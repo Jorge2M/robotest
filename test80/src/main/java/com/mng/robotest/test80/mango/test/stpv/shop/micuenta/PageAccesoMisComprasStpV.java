@@ -1,0 +1,111 @@
+package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.test.datastored.DataPedido;
+import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras;
+import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras.TypeBlock;
+import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStpV;
+
+@SuppressWarnings("javadoc")
+public class PageAccesoMisComprasStpV {
+    
+    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+        //Validaciones.
+        String descripValidac = 
+            "1) Aparece la página de \"Acceso a Mis Compras\"<br>" +
+            "2) Aparecen el bloque \"Ya estoy registrado\"<br>" +
+            "3) Aparece el bloque de \"No estoy registrado\"";
+        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        try {
+            List<SimpleValidation> listVals = new ArrayList<>();
+            //1)
+            if (!PageAccesoMisCompras.isPage(dFTest.driver))
+                fmwkTest.addValidation(1, State.Warn, listVals);
+            //2)
+            if (!PageAccesoMisCompras.isPresentBlock(TypeBlock.SiRegistrado, dFTest.driver))
+                fmwkTest.addValidation(2, State.Warn, listVals);
+            //3)
+            if (!PageAccesoMisCompras.isPresentBlock(TypeBlock.NoRegistrado, dFTest.driver))  
+                fmwkTest.addValidation(3, State.Warn, listVals);
+        
+            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+        }
+        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+    }
+    
+    public static void clickBlock(TypeBlock typeBlock, DataFmwkTest dFTest) {
+        //Step.
+        datosStep datosStep = new datosStep     (
+            "Seleccionar el bloque \"" + typeBlock + "\"", 
+            "Se hace visible el bloque de " + typeBlock);
+        try {
+            PageAccesoMisCompras.clickBlock(typeBlock, dFTest.driver);
+                
+            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+        }
+        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }        
+        
+        //Validation
+        int maxSecondsToWait = 1;
+        String descripValidac = 
+            "1) Se hace visible el bloque de \"" + typeBlock + "\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
+        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        try {
+            List<SimpleValidation> listVals = new ArrayList<>();
+            //1)
+            if (!PageAccesoMisCompras.isVisibleBlockUntil(typeBlock, maxSecondsToWait, dFTest.driver))
+                fmwkTest.addValidation(1, State.Warn, listVals);
+            
+            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+        }
+        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+    }
+    
+    public static datosStep enterForSiRegistrado(String usuario, String password, DataFmwkTest dFTest) throws Exception {
+        //Step.
+        datosStep datosStep = new datosStep     (
+            "En el bloque de \"Si Registrado\", introducir el usuario/password (" + usuario + "/" + password + ") y pulsar \"Entrar\"", 
+            "Aparece la página de \"Mis compras\"");
+        try {
+            PageAccesoMisCompras.inputUserPasswordBlockSi(usuario, password, dFTest.driver); 
+            PageAccesoMisCompras.clickEntrarBlockSi(dFTest.driver);
+                
+            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+        }
+        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }        
+        
+        //Validation
+        PageMisComprasStpV.validateIsPage(datosStep, dFTest);
+        
+        return datosStep;
+    }
+    
+    public static datosStep buscarPedidoForNoRegistrado(DataPedido dataPedido, AppEcom app, DataFmwkTest dFTest) throws Exception {
+        //Step.
+        String usuario = dataPedido.getEmailCheckout();
+        datosStep datosStep = new datosStep     (
+            "En el bloque de \"No Registrado\", introducir el usuario/núm pedido (" + usuario + "/" + dataPedido.getCodpedido() + ") y pulsar \"Buscar pedido\"", 
+            "Aparece la página de detalle del pedido");
+        try {
+            PageAccesoMisCompras.inputUserAndNumPedidoBlockNo(usuario, dataPedido.getCodpedido(), dFTest.driver); 
+            PageAccesoMisCompras.clickBuscarPedidoBlockNo(dFTest.driver);
+                
+            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+        }
+        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }        
+        
+        //Validation
+        PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(dFTest.driver);
+        pageDetPedidoStpV.validateIsPageOk(dataPedido, app, datosStep, dFTest);
+        
+        return datosStep;        
+    }
+}

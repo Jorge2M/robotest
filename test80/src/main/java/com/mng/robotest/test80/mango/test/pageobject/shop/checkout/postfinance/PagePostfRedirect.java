@@ -1,0 +1,39 @@
+package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+
+@SuppressWarnings("javadoc")
+public class PagePostfRedirect extends WebdrvWrapp {
+
+    static String XPathButtonOK = "//form/input[@type='button' and @value[contains(.,'OK')]]"; 
+    
+    /**
+     * @return si estamos en la página de redirección con el botón OK que aparece después de introducir el código de seguridad y pulsar "Continuar"
+     */
+    public static boolean isPresentButtonOk(WebDriver driver) throws Exception {
+        return (isElementPresent(driver, By.xpath(XPathButtonOK)));
+    }
+    
+    /**
+     * @return si es invisible (ha desaparecido) la capa de redirección con el botón OK que aparece después de introducir el código de seguridad y pulsar "Continuar"
+     */
+    public static boolean isInvisibleButtonOkUntil(WebDriver driver, int seconds) {
+        boolean invisibility = false;
+        try { 
+            new WebDriverWait(driver, seconds).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(XPathButtonOK)));
+            invisibility = true;
+        }
+        catch (Exception e) {
+            /*
+             * Continuamos pues existe la posibilidad de que el botón esté en el estado deseado
+             */
+        }
+        
+        return invisibility;
+    }
+}

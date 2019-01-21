@@ -1,0 +1,80 @@
+package com.mng.robotest.test80.mango.test.stpv.manto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.test.data.TiendaMantoEnum.TiendaManto;
+import com.mng.robotest.test80.mango.test.pageobject.manto.PageSelTda;
+import com.mng.robotest.test80.mango.test.pageobject.manto.SecCabecera;
+import com.mng.robotest.test80.mango.test.pageobject.shop.PageMenusManto;
+
+/**
+ * Ejecución de pasos/validaciones relacionados con la página "Selección de la tienda en Manto" (la posterior al login)
+ * @author jorge.munoz
+ *
+ */
+@SuppressWarnings("javadoc")
+public class PageSelTdaMantoStpV {
+	
+    public static datosStep selectTienda(String codigoAlmacen, String codigoPais, AppEcom appE, DataFmwkTest dFTest) 
+    throws Exception {
+        TiendaManto tienda = TiendaManto.getTienda(codigoAlmacen, codigoPais, appE);
+        
+        //Step.
+        datosStep datosStep = new datosStep       (
+            "Seleccionamos el entorno \"" + tienda + "\"", 
+            "Aparece la página de Menús");
+        datosStep.setGrab_ErrorPageIfProblem(false);
+        try {
+            //Si no estamos en la página de selección de tienda vamos a ella mediante selección del botón "Seleccionar tienda"
+            if (!PageSelTda.isPage(dFTest.driver))
+                SecCabecera.clickButtonSelTienda(dFTest.driver);
+            
+            //Seleccionamos el entorno asociado al almacén (Alemania, Europa Palau...)
+            PageSelTda.selectTienda(tienda, dFTest.driver);
+            
+            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+        }
+        finally {
+            if (dFTest.ctx!=null)
+                datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); 
+        }
+        
+        //Validaciones
+        String descripValidac = 
+            "1) Aparece la página del Menú principal de Manto donde se encuentran todas las opciones de éste";
+        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        try {
+            List<SimpleValidation> listVals = new ArrayList<>();
+            //1)
+            if (!PageMenusManto.isPage(dFTest.driver))
+                fmwkTest.addValidation(1, State.Defect, listVals);
+                
+            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+        }  
+        finally {
+            if (dFTest.ctx!=null)
+                fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); 
+        }
+        
+        return datosStep;
+    }
+    
+
+    /**
+     * Accede a la tienda asociada al almacén (sólo si no estamos en ella ya)
+     */
+    public static void goToTiendaPais(String codigoAlmacen, String codigoPais,  AppEcom appE, DataFmwkTest dFTest) 
+    throws Exception {
+        String tiendaActual = SecCabecera.getLitTienda(dFTest.driver);
+        TiendaManto tiendaToGo = TiendaManto.getTienda(codigoAlmacen, codigoPais, appE);
+        if (!tiendaActual.contains(tiendaToGo.litPantManto))
+            selectTienda(codigoAlmacen, codigoPais, appE, dFTest);
+    }
+}

@@ -1,0 +1,190 @@
+package com.mng.robotest.test80.mango.test.stpv.manto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.mango.test.pageobject.manto.PageConsultaIdEans;
+
+@SuppressWarnings("javadoc")
+public class PageConsultaIdEansStpV {
+
+	
+	
+
+    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+        String descripValidac = 
+            "1) Es visible el contenido de la pestaña Busqueda Excel<br>" + 
+            "2) Es visible el contenido de la pestaña Busqueda Rapida<br>" +
+            "3) Es visible el título de página correcto";
+        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        try {
+            List<SimpleValidation> listVals = new ArrayList<>();
+            //1)
+            if (!PageConsultaIdEans.isVisibleDivBusquedaExcel(dFTest.driver))
+                fmwkTest.addValidation(1, State.Defect, listVals);
+            //2)
+            if (!PageConsultaIdEans.isVisibleDivBusquedaRapida(dFTest.driver))
+                fmwkTest.addValidation(2, State.Defect, listVals);
+            //3)
+            if (!PageConsultaIdEans.isVisibleTituloPagina(dFTest.driver))
+                fmwkTest.addValidation(3, State.Defect, listVals);
+
+            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+        } 
+        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+    }
+
+    
+    
+    
+	public static void consultaDatosContacto(List<String> pedidosPrueba, DataFmwkTest dFTest) {
+	    datosStep datosStep = new datosStep       (
+	        "Introducimos datos de pedido válido y consultamos los datos de contacto", 
+	        "Deben mostrar la información de contacto");
+	    datosStep.setGrab_ErrorPageIfProblem(false);
+	    try {
+	        PageConsultaIdEans.inputPedidosAndClickBuscarDatos(pedidosPrueba, dFTest.driver);
+	            
+	        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+	    }
+	    finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		
+	    int maxSecondsToWait = 2;
+	    String descripValidac = 
+	        "1) Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>" +
+	        "2) El número de líneas de pedido es " + pedidosPrueba.size() + "<br>" +
+	        "3) Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.toString() + "</b>";
+            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+            try {
+                List<SimpleValidation> listVals = new ArrayList<>();
+                //1)
+                if (!PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, dFTest.driver))
+                    fmwkTest.addValidation(1, State.Defect, listVals);
+                //2) 
+                if (PageConsultaIdEans.getLineasPedido(dFTest.driver)!=pedidosPrueba.size())
+                    fmwkTest.addValidation(2, State.Defect, listVals);            
+                //3)
+                if (!PageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba, dFTest.driver))
+                    fmwkTest.addValidation(3, State.Defect, listVals);
+    
+                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            } 
+            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+    	}
+
+	
+	
+	
+	public static void consultaIdentificadoresPedido(List<String> pedidosPrueba, DataFmwkTest dFTest) {
+		datosStep datosStep = new datosStep       (
+	            "Introducimos datos de pedido válido y consultamos los Identificadores que tiene", 
+	            "Debe mostrar los identificadores del pedido");
+        datosStep.setGrab_ErrorPageIfProblem(false);
+        try {
+        	PageConsultaIdEans.inputPedidosAndClickBuscarIdentificadores(pedidosPrueba, dFTest.driver);
+            
+            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+        }
+        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		
+        int maxSecondsToWait = 2;
+		String descripValidac = 
+			"1) Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>" +
+	        "2) El número de líneas de pedido es " + pedidosPrueba.size() + "<br>" +
+	        "3) Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.toString() + "</b>";
+        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        try {
+            List<SimpleValidation> listVals = new ArrayList<>();
+            //1)
+            if (!PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, dFTest.driver))
+                fmwkTest.addValidation(1, State.Defect, listVals);
+            //2) 
+            if (PageConsultaIdEans.getLineasPedido(dFTest.driver)!=pedidosPrueba.size())
+                fmwkTest.addValidation(2, State.Defect, listVals);            
+            //3)
+            if (!PageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba, dFTest.driver))
+                fmwkTest.addValidation(3, State.Defect, listVals);
+
+            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+        } 
+        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+	}
+	
+	
+	
+	
+	public static void consultaTrackings(List<String> pedidosPrueba, DataFmwkTest dFTest) {
+		datosStep datosStep = new datosStep       (
+				"Introducimos datos de pedido válido y consultamos el trackings", 
+	            "Debe mostrar el tracking");
+        datosStep.setGrab_ErrorPageIfProblem(false);
+        try {
+        	PageConsultaIdEans.inputPedidosAndClickBuscarTrackings(pedidosPrueba, dFTest.driver);
+            
+            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+        }
+        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		
+        int maxSecondsToWait = 2;
+		String descripValidac = 
+				"1) Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>";
+        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        try {
+            List<SimpleValidation> listVals = new ArrayList<>();
+            //1)
+            if (!PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, dFTest.driver))
+                fmwkTest.addValidation(1, State.Defect, listVals);           
+
+
+            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+        } 
+        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+	}
+
+
+
+
+	public static void consultaDatosEan(List<String> articulosPrueba, DataFmwkTest dFTest) {
+		datosStep datosStep = new datosStep       (
+				"Introducimos artículos válidos y consultamos el EAN", 
+	            "Debe mostrar el EAN");
+        datosStep.setGrab_ErrorPageIfProblem(false);
+        try {
+        	PageConsultaIdEans.inputArticulosAndClickBuscarDatosEan(articulosPrueba, dFTest.driver);
+            
+            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+        }
+        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		
+        int maxSecondsToWait = 2;
+		String descripValidac = 
+				"1) Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>" +
+		        "2) El número de líneas de artículos es " + articulosPrueba.size() + "<br>" +
+		        "3) Aparece una línea por cada uno de los artículos <b>" + articulosPrueba.toString() + "</b>";
+        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        try {
+            List<SimpleValidation> listVals = new ArrayList<>();
+            //1)
+            if (!PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, dFTest.driver))
+                fmwkTest.addValidation(1, State.Defect, listVals);
+            //2) 
+            if (PageConsultaIdEans.getLineasPedido(dFTest.driver)!=articulosPrueba.size())
+                fmwkTest.addValidation(2, State.Defect, listVals);            
+            //3)
+            if (!PageConsultaIdEans.isArticulosTablaCorrecto(articulosPrueba, dFTest.driver))
+                fmwkTest.addValidation(3, State.Defect, listVals);
+
+
+            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+        } 
+        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+	}
+
+	
+	
+}
