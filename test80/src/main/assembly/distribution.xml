@@ -1,0 +1,58 @@
+<assembly>
+<id>distribution</id>
+ 
+<!-- el formato de salida es archivo .zip -->
+<formats>
+<format>zip</format>
+</formats>
+ 
+<!-- incluir todas las dependencias runtime en el directorio lib del archivo .zip de salida-->
+<dependencySets>
+<dependencySet>
+<outputDirectory>/lib</outputDirectory>
+<useProjectArtifact>false</useProjectArtifact>
+</dependencySet>
+</dependencySets>
+ 
+<fileSets>
+<!-- incluir el jar de la aplicación en el directorio base del archivo .zip -->
+<fileSet>
+<directory>target</directory>
+<outputDirectory></outputDirectory>
+<includes>
+<include>*.jar</include>
+</includes>
+</fileSet>
+
+<!--  copiamos los .bat en la raiz -->
+<!-- 
+<fileSet>
+<directory>/bats</directory>
+<outputDirectory></outputDirectory>
+<includes>
+<include>*.bat</include>
+</includes>
+</fileSet>-->
+
+<!-- copiar la carpeta de componentes estáticas en el directorio base -->
+<fileSet>
+<directory>output-library/static</directory>
+<outputDirectory>output-library/static</outputDirectory>
+</fileSet>
+
+<!-- copiar la carpeta con la librería de scripts + SQLITE -->
+<fileSet>
+<directory>output-library/sqlite</directory>
+<outputDirectory>output-library/sqlite</outputDirectory>
+<includes></includes>
+</fileSet>
+
+<!-- copiar la carpeta con los resources -->
+<fileSet>
+<directory>resources</directory>
+<outputDirectory>resources</outputDirectory>
+</fileSet>
+
+</fileSets>
+</assembly>
+
