@@ -1,0 +1,118 @@
+package com.mng.robotest.test80.mango.test.pageobject.shop.menus;
+
+import java.util.ArrayList;
+import java.util.Objects;
+
+import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+
+@SuppressWarnings("javadoc")
+public final class Menu1rstLevel implements MenuLateralDesktop {
+    
+	AppEcom app;
+	private KeyMenu1rstLevel key;
+    private String dataGaLabel = ""; //Identificador del menú (atributo data_ga_label) para encontrarlo/clicarlo en el HTML
+    private boolean isMenuLateral;
+    private String[] textsArticlesGalery = null; //Lista de posibles textos contenidos en los artículos de la galería
+    private ArrayList<Menu2onLevel> listMenus2onLevel = new ArrayList<>();
+    
+    private Menu1rstLevel(AppEcom app, KeyMenu1rstLevel key, String dataGaLabel, boolean isMenuLateral, String[] textsArticlesGalery) {
+    	this.app = app;
+        this.key = key;
+        this.dataGaLabel = dataGaLabel;
+        this.isMenuLateral = isMenuLateral;
+        this.textsArticlesGalery = textsArticlesGalery;
+    }
+    
+    static Menu1rstLevel from(AppEcom app, KeyMenu1rstLevel key, String data_ga_label, boolean isMenuLateral, String[] textsArticlesGalery) {
+    	return (new Menu1rstLevel(app, key, data_ga_label, isMenuLateral, textsArticlesGalery));
+    }
+    
+    public KeyMenu1rstLevel getKey() {
+        return this.key;
+    }
+    
+    @Override
+    public AppEcom getApp() {
+    	return this.app;
+    }
+    
+    @Override
+    public LineaType getLinea() {
+    	return this.key.lineaType;
+    }
+    
+    @Override
+    public SublineaNinosType getSublinea() {
+    	return this.key.sublineaType;
+    }
+    
+    @Override
+    public String getNombre() {
+    	return this.key.nombreMenu;
+    }
+    
+    public void setNombre(String nombreMenu) {
+    	this.key.nombreMenu = nombreMenu;
+    }
+    
+    @Override
+    public String getDataGaLabelMenuLateralDesktop() {
+    	return (getLinea().getLiteral() + ":" + getNombre().toLowerCase());
+    }
+    
+    @Override
+    public String getDataGaLabelMenuSuperiorDesktop() {
+        return this.dataGaLabel;
+    }
+    
+    @Override
+    public boolean isMenuLateral() {
+        return this.isMenuLateral;
+    }   
+    
+    @Override
+    public boolean isDataForValidateArticleNames() {
+        return (this.textsArticlesGalery!=null &&
+                "*".compareTo(this.textsArticlesGalery[0])!=0);
+    }
+    
+    @Override
+    public String[] getTextsArticlesGalery() {
+        return this.textsArticlesGalery;
+    }
+    
+    public ArrayList<Menu2onLevel> getListMenus2onLevel() {
+        return this.listMenus2onLevel;
+    }
+    
+
+    
+    public void setDataGaLabel(String dataGaLabel) {
+    	this.dataGaLabel = dataGaLabel;
+    }
+    
+    public void addMenu2onLevel(Menu2onLevel menuToAdd) {
+        this.listMenus2onLevel.add(menuToAdd);
+    }
+
+    @Override public boolean equals(Object o) {
+    	if (o == this)
+    		return true;
+    	if (!(o instanceof Menu1rstLevel))
+    		return false;
+    	Menu1rstLevel menu1rNivel = (Menu1rstLevel) o;
+    	return (menu1rNivel.key.equals(key));
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(key);
+    }
+    
+    @Override
+    public String toString() {
+    	return (key.toString());
+    }
+}
