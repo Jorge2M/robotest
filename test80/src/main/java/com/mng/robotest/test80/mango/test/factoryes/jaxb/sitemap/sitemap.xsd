@@ -1,0 +1,16 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="sitemapindex">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="sitemap" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:anyURI" name="loc"/>
+              <xs:element type="xs:date" name="lastmod"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
