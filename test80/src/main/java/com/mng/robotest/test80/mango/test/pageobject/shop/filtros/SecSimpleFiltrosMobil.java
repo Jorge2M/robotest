@@ -1,0 +1,130 @@
+package com.mng.robotest.test80.mango.test.pageobject.shop.filtros;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
+import com.mng.robotest.test80.mango.test.data.Color;
+import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
+
+@SuppressWarnings("javadoc")
+/**
+ * Clase que define la automatización de las diferentes funcionalidades de la sección correspondiente a los "Filtros"
+ * @author jorge.munoz
+ *
+ */
+public class SecSimpleFiltrosMobil implements SecFiltros {
+    
+    final static String XPathFiltrarYOrdenarButton = "//button[@id[contains(.,'orderFiltersBtn')]]";
+    
+	WebDriver driver;
+	PageGaleria pageGaleria = null;
+	
+	private SecSimpleFiltrosMobil(WebDriver driver, PageGaleria pageGaleria) {
+		this.driver = driver;
+		this.pageGaleria = pageGaleria;
+	}
+	
+	public static SecSimpleFiltrosMobil getInstance(AppEcom app, WebDriver driver) throws Exception {
+		PageGaleria pageGaleria = PageGaleria.getInstance(Channel.movil_web, app, driver);
+		return (new SecSimpleFiltrosMobil(driver, pageGaleria));
+	}
+	
+	public static SecSimpleFiltrosMobil getInstance(WebDriver driver, PageGaleria pageGaleria) {
+		return (new SecSimpleFiltrosMobil(driver, pageGaleria));
+	}
+	
+    @Override
+    public void selectOrdenacion(FilterOrdenacion ordenacion) throws Exception {
+        selectFiltroAndWaitLoad(FiltroMobil.Ordenar, ordenacion.getValueForMobil(), driver);        
+    }
+    
+    @Override
+    public void selectCollection(FilterCollection collection) throws Exception {
+        selectFiltroAndWaitLoad(FiltroMobil.Coleccion, collection.getValueMobil(), driver);        
+    }
+    
+    @Override
+    public boolean isCollectionFilterPresent() throws Exception {
+    	return (WebdrvWrapp.isElementPresent(driver, By.xpath(FiltroMobil.Coleccion.getXPathLineaFiltroSimple())));
+    }
+    
+    /** 
+     * Seleccionamos una ordenación ascendente/descendente
+     */
+    @Override
+    public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
+        selectOrdenacion(typeOrden);
+        int maxSecondsToWait = 10;
+        int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(maxSecondsToWait);
+        return numArticles;
+    }
+
+    /** 
+     * Seleccionamos un filtro de color
+     * @param codigoColor código asociado al color, p.e. el 01 es el código asociado al color Blanco
+     * @return el número de artículos que aparecen en la galería después de seleccionar el filtro
+     */
+    @Override
+    public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToFilter) throws Exception {
+    	String valueFiltro = colorsToFilter.get(0).getCodigoColor();
+        selectFiltroAndWaitLoad(FiltroMobil.Colores, valueFiltro, driver);
+        int maxSecondsToWait = 10;
+        int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(maxSecondsToWait);
+        return numArticles;
+    }
+    
+    @Override
+    public boolean isClickableFiltroUntil(int seconds) {
+        return (WebdrvWrapp.isElementClickableUntil(driver, By.xpath(XPathFiltrarYOrdenarButton), seconds));
+    }    
+    
+    /**
+     * Selecciona un determinado filtro de la galería de móvil
+     * @param valor atributo 'value' a nivel de la option del filtro (select)
+     */
+    private void selectFiltroAndWaitLoad(FiltroMobil typeFiltro, String valorFiltro, WebDriver driver) 
+    throws Exception {
+        goAndClickFiltroButton(driver);
+        By byLineaFiltro = By.xpath(typeFiltro.getXPathLineaFiltroSimple());
+        int maxSecondsToWait = 1;
+        WebdrvWrapp.isElementVisibleUntil(driver, byLineaFiltro, maxSecondsToWait);
+        WebElement filtroLineaSelect = driver.findElement(byLineaFiltro);
+        Select selectFiltro = new Select(filtroLineaSelect);
+        selectFiltro.selectByValue(valorFiltro);
+        WebdrvWrapp.waitForPageLoaded(driver);
+    }
+    
+    private void goAndClickFiltroButton(WebDriver driver) throws Exception {
+        if (WebdrvWrapp.isElementVisible(driver, By.xpath(XPathFiltrarYOrdenarButton))) {
+        	WebdrvWrapp.moveToElement(By.xpath(XPathFiltrarYOrdenarButton), driver);
+            Thread.sleep(500);
+            
+            //Scrollamos un poquito hacia arriba para asegurar
+            ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-50)", "");
+        }
+        
+        int maxSecondsToWait = 2;
+        waitAndClickFiltroButton(maxSecondsToWait, driver);
+    }
+    
+    private void waitAndClickFiltroButton(int maxSecondsToWait, WebDriver driver) {
+        if (!isOpenFiltrosUntil(0/*maxSecondsToWait*/, driver)) {
+            WebdrvWrapp.isElementClickableUntil(driver, By.xpath(XPathFiltrarYOrdenarButton), maxSecondsToWait);
+            driver.findElement(By.xpath(XPathFiltrarYOrdenarButton)).click();
+            isOpenFiltrosUntil(maxSecondsToWait, driver);
+        }        
+    }
+    
+    private boolean isOpenFiltrosUntil(int maxSecondsToWait, WebDriver driver) {
+    	String xpathLineaOrdenar = FiltroMobil.Ordenar.getXPathLineaFiltroSimple();
+        return (WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(xpathLineaOrdenar), maxSecondsToWait));
+    }
+}
