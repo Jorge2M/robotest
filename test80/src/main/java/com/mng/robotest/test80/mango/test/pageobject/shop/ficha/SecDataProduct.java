@@ -75,7 +75,7 @@ public class SecDataProduct extends WebdrvWrapp {
     	}
     }
     
-    private static final String XPathNombreColorSelectedDesktop = ColorType.Selected.getXPath() + "//img[@class='color-image']";/* + "//span[@itemprop='color']"*/
+    private static final String XPathNombreColorSelectedDesktop = ColorType.Selected.getXPath() + "//img[@class='color-image']";
     
 //xpaths asociados al tema tallas
     private static final String XPathCapaAvisame = "//*[@id='bocataAvisame']";
