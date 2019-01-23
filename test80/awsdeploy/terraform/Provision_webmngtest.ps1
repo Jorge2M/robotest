@@ -112,7 +112,7 @@ Unzip $zipWebmngtestLocalFile $currentScriptDirectory.tostring()
 #Rename-Item -Path webmngtest*.war $warWebmngtestLocalName
 Get-ChildItem -Path $currentScriptDirectory.tostring() -Filter webmngtest*.war |
 ForEach-Object {
-   Rename-Item -Path $_.FullName -NewName $warMangoTestLocalName
+   Rename-Item -Path $_.FullName -NewName $warWebmngtestLocalName
 }
 
 # Start Tomcat as a Service and Wait 20 seconds to state "Running"
