@@ -84,7 +84,7 @@ resource "aws_instance" "robotest" {
 	
 	#ami           = "ami-fc8cb885" (stable Windows_Server-2016-English-Full-Base)
 	#ami           = "ami-fbd0e782"
-	ami 		   = "ami-05d253e02b130b87b"
+	ami 		   = "ami-0864fcc37d7ff3d44"
 	instance_type = "t2.medium"
 	
 	tags {
