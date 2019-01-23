@@ -102,7 +102,7 @@ $ParamsJSON = ConvertTo-Json -InputObject $JenkinsParams
 Invoke-WebRequest -UseBasicParsing $FullURL -Method POST -Headers $Headers -Body @{ json = $ParamsJSON }
 
 # Get del pathTest80S3file (de tipo test80-RELEASE1.zip) from S3 (Wait for X loops)
-WaitAndGet-FileFromS3 $pathTest80S3file $zipTest80LocalFile $bucketS3Name $accessKeyS3 $secreKeyS3 15
+# WaitAndGet-FileFromS3 $pathTest80S3file $zipTest80LocalFile $bucketS3Name $accessKeyS3 $secreKeyS3 15
 
 # Ejecutamos la tarea Jenkins que genera el pathWebmngtestZipS3file (de tipo webmngtest-RELEASE1.zip)
 $JenkinsParams = @{
