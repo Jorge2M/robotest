@@ -67,7 +67,9 @@ Import-Module "C:\Program Files (x86)\AWS Tools\PowerShell\AWSPowerShell\AWSPowe
 Remove-S3Object -BucketName $bucketS3Name -Key $pathTest80S3file -AccessKey $accessKeyS3 -SecretKey $secreKeyS3 -Region eu-west-1 -force
 Remove-S3Object -BucketName $bucketS3Name -Key $pathWebmngtestZipS3file -AccessKey $accessKeyS3 -SecretKey $secreKeyS3 -Region eu-west-1 -force
 
-# Ejecutamos la tarea Jenkins que genera el pathTest80S3file (de tipo test80-RELEASE1.zip)
+# Ejecutamos la tarea Jenkins que genera:
+# - El pathTest80S3file (de tipo test80-origin_develop.zip) 
+# - El pathWebmngtestZipS3file (de tipo de tipo webmngtest-origin_develop.zip)
 $JenkinsURL = "https://citools.mangodev.net/jenkins"
 $JobName = "CI.ROBOTEST.mango.testing"
 $JobToken = "robotest"
@@ -89,10 +91,6 @@ name = "BRANCH"
 tag = $branch_robot
 },
 @{
-name = "PROJECT"
-value = "test80"
-},
-@{
 name = "SKIP_TEST"
 value = "true"
 }
@@ -103,26 +101,6 @@ Invoke-WebRequest -UseBasicParsing $FullURL -Method POST -Headers $Headers -Body
 
 # Get del pathTest80S3file (de tipo test80-RELEASE1.zip) from S3 (Wait for X loops)
 # WaitAndGet-FileFromS3 $pathTest80S3file $zipTest80LocalFile $bucketS3Name $accessKeyS3 $secreKeyS3 15
-
-# Ejecutamos la tarea Jenkins que genera el pathWebmngtestZipS3file (de tipo webmngtest-RELEASE1.zip)
-$JenkinsParams = @{
-"parameter" = @(
-@{
-name = "BRANCH"
-tag = $branch_robot
-},
-@{
-name = "PROJECT"
-value = "webmngtest"
-},
-@{
-name = "SKIP_TEST"
-value = "true"
-}
-)
-}
-$ParamsJSON = ConvertTo-Json -InputObject $JenkinsParams
-Invoke-WebRequest -UseBasicParsing $FullURL -Method POST -Headers $Headers -Body @{ json = $ParamsJSON }
 
 # Get del pathWebmngtestZipS3file (de tipo webmngtest-RELEASE1.zip) from S3 (Wait for X loops)
 WaitAndGet-FileFromS3 $pathWebmngtestZipS3file $zipWebmngtestLocalFile $bucketS3Name $accessKeyS3 $secreKeyS3 10
