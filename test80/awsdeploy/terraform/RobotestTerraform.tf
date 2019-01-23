@@ -71,14 +71,14 @@ resource "aws_instance" "robotest" {
     #}	
 	
     provisioner "file" {
-        source      = "Provision${var.robot}.ps1"
-        destination = "C:\\Provision${var.robot}.ps1"
+        source      = "Provision_${var.robot}.ps1"
+        destination = "C:\\Provision_${var.robot}.ps1"
     }
 
     provisioner "remote-exec" {
          inline = [
 	     	"powershell.exe Set-ExecutionPolicy RemoteSigned -force",
-           	"powershell.exe -version 4 -ExecutionPolicy Bypass -File C:\\Provision${var.robot}.ps1 ${var.branch_robot}"
+           	"powershell.exe -version 4 -ExecutionPolicy Bypass -File C:\\Provision_${var.robot}.ps1 ${var.branch_robot}"
          ]
     }	
 	
