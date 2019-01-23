@@ -10,7 +10,7 @@
 #
 #Declare the input parameters that this script will accept
 param (
-  # param branch_robot: p.e. "branches/RELEASE_1" o "trunk"
+  # param branch_robot: p.e. "origin/develop" o "origin/master"
   [string]$branch_robot
 )
 
@@ -88,7 +88,8 @@ $JenkinsParams = @{
 "parameter" = @(
 @{
 name = "BRANCH"
-tag = $branch_robot
+#tag = $branch_robot
+tag = "origin_develop"
 },
 @{
 name = "SKIP_TEST"
