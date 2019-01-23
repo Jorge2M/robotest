@@ -75,7 +75,7 @@ public class SecDataProduct extends WebdrvWrapp {
     	}
     }
     
-    private static final String XPathNombreColorSelectedDesktop = ColorType.Selected + "//span[@itemprop='color']";
+    private static final String XPathNombreColorSelectedDesktop = ColorType.Selected.getXPath() + "//img[@class='color-image']";/* + "//span[@itemprop='color']"*/
     
 //xpaths asociados al tema tallas
     private static final String XPathCapaAvisame = "//*[@id='bocataAvisame']";
@@ -115,6 +115,7 @@ public class SecDataProduct extends WebdrvWrapp {
         articulo.setNombre(getTituloArt(channel, driver));
         articulo.setPrecio(getPrecioFinalArticulo(driver));
         articulo.setCodigoColor(getCodeColor(ColorType.Selected, driver));
+        boolean patata = checkPotatoe(driver);
         articulo.setColor(getNombreColorSelected(channel, driver));
         articulo.setTallaAlf(getTallaAlfSelected(typeFicha, driver));
         articulo.setTallaNum(getTallaNumSelected(typeFicha, driver));
@@ -163,13 +164,17 @@ public class SecDataProduct extends WebdrvWrapp {
         switch (channel) {
         case desktop:
             if (isElementPresent(driver, By.xpath(XPathNombreColorSelectedDesktop)))
-                return (driver.findElement(By.xpath(XPathNombreColorSelectedDesktop)).getAttribute("innerHTML"));
+                return (driver.findElement(By.xpath(XPathNombreColorSelectedDesktop)).getAttribute("alt"));
             
             return Constantes.colorDesconocido;
         case movil_web:
         default:
         	return (getNombreColorMobil(ColorType.Selected, driver));
         }
+    }
+
+    public static boolean checkPotatoe (WebDriver driver) {
+        return isElementPresent(driver, By.xpath(XPathNombreColorSelectedDesktop));
     }
     
     public static void selectColorWaitingForAvailability(String codigoColor, WebDriver driver) 
