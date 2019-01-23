@@ -9,8 +9,8 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 
 public class BannerEditsObject extends BannerObject {
 
-	final static String XPathWrapperBanner = "//div[@class[contains(.,'vsv-')]]";
-	final static String XPathBanner = XPathWrapperBanner + "//a[@data-analytics and not(@data-analytics='')]";
+	final static String XPathWrapperBanner = "//div[@class[contains(.,'vsv-')] and @data-analytics and not(@data-analytics='')]";
+	final static String XPathBanner = XPathWrapperBanner + "//a";
 	final static String XPathImageRelativeBanner = "//img";
 	
 	public BannerEditsObject(BannerType bannerType) {
