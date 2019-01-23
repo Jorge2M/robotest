@@ -1,7 +1,7 @@
 #Steps for exec terraform:
 #terraform init -backend-config "key=infraestructure/robotest/tfstate-${nameInstance}"
-#terraform plan -var robot="MangoTest" o "Pruebas80" -var branch_robot=branches/RELEASE_1 -var id_instance="RELEASE_1_jorge.munoz"
-#terraform apply -var robot="MangoTest" o "Pruebas80" -var branch_robot=branches/RELEASE_1 -var id_instance="RELEASE_1_jorge.munoz"
+#terraform plan -var robot="MangoTest" o "test80" -var branch_robot=branches/RELEASE_1 -var id_instance="RELEASE_1_jorge.munoz"
+#terraform apply -var robot="MangoTest" o "test80" -var branch_robot=branches/RELEASE_1 -var id_instance="RELEASE_1_jorge.munoz"
 
 
 # param branch_robot: p.e. "RELEASE_1"
@@ -14,7 +14,7 @@ variable "id_instance" {
   type = "string"
 }
 
-# param robot: "MangoTest" o "Pruebas80"
+# param robot: "MangoTest" o "test80"
 variable "robot" {
   type = "string"
 }
