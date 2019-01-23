@@ -1,5 +1,7 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.buscador;
 
+import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.mango.test.pageobject.shop.Mensajes;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -7,12 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
-import com.mng.robotest.test80.mango.test.pageobject.shop.Mensajes;
-
 @SuppressWarnings("javadoc")
 public class SecBuscadorDesktop extends WebdrvWrapp {
-    private final static String XPathInputBuscador = "//input[@class='search-input']";
+    private final static String XPathInputBuscador = "//input[@class[contains(.,'search-input')]]";
     private final static String XPathInputLupaShopDesktop = "//span[@class='menu-search-icon']";
     
     /**
