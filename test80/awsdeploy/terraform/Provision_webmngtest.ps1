@@ -88,7 +88,6 @@ $JenkinsParams = @{
 "parameter" = @(
 @{
 name = "BRANCH"
-Branch = $branch_robot
 value = $branch_robot
 },
 @{
