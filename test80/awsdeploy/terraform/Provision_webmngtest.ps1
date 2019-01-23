@@ -88,8 +88,8 @@ $JenkinsParams = @{
 "parameter" = @(
 @{
 name = "BRANCH"
-#tag = $branch_robot
-tag = "origin_develop"
+Branch = $branch_robot
+value = $branch_robot
 },
 @{
 name = "SKIP_TEST"

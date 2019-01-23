@@ -4,17 +4,17 @@
 #terraform apply -var robot="MangoTest" o "test80" -var branch_robot=branches/RELEASE_1 -var id_instance="RELEASE_1_jorge.munoz"
 
 
-# param branch_robot: p.e. "RELEASE_1"
+# param branch_robot: p.e. "origin/develop"
 variable "branch_robot" {
   type = "string"
 }
 
-# param id_instance: p.e. "RELEASE_1_jorge.munoz"
+# param id_instance: p.e. "origin_develop_id_jorge.munoz"
 variable "id_instance" {
   type = "string"
 }
 
-# param robot: "MangoTest" o "test80"
+# param robot: "webmngtest" o "test80"
 variable "robot" {
   type = "string"
 }
