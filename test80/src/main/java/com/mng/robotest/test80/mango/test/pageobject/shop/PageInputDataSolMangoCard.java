@@ -17,7 +17,7 @@ public class PageInputDataSolMangoCard extends WebdrvWrapp {
 	
     static String XPathbotonContinuarModal = "//div//button[text()[contains(.,'Continuar')]]";
     static String XPathTextDatosPersonalesPage2 = "//div[@id='datospersonales']";
-    static String XPathIsPage2 = "//div/h3[text()[contains(.,'Solicitud de tu MANGO Card')]]";
+    static String XPathIsPage2 = "//div/h2[text()[contains(.,'Solicitud de tu MANGO Card')]]";
     static String XPathTextDatosBancariosPage2 = "//div/span[text()[contains(.,'Datos bancarios')]]";
     static String XPathDatosContactoPage2 = "//div/span[text()[contains(.,'Datos de contacto')]]";
     static String XPathDatosSocioeconomicosPage2 = "//div/span[text()[contains(.,'Datos socioeconómicos')]]";
