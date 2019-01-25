@@ -25,8 +25,8 @@ param (
 
 $currentScriptDirectory = Get-Location
 $brachWithoutSlash = $branch_robot -replace '/','_'
-$pathPruebas80S3file = 'code/' + 'Pruebas80-' + $brachWithoutSlash + '.zip'
-$zipPruebas80LocalFile = 'Pruebas80.zip'
+$pathTest80S3file = 'code/' + 'test80-' + $brachWithoutSlash + '.zip'
+$zipTest80LocalFile = 'test80.zip'
 $bucketS3Name = 'mng-mangotest-releases'
 $accessKeyS3 = 'AKIAJWAHWJ3R2TZYGR3Q'
 $secreKeyS3 = 'qp1slaBJw2KnRI5NEXKBVwtcC26CPJxgii8tbuu6'
@@ -65,9 +65,9 @@ function WaitAndGet-FileFromS3 {
 	}
 }
 
-# Ejecutamos la tarea Jenkins que genera el pathPruebas80S3file (de tipo Pruebas80-RELEASE1.zip)
-If (Test-Path $zipPruebas80LocalFile) {
-	Remove-Item -Force $zipPruebas80LocalFile
+# Ejecutamos la tarea Jenkins que genera el pathTest80S3file (de tipo test80-RELEASE1.zip)
+If (Test-Path $zipTest80LocalFile) {
+	Remove-Item -Force $zipTest80LocalFile
 }
 
 $JenkinsURL = "https://citools.mangodev.net/jenkins"
@@ -88,7 +88,7 @@ tag = $branch_robot
 },
 @{
 name = "PROJECT"
-value = "Pruebas80"
+value = "test80"
 },
 @{
 name = "SKIP_TEST"
@@ -99,20 +99,20 @@ value = "true"
 $ParamsJSON = ConvertTo-Json -InputObject $JenkinsParams
 Invoke-WebRequest -UseBasicParsing $FullURL -Method POST -Headers $Headers -Body @{ json = $ParamsJSON }
 
-# Get del pathPruebas80S3file (de tipo Pruebas80-RELEASE1.zip) from S3 (Wait for X loops) and save with name Pruebas80.zip
-WaitAndGet-FileFromS3 $pathPruebas80S3file $zipPruebas80LocalFile $bucketS3Name $accessKeyS3 $secreKeyS3 15
+# Get del pathTest80S3file (de tipo test80-RELEASE1.zip) from S3 (Wait for X loops) and save with name test80.zip
+WaitAndGet-FileFromS3 $pathTest80S3file $zipTest80LocalFile $bucketS3Name $accessKeyS3 $secreKeyS3 15
 
-# Unzip the file Pruebas80.zip downloaded from S3
+# Unzip the file test80.zip downloaded from S3
 $currentScriptDirectory = Get-Location
-$pathZip = $currentScriptDirectory.tostring() + '\' + $zipPruebas80LocalFile
+$pathZip = $currentScriptDirectory.tostring() + '\' + $zipTest80LocalFile
 Unzip $pathZip $currentScriptDirectory
 
-# Exec Pruebas80 with Params
-Set-Location -Path Pruebas80*
-java -cp Pruebas80.jar org.Pruebas80.Pruebas80Mango -suite SmokeTest -browser chrome -channel desktop -application shop -version V1 -url https://shop.mango.com/preHome.faces -typeAccess Online -tcases MIC001
+# Exec test80 with Params
+Set-Location -Path test80*
+java -cp test80.jar com.mng.robotest.test80 -suite SmokeTest -browser chrome -channel desktop -application shop -version V1 -url https://shop.mango.com/preHome.faces -typeAccess Online -tcases MIC001
 
 # Zip Results 
-$sourceFolder = $currentScriptDirectory.tostring() + '\' + 'Pruebas80-RELEASE-1\output-library'
+$sourceFolder = $currentScriptDirectory.tostring() + '\' + 'test80-RELEASE-1\output-library'
 $zipDestination = $currentScriptDirectory.tostring() + "\reportTest.zip"
 If (Test-Path $zipDestination){
 	Remove-Item -Force $zipDestination

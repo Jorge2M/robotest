@@ -9,6 +9,29 @@
   	<module>webmngtest</module>
   </modules>
   
+  <properties>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+       <nexusUrl>https://citools.mangodev.net/nexus</nexusUrl>		
+  </properties>
+
+  <!-- Configuración de deployment. Apunta al repositorio Maven sobre el que
+       se deplayará. No se debe definir nunca en ningún otro proyecto. Siempre se
+       heredará de este proyecto. -->
+  <distributionManagement>
+      <repository>
+          <id>nexus</id>
+          <name>releases</name>
+          <url>${nexusUrl}/content/repositories/releases</url>
+      </repository>
+
+      <snapshotRepository>
+          <id>nexus</id>
+          <name>snapshots</name>
+          <url>${nexusUrl}/content/repositories/snapshots</url>
+      </snapshotRepository>
+  </distributionManagement>
+  
   <build>
     <plugins>
 		<plugin>

@@ -1,20 +1,20 @@
 #Steps for exec terraform:
 #terraform init -backend-config "key=infraestructure/robotest/tfstate-${nameInstance}"
-#terraform plan -var robot="MangoTest" o "Pruebas80" -var branch_robot=branches/RELEASE_1 -var id_instance="RELEASE_1_jorge.munoz"
-#terraform apply -var robot="MangoTest" o "Pruebas80" -var branch_robot=branches/RELEASE_1 -var id_instance="RELEASE_1_jorge.munoz"
+#terraform plan -var robot="MangoTest" o "test80" -var branch_robot=branches/RELEASE_1 -var id_instance="RELEASE_1_jorge.munoz"
+#terraform apply -var robot="MangoTest" o "test80" -var branch_robot=branches/RELEASE_1 -var id_instance="RELEASE_1_jorge.munoz"
 
 
-# param branch_robot: p.e. "RELEASE_1"
+# param branch_robot: p.e. "origin/develop"
 variable "branch_robot" {
   type = "string"
 }
 
-# param id_instance: p.e. "RELEASE_1_jorge.munoz"
+# param id_instance: p.e. "origin_develop_id_jorge.munoz"
 variable "id_instance" {
   type = "string"
 }
 
-# param robot: "MangoTest" o "Pruebas80"
+# param robot: "webmngtest" o "test80"
 variable "robot" {
   type = "string"
 }
@@ -71,20 +71,20 @@ resource "aws_instance" "robotest" {
     #}	
 	
     provisioner "file" {
-        source      = "Provision${var.robot}.ps1"
-        destination = "C:\\Provision${var.robot}.ps1"
+        source      = "Provision_${var.robot}.ps1"
+        destination = "C:\\Provision_${var.robot}.ps1"
     }
 
     provisioner "remote-exec" {
          inline = [
 	     	"powershell.exe Set-ExecutionPolicy RemoteSigned -force",
-           	"powershell.exe -version 4 -ExecutionPolicy Bypass -File C:\\Provision${var.robot}.ps1 ${var.branch_robot}"
+           	"powershell.exe -version 4 -ExecutionPolicy Bypass -File C:\\Provision_${var.robot}.ps1 ${var.branch_robot}"
          ]
     }	
 	
 	#ami           = "ami-fc8cb885" (stable Windows_Server-2016-English-Full-Base)
 	#ami           = "ami-fbd0e782"
-	ami 		   = "ami-05d253e02b130b87b"
+	ami 		   = "ami-0864fcc37d7ff3d44"
 	instance_type = "t2.medium"
 	
 	tags {
