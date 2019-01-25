@@ -90,18 +90,23 @@ response.setDateHeader ("Expires", -1);%>
 	</div>
 
 	<%
-	boolean browserTasksRunning = browserTasksRunning(paramsTSuite.getBrowser());
+	boolean browserTasksRunning;
+	if(System.getProperty("os.name").contains("Windows")){
+		browserTasksRunning = browserTasksRunning(paramsTSuite.getBrowser(), "tasklist");
+	} else {
+		browserTasksRunning = browserTasksRunning(paramsTSuite.getBrowser(), "ps");
+	}
 	if (forceStart.toLowerCase().compareTo("on")!=0 && browserTasksRunning) {
 	%>
 		<div id="contenidoAjax"><p style="color:red;">Test no iniciado! </p>
 			<ul>
-				<li><b>Existe un <%=paramsTSuite.getBrowser().toUpperCase()%> arrancado en la máquina de Test.</b> Puede tratarse de un test activo. Espere a que finalice el test en la máquina remota o cierre las pantallas de <%=paramsTSuite.getBrowser().toUpperCase()%>.</li>
+				<li><b>Existe un <%=paramsTSuite.getBrowser().toUpperCase()%> arrancado en la mï¿½quina de Test.</b> Puede tratarse de un test activo. Espere a que finalice el test en la mï¿½quina remota o cierre las pantallas de <%=paramsTSuite.getBrowser().toUpperCase()%>.</li>
 			</ul>
 		</div>
 		<%
 	}
 	else {
-	    //Obtenemos el id de la ejecución + el output directory correspondiente a dicha ejecución y ejecutamos la TestSuite
+	    //Obtenemos el id de la ejecuciï¿½n + el output directory correspondiente a dicha ejecuciï¿½n y ejecutamos la TestSuite
 	    String idExecutedSuite = Test80mng.getIdForSuiteToExecute();
 		paramsTSuite.setIdExecutedSuite(idExecutedSuite);
 	    launchTestSuiteInThread(paramsTSuite, ctx);
@@ -112,17 +117,17 @@ response.setDateHeader ("Expires", -1);%>
 		if (!testExists)
 			out.print("<div class=\"errorMessage\"><b>Problema en el inicio la TestSuite!</b>. Superado Timeout " + maxSecondsToWait + " segundos</div>");			
 		else {
-		  	//Construímos la ruta del report HTML
+		  	//Construï¿½mos la ruta del report HTML
 		  	suite = SuitesDAO.getSuite(idExecutedSuite, paramsTSuite.getSuiteName());
 		  	
-		  	//Escribimos la función JavaScript que iterará la llamada Ajax que espera la finalización de los tests (existencia del fichero)
+		  	//Escribimos la funciï¿½n JavaScript que iterarï¿½ la llamada Ajax que espera la finalizaciï¿½n de los tests (existencia del fichero)
 			out.println("<script>");
 			out.println("var interval = null;");
 			out.println("$(document).ready(function() {");
 			out.println("    interval = setInterval(\"ajaxd()\",5000);");
 			out.println("});");
 			out.println("</script>");
-			out.println("<div id=\"contenidoAjax\" class=\"message\"><b>Test en ejecución!</b>. Esperando su finalización...</div>");
+			out.println("<div id=\"contenidoAjax\" class=\"message\"><b>Test en ejecuciï¿½n!</b>. Esperando su finalizaciï¿½n...</div>");
 			
 			//Forzamos un stop
 			//testNG.setThreadCount(0);
@@ -208,15 +213,15 @@ response.setDateHeader ("Expires", -1);%>
 		return (existsTSuite); 
 	}
 	
-	public boolean browserTasksRunning(String browser) throws Exception {
-		Process p = Runtime.getRuntime().exec("tasklist");
+	public boolean browserTasksRunning(String browser, String executionProtocol) throws Exception {
+		Process p = Runtime.getRuntime().exec(executionProtocol);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 		String line = "";
 		while ((line = reader.readLine()) != null) {
-			if (line.toLowerCase().contains(browser + ".exe"))
-				return true;
+		if ((line.toLowerCase().contains(browser + ".exe")) || (line.toLowerCase().contains(browser + ".app")))
+			return true;
 		}
-		
+
 		return false;
 	}%>
 
@@ -247,7 +252,7 @@ response.setDateHeader ("Expires", -1);%>
 			error:
 				function() {
 					window.clearInterval(interval);
-					document.getElementById("contenidoAjax").innerHTML="<b style=\"color:red\">Problemas técnicos en la ejecución del test!</b>";
+					document.getElementById("contenidoAjax").innerHTML="<b style=\"color:red\">Problemas tï¿½cnicos en la ejecuciï¿½n del test!</b>";
 				}
 			});
 	}
