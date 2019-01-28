@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
@@ -17,7 +17,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutW
 @SuppressWarnings("javadoc")
 public class SecTarjetaPciStpV {
     
-    public static void validateIsSectionOk(Pago pago, Pais pais, Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsSectionOk(Pago pago, Pais pais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = "";
         int maxSecondsToWait = 5;
         if (channel==Channel.desktop && !pais.isPagoPSP())

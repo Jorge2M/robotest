@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
@@ -21,9 +21,9 @@ public class PagoSofort extends PagoStpV {
     }
     
     @Override
-    public datosStep testPagoFromCheckout(boolean execPay) throws Exception {
+    public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
         PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
-        datosStep datosStep = 
+        DatosStep datosStep = 
         	PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
         boolean isPageIconoSofort = PageSofort1rst.isPageVisibleUntil(3, this.dCtxSh.channel, this.dFTest.driver);
         

@@ -194,7 +194,7 @@ public class GaleriaProducto extends GestorWebDriver {
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;
         dCtxSh.userRegistered = true;
-        datosStep datosStep = null;
+        DatosStep datosStep = null;
     
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);

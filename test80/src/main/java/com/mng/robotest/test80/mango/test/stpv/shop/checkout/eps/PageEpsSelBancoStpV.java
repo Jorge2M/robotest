@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.eps.PageEpsSelBanco;
@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 @SuppressWarnings("javadoc")
 public class PageEpsSelBancoStpV {
 
-    public static void validateIsPage(String importeTotal, String codPais, Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(String importeTotal, String codPais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Figura el icono correspondiente al pago <b>EPS</b><br>" +
             "2) Aparece el importe de la compra: " + importeTotal + "<br>" +

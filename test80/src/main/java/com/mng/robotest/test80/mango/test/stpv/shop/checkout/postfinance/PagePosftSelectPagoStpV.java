@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance.PagePostfSelectPago;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -18,7 +18,7 @@ public class PagePosftSelectPagoStpV {
 
 	static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 	
-	public static void validateIsPage(String nombrePago, String importeTotal, String codPais, datosStep datosStep, DataFmwkTest dFTest) {
+	public static void validateIsPage(String nombrePago, String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) {
 		int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Aparece la 1a pantalla para la selección del método <b>" + nombrePago + "</b> (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" + 
@@ -44,7 +44,7 @@ public class PagePosftSelectPagoStpV {
 	public static void clickIconoPago(String nombrePago, String importeTotal, String codigoPais, DataFmwkTest dFTest) 
 	throws Exception {
 		//Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar el icono del pago <b>" + nombrePago + "</b>", 
             "Aparece una página de redirección");
         try {

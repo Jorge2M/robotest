@@ -6,14 +6,14 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal.PagePaypalLogin;
 
 @SuppressWarnings("javadoc")
 public class PagePaypalLoginStpV {
 
-    public static void validateIsPageUntil(int maxSecondsToWait, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPageUntil(int maxSecondsToWait, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         String descripValidac =
             "1) Aparece la página de login (la esperamos hasta un máximo de " + maxSecondsToWait + " segundos)";
@@ -29,9 +29,9 @@ public class PagePaypalLoginStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep loginPaypal(String userMail, String password, DataFmwkTest dFTest) throws Exception { 
+    public static DatosStep loginPaypal(String userMail, String password, DataFmwkTest dFTest) throws Exception { 
         //Step.
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Introducimos las credenciales (" + userMail + " - " + password + ") y pulsamos el botón \"Iniciar sesión\"", 
             "Aparece la página de inicio de sesión en Paypal");
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);    

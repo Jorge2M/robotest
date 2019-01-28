@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.epayment.PageEpaymentIdent;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paytrail.PagePaytrailEpayment;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paytrail.Page
 @SuppressWarnings("javadoc")
 public class PagePaytrailEpaymentStpV {
     
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) { 
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) { 
         String descripValidac = 
             "1) Aparece la página inicial de E-Payment<br>" +
             "2) Figuran el input correspondientes al \"User ID\"";
@@ -36,9 +36,9 @@ public class PagePaytrailEpaymentStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep clickCodeCardOK(String importeTotal, String codPais, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clickCodeCardOK(String importeTotal, String codPais, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Click en el botón \"OK\"del apartado \"Code card\"", 
             "Aparece la página de introducción del <b>ID de confirmación</b>");
         try {

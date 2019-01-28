@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 
 @SuppressWarnings("javadoc")
@@ -15,7 +15,7 @@ public class Page1IdentCheckoutStpV {
     public static SecSoyNuevoStpV secSoyNuevo;
     
     @SuppressWarnings("static-access")
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         int maxSecondsToWait = 5;
         String descripValidac = 

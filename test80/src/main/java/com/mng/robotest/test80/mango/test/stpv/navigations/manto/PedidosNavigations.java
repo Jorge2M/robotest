@@ -9,7 +9,7 @@ import com.mng.robotest.test80.Test80mng.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.utils;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -85,7 +85,7 @@ public class PedidosNavigations {
         
         //Establecemos los filtros de las bolsas con el día de hoy + el pedido + el código de país asociado al pedido y pulsamos "Buscar"
         PageMenusMantoStpV.goToBolsas(dFTest);
-        datosStep datosStep = SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.BOLSA, dFTest);
+        DatosStep datosStep = SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.BOLSA, dFTest);
         boolean existLinkPedido = PageBolsasMantoStpV.validaLineaBolsa(dataPedido, appE, datosStep, dFTest);
         if (existLinkPedido)
             PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.bolsa, appE, dFTest);

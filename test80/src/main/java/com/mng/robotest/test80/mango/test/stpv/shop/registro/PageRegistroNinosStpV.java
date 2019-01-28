@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataNinos;
@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 @SuppressWarnings("javadoc")
 public class PageRegistroNinosStpV {
     
-    public static void validaIsPageWithNinos(int numNinos, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaIsPageWithNinos(int numNinos, DatosStep datosStep, DataFmwkTest dFTest) {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Aparece la página de introducción de datos del niño (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>" +
@@ -39,7 +39,7 @@ public class PageRegistroNinosStpV {
     public static void sendNinoDataAndContinue(ListDataNinos listaNinos, Pais pais, DataFmwkTest dFTest) 
     throws Exception {
         //Step.
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Introducir datos de los niños: <br>" + listaNinos.getFormattedHTMLData() + "<br>" + "y finalmente pulsar el botón \"Continuar\"", 
             "Aparece la página de introducción de datos de la dirección");
         try {

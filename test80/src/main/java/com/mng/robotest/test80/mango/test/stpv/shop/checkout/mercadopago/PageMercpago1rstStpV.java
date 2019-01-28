@@ -6,14 +6,14 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpago1rst;
 
 @SuppressWarnings("javadoc")
 public class PageMercpago1rstStpV {
 		
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Aparece la página inicial de Mercado para la introducción de datos";
@@ -29,8 +29,8 @@ public class PageMercpago1rstStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
 	
-    public static datosStep clickLinkRegistration(DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = new datosStep       (
+    public static DatosStep clickLinkRegistration(DataFmwkTest dFTest) throws Exception {
+        DatosStep datosStep = new DatosStep       (
             "Accedemos a la página de identificación", 
             "Aparece la página de identificación");
         try {

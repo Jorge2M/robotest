@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageSelTda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageJCAS;
@@ -19,9 +19,9 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.PageJCAS;
 public class PageLoginMantoStpV {
 
     @SuppressWarnings("javadoc")
-    public static datosStep login(String urlManto, String usrManto, String pasManto, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep login(String urlManto, String usrManto, String pasManto, DataFmwkTest dFTest) throws Exception {
         //Step. Acceder a la página de menús de Manto
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "<b style=\"color:brown;\">ACCEDER A MANTO</b> (" + urlManto + ")",
             "Aparece la página de selección de login o selección de tienda");
         datosStep.setGrab_ErrorPageIfProblem(false);
@@ -38,7 +38,7 @@ public class PageLoginMantoStpV {
 
         if (!PageSelTda.isPage(dFTest.driver)) {
             //Step. Acceder a la página de menús de Manto
-            datosStep = new datosStep       (
+            datosStep = new DatosStep       (
                 "Identificarse desde la página de Jasig CAS con " + usrManto,
                 "Aparece la página de selección de la tienda");
             datosStep.setGrab_ErrorPageIfProblem(false);

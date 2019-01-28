@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.votf;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.pageobject.votf.PageAlertaVOTF;
@@ -11,9 +11,9 @@ import com.mng.robotest.test80.mango.test.pageobject.votf.PageSelectIdiomaVOTF;
 @SuppressWarnings("javadoc")
 public class PageSelectIdiomaVOTFStpV {
 
-    public static datosStep selectIdiomaAndContinue(IdiomaPais idioma, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep selectIdiomaAndContinue(IdiomaPais idioma, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Seleccionar el idioma <b>" + idioma.getCodigo().getLiteral() + "</b> y pulsar \"Aceptar\" (si aparece una página de alerta la aceptamos)",
             "Aparece la página de selección de la línea");
         try {

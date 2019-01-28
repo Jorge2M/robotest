@@ -57,16 +57,16 @@ public class fmwkTest {
      * Función que realiza la grabación de un Step. Básicamente graba los datos en BD y genera los ficheros asociados
      */
     @SuppressWarnings({ "unchecked"})    
-    public static int grabStep(datosStep datosStep, DataFmwkTest dFTest) {
+    public static int grabStep(DatosStep datosStep, DataFmwkTest dFTest) {
         if ("ROBOTEST2".equals(System.getProperty("ROBOTEST2"))) {
             // No queremos crear una dependencia ciclica robotest2 report, por lo que es licito realizar este workaround intercambiando datos atraves de listas y hashes
-            Map<datosStep, List<String>> stepMap = (Map<datosStep, List<String>>) dFTest.ctx.getSuite()
+            Map<DatosStep, List<String>> stepMap = (Map<DatosStep, List<String>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_STEP_VALIDATIONS");
-            Map<datosStep, List<State>> stepMapStatus = (Map<datosStep, List<State>>) dFTest.ctx.getSuite()
+            Map<DatosStep, List<State>> stepMapStatus = (Map<DatosStep, List<State>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_VALIDATION_STATUS_LIST");              
-            Map<datosStep, List<byte[]>> screnshootsMap = (Map<datosStep, List<byte[]>>) dFTest.ctx.getSuite()
+            Map<DatosStep, List<byte[]>> screnshootsMap = (Map<DatosStep, List<byte[]>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_SCRENSHOT_LIST");
-            Map<datosStep, List<byte[]>> htmlsourcesMap = (Map<datosStep, List<byte[]>>) dFTest.ctx.getSuite()
+            Map<DatosStep, List<byte[]>> htmlsourcesMap = (Map<DatosStep, List<byte[]>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_SOURCES_LIST");
             if (!stepMap.containsKey(datosStep)) {
                 stepMap.put(datosStep, new ArrayList<String>());
@@ -89,7 +89,7 @@ public class fmwkTest {
      * Realiza la grabación de una validación
      */
     @SuppressWarnings({ "unchecked"})
-    public static void grabStepValidation(datosStep datosStep, String descripValidac, DataFmwkTest dFTest) {
+    public static void grabStepValidation(DatosStep datosStep, String descripValidac, DataFmwkTest dFTest) {
         boolean avoidEvidences = false;
         switch (datosStep.getResultSteps()) {
         case Warn_NoHardcopy:
@@ -104,13 +104,13 @@ public class fmwkTest {
             avoidEvidences = false;
         }
         if ("ROBOTEST2".equals(System.getProperty("ROBOTEST2"))) {
-            Map<datosStep, List<String>> stepMap = (Map<datosStep, List<String>>) dFTest.ctx.getSuite()
+            Map<DatosStep, List<String>> stepMap = (Map<DatosStep, List<String>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_STEP_VALIDATIONS");
-            Map<datosStep, List<State>> stepMapStatus = (Map<datosStep, List<State>>) dFTest.ctx.getSuite()
+            Map<DatosStep, List<State>> stepMapStatus = (Map<DatosStep, List<State>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_VALIDATION_STATUS_LIST");              
-            Map<datosStep, List<byte[]>> screnshootsMap = (Map<datosStep, List<byte[]>>) dFTest.ctx.getSuite()
+            Map<DatosStep, List<byte[]>> screnshootsMap = (Map<DatosStep, List<byte[]>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_SCRENSHOT_LIST");
-            Map<datosStep, List<byte[]>> htmlsourcesMap = (Map<datosStep, List<byte[]>>) dFTest.ctx.getSuite()
+            Map<DatosStep, List<byte[]>> htmlsourcesMap = (Map<DatosStep, List<byte[]>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_SOURCES_LIST");     
             if (!stepMap.containsKey(datosStep)) {
                 stepMap.put(datosStep, new ArrayList<String>());
@@ -205,7 +205,7 @@ public class fmwkTest {
             throw new SkipException("Received Signal for stop TestSuite");
     }
 
-    private static void storeFileEvidencesIfNeeded(datosStep datosStep, TypeStore typeStore, DataFmwkTest dFTest) {
+    private static void storeFileEvidencesIfNeeded(DatosStep datosStep, TypeStore typeStore, DataFmwkTest dFTest) {
         String nameMethodWithFactory = fmwkTest.getMethodWithFactory(dFTest.meth, dFTest.ctx);
         datosStep.setNameMethodWithFactory(nameMethodWithFactory);
         if (typeStore==TypeStore.step) {
@@ -223,7 +223,7 @@ public class fmwkTest {
         directorio.mkdirs();
     }
     
-    private static void storeHardcopyIfNeeded(datosStep datosStep, DataFmwkTest dFTest) {
+    private static void storeHardcopyIfNeeded(DatosStep datosStep, DataFmwkTest dFTest) {
         try {
             boolean browserGUI = true;
             int grabImg = 0;
@@ -255,7 +255,7 @@ public class fmwkTest {
         }
     }
     
-    private static void storeHTMLIfNeeded(datosStep datosStep, DataFmwkTest dFTest) {
+    private static void storeHTMLIfNeeded(DatosStep datosStep, DataFmwkTest dFTest) {
         try {
             if (datosStep.getGrabHTML() && datosStep.getTypePage() == 0/* HTML */)
                 WebDriverArqUtils.capturaHTMLPage(dFTest, datosStep.getStepNumber());
@@ -265,7 +265,7 @@ public class fmwkTest {
         }
     }
     
-    private static void storeNetTrafficIfNeeded(datosStep datosStep, ITestContext ctx) {
+    private static void storeNetTrafficIfNeeded(DatosStep datosStep, ITestContext ctx) {
 	    try {
 	    	String methodWithFactory = datosStep.getNameMethodWithFactory();
 	        if (datosStep.getGrabNettrafic()) {
@@ -376,7 +376,7 @@ public class fmwkTest {
      *          false: devuelve la URL de la imagen correspondiente al 'output directory' temporal durante la ejecución de los tests
      * @return URL de la hardcopy asociada a un step concreto
      */
-    public static String getURLImgStep(datosStep datosStep, boolean finDirectory, Method method, ITestContext context) {
+    public static String getURLImgStep(DatosStep datosStep, boolean finDirectory, Method method, ITestContext context) {
         String methodWithFactory = getMethodWithFactory(method, context);
         String pathImageInit = getPathFileEvidenciaStep(context, methodWithFactory, datosStep.getStepNumber(), TypeEvidencia.imagen);
         File fileImage = new File(pathImageInit);

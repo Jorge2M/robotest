@@ -6,14 +6,14 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.multibanco.PageMultibancoEnProgreso;
 
 @SuppressWarnings("javadoc")
 public class PageMultibancoEnProgresoStpv {
     
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
         int maxSecondsToWait = 3;
         String descripValidac = 
             "1) Aparece la cabecera <b>Pagamento em progreso</b> (la esperamos hasta " + maxSecondsToWait + " segundos<br>" +
@@ -33,9 +33,9 @@ public class PageMultibancoEnProgresoStpv {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep clickButtonNextStep(DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clickButtonNextStep(DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar el botón \"Continuar\"", 
             "El pago se ejecuta correctamente y aparece la correspondiente página de resultado de Mango");
         try {

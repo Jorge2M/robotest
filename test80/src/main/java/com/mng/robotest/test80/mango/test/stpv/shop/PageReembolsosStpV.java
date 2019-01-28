@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -27,12 +27,12 @@ public class PageReembolsosStpV {
      * Step (+validación) correspondiente a la selección del menú superior "Mi cuenta" + "Reembolsos"
      * @param paisConSaldoCta indica si el país tiene configurado el saldo en cuenta
      */
-    public static datosStep gotoRefundsFromMenu(boolean paisConSaldoCta, AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep gotoRefundsFromMenu(boolean paisConSaldoCta, AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
     	//Step
     	SecMenusUserStpV.clickMenuMiCuenta(channel, app, dFTest);
     	
         //Step
-        datosStep datosStep = new datosStep   (
+        DatosStep datosStep = new DatosStep   (
             "Seleccionar la opción \"Reembolsos\"", 
             "Aparece la página de reembolsos");
         try {
@@ -85,9 +85,9 @@ public class PageReembolsosStpV {
      * @param webdriver
      * @param saldoEsperado saldo que validaremos exista en el apartado de "Saldo en cuenta" de la página de configuración del reembolso
      */
-    public static datosStep gotoRefundsFromMenuAndValidaSalCta(boolean paisConSaldoCta, float saldoCtaEsperado, AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep gotoRefundsFromMenuAndValidaSalCta(boolean paisConSaldoCta, float saldoCtaEsperado, AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step (+validación) correspondiente a la selección del menú superior "Mi cuenta" + "Reembolsos"
-        datosStep datosStep = PageReembolsosStpV.gotoRefundsFromMenu(paisConSaldoCta, app, channel, dFTest);
+        DatosStep datosStep = PageReembolsosStpV.gotoRefundsFromMenu(paisConSaldoCta, app, channel, dFTest);
         
         //Validations
         String descripValidac = "1) Aparece el saldo en cuenta que esperamos <b>" + saldoCtaEsperado + "</b>"; 
@@ -120,9 +120,9 @@ public class PageReembolsosStpV {
     /**
      * Selección del radio correspondiente a la opción de Transferencias
      */
-    public static datosStep selectRadioTransferencia(DataFmwkTest dFTest) throws Exception {    
+    public static DatosStep selectRadioTransferencia(DataFmwkTest dFTest) throws Exception {    
         //Step
-        datosStep datosStep = new datosStep   (
+        DatosStep datosStep = new DatosStep   (
             "<b>Transferencias:</b> seleccionamos el radio asociado", 
             "Los campos de input se hacen visibles");
         try {
@@ -153,12 +153,12 @@ public class PageReembolsosStpV {
     /**
      * Informa los datos de configuración del reembolso por transferencia y selecciona el botón guardar
      */
-    public static datosStep informaDatosTransAndSave(DataFmwkTest dFTest) throws Exception {
+    public static DatosStep informaDatosTransAndSave(DataFmwkTest dFTest) throws Exception {
         //Step
         String banco = "Banco de crédito Balear";
         String titular = "Jorge Muñoz";
         String IBAN = "ES8023100001180000012345";
-        datosStep datosStep = new datosStep   (
+        DatosStep datosStep = new DatosStep   (
             "Informar el banco: " + banco + "<br>titular: " + titular + "<br>IBAN: " + IBAN + "<br>y pulsar el botón \"Save\"", 
             "La modificación de datos se realiza correctamente");
         try {
@@ -196,9 +196,9 @@ public class PageReembolsosStpV {
     /**
      * Selección del radio de Saldo en Cuenta + refresh de la página
      */
-    public static datosStep selectRadioSalCtaAndRefresh(DataFmwkTest dFTest) {
+    public static DatosStep selectRadioSalCtaAndRefresh(DataFmwkTest dFTest) {
         //Step
-        datosStep datosStep = new datosStep   (
+        DatosStep datosStep = new DatosStep   (
             "<b>Store Credit:</b> seleccionamos el radio asociado y ejecutamos un refresh de la página", 
             "El checkbox de \"Store Credit\" acaba marcado");
         try {
@@ -238,7 +238,7 @@ public class PageReembolsosStpV {
     public static void clickSaveButtonStoreCreditIfExists(DataFmwkTest dFTest) throws Exception {
         if (PageReembolsos.isVisibleSaveButtonStoreCredit(dFTest.driver)) {
             //Step
-            datosStep datosStep = new datosStep   (
+            DatosStep datosStep = new DatosStep   (
                 "<b>Store Credit:</b> Seleccionamos el botón \"Save\"", 
                 "Desaparece el botón \"Save\"");
             try {

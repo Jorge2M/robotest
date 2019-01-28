@@ -4,7 +4,7 @@ import com.mng.robotest.test80.arq.utils.State;
 
 @SuppressWarnings("javadoc")
 public class ResultTestRun {
-    public State maxResultScript = State.Reservado; 
-    public State maxresultTNG = State.Reservado;
+    public State maxResultScript = State.Undefined; 
+    public State maxresultTNG = State.Undefined;
     public int numberMethods = 0;
 }

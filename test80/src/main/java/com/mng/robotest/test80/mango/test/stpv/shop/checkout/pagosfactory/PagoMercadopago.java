@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -22,10 +22,10 @@ public class PagoMercadopago extends PagoStpV {
     }
     
     @Override
-    public datosStep testPagoFromCheckout(boolean execPay) throws Exception {
+    public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
         DataPedido dataPedido = this.dCtxPago.getDataPedido();
         PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
-        datosStep datosStep = 
+        DatosStep datosStep = 
             PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
         PageMercpago1rstStpV.validateIsPage(datosStep, dFTest);
         datosStep = PageMercpago1rstStpV.clickLinkRegistration(this.dFTest);

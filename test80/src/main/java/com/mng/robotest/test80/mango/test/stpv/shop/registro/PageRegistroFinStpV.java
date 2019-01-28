@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroF
 @SuppressWarnings({"javadoc", "static-access"})
 public class PageRegistroFinStpV {
     
-    public static void isPage(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void isPage(DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones.
         int maxSecondsToWait = 5;
         String descripValidac = 
@@ -33,10 +33,10 @@ public class PageRegistroFinStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep clickIrDeShoppingButton(DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep clickIrDeShoppingButton(DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         //Step.
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el botón \"Ir de shopping\" y finalmente el icono de Mango", 
             "Se accede a la shop correctamente");
         try {

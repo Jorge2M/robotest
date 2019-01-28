@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.ModalDirecFactura;
@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopChe
 @SuppressWarnings("javadoc")
 public class ModalDirecFacturaStpV {
 
-    public static void validateIsOk(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsOk(DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         int maxSeconds = 5;
         String descripValidac = 
@@ -36,9 +36,9 @@ public class ModalDirecFacturaStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep inputDataAndActualizar(DataDireccion dataDirFactura, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep inputDataAndActualizar(DataDireccion dataDirFactura, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Introducir los datos y pulsar \"Actualizar\"<br>" + dataDirFactura.getFormattedHTMLData(), 
             "Los datos se actualizan correctamente");
         try {

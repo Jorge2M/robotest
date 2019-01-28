@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.TiendaMantoEnum.TiendaManto;
@@ -22,12 +22,12 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.PageMenusManto;
 @SuppressWarnings("javadoc")
 public class PageSelTdaMantoStpV {
 	
-    public static datosStep selectTienda(String codigoAlmacen, String codigoPais, AppEcom appE, DataFmwkTest dFTest) 
+    public static DatosStep selectTienda(String codigoAlmacen, String codigoPais, AppEcom appE, DataFmwkTest dFTest) 
     throws Exception {
         TiendaManto tienda = TiendaManto.getTienda(codigoAlmacen, codigoPais, appE);
         
         //Step.
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionamos el entorno \"" + tienda + "\"", 
             "Aparece la página de Menús");
         datosStep.setGrab_ErrorPageIfProblem(false);

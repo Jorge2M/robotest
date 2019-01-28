@@ -3,10 +3,14 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.testng.annotations.Test;
+
+import com.mng.robotest.test80.arq.annotations.Validation;
+import com.mng.robotest.test80.arq.annotations.ValidationResult;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -59,7 +63,7 @@ public class PageFichaArtStpV {
         return this.pageFicha;
     }
     
-    public void validateIsFichaAccordingTypeProduct(ArticleStock articulo, datosStep datosStep) 
+    public void validateIsFichaAccordingTypeProduct(ArticleStock articulo, DatosStep datosStep) 
     throws Exception {
         switch (articulo.getType()) {
         case articlesNotExistent:
@@ -79,7 +83,7 @@ public class PageFichaArtStpV {
         AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, datosStep, this.dFTest);
     }
     
-    public void validateIsFichaArtDisponible(String refArticulo, datosStep datosStep) { 
+    public void validateIsFichaArtDisponible(String refArticulo, DatosStep datosStep) { 
         //Validaciones
     	int maxSecondsToWait = 3;
         String descripValidac = 
@@ -97,7 +101,7 @@ public class PageFichaArtStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
     }
     
-    public void validateIsFichaArtNoDisponible(String refArticulo, datosStep datosStep) {
+    public void validateIsFichaArtNoDisponible(String refArticulo, DatosStep datosStep) {
         //Validaciones
         String descripValidac = 
             "1) Aparece la página de resultado de una búsqueda KO<br>" +
@@ -117,7 +121,7 @@ public class PageFichaArtStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
     }
     
-    public void validateIsArticleNotAvailable(ArticleStock article, datosStep datosStep) {
+    public void validateIsArticleNotAvailable(ArticleStock article, DatosStep datosStep) {
         //Validaciones
     	int maxSecondsToWait = 2;
         String descripValidac = 
@@ -139,7 +143,7 @@ public class PageFichaArtStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
     }        
     
-    public void validateIsFichaArtAlgunoColorNoDisponible(String refArticulo, datosStep datosStep) {
+    public void validateIsFichaArtAlgunoColorNoDisponible(String refArticulo, DatosStep datosStep) {
         //Validaciones
         String descripValidac = 
             "1) Aparece la página correspondiente a la ficha del artículo " + refArticulo + "<br>" +
@@ -159,7 +163,7 @@ public class PageFichaArtStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
     }
     
-    public void validateIsFichaCualquierArticulo(datosStep datosStep) {
+    public void validateIsFichaCualquierArticulo(DatosStep datosStep) {
         //Validaciones
         String descripValidac = 
             "1) Aparece la página de Ficha";
@@ -176,7 +180,7 @@ public class PageFichaArtStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
     }
     
-    public void validaDetallesProducto(DataFichaArt datosArticulo, datosStep datosStep) {
+    public void validaDetallesProducto(DataFichaArt datosArticulo, DatosStep datosStep) {
         String validacion1 = "";
         String validacion2 = "";
         int maxSecondsToWait = 3;
@@ -214,15 +218,15 @@ public class PageFichaArtStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
     }
 
-    public datosStep selectColorAndSaveData(ArticuloScreen articulo) throws Exception {
-        datosStep datosStep = selectColor(articulo.getCodigoColor());
+    public DatosStep selectColorAndSaveData(ArticuloScreen articulo) throws Exception {
+        DatosStep datosStep = selectColor(articulo.getCodigoColor());
         articulo.setColor(pageFicha.secDataProduct.getNombreColorSelected(this.channel, this.dFTest.driver));
         return datosStep;
     }
     
-    public datosStep selectColor(String codigoColor) throws Exception {
+    public DatosStep selectColor(String codigoColor) throws Exception {
         //Step. 
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Seleccionar el color con código <b>" + codigoColor + "</b>", 
             "Se muestra la ficha correspondiente al color seleccionado");
         try {
@@ -251,21 +255,21 @@ public class PageFichaArtStpV {
         return datosStep;
     }
     
-    public datosStep selectTallaAndSaveData(ArticuloScreen articulo) throws Exception {
-        datosStep datosStep = selectTalla(articulo.getTallaNum());
+    public DatosStep selectTallaAndSaveData(ArticuloScreen articulo) throws Exception {
+        DatosStep datosStep = selectTalla(articulo.getTallaNum());
         articulo.setTallaAlf(pageFicha.getTallaAlfSelected());
         articulo.setTallaNum(pageFicha.getTallaNumSelected());
         return datosStep;
     }
     
-    public datosStep selectTalla(int positionTalla) throws Exception {
+    public DatosStep selectTalla(int positionTalla) throws Exception {
     	String tallaCodNum = pageFicha.getTallaCodNum(positionTalla);
     	return (selectTalla(tallaCodNum));
 	}
     
-    public datosStep selectTalla(String tallaCodNum) throws Exception {
+    public DatosStep selectTalla(String tallaCodNum) throws Exception {
         //Step. 
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Seleccionar la talla con código <b>" + tallaCodNum + "</b> (previamente, si está abierta, cerramos la capa de la bolsa)", 
             "Se cambia la talla correctamente");
         try {
@@ -300,7 +304,7 @@ public class PageFichaArtStpV {
      */
     public void selectColorAndTallaNoDisponible(ArticleStock article, AppEcom app) throws Exception {
         //Step. 
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Seleccionar el color <b>" + article.getColourCode() + "<b>", 
             "La talla " + article.getSize() + " no está disponible");
         try {
@@ -311,7 +315,7 @@ public class PageFichaArtStpV {
         finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, this.dFTest)); }                  
             
         //Step
-        datosStep = new datosStep       (
+        datosStep = new DatosStep       (
             "Seleccionar la talla <b>" + article.getSize() + "</b>", 
             "Aparece una capa de introducción email para aviso");
         try {
@@ -341,9 +345,9 @@ public class PageFichaArtStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
     }
     
-    public datosStep selectAnadirALaBolsaStep() throws Exception {
+    public DatosStep selectAnadirALaBolsaStep() throws Exception {
         //Step
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar el botón <b>\"Añadir a la bolsa\"</b>", 
             "El comportamiento es el esperado... :-)");
         try {
@@ -362,7 +366,7 @@ public class PageFichaArtStpV {
      */
     public boolean selectAnadirALaBolsaTallaPrevNoSelected() throws Exception {
         //Step
-        datosStep datosStep = selectAnadirALaBolsaStep();
+        DatosStep datosStep = selectAnadirALaBolsaStep();
         
         //Validation
         boolean isTallaUnica = pageFicha.isTallaUnica();
@@ -411,24 +415,24 @@ public class PageFichaArtStpV {
     /**
      * Selección del botón "Añadir a la bolsa" en un contexto en el que previamente SÍ se ha seleccionado una talla
      */
-    public datosStep selectAnadirALaBolsaTallaPrevSiSelected(ArticuloScreen articulo, DataCtxShop dCtxSh) 
+    public DatosStep selectAnadirALaBolsaTallaPrevSiSelected(ArticuloScreen articulo, DataCtxShop dCtxSh) 
     throws Exception {
         //Step, Validation
-        datosStep datosStep = selectAnadirALaBolsaStep();
+        DatosStep datosStep = selectAnadirALaBolsaStep();
         DataBag dataBag = new DataBag();
         dataBag.addArticulo(articulo);
         SecBolsaStpV.validaAltaArtBolsa(datosStep, dataBag, dCtxSh.channel, dCtxSh.appE, this.dFTest);
         return datosStep;
     }    
 
-    public datosStep selectAnadirAFavoritos() throws Exception {
+    public DatosStep selectAnadirAFavoritos() throws Exception {
         DataFavoritos dataFavoritos = new DataFavoritos();
         return (selectAnadirAFavoritos(dataFavoritos));
     }
     
-    public datosStep selectAnadirAFavoritos(DataFavoritos dataFavoritos) throws Exception {
+    public DatosStep selectAnadirAFavoritos(DataFavoritos dataFavoritos) throws Exception {
         //Step
-        datosStep datosStep = new datosStep   (
+        DatosStep datosStep = new DatosStep   (
             "Seleccionar el botón <b>\"Añadir a Favoritos\"</b>", 
             "El artículo se añade a Favoritos");
         try {
@@ -464,9 +468,9 @@ public class PageFichaArtStpV {
         return datosStep;
     }
     
-    public datosStep selectRemoveFromFavoritos() throws Exception {
+    public DatosStep selectRemoveFromFavoritos() throws Exception {
         //Step
-        datosStep datosStep = new datosStep   (
+        DatosStep datosStep = new DatosStep   (
             "Seleccionar el botón <b>\"Eliminar de Favoritos\"</b>", 
             "El artículo se elimina de Favoritos");
         try {
@@ -482,7 +486,7 @@ public class PageFichaArtStpV {
         return datosStep;
     }    
     
-    public void validateVisibleButtonFavoritos(ActionFavButton buttonType, datosStep datosStep) {
+    public void validateVisibleButtonFavoritos(ActionFavButton buttonType, DatosStep datosStep) {
         //Validaciones
         String descripValidac = 
             "1) Aparece el botón de " + buttonType + " a Favoritos";
@@ -506,9 +510,9 @@ public class PageFichaArtStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }        
     }
     
-    public datosStep selectBuscarEnTiendaButton() throws Exception {
+    public DatosStep selectBuscarEnTiendaButton() throws Exception {
         //Step
-        datosStep datosStep = new datosStep   (
+        DatosStep datosStep = new DatosStep   (
             "Seleccionar <b>" + pageFicha.getNameLinkBuscarEnTienda() + "</b>", 
             "Aparece un resultado de la búsqueda correcta");
         try {
@@ -524,10 +528,10 @@ public class PageFichaArtStpV {
         return datosStep;
     }
     
-    public datosStep selectGuiaDeTallas() throws Exception {
+    public DatosStep selectGuiaDeTallas() throws Exception {
         //Step.
     	boolean isVisible = false;
-        datosStep datosStep = new datosStep   (
+        DatosStep datosStep = new DatosStep   (
             "Si está visible, Seleccionar el link \"<b>Guía de tallas</b>\"", 
             "Aparece el Fit Finder");
         try {
@@ -544,7 +548,7 @@ public class PageFichaArtStpV {
         return datosStep;
     }
     
-    public void validateSliderIfExists(Slider typeSlider, datosStep datosStep) {
+    public void validateSliderIfExists(Slider typeSlider, DatosStep datosStep) {
         //Validaciones
         boolean existsBlock = true;
         String descripValidac = 
@@ -581,7 +585,7 @@ public class PageFichaArtStpV {
         }
     }
     
-    public void validaPrevNext(LocationArticle locationArt, DataCtxShop dCtxSh, datosStep datosStep) {
+    public void validaPrevNext(LocationArticle locationArt, DataCtxShop dCtxSh, DatosStep datosStep) {
         String statePrevText = "Es visible";
         if (locationArt.isFirstInGalery()) 
             statePrevText = "No es visible";
@@ -615,10 +619,10 @@ public class PageFichaArtStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
     }
     
-    public datosStep selectLinkNavigation(ProductNav productNav, DataCtxShop dCtxSh, String refProductOrigin) 
+    public DatosStep selectLinkNavigation(ProductNav productNav, DataCtxShop dCtxSh, String refProductOrigin) 
     throws Exception {
         //Step. 
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Seleccionamos el link <b>" + productNav + "</b>", 
             "Aparece una página de ficha correcta");
         try {
@@ -641,7 +645,7 @@ public class PageFichaArtStpV {
     
     //------------------------------------------------------------------------
     //Específic Ficha Old
-    public void validaExistsImgsCarruselIzqFichaOld(datosStep datosStep) {
+    public void validaExistsImgsCarruselIzqFichaOld(DatosStep datosStep) {
         //Validaciones
         String descripValidac = 
             "1) Existe más de una imagen de carrusel a la izquierda de la imagen principal";
@@ -657,10 +661,10 @@ public class PageFichaArtStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest);}
     }
     
-    public datosStep selectImgCarruselIzqFichaOld(int numImagen) throws Exception { 
+    public DatosStep selectImgCarruselIzqFichaOld(int numImagen) throws Exception { 
         //Step.
         String pngImagen = "";
-        datosStep datosStep = new datosStep   (
+        DatosStep datosStep = new DatosStep   (
             "Seleccionar la " + numImagen + "a imagen del carrusel izquierdo", 
             "La imagen se carga aumentada en la imagen central");
         try {
@@ -691,7 +695,7 @@ public class PageFichaArtStpV {
     public void selectImagenCentralFichaOld() throws Exception {
         //Step
         String pngImgCentralOriginal = ((PageFichaArtOld)pageFicha).getSrcImagenCentral();
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar la imagen/ficha central", 
             "Se produce un zoom sobre la imagen");
         try {
@@ -720,7 +724,7 @@ public class PageFichaArtStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
     }    
     
-    public void validaBreadCrumbFichaOld(String urlGaleryOrigin, datosStep datosStep) {
+    public void validaBreadCrumbFichaOld(String urlGaleryOrigin, DatosStep datosStep) {
         String descripValidac = 
             "1) Existen el bloque correspondiente a las <b>BreadCrumb</b><br>" + 
             "2) El link correspondiente a la Galería del artículo linca a la URL " + urlGaleryOrigin;
@@ -738,5 +742,34 @@ public class PageFichaArtStpV {
             datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
         }
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
+    }
+    
+    //TODO pending refactors:
+    // 1) Remove datosStep
+    // 2) Reduce variable assignations
+    @Validation
+    public ValidationResult ValidateVisibilityOkAvisoSelectTalla(TypeFicha typeFichaAct, boolean isTallaUnica, State levelError, DatosStep datosStep, DataFmwkTest dFTest) {
+        ValidationResult valResult = new ValidationResult();
+        valResult.datosStep = datosStep;
+        valResult.dFTest = dFTest;
+        boolean isVisibleAviso = pageFicha.secDataProduct.isVisibleAvisoSeleccionTalla(dFTest.driver);
+        String apareceAvisoStr = "Aparece un aviso indicando que hay que seleccionar la talla";
+        if (isTallaUnica || typeFichaAct==TypeFicha.New) {
+            valResult.validation = "NO " + apareceAvisoStr;
+            valResult.resultOk = !isVisibleAviso;
+            return valResult;
+        }
+
+        valResult.validation = "SÍ " + apareceAvisoStr;
+        valResult.resultOk = isVisibleAviso;
+        valResult.levelError = levelError;        
+        return valResult;
+    }
+    
+    @Validation (
+        description="Prueba de test",
+        level=State.Warn)
+    public void ValidateInConstruction(DataFmwkTest dFTest) {
+    	
     }
 }

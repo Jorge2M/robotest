@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paytrail.PagePaytrailResultadoOk;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 @SuppressWarnings("javadoc")
 public class PagePaytrailResultadoOkStpV {
     
-    public static void validateIsPage(String importeTotal, String codPais, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac =
             "1) Aparece la página de resultado Ok de Paytrail<br>" +
             "2) Aparece el importe de la compra: " + importeTotal;
@@ -36,9 +36,9 @@ public class PagePaytrailResultadoOkStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep clickVolverAMangoButton(DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clickVolverAMangoButton(DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Click el botón para volver a Mango", 
             "Aparece la página de resultado Ok de Mango");
         try {

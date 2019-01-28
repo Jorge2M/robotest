@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -24,7 +24,7 @@ public class PageBolsasMantoStpV {
      * @return si existe el link correspondiente al código de pedido
      */
     @SuppressWarnings("javadoc")
-    public static boolean validaLineaBolsa(DataPedido dataPedido, AppEcom appE, datosStep datosStep, DataFmwkTest dFTest) {
+    public static boolean validaLineaBolsa(DataPedido dataPedido, AppEcom appE, DatosStep datosStep, DataFmwkTest dFTest) {
 //    	//TODO tratamiento específico temporal para el entorno de CI con Adyen -> Level.Info 
 //    	//(hasta que dispongamos de la CI que despliega Adyen y el resto de artefactos satelitales)
 //        State levelByCIAdyen = State.Warn;

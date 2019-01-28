@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -23,7 +23,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 @SuppressWarnings({"javadoc", "static-access"})
 public class ModalFichaFavoritosStpV {
     
-    public static void validaIsVisibleFicha(ArticuloScreen articulo, datosStep datosStep, DataFmwkTest dFTest) { 
+    public static void validaIsVisibleFicha(ArticuloScreen articulo, DatosStep datosStep, DataFmwkTest dFTest) { 
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) En Favoritos es visible el modal de la ficha del producto " + articulo.getRefProducto() + " (lo esperamos hasta " + maxSecondsToWait + " segundos) <br>" +
@@ -43,12 +43,12 @@ public class ModalFichaFavoritosStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Channel channel, 
+    public static DatosStep addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Channel channel, 
     										 AppEcom app, DataFmwkTest dFTest) throws Exception {
         String refProductoToAdd = artToAddBolsa.getRefProducto();
         
         //Step
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Desde Favoritos añadimos el artículo: " + refProductoToAdd + " (1a talla disponible) a la bolsa",
             "El artículo aparece en la bolsa");
         try {
@@ -75,11 +75,11 @@ public class ModalFichaFavoritosStpV {
         return datosStep;
     }
     
-    public static datosStep closeFicha(ArticuloScreen articulo, DataFmwkTest dFTest) {
+    public static DatosStep closeFicha(ArticuloScreen articulo, DataFmwkTest dFTest) {
         String refProductoToClose = articulo.getRefProducto();
         
         //Step
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "En Favoritos cerramos la ficha del producto: " + refProductoToClose,
             "Desaparece la ficha");
         try {

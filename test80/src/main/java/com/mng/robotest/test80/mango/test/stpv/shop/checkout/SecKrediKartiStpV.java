@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecKrediKarti;
@@ -14,9 +14,9 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecKrediKarti
 @SuppressWarnings("javadoc")
 public class SecKrediKartiStpV {
 
-    public static datosStep inputNumTarjeta(String numTarjeta, Channel channel, DataFmwkTest dFTest) {
+    public static DatosStep inputNumTarjeta(String numTarjeta, Channel channel, DataFmwkTest dFTest) {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Introducimos el número de cuenta " + numTarjeta,
             "Aparece la capa correspondiente a las opciones a plazo");
         try {
@@ -46,8 +46,8 @@ public class SecKrediKartiStpV {
         return datosStep;
     }
     
-    public static datosStep clickOpcionPagoAPlazo(int numOpcion, Channel channel, DataFmwkTest dFTest) {
-        datosStep datosStep = new datosStep       (
+    public static DatosStep clickOpcionPagoAPlazo(int numOpcion, Channel channel, DataFmwkTest dFTest) {
+        DatosStep datosStep = new DatosStep       (
             "Seleccionamos la " + numOpcion + "a de las opciones de pago a plazo", 
             "La opción se selecciona correctamente");
         try {

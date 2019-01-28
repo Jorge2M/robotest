@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -30,7 +30,7 @@ public class SecCabeceraStpV {
 		return (new SecCabeceraStpV(dCtxSh, dFTest));
 	}
 	
-    public void validaLogoDesktop(LineaType lineaType, datosStep datosStep) {
+    public void validaLogoDesktop(LineaType lineaType, DatosStep datosStep) {
         //Validaciones.
     	int maxSecondsWait = 1;
         String descripValidac = 
@@ -53,7 +53,7 @@ public class SecCabeceraStpV {
      */
     public void selecLogo() throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar el logo de Mango", 
             "Se accede a la página principal de la línea");
         datosStep.setGrabImage(true);
@@ -65,7 +65,7 @@ public class SecCabeceraStpV {
         finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }              
     }    
     
-    public void validateIconoBolsa(datosStep datosStep) {
+    public void validateIconoBolsa(DatosStep datosStep) {
         String validacion1 = "";
         if ("true".compareTo(dCtxSh.pais.getShop_online())==0)
             validacion1 = "<b>Sí</b> es posible comprar (aparece la capa relacionada con la bolsa)";

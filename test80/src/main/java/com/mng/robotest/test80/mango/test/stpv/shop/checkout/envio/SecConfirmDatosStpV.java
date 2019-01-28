@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -17,7 +17,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDr
 @SuppressWarnings({"javadoc", "static-access"})
 public class SecConfirmDatosStpV {
     
-    public static void validateIsVisible(Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsVisible(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         int maxSecondsToWait = 3;
         String descripValidac = 
             "1) Es visible la capa de confirmación de los datos (la esperamos hasta " + maxSecondsToWait + " segundos)";
@@ -33,9 +33,9 @@ public class SecConfirmDatosStpV {
       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
     }
     
-    public static datosStep clickConfirmarDatosButton(Channel channel, DataPedido dataPedido, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clickConfirmarDatosButton(Channel channel, DataPedido dataPedido, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Clickamos el botón \"Confirmar Datos\"", 
             "La dirección de envío se establece a la de la tienda");
         try {

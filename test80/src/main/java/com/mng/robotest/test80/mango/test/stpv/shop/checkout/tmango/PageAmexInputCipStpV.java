@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.PageAmexInputCip;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 @SuppressWarnings("javadoc")
 public class PageAmexInputCipStpV {
     
-    public static void validateIsPageOk(String importeTotal, String codigoPais, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPageOk(String importeTotal, String codigoPais, DatosStep datosStep, DataFmwkTest dFTest) {
     	int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Aparece la página de introducción del CIP (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" + 
@@ -34,10 +34,10 @@ public class PageAmexInputCipStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep inputCipAndAcceptButton(String CIP, String importeTotal, String codigoPais, DataFmwkTest dFTest) 
+    public static DatosStep inputCipAndAcceptButton(String CIP, String importeTotal, String codigoPais, DataFmwkTest dFTest) 
     throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Introducimos el CIP " + CIP + " y pulsamos el botón \"Aceptar\"", 
             "Aparece una página de la pasarela de resultado OK");
         try {

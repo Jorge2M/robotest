@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
@@ -85,7 +85,7 @@ public class Buscador extends GestorWebDriver {
         DataCtxShop dCtxSh = this.dCtsShThread.get();
         dCtxSh.userRegistered = false;
 
-        datosStep datosStep = AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        DatosStep datosStep = AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
         PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, datosStep, dFTest);
         SecBuscadorStpV.searchArticuloAndValidateBasic(TypeArticleStock.articlesWithMoreOneColour, dCtxSh, dFTest);
         SecBuscadorStpV.searchArticuloAndValidateBasic(TypeArticleStock.articlesNotExistent, dCtxSh, dFTest);

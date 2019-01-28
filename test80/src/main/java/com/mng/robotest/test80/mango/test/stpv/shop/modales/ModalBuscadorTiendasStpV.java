@@ -6,14 +6,14 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalBuscadorTiendas;
 
 @SuppressWarnings("javadoc")
 public class ModalBuscadorTiendasStpV {
 
-    public static void validaBusquedaConResultados(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaBusquedaConResultados(DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         int maxSecondsToWait = 5;
         String descripValidac = 
@@ -39,7 +39,7 @@ public class ModalBuscadorTiendasStpV {
      */
     public static void close(DataFmwkTest dFTest) {
         //Step.
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Cerramos la capa correspondiente al resultado del buscador", 
             "La capa correspondiente a la búsqueda desaparece");
         try {

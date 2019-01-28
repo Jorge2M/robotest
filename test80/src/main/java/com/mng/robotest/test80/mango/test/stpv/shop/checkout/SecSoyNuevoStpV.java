@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -18,10 +18,10 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecSoyNuevo.A
 @SuppressWarnings("javadoc")
 public class SecSoyNuevoStpV {
     
-    public static datosStep inputEmailAndContinue(String email, boolean emailExistsYet, AppEcom appE, boolean userRegistered, 
+    public static DatosStep inputEmailAndContinue(String email, boolean emailExistsYet, AppEcom appE, boolean userRegistered, 
     											  Pais pais, Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Desmarcamos el check NewsLetter, introducmos el email y seleccionamos \"Continuar\"", 
             "Aparece la página de introducción de datos del usuario");
         try {
@@ -43,7 +43,7 @@ public class SecSoyNuevoStpV {
     
     
     @SuppressWarnings("static-access")
-	public static void validaRGPDText(datosStep datosStep, DataCtxShop dCtxSh, DataFmwkTest dFTest) {      
+	public static void validaRGPDText(DatosStep datosStep, DataCtxShop dCtxSh, DataFmwkTest dFTest) {      
     	//Validaciones
 		if (dCtxSh.pais.getRgpd().equals("S")) {
 	        String descripValidac = 

@@ -10,7 +10,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 
 @SuppressWarnings("javadoc")
-public class datosStep {
+public class DatosStep {
 
 //Número de paso
 private int step_number = 0;
@@ -57,11 +57,11 @@ private List<SimpleValidation> listSimpleValidacs = null;
 //hay que rediseñar esta clase pero de momento utilizamos este campo para recopilar el resultado global
 private State result_todas_validaciones = State.Ok;
 
-    public datosStep() {
+    public DatosStep() {
         this.step_number = 0;
     }
 
-    public datosStep(String c_descripcion, String c_res_expected) {
+    public DatosStep(String c_descripcion, String c_res_expected) {
         this.descripcion = c_descripcion;
         this.res_expected = c_res_expected;
         this.hora_inicio = new Date(System.currentTimeMillis());

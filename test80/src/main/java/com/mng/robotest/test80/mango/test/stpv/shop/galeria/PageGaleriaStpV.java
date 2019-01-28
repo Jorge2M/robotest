@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -82,7 +82,7 @@ public class PageGaleriaStpV {
         DataFichaArt datosArticulo = new DataFichaArt();
 
         
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionamos el artículo " + locationArt + " en una pestaña aparte", 
             "Aparece la ficha del artículo seleccionado en una pestaña aparte");
         try {
@@ -113,7 +113,7 @@ public class PageGaleriaStpV {
         DataFichaArt datosArticulo = new DataFichaArt();
         String urlGaleria = dFTest.driver.getCurrentUrl();
         
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el artículo " + locationArt, 
             "Aparece la ficha del artículo seleccionado");
         try { 
@@ -146,7 +146,7 @@ public class PageGaleriaStpV {
     public void selectLinkAddArticuloToBagDesktop(int posArticulo)
     throws Exception {
     	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Posicionarse sobre el artículo en la posición <b>" + posArticulo + "</b>, esperar que aparezca el link \"Añadir\" y seleccionarlo", 
             "Aparece la capa con la información de las tallas");
         try { 
@@ -179,7 +179,7 @@ public class PageGaleriaStpV {
     throws Exception {
     	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
         ArticuloScreen articulo = null;
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Del " + posArticulo + "o artículo, seleccionamos la " + posTalla + "a talla", 
             "Se da de alta correctamente el artículo en la bolsa");
         datosStep.setGrabHTML(true);
@@ -220,7 +220,7 @@ public class PageGaleriaStpV {
         
         //Step
         int numArticulosInicio = pageGaleria.getNumArticulos();
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Escrollar hasta posicionarse en la " + idPage + " página", 
             "Se escrolla correctamente");
         datosStep.setGrabNettrafic(dFTest.ctx);
@@ -335,7 +335,7 @@ public class PageGaleriaStpV {
    public int seleccionaOrdenacionGaleria(FilterOrdenacion typeOrdenacion, String tipoPrendasGaleria, int numArticulosValidar, 
 		   										 DataCtxShop dCtxSh) throws Exception {
        //Step. Seleccionar el link "Descendente" / "Ascendente"
-       datosStep datosStep = new datosStep       (
+       DatosStep datosStep = new DatosStep       (
            "Seleccionar la ordenación " + typeOrdenacion.name(), 
            "Los artículos se ordenan correctamente");
        try {
@@ -402,7 +402,7 @@ public class PageGaleriaStpV {
     */
    public void backTo1erArticleMobilStep(DataCtxShop dCtxSh) throws Exception {
        //Step
-       datosStep datosStep = new datosStep (
+       DatosStep datosStep = new DatosStep (
            "Volver al 1er artículo de la galería (mediante selección del icono de la flecha Up)", 
            "Se visualiza el 1er elemento");
        try {
@@ -451,7 +451,7 @@ public class PageGaleriaStpV {
        WebElement colorToClick = null;
        
        //Step. Seleccionar el Xo color (posColor) del Y artículo (numArtConColores) con variedad de colores
-       datosStep datosStep = new datosStep       (
+       DatosStep datosStep = new DatosStep       (
            "Seleccionar el " + posColor + "o color (" + TAGsrcPng2oColor +") no seleccionado del " + numArtConColores + "o artículo con variedad de colores (" + TAGnombre1erArt + ", " + TAGprecio1erArt +")", 
            "Se selecciona el color");
        try {
@@ -514,7 +514,7 @@ public class PageGaleriaStpV {
        WebElement articuloColores = null;
        
        String slidersListStr = getStringSliderList(typeSliderList);
-       datosStep datosStep = new datosStep       (
+       DatosStep datosStep = new DatosStep       (
            "Clickar la siguiente secuencia de sliders: <b>" + slidersListStr + "</b> del " + numArtConColores + "o artículo con variedad de colores (" + TAGnombreArt + "). Previamente realizamos un \"Hover\" sobre dicho artículo", 
            "Aparece el artículo original(" + TAGnombreArt + ")");
        try {
@@ -583,7 +583,7 @@ public class PageGaleriaStpV {
        String precio1erArt = pageGaleria.getPrecioArticulo(articuloColores);
        
        //Step. Seleccionar el Xer artículo con variedad de colores
-       datosStep datosStep = new datosStep       (
+       DatosStep datosStep = new DatosStep       (
            "Seleccionar el " + numArtConColores + "o artículo con variedad de colores (" + nombre1erArt + " " + precio1erArt + ")", 
            "Aparece el artículo original(" + nombre1erArt + " " + precio1erArt + ")");
        datosStep.setGrabNettrafic(dFTest.ctx);       
@@ -628,7 +628,7 @@ public class PageGaleriaStpV {
        PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, datosStep, dFTest);        
    }
    
-   public void hayPanoramicasEnGaleriaDesktop(float porcentaje, datosStep datosStep) {
+   public void hayPanoramicasEnGaleriaDesktop(float porcentaje, DatosStep datosStep) {
        //Validaciones
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
        String descripValidac = 
@@ -654,7 +654,7 @@ public class PageGaleriaStpV {
 	   return ((numArtToMesure / numArtTotal) < (percentage / 100));
    }
    
-   public void validaHayVideoEnGaleria(datosStep datosStep) {
+   public void validaHayVideoEnGaleria(DatosStep datosStep) {
        //Validaciones
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
        String descripValidac = 
@@ -672,7 +672,7 @@ public class PageGaleriaStpV {
    }
    
    // Validación que comprueba que está apareciendo una galería de artículos
-   public void validaArtEnContenido(datosStep datosStep) {
+   public void validaArtEnContenido(DatosStep datosStep) {
        String descripValidac = "1) Aparece una página con artículos (la esperamos 3 segundos)";
        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
        try {
@@ -687,7 +687,7 @@ public class PageGaleriaStpV {
        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
    }   
    
-   public datosStep clickArticlesHearthIcons(List<Integer> posIconsToClick, TypeActionFav actionFav, DataCtxShop dCtxSh, 
+   public DatosStep clickArticlesHearthIcons(List<Integer> posIconsToClick, TypeActionFav actionFav, DataCtxShop dCtxSh, 
 		   									 DataFavoritos dataFavoritos) throws Exception {
        String estadoFinal = "";
        switch (actionFav) {
@@ -702,7 +702,7 @@ public class PageGaleriaStpV {
        }
 
        //Step
-       datosStep datosStep = new datosStep       (
+       DatosStep datosStep = new DatosStep       (
            "Seleccionamos (para <b>" + actionFav + "</b>) los \"Hearth Icons\" asociados a los artículos con posiciones <b>" + posIconsToClick + "</b>", 
            "Los \"Hearth Icons\" quedan " + estadoFinal);
        try {
@@ -743,7 +743,7 @@ public class PageGaleriaStpV {
    throws Exception {
        //Step
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-       datosStep datosStep = new datosStep       (
+       DatosStep datosStep = new DatosStep       (
            "Seleccionar el link del listado a <b>" + numColumnas.name() + " columnas</b>", 
            "Aparece un listado de artículos a " + numColumnas.name() + " columnas");
        try {
@@ -798,7 +798,7 @@ public class PageGaleriaStpV {
    /**
     * Valida que por pantalla está apareciendo una lista análoga (en contenido y orden) que la que le pasamos como parámetro (perteneciente a otro nodo)
     */
-   public void validaNombresYRefEnOrden(NodoStatus nodoAnt, NodoStatus nodoAct, datosStep datosStep) {
+   public void validaNombresYRefEnOrden(NodoStatus nodoAnt, NodoStatus nodoAct, DatosStep datosStep) {
        String descripValidac = 
            "1) El número de artículos de la galería Nuevo (" + nodoAct.getArticlesNuevo().size() + ") es igual al del nodo " + nodoAnt.getIp() + " (" + nodoAnt.getArticlesNuevo().size() + ")<br>" +
            "2) El orden y contenido de los artículos en ambos nodos es el mismo";
@@ -822,7 +822,7 @@ public class PageGaleriaStpV {
    }
 
    @SuppressWarnings("static-access")
-   public void validateBannerSuperiorIfExistsDesktop(datosStep datosStep) {
+   public void validateBannerSuperiorIfExistsDesktop(DatosStep datosStep) {
 	   boolean bannerIsVisible = PageGaleriaDesktop.secBannerHead.isVisible(dFTest.driver);
 	   if (bannerIsVisible) {
 		   if (!PageGaleriaDesktop.secBannerHead.isBannerWithoutTextAccesible(dFTest.driver)) {
@@ -848,7 +848,7 @@ public class PageGaleriaStpV {
 	   boolean bannerIsLincable = PageGaleriaDesktop.secBannerHead.isLinkable(dFTest.driver);
 	   if (bannerIsLincable) {
 	       //Step
-	       datosStep datosStep = new datosStep       (
+	       DatosStep datosStep = new DatosStep       (
 	           "Seleccionar el banner superior", 
 	           "Aparece una galería de artículos");
 	       try {
@@ -863,7 +863,7 @@ public class PageGaleriaStpV {
    }
    
    @SuppressWarnings("static-access")
-   public void validaRebajasHasta70Jun2018(IdiomaPais idioma, datosStep datosStep) {
+   public void validaRebajasHasta70Jun2018(IdiomaPais idioma, DatosStep datosStep) {
 	   boolean filtrosPercActivated = false;
 	   String maxPercDiscount = "70";
 	   int minMenusVisibles = 1;
@@ -907,7 +907,7 @@ public class PageGaleriaStpV {
    
    @SuppressWarnings("static-access")
    public void validaRebajasJun2018Desktop(boolean isGaleriaSale, Pais pais, IdiomaPais idioma, LineaType lineaType, 
-		   								   bloqueMenu menuType, datosStep datosStep) throws Exception {
+		   								   bloqueMenu menuType, DatosStep datosStep) throws Exception {
        //Validaciones
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
        String descripValidac = 
@@ -1041,20 +1041,20 @@ public class PageGaleriaStpV {
 
    }
    
-   public void validaArticlesOfTemporadas(List<Integer> listTemporadas, State levelError, datosStep datosStep) {
+   public void validaArticlesOfTemporadas(List<Integer> listTemporadas, State levelError, DatosStep datosStep) {
 	   validaArticlesOfTemporadas(listTemporadas, false, levelError, datosStep);
    }
    
-   public void validaArticlesOfTemporadas(List<Integer> listTemporadas, datosStep datosStep) {
+   public void validaArticlesOfTemporadas(List<Integer> listTemporadas, DatosStep datosStep) {
 	   validaArticlesOfTemporadas(listTemporadas, false, State.Warn, datosStep);
    }
    
-   public void validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles, datosStep datosStep) {
+   public void validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles, DatosStep datosStep) {
 	   validaArticlesOfTemporadas(listTemporadas, validaNotNewArticles, State.Warn, datosStep);
    }
    
    public void validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles, 
-		   								  State levelError, datosStep datosStep) {
+		   								  State levelError, DatosStep datosStep) {
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
        String descripValidac =
            "<b style=\"color:blue\">Rebajas</b></br>" +
@@ -1085,7 +1085,7 @@ public class PageGaleriaStpV {
        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }	   
    }
    
-   public void validaNotArticlesOfTypeDesktop(TypeArticle typeArticle, State levelError, datosStep datosStep) {
+   public void validaNotArticlesOfTypeDesktop(TypeArticle typeArticle, State levelError, DatosStep datosStep) {
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
        String descripValidac =
            "<b style=\"color:blue\">Rebajas</b></br>" +
@@ -1113,7 +1113,7 @@ public class PageGaleriaStpV {
    @SuppressWarnings("static-access")
    public static void clickMoreInfoBannerRebajasJun2018(DataFmwkTest dFTest) throws Exception {
        //Step
-       datosStep datosStep = new datosStep       (
+       DatosStep datosStep = new DatosStep       (
            "Seleccionamos el link <b>Más Info</b>", 
            "Se hace visible el aviso legal");
        try {

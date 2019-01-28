@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrjDesktop;
@@ -24,7 +24,7 @@ public class PageMercpagoDatosTrjStpV {
 		public String codigoSeguridad;
 	}
     
-    public static void validaIsPage(Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaIsPage(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         switch (channel) {
         case movil_web:
             validaIsPageMobil(datosStep, dFTest);
@@ -35,7 +35,7 @@ public class PageMercpagoDatosTrjStpV {
         }
     }
     
-    public static void validaIsPageMobil(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaIsPageMobil(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Estamos en la página de introducción de los datos de la tarjeta";   
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);   
@@ -49,7 +49,7 @@ public class PageMercpagoDatosTrjStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static void validaIsPageDesktop(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaIsPageDesktop(DatosStep datosStep, DataFmwkTest dFTest) {
     	int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Estamos en la página de introducción del CVC (la esperamos hasta " + maxSecondsToWait + " segundos)";   
@@ -64,7 +64,7 @@ public class PageMercpagoDatosTrjStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }    
     
-    public static datosStep inputNumTarjeta(String numTarjeta, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep inputNumTarjeta(String numTarjeta, Channel channel, DataFmwkTest dFTest) throws Exception {
         switch (channel) {
         case movil_web:
             return inputNumTarjetaMobil(numTarjeta, dFTest);
@@ -74,9 +74,9 @@ public class PageMercpagoDatosTrjStpV {
         }
     }
     
-    public static datosStep inputNumTarjetaMobil(String numTarjeta, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep inputNumTarjetaMobil(String numTarjeta, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Introducir el número de tarjeta (" + numTarjeta + ")", 
             "El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa");
         try {
@@ -103,9 +103,9 @@ public class PageMercpagoDatosTrjStpV {
         return datosStep;
     }
     
-    public static datosStep inputNumTarjetaDesktop(String numTarjeta, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep inputNumTarjetaDesktop(String numTarjeta, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Introducir el número de tarjeta (" + numTarjeta + ")", 
             "Aparece el icono de Visa a la derecha de la tarjeta introducida");
         try {
@@ -132,7 +132,7 @@ public class PageMercpagoDatosTrjStpV {
         return datosStep;
     }
     
-    public static datosStep inputDataAndPay(InputData inputData, Channel channel, DataFmwkTest dFTest) 
+    public static DatosStep inputDataAndPay(InputData inputData, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
         switch (channel) {
         case movil_web:
@@ -144,9 +144,9 @@ public class PageMercpagoDatosTrjStpV {
         }
     }
     
-    public static datosStep inputDataMobil(InputData inputData, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep inputDataMobil(InputData inputData, DataFmwkTest dFTest) throws Exception {
         String fechaVencimiento = inputData.mesVencimiento + "/" + inputData.anyVencimiento;        
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Introducir la fecha de vencimiento (" + fechaVencimiento + "), " + 
             "el banco (" + inputData.banco + ") " + 
             "security code (" + inputData.codigoSeguridad + ") " + 
@@ -177,8 +177,8 @@ public class PageMercpagoDatosTrjStpV {
         return datosStep;
     }
     
-    public static datosStep clickButtonPayMobil(DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = new datosStep (
+    public static DatosStep clickButtonPayMobil(DataFmwkTest dFTest) throws Exception {
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el botón \"Next\" para pagar", 
             "Aparece la página de resultado");
         try {
@@ -194,10 +194,10 @@ public class PageMercpagoDatosTrjStpV {
         return datosStep;
     }    
     
-    public static datosStep inputDataAndPayDesktop(InputData inputData, DataFmwkTest dFTest) 
+    public static DatosStep inputDataAndPayDesktop(InputData inputData, DataFmwkTest dFTest) 
     throws Exception {
         String fechaVencimiento = inputData.mesVencimiento + "/" + inputData.anyVencimiento;     
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Introducir la fecha de vencimiento (" + fechaVencimiento + "), " + 
             "security code (" + inputData.codigoSeguridad + "), " + 
             "Banco (" + inputData.banco  + ") " +

@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.eps.PageEpsSimulador;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.eps.PageEpsSimulador.TypeDelay;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.eps.PageEpsSi
 @SuppressWarnings("javadoc")
 public class PageEpsSimuladorStpV {
     
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) { 
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) { 
         String descripValidac = 
             "1) Aparece la página de simulación de EPS"; 
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);  
@@ -29,8 +29,8 @@ public class PageEpsSimuladorStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep selectDelay(TypeDelay typeDelay, DataFmwkTest dFTest) {
-        datosStep datosStep = new datosStep       (
+    public static DatosStep selectDelay(TypeDelay typeDelay, DataFmwkTest dFTest) {
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar la opción <b>" + typeDelay + "</b> del apartado \"pending-authorised\"", 
             "La opción se selecciona correctamente");
         try {
@@ -42,8 +42,8 @@ public class PageEpsSimuladorStpV {
         return datosStep;
     }
     
-    public static datosStep clickContinueButton(DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = new datosStep       (
+    public static DatosStep clickContinueButton(DataFmwkTest dFTest) throws Exception {
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar el botón \"pending > autrhorised\"", 
             "El pago se realiza correctamente");
         try {

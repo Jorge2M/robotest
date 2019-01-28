@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
@@ -19,7 +19,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 @SuppressWarnings("javadoc")
 public class PageAssist1rstStpV {
     
-    public static void validateIsPage(String importeTotal, Pais pais, Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(String importeTotal, Pais pais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Está presente el logo de Assist<br>" +
             "2) En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>" + 
@@ -51,9 +51,9 @@ public class PageAssist1rstStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep inputDataTarjAndPay(Pago pago, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep inputDataTarjAndPay(Pago pago, Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Introducimos los datos de la tarjeta y pulsamos el botón de pago", 
             "Aparece la página de resultado de Mango");
         try {

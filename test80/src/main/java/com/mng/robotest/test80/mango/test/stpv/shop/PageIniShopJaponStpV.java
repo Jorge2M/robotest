@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageIniShopJapon;
 
@@ -16,7 +16,7 @@ public class PageIniShopJaponStpV {
     /**
      * Validaciones que comprueban que se trata de la página inicial de la shop de Japón
      */
-    public static void validaPageIniJapon(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaPageIniJapon(DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
     	int maxSecondsToWait = 2;
         String descripValidac = 

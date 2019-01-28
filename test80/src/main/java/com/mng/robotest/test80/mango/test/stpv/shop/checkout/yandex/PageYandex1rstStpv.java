@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandex1rst;
@@ -17,7 +17,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 @SuppressWarnings("javadoc")
 public class PageYandex1rstStpv {
     
-    public static void validateIsPage(String emailUsr, String importeTotal, String codPais, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(String emailUsr, String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validation
         //Esta validación debería hacerse en un punto posterior, una vez se ha intentado enviar el input que es cuando se genera el botón retry.
         String descripValidac =
@@ -50,7 +50,7 @@ public class PageYandex1rstStpv {
     public static String inputTlfnAndclickContinuar(String telefonoRuso, String emailUsr, String importeTotal, String codPais, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
         //Step
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Introducimos el teléfono <b>" + telefonoRuso + "</b> y seleccionamos el botón <b>\"Continuar\"</b>", 
             "Aparece la página de confirmación del pago");
         try {
@@ -75,7 +75,7 @@ public class PageYandex1rstStpv {
         return PageYandex1rst.retryButtonExists(driver);
     }
 
-    public static String retry(String emailUsr, String importeTotal, String codPais, datosStep datosStep, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static String retry(String emailUsr, String importeTotal, String codPais, DatosStep datosStep, Channel channel, DataFmwkTest dFTest) throws Exception {
         PageYandex1rst.clickOnRetry(dFTest.driver);
         PageYandex1rst.clickContinue(dFTest.driver);
         String paymentCode = PageYandexPayingByCodeStpV.validateIsPage(emailUsr, importeTotal, codPais, channel, datosStep, dFTest);

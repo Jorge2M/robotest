@@ -4,6 +4,6 @@ import com.mng.robotest.test80.arq.utils.State;
 
 @SuppressWarnings("javadoc")
 public class ResultMethod {
-    public State maxResultadoStep = State.Reservado; 
+    public State maxResultadoStep = State.Undefined; 
     public int numberSteps = 0;
 }

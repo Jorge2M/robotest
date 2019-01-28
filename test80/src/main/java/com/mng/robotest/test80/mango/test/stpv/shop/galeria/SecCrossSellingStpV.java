@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -21,7 +21,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenus
 @SuppressWarnings({"javadoc", "static-access"})
 public class SecCrossSellingStpV {
 
-    public static void validaIsCorrect(LineaType lineaType, AppEcom app, datosStep datosStep, DataFmwkTest dFTest) 
+    public static void validaIsCorrect(LineaType lineaType, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
         //Obtenemos la lista de menús de Mujer-Prendas
         List<WebElement> listaMenusBloque = 

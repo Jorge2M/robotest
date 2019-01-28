@@ -6,16 +6,16 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandexMoney;
 
 @SuppressWarnings("javadoc")
 public class PageYandexMoneyStpV {
 
-    public static datosStep accessInNewTab(String tabTitle, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep accessInNewTab(String tabTitle, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Accedemos a la URL de <b>YandexMoney</b>: " + PageYandexMoney.urlAccess, 
             "Aparece la página de YandexMoney");
         try {
@@ -31,7 +31,7 @@ public class PageYandexMoneyStpV {
         return datosStep;
     }
     
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Aparece el input para el <b>Payment Code</b><br>" +
             "2) Aparece el input para el importe";
@@ -53,9 +53,9 @@ public class PageYandexMoneyStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep inputDataAndPay(String paymentCode, String importe, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep inputDataAndPay(String paymentCode, String importe, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Introducimos el paymentCode <b>" + paymentCode + "</b>, el importe <b>" + importe + "</b> y pulsamos el botón de Pago", 
             "Aparece la página de resultado del pago a nivel de Yandex");
         try {
@@ -73,9 +73,9 @@ public class PageYandexMoneyStpV {
         return datosStep;
     }
     
-    public static datosStep closeTabByTitle(String tabTitle, String windowHandlePageToSwitch, DataFmwkTest dFTest) {
+    public static DatosStep closeTabByTitle(String tabTitle, String windowHandlePageToSwitch, DataFmwkTest dFTest) {
         //Step
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Cerramos la actual pestaña con nombre <b>" + tabTitle + "</b>", 
             "Desaparece la pestaña");
         try {

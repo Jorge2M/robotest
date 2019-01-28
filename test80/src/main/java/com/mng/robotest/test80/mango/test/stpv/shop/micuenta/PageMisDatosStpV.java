@@ -7,7 +7,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisDatos;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 @SuppressWarnings("javadoc")
 public class PageMisDatosStpV {
     
-    public static datosStep validaIsPage(String usuarioReg, datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep validaIsPage(String usuarioReg, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         //Validaciones.
         String descripValidac = 
             "1) Aparece una página con el la cabecera \"Mis datos\"<br>" +
@@ -44,7 +44,7 @@ public class PageMisDatosStpV {
         return datosStep;
     }
     
-    public static datosStep validaIsDataAssociatedToRegister(HashMap<String,String> datosRegOk, String codpais, datosStep datosStep, DataFmwkTest dFTest) {
+    public static DatosStep validaIsDataAssociatedToRegister(HashMap<String,String> datosRegOk, String codpais, DatosStep datosStep, DataFmwkTest dFTest) {
         String nombre = datosRegOk.get("cfName"); 
         String apellidos = datosRegOk.get("cfSname");
         String email = datosRegOk.get("cfEmail");
@@ -109,7 +109,7 @@ public class PageMisDatosStpV {
     
     public static String modificaNombreYGuarda(DataFmwkTest dFTest) throws Exception {
         String nombreActual = "";
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Modificar el nombre (cambio de mayúsculas<->minúsculas) + Botón \"Modificar Datos\"", 
             "Aparece la confirmación que los datos se han modificado");
         try {
@@ -146,7 +146,7 @@ public class PageMisDatosStpV {
         return nombreActual;
     }
     
-    public static void validaContenidoNombre(String nombre, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaContenidoNombre(String nombre, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) En el campo del nombre figura<b>: " + nombre + "<b>"; 
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               

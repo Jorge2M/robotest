@@ -14,7 +14,7 @@ import org.testng.ITestContext;
 import com.mng.robotest.test80.arq.jdbc.Connector;
 import com.mng.robotest.test80.arq.jdbc.to.ResultMethod;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -42,7 +42,7 @@ public class StepsDAO {
         "DELETE FROM STEPS " +
         "WHERE INICIO < ?;";    
     
-    public static int grabStep(datosStep datosStep, Method method, ITestContext ctx) {
+    public static int grabStep(DatosStep datosStep, Method method, ITestContext ctx) {
         int stepNumber = StepsDAO.getNextMethodStep(method, ctx);
         String methodWithFactory = fmwkTest.getMethodWithFactory(method, ctx);
         datosStep.setStepNumber(stepNumber);

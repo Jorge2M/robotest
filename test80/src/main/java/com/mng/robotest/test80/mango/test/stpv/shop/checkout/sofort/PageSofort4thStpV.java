@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSofort4th;
 
@@ -18,7 +18,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSo
 @SuppressWarnings("javadoc")
 public class PageSofort4thStpV {
     
-    public static void validaIsPage(datosStep datosStep, DataFmwkTest dFTest) { 
+    public static void validaIsPage(DatosStep datosStep, DataFmwkTest dFTest) { 
         String descripValidac = 
             "1) Aparece la página de introducción del Usuario/Password de \"SOFORT\"";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
@@ -33,8 +33,8 @@ public class PageSofort4thStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep inputCredencialesUsr(String usrSofort, String passSofort, DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = new datosStep       (
+    public static DatosStep inputCredencialesUsr(String usrSofort, String passSofort, DataFmwkTest dFTest) throws Exception {
+        DatosStep datosStep = new DatosStep       (
             "Introducir el usuario/password de DEMO: " + usrSofort + " / " + passSofort, 
             "Aparece la página de selección de cuenta");
         try {
@@ -62,8 +62,8 @@ public class PageSofort4thStpV {
         return datosStep;
     }
     
-    public static datosStep select1rstCtaAndAccept(DataFmwkTest dFTest) throws Exception { 
-        datosStep datosStep = new datosStep       (
+    public static DatosStep select1rstCtaAndAccept(DataFmwkTest dFTest) throws Exception { 
+        DatosStep datosStep = new DatosStep       (
             "Seleccionamos la 1a cuenta y pulsamos aceptar", 
             "Aparece la página de confirmación de la transacción");
         try {
@@ -92,8 +92,8 @@ public class PageSofort4thStpV {
         return datosStep;
     }
     
-    public static datosStep inputTANandAccept(String TANSofort, DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = new datosStep       (
+    public static DatosStep inputTANandAccept(String TANSofort, DataFmwkTest dFTest) throws Exception {
+        DatosStep datosStep = new DatosStep       (
             "Introducción del TAN: " + TANSofort + " y pulsamos aceptar", 
             "El pago se realiza correctamente");
         try {

@@ -7,7 +7,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -28,7 +28,7 @@ public class PagePrehomeStpV {
     public static void seleccionPaisIdioma(String urlAcceso, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         //Step
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Acceder a la página de inicio y seleccionar el país " + dCtxSh.pais.getNombre_pais(),
             "Se selecciona el país/idioma correctamente");
         try {
@@ -71,9 +71,9 @@ public class PagePrehomeStpV {
     /**
      * Given país/provincia/idioma seleccionados, se realiza el paso para entrar en la shop
      */
-    public static datosStep entradaShopGivenPaisSeleccionado(Pais pais, IdiomaPais idioma, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep entradaShopGivenPaisSeleccionado(Pais pais, IdiomaPais idioma, Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step. Selección de país/idioma
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Si es preciso introducimos la provincia/idioma y finalmente seleccionamos el botón \"Entrar\"",
             "Se accede a la Shop correctamente");
         try {
@@ -88,16 +88,16 @@ public class PagePrehomeStpV {
     }
 
     // Acceso a través de objetos Pais e Iidoma
-    public static datosStep seleccionPaisIdiomaAndEnter(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep seleccionPaisIdiomaAndEnter(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
         return PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, false/*execValidacs*/, dFTest);
     }
     
     /**
      * Selecciona un país/idioma de la página de countrys y acceder a la Shop
      */
-    public static datosStep seleccionPaisIdiomaAndEnter(DataCtxShop dCtxSh, boolean execValidacs, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep seleccionPaisIdiomaAndEnter(DataCtxShop dCtxSh, boolean execValidacs, DataFmwkTest dFTest) throws Exception {
         //Step. Selección de país/idoma + Entrada a la Shop
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Acceder a la página de inicio y seleccionar el país <b>" + dCtxSh.pais.getNombre_pais() + "</b>, el idioma <b>" + dCtxSh.idioma.getCodigo().getLiteral() + "</b> y acceder",
             "Se accede correctamente al pais / idioma seleccionados");
         datosStep.setGrabNettrafic(dFTest.ctx);

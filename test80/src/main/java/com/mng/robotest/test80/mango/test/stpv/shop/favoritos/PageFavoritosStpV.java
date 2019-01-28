@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -22,7 +22,7 @@ public class PageFavoritosStpV {
     
     public static ModalFichaFavoritosStpV modalFichaFavoritos;
     
-    public static void validaIsPageOK(DataFavoritos dataFavoritos, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaIsPageOK(DataFavoritos dataFavoritos, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         int maxSecondsToWaitCapa = 3;
         int maxSecondsToWaitArticles = 1;
@@ -45,19 +45,19 @@ public class PageFavoritosStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
     }
     
-    public static datosStep clearAll(DataFavoritos dataFavoritos, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clearAll(DataFavoritos dataFavoritos, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
         dataFavoritos.clear();
         return (clearAll(dCtxSh, dFTest));
     }
     
-    public static datosStep clear(ArticuloScreen articulo, DataFavoritos dataFavoritos, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clear(ArticuloScreen articulo, DataFavoritos dataFavoritos, DataFmwkTest dFTest) throws Exception {
         dataFavoritos.removeArticulo(articulo);
         return (clear(articulo, dFTest));
     }
     
-    public static datosStep clickShareIsOk(DataFmwkTest dFTest) {
+    public static DatosStep clickShareIsOk(DataFmwkTest dFTest) {
     	//Step
-    	datosStep stepShareOk = new datosStep("Seleccionar el link de favoritos compartidos. ",
+    	DatosStep stepShareOk = new DatosStep("Seleccionar el link de favoritos compartidos. ",
     			"El modal de favoritos compartidos aparece correctamente");
     	try {
     	
@@ -72,7 +72,7 @@ public class PageFavoritosStpV {
        	return stepShareOk;
     }
     
-    public static void checkShareIsOk(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void checkShareIsOk(DatosStep datosStep, DataFmwkTest dFTest) {
     	//Validacion
     	int secondsToWait = 5;
         String descripValidac = 
@@ -107,9 +107,9 @@ public class PageFavoritosStpV {
     }
     
     
-    public static datosStep closeShareModal(DataFmwkTest dFTest) {
+    public static DatosStep closeShareModal(DataFmwkTest dFTest) {
        	//Step
-    	datosStep stepShareClose = new datosStep("Cerramos el modal de favoritos compartidos. ",
+    	DatosStep stepShareClose = new DatosStep("Cerramos el modal de favoritos compartidos. ",
     			"El modal de favoritos compartidos desaparece correctamente");
        	
     	try {
@@ -123,7 +123,7 @@ public class PageFavoritosStpV {
     	return stepShareClose;
     }
     
-    public static void checkShareIsClosed(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void checkShareIsClosed(DatosStep datosStep, DataFmwkTest dFTest) {
  	   	//Validacion
     	int secondsToWait = 5;
         String descripValidac = 
@@ -142,9 +142,9 @@ public class PageFavoritosStpV {
     
     
     
-    public static datosStep clear(ArticuloScreen articulo, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clear(ArticuloScreen articulo, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Eliminamos de Favoritos el artículo con referencia<b>: " + articulo.getRefProducto() + "</b>",
             "El artículo desaparece de Favoritos");
         try {
@@ -172,9 +172,9 @@ public class PageFavoritosStpV {
         return datosStep;
     }
     
-    public static datosStep clearAll(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clearAll(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Eliminamos de Favoritos los posibles artículos existentes",
             "No queda ningún artículo en Favoritos");
         try {
@@ -205,13 +205,13 @@ public class PageFavoritosStpV {
         return datosStep;
     }
     
-    public static datosStep addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Channel channel, DataFmwkTest dFTest) 
+    public static DatosStep addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
         String refProductoToAdd = artToAddBolsa.getRefProducto();
         String codigoColor = artToAddBolsa.getCodigoColor();
         
         //Step
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Desde Favoritos añadimos el artículo: " + refProductoToAdd + " (1a talla disponible) a la bolsa",
             "El artículo aparece en la bolsa");
         try {
@@ -229,12 +229,12 @@ public class PageFavoritosStpV {
         return datosStep;
     }
     
-    public static datosStep clickArticuloImg(ArticuloScreen artToPlay, DataFmwkTest dFTest) {
+    public static DatosStep clickArticuloImg(ArticuloScreen artToPlay, DataFmwkTest dFTest) {
         String refProducto = artToPlay.getRefProducto();
         String codigoColor = artToPlay.getCodigoColor();
         
         //Step
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Desde Favoritos seleccionamos la imagen del artículo: " + refProducto,
             "Aparece el modal con la ficha del artículo");
         try {

@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -35,10 +35,10 @@ public class SecMenuLateralMobilStpV {
     /**
      * Selección de un menú lateral de 1er nivel con un catálogo de artículos asociado (p.e. vestidos, camisas, etc.)
      */
-    public static datosStep selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar el menú lateral de 1er nivel <b>" + menu1rstLevel + "</b>", 
             "Aparece la galería de productos asociada al menú");
         datosStep.setGrabNettrafic(dFTest.ctx);
@@ -60,7 +60,7 @@ public class SecMenuLateralMobilStpV {
      */
     public static void navClickLineaAndCarrusels(LineaType lineaConCarrusels, Pais pais, AppEcom app, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Realizar click sobre la línea <b>" + lineaConCarrusels + "</b>",
             "Aparecen los sublinks de " + lineaConCarrusels + " correspondientes según el país");
         try {
@@ -95,10 +95,10 @@ public class SecMenuLateralMobilStpV {
         }
     }
     
-    public static datosStep selectCarruselNuevo(Linea lineaNuevo, LineaType lineaType, AppEcom appE, DataFmwkTest dFTest) 
+    public static DatosStep selectCarruselNuevo(Linea lineaNuevo, LineaType lineaType, AppEcom appE, DataFmwkTest dFTest) 
     throws Exception {
         //Step
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Seleccionar el carrusel \"nuevo\" asociado a la línea " + lineaType,
             "Aparece la página de nuevo asociada a la línea " + lineaType);
         try {
@@ -130,9 +130,9 @@ public class SecMenuLateralMobilStpV {
         return datosStep;
     }
     
-    public static datosStep selectSublineaRebajas(Linea lineaRebajas, LineaType lineaType, AppEcom appE, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep selectSublineaRebajas(Linea lineaRebajas, LineaType lineaType, AppEcom appE, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Seleccionar la sublínea de \"rebajas\" <b>" + lineaType + "</b>",
             "Aparece la capa de menús asociada a la sublínea " + lineaType);
         try {
@@ -159,11 +159,11 @@ public class SecMenuLateralMobilStpV {
         return datosStep;
     }
     
-    public static datosStep seleccionLinea(LineaType lineaType, Pais pais, AppEcom app, DataFmwkTest dFTest) 
+    public static DatosStep seleccionLinea(LineaType lineaType, Pais pais, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
         //Step
         String nombreLinea = "<b style=\"color:brown;\">\"" + lineaType.name().toUpperCase() + "\"</b>";
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Si no lo está, seleccionar la <b style=\"color:chocolate\">Línea</b> " + nombreLinea,
             "Aparece la página correcta asociada a la línea " + lineaType.name().toUpperCase());
         try {
@@ -181,11 +181,11 @@ public class SecMenuLateralMobilStpV {
     /**
      * Selecciona una línea (he, she, he...) o sublínea (p.e. bebe_nino)
      */
-    public static datosStep seleccionSublineaNinos(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep seleccionSublineaNinos(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         //Step. Selección de una sublínea
         String nombreLineaSublinea = "<b style=\"color:brown;\">\"" + lineaType.name() + " / " + sublineaType.name().toUpperCase() + "\"</b>";
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Si no lo está, seleccionar la línea / <b style=\"color:chocolate\">Sublínea</b> " + nombreLineaSublinea,
             "Aparece la página correcta asociada a la línea/sublínea");
         try {
@@ -203,7 +203,7 @@ public class SecMenuLateralMobilStpV {
     /**
      * Validamos el resultado esperado después de seleccionar una línea (she, he, kids...) en Móbil
      */
-    public static void validaSelecLinea(Pais pais, LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, datosStep datosStep, DataFmwkTest dFTest) 
+    public static void validaSelecLinea(Pais pais, LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
         Linea linea = pais.getShoponline().getLinea(lineaType);
         TypeContentMobil typeContent = linea.getContentMobilType();
@@ -232,7 +232,7 @@ public class SecMenuLateralMobilStpV {
         }
     }
     
-    public static void validaSelectLineaNuevoWithCarrusels(Pais pais, AppEcom app, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaSelectLineaNuevoWithCarrusels(Pais pais, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) {
         String tagCarrusels = "@TAG_CARRUSELS";
         String descripValidac = 
             "1) Aparecen los carrusels asociados a la linea de " + LineaType.nuevo + " (<b>" + tagCarrusels + "</b>)";
@@ -254,7 +254,7 @@ public class SecMenuLateralMobilStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
         
-    public static void validaSelectLineaRebajasWithSublineas(Pais pais, AppEcom app, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaSelectLineaRebajasWithSublineas(Pais pais, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) {
         String tagSublineas = "@TAG_SUBLINEAS";
         String descripValidac = 
             "1) Aparecen las sublíneas asociados a la linea de " + LineaType.rebajas + "(<b>" + tagSublineas + "</b>)";
@@ -279,7 +279,7 @@ public class SecMenuLateralMobilStpV {
     /**
      * Validaciones asociadas a la selección de una línea con submenús en móvil (línea ninos básicamente)
      */
-    public static void validaSelecLineaNinosWithSublineas(LineaType lineaNinosType, AppEcom appE, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaSelecLineaNinosWithSublineas(LineaType lineaNinosType, AppEcom appE, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac =
             "1) Está seleccionada la línea <b>" + lineaNinosType + "</b><br>" + 
             "2) Es visible el bloque con las sublíneas de " + lineaNinosType;
@@ -301,7 +301,7 @@ public class SecMenuLateralMobilStpV {
     /**
      * Validaciones asociadas a la selección de una línea con submenús en móvil
      */
-    public static void validaSelecLineaWithMenus2onLevelAssociated(LineaType lineaType, SublineaNinosType sublineaType, AppEcom appE, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaSelecLineaWithMenus2onLevelAssociated(LineaType lineaType, SublineaNinosType sublineaType, AppEcom appE, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Está seleccionada la línea <b>" + lineaType + "</b><br>" +
             "2) Son visibles links de Menú de 2o nivel";
@@ -324,7 +324,7 @@ public class SecMenuLateralMobilStpV {
     throws Exception {
         //Step
         String tagMenu = "[UnknownText]";
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
         	"Selección del menú <b>" + tagMenu + "</b> (data-ga-label contains " + menu1rstLevel.getDataGaLabelMenuSuperiorDesktop() + ")", 
             "El menú se ejecuta correctamente");
         try {
@@ -340,7 +340,7 @@ public class SecMenuLateralMobilStpV {
         validaPaginaResultMenu2onLevel(app, datosStep, dFTest);
     }    
     
-    public static void validaPaginaResultMenu2onLevel(AppEcom app, datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void validaPaginaResultMenu2onLevel(AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
     	PageGaleria pageGaleria = PageGaleria.getInstance(Channel.movil_web, app, dFTest.driver);
         String descripValidac = 
             "1) Aparecen artículos, banners, frames, maps o Sliders";

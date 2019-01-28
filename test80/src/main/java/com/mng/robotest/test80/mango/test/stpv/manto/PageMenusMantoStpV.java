@@ -8,7 +8,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageBolsas;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PagePedidos;
@@ -23,9 +23,9 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.PageMenusManto;
 @SuppressWarnings("javadoc")
 public class PageMenusMantoStpV {
 
-    public static datosStep goToMainMenusAndClickMenu(String subMenu, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep goToMainMenusAndClickMenu(String subMenu, DataFmwkTest dFTest) throws Exception {
         //Step. Accedemos al menú de Bolsas
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Desde la página de menús, seleccionamos el menú \"" + subMenu + "\"", 
             "Aparece la página al menú seleccionado");
         datosStep.setGrab_ErrorPageIfProblem(false);
@@ -76,7 +76,7 @@ public class PageMenusMantoStpV {
         //Si ya estamos en la página en cuestión no hacemos nada
         if (!PageBolsas.isPage(dFTest.driver)) {
             //Step
-            datosStep datosStep = goToMainMenusAndClickMenu("Bolsas", dFTest);
+            DatosStep datosStep = goToMainMenusAndClickMenu("Bolsas", dFTest);
                 
             //Validaciones
             String descripValidac = "1) Aparece la página de Bolsas";
@@ -98,7 +98,7 @@ public class PageMenusMantoStpV {
         //Si ya estamos en la página en cuestión no hacemos nada
         if (!PagePedidos.isPage(dFTest.driver)) {
             //Step. 
-            datosStep datosStep = goToMainMenusAndClickMenu("Pedidos", dFTest);
+            DatosStep datosStep = goToMainMenusAndClickMenu("Pedidos", dFTest);
                 
             //Validaciones
             String descripValidac = 
@@ -119,7 +119,7 @@ public class PageMenusMantoStpV {
      */
     public static void goToConsultarTiendas(DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = goToMainMenusAndClickMenu("Consultar Tiendas", dFTest);
+        DatosStep datosStep = goToMainMenusAndClickMenu("Consultar Tiendas", dFTest);
             
         //Validaciones
         PageConsultaTiendaStpV.validateIsPage(datosStep, dFTest);
@@ -130,7 +130,7 @@ public class PageMenusMantoStpV {
      */
 	public static void goToIdEans(DataFmwkTest dFTest)  throws Exception{
 		//Step
-        datosStep datosStep = goToMainMenusAndClickMenu("EANS", dFTest);
+        DatosStep datosStep = goToMainMenusAndClickMenu("EANS", dFTest);
             
         //Validaciones
         PageConsultaIdEansStpV.validateIsPage(datosStep, dFTest);
@@ -141,7 +141,7 @@ public class PageMenusMantoStpV {
      */
 	public static void goToGestionarClientes(DataFmwkTest dFTest) throws Exception{
 		//Step
-        datosStep datosStep = goToMainMenusAndClickMenu("Gestionar Clientes", dFTest);
+        DatosStep datosStep = goToMainMenusAndClickMenu("Gestionar Clientes", dFTest);
             
         //Validaciones
         PageGestionarClientesStpV.validateIsPage(datosStep, dFTest);
@@ -153,7 +153,7 @@ public class PageMenusMantoStpV {
      */
 	public static void goToGestorCheques(DataFmwkTest dFTest) throws Exception {
 		//Step
-        datosStep datosStep = goToMainMenusAndClickMenu("Gestor de Cheques", dFTest);
+        DatosStep datosStep = goToMainMenusAndClickMenu("Gestor de Cheques", dFTest);
             
         //Validaciones
         PageGestorChequesStpV.validateIsPage(datosStep, dFTest);
@@ -165,7 +165,7 @@ public class PageMenusMantoStpV {
      */
 	public static void goToGestorEstadisticasPedido(DataFmwkTest dFTest) throws Exception {
 		//Step
-        datosStep datosStep = goToMainMenusAndClickMenu("Estadisticas Pedidos", dFTest);
+        DatosStep datosStep = goToMainMenusAndClickMenu("Estadisticas Pedidos", dFTest);
             
         //Validaciones
         PageGestorEstadisticasPedidoStpV.validateIsPage(datosStep, dFTest);
@@ -178,7 +178,7 @@ public class PageMenusMantoStpV {
      */
 	public static void goToGestorSaldosTPV(DataFmwkTest dFTest) throws Exception {
 		//Step
-        datosStep datosStep = goToMainMenusAndClickMenu("Gestor de Saldos de TPV", dFTest);
+        DatosStep datosStep = goToMainMenusAndClickMenu("Gestor de Saldos de TPV", dFTest);
             
         //Validaciones
         PageGestorSaldosTPVStpV.validateIsPage(datosStep, dFTest);
@@ -191,7 +191,7 @@ public class PageMenusMantoStpV {
      */
 	public static void goToGestorConsultaCambioFamilia(DataFmwkTest dFTest) throws Exception {
 		//Step
-        datosStep datosStep = goToMainMenusAndClickMenu("Gestor de familias", dFTest);
+        DatosStep datosStep = goToMainMenusAndClickMenu("Gestor de familias", dFTest);
             
         //Validaciones
         PageGestorConsultaCambioFamiliaStpV.validateIsPage(datosStep, dFTest);
@@ -205,7 +205,7 @@ public class PageMenusMantoStpV {
 	
 	public static void goToOrdenadorDePrendas(DataFmwkTest dFTest) throws Exception {
 		//Step
-		datosStep datosStep = goToMainMenusAndClickMenu("Ordenador de Prendas", dFTest);
+		DatosStep datosStep = goToMainMenusAndClickMenu("Ordenador de Prendas", dFTest);
 		
 		//Validaciones
 		PageOrdenacionDePrendasStpV.validateIsPage(datosStep, dFTest);

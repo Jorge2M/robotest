@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecBillpay;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecBillpay;
 @SuppressWarnings("javadoc")
 public class SecBillpayStpV {
     
-    public static void validateIsSectionOk(Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsSectionOk(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         String descripValidac = 
             "1) Aparecen 3 desplegables para la selección de la fecha de nacimiento<br>" +
@@ -42,9 +42,9 @@ public class SecBillpayStpV {
     /**
      * @param fechaNac en formato "DD-MM-AAAA"
      */
-    public static datosStep inputDiaNacAndCheckAcepto(String fechaNac, String nombrePago, Channel channel, DataFmwkTest dFTest) {
+    public static DatosStep inputDiaNacAndCheckAcepto(String fechaNac, String nombrePago, Channel channel, DataFmwkTest dFTest) {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Informamos la fecha de nacimiento " + fechaNac + " y marcamos el check de \"Acepto\"", 
             "La fecha se informa correctamente");
         try {
@@ -85,8 +85,8 @@ public class SecBillpayStpV {
         return datosStep;
     }
     
-    public static datosStep inputDataInLastschrift(String iban, String bic, String titular, DataFmwkTest dFTest) { 
-        datosStep datosStep = new datosStep (
+    public static DatosStep inputDataInLastschrift(String iban, String bic, String titular, DataFmwkTest dFTest) { 
+        DatosStep datosStep = new DatosStep (
             "Informamos el titular, IBAN (" + iban + ") y BIC (" + bic + ")", 
             "Los datos se informan correctamente");
         try {

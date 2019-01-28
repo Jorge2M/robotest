@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi.PageQiwiConfirm;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi.PageQiwiInputTlfn;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi.Pa
 @SuppressWarnings("javadoc")
 public class PageQiwiInputTlfnStpV {
                  
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) { 
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) { 
         String descripValidac = 
             "1) Aparece una página con el campo de introducción del Qiwi Mobile Phone"; 
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
@@ -29,9 +29,9 @@ public class PageQiwiInputTlfnStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep inputTlfnAndAceptar(String tlfnQiwi, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep inputTlfnAndAceptar(String tlfnQiwi, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Introducimos el Qiwi Mobile Phone " + tlfnQiwi + " y pulsamos el botón \"Aceptar\"", 
             "Aparece la página de confirmación de Qiwi o la de resultado del pago de Mango");
         try {
@@ -44,7 +44,7 @@ public class PageQiwiInputTlfnStpV {
             
         //En caso de que aparezca la página de confirmación...
         if (PageQiwiConfirm.isPage(dFTest.driver)) {
-            datosStep = new datosStep     (
+            datosStep = new DatosStep     (
                 "Seleccionar el botón \"Confirmar\" de la página de confirmación de Qiwi", 
                 "Aparece la página de resultado del pago de Mango");
             try {

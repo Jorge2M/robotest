@@ -15,7 +15,7 @@ import org.testng.ITestContext;
 
 import com.mng.robotest.test80.arq.jdbc.Connector;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -114,7 +114,7 @@ public class ValidationsDAO {
         return nextValidation;
     }
     
-    public static void insertValidationInStep(String descripValidac, datosStep datosStep, Method method, ITestContext ctx) {
+    public static void insertValidationInStep(String descripValidac, DatosStep datosStep, Method method, ITestContext ctx) {
         String methodWithFactory = fmwkTest.getMethodWithFactory(method, ctx);
         int validationNumber = ValidationsDAO.selectNextValidation(method, datosStep.getStepNumber(), ctx);
         try (Connection conn = Connector.getConnection()) {

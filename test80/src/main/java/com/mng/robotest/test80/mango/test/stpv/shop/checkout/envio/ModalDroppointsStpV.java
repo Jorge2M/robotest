@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -21,7 +21,7 @@ public class ModalDroppointsStpV {
     public static SecConfirmDatosStpV secConfirmDatos;
     
     @SuppressWarnings("static-access")
-    public static void validaIsVisible(Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaIsVisible(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validación
         int maxSecondsToWait = 3;
         String descripValidac = 
@@ -46,7 +46,7 @@ public class ModalDroppointsStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static void validaIsNotVisible(Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaIsNotVisible(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) No aparece el modal con el mapa de Droppoints";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               

@@ -7,7 +7,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageRegistroAddressData;
@@ -18,7 +18,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegis
 @SuppressWarnings("javadoc")
 public class PageRegistroDirecStpV {
     
-    public static void isPageFromPais(Pais pais, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void isPageFromPais(Pais pais, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones.
         String descripValidac = 
             "1) Aparece la página de introducción de datos de la dirección (la esperamos un máximo de 3 segundos)<br>" +
@@ -40,9 +40,9 @@ public class PageRegistroDirecStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep sendDataAccordingCountryToInputs(HashMap<String,String> dataRegistro, Pais pais, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep sendDataAccordingCountryToInputs(HashMap<String,String> dataRegistro, Pais pais, DataFmwkTest dFTest) throws Exception {
         //Step. Introducir datos en el registro según el país
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Introducir los datos correctos para el país " + pais.getNombre_pais(), 
             "No aparece ningún mensaje de error");
         try {
@@ -58,9 +58,9 @@ public class PageRegistroDirecStpV {
         return datosStep;
     }
     
-    public static datosStep sendDataOkToInputs(ListDataRegistro dataToSend, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep sendDataOkToInputs(ListDataRegistro dataToSend, DataFmwkTest dFTest) throws Exception {
         //Step. Introducir datos en el registro
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Introducir los datos correctos:<br>" + dataToSend.getFormattedHTMLData(PageData.pageDireccion), 
             "No aparece ningún mensaje de error");
         try {
@@ -76,7 +76,7 @@ public class PageRegistroDirecStpV {
         return datosStep;
     }
     
-    private static void validateInputDataOk(datosStep datosStep, DataFmwkTest dFTest) {
+    private static void validateInputDataOk(DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         String descripValidac = 
             "1) No aparece ningún mensaje de error asociado a los campos de entrada"; 
@@ -92,10 +92,10 @@ public class PageRegistroDirecStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep clickFinalizarButton(DataFmwkTest dFTest) 
+    public static DatosStep clickFinalizarButton(DataFmwkTest dFTest) 
     throws Exception {
         //Step. 
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar el botón \"<b>Finalizar</b>\"", 
             "Aparece la página final del proceso de registro");
         try {

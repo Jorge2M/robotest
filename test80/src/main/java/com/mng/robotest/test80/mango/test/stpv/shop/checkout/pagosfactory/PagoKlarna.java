@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
@@ -18,8 +18,8 @@ public class PagoKlarna extends PagoStpV {
     
     @SuppressWarnings("static-access")
     @Override
-    public datosStep testPagoFromCheckout(boolean execPay) throws Exception {
-        datosStep datosStep = PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
+    public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
+        DatosStep datosStep = PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
         Pago pago = this.dCtxPago.getDataPedido().getPago();
         PageCheckoutWrapperStpV.secKlarna.inputNumPersonal(pago.getNumperklarna(), this.dCtxSh.channel, this.dFTest);
         if (pago.getSearchAddklarna().compareTo("s")==0) {

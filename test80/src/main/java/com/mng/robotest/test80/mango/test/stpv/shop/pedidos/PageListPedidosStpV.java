@@ -6,14 +6,14 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageListPedidos;
 
 @SuppressWarnings("javadoc")
 public class PageListPedidosStpV {
 
-    public static void validateIsPage(String codigoPedido, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(String codigoPedido, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) La página contiene el bloque correspondiente a la lista de pedidos<br>" +
             "2) Figura la línea correspondiente al pedido " + codigoPedido;
@@ -32,8 +32,8 @@ public class PageListPedidosStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep selectPedido(String codPedido, DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = new datosStep       (
+    public static DatosStep selectPedido(String codPedido, DataFmwkTest dFTest) throws Exception {
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar el pedido de la lista <b>" + codPedido + "</b>", 
             "Apareca la página con los datos correctos del pedido");
         try {

@@ -6,14 +6,14 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal.PagePaypalSelectPago;
 
 @SuppressWarnings("javadoc")
 public class PagePaypalSelectPagoStpV {
     
-    public static void validateIsPageUntil(int maxSecondsWait, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPageUntil(int maxSecondsWait, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         String descripValidac =
             "1) Aparece la página de Selección del Pago (la esperamos hasta " + maxSecondsWait + " segundos)";
@@ -30,9 +30,9 @@ public class PagePaypalSelectPagoStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep clickContinuarButton(DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clickContinuarButton(DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar el botón \"Continuar\"", 
             "Aparece la página de Mango de resultado OK del pago");
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);    

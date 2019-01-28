@@ -7,7 +7,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -19,7 +19,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 @SuppressWarnings("javadoc")
 public class PageRegistroSegundaStpV {
     
-    public static void validaIsPageRegistroOK(Pais paisRegistro, AppEcom app, HashMap<String,String> dataRegistro, datosStep datosStep, DataFmwkTest dFTest) 
+    public static void validaIsPageRegistroOK(Pais paisRegistro, AppEcom app, HashMap<String,String> dataRegistro, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
         //Validaciones
         String lineasComaSeparated = "";
@@ -79,7 +79,7 @@ public class PageRegistroSegundaStpV {
      * Introduce los datos en la página: una fecha de nacimiento + un número de niños + selección random de líneas 
      * @param fechaNacimiento fecha en formato "DD/MM/AAAA"
      */
-    public static datosStep setDataAndLineasRandom(String fechaNacimiento, boolean paisConNinos, int numNinos, Pais pais, HashMap<String,String> dataRegistroOK, DataFmwkTest dFTest) 
+    public static DatosStep setDataAndLineasRandom(String fechaNacimiento, boolean paisConNinos, int numNinos, Pais pais, HashMap<String,String> dataRegistroOK, DataFmwkTest dFTest) 
     throws Exception {
         //Step.
         String tagListaRandom = "@lineasRandom";
@@ -93,7 +93,7 @@ public class PageRegistroSegundaStpV {
         "<br>" +
         "  3) Seleccionar el número de niños: <b>" + numNinos + "</b>";
             
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             stepAction,
             "Aparece la página de introducción de datos del niño o la de datos de la dirección (según se podían o no seleccionar niños)");    
         try {

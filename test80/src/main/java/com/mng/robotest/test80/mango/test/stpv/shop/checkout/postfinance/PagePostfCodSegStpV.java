@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance.PagePostfCodSeg;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -30,7 +30,7 @@ public class PagePostfCodSegStpV {
      *   PRO-PostFinance -> https://epayment.postfinance.ch/pfef/authentication/v2
      * @throws Exception 
      */
-    public static void postfinanceValidate1rstPage(String nombrePago, String importeTotal, String codPais, datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void postfinanceValidate1rstPage(String nombrePago, String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
     	PagePostfCodSeg.waitLoadPage(dFTest.driver);
     	if (PagePostfCodSeg.isPasarelaTest(dFTest.driver))
             PagePostfCodSegStpV.validateIsPageTest(nombrePago, importeTotal, codPais, datosStep, dFTest);
@@ -38,7 +38,7 @@ public class PagePostfCodSegStpV {
             PagePostfCodSegStpV.validateIsPagePro(importeTotal, codPais, datosStep, dFTest);
     }
     
-    public static void validateIsPageTest(String nombrePago, String importeTotal, String codPais, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPageTest(String nombrePago, String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) {
         String validacion4 = "4) NO existe el campo de introducción del código de seguridad"; 
         if (isPostfinanceEcard(nombrePago))
             validacion4 = "4) SÍ existe el campo de introducción del código de seguridad";
@@ -76,7 +76,7 @@ public class PagePostfCodSegStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static void validateIsPagePro(String importeTotal, String codPais, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPagePro(String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) {
     	int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Aparece la pasarela de pagos de PostFinance E-Payment (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" + 
@@ -103,7 +103,7 @@ public class PagePostfCodSegStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep inputCodigoSeguridadAndAccept(String codSeguridad, String nombreMetodo, DataFmwkTest dFTest) 
+    public static DatosStep inputCodigoSeguridadAndAccept(String codSeguridad, String nombreMetodo, DataFmwkTest dFTest) 
     throws Exception {
         String strCodSeguridad = "";
         
@@ -111,7 +111,7 @@ public class PagePostfCodSegStpV {
         if (isPostfinanceEcard(nombreMetodo))
             strCodSeguridad = "Introducir el código de seguridad " + codSeguridad;
              
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             strCodSeguridad + "Seleccionar el botón Aceptar", 
             "Aparece una página de redirección");
         try {

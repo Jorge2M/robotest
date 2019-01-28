@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSofort2on;
@@ -19,7 +19,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSo
 @SuppressWarnings("javadoc")
 public class PageSofort2onStpV {
     
-    public static void validaIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
         int maxSecondsToWait = 3;
         String descripValidac = 
             "1) Aparece la página de selección del país/banco (la esperamos hasta " + maxSecondsToWait + " segundos)"; 
@@ -35,9 +35,9 @@ public class PageSofort2onStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep selectPaisYBanco(String paisSofort, String bankCode, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep selectPaisYBanco(String paisSofort, String bankCode, DataFmwkTest dFTest) throws Exception {
         //Step.
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionamos el país con código <b>" + paisSofort + "</b> y el código de banco <b>" + bankCode + "</b> y pulsamos \"Weiter\"", 
             "Aparece la página de indentificación en SOFORT");
         try {

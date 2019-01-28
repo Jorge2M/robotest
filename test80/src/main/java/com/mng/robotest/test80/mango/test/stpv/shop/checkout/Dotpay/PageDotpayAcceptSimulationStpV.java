@@ -6,14 +6,14 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.dotpay.PageDotpayAcceptSimulation;
 
 @SuppressWarnings("javadoc")
 public class PageDotpayAcceptSimulationStpV {
     
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Aparece la página de Dotpay para la introducción de los datos del pagador<br>" +
             "2) Figura un botón de aceptar rojo";
@@ -32,9 +32,9 @@ public class PageDotpayAcceptSimulationStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep clickRedButtonAceptar(DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clickRedButtonAceptar(DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el botón rojo para aceptar", 
             "Aparece la página resultado");
         try {

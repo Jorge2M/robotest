@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.d3d.PageD3DJPTestSelectOption;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.d3d.PageD3DJPTestSelectOption.OptionD3D;
@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 @SuppressWarnings("javadoc")
 public class PageD3DJPTestSelectOptionStpV {
     
-    public static boolean validateIsPage(String importeTotal, String codPais, datosStep datosStep, DataFmwkTest dFTest) {
+    public static boolean validateIsPage(String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) {
         boolean isD3DJP = true;
         int maxSecondsToWait = 1;
         String descripValidac = 
@@ -40,8 +40,8 @@ public class PageD3DJPTestSelectOptionStpV {
         return isD3DJP;
     }
     
-    public static datosStep clickSubmitButton(DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = new datosStep       (
+    public static DatosStep clickSubmitButton(DataFmwkTest dFTest) throws Exception {
+        DatosStep datosStep = new DatosStep       (
             "Seleccionamos la opción \"Successful\" y clickamos en el botón \"Submit\"", 
             "Aparece la página de resultado OK");
         try {

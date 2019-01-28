@@ -17,7 +17,7 @@ import org.testng.Assert;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.sitemap.Sitemapindex;
@@ -38,7 +38,7 @@ public class BrowserStpV {
         String urlSitemap = urlBaseTest.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
         
         //Step. Comprobamos la URL correspondiente a robots.txt
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Ejecutamos la URL del robots: " + urlRobots, 
             "Se carga el contenido correcto");
         try {
@@ -206,7 +206,7 @@ public class BrowserStpV {
         String urlSitemap = urlBaseTest.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
         
         //Step. Comprobamos al URL correspondiente a SITEMAP.XML
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Ejecutamos la URL del sitemap: " + urlSitemap, 
             "Se carga el contenido correcto");
         try {

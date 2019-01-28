@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -28,7 +28,7 @@ import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 @SuppressWarnings("javadoc")
 public class PageHomeMarcasStpV {
 
-    public static datosStep validateIsPageWithCorrectLineas(Pais pais, Channel channel, AppEcom app, datosStep datosStep, DataFmwkTest dFTest) {
+    public static DatosStep validateIsPageWithCorrectLineas(Pais pais, Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         AllPagesStpV.validateMainContentPais(pais, datosStep, dFTest);
 
@@ -41,7 +41,7 @@ public class PageHomeMarcasStpV {
         return datosStep;
     }
     
-    public static void validateIsPageOk(Pais pais, AppEcom app, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPageOk(Pais pais, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Aparece la home de marcas/multimarcas según el país<br>" +
             "2) No aparece ningún tag de error";
@@ -64,7 +64,7 @@ public class PageHomeMarcasStpV {
     
     public enum TypeHome {Multimarca, PortadaLinea}
     public static void validaRebajasJun2018(TypeHome typeHome, boolean areBanners, DataCtxShop dCtxSh, 
-    										datosStep datosStep, DataFmwkTest dFTest) {
+    										DatosStep datosStep, DataFmwkTest dFTest) {
         int maxSeconds = 3;
         String validacion1 = "Aparece la línea \"Rebajas\" (lo esperamos hasta " + maxSeconds + " segundos)";
         if (!dCtxSh.pais.isVentaOnline())

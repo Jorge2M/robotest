@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -20,7 +20,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PagePasarelaOtrasStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
-    public static void validateIsPage(String importeTotal, Pais pais, Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(String importeTotal, Pais pais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String validacion1 = "";
         if (channel==Channel.desktop)
             validacion1 = 

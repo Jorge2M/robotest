@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.multibanco.PageMultibanco1rst;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 @SuppressWarnings("javadoc")
 public class PageMultibanco1rstStpV {
-    public static void validateIsPage(String nombrePago, String importeTotal, String emailUsr, String codPais, Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(String nombrePago, String importeTotal, String emailUsr, String codPais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Figura el bloque correspondiente al pago <b>" + nombrePago + "</b><br>" +
             "2) Aparece el importe de la compra: " + importeTotal + "<br>" +
@@ -59,9 +59,9 @@ public class PageMultibanco1rstStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep continueToNextPage(Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep continueToNextPage(Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el botón \"Pagar\"", 
             "Aparece la página de \"En progreso\"");
         try {

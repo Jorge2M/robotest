@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -23,7 +23,7 @@ public class SecBolsaButtonAndLinksNewStpV {
     
     public static void selectEnvioYDevoluciones(DataFmwkTest dFTest) throws Exception {
         //Step.
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el link <b>Envío y devoluciones</b>",
             "Aparece el modal con los datos a nivel de envío y devolución");
         try {
@@ -39,7 +39,7 @@ public class SecBolsaButtonAndLinksNewStpV {
     
     public static void selectDetalleDelProducto(AppEcom app, LineaType lineaType, DataFmwkTest dFTest) throws Exception {
         //Step.
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el link <b>Detalle del producto</b>",
             "Se scrolla hasta el apartado de \"Descripción\"");
         try {
@@ -106,9 +106,9 @@ public class SecBolsaButtonAndLinksNewStpV {
         }
     }
     
-    public static datosStep selectLinkCompartir(String codigoPais, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep selectLinkCompartir(String codigoPais, DataFmwkTest dFTest) throws Exception {
         //Step.
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el link <b>Compartir</b>",
             "Aparece el modal para compartir el enlace");
         try {

@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.trustpay.PageTrustpayTestConfirm;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.trustpay.PageTrustpayTestConfirm.typeButtons;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.trustpay.Page
 @SuppressWarnings("javadoc")
 public class PageTrustpayTestConfirmStpV {
     
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Figura el botón \"OK\"<br>" +
             "2) Figura el botón \"ANNOUNCED\"<br>" +
@@ -41,9 +41,9 @@ public class PageTrustpayTestConfirmStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep clickButtonOK(DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clickButtonOK(DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar el botón para continuar con el pago", 
             "El pago se completa correctamente");
         try {

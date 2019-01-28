@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -28,7 +28,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 @SuppressWarnings("javadoc")
 public class PageResultPagoStpV {
 
-    public static void validaIsPageUntil(int maxSecondsToWait, Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaIsPageUntil(int maxSecondsToWait, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" (la esperamos hasta " + maxSecondsToWait + " segundos)";   
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);   
@@ -42,7 +42,7 @@ public class PageResultPagoStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static void validateIsPageOk(DataCtxPago dCtxPago, DataCtxShop dCtxSh, datosStep datosStep, DataFmwkTest dFTest) 
+    public static void validateIsPageOk(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
         String importeTotal = "";
         DataBag dataBag = dCtxPago.getDataPedido().getDataBag(); 
@@ -101,7 +101,7 @@ public class PageResultPagoStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static void validateTextConfirmacionPago(Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateTextConfirmacionPago(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
 	    int maxSecondsWait1 = 10;
 	    int maxSecondsWait2 = 20;
 	    String descripValidac = 
@@ -123,9 +123,9 @@ public class PageResultPagoStpV {
 	    finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep selectMisPedidos(DataPedido dataPedido, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep selectMisPedidos(DataPedido dataPedido, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el link \"Mis pedidos\"", 
             "Apareca la página de identificación del pedido");
         try {
@@ -144,7 +144,7 @@ public class PageResultPagoStpV {
         return datosStep;
     }    
     
-    public static datosStep selectMisCompras(boolean userRegistered, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep selectMisCompras(boolean userRegistered, DataFmwkTest dFTest) throws Exception {
         //Step
         String resultadoEsperado = "";
         if (userRegistered)
@@ -152,7 +152,7 @@ public class PageResultPagoStpV {
         else
             resultadoEsperado = "Aparece la página de acceso a \"Mis compras\"";
             
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el link \"Mis Compras\"", 
             resultadoEsperado);
         try {
@@ -171,9 +171,9 @@ public class PageResultPagoStpV {
         return datosStep;
     }    
     
-    public static datosStep selectSeguirDeShopping(Channel channel, AppEcom app, DataFmwkTest dFTest) throws Exception {  
+    public static DatosStep selectSeguirDeShopping(Channel channel, AppEcom app, DataFmwkTest dFTest) throws Exception {  
         //Step
-        datosStep datosStep = new datosStep   (
+        DatosStep datosStep = new DatosStep   (
             "Seleccionar el link \"Seguir de shopping\" o el icono de Mango", 
             "Volvemos a la portada");
         try {
@@ -193,9 +193,9 @@ public class PageResultPagoStpV {
         return datosStep;
     }
     
-    public static datosStep selectLinkPedidoAndValidatePedido(DataPedido dataPedido, AppEcom app, DataFmwkTest dFTest) 
+    public static DatosStep selectLinkPedidoAndValidatePedido(DataPedido dataPedido, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
-        datosStep datosStep = PageResultPagoStpV.selectMisPedidos(dataPedido, dFTest);
+        DatosStep datosStep = PageResultPagoStpV.selectMisPedidos(dataPedido, dFTest);
         if (datosStep.getResultSteps()==State.Ok) {
             if (PageListPedidos.isPage(dFTest.driver))
                 datosStep = PageListPedidosStpV.selectPedido(dataPedido.getCodpedido(), dFTest);
@@ -206,8 +206,8 @@ public class PageResultPagoStpV {
         return datosStep;
     }
     
-    public static datosStep selectLinkMisComprasAndValidateCompra(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = null;
+    public static DatosStep selectLinkMisComprasAndValidateCompra(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+        DatosStep datosStep = null;
         PageResultPagoStpV.selectMisCompras(dCtxSh.userRegistered, dFTest);
         DataPedido dataPedido = dCtxPago.getDataPedido();
         if (dCtxSh.userRegistered) {

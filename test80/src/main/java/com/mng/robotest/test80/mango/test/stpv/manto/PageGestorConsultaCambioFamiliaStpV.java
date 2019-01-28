@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorConsultaCambioFamilia;
 
@@ -15,7 +15,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 
 
 
-	public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+	public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
 		String descripValidac = 
 				"1) Estamos en la página \"" + PageGestorConsultaCambioFamilia.titulo + " \"<br>" +
 				"2) Aparece la tabla de \"Consulta\"" +
@@ -43,7 +43,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 	
 	
 	public static void selectAccesoriosAndClickConsultaPorFamiliaButton(DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 				"Buscamos productos por la familia \"Accesorios\" ", 
 				"Muestra la tabla con productos que corresponden con esta familia");
 		datosStep.setGrab_ErrorPageIfProblem(false);
@@ -76,7 +76,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 	
 	
 	public static void clickCambioFamiliaButton(DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 				"Damos click al botón \"Cambio Familia\"", 
 				"Muestra la página que permite gestionar los cambios de familia");
 		datosStep.setGrab_ErrorPageIfProblem(false);

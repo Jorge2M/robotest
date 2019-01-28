@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.ModalArticleNotAvailable;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.ModalArticleNotAvailable.StateModal;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.ModalArticleNo
 @SuppressWarnings("javadoc")
 public class ModalArticleNotAvailableStpV {
     
-    public static boolean validateState(StateModal stateModal, datosStep datosStep, DataFmwkTest dFTest) {
+    public static boolean validateState(StateModal stateModal, DatosStep datosStep, DataFmwkTest dFTest) {
         boolean isPresent = false;
         int maxSecondsToWait = 1;
         String descripValidac = 
@@ -36,7 +36,7 @@ public class ModalArticleNotAvailableStpV {
     }
     
     public static void clickAspaForClose(DataFmwkTest dFTest) {
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionamos el aspa del modal para cerrarlo", 
             "El modal queda en estado " + StateModal.notvisible);
         try {

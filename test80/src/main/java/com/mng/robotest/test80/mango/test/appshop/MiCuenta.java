@@ -114,7 +114,7 @@ public class MiCuenta extends GestorWebDriver {
         dCtxSh.userConnected = userConDevolucionPeroNoEnPRO;
         dCtxSh.passwordUser = passwordUserConDevolucion;
             
-        datosStep datosStep = PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest);
+        DatosStep datosStep = PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest);
         dCtxSh.userRegistered = false;
         SecMenusWrapperStpV.seleccionLinea(LineaType.she, null/*sublineaType*/, dCtxSh, dFTest);
         dCtxSh.userRegistered = true;

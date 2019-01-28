@@ -210,7 +210,7 @@ public class Otras extends GestorWebDriver {
         dCtxSh.pais = this.japon;
         dCtxSh.idioma = this.japones;
         PagePrehomeStpV.seleccionPaisIdioma(urlBaseTest, dCtxSh, dFTest);
-        datosStep datosStep = PagePrehomeStpV.entradaShopGivenPaisSeleccionado(this.japon, this.japones, dCtxSh.channel, dFTest);
+        DatosStep datosStep = PagePrehomeStpV.entradaShopGivenPaisSeleccionado(this.japon, this.japones, dCtxSh.channel, dFTest);
         PageIniShopJaponStpV.validaPageIniJapon(datosStep, dFTest);
     }	
 }

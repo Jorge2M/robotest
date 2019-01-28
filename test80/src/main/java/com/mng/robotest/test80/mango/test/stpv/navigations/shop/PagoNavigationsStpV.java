@@ -12,7 +12,7 @@ import com.mng.robotest.test80.Test80mng.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.utils;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -67,14 +67,14 @@ public class PagoNavigationsStpV {
     public static void testFromLoginToExecPaymetIfNeeded(List<Pais> paisesDestino, DataCtxShop dCtxSh, 
     													 DataCtxPago dCtxPago, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep=null;    	
+        DatosStep datosStep=null;    	
         String registro = "";
         if (dCtxSh.userRegistered)
             registro = "e Identificarse";
         else
             registro = " (si estamos logados cerramos sesión)";
         
-        datosStep = new datosStep       (
+        datosStep = new DatosStep       (
             "Acceder a Mango " + registro, 
             "Se accede a Mango");
         datosStep.setGrabNettrafic(dFTest.ctx);
@@ -178,9 +178,9 @@ public class PagoNavigationsStpV {
      * Testea desde la página inicial de identificación hasta la 1a página de checkout 
      */
     @SuppressWarnings("static-access")
-    public static datosStep testFromIdentToCheckoutIni(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep testFromIdentToCheckoutIni(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
-        datosStep datosStep = null;
+        DatosStep datosStep = null;
         boolean validaCharNoLatinos = (dCtxSh.pais!=null && dCtxSh.pais.getDireccharnolatinos().check() && dCtxSh.appE!=AppEcom.votf);
         DataBag dataBag = dCtxPago.getDataPedido().getDataBag();
         String emailCheckout = UtilsMangoTest.getEmailForCheckout(dCtxSh.pais, dCtxPago.getFTCkout().emailExist); 
@@ -210,7 +210,7 @@ public class PagoNavigationsStpV {
     }
     
     public static void testPagoFromCheckoutToEnd(DataCtxPago dCtxPago, DataCtxShop dCtxSh, Pago pagoToTest, DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = null;
+        DatosStep datosStep = null;
         DataPedido dataPedido = dCtxPago.getDataPedido();
         dataPedido.setPago(pagoToTest);
         dataPedido.setResejecucion(State.Nok);
@@ -266,7 +266,7 @@ public class PagoNavigationsStpV {
     throws Exception {
         DataPedido dataPedido = dCtxPago.getDataPedido();
         DataBag dataBag = dataPedido.getDataBag();
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Nos posicionamos en la página inicial", 
             "La acción se ejecuta correctamente");
         try {
@@ -305,7 +305,7 @@ public class PagoNavigationsStpV {
     throws Exception {
         try {
             DataPedido dataPedido = dCtxPago.getDataPedido();
-            datosStep datosStep=null;
+            DatosStep datosStep=null;
 
             //En el caso de DESKTOP disponemos y almacenamos el importe total mostrado por pantalla (lo necesitaremos más adelante)
             if (dCtxSh.channel==Channel.desktop)
@@ -411,8 +411,8 @@ public class PagoNavigationsStpV {
      *     Desktop: simplemente se selecciona el botón "Confirmar Compra"
      *     Movil  : se selecciona los botones "Ver resumen" y "Confirmación del pago)
      */
-    public static datosStep aceptarCompraDesdeMetodosPago(DataCtxPago dCtxPago, Channel channel, DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = null;
+    public static DatosStep aceptarCompraDesdeMetodosPago(DataCtxPago dCtxPago, Channel channel, DataFmwkTest dFTest) throws Exception {
+        DatosStep datosStep = null;
         DataPedido dataPedido = dCtxPago.getDataPedido();
         dataPedido.setCodtipopago("R");
         if (channel==Channel.desktop) {

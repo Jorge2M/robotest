@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageDevoluciones;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageDevoluciones.Devolucion;;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.PageDevoluciones.Devol
 @SuppressWarnings("javadoc")
 public class PageDevolucionesStpV {
     
-    public static void validaIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Aparece la página de devoluciones<br>" +
             "2) Aparece la opción de " + Devolucion.EnTienda.getLiteral() + "<br>" +
@@ -41,8 +41,8 @@ public class PageDevolucionesStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep solicitarRegogidaGratuitaADomicilio(DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = new datosStep (
+    public static DatosStep solicitarRegogidaGratuitaADomicilio(DataFmwkTest dFTest) throws Exception {
+        DatosStep datosStep = new DatosStep (
             "Pulsar \"Recogida gratuíta a domicilio\" + \"Solicitar Recogida\"", 
             "Aparece la tabla de devoluciones sin ningún pedido");
         try {

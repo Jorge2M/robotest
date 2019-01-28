@@ -8,7 +8,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -53,9 +53,9 @@ public class SecMenusDesktopStpV {
     /**
      * Selección de un menú superior (lateral en el caso de móvil) con un catálogo de artículos asociado (p.e. vestidos, camisas, etc.)
      */
-    public static datosStep selectMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep selectMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar el menú superior <b>" + menu1rstLevel + "</b>", 
             "Aparece la galería asociada al menú");
         datosStep.setGrabNettrafic(dFTest.ctx);
@@ -73,9 +73,9 @@ public class SecMenusDesktopStpV {
         return datosStep;
     }
     
-    public static datosStep selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar el menú lateral de 1er nivel <b>" + menu1rstLevel + "</b>", 
             "Aparecen artículos de tipo Camiseta");
         datosStep.setGrabNettrafic(dFTest.ctx);
@@ -92,10 +92,10 @@ public class SecMenusDesktopStpV {
         return datosStep;
     }
     
-    public static datosStep selectMenuLateral2oLevel(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep selectMenuLateral2oLevel(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         //Step.
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar el menú lateral de 2o nivel <b>" + menu2onLevel + "</b>", 
             "Aparecen artículos asociados al menú");
         datosStep.setGrabNettrafic(dFTest.ctx);
@@ -113,7 +113,7 @@ public class SecMenusDesktopStpV {
     }
     
 
-    public static void validateIsLineaSelected(LineaType lineaType, AppEcom app, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsLineaSelected(LineaType lineaType, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Está seleccionada la línea <b>" + lineaType + "</b>";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
@@ -135,7 +135,7 @@ public class SecMenusDesktopStpV {
      */
     @SuppressWarnings("static-access")
     public static void validationsSelecMenuEspecificDesktop(MenuLateralDesktop menu, Channel channel, AppEcom app, 
-    														datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    														DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, dFTest);
     	pageGaleriaStpV.validateBannerSuperiorIfExistsDesktop(datosStep);
         if (menu.isMenuLateral()) {
@@ -220,13 +220,13 @@ public class SecMenusDesktopStpV {
     /**
      * Función que ejecuta el paso/validaciones correspondiente a la selección de una entrada el menú superior de Desktop
      */
-    public static datosStep stepEntradaMenuDesktop(Menu1rstLevel menu1rstLevel, String paginaLinea, Channel channel, 
+    public static DatosStep stepEntradaMenuDesktop(Menu1rstLevel menu1rstLevel, String paginaLinea, Channel channel, 
     											   AppEcom app, DataFmwkTest dFTest) throws Exception {
         String tagMenu = "[UnknownText]";
         LineaType lineaMenu = menu1rstLevel.getLinea();
         
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
         	"Selección del menú <b>" + tagMenu + "</b> (data-ga-label=" + menu1rstLevel.getDataGaLabelMenuSuperiorDesktop() + ")", 
             "El menú se ejecuta correctamente");
         datosStep.setGrabNettrafic(dFTest.ctx);
@@ -265,7 +265,7 @@ public class SecMenusDesktopStpV {
         Linea linea = pais.getShoponline().getLinea(lineaType);
         
         //Step
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Realizar \"hover\" sobre la línea " + linea.getType(),
             "Aparecen los carrusels correspondientes a la línea " + linea.getCarrusels());
         try {
@@ -313,12 +313,12 @@ public class SecMenusDesktopStpV {
     /**
      * Ejecuta el paso/validación que selecciona un determinado bloque del "nuevo" (de los que aparecen al realizar 'hover' sobre la línea)
      */
-    public static datosStep stepSeleccionaCarrusel(Pais pais, LineaType lineaType, String idCarrusel, AppEcom app, DataFmwkTest dFTest) 
+    public static DatosStep stepSeleccionaCarrusel(Pais pais, LineaType lineaType, String idCarrusel, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
         Linea linea = pais.getShoponline().getLinea(lineaType);
         
         //Step. Seleccionamos el bloque asociado a las lineas de tipo she, he, niños, niñas
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Seleccionar el carrusel de la línea " + lineaType + " correspondiente a <b>" + idCarrusel + "</b>",
             "Aparece la página asociada al carrusel " + lineaType + " / " + idCarrusel);
         try {
@@ -381,12 +381,12 @@ public class SecMenusDesktopStpV {
     /**
      * Selecciona una línea (he, she, he...) o sublínea (p.e. bebe_nino)
      */
-    public static datosStep seleccionLinea(LineaType lineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep seleccionLinea(LineaType lineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         //Step
-        datosStep datosStep = null;
+        DatosStep datosStep = null;
         String nombreLinea = "<b style=\"color:brown;\">\"" + lineaType.name().toUpperCase() + "\"</b>";
-        datosStep = new datosStep(
+        datosStep = new DatosStep(
             "Seleccionar la <b style=\"color:chocolate\">Línea</b> " + nombreLinea,
             "Aparece la página correcta asociada a la línea " + lineaType.name().toUpperCase());
         try {
@@ -406,11 +406,11 @@ public class SecMenusDesktopStpV {
     /**
      * Selecciona una línea (he, she, he...) o sublínea (p.e. bebe_nino)
      */
-    public static datosStep seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, 
+    public static DatosStep seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, 
     										  DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
         //Step. 
         String nombreLineaSublinea = "<b style=\"color:brown;\">\"" + lineaType.name() + " / " + sublineaType.name().toUpperCase() + "\"</b>";
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Seleccionar la línea / <b style=\"color:chocolate\">Sublínea</b> " + nombreLineaSublinea,
             "Aparece la página correcta asociada a la línea/sublínea");
         try {
@@ -427,7 +427,7 @@ public class SecMenusDesktopStpV {
         return datosStep;
     }    
     
-    public static void validaSelecLinea(datosStep datosStep, LineaType lineaType, SublineaNinosType sublineaType, 
+    public static void validaSelecLinea(DatosStep datosStep, LineaType lineaType, SublineaNinosType sublineaType, 
     									DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
     	SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh, dFTest);
         if (sublineaType==null) {
@@ -469,13 +469,13 @@ public class SecMenusDesktopStpV {
     /**
      * Contamos los menús de una línea (she, he, nina, niño, violeta), validamos que sean iguales y los almacenamos en el contexto
      */
-    public static datosStep countSaveMenusEntorno(LineaType lineaType, SublineaNinosType sublineaType, String inodo, String urlBase, AppEcom app, DataFmwkTest dFTest) 
+    public static DatosStep countSaveMenusEntorno(LineaType lineaType, SublineaNinosType sublineaType, String inodo, String urlBase, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
         //Step. Contamos los menús
         int numPestanyas = 0;
         int numMenus = 0;
         String descripValidac = "";
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Contamos el número de pestañas y menús de " + lineaType + "/" + sublineaType,
             "El número de pestañas/menús coincide con el del nodo anterior");
         try {
@@ -533,10 +533,10 @@ public class SecMenusDesktopStpV {
     /**
      * Función que ejecuta el paso/validaciones correspondiente a la selección de una entrada el menú superior de Desktop
      */
-    public static datosStep clickRightBanner(LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, DataFmwkTest dFTest) 
+    public static DatosStep clickRightBanner(LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar el banner existente a la derecha de los menús", 
             "Aparece una página con banners o artículos");
         try {
@@ -575,7 +575,7 @@ public class SecMenusDesktopStpV {
     /**
      * Chequear una URL de redirect que linca a HE - Zapatos
      */
-    public static datosStep checkURLRedirectZapatosHeEspanya(Channel channel, AppEcom app, DataFmwkTest dFTest) 
+    public static DatosStep checkURLRedirectZapatosHeEspanya(Channel channel, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
         URI uri = new URI(dFTest.driver.getCurrentUrl());
         String tiendaId = "he";
@@ -590,7 +590,7 @@ public class SecMenusDesktopStpV {
         	"&menu_temporada=2&menu_accesorio=140";
 
         //Step
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Cargar la siguiente URL de redirect a <b>España / HE / Zapatos</b>:<br>" + urlAccesoCorreo,
             "Aparece desplegada la página de Zapatos (HE)");
         try {
@@ -610,7 +610,7 @@ public class SecMenusDesktopStpV {
     /**
      * Chequear una URL de redirect que linca a HE - Zapatos
      */
-    public static datosStep checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
     	ArticleStock articulo = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithMoreOneColour, dCtxSh);
         URI uri = new URI(dFTest.driver.getCurrentUrl());
@@ -623,7 +623,7 @@ public class SecMenusDesktopStpV {
         	"&producto=" + articulo.getReference() + "&color=" + articulo.getColourCode() ;
 
         //Step
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Cargar la siguiente URL de redirect a la ficha del producto <b>" + articulo.getReference() + " (" + pais.getNombre_pais()+ ")</b>:<br>" + urlAccesoCorreo,
             "Aparece la ficha del producto " + articulo.getReference());
         try {
@@ -641,7 +641,7 @@ public class SecMenusDesktopStpV {
         return datosStep;
     }
     
-    public static void validaPaginaResultMenu(MenuLateralDesktop menu, Channel channel, AppEcom app, datosStep datosStep, DataFmwkTest dFTest) 
+    public static void validaPaginaResultMenu(MenuLateralDesktop menu, Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
         String validacion1 = "";
         String validacion2_2 = "";
@@ -793,7 +793,7 @@ public class SecMenusDesktopStpV {
        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, datosStep, dFTest);
     }    
     
-    public static void validationsRebajas(Channel channel, AppEcom app, datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void validationsRebajas(Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         //Validación especialmente útil en periodo de Rebajas
     	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(channel, app, dFTest.driver);
     	List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;

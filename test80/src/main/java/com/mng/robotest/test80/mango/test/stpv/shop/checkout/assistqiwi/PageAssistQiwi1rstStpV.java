@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi.PageAssistQiwi1rst;
@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 @SuppressWarnings("javadoc")
 public class PageAssistQiwi1rstStpV {
     
-    public static void validateIsPage(String importeTotal, String codPais, Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(String importeTotal, String codPais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Aparece el icono de Assist<br>" + 
             "2) En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>" +
@@ -39,9 +39,9 @@ public class PageAssistQiwi1rstStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }            
     }
     
-    public static datosStep clickIconPasarelaQiwi(Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clickIconPasarelaQiwi(Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar la opción de Qiwi Kошелек", 
             "Aparece la página de introducción del número de teléfono");
         try {

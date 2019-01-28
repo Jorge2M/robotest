@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.Descuento;
@@ -33,7 +33,7 @@ public class Page1EnvioCheckoutMobilStpV {
 
     public static ModalDroppointsStpV modalDroppoints;
     
-    public static void validateIsPage(boolean userLogged, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(boolean userLogged, DatosStep datosStep, DataFmwkTest dFTest) {
         
     	String optionalValidac = "3) Aparece seleccionado el método de envío \"Estándar\"<br>";
     	String descripValidac = 
@@ -65,10 +65,10 @@ public class Page1EnvioCheckoutMobilStpV {
     }
     
     @SuppressWarnings("static-access")
-    public static datosStep selectMetodoEnvio(TipoTransporte tipoTransporte, String nombrePago, DataCtxPago dCtxPago, DataFmwkTest dFTest) 
+    public static DatosStep selectMetodoEnvio(TipoTransporte tipoTransporte, String nombrePago, DataCtxPago dCtxPago, DataFmwkTest dFTest) 
     throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "<b style=\"color:blue;\">" + nombrePago + "</b>:Seleccionamos el método de envío <b>" + tipoTransporte + "</b> (previamente, si no lo estamos, nos posicionamos en el apartado \"1. Envio\")", 
             "Se selecciona el método de envío correctamente");
         try {
@@ -92,7 +92,7 @@ public class Page1EnvioCheckoutMobilStpV {
         return datosStep;
     }    
     
-    public static void validaBlockSelected(TipoTransporte tipoTransporte, datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void validaBlockSelected(TipoTransporte tipoTransporte, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Queda seleccionado el bloque correspondiete a <b>" + tipoTransporte + "</b> (lo esperamos hasta " + maxSecondsToWait + " segundos)";
@@ -108,9 +108,9 @@ public class Page1EnvioCheckoutMobilStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep clickContinuarToMetodosPago(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clickContinuarToMetodosPago(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
         //Step.
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar el botón \"Continuar\"", 
             "Aparece la página de checkout con los métodos de pago");
         try {
@@ -150,7 +150,7 @@ public class Page1EnvioCheckoutMobilStpV {
         return datosStep;
     }
     
-    public static void validaResultImputPromoEmpl(DataBag dataBag, AppEcom app, datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void validaResultImputPromoEmpl(DataBag dataBag, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         Descuento descuento = new Descuento(app, DiscountType.Empleado);
         String descripValidac = 
             "1) Aparece el descuento total aplicado al empleado (en menos de 2 segundos)<br>" +
@@ -198,9 +198,9 @@ public class Page1EnvioCheckoutMobilStpV {
 //        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }    
 //    }
     
-    public static datosStep selectFranjaHorariaUrgente(int posicion, DataFmwkTest dFTest) {
+    public static DatosStep selectFranjaHorariaUrgente(int posicion, DataFmwkTest dFTest) {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionamos la <b>" + posicion + "a<b> franja horaria del envío \"Urgente - Horario personalizado\"</b>", 
             "La franja horaria se selecciona correctamente");
         try {

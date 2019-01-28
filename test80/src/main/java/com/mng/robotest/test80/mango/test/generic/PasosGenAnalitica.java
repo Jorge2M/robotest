@@ -14,7 +14,7 @@ import org.json.simple.JSONObject;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -30,7 +30,7 @@ public class PasosGenAnalitica {
     /**
      * Aplica las validaciones estándar a nivel de Analítica
      */
-    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         //Por defecto aplicaremos todas las avalidaciones (Google Analytics, Criteo, NetTraffic y DataLayer)
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(Constantes.AnalyticsVal.GoogleAnalytics,
                                                                   Constantes.AnalyticsVal.NetTraffic, 
@@ -41,12 +41,12 @@ public class PasosGenAnalitica {
         validaHTTPAnalytics(app, lineaId, analyticSet, datosStep, dFTest);
     }
     
-    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, EnumSet<Constantes.AnalyticsVal> analyticSet, datosStep datosStep, DataFmwkTest dFTest) 
+    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, EnumSet<Constantes.AnalyticsVal> analyticSet, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
         validaHTTPAnalytics(app, lineaId, null/*DataProcessPago*/, analyticSet, datosStep, dFTest);
     }
     
-    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DataPedido dataPedido, EnumSet<Constantes.AnalyticsVal> analyticSet, datosStep datosStep, DataFmwkTest dFTest) 
+    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DataPedido dataPedido, EnumSet<Constantes.AnalyticsVal> analyticSet, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
         boolean netAnalysis = datosStep.getGrabNettrafic();
         if (netAnalysis &&
@@ -98,7 +98,7 @@ public class PasosGenAnalitica {
         }
     }
 
-    public static void validaPolyvore(datosStep datosStep, gestorDatosHarJSON gestorHAR, DataPedido dataPedido, DataFmwkTest dFTest) throws Exception {
+    public static void validaPolyvore(DatosStep datosStep, gestorDatosHarJSON gestorHAR, DataPedido dataPedido, DataFmwkTest dFTest) throws Exception {
         //VALIDACIONES POLYVORE PARA USA (sólo en el "Confirmar Compra")
         String urlPolyvore = "://www.polyvore.com/conversion/beacon.gif?";
         String paramPolyvore = "adv=mango.com";
@@ -176,7 +176,7 @@ public class PasosGenAnalitica {
     }    
     
     @SuppressWarnings("rawtypes")
-    public static void validaCriteo(datosStep datosStep, gestorDatosHarJSON gestorHAR, LineaType lineaId, DataFmwkTest dFTest) throws Exception {
+    public static void validaCriteo(DatosStep datosStep, gestorDatosHarJSON gestorHAR, LineaType lineaId, DataFmwkTest dFTest) throws Exception {
         //En el caso de violeta no está activado Criteo
         if (lineaId!=LineaType.violeta) {
             String tagReferrer = "<REFERRER_1A_REQ>";
@@ -260,7 +260,7 @@ public class PasosGenAnalitica {
         }
     }
     
-    public static void validaBing(datosStep datosStep, gestorDatosHarJSON gestorHAR, AppEcom app, DataFmwkTest dFTest) throws Exception {
+    public static void validaBing(DatosStep datosStep, gestorDatosHarJSON gestorHAR, AppEcom app, DataFmwkTest dFTest) throws Exception {
         //El tracking de Bing sólo se encuentra activo en PRO
         if (UtilsMangoTest.isEntornoPRO(app, dFTest)) {
             //Validaciones
@@ -323,7 +323,7 @@ public class PasosGenAnalitica {
         }
     }
     
-    public static void validaGoogleAnalytics(datosStep datosStep, gestorDatosHarJSON gestorHAR, AppEcom app, DataFmwkTest dFTest) {
+    public static void validaGoogleAnalytics(DatosStep datosStep, gestorDatosHarJSON gestorHAR, AppEcom app, DataFmwkTest dFTest) {
         //TODO esta validación es temporal. Actualmente hay activados 2 formas de lanzar Google Analytics con lo que es normal que en algún
         //caso se ejecuten 2 peticiones. Cuando dejen sólo una forma habrá que restaurar la validación original
         String valueTid1 = "UA-855910-26";
@@ -381,7 +381,7 @@ public class PasosGenAnalitica {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static void validaDatalayer(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaDatalayer(DatosStep datosStep, DataFmwkTest dFTest) {
         String firstLineDataLayerFunction = "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':"; 
         String descripValidac = 
             "1) Figura el código JavaScript del tag <b>dataLayer</b>. Validamos la existencia de la 1a línea de la función: " + firstLineDataLayerFunction;
@@ -397,7 +397,7 @@ public class PasosGenAnalitica {
     }
     
     @SuppressWarnings({ "rawtypes", "boxing" })
-    public static void validaNetTraffic(datosStep datosStep, gestorDatosHarJSON gestorHAR, DataFmwkTest dFTest) {
+    public static void validaNetTraffic(DatosStep datosStep, gestorDatosHarJSON gestorHAR, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) En el tráfico de red no existe ninguna sin respuesta o con status KO";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               

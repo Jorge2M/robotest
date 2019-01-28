@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.d3d.PageD3DLogin;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 @SuppressWarnings("javadoc")
 public class PageD3DLoginStpV {
     
-    public static boolean validateIsPage(String importeTotal, String codPais, datosStep datosStep, DataFmwkTest dFTest) {
+    public static boolean validateIsPage(String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) {
         boolean isD3D = true;
         int maxSecondsToWait = 1;
         String descripValidac = 
@@ -39,8 +39,8 @@ public class PageD3DLoginStpV {
         return isD3D;
     }
     
-    public static datosStep loginAndClickSubmit(String user, String password, DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = new datosStep       (
+    public static DatosStep loginAndClickSubmit(String user, String password, DataFmwkTest dFTest) throws Exception {
+        DatosStep datosStep = new DatosStep       (
             "Autenticarse en D3D con " + user + "/" + password, 
             "Aparece la página de resultado OK");
         try {

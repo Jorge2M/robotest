@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -21,10 +21,10 @@ public class SecMetodoEnvioDesktopStpV {
     public static ModalDroppointsStpV modalDroppoints;
     
     @SuppressWarnings("static-access")
-    public static datosStep selectMetodoEnvio(TipoTransporte tipoTransporte, String nombrePago, DataCtxPago dCtxPago, DataFmwkTest dFTest) 
+    public static DatosStep selectMetodoEnvio(TipoTransporte tipoTransporte, String nombrePago, DataCtxPago dCtxPago, DataFmwkTest dFTest) 
     throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "<b style=\"color:blue;\">" + nombrePago + "</b>:Seleccionamos el método de envío <b>" + tipoTransporte + "</b>", 
             "Se selecciona el método de envío correctamente");
         try {
@@ -48,7 +48,7 @@ public class SecMetodoEnvioDesktopStpV {
         return datosStep;
     }
     
-    public static void validaBlockSelectedDesktop(TipoTransporte tipoTransporte, datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void validaBlockSelectedDesktop(TipoTransporte tipoTransporte, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Desaparece la capa de Loading  (lo esperamos hasta " + maxSecondsToWait + " segundos) <br>" +
@@ -68,9 +68,9 @@ public class SecMetodoEnvioDesktopStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep selectFranjaHorariaUrgente(int posicion, DataFmwkTest dFTest) {
+    public static DatosStep selectFranjaHorariaUrgente(int posicion, DataFmwkTest dFTest) {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionamos la <b>" + posicion + "a<b> franja horaria del envío \"Urgente - Horario personalizado\"</b>", 
             "La franja horaria se selecciona correctamente");
         try {

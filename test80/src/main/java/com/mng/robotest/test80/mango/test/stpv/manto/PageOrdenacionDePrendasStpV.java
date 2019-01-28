@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPage;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
@@ -36,7 +36,7 @@ public class PageOrdenacionDePrendasStpV {
 		aceptarOrdenPais(dFTest);
 	}
 	
-	public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+	public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
 		//Validations 
 		mantoOrdenacionValidation(datosStep, dFTest, 
 			1, "Estamos en la página \"" + Orden.titulo.getXPath(), Orden.initialTitulo);
@@ -47,7 +47,7 @@ public class PageOrdenacionDePrendasStpV {
 	}
 	
 	private static void selectPreProduccion(DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep (
+		DatosStep datosStep = new DatosStep (
 			"Seleccionamos en el desplegable la opción <b>PreProduccion</b>", 
 			"Aparecen los diferentes indicadores de secciones"); 
 		try {
@@ -70,7 +70,7 @@ public class PageOrdenacionDePrendasStpV {
 	}
 	
 	private static void selectShe(DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep (
+		DatosStep datosStep = new DatosStep (
 			"Seleccionamos la seccion de <b>She</b>", 
 			"Podemos seleccionar que queremos realizar"); 
 		try {
@@ -84,7 +84,7 @@ public class PageOrdenacionDePrendasStpV {
 	}
 	
 	private static void selectSectionPrenda(DataFmwkTest dFTest){
-		datosStep datosStep = new datosStep (
+		DatosStep datosStep = new DatosStep (
 			"Seleccionamos la sección de <b>prendas</b> en el desplegable", 
 			"Nos aparece otro desplegable con los tipos de prenda");
 		try {
@@ -100,7 +100,7 @@ public class PageOrdenacionDePrendasStpV {
 	}
 	
 	private static void selectTipoPrenda(DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep (
+		DatosStep datosStep = new DatosStep (
 			"Seleccionamos <b>Camisas</b> en el desplegable de tipo de prenda y confirmamos nuestra seleccion", "Aparecen fotos en pantalla");
 		datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		try {
@@ -118,7 +118,7 @@ public class PageOrdenacionDePrendasStpV {
 	}
 	
 	private static void bajarPrenda(DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep (
+		DatosStep datosStep = new DatosStep (
 			"Enviamos la primera prenda al final", "La prenda ha cambiado");
 		datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		refPrenda = validationPrenda(dFTest, Orden.primeraPrenda);
@@ -136,7 +136,7 @@ public class PageOrdenacionDePrendasStpV {
 	}
 	
 	private static void aplicarOrden(DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep (
+		DatosStep datosStep = new DatosStep (
 			"Aplicamos el nuevo orden a las prendas", "Se despliega el modal de la ordenacion de predas");
 		datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		
@@ -156,7 +156,7 @@ public class PageOrdenacionDePrendasStpV {
 	}
 	
 	private static void aceptarOrdenPais(DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep (
+		DatosStep datosStep = new DatosStep (
 			"Aplicamos el orden por pais", "La prenda desaparece");
 		datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		
@@ -177,7 +177,7 @@ public class PageOrdenacionDePrendasStpV {
 		return refPrenda;
 	}
 	
-	private static void validateOrdenacionFunction(datosStep datosStep, DataFmwkTest dFTest, 
+	private static void validateOrdenacionFunction(DatosStep datosStep, DataFmwkTest dFTest, 
 												   int numValidac, String descripValidac, Orden prenda){
 		String descripValidacion = numValidac + ") " + descripValidac;
 		datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
@@ -191,12 +191,12 @@ public class PageOrdenacionDePrendasStpV {
 		} finally { fmwkTest.grabStepValidation(datosStep, descripValidacion, dFTest); }
 	}
 	
-	private static void mantoOrdenacionValidation(datosStep datosStep, DataFmwkTest dFTest, int numValidac, String descripValidac,
+	private static void mantoOrdenacionValidation(DatosStep datosStep, DataFmwkTest dFTest, int numValidac, String descripValidac,
 												  ElementPage element) {
 		mantoOrdenacionValidation(datosStep, dFTest, numValidac, descripValidac, element, 0);
 	}
 	
-	private static void mantoOrdenacionValidation(datosStep datosStep, DataFmwkTest dFTest, int numValidac, String descripValidac,
+	private static void mantoOrdenacionValidation(DatosStep datosStep, DataFmwkTest dFTest, int numValidac, String descripValidac,
 												  ElementPage element, int maxSecondsWait) {
 		String descripValidacion = numValidac + ") " + descripValidac;
 		if (maxSecondsWait > 0)

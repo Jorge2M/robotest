@@ -7,7 +7,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -19,7 +19,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2IdentChe
 @SuppressWarnings("javadoc")
 public class Page2IdentCheckoutStpV {
     
-    public static void validateIsPage(boolean emailYetExists, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(boolean emailYetExists, DatosStep datosStep, DataFmwkTest dFTest) {
     	int maxSecondsToWait = 1;
         String descripValidac = 
             "1) Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + maxSecondsToWait + ")<br>" +
@@ -44,7 +44,7 @@ public class Page2IdentCheckoutStpV {
         HashMap<String, String> datosRegistro = null;
         
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Introdumios los datos del cliente según el país", 
             "Se hace clickable el botón \"Continuar\"");
         datosStep.setGrabImage(true);
@@ -77,7 +77,7 @@ public class Page2IdentCheckoutStpV {
     /**
      * @param validaDirecCharNoLatinos indica si se ha de validar que en la dirección no pueden figurar carácteres no latinos
      */
-    public static datosStep clickContinuar(boolean userRegistered, boolean validaDirecCharNoLatinos, DataBag dataBag, Channel channel, AppEcom app, DataFmwkTest dFTest)
+    public static DatosStep clickContinuar(boolean userRegistered, boolean validaDirecCharNoLatinos, DataBag dataBag, Channel channel, AppEcom app, DataFmwkTest dFTest)
     throws Exception {
         
         String descripIniTest = "";
@@ -90,7 +90,7 @@ public class Page2IdentCheckoutStpV {
         }
         
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             descripIniTest + "Seleccionamos el botón \"Continuar\"", 
             descripResult /*Resultado esperado*/);
         datosStep.setGrabImage(true);
@@ -122,7 +122,7 @@ public class Page2IdentCheckoutStpV {
         return datosStep;
     }
     
-    public static void validaRGPDText(datosStep datosStep, Pais pais, DataFmwkTest dFTest) {      
+    public static void validaRGPDText(DatosStep datosStep, Pais pais, DataFmwkTest dFTest) {      
     	//Validaciones
 		if (pais.getRgpd().equals("S")) {
 	        String descripValidac = 

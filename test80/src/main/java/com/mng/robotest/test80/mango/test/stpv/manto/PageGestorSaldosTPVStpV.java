@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorSaldosTPV;
 
@@ -15,7 +15,7 @@ public class PageGestorSaldosTPVStpV {
 
 
 
-	public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+	public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
 		String descripValidac = 
 				"1) Estamos en la página \"" + PageGestorSaldosTPV.titulo + " \"<br>" +
 				"2) Aparece el input de fecha de TPV";
@@ -39,7 +39,7 @@ public class PageGestorSaldosTPVStpV {
 	
 	
 	public static void searchValidTPV(String tpv, DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 				"Introducimos una TPV válida y damos click a \"Consultar Saldos\"", 
 				"Muestra la tabla de saldos con el ID de la TPV en ella");
 		datosStep.setGrab_ErrorPageIfProblem(false);
@@ -72,7 +72,7 @@ public class PageGestorSaldosTPVStpV {
 	
 	
 	public static void searchUnvalidTPV(String tpv, DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 				"Introducimos una TPV no válida y damos click a \"Consultar Saldos\"", 
 				"Muestra el mensaje conforme la TPV no existe");
 		datosStep.setGrab_ErrorPageIfProblem(false);

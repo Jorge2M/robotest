@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -49,7 +49,7 @@ public class PageCheckoutWrapperStpV {
     public static Page1DktopCheckoutStpV page1DktopCheck;
     public static Page1EnvioCheckoutMobilStpV page1MobilCheck;
     
-    public static void validateIsFirstPage(boolean userLogged, DataBag dataBag, Channel channel, AppEcom app, datosStep datosStep, DataFmwkTest dFTest) 
+    public static void validateIsFirstPage(boolean userLogged, DataBag dataBag, Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
         if (channel==Channel.movil_web)
             page1MobilCheck.validateIsPage(userLogged, datosStep, dFTest);
@@ -60,9 +60,9 @@ public class PageCheckoutWrapperStpV {
     /**
      * Despliega (si no lo están) los métodos de pago y valida que realmente sean los correctos
      */
-    public static datosStep despliegaYValidaMetodosPago(Pais pais, boolean isEmpl, AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep despliegaYValidaMetodosPago(Pais pais, boolean isEmpl, AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Si existen y están plegados, desplegamos el bloque con los métodos de pago", 
             "Aparecen los métodos de pagos asociados al país: " + pais.getStringPagosTest(app, isEmpl));
         try {
@@ -81,7 +81,7 @@ public class PageCheckoutWrapperStpV {
     /**
      * Valida los métodos de pago disponibles en la página de checkout
      */
-    public static void validaMetodosPagoDisponibles(datosStep datosStep, Pais pais, boolean isEmpl, AppEcom app, Channel channel, DataFmwkTest dFTest) {
+    public static void validaMetodosPagoDisponibles(DatosStep datosStep, Pais pais, boolean isEmpl, AppEcom app, Channel channel, DataFmwkTest dFTest) {
         //Validaciones
         String descripValidac = 
             "1) El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país (" + pais.getListPagosEnOrdenPantalla(app, isEmpl).size() + ")";
@@ -131,11 +131,11 @@ public class PageCheckoutWrapperStpV {
     /**
      * Paso ficticio consistente en "no-clicar" el icono de VOTF.
      */
-    public static datosStep noClickIconoVotf(String nombrePagoTpvVOTF, DataFmwkTest dFTest) throws Exception {        
-        datosStep datosStep = null;
+    public static DatosStep noClickIconoVotf(String nombrePagoTpvVOTF, DataFmwkTest dFTest) throws Exception {        
+        DatosStep datosStep = null;
         
         //Step. No hacemos nada pues el pago con TPV en VOTF no tiene icono ni pasarelas asociadas
-        datosStep = new datosStep       (
+        datosStep = new DatosStep       (
             "<b>" + nombrePagoTpvVOTF + "</b>: no clickamos el icono pues no existe", 
             "No aplica");
         try {
@@ -149,7 +149,7 @@ public class PageCheckoutWrapperStpV {
     /**
      * Realiza una navegación (conjunto de pasos/validaciones) mediante la que se selecciona el método de envío y finalmente el método de pago 
      */
-    public static datosStep fluxSelectEnvioAndClickPaymentMethod(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep fluxSelectEnvioAndClickPaymentMethod(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         boolean pagoPintado = false;
         if (!dCtxPago.getFTCkout().isChequeRegalo)
@@ -177,7 +177,7 @@ public class PageCheckoutWrapperStpV {
         return pagoPintado;
     }
     
-    public static datosStep selectFranjaHorariaUrgente(Channel channel, DataFmwkTest dFTest) {
+    public static DatosStep selectFranjaHorariaUrgente(Channel channel, DataFmwkTest dFTest) {
         switch (channel) {
         case desktop:
             return SecMetodoEnvioDesktopStpV.selectFranjaHorariaUrgente(1, dFTest);
@@ -188,7 +188,7 @@ public class PageCheckoutWrapperStpV {
         }    
     }
 
-    public static datosStep selectMetodoEnvio(DataCtxPago dCtxPago, String nombrePago, AppEcom appE, Channel channel, DataFmwkTest dFTest) 
+    public static DatosStep selectMetodoEnvio(DataCtxPago dCtxPago, String nombrePago, AppEcom appE, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
         alterTypeEnviosAccordingContext(dCtxPago, appE, channel, dFTest.driver);
         Pago pago = dCtxPago.getDataPedido().getPago();
@@ -263,11 +263,11 @@ public class PageCheckoutWrapperStpV {
     /**
      * Paso consistente en clickar un determinado método de pago de la página de resumen de artículos (precompra)
      */
-    public static datosStep forceClickIconoPagoAndWait(Pais pais, Pago pago, Channel channel, boolean pintaNombrePago, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep forceClickIconoPagoAndWait(Pais pais, Pago pago, Channel channel, boolean pintaNombrePago, DataFmwkTest dFTest) throws Exception {
         String pintaPago = "";
         if (pintaNombrePago)
             pintaPago = "<b style=\"color:blue;\">" + pago.getNombre(channel) + "</b>:"; 
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             pintaPago + "Seleccionamos el icono/pestaña correspondiente al método de pago y esperamos la desaparición de los \"loading\"", 
             "La operación se ejecuta correctamente");
         try {
@@ -290,14 +290,14 @@ public class PageCheckoutWrapperStpV {
         return datosStep;
     }
     
-    public static void validateSelectPagoTRJintegrada(Pago pago, Pais pais, Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateSelectPagoTRJintegrada(Pago pago, Pais pais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         if (channel==Channel.desktop)
             validateIsPresentButtonCompraDesktop(datosStep, dFTest);
         
         PageCheckoutWrapperStpV.secTarjetaPci.validateIsSectionOk(pago, pais, channel, datosStep, dFTest);
     }
     
-    public static void validateSelectPagoNoTRJintegrada(Pago pago, Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateSelectPagoNoTRJintegrada(Pago pago, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         if (channel==Channel.desktop)
             validateIsPresentButtonCompraDesktop(datosStep, dFTest);
 
@@ -321,7 +321,7 @@ public class PageCheckoutWrapperStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static void validateIsPresentButtonCompraDesktop(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPresentButtonCompraDesktop(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
         "1) Aparece el botón de \"Confirmar Compra\"";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
@@ -340,14 +340,14 @@ public class PageCheckoutWrapperStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep inputDataTrjAndConfirmPago(DataCtxPago dCtxPago, Channel channel, DataFmwkTest dFTest) 
+    public static DatosStep inputDataTrjAndConfirmPago(DataCtxPago dCtxPago, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
         Pago pago = dCtxPago.getDataPedido().getPago();
         String descripcionStep = "Introducimos los datos de la tarjeta (" + pago.getTipotarj() + ") " + pago.getNumtarj() + " y pulsamos el botón \"Confirmar pago\"";
         if (dCtxPago.getFTCkout().trjGuardada)
             descripcionStep = "Seleccionamos la tarjeta guardada y pulsamos el botón \"Confirmar pago\""; 
         
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             descripcionStep, 
             "Aparece la página de resultado OK");
         try {
@@ -384,9 +384,9 @@ public class PageCheckoutWrapperStpV {
         return datosStep;
     }
     
-    public static datosStep clickSolicitarFactura(Channel channel, DataFmwkTest dFTest) {
+    public static DatosStep clickSolicitarFactura(Channel channel, DataFmwkTest dFTest) {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el radiobutton \"Quiero recibir una factura\"", 
             "Aparece el modal para la introducción de la dirección de facturación");
         try {
@@ -402,9 +402,9 @@ public class PageCheckoutWrapperStpV {
         return datosStep;
     }
     
-    public static datosStep clickEditarDirecEnvio(DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clickEditarDirecEnvio(DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el botón \"Editar\" asociado a la Dirección de Envío", 
             "Aparece el modal para la introducción de la dirección de envío");
         try {
@@ -421,8 +421,8 @@ public class PageCheckoutWrapperStpV {
     }
     
     //Seleccionar el botón necesario para aceptar la compra
-    public static datosStep pasoBotonAceptarCompraDesktop(DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = new datosStep (
+    public static DatosStep pasoBotonAceptarCompraDesktop(DataFmwkTest dFTest) throws Exception {
+        DatosStep datosStep = new DatosStep (
             "Seleccionamos el botón \"Confirmar Pago\"", 
             "Aparece una pasarela de pago");
         datosStep.setGrabImage(true);
@@ -440,9 +440,9 @@ public class PageCheckoutWrapperStpV {
     }
 
     //Seleccionar el botón "Ver resumen" de la página-2 de checkout (2. Datos de pago) de móvil 
-    public static datosStep pasoBotonVerResumenCheckout2Mobil(DataFmwkTest dFTest) throws Exception {
+    public static DatosStep pasoBotonVerResumenCheckout2Mobil(DataFmwkTest dFTest) throws Exception {
         int maxSecondsToWait = 2;
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionamos el botón \"Ver resumen\" (lo esperamos " + maxSecondsToWait + " segundos)", 
             "Aparece la página-3 del checkout");
         datosStep.setGrabImage(true);
@@ -476,9 +476,9 @@ public class PageCheckoutWrapperStpV {
     /**
      * Seleccionar el botón "Confirmar pago" de la página-3 de checkout (3. Resumen) de móvil
      */
-    public static datosStep pasoBotonConfirmarPagoCheckout3Mobil(DataFmwkTest dFTest) throws Exception {
+    public static DatosStep pasoBotonConfirmarPagoCheckout3Mobil(DataFmwkTest dFTest) throws Exception {
         int maxSecondsToWait = 20;
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionamos el botón \"Confirmar pago\" (esperamos hasta " + maxSecondsToWait + " a que desaparezca la capa \"Espera unos segundos...\")", 
             "Aparece una pasarela de pago");
         datosStep.setGrabImage(true);
@@ -498,9 +498,9 @@ public class PageCheckoutWrapperStpV {
         return datosStep;
     }    
     
-    public static datosStep inputTarjetaEmplEnCodPromo(Pais pais, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep inputTarjetaEmplEnCodPromo(Pais pais, Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step.
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Introducir la tarjeta de empleado " + pais.getAccesoEmpl().getTarjeta() + " y pulsar el botón \"Aplicar\"", 
             "Aparecen los datos para la introducción del 1er apellido y el nif");
         try {   
@@ -560,7 +560,7 @@ public class PageCheckoutWrapperStpV {
         return datosStep;
     }
     
-    public static datosStep inputDataEmplEnPromoAndAccept(DataBag dataBag, Pais pais, Channel channel, AppEcom app, DataFmwkTest dFTest) 
+    public static DatosStep inputDataEmplEnPromoAndAccept(DataBag dataBag, Pais pais, Channel channel, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
         //Step.
         String descrStep = "";
@@ -572,7 +572,7 @@ public class PageCheckoutWrapperStpV {
         
         String primerApellido = (new StringTokenizer(pais.getAccesoEmpl().getNombre(), " ")).nextToken();
     
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             descrStep + "Introducir el primer apellido " + primerApellido + " y pulsar el botón \"Guardar\"", 
             "Se aplican los descuentos correctamente");
         try {
@@ -596,7 +596,7 @@ public class PageCheckoutWrapperStpV {
         return datosStep;
     }
         
-    public static void validaResultImputPromoEmpl(DataBag dataBag, Channel channel, AppEcom app, datosStep datosStep, DataFmwkTest dFTest) 
+    public static void validaResultImputPromoEmpl(DataBag dataBag, Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
         if (channel==Channel.movil_web)
             Page1EnvioCheckoutMobilStpV.validaResultImputPromoEmpl(dataBag, app, datosStep, dFTest);
@@ -604,18 +604,18 @@ public class PageCheckoutWrapperStpV {
             Page1DktopCheckoutStpV.validaResultImputPromoEmpl(dataBag, app, datosStep, dFTest);
     }    
     
-    public static void validaIsVersionChequeRegalo(ChequeRegalo chequeRegalo, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaIsVersionChequeRegalo(ChequeRegalo chequeRegalo, DatosStep datosStep, DataFmwkTest dFTest) {
         Page1DktopCheckoutStpV.validateIsVersionChequeRegalo(chequeRegalo, datosStep, dFTest);
     }
 
     
-	public static datosStep selectBancoEPS(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+	public static DatosStep selectBancoEPS(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
         //Step.
 		String nombreBanco = "Easybank";
 		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest))
 			nombreBanco = "Test Issuer";
 		
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Escogemos el banco \"" + nombreBanco + "\" en la pestaña de selección", 
             "El banco aparece seleccionado");
         try {

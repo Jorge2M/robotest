@@ -7,7 +7,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -23,7 +23,7 @@ import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 @SuppressWarnings("javadoc")
 public class PageRegistroIniStpV {
     
-    public static void validaIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
     	int maxSecondsWait = 5;
         String descripValidac =
             "1) Aparece la página inicial del proceso de registro (la esperamos hasta " + maxSecondsWait + " segundos)";
@@ -44,7 +44,7 @@ public class PageRegistroIniStpV {
         HashMap<String,String> dataSended = new HashMap<>();
 
         //Step. Introducir datos en el registro según el país
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Introducir los datos correctos para el país " + pais.getNombre_pais() + " (Si aparece, seleccionar link de publicidad: <b>" + clickPubli + "</b>)", 
             "No aparece ningún mensaje de dato incorrecto");
         try {
@@ -71,9 +71,9 @@ public class PageRegistroIniStpV {
         return dataSended;
     }
     
-    public static datosStep sendFixedDataToInputs(ListDataRegistro dataToSend, DataFmwkTest dFTest) {
+    public static DatosStep sendFixedDataToInputs(ListDataRegistro dataToSend, DataFmwkTest dFTest) {
         //Step. Introducir datos en el registro
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Introducir los datos:<br>" + dataToSend.getFormattedHTMLData(PageData.pageInicial), 
             "En los datos incorrectos aparece error y en los correctos no");
         try {
@@ -117,10 +117,10 @@ public class PageRegistroIniStpV {
         return datosStep;
     }
     
-    public static datosStep clickRegistrateButton(Pais paisRegistro, boolean usrExists, AppEcom app, HashMap<String,String> dataRegistro, DataFmwkTest dFTest) 
+    public static DatosStep clickRegistrateButton(Pais paisRegistro, boolean usrExists, AppEcom app, HashMap<String,String> dataRegistro, DataFmwkTest dFTest) 
     throws Exception {
         //Step. 
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar el botón \"<b>Regístrate</b>\"", 
             "");
         try {
@@ -147,7 +147,7 @@ public class PageRegistroIniStpV {
         return datosStep;
     }
     
-	public static void validaIsInvisibleCapaLoading(datosStep datosStep, DataFmwkTest dFTest) {
+	public static void validaIsInvisibleCapaLoading(DatosStep datosStep, DataFmwkTest dFTest) {
 		int maxSecondsToWait = 3;
         String descripValidac =
             "1) Desparece la capa de loading (lo esperamos hasta " + maxSecondsToWait + " segundos)";         
@@ -163,7 +163,7 @@ public class PageRegistroIniStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
 	}
 	
-    private static void validaRegistroKO(Pais pais, boolean usrExists, datosStep datosStep, DataFmwkTest dFTest) {
+    private static void validaRegistroKO(Pais pais, boolean usrExists, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones para el caso de usuario ya existente
         if (usrExists) {
             String descripValidac =
@@ -206,7 +206,7 @@ public class PageRegistroIniStpV {
         }
     }
     
-    public static void validaRebajasJun2018(IdiomaPais idioma, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaRebajasJun2018(IdiomaPais idioma, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         String percentageSymbol = UtilsTestMango.getPercentageSymbol(idioma);
         String descripValidac = 
@@ -224,7 +224,7 @@ public class PageRegistroIniStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
     }
 
-	public static void validaIsRGPDVisible(datosStep datosStep, DataCtxShop dCtxSh, DataFmwkTest dFTest) {
+	public static void validaIsRGPDVisible(DatosStep datosStep, DataCtxShop dCtxSh, DataFmwkTest dFTest) {
 		//Validaciones
 		if (dCtxSh.pais.getRgpd().equals("S")) {
 			int maxSeconds = 1;

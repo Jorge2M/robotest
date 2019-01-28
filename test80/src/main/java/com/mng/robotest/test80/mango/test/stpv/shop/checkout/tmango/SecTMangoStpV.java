@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMa
 @SuppressWarnings("javadoc")
 public class SecTMangoStpV {
 
-    public static void validateIsSectionOk(Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsSectionOk(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Aparece el bloque de selección de la forma de pago<br>" +
             "2) Aparece disponible la modalidad de pago:<br>" +
@@ -41,9 +41,9 @@ public class SecTMangoStpV {
     /**
      * @param literalTipoPago contiene uno de los valores de SecTMango.pagoHabitual, SecTMango.tresMeses...
      */
-    public static datosStep clickTipoPago(TipoPago tipoPago, Channel channel, DataFmwkTest dFTest) {
+    public static DatosStep clickTipoPago(TipoPago tipoPago, Channel channel, DataFmwkTest dFTest) {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar la forma de pago \"" + SecTMango.getDescripcionTipoPago(tipoPago) + "\"", 
             "El resultado es correcto");
         try {

@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -19,7 +19,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 @SuppressWarnings("javadoc")
 public class PageSelectLineaVOTFStpV {
 
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) { 
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) { 
         String descripValidac = 
             "1) Aparece el banner correspondiente a SHE<br>" +
             "2) Aparece el banner correspondiente a MAN<br>" +
@@ -52,7 +52,7 @@ public class PageSelectLineaVOTFStpV {
     
     public static void selectMenuAndLogoMango(int numMenu, Pais pais, DataFmwkTest dFTest) throws Exception {
         //Step. 
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Seleccionar el " + numMenu + "o menu de " + LineaType.she + " y finalmente seleccionar el logo de Mango",
             "Aparece la página inicial de SHE");
         try {

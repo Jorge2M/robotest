@@ -13,7 +13,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
@@ -80,7 +80,7 @@ public class Footer extends GestorWebDriver {
         DataCtxShop dCtxSh = this.dCtsShThread.get();
         dCtxSh.userRegistered = false;
 
-        datosStep datosStep = AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        DatosStep datosStep = AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
         String urlInitialPage = dFTest.driver.getCurrentUrl();
         SecFooterStpV.validaLinksFooter(dCtxSh.channel, dCtxSh.appE, datosStep, dFTest);
         

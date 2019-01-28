@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sepa.PageSepa1rst;
@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 @SuppressWarnings("javadoc")
 public class PageSepa1rstStpV {
     
-    public static void validateIsPage(String nombrePago, String importeTotal, String codPais, Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(String nombrePago, String importeTotal, String codPais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Figura el bloque correspondiente al pago <b>" + nombrePago + "</b><br>" +
             "2) Aparece el importe de la compra: " + importeTotal + "<br>" +
@@ -64,7 +64,7 @@ public class PageSepa1rstStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep inputDataAndclickPay(String iban, String titular, String importeTotal, String codPais, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep inputDataAndclickPay(String iban, String titular, String importeTotal, String codPais, Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step
         String descripStep = "";
         if (channel==Channel.movil_web)
@@ -74,7 +74,7 @@ public class PageSepa1rstStpV {
             "  - Titular: <b>" + titular + "</b><br>" +
             "  - Cuenta: <b>" + iban + "</b></br>" +
             "Y pulsamos el botón <b>Pay</b>";                
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             descripStep, 
             "Aparece la página de resultado de pago OK de Mango");
         try {

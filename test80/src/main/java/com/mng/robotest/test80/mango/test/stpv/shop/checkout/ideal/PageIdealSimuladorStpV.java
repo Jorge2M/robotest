@@ -6,14 +6,14 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.ideal.PageIdealSimulador;
 
 @SuppressWarnings("javadoc")
 public class PageIdealSimuladorStpV {
     
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) { 
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) { 
         String descripValidac = 
             "1) Aparece la página de simulación de Ideal"; 
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);  
@@ -28,8 +28,8 @@ public class PageIdealSimuladorStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep clickContinueButton(DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = new datosStep       (
+    public static DatosStep clickContinueButton(DataFmwkTest dFTest) throws Exception {
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar el botón \"Continuar\"", 
             "El pago se realiza correctamente");
         try {

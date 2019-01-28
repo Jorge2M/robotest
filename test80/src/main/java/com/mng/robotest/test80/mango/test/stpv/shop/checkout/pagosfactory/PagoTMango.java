@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -22,9 +22,9 @@ public class PagoTMango extends PagoStpV {
     
     @SuppressWarnings("static-access")
     @Override
-    public datosStep testPagoFromCheckout(boolean execPay) throws Exception {
+    public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
         DataPedido dataPedido = this.dCtxPago.getDataPedido();
-        datosStep datosStep = PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
+        DatosStep datosStep = PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
         PageCheckoutWrapperStpV.secTMango.validateIsSectionOk(this.dCtxSh.channel, datosStep, this.dFTest);
         PageCheckoutWrapperStpV.secTMango.clickTipoPago(SecTMango.TipoPago.pagoHabitual, this.dCtxSh.channel, this.dFTest);
         datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);

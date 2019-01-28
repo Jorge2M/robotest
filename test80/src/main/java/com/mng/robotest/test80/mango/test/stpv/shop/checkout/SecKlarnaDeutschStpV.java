@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecKlarnaDeutsch;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecKlarnaDeut
 @SuppressWarnings("javadoc")
 public class SecKlarnaDeutschStpV {
     
-    public static void validateIsSection(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsSection(DatosStep datosStep, DataFmwkTest dFTest) {
         int maxSecondsToWait = 1;
         String descripValidac = 
             "1) Aparece el selector de la fecha de nacimiento (lo esperamos hasta un máximo de " + maxSecondsToWait + " segundos)";
@@ -33,8 +33,8 @@ public class SecKlarnaDeutschStpV {
     /**
      * @param fechaNaci en formato "dd-mm-aaaa"
      */
-    public static datosStep inputData(String fechaNaci, Channel channel, DataFmwkTest dFTest) {
-        datosStep datosStep = new datosStep (
+    public static DatosStep inputData(String fechaNaci, Channel channel, DataFmwkTest dFTest) {
+        DatosStep datosStep = new DatosStep (
             "Introducimos la fecha de nacimiento<b>" + fechaNaci + "</b> y marcamos el radio de <b>\"Acepto\"</b>", 
             "Los datos se informan correctamente");
         try {

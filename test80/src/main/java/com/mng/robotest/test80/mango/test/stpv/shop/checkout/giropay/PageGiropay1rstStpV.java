@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.giropay.PageGiropay1rst;
@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 @SuppressWarnings("javadoc")
 public class PageGiropay1rstStpV {
     
-    public static void validateIsPage(String nombrePago, String importeTotal, String codPais, Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(String nombrePago, String importeTotal, String codPais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Figura el bloque correspondiente al pago <b>" + nombrePago.toLowerCase() + "</b><br>" +
@@ -56,9 +56,9 @@ public class PageGiropay1rstStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep inputBank(String bankToInput, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep inputBank(String bankToInput, Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Introducimos el banco \"" + bankToInput + "\" y pulsamos \"TAB\"", 
             "Aparece un desplegable con dicho banco");
         try {
@@ -83,7 +83,7 @@ public class PageGiropay1rstStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
         
         //Step
-        datosStep = new datosStep     (
+        datosStep = new DatosStep     (
             "Movemos el foco del input de \"Bank\" mediante un  \"TAB\"", 
             "Aparece un desplegable con dicho banco");
         try {
@@ -110,9 +110,9 @@ public class PageGiropay1rstStpV {
         return datosStep;
     }
     
-    public static datosStep clickButtonContinuePay(Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clickButtonContinuePay(Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Pulsamos el botón para continuar con el Pago", 
             "Aparece la página de Test de introducción de datos de Giropay");
         try {

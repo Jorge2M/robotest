@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
@@ -17,8 +17,8 @@ public class PagoKlarnaDeutsch extends PagoStpV {
     
     @SuppressWarnings("static-access")
     @Override
-    public datosStep testPagoFromCheckout(boolean execPay) throws Exception {
-        datosStep datosStep = PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
+    public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
+        DatosStep datosStep = PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
         PageCheckoutWrapperStpV.secKlarnaDeutsch.validateIsSection(datosStep, this.dFTest);
         datosStep = PageCheckoutWrapperStpV.secKlarnaDeutsch.inputData("23-04-1974", this.dCtxSh.channel, this.dFTest);
         if (execPay) {

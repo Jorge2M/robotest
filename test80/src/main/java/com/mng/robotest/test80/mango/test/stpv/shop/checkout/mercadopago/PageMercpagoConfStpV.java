@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoConf;
@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageResultPagoStpV;
 @SuppressWarnings("javadoc")
 public class PageMercpagoConfStpV {
 
-    public static void validaIsPage(Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaIsPage(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Estamos en la página de confirmación del pago (la esperamos hasta " + maxSecondsToWait + " segundos)";   
@@ -30,9 +30,9 @@ public class PageMercpagoConfStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep clickPagar(Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clickPagar(Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step. 
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el botón \"Pagar\"", 
             "Aparece la página de resultado");
         try {

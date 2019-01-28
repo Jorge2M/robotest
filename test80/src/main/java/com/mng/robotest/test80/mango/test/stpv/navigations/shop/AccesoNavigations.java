@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.navigations.shop;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -79,9 +79,9 @@ public class AccesoNavigations {
             cambioPais(dCtxSh, dFTest);
     }
     
-    public static datosStep cambioPais(DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep cambioPais(DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
-        datosStep datosStep = null;
+        DatosStep datosStep = null;
         if (dCtxSh.channel==Channel.movil_web)
             datosStep = SecMenusWrapperStpV.secMenuUser.cambioPaisMobil(dCtxSh, dFTest);
         else

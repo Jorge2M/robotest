@@ -6,14 +6,14 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance.PagePostfRedirect;
 
 @SuppressWarnings("javadoc")
 public class PagePostfRedirectStpV {
 
-    public static void isPageAndFinallyDisappears(datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void isPageAndFinallyDisappears(DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         int maxSecondsToWait = 10;
         String descripValidac = 
             "1) Aparece una página de redirección con un botón OK<br>" +

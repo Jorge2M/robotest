@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -26,7 +26,7 @@ public class SecBuscadorStpV {
     /**
      * Utiliza el buscador para localizar una referencia y aplica validaciones específicas según la disponibilidad: disponible, no_disponible, algún_color_no_disponible
      */
-    public static datosStep searchArticuloAndValidateBasic(TypeArticleStock typeArticle, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep searchArticuloAndValidateBasic(TypeArticleStock typeArticle, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
     	ArticleStock articulo = ManagerArticlesStock.getArticleStock(typeArticle, dCtxSh);
     	return (searchArticuloAndValidateBasic(articulo, dCtxSh, dFTest));
@@ -35,10 +35,10 @@ public class SecBuscadorStpV {
     /**
      * Utiliza el buscador para localizar una referencia y aplica validaciones específicas según la disponibilidad: disponible, no_disponible, algún_color_no_disponible
      */
-    public static datosStep searchArticuloAndValidateBasic(ArticleStock articulo, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep searchArticuloAndValidateBasic(ArticleStock articulo, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Buscar un producto de tipo: <b>" + articulo.getType() + "</b> " +
             "(" + articulo.getReference() + " color:" + articulo.getColourCode() + ", size:" + articulo.getSize() + ")", 
             "Aparece una ficha de producto de typo <b>" + articulo.getType() + "</b>");
@@ -65,7 +65,7 @@ public class SecBuscadorStpV {
         if (categoriaExiste)
             categoriaExisteStr = "Sí";
         
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Introducir la categoría de producto <b>" + categoriaABuscar + " </b>(" + categoriaExisteStr + " existe)</b>", 
             "El resultado de la búsqueda es el correcto :-)");
         try {

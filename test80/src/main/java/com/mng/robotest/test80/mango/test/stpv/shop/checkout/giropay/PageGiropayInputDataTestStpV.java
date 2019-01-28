@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.giropay.PageGiropayInputDataTest;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.giropay.PageG
 @SuppressWarnings("javadoc")
 public class PageGiropayInputDataTestStpV {
     
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Aparece la página de Test para la introducción de los datos de Giropay (la esperamos hasta " + maxSecondsToWait + ")";
@@ -30,9 +30,9 @@ public class PageGiropayInputDataTestStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep inputDataAndClick(Pago pago, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep inputDataAndClick(Pago pago, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Introducimos los datos del pago:<br>" +
             "  - sc: <b>" + pago.getScgiropay() + "</b><br>" +
             "  - extensionSc: <b>" + pago.getExtscgiropay() + "</b><br>" +

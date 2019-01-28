@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques;
@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques.Tab
 @SuppressWarnings("javadoc")
 public class PageGestorChequesStpV {
 
-	public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+	public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
 		String descripValidac = 
 				"1) Estamos en la página \"" + PageGestorCheques.titulo + " \"";
 		datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
@@ -34,7 +34,7 @@ public class PageGestorChequesStpV {
 	}
 
 	public static void inputMailAndClickCorreoCliente(String mail, DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 				"Introducimos el email <b>" + mail + "</b> y damos click al botón \"Correo del cliente\"", 
 				"Muestra los cheques asociados al mail correctamente");
 		datosStep.setGrab_ErrorPageIfProblem(false);
@@ -66,7 +66,7 @@ public class PageGestorChequesStpV {
 	}
 	
 	public static void clickPedido(int numFila, String cheque, String mail, DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 				"Damos click al pedido de la " + numFila + "a fila", 
 				"Muestra la página de detalles del pedido");
 		datosStep.setGrab_ErrorPageIfProblem(false);
@@ -110,7 +110,7 @@ public class PageGestorChequesStpV {
 	}
 
 	public static void volverCheques (DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 				"Damos click a <b>Volver a cheques</b>",
 				"Muestra la página de información sobre los cheques");
 		datosStep.setGrab_ErrorPageIfProblem(false);
@@ -124,7 +124,7 @@ public class PageGestorChequesStpV {
 		validateButtons(datosStep, dFTest);
 	}
 
-	public static void validateButtons (datosStep datosStep, DataFmwkTest dFTest) {
+	public static void validateButtons (DatosStep datosStep, DataFmwkTest dFTest) {
 		String descripValidac =
 				"1) Existe el botón de <b>Id del pedido</b><br>"+
 				"2) Existe el botón de <b>Numero de cheque</b><br>"+
@@ -156,7 +156,7 @@ public class PageGestorChequesStpV {
 		finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
 	}
 
-	public static void validateDataFromCheque (datosStep datosStep, DataFmwkTest dFTest) {
+	public static void validateDataFromCheque (DatosStep datosStep, DataFmwkTest dFTest) {
 		String descripValidac =	"1) Existe la tabla que contiene <b>Activo</b><br>"+
 								"2) Existe la tabla que contiene <b>Divisa</b><br>"+
 								"3) Existe la tabla que contiene <b>Pedidos Realizados</b><br>"+
@@ -302,7 +302,7 @@ public class PageGestorChequesStpV {
 	}
 
 	public static void inputCheque (String cheque, DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep 	 	(
+		DatosStep datosStep = new DatosStep 	 	(
 				"Introducimos el numero de cheque con valor: <b>" + cheque + "</b>" ,
 				"Una vez hemos buscado dicho numero, nos aparece una tabla con información");
 		datosStep.setGrab_ErrorPageIfProblem(false);
@@ -323,7 +323,7 @@ public class PageGestorChequesStpV {
 	}
 
 	public static void chequeDetails (DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep		(
+		DatosStep datosStep = new DatosStep		(
 				"Accedemos al numero de cheque",
 				"Aparece toda la información de dicho cheque pero no un email");
 		datosStep.setGrab_ErrorPageIfProblem(false);

@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.ideal.SecIdeal;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.ideal.SecIdea
 
 public class SecIdealStpV {
 
-    public static void validateIsSectionOk(Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsSectionOk(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Aparece el bloque de selección del banco";
         
@@ -36,9 +36,9 @@ public class SecIdealStpV {
     /**
      * @param el valor de las opciones del banco a seleccionar contiene el "value" del listBox...
      */
-    public static datosStep clickBanco(BancoSeleccionado bancoSeleccionado, Channel channel, DataFmwkTest dFTest) {
+    public static DatosStep clickBanco(BancoSeleccionado bancoSeleccionado, Channel channel, DataFmwkTest dFTest) {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el banco \"" + bancoSeleccionado + "\"", 
             "El resultado es correcto");
         try {

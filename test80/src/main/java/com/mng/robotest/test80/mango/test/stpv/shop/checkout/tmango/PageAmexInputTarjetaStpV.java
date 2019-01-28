@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.PageAmexInputTarjeta;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -18,7 +18,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PageAmexInputTarjetaStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 
-    public static void validateIsPageOk(String importeTotal, String codPais, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPageOk(String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones 
         int maxSecondsToWait = 5;
         String descripValidac = 
@@ -53,10 +53,10 @@ public class PageAmexInputTarjetaStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep inputTarjetaAndPayButton(String numTarj, String mesCad, String anyCad, String Cvc, String importeTotal, String codigoPais, DataFmwkTest dFTest) 
+    public static DatosStep inputTarjetaAndPayButton(String numTarj, String mesCad, String anyCad, String Cvc, String importeTotal, String codigoPais, DataFmwkTest dFTest) 
     throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Introducimos los datos de la tarjeta: " + numTarj + " / " + mesCad + "-" + anyCad + " / " + Cvc + " y pulsamos el botón \"Pagar\""/*Descripción Test*/, 
             "Aparece la página de introducción del CIP");
         try {

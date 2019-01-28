@@ -6,14 +6,14 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageMispedidos;
 
 @SuppressWarnings("javadoc")
 public class PagePedidosStpV {
 
-    public static void validaIsPageSinPedidos(String usrRegistrado, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaIsPageSinPedidos(String usrRegistrado, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Aparece la página de \"Mis Pedidos\"<br>" +
             "2) La página contiene " + usrRegistrado + "<br>" +

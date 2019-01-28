@@ -111,7 +111,7 @@ public class TestNodos extends GestorWebDriver {
     public void NOD001_TestNodo(ITestContext context, Method method) throws Throwable {
         DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
         DataCtxShop dCtxSh = this.dCtsShThread.get();
-        datosStep datosStep = null;
+        DatosStep datosStep = null;
         AppEcom appE = this.nodo.getAppEcom();
         
         //Step+Validation. Acceso y testeo del estado del nodo (+ almacenamiento de datos en el gestor JSON)

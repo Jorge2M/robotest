@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalSuscripcion;
@@ -17,8 +17,8 @@ public class ModalSuscripcionStpV {
 	 /**
      * Validaciones del código fuente de la página para ver si están presentes o no los textos legales de RGPD
      */
-    public static datosStep validaRGPDModal(DataCtxShop dCtxSh, DataFmwkTest dFTest) {
-    	datosStep datosStep = new datosStep (
+    public static DatosStep validaRGPDModal(DataCtxShop dCtxSh, DataFmwkTest dFTest) {
+    	DatosStep datosStep = new DatosStep (
                 "Comprobar que se incluyen o no los textos legales de RGPD en el modal de suscripcion (el modal está en el HTML de la página no visible)<br>",
                 "Los textos existen en el código fuente dependiendo del pais");
         datosStep.setGrabNettrafic(dFTest.ctx);

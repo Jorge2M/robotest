@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageRecuperaPasswd;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 @SuppressWarnings("javadoc")
 public class PageRecuperaPasswdStpV {
     
-    public static void isPage(datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void isPage(DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
     	int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Aparece la pantalla de recuperación de la contraseña (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
@@ -39,7 +39,7 @@ public class PageRecuperaPasswdStpV {
     
     public static void inputMailAndClickEnviar(String email, DataFmwkTest dFTest) throws Exception {
         //Step.
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Introducir el email <b>" + email + "</b> y pulsar el botón \"Enviar\"", 
             "Aparece la página de cambio de contraseña");
         try {

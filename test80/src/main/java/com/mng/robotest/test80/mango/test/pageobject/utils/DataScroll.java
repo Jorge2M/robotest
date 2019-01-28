@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.utils;
 
 @SuppressWarnings("javadoc")
 public class DataScroll {
-    public com.mng.robotest.test80.arq.utils.controlTest.datosStep datosStep;
+    public com.mng.robotest.test80.arq.utils.controlTest.DatosStep datosStep;
     public int paginaFinal;
     public int articulosMostrados;
     public boolean finalAlcanzado;

@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
@@ -42,7 +42,7 @@ public class SecMenusWrapperStpV {
 	
     public static SecMenusUserStpV secMenuUser;
     
-    public static void validateLineas(Pais pais, AppEcom app, Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateLineas(Pais pais, AppEcom app, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = "";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
         try {
@@ -128,10 +128,10 @@ public class SecMenusWrapperStpV {
             SecMenusDesktopStpV.stepValidaCarrusels(pais, lineaNuevoOReb, app, dFTest);
     }
     
-    public static datosStep accesoMenuXRef(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep accesoMenuXRef(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         //Step
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Seleccionar el menú <b>" + menu1rstLevel + "</b>",
             "Se obtiene el catálogo de artículos asociados al menú");
         try {
@@ -162,7 +162,7 @@ public class SecMenusWrapperStpV {
         return datosStep;
     }
     
-    public static datosStep selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         if (dCtxSh.channel==Channel.movil_web)
             return SecMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, dFTest);
@@ -170,7 +170,7 @@ public class SecMenusWrapperStpV {
         return SecMenusDesktopStpV.selectMenuSuperiorTypeCatalog(menu1rstLevel, dCtxSh, dFTest);
     }
     
-    public static datosStep selectMenuLateral1erLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep selectMenuLateral1erLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         if (dCtxSh.channel==Channel.movil_web)
             return SecMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, dFTest); 
@@ -182,7 +182,7 @@ public class SecMenusWrapperStpV {
      * Validación de la selección de un menú lateral de 1er o 2o nivel 
      */
     @SuppressWarnings("static-access")
-	public static void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh, datosStep datosStep, DataFmwkTest dFTest)
+	public static void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh, DatosStep datosStep, DataFmwkTest dFTest)
     throws Exception {
         //Validaciones
     	int maxSecondsToWaitArticle = 3;
@@ -239,7 +239,7 @@ public class SecMenusWrapperStpV {
         PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, menu.getLinea(), analyticSet, datosStep, dFTest);
     }
     
-    public static datosStep seleccionLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep seleccionLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         if (sublineaType==null) {
             return seleccionLinea(lineaType, dCtxSh, dFTest);
@@ -248,7 +248,7 @@ public class SecMenusWrapperStpV {
         return seleccionSublinea(lineaType, sublineaType, dCtxSh, dFTest);
     }
     
-    public static datosStep seleccionLinea(LineaType lineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep seleccionLinea(LineaType lineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
             return SecMenuLateralMobilStpV.seleccionLinea(lineaType, dCtxSh.pais, dCtxSh.appE, dFTest);
         }
@@ -256,7 +256,7 @@ public class SecMenusWrapperStpV {
         return SecMenusDesktopStpV.seleccionLinea(lineaType, dCtxSh, dFTest);
     }
     
-    public static datosStep seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest)
+    public static DatosStep seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest)
     throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
             return SecMenuLateralMobilStpV.seleccionSublineaNinos(lineaType, sublineaType, dCtxSh, dFTest);
@@ -272,11 +272,11 @@ public class SecMenusWrapperStpV {
     		selectFiltroCollection(typeMenu, channel, app, dFTest);
     }
     
-    public static datosStep selectFiltroCollection(FilterCollection typeMenu, Channel channel, AppEcom app, DataFmwkTest dFTest) 
+    public static DatosStep selectFiltroCollection(FilterCollection typeMenu, Channel channel, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
         //Step.
     	SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app, dFTest.driver);
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar filtro de colecciones <b>" + typeMenu + "</b>", 
             "Aparece una galería con artículos de temporadas" + typeMenu.getListTempArticles());
         datosStep.setGrabNettrafic(dFTest.ctx);

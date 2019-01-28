@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
@@ -19,7 +19,7 @@ public class PageChequeRegaloInputDataStpV{
 
     public static void paginaConsultarSaldo(DataFmwkTest dFTest, String numTarjeta) throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
         	"Accedemos a la página de consultar saldo de cheque regalo con sus respectivos campos",
             "Aparecen todos los campos y volvemos a la operativa normal");
         try{
@@ -55,7 +55,7 @@ public class PageChequeRegaloInputDataStpV{
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
 
         //Step
-        datosStep datosStep2 = new datosStep    (
+        DatosStep datosStep2 = new DatosStep    (
         	"Introducimos en el campo de <b>tarjeta bancaria</b> " + numTarjeta + " para consultar el saldo",
             "Se carga la página donde salen nuevos campos visibles como el de <b>cvv</b>");
         try {
@@ -87,7 +87,7 @@ public class PageChequeRegaloInputDataStpV{
     /*TODO A la espera del cvv para completar esta parte*/
     public static void insertCVVConsultaSaldo(DataFmwkTest dFTest, String cvvNumber) throws Exception {
         //Step
-        datosStep datosStep = new datosStep   (
+        DatosStep datosStep = new DatosStep   (
             "Introducimos el CVV <b>" + cvvNumber + "</b> de la tarjeta",
             "Se vuelve a la página inicial del cheque regalo"/*Temporal*/);
         try {
@@ -122,7 +122,7 @@ public class PageChequeRegaloInputDataStpV{
         } finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
 
         //Step
-        datosStep = new datosStep(
+        datosStep = new DatosStep(
             "Usamos el boton de volver",
             "Estamos en la página inicial de <b>Cheque Regalo</b>");
         try {
@@ -148,7 +148,7 @@ public class PageChequeRegaloInputDataStpV{
 
     public static void seleccionarCantidades(DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep   (
+        DatosStep datosStep = new DatosStep   (
             "Seleccionamos la cantidad de <b>50€</b>",
             "Se comprueba que existen el resto de botones y está seleccionado el de <b>50€</b>");
         try {
@@ -182,7 +182,7 @@ public class PageChequeRegaloInputDataStpV{
 
     public static void clickQuieroComprarChequeRegalo(DataFmwkTest dFTest) throws Exception {
         //Step.
-        datosStep datosStep = new datosStep   (
+        DatosStep datosStep = new DatosStep   (
             "Seleccionar link \"Comprar ahora\"",
             "Aparece la capa para introducir los datos de la operación");
         try {
@@ -211,7 +211,7 @@ public class PageChequeRegaloInputDataStpV{
     
     public static void inputDataAndClickComprar(ChequeRegalo chequeRegalo, DataFmwkTest dFTest) throws Exception {
         //Step.
-        datosStep datosStep = new datosStep   (
+        DatosStep datosStep = new DatosStep   (
             "Introducir los datos del cheque y pulsar el botón <b>Comprar</b>:<br>" +
             "Nombre: <b>" + chequeRegalo.getNombre() + "</b><br>" +
             "Apellidos: <b>" + chequeRegalo.getApellidos() + "</b><br>" +

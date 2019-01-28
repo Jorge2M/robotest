@@ -2,16 +2,16 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.assist;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assist.PageAssistLast;
 
 @SuppressWarnings("javadoc")
 public class PageAssistLastStpV {
 
-    public static datosStep clickSubmit(DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clickSubmit(DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar el botón de Submit", 
             "Aparece la página de resultado de Mango");
         try {

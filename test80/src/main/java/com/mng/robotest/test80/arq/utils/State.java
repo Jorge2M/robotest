@@ -2,7 +2,7 @@ package com.mng.robotest.test80.arq.utils;
 
 @SuppressWarnings({"javadoc"})
 public enum State  {
-    Reservado(LevelState.Reservado, 0, "black"),
+    Undefined(LevelState.Reservado, 0, "black"),
     Ok(LevelState.OK, 1, "green"),
     Info(LevelState.INFO, 2, "blue"), 
     Info_NoHardcopy(LevelState.INFO, 3, "blue"), 

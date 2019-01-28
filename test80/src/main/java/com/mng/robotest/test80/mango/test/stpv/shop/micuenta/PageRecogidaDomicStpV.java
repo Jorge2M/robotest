@@ -6,14 +6,14 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageRecADomic;
 
 @SuppressWarnings("javadoc")
 public class PageRecogidaDomicStpV {
 
-    public static void vaidaIsPageSinDevoluciones(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void vaidaIsPageSinDevoluciones(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Aparece la página de Recogida a Domicilio<br>" +
             "2) Aparece la tabla de devoluciones<br>" +

@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSofort1rst;
@@ -18,7 +18,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSo
  */
 @SuppressWarnings("javadoc")
 public class PageSofortIconosBancoStpV {
-	public static void validateIsPage(Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+	public static void validateIsPage(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
 	    //Validaciones
         int maxSecondsToWait = 3;
 	    String descripValidac =
@@ -36,8 +36,8 @@ public class PageSofortIconosBancoStpV {
 	    finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
 	}
 	
-    public static datosStep clickIconoSofort(Channel channel, DataFmwkTest dFTest) throws Exception { 
-        datosStep datosStep = new datosStep     (
+    public static DatosStep clickIconoSofort(Channel channel, DataFmwkTest dFTest) throws Exception { 
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar el link hacia la siguiente página de Sofort", 
             "Aparece la página de selección del Banco");
         try {

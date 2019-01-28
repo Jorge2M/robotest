@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -17,7 +17,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 @SuppressWarnings({"javadoc", "static-access"})
 public class SecSelectorPreciosStpV {
 
-    public static void validaIsSelector(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaIsSelector(DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         String descripValidac = 
             "1) Es visible el selector de precios"; 
@@ -37,7 +37,7 @@ public class SecSelectorPreciosStpV {
      * Selecciona un intervalo de precio mínimo/precio máximo. 
      * No es posible pasar como parámetro el mínimo/máximo pues lo único que podemos hacer es 'click por la derecha' + 'click por la izquierda'
       */
-    public static datosStep seleccionaIntervalo(AppEcom app, DataFmwkTest dFTest) 
+    public static DatosStep seleccionaIntervalo(AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
     
         int minimoOrig = 0;
@@ -47,7 +47,7 @@ public class SecSelectorPreciosStpV {
         String tagMinimo = "[MINIMO]";
         String tagMaximo = "[MAXIMO]";
             
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Utilizar el selector de precio: Mínimo=" + tagMinimo + " Máximo=" + tagMaximo, 
             "Aparecen artículos con precio en el intervalo seleccionado");
         try {

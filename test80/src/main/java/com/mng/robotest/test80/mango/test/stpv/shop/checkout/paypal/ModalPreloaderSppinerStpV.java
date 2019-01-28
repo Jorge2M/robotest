@@ -6,17 +6,17 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal.ModalPreloaderSpinner;
 
 public class ModalPreloaderSppinerStpV {
-	public static void validateAppearsAndDisappears(datosStep datosStep, DataFmwkTest dFTest) {
+	public static void validateAppearsAndDisappears(DatosStep datosStep, DataFmwkTest dFTest) {
 		validateIsVisible(2, datosStep, dFTest);
 		validateIsVanished(10, datosStep, dFTest);
 	}
 	
-    public static void validateIsVisible(int maxSecondsWait, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsVisible(int maxSecondsWait, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         String descripValidac =
             "1) Aparece el icono del candado de \"Cargando\" (lo esperamos un máximo de " + maxSecondsWait + ")";   
@@ -32,7 +32,7 @@ public class ModalPreloaderSppinerStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
 	
-    public static void validateIsVanished(int maxSecondsWait, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsVanished(int maxSecondsWait, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         String descripValidac =
             "1) Desaparece el icono del candado de \"Cargando\" (lo esperamos un máximo de " + maxSecondsWait + ")";   

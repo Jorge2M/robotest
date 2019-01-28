@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -26,14 +26,14 @@ public class PagoEps extends PagoStpV {
     }
     
     @Override
-    public datosStep testPagoFromCheckout(boolean execPay) throws Exception {
+    public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
     	//TODO mantener hasta que se elimine el actual TestAB para la aparición o no del pago EPS
     	//activateTestABforMethodEPS();
     	this.dFTest.driver.navigate().refresh();
     	
         PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
         PageCheckoutWrapperStpV.selectBancoEPS(this.dCtxPago, this.dCtxSh, this.dFTest);
-        datosStep datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
+        DatosStep datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
         if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest)) {
         	PageEpsSimuladorStpV.validateIsPage(datosStep, dFTest);
         	PageEpsSimuladorStpV.selectDelay(TypeDelay.OneMinutes, dFTest);

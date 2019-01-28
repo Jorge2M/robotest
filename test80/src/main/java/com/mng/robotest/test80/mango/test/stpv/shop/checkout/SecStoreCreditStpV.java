@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -24,10 +24,10 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class SecStoreCreditStpV { 
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
-    public static datosStep validateInitialStateOk(Channel channel, DataCtxPago dCtxPago, DataFmwkTest dFTest) 
+    public static DatosStep validateInitialStateOk(Channel channel, DataCtxPago dCtxPago, DataFmwkTest dFTest) 
     throws Exception {
         String nombrePago = dCtxPago.getDataPedido().getPago().getNombre(channel);
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Revisamos el bloque de \"Saldo en cuenta\"", 
             "Sólo aparece el método de pago " + nombrePago);
         try {
@@ -43,12 +43,12 @@ public class SecStoreCreditStpV {
         return datosStep;
     }
 
-    public static datosStep selectSaldoEnCuentaBlock(Pais pais, DataCtxPago dCtxPago, AppEcom app, Channel channel, DataFmwkTest dFTest) 
+    public static DatosStep selectSaldoEnCuentaBlock(Pais pais, DataCtxPago dCtxPago, AppEcom app, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
         boolean marcadoInicialmente = Page1DktopCheckout.secStoreCredit.isChecked(dFTest.driver);
         
         //Step (seleccionamos el bloque de saldo en cuenta)"
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionamos el bloque de \"Saldo en cuenta\"", 
             "Aparecen el resto de métodos de pago");
         try {
@@ -99,7 +99,7 @@ public class SecStoreCreditStpV {
     /**
      * Valida que aparezca un bloque válido correspondiente al pago con "Saldo en Cuenta"
      */
-    public static void validaBloqueSaldoEnCuenta(datosStep datosStep, boolean marcado, Channel channel, DataCtxPago dCtxPago, DataFmwkTest dFTest) {
+    public static void validaBloqueSaldoEnCuenta(DatosStep datosStep, boolean marcado, Channel channel, DataCtxPago dCtxPago, DataFmwkTest dFTest) {
         float saldoCta = dCtxPago.getSaldoCta();
         DataBag dataBag = dCtxPago.getDataPedido().getDataBag(); 
         float importeSubTotal = dataBag.getImporteTotalFloat();

@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -32,7 +32,7 @@ public class PagePedidosMantoStpV {
      * Se valida que está apareciendo una línea de pedido con los datos del pedido
      * @return si existe el link correspondiente al código de pedido 
      */
-    public static boolean validaLineaPedido(DataPedido dataPedido, AppEcom appE, datosStep datosStep, DataFmwkTest dFTest) {
+    public static boolean validaLineaPedido(DataPedido dataPedido, AppEcom appE, DatosStep datosStep, DataFmwkTest dFTest) {
 //    	//TODO tratamiento específico temporal para el entorno de CI con Adyen -> Level.Info 
 //    	//(hasta que dispongamos de la CI que despliega Adyen y el resto de artefactos satelitales)
 //        State levelByCIAdyen = State.Warn;
@@ -101,7 +101,7 @@ public class PagePedidosMantoStpV {
 		int posicionPedidoActual = 6;
 		int posicionMaxPaginaPedidos = 105;
 
-		datosStep datosStep = new datosStep(
+		DatosStep datosStep = new DatosStep(
 				"Buscamos pedidos con id registro",
 				"Debemos obtener el ID del pedido");
 		datosStep.setGrab_ErrorPageIfProblem(false);
@@ -159,7 +159,7 @@ public class PagePedidosMantoStpV {
 		List<String> referencias = new ArrayList<>();
 		ArticuloScreen articulo;
 
-		datosStep datosStep = new datosStep("Buscamos pedidos con id registro para obtener información del cliente",
+		DatosStep datosStep = new DatosStep("Buscamos pedidos con id registro para obtener información del cliente",
 				"Debemos obtener la información del cliente");
 		datosStep.setGrab_ErrorPageIfProblem(false);
 		try {
@@ -205,7 +205,7 @@ public class PagePedidosMantoStpV {
 	 * @return DataPedido con la información del cliente seteada
 	 */
 	public static DataPedido getDataCliente(DataPedido dPedidoPrueba, DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep("Buscamos pedidos con id registro para obtener información del cliente",
+		DatosStep datosStep = new DatosStep("Buscamos pedidos con id registro para obtener información del cliente",
 				"Debemos obtener la información del cliente");
 		datosStep.setGrab_ErrorPageIfProblem(false);
 		try {
@@ -258,7 +258,7 @@ public class PagePedidosMantoStpV {
 			throws Exception {
 		DataDeliveryPoint dEnvioPrueba = new DataDeliveryPoint();
 
-		datosStep datosStep = new datosStep(
+		DatosStep datosStep = new DatosStep(
 			"Un pedido con tienda física en la lista de pedidos",
 			"Debemos obtener una tienda física válida");
 		datosStep.setGrab_ErrorPageIfProblem(false);

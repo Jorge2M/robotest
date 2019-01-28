@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.otras.PageGoogle;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
@@ -17,7 +17,7 @@ public class GoogleStpV {
 
     public static void accessGoogleAndSearchMango(DataFmwkTest dFTest) throws Exception {
         //Step. 
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Accedemos a la URL <b> " + PageGoogle.URLacceso + "</b> y buscamos \"MANGO\"", 
             "Aparecen los links de Mango con contenido correcto");
         try {
@@ -49,7 +49,7 @@ public class GoogleStpV {
 
     public static void selectFirstLinkSinPublicidad(DataFmwkTest dFTest) throws Exception { 
         //Step.
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionamos el 1er link normal (sin publicidad)", 
             "Aparece la página inicial de la shop de Mango");
         try {

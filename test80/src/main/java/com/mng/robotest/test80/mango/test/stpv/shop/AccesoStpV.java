@@ -12,7 +12,7 @@ import org.json.simple.JSONObject;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -45,7 +45,7 @@ public class AccesoStpV {
      * Accedemos a la aplicación (shop/outlet/votf)
      * Se ejecutan todas las acciones en un único paso
      */
-    public static datosStep accesoAplicacionEnUnPaso(DataCtxShop dCtxSh, boolean clearArticulos, DataFmwkTest dFTest) 
+    public static DatosStep accesoAplicacionEnUnPaso(DataCtxShop dCtxSh, boolean clearArticulos, DataFmwkTest dFTest) 
     throws Exception {
         String registro = "";
         if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf)
@@ -54,7 +54,7 @@ public class AccesoStpV {
         if (clearArticulos)
             registro+= "Borrar la Bolsa/Favoritos<br>";              
 
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Acceder a Mango (" + dCtxSh.pais.getNombre_pais() + "/" + dCtxSh.idioma.getCodigo().getLiteral() + ")<br>" + registro, 
             "Se accede correctamente");
         datosStep.setGrabNettrafic(dFTest.ctx);
@@ -85,7 +85,7 @@ public class AccesoStpV {
 	/**
      * Validaciones posteriores a la identificación con un usuario/password
      */
-    public static void validaIdentificacionEnShop(DataCtxShop dCtxSh, datosStep datosStep, DataFmwkTest dFTest) 
+    public static void validaIdentificacionEnShop(DataCtxShop dCtxSh, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
         //Validaciones
         int maxSecondsToWait = 5;
@@ -179,8 +179,8 @@ public class AccesoStpV {
      * Accedemos a la aplicación (shop/outlet/votf)
      * Se ejecutan cada acción en un paso
      */
-    public static datosStep accesoAplicacionEnVariosPasos(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = null;
+    public static DatosStep accesoAplicacionEnVariosPasos(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+        DatosStep datosStep = null;
         if (dCtxSh.appE==AppEcom.votf && !dCtxSh.userRegistered) { //En VOTF no tiene sentido identificarte con las credenciales del cliente
             //Steps Login Votf + Selección idioma
             datosStep = AccesoStpV.accesoVOTFtoHOME(dCtxSh, dFTest);                    
@@ -203,13 +203,13 @@ public class AccesoStpV {
         return datosStep;
     }    
     
-    public static datosStep identificacionEnMango(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = new datosStep();
+    public static DatosStep identificacionEnMango(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+        DatosStep datosStep = new DatosStep();
 
         //Si existe el link "Cerrar sesión" nos damos por registrados y no hacemos nada
         if (!SecMenusUserWrap.isPresentCerrarSesion(dCtxSh.channel, dFTest.driver)) {
             //Step
-            datosStep = new datosStep (
+            datosStep = new DatosStep (
                 "Seleccionar \"Iniciar Sesión\" e identificarse con " + dCtxSh.userConnected + " / " + dCtxSh.passwordUser, 
                 "La identificación es correcta" /* Resultado esperado */);
             datosStep.setGrabHTML(true);
@@ -229,11 +229,11 @@ public class AccesoStpV {
     }
     
     //Acceso a VOTF (identificación + selección idioma + HOME she)
-    public static datosStep accesoVOTFtoHOME(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep accesoVOTFtoHOME(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
         String urlAcceso = (String)dFTest.ctx.getAttribute("appPath");
         int numIdiomas = dCtxSh.pais.getListIdiomas().size();
         
-        datosStep datosStep = PageLoginVOTFStpV.goToAndLogin(urlAcceso, dCtxSh, dFTest);
+        DatosStep datosStep = PageLoginVOTFStpV.goToAndLogin(urlAcceso, dCtxSh, dFTest);
         if (numIdiomas > 1)
             datosStep = PageSelectIdiomaVOTFStpV.selectIdiomaAndContinue(dCtxSh.idioma, dFTest);
         
@@ -266,7 +266,7 @@ public class AccesoStpV {
         String nodoDestino = WebDriverMngUtils.getNodeFromErrorPage(dFTest.driver);
         
         // STEP (TEMPORAL) INFORMAR DE LOS PAÍSES / NODOS
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Datos del cambio de país <br>" + 
             "<b>" + dCtxSh.pais.getNombre_pais() + "</b> (" + dCtxSh.pais.getCodigo_pais() + "), <b>idioma " + dCtxSh.idioma.getCodigo().getLiteral() + "</b>. Nodo: <b style=\"color:blue\">" + nodoOrigen + "</b><br>" +  
             "<b>" + paisDestino.getNombre_pais() + "</b> (" + paisDestino.getCodigo_pais() + "), <b>idioma " + idiomaDestino.getCodigo().getLiteral() + "</b>. Nodo: <b style=\"color:blue\">" + nodoDestino +  "</b>",
@@ -299,7 +299,7 @@ public class AccesoStpV {
         IdiomaPais idiomaOrigen = paisAccesoNoIP.getListIdiomas().get(0);
         
         //Step. Accede a la shop vía la URL de un país <> al asociado a la IP
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Acceder a la shop vía la URL <b>" + urlAccesoPaisNoIp + "</b> (" + paisAccesoNoIP.getNombre_pais() + " / " + idiomaOrigen.getCodigo().getLiteral() + ")", 
             "Aparece un modal solicitando confirmación del país");
         try {
@@ -325,7 +325,7 @@ public class AccesoStpV {
      * Valicaciones correspondientes al caso en que después del acceso SÍ aparece el modal de confirmacióin del país
      * @return el país asociado a la IP (al que te proponen cambiar en el modal)
      */
-    private static Pais validacAccesoSiApareceModal(datosStep datosStep, String urlBaseTest, Pais paisAccesoNoIP, Pais paisAccesoPrevio, Pais paisConfirmado, List<Pais> listPaisAsocIP, DataFmwkTest dFTest) 
+    private static Pais validacAccesoSiApareceModal(DatosStep datosStep, String urlBaseTest, Pais paisAccesoNoIP, Pais paisAccesoPrevio, Pais paisConfirmado, List<Pais> listPaisAsocIP, DataFmwkTest dFTest) 
     throws Exception {
         Pais paisAsocIP = null;
         
@@ -404,7 +404,7 @@ public class AccesoStpV {
      * Valicaciones correspondientes al caso en que después del acceso NO aparece el modal de confirmacióin del país
      * @throws Exception
      */
-    private static void validacAccesoNoApareceModal(datosStep datosStep, String urlBaseTest, Pais paisPrevConf, DataFmwkTest dFTest) throws Exception {
+    private static void validacAccesoNoApareceModal(DatosStep datosStep, String urlBaseTest, Pais paisPrevConf, DataFmwkTest dFTest) throws Exception {
         String nombrePaisPrevConf = paisPrevConf.getNombre_pais();
         String hrefPaisPrevConf = paisPrevConf.getUrlPaisEstandar(urlBaseTest);
         
@@ -431,13 +431,13 @@ public class AccesoStpV {
     /**
      * Se selecciona el botón de confirmación del país existente en el modal de cambio de país
      */
-    public static datosStep selectConfirmPaisModal(DataFmwkTest dFTest) throws Exception {
+    public static DatosStep selectConfirmPaisModal(DataFmwkTest dFTest) throws Exception {
         //Obtenemos el país y el HRef asociados al botón para confirmar el cambio de país
         String paisBotonCambio = ModalCambioPais.getTextPaisButtonChagePais(dFTest.driver);
         String hrefBotonCambioPais = ModalCambioPais.getHRefPaisButtonChagePais(dFTest.driver);
         
         //Step. Confirmamos el país indicado en el modal
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Confirmamos la propuesta de país del modal <b>" + paisBotonCambio + "</b>", 
             "Se redirige a la URL " + hrefBotonCambioPais);
         try {
@@ -467,9 +467,9 @@ public class AccesoStpV {
      * Accede y testea el estado de un nodo concreto de amazon (especificado mediante cookies de sesión). Almacena los datos obtenidos mediante llamada a la URL de status 
      * @param urlControl url para testear el estado del nodo
      */
-    public static datosStep testNodoState(NodoStatus nodo, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep testNodoState(NodoStatus nodo, DataFmwkTest dFTest) throws Exception {
         //Step. Comprobamos si el nodo responde
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Invocamos a <b>" + nodo.getStatusJSON().pathStatus + "</b> para obtener los datos JSON", 
             "El nodo se encuentra en un estado correcto");
         datosStep.setGrabHTML(true);
@@ -498,7 +498,7 @@ public class AccesoStpV {
     /**
      * Validaciones comparativa del status de 2 nodos concretos
      */
-    public static void validaCompareStatusNodos(datosStep datosStep, NodoStatus nodoAct, NodoStatus nodoAnt, DataFmwkTest dFTest) throws Exception {
+    public static void validaCompareStatusNodos(DatosStep datosStep, NodoStatus nodoAct, NodoStatus nodoAnt, DataFmwkTest dFTest) throws Exception {
         //Obtenemos el stock actual
         JSONObject stockAct = nodoAct.getStatusJSON().getWarehouses();
         

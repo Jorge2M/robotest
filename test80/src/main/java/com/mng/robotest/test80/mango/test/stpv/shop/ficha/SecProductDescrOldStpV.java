@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld;
@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrO
 @SuppressWarnings("javadoc")
 public class SecProductDescrOldStpV {
     
-    public static void validateAreInStateInitial(AppEcom appE, datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void validateAreInStateInitial(AppEcom appE, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         String descripValidac = "";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
         try {               
@@ -43,7 +43,7 @@ public class SecProductDescrOldStpV {
         //Step.
         TypeStatePanel statePanelIni = SecProductDescrOld.getStatePanel(typePanel, dFTest.driver);
         TypeStatePanel stateExpectedAfterClick = SecProductDescrOld.getStatePanelAfterClick(statePanelIni);
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el panel <b>" + typePanel + "</b> (en estado inicial: " + statePanelIni + ")",
             "La pestaña queda en estado " + stateExpectedAfterClick);
         try {

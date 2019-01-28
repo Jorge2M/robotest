@@ -137,7 +137,7 @@ public class FichaProducto extends GestorWebDriver {
         dCtxSh.idioma=this.castellano;
 
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
-        datosStep datosStep = SecBuscadorStpV.searchArticuloAndValidateBasic(TypeArticleStock.articlesWithTotalLook, dCtxSh, dFTest);
+        DatosStep datosStep = SecBuscadorStpV.searchArticuloAndValidateBasic(TypeArticleStock.articlesWithTotalLook, dCtxSh, dFTest);
         
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dFTest);
         if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {

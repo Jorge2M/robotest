@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -28,7 +28,7 @@ public class SecFooterStpV {
     /**
      * Valida que existe el footer con todas sus componentes
      */
-    public static void validaLinksFooter(Channel channel, AppEcom app, datosStep datosStep, DataFmwkTest dFTest) throws Exception { 
+    public static void validaLinksFooter(Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) throws Exception { 
         //Validaciones
     	List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(app, channel);
         String descripValidac = 
@@ -49,12 +49,12 @@ public class SecFooterStpV {
      * @param pageInNewTab indica si el link abrirá la página en una nueva ventana
      * @param closeTabAtEnd indicamos si queremos que finalmente se cierre la ventana o no (porque posteriormente queremos proseguir con la prueba)
      */
-    public static datosStep clickLinkFooter(FooterLink typeFooter, boolean closeAtEnd, Channel channel, AppEcom app, DataFmwkTest dFTest) 
+    public static DatosStep clickLinkFooter(FooterLink typeFooter, boolean closeAtEnd, Channel channel, AppEcom app, DataFmwkTest dFTest) 
     throws Exception { 
         //Step
     	PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter, channel);
     	String windowFatherHandle;
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar el link del footer <b>" + typeFooter + "</b><br>", 
             "Se redirige a la pantalla de " + pageObject.getName());
         try {
@@ -106,7 +106,7 @@ public class SecFooterStpV {
     /**
      * Método que valida la existencia del número de teléfono en el apartado Preguntas frecuentes
      */    
-    public static void validaPaginaAyuda(Channel channel, datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void validaPaginaAyuda(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         //Validación
         String telefono = "901 150 543";
         String descripValidac = 
@@ -132,12 +132,12 @@ public class SecFooterStpV {
      */    
      public static void checkSolicitarTarjeta (Channel channel, DataFmwkTest dFTest) throws Exception {
          String ventanaPadre = "";
-         datosStep datosStep = null;
+         DatosStep datosStep = null;
          String descripValidac = "";
          String ventanaOriginal = dFTest.driver.getWindowHandle();
 
          //Step
-         datosStep = new datosStep       (
+         datosStep = new DatosStep       (
              "Seleccionar el botón con fondo negro \"¡La quiero ahora!\"",
              "La página hace scroll hasta el formulario previo de solicitud de la tarjeta");
          try {
@@ -185,7 +185,7 @@ public class SecFooterStpV {
     
              
              //Step 
-             datosStep = new datosStep		 (
+             datosStep = new DatosStep		 (
             		 "Seleccionamos el botón \"¡Lo quiero ahora!\" que aparece debajo del formulario",
             		 "Se abre una nueva pestaña del Banc Sabadell con un modal y texto \"Solicitud de tu MANGO Card\"");
              try {
@@ -223,7 +223,7 @@ public class SecFooterStpV {
         
                  
              //Step
-             datosStep = new datosStep       (
+             datosStep = new DatosStep       (
                  "Seleccionar el botón \"Continuar\"", 
                  "Aparece la página del formulario de solicitud de la tarjeta");
              try {
@@ -281,9 +281,9 @@ public class SecFooterStpV {
          }
      }
      
-     public static datosStep cambioPais(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+     public static DatosStep cambioPais(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
          //Step. 
-         datosStep datosStep = new datosStep(
+         DatosStep datosStep = new DatosStep(
              "Se selecciona el link para el cambio de país", 
              "Aparece el modal para el cambio de país");
          try {
@@ -306,8 +306,8 @@ public class SecFooterStpV {
       * Validaciones del código fuente de la página para ver si están presentes o no los textos legales de RGPD
      * @throws Exception 
       */
-     public static datosStep validaRGPDFooter(Boolean clickRegister, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
-     	datosStep datosStep = new datosStep (
+     public static DatosStep validaRGPDFooter(Boolean clickRegister, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+     	DatosStep datosStep = new DatosStep (
                  "Hacer click en el cuadro de suscripción del footer<br>",
                  "Aparecen los textos legales de RGPD");
      	try {

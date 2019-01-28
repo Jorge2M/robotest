@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorEstadisticasPedido;
 
@@ -15,7 +15,7 @@ public class PageGestorEstadisticasPedidoStpV {
 
 
 
-	public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+	public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
 		String descripValidac = 
 				"1) Estamos en la página \"" + PageGestorEstadisticasPedido.titulo + " \"<br>" +
 				"2) Aparece el input de fecha de inicio<br>" + 
@@ -43,7 +43,7 @@ public class PageGestorEstadisticasPedidoStpV {
 	
 	
 	public static void searchZalandoOrdersInformation(DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 				"Seleccionamos \"Todos los zalandos\" y damos click a \"Mostrar Pedidos\"", 
 				"Muestra la tabla de información correctamente");
 		datosStep.setGrab_ErrorPageIfProblem(false);
@@ -82,7 +82,7 @@ public class PageGestorEstadisticasPedidoStpV {
 	
 
 	public static void compareLastDayInformation(DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 				"Seleccionamos el radio \"Día Anterior\" y damos click a \"Comparar\"", 
 				"Se muestran las celdas rojas y verdes con valores correctos");
 		datosStep.setGrab_ErrorPageIfProblem(false);

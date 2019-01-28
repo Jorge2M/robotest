@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -34,9 +34,9 @@ import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV
 @SuppressWarnings({"javadoc", "static-access"})
 public class SecMenusUserStpV {
     
-    public static datosStep selectFavoritos(DataFavoritos dataFavoritos, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep selectFavoritos(DataFavoritos dataFavoritos, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
         //Step.
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar el menú de usuario \"Favoritos\"", 
             "Aparece la página de gestión de favoritos con los artículos correctos");
         try {
@@ -52,10 +52,10 @@ public class SecMenusUserStpV {
         return datosStep;
     }
     
-    public static datosStep selectRegistrate(Channel channel, DataCtxShop dCtxSh,  DataFmwkTest dFTest) 
+    public static DatosStep selectRegistrate(Channel channel, DataCtxShop dCtxSh,  DataFmwkTest dFTest) 
     throws Exception {
         //Step.
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar el menú de usuario \"Regístrate\"", 
             "Aparece al página inicial del registro");
         datosStep.setGrabHTML(true);
@@ -77,7 +77,7 @@ public class SecMenusUserStpV {
     
     public static void logoff(Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step. Cerrar sesión + Identificarse
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Clicar el link de Logoff para cerrar la sesión", 
             "Aparece el link de login");
         try {
@@ -108,7 +108,7 @@ public class SecMenusUserStpV {
         logoff(channel, dFTest);
         
         //Step. Identificarse
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Identificarse con los datos del registro (" + userConnect + " / " + userPassword + ")", 
             "La nueva identificación es correcta");
         try {
@@ -138,7 +138,7 @@ public class SecMenusUserStpV {
     
 	public static void clickMenuMiCuenta(Channel channel, AppEcom app, DataFmwkTest dFTest) throws Exception {
         //Step.
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar el link \"Mi cuenta\"", 
             "Aparece la página de \"Mi cuenta\"");
         try {
@@ -151,9 +151,9 @@ public class SecMenusUserStpV {
         PageMiCuentaStpV.validateIsPage(datosStep, dFTest);
 	}
     
-    public static datosStep cambioPaisMobil(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep cambioPaisMobil(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
         //Step. Seleccionamos el link para el cambio de país
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Se selecciona el menú para el cambio de país", 
             "Aparece el modal para el cambio de país");
         try {

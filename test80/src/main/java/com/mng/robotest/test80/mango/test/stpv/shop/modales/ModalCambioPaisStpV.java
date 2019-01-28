@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.PageHomeMarcasStpV;
 @SuppressWarnings("javadoc")
 public class ModalCambioPaisStpV {
     
-    public static void validateIsVisible(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsVisible(DatosStep datosStep, DataFmwkTest dFTest) {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Aparece el modal de selección de país (lo esperamos hasta " + maxSecondsToWait + " segundos)"; 
@@ -32,10 +32,10 @@ public class ModalCambioPaisStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep cambioPais(DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep cambioPais(DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         //Step
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Cambiamos al país <b>" + dCtxSh.pais.getNombre_pais() + "</b> (" + dCtxSh.pais.getCodigo_pais() + "), idioma <b>" + dCtxSh.idioma.getCodigo().getLiteral() + "</b>", 
             "Se accede a la shop de " + dCtxSh.pais.getNombre_pais() + " en " + dCtxSh.idioma.getCodigo().getLiteral());
         try {

@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoreanConfirmation;
 
@@ -17,7 +17,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditc
 public class PageKoreanConfirmatioStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {    
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {    
         String descripValidac = 
     		"1) Aparece la página para la confirmación de la compra";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
@@ -32,9 +32,9 @@ public class PageKoreanConfirmatioStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep clickConfirmarButton(DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clickConfirmarButton(DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar el botón para Confirmar", 
             "Aparece la página de Mango de resultado OK del pago");
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);    

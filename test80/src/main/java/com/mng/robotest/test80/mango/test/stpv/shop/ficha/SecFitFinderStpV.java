@@ -6,14 +6,14 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecFitFinder;
 
 @SuppressWarnings("javadoc")
 public class SecFitFinderStpV {
     
-    public static void validateIsOkAndClose(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsOkAndClose(DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         int maxSecondsToWait = 2;
         String descripValidac = 

@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.utils;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -111,7 +111,7 @@ public class ControlPeriodicoURLs extends GestorWebDriver /*Funcionalidades gen�
                 Pais pais = controlPeriodicoURLsList.getPais();
                 
                 //Step. Acceder a la shop vía la URL del país origen
-                datosStep datosStep = new datosStep(
+                DatosStep datosStep = new DatosStep(
                     "Acceder a la shop vía la URL <b>" + urlAccesoIdiomaOr + "</b> (" + pais.getNombre_pais() + " / " + controlPeriodicoURLsList.getIdioma().getCodigo().getLiteral() + ")", 
                     "Aparece una página inicial correcta");
                 datosStep.setGrabNettrafic(dFTest.ctx);

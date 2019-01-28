@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestionarClientes;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestionarClientes.TypeThirdButton;
@@ -16,7 +16,7 @@ public class PageGestionarClientesStpV {
 
 
 
-	public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+	public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
 		String descripValidac = 
 				"1) Estamos en la página \"" + PageGestionarClientes.titulo + " \"<br>" + 
 						"2) Aparece el apartado de \"Buscar clientes\"<br>" +
@@ -43,7 +43,7 @@ public class PageGestionarClientesStpV {
 
 
 	public static void inputDniAndClickBuscar(String dni, DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 				"Introducimos el DNI <b>" + dni + "</b> y pulsamos el botón \"Buscar\"", 
 				"Aparece una lista de clientes válida");
 		datosStep.setGrab_ErrorPageIfProblem(false);
@@ -87,7 +87,7 @@ public class PageGestionarClientesStpV {
 
 	public static void clickThirdButton(DataFmwkTest dFTest) throws Exception {
 		TypeThirdButton typeButton = PageGestionarClientes.getTypeThirdButton(dFTest.driver);	    
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 				"Tras haber introducido un DNI y haber dado al botón \"Buscar\", damos click al botón \"" + typeButton + "\"", 
 				"Aparece el mensaje correspondiente y el botón Alta");
 		datosStep.setGrab_ErrorPageIfProblem(false);
@@ -124,7 +124,7 @@ public class PageGestionarClientesStpV {
 
 
 	public static void clickDetallesButton(String dni, DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 				"Tras haber introducido un DNI y haber dado al botón \"Buscar\", damos click al botón \"Detalles\"", 
 				"Muestra los detalles del cliente correctamente");
 		datosStep.setGrab_ErrorPageIfProblem(false);

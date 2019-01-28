@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageResultPagoTpv;
@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 @SuppressWarnings("javadoc")
 public class PageResultPagoTpvStpV {
     
-    public static void validateIsPageOk(DataPedido dataPedido, String codPais, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPageOk(DataPedido dataPedido, String codPais, DatosStep datosStep, DataFmwkTest dFTest) {
         String importeTotal = dataPedido.getImporteTotal();
         String tagPedido = "[PEDIDO]";
         String codigoPed = "";

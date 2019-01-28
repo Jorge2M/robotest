@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
@@ -20,7 +20,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.P
 @SuppressWarnings("javadoc")
 public class PageMercpagoLoginStpV {
 
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Aparece la página de identificación de Mercadopago<br>" + 
             "2) En la página figuran los campos de identificación (email + password)";
@@ -45,10 +45,10 @@ public class PageMercpagoLoginStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep loginMercadopago(Pago pago, String importeTotal, String codigoPais, Channel channel, DataFmwkTest dFTest) 
+    public static DatosStep loginMercadopago(Pago pago, String importeTotal, String codigoPais, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
         //Step
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Introducir el usuario/password de mercadopago (" + pago.getUseremail() + " / " + pago.getPasswordemail() + ") + click botón \"Ingresar\"",
             "Aparece alguna de las páginas:<br>" +
             " - Elección medio pago<br>" +

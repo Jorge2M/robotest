@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
@@ -16,11 +16,11 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.SecSele
 @SuppressWarnings({"javadoc", "static-access"})
 public class SecSelectDPointStpV {
     
-    public static datosStep searchPoblacion(DataSearchDeliveryPoint dataSearchDp, DataFmwkTest dFTest) 
+    public static DatosStep searchPoblacion(DataSearchDeliveryPoint dataSearchDp, DataFmwkTest dFTest) 
     throws Exception {
         //Step
     	TypeDeliveryPoint typeDp = dataSearchDp.tipoTransporte.getTypeDeliveryPoint();
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Introducimos la provincia <b>" + dataSearchDp.data + "</b> + Return", 
             "Aparecen puntos de recogida de " + dataSearchDp.data);
         try {
@@ -60,7 +60,7 @@ public class SecSelectDPointStpV {
         return datosStep;
     }
     
-    public static void validaDeliveryPointOfType(TypeDeliveryPoint typeDp, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaDeliveryPointOfType(TypeDeliveryPoint typeDp, DatosStep datosStep, DataFmwkTest dFTest) {
         int maxSecondsToWait = 3;
         String descripValidac = 
             "1) Es visible el 1er delivery point de la lista (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
@@ -82,7 +82,7 @@ public class SecSelectDPointStpV {
     
     public static DataDeliveryPoint clickDeliveryPointAndGetData(int position, DataFmwkTest dFTest) throws Exception {
         DataDeliveryPoint dataDpToReturn = null;
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Clickamos en el <b>#" + position + "</b> droppoint", 
             "El droppoint queda seleccionado");
         try {
@@ -109,7 +109,7 @@ public class SecSelectDPointStpV {
     }
     
     public static void clickSelectButton(Channel channel, DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Clickamos el botón de \"Select\" de la capa de Droppoints", 
             "Desaparece al capa de droppoint");
         try {

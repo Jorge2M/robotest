@@ -7,7 +7,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.Color;
@@ -31,7 +31,7 @@ public class SecFiltrosStpV {
     throws Exception {
         //Step
         int numArticulos1page = 0;
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar los colores <b>" + Color.getListNamesFiltros(colorsToSelect) + "</b>", 
             "Aparece la galería de imágenes");
         datosStep.setGrabNettrafic(dFTest.ctx);

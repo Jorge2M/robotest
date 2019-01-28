@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.PageAmexResult;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 @SuppressWarnings("javadoc")
 public class PageAmexResultStpV {
 
-    public static void validateIsPageOk(datosStep datosStep, String importeTotal, String codigoPais, DataFmwkTest dFTest) {
+    public static void validateIsPageOk(DatosStep datosStep, String importeTotal, String codigoPais, DataFmwkTest dFTest) {
     	int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Aparece una página con un mensaje de OK (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" + 
@@ -39,8 +39,8 @@ public class PageAmexResultStpV {
     }
     
     
-    public static datosStep clickContinuarButton(DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = new datosStep     (
+    public static DatosStep clickContinuarButton(DataFmwkTest dFTest) throws Exception {
+        DatosStep datosStep = new DatosStep     (
             "Seleccionamos el botón \"Continuar\"", 
             "Aparece la página de Mango de resultado OK del pago");
         try {

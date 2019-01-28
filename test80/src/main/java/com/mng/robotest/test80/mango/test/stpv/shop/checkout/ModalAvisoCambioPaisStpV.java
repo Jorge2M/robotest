@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -16,9 +16,9 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutW
 @SuppressWarnings("javadoc")
 public class ModalAvisoCambioPaisStpV {
 
-    public static datosStep clickConfirmar(Pais paisEnvio, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clickConfirmar(Pais paisEnvio, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar botón \"Confirmar cambio\"", 
             "Aparece el modal para la introducción de la dirección de facturación");
         try {

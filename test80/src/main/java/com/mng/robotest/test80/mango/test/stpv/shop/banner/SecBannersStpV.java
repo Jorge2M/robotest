@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.appshop.campanas.CampanasData;
 import com.mng.robotest.test80.mango.test.appshop.campanas.DataCampana;
@@ -59,13 +59,13 @@ public class SecBannersStpV {
     	for (DataCampana dataCampToTest : listCampanasToTest) {
     		int posBanner = Integer.valueOf(dataCampToTest.posicion);
     		boolean makeValidations = true;
-    		datosStep datosStep = seleccionarBanner(posBanner, makeValidations, dCtxSh.appE, dCtxSh.channel, dFTest);
+    		DatosStep datosStep = seleccionarBanner(posBanner, makeValidations, dCtxSh.appE, dCtxSh.channel, dFTest);
     		DataBanner dataBanner = managerBannersScreen.getBanner(posBanner);
     		validateCamapanaWithBannerInScreen(dataCampToTest, dataBanner, datosStep, dFTest);
     	}
     }
     
-    private void validateCamapanaWithBannerInScreen(DataCampana dataCampana, DataBanner dataBanner, datosStep datosStep, DataFmwkTest dFTest) {
+    private void validateCamapanaWithBannerInScreen(DataCampana dataCampana, DataBanner dataBanner, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Los datos de la campaña son correctos<br>" +
             	getReportCompareDataInCuteHtml(dataCampana, dataBanner);
@@ -81,7 +81,7 @@ public class SecBannersStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }            
     }
     
-    public datosStep seleccionarBanner(int posBanner, boolean validaciones, AppEcom app, Channel channel, DataFmwkTest dFTest) 
+    public DatosStep seleccionarBanner(int posBanner, boolean validaciones, AppEcom app, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
         DataBanner dataBanner = this.managerBannersScreen.getBanner(posBanner);
         String urlPagPrincipal = dFTest.driver.getCurrentUrl();
@@ -93,7 +93,7 @@ public class SecBannersStpV {
         	"<b>URL</b>: " + dataBanner.getUrlBanner() + "<br>" + 
         	"<b>imagen</b>: " + dataBanner.getSrcImage() + "<br>" + 
             "<b>texto</b>: " + dataBanner.getText();
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             descripcion, 
             "Aparece una página correcta (con banners o artículos)");
         try {
@@ -123,7 +123,7 @@ public class SecBannersStpV {
         return datosStep;
     }
         
-    public void validacionesGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre, datosStep datosStep, DataFmwkTest dFTest) 
+    public void validacionesGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
     	int maxSecondsWait1 = 1;
     	int maxSecondsWait2 = 1;
@@ -162,7 +162,7 @@ public class SecBannersStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
     }
     
-    public void validacionesBannerEstandar(AppEcom app, datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public void validacionesBannerEstandar(AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         //Validaciones
         String descripValidac = 
             "1) Aparece una página con secciones, galería, banners, bloque de contenido con imágenes o página acceso";
@@ -187,7 +187,7 @@ public class SecBannersStpV {
     /**
      * Validación que comprueba que se está cargando el bloque de contenido (banners) de las homes (SHE, HE, KIDS, VIOLETA...)
      */
-    public void validaBannEnContenido(datosStep datosStep, DataFmwkTest dFTest) {
+    public void validaBannEnContenido(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) El bloque de contenido (homeContent o bannerHome) existe y tiene >= 1 banner o >=1 map o >=1 items-edit";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);

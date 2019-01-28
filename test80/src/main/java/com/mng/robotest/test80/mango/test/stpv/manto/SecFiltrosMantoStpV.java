@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.manto.SecCabecera;
@@ -21,9 +21,9 @@ public class SecFiltrosMantoStpV {
     /**
      * Establecemos los filtros y seleccionamos el botón "Buscar"
      */
-    public static datosStep setFiltrosHoyYbuscar(DataPedido dataPedido, TypeSearch typeSearch, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep setFiltrosHoyYbuscar(DataPedido dataPedido, TypeSearch typeSearch, DataFmwkTest dFTest) throws Exception {
         //Step. Seteamos los filtros
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Buscamos a nivel de " + typeSearch + " el pedido <b style=\"color:blue;\">" + dataPedido.getCodigoPedidoManto() + "</b> con filtros: <br>" +
             "- Método pago: <b>" + dataPedido.getPago().getNombre() + "</b><br>" +
             "- Tienda: <b>" + SecCabecera.getLitTienda(dFTest.driver) + "</b><br>" +

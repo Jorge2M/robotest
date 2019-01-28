@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandexPayingByCode;
@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 @SuppressWarnings("javadoc")
 public class PageYandexPayingByCodeStpV {
     
-    public static String validateIsPage(String emailUsr, String importeTotal, String codPais, Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static String validateIsPage(String emailUsr, String importeTotal, String codPais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String paymentCodeForReturn = "";
         String descripValidac = 
             "1) Aparece la página de <b>Paying by code</b><br>" +
@@ -46,9 +46,9 @@ public class PageYandexPayingByCodeStpV {
         return paymentCodeForReturn;
     }
     
-    public static datosStep clickBackToMango(Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clickBackToMango(Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionamos el botón para volver a Mango", 
             "Aparece la página Mango de resultado OK del pago");
         try {

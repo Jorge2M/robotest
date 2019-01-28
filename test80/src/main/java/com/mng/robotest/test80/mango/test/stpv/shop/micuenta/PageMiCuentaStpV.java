@@ -7,7 +7,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -17,7 +17,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 @SuppressWarnings({"javadoc", "static-access"})
 public class PageMiCuentaStpV {
     
-	public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+	public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
 		int maxSecondsToWait = 2;
 	    String descripValidac = 
 	        "1) Aparece la página de \"Mi Cuenta\" (la esperamos hasta " + maxSecondsToWait + " segundos)";
@@ -33,12 +33,12 @@ public class PageMiCuentaStpV {
 	    finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
 	}
 	
-    public static datosStep goToMisDatos(String usuarioReg, AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep goToMisDatos(String usuarioReg, AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
     	//Step
     	SecMenusUserStpV.clickMenuMiCuenta(channel, app, dFTest);
     	
         //Step.
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar el link \"Mis datos\"", 
             "Aparece la página de \"Mis datos\"");
         try {
@@ -54,12 +54,12 @@ public class PageMiCuentaStpV {
         return datosStep;
     }
     
-    public static datosStep goToMisComprasFromMenu(AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep goToMisComprasFromMenu(AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
     	//Step
     	SecMenusUserStpV.clickMenuMiCuenta(channel, app, dFTest);
     	
         //Step.
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar el link \"Mis Compras\"", 
             "Aparece la página de \"Mis Compras\"");
         try {
@@ -81,10 +81,10 @@ public class PageMiCuentaStpV {
         return datosStep;
     }    
  
-    public static datosStep goToMisDatosAndValidateData(HashMap<String,String> dataRegistro, String codPais, AppEcom app, Channel channel, DataFmwkTest dFTest) 
+    public static DatosStep goToMisDatosAndValidateData(HashMap<String,String> dataRegistro, String codPais, AppEcom app, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
         //Step.
-        datosStep datosStep = goToMisDatos(dataRegistro.get("cfEmail"), app, channel, dFTest);
+        DatosStep datosStep = goToMisDatos(dataRegistro.get("cfEmail"), app, channel, dFTest);
         
         //Validaciones.
         PageMisDatosStpV.validaIsDataAssociatedToRegister(dataRegistro, codPais, datosStep, dFTest);
@@ -92,12 +92,12 @@ public class PageMiCuentaStpV {
         return datosStep;
     }    
     
-    public static datosStep goToSuscripciones(AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep goToSuscripciones(AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
     	//Step
     	SecMenusUserStpV.clickMenuMiCuenta(channel, app, dFTest);
     	
     	//Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar el link \"Suscripciones\"", 
             "Aparece la página de \"Suscripciones\"" /*Resultado esperado*/);
         try {
@@ -116,18 +116,18 @@ public class PageMiCuentaStpV {
     public static void goToSuscripcionesAndValidateData(HashMap<String,String> datosRegOk, AppEcom app, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
         //Step.
-        datosStep datosStep = goToSuscripciones(app, channel, dFTest);
+        DatosStep datosStep = goToSuscripciones(app, channel, dFTest);
         
         //Validaciones
         PageSuscripcionesStpV.validaIsDataAssociatedToRegister(datosRegOk, datosStep, dFTest);
     }    
     
-    public static datosStep goToMisPedidos(String usrRegistrado, AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep goToMisPedidos(String usrRegistrado, AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
     	//Step
     	SecMenusUserStpV.clickMenuMiCuenta(channel, app, dFTest);
     	
     	//Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el link \"Mis pedidos\"", 
             "Aparece la página de \"Mis pedidos\" sin pedidos");
         try {
@@ -143,13 +143,13 @@ public class PageMiCuentaStpV {
         return datosStep;
     }
     
-    public static datosStep goToDevoluciones(AppEcom app, Channel channel, DataFmwkTest dFTest) 
+    public static DatosStep goToDevoluciones(AppEcom app, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
     	//Step
     	SecMenusUserStpV.clickMenuMiCuenta(channel, app, dFTest);
     	
     	//Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el link \"Devoluciones\"", 
             "Aparece la página de \"Devoluciones\"");
         try {
@@ -165,13 +165,13 @@ public class PageMiCuentaStpV {
         return datosStep;
     }
     
-    public static datosStep goToReembolsos(AppEcom app, Channel channel, DataFmwkTest dFTest) 
+    public static DatosStep goToReembolsos(AppEcom app, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
     	//Step
     	SecMenusUserStpV.clickMenuMiCuenta(channel, app, dFTest);
     	
     	//Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el link \"Reembolsos\"", 
             "Aparece la página de \"Reembolsos\"");
         try {

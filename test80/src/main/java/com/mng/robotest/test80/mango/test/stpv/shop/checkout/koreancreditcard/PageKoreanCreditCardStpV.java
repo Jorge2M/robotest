@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -23,7 +23,7 @@ import org.apache.logging.log4j.Logger;
 public class PageKoreanCreditCardStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
-    public static void validateIsPage(String importeTotal, Pais pais, Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(String importeTotal, Pais pais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String validacion1 = "";
         if (channel==Channel.desktop)
             validacion1 = 
@@ -66,7 +66,7 @@ public class PageKoreanCreditCardStpV {
 
     public static void payMobile (DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
                 "Aparece el botón para proceder con el pago",
                 "Carga la pagina de la pasarela de Corea");
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
@@ -103,7 +103,7 @@ public class PageKoreanCreditCardStpV {
 
     public static void preparePaymentMobile(DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
                 "Marcamos el checkbox de los terminos",
                 "Desaparecen el titulo de los temrinos");
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
@@ -127,7 +127,7 @@ public class PageKoreanCreditCardStpV {
 
     public static void continuarConPagoCoreaMobile(DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
                 "Seleccionamos la opcion deseada (ultima fila, segunda columna)",
                 "Aparece información varia y el boton de continuar");
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
@@ -158,7 +158,7 @@ public class PageKoreanCreditCardStpV {
 
     public static void confirmMainPaymentCorea(DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
                 "Procedemos a continuar con el proceso",
                 "Aparece la proxima pagina del procedimiento de pago");
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
@@ -189,7 +189,7 @@ public class PageKoreanCreditCardStpV {
 
     public static void endPayment(DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
                 "Procedemos a finalizar el proceso",
                 "Aparece la proxima pagina del procedimiento de pago");
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
@@ -217,9 +217,9 @@ public class PageKoreanCreditCardStpV {
         } finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
 
-    public static datosStep clickConfirmarButton(DataFmwkTest dFTest) throws Exception {
+    public static DatosStep clickConfirmarButton(DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar el botón para Confirmar", 
             "Aparece la página de confirmación de KrediKarti");
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);    

@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -29,7 +29,7 @@ public abstract class PagoStpV {
      * @param execPay indica si, además de las pruebas iniciales de la pasarela, hemos de ejecutar el último/s pasos que confirman el pago y generan un pedido
      * @return
      */
-    public abstract datosStep testPagoFromCheckout(boolean execPay) throws Exception;
+    public abstract DatosStep testPagoFromCheckout(boolean execPay) throws Exception;
 
     public void storePedidoForMantoAndResetData() {
         this.dCtxPago.storePedidoForManto();

@@ -7,7 +7,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.Descuento;
@@ -26,7 +26,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 @SuppressWarnings("javadoc")
 public class Page1DktopCheckoutStpV {
     
-    public static void validateIsPageOK(DataBag dataBag, AppEcom app, datosStep datosStep, DataFmwkTest dFTest) 
+    public static void validateIsPageOK(DataBag dataBag, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
         //Validaciones
         int maxSecondsToWait = 5;
@@ -53,7 +53,7 @@ public class Page1DktopCheckoutStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static void validateIsVersionChequeRegalo(ChequeRegalo chequeRegalo, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsVersionChequeRegalo(ChequeRegalo chequeRegalo, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         int maxSecondsToWait = 5;
         String descripValidac = 
@@ -79,7 +79,7 @@ public class Page1DktopCheckoutStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static void validaResultImputPromoEmpl(DataBag dataBag, AppEcom app, datosStep datosStep, DataFmwkTest dFTest) 
+    public static void validaResultImputPromoEmpl(DataBag dataBag, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
     	Descuento descuento = new Descuento(app, DiscountType.Empleado);
         int maxSecondsToWait = 5;
@@ -115,7 +115,7 @@ public class Page1DktopCheckoutStpV {
     public static void inputValeDescuento(ValePais valePais, DataBag dataBag, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
         //Step
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Introducir el vale <b style=\"color:blue;\">" + valePais.getCodigoVale() + "</b> y pulsar el botón \"CONFIRMAR\"", 
             "Aparece la página de resumen de artículos con los descuentos correctamente aplicados" /*Resultado esperado*/);
         datosStep.setGrabNettrafic(dFTest.ctx);
@@ -192,7 +192,7 @@ public class Page1DktopCheckoutStpV {
     
     public static void clearValeIfLinkExists(DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Si existe -> seleccionar el link \"Eliminar\" asociado al vale", 
             "El vale desaparece");
         try {   
@@ -223,7 +223,7 @@ public class Page1DktopCheckoutStpV {
      */
     public static void stepIntroduceCodigoVendedorVOTF(String codigoVendedor, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Introducir un código de vendedor correcto " + codigoVendedor + " y pulsar el botón \"Aceptar\"", 
             "El vendedor queda registrado");
         try {   

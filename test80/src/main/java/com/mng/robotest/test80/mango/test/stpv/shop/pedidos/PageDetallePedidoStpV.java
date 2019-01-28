@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -33,7 +33,7 @@ public class PageDetallePedidoStpV {
     	return this.pageDetalle;
     }
     
-    public void validateIsPageOk(CompraOnline compraOnline, String codPais, datosStep datosStep, DataFmwkTest dFTest) 
+    public void validateIsPageOk(CompraOnline compraOnline, String codPais, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
         String codPedido = compraOnline.numPedido;
         String importeTotal = compraOnline.importe.replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
@@ -59,7 +59,7 @@ public class PageDetallePedidoStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
         
-    public void validateIsPageOk(DataPedido dataPedido, AppEcom app, datosStep datosStep, DataFmwkTest dFTest) {
+    public void validateIsPageOk(DataPedido dataPedido, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) {
         String codPedido = dataPedido.getCodpedido();
         String importeTotalManto = dataPedido.getImporteTotalManto();
         String codPais = dataPedido.getCodigoPais();
@@ -71,7 +71,7 @@ public class PageDetallePedidoStpV {
     }
     
     private void validateIsPageOk(String codPedido, String importeTotalWithoutCurrency, String codPais, 
-    							  datosStep datosStep, DataFmwkTest dFTest) {
+    							  DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Aparece la página de detalle del pedido<br>" + 
             "2) En la página figura el Nº de pedido: " + codPedido + "<br>" +
@@ -100,9 +100,9 @@ public class PageDetallePedidoStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public datosStep clickBackButton(Channel channel, DataFmwkTest dFTest) throws Exception {
+    public DatosStep clickBackButton(Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step.
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Seleccionar el botón \"Volver\"", 
             "Se vuelve a la página anterior");
         try {

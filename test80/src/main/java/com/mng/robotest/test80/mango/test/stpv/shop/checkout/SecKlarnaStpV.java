@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
@@ -16,8 +16,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecKlarna;
 @SuppressWarnings("javadoc")
 public class SecKlarnaStpV {
     
-    public static datosStep inputNumPersonal(String numPersonalKlarna, Channel channel, DataFmwkTest dFTest) {
-        datosStep datosStep = new datosStep (
+    public static DatosStep inputNumPersonal(String numPersonalKlarna, Channel channel, DataFmwkTest dFTest) {
+        DatosStep datosStep = new DatosStep (
             "Introducir Nº personal Klarna (" + numPersonalKlarna + ")", 
             "El dato se introduce correctamente");
         try {
@@ -30,9 +30,9 @@ public class SecKlarnaStpV {
         return datosStep;
     }
     
-    public static datosStep searchAddress(Pago pago, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep searchAddress(Pago pago, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Click botón \"Search Address\"", 
             "Aparece la capa de \"Klarna Invoice\" con datos correctos");
         try {
@@ -66,9 +66,9 @@ public class SecKlarnaStpV {
         return datosStep;
     }
     
-    public static datosStep confirmAddress(Pago pago, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep confirmAddress(Pago pago, Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar el botón \"Confirm Address\"", 
             "Se modifica la dirección correctamente");
         try {

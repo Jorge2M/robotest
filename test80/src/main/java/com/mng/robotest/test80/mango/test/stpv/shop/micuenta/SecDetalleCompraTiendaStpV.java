@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompra
 @SuppressWarnings("javadoc")
 public class SecDetalleCompraTiendaStpV {
     @SuppressWarnings("static-access")
-    public static void validateIsOk(CompraTienda compraTienda, Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsOk(CompraTienda compraTienda, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         int maxSecondsToWait = 1;
         String descripValidac = 
@@ -69,10 +69,10 @@ public class SecDetalleCompraTiendaStpV {
     }
     
     @SuppressWarnings("static-access")
-    public static datosStep selectArticulo(int posArticulo, DataFmwkTest dFTest) {
+    public static DatosStep selectArticulo(int posArticulo, DataFmwkTest dFTest) {
         //Step.
         ArticuloScreen articulo = null;
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar el " + posArticulo + "o artículo de la Compra", 
             "Aparece la sección correspondiente al \"QuickView\" del artículo");
         try {

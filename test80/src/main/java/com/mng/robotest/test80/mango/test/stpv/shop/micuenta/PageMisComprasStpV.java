@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraOnline;
@@ -23,7 +23,7 @@ public class PageMisComprasStpV {
     public static SecDetalleCompraTiendaStpV SecDetalleCompraTienda; 
     public static SecQuickViewArticuloStpV SecQuickViewArticulo;
     
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         //Validaciones.
     	int maxSecondsToWait = 2;
         String descripValidac = 
@@ -54,9 +54,9 @@ public class PageMisComprasStpV {
     /**
      * Selección de un bloque para el que esperamos que SÍ existan pedidos
      */
-    public static datosStep selectBlock(TypeCompra typeCompra, boolean ordersExpected, DataFmwkTest dFTest) {
+    public static DatosStep selectBlock(TypeCompra typeCompra, boolean ordersExpected, DataFmwkTest dFTest) {
         //Step.
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar el bloque \"" + typeCompra + "\"", 
             "Se hace visible el bloque de " + typeCompra);
         try {
@@ -127,7 +127,7 @@ public class PageMisComprasStpV {
         return datosStep;
     }
     
-    public static void validateIsCompraOnlineVisible(String codPedido, boolean isChequeRegalo, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsCompraOnlineVisible(String codPedido, boolean isChequeRegalo, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         String descripValidac = 
             "1) Es visible la compra " + TypeCompra.Online + " asociada al pedido <b>" + codPedido + "</b>";
@@ -149,7 +149,7 @@ public class PageMisComprasStpV {
     public static PageDetallePedidoStpV selectCompraOnline(int posInLista, String codPais, Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step.
         CompraOnline compraOnline = null;
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionamos la " + posInLista + "a compra (tipo Online) de la lista", 
             "Aparece la página con los detalles del pedido");
         try {
@@ -168,10 +168,10 @@ public class PageMisComprasStpV {
     }
     
     @SuppressWarnings("static-access")
-    public static datosStep selectCompraTienda(int posInLista, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep selectCompraTienda(int posInLista, Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step.
         CompraTienda compraTienda = null;
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionamos la " + posInLista + "a compra (tipo Tienda) de la lista", 
             "Aparece una sección con los detalles de la Compra");
         try {
@@ -192,7 +192,7 @@ public class PageMisComprasStpV {
 	public static void clickMoreInfo(DataFmwkTest dFTest) {
 		//Step.
 		String idArticulo = "";
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionamos el primer artículo que aparece con referencia ", 
             "Aparece el modal con información del artículo");
         try {

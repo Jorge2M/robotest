@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageConsultaIdEans;
 
@@ -16,7 +16,7 @@ public class PageConsultaIdEansStpV {
 	
 	
 
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Es visible el contenido de la pestaña Busqueda Excel<br>" + 
             "2) Es visible el contenido de la pestaña Busqueda Rapida<br>" +
@@ -43,7 +43,7 @@ public class PageConsultaIdEansStpV {
     
     
 	public static void consultaDatosContacto(List<String> pedidosPrueba, DataFmwkTest dFTest) {
-	    datosStep datosStep = new datosStep       (
+	    DatosStep datosStep = new DatosStep       (
 	        "Introducimos datos de pedido válido y consultamos los datos de contacto", 
 	        "Deben mostrar la información de contacto");
 	    datosStep.setGrab_ErrorPageIfProblem(false);
@@ -81,7 +81,7 @@ public class PageConsultaIdEansStpV {
 	
 	
 	public static void consultaIdentificadoresPedido(List<String> pedidosPrueba, DataFmwkTest dFTest) {
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 	            "Introducimos datos de pedido válido y consultamos los Identificadores que tiene", 
 	            "Debe mostrar los identificadores del pedido");
         datosStep.setGrab_ErrorPageIfProblem(false);
@@ -119,7 +119,7 @@ public class PageConsultaIdEansStpV {
 	
 	
 	public static void consultaTrackings(List<String> pedidosPrueba, DataFmwkTest dFTest) {
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 				"Introducimos datos de pedido válido y consultamos el trackings", 
 	            "Debe mostrar el tracking");
         datosStep.setGrab_ErrorPageIfProblem(false);
@@ -150,7 +150,7 @@ public class PageConsultaIdEansStpV {
 
 
 	public static void consultaDatosEan(List<String> articulosPrueba, DataFmwkTest dFTest) {
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 				"Introducimos artículos válidos y consultamos el EAN", 
 	            "Debe mostrar el EAN");
         datosStep.setGrab_ErrorPageIfProblem(false);

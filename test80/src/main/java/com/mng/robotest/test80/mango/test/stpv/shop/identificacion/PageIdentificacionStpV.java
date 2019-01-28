@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -16,9 +16,9 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 @SuppressWarnings("javadoc")
 public class PageIdentificacionStpV {
 
-    public static datosStep inicioSesionDatosKO(String usrExistente, String password, Channel channel, AppEcom appE, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep inicioSesionDatosKO(String usrExistente, String password, Channel channel, AppEcom appE, DataFmwkTest dFTest) throws Exception {
         //Step.
-        datosStep datosStep = new datosStep(
+        DatosStep datosStep = new DatosStep(
             "Seleccionar el link 'Iniciar Sesión' e introducir credenciales incorrectas: <b>" + usrExistente + ", " + password + "</b>",
             "Aparece el correspondiente mensaje de error");
         try {
@@ -48,10 +48,10 @@ public class PageIdentificacionStpV {
         return datosStep;
     }
     
-    public static datosStep selectHasOlvidadoTuContrasenya(DataFmwkTest dFTest) 
+    public static DatosStep selectHasOlvidadoTuContrasenya(DataFmwkTest dFTest) 
     throws Exception {
         //Step.
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar el link \"¿Has olvidado tu contraseña?\"", 
             "Aparece la página de cambio de contraseña");
         try {

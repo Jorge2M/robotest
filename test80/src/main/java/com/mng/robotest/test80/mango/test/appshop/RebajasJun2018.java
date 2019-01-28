@@ -86,7 +86,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
     public void REB001_RebajasDic2018(ITestContext context, Method method) throws Exception {
         DataCtxShop dCtxSh = this.dCtsShThread.get();
         DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        datosStep datosStep = null;
+        DatosStep datosStep = null;
         int numLineasPais = dCtxSh.pais.getShoponline().getNumLineasTiendas(dCtxSh.appE);
             
         //Step&Validation
@@ -132,7 +132,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
             sublineaType = sublinea.getTypeSublinea();
         
         //Selección de la línea/sublínea
-        datosStep datosStep = SecMenusWrapperStpV.seleccionLinea(lineaType, sublineaType, dCtxSh, dFTest);
+        DatosStep datosStep = SecMenusWrapperStpV.seleccionLinea(lineaType, sublineaType, dCtxSh, dFTest);
         PageHomeMarcasStpV.validaRebajasJun2018(TypeHome.PortadaLinea, areBanners, dCtxSh, datosStep, dFTest);
         if (SecMenusWrap.canClickMenuArticles(dCtxSh.pais, linea, sublinea)) {
             PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);

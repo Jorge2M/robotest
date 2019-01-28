@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -28,9 +28,9 @@ public class PageConsultaPedidoBolsaStpV {
     /**
      * Se accede al detalle de un pedido desde la lista de pedidos o bolsas
      */
-    public static datosStep detalleFromListaPedBol(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep detalleFromListaPedBol(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, DataFmwkTest dFTest) throws Exception {
         //Step. Accedemos al detalle del pedido desde la lista de pedidos
-        datosStep datosStep = new datosStep   (
+        DatosStep datosStep = new DatosStep   (
             "Seleccionamos el código de pedido para acceder al Detalle", 
             "Aparece la página de detalle de " + typeDetalle + " correcta");
         datosStep.setGrabImage(true);
@@ -48,12 +48,12 @@ public class PageConsultaPedidoBolsaStpV {
         return datosStep;
     }
     
-    public static void validacionesTotalesPedido(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validacionesTotalesPedido(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, DatosStep datosStep, DataFmwkTest dFTest) {
         validaDatosGeneralesPedido(dataPedido, appE, datosStep, dFTest);
         validaDatosEnvioPedido(dataPedido, typeDetalle, appE, datosStep, dFTest);
     }
     
-    public static void validaDatosEnvioPedido(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaDatosEnvioPedido(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, DatosStep datosStep, DataFmwkTest dFTest) {
         TipoTransporte tipoTransporte = dataPedido.getPago().getTipoEnvioType(appE);
         String validacion2 = "";
         String textEnvioTienda = "";
@@ -84,7 +84,7 @@ public class PageConsultaPedidoBolsaStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
     }
     
-    public static void validaDatosGeneralesPedido(DataPedido dataPedido, AppEcom appE, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaDatosGeneralesPedido(DataPedido dataPedido, AppEcom appE, DatosStep datosStep, DataFmwkTest dFTest) {
         String validacion5 = "";
         Pago pago = dataPedido.getPago();
         if (pago.getTpv().getEstado()!=null &&

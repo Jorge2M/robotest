@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -17,7 +17,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStp
 @SuppressWarnings("javadoc")
 public class PageAccesoMisComprasStpV {
     
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones.
         String descripValidac = 
             "1) Aparece la página de \"Acceso a Mis Compras\"<br>" +
@@ -43,7 +43,7 @@ public class PageAccesoMisComprasStpV {
     
     public static void clickBlock(TypeBlock typeBlock, DataFmwkTest dFTest) {
         //Step.
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "Seleccionar el bloque \"" + typeBlock + "\"", 
             "Se hace visible el bloque de " + typeBlock);
         try {
@@ -69,9 +69,9 @@ public class PageAccesoMisComprasStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
     }
     
-    public static datosStep enterForSiRegistrado(String usuario, String password, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep enterForSiRegistrado(String usuario, String password, DataFmwkTest dFTest) throws Exception {
         //Step.
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "En el bloque de \"Si Registrado\", introducir el usuario/password (" + usuario + "/" + password + ") y pulsar \"Entrar\"", 
             "Aparece la página de \"Mis compras\"");
         try {
@@ -88,10 +88,10 @@ public class PageAccesoMisComprasStpV {
         return datosStep;
     }
     
-    public static datosStep buscarPedidoForNoRegistrado(DataPedido dataPedido, AppEcom app, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep buscarPedidoForNoRegistrado(DataPedido dataPedido, AppEcom app, DataFmwkTest dFTest) throws Exception {
         //Step.
         String usuario = dataPedido.getEmailCheckout();
-        datosStep datosStep = new datosStep     (
+        DatosStep datosStep = new DatosStep     (
             "En el bloque de \"No Registrado\", introducir el usuario/núm pedido (" + usuario + "/" + dataPedido.getCodpedido() + ") y pulsar \"Buscar pedido\"", 
             "Aparece la página de detalle del pedido");
         try {

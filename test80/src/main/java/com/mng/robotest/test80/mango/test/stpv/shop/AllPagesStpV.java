@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.WebDriverArqUtils;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
@@ -26,13 +26,13 @@ import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
 public class AllPagesStpV {
     
     public static void validacionesEstandar(boolean validaSEO, boolean validaJS, boolean validaImgBroken, 
-    										datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    										DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         validacionesEstandar(validaSEO, State.Info_NoHardcopy, validaJS, State.Info_NoHardcopy, validaImgBroken, State.Warn, datosStep, dFTest);
     }
     
     public static void validacionesEstandar(boolean validaSEO, State levelAlertSEO, boolean validaJS, 
     										State levelAlertJS, boolean validaImgBroken, State levelAlertImgBroken, 
-    										datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    										DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         //Validaciones
         String descripValidac = "";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
@@ -81,7 +81,7 @@ public class AllPagesStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static void validatePageWithFooter(Pais pais, AppEcom app, datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void validatePageWithFooter(Pais pais, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         //Validaciones
         String descripValidac = 
             "1) No hay SRCs con HTTPs maliciosos<br>" + 
@@ -121,7 +121,7 @@ public class AllPagesStpV {
     /**
      * Validaciones que comprueban que está apareciendo el Main Content asociado a un país concreto
      */
-    public static void validateMainContentPais(Pais pais, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateMainContentPais(Pais pais, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Aparece el div de contenido asociado al país " + pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ")";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
@@ -137,7 +137,7 @@ public class AllPagesStpV {
     }
 
     public static void backNagegador(DataFmwkTest dFTest) throws Exception {
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Realizamos un <b>back</b> del navegador", 
             "Se vuelve a la página anterior");
         try {

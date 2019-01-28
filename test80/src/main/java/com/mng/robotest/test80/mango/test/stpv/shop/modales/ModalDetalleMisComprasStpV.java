@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalBuscadorTallaTiendas;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalDetalleMisCompras;
@@ -19,7 +19,7 @@ public class ModalDetalleMisComprasStpV {
      */
     public static void clickBuscarTiendaButton(DataFmwkTest dFTest) throws Exception {
         //Step.
-        datosStep datosStep = new datosStep (
+        DatosStep datosStep = new DatosStep (
             "Damos click al botón de \"Buscar talla en tienda\"",
             "Aparece el modal de busqueda en tienda");
         try {

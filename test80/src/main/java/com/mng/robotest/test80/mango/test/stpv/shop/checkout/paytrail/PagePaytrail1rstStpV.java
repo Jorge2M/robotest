@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paytrail.PagePaytrail1rst;
@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 @SuppressWarnings("javadoc")
 public class PagePaytrail1rstStpV {
     
-    public static void validateIsPage(String importeTotal, String codPais, Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(String importeTotal, String codPais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String nombrePagoCabecera = "Finnish E-Banking";
         int maxSecondsToWait = 2;
         String descripValidac = 
@@ -56,10 +56,10 @@ public class PagePaytrail1rstStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
     
-    public static datosStep selectBancoAndContinue(Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep selectBancoAndContinue(Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step
         String bancoNordea = "Nordea";
-        datosStep datosStep = new datosStep       (
+        DatosStep datosStep = new DatosStep       (
             "Seleccionar el banco \"" + bancoNordea + "\" del desplegable y pulsar el botón \"Continue\"", 
             "Aparece la página de identificación de E-payment");
         try {

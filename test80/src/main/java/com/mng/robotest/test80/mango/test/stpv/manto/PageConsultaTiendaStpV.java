@@ -6,14 +6,14 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageConsultaTienda;
 
 @SuppressWarnings("javadoc")
 public class PageConsultaTiendaStpV {
 
-    public static void validateIsPage(datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Es visible el input para la introducción de la tienda";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
@@ -29,7 +29,7 @@ public class PageConsultaTiendaStpV {
     }
 
 	public static void consultaTiendaInexistente(String tiendaNoExistente, DataFmwkTest dFTest) {
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 	            "Introducimos tienda \"" + tiendaNoExistente + "\"", 
 	            "No debe ser válida");
 	        datosStep.setGrab_ErrorPageIfProblem(false);
@@ -59,7 +59,7 @@ public class PageConsultaTiendaStpV {
 
 	
 	public static void consultaTiendaExistente(String tiendaExistente, DataFmwkTest dFTest) {
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 	            "Introducimos tienda \"" + tiendaExistente + "\"", 
 	            "No debe ser válida");
 	        datosStep.setGrab_ErrorPageIfProblem(false);

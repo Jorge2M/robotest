@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompras;
@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompra
 public class SecQuickViewArticuloStpV {
     
     @SuppressWarnings("static-access")
-    public static void validateIsOk(ArticuloScreen articulo, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsOk(ArticuloScreen articulo, DatosStep datosStep, DataFmwkTest dFTest) {
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Aparece el quickview correspondiente al artículo (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +

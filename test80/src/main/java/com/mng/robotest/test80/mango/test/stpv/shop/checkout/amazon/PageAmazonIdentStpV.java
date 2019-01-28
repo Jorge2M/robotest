@@ -6,7 +6,7 @@ import java.util.List;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -17,7 +17,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 @SuppressWarnings("javadoc")
 public class PageAmazonIdentStpV {
     
-    public static void validateIsPage(Pais pais, Channel channel, DataPedido dataPedido, datosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(Pais pais, Channel channel, DataPedido dataPedido, DatosStep datosStep, DataFmwkTest dFTest) {
         String validacion3 = "";
         if (channel==Channel.desktop)
             validacion3 = "3) En la página resultante figura el importe total de la compra (" + dataPedido.getImporteTotal() + ")";

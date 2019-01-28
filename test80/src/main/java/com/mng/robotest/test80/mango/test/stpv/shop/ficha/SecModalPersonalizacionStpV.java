@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -48,7 +48,7 @@ public class SecModalPersonalizacionStpV {
 
     	boolean customizable = false;
     	int maxArticlesToReview = 8;
-    	datosStep datosStep;
+    	DatosStep datosStep;
     	int i = 1;
     	String galeriaToSelect = "camisas";
     	do {
@@ -98,7 +98,7 @@ public class SecModalPersonalizacionStpV {
     
 	private void selectCustomization(Channel channel, DataFmwkTest dFTest) throws Exception {
 		//Step
-		datosStep datosStep = new datosStep       (
+		DatosStep datosStep = new DatosStep       (
 			"Seleccionamos el link <b>Añadir personalización</b>", 
 	        "Aparece el modal para la personalización de la prenda");
 		try {
@@ -117,7 +117,7 @@ public class SecModalPersonalizacionStpV {
 
     private void startCustomization(Channel channel, DataFmwkTest dFTest) throws Exception {
     	//Step
-    	datosStep datosStep = new datosStep		  (
+    	DatosStep datosStep = new DatosStep		  (
     		"Seleccionamos el botón <b>Empezar</b>", 
     		"Aparecen las primeras opciones de personalizacion del artículo");
     	try {
@@ -137,7 +137,7 @@ public class SecModalPersonalizacionStpV {
     	
 	private void selectIconCustomization(Channel channel, DataFmwkTest dFTest) throws Exception {
 		//Step
-		datosStep datosStep = new datosStep			(
+		DatosStep datosStep = new DatosStep			(
 			"Seleccionamos la opción <b>Un icono</b>",
 			"Aparece la lista de iconos");
 		try {
@@ -162,7 +162,7 @@ public class SecModalPersonalizacionStpV {
 	
 	private void selectFirstIcon(Channel channel, DataFmwkTest dFTest) throws Exception {
 		//Step
-		datosStep datosStep = new datosStep 		 (
+		DatosStep datosStep = new DatosStep 		 (
 			"Seleccionamos el primer icono",
 			"Aparece el botón Confirmar");
 		try {
@@ -185,7 +185,7 @@ public class SecModalPersonalizacionStpV {
 	
 	private void selectWhere(Channel channel, DataFmwkTest dFTest) throws Exception {
 		//Step
-		datosStep datosStep = new datosStep			(
+		DatosStep datosStep = new DatosStep			(
 			"Seleccionamos el botón \"Confirmar\"",
 			"Se hace visible el paso-2");
 				
@@ -214,7 +214,7 @@ public class SecModalPersonalizacionStpV {
 	}
 	
 	private void selectColor(Channel channel, DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep			(
+		DatosStep datosStep = new DatosStep			(
 			"Seleccionamos el botón \"Confirmar\"",
 			"Aparece el apartado 3 de la personalización");
 		
@@ -241,7 +241,7 @@ public class SecModalPersonalizacionStpV {
 	}
 
 	private void selectSize(Channel channel, DataFmwkTest dFTest) throws Exception {
-		datosStep datosStep = new datosStep			(
+		DatosStep datosStep = new DatosStep			(
 				"Seleccionamos el botón \"Confirmar\"",
 				"Aparece el apartado 4 de la personalización");
 
@@ -263,7 +263,7 @@ public class SecModalPersonalizacionStpV {
 
 	private void confirmCustomization(Channel channel, DataFmwkTest dFTest) throws Exception {
 		//Step
-		datosStep datosStep = new datosStep			(
+		DatosStep datosStep = new DatosStep			(
 			"Seleccionamos el botón \"Añadir a la bolsa\"",
 			"Aparece el modal con las opciones para ver la bolsa o seguir comprando");
 		try {
@@ -288,7 +288,7 @@ public class SecModalPersonalizacionStpV {
 
 	private void checkCustomizationProof(Channel channel, DataFmwkTest dFTest) throws Exception {
 		//Step
-		datosStep datosStep = new datosStep			(
+		DatosStep datosStep = new DatosStep			(
 			"Seleccionamos el botón \"Añadir a la bolsa\"",
 			"El artículo se da de alta correctamente en la bolsa");
 		
@@ -310,13 +310,13 @@ public class SecModalPersonalizacionStpV {
 	}
 
 	private void customizationValidation(Channel channel, ModalElement element,
-		State state, datosStep datosStep, DataFmwkTest dFTest, String descripValidac) {
+		State state, DatosStep datosStep, DataFmwkTest dFTest, String descripValidac) {
 		int maxSecondsToWait = 1;
 		customizationValidation(channel, element, maxSecondsToWait, state, datosStep, dFTest, descripValidac);
 	}
 
 	private void customizationValidation(Channel channel, ModalElement element, int maxSecondsToWait,
-										State state, datosStep datosStep, DataFmwkTest dFTest, String descripValidac) {
+										State state, DatosStep datosStep, DataFmwkTest dFTest, String descripValidac) {
 		datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
 		try {
 			List<SimpleValidation> listVals = new ArrayList<>();
@@ -328,7 +328,7 @@ public class SecModalPersonalizacionStpV {
 
 	private void doubleCustomizationValidations(Channel channel, DataFmwkTest dFTest,
 										ModalElement firstElement, ModalElement secondElement, 
-										State state, datosStep datosStep, String descripValidac) 
+										State state, DatosStep datosStep, String descripValidac) 
 	{
 		datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
 		
@@ -343,7 +343,7 @@ public class SecModalPersonalizacionStpV {
 	}
 	
 	
-	private static void validateIsApartadoVisible(int numApartado, datosStep datosStep, DataFmwkTest dFTest, Channel channel) {
+	private static void validateIsApartadoVisible(int numApartado, DatosStep datosStep, DataFmwkTest dFTest, Channel channel) {
 		ModalElement modalToValidate;
 		switch (numApartado) {
 		case 1:
