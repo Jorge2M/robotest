@@ -43,8 +43,9 @@ public class AccesoNavigations {
             accesoVOTF(dCtxSh, dFTest);
             goFromLineasToMultimarcaVOTF(dFTest.driver);
         } 
-        else
+        else {
             PagePrehome.accesoShopViaPrehome(dCtxSh, dFTest);
+        }
         
         dFTest.ctx.setAttribute(Constantes.attrUrlPagPostAcceso, dFTest.driver.getCurrentUrl());
     }
