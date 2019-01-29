@@ -11,6 +11,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMiCuenta;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 
@@ -54,9 +55,9 @@ public class PageMiCuentaStpV {
         return datosStep;
     }
     
-    public static datosStep goToMisComprasFromMenu(AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static datosStep goToMisComprasFromMenu(DataCtxShop dataCtxShop, Channel channel, DataFmwkTest dFTest) throws Exception {
     	//Step
-    	SecMenusUserStpV.clickMenuMiCuenta(channel, app, dFTest);
+    	SecMenusUserStpV.clickMenuMiCuenta(channel, dataCtxShop.appE, dFTest);
     	
         //Step.
         datosStep datosStep = new datosStep     (
@@ -76,7 +77,7 @@ public class PageMiCuentaStpV {
         }
         
         //Validaciones
-        PageMisComprasStpV.validateIsPage(datosStep, dFTest);
+        PageMisComprasStpV.validateIsPage(dataCtxShop, datosStep, dFTest);
         
         return datosStep;
     }    
