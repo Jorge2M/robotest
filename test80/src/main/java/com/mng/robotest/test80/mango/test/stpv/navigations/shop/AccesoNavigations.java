@@ -18,6 +18,7 @@ import com.mng.robotest.test80.mango.test.pageobject.votf.PageSelectIdiomaVOTF;
 import com.mng.robotest.test80.mango.test.pageobject.votf.PageSelectLineaVOTF;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
+import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
 
 /**
  * Clase que implementa los diferentes steps/validations asociados asociados a la página de Login de Manto
@@ -68,8 +69,13 @@ public class AccesoNavigations {
             PageSelectIdiomaVOTF.clickButtonAceptar(dFTest.driver);
         }
 
-        if (PageAlertaVOTF.isPage(dFTest.driver))
+        if (PageAlertaVOTF.isPage(dFTest.driver)) {
             PageAlertaVOTF.clickButtonContinuar(dFTest.driver);
+        }
+        
+    	//Forzamos galería sin React
+    	int versionSinReact = 0;
+    	TestAB.activateTestABgaleriaReact(versionSinReact, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
     }    
     
     public static void cambioPaisFromHomeIfNeeded(DataCtxShop dCtxSh, DataFmwkTest dFTest) 

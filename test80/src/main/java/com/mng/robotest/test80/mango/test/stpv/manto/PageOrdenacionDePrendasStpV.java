@@ -110,7 +110,7 @@ public class PageOrdenacionDePrendasStpV {
 		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 		
 		//Validations
-		int maxSecondsWait = 8;
+		int maxSecondsWait = 10;
 		mantoOrdenacionValidation(datosStep, dFTest, 
 			1, "Aparecen imagenes en la nueva página",	Orden.pruebaImagen, maxSecondsWait);
 		mantoOrdenacionValidation(datosStep, dFTest, 
