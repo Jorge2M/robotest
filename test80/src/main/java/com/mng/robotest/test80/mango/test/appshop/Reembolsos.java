@@ -89,7 +89,7 @@ public class Reembolsos extends GestorWebDriver {
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Otras", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDriver().driver;
+        WebDriver driver = getDataWebDriver().driver;
         super.quitWebDriver(driver, context);
     }		
 	
@@ -100,7 +100,7 @@ public class Reembolsos extends GestorWebDriver {
         groups={"Reembolso", "Canal:all_App:shop"}, 
         description="Configura el reembolso vía transferencia y saldo en cuenta para un país/idioma determinado")
     public void REE001_configureReembolso(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
+        DataFmwkTest dFTest = new DataFmwkTest(getDataWebDriver(), method, context);
         DataCtxShop dCtxSh = this.dCtsShThread.get();
 	    
         //Este test sólo aplica al entornos no productivos
@@ -150,7 +150,7 @@ public class Reembolsos extends GestorWebDriver {
         groups={"Reembolso", "Canal:all_App:shop"},
         description="Se realiza un Checkout utilizando Saldo en Cuenta. Se accede a la configuración al inicio y al final para comprobar que el saldo en cuenta se resta correctamente")
     public void REE002_checkoutWithSaldoCta(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
+        DataFmwkTest dFTest = new DataFmwkTest(getDataWebDriver(), method, context);
         DataCtxShop dCtxSh = this.dCtsShThread.get();
         
         //Este test sólo aplica al entornos no productivos

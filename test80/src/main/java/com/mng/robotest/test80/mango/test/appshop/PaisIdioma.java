@@ -110,7 +110,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Lineas", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDriver().driver;
+        WebDriver driver = getDataWebDriver().driver;
         try {
             super.quitWebDriver(driver, context);
         }
@@ -124,7 +124,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
         description="Acceso desde prehome y navegación por todas las líneas/sublíneas/carrusels del país + selección menú/s")
     public void PAR001_Lineas(ITestContext context, Method method) throws Exception {
         DataCtxShop dCtxShI = this.dCtsShThread.get();
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
+        DataFmwkTest dFTest = new DataFmwkTest(getDataWebDriver(), method, context);
         DatosStep datosStep = null;
             
         datosStep = PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxShI, dFTest);

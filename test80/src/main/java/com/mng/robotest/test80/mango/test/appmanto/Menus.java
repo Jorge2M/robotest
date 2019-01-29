@@ -46,25 +46,21 @@ public class Menus  extends GestorWebDriver {
 		this.dMantoAcc.userManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramUsrmanto);
 		this.dMantoAcc.passManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramPasmanto);
 		this.dMantoAcc.appE = AppEcom.shop;
-
-		//Creación del WebDriver
-		createDriverInThread(bpath, urlBase, this.index_fact, Channel.desktop, ctx, method);
+		getAndStoreDataFmwk(bpath, urlBase, this.index_fact, Channel.desktop, ctx, method);
 	}
 
 	@SuppressWarnings("unused")
 	@AfterMethod (groups={"Menus", "Canal:desktop_App:all", "SupportsFactoryCountrys"}, alwaysRun = true)
 	public void logout(ITestContext context, Method method) throws Exception {
-		WebDriver driver = getDriver().driver;
+		WebDriver driver = getWebDriver();
 		super.quitWebDriver(driver, context);
 	}
 
 	@Test(
-			groups={"Menus", "Canal:desktop_App:all"},
-			description="Consulta de menús")
+		groups={"Menus", "Canal:desktop_App:all"},
+		description="Consulta de menús")
 	public void MAN005_ConsultaMenus(ITestContext context, Method method) throws Exception {
-		DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-
-		//Script
+		DataFmwkTest dFTest = getdFTest();
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)

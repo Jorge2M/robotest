@@ -67,7 +67,7 @@ public class Favoritos extends GestorWebDriver {
     public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) 
     throws Exception {
         //Recopilación de parámetros
-        dCtxSh = new DataCtxShop();
+        DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom(appEcom);
         dCtxSh.setChannel(channel);
         dCtxSh.urlAcceso = urlAcceso;
@@ -89,17 +89,14 @@ public class Favoritos extends GestorWebDriver {
             dCtxSh.idioma = this.idiomaFactory;
         }
         
-        //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        this.clonePerThreadCtx();
-        
-        //Creación del WebDriver
-        createDriverInThread(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
+        storeInThread(dCtxSh);
+        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
     }
 
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Favoritos", "Canal:all_App:shop", "SupportsFactoryCountrys"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDriver().driver;
+        WebDriver driver = getWebDriver();
         super.quitWebDriver(driver, context);
     }       
 
@@ -108,8 +105,8 @@ public class Favoritos extends GestorWebDriver {
         groups={"Favoritos", "Canal:all_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
         description="[Usuario registrado] Alta favoritos desde la galería")
     public void FAV001_AltaFavoritosDesdeGaleria(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;
@@ -148,9 +145,9 @@ public class Favoritos extends GestorWebDriver {
         groups={"Favoritos", "Canal:all_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
         /*dependsOnMethods = {"FAV001_AltaFavoritosDesdeGaleria"},*/ 
         description="[Usuario no registrado] Alta favoritos desde la galería y posterior identificación")
-    	public void FAV002_AltaFavoritosDesdeFicha(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    public void FAV002_AltaFavoritosDesdeFicha(ITestContext context, Method method) throws Exception {
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         dCtxSh.userRegistered=false;
         DataFavoritos dataFavoritos = new DataFavoritos();
         DataBag dataBolsa = new DataBag();

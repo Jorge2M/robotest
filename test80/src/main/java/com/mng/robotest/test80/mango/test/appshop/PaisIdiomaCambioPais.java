@@ -43,13 +43,13 @@ public class PaisIdiomaCambioPais extends GestorWebDriver /*Funcionalidades gen√
     @SuppressWarnings("unused")
     @AfterMethod (alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDriver().driver;
+        WebDriver driver = getDataWebDriver().driver;
         super.quitWebDriver(driver, context);
     }	
 	
     @Test
     public void CAM001_PR_CambioPais(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
+        DataFmwkTest dFTest = new DataFmwkTest(getDataWebDriver(), method, context);
 	AccesoStpV.accesoPRYCambioPais(this.dCtxSh, this.paisDestino, this.idiomaDestino, dFTest);
     }
 }

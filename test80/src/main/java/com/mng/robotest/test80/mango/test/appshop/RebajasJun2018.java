@@ -76,7 +76,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
     @SuppressWarnings("unused")
     @AfterMethod (groups={"RebajasDic2018", "Canal:desktop_App:shop", "SupportsFactoryCountrys"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDriver().driver;
+        WebDriver driver = getDataWebDriver().driver;
         super.quitWebDriver(driver, context);
     }	
 	
@@ -85,7 +85,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
     	   description="Validaciones específicas correspondientes a las Rebajas de Diciembre-2017")
     public void REB001_RebajasDic2018(ITestContext context, Method method) throws Exception {
         DataCtxShop dCtxSh = this.dCtsShThread.get();
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
+        DataFmwkTest dFTest = new DataFmwkTest(getDataWebDriver(), method, context);
         DatosStep datosStep = null;
         int numLineasPais = dCtxSh.pais.getShoponline().getNumLineasTiendas(dCtxSh.appE);
             

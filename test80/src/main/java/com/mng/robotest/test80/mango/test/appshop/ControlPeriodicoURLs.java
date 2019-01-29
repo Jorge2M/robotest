@@ -55,13 +55,13 @@ public class ControlPeriodicoURLs extends GestorWebDriver /*Funcionalidades gen√
     @Parameters({"brwsr-path", "urlBase", "Channel"})
     public void login(String bpath, String urlAcceso, String channelI, ITestContext context, Method method) throws Exception {
         Channel channel = ChannelEnum.getChannel(channelI);
-        createDriverInThread(bpath, urlAcceso, this.index_fact, channel, context, method);
+        getAndStoreDataFmwk(bpath, urlAcceso, this.index_fact, channel, context, method);
     }
         
     @SuppressWarnings({ "unused" })
     @AfterMethod (alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDriver().driver;
+        WebDriver driver = getWebDriver();
         try {
             super.quitWebDriver(driver, context);
         }
@@ -72,9 +72,7 @@ public class ControlPeriodicoURLs extends GestorWebDriver /*Funcionalidades gen√
     
     @Test
     public void CP001_URL_ControlPeriodico(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        
-        // Acceso a la URL
+    	DataFmwkTest dFTest = getdFTest();
         try {
             accesoURLPais(this.listaPaisesControlUrl, true/*netAnalysis*/, dFTest);
         }

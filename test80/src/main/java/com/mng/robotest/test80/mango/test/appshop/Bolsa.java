@@ -49,7 +49,7 @@ public class Bolsa extends GestorWebDriver {
     public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) 
     throws Exception {
         //Recopilación de parámetros
-        dCtxSh = new DataCtxShop();
+        DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom(appEcom);
         dCtxSh.setChannel(channel);
         dCtxSh.urlAcceso = urlAcceso;
@@ -63,15 +63,14 @@ public class Bolsa extends GestorWebDriver {
         dCtxSh.pais = this.españa;
         dCtxSh.idioma = this.castellano;
         
-        //Creación del WebDriver y almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        this.clonePerThreadCtx();
-        createDriverInThread(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        storeInThread(dCtxSh);
+        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
     
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Bolsa", "Canal:desktop_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDriver().driver;
+        WebDriver driver = getWebDriver();
         super.quitWebDriver(driver, context);
     }       
 
@@ -79,8 +78,8 @@ public class Bolsa extends GestorWebDriver {
         groups={"Bolsa", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true, 
         description="[Usuario no registrado] Añadir artículo a la bolsa")
     public void BOR001_AddBolsaFromGaleria_NoReg(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         dCtxSh.userRegistered = false;
         
         AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest);
@@ -120,8 +119,8 @@ public class Bolsa extends GestorWebDriver {
         groups={"Bolsa", "Canal:desktop_App:all"}, alwaysRun=true, 
         description="[Usuario no registrado] Añadir y eliminar artículos de la bolsa")
     public void BOR005_Gest_Prod_Bolsa_Noreg(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         dCtxSh.userRegistered = false;
         BOR005_6_Gest_Prod_Bolsa(dCtxSh, dFTest);
     }
@@ -130,8 +129,8 @@ public class Bolsa extends GestorWebDriver {
         groups={"Bolsa", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true, 
         description="[Usuario registrado] Añadir artículo a la bolsa")
     public void BOR002_AnyadirBolsa_yCompra_SiReg(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;
@@ -162,8 +161,8 @@ public class Bolsa extends GestorWebDriver {
         groups={"Bolsa", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true, 
         description="[Usuario registrado] Añadir y eliminar artículos de la bolsa")
     public void BOR006_Gest_Prod_Bolsa_Sireg(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;

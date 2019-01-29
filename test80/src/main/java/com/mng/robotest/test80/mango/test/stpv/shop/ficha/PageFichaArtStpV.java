@@ -767,9 +767,9 @@ public class PageFichaArtStpV {
     }
     
     @Validation (
-        description="Prueba de test",
+        description="Descripción de la validación",
         level=State.Warn)
     public void ValidateInConstruction(DataFmwkTest dFTest) {
-    	
+    	assert(SecBreadcrumbFichaOld.isVisibleBreadCrumb(this.dFTest.driver));
     }
 }

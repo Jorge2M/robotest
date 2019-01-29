@@ -46,19 +46,15 @@ public class Otras extends GestorWebDriver {
     @Parameters({"brwsr-path","urlBase", "AppEcom", "Channel"})
     public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) 
     throws Exception {
-        //testResources.skipTestsIfSuiteStoped(context);
-        
-        dCtxSh = new DataCtxShop();
+
+        DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom(appEcom);
         dCtxSh.setChannel(channel);
         dCtxSh.urlAcceso = urlAcceso;
         
-        
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        this.clonePerThreadCtx();
-        
-        //Creamos el WebDriver con el que ejecutaremos el Test
-        createDriverInThread(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        storeInThread(dCtxSh);
+        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
         
         if (this.españa==null) {
             Integer codEspanya = Integer.valueOf(1);
@@ -86,17 +82,16 @@ public class Otras extends GestorWebDriver {
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Otras", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDriver().driver;
+        WebDriver driver = getWebDriver();
         super.quitWebDriver(driver, context);
     }		
 	
-    
     @Test (
         groups={"Otras", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, 
         description="Comprobar acceso url desde email")
     public void OTR001_check_Redirects(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
 	    
         //Step. Acceso a la aplicación shop/outlet/VOTF sin registrarse posteriormente
         dCtxSh.pais = this.españa;
@@ -121,7 +116,7 @@ public class Otras extends GestorWebDriver {
         groups={"Otras", "Canal:desktop_App:shop"}, 
         description="Verificar en google la existencia de referencia Mango")
     public void OTR002_check_Busqueda_Google(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
+    	DataFmwkTest dFTest = getdFTest();
         GoogleStpV.accessGoogleAndSearchMango(dFTest);
         GoogleStpV.selectFirstLinkSinPublicidad(dFTest);
     }
@@ -130,8 +125,8 @@ public class Otras extends GestorWebDriver {
         groups={"Otras", "Canal:desktop_App:all"}, 
         description="Verificar el cambio de país a través del modal")
     public void OTR003_cambioPais(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
 	    
         //Step. Acceder a la aplicación en España/Castellano y después realiza un cambio a Francia/Francés
         dCtxSh.pais = this.españa;
@@ -147,8 +142,8 @@ public class Otras extends GestorWebDriver {
         groups={"Otras", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, 
         description="Verificar el cambio de país a través de url")
     public void OTR004_cambioPaisURL(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         String urlBaseTest = (String)context.getAttribute("appPath");
 
         //Definimos la lista de los 3 países que pueden estar asociados a la IP del usuario
@@ -203,8 +198,8 @@ public class Otras extends GestorWebDriver {
         groups={"Otras", "Canal:desktop_App:shop"}, 
         description="Acceso al país Japón desde la preHome y comprobación de que redirige a la shop específica de este país")
     public void OTR005_accesoJapon(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         String urlBaseTest = (String)context.getAttribute("appPath");
 
         dCtxSh.pais = this.japon;

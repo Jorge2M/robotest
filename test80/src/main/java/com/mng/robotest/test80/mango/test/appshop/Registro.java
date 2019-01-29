@@ -102,7 +102,7 @@ public class Registro extends GestorWebDriver {
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Registro", "Canal:all_App:all", "SupportsFactoryCountrys"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDriver().driver;
+        WebDriver driver = getDataWebDriver().driver;
         super.quitWebDriver(driver, context);
     }       
 
@@ -111,7 +111,7 @@ public class Registro extends GestorWebDriver {
         groups={"Registro", "Canal:desktop_App:all"},
         description="Registro con errores en la introducción de los datos")
     public void REG001_RegistroNOK(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
+        DataFmwkTest dFTest = new DataFmwkTest(getDataWebDriver(), method, context);
         DataCtxShop dCtxSh = this.dCtsShThread.get();
         dCtxSh.userRegistered = false;
         if (dCtxSh.appE==AppEcom.votf)
@@ -165,7 +165,7 @@ public class Registro extends GestorWebDriver {
         if ("false".compareTo(register)==0)
         	clickRegister = false;
         
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
+        DataFmwkTest dFTest = new DataFmwkTest(getDataWebDriver(), method, context);
         DataCtxShop dCtxSh = this.dCtsShThread.get();
         dCtxSh.userRegistered = false;
             
@@ -222,7 +222,7 @@ public class Registro extends GestorWebDriver {
         description="Alta/Registro de un usuario (sin seleccionar el link de publicidad)")
     public void REG003_RegistroOK_NoPubli(ITestContext context, Method method) throws Exception {
     	boolean clickPubli = false;
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
+        DataFmwkTest dFTest = new DataFmwkTest(getDataWebDriver(), method, context);
         DataCtxShop dCtxSh = this.dCtsShThread.get();
         dCtxSh.userRegistered = false;
             

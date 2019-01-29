@@ -103,13 +103,13 @@ public class TestNodos extends GestorWebDriver {
     @SuppressWarnings("unused")
     @AfterMethod (alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDriver().driver;
+        WebDriver driver = getDataWebDriver().driver;
         super.quitWebDriver(driver, context);
     }	
 	
     @Test (description="Verificar funcionamiento general en un nodo. Validar status, acceso, click banner, navegación por las líneas...")
     public void NOD001_TestNodo(ITestContext context, Method method) throws Throwable {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
+        DataFmwkTest dFTest = new DataFmwkTest(getDataWebDriver(), method, context);
         DataCtxShop dCtxSh = this.dCtsShThread.get();
         DatosStep datosStep = null;
         AppEcom appE = this.nodo.getAppEcom();

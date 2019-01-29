@@ -15,16 +15,16 @@ public class DataFmwkTest {
     public Method meth;
     public ITestContext ctx;
     
-    public DataFmwkTest(DataWebdriver dataWebDrv, Method methodI, ITestContext contextI) {
-        this.driver = dataWebDrv.driver;
-        this.typeDriver = dataWebDrv.typeDriver;
+    public DataFmwkTest(WebDriver driver, TypeDriver typeDriver, Method methodI, ITestContext contextI) {
+        this.driver = driver;
+        this.typeDriver = typeDriver;
         this.meth = methodI;
         this.ctx = contextI;
     }
     
-    public DataFmwkTest(DataWebdriver dataWebDrv, ITestContext contextI) {
-        this.driver = dataWebDrv.driver;
-        this.typeDriver = dataWebDrv.typeDriver;
+    public DataFmwkTest(WebDriver driver, TypeDriver typeDriver, ITestContext contextI) {
+        this.driver = driver;
+        this.typeDriver = typeDriver;
         this.meth = null;
         this.ctx = contextI;
     }    

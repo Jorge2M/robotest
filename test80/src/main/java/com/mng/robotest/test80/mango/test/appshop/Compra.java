@@ -90,26 +90,21 @@ public class Compra extends GestorWebDriver {
         
         //Recopilación de parámetros comunes
         //DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh = new DataCtxShop();
+        DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom(appEcom);
         dCtxSh.setChannel(channel);
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
         dCtxSh.urlAcceso = urlAcceso;
         
-        //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        //TODO hablarlo con Miguel porque parece que no funciona correctamente
-        this.clonePerThreadCtx();
-        //this.dCtsShThread.set(dCtxSh);
-        
-        //Creamos el WebDriver con el que ejecutaremos el Test
-        this.createDriverInThread(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        storeInThread(dCtxSh);
+        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 	
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Compra", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDriver().driver;
+        WebDriver driver = getWebDriver();
         super.quitWebDriver(driver, context);
     }		
 	
@@ -117,8 +112,8 @@ public class Compra extends GestorWebDriver {
         groups={"Compra", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true, priority=2, 
         description="[Usuario registrado][Tarjeta guardada] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
     public void COM001_Compra_TrjSaved_Empl(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;
@@ -154,8 +149,8 @@ public class Compra extends GestorWebDriver {
         groups={"Compra", "Canal:desktop_App:shop"}, alwaysRun=true,
         description="[Usuario registrado] Compra Cheque regalo")
     public void COM004_Cheque_Regalo_NoReg_emailExist(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;        
@@ -214,8 +209,8 @@ public class Compra extends GestorWebDriver {
         groups={"Compra", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true,
         description="[Usuario no registrado] Compra con cambio datos en dirección de envío en checkout")
     public void COM003_Compra_y_CambioPais_Noreg_emailExist(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         dCtxSh.userRegistered = false;
             
         //Indicamos la lista de países hacia los que queremos cambiar/verificar en la página de precompra 
@@ -244,8 +239,8 @@ public class Compra extends GestorWebDriver {
         groups={"Compra", "Canal:desktop_App:all"}, alwaysRun=true,
         description="[Usuario no registrado] Pre-compra. Cierre/Inicio sesión correcto")
     public void COM005_Compra_noReg_emailNoExist(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         dCtxSh.userRegistered = false;
 	    
         //No permitiremos la ejecución diaria de este tipo de checkout porque implica la ejecución de un registro de usuario con el nuevo email introducido 
@@ -291,8 +286,8 @@ public class Compra extends GestorWebDriver {
         groups={"Compra", "Canal:desktop_App:votf"}, /*dependsOnGroups = {"Bolsa"},*/ alwaysRun=true,
         description="description=[Usuario no registrado] Test en VOTF compra desde tienda Francia")
     public void COM006_Compra_Francia_Tienda(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         dCtxSh.pais=this.francia;
         dCtxSh.idioma=this.frances;   
         dCtxSh.userRegistered = false;
@@ -318,8 +313,8 @@ public class Compra extends GestorWebDriver {
     //    groups={"Compra", "Canal:desktop_App:shop"}, alwaysRun=true, priority=1,
     //    description="description=[Usuario sin conectar] Alta pago con Codensa (Colombia) y posterior cambios de estado mediante API")
     public void COM008_Compra_ColombiaCodensa(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         dCtxSh.pais=this.colombia;
         dCtxSh.idioma=this.castellanoColomb;   
         dCtxSh.userRegistered = false;

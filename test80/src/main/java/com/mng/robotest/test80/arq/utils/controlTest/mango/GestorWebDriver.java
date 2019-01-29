@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
-import com.mng.robotest.test80.arq.utils.DataWebdriver;
+import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.NetTrafficMng;
 import com.mng.robotest.test80.arq.utils.controlTest.GestorWebDrv;
 import com.mng.robotest.test80.arq.utils.controlTest.StoredWebDrv;
@@ -22,40 +22,42 @@ import java.text.Normalizer;
 import java.util.regex.Pattern;
 
 @SuppressWarnings("javadoc")
-public class GestorWebDriver extends fmwkTest /*Implementa todo lo relacionado con BD*/ implements GestorDriverRobotest2Adpater {
+public class GestorWebDriver extends fmwkTest {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
-	
-    protected ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
-    protected ThreadLocal<TypeDriver> threadTypeDriver = new ThreadLocal<>();
     static Object startupSync = new Object();
-	
-    protected ThreadLocal<DataCtxShop> dCtsShThread = new ThreadLocal<>();
-    protected DataCtxShop dCtxSh = null;
+    protected ThreadLocal<DataCtxShop> dCtxShInThread = new ThreadLocal<>();
+    protected ThreadLocal<DataFmwkTest> dFTestInThread = new ThreadLocal<>();
 
     public DataCtxShop getdCtxSh() {
-        return this.dCtxSh;
-    }
-
-    public void setdCtxSh(DataCtxShop dCtxSh) {
-        this.dCtxSh = dCtxSh;
-    }
-
-    @Override
-    public void setDCtsShThread(DataCtxShop dCtxSh) {
-        this.dCtsShThread.set(dCtxSh);
-    }
-
-    public DataCtxShop getDCtsShThread() {
-        return this.dCtsShThread.get();
+        return this.dCtxShInThread.get();
     }    
+    
+    public DataFmwkTest getdFTest() {
+        return this.dFTestInThread.get();
+    }   
+    
+    public WebDriver getWebDriver() {
+    	return (getdFTest().driver);
+    }
    
-    public void clonePerThreadCtx() {
-        if (null!=this.getdCtxSh()) {
-            //Acceso desde @Factory
-            //Clone y almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-            DataCtxShop dCtxShC = (DataCtxShop)this.getdCtxSh().clone();
-            this.dCtsShThread.set(dCtxShC);
-        }
+    public void storeInThread(DataCtxShop dCtxShop, DataFmwkTest dFTest) {
+    	storeInThread(dCtxShop);
+    	storeInThread(dFTest);
+    }
+    
+    public void storeInThread(DataCtxShop dCtxShop) {
+    	this.dCtxShInThread.set(dCtxShop);
+    }
+    
+    public void storeInThread(DataFmwkTest dFTest) {
+    	this.dFTestInThread.set(dFTest);
+    }
+    
+    public void getAndStoreDataFmwk(String bpath, String appPath, String datosFactoria, Channel channel, ITestContext context, Method method) 
+    throws Exception {
+		WebDriver driver = getWebDriver(bpath, appPath, datosFactoria, channel, context, method);
+		DataFmwkTest dFTest = new DataFmwkTest(driver, TypeDriver.valueOf(bpath), method, context);
+		storeInThread(dFTest);
     }
     
     /**
@@ -66,7 +68,8 @@ public class GestorWebDriver extends fmwkTest /*Implementa todo lo relacionado c
      * @param datosFactoria identificador de los casos de prueba creados desde factorías
      * @param isMobil       indicador de si las pruebas son de móvil o desktop
      */
-    public WebDriver createDriverInThread (String bpath, String appPath, String datosFactoria, Channel channel, ITestContext context, Method method) throws Exception {
+    public WebDriver getWebDriver(String bpath, String appPath, String datosFactoria, Channel channel, ITestContext context, Method method) 
+    throws Exception {
         WebDriver driver = null;
         if (!"ROBOTEST2".equals(System.getProperty("ROBOTEST2"))) {
             // Lo ideal sería ejecutar este método desde el InvokeListener.onTestStart, pero desde allí no tiene efecto
@@ -95,10 +98,6 @@ public class GestorWebDriver extends fmwkTest /*Implementa todo lo relacionado c
                 //Almacenamos el WebDriver creado en el gestor marcándolo con estado 'busy' y especificando los parámetros que definen sus características
                 gestorWd.storeWebDriver(driver, StoredWebDrv.stateWd.busy, canalWebDriver, moreDataWdrv);
             }
-            
-            //Almacenamiento para tener el webdriver accesible por Thread
-            this.threadDriver.set(driver);
-            this.threadTypeDriver.set(canalWebDriver);
                     
             //Almacenamiento en el contexto de algunos datos útiles
             context.setAttribute("bpath", bpath);
@@ -144,14 +143,6 @@ public class GestorWebDriver extends fmwkTest /*Implementa todo lo relacionado c
             }
         }
     }
-	
-    public void setDriver(WebDriver drv) {
-        this.threadDriver.set(drv);
-    }
-    
-    public DataWebdriver getDriver() {
-        return (new DataWebdriver(this.threadDriver.get(), this.threadTypeDriver.get()));
-    }	
 	
     public static String deAccent(String str) {
         String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD); 

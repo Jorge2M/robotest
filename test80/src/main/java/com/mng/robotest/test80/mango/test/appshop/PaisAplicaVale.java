@@ -56,7 +56,7 @@ public class PaisAplicaVale extends GestorWebDriver {
     @SuppressWarnings("unused")
     @AfterMethod (alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDriver().driver;
+        WebDriver driver = getDataWebDriver().driver;
         super.quitWebDriver(driver, context);
     }	
 	
@@ -64,7 +64,7 @@ public class PaisAplicaVale extends GestorWebDriver {
     @Parameters({"validaPasarelas", "validaPagos", "validaPedidosEnManto"})
     public void CHK001_Compra_noReg(String validaPasarelasStr, String validaPagosStr, String validaPedidosEnMantoStr, 
     								ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
+        DataFmwkTest dFTest = new DataFmwkTest(getDataWebDriver(), method, context);
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
         CHK001_Compra_noReg_Impl(validaPasarelasStr, validaPagosStr, validaPedidosEnMantoStr, dFTest);
     }

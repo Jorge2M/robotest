@@ -33,7 +33,7 @@ public class IniciarSesion extends GestorWebDriver {
     public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) 
     throws Exception {
         //Recopilación de parámetros
-        dCtxSh = new DataCtxShop();
+        DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom(appEcom);
         dCtxSh.setChannel(channel);
         dCtxSh.urlAcceso = urlAcceso;
@@ -44,15 +44,14 @@ public class IniciarSesion extends GestorWebDriver {
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        this.clonePerThreadCtx();
-        
-        createDriverInThread(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        storeInThread(dCtxSh);
+        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 
     @SuppressWarnings("unused")
     @AfterMethod (groups={"IniciarSesion", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDriver().driver;
+        WebDriver driver = getWebDriver();
         super.quitWebDriver(driver, context);
     }       
 
@@ -60,8 +59,8 @@ public class IniciarSesion extends GestorWebDriver {
         groups={"IniciarSesion", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, /*dependsOnMethods = {"SES002_Registro_OK"},*/ alwaysRun=true, 
         description="Verificar inicio sesión con usuario incorrecto")
     public void SES001_IniciarSesion_NOK(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         dCtxSh.userRegistered = false;
                     
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
@@ -76,8 +75,8 @@ public class IniciarSesion extends GestorWebDriver {
         groups={"IniciarSesion", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, /*dependsOnMethods = {"SES003_IniciarSesion_NOK"},*/ alwaysRun=true, 
         description="[Usuario registrado] Verificar inicio sesión")
     public void SES002_IniciarSesion_OK(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;

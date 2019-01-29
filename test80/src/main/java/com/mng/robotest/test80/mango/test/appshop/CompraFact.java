@@ -93,24 +93,21 @@ public class CompraFact extends GestorWebDriver {
     public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) 
     throws Exception {
         //Recopilación de parámetros
-        dCtxSh = new DataCtxShop();
+        DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom(appEcom);
         dCtxSh.setChannel(channel);
         dCtxSh.urlAcceso = urlAcceso;
         dCtxSh.pais = this.paisFactory;
         dCtxSh.idioma = this.idiomaFactory;
         
-        //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        this.clonePerThreadCtx();
-        
-        //Creación del WebDriver
-        createDriverInThread(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);     
+        storeInThread(dCtxSh);
+        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);     
     }    
     
     @SuppressWarnings("unused")
     @AfterMethod (groups={"CompraFact", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDriver().driver;
+        WebDriver driver = getWebDriver();
         super.quitWebDriver(driver, context);
     }    
       
@@ -118,10 +115,10 @@ public class CompraFact extends GestorWebDriver {
         groups={"Compra", "Canal:all_App:all"}, alwaysRun=true, priority=1, 
         description="Test de compra (creado desde Factoría) con valores específicos a nivel de Pago, Tipo de Envío, Usuario Conectado y Empleado")
     public void COM010_Pago(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+        DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         dCtxSh.userRegistered = this.usrRegistrado;
-        this.testVale = includeValeValidation(dFTest);
+        this.testVale = includeValeValidation(dCtxSh.appE, dFTest);
         if (dCtxSh.userRegistered) {
 	        UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
 	        dCtxSh.userConnected = userShop.user;
@@ -164,10 +161,10 @@ public class CompraFact extends GestorWebDriver {
             PedidosNavigations.testPedidosEnManto(dCtxPago.getListPedidos(), dCtxSh.appE, dFTest);
     }
     
-    private boolean includeValeValidation(DataFmwkTest dFTest) {
+    private boolean includeValeValidation(AppEcom app, DataFmwkTest dFTest) {
     	return (
     		this.testVale && 
-    		!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest));
+    		!UtilsMangoTest.isEntornoPRO(app, dFTest));
     }
 
 }

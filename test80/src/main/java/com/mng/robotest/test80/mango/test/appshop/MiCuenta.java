@@ -66,7 +66,7 @@ public class MiCuenta extends GestorWebDriver {
     public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) 
     throws Exception {
         //Recopilación de parámetros comunes
-        dCtxSh = new DataCtxShop();
+        DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom(appEcom);
         dCtxSh.setChannel(channel);
         dCtxSh.urlAcceso = urlAcceso;
@@ -90,17 +90,15 @@ public class MiCuenta extends GestorWebDriver {
         }
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        this.clonePerThreadCtx();
-        
-        //Creamos el WebDriver con el que ejecutaremos el Test        
-        createDriverInThread(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
+        storeInThread(dCtxSh);
+        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
     }
 
 
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Micuenta", "Canal:all_App:all", "SupportsFactoryCountrys"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDriver().driver;
+        WebDriver driver = getWebDriver();
         super.quitWebDriver(driver, context);
     }       
 
@@ -109,8 +107,8 @@ public class MiCuenta extends GestorWebDriver {
         description="Verificar opciones de 'mi cuenta'")
     @Parameters({"userConDevolucionPeroSoloEnPRO", "passwordUserConDevolucion"})
     public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion, ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         dCtxSh.userConnected = userConDevolucionPeroNoEnPRO;
         dCtxSh.passwordUser = passwordUserConDevolucion;
             
@@ -147,8 +145,8 @@ public class MiCuenta extends GestorWebDriver {
         description="Consulta de mis compras con un usuario con datos a nivel de Tienda y Online")
     @Parameters({"userConComprasPeroSoloOnlineEnPRO", "passwordUserConCompras"})
     public void MIC002_CheckConsultaMisCompras(String userConCompras, String passwordUserConCompras, ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         dCtxSh.userConnected = userConCompras;
         dCtxSh.passwordUser = passwordUserConCompras;
         dCtxSh.userRegistered = true;

@@ -44,7 +44,7 @@ public class SEO extends GestorWebDriver {
     @SuppressWarnings("unused")
     @AfterMethod(groups = { "Otras", "Canal:all_App:all" }, alwaysRun = true)
     public void logout(final ITestContext context, final Method method) throws Exception {
-        WebDriver driver = getDriver().driver;
+        WebDriver driver = getDataWebDriver().driver;
         super.quitWebDriver(driver, context);
     }
 
@@ -52,7 +52,7 @@ public class SEO extends GestorWebDriver {
         groups = { "Otras", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, 
         description="Comprobar existencia y contenido del fichero robots.txt")
     public void SEO001_check_RobotsSitemap(final ITestContext context, final Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
+        DataFmwkTest dFTest = new DataFmwkTest(getDataWebDriver(), method, context);
         DataCtxShop dCtxSh = this.dCtsShThread.get();
         
         //Este test sólo aplica al entorno productivo
