@@ -308,6 +308,8 @@ public class PageGestorChequesStpV {
 		datosStep.setGrab_ErrorPageIfProblem(false);
 		try {
 			PageGestorCheques.inputChequeAndConfirm(cheque, dFTest.driver);
+
+			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		String descripValidac =
@@ -329,6 +331,8 @@ public class PageGestorChequesStpV {
 		datosStep.setGrab_ErrorPageIfProblem(false);
 		try {
 			PageGestorCheques.clickAndWait(ButtonsCheque.chequeData, dFTest.driver);
+
+			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		String descripValidac =

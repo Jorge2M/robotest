@@ -158,7 +158,7 @@ public class CorreoReport {
         html+="</tbody>";
     	
         //Totales
-        float totalCasos = totalOKs + totalNKs + totalWRs + totalIFs + totalSKs;
+        float totalCasos = totalOKs + totalNKs + totalDEs + totalWRs + totalIFs + totalSKs;
         html+=
             "<tfoot style=\"font-weight: bold;\">" +
     	    "<tr style=\"border:none;\">" +
