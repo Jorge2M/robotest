@@ -533,7 +533,7 @@ public class CreateWebDriver {
      * Establece el chromedriver.exe a nivel de parámetro webdriver.chrome.driver
      */
     private static void setDriverChrome() {        
-        ChromeDriverManager.getInstance().version("2.43").setup();
+        ChromeDriverManager.getInstance().version("2.45").setup();
     }
 
     /**

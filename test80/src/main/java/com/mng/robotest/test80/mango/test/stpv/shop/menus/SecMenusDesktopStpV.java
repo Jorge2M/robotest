@@ -58,6 +58,7 @@ public class SecMenusDesktopStpV {
         datosStep datosStep = new datosStep     (
             "Seleccionar el menú superior <b>" + menu1rstLevel + "</b>", 
             "Aparece la galería asociada al menú");
+        datosStep.setGrabHTML(true);
         datosStep.setGrabNettrafic(dFTest.ctx);
         try {
             SecMenusDesktop.
