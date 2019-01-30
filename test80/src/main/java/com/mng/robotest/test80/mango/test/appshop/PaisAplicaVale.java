@@ -28,6 +28,7 @@ public class PaisAplicaVale extends GestorWebDriver {
     public boolean isEmpl;
     public int prioridad;
     String masProductos = "";
+    DataCtxShop dCtxSh;
     
     public PaisAplicaVale(DataCtxShop dCtxSh, Continente continente, Pais paisChange, boolean isEmpl, int prioridad) {
         //Recopilación de parámetros
@@ -50,13 +51,13 @@ public class PaisAplicaVale extends GestorWebDriver {
     @Parameters({"brwsr-path", "urlBase", "masProductos"})
     public void login(String bpath, String urlAcceso, String masProductosI, ITestContext context, Method method) throws Exception {
         //Creamos el WebDriver con el que ejecutaremos el Test
-        createDriverInThread(bpath, urlAcceso, this.index_fact, this.dCtxSh.channel, context, method);    
+    	getAndStoreDataFmwk(bpath, urlAcceso, this.index_fact, this.dCtxSh.channel, context, method);    
     }
 	
     @SuppressWarnings("unused")
     @AfterMethod (alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDataWebDriver().driver;
+        WebDriver driver = getWebDriver();
         super.quitWebDriver(driver, context);
     }	
 	
@@ -64,8 +65,7 @@ public class PaisAplicaVale extends GestorWebDriver {
     @Parameters({"validaPasarelas", "validaPagos", "validaPedidosEnManto"})
     public void CHK001_Compra_noReg(String validaPasarelasStr, String validaPagosStr, String validaPedidosEnMantoStr, 
     								ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDataWebDriver(), method, context);
-        //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
+    	DataFmwkTest dFTest = getdFTest();
         CHK001_Compra_noReg_Impl(validaPasarelasStr, validaPagosStr, validaPedidosEnMantoStr, dFTest);
     }
 	

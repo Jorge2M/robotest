@@ -20,6 +20,7 @@ public class SEO extends GestorWebDriver {
 
     boolean isMobile;
     boolean isOutlet;
+    private DataCtxShop dCtxSh;
 
     public SEO() {
     }
@@ -35,16 +36,14 @@ public class SEO extends GestorWebDriver {
         dCtxSh.urlAcceso = urlAcceso;
 
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        this.clonePerThreadCtx();        
-        
-        //Creamos el WebDriver con el que ejecutaremos el Test
-        this.createDriverInThread(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        storeInThread(dCtxSh);        
+        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 
     @SuppressWarnings("unused")
     @AfterMethod(groups = { "Otras", "Canal:all_App:all" }, alwaysRun = true)
     public void logout(final ITestContext context, final Method method) throws Exception {
-        WebDriver driver = getDataWebDriver().driver;
+        WebDriver driver = getWebDriver();
         super.quitWebDriver(driver, context);
     }
 
@@ -52,8 +51,8 @@ public class SEO extends GestorWebDriver {
         groups = { "Otras", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, 
         description="Comprobar existencia y contenido del fichero robots.txt")
     public void SEO001_check_RobotsSitemap(final ITestContext context, final Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDataWebDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         
         //Este test sólo aplica al entorno productivo
         if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest))

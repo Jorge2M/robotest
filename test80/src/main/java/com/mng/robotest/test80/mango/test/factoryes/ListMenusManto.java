@@ -59,8 +59,7 @@ public class ListMenusManto {
         WebDriver driver = CreateWebDriver.getWebDriver(TypeDriver.firefox);
         
         //Nos posicionamos en la página de Menús mediante WebDriver y obtenemos la lista
-        DataWebdriver dataWebDriver = new DataWebdriver(driver, TypeDriver.firefox);
-        DataFmwkTest dFTest = new DataFmwkTest(dataWebDriver, null/*context*/);
+        DataFmwkTest dFTest = new DataFmwkTest(driver, TypeDriver.firefox, null/*context*/);
         PageLoginMantoStpV.login(urlBaseManto, Constantes.userManto, Constantes.passwordManto, dFTest);
         String codigoEspanya = "001";
         String almacenEspanya = "001";

@@ -26,14 +26,14 @@ public class GestorWebDriver extends fmwkTest {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     static Object startupSync = new Object();
     protected ThreadLocal<DataCtxShop> dCtxShInThread = new ThreadLocal<>();
-    protected ThreadLocal<DataFmwkTest> dFTestInThread = new ThreadLocal<>();
+    static ThreadLocal<DataFmwkTest> dFTestInThread = new ThreadLocal<>();
 
     public DataCtxShop getdCtxSh() {
         return this.dCtxShInThread.get();
     }    
     
-    public DataFmwkTest getdFTest() {
-        return this.dFTestInThread.get();
+    public static DataFmwkTest getdFTest() {
+        return dFTestInThread.get();
     }   
     
     public WebDriver getWebDriver() {
@@ -46,11 +46,11 @@ public class GestorWebDriver extends fmwkTest {
     }
     
     public void storeInThread(DataCtxShop dCtxShop) {
-    	this.dCtxShInThread.set(dCtxShop);
+    	this.dCtxShInThread.set((DataCtxShop)dCtxShop.clone());
     }
     
     public void storeInThread(DataFmwkTest dFTest) {
-    	this.dFTestInThread.set(dFTest);
+    	dFTestInThread.set(dFTest);
     }
     
     public void getAndStoreDataFmwk(String bpath, String appPath, String datosFactoria, Channel channel, ITestContext context, Method method) 

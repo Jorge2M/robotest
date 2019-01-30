@@ -53,6 +53,7 @@ public class TestNodos extends GestorWebDriver {
     public String urlStatus;
     public String urlErrorpage;
     public boolean testLinksPie;
+    private DataCtxShop dCtxSh;
     
     /**
      * @param listaNodos lista de todos los nodos que está previsto testear
@@ -65,12 +66,12 @@ public class TestNodos extends GestorWebDriver {
     public TestNodos(HashMap<String, NodoStatus> listaNodos, NodoStatus nodo, int prioridad, String autAddr, String urlStatus, String urlErrorpage, boolean testLinksPie) {
         this.index_fact = "Nodo-" + nodo.getIp();
         this.listaNodos = listaNodos;
-	this.nodo = nodo;
-	this.prioridad = prioridad;
-	this.autAddr = autAddr;
-	this.urlStatus = urlStatus;
-	this.urlErrorpage = urlErrorpage;
-	this.testLinksPie = testLinksPie;
+		this.nodo = nodo;
+		this.prioridad = prioridad;
+		this.autAddr = autAddr;
+		this.urlStatus = urlStatus;
+		this.urlErrorpage = urlErrorpage;
+		this.testLinksPie = testLinksPie;
     }	  
 	  
     @BeforeMethod
@@ -94,23 +95,21 @@ public class TestNodos extends GestorWebDriver {
         dCtxSh.idioma = this.castellano;
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        this.clonePerThreadCtx();
-        
-        //Creamos el WebDriver con el que ejecutaremos el Test
-        createDriverInThread(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
+        storeInThread(dCtxSh);
+        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
     }
 	
     @SuppressWarnings("unused")
     @AfterMethod (alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDataWebDriver().driver;
+        WebDriver driver = getWebDriver();
         super.quitWebDriver(driver, context);
     }	
 	
     @Test (description="Verificar funcionamiento general en un nodo. Validar status, acceso, click banner, navegación por las líneas...")
     public void NOD001_TestNodo(ITestContext context, Method method) throws Throwable {
-        DataFmwkTest dFTest = new DataFmwkTest(getDataWebDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         DatosStep datosStep = null;
         AppEcom appE = this.nodo.getAppEcom();
         

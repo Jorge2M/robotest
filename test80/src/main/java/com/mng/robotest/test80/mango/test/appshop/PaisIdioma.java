@@ -52,6 +52,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
     private boolean recorreBanners;
     public int prioridad;
     CampanasData dataCamp;
+    DataCtxShop dCtxSh;
     
     //Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
     public PaisIdioma() {}
@@ -98,19 +99,16 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
             this.lineasAprobar = this.dCtxSh.pais.getShoponline().getLineasToTest(this.dCtxSh.appE);
             this.recorreMenus = false;
             this.recorreBanners = false;
-            this.dCtsShThread.set(this.dCtxSh);
         }
-        else {
-            clonePerThreadCtx();
-        }
-        
-        createDriverInThread(bpath, this.dCtxSh.urlAcceso, this.index_fact, this.dCtxSh.channel, context, method);
+
+        storeInThread(dCtxSh);
+        getAndStoreDataFmwk(bpath, this.dCtxSh.urlAcceso, this.index_fact, this.dCtxSh.channel, context, method);
     }
 	
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Lineas", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDataWebDriver().driver;
+        WebDriver driver = getWebDriver();
         try {
             super.quitWebDriver(driver, context);
         }
@@ -123,8 +121,8 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
         groups={"Lineas", "Canal:all_App:shop", "Canal:all_App:outlet"}, 
         description="Acceso desde prehome y navegación por todas las líneas/sublíneas/carrusels del país + selección menú/s")
     public void PAR001_Lineas(ITestContext context, Method method) throws Exception {
-        DataCtxShop dCtxShI = this.dCtsShThread.get();
-        DataFmwkTest dFTest = new DataFmwkTest(getDataWebDriver(), method, context);
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxShI = getdCtxSh();
         DatosStep datosStep = null;
             
         datosStep = PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxShI, dFTest);

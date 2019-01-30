@@ -45,6 +45,7 @@ public class Reembolsos extends GestorWebDriver {
     String baseUrl;
     boolean acceptNextAlert = true;
     StringBuffer verificationErrors = new StringBuffer();
+    DataCtxShop dCtxSh;
     
     /**
      * Acciones previas a cualquier @Test
@@ -76,10 +77,8 @@ public class Reembolsos extends GestorWebDriver {
         dCtxSh.idioma = this.arabia_arabe;
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        this.clonePerThreadCtx();
-        
-        //Creamos el WebDriver con el que ejecutaremos el Test
-        createDriverInThread(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        storeInThread(dCtxSh);
+        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 
     /**
@@ -89,7 +88,7 @@ public class Reembolsos extends GestorWebDriver {
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Otras", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getDataWebDriver().driver;
+        WebDriver driver = getWebDriver();
         super.quitWebDriver(driver, context);
     }		
 	
@@ -100,8 +99,8 @@ public class Reembolsos extends GestorWebDriver {
         groups={"Reembolso", "Canal:all_App:shop"}, 
         description="Configura el reembolso vía transferencia y saldo en cuenta para un país/idioma determinado")
     public void REE001_configureReembolso(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDataWebDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
 	    
         //Este test sólo aplica al entornos no productivos
         if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest))
@@ -150,8 +149,8 @@ public class Reembolsos extends GestorWebDriver {
         groups={"Reembolso", "Canal:all_App:shop"},
         description="Se realiza un Checkout utilizando Saldo en Cuenta. Se accede a la configuración al inicio y al final para comprobar que el saldo en cuenta se resta correctamente")
     public void REE002_checkoutWithSaldoCta(ITestContext context, Method method) throws Exception {
-        DataFmwkTest dFTest = new DataFmwkTest(getDataWebDriver(), method, context);
-        DataCtxShop dCtxSh = this.dCtsShThread.get();
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
         
         //Este test sólo aplica al entornos no productivos
         if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest))
