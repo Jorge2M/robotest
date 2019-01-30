@@ -24,9 +24,11 @@ import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
 import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBannersScreen;
+import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.LabelArticle;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.ControlTemporada;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
@@ -793,20 +795,25 @@ public class SecMenusDesktopStpV {
        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, datosStep, dFTest);
     }    
     
-    public static void validationsRebajas(Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void validationsRebajas(Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
+    throws Exception {
         //Validación especialmente útil en periodo de Rebajas
     	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(channel, app, dFTest.driver);
     	List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
+    	List<Integer> tempSales = FilterCollection.sale.getListTempArticles();
         String descripValidac = 
             "<b style=\"color:blue\">Rebajas</b></br>" +        		   
-            "1) No hay artículos <b>rebajados</b> con alguna de las etiquetas <b>" + listLabelsWrong + "</b>" + 
-            " (en sus correspondientes traducciones)"; 
+            "1) No hay artículos con las siguientes características:<br>" + 
+            " * Rebajados</b><br>" +
+            " * De temporadas anteriores " + tempSales + "<br>" +
+            " * Con alguna de las etiquetas <b>" + listLabelsWrong + "</b> (en sus correspondientes traducciones)"; 
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);     
         try {
             List<SimpleValidation> listVals = new ArrayList<>();
             //1)
-            ArrayList<String> listArtWrong = 
-            	pageGaleriaDesktop.getArticlesRebajadosWithLiteralInLabel(listLabelsWrong);
+            List<String> listArtWrong = 
+            	pageGaleriaDesktop.getArticlesTemporadaxRebajadosWithLiteralInLabel(ControlTemporada.articlesFrom, tempSales, listLabelsWrong);
+            	//pageGaleriaDesktop.getArticlesRebajadosWithLiteralInLabel(listLabelsWrong);
             if (listArtWrong.size() > 0) {
                 fmwkTest.addValidation(1, State.Warn, listVals);
                 descripValidac+=

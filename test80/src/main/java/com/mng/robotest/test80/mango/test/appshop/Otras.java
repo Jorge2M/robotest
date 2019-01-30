@@ -8,13 +8,21 @@ import java.util.List;
 
 import org.testng.annotations.*;
 
+import com.mng.robotest.test80.arq.annotations.Validation;
+import com.mng.robotest.test80.arq.annotations.ValidationResult;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
+import com.mng.robotest.test80.mango.test.pageobject.shop.PageIniShopJapon;
+import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
+import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecBreadcrumbFichaOld;
+import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha.TypeFicha;
 import com.mng.robotest.test80.mango.test.stpv.otras.GoogleStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PageIniShopJaponStpV;
@@ -208,4 +216,87 @@ public class Otras extends GestorWebDriver {
         DatosStep datosStep = PagePrehomeStpV.entradaShopGivenPaisSeleccionado(this.japon, this.japones, dCtxSh.channel, dFTest);
         PageIniShopJaponStpV.validaPageIniJapon(datosStep, dFTest);
     }	
+    
+    /**
+    /* Acceso a la prehome, selección de Japón/Japonés y validaciones de que aparece la portada de la shop específica de Japón
+     */
+    @Test (
+        groups={"Otras", "Canal:desktop_App:shop"}, 
+        description="Pruebas aspectos")
+    public void OTR006_PruebasAspectos(ITestContext context, Method method) throws Exception {
+    	DataFmwkTest dFTest = getdFTest();
+        DataCtxShop dCtxSh = getdCtxSh();
+        String urlBaseTest = (String)context.getAttribute("appPath");
+
+        dCtxSh.pais = this.japon;
+        dCtxSh.idioma = this.japones;
+        PagePrehomeStpV.seleccionPaisIdioma(urlBaseTest, dCtxSh, dFTest);
+        DatosStep datosStep = entradaShopGivenPaisSeleccionado(this.japon, this.japones, dCtxSh.channel, dFTest);
+        validaPagpreseIniJapon2(datosStep, dFTest.driver);
+    }	
+    
+    /**
+     * Given país/provincia/idioma seleccionados, se realiza el paso para entrar en la shop
+     */
+    public static DatosStep entradaShopGivenPaisSeleccionado(Pais pais, IdiomaPais idioma, Channel channel, DataFmwkTest dFTest) throws Exception {
+        //Step. Selección de país/idioma
+        DatosStep datosStep = new DatosStep(
+            "Si es preciso introducimos la provincia/idioma y finalmente seleccionamos el botón \"Entrar\"",
+            "Se accede a la Shop correctamente");
+        try {
+            //Seleccionamos la provincia/idioma (si los hubiera) y seleccionamos el botón "Entrar"
+            PagePrehome.selecionProvIdiomAndEnter(pais, idioma, channel, dFTest.driver);
+            
+            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+        } 
+        finally {datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));}
+        return datosStep;
+    }
+    
+    @Validation (
+    	description="Estamos en la página inicial de Japón",
+        level=State.Warn)
+    public boolean validaPageIniJapon1(DatosStep datosStep, WebDriver driver) {
+    	int maxSecondsToWait = 2;
+        return (PageIniShopJapon.isPageUntil(maxSecondsToWait, driver));
+    }
+    
+    @Validation (
+    	description="Estamos en la página inicial de Japón",
+        level=State.Warn)
+    public ValidationResult validaPagpreseIniJapon2(DatosStep datosStep, WebDriver driver) {
+    	ValidationResult valResult = new ValidationResult();
+    	int maxSecondsToWait = 2;
+        PageIniShopJapon.isPageUntil(maxSecondsToWait, driver);
+        return valResult;
+    }
+    
+//    //TODO pending refactors:
+//    // 1) Remove datosStep
+//    // 2) Reduce variable assignations
+//    @Validation
+//    public ValidationResult ValidateVisibilityOkAvisoSelectTalla(TypeFicha typeFichaAct, boolean isTallaUnica, State levelError, DatosStep datosStep, DataFmwkTest dFTest) {
+//        ValidationResult valResult = new ValidationResult();
+//        valResult.datosStep = datosStep;
+//        valResult.dFTest = dFTest;
+//        boolean isVisibleAviso = pageFicha.secDataProduct.isVisibleAvisoSeleccionTalla(dFTest.driver);
+//        String apareceAvisoStr = "Aparece un aviso indicando que hay que seleccionar la talla";
+//        if (isTallaUnica || typeFichaAct==TypeFicha.New) {
+//            valResult.validation = "NO " + apareceAvisoStr;
+//            valResult.resultOk = !isVisibleAviso;
+//            return valResult;
+//        }
+//
+//        valResult.validation = "SÍ " + apareceAvisoStr;
+//        valResult.resultOk = isVisibleAviso;
+//        valResult.levelError = levelError;        
+//        return valResult;
+//    }
+    
+//    @Validation (
+//        description="Descripción de la validación",
+//        level=State.Warn)
+//    public void ValidateInConstruction(DataFmwkTest dFTest) {
+//    	assert(SecBreadcrumbFichaOld.isVisibleBreadCrumb(this.dFTest.driver));
+//    }
 }

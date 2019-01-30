@@ -9,6 +9,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraOnline;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraTienda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompras;
@@ -22,7 +23,42 @@ public class PageMisComprasStpV {
 
     public static SecDetalleCompraTiendaStpV SecDetalleCompraTienda; 
     public static SecQuickViewArticuloStpV SecQuickViewArticulo;
-    
+    public static void validateIsPage(DataCtxShop dataCtxShop, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
+        if (dataCtxShop.pais.isTicketStoreEnabled()) {
+            validateIsPage(datosStep, dFTest);
+        } else {
+            validateIsPageWhenNotExistTabs(datosStep, dFTest);
+        }
+    }
+
+    private static void validateIsPageWhenNotExistTabs(DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
+        //Validaciones.
+        int maxSecondsToWait = 2;
+        String descripValidac =
+                "1) Aparece la pÃ¡gina de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
+                        "2) No aparece el bloque de \"Tienda\"<br>" +
+                        "3) No aparece el bloque de \"Online\"";
+        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        try {
+            List<SimpleValidation> listVals = new ArrayList<>();
+            //1)
+            if (!PageMisCompras.isPageUntil(maxSecondsToWait, dFTest.driver))
+                fmwkTest.addValidation(1, State.Warn, listVals);
+            //2)
+            if (PageMisCompras.isPresentBlockUntil(0/*maxSedondsToWait*/, TypeCompra.Tienda, dFTest.driver))
+                fmwkTest.addValidation(2, State.Warn, listVals);
+            //3)
+            if (PageMisCompras.isPresentBlockUntil(0/*maxSedondsToWait*/, TypeCompra.Online, dFTest.driver))
+                fmwkTest.addValidation(3, State.Warn, listVals);
+
+            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+        }
+        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+
+        //Validaciones estÃ¡ndar.
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
+    }
+
     public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         //Validaciones.
     	int maxSecondsToWait = 2;
@@ -60,7 +96,7 @@ public class PageMisComprasStpV {
             "Seleccionar el bloque \"" + typeCompra + "\"", 
             "Se hace visible el bloque de " + typeCompra);
         try {
-            PageMisCompras.clickBlock(typeCompra, dFTest.driver);
+            //PageMisCompras.clickBlock(typeCompra, dFTest.driver);
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
@@ -68,15 +104,15 @@ public class PageMisComprasStpV {
         
         //Validaciones
         int maxSecondsToWait = 2;
-        String descripValidac = 
+        String descripValidac =
             "1) Queda seleccionado el bloque de \"" + typeCompra + "\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
         try {
             List<SimpleValidation> listVals = new ArrayList<>();
             //1)
-            if (!PageMisCompras.isSelectedBlockUntil(maxSecondsToWait, typeCompra, dFTest.driver))
+            if (PageMisCompras.isSelectedBlockUntil(maxSecondsToWait, typeCompra, dFTest.driver))
                 fmwkTest.addValidation(1, State.Warn, listVals);
-        
+
             datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
         }
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }

@@ -39,6 +39,7 @@ public class Pais {
     String moneda;
     String maximo_bolsa;
     String control_net;
+    String ticketStore_enabled;
     
     Tienda tienda = new Tienda();
     Shoponline shoponline = new Shoponline();
@@ -216,6 +217,20 @@ public class Pais {
     public void setControl_net(String control_net) {
         this.control_net = control_net;
     }        
+    
+    public boolean isTicketStoreEnabled() {
+    	return (getTicketStore_enabled()!=null && 
+    			"true".compareTo(getTicketStore_enabled())==0);
+    }
+    
+    public String getTicketStore_enabled() {
+        return this.ticketStore_enabled;
+    }
+    
+    @XmlElement
+    public void setTicketStore_enabled(String ticketStore_enabled) {
+        this.ticketStore_enabled = ticketStore_enabled;
+    }
 
     public Direccharnolatinos getDireccharnolatinos() {
         return this.direccharnolatinos;

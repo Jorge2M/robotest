@@ -122,7 +122,7 @@ public class MiCuenta extends GestorWebDriver {
         datosStep = PageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected, dCtxSh.appE, dCtxSh.channel, dFTest);
         PageMisDatosStpV.validaContenidoNombre(nombreActual, datosStep, dFTest);
         if (dCtxSh.appE==AppEcom.shop)
-            PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.appE, dCtxSh.channel, dFTest);
+            PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dCtxSh.channel, dFTest);
         else
             PageMiCuentaStpV.goToMisPedidos(dCtxSh.userConnected, dCtxSh.appE, dCtxSh.channel, dFTest);            
             
@@ -154,7 +154,7 @@ public class MiCuenta extends GestorWebDriver {
             
         PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest);
         AccesoStpV.identificacionEnMango(dCtxSh, dFTest);
-        PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.appE, dCtxSh.channel, dFTest);
+        PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dCtxSh.channel, dFTest);
         PageMisComprasStpV.selectBlock(TypeCompra.Online, true/*ordersExpected*/, dFTest);
         int posicionCompra = 1;
         PageDetallePedidoStpV pageDetPedidoStpV = 

@@ -3,10 +3,6 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.testng.annotations.Test;
-
-import com.mng.robotest.test80.arq.annotations.Validation;
-import com.mng.robotest.test80.arq.annotations.ValidationResult;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
@@ -742,34 +738,5 @@ public class PageFichaArtStpV {
             datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
         }
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
-    }
-    
-    //TODO pending refactors:
-    // 1) Remove datosStep
-    // 2) Reduce variable assignations
-    @Validation
-    public ValidationResult ValidateVisibilityOkAvisoSelectTalla(TypeFicha typeFichaAct, boolean isTallaUnica, State levelError, DatosStep datosStep, DataFmwkTest dFTest) {
-        ValidationResult valResult = new ValidationResult();
-        valResult.datosStep = datosStep;
-        valResult.dFTest = dFTest;
-        boolean isVisibleAviso = pageFicha.secDataProduct.isVisibleAvisoSeleccionTalla(dFTest.driver);
-        String apareceAvisoStr = "Aparece un aviso indicando que hay que seleccionar la talla";
-        if (isTallaUnica || typeFichaAct==TypeFicha.New) {
-            valResult.validation = "NO " + apareceAvisoStr;
-            valResult.resultOk = !isVisibleAviso;
-            return valResult;
-        }
-
-        valResult.validation = "SÍ " + apareceAvisoStr;
-        valResult.resultOk = isVisibleAviso;
-        valResult.levelError = levelError;        
-        return valResult;
-    }
-    
-    @Validation (
-        description="Descripción de la validación",
-        level=State.Warn)
-    public void ValidateInConstruction(DataFmwkTest dFTest) {
-    	assert(SecBreadcrumbFichaOld.isVisibleBreadCrumb(this.dFTest.driver));
     }
 }
