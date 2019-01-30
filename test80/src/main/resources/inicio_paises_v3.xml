@@ -324,7 +324,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>true</miscompras>
+<miscompras>false</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
@@ -420,7 +420,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>true</miscompras>
+<miscompras>false</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <ticketStore_enabled>false</ticketStore_enabled>
@@ -575,7 +575,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>true</miscompras>
+<miscompras>false</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ HRK</moneda>
 <maximo_bolsa>8500</maximo_bolsa>
@@ -624,7 +624,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>true</miscompras>
+<miscompras>false</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
@@ -678,7 +678,7 @@
 <codpos>251 99</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
-<shop_online>true</shop_online>
+<shop_online>false</shop_online>
 <outlet_online>true</outlet_online>
 <miscompras>true</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
@@ -736,7 +736,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>true</miscompras>
+<miscompras>false</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ DKK</moneda>
 <maximo_bolsa>11200</maximo_bolsa>
@@ -855,7 +855,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>true</miscompras>
+<miscompras>false</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
@@ -1079,7 +1079,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>true</miscompras>
+<miscompras>false</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
@@ -1139,7 +1139,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>true</miscompras>
+<miscompras>false</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ HUF</moneda>
 <maximo_bolsa>375000</maximo_bolsa>
@@ -2572,7 +2572,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>true</miscompras>
+<miscompras>false</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ SEK</moneda>
 <maximo_bolsa>14000</maximo_bolsa>
