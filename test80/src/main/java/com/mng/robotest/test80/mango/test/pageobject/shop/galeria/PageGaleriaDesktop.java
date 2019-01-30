@@ -174,7 +174,7 @@ public class PageGaleriaDesktop extends PageGaleria {
     		}
     	}
 	    	
-    	return (xpathResult + "]");
+    	return (xpathResult + "]//div[@class[contains(.,'product-list-info')]]");
     }
     
     String getXPathArticulo(TypeArticleDesktop sizeArticle) {
@@ -422,11 +422,23 @@ public class PageGaleriaDesktop extends PageGaleria {
     	ArrayList<String> dataTextArticles = new ArrayList<String>();
     	for (LabelArticle label : listLabels) {
     		String xpathLit = getXPathDataArticuloRebajadoWithLabel(label);
-    		for (WebElement litWebEl : driver.findElements(By.xpath(xpathLit)))
-    			dataTextArticles.add(litWebEl.getText());
+    		dataTextArticles.addAll(getDataFromArticlesLiteral(xpathLit));
     	}
     	
     	return dataTextArticles;
+    }
+    
+    public List<String> getArticlesTemporadaxRebajadosWithLiteralInLabel(ControlTemporada controlTemporada, List<Integer> listTemporadas, 
+    																	 List<LabelArticle> listLabels) {
+    	List<String> listArtSaleWithLabel = getArticlesRebajadosWithLiteralInLabel(listLabels);
+    	if (listArtSaleWithLabel.size() == 0) {
+    		return listArtSaleWithLabel;
+    	}
+    	
+		List<String> listArtTempX = getArticlesTemporadasX(ControlTemporada.articlesFrom, listTemporadas);
+		List<String> common = new ArrayList<String>(listArtTempX);
+		common.retainAll(listArtSaleWithLabel);
+		return common;
     }
     
     public ArrayList<String> getArticlesOfType(TypeArticle typeArticle) {
@@ -439,27 +451,28 @@ public class PageGaleriaDesktop extends PageGaleria {
     }
     
     public List<String> getArticlesTemporadasX(ControlTemporada controlTemporada, List<Integer> listTemporadas) {
-    	List<String> dataTextArticles = new ArrayList<String>();
 		String xpathLit = getXPathArticuloTemporadasX(controlTemporada, listTemporadas);
-		for (WebElement litWebEl : driver.findElements(By.xpath(xpathLit))) {
-			String referencia = litWebEl.getAttribute("id").replaceAll("_info", "");
-			dataTextArticles.add(litWebEl.getText() + " (" + referencia + ")");
-		}    	
-		
-		return dataTextArticles;
+		return (getDataFromArticlesLiteral(xpathLit));
     }
     
     public List<String> getArticlesTemporadaXWithLiteralInLabel(List<Integer> temporadasX, List<LabelArticle> listLabels) {
     	List<String> dataTextArticles = new ArrayList<String>();
        	for (LabelArticle label : listLabels) {
        		String xpathLit = getXPathDataArticuloTemporadaXWithLabel(temporadasX, label);
-    		for (WebElement litWebEl : driver.findElements(By.xpath(xpathLit))) {
-    			String referencia = litWebEl.getAttribute("id").replaceAll("_info", "");
-    			dataTextArticles.add(litWebEl.getText() + " (" + referencia + ")");
-    		}
+    		dataTextArticles.addAll(getDataFromArticlesLiteral(xpathLit));
     	}
     	
     	return dataTextArticles;
+    }
+    
+    private List<String> getDataFromArticlesLiteral(String xpathLiteralArticle) {
+    	List<String> dataTextArticles = new ArrayList<String>();
+		for (WebElement litWebEl : driver.findElements(By.xpath(xpathLiteralArticle))) {
+			String referencia = litWebEl.getAttribute("id").replaceAll("_info", "");
+			dataTextArticles.add(litWebEl.getText() + " (" + referencia + ")");
+		}
+		
+		return dataTextArticles;
     }
     
     /**
