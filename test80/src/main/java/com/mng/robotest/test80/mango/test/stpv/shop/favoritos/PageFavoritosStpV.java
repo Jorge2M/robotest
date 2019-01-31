@@ -109,9 +109,9 @@ public class PageFavoritosStpV {
     
     public static datosStep closeShareModal(DataFmwkTest dFTest) {
        	//Step
-    	datosStep stepShareClose = new datosStep("Cerramos el modal de favoritos compartidos. ",
-    			"El modal de favoritos compartidos desaparece correctamente");
-       	
+    	datosStep stepShareClose = new datosStep(
+    		"Cerramos el modal de favoritos compartidos. ",
+    		"El modal de favoritos compartidos desaparece correctamente");
     	try {
        		PageFavoritos.closeShareModal(dFTest.driver);
        		
@@ -124,23 +124,21 @@ public class PageFavoritosStpV {
     }
     
     public static void checkShareIsClosed(datosStep datosStep, DataFmwkTest dFTest) {
- 	   	//Validacion
-    	int secondsToWait = 5;
+        //Validaciones
+        int maxSecondsToWait = 2;
         String descripValidac = 
-                "1) Desaparece el modal de favoritos compartidos <b>";
+        	"1) Desaparece el modal de favoritos compartidos (lo esperamos hasta " + maxSecondsToWait + " segundos)";
+        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
         try {
-        
-        	if (PageFavoritos.checkShareModalInvisible(dFTest.driver, secondsToWait)) {
-                datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-           	} else {
-           		datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok); 
-           	};
-            
-            
-        } finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); };       	
+            List<SimpleValidation> listVals = new ArrayList<>();
+            //1)
+            if (!PageFavoritos.checkShareModalInvisible(dFTest.driver, maxSecondsToWait)) 
+                fmwkTest.addValidation(1, State.Warn, listVals);
+                        
+            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+        }
+        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
     }
-    
-    
     
     public static datosStep clear(ArticuloScreen articulo, DataFmwkTest dFTest) throws Exception {
         //Step
