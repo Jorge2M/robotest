@@ -53,6 +53,19 @@ public enum TestABid {
 			"V0-Galería sin React", //Este es el único caso posible en Outlet
 			"V1-Galería con React")
 	),
+	//Este TestAB se definió únicamente para certificar que el Robotest soportaba la V1 sin necesidad de aplicar ningún cambio
+	//Si se tuviera que activar hay que tener en cuenta que sólo funciona si después de aplicar el TestAB se refresca la portada
+//	HeaderMobileFreeShipping (
+//		TypeTestAB.GoogleOptimize,
+//		"GTM-5T8R33",
+//		"Header - Mobile - Free Shipping", 
+//	    "UWOU5vObVAZJ7ylnbAK2vQ",
+//	    "GTM-KWJ6XJ_OPT-MXVVB%24",
+//	    "QUICK_PREVIEW",
+//	    Arrays.asList(
+//	    	"V0-Original", 
+//	    	"V1-Barra Free Shipping arriba")
+//	),
 	HeaderMobileFavoritos (
 		TypeTestAB.GoogleOptimize,
 		"GTM-5T8R33",

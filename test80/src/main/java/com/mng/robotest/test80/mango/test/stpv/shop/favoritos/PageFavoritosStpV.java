@@ -107,7 +107,7 @@ public class PageFavoritosStpV {
     }
     
     
-    public static datosStep closeShareModal(DataFmwkTest dFTest) {
+    public static datosStep closeShareModal(DataFmwkTest dFTest) throws Exception {
        	//Step
     	datosStep stepShareClose = new datosStep(
     		"Cerramos el modal de favoritos compartidos. ",

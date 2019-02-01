@@ -226,8 +226,6 @@ public class PagePrehome extends WebdrvWrapp {
         driver.manage().addCookie(ck);
     }
 
-
-    
     /**
      * Ejecuta una acceso a la shop vía la páinga de prehome
      */

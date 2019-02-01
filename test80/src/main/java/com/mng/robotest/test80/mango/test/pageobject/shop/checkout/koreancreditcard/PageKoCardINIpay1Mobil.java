@@ -1,15 +1,17 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard;
 
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPage;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions;
 
-public class PageKoreanCreditCardMobile extends ElementPageFunctions {
+public class PageKoCardINIpay1Mobil extends ElementPageFunctions {
     public enum KsMobile implements ElementPage {
         //1rs part
         terms("//label[@for='allAgree']"),
         termsTitle("div[@id='term1Title']"),
-        samsungpay("//div[[@class='simplePaySec_ul_bt' and text()[contains(.,'SAMSUNGPAY')]]"),
+        samsungpay("//div[@class='simplePaySec_ul_bt' and text()[contains(.,'SAMSUNGPAY')]"),
         type("//li[text()[contains(.,'케이뱅크')]]"),
 
         //2nd part
@@ -23,7 +25,10 @@ public class PageKoreanCreditCardMobile extends ElementPageFunctions {
 
         //shared
         previousButton("//span[@class='btn_left']"),
-        nextButton("//span[@id='cardNext2Btn']");
+        nextButton("//span[@id='cardNext2Btn']"),
+    	
+    	//Common submit Button
+    	submitButton("//input[@type='submit']");
 
         private String xPath;
 
@@ -40,5 +45,9 @@ public class PageKoreanCreditCardMobile extends ElementPageFunctions {
         public String getXPath(Channel channel) {
             return this.xPath;
         }
+    }
+    
+    public static boolean isPage(WebDriver driver) {
+    	return (driver.getTitle().contains("INIpay"));
     }
 }

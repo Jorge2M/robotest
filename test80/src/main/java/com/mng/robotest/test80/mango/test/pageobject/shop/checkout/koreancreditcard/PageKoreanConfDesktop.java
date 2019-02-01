@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-public class PageKoreanConfirmation extends WebdrvWrapp {
+public class PageKoreanConfDesktop extends WebdrvWrapp {
     private static String XPathSubmitButton = "//input[@id='pay_btn']";
 
 	public static boolean isPage(WebDriver driver) {

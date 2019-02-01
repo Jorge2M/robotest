@@ -9,9 +9,10 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 
 public class BannerEditsObject extends BannerObject {
 
-	final static String XPathWrapperBanner = "//div[@class[contains(.,'vsv-')] and @data-analytics and not(@data-analytics='')]";
-	final static String XPathBanner = XPathWrapperBanner + "//a";
-	final static String XPathImageRelativeBanner = "//img";
+	final static String tagAnalytics = "@data-analytics and not(@data-analytics='')";
+	final static String XPathBannerV1 = "//div[@class[contains(.,'vsv-')] and " + tagAnalytics + "]//a";
+	final static String XPathBannerV2 = "//div[@class[contains(.,'vsv-')]]//a[" + tagAnalytics + "]";
+	final static String XPathBanner = "(" + XPathBannerV1 + " | " + XPathBannerV2 + ")";
 	
 	public BannerEditsObject(BannerType bannerType) {
 		super(bannerType, XPathBanner);
@@ -24,7 +25,7 @@ public class BannerEditsObject extends BannerObject {
     
 	@Override
     protected String getSrcImageBanner(WebElement bannerScreen) {
-    	List<WebElement> listImgsBanner = UtilsMangoTest.findDisplayedElements(bannerScreen, By.xpath("." + XPathImageRelativeBanner));
+    	List<WebElement> listImgsBanner = UtilsMangoTest.findDisplayedElements(bannerScreen, By.xpath(".//img"));
     	if (listImgsBanner.size() > 0)
     		return (listImgsBanner.get(0).getAttribute("src"));
     		
