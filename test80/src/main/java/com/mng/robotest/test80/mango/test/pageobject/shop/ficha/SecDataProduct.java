@@ -115,7 +115,6 @@ public class SecDataProduct extends WebdrvWrapp {
         articulo.setNombre(getTituloArt(channel, driver));
         articulo.setPrecio(getPrecioFinalArticulo(driver));
         articulo.setCodigoColor(getCodeColor(ColorType.Selected, driver));
-        boolean patata = checkPotatoe(driver);
         articulo.setColor(getNombreColorSelected(channel, driver));
         articulo.setTallaAlf(getTallaAlfSelected(typeFicha, driver));
         articulo.setTallaNum(getTallaNumSelected(typeFicha, driver));

@@ -396,8 +396,9 @@ public class PagoNavigationsStpV {
         DataPedido dataPedido = dCtxPago.getDataPedido(); 
         Pago pago = dataPedido.getPago();
         try {
-            if (dCtxSh.channel==Channel.desktop)
+            if (dCtxSh.channel==Channel.desktop) {
             	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, dFTest.driver);
+            }
                             
             testPagoFromCheckoutToEnd(dCtxPago, dCtxSh, pago, dFTest);
         }

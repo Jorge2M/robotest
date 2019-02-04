@@ -11,10 +11,10 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoreanConfirmation;
+import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoreanConfDesktop;
 
 @SuppressWarnings("javadoc")
-public class PageKoreanConfirmatioStpV {
+public class PageKoreanConfDesktopStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
     public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {    
@@ -23,8 +23,8 @@ public class PageKoreanConfirmatioStpV {
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
         try {
             List<SimpleValidation> listVals = new ArrayList<>();    
-            //13)
-            if (!PageKoreanConfirmation.isPage(dFTest.driver))
+            //1)
+            if (!PageKoreanConfDesktop.isPage(dFTest.driver))
             	fmwkTest.addValidation(1, State.Defect, listVals);
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
@@ -39,7 +39,7 @@ public class PageKoreanConfirmatioStpV {
             "Aparece la página de Mango de resultado OK del pago");
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);    
         try {       
-        	PageKoreanConfirmation.clickButtonSubmit(dFTest.driver);
+        	PageKoreanConfDesktop.clickButtonSubmit(dFTest.driver);
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }

@@ -72,8 +72,9 @@ public class PageFavoritos extends WebdrvWrapp {
     	driver.findElement(By.xpath(xPathShareModalButton)).click();
     }
     
-    public static void closeShareModal(WebDriver driver) {
-    	driver.findElement(By.xpath(xPathCloseShareModalButton)).click();
+    public static void closeShareModal(WebDriver driver) throws Exception {
+    	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xPathCloseShareModalButton), TypeOfClick.javascript);
+    	//driver.findElement(By.xpath(xPathCloseShareModalButton)).click();
     }
     
     public static boolean checkShareModalUntill(int maxSeconds, WebDriver driver) {

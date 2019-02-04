@@ -46,4 +46,14 @@ public interface TestAB {
 	    	testAB.activateTestAB(versionTestAB, driver);
     	}
     }
+    
+//	//TODO cuando se elimine el Test A/B habrá que eliminar este código
+//	//si el TestAB que gana no es el actual habrá que adaptar el script de test
+//    public static void activateTestAB_HeaderFreeShipping(int versionTestAB, Channel channel, AppEcom app, WebDriver driver) 
+//    throws Exception {
+//    	if (channel==Channel.movil_web) {
+//	    	TestAB testAB = TestAB.getInstance(TestABid.HeaderMobileFreeShipping, app);
+//	    	testAB.activateTestAB(versionTestAB, driver);
+//    	}
+//    }
 }

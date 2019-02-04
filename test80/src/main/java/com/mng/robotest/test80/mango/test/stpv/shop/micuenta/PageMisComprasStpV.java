@@ -35,9 +35,9 @@ public class PageMisComprasStpV {
         //Validaciones.
         int maxSecondsToWait = 2;
         String descripValidac =
-                "1) Aparece la pÃ¡gina de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
-                        "2) No aparece el bloque de \"Tienda\"<br>" +
-                        "3) No aparece el bloque de \"Online\"";
+        	"1) Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
+            "2) No aparece el bloque de \"Tienda\"<br>" +
+            "3) No aparece el bloque de \"Online\"";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
         try {
             List<SimpleValidation> listVals = new ArrayList<>();
@@ -110,7 +110,7 @@ public class PageMisComprasStpV {
         try {
             List<SimpleValidation> listVals = new ArrayList<>();
             //1)
-            if (PageMisCompras.isSelectedBlockUntil(maxSecondsToWait, typeCompra, dFTest.driver))
+            if (!PageMisCompras.isSelectedBlockUntil(maxSecondsToWait, typeCompra, dFTest.driver))
                 fmwkTest.addValidation(1, State.Warn, listVals);
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
