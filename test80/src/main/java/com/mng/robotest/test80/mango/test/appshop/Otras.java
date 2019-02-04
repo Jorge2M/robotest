@@ -21,8 +21,6 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageIniShopJapon;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
-import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecBreadcrumbFichaOld;
-import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha.TypeFicha;
 import com.mng.robotest.test80.mango.test.stpv.otras.GoogleStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PageIniShopJaponStpV;
@@ -232,13 +230,15 @@ public class Otras extends GestorWebDriver {
         dCtxSh.idioma = this.japones;
         PagePrehomeStpV.seleccionPaisIdioma(urlBaseTest, dCtxSh, dFTest);
         DatosStep datosStep = entradaShopGivenPaisSeleccionado(this.japon, this.japones, dCtxSh.channel, dFTest);
-        validaPagpreseIniJapon2(datosStep, dFTest.driver);
+        //validaPageIniJapon1(datosStep, dFTest.driver);
+        validaPageIniJapon1_5(datosStep, 3, "nos fumamos un porro", dFTest.driver);
     }	
     
     /**
      * Given país/provincia/idioma seleccionados, se realiza el paso para entrar en la shop
      */
-    public static DatosStep entradaShopGivenPaisSeleccionado(Pais pais, IdiomaPais idioma, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep entradaShopGivenPaisSeleccionado(Pais pais, IdiomaPais idioma, Channel channel, DataFmwkTest dFTest) 
+    throws Exception {
         //Step. Selección de país/idioma
         DatosStep datosStep = new DatosStep(
             "Si es preciso introducimos la provincia/idioma y finalmente seleccionamos el botón \"Entrar\"",
@@ -254,7 +254,7 @@ public class Otras extends GestorWebDriver {
     }
     
     @Validation (
-    	description="Estamos en la página inicial de Japón",
+    	description="1) Estamos en la página inicial de Japón",
         level=State.Warn)
     public boolean validaPageIniJapon1(DatosStep datosStep, WebDriver driver) {
     	int maxSecondsToWait = 2;
@@ -262,9 +262,16 @@ public class Otras extends GestorWebDriver {
     }
     
     @Validation (
-    	description="Estamos en la página inicial de Japón",
+    	description="1) Estamos en la página inicial de Japón (la esperamos hasta #{maxSecondsWait} segundos y #{otraCosa})",
         level=State.Warn)
-    public ValidationResult validaPagpreseIniJapon2(DatosStep datosStep, WebDriver driver) {
+    public boolean validaPageIniJapon1_5(DatosStep datosStep, int maxSecondsWait, String otraCosa, WebDriver driver) {
+        return (!PageIniShopJapon.isPageUntil(maxSecondsWait, driver));
+    }
+    
+    @Validation (
+    	description="1) Estamos en la página inicial de Japón",
+        level=State.Warn)
+    public ValidationResult validaPageIniJapon2(DatosStep datosStep, WebDriver driver) {
     	ValidationResult valResult = new ValidationResult();
     	int maxSecondsToWait = 2;
         PageIniShopJapon.isPageUntil(maxSecondsToWait, driver);

@@ -9,6 +9,8 @@ import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -33,41 +35,37 @@ public class ValidationAspect {
     	System.out.println("Before : " + joinPoint.getSignature().getName());
     }
     
-//    @AfterReturning(pointcut="annotationValidationPointcut() && atExecution()")
-//    public void grabValidationAfter(JoinPoint joinPoint) throws Throwable {
-//        System.out.println("hijacked : " + joinPoint.getSignature().getName());
-//        ValidationResult valResult;
-//        valResult = new ValidationResult();
-//        
-//    	modifyValidationResultAccordingAnnotationParams(valResult, joinPoint);
-//    	//TODO el datosStep se puede acabar eliminando pero de momento lo forzaremos como parámetro obligatorio sólo para probar
-//    	DatosStep datosStep = getDatosStepFromMethodParams(joinPoint);
-//    	
-//    	//TODO al dFTest habría que ubicarlo en una clase de arquitectura en lugar del GestorWebDriver
-//    	List<SimpleValidation> listVals = new ArrayList<>();
-//    	fmwkTest.addValidation(1, valResult.getLevelError(), listVals);
-//        fmwkTest.grabStepValidation(datosStep, valResult.getDescription(), GestorWebDriver.getdFTest());
-//    }
-    
-    @AfterReturning(pointcut="annotationValidationPointcut() && atExecution()", returning="result")
-    public void grabValidationAfter(JoinPoint joinPoint, Object result) throws Throwable {
-        System.out.println("hijacked : " + joinPoint.getSignature().getName());
-        ValidationResult valResult;
-        if (result!=null && result instanceof ValidationResult) {
-        	valResult = (ValidationResult)result;
-        }
-        else {
-        	valResult = new ValidationResult();
-        }
-        
+    @AfterReturning(
+    	pointcut="annotationValidationPointcut() && atExecution()", 
+    	returning="resultMethod")
+    public void grabValidationAfter(JoinPoint joinPoint, Object resultMethod) throws Throwable {
+    	ValidationResult valResult = getValidationResultFromMethodReturn(resultMethod);
     	modifyValidationResultAccordingAnnotationParams(valResult, joinPoint);
+    	
     	//TODO el datosStep se puede acabar eliminando pero de momento lo forzaremos como parámetro obligatorio sólo para probar
     	DatosStep datosStep = getDatosStepFromMethodParams(joinPoint);
     	
-    	//TODO al dFTest habría que ubicarlo en una clase de arquitectura en lugar del GestorWebDriver
-    	List<SimpleValidation> listVals = new ArrayList<>();
-    	fmwkTest.addValidation(1, valResult.getLevelError(), listVals);
-        fmwkTest.grabStepValidation(datosStep, valResult.getDescription(), GestorWebDriver.getdFTest());
+    	if (!valResult.isOvercomed()) {
+	    	//TODO al dFTest habría que ubicarlo en una clase de arquitectura en lugar del GestorWebDriver
+	    	List<SimpleValidation> listVals = new ArrayList<>();
+	    	fmwkTest.addValidation(1, valResult.getLevelError(), listVals);
+    	}
+    	
+    	fmwkTest.grabStepValidation(datosStep, valResult.getDescription(), GestorWebDriver.getdFTest());
+    }
+    
+    private ValidationResult getValidationResultFromMethodReturn(Object resultMethod) {
+        if (resultMethod!=null && resultMethod instanceof Boolean) {
+        	ValidationResult valResult = new ValidationResult();
+        	valResult.setOvercomed((Boolean)resultMethod);
+        	return valResult;
+        }
+        
+        if (resultMethod!=null && resultMethod instanceof ValidationResult) {
+        	return (ValidationResult)resultMethod;
+        }
+        
+        throw (new RuntimeException("The return of a method marked with @Validation annotation must be of type boolean or ValidationResult"));
     }
     
 	//TODO el datosStep se puede acabar eliminando pero de momento lo forzaremos como parámetro obligatorio sólo para probar
@@ -85,13 +83,40 @@ public class ValidationAspect {
     private void modifyValidationResultAccordingAnnotationParams(ValidationResult valResult, JoinPoint joinPoint) {
     	Validation validation = getValidationAnnotation(joinPoint);
     	if ("".compareTo(valResult.getDescription())==0) {
-    		valResult.setDescription(validation.description());
+    		String descripValidationMatched = getValidationDescriptionMatchingWithMethodParameters(validation, joinPoint);
+    		valResult.setDescription(descripValidationMatched);
     	}
     	
     	if (valResult.getLevelError()==State.Undefined &&
     		validation.level()!=null) {
     		valResult.setLevelError(validation.level());
     	}
+    }
+    
+    private String getValidationDescriptionMatchingWithMethodParameters(Validation validation, JoinPoint joinPoint) {
+    	String descrToReturn  = validation.description();
+    	Pattern p = Pattern.compile("\\#\\{([^}]*)\\}");
+    	Matcher m = p.matcher(descrToReturn);
+    	while (m.find()) {
+    	  String group = m.group(1);
+    	  String valueParameter = getStringValueParameterFromMethod(group, joinPoint);
+    	  descrToReturn = descrToReturn.replace("#{" + group + "}", valueParameter);
+    	  System.out.println(m.group(1));
+    	}
+    	
+    	return (descrToReturn);
+    }
+    
+    private String getStringValueParameterFromMethod(String paramNameInDescrValidation, JoinPoint joinPoint) {
+    	Object[] signatureArgs = joinPoint.getArgs();
+    	String[] parameterNames = ((MethodSignature) joinPoint.getSignature()).getParameterNames();
+    	for (int i=0; i<parameterNames.length; i++) {
+    		if (parameterNames[i].compareTo(paramNameInDescrValidation)==0) {
+    			return (signatureArgs[i].toString());
+    		}
+    	}
+    	
+    	return null;
     }
     
     private Validation getValidationAnnotation(JoinPoint joinPoint) {
