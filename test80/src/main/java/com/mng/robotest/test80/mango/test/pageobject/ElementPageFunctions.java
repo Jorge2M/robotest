@@ -61,6 +61,10 @@ public class ElementPageFunctions {
     public static void clickAndWait(ElementPage element, int maxSecondsToWait, WebDriver driver) throws Exception {
         WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(element.getXPath()), maxSecondsToWait);
     }
+    
+    public static void clickElementVisibleAndWaitLoad(ElementPage element, int maxSecondsToWait, WebDriver driver) throws Exception {
+        WebdrvWrapp.clickElementVisibleAndWaitLoad(driver, By.xpath(element.getXPath()), maxSecondsToWait);
+    }
 
     public static void clickAndWait(Channel channel, ElementPage element, WebDriver driver) throws Exception {
         WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(element.getXPath(channel)));

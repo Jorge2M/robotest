@@ -23,7 +23,7 @@ public class PageKoreanConfDesktopStpV {
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
         try {
             List<SimpleValidation> listVals = new ArrayList<>();    
-            //13)
+            //1)
             if (!PageKoreanConfDesktop.isPage(dFTest.driver))
             	fmwkTest.addValidation(1, State.Defect, listVals);
             

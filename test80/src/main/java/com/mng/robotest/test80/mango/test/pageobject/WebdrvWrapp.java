@@ -258,6 +258,11 @@ public class WebdrvWrapp extends ElementPageFunctions {
     public static boolean clickAndWaitLoad(WebDriver driver, By by, int waitSeconds) throws Exception {
         return waitClickAndWaitLoad(driver, 0, by, waitSeconds, TypeOfClick.webdriver);
     }
+    
+    public static boolean clickElementVisibleAndWaitLoad(WebDriver driver, By by, int waitSeconds) throws Exception {
+    	WebElement elemVisible = getElementVisible(driver, by);
+        return clickAndWaitLoad(driver, elemVisible, waitSeconds, TypeOfClick.webdriver);
+    }
 
     public static boolean waitClickAndWaitLoad(WebDriver driver, int waitForLinkToClick, By by) throws Exception {
         return (waitClickAndWaitLoad(driver, waitForLinkToClick, by, 30/*waitSeconds*/, TypeOfClick.webdriver));

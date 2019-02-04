@@ -1,38 +1,25 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPage;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions;
+import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
 public class PageKoCardINIpay1Mobil extends ElementPageFunctions {
-    public enum KsMobile implements ElementPage {
-        //1rs part
+	private final static String tagTitleButtonTypeCard = "@TagLitTypeCard";
+    public enum BodyPageKoCardINIpay1 implements ElementPage {
         terms("//label[@for='allAgree']"),
-        termsTitle("div[@id='term1Title']"),
-        samsungpay("//div[@class='simplePaySec_ul_bt' and text()[contains(.,'SAMSUNGPAY')]"),
-        type("//li[text()[contains(.,'케이뱅크')]]"),
-
-        //2nd part
-        iniMon("//select[@id='intMon']"),//validation
-
-        //3rd part
-        mainButton("//div[@class[contains(.,'btn_main')]]"),
-
-        //4rd part
-        infoPayment("//li//p[@class='cont_text']"),
-
-        //shared
-        previousButton("//span[@class='btn_left']"),
-        nextButton("//span[@id='cardNext2Btn']"),
-    	
-    	//Common submit Button
+        termsTitle("//div[@id='term1Title']"),
+        samsungpay("//div[@class='simplePaySec_ul_bt' and text()[contains(.,'SAMSUNGPAY')]]"),
+        typecardbutton_withtag("//li[text()[contains(.,'" + tagTitleButtonTypeCard + "')]]"),
     	submitButton("//input[@type='submit']");
 
         private String xPath;
 
-        KsMobile (String xPath) {
+        BodyPageKoCardINIpay1 (String xPath) {
             this.xPath = xPath;
         }
 
@@ -44,6 +31,12 @@ public class PageKoCardINIpay1Mobil extends ElementPageFunctions {
         @Override
         public String getXPath(Channel channel) {
             return this.xPath;
+        }
+        
+        public static void clickTypeCardButton(String litButton, WebDriver driver) throws Exception {
+        	String xpatyButtonTypeCard = typecardbutton_withtag.getXPath().replace(tagTitleButtonTypeCard, litButton);
+        	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xpatyButtonTypeCard));
+        	
         }
     }
     

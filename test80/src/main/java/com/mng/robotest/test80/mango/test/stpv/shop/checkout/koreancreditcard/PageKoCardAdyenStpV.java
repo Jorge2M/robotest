@@ -11,13 +11,13 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
-import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardAdyenMobil;
+import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardAdyen;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @SuppressWarnings("javadoc")
-public class PageKoCardAdyenMobilStpV {
+public class PageKoCardAdyenStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
     public static void validateIsPage(String importeTotal, Pais pais, Channel channel, datosStep datosStep, DataFmwkTest dFTest) {
@@ -42,7 +42,7 @@ public class PageKoCardAdyenMobilStpV {
             if (PageCheckoutWrapper.isPresentMetodosPago(pais, channel, dFTest.driver))
                 fmwkTest.addValidation(2, State.Defect, listVals);            
             //3)
-            if (!PageKoCardAdyenMobil.isPage(dFTest.driver))
+            if (!PageKoCardAdyen.isPage(dFTest.driver))
             	fmwkTest.addValidation(3, State.Defect, listVals);
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
@@ -50,21 +50,29 @@ public class PageKoCardAdyenMobilStpV {
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
     }
 
-    public static void clickIconForContinue (DataFmwkTest dFTest) throws Exception {
+    public static datosStep clickIconForContinue (Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step
         datosStep datosStep = new datosStep (
         	"Seleccionar el icono de Korean Credit Card para continuar",
             "Aparece la páinga de INIpay");
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
         try {
-            PageKoCardAdyenMobil.clickIconForContinue(dFTest.driver);
+            PageKoCardAdyen.clickForContinue(channel, dFTest.driver);
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
         finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
         
         //Validations
-        PageKoCardINIpay1MobilStpV2.validateIsPage(datosStep, dFTest);
+        switch (channel) {
+        case movil_web:
+        	PageKoCardINIpay1MobilStpV2.validateIsPage(datosStep, dFTest);
+        	break;
+        case desktop:
+        	PageKoreanConfDesktopStpV.validateIsPage(datosStep, dFTest);
+        	break;
+        }
+        
+        return datosStep;
     }
-
 }

@@ -8,8 +8,11 @@ import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard.PageKoreanConfDesktopStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard.PageKoCardAdyenMobilStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard.PageKoCardAdyenStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard.PageKoCardINIpay1MobilStpV2;
+import com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard.PageKoCardINIpay2MobilStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard.PageKoCardINIpay3MobilStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard.PageKoCardINIpay4MobilStpV;
 
 @SuppressWarnings("javadoc")
 public class PagoKoreanCreditCard extends PagoStpV {
@@ -21,20 +24,23 @@ public class PagoKoreanCreditCard extends PagoStpV {
     
     @Override
     public datosStep testPagoFromCheckout(boolean execPay) throws Exception {
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
-        datosStep datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
-        PageKoCardAdyenMobilStpV.validateIsPage(this.dCtxPago.getDataPedido().getImporteTotal(), this.dCtxSh.pais, this.dCtxSh.channel, datosStep, this.dFTest);
-        if (dCtxSh.channel == Channel.movil_web){
-        	PageKoCardAdyenMobilStpV.clickIconForContinue(dFTest);
-        	PageKoCardINIpay1MobilStpV2.preparePaymentMobile(dFTest);
-        	PageKoCardINIpay1MobilStpV2.continuarConPagoCoreaMobile(dFTest);
-        	PageKoCardINIpay1MobilStpV2.confirmMainPaymentCorea(dFTest);
-        	datosStep = PageKoCardINIpay1MobilStpV2.endPayment(dFTest);
-        }
-        if (execPay && dCtxSh.channel == Channel.desktop) {
-        	PageKoCardINIpay1MobilStpV2.clickConfirmarButton(dFTest);
-        	datosStep = PageKoreanConfDesktopStpV.clickConfirmarButton(dFTest);
-        }
+        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, dFTest);
+        datosStep datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, dFTest);
+        PageKoCardAdyenStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais, dCtxSh.channel, datosStep, dFTest);
+    	datosStep = PageKoCardAdyenStpV.clickIconForContinue(dCtxSh.channel, dFTest);
+    	if (execPay) {
+	        if (dCtxSh.channel == Channel.movil_web) {
+	        	PageKoCardINIpay1MobilStpV2.checkTerminosBox(dFTest);
+	        	PageKoCardINIpay1MobilStpV2.continuarConPagoCoreaMobile(dFTest);
+	        	PageKoCardINIpay2MobilStpV.confirmMainPaymentCorea(dFTest);
+	        	PageKoCardINIpay3MobilStpV.clickNextButton(dFTest);
+	        	datosStep = PageKoCardINIpay4MobilStpV.clickConfirmarButton(dFTest);
+	        }
+	        
+	        if (dCtxSh.channel == Channel.desktop) {
+	        	datosStep = PageKoreanConfDesktopStpV.clickConfirmarButton(dFTest);
+	        }
+    	}
         return datosStep;
     }    
 }
