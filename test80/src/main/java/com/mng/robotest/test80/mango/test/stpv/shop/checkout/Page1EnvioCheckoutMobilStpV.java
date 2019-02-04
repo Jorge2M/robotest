@@ -120,22 +120,9 @@ public class Page1EnvioCheckoutMobilStpV {
         }
         finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
                 
-        //Validaciones
-        int maxSecondsToWait = 10;
-        String descripValidac = "1) Acaba desapareciendo la capa de \"Cargando...\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
-        try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            Thread.sleep(200); //Damos tiempo a que aparezca la capa de "Cargando"
-            if (!PageCheckoutWrapper.isNoDivLoadingUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);     
-    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
-        }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        PageCheckoutWrapperStpV.validateLoadingDisappears(datosStep, dFTest);
         
-        descripValidac = "1) Aparece la página con los métodos de Pago";
+        String descripValidac = "1) Aparece la página con los métodos de Pago";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
         try {
             List<SimpleValidation> listVals = new ArrayList<>();

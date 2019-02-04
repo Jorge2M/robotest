@@ -57,6 +57,23 @@ public class PageCheckoutWrapperStpV {
             page1DktopCheck.validateIsPageOK(dataBag, app, datosStep, dFTest);
     } 
     
+    public static void validateLoadingDisappears(datosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    //Validaciones
+	    int maxSecondsToWait = 10;
+	    String descripValidac = "1) Acaba desapareciendo la capa de \"Cargando...\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
+	    datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
+	    try {
+	        List<SimpleValidation> listVals = new ArrayList<>();
+	        //1)
+	        Thread.sleep(200); //Damos tiempo a que aparezca la capa de "Cargando"
+	        if (!PageCheckoutWrapper.isNoDivLoadingUntil(maxSecondsToWait, dFTest.driver))
+	            fmwkTest.addValidation(1, State.Warn, listVals);     
+	
+	        datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+	    }
+	    finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+    }
+    
     /**
      * Despliega (si no lo están) los métodos de pago y valida que realmente sean los correctos
      */

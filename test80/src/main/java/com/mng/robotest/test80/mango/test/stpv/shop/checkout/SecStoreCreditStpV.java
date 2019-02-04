@@ -13,7 +13,6 @@ import com.mng.robotest.test80.arq.utils.controlTest.datosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopCheckout;
@@ -46,8 +45,6 @@ public class SecStoreCreditStpV {
     public static datosStep selectSaldoEnCuentaBlock(Pais pais, DataCtxPago dCtxPago, AppEcom app, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
         boolean marcadoInicialmente = Page1DktopCheckout.secStoreCredit.isChecked(dFTest.driver);
-        
-        //Step (seleccionamos el bloque de saldo en cuenta)"
         datosStep datosStep = new datosStep (
             "Seleccionamos el bloque de \"Saldo en cuenta\"", 
             "Aparecen el resto de métodos de pago");
@@ -58,7 +55,7 @@ public class SecStoreCreditStpV {
         }
         finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
                             
-        //Validaciones (bloque "Saldo en cuenta" desmarcado)
+        PageCheckoutWrapperStpV.validateLoadingDisappears(datosStep, dFTest);
         validaBloqueSaldoEnCuenta(datosStep, !marcadoInicialmente, channel, dCtxPago, dFTest);
     
         if (marcadoInicialmente) {
@@ -101,10 +98,10 @@ public class SecStoreCreditStpV {
      */
     public static void validaBloqueSaldoEnCuenta(datosStep datosStep, boolean marcado, Channel channel, DataCtxPago dCtxPago, DataFmwkTest dFTest) {
         float saldoCta = dCtxPago.getSaldoCta();
-        DataBag dataBag = dCtxPago.getDataPedido().getDataBag(); 
-        float importeSubTotal = dataBag.getImporteTotalFloat();
-        float importeTransp = dataBag.getImporteTranspFloat();
-        float importeTotal = importeSubTotal + importeTransp;
+        //DataBag dataBag = dCtxPago.getDataPedido().getDataBag(); 
+        //float importeSubTotal = dataBag.getImporteTotalFloat();
+        //float importeTransp = dataBag.getImporteTranspFloat();
+        //float importeTotal = importeSubTotal + importeTransp;
         
         //Validaciones
         String validacion2 = "";
@@ -113,13 +110,14 @@ public class SecStoreCreditStpV {
         if (marcado) {
             validacion2 = "2) SÍ está marcado el radio del bloque de \"Saldo en cuenta\"<br>";
             validacion3 = "3) NO aparece el link para desplegar los métodos de pago<br>";
-            if (channel==Channel.desktop)
+            if (channel==Channel.desktop) {
                 validacion4 = "4) Figura un importe total de 0<br>";
+            }
         }
         else {
             validacion2 = "2) NO está marcado el radio del bloque de \"Saldo en cuenta\"<br>";
             validacion3 = "3) SÍ aparece el link para desplegar los métodos de pago<br>";
-            validacion4 = "4) Figura un importe total de " + importeTotal + "<br>";
+            validacion4 = "4) No figura un importe total de 0 <br>";
         }
         
         String descripValidac = 
@@ -147,7 +145,7 @@ public class SecStoreCreditStpV {
                 String impTotResumen = PageCheckoutWrapper.getPrecioTotalFromResumen(channel, dFTest.driver);
                 float impFloat = ImporteScreen.getFloatFromImporteMangoScreen(impTotResumen);
                 if ((marcado && impFloat!=0.0) ||
-                    (!marcado && impFloat!=importeTotal))
+                    (!marcado && impFloat==0.0))
                     fmwkTest.addValidation(4, State.Warn, listVals);
             }
             //5)
