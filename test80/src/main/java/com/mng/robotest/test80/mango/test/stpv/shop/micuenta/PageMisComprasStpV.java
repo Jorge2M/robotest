@@ -97,7 +97,7 @@ public class PageMisComprasStpV {
             "Seleccionar el bloque \"" + typeCompra + "\"", 
             "Se hace visible el bloque de " + typeCompra);
         try {
-            //PageMisCompras.clickBlock(typeCompra, dFTest.driver);
+            PageMisCompras.clickBlock(typeCompra, dFTest.driver);
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
