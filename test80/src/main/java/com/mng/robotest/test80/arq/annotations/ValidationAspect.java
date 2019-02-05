@@ -22,6 +22,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 @SuppressWarnings("javadoc")
 @Aspect
 public class ValidationAspect {
+	
     @Pointcut("@annotation(Validation)")
     public void annotationValidationPointcut() {
         //Pointcut
@@ -39,7 +40,8 @@ public class ValidationAspect {
     	pointcut="annotationValidationPointcut() && atExecution()", 
     	returning="resultMethod")
     public void grabValidationAfter(JoinPoint joinPoint, Object resultMethod) throws Throwable {
-    	ValidationResult valResult = getValidationResultFromMethodReturn(resultMethod);
+    	InfoValidation infoValidation = InfoValidation.from(joinPoint);
+    	ValidationResult valResult = getValResultFromMethod(resultMethod);
     	modifyValidationResultAccordingAnnotationParams(valResult, joinPoint);
     	
     	//TODO el datosStep se puede acabar eliminando pero de momento lo forzaremos como parámetro obligatorio sólo para probar
@@ -54,7 +56,7 @@ public class ValidationAspect {
     	fmwkTest.grabStepValidation(datosStep, valResult.getDescription(), GestorWebDriver.getdFTest());
     }
     
-    private ValidationResult getValidationResultFromMethodReturn(Object resultMethod) {
+    private ValidationResult getValResultFromMethod(Object resultMethod) {
         if (resultMethod!=null && resultMethod instanceof Boolean) {
         	ValidationResult valResult = new ValidationResult();
         	valResult.setOvercomed((Boolean)resultMethod);
@@ -67,6 +69,8 @@ public class ValidationAspect {
         
         throw (new RuntimeException("The return of a method marked with @Validation annotation must be of type boolean or ValidationResult"));
     }
+    
+
     
 	//TODO el datosStep se puede acabar eliminando pero de momento lo forzaremos como parámetro obligatorio sólo para probar
     private DatosStep getDatosStepFromMethodParams(JoinPoint joinPoint) {
@@ -117,13 +121,6 @@ public class ValidationAspect {
     	}
     	
     	return null;
-    }
-    
-    private Validation getValidationAnnotation(JoinPoint joinPoint) {
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        Method method = signature.getMethod();
-        Validation validationAnnotation = method.getAnnotation(Validation.class);
-        return (validationAnnotation);
     }
     
     //TODO manage exception -> NOK
