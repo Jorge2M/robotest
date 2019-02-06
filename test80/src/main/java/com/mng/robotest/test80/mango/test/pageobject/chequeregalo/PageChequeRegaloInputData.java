@@ -32,11 +32,6 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
         public String getXPath() {
             return this.element;
         }
-
-        @Override
-        public String getXPath(Channel channel) {
-            return this.element;
-        }
     }
 
     public enum ElementCheque implements ElementPage {
@@ -49,7 +44,6 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
 
         String element;
         String mobile_element;
-
         ElementCheque(String element, String mobile_element) {
             this.element = element;
             this.mobile_element = mobile_element;
@@ -86,11 +80,6 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
 
         @Override
         public String getXPath() {
-            return this.element;
-        }
-
-        @Override
-        public String getXPath(Channel channel) {
             return this.element;
         }
     }

@@ -11,8 +11,8 @@ import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageBolsas;
-import com.mng.robotest.test80.mango.test.pageobject.manto.PagePedidos;
 import com.mng.robotest.test80.mango.test.pageobject.manto.SecCabecera;
+import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PagePedidos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageMenusManto;
 
 /**

@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.stpv.manto;
+package com.mng.robotest.test80.mango.test.stpv.manto.pedido;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,8 +100,7 @@ public class PagePedidosMantoStpV {
 			throws Exception {
 		int posicionPedidoActual = 6;
 		int posicionMaxPaginaPedidos = 105;
-
-		DatosStep datosStep = new DatosStep(
+		DatosStep datosStep = new DatosStep (
 				"Buscamos pedidos con id registro",
 				"Debemos obtener el ID del pedido");
 		datosStep.setGrab_ErrorPageIfProblem(false);
@@ -158,9 +157,9 @@ public class PagePedidosMantoStpV {
 		DataBag dBagPrueba = new DataBag();
 		List<String> referencias = new ArrayList<>();
 		ArticuloScreen articulo;
-
-		DatosStep datosStep = new DatosStep("Buscamos pedidos con id registro para obtener información del cliente",
-				"Debemos obtener la información del cliente");
+		DatosStep datosStep = new DatosStep(
+			"Buscamos pedidos con id registro para obtener información del cliente",
+			"Debemos obtener la información del cliente");
 		datosStep.setGrab_ErrorPageIfProblem(false);
 		try {
 
@@ -205,8 +204,9 @@ public class PagePedidosMantoStpV {
 	 * @return DataPedido con la información del cliente seteada
 	 */
 	public static DataPedido getDataCliente(DataPedido dPedidoPrueba, DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep("Buscamos pedidos con id registro para obtener información del cliente",
-				"Debemos obtener la información del cliente");
+		DatosStep datosStep = new DatosStep(
+			"Buscamos pedidos con id registro para obtener información del cliente",
+			"Debemos obtener la información del cliente");
 		datosStep.setGrab_ErrorPageIfProblem(false);
 		try {
 			PageDetallePedido.clickLinkDetallesCliente(dFTest.driver);
@@ -257,7 +257,6 @@ public class PagePedidosMantoStpV {
 	public static DataPedido getTiendaFisicaListaPedidos(DataPedido dPedidoPrueba, DataFmwkTest dFTest)
 			throws Exception {
 		DataDeliveryPoint dEnvioPrueba = new DataDeliveryPoint();
-
 		DatosStep datosStep = new DatosStep(
 			"Un pedido con tienda física en la lista de pedidos",
 			"Debemos obtener una tienda física válida");

@@ -14,8 +14,8 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
-import com.mng.robotest.test80.mango.test.pageobject.manto.PageDetallePedido;
-import com.mng.robotest.test80.mango.test.pageobject.manto.PagePedidos.TypeDetalle;
+import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageDetallePedido;
+import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PagePedidos.TypeDetalle;
 import com.mng.robotest.test80.mango.test.stpv.manto.DataMantoAccess;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageBolsasMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageConsultaPedidoBolsaStpV;
@@ -87,8 +87,9 @@ public class PedidosNavigations {
         PageMenusMantoStpV.goToBolsas(dFTest);
         DatosStep datosStep = SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.BOLSA, dFTest);
         boolean existLinkPedido = PageBolsasMantoStpV.validaLineaBolsa(dataPedido, appE, datosStep, dFTest);
-        if (existLinkPedido)
+        if (existLinkPedido) {
             PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.bolsa, appE, dFTest);
+        }
         
         if (appE!=AppEcom.votf) {
             //Establecemos los filtros de los pedidos con el día de hoy + el pedido + el código de país asociado al pedido y pulsamos "Buscar"
@@ -97,8 +98,9 @@ public class PedidosNavigations {
             existLinkPedido = PagePedidosMantoStpV.validaLineaPedido(dataPedido, appE, datosStep, dFTest);
                                         
             //Si existe el link del pedido, Accedemos al detalle del pedido (la página de detalle es común para consulta de pedido/bolsa)
-            if (existLinkPedido)
+            if (existLinkPedido) {
                 PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.pedido, appE, dFTest);
+            }
         }
         
         PageDetallePedido.gotoListaPedidos(dFTest.driver);

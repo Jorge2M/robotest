@@ -3,7 +3,6 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancredit
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPage;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
@@ -18,18 +17,12 @@ public class PageKoCardINIpay1Mobil extends ElementPageFunctions {
     	submitButton("//input[@type='submit']");
 
         private String xPath;
-
         BodyPageKoCardINIpay1 (String xPath) {
             this.xPath = xPath;
         }
 
         @Override
         public String getXPath() {
-            return this.xPath;
-        }
-
-        @Override
-        public String getXPath(Channel channel) {
             return this.xPath;
         }
         

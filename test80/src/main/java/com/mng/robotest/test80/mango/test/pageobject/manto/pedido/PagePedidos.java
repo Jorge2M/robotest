@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.pageobject.manto;
+package com.mng.robotest.test80.mango.test.pageobject.manto.pedido;
 
 import java.util.List;
 

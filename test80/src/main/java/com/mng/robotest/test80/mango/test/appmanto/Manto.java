@@ -30,10 +30,10 @@ import com.mng.robotest.test80.mango.test.stpv.manto.PageGestorSaldosTPVStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageLoginMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageMenusMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageOrdenacionDePrendasStpV;
-import com.mng.robotest.test80.mango.test.stpv.manto.PagePedidosMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageSelTdaMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.SecFiltrosMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.SecFiltrosMantoStpV.TypeSearch;
+import com.mng.robotest.test80.mango.test.stpv.manto.pedido.PagePedidosMantoStpV;
 
 @SuppressWarnings("javadoc")
 public class Manto  extends GestorWebDriver {
