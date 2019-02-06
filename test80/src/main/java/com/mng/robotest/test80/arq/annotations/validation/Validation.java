@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.arq.annotations;
+package com.mng.robotest.test80.arq.annotations.validation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

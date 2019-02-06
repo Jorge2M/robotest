@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.arq.annotations;
+package com.mng.robotest.test80.arq.annotations.validation;
 
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;

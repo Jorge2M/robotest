@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.arq.annotations;
+package com.mng.robotest.test80.arq.annotations.validation;
 
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
@@ -23,6 +23,8 @@ import org.aspectj.lang.reflect.MethodSignature;
 @Aspect
 public class ValidationAspect {
 	
+	InfoValidation infoValidation;
+	
     @Pointcut("@annotation(Validation)")
     public void annotationValidationPointcut() {
         //Pointcut
@@ -40,7 +42,7 @@ public class ValidationAspect {
     	pointcut="annotationValidationPointcut() && atExecution()", 
     	returning="resultMethod")
     public void grabValidationAfter(JoinPoint joinPoint, Object resultMethod) throws Throwable {
-    	InfoValidation infoValidation = InfoValidation.from(joinPoint);
+    	infoValidation = InfoValidation.from(joinPoint);
     	ValidationResult valResult = getValResultFromMethod(resultMethod);
     	modifyValidationResultAccordingAnnotationParams(valResult, joinPoint);
     	

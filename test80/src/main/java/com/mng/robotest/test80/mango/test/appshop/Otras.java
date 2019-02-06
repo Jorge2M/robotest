@@ -8,8 +8,8 @@ import java.util.List;
 
 import org.testng.annotations.*;
 
-import com.mng.robotest.test80.arq.annotations.Validation;
-import com.mng.robotest.test80.arq.annotations.ValidationResult;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
+import com.mng.robotest.test80.arq.annotations.validation.ValidationResult;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.*;
