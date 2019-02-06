@@ -84,6 +84,10 @@ public class DataPedido {
     public void setResejecucion(State resejecucion) {
         this.resejecucion = resejecucion;
     }   
+    
+    public boolean isResultadoOk() {
+    	return (getResejecucion()==State.Ok);
+    }
         
     /**
      * @return el código de pedido regularizado según el país para su búsqueda a nivel de Manto

@@ -10,16 +10,18 @@ import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
+import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
+import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageReembolsos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageReembolsos.TypeReembolso;
-import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidosNavigations;
+import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PageReembolsosStpV;
@@ -218,6 +220,10 @@ public class Reembolsos extends GestorWebDriver {
         PageReembolsosStpV.gotoRefundsFromMenuAndValidaSalCta(dCtxSh.pais.existsPagoStoreCredit(), saldoCtaEsperado, dCtxSh.appE, dCtxSh.channel, dFTest);
         
         //Validación en Manto de los Pedidos (si existen)
-        PedidosNavigations.testPedidosEnManto(dCtxPago.getListPedidos(), dCtxSh.appE, dFTest);
+    	List<CheckPedido> listChecks = Arrays.asList(
+    		CheckPedido.consultarBolsa, 
+    		CheckPedido.consultarPedido);
+        DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
+        PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, dFTest);
     }
 }

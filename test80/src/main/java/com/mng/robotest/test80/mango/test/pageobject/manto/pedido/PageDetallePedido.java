@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.pageobject.manto;
+package com.mng.robotest.test80.mango.test.pageobject.manto.pedido;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,19 +11,43 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
+import com.mng.robotest.test80.mango.test.pageobject.ElementPage;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
 @SuppressWarnings("javadoc")
 public class PageDetallePedido extends WebdrvWrapp {
 
-    public static String XPathImporteTotal = "//span[text()[contains(.,'TOTAL:')]]/../following-sibling::*[1]";
-    private static String XPathCodigoPais = "//table[1]/tbody/tr/td[2]//tr[11]";
-    private static String XPathLinkEnvioTienda = "//td[text()[contains(.,'ENVIO A TIENDA')]]";
-    private static String XPathEstadoPedido = "//span[text()[contains(.,'res_banco')]]/../following-sibling::*[1]";
-    private static String XPathTipoServicio = "//span[text()[contains(.,'tipo servicio')]]/../following-sibling::*[1]";
-    private static String XPathLinkVolverPedidos = "//a[text()[contains(.,'volver a pedidos')]]";
-    private static String XPathRefereciaArticulo = "//a[@onclick[contains(.,'var div =')]]";
-    private static String XPathLinkDetallesCliente = "//input[@value='Detalles Cliente']";
+	private final static String tagIdPedido = "@tagIdPedido";
+    public final static String XPathImporteTotal = "//span[text()[contains(.,'TOTAL:')]]/../following-sibling::*[1]";
+    private final static String XPathCodigoPais = "//table[1]/tbody/tr/td[2]//tr[11]";
+    private final static String XPathLinkEnvioTienda = "//td[text()[contains(.,'ENVIO A TIENDA')]]";
+    private final static String XPathLabelIdPedido = "//td/label[text()[contains(.,'" + tagIdPedido + "')]]";
+    private final static String XPathEstadoPedido = "//span[text()[contains(.,'res_banco')]]/../following-sibling::*[1]";
+    private final static String XPathTipoServicio = "//span[text()[contains(.,'tipo servicio')]]/../following-sibling::*[1]";
+    private final static String XPathLinkVolverPedidos = "//a[text()[contains(.,'volver a pedidos')]]";
+    private final static String XPathRefereciaArticulo = "//a[@onclick[contains(.,'var div =')]]";
+    private final static String XPathLinkDetallesCliente = "//input[@value='Detalles Cliente']";
+    
+    public static enum RightButtons implements ElementPage {
+        IrAGenerar("//input[@value='ir a Generar']"),
+        DetallesCliente("//input[@value='Detalles Cliente']"),
+        Devoluciones("//input[@value='Devoluciones']");
+
+        private String xPath;
+        
+        RightButtons(String xPath) {
+            this.xPath = xPath;
+        }
+
+        @Override
+        public String getXPath() {
+            return this.xPath;
+        }
+    }
+    
+    private static String getXPathLabelIdPedido(String idPedido) {
+    	return (XPathLabelIdPedido.replace(tagIdPedido, idPedido));
+    }
     
     /**
      * @param driver
@@ -31,6 +55,15 @@ public class PageDetallePedido extends WebdrvWrapp {
      */
     public static boolean isPage(WebDriver driver) {
         return (isElementPresent(driver, By.xpath("//td[text()[contains(.,'DETALLES PEDIDOS')]]")));
+    }
+    
+    public static boolean isPage(String idPedido, WebDriver driver) {
+    	if (isPage(driver)) {
+    		String xpathLabelIdPedido = getXPathLabelIdPedido(idPedido);
+    		return (WebdrvWrapp.isElementVisible(driver, By.xpath(xpathLabelIdPedido)));
+    	}
+    	
+    	return false;
     }
     
     /**

@@ -82,11 +82,11 @@ public class SecTarjetaPciDktop extends WebdrvWrapp implements SecTarjetaPci {
     
     @Override
     public void selectMesByVisibleText(String mes, WebDriver driver) {
-        selectOption(By.xpath(XPathSelectMes), mes, driver);
+        selectOption(By.xpath(XPathSelectMes), mes, OptionSelect.ByVisibleText, driver);
     }
     
     @Override
     public void selectAnyByVisibleText(String any, WebDriver driver) {
-        selectOption(By.xpath(XPathSelectAny), any, driver);
+        selectOption(By.xpath(XPathSelectAny), any, OptionSelect.ByVisibleText, driver);
     }
 }

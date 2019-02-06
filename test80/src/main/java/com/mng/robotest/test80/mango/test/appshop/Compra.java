@@ -13,9 +13,11 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.*;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
+import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
+import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -30,7 +32,7 @@ import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputData.Importe;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter.FooterLink;
-import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidosNavigations;
+import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
@@ -147,13 +149,17 @@ public class Compra extends GestorWebDriver {
         PagoNavigationsStpV.testPagoFromCheckoutToEnd(dCtxPago, dCtxSh, pagoVisaToTest, dFTest);
         
         //Validación en Manto de los Pedidos (si existen)
-        PedidosNavigations.testPedidosEnManto(dCtxPago.getListPedidos(), dCtxSh.appE, dFTest);
+    	List<CheckPedido> listChecks = Arrays.asList(
+    		CheckPedido.consultarBolsa, 
+    		CheckPedido.consultarPedido);
+        DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
+        PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, dFTest);
     }
 
     @Test (
         groups={"Compra", "Canal:desktop_App:shop"}, alwaysRun=true,
-        description="[Usuario registrado] Compra Cheque regalo")
-    public void COM004_Cheque_Regalo_NoReg_emailExist(ITestContext context, Method method) throws Exception {
+        description="[Usuario registrado] Consulta datos cheque existente y posterior compra Cheque regalo")
+    public void COM004_Cheque_Regalo_UsrReg_emailExist(ITestContext context, Method method) throws Exception {
         DataFmwkTest dFTest = new DataFmwkTest(getDriver(), method, context);
         DataCtxShop dCtxSh = this.dCtsShThread.get();
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
@@ -204,10 +210,14 @@ public class Compra extends GestorWebDriver {
         dataPedido.setDireccionEnvio("");
         dataPedido.setEmailCheckout(dCtxSh.userConnected);
         PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, dFTest);
-        
-        //Validación en Manto de los Pedidos (si existen)
-        if (fTCkout.validaPedidosEnManto)
-            PedidosNavigations.testPedidosEnManto(dCtxPago.getListPedidos(), dCtxSh.appE, dFTest);
+        if (fTCkout.validaPedidosEnManto) {
+        	List<CheckPedido> listChecks = Arrays.asList(
+        		CheckPedido.consultarBolsa, 
+        		CheckPedido.consultarPedido, 
+        		CheckPedido.anular);
+        	DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
+            PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, dFTest);
+        }
      }    
     
     @Test (
@@ -233,10 +243,13 @@ public class Compra extends GestorWebDriver {
         dCtxPago.setFTCkout(FTCkout);
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
         PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(paisesDestino, dCtxSh, dCtxPago, dFTest);
-        
-        //Validación en Manto de los Pedidos (si existen)
-        if (FTCkout.validaPedidosEnManto)
-            PedidosNavigations.testPedidosEnManto(dCtxPago.getListPedidos(), dCtxSh.appE, dFTest);
+        if (FTCkout.validaPedidosEnManto) {
+        	List<CheckPedido> listChecks = Arrays.asList(
+        		CheckPedido.consultarBolsa, 
+        		CheckPedido.consultarPedido);
+            DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
+            PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, dFTest);
+        }
     }
             
     @SuppressWarnings("static-access")
@@ -282,8 +295,13 @@ public class Compra extends GestorWebDriver {
             }            
             
             //Validación en Manto de los Pedidos (si existen)
-            if (FTCkout.validaPedidosEnManto)
-                PedidosNavigations.testPedidosEnManto(dCtxPago.getListPedidos(), dCtxSh.appE, dFTest);
+            if (FTCkout.validaPedidosEnManto) {
+            	List<CheckPedido> listChecks = Arrays.asList(
+            		CheckPedido.consultarBolsa, 
+            		CheckPedido.consultarPedido);
+                DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
+                PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, dFTest);
+            }
         }
     }
 
@@ -308,10 +326,13 @@ public class Compra extends GestorWebDriver {
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
         PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(dCtxSh, dCtxPago, dFTest);
-        
-        //Validación en Manto de los Pedidos (si existen)
-        if (FTCkout.validaPedidosEnManto)
-            PedidosNavigations.testPedidosEnManto(dCtxPago.getListPedidos(), dCtxSh.appE, dFTest);
+        if (FTCkout.validaPedidosEnManto) {
+        	List<CheckPedido> listChecks = Arrays.asList(
+        		CheckPedido.consultarBolsa, 
+        		CheckPedido.consultarPedido);
+            DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
+            PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, dFTest);
+        }
     }
     
     //@Test (
@@ -357,7 +378,11 @@ public class Compra extends GestorWebDriver {
         
         //Validación en Manto de los Pedidos (si existen)
         if (FTCkout.validaPedidosEnManto) {
-            PedidosNavigations.testPedidosEnManto(dCtxPago.getListPedidos(), dCtxSh.appE, dFTest);
+        	List<CheckPedido> listChecks = Arrays.asList(
+        		CheckPedido.consultarBolsa, 
+        		CheckPedido.consultarPedido);
+            DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
+            PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, dFTest);
             
             //String idCompra = dCtxPago.getListPedidos().get(0).getIdCompra();
             //Test API...

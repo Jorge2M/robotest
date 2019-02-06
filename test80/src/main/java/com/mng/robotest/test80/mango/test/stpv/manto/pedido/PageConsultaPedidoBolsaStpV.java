@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.stpv.manto;
+package com.mng.robotest.test80.mango.test.stpv.manto.pedido;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +11,11 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
-import com.mng.robotest.test80.mango.test.pageobject.manto.PageDetallePedido;
-import com.mng.robotest.test80.mango.test.pageobject.manto.PagePedidos;
-import com.mng.robotest.test80.mango.test.pageobject.manto.PagePedidos.TypeDetalle;
+import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions;
+import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageDetallePedido;
+import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PagePedidos;
+import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageDetallePedido.RightButtons;
+import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PagePedidos.TypeDetalle;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -23,7 +25,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  *
  */
 @SuppressWarnings("javadoc")
-public class PageConsultaPedidoBolsaStpV {
+public class PageConsultaPedidoBolsaStpV extends ElementPageFunctions {
 
     /**
      * Se accede al detalle de un pedido desde la lista de pedidos o bolsas
@@ -129,5 +131,24 @@ public class PageConsultaPedidoBolsaStpV {
             datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
         }  
         finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+    }
+    
+    public static datosStep clickButtonIrAGenerar(String idPedido, DataFmwkTest dFTest) throws Exception {
+        //Step
+        datosStep datosStep = new datosStep   (
+            "Seleccionamos el botón " + RightButtons.IrAGenerar, 
+            "Aparece la página de generación del pedido");
+        datosStep.setGrabImage(true); datosStep.setGrab_ErrorPageIfProblem(false);
+        try {
+            clickAndWait(RightButtons.IrAGenerar, dFTest.driver);
+                                            
+            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+        }
+        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+                                    
+        //Validaciones
+        PageGenerarPedidoStpV.validateIsPage(idPedido, datosStep, dFTest);
+        
+        return datosStep;
     }
 }

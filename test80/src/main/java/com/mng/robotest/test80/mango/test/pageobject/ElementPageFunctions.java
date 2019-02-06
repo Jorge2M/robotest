@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp.OptionSelect;
 
 public class ElementPageFunctions {
 
@@ -119,5 +120,10 @@ public class ElementPageFunctions {
     	catch (NoSuchElementException e) {
     		return null;
     	}
+    }
+    
+    public static void selectByValue(ElementPage select, String value, OptionSelect typeSelect, WebDriver driver) {
+    	By selectBy = By.xpath(select.getXPath());
+    	WebdrvWrapp.selectOption(selectBy, value, typeSelect, driver);
     }
 }

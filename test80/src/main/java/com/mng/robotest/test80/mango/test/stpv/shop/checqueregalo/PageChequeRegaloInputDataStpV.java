@@ -56,7 +56,7 @@ public class PageChequeRegaloInputDataStpV{
 
         //Step
         datosStep datosStep2 = new datosStep    (
-        	"Introducimos en el campo de <b>tarjeta bancaria</b> " + numTarjeta + " para consultar el saldo",
+        	"Introducimos en el campo de <b>tarjeta regalo</b> " + numTarjeta + " para consultar el saldo",
             "Se carga la página donde salen nuevos campos visibles como el de <b>cvv</b>");
         try {
             PageChequeRegaloInputData.introducirTarjetaConsultaSaldo(dFTest.driver, numTarjeta);

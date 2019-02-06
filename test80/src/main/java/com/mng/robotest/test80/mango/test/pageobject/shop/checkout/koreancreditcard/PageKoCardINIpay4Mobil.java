@@ -13,19 +13,14 @@ public class PageKoCardINIpay4Mobil extends ElementPageFunctions {
     public enum BodyPageKoCardINIpay4 implements ElementPage {
         nextButton("//span[@id='cardNext2Btn']"),
     	messagePagoOk("//p[text()[contains(.,'" + textoPagoConExitoKR + "')]]");
+    	
         private String xPath;
-
         BodyPageKoCardINIpay4 (String xPath) {
             this.xPath = xPath;
         }
 
         @Override
         public String getXPath() {
-            return this.xPath;
-        }
-
-        @Override
-        public String getXPath(Channel channel) {
             return this.xPath;
         }
     }

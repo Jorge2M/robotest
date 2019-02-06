@@ -596,18 +596,27 @@ public class WebdrvWrapp extends ElementPageFunctions {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", webElem);
     }
    
-    public static void selectOption(By selectBy, String value, WebDriver driver) {
+    public enum OptionSelect {ByVisibleText, ByValue, ByValueJavaScript}
+    public static void selectOption(By selectBy, String value, OptionSelect typeSelect, WebDriver driver) {
         WebElement selectElem = driver.findElement(selectBy); 
-        new Select(selectElem).selectByVisibleText(value);
-        if (selectElem.getAttribute("value").compareTo(value)!=0) {
-            selectElem.sendKeys(value);
-            if (selectElem.getAttribute("value").compareTo(value)!=0) {
+        switch (typeSelect) {
+        case ByVisibleText:
+        	new Select(selectElem).selectByVisibleText(value);
+        	break;
+        case ByValue:
+        	if (selectElem.getAttribute("value").compareTo(value)!=0) {
+                selectElem.sendKeys(value);
+        	}
+        	break;
+        case ByValueJavaScript:
+        	if (selectElem.getAttribute("value").compareTo(value)!=0) {
                 JavascriptExecutor executor = (JavascriptExecutor) driver;
                 executor.executeScript(
                     "const textToFind = '" + value + "';" +
                     "const dd = arguments[0];" +
-                    "dd.selectedIndex = [...dd.options].findIndex (option => option.text === textToFind);", selectElem);
-            }
+                    "dd.selectedIndex = [...dd.options].findIndex (option => option.text === textToFind);", selectElem
+                );
+        	}
         }
     }
     

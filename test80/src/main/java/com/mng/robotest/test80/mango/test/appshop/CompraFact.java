@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,8 +18,10 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
+import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
+import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -26,7 +29,7 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
-import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidosNavigations;
+import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
@@ -49,6 +52,7 @@ public class CompraFact extends GestorWebDriver {
     boolean empleado = false;
     boolean testVale = false;
     boolean manyArticles = false;
+    boolean checkAnulaPedido = false;
     
     //Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
     public CompraFact() {}
@@ -57,7 +61,8 @@ public class CompraFact extends GestorWebDriver {
      * Constructor para invocación desde @Factory
      */
     public CompraFact(Pais pais, IdiomaPais idioma, Pago pago, AppEcom appE, Channel channel, 
-    				  boolean usrRegistrado, boolean empleado, boolean testVale, boolean manyArticles, int prioridad) {
+    				  boolean usrRegistrado, boolean empleado, boolean testVale, boolean manyArticles, 
+    				  boolean checkAnulaPedido, int prioridad) {
         this.paisFactory = pais;
         this.idiomaFactory = idioma;
         this.pago = pago;
@@ -65,6 +70,7 @@ public class CompraFact extends GestorWebDriver {
         this.empleado = empleado;
         this.testVale = testVale;
         this.manyArticles = manyArticles;
+        this.checkAnulaPedido = checkAnulaPedido;
         this.prioridad = prioridad;
         this.index_fact = getIndexFactoria(pais, pago, appE, channel);
     }
@@ -84,6 +90,8 @@ public class CompraFact extends GestorWebDriver {
     			index+="-síVale";
     		if (manyArticles)
     			index+="-síManyArt";
+    		if (checkAnulaPedido)
+    			index+="-anulPedido";
     			
     	return index;
     }
@@ -160,8 +168,15 @@ public class CompraFact extends GestorWebDriver {
         PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, dFTest);
         
         //Validación en Manto de los Pedidos (si existen)
-        if (fTCkout.validaPedidosEnManto)
-            PedidosNavigations.testPedidosEnManto(dCtxPago.getListPedidos(), dCtxSh.appE, dFTest);
+        if (fTCkout.validaPedidosEnManto) {
+        	List<CheckPedido> listChecks = new ArrayList<CheckPedido>(Arrays.asList(
+        		CheckPedido.consultarBolsa, 
+        		CheckPedido.consultarPedido));
+        	if (checkAnulaPedido)
+        		listChecks.add(CheckPedido.anular);
+            DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
+            PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, dFTest);
+        }
     }
     
     private boolean includeValeValidation(DataFmwkTest dFTest) {

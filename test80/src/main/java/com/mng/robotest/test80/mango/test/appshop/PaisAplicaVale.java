@@ -2,15 +2,20 @@ package com.mng.robotest.test80.mango.test.appshop;
 
 import org.testng.ITestContext;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
+
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
+import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
-import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidosNavigations;
+import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 
 import org.openqa.selenium.WebDriver;
@@ -92,9 +97,12 @@ public class PaisAplicaVale extends GestorWebDriver {
         DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);
         dCtxPago.setFTCkout(fTCkout);
         PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(this.dCtxSh, dCtxPago, dFTest);
-        
-        //Validación en Manto de los Pedidos (si existen)
-        if (fTCkout.validaPedidosEnManto)
-            PedidosNavigations.testPedidosEnManto(dCtxPago.getListPedidos(), this.dCtxSh.appE, dFTest);
+        if (fTCkout.validaPedidosEnManto) {
+        	List<CheckPedido> listChecks = Arrays.asList(
+        		CheckPedido.consultarBolsa, 
+        		CheckPedido.consultarPedido);
+            DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
+            PedidoNavigations.testPedidosEnManto(checksPedidos, this.dCtxSh.appE, dFTest);
+        }
     }
 }

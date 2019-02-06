@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.stpv.manto;
+package com.mng.robotest.test80.mango.test.stpv.manto.pedido;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +13,10 @@ import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageDetalleCliente;
-import com.mng.robotest.test80.mango.test.pageobject.manto.PageDetallePedido;
-import com.mng.robotest.test80.mango.test.pageobject.manto.PagePedidos;
-import com.mng.robotest.test80.mango.test.pageobject.manto.PagePedidos.IdColumn;
-import com.mng.robotest.test80.mango.test.pageobject.manto.PagePedidos.TypeDetalle;
+import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageDetallePedido;
+import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PagePedidos;
+import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PagePedidos.IdColumn;
+import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PagePedidos.TypeDetalle;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.DataDeliveryPoint;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
