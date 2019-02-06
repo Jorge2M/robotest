@@ -2,9 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.cabecera;
 
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -21,6 +19,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLat
  *
  */
 public class SecCabeceraMobil extends SecCabecera {
+	
+	private SearchBarMobil searchBar = null; 
 	
 	final static String XPathHeader = "//header";
 	public enum Icono {
@@ -65,8 +65,7 @@ public class SecCabeceraMobil extends SecCabecera {
 			return (getXPath(app));
 		}
 	}
-	
-    private final static String XPathInputBuscador = "//form[not(@class)]/input[@class='search-input']";
+
     private final static String XPathSmartBanner = XPathHeader + "/div[@id='smartbanner']";
     private final static String XPathLinkCloseSmartBanner = XPathSmartBanner + "//a[@class='sb-close']";       
     private final static String XPathLinkLogoMangoShop = "//a[@class='header-content-logo']";
@@ -81,8 +80,15 @@ public class SecCabeceraMobil extends SecCabecera {
     public static SecCabeceraMobil getNew(AppEcom app, WebDriver driver) {
     	return (new SecCabeceraMobil(app, driver));
     }
-
     
+    public SearchBarMobil getSearchBar() throws Exception {
+    	if (searchBar==null) {
+    		searchBar = SearchBarMobil.make(app, driver);
+    	}
+    	
+    	return searchBar;
+    }
+
     @Override
     String getXPathLogoMango() {
     	switch (app) {
@@ -144,22 +150,23 @@ public class SecCabeceraMobil extends SecCabecera {
     }
     
     public void click(Icono icono) throws Exception {
+    	click(icono, app, driver);
+    }
+    
+    public static void click(Icono icono, AppEcom app, WebDriver driver) throws Exception {
     	clickAndWaitLoad(driver, By.xpath(icono.getXPathLink(app)), TypeOfClick.javascript);
     }
     
-    public void clickIconoLupaIfBuscadorNotVisible() throws Exception {
-    	if (!isBuscadorVisibleUntil(0))
+    public void clickIconoLupaIfVisible() throws Exception {
+    	if (isElementVisible(driver, By.xpath(Icono.Lupa.getXPath(app)))) {
     		click(Icono.Lupa);
+    	}
     }
     
     public void hoverIcono(Icono icono) {
     	moveToElement(By.xpath(icono.getXPathLink(app)), driver);
     }
-    
-    public boolean isBuscadorVisibleUntil(int maxSeconds) {
-    	return (isElementVisibleUntil(driver, By.xpath(XPathInputBuscador), maxSeconds));
-    }
-    
+
     /**
      * Busca un determinado artículo por su referencia y no espera a la página de resultado
      */
@@ -168,20 +175,17 @@ public class SecCabeceraMobil extends SecCabecera {
         setTextAndReturn(referencia);
     }
     
-    public boolean clickLupaAndWaitInput(int maxSecondsToWait) throws Exception {
-    	clickIconoLupaIfBuscadorNotVisible();
-        return (isElementPresentUntil(driver, By.xpath(XPathInputBuscador), maxSecondsToWait));
+    public boolean clickLupaAndWaitInput(int maxSecondsWait) throws Exception {
+    	clickIconoLupaIfVisible();
+    	return (getSearchBar().isVisibleUntil(maxSecondsWait));
     }
     
     /**
      * Introducimos la referencia en el buscador y seleccionamos RETURN
      */
-    public void setTextAndReturn(String referencia) {
-    	if (isBuscadorVisibleUntil(2)) {
-	        WebElement input = getElementVisible(driver, By.xpath(XPathInputBuscador));
-	        input.clear();
-	        sendKeysWithRetry(5, input, referencia);
-	        input.sendKeys(Keys.RETURN);
+    public void setTextAndReturn(String referencia) throws Exception {
+    	if (getSearchBar().isVisibleUntil(2)) {
+    		getSearchBar().search(referencia);
     	}
     }    
     

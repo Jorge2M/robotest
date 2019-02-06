@@ -2,7 +2,6 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancredit
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPage;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions;
 
