@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -21,16 +18,16 @@ public class SecConfirmDatosStpV {
         int maxSecondsToWait = 3;
         String descripValidac = 
             "1) Es visible la capa de confirmación de los datos (la esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!ModalDroppoints.secConfirmDatos.isVisibleUntil(maxSecondsToWait, channel, dFTest.driver)) 
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!ModalDroppoints.secConfirmDatos.isVisibleUntil(maxSecondsToWait, channel, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
                           
-          datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+          datosStep.setListResultValidations(listVals);
       }
-      finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+      finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
     public static DatosStep clickConfirmarDatosButton(Channel channel, DataPedido dataPedido, DataFmwkTest dFTest) throws Exception {
@@ -52,25 +49,25 @@ public class SecConfirmDatosStpV {
             "1) Desaparece la capa de Droppoints<br>" +
             "2) Se modifica la dirección de envío por la del Delivery Point (" + dataDp.getDireccion() + ")<br>" +
             "3) Se modifica el código postal de envío por el del Delivery Point (" + dataDp.getCPandPoblacion() + ")";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (ModalDroppoints.isVisible(channel, dFTest.driver)) 
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (ModalDroppoints.isVisible(channel, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
             
             String textDireccionEnvioCompleta = PageCheckoutWrapper.getTextDireccionEnvioCompleta(channel, dFTest.driver);
             dataPedido.setDireccionEnvio(textDireccionEnvioCompleta);
-            //2)
-            if (!textDireccionEnvioCompleta.contains(dataDp.getDireccion()))
-                fmwkTest.addValidation(2, State.Defect, listVals);
-            //3)
-            if (!textDireccionEnvioCompleta.contains(dataDp.getCPandPoblacion()))
-                fmwkTest.addValidation(3, State.Defect, listVals);
+            if (!textDireccionEnvioCompleta.contains(dataDp.getDireccion())) {
+                listVals.add(2, State.Defect);
+            }
+            if (!textDireccionEnvioCompleta.contains(dataDp.getCPandPoblacion())) {
+                listVals.add(3, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }

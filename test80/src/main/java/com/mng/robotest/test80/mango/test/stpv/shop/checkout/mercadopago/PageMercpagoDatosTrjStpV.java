@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.mercadopago;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -38,30 +35,32 @@ public class PageMercpagoDatosTrjStpV {
     public static void validaIsPageMobil(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Estamos en la página de introducción de los datos de la tarjeta";   
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);   
+        datosStep.setStateIniValidations();   
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
-            List<SimpleValidation> listVals = new ArrayList<>();
-            if (!PageMercpagoDatosTrjMobil.isPage(dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!PageMercpagoDatosTrjMobil.isPage(dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
                                                                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static void validaIsPageDesktop(DatosStep datosStep, DataFmwkTest dFTest) {
     	int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Estamos en la página de introducción del CVC (la esperamos hasta " + maxSecondsToWait + " segundos)";   
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);   
+        datosStep.setStateIniValidations();   
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
-            List<SimpleValidation> listVals = new ArrayList<>();
-            if (!PageMercpagoDatosTrjDesktop.isPageUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!PageMercpagoDatosTrjDesktop.isPageUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
                                                                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }    
     
     public static DatosStep inputNumTarjeta(String numTarjeta, Channel channel, DataFmwkTest dFTest) throws Exception {
@@ -90,15 +89,16 @@ public class PageMercpagoDatosTrjStpV {
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa (lo esperamos hasta " + maxSecondsToWait + " segundos)";   
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);   
+        datosStep.setStateIniValidations();   
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
-            List<SimpleValidation> listVals = new ArrayList<>();
-            if (!PageMercpagoDatosTrjMobil.isActiveWrapperVisaUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (!PageMercpagoDatosTrjMobil.isActiveWrapperVisaUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
                                                                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -119,15 +119,16 @@ public class PageMercpagoDatosTrjStpV {
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Aparece el icono de Visa a la derecha de la tarjeta (lo esperamos hasta " + maxSecondsToWait + " segundos)";   
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);   
+        datosStep.setStateIniValidations();   
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
-            List<SimpleValidation> listVals = new ArrayList<>();
-            if (!PageMercpagoDatosTrjDesktop.isVisibleVisaIconUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (!PageMercpagoDatosTrjDesktop.isVisibleVisaIconUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
                                                                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -164,15 +165,16 @@ public class PageMercpagoDatosTrjStpV {
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Aparece activado el botón \"Next\" para continuar con el pago (lo esperamos hasta " + maxSecondsToWait + " segundos)";   
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);   
+        datosStep.setStateIniValidations();   
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
-            List<SimpleValidation> listVals = new ArrayList<>();
-            if (!PageMercpagoDatosTrjMobil.isClickableButtonNextPayUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (!PageMercpagoDatosTrjMobil.isClickableButtonNextPayUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
                                                                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }

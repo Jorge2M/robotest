@@ -1,11 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.shop;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -33,16 +32,16 @@ public class SecFooterStpV {
     	List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(app, channel);
         String descripValidac = 
             "1) Aparecen los siguientes links en el footer <b>" + listFooterLinksToValidate + "</b>";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!SecFooter.checkFooters(listFooterLinksToValidate, app, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!SecFooter.checkFooters(listFooterLinksToValidate, app, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally {fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest);}        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
 
     /**
@@ -73,25 +72,25 @@ public class SecFooterStpV {
         if (typeFooter.pageInNewTab())
         	validation2 = "2) Aparece la página en una ventana aparte";
         
-        String validation = 
+        String descripValidac = 
             "1) Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             validation2;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!pageObject.isPageCorrect(dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
+            if (!pageObject.isPageCorrect(dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
             if (typeFooter.pageInNewTab()) {
-            	if (!newWindowInNewTab)
-            		fmwkTest.addValidation(2, State.Warn, listVals);
+            	if (!newWindowInNewTab) {
+            		listVals.add(2, State.Warn);
+            	}
             }
                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
         finally {
-            fmwkTest.grabStepValidation(datosStep, validation, dFTest);
+        	listVals.checkAndStoreValidations(descripValidac);
             if (typeFooter.pageInNewTab()) {
                 if (closeAtEnd && newWindowInNewTab) {
                     dFTest.driver.close();
@@ -112,19 +111,19 @@ public class SecFooterStpV {
         String descripValidac = 
             "1) Aparece \"Preguntas Frecuentes\" en la página <br>" +
             "2) Aparece la sección \"Contáctanos\" con el número de teléfono " + telefono;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageAyuda.isPresentCabPreguntasFreq(channel, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!PageAyuda.isPresentTelefono(dFTest.driver, telefono))
-                fmwkTest.addValidation(2, State.Warn, listVals);            
+            if (!PageAyuda.isPresentCabPreguntasFreq(channel, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!PageAyuda.isPresentTelefono(dFTest.driver, telefono)) {
+                listVals.add(2, State.Warn);            
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
         
     /**
@@ -157,31 +156,31 @@ public class SecFooterStpV {
            		 "5) Aparece el campo <b>Mail</b><br>" + 
            		 "6) Aparece el botón <b>¡Lo quiero ahora!</b>";
                  
-             datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+             datosStep.setStateIniValidations();
+             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
              try {
-                 List<SimpleValidation> listVals = new ArrayList<>();
-                 //1)
-                 if (!PageMangoCard.isPresentNameField(dFTest.driver))
-                	 fmwkTest.addValidation(2, State.Warn, listVals);
-                 //2)
-                 if (!PageMangoCard.isPresentFirstSurnameField(dFTest.driver))
-                	 fmwkTest.addValidation(2, State.Warn, listVals);
-                 //3)
-                 if (!PageMangoCard.isPresentSecondSurnameField(dFTest.driver))
-                	 fmwkTest.addValidation(2, State.Warn, listVals);
-                 //4)
-                 if (!PageMangoCard.isPresentMobileField(dFTest.driver))
-                	 fmwkTest.addValidation(2, State.Warn, listVals);
-                 //5)
-                 if (!PageMangoCard.isPresentMailField(dFTest.driver))
-                	 fmwkTest.addValidation(2, State.Warn, listVals);
-                 //6)
-                 if (!PageMangoCard.isPresentButtonSolMangoCardNow(dFTest.driver))
-                	 fmwkTest.addValidation(2, State.Warn, listVals);
+                 if (!PageMangoCard.isPresentNameField(dFTest.driver)) {
+                	 listVals.add(2, State.Warn);
+                 }
+                 if (!PageMangoCard.isPresentFirstSurnameField(dFTest.driver)) {
+                	 listVals.add(2, State.Warn);
+                 }
+                 if (!PageMangoCard.isPresentSecondSurnameField(dFTest.driver)) {
+                	 listVals.add(2, State.Warn);
+                 }
+                 if (!PageMangoCard.isPresentMobileField(dFTest.driver)) {
+                	 listVals.add(2, State.Warn);
+                 }
+                 if (!PageMangoCard.isPresentMailField(dFTest.driver)) {
+                	 listVals.add(2, State.Warn);
+                 }
+                 if (!PageMangoCard.isPresentButtonSolMangoCardNow(dFTest.driver)) {
+                	 listVals.add(2, State.Warn);
+                 }
                  
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
              }
-             finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+             finally { listVals.checkAndStoreValidations(descripValidac); }
     
              
              //Step 
@@ -203,23 +202,20 @@ public class SecFooterStpV {
 		         "2) Aparece un modal de aviso de trámite de la solicitud con un botón \"Continuar\" (la esperamos hasta " + secondsToWait + " segundos)";
                  
              datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok); 
-                 
+             listVals = ListResultValidation.getNew(datosStep);    
              try {
-                 List<SimpleValidation> listVals = new ArrayList<>();
-                 //1)
                  ventanaPadre = dFTest.driver.getWindowHandle();
                  WebdrvWrapp.switchToAnotherWindow(dFTest.driver, ventanaPadre);                     
                  //El javascript lanzado por "waitForPageLoaded" rompe la carga de la página -> hemos de aplicar wait explícito previo
                  Thread.sleep(1000); 
                  WebdrvWrapp.waitForPageLoaded(dFTest.driver, 10);
-                     
-                 //2)
-                 if (!PageInputDataSolMangoCard.isPresentBotonContinuarModalUntil(secondsToWait, dFTest.driver))
-                     fmwkTest.addValidation(2, State.Warn, listVals);
+                 if (!PageInputDataSolMangoCard.isPresentBotonContinuarModalUntil(secondsToWait, dFTest.driver)) {
+                     listVals.add(2, State.Warn);
+                 }
                     
-                 datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                 datosStep.setListResultValidations(listVals);
              }
-             finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+             finally { listVals.checkAndStoreValidations(descripValidac); }
         
                  
              //Step
@@ -242,38 +238,37 @@ public class SecFooterStpV {
                  "6) Aparece el apartado \"Modalidad de pago de tu MANGO Card<br>" +
                  "7) Aparece el botón \"Continuar\"";
              
-             datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok); 
-             
+             datosStep.setStateIniValidations(); 
+             listVals = ListResultValidation.getNew(datosStep);             
              try {
-                 List<SimpleValidation> listVals = new ArrayList<>();
-                 //1)
-                 if (!PageInputDataSolMangoCard.isPage2(dFTest.driver))
-                     fmwkTest.addValidation(1, State.Defect, listVals);
+                 if (!PageInputDataSolMangoCard.isPage2(dFTest.driver)) {
+                     listVals.add(1, State.Defect);
+                 }
                  //Nos posicionamos en el iframe central para recorrer contenido (datos personales y datos bancarios).
                  PageInputDataSolMangoCard.gotoiFramePage2(dFTest.driver);
-                 //2)
-                 if (!PageInputDataSolMangoCard.isPresentDatosPersonalesPage2(dFTest.driver))
-                     fmwkTest.addValidation(2, State.Warn, listVals);
-                 //3)
-                 if (!PageInputDataSolMangoCard.isPresentDatosBancariosPage2(dFTest.driver))
-                     fmwkTest.addValidation(3, State.Defect, listVals);
-                 //4)
-                 if (!PageInputDataSolMangoCard.isPresentDatosContactoPage2(dFTest.driver))
-                     fmwkTest.addValidation(4, State.Warn, listVals);
-                 //5)
-                 if (!PageInputDataSolMangoCard.isPresentDatosSocioeconomicosPage2(dFTest.driver))
-                     fmwkTest.addValidation(5, State.Warn, listVals);
-                 //6)
-                 if (!PageInputDataSolMangoCard.isPresentModalidadpagoPage2(dFTest.driver))
-                     fmwkTest.addValidation(6, State.Warn, listVals);                 
-                 //7)
-                 if (!PageInputDataSolMangoCard.isPresentButtonContinuarPage2(dFTest.driver))
-                     fmwkTest.addValidation(7, State.Warn, listVals);                 
+                 if (!PageInputDataSolMangoCard.isPresentDatosPersonalesPage2(dFTest.driver)) {
+                     listVals.add(2, State.Warn);
+                 }
+                 if (!PageInputDataSolMangoCard.isPresentDatosBancariosPage2(dFTest.driver)) {
+                     listVals.add(3, State.Defect);
+                 }
+                 if (!PageInputDataSolMangoCard.isPresentDatosContactoPage2(dFTest.driver)) {
+                     listVals.add(4, State.Warn);
+                 }
+                 if (!PageInputDataSolMangoCard.isPresentDatosSocioeconomicosPage2(dFTest.driver)) {
+                     listVals.add(5, State.Warn);
+                 }
+                 if (!PageInputDataSolMangoCard.isPresentModalidadpagoPage2(dFTest.driver)) {
+                     listVals.add(6, State.Warn);                 
+                 }
+                 if (!PageInputDataSolMangoCard.isPresentButtonContinuarPage2(dFTest.driver)) {
+                     listVals.add(7, State.Warn);                 
+                 }
                  
-                 datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                 datosStep.setListResultValidations(listVals);
              }
              finally {
-                 fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); 
+            	 listVals.checkAndStoreValidations(descripValidac); 
                  dFTest.driver.close();
                  dFTest.driver.switchTo().window(ventanaOriginal);
              }         
@@ -327,38 +322,38 @@ public class SecFooterStpV {
  	        String descripValidac = 
  	            "1) El texto de info de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>" + 
  	            "2) El texto legal de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>";
- 	        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+ 	        datosStep.setStateIniValidations();
+	        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
  	        try {
- 	            List<SimpleValidation> listVals = new ArrayList<>();
- 	            //1)
- 	            if (!SecFooter.isTextoRGPDPresent(dFTest.driver))
- 	                fmwkTest.addValidation(1, State.Defect, listVals);
- 	            //2)
- 	            if (!SecFooter.isTextoLegalRGPDPresent(dFTest.driver))
- 	                fmwkTest.addValidation(2, State.Defect, listVals);
+ 	            if (!SecFooter.isTextoRGPDPresent(dFTest.driver)) {
+ 	                listVals.add(1, State.Defect);
+ 	            }
+ 	            if (!SecFooter.isTextoLegalRGPDPresent(dFTest.driver)) {
+ 	                listVals.add(2, State.Defect);
+ 	            }
  	            
- 	            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+ 	            datosStep.setListResultValidations(listVals);
  	        }
- 	        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }   
+ 	        finally { listVals.checkAndStoreValidations(descripValidac); }   
  		}
  		
  		else {
  			String descripValidac = 
  	            "1) El texto de info de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>" + 
  	            "2) El texto legal de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>";
- 	        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);                             
+ 	        datosStep.setStateIniValidations();
+	        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
  	        try {
- 	            List<SimpleValidation> listVals = new ArrayList<>();
- 	            //1)
- 	            if (SecFooter.isTextoRGPDPresent(dFTest.driver))
- 	                fmwkTest.addValidation(1, State.Defect, listVals);
- 	            //2)
- 	            if (SecFooter.isTextoLegalRGPDPresent(dFTest.driver))
- 	                fmwkTest.addValidation(2, State.Defect, listVals);
+ 	            if (SecFooter.isTextoRGPDPresent(dFTest.driver)) {
+ 	                listVals.add(1, State.Defect);
+ 	            }
+ 	            if (SecFooter.isTextoLegalRGPDPresent(dFTest.driver)) {
+ 	                listVals.add(2, State.Defect);
+ 	            }
  	            
- 	            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+ 	            datosStep.setListResultValidations(listVals);
  	        }
- 	        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); } 
+ 	        finally { listVals.checkAndStoreValidations(descripValidac); } 
  		}
  		return datosStep;
      }

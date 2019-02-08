@@ -1,16 +1,14 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -61,17 +59,17 @@ public class PageCheckoutWrapperStpV {
     //Validaciones
 	    int maxSecondsToWait = 10;
 	    String descripValidac = "1) Acaba desapareciendo la capa de \"Cargando...\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-	    datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
+	    datosStep.setStateIniValidations();  
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	    try {
-	        List<SimpleValidation> listVals = new ArrayList<>();
-	        //1)
 	        Thread.sleep(200); //Damos tiempo a que aparezca la capa de "Cargando"
-	        if (!PageCheckoutWrapper.isNoDivLoadingUntil(maxSecondsToWait, dFTest.driver))
-	            fmwkTest.addValidation(1, State.Warn, listVals);     
+	        if (!PageCheckoutWrapper.isNoDivLoadingUntil(maxSecondsToWait, dFTest.driver)) {
+	            listVals.add(1, State.Warn);     
+	        }
 	
-	        datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+	        datosStep.setListResultValidations(listVals);
 	    }
-	    finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+	    finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     /**
@@ -102,47 +100,46 @@ public class PageCheckoutWrapperStpV {
         //Validaciones
         String descripValidac = 
             "1) El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país (" + pais.getListPagosEnOrdenPantalla(app, isEmpl).size() + ")";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageCheckoutWrapper.isNumMetodosPagoOK(pais, app, channel, isEmpl, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!PageCheckoutWrapper.isNumMetodosPagoOK(pais, app, channel, isEmpl, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         catch (Exception e) {
             /*
              * 
              */
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones
         descripValidac = 
             "1) Aparece un logo/pestaña por cada uno de los pagos asociados al país: " + pais.getStringPagosEnOrdenPantalla(app, isEmpl);
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             List<Pago> listaPagosEnOrden = pais.getListPagosEnOrdenPantalla(app, isEmpl);
             for (int i=0; i<listaPagosEnOrden.size(); i++) {
                 if (listaPagosEnOrden.get(i).getTypePago()!=TypePago.TpvVotf) {
                     if (!PageCheckoutWrapper.isMetodoPagoPresent(listaPagosEnOrden.get(i).getNombre(channel), listaPagosEnOrden.get(i).getIndexpant(), channel, pais.getLayoutPago(), dFTest.driver)) {                                 
-                        fmwkTest.addValidation(1, State.Defect, listVals); 
+                        listVals.add(1, State.Defect); 
                         break;
                     }
                 }
             }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals); 
+            datosStep.setListResultValidations(listVals); 
         }
         catch (Exception e) {
             /*
              * 
              */
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }            
+        finally { listVals.checkAndStoreValidations(descripValidac); }            
     }
     
     /**
@@ -321,40 +318,39 @@ public class PageCheckoutWrapperStpV {
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Se hace visible el texto bajo el método de pago: " + pago.getNombre(channel) + " (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, channel, maxSecondsToWait, dFTest.driver)) 
-                fmwkTest.addValidation(1, State.Warn, listVals);                    
+            if (!PageCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, channel, maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Warn);                    
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         catch (Exception e) {
             /*
              * 
              */
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static void validateIsPresentButtonCompraDesktop(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
-        "1) Aparece el botón de \"Confirmar Compra\"";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
-    
+        	"1) Aparece el botón de \"Confirmar Compra\"";
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageCheckoutWrapper.page1DktopCheckout.isPresentButtonConfPago(dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!PageCheckoutWrapper.page1DktopCheckout.isPresentButtonConfPago(dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         catch (Exception e) {
             //
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep inputDataTrjAndConfirmPago(DataCtxPago dCtxPago, Channel channel, DataFmwkTest dFTest) 
@@ -476,16 +472,16 @@ public class PageCheckoutWrapperStpV {
         //Validaciones
         maxSecondsToWait = 2;
         String descripValidac = "1) Aparece el botón de \"Confirmar Pago\" (esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);                 
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageCheckoutWrapper.page3MobilCheckout.isClickableButtonConfirmarPagoUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1,State.Warn, listVals);
+            if (!PageCheckoutWrapper.page3MobilCheckout.isClickableButtonConfirmarPagoUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1,State.Warn);
+            }
                                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals); 
+            datosStep.setListResultValidations(listVals); 
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest);  }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
                             
         return datosStep;
     }       
@@ -545,34 +541,36 @@ public class PageCheckoutWrapperStpV {
             "1) Aparece el campo de introducción del primer apellido (lo esperamos hasta " + maxSecondsToWait + " segundos)" +
             descripcion2 +
             descripcion3;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();  
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(channel, maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
+            if (!PageCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(channel, maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
             if (pais.getAccesoEmpl().getNif()!=null) { 
-                if (!PageCheckoutWrapper.isPresentInputDNIPromoEmpl(channel, dFTest.driver)) 
-                    fmwkTest.addValidation(2,State.Defect, listVals);
+                if (!PageCheckoutWrapper.isPresentInputDNIPromoEmpl(channel, dFTest.driver)) {
+                    listVals.add(2,State.Defect);
+                }
             }
             else {
-                if (PageCheckoutWrapper.isPresentInputDNIPromoEmpl(channel, dFTest.driver))
-                    fmwkTest.addValidation(2,State.Defect, listVals);
+                if (PageCheckoutWrapper.isPresentInputDNIPromoEmpl(channel, dFTest.driver)) {
+                    listVals.add(2,State.Defect);
+                }
             }
-            //3)
             if (pais.getAccesoEmpl().getFecnac()!=null) { 
-                if (!PageCheckoutWrapper.isPresentDiaNaciPromoEmpl(channel, dFTest.driver))
-                    fmwkTest.addValidation(3, State.Defect, listVals);
+                if (!PageCheckoutWrapper.isPresentDiaNaciPromoEmpl(channel, dFTest.driver)) {
+                    listVals.add(3, State.Defect);
+                }
             }
             else {
-                if (PageCheckoutWrapper.isPresentDiaNaciPromoEmpl(channel, dFTest.driver))
-                    fmwkTest.addValidation(3, State.Defect, listVals);
+                if (PageCheckoutWrapper.isPresentDiaNaciPromoEmpl(channel, dFTest.driver)) {
+                    listVals.add(3, State.Defect);
+                }
             }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -646,16 +644,16 @@ public class PageCheckoutWrapperStpV {
       //Validaciones
         String descripValidac = 
                 "1) Aparece el banco \"" + nombreBanco + "\" en el cuadro de selección";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();      
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageCheckoutWrapper.isBancoSeleccionado(nombreBanco, dFTest))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!PageCheckoutWrapper.isBancoSeleccionado(nombreBanco, dFTest)) {
+                listVals.add(1, State.Defect);
+            }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
 		

@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -19,24 +16,24 @@ public class SecBillpayStpV {
         String descripValidac = 
             "1) Aparecen 3 desplegables para la selección de la fecha de nacimiento<br>" +
             "2) Aparece el check de \"Acepto\"";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);             
+        datosStep.setStateIniValidations(); 
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (!SecBillpay.isPresentSelectBirthBirthYear(dFTest.driver) ||
                 !SecBillpay.isPresentSelectBirthMonth(dFTest.driver) ||
-                !SecBillpay.isPresentSelectBirthDay(dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
-            if (!SecBillpay.isPresentRadioAcepto(channel, dFTest.driver))
-                fmwkTest.addValidation(2, State.Defect, listVals);
+                !SecBillpay.isPresentSelectBirthDay(dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            if (!SecBillpay.isPresentRadioAcepto(channel, dFTest.driver)) {
+                listVals.add(2, State.Defect);
+            }
                                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         catch (Exception e) {
             //
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     /**
@@ -61,25 +58,25 @@ public class SecBillpayStpV {
                 "1) Aparece el campo para la introducción del titular<br>" +
                 "2) Aparece el campo para la introducción del IBAN<br>" +
                 "3) Aparece el campo para la introducción del BIC";
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);             
+            datosStep.setStateIniValidations();
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
-                if (!SecBillpay.isPresentInputTitular(dFTest.driver))
-                    fmwkTest.addValidation(1, State.Defect, listVals);
-                //2)
-                if (!SecBillpay.isPresentInputIBAN(dFTest.driver))
-                    fmwkTest.addValidation(2, State.Defect, listVals);
-                //3)
-                if (!SecBillpay.isPresentInputBIC(dFTest.driver))
-                    fmwkTest.addValidation(3, State.Defect, listVals);
+                if (!SecBillpay.isPresentInputTitular(dFTest.driver)) {
+                    listVals.add(1, State.Defect);
+                }
+                if (!SecBillpay.isPresentInputIBAN(dFTest.driver)) {
+                    listVals.add(2, State.Defect);
+                }
+                if (!SecBillpay.isPresentInputBIC(dFTest.driver)) {
+                    listVals.add(3, State.Defect);
+                }
 
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }
             catch (Exception e) {
                 //
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
         }
         
         return datosStep;

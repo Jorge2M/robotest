@@ -2,16 +2,14 @@ package com.mng.robotest.test80.mango.test.stpv.shop;
 
 import static org.testng.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
-
 import org.json.simple.JSONObject;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -118,52 +116,55 @@ public class AccesoStpV {
         if (dCtxSh.channel==Channel.desktop)
             descripValidac+=
             "6) Aparece una página con menús de MANGO";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!SecMenusWrap.secMenusUser.isPresentMiCuentaUntil(dCtxSh.channel, maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
+            if (!SecMenusWrap.secMenusUser.isPresentMiCuentaUntil(dCtxSh.channel, maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
             if (dCtxSh.appE==AppEcom.outlet) {
-                if (SecMenusWrap.secMenusUser.isPresentFavoritos(dCtxSh.channel, dFTest.driver))
-                    fmwkTest.addValidation(2, State.Defect, listVals);
+                if (SecMenusWrap.secMenusUser.isPresentFavoritos(dCtxSh.channel, dFTest.driver)) {
+                    listVals.add(2, State.Defect);
+                }
             }
             else {
-                if (!SecMenusWrap.secMenusUser.isPresentFavoritos(dCtxSh.channel, dFTest.driver))
-                    fmwkTest.addValidation(2, State.Defect, listVals);
+                if (!SecMenusWrap.secMenusUser.isPresentFavoritos(dCtxSh.channel, dFTest.driver)) {
+                    listVals.add(2, State.Defect);
+                }
             }
-            //3)
             if (dCtxSh.appE==AppEcom.outlet) {
-                if (!SecMenusWrap.secMenusUser.isPresentPedidos(dCtxSh.channel, dFTest.driver))
-                    fmwkTest.addValidation(3, State.Defect, listVals);
+                if (!SecMenusWrap.secMenusUser.isPresentPedidos(dCtxSh.channel, dFTest.driver)) {
+                    listVals.add(3, State.Defect);
+                }
             }
             else {
                 if (dCtxSh.pais.isMisCompras()) {
-                    if (!SecMenusWrap.secMenusUser.isPresentMisCompras(dCtxSh.channel, dFTest.driver))
-                        fmwkTest.addValidation(3, State.Defect, listVals);
+                    if (!SecMenusWrap.secMenusUser.isPresentMisCompras(dCtxSh.channel, dFTest.driver)) {
+                        listVals.add(3, State.Defect);
+                    }
                 }
                 else {
-                    if (SecMenusWrap.secMenusUser.isPresentMisCompras(dCtxSh.channel, dFTest.driver))
-                        fmwkTest.addValidation(3, State.Defect, listVals);
+                    if (SecMenusWrap.secMenusUser.isPresentMisCompras(dCtxSh.channel, dFTest.driver)) {
+                        listVals.add(3, State.Defect);
+                    }
                 }
             }
-            //4)
-            if (!SecMenusWrap.secMenusUser.isPresentAyuda(dCtxSh.channel, dFTest.driver))
-                fmwkTest.addValidation(4, State.Defect, listVals);
-            //5)
-            if (!SecMenusWrap.secMenusUser.isPresentCerrarSesion(dCtxSh.channel, dFTest.driver))
-                fmwkTest.addValidation(5, State.Defect, listVals);
-            //6)
+            if (!SecMenusWrap.secMenusUser.isPresentAyuda(dCtxSh.channel, dFTest.driver)) {
+                listVals.add(4, State.Defect);
+            }
+            if (!SecMenusWrap.secMenusUser.isPresentCerrarSesion(dCtxSh.channel, dFTest.driver)) {
+                listVals.add(5, State.Defect);
+            }
             if (dCtxSh.channel==Channel.desktop) {
-                if (!SecMenusDesktop.
-                		secMenuSuperior.secLineas.isPresentLineasMenuWrapp(dFTest.driver))
-                    fmwkTest.addValidation(6, State.Warn, listVals);
+                if (!SecMenusDesktop
+                	.secMenuSuperior.secLineas.isPresentLineasMenuWrapp(dFTest.driver)) {
+                    listVals.add(6, State.Warn);
+                }
             }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones estándar. 
         AllPagesStpV.validacionesEstandar(false/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
@@ -357,25 +358,27 @@ public class AccesoStpV {
             "1) Aparece un modal solicitando confirmación de país<br>" +
             validacion2 +
             "3) En el modal aparece un botón con la opción de cambiar a uno de los posibles países asociados a la IP (" + paisesAsocIP + ")";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok); 
+        datosStep.setStateIniValidations(); 
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!ModalCambioPais.isVisibleModalUntil(dFTest.driver, 0)) 
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
+            if (!ModalCambioPais.isVisibleModalUntil(dFTest.driver, 0)) {
+                listVals.add(1, State.Defect);
+            }
             if (paisAccesoPrevio==null) {
-                 if (ModalCambioPais.isLinkToConfirmPais(dFTest.driver, paisAccesoNoIP.getNombre_pais())) 
-                     fmwkTest.addValidation(2, State.Defect, listVals);
+                 if (ModalCambioPais.isLinkToConfirmPais(dFTest.driver, paisAccesoNoIP.getNombre_pais())) {
+                     listVals.add(2, State.Defect);
+                 }
             }
             else {
                 if (paisConfirmado==null) { 
-                    if (!ModalCambioPais.isLinkToConfirmPais(dFTest.driver, paisAccesoPrevio.getUrlPaisEstandar(urlBaseTest)))
-                        fmwkTest.addValidation(2, State.Defect,listVals);
+                    if (!ModalCambioPais.isLinkToConfirmPais(dFTest.driver, paisAccesoPrevio.getUrlPaisEstandar(urlBaseTest))) {
+                        listVals.add(2, State.Defect);
+                    }
                 }
                 else {
-                    if (ModalCambioPais.isLinkToConfirmPais(dFTest.driver, paisAccesoPrevio.getNombre_pais()))
-                        fmwkTest.addValidation(2, State.Defect,listVals);
+                    if (ModalCambioPais.isLinkToConfirmPais(dFTest.driver, paisAccesoPrevio.getNombre_pais())) {
+                        listVals.add(2, State.Defect);
+                    }
                 }
             }
             //3)
@@ -391,11 +394,11 @@ public class AccesoStpV {
             }
                  
             if (!hayBoton)
-                fmwkTest.addValidation(3, State.Defect, listVals);
+                listVals.add(3, State.Defect);
                         
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return paisAsocIP;
     }
@@ -412,19 +415,19 @@ public class AccesoStpV {
         String descripValidac = 
             "1) No aparece un modal solicitando confirmación de país<br>" +
             "2) Se ha redirigido a la URL del país confirmado previamente <b>" + nombrePaisPrevConf + "</b> (" + hrefPaisPrevConf + ")";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);       
+        datosStep.setStateIniValidations();  
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (ModalCambioPais.isVisibleModalUntil(dFTest.driver, 0)) 
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
-            if (!(dFTest.driver.getCurrentUrl().toLowerCase().contains(hrefPaisPrevConf.toLowerCase()))) 
-                fmwkTest.addValidation(2, State.Defect, listVals);
+            if (ModalCambioPais.isVisibleModalUntil(dFTest.driver, 0)) { 
+                listVals.add(1, State.Defect);
+            }
+            if (!(dFTest.driver.getCurrentUrl().toLowerCase().contains(hrefPaisPrevConf.toLowerCase()))) {
+                listVals.add(2, State.Defect);
+            }
                     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
         
     }
     
@@ -447,17 +450,18 @@ public class AccesoStpV {
         } 
         finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));}        
         
-        String descripValidac = "1) Se redirige a la URL del país " + paisBotonCambio + " (" + hrefBotonCambioPais + ")"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);   
+        String descripValidac = 
+        	"1) Se redirige a la URL del país " + paisBotonCambio + " (" + hrefBotonCambioPais + ")"; 
+        datosStep.setStateIniValidations(); 
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!(dFTest.driver.getCurrentUrl().toLowerCase().contains(hrefBotonCambioPais.toLowerCase())))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!(dFTest.driver.getCurrentUrl().toLowerCase().contains(hrefBotonCambioPais.toLowerCase()))) {
+                listVals.add(1, State.Defect);
+            }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -484,13 +488,14 @@ public class AccesoStpV {
         //Validaciones
         String descripValidac = 
             "1) El estatus es \"UP\"";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();        
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             assertTrue(nodo.getStatusJSON().isStatusOk());
                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -515,23 +520,23 @@ public class AccesoStpV {
             "1) El stock de los almacenes (" + stockAct + ") coincide (+-10%) con el del nodo " + nodoAnt.getIp() + "<br>" +
             "2) La versión del shopconfig (" + vShopCAct + ") es igual que la del nodo " + nodoAnt.getIp() + "<br>" +
             "3) El contador de sesiones (" + sessionCAct + ") coincide (+-50%) con el del nodo " + nodoAnt.getIp() + " (" + sessionCAnt + ")";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            
-            if (!nodoAct.comparaStocksWarehouses(nodoAnt, 0.10))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            
-            if (vShopCAct.compareTo(vShopCAnt)!=0)
-                fmwkTest.addValidation(2, State.Warn, listVals);
-            
+            if (!nodoAct.comparaStocksWarehouses(nodoAnt, 0.10)) {
+                listVals.add(1, State.Warn);
+            }
+            if (vShopCAct.compareTo(vShopCAnt)!=0) {
+                listVals.add(2, State.Warn);
+            }
             float divisor = Math.abs(sessionCAct - sessionCAnt);
             float dividendo = Math.max(sessionCAct, sessionCAnt);
-            if ((divisor / dividendo) > 0.5)
-                fmwkTest.addValidation(3, State.Warn, listVals);
+            if ((divisor / dividendo) > 0.5) {
+                listVals.add(3, State.Warn);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 }

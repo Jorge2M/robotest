@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -27,21 +24,22 @@ public class SecKrediKartiStpV {
         finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
                 
         //Validaciones
+        int maxSecondsWait = 5;
         String descripValidac = 
-            "1) Se carga la capa correspondiente al pago a plazos (en menos de 5 segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+            "1) Se carga la capa correspondiente al pago a plazos (en menos de " + maxSecondsWait + " segundos)";
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!SecKrediKarti.isVisiblePagoAPlazoUntil(dFTest.driver, channel, 5/*seconds*/))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!SecKrediKarti.isVisiblePagoAPlazoUntil(dFTest.driver, channel, maxSecondsWait)) {
+                listVals.add(1, State.Defect);
+            }
                         
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals); 
+            datosStep.setListResultValidations(listVals); 
         }
         catch (Exception e) {
             //
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }

@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -160,16 +160,16 @@ public class PageGaleriaStpV {
         int maxSecondsToWait = 1;
         String descripValidac = 
             "1) Aparece la capa con la información de las tallas (la esperamos hasta " + maxSecondsToWait + ")";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!pageGaleriaDesktop.isVisibleArticleCapaTallasDesktopUntil(posArticulo, maxSecondsToWait))
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (!pageGaleriaDesktop.isVisibleArticleCapaTallasDesktopUntil(posArticulo, maxSecondsToWait)) {
+                listVals.add(1, State.Warn);
+            }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }    
     
     /**
@@ -234,89 +234,90 @@ public class PageGaleriaStpV {
         //Validaciones.
         String descripValidac = 
             "1) " + apareceElFooter + " aparece el footer";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (pageToScroll>=PageGaleriaDesktop.maxPageToScroll) {
-                if (!SecFooter.isVisible(dCtxSh.appE, dFTest.driver)) 
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                if (!SecFooter.isVisible(dCtxSh.appE, dFTest.driver)) {
+                    listVals.add(1, State.Warn);
+                }
             }
             else {
-                if (SecFooter.isVisible(dCtxSh.appE, dFTest.driver)) 
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                if (SecFooter.isVisible(dCtxSh.appE, dFTest.driver)) {
+                    listVals.add(1, State.Warn);
+                }
             }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); } 
+        finally { listVals.checkAndStoreValidations(descripValidac); } 
 
         if (pageToScroll < PageGaleriaDesktop.maxPageToScroll) {
             //Validaciones.
             descripValidac = 
                 "1) En pantalla aparecen más artículos (" + datosScroll.articulosMostrados + ") " + 
-                   "de los que había inicialmente (" + numArticulosInicio + ")";
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+                "de los que había inicialmente (" + numArticulosInicio + ")";
+            datosStep.setStateIniValidations();  
+            listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
-                if (datosScroll.articulosMostrados <= numArticulosInicio)
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                if (datosScroll.articulosMostrados <= numArticulosInicio) {
+                    listVals.add(1, State.Warn);
+                }
                     
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
         }
         
         if (dataForScroll.ordenacionExpected != FilterOrdenacion.NOordenado) {
             //Validaciones
             descripValidac = "1) Los artículos aparecen " + dataForScroll.ordenacionExpected;
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+            datosStep.setStateIniValidations();       
+            listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
-                if (!pageGaleria.articlesInOrder(dataForScroll.ordenacionExpected)) 
-                    fmwkTest.addValidation(1, State.Defect, listVals);
+                if (!pageGaleria.articlesInOrder(dataForScroll.ordenacionExpected)) {
+                    listVals.add(1, State.Defect);
+                }
                     
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
         }
         
         //Validaciones
         descripValidac = 
             "1) No aparece ningún artículo repetido";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();  
+        listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             ArrayList<NombreYRef> productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
             if (productsRepeated!=null && productsRepeated.size()>0) {
-                fmwkTest.addValidation(1, State.Defect, listVals);
-                descripValidac+="<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: " + 
-                				"hay productos " + productsRepeated.size() + " repetidos, " + 
-                				"por ejemplo el <b>" + productsRepeated.get(0).toString() + "</b>";
+                listVals.add(1, State.Defect);
+                descripValidac+=
+                	"<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: " + 
+                	"hay productos " + productsRepeated.size() + " repetidos, " + 
+                	"por ejemplo el <b>" + productsRepeated.get(0).toString() + "</b>";
             }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         if (dataForScroll.validateArticlesExpected) {
             //Validación
             descripValidac = 
                 "1) En pantalla aparecen exactamente " + dataForScroll.numArticlesExpected + " artículos " + 
-                   "(están apareciendo " + datosScroll.articulosTotalesPagina + ")";
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+                "(están apareciendo " + datosScroll.articulosTotalesPagina + ")";
+            datosStep.setStateIniValidations();  
+            listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
-                if (dataForScroll.numArticlesExpected != datosScroll.articulosTotalesPagina)
-                    fmwkTest.addValidation(1, State.Info, listVals);
+                if (dataForScroll.numArticlesExpected != datosScroll.articulosTotalesPagina) {
+                    listVals.add(1, State.Info);
+                }
                 
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
             
             datosScroll.datosStep = datosStep;
         }
@@ -349,16 +350,16 @@ public class PageGaleriaStpV {
        //Validaciones.
        String descripValidac = 
            "1) Aparece una pantalla en la que el title contiene \"" + tipoPrendasGaleria;
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+       datosStep.setStateIniValidations(); 
+       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
-           if (!dFTest.driver.getTitle().toLowerCase().contains(tipoPrendasGaleria)) 
-               fmwkTest.addValidation(1, State.Warn, listVals);
+           if (!dFTest.driver.getTitle().toLowerCase().contains(tipoPrendasGaleria)) {
+               listVals.add(1, State.Warn);
+           }
    
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+       finally { listVals.checkAndStoreValidations(descripValidac); }
        
        //Validaciones
        int numArticulosPant = 0;
@@ -370,25 +371,25 @@ public class PageGaleriaStpV {
            "1) Aparecen > 1 prendas<br>" + 
            validacion2 +
            "3) Los artículos aparecen ordenados por " + typeOrdenacion.name();
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+       datosStep.setStateIniValidations();           
+       listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
            numArticulosPant = pageGaleria.getNumArticulos() + pageGaleria.getNumArticulos();
-           if (numArticulosPant <= 1) 
-               fmwkTest.addValidation(1, State.Warn, listVals);
-           //2)
-           if (numArticulosValidar >= 0) {
-               if (numArticulosValidar != numArticulosPant)
-                   fmwkTest.addValidation(2, State.Info, listVals);
+           if (numArticulosPant <= 1) {
+               listVals.add(1, State.Warn);
            }
-           //3)
-           if (!pageGaleria.articlesInOrder(typeOrdenacion))
-               fmwkTest.addValidation(3, State.Warn, listVals);
+           if (numArticulosValidar >= 0) {
+               if (numArticulosValidar != numArticulosPant) {
+                   listVals.add(2, State.Info);
+               }
+           }
+           if (!pageGaleria.articlesInOrder(typeOrdenacion)) {
+               listVals.add(3, State.Warn);
+           }
    
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }                
+       finally { listVals.checkAndStoreValidations(descripValidac); }                
 
        //Validaciones estándar. 
        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
@@ -414,24 +415,25 @@ public class PageGaleriaStpV {
        finally { datosStep.setStepNumber( fmwkTest.grabStep(datosStep, dFTest)); }
        
        //Validaciones
+       int maxSecondsWait = 2;
        String descripValidac = 
            "1) Es clickable el 1er elemento de la lista<br>" +
-           "2) Es clickable el bloque de filtros (esperamos 2 segundos)";
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+           "2) Es clickable el bloque de filtros (esperamos hasta " + maxSecondsWait + " segundos)";
+       datosStep.setStateIniValidations();     
+       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
-           if (!pageGaleria.isClickableArticuloUntil(5, 0/*seconds*/))
-               fmwkTest.addValidation(1, State.Warn, listVals);
-           //2)
-           int maxSecondsToWait = 2;
+           if (!pageGaleria.isClickableArticuloUntil(5, 0/*seconds*/)) {
+               listVals.add(1, State.Warn);
+           }
+
            SecFiltros secFiltros = SecFiltros.newInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-           if (!secFiltros.isClickableFiltroUntil(maxSecondsToWait))
-               fmwkTest.addValidation(2, State.Warn, listVals);
+           if (!secFiltros.isClickableFiltroUntil(maxSecondsWait)) {
+               listVals.add(2, State.Warn);
+           }
           
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }                
+       finally { listVals.checkAndStoreValidations(descripValidac); }                
    }
 
    /**
@@ -475,17 +477,17 @@ public class PageGaleriaStpV {
        //Validaciones.
        String descripValidac = 
            "1) Se modifica la imagen correspondiente al artículo ";
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+       datosStep.setStateIniValidations();   
+       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
            srcImgAfterClickColor = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
-           if (srcImgAfterClickColor.contains(srcImg1erArt)) 
-               fmwkTest.addValidation(1, State.Defect, listVals);
+           if (srcImgAfterClickColor.contains(srcImg1erArt)) {
+               listVals.add(1, State.Defect);
+           }
                
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }               
+       finally { listVals.checkAndStoreValidations(descripValidac); }               
        
        return srcImgAfterClickColor;
    }
@@ -538,31 +540,31 @@ public class PageGaleriaStpV {
        String srcImg2oSlider = "";
        String descripValidac = 
            "1) Se modifica la imagen asociada al artículo (<b>antes</b>: " + srcImg1erSlider + ", <b>ahora</b>: " + srcImg2oSlider + ")";
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+       datosStep.setStateIniValidations(); 
+       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
            srcImg2oSlider = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
-           if (srcImg2oSlider.compareTo(srcImg1erSlider)==0)
-               fmwkTest.addValidation(1, State.Defect, listVals);
+           if (srcImg2oSlider.compareTo(srcImg1erSlider)==0) {
+               listVals.add(1, State.Defect);
+           }
                
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+       finally { listVals.checkAndStoreValidations(descripValidac); }
        
        if ("".compareTo(srcImageExpected)!=0) {
            descripValidac = 
                "1) El src de la imagen <b>ahora</b> (" + srcImg2oSlider + ") es la <b>original</b> (" + srcImageExpected + ")";
-           datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+           datosStep.setStateIniValidations();     
+           listVals = ListResultValidation.getNew(datosStep);
            try {
-               List<SimpleValidation> listVals = new ArrayList<>();
-               //1)
-               if (srcImg2oSlider.compareTo(srcImageExpected)!=0)
-                   fmwkTest.addValidation(1, State.Defect, listVals);
+               if (srcImg2oSlider.compareTo(srcImageExpected)!=0) {
+                   listVals.add(1, State.Defect);
+               }
                    
-               datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+               datosStep.setListResultValidations(listVals);
            }
-           finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+           finally { listVals.checkAndStoreValidations(descripValidac); }
        }
        
        return srcImg2oSlider;
@@ -601,25 +603,25 @@ public class PageGaleriaStpV {
            "2) Aparece el artículo anteriormente seleccionado: <br>" +
            "   - Nombre " + nombre1erArt + "<br>" +
            "   - Precio " + precio1erArt;
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+       datosStep.setStateIniValidations();  
+       ListResultValidation listVals = ListResultValidation.getNew(datosStep);            
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
            PageFicha pageFicha = PageFicha.newInstance(app, channel, dFTest.driver);
-           if (!pageFicha.isPageUntil(maxSecondsToWait))
-               fmwkTest.addValidation(1, State.Warn, listVals);
-           //2)
+           if (!pageFicha.isPageUntil(maxSecondsToWait)) {
+               listVals.add(1, State.Warn);
+           }
            String nombreArtFicha = pageFicha.secDataProduct.getTituloArt(channel, dFTest.driver);
            String precioArtFicha = pageFicha.secDataProduct.getPrecioFinalArticulo(dFTest.driver);
-           if (!nombreArtFicha.toUpperCase().contains(nombre1erArt.toUpperCase()))
-               fmwkTest.addValidation(2, State.Info_NoHardcopy, listVals);
-                
-           if (!precioArtFicha.replaceAll(" ", "").toUpperCase().contains(precio1erArt.replaceAll(" ", "").toUpperCase()))
-               fmwkTest.addValidation(2, State.Info_NoHardcopy, listVals);
+           if (!nombreArtFicha.toUpperCase().contains(nombre1erArt.toUpperCase())) {
+               listVals.add(2, State.Info_NoHardcopy);
+           }
+           if (!precioArtFicha.replaceAll(" ", "").toUpperCase().contains(precio1erArt.replaceAll(" ", "").toUpperCase())) {
+               listVals.add(2, State.Info_NoHardcopy);
+           }
                
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+       finally { listVals.checkAndStoreValidations(descripValidac); }
 
        //Validaciones estándar. 
        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
@@ -633,18 +635,18 @@ public class PageGaleriaStpV {
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
        String descripValidac = 
            "1) Como mínimo el " + porcentaje + " % de los productos son panorámicas";
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+       datosStep.setStateIniValidations();   
+       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
            float numArtTotal = pageGaleria.getNumArticulos();
            float numArtPanoramicos = pageGaleriaDesktop.getNumArticulos(TypeArticleDesktop.Panoramica);
-           if (articlesUnderPercentage(numArtTotal, numArtPanoramicos, porcentaje))
-               fmwkTest.addValidation(1, State.Info_NoHardcopy, listVals);
+           if (articlesUnderPercentage(numArtTotal, numArtPanoramicos, porcentaje)) {
+               listVals.add(1, State.Info_NoHardcopy);
+           }
        
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+       finally { listVals.checkAndStoreValidations(descripValidac); }
    }
    
    private static boolean articlesUnderPercentage(float numArtTotal, float numArtToMesure, float percentage) {
@@ -659,32 +661,32 @@ public class PageGaleriaStpV {
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
        String descripValidac = 
            "1) Existe algún vídeo en la galería";
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+       datosStep.setStateIniValidations(); 
+       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
-           if (!pageGaleriaDesktop.isPresentAnyArticle(TypeArticleDesktop.Video))
-               fmwkTest.addValidation(1,State.Warn, listVals);
+           if (!pageGaleriaDesktop.isPresentAnyArticle(TypeArticleDesktop.Video)) {
+               listVals.add(1,State.Warn);
+           }
        
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+       finally { listVals.checkAndStoreValidations(descripValidac); }
    }
    
    // Validación que comprueba que está apareciendo una galería de artículos
    public void validaArtEnContenido(DatosStep datosStep) {
        String descripValidac = "1) Aparece una página con artículos (la esperamos 3 segundos)";
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+       datosStep.setStateIniValidations();
+       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
            boolean articulos = pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, 3/*seconds*/);
-           if (!articulos)
-               fmwkTest.addValidation(1, State.Warn, listVals);
+           if (!articulos) {
+               listVals.add(1, State.Warn);
+           }
 
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        } 
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+       finally { listVals.checkAndStoreValidations(descripValidac); }
    }   
    
    public DatosStep clickArticlesHearthIcons(List<Integer> posIconsToClick, TypeActionFav actionFav, DataCtxShop dCtxSh, 
@@ -725,16 +727,16 @@ public class PageGaleriaStpV {
        //Validaciones
        String descripValidac = 
            "1) Quedan " + estadoFinal + " los iconos asociados a los artículos con posiciones <b>" + posIconsToClick.toString() + "</b>";
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+       datosStep.setStateIniValidations();
+       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
-           if (!pageGaleria.iconsInCorrectState(posIconsToClick, actionFav))
-               fmwkTest.addValidation(1, State.Warn, listVals);
+           if (!pageGaleria.iconsInCorrectState(posIconsToClick, actionFav)) {
+               listVals.add(1, State.Warn);
+           }
 
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        } 
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+       finally { listVals.checkAndStoreValidations(descripValidac); }
        
        return datosStep;
    }
@@ -756,16 +758,16 @@ public class PageGaleriaStpV {
        //Validaciones.
        String descripValidac = 
            "1) Aparece el layout correspondiente al listado a <b>" + numColumnas.name() + " columnas</b>";
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+       datosStep.setStateIniValidations();  
+       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
-           if (pageGaleria.getLayoutNumColumnas() != pageGaleriaDesktop.getNumColumnas(numColumnas))
-               fmwkTest.addValidation(1, State.Warn, listVals);
+           if (pageGaleria.getLayoutNumColumnas() != pageGaleriaDesktop.getNumColumnas(numColumnas)) {
+               listVals.add(1, State.Warn);
+           }
                 
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }       
+       finally { listVals.checkAndStoreValidations(descripValidac); }       
        
        //Obtenemos y almacenamos los artículos de la galería Nuevo
        NombreYRefList listArticlesGaleriaAct = pageGaleria.getListaNombreYRefArticulos();
@@ -773,23 +775,21 @@ public class PageGaleriaStpV {
        int articulosComprobar = 20;
        if (listArticlesGaleriaAnt!=null) {
            descripValidac = 
-               "1) Los primeros " + articulosComprobar + " artículos de la galería a " + numColumnas.name() + " columnas son iguales a los de la anterior galería";
-           datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+               "1) Los primeros " + articulosComprobar + " artículos de la galería a " + numColumnas.name() + 
+               " columnas son iguales a los de la anterior galería";
+           datosStep.setStateIniValidations();  
+           listVals = ListResultValidation.getNew(datosStep);
            try {
-               List<SimpleValidation> listVals = new ArrayList<>();
-
-               //1)
-             //1)
                if (!listArticlesGaleriaAct.isArticleListEquals(listArticlesGaleriaAnt, articulosComprobar)) {
-                   fmwkTest.addValidation(2, State.Info, listVals);
+                   listVals.add(2, State.Info);
                    NombreYRef articleGaleryActualNotFit = listArticlesGaleriaAct.getFirstArticleThatNotFitWith(listArticlesGaleriaAnt);
                    descripValidac+="<br><b style=\"color:" + State.Info.getColorCss() + "\">Warning!</b>: hay productos de la galería que no cuadran con los de la galería anterior (por ejemplo <b>" + articleGaleryActualNotFit.toString() + "</b>). ";
                    descripValidac+=listArticlesGaleriaAct.getTableHTLMCompareArticlesGaleria(listArticlesGaleriaAnt);
                }
                
-               datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+               datosStep.setListResultValidations(listVals);
            }
-           finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+           finally { listVals.checkAndStoreValidations(descripValidac); }
        }
        
        return listArticlesGaleriaAct;
@@ -802,23 +802,22 @@ public class PageGaleriaStpV {
        String descripValidac = 
            "1) El número de artículos de la galería Nuevo (" + nodoAct.getArticlesNuevo().size() + ") es igual al del nodo " + nodoAnt.getIp() + " (" + nodoAnt.getArticlesNuevo().size() + ")<br>" +
            "2) El orden y contenido de los artículos en ambos nodos es el mismo";
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+       datosStep.setStateIniValidations(); 
+       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
-           if (nodoAct.getArticlesNuevo().size()!=nodoAct.getArticlesNuevo().size())
-               fmwkTest.addValidation(1, State.Warn, listVals);
-           //2)
+           if (nodoAct.getArticlesNuevo().size()!=nodoAct.getArticlesNuevo().size()) {
+               listVals.add(1, State.Warn);
+           }
            NombreYRef articleGaleryActualNotFit = nodoAct.getArticleNuevoThatNotFitWith(nodoAnt);
            if (articleGaleryActualNotFit!=null) {
-               fmwkTest.addValidation(2, State.Warn, listVals);
+               listVals.add(2, State.Warn);
                descripValidac+="<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: hay productos de la galería que no cuadran con los de la galería del nodo " + nodoAnt.getIp() + " (por ejemplo <b>" + articleGaleryActualNotFit.toString() + "</b>). ";
                descripValidac+=nodoAct.getArticlesNuevo().getTableHTLMCompareArticlesGaleria(nodoAnt.getArticlesNuevo());
            }
        
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+       finally { listVals.checkAndStoreValidations(descripValidac); }
    }
 
    @SuppressWarnings("static-access")
@@ -828,17 +827,17 @@ public class PageGaleriaStpV {
 		   if (!PageGaleriaDesktop.secBannerHead.isBannerWithoutTextAccesible(dFTest.driver)) {
 		       String descripValidac =
 	               "1) El Banner de Cabecera contiene algún texto";
-	           datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+	           datosStep.setStateIniValidations();  
+               ListResultValidation listVals = ListResultValidation.getNew(datosStep);            
 	           try {
-	               List<SimpleValidation> listVals = new ArrayList<>();
-	               //1)
 	               String textBanner = PageGaleriaDesktop.secBannerHead.getText(dFTest.driver);
-	               if ("".compareTo(textBanner)==0)
-	                   fmwkTest.addValidation(1, State.Defect, listVals);          
+	               if ("".compareTo(textBanner)==0) {
+	                   listVals.add(1, State.Defect);
+	               }
 	                
-	               datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+	               datosStep.setListResultValidations(listVals);
 	           }
-	           finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+	           finally { listVals.checkAndStoreValidations(descripValidac); }
 		   }
 	   }
    }
@@ -879,30 +878,31 @@ public class PageGaleriaStpV {
        else
     	   descripValidac+=
     	   "3) No aparece ningún filtro de descuento";
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+       datosStep.setStateIniValidations();      
+       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
-           if (!PageGaleriaDesktop.secBannerHead.isVisible(dFTest.driver))
-               fmwkTest.addValidation(1, State.Defect, listVals);
-           //2)
+           if (!PageGaleriaDesktop.secBannerHead.isVisible(dFTest.driver)) {
+               listVals.add(1, State.Defect);
+           }
            String textBanner = PageGaleriaDesktop.secBannerHead.getText(dFTest.driver);
-           if (!UtilsTestMango.textContainsSetenta(textBanner, idioma))
-               fmwkTest.addValidation(2, State.Warn, listVals);
-           //3)
+           if (!UtilsTestMango.textContainsSetenta(textBanner, idioma)) {
+               listVals.add(2, State.Warn);
+           }
            int menusDescVisibles = SecMenusDesktop.secMenusFiltroDiscount.getNumberOfVisibleMenus(dFTest.driver);
            if (filtrosPercActivated) {
-	           if (menusDescVisibles < minMenusVisibles)
-	               fmwkTest.addValidation(3, State.Defect, listVals);      
+	           if (menusDescVisibles < minMenusVisibles) {
+	               listVals.add(3, State.Defect);      
+	           }
            }
            else {
-        	   if (menusDescVisibles > 0)
-        		   fmwkTest.addValidation(3, State.Warn, listVals);
+        	   if (menusDescVisibles > 0) {
+        		   listVals.add(3, State.Warn);
+        	   }
            }
             
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+       finally { listVals.checkAndStoreValidations(descripValidac); }
    }
    
    @SuppressWarnings("static-access")
@@ -912,16 +912,16 @@ public class PageGaleriaStpV {
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
        String descripValidac = 
            "1) Estamos en la página de Galería";
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+       datosStep.setStateIniValidations();     
+       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
-           if (!pageGaleriaDesktop.isPage())
-               fmwkTest.addValidation(1, State.Warn, listVals);
+           if (!pageGaleriaDesktop.isPage()) {
+               listVals.add(1, State.Warn);
+           }
                 
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }       
+       finally { listVals.checkAndStoreValidations(descripValidac); }       
        
        //Validaciones.
        String saleTraduction = UtilsTestMango.getSaleTraduction(idioma);
@@ -931,27 +931,27 @@ public class PageGaleriaStpV {
            "2) El banner de cabecera es de rebajas  (contiene un símbolo de porcentaje o \"" + saleTraduction + "\")<br>" +
            "3) El banner de cabecera no es lincable<br>" +
            "4) El banner de cabecera contiene un link de \"Más info\"";
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+       datosStep.setStateIniValidations();   
+       listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
-           if (!PageGaleriaDesktop.secBannerHead.isVisible(dFTest.driver))
-               fmwkTest.addValidation(1, State.Defect, listVals);
-           //2)
+           if (!PageGaleriaDesktop.secBannerHead.isVisible(dFTest.driver)) {
+               listVals.add(1, State.Defect);
+           }
            String textBanner = PageGaleriaDesktop.secBannerHead.getText(dFTest.driver);
            if (!UtilsTestMango.textContainsPercentage(textBanner, idioma) &&
-               !textBanner.contains(saleTraduction))
-               fmwkTest.addValidation(2, State.Defect, listVals);
-           //3)
-           if (PageGaleriaDesktop.secBannerHead.isLinkable(dFTest.driver))
-               fmwkTest.addValidation(3, State.Info, listVals);
-           //4)
-           if (!PageGaleriaDesktop.secBannerHead.isVisibleLinkInfoRebajas(dFTest.driver))
-               fmwkTest.addValidation(4, State.Warn, listVals);           
+               !textBanner.contains(saleTraduction)) {
+               listVals.add(2, State.Defect);
+           }
+           if (PageGaleriaDesktop.secBannerHead.isLinkable(dFTest.driver)) {
+               listVals.add(3, State.Info);
+           }
+           if (!PageGaleriaDesktop.secBannerHead.isVisibleLinkInfoRebajas(dFTest.driver)) {
+               listVals.add(4, State.Warn);           
+           }
                 
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+       finally { listVals.checkAndStoreValidations(descripValidac); }
        
        SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(Channel.desktop, AppEcom.shop, dFTest.driver);
        if (!isGaleriaSale) {
@@ -962,41 +962,41 @@ public class PageGaleriaStpV {
                "2) Aparece el filtro para todas las temporadas <b>All</b>)<br>" +
                "3) Aparece el filtro para las ofertas <b>Sale</b><br>" +
                "4) Aparece el filtro para la nueva temporada <b>Next season preview</b>";
-           datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+           datosStep.setStateIniValidations();    
+           listVals = ListResultValidation.getNew(datosStep);
            try {
-               List<SimpleValidation> listVals = new ArrayList<>();
-               //1)
-               if (!filtrosCollection.isVisible())
-                   fmwkTest.addValidation(1, State.Defect, listVals);
-               //2)
-               if (!filtrosCollection.isVisibleMenu(FilterCollection.all))
-                   fmwkTest.addValidation(2, State.Warn, listVals);           
-               //3)
-               if (!filtrosCollection.isVisibleMenu(FilterCollection.sale))
-                   fmwkTest.addValidation(3, State.Warn, listVals);
-               //4)
-               if (!filtrosCollection.isVisibleMenu(FilterCollection.nextSeason))
-                   fmwkTest.addValidation(4, State.Warn, listVals);
+               if (!filtrosCollection.isVisible()) {
+                   listVals.add(1, State.Defect);
+               }
+               if (!filtrosCollection.isVisibleMenu(FilterCollection.all)) {
+                   listVals.add(2, State.Warn);           
+               }
+               if (!filtrosCollection.isVisibleMenu(FilterCollection.sale)) {
+                   listVals.add(3, State.Warn);
+               }
+               if (!filtrosCollection.isVisibleMenu(FilterCollection.nextSeason)) {
+                   listVals.add(4, State.Warn);
+               }
                     
-               datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+               datosStep.setListResultValidations(listVals);
            }
-           finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }       
+           finally { listVals.checkAndStoreValidations(descripValidac); }       
        }
        else {
            //Validaciones.
            descripValidac =
                "<b style=\"color:blue\">Rebajas</b></br>" +
                "1) No son visibles los menús laterales de filtro a nivel detemporadas (Collection)<b>";
-           datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+           datosStep.setStateIniValidations();   
+           listVals = ListResultValidation.getNew(datosStep);
            try {
-               List<SimpleValidation> listVals = new ArrayList<>();
-               //1)
-               if (filtrosCollection.isVisible())
-                   fmwkTest.addValidation(1, State.Defect, listVals);
+               if (filtrosCollection.isVisible()) {
+                   listVals.add(1, State.Defect);
+               }
                     
-               datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+               datosStep.setListResultValidations(listVals);
            }
-           finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+           finally { listVals.checkAndStoreValidations(descripValidac); }
        }
        
        //Validaciones.
@@ -1012,32 +1012,31 @@ public class PageGaleriaStpV {
            "<b style=\"color:blue\">Rebajas</b></br>" +
            "1) El 1er artículo pertenece a alguna de las temporadas " + ordenType.getTemporadasIniciales() + " <br>" +
            "2) Los artículos aparecen ordenados por <b>" + ordenType.toString() + "</b>";
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+       datosStep.setStateIniValidations(); 
+       listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
            State levelErrorValidation2 = State.Info_NoHardcopy;
-           //1)
            String ref1rstArticle = pageGaleria.getReferencia(1/*posArticle*/);
            int temporada1rstArticle = 0;
-           if ("".compareTo(ref1rstArticle)!=0)
+           if ("".compareTo(ref1rstArticle)!=0) {
         	   temporada1rstArticle = Integer.valueOf(ref1rstArticle.substring(0,1));
+           }
            
            if (!ordenType.getTemporadasIniciales().contains(temporada1rstArticle)) {
-               fmwkTest.addValidation(1, State.Warn, listVals);
+               listVals.add(1, State.Warn);
                levelErrorValidation2 = State.Warn;
            }
-           //2)
            String notInOrder = pageGaleria.getAnyArticleNotInOrder(ordenType);
            if ("".compareTo(notInOrder)!=0) {
                descripValidac+=
                    "<br>" +
                    "<b>Warning!</b> " + notInOrder;
-               fmwkTest.addValidation(2, levelErrorValidation2, listVals);
+               listVals.add(2, levelErrorValidation2);
            }
                 
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }       
+       finally { listVals.checkAndStoreValidations(descripValidac); }       
 
    }
    
@@ -1061,17 +1060,16 @@ public class PageGaleriaStpV {
            "1) Todos los artículos pertenecen a las temporadas <b>" + listTemporadas.toString() + "</b>";
        if (validaNotNewArticles)
     	   descripValidac+=" y no contienen alguna de las etiquetas de artículo nuevo (" + PageGaleria.listLabelsNew + ")";
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+       datosStep.setStateIniValidations();        
+       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
            List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFromOther, listTemporadas);
            if (validaNotNewArticles) {
         	   listArtWrong = PageGaleria.getNotNewArticlesFrom(listArtWrong);
            }
            
            if (listArtWrong.size() > 0) {
-               fmwkTest.addValidation(1, levelError, listVals);
+               listVals.add(1, levelError);
                descripValidac+=
                    "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
                    "hay " + listArtWrong.size() + " artículos que no pertenecen a las temporadas " + listTemporadas + ":<br>";
@@ -1080,9 +1078,9 @@ public class PageGaleriaStpV {
                descripValidac+="</lin>";
            }
                 
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }	   
+       finally { listVals.checkAndStoreValidations(descripValidac); }	   
    }
    
    public void validaNotArticlesOfTypeDesktop(TypeArticle typeArticle, State levelError, DatosStep datosStep) {
@@ -1090,13 +1088,12 @@ public class PageGaleriaStpV {
        String descripValidac =
            "<b style=\"color:blue\">Rebajas</b></br>" +
            "1) No hay ningún artículo del tipo <b>" + typeArticle + "</b>";
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+       datosStep.setStateIniValidations();      
+       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
            ArrayList<String> listArtWrong = pageGaleriaDesktop.getArticlesOfType(typeArticle);
            if (listArtWrong.size() > 0) {
-               fmwkTest.addValidation(1, levelError, listVals);
+               listVals.add(1, levelError);
                descripValidac+=
                    "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
                    "hay " + listArtWrong.size() + " artículos que son del tipo <b>" + typeArticle + "</b><br>:";
@@ -1105,9 +1102,9 @@ public class PageGaleriaStpV {
                descripValidac+="</lin>";
            }
                 
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }	   
+       finally { listVals.checkAndStoreValidations(descripValidac); }	   
    }   
    
    @SuppressWarnings("static-access")
@@ -1129,18 +1126,18 @@ public class PageGaleriaStpV {
            "<b style=\"color:blue\">Rebajas</b></br>" +
            "1) Se despliega la información relativa a las rebajas (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
            "2) Aparece el link de <b>Menos info</b>";
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+       datosStep.setStateIniValidations();      
+       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
-           if (!PageGaleriaDesktop.secBannerHead.isVisibleInfoRebajasUntil(maxSecondsToWait, dFTest.driver))
-           	   fmwkTest.addValidation(1, State.Warn, listVals);
-           //2)
-           if (!PageGaleriaDesktop.secBannerHead.isVisibleLinkTextInfoRebajas(TypeLinkInfo.less, dFTest.driver))
-               fmwkTest.addValidation(2, State.Warn, listVals);
+           if (!PageGaleriaDesktop.secBannerHead.isVisibleInfoRebajasUntil(maxSecondsToWait, dFTest.driver)) {
+           	   listVals.add(1, State.Warn);
+           }
+           if (!PageGaleriaDesktop.secBannerHead.isVisibleLinkTextInfoRebajas(TypeLinkInfo.less, dFTest.driver)) {
+               listVals.add(2, State.Warn);
+           }
                 
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }	   
+       finally { listVals.checkAndStoreValidations(descripValidac); }	   
    }
 }

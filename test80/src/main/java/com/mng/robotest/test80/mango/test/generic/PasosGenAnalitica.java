@@ -1,19 +1,16 @@
 package com.mng.robotest.test80.mango.test.generic;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Iterator;
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -118,13 +115,13 @@ public class PasosGenAnalitica {
             "4) En la petición figura el parámetro <b>\"atm\"</b> y contiene el importe total del pedido <b>" + dataPedido.getImporteTotal() + "\"</b><br>" +
             "5) En la petición figura el parámetro <b>\"oid\"</b> y contiene <b>\"MNG\"</b><br>" +
             "6) En la petición figura el parámetro <b>\"skus\"</b> y contiene los artículos del pedido <b>" + listaArtsStr + "</b>";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+    	ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
             JSONArray listEntriesFiltered = gestorHAR.getListEntriesFilterURL(urlPolyvore, paramPolyvore);
-            //1)
-            if (listEntriesFiltered.size()!=1)
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (listEntriesFiltered.size()!=1) {
+                listVals.add(1, State.Warn);
+            }
             else {
                 JSONObject entrieJSON = (JSONObject)listEntriesFiltered.get(0);
                 JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
@@ -139,32 +136,33 @@ public class PasosGenAnalitica {
                 JSONObject paramSkus = gestorHAR.getParameterFromRequestQuery(requestJSON, "skus");                     
                      
                 JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
-                //2)
-                if (requestJSON.get("method").toString().compareTo("GET")!=0)
-                    fmwkTest.addValidation(2, State.Warn, listVals);
-                //3)
-                if (!responseJSON.get("status").toString().matches("[2|3]\\d\\d"))
-                    fmwkTest.addValidation(3, State.Warn, listVals);
-                //4)
-                if (paramAtm==null || !((String)paramAtm.get("value")).contains(dataPedido.getImporteTotal()))
-                    fmwkTest.addValidation(4, State.Warn, listVals);
-                //5)
-                if (paramOid==null || !((String)paramOid.get("value")).contains("MNG"))
-                    fmwkTest.addValidation(5, State.Warn, listVals);
-                //6)
-                if (paramSkus==null)
-                    fmwkTest.addValidation(6, State.Warn, listVals);
+                if (requestJSON.get("method").toString().compareTo("GET")!=0) {
+                    listVals.add(2, State.Warn);
+                }
+                if (!responseJSON.get("status").toString().matches("[2|3]\\d\\d")) {
+                    listVals.add(3, State.Warn);
+                }
+                if (paramAtm==null || !((String)paramAtm.get("value")).contains(dataPedido.getImporteTotal())) {
+                    listVals.add(4, State.Warn);
+                }
+                if (paramOid==null || !((String)paramOid.get("value")).contains("MNG")) {
+                    listVals.add(5, State.Warn);
+                }
+                if (paramSkus==null) {
+                    listVals.add(6, State.Warn);
+                }
                 else {
                     Iterator<ArticuloScreen> it2 = dataPedido.getDataBag().getListArticulos().iterator();
                     while (it2.hasNext()) {
                         String refPedido = it2.next().getReferencia();
-                        if (!((String)paramSkus.get("value")).contains(refPedido))
-                            fmwkTest.addValidation(6,State.Warn, listVals);
+                        if (!((String)paramSkus.get("value")).contains(refPedido)) {
+                            listVals.add(6,State.Warn);
+                        }
                     }
                 }
             }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         catch (Exception e) {
             //Tratamos una excepción en los datos del JSON como un warning
@@ -172,7 +170,7 @@ public class PasosGenAnalitica {
             datosStep.setResultSteps(State.Warn);
             pLogger.warn("Problem in validations of tracking Polyvore", e);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }    
     
     @SuppressWarnings("rawtypes")
@@ -189,10 +187,9 @@ public class PasosGenAnalitica {
                 "2) La petición es de tipo <b>\"GET\"</b><br>" +
                 "3) El response status de la petición es de tipo <b>2xx</b> o <b>3xx</b><br>" +
                 "4) En la petición figura el parámetro <b>\"ref\"</b> y contiene el referer de la 1a request (prioridad a las de estado 2xx) \"" + tagReferrer + "\"</b>";
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+            datosStep.setStateIniValidations();  
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                
                 //Obtenemos la 1a request de tipo "text/html"con estado 2xx 
                 JSONArray petsTextHtml = gestorHAR.getListEntriesOfMimeType("text/html");
                 JSONObject primeraRequest = null;
@@ -226,9 +223,8 @@ public class PasosGenAnalitica {
                     listEntriesFiltered = gestorHAR.getListEntriesFilterURL(urlCriteo, paramCriteo);
                 }
                 
-                //1)
                 if (listEntriesFiltered==null || listEntriesFiltered.size()!=1) {
-                    fmwkTest.addValidation(1,State.Info, listVals);
+                    listVals.add(1,State.Info);
                 }
                 else {
                     JSONObject entrieJSON = (JSONObject)listEntriesFiltered.get(0);
@@ -237,18 +233,18 @@ public class PasosGenAnalitica {
                     //Obtenemos el parámetro href existente en el request de criteo (en el queryString)
                     JSONObject paramRef = gestorHAR.getParameterFromRequestQuery(requestJSON, "ref");
                     JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
-                    //2)
-                    if (requestJSON.get("method").toString().compareTo("GET")!=0)
-                        fmwkTest.addValidation(2,State.Warn, listVals);
-                    //3)
-                    if (!responseJSON.get("status").toString().matches("[2|3]\\d\\d"))
-                        fmwkTest.addValidation(3,State.Info, listVals);
-                    //4)
-                    if (paramRef==null || !((String)paramRef.get("value")).contains(referer1aRequest))
-                        fmwkTest.addValidation(4,State.Warn, listVals);
+                    if (requestJSON.get("method").toString().compareTo("GET")!=0) {
+                        listVals.add(2,State.Warn);
+                    }
+                    if (!responseJSON.get("status").toString().matches("[2|3]\\d\\d")) {
+                        listVals.add(3,State.Info);
+                    }
+                    if (paramRef==null || !((String)paramRef.get("value")).contains(referer1aRequest)) {
+                        listVals.add(4,State.Warn);
+                    }
                 }
 
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }
             catch (Exception e) {
                 //Tratamos una excepción en los datos del JSON como un warning
@@ -256,7 +252,7 @@ public class PasosGenAnalitica {
                 datosStep.setResultSteps(State.Warn);
                 pLogger.warn("Problem in validations of tracking Criteo", e);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
         }
     }
     
@@ -273,10 +269,9 @@ public class PasosGenAnalitica {
                 "2) La petición es de tipo <b>\"GET\"</b><br>" +
                 "3) El response status de la petición es de tipo <b>2xx</b><br>" +
                 "4) En la petición figura el parámetro <b>\"p\"</b> y contiene la URL de la 1a request " + tagUrl1aReq + "\"</b>";
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
-            try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                
+            datosStep.setStateIniValidations();   
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+            try { 
                 //Obtenemos la URL de la 1a URL de type "text/html" que se ha lanzado
                 JSONArray petsTextHtml = gestorHAR.getListEntriesOfMimeType("text/html");
                 JSONObject primeraRequest = (JSONObject)petsTextHtml.get(0);
@@ -287,31 +282,28 @@ public class PasosGenAnalitica {
                 
                 //Obtenemos las peticiones de Bing
                 JSONArray listEntriesFiltered = gestorHAR.getListEntriesFilterURL(urlBing, paramBing);
-                
-                //1)
-                if (listEntriesFiltered.size()!=1)
-                    fmwkTest.addValidation(1,State.Warn, listVals);
+                if (listEntriesFiltered.size()!=1) {
+                    listVals.add(1, State.Warn);
+                }
                 else {
                      JSONObject entrieJSON = (JSONObject)listEntriesFiltered.get(0);
                      JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
                      
                      //Obtenemos el parámetro 'p' existente en el request de criteo (en el queryString)
                      JSONObject paramP = gestorHAR.getParameterFromRequestQuery(requestJSON, "p");
-                     
                      JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
-                     
-                     //2)
-                     if (requestJSON.get("method").toString().compareTo("GET")!=0)
-                         fmwkTest.addValidation(2,State.Warn, listVals);
-                     //3)
-                     if (!responseJSON.get("status").toString().matches("2\\d\\d"))
-                         fmwkTest.addValidation(3,State.Warn, listVals);
-                     //4)
-                     if (paramP==null || !((String)paramP.get("value")).contains(url1aRequest))
-                         fmwkTest.addValidation(4,State.Warn, listVals);
+                     if (requestJSON.get("method").toString().compareTo("GET")!=0) {
+                         listVals.add(2, State.Warn);
+                     }
+                     if (!responseJSON.get("status").toString().matches("2\\d\\d")) {
+                         listVals.add(3, State.Warn);
+                     }
+                     if (paramP==null || !((String)paramP.get("value")).contains(url1aRequest)) {
+                         listVals.add(4, State.Warn);
+                     }
                 }
 
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }
             catch (Exception e) {
                 //Tratamos una excepción en los datos del JSON como un warning
@@ -319,7 +311,7 @@ public class PasosGenAnalitica {
                 datosStep.setResultSteps(State.Warn);
                 pLogger.warn("Problem in validations of tracking Bing", e);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
         }
     }
     
@@ -341,36 +333,35 @@ public class PasosGenAnalitica {
             "2) La petición es de tipo <b>\"GET\"</b><br>" +
             "3) El response status de la petición es de tipo <b>2xx</b><br>" +
             "4) En la petición figura el parámetro <b>\"tid=" + valueTid1 + "\" o \"tid=" + valueTid2 + "\" o o \"tid=" + valueTid3 + "\"</b>";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();    
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            
             JSONArray listEntriesFilteredPage = gestorHAR.getListEntriesFilterURL("://www.google-analytics.com/collect","t=pageview");
             int numLineas = listEntriesFilteredPage.size(); 
                     
-            //1///if (numLineas!=1) {
-                 if (numLineas==0)
-                     fmwkTest.addValidation(1,State.Warn, listVals);
-                 else {
-                     JSONObject entrieJSON = (JSONObject)listEntriesFilteredPage.get(0);
-                     JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
-                     JSONObject paramTid = gestorHAR.getParameterFromRequestQuery(requestJSON, "tid");
-                     JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
-                     //2)
-                     if (requestJSON.get("method").toString().compareTo("GET")!=0)
-                         fmwkTest.addValidation(2,State.Warn, listVals);
-                     //3)
-                     if (!responseJSON.get("status").toString().matches("2\\d\\d"))
-                         fmwkTest.addValidation(3,State.Warn, listVals);
-                     //4)
-                     if (paramTid==null || 
-                        ( ((String)paramTid.get("value")).compareTo(valueTid1)!=0 && 
-                        ((String)paramTid.get("value")).compareTo(valueTid2)!=0 &&
-                        ((String)paramTid.get("value")).compareTo(valueTid3)!=0) )
-                         fmwkTest.addValidation(4,State.Warn, listVals);
-                 }
+	        if (numLineas==0) {
+	            listVals.add(1, State.Warn);
+	        }
+	        else {
+	            JSONObject entrieJSON = (JSONObject)listEntriesFilteredPage.get(0);
+	            JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
+	            JSONObject paramTid = gestorHAR.getParameterFromRequestQuery(requestJSON, "tid");
+	            JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
+	            if (requestJSON.get("method").toString().compareTo("GET")!=0) {
+	                listVals.add(2, State.Warn);
+	            }
+	            if (!responseJSON.get("status").toString().matches("2\\d\\d")) {
+	                listVals.add(3, State.Warn);
+	            }
+	            if (paramTid==null || 
+	               ( ((String)paramTid.get("value")).compareTo(valueTid1)!=0 && 
+	               ((String)paramTid.get("value")).compareTo(valueTid2)!=0 &&
+	               ((String)paramTid.get("value")).compareTo(valueTid3)!=0) ) {
+	                listVals.add(4, State.Warn);
+	            }
+	        }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);            
+            datosStep.setListResultValidations(listVals);            
         }
         catch (Exception e) {
             //Tratamos una excepción en los datos del JSON como un warning
@@ -378,35 +369,33 @@ public class PasosGenAnalitica {
             datosStep.setResultSteps(State.Warn);
             pLogger.warn("Problem in validations of tracking Google Analytics", e);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static void validaDatalayer(DatosStep datosStep, DataFmwkTest dFTest) {
         String firstLineDataLayerFunction = "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':"; 
         String descripValidac = 
             "1) Figura el código JavaScript del tag <b>dataLayer</b>. Validamos la existencia de la 1a línea de la función: " + firstLineDataLayerFunction;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();  
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
             if (!dFTest.driver.getPageSource().contains(firstLineDataLayerFunction))
-                fmwkTest.addValidation(1, State.Warn, listVals);
+                listVals.add(1, State.Warn);
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
     @SuppressWarnings({ "rawtypes", "boxing" })
     public static void validaNetTraffic(DatosStep datosStep, gestorDatosHarJSON gestorHAR, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) En el tráfico de red no existe ninguna sin respuesta o con status KO";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();     
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
             //Obtenemos todas las entradas sin filtrar por URL
             JSONArray listEntriesTotal = gestorHAR.getListEntriesFilterURL("","");
-            
-            //1)
             boolean petKOencontrada = false;
             Iterator entriesJSON = listEntriesTotal.iterator();
             while (entriesJSON.hasNext() && !petKOencontrada) {
@@ -414,21 +403,21 @@ public class PasosGenAnalitica {
                 JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
                 JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
                 if (responseJSON==null) {
-                    fmwkTest.addValidation(1,State.Warn, listVals);
+                    listVals.add(1, State.Warn);
                     descripValidac+="<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: hay peticiones sin respuesta, por ejemplo la <a href=\"" + (String)requestJSON.get("url") + "\">" + (String)requestJSON.get("url") + "</a>";
                     petKOencontrada = true;
                 }
                 else {
                     long statusResponse = (long)responseJSON.get("status");
                     if (statusResponse >= 400) {
-                        fmwkTest.addValidation(1,State.Warn, listVals);
+                        listVals.add(1, State.Warn);
                         descripValidac+="<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: hay peticiones con status KO, por ejemplo la <a href=\"" + (String)requestJSON.get("url") + "\">" + (String)requestJSON.get("url") + "</a> ( " + statusResponse + ")";
                         petKOencontrada = true;
                     }
                 }
             }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         catch (Exception e) {
             //Tratamos una excepción en los datos del JSON como un warning
@@ -436,7 +425,7 @@ public class PasosGenAnalitica {
             datosStep.setResultSteps(State.Warn);
             pLogger.warn("Problem in validations of NetTraffic", e);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
    

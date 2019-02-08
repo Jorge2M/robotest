@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.registro;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -21,19 +18,19 @@ public class PageRegistroNinosStpV {
         String descripValidac = 
             "1) Aparece la página de introducción de datos del niño (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>" +
             "2) Aparecen inputs para introducir <b>" + numNinos + "</b>";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();   
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageRegistroNinos.isPageUntil(dFTest.driver, maxSecondsToWait))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2) 
-            if (PageRegistroNinos.getNumInputsNameNino(dFTest.driver)!=numNinos)
-                fmwkTest.addValidation(2, State.Defect, listVals);
+            if (!PageRegistroNinos.isPageUntil(dFTest.driver, maxSecondsToWait)) {
+                listVals.add(1, State.Defect);
+            }
+            if (PageRegistroNinos.getNumInputsNameNino(dFTest.driver)!=numNinos) {
+                listVals.add(2, State.Defect);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static void sendNinoDataAndContinue(ListDataNinos listaNinos, Pais pais, DataFmwkTest dFTest) 

@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.paypal;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal.PagePaypalSelectPago;
@@ -18,16 +15,16 @@ public class PagePaypalSelectPagoStpV {
         String descripValidac =
             "1) Aparece la página de Selección del Pago (la esperamos hasta " + maxSecondsWait + " segundos)";
         datosStep.setGrabImage(true);        
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok); 
+        datosStep.setStateIniValidations(); 
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {    
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PagePaypalSelectPago.isPageUntil(maxSecondsWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!PagePaypalSelectPago.isPageUntil(maxSecondsWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep clickContinuarButton(DataFmwkTest dFTest) throws Exception {
@@ -35,7 +32,7 @@ public class PagePaypalSelectPagoStpV {
         DatosStep datosStep = new DatosStep     (
             "Seleccionar el botón \"Continuar\"", 
             "Aparece la página de Mango de resultado OK del pago");
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);    
+        datosStep.setStateIniValidations();    
         try {       
             PagePaypalSelectPago.clickContinuarButton(dFTest.driver);
 

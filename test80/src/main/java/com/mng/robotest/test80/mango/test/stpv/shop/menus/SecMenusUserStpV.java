@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -91,16 +88,16 @@ public class SecMenusUserStpV {
         int maxSecondsToWait = 3;
         String descripValidac = 
             "1) Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!SecMenusWrap.secMenusUser.isPresentIniciarSesionUntil(channel, maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!SecMenusWrap.secMenusUser.isPresentIniciarSesionUntil(channel, maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
     public static void logoffLogin(String userConnect, String userPassword, Channel channel, AppEcom appE, DataFmwkTest dFTest) throws Exception {
@@ -121,16 +118,16 @@ public class SecMenusUserStpV {
         //Validaciones
         String descripValidac = 
             "1) Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!SecMenusWrap.secMenusUser.isPresentCerrarSesion(channel, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!SecMenusWrap.secMenusUser.isPresentCerrarSesion(channel, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones estándar. 
         AllPagesStpV.validacionesEstandar(true/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);

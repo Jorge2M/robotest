@@ -1,13 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.amazon;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -26,27 +22,26 @@ public class PageAmazonIdentStpV {
             "1) Aparece una página con el logo de Amazon<br>" +
             "2) Aparece los campos para la identificación (usuario/password)" +
             validacion3;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();   
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);           
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageAmazonIdent.isLogoAmazon(dFTest.driver)) 
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!PageAmazonIdent.isPageIdent(dFTest.driver))
-                fmwkTest.addValidation(2, State.Defect, listVals);
-                            
+            if (!PageAmazonIdent.isLogoAmazon(dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!PageAmazonIdent.isPageIdent(dFTest.driver)) {
+                listVals.add(2, State.Defect);
+            }
             if (channel==Channel.desktop) {
-                //3)
-                if (!ImporteScreen.isPresentImporteInScreen(dataPedido.getImporteTotal(), pais.getCodigo_pais(), dFTest.driver)) 
-                    fmwkTest.addValidation(3,State.Warn, listVals);
+                if (!ImporteScreen.isPresentImporteInScreen(dataPedido.getImporteTotal(), pais.getCodigo_pais(), dFTest.driver)) {
+                    listVals.add(3, State.Warn);
+                }
             }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         catch (Exception e) {
             //
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 }

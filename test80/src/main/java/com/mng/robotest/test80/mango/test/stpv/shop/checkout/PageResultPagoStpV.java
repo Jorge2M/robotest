@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -31,15 +28,16 @@ public class PageResultPagoStpV {
     public static void validaIsPageUntil(int maxSecondsToWait, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" (la esperamos hasta " + maxSecondsToWait + " segundos)";   
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);   
+        datosStep.setStateIniValidations();   
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
-            List<SimpleValidation> listVals = new ArrayList<>();
-            if (!PageResultPago.isVisibleTextoConfirmacionPago(dFTest.driver, channel, maxSecondsToWait))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!PageResultPago.isVisibleTextoConfirmacionPago(dFTest.driver, channel, maxSecondsToWait)) {
+                listVals.add(1, State.Defect);
+            }
                                                                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static void validateIsPageOk(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DatosStep datosStep, DataFmwkTest dFTest) 
@@ -69,36 +67,36 @@ public class PageResultPagoStpV {
             "1) Aparece el importe " + importeTotal + " de la operación<br>" +
             validacion2 + 
             "3) Aparece el código de pedido (" + tagPedido + ") (lo esperamos 5 segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);             
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, dCtxSh.pais.getCodigo_pais(), dFTest.driver)) 
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)                                
+            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, dCtxSh.pais.getCodigo_pais(), dFTest.driver)) {
+                listVals.add(1, State.Warn);   
+            }
             if (dCtxSh.channel==Channel.desktop) {
                 if (dCtxSh.pais.isPaisWithMisCompras() && dCtxSh.appE==AppEcom.shop) {
-                    if (!PageResultPago.isLinkMisComprasDesktop(dFTest.driver))
-                        fmwkTest.addValidation(2, State.Warn, listVals);
+                    if (!PageResultPago.isLinkMisComprasDesktop(dFTest.driver)) {
+                        listVals.add(2, State.Warn);
+                    }
                 }
                 else {
-                    if (!PageResultPago.isLinkPedidosDesktop(dFTest.driver))
-                        fmwkTest.addValidation(2, State.Warn, listVals);
+                    if (!PageResultPago.isLinkPedidosDesktop(dFTest.driver)) {
+                        listVals.add(2, State.Warn);
+                    }
                 }
             }
-            //3)
             codigoPed = PageResultPago.getCodigoPedido(dFTest.driver, dCtxSh.channel, 5/*secondsWait*/);
             if ("".compareTo(codigoPed)==0)
-                fmwkTest.addValidation(3, State.Defect, listVals);
+                listVals.add(3, State.Defect);
             else
                 dataPedido.setResejecucion(State.Ok);            
                         
             descripValidac = descripValidac.replace(tagPedido, codigoPed);
             dataPedido.setCodpedido(codigoPed);
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals); 
+            datosStep.setListResultValidations(listVals); 
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static void validateTextConfirmacionPago(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
@@ -107,20 +105,19 @@ public class PageResultPagoStpV {
 	    String descripValidac = 
 	        "1) Aparece un texto de confirmación del pago (lo esperamos hasta " + maxSecondsWait1 + " segundos)<br>" +
 	    	"2) Si no aparece lo esperamos " + maxSecondsWait2 + " segundos";
-	    datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);             
+	    datosStep.setStateIniValidations();
+	    ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	    try { 
-	        List<SimpleValidation> listVals = new ArrayList<>();
-	        //1)
 	        if (!PageResultPago.isVisibleTextoConfirmacionPago(dFTest.driver, channel, maxSecondsWait1)) {
-	            fmwkTest.addValidation(1, State.Warn, listVals);
-	            //2)
-	            if (!PageResultPago.isVisibleTextoConfirmacionPago(dFTest.driver, channel, maxSecondsWait2))
-	            	fmwkTest.addValidation(2, State.Defect, listVals);
+	            listVals.add(1, State.Warn);
+	            if (!PageResultPago.isVisibleTextoConfirmacionPago(dFTest.driver, channel, maxSecondsWait2)) {
+	            	listVals.add(2, State.Defect);
+	            }
 	        }
 	        
-	        datosStep.setExcepExists(false); datosStep.setResultSteps(listVals); 
+	        datosStep.setListResultValidations(listVals); 
 	    }
-	    finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+	    finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep selectMisPedidos(DataPedido dataPedido, DataFmwkTest dFTest) throws Exception {

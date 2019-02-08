@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.giropay;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -25,35 +22,35 @@ public class PageGiropay1rstStpV {
             descripValidac+="<br>" +
             "4) Aparece un input para la introducción del Banco (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "5) Figura un botón de pago";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();  
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageGiropay1rst.isPresentIconoGiropay(channel, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver))
-                if (channel==Channel.movil_web)
-                    fmwkTest.addValidation(2, State.Info_NoHardcopy, listVals);
-                else
-                    fmwkTest.addValidation(2, State.Warn, listVals);            
-            //3)
-            if (!PageGiropay1rst.isPresentCabeceraStep(dFTest.driver)) 
-                fmwkTest.addValidation(3, State.Warn, listVals);
-            //4)
-            if (channel==Channel.desktop) {
-                if (!PageGiropay1rst.isVisibleInputBankUntil(maxSecondsToWait, dFTest.driver)) 
-                    fmwkTest.addValidation(4, State.Warn, listVals);
+            if (!PageGiropay1rst.isPresentIconoGiropay(channel, dFTest.driver)) {
+                listVals.add(1, State.Warn);
             }
-            //5)
+            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver)) {
+                if (channel==Channel.movil_web)
+                    listVals.add(2, State.Info_NoHardcopy);
+                else
+                    listVals.add(2, State.Warn);            
+            }
+            if (!PageGiropay1rst.isPresentCabeceraStep(dFTest.driver)) {
+                listVals.add(3, State.Warn);
+            }
             if (channel==Channel.desktop) {
-                if (!PageGiropay1rst.isPresentButtonPagoDesktop(dFTest.driver)) 
-                    fmwkTest.addValidation(5, State.Defect, listVals); 
+                if (!PageGiropay1rst.isVisibleInputBankUntil(maxSecondsToWait, dFTest.driver)) {
+                    listVals.add(4, State.Warn);
+                }
+            }
+            if (channel==Channel.desktop) {
+                if (!PageGiropay1rst.isPresentButtonPagoDesktop(dFTest.driver)) {
+                    listVals.add(5, State.Defect); 
+                }
             }
                                                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep inputBank(String bankToInput, Channel channel, DataFmwkTest dFTest) throws Exception {
@@ -68,19 +65,20 @@ public class PageGiropay1rstStpV {
         }
         finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
         
+        //Validaciones
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Aparece la entrada <b>" + bankToInput + "</b> del desplegable (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();   
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageGiropay1rst.isVisibleBankInListUntil(bankToInput, maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (!PageGiropay1rst.isVisibleBankInListUntil(bankToInput, maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
                                                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
         
         //Step
         datosStep = new DatosStep     (
@@ -96,16 +94,16 @@ public class PageGiropay1rstStpV {
         maxSecondsToWait = 2;
         descripValidac = 
             "1) Acaba desapareciendo la entrada <b>" + bankToInput + "</b> del desplegable (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();   
+        listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageGiropay1rst.isInvisibleBankInListUntil(bankToInput, maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (!PageGiropay1rst.isInvisibleBankInListUntil(bankToInput, maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
                                                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
         
         return datosStep;
     }

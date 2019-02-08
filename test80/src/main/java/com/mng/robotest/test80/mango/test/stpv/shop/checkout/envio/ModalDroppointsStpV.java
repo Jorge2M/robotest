@@ -1,13 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -28,37 +24,37 @@ public class ModalDroppointsStpV {
             "1) Desaparece el mensaje de \"Cargando...\" (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) Aparece un 1er Droppoint visible (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "3) Sí aparece el modal con el mapa de Droppoints";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();     
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!ModalDroppoints.isInvisibleCargandoMsgUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!ModalDroppoints.secSelectDPoint.isDroppointVisibleUntil(1, maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(2, State.Info, listVals);
-            //3)
-            if (!ModalDroppoints.isVisible(channel, dFTest.driver))
-                fmwkTest.addValidation(3, State.Defect, listVals);
+            if (!ModalDroppoints.isInvisibleCargandoMsgUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!ModalDroppoints.secSelectDPoint.isDroppointVisibleUntil(1, maxSecondsToWait, dFTest.driver)) {
+                listVals.add(2, State.Info);
+            }
+            if (!ModalDroppoints.isVisible(channel, dFTest.driver)) {
+                listVals.add(3, State.Defect);
+            }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static void validaIsNotVisible(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) No aparece el modal con el mapa de Droppoints";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();   
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (ModalDroppoints.isVisible(channel, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (ModalDroppoints.isVisible(channel, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
     @SuppressWarnings("static-access")

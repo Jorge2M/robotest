@@ -1,15 +1,12 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.galeria;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -36,23 +33,23 @@ public class SecCrossSellingStpV {
         String descripValidac = 
             "1) La sección cross-selling existe (si de primeras no existe scrollamos hasta el final de la galería)<br>" +
             "2) Aparecen los links correspondientes a los 3 primeros menús de Mujer-Prendas (<b>" + litMenu1 + ", " + litMenu2 + ", " + litMenu3 + "</b>)";  
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (!PageGaleriaDesktop.secCrossSelling.isSection(dFTest.driver)) {
                 pageGaleria.scrollToPageFromFirst(PageGaleriaDesktop.maxPageToScroll, app);
-                if (!PageGaleriaDesktop.secCrossSelling.isSection(dFTest.driver))
-                    fmwkTest.addValidation(1, State.Defect, listVals);
+                if (!PageGaleriaDesktop.secCrossSelling.isSection(dFTest.driver)) {
+                    listVals.add(1, State.Defect);
+                }
             }
-            //2
             if (!PageGaleriaDesktop.secCrossSelling.linkAssociatedToMenu(1, listaMenusBloque.get(0), dFTest.driver) ||
                 !PageGaleriaDesktop.secCrossSelling.linkAssociatedToMenu(2, listaMenusBloque.get(1), dFTest.driver) ||
-                !PageGaleriaDesktop.secCrossSelling.linkAssociatedToMenu(3, listaMenusBloque.get(2), dFTest.driver))
-                fmwkTest.addValidation(2, State.Defect, listVals);                
+                !PageGaleriaDesktop.secCrossSelling.linkAssociatedToMenu(3, listaMenusBloque.get(2), dFTest.driver)) {
+                listVals.add(2, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 }

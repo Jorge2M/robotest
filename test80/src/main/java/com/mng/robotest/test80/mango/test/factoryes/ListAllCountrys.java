@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
-
 import org.testng.annotations.*;
 
-import com.mng.robotest.test80.mango.test.appshop.ControlPeriodicoURLs;
-import com.mng.robotest.test80.mango.test.appshop.ControlPeriodicoURLsList;
 import com.mng.robotest.test80.mango.test.appshop.PaisIdioma;
 import com.mng.robotest.test80.mango.test.appshop.PaisIdiomaCambioPais;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
@@ -28,9 +25,7 @@ public class ListAllCountrys {
     throws Exception {
         ArrayList<String> listaPaises = new ArrayList<>();
         ArrayList<PaisIdiomaCambioPais> listTestsCambioPais = new ArrayList<>();
-        ArrayList<ControlPeriodicoURLs> listTestsControlPeriodicoURL = new ArrayList<>();
         ArrayList<PaisIdioma> listTests = new ArrayList<>();
-        ArrayList<ControlPeriodicoURLsList> listPaisesControlUrl = new ArrayList<>();
         try {
             //Parseo de los parámetros de entrada
             AppEcom appE = AppEcomEnum.getAppEcom(appEStr);
@@ -52,7 +47,6 @@ public class ListAllCountrys {
             Iterator<Continente> itContinentes = response.getResponse().iterator();
 			
             int prioridad=0; /*Nota: ha de ser secuencial para cada uno de los tests creados*/
-            int j=0;/*Contador para index_fact de ControlPeriodicoURLs*/
 
             //Iteramos a nivel de Continentes -> Países -> Idiomas
             Pais paisAnt = null;
@@ -105,19 +99,6 @@ public class ListAllCountrys {
                                     ",País destion=" + paisAnt.getNombre_pais() +
                                     ",Num Idiomas=" + pais.getListIdiomas().size());
                                 break;
-                            case "4": // Test control periodico URLs      	            					    
-                                listPaisesControlUrl.add(new ControlPeriodicoURLsList(pais, idioma));
-                                if(listPaisesControlUrl.size() == 10 || 
-                                   (!itPaises.hasNext() && !itIdiomas.hasNext())) {
-                                    ControlPeriodicoURLs newTest = new ControlPeriodicoURLs(listPaisesControlUrl /*Lista 10 paises*/, (continente.getNombre_continente() + "_" + j));
-                                    listTestsControlPeriodicoURL.add(newTest);
-        	            					        
-                                    j++;
-                                    listPaisesControlUrl.clear();
-                                                                        
-                                    System.out.println("Creado Test \"ControlPeriodicoURLs\" con datos: " +  newTest.toString());
-                                } 
-                                break;
                             default:
                                 break;
                             }
@@ -141,8 +122,6 @@ public class ListAllCountrys {
             return listTests.toArray(new Object[listTests.size()]);
         case "3": 
             return listTestsCambioPais.toArray(new Object[listTestsCambioPais.size()]);
-        case "4":
-            return listTestsControlPeriodicoURL.toArray(new Object[listTestsControlPeriodicoURL.size()]);
         default:
             return listTests.toArray(new Object[listTests.size()]);
         }

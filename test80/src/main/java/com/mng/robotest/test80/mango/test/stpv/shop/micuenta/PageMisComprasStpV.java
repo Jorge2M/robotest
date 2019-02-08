@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -38,22 +35,22 @@ public class PageMisComprasStpV {
         	"1) Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) No aparece el bloque de \"Tienda\"<br>" +
             "3) No aparece el bloque de \"Online\"";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageMisCompras.isPageUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (PageMisCompras.isPresentBlockUntil(0/*maxSedondsToWait*/, TypeCompra.Tienda, dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);
-            //3)
-            if (PageMisCompras.isPresentBlockUntil(0/*maxSedondsToWait*/, TypeCompra.Online, dFTest.driver))
-                fmwkTest.addValidation(3, State.Warn, listVals);
+            if (!PageMisCompras.isPageUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (PageMisCompras.isPresentBlockUntil(0/*maxSedondsToWait*/, TypeCompra.Tienda, dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
+            if (PageMisCompras.isPresentBlockUntil(0/*maxSedondsToWait*/, TypeCompra.Online, dFTest.driver)) {
+                listVals.add(3, State.Warn);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
 
         //Validaciones estÃ¡ndar.
         AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
@@ -66,22 +63,22 @@ public class PageMisComprasStpV {
             "1) Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) Aparece el bloque de \"Tienda\"<br>" +
             "3) Aparece el bloque de \"Online\"";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();      
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageMisCompras.isPageUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!PageMisCompras.isPresentBlockUntil(0/*maxSedondsToWait*/, TypeCompra.Tienda, dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);
-            //3)
-            if (!PageMisCompras.isPresentBlockUntil(0/*maxSedondsToWait*/, TypeCompra.Online, dFTest.driver))  
-                fmwkTest.addValidation(3, State.Warn, listVals);
+            if (!PageMisCompras.isPageUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!PageMisCompras.isPresentBlockUntil(0/*maxSedondsToWait*/, TypeCompra.Tienda, dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
+            if (!PageMisCompras.isPresentBlockUntil(0/*maxSedondsToWait*/, TypeCompra.Online, dFTest.driver)) {
+                listVals.add(3, State.Warn);
+            }
         
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
             
         //Validaciones estándar. 
         AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
@@ -106,58 +103,58 @@ public class PageMisComprasStpV {
         int maxSecondsToWait = 2;
         String descripValidac =
             "1) Queda seleccionado el bloque de \"" + typeCompra + "\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageMisCompras.isSelectedBlockUntil(maxSecondsToWait, typeCompra, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (!PageMisCompras.isSelectedBlockUntil(maxSecondsToWait, typeCompra, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         if (ordersExpected) {
             maxSecondsToWait = 2;
             descripValidac = 
                 "1) Aparece una lista con algún artículo (lo esperamos hasta " + maxSecondsToWait + " segundos) <br>" +
                 "2) El 1er artículo es de tipo \"" + typeCompra + "\"";
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+            datosStep.setStateIniValidations();            
+            listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
                 boolean isVisibleAnyCompra = PageMisCompras.isVisibleAnyCompraUntil(maxSecondsToWait, dFTest.driver); 
-                if (!isVisibleAnyCompra)
-                    fmwkTest.addValidation(1, State.Warn, listVals);
-                //2)
+                if (!isVisibleAnyCompra) {
+                    listVals.add(1, State.Warn);
+                }
                 if (isVisibleAnyCompra) {
-                    if (PageMisCompras.getTypeCompra(1/*posInLista*/, dFTest.driver)!=typeCompra)
-                        fmwkTest.addValidation(2, State.Warn, listVals);
+                    if (PageMisCompras.getTypeCompra(1/*posInLista*/, dFTest.driver)!=typeCompra) {
+                        listVals.add(2, State.Warn);
+                    }
                 }
             
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+            finally { listVals.checkAndStoreValidations(descripValidac); }        
         }
         else {
             //Validaciones
             descripValidac = 
                 "1) No aparece ningún artículo<br>" +
                 "2) Es visible la imagen asociada a \"Lista Vacía\" para " + typeCompra;
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+            datosStep.setStateIniValidations();
+            listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
                 boolean isVisibleAnyCompra = PageMisCompras.isVisibleAnyCompraUntil(0/*maxSecondsToWait*/, dFTest.driver); 
-                if (isVisibleAnyCompra)
-                    fmwkTest.addValidation(1, State.Warn, listVals);
-                //2)
-                if (!PageMisCompras.isVisibleEmptyListImage(typeCompra, dFTest.driver))
-                    fmwkTest.addValidation(2, State.Warn, listVals);
+                if (isVisibleAnyCompra) {
+                    listVals.add(1, State.Warn);
+                }
+                if (!PageMisCompras.isVisibleEmptyListImage(typeCompra, dFTest.driver)) {
+                    listVals.add(2, State.Warn);
+                }
             
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }            
+            finally { listVals.checkAndStoreValidations(descripValidac); }            
         }
         
         return datosStep;
@@ -167,19 +164,19 @@ public class PageMisComprasStpV {
         //Validaciones
         String descripValidac = 
             "1) Es visible la compra " + TypeCompra.Online + " asociada al pedido <b>" + codPedido + "</b>";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();       
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageMisCompras.isVisibleCompraOnline(codPedido, dFTest.driver))
+            if (!PageMisCompras.isVisibleCompraOnline(codPedido, dFTest.driver)) {
                 if (isChequeRegalo)
-                    fmwkTest.addValidation(1, State.Info_NoHardcopy, listVals);
+                    listVals.add(1, State.Info_NoHardcopy);
                 else
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                    listVals.add(1, State.Warn);
+            }
         
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static PageDetallePedidoStpV selectCompraOnline(int posInLista, String codPais, Channel channel, DataFmwkTest dFTest) throws Exception {
@@ -242,21 +239,20 @@ public class PageMisComprasStpV {
         
         //Validaciones
         String descripValidac = 
-                "1) Aparece el modal con información del artículo<br>" + 
-                "2) La referencia que aparece en el modal es correcta " + idArticulo;
+        	"1) Aparece el modal con información del artículo<br>" + 
+            "2) La referencia que aparece en el modal es correcta " + idArticulo;
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            
-            //1)
-            if (!ModalDetalleMisCompras.isVisible(dFTest.driver))
-            		fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
-            if (!ModalDetalleMisCompras.isReferenciaValidaModal(idArticulo, dFTest.driver))
-            		fmwkTest.addValidation(2, State.Defect, listVals);
+            if (!ModalDetalleMisCompras.isVisible(dFTest.driver)) {
+            	listVals.add(1, State.Defect);
+            }
+            if (!ModalDetalleMisCompras.isReferenciaValidaModal(idArticulo, dFTest.driver)) {
+            	listVals.add(2, State.Defect);
+            }
         
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }      
+        finally { listVals.checkAndStoreValidations(descripValidac); }      
 		
 	}    
 }

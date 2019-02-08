@@ -1,14 +1,11 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoreanConfDesktop;
@@ -20,16 +17,16 @@ public class PageKoreanConfDesktopStpV {
     public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {    
         String descripValidac = 
     		"1) Aparece la página para la confirmación de la compra";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
+        datosStep.setStateIniValidations();    
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();    
-            //1)
-            if (!PageKoreanConfDesktop.isPage(dFTest.driver))
-            	fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!PageKoreanConfDesktop.isPage(dFTest.driver)) {
+            	listVals.add(1, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep clickConfirmarButton(DataFmwkTest dFTest) throws Exception {
@@ -37,7 +34,7 @@ public class PageKoreanConfDesktopStpV {
         DatosStep datosStep = new DatosStep     (
             "Seleccionar el botón para Confirmar", 
             "Aparece la página de Mango de resultado OK del pago");
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);    
+        datosStep.setStateIniValidations();    
         try {       
         	PageKoreanConfDesktop.clickButtonSubmit(dFTest.driver);
 

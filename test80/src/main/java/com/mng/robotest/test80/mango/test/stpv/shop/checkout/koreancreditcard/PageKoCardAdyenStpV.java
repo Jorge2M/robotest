@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -30,24 +27,24 @@ public class PageKoCardAdyenStpV {
             validacion1 + 
             "2) No se trata de la página de precompra (no aparece los logos de formas de pago <br>" + 
     		"3) Aparece la página de Adyen / Korean Kredit Cards";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
+        datosStep.setStateIniValidations(); 
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (channel==Channel.desktop) {
-                if (!ImporteScreen.isPresentImporteInScreen(importeTotal, pais.getCodigo_pais(), dFTest.driver)) 
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                if (!ImporteScreen.isPresentImporteInScreen(importeTotal, pais.getCodigo_pais(), dFTest.driver)) {
+                    listVals.add(1, State.Warn);
+                }
             }
-            //2)
-            if (PageCheckoutWrapper.isPresentMetodosPago(pais, channel, dFTest.driver))
-                fmwkTest.addValidation(2, State.Defect, listVals);            
-            //3)
-            if (!PageKoCardAdyen.isPage(dFTest.driver))
-            	fmwkTest.addValidation(3, State.Defect, listVals);
+            if (PageCheckoutWrapper.isPresentMetodosPago(pais, channel, dFTest.driver)) {
+                listVals.add(2, State.Defect);            
+            }
+            if (!PageKoCardAdyen.isPage(dFTest.driver)) {
+            	listVals.add(3, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 
     public static DatosStep clickIconForContinue (Channel channel, DataFmwkTest dFTest) throws Exception {
@@ -55,7 +52,7 @@ public class PageKoCardAdyenStpV {
         DatosStep datosStep = new DatosStep (
         	"Seleccionar el icono de Korean Credit Card para continuar",
             "Aparece la páinga de INIpay");
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
         try {
             PageKoCardAdyen.clickForContinue(channel, dFTest.driver);
             

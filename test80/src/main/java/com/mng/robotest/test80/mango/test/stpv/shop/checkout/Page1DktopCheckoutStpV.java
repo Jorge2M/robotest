@@ -1,12 +1,11 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -34,23 +33,22 @@ public class Page1DktopCheckoutStpV {
             "1) Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>" +
             "2) Si no ha aparecido la esperamos " + (maxSecondsToWait * 2) + " segundos más<br>" +
             "3) Cuadran los artículos a nivel de la Referencia e Importe";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();       
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1) 
             if (!Page1DktopCheckout.isPageUntil(maxSecondsToWait, dFTest.driver)) {
-                fmwkTest.addValidation(1, State.Warn_NoHardcopy, listVals);
-	        //2)
-	            if (!Page1DktopCheckout.isPageUntil(maxSecondsToWait*2, dFTest.driver))
-	                fmwkTest.addValidation(2, State.Defect, listVals);
+                listVals.add(1, State.Warn_NoHardcopy);
+	            if (!Page1DktopCheckout.isPageUntil(maxSecondsToWait*2, dFTest.driver)) {
+	                listVals.add(2, State.Defect);
+	            }
             }
-            //3)
-            if (!Page1DktopCheckout.validateArticlesAndImport(dataBag, dFTest.driver))
-                fmwkTest.addValidation(3, State.Warn, listVals);
+            if (!Page1DktopCheckout.validateArticlesAndImport(dataBag, dFTest.driver)) {
+                listVals.add(3, State.Warn);
+            }
                                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static void validateIsVersionChequeRegalo(ChequeRegalo chequeRegalo, DatosStep datosStep, DataFmwkTest dFTest) {
@@ -64,19 +62,19 @@ public class Page1DktopCheckoutStpV {
               "Email: <b>" + chequeRegalo.getEmail() + "</b><br>" +
               "Importe: <b>" + chequeRegalo.getImporte() + "</b><br>" +
               "Mensaje: <b>" + chequeRegalo.getMensaje() + "</b>"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);                   
+        datosStep.setStateIniValidations();  
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1) 
-            if (!Page1DktopCheckout.isPageUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
-            if (!Page1DktopCheckout.isDataChequeRegalo(chequeRegalo, dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (!Page1DktopCheckout.isPageUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            if (!Page1DktopCheckout.isDataChequeRegalo(chequeRegalo, dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static void validaResultImputPromoEmpl(DataBag dataBag, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
@@ -87,19 +85,19 @@ public class Page1DktopCheckoutStpV {
             "1) Aparece el descuento total aplicado al empleado (lo experamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) Para todos los artículos, el % de descuento final es como mínimo del " + 
             	descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + ")";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();   
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!Page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(dFTest.driver, maxSecondsToWait))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
-            if (!Page1DktopCheckout.validateArticlesAndDiscount(dataBag, descuento, dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (!Page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(dFTest.driver, maxSecondsToWait)) {
+                listVals.add(1, State.Defect);
+            }
+            if (!Page1DktopCheckout.validateArticlesAndDiscount(dataBag, descuento, dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones estándar. 
         AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
@@ -142,22 +140,23 @@ public class Page1DktopCheckoutStpV {
             	"(lo esperamos hasta " + maxSecondsToWait2 + " segundos)";
         
         String descripValidac = "1) " + validacion2;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (valePais.isValid()) {
-                if (Page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(maxSecondsToWait1, dFTest.driver))
-                    fmwkTest.addValidation(1, State.Defect, listVals);
+                if (Page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(maxSecondsToWait1, dFTest.driver)) {
+                    listVals.add(1, State.Defect);
+                }
             }
             else {
-                if (!Page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(maxSecondsToWait2, dFTest.driver))
-                    fmwkTest.addValidation(1, State.Defect, listVals);
+                if (!Page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(maxSecondsToWait2, dFTest.driver)) {
+                    listVals.add(1, State.Defect);
+                }
             }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }                
+        finally { listVals.checkAndStoreValidations(descripValidac); }                
 
         if (valePais.isValid()) {
             //Validaciones
@@ -166,16 +165,16 @@ public class Page1DktopCheckoutStpV {
                 "1) En los artículos a los que aplica, el descuento es de " + 
                     descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + "): <br>" +
                 	dataBag.getListArtDescHTML();
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+            datosStep.setStateIniValidations();
+            listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
-                if (!Page1DktopCheckout.validateArticlesAndDiscount(dataBag, descuento, dFTest.driver))
-                    fmwkTest.addValidation(1, State.Defect, listVals);
+                if (!Page1DktopCheckout.validateArticlesAndDiscount(dataBag, descuento, dFTest.driver)) {
+                    listVals.add(1, State.Defect);
+                }
 
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
             
             //Validaciones estándar. 
             //AllPagesStpV.validacionesEstandar(false/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);            
@@ -206,16 +205,16 @@ public class Page1DktopCheckoutStpV {
         int maxSecondsToWait = 1;
         String descripValidac = 
             "1) Aparece el input para la introducción del vale (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok); 
+        datosStep.setStateIniValidations(); 
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!Page1DktopCheckout.isVisibleInputCodigoPromoUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (!Page1DktopCheckout.isVisibleInputCodigoPromoUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     /**
@@ -238,18 +237,18 @@ public class Page1DktopCheckoutStpV {
         String descripValidac = 
             "1) Desaparece el campo de Input del código de vendedor<br>" +
             "2) En su lugar se pinta el código de vendedor " + codigoVendedor;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok); 
+        datosStep.setStateIniValidations(); 
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (Page1DktopCheckout.isVisibleInputVendedorVOTF(dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!Page1DktopCheckout.isVisibleCodigoVendedorVOTF(codigoVendedor, dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (Page1DktopCheckout.isVisibleInputVendedorVOTF(dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!Page1DktopCheckout.isVisibleCodigoVendedorVOTF(codigoVendedor, dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 }

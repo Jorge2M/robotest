@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.manto.pedido;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -71,20 +68,21 @@ public class PageConsultaPedidoBolsaStpV extends ElementPageFunctions {
         String descripValidac = 
             "1) El campo \"tipo servicio\" contiene el valor <b>" + tipoTransporte.getCodigoIntercambio() + "</b> (asociado al tipo de envío " + tipoTransporte + ")" + 
             validacion2;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (PageDetallePedido.getTipoServicio(dFTest.driver).compareTo(tipoTransporte.getCodigoIntercambio())!=0) 
-                fmwkTest.addValidation(1, State.Info, listVals);
-            //2)
-            if ("".compareTo(validacion2)!=0) 
-                if (!PageDetallePedido.get1rstLineDatosEnvioText(dFTest.driver).contains(textEnvioTienda))
-                    fmwkTest.addValidation(2, State.Defect, listVals);
+            if (PageDetallePedido.getTipoServicio(dFTest.driver).compareTo(tipoTransporte.getCodigoIntercambio())!=0) {
+                listVals.add(1, State.Info);
+            }
+            if ("".compareTo(validacion2)!=0) { 
+                if (!PageDetallePedido.get1rstLineDatosEnvioText(dFTest.driver).contains(textEnvioTienda)) {
+                    listVals.add(2, State.Defect);
+                }
+            }
                                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }  
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
     public static void validaDatosGeneralesPedido(DataPedido dataPedido, AppEcom appE, DatosStep datosStep, DataFmwkTest dFTest) {
@@ -102,36 +100,37 @@ public class PageConsultaPedidoBolsaStpV extends ElementPageFunctions {
             "3) Las 3 líneas de la dirección de envío figuran en la dirección del pedido (" + dataPedido.getDireccionEnvio() +")<br>" +
             "4) Figura el código de país (" + dataPedido.getCodigoPais() + ")" +
             validacion5;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageDetallePedido.isPage(dFTest.driver)) 
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), PageDetallePedido.XPathImporteTotal, dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);
-            //3)
-            if (!PageDetallePedido.isDireccionPedido(dFTest.driver, dataPedido.getDireccionEnvio()))
-                fmwkTest.addValidation(3, State.Warn, listVals);
-            //4)
-            if (!PageDetallePedido.isCodPaisPedido(dFTest.driver, dataPedido.getCodigoPais()))
-                fmwkTest.addValidation(4, State.Warn, listVals);
-            //5)
+            if (!PageDetallePedido.isPage(dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), PageDetallePedido.XPathImporteTotal, dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
+            if (!PageDetallePedido.isDireccionPedido(dFTest.driver, dataPedido.getDireccionEnvio())) {
+                listVals.add(3, State.Warn);
+            }
+            if (!PageDetallePedido.isCodPaisPedido(dFTest.driver, dataPedido.getCodigoPais())) {
+                listVals.add(4, State.Warn);
+            }
             if (pago.getTpv().getEstado()!=null &&
                 pago.getTpv().getEstado().compareTo("")!=0 &&
                 appE!=AppEcom.votf) {
                 if (!PageDetallePedido.isStateInTpvStates(dFTest.driver, dataPedido)) {
-                	if (PageDetallePedido.isPedidoInStateMenos1NULL(dFTest.driver))
-                		fmwkTest.addValidation(5, State.Defect, listVals);
-                	else
-                		fmwkTest.addValidation(5, State.Warn, listVals);
+                	if (PageDetallePedido.isPedidoInStateMenos1NULL(dFTest.driver)) {
+                		listVals.add(5, State.Defect);
+                	}
+                	else {
+                		listVals.add(5, State.Warn);
+                	}
                 }
             }
                                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }  
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
     public static DatosStep clickButtonIrAGenerar(String idPedido, DataFmwkTest dFTest) throws Exception {

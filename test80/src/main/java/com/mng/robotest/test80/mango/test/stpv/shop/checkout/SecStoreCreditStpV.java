@@ -1,14 +1,11 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -72,16 +69,16 @@ public class SecStoreCreditStpV {
             int numPagosExpected = 0;
             String descripValidac = 
                 "1) Aparecen " + numPagosExpected + " métodos de pago";
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);                 
+            datosStep.setStateIniValidations();
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try { 
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
-                if (!PageCheckoutWrapper.isNumpagos(numPagosExpected, channel, pais, dFTest.driver))
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                if (!PageCheckoutWrapper.isNumpagos(numPagosExpected, channel, pais, dFTest.driver)) {
+                    listVals.add(1, State.Warn);
+                }
                                                 
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals); 
+                datosStep.setListResultValidations(listVals); 
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest);  }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
  
             //Almacenamos el importe total
             if (channel==Channel.movil_web)
@@ -126,37 +123,37 @@ public class SecStoreCreditStpV {
             validacion3 +
             validacion4 +
             "5) Figura un saldo en cuenta de: " + saldoCta;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!Page1DktopCheckout.secStoreCredit.isVisible(dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
+            if (!Page1DktopCheckout.secStoreCredit.isVisible(dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
             if (marcado && !Page1DktopCheckout.secStoreCredit.isChecked(dFTest.driver) ||
-                !marcado && Page1DktopCheckout.secStoreCredit.isChecked(dFTest.driver)) 
-                fmwkTest.addValidation(2, State.Warn, listVals);
-            //3)
+                !marcado && Page1DktopCheckout.secStoreCredit.isChecked(dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
             if (marcado && !Page1DktopCheckout.secStoreCredit.isChecked(dFTest.driver) ||
-                !marcado && Page1DktopCheckout.secStoreCredit.isChecked(dFTest.driver)) 
-                fmwkTest.addValidation(3,State.Warn, listVals);
-            //4)
+                !marcado && Page1DktopCheckout.secStoreCredit.isChecked(dFTest.driver)) {
+                listVals.add(3,State.Warn);
+            }
             if (!marcado || channel==Channel.desktop) {
                 String impTotResumen = PageCheckoutWrapper.getPrecioTotalFromResumen(channel, dFTest.driver);
                 float impFloat = ImporteScreen.getFloatFromImporteMangoScreen(impTotResumen);
                 if ((marcado && impFloat!=0.0) ||
-                    (!marcado && impFloat==0.0))
-                    fmwkTest.addValidation(4, State.Warn, listVals);
+                    (!marcado && impFloat==0.0)) {
+                    listVals.add(4, State.Warn);
+                }
             }
-            //5)
-            if (Page1DktopCheckout.secStoreCredit.getImporte(dFTest.driver) != saldoCta)
-                fmwkTest.addValidation(5,State.Warn, listVals);
+            if (Page1DktopCheckout.secStoreCredit.getImporte(dFTest.driver) != saldoCta) {
+                listVals.add(5,State.Warn);
+            }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         catch (Exception e) {
             pLogger.warn("Problem validating Block Checkout StoreCredit", e);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 }

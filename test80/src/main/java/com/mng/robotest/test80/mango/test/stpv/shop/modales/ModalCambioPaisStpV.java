@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.modales;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -20,16 +17,16 @@ public class ModalCambioPaisStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Aparece el modal de selección de país (lo esperamos hasta " + maxSecondsToWait + " segundos)"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);  
+        datosStep.setStateIniValidations();  
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!ModalCambioPais.isVisibleModalUntil(dFTest.driver, maxSecondsToWait))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!ModalCambioPais.isVisibleModalUntil(dFTest.driver, maxSecondsToWait)) {
+                listVals.add(1, State.Defect);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep cambioPais(DataCtxShop dCtxSh, DataFmwkTest dFTest) 

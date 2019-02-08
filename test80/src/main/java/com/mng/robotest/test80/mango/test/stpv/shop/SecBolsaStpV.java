@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -73,16 +73,16 @@ public class SecBolsaStpV {
         int maxSecondsToWait = 3;
         String descripValidac = 
             "1) Desaparece la bolsa (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!SecBolsa.isInStateUntil(StateBolsa.Closed, Channel.movil_web, maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!SecBolsa.isInStateUntil(StateBolsa.Closed, Channel.movil_web, maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }    
@@ -113,16 +113,16 @@ public class SecBolsaStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) La bolsa queda en estado " + stateBolsaExpected + " (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!SecBolsa.isInStateUntil(stateBolsaExpected, channel, 0, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!SecBolsa.isInStateUntil(stateBolsaExpected, channel, 0, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
                     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static void altaArticlosConColores(int numArticulos, DataBag dataBag, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
@@ -212,19 +212,19 @@ public class SecBolsaStpV {
             String descripValidac =
                 "1) Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
                 "2) Aparece el botón \"Comprar\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+            datosStep.setStateIniValidations();
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
-                if (!SecBolsa.isInStateUntil(StateBolsa.Open, channel, maxSecondsToWait, dFTest.driver))
-                    fmwkTest.addValidation(1, State.Defect, listVals);
-                //2)
-                if (!SecBolsa.isVisibleBotonComprarUntil(dFTest.driver, channel, maxSecondsToWait))
-                    fmwkTest.addValidation(2, State.Defect, listVals);
+                if (!SecBolsa.isInStateUntil(StateBolsa.Open, channel, maxSecondsToWait, dFTest.driver)) {
+                    listVals.add(1, State.Defect);
+                }
+                if (!SecBolsa.isVisibleBotonComprarUntil(dFTest.driver, channel, maxSecondsToWait)) {
+                    listVals.add(2, State.Defect);
+                }
                 
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             } 
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+            finally { listVals.checkAndStoreValidations(descripValidac); }        
         }
         
         //Validaciones. Cuadran los artículos en la volsa
@@ -245,17 +245,17 @@ public class SecBolsaStpV {
             "1) Existen " + dataBag.getListArticulos().size() + 
             " elementos dados de alta en la bolsa (los esperamos hasta " + 
             maxSecondsToWait + " segundos)"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             String itemsSaved = String.valueOf(dataBag.getListArticulos().size());
-            if (!SecBolsa.numberItemsIsUntil(itemsSaved, channel, app, maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (!SecBolsa.numberItemsIsUntil(itemsSaved, channel, app, maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static void validaCuadranArticulosBolsa(DataBag dataBag, AppEcom app, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) 
@@ -268,28 +268,30 @@ public class SecBolsaStpV {
             "4) Cuadran los colores de los artículos existentes en la bolsa<br>" +
             "5) Cuadran las tallas de los artículos existentes en la bolsa<br>" +
             "6) Cuadran los precios de los artículos existentes en la bolsa";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
             ValidatorContentBolsa validatorBolsa = new ValidatorContentBolsa(dataBag, app, channel, dFTest.driver);
-            //1)
-            if (!validatorBolsa.numArticlesIsCorrect())
-            	fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
+            if (!validatorBolsa.numArticlesIsCorrect()) {
+            	listVals.add(1, State.Warn);
+            }
             ArrayList<DataArtBolsa> listDataToValidate = new ArrayList<>();
             listDataToValidate.add(DataArtBolsa.Referencia);
-            if (!validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate))
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (!validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate)) {
+                listVals.add(2, State.Warn);
+            }
             
             listDataToValidate.clear();
             listDataToValidate.add(DataArtBolsa.Nombre);
-            if (!validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate))
-                fmwkTest.addValidation(3, State.Warn, listVals);
+            if (!validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate)) {
+                listVals.add(3, State.Warn);
+            }
             
             listDataToValidate.clear();
             listDataToValidate.add(DataArtBolsa.Color);
-            if (!validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate))
-                fmwkTest.addValidation(4, State.Warn, listVals);
+            if (!validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate)) {
+                listVals.add(4, State.Warn);
+            }
             
             listDataToValidate.clear();
             listDataToValidate.add(DataArtBolsa.TallaNum);
@@ -297,17 +299,19 @@ public class SecBolsaStpV {
             listDataToValidate.clear();
             listDataToValidate.add(DataArtBolsa.TallaAlf);
             boolean tallaAlfOk = validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate);
-            if (!tallaNumOk && !tallaAlfOk)
-                fmwkTest.addValidation(5, State.Warn, listVals);
+            if (!tallaNumOk && !tallaAlfOk) {
+                listVals.add(5, State.Warn);
+            }
             
             listDataToValidate.clear();
             listDataToValidate.add(DataArtBolsa.PrecioTotal);
-            if (!validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate))
-                fmwkTest.addValidation(6, State.Warn, listVals);
+            if (!validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate)) {
+                listVals.add(6, State.Warn);
+            }
                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static void clear1erArticuloBolsa(DataBag dataBag, AppEcom app, Channel channel, DataFmwkTest dFTest) 
@@ -331,16 +335,16 @@ public class SecBolsaStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) El importe total se acaba modificando (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!SecBolsa.isNotThisImporteTotalUntil(importeTotal, channel, maxSecondsToWait, dFTest.driver)) 
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (!SecBolsa.isNotThisImporteTotalUntil(importeTotal, channel, maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones. Cuadran los artículos en la volsa
         validaCuadranArticulosBolsa(dataBag, app, channel, datosStep, dFTest);

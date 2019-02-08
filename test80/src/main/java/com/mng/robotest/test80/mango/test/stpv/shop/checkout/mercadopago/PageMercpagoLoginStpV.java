@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.mercadopago;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -24,25 +21,25 @@ public class PageMercpagoLoginStpV {
         String descripValidac = 
             "1) Aparece la página de identificación de Mercadopago<br>" + 
             "2) En la página figuran los campos de identificación (email + password)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();       
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if ((!PageMercpagoLogin.isPage(dFTest.driver)))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
+            if ((!PageMercpagoLogin.isPage(dFTest.driver))) {
+                listVals.add(1, State.Defect);
+            }
             if (!PageMercpagoLogin.isInputUserVisible(dFTest.driver) ||
-                !PageMercpagoLogin.isInputPasswordVisible(dFTest.driver))
-                fmwkTest.addValidation(2, State.Defect, listVals);
+                !PageMercpagoLogin.isInputPasswordVisible(dFTest.driver)) {
+                listVals.add(2, State.Defect);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         catch (Exception e) {
             /*
              * 
              */
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep loginMercadopago(Pago pago, String importeTotal, String codigoPais, Channel channel, DataFmwkTest dFTest) 

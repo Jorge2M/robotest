@@ -11,7 +11,6 @@ public enum Suites {
     MenusPais(10), 
     MenusManto(50),
     Nodos(80), //In this case the @Factory is very Slow because opens a Browser and iterates until 100 times searching new nodes  
-    ControlPeriodicoURLs(10), 
     ConsolaVotf(10), 
     ListFavoritos(10),
     ListMiCuenta(10),

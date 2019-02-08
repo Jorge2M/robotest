@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -110,22 +107,23 @@ public class SecMenuLateralMobilStpV {
         
         //Validaciones. Aparece la galería de nuevo correcta
         PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, appE, dFTest.driver);
+        int maxSecondsWait = 3;
         String descripValidac = 
-            "1) Aparece algún artículo (esperamos 3 segundos)<br>" +
+            "1) Aparece algún artículo (esperamos " + maxSecondsWait + " segundos)<br>" +
             "2) El 1er artículo es de tipo " + LineaType.nuevo;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, 3/*seconds*/))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!pageGaleria.isFirstArticleOfType(LineaType.nuevo))
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (!pageGaleria.isVisibleArticleUntil(1, maxSecondsWait)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!pageGaleria.isFirstArticleOfType(LineaType.nuevo)) {
+                listVals.add(2, State.Warn);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
         
         return datosStep;
     }
@@ -145,16 +143,16 @@ public class SecMenuLateralMobilStpV {
         //Validaciones
         String descripValidac = 
             "1) Se hace visible una capa de submenús asociada a " + lineaType;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!SecMenuLateralMobil.isVisibleMenuSublineaRebajas(lineaType, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!SecMenuLateralMobil.isVisibleMenuSublineaRebajas(lineaType, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
         
         return datosStep;
     }
@@ -236,44 +234,46 @@ public class SecMenuLateralMobilStpV {
         String tagCarrusels = "@TAG_CARRUSELS";
         String descripValidac = 
             "1) Aparecen los carrusels asociados a la linea de " + LineaType.nuevo + " (<b>" + tagCarrusels + "</b>)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
             String listCarrusels = "";
             for (Linea linea : pais.getShoponline().getLineasToTest(app)) {
                 if (SecMenuLateralMobil.isCarruselNuevoAssociated(linea.getType())) {
                     listCarrusels+=(linea.getType() + " ");
-                    if (!SecMenuLateralMobil.isCarruselNuevoVisible(linea.getType(), dFTest.driver))
-                        fmwkTest.addValidation(1, State.Warn, listVals);      
+                    if (!SecMenuLateralMobil.isCarruselNuevoVisible(linea.getType(), dFTest.driver)) {
+                        listVals.add(1, State.Warn);      
+                    }
                 }
             }
             
             descripValidac = descripValidac.replace(tagCarrusels, listCarrusels);
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
         
     public static void validaSelectLineaRebajasWithSublineas(Pais pais, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) {
         String tagSublineas = "@TAG_SUBLINEAS";
         String descripValidac = 
             "1) Aparecen las sublíneas asociados a la linea de " + LineaType.rebajas + "(<b>" + tagSublineas + "</b>)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
             String listSublineas = "";
             for (Linea linea : pais.getShoponline().getLineasToTest(app)) {
                 if (SecMenuLateralMobil.isSublineaRebajasAssociated(linea.getType())) {
                     listSublineas+=(linea.getType() + " ");
-                    if (!SecMenuLateralMobil.isSublineaRebajasVisible(linea.getType(), dFTest.driver))
-                        fmwkTest.addValidation(1, State.Warn, listVals);      
+                    if (!SecMenuLateralMobil.isSublineaRebajasVisible(linea.getType(), dFTest.driver)) {
+                        listVals.add(1, State.Warn);      
+                    }
                 }
             }
             
             descripValidac.replace(tagSublineas, listSublineas);
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
      
     /**
@@ -283,19 +283,19 @@ public class SecMenuLateralMobilStpV {
         String descripValidac =
             "1) Está seleccionada la línea <b>" + lineaNinosType + "</b><br>" + 
             "2) Es visible el bloque con las sublíneas de " + lineaNinosType;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!SecMenuLateralMobil.isSelectedLinea(lineaNinosType, appE, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!SecMenuLateralMobil.isVisibleBlockSublineasNinos(lineaNinosType, appE, dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);            
+            if (!SecMenuLateralMobil.isSelectedLinea(lineaNinosType, appE, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!SecMenuLateralMobil.isVisibleBlockSublineasNinos(lineaNinosType, appE, dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
     /**
@@ -305,19 +305,19 @@ public class SecMenuLateralMobilStpV {
         String descripValidac = 
             "1) Está seleccionada la línea <b>" + lineaType + "</b><br>" +
             "2) Son visibles links de Menú de 2o nivel";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!SecMenuLateralMobil.isSelectedLinea(lineaType, appE, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!SecMenuLateralMobil.isMenus2onLevelDisplayed(sublineaType, appE, dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (!SecMenuLateralMobil.isSelectedLinea(lineaType, appE, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!SecMenuLateralMobil.isMenus2onLevelDisplayed(sublineaType, appE, dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }    
     
     public static void stepClickMenu1rstLevel(Menu1rstLevel menu1rstLevel, Pais pais, AppEcom app, DataFmwkTest dFTest) 
@@ -344,20 +344,20 @@ public class SecMenuLateralMobilStpV {
     	PageGaleria pageGaleria = PageGaleria.getInstance(Channel.movil_web, app, dFTest.driver);
         String descripValidac = 
             "1) Aparecen artículos, banners, frames, maps o Sliders";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (!pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, 3/*seconds*/) &&
                 !PageLanding.hayIframes(dFTest.driver) &&
                 !PageLanding.hayMaps(dFTest.driver) &&
                 !PageLanding.haySliders(dFTest.driver) &&
-                !ManagerBannersScreen.existBanners(dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
+                !ManagerBannersScreen.existBanners(dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+       finally { listVals.checkAndStoreValidations(descripValidac); }
         
        //Validaciones estándar. 
        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, datosStep, dFTest);

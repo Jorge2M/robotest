@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -53,19 +50,19 @@ public class SecMetodoEnvioDesktopStpV {
         String descripValidac = 
             "1) Desaparece la capa de Loading  (lo esperamos hasta " + maxSecondsToWait + " segundos) <br>" +
             "2) Queda seleccionado el bloque correspondiete a <b>" + tipoTransporte + "</b>";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageCheckoutWrapper.waitUntilNoDivLoading(dFTest.driver, maxSecondsToWait)) 
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!SecMetodoEnvioDesktop.isBlockSelectedUntil(tipoTransporte, maxSecondsToWait, dFTest.driver)) 
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (!PageCheckoutWrapper.waitUntilNoDivLoading(dFTest.driver, maxSecondsToWait)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!SecMetodoEnvioDesktop.isBlockSelectedUntil(tipoTransporte, maxSecondsToWait, dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep selectFranjaHorariaUrgente(int posicion, DataFmwkTest dFTest) {

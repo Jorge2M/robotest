@@ -1,12 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.registro;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -20,24 +18,25 @@ public class PageRegistroDirecStpV {
     
     public static void isPageFromPais(Pais pais, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones.
+    	int maxSecondsWait = 3;
         String descripValidac = 
-            "1) Aparece la página de introducción de datos de la dirección (la esperamos un máximo de 3 segundos)<br>" +
+            "1) Aparece la página de introducción de datos de la dirección (la esperamos un máximo de " + maxSecondsWait + " segundos)<br>" +
             "2) Si existe el desplebagle de países, en él aparece el país con código " + pais.getCodigo_pais() + " (" + pais.getNombre_pais() + ")";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageRegistroAddressData.isPageUntil(dFTest.driver, 3/*secondsMaxToWait*/))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
+            if (!PageRegistroAddressData.isPageUntil(dFTest.driver, maxSecondsWait)) {
+                listVals.add(1, State.Warn);
+            }
             if (PageRegistroAddressData.existsDesplegablePaises(dFTest.driver)) {
-                if (!PageRegistroAddressData.isOptionPaisSelected(dFTest.driver, pais.getCodigo_pais()))
-                    fmwkTest.addValidation(2, State.Warn, listVals);
+                if (!PageRegistroAddressData.isOptionPaisSelected(dFTest.driver, pais.getCodigo_pais())) {
+                    listVals.add(2, State.Warn);
+                }
             }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep sendDataAccordingCountryToInputs(HashMap<String,String> dataRegistro, Pais pais, DataFmwkTest dFTest) throws Exception {
@@ -80,16 +79,16 @@ public class PageRegistroDirecStpV {
         //Validaciones
         String descripValidac = 
             "1) No aparece ningún mensaje de error asociado a los campos de entrada"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (PageRegistroDirec.getNumberMsgInputInvalid(dFTest.driver) > 0)
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (PageRegistroDirec.getNumberMsgInputInvalid(dFTest.driver) > 0) {
+                listVals.add(1, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep clickFinalizarButton(DataFmwkTest dFTest) 

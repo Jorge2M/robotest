@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.sepa;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -25,43 +22,45 @@ public class PageSepa1rstStpV {
             "4) Figura el campo de introducción del titular<br>" +
             "5) Figura el campo de introducción del la cuenta<br>" +
             "6) Figura un botón de pago";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageSepa1rst.isPresentIconoSepa(channel, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver))
-                if (channel==Channel.movil_web)
-                    fmwkTest.addValidation(2, State.Info_NoHardcopy, listVals);
-                else
-                    fmwkTest.addValidation(2, State.Warn, listVals);            
-            //3)
-            if (!PageSepa1rst.isPresentCabeceraStep(dFTest.driver)) 
-                fmwkTest.addValidation(3, State.Warn, listVals);
-            //4)
-            if (channel==Channel.desktop) {
-                if (!PageSepa1rst.isPresentInputTitular(dFTest.driver)) 
-                    fmwkTest.addValidation(4, State.Warn, listVals);            
+            if (!PageSepa1rst.isPresentIconoSepa(channel, dFTest.driver)) {
+                listVals.add(1, State.Warn);
             }
-            //5)
-            if (channel==Channel.desktop) {
-                if (!PageSepa1rst.isPresentInputCuenta(dFTest.driver)) 
-                    fmwkTest.addValidation(5, State.Warn, listVals);
+            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver)) {
+                if (channel==Channel.movil_web) {
+                    listVals.add(2, State.Info_NoHardcopy);
+                }
+                else {
+                    listVals.add(2, State.Warn);
+                }
             }
-            //6)
+            if (!PageSepa1rst.isPresentCabeceraStep(dFTest.driver)) {
+                listVals.add(3, State.Warn);
+            }
             if (channel==Channel.desktop) {
-                if (!PageSepa1rst.isPresentButtonPagoDesktop(dFTest.driver)) 
-                    fmwkTest.addValidation(6, State.Defect, listVals); 
+                if (!PageSepa1rst.isPresentInputTitular(dFTest.driver)) {
+                    listVals.add(4, State.Warn);            
+                }
+            }
+            if (channel==Channel.desktop) {
+                if (!PageSepa1rst.isPresentInputCuenta(dFTest.driver)) {
+                    listVals.add(5, State.Warn);
+                }
+            }
+            if (channel==Channel.desktop) {
+                if (!PageSepa1rst.isPresentButtonPagoDesktop(dFTest.driver)) {
+                    listVals.add(6, State.Defect); 
+                }
             }
                                                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         catch (Exception e) {
             //
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep inputDataAndclickPay(String iban, String titular, String importeTotal, String codPais, Channel channel, DataFmwkTest dFTest) throws Exception {

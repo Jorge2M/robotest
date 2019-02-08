@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -55,27 +52,28 @@ public class PageReembolsosStpV {
         String descripValidac = 
             "1) Aparece la página de reembolsos<br>" + 
             validacion2;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageReembolsos.isPage(dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
+            if (!PageReembolsos.isPage(dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
             if (paisConSaldoCta) {
                 if (!PageReembolsos.isVisibleTransferenciaSectionUntil(maxSecondsToWait, dFTest.driver) ||
-                    !PageReembolsos.isVisibleStorecreditSection(dFTest.driver)) 
-                    fmwkTest.addValidation(2, State.Defect, listVals);
+                    !PageReembolsos.isVisibleStorecreditSection(dFTest.driver)) {
+                    listVals.add(2, State.Defect);
+                }
             }
             else {
                 if (!PageReembolsos.isVisibleTransferenciaSectionUntil(maxSecondsToWait, dFTest.driver) ||
-                    PageReembolsos.isVisibleStorecreditSection(dFTest.driver)) 
-                    fmwkTest.addValidation(2, State.Defect, listVals);
+                    PageReembolsos.isVisibleStorecreditSection(dFTest.driver)) {
+                    listVals.add(2, State.Defect);
+                }
             }
                     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -91,17 +89,17 @@ public class PageReembolsosStpV {
         
         //Validations
         String descripValidac = "1) Aparece el saldo en cuenta que esperamos <b>" + saldoCtaEsperado + "</b>"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1) Capturamos el importe de "Saldo en Cuenta"
             float saldoCtaPage = PageReembolsos.getImporteStoreCredit(dFTest.driver);
-            if (saldoCtaEsperado!=saldoCtaPage)
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (saldoCtaEsperado!=saldoCtaPage) {
+                listVals.add(1, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -136,16 +134,16 @@ public class PageReembolsosStpV {
         //Validations
         String descripValidac = 
             "1) Los campos de input Banco, Titular e IBAN se hacen visibles"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageReembolsos.isVisibleInputsTransf(dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!PageReembolsos.isVisibleInputsTransf(dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -174,21 +172,21 @@ public class PageReembolsosStpV {
         String descripValidac = 
             "1) Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) Aparece seleccionado el radiobutton de \"Transferencia bancaria\"";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (!PageReembolsos.isVisibleTextBancoUntil(maxSecondsToWait, dFTest.driver) ||
                 !PageReembolsos.isVisibleTextTitular(dFTest.driver) ||
-                !PageReembolsos.isVisibleTextIBAN(dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
-            if (!PageReembolsos.isCheckedRadio(TypeReembolso.Transferencia, dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);
+                !PageReembolsos.isVisibleTextIBAN(dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            if (!PageReembolsos.isCheckedRadio(TypeReembolso.Transferencia, dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -215,19 +213,19 @@ public class PageReembolsosStpV {
         String descripValidac = 
             "1) Aparece seleccionado el radiobutton de \"Store Credit\"<br>" + 
             "2) Aparece un saldo >= 0";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
-           if (!PageReembolsos.isCheckedRadio(TypeReembolso.StoreCredit, dFTest.driver))
-               fmwkTest.addValidation(1,State.Warn, listVals);
-           //2)
-           if (PageReembolsos.getImporteStoreCredit(dFTest.driver) < 0)
-               fmwkTest.addValidation(2, State.Defect, listVals);
+           if (!PageReembolsos.isCheckedRadio(TypeReembolso.StoreCredit, dFTest.driver)) {
+               listVals.add(1,State.Warn);
+           }
+           if (PageReembolsos.getImporteStoreCredit(dFTest.driver) < 0) {
+               listVals.add(2, State.Defect);
+           }
            
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -252,16 +250,16 @@ public class PageReembolsosStpV {
             int maxSecondsToWait = 2;
             String descripValidac = 
                 "1) Desaparece el botón \"Save\" de Store Credit (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+            datosStep.setStateIniValidations();
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
-               List<SimpleValidation> listVals = new ArrayList<>();
-               //1)
-               if (PageReembolsos.isVisibleSaveButtonStoreCreditUntil(maxSecondsToWait, dFTest.driver))
-                   fmwkTest.addValidation(1,State.Warn, listVals);
+               if (PageReembolsos.isVisibleSaveButtonStoreCreditUntil(maxSecondsToWait, dFTest.driver)) {
+                   listVals.add(1,State.Warn);
+               }
                
-               datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+               datosStep.setListResultValidations(listVals);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
         }
     }
 }

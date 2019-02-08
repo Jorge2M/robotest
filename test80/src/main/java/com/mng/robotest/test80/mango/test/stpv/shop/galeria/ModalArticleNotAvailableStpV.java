@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.galeria;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.ModalArticleNotAvailable;
@@ -19,18 +16,17 @@ public class ModalArticleNotAvailableStpV {
         int maxSecondsToWait = 1;
         String descripValidac = 
             "1) El modal de \"Avísame\" por artículo no disponible está en estado " + stateModal + " (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();          
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (!ModalArticleNotAvailable.inStateUntil(stateModal, maxSecondsToWait, dFTest.driver)) {
-                fmwkTest.addValidation(1, State.Info, listVals);
+                listVals.add(1, State.Info);
                 isPresent = true;
             }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return isPresent;
     }

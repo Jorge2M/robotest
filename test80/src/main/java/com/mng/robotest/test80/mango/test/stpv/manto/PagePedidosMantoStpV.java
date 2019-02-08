@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -54,39 +54,38 @@ public class PagePedidosMantoStpV {
             "5) En la columna " + IdColumn.email.textoColumna + " aparece el email asociado: " + dataPedido.getEmailCheckout() + "<br>" +
             "6) En pantalla aparece el importe asociado: " +  dataPedido.getImporteTotalManto() + "<br>" +
             "7) En la columna " + IdColumn.tarjeta.textoColumna + " aparece el tipo de tarjeta: " + dataPedido.getCodtipopago();
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PagePedidos.isInvisibleCapaLoadingUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
+            if (!PagePedidos.isInvisibleCapaLoadingUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
             if (!PagePedidos.isPresentDataInPedido(IdColumn.idpedido, dataPedido.getCodigoPedidoManto(), TypeDetalle.pedido, 0/*wait*/, dFTest.driver)) {
-                fmwkTest.addValidation(2, State.Warn, listVals);
+                listVals.add(2, State.Warn);
                 existsLinkPedido = false;
             }
-            //3)
-            if (PagePedidos.getNumLineas(dFTest.driver)!=1)
-                fmwkTest.addValidation(3, State.Warn, listVals);            
-            //4)
-            if (appE!=AppEcom.outlet) { 
-                if (!PagePedidos.isPresentDataInPedido(IdColumn.tpv, dataPedido.getPago().getTpv().getId(), TypeDetalle.pedido, 0/*wait*/, dFTest.driver))            	
-                    fmwkTest.addValidation(4, State.Warn, listVals);
+            if (PagePedidos.getNumLineas(dFTest.driver)!=1) {
+                listVals.add(3, State.Warn);            
             }
-            //5)
-            if (!PagePedidos.isPresentDataInPedido(IdColumn.email, dataPedido.getEmailCheckout(), TypeDetalle.pedido, 0/*wait*/, dFTest.driver))
-                fmwkTest.addValidation(5, State.Warn, listVals);
-            //6)
+            if (appE!=AppEcom.outlet) { 
+                if (!PagePedidos.isPresentDataInPedido(IdColumn.tpv, dataPedido.getPago().getTpv().getId(), TypeDetalle.pedido, 0/*wait*/, dFTest.driver)) {           	
+                    listVals.add(4, State.Warn);
+                }
+            }
+            if (!PagePedidos.isPresentDataInPedido(IdColumn.email, dataPedido.getEmailCheckout(), TypeDetalle.pedido, 0/*wait*/, dFTest.driver)) {
+                listVals.add(5, State.Warn);
+            }
             String xpathCeldaImporte = PagePedidos.getXPathCeldaLineaPedido(IdColumn.total, TypeDetalle.pedido, dFTest.driver);
-            if (!ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), xpathCeldaImporte, dFTest.driver))
-                fmwkTest.addValidation(6, State.Warn, listVals);
-            //7)
-            if (!PagePedidos.isPresentDataInPedido(IdColumn.tarjeta, dataPedido.getCodtipopago(), TypeDetalle.pedido, 0/*wait*/, dFTest.driver))
-                fmwkTest.addValidation(7, State.Warn, listVals);     
+            if (!ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), xpathCeldaImporte, dFTest.driver)) {
+                listVals.add(6, State.Warn);
+            }
+            if (!PagePedidos.isPresentDataInPedido(IdColumn.tarjeta, dataPedido.getCodtipopago(), TypeDetalle.pedido, 0/*wait*/, dFTest.driver)) {
+                listVals.add(7, State.Warn);
+            }
                                        
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals); 
+            datosStep.setListResultValidations(listVals); 
         }  
-        finally {fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return existsLinkPedido;
     }
@@ -131,19 +130,16 @@ public class PagePedidosMantoStpV {
 		}
 
 		String descripValidac = "1) Tenemos código de pedido " + dPedidoPrueba.getCodpedido();
-		datosStep.setExcepExists(true);
-		datosStep.setResultSteps(State.Nok);
+		datosStep.setStateIniValidations();
+		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
-			List<SimpleValidation> listVals = new ArrayList<>();
-			// 1)
-			if (dPedidoPrueba.getCodpedido().equals(""))
-				fmwkTest.addValidation(1, State.Defect, listVals);
+			if (dPedidoPrueba.getCodpedido().equals("")) {
+				listVals.add(1, State.Defect);
+			}
 
-			datosStep.setExcepExists(false);
-			datosStep.setResultSteps(listVals);
-		} finally {
-			fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest);
-		}
+			datosStep.setListResultValidations(listVals);
+		} 
+		finally { listVals.checkAndStoreValidations(descripValidac); }
 
 		return dPedidoPrueba;
 	}
@@ -181,19 +177,16 @@ public class PagePedidosMantoStpV {
 		}
 
 		String descripValidac = "1) El pedido tiene las referencias " + referencias.toString();
-		datosStep.setExcepExists(true);
-		datosStep.setResultSteps(State.Nok);
+		datosStep.setStateIniValidations();
+		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
-			List<SimpleValidation> listVals = new ArrayList<>();
-			// 1)
-			if (dPedidoPrueba.getDataBag().getListArticulos().isEmpty())
-				fmwkTest.addValidation(1, State.Defect, listVals);
+			if (dPedidoPrueba.getDataBag().getListArticulos().isEmpty()) {
+				listVals.add(1, State.Defect);
+			}
 
-			datosStep.setExcepExists(false);
-			datosStep.setResultSteps(listVals);
-		} finally {
-			fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest);
-		}
+			datosStep.setListResultValidations(listVals);
+		} 
+		finally { listVals.checkAndStoreValidations(descripValidac); }
 
 		return dPedidoPrueba;
 	}
@@ -228,22 +221,19 @@ public class PagePedidosMantoStpV {
 
 		String descripValidac = "1) Tenemos el DNI del cliente " + dPedidoPrueba.getPago().getDni() + "<br>"
 				+ "2) Tenemos el Email del cliente " + dPedidoPrueba.getPago().getUseremail();
-		datosStep.setExcepExists(true);
-		datosStep.setResultSteps(State.Nok);
+		datosStep.setStateIniValidations();
+		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
-			List<SimpleValidation> listVals = new ArrayList<>();
-			// 1)
-			if (dPedidoPrueba.getPago().getDni().equals(""))
-				fmwkTest.addValidation(1, State.Defect, listVals);
-			// 2)
-			if (dPedidoPrueba.getPago().getUseremail().equals(""))
-				fmwkTest.addValidation(2, State.Defect, listVals);
+			if (dPedidoPrueba.getPago().getDni().equals("")) {
+				listVals.add(1, State.Defect);
+			}
+			if (dPedidoPrueba.getPago().getUseremail().equals("")) {
+				listVals.add(2, State.Defect);
+			}
 
-			datosStep.setExcepExists(false);
-			datosStep.setResultSteps(listVals);
-		} finally {
-			fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest);
-		}
+			datosStep.setListResultValidations(listVals);
+		} 
+		finally { listVals.checkAndStoreValidations(descripValidac); }
 
 		return dPedidoPrueba;
 	}
@@ -273,109 +263,17 @@ public class PagePedidosMantoStpV {
 		}
 
 		String descripValidac = "1) Tenemos la tienda física " + dPedidoPrueba.getDataDeliveryPoint().getCodigo();
-		datosStep.setExcepExists(true);
-		datosStep.setResultSteps(State.Nok);
+		datosStep.setStateIniValidations();
+		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
-			List<SimpleValidation> listVals = new ArrayList<>();
-			// 1)
-			if (dPedidoPrueba.getDataDeliveryPoint().getCodigo().equals(""))
-				fmwkTest.addValidation(1, State.Defect, listVals);
+			if (dPedidoPrueba.getDataDeliveryPoint().getCodigo().equals("")) {
+				listVals.add(1, State.Defect);
+			}
 
-			datosStep.setExcepExists(false);
-			datosStep.setResultSteps(listVals);
-		} finally {
-			fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest);
-		}
+			datosStep.setListResultValidations(listVals);
+		} 
+		finally { listVals.checkAndStoreValidations(descripValidac); }
 
 		return dPedidoPrueba;
 	}
-	
-	
-	
-	
-	/*
-	public static DataPedido getDataPedidoUsuarioRegistrado(DataPedido dPedidoPrueba, DataFmwkTest dFTest) throws Exception {
-		DataBag dBagPrueba = new DataBag();
-		List <String> referencias = new ArrayList<>();
-		Articulo articulo;
-		int posicionPedidoActual = 6;
-		int posicionMaxPaginaPedidos = 105;
-		
-		datosStep datosStep = new datosStep       (
-		        "Buscamos y clickamos un pedido con id registro para obtener información del pedido", 
-		        "Acabamos encontrando un pedido válido (que tenga informado el DNI)");
-		    datosStep.setGrab_ErrorPageIfProblem(false);
-		    try {
-		    	do{
-		    		posicionPedidoActual++;
-			    	posicionPedidoActual = PagePedidos.getPosicionPedidoUsuarioRegistrado(posicionPedidoActual, dFTest.driver);
-	
-			    	PagePedidos.clickLinkPedidoInLineas(dFTest.driver, PagePedidos.getCodigoPedidoUsuarioRegistrado(posicionPedidoActual, dFTest.driver));
-			    	
-			    	PageDetallePedido.clickLinkDetallesCliente(dFTest.driver);
-			    	
-			    	dPedidoPrueba.getPago().setDni(PageDetalleCliente.getUserDniText(dFTest.driver));
-			    	
-			    	PageDetalleCliente.clickLinkVolverPedidos(dFTest.driver);
-			    	
-			    	if (posicionPedidoActual == posicionMaxPaginaPedidos){
-			    		posicionPedidoActual = 6;
-			    		PagePedidos.clickPaginaSiguientePedidos(dFTest.driver);
-			    	}
-		    	}while (dPedidoPrueba.getPago().getDni().equals(""));
-		    	
-		    	
-		    	dPedidoPrueba.setCodpedido(PagePedidos.getCodigoPedidoUsuarioRegistrado(posicionPedidoActual, dFTest.driver));
-		    	PagePedidos.clickLinkPedidoInLineas(dFTest.driver, PagePedidos.getCodigoPedidoUsuarioRegistrado(posicionPedidoActual, dFTest.driver));
-		    	
-		    	referencias = PageDetallePedido.getReferenciasArticulosDetallePedido(dFTest.driver);
-		    	
-		    	for (String referencia : referencias){
-		    		articulo = new Articulo();
-		    		articulo.setReferencia(referencia);
-		    		dBagPrueba.addArticulo(articulo);
-		    	}
-		    	dPedidoPrueba.setDataBag(dBagPrueba);
-		    	
-		    	PageDetallePedido.clickLinkDetallesCliente(dFTest.driver);
-		    	
-		    	dPedidoPrueba.getPago().setDni(PageDetalleCliente.getUserDniText(dFTest.driver));
-		    	dPedidoPrueba.getPago().setUseremail(PageDetalleCliente.getUserEmailText(dFTest.driver));
-		            
-		    	PageDetalleCliente.clickLinkVolverPedidos(dFTest.driver);
-		    	
-		        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		    }
-		    finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
-			
-		    String descripValidac = 
-		        "1) El código de pedido no está vacío (estamos obteniendo " + dPedidoPrueba.getCodpedido() + ")<br>" +
-		        "2) La refrerencia del pedido no está vacía (El pedido tiene las referencias " + referencias.toString() + ")<br>" +
-		        "3) ...Tenemos el DNI del cliente " + dPedidoPrueba.getPago().getDni() + "<br>" +
-		        "3) ...Tenemos el Email del cliente " + dPedidoPrueba.getPago().getUseremail();
-	            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
-	            try {
-	                List<SimpleValidation> listVals = new ArrayList<>();
-	                //1)
-	                if (dPedidoPrueba.getCodpedido().equals(""))
-	                    fmwkTest.addValidation(1, State.Defect, listVals);
-	                //2) 
-	                if (dPedidoPrueba.getDataBag().getListArticulos().isEmpty())
-	                    fmwkTest.addValidation(2, State.Defect, listVals);            
-	                //3)
-	                if (dPedidoPrueba.getPago().getDni().equals(""))
-	                    fmwkTest.addValidation(3, State.Defect, listVals);
-	                //4)
-	                if (dPedidoPrueba.getPago().getUseremail().equals(""))
-	                    fmwkTest.addValidation(4, State.Defect, listVals);
-	    
-	                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
-	            } 
-	            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
-		
-		return dPedidoPrueba;
-	}
-	*/
-	
-	
 }

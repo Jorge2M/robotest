@@ -1,12 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.registro;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
@@ -52,27 +50,28 @@ public class PageRegistroSegundaStpV {
 
         dataRegistro.put("numlineas", String.valueOf(numLineas));
         dataRegistro.put("lineascomaseparated", lineasComaSeparated);
+        int maxSecondsWait = 5;
         String descripValidac =
-            "1) Aparece la 2ª página de introducción de datos (la esperamos hasta 5 segs)<br>" +                
+            "1) Aparece la 2ª página de introducción de datos (la esperamos hasta " + maxSecondsWait + " segs)<br>" +                
             "2) Se pueden seleccionar las colecciones " + lineasComaSeparated + "<br>" +
             "3) Aparece un número de colecciones coincidente con el número de líneas (" + numLineas + ")";                          
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageRegistroSegunda.isPageUntil(dFTest.driver, 5/*maxSecondsToWait*/))
-                fmwkTest.addValidation(1, State.Warn, listVals);         
-            //2)
-            if (!PageRegistroSegunda.isPresentInputForLineas(dFTest.driver, lineasComaSeparated))
-                fmwkTest.addValidation(2, State.Info_NoHardcopy, listVals);
-            //3)
+            if (!PageRegistroSegunda.isPageUntil(dFTest.driver, maxSecondsWait)) {
+                listVals.add(1, State.Warn);         
+            }
+            if (!PageRegistroSegunda.isPresentInputForLineas(dFTest.driver, lineasComaSeparated)) {
+                listVals.add(2, State.Info_NoHardcopy);
+            }
             int numColecciones = PageRegistroSegunda.getNumColecciones(dFTest.driver);
-            if (numColecciones!=numLineas)
-                fmwkTest.addValidation(3, State.Info_NoHardcopy, listVals);    
+            if (numColecciones!=numLineas) {
+                listVals.add(3, State.Info_NoHardcopy);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     /**

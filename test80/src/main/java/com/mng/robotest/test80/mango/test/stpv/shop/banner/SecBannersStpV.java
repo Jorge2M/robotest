@@ -2,14 +2,12 @@ package com.mng.robotest.test80.mango.test.stpv.shop.banner;
 
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.appshop.campanas.CampanasData;
@@ -70,15 +68,15 @@ public class SecBannersStpV {
             "1) Los datos de la campaña son correctos<br>" +
             	getReportCompareDataInCuteHtml(dataCampana, dataBanner);
         datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-//            if (getReportCompareDataCampanaTableHTML(dataCampana, dataBanner))
-//                fmwkTest.addValidation(1, State.Defect, listVals);
+//            if (getReportCompareDataCampanaTableHTML(dataCampana, dataBanner)) {
+//                listVals.add(1, State.Defect);
+//        	  }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }            
+        finally { listVals.checkAndStoreValidations(descripValidac); }            
     }
     
     public DatosStep seleccionarBanner(int posBanner, boolean validaciones, AppEcom app, Channel channel, DataFmwkTest dFTest) 
@@ -135,31 +133,32 @@ public class SecBannersStpV {
             "3) No hay imágenes cortadas<br>" +
             "4) El dominio de la página se corresponde con el de la página padre:" + uriPagPadre.getHost();
         datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!AllPages.validateUrlNotMatchUntil(urlPagPadre, maxSecondsWait1, dFTest.driver))
-                 fmwkTest.addValidation(1, State.Defect, listVals) ;
-            //2)
-            if (!AllPages.validateElementsNotEqualsUntil(elementosPagPadre, marginElements, maxSecondsWait2, dFTest.driver))
-                fmwkTest.addValidation(2,State.Warn, listVals); 
+            if (!AllPages.validateUrlNotMatchUntil(urlPagPadre, maxSecondsWait1, dFTest.driver)) {
+                 listVals.add(1, State.Defect);
+            }
+            if (!AllPages.validateElementsNotEqualsUntil(elementosPagPadre, marginElements, maxSecondsWait2, dFTest.driver)) {
+                listVals.add(2,State.Warn); 
+            }
             //3)
             ResultadoErrores resultadoImgs = WebDriverMngUtils.imagesBroken(dFTest.driver, Channel.desktop, 1/* maxErrors */, dFTest.ctx);
             if (resultadoImgs.getResultado() != ResultadoErrores.Resultado.OK) { // Si hay error lo pintamos en la descripción de la validación
                 descripValidac += resultadoImgs.getlistaLogError().toString();
-                if (resultadoImgs.getResultado() != ResultadoErrores.Resultado.MAX_ERRORES)
-                    fmwkTest.addValidation(3, State.Defect, listVals);
+                if (resultadoImgs.getResultado() != ResultadoErrores.Resultado.MAX_ERRORES) {
+                    listVals.add(3, State.Defect);
+                }
             }
             //4)
             String urlPagActual = dFTest.driver.getCurrentUrl();
             URI uriPagActual = new URI(urlPagActual);
             if (uriPagPadre.getHost().compareTo(uriPagActual.getHost()) != 0)
-                fmwkTest.addValidation(4, State.Warn, listVals);
+                listVals.add(4, State.Warn);
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
             
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
     public void validacionesBannerEstandar(AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
@@ -167,19 +166,19 @@ public class SecBannersStpV {
         String descripValidac = 
             "1) Aparece una página con secciones, galería, banners, bloque de contenido con imágenes o página acceso";
         datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (!PageLanding.haySecc_Art_Banners(app, dFTest.driver)) {
                 boolean contenidoConImgs = PageLanding.hayImgsEnContenido(dFTest.driver);
-                if (!contenidoConImgs)
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                if (!contenidoConImgs) {
+                    listVals.add(1, State.Warn);
+                }
             }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
             
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
 
@@ -190,19 +189,19 @@ public class SecBannersStpV {
     public void validaBannEnContenido(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) El bloque de contenido (homeContent o bannerHome) existe y tiene >= 1 banner o >=1 map o >=1 items-edit";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            
             boolean existBanners = managerBannersScreen.existBanners();
             boolean existsMaps = PageLanding.hayMaps(dFTest.driver);
             boolean existsEditItems = PageLanding.hayItemsEdits(dFTest.driver);
-            if (!(existBanners || existsMaps || existsEditItems))
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (!(existBanners || existsMaps || existsEditItems)) {
+                listVals.add(1, State.Warn);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     private static String getReportCompareDataInCuteHtml(DataCampana dataCampana, DataBanner dataBanner) {

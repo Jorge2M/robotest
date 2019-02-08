@@ -118,11 +118,7 @@ public class fmwkTest {
                 screnshootsMap.put(datosStep, new ArrayList<byte[]>());
                 htmlsourcesMap.put(datosStep, new ArrayList<byte[]>());
             }            
-            List<Integer> listVals = datosStep.getSimpleValidacsList();
-            if (listVals!=null)
-                stepMap.get(datosStep).add(descripValidac + "<br />" + listVals.toString());
-            else
-                stepMap.get(datosStep).add(descripValidac);
+
             if (datosStep.getExcepExists()) {
                 datosStep.setResultSteps(State.Nok);
                 stepMapStatus.get(datosStep).add(State.Nok);
@@ -279,11 +275,6 @@ public class fmwkTest {
 	    catch (Exception e) {
 	        pLogger.info("Problema grabando NetTraffic", e);
 	    }    
-    }
-
-    public static void addValidation(int id, State result, List<SimpleValidation> listValidations) {
-        SimpleValidation validation = new SimpleValidation(id, result);
-        listValidations.add(validation);
     }
 
     public static String getOutputDirectory(String userDir, String suiteName, String idExecutedSuite) {

@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.manto.pedido;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
@@ -19,16 +16,16 @@ public class PageGenerarPedidoStpV {
 	public static void validateIsPage(String idPedido, DatosStep datosStep, DataFmwkTest dFTest) {
 		String descripValidac = 
 			"1) Aparece la página de generación asociada al pedido <b>" + idPedido + "</b>";
-		datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+		datosStep.setStateIniValidations();
+		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
-			List<SimpleValidation> listVals = new ArrayList<>();
 			// 1)
 			if (!PageGenerarPedido.isPage(idPedido, dFTest.driver))
-				fmwkTest.addValidation(1, State.Defect, listVals);
+				listVals.add(1, State.Defect);
 
-			datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+			datosStep.setListResultValidations(listVals);
 		} 
-		finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+		finally { listVals.checkAndStoreValidations(descripValidac); }
 	}
 	
 	public static DatosStep changePedidoToEstado(EstadoPedido newState, DataFmwkTest dFTest) throws Exception {
@@ -47,16 +44,16 @@ public class PageGenerarPedidoStpV {
         //Validations
 		String descripValidac = 
 			"1) Aparece el mensaje de <b>Fichero creado correctamente</b>";
-		datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+		datosStep.setStateIniValidations();
+		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
-			List<SimpleValidation> listVals = new ArrayList<>();
 			// 1)
 			if (!PageGenerarPedido.isElementInState(MessageOkFicheroCreado, StateElem.Visible, dFTest.driver))
-				fmwkTest.addValidation(1, State.Defect, listVals);
+				listVals.add(1, State.Defect);
 
-			datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+			datosStep.setListResultValidations(listVals);
 		} 
-		finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+		finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
 	}

@@ -1,13 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageBolsas;
@@ -42,31 +38,31 @@ public class PageBolsasMantoStpV {
             "3) En la columna 8 Aparece el Tpv asociado: " + dataPedido.getPago().getTpv().getId() + "<br>";
         descripValidac+=
             "4) En la columna 7 aparece el email asociado: " + dataPedido.getEmailCheckout();
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);   
+        datosStep.setStateIniValidations(); 
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (!PageBolsas.presentLinkPedidoInBolsaUntil(dataPedido.getCodigoPedidoManto(), maxSecondsToWait, dFTest.driver)) {
-                fmwkTest.addValidation(1, State.Warn, listVals);
+                listVals.add(1, State.Warn);
                 existsLinkCodPed = false;
             }
-            else
+            else {
                 dataPedido.setIdCompra(PageBolsas.getIdCompra(dataPedido.getCodigoPedidoManto(), dFTest.driver));
-            //2)
-            if (PageBolsas.getNumLineas(dFTest.driver)!=1)
-                fmwkTest.addValidation(2, State.Warn, listVals);            
-            //3)
-            if (appE!=AppEcom.outlet) {
-                if (!PageBolsas.presentIdTpvInBolsa(dFTest.driver, dataPedido.getPago().getTpv().getId()))
-                    fmwkTest.addValidation(3, State.Warn, listVals);
             }
-            //4)
-            if (!PageBolsas.presentCorreoInBolsa(dFTest.driver, dataPedido.getEmailCheckout()))
-                fmwkTest.addValidation(4, State.Warn, listVals);   
+            if (PageBolsas.getNumLineas(dFTest.driver)!=1) {
+                listVals.add(2, State.Warn);
+            }
+            if (appE!=AppEcom.outlet) {
+                if (!PageBolsas.presentIdTpvInBolsa(dFTest.driver, dataPedido.getPago().getTpv().getId())) {
+                    listVals.add(3, State.Warn);
+                }
+            }
+            if (!PageBolsas.presentCorreoInBolsa(dFTest.driver, dataPedido.getEmailCheckout())) {
+                listVals.add(4, State.Warn);   
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }  
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return existsLinkCodPed;
     }

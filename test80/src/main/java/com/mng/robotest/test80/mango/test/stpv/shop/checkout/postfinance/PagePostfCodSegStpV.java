@@ -1,14 +1,11 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.postfinance;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance.PagePostfCodSeg;
@@ -48,32 +45,33 @@ public class PagePostfCodSegStpV {
             "2) En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>" +
             "3) Aparece un iframe en el que figura el botón Aceptar<br>" + 
             validacion4; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();                            
-            //1)
-            if (!PagePostfCodSeg.isPasarelaPostfinanceTest(dFTest.driver, nombrePago))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
-            if (!PagePostfCodSeg.isPresentButtonAceptar(dFTest.driver))
-                fmwkTest.addValidation(2, State.Defect, listVals);
-            //3)
+            if (!PagePostfCodSeg.isPasarelaPostfinanceTest(dFTest.driver, nombrePago)) {
+                listVals.add(1, State.Defect);
+            }
+            if (!PagePostfCodSeg.isPresentButtonAceptar(dFTest.driver)) {
+                listVals.add(2, State.Defect);
+            }
             boolean existsCode = PagePostfCodSeg.isPresentInputCodSeg(dFTest.driver);
             if (isPostfinanceEcard(nombrePago)) {
-                if (!existsCode)
-                    fmwkTest.addValidation(3, State.Defect, listVals);
+                if (!existsCode) {
+                    listVals.add(3, State.Defect);
+                }
             }
             else {
-                if (existsCode)
-                    fmwkTest.addValidation(3, State.Defect, listVals);
+                if (existsCode) {
+                    listVals.add(3, State.Defect);
+                }
             }
                                     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         catch (Exception e) {
             pLogger.warn("Problem in validations of Payment {} for country {}", nombrePago, codPais, e);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static void validateIsPagePro(String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) {
@@ -82,25 +80,25 @@ public class PagePostfCodSegStpV {
             "1) Aparece la pasarela de pagos de PostFinance E-Payment (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" + 
             "2) En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>" +
             "3) Aparece el botón Weiter (Aceptar)<br>";         
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();  
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PagePostfCodSeg.isPasarelaPostfinanceProUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
-            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);
-            //3)
-            if (!PagePostfCodSeg.isPresentButtonWeiter(dFTest.driver)) 
-                fmwkTest.addValidation(3, State.Defect, listVals);
+            if (!PagePostfCodSeg.isPasarelaPostfinanceProUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
+            if (!PagePostfCodSeg.isPresentButtonWeiter(dFTest.driver)) {
+                listVals.add(3, State.Defect);
+            }
                                     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         catch (Exception e) {
             pLogger.warn("Problem in PostFinance validations for country {}", codPais, e);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep inputCodigoSeguridadAndAccept(String codSeguridad, String nombreMetodo, DataFmwkTest dFTest) 

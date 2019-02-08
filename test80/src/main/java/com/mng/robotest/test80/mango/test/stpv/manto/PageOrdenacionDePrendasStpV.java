@@ -1,14 +1,11 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPage;
@@ -180,15 +177,16 @@ public class PageOrdenacionDePrendasStpV {
 	private static void validateOrdenacionFunction(DatosStep datosStep, DataFmwkTest dFTest, 
 												   int numValidac, String descripValidac, Orden prenda){
 		String descripValidacion = numValidac + ") " + descripValidac;
-		datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+		datosStep.setStateIniValidations();
+		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
-			List<SimpleValidation> listVals = new ArrayList<>();
-			
-			if (refPrenda == validationPrenda(dFTest, prenda))
-				fmwkTest.addValidation(numValidac, State.Defect, listVals);
+			if (refPrenda == validationPrenda(dFTest, prenda)) {
+				listVals.add(numValidac, State.Defect);
+			}
 
-			datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
-		} finally { fmwkTest.grabStepValidation(datosStep, descripValidacion, dFTest); }
+			datosStep.setListResultValidations(listVals);
+		} 
+		finally { listVals.checkAndStoreValidations(descripValidacion); }
 	}
 	
 	private static void mantoOrdenacionValidation(DatosStep datosStep, DataFmwkTest dFTest, int numValidac, String descripValidac,
@@ -203,14 +201,15 @@ public class PageOrdenacionDePrendasStpV {
 			descripValidacion+=" (esperamos hasta un máximo de " + maxSecondsWait + " segundos)";
 			
 		datosStep.setGrab_ErrorPageIfProblem(false);
-		datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+		datosStep.setStateIniValidations();
+		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
-			List<SimpleValidation> listVals = new ArrayList<>();
-			//1)
-			if (!SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Present, maxSecondsWait, dFTest.driver))
-				fmwkTest.addValidation(numValidac, State.Defect, listVals);
+			if (!SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Present, maxSecondsWait, dFTest.driver)) {
+				listVals.add(numValidac, State.Defect);
+			}
 
-			datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
-		} finally { fmwkTest.grabStepValidation(datosStep, descripValidacion, dFTest); }
+			datosStep.setListResultValidations(listVals);
+		} 
+		finally { listVals.checkAndStoreValidations(descripValidacion); }
 	}
 }

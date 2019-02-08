@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checqueregalo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
@@ -34,54 +31,54 @@ public class PageChequeRegaloInputDataStpV{
         	"1) Aparece el cuadro de introduccion de datos determinado (lo esperamos hasta " + maxSecondsWait + " segundos)<br>" +
             "2) Podemos validar la tarjeta<br>" +
             "3) Podemos volver atrás";
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
+            if(!PageChequeRegaloInputData.
+            	isElementInStateUntil(ConsultaSaldo.numeroTarjeta, StateElem.Present, maxSecondsWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            if(!PageChequeRegaloInputData.
+            	isElementInState(ConsultaSaldo.validar, StateElem.Present, dFTest.driver)) {
+                listVals.add(2, State.Defect);
+            }
+            if(!PageChequeRegaloInputData.
+            	isElementInState(ConsultaSaldo.volver, StateElem.Present, dFTest.driver)) {
+                listVals.add(3, State.Defect);
+            }
 
-            //1
-            if(!PageChequeRegaloInputData.
-            	isElementInStateUntil(ConsultaSaldo.numeroTarjeta, StateElem.Present, maxSecondsWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2
-            if(!PageChequeRegaloInputData.
-            	isElementInState(ConsultaSaldo.validar, StateElem.Present, dFTest.driver))
-                fmwkTest.addValidation(2, State.Defect, listVals);
-            //3
-            if(!PageChequeRegaloInputData.
-            	isElementInState(ConsultaSaldo.volver, StateElem.Present, dFTest.driver))
-                fmwkTest.addValidation(3, State.Defect, listVals);
-
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
 
         //Step
-        DatosStep datosStep2 = new DatosStep    (
+        datosStep = new DatosStep    (
         	"Introducimos en el campo de <b>tarjeta regalo</b> " + numTarjeta + " para consultar el saldo",
             "Se carga la página donde salen nuevos campos visibles como el de <b>cvv</b>");
         try {
             PageChequeRegaloInputData.introducirTarjetaConsultaSaldo(dFTest.driver, numTarjeta);
             PageChequeRegaloInputData.clickAndWait(ConsultaSaldo.validar, dFTest.driver);
 
-            datosStep2.setExcepExists(false); datosStep2.setResultSteps(State.Ok);
-        } finally { datosStep2.setStepNumber(fmwkTest.grabStep(datosStep2,dFTest)); }
+            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+        } 
+        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep,dFTest)); }
 
         //Validar
         maxSecondsWait = 2;
         descripValidac =
             "1) Es visible el campo de <b>cvv</b> (lo esperamos hasta " + maxSecondsWait + " segundos)</br>" +
             "2) Es visible el botón de <b>validar</b>";
+        listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1
-            if(!PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.validar, StateElem.Present, maxSecondsWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2
-            if(!PageChequeRegaloInputData.isElementInState(ConsultaSaldo.validar, StateElem.Present, dFTest.driver))
-                fmwkTest.addValidation(2, State.Defect, listVals);
+            if(!PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.validar, StateElem.Present, maxSecondsWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            if(!PageChequeRegaloInputData.isElementInState(ConsultaSaldo.validar, StateElem.Present, dFTest.driver)) {
+                listVals.add(2, State.Defect);
+            }
 
-            datosStep2.setExcepExists(false); datosStep2.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep2, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 
     /*TODO A la espera del cvv para completar esta parte*/
@@ -101,25 +98,22 @@ public class PageChequeRegaloInputDataStpV{
         //Validations
         int maxSecondsWait = 2;
         String descripValidac =
-                "1) Se pueden validar los datos (lo esperamos hasta " + maxSecondsWait + " segundos)</br>" +
-                "2) Se puede volver atrás</br>" +
-                "3) La tarjeta introducida no tiene saldo disponible";
+        	"1) Se pueden validar los datos (lo esperamos hasta " + maxSecondsWait + " segundos)</br>" +
+            "2) Se puede volver atrás</br>" +
+            "3) La tarjeta introducida no tiene saldo disponible";
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1
-            if(!PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.validar, StateElem.Present, maxSecondsWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-
-            //2
-            if(!PageChequeRegaloInputData.isElementInState(ConsultaSaldo.volver, StateElem.Present, dFTest.driver))
-                fmwkTest.addValidation(2, State.Defect, listVals);
-
-            //3
-            if (!PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.mensajeTarjetaSinSaldo, StateElem.Present, maxSecondsWait + 2, dFTest.driver)) {
-                fmwkTest.addValidation(3, State.Defect, listVals);
+            if(!PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.validar, StateElem.Present, maxSecondsWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
             }
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
-        } finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            if(!PageChequeRegaloInputData.isElementInState(ConsultaSaldo.volver, StateElem.Present, dFTest.driver)) {
+                listVals.add(2, State.Defect);
+            }
+            if (!PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.mensajeTarjetaSinSaldo, StateElem.Present, maxSecondsWait + 2, dFTest.driver)) {
+                listVals.add(3, State.Defect);
+            }
+            datosStep.setListResultValidations(listVals);
+        } finally { listVals.checkAndStoreValidations(descripValidac); }
 
         //Step
         datosStep = new DatosStep(
@@ -134,16 +128,17 @@ public class PageChequeRegaloInputDataStpV{
         //Validaciones
         maxSecondsWait = 2;
         descripValidac =
-                "1) Estamos en la página inicial (la esperamos hasta " + maxSecondsWait + " segundos)";
+        	"1) Estamos en la página inicial (la esperamos hasta " + maxSecondsWait + " segundos)";
+        listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1
             if (!PageChequeRegaloInputData.
-            	isElementInStateUntil(ElementCheque.paginaForm, StateElem.Present, maxSecondsWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            	isElementInStateUntil(ElementCheque.paginaForm, StateElem.Present, maxSecondsWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
-        } finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            datosStep.setListResultValidations(listVals);
+        } 
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 
     public static void seleccionarCantidades(DataFmwkTest dFTest) throws Exception {
@@ -164,20 +159,21 @@ public class PageChequeRegaloInputDataStpV{
             "1) Aparece el titulo de la página correctamente (lo esperamos hasta XX segundos)<br>" +
             "2) Es posible seleccionar cheques de " + importesStr + "<br>" +
             "3) Es visible el link de <b>Consultar saldo</b>";
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try{
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1
-            if (!PageChequeRegaloInputData.isElementInStateUntil(ElementCheque.paginaForm, StateElem.Present, maxSecondsWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2
-            if (!PageChequeRegaloInputData.isPresentInputImportes(dFTest.driver))
-                fmwkTest.addValidation(2, State.Defect, listVals);
-            //3
-            if (!PageChequeRegaloInputData.isElementInState(ConsultaSaldo.ir, StateElem.Present, dFTest.driver))
-                fmwkTest.addValidation(3, State.Defect, listVals);
+            if (!PageChequeRegaloInputData.isElementInStateUntil(ElementCheque.paginaForm, StateElem.Present, maxSecondsWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            if (!PageChequeRegaloInputData.isPresentInputImportes(dFTest.driver)) {
+                listVals.add(2, State.Defect);
+            }
+            if (!PageChequeRegaloInputData.isElementInState(ConsultaSaldo.ir, StateElem.Present, dFTest.driver)) {
+                listVals.add(3, State.Defect);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
-        } finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            datosStep.setListResultValidations(listVals);
+        } 
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 
     public static void clickQuieroComprarChequeRegalo(DataFmwkTest dFTest) throws Exception {
@@ -196,17 +192,17 @@ public class PageChequeRegaloInputDataStpV{
         int maxSecondsWait = 3;
         String descripValidac =
             "1) Aparece la capa para introducir los datos del cheque regalo (la esperamos hasta " + maxSecondsWait + " segundos)<br>";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (!PageChequeRegaloInputData.
-            	isElementInStateUntil(InputCheque.dataProof, StateElem.Present, maxSecondsWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            	isElementInStateUntil(InputCheque.dataProof, StateElem.Present, maxSecondsWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static void inputDataAndClickComprar(ChequeRegalo chequeRegalo, DataFmwkTest dFTest) throws Exception {

@@ -1,13 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.eps;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.eps.PageEpsSelBanco;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -20,29 +16,30 @@ public class PageEpsSelBancoStpV {
             "1) Figura el icono correspondiente al pago <b>EPS</b><br>" +
             "2) Aparece el importe de la compra: " + importeTotal + "<br>" +
             "3) Aparece el logo del banco seleccionado";
-
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();    
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageEpsSelBanco.isPresentIconoEps(dFTest.driver))
-                fmwkTest.addValidation(1,State.Warn, listVals);
-            //2)
-            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver))
-                if (channel==Channel.movil_web)
-                    fmwkTest.addValidation(2, State.Info, listVals);
-                else
-                    fmwkTest.addValidation(2, State.Warn, listVals);            
-            //3) 
-            if (!PageEpsSelBanco.isVisibleIconoBanco(dFTest.driver))
-                fmwkTest.addValidation(3, State.Warn, listVals);
+            if (!PageEpsSelBanco.isPresentIconoEps(dFTest.driver)) {
+                listVals.add(1,State.Warn);
+            }
+            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver)) {
+                if (channel==Channel.movil_web) {
+                    listVals.add(2, State.Info);
+                }
+                else {
+                    listVals.add(2, State.Warn);
+                }
+            }
+            if (!PageEpsSelBanco.isVisibleIconoBanco(dFTest.driver)) {
+                listVals.add(3, State.Warn);
+            }
                                                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         catch (Exception e) {
             //
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 }
     

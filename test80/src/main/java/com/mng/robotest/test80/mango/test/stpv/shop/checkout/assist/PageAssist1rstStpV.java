@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.assist;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -30,25 +27,25 @@ public class PageAssist1rstStpV {
         else
             descripValidac+=
             "4) Figuran 5 campos de input para los datos de la tarjeta: 4 para el número de tarjeta, 2 para la fecha de caducidad, 1 para el titular y 1 para el CVC";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
+        datosStep.setStateIniValidations();    
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageAssist1rst.isPresentLogoAssist(channel, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, pais.getCodigo_pais(), dFTest.driver)) 
-                fmwkTest.addValidation(2, State.Warn, listVals);
-            //3)
-            if (PageCheckoutWrapper.isPresentMetodosPago(pais, channel, dFTest.driver))
-                fmwkTest.addValidation(3, State.Defect, listVals);            
-            //4)
-            if (!PageAssist1rst.isPresentInputsForTrjData(channel, dFTest.driver))
-                fmwkTest.addValidation(4, State.Warn, listVals);
+            if (!PageAssist1rst.isPresentLogoAssist(channel, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, pais.getCodigo_pais(), dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
+            if (PageCheckoutWrapper.isPresentMetodosPago(pais, channel, dFTest.driver)) {
+                listVals.add(3, State.Defect);            
+            }
+            if (!PageAssist1rst.isPresentInputsForTrjData(channel, dFTest.driver)) {
+                listVals.add(4, State.Warn);
+            }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep inputDataTarjAndPay(Pago pago, Channel channel, DataFmwkTest dFTest) throws Exception {
@@ -69,19 +66,19 @@ public class PageAssist1rstStpV {
         String descripValidac = 
             "1) Desaparece la página con el botón de pago (lo esperamos hasta " + maxSecondsWait + " segundos)<br>" +
             "2) Aparece una página intermedia con un botón de submit"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
+        datosStep.setStateIniValidations(); 
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageAssist1rst.invisibilityBotonPagoUntil(maxSecondsWait, channel, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!PageAssistLast.isPage(dFTest.driver)) 
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (!PageAssist1rst.invisibilityBotonPagoUntil(maxSecondsWait, channel, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!PageAssistLast.isPage(dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }

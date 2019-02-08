@@ -148,6 +148,7 @@
        
   <build>
   	<plugins>
+  		<!-- Aspect Code
        	<plugin>
 			<groupId>org.codehaus.mojo</groupId>
 		    <artifactId>aspectj-maven-plugin</artifactId>
@@ -162,17 +163,18 @@
 		        <encoding>UTF-8 </encoding>
 		    </configuration>
 		    <executions>
-		    	<!-- Problema Eclipse Kepler Version -->
+		    	//Problema Eclipse Kepler Version
 		        <execution>
 		            <goals>
-		                <!-- use this goal to weave all your main classes -->
+		                //use this goal to weave all your main classes
 		                <goal>compile</goal>
-		                <!-- use this goal to weave all your test classes -->
-		                <!-- <goal>test-compile</goal> -->
+		                //use this goal to weave all your test classes
+		                //<goal>test-compile</goal>
 		            </goals>
 		        </execution>
 		    </executions>
 		</plugin> 	
+		-->
  
         <plugin>
         	<groupId>org.apache.maven.plugins</groupId>
@@ -241,10 +243,10 @@
 		
 	</plugins>
 	
-	<!-- </pluginManagement>-->
+	<!-- Aspect Code
 	<pluginManagement>
 		<plugins>
-			<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+			//This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself
 			<plugin>
 				<groupId>org.eclipse.m2e</groupId>
 				<artifactId>lifecycle-mapping</artifactId>
@@ -273,5 +275,6 @@
 			</plugin>
 		</plugins>
 	</pluginManagement>  
+	-->
   </build>
 </project>

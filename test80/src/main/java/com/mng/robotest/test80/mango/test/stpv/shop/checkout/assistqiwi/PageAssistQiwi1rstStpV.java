@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.assistqiwi;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -21,22 +18,22 @@ public class PageAssistQiwi1rstStpV {
             "1) Aparece el icono de Assist<br>" + 
             "2) En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>" +
             "3) Aparece el icono de Qiwi";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();    
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageAssistQiwi1rst.isPresentIconoAssist(dFTest.driver, channel))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);
-            //3)
-            if (!PageAssistQiwi1rst.isPresentIconPasarelas(dFTest.driver, channel)) 
-                fmwkTest.addValidation(3, State.Warn, listVals);
+            if (!PageAssistQiwi1rst.isPresentIconoAssist(dFTest.driver, channel)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
+            if (!PageAssistQiwi1rst.isPresentIconPasarelas(dFTest.driver, channel)) {
+                listVals.add(3, State.Warn);
+            }
                                     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }            
+        finally { listVals.checkAndStoreValidations(descripValidac); }            
     }
     
     public static DatosStep clickIconPasarelaQiwi(Channel channel, DataFmwkTest dFTest) throws Exception {

@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.otras;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.otras.PageGoogle;
@@ -28,23 +25,24 @@ public class GoogleStpV {
         }
         finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }           
     
-        //Validaciones.
+        //Validaciones
+        int maxSecondsWait = 5;
         String descripValidac = 
-            "1) El 1er link no-anuncio contiene \"MANGO\" (lo esperamos 5 segundos)<br>" +
+            "1) El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + maxSecondsWait + " segundos)<br>" +
             "2) El 1er link no-anuncion no contiene \"robots.txt\""; 
-        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Warn);            
+        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Warn); 
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageGoogle.validaFirstLinkContainsUntil("MANGO", 5/*maxSecondsToWait*/, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
-            if (PageGoogle.validaFirstLinkContainsUntil("robots.txt", 0/*maxSecondsToWait*/, dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (!PageGoogle.validaFirstLinkContainsUntil("MANGO", maxSecondsWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            if (PageGoogle.validaFirstLinkContainsUntil("robots.txt", 0, dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }  
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 
     public static void selectFirstLinkSinPublicidad(DataFmwkTest dFTest) throws Exception { 
@@ -63,24 +61,24 @@ public class GoogleStpV {
         String descripValidac = 
             "1) Aparece la página de <b>Landing</b> o <b>Prehome</b> (estamos en la URL " + dFTest.driver.getCurrentUrl() + ")<br>";// +
             //"2) Si estamos en la Landing: aparece visible el modal de selección del país o el de provincia";
-        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Warn);            
+        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Warn);  
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);         
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             boolean isPageLanding = PageLanding.isPage(dFTest.driver);
             boolean isPagePrehome = PagePrehome.isPage(dFTest.driver);
-            if (!isPageLanding && !isPagePrehome)
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!isPageLanding && !isPagePrehome) {
+                listVals.add(1, State.Defect);
+            }
             /*
-            //2)
             if (isPageLanding) {
                 if (!ModalCambioPais.isVisibleModalUntil(dFTest.driver, 0/) &&
-                    !ModalCambioPais.isVisibleModalSelecProvincia(dFTest.driver))
-                    fmwkTest.addValidation(2, State.Warn, listVals);                         
+                    !ModalCambioPais.isVisibleModalSelecProvincia(dFTest.driver)) {
+                    listVals.add(2, State.Warn);                         
+                }
             }*/
                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }  
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 }

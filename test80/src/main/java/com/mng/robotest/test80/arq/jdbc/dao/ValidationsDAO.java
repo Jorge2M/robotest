@@ -126,12 +126,14 @@ public class ValidationsDAO {
                 insert.setInt(5, datosStep.getStepNumber());
                 insert.setInt(6, validationNumber);
                 insert.setString(7, descripValidac);
-                if (datosStep.getExcepExists())
+                if (datosStep.getExcepExists()) {
                     insert.setInt(8, State.Nok.getIdNumerid());
-                else
+                }
+                else {
                     insert.setInt(8, datosStep.getResultSteps().getIdNumerid());
+                }
     
-                List<Integer> listVals = datosStep.getSimpleValidacsList();
+                List<Integer> listVals = datosStep.getListCodeNumStateValidations();
                 if (listVals!=null)
                     insert.setString(9, listVals.toString().replace("[","").replace("]",""));
                 else

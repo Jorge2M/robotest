@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions;
@@ -18,15 +15,16 @@ public class PageKoCardINIpay3MobilStpV extends ElementPageFunctions {
 	    //Validation
 	    String descripValidac =
 	        "1) Aparece la 3a página de INIpay";
+        datosStep.setStateIniValidations(); 
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	    try {
-	        List<SimpleValidation> listVals = new ArrayList<>();
-	        //1)
-	        if (!PageKoCardINIpay3Mobil.isPage(dFTest.driver))
-	        	fmwkTest.addValidation(1, State.Defect, listVals);
+	        if (!PageKoCardINIpay3Mobil.isPage(dFTest.driver)) {
+	        	listVals.add(1, State.Defect);
+	        }
 	        	
-	        datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+	        datosStep.setListResultValidations(listVals);
 	    } 
-	    finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+	    finally { listVals.checkAndStoreValidations(descripValidac); }
 	}
 	
 	public static DatosStep clickNextButton(DataFmwkTest dFTest) throws Exception {
@@ -34,7 +32,7 @@ public class PageKoCardINIpay3MobilStpV extends ElementPageFunctions {
 	    DatosStep datosStep = new DatosStep     (
 	        "Seleccionamos el <b>Next Button</b>",
 	        "Aparece la 4a y última página de INIpay con resultado OK");
-	    datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+	    datosStep.setStateIniValidations();
 	    try {
 	    	clickElementVisibleAndWaitLoad(BodyPageKoCardINIpay3.nextButton, 0, dFTest.driver);
 	        

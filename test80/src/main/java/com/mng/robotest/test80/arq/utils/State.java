@@ -35,6 +35,10 @@ public enum State  {
         return this.idNumeric;
     }
     
+    public boolean isMoreCriticThan(State state) {
+    	return (idNumeric > state.getIdNumerid());
+    }
+    
     public String getColorCss() {
         return this.colorCss;
     }

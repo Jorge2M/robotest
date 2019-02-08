@@ -1,14 +1,11 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.postfinance;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance.PagePostfSelectPago;
@@ -23,22 +20,22 @@ public class PagePosftSelectPagoStpV {
         String descripValidac = 
             "1) Aparece la 1a pantalla para la selección del método <b>" + nombrePago + "</b> (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" + 
             "2) En la página resultante figura el importe total de la compra (" + importeTotal + ")";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();           
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);   
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();                            
-            //1)
-            if (!PagePostfSelectPago.isPageUntil(nombrePago, maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
-            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver)) 
-                fmwkTest.addValidation(2, State.Warn, listVals); 
+            if (!PagePostfSelectPago.isPageUntil(nombrePago, maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver)) {
+                listVals.add(2, State.Warn); 
+            }
                                     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         catch (Exception e) {
             pLogger.warn("Problem in validations of Payment {} for country {}", nombrePago, codPais, e);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }		
+        finally { listVals.checkAndStoreValidations(descripValidac); }		
 	}
 	
 	public static void clickIconoPago(String nombrePago, String importeTotal, String codigoPais, DataFmwkTest dFTest) 

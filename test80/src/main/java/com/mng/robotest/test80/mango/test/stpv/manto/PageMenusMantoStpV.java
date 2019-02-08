@@ -1,13 +1,11 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
 import static org.testng.Assert.assertTrue;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageBolsas;
@@ -47,23 +45,22 @@ public class PageMenusMantoStpV {
         String descripValidac = 
         	"1) Aparece la página asociada al menú <b>" + subMenu + "</b><br>" +
         	"2) No aparece ninguna ventana de alerta";
-        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageMenusManto.validateIsPage(subMenu, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
+            if (!PageMenusManto.validateIsPage(subMenu, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
             if ("".compareTo(textAlert)!=0) {
-                    descripValidac+=
-                        "<br>" +
-                        "<b>Warning!</b> Ha aparecido una alerta con el mensaje: " + textAlert;
-            	fmwkTest.addValidation(2, State.Warn, listVals);
+            	descripValidac+=
+            		"<br>" +
+            		"<b>Warning!</b> Ha aparecido una alerta con el mensaje: " + textAlert;
+            	listVals.add(2, State.Warn);
             }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -80,15 +77,15 @@ public class PageMenusMantoStpV {
                 
             //Validaciones
             String descripValidac = "1) Aparece la página de Bolsas";
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);              
+            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);      
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
                 /*1*/assertTrue(PageBolsas.isPage(dFTest.driver));
                                           
                 datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
             }  
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
         }
-        
     }
     
     /**
@@ -103,14 +100,14 @@ public class PageMenusMantoStpV {
             //Validaciones
             String descripValidac = 
                 "1) Aparece la página de Pedidos";
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);              
+            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);      
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
-                //1)
                 assertTrue(PagePedidos.isPage(dFTest.driver));
                                           
                 datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
             }  
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
         }        
     }    
     

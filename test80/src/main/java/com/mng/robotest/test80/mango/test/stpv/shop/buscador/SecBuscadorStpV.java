@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.buscador;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -80,37 +77,38 @@ public class SecBuscadorStpV {
         if (categoriaExiste) { 
             //Validaciones
             String producSin1erCaracter = categoriaABuscar.substring(1, categoriaABuscar.length()-1).toLowerCase();
+            int maxSecondsWait = 3;
             String descripValidac = 
-                "1) Aparece como mínimo un producto de tipo " + producSin1erCaracter + " (lo esperamos 3 segundos)<br>" +
+                "1) Aparece como mínimo un producto de tipo " + producSin1erCaracter + " (lo esperamos hasta " + maxSecondsWait + " segundos)<br>" +
                 "2) Aparece la categoría en el resultado de la búsqueda";
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+            datosStep.setStateIniValidations();
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
-                if ("".compareTo(pageGaleria.getArticuloWithText(producSin1erCaracter, 3/*secondsWait*/))==0)
-                    fmwkTest.addValidation(1, State.Defect, listVals);
-                //2)
-                if (!pageGaleria.isCabeceraResBusqueda(producSin1erCaracter))
-                    fmwkTest.addValidation(2, State.Defect, listVals);  
+                if ("".compareTo(pageGaleria.getArticuloWithText(producSin1erCaracter, maxSecondsWait))==0) {
+                    listVals.add(1, State.Defect);
+                }
+                if (!pageGaleria.isCabeceraResBusqueda(producSin1erCaracter)) {
+                    listVals.add(2, State.Defect);  
+                }
     
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); } 
+            finally { listVals.checkAndStoreValidations(descripValidac); } 
         }
         else {
             //Validaciones
             String descripValidac =
                 "1) Aparece la página de error en la búsqueda con el encabezado<b>" + categoriaABuscar + "</b>";
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+            datosStep.setStateIniValidations();
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
-                if (!PageErrorBusqueda.isCabeceraResBusqueda(dFTest.driver, categoriaABuscar))
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                if (!PageErrorBusqueda.isCabeceraResBusqueda(dFTest.driver, categoriaABuscar)) {
+                    listVals.add(1, State.Warn);
+                }
                   
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
         }
         
         //Validaciones estándar. 

@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -35,24 +32,23 @@ public class SecSelectDPointStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) La dirección del droppoint seleccionado contiene <b>" + dataSearchDp.data + "</b> (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (!ModalDroppoints.secSelectDPoint.deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, maxSecondsToWait, dFTest.driver)) {
             	switch (dataSearchDp.typeData) {
             	case Provincia:
-            		fmwkTest.addValidation(1, State.Warn, listVals);
+            		listVals.add(1, State.Warn);
             		break;
             	case CodigoPostal:
-            		fmwkTest.addValidation(1, State.Info, listVals);
+            		listVals.add(1, State.Info);
             		break;
             	}
             }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validación-1
         validaDeliveryPointOfType(typeDp, datosStep, dFTest);
@@ -65,19 +61,19 @@ public class SecSelectDPointStpV {
         String descripValidac = 
             "1) Es visible el 1er delivery point de la lista (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) El 1er delivery point de la lista es de tipo <b>" + typeDp + "</b>";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!ModalDroppoints.secSelectDPoint.isDroppointVisibleUntil(1/*position*/, 3/*maxSecondsToWait*/, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
-            if (ModalDroppoints.secSelectDPoint.getTypeDeliveryPoint(1/*position*/, dFTest.driver)!=typeDp)
-                fmwkTest.addValidation(2, State.Defect, listVals);
+            if (!ModalDroppoints.secSelectDPoint.isDroppointVisibleUntil(1, maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            if (ModalDroppoints.secSelectDPoint.getTypeDeliveryPoint(1, dFTest.driver)!=typeDp) {
+                listVals.add(2, State.Defect);
+            }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DataDeliveryPoint clickDeliveryPointAndGetData(int position, DataFmwkTest dFTest) throws Exception {
@@ -94,16 +90,16 @@ public class SecSelectDPointStpV {
         
         String descripValidac = 
             "1) Queda seleccionado el Droppoint #" + position;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!ModalDroppoints.secSelectDPoint.isDroppointSelected(position, dFTest.driver)) 
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!ModalDroppoints.secSelectDPoint.isDroppointSelected(position, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return dataDpToReturn;
     }

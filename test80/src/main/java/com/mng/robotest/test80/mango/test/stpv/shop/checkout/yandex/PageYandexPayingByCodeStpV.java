@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.yandex;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -21,27 +18,28 @@ public class PageYandexPayingByCodeStpV {
             "1) Aparece la página de <b>Paying by code</b><br>" +
             "2) Aparece el importe de la compra por pantalla: " + importeTotal + "<br>" +
             "3) Aparece un <b>PaymentCode</b>";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageYandexPayingByCode.isPage(channel, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver)) 
-                fmwkTest.addValidation(2, State.Warn, listVals);
-            //3)
-            if (!PageYandexPayingByCode.isVisiblePaymentCode(dFTest.driver))
-                fmwkTest.addValidation(3, State.Defect, listVals);
-            else
+            if (!PageYandexPayingByCode.isPage(channel, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
+            if (!PageYandexPayingByCode.isVisiblePaymentCode(dFTest.driver)) {
+                listVals.add(3, State.Defect);
+            }
+            else {
                 paymentCodeForReturn = PageYandexPayingByCode.getPaymentCode(dFTest.driver);
+            }
                                                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         catch (Exception e) {
             //
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return paymentCodeForReturn;
     }

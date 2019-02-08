@@ -1,13 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.openqa.selenium.By;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -65,15 +62,15 @@ public class SecModalPersonalizacionStpV {
 	    //Validaciones
         String descripValidac = 
             "1) Alguno de los " + maxArticlesToReview + " primeros artículos de la galería " + galeriaToSelect + " es personalizable";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-    		if (!customizable) 
-    			fmwkTest.addValidation(1, State.Defect, listVals);
+    		if (!customizable) {
+    			listVals.add(1, State.Defect);
+    		}
     		
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
-        } finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            datosStep.setListResultValidations(listVals);
+        } finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public void startCustomizationProcces(Channel channel, DataFmwkTest dFTest) throws Exception {
@@ -317,29 +314,31 @@ public class SecModalPersonalizacionStpV {
 
 	private void customizationValidation(Channel channel, ModalElement element, int maxSecondsToWait,
 										State state, DatosStep datosStep, DataFmwkTest dFTest, String descripValidac) {
-		datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+		datosStep.setStateIniValidations();
+		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
-			List<SimpleValidation> listVals = new ArrayList<>();
-			if (!SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Present, maxSecondsToWait, channel, dFTest.driver))
-				fmwkTest.addValidation(1, state, listVals);
-			datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
-		} finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+			if (!SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Present, maxSecondsToWait, channel, dFTest.driver)) {
+				listVals.add(1, state);
+			}
+			datosStep.setListResultValidations(listVals);
+		} 
+		finally { listVals.checkAndStoreValidations(descripValidac); }
 	}
 
 	private void doubleCustomizationValidations(Channel channel, DataFmwkTest dFTest,
 										ModalElement firstElement, ModalElement secondElement, 
-										State state, DatosStep datosStep, String descripValidac) 
-	{
-		datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
-		
+										State state, DatosStep datosStep, String descripValidac) {
+		datosStep.setStateIniValidations();
+		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
-			List<SimpleValidation> listVals = new ArrayList<>();
 			if (!SecModalPersonalizacion.isElementInStateUntil(firstElement, StateElem.Present, 1, channel, dFTest.driver) &&
-				!SecModalPersonalizacion.isElementInStateUntil(secondElement, StateElem.Present, 1, channel, dFTest.driver))
-				fmwkTest.addValidation(1, state, listVals);
+				!SecModalPersonalizacion.isElementInStateUntil(secondElement, StateElem.Present, 1, channel, dFTest.driver)) {
+				listVals.add(1, state);
+			}
 			
-			datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
-		} finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+			datosStep.setListResultValidations(listVals);
+		} 
+		finally { listVals.checkAndStoreValidations(descripValidac); }
 	}
 	
 	
@@ -362,14 +361,15 @@ public class SecModalPersonalizacionStpV {
 		
 	    String descripValidac =                
 	    	"1) Es visible el apartado " + numApartado + " de la personalización";
-	    datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+	    datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	    try {
-	        List<SimpleValidation> listVals = new ArrayList<>();
-	        //1)
-			if (!SecModalPersonalizacion.isElementInStateUntil(modalToValidate, StateElem.Present, 1, channel, dFTest.driver))
-				fmwkTest.addValidation(2, State.Warn, listVals);
+			if (!SecModalPersonalizacion.isElementInStateUntil(modalToValidate, StateElem.Present, 1, channel, dFTest.driver)) {
+				listVals.add(1, State.Warn);
+			}
 			
-	        datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
-	    } finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+	        datosStep.setListResultValidations(listVals);
+	    } 
+	    finally { listVals.checkAndStoreValidations(descripValidac); }
 	}
 }

@@ -1,15 +1,12 @@
 package com.mng.robotest.test80.mango.test.stpv.shop;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import org.openqa.selenium.By;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -45,21 +42,21 @@ public class PageHomeMarcasStpV {
         String descripValidac = 
             "1) Aparece la home de marcas/multimarcas según el país<br>" +
             "2) No aparece ningún tag de error";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (app!=AppEcom.outlet) {
-                if (!PageHomeMarcas.isHomeMarcasMultimarcasDependingCountry(pais, app, dFTest.driver))
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                if (!PageHomeMarcas.isHomeMarcasMultimarcasDependingCountry(pais, app, dFTest.driver)) {
+                    listVals.add(1, State.Warn);
+                }
             }
-            //2)
-            if (WebdrvWrapp.isElementPresent(dFTest.driver, By.xpath("//error"))) 
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (WebdrvWrapp.isElementPresent(dFTest.driver, By.xpath("//error"))) {
+                listVals.add(2, State.Warn);
+            }
            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public enum TypeHome {Multimarca, PortadaLinea}
@@ -74,21 +71,23 @@ public class PageHomeMarcasStpV {
             "<b style=\"color:blue\">Rebajas</b></br>" +
             "1) " + validacion1;
         datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (dCtxSh.pais.isVentaOnline()) {
-	            if (!SecMenusWrap.isLineaPresentUntil(LineaType.rebajas, dCtxSh.appE, dCtxSh.channel, maxSeconds, dFTest.driver))
-	                fmwkTest.addValidation(1, State.Defect, listVals);
+	            if (!SecMenusWrap.isLineaPresentUntil(LineaType.rebajas, dCtxSh.appE, dCtxSh.channel, maxSeconds, dFTest.driver)) {
+	                listVals.add(1, State.Defect);
+	            }
             }
             else {
-                if (SecMenusWrap.isLineaPresentUntil(LineaType.rebajas, dCtxSh.appE, dCtxSh.channel, 0, dFTest.driver))
-                    fmwkTest.addValidation(1, State.Defect, listVals);
+                if (SecMenusWrap.isLineaPresentUntil(LineaType.rebajas, dCtxSh.appE, dCtxSh.channel, 0, dFTest.driver)) {
+                    listVals.add(1, State.Defect);
+                }
             }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
             
-        } finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        } 
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         if (areBanners) {
         	int maxBannersToLoad = 1;
@@ -99,23 +98,24 @@ public class PageHomeMarcasStpV {
                 "1) Existen banners<br>" +
                 "2) El 1er Banner linca con la sección de rebajas";
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
+            listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
-                if (!managerBannersScreen.existBanners())
-                    fmwkTest.addValidation(1, State.Defect, listVals);
-                //2)
+                if (!managerBannersScreen.existBanners()) {
+                    listVals.add(1, State.Defect);
+                }
                 if (managerBannersScreen.existBanners()) {
                     dataBanner1 = managerBannersScreen.getBanner(1);
-                    if (!dataBanner1.getUrlBanner().contains("seccion=Rebajas"))
-                        fmwkTest.addValidation(2, State.Warn, listVals);
+                    if (!dataBanner1.getUrlBanner().contains("seccion=Rebajas")) {
+                        listVals.add(2, State.Warn);
+                    }
                 }
-                else
-                    fmwkTest.addValidation(2, State.Warn, listVals);
+                else {
+                    listVals.add(2, State.Warn);
+                }
     
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
                 
-            } finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+            } finally { listVals.checkAndStoreValidations(descripValidac); }        
             
             if (dataBanner1!=null && typeHome==TypeHome.Multimarca) {
             	List<Linea> listLineas = dCtxSh.pais.getShoponline().getListLineasTiendas(dCtxSh.appE);
@@ -128,21 +128,22 @@ public class PageHomeMarcasStpV {
 	                	i++;
 	                }
 	                datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
+                    listVals = ListResultValidation.getNew(datosStep);
 	                try {
-	                    List<SimpleValidation> listVals = new ArrayList<>();
 	                    //i)
 	                    String urlLink;
 		                i=1;
 		                for (Linea linea : listLineas) {
 		                    urlLink = dataBanner1.getUrlLinkLinea(linea.getType());
-		                    if (!urlLink.contains("seccion=Rebajas_" + linea.getType().getId3()))
-		                    	fmwkTest.addValidation(i, State.Warn, listVals);		                	
+		                    if (!urlLink.contains("seccion=Rebajas_" + linea.getType().getId3())) {
+		                    	listVals.add(i, State.Warn);		                	
+		                    }
 		                    i++;
 		                }
 		                
-	                    datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+	                    datosStep.setListResultValidations(listVals);
 	                    
-	                } finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+	                } finally { listVals.checkAndStoreValidations(descripValidac); }        
             	}
             }
             
@@ -151,15 +152,15 @@ public class PageHomeMarcasStpV {
                 "<b style=\"color:blue\">Rebajas</b></br>" +
                 "1) El mensaje de NewsLetter del Footer no contiene \"" + percentageSymbol + "\"";
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
+            listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
-                if (SecFooter.getNewsLetterMsgText(dFTest.driver).contains(percentageSymbol))
-                    fmwkTest.addValidation(1, State.Info_NoHardcopy, listVals);
+                if (SecFooter.getNewsLetterMsgText(dFTest.driver).contains(percentageSymbol)) {
+                    listVals.add(1, State.Info_NoHardcopy);
+                }
     
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
                 
-            } finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            } finally { listVals.checkAndStoreValidations(descripValidac); }
         }
     }
 }

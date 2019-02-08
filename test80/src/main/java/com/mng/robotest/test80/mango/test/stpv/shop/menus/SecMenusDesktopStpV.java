@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -118,18 +118,18 @@ public class SecMenusDesktopStpV {
     public static void validateIsLineaSelected(LineaType lineaType, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Está seleccionada la línea <b>" + lineaType + "</b>";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!SecMenusDesktop.
-            		secMenuSuperior.secLineas.isLineaSelected(lineaType, app, dFTest.driver))
+            if (!SecMenusDesktop
+            	.secMenuSuperior.secLineas.isLineaSelected(lineaType, app, dFTest.driver)) {
             	//TODO provisionalmente lo ponemos a Info, cuando pasen las rebajas o cuando se resuelva el tícket https://jira.mangodev.net/jira/browse/GPS-621
-                fmwkTest.addValidation(1, State.Info, listVals);
+                listVals.add(1, State.Info);
+            }
                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
     /**
@@ -145,16 +145,16 @@ public class SecMenusDesktopStpV {
             int maxSecondsToWait = 2;
             String descripValidac = 
                 "1) Aparece seleccionado el menú lateral <b>" + menu.getNombre() + "</b> (lo esperamos hasta " + maxSecondsToWait + "segundos)";
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+            datosStep.setStateIniValidations();
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
-                if (!SecMenusDesktop.secMenuLateral.isSelectedMenu(menu, maxSecondsToWait, dFTest.driver)) 
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                if (!SecMenusDesktop.secMenuLateral.isSelectedMenu(menu, maxSecondsToWait, dFTest.driver)) {
+                    listVals.add(1, State.Warn);
+                }
                     
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
         }
         
         //Validación específica para Menú de 1er nivel
@@ -168,16 +168,16 @@ public class SecMenusDesktopStpV {
 	            for (Menu2onLevel menu2oNivelTmp : menus2onLevel)
 	                descripValidac = descripValidac + "<br>" + menu2oNivelTmp.getNombre();
 	
-	            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+	            datosStep.setStateIniValidations();       
+	            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	            try {
-	                List<SimpleValidation> listVals = new ArrayList<>();
-	                //1)
-	                if (!SecMenusDesktop.secMenuLateral.areVisibleMenus2oNivel(menu1rstLevel, dFTest.driver)) 
-	                    fmwkTest.addValidation(1, State.Warn, listVals);
+	                if (!SecMenusDesktop.secMenuLateral.areVisibleMenus2oNivel(menu1rstLevel, dFTest.driver)) {
+	                    listVals.add(1, State.Warn);
+	                }
 	                    
-	                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+	                datosStep.setListResultValidations(listVals);
 	            }
-	            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+	            finally { listVals.checkAndStoreValidations(descripValidac); }
 	        }        
         }
     
@@ -190,23 +190,23 @@ public class SecMenusDesktopStpV {
                 for (int i=0; i<textsArticlesGalery.length; i++)
                     descripValidac =  descripValidac + "<br>" + textsArticlesGalery[i];
  
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+            datosStep.setStateIniValidations();
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
                 PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);
                 ArrayList<String> listTxtArtNoValidos = pageGaleriaDesktop.nombreArticuloNoValido(textsArticlesGalery);
                 if (listTxtArtNoValidos.size() > 0) {
                     descripValidac+="<br>" + "<b>Warning!</b> Hay Algún artículo extraño, p.e.:";
-                    for (String txtArtNoValido : listTxtArtNoValidos)
+                    for (String txtArtNoValido : listTxtArtNoValidos) {
                         descripValidac+=("<br>" + txtArtNoValido);
+                    }
                     
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                    listVals.add(1, State.Warn);
                 }                
             
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
         }
         
         //Validaciones. Aparece el selector de precios
@@ -285,22 +285,22 @@ public class SecMenusDesktopStpV {
 	        	"1) Aparece el bloque de menús de la línea " + linea.getType() + " (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
 	            "2) El número de carrusels es de " + linea.getListCarrusels().length + "<br>" +
 	            "3) Aparecen los carrusels: " + linea.getCarrusels().toString();
-	        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+	        datosStep.setStateIniValidations();
+	        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	        try {
-	            List<SimpleValidation> listVals = new ArrayList<>(); 
-	            //1) 
-	            if (!SecMenusDesktop.secMenuSuperior.secBlockMenus.isCapaMenusLineaVisibleUntil(linea.getType(), maxSecondsToWait, dFTest.driver))
-	            	fmwkTest.addValidation(1, State.Warn, listVals);
-	            //2)8
-	            if (linea.getListCarrusels().length != SecMenusDesktop.secMenuSuperior.secCarrusel.getNumCarrousels(linea.getType(), dFTest.driver))
-	                fmwkTest.addValidation(2, State.Warn, listVals);
-	            //3)
-	            if (!SecMenusDesktop.secMenuSuperior.secCarrusel.isVisibleCarrusels(linea, dFTest.driver))
-	                fmwkTest.addValidation(3, State.Warn, listVals);
+	            if (!SecMenusDesktop.secMenuSuperior.secBlockMenus.isCapaMenusLineaVisibleUntil(linea.getType(), maxSecondsToWait, dFTest.driver)) {
+	            	listVals.add(1, State.Warn);
+	            }
+	            if (linea.getListCarrusels().length != SecMenusDesktop.secMenuSuperior.secCarrusel.getNumCarrousels(linea.getType(), dFTest.driver)) {
+	                listVals.add(2, State.Warn);
+	            }
+	            if (!SecMenusDesktop.secMenuSuperior.secCarrusel.isVisibleCarrusels(linea, dFTest.driver)) {
+	                listVals.add(3, State.Warn);
+	            }
 	
-	            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+	            datosStep.setListResultValidations(listVals);
 	        } 
-	        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+	        finally { listVals.checkAndStoreValidations(descripValidac); }
 	
 	        //Steps - Selección de cada uno de los carrusels asociados a la línea
 	        String[] listCarrusels = linea.getListCarrusels();
@@ -346,36 +346,37 @@ public class SecMenusDesktopStpV {
             validacion4 = 
             "4) Aparece algún artículo en panorámica";
 
+        int maxSecondsWait = 3;
         String descripValidac = 
-            "1) Aparece algún artículo (lo esperamos 3 segundos)<br>" +
+            "1) Aparece algún artículo (lo esperamos hasta " + maxSecondsWait + " segundos)<br>" +
             "2) El 1er artículo es de tipo " + linea.getType() + "<br>" +
             validacion3 +
             validacion4;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!pageGaleriaDesktop.isVisibleArticleUntil(1/*numArticulo*/, 3/*seconds*/))
-                fmwkTest.addValidation(1, State.Info_NoHardcopy, listVals);
+            if (!pageGaleriaDesktop.isVisibleArticleUntil(1, maxSecondsWait)) {
+                listVals.add(1, State.Info_NoHardcopy);
+            }
             
-            //2)
-            if (!pageGaleriaDesktop.isArticleFromLinea(1/*numArticle*/, lineaType))
-                fmwkTest.addValidation(2, State.Warn, listVals);
-            //3)
+            if (!pageGaleriaDesktop.isArticleFromLinea(1/*numArticle*/, lineaType)) {
+                listVals.add(2, State.Warn);
+            }
             if (lineaType!=LineaType.nuevo) {
-            	if (!pageGaleriaDesktop.isArticleFromCarrusel(1/*numArticle*/, linea, idCarrusel))
-            		fmwkTest.addValidation(3, State.Warn, listVals);
+            	if (!pageGaleriaDesktop.isArticleFromCarrusel(1/*numArticle*/, linea, idCarrusel)) {
+            		listVals.add(3, State.Warn);
+            	}
             }
             
             if (panoramEnLinea) {
-                //4)
-                if (pageGaleriaDesktop.getNumArticulos(TypeArticleDesktop.Panoramica)==0)
-                	fmwkTest.addValidation(4, State.Warn, listVals);
+                if (pageGaleriaDesktop.getNumArticulos(TypeArticleDesktop.Panoramica)==0) {
+                	listVals.add(4, State.Warn);
+                }
             }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -513,15 +514,18 @@ public class SecMenusDesktopStpV {
             descripValidac = 
                 "1) El número de pestañas (" + numPestanyas + ") coincide con el del nodo " + dFTest.ctx.getAttribute("NodoMenus" + clave) + " (" + numPestanyas_C + ")<br>" + 
                 "2) El número de menús (" + numMenus + ") coincide con el del nodo " + dFTest.ctx.getAttribute("NodoMenus" + clave) + " (" + numMenus_C + ")";
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
-                if (numPestanyas != numPestanyas_C || numMenus != numMenus_C)
+                if (numPestanyas != numPestanyas_C || numMenus != numMenus_C) {
                     datosStep.setResultSteps(State.Warn);
-                else
+                }
+                else {
                     datosStep.setResultSteps(State.Ok);
+                }
 
                 datosStep.setExcepExists(false);
             } 
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
         }
 
         //Almacenamos los nuevos datos en el contexto
@@ -553,23 +557,23 @@ public class SecMenusDesktopStpV {
         PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);
         String descripValidac = 
             "1) Aparece una página con banners, artículos, iframes, maps o sliders";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();  
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (!pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, 3/*seconds*/) &&
                 !PageLanding.hayIframes(dFTest.driver) &&
                 !PageLanding.hayMaps(dFTest.driver) &&
                 !PageLanding.haySliders(dFTest.driver)) {
             	int maxBannersToLoad = 1;
             	ManagerBannersScreen managerBanners = new ManagerBannersScreen(maxBannersToLoad, dFTest.driver);
-            	if (!managerBanners.existBanners())
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+            	if (!managerBanners.existBanners()) {
+                    listVals.add(1, State.Warn);
+            	}
             }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -716,16 +720,15 @@ public class SecMenusDesktopStpV {
     
         PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);
         String descripValidac = validacion1;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (!containsArtsObannersOmaps) {
                 if (containsArt && 
                     !pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, 3/*seconds*/) ||
                     (containsBan && 
                     !ManagerBannersScreen.existBanners(dFTest.driver))) {
-                    fmwkTest.addValidation(1, State.Warn,listVals);
+                    listVals.add(1, State.Warn);
                 }
             }
             else {
@@ -734,28 +737,28 @@ public class SecMenusDesktopStpV {
                     !PageLanding.hayMaps(dFTest.driver) &&
                     !PageLanding.haySliders(dFTest.driver) &&
                     !ManagerBannersScreen.existBanners(dFTest.driver)) {
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                    listVals.add(1, State.Warn);
                 }
             }
                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+       finally { listVals.checkAndStoreValidations(descripValidac); }
         
        if (containsArt) {
            String guiones = "--";
            descripValidac = 
                "1) No hay artículos con \"" + guiones + "\""; 
-           datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);     
+           datosStep.setStateIniValidations();
+           listVals = ListResultValidation.getNew(datosStep);
            try {
-               List<SimpleValidation> listVals = new ArrayList<>();
-               //1)
-               if (((PageGaleriaDesktop)pageGaleria).isArticuloWithStringInName(guiones)) 
-                   fmwkTest.addValidation(1, State.Warn, listVals);
+               if (((PageGaleriaDesktop)pageGaleria).isArticuloWithStringInName(guiones)) {
+                   listVals.add(1, State.Warn);
+               }
 
-               datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+               datosStep.setListResultValidations(listVals);
            } 
-           finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+           finally { listVals.checkAndStoreValidations(descripValidac); }
 
            //Validaciones relacionadas con Rebajas
            validationsRebajas(channel, app, datosStep, dFTest);
@@ -764,32 +767,34 @@ public class SecMenusDesktopStpV {
        descripValidac = 
            "1) El errorPage.faces no devuelve una excepción" +
            validacion2_2;
-       datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+       datosStep.setStateIniValidations();
+       listVals = ListResultValidation.getNew(datosStep);
        try {
-           List<SimpleValidation> listVals = new ArrayList<>();
-           //1)
            stackTrace exception = WebDriverMngUtils.stackTaceException(dFTest.driver, dFTest.ctx);
-           if (exception.getRepetida())
+           if (exception.getRepetida()) {
                descripValidac+="<br><b>Warning!</b>Se ha detectado una excepción detectada previamente (" + exception.getNumExcepciones() + ")";
+           }
            else {
-               if (exception.getExiste()) 
-                   fmwkTest.addValidation(1, State.Warn, listVals);
+               if (exception.getExiste()) {
+                   listVals.add(1, State.Warn);
+               }
            }                     
-           //2)
            if (validac2_2) {
                if (!AllPages.isTitleAssociatedToMenu(menu.getNombre(), dFTest.driver)) {
                    //TODO modificación temporal para no grabar la imagen en caso de Baby. Hasta que se corrija (http://ci.mangodev.net/redmine/issues/50111)
             	   String datagalabel_Menu = menu.getDataGaLabelMenuLateralDesktop();
-                   if (datagalabel_Menu.contains("bebe")) 
-                       fmwkTest.addValidation(2, State.Info_NoHardcopy, listVals);
-                   else
-                       fmwkTest.addValidation(2, State.Warn, listVals);
+                   if (datagalabel_Menu.contains("bebe")) {
+                       listVals.add(2, State.Info_NoHardcopy);
+                   }
+                   else {
+                       listVals.add(2, State.Warn);
+                   }
                }
            }
         
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
        }
-       finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+       finally { listVals.checkAndStoreValidations(descripValidac); }
        
        //Validaciones estándar. 
        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, datosStep, dFTest);
@@ -807,26 +812,26 @@ public class SecMenusDesktopStpV {
             " * Rebajados</b><br>" +
             " * De temporadas anteriores " + tempSales + "<br>" +
             " * Con alguna de las etiquetas <b>" + listLabelsWrong + "</b> (en sus correspondientes traducciones)"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);     
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             List<String> listArtWrong = 
             	pageGaleriaDesktop.getArticlesTemporadaxRebajadosWithLiteralInLabel(ControlTemporada.articlesFrom, tempSales, listLabelsWrong);
             	//pageGaleriaDesktop.getArticlesRebajadosWithLiteralInLabel(listLabelsWrong);
             if (listArtWrong.size() > 0) {
-                fmwkTest.addValidation(1, State.Warn, listVals);
+                listVals.add(1, State.Warn);
                 descripValidac+=
                     "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
                     "hay " + listArtWrong.size() + " artículos rebajados con label errónea:<br>";
-                for (String nameWrong : listArtWrong)
+                for (String nameWrong : listArtWrong) {
              	   descripValidac+=(nameWrong + "<br>");
+                }
                 descripValidac+="</lin>";
             }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validación especialmente útil en periodo de Rebajas
         ArrayList<Integer> temporadaOld = new ArrayList<Integer>(Arrays.asList(2));  
@@ -834,48 +839,48 @@ public class SecMenusDesktopStpV {
             "<b style=\"color:blue\">Rebajas</b></br>" +        		   
             "1) No hay artículos <b>de Temporada " + temporadaOld + "</b> con alguna de las etiquetas <b>" + listLabelsWrong + "</b> " + 
               "(en sus correspondientes traducciones)"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);     
+        datosStep.setStateIniValidations();
+        listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaOld, listLabelsWrong);
             if (listArtWrong.size() > 0) {
-                fmwkTest.addValidation(1, State.Warn, listVals);
+                listVals.add(1, State.Warn);
                 descripValidac+=
                     "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
                     "hay " + listArtWrong.size() + " artículos de temporada " + temporadaOld + " con label errónea:<br>";
-                for (String nameWrong : listArtWrong)
+                for (String nameWrong : listArtWrong) {
              	   descripValidac+=(nameWrong + "<br>");
+                }
                 descripValidac+="</lin>";
             }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     
         ArrayList<Integer> temporadaNew = new ArrayList<Integer>(Arrays.asList(3));
         descripValidac = 
             "<b style=\"color:blue\">Rebajas</b></br>" +        		   
             "1) No hay artículos <b>de Temporada " + temporadaNew + "</b> con las 2 etiquetas <b>New Collection</b> y <b>New Now</b> " + 
               "(en sus correspondientes traducciones)"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);     
+        datosStep.setStateIniValidations();
+        listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             List<String> listArtWrong = 
             	pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaNew, LabelArticle.NewNow, LabelArticle.NewCollection);
             if (listArtWrong.size() > 0) {
-                fmwkTest.addValidation(1, State.Info_NoHardcopy, listVals);
+                listVals.add(1, State.Info_NoHardcopy);
                 descripValidac+=
                     "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
                     "hay " + listArtWrong.size() + " artículos de temporada " + temporadaNew + " con las 2 labels asociadas:<br>";
-                for (String nameWrong : listArtWrong)
+                for (String nameWrong : listArtWrong) {
              	    descripValidac+=(nameWrong + "<br>");
+                }
                 descripValidac+="</lin>";
             }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }    	
+        finally { listVals.checkAndStoreValidations(descripValidac); }    	
     }
 }

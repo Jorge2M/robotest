@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.votf;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -26,28 +23,28 @@ public class PageSelectLineaVOTFStpV {
             "3) Aparece el banner correspondiente a NIÑAS<br>" +
             "4) Aparece el banner correspondiente a NIÑOS<br>" +
             "5) Aparece el banner correspondiente a VIOLETA";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();   
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageSelectLineaVOTF.isBannerPresent(LineaType.she, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!PageSelectLineaVOTF.isBannerPresent(LineaType.he, dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);
-            //3)
-            if (!PageSelectLineaVOTF.isBannerPresent(LineaType.nina, dFTest.driver))
-                fmwkTest.addValidation(3, State.Warn, listVals);
-            //4)
-            if (!PageSelectLineaVOTF.isBannerPresent(LineaType.nino, dFTest.driver))
-                fmwkTest.addValidation(4, State.Warn, listVals);            
-            //5)
-            if (!PageSelectLineaVOTF.isBannerPresent(LineaType.violeta, dFTest.driver))
-                fmwkTest.addValidation(5, State.Warn, listVals);
+            if (!PageSelectLineaVOTF.isBannerPresent(LineaType.she, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!PageSelectLineaVOTF.isBannerPresent(LineaType.he, dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
+            if (!PageSelectLineaVOTF.isBannerPresent(LineaType.nina, dFTest.driver)) {
+                listVals.add(3, State.Warn);
+            }
+            if (!PageSelectLineaVOTF.isBannerPresent(LineaType.nino, dFTest.driver)) {
+                listVals.add(4, State.Warn);            
+            }
+            if (!PageSelectLineaVOTF.isBannerPresent(LineaType.violeta, dFTest.driver)) {
+                listVals.add(5, State.Warn);
+            }
                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static void selectMenuAndLogoMango(int numMenu, Pais pais, DataFmwkTest dFTest) throws Exception {

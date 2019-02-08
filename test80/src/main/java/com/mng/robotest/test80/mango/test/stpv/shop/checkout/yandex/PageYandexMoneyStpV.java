@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.yandex;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandexMoney;
@@ -35,22 +32,22 @@ public class PageYandexMoneyStpV {
         String descripValidac = 
             "1) Aparece el input para el <b>Payment Code</b><br>" +
             "2) Aparece el input para el importe";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageYandexMoney.isVisibleInputPaymentCode(dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2) 
-            if (!PageYandexMoney.isVisibleInputImport(dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (!PageYandexMoney.isVisibleInputPaymentCode(dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!PageYandexMoney.isVisibleInputImport(dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
                                                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         catch (Exception e) {
             //
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep inputDataAndPay(String paymentCode, String importe, DataFmwkTest dFTest) throws Exception {

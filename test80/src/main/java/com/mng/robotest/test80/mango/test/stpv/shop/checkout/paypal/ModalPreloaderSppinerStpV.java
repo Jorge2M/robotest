@@ -1,13 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.paypal;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal.ModalPreloaderSpinner;
 
 public class ModalPreloaderSppinerStpV {
@@ -20,31 +16,31 @@ public class ModalPreloaderSppinerStpV {
         //Validaciones
         String descripValidac =
             "1) Aparece el icono del candado de \"Cargando\" (lo esperamos un máximo de " + maxSecondsWait + ")";   
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok); 
-        try {    
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1) 
-            if (!ModalPreloaderSpinner.isVisibleUntil(maxSecondsWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Info, listVals);
+        datosStep.setStateIniValidations(); 
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        try {
+            if (!ModalPreloaderSpinner.isVisibleUntil(maxSecondsWait, dFTest.driver)) {
+                listVals.add(1, State.Info);
+            }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 	
     public static void validateIsVanished(int maxSecondsWait, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         String descripValidac =
             "1) Desaparece el icono del candado de \"Cargando\" (lo esperamos un máximo de " + maxSecondsWait + ")";   
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok); 
+        datosStep.setStateIniValidations(); 
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {    
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1) 
-            if (!ModalPreloaderSpinner.isNotVisibleUntil(maxSecondsWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Info, listVals);
+            if (!ModalPreloaderSpinner.isNotVisibleUntil(maxSecondsWait, dFTest.driver)) {
+                listVals.add(1, State.Info);
+            }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 }

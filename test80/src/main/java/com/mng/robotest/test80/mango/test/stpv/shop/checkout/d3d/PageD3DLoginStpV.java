@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.d3d;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.d3d.PageD3DLogin;
@@ -20,21 +17,20 @@ public class PageD3DLoginStpV {
         String descripValidac = 
             "1) Aparece la página de identificación D3D (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" + 
             "2) Aparece el importe " + importeTotal + " de la operación";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();    
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (!PageD3DLogin.isPageUntil(maxSecondsToWait, dFTest.driver)) {
-                fmwkTest.addValidation(1, State.Info_NoHardcopy, listVals);
+                listVals.add(1, State.Info_NoHardcopy);
                 isD3D = false;
             }
-            //2)
-            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver))
-                fmwkTest.addValidation(2,State.Warn, listVals);
+            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return isD3D;
     }

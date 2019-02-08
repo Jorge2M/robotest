@@ -2,11 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.trustpay;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -25,38 +24,39 @@ public class PageTrustpaySelectBankStpV {
             descripValidac+="<br>" +            
             "4) Figura el desplegable de bancos<br>" +
             "5) Figura un botón de pago";            
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageTrustpaySelectBank.isPresentEntradaPago(nombrePago, channel, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
+            if (!PageTrustpaySelectBank.isPresentEntradaPago(nombrePago, channel, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
             if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver))
-                if (channel==Channel.movil_web)
-                    fmwkTest.addValidation(2, State.Info, listVals);
-                else
-                    fmwkTest.addValidation(2, State.Warn, listVals);            
+                if (channel==Channel.movil_web) {
+                    listVals.add(2, State.Info);
+                }
+                else {
+                    listVals.add(2, State.Warn);
+                }
             //3)
             if (!PageTrustpaySelectBank.isPresentCabeceraStep(nombrePago, channel, dFTest.driver)) 
-                fmwkTest.addValidation(3, State.Warn, listVals);
+                listVals.add(3, State.Warn);
             //4) 
             if (channel==Channel.desktop) {
                 if (!PageTrustpaySelectBank.isPresentSelectBancos(dFTest.driver))
-                    fmwkTest.addValidation(4, State.Warn, listVals);
+                    listVals.add(4, State.Warn);
             }
             //5)
             if (channel==Channel.desktop) {
                 if (!PageTrustpaySelectBank.isPresentButtonPago(dFTest.driver)) 
-                    fmwkTest.addValidation(5, State.Defect, listVals); 
+                    listVals.add(5, State.Defect); 
             }
                                                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         catch (Exception e) {
             //
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     /**

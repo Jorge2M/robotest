@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorSaldosTPV;
@@ -17,33 +14,28 @@ public class PageGestorSaldosTPVStpV {
 
 	public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
 		String descripValidac = 
-				"1) Estamos en la página \"" + PageGestorSaldosTPV.titulo + " \"<br>" +
-				"2) Aparece el input de fecha de TPV";
-		datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+			"1) Estamos en la página \"" + PageGestorSaldosTPV.titulo + " \"<br>" +
+			"2) Aparece el input de fecha de TPV";
+		datosStep.setStateIniValidations();
+		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
-			List<SimpleValidation> listVals = new ArrayList<>();
-			//1)
-			if (!PageGestorSaldosTPV.isPage(dFTest.driver))
-				fmwkTest.addValidation(1, State.Defect, listVals);
-			//2)
-			if (!PageGestorSaldosTPV.isVisibleTPVInput(dFTest.driver))
-				fmwkTest.addValidation(2, State.Defect, listVals);
+			if (!PageGestorSaldosTPV.isPage(dFTest.driver)) {
+				listVals.add(1, State.Defect);
+			}
+			if (!PageGestorSaldosTPV.isVisibleTPVInput(dFTest.driver)) {
+				listVals.add(2, State.Defect);
+			}
 
-			datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+			datosStep.setListResultValidations(listVals);
 		} 
-		finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+		finally { listVals.checkAndStoreValidations(descripValidac); }
 	}
-	
-	
-	
-	
 	
 	public static void searchValidTPV(String tpv, DataFmwkTest dFTest) throws Exception {
 		DatosStep datosStep = new DatosStep       (
-				"Introducimos una TPV válida y damos click a \"Consultar Saldos\"", 
-				"Muestra la tabla de saldos con el ID de la TPV en ella");
+			"Introducimos una TPV válida y damos click a \"Consultar Saldos\"", 
+			"Muestra la tabla de saldos con el ID de la TPV en ella");
 		datosStep.setGrab_ErrorPageIfProblem(false);
-
 		try {
 			PageGestorSaldosTPV.insertTPVAndClickConsultarSaldos(tpv, dFTest.driver);
 
@@ -52,21 +44,21 @@ public class PageGestorSaldosTPVStpV {
 		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		String descripValidac = 
-				"1) Aparece la tabla de saldos<br>" +
-				"2) Aparece el ID de la TPV \"" + tpv + "\" en la tabla";
-		datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+			"1) Aparece la tabla de saldos<br>" +
+			"2) Aparece el ID de la TPV \"" + tpv + "\" en la tabla";
+		datosStep.setStateIniValidations();
+		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
-			List<SimpleValidation> listVals = new ArrayList<>();
-			//1)
-			if (!PageGestorSaldosTPV.isTablaSaldosVisible(dFTest.driver))
-				fmwkTest.addValidation(1, State.Defect, listVals);
-			//2)
-			if (!PageGestorSaldosTPV.isTPVIDVisible(tpv, dFTest.driver))
-				fmwkTest.addValidation(2, State.Defect, listVals);
+			if (!PageGestorSaldosTPV.isTablaSaldosVisible(dFTest.driver)) {
+				listVals.add(1, State.Defect);
+			}
+			if (!PageGestorSaldosTPV.isTPVIDVisible(tpv, dFTest.driver)) {
+				listVals.add(2, State.Defect);
+			}
           
-			datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+			datosStep.setListResultValidations(listVals);
 		} 
-		finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+		finally { listVals.checkAndStoreValidations(descripValidac); }
 	}
 
 	
@@ -85,23 +77,16 @@ public class PageGestorSaldosTPVStpV {
 		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		String descripValidac = 
-				"1) Aparece el mensaje \"La tpv seleccionada no existe\"";
-		datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+			"1) Aparece el mensaje \"La tpv seleccionada no existe\"";
+		datosStep.setStateIniValidations();
+		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
-			List<SimpleValidation> listVals = new ArrayList<>();
-			//1)
-			if (!PageGestorSaldosTPV.isUnvalidTPVMessageVisible(dFTest.driver))
-				fmwkTest.addValidation(1, State.Defect, listVals);
+			if (!PageGestorSaldosTPV.isUnvalidTPVMessageVisible(dFTest.driver)) {
+				listVals.add(1, State.Defect);
+			}
 
-			datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+			datosStep.setListResultValidations(listVals);
 		} 
-		finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+		finally { listVals.checkAndStoreValidations(descripValidac); }
 	}
-
-	
-	
-	
-	
-
-
 }

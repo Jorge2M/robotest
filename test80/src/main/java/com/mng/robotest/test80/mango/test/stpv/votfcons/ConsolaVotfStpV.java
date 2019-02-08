@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.votfcons;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.votfcons.IframeResult;
@@ -35,19 +32,19 @@ public class ConsolaVotfStpV {
         String descripValidac = 
             "1) Aparece el apartado \"Test servicios VOTF\"<br>" +
             "2) Aparece el apartado \"Consola comandos VOTF";
-        datosStep.setExcepExists(true);         
+        datosStep.setExcepExists(true);  
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {  
-            ArrayList<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageConsola.existTestServVOTF(dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!PageConsola.existConsolaComVOTF(dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (!PageConsola.existTestServVOTF(dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!PageConsola.existConsolaComVOTF(dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -121,21 +118,20 @@ public class ConsolaVotfStpV {
         String descripValidac = 
             "1) En el bloque de \"Petición/Resultado\" aparece el literal \"" + PageConsola.msgConsTiposEnvioOK + "\"";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-             
             //Nos posicionamos en el iframe correspondiente al resultado
             PageConsola.switchToResultIFrame(dFTest.driver);
-            //1)
-            if (!IframeResult.resultadoContainsText(dFTest.driver, PageConsola.msgConsTiposEnvioOK))
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (!IframeResult.resultadoContainsText(dFTest.driver, PageConsola.msgConsTiposEnvioOK)) {
+                listVals.add(1, State.Warn);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
         finally {
             //Salimos del iframe de resultado hacia la página padre
             dFTest.driver.switchTo().window(paginaPadre);
-            fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); 
+            listVals.checkAndStoreValidations(descripValidac);
         }
         
         return datosStep;
@@ -169,29 +165,31 @@ public class ConsolaVotfStpV {
             "1) En el desplegable \"Código de Transporte\" aparecen datos (lo esperamos hasta XX segundos)<br>" +
             "2) En el bloque de \"Petición/Resultado\" aparece una tabla \"transportes__content\"<br>" +
             "3) En la tabla figuran los tipos " + codigosTransporte.replace("\n", ",");
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);          
+        datosStep.setExcepExists(true); 
+        datosStep.setResultSteps(State.Ok);
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {  
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageConsola.isDataSelectCodigoTransporte(maxSecondsToWait, dFTest.driver)) 
-                fmwkTest.addValidation(1, State.Defect,listVals);
-            else
+            if (!PageConsola.isDataSelectCodigoTransporte(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            else {
                 codigosTransporte = PageConsola.getCodigoTransporte(dFTest.driver);
+            }
 
             PageConsola.switchToResultIFrame(dFTest.driver);
-            //2)
-            if (!IframeResult.existsTransportes(dFTest.driver)) 
-                fmwkTest.addValidation(2, State.Defect,listVals);
-            //3)
-            if (!IframeResult.transportesContainsTipos(dFTest.driver, codigosTransporte))
-                fmwkTest.addValidation(3, State.Defect,listVals);
+            if (!IframeResult.existsTransportes(dFTest.driver)) {
+                listVals.add(2, State.Defect);
+            }
+            if (!IframeResult.transportesContainsTipos(dFTest.driver, codigosTransporte)) {
+                listVals.add(3, State.Defect);
+            }
     
-           datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+           datosStep.setListResultValidations(listVals);
         }
         finally {
            //Salimos del iframe de resultado hacia la página padre
             dFTest.driver.switchTo().window(paginaPadre);
-           fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); 
+            listVals.checkAndStoreValidations(descripValidac);
         }
         
         return datosStep;
@@ -226,22 +224,22 @@ public class ConsolaVotfStpV {
             "2) Aparece una línea de \"TipoStock:\" con contenido";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);          
         paginaPadre = dFTest.driver.getWindowHandle();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {  
-            ArrayList<SimpleValidation> listVals = new ArrayList<>();
             PageConsola.switchToResultIFrame(dFTest.driver);
-            //1)
-            if (IframeResult.existsTransportes(dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
-            if (!IframeResult.isPresentTipoStock(dFTest.driver))
-                fmwkTest.addValidation(2, State.Defect, listVals);
+            if (IframeResult.existsTransportes(dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            if (!IframeResult.isPresentTipoStock(dFTest.driver)) {
+                listVals.add(2, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         finally {
             //Salimos del iframe de resultado hacia la página padre
             dFTest.driver.switchTo().window(paginaPadre);
-            fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); 
+            listVals.checkAndStoreValidations(descripValidac);
         }
         
         return datosStep;
@@ -277,27 +275,27 @@ public class ConsolaVotfStpV {
             "1) En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Código de pedido\"<br>" +
             "2) Aparece un código de pedido<br>" +
             "3) Aparece el literal \"Resultado creación pedido: (0) Total\"";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);          
+        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {  
-            List<SimpleValidation> listVals = new ArrayList<>();
             PageConsola.switchToResultIFrame(dFTest.driver);
-            //1)
-            if (!IframeResult.isPresentCodigoPedido(dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
+            if (!IframeResult.isPresentCodigoPedido(dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
             codigoPedido = IframeResult.getCodigoPedido(dFTest.driver);
-            if ("".compareTo(codigoPedido)==0)
-                fmwkTest.addValidation(2, State.Defect, listVals);
-            //3)
-            if (!IframeResult.resCreacionPedidoOk(dFTest.driver))
-                fmwkTest.addValidation(3, State.Warn, listVals);
+            if ("".compareTo(codigoPedido)==0) {
+                listVals.add(2, State.Defect);
+            }
+            if (!IframeResult.resCreacionPedidoOk(dFTest.driver)) {
+                listVals.add(3, State.Warn);
+            }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         finally {
             //Salimos del iframe de resultado hacia la página padre
             dFTest.driver.switchTo().window(paginaPadre);
-            fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); 
+            listVals.checkAndStoreValidations(descripValidac);
         } 
         
         return codigoPedido;
@@ -331,26 +329,24 @@ public class ConsolaVotfStpV {
         String descripValidac = 
             "1) En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Pedidos\"<br>" +
             "2) En la lista de pedidos aparece el generado anteriormente: " + codigoPedido;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);          
+        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {  
-            List<SimpleValidation> listVals = new ArrayList<>();
-            
-            //Nos posicionamos en el iframe correspondiente al resultado
             PageConsola.switchToResultIFrame(dFTest.driver);
-                 
-            /*1*/if (!IframeResult.isPresentListaPedidos(dFTest.driver)) 
-                    fmwkTest.addValidation(1,State.Warn, listVals);    
+            if (!IframeResult.isPresentListaPedidos(dFTest.driver)) {
+            	listVals.add(1, State.Warn);    
+            }
+            codigoPedidoFull = IframeResult.getPedidoFromListaPedidos(dFTest.driver, codigoPedido);
+            if ("".compareTo(codigoPedidoFull)==0) {
+            	listVals.add(2, State.Defect);
+            }
             
-            /*2*/codigoPedidoFull = IframeResult.getPedidoFromListaPedidos(dFTest.driver, codigoPedido);
-                if ("".compareTo(codigoPedidoFull)==0)
-                    fmwkTest.addValidation(2, State.Defect, listVals);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         finally {
             //Salimos del iframe de resultado hacia la página padre
             dFTest.driver.switchTo().window(paginaPadre);
-            fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); 
+            listVals.checkAndStoreValidations(descripValidac);
         }
                 
         return codigoPedidoFull;
@@ -383,20 +379,20 @@ public class ConsolaVotfStpV {
         //Validaciones
         String descripValidac = 
             "1) En el bloque de \"Petición/Resultado\" aparece una línea \"Seleccionado: " + codigoPedidoFull + "\"";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);          
+        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {  
-            List<SimpleValidation> listVals = new ArrayList<>();
             PageConsola.switchToResultIFrame(dFTest.driver);
-            //1)
-            if (IframeResult.resSelectPedidoOk(dFTest.driver, codigoPedidoFull))
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (IframeResult.resSelectPedidoOk(dFTest.driver, codigoPedidoFull)) {
+                listVals.add(1, State.Warn);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         finally {
             //Salimos del iframe de resultado hacia la página padre
             dFTest.driver.switchTo().window(paginaPadre);
-            fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); 
+            listVals.checkAndStoreValidations(descripValidac);
         }
     }
     
@@ -428,23 +424,23 @@ public class ConsolaVotfStpV {
             "2) Aparece un XML con el dato \"&lt;pedido&gt;" + codigoPedidoFull + "&lt;/pedido&gt;\"";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);          
         paginaPadre = dFTest.driver.getWindowHandle();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {  
-            List<SimpleValidation> listVals = new ArrayList<>();
             PageConsola.switchToResultIFrame(dFTest.driver);
             boolean[] resultado = IframeResult.resSelPreconfPedidoOk(dFTest.driver, codigoPedidoFull);
-            //1)
-            if (!resultado[0])
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!resultado[1])
-                fmwkTest.addValidation(2, State.Defect, listVals);    
+            if (!resultado[0]) {
+                listVals.add(1, State.Warn);
+            }
+            if (!resultado[1]) {
+                listVals.add(2, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
         finally {
             //Salimos del iframe de resultado hacia la página padre
             dFTest.driver.switchTo().window(paginaPadre);
-            fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); 
+            listVals.checkAndStoreValidations(descripValidac);
         }
     }
     
@@ -473,20 +469,20 @@ public class ConsolaVotfStpV {
         //Validaciones
         String descripValidac = 
             "1) En el bloque de \"Petición/Resultado\" aparece una línea \"Confirmado: " + codigoPedidoFull + "\"";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);          
+        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {  
-            List<SimpleValidation> listVals = new ArrayList<>();
             PageConsola.switchToResultIFrame(dFTest.driver);
-            //1)
-            if (!IframeResult.resConfPedidoOk(dFTest.driver, codigoPedidoFull))
-                fmwkTest.addValidation(1, State.Warn, listVals);    
+            if (!IframeResult.resConfPedidoOk(dFTest.driver, codigoPedidoFull)) {
+                listVals.add(1, State.Warn);    
+            }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);        
+            datosStep.setListResultValidations(listVals);        
         }
         finally {
             //Salimos del iframe de resultado hacia la página padre
             dFTest.driver.switchTo().window(paginaPadre);
-            fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); 
+            listVals.checkAndStoreValidations(descripValidac); 
         }       
     }
 }

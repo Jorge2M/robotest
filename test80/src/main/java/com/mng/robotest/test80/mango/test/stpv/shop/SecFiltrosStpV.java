@@ -1,12 +1,11 @@
 package com.mng.robotest.test80.mango.test.stpv.shop;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -53,22 +52,22 @@ public class SecFiltrosStpV {
                 	"(*) " + currentUrl + "<br>" +
                 "2) Aparece una pantalla en la que el title contiene \"" + litMenu.toUpperCase() + "\"<br>" +
                 "3) En pantalla aparecen >1 artículos (están apareciendo " + numArticulos1page + ")";
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
+            datosStep.setStateIniValidations();
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
-                if (!SecFiltros.checkUrlAfterFilterContainsColors(colorsToSelect, currentUrl))
-                    fmwkTest.addValidation(1, State.Warn, listVals);
-                //2)
-                if (!dFTest.driver.getTitle().toUpperCase().contains(litMenu.toUpperCase())) 
-                    fmwkTest.addValidation(2, State.Warn, listVals);                
-                //3)
-                if (numArticulos1page<=1) 
-                    fmwkTest.addValidation(3, State.Warn, listVals);
+                if (!SecFiltros.checkUrlAfterFilterContainsColors(colorsToSelect, currentUrl)) {
+                    listVals.add(1, State.Warn);
+                }
+                if (!dFTest.driver.getTitle().toUpperCase().contains(litMenu.toUpperCase())) {
+                    listVals.add(2, State.Warn);
+                }
+                if (numArticulos1page<=1) {
+                    listVals.add(3, State.Warn);
+                }
                                 
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
                 
             //Validaciones para Analytics (sólo Firefox y NetAnalysis)
             EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(

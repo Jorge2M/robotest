@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.ideal;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.ideal.PageIdealSimulador;
@@ -17,15 +14,15 @@ public class PageIdealSimuladorStpV {
         String descripValidac = 
             "1) Aparece la página de simulación de Ideal"; 
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);  
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageIdealSimulador.isPage(dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!PageIdealSimulador.isPage(dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
                     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep clickContinueButton(DataFmwkTest dFTest) throws Exception {

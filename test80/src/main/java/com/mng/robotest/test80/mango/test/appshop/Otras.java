@@ -1,6 +1,9 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
 import org.testng.ITestContext;
+
+import static org.junit.Assert.assertTrue;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +12,8 @@ import java.util.List;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.annotations.validation.ValidationResult;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ResultValidation;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.*;
@@ -215,24 +219,26 @@ public class Otras extends GestorWebDriver {
         PageIniShopJaponStpV.validaPageIniJapon(datosStep, dFTest);
     }	
     
-    /**
-    /* Acceso a la prehome, selección de Japón/Japonés y validaciones de que aparece la portada de la shop específica de Japón
-     */
-    @Test (
-        groups={"Otras", "Canal:desktop_App:shop"}, 
-        description="Pruebas aspectos")
-    public void OTR006_PruebasAspectos(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
-        String urlBaseTest = (String)context.getAttribute("appPath");
-
-        dCtxSh.pais = this.japon;
-        dCtxSh.idioma = this.japones;
-        PagePrehomeStpV.seleccionPaisIdioma(urlBaseTest, dCtxSh, dFTest);
-        DatosStep datosStep = entradaShopGivenPaisSeleccionado(this.japon, this.japones, dCtxSh.channel, dFTest);
-        //validaPageIniJapon1(datosStep, dFTest.driver);
-        validaPageIniJapon1_5(datosStep, 3, "nos fumamos un porro", dFTest.driver);
-    }	
+//    /**
+//    /* Acceso a la prehome, selección de Japón/Japonés y validaciones de que aparece la portada de la shop específica de Japón
+//     */
+//    @Test (
+//        groups={"Otras", "Canal:desktop_App:shop"}, 
+//        description="Pruebas aspectos")
+//    public void OTR006_PruebasAspectos(ITestContext context, Method method) throws Exception {
+//    	DataFmwkTest dFTest = getdFTest();
+//        DataCtxShop dCtxSh = getdCtxSh();
+//        String urlBaseTest = (String)context.getAttribute("appPath");
+//
+//        dCtxSh.pais = this.japon;
+//        dCtxSh.idioma = this.japones;
+//        PagePrehomeStpV.seleccionPaisIdioma(urlBaseTest, dCtxSh, dFTest);
+//        DatosStep datosStep = entradaShopGivenPaisSeleccionado(this.japon, this.japones, dCtxSh.channel, dFTest);
+//        //validaPageIniJapon1(datosStep, dFTest.driver);
+//        //validaPageIniJapon1_5(datosStep, 3, "nos fumamos un porro", dFTest.driver);
+//        validaPageIniJapon1_6(datosStep, 3, "nos fumamos un porro", dFTest.driver);
+//        //validaPageIniJapon2(datosStep, dFTest.driver);
+//    }	
     
     /**
      * Given país/provincia/idioma seleccionados, se realiza el paso para entrar en la shop
@@ -253,30 +259,44 @@ public class Otras extends GestorWebDriver {
         return datosStep;
     }
     
-    @Validation (
-    	description="1) Estamos en la página inicial de Japón",
-        level=State.Warn)
-    public boolean validaPageIniJapon1(DatosStep datosStep, WebDriver driver) {
-    	int maxSecondsToWait = 2;
-        return (PageIniShopJapon.isPageUntil(maxSecondsToWait, driver));
-    }
-    
-    @Validation (
-    	description="1) Estamos en la página inicial de Japón (la esperamos hasta #{maxSecondsWait} segundos y #{otraCosa})",
-        level=State.Warn)
-    public boolean validaPageIniJapon1_5(DatosStep datosStep, int maxSecondsWait, String otraCosa, WebDriver driver) {
-        return (!PageIniShopJapon.isPageUntil(maxSecondsWait, driver));
-    }
-    
-    @Validation (
-    	description="1) Estamos en la página inicial de Japón",
-        level=State.Warn)
-    public ValidationResult validaPageIniJapon2(DatosStep datosStep, WebDriver driver) {
-    	ValidationResult valResult = new ValidationResult();
-    	int maxSecondsToWait = 2;
-        PageIniShopJapon.isPageUntil(maxSecondsToWait, driver);
-        return valResult;
-    }
+//    @Validation (
+//    	description="1) Estamos en la página inicial de Japón",
+//        level=State.Warn)
+//    public boolean validaPageIniJapon1(DatosStep datosStep, WebDriver driver) {
+//    	int maxSecondsToWait = 2;
+//        return (PageIniShopJapon.isPageUntil(maxSecondsToWait, driver));
+//    }
+//    
+//    @Validation (
+//    	description="1) Estamos en la página inicial de Japón (la esperamos hasta #{maxSecondsWait} segundos y #{otraCosa})",
+//        level=State.Warn)
+//    public boolean validaPageIniJapon1_5(DatosStep datosStep, int maxSecondsWait, String otraCosa, WebDriver driver) {
+//        return (!PageIniShopJapon.isPageUntil(maxSecondsWait, driver));
+//    }
+//    
+//    @Validation (
+//    	description="1) Estamos en la página inicial de Japón (la esperamos hasta #{maxSecondsWait} segundos y #{otraCosa}) y se va a producir una excepción",
+//        level=State.Warn)
+//    public boolean validaPageIniJapon1_6(DatosStep datosStep, int maxSecondsWait, String otraCosa, WebDriver driver) {
+//    	assertTrue(2==3);
+//        return (!PageIniShopJapon.isPageUntil(maxSecondsWait, driver));
+//    }
+//    
+//    @Validation (
+//    	description="1) Estamos en la página inicial de Japón",
+//        level=State.Warn)
+//    public ListResultValidation validaPageIniJapon2(DatosStep datosStep, WebDriver driver) {
+//    	ListResultValidation listValResults = ListResultValidation.getNew(datosStep);
+//    	int maxSecondsToWait = 2;
+//        if (PageIniShopJapon.isPageUntil(maxSecondsToWait, driver)) {
+//        	ResultValidation resultVal = new ResultValidation();
+//        	resultVal.setDescription("Hemos esperado " + maxSecondsToWait + " segundos y hemos forzado un defecto");
+//        	resultVal.setLevelResult(State.Defect);
+//        	listValResults.add(resultVal);
+//        }
+//        
+//        return listValResults;
+//    }
     
 //    //TODO pending refactors:
 //    // 1) Remove datosStep

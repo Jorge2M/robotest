@@ -3,20 +3,16 @@ package com.mng.robotest.test80.mango.test.stpv.otras;
 import java.io.StringReader;
 import java.net.URI;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
-
 import org.testng.Assert;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -179,27 +175,26 @@ public class BrowserStpV {
             "2) Figura el siguiente contenido: <br>" + contRobots2.replace("\n", "<br>") + "<br>" +
             "3) Figura el siguiente contenido: <br>" + contRobots3.replace("\n", "<br>") + "<br>" +
             "4) Figura el siguiente contenido: <br>" + contRobots4.replace("\n", "<br>");
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!dFTest.driver.getPageSource().toLowerCase().contains(contRobots1.toLowerCase())) 
-                fmwkTest.addValidation(1, State.Defect, listVals);                
-            //2)
-            if (!dFTest.driver.getPageSource().contains(contRobots2))
-                fmwkTest.addValidation(2, State.Defect, listVals);
-            //3)
-            if (!dFTest.driver.getPageSource().contains(contRobots3))
-                fmwkTest.addValidation(3, State.Defect, listVals);
-            //4)
-            if (!dFTest.driver.getPageSource().contains(contRobots4))
-                fmwkTest.addValidation(4, State.Defect, listVals);            
+            if (!dFTest.driver.getPageSource().toLowerCase().contains(contRobots1.toLowerCase())) {
+                listVals.add(1, State.Defect);                
+            }
+            if (!dFTest.driver.getPageSource().contains(contRobots2)) {
+                listVals.add(2, State.Defect);
+            }
+            if (!dFTest.driver.getPageSource().contains(contRobots3)) {
+                listVals.add(3, State.Defect);
+            }
+            if (!dFTest.driver.getPageSource().contains(contRobots4)) {
+                listVals.add(4, State.Defect);
+            }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
-    
     
     public static void inputSitemapURLandValidate(String urlBaseTest, DataFmwkTest dFTest) throws Exception {
         URI uriBase = new URI(urlBaseTest);
@@ -224,6 +219,7 @@ public class BrowserStpV {
             "1) Obtenemos un XML con formato de sitemap<br>" + 
             "2) Todos los tags <b>lastmod</b> contienen la fecha del día: " + currentDay;
         datosStep.setExcepExists(false); datosStep.setResultSteps(State.Warn);
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             State resultado = State.Ok;
             //1)
@@ -241,7 +237,7 @@ public class BrowserStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(resultado);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static Date removeTime(Date date) {    

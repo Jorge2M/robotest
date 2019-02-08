@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -53,56 +50,56 @@ public class SecBolsaButtonAndLinksNewStpV {
         int maxSecondsToWait = 3;
         String descripValidac = 
             "1) Se scrolla hasta el apartado de \"Descriptión\"";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!SecDetalleProductNew.isVisibleUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!SecDetalleProductNew.isVisibleUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }  
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
         
         descripValidac = 
             "1) Figura el bloque de BreadCrumbs<br>" +
             "2) Es visible el item " + ItemBreadcrumb.linea + "<br>" +
             "3) Es visible el item " + ItemBreadcrumb.grupo + "<br>" +
             "4) Es visible el item " + ItemBreadcrumb.galeria;            
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!SecDetalleProductNew.isVisibleBreadcrumbs(0, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!SecDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.linea, dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);            
-            //3)
-            if (!SecDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.grupo, dFTest.driver))
-                fmwkTest.addValidation(3, State.Warn, listVals);
-            //4)
-            if (!SecDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.galeria, dFTest.driver))
-                fmwkTest.addValidation(4, State.Warn, listVals);            
+            if (!SecDetalleProductNew.isVisibleBreadcrumbs(0, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!SecDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.linea, dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
+            if (!SecDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.grupo, dFTest.driver)) {
+                listVals.add(3, State.Warn);
+            }
+            if (!SecDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.galeria, dFTest.driver)) {
+                listVals.add(4, State.Warn);            
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }  
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         if (TypePanel.KcSafety.getListApps().contains(app) &&
             (lineaType==LineaType.nina || lineaType==LineaType.nino)) {
             descripValidac = 
                 "1) Aparece el bloque de \"KcSafety\"";
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+            datosStep.setStateIniValidations();
+            listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
-                if (!SecDetalleProductNew.isVisibleBlockKcSafety(dFTest.driver))
-                    fmwkTest.addValidation(1, State.Defect, listVals);
+                if (!SecDetalleProductNew.isVisibleBlockKcSafety(dFTest.driver)) {
+                    listVals.add(1, State.Defect);
+                }
                 
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }  
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
         }
     }
     
@@ -133,29 +130,31 @@ public class SecBolsaButtonAndLinksNewStpV {
             descripValidac+=
             "<br>" + i + ") " + visible  + " es visible el icono de " + icon;
         }        
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!ModCompartirNew.isVisibleUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!ModCompartirNew.isVisibleUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
             //2...N)
             i=1;
             for (IconSocial icon : IconSocial.values()) {
                 i+=1;
                 if (isPaisChina != icon.isSpecificChina()) {
-                    if (ModCompartirNew.isVisibleIcon(icon, dFTest.driver))
-                        fmwkTest.addValidation(i, State.Warn, listVals);
+                    if (ModCompartirNew.isVisibleIcon(icon, dFTest.driver)) {
+                        listVals.add(i, State.Warn);
+                    }
                 }
                 else {
-                    if (!ModCompartirNew.isVisibleIcon(icon, dFTest.driver))
-                        fmwkTest.addValidation(i, State.Warn, listVals);                        
+                    if (!ModCompartirNew.isVisibleIcon(icon, dFTest.driver)) {
+                        listVals.add(i, State.Warn);                        
+                    }
                 }
             }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }  
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }    

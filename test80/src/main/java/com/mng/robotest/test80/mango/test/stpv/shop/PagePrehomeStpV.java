@@ -1,12 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.shop;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.List;
 
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -51,21 +49,21 @@ public class PagePrehomeStpV {
         String descripValidac = 
             validacion1 +
             "2) El país " + marcaOnline + " tiene la marca de venta online";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (dCtxSh.channel==Channel.desktop) {
-                if (!PagePrehome.isPaisSelectedDesktop(dFTest.driver, dCtxSh.pais.getNombre_pais()))
-                    fmwkTest.addValidation(1, State.Warn_NoHardcopy, listVals);
+                if (!PagePrehome.isPaisSelectedDesktop(dFTest.driver, dCtxSh.pais.getNombre_pais())) {
+                	listVals.add(1, State.Warn_NoHardcopy);
+                }
             }
-            //2)
-            if (!(dCtxSh.pais.isVentaOnline() && PagePrehome.isPaisSelectedWithMarcaCompra(dFTest.driver)))
-                fmwkTest.addValidation(2, State.Warn_NoHardcopy, listVals);
+            if (!(dCtxSh.pais.isVentaOnline() && PagePrehome.isPaisSelectedWithMarcaCompra(dFTest.driver))) {
+            	listVals.add(2, State.Warn_NoHardcopy);
+            }
                                     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     /**
@@ -80,7 +78,8 @@ public class PagePrehomeStpV {
             //Seleccionamos la provincia/idioma (si los hubiera) y seleccionamos el botón "Entrar"
             PagePrehome.selecionProvIdiomAndEnter(pais, idioma, channel, dFTest.driver);
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+            datosStep.setExcepExists(false); 
+            datosStep.setResultSteps(State.Ok);
         } 
         finally {datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));}
         
@@ -123,16 +122,16 @@ public class PagePrehomeStpV {
             
             String descripValidac = 
                 "1) Aparece una pantalla en la que el título contiene \"" + tituloContains + "\"";
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+            datosStep.setStateIniValidations();
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
-                if (!dFTest.driver.getTitle().toLowerCase().contains(tituloContains))
-                    fmwkTest.addValidation(1, State.Defect, listVals);
-                                        
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                if (!dFTest.driver.getTitle().toLowerCase().contains(tituloContains)) {
+                	listVals.add(1, State.Defect);
+                }
+                	                 
+                datosStep.setListResultValidations(listVals);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
         }
         
         //Validaciones estándar. 

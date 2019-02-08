@@ -1,12 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -22,16 +20,16 @@ public class PageMiCuentaStpV {
 		int maxSecondsToWait = 2;
 	    String descripValidac = 
 	        "1) Aparece la página de \"Mi Cuenta\" (la esperamos hasta " + maxSecondsToWait + " segundos)";
-	    datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+	    datosStep.setStateIniValidations();     
+	    ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	    try {
-	        List<SimpleValidation> listVals = new ArrayList<>();
-	        //1)
-	        if (!PageMiCuenta.isPageUntil(maxSecondsToWait, dFTest.driver))
-	            fmwkTest.addValidation(1, State.Defect, listVals);
+	        if (!PageMiCuenta.isPageUntil(maxSecondsToWait, dFTest.driver)) {
+	            listVals.add(1, State.Defect);
+	        }
 	
-	        datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+	        datosStep.setListResultValidations(listVals);
 	    }
-	    finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+	    finally { listVals.checkAndStoreValidations(descripValidac); }
 	}
 	
     public static DatosStep goToMisDatos(String usuarioReg, AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {

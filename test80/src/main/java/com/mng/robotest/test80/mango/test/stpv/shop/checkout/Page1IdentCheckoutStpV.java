@@ -1,13 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 
 @SuppressWarnings("javadoc")
 public class Page1IdentCheckoutStpV {
@@ -20,16 +16,16 @@ public class Page1IdentCheckoutStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Aparece el formulario correspondiente a la identificación (lo esperamos hasta " + maxSecondsToWait + " segs)"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();  
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!Page1IdentCheckout.secSoyNuevo.isFormIdentUntil(dFTest.driver, maxSecondsToWait))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!Page1IdentCheckout.secSoyNuevo.isFormIdentUntil(dFTest.driver, maxSecondsToWait)) {
+                listVals.add(1, State.Defect);
+            }
         
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 
 }

@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -33,19 +30,19 @@ public class ModalAvisoCambioPaisStpV {
         String descripValidac = 
             "1) Desaparece el modal de aviso de cambio de país (lo esperamos hasta " + maxSecondsWait + " segundos)<br>" +
             "2) En la dirección de envió aparece el país " + paisEnvio.getNombre_pais();
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!ModalAvisoCambioPais.isInvisibleUntil(maxSecondsWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2) 
-            if (!PageCheckoutWrapper.direcEnvioContainsPais(Channel.desktop, paisEnvio.getNombre_pais(), dFTest.driver))
-                fmwkTest.addValidation(2, State.Defect, listVals);
+            if (!ModalAvisoCambioPais.isInvisibleUntil(maxSecondsWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            if (!PageCheckoutWrapper.direcEnvioContainsPais(Channel.desktop, paisEnvio.getNombre_pais(), dFTest.driver)) {
+                listVals.add(2, State.Defect);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }

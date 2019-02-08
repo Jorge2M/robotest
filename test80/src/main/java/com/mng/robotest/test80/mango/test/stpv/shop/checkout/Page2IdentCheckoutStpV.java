@@ -1,12 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -24,19 +22,19 @@ public class Page2IdentCheckoutStpV {
         String descripValidac = 
             "1) Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + maxSecondsToWait + ")<br>" +
             "2) Es <b>" + !emailYetExists + "</b> que aparece el input para la introducción de la contraseña";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);             
+        datosStep.setStateIniValidations();         
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!Page2IdentCheckout.isPageUntil(maxSecondsToWait, dFTest.driver)) 
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
-            if (!Page2IdentCheckout.isInputPasswordAccordingEmail(emailYetExists, dFTest.driver)) 
-                fmwkTest.addValidation(2, State.Defect, listVals);
+            if (!Page2IdentCheckout.isPageUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            if (!Page2IdentCheckout.isInputPasswordAccordingEmail(emailYetExists, dFTest.driver)) {
+                listVals.add(2, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static HashMap<String, String> inputDataPorDefecto(Pais pais, String emailUsr, boolean inputDireccCharNoLatinos, DataFmwkTest dFTest) 
@@ -60,16 +58,16 @@ public class Page2IdentCheckoutStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Se hace clickable el botón \"Continuar\" (lo esperamos hasta " + maxSecondsToWait + ")";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);             
+        datosStep.setStateIniValidations();           
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!Page2IdentCheckout.isContinuarClickableUntil(maxSecondsToWait, dFTest.driver)) 
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!Page2IdentCheckout.isContinuarClickableUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
         
         return datosRegistro;
     }
@@ -105,16 +103,16 @@ public class Page2IdentCheckoutStpV {
         if (validaDirecCharNoLatinos) {
             String descripValidac = 
                 "1) Aparece el aviso a nivel de aduanas que indica que la dirección contiene carácteres no-latinos";
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);             
+            datosStep.setStateIniValidations();    
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);        
             try { 
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
-                if (!Page2IdentCheckout.isDisplayedAvisoAduanas(dFTest.driver)) 
-                    fmwkTest.addValidation(1, State.Defect, listVals);
+                if (!Page2IdentCheckout.isDisplayedAvisoAduanas(dFTest.driver)) {
+                    listVals.add(1, State.Defect);
+                }
                 
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+            finally { listVals.checkAndStoreValidations(descripValidac); }
         }
         else 
             PageCheckoutWrapperStpV.validateIsFirstPage(userRegistered, dataBag, channel, app, datosStep, dFTest);
@@ -127,31 +125,31 @@ public class Page2IdentCheckoutStpV {
 		if (pais.getRgpd().equals("S")) {
 	        String descripValidac = 
 	            "1) El texto legal de RGPD <b>SI</b> existe para el pais " + pais.getCodigo_pais() + "<br>";
-	        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+	        datosStep.setStateIniValidations();    
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	        try {
-	            List<SimpleValidation> listVals = new ArrayList<>();
-	            //1)
-	            if (!Page2IdentCheckout.isTextoLegalRGPDVisible(dFTest.driver))
-	                fmwkTest.addValidation(1, State.Defect, listVals);
+	            if (!Page2IdentCheckout.isTextoLegalRGPDVisible(dFTest.driver)) {
+	                listVals.add(1, State.Defect);
+	            }
 	            
-	            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+	            datosStep.setListResultValidations(listVals);
 	        }
-	        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }   
+	        finally { listVals.checkAndStoreValidations(descripValidac); }   
 		}
 		
 		else {
 			String descripValidac = 
 	            "1) El texto legal de RGPD <b>NO</b> existe para el pais " + pais.getCodigo_pais() + "<br>";
-	        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);                             
+	        datosStep.setStateIniValidations();    
+            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	        try {
-	            List<SimpleValidation> listVals = new ArrayList<>();
-	            //1)
-	            if (Page2IdentCheckout.isTextoLegalRGPDVisible(dFTest.driver))
-	                fmwkTest.addValidation(1, State.Defect, listVals);
+	            if (Page2IdentCheckout.isTextoLegalRGPDVisible(dFTest.driver)) {
+	                listVals.add(1, State.Defect);
+	            }
 	            
-	            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+	            datosStep.setListResultValidations(listVals);
 	        }
-	        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); } 
+	        finally { listVals.checkAndStoreValidations(descripValidac); } 
 	    }
 	}
     

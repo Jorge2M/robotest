@@ -263,12 +263,10 @@ public class CreateWebDriver {
             options.setExperimentalOption("mobileEmulation", mobileEmulation);
         }
 
-        //Creación del WebDriver de Chrome
         ChromeDriver chromeDriver = new ChromeDriver(options);
-        
-        //En caso de Desktop maximizaremos la ventana
-        if (channel==Channel.desktop)
-            chromeDriver.manage().window().maximize(); 
+        if (channel==Channel.desktop) {
+            chromeDriver.manage().window().maximize();
+        }
 
         return chromeDriver;
     }

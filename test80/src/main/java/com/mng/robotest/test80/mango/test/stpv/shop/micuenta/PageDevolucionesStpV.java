@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageDevoluciones;
@@ -20,25 +17,25 @@ public class PageDevolucionesStpV {
             "2) Aparece la opción de " + Devolucion.EnTienda.getLiteral() + "<br>" +
             "3) Aparece la opción de " + Devolucion.EnDomicilio.getLiteral() + "<br>" +
             "4) Aparece la opción de " + Devolucion.PuntoCeleritas.getLiteral();
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();      
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageDevoluciones.isPage(dFTest.driver)) 
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
-            if (!Devolucion.EnTienda.isPresentLink(dFTest.driver))
-                fmwkTest.addValidation(2, State.Defect, listVals);
-            //3)
-            if (!Devolucion.EnDomicilio.isPresentLink(dFTest.driver)) 
-                fmwkTest.addValidation(3, State.Defect, listVals);
-            //4)
-            if (!Devolucion.PuntoCeleritas.isPresentLink(dFTest.driver))
-                fmwkTest.addValidation(4, State.Defect, listVals);
+            if (!PageDevoluciones.isPage(dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            if (!Devolucion.EnTienda.isPresentLink(dFTest.driver)) {
+                listVals.add(2, State.Defect);
+            }
+            if (!Devolucion.EnDomicilio.isPresentLink(dFTest.driver)) {
+                listVals.add(3, State.Defect);
+            }
+            if (!Devolucion.PuntoCeleritas.isPresentLink(dFTest.driver)) {
+                listVals.add(4, State.Defect);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep solicitarRegogidaGratuitaADomicilio(DataFmwkTest dFTest) throws Exception {

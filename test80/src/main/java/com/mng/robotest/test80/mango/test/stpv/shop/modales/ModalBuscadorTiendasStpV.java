@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.modales;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalBuscadorTiendas;
@@ -19,19 +16,19 @@ public class ModalBuscadorTiendasStpV {
         String descripValidac = 
             "1) La capa de búsqueda es visible<br>" +
             "2) Se ha localizado alguna tienda (la esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {                                
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!ModalBuscadorTiendas.isVisible(dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!ModalBuscadorTiendas.isPresentAnyTiendaUntil(dFTest.driver, maxSecondsToWait))
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (!ModalBuscadorTiendas.isVisible(dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!ModalBuscadorTiendas.isPresentAnyTiendaUntil(dFTest.driver, maxSecondsToWait)) {
+                listVals.add(2, State.Warn);
+            }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }  
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest);}
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     /**
@@ -52,15 +49,15 @@ public class ModalBuscadorTiendasStpV {
         //Validaciones.
         String descripValidac = 
             "1) La capa correspondiente a la búsqueda desaparece";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (ModalBuscadorTiendas.isVisible(dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (ModalBuscadorTiendas.isVisible(dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
                         
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }  
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest);}
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 }

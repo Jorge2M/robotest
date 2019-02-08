@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.sofort;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSofort4th;
@@ -21,16 +18,16 @@ public class PageSofort4thStpV {
     public static void validaIsPage(DatosStep datosStep, DataFmwkTest dFTest) { 
         String descripValidac = 
             "1) Aparece la página de introducción del Usuario/Password de \"SOFORT\"";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageSofort4th.isPage(dFTest.driver)) 
-                fmwkTest.addValidation(1,State.Warn, listVals);
+            if (!PageSofort4th.isPage(dFTest.driver)) {
+                listVals.add(1,State.Warn);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep inputCredencialesUsr(String usrSofort, String passSofort, DataFmwkTest dFTest) throws Exception {
@@ -48,16 +45,16 @@ public class PageSofort4thStpV {
         //Validaciones
         String descripValidac = 
             "1) Aparece un formulario para la selección de la cuenta"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep); 
         try {
-            List<SimpleValidation> listVals = new ArrayList<>(); 
-            //1)
-            if (!PageSofort4th.isVisibleFormSelCta(dFTest.driver)) 
-                fmwkTest.addValidation(1,State.Warn, listVals);
+            if (!PageSofort4th.isVisibleFormSelCta(dFTest.driver)) {
+                listVals.add(1,State.Warn);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -78,16 +75,16 @@ public class PageSofort4thStpV {
         //Validaciones
         String descripValidac = 
             "1) Aparece un campo para la introducción del TAN"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageSofort4th.isVisibleInputTAN(dFTest.driver))
-                fmwkTest.addValidation(1,State.Warn, listVals);
+            if (!PageSofort4th.isVisibleInputTAN(dFTest.driver)) {
+                listVals.add(1,State.Warn);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }

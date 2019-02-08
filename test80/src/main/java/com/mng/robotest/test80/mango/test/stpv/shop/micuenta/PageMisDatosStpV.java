@@ -1,12 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisDatos;
@@ -21,22 +19,22 @@ public class PageMisDatosStpV {
             "1) Aparece una página con el la cabecera \"Mis datos\"<br>" +
             "2) El campo de email está bloqueado<br>" +
             "3) El campo de email contiene " + usuarioReg;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();       
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageMisDatos.isPage(dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!PageMisDatos.emailIsDisabled(dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);
-            //3)
-            if (PageMisDatos.getValueEmailInput(dFTest.driver).compareTo(usuarioReg.toUpperCase())!=0)  
-                fmwkTest.addValidation(3, State.Warn, listVals);
+            if (!PageMisDatos.isPage(dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!PageMisDatos.emailIsDisabled(dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
+            if (PageMisDatos.getValueEmailInput(dFTest.driver).compareTo(usuarioReg.toUpperCase())!=0) {
+                listVals.add(3, State.Warn);
+            }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones estándar. 
         AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
@@ -64,45 +62,45 @@ public class PageMisDatosStpV {
             "8) La población contiene la definida durante el registro: <b>" + poblacion + "</b><br>" +
             "9) Está seleccionado el país definido durante el registro: <b>" + codpais + "</b><br>" +
             "10) Está seleccionada la provincia definida durante el registro: <b>" + provincia + "</b>";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();           
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageMisDatos.isVisiblePasswordTypePassword(dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
-            if (PageMisDatos.getNumInputContentVoid(dFTest.driver) > 1)
-                fmwkTest.addValidation(2, State.Defect, listVals);
-            //3)
-            if (PageMisDatos.getText_inputNombre(dFTest.driver).compareTo(nombre)!=0)
-                fmwkTest.addValidation(3, State.Defect, listVals);
-            //4)
-            if (PageMisDatos.getText_inputApellidos(dFTest.driver).compareTo(apellidos)!=0)
-                fmwkTest.addValidation(4, State.Defect, listVals);
-            //5)
-            if (PageMisDatos.getText_inputEmail(dFTest.driver).toLowerCase().compareTo(email.toLowerCase())!=0)
-                fmwkTest.addValidation(5, State.Defect, listVals);
-            //6)
-            if (PageMisDatos.getText_inputDireccion(dFTest.driver).compareTo(direccion)!=0)
-                fmwkTest.addValidation(6, State.Defect, listVals);
-            //7)
-            if (PageMisDatos.getText_inputCodPostal(dFTest.driver).compareTo(codpostal)!=0)
-                fmwkTest.addValidation(7, State.Defect, listVals);
-            //8)
-            if (PageMisDatos.getText_inputPoblacion(dFTest.driver).compareTo(poblacion)!=0)
-                fmwkTest.addValidation(8, State.Defect, listVals);
-            //9)
-            if (PageMisDatos.getCodPaisSelected(dFTest.driver).compareTo(codpais)!=0)
-                fmwkTest.addValidation(9, State.Defect, listVals);
-            //10)
+            if (!PageMisDatos.isVisiblePasswordTypePassword(dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            if (PageMisDatos.getNumInputContentVoid(dFTest.driver) > 1) {
+                listVals.add(2, State.Defect);
+            }
+            if (PageMisDatos.getText_inputNombre(dFTest.driver).compareTo(nombre)!=0) {
+                listVals.add(3, State.Defect);
+            }
+            if (PageMisDatos.getText_inputApellidos(dFTest.driver).compareTo(apellidos)!=0) {
+                listVals.add(4, State.Defect);
+            }
+            if (PageMisDatos.getText_inputEmail(dFTest.driver).toLowerCase().compareTo(email.toLowerCase())!=0) {
+                listVals.add(5, State.Defect);
+            }
+            if (PageMisDatos.getText_inputDireccion(dFTest.driver).compareTo(direccion)!=0) {
+                listVals.add(6, State.Defect);
+            }
+            if (PageMisDatos.getText_inputCodPostal(dFTest.driver).compareTo(codpostal)!=0) {
+                listVals.add(7, State.Defect);
+            }
+            if (PageMisDatos.getText_inputPoblacion(dFTest.driver).compareTo(poblacion)!=0) {
+                listVals.add(8, State.Defect);
+            }
+            if (PageMisDatos.getCodPaisSelected(dFTest.driver).compareTo(codpais)!=0) {
+                listVals.add(9, State.Defect);
+            }
             if (provincia!=null) {
-	            if (PageMisDatos.getProvinciaSelected(dFTest.driver).compareTo(provincia)!=0)
-	                fmwkTest.addValidation(10, State.Defect, listVals);
+	            if (PageMisDatos.getProvinciaSelected(dFTest.driver).compareTo(provincia)!=0) {
+	                listVals.add(10, State.Defect);
+	            }
             }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -132,16 +130,16 @@ public class PageMisDatosStpV {
         //Validaciones.
         String descripValidac = 
             "1) Aparece una pantalla con el literal \"Tus datos han sido modificados en nuestra base de datos\"";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageMisDatos.pageResOK(dFTest.driver)) 
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!PageMisDatos.pageResOK(dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
                                     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return nombreActual;
     }
@@ -149,15 +147,15 @@ public class PageMisDatosStpV {
     public static void validaContenidoNombre(String nombre, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) En el campo del nombre figura<b>: " + nombre + "<b>"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageMisDatos.getValueNombreInput(dFTest.driver).contains(nombre))
-                fmwkTest.addValidation(1,State.Warn, listVals);
+            if (!PageMisDatos.getValueNombreInput(dFTest.driver).contains(nombre)) {
+                listVals.add(1,State.Warn);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 }

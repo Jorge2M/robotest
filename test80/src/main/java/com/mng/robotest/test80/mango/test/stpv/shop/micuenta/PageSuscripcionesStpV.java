@@ -2,12 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.StringTokenizer;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageSuscripciones;
@@ -21,16 +20,16 @@ public class PageSuscripcionesStpV {
         //Validaciones
         String descripValidac = 
             "1) Aparece la página de \"Suscripciones\"";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageSuscripciones.isPage(dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!PageSuscripciones.isPage(dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones estándar. 
         AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
@@ -47,25 +46,25 @@ public class PageSuscripcionesStpV {
             "1) Aparecen "  + numLineasTotales + " Newsletter<br>" +
             "2) Aparecen "  + numLinDesmarcadas + " suscripciones desmarcadas<br>" +
             "3) Aparecen desmarcadas las suscripciones de: " + lineasUnchecked;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();   
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (PageSuscripciones.getNumNewsletters(dFTest.driver)!=numLineasTotales)
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (PageSuscripciones.getNumNewslettersDesmarcadas(dFTest.driver)!=numLinDesmarcadas) 
-                fmwkTest.addValidation(2, State.Warn, listVals);
-            //3)
+            if (PageSuscripciones.getNumNewsletters(dFTest.driver)!=numLineasTotales) {
+                listVals.add(1, State.Warn);
+            }
+            if (PageSuscripciones.getNumNewslettersDesmarcadas(dFTest.driver)!=numLinDesmarcadas) {
+                listVals.add(2, State.Warn);
+            }
             while (tokensLinDesmarcadas.hasMoreElements()) {
                 String lineaStr=tokensLinDesmarcadas.nextToken();
-                if (!PageSuscripciones.isNewsletterDesmarcada(lineaStr, dFTest.driver))
-                    fmwkTest.addValidation(3, State.Warn, listVals);
+                if (!PageSuscripciones.isNewsletterDesmarcada(lineaStr, dFTest.driver)) {
+                    listVals.add(3, State.Warn);
+                }
             }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep selectNewslettersAndGuarda(ArrayList<idNewsletters> listNewsletters, DataFmwkTest dFTest) throws Exception {
@@ -87,16 +86,16 @@ public class PageSuscripcionesStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Aparece una pantalla de resultado OK (la esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();     
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageSuscripciones.isPageResOKUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!PageSuscripciones.isPageResOKUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
                                     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }

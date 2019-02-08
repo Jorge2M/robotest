@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -85,16 +82,16 @@ public class PageFichaArtStpV {
         String descripValidac = 
             "1) Aparece la página correspondiente a la ficha del artículo " + refArticulo + 
             " (La esperamos hasta " + maxSecondsToWait + " segundos)"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!pageFicha.isFichaArticuloUntil(refArticulo, maxSecondsToWait))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!pageFicha.isFichaArticuloUntil(refArticulo, maxSecondsToWait)) {
+                listVals.add(1, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public void validateIsFichaArtNoDisponible(String refArticulo, DatosStep datosStep) {
@@ -102,19 +99,19 @@ public class PageFichaArtStpV {
         String descripValidac = 
             "1) Aparece la página de resultado de una búsqueda KO<br>" +
             "2) En el texto de resultado de la búsqueda aparece la referencia " + refArticulo;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageErrorBusqueda.isPage(this.dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!PageErrorBusqueda.isCabeceraResBusqueda(this.dFTest.driver, refArticulo))
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (!PageErrorBusqueda.isPage(this.dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!PageErrorBusqueda.isCabeceraResBusqueda(this.dFTest.driver, refArticulo)) {
+                listVals.add(2, State.Warn);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public void validateIsArticleNotAvailable(ArticleStock article, DatosStep datosStep) {
@@ -124,19 +121,19 @@ public class PageFichaArtStpV {
             "1) Aparece la página correspondiente a la ficha del artículo " + article.getReference() + 
                 " (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) No está disponible La talla <b>" + article.getSize() + "</b> del color <b>" + article.getColourCode() + "</b>"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!pageFicha.isFichaArticuloUntil(article.getReference(), maxSecondsToWait))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
-            if (pageFicha.secDataProduct.isTallaAvailable(article.getSize(), pageFicha.getTypeFicha(), dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (!pageFicha.isFichaArticuloUntil(article.getReference(), maxSecondsToWait)) {
+                listVals.add(1, State.Defect);
+            }
+            if (pageFicha.secDataProduct.isTallaAvailable(article.getSize(), pageFicha.getTypeFicha(), dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }        
     
     public void validateIsFichaArtAlgunoColorNoDisponible(String refArticulo, DatosStep datosStep) {
@@ -144,19 +141,19 @@ public class PageFichaArtStpV {
         String descripValidac = 
             "1) Aparece la página correspondiente a la ficha del artículo " + refArticulo + "<br>" +
             "2) Aparece algún color no disponible";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!pageFicha.isFichaArticuloUntil(refArticulo, 0/*maxSecondsToWait*/))
-                fmwkTest.addValidation(1, State.Defect, listVals);                
-            //2)
-            if (!pageFicha.secDataProduct.isElementInState(ColorType.Unavailable, StateElem.Present, dFTest.driver))
-                fmwkTest.addValidation(2, State.Defect, listVals);
+            if (!pageFicha.isFichaArticuloUntil(refArticulo, 0/*maxSecondsToWait*/)) {
+                listVals.add(1, State.Defect);                
+            }
+            if (!pageFicha.secDataProduct.isElementInState(ColorType.Unavailable, StateElem.Present, dFTest.driver)) {
+                listVals.add(2, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public void validateIsFichaCualquierArticulo(DatosStep datosStep) {
@@ -164,16 +161,16 @@ public class PageFichaArtStpV {
         String descripValidac = 
             "1) Aparece la página de Ficha";
         datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!pageFicha.isPageUntil(0))
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (!pageFicha.isPageUntil(0)) {
+                listVals.add(1, State.Warn);
+            }
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
             
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
     public void validaDetallesProducto(DataFichaArt datosArticulo, DatosStep datosStep) {
@@ -193,25 +190,24 @@ public class PageFichaArtStpV {
         String descripValidac = 
              validacion1 +
              validacion2;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (datosArticulo.availableReferencia()) {
-                if (!pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), maxSecondsToWait))                  
-                    fmwkTest.addValidation(1, State.Defect, listVals);
+                if (!pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), maxSecondsToWait)) {                 
+                    listVals.add(1, State.Defect);
+                }
             }
-            
-            //2)
             if (datosArticulo.availableNombre()) {
                 String nombreArtFicha = pageFicha.secDataProduct.getTituloArt(this.channel, this.dFTest.driver).trim();
-                if (datosArticulo.getNombre().toLowerCase().compareTo(nombreArtFicha.toLowerCase())!=0) 
-                    fmwkTest.addValidation(2, State.Warn, listVals);
+                if (datosArticulo.getNombre().toLowerCase().compareTo(nombreArtFicha.toLowerCase())!=0) {
+                    listVals.add(2, State.Warn);
+                }
             }
         
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 
     public DatosStep selectColorAndSaveData(ArticuloScreen articulo) throws Exception {
@@ -236,17 +232,17 @@ public class PageFichaArtStpV {
         //Validaciones
         String descripValidac = 
         "1) Está seleccionado el color con código <b>" + codigoColor + "<b>";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             String codigoColorPage = pageFicha.secDataProduct.getCodeColor(ColorType.Selected, dFTest.driver); 
-            if (!codigoColorPage.contains(codigoColor))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!codigoColorPage.contains(codigoColor)) {
+                listVals.add(1, State.Defect);
+            }
                     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }  
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -279,17 +275,17 @@ public class PageFichaArtStpV {
         //Validaciones
         String descripValidac = 
         "1) Queda seleccionada la talla <b>" + tallaCodNum + "<b>";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             String tallaSelected = pageFicha.getTallaNumSelected(); 
-            if (tallaSelected.compareTo(tallaCodNum)!=0)
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (tallaSelected.compareTo(tallaCodNum)!=0) {
+                listVals.add(1, State.Defect);
+            }
                     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }  
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -325,20 +321,20 @@ public class PageFichaArtStpV {
         String descripValidac = 
             "1) No aparece el botón \"COMPRAR\"<br>" +
             "2) Aparece la capa de introducción de avísame";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (SecBolsa.isVisibleBotonComprar(Channel.desktop, this.dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
+            if (SecBolsa.isVisibleBotonComprar(Channel.desktop, this.dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
             boolean isVisibleAvisame = pageFicha.secDataProduct.isVisibleCapaAvisame(this.dFTest.driver);
-            if (!isVisibleAvisame)
-                fmwkTest.addValidation(2, State.Defect, listVals);
+            if (!isVisibleAvisame) {
+                listVals.add(2, State.Defect);
+            }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public DatosStep selectAnadirALaBolsaStep() throws Exception {
@@ -372,37 +368,38 @@ public class PageFichaArtStpV {
             strApareceAviso = "NO";
         String descripValidac = 
             "1) " + strApareceAviso + " Aparece un aviso indicando que hay que seleccionar la talla";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             boolean isVisibleAviso = pageFicha.secDataProduct.isVisibleAvisoSeleccionTalla(this.dFTest.driver);
             if (isTallaUnica || typeFichaAct==TypeFicha.New) {
-                if (isVisibleAviso)
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                if (isVisibleAviso) {
+                    listVals.add(1, State.Warn);
+                }
             }
             else {
-                if (!isVisibleAviso)
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                if (!isVisibleAviso) {
+                    listVals.add(1, State.Warn);
+                }
             }
                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }  
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         if (!isTallaUnica && typeFichaAct==TypeFicha.New) {
             descripValidac = 
                 "1) Se hace visible la lista de tallas";
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+            datosStep.setStateIniValidations();
+            listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
-                if (!pageFicha.secDataProduct.secSelTallasNew.isVisibleListTallasForSelectUntil(0, this.dFTest.driver))
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                if (!pageFicha.secDataProduct.secSelTallasNew.isVisibleListTallasForSelectUntil(0, this.dFTest.driver)) {
+                    listVals.add(1, State.Warn);
+                }
         
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }  
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }            
+            finally { listVals.checkAndStoreValidations(descripValidac); }            
         }
             
         return isTallaUnica;
@@ -445,18 +442,19 @@ public class PageFichaArtStpV {
         String descripValidac = 
             "1) Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + maxSecondsToWait1 + " segundos)<br>" +
             "2) La capa superior acaba desapareciendo (lo esperamos hasta " + maxSecondsToWait2 + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!pageFicha.isVisibleDivAnadiendoAFavoritosUntil(maxSecondsToWait1))
-                fmwkTest.addValidation(1, State.Info, listVals);
-            if (!pageFicha.isInvisibleDivAnadiendoAFavoritosUntil(maxSecondsToWait2))
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (!pageFicha.isVisibleDivAnadiendoAFavoritosUntil(maxSecondsToWait1)) {
+                listVals.add(1, State.Info);
+            }
+            if (!pageFicha.isInvisibleDivAnadiendoAFavoritosUntil(maxSecondsToWait2)) {
+                listVals.add(2, State.Warn);
+            }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones
         validateVisibleButtonFavoritos(ActionFavButton.Remove, datosStep);
@@ -486,24 +484,25 @@ public class PageFichaArtStpV {
         //Validaciones
         String descripValidac = 
             "1) Aparece el botón de " + buttonType + " a Favoritos";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             switch (buttonType) {
             case Remove:
-                if (!pageFicha.isVisibleButtonElimFavoritos())
-                    fmwkTest.addValidation(1, State.Defect, listVals);
+                if (!pageFicha.isVisibleButtonElimFavoritos()) {
+                    listVals.add(1, State.Defect);
+                }
                 break;
             case Add:
             default:                
-                if (!pageFicha.isVisibleButtonAnadirFavoritos())
-                    fmwkTest.addValidation(1, State.Defect, listVals);
+                if (!pageFicha.isVisibleButtonAnadirFavoritos()) {
+                    listVals.add(1, State.Defect);
+                }
             }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
     public DatosStep selectBuscarEnTiendaButton() throws Exception {
@@ -549,35 +548,33 @@ public class PageFichaArtStpV {
         boolean existsBlock = true;
         String descripValidac = 
             "1) Es visible el slider de artículos de tipo <b>" + typeSlider + "</b>";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (!pageFicha.isVisibleSlider(typeSlider)) {
-                fmwkTest.addValidation(1, State.Info_NoHardcopy, listVals);
+                listVals.add(1, State.Info_NoHardcopy);
                 existsBlock = false;
             }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         if (existsBlock) {
             int numArtMin = 1;
             descripValidac = 
                 "1) El número de artículos del slider de tipo <b>" + typeSlider + "</b> es > " + numArtMin;
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+            datosStep.setStateIniValidations();
+            listVals = ListResultValidation.getNew(datosStep);
             try {
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
                 if (pageFicha.getNumArtVisiblesSlider(typeSlider) <= numArtMin) {
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                    listVals.add(1, State.Warn);
                     existsBlock = false;
                 }
                                 
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }            
+            finally { listVals.checkAndStoreValidations(descripValidac); }            
         }
     }
     
@@ -591,28 +588,28 @@ public class PageFichaArtStpV {
             "1) " + statePrevText + " el link <b>Prev</b> (lo esperamos hasta " + maxSecondsToWait + " segundos)";          
         if (dCtxSh.appE==AppEcom.outlet || dCtxSh.channel==Channel.desktop)
         	descripValidac+="<br>2) Es visible el link <b>Next</b>";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (locationArt.isFirstInGalery()) {
-                if (pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Prev, maxSecondsToWait, this.dFTest.driver))
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                if (pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Prev, maxSecondsToWait, this.dFTest.driver)) {
+                    listVals.add(1, State.Warn);
+                }
             }
             else {
-                if (!pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Prev, maxSecondsToWait, this.dFTest.driver))
-                    fmwkTest.addValidation(1, State.Warn, listVals);
+                if (!pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Prev, maxSecondsToWait, this.dFTest.driver)) {
+                    listVals.add(1, State.Warn);
+                }
             }
-            //2)
             if (app==AppEcom.outlet || dCtxSh.channel==Channel.desktop) {
             	descripValidac = descripValidac + "2) Es visible el link <b>Next</b>";
-	            if (!pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Next, 0, this.dFTest.driver))
-	                fmwkTest.addValidation(2, State.Warn, listVals);            
+	            if (!pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Next, 0, this.dFTest.driver)) {
+	                listVals.add(2, State.Warn);            
+	            }
             }            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);            
+            datosStep.setListResultValidations(listVals);            
         }
-        
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public DatosStep selectLinkNavigation(ProductNav productNav, DataCtxShop dCtxSh, String refProductOrigin) 
@@ -645,16 +642,16 @@ public class PageFichaArtStpV {
         //Validaciones
         String descripValidac = 
             "1) Existe más de una imagen de carrusel a la izquierda de la imagen principal";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() < 2)
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() < 2) {
+                listVals.add(1, State.Warn);
+            }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);                    
+            datosStep.setListResultValidations(listVals);                    
         }  
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest);}
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public DatosStep selectImgCarruselIzqFichaOld(int numImagen) throws Exception { 
@@ -674,16 +671,16 @@ public class PageFichaArtStpV {
         //Validaciones
         String descripValidac = 
             "1) La imagen central se corresponde con la imagen del carrusel seleccionada (<b>" + pngImagen + "</b>)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);           
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!((PageFichaArtOld)pageFicha).srcImagenCentralCorrespondsToImgCarrusel(pngImagen))
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!((PageFichaArtOld)pageFicha).srcImagenCentralCorrespondsToImgCarrusel(pngImagen)) {
+                listVals.add(1, State.Defect);
+            }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -705,38 +702,38 @@ public class PageFichaArtStpV {
         String descripValidac = 
             "1) Se aplica un Zoom sobre la imagen central<br>" +
             "2) La imagen central con Zoom sigue conteniendo la imagen original: " + pngImgCentralOriginal;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!((PageFichaArtOld)pageFicha).isVisibleFichaConZoom())
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
-            if (!((PageFichaArtOld)pageFicha).srcImagenCentralConZoomContains(pngImgCentralOriginal))
-                fmwkTest.addValidation(2, State.Defect, listVals);
+            if (!((PageFichaArtOld)pageFicha).isVisibleFichaConZoom()) {
+                listVals.add(1, State.Defect);
+            }
+            if (!((PageFichaArtOld)pageFicha).srcImagenCentralConZoomContains(pngImgCentralOriginal)) {
+                listVals.add(2, State.Defect);
+            }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }    
     
     public void validaBreadCrumbFichaOld(String urlGaleryOrigin, DatosStep datosStep) {
         String descripValidac = 
             "1) Existen el bloque correspondiente a las <b>BreadCrumb</b><br>" + 
             "2) El link correspondiente a la Galería del artículo linca a la URL " + urlGaleryOrigin;
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!SecBreadcrumbFichaOld.isVisibleBreadCrumb(this.dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
+            if (!SecBreadcrumbFichaOld.isVisibleBreadCrumb(this.dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
             String urlGaleryBC = SecBreadcrumbFichaOld.getUrlItemBreadCrumb(ItemBCrumb.Galery, this.dFTest.driver);
-            if (!urlGaleryOrigin.contains(urlGaleryBC))
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (!urlGaleryOrigin.contains(urlGaleryBC)) {
+                listVals.add(2, State.Warn);
+            }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, this.dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 }

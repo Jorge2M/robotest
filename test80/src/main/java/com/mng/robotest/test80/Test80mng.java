@@ -336,10 +336,6 @@ public class Test80mng {
                 NodosFactoryXML nodosFactory = new NodosFactoryXML();
                 nodosFactory.testRunner(params);            
                 break;                
-            case ControlPeriodicoURLs:
-                ControlPeriodicoURLsXML controlPerURLs = new ControlPeriodicoURLsXML();
-                controlPerURLs.testRunner(params);
-                break;
             case ConsolaVotf:
                 ConsolaVotfXML consolaVotf = new ConsolaVotfXML();
                 consolaVotf.testRunner(params);

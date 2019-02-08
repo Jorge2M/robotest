@@ -1,16 +1,14 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -44,16 +42,15 @@ public class SecMenusWrapperStpV {
     
     public static void validateLineas(Pais pais, AppEcom app, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = "";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-    
             //Ejecutamos las validaciones y obtenemos el literal con la descrpción de cada una de ellas
             descripValidac = getListaValidacionesLineas(listVals, pais, app, channel, dFTest.driver);
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         } 
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     /**
@@ -61,7 +58,7 @@ public class SecMenusWrapperStpV {
      * @listVals con la lista de validaciones fallidas si las hubiera
      * @return la lista de validaciones
      */
-    private static String getListaValidacionesLineas(List<SimpleValidation> listVals, Pais pais, AppEcom app, Channel channel, WebDriver driver) {
+    private static String getListaValidacionesLineas(ListResultValidation listVals, Pais pais, AppEcom app, Channel channel, WebDriver driver) {
         LineaType[] lineasToTest = Linea.LineaType.values();
         int numValidacion = 0;
         String descripValidac = "";
@@ -80,13 +77,13 @@ public class SecMenusWrapperStpV {
                     numValidacion+=1;
                     descripValidac+=numValidacion + ") <b>Sí</b> aparece el link de la línea \"<b>" + lineaType + "</b>\"<br>";
                     if (!SecMenusWrap.isLineaPresent(lineaType, app, channel, driver))
-                        fmwkTest.addValidation(numValidacion, State.Warn, listVals);
+                        listVals.add(numValidacion, State.Warn);
                 }    
                 else {
                     numValidacion+=1;
                     descripValidac+=numValidacion + ") <b>No</b> aparece el link de la línea \"<b>" + lineaType + "</b>\"<br>";
                     if (SecMenusWrap.isLineaPresent(lineaType, app, channel, driver))
-                        fmwkTest.addValidation(numValidacion, State.Warn, listVals);
+                        listVals.add(numValidacion, State.Warn);
                 }
             }
         }
@@ -142,19 +139,20 @@ public class SecMenusWrapperStpV {
         finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
         //Validaciones
+        int maxSecondsWait = 3;
         String descripValidac =
-            "1) Como mínimo se obtiene 1 artículo (lo esperamos un máximo de 3 segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);
+            "1) Como mínimo se obtiene 1 artículo (lo esperamos un máximo de " + maxSecondsWait + " segundos)";
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             PageGaleria pageGaleria = PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-            if (!pageGaleria.isVisibleArticuloUntil(1/*numArticulo*/, 3/*max seconds to wait*/))
-                fmwkTest.addValidation(1, State.Warn_NoHardcopy, listVals);
+            if (!pageGaleria.isVisibleArticuloUntil(1, maxSecondsWait)) {
+                listVals.add(1, State.Warn_NoHardcopy);
+            }
                  
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
             
-        } finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        } finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones estándar. 
         AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, datosStep, dFTest);
@@ -198,30 +196,30 @@ public class SecMenusWrapperStpV {
         else
             descripValidac+=
             "3) No aparece ningún icono de favoritos asociado a ningún artículo";        
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
             PageGaleria pageGaleria = PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-            //1)
-            if (!pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, maxSecondsToWaitArticle)) 
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (!pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, maxSecondsToWaitArticle)) {
+                listVals.add(1, State.Warn);
+            }
             if (dCtxSh.appE==AppEcom.shop) {
-            	//2)
-            	if (!pageGaleria.isArticleWithHearthIconPresentUntil(1, maxSecondsToWaitIcon))
-            		fmwkTest.addValidation(2, State.Defect, listVals);
-                //3)
-                if (!pageGaleria.eachArticlesHasOneFavoriteIcon()) 
-                    fmwkTest.addValidation(3, State.Warn, listVals);            
+            	if (!pageGaleria.isArticleWithHearthIconPresentUntil(1, maxSecondsToWaitIcon)) {
+            		listVals.add(2, State.Defect);
+            	}
+                if (!pageGaleria.eachArticlesHasOneFavoriteIcon()) {
+                    listVals.add(3, State.Warn);            
+                }
             }
             else {
-                //3)
-                if (pageGaleria.getNumFavoritoIcons() > 0)
-                    fmwkTest.addValidation(3, State.Defect, listVals);
+                if (pageGaleria.getNumFavoritoIcons() > 0) {
+                    listVals.add(3, State.Defect);
+                }
             }
                     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones específicas para el caso de Desktop
         if (dCtxSh.channel==Channel.desktop)

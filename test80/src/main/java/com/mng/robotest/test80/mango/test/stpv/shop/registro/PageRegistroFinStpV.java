@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.registro;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -21,16 +18,16 @@ public class PageRegistroFinStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Aparece la página final del proceso de registro (la esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageRegistroFin.isPageUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (!PageRegistroFin.isPageUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Warn);
+            }
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
     public static DatosStep clickIrDeShoppingButton(DataCtxShop dCtxSh, DataFmwkTest dFTest) 
@@ -52,20 +49,20 @@ public class PageRegistroFinStpV {
         String descripValidac = 
             "1) El logo de Mango redirige al país/idioma origen: /" + dCtxSh.idioma.getAcceso() + "<br>" +
             "2) Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
             if (!SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver)
-            		.validaLogoMangoGoesToIdioma(dCtxSh.idioma))
-                fmwkTest.addValidation(1, State.Warn, listVals);
-            //2)
-            if (!SecMenusWrap.secMenusUser.isPresentCerrarSesion(dCtxSh.channel, dFTest.driver))
-                fmwkTest.addValidation(2, State.Defect, listVals);
+            	.validaLogoMangoGoesToIdioma(dCtxSh.idioma)) {
+                listVals.add(1, State.Warn);
+            }
+            if (!SecMenusWrap.secMenusUser.isPresentCerrarSesion(dCtxSh.channel, dFTest.driver)) {
+                listVals.add(2, State.Defect);
+            }
                             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }

@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.favoritos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -30,19 +27,19 @@ public class PageFavoritosStpV {
             "1) Está visible la capa de favoritos con artículos (la esperamos hasta " + maxSecondsToWaitCapa + " segundos)<br>" +
             "2) Aparecen los artículos (los esperamos hasta " + maxSecondsToWaitArticles + " segundos): <br>" +
             	dataFavoritos.getListArtDescHTML();
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();    
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageFavoritos.isSectionArticlesVisibleUntil(maxSecondsToWaitCapa, dFTest.driver)) 
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2) 
-            if (!PageFavoritos.areVisibleArticlesUntil(dataFavoritos, maxSecondsToWaitArticles, dFTest.driver))
-                fmwkTest.addValidation(2, State.Defect, listVals);
+            if (!PageFavoritos.isSectionArticlesVisibleUntil(maxSecondsToWaitCapa, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            if (!PageFavoritos.areVisibleArticlesUntil(dataFavoritos, maxSecondsToWaitArticles, dFTest.driver)) {
+                listVals.add(2, State.Defect);
+            }
                         
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
     public static DatosStep clearAll(DataFavoritos dataFavoritos, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
@@ -76,33 +73,28 @@ public class PageFavoritosStpV {
     	//Validacion
     	int secondsToWait = 5;
         String descripValidac = 
-                "1) Aparece el modal de favoritos compartidos <br>" +
-                "2) Aparece el boton de compartir por Telegram <br>" + 
-                "3) Aparece el boton de compartir por WhatsApp <br>" +
-                "4) Aparece la url para copiarla y compartir como texto";
+        	"1) Aparece el modal de favoritos compartidos <br>" +
+            "2) Aparece el boton de compartir por Telegram <br>" + 
+            "3) Aparece el boton de compartir por WhatsApp <br>" +
+            "4) Aparece la url para copiarla y compartir como texto";
+    	ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-        	
-        	List<SimpleValidation> listVals = new ArrayList<>();
-        	//1
         	if(!PageFavoritos.checkShareModalUntill(secondsToWait, dFTest.driver)) {
-        		fmwkTest.addValidation(1, State.Defect, listVals);
-        	};
-            //2
+        		listVals.add(1, State.Defect);
+        	}
         	if(!PageFavoritos.isShareTelegramFavoritesVisible(dFTest.driver)) {
-        		fmwkTest.addValidation(1, State.Defect, listVals);
-        	};
-            //3
+        		listVals.add(1, State.Defect);
+        	}
             if(!PageFavoritos.isShareWhatsappFavoritesVisible(dFTest.driver)) {
-            	fmwkTest.addValidation(1, State.Defect, listVals);
-            };
-            //4
+            	listVals.add(1, State.Defect);
+            }
             if(!PageFavoritos.isShareUrlFavoritesVisible(dFTest.driver)) {
-            	fmwkTest.addValidation(1, State.Defect, listVals);
-            };
+            	listVals.add(1, State.Defect);
+            }
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         
-        } finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        } finally { listVals.checkAndStoreValidations(descripValidac); }
         
     }
     
@@ -128,16 +120,16 @@ public class PageFavoritosStpV {
         int maxSecondsToWait = 2;
         String descripValidac = 
         	"1) Desaparece el modal de favoritos compartidos (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();   
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageFavoritos.checkShareModalInvisible(dFTest.driver, maxSecondsToWait)) 
-                fmwkTest.addValidation(1, State.Warn, listVals);
+            if (!PageFavoritos.checkShareModalInvisible(dFTest.driver, maxSecondsToWait)) {
+                listVals.add(1, State.Warn);
+            }
                         
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
     public static DatosStep clear(ArticuloScreen articulo, DataFmwkTest dFTest) throws Exception {
@@ -156,16 +148,16 @@ public class PageFavoritosStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Desaparece de Favoritos el artículo con referencia <b>" + articulo.getRefProducto() + "</b> (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations(); 
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!PageFavoritos.isInvisibleArticleUntil(articulo, maxSecondsToWait, dFTest.driver)) 
-                fmwkTest.addValidation(1, State.Defect, listVals);
+            if (!PageFavoritos.isInvisibleArticleUntil(articulo, maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
                         
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
         
         return datosStep;
     }
@@ -186,19 +178,19 @@ public class PageFavoritosStpV {
         String descripValidac = 
             "1) No queda ningún artículo en Favoritos<br>" +
             "2) Aparece el botón \"Inspírate con lo último\"";
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Nok);               
+        datosStep.setStateIniValidations();    
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (PageFavoritos.hayArticulos(dFTest.driver)) 
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2) 
-            if (!PageFavoritos.isVisibleButtonEmpty(dFTest.driver))
-                fmwkTest.addValidation(2, State.Warn, listVals);
+            if (PageFavoritos.hayArticulos(dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
+            if (!PageFavoritos.isVisibleButtonEmpty(dFTest.driver)) {
+                listVals.add(2, State.Warn);
+            }
                         
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }        
+        finally { listVals.checkAndStoreValidations(descripValidac); }        
         
         return datosStep;
     }

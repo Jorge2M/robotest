@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.controlTest.SimpleValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -47,21 +44,21 @@ public class SecKlarnaStpV {
         String descripValidac = 
             "1) Aparece el modal de las direcciones de Klarna (lo esperamos hasta " + maxSecondsToWait+ " segundos)<br>" + 
             "2) Aparecen los datos asociados al Nº persona: " + pago.getNomklarna() + " - " + pago.getDirecklarna() + " - " + pago.getProvinklarna();
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);          
+        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!SecKlarna.isModalDireccionesVisibleUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1, State.Defect, listVals);
-            //2)
+            if (!SecKlarna.isModalDireccionesVisibleUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1, State.Defect);
+            }
             if (!SecKlarna.getTextNombreAddress(dFTest.driver).contains(pago.getNomklarna()) ||
                 !SecKlarna.getTextDireccionAddress(dFTest.driver).contains(pago.getDirecklarna()) ||
-                !SecKlarna.getTextProvinciaAddress(dFTest.driver).contains(pago.getProvinklarna()))
-                fmwkTest.addValidation(2,State.Warn, listVals);
+                !SecKlarna.getTextProvinciaAddress(dFTest.driver).contains(pago.getProvinklarna())) {
+                listVals.add(2,State.Warn);
+            }
                         
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         return datosStep;
     }
@@ -82,34 +79,34 @@ public class SecKlarnaStpV {
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Desaparece el modal de las direcciones de Klarna (lo esperamos hasta " + maxSecondsToWait + " segundos)"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);          
+        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);
+        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
-            List<SimpleValidation> listVals = new ArrayList<>();
-            //1)
-            if (!SecKlarna.isModalDireccionesInvisibleUntil(maxSecondsToWait, dFTest.driver))
-                fmwkTest.addValidation(1,State.Warn, listVals);
+            if (!SecKlarna.isModalDireccionesInvisibleUntil(maxSecondsToWait, dFTest.driver)) {
+                listVals.add(1,State.Warn);
+            }
                                 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+            datosStep.setListResultValidations(listVals);
         }
-        finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }
+        finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Esta validación sólo podemos realizarla en Desktop porque en el caso de móvil todavía no figura la dirección en pantalla 
         if (channel==Channel.desktop) {
             //VAlidaciones
             descripValidac = 
                 "1) Como Shipping Address figura la de Klarna: " + pago.getNomklarna() + " - " + pago.getDirecklarna() + " - " + pago.getProvinklarna();
-            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);          
+            datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);
+            listVals = ListResultValidation.getNew(datosStep);
             try { 
-                List<SimpleValidation> listVals = new ArrayList<>();
-                //1)
                 if (!Page1DktopCheckout.getTextNombreEnvio(dFTest.driver).contains(pago.getNomklarna()) ||
                     !Page1DktopCheckout.getTextDireccionEnvio(dFTest.driver).contains(pago.getDirecklarna()) ||
-                    !Page1DktopCheckout.getTextPoblacionEnvio(dFTest.driver).replace(" ", "").contains(pago.getProvinklarna().replace(" ", "")))
-                    fmwkTest.addValidation(1,State.Warn, listVals);
+                    !Page1DktopCheckout.getTextPoblacionEnvio(dFTest.driver).replace(" ", "").contains(pago.getProvinklarna().replace(" ", ""))) {
+                    listVals.add(1,State.Warn);
+                }
                                                                  
-                datosStep.setExcepExists(false); datosStep.setResultSteps(listVals);
+                datosStep.setListResultValidations(listVals);
             }
-            finally { fmwkTest.grabStepValidation(datosStep, descripValidac, dFTest); }                            
+            finally { listVals.checkAndStoreValidations(descripValidac); }                            
         }        
         
         return datosStep;
