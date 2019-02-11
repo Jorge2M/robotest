@@ -2,8 +2,9 @@ package com.mng.robotest.test80.mango.test.pageobject.manto;
 
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPage;
+import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-public class PageOrdenacionDePrendas {
+public class PageOrdenacionDePrendas extends WebdrvWrapp {
 	
     public enum Orden implements ElementPage {
     	titulo("ORDENADOR DE PRENDAS"),
