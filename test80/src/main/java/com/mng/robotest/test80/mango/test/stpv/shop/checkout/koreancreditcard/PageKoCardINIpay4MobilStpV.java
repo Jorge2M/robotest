@@ -15,7 +15,7 @@ public class PageKoCardINIpay4MobilStpV extends ElementPageFunctions {
 	    //Validation
 	    String descripValidac =
 	        "1) Está presente el texto de pago OK en Coreano <b>" + PageKoCardINIpay4Mobil.textoPagoConExitoKR + "</b>";
-        datosStep.setStateIniValidations(); 
+        datosStep.setNOKstateByDefault(); 
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	    try {
 	        if (!PageKoCardINIpay4Mobil.isVisibleMessagePaymentOk(dFTest.driver)) {
@@ -32,7 +32,7 @@ public class PageKoCardINIpay4MobilStpV extends ElementPageFunctions {
 	    DatosStep datosStep = new DatosStep     (
 	        "Seleccionar el botón para Confirmar", 
 	        "Aparece la página de confirmación de KrediKarti");
-	    datosStep.setStateIniValidations();    
+	    datosStep.setNOKstateByDefault();    
 	    try {       
 	    	clickElementVisibleAndWaitLoad(BodyPageKoCardINIpay4.nextButton, 0, dFTest.driver);
 	

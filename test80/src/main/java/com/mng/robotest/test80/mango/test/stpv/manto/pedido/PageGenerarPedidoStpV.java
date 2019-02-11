@@ -16,7 +16,7 @@ public class PageGenerarPedidoStpV {
 	public static void validateIsPage(String idPedido, DatosStep datosStep, DataFmwkTest dFTest) {
 		String descripValidac = 
 			"1) Aparece la página de generación asociada al pedido <b>" + idPedido + "</b>";
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			// 1)
@@ -44,7 +44,7 @@ public class PageGenerarPedidoStpV {
         //Validations
 		String descripValidac = 
 			"1) Aparece el mensaje de <b>Fichero creado correctamente</b>";
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			// 1)

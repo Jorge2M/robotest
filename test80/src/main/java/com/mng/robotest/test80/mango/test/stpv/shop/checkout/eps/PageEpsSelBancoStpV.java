@@ -16,7 +16,7 @@ public class PageEpsSelBancoStpV {
             "1) Figura el icono correspondiente al pago <b>EPS</b><br>" +
             "2) Aparece el importe de la compra: " + importeTotal + "<br>" +
             "3) Aparece el logo del banco seleccionado";
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageEpsSelBanco.isPresentIconoEps(dFTest.driver)) {

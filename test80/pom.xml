@@ -7,12 +7,11 @@
   </parent>
   <artifactId>test80</artifactId>
   <packaging>jar</packaging>
-  
   <dependencies>
     	<dependency>
 		    <groupId>org.aspectj</groupId>
 		    <artifactId>aspectjrt</artifactId>
-		    <version>1.8.2</version>
+		    <version>1.9.2</version>
 		</dependency>
 	    <dependency>
 	        <groupId>org.seleniumhq.selenium</groupId>
@@ -145,10 +144,23 @@
 		</dependency>
 		-->			
   </dependencies>
+    
        
   <build>
   	<plugins>
-  		<!-- Aspect Code
+		<plugin>
+			<!-- Define Aspectj Nature -->
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-eclipse-plugin</artifactId>
+		    <configuration>
+		      <additionalProjectnatures>
+		        <projectnature>org.eclipse.ajdt.ui.ajnature</projectnature>
+		      </additionalProjectnatures>
+		      <additionalBuildcommands>
+		        <buildcommand>org.eclipse.ajdt.core.ajbuilder</buildcommand>
+		      </additionalBuildcommands>
+		    </configuration>
+		</plugin>  	
        	<plugin>
 			<groupId>org.codehaus.mojo</groupId>
 		    <artifactId>aspectj-maven-plugin</artifactId>
@@ -163,18 +175,17 @@
 		        <encoding>UTF-8 </encoding>
 		    </configuration>
 		    <executions>
-		    	//Problema Eclipse Kepler Version
+		    	<!-- Problema Eclipse Kepler Version -->
 		        <execution>
 		            <goals>
-		                //use this goal to weave all your main classes
+		                <!-- use this goal to weave all your main classes -->
 		                <goal>compile</goal>
-		                //use this goal to weave all your test classes
-		                //<goal>test-compile</goal>
+		                <!-- use this goal to weave all your test classes -->
+		                <!-- <goal>test-compile</goal> -->
 		            </goals>
 		        </execution>
 		    </executions>
 		</plugin> 	
-		-->
  
         <plugin>
         	<groupId>org.apache.maven.plugins</groupId>
@@ -243,10 +254,10 @@
 		
 	</plugins>
 	
-	<!-- Aspect Code
+	<!-- </pluginManagement>-->
 	<pluginManagement>
 		<plugins>
-			//This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself
+			<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
 			<plugin>
 				<groupId>org.eclipse.m2e</groupId>
 				<artifactId>lifecycle-mapping</artifactId>
@@ -275,6 +286,5 @@
 			</plugin>
 		</plugins>
 	</pluginManagement>  
-	-->
   </build>
 </project>

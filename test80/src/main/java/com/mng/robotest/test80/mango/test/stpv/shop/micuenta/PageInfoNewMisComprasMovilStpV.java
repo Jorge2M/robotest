@@ -13,7 +13,7 @@ public class PageInfoNewMisComprasMovilStpV {
     public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Aparece la página \"New!\" informativa a nivel de \"Mis Compras\"";
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageInfoNewMisComprasMovil.isPage(dFTest.driver)) {

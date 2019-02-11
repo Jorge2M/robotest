@@ -177,7 +177,7 @@ public class PageOrdenacionDePrendasStpV {
 	private static void validateOrdenacionFunction(DatosStep datosStep, DataFmwkTest dFTest, 
 												   int numValidac, String descripValidac, Orden prenda){
 		String descripValidacion = numValidac + ") " + descripValidac;
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (refPrenda == validationPrenda(dFTest, prenda)) {
@@ -201,7 +201,7 @@ public class PageOrdenacionDePrendasStpV {
 			descripValidacion+=" (esperamos hasta un máximo de " + maxSecondsWait + " segundos)";
 			
 		datosStep.setGrab_ErrorPageIfProblem(false);
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (!SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Present, maxSecondsWait, dFTest.driver)) {

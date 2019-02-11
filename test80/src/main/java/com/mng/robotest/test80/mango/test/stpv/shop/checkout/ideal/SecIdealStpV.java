@@ -14,7 +14,7 @@ public class SecIdealStpV {
     public static void validateIsSectionOk(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Aparece el bloque de selección del banco";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecIdeal.isVisibleSelectorOfBank(channel, 1/*maxSecondsToWait*/, dFTest.driver)) {

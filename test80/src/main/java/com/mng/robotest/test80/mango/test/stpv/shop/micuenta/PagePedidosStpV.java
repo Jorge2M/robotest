@@ -14,7 +14,7 @@ public class PagePedidosStpV {
             "1) Aparece la página de \"Mis Pedidos\"<br>" +
             "2) La página contiene " + usrRegistrado + "<br>" +
             "3) La lista de pedidos está vacía";
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageMispedidos.isPage(dFTest.driver)) {

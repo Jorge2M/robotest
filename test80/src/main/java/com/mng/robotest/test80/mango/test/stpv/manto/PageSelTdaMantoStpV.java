@@ -46,7 +46,7 @@ public class PageSelTdaMantoStpV {
         //Validaciones
         String descripValidac = 
             "1) Aparece la página del Menú principal de Manto donde se encuentran todas las opciones de éste";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageMenusManto.isPage(dFTest.driver)) {

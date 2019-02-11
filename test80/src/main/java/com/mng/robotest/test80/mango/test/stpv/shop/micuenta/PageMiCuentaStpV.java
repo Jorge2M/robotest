@@ -20,7 +20,7 @@ public class PageMiCuentaStpV {
 		int maxSecondsToWait = 2;
 	    String descripValidac = 
 	        "1) Aparece la página de \"Mi Cuenta\" (la esperamos hasta " + maxSecondsToWait + " segundos)";
-	    datosStep.setStateIniValidations();     
+	    datosStep.setNOKstateByDefault();     
 	    ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	    try {
 	        if (!PageMiCuenta.isPageUntil(maxSecondsToWait, dFTest.driver)) {

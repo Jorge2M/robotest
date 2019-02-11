@@ -42,7 +42,7 @@ public class SecMenusWrapperStpV {
     
     public static void validateLineas(Pais pais, AppEcom app, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = "";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             //Ejecutamos las validaciones y obtenemos el literal con la descrpción de cada una de ellas
@@ -142,7 +142,7 @@ public class SecMenusWrapperStpV {
         int maxSecondsWait = 3;
         String descripValidac =
             "1) Como mínimo se obtiene 1 artículo (lo esperamos un máximo de " + maxSecondsWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             PageGaleria pageGaleria = PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
@@ -196,7 +196,7 @@ public class SecMenusWrapperStpV {
         else
             descripValidac+=
             "3) No aparece ningún icono de favoritos asociado a ningún artículo";        
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             PageGaleria pageGaleria = PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);

@@ -52,7 +52,7 @@ public class SecFiltrosStpV {
                 	"(*) " + currentUrl + "<br>" +
                 "2) Aparece una pantalla en la que el title contiene \"" + litMenu.toUpperCase() + "\"<br>" +
                 "3) En pantalla aparecen >1 artículos (están apareciendo " + numArticulos1page + ")";
-            datosStep.setStateIniValidations();
+            datosStep.setNOKstateByDefault();
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
                 if (!SecFiltros.checkUrlAfterFilterContainsColors(colorsToSelect, currentUrl)) {

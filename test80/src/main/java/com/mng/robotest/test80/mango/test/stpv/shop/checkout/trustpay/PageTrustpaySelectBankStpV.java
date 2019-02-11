@@ -24,7 +24,7 @@ public class PageTrustpaySelectBankStpV {
             descripValidac+="<br>" +            
             "4) Figura el desplegable de bancos<br>" +
             "5) Figura un botón de pago";            
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageTrustpaySelectBank.isPresentEntradaPago(nombrePago, channel, dFTest.driver)) {

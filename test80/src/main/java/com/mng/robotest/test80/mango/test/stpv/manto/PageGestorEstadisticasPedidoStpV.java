@@ -17,7 +17,7 @@ public class PageGestorEstadisticasPedidoStpV {
 			"1) Estamos en la página \"" + PageGestorEstadisticasPedido.titulo + " \"<br>" +
 			"2) Aparece el input de fecha de inicio<br>" + 
 			"3) Aparece el input de fecha fin";
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (!PageGestorEstadisticasPedido.isPage(dFTest.driver)) {
@@ -52,7 +52,7 @@ public class PageGestorEstadisticasPedidoStpV {
 			"1) Aparece la tabla de información<br>" +
 			"2) Las columnas de comparación en verde contienen \"0 €\"<br>" +
 			"3) Las columnas de comparación en rojo contienen \"0 %\"";
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (!PageGestorEstadisticasPedido.isTablaInformacionVisible(dFTest.driver)) {
@@ -86,7 +86,7 @@ public class PageGestorEstadisticasPedidoStpV {
 		String descripValidac = 
 			"1) Las columnas de comparación en verde no contienen \"0 €\"<br>" +
 			"2) Las columnas de comparación en rojo no contienen \"0 %\"";
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (!PageGestorEstadisticasPedido.isColumnaCompararVerdeNoZero(dFTest.driver)) {

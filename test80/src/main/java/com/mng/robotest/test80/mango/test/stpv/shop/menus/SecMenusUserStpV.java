@@ -88,7 +88,7 @@ public class SecMenusUserStpV {
         int maxSecondsToWait = 3;
         String descripValidac = 
             "1) Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecMenusWrap.secMenusUser.isPresentIniciarSesionUntil(channel, maxSecondsToWait, dFTest.driver)) {
@@ -118,7 +118,7 @@ public class SecMenusUserStpV {
         //Validaciones
         String descripValidac = 
             "1) Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecMenusWrap.secMenusUser.isPresentCerrarSesion(channel, dFTest.driver)) {

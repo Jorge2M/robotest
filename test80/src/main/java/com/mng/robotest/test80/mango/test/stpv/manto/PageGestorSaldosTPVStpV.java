@@ -16,7 +16,7 @@ public class PageGestorSaldosTPVStpV {
 		String descripValidac = 
 			"1) Estamos en la página \"" + PageGestorSaldosTPV.titulo + " \"<br>" +
 			"2) Aparece el input de fecha de TPV";
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (!PageGestorSaldosTPV.isPage(dFTest.driver)) {
@@ -46,7 +46,7 @@ public class PageGestorSaldosTPVStpV {
 		String descripValidac = 
 			"1) Aparece la tabla de saldos<br>" +
 			"2) Aparece el ID de la TPV \"" + tpv + "\" en la tabla";
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (!PageGestorSaldosTPV.isTablaSaldosVisible(dFTest.driver)) {
@@ -78,7 +78,7 @@ public class PageGestorSaldosTPVStpV {
 
 		String descripValidac = 
 			"1) Aparece el mensaje \"La tpv seleccionada no existe\"";
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (!PageGestorSaldosTPV.isUnvalidTPVMessageVisible(dFTest.driver)) {

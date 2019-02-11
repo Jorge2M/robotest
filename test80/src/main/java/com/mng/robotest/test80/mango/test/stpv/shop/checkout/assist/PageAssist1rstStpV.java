@@ -27,7 +27,7 @@ public class PageAssist1rstStpV {
         else
             descripValidac+=
             "4) Figuran 5 campos de input para los datos de la tarjeta: 4 para el número de tarjeta, 2 para la fecha de caducidad, 1 para el titular y 1 para el CVC";
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageAssist1rst.isPresentLogoAssist(channel, dFTest.driver)) {
@@ -66,7 +66,7 @@ public class PageAssist1rstStpV {
         String descripValidac = 
             "1) Desaparece la página con el botón de pago (lo esperamos hasta " + maxSecondsWait + " segundos)<br>" +
             "2) Aparece una página intermedia con un botón de submit"; 
-        datosStep.setStateIniValidations(); 
+        datosStep.setNOKstateByDefault(); 
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageAssist1rst.invisibilityBotonPagoUntil(maxSecondsWait, channel, dFTest.driver)) {

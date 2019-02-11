@@ -27,7 +27,7 @@ public class SecKrediKartiStpV {
         int maxSecondsWait = 5;
         String descripValidac = 
             "1) Se carga la capa correspondiente al pago a plazos (en menos de " + maxSecondsWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecKrediKarti.isVisiblePagoAPlazoUntil(dFTest.driver, channel, maxSecondsWait)) {

@@ -30,7 +30,7 @@ public class ModalAvisoCambioPaisStpV {
         String descripValidac = 
             "1) Desaparece el modal de aviso de cambio de país (lo esperamos hasta " + maxSecondsWait + " segundos)<br>" +
             "2) En la dirección de envió aparece el país " + paisEnvio.getNombre_pais();
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!ModalAvisoCambioPais.isInvisibleUntil(maxSecondsWait, dFTest.driver)) {

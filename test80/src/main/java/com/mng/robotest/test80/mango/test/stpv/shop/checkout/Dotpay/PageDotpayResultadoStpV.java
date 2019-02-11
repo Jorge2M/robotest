@@ -13,7 +13,7 @@ public class PageDotpayResultadoStpV {
     public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Aparece la página de resultado del pago OK de Dotpay";
-        datosStep.setStateIniValidations();         
+        datosStep.setNOKstateByDefault();         
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageDotpayResultado.isPageResultadoOk(dFTest.driver)) {

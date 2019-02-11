@@ -38,7 +38,7 @@ public class PageBolsasMantoStpV {
             "3) En la columna 8 Aparece el Tpv asociado: " + dataPedido.getPago().getTpv().getId() + "<br>";
         descripValidac+=
             "4) En la columna 7 aparece el email asociado: " + dataPedido.getEmailCheckout();
-        datosStep.setStateIniValidations(); 
+        datosStep.setNOKstateByDefault(); 
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageBolsas.presentLinkPedidoInBolsaUntil(dataPedido.getCodigoPedidoManto(), maxSecondsToWait, dFTest.driver)) {

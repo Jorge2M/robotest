@@ -15,7 +15,7 @@ public class PageDotpayPaymentChannelStpV {
         String descripValidac = 
             "1) Aparece la página de Dotpay para la selección del banco<br>" +
             "2) Aparece el importe de la compra: " + importeTotal;
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageDotpayPaymentChannel.isPage(dFTest.driver)) {
@@ -46,7 +46,7 @@ public class PageDotpayPaymentChannelStpV {
         int maxSecondsToWait = 1;
         String descripValidac = 
             "1) Es visible el bloque de introducción del nombre (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);           
         try {
             if (!PageDotpayPaymentChannel.isVisibleBlockInputDataUntil(maxSecondsToWait, dFTest.driver)) {

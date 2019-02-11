@@ -118,7 +118,7 @@ public class SecMenusDesktopStpV {
     public static void validateIsLineaSelected(LineaType lineaType, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Está seleccionada la línea <b>" + lineaType + "</b>";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecMenusDesktop
@@ -145,7 +145,7 @@ public class SecMenusDesktopStpV {
             int maxSecondsToWait = 2;
             String descripValidac = 
                 "1) Aparece seleccionado el menú lateral <b>" + menu.getNombre() + "</b> (lo esperamos hasta " + maxSecondsToWait + "segundos)";
-            datosStep.setStateIniValidations();
+            datosStep.setNOKstateByDefault();
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
                 if (!SecMenusDesktop.secMenuLateral.isSelectedMenu(menu, maxSecondsToWait, dFTest.driver)) {
@@ -168,7 +168,7 @@ public class SecMenusDesktopStpV {
 	            for (Menu2onLevel menu2oNivelTmp : menus2onLevel)
 	                descripValidac = descripValidac + "<br>" + menu2oNivelTmp.getNombre();
 	
-	            datosStep.setStateIniValidations();       
+	            datosStep.setNOKstateByDefault();       
 	            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	            try {
 	                if (!SecMenusDesktop.secMenuLateral.areVisibleMenus2oNivel(menu1rstLevel, dFTest.driver)) {
@@ -190,7 +190,7 @@ public class SecMenusDesktopStpV {
                 for (int i=0; i<textsArticlesGalery.length; i++)
                     descripValidac =  descripValidac + "<br>" + textsArticlesGalery[i];
  
-            datosStep.setStateIniValidations();
+            datosStep.setNOKstateByDefault();
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
                 PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);
@@ -285,7 +285,7 @@ public class SecMenusDesktopStpV {
 	        	"1) Aparece el bloque de menús de la línea " + linea.getType() + " (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
 	            "2) El número de carrusels es de " + linea.getListCarrusels().length + "<br>" +
 	            "3) Aparecen los carrusels: " + linea.getCarrusels().toString();
-	        datosStep.setStateIniValidations();
+	        datosStep.setNOKstateByDefault();
 	        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	        try {
 	            if (!SecMenusDesktop.secMenuSuperior.secBlockMenus.isCapaMenusLineaVisibleUntil(linea.getType(), maxSecondsToWait, dFTest.driver)) {
@@ -352,7 +352,7 @@ public class SecMenusDesktopStpV {
             "2) El 1er artículo es de tipo " + linea.getType() + "<br>" +
             validacion3 +
             validacion4;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!pageGaleriaDesktop.isVisibleArticleUntil(1, maxSecondsWait)) {
@@ -557,7 +557,7 @@ public class SecMenusDesktopStpV {
         PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);
         String descripValidac = 
             "1) Aparece una página con banners, artículos, iframes, maps o sliders";
-        datosStep.setStateIniValidations();  
+        datosStep.setNOKstateByDefault();  
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, 3/*seconds*/) &&
@@ -720,7 +720,7 @@ public class SecMenusDesktopStpV {
     
         PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);
         String descripValidac = validacion1;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!containsArtsObannersOmaps) {
@@ -749,7 +749,7 @@ public class SecMenusDesktopStpV {
            String guiones = "--";
            descripValidac = 
                "1) No hay artículos con \"" + guiones + "\""; 
-           datosStep.setStateIniValidations();
+           datosStep.setNOKstateByDefault();
            listVals = ListResultValidation.getNew(datosStep);
            try {
                if (((PageGaleriaDesktop)pageGaleria).isArticuloWithStringInName(guiones)) {
@@ -767,7 +767,7 @@ public class SecMenusDesktopStpV {
        descripValidac = 
            "1) El errorPage.faces no devuelve una excepción" +
            validacion2_2;
-       datosStep.setStateIniValidations();
+       datosStep.setNOKstateByDefault();
        listVals = ListResultValidation.getNew(datosStep);
        try {
            stackTrace exception = WebDriverMngUtils.stackTaceException(dFTest.driver, dFTest.ctx);
@@ -812,7 +812,7 @@ public class SecMenusDesktopStpV {
             " * Rebajados</b><br>" +
             " * De temporadas anteriores " + tempSales + "<br>" +
             " * Con alguna de las etiquetas <b>" + listLabelsWrong + "</b> (en sus correspondientes traducciones)"; 
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             List<String> listArtWrong = 
@@ -839,7 +839,7 @@ public class SecMenusDesktopStpV {
             "<b style=\"color:blue\">Rebajas</b></br>" +        		   
             "1) No hay artículos <b>de Temporada " + temporadaOld + "</b> con alguna de las etiquetas <b>" + listLabelsWrong + "</b> " + 
               "(en sus correspondientes traducciones)"; 
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         listVals = ListResultValidation.getNew(datosStep);
         try {
             List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaOld, listLabelsWrong);
@@ -863,7 +863,7 @@ public class SecMenusDesktopStpV {
             "<b style=\"color:blue\">Rebajas</b></br>" +        		   
             "1) No hay artículos <b>de Temporada " + temporadaNew + "</b> con las 2 etiquetas <b>New Collection</b> y <b>New Now</b> " + 
               "(en sus correspondientes traducciones)"; 
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         listVals = ListResultValidation.getNew(datosStep);
         try {
             List<String> listArtWrong = 

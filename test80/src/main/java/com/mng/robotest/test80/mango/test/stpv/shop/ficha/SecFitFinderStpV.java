@@ -16,7 +16,7 @@ public class SecFitFinderStpV {
             "1) Es visible el Wrapper con la guía de tallas (lo esperamos hasta " + maxSecondsToWait + " seconds)<br>" +
             "2) Es visible el input para la introducción de la altura<br>" +
             "3) Es visible el input para la introducción del peso";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecFitFinder.isVisibleUntil(maxSecondsToWait, dFTest.driver)) {

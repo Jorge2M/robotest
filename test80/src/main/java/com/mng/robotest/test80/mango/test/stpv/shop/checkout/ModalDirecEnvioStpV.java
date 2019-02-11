@@ -18,7 +18,7 @@ public class ModalDirecEnvioStpV {
         String descripValidac = 
             "1) Es visible el formulario para la introducción de la \"Dirección de envío\" (lo esperamos hasta " + maxSeconds + " seconds)<br>" +
             "2) Es visible el botón \"Actualizar\"";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!ModalDirecEnvio.isVisibleFormUntil(maxSeconds, dFTest.driver)) {
@@ -52,7 +52,7 @@ public class ModalDirecEnvioStpV {
         String descripValidac = 
             "1) Desaparece el modal de introducción de los datos de la dirección (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) Aparece un modal de alerta alertando de un posible cambio de precios (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!ModalDirecEnvio.isInvisibleFormUntil(maxSecondsToWait, dFTest.driver)) {

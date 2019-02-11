@@ -14,7 +14,7 @@ public class ModEnvioYdevolNewStpV {
         int maxSecondsToWait = 1;
         String descripValidac = 
             "1) Aparece el modal con los datos a nivel de envío y devolución";
-        datosStep.setStateIniValidations();  
+        datosStep.setNOKstateByDefault();  
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!ModEnvioYdevolNew.isVisibleUntil(maxSecondsToWait, dFTest.driver)) {
@@ -41,7 +41,7 @@ public class ModEnvioYdevolNewStpV {
         int maxSecondsToWait = 1;
         String descripValidac = 
             "1) No es visible el modal con los datos a nivel de envío y devolución";
-        datosStep.setStateIniValidations();  
+        datosStep.setNOKstateByDefault();  
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (ModEnvioYdevolNew.isVisibleUntil(maxSecondsToWait, dFTest.driver)) {

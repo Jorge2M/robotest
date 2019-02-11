@@ -53,7 +53,7 @@ public class PageLoginMantoStpV {
         //Validaciones
         String descripValidac = 
             "1) Aparece la página de selección de la tienda";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageSelTda.isPage(dFTest.driver)) {

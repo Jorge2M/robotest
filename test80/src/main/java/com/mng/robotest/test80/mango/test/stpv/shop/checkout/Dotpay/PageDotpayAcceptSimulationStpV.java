@@ -14,7 +14,7 @@ public class PageDotpayAcceptSimulationStpV {
         String descripValidac = 
             "1) Aparece la página de Dotpay para la introducción de los datos del pagador<br>" +
             "2) Figura un botón de aceptar rojo";
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageDotpayAcceptSimulation.isPage(dFTest.driver)) {

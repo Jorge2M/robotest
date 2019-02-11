@@ -22,7 +22,7 @@ public class PageGiropay1rstStpV {
             descripValidac+="<br>" +
             "4) Aparece un input para la introducción del Banco (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "5) Figura un botón de pago";
-        datosStep.setStateIniValidations();  
+        datosStep.setNOKstateByDefault();  
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageGiropay1rst.isPresentIconoGiropay(channel, dFTest.driver)) {
@@ -69,7 +69,7 @@ public class PageGiropay1rstStpV {
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Aparece la entrada <b>" + bankToInput + "</b> del desplegable (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageGiropay1rst.isVisibleBankInListUntil(bankToInput, maxSecondsToWait, dFTest.driver)) {
@@ -94,7 +94,7 @@ public class PageGiropay1rstStpV {
         maxSecondsToWait = 2;
         descripValidac = 
             "1) Acaba desapareciendo la entrada <b>" + bankToInput + "</b> del desplegable (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageGiropay1rst.isInvisibleBankInListUntil(bankToInput, maxSecondsToWait, dFTest.driver)) {

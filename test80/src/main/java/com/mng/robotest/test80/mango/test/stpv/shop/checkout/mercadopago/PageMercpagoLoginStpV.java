@@ -21,7 +21,7 @@ public class PageMercpagoLoginStpV {
         String descripValidac = 
             "1) Aparece la página de identificación de Mercadopago<br>" + 
             "2) En la página figuran los campos de identificación (email + password)";
-        datosStep.setStateIniValidations();       
+        datosStep.setNOKstateByDefault();       
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if ((!PageMercpagoLogin.isPage(dFTest.driver))) {

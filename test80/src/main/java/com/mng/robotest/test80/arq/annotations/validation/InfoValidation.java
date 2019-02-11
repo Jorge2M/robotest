@@ -16,14 +16,12 @@ public class InfoValidation {
 	private final Validation valAnnotation;
 	private final Object resultMethod;
 	private final ListResultValidation listResultValidations;
-	private final DatosStep datosStep;
 	
 	private InfoValidation(JoinPoint joinPoint, Object resultMethod) {
 		this.joinPoint = joinPoint;
 		this.valAnnotation = getValidationAnnotation(joinPoint);
 		this.resultMethod = resultMethod;
 		this.listResultValidations = getValResultFromMethodData();
-		this.datosStep = getDatosStepParam();
 	}
 	
 	private InfoValidation(JoinPoint joinPoint) {
@@ -31,7 +29,6 @@ public class InfoValidation {
 		this.valAnnotation = getValidationAnnotation(joinPoint);
 		this.listResultValidations = getValResultFromMethodData();
 		this.resultMethod = null;
-		this.datosStep = getDatosStepParam();
 	}
 	
 	public static InfoValidation from(JoinPoint joinPoint, Object resultMethod) {
@@ -44,10 +41,6 @@ public class InfoValidation {
 	
 	public ListResultValidation getListResultValidation() {
 		return listResultValidations;
-	}
-	
-	public DatosStep getDatosStep() {
-		return datosStep;
 	}
 	
     private DatosStep getDatosStepParam() {
@@ -70,36 +63,43 @@ public class InfoValidation {
 	
 	private ListResultValidation getValResultFromMethodData() {
 		ListResultValidation valResult = getValidationResultFromObjectMethodReturn();
-		modifyValidationResultAccordingAnnotationParams();
+		modifyValidationResultAccordingAnnotationParams(valResult);
 		return valResult;
 	}
 	
     private ListResultValidation getValidationResultFromObjectMethodReturn() {
+    	DatosStep datosStep = getDatosStepParam();
     	ListResultValidation valResult = ListResultValidation.getNew(datosStep);
     	if (resultMethod!=null) {
 	        if (resultMethod instanceof Boolean) {
-	        	valResult.get(0).setOvercomed((Boolean)resultMethod);
+	        	ResultValidation validation = new ResultValidation(1);
+	        	validation.setOvercomed((Boolean)resultMethod);
+	        	valResult.add(validation);
+	        	return valResult;
 	        }
 	        
 	        if (resultMethod instanceof ListResultValidation) {
 	        	valResult = (ListResultValidation)resultMethod;
+	        	return valResult;
 	        }
 	        
 	        throw (new RuntimeException("The return of a method marked with @Validation annotation must be of type boolean or ValidationResult"));
     	}
-    	
-    	return valResult;
+    	else {
+    		valResult.add(new ResultValidation(1));
+    		return valResult;
+    	}
     }
     
-    private void modifyValidationResultAccordingAnnotationParams() {
-    	if ("".compareTo(listResultValidations.get(0).getDescription())==0) {
+    private void modifyValidationResultAccordingAnnotationParams(ListResultValidation valResult) {
+    	if ("".compareTo(valResult.get(0).getDescription())==0) {
     		String descripValidationMatched = getValidationDescriptionMatchingWithMethodParameters();
-    		listResultValidations.get(0).setDescription(descripValidationMatched);
+    		valResult.get(0).setDescription(descripValidationMatched);
     	}
     	
-    	if (listResultValidations.get(0).getLevelResult()==State.Undefined &&
+    	if (valResult.get(0).getLevelResult()==State.Undefined &&
     		valAnnotation.level()!=null) {
-    		listResultValidations.get(0).setLevelResult(valAnnotation.level());
+    		valResult.get(0).setLevelResult(valAnnotation.level());
     	}
     }
     

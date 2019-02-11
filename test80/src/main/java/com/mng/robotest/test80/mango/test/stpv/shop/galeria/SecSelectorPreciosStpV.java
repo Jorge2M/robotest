@@ -18,7 +18,7 @@ public class SecSelectorPreciosStpV {
         //Validaciones
         String descripValidac = 
             "1) Es visible el selector de precios"; 
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageGaleriaDesktop.secSelectorPrecios.isVisible(dFTest.driver)) {
@@ -73,7 +73,7 @@ public class SecSelectorPreciosStpV {
             "1) El nuevo mínimo es mayor que el anterior. Era de <b>" + minimoOrig + "</b> y ahora es <b>" + minimoFinal + "</b><br>" + 
             "2) El nuevo máximo es menor que el anterior. Era de <b>" + maximoOrig + "</b> y ahora es <b>" + maximoFinal + "</b><br>" +
             "3) Todos los precios están en el intervalo [" + minimoFinal + ", " + maximoFinal + "]";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (minimoFinal <= minimoOrig) {

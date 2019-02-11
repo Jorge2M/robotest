@@ -22,7 +22,7 @@ public class PageAmazonIdentStpV {
             "1) Aparece una página con el logo de Amazon<br>" +
             "2) Aparece los campos para la identificación (usuario/password)" +
             validacion3;
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);           
         try {
             if (!PageAmazonIdent.isLogoAmazon(dFTest.driver)) {

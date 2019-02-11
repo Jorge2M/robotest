@@ -26,7 +26,7 @@ public class PagePasarelaOtrasStpV {
         String descripValidac = 
             validacion1 + "<br>" + 
             "2) No se trata de la página de precompra (no aparece los logos de formas de pago)";
-        datosStep.setStateIniValidations();  
+        datosStep.setNOKstateByDefault();  
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (channel==Channel.desktop) {

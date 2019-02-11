@@ -15,7 +15,7 @@ public class PagePaytrailResultadoOkStpV {
         String descripValidac =
             "1) Aparece la página de resultado Ok de Paytrail<br>" +
             "2) Aparece el importe de la compra: " + importeTotal;
-        datosStep.setStateIniValidations();       
+        datosStep.setNOKstateByDefault();       
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PagePaytrailResultadoOk.isPage(dFTest.driver)) {

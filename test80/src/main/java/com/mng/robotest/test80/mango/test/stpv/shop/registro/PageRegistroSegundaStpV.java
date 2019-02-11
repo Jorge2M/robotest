@@ -55,7 +55,7 @@ public class PageRegistroSegundaStpV {
             "1) Aparece la 2ª página de introducción de datos (la esperamos hasta " + maxSecondsWait + " segs)<br>" +                
             "2) Se pueden seleccionar las colecciones " + lineasComaSeparated + "<br>" +
             "3) Aparece un número de colecciones coincidente con el número de líneas (" + numLineas + ")";                          
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageRegistroSegunda.isPageUntil(dFTest.driver, maxSecondsWait)) {

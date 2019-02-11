@@ -23,7 +23,7 @@ public class PageSelectLineaVOTFStpV {
             "3) Aparece el banner correspondiente a NIÑAS<br>" +
             "4) Aparece el banner correspondiente a NIÑOS<br>" +
             "5) Aparece el banner correspondiente a VIOLETA";
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageSelectLineaVOTF.isBannerPresent(LineaType.she, dFTest.driver)) {

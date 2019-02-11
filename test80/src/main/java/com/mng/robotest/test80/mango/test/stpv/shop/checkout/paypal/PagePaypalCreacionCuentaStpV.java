@@ -14,7 +14,7 @@ public class PagePaypalCreacionCuentaStpV {
         DatosStep datosStep = new DatosStep     (
             "Seleccionamos el botón <b>Iniciar Sesión</b>", 
             "Aparece la página de login");
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         try {           
             PagePaypalCreacionCuenta.clickButtonIniciarSesion(dFTest.driver);
                             

@@ -192,7 +192,7 @@ public class PageChequeRegaloInputDataStpV{
         int maxSecondsWait = 3;
         String descripValidac =
             "1) Aparece la capa para introducir los datos del cheque regalo (la esperamos hasta " + maxSecondsWait + " segundos)<br>";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageChequeRegaloInputData.

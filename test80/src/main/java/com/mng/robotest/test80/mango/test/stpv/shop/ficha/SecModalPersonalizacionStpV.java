@@ -62,7 +62,7 @@ public class SecModalPersonalizacionStpV {
 	    //Validaciones
         String descripValidac = 
             "1) Alguno de los " + maxArticlesToReview + " primeros artículos de la galería " + galeriaToSelect + " es personalizable";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
     		if (!customizable) {
@@ -166,13 +166,14 @@ public class SecModalPersonalizacionStpV {
 			SecModalPersonalizacion.selectElement(ModalElement.IconSelecction, channel, dFTest.driver, WebdrvWrapp.TypeOfClick.javascript);
 
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		} 
+		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 		
 		//Validaciones		
 		if (channel == Channel.desktop) {
 			doubleCustomizationValidations(channel, dFTest, ModalElement.IconSelecction, ModalElement.Continue, State.Warn, datosStep,
 				"1) Aparece seleccionado el primer icono<br>" + 
-						      "2) Podemos confirmar nuestra seleccion");
+				"2) Podemos confirmar nuestra seleccion");
 			
 		} else {
 			customizationValidation(channel, ModalElement.PositionButton, State.Warn, datosStep, dFTest,
@@ -185,14 +186,14 @@ public class SecModalPersonalizacionStpV {
 		DatosStep datosStep = new DatosStep			(
 			"Seleccionamos el botón \"Confirmar\"",
 			"Se hace visible el paso-2");
-				
 		try {
 			if (channel == Channel.desktop)
 				SecModalPersonalizacion.selectElement(ModalElement.Continue, channel, dFTest.driver);
 			SecModalPersonalizacion.selectElement(ModalElement.PositionButton, channel, dFTest.driver);
 			
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		} 
+		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 		
 		//Validaciones
 		if (channel == Channel.desktop) {
@@ -214,12 +215,12 @@ public class SecModalPersonalizacionStpV {
 		DatosStep datosStep = new DatosStep			(
 			"Seleccionamos el botón \"Confirmar\"",
 			"Aparece el apartado 3 de la personalización");
-		
-		//Step
 		try {
 			SecModalPersonalizacion.selectElement(ModalElement.Continue, channel, dFTest.driver, WebdrvWrapp.TypeOfClick.javascript);
+			
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		} 
+		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 		
 		//Validacion
 		if (channel == Channel.desktop) {
@@ -239,22 +240,22 @@ public class SecModalPersonalizacionStpV {
 
 	private void selectSize(Channel channel, DataFmwkTest dFTest) throws Exception {
 		DatosStep datosStep = new DatosStep			(
-				"Seleccionamos el botón \"Confirmar\"",
-				"Aparece el apartado 4 de la personalización");
-
-		//Step
+			"Seleccionamos el botón \"Confirmar\"",
+			"Aparece el apartado 4 de la personalización");
 		try {
 			SecModalPersonalizacion.clickAndWait(channel, ModalElement.Continue, dFTest.driver);
+			
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		} 
+		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		//Validacion
 		if (channel != Channel.movil_web) {
 			customizationValidation(channel, ModalElement.SizeContainer, State.Warn, datosStep, dFTest,
-					"1) Aparecen los posibles tamaños");
+				"1) Aparecen los posibles tamaños");
 		} else {
 			customizationValidation(channel, ModalElement.addToBag, State.Warn, datosStep, dFTest,
-					"1) Es visible el botón que nos permite añadir ese producto a la bolsa");
+				"1) Es visible el botón que nos permite añadir ese producto a la bolsa");
 		}
     }
 
@@ -275,11 +276,11 @@ public class SecModalPersonalizacionStpV {
 		//Validaciones
 		if (channel == Channel.desktop) {
 			customizationValidation(channel, ModalElement.Continue, State.Warn, datosStep, dFTest,
-					"1) Aparece el botón para añadir a la bolsa");
+				"1) Aparece el botón para añadir a la bolsa");
 			
 		} else {
 			customizationValidation(channel, ModalElement.addToBag, State.Warn, datosStep, dFTest,
-					"1) Aparece el boton de <b>ir a la bolsa</b>");
+				"1) Aparece el boton de <b>ir a la bolsa</b>");
 		}
 	}
 
@@ -314,7 +315,7 @@ public class SecModalPersonalizacionStpV {
 
 	private void customizationValidation(Channel channel, ModalElement element, int maxSecondsToWait,
 										State state, DatosStep datosStep, DataFmwkTest dFTest, String descripValidac) {
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (!SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Present, maxSecondsToWait, channel, dFTest.driver)) {
@@ -328,7 +329,7 @@ public class SecModalPersonalizacionStpV {
 	private void doubleCustomizationValidations(Channel channel, DataFmwkTest dFTest,
 										ModalElement firstElement, ModalElement secondElement, 
 										State state, DatosStep datosStep, String descripValidac) {
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (!SecModalPersonalizacion.isElementInStateUntil(firstElement, StateElem.Present, 1, channel, dFTest.driver) &&
@@ -340,7 +341,6 @@ public class SecModalPersonalizacionStpV {
 		} 
 		finally { listVals.checkAndStoreValidations(descripValidac); }
 	}
-	
 	
 	private static void validateIsApartadoVisible(int numApartado, DatosStep datosStep, DataFmwkTest dFTest, Channel channel) {
 		ModalElement modalToValidate;
@@ -361,7 +361,7 @@ public class SecModalPersonalizacionStpV {
 		
 	    String descripValidac =                
 	    	"1) Es visible el apartado " + numApartado + " de la personalización";
-	    datosStep.setStateIniValidations();
+	    datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	    try {
 			if (!SecModalPersonalizacion.isElementInStateUntil(modalToValidate, StateElem.Present, 1, channel, dFTest.driver)) {

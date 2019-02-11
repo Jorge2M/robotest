@@ -16,7 +16,7 @@ public class SecBillpayStpV {
         String descripValidac = 
             "1) Aparecen 3 desplegables para la selección de la fecha de nacimiento<br>" +
             "2) Aparece el check de \"Acepto\"";
-        datosStep.setStateIniValidations(); 
+        datosStep.setNOKstateByDefault(); 
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecBillpay.isPresentSelectBirthBirthYear(dFTest.driver) ||
@@ -58,7 +58,7 @@ public class SecBillpayStpV {
                 "1) Aparece el campo para la introducción del titular<br>" +
                 "2) Aparece el campo para la introducción del IBAN<br>" +
                 "3) Aparece el campo para la introducción del BIC";
-            datosStep.setStateIniValidations();
+            datosStep.setNOKstateByDefault();
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
                 if (!SecBillpay.isPresentInputTitular(dFTest.driver)) {

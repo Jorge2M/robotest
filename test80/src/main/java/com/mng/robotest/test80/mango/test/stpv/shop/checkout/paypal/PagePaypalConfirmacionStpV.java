@@ -15,7 +15,7 @@ public class PagePaypalConfirmacionStpV {
         String descripValidac =
             "1) Aparece la página de Confirmación (la esperamos hasta " + maxSecondsWait + " segundos)";
         datosStep.setGrabImage(true);        
-        datosStep.setStateIniValidations(); 
+        datosStep.setNOKstateByDefault(); 
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {    
             if (!PagePaypalConfirmacion.isPageUntil(maxSecondsWait, dFTest.driver)) {
@@ -32,7 +32,7 @@ public class PagePaypalConfirmacionStpV {
         DatosStep datosStep = new DatosStep     (
             "Seleccionar el botón \"Continuar\"", 
             "Aparece la página de Mango de resultado OK del pago");
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         try {       
             PagePaypalConfirmacion.clickContinuarButton(dFTest.driver);
 

@@ -28,7 +28,7 @@ public class PageResultPagoStpV {
     public static void validaIsPageUntil(int maxSecondsToWait, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" (la esperamos hasta " + maxSecondsToWait + " segundos)";   
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!PageResultPago.isVisibleTextoConfirmacionPago(dFTest.driver, channel, maxSecondsToWait)) {
@@ -67,7 +67,7 @@ public class PageResultPagoStpV {
             "1) Aparece el importe " + importeTotal + " de la operación<br>" +
             validacion2 + 
             "3) Aparece el código de pedido (" + tagPedido + ") (lo esperamos 5 segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!ImporteScreen.isPresentImporteInScreen(importeTotal, dCtxSh.pais.getCodigo_pais(), dFTest.driver)) {
@@ -105,7 +105,7 @@ public class PageResultPagoStpV {
 	    String descripValidac = 
 	        "1) Aparece un texto de confirmación del pago (lo esperamos hasta " + maxSecondsWait1 + " segundos)<br>" +
 	    	"2) Si no aparece lo esperamos " + maxSecondsWait2 + " segundos";
-	    datosStep.setStateIniValidations();
+	    datosStep.setNOKstateByDefault();
 	    ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	    try { 
 	        if (!PageResultPago.isVisibleTextoConfirmacionPago(dFTest.driver, channel, maxSecondsWait1)) {

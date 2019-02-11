@@ -18,7 +18,7 @@ public class PageRegistroNinosStpV {
         String descripValidac = 
             "1) Aparece la página de introducción de datos del niño (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>" +
             "2) Aparecen inputs para introducir <b>" + numNinos + "</b>";
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageRegistroNinos.isPageUntil(dFTest.driver, maxSecondsToWait)) {

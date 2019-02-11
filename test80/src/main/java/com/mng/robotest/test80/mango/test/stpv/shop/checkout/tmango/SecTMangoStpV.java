@@ -17,7 +17,7 @@ public class SecTMangoStpV {
             "1) Aparece el bloque de selección de la forma de pago<br>" +
             "2) Aparece disponible la modalidad de pago:<br>" +
             "   - " + SecTMango.getDescripcionTipoPago(TipoPago.pagoHabitual); 
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
 

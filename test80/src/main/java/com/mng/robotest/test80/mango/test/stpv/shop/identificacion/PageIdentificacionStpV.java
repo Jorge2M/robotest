@@ -28,7 +28,7 @@ public class PageIdentificacionStpV {
         //Validaciones
         String descripValidac = 
             "1) Aparece el texto \"" + PageIdentificacion.avisoCredencialesKO + "\"";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageIdentificacion.isErrorEmailoPasswordKO(dFTest.driver)) {

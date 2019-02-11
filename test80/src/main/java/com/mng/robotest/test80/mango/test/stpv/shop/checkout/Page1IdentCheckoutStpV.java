@@ -16,7 +16,7 @@ public class Page1IdentCheckoutStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Aparece el formulario correspondiente a la identificación (lo esperamos hasta " + maxSecondsToWait + " segs)"; 
-        datosStep.setStateIniValidations();  
+        datosStep.setNOKstateByDefault();  
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!Page1IdentCheckout.secSoyNuevo.isFormIdentUntil(dFTest.driver, maxSecondsToWait)) {

@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.arq.utils.controlTest;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.testng.ITestContext;
@@ -175,7 +176,7 @@ public class DatosStep {
         return this.excep_exists; 
     }
     
-    public void setStateIniValidations() {
+    public void setNOKstateByDefault() {
     	setExcepExists(true); 
     	setResultSteps(State.Nok);
     }
@@ -194,7 +195,12 @@ public class DatosStep {
     }
     
     public List<Integer> getListCodeNumStateValidations() {
-    	return (this.listResultValidations.getListCodeNumStateValidations());
+    	List<Integer> result = new ArrayList<>();
+    	if (this.listResultValidations!=null) {
+    		result = this.listResultValidations.getListCodeNumStateValidations();
+    	}
+    	
+    	return result;
     }
 }
 

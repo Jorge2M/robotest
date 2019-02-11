@@ -54,7 +54,7 @@ public class PagePedidosMantoStpV {
             "5) En la columna " + IdColumn.email.textoColumna + " aparece el email asociado: " + dataPedido.getEmailCheckout() + "<br>" +
             "6) En pantalla aparece el importe asociado: " +  dataPedido.getImporteTotalManto() + "<br>" +
             "7) En la columna " + IdColumn.tarjeta.textoColumna + " aparece el tipo de tarjeta: " + dataPedido.getCodtipopago();
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PagePedidos.isInvisibleCapaLoadingUntil(maxSecondsToWait, dFTest.driver)) {
@@ -130,7 +130,7 @@ public class PagePedidosMantoStpV {
 		}
 
 		String descripValidac = "1) Tenemos código de pedido " + dPedidoPrueba.getCodpedido();
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (dPedidoPrueba.getCodpedido().equals("")) {
@@ -177,7 +177,7 @@ public class PagePedidosMantoStpV {
 		}
 
 		String descripValidac = "1) El pedido tiene las referencias " + referencias.toString();
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (dPedidoPrueba.getDataBag().getListArticulos().isEmpty()) {
@@ -221,7 +221,7 @@ public class PagePedidosMantoStpV {
 
 		String descripValidac = "1) Tenemos el DNI del cliente " + dPedidoPrueba.getPago().getDni() + "<br>"
 				+ "2) Tenemos el Email del cliente " + dPedidoPrueba.getPago().getUseremail();
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (dPedidoPrueba.getPago().getDni().equals("")) {
@@ -263,7 +263,7 @@ public class PagePedidosMantoStpV {
 		}
 
 		String descripValidac = "1) Tenemos la tienda física " + dPedidoPrueba.getDataDeliveryPoint().getCodigo();
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (dPedidoPrueba.getDataDeliveryPoint().getCodigo().equals("")) {

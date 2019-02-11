@@ -22,7 +22,7 @@ public class PageRegistroDirecStpV {
         String descripValidac = 
             "1) Aparece la página de introducción de datos de la dirección (la esperamos un máximo de " + maxSecondsWait + " segundos)<br>" +
             "2) Si existe el desplebagle de países, en él aparece el país con código " + pais.getCodigo_pais() + " (" + pais.getNombre_pais() + ")";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageRegistroAddressData.isPageUntil(dFTest.driver, maxSecondsWait)) {
@@ -79,7 +79,7 @@ public class PageRegistroDirecStpV {
         //Validaciones
         String descripValidac = 
             "1) No aparece ningún mensaje de error asociado a los campos de entrada"; 
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (PageRegistroDirec.getNumberMsgInputInvalid(dFTest.driver) > 0) {

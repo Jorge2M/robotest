@@ -18,7 +18,7 @@ public class PageRegistroFinStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Aparece la página final del proceso de registro (la esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageRegistroFin.isPageUntil(maxSecondsToWait, dFTest.driver)) {
@@ -49,7 +49,7 @@ public class PageRegistroFinStpV {
         String descripValidac = 
             "1) El logo de Mango redirige al país/idioma origen: /" + dCtxSh.idioma.getAcceso() + "<br>" +
             "2) Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver)

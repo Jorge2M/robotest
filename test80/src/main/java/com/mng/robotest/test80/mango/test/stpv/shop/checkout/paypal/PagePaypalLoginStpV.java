@@ -14,7 +14,7 @@ public class PagePaypalLoginStpV {
         //Validaciones
         String descripValidac =
             "1) Aparece la página de login (la esperamos hasta un máximo de " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations(); 
+        datosStep.setNOKstateByDefault(); 
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {    
             if (!PagePaypalLogin.isPageUntil(maxSecondsToWait, dFTest.driver)) {
@@ -31,7 +31,7 @@ public class PagePaypalLoginStpV {
         DatosStep datosStep = new DatosStep     (
             "Introducimos las credenciales (" + userMail + " - " + password + ") y pulsamos el botón \"Iniciar sesión\"", 
             "Aparece la página de inicio de sesión en Paypal");
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         datosStep.setGrabImage(true);
         datosStep.setGrabHTML(true);
         String paginaPadre = dFTest.driver.getWindowHandle();            

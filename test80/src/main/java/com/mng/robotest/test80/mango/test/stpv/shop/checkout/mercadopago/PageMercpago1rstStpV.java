@@ -14,7 +14,7 @@ public class PageMercpago1rstStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Aparece la página inicial de Mercado para la introducción de datos";
-        datosStep.setStateIniValidations();     
+        datosStep.setNOKstateByDefault();     
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if ((!PageMercpago1rst.isPageUntil(maxSecondsToWait, dFTest.driver))) {

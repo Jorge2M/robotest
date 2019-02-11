@@ -16,7 +16,7 @@ public class ModalPreloaderSppinerStpV {
         //Validaciones
         String descripValidac =
             "1) Aparece el icono del candado de \"Cargando\" (lo esperamos un máximo de " + maxSecondsWait + ")";   
-        datosStep.setStateIniValidations(); 
+        datosStep.setNOKstateByDefault(); 
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!ModalPreloaderSpinner.isVisibleUntil(maxSecondsWait, dFTest.driver)) {
@@ -32,7 +32,7 @@ public class ModalPreloaderSppinerStpV {
         //Validaciones
         String descripValidac =
             "1) Desaparece el icono del candado de \"Cargando\" (lo esperamos un máximo de " + maxSecondsWait + ")";   
-        datosStep.setStateIniValidations(); 
+        datosStep.setNOKstateByDefault(); 
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {    
             if (!ModalPreloaderSpinner.isNotVisibleUntil(maxSecondsWait, dFTest.driver)) {

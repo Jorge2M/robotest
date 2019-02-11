@@ -18,7 +18,7 @@ public class ModalDirecFacturaStpV {
         String descripValidac = 
             "1) Es visible el formulario para la introducción de la \"Dirección de facturación\" (lo esperamos hasta " + maxSeconds + " seconds)<br>" +
             "2) Es visible el botón \"Actualizar\"";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!ModalDirecFactura.isVisibleFormUntil(maxSeconds, dFTest.driver)) {
@@ -50,7 +50,7 @@ public class ModalDirecFacturaStpV {
         String descripValidac = 
             "1) Desaparece el modal de introducción de los datos de la dirección <br>" +
             "2) Queda marcado el radiobutton \"Quiero recibir una factura\"";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (ModalDirecFactura.isVisibleFormUntil(0/*maxSeconds*/, dFTest.driver)) {

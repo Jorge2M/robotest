@@ -33,7 +33,7 @@ public class AllPagesStpV {
     										DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         //Validaciones
         String descripValidac = "";
-        datosStep.setStateIniValidations();     
+        datosStep.setNOKstateByDefault();     
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (validaSEO) {
@@ -91,7 +91,7 @@ public class AllPagesStpV {
         if (pais!=null)
             descripValidac+=
             "3) Aparece el div de contenido asociado al país " + pais.getCodigo_pais();
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (datosStep.getResultSteps() == State.Ok) {
@@ -124,7 +124,7 @@ public class AllPagesStpV {
     public static void validateMainContentPais(Pais pais, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Aparece el div de contenido asociado al país " + pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ")";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!AllPages.isPresentMainContent(pais, dFTest.driver)) {

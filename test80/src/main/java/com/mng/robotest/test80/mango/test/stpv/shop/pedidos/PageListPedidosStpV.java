@@ -14,7 +14,7 @@ public class PageListPedidosStpV {
         String descripValidac = 
             "1) La página contiene el bloque correspondiente a la lista de pedidos<br>" +
             "2) Figura la línea correspondiente al pedido " + codigoPedido;
-        datosStep.setStateIniValidations();      
+        datosStep.setNOKstateByDefault();      
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!PageListPedidos.isPage(dFTest.driver)) {

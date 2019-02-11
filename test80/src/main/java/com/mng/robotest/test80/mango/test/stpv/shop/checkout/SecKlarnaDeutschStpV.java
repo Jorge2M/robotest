@@ -15,7 +15,7 @@ public class SecKlarnaDeutschStpV {
         int maxSecondsToWait = 1;
         String descripValidac = 
             "1) Aparece el selector de la fecha de nacimiento (lo esperamos hasta un máximo de " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecKlarnaDeutsch.isVisibleSelectDiaNacimientoUntil(maxSecondsToWait, dFTest.driver)) {

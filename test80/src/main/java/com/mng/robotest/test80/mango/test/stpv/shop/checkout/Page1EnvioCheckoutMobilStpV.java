@@ -40,7 +40,7 @@ public class Page1EnvioCheckoutMobilStpV {
     	if (!userLogged)
     		descripValidac += optionalValidac;
     	
-    	datosStep.setStateIniValidations();   
+    	datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!WebdrvWrapp.isElementPresent(dFTest.driver, By.xpath("//h2[@data-toggle='step1']"))) {
@@ -92,7 +92,7 @@ public class Page1EnvioCheckoutMobilStpV {
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Queda seleccionado el bloque correspondiete a <b>" + tipoTransporte + "</b> (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();       
+        datosStep.setNOKstateByDefault();       
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!Page1EnvioCheckoutMobil.isBlockSelectedUntil(tipoTransporte, 3/*maxSecondsToWait*/, dFTest.driver)) {
@@ -119,7 +119,7 @@ public class Page1EnvioCheckoutMobilStpV {
         PageCheckoutWrapperStpV.validateLoadingDisappears(datosStep, dFTest);
         
         String descripValidac = "1) Aparece la página con los métodos de Pago";
-        datosStep.setStateIniValidations();           
+        datosStep.setNOKstateByDefault();           
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageCheckoutWrapper.isPresentMetodosPago(dCtxSh.pais, dCtxSh.channel, dFTest.driver)) {
@@ -139,7 +139,7 @@ public class Page1EnvioCheckoutMobilStpV {
         String descripValidac = 
             "1) Aparece el descuento total aplicado al empleado (en menos de " + maxSecondsWait + " segundos)<br>" +
             "2) Aparece un descuento de empleado mayor que 0";
-        datosStep.setStateIniValidations();           
+        datosStep.setNOKstateByDefault();           
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!Page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(dFTest.driver, maxSecondsWait)) {

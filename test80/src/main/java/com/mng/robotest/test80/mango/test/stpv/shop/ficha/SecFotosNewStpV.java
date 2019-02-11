@@ -15,7 +15,7 @@ public class SecFotosNewStpV {
         //Validaciones
         String descripValidac = 
             "1) La 1a foto es de tipo <b>" + TipoImagenProducto.DETALLES + " o " + TipoImagenProducto.OUTFIT + " o " + TipoImagenProducto.BODEGON + "</b>";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             DataFoto dataFoto = SecFotosNew.getDataFoto(1/*line*/, 1/*int position*/, dFTest.driver);
@@ -40,7 +40,7 @@ public class SecFotosNewStpV {
             "1) La 1a línea tiene " + numFotosExpected1rstLine_A + " o " + numFotosExpected1rstLine_B + " fotos<br>" +
             "2) La última línea tiene < 5 fotos<br>" +        
             "3) Las líneas intermedias (si las hay) tienen 2 fotos";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         listVals = ListResultValidation.getNew(datosStep);
         try {
             int numFotos1rstLine = SecFotosNew.getNumFotosLine(1, dFTest.driver);

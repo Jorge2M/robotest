@@ -15,7 +15,7 @@ public class PageMultibancoEnProgresoStpv {
         String descripValidac = 
             "1) Aparece la cabecera <b>Pagamento em progreso</b> (la esperamos hasta " + maxSecondsToWait + " segundos<br>" +
             "2) Figura un botón para ir al siguiente paso";
-        datosStep.setStateIniValidations();         
+        datosStep.setNOKstateByDefault();         
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageMultibancoEnProgreso.isPageUntil(maxSecondsToWait, dFTest.driver)) {

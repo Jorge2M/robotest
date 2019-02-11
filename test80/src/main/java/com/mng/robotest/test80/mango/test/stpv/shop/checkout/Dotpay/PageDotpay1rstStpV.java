@@ -20,7 +20,7 @@ public class PageDotpay1rstStpV {
         if (channel==Channel.desktop)
             descripValidac+="<br>" +
             "4) Figura un botón de pago";
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageDotpay1rst.isPresentEntradaPago(nombrePago, channel, dFTest.driver)) {

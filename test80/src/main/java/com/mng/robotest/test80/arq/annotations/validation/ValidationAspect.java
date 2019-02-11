@@ -7,14 +7,11 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-
 @SuppressWarnings("javadoc")
 @Aspect
 public class ValidationAspect {
 	
 	ListResultValidation listResultValidations;
-	DatosStep datosStep;
 	
     @Pointcut("@annotation(Validation)")
     public void annotationValidationPointcut() {}
@@ -31,8 +28,7 @@ public class ValidationAspect {
     public void doRecoveryActions(JoinPoint joinPoint, Throwable ex) {
     	InfoValidation infoValidation = InfoValidation.from(joinPoint);
     	listResultValidations = infoValidation.getListResultValidation();
-    	datosStep = infoValidation.getDatosStep();
-    	datosStep.setStateIniValidations();
+    	listResultValidations.getDatosStep().setNOKstateByDefault();
     	listResultValidations.checkAndStoreValidations();
     }
     
@@ -47,7 +43,6 @@ public class ValidationAspect {
     private void getDataFromReturning(JoinPoint joinPoint, Object resultMethod) {
     	InfoValidation infoValidation = InfoValidation.from(joinPoint, resultMethod);
     	listResultValidations = infoValidation.getListResultValidation();
-		datosStep = infoValidation.getDatosStep();
     }
     
 	//TODO el datosStep se puede acabar eliminando pero de momento lo forzaremos como parámetro obligatorio sólo para probar

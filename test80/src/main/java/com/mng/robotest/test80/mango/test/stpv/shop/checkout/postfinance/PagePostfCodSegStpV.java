@@ -45,7 +45,7 @@ public class PagePostfCodSegStpV {
             "2) En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>" +
             "3) Aparece un iframe en el que figura el botón Aceptar<br>" + 
             validacion4; 
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PagePostfCodSeg.isPasarelaPostfinanceTest(dFTest.driver, nombrePago)) {
@@ -80,7 +80,7 @@ public class PagePostfCodSegStpV {
             "1) Aparece la pasarela de pagos de PostFinance E-Payment (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" + 
             "2) En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>" +
             "3) Aparece el botón Weiter (Aceptar)<br>";         
-        datosStep.setStateIniValidations();  
+        datosStep.setNOKstateByDefault();  
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PagePostfCodSeg.isPasarelaPostfinanceProUntil(maxSecondsToWait, dFTest.driver)) {

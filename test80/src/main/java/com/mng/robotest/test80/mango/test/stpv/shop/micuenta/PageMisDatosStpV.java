@@ -19,7 +19,7 @@ public class PageMisDatosStpV {
             "1) Aparece una página con el la cabecera \"Mis datos\"<br>" +
             "2) El campo de email está bloqueado<br>" +
             "3) El campo de email contiene " + usuarioReg;
-        datosStep.setStateIniValidations();       
+        datosStep.setNOKstateByDefault();       
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageMisDatos.isPage(dFTest.driver)) {
@@ -62,7 +62,7 @@ public class PageMisDatosStpV {
             "8) La población contiene la definida durante el registro: <b>" + poblacion + "</b><br>" +
             "9) Está seleccionado el país definido durante el registro: <b>" + codpais + "</b><br>" +
             "10) Está seleccionada la provincia definida durante el registro: <b>" + provincia + "</b>";
-        datosStep.setStateIniValidations();           
+        datosStep.setNOKstateByDefault();           
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageMisDatos.isVisiblePasswordTypePassword(dFTest.driver)) {
@@ -130,7 +130,7 @@ public class PageMisDatosStpV {
         //Validaciones.
         String descripValidac = 
             "1) Aparece una pantalla con el literal \"Tus datos han sido modificados en nuestra base de datos\"";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageMisDatos.pageResOK(dFTest.driver)) {
@@ -147,7 +147,7 @@ public class PageMisDatosStpV {
     public static void validaContenidoNombre(String nombre, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) En el campo del nombre figura<b>: " + nombre + "<b>"; 
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageMisDatos.getValueNombreInput(dFTest.driver).contains(nombre)) {

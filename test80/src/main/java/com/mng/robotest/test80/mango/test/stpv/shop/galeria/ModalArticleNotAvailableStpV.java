@@ -16,7 +16,7 @@ public class ModalArticleNotAvailableStpV {
         int maxSecondsToWait = 1;
         String descripValidac = 
             "1) El modal de \"Avísame\" por artículo no disponible está en estado " + stateModal + " (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();          
+        datosStep.setNOKstateByDefault();          
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!ModalArticleNotAvailable.inStateUntil(stateModal, maxSecondsToWait, dFTest.driver)) {

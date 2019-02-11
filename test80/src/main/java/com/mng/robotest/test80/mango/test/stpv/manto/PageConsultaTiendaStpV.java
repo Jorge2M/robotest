@@ -13,7 +13,7 @@ public class PageConsultaTiendaStpV {
     public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Es visible el input para la introducción de la tienda";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageConsultaTienda.isVisibleInputTienda(dFTest.driver)) {
@@ -41,7 +41,7 @@ public class PageConsultaTiendaStpV {
 	        //Validaciones
 	        String descripValidac = 
 	            "1) Aparece el mensaje La tienda no existe.";
-	        datosStep.setStateIniValidations();     
+	        datosStep.setNOKstateByDefault();     
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	        try {
 	            if (!PageConsultaTienda.apareceMensajeTiendaNoExiste(dFTest.driver)) {
@@ -70,7 +70,7 @@ public class PageConsultaTiendaStpV {
         String descripValidac = 
             "1) Aparece la información de la tienda<br>" + 
             "2) No aparece el mensaje de tienda no existe";
-        datosStep.setStateIniValidations();        
+        datosStep.setNOKstateByDefault();        
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageConsultaTienda.apareceInformacionTienda(dFTest.driver)) {

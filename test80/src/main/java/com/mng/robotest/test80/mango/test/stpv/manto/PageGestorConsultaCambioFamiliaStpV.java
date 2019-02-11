@@ -17,7 +17,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 			"1) Estamos en la página \"" + PageGestorConsultaCambioFamilia.titulo + " \"<br>" +
 			"2) Aparece la tabla de \"Consulta\"" +
 			"3) El botón \"Consulta está\" \"disabled\"";
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (!PageGestorConsultaCambioFamilia.isPage(dFTest.driver)) {
@@ -50,7 +50,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 		String descripValidac = 
 			"1) Aparece la tabla con los productos<br>" +
 			"2) El campo de la tabla \"Traducción familia principal\" de la primera fila contiene el atributo \"Accesorios\"";
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (!PageGestorConsultaCambioFamilia.isTablaProductosVisible(dFTest.driver)) {
@@ -83,7 +83,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 		String descripValidac = 
 			"1) Aparece la tabla con las opciones para los cambios de familia<br>" + 
 			"2) El botón \"Consulta\" ya no está \"disabled\"";
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (!PageGestorConsultaCambioFamilia.isTablaCambioFamiliaVisible(dFTest.driver)) {

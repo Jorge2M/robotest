@@ -160,7 +160,7 @@ public class PageGaleriaStpV {
         int maxSecondsToWait = 1;
         String descripValidac = 
             "1) Aparece la capa con la información de las tallas (la esperamos hasta " + maxSecondsToWait + ")";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!pageGaleriaDesktop.isVisibleArticleCapaTallasDesktopUntil(posArticulo, maxSecondsToWait)) {
@@ -234,7 +234,7 @@ public class PageGaleriaStpV {
         //Validaciones.
         String descripValidac = 
             "1) " + apareceElFooter + " aparece el footer";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (pageToScroll>=PageGaleriaDesktop.maxPageToScroll) {
@@ -257,7 +257,7 @@ public class PageGaleriaStpV {
             descripValidac = 
                 "1) En pantalla aparecen más artículos (" + datosScroll.articulosMostrados + ") " + 
                 "de los que había inicialmente (" + numArticulosInicio + ")";
-            datosStep.setStateIniValidations();  
+            datosStep.setNOKstateByDefault();  
             listVals = ListResultValidation.getNew(datosStep);
             try {
                 if (datosScroll.articulosMostrados <= numArticulosInicio) {
@@ -272,7 +272,7 @@ public class PageGaleriaStpV {
         if (dataForScroll.ordenacionExpected != FilterOrdenacion.NOordenado) {
             //Validaciones
             descripValidac = "1) Los artículos aparecen " + dataForScroll.ordenacionExpected;
-            datosStep.setStateIniValidations();       
+            datosStep.setNOKstateByDefault();       
             listVals = ListResultValidation.getNew(datosStep);
             try {
                 if (!pageGaleria.articlesInOrder(dataForScroll.ordenacionExpected)) {
@@ -287,7 +287,7 @@ public class PageGaleriaStpV {
         //Validaciones
         descripValidac = 
             "1) No aparece ningún artículo repetido";
-        datosStep.setStateIniValidations();  
+        datosStep.setNOKstateByDefault();  
         listVals = ListResultValidation.getNew(datosStep);
         try {
             ArrayList<NombreYRef> productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
@@ -308,7 +308,7 @@ public class PageGaleriaStpV {
             descripValidac = 
                 "1) En pantalla aparecen exactamente " + dataForScroll.numArticlesExpected + " artículos " + 
                 "(están apareciendo " + datosScroll.articulosTotalesPagina + ")";
-            datosStep.setStateIniValidations();  
+            datosStep.setNOKstateByDefault();  
             listVals = ListResultValidation.getNew(datosStep);
             try {
                 if (dataForScroll.numArticlesExpected != datosScroll.articulosTotalesPagina) {
@@ -350,7 +350,7 @@ public class PageGaleriaStpV {
        //Validaciones.
        String descripValidac = 
            "1) Aparece una pantalla en la que el title contiene \"" + tipoPrendasGaleria;
-       datosStep.setStateIniValidations(); 
+       datosStep.setNOKstateByDefault(); 
        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
            if (!dFTest.driver.getTitle().toLowerCase().contains(tipoPrendasGaleria)) {
@@ -371,7 +371,7 @@ public class PageGaleriaStpV {
            "1) Aparecen > 1 prendas<br>" + 
            validacion2 +
            "3) Los artículos aparecen ordenados por " + typeOrdenacion.name();
-       datosStep.setStateIniValidations();           
+       datosStep.setNOKstateByDefault();           
        listVals = ListResultValidation.getNew(datosStep);
        try {
            numArticulosPant = pageGaleria.getNumArticulos() + pageGaleria.getNumArticulos();
@@ -419,7 +419,7 @@ public class PageGaleriaStpV {
        String descripValidac = 
            "1) Es clickable el 1er elemento de la lista<br>" +
            "2) Es clickable el bloque de filtros (esperamos hasta " + maxSecondsWait + " segundos)";
-       datosStep.setStateIniValidations();     
+       datosStep.setNOKstateByDefault();     
        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
            if (!pageGaleria.isClickableArticuloUntil(5, 0/*seconds*/)) {
@@ -477,7 +477,7 @@ public class PageGaleriaStpV {
        //Validaciones.
        String descripValidac = 
            "1) Se modifica la imagen correspondiente al artículo ";
-       datosStep.setStateIniValidations();   
+       datosStep.setNOKstateByDefault();   
        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
            srcImgAfterClickColor = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
@@ -540,7 +540,7 @@ public class PageGaleriaStpV {
        String srcImg2oSlider = "";
        String descripValidac = 
            "1) Se modifica la imagen asociada al artículo (<b>antes</b>: " + srcImg1erSlider + ", <b>ahora</b>: " + srcImg2oSlider + ")";
-       datosStep.setStateIniValidations(); 
+       datosStep.setNOKstateByDefault(); 
        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
            srcImg2oSlider = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
@@ -555,7 +555,7 @@ public class PageGaleriaStpV {
        if ("".compareTo(srcImageExpected)!=0) {
            descripValidac = 
                "1) El src de la imagen <b>ahora</b> (" + srcImg2oSlider + ") es la <b>original</b> (" + srcImageExpected + ")";
-           datosStep.setStateIniValidations();     
+           datosStep.setNOKstateByDefault();     
            listVals = ListResultValidation.getNew(datosStep);
            try {
                if (srcImg2oSlider.compareTo(srcImageExpected)!=0) {
@@ -603,7 +603,7 @@ public class PageGaleriaStpV {
            "2) Aparece el artículo anteriormente seleccionado: <br>" +
            "   - Nombre " + nombre1erArt + "<br>" +
            "   - Precio " + precio1erArt;
-       datosStep.setStateIniValidations();  
+       datosStep.setNOKstateByDefault();  
        ListResultValidation listVals = ListResultValidation.getNew(datosStep);            
        try {
            PageFicha pageFicha = PageFicha.newInstance(app, channel, dFTest.driver);
@@ -635,7 +635,7 @@ public class PageGaleriaStpV {
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
        String descripValidac = 
            "1) Como mínimo el " + porcentaje + " % de los productos son panorámicas";
-       datosStep.setStateIniValidations();   
+       datosStep.setNOKstateByDefault();   
        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
            float numArtTotal = pageGaleria.getNumArticulos();
@@ -661,7 +661,7 @@ public class PageGaleriaStpV {
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
        String descripValidac = 
            "1) Existe algún vídeo en la galería";
-       datosStep.setStateIniValidations(); 
+       datosStep.setNOKstateByDefault(); 
        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
            if (!pageGaleriaDesktop.isPresentAnyArticle(TypeArticleDesktop.Video)) {
@@ -676,7 +676,7 @@ public class PageGaleriaStpV {
    // Validación que comprueba que está apareciendo una galería de artículos
    public void validaArtEnContenido(DatosStep datosStep) {
        String descripValidac = "1) Aparece una página con artículos (la esperamos 3 segundos)";
-       datosStep.setStateIniValidations();
+       datosStep.setNOKstateByDefault();
        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
            boolean articulos = pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, 3/*seconds*/);
@@ -727,7 +727,7 @@ public class PageGaleriaStpV {
        //Validaciones
        String descripValidac = 
            "1) Quedan " + estadoFinal + " los iconos asociados a los artículos con posiciones <b>" + posIconsToClick.toString() + "</b>";
-       datosStep.setStateIniValidations();
+       datosStep.setNOKstateByDefault();
        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
            if (!pageGaleria.iconsInCorrectState(posIconsToClick, actionFav)) {
@@ -758,7 +758,7 @@ public class PageGaleriaStpV {
        //Validaciones.
        String descripValidac = 
            "1) Aparece el layout correspondiente al listado a <b>" + numColumnas.name() + " columnas</b>";
-       datosStep.setStateIniValidations();  
+       datosStep.setNOKstateByDefault();  
        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
            if (pageGaleria.getLayoutNumColumnas() != pageGaleriaDesktop.getNumColumnas(numColumnas)) {
@@ -777,7 +777,7 @@ public class PageGaleriaStpV {
            descripValidac = 
                "1) Los primeros " + articulosComprobar + " artículos de la galería a " + numColumnas.name() + 
                " columnas son iguales a los de la anterior galería";
-           datosStep.setStateIniValidations();  
+           datosStep.setNOKstateByDefault();  
            listVals = ListResultValidation.getNew(datosStep);
            try {
                if (!listArticlesGaleriaAct.isArticleListEquals(listArticlesGaleriaAnt, articulosComprobar)) {
@@ -802,7 +802,7 @@ public class PageGaleriaStpV {
        String descripValidac = 
            "1) El número de artículos de la galería Nuevo (" + nodoAct.getArticlesNuevo().size() + ") es igual al del nodo " + nodoAnt.getIp() + " (" + nodoAnt.getArticlesNuevo().size() + ")<br>" +
            "2) El orden y contenido de los artículos en ambos nodos es el mismo";
-       datosStep.setStateIniValidations(); 
+       datosStep.setNOKstateByDefault(); 
        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
            if (nodoAct.getArticlesNuevo().size()!=nodoAct.getArticlesNuevo().size()) {
@@ -827,7 +827,7 @@ public class PageGaleriaStpV {
 		   if (!PageGaleriaDesktop.secBannerHead.isBannerWithoutTextAccesible(dFTest.driver)) {
 		       String descripValidac =
 	               "1) El Banner de Cabecera contiene algún texto";
-	           datosStep.setStateIniValidations();  
+	           datosStep.setNOKstateByDefault();  
                ListResultValidation listVals = ListResultValidation.getNew(datosStep);            
 	           try {
 	               String textBanner = PageGaleriaDesktop.secBannerHead.getText(dFTest.driver);
@@ -878,7 +878,7 @@ public class PageGaleriaStpV {
        else
     	   descripValidac+=
     	   "3) No aparece ningún filtro de descuento";
-       datosStep.setStateIniValidations();      
+       datosStep.setNOKstateByDefault();      
        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
            if (!PageGaleriaDesktop.secBannerHead.isVisible(dFTest.driver)) {
@@ -912,7 +912,7 @@ public class PageGaleriaStpV {
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
        String descripValidac = 
            "1) Estamos en la página de Galería";
-       datosStep.setStateIniValidations();     
+       datosStep.setNOKstateByDefault();     
        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
            if (!pageGaleriaDesktop.isPage()) {
@@ -931,7 +931,7 @@ public class PageGaleriaStpV {
            "2) El banner de cabecera es de rebajas  (contiene un símbolo de porcentaje o \"" + saleTraduction + "\")<br>" +
            "3) El banner de cabecera no es lincable<br>" +
            "4) El banner de cabecera contiene un link de \"Más info\"";
-       datosStep.setStateIniValidations();   
+       datosStep.setNOKstateByDefault();   
        listVals = ListResultValidation.getNew(datosStep);
        try {
            if (!PageGaleriaDesktop.secBannerHead.isVisible(dFTest.driver)) {
@@ -962,7 +962,7 @@ public class PageGaleriaStpV {
                "2) Aparece el filtro para todas las temporadas <b>All</b>)<br>" +
                "3) Aparece el filtro para las ofertas <b>Sale</b><br>" +
                "4) Aparece el filtro para la nueva temporada <b>Next season preview</b>";
-           datosStep.setStateIniValidations();    
+           datosStep.setNOKstateByDefault();    
            listVals = ListResultValidation.getNew(datosStep);
            try {
                if (!filtrosCollection.isVisible()) {
@@ -987,7 +987,7 @@ public class PageGaleriaStpV {
            descripValidac =
                "<b style=\"color:blue\">Rebajas</b></br>" +
                "1) No son visibles los menús laterales de filtro a nivel detemporadas (Collection)<b>";
-           datosStep.setStateIniValidations();   
+           datosStep.setNOKstateByDefault();   
            listVals = ListResultValidation.getNew(datosStep);
            try {
                if (filtrosCollection.isVisible()) {
@@ -1012,7 +1012,7 @@ public class PageGaleriaStpV {
            "<b style=\"color:blue\">Rebajas</b></br>" +
            "1) El 1er artículo pertenece a alguna de las temporadas " + ordenType.getTemporadasIniciales() + " <br>" +
            "2) Los artículos aparecen ordenados por <b>" + ordenType.toString() + "</b>";
-       datosStep.setStateIniValidations(); 
+       datosStep.setNOKstateByDefault(); 
        listVals = ListResultValidation.getNew(datosStep);
        try {
            State levelErrorValidation2 = State.Info_NoHardcopy;
@@ -1060,7 +1060,7 @@ public class PageGaleriaStpV {
            "1) Todos los artículos pertenecen a las temporadas <b>" + listTemporadas.toString() + "</b>";
        if (validaNotNewArticles)
     	   descripValidac+=" y no contienen alguna de las etiquetas de artículo nuevo (" + PageGaleria.listLabelsNew + ")";
-       datosStep.setStateIniValidations();        
+       datosStep.setNOKstateByDefault();        
        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
            List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFromOther, listTemporadas);
@@ -1088,7 +1088,7 @@ public class PageGaleriaStpV {
        String descripValidac =
            "<b style=\"color:blue\">Rebajas</b></br>" +
            "1) No hay ningún artículo del tipo <b>" + typeArticle + "</b>";
-       datosStep.setStateIniValidations();      
+       datosStep.setNOKstateByDefault();      
        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
            ArrayList<String> listArtWrong = pageGaleriaDesktop.getArticlesOfType(typeArticle);
@@ -1126,7 +1126,7 @@ public class PageGaleriaStpV {
            "<b style=\"color:blue\">Rebajas</b></br>" +
            "1) Se despliega la información relativa a las rebajas (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
            "2) Aparece el link de <b>Menos info</b>";
-       datosStep.setStateIniValidations();      
+       datosStep.setNOKstateByDefault();      
        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
            if (!PageGaleriaDesktop.secBannerHead.isVisibleInfoRebajasUntil(maxSecondsToWait, dFTest.driver)) {

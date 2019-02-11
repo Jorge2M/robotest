@@ -41,7 +41,7 @@ public class PageDetallePedidoStpV {
         String descripValidac =
         	"1) Es visible alguna prenda (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) Aparecen " + compraOnline.numPrendas + " prendas"; 
-        datosStep.setStateIniValidations(); 
+        datosStep.setNOKstateByDefault(); 
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);               
         try { 
             if (!pageDetalle.isVisiblePrendaUntil(maxSecondsToWait, dFTest.driver)) {
@@ -73,7 +73,7 @@ public class PageDetallePedidoStpV {
             "1) Aparece la página de detalle del pedido<br>" + 
             "2) En la página figura el Nº de pedido: " + codPedido + "<br>" +
             "3) Como total figura el importe: " + importeTotalWithoutCurrency;
-        datosStep.setStateIniValidations();       
+        datosStep.setNOKstateByDefault();       
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!pageDetalle.isPage(dFTest.driver)) {

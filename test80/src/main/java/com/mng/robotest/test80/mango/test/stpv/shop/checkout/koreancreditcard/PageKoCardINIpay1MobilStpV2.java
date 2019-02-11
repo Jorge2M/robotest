@@ -23,7 +23,7 @@ public class PageKoCardINIpay1MobilStpV2 {
             "2) Existe el botón <b>SamsungPay</b><br>" +
             "3) Existe el checkbox para los <b>terminos</b> del pago<br>" +
             "4) Existe el titulo de los terminos<br>";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageKoCardINIpay1Mobil.isPage(dFTest.driver)) {
@@ -49,7 +49,7 @@ public class PageKoCardINIpay1MobilStpV2 {
         DatosStep datosStep = new DatosStep     (
             "Marcamos el checkbox de los terminos",
             "Desaparecen el titulo de los terminos");
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         try {
             PageKoCardINIpay1Mobil.clickAndWait(BodyPageKoCardINIpay1.terms, 2, dFTest.driver);
             
@@ -60,7 +60,7 @@ public class PageKoCardINIpay1MobilStpV2 {
         //Validation
         String descripValidac =
             "1) Desaparece el apartado de los términos";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (PageKoCardINIpay1Mobil.isElementInStateUntil(BodyPageKoCardINIpay1.termsTitle, StateElem.Visible, 1, dFTest.driver)) {
@@ -78,7 +78,7 @@ public class PageKoCardINIpay1MobilStpV2 {
         DatosStep datosStep = new DatosStep     (
             "Seleccionamso el botón correspondiente al tipo de tarjeta <b>" + litButtonTypeCard + "</b>",
             "Aparece información varia y el boton de continuar");
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         try {
         	BodyPageKoCardINIpay1.clickTypeCardButton(litButtonTypeCard, dFTest.driver);
             

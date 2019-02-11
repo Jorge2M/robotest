@@ -17,7 +17,7 @@ public class PageConsultaIdEansStpV {
             "1) Es visible el contenido de la pestaña Busqueda Excel<br>" + 
             "2) Es visible el contenido de la pestaña Busqueda Rapida<br>" +
             "3) Es visible el título de página correcto";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageConsultaIdEans.isVisibleDivBusquedaExcel(dFTest.driver)) {
@@ -55,7 +55,7 @@ public class PageConsultaIdEansStpV {
 	        "1) Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>" +
 	        "2) El número de líneas de pedido es " + pedidosPrueba.size() + "<br>" +
 	        "3) Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.toString() + "</b>";
-            datosStep.setStateIniValidations();
+            datosStep.setNOKstateByDefault();
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
                 if (!PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, dFTest.driver)) {
@@ -93,7 +93,7 @@ public class PageConsultaIdEansStpV {
 			"1) Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>" +
 	        "2) El número de líneas de pedido es " + pedidosPrueba.size() + "<br>" +
 	        "3) Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.toString() + "</b>";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, dFTest.driver)) {
@@ -126,7 +126,7 @@ public class PageConsultaIdEansStpV {
         int maxSecondsToWait = 2;
 		String descripValidac = 
 			"1) Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, dFTest.driver)) {
@@ -155,7 +155,7 @@ public class PageConsultaIdEansStpV {
 			"1) Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>" +
 		    "2) El número de líneas de artículos es " + articulosPrueba.size() + "<br>" +
 		    "3) Aparece una línea por cada uno de los artículos <b>" + articulosPrueba.toString() + "</b>";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, dFTest.driver)) {

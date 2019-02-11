@@ -42,7 +42,7 @@ public class PageHomeMarcasStpV {
         String descripValidac = 
             "1) Aparece la home de marcas/multimarcas según el país<br>" +
             "2) No aparece ningún tag de error";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (app!=AppEcom.outlet) {

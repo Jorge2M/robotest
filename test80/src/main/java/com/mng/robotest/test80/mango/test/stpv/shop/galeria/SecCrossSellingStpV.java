@@ -33,7 +33,7 @@ public class SecCrossSellingStpV {
         String descripValidac = 
             "1) La sección cross-selling existe (si de primeras no existe scrollamos hasta el final de la galería)<br>" +
             "2) Aparecen los links correspondientes a los 3 primeros menús de Mujer-Prendas (<b>" + litMenu1 + ", " + litMenu2 + ", " + litMenu3 + "</b>)";  
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageGaleriaDesktop.secCrossSelling.isSection(dFTest.driver)) {

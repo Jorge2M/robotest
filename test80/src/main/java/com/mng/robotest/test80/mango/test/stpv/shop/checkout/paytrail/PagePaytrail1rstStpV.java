@@ -22,7 +22,7 @@ public class PagePaytrail1rstStpV {
             descripValidac+="<br>" +
             "3) Es visible el desplegable de bancos (lo esperamos hasta " + maxSecondsToWait + " seconds)<br>" +
             "4) Figura un botón de pago";
-        datosStep.setStateIniValidations();  
+        datosStep.setNOKstateByDefault();  
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PagePaytrail1rst.isPresentEntradaPago(nombrePagoCabecera, dFTest.driver)) {

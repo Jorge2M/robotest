@@ -23,7 +23,7 @@ public class PageAmexInputTarjetaStpV {
             "2) En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>" +
             "3) Aparecen los campos de introducción de tarjeta, fecha caducidad y código de seguridad<br>" +
             "4) Figura un botón de Aceptar";
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageAmexInputTarjeta.isPasarelaBancoSabadellUntil(maxSecondsToWait, dFTest.driver)) {

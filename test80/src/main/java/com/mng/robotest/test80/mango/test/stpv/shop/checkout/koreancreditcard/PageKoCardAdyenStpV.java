@@ -27,7 +27,7 @@ public class PageKoCardAdyenStpV {
             validacion1 + 
             "2) No se trata de la página de precompra (no aparece los logos de formas de pago <br>" + 
     		"3) Aparece la página de Adyen / Korean Kredit Cards";
-        datosStep.setStateIniValidations(); 
+        datosStep.setNOKstateByDefault(); 
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (channel==Channel.desktop) {
@@ -52,7 +52,7 @@ public class PageKoCardAdyenStpV {
         DatosStep datosStep = new DatosStep (
         	"Seleccionar el icono de Korean Credit Card para continuar",
             "Aparece la páinga de INIpay");
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         try {
             PageKoCardAdyen.clickForContinue(channel, dFTest.driver);
             

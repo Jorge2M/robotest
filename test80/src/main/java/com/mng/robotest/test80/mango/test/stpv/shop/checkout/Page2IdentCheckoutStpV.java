@@ -22,7 +22,7 @@ public class Page2IdentCheckoutStpV {
         String descripValidac = 
             "1) Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + maxSecondsToWait + ")<br>" +
             "2) Es <b>" + !emailYetExists + "</b> que aparece el input para la introducción de la contraseña";
-        datosStep.setStateIniValidations();         
+        datosStep.setNOKstateByDefault();         
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!Page2IdentCheckout.isPageUntil(maxSecondsToWait, dFTest.driver)) {
@@ -58,7 +58,7 @@ public class Page2IdentCheckoutStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Se hace clickable el botón \"Continuar\" (lo esperamos hasta " + maxSecondsToWait + ")";
-        datosStep.setStateIniValidations();           
+        datosStep.setNOKstateByDefault();           
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!Page2IdentCheckout.isContinuarClickableUntil(maxSecondsToWait, dFTest.driver)) {
@@ -103,7 +103,7 @@ public class Page2IdentCheckoutStpV {
         if (validaDirecCharNoLatinos) {
             String descripValidac = 
                 "1) Aparece el aviso a nivel de aduanas que indica que la dirección contiene carácteres no-latinos";
-            datosStep.setStateIniValidations();    
+            datosStep.setNOKstateByDefault();    
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);        
             try { 
                 if (!Page2IdentCheckout.isDisplayedAvisoAduanas(dFTest.driver)) {
@@ -125,7 +125,7 @@ public class Page2IdentCheckoutStpV {
 		if (pais.getRgpd().equals("S")) {
 	        String descripValidac = 
 	            "1) El texto legal de RGPD <b>SI</b> existe para el pais " + pais.getCodigo_pais() + "<br>";
-	        datosStep.setStateIniValidations();    
+	        datosStep.setNOKstateByDefault();    
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	        try {
 	            if (!Page2IdentCheckout.isTextoLegalRGPDVisible(dFTest.driver)) {
@@ -140,7 +140,7 @@ public class Page2IdentCheckoutStpV {
 		else {
 			String descripValidac = 
 	            "1) El texto legal de RGPD <b>NO</b> existe para el pais " + pais.getCodigo_pais() + "<br>";
-	        datosStep.setStateIniValidations();    
+	        datosStep.setNOKstateByDefault();    
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	        try {
 	            if (Page2IdentCheckout.isTextoLegalRGPDVisible(dFTest.driver)) {

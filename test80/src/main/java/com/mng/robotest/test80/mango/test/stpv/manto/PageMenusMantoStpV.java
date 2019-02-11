@@ -45,7 +45,7 @@ public class PageMenusMantoStpV {
         String descripValidac = 
         	"1) Aparece la página asociada al menú <b>" + subMenu + "</b><br>" +
         	"2) No aparece ninguna ventana de alerta";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageMenusManto.validateIsPage(subMenu, dFTest.driver)) {

@@ -49,7 +49,7 @@ public class PagePrehomeStpV {
         String descripValidac = 
             validacion1 +
             "2) El país " + marcaOnline + " tiene la marca de venta online";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (dCtxSh.channel==Channel.desktop) {
@@ -122,7 +122,7 @@ public class PagePrehomeStpV {
             
             String descripValidac = 
                 "1) Aparece una pantalla en la que el título contiene \"" + tituloContains + "\"";
-            datosStep.setStateIniValidations();
+            datosStep.setNOKstateByDefault();
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
                 if (!dFTest.driver.getTitle().toLowerCase().contains(tituloContains)) {

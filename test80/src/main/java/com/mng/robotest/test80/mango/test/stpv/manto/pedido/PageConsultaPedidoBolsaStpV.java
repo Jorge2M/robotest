@@ -68,7 +68,7 @@ public class PageConsultaPedidoBolsaStpV extends ElementPageFunctions {
         String descripValidac = 
             "1) El campo \"tipo servicio\" contiene el valor <b>" + tipoTransporte.getCodigoIntercambio() + "</b> (asociado al tipo de envío " + tipoTransporte + ")" + 
             validacion2;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (PageDetallePedido.getTipoServicio(dFTest.driver).compareTo(tipoTransporte.getCodigoIntercambio())!=0) {
@@ -100,7 +100,7 @@ public class PageConsultaPedidoBolsaStpV extends ElementPageFunctions {
             "3) Las 3 líneas de la dirección de envío figuran en la dirección del pedido (" + dataPedido.getDireccionEnvio() +")<br>" +
             "4) Figura el código de país (" + dataPedido.getCodigoPais() + ")" +
             validacion5;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!PageDetallePedido.isPage(dFTest.driver)) {

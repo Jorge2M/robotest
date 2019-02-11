@@ -25,7 +25,7 @@ public class PageRegistroIniStpV {
     	int maxSecondsWait = 5;
         String descripValidac =
             "1) Aparece la página inicial del proceso de registro (la esperamos hasta " + maxSecondsWait + " segundos)";
-        datosStep.setStateIniValidations();     
+        datosStep.setNOKstateByDefault();     
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);   
         try {
             if (!PageRegistroIni.isPageUntil(maxSecondsWait, dFTest.driver)) {
@@ -55,7 +55,7 @@ public class PageRegistroIniStpV {
         //Validaciones
         String descripValidac = 
             "1) No aparece mensaje de error en los campos con datos correctos"; 
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (PageRegistroIni.isVisibleAnyInputErrorMessage(dFTest.driver)) {
@@ -97,7 +97,7 @@ public class PageRegistroIniStpV {
             }
         }
         
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             for (DataRegistro dataInput : dataToSend.getDataPageInicial()) {
@@ -154,7 +154,7 @@ public class PageRegistroIniStpV {
 		int maxSecondsToWait = 3;
         String descripValidac =
             "1) Desparece la capa de loading (lo esperamos hasta " + maxSecondsToWait + " segundos)";         
-        datosStep.setStateIniValidations();       
+        datosStep.setNOKstateByDefault();       
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);    
         try {
             if (!PageRegistroIni.isCapaLoadingInvisibleUntil(maxSecondsToWait, dFTest.driver)) {
@@ -172,7 +172,7 @@ public class PageRegistroIniStpV {
         	int maxSecondsWait = 5;
             String descripValidac =
                 "1) Aparece un error \"Email ya registrado\" (lo esperamos hasta " + maxSecondsWait + " segundos)";         
-            datosStep.setStateIniValidations();   
+            datosStep.setNOKstateByDefault();   
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);    
             try {
                 if (!PageRegistroIni.isVisibleErrorUsrDuplicadoUntil(dFTest.driver, maxSecondsWait)) {
@@ -192,7 +192,7 @@ public class PageRegistroIniStpV {
             String descripValidac = 
                 "1) Aparecen " + inputsObligNoInf + " errores de campo obligatorio<br>" +
                 "2) Si existe, en el desplegable aparece seleccionado el país con código " + pais.getCodigo_pais() + " (" + pais.getNombre_pais() + ")";
-            datosStep.setStateIniValidations();    
+            datosStep.setNOKstateByDefault();    
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
                 if ((inputsObligNoInf + numInputsTypePassrod) < numErrCampObligatorio) {
@@ -216,7 +216,7 @@ public class PageRegistroIniStpV {
         String descripValidac = 
             "<b style=\"color:blue\">Rebajas</b></br>" +
             "1) El mensaje de NewsLetter no aparece o si aparece no contiene \"" + percentageSymbol + "\""; 
-        datosStep.setStateIniValidations();  
+        datosStep.setNOKstateByDefault();  
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (PageRegistroIni.newsLetterTitleContains(percentageSymbol, dFTest.driver)) {
@@ -237,7 +237,7 @@ public class PageRegistroIniStpV {
 	            "2) El texto legal de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>" + 
 	            "3) <b>SI</b> está presente el checkbox para recibir promociones e información personalizada para el pais " + 
 	            	dCtxSh.pais.getCodigo_pais() + " (lo esperamos hasta " + maxSeconds + " segundos)"; 
-	        datosStep.setStateIniValidations();   
+	        datosStep.setNOKstateByDefault();   
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	        try {
 		        if (!PageRegistroIni.isTextoRGPDVisible(dFTest.driver)) {           	
@@ -262,7 +262,7 @@ public class PageRegistroIniStpV {
 	            "2) El texto legal de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>" + 
 	            "3) <b>NO</b> es visible el checkbox para recibir promociones e información personalizada para el pais " + 
 	            	dCtxSh.pais.getCodigo_pais() + " (lo esperamos hasta " + maxSeconds + " segundos)"; 
-	        datosStep.setStateIniValidations();   
+	        datosStep.setNOKstateByDefault();   
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	        try {
 	            if (PageRegistroIni.isTextoRGPDVisible(dFTest.driver)) {

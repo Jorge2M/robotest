@@ -18,7 +18,7 @@ public class PageD3DJPTestSelectOptionStpV {
         String descripValidac = 
             "1) Aparece la página de Test correspondiente al D3D de JPMorgan (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" + 
             "2) Aparece el importe " + importeTotal + " de la operación";
-        datosStep.setStateIniValidations(); 
+        datosStep.setNOKstateByDefault(); 
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageD3DJPTestSelectOption.isPageUntil(maxSecondsToWait, dFTest.driver)) {

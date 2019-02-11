@@ -59,7 +59,7 @@ public class PageCheckoutWrapperStpV {
     //Validaciones
 	    int maxSecondsToWait = 10;
 	    String descripValidac = "1) Acaba desapareciendo la capa de \"Cargando...\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-	    datosStep.setStateIniValidations();  
+	    datosStep.setNOKstateByDefault();  
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	    try {
 	        Thread.sleep(200); //Damos tiempo a que aparezca la capa de "Cargando"
@@ -100,7 +100,7 @@ public class PageCheckoutWrapperStpV {
         //Validaciones
         String descripValidac = 
             "1) El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país (" + pais.getListPagosEnOrdenPantalla(app, isEmpl).size() + ")";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageCheckoutWrapper.isNumMetodosPagoOK(pais, app, channel, isEmpl, dFTest.driver)) {
@@ -119,7 +119,7 @@ public class PageCheckoutWrapperStpV {
         //Validaciones
         descripValidac = 
             "1) Aparece un logo/pestaña por cada uno de los pagos asociados al país: " + pais.getStringPagosEnOrdenPantalla(app, isEmpl);
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         listVals = ListResultValidation.getNew(datosStep);
         try {
             List<Pago> listaPagosEnOrden = pais.getListPagosEnOrdenPantalla(app, isEmpl);
@@ -318,7 +318,7 @@ public class PageCheckoutWrapperStpV {
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Se hace visible el texto bajo el método de pago: " + pago.getNombre(channel) + " (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, channel, maxSecondsToWait, dFTest.driver)) {
@@ -338,7 +338,7 @@ public class PageCheckoutWrapperStpV {
     public static void validateIsPresentButtonCompraDesktop(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
         	"1) Aparece el botón de \"Confirmar Compra\"";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageCheckoutWrapper.page1DktopCheckout.isPresentButtonConfPago(dFTest.driver)) {
@@ -472,7 +472,7 @@ public class PageCheckoutWrapperStpV {
         //Validaciones
         maxSecondsToWait = 2;
         String descripValidac = "1) Aparece el botón de \"Confirmar Pago\" (esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!PageCheckoutWrapper.page3MobilCheckout.isClickableButtonConfirmarPagoUntil(maxSecondsToWait, dFTest.driver)) {
@@ -541,7 +541,7 @@ public class PageCheckoutWrapperStpV {
             "1) Aparece el campo de introducción del primer apellido (lo esperamos hasta " + maxSecondsToWait + " segundos)" +
             descripcion2 +
             descripcion3;
-        datosStep.setStateIniValidations();  
+        datosStep.setNOKstateByDefault();  
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(channel, maxSecondsToWait, dFTest.driver)) {
@@ -644,7 +644,7 @@ public class PageCheckoutWrapperStpV {
       //Validaciones
         String descripValidac = 
                 "1) Aparece el banco \"" + nombreBanco + "\" en el cuadro de selección";
-        datosStep.setStateIniValidations();      
+        datosStep.setNOKstateByDefault();      
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageCheckoutWrapper.isBancoSeleccionado(nombreBanco, dFTest)) {

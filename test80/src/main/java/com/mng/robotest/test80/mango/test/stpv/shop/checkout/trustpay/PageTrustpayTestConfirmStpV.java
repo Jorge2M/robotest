@@ -17,7 +17,7 @@ public class PageTrustpayTestConfirmStpV {
             "2) Figura el botón \"ANNOUNCED\"<br>" +
             "3) Figura el botón \"FAIL\"<br>" +
             "4) Figura el botón \"PENDING\"";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageTrustpayTestConfirm.isPresentButton(typeButtons.OK, dFTest.driver)) {

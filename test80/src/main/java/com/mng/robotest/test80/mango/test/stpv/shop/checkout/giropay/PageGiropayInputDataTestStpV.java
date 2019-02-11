@@ -15,7 +15,7 @@ public class PageGiropayInputDataTestStpV {
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Aparece la página de Test para la introducción de los datos de Giropay (la esperamos hasta " + maxSecondsToWait + ")";
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageGiropayInputDataTest.isPageUntil(maxSecondsToWait, dFTest.driver)) {

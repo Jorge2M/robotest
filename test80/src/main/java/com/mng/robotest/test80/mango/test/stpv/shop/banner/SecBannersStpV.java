@@ -189,7 +189,7 @@ public class SecBannersStpV {
     public void validaBannEnContenido(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) El bloque de contenido (homeContent o bannerHome) existe y tiene >= 1 banner o >=1 map o >=1 items-edit";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             boolean existBanners = managerBannersScreen.existBanners();

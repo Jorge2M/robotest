@@ -20,7 +20,7 @@ public class PageAccesoMisComprasStpV {
             "1) Aparece la página de \"Acceso a Mis Compras\"<br>" +
             "2) Aparecen el bloque \"Ya estoy registrado\"<br>" +
             "3) Aparece el bloque de \"No estoy registrado\"";
-        datosStep.setStateIniValidations();      
+        datosStep.setNOKstateByDefault();      
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageAccesoMisCompras.isPage(dFTest.driver)) {
@@ -54,7 +54,7 @@ public class PageAccesoMisComprasStpV {
         int maxSecondsToWait = 1;
         String descripValidac = 
             "1) Se hace visible el bloque de \"" + typeBlock + "\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();      
+        datosStep.setNOKstateByDefault();      
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageAccesoMisCompras.isVisibleBlockUntil(typeBlock, maxSecondsToWait, dFTest.driver)) {

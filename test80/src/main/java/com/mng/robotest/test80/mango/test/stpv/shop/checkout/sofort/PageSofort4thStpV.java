@@ -18,7 +18,7 @@ public class PageSofort4thStpV {
     public static void validaIsPage(DatosStep datosStep, DataFmwkTest dFTest) { 
         String descripValidac = 
             "1) Aparece la página de introducción del Usuario/Password de \"SOFORT\"";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageSofort4th.isPage(dFTest.driver)) {
@@ -45,7 +45,7 @@ public class PageSofort4thStpV {
         //Validaciones
         String descripValidac = 
             "1) Aparece un formulario para la selección de la cuenta"; 
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep); 
         try {
             if (!PageSofort4th.isVisibleFormSelCta(dFTest.driver)) {
@@ -75,7 +75,7 @@ public class PageSofort4thStpV {
         //Validaciones
         String descripValidac = 
             "1) Aparece un campo para la introducción del TAN"; 
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageSofort4th.isVisibleInputTAN(dFTest.driver)) {

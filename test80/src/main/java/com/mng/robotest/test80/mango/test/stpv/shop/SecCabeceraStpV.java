@@ -33,7 +33,7 @@ public class SecCabeceraStpV {
         String descripValidac = 
             "1) Aparece el logo/link correcto correspondiente al canal, país, línea " +
                "(esperamos hasta " + maxSecondsWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!((SecCabeceraDesktop)secCabecera).isPresentLogoCorrectUntil(dCtxSh.pais, lineaType, maxSecondsWait)) {
@@ -71,7 +71,7 @@ public class SecCabeceraStpV {
     
         String descripValidac = 
             "1) " + validacion1;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if ("true".compareTo(dCtxSh.pais.getShop_online())==0) {

@@ -22,7 +22,7 @@ public class PageYandex1rstStpv {
                             "2) Figura preinformado el email del usuario: " + emailUsr + "<br>" +
                             "3) Aparece el importe de la compra por pantalla: " + importeTotal;
 
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageYandex1rst.isPage(dFTest.driver)) {

@@ -32,7 +32,7 @@ public class SecFooterStpV {
     	List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(app, channel);
         String descripValidac = 
             "1) Aparecen los siguientes links en el footer <b>" + listFooterLinksToValidate + "</b>";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecFooter.checkFooters(listFooterLinksToValidate, app, dFTest.driver)) {
@@ -75,7 +75,7 @@ public class SecFooterStpV {
         String descripValidac = 
             "1) Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             validation2;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!pageObject.isPageCorrect(dFTest.driver)) {
@@ -111,7 +111,7 @@ public class SecFooterStpV {
         String descripValidac = 
             "1) Aparece \"Preguntas Frecuentes\" en la página <br>" +
             "2) Aparece la sección \"Contáctanos\" con el número de teléfono " + telefono;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageAyuda.isPresentCabPreguntasFreq(channel, dFTest.driver)) {
@@ -156,7 +156,7 @@ public class SecFooterStpV {
            		 "5) Aparece el campo <b>Mail</b><br>" + 
            		 "6) Aparece el botón <b>¡Lo quiero ahora!</b>";
                  
-             datosStep.setStateIniValidations();
+             datosStep.setNOKstateByDefault();
              ListResultValidation listVals = ListResultValidation.getNew(datosStep);
              try {
                  if (!PageMangoCard.isPresentNameField(dFTest.driver)) {
@@ -238,7 +238,7 @@ public class SecFooterStpV {
                  "6) Aparece el apartado \"Modalidad de pago de tu MANGO Card<br>" +
                  "7) Aparece el botón \"Continuar\"";
              
-             datosStep.setStateIniValidations(); 
+             datosStep.setNOKstateByDefault(); 
              listVals = ListResultValidation.getNew(datosStep);             
              try {
                  if (!PageInputDataSolMangoCard.isPage2(dFTest.driver)) {
@@ -322,7 +322,7 @@ public class SecFooterStpV {
  	        String descripValidac = 
  	            "1) El texto de info de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>" + 
  	            "2) El texto legal de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>";
- 	        datosStep.setStateIniValidations();
+ 	        datosStep.setNOKstateByDefault();
 	        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
  	        try {
  	            if (!SecFooter.isTextoRGPDPresent(dFTest.driver)) {
@@ -341,7 +341,7 @@ public class SecFooterStpV {
  			String descripValidac = 
  	            "1) El texto de info de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>" + 
  	            "2) El texto legal de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>";
- 	        datosStep.setStateIniValidations();
+ 	        datosStep.setNOKstateByDefault();
 	        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
  	        try {
  	            if (SecFooter.isTextoRGPDPresent(dFTest.driver)) {

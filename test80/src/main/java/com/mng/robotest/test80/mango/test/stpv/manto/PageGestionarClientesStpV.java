@@ -18,7 +18,7 @@ public class PageGestionarClientesStpV {
 				"1) Estamos en la página \"" + PageGestionarClientes.titulo + " \"<br>" + 
 						"2) Aparece el apartado de \"Buscar clientes\"<br>" +
 						"3) Aparece el apartado de \"Tratar clientes\"";
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (!PageGestionarClientes.isPage(dFTest.driver)) {
@@ -57,7 +57,7 @@ public class PageGestionarClientesStpV {
 				"1) Se muestra la tabla de información<br>" +
 				"2) Aparece el DNI <b>" + dni + "</b> en la tabla<br>" +
 				"3) Aparece el botón de Alta o Baja (los esperamos un máximo de " + maxSecondsToWait + " segundos)";
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (!PageGestionarClientes.isVisibleTablaInformacion(dFTest.driver)) {
@@ -98,7 +98,7 @@ public class PageGestionarClientesStpV {
 		String descripValidac = 
 			"1) Aparece el mensaje \""+ typeButton.getMensaje() +"\"<br>" +
 			"2) Aparece el botón \"Alta\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (!PageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton, dFTest.driver)) {
@@ -132,7 +132,7 @@ public class PageGestionarClientesStpV {
 		String descripValidac = 
 			"1) Aparece el id del cliente \""+ idCliente +"\"<br>" +
 			"2) Aparece el dni del cliente \""+ dni +"\"";
-		datosStep.setStateIniValidations();
+		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
 			if (!PageGestionarClientes.isVisibleIdClienteClickDetallesButton(idCliente, dFTest.driver)) {

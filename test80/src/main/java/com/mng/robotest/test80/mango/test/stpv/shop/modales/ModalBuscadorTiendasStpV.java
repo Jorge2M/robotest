@@ -16,7 +16,7 @@ public class ModalBuscadorTiendasStpV {
         String descripValidac = 
             "1) La capa de búsqueda es visible<br>" +
             "2) Se ha localizado alguna tienda (la esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {                                
             if (!ModalBuscadorTiendas.isVisible(dFTest.driver)) {
@@ -49,7 +49,7 @@ public class ModalBuscadorTiendasStpV {
         //Validaciones.
         String descripValidac = 
             "1) La capa correspondiente a la búsqueda desaparece";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (ModalBuscadorTiendas.isVisible(dFTest.driver)) {

@@ -25,7 +25,7 @@ public class ModalFichaFavoritosStpV {
         String descripValidac = 
             "1) En Favoritos es visible el modal de la ficha del producto " + articulo.getRefProducto() + " (lo esperamos hasta " + maxSecondsToWait + " segundos) <br>" +
             "2) Aparece seleccionado el color " + articulo.getColor();
-        datosStep.setStateIniValidations();  
+        datosStep.setNOKstateByDefault();  
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageFavoritos.modalFichaFavoritos.isVisibleFichaUntil(articulo.getRefProducto(), maxSecondsToWait, dFTest.driver)) {
@@ -90,7 +90,7 @@ public class ModalFichaFavoritosStpV {
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Desaparece de Favoritos la ficha del producto " + articulo.getRefProducto() + " (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();        
+        datosStep.setNOKstateByDefault();        
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageFavoritos.modalFichaFavoritos.isInvisibleFichaUntil(articulo.getRefProducto(), maxSecondsToWait, dFTest.driver)) {

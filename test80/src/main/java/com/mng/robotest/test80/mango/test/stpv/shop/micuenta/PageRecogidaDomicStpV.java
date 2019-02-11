@@ -14,7 +14,7 @@ public class PageRecogidaDomicStpV {
             "1) Aparece la página de Recogida a Domicilio<br>" +
             "2) Aparece la tabla de devoluciones<br>" +
             "3) No aparece ningún pedido";
-        datosStep.setStateIniValidations();  
+        datosStep.setNOKstateByDefault();  
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageRecADomic.isPage(dFTest.driver)) {

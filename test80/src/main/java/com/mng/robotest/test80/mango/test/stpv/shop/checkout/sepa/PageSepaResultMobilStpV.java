@@ -15,7 +15,7 @@ public class PageSepaResultMobilStpV {
         String descripValidac = 
             "1) Aparece la página de resultado de SEPA para móvil<br>" +
             "2) Aparece el importe de la compra: " + importeTotal;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageSepaResultMobil.isPage(dFTest.driver)) {

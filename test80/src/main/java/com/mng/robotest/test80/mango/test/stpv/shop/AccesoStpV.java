@@ -116,7 +116,7 @@ public class AccesoStpV {
         if (dCtxSh.channel==Channel.desktop)
             descripValidac+=
             "6) Aparece una página con menús de MANGO";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecMenusWrap.secMenusUser.isPresentMiCuentaUntil(dCtxSh.channel, maxSecondsToWait, dFTest.driver)) {
@@ -358,7 +358,7 @@ public class AccesoStpV {
             "1) Aparece un modal solicitando confirmación de país<br>" +
             validacion2 +
             "3) En el modal aparece un botón con la opción de cambiar a uno de los posibles países asociados a la IP (" + paisesAsocIP + ")";
-        datosStep.setStateIniValidations(); 
+        datosStep.setNOKstateByDefault(); 
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!ModalCambioPais.isVisibleModalUntil(dFTest.driver, 0)) {
@@ -415,7 +415,7 @@ public class AccesoStpV {
         String descripValidac = 
             "1) No aparece un modal solicitando confirmación de país<br>" +
             "2) Se ha redirigido a la URL del país confirmado previamente <b>" + nombrePaisPrevConf + "</b> (" + hrefPaisPrevConf + ")";
-        datosStep.setStateIniValidations();  
+        datosStep.setNOKstateByDefault();  
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (ModalCambioPais.isVisibleModalUntil(dFTest.driver, 0)) { 
@@ -452,7 +452,7 @@ public class AccesoStpV {
         
         String descripValidac = 
         	"1) Se redirige a la URL del país " + paisBotonCambio + " (" + hrefBotonCambioPais + ")"; 
-        datosStep.setStateIniValidations(); 
+        datosStep.setNOKstateByDefault(); 
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!(dFTest.driver.getCurrentUrl().toLowerCase().contains(hrefBotonCambioPais.toLowerCase()))) {
@@ -488,7 +488,7 @@ public class AccesoStpV {
         //Validaciones
         String descripValidac = 
             "1) El estatus es \"UP\"";
-        datosStep.setStateIniValidations();        
+        datosStep.setNOKstateByDefault();        
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             assertTrue(nodo.getStatusJSON().isStatusOk());
@@ -520,7 +520,7 @@ public class AccesoStpV {
             "1) El stock de los almacenes (" + stockAct + ") coincide (+-10%) con el del nodo " + nodoAnt.getIp() + "<br>" +
             "2) La versión del shopconfig (" + vShopCAct + ") es igual que la del nodo " + nodoAnt.getIp() + "<br>" +
             "3) El contador de sesiones (" + sessionCAct + ") coincide (+-50%) con el del nodo " + nodoAnt.getIp() + " (" + sessionCAnt + ")";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!nodoAct.comparaStocksWarehouses(nodoAnt, 0.10)) {

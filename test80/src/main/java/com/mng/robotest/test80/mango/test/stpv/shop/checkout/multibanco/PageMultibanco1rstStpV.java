@@ -20,7 +20,7 @@ public class PageMultibanco1rstStpV {
             descripValidac+="<br>" +
             "4) Aparece un campo de introducción de email (informado con <b>" + emailUsr + "</b>)<br>" +
             "5) Figura un botón de pago";
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageMultibanco1rst.isPresentEntradaPago(nombrePago, channel, dFTest.driver)) {

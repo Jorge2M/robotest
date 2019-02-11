@@ -111,7 +111,7 @@ public class SecMenuLateralMobilStpV {
         String descripValidac = 
             "1) Aparece algún artículo (esperamos " + maxSecondsWait + " segundos)<br>" +
             "2) El 1er artículo es de tipo " + LineaType.nuevo;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!pageGaleria.isVisibleArticleUntil(1, maxSecondsWait)) {
@@ -143,7 +143,7 @@ public class SecMenuLateralMobilStpV {
         //Validaciones
         String descripValidac = 
             "1) Se hace visible una capa de submenús asociada a " + lineaType;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecMenuLateralMobil.isVisibleMenuSublineaRebajas(lineaType, dFTest.driver)) {
@@ -234,7 +234,7 @@ public class SecMenuLateralMobilStpV {
         String tagCarrusels = "@TAG_CARRUSELS";
         String descripValidac = 
             "1) Aparecen los carrusels asociados a la linea de " + LineaType.nuevo + " (<b>" + tagCarrusels + "</b>)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             String listCarrusels = "";
@@ -257,7 +257,7 @@ public class SecMenuLateralMobilStpV {
         String tagSublineas = "@TAG_SUBLINEAS";
         String descripValidac = 
             "1) Aparecen las sublíneas asociados a la linea de " + LineaType.rebajas + "(<b>" + tagSublineas + "</b>)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             String listSublineas = "";
@@ -283,7 +283,7 @@ public class SecMenuLateralMobilStpV {
         String descripValidac =
             "1) Está seleccionada la línea <b>" + lineaNinosType + "</b><br>" + 
             "2) Es visible el bloque con las sublíneas de " + lineaNinosType;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecMenuLateralMobil.isSelectedLinea(lineaNinosType, appE, dFTest.driver)) {
@@ -305,7 +305,7 @@ public class SecMenuLateralMobilStpV {
         String descripValidac = 
             "1) Está seleccionada la línea <b>" + lineaType + "</b><br>" +
             "2) Son visibles links de Menú de 2o nivel";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecMenuLateralMobil.isSelectedLinea(lineaType, appE, dFTest.driver)) {
@@ -344,7 +344,7 @@ public class SecMenuLateralMobilStpV {
     	PageGaleria pageGaleria = PageGaleria.getInstance(Channel.movil_web, app, dFTest.driver);
         String descripValidac = 
             "1) Aparecen artículos, banners, frames, maps o Sliders";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, 3/*seconds*/) &&

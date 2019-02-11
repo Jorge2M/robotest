@@ -13,7 +13,7 @@ public class PageReembolsosStpV {
         String descripValidac = 
             "1) Aparece la página de Reembolsos<br>" +
             "2) Aparecen los inputs de BANCO, TITULAR e IBAN";
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageReembolsos.isPage(dFTest.driver)) {

@@ -17,7 +17,7 @@ public class PageTrustPayResultStpV {
             "1) Figura el encabezamiento \"" + textHeader + "<br>" +
             "2) Figura el importe total de la compra (" + importeTotal + ")<br>" +
             "3) Figura el botón \"continue\"";
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageTrustPayResult.headerContains(textHeader, dFTest.driver)) {

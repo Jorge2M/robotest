@@ -32,7 +32,7 @@ public class PageYandexMoneyStpV {
         String descripValidac = 
             "1) Aparece el input para el <b>Payment Code</b><br>" +
             "2) Aparece el input para el importe";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageYandexMoney.isVisibleInputPaymentCode(dFTest.driver)) {

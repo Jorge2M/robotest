@@ -17,7 +17,7 @@ public class PageKoreanConfDesktopStpV {
     public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {    
         String descripValidac = 
     		"1) Aparece la página para la confirmación de la compra";
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageKoreanConfDesktop.isPage(dFTest.driver)) {
@@ -34,7 +34,7 @@ public class PageKoreanConfDesktopStpV {
         DatosStep datosStep = new DatosStep     (
             "Seleccionar el botón para Confirmar", 
             "Aparece la página de Mango de resultado OK del pago");
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         try {       
         	PageKoreanConfDesktop.clickButtonSubmit(dFTest.driver);
 

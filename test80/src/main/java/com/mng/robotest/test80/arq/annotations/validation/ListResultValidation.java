@@ -34,8 +34,18 @@ public class ListResultValidation {
 		return (listResultValidations.get(index));
 	}
 	
+	public DatosStep getDatosStep() {
+		return this.datosStep;
+	}
+	
 	public void add(ResultValidation resultValidation) {
 		listResultValidations.add(resultValidation);
+	}
+	
+	public void add(String description, boolean overcomed, State levelResult) {
+		int id = listResultValidations.size() + 1;
+		ResultValidation resultValidation = ResultValidation.of(id, id + ") " + description, overcomed, levelResult);
+		add(resultValidation);
 	}
 	
 	public void add(int id, State levelResult) {
@@ -60,33 +70,52 @@ public class ListResultValidation {
     	}
     	else {
 	    	stateValidation = State.Ok;
-	    	descripcionValidations = "";
-	    	for (ResultValidation resultValidation : listResultValidations) {
-	    		descripcionValidations+=resultValidation.getDescription();
-	    		if (!resultValidation.isOvercomed()) {
-	    			State criticityValidation = resultValidation.getLevelResult();
-	    			if (criticityValidation.isMoreCriticThan(stateValidation)) {
-	    				stateValidation = criticityValidation;
-	    			}
-	    		}
-	    	}
-	    	
-	    	datosStep.setResultSteps(stateValidation);
-	    	datosStep.setListResultValidations(this);
     	}
+    	
+    	descripcionValidations = "";
+    	for (ResultValidation resultValidation : listResultValidations) {
+    		descripcionValidations+=resultValidation.getDescription();
+    		if (!resultValidation.isOvercomed()) {
+    			State criticityValidation = resultValidation.getLevelResult();
+    			if (criticityValidation.isMoreCriticThan(stateValidation)) {
+    				stateValidation = criticityValidation;
+    			}
+    		}
+    	}
+    	
+    	datosStep.setResultSteps(stateValidation);
+    	datosStep.setListResultValidations(this);
     }
     
     /**
      * @return la lista ordenada de resultado de las validaciones que se pueda almacenar en BD
      */
     public List<Integer> getListCodeNumStateValidations() {
+    	//List initialized with OKs
     	List<Integer> listCodes = new ArrayList<>();
+    	int lastValidation = getIndexLastValidation();
+    	for (int i=0; i<lastValidation; i++) {
+    		listCodes.add(State.Ok.getIdNumerid());
+    	}
     	for (ResultValidation resultValidation : listResultValidations) {
-    		listCodes.add(resultValidation.getLevelResult().getIdNumerid());
+    		if (!resultValidation.isOvercomed()) {
+    			listCodes.set(resultValidation.getId()-1, resultValidation.getLevelResult().getIdNumerid());
+    		}
     	}
     	
     	return listCodes;
     }
+    
+	private int getIndexLastValidation() {
+		int maxIndexValidation = 0;
+		for (ResultValidation resultValidation : listResultValidations) {
+			if (resultValidation.getId() > maxIndexValidation) {
+				maxIndexValidation = resultValidation.getId();
+			}
+		}
+		
+		return maxIndexValidation;
+	}
     
     public void storeGroupValidations(String descripcionValidations) {
     	fmwkTest.grabStepValidation(datosStep, descripcionValidations, GestorWebDriver.getdFTest());

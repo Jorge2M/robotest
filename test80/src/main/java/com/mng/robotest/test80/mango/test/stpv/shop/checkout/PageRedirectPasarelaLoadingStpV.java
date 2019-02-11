@@ -14,7 +14,7 @@ public class PageRedirectPasarelaLoadingStpV {
     	int maxSecondsWait = 5;
         String descripValidac = 
             "1) Acaba desapareciendo la página de \"Por favor espere. Este proceso puede tardar...\" (esperamos hasta " + maxSecondsWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!PageRedirectPasarelaLoading.isPageNotVisibleUntil(5/*maxSecondsToWait*/, dFTest.driver)) {

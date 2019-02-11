@@ -17,7 +17,7 @@ public class PageDevolucionesStpV {
             "2) Aparece la opción de " + Devolucion.EnTienda.getLiteral() + "<br>" +
             "3) Aparece la opción de " + Devolucion.EnDomicilio.getLiteral() + "<br>" +
             "4) Aparece la opción de " + Devolucion.PuntoCeleritas.getLiteral();
-        datosStep.setStateIniValidations();      
+        datosStep.setNOKstateByDefault();      
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageDevoluciones.isPage(dFTest.driver)) {

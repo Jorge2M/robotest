@@ -16,11 +16,10 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSo
 @SuppressWarnings("javadoc")
 public class PageSofortIconosBancoStpV {
 	public static void validateIsPage(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
-	    //Validaciones
         int maxSecondsToWait = 3;
 	    String descripValidac =
 	        "1) Aparece la 1a página de Sofort (la esperamos hasta " + maxSecondsToWait + " segundos)";
-	    datosStep.setStateIniValidations();
+	    datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	    try {
 	        if (!PageSofort1rst.isPageVisibleUntil(maxSecondsToWait, channel, dFTest.driver)) {

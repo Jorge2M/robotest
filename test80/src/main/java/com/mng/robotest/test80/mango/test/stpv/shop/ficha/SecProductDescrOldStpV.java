@@ -15,7 +15,7 @@ public class SecProductDescrOldStpV {
     
     public static void validateAreInStateInitial(AppEcom appE, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         String descripValidac = "";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {               
             //1 to X)
@@ -56,7 +56,7 @@ public class SecProductDescrOldStpV {
         int maxSecondsToWait = 1;
         String descripValidac = 
             "1) La sección ha de quedar en estado <b>" + stateExpectedAfterClick + "</b> (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecProductDescrOld.isPanelInStateUntil(typePanel, stateExpectedAfterClick, maxSecondsToWait, dFTest.driver)) {

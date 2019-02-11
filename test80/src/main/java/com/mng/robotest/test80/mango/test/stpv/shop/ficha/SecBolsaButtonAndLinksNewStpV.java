@@ -50,7 +50,7 @@ public class SecBolsaButtonAndLinksNewStpV {
         int maxSecondsToWait = 3;
         String descripValidac = 
             "1) Se scrolla hasta el apartado de \"Descriptión\"";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecDetalleProductNew.isVisibleUntil(maxSecondsToWait, dFTest.driver)) {
@@ -66,7 +66,7 @@ public class SecBolsaButtonAndLinksNewStpV {
             "2) Es visible el item " + ItemBreadcrumb.linea + "<br>" +
             "3) Es visible el item " + ItemBreadcrumb.grupo + "<br>" +
             "4) Es visible el item " + ItemBreadcrumb.galeria;            
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecDetalleProductNew.isVisibleBreadcrumbs(0, dFTest.driver)) {
@@ -90,7 +90,7 @@ public class SecBolsaButtonAndLinksNewStpV {
             (lineaType==LineaType.nina || lineaType==LineaType.nino)) {
             descripValidac = 
                 "1) Aparece el bloque de \"KcSafety\"";
-            datosStep.setStateIniValidations();
+            datosStep.setNOKstateByDefault();
             listVals = ListResultValidation.getNew(datosStep);
             try {
                 if (!SecDetalleProductNew.isVisibleBlockKcSafety(dFTest.driver)) {
@@ -130,7 +130,7 @@ public class SecBolsaButtonAndLinksNewStpV {
             descripValidac+=
             "<br>" + i + ") " + visible  + " es visible el icono de " + icon;
         }        
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!ModCompartirNew.isVisibleUntil(maxSecondsToWait, dFTest.driver)) {

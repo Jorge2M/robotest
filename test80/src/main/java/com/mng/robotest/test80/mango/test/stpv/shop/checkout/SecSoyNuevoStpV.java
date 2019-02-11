@@ -46,7 +46,7 @@ public class SecSoyNuevoStpV {
 	        String descripValidac = 
 	            "1) El texto de info de RGPD <b>SI</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>" + 
 	            "2) El texto legal de RGPD <b>SI</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>";
-	        datosStep.setStateIniValidations();
+	        datosStep.setNOKstateByDefault();
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	        try {
 	            if (!Page1IdentCheckout.secSoyNuevo.isTextoRGPDVisible(dFTest.driver)) {
@@ -65,7 +65,7 @@ public class SecSoyNuevoStpV {
 			String descripValidac = 
 	            "1) El texto de info de RGPD <b>NO</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>" + 
 	            "2) El texto legal de RGPD <b>NO</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>";
-	        datosStep.setStateIniValidations();
+	        datosStep.setNOKstateByDefault();
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	        try {
 	            if (Page1IdentCheckout.secSoyNuevo.isTextoRGPDVisible(dFTest.driver)) {

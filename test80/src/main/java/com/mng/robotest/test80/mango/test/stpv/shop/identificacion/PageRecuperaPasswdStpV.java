@@ -16,7 +16,7 @@ public class PageRecuperaPasswdStpV {
         String descripValidac = 
             "1) Aparece la pantalla de recuperación de la contraseña (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) Aparece el campo para la introducción del correo";                         
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageRecuperaPasswd.isPageUntil(maxSecondsToWait, dFTest.driver)) {
@@ -52,7 +52,7 @@ public class PageRecuperaPasswdStpV {
         String descripValidac = 
             "1) Aparece el mensaje de \"Revisa tu email\" (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) Aparece el botón \"Ir de Shopping\"";                         
-        datosStep.setStateIniValidations();          
+        datosStep.setNOKstateByDefault();          
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageRecuperaPasswd.isVisibleRevisaTuEmailUntil(maxSecondsToWait, dFTest.driver)) {

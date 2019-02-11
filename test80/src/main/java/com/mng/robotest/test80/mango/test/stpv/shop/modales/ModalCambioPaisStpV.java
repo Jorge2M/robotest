@@ -17,7 +17,7 @@ public class ModalCambioPaisStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Aparece el modal de selección de país (lo esperamos hasta " + maxSecondsToWait + " segundos)"; 
-        datosStep.setStateIniValidations();  
+        datosStep.setNOKstateByDefault();  
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!ModalCambioPais.isVisibleModalUntil(dFTest.driver, maxSecondsToWait)) {

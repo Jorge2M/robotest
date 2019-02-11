@@ -18,7 +18,7 @@ public class PageYandexPayingByCodeStpV {
             "1) Aparece la página de <b>Paying by code</b><br>" +
             "2) Aparece el importe de la compra por pantalla: " + importeTotal + "<br>" +
             "3) Aparece un <b>PaymentCode</b>";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageYandexPayingByCode.isPage(channel, dFTest.driver)) {

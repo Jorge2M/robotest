@@ -18,7 +18,7 @@ public class PageAssistQiwi1rstStpV {
             "1) Aparece el icono de Assist<br>" + 
             "2) En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>" +
             "3) Aparece el icono de Qiwi";
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageAssistQiwi1rst.isPresentIconoAssist(dFTest.driver, channel)) {

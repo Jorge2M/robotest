@@ -175,7 +175,7 @@ public class BrowserStpV {
             "2) Figura el siguiente contenido: <br>" + contRobots2.replace("\n", "<br>") + "<br>" +
             "3) Figura el siguiente contenido: <br>" + contRobots3.replace("\n", "<br>") + "<br>" +
             "4) Figura el siguiente contenido: <br>" + contRobots4.replace("\n", "<br>");
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!dFTest.driver.getPageSource().toLowerCase().contains(contRobots1.toLowerCase())) {

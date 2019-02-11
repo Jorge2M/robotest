@@ -15,7 +15,7 @@ public class PagePaytrailIdConfirmStpV {
         String descripValidac =
             "1) Aparece la página de introducción del ID de confirmación<br>" +
             "2) Aparece el importe de la compra: " + importeTotal;
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PagePaytrailIdConfirm.isPage(dFTest.driver)) {

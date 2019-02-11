@@ -82,7 +82,7 @@ public class PageFichaArtStpV {
         String descripValidac = 
             "1) Aparece la página correspondiente a la ficha del artículo " + refArticulo + 
             " (La esperamos hasta " + maxSecondsToWait + " segundos)"; 
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!pageFicha.isFichaArticuloUntil(refArticulo, maxSecondsToWait)) {
@@ -99,7 +99,7 @@ public class PageFichaArtStpV {
         String descripValidac = 
             "1) Aparece la página de resultado de una búsqueda KO<br>" +
             "2) En el texto de resultado de la búsqueda aparece la referencia " + refArticulo;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageErrorBusqueda.isPage(this.dFTest.driver)) {
@@ -121,7 +121,7 @@ public class PageFichaArtStpV {
             "1) Aparece la página correspondiente a la ficha del artículo " + article.getReference() + 
                 " (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) No está disponible La talla <b>" + article.getSize() + "</b> del color <b>" + article.getColourCode() + "</b>"; 
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!pageFicha.isFichaArticuloUntil(article.getReference(), maxSecondsToWait)) {
@@ -141,7 +141,7 @@ public class PageFichaArtStpV {
         String descripValidac = 
             "1) Aparece la página correspondiente a la ficha del artículo " + refArticulo + "<br>" +
             "2) Aparece algún color no disponible";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!pageFicha.isFichaArticuloUntil(refArticulo, 0/*maxSecondsToWait*/)) {
@@ -190,7 +190,7 @@ public class PageFichaArtStpV {
         String descripValidac = 
              validacion1 +
              validacion2;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (datosArticulo.availableReferencia()) {
@@ -232,7 +232,7 @@ public class PageFichaArtStpV {
         //Validaciones
         String descripValidac = 
         "1) Está seleccionado el color con código <b>" + codigoColor + "<b>";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             String codigoColorPage = pageFicha.secDataProduct.getCodeColor(ColorType.Selected, dFTest.driver); 
@@ -275,7 +275,7 @@ public class PageFichaArtStpV {
         //Validaciones
         String descripValidac = 
         "1) Queda seleccionada la talla <b>" + tallaCodNum + "<b>";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             String tallaSelected = pageFicha.getTallaNumSelected(); 
@@ -321,7 +321,7 @@ public class PageFichaArtStpV {
         String descripValidac = 
             "1) No aparece el botón \"COMPRAR\"<br>" +
             "2) Aparece la capa de introducción de avísame";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (SecBolsa.isVisibleBotonComprar(Channel.desktop, this.dFTest.driver)) {
@@ -368,7 +368,7 @@ public class PageFichaArtStpV {
             strApareceAviso = "NO";
         String descripValidac = 
             "1) " + strApareceAviso + " Aparece un aviso indicando que hay que seleccionar la talla";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             boolean isVisibleAviso = pageFicha.secDataProduct.isVisibleAvisoSeleccionTalla(this.dFTest.driver);
@@ -390,7 +390,7 @@ public class PageFichaArtStpV {
         if (!isTallaUnica && typeFichaAct==TypeFicha.New) {
             descripValidac = 
                 "1) Se hace visible la lista de tallas";
-            datosStep.setStateIniValidations();
+            datosStep.setNOKstateByDefault();
             listVals = ListResultValidation.getNew(datosStep);
             try {
                 if (!pageFicha.secDataProduct.secSelTallasNew.isVisibleListTallasForSelectUntil(0, this.dFTest.driver)) {
@@ -442,7 +442,7 @@ public class PageFichaArtStpV {
         String descripValidac = 
             "1) Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + maxSecondsToWait1 + " segundos)<br>" +
             "2) La capa superior acaba desapareciendo (lo esperamos hasta " + maxSecondsToWait2 + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!pageFicha.isVisibleDivAnadiendoAFavoritosUntil(maxSecondsToWait1)) {
@@ -484,7 +484,7 @@ public class PageFichaArtStpV {
         //Validaciones
         String descripValidac = 
             "1) Aparece el botón de " + buttonType + " a Favoritos";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             switch (buttonType) {
@@ -548,7 +548,7 @@ public class PageFichaArtStpV {
         boolean existsBlock = true;
         String descripValidac = 
             "1) Es visible el slider de artículos de tipo <b>" + typeSlider + "</b>";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!pageFicha.isVisibleSlider(typeSlider)) {
@@ -564,7 +564,7 @@ public class PageFichaArtStpV {
             int numArtMin = 1;
             descripValidac = 
                 "1) El número de artículos del slider de tipo <b>" + typeSlider + "</b> es > " + numArtMin;
-            datosStep.setStateIniValidations();
+            datosStep.setNOKstateByDefault();
             listVals = ListResultValidation.getNew(datosStep);
             try {
                 if (pageFicha.getNumArtVisiblesSlider(typeSlider) <= numArtMin) {
@@ -588,7 +588,7 @@ public class PageFichaArtStpV {
             "1) " + statePrevText + " el link <b>Prev</b> (lo esperamos hasta " + maxSecondsToWait + " segundos)";          
         if (dCtxSh.appE==AppEcom.outlet || dCtxSh.channel==Channel.desktop)
         	descripValidac+="<br>2) Es visible el link <b>Next</b>";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (locationArt.isFirstInGalery()) {
@@ -642,7 +642,7 @@ public class PageFichaArtStpV {
         //Validaciones
         String descripValidac = 
             "1) Existe más de una imagen de carrusel a la izquierda de la imagen principal";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() < 2) {
@@ -671,7 +671,7 @@ public class PageFichaArtStpV {
         //Validaciones
         String descripValidac = 
             "1) La imagen central se corresponde con la imagen del carrusel seleccionada (<b>" + pngImagen + "</b>)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!((PageFichaArtOld)pageFicha).srcImagenCentralCorrespondsToImgCarrusel(pngImagen)) {
@@ -702,7 +702,7 @@ public class PageFichaArtStpV {
         String descripValidac = 
             "1) Se aplica un Zoom sobre la imagen central<br>" +
             "2) La imagen central con Zoom sigue conteniendo la imagen original: " + pngImgCentralOriginal;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!((PageFichaArtOld)pageFicha).isVisibleFichaConZoom()) {
@@ -721,7 +721,7 @@ public class PageFichaArtStpV {
         String descripValidac = 
             "1) Existen el bloque correspondiente a las <b>BreadCrumb</b><br>" + 
             "2) El link correspondiente a la Galería del artículo linca a la URL " + urlGaleryOrigin;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecBreadcrumbFichaOld.isVisibleBreadCrumb(this.dFTest.driver)) {

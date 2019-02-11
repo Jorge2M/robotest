@@ -24,7 +24,7 @@ public class ModalDroppointsStpV {
             "1) Desaparece el mensaje de \"Cargando...\" (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) Aparece un 1er Droppoint visible (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "3) Sí aparece el modal con el mapa de Droppoints";
-        datosStep.setStateIniValidations();     
+        datosStep.setNOKstateByDefault();     
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!ModalDroppoints.isInvisibleCargandoMsgUntil(maxSecondsToWait, dFTest.driver)) {
@@ -45,7 +45,7 @@ public class ModalDroppointsStpV {
     public static void validaIsNotVisible(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) No aparece el modal con el mapa de Droppoints";
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (ModalDroppoints.isVisible(channel, dFTest.driver)) {

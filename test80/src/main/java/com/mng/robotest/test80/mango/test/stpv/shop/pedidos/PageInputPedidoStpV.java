@@ -15,7 +15,7 @@ public class PageInputPedidoStpV {
     public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) La página contiene un campo para la introducción del Nº de pedido";
-        datosStep.setStateIniValidations();       
+        datosStep.setNOKstateByDefault();       
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!PageInputPedido.isVisibleInputPedido(dFTest.driver)) {

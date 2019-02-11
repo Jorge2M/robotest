@@ -18,7 +18,7 @@ public class SecQuickViewArticuloStpV {
             "2) Se muestra la referencia " + articulo.getReferencia() + "<br>" +
             "3) Se muestra el nombre " + articulo.getNombre() + "<br>" +
             "4) Se muestra el precio " + articulo.getPrecio();
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageMisCompras.SecQuickViewArticulo.isVisibleUntil(maxSecondsToWait, dFTest.driver)) {

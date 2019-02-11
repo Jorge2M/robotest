@@ -14,7 +14,7 @@ public class PageQiwiInputTlfnStpV {
     public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) { 
         String descripValidac = 
             "1) Aparece una página con el campo de introducción del Qiwi Mobile Phone"; 
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!PageQiwiInputTlfn.isPresentInputPhone(dFTest.driver)) {

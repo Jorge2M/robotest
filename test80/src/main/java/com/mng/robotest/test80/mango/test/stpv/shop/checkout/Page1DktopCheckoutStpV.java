@@ -33,7 +33,7 @@ public class Page1DktopCheckoutStpV {
             "1) Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>" +
             "2) Si no ha aparecido la esperamos " + (maxSecondsToWait * 2) + " segundos más<br>" +
             "3) Cuadran los artículos a nivel de la Referencia e Importe";
-        datosStep.setStateIniValidations();       
+        datosStep.setNOKstateByDefault();       
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!Page1DktopCheckout.isPageUntil(maxSecondsToWait, dFTest.driver)) {
@@ -62,7 +62,7 @@ public class Page1DktopCheckoutStpV {
               "Email: <b>" + chequeRegalo.getEmail() + "</b><br>" +
               "Importe: <b>" + chequeRegalo.getImporte() + "</b><br>" +
               "Mensaje: <b>" + chequeRegalo.getMensaje() + "</b>"; 
-        datosStep.setStateIniValidations();  
+        datosStep.setNOKstateByDefault();  
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!Page1DktopCheckout.isPageUntil(maxSecondsToWait, dFTest.driver)) {
@@ -85,7 +85,7 @@ public class Page1DktopCheckoutStpV {
             "1) Aparece el descuento total aplicado al empleado (lo experamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) Para todos los artículos, el % de descuento final es como mínimo del " + 
             	descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + ")";
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!Page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(dFTest.driver, maxSecondsToWait)) {
@@ -140,7 +140,7 @@ public class Page1DktopCheckoutStpV {
             	"(lo esperamos hasta " + maxSecondsToWait2 + " segundos)";
         
         String descripValidac = "1) " + validacion2;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (valePais.isValid()) {
@@ -165,7 +165,7 @@ public class Page1DktopCheckoutStpV {
                 "1) En los artículos a los que aplica, el descuento es de " + 
                     descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + "): <br>" +
                 	dataBag.getListArtDescHTML();
-            datosStep.setStateIniValidations();
+            datosStep.setNOKstateByDefault();
             listVals = ListResultValidation.getNew(datosStep);
             try {
                 if (!Page1DktopCheckout.validateArticlesAndDiscount(dataBag, descuento, dFTest.driver)) {
@@ -205,7 +205,7 @@ public class Page1DktopCheckoutStpV {
         int maxSecondsToWait = 1;
         String descripValidac = 
             "1) Aparece el input para la introducción del vale (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations(); 
+        datosStep.setNOKstateByDefault(); 
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!Page1DktopCheckout.isVisibleInputCodigoPromoUntil(maxSecondsToWait, dFTest.driver)) {
@@ -237,7 +237,7 @@ public class Page1DktopCheckoutStpV {
         String descripValidac = 
             "1) Desaparece el campo de Input del código de vendedor<br>" +
             "2) En su lugar se pinta el código de vendedor " + codigoVendedor;
-        datosStep.setStateIniValidations(); 
+        datosStep.setNOKstateByDefault(); 
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (Page1DktopCheckout.isVisibleInputVendedorVOTF(dFTest.driver)) {

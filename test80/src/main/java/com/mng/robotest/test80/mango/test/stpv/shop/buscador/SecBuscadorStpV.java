@@ -81,7 +81,7 @@ public class SecBuscadorStpV {
             String descripValidac = 
                 "1) Aparece como mínimo un producto de tipo " + producSin1erCaracter + " (lo esperamos hasta " + maxSecondsWait + " segundos)<br>" +
                 "2) Aparece la categoría en el resultado de la búsqueda";
-            datosStep.setStateIniValidations();
+            datosStep.setNOKstateByDefault();
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
                 if ("".compareTo(pageGaleria.getArticuloWithText(producSin1erCaracter, maxSecondsWait))==0) {
@@ -99,7 +99,7 @@ public class SecBuscadorStpV {
             //Validaciones
             String descripValidac =
                 "1) Aparece la página de error en la búsqueda con el encabezado<b>" + categoriaABuscar + "</b>";
-            datosStep.setStateIniValidations();
+            datosStep.setNOKstateByDefault();
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
                 if (!PageErrorBusqueda.isCabeceraResBusqueda(dFTest.driver, categoriaABuscar)) {

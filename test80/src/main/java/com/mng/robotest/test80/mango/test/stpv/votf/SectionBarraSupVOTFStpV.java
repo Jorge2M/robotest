@@ -13,7 +13,7 @@ public class SectionBarraSupVOTFStpV {
         String usuarioLit = SectionBarraSupVOTF.titleUserName + usuarioVOTF;
         String descripValidac = 
             "1) En la barra superior figura un \"" + usuarioLit + "\"";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SectionBarraSupVOTF.isPresentUsuario(usuarioVOTF, dFTest.driver)) {

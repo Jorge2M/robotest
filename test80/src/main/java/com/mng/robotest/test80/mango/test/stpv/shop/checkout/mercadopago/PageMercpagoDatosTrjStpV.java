@@ -35,7 +35,7 @@ public class PageMercpagoDatosTrjStpV {
     public static void validaIsPageMobil(DatosStep datosStep, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) Estamos en la página de introducción de los datos de la tarjeta";   
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!PageMercpagoDatosTrjMobil.isPage(dFTest.driver)) {
@@ -51,7 +51,7 @@ public class PageMercpagoDatosTrjStpV {
     	int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Estamos en la página de introducción del CVC (la esperamos hasta " + maxSecondsToWait + " segundos)";   
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!PageMercpagoDatosTrjDesktop.isPageUntil(maxSecondsToWait, dFTest.driver)) {
@@ -89,7 +89,7 @@ public class PageMercpagoDatosTrjStpV {
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa (lo esperamos hasta " + maxSecondsToWait + " segundos)";   
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!PageMercpagoDatosTrjMobil.isActiveWrapperVisaUntil(maxSecondsToWait, dFTest.driver)) {
@@ -119,7 +119,7 @@ public class PageMercpagoDatosTrjStpV {
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Aparece el icono de Visa a la derecha de la tarjeta (lo esperamos hasta " + maxSecondsToWait + " segundos)";   
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!PageMercpagoDatosTrjDesktop.isVisibleVisaIconUntil(maxSecondsToWait, dFTest.driver)) {
@@ -165,7 +165,7 @@ public class PageMercpagoDatosTrjStpV {
         int maxSecondsToWait = 2;
         String descripValidac = 
             "1) Aparece activado el botón \"Next\" para continuar con el pago (lo esperamos hasta " + maxSecondsToWait + " segundos)";   
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!PageMercpagoDatosTrjMobil.isClickableButtonNextPayUntil(maxSecondsToWait, dFTest.driver)) {

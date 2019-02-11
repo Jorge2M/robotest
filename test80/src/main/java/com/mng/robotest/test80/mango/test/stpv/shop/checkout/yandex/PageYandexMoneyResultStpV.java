@@ -13,7 +13,7 @@ public class PageYandexMoneyResultStpV {
         String descripValidac = 
             "1) Aparece la página de resultado de Yandex Money<br>" +
             "2) Aparece un mensaje de transferencia con éxito";
-        datosStep.setStateIniValidations();         
+        datosStep.setNOKstateByDefault();         
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageYandexMoneyResult.isPage(dFTest.driver)) {

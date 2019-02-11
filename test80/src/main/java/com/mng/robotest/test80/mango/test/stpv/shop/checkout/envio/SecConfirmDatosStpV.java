@@ -18,7 +18,7 @@ public class SecConfirmDatosStpV {
         int maxSecondsToWait = 3;
         String descripValidac = 
             "1) Es visible la capa de confirmación de los datos (la esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!ModalDroppoints.secConfirmDatos.isVisibleUntil(maxSecondsToWait, channel, dFTest.driver)) {
@@ -49,7 +49,7 @@ public class SecConfirmDatosStpV {
             "1) Desaparece la capa de Droppoints<br>" +
             "2) Se modifica la dirección de envío por la del Delivery Point (" + dataDp.getDireccion() + ")<br>" +
             "3) Se modifica el código postal de envío por el del Delivery Point (" + dataDp.getCPandPoblacion() + ")";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (ModalDroppoints.isVisible(channel, dFTest.driver)) {

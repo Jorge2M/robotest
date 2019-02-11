@@ -19,7 +19,7 @@ public class PageIniShopJaponStpV {
             "1) Estamos en la página inicial de la shop de Japón (la esperamos hasta " + maxSecondsToWait + " segundos):<br>" +
             "   - El título es \"" + PageIniShopJapon.Title + "\"<br>" +        
             "   - La URL contiene \"" + PageIniShopJapon.URL + "\"";
-        datosStep.setStateIniValidations();           
+        datosStep.setNOKstateByDefault();           
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageIniShopJapon.isPageUntil(maxSecondsToWait, dFTest.driver)) {

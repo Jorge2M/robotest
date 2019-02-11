@@ -17,7 +17,7 @@ public class PageD3DLoginStpV {
         String descripValidac = 
             "1) Aparece la página de identificación D3D (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" + 
             "2) Aparece el importe " + importeTotal + " de la operación";
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageD3DLogin.isPageUntil(maxSecondsToWait, dFTest.driver)) {

@@ -22,7 +22,7 @@ public class PageSepa1rstStpV {
             "4) Figura el campo de introducción del titular<br>" +
             "5) Figura el campo de introducción del la cuenta<br>" +
             "6) Figura un botón de pago";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageSepa1rst.isPresentIconoSepa(channel, dFTest.driver)) {

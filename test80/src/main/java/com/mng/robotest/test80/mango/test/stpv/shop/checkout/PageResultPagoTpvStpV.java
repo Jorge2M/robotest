@@ -19,7 +19,7 @@ public class PageResultPagoTpvStpV {
             "1) Aparece un texto de confirmación de la compra<br>" +
             "2) Aparece el importe " + importeTotal + " de la operación<br>" +
             "3) Aparece el código de pedido (" + tagPedido + ")";
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!PageResultPagoTpv.isPresentCabeceraConfCompra(dFTest.driver)) {

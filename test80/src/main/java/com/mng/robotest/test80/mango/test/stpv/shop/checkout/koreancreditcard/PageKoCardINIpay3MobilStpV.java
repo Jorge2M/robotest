@@ -15,7 +15,7 @@ public class PageKoCardINIpay3MobilStpV extends ElementPageFunctions {
 	    //Validation
 	    String descripValidac =
 	        "1) Aparece la 3a página de INIpay";
-        datosStep.setStateIniValidations(); 
+        datosStep.setNOKstateByDefault(); 
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	    try {
 	        if (!PageKoCardINIpay3Mobil.isPage(dFTest.driver)) {
@@ -32,7 +32,7 @@ public class PageKoCardINIpay3MobilStpV extends ElementPageFunctions {
 	    DatosStep datosStep = new DatosStep     (
 	        "Seleccionamos el <b>Next Button</b>",
 	        "Aparece la 4a y última página de INIpay con resultado OK");
-	    datosStep.setStateIniValidations();
+	    datosStep.setNOKstateByDefault();
 	    try {
 	    	clickElementVisibleAndWaitLoad(BodyPageKoCardINIpay3.nextButton, 0, dFTest.driver);
 	        

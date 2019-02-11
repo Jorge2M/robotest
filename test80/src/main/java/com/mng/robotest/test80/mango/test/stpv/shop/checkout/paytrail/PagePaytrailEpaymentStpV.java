@@ -15,7 +15,7 @@ public class PagePaytrailEpaymentStpV {
         String descripValidac = 
             "1) Aparece la página inicial de E-Payment<br>" +
             "2) Figuran el input correspondientes al \"User ID\"";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageEpaymentIdent.isPage(dFTest.driver)) {

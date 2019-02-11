@@ -31,7 +31,7 @@ public class SecTarjetaPciStpV {
             descripValidac+= "<br>" +
             "4) Aparece también el campo <b>DNI(C.C)</b>";
             
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {               
             if (channel==Channel.desktop && !pais.isPagoPSP()) {

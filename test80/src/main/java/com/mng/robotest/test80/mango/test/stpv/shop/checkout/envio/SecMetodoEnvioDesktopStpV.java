@@ -50,7 +50,7 @@ public class SecMetodoEnvioDesktopStpV {
         String descripValidac = 
             "1) Desaparece la capa de Loading  (lo esperamos hasta " + maxSecondsToWait + " segundos) <br>" +
             "2) Queda seleccionado el bloque correspondiete a <b>" + tipoTransporte + "</b>";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageCheckoutWrapper.waitUntilNoDivLoading(dFTest.driver, maxSecondsToWait)) {

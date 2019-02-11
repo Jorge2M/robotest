@@ -30,7 +30,7 @@ public class ModalDetalleMisComprasStpV {
         //Validaciones.
         String descripValidac = 
             "1) Aparece el modal de búsqueda de talla en tienda";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!ModalBuscadorTallaTiendas.isVisible(dFTest.driver)) {

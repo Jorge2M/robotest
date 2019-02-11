@@ -32,7 +32,7 @@ public class SecSelectDPointStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) La dirección del droppoint seleccionado contiene <b>" + dataSearchDp.data + "</b> (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!ModalDroppoints.secSelectDPoint.deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, maxSecondsToWait, dFTest.driver)) {
@@ -61,7 +61,7 @@ public class SecSelectDPointStpV {
         String descripValidac = 
             "1) Es visible el 1er delivery point de la lista (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) El 1er delivery point de la lista es de tipo <b>" + typeDp + "</b>";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!ModalDroppoints.secSelectDPoint.isDroppointVisibleUntil(1, maxSecondsToWait, dFTest.driver)) {
@@ -90,7 +90,7 @@ public class SecSelectDPointStpV {
         
         String descripValidac = 
             "1) Queda seleccionado el Droppoint #" + position;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!ModalDroppoints.secSelectDPoint.isDroppointSelected(position, dFTest.driver)) {

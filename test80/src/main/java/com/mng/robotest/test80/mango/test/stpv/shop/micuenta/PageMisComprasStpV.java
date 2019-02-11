@@ -35,7 +35,7 @@ public class PageMisComprasStpV {
         	"1) Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) No aparece el bloque de \"Tienda\"<br>" +
             "3) No aparece el bloque de \"Online\"";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageMisCompras.isPageUntil(maxSecondsToWait, dFTest.driver)) {
@@ -63,7 +63,7 @@ public class PageMisComprasStpV {
             "1) Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) Aparece el bloque de \"Tienda\"<br>" +
             "3) Aparece el bloque de \"Online\"";
-        datosStep.setStateIniValidations();      
+        datosStep.setNOKstateByDefault();      
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageMisCompras.isPageUntil(maxSecondsToWait, dFTest.driver)) {
@@ -103,7 +103,7 @@ public class PageMisComprasStpV {
         int maxSecondsToWait = 2;
         String descripValidac =
             "1) Queda seleccionado el bloque de \"" + typeCompra + "\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageMisCompras.isSelectedBlockUntil(maxSecondsToWait, typeCompra, dFTest.driver)) {
@@ -119,7 +119,7 @@ public class PageMisComprasStpV {
             descripValidac = 
                 "1) Aparece una lista con algún artículo (lo esperamos hasta " + maxSecondsToWait + " segundos) <br>" +
                 "2) El 1er artículo es de tipo \"" + typeCompra + "\"";
-            datosStep.setStateIniValidations();            
+            datosStep.setNOKstateByDefault();            
             listVals = ListResultValidation.getNew(datosStep);
             try {
                 boolean isVisibleAnyCompra = PageMisCompras.isVisibleAnyCompraUntil(maxSecondsToWait, dFTest.driver); 
@@ -141,7 +141,7 @@ public class PageMisComprasStpV {
             descripValidac = 
                 "1) No aparece ningún artículo<br>" +
                 "2) Es visible la imagen asociada a \"Lista Vacía\" para " + typeCompra;
-            datosStep.setStateIniValidations();
+            datosStep.setNOKstateByDefault();
             listVals = ListResultValidation.getNew(datosStep);
             try {
                 boolean isVisibleAnyCompra = PageMisCompras.isVisibleAnyCompraUntil(0/*maxSecondsToWait*/, dFTest.driver); 
@@ -164,7 +164,7 @@ public class PageMisComprasStpV {
         //Validaciones
         String descripValidac = 
             "1) Es visible la compra " + TypeCompra.Online + " asociada al pedido <b>" + codPedido + "</b>";
-        datosStep.setStateIniValidations();       
+        datosStep.setNOKstateByDefault();       
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageMisCompras.isVisibleCompraOnline(codPedido, dFTest.driver)) {

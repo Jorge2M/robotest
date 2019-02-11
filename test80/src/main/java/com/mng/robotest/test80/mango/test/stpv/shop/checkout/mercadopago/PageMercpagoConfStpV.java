@@ -16,7 +16,7 @@ public class PageMercpagoConfStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Estamos en la página de confirmación del pago (la esperamos hasta " + maxSecondsToWait + " segundos)";   
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!PageMercpagoConf.isPageUntil(channel, maxSecondsToWait, dFTest.driver)) {

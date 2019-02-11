@@ -115,7 +115,7 @@ public class PasosGenAnalitica {
             "4) En la petición figura el parámetro <b>\"atm\"</b> y contiene el importe total del pedido <b>" + dataPedido.getImporteTotal() + "\"</b><br>" +
             "5) En la petición figura el parámetro <b>\"oid\"</b> y contiene <b>\"MNG\"</b><br>" +
             "6) En la petición figura el parámetro <b>\"skus\"</b> y contiene los artículos del pedido <b>" + listaArtsStr + "</b>";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
     	ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             JSONArray listEntriesFiltered = gestorHAR.getListEntriesFilterURL(urlPolyvore, paramPolyvore);
@@ -187,7 +187,7 @@ public class PasosGenAnalitica {
                 "2) La petición es de tipo <b>\"GET\"</b><br>" +
                 "3) El response status de la petición es de tipo <b>2xx</b> o <b>3xx</b><br>" +
                 "4) En la petición figura el parámetro <b>\"ref\"</b> y contiene el referer de la 1a request (prioridad a las de estado 2xx) \"" + tagReferrer + "\"</b>";
-            datosStep.setStateIniValidations();  
+            datosStep.setNOKstateByDefault();  
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
                 //Obtenemos la 1a request de tipo "text/html"con estado 2xx 
@@ -269,7 +269,7 @@ public class PasosGenAnalitica {
                 "2) La petición es de tipo <b>\"GET\"</b><br>" +
                 "3) El response status de la petición es de tipo <b>2xx</b><br>" +
                 "4) En la petición figura el parámetro <b>\"p\"</b> y contiene la URL de la 1a request " + tagUrl1aReq + "\"</b>";
-            datosStep.setStateIniValidations();   
+            datosStep.setNOKstateByDefault();   
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try { 
                 //Obtenemos la URL de la 1a URL de type "text/html" que se ha lanzado
@@ -333,7 +333,7 @@ public class PasosGenAnalitica {
             "2) La petición es de tipo <b>\"GET\"</b><br>" +
             "3) El response status de la petición es de tipo <b>2xx</b><br>" +
             "4) En la petición figura el parámetro <b>\"tid=" + valueTid1 + "\" o \"tid=" + valueTid2 + "\" o o \"tid=" + valueTid3 + "\"</b>";
-        datosStep.setStateIniValidations();    
+        datosStep.setNOKstateByDefault();    
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             JSONArray listEntriesFilteredPage = gestorHAR.getListEntriesFilterURL("://www.google-analytics.com/collect","t=pageview");
@@ -376,7 +376,7 @@ public class PasosGenAnalitica {
         String firstLineDataLayerFunction = "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':"; 
         String descripValidac = 
             "1) Figura el código JavaScript del tag <b>dataLayer</b>. Validamos la existencia de la 1a línea de la función: " + firstLineDataLayerFunction;
-        datosStep.setStateIniValidations();  
+        datosStep.setNOKstateByDefault();  
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!dFTest.driver.getPageSource().contains(firstLineDataLayerFunction))
@@ -391,7 +391,7 @@ public class PasosGenAnalitica {
     public static void validaNetTraffic(DatosStep datosStep, gestorDatosHarJSON gestorHAR, DataFmwkTest dFTest) {
         String descripValidac = 
             "1) En el tráfico de red no existe ninguna sin respuesta o con status KO";
-        datosStep.setStateIniValidations();     
+        datosStep.setNOKstateByDefault();     
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             //Obtenemos todas las entradas sin filtrar por URL

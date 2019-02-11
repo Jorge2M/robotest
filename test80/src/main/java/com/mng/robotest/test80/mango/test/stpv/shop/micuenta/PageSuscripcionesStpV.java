@@ -20,7 +20,7 @@ public class PageSuscripcionesStpV {
         //Validaciones
         String descripValidac = 
             "1) Aparece la página de \"Suscripciones\"";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageSuscripciones.isPage(dFTest.driver)) {
@@ -46,7 +46,7 @@ public class PageSuscripcionesStpV {
             "1) Aparecen "  + numLineasTotales + " Newsletter<br>" +
             "2) Aparecen "  + numLinDesmarcadas + " suscripciones desmarcadas<br>" +
             "3) Aparecen desmarcadas las suscripciones de: " + lineasUnchecked;
-        datosStep.setStateIniValidations();   
+        datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (PageSuscripciones.getNumNewsletters(dFTest.driver)!=numLineasTotales) {
@@ -86,7 +86,7 @@ public class PageSuscripcionesStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) Aparece una pantalla de resultado OK (la esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();     
+        datosStep.setNOKstateByDefault();     
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageSuscripciones.isPageResOKUntil(maxSecondsToWait, dFTest.driver)) {

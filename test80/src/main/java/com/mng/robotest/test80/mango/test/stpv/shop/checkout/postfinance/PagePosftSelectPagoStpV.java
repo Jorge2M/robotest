@@ -20,7 +20,7 @@ public class PagePosftSelectPagoStpV {
         String descripValidac = 
             "1) Aparece la 1a pantalla para la selección del método <b>" + nombrePago + "</b> (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" + 
             "2) En la página resultante figura el importe total de la compra (" + importeTotal + ")";
-        datosStep.setStateIniValidations();           
+        datosStep.setNOKstateByDefault();           
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);   
         try {
             if (!PagePostfSelectPago.isPageUntil(nombrePago, maxSecondsToWait, dFTest.driver)) {

@@ -52,7 +52,7 @@ public class PageReembolsosStpV {
         String descripValidac = 
             "1) Aparece la página de reembolsos<br>" + 
             validacion2;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageReembolsos.isPage(dFTest.driver)) {
@@ -89,7 +89,7 @@ public class PageReembolsosStpV {
         
         //Validations
         String descripValidac = "1) Aparece el saldo en cuenta que esperamos <b>" + saldoCtaEsperado + "</b>"; 
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             float saldoCtaPage = PageReembolsos.getImporteStoreCredit(dFTest.driver);
@@ -134,7 +134,7 @@ public class PageReembolsosStpV {
         //Validations
         String descripValidac = 
             "1) Los campos de input Banco, Titular e IBAN se hacen visibles"; 
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageReembolsos.isVisibleInputsTransf(dFTest.driver)) {
@@ -172,7 +172,7 @@ public class PageReembolsosStpV {
         String descripValidac = 
             "1) Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
             "2) Aparece seleccionado el radiobutton de \"Transferencia bancaria\"";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageReembolsos.isVisibleTextBancoUntil(maxSecondsToWait, dFTest.driver) ||
@@ -213,7 +213,7 @@ public class PageReembolsosStpV {
         String descripValidac = 
             "1) Aparece seleccionado el radiobutton de \"Store Credit\"<br>" + 
             "2) Aparece un saldo >= 0";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
            if (!PageReembolsos.isCheckedRadio(TypeReembolso.StoreCredit, dFTest.driver)) {
@@ -250,7 +250,7 @@ public class PageReembolsosStpV {
             int maxSecondsToWait = 2;
             String descripValidac = 
                 "1) Desaparece el botón \"Save\" de Store Credit (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-            datosStep.setStateIniValidations();
+            datosStep.setNOKstateByDefault();
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
                if (PageReembolsos.isVisibleSaveButtonStoreCreditUntil(maxSecondsToWait, dFTest.driver)) {

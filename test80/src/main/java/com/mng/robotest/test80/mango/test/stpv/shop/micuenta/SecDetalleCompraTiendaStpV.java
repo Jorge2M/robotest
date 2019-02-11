@@ -23,7 +23,7 @@ public class SecDetalleCompraTiendaStpV {
             "4) Figura la dirección " + compraTienda.direccion + "<br>" +
             "5) Figura la fecha " + compraTienda.fecha + "<br>" +
             "6) Existen " + compraTienda.numPrendas + " prendas";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageMisCompras.SecDetalleCompraTienda.isVisibleSectionUntil(maxSecondsToWait, dFTest.driver)) {
@@ -52,7 +52,7 @@ public class SecDetalleCompraTiendaStpV {
         if (channel==Channel.movil_web) {
             descripValidac = 
                 "1) Aparece la imagen correspondiente al código de barras de la compra";
-            datosStep.setStateIniValidations();
+            datosStep.setNOKstateByDefault();
             listVals = ListResultValidation.getNew(datosStep);
             try {
                 if (!PageMisCompras.SecDetalleCompraTienda.isVisibleCodigoBarrasImg(dFTest.driver)) {

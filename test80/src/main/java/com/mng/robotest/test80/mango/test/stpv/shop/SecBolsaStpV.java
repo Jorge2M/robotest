@@ -73,7 +73,7 @@ public class SecBolsaStpV {
         int maxSecondsToWait = 3;
         String descripValidac = 
             "1) Desaparece la bolsa (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecBolsa.isInStateUntil(StateBolsa.Closed, Channel.movil_web, maxSecondsToWait, dFTest.driver)) {
@@ -113,7 +113,7 @@ public class SecBolsaStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) La bolsa queda en estado " + stateBolsaExpected + " (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecBolsa.isInStateUntil(stateBolsaExpected, channel, 0, dFTest.driver)) {
@@ -212,7 +212,7 @@ public class SecBolsaStpV {
             String descripValidac =
                 "1) Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
                 "2) Aparece el botón \"Comprar\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-            datosStep.setStateIniValidations();
+            datosStep.setNOKstateByDefault();
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
                 if (!SecBolsa.isInStateUntil(StateBolsa.Open, channel, maxSecondsToWait, dFTest.driver)) {
@@ -245,7 +245,7 @@ public class SecBolsaStpV {
             "1) Existen " + dataBag.getListArticulos().size() + 
             " elementos dados de alta en la bolsa (los esperamos hasta " + 
             maxSecondsToWait + " segundos)"; 
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             String itemsSaved = String.valueOf(dataBag.getListArticulos().size());
@@ -268,7 +268,7 @@ public class SecBolsaStpV {
             "4) Cuadran los colores de los artículos existentes en la bolsa<br>" +
             "5) Cuadran las tallas de los artículos existentes en la bolsa<br>" +
             "6) Cuadran los precios de los artículos existentes en la bolsa";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             ValidatorContentBolsa validatorBolsa = new ValidatorContentBolsa(dataBag, app, channel, dFTest.driver);
@@ -335,7 +335,7 @@ public class SecBolsaStpV {
         int maxSecondsToWait = 5;
         String descripValidac = 
             "1) El importe total se acaba modificando (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!SecBolsa.isNotThisImporteTotalUntil(importeTotal, channel, maxSecondsToWait, dFTest.driver)) {

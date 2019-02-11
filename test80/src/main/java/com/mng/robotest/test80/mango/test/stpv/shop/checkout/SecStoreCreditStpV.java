@@ -69,7 +69,7 @@ public class SecStoreCreditStpV {
             int numPagosExpected = 0;
             String descripValidac = 
                 "1) Aparecen " + numPagosExpected + " métodos de pago";
-            datosStep.setStateIniValidations();
+            datosStep.setNOKstateByDefault();
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try { 
                 if (!PageCheckoutWrapper.isNumpagos(numPagosExpected, channel, pais, dFTest.driver)) {
@@ -123,7 +123,7 @@ public class SecStoreCreditStpV {
             validacion3 +
             validacion4 +
             "5) Figura un saldo en cuenta de: " + saldoCta;
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!Page1DktopCheckout.secStoreCredit.isVisible(dFTest.driver)) {

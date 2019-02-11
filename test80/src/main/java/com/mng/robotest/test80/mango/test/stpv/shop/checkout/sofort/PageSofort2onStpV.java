@@ -20,7 +20,7 @@ public class PageSofort2onStpV {
         int maxSecondsToWait = 3;
         String descripValidac = 
             "1) Aparece la página de selección del país/banco (la esperamos hasta " + maxSecondsToWait + " segundos)"; 
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageSofort2on.isPageUntil(maxSecondsToWait, dFTest.driver)) {

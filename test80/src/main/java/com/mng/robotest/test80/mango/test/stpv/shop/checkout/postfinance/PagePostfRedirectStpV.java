@@ -14,7 +14,7 @@ public class PagePostfRedirectStpV {
         String descripValidac = 
             "1) Aparece una página de redirección con un botón OK<br>" +
             "2) La página de redirección acaba desapareciendo (esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setStateIniValidations();
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try { 
             if (!PagePostfRedirect.isPresentButtonOk(dFTest.driver)) {

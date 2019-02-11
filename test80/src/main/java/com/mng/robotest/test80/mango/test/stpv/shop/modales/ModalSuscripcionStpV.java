@@ -27,7 +27,7 @@ public class ModalSuscripcionStpV {
 	        String descripValidac = 
 	            "1) El texto de info de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>" + 
 	            "2) El texto legal de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>";
-	        datosStep.setStateIniValidations();     
+	        datosStep.setNOKstateByDefault();     
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	        try {
 	            if (!ModalSuscripcion.isTextoRGPDPresent(dFTest.driver)) {
@@ -46,7 +46,7 @@ public class ModalSuscripcionStpV {
 			String descripValidac = 
 	            "1) El texto de info de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>" + 
 	            "2) El texto legal de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>";
-	        datosStep.setStateIniValidations();    
+	        datosStep.setNOKstateByDefault();    
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 	        try {
 	            if (ModalSuscripcion.isTextoRGPDPresent(dFTest.driver)) {
