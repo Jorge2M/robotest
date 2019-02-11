@@ -22,16 +22,25 @@ import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.DataMango;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.test.datastored.DataBag;
+import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
+import com.mng.robotest.test80.mango.test.datastored.DataPedido;
+import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
+import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
+import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.DataNino;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataNinos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.DataNino.sexoType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro.DataRegType;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMiCuentaStpV;
@@ -41,6 +50,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroFinStpV
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroNinosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroSegundaStpV;
+import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 @SuppressWarnings("javadoc")
 public class Registro extends GestorWebDriver {
@@ -49,6 +59,7 @@ public class Registro extends GestorWebDriver {
     String baseUrl;
     boolean acceptNextAlert = true;
     StringBuffer verificationErrors = new StringBuffer();
+    boolean loyaltyTest = false;
     
     private String index_fact = "";
     public int prioridad;
@@ -65,6 +76,12 @@ public class Registro extends GestorWebDriver {
         this.idiomaFactory = idioma;
         this.index_fact = pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + "-" + idioma.getCodigo().getLiteral();
         this.prioridad = prioridad;
+    }
+    
+    //TODO temporal para Loyalty
+    public Registro(int iteration) {
+        this.index_fact = String.valueOf(iteration);
+        loyaltyTest = true;
     }
     
     @BeforeMethod(groups={"Registro", "Canal:all_App:all", "SupportsFactoryCountrys"})
@@ -160,10 +177,12 @@ public class Registro extends GestorWebDriver {
         boolean loginAfter = true;
         boolean clickPubli = true;
         boolean clickRegister = true;
-        if ("false".compareTo(loginAfterRegister)==0)
+        if ("false".compareTo(loginAfterRegister)==0) {
             loginAfter = false;
-        if ("false".compareTo(register)==0)
+        }
+        if ("false".compareTo(register)==0) {
         	clickRegister = false;
+        }
         
     	DataFmwkTest dFTest = getdFTest();
         DataCtxShop dCtxSh = getdCtxSh();
@@ -175,8 +194,10 @@ public class Registro extends GestorWebDriver {
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
         //Validación modal suscripcion RGPD
-        if (!dCtxSh.userRegistered)
+        if (!dCtxSh.userRegistered) {
         	ModalSuscripcionStpV.validaRGPDModal(dCtxSh, dFTest);
+        }
+        
         SecMenusWrapperStpV.secMenuUser.selectRegistrate(dCtxSh.channel, dCtxSh, dFTest);
         if(clickRegister) {
 	        String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
@@ -210,10 +231,50 @@ public class Registro extends GestorWebDriver {
 	            //Step. Ejecutamos la consulta de suscripciones comprobando que los datos son coherentes con los utilizados en el registro
 	            PageMiCuentaStpV.goToSuscripcionesAndValidateData(dataRegistro, dCtxSh.appE, dCtxSh.channel, dFTest);        
 	        }
+	        
+	        //TODO Checkout temporal para Loyalty
+	        if (loyaltyTest) {
+	        	testPago(dataRegistro, dFTest);
+	        }
+
         }
         else {
         	SecFooterStpV.validaRGPDFooter(clickRegister, dCtxSh, dFTest);
         }
+    }
+    
+    private void testPago(HashMap<String,String> dataRegistro, DataFmwkTest dFTest) throws Exception {
+        dCtxSh.userRegistered = true;
+        dCtxSh.userConnected = dataRegistro.get("cfEmail");
+        
+        FlagsTestCkout FTCkout = new FlagsTestCkout();
+        FTCkout.validaPasarelas = true;  
+        FTCkout.validaPagos = true;
+        FTCkout.emailExist = true; 
+        FTCkout.trjGuardada = false;
+        FTCkout.isEmpl = false;
+        DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
+        dCtxPago.setFTCkout(FTCkout);
+        
+        int maxArticlesAwayVale = 1;
+        List<ArticleStock> listArticles = UtilsTestMango.getArticlesForTestDependingVale(dCtxSh, maxArticlesAwayVale);
+        
+        DataBag dataBag = dCtxPago.getDataPedido().getDataBag();
+        SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, dFTest);
+
+        //Steps. Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
+        dCtxPago.getFTCkout().testCodPromocional = true;
+        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, dFTest);
+        
+        //Pago
+        Pago pagoVisaToTest = this.españa.getPago("VISA");
+        DataPedido dataPedido = new DataPedido(dCtxSh.pais);
+        dataPedido.setPago(pagoVisaToTest);
+        
+        PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, dFTest.driver);
+        dCtxPago.setDataPedido(dataPedido);
+        dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
+        PagoNavigationsStpV.testPagoFromCheckoutToEnd(dCtxPago, dCtxSh, pagoVisaToTest, dFTest);
     }
     
     @SuppressWarnings("static-access")
@@ -227,8 +288,9 @@ public class Registro extends GestorWebDriver {
         dCtxSh.userRegistered = false;
             
         //En caso de ejecución desde .bat no ejecutaremos el Registro 
-        if (utils.getTypeAccessFmwk(dFTest.ctx)==TypeAccessFmwk.Bat)
+        if (utils.getTypeAccessFmwk(dFTest.ctx)==TypeAccessFmwk.Bat) {
             return;
+        }
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
         SecMenusWrapperStpV.secMenuUser.selectRegistrate(dCtxSh.channel, dCtxSh, dFTest);
