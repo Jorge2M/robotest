@@ -11,7 +11,7 @@
     	<dependency>
 		    <groupId>org.aspectj</groupId>
 		    <artifactId>aspectjrt</artifactId>
-		    <version>1.9.2</version>
+		    <version>1.8.2</version>
 		</dependency>
 	    <dependency>
 	        <groupId>org.seleniumhq.selenium</groupId>
@@ -149,7 +149,7 @@
   <build>
   	<plugins>
 		<plugin>
-			<!-- Define Aspectj Nature -->
+			<!-- Define Aspectj Nature in Eclipse-->
 		    <groupId>org.apache.maven.plugins</groupId>
 		    <artifactId>maven-eclipse-plugin</artifactId>
 		    <configuration>
