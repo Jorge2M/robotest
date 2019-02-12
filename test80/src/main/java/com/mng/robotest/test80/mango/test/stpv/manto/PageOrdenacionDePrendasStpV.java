@@ -158,7 +158,7 @@ public class PageOrdenacionDePrendasStpV {
                 "Aparecen imagenes en la nueva página<br>",
                 PageOrdenacionDePrendas.isElementInStateUntil(Orden.pruebaImagen, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
-                "2) Estamos en la sección que corresponde <b>camisas</b>",
+                "Estamos en la sección que corresponde <b>camisas</b>",
                 PageOrdenacionDePrendas.isElementInStateUntil(Orden.pruebaCamisa, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         return validations;
     }
