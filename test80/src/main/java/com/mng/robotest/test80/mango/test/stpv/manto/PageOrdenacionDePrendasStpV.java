@@ -35,32 +35,21 @@ public class PageOrdenacionDePrendasStpV {
 		aceptarOrdenPais(dFTest);
 	}
 
-	public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
-		//Validations
-		int maxSecondsWait = 3;
-		String descripValidac =
-				"1) Estamos en la página" + Orden.titulo.getXPath()+"<br>" +
-						"2) Aparece el desplegable de tiendas<br>" +
-						"3) El botón <b>Ver Tiendas</b> está en la página";
-		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Orden.initialTitulo, StateElem.Visible, maxSecondsWait, dFTest.driver)) {
-				listVals.add(1, State.Defect);
-			}
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Orden.desplegableTiendas, StateElem.Visible, maxSecondsWait, dFTest.driver)) {
-				listVals.add(2, State.Defect);
-			}
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Orden.verTiendas, StateElem.Visible, maxSecondsWait, dFTest.driver)) {
-				listVals.add(3, State.Defect);
-			}
-			datosStep.setListResultValidations(listVals);
-		}
-		finally {
-			listVals.checkAndStoreValidations(descripValidac);
-		}
-	}
-
+    @Validation
+    public static ListResultValidation validateIsPage(DatosStep datosStep, WebDriver driver) {
+        ListResultValidation validations = ListResultValidation.getNew(datosStep);
+        int maxSecondsWait = 10;
+        validations.add(
+                "Estamos en la página " + Orden.titulo.getXPath() + "<br>",
+                PageOrdenacionDePrendas.isElementInStateUntil(Orden.initialTitulo, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        validations.add(
+                "Aparece el desplegable de tiendas<br>",
+                PageOrdenacionDePrendas.isElementInStateUntil(Orden.desplegableTiendas, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        validations.add(
+                "El botón <b>Ver Tiendas</b> está en la página",
+                PageOrdenacionDePrendas.isElementInStateUntil(Orden.verTiendas, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        return validations;
+    }
 	private static void selectPreProduccion(DataFmwkTest dFTest) throws Exception {
 		DatosStep datosStep = new DatosStep (
 				"Seleccionamos en el desplegable la opción <b>PreProduccion</b>",
@@ -76,38 +65,27 @@ public class PageOrdenacionDePrendasStpV {
 		validatePreProductionElements(datosStep, dFTest.driver);
 	}
 
-	public static void validatePreProductionElements(DatosStep datosStep, WebDriver driver) {
-		int maxSecondsWait = 3;
-		String descripValidac =
-				"1) Está presente el enlace de <b>She</b><br>" +
-						"2) Está presente el enlace de <b>He</b><br>" +
-						"3) Está presente el enlace de <b>Nina</b><br>" +
-						"4) Está presente el enlace de <b>Nino</b><br>" +
-						"5) Está presente el enlace de <b>Violeta</b>";
-		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Section.She, StateElem.Visible, maxSecondsWait, driver)) {
-				listVals.add(1, State.Defect);
-			}
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Section.He, StateElem.Visible, maxSecondsWait, driver)) {
-				listVals.add(2, State.Defect);
-			}
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Section.Nina, StateElem.Visible, maxSecondsWait, driver)) {
-				listVals.add(3, State.Defect);
-			}
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Section.Nino, StateElem.Visible, maxSecondsWait, driver)) {
-				listVals.add(4, State.Defect);
-			}
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Section.Violeta, StateElem.Visible, maxSecondsWait, driver)) {
-				listVals.add(5, State.Defect);
-			}
-			datosStep.setListResultValidations(listVals);
-		}
-		finally {
-			listVals.checkAndStoreValidations(descripValidac);
-		}
-	}
+    @Validation
+    public static ListResultValidation validatePreProductionElements(DatosStep datosStep, WebDriver driver) {
+        ListResultValidation validations = ListResultValidation.getNew(datosStep);
+        int maxSecondsWait = 10;
+        validations.add(
+                "Está presente el enlace de <b>She</b><br>",
+                PageOrdenacionDePrendas.isElementInStateUntil(Section.She, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        validations.add(
+                "Está presente el enlace de <b>He</b>",
+                PageOrdenacionDePrendas.isElementInStateUntil(Section.He, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        validations.add(
+                "Está presente el enlace de <b>Nina</b><br><br>",
+                PageOrdenacionDePrendas.isElementInStateUntil(Section.Nina, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        validations.add(
+                "Aparece correctamente el boton de <b>cancelar</b>",
+                PageOrdenacionDePrendas.isElementInStateUntil(Section.Nino, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        validations.add(
+                "Está presente el enlace de <b>Violeta</b>",
+                PageOrdenacionDePrendas.isElementInStateUntil(Section.Violeta, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        return validations;
+    }
 
 	private static void selectShe(DataFmwkTest dFTest) throws Exception {
 		DatosStep datosStep = new DatosStep (
@@ -120,14 +98,14 @@ public class PageOrdenacionDePrendasStpV {
 
 		//Validations
 		datosStep.setGrab_ErrorPageIfProblem(false);
-		validateSectionShe(datosStep, 3, "1) Está presente el selector de secciones dentro de <b>She</b>", dFTest.driver);
+		validateSectionShe(datosStep, 13, "1) Está presente el selector de secciones dentro de <b>She</b>", dFTest.driver);
 	}
 
 	@Validation(
-			description="1) Está presente el selector de secciones dentro de <b>she</b>",
+			description="1) Está presente el selector de secciones dentro de <b>She</b>",
 			level=State.Warn)
 	public static boolean validateSectionShe(DatosStep datosStep, int maxSecondsWait, String validacion, WebDriver driver) {
-		return (!PageOrdenacionDePrendas.isElementInStateUntil(Orden.selectorOrdenacion, StateElem.Visible, maxSecondsWait, driver));
+		return (PageOrdenacionDePrendas.isElementInStateUntil(Orden.selectorOrdenacion, StateElem.Visible, maxSecondsWait, driver));
 	}
 
 	private static void selectSectionPrenda(DataFmwkTest dFTest){
@@ -144,27 +122,18 @@ public class PageOrdenacionDePrendasStpV {
 		validateSectionPrenda(datosStep, dFTest.driver);
 	}
 
-	public static void validateSectionPrenda(DatosStep datosStep, WebDriver driver) {
-		//Validations
-		int maxSecondsWait = 3;
-		String descripValidac =
-				"1) Se vuelve visible el selector de tipo de <b>Prendas</b><br>" +
-						"2) Podemos ver el <b>botón</b> para ver las prendas";
-		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Orden.selectorPrendas, StateElem.Visible, maxSecondsWait, driver)) {
-				listVals.add(1, State.Defect);
-			}
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Orden.verPrendas, StateElem.Visible, maxSecondsWait, driver)) {
-				listVals.add(2, State.Defect);
-			}
-			datosStep.setListResultValidations(listVals);
-		}
-		finally {
-			listVals.checkAndStoreValidations(descripValidac);
-		}
-	}
+    @Validation
+    public static ListResultValidation validateSectionPrenda(DatosStep datosStep, WebDriver driver) {
+        ListResultValidation validations = ListResultValidation.getNew(datosStep);
+        int maxSecondsWait = 13;
+        validations.add(
+                "Se vuelve visible el selector de tipo de <b>Prendas</b><br>",
+                PageOrdenacionDePrendas.isElementInStateUntil(Orden.selectorPrendas, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        validations.add(
+                "2) Podemos ver el <b>botón</b> para ver las prendas",
+                PageOrdenacionDePrendas.isElementInStateUntil(Orden.verPrendas, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        return validations;
+    }
 
 	private static void selectTipoPrenda(DataFmwkTest dFTest) throws Exception {
 		DatosStep datosStep = new DatosStep (
@@ -172,7 +141,7 @@ public class PageOrdenacionDePrendasStpV {
 		datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		try {
 			SecModalPersonalizacion.selectInDropDown(Orden.selectorPrendas, "camisas_she", dFTest.driver);
-			int secondsWaitElement = 2;
+			int secondsWaitElement = 10;
 			SecModalPersonalizacion.selectElementWaitingForAvailability(Orden.verPrendas, secondsWaitElement, dFTest.driver);
 		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
@@ -182,26 +151,17 @@ public class PageOrdenacionDePrendasStpV {
 		validateTipoPrenda(datosStep, dFTest.driver, maxSecondsWait);
 	}
 
-	public static void validateTipoPrenda(DatosStep datosStep, WebDriver driver, int maxSecondsWait) {
-		//Validations
-		String descripValidac =
-				"1) Aparecen imagenes en la nueva página<br>" +
-						"2) Estamos en la sección que corresponde <b>camisas</b>";
-		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Orden.pruebaImagen, StateElem.Visible, maxSecondsWait, driver)) {
-				listVals.add(1, State.Defect);
-			}
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Orden.pruebaCamisa, StateElem.Visible, maxSecondsWait, driver)) {
-				listVals.add(2, State.Defect);
-			}
-			datosStep.setListResultValidations(listVals);
-		}
-		finally {
-			listVals.checkAndStoreValidations(descripValidac);
-		}
-	}
+	@Validation
+    public static ListResultValidation validateTipoPrenda(DatosStep datosStep, WebDriver driver, int maxSecondsWait) {
+        ListResultValidation validations = ListResultValidation.getNew(datosStep);
+        validations.add(
+                "Aparecen imagenes en la nueva página<br>",
+                PageOrdenacionDePrendas.isElementInStateUntil(Orden.pruebaImagen, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        validations.add(
+                "2) Estamos en la sección que corresponde <b>camisas</b>",
+                PageOrdenacionDePrendas.isElementInStateUntil(Orden.pruebaCamisa, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        return validations;
+    }
 
 	private static void bajarPrenda(DataFmwkTest dFTest) throws Exception {
 		DatosStep datosStep = new DatosStep (
@@ -219,26 +179,17 @@ public class PageOrdenacionDePrendasStpV {
 		validateBajarPrenda(datosStep, dFTest.driver, 15);
 	}
 
-	public static void validateBajarPrenda(DatosStep datosStep, WebDriver driver, int maxSecondsWait) {
-		//Validations
-		String descripValidac =
-				"1) Se sigue viendo la segunda prenda<br>" +
-						"2) La primera prenda no se corresponde con la que había inicialmente";
-		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Orden.segundaPrenda, StateElem.Visible, maxSecondsWait, driver)) {
-				listVals.add(1, State.Defect);
-			}
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Orden.primeraPrenda, StateElem.Visible, maxSecondsWait, driver)) {
-				listVals.add(2, State.Defect);
-			}
-			datosStep.setListResultValidations(listVals);
-		}
-		finally {
-			listVals.checkAndStoreValidations(descripValidac);
-		}
-	}
+    @Validation
+    public static ListResultValidation validateBajarPrenda(DatosStep datosStep, WebDriver driver, int maxSecondsWait) {
+        ListResultValidation validations = ListResultValidation.getNew(datosStep);
+        validations.add(
+                "Se sigue viendo la segunda prenda<br>",
+                PageOrdenacionDePrendas.isElementInStateUntil(Orden.segundaPrenda, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        validations.add(
+                "La primera prenda no se corresponde con la que había inicialmente",
+                PageOrdenacionDePrendas.isElementInStateUntil(Orden.primeraPrenda, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        return validations;
+    }
 
 	private static void aplicarOrden(DataFmwkTest dFTest) throws Exception {
 		DatosStep datosStep = new DatosStep (
@@ -254,35 +205,24 @@ public class PageOrdenacionDePrendasStpV {
 		validateAplicarOrden(datosStep, dFTest.driver);
 	}
 
-	public static void validateAplicarOrden(DatosStep datosStep, WebDriver driver) {
-		//Validations
-		int maxSecondsWait = 10;
-		String descripValidac =
-				"1) Aparece correctamente el modal de confirmacion<br>" +
-						"2) Aparece correctamente el boton de <b>aplicar general</b><br>" +
-						"3) Aparece correctamente el boton de <b>aplicar pais</b><br>" +
-						"4) Aparece correctamente el boton de <b>cancelar</b>";
-		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Modal.container, StateElem.Visible, maxSecondsWait, driver)) {
-				listVals.add(1, State.Defect);
-			}
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Modal.applyGeneric, StateElem.Visible, maxSecondsWait, driver)) {
-				listVals.add(2, State.Defect);
-			}
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Modal.applyCountry, StateElem.Visible, maxSecondsWait, driver)) {
-				listVals.add(3, State.Defect);
-			}
-			if (!PageOrdenacionDePrendas.isElementInStateUntil(Modal.cancel, StateElem.Visible, maxSecondsWait, driver)) {
-				listVals.add(4, State.Defect);
-			}
-			datosStep.setListResultValidations(listVals);
-		}
-		finally {
-			listVals.checkAndStoreValidations(descripValidac);
-		}
-	}
+    @Validation
+    public static ListResultValidation validateAplicarOrden(DatosStep datosStep, WebDriver driver) {
+        ListResultValidation validations = ListResultValidation.getNew(datosStep);
+        int maxSecondsWait = 15;
+        validations.add(
+                "Aparece correctamente el modal de confirmacion<br>",
+                PageOrdenacionDePrendas.isElementInStateUntil(Modal.container, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        validations.add(
+                "Aparece correctamente el boton de <b>aplicar general</b><br>",
+                PageOrdenacionDePrendas.isElementInStateUntil(Modal.applyGeneric, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        validations.add(
+                "Aparece correctamente el boton de <b>aplicar pais</b><br>",
+                PageOrdenacionDePrendas.isElementInStateUntil(Modal.applyCountry, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        validations.add(
+                "Aparece correctamente el boton de <b>cancelar</b>",
+                PageOrdenacionDePrendas.isElementInStateUntil(Modal.cancel, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+        return validations;
+    }
 
 	private static void aceptarOrdenPais(DataFmwkTest dFTest) throws Exception {
 		DatosStep datosStep = new DatosStep (
