@@ -524,14 +524,14 @@ public class CreateWebDriver {
      * Establece el geckodriver.exe a nivel de parámetro webdriver.gecko.driver
      */    
     private static void setDriverFirefox() {        
-        FirefoxDriverManager.getInstance().version("0.23.0").setup();
+        FirefoxDriverManager.getInstance().version("0.24.0").setup();
     }
     
     /**
      * Establece el chromedriver.exe a nivel de parámetro webdriver.chrome.driver
      */
     private static void setDriverChrome() {        
-        ChromeDriverManager.getInstance().version("2.45").setup();
+        ChromeDriverManager.getInstance().version("73.0.3683.20").setup();
     }
 
     /**
