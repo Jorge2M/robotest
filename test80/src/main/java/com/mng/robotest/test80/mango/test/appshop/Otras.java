@@ -244,7 +244,9 @@ public class Otras extends GestorWebDriver {
     
     @Step (
     	description="Si es preciso introducimos la provincia/idioma y finalmente seleccionamos el botón <b>#{litButton}</b>",
-        expected="Se accede a la Shop correctamente después de seleccionar el botón #{litButton}")
+        expected="Se accede a la Shop correctamente después de seleccionar el botón #{litButton}",
+        saveImagePage=SaveWhen.Always,
+        saveErrorPage=SaveWhen.Never)
     public void step1(String litButton, Pais pais, IdiomaPais idioma, Channel channel, WebDriver driver) 
     throws Exception {
     	PagePrehome.selecionProvIdiomAndEnter(pais, idioma, channel, driver);
