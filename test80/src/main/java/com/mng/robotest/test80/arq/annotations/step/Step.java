@@ -4,7 +4,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.RetentionPolicy;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 
 @SuppressWarnings("javadoc")
 @Target(ElementType.METHOD)
@@ -12,8 +12,8 @@ import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
 public @interface Step {
 	String description() default "";
 	String expected() default "";
-	WhenSave saveImagePage() default WhenSave.IfProblem;
-	WhenSave saveErrorPage() default WhenSave.IfProblem;
-	WhenSave saveHtmlPage() default WhenSave.Never;
-	WhenSave saveNettraffic() default WhenSave.Never;
+	SaveWhen saveImagePage() default SaveWhen.IfProblem;
+	SaveWhen saveErrorPage() default SaveWhen.IfProblem;
+	SaveWhen saveHtmlPage() default SaveWhen.Never;
+	SaveWhen saveNettraffic() default SaveWhen.Never;
 }

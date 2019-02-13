@@ -5,7 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
@@ -54,7 +54,7 @@ public class SecCabeceraStpV {
         DatosStep datosStep = new DatosStep     (
             "Seleccionar el logo de Mango", 
             "Se accede a la página principal de la línea");
-        datosStep.setSaveImagePage(WhenSave.Always);
+        datosStep.setSaveImagePage(SaveWhen.Always);
         try {
             secCabecera.clickLogoMango();
                 

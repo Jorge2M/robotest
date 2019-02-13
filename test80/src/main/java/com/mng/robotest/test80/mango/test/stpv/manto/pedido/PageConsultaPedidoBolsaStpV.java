@@ -5,7 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
@@ -34,8 +34,8 @@ public class PageConsultaPedidoBolsaStpV extends ElementPageFunctions {
         DatosStep datosStep = new DatosStep   (
             "Seleccionamos el código de pedido para acceder al Detalle", 
             "Aparece la página de detalle de " + typeDetalle + " correcta");
-        datosStep.setSaveImagePage(WhenSave.Always);
-	    datosStep.setSaveErrorPage(WhenSave.Never);
+        datosStep.setSaveImagePage(SaveWhen.Always);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
             PagePedidos.clickLinkPedidoInLineas(dFTest.driver, dataPedido.getCodigoPedidoManto(), typeDetalle);
                                             
@@ -139,8 +139,8 @@ public class PageConsultaPedidoBolsaStpV extends ElementPageFunctions {
         DatosStep datosStep = new DatosStep (
             "Seleccionamos el botón " + RightButtons.IrAGenerar, 
             "Aparece la página de generación del pedido");
-        datosStep.setSaveImagePage(WhenSave.Always);
-	    datosStep.setSaveErrorPage(WhenSave.Never);
+        datosStep.setSaveImagePage(SaveWhen.Always);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
             clickAndWait(RightButtons.IrAGenerar, dFTest.driver);
                                             

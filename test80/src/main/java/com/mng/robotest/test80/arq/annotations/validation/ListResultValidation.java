@@ -24,6 +24,11 @@ public class ListResultValidation {
 		return (new ListResultValidation(datosStep));
 	}
 	
+	public static ListResultValidation getNew() {
+		DatosStep datosStep = ThreadData.getDatosStep();
+		return (getNew(datosStep));
+	}
+	
 	public static ListResultValidation of(ResultValidation resultValidation, DatosStep datosStep) {
 		ListResultValidation listValidations = new ListResultValidation(datosStep);
 		listValidations.add(resultValidation);

@@ -8,7 +8,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageBolsas;
 import com.mng.robotest.test80.mango.test.pageobject.manto.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PagePedidos;
@@ -27,7 +27,7 @@ public class PageMenusMantoStpV {
         DatosStep datosStep = new DatosStep     (
             "Desde la página de menús, seleccionamos el menú \"" + subMenu + "\"", 
             "Aparece la página al menú seleccionado");
-	    datosStep.setSaveErrorPage(WhenSave.Never);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         String textAlert = "";
         try {
             //Si no estamos en la página de menús nos posicionamos en ella

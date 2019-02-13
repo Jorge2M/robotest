@@ -5,7 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageConsultaTienda;
 
 @SuppressWarnings("javadoc")
@@ -30,7 +30,7 @@ public class PageConsultaTiendaStpV {
 		DatosStep datosStep = new DatosStep       (
 	            "Introducimos tienda \"" + tiendaNoExistente + "\"", 
 	            "No debe ser válida");
-	    datosStep.setSaveErrorPage(WhenSave.Never);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
             PageConsultaTienda.introducirTienda(tiendaNoExistente, dFTest.driver);
             
@@ -58,7 +58,7 @@ public class PageConsultaTiendaStpV {
 		DatosStep datosStep = new DatosStep       (
             "Introducimos tienda \"" + tiendaExistente + "\"", 
             "No debe ser válida");
-	    datosStep.setSaveErrorPage(WhenSave.Never);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
             PageConsultaTienda.introducirTienda(tiendaExistente, dFTest.driver);
             

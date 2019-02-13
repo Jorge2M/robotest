@@ -8,7 +8,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.Descuento;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -117,8 +117,8 @@ public class Page1DktopCheckoutStpV {
         DatosStep datosStep = new DatosStep     (
             "Introducir el vale <b style=\"color:blue;\">" + valePais.getCodigoVale() + "</b> y pulsar el botón \"CONFIRMAR\"", 
             "Aparece la página de resumen de artículos con los descuentos correctamente aplicados" /*Resultado esperado*/);
-        datosStep.setSaveNettrafic(WhenSave.Always, dFTest.ctx);
-        datosStep.setSaveImagePage(WhenSave.Never);
+        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
+        datosStep.setSaveImagePage(SaveWhen.Never);
         try {   
             PageCheckoutWrapper.inputCodigoPromoAndAccept(valePais.getCodigoVale(), Channel.desktop, dFTest.driver);
             dataBag.setImporteTotal(PageCheckoutWrapper.getPrecioTotalFromResumen(Channel.desktop, dFTest.driver));

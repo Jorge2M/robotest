@@ -8,7 +8,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.Color;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -34,7 +34,7 @@ public class SecFiltrosStpV {
         DatosStep datosStep = new DatosStep (
             "Seleccionar los colores <b>" + Color.getListNamesFiltros(colorsToSelect) + "</b>", 
             "Aparece la galería de imágenes");
-        datosStep.setSaveNettrafic(WhenSave.Always, dFTest.ctx);
+        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
         try {
             SecFiltros secFiltros = SecFiltros.newInstance(channel, app, dFTest.driver);
             numArticulos1page = secFiltros.selecFiltroColoresAndReturnNumArticles(colorsToSelect); 

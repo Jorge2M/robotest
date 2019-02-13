@@ -11,7 +11,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageOrdenacionDePrendas.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion;
@@ -62,7 +62,7 @@ public class PageOrdenacionDePrendasStpV {
 		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		//Validations
-	    datosStep.setSaveErrorPage(WhenSave.Never);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
 		validatePreProductionElements(datosStep, dFTest.driver);
 	}
 
@@ -98,7 +98,7 @@ public class PageOrdenacionDePrendasStpV {
 		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		//Validations
-	    datosStep.setSaveErrorPage(WhenSave.Never);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
 		validateSectionShe(datosStep, 13, "1) Está presente el selector de secciones dentro de <b>She</b>", dFTest.driver);
 	}
 
@@ -119,7 +119,7 @@ public class PageOrdenacionDePrendasStpV {
 		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		//Validaciones
-	    datosStep.setSaveErrorPage(WhenSave.Never);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
 		validateSectionPrenda(datosStep, dFTest.driver);
 	}
 
@@ -148,7 +148,7 @@ public class PageOrdenacionDePrendasStpV {
 
 		//Validations
 		int maxSecondsWait = 10;
-	    datosStep.setSaveErrorPage(WhenSave.Never);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
 		validateTipoPrenda(datosStep, dFTest.driver, maxSecondsWait);
 	}
 
@@ -159,7 +159,7 @@ public class PageOrdenacionDePrendasStpV {
                 "Aparecen imagenes en la nueva página<br>",
                 PageOrdenacionDePrendas.isElementInStateUntil(Orden.pruebaImagen, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
-                "2) Estamos en la sección que corresponde <b>camisas</b>",
+                "Estamos en la sección que corresponde <b>camisas</b>",
                 PageOrdenacionDePrendas.isElementInStateUntil(Orden.pruebaCamisa, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         return validations;
     }
@@ -176,7 +176,7 @@ public class PageOrdenacionDePrendasStpV {
 		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		//Validations
-	    datosStep.setSaveErrorPage(WhenSave.Never);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
 		validateBajarPrenda(datosStep, dFTest.driver, 15);
 	}
 
@@ -202,7 +202,7 @@ public class PageOrdenacionDePrendasStpV {
 		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		//Validations
-	    datosStep.setSaveErrorPage(WhenSave.Never);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
 		validateAplicarOrden(datosStep, dFTest.driver);
 	}
 
@@ -235,7 +235,7 @@ public class PageOrdenacionDePrendasStpV {
 		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		//Validations
-	    datosStep.setSaveErrorPage(WhenSave.Never);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
 		validateBajarPrenda(datosStep, dFTest.driver, 10);
 	}
 

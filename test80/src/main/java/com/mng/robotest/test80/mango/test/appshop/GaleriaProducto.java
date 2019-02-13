@@ -4,6 +4,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.*;
@@ -75,14 +76,14 @@ public class GaleriaProducto extends GestorWebDriver {
         dCtxSh.idioma = this.castellano;
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        storeInThread(dCtxSh); 
-        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        ThreadData.storeInThread(dCtxSh); 
+        ThreadData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
     
     @SuppressWarnings("unused")
     @AfterMethod (groups={"GaleriaProducto", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getWebDriver();
+        WebDriver driver = ThreadData.getWebDriver();
         super.quitWebDriver(driver, context);
     }               
     
@@ -90,8 +91,8 @@ public class GaleriaProducto extends GestorWebDriver {
         groups={"GaleriaProducto", "Canal:movil_web_App:all"}, alwaysRun=true, 
         description="[Usuario registrado] Acceder a galería camisas. Filtros y ordenación. Seleccionar producto y color")
     public void GPO001_Galeria_Camisas(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;
@@ -143,8 +144,8 @@ public class GaleriaProducto extends GestorWebDriver {
         groups={"GaleriaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
         description="[Usuario no registrado][Chrome] Acceder a galería camisas. Filtro color. Scroll")
     public void GPO004_Navega_Galeria(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         dCtxSh.userRegistered = false;
             
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
@@ -186,8 +187,8 @@ public class GaleriaProducto extends GestorWebDriver {
         groups={"GaleriaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
         description="[Usuario registrado] Acceder a galería. Navegación menú lateral de primer y segundo nivel. Selector de precios")
     public void GPO005_Galeria_Menu_Lateral(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;
@@ -225,8 +226,8 @@ public class GaleriaProducto extends GestorWebDriver {
         description="Acceder a galería y testear el slider. Testeamos secuencias de sliders en ambas direcciones y " + 
     				"finalmente las combinamos con cambios de color")
     public void GPO006_SliderInDesktop(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();;
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();;
         dCtxSh.userRegistered = false;
     
         //Ini script

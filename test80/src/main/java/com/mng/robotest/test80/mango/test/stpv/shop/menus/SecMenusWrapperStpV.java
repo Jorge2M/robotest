@@ -10,7 +10,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
@@ -278,7 +278,7 @@ public class SecMenusWrapperStpV {
         DatosStep datosStep = new DatosStep       (
             "Seleccionar filtro de colecciones <b>" + typeMenu + "</b>", 
             "Aparece una galería con artículos de temporadas" + typeMenu.getListTempArticles());
-        datosStep.setSaveNettrafic(WhenSave.Always, dFTest.ctx);
+        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
         try {
         	filtrosCollection.click(typeMenu);
                     

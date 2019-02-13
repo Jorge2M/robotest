@@ -43,10 +43,12 @@ public class StepsDAO {
         "WHERE INICIO < ?;";    
     
     public static int grabStep(DatosStep datosStep, Method method, ITestContext ctx) {
-        int stepNumber = StepsDAO.getNextMethodStep(method, ctx);
+    	if (datosStep.getStepNumber()==0) {
+	        int stepNumber = StepsDAO.getNextMethodStep(method, ctx);
+	        datosStep.setStepNumber(stepNumber);
+    	}
+    	
         String methodWithFactory = fmwkTest.getMethodWithFactory(method, ctx);
-        datosStep.setStepNumber(stepNumber);
-        
         if (datosStep.getHoraFin()==null) {
             datosStep.setHoraFin(new Date(System.currentTimeMillis()));
         }
@@ -57,7 +59,7 @@ public class StepsDAO {
             insert.setString(2, ctx.getSuite().getName());
             insert.setString(3, ctx.getName());
             insert.setString(4, methodWithFactory);
-            insert.setInt(5, stepNumber);
+            insert.setInt(5, datosStep.getStepNumber());
             insert.setString(6, datosStep.getDescripcion());
             insert.setString(7, datosStep.getResExpected());
             insert.setInt(8, datosStep.getResultSteps().getIdNumerid());
@@ -74,7 +76,7 @@ public class StepsDAO {
             throw new RuntimeException(ex);
         }    
         
-        return stepNumber;
+        return (datosStep.getStepNumber());
     }
     
     

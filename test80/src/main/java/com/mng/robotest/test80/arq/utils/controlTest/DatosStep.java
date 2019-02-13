@@ -7,12 +7,13 @@ import org.testng.ITestContext;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.NetTrafficMng;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 
 @SuppressWarnings("javadoc")
 public class DatosStep {
 	
-	public enum WhenSave {
+	public enum SaveWhen {
 		Always, 
 		Never, 
 		IfProblem;
@@ -25,10 +26,10 @@ public class DatosStep {
 	private int step_number = 0;
 	private String descripcion; 
 	private String res_expected; 
-	private WhenSave saveImagePage = WhenSave.IfProblem;
-	private WhenSave saveErrorPage = WhenSave.IfProblem;
-	private WhenSave saveHtmlPage = WhenSave.Never;
-	private WhenSave saveNettraffic = WhenSave.Never;
+	private SaveWhen saveImagePage = SaveWhen.IfProblem;
+	private SaveWhen saveErrorPage = SaveWhen.IfProblem;
+	private SaveWhen saveHtmlPage = SaveWhen.Never;
+	private SaveWhen saveNettraffic = SaveWhen.Never;
 	private int type_page = 0; 
 	private Date hora_inicio; 
 	private Date hora_fin;
@@ -45,6 +46,7 @@ public class DatosStep {
         this.descripcion = c_descripcion;
         this.res_expected = c_res_expected;
         this.hora_inicio = new Date(System.currentTimeMillis());
+        ThreadData.storeInThread(this);
     }
 
     public void setStepNumber (int c_step_number) { 
@@ -59,19 +61,19 @@ public class DatosStep {
         this.res_expected = c_res_expected; 
     }
     
-    public void setSaveImagePage(WhenSave saveImagePage) { 
+    public void setSaveImagePage(SaveWhen saveImagePage) { 
         this.saveImagePage = saveImagePage; 
     }
     
-    public void setSaveErrorPage(WhenSave saveErrorPage) { 
+    public void setSaveErrorPage(SaveWhen saveErrorPage) { 
         this.saveErrorPage = saveErrorPage; 
     }
     
-    public void setSaveHtmlPage(WhenSave saveHtmlPage) { 
+    public void setSaveHtmlPage(SaveWhen saveHtmlPage) { 
         this.saveHtmlPage = saveHtmlPage; 
     }
     
-    public void setSaveNettrafic(WhenSave saveNettraffic, ITestContext context) {
+    public void setSaveNettrafic(SaveWhen saveNettraffic, ITestContext context) {
         String netTrafficStr = context.getSuite().getXmlSuite().getParameter(Constantes.paramNetAnalysis);
         if ("true".compareTo(netTrafficStr)==0) {
         	this.saveNettraffic = saveNettraffic;
@@ -112,19 +114,19 @@ public class DatosStep {
         return this.res_expected; 
     }
     
-    public WhenSave getSaveImagePage() { 
+    public SaveWhen getSaveImagePage() { 
         return this.saveImagePage; 
     }
     
-    public WhenSave getSaveHtmlPage() { 
+    public SaveWhen getSaveHtmlPage() { 
         return this.saveHtmlPage; 
     }
     
-    public WhenSave getSaveErrorPage() { 
+    public SaveWhen getSaveErrorPage() { 
         return this.saveErrorPage; 
     }
     
-    public WhenSave getSaveNettrafic() { 
+    public SaveWhen getSaveNettrafic() { 
         return this.saveNettraffic; 
     }    
     

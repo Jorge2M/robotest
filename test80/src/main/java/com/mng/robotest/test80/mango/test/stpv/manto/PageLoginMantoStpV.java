@@ -5,7 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageSelTda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageJCAS;
 
@@ -22,7 +22,7 @@ public class PageLoginMantoStpV {
         DatosStep datosStep = new DatosStep       (
             "<b style=\"color:brown;\">ACCEDER A MANTO</b> (" + urlManto + ")",
             "Aparece la página de selección de login o selección de tienda");
-	    datosStep.setSaveErrorPage(WhenSave.Never);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
         	dFTest.driver.manage().deleteAllCookies();
             dFTest.driver.get(urlManto);
@@ -39,7 +39,7 @@ public class PageLoginMantoStpV {
             datosStep = new DatosStep       (
                 "Identificarse desde la página de Jasig CAS con " + usrManto,
                 "Aparece la página de selección de la tienda");
-    	    datosStep.setSaveErrorPage(WhenSave.Never);
+    	    datosStep.setSaveErrorPage(SaveWhen.Never);
             try {
                 PageJCAS.identication(dFTest.driver, usrManto, pasManto);
                 

@@ -38,7 +38,7 @@ import com.mng.robotest.test80.arq.utils.NetTrafficMng;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.StateSuite;
 import com.mng.robotest.test80.arq.utils.utils;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.WebDriverArqUtils;
 import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
@@ -138,7 +138,7 @@ public class fmwkTest {
                     browserGUI = ((Boolean)dFTest.ctx.getAttribute("browserGUI")).booleanValue();
                 }
     
-                if ((datosStep.getSaveImagePage()==WhenSave.Always || 
+                if ((datosStep.getSaveImagePage()==SaveWhen.Always || 
                      grabImg == 1 || /* Está activada la grabación de imagen a nivel general o */
                      datosStep.getResultSteps()!=State.Ok) &&
                      datosStep.getTypePage() == 0/*HTML*/&&
@@ -174,7 +174,7 @@ public class fmwkTest {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    if (datosStep.getSaveHtmlPage()==WhenSave.Always && datosStep.getTypePage() == 0/* HTML */) {
+                    if (datosStep.getSaveHtmlPage()==SaveWhen.Always && datosStep.getTypePage() == 0/* HTML */) {
                         try {
                             //Capture sources
                             htmlsourcesMap.get(datosStep).add(dFTest.driver.getPageSource().getBytes());
@@ -212,8 +212,13 @@ public class fmwkTest {
         	createPathForEvidencesStore(nameMethodWithFactory, dFTest.ctx);
         	storeNetTrafficIfNeeded(datosStep, dFTest.ctx);
         }
-        
-        storeHardcopyIfNeeded(datosStep, dFTest);
+    	boolean browserGUI = true;
+        Object browserGUIObj = dFTest.ctx.getAttribute("browserGUI");
+        if (browserGUIObj!=null) {
+            browserGUI = ((Boolean)browserGUIObj).booleanValue();
+        }
+        storeHardcopyIfNeeded(browserGUI, datosStep, dFTest);
+        storeErrorPageIfNeeded(browserGUI, datosStep, dFTest);
         storeHTMLIfNeeded(datosStep, dFTest);
     }
     
@@ -223,43 +228,32 @@ public class fmwkTest {
         directorio.mkdirs();
     }
     
-    //TODO refactor
-    private static void storeHardcopyIfNeeded(DatosStep datosStep, DataFmwkTest dFTest) {
+    private static void storeHardcopyIfNeeded(boolean browserGUI, DatosStep datosStep, DataFmwkTest dFTest) {
         try {
-            boolean browserGUI = true;
-            int grabImg = 0;
-            if (dFTest.ctx.getAttribute("grabImg") != null) {
-                grabImg = ((Integer)dFTest.ctx.getAttribute("grabImg")).intValue();
+            if (isStoreImage(browserGUI, datosStep, dFTest)) {
+                String nombreImagen = getPathFileEvidenciaStep(dFTest.ctx, datosStep.getNameMethodWithFactory(), datosStep.getStepNumber(), TypeEvidencia.imagen);
+                WebDriverArqUtils.captureEntirePageMultipleBrowsers(dFTest.driver, dFTest.ctx, nombreImagen);
             }
-            if (dFTest.ctx.getAttribute("browserGUI") != null) {
-                browserGUI = ((Boolean)dFTest.ctx.getAttribute("browserGUI")).booleanValue();
-            }
-            if ((datosStep.getSaveImagePage().IfProblemSave() || 
-                 grabImg == 1 || /* Está activada la grabación de imagen a nivel general o */
-                 datosStep.getResultSteps()!=State.Ok) &&
-                 datosStep.getTypePage() == 0/*HTML*/&&
-                 browserGUI) {
-                 //Capture hardcopy
-                 String nombreImagen = getPathFileEvidenciaStep(dFTest.ctx, datosStep.getNameMethodWithFactory(), datosStep.getStepNumber(), TypeEvidencia.imagen);
-                 WebDriverArqUtils.captureEntirePageMultipleBrowsers(dFTest.driver, dFTest.ctx, nombreImagen);
-
-                 //Capture errorPage.faces
-                 String currentURL = dFTest.driver.getCurrentUrl();
-                 URI uri = new URI(currentURL);
-                 if (datosStep.getSaveErrorPage().IfProblemSave() &&
-                     (((String)dFTest.ctx.getAttribute("appPath")).contains(uri.getHost()) || uri.getHost().contains("mango.com")) &&
-                     datosStep.getResultSteps()!=State.Ok) {
-                     WebDriverMngUtils.capturaErrorPage(dFTest, datosStep.getStepNumber());
-                 }
-            }
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             pLogger.warn("Problema grabando imagen", e);
+        }
+    }
+    
+    private static void storeErrorPageIfNeeded(boolean browserGUI, DatosStep datosStep, DataFmwkTest dFTest) {
+    	try {
+		    if (isStoreError(browserGUI, datosStep, dFTest)) {
+		        WebDriverMngUtils.capturaErrorPage(dFTest, datosStep.getStepNumber());
+	        } 
+    	}
+	    catch (Exception e) {
+            pLogger.warn("Problema grabando ErrorPage", e);
         }
     }
     
     private static void storeHTMLIfNeeded(DatosStep datosStep, DataFmwkTest dFTest) {
         try {
-            if (datosStep.getSaveHtmlPage()==WhenSave.Always && 
+            if (datosStep.getSaveHtmlPage()==SaveWhen.Always && 
             	datosStep.getTypePage() == 0/* HTML */) {
                 WebDriverArqUtils.capturaHTMLPage(dFTest, datosStep.getStepNumber());
             }
@@ -269,10 +263,43 @@ public class fmwkTest {
         }
     }
     
+    private static boolean isStoreImage(boolean browserGUI, DatosStep datosStep, DataFmwkTest dFTest) {
+        int forceGrabInAllSteps = 0;
+        Object grabImgObj = dFTest.ctx.getAttribute("grabImg");
+        if (grabImgObj!=null) {
+        	forceGrabInAllSteps = ((Integer)grabImgObj).intValue();
+        }
+        SaveWhen saveImageWhen = datosStep.getSaveImagePage();
+        boolean saveAlways = (saveImageWhen==SaveWhen.Always || forceGrabInAllSteps==1);
+        boolean isErrorAndWeWantHardcopy = (datosStep.getResultSteps()!=State.Ok && saveImageWhen==SaveWhen.IfProblem);
+        boolean isPageHardcopyPossible = (datosStep.getTypePage() == 0/*HTML*/ && browserGUI);
+        
+    	return (
+	    	(saveAlways || isErrorAndWeWantHardcopy) &&
+	    	 isPageHardcopyPossible
+        );
+    }
+    
+    private static boolean isStoreError(boolean browserGUI, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
+	    String currentURL = dFTest.driver.getCurrentUrl();
+	    URI uri = new URI(currentURL);
+    	SaveWhen saveErrorWhen = datosStep.getSaveErrorPage();
+        boolean saveAlways = saveErrorWhen==SaveWhen.Always;
+        boolean isErrorAndWeWantError = (datosStep.getResultSteps()!=State.Ok && saveErrorWhen==SaveWhen.IfProblem);
+        boolean isUrlMango = (((String)dFTest.ctx.getAttribute("appPath")).contains(uri.getHost()) || uri.getHost().contains("mango.com"));
+        boolean isGetErrorPossible = (datosStep.getTypePage() == 0/*HTML*/ && browserGUI );
+    	
+	    return (
+		    (saveAlways || isErrorAndWeWantError) &&
+		    isGetErrorPossible &&
+		    isUrlMango
+	    );
+    }
+
     private static void storeNetTrafficIfNeeded(DatosStep datosStep, ITestContext ctx) {
 	    try {
 	    	String methodWithFactory = datosStep.getNameMethodWithFactory();
-	        if (datosStep.getSaveNettrafic()==WhenSave.Always) {
+	        if (datosStep.getSaveNettrafic()==SaveWhen.Always) {
 	            String nameFileHar = fmwkTest.getPathFileEvidenciaStep(ctx, methodWithFactory, datosStep.getStepNumber(), TypeEvidencia.har);
 	        	NetTrafficMng netTraffic = new NetTrafficMng();
 	            netTraffic.storeHarInFile(nameFileHar);

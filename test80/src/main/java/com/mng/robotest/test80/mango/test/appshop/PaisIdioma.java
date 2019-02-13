@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.*;
@@ -101,14 +102,14 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
             this.recorreBanners = false;
         }
 
-        storeInThread(dCtxSh);
-        getAndStoreDataFmwk(bpath, this.dCtxSh.urlAcceso, this.index_fact, this.dCtxSh.channel, context, method);
+        ThreadData.storeInThread(dCtxSh);
+        ThreadData.getAndStoreDataFmwk(bpath, this.dCtxSh.urlAcceso, this.index_fact, this.dCtxSh.channel, context, method);
     }
 	
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Lineas", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getWebDriver();
+        WebDriver driver = ThreadData.getWebDriver();
         try {
             super.quitWebDriver(driver, context);
         }
@@ -121,8 +122,8 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
         groups={"Lineas", "Canal:all_App:shop", "Canal:all_App:outlet"}, 
         description="Acceso desde prehome y navegación por todas las líneas/sublíneas/carrusels del país + selección menú/s")
     public void PAR001_Lineas(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxShI = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxShI = ThreadData.getdCtxSh();
         DatosStep datosStep = null;
             
         datosStep = PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxShI, dFTest);

@@ -5,7 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -56,7 +56,7 @@ public class SecMenusUserStpV {
         DatosStep datosStep = new DatosStep       (
             "Seleccionar el menú de usuario \"Regístrate\"", 
             "Aparece al página inicial del registro");
-        datosStep.setSaveHtmlPage(WhenSave.Always);
+        datosStep.setSaveHtmlPage(SaveWhen.Always);
         try {
             SecMenusWrap.secMenusUser.clickRegistrate(channel, dFTest.driver);
     
