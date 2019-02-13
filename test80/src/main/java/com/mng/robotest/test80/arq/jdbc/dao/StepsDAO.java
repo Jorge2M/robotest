@@ -47,8 +47,9 @@ public class StepsDAO {
         String methodWithFactory = fmwkTest.getMethodWithFactory(method, ctx);
         datosStep.setStepNumber(stepNumber);
         
-        if (datosStep.getHoraFin()==null)
+        if (datosStep.getHoraFin()==null) {
             datosStep.setHoraFin(new Date(System.currentTimeMillis()));
+        }
     
         try (Connection conn = Connector.getConnection();
             PreparedStatement insert = conn.prepareStatement(SQLInsertStep)) {
@@ -65,8 +66,6 @@ public class StepsDAO {
             insert.setDate(11, datosStep.getHoraFin());
             insert.setFloat(12, datosStep.getHoraFin().getTime() - datosStep.getHoraInicio().getTime());
             insert.setInt(13, 0);
-            insert.setBoolean(14, datosStep.getGrabImage());
-            insert.setBoolean(15, datosStep.getGrabHTML());
             insert.setInt(16, datosStep.getTypePage());
             insert.executeUpdate();
         } catch (SQLException ex) {

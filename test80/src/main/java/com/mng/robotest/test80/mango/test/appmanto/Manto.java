@@ -12,6 +12,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -36,7 +37,7 @@ import com.mng.robotest.test80.mango.test.stpv.manto.SecFiltrosMantoStpV.TypeSea
 import com.mng.robotest.test80.mango.test.stpv.manto.pedido.PagePedidosMantoStpV;
 
 @SuppressWarnings("javadoc")
-public class Manto  extends GestorWebDriver {
+public class Manto {
 
 	DataMantoAccess dMantoAcc;
 	DataPedido dPedidoPrueba;
@@ -56,7 +57,7 @@ public class Manto  extends GestorWebDriver {
 		this.dMantoAcc.userManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramUsrmanto);
 		this.dMantoAcc.passManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramPasmanto);
 		this.dMantoAcc.appE = AppEcom.shop;
-		getAndStoreDataFmwk(bpath, urlBase, "", Channel.desktop, ctx, method);
+		ThreadData.getAndStoreDataFmwk(bpath, urlBase, "", Channel.desktop, ctx, method);
 	}
 
 	@SuppressWarnings("unused")

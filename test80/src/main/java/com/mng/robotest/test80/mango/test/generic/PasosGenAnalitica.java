@@ -12,6 +12,7 @@ import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -45,8 +46,8 @@ public class PasosGenAnalitica {
     
     public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DataPedido dataPedido, EnumSet<Constantes.AnalyticsVal> analyticSet, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
-        boolean netAnalysis = datosStep.getGrabNettrafic();
-        if (netAnalysis &&
+        WhenSave whenSaveNettraffic = datosStep.getSaveNettrafic();
+        if (whenSaveNettraffic == WhenSave.Always &&
             dFTest.driver.toString().toLowerCase().contains("firefox")) {
 
             //Instanciamos el gestor de los datos HAR

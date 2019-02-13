@@ -5,6 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorSaldosTPV;
 
 @SuppressWarnings("javadoc")
@@ -35,7 +36,7 @@ public class PageGestorSaldosTPVStpV {
 		DatosStep datosStep = new DatosStep       (
 			"Introducimos una TPV válida y damos click a \"Consultar Saldos\"", 
 			"Muestra la tabla de saldos con el ID de la TPV en ella");
-		datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(WhenSave.Never);
 		try {
 			PageGestorSaldosTPV.insertTPVAndClickConsultarSaldos(tpv, dFTest.driver);
 
@@ -67,8 +68,7 @@ public class PageGestorSaldosTPVStpV {
 		DatosStep datosStep = new DatosStep       (
 				"Introducimos una TPV no válida y damos click a \"Consultar Saldos\"", 
 				"Muestra el mensaje conforme la TPV no existe");
-		datosStep.setGrab_ErrorPageIfProblem(false);
-
+	    datosStep.setSaveErrorPage(WhenSave.Never);
 		try {
 			PageGestorSaldosTPV.insertTPVAndClickConsultarSaldos(tpv, dFTest.driver);
 

@@ -8,6 +8,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -102,7 +103,7 @@ public class PagePedidosMantoStpV {
 		DatosStep datosStep = new DatosStep (
 				"Buscamos pedidos con id registro",
 				"Debemos obtener el ID del pedido");
-		datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(WhenSave.Never);
 		try {
 			do {
 				posicionPedidoActual++;
@@ -155,7 +156,7 @@ public class PagePedidosMantoStpV {
 		DatosStep datosStep = new DatosStep(
 			"Buscamos pedidos con id registro para obtener información del cliente",
 			"Debemos obtener la información del cliente");
-		datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(WhenSave.Never);
 		try {
 
 			referencias = PageDetallePedido.getReferenciasArticulosDetallePedido(dFTest.driver);
@@ -199,7 +200,7 @@ public class PagePedidosMantoStpV {
 		DatosStep datosStep = new DatosStep(
 			"Buscamos pedidos con id registro para obtener información del cliente",
 			"Debemos obtener la información del cliente");
-		datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(WhenSave.Never);
 		try {
 			PageDetallePedido.clickLinkDetallesCliente(dFTest.driver);
 
@@ -249,7 +250,7 @@ public class PagePedidosMantoStpV {
 		DatosStep datosStep = new DatosStep(
 			"Un pedido con tienda física en la lista de pedidos",
 			"Debemos obtener una tienda física válida");
-		datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(WhenSave.Never);
 		try {
 			dPedidoPrueba.setDataDeliveryPoint(dEnvioPrueba);
 			dPedidoPrueba.getDataDeliveryPoint().setCodigo(PagePedidos.getTiendaFisicaFromListaPedidos(dFTest.driver));

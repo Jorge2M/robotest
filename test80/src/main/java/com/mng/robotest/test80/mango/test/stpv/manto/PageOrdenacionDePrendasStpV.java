@@ -11,6 +11,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageOrdenacionDePrendas.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion;
@@ -61,7 +62,7 @@ public class PageOrdenacionDePrendasStpV {
 		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		//Validations
-		datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(WhenSave.Never);
 		validatePreProductionElements(datosStep, dFTest.driver);
 	}
 
@@ -97,7 +98,7 @@ public class PageOrdenacionDePrendasStpV {
 		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		//Validations
-		datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(WhenSave.Never);
 		validateSectionShe(datosStep, 13, "1) Está presente el selector de secciones dentro de <b>She</b>", dFTest.driver);
 	}
 
@@ -118,7 +119,7 @@ public class PageOrdenacionDePrendasStpV {
 		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		//Validaciones
-		datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(WhenSave.Never);
 		validateSectionPrenda(datosStep, dFTest.driver);
 	}
 
@@ -147,7 +148,7 @@ public class PageOrdenacionDePrendasStpV {
 
 		//Validations
 		int maxSecondsWait = 10;
-		datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(WhenSave.Never);
 		validateTipoPrenda(datosStep, dFTest.driver, maxSecondsWait);
 	}
 
@@ -175,7 +176,7 @@ public class PageOrdenacionDePrendasStpV {
 		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		//Validations
-		datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(WhenSave.Never);
 		validateBajarPrenda(datosStep, dFTest.driver, 15);
 	}
 
@@ -201,7 +202,7 @@ public class PageOrdenacionDePrendasStpV {
 		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		//Validations
-		datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(WhenSave.Never);
 		validateAplicarOrden(datosStep, dFTest.driver);
 	}
 
@@ -234,7 +235,7 @@ public class PageOrdenacionDePrendasStpV {
 		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		//Validations
-		datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(WhenSave.Never);
 		validateBajarPrenda(datosStep, dFTest.driver, 10);
 	}
 

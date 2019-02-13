@@ -5,6 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestionarClientes;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestionarClientes.TypeThirdButton;
 
@@ -15,9 +16,9 @@ public class PageGestionarClientesStpV {
 
 	public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
 		String descripValidac = 
-				"1) Estamos en la página \"" + PageGestionarClientes.titulo + " \"<br>" + 
-						"2) Aparece el apartado de \"Buscar clientes\"<br>" +
-						"3) Aparece el apartado de \"Tratar clientes\"";
+			"1) Estamos en la página \"" + PageGestionarClientes.titulo + " \"<br>" + 
+			"2) Aparece el apartado de \"Buscar clientes\"<br>" +
+			"3) Aparece el apartado de \"Tratar clientes\"";
 		datosStep.setNOKstateByDefault();
 		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
 		try {
@@ -38,10 +39,10 @@ public class PageGestionarClientesStpV {
 
 	public static void inputDniAndClickBuscar(String dni, DataFmwkTest dFTest) throws Exception {
 		DatosStep datosStep = new DatosStep       (
-				"Introducimos el DNI <b>" + dni + "</b> y pulsamos el botón \"Buscar\"", 
-				"Aparece una lista de clientes válida");
-		datosStep.setGrab_ErrorPageIfProblem(false);
-		datosStep.setGrabImage(true);
+			"Introducimos el DNI <b>" + dni + "</b> y pulsamos el botón \"Buscar\"", 
+			"Aparece una lista de clientes válida");
+	    datosStep.setSaveErrorPage(WhenSave.Never);
+        datosStep.setSaveImagePage(WhenSave.Always);
 		int waitSeconds = 20;
 		try {
 			PageGestionarClientes.inputDniAndClickBuscarButton(dni, waitSeconds, dFTest.driver);
@@ -84,8 +85,7 @@ public class PageGestionarClientesStpV {
 		DatosStep datosStep = new DatosStep       (
 				"Tras haber introducido un DNI y haber dado al botón \"Buscar\", damos click al botón \"" + typeButton + "\"", 
 				"Aparece el mensaje correspondiente y el botón Alta");
-		datosStep.setGrab_ErrorPageIfProblem(false);
-
+	    datosStep.setSaveErrorPage(WhenSave.Never);
 		int waitSeconds = 3;
 		try {
 			PageGestionarClientes.clickThirdButtonAndWaitSeconds(typeButton, waitSeconds, dFTest.driver);
@@ -118,7 +118,7 @@ public class PageGestionarClientesStpV {
 		DatosStep datosStep = new DatosStep       (
 			"Tras haber introducido un DNI y haber dado al botón \"Buscar\", damos click al botón \"Detalles\"", 
 			"Muestra los detalles del cliente correctamente");
-		datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(WhenSave.Never);
 		String idCliente;
 		int waitSeconds = 3;
 		try {

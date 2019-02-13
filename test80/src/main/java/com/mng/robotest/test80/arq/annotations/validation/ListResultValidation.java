@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 
 @SuppressWarnings("javadoc")
 public class ListResultValidation {
@@ -118,6 +118,6 @@ public class ListResultValidation {
 	}
     
     public void storeGroupValidations(String descripcionValidations) {
-    	fmwkTest.grabStepValidation(datosStep, descripcionValidations, GestorWebDriver.getdFTest());
+    	fmwkTest.grabStepValidation(datosStep, descripcionValidations, ThreadData.getdFTest());
     }
 }

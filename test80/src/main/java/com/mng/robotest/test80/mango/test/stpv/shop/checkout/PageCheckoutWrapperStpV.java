@@ -11,6 +11,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -438,7 +439,7 @@ public class PageCheckoutWrapperStpV {
         DatosStep datosStep = new DatosStep (
             "Seleccionamos el botón \"Confirmar Pago\"", 
             "Aparece una pasarela de pago");
-        datosStep.setGrabImage(true);
+        datosStep.setSaveImagePage(WhenSave.Always);
         try {
             PageCheckoutWrapper.page1DktopCheckout.clickConfirmarPago(dFTest.driver);
 
@@ -458,7 +459,7 @@ public class PageCheckoutWrapperStpV {
         DatosStep datosStep = new DatosStep       (
             "Seleccionamos el botón \"Ver resumen\" (lo esperamos " + maxSecondsToWait + " segundos)", 
             "Aparece la página-3 del checkout");
-        datosStep.setGrabImage(true);
+        datosStep.setSaveImagePage(WhenSave.Always);
         try {
             PageCheckoutWrapper.page2MobilCheckout.waitAndClickVerResumen(maxSecondsToWait, dFTest.driver);
 
@@ -494,7 +495,7 @@ public class PageCheckoutWrapperStpV {
         DatosStep datosStep = new DatosStep (
             "Seleccionamos el botón \"Confirmar pago\" (esperamos hasta " + maxSecondsToWait + " a que desaparezca la capa \"Espera unos segundos...\")", 
             "Aparece una pasarela de pago");
-        datosStep.setGrabImage(true);
+        datosStep.setSaveImagePage(WhenSave.Always);
         try {
             PageCheckoutWrapper.page3MobilCheckout.clickConfirmaPagoAndWait(maxSecondsToWait, dFTest.driver);
                                     

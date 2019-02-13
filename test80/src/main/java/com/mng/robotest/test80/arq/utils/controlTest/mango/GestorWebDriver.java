@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.NetTrafficMng;
 import com.mng.robotest.test80.arq.utils.controlTest.GestorWebDrv;
 import com.mng.robotest.test80.arq.utils.controlTest.StoredWebDrv;
@@ -14,7 +13,6 @@ import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
 import com.mng.robotest.test80.arq.utils.selenium.BStackDataMovil;
 import com.mng.robotest.test80.arq.utils.selenium.CreateWebDriver;
-import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 
 import java.lang.reflect.Method;
@@ -25,40 +23,7 @@ import java.util.regex.Pattern;
 public class GestorWebDriver extends fmwkTest {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     static Object startupSync = new Object();
-    protected ThreadLocal<DataCtxShop> dCtxShInThread = new ThreadLocal<>();
-    static ThreadLocal<DataFmwkTest> dFTestInThread = new ThreadLocal<>();
 
-    public DataCtxShop getdCtxSh() {
-        return this.dCtxShInThread.get();
-    }    
-    
-    public static DataFmwkTest getdFTest() {
-        return dFTestInThread.get();
-    }   
-    
-    public WebDriver getWebDriver() {
-    	return (getdFTest().driver);
-    }
-   
-    public void storeInThread(DataCtxShop dCtxShop, DataFmwkTest dFTest) {
-    	storeInThread(dCtxShop);
-    	storeInThread(dFTest);
-    }
-    
-    public void storeInThread(DataCtxShop dCtxShop) {
-    	this.dCtxShInThread.set((DataCtxShop)dCtxShop.clone());
-    }
-    
-    public void storeInThread(DataFmwkTest dFTest) {
-    	dFTestInThread.set(dFTest);
-    }
-    
-    public void getAndStoreDataFmwk(String bpath, String appPath, String datosFactoria, Channel channel, ITestContext context, Method method) 
-    throws Exception {
-		WebDriver driver = getWebDriver(bpath, appPath, datosFactoria, channel, context, method);
-		DataFmwkTest dFTest = new DataFmwkTest(driver, TypeDriver.valueOf(bpath), method, context);
-		storeInThread(dFTest);
-    }
     
     /**
      * Creamos el driver del tipo especificado y lo almacenamos en una estructura de tipo ThreadLocal que nos permite obtener datos almacenados a nivel de Thread

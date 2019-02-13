@@ -9,6 +9,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -172,8 +173,8 @@ public class SecBolsaStpV {
         DatosStep datosStep = new DatosStep (
             "Buscar y dar de alta los siguientes productos en la bolsa:<br>" + listaArtStr, 
             "Los productos se dan de alta en la bolsa correctamente");
-        datosStep.setGrabHTML(true);
-        datosStep.setGrabNettrafic(dFTest.ctx);
+        datosStep.setSaveHtmlPage(WhenSave.Always);
+        datosStep.setSaveNettrafic(WhenSave.Always, dFTest.ctx);
         try {
         	//Damos de alta la lista de productos en la bolsa
             for (int i=0; i<listParaAlta.size(); i++) {
@@ -359,7 +360,7 @@ public class SecBolsaStpV {
         DatosStep datosStep = new DatosStep     (
             "Se selecciona el botón \"COMPRAR\" de la bolsa", 
             "Se muestra la página de identificación");
-        datosStep.setGrabNettrafic(dFTest.ctx);
+        datosStep.setSaveNettrafic(WhenSave.Always, dFTest.ctx);
         try {
         	//SecBolsa.setBolsaToStateIfNotYet(StateBolsa.Open, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
             SecBolsa.clickBotonComprar(dFTest.driver, dCtxSh.channel, 10/*secondsWait*/);

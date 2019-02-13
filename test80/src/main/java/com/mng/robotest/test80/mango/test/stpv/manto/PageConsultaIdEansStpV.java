@@ -6,6 +6,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageConsultaIdEans;
 
@@ -42,7 +43,7 @@ public class PageConsultaIdEansStpV {
 	    DatosStep datosStep = new DatosStep       (
 	        "Introducimos datos de pedido válido y consultamos los datos de contacto", 
 	        "Deben mostrar la información de contacto");
-	    datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(WhenSave.Never);
 	    try {
 	        PageConsultaIdEans.inputPedidosAndClickBuscarDatos(pedidosPrueba, dFTest.driver);
 	            
@@ -80,7 +81,7 @@ public class PageConsultaIdEansStpV {
 		DatosStep datosStep = new DatosStep       (
 	            "Introducimos datos de pedido válido y consultamos los Identificadores que tiene", 
 	            "Debe mostrar los identificadores del pedido");
-        datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(WhenSave.Never);
         try {
         	PageConsultaIdEans.inputPedidosAndClickBuscarIdentificadores(pedidosPrueba, dFTest.driver);
             
@@ -115,7 +116,7 @@ public class PageConsultaIdEansStpV {
 		DatosStep datosStep = new DatosStep       (
 			"Introducimos datos de pedido válido y consultamos el trackings", 
 	        "Debe mostrar el tracking");
-        datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(WhenSave.Never);
         try {
         	PageConsultaIdEans.inputPedidosAndClickBuscarTrackings(pedidosPrueba, dFTest.driver);
             
@@ -142,7 +143,7 @@ public class PageConsultaIdEansStpV {
 		DatosStep datosStep = new DatosStep       (
 			"Introducimos artículos válidos y consultamos el EAN", 
 	        "Debe mostrar el EAN");
-        datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(WhenSave.Never);
         try {
         	PageConsultaIdEans.inputArticulosAndClickBuscarDatosEan(articulosPrueba, dFTest.driver);
             
@@ -172,7 +173,4 @@ public class PageConsultaIdEansStpV {
         } 
         finally { listVals.checkAndStoreValidations(descripValidac); }
 	}
-
-	
-	
 }

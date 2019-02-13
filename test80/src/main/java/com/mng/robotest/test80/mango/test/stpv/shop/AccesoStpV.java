@@ -12,6 +12,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.WhenSave;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -55,7 +56,7 @@ public class AccesoStpV {
         DatosStep datosStep = new DatosStep (
             "Acceder a Mango (" + dCtxSh.pais.getNombre_pais() + "/" + dCtxSh.idioma.getCodigo().getLiteral() + ")<br>" + registro, 
             "Se accede correctamente");
-        datosStep.setGrabNettrafic(dFTest.ctx);
+        datosStep.setSaveNettrafic(WhenSave.Always, dFTest.ctx);
         try {
             AccesoNavigations.accesoHomeAppWeb(dCtxSh, dFTest);
             
@@ -213,8 +214,8 @@ public class AccesoStpV {
             datosStep = new DatosStep (
                 "Seleccionar \"Iniciar Sesión\" e identificarse con " + dCtxSh.userConnected + " / " + dCtxSh.passwordUser, 
                 "La identificación es correcta" /* Resultado esperado */);
-            datosStep.setGrabHTML(true);
-            datosStep.setGrabNettrafic(dFTest.ctx);
+            datosStep.setSaveHtmlPage(WhenSave.Always);
+            datosStep.setSaveNettrafic(WhenSave.Always, dFTest.ctx);
             try {
                 PageIdentificacion.iniciarSesion(dCtxSh, dFTest.driver);
                 
@@ -476,7 +477,7 @@ public class AccesoStpV {
         DatosStep datosStep = new DatosStep       (
             "Invocamos a <b>" + nodo.getStatusJSON().pathStatus + "</b> para obtener los datos JSON", 
             "El nodo se encuentra en un estado correcto");
-        datosStep.setGrabHTML(true);
+        datosStep.setSaveHtmlPage(WhenSave.Always);
         try {
             //Cargamos al URL de status y almacenamos los datos JSON obtenidos
             nodo.setDataStateNodeFromBrowser(dFTest.driver);

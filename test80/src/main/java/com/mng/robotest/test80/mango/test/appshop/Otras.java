@@ -9,6 +9,7 @@ import java.util.List;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
@@ -229,18 +230,18 @@ public class Otras extends GestorWebDriver {
         dCtxSh.pais = this.japon;
         dCtxSh.idioma = this.japones;
         PagePrehomeStpV.seleccionPaisIdioma(urlBaseTest, dCtxSh, dFTest);
-        DatosStep datosStep = entradaShopGivenPaisSeleccionado(this.japon, this.japones, dCtxSh.channel, dFTest);
+        entradaShopGivenPaisSeleccionado(this.japon, this.japones, dCtxSh.channel, dFTest);
         //Ok...validaPageIniJapon1(datosStep, dFTest.driver);
-        validaPageIniJapon1_5(datosStep, 3, "nos fumamos un porro", dFTest.driver);
+        //validaPageIniJapon1_5(datosStep, 3, "nos fumamos un porro", dFTest.driver);
         //Ok... validaPageIniJapon1_6(datosStep, 3, "nos fumamos un porro", dFTest.driver);
-        validaPageIniJapon3(datosStep, dFTest.driver);
-        validaPageIniJapon4(datosStep, dFTest.driver);
+        //validaPageIniJapon3(datosStep, dFTest.driver);
+        //validaPageIniJapon4(datosStep, dFTest.driver);
     }	
     
-    /**
-     * Given país/provincia/idioma seleccionados, se realiza el paso para entrar en la shop
-     */
-    public static DatosStep entradaShopGivenPaisSeleccionado(Pais pais, IdiomaPais idioma, Channel channel, DataFmwkTest dFTest) 
+    @Step (
+    	description="Si es preciso introducimos la provincia/idioma y finalmente seleccionamos el botón \"Entrar\"",
+        expected="Se accede a la Shop correctamente")
+    public static void entradaShopGivenPaisSeleccionado(Pais pais, IdiomaPais idioma, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
         //Step. Selección de país/idioma
         DatosStep datosStep = new DatosStep(
@@ -253,7 +254,6 @@ public class Otras extends GestorWebDriver {
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
         finally {datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));}
-        return datosStep;
     }
     
     @Validation (
