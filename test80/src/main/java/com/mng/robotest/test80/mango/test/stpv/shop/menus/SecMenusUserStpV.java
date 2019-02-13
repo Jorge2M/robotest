@@ -45,7 +45,7 @@ public class SecMenusUserStpV {
         finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }           
             
         //Validaciones
-        PageFavoritosStpV.validaIsPageOK(dataFavoritos, datosStep, dFTest);
+        PageFavoritosStpV.validaIsPageOK(dataFavoritos, dFTest);
         
         return datosStep;
     }

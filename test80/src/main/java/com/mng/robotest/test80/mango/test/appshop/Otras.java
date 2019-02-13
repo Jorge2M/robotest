@@ -221,9 +221,9 @@ public class Otras extends GestorWebDriver {
     /**
     /* Acceso a la prehome, selección de Japón/Japonés y validaciones de que aparece la portada de la shop específica de Japón
      */
-//    @Test (
-//        groups={"Otras", "Canal:desktop_App:shop"}, 
-//        description="Pruebas aspectos")
+    @Test (
+        groups={"Otras", "Canal:desktop_App:shop"}, 
+        description="Pruebas aspectos")
     public void OTR006_PruebasAspectos(ITestContext context, Method method) throws Exception {
     	DataFmwkTest dFTest = ThreadData.getdFTest();
         DataCtxShop dCtxSh = ThreadData.getdCtxSh();
@@ -243,8 +243,8 @@ public class Otras extends GestorWebDriver {
     }	
     
     @Step (
-    	description="Si es preciso introducimos la provincia/idioma y finalmente seleccionamos el botón <b>#{litButton}</b>",
-        expected="Se accede a la Shop correctamente después de seleccionar el botón #{litButton}",
+    	description="Pais con codigo <b>#{pais.getCodigo_pais()}</b> Si es preciso introducimos la provincia/idioma y finalmente seleccionamos el botón <b>#{litButton}</b>",
+        expected="Se accede a la Shop correctamente después de seleccionar el botón #{pais.getCodigo_pais()}",
         saveImagePage=SaveWhen.Always,
         saveErrorPage=SaveWhen.Never)
     public void step1(String litButton, Pais pais, IdiomaPais idioma, Channel channel, WebDriver driver) 

@@ -195,7 +195,7 @@ public class PageGaleriaStpV {
         boolean isVisibleAvisame = ModalArticleNotAvailableStpV.validateState(StateModal.notvisible, datosStep, dFTest);
         if (!isVisibleAvisame) {
             dataBag.addArticulo(articulo);
-            SecBolsaStpV.validaAltaArtBolsa(datosStep, dataBag, dCtxSh.channel, dCtxSh.appE, dFTest);
+            SecBolsaStpV.validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, dFTest);
         }
         
         return !isVisibleAvisame;

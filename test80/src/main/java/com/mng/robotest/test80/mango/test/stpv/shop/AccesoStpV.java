@@ -197,8 +197,9 @@ public class AccesoStpV {
                         
                 //Step Borrar datos bolsa y favorites
                 datosStep = SecBolsaStpV.clear(dCtxSh, dFTest);
-                if (dCtxSh.appE==AppEcom.shop)
-                    datosStep = PageFavoritosStpV.clearAll(dCtxSh, dFTest);
+                if (dCtxSh.appE==AppEcom.shop) {
+                    PageFavoritosStpV.clearAll(dCtxSh, dFTest);
+                }
             }
         }
         

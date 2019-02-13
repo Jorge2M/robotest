@@ -6,7 +6,6 @@ import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.ThreadData;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -134,8 +133,8 @@ public class Favoritos extends GestorWebDriver {
         ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);
         PageFavoritosStpV.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dFTest);
         if (dCtxSh.channel==Channel.movil_web) {
-            DatosStep datosStep = SecBolsaStpV.clickAspaForCloseMobil(dFTest);
-            PageFavoritosStpV.validaIsPageOK(dataFavoritos, datosStep, dFTest);
+            SecBolsaStpV.clickAspaForCloseMobil(dFTest);
+            PageFavoritosStpV.validaIsPageOK(dataFavoritos, dFTest);
         }
         
         PageFavoritosStpV.clear(artToPlay, dataFavoritos, dFTest);
@@ -189,9 +188,9 @@ public class Favoritos extends GestorWebDriver {
         
         ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);
         PageFavoritosStpV.clickArticuloImg(artToPlay, dFTest);
-        DatosStep datosStep = PageFavoritosStpV.modalFichaFavoritos.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dCtxSh.appE, dFTest);       
+        PageFavoritosStpV.modalFichaFavoritos.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dCtxSh.appE, dFTest);       
         if (dCtxSh.channel==Channel.movil_web) {
-            PageFavoritosStpV.validaIsPageOK(dataFavoritos, datosStep, dFTest);
+            PageFavoritosStpV.validaIsPageOK(dataFavoritos, dFTest);
         }
         else {
             PageFavoritosStpV.modalFichaFavoritos.closeFicha(artToPlay, dFTest);

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
@@ -146,7 +147,7 @@ public class SecBolsaStpV {
             datosStep = altaBolsaArticulos(listArticlesForAdd, dataBag, dCtxSh, dFTest);
         
             //Validación
-            validaAltaArtBolsa(datosStep, dataBag, dCtxSh.channel, dCtxSh.appE, dFTest);
+            validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, dFTest);
         }
         
         //Almacenamos el importe SubTotal y el de Transporte
@@ -204,10 +205,11 @@ public class SecBolsaStpV {
      * Validaciones posteriores al alta de una lista de artículos en la bolsa
      * @param listArtEnBolsa lista total de artículos dados de alta a la bolsa
      */
-    public static void validaAltaArtBolsa(DatosStep datosStep, DataBag dataBag, Channel channel, AppEcom app, DataFmwkTest dFTest) 
+    public static void validaAltaArtBolsa(DataBag dataBag, Channel channel, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
         //Validaciones
-        validaNumArtEnBolsa(dataBag, channel, app, datosStep, dFTest);
+    	DatosStep datosStep = ThreadData.getDatosStep();
+        validaNumArtEnBolsa(dataBag, channel, app, dFTest);
         if (channel==Channel.desktop) {
             int maxSecondsToWait = 1;
             String descripValidac =
@@ -239,8 +241,9 @@ public class SecBolsaStpV {
         PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, analyticSet, datosStep, dFTest);
     }
     
-    public static void validaNumArtEnBolsa(DataBag dataBag, Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
+    public static void validaNumArtEnBolsa(DataBag dataBag, Channel channel, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
+    	DatosStep datosStep = ThreadData.getDatosStep();
         int maxSecondsToWait = 2;
         String descripValidac =
             "1) Existen " + dataBag.getListArticulos().size() + 

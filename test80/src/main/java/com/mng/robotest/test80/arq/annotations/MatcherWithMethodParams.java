@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.arq.annotations;
 
+import java.lang.reflect.Method;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,27 +20,66 @@ public class MatcherWithMethodParams {
 	}
 	
     public String match(String litWithTags) {
-    	String litToReturn = "";
+    	String litToReturn = litWithTags;
     	Pattern p = Pattern.compile("\\#\\{([^}]*)\\}");
     	Matcher m = p.matcher(litWithTags);
     	while (m.find()) {
     	  String group = m.group(1);
     	  String valueParameter = getStringValueParameterFromMethod(group);
-    	  litToReturn = litWithTags.replace("#{" + group + "}", valueParameter);
+    	  litToReturn = litToReturn.replace("#{" + group + "}", valueParameter);
     	}
     	
     	return (litToReturn);
     }
     
     private String getStringValueParameterFromMethod(String paramNameInDescrValidation) {
-    	Object[] signatureArgs = joinPoint.getArgs();
-    	String[] parameterNames = ((MethodSignature) joinPoint.getSignature()).getParameterNames();
-    	for (int i=0; i<parameterNames.length; i++) {
-    		if (parameterNames[i].compareTo(paramNameInDescrValidation)==0) {
-    			return (signatureArgs[i].toString());
-    		}
+    	try {
+    		TagData tagData = new TagData(paramNameInDescrValidation);
+	    	Object[] signatureArgs = joinPoint.getArgs();
+	    	String[] parameterNames = ((MethodSignature) joinPoint.getSignature()).getParameterNames();
+	    	for (int i=0; i<parameterNames.length; i++) {
+	    		if (parameterNames[i].compareTo(tagData.nameParameter)==0) {
+	    			return (getStringFromParameter(tagData, signatureArgs[i]));
+	    		}
+	    	}
+    	}
+    	catch (Exception e) {
+    		return "Unknown";
     	}
     	
     	return null;
+    }
+    
+    private String getStringFromParameter(TagData tagData, Object parameter) throws Exception {
+		if ("".compareTo(tagData.methodWithoutParams)!=0) {
+			for (Method methodFromParam : parameter.getClass().getMethods()) {
+				if (tagData.methodWithoutParams.compareTo(methodFromParam.getName())==0) {
+					return ((String)methodFromParam.invoke(parameter));
+				}
+			}
+		}
+	
+		return (parameter.toString());
+    }
+    
+    /**
+     * Obtiene los datos de un String del tipo "parametroX.methodY()";
+     *
+     */
+    class TagData {
+        public String nameParameter = "";
+        public String methodWithoutParams = "";
+        
+        private TagData(String varAndMethod) {
+        	Pattern p = Pattern.compile("(.*)\\.(.*)\\(\\)");
+        	Matcher m = p.matcher(varAndMethod);
+        	if (m.find()) {
+          	  nameParameter = m.group(1);
+          	  methodWithoutParams = m.group(2).replace(")","").replace("(","");
+          	}
+        	else {
+        		nameParameter = varAndMethod;
+        	}
+        }
     }
 }

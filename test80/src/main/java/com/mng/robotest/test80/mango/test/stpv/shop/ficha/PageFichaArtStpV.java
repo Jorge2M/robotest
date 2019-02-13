@@ -414,7 +414,7 @@ public class PageFichaArtStpV {
         DatosStep datosStep = selectAnadirALaBolsaStep();
         DataBag dataBag = new DataBag();
         dataBag.addArticulo(articulo);
-        SecBolsaStpV.validaAltaArtBolsa(datosStep, dataBag, dCtxSh.channel, dCtxSh.appE, this.dFTest);
+        SecBolsaStpV.validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, this.dFTest);
         return datosStep;
     }    
 
