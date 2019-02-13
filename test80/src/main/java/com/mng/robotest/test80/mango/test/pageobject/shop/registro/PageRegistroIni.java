@@ -47,6 +47,8 @@ public class PageRegistroIni extends WebdrvWrapp {
     private static String XPathCheckBoxPubli = "//div[@id='STEP1_cfPubli']";
     private static String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
     private static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
+    private static String XPathTextRGPDloyalty = "//p[@class='gdpr-text-loyalty gdpr-profiling']";
+    private static String XPathLegalRGPDloyalty = "//p[@class='gdpr-text-loyalty gdpr-data-protection']";
     
     private static String msgNameInvalid = "nombre. Este campo solo acepta letras";
     private static String msgApellidosInvalid = "apellidos. Este campo solo acepta letras";
@@ -220,12 +222,22 @@ public class PageRegistroIni extends WebdrvWrapp {
     }
 
 	public static boolean isTextoRGPDVisible(WebDriver driver) {
+		//TODO dejar sólo la versión de Loyalty cuando esta operativa suba a producción
 		WebElement textoElem = getElementWithSizeNot0(driver, By.xpath(XPathTextRGPD));
+		if (textoElem==null) {
+			textoElem = getElementWithSizeNot0(driver, By.xpath(XPathTextRGPDloyalty));
+		}
+		
 		return (textoElem!=null);
 	}
 
 	public static boolean isTextoLegalRGPDVisible(WebDriver driver) {
+		//TODO dejar sólo la versión de Loyalty cuando esta operativa suba a producción
 		WebElement textoElem = getElementWithSizeNot0(driver, By.xpath(XPathLegalRGPD));
+		if (textoElem==null) {
+			textoElem = getElementWithSizeNot0(driver, By.xpath(XPathLegalRGPDloyalty));
+		}
+		
 		return (textoElem!=null);
 	}
 

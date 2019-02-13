@@ -136,6 +136,12 @@ public class Page1EnvioCheckoutMobil extends WebdrvWrapp {
 
 	public static void clickAceptarPromo(WebDriver driver) throws Exception {
 		clickAndWaitLoad(driver, By.xpath(XPathButtonAplicarPromo));
+		
+		// Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no
+		// funciona así que ejecutamos un 2o
+		if (WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(XPathButtonAplicarPromo), 2)) {
+			clickAndWaitLoad(driver, By.xpath(XPathButtonAplicarPromo), TypeOfClick.javascript);
+		}
 	}
 	
     public static void clickEliminarValeIfExists(WebDriver driver) throws Exception {

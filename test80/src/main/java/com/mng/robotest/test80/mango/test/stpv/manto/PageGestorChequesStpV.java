@@ -1,5 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
@@ -14,20 +17,15 @@ import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques.Tab
 public class PageGestorChequesStpV {
 
 	public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
-		String descripValidac = 
-			"1) Estamos en la página \"" + PageGestorCheques.titulo + " \"";
-		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if (!PageGestorCheques.isPage(dFTest.driver)) {
-				listVals.add(1, State.Defect);
-			}
+		validatePage(PageGestorCheques.titulo, datosStep, dFTest.driver);
+		validateButtons(datosStep, dFTest.driver);
+	}
 
-			datosStep.setListResultValidations(listVals);
-		} 
-		finally { listVals.checkAndStoreValidations(descripValidac); }
-
-		validateButtons(datosStep, dFTest);
+	@Validation(
+			description="1) Estamos en la página \"#{titulo} \"",
+			level=State.Defect)
+	public static boolean validatePage(String titulo, DatosStep datosStep, WebDriver driver) {
+		return (PageGestorCheques.isPage(driver));
 	}
 
 	public static void inputMailAndClickCorreoCliente(String mail, DataFmwkTest dFTest) throws Exception {
@@ -44,24 +42,21 @@ public class PageGestorChequesStpV {
 		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
 		int numPedidosEsther = 100;
-		String descripValidac = 
-			"1) Aparecen más de \"" + numPedidosEsther + "\" pedidos<br>" +
-			"2) La columna correo de la primera línea es \""+ mail +"\"";
-		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if (!PageGestorCheques.comprobarNumeroPedidos(numPedidosEsther, dFTest.driver)) {
-				listVals.add(1, State.Defect);
-			}
-			if (!PageGestorCheques.isMailCorrecto(mail, dFTest.driver)) {
-				listVals.add(2, State.Defect);
-			}
-
-			datosStep.setListResultValidations(listVals);
-		} 
-		finally { listVals.checkAndStoreValidations(descripValidac); }
+		validateInitData(numPedidosEsther, mail, datosStep, dFTest.driver);
 	}
-	
+
+	@Validation
+	public static ListResultValidation validateInitData(int numPedidos, String mail, DatosStep datosStep, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+		validations.add(
+				"Aparecen más de \"" + numPedidos + "\" pedidos<br>",
+				PageGestorCheques.comprobarNumeroPedidos(numPedidos, driver), State.Defect);
+		validations.add(
+				"La columna correo de la primera línea es \""+ mail +"\"",
+				PageGestorCheques.isMailCorrecto(mail, driver), State.Defect);
+		return validations;
+	}
+
 	public static void clickPedido(int numFila, String cheque, String mail, DataFmwkTest dFTest) throws Exception {
 		DatosStep datosStep = new DatosStep       (
 			"Damos click al pedido de la " + numFila + "a fila", 
@@ -76,26 +71,7 @@ public class PageGestorChequesStpV {
 		}
 		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
-		String descripValidac = 
-			"1) Aparece la página de \"" + PageGestorCheques.tituloDetalles + "\"<br>" +
-			"2) Como email del apartado \"Cheque número\" aparece \"" + mail + "\"<br>" +
-			"3) Como id del pedido aparece \"" + pedido  + "\"";
-		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if (!PageGestorCheques.isPageDetalles(dFTest.driver)) {
-				listVals.add(1, State.Defect);
-			}
-			if (!PageGestorCheques.comprobarMailDetallesCheque(mail, dFTest.driver)) {
-				listVals.add(2, State.Defect);       
-			}
-			if (!PageGestorCheques.comprobarPedidoDetallesCheque(pedido, dFTest.driver)) {
-				listVals.add(3, State.Defect); 
-			}
-
-			datosStep.setListResultValidations(listVals);
-		} 
-		finally { listVals.checkAndStoreValidations(descripValidac); }
+		validateDetailsCheques(pedido, mail, datosStep, dFTest.driver);
 
 		validateDataFromCheque (datosStep, dFTest);
 
@@ -104,6 +80,20 @@ public class PageGestorChequesStpV {
 		inputCheque(cheque, dFTest);
 
 		chequeDetails(dFTest);
+	}
+
+	@Validation
+	public static ListResultValidation validateDetailsCheques(String pedido, String mail, DatosStep datosStep, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+		validations.add(
+				"Aparece la página de" + PageGestorCheques.tituloDetalles + "<br>",
+				PageGestorCheques.isPageDetalles(driver), State.Defect);
+		validations.add(
+				"Como email del apartado \"Cheque número\" aparece" + mail + "<br>",
+				PageGestorCheques.comprobarMailDetallesCheque(mail, driver), State.Defect);
+		validations.add("Como id del pedido aparece\"" + pedido  + "\"",
+				PageGestorCheques.comprobarPedidoDetallesCheque(pedido, driver), State.Defect);
+		return validations;
 	}
 
 	public static void volverCheques (DataFmwkTest dFTest) throws Exception {
@@ -118,176 +108,124 @@ public class PageGestorChequesStpV {
 		}
 		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
-		validateButtons(datosStep, dFTest);
+		validateButtons(datosStep, dFTest.driver);
 	}
 
-	public static void validateButtons (DatosStep datosStep, DataFmwkTest dFTest) {
-		String descripValidac =
-			"1) Existe el botón de <b>Id del pedido</b><br>"+
-			"2) Existe el botón de <b>Numero de cheque</b><br>"+
-			"3) Existe el botón de <b>Id de compra</b><br>"+
-			"4) Existe el botón de <b>Correo del receptor</b><br>"+
-			"5) Existe el botón de <b>Correo del comprador</b>";
-		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if(!PageGestorCheques.isElementInStateUntil(ButtonsCheque.idPedido, StateElem.Clickable, 3, dFTest.driver))
-				listVals.add(1, State.Defect);
+	@Validation
+	public static ListResultValidation validateButtons(DatosStep datosStep, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+		int maxSecondsWait = 3;
+		validations.add(
+				"Existe el botón de <b>Id del pedido</b><br>",
+				PageGestorCheques.isElementInStateUntil(ButtonsCheque.idPedido, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"Existe el botón de <b>Numero de cheque</b><br>",
+				PageGestorCheques.isElementInStateUntil(ButtonsCheque.numCheque, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"Existe el botón de <b>Id de compra</b><br>",
+				PageGestorCheques.isElementInStateUntil(ButtonsCheque.idCompra, StateElem.Clickable, 3, driver), State.Defect);
+		validations.add(
+				"Existe el botón de <b>Correo del receptor</b><br>",
+				PageGestorCheques.isElementInStateUntil(ButtonsCheque.correoReceptor, StateElem.Clickable, 3, driver), State.Defect);
+		validations.add(
+				"Existe el botón de <b>Correo del comprador</b>",
+				PageGestorCheques.isElementInStateUntil(ButtonsCheque.correoComprador, StateElem.Clickable, 3, driver), State.Defect);
+		return validations;
+	}
 
-			if(!PageGestorCheques.isElementInStateUntil(ButtonsCheque.numCheque, StateElem.Clickable, 3, dFTest.driver))
-				listVals.add(2, State.Defect);
+	@Validation
+	public static ListResultValidation validateSecondDataCheque(DatosStep datosStep, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+		int maxSecondsWait = 3;
+		validations.add(
+				"En la tabla activo existe un apartado para <b>ACTIVO</b><br>",
+				PageGestorCheques.isElementInStateUntil(TablaCheque.activo, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"En la tabla activo existe un apartado para <b>CHARGEBACK</b><br>",
+				PageGestorCheques.isElementInStateUntil(TablaCheque.chargeBack, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		return validations;
+	}
 
-			if(!PageGestorCheques.isElementInStateUntil(ButtonsCheque.idCompra, StateElem.Clickable, 3, dFTest.driver))
-				listVals.add(3, State.Defect);
+	@Validation(
+			description="1) Aparece el botón para <b>Volver a cheques</b>",
+			level=State.Defect)
+	public static boolean validateReturnCheques(DatosStep datosStep, WebDriver driver) {
+		return (PageGestorCheques.isElementInStateUntil(ButtonsCheque.volverCheques, StateElem.Present, 3, driver));
+	}
 
-			if(!PageGestorCheques.isElementInStateUntil(ButtonsCheque.correoReceptor, StateElem.Clickable, 3, dFTest.driver))
-				listVals.add(4, State.Defect);
+	@Validation
+	public static ListResultValidation validateThirdDataCheque(DatosStep datosStep, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+		int maxSecondsWait = 3;
+		validations.add(
+				"En la tabla divisa existe un apartado para <b>DIVISA</b><br>",
+				PageGestorCheques.isElementInStateUntil(TablaCheque.divisa, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"En la tabla divisa existe un apartado para <b>VALOR TOTAL</b><br>",
+				PageGestorCheques.isElementInStateUntil(TablaCheque.valorTotal, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"En la tabla divisa existe un apartado para <b>SALDO</b><br>",
+				PageGestorCheques.isElementInStateUntil(TablaCheque.saldo, StateElem.Clickable, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"En la tabla divisa existe un apartado para <b>FECHA DE COMPRA</b><br>",
+				PageGestorCheques.isElementInStateUntil(TablaCheque.fechaCompra, StateElem.Clickable, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"En la tabla divisa existe un apartado para <b>VALIDEZ</b>",
+				PageGestorCheques.isElementInStateUntil(TablaCheque.validez, StateElem.Clickable, maxSecondsWait, driver), State.Defect);
+		return validations;
+	}
 
-			if(!PageGestorCheques.isElementInStateUntil(ButtonsCheque.correoReceptor, StateElem.Clickable, 3, dFTest.driver))
-				listVals.add(5, State.Defect);
+	@Validation
+	public static ListResultValidation validatePedidosData(DatosStep datosStep, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+		int maxSecondsWait = 3;
+		validations.add(
+				"En la tabla pedidos realizados existe un apartado para <b>Id</b><br>",
+				PageGestorCheques.isElementInStateUntil(TablaCheque.idPedidos, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"En la tabla pedidos realizados existe un apartado para <b>Fecha</b><br>",
+				PageGestorCheques.isElementInStateUntil(TablaCheque.fechaPedidos, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"En la tabla pedidos realizados existe un apartado para <b>Total</b><br>",
+				PageGestorCheques.isElementInStateUntil(TablaCheque.totalPedidos, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"En la tabla pedidos realizados existe un apartado para <b>Usuario</b><br>",
+				PageGestorCheques.isElementInStateUntil(TablaCheque.usuarioPedidos, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"En la tabla pedidos realizados existe un apartado para <b>Accion</b>",
+				PageGestorCheques.isElementInStateUntil(TablaCheque.activoPedidos, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		return validations;
+	}
 
-			datosStep.setListResultValidations(listVals);
-		}
-		finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+	public static ListResultValidation validateButtonsDataCheque(DatosStep datosStep, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+		int maxSecondsWait = 3;
+		validations.add(
+				"Existe el boton para <b>Modificar</b><br>",
+				PageGestorCheques.isElementInStateUntil(ButtonsCheque.modificar, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"Existe el boton para <b>Añadir</b><br>",
+				PageGestorCheques.isElementInStateUntil(ButtonsCheque.add, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"Existe el boton para <b>Reenviar</b><br>",
+				PageGestorCheques.isElementInStateUntil(ButtonsCheque.reenviar, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"Existe el boton para <b>Editar</b><br>",
+				PageGestorCheques.isElementInStateUntil(ButtonsCheque.editar, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"Existe el boton para <b>Desactivar</b>",
+				PageGestorCheques.isElementInStateUntil(ButtonsCheque.desactivar, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		return validations;
 	}
 
 	public static void validateDataFromCheque (DatosStep datosStep, DataFmwkTest dFTest) {
-		String descripValidac =	
-			"1) Existe la tabla que contiene <b>Activo</b><br>"+
-			"2) Existe la tabla que contiene <b>Divisa</b><br>"+
-			"3) Existe la tabla que contiene <b>Pedidos Realizados</b><br>"+
-			"4) Existe la tabla que contiene <b>Pedidos Eliminados</b>";
-		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if(!PageGestorCheques.isElementInStateUntil(TablaCheque.activo, StateElem.Present, 3, dFTest.driver))
-				listVals.add(1, State.Defect);
-
-			if(!PageGestorCheques.isElementInStateUntil(TablaCheque.divisa, StateElem.Present, 3, dFTest.driver))
-				listVals.add(2, State.Defect);
-
-			if(!PageGestorCheques.isElementInStateUntil(TablaCheque.pedidosRealizados, StateElem.Present, 3, dFTest.driver))
-				listVals.add(3, State.Defect);
-
-			if(!PageGestorCheques.isElementInStateUntil(TablaCheque.pedidosEliminados, StateElem.Present, 3, dFTest.driver))
-				listVals.add(4, State.Defect);
-
-			datosStep.setListResultValidations(listVals);
-		}
-		finally { listVals.checkAndStoreValidations(descripValidac); }
-
-		descripValidac = 
-			"1) En la tabla activo existe un apartado para <b>ACTIVO</b><br>" +
-			"2) En la tabla activo existe un apartado para <b>CHARGEBACK</b><br>";
-		datosStep.setNOKstateByDefault();
-		listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if(!PageGestorCheques.isElementInStateUntil(TablaCheque.activo, StateElem.Present, 3, dFTest.driver))
-				listVals.add(1, State.Defect);
-
-			if(!PageGestorCheques.isElementInStateUntil(TablaCheque.chargeBack, StateElem.Present, 3, dFTest.driver))
-				listVals.add(2, State.Defect);
-
-			datosStep.setListResultValidations(listVals);
-		}
-		finally { listVals.checkAndStoreValidations(descripValidac); }
-
-		descripValidac = 
-			"1) En la tabla divisa existe un apartado para <b>DIVISA</b><br>"+
-			"2) En la tabla divisa existe un apartado para <b>VALOR TOTAL</b><br>"+
-			"3) En la tabla divisa existe un apartado para <b>SALDO</b><br>"+
-			"4) En la tabla divisa existe un apartado para <b>FECHA DE COMPRA</b><br>" +
-			"5) En la tabla divisa existe un apartado para <b>VALIDEZ</b>";
-		datosStep.setNOKstateByDefault();
-		listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if(!PageGestorCheques.isElementInStateUntil(TablaCheque.divisa, StateElem.Present, 3, dFTest.driver))
-				listVals.add(1, State.Defect);
-
-			if(!PageGestorCheques.isElementInStateUntil(TablaCheque.valorTotal, StateElem.Present, 3, dFTest.driver))
-				listVals.add(2, State.Defect);
-
-			if(!PageGestorCheques.isElementInStateUntil(TablaCheque.saldo, StateElem.Present, 3, dFTest.driver))
-				listVals.add(3, State.Defect);
-
-			if(!PageGestorCheques.isElementInStateUntil(TablaCheque.fechaCompra, StateElem.Present, 3, dFTest.driver))
-				listVals.add(4, State.Defect);
-
-			if(!PageGestorCheques.isElementInStateUntil(TablaCheque.validez, StateElem.Present, 3, dFTest.driver))
-				listVals.add(5, State.Defect);
-
-			datosStep.setListResultValidations(listVals);
-		}
-		finally { listVals.checkAndStoreValidations(descripValidac); }
-
-		descripValidac = 
-			"1) En la tabla pedidos realizados existe un apartado para <b>Id</b><br>"+
-			"2) En la tabla pedidos realizados existe un apartado para <b>Fecha</b><br>"+
-			"3) En la tabla pedidos realizados existe un apartado para <b>Total</b><br>"+
-			"4) En la tabla pedidos realizados existe un apartado para <b>Usuario</b><br>" +
-			"5) En la tabla pedidos realizados existe un apartado para <b>Accion</b>";
-		datosStep.setNOKstateByDefault();
-		listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if(!PageGestorCheques.isElementInStateUntil(TablaCheque.idPedidos, StateElem.Present, 3, dFTest.driver))
-				listVals.add(1, State.Defect);
-
-			if(!PageGestorCheques.isElementInStateUntil(TablaCheque.fechaPedidos, StateElem.Present, 3, dFTest.driver))
-				listVals.add(2, State.Defect);
-
-			if(!PageGestorCheques.isElementInStateUntil(TablaCheque.totalPedidos, StateElem.Present, 3, dFTest.driver))
-				listVals.add(3, State.Defect);
-
-			if(!PageGestorCheques.isElementInStateUntil(TablaCheque.usuarioPedidos, StateElem.Present, 3, dFTest.driver))
-				listVals.add(4, State.Defect);
-
-			if(!PageGestorCheques.isElementInStateUntil(TablaCheque.activoPedidos, StateElem.Present, 3, dFTest.driver))
-				listVals.add(5, State.Defect);
-
-			datosStep.setListResultValidations(listVals);
-		}
-		finally { listVals.checkAndStoreValidations(descripValidac); }
-
-		descripValidac = 
-			"1) Existe el boton para <b>Modificar</b><br>"+
-			"2) Existe el boton para <b>Añadir</b><br>"+
-			"3) Existe el boton para <b>Reenviar</b><br>"+
-			"4) Existe el boton para <b>Editar</b><br>" +
-			"5) Existe el boton para <b>Desactivar</b>";
-		datosStep.setNOKstateByDefault();
-		listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if(!PageGestorCheques.isElementInStateUntil(ButtonsCheque.modificar, StateElem.Present, 3, dFTest.driver))
-				listVals.add(1, State.Defect);
-
-			if(!PageGestorCheques.isElementInStateUntil(ButtonsCheque.add, StateElem.Present, 3, dFTest.driver))
-				listVals.add(2, State.Defect);
-
-			if(!PageGestorCheques.isElementInStateUntil(ButtonsCheque.reenviar, StateElem.Present, 3, dFTest.driver))
-				listVals.add(3, State.Defect);
-
-			if(!PageGestorCheques.isElementInStateUntil(ButtonsCheque.editar, StateElem.Present, 3, dFTest.driver))
-				listVals.add(4, State.Defect);
-
-			if(!PageGestorCheques.isElementInStateUntil(ButtonsCheque.desactivar, StateElem.Present, 3, dFTest.driver))
-				listVals.add(5, State.Defect);
-
-			datosStep.setListResultValidations(listVals);
-		}
-		finally { listVals.checkAndStoreValidations(descripValidac); }
-
-		descripValidac = "1) Aparece el botón para <b>Volver a cheques</b>";
-
-		datosStep.setNOKstateByDefault();
-		listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if(!PageGestorCheques.isElementInStateUntil(ButtonsCheque.volverCheques, StateElem.Present, 3, dFTest.driver))
-				listVals.add(1, State.Defect);
-
-			datosStep.setListResultValidations(listVals);
-		}
-		finally { listVals.checkAndStoreValidations(descripValidac); }
-
+		validateInitDataCheque(datosStep, dFTest.driver);
+		validateSecondDataCheque(datosStep, dFTest.driver);
+		validateThirdDataCheque(datosStep, dFTest.driver);
+		validatePedidosData(datosStep, dFTest.driver);
+		validateButtonsDataCheque(datosStep, dFTest.driver);
+		validateReturnCheques(datosStep, dFTest.driver);
 	}
 
 	public static void inputCheque (String cheque, DataFmwkTest dFTest) throws Exception {
@@ -302,17 +240,14 @@ public class PageGestorChequesStpV {
 		} 
 		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
-		String descripValidac =
-			"1) Aparece el numero de cheque <b>" + cheque + "</b> en la tabla de datos";
-		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if(!PageGestorCheques.isElementInStateUntil(ButtonsCheque.chequeData, StateElem.Present, 3, dFTest.driver))
-				listVals.add(1, State.Defect);
+		validateDataCheque(cheque, datosStep, dFTest.driver);
+	}
 
-			datosStep.setListResultValidations(listVals);
-		} 
-		finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation(
+			description="1) Aparece el numero de cheque <b>#{cheque}</b> en la tabla de datos",
+			level=State.Defect)
+	public static boolean validateDataCheque(String cheque, DatosStep datosStep, WebDriver driver) {
+		return (!PageGestorCheques.isElementInStateUntil(ButtonsCheque.volverCheques, StateElem.Present, 3, driver));
 	}
 
 	public static void chequeDetails (DataFmwkTest dFTest) throws Exception {
@@ -326,18 +261,34 @@ public class PageGestorChequesStpV {
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
-		String descripValidac =
-			"1) El dato de <b>mail</b> corresponde a un registro <b>vacio</b>";
-		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-		try {
-			if (PageGestorCheques.isMailCorrecto("", dFTest.driver)) {
-				listVals.add(1, State.Defect);
-			}
-
-			datosStep.setListResultValidations(listVals);
-		} finally { listVals.checkAndStoreValidations(descripValidac); }
+		validateEmptyMail(datosStep, dFTest.driver);
 
 		validateDataFromCheque(datosStep, dFTest);
+	}
+
+	@Validation(
+			description="1) El dato de <b>mail</b> corresponde a un registro <b>vacio</b>",
+			level=State.Defect)
+	public static boolean validateEmptyMail(DatosStep datosStep, WebDriver driver) {
+		return (!PageGestorCheques.isMailCorrecto("", driver));
+	}
+
+	@Validation
+	public static ListResultValidation validateInitDataCheque(DatosStep datosStep, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+		int maxSecondsWait = 3;
+		validations.add(
+				"Existe la tabla que contiene <b>Activo</b><br>",
+				PageGestorCheques.isElementInStateUntil(TablaCheque.activo, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"Existe la tabla que contiene <b>Divisa</b><br>",
+				PageGestorCheques.isElementInStateUntil(TablaCheque.divisa, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"Existe la tabla que contiene <b>Pedidos Realizados</b><br>",
+				PageGestorCheques.isElementInStateUntil(TablaCheque.pedidosRealizados, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		validations.add(
+				"Existe la tabla que contiene <b>Pedidos Eliminados</b>",
+				PageGestorCheques.isElementInStateUntil(TablaCheque.pedidosEliminados, StateElem.Present, maxSecondsWait, driver), State.Defect);
+		return validations;
 	}
 }

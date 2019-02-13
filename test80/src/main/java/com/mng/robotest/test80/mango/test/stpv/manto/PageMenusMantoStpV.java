@@ -205,7 +205,7 @@ public class PageMenusMantoStpV {
 		DatosStep datosStep = goToMainMenusAndClickMenu("Ordenador de Prendas", dFTest);
 		
 		//Validaciones
-		PageOrdenacionDePrendasStpV.validateIsPage(datosStep, dFTest);
+		PageOrdenacionDePrendasStpV.validateIsPage(datosStep, dFTest.driver);
 	}
 	
 	/**

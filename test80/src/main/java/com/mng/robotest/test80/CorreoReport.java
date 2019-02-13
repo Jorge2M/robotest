@@ -82,7 +82,7 @@ public class CorreoReport {
             "<th style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">CHANNEL</th>" +
             "<th style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">BROWSER</th>" +
             "<th style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">VERSIÓN</th>" +
-            "<th style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">#DISPONIBILITY</th>" +
+            "<th style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">#AVAILABILITY</th>" +
             "<th style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">#OKs</th>" +
             "<th style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">#NOKs</th>" +
             "<th style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">#DEFECTs</th>" +            

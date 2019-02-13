@@ -129,8 +129,8 @@ public class PageFavoritos extends WebdrvWrapp {
         //driver.findElement(By.xpath(xpathBorrar)).click();
     }
     
-    public static boolean isInvisibleArticleUntil(ArticuloScreen articulo, int maxSecondsToWait, WebDriver driver) {
-        String xpathArticulo = getXPathArticle(articulo.getRefProducto(), articulo.getCodigoColor());
+    public static boolean isInvisibleArticleUntil(String referencia, String codColor, int maxSecondsToWait, WebDriver driver) {
+        String xpathArticulo = getXPathArticle(referencia, codColor);
         return (isElementInvisibleUntil(driver, By.xpath(xpathArticulo), maxSecondsToWait));
     }
     
