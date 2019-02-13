@@ -111,7 +111,6 @@ public class InfoValidation {
     	  String group = m.group(1);
     	  String valueParameter = getStringValueParameterFromMethod(group);
     	  descrToReturn = descrToReturn.replace("#{" + group + "}", valueParameter);
-    	  System.out.println(m.group(1));
     	}
     	
     	return (descrToReturn);

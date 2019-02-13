@@ -2,7 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.favoritos;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -20,25 +24,18 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 @SuppressWarnings({"javadoc", "static-access"})
 public class ModalFichaFavoritosStpV {
     
-    public static void validaIsVisibleFicha(ArticuloScreen articulo, DatosStep datosStep, DataFmwkTest dFTest) { 
-        int maxSecondsToWait = 2;
-        String descripValidac = 
-            "1) En Favoritos es visible el modal de la ficha del producto " + articulo.getRefProducto() + " (lo esperamos hasta " + maxSecondsToWait + " segundos) <br>" +
-            "2) Aparece seleccionado el color " + articulo.getColor();
-        datosStep.setNOKstateByDefault();  
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageFavoritos.modalFichaFavoritos.isVisibleFichaUntil(articulo.getRefProducto(), maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            if (!PageFavoritos.modalFichaFavoritos.isColorSelectedInFicha(articulo.getColor(), dFTest.driver)) {
-                listVals.add(2, State.Warn);
-            }
-                        
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-    }
+    @Validation
+    public static ListResultValidation validaIsVisibleFicha(ArticuloScreen articulo, DatosStep datosStep, WebDriver driver) { 
+    	ListResultValidation validations = ListResultValidation.getNew(datosStep);
+    	int maxSecondsWait = 2;
+    	validations.add(
+    		"En Favoritos es visible el modal de la ficha del producto " + articulo.getRefProducto() + " (lo esperamos hasta " + maxSecondsWait + " segundos) <br>",
+    		PageFavoritos.modalFichaFavoritos.isVisibleFichaUntil(articulo.getRefProducto(), maxSecondsWait, driver), State.Warn);
+    	validations.add(
+            "Aparece seleccionado el color " + articulo.getColor(),
+            PageFavoritos.modalFichaFavoritos.isColorSelectedInFicha(articulo.getColor(), driver), State.Warn);
+        return validations;
+    }  
     
     public static DatosStep addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Channel channel, 
     										 AppEcom app, DataFmwkTest dFTest) throws Exception {
@@ -86,21 +83,16 @@ public class ModalFichaFavoritosStpV {
         } 
         finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
         
-        //Validaciones
-        int maxSecondsToWait = 2;
-        String descripValidac = 
-            "1) Desaparece de Favoritos la ficha del producto " + articulo.getRefProducto() + " (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setNOKstateByDefault();        
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageFavoritos.modalFichaFavoritos.isInvisibleFichaUntil(articulo.getRefProducto(), maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-                        
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
+        int maxSecondsWait = 2;
+        checkFichaDisappearsFromFavorites(articulo.getRefProducto(), maxSecondsWait, datosStep, dFTest.driver);
+
         return datosStep;
+    }
+    
+    @Validation (
+        description="Desaparece de Favoritos la ficha del producto #{refProducto} (lo esperamos hasta #{maxSecondsWait} segundos)",
+        level=State.Warn)
+    public static boolean checkFichaDisappearsFromFavorites(String refProducto, int maxSecondsWait, DatosStep datosStep, WebDriver driver) {
+    	return (PageFavoritos.modalFichaFavoritos.isInvisibleFichaUntil(refProducto, maxSecondsWait, driver));
     }
 }

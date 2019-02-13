@@ -2,7 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.favoritos;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -19,27 +23,18 @@ public class PageFavoritosStpV {
     
     public static ModalFichaFavoritosStpV modalFichaFavoritos;
     
-    public static void validaIsPageOK(DataFavoritos dataFavoritos, DatosStep datosStep, DataFmwkTest dFTest) {
-        //Validaciones
+    @Validation
+    public static ListResultValidation validaIsPageOK(DataFavoritos dataFavoritos, DatosStep datosStep, DataFmwkTest dFTest) {
+    	ListResultValidation validations = ListResultValidation.getNew(datosStep);
         int maxSecondsToWaitCapa = 3;
         int maxSecondsToWaitArticles = 1;
-        String descripValidac = 
-            "1) Está visible la capa de favoritos con artículos (la esperamos hasta " + maxSecondsToWaitCapa + " segundos)<br>" +
-            "2) Aparecen los artículos (los esperamos hasta " + maxSecondsToWaitArticles + " segundos): <br>" +
-            	dataFavoritos.getListArtDescHTML();
-        datosStep.setNOKstateByDefault();    
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageFavoritos.isSectionArticlesVisibleUntil(maxSecondsToWaitCapa, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (!PageFavoritos.areVisibleArticlesUntil(dataFavoritos, maxSecondsToWaitArticles, dFTest.driver)) {
-                listVals.add(2, State.Defect);
-            }
-                        
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
+    	validations.add(
+    		"Está visible la capa de favoritos con artículos (la esperamos hasta " + maxSecondsToWaitCapa + " segundos)<br>",
+    		PageFavoritos.isSectionArticlesVisibleUntil(maxSecondsToWaitCapa, dFTest.driver), State.Defect);
+    	validations.add(
+    		"Aparecen los artículos (los esperamos hasta " + maxSecondsToWaitArticles + " segundos): <br>" + dataFavoritos.getListArtDescHTML(),
+    		PageFavoritos.areVisibleArticlesUntil(dataFavoritos, maxSecondsToWaitArticles, dFTest.driver), State.Defect);
+    	return validations;
     }
     
     public static DatosStep clearAll(DataFavoritos dataFavoritos, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
@@ -63,72 +58,53 @@ public class PageFavoritosStpV {
     	} 
     	finally { stepShareOk.setStepNumber(fmwkTest.grabStep(stepShareOk, dFTest)) ;}
     	
-    	checkShareIsOk(stepShareOk, dFTest);
+    	checkShareIsOk(stepShareOk, dFTest.driver);
        	
        	return stepShareOk;
     }
     
-    public static void checkShareIsOk(DatosStep datosStep, DataFmwkTest dFTest) {
-    	//Validacion
+    @Validation
+    public static ListResultValidation checkShareIsOk(DatosStep datosStep, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew(datosStep);
     	int secondsToWait = 5;
-        String descripValidac = 
-        	"1) Aparece el modal de favoritos compartidos <br>" +
-            "2) Aparece el boton de compartir por Telegram <br>" + 
-            "3) Aparece el boton de compartir por WhatsApp <br>" +
-            "4) Aparece la url para copiarla y compartir como texto";
-    	ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-        	if(!PageFavoritos.checkShareModalUntill(secondsToWait, dFTest.driver)) {
-        		listVals.add(1, State.Defect);
-        	}
-        	if(!PageFavoritos.isShareTelegramFavoritesVisible(dFTest.driver)) {
-        		listVals.add(1, State.Defect);
-        	}
-            if(!PageFavoritos.isShareWhatsappFavoritesVisible(dFTest.driver)) {
-            	listVals.add(1, State.Defect);
-            }
-            if(!PageFavoritos.isShareUrlFavoritesVisible(dFTest.driver)) {
-            	listVals.add(1, State.Defect);
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        
-        } finally { listVals.checkAndStoreValidations(descripValidac); }
-        
+    	validations.add(
+    		"Aparece el modal de favoritos compartidos <br>",
+    		PageFavoritos.checkShareModalUntill(secondsToWait, driver), State.Defect);
+    	validations.add(
+            "Aparece el boton de compartir por Telegram <br>",
+            PageFavoritos.isShareTelegramFavoritesVisible(driver), State.Defect);
+        validations.add(
+            "Aparece el boton de compartir por WhatsApp <br>",
+            PageFavoritos.isShareWhatsappFavoritesVisible(driver), State.Defect);
+        validations.add(
+            "Aparece la url para copiarla y compartir como texto", 
+            PageFavoritos.isShareUrlFavoritesVisible(driver), State.Defect);
+        return validations;
     }
-    
     
     public static DatosStep closeShareModal(DataFmwkTest dFTest) throws Exception {
        	//Step
-    	DatosStep stepShareClose = new DatosStep(
+    	DatosStep datosStep = new DatosStep(
     		"Cerramos el modal de favoritos compartidos. ",
     		"El modal de favoritos compartidos desaparece correctamente");
     	try {
        		PageFavoritos.closeShareModal(dFTest.driver);
        		
-       		stepShareClose.setExcepExists(false); stepShareClose.setResultSteps(State.Ok);
+       		datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
        	} 
-    	finally { stepShareClose.setStepNumber(fmwkTest.grabStep(stepShareClose, dFTest)) ;};
+    	finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)) ;};
        	
-    	checkShareIsClosed(stepShareClose, dFTest);
-    	return stepShareClose;
+    	int maxSecondsWait = 2;
+    	checkShareIsClosedUntil(maxSecondsWait, datosStep, dFTest.driver);
+    	
+    	return datosStep;
     }
     
-    public static void checkShareIsClosed(DatosStep datosStep, DataFmwkTest dFTest) {
-        //Validaciones
-        int maxSecondsToWait = 2;
-        String descripValidac = 
-        	"1) Desaparece el modal de favoritos compartidos (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setNOKstateByDefault();   
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageFavoritos.checkShareModalInvisible(dFTest.driver, maxSecondsToWait)) {
-                listVals.add(1, State.Warn);
-            }
-                        
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
+    @Validation (
+        description="Desaparece el modal de favoritos compartidos (lo esperamos hasta #{maxSecondsWait} segundos)",
+        level=State.Warn)
+    public static boolean checkShareIsClosedUntil(int maxSecondsWait, DatosStep datosStep, WebDriver driver) {
+    	return (PageFavoritos.checkShareModalInvisible(driver, maxSecondsWait));
     }
     
     public static DatosStep clear(ArticuloScreen articulo, DataFmwkTest dFTest) throws Exception {
@@ -143,22 +119,17 @@ public class PageFavoritosStpV {
         } 
         finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
-        //Validaciones
-        int maxSecondsToWait = 5;
-        String descripValidac = 
-            "1) Desaparece de Favoritos el artículo con referencia <b>" + articulo.getRefProducto() + "</b> (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setNOKstateByDefault(); 
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageFavoritos.isInvisibleArticleUntil(articulo, maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-                        
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
+        int maxSecondsWait = 5;
+        checkArticleDisappearsFromFavoritesUntil(articulo.getReferencia(), articulo.getCodigoColor(), maxSecondsWait, datosStep, dFTest.driver);
         
         return datosStep;
+    }
+    
+    @Validation (
+    	description="Desaparece de Favoritos el artículo con referencia <b>#{refArticle}</b> y código de color <b>#{codColor}</b> (lo esperamos hasta #{maxSecondsWait} segundos)",
+        level=State.Defect)
+    public static boolean checkArticleDisappearsFromFavoritesUntil(String refArticle, String codColor, int maxSecondsWait, DatosStep datosStep, WebDriver driver) {
+    	return (PageFavoritos.isInvisibleArticleUntil(refArticle, codColor, maxSecondsWait, driver));
     }
     
     public static DatosStep clearAll(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
@@ -173,26 +144,22 @@ public class PageFavoritosStpV {
         } 
         finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
-        //Validaciones
-        String descripValidac = 
-            "1) No queda ningún artículo en Favoritos<br>" +
-            "2) Aparece el botón \"Inspírate con lo último\"";
-        datosStep.setNOKstateByDefault();    
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (PageFavoritos.hayArticulos(dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (!PageFavoritos.isVisibleButtonEmpty(dFTest.driver)) {
-                listVals.add(2, State.Warn);
-            }
-                        
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
+        checkFavoritosWithoutArticles(datosStep, dFTest.driver);
         
         return datosStep;
     }
+    
+    @Validation
+    public static ListResultValidation checkFavoritosWithoutArticles(DatosStep datosStep, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew(datosStep);
+    	validations.add(
+    		"No queda ningún artículo en Favoritos<br>",
+    		!PageFavoritos.hayArticulos(driver), State.Defect);
+    	validations.add(
+            "Aparece el botón \"Inspírate con lo último\"",
+            PageFavoritos.isVisibleButtonEmpty(driver), State.Warn);
+        return validations;
+    }  
     
     public static DatosStep addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
@@ -234,7 +201,7 @@ public class PageFavoritosStpV {
         finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
 
         //Validaciones
-        modalFichaFavoritos.validaIsVisibleFicha(artToPlay, datosStep, dFTest);
+        modalFichaFavoritos.validaIsVisibleFicha(artToPlay, datosStep, dFTest.driver);
         
         return datosStep;
     }
