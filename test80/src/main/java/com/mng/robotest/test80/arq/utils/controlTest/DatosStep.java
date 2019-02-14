@@ -2,78 +2,60 @@ package com.mng.robotest.test80.arq.utils.controlTest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.testng.ITestContext;
 
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.NetTrafficMng;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 
 @SuppressWarnings("javadoc")
 public class DatosStep {
+	
+	public enum SaveWhen {
+		Always, 
+		Never, 
+		IfProblem;
+		
+		boolean IfProblemSave() {
+			return (this==Always || this==IfProblem);
+		}
+	}
 
-	//Número de paso
 	private int step_number = 0;
-	
-	//Literal descriptivo del paso a realizar
 	private String descripcion; 
-	
-	//Literal descriptivo del resultado esperado
 	private String res_expected; 
-	
-	//Indicador de si es necesario grabar la imagen
-	private boolean grab_image = false; 
-	
-	//Indicador de si es necesario grabar el HTML
-	private boolean grab_HTML = false; 
-	
-	//Indicador de si es necesario grabar el Nettrafic (actuamente mediante HAR Export en Firefox)
-	private boolean grab_Nettrafic = false;
-	
-	//Indicador de si es necesario grabar la excepción en caso de error
-	private boolean grab_ErrorPageIfProblem = true; 
-	
-	//0->HTML, 1->EXCEL, 2->PDF
+	private SaveWhen saveImagePage = SaveWhen.IfProblem;
+	private SaveWhen saveErrorPage = SaveWhen.IfProblem;
+	private SaveWhen saveHtmlPage = SaveWhen.Never;
+	private SaveWhen saveNettraffic = SaveWhen.Never;
 	private int type_page = 0; 
-	
-	//Hora de inicio del paso
 	private Date hora_inicio; 
-	
-	//Hora de fin del paso
 	private Date hora_fin;
-	
-	//Resultado del paso: OK, WARNING o ERROR (x defecto ERROR)
 	private State result_steps = State.Nok;
-	
-	//Indicador de si se ha producido una excepción (por defecto sí)
 	private boolean excep_exists = true;
 	private ListResultValidation listResultValidations;
-
 	private String nameMethodWithFactory = "";
 
     public DatosStep() {
         this.step_number = 0;
     }
 
+    //TODO llamada desde el mecanismo antiguo. Eliminar cuando esté todo migrado a AspectJ
     public DatosStep(String c_descripcion, String c_res_expected) {
         this.descripcion = c_descripcion;
         this.res_expected = c_res_expected;
         this.hora_inicio = new Date(System.currentTimeMillis());
+    	DatosStep stepAnterior = ThreadData.peekDatosStep();
+    	if (stepAnterior!=null) {
+    		setStepNumber(stepAnterior.getStepNumber()+1);
+    	}
+    	else {
+    		setStepNumber(1);
+    	}
+        ThreadData.storeInThread(this);
     }
-    
-//    public datosStep(String c_descripcion, String c_res_expected, boolean c_grab_image, boolean c_grab_HTML, boolean c_grab_ErrorPageIfProblem, int c_type_page, boolean c_excep_exists, int c_result_steps) {
-//        this.descripcion = c_descripcion;
-//        this.res_expected = c_res_expected;
-//        this.hora_inicio = new Date(System.currentTimeMillis());
-//        this.grab_image = c_grab_image;
-//        this.grab_HTML = c_grab_HTML;
-//        this.grab_ErrorPageIfProblem = c_grab_ErrorPageIfProblem;
-//        this.type_page = c_type_page;
-//        this.excep_exists = c_excep_exists;
-//        this.result_steps = c_result_steps;
-//        this.step_number = 0;
-//    }
 
     public void setStepNumber (int c_step_number) { 
         this.step_number = c_step_number; 
@@ -87,26 +69,26 @@ public class DatosStep {
         this.res_expected = c_res_expected; 
     }
     
-    public void setGrabImage(boolean c_grab_image) { 
-        this.grab_image = c_grab_image; 
+    public void setSaveImagePage(SaveWhen saveImagePage) { 
+        this.saveImagePage = saveImagePage; 
     }
     
-    public void setGrabHTML(boolean c_grab_HTML) { 
-        this.grab_HTML = c_grab_HTML; 
+    public void setSaveErrorPage(SaveWhen saveErrorPage) { 
+        this.saveErrorPage = saveErrorPage; 
     }
     
-    public void setGrabNettrafic(ITestContext context) {
+    public void setSaveHtmlPage(SaveWhen saveHtmlPage) { 
+        this.saveHtmlPage = saveHtmlPage; 
+    }
+    
+    public void setSaveNettrafic(SaveWhen saveNettraffic, ITestContext context) {
         String netTrafficStr = context.getSuite().getXmlSuite().getParameter(Constantes.paramNetAnalysis);
-        this.grab_Nettrafic = "true".compareTo(netTrafficStr)==0;
-        if (getGrabNettrafic()) {
+        if ("true".compareTo(netTrafficStr)==0) {
+        	this.saveNettraffic = saveNettraffic;
         	NetTrafficMng netTraffic = new NetTrafficMng();
         	netTraffic.resetAndStartNetTraffic();
         }
     }    
-    
-    public void setGrab_ErrorPageIfProblem(boolean c_grab_ErrorPageIfProblem) { 
-        this.grab_ErrorPageIfProblem = c_grab_ErrorPageIfProblem; 
-    }
     
     public void setTypePage(int c_type_page) { 
         this.type_page = c_type_page; 
@@ -140,21 +122,21 @@ public class DatosStep {
         return this.res_expected; 
     }
     
-    public boolean getGrabImage() { 
-        return this.grab_image; 
+    public SaveWhen getSaveImagePage() { 
+        return this.saveImagePage; 
     }
     
-    public boolean getGrabHTML() { 
-        return this.grab_HTML; 
+    public SaveWhen getSaveHtmlPage() { 
+        return this.saveHtmlPage; 
     }
     
-    public boolean getGrabNettrafic() { 
-        return this.grab_Nettrafic; 
+    public SaveWhen getSaveErrorPage() { 
+        return this.saveErrorPage; 
+    }
+    
+    public SaveWhen getSaveNettrafic() { 
+        return this.saveNettraffic; 
     }    
-    
-    public boolean getGrab_ErrorPageIfProblem() { 
-        return this.grab_ErrorPageIfProblem; 
-    }
     
     public int getTypePage() { 
         return this.type_page; 
@@ -203,4 +185,3 @@ public class DatosStep {
     	return result;
     }
 }
-

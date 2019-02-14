@@ -1,13 +1,12 @@
 package com.mng.robotest.test80.arq.annotations.validation;
 
 import java.lang.reflect.Method;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
+import com.mng.robotest.test80.arq.annotations.MatcherWithMethodParams;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 
 public class InfoValidation {
@@ -49,6 +48,10 @@ public class InfoValidation {
     		if (signatureArg!=null && signatureArg instanceof DatosStep) {
     			return ((DatosStep)signatureArg);
     		}
+    	}
+    	
+    	if (ThreadData.peekDatosStep()!=null) {
+    		return (ThreadData.peekDatosStep());
     	}
     	
     	throw (new RuntimeException("A parameter of Type DatosStep is mandatory in method with @Validation annotation"));
@@ -93,7 +96,8 @@ public class InfoValidation {
     
     private void modifyValidationResultAccordingAnnotationParams(ListResultValidation valResult) {
     	if ("".compareTo(valResult.get(0).getDescription())==0) {
-    		String descripValidationMatched = getValidationDescriptionMatchingWithMethodParameters();
+    		MatcherWithMethodParams matcher = MatcherWithMethodParams.from(joinPoint);
+    		String descripValidationMatched = matcher.match(valAnnotation.description());
     		valResult.get(0).setDescription(descripValidationMatched);
     	}
     	
@@ -103,28 +107,5 @@ public class InfoValidation {
     	}
     }
     
-    private String getValidationDescriptionMatchingWithMethodParameters() {
-    	String descrToReturn  = valAnnotation.description();
-    	Pattern p = Pattern.compile("\\#\\{([^}]*)\\}");
-    	Matcher m = p.matcher(descrToReturn);
-    	while (m.find()) {
-    	  String group = m.group(1);
-    	  String valueParameter = getStringValueParameterFromMethod(group);
-    	  descrToReturn = descrToReturn.replace("#{" + group + "}", valueParameter);
-    	}
-    	
-    	return (descrToReturn);
-    }
-    
-    private String getStringValueParameterFromMethod(String paramNameInDescrValidation) {
-    	Object[] signatureArgs = joinPoint.getArgs();
-    	String[] parameterNames = ((MethodSignature) joinPoint.getSignature()).getParameterNames();
-    	for (int i=0; i<parameterNames.length; i++) {
-    		if (parameterNames[i].compareTo(paramNameInDescrValidation)==0) {
-    			return (signatureArgs[i].toString());
-    		}
-    	}
-    	
-    	return null;
-    }
+
 }

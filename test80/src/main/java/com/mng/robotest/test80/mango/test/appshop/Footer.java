@@ -13,6 +13,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -60,14 +61,14 @@ public class Footer extends GestorWebDriver {
         dCtxSh.idioma = this.castellano;
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        storeInThread(dCtxSh);
-        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        ThreadData.storeInThread(dCtxSh);
+        ThreadData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 
     @SuppressWarnings({ "javadoc", "unused" })
     @AfterMethod(groups = { "Footer", "Canal:all_App:shop", "Canal:desktop_App:outlet" }, alwaysRun = true)
     public void logout(final ITestContext context, final Method method) throws Exception {
-        WebDriver driver = getWebDriver();
+        WebDriver driver = ThreadData.getWebDriver();
         super.quitWebDriver(driver, context);
     }
 
@@ -76,8 +77,8 @@ public class Footer extends GestorWebDriver {
         groups = { "Footer", "Canal:all_App:shop", "Canal:desktop_App:outlet" }, alwaysRun = true, 
         description="Verificar que los links del footer aparecen y redirigen correctamente")
     public void FOOT001_Menu(final ITestContext context, final Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         dCtxSh.userRegistered = false;
 
         DatosStep datosStep = AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);

@@ -10,6 +10,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -70,14 +71,14 @@ public class FichaProducto extends GestorWebDriver {
             this.castellano = this.españa.getListIdiomas().get(0);
         }
         
-        storeInThread(dCtxSh);
-        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        ThreadData.storeInThread(dCtxSh);
+        ThreadData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 	
     @SuppressWarnings("unused")
     @AfterMethod (groups={"FichaProducto", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getWebDriver();
+        WebDriver driver = ThreadData.getWebDriver();
         super.quitWebDriver(driver, context);
     }		
 	
@@ -85,8 +86,8 @@ public class FichaProducto extends GestorWebDriver {
         groups={"FichaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
         description="[Usuario registrado] Se testean las features principales de una ficha con origen el buscador: añadir a la bolsa, selección color/talla, buscar en tienda, añadir a favoritos")
     public void FIC001_FichaFromSearch_PrimaryFeatures_Reg(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
@@ -127,8 +128,8 @@ public class FichaProducto extends GestorWebDriver {
         groups={"FichaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
         description="[Usuario no registrado] Se testean las features secundarias de una ficha con origen el buscador: guía de tallas, carrusel imágenes, imagen central, panel de opciones")
     public void FIC002_FichaFromSearch_SecondaryFeatures_NoReg(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         dCtxSh.userRegistered = false;
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
@@ -179,8 +180,8 @@ public class FichaProducto extends GestorWebDriver {
         groups={"FichaProducto", "Canal:desktop_App:shop"}, alwaysRun=true, 
         description="[Usuario no registrado] Desde Corea/coreano, se testea una ficha con origen la Galería validando el panel KcSafety")
     public void FIC003_FichaFromGalery_CheckKcSafety(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         dCtxSh.userRegistered = false;
         Integer codCorea = Integer.valueOf(728);
         List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(Arrays.asList(codCorea)));
@@ -213,8 +214,8 @@ public class FichaProducto extends GestorWebDriver {
         groups={"FichaProducto", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, 
         alwaysRun=true, description="[Usario no registrado] Testeo ficha con artículo con color y tallas no disponibles")
     public void FIC004_Articulo_NoStock_Noreg(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
         dCtxSh.userRegistered = false;
@@ -235,8 +236,8 @@ public class FichaProducto extends GestorWebDriver {
         groups={"FichaProducto", "Canal:all_App:shop"}, 
         alwaysRun=true, description="[Usario no registrado] Testeo Personalización bordados")
     public void FIC005_Articulo_Personalizable_Noreg(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
         dCtxSh.userRegistered = false;

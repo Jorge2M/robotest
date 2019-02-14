@@ -4,6 +4,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.manto.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.manto.SecFiltros;
@@ -29,7 +30,7 @@ public class SecFiltrosMantoStpV {
             "- Tienda: <b>" + SecCabecera.getLitTienda(dFTest.driver) + "</b><br>" +
             "- País: <b>" + dataPedido.getNombrePais() + "</b> (" + dataPedido.getCodigoPais() + ")", 
             "La búsqueda es correcta");
-        datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
         	if (dataPedido.getCodigoPedidoManto() != null)
 	            SecFiltros.setFiltroCodPedido(dFTest.driver, dataPedido.getCodigoPedidoManto());

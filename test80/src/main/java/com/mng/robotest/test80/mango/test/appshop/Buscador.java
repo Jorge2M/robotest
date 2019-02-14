@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -61,14 +62,14 @@ public class Buscador extends GestorWebDriver {
         dCtxSh.pais = this.españa;
         dCtxSh.idioma = this.castellano;
         
-        storeInThread(dCtxSh);
-        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        ThreadData.storeInThread(dCtxSh);
+        ThreadData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Buscador", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getWebDriver();
+        WebDriver driver = ThreadData.getWebDriver();
         super.quitWebDriver(driver, context);
     }       
 
@@ -78,8 +79,8 @@ public class Buscador extends GestorWebDriver {
     @Parameters({"categoriaProdExistente", "catProdInexistente"})
     public void BUS001_Buscador_NoReg(String categoriaProdExistente, String catProdInexistente, ITestContext context, Method method) 
     throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         dCtxSh.userRegistered = false;
 
         DatosStep datosStep = AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);

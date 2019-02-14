@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 
 @SuppressWarnings("javadoc")
 public class ListResultValidation {
@@ -22,6 +22,11 @@ public class ListResultValidation {
 	
 	public static ListResultValidation getNew(DatosStep datosStep) {
 		return (new ListResultValidation(datosStep));
+	}
+	
+	public static ListResultValidation getNew() {
+		DatosStep datosStep = ThreadData.peekDatosStep();
+		return (getNew(datosStep));
 	}
 	
 	public static ListResultValidation of(ResultValidation resultValidation, DatosStep datosStep) {
@@ -65,7 +70,7 @@ public class ListResultValidation {
     }
     
     private void checkValidations() {
-    	if (datosStep.getExcepExists()) {
+    	if (isStepFinishedWithException()) {
     		stateValidation = State.Nok;
     	}
     	else {
@@ -85,6 +90,10 @@ public class ListResultValidation {
     	
     	datosStep.setResultSteps(stateValidation);
     	datosStep.setListResultValidations(this);
+    }
+    
+    private boolean isStepFinishedWithException() {
+    	return (datosStep.getHoraFin()!=null && datosStep.getExcepExists());
     }
     
     /**
@@ -118,6 +127,6 @@ public class ListResultValidation {
 	}
     
     public void storeGroupValidations(String descripcionValidations) {
-    	fmwkTest.grabStepValidation(datosStep, descripcionValidations, GestorWebDriver.getdFTest());
+    	fmwkTest.grabStepValidation(datosStep, descripcionValidations, ThreadData.getdFTest());
     }
 }

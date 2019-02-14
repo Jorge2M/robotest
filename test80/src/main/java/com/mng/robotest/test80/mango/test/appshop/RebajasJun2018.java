@@ -6,6 +6,7 @@ import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -68,14 +69,14 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
         dCtxSh.pais = this.paisFactory;
         dCtxSh.idioma = this.idiomaFactory;
         dCtxSh.urlAcceso = urlAcceso;
-        storeInThread(dCtxSh);
-        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
+        ThreadData.storeInThread(dCtxSh);
+        ThreadData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
     }
 	
     @SuppressWarnings("unused")
     @AfterMethod (groups={"RebajasDic2018", "Canal:desktop_App:shop", "SupportsFactoryCountrys"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getWebDriver();
+        WebDriver driver = ThreadData.getWebDriver();
         super.quitWebDriver(driver, context);
     }	
 	
@@ -83,8 +84,8 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
     @Test (groups={"RebajasDic201", "Canal:desktop_App:shop", "SupportsFactoryCountrys"}, 
     	   description="Validaciones específicas correspondientes a las Rebajas de Diciembre-2017")
     public void REB001_RebajasDic2018(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         DatosStep datosStep = null;
         int numLineasPais = dCtxSh.pais.getShoponline().getNumLineasTiendas(dCtxSh.appE);
             

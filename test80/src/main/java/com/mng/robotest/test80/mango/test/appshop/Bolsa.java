@@ -9,6 +9,7 @@ import java.util.List;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -63,14 +64,14 @@ public class Bolsa extends GestorWebDriver {
         dCtxSh.pais = this.españa;
         dCtxSh.idioma = this.castellano;
         
-        storeInThread(dCtxSh);
-        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        ThreadData.storeInThread(dCtxSh);
+        ThreadData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
     
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Bolsa", "Canal:desktop_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getWebDriver();
+        WebDriver driver = ThreadData.getWebDriver();
         super.quitWebDriver(driver, context);
     }       
 
@@ -78,8 +79,8 @@ public class Bolsa extends GestorWebDriver {
         groups={"Bolsa", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true, 
         description="[Usuario no registrado] Añadir artículo a la bolsa")
     public void BOR001_AddBolsaFromGaleria_NoReg(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         dCtxSh.userRegistered = false;
         
         AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest);
@@ -119,8 +120,8 @@ public class Bolsa extends GestorWebDriver {
         groups={"Bolsa", "Canal:desktop_App:all"}, alwaysRun=true, 
         description="[Usuario no registrado] Añadir y eliminar artículos de la bolsa")
     public void BOR005_Gest_Prod_Bolsa_Noreg(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         dCtxSh.userRegistered = false;
         BOR005_6_Gest_Prod_Bolsa(dCtxSh, dFTest);
     }
@@ -129,8 +130,8 @@ public class Bolsa extends GestorWebDriver {
         groups={"Bolsa", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true, 
         description="[Usuario registrado] Añadir artículo a la bolsa")
     public void BOR002_AnyadirBolsa_yCompra_SiReg(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;
@@ -161,8 +162,8 @@ public class Bolsa extends GestorWebDriver {
         groups={"Bolsa", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true, 
         description="[Usuario registrado] Añadir y eliminar artículos de la bolsa")
     public void BOR006_Gest_Prod_Bolsa_Sireg(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;

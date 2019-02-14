@@ -14,6 +14,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ValesData;
@@ -77,7 +78,7 @@ public class PagoNavigationsStpV {
         datosStep = new DatosStep       (
             "Acceder a Mango " + registro, 
             "Se accede a Mango");
-        datosStep.setGrabNettrafic(dFTest.ctx);
+        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
         try {
             AccesoNavigations.accesoHomeAppWeb(dCtxSh, dFTest);
             TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, dFTest.driver);

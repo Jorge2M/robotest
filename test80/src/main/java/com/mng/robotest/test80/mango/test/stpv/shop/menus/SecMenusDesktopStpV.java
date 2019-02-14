@@ -10,6 +10,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -60,7 +61,7 @@ public class SecMenusDesktopStpV {
         DatosStep datosStep = new DatosStep     (
             "Seleccionar el menú superior <b>" + menu1rstLevel + "</b>", 
             "Aparece la galería asociada al menú");
-        datosStep.setGrabNettrafic(dFTest.ctx);
+        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
         try {
             SecMenusDesktop.
             	secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel, dCtxSh.appE, dFTest.driver);
@@ -80,7 +81,7 @@ public class SecMenusDesktopStpV {
         DatosStep datosStep = new DatosStep       (
             "Seleccionar el menú lateral de 1er nivel <b>" + menu1rstLevel + "</b>", 
             "Aparecen artículos de tipo Camiseta");
-        datosStep.setGrabNettrafic(dFTest.ctx);
+        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
         try {
             SecMenusDesktop.secMenuLateral.clickMenu(menu1rstLevel, dFTest.driver);
                     
@@ -100,7 +101,7 @@ public class SecMenusDesktopStpV {
         DatosStep datosStep = new DatosStep       (
             "Seleccionar el menú lateral de 2o nivel <b>" + menu2onLevel + "</b>", 
             "Aparecen artículos asociados al menú");
-        datosStep.setGrabNettrafic(dFTest.ctx);
+        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
         try {
             SecMenusDesktop.secMenuLateral.clickMenu(menu2onLevel, dFTest.driver);
                     
@@ -231,7 +232,7 @@ public class SecMenusDesktopStpV {
         DatosStep datosStep = new DatosStep     (
         	"Selección del menú <b>" + tagMenu + "</b> (data-ga-label=" + menu1rstLevel.getDataGaLabelMenuSuperiorDesktop() + ")", 
             "El menú se ejecuta correctamente");
-        datosStep.setGrabNettrafic(dFTest.ctx);
+        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
         try {
             //Si en la pantalla no existen los menús volvemos a la página inicial de la línea
         	if (!SecMenusDesktop.secMenuSuperior.secLineas.isLineaVisible(lineaMenu, app, dFTest.driver))

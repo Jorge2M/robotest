@@ -8,6 +8,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques.ButtonsCheque;
@@ -32,8 +33,7 @@ public class PageGestorChequesStpV {
 		DatosStep datosStep = new DatosStep       (
 			"Introducimos el email <b>" + mail + "</b> y damos click al botón \"Correo del cliente\"", 
 			"Muestra los cheques asociados al mail correctamente");
-		datosStep.setGrab_ErrorPageIfProblem(false);
-
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
 		try {
 			PageGestorCheques.inputMailAndClickCorreoReceptorButton(mail, dFTest.driver);
 
@@ -61,8 +61,7 @@ public class PageGestorChequesStpV {
 		DatosStep datosStep = new DatosStep       (
 			"Damos click al pedido de la " + numFila + "a fila", 
 			"Muestra la página de detalles del pedido");
-		datosStep.setGrab_ErrorPageIfProblem(false);
-
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
 		String pedido;
 		try {
 			pedido = PageGestorCheques.clickPedido(numFila, mail, dFTest.driver);
@@ -100,8 +99,7 @@ public class PageGestorChequesStpV {
 		DatosStep datosStep = new DatosStep       (
 				"Damos click a <b>Volver a cheques</b>",
 				"Muestra la página de información sobre los cheques");
-		datosStep.setGrab_ErrorPageIfProblem(false);
-
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
 		try {
 			PageGestorCheques.clickAndWait(ButtonsCheque.volverCheques, dFTest.driver);
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
@@ -232,7 +230,7 @@ public class PageGestorChequesStpV {
 		DatosStep datosStep = new DatosStep 	 	(
 			"Introducimos el numero de cheque con valor: <b>" + cheque + "</b>" ,
 			"Una vez hemos buscado dicho numero, nos aparece una tabla con información");
-		datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
 		try {
 			PageGestorCheques.inputChequeAndConfirm(cheque, dFTest.driver);
 
@@ -254,7 +252,7 @@ public class PageGestorChequesStpV {
 		DatosStep datosStep = new DatosStep		(
 			"Accedemos al numero de cheque",
 			"Aparece toda la información de dicho cheque pero no un email");
-		datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
 		try {
 			PageGestorCheques.clickAndWait(ButtonsCheque.chequeData, dFTest.driver);
 

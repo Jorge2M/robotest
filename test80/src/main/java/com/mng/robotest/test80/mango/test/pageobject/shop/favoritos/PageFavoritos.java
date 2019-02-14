@@ -121,8 +121,9 @@ public class PageFavoritos extends WebdrvWrapp {
         return (isElementVisibleUntil(driver, By.xpath(XPathBlockFavWithArt), maxSecondsToWait));
     }
     
-    public static void clearArticuloAndWait(ArticuloScreen articulo, WebDriver driver) throws Exception {
-        String xpathBorrar = getXPathAspaBorrar(articulo.getRefProducto(), articulo.getCodigoColor());
+    public static void clearArticuloAndWait(String refArticulo, String codColorArticulo, WebDriver driver) 
+    throws Exception {
+        String xpathBorrar = getXPathAspaBorrar(refArticulo, codColorArticulo);
         
         //Ejecutamos el click mediante JavaScript porque en el caso de móvil en ocasiones el aspa de cerrado queda por debajo de la cabecera
         clickAndWaitLoad(driver, By.xpath(xpathBorrar), TypeOfClick.javascript);

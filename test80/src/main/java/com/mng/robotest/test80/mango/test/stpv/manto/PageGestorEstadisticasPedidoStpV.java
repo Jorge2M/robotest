@@ -5,6 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorEstadisticasPedido;
 
 @SuppressWarnings("javadoc")
@@ -39,8 +40,7 @@ public class PageGestorEstadisticasPedidoStpV {
 		DatosStep datosStep = new DatosStep       (
 			"Seleccionamos \"Todos los zalandos\" y damos click a \"Mostrar Pedidos\"", 
 			"Muestra la tabla de información correctamente");
-		datosStep.setGrab_ErrorPageIfProblem(false);
-
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
 		try {
 			PageGestorEstadisticasPedido.selectZalandoAndClickShowOrdersButton(dFTest.driver);
 
@@ -74,8 +74,7 @@ public class PageGestorEstadisticasPedidoStpV {
 		DatosStep datosStep = new DatosStep       (
 			"Seleccionamos el radio \"Día Anterior\" y damos click a \"Comparar\"", 
 			"Se muestran las celdas rojas y verdes con valores correctos");
-		datosStep.setGrab_ErrorPageIfProblem(false);
-
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
 		try {
 			PageGestorEstadisticasPedido.selectDiaAnteriorAndClickCompararButton(dFTest.driver);
 

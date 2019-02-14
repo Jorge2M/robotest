@@ -13,8 +13,7 @@ public class PagePaypalConfirmacionStpV {
     public static void validateIsPageUntil(int maxSecondsWait, DatosStep datosStep, DataFmwkTest dFTest) {
         //Validaciones
         String descripValidac =
-            "1) Aparece la página de Confirmación (la esperamos hasta " + maxSecondsWait + " segundos)";
-        datosStep.setGrabImage(true);        
+            "1) Aparece la página de Confirmación (la esperamos hasta " + maxSecondsWait + " segundos)";      
         datosStep.setNOKstateByDefault(); 
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {    

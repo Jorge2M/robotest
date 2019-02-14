@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.Test80mng.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -112,14 +113,14 @@ public class Registro extends GestorWebDriver {
         }        
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        storeInThread(dCtxSh);
-        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
+        ThreadData.storeInThread(dCtxSh);
+        ThreadData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
     }
 
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Registro", "Canal:all_App:all", "SupportsFactoryCountrys"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getWebDriver();
+        WebDriver driver = ThreadData.getWebDriver();
         super.quitWebDriver(driver, context);
     }       
 
@@ -128,8 +129,8 @@ public class Registro extends GestorWebDriver {
         groups={"Registro", "Canal:desktop_App:all"},
         description="Registro con errores en la introducción de los datos")
     public void REG001_RegistroNOK(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         dCtxSh.userRegistered = false;
         if (dCtxSh.appE==AppEcom.votf)
             return;
@@ -184,8 +185,8 @@ public class Registro extends GestorWebDriver {
         	clickRegister = false;
         }
         
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         dCtxSh.userRegistered = false;
             
         //En caso de ejecución desde .bat no ejecutaremos el Registro 
@@ -283,8 +284,8 @@ public class Registro extends GestorWebDriver {
         description="Alta/Registro de un usuario (sin seleccionar el link de publicidad)")
     public void REG003_RegistroOK_NoPubli(ITestContext context, Method method) throws Exception {
     	boolean clickPubli = false;
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         dCtxSh.userRegistered = false;
             
         //En caso de ejecución desde .bat no ejecutaremos el Registro 

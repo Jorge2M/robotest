@@ -10,6 +10,7 @@ import java.util.List;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -44,14 +45,14 @@ public class IniciarSesion extends GestorWebDriver {
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        storeInThread(dCtxSh);
-        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        ThreadData.storeInThread(dCtxSh);
+        ThreadData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 
     @SuppressWarnings("unused")
     @AfterMethod (groups={"IniciarSesion", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getWebDriver();
+        WebDriver driver = ThreadData.getWebDriver();
         super.quitWebDriver(driver, context);
     }       
 
@@ -59,8 +60,8 @@ public class IniciarSesion extends GestorWebDriver {
         groups={"IniciarSesion", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, /*dependsOnMethods = {"SES002_Registro_OK"},*/ alwaysRun=true, 
         description="Verificar inicio sesión con usuario incorrecto")
     public void SES001_IniciarSesion_NOK(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         dCtxSh.userRegistered = false;
                     
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
@@ -75,8 +76,8 @@ public class IniciarSesion extends GestorWebDriver {
         groups={"IniciarSesion", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, /*dependsOnMethods = {"SES003_IniciarSesion_NOK"},*/ alwaysRun=true, 
         description="[Usuario registrado] Verificar inicio sesión")
     public void SES002_IniciarSesion_OK(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;

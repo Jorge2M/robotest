@@ -6,9 +6,11 @@ import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -145,7 +147,7 @@ public class SecBolsaStpV {
             datosStep = altaBolsaArticulos(listArticlesForAdd, dataBag, dCtxSh, dFTest);
         
             //Validación
-            validaAltaArtBolsa(datosStep, dataBag, dCtxSh.channel, dCtxSh.appE, dFTest);
+            validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, dFTest);
         }
         
         //Almacenamos el importe SubTotal y el de Transporte
@@ -172,8 +174,8 @@ public class SecBolsaStpV {
         DatosStep datosStep = new DatosStep (
             "Buscar y dar de alta los siguientes productos en la bolsa:<br>" + listaArtStr, 
             "Los productos se dan de alta en la bolsa correctamente");
-        datosStep.setGrabHTML(true);
-        datosStep.setGrabNettrafic(dFTest.ctx);
+        datosStep.setSaveHtmlPage(SaveWhen.Always);
+        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
         try {
         	//Damos de alta la lista de productos en la bolsa
             for (int i=0; i<listParaAlta.size(); i++) {
@@ -203,10 +205,11 @@ public class SecBolsaStpV {
      * Validaciones posteriores al alta de una lista de artículos en la bolsa
      * @param listArtEnBolsa lista total de artículos dados de alta a la bolsa
      */
-    public static void validaAltaArtBolsa(DatosStep datosStep, DataBag dataBag, Channel channel, AppEcom app, DataFmwkTest dFTest) 
+    public static void validaAltaArtBolsa(DataBag dataBag, Channel channel, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
         //Validaciones
-        validaNumArtEnBolsa(dataBag, channel, app, datosStep, dFTest);
+    	DatosStep datosStep = ThreadData.peekDatosStep();
+        validaNumArtEnBolsa(dataBag, channel, app, dFTest);
         if (channel==Channel.desktop) {
             int maxSecondsToWait = 1;
             String descripValidac =
@@ -238,8 +241,9 @@ public class SecBolsaStpV {
         PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, analyticSet, datosStep, dFTest);
     }
     
-    public static void validaNumArtEnBolsa(DataBag dataBag, Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
+    public static void validaNumArtEnBolsa(DataBag dataBag, Channel channel, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
+    	DatosStep datosStep = ThreadData.peekDatosStep();
         int maxSecondsToWait = 2;
         String descripValidac =
             "1) Existen " + dataBag.getListArticulos().size() + 
@@ -359,7 +363,7 @@ public class SecBolsaStpV {
         DatosStep datosStep = new DatosStep     (
             "Se selecciona el botón \"COMPRAR\" de la bolsa", 
             "Se muestra la página de identificación");
-        datosStep.setGrabNettrafic(dFTest.ctx);
+        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
         try {
         	//SecBolsa.setBolsaToStateIfNotYet(StateBolsa.Open, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
             SecBolsa.clickBotonComprar(dFTest.driver, dCtxSh.channel, 10/*secondsWait*/);

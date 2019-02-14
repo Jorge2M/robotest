@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum;
@@ -90,15 +91,15 @@ public class MiCuenta extends GestorWebDriver {
         }
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        storeInThread(dCtxSh);
-        getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
+        ThreadData.storeInThread(dCtxSh);
+        ThreadData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
     }
 
 
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Micuenta", "Canal:all_App:all", "SupportsFactoryCountrys"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = getWebDriver();
+        WebDriver driver = ThreadData.getWebDriver();
         super.quitWebDriver(driver, context);
     }       
 
@@ -107,8 +108,8 @@ public class MiCuenta extends GestorWebDriver {
         description="Verificar opciones de 'mi cuenta'")
     @Parameters({"userConDevolucionPeroSoloEnPRO", "passwordUserConDevolucion"})
     public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion, ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         dCtxSh.userConnected = userConDevolucionPeroNoEnPRO;
         dCtxSh.passwordUser = passwordUserConDevolucion;
             
@@ -145,8 +146,8 @@ public class MiCuenta extends GestorWebDriver {
         description="Consulta de mis compras con un usuario con datos a nivel de Tienda y Online")
     @Parameters({"userConComprasPeroSoloOnlineEnPRO", "passwordUserConCompras"})
     public void MIC002_CheckConsultaMisCompras(String userConCompras, String passwordUserConCompras, ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = getdFTest();
-        DataCtxShop dCtxSh = getdCtxSh();
+    	DataFmwkTest dFTest = ThreadData.getdFTest();
+        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
         dCtxSh.userConnected = userConCompras;
         dCtxSh.passwordUser = passwordUserConCompras;
         dCtxSh.userRegistered = true;

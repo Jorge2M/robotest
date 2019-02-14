@@ -32,8 +32,6 @@ public class PagePaypalLoginStpV {
             "Introducimos las credenciales (" + userMail + " - " + password + ") y pulsamos el botón \"Iniciar sesión\"", 
             "Aparece la página de inicio de sesión en Paypal");
         datosStep.setNOKstateByDefault();    
-        datosStep.setGrabImage(true);
-        datosStep.setGrabHTML(true);
         String paginaPadre = dFTest.driver.getWindowHandle();            
         try {                                          
             PagePaypalLogin.inputUserAndPassword(userMail, password, dFTest.driver);

@@ -11,6 +11,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -182,7 +183,7 @@ public class PageGaleriaStpV {
         DatosStep datosStep = new DatosStep (
             "Del " + posArticulo + "o artículo, seleccionamos la " + posTalla + "a talla", 
             "Se da de alta correctamente el artículo en la bolsa");
-        datosStep.setGrabHTML(true);
+        datosStep.setSaveHtmlPage(SaveWhen.Always);
         try { 
             articulo = pageGaleriaDesktop.selectTallaArticle(posArticulo, posTalla);
                             
@@ -194,7 +195,7 @@ public class PageGaleriaStpV {
         boolean isVisibleAvisame = ModalArticleNotAvailableStpV.validateState(StateModal.notvisible, datosStep, dFTest);
         if (!isVisibleAvisame) {
             dataBag.addArticulo(articulo);
-            SecBolsaStpV.validaAltaArtBolsa(datosStep, dataBag, dCtxSh.channel, dCtxSh.appE, dFTest);
+            SecBolsaStpV.validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, dFTest);
         }
         
         return !isVisibleAvisame;
@@ -223,7 +224,7 @@ public class PageGaleriaStpV {
         DatosStep datosStep = new DatosStep (
             "Escrollar hasta posicionarse en la " + idPage + " página", 
             "Se escrolla correctamente");
-        datosStep.setGrabNettrafic(dFTest.ctx);
+        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
         try {
         	datosScroll = pageGaleria.scrollToPageFromFirst(pageToScroll, dCtxSh.appE);
                               
@@ -588,7 +589,7 @@ public class PageGaleriaStpV {
        DatosStep datosStep = new DatosStep       (
            "Seleccionar el " + numArtConColores + "o artículo con variedad de colores (" + nombre1erArt + " " + precio1erArt + ")", 
            "Aparece el artículo original(" + nombre1erArt + " " + precio1erArt + ")");
-       datosStep.setGrabNettrafic(dFTest.ctx);       
+       datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);       
        try {
            pageGaleria.clickArticulo(articuloColores);
                

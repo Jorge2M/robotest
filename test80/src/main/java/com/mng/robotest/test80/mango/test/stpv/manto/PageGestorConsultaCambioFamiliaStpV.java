@@ -5,6 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorConsultaCambioFamilia;
 
 @SuppressWarnings("javadoc")
@@ -39,7 +40,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 		DatosStep datosStep = new DatosStep       (
 			"Buscamos productos por la familia \"Accesorios\" ", 
 			"Muestra la tabla con productos que corresponden con esta familia");
-		datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
 		try {
 			PageGestorConsultaCambioFamilia.selectAccesoriosAndClickConsultaPorFamiliaButton(dFTest.driver);
 
@@ -71,8 +72,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 		DatosStep datosStep = new DatosStep       (
 				"Damos click al botón \"Cambio Familia\"", 
 				"Muestra la página que permite gestionar los cambios de familia");
-		datosStep.setGrab_ErrorPageIfProblem(false);
-
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
 		try {
 			PageGestorConsultaCambioFamilia.clickCambioFamiliaButton(dFTest.driver);
 

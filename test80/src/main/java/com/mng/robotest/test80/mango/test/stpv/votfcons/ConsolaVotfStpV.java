@@ -5,6 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.votfcons.IframeResult;
 import com.mng.robotest.test80.mango.test.pageobject.votfcons.PageConsola;
 
@@ -20,7 +21,7 @@ public class ConsolaVotfStpV {
         DatosStep datosStep = new DatosStep       (
             "Accedemos a la página inicial de VOTF", 
             "Aparece la página inicial de VOTF");
-        datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
             dFTest.driver.get(urlVOTF);
                 
@@ -59,7 +60,7 @@ public class ConsolaVotfStpV {
         DatosStep datosStep = new DatosStep       (
             "Seleccionamos el entorno de  " + entorno + " en los apartados \"Test servicios VOTF\" y \"Consola comandos VOTF\"", 
             "El entorno se selecciona correctamente");
-        datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
             //Seleccionamos el valor del desplegable "Entorno" (de Test) correspondiente al entorno de Preproducción
             PageConsola.selectEntornoTestServ(dFTest.driver, entorno);
@@ -82,7 +83,7 @@ public class ConsolaVotfStpV {
         DatosStep datosStep = new DatosStep       (
             "Introducimos el artículo disponible " + articulo + " (a nivel de  artículo disponible y de compra) + la tienda " + tienda, 
             "Aparecen datos correspondientes a " + PageConsola.msgConsTiposEnvioOK);
-        datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
             PageConsola.inputArticDispYCompra(dFTest.driver, articulo);
             PageConsola.inputTiendas(tienda, dFTest.driver);
@@ -102,7 +103,7 @@ public class ConsolaVotfStpV {
         DatosStep datosStep = new DatosStep       (
             "Selección botón \"Consultar tipos de envío\"", 
             "Aparecen datos correspondientes a " + PageConsola.msgConsTiposEnvioOK);
-        datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
             //Seleccionamos el botón "Consultar tipos de envío"
             PageConsola.clickButtonConsTiposEnvios(dFTest.driver);
@@ -146,7 +147,7 @@ public class ConsolaVotfStpV {
         DatosStep datosStep = new DatosStep       (
             "Introducimos el artículo " + articulo + " (a nivel de  artículo disponible y de compra) + Seleccionar el botón \"Consultar Disponibilidad Envío Domicilio\"", 
             "Aparece la tabla de transportes con los tipos");
-        datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
             //Si todavía no están introducidos, introducimos el código de artículo en los inputs compra y disponiblidad
             PageConsola.inputArticDispYCompra(dFTest.driver, articulo);
@@ -203,7 +204,7 @@ public class ConsolaVotfStpV {
         DatosStep datosStep = new DatosStep       (
             "Introducimos el artículo " + articulo + " (a nivel de  artículo disponible y de compra) + Seleccionar el botón \"Consultar Disponibilidad Envío Tienda\"", 
             "Aparece el bloque de transportes y el tipo de stock");
-        datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
             //Si todavía no están introducidos, introducimos el código de artículo en los inputs compra y disponiblidad
             PageConsola.inputArticDispYCompra(dFTest.driver, articulo);
@@ -255,7 +256,7 @@ public class ConsolaVotfStpV {
         DatosStep datosStep = new DatosStep (
             "Seleccionar el botón \"Realizar Solicitud A Tienda\"", 
             "El pedido se crea correctamente");
-        datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
             //Si todavía no están introducidos, introducimos el código de artículo en los inputs compra y disponiblidad
             PageConsola.inputArticDispYCompra(dFTest.driver, articulo);
@@ -313,7 +314,7 @@ public class ConsolaVotfStpV {
         DatosStep datosStep = new DatosStep (
             "Seleccionar el botón \"Obtener Pedidos\"", 
             "Aparece la lista de pedidos");
-        datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
             //Seleccionamos el botón "Obtener pedidos" (y esperamos hasta que se carga la página)
             PageConsola.clickButtonObtenerPedidos(dFTest.driver);
@@ -361,7 +362,7 @@ public class ConsolaVotfStpV {
         DatosStep datosStep = new DatosStep       (
             "Seleccionar el pedido " + codigoPedidoFull + "en el desplegable \"Pedido\" y pulsar \"Seleccionar pedido\"", 
             "Aparece el pedido seleccionado");
-        datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
             //Seleccionar el pedido en el desplegable
             PageConsola.selectPedido(dFTest.driver, codigoPedidoFull);
@@ -406,7 +407,7 @@ public class ConsolaVotfStpV {
         DatosStep datosStep = new DatosStep       (
             "Pulsar el botón \"Preconfirmar Pedido\"", 
             "Aparece el pedido como preconfirmado");
-        datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
             //Seleccionamos el botón "Seleccionar Pedidos" (y esperamos hasta que se carga la página)
             PageConsola.clickButtonPreconfPedido(dFTest.driver);
@@ -454,7 +455,7 @@ public class ConsolaVotfStpV {
         DatosStep datosStep = new DatosStep       (
             "Pulsar el botón \"Confirmar Pedido\"", 
             "Aparece el pedido confirmado");
-        datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
             //Seleccionamos el botón "Seleccionar Pedidos" (y esperamos hasta que se carga la página)
             PageConsola.clickButtonConfPedido(dFTest.driver);

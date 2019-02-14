@@ -6,6 +6,7 @@ import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -99,7 +100,7 @@ public class PagePrehomeStpV {
         DatosStep datosStep = new DatosStep(
             "Acceder a la página de inicio y seleccionar el país <b>" + dCtxSh.pais.getNombre_pais() + "</b>, el idioma <b>" + dCtxSh.idioma.getCodigo().getLiteral() + "</b> y acceder",
             "Se accede correctamente al pais / idioma seleccionados");
-        datosStep.setGrabNettrafic(dFTest.ctx);
+        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
         try {
             PagePrehome.accesoShopViaPrehome(dCtxSh, dFTest);
 

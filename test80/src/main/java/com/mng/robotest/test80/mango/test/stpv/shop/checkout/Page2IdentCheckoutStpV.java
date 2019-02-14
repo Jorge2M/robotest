@@ -7,6 +7,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -45,7 +46,7 @@ public class Page2IdentCheckoutStpV {
         DatosStep datosStep = new DatosStep (
             "Introdumios los datos del cliente según el país", 
             "Se hace clickable el botón \"Continuar\"");
-        datosStep.setGrabImage(true);
+        datosStep.setSaveImagePage(SaveWhen.Always);
         try {
             datosRegistro = Page2IdentCheckout.inputDataPorDefectoSegunPais(pais, emailUsr, inputDireccCharNoLatinos, false, dFTest.driver);
             datosStep.setDescripcion(datosStep.getDescripcion() + ". Utilizando los datos: "+ UtilsMangoTest.listaCamposHTML(datosRegistro));
@@ -91,7 +92,7 @@ public class Page2IdentCheckoutStpV {
         DatosStep datosStep = new DatosStep (
             descripIniTest + "Seleccionamos el botón \"Continuar\"", 
             descripResult /*Resultado esperado*/);
-        datosStep.setGrabImage(true);
+        datosStep.setSaveImagePage(SaveWhen.Always);
         try {
             Page2IdentCheckout.clickBotonContinuarAndWait(maxSecondsToWait, dFTest.driver);
 

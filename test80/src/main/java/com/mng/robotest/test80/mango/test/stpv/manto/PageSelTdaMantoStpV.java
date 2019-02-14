@@ -5,6 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.TiendaMantoEnum.TiendaManto;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageSelTda;
@@ -27,7 +28,7 @@ public class PageSelTdaMantoStpV {
         DatosStep datosStep = new DatosStep       (
             "Seleccionamos el entorno \"" + tienda + "\"", 
             "Aparece la página de Menús");
-        datosStep.setGrab_ErrorPageIfProblem(false);
+	    datosStep.setSaveErrorPage(SaveWhen.Never);
         try {
             //Si no estamos en la página de selección de tienda vamos a ella mediante selección del botón "Seleccionar tienda"
             if (!PageSelTda.isPage(dFTest.driver))
