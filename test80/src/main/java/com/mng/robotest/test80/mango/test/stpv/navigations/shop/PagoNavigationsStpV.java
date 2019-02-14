@@ -86,7 +86,7 @@ public class PagoNavigationsStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //Validaciones analítica (sólo para firefox y NetAnalysis)
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
@@ -275,7 +275,7 @@ public class PagoNavigationsStpV {
                                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Step. Cambiamos de país 
         //(en Chrome, cuando existe paralelización en ocasiones se pierden las cookies cuando se completa un pago con pasarela externa)

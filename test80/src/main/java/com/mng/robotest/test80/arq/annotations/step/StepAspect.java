@@ -33,9 +33,9 @@ public class StepAspect {
     
     private DatosStep getFromJoinPointAndStoreDatosStep(JoinPoint joinPoint, InfoStep infoStep) {
     	DatosStep datosStep = infoStep.getDatosStep();
-    	DatosStep stepAnterior = ThreadData.peekDatosStep();
-    	if (stepAnterior!=null) {
-    		datosStep.setStepNumber(stepAnterior.getStepNumber()+1);
+    	DatosStep maxDatosStep = ThreadData.getMaxDatosStep();
+    	if (maxDatosStep!=null) {
+    		datosStep.setStepNumber(maxDatosStep.getStepNumber()+1);
     	}
     	
     	ThreadData.storeInThread(datosStep);
@@ -73,8 +73,7 @@ public class StepAspect {
     
     private void storeStep(State stateResult, boolean isException, DatosStep datosStep) {
     	updateDatosStep(datosStep, stateResult, isException);
-        int numStep = fmwkTest.grabStep(datosStep, ThreadData.getdFTest());
-        datosStep.setStepNumber(numStep);
+        fmwkTest.grabStep(datosStep, ThreadData.getdFTest());
     }
     
     private void updateDatosStep(DatosStep datosStep, State stateResult, boolean isException) {

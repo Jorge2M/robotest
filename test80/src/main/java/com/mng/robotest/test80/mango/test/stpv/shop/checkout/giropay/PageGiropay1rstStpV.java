@@ -63,7 +63,7 @@ public class PageGiropay1rstStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         int maxSecondsToWait = 2;
@@ -89,7 +89,7 @@ public class PageGiropay1rstStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         maxSecondsToWait = 2;
         descripValidac = 
@@ -118,7 +118,7 @@ public class PageGiropay1rstStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validación
         PageGiropayInputDataTestStpV.validateIsPage(datosStep, dFTest);

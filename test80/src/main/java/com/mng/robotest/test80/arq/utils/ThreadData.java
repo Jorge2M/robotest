@@ -18,6 +18,7 @@ public class ThreadData {
     static ThreadLocal<DataCtxShop> dCtxShInThread = new ThreadLocal<>();
     static ThreadLocal<DataFmwkTest> dFTestInThread = new ThreadLocal<>();
     static ThreadLocal<Queue<DatosStep>> datosStepStack = new ThreadLocal<>();
+    static ThreadLocal<DatosStep> maxDatosStep = new ThreadLocal<>();
 
     public static DataCtxShop getdCtxSh() {
         return dCtxShInThread.get();
@@ -66,6 +67,7 @@ public class ThreadData {
     	
     	datosStepStackTmp.add(datosStep);
     	datosStepStack.set(datosStepStackTmp);
+    	maxDatosStep.set(datosStep);
     }
     
     public static void getAndStoreDataFmwk(String bpath, String appPath, String datosFactoria, Channel channel, ITestContext context, Method method) 
@@ -74,5 +76,9 @@ public class ThreadData {
 		WebDriver driver = gestorWdrv.getWebDriver(bpath, appPath, datosFactoria, channel, context, method);
 		DataFmwkTest dFTest = new DataFmwkTest(driver, TypeDriver.valueOf(bpath), method, context);
 		storeInThread(dFTest);
+    }
+    
+    public static DatosStep getMaxDatosStep() {
+    	return (maxDatosStep.get());
     }
 }

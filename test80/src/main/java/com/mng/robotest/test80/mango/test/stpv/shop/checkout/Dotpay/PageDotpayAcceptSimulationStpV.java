@@ -39,7 +39,7 @@ public class PageDotpayAcceptSimulationStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validation
         PageDotpayResultadoStpV.validateIsPage(datosStep, dFTest);

@@ -83,7 +83,7 @@ public class PageMercpagoDatosTrjStpV {
                                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
             
         //Validaciones
         int maxSecondsToWait = 2;
@@ -113,7 +113,7 @@ public class PageMercpagoDatosTrjStpV {
                                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
             
         //Validaciones
         int maxSecondsToWait = 2;
@@ -159,7 +159,7 @@ public class PageMercpagoDatosTrjStpV {
                                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
             
         //Validaciones
         int maxSecondsToWait = 2;
@@ -188,7 +188,7 @@ public class PageMercpagoDatosTrjStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
             
         //Validaciones
         PageMercpagoConfStpV.validaIsPage(Channel.movil_web, datosStep, dFTest);
@@ -213,7 +213,7 @@ public class PageMercpagoDatosTrjStpV {
                                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
             
         //Validaciones
         PageMercpagoConfStpV.validaIsPage(Channel.desktop, datosStep, dFTest);

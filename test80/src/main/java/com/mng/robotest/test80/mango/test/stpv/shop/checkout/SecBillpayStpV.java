@@ -50,7 +50,7 @@ public class SecBillpayStpV {
                                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         if (nombrePago.compareTo("Lastschrift")==0) {
             //Validaciones
@@ -93,7 +93,7 @@ public class SecBillpayStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         return datosStep;
     }

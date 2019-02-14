@@ -45,7 +45,7 @@ public class PageMiCuentaStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }             
+        finally { fmwkTest.grabStep(datosStep, dFTest); }             
         
         //Validaciones
         PageMisDatosStpV.validaIsPage(usuarioReg, datosStep, dFTest);
@@ -66,7 +66,7 @@ public class PageMiCuentaStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }             
+        finally { fmwkTest.grabStep(datosStep, dFTest); }             
         
         if (channel==Channel.movil_web) {
             //En el caso de móvil_web aparece una página intermedia "New!"
@@ -104,7 +104,7 @@ public class PageMiCuentaStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         PageSuscripcionesStpV.validaIsPage(datosStep, dFTest);
@@ -134,7 +134,7 @@ public class PageMiCuentaStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }           
+        finally { fmwkTest.grabStep(datosStep, dFTest); }           
             
         //Validaciones.
         PagePedidosStpV.validaIsPageSinPedidos(usrRegistrado, datosStep, dFTest);
@@ -156,7 +156,7 @@ public class PageMiCuentaStpV {
                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }           
+        finally { fmwkTest.grabStep(datosStep, dFTest); }           
                 
         //Validaciones
         PageDevolucionesStpV.validaIsPage(datosStep, dFTest);
@@ -178,7 +178,7 @@ public class PageMiCuentaStpV {
                                                                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }           
+        finally { fmwkTest.grabStep(datosStep, dFTest); }           
                 
         //Validaciones
         PageReembolsosStpV.validateIsPage(datosStep, dFTest);

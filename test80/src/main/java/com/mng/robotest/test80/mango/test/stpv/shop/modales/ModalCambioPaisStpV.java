@@ -40,7 +40,7 @@ public class ModalCambioPaisStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));}
+        finally { fmwkTest.grabStep(datosStep, dFTest);}
         
         //Validation. Aparece el país destino con todas las líneas de dicho país
         PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, datosStep, dFTest);

@@ -86,7 +86,7 @@ public class PageCheckoutWrapperStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //Validaciones (validamos los métodos de pago disponibles)
         validaMetodosPagoDisponibles(datosStep, pais, isEmpl, app, channel, dFTest);
@@ -156,7 +156,7 @@ public class PageCheckoutWrapperStpV {
         try {
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }         
+        finally { fmwkTest.grabStep(datosStep, dFTest); }         
             
         return datosStep;
     }
@@ -293,7 +293,7 @@ public class PageCheckoutWrapperStpV {
         catch (Exception e) {
             pLogger.warn("Problem clicking icono pago for payment {} in country {}", pago.getNombre(), pais.getNombre_pais(), e);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         if (pago.getTypePago()==TypePago.TarjetaIntegrada || 
             pago.getTypePago()==TypePago.KrediKarti ||
@@ -390,7 +390,7 @@ public class PageCheckoutWrapperStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         PageRedirectPasarelaLoadingStpV.validateDisappeared(datosStep, dFTest);
@@ -408,7 +408,7 @@ public class PageCheckoutWrapperStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //Validaciones
         modalDirecFactura.validateIsOk(datosStep, dFTest);
@@ -426,7 +426,7 @@ public class PageCheckoutWrapperStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //Validaciones
         modalDirecEnvio.validateIsOk(datosStep, dFTest);
@@ -448,7 +448,7 @@ public class PageCheckoutWrapperStpV {
         catch (Exception e) {
             //
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         return datosStep;
     }
@@ -468,7 +468,7 @@ public class PageCheckoutWrapperStpV {
         catch (Exception e) {
             //
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //Validaciones
         maxSecondsToWait = 2;
@@ -504,7 +504,7 @@ public class PageCheckoutWrapperStpV {
         catch (Exception e) {
             pLogger.warn("Problem in click Confirm payment button", e);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
                             
         //Validaciones
         PageRedirectPasarelaLoadingStpV.validateDisappeared(datosStep, dFTest);
@@ -522,7 +522,7 @@ public class PageCheckoutWrapperStpV {
         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         int maxSecondsToWait = 5;
@@ -604,7 +604,7 @@ public class PageCheckoutWrapperStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         validaResultImputPromoEmpl(dataBag, channel, app, datosStep, dFTest);
@@ -640,7 +640,7 @@ public class PageCheckoutWrapperStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
       //Validaciones
         String descripValidac = 

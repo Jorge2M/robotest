@@ -31,7 +31,7 @@ public class SecStoreCreditStpV {
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
             dCtxPago.getDataPedido().setImporteTotal(PageCheckoutWrapper.getPrecioTotalFromResumen(channel, dFTest.driver));
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
                     
         //Validaciones (bloque "Saldo en cuenta" marcado)
         validaBloqueSaldoEnCuenta(datosStep, true/*marcado*/, channel, dCtxPago, dFTest);
@@ -50,7 +50,7 @@ public class SecStoreCreditStpV {
                                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
                             
         PageCheckoutWrapperStpV.validateLoadingDisappears(datosStep, dFTest);
         validaBloqueSaldoEnCuenta(datosStep, !marcadoInicialmente, channel, dCtxPago, dFTest);

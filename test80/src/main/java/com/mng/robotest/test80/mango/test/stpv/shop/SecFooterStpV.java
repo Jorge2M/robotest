@@ -62,7 +62,7 @@ public class SecFooterStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
                 
         //Validaciones
     	String windowActualHandle = dFTest.driver.getWindowHandle();
@@ -143,7 +143,7 @@ public class SecFooterStpV {
              PageMangoCard.clickOnWantMangoCardNow(dFTest.driver, channel);
              datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
          }
-         finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+         finally { fmwkTest.grabStep(datosStep, dFTest); }
 
          //Si no estamos en el entorno de CI
          if(!dFTest.driver.getCurrentUrl().contains("shop-ci")) {
@@ -193,7 +193,7 @@ public class SecFooterStpV {
                  datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 
              } 
-             finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+             finally { fmwkTest.grabStep(datosStep, dFTest); }
              
              //Validaciones
              int secondsToWait = 3;
@@ -226,7 +226,7 @@ public class SecFooterStpV {
                  PageInputDataSolMangoCard.clickBotonCerrarModal(dFTest.driver);                     
                  datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
              }
-             finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+             finally { fmwkTest.grabStep(datosStep, dFTest); }
            
              //Validaciones
              descripValidac = 
@@ -286,7 +286,7 @@ public class SecFooterStpV {
 
              datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
          } 
-         finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));}
+         finally { fmwkTest.grabStep(datosStep, dFTest);}
          
          //Validaciones. 
          ModalCambioPaisStpV.validateIsVisible(datosStep, dFTest);
@@ -315,7 +315,7 @@ public class SecFooterStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));}
+        finally { fmwkTest.grabStep(datosStep, dFTest);}
              
      	//Validaciones
  		if (dCtxSh.pais.getRgpd().equals("S")) {

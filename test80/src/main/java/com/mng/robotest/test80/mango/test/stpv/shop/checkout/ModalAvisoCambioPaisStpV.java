@@ -23,7 +23,7 @@ public class ModalAvisoCambioPaisStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //Validaciones
         int maxSecondsWait = 10;

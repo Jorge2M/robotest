@@ -130,7 +130,7 @@ public class PageResultPagoStpV {
                                                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }         
+        finally { fmwkTest.grabStep(datosStep, dFTest); }         
                                 
         //Puede aparecer la página con la lista de pedidos o la de introducción de los datos del pedido
         if (PageListPedidos.isPage(dFTest.driver))
@@ -157,7 +157,7 @@ public class PageResultPagoStpV {
                                                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }         
+        finally { fmwkTest.grabStep(datosStep, dFTest); }         
                                 
         //Validations
         if (userRegistered)
@@ -185,7 +185,7 @@ public class PageResultPagoStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         return datosStep;
     }

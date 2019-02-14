@@ -122,7 +122,7 @@ public class PagePostfCodSegStpV {
         }
         finally {
             dFTest.driver.switchTo().defaultContent(); 
-            datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); 
+            fmwkTest.grabStep(datosStep, dFTest); 
         }
             
         //Validaciones

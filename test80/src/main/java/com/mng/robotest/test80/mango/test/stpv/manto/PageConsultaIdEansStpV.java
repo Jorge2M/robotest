@@ -49,7 +49,7 @@ public class PageConsultaIdEansStpV {
 	            
 	        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 	    }
-	    finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+	    finally { fmwkTest.grabStep(datosStep, dFTest); }
 		
 	    int maxSecondsToWait = 2;
 	    String descripValidac = 
@@ -87,7 +87,7 @@ public class PageConsultaIdEansStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 		
         int maxSecondsToWait = 2;
 		String descripValidac = 
@@ -122,7 +122,7 @@ public class PageConsultaIdEansStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 		
         int maxSecondsToWait = 2;
 		String descripValidac = 
@@ -149,7 +149,7 @@ public class PageConsultaIdEansStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 		
         int maxSecondsToWait = 2;
 		String descripValidac = 

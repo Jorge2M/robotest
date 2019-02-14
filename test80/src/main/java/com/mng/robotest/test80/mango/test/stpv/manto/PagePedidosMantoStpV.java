@@ -127,7 +127,7 @@ public class PagePedidosMantoStpV {
 			datosStep.setResultSteps(State.Ok);
 
 		} finally {
-			datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));
+			fmwkTest.grabStep(datosStep, dFTest);
 		}
 
 		String descripValidac = "1) Tenemos código de pedido " + dPedidoPrueba.getCodpedido();
@@ -174,7 +174,7 @@ public class PagePedidosMantoStpV {
 			datosStep.setResultSteps(State.Ok);
 
 		} finally {
-			datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));
+			fmwkTest.grabStep(datosStep, dFTest);
 		}
 
 		String descripValidac = "1) El pedido tiene las referencias " + referencias.toString();
@@ -217,7 +217,7 @@ public class PagePedidosMantoStpV {
 			datosStep.setResultSteps(State.Ok);
 
 		} finally {
-			datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));
+			fmwkTest.grabStep(datosStep, dFTest);
 		}
 
 		String descripValidac = "1) Tenemos el DNI del cliente " + dPedidoPrueba.getPago().getDni() + "<br>"
@@ -260,7 +260,7 @@ public class PagePedidosMantoStpV {
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		} 
 		finally {
-			datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));
+			fmwkTest.grabStep(datosStep, dFTest);
 		}
 
 		String descripValidac = "1) Tenemos la tienda física " + dPedidoPrueba.getDataDeliveryPoint().getCodigo();

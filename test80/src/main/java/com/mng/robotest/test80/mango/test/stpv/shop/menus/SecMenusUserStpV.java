@@ -42,7 +42,7 @@ public class SecMenusUserStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }           
+        finally { fmwkTest.grabStep(datosStep, dFTest); }           
             
         //Validaciones
         PageFavoritosStpV.validaIsPageOK(dataFavoritos, dFTest);
@@ -62,7 +62,7 @@ public class SecMenusUserStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }           
+        finally { fmwkTest.grabStep(datosStep, dFTest); }           
             
         //Validaciones
         PageRegistroIniStpV.validaIsPage(datosStep, dFTest);
@@ -83,7 +83,7 @@ public class SecMenusUserStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         int maxSecondsToWait = 3;
@@ -114,7 +114,7 @@ public class SecMenusUserStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         String descripValidac = 
@@ -144,7 +144,7 @@ public class SecMenusUserStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }		
+        finally { fmwkTest.grabStep(datosStep, dFTest); }		
 		
         PageMiCuentaStpV.validateIsPage(datosStep, dFTest);
 	}
@@ -159,7 +159,7 @@ public class SecMenusUserStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));}
+        finally { fmwkTest.grabStep(datosStep, dFTest);}
 
         //Validaciones. 
         ModalCambioPaisStpV.validateIsVisible(datosStep, dFTest);

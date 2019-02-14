@@ -45,7 +45,7 @@ public class SecBuscadorStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }         
+        finally { fmwkTest.grabStep(datosStep, dFTest); }         
 
         //Validations
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dFTest);
@@ -72,7 +72,7 @@ public class SecBuscadorStpV {
                                                                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }           
+        finally { fmwkTest.grabStep(datosStep, dFTest); }           
             
         if (categoriaExiste) { 
             //Validaciones

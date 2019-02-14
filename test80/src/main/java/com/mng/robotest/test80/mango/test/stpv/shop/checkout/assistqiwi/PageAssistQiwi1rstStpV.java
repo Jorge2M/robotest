@@ -46,7 +46,7 @@ public class PageAssistQiwi1rstStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //Validaciones
         PageQiwiInputTlfnStpV.validateIsPage(datosStep, dFTest);

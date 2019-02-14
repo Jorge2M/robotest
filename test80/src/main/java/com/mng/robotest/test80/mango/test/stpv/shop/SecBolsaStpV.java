@@ -46,7 +46,7 @@ public class SecBolsaStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         return datosStep;
     }
@@ -69,7 +69,7 @@ public class SecBolsaStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); } 
+        finally { fmwkTest.grabStep(datosStep, dFTest); } 
     
         //Validaciones
         int maxSecondsToWait = 3;
@@ -104,7 +104,7 @@ public class SecBolsaStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); } 
+        finally { fmwkTest.grabStep(datosStep, dFTest); } 
     
         //Validaciones
         validateBolsaInState(stateBolsaExpected, channel, datosStep, dFTest);
@@ -196,7 +196,7 @@ public class SecBolsaStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         return datosStep;
     }
@@ -333,7 +333,7 @@ public class SecBolsaStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); } 
+        finally { fmwkTest.grabStep(datosStep, dFTest); } 
 
         //Validaciones
         int maxSecondsToWait = 5;
@@ -370,7 +370,7 @@ public class SecBolsaStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         validaSelectButtonComprar(datosStep, dataBag, dCtxSh, dFTest);
@@ -408,7 +408,7 @@ public class SecBolsaStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); } 
+        finally { fmwkTest.grabStep(datosStep, dFTest); } 
     
         //Validaciones.
         String refArticulo = articuloClickado.getReferencia();

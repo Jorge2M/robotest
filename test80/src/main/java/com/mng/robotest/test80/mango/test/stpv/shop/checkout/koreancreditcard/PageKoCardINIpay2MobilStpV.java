@@ -38,7 +38,7 @@ public class PageKoCardINIpay2MobilStpV extends ElementPageFunctions {
 	        
 	        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 	    } 
-	    finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+	    finally { fmwkTest.grabStep(datosStep, dFTest); }
 	
 	    //Validation
 	    PageKoCardINIpay3MobilStpV.validateIsPage(datosStep, dFTest);

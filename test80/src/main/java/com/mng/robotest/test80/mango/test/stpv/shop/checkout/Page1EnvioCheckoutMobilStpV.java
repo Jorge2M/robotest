@@ -76,7 +76,7 @@ public class Page1EnvioCheckoutMobilStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //Validaciones
         validaBlockSelected(tipoTransporte, datosStep, dFTest);
@@ -114,7 +114,7 @@ public class Page1EnvioCheckoutMobilStpV {
                                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
                 
         PageCheckoutWrapperStpV.validateLoadingDisappears(datosStep, dFTest);
         
@@ -164,7 +164,7 @@ public class Page1EnvioCheckoutMobilStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         return datosStep;
     }

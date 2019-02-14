@@ -46,7 +46,7 @@ public class PageGestorEstadisticasPedidoStpV {
 
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		}
-		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		finally { fmwkTest.grabStep(datosStep, dFTest); }
 
 		String descripValidac = 
 			"1) Aparece la tabla de información<br>" +
@@ -80,7 +80,7 @@ public class PageGestorEstadisticasPedidoStpV {
 
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		}
-		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		finally { fmwkTest.grabStep(datosStep, dFTest); }
 
 		String descripValidac = 
 			"1) Las columnas de comparación en verde no contienen \"0 €\"<br>" +

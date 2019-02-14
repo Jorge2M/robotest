@@ -72,7 +72,9 @@ public class AccesoStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { 
+        	fmwkTest.grabStep(datosStep, dFTest); 
+        }
         
         if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) 
             validaIdentificacionEnShop(dCtxSh, datosStep, dFTest);
@@ -222,7 +224,7 @@ public class AccesoStpV {
                 
                 datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
             } 
-            finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+            finally { fmwkTest.grabStep(datosStep, dFTest); }
             
             //Validación
             validaIdentificacionEnShop(dCtxSh, datosStep, dFTest);
@@ -279,7 +281,7 @@ public class AccesoStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));}
+        finally { fmwkTest.grabStep(datosStep, dFTest);}
         
     }
     
@@ -312,7 +314,7 @@ public class AccesoStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));}
+        finally { fmwkTest.grabStep(datosStep, dFTest);}
 
         if (vecesPaisConfPrev < 2)
             //Si se ha confirmado el país < 2 veces debería aparecer el modal del cambio de país
@@ -450,7 +452,7 @@ public class AccesoStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));}        
+        finally { fmwkTest.grabStep(datosStep, dFTest);}        
         
         String descripValidac = 
         	"1) Se redirige a la URL del país " + paisBotonCambio + " (" + hrefBotonCambioPais + ")"; 
@@ -485,7 +487,7 @@ public class AccesoStpV {
                                                                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
                 
         //Validaciones
         String descripValidac = 

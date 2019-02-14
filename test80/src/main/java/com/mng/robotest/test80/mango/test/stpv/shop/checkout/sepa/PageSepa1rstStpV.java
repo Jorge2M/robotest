@@ -87,7 +87,7 @@ public class PageSepa1rstStpV {
                                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //En el caso de móvil aparece una página de resultado específica de SEPA
         if (channel==Channel.movil_web)

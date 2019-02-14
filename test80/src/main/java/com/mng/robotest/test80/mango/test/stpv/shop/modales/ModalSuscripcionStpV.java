@@ -21,7 +21,7 @@ public class ModalSuscripcionStpV {
                 "Los textos existen en el código fuente dependiendo del pais");
         datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
         datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));
+        fmwkTest.grabStep(datosStep, dFTest);
             
     	//Validaciones
 		if (dCtxSh.pais.getRgpd().equals("S")) {

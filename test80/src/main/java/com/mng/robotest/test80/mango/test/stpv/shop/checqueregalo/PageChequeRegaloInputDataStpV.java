@@ -23,7 +23,8 @@ public class PageChequeRegaloInputDataStpV{
             PageChequeRegaloInputData.clickAndWait(ConsultaSaldo.ir, dFTest.driver);
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        } finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep,dFTest)); }
+        } 
+        finally { fmwkTest.grabStep(datosStep,dFTest); }
 
         //Validaciones
         int maxSecondsWait = 2;
@@ -60,7 +61,7 @@ public class PageChequeRegaloInputDataStpV{
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep,dFTest)); }
+        finally { fmwkTest.grabStep(datosStep,dFTest); }
 
         //Validar
         maxSecondsWait = 2;
@@ -93,7 +94,7 @@ public class PageChequeRegaloInputDataStpV{
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //Validations
         int maxSecondsWait = 2;
@@ -123,7 +124,7 @@ public class PageChequeRegaloInputDataStpV{
             PageChequeRegaloInputData.clickAndWait(ConsultaSaldo.volver, dFTest.driver);
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        } finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep,dFTest)); }
+        } finally { fmwkTest.grabStep(datosStep,dFTest); }
 
         //Validaciones
         maxSecondsWait = 2;
@@ -150,7 +151,8 @@ public class PageChequeRegaloInputDataStpV{
             PageChequeRegaloInputData.clickImporteCheque(dFTest.driver);
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        } finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep,dFTest)); }
+        } 
+        finally { fmwkTest.grabStep(datosStep,dFTest); }
 
         //Validaciones
         String importesStr = java.util.Arrays.asList(PageChequeRegaloInputData.Importe.values()).toString();
@@ -186,7 +188,7 @@ public class PageChequeRegaloInputDataStpV{
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //Validaciones.
         int maxSecondsWait = 3;
@@ -221,7 +223,7 @@ public class PageChequeRegaloInputDataStpV{
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }               
+        finally { fmwkTest.grabStep(datosStep, dFTest); }               
             
         //Validaciones.
         PageCheckoutWrapperStpV.validaIsVersionChequeRegalo(chequeRegalo, datosStep, dFTest);

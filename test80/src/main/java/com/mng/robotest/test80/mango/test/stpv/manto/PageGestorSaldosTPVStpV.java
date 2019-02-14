@@ -42,7 +42,7 @@ public class PageGestorSaldosTPVStpV {
 
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		}
-		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		finally { fmwkTest.grabStep(datosStep, dFTest); }
 
 		String descripValidac = 
 			"1) Aparece la tabla de saldos<br>" +
@@ -74,7 +74,7 @@ public class PageGestorSaldosTPVStpV {
 
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		}
-		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		finally { fmwkTest.grabStep(datosStep, dFTest); }
 
 		String descripValidac = 
 			"1) Aparece el mensaje \"La tpv seleccionada no existe\"";

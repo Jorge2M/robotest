@@ -20,7 +20,7 @@ public class PagePaypalCreacionCuentaStpV {
                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         PagePaypalLoginStpV.validateIsPageUntil(10/*maxSecondsToWait*/, datosStep, dFTest);

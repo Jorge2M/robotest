@@ -27,7 +27,7 @@ public class ConsolaVotfStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }           
+        finally { fmwkTest.grabStep(datosStep, dFTest); }           
         
         //Validaciones
         String descripValidac = 
@@ -70,7 +70,7 @@ public class ConsolaVotfStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         return datosStep;
     }
@@ -90,7 +90,7 @@ public class ConsolaVotfStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         return datosStep;
     }
@@ -110,7 +110,7 @@ public class ConsolaVotfStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }           
+        finally { fmwkTest.grabStep(datosStep, dFTest); }           
     
         //Obtenemos el handle de la página actual
         String paginaPadre = dFTest.driver.getWindowHandle();
@@ -155,7 +155,7 @@ public class ConsolaVotfStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //Obtenemos el handle de la página actual
         String paginaPadre = dFTest.driver.getWindowHandle();
@@ -214,7 +214,7 @@ public class ConsolaVotfStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Obtenemos el handle de la página actual
         String paginaPadre = dFTest.driver.getWindowHandle();
@@ -266,7 +266,7 @@ public class ConsolaVotfStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Obtenemos el handle de la página actual
         String paginaPadre = dFTest.driver.getWindowHandle();
@@ -321,7 +321,7 @@ public class ConsolaVotfStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Obtenemos el handle de la página actual
         String paginaPadre = dFTest.driver.getWindowHandle();
@@ -372,7 +372,7 @@ public class ConsolaVotfStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
     
         //Obtenemos el handle de la página actual
         String paginaPadre = dFTest.driver.getWindowHandle();
@@ -414,7 +414,7 @@ public class ConsolaVotfStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Obtenemos el handle de la página actual
         String paginaPadre = dFTest.driver.getWindowHandle();
@@ -462,7 +462,7 @@ public class ConsolaVotfStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Obtenemos el handle de la página actual
         String paginaPadre = dFTest.driver.getWindowHandle();

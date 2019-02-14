@@ -51,7 +51,7 @@ public class PageGestionarClientesStpV {
 
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		}
-		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }        
+		finally { fmwkTest.grabStep(datosStep, dFTest); }        
 
 		int maxSecondsToWait = 1;
 		String descripValidac = 
@@ -92,7 +92,7 @@ public class PageGestionarClientesStpV {
 
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		}
-		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }        
+		finally { fmwkTest.grabStep(datosStep, dFTest); }        
 
 		int maxSecondsToWait = 2;
 		String descripValidac = 
@@ -127,7 +127,7 @@ public class PageGestionarClientesStpV {
 
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		}
-		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }        
+		finally { fmwkTest.grabStep(datosStep, dFTest); }        
 
 		String descripValidac = 
 			"1) Aparece el id del cliente \""+ idCliente +"\"<br>" +

@@ -68,7 +68,7 @@ public class SecMenusDesktopStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, datosStep, dFTest);
@@ -87,7 +87,7 @@ public class SecMenusDesktopStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }           
+        finally { fmwkTest.grabStep(datosStep, dFTest); }           
             
         //Validaciones
         SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, datosStep, dFTest);
@@ -107,7 +107,7 @@ public class SecMenusDesktopStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }           
+        finally { fmwkTest.grabStep(datosStep, dFTest); }           
             
         //Validaciones
         SecMenusWrapperStpV.validaSelecMenu(menu2onLevel, dCtxSh, datosStep, dFTest);
@@ -244,7 +244,7 @@ public class SecMenusDesktopStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         validaPaginaResultMenu(menu1rstLevel, channel, app, datosStep, dFTest);
@@ -277,7 +277,7 @@ public class SecMenusDesktopStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok); 
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
     
         //Validaciones
         if (linea.getType()!=LineaType.rebajas) {
@@ -332,7 +332,7 @@ public class SecMenusDesktopStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones. Aparece la galería de nuevo correcta
         PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);
@@ -399,7 +399,7 @@ public class SecMenusDesktopStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }            
+        finally { fmwkTest.grabStep(datosStep, dFTest); }            
         
         //Validaciones
         validaSelecLinea(datosStep, lineaType, null/*sublineaType*/, dCtxSh, dFTest);
@@ -423,7 +423,7 @@ public class SecMenusDesktopStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //Validaciones
         validaSelecLinea(datosStep, lineaType, sublineaType, dCtxSh, dFTest);
@@ -492,7 +492,7 @@ public class SecMenusDesktopStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //Validaciones
         int numPestanyas_C;
@@ -552,7 +552,7 @@ public class SecMenusDesktopStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);
@@ -605,7 +605,7 @@ public class SecMenusDesktopStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //Validaciones
     	Menu1rstLevel menu1erNivel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.he, null, "zapatos"));
@@ -638,7 +638,7 @@ public class SecMenusDesktopStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //Validaciones
         DataFichaArt datosArticulo = new DataFichaArt(articulo.getReference(), "");

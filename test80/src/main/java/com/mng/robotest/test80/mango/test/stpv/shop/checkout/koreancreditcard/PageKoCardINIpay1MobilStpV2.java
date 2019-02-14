@@ -55,7 +55,7 @@ public class PageKoCardINIpay1MobilStpV2 {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //Validation
         String descripValidac =
@@ -84,7 +84,7 @@ public class PageKoCardINIpay1MobilStpV2 {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validations
         PageKoCardINIpay2MobilStpV.validateIsPage(datosStep, dFTest);

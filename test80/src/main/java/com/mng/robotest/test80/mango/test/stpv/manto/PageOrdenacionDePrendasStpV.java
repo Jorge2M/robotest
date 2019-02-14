@@ -59,7 +59,7 @@ public class PageOrdenacionDePrendasStpV {
 			SecModalPersonalizacion.selectInDropDown(Orden.desplegableTiendas, "shop.pre.mango.com", dFTest.driver);
 			SecModalPersonalizacion.clickAndWait(Orden.verTiendas, dFTest.driver);
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		} finally { fmwkTest.grabStep(datosStep, dFTest); }
 
 		//Validations
 	    datosStep.setSaveErrorPage(SaveWhen.Never);
@@ -95,7 +95,7 @@ public class PageOrdenacionDePrendasStpV {
 		try {
 			SecModalPersonalizacion.selectElement(Section.She, dFTest.driver);
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		} finally { fmwkTest.grabStep(datosStep, dFTest); }
 
 		//Validations
 	    datosStep.setSaveErrorPage(SaveWhen.Never);
@@ -116,7 +116,7 @@ public class PageOrdenacionDePrendasStpV {
 		try {
 			PageOrdenacionDePrendas.selectInDropDown(Orden.selectorOrdenacion, "prendas_she", dFTest.driver);
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		} finally { fmwkTest.grabStep(datosStep, dFTest); }
 
 		//Validaciones
 	    datosStep.setSaveErrorPage(SaveWhen.Never);
@@ -144,7 +144,7 @@ public class PageOrdenacionDePrendasStpV {
 			SecModalPersonalizacion.selectInDropDown(Orden.selectorPrendas, "camisas_she", dFTest.driver);
 			int secondsWaitElement = 10;
 			SecModalPersonalizacion.selectElementWaitingForAvailability(Orden.verPrendas, secondsWaitElement, dFTest.driver);
-		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		} finally { fmwkTest.grabStep(datosStep, dFTest); }
 
 		//Validations
 		int maxSecondsWait = 10;
@@ -173,7 +173,7 @@ public class PageOrdenacionDePrendasStpV {
 		try {
 			SecModalPersonalizacion.clickAndWait(Orden.primeraPrenda, dFTest.driver);
 			SecModalPersonalizacion.moveToAndSelectElement(Orden.bajarPrenda, dFTest.driver);
-		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		} finally { fmwkTest.grabStep(datosStep, dFTest); }
 
 		//Validations
 	    datosStep.setSaveErrorPage(SaveWhen.Never);
@@ -199,7 +199,7 @@ public class PageOrdenacionDePrendasStpV {
 
 		try {
 			SecModalPersonalizacion.selectElement(Orden.aplicarOrden, dFTest.driver);
-		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		} finally { fmwkTest.grabStep(datosStep, dFTest); }
 
 		//Validations
 	    datosStep.setSaveErrorPage(SaveWhen.Never);
@@ -232,7 +232,7 @@ public class PageOrdenacionDePrendasStpV {
 
 		try {
 			SecModalPersonalizacion.selectElement(Modal.applyCountry, dFTest.driver);
-		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		} finally { fmwkTest.grabStep(datosStep, dFTest); }
 
 		//Validations
 	    datosStep.setSaveErrorPage(SaveWhen.Never);

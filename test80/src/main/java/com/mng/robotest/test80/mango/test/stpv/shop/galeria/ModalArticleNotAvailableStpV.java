@@ -40,7 +40,7 @@ public class ModalArticleNotAvailableStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         validateState(StateModal.notvisible, datosStep, dFTest);
     }

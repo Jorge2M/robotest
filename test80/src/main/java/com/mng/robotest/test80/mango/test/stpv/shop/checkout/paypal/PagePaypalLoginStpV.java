@@ -41,7 +41,7 @@ public class PagePaypalLoginStpV {
         }
         finally {
             dFTest.driver.switchTo().window(paginaPadre); //Salimos del iframe
-            datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); 
+            fmwkTest.grabStep(datosStep, dFTest); 
         }
         
         //Validaciones

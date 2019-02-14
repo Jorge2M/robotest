@@ -65,7 +65,7 @@ public class SecSelectorPreciosStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }         
+        finally { fmwkTest.grabStep(datosStep, dFTest); }         
             
         //Validaciones
         PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);

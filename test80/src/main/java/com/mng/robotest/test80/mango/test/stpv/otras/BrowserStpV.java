@@ -42,7 +42,7 @@ public class BrowserStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
     
         //Validaciones.
         String contRobots1 = 
@@ -209,7 +209,7 @@ public class BrowserStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
     
         //Validaciones.
         Date currDateDayPrecision = removeTime(new Date());

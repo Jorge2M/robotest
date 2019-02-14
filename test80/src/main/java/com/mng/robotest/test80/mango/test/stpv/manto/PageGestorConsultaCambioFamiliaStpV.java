@@ -46,7 +46,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		}
-		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		finally { fmwkTest.grabStep(datosStep, dFTest); }
 
 		String descripValidac = 
 			"1) Aparece la tabla con los productos<br>" +
@@ -78,7 +78,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		}
-		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		finally { fmwkTest.grabStep(datosStep, dFTest); }
 
 		String descripValidac = 
 			"1) Aparece la tabla con las opciones para los cambios de familia<br>" + 

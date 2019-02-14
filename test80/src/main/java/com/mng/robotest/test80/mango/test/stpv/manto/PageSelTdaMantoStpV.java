@@ -41,7 +41,7 @@ public class PageSelTdaMantoStpV {
         }
         finally {
             if (dFTest.ctx!=null)
-                datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); 
+                fmwkTest.grabStep(datosStep, dFTest); 
         }
         
         //Validaciones

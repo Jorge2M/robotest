@@ -49,7 +49,7 @@ public class PageRegistroDirecStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         validateInputDataOk(datosStep, dFTest);
@@ -67,7 +67,7 @@ public class PageRegistroDirecStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }           
+        finally { fmwkTest.grabStep(datosStep, dFTest); }           
             
         //Validaciones
         validateInputDataOk(datosStep, dFTest);
@@ -102,7 +102,7 @@ public class PageRegistroDirecStpV {
                                                                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //Validaciones 
         PageRegistroFinStpV.isPage(datosStep, dFTest);

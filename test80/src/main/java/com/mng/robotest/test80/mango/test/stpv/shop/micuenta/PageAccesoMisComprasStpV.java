@@ -48,7 +48,7 @@ public class PageAccesoMisComprasStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }        
+        finally { fmwkTest.grabStep(datosStep, dFTest); }        
         
         //Validation
         int maxSecondsToWait = 1;
@@ -77,7 +77,7 @@ public class PageAccesoMisComprasStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }        
+        finally { fmwkTest.grabStep(datosStep, dFTest); }        
         
         //Validation
         PageMisComprasStpV.validateIsPage(datosStep, dFTest);
@@ -97,7 +97,7 @@ public class PageAccesoMisComprasStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }        
+        finally { fmwkTest.grabStep(datosStep, dFTest); }        
         
         //Validation
         PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(dFTest.driver);

@@ -36,7 +36,7 @@ public class PagePrehomeStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally {datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));}
+        finally {fmwkTest.grabStep(datosStep, dFTest);}
         
         //Validaciones.
         String validacion1 = ""; 
@@ -82,7 +82,7 @@ public class PagePrehomeStpV {
             datosStep.setExcepExists(false); 
             datosStep.setResultSteps(State.Ok);
         } 
-        finally {datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));}
+        finally {fmwkTest.grabStep(datosStep, dFTest);}
         
         return datosStep;
     }
@@ -106,7 +106,7 @@ public class PagePrehomeStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         //VALIDACIONES - PARA ANALYTICS (sólo para firefox y NetAnalysis)
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(

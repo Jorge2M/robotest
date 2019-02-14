@@ -40,7 +40,7 @@ public class PageDotpayPaymentChannelStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         int maxSecondsToWait = 1;
@@ -71,7 +71,7 @@ public class PageDotpayPaymentChannelStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         PageDotpayAcceptSimulationStpV.validateIsPage(datosStep, dFTest);

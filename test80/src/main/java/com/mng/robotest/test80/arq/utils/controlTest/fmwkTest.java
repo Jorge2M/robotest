@@ -37,6 +37,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.NetTrafficMng;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.StateSuite;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -58,7 +59,12 @@ public class fmwkTest {
      * Función que realiza la grabación de un Step. Básicamente graba los datos en BD y genera los ficheros asociados
      */
     @SuppressWarnings({ "unchecked"})    
-    public static int grabStep(DatosStep datosStep, DataFmwkTest dFTest) {
+    public static void grabStep(DatosStep datosStep, DataFmwkTest dFTest) {
+    	//TODO eliminar este If cuando hayamos migrado todo a AspectJ
+    	if (ThreadData.peekDatosStep()==datosStep) {
+    		ThreadData.pollDatosStep();
+    	}
+    	
         if ("ROBOTEST2".equals(System.getProperty("ROBOTEST2"))) {
             // No queremos crear una dependencia ciclica robotest2 report, por lo que es licito realizar este workaround intercambiando datos atraves de listas y hashes
             Map<DatosStep, List<String>> stepMap = (Map<DatosStep, List<String>>) dFTest.ctx.getSuite()
@@ -78,12 +84,10 @@ public class fmwkTest {
             if (datosStep.getHoraFin()==null)
                 datosStep.setHoraFin(new Date(System.currentTimeMillis()));
             System.out.println("ROBOTEST2: LAZY REPORT STEP REDIRECT");
-            return 0;
         }
         sendSkipTestExceptionIfSuiteStopping(dFTest.ctx);                
-        int stepNumber = StepsDAO.grabStep(datosStep, dFTest.meth, dFTest.ctx);
+        StepsDAO.grabStep(datosStep, dFTest.meth, dFTest.ctx);
         storeFileEvidencesIfNeeded(datosStep, TypeStore.step, dFTest);
-        return stepNumber;
     }
 
     /**

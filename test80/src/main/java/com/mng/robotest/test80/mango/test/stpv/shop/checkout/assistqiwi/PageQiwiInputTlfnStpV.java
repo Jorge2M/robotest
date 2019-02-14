@@ -37,7 +37,7 @@ public class PageQiwiInputTlfnStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
             
         //En caso de que aparezca la página de confirmación...
         if (PageQiwiConfirm.isPage(dFTest.driver)) {
@@ -49,7 +49,7 @@ public class PageQiwiInputTlfnStpV {
                             
                 datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
             }
-            finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }            
+            finally { fmwkTest.grabStep(datosStep, dFTest); }            
         }
         
         return datosStep;

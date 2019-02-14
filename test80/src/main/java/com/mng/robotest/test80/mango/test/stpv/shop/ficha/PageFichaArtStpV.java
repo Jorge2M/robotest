@@ -227,7 +227,7 @@ public class PageFichaArtStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, this.dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, this.dFTest); }
 
         //Validaciones
         String descripValidac = 
@@ -270,7 +270,7 @@ public class PageFichaArtStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, this.dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, this.dFTest); }
         
         //Validaciones
         String descripValidac = 
@@ -304,7 +304,7 @@ public class PageFichaArtStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, this.dFTest)); }                  
+        finally { fmwkTest.grabStep(datosStep, this.dFTest); }                  
             
         //Step
         datosStep = new DatosStep       (
@@ -315,7 +315,7 @@ public class PageFichaArtStpV {
                                                                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, this.dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, this.dFTest); }
         
         //Validaciones
         String descripValidac = 
@@ -347,7 +347,7 @@ public class PageFichaArtStpV {
                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, this.dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, this.dFTest); }
         
         return datosStep;
     }
@@ -435,7 +435,7 @@ public class PageFichaArtStpV {
                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, this.dFTest)); }               
+        finally { fmwkTest.grabStep(datosStep, this.dFTest); }               
 
         int maxSecondsToWait1 = 2;
         int maxSecondsToWait2 = 3;
@@ -472,7 +472,7 @@ public class PageFichaArtStpV {
                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, this.dFTest)); }               
+        finally { fmwkTest.grabStep(datosStep, this.dFTest); }               
 
         //Validaciones
         validateVisibleButtonFavoritos(ActionFavButton.Add, datosStep);
@@ -515,7 +515,7 @@ public class PageFichaArtStpV {
                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, this.dFTest)); }               
+        finally { fmwkTest.grabStep(datosStep, this.dFTest); }               
 
         //Validaciones
         ModalBuscadorTiendasStpV.validaBusquedaConResultados(datosStep, this.dFTest);
@@ -535,7 +535,7 @@ public class PageFichaArtStpV {
                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, this.dFTest)); }               
+        finally { fmwkTest.grabStep(datosStep, this.dFTest); }               
 
         if (isVisible)
             secFitFinder.validateIsOkAndClose(datosStep, this.dFTest);
@@ -623,7 +623,7 @@ public class PageFichaArtStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, this.dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, this.dFTest); }
         
         if (productNav==ProductNav.Prev)
             validateIsFichaArtDisponible(refProductOrigin, datosStep);
@@ -666,7 +666,7 @@ public class PageFichaArtStpV {
                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, this.dFTest)); }               
+        finally { fmwkTest.grabStep(datosStep, this.dFTest); }               
                     
         //Validaciones
         String descripValidac = 
@@ -696,7 +696,7 @@ public class PageFichaArtStpV {
                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, this.dFTest)); }         
+        finally { fmwkTest.grabStep(datosStep, this.dFTest); }         
                     
         //Validaciones
         String descripValidac = 

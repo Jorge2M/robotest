@@ -26,7 +26,7 @@ public class SecSelectDPointStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }        
+        finally { fmwkTest.grabStep(datosStep, dFTest); }        
 
         //Validación-2
         int maxSecondsToWait = 5;
@@ -86,7 +86,7 @@ public class SecSelectDPointStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         String descripValidac = 
             "1) Queda seleccionado el Droppoint #" + position;
@@ -113,7 +113,7 @@ public class SecSelectDPointStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validación
         ModalDroppointsStpV.secConfirmDatos.validateIsVisible(channel, datosStep, dFTest);

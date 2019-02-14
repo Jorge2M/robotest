@@ -47,9 +47,9 @@ public class DatosStep {
         this.descripcion = c_descripcion;
         this.res_expected = c_res_expected;
         this.hora_inicio = new Date(System.currentTimeMillis());
-    	DatosStep stepAnterior = ThreadData.peekDatosStep();
-    	if (stepAnterior!=null) {
-    		setStepNumber(stepAnterior.getStepNumber()+1);
+    	DatosStep maxDatosStep = ThreadData.getMaxDatosStep();
+    	if (maxDatosStep!=null) {
+    		setStepNumber(maxDatosStep.getStepNumber() + 1);
     	}
     	else {
     		setStepNumber(1);

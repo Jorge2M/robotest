@@ -37,7 +37,7 @@ public class PageReembolsosStpV {
                                                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
     
         //Validaciones
         String validacion2 = "";
@@ -129,7 +129,7 @@ public class PageReembolsosStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validations
         String descripValidac = 
@@ -165,7 +165,7 @@ public class PageReembolsosStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
     
         //Validaciones
         int maxSecondsToWait = 10;
@@ -207,7 +207,7 @@ public class PageReembolsosStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         String descripValidac = 
@@ -244,7 +244,7 @@ public class PageReembolsosStpV {
                 
                 datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
             }
-            finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+            finally { fmwkTest.grabStep(datosStep, dFTest); }
             
             //Validaciones
             int maxSecondsToWait = 2;

@@ -45,7 +45,7 @@ public class SecMenuLateralMobilStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, datosStep, dFTest);
@@ -66,7 +66,7 @@ public class SecMenuLateralMobilStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         validaSelecLinea(pais, lineaConCarrusels, null/*sublinea*/, app, datosStep, dFTest);
         navSelectCarrusels(lineaConCarrusels, pais, app, dFTest);
@@ -104,7 +104,7 @@ public class SecMenuLateralMobilStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones. Aparece la galería de nuevo correcta
         PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, appE, dFTest.driver);
@@ -139,7 +139,7 @@ public class SecMenuLateralMobilStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         String descripValidac = 
@@ -170,7 +170,7 @@ public class SecMenuLateralMobilStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }            
+        finally { fmwkTest.grabStep(datosStep, dFTest); }            
 
         validaSelecLinea(pais, lineaType, null/*sublinea*/, app, datosStep, dFTest);
         
@@ -192,7 +192,7 @@ public class SecMenuLateralMobilStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
 
         validaSelecLinea(dCtxSh.pais, lineaType, sublineaType, dCtxSh.appE, datosStep, dFTest);
         
@@ -335,7 +335,7 @@ public class SecMenuLateralMobilStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+        finally { fmwkTest.grabStep(datosStep, dFTest); }
         
         //Validaciones
         validaPaginaResultMenu2onLevel(app, datosStep, dFTest);
