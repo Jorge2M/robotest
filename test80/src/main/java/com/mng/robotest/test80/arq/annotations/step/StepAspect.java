@@ -29,7 +29,7 @@ public class StepAspect {
     @Pointcut("execution(* *(..))")
     public void atExecution(){}
     
-    @Before("annotationStepPointcut()")
+    @Before("annotationStepPointcut() && atExecution()")
     public void before(JoinPoint joinPoint) {
     	setInstanceData(joinPoint);
     	ThreadData.storeInThread(datosStep);

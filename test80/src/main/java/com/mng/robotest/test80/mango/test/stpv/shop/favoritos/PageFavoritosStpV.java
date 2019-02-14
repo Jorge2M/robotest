@@ -133,7 +133,7 @@ public class PageFavoritosStpV {
     }  
     
     @Step (
-    	description="Desde Favoritos añadimos el artículo <b>#{artToAddBolsa.getRefProducto()</b> (1a talla disponible) a la bolsa",
+    	description="Desde Favoritos añadimos el artículo <b>#{artToAddBolsa.getRefProducto()}</b> (1a talla disponible) a la bolsa",
         expected="El artículo aparece en la bolsa")
     public static void addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Channel channel, DataFmwkTest dFTest) 
     throws Exception {

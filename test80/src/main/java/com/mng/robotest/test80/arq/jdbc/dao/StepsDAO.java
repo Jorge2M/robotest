@@ -43,16 +43,23 @@ public class StepsDAO {
         "WHERE INICIO < ?;";    
     
     public static int grabStep(DatosStep datosStep, Method method, ITestContext ctx) {
-    	if (datosStep.getStepNumber()==0) {
-	        int stepNumber = StepsDAO.getNextMethodStep(method, ctx);
-	        datosStep.setStepNumber(stepNumber);
-    	}
+//    	if (datosStep.getStepNumber()==0) {
+//	        int stepNumber = StepsDAO.getNextMethodStep(method, ctx);
+//	        datosStep.setStepNumber(stepNumber);
+//    	}
     	
         String methodWithFactory = fmwkTest.getMethodWithFactory(method, ctx);
         if (datosStep.getHoraFin()==null) {
             datosStep.setHoraFin(new Date(System.currentTimeMillis()));
         }
     
+        System.out.println("Inicio insert en STEP");
+        System.out.println("IDEXECSUITE: " + ctx.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx));
+        System.out.println("SUITE: " + ctx.getSuite().getName());
+        System.out.println("TEST: " + ctx.getName());
+        System.out.println("METHOD: " + methodWithFactory);
+        System.out.println("NUMBER: " + datosStep.getStepNumber());
+        
         try (Connection conn = Connector.getConnection();
             PreparedStatement insert = conn.prepareStatement(SQLInsertStep)) {
             insert.setString(1, ctx.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx));

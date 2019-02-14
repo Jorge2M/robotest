@@ -70,7 +70,7 @@ public class ListResultValidation {
     }
     
     private void checkValidations() {
-    	if (datosStep.getExcepExists()) {
+    	if (isStepFinishedWithException()) {
     		stateValidation = State.Nok;
     	}
     	else {
@@ -90,6 +90,10 @@ public class ListResultValidation {
     	
     	datosStep.setResultSteps(stateValidation);
     	datosStep.setListResultValidations(this);
+    }
+    
+    private boolean isStepFinishedWithException() {
+    	return (datosStep.getHoraFin()!=null && datosStep.getExcepExists());
     }
     
     /**

@@ -42,10 +42,18 @@ public class DatosStep {
         this.step_number = 0;
     }
 
+    //TODO llamada desde el mecanismo antiguo. Eliminar cuando esté todo migrado a AspectJ
     public DatosStep(String c_descripcion, String c_res_expected) {
         this.descripcion = c_descripcion;
         this.res_expected = c_res_expected;
         this.hora_inicio = new Date(System.currentTimeMillis());
+    	DatosStep stepAnterior = ThreadData.getDatosStep();
+    	if (stepAnterior!=null) {
+    		setStepNumber(stepAnterior.getStepNumber()+1);
+    	}
+    	else {
+    		setStepNumber(1);
+    	}
         ThreadData.storeInThread(this);
     }
 
