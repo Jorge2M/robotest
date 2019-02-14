@@ -1,6 +1,9 @@
 package com.mng.robotest.test80.arq.utils;
 
 import java.lang.reflect.Method;
+import java.util.ArrayDeque;
+import java.util.Collections;
+import java.util.Queue;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
@@ -14,7 +17,7 @@ import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 public class ThreadData {
     static ThreadLocal<DataCtxShop> dCtxShInThread = new ThreadLocal<>();
     static ThreadLocal<DataFmwkTest> dFTestInThread = new ThreadLocal<>();
-    static ThreadLocal<DatosStep> datosStepInThread = new ThreadLocal<>();
+    static ThreadLocal<Queue<DatosStep>> datosStepStack = new ThreadLocal<>();
 
     public static DataCtxShop getdCtxSh() {
         return dCtxShInThread.get();
@@ -28,8 +31,18 @@ public class ThreadData {
     	return (getdFTest().driver);
     }
     
-    public static DatosStep getDatosStep() {
-    	return (datosStepInThread.get());
+    public static DatosStep pollDatosStep() {
+    	Queue<DatosStep> datosStepStackTmp = datosStepStack.get();
+    	return (datosStepStackTmp.poll());
+    }
+    
+    public static DatosStep peekDatosStep() {
+    	Queue<DatosStep> datosStepStackTmp = datosStepStack.get();
+    	if (datosStepStackTmp!=null && !datosStepStackTmp.isEmpty()) {
+    		return (datosStepStackTmp.peek());
+    	}
+    	
+    	return null;
     }
    
     public static void storeInThread(DataCtxShop dCtxShop, DataFmwkTest dFTest) {
@@ -46,7 +59,13 @@ public class ThreadData {
     }
     
     public static void storeInThread(DatosStep datosStep) {
-    	datosStepInThread.set(datosStep);
+    	Queue<DatosStep> datosStepStackTmp = datosStepStack.get();
+    	if (datosStepStackTmp==null) {
+    		datosStepStackTmp = Collections.asLifoQueue(new ArrayDeque<DatosStep>());
+    	}
+    	
+    	datosStepStackTmp.add(datosStep);
+    	datosStepStack.set(datosStepStackTmp);
     }
     
     public static void getAndStoreDataFmwk(String bpath, String appPath, String datosFactoria, Channel channel, ITestContext context, Method method) 
