@@ -1,10 +1,6 @@
 package com.mng.robotest.test80.arq.annotations.step;
 
 import java.sql.Date;
-import java.util.ArrayDeque;
-import java.util.Collections;
-import java.util.Queue;
-
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -21,9 +17,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 @SuppressWarnings("javadoc")
 @Aspect
 public class StepAspect {
-	
-	Queue<DatosStep> datosStepStack = Collections.asLifoQueue(new ArrayDeque<DatosStep>());
-	
+
     @Pointcut("@annotation(Step)")
     public void annotationStepPointcut() {}
     
@@ -44,7 +38,6 @@ public class StepAspect {
     		datosStep.setStepNumber(stepAnterior.getStepNumber()+1);
     	}
     	
-    	datosStepStack.add(datosStep);
     	ThreadData.storeInThread(datosStep);
     	return datosStep;
     }
@@ -53,7 +46,7 @@ public class StepAspect {
     	pointcut="annotationStepPointcut() && atExecution()", 
     	throwing="ex")
     public void doRecoveryActions(JoinPoint joinPoint, Throwable ex) {
-    	DatosStep datosStep = getDatosStepStored();
+    	DatosStep datosStep = ThreadData.pollDatosStep();
     	setEndDataStep(datosStep);
     	storeStep(State.Nok, true, datosStep);
     }
@@ -61,12 +54,8 @@ public class StepAspect {
     @AfterReturning(
     	pointcut="annotationStepPointcut() && atExecution()")
     public void grabValidationAfter(JoinPoint joinPoint) throws Throwable {
-    	DatosStep datosStep = getDatosStepStored();
+    	DatosStep datosStep = ThreadData.pollDatosStep();
     	storeStep(State.Ok, false, datosStep);
-    }
-    
-    private DatosStep getDatosStepStored() {
-    	return (datosStepStack.poll());
     }
     
     private void setInitDataStep(InfoStep infoStep, JoinPoint joinPoint, DatosStep datosStep) {
