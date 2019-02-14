@@ -154,7 +154,7 @@ public class PageMenusMantoStpV {
         DatosStep datosStep = goToMainMenusAndClickMenu("Gestor de Cheques", dFTest);
             
         //Validaciones
-        PageGestorChequesStpV.validateIsPage(datosStep, dFTest);
+        PageGestorChequesStpV.validateIsPage(dFTest.driver);
 	}
 	
 	/**

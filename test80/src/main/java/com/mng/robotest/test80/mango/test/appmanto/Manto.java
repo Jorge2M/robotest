@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
@@ -182,11 +183,13 @@ public class Manto extends GestorWebDriver {
 
 		String mail = "esther.esteve@mango.com";
 		String cheque = "204028046151";
-		PageGestorChequesStpV.inputMailAndClickCorreoCliente(mail, dFTest);
+		PageGestorChequesStpV.inputMailAndClickCorreoCliente(mail, dFTest.driver);
 		
-		PageGestorChequesStpV.clickPedido(10/*numFila*/, cheque, mail, dFTest);
-
-		PageGestorChequesStpV.volverCheques(dFTest);
+		PageGestorChequesStpV.clickPedido(10/*numFila*/, mail, dFTest.driver);
+		PageGestorChequesStpV.volverCheques(dFTest.driver);
+		PageGestorChequesStpV.inputCheque(cheque, dFTest.driver);
+		PageGestorChequesStpV.chequeDetails(dFTest.driver);
+		PageGestorChequesStpV.volverCheques(dFTest.driver);
 	}
 	
 	

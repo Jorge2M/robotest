@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import org.openqa.selenium.WebDriver;
 
@@ -17,37 +18,34 @@ import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques.Tab
 @SuppressWarnings("javadoc")
 public class PageGestorChequesStpV {
 
-	public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
-		validatePage(PageGestorCheques.titulo, datosStep, dFTest.driver);
-		validateButtons(datosStep, dFTest.driver);
+	public static void validateIsPage(WebDriver driver) {
+		validatePage(PageGestorCheques.titulo, driver);
+		validateButtons(driver);
 	}
 
 	@Validation(
 			description="1) Estamos en la página \"#{titulo} \"",
 			level=State.Defect)
-	public static boolean validatePage(String titulo, DatosStep datosStep, WebDriver driver) {
+	public static boolean validatePage(String titulo, WebDriver driver) {
 		return (PageGestorCheques.isPage(driver));
 	}
 
-	public static void inputMailAndClickCorreoCliente(String mail, DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep       (
-			"Introducimos el email <b>" + mail + "</b> y damos click al botón \"Correo del cliente\"", 
-			"Muestra los cheques asociados al mail correctamente");
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-		try {
-			PageGestorCheques.inputMailAndClickCorreoReceptorButton(mail, dFTest.driver);
+	@Step(
+			description="Introducimos el email <b>#{mail}</b> y damos click al botón \"Correo del cliente\"",
+			expected="Muestra los cheques asociados al mail correctamente",
+			saveErrorPage=SaveWhen.Never)
+	public static void inputMailAndClickCorreoCliente(String mail, WebDriver driver) throws Exception {
 
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		}
-		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		//Step
+		PageGestorCheques.inputMailAndClickCorreoReceptorButton(mail, driver);
 
-		int numPedidosEsther = 100;
-		validateInitData(numPedidosEsther, mail, datosStep, dFTest.driver);
+		//Validation
+		validateInitData(100, mail, driver);
 	}
 
 	@Validation
-	public static ListResultValidation validateInitData(int numPedidos, String mail, DatosStep datosStep, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+	public static ListResultValidation validateInitData(int numPedidos, String mail, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
 		validations.add(
 				"Aparecen más de \"" + numPedidos + "\" pedidos<br>",
 				PageGestorCheques.comprobarNumeroPedidos(numPedidos, driver), State.Defect);
@@ -57,33 +55,25 @@ public class PageGestorChequesStpV {
 		return validations;
 	}
 
-	public static void clickPedido(int numFila, String cheque, String mail, DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep       (
-			"Damos click al pedido de la " + numFila + "a fila", 
-			"Muestra la página de detalles del pedido");
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
+	@Step(
+			description="Damos click al pedido de la #{numFila}a fila",
+			expected="Muestra la página de detalles del pedido",
+			saveErrorPage=SaveWhen.Never)
+	public static void clickPedido(int numFila, String mail, WebDriver driver) throws Exception {
 		String pedido;
-		try {
-			pedido = PageGestorCheques.clickPedido(numFila, mail, dFTest.driver);
 
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		}
-		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		//Step
+		pedido = PageGestorCheques.clickPedido(numFila, mail, driver);
 
-		validateDetailsCheques(pedido, mail, datosStep, dFTest.driver);
+		//Validations
+		validateDetailsCheques(pedido, mail, driver);
 
-		validateDataFromCheque (datosStep, dFTest);
-
-		volverCheques(dFTest);
-
-		inputCheque(cheque, dFTest);
-
-		chequeDetails(dFTest);
+		validateDataFromCheque (driver);
 	}
 
 	@Validation
-	public static ListResultValidation validateDetailsCheques(String pedido, String mail, DatosStep datosStep, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+	public static ListResultValidation validateDetailsCheques(String pedido, String mail, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
 		validations.add(
 				"Aparece la página de" + PageGestorCheques.tituloDetalles + "<br>",
 				PageGestorCheques.isPageDetalles(driver), State.Defect);
@@ -95,23 +85,22 @@ public class PageGestorChequesStpV {
 		return validations;
 	}
 
-	public static void volverCheques (DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep       (
-				"Damos click a <b>Volver a cheques</b>",
-				"Muestra la página de información sobre los cheques");
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-		try {
-			PageGestorCheques.clickAndWait(ButtonsCheque.volverCheques, dFTest.driver);
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		}
-		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+	@Step(
+			description="Damos click a <b>Volver a cheques</b>",
+			expected="Muestra la página de información sobre los cheques",
+			saveErrorPage=SaveWhen.Never)
+	public static void volverCheques (WebDriver driver) throws Exception {
 
-		validateButtons(datosStep, dFTest.driver);
+		//Step
+		PageGestorCheques.clickAndWait(ButtonsCheque.volverCheques, driver);
+
+		//Validation
+		validateButtons(driver);
 	}
 
 	@Validation
-	public static ListResultValidation validateButtons(DatosStep datosStep, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+	public static ListResultValidation validateButtons(WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 				"Existe el botón de <b>Id del pedido</b><br>",
@@ -132,8 +121,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ListResultValidation validateSecondDataCheque(DatosStep datosStep, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+	public static ListResultValidation validateSecondDataCheque(WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 				"En la tabla activo existe un apartado para <b>ACTIVO</b><br>",
@@ -147,13 +136,13 @@ public class PageGestorChequesStpV {
 	@Validation(
 			description="1) Aparece el botón para <b>Volver a cheques</b>",
 			level=State.Defect)
-	public static boolean validateReturnCheques(DatosStep datosStep, WebDriver driver) {
+	public static boolean validateReturnCheques(WebDriver driver) {
 		return (PageGestorCheques.isElementInStateUntil(ButtonsCheque.volverCheques, StateElem.Present, 3, driver));
 	}
 
 	@Validation
-	public static ListResultValidation validateThirdDataCheque(DatosStep datosStep, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+	public static ListResultValidation validateThirdDataCheque(WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 				"En la tabla divisa existe un apartado para <b>DIVISA</b><br>",
@@ -174,8 +163,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ListResultValidation validatePedidosData(DatosStep datosStep, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+	public static ListResultValidation validatePedidosData(WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 				"En la tabla pedidos realizados existe un apartado para <b>Id</b><br>",
@@ -196,8 +185,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ListResultValidation validateButtonsDataCheque(DatosStep datosStep, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+	public static ListResultValidation validateButtonsDataCheque(WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 				"Existe el boton para <b>Modificar</b><br>",
@@ -217,63 +206,60 @@ public class PageGestorChequesStpV {
 		return validations;
 	}
 
-	public static void validateDataFromCheque (DatosStep datosStep, DataFmwkTest dFTest) {
-		validateInitDataCheque(datosStep, dFTest.driver);
-		validateSecondDataCheque(datosStep, dFTest.driver);
-		validateThirdDataCheque(datosStep, dFTest.driver);
-		validatePedidosData(datosStep, dFTest.driver);
-		validateButtonsDataCheque(datosStep, dFTest.driver);
-		validateReturnCheques(datosStep, dFTest.driver);
+	public static void validateDataFromCheque (WebDriver driver) {
+		validateInitDataCheque(driver);
+		validateSecondDataCheque(driver);
+		validateThirdDataCheque(driver);
+		validatePedidosData(driver);
+		validateButtonsDataCheque(driver);
+		validateReturnCheques(driver);
 	}
 
-	public static void inputCheque (String cheque, DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep 	 	(
-			"Introducimos el numero de cheque con valor: <b>" + cheque + "</b>" ,
-			"Una vez hemos buscado dicho numero, nos aparece una tabla con información");
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-		try {
-			PageGestorCheques.inputChequeAndConfirm(cheque, dFTest.driver);
+	@Step(
+			description="Introducimos el numero de cheque con valor: <b>#{cheque}</b>",
+			expected="Muestra los cheques asociados al mail correctamente",
+			saveErrorPage=SaveWhen.Never)
+	public static void inputCheque (String cheque, WebDriver driver) throws Exception {
 
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		} 
-		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		//Step
+		PageGestorCheques.inputChequeAndConfirm(cheque, driver);
 
-		validateDataCheque(cheque, datosStep, dFTest.driver);
+		//Validation
+		validateDataCheque(cheque, driver);
 	}
 
 	@Validation(
 			description="1) Aparece el numero de cheque <b>#{cheque}</b> en la tabla de datos",
 			level=State.Defect)
-	public static boolean validateDataCheque(String cheque, DatosStep datosStep, WebDriver driver) {
+	public static boolean validateDataCheque(String cheque, WebDriver driver) {
 		return (!PageGestorCheques.isElementInStateUntil(ButtonsCheque.volverCheques, StateElem.Present, 3, driver));
 	}
 
-	public static void chequeDetails (DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep		(
-			"Accedemos al numero de cheque",
-			"Aparece toda la información de dicho cheque pero no un email");
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-		try {
-			PageGestorCheques.clickAndWait(ButtonsCheque.chequeData, dFTest.driver);
+	@Step(
+			description="Accedemos al numero de cheque",
+			expected="Aparece toda la información de dicho cheque pero no un email",
+			saveErrorPage=SaveWhen.Never)
+	public static void chequeDetails (WebDriver driver) throws Exception {
 
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		//Step
+		PageGestorCheques.clickAndWait(ButtonsCheque.chequeData, driver);
 
-		validateEmptyMail(datosStep, dFTest.driver);
+		//Validation
+		validateEmptyMail(driver);
 
-		validateDataFromCheque(datosStep, dFTest);
+		validateDataFromCheque(driver);
 	}
 
 	@Validation(
 			description="1) El dato de <b>mail</b> corresponde a un registro <b>vacio</b>",
 			level=State.Defect)
-	public static boolean validateEmptyMail(DatosStep datosStep, WebDriver driver) {
+	public static boolean validateEmptyMail(WebDriver driver) {
 		return (!PageGestorCheques.isMailCorrecto("", driver));
 	}
 
 	@Validation
-	public static ListResultValidation validateInitDataCheque(DatosStep datosStep, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+	public static ListResultValidation validateInitDataCheque( WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 				"Existe la tabla que contiene <b>Activo</b><br>",
