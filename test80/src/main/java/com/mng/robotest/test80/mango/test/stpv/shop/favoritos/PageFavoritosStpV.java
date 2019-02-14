@@ -93,7 +93,7 @@ public class PageFavoritosStpV {
     }
     
     @Step (
-        description="Eliminamos de Favoritos el artículo con referencia<b>#{refArticulo}</b> y código de color <b>#{codColor}</b>",
+        description="Eliminamos de Favoritos el artículo con referencia <b>#{refArticulo}</b> y código de color <b>#{codColor}</b>",
         expected="El artículo desaparece de Favoritos")
     public static void clear(String refArticulo, String codColor, DataFmwkTest dFTest) throws Exception {
         PageFavoritos.clearArticuloAndWait(refArticulo, codColor, dFTest.driver);
@@ -148,7 +148,7 @@ public class PageFavoritosStpV {
     }
     
     @Step (
-    	description="Desde Favoritos seleccionamos la imagen del artículo<b>#{artToPlay.getRefProducto()}</b>",
+    	description="Desde Favoritos seleccionamos la imagen del artículo <b>#{artToPlay.getRefProducto()}</b>",
         expected="Aparece el modal con la ficha del artículo")
     public static void clickArticuloImg(ArticuloScreen artToPlay, DataFmwkTest dFTest) {
         String refProducto = artToPlay.getRefProducto();

@@ -47,7 +47,7 @@ public class MatcherWithMethodParams {
     		return "Unknown";
     	}
     	
-    	return null;
+    	return paramNameInDescrValidation;
     }
     
     private String getStringFromParameter(TagData tagData, Object parameter) throws Exception {
