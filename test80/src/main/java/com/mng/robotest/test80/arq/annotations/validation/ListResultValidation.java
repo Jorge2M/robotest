@@ -25,7 +25,7 @@ public class ListResultValidation {
 	}
 	
 	public static ListResultValidation getNew() {
-		DatosStep datosStep = ThreadData.peekDatosStep();
+		DatosStep datosStep = ThreadData.getMaxDatosStep();
 		return (getNew(datosStep));
 	}
 	

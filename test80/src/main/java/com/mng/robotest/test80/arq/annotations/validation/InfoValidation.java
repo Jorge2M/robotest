@@ -50,8 +50,8 @@ public class InfoValidation {
     		}
     	}
     	
-    	if (ThreadData.peekDatosStep()!=null) {
-    		return (ThreadData.peekDatosStep());
+    	if (ThreadData.getMaxDatosStep()!=null) {
+    		return (ThreadData.getMaxDatosStep());
     	}
     	
     	throw (new RuntimeException("A parameter of Type DatosStep is mandatory in method with @Validation annotation"));
