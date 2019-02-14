@@ -139,7 +139,7 @@ public class PageFavoritosStpV {
     throws Exception {
         String refProductoToAdd = artToAddBolsa.getRefProducto();
         String codigoColor = artToAddBolsa.getCodigoColor();
-        String tallaSelected = PageFavoritos.addArticleToBag(refProductoToAdd, codigoColor, 1/*posicionTalla*/, dFTest.driver);
+        String tallaSelected = PageFavoritos.addArticleToBag(refProductoToAdd, codigoColor, 1, dFTest.driver);
         artToAddBolsa.setTallaAlf(tallaSelected);
         dataBolsa.addArticulo(artToAddBolsa);
 

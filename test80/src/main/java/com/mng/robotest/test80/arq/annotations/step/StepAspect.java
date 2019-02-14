@@ -1,6 +1,9 @@
 package com.mng.robotest.test80.arq.annotations.step;
 
 import java.sql.Date;
+import java.util.ArrayDeque;
+import java.util.Collections;
+import java.util.Queue;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -19,9 +22,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 @Aspect
 public class StepAspect {
 	
-	JoinPoint joinPoint;
-	InfoStep infoStep;
-	DatosStep datosStep;
+	Queue<DatosStep> datosStepStack = Collections.asLifoQueue(new ArrayDeque<DatosStep>());
 	
     @Pointcut("@annotation(Step)")
     public void annotationStepPointcut() {}
@@ -31,36 +32,44 @@ public class StepAspect {
     
     @Before("annotationStepPointcut() && atExecution()")
     public void before(JoinPoint joinPoint) {
-    	setInstanceData(joinPoint);
+    	InfoStep infoStep = InfoStep.from(joinPoint);
+    	DatosStep datosStep = getFromJoinPointAndStoreDatosStep(joinPoint, infoStep);
+    	setInitDataStep(infoStep, joinPoint, datosStep);
+    }
+    
+    private DatosStep getFromJoinPointAndStoreDatosStep(JoinPoint joinPoint, InfoStep infoStep) {
+    	DatosStep datosStep = infoStep.getDatosStep();
+    	DatosStep stepAnterior = ThreadData.peekDatosStep();
+    	if (stepAnterior!=null) {
+    		datosStep.setStepNumber(stepAnterior.getStepNumber()+1);
+    	}
+    	
+    	datosStepStack.add(datosStep);
     	ThreadData.storeInThread(datosStep);
-    	setInitDataStep();
+    	return datosStep;
     }
     
     @AfterThrowing(
     	pointcut="annotationStepPointcut() && atExecution()", 
     	throwing="ex")
     public void doRecoveryActions(JoinPoint joinPoint, Throwable ex) {
-    	setEndDataStep();
-    	storeStep(State.Nok, true);
+    	DatosStep datosStep = getDatosStepStored();
+    	setEndDataStep(datosStep);
+    	storeStep(State.Nok, true, datosStep);
     }
     
     @AfterReturning(
     	pointcut="annotationStepPointcut() && atExecution()")
     public void grabValidationAfter(JoinPoint joinPoint) throws Throwable {
-    	storeStep(State.Ok, false);
+    	DatosStep datosStep = getDatosStepStored();
+    	storeStep(State.Ok, false, datosStep);
     }
     
-    private void setInstanceData(JoinPoint joinPoint) {
-    	this.joinPoint = joinPoint;
-    	infoStep = InfoStep.from(joinPoint);
-    	datosStep = infoStep.getDatosStep();
-    	DatosStep stepAnterior = ThreadData.getDatosStep();
-    	if (stepAnterior!=null) {
-    		datosStep.setStepNumber(stepAnterior.getStepNumber()+1);
-    	}
+    private DatosStep getDatosStepStored() {
+    	return (datosStepStack.poll());
     }
     
-    private void setInitDataStep() {
+    private void setInitDataStep(InfoStep infoStep, JoinPoint joinPoint, DatosStep datosStep) {
         MatcherWithMethodParams matcher = MatcherWithMethodParams.from(joinPoint);
         String stepDescription = infoStep.getStepAnnotation().description();
         String stepResExpected = infoStep.getStepAnnotation().expected();
@@ -69,11 +78,11 @@ public class StepAspect {
         datosStep.setHoraInicio(new Date(System.currentTimeMillis()));
     }
     
-    private void setEndDataStep() {
+    private void setEndDataStep(DatosStep datosStep) {
     	datosStep.setHoraFin(new Date(System.currentTimeMillis()));
     }
     
-    private void storeStep(State stateResult, boolean isException) {
+    private void storeStep(State stateResult, boolean isException, DatosStep datosStep) {
     	updateDatosStep(datosStep, stateResult, isException);
         int numStep = fmwkTest.grabStep(datosStep, ThreadData.getdFTest());
         datosStep.setStepNumber(numStep);

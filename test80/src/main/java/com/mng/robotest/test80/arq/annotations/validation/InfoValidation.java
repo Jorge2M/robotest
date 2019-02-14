@@ -1,9 +1,6 @@
 package com.mng.robotest.test80.arq.annotations.validation;
 
 import java.lang.reflect.Method;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
@@ -53,8 +50,8 @@ public class InfoValidation {
     		}
     	}
     	
-    	if (ThreadData.getDatosStep()!=null) {
-    		return ThreadData.getDatosStep();
+    	if (ThreadData.peekDatosStep()!=null) {
+    		return (ThreadData.peekDatosStep());
     	}
     	
     	throw (new RuntimeException("A parameter of Type DatosStep is mandatory in method with @Validation annotation"));
