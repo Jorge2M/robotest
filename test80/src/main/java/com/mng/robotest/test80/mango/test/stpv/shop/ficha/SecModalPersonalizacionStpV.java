@@ -1,14 +1,14 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.mango.test.pageobject.manto.PageOrdenacionDePrendas;
+import com.mng.robotest.test80.arq.utils.ThreadData;
 import org.openqa.selenium.By;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -77,318 +77,290 @@ public class SecModalPersonalizacionStpV {
 	}
 
 	public void startCustomizationProcces(Channel channel, DataFmwkTest dFTest) throws Exception {
-		selectCustomization(channel, dFTest);
-		startCustomization(channel, dFTest);
+		selectCustomization(channel, dFTest.driver);
+		startCustomization(channel, dFTest.driver);
 	}
 
 	public void customizationProcces(Channel channel, DataFmwkTest dFTest) throws Exception {
-		selectIconCustomization(channel, dFTest);
-		selectFirstIcon(channel, dFTest);
-		selectWhere(channel, dFTest);
-		selectColor(channel, dFTest);
-		selectSize(channel, dFTest);
+		selectIconCustomization(channel, dFTest.driver);
+		selectFirstIcon(channel, dFTest.driver);
+		selectWhere(channel, dFTest.driver);
+		selectColor(channel, dFTest.driver);
+		selectSize(channel, dFTest.driver);
 	}
 
 	public void endAndCheckCustomization(Channel channel, DataFmwkTest dFTest) throws Exception {
-		confirmCustomization(channel, dFTest);
-		checkCustomizationProof(channel, dFTest);
+		confirmCustomization(channel, dFTest.driver);
+		checkCustomizationProof(channel, dFTest.driver);
 	}
 
 	//Funciones donde comprobaremos los diferentes pasos de la personalizacion
 
-	private void selectCustomization(Channel channel, DataFmwkTest dFTest) throws Exception {
+	@Step(
+			description="Seleccionamos el link <b>Añadir personalización</b>",
+			expected="Aparece el modal para la personalización de la prenda")
+	public void selectCustomization (Channel channel, WebDriver driver) throws Exception {
 		//Step
-		DatosStep datosStep = new DatosStep       (
-				"Seleccionamos el link <b>Añadir personalización</b>",
-				"Aparece el modal para la personalización de la prenda");
-		try {
-			if(channel == Channel.movil_web)
-				WebdrvWrapp.moveToElement(By.xpath(ModalElement.BotonIniciar.getXPath(channel)), dFTest.driver);
-			SecModalPersonalizacion.selectElement(ModalElement.BotonIniciar, channel, dFTest.driver);
+		if(channel == Channel.movil_web)
+			WebdrvWrapp.moveToElement(By.xpath(ModalElement.BotonIniciar.getXPath(channel)), driver);
+		SecModalPersonalizacion.selectElement(ModalElement.BotonIniciar, channel, driver);
 
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
-
-		validateModal(3, datosStep, dFTest.driver);
+		//Validation
+		validateModal(3, driver);
 	}
 
 	@Validation(
 			description="1) Aparece el modal de personalización de la prenda",
 			level=State.Warn)
-	public static boolean validateModal(int maxSecondsWait, DatosStep datosStep, WebDriver driver) {
+	public static boolean validateModal(int maxSecondsWait, WebDriver driver) {
 		return (!SecModalPersonalizacion.isElementInStateUntil(ModalElement.Modal, StateElem.Visible, maxSecondsWait, driver));
 	}
 
-	private void startCustomization(Channel channel, DataFmwkTest dFTest) throws Exception {
+	@Step(
+			description="Seleccionamos el botón <b>Empezar</b>",
+			expected="Aparecen las primeras opciones de personalizacion del artículo"
+	)
+	public void startCustomization (Channel channel, WebDriver driver) throws Exception {
 		//Step
-		DatosStep datosStep = new DatosStep		  (
-				"Seleccionamos el botón <b>Empezar</b>",
-				"Aparecen las primeras opciones de personalizacion del artículo");
-		try {
-			//Seleccionamos el boton de continuar para después hacer las diversas validaciones
-			SecModalPersonalizacion.selectElement(ModalElement.StartProcces, channel, dFTest.driver);
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		SecModalPersonalizacion.selectElement(ModalElement.StartProcces, channel, driver);
 
-		//Validaciones
+		//Validation
 		if (channel == Channel.desktop) {
-			validateIsApartadoVisible(1, datosStep, dFTest, channel);
+			validateIsApartadoVisible(1, driver, channel);
 		} else {
-			validationInitMblCustomization(2, ModalElement.HeaderProof, datosStep, channel, dFTest.driver);
+			validationInitMblCustomization(2, ModalElement.HeaderProof, channel, driver);
 		}
 	}
 
 	@Validation(
 			description="1) Aparece la cabecera correspondiente a la personalizacion de la prenda",
 			level=State.Warn)
-	public static boolean validationInitMblCustomization(int maxSecondsWait, ModalElement element, DatosStep datosStep, Channel channel, WebDriver driver) {
+	public static boolean validationInitMblCustomization(int maxSecondsWait, ModalElement element, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
-	private void selectIconCustomization(Channel channel, DataFmwkTest dFTest) throws Exception {
+	@Step(
+			description="Seleccionamos la opción <b>Un icono</b>",
+			expected="Aparece la lista de iconos"
+	)
+	public void selectIconCustomization (Channel channel, WebDriver driver) throws Exception {
 		//Step
-		DatosStep datosStep = new DatosStep			(
-				"Seleccionamos la opción <b>Un icono</b>",
-				"Aparece la lista de iconos");
-		try {
-			SecModalPersonalizacion.selectElement(ModalElement.RadioIcon, channel, dFTest.driver);
+		SecModalPersonalizacion.selectElement(ModalElement.RadioIcon, channel, driver);
 
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
-
+		//Validation
 		if (channel == Channel.desktop) {
-			validateIsApartadoVisible(1,  datosStep, dFTest, channel);
-			validationIconSelection(2, ModalElement.Icons, datosStep, channel, dFTest.driver);
+			validateIsApartadoVisible(1, driver, channel);
+			validationIconSelection(2, ModalElement.Icons, channel, driver);
 		} else {
-			validateCabeceraMvl("La cabecera ha cambiado",2, datosStep, channel, dFTest.driver);
-			validationIconSelection(2, ModalElement.BackProof, datosStep, channel, dFTest.driver);
+			validateCabeceraMvl("La cabecera ha cambiado",2, channel, driver);
+			validationIconSelection(2, ModalElement.BackProof, channel, driver);
 		}
 	}
 
 	@Validation(
 			description="1) Aparece la lista de iconos seleccionables",
 			level=State.Warn)
-	public static boolean validationIconSelection(int maxSecondsWait, ModalElement element, DatosStep datosStep, Channel channel, WebDriver driver) {
+	public static boolean validationIconSelection(int maxSecondsWait, ModalElement element, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
-	private void selectFirstIcon(Channel channel, DataFmwkTest dFTest) throws Exception {
+	@Step(
+			description="Seleccionamos el primer icono",
+			expected="Aparece el botón Confirmar"
+	)
+	public void selectFirstIcon (Channel channel, WebDriver driver) throws Exception {
 		//Step
-		DatosStep datosStep = new DatosStep 		 (
-				"Seleccionamos el primer icono",
-				"Aparece el botón Confirmar");
-		try {
-			SecModalPersonalizacion.selectElement(ModalElement.IconSelecction, channel, dFTest.driver, WebdrvWrapp.TypeOfClick.javascript);
+		SecModalPersonalizacion.selectElement(ModalElement.IconSelecction, channel, driver, WebdrvWrapp.TypeOfClick.javascript);
 
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		}
-		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
-
-		//Validaciones
+		//Validation
 		if (channel == Channel.desktop) {
-			validateIconSelected(datosStep, dFTest.driver);
+			validateIconSelected(driver);
 		} else {
-			validateFirstIconSelectionMvl(2, ModalElement.PositionButton, datosStep, channel, dFTest.driver);
+			validateFirstIconSelectionMvl(2, ModalElement.PositionButton, channel, driver);
 		}
 	}
 
 	@Validation
-	public static ListResultValidation validateIconSelected(DatosStep datosStep, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+	public static ListResultValidation validateIconSelected(WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 				"Aparece seleccionado el primer icono<br>",
-				PageOrdenacionDePrendas.isElementInStateUntil(ModalElement.IconSelecction, StateElem.Visible, maxSecondsWait, driver), State.Warn);
+				SecModalPersonalizacion.isElementInStateUntil(ModalElement.IconSelecction, StateElem.Visible, maxSecondsWait, driver), State.Warn);
 		validations.add(
 				"Podemos confirmar nuestra seleccion",
-				PageOrdenacionDePrendas.isElementInStateUntil(ModalElement.PositionButton, StateElem.Visible, maxSecondsWait, driver), State.Warn);
+				SecModalPersonalizacion.isElementInStateUntil(ModalElement.PositionButton, StateElem.Visible, maxSecondsWait, driver), State.Warn);
 		return validations;
 	}
 
 	@Validation(
 			description="1) Aparece seleccionado el primer icono y podemos confirmar nuestra seleccion",
 			level=State.Warn)
-	public static boolean validateFirstIconSelectionMvl(int maxSecondsWait, ModalElement element, DatosStep datosStep, Channel channel, WebDriver driver) {
+	public static boolean validateFirstIconSelectionMvl(int maxSecondsWait, ModalElement element, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
-	private void selectWhere(Channel channel, DataFmwkTest dFTest) throws Exception {
+	@Step(
+			description="Seleccionamos el botón \"Confirmar\"",
+			expected="Se hace visible el paso-2"
+	)
+	public void selectWhere (Channel channel, WebDriver driver) throws Exception {
 		//Step
-		DatosStep datosStep = new DatosStep			(
-				"Seleccionamos el botón \"Confirmar\"",
-				"Se hace visible el paso-2");
-		try {
-			if (channel == Channel.desktop)
-				SecModalPersonalizacion.selectElement(ModalElement.Continue, channel, dFTest.driver);
-			SecModalPersonalizacion.selectElement(ModalElement.PositionButton, channel, dFTest.driver);
+		if (channel == Channel.desktop)
+			SecModalPersonalizacion.selectElement(ModalElement.Continue, channel, driver);
+		SecModalPersonalizacion.selectElement(ModalElement.PositionButton, channel, driver);
 
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		}
-		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
-
-		//Validaciones
+		//Validation
 		if (channel == Channel.desktop) {
-			validateIsApartadoVisible(2, datosStep, dFTest, channel);
-			validateWhere(datosStep, dFTest.driver);
+			validateIsApartadoVisible(2, driver, channel);
+			validateWhere(driver);
 		} else {
-			validateCabeceraMvl("Seguimos en el proceso de personalizacion", 2, datosStep, channel, dFTest.driver);
-			validateColorsMvl(2, ModalElement.ColorsContainer, datosStep, channel, dFTest.driver);
+			validateCabeceraMvl("Seguimos en el proceso de personalizacion", 2, channel, driver);
+			validateColorsMvl(2, ModalElement.ColorsContainer, channel, driver);
 		}
 	}
 
 	@Validation
-	public static ListResultValidation validateWhere(DatosStep datosStep, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+	public static ListResultValidation validateWhere(WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 				"Aparecen los radio-button correspondientes a la seccion<br>",
-				PageOrdenacionDePrendas.isElementInStateUntil(ModalElement.PositionButton, StateElem.Visible, maxSecondsWait, driver), State.Warn);
+				SecModalPersonalizacion.isElementInStateUntil(ModalElement.PositionButton, StateElem.Visible, maxSecondsWait, driver), State.Warn);
 		validations.add(
 				"Podemos confirmar nuestra seleccion",
-				PageOrdenacionDePrendas.isElementInStateUntil(ModalElement.StepProof, StateElem.Visible, maxSecondsWait, driver), State.Warn);
+				SecModalPersonalizacion.isElementInStateUntil(ModalElement.StepProof, StateElem.Visible, maxSecondsWait, driver), State.Warn);
 		return validations;
 	}
 
 	@Validation(
 			description="1) En el flujo mobil, ahora aparecen los colores disponibles",
 			level=State.Warn)
-	public static boolean validateColorsMvl(int maxSecondsWait, ModalElement element, DatosStep datosStep, Channel channel, WebDriver driver) {
+	public static boolean validateColorsMvl(int maxSecondsWait, ModalElement element, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
-	private void selectColor(Channel channel, DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep			(
-				"Seleccionamos el botón \"Confirmar\"",
-				"Aparece el apartado 3 de la personalización");
-		try {
-			SecModalPersonalizacion.selectElement(ModalElement.Continue, channel, dFTest.driver, WebdrvWrapp.TypeOfClick.javascript);
+	@Step(
+			description="Seleccionamos el botón \"Confirmar\"",
+			expected="Aparece el apartado 3 de la personalización"
+	)
+	public void selectColor (Channel channel, WebDriver driver) throws Exception {
+		//Step
+		SecModalPersonalizacion.selectElement(ModalElement.Continue, channel, driver, WebdrvWrapp.TypeOfClick.javascript);
 
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		}
-		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
-
-		//Validacion
+		//Validation
 		if (channel == Channel.desktop) {
-			validateIsApartadoVisible(3, datosStep, dFTest, channel);
-			validateSelectionColor(datosStep, dFTest.driver);
+			validateIsApartadoVisible(3, driver, channel);
+			validateSelectionColor(driver);
 		} else {
-			validateCabeceraMvl("Cambia la cabecera pero seguimos en la personalizacion del producto", 2, datosStep, channel, dFTest.driver);
-			validateContinuesMvl(2, datosStep, channel, dFTest.driver);
+			validateCabeceraMvl("Cambia la cabecera pero seguimos en la personalizacion del producto", 2, channel, driver);
+			validateContinuesMvl(2, channel, driver);
 		}
 	}
 
 	@Validation
-	public static ListResultValidation validateSelectionColor(DatosStep datosStep, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew(datosStep);
+	public static ListResultValidation validateSelectionColor(WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 				"Aparecen los radio-button correspondientes a los colores<br>",
-				PageOrdenacionDePrendas.isElementInStateUntil(ModalElement.ColorsContainer, StateElem.Visible, maxSecondsWait, driver), State.Warn);
+				SecModalPersonalizacion.isElementInStateUntil(ModalElement.ColorsContainer, StateElem.Visible, maxSecondsWait, driver), State.Warn);
 		validations.add(
 				"Aparece el botón de \"Confirmar\"",
-				PageOrdenacionDePrendas.isElementInStateUntil(ModalElement.Continue, StateElem.Visible, maxSecondsWait, driver), State.Warn);
+				SecModalPersonalizacion.isElementInStateUntil(ModalElement.Continue, StateElem.Visible, maxSecondsWait, driver), State.Warn);
 		return validations;
 	}
 
 	@Validation(
 			description="1) Podemos continuar con nuestro proceso de personalizacion",
 			level=State.Warn)
-	public static boolean validateContinuesMvl(int maxSecondsWait, DatosStep datosStep, Channel channel, WebDriver driver) {
+	public static boolean validateContinuesMvl (int maxSecondsWait, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Continue, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
-	private void selectSize(Channel channel, DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep			(
-				"Seleccionamos el botón \"Confirmar\"",
-				"Aparece el apartado 4 de la personalización");
-		try {
-			SecModalPersonalizacion.clickAndWait(channel, ModalElement.Continue, dFTest.driver);
+	@Step(
+			description="Seleccionamos el botón \"Confirmar\"",
+			expected="Aparece el apartado 4 de la personalización"
+	)
+	public void selectSize (Channel channel, WebDriver driver) throws Exception {
+		//Step
+		SecModalPersonalizacion.clickAndWait(channel, ModalElement.Continue, driver);
 
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		}
-		finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
-
-		//Validacion
+		//Validation
 		if (channel != Channel.movil_web) {
-			validateSizeList(2, datosStep, channel, dFTest.driver);
+			validateSizeList(2, channel, driver);
 		} else {
-			validateAddBagMvl("que nos permite añadir ese producto a la bolsa", 2, datosStep, channel, dFTest.driver);
+			validateAddBagMvl("que nos permite añadir ese producto a la bolsa", 2, channel, driver);
 		}
 	}
 
 	@Validation(
 			description="1) Aparecen los posibles tamaños",
 			level=State.Warn)
-	public static boolean validateSizeList(int maxSecondsWait, DatosStep datosStep, Channel channel, WebDriver driver) {
+	public static boolean validateSizeList(int maxSecondsWait, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.SizeContainer, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
 	@Validation(
 			description="1) Es visible el botón #{descripcion}que nos permite añadir ese producto a la bolsa",
 			level=State.Warn)
-	public static boolean validateAddBagMvl(String descripcion, int maxSecondsWait, DatosStep datosStep, Channel channel, WebDriver driver) {
+	public static boolean validateAddBagMvl(String descripcion, int maxSecondsWait, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.addToBag, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
-	private void confirmCustomization(Channel channel, DataFmwkTest dFTest) throws Exception {
+	@Step(
+			description="Seleccionamos el botón \"Añadir a la bolsa\"",
+			expected="Aparece el modal con las opciones para ver la bolsa o seguir comprando"
+	)
+	public void confirmCustomization (Channel channel, WebDriver driver) throws Exception {
 		//Step
-		DatosStep datosStep = new DatosStep			(
-				"Seleccionamos el botón \"Añadir a la bolsa\"",
-				"Aparece el modal con las opciones para ver la bolsa o seguir comprando");
-		try {
-			if (channel != Channel.movil_web) {
-				SecModalPersonalizacion.selectElement(ModalElement.Continue, dFTest.driver);
-			} else {
-				SecModalPersonalizacion.selectElement(ModalElement.addToBag, channel, dFTest.driver);
-			}
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		} finally { datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest)); }
+		if (channel != Channel.movil_web) {
+			SecModalPersonalizacion.selectElement(ModalElement.Continue, driver);
+		} else {
+			SecModalPersonalizacion.selectElement(ModalElement.addToBag, channel, driver);
+		}
 
-		//Validaciones
+		//Validation
 		if (channel == Channel.desktop) {
-			validateAddBag(2, datosStep, channel, dFTest.driver);
+			validateAddBag(2, channel, driver);
 
 		} else {
-			validateAddBagMvl("<b>ir a la bolsa</b>", 2, datosStep, channel, dFTest.driver);
+			validateAddBagMvl("<b>ir a la bolsa</b>", 2, channel, driver);
 		}
 	}
 
 	@Validation(
 			description="1) Aparece el botón para añadir a la bolsa",
 			level=State.Warn)
-	public static boolean validateAddBag(int maxSecondsWait, DatosStep datosStep, Channel channel, WebDriver driver) {
+	public static boolean validateAddBag(int maxSecondsWait, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Continue, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
-	private void checkCustomizationProof(Channel channel, DataFmwkTest dFTest) throws Exception {
+	@Step(
+			description="Seleccionamos el botón \"Añadir a la bolsa\"",
+			expected="El artículo se da de alta correctamente en la bolsa"
+	)
+	public void checkCustomizationProof (Channel channel, WebDriver driver) throws Exception {
 		//Step
-		DatosStep datosStep = new DatosStep			(
-				"Seleccionamos el botón \"Añadir a la bolsa\"",
-				"El artículo se da de alta correctamente en la bolsa");
-
 		if (channel == Channel.desktop) {
-			SecModalPersonalizacion.selectElement(ModalElement.Continue, channel, dFTest.driver);
+			SecModalPersonalizacion.selectElement(ModalElement.Continue, channel, driver);
 		} else if (channel == Channel.movil_web) {
-			SecModalPersonalizacion.selectElement(ModalElement.StartProcces, channel, dFTest.driver);
-			SecModalPersonalizacion.selectElement(ModalElement.GoToBag, channel, dFTest.driver);
+			SecModalPersonalizacion.selectElement(ModalElement.StartProcces, channel, driver);
+			SecModalPersonalizacion.selectElement(ModalElement.GoToBag, channel, driver);
 		}
 
-		//Step
-		datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		datosStep.setStepNumber(fmwkTest.grabStep(datosStep, dFTest));
-
-		//Validaciones
-		validateCustomizationProof(2, ModalElement.BolsaProof, datosStep, channel, dFTest.driver);
+		//Validation
+		validateCustomizationProof(2, ModalElement.BolsaProof, channel, driver);
 	}
 
 	@Validation(
 			description="1) En la bolsa aparece el apartado correspondiente a la personalización (lo esperamos hasta #{maxSecondsWait} segundos)",
 			level=State.Defect)
-	public static boolean validateCustomizationProof(int maxSecondsWait, ModalElement element, DatosStep datosStep, Channel channel, WebDriver driver) {
+	public static boolean validateCustomizationProof(int maxSecondsWait, ModalElement element, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
-	private static void validateIsApartadoVisible(int numApartado, DatosStep datosStep, DataFmwkTest dFTest, Channel channel) {
+	private static void validateIsApartadoVisible(int numApartado, WebDriver driver, Channel channel) {
 		ModalElement modalToValidate;
 		switch (numApartado) {
 			case 1:
@@ -405,13 +377,13 @@ public class SecModalPersonalizacionStpV {
 				modalToValidate = ModalElement.Step4Proof;
 		}
 
-		validateSection(4, modalToValidate, numApartado, datosStep, channel, dFTest.driver);
+		validateSection(4, modalToValidate, numApartado, channel, driver);
 	}
 
 	@Validation(
 			description="1) Es visible el apartado #{numApartado} de la personalización",
 			level=State.Defect)
-	public static boolean validateSection(int maxSecondsWait, ModalElement element, int numApartado, DatosStep datosStep, Channel channel, WebDriver driver) {
+	public static boolean validateSection(int maxSecondsWait, ModalElement element, int numApartado, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
@@ -419,7 +391,7 @@ public class SecModalPersonalizacionStpV {
 	@Validation(
 			description="1) #{descripcion}",
 			level=State.Warn)
-	public static boolean validateCabeceraMvl(String descripcion, int maxSecondsWait, DatosStep datosStep, Channel channel, WebDriver driver) {
+	public static boolean validateCabeceraMvl(String descripcion, int maxSecondsWait, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.HeaderProof, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
