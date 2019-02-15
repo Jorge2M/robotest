@@ -64,11 +64,12 @@ public class StepAspect {
     	pointcut="annotationStepPointcut() && atExecution()")
     public void grabValidationAfter(JoinPoint joinPoint) throws Throwable {
     	DatosStep datosStep = TestCaseData.pollDatosStepForStep();
+    	datosStep.setExcepExists(false);
     	storeDataAfterStep(datosStep);
     }
     
     public static void storeDataAfterStep(DatosStep datosStep) {
-    	if (!datosStep.isStateUpdated()) {
+    	if (!datosStep.isStateUpdated() && !datosStep.getExcepExists()) {
     		storeStep(State.Ok, false, datosStep);
     	}
     	else {
