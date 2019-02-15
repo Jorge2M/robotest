@@ -3,6 +3,8 @@ package com.mng.robotest.test80.mango.test.getdata.productos;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -41,6 +43,7 @@ public class ManagerArticlesStockTest extends TestCase {
     }
 	
 	@Test
+	@Ignore
 	public void testGetProductsFromServiceMng() throws Exception {
 		//Code to test
 		ManagerArticlesStock managerArticles = new ManagerArticlesStock(appForTest, urlForTest, numArticlesDesired);
@@ -59,6 +62,7 @@ public class ManagerArticlesStockTest extends TestCase {
 	}
 	
 	@Test
+	@Ignore
 	public void testGetProductsFromCache() throws Exception {
 		//Define initial context. Articles exists only in caché
 		ManagerArticlesStock managerArticles = new ManagerArticlesStock(appForTest, urlForTest);
