@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageBolsas extends WebdrvWrapp {
 
     static String XPathLinea = "//table[@width='100%']/tbody/tr[5]/td/input[@class='botones']";

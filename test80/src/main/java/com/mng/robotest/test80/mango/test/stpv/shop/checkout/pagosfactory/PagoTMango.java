@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango.PageAmexInpu
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango.PageAmexInputTarjetaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango.PageAmexResultStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoTMango extends PagoStpV {
 
     public PagoTMango(DataCtxShop dCtxSh, DataCtxPago dataPago, DataFmwkTest dFTest) {

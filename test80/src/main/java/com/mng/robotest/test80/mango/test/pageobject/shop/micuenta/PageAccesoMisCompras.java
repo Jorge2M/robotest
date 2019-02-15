@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.PageFromFooter;
 
-@SuppressWarnings("javadoc")
+
 public class PageAccesoMisCompras extends WebdrvWrapp implements PageFromFooter {
 
     public enum TypeBlock {SiRegistrado, NoRegistrado}

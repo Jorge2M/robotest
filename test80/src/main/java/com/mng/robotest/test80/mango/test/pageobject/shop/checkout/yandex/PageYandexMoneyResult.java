@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageYandexMoneyResult extends WebdrvWrapp {
     
     public static String msgTransferOk = "Обработка завершена. Запрос выполнен успешно. Зачисление перевода проведено успешно";

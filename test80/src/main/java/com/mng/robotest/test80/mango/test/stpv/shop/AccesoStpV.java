@@ -9,9 +9,9 @@ import org.json.simple.JSONObject;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -37,7 +37,7 @@ import com.mng.robotest.test80.mango.test.stpv.votf.PageSelectIdiomaVOTFStpV;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageSelectLineaVOTFStpV;
 import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
 
-@SuppressWarnings({"javadoc", "static-access"})
+@SuppressWarnings({"static-access"})
 public class AccesoStpV {
 
     /**
@@ -73,7 +73,7 @@ public class AccesoStpV {
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
         finally { 
-        	fmwkTest.grabStep(datosStep, dFTest); 
+        	StepAspect.storeDataAfterStep(datosStep); 
         }
         
         if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) 
@@ -224,7 +224,7 @@ public class AccesoStpV {
                 
                 datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
             } 
-            finally { fmwkTest.grabStep(datosStep, dFTest); }
+            finally { StepAspect.storeDataAfterStep(datosStep); }
             
             //Validación
             validaIdentificacionEnShop(dCtxSh, datosStep, dFTest);
@@ -281,7 +281,7 @@ public class AccesoStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest);}
+        finally { StepAspect.storeDataAfterStep(datosStep);}
         
     }
     
@@ -314,7 +314,7 @@ public class AccesoStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest);}
+        finally { StepAspect.storeDataAfterStep(datosStep);}
 
         if (vecesPaisConfPrev < 2)
             //Si se ha confirmado el país < 2 veces debería aparecer el modal del cambio de país
@@ -452,7 +452,7 @@ public class AccesoStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest);}        
+        finally { StepAspect.storeDataAfterStep(datosStep);}        
         
         String descripValidac = 
         	"1) Se redirige a la URL del país " + paisBotonCambio + " (" + hrefBotonCambioPais + ")"; 
@@ -487,7 +487,7 @@ public class AccesoStpV {
                                                                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
                 
         //Validaciones
         String descripValidac = 
@@ -507,7 +507,8 @@ public class AccesoStpV {
     /**
      * Validaciones comparativa del status de 2 nodos concretos
      */
-    public static void validaCompareStatusNodos(DatosStep datosStep, NodoStatus nodoAct, NodoStatus nodoAnt, DataFmwkTest dFTest) throws Exception {
+    public static void validaCompareStatusNodos(DatosStep datosStep, NodoStatus nodoAct, NodoStatus nodoAnt)
+    throws Exception {
         //Obtenemos el stock actual
         JSONObject stockAct = nodoAct.getStatusJSON().getWarehouses();
         

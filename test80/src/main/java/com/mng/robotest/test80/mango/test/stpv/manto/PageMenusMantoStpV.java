@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageBolsas;
 import com.mng.robotest.test80.mango.test.pageobject.manto.SecCabecera;
@@ -19,7 +19,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.PageMenusManto;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class PageMenusMantoStpV {
 
     public static DatosStep goToMainMenusAndClickMenu(String subMenu, DataFmwkTest dFTest) throws Exception {
@@ -40,7 +40,7 @@ public class PageMenusMantoStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         String descripValidac = 
@@ -151,7 +151,7 @@ public class PageMenusMantoStpV {
      */
 	public static void goToGestorCheques(DataFmwkTest dFTest) throws Exception {
 		//Step
-        DatosStep datosStep = goToMainMenusAndClickMenu("Gestor de Cheques", dFTest);
+        goToMainMenusAndClickMenu("Gestor de Cheques", dFTest);
             
         //Validaciones
         PageGestorChequesStpV.validateIsPage(dFTest.driver);

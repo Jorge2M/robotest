@@ -18,7 +18,7 @@ import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
 import com.mng.robotest.test80.arq.utils.selenium.BStackDataMovil;
 
-@SuppressWarnings("javadoc")
+
 public class MenusPaisXML {
 
     ParamsBean params = null;

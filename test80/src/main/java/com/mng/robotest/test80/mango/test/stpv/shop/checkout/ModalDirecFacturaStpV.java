@@ -2,14 +2,14 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.ModalDirecFactura;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopCheckout;
 
-@SuppressWarnings("javadoc")
+
 public class ModalDirecFacturaStpV {
 
     public static void validateIsOk(DatosStep datosStep, DataFmwkTest dFTest) {
@@ -44,7 +44,7 @@ public class ModalDirecFacturaStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         String descripValidac = 

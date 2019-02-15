@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
 
-@SuppressWarnings("javadoc")
+
 public class PageRecuperaPasswd extends WebdrvWrapp {
     
     static String xpathInputCorreo = "//input[@type='text' and @id[contains(.,'RPemail')]]";

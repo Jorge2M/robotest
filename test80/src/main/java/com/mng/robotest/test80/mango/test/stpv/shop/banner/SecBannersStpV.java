@@ -7,9 +7,9 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.appshop.campanas.CampanasData;
 import com.mng.robotest.test80.mango.test.appshop.campanas.DataCampana;
 import com.mng.robotest.test80.mango.test.appshop.campanas.DataCampana.AtributoCampana;
@@ -26,7 +26,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
 import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
 
-@SuppressWarnings("javadoc")
+
 public class SecBannersStpV {
 	
 	int maxBannersToLoad;
@@ -36,7 +36,7 @@ public class SecBannersStpV {
 		managerBannersScreen = new ManagerBannersScreen(maxBannersToLoad, driver);
 	}
 	
-    public void testPageBanners(DataCtxShop dCtxSh, LineaType lineaType, int maximoBanners, DataFmwkTest dFTest) 
+    public void testPageBanners(DataCtxShop dCtxSh, int maximoBanners, DataFmwkTest dFTest) 
     throws Exception { 
         String urlPagPrincipal = dFTest.driver.getCurrentUrl();
         int sizeListBanners = managerBannersScreen.getListDataBanners().size();
@@ -59,11 +59,11 @@ public class SecBannersStpV {
     		boolean makeValidations = true;
     		DatosStep datosStep = seleccionarBanner(posBanner, makeValidations, dCtxSh.appE, dCtxSh.channel, dFTest);
     		DataBanner dataBanner = managerBannersScreen.getBanner(posBanner);
-    		validateCamapanaWithBannerInScreen(dataCampToTest, dataBanner, datosStep, dFTest);
+    		validateCamapanaWithBannerInScreen(dataCampToTest, dataBanner, datosStep);
     	}
     }
     
-    private void validateCamapanaWithBannerInScreen(DataCampana dataCampana, DataBanner dataBanner, DatosStep datosStep, DataFmwkTest dFTest) {
+    private void validateCamapanaWithBannerInScreen(DataCampana dataCampana, DataBanner dataBanner, DatosStep datosStep) {
         String descripValidac = 
             "1) Los datos de la campaña son correctos<br>" +
             	getReportCompareDataInCuteHtml(dataCampana, dataBanner);
@@ -100,7 +100,7 @@ public class SecBannersStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         dataBanner.setUrlDestino(dFTest.driver.getCurrentUrl());
         if (validaciones) {

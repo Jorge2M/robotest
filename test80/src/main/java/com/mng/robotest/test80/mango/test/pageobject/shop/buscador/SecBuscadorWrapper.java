@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 
-@SuppressWarnings("javadoc")
+
 public class SecBuscadorWrapper {
 	
 	public static void buscarArticulo(ArticleStock articulo, Channel channel, AppEcom app, WebDriver driver) 

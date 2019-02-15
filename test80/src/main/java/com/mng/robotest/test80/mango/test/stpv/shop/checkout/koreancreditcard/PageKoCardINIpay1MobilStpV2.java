@@ -2,6 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
@@ -12,7 +13,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditc
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@SuppressWarnings("javadoc")
+
 public class PageKoCardINIpay1MobilStpV2 {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
@@ -55,7 +56,7 @@ public class PageKoCardINIpay1MobilStpV2 {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validation
         String descripValidac =
@@ -84,7 +85,7 @@ public class PageKoCardINIpay1MobilStpV2 {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validations
         PageKoCardINIpay2MobilStpV.validateIsPage(datosStep, dFTest);

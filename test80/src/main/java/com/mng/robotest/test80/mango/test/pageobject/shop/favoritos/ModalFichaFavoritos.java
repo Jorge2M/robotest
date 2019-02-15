@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 
-@SuppressWarnings("javadoc")
+
 public class ModalFichaFavoritos extends WebdrvWrapp {
     
     static String XPathFichaProducto = "//div[@class='favorites-quickview']";

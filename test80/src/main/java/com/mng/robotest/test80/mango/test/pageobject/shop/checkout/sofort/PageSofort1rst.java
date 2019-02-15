@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 /**
  * Page1: la página inicial de Sofort (la posterior a la selección del botón "Confirmar Pago")
  * @author jorge.munoz

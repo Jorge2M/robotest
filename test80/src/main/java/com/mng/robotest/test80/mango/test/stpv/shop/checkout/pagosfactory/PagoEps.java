@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.eps.PageEpsSelBanco
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.eps.PageEpsSimuladorStpV;
 
 
-@SuppressWarnings("javadoc")
+
 public class PagoEps extends PagoStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
@@ -32,7 +32,7 @@ public class PagoEps extends PagoStpV {
     	this.dFTest.driver.navigate().refresh();
     	
         PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
-        PageCheckoutWrapperStpV.selectBancoEPS(this.dCtxPago, this.dCtxSh, this.dFTest);
+        PageCheckoutWrapperStpV.selectBancoEPS(this.dCtxSh, this.dFTest);
         DatosStep datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
         if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest)) {
         	PageEpsSimuladorStpV.validateIsPage(datosStep, dFTest);

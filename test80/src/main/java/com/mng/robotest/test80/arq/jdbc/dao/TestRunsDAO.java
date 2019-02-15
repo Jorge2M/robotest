@@ -19,7 +19,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.selenium.BStackDataMovil;
 
-@SuppressWarnings("javadoc")
+
 public class TestRunsDAO {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     

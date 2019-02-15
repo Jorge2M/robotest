@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.arq.utils.controlTest;
 
-@SuppressWarnings("javadoc")
+
 public class indexSuite {
 
     private String idExecSuite;

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageAmexInputTarjeta extends WebdrvWrapp {
 
     static String XPathIconoBancoSabadell = "//div[@class='logoEntidad']/img[@src[contains(.,'entidad/81.png')]]";

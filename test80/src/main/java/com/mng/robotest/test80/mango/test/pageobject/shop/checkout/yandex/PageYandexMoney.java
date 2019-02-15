@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageYandexMoney extends WebdrvWrapp {
 
     public static String urlAccess = "https://demomoney.yandex.ru/shop.xml?scid=50215";

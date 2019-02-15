@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageYandexPayingByCode extends WebdrvWrapp {
     
     static String XPathDivPaymentCode = "//div[@class[contains(.,'payment-code-wrapper')]]";

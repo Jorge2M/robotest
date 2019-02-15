@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.factoryes.jaxb;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@SuppressWarnings("javadoc")
+
 @XmlRootElement
 public class Modopago {
 	

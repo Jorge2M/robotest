@@ -7,7 +7,7 @@ import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-@SuppressWarnings("javadoc")
+
 public class PageDetallePedidoOld extends WebdrvWrapp implements PageDetallePedido {
     private static final String XPathDivDetalle = "//div[@class[contains(.,'detallePedido')]]";
     private static final String XPathLineaPrenda = "//tr/td[@align='left' and @height='30']/..";

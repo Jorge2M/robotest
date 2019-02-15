@@ -5,9 +5,9 @@ import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.Color;
@@ -17,7 +17,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.SecFiltros;
 
-@SuppressWarnings("javadoc")
+
 public class SecFiltrosStpV {
 
     /**
@@ -41,7 +41,7 @@ public class SecFiltrosStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }             
+        finally { StepAspect.storeDataAfterStep(datosStep); }             
                 
         if (validaciones) {
             int maxSecondsToWait = 1;

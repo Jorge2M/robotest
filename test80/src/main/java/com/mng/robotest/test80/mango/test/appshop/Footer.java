@@ -13,7 +13,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -39,7 +39,6 @@ public class Footer extends GestorWebDriver {
      */
     public Footer() {}
 
-    @SuppressWarnings({"javadoc"})
     @BeforeMethod(groups = { "Footer", "Canal:all_App:shop", "Canal:desktop_App:outlet" })
     @Parameters({ "brwsr-path", "urlBase", "AppEcom", "Channel"})
     public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) throws Exception {
@@ -61,24 +60,24 @@ public class Footer extends GestorWebDriver {
         dCtxSh.idioma = this.castellano;
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        ThreadData.storeInThread(dCtxSh);
-        ThreadData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        TestCaseData.storeInThread(dCtxSh);
+        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 
-    @SuppressWarnings({ "javadoc", "unused" })
+    @SuppressWarnings({ "unused" })
     @AfterMethod(groups = { "Footer", "Canal:all_App:shop", "Canal:desktop_App:outlet" }, alwaysRun = true)
     public void logout(final ITestContext context, final Method method) throws Exception {
-        WebDriver driver = ThreadData.getWebDriver();
+        WebDriver driver = TestCaseData.getWebDriver();
         super.quitWebDriver(driver, context);
     }
 
-    @SuppressWarnings({ "javadoc" })
+    
     @Test(
         groups = { "Footer", "Canal:all_App:shop", "Canal:desktop_App:outlet" }, alwaysRun = true, 
         description="Verificar que los links del footer aparecen y redirigen correctamente")
-    public void FOOT001_Menu(final ITestContext context, final Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
-        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
+    public void FOOT001_Menu() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userRegistered = false;
 
         DatosStep datosStep = AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);

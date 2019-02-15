@@ -2,12 +2,12 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.paypal;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal.PagePaypalLogin;
 
-@SuppressWarnings("javadoc")
+
 public class PagePaypalLoginStpV {
 
     public static void validateIsPageUntil(int maxSecondsToWait, DatosStep datosStep, DataFmwkTest dFTest) {
@@ -41,7 +41,7 @@ public class PagePaypalLoginStpV {
         }
         finally {
             dFTest.driver.switchTo().window(paginaPadre); //Salimos del iframe
-            fmwkTest.grabStep(datosStep, dFTest); 
+            StepAspect.storeDataAfterStep(datosStep); 
         }
         
         //Validaciones

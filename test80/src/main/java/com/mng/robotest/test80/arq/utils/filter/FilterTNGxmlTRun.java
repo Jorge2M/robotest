@@ -25,7 +25,7 @@ import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.xmlprogram.commonsXML;
 
-@SuppressWarnings("javadoc")
+
 public class FilterTNGxmlTRun {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 

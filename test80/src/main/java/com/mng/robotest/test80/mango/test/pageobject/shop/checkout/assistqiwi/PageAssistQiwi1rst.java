@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageAssistQiwi1rst extends WebdrvWrapp {
 
     public enum pasarelasAssist { visa, webmoney, Яндекс, qiwikошелек, qiwimts, qiwimegafon }

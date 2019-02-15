@@ -5,13 +5,14 @@ import org.apache.logging.log4j.Logger;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.PageAmexInputTarjeta;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-@SuppressWarnings("javadoc")
+
 public class PageAmexInputTarjetaStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 
@@ -62,7 +63,7 @@ public class PageAmexInputTarjetaStpV {
                                
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
                     
         //Validaciones
         PageAmexInputCipStpV.validateIsPageOk(importeTotal, codigoPais, datosStep, dFTest);

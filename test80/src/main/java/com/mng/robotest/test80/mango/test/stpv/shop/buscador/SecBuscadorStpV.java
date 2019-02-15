@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.buscador;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -18,7 +18,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
 
-@SuppressWarnings("javadoc")
+
 public class SecBuscadorStpV {
     /**
      * Utiliza el buscador para localizar una referencia y aplica validaciones específicas según la disponibilidad: disponible, no_disponible, algún_color_no_disponible
@@ -45,7 +45,7 @@ public class SecBuscadorStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }         
+        finally { StepAspect.storeDataAfterStep(datosStep); }         
 
         //Validations
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dFTest);
@@ -72,7 +72,7 @@ public class SecBuscadorStpV {
                                                                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }           
+        finally { StepAspect.storeDataAfterStep(datosStep); }           
             
         if (categoriaExiste) { 
             //Validaciones

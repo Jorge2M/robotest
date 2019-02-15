@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -41,7 +41,7 @@ import org.openqa.selenium.WebDriver;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class Reembolsos extends GestorWebDriver {
     Pais arabia = null;
     IdiomaPais arabia_arabe = null;    
@@ -80,8 +80,8 @@ public class Reembolsos extends GestorWebDriver {
         dCtxSh.idioma = this.arabia_arabe;
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        ThreadData.storeInThread(dCtxSh);
-        ThreadData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        TestCaseData.storeInThread(dCtxSh);
+        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 
     /**
@@ -91,7 +91,7 @@ public class Reembolsos extends GestorWebDriver {
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Otras", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = ThreadData.getWebDriver();
+        WebDriver driver = TestCaseData.getWebDriver();
         super.quitWebDriver(driver, context);
     }		
 	
@@ -101,9 +101,9 @@ public class Reembolsos extends GestorWebDriver {
     @Test (
         groups={"Reembolso", "Canal:all_App:shop"}, 
         description="Configura el reembolso vía transferencia y saldo en cuenta para un país/idioma determinado")
-    public void REE001_configureReembolso(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
-        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
+    public void REE001_configureReembolso() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
 	    
         //Este test sólo aplica al entornos no productivos
         if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest))
@@ -151,9 +151,9 @@ public class Reembolsos extends GestorWebDriver {
     @Test (
         groups={"Reembolso", "Canal:all_App:shop"},
         description="Se realiza un Checkout utilizando Saldo en Cuenta. Se accede a la configuración al inicio y al final para comprobar que el saldo en cuenta se resta correctamente")
-    public void REE002_checkoutWithSaldoCta(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
-        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
+    public void REE002_checkoutWithSaldoCta() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         
         //Este test sólo aplica al entornos no productivos
         if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest))

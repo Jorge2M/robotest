@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.TreeSet;
 
-@SuppressWarnings("javadoc")
+
 public class NombreYRefList {
 
     ArrayList<NombreYRef> listNombreYRef = new ArrayList<>();

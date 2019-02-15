@@ -2,14 +2,14 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.yandex;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandexPayingByCode;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-@SuppressWarnings("javadoc")
+
 public class PageYandexPayingByCodeStpV {
     
     public static String validateIsPage(String emailUsr, String importeTotal, String codPais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
@@ -54,7 +54,7 @@ public class PageYandexPayingByCodeStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         return datosStep;
     }

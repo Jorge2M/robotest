@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class DataBag {
 
     ArrayList<ArticuloScreen> listArticulos = new ArrayList<>();

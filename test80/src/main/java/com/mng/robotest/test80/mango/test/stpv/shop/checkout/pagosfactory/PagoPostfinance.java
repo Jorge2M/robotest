@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsS
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.postfinance.PagePostfCodSegStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoPostfinance extends PagoStpV {
     
     public PagoPostfinance(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

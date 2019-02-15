@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsS
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.pasarelaotras.PagePasarelaOtrasStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoPasarelaOtras extends PagoStpV {
     
     public PagoPasarelaOtras(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

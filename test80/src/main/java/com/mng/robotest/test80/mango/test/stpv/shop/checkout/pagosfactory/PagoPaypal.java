@@ -19,7 +19,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.paypal.PagePaypalCr
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.paypal.PagePaypalLoginStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.paypal.PagePaypalSelectPagoStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoPaypal extends PagoStpV {
 	
     public PagoPaypal(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

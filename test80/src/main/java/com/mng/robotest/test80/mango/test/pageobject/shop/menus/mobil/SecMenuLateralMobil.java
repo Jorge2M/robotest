@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 
-@SuppressWarnings("javadoc")
+
 public class SecMenuLateralMobil extends WebdrvWrapp {
     
     public static SecMenusUserMobil secMenusUser;
@@ -127,7 +127,7 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
         return (xpathLinkLinea + "/..");
     }
     
-    public static String getXPathSublineaNinosLink(SublineaNinosType sublineaType, AppEcom appE) {
+    public static String getXPathSublineaNinosLink(SublineaNinosType sublineaType) {
         switch (sublineaType) {
         case nina:
         	return XPathLinkSublineaNina;
@@ -141,13 +141,13 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
         }
     }
     
-    public static String getXPathLiSublineaNinos(SublineaNinosType sublineaType, AppEcom appE) {
-        String xpathLinkSublinea = getXPathSublineaNinosLink(sublineaType, appE);        
+    public static String getXPathLiSublineaNinos(SublineaNinosType sublineaType) {
+        String xpathLinkSublinea = getXPathSublineaNinosLink(sublineaType);        
         return (xpathLinkSublinea + "/..");
     }
     
-    public static String getXPathBlockSublineasNinos(SublineaNinosType sublineaType, AppEcom appE) {
-        String xpathSublineaLi = getXPathLiSublineaNinos(sublineaType, appE);        
+    public static String getXPathBlockSublineasNinos(SublineaNinosType sublineaType) {
+        String xpathSublineaLi = getXPathLiSublineaNinos(sublineaType);        
         return (xpathSublineaLi + "/..");
     }
     
@@ -196,16 +196,17 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
         return (getXPathCarruselNuevo(lineaType)!=null);
     }
     
-    public static String getXPathLinksMenus(SublineaNinosType sublineaType, AppEcom appE) {
-        if (sublineaType==null)
+    public static String getXPathLinksMenus(SublineaNinosType sublineaType) {
+        if (sublineaType==null) {
             return XPathCapa2onLevelMenu + XPathLinkMenuVisibleFromLi;
+        }
         
-        String divSublineaNinos = getXPathSublineaNinosLink(sublineaType, appE); 
+        String divSublineaNinos = getXPathSublineaNinosLink(sublineaType); 
         return divSublineaNinos + "/.." + XPathLinkMenuVisibleFromLi;
     }
     
     public static String getXPathMenuByTypeLocator(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel) {
-        String xpath2oLevelMenuLink = getXPathLinksMenus(menu1rstLevel.getSublinea(), menu1rstLevel.getApp());
+        String xpath2oLevelMenuLink = getXPathLinksMenus(menu1rstLevel.getSublinea());
         switch (typeLocator) {
         case dataGaLabelPortion:
             return xpath2oLevelMenuLink.replace("@href", "@data-label[contains(.,\"" + menu1rstLevel.getDataGaLabelMenuSuperiorDesktop().toLowerCase() + "\")]");            
@@ -250,34 +251,34 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
         return false;
     }
     
-    public static boolean isMenus2onLevelDisplayed(SublineaNinosType sublineaType, AppEcom appE, WebDriver driver) {
-        String xpath2oLevelMenuLink = getXPathLinksMenus(sublineaType, appE);
+    public static boolean isMenus2onLevelDisplayed(SublineaNinosType sublineaType, WebDriver driver) {
+        String xpath2oLevelMenuLink = getXPathLinksMenus(sublineaType);
         return (isElementVisible(driver, By.xpath(xpath2oLevelMenuLink)));
     }
     
     public static void selecSublineaNinosIfNotSelected(Linea linea, SublineaNinosType sublineaType, AppEcom appE, WebDriver driver) throws Exception {
         selecLineaIfNotSelected(linea, appE, driver);
-        if (!isSelectedSublineaNinos(sublineaType, appE, driver))
-            clickAndWaitLoad(driver, By.xpath(getXPathSublineaNinosLink(sublineaType, appE)), TypeOfClick.javascript);
+        if (!isSelectedSublineaNinos(sublineaType, driver))
+            clickAndWaitLoad(driver, By.xpath(getXPathSublineaNinosLink(sublineaType)), TypeOfClick.javascript);
     }
     
-    public static boolean isSelectedSublineaNinos(SublineaNinosType sublineaNinosType, AppEcom appE, WebDriver driver) {
-        String xpathSublinea = getXPathLiSublineaNinos(sublineaNinosType, appE);
+    public static boolean isSelectedSublineaNinos(SublineaNinosType sublineaNinosType, WebDriver driver) {
+        String xpathSublinea = getXPathLiSublineaNinos(sublineaNinosType);
         if (isElementPresent(driver, By.xpath(xpathSublinea)))
             return (driver.findElement(By.xpath(xpathSublinea)).getAttribute("class").contains("open"));
         
         return false;
     }
     
-    public static boolean isVisibleBlockSublineasNinos(LineaType lineaNinosType, AppEcom appE, WebDriver driver) {
+    public static boolean isVisibleBlockSublineasNinos(LineaType lineaNinosType, WebDriver driver) {
         String xpathBlockSublineas = "";
         switch (lineaNinosType) {
         case nina: 
-            xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaNinosType.nina, appE);
+            xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaNinosType.nina);
             break;
         default:
         case nino:
-            xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaNinosType.nino, appE);
+            xpathBlockSublineas = getXPathBlockSublineasNinos(SublineaNinosType.nino);
             break;        
         }
         
@@ -323,7 +324,7 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     public static List<WebElement> getListMenusAfterSelectLinea(Linea linea, SublineaNinosType sublineaType, AppEcom appE, WebDriver driver) 
     throws Exception {
         selectLineaIfNotSelected(linea, sublineaType, appE, driver);
-        String xpath2oLevelMenuLink = getXPathLinksMenus(sublineaType, appE);
+        String xpath2oLevelMenuLink = getXPathLinksMenus(sublineaType);
         return (getElementsVisible(driver, By.xpath(xpath2oLevelMenuLink)));
     }
     

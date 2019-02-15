@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@SuppressWarnings("javadoc")
+
 @XmlRootElement
 public class Continente {
     String nombre_continente;

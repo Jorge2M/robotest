@@ -11,7 +11,7 @@ import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 
-@SuppressWarnings("javadoc")
+
 public class Shoponline {
     
     //Líneas correspondientes a las 5 básicas ("kids" sigue apareciendo en algunos países sin venta como Bolivia) 

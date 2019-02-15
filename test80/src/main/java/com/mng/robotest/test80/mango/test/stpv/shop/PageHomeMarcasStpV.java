@@ -22,7 +22,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
-@SuppressWarnings("javadoc")
+
 public class PageHomeMarcasStpV {
 
     public static DatosStep validateIsPageWithCorrectLineas(Pais pais, Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) {

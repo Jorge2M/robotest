@@ -38,7 +38,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.navigations.ArticuloNavigations;
 
-@SuppressWarnings("javadoc")
+
 public class UtilsMangoTest {
 
     /**

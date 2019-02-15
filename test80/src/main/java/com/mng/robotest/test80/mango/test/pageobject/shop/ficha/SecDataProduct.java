@@ -22,7 +22,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings({"javadoc", "static-access"})
+@SuppressWarnings({"static-access"})
 public class SecDataProduct extends WebdrvWrapp {
     
     public enum ProductNav {Prev, Next}

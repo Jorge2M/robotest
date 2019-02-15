@@ -7,7 +7,7 @@ import java.sql.Date;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class ProductCache {
 
     private String producto;

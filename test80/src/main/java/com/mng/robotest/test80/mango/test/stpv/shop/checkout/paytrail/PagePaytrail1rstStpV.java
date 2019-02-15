@@ -2,14 +2,14 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.paytrail;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paytrail.PagePaytrail1rst;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-@SuppressWarnings("javadoc")
+
 public class PagePaytrail1rstStpV {
     
     public static void validateIsPage(String importeTotal, String codPais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
@@ -67,7 +67,7 @@ public class PagePaytrail1rstStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         PagePaytrailEpaymentStpV.validateIsPage(datosStep, dFTest);

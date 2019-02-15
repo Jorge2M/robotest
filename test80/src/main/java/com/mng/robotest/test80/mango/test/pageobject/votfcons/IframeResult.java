@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 /**
  * Se definen las funciones de interacción con el iframe de resultado que aparece en la página de la cónsola de VOTF (PageConsola.java)
  * @author jorge.munoz

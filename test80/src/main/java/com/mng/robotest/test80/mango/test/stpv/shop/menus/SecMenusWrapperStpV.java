@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
@@ -35,7 +36,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 
-@SuppressWarnings({"javadoc"})
 public class SecMenusWrapperStpV {
 	static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 	
@@ -137,7 +137,7 @@ public class SecMenusWrapperStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
         int maxSecondsWait = 3;
@@ -180,7 +180,6 @@ public class SecMenusWrapperStpV {
     /**
      * Validación de la selección de un menú lateral de 1er o 2o nivel 
      */
-    @SuppressWarnings("static-access")
 	public static void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh, DatosStep datosStep, DataFmwkTest dFTest)
     throws Exception {
         //Validaciones
@@ -284,7 +283,7 @@ public class SecMenusWrapperStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }           
+        finally { StepAspect.storeDataAfterStep(datosStep); }           
             
         //Validaciones
         if (channel==Channel.desktop) {

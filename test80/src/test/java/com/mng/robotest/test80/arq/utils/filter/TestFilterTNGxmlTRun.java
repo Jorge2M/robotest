@@ -19,7 +19,6 @@ import com.mng.robotest.test80.arq.utils.filter.resources.TestNGxmlStub;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 
-@SuppressWarnings("javadoc")
 public class TestFilterTNGxmlTRun {
 
     TestNGxmlStub testNGxml = new TestNGxmlStub();

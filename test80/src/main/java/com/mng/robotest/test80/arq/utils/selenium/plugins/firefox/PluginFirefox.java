@@ -6,7 +6,7 @@ import java.io.InputStream;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
-@SuppressWarnings("javadoc")
+
 public abstract class PluginFirefox {
 	//Example for add a plugin to Firefox
     //ArrayList<PluginFirefox.typePluginFirefox> listPlugins = new ArrayList<>();

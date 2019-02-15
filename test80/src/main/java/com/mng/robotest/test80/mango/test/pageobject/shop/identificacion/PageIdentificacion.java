@@ -13,7 +13,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalActPoliti
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAfterLogin;
 
-@SuppressWarnings("javadoc")
+
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la página de autentificación de 
  * Jasig CAS que aparece en los entornos de test cuando se accede desde fuera 

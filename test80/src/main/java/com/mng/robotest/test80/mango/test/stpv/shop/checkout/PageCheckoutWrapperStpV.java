@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
@@ -29,7 +30,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.SecMetodoEnvi
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.ideal.SecIdealStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango.SecTMangoStpV;
 
-@SuppressWarnings({"javadoc", "static-access"})
+@SuppressWarnings({"static-access"})
 public class PageCheckoutWrapperStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 
@@ -48,12 +49,12 @@ public class PageCheckoutWrapperStpV {
     public static Page1DktopCheckoutStpV page1DktopCheck;
     public static Page1EnvioCheckoutMobilStpV page1MobilCheck;
     
-    public static void validateIsFirstPage(boolean userLogged, DataBag dataBag, Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
+    public static void validateIsFirstPage(boolean userLogged, DataBag dataBag, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
         if (channel==Channel.movil_web)
             page1MobilCheck.validateIsPage(userLogged, datosStep, dFTest);
         else
-            page1DktopCheck.validateIsPageOK(dataBag, app, datosStep, dFTest);
+            page1DktopCheck.validateIsPageOK(dataBag, datosStep, dFTest);
     } 
     
     public static void validateLoadingDisappears(DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
@@ -86,7 +87,7 @@ public class PageCheckoutWrapperStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones (validamos los métodos de pago disponibles)
         validaMetodosPagoDisponibles(datosStep, pais, isEmpl, app, channel, dFTest);
@@ -146,7 +147,7 @@ public class PageCheckoutWrapperStpV {
     /**
      * Paso ficticio consistente en "no-clicar" el icono de VOTF.
      */
-    public static DatosStep noClickIconoVotf(String nombrePagoTpvVOTF, DataFmwkTest dFTest) throws Exception {        
+    public static DatosStep noClickIconoVotf(String nombrePagoTpvVOTF) throws Exception {        
         DatosStep datosStep = null;
         
         //Step. No hacemos nada pues el pago con TPV en VOTF no tiene icono ni pasarelas asociadas
@@ -156,7 +157,7 @@ public class PageCheckoutWrapperStpV {
         try {
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }         
+        finally { StepAspect.storeDataAfterStep(datosStep); }         
             
         return datosStep;
     }
@@ -293,7 +294,7 @@ public class PageCheckoutWrapperStpV {
         catch (Exception e) {
             pLogger.warn("Problem clicking icono pago for payment {} in country {}", pago.getNombre(), pais.getNombre_pais(), e);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         if (pago.getTypePago()==TypePago.TarjetaIntegrada || 
             pago.getTypePago()==TypePago.KrediKarti ||
@@ -390,7 +391,7 @@ public class PageCheckoutWrapperStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         PageRedirectPasarelaLoadingStpV.validateDisappeared(datosStep, dFTest);
@@ -408,7 +409,7 @@ public class PageCheckoutWrapperStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
         modalDirecFactura.validateIsOk(datosStep, dFTest);
@@ -426,7 +427,7 @@ public class PageCheckoutWrapperStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
         modalDirecEnvio.validateIsOk(datosStep, dFTest);
@@ -448,7 +449,7 @@ public class PageCheckoutWrapperStpV {
         catch (Exception e) {
             //
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         return datosStep;
     }
@@ -468,7 +469,7 @@ public class PageCheckoutWrapperStpV {
         catch (Exception e) {
             //
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
         maxSecondsToWait = 2;
@@ -504,7 +505,7 @@ public class PageCheckoutWrapperStpV {
         catch (Exception e) {
             pLogger.warn("Problem in click Confirm payment button", e);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
                             
         //Validaciones
         PageRedirectPasarelaLoadingStpV.validateDisappeared(datosStep, dFTest);
@@ -522,7 +523,7 @@ public class PageCheckoutWrapperStpV {
         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         int maxSecondsToWait = 5;
@@ -604,7 +605,7 @@ public class PageCheckoutWrapperStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         validaResultImputPromoEmpl(dataBag, channel, app, datosStep, dFTest);
@@ -625,7 +626,7 @@ public class PageCheckoutWrapperStpV {
     }
 
     
-	public static DatosStep selectBancoEPS(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+	public static DatosStep selectBancoEPS(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
         //Step.
 		String nombreBanco = "Easybank";
 		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest))
@@ -640,7 +641,7 @@ public class PageCheckoutWrapperStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
       //Validaciones
         String descripValidac = 

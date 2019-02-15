@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 
-@SuppressWarnings({"javadoc", "static-access"})
+@SuppressWarnings({"static-access"})
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la página de "GALERÍA DE PRODUCTOS"
  * @author jorge.munoz

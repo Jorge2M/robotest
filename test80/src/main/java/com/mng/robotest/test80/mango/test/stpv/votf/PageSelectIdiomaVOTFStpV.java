@@ -1,14 +1,14 @@
 package com.mng.robotest.test80.mango.test.stpv.votf;
 
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.pageobject.votf.PageAlertaVOTF;
 import com.mng.robotest.test80.mango.test.pageobject.votf.PageSelectIdiomaVOTF;
 
-@SuppressWarnings("javadoc")
+
 public class PageSelectIdiomaVOTFStpV {
 
     public static DatosStep selectIdiomaAndContinue(IdiomaPais idioma, DataFmwkTest dFTest) throws Exception {
@@ -24,7 +24,7 @@ public class PageSelectIdiomaVOTFStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         return datosStep;
     }

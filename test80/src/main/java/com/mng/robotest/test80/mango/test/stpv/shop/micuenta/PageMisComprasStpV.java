@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraOnline;
@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalDetalleMi
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PageMisComprasStpV {
 
     public static SecDetalleCompraTiendaStpV SecDetalleCompraTienda; 
@@ -97,7 +97,7 @@ public class PageMisComprasStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         int maxSecondsToWait = 2;
@@ -191,7 +191,7 @@ public class PageMisComprasStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }             
+        finally { StepAspect.storeDataAfterStep(datosStep); }             
         
         //Validaciones
         PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(dFTest.driver);
@@ -213,7 +213,7 @@ public class PageMisComprasStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }             
+        finally { StepAspect.storeDataAfterStep(datosStep); }             
         
         //Validaciones
         SecDetalleCompraTienda.validateIsOk(compraTienda, channel, datosStep, dFTest);
@@ -235,7 +235,7 @@ public class PageMisComprasStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }             
+        finally { StepAspect.storeDataAfterStep(datosStep); }             
         
         //Validaciones
         String descripValidac = 

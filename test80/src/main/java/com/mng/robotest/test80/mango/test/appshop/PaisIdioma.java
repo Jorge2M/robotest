@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.*;
@@ -39,7 +39,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-@SuppressWarnings("javadoc")
+
 public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas propias de MANGO*/ {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 
@@ -102,14 +102,14 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
             this.recorreBanners = false;
         }
 
-        ThreadData.storeInThread(dCtxSh);
-        ThreadData.getAndStoreDataFmwk(bpath, this.dCtxSh.urlAcceso, this.index_fact, this.dCtxSh.channel, context, method);
+        TestCaseData.storeInThread(dCtxSh);
+        TestCaseData.getAndStoreDataFmwk(bpath, this.dCtxSh.urlAcceso, this.index_fact, this.dCtxSh.channel, context, method);
     }
 	
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Lineas", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = ThreadData.getWebDriver();
+        WebDriver driver = TestCaseData.getWebDriver();
         try {
             super.quitWebDriver(driver, context);
         }
@@ -121,9 +121,9 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
     @Test (
         groups={"Lineas", "Canal:all_App:shop", "Canal:all_App:outlet"}, 
         description="Acceso desde prehome y navegación por todas las líneas/sublíneas/carrusels del país + selección menú/s")
-    public void PAR001_Lineas(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
-        DataCtxShop dCtxShI = ThreadData.getdCtxSh();
+    public void PAR001_Lineas() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxShI = TestCaseData.getdCtxSh();
         DatosStep datosStep = null;
             
         datosStep = PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxShI, dFTest);
@@ -139,7 +139,6 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
         }
     }
     
-    @SuppressWarnings("static-access")
 	private void validaLinea(Linea linea, Sublinea sublinea, DataCtxShop dCtxShI, DataFmwkTest dFTest) throws Exception {
         //Obtenemos el tipo de línea/sublínea
         LineaType lineaType = linea.getType();
@@ -183,7 +182,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
         	int maxBannersToTest = getMaxBannersToTest(dCtxShI.pais, dCtxShI.appE);
         	SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToTest, dFTest.driver);
         	if (this.dataCamp==null)
-        		secBannersStpV.testPageBanners(dCtxShI, lineaType, maxBannersToTest, dFTest);
+        		secBannersStpV.testPageBanners(dCtxShI, maxBannersToTest, dFTest);
         	else
         		secBannersStpV.testCampanas(dataCamp, dCtxShI, lineaType, dFTest);
         }

@@ -5,7 +5,7 @@ import org.testng.annotations.*;
 
 import java.lang.reflect.*;
 
-@SuppressWarnings("javadoc")
+
 public class MyTransformer implements IAnnotationTransformer {
     
     @SuppressWarnings("rawtypes")

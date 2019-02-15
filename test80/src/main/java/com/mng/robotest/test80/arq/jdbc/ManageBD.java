@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-@SuppressWarnings("javadoc")
+
 public class ManageBD {
 
     public static void vacuum() {

@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -31,7 +31,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalBuscadorTiendasStpV;
 
-@SuppressWarnings({"javadoc", "static-access"})
+@SuppressWarnings({"static-access"})
 public class PageFichaArtStpV {
     
     DataFmwkTest dFTest;
@@ -227,7 +227,7 @@ public class PageFichaArtStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, this.dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
         String descripValidac = 
@@ -270,7 +270,7 @@ public class PageFichaArtStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, this.dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         String descripValidac = 
@@ -294,7 +294,7 @@ public class PageFichaArtStpV {
      * Precondición: estamos en una ficha correspondiente a un artículo con algún color no disponible 
      * Selección de un color no disponible + posterior selección de una talla (que necesariamente ha de estar no disponible)
      */
-    public void selectColorAndTallaNoDisponible(ArticleStock article, AppEcom app) throws Exception {
+    public void selectColorAndTallaNoDisponible(ArticleStock article) throws Exception {
         //Step. 
         DatosStep datosStep = new DatosStep(
             "Seleccionar el color <b>" + article.getColourCode() + "<b>", 
@@ -304,7 +304,7 @@ public class PageFichaArtStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, this.dFTest); }                  
+        finally { StepAspect.storeDataAfterStep(datosStep); }                  
             
         //Step
         datosStep = new DatosStep       (
@@ -315,7 +315,7 @@ public class PageFichaArtStpV {
                                                                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, this.dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         String descripValidac = 
@@ -347,7 +347,7 @@ public class PageFichaArtStpV {
                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, this.dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         return datosStep;
     }
@@ -435,7 +435,7 @@ public class PageFichaArtStpV {
                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, this.dFTest); }               
+        finally { StepAspect.storeDataAfterStep(datosStep); }               
 
         int maxSecondsToWait1 = 2;
         int maxSecondsToWait2 = 3;
@@ -472,7 +472,7 @@ public class PageFichaArtStpV {
                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, this.dFTest); }               
+        finally { StepAspect.storeDataAfterStep(datosStep); }               
 
         //Validaciones
         validateVisibleButtonFavoritos(ActionFavButton.Add, datosStep);
@@ -515,7 +515,7 @@ public class PageFichaArtStpV {
                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, this.dFTest); }               
+        finally { StepAspect.storeDataAfterStep(datosStep); }               
 
         //Validaciones
         ModalBuscadorTiendasStpV.validaBusquedaConResultados(datosStep, this.dFTest);
@@ -535,7 +535,7 @@ public class PageFichaArtStpV {
                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, this.dFTest); }               
+        finally { StepAspect.storeDataAfterStep(datosStep); }               
 
         if (isVisible)
             secFitFinder.validateIsOkAndClose(datosStep, this.dFTest);
@@ -623,7 +623,7 @@ public class PageFichaArtStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, this.dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         if (productNav==ProductNav.Prev)
             validateIsFichaArtDisponible(refProductOrigin, datosStep);
@@ -666,7 +666,7 @@ public class PageFichaArtStpV {
                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, this.dFTest); }               
+        finally { StepAspect.storeDataAfterStep(datosStep); }               
                     
         //Validaciones
         String descripValidac = 
@@ -696,7 +696,7 @@ public class PageFichaArtStpV {
                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, this.dFTest); }         
+        finally { StepAspect.storeDataAfterStep(datosStep); }         
                     
         //Validaciones
         String descripValidac = 

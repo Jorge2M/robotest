@@ -12,9 +12,9 @@ import org.testng.Assert;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.sitemap.Sitemapindex;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.sitemap.Sitemapindex.Sitemap;
@@ -25,7 +25,7 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class BrowserStpV {
 
     public static void inputRobotsURLandValidate(String urlBaseTest, AppEcom app, DataFmwkTest dFTest) throws Exception {
@@ -42,7 +42,7 @@ public class BrowserStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
     
         //Validaciones.
         String contRobots1 = 
@@ -209,7 +209,7 @@ public class BrowserStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
     
         //Validaciones.
         Date currDateDayPrecision = removeTime(new Date());

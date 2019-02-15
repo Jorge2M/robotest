@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard.Pa
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard.PageKoCardINIpay3MobilStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard.PageKoCardINIpay4MobilStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoKoreanCreditCard extends PagoStpV {
     
     public PagoKoreanCreditCard(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.registro;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("javadoc")
+
 public class ListDataNinos {
     private ArrayList<DataNino> listNinos = new ArrayList<>();
     

@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageTrustpaySelectBank extends WebdrvWrapp {
     
     static String XPathListOfPayments = "//ul[@id='paymentMethods']";

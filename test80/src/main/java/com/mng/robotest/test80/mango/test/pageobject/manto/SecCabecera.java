@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class SecCabecera extends WebdrvWrapp {
     
     static String XPathLitTienda = "//td/span[@class='txt8BDis']";

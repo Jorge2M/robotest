@@ -2,15 +2,15 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraTienda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompras;
 
-@SuppressWarnings("javadoc")
+
 public class SecDetalleCompraTiendaStpV {
     @SuppressWarnings("static-access")
     public static void validateIsOk(CompraTienda compraTienda, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
@@ -78,7 +78,7 @@ public class SecDetalleCompraTiendaStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         PageMisComprasStpV.SecQuickViewArticulo.validateIsOk(articulo, datosStep, dFTest);

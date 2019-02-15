@@ -26,7 +26,7 @@ import com.mng.robotest.test80.mango.test.stpv.manto.PageSelTdaMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.SecFiltrosMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.SecFiltrosMantoStpV.TypeSearch;
 
-@SuppressWarnings("javadoc")
+
 public class PedidosNavigations {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 

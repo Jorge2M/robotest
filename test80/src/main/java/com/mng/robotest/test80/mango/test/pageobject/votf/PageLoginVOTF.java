@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
 
-@SuppressWarnings("javadoc")
+
 public class PageLoginVOTF extends WebdrvWrapp {
 
     private static final String XPathInputUsuario = "//input[@class='username']";

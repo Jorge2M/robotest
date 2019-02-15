@@ -7,7 +7,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop.StateUser;
 
-@SuppressWarnings("javadoc")
+
 public class GestorUsersShop {
 
     public static CopyOnWriteArrayList<UserShop> ListUsers;

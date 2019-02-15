@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorPage;
 
 import org.openqa.selenium.WebDriver;
 
-@SuppressWarnings("javadoc")
+
 public class ListAllNodes {
 	
     @SuppressWarnings("unused")

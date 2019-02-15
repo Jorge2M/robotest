@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.factoryes.jaxb;
 
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 
-@SuppressWarnings("javadoc")
+
 public class Sublinea extends Linea {
 
     public static enum SublineaNinosType { 

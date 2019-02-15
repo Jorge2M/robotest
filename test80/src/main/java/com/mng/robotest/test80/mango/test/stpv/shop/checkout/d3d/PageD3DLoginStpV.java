@@ -2,13 +2,13 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.d3d;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.d3d.PageD3DLogin;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-@SuppressWarnings("javadoc")
+
 public class PageD3DLoginStpV {
     
     public static boolean validateIsPage(String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) {
@@ -45,7 +45,7 @@ public class PageD3DLoginStpV {
                                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         return datosStep;
     }

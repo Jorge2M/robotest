@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.data.TiendaMantoEnum.TiendaManto;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 /**
  * Implementa la "API" de interacción con la página de "Selección de la tienda en Manto" (la posterior al login) 
  * @author jorge.munoz

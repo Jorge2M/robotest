@@ -21,7 +21,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getdata.json.gestorDatosHarJSON;
 
-@SuppressWarnings("javadoc")
+
 public class PasosGenAnalitica {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
@@ -66,11 +66,11 @@ public class PasosGenAnalitica {
                 switch (it.next()) {
                     case GoogleAnalytics:
                         //Validaciones a nivel de la petición de Google Analytics
-                        validaGoogleAnalytics(datosStep, gestorHAR, app, dFTest);
+                        validaGoogleAnalytics(datosStep, gestorHAR, app);
                         break;
                     case Criteo:
                         //Validaciones a nivel de la petición de Criteo
-                        validaCriteo(datosStep, gestorHAR, lineaId, dFTest);
+                        validaCriteo(datosStep, gestorHAR, lineaId);
                         break;
                     case Bing:
                         //Validaciones a nivel de la petición de Bing
@@ -79,11 +79,11 @@ public class PasosGenAnalitica {
                     case Polyvore:
                         //Validaciones a nivel del tráfico de Polyvore (sólo USA)
                         if (dataPedido!=null && dataPedido.getCodigoPais().compareTo("400")==0)
-                            validaPolyvore(datosStep, gestorHAR, dataPedido, dFTest);
+                            validaPolyvore(datosStep, gestorHAR, dataPedido);
                         break;                            
                     case NetTraffic:
                         //Validaciones a nivel del tráfico de red
-                        validaNetTraffic(datosStep, gestorHAR, dFTest);                            
+                        validaNetTraffic(datosStep, gestorHAR);                            
                         break;
                     case DataLayer:
                         //Validaciones a nivel del tag datalayer (realmente no es una validación a nivel de HTTP)
@@ -96,7 +96,8 @@ public class PasosGenAnalitica {
         }
     }
 
-    public static void validaPolyvore(DatosStep datosStep, gestorDatosHarJSON gestorHAR, DataPedido dataPedido, DataFmwkTest dFTest) throws Exception {
+    public static void validaPolyvore(DatosStep datosStep, gestorDatosHarJSON gestorHAR, DataPedido dataPedido)
+    throws Exception {
         //VALIDACIONES POLYVORE PARA USA (sólo en el "Confirmar Compra")
         String urlPolyvore = "://www.polyvore.com/conversion/beacon.gif?";
         String paramPolyvore = "adv=mango.com";
@@ -175,7 +176,8 @@ public class PasosGenAnalitica {
     }    
     
     @SuppressWarnings("rawtypes")
-    public static void validaCriteo(DatosStep datosStep, gestorDatosHarJSON gestorHAR, LineaType lineaId, DataFmwkTest dFTest) throws Exception {
+    public static void validaCriteo(DatosStep datosStep, gestorDatosHarJSON gestorHAR, LineaType lineaId) 
+    throws Exception {
         //En el caso de violeta no está activado Criteo
         if (lineaId!=LineaType.violeta) {
             String tagReferrer = "<REFERRER_1A_REQ>";
@@ -316,7 +318,7 @@ public class PasosGenAnalitica {
         }
     }
     
-    public static void validaGoogleAnalytics(DatosStep datosStep, gestorDatosHarJSON gestorHAR, AppEcom app, DataFmwkTest dFTest) {
+    public static void validaGoogleAnalytics(DatosStep datosStep, gestorDatosHarJSON gestorHAR, AppEcom app) {
         //TODO esta validación es temporal. Actualmente hay activados 2 formas de lanzar Google Analytics con lo que es normal que en algún
         //caso se ejecuten 2 peticiones. Cuando dejen sólo una forma habrá que restaurar la validación original
         String valueTid1 = "UA-855910-26";
@@ -388,8 +390,8 @@ public class PasosGenAnalitica {
         finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
-    @SuppressWarnings({ "rawtypes", "boxing" })
-    public static void validaNetTraffic(DatosStep datosStep, gestorDatosHarJSON gestorHAR, DataFmwkTest dFTest) {
+    @SuppressWarnings({ "rawtypes" })
+    public static void validaNetTraffic(DatosStep datosStep, gestorDatosHarJSON gestorHAR) {
         String descripValidac = 
             "1) En el tráfico de red no existe ninguna sin respuesta o con status KO";
         datosStep.setNOKstateByDefault();     

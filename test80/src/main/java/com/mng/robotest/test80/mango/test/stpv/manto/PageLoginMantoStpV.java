@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageSelTda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageJCAS;
@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.PageJCAS;
  */
 public class PageLoginMantoStpV {
 
-    @SuppressWarnings("javadoc")
+    
     public static DatosStep login(String urlManto, String usrManto, String pasManto, DataFmwkTest dFTest) throws Exception {
         //Step. Acceder a la página de menús de Manto
         DatosStep datosStep = new DatosStep       (
@@ -31,7 +31,7 @@ public class PageLoginMantoStpV {
         }
         finally {
             if (dFTest.ctx!=null)
-                fmwkTest.grabStep(datosStep, dFTest); 
+                StepAspect.storeDataAfterStep(datosStep); 
         }
 
         if (!PageSelTda.isPage(dFTest.driver)) {
@@ -47,7 +47,7 @@ public class PageLoginMantoStpV {
             }
             finally { 
                 if (dFTest.ctx!=null)
-                    fmwkTest.grabStep(datosStep, dFTest); 
+                    StepAspect.storeDataAfterStep(datosStep); 
             }
         }
         

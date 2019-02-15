@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@SuppressWarnings("javadoc")
+
 public class DataDireccion {
     public enum DataDirType {nif, name, apellidos, direccion, codpostal, codigoPais, poblacion, provincia, email, telefono}
     private LinkedHashMap<DataDirType, String> dataDireccion = new LinkedHashMap<>();

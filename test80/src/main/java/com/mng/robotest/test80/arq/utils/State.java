@@ -1,6 +1,5 @@
 package com.mng.robotest.test80.arq.utils;
 
-@SuppressWarnings({"javadoc"})
 public enum State  {
     Undefined(LevelState.Reservado, 0, "black"),
     Ok(LevelState.OK, 1, "green"),
@@ -37,6 +36,14 @@ public enum State  {
     
     public boolean isMoreCriticThan(State state) {
     	return (idNumeric > state.getIdNumerid());
+    }
+    
+    public static State getMoreCritic(State state1, State state2) {
+    	if (state1.isMoreCriticThan(state2)) {
+    		return state1;
+    	}
+    	
+    	return state2;
     }
     
     public String getColorCss() {

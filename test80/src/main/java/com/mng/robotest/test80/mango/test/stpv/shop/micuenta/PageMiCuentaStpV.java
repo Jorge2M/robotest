@@ -4,16 +4,15 @@ import java.util.HashMap;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMiCuenta;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 
-@SuppressWarnings({"javadoc", "static-access"})
 public class PageMiCuentaStpV {
     
 	public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
@@ -45,7 +44,7 @@ public class PageMiCuentaStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }             
+        finally { StepAspect.storeDataAfterStep(datosStep); }             
         
         //Validaciones
         PageMisDatosStpV.validaIsPage(usuarioReg, datosStep, dFTest);
@@ -66,7 +65,7 @@ public class PageMiCuentaStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }             
+        finally { StepAspect.storeDataAfterStep(datosStep); }             
         
         if (channel==Channel.movil_web) {
             //En el caso de móvil_web aparece una página intermedia "New!"
@@ -104,7 +103,7 @@ public class PageMiCuentaStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         PageSuscripcionesStpV.validaIsPage(datosStep, dFTest);
@@ -134,7 +133,7 @@ public class PageMiCuentaStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }           
+        finally { StepAspect.storeDataAfterStep(datosStep); }           
             
         //Validaciones.
         PagePedidosStpV.validaIsPageSinPedidos(usrRegistrado, datosStep, dFTest);
@@ -156,7 +155,7 @@ public class PageMiCuentaStpV {
                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }           
+        finally { StepAspect.storeDataAfterStep(datosStep); }           
                 
         //Validaciones
         PageDevolucionesStpV.validaIsPage(datosStep, dFTest);
@@ -178,7 +177,7 @@ public class PageMiCuentaStpV {
                                                                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }           
+        finally { StepAspect.storeDataAfterStep(datosStep); }           
                 
         //Validaciones
         PageReembolsosStpV.validateIsPage(datosStep, dFTest);

@@ -12,10 +12,9 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-@SuppressWarnings("javadoc")
+
 public class ControlMail {
 	
-    @SuppressWarnings({ "static-access", "boxing" })
     public static void enviarMail(InfoMail info, String user, String pasword) throws Exception {
         Properties properties = new Properties();
         properties.put("mail.smtp.host", info.getSMTPHost());

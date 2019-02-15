@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay2Mobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay2Mobil.BodyPageKoCardINIpay2;
@@ -38,7 +38,7 @@ public class PageKoCardINIpay2MobilStpV extends ElementPageFunctions {
 	        
 	        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 	    } 
-	    finally { fmwkTest.grabStep(datosStep, dFTest); }
+	    finally { StepAspect.storeDataAfterStep(datosStep); }
 	
 	    //Validation
 	    PageKoCardINIpay3MobilStpV.validateIsPage(datosStep, dFTest);

@@ -2,7 +2,6 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.utils.ThreadData;
 import org.openqa.selenium.By;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;

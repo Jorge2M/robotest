@@ -20,7 +20,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 
-@SuppressWarnings("javadoc")
+
 public class ValidationsDAO {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
@@ -130,7 +130,7 @@ public class ValidationsDAO {
                     insert.setInt(8, State.Nok.getIdNumerid());
                 }
                 else {
-                    insert.setInt(8, datosStep.getResultSteps().getIdNumerid());
+                    insert.setInt(8, datosStep.getResultLastValidation().getIdNumerid());
                 }
     
                 List<Integer> listVals = datosStep.getListCodeNumStateValidations();

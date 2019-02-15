@@ -1,13 +1,13 @@
 package com.mng.robotest.test80.mango.test.stpv.votf;
 
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.votf.PageLoginVOTF;
 
-@SuppressWarnings("javadoc")
+
 public class PageLoginVOTFStpV {
 
     public static DatosStep goToAndLogin(String urlAcceso, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
@@ -32,7 +32,7 @@ public class PageLoginVOTFStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         return datosStep;
     }

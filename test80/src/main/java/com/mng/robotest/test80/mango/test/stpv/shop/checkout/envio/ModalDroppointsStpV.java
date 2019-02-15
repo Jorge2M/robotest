@@ -10,7 +10,7 @@ import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDroppoints;
 
-@SuppressWarnings("javadoc")
+
 public class ModalDroppointsStpV {
     
     public static SecSelectDPointStpV secSelectDPoint;

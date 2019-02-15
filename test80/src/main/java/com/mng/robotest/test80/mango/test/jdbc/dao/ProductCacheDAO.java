@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
 import com.mng.robotest.test80.mango.test.jdbc.to.ProductCache;
 
-@SuppressWarnings("javadoc")
+
 public class ProductCacheDAO {
     
     public static String SQLSelectProductCacheAlmacen = 

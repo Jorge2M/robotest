@@ -8,7 +8,7 @@ import org.testng.xml.XmlTest;
  * @author jorge.munoz
  * This class is needed becaus XmlTest not exposes the x_xmlGroups attribute and then results in impossibility of modify dependency-groups
  */
-@SuppressWarnings("javadoc")
+
 public class XmlTestP80 extends XmlTest {
     private static final long serialVersionUID = -4002416107477209626L;
     public XmlGroups x_xmlGroupsVisible;

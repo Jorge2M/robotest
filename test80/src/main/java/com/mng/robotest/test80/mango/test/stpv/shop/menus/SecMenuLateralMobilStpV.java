@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -25,7 +25,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPai
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 
-@SuppressWarnings("javadoc")
+
 public class SecMenuLateralMobilStpV {
     
     public static SecMenusUserStpV secMenusUser;
@@ -45,7 +45,7 @@ public class SecMenuLateralMobilStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, datosStep, dFTest);
@@ -66,7 +66,7 @@ public class SecMenuLateralMobilStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         validaSelecLinea(pais, lineaConCarrusels, null/*sublinea*/, app, datosStep, dFTest);
         navSelectCarrusels(lineaConCarrusels, pais, app, dFTest);
@@ -104,7 +104,7 @@ public class SecMenuLateralMobilStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones. Aparece la galería de nuevo correcta
         PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, appE, dFTest.driver);
@@ -139,7 +139,7 @@ public class SecMenuLateralMobilStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         String descripValidac = 
@@ -170,7 +170,7 @@ public class SecMenuLateralMobilStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }            
+        finally { StepAspect.storeDataAfterStep(datosStep); }            
 
         validaSelecLinea(pais, lineaType, null/*sublinea*/, app, datosStep, dFTest);
         
@@ -192,7 +192,7 @@ public class SecMenuLateralMobilStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         validaSelecLinea(dCtxSh.pais, lineaType, sublineaType, dCtxSh.appE, datosStep, dFTest);
         
@@ -290,7 +290,7 @@ public class SecMenuLateralMobilStpV {
             if (!SecMenuLateralMobil.isSelectedLinea(lineaNinosType, appE, dFTest.driver)) {
                 listVals.add(1, State.Warn);
             }
-            if (!SecMenuLateralMobil.isVisibleBlockSublineasNinos(lineaNinosType, appE, dFTest.driver)) {
+            if (!SecMenuLateralMobil.isVisibleBlockSublineasNinos(lineaNinosType, dFTest.driver)) {
                 listVals.add(2, State.Warn);
             }
             
@@ -312,7 +312,7 @@ public class SecMenuLateralMobilStpV {
             if (!SecMenuLateralMobil.isSelectedLinea(lineaType, appE, dFTest.driver)) {
                 listVals.add(1, State.Warn);
             }
-            if (!SecMenuLateralMobil.isMenus2onLevelDisplayed(sublineaType, appE, dFTest.driver)) {
+            if (!SecMenuLateralMobil.isMenus2onLevelDisplayed(sublineaType, dFTest.driver)) {
                 listVals.add(2, State.Warn);
             }
             
@@ -335,7 +335,7 @@ public class SecMenuLateralMobilStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         validaPaginaResultMenu2onLevel(app, datosStep, dFTest);

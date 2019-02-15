@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageReembolsos;
@@ -17,7 +17,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings({"javadoc", "static-access"})
 public class PageReembolsosStpV {
 
     /**
@@ -37,7 +36,7 @@ public class PageReembolsosStpV {
                                                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
     
         //Validaciones
         String validacion2 = "";
@@ -129,7 +128,7 @@ public class PageReembolsosStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validations
         String descripValidac = 
@@ -165,7 +164,7 @@ public class PageReembolsosStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
     
         //Validaciones
         int maxSecondsToWait = 10;
@@ -207,7 +206,7 @@ public class PageReembolsosStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         String descripValidac = 
@@ -244,7 +243,7 @@ public class PageReembolsosStpV {
                 
                 datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
             }
-            finally { fmwkTest.grabStep(datosStep, dFTest); }
+            finally { StepAspect.storeDataAfterStep(datosStep); }
             
             //Validaciones
             int maxSecondsToWait = 2;

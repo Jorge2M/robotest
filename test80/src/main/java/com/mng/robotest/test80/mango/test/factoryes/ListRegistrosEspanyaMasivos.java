@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 
 import org.testng.ITestContext;
 
-@SuppressWarnings("javadoc")
+
 public class ListRegistrosEspanyaMasivos {
     @SuppressWarnings("unused")
     @Factory

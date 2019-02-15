@@ -3,7 +3,7 @@ package com.mng.robotest.test80.arq.utils.mail;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("javadoc")
+
 public class InfoMail {
 
 	private String SMTPHost;

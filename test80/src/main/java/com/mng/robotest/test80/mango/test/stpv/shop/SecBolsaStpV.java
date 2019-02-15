@@ -6,10 +6,10 @@ import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -32,7 +32,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Page1IdentCheckoutS
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
 
-@SuppressWarnings("javadoc")
+
 public class SecBolsaStpV {
     
     public static DatosStep clear(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
@@ -46,7 +46,7 @@ public class SecBolsaStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         return datosStep;
     }
@@ -69,7 +69,7 @@ public class SecBolsaStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); } 
+        finally { StepAspect.storeDataAfterStep(datosStep); } 
     
         //Validaciones
         int maxSecondsToWait = 3;
@@ -104,7 +104,7 @@ public class SecBolsaStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); } 
+        finally { StepAspect.storeDataAfterStep(datosStep); } 
     
         //Validaciones
         validateBolsaInState(stateBolsaExpected, channel, datosStep, dFTest);
@@ -196,7 +196,7 @@ public class SecBolsaStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         return datosStep;
     }
@@ -208,7 +208,7 @@ public class SecBolsaStpV {
     public static void validaAltaArtBolsa(DataBag dataBag, Channel channel, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
         //Validaciones
-    	DatosStep datosStep = ThreadData.getMaxDatosStep();
+    	DatosStep datosStep = TestCaseData.getDatosStepForValidation();
         validaNumArtEnBolsa(dataBag, channel, app, dFTest);
         if (channel==Channel.desktop) {
             int maxSecondsToWait = 1;
@@ -243,7 +243,7 @@ public class SecBolsaStpV {
     
     public static void validaNumArtEnBolsa(DataBag dataBag, Channel channel, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
-    	DatosStep datosStep = ThreadData.getMaxDatosStep();
+    	DatosStep datosStep = TestCaseData.getDatosStepForValidation();
         int maxSecondsToWait = 2;
         String descripValidac =
             "1) Existen " + dataBag.getListArticulos().size() + 
@@ -333,7 +333,7 @@ public class SecBolsaStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); } 
+        finally { StepAspect.storeDataAfterStep(datosStep); } 
 
         //Validaciones
         int maxSecondsToWait = 5;
@@ -370,7 +370,7 @@ public class SecBolsaStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         validaSelectButtonComprar(datosStep, dataBag, dCtxSh, dFTest);
@@ -389,7 +389,7 @@ public class SecBolsaStpV {
     public static DatosStep validaSelectButtonComprar(DatosStep datosStep, DataBag dataBag, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         if (dCtxSh.userRegistered)
-            PageCheckoutWrapperStpV.validateIsFirstPage(dCtxSh.userRegistered, dataBag, dCtxSh.channel, dCtxSh.appE, datosStep, dFTest);
+            PageCheckoutWrapperStpV.validateIsFirstPage(dCtxSh.userRegistered, dataBag, dCtxSh.channel, datosStep, dFTest);
         else
             Page1IdentCheckoutStpV.validateIsPage(datosStep, dFTest);
         
@@ -408,7 +408,7 @@ public class SecBolsaStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); } 
+        finally { StepAspect.storeDataAfterStep(datosStep); } 
     
         //Validaciones.
         String refArticulo = articuloClickado.getReferencia();

@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageTrustPayResult extends WebdrvWrapp {
     
     static String XPathHeader = "//h2[@id='stageheader']";

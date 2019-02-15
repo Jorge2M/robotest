@@ -10,7 +10,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 
-@SuppressWarnings("javadoc")
+
 public class SecTarjetaPciStpV {
     
     public static void validateIsSectionOk(Pago pago, Pais pais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {

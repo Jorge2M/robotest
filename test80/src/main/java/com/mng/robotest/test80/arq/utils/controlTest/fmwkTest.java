@@ -37,14 +37,14 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.NetTrafficMng;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.StateSuite;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.WebDriverArqUtils;
 import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
 
-@SuppressWarnings("javadoc")
+
 public class fmwkTest {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 
@@ -61,8 +61,8 @@ public class fmwkTest {
     @SuppressWarnings({ "unchecked"})    
     public static void grabStep(DatosStep datosStep, DataFmwkTest dFTest) {
     	//TODO eliminar este If cuando hayamos migrado todo a AspectJ
-    	if (ThreadData.peekDatosStep()==datosStep) {
-    		ThreadData.pollDatosStep();
+    	if (TestCaseData.peekDatosStepForStep()==datosStep) {
+    		TestCaseData.pollDatosStepForStep();
     	}
     	
         if ("ROBOTEST2".equals(System.getProperty("ROBOTEST2"))) {

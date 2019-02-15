@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop;
 
-@SuppressWarnings("javadoc")
+
 public class Mensajes {
 
     /**

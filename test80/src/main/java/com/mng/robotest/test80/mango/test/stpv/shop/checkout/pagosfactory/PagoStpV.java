@@ -6,7 +6,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 
-@SuppressWarnings("javadoc")
+
 public abstract class PagoStpV {
     public DataCtxShop dCtxSh;
     public DataCtxPago dCtxPago;

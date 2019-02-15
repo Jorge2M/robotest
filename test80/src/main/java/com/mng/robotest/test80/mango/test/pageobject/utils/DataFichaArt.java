@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.pageobject.utils;
 
-@SuppressWarnings("javadoc")
+
 public class DataFichaArt {
     private String refArticulo = "";
     private String nombreArticulo = "";

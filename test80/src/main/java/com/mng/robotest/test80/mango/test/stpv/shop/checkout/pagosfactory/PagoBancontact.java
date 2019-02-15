@@ -10,7 +10,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypeTarj;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.d3d.PageD3DLoginStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoBancontact extends PagoStpV {
     
     public PagoBancontact(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

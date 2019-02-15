@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PagePedidos extends WebdrvWrapp {
 
     public enum TypeDetalle {bolsa, pedido} 

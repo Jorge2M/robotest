@@ -2,7 +2,7 @@ package com.mng.robotest.test80.arq.utils.mail;
 
 import javax.mail.PasswordAuthentication;
 
-@SuppressWarnings("javadoc")
+
 public class MiAuthenticator extends javax.mail.Authenticator{	
     private PasswordAuthentication authentication;
 

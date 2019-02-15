@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 
 import org.testng.annotations.Test;
 
-@SuppressWarnings("javadoc")
+
 public class TestMethod {
     Test annotationTest;
     Method method;

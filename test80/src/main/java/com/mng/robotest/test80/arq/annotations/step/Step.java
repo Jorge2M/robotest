@@ -6,7 +6,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.RetentionPolicy;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 
-@SuppressWarnings("javadoc")
+
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Step {

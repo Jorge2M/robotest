@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 
-@SuppressWarnings("javadoc")
+
 public class PageHomeMarcas {
 
     /**

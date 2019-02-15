@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
 
-@SuppressWarnings("javadoc")
+
 public class ListAllCountrys {
 	
     @Factory

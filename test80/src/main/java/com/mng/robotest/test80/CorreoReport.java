@@ -20,7 +20,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.mail.MailClient;
 import com.mng.robotest.test80.arq.utils.mail.beans.AttachMail;
 
-@SuppressWarnings("javadoc")
+
 public class CorreoReport {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger); 
     

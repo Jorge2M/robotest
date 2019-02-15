@@ -13,7 +13,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class SecFotosNew extends WebdrvWrapp {
 
 	private final static String XPathCapa = "//div[@class[contains(.,'product-images')]]";

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import com.mng.robotest.test80.arq.jdbc.Connector;
 
-@SuppressWarnings("javadoc")
+
 public class CorreosGroupDAO {
     
     public static String SQLSelectCorreosGroup = 

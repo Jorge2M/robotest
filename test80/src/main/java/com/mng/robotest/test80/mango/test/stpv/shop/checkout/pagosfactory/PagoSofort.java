@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.sofort.PageSofort2o
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.sofort.PageSofort4thStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.sofort.PageSofortIconosBancoStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoSofort extends PagoStpV {
     
     public PagoSofort(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

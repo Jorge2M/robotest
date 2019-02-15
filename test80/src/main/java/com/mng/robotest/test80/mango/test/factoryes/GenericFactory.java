@@ -13,9 +13,8 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 
 import org.testng.ITestContext;
 
-@SuppressWarnings("javadoc")
+
 public class GenericFactory {
-    @SuppressWarnings("unused")
     @Factory
     @Parameters({"countrys"})
     public Object[] createInstances(String listaPaisesStr, ITestContext context) throws Exception {

@@ -7,7 +7,7 @@ import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-@SuppressWarnings("javadoc")
+
 public class PageDetallePedidoNew extends WebdrvWrapp implements PageDetallePedido {
     private static final String XPathDivDetalle = "//div[@id='myPurchasesPage']";
     private static final String XPathLineaPrenda = "//div[@onclick[contains(.,'openProductDetails')]]";

@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.registro;
 
-@SuppressWarnings("javadoc")
+
 public class InputDataXPath {
     String XPath;
     String XPathDivError;

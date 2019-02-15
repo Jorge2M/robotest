@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageDotpayAcceptSimulation extends WebdrvWrapp {
     
     static String XPathRedButtonAceptar = "//input[@id='submit_success' and @type='submit']";

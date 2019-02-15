@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 
 import org.openqa.selenium.WebDriver;
 
-@SuppressWarnings("javadoc")
+
 public interface SecTarjetaPci {
     public boolean isVisiblePanelPagoUntil(String nombrePago, int maxSeconds, WebDriver driver);
     public boolean isPresentInputNumberUntil(int maxSecondsToWait, WebDriver driver);

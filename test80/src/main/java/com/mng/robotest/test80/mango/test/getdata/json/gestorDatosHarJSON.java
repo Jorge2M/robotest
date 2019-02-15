@@ -12,7 +12,7 @@ import org.testng.ITestContext;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest.TypeEvidencia;
 
-@SuppressWarnings("javadoc")
+
 public class gestorDatosHarJSON {
 
     private JSONParser parser = new JSONParser();

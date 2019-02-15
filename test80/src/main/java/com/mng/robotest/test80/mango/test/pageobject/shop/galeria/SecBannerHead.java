@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class SecBannerHead extends WebdrvWrapp {
 	public enum TypeLinkInfo {more, less};
     static String XPathBanner = "//div[@class='bannerHead' or @class='firstBanner']";

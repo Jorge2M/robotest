@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollecti
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.SecFiltros;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusFiltroCollection;
 
-@SuppressWarnings("javadoc")
+
 public class SecMenusFiltroCollectionMobil extends WebdrvWrapp implements SecMenusFiltroCollection {
 
 	private final SecFiltros secFiltros;

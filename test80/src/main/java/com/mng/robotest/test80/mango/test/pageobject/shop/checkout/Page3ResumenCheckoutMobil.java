@@ -10,7 +10,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  * @author jorge.muñoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class Page3ResumenCheckoutMobil extends WebdrvWrapp {
     
     static String XPathLink3Resumen = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step3']";

@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
 
 import org.testng.ITestContext;
 
-@SuppressWarnings("javadoc")
+
 public class ListRebajasXPais {
     @SuppressWarnings("unused")
     @Factory

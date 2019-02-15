@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.getdata.usuarios;
 
 import java.util.Calendar;
 
-@SuppressWarnings("javadoc")
+
 public class UserShop {
     public enum StateUser {free, busy}
     public String user;

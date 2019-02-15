@@ -2,13 +2,13 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorEstadisticasPedido;
 
-@SuppressWarnings("javadoc")
+
 public class PageGestorEstadisticasPedidoStpV {
 
 
@@ -46,7 +46,7 @@ public class PageGestorEstadisticasPedidoStpV {
 
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		}
-		finally { fmwkTest.grabStep(datosStep, dFTest); }
+		finally { StepAspect.storeDataAfterStep(datosStep); }
 
 		String descripValidac = 
 			"1) Aparece la tabla de información<br>" +
@@ -80,7 +80,7 @@ public class PageGestorEstadisticasPedidoStpV {
 
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		}
-		finally { fmwkTest.grabStep(datosStep, dFTest); }
+		finally { StepAspect.storeDataAfterStep(datosStep); }
 
 		String descripValidac = 
 			"1) Las columnas de comparación en verde no contienen \"0 €\"<br>" +

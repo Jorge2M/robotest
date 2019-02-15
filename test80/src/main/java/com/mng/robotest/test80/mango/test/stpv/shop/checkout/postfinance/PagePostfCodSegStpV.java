@@ -5,13 +5,14 @@ import org.apache.logging.log4j.Logger;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance.PagePostfCodSeg;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-@SuppressWarnings("javadoc")
+
 public class PagePostfCodSegStpV {
 
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);    
@@ -122,7 +123,7 @@ public class PagePostfCodSegStpV {
         }
         finally {
             dFTest.driver.switchTo().defaultContent(); 
-            fmwkTest.grabStep(datosStep, dFTest); 
+            StepAspect.storeDataAfterStep(datosStep); 
         }
             
         //Validaciones

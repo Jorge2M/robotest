@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPage;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageDetallePedido extends WebdrvWrapp {
 
 	private final static String tagIdPedido = "@tagIdPedido";

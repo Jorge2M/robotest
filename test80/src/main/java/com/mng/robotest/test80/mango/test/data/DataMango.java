@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.data;
 
 import java.sql.Timestamp;
 
-@SuppressWarnings("javadoc")
+
 public class DataMango {
     
 	/**

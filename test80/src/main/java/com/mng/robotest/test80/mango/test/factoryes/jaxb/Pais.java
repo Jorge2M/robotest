@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.*;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
 
-@SuppressWarnings("javadoc")
+
 @XmlRootElement
 public class Pais {
 

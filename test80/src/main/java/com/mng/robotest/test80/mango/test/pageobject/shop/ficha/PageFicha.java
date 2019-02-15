@@ -7,7 +7,7 @@ import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings({"javadoc", "static-access"})
+@SuppressWarnings({"static-access"})
 public abstract class PageFicha extends WebdrvWrapp {
 
     public enum TypeFicha {Old, New}

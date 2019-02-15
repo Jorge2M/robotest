@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-@SuppressWarnings("javadoc")
+
 public class SecBuscadorDesktop extends WebdrvWrapp {
     private final static String XPathInputBuscador = "//input[@class[contains(.,'search-input')]]";
     private final static String XPathInputLupaShopDesktop = "//span[@class='menu-search-icon']";

@@ -10,7 +10,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 
-@SuppressWarnings("javadoc")
+
 public class SecMetodoEnvioDesktop extends WebdrvWrapp {
 	static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 	
@@ -29,7 +29,6 @@ public class SecMetodoEnvioDesktop extends WebdrvWrapp {
     	return (xpathBlockMethod + "//self::*[@class[contains(.,'metodoSelected')]]");
     }
 
-    @SuppressWarnings("unused")
 	private static String getXPathRadioMetodo(TipoTransporte tipoTransporte) {
         return getXPathBlockMetodo(tipoTransporte) + XPathRadioInput;
     }

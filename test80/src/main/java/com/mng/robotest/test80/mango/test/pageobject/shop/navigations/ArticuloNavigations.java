@@ -11,7 +11,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecBuscadorWr
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecDataProduct.ColorType;
 
-@SuppressWarnings({"javadoc", "static-access"})
+@SuppressWarnings({"static-access"})
 public class ArticuloNavigations {
 
     /**

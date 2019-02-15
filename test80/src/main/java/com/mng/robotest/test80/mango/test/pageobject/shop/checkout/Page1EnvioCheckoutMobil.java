@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen; 
 
-@SuppressWarnings("javadoc")
+
 public class Page1EnvioCheckoutMobil extends WebdrvWrapp {
 	static String XPathLink1Envio = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step1']";
 	static String XPathInputPromo = "//input[@id[contains(.,'oucherCode')]]";

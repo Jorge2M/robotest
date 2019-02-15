@@ -4,13 +4,13 @@ import java.util.HashMap;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisDatos;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PageMisDatosStpV {
     
     public static DatosStep validaIsPage(String usuarioReg, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
@@ -125,7 +125,7 @@ public class PageMisDatosStpV {
                                                                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }           
+        finally { StepAspect.storeDataAfterStep(datosStep); }           
             
         //Validaciones.
         String descripValidac = 

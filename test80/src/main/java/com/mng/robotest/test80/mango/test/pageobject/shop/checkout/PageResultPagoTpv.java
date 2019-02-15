@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageResultPagoTpv extends WebdrvWrapp {
     static String XPathCabeceraConfCompra = "//div[@class[contains(.,'details')]]/h2";
     static String XPathCodPedido = "//div[@id[contains(.,'num-pedido')]]/div[@class='valor']";

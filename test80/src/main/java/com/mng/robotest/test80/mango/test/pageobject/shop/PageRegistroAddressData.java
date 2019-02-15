@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 /**
  * Clase para operar con la página de registro en la que se introducen los datos de la dirección del usuario
  * @author jorge.munoz

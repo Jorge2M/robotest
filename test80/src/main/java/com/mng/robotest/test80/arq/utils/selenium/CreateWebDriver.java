@@ -8,7 +8,6 @@ import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 import net.lightbody.bmp.client.ClientUtil;
 
 import java.awt.Toolkit;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,7 +46,7 @@ import com.mng.robotest.test80.arq.utils.selenium.plugins.firefox.PluginFirefox;
 import com.mng.robotest.test80.arq.utils.selenium.plugins.firefox.PluginFirefox.typePluginFirefox;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 
-@SuppressWarnings("javadoc")
+
 public class CreateWebDriver {
     
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
@@ -59,15 +58,15 @@ public class CreateWebDriver {
      * @param isMobil identifica si se ha de arrancar un WebDriver compatible con scripts de tipo 'móvil' o 'desktop'
      * @param netAnalysis define si será preciso exportar el NetTraffic
      */    
-    public static WebDriver getWebDriver(final TypeDriver canalWebDriver, final Channel channel, final boolean netAnalysis, final ITestContext context, final Method method) 
+    public static WebDriver getWebDriver(final TypeDriver canalWebDriver, final Channel channel, final boolean netAnalysis, final ITestContext context) 
     throws Exception {
         WebDriver webdriver = null;
         switch (canalWebDriver) {
         case firefox:
-            webdriver = CreateWebDriver.createFirefoxDriver(channel, netAnalysis, false/*headless*/, true/*isMarionette*/, method, context);
+            webdriver = CreateWebDriver.createFirefoxDriver(channel, netAnalysis, false/*headless*/, true/*isMarionette*/, context);
             break;            
         case firefoxhless:
-            webdriver = CreateWebDriver.createFirefoxDriver(channel, netAnalysis, true/*headless*/, true/*isMarionette*/, method, context);
+            webdriver = CreateWebDriver.createFirefoxDriver(channel, netAnalysis, true/*headless*/, true/*isMarionette*/, context);
             break;            
         case chrome:
             webdriver = CreateWebDriver.createChromeDriver(channel, netAnalysis, false/*headless*/);
@@ -113,7 +112,7 @@ public class CreateWebDriver {
      * @param bpath parámetro que especficiará el tipo de webdriver (firefox, chrome, appium...)
      */
     public static WebDriver getWebDriver(final TypeDriver canalWebDriver) throws Exception {
-        return CreateWebDriver.getWebDriver(canalWebDriver, Channel.desktop, false /*netAnalysis*/, null, null);
+        return CreateWebDriver.getWebDriver(canalWebDriver, Channel.desktop, false /*netAnalysis*/, null);
     }    
     
     /**
@@ -124,7 +123,7 @@ public class CreateWebDriver {
      * @param netAnalysis indica si queremos análisis del tráfico de red (con lo que activaríamos el plugin NetExport para poder expotrar dicho tráfico)
      * @return webdriver de Firefox (FirefoxDriver)
      */
-    private static FirefoxDriver createFirefoxDriver(Channel channel, boolean netAnalysis, boolean headless, boolean isMarionette, Method method, ITestContext context) 
+    private static FirefoxDriver createFirefoxDriver(Channel channel, boolean netAnalysis, boolean headless, boolean isMarionette, ITestContext context) 
     throws Exception {
 
         FirefoxProfile fp = new FirefoxProfile();

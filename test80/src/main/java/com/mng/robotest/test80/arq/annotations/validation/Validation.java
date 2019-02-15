@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 
 import com.mng.robotest.test80.arq.utils.State;
 
-@SuppressWarnings("javadoc")
+
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Validation {

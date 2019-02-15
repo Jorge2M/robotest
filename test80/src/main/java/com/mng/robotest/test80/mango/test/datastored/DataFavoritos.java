@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class DataFavoritos {
 
     ArrayList<ArticuloScreen> listArticulos = new ArrayList<>();

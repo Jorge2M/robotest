@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 /**
  * Clase para operar con la página "Resultado de una búsqueda KO" a través de la API de driver
  * @author jorge.munoz

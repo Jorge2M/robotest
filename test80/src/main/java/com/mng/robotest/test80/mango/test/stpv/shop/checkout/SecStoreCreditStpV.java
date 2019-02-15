@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
@@ -16,7 +17,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopChe
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen; 
 
-@SuppressWarnings({"javadoc", "static-access"})
+@SuppressWarnings({"static-access"})
 public class SecStoreCreditStpV { 
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
@@ -31,7 +32,7 @@ public class SecStoreCreditStpV {
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
             dCtxPago.getDataPedido().setImporteTotal(PageCheckoutWrapper.getPrecioTotalFromResumen(channel, dFTest.driver));
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
                     
         //Validaciones (bloque "Saldo en cuenta" marcado)
         validaBloqueSaldoEnCuenta(datosStep, true/*marcado*/, channel, dCtxPago, dFTest);
@@ -50,7 +51,7 @@ public class SecStoreCreditStpV {
                                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
                             
         PageCheckoutWrapperStpV.validateLoadingDisappears(datosStep, dFTest);
         validaBloqueSaldoEnCuenta(datosStep, !marcadoInicialmente, channel, dCtxPago, dFTest);

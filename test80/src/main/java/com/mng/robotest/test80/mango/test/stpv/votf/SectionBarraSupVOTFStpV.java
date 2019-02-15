@@ -6,7 +6,7 @@ import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.pageobject.votf.SectionBarraSupVOTF;
 
-@SuppressWarnings("javadoc")
+
 public class SectionBarraSupVOTFStpV {
 
     public static void validate(String usuarioVOTF, DatosStep datosStep, DataFmwkTest dFTest) {

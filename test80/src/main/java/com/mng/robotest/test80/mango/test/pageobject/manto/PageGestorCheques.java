@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.pageobject.ElementPage;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageGestorCheques extends ElementPageFunctions {
 
     public static String titulo = "Gestor de Cheques";

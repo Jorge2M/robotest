@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 
-@SuppressWarnings("javadoc")
+
 public class Pago {
     public static enum TypePago {
         TarjetaIntegrada, 

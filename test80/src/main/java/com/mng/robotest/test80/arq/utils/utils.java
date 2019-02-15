@@ -8,7 +8,7 @@ import com.mng.robotest.test80.Test80mng.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.myUtils;
 
-@SuppressWarnings("javadoc")
+
 public class utils {
 
     public static State getEstadoMethod(final String result_script, final String result_tng) {

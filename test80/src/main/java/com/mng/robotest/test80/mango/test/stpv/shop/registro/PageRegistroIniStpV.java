@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
@@ -18,7 +18,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegis
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
-@SuppressWarnings("javadoc")
+
 public class PageRegistroIniStpV {
     
     public static void validaIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
@@ -50,7 +50,7 @@ public class PageRegistroIniStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }           
+        finally { StepAspect.storeDataAfterStep(datosStep); }           
             
         //Validaciones
         String descripValidac = 
@@ -80,7 +80,7 @@ public class PageRegistroIniStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }           
+        finally { StepAspect.storeDataAfterStep(datosStep); }           
             
         //Validaciones
         String descripValidac = 
@@ -132,7 +132,7 @@ public class PageRegistroIniStpV {
                                                                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validacion
         validaIsInvisibleCapaLoading(datosStep, dFTest);

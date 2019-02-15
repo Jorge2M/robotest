@@ -2,16 +2,16 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDroppoints;
 
-@SuppressWarnings({"javadoc", "static-access"})
+@SuppressWarnings({"static-access"})
 public class SecConfirmDatosStpV {
     
     public static void validateIsVisible(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
@@ -41,7 +41,7 @@ public class SecConfirmDatosStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }        
+        finally { StepAspect.storeDataAfterStep(datosStep); }        
         
         //Validaciones
         DataDeliveryPoint dataDp = dataPedido.getDataDeliveryPoint();

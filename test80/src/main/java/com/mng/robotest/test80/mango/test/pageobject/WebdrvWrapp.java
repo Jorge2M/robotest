@@ -28,7 +28,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
 
-@SuppressWarnings("javadoc")
+
 public class WebdrvWrapp extends ElementPageFunctions {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     public enum TypeOfClick {webdriver, javascript}

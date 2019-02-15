@@ -13,7 +13,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-@SuppressWarnings("javadoc")
+
 public class PagePasarelaOtrasStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     

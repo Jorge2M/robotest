@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.Test80mng.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -53,7 +53,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroNinosSt
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroSegundaStpV;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
-@SuppressWarnings("javadoc")
+
 public class Registro extends GestorWebDriver {
     Pais españa = null;
     IdiomaPais castellano = null;
@@ -113,14 +113,14 @@ public class Registro extends GestorWebDriver {
         }        
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        ThreadData.storeInThread(dCtxSh);
-        ThreadData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
+        TestCaseData.storeInThread(dCtxSh);
+        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
     }
 
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Registro", "Canal:all_App:all", "SupportsFactoryCountrys"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = ThreadData.getWebDriver();
+        WebDriver driver = TestCaseData.getWebDriver();
         super.quitWebDriver(driver, context);
     }       
 
@@ -128,9 +128,9 @@ public class Registro extends GestorWebDriver {
     @Test (
         groups={"Registro", "Canal:desktop_App:all"},
         description="Registro con errores en la introducción de los datos")
-    public void REG001_RegistroNOK(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
-        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
+    public void REG001_RegistroNOK() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userRegistered = false;
         if (dCtxSh.appE==AppEcom.votf)
             return;
@@ -174,7 +174,7 @@ public class Registro extends GestorWebDriver {
         groups={"Registro", "Canal:all_App:shop", "Canal:all_App:outlet", "SupportsFactoryCountrys"}, alwaysRun=true, 
         description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
     @Parameters({"loginAfterRegister", "register"})    
-    public void REG002_RegistroOK_publi(String loginAfterRegister, String register, ITestContext context, Method method) throws Exception {
+    public void REG002_RegistroOK_publi(String loginAfterRegister, String register) throws Exception {
         boolean loginAfter = true;
         boolean clickPubli = true;
         boolean clickRegister = true;
@@ -185,8 +185,8 @@ public class Registro extends GestorWebDriver {
         	clickRegister = false;
         }
         
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
-        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userRegistered = false;
             
         //En caso de ejecución desde .bat no ejecutaremos el Registro 
@@ -282,10 +282,10 @@ public class Registro extends GestorWebDriver {
     @Test (
         groups={"Registro", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true, 
         description="Alta/Registro de un usuario (sin seleccionar el link de publicidad)")
-    public void REG003_RegistroOK_NoPubli(ITestContext context, Method method) throws Exception {
+    public void REG003_RegistroOK_NoPubli() throws Exception {
     	boolean clickPubli = false;
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
-        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userRegistered = false;
             
         //En caso de ejecución desde .bat no ejecutaremos el Registro 

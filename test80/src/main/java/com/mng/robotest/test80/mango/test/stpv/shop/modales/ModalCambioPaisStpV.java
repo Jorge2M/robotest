@@ -2,15 +2,15 @@ package com.mng.robotest.test80.mango.test.stpv.shop.modales;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test80.mango.test.stpv.shop.PageHomeMarcasStpV;
 
-@SuppressWarnings("javadoc")
+
 public class ModalCambioPaisStpV {
     
     public static void validateIsVisible(DatosStep datosStep, DataFmwkTest dFTest) {
@@ -40,7 +40,7 @@ public class ModalCambioPaisStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest);}
+        finally { StepAspect.storeDataAfterStep(datosStep);}
         
         //Validation. Aparece el país destino con todas las líneas de dicho país
         PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, datosStep, dFTest);

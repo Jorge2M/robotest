@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 import com.mng.robotest.test80.arq.jdbc.Connector;
 
-@SuppressWarnings("javadoc")
+
 public class ParamsDAO {
     public static String SQLSelectParam = 
         "SELECT PARAM, VALOR FROM PARAMS " +

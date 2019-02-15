@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 
-@SuppressWarnings("javadoc")
+
 public class PluginHTML5Autoplay extends PluginChrome {
     
     private final String fileName = "html5autoplay_0_6_2.crx";

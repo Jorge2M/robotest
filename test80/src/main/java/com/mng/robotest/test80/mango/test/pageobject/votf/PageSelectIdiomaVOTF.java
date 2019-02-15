@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import com.mng.robotest.test80.mango.test.data.CodigoIdioma;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageSelectIdiomaVOTF extends WebdrvWrapp {
 
     private static final String XPathSelectIdioma = "//select[@name[contains(.,'country')]]";

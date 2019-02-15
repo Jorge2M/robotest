@@ -2,12 +2,12 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.yandex;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandexMoney;
 
-@SuppressWarnings("javadoc")
+
 public class PageYandexMoneyStpV {
 
     public static DatosStep accessInNewTab(String tabTitle, DataFmwkTest dFTest) throws Exception {
@@ -20,7 +20,7 @@ public class PageYandexMoneyStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validation
         validateIsPage(datosStep, dFTest);
@@ -62,7 +62,7 @@ public class PageYandexMoneyStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
         PageYandexMoneyResultStpV.validateIsResultOk(datosStep, dFTest);
@@ -81,7 +81,7 @@ public class PageYandexMoneyStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }        
+        finally { StepAspect.storeDataAfterStep(datosStep); }        
         
         return datosStep;
     }

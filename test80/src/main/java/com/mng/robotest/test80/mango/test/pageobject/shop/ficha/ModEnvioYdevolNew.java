@@ -10,7 +10,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class ModEnvioYdevolNew extends WebdrvWrapp {
 
     static String XPathWrapper = "//div[@class='handling-modal-wrapper']";

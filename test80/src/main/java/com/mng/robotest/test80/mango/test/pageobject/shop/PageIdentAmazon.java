@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageIdentAmazon extends WebdrvWrapp {
 
     static String XPathImgLogoAmazon = "//div/img[@src[contains(.,'logo_payments')]]";

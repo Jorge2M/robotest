@@ -2,15 +2,15 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld.TypePanel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld.TypeStatePanel;
 
-@SuppressWarnings("javadoc")
+
 public class SecProductDescrOldStpV {
     
     public static void validateAreInStateInitial(AppEcom appE, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
@@ -50,7 +50,7 @@ public class SecProductDescrOldStpV {
                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
                 
         //Validaciones
         int maxSecondsToWait = 1;

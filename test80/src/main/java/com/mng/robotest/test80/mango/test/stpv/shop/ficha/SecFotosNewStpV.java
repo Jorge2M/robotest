@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.DataFoto;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecFotosNew;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.TipoImagenProducto;
 
-@SuppressWarnings("javadoc")
+
 public class SecFotosNewStpV {
 
     public static void validaLayoutFotosNew(boolean isFichaAccesorios, DatosStep datosStep, DataFmwkTest dFTest) {

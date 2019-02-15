@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -21,7 +21,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter.FooterLink;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalCambioPaisStpV;
 
-@SuppressWarnings("javadoc")
+
 public class SecFooterStpV {
     
     /**
@@ -58,11 +58,11 @@ public class SecFooterStpV {
             "Se redirige a la pantalla de " + pageObject.getName());
         try {
         	windowFatherHandle = 
-        		SecFooter.clickLinkAndGetWindowFatherHandle(typeFooter, app, dFTest.driver);
+        		SecFooter.clickLinkAndGetWindowFatherHandle(typeFooter, dFTest.driver);
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
                 
         //Validaciones
     	String windowActualHandle = dFTest.driver.getWindowHandle();
@@ -143,7 +143,7 @@ public class SecFooterStpV {
              PageMangoCard.clickOnWantMangoCardNow(dFTest.driver, channel);
              datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
          }
-         finally { fmwkTest.grabStep(datosStep, dFTest); }
+         finally { StepAspect.storeDataAfterStep(datosStep); }
 
          //Si no estamos en el entorno de CI
          if(!dFTest.driver.getCurrentUrl().contains("shop-ci")) {
@@ -193,7 +193,7 @@ public class SecFooterStpV {
                  datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 
              } 
-             finally { fmwkTest.grabStep(datosStep, dFTest); }
+             finally { StepAspect.storeDataAfterStep(datosStep); }
              
              //Validaciones
              int secondsToWait = 3;
@@ -226,7 +226,7 @@ public class SecFooterStpV {
                  PageInputDataSolMangoCard.clickBotonCerrarModal(dFTest.driver);                     
                  datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
              }
-             finally { fmwkTest.grabStep(datosStep, dFTest); }
+             finally { StepAspect.storeDataAfterStep(datosStep); }
            
              //Validaciones
              descripValidac = 
@@ -286,7 +286,7 @@ public class SecFooterStpV {
 
              datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
          } 
-         finally { fmwkTest.grabStep(datosStep, dFTest);}
+         finally { StepAspect.storeDataAfterStep(datosStep);}
          
          //Validaciones. 
          ModalCambioPaisStpV.validateIsVisible(datosStep, dFTest);
@@ -315,7 +315,7 @@ public class SecFooterStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest);}
+        finally { StepAspect.storeDataAfterStep(datosStep);}
              
      	//Validaciones
  		if (dCtxSh.pais.getRgpd().equals("S")) {

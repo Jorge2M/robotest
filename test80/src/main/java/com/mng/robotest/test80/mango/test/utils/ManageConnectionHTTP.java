@@ -11,7 +11,7 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-@SuppressWarnings("javadoc")
+
 public class ManageConnectionHTTP {
 
     public static void disableSslVerification() {

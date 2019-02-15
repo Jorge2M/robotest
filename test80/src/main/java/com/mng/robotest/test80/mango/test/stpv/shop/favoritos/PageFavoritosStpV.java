@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavoritos;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 
-@SuppressWarnings({"javadoc", "static-access"})
+@SuppressWarnings({"static-access"})
 public class PageFavoritosStpV {
     
     public static ModalFichaFavoritosStpV modalFichaFavoritos;

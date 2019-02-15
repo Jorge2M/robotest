@@ -23,7 +23,7 @@ import com.mng.robotest.test80.arq.utils.selenium.BStackDataDesktop;
 import com.mng.robotest.test80.arq.utils.selenium.BStackDataMovil;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 
-@SuppressWarnings("javadoc")
+
 public class SmokeTestXML {
 
     ParamsBean params = null;

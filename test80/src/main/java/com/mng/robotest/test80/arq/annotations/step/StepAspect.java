@@ -10,11 +10,11 @@ import org.aspectj.lang.annotation.Pointcut;
 
 import com.mng.robotest.test80.arq.annotations.MatcherWithMethodParams;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 
-@SuppressWarnings("javadoc")
+
 @Aspect
 public class StepAspect {
 
@@ -33,29 +33,13 @@ public class StepAspect {
     
     private DatosStep getFromJoinPointAndStoreDatosStep(JoinPoint joinPoint, InfoStep infoStep) {
     	DatosStep datosStep = infoStep.getDatosStep();
-    	DatosStep maxDatosStep = ThreadData.getMaxDatosStep();
+    	DatosStep maxDatosStep = TestCaseData.getDatosStepForValidation();
     	if (maxDatosStep!=null) {
     		datosStep.setStepNumber(maxDatosStep.getStepNumber()+1);
     	}
     	
-    	ThreadData.storeInThread(datosStep);
+    	TestCaseData.storeInThread(datosStep);
     	return datosStep;
-    }
-    
-    @AfterThrowing(
-    	pointcut="annotationStepPointcut() && atExecution()", 
-    	throwing="ex")
-    public void doRecoveryActions(JoinPoint joinPoint, Throwable ex) {
-    	DatosStep datosStep = ThreadData.pollDatosStep();
-    	setEndDataStep(datosStep);
-    	storeStep(State.Nok, true, datosStep);
-    }
-    
-    @AfterReturning(
-    	pointcut="annotationStepPointcut() && atExecution()")
-    public void grabValidationAfter(JoinPoint joinPoint) throws Throwable {
-    	DatosStep datosStep = ThreadData.pollDatosStep();
-    	storeStep(State.Ok, false, datosStep);
     }
     
     private void setInitDataStep(InfoStep infoStep, JoinPoint joinPoint, DatosStep datosStep) {
@@ -67,16 +51,41 @@ public class StepAspect {
         datosStep.setHoraInicio(new Date(System.currentTimeMillis()));
     }
     
+    @AfterThrowing(
+    	pointcut="annotationStepPointcut() && atExecution()", 
+    	throwing="ex")
+    public void doRecoveryActions(JoinPoint joinPoint, Throwable ex) {
+    	DatosStep datosStep = TestCaseData.pollDatosStepForStep();
+    	setEndDataStep(datosStep);
+    	storeStep(State.Nok, true, datosStep);
+    }
+    
+    @AfterReturning(
+    	pointcut="annotationStepPointcut() && atExecution()")
+    public void grabValidationAfter(JoinPoint joinPoint) throws Throwable {
+    	DatosStep datosStep = TestCaseData.pollDatosStepForStep();
+    	storeDataAfterStep(datosStep);
+    }
+    
+    public static void storeDataAfterStep(DatosStep datosStep) {
+    	if (!datosStep.isStateUpdated()) {
+    		storeStep(State.Ok, false, datosStep);
+    	}
+    	else {
+    		fmwkTest.grabStep(datosStep, TestCaseData.getdFTest());
+    	}
+    }
+
     private void setEndDataStep(DatosStep datosStep) {
     	datosStep.setHoraFin(new Date(System.currentTimeMillis()));
     }
     
-    private void storeStep(State stateResult, boolean isException, DatosStep datosStep) {
+    private static void storeStep(State stateResult, boolean isException, DatosStep datosStep) {
     	updateDatosStep(datosStep, stateResult, isException);
-        fmwkTest.grabStep(datosStep, ThreadData.getdFTest());
+        fmwkTest.grabStep(datosStep, TestCaseData.getdFTest());
     }
     
-    private void updateDatosStep(DatosStep datosStep, State stateResult, boolean isException) {
+    private static void updateDatosStep(DatosStep datosStep, State stateResult, boolean isException) {
         datosStep.setExcepExists(isException); 
         datosStep.setResultSteps(stateResult);
     }

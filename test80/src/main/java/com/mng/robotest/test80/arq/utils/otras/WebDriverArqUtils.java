@@ -33,7 +33,7 @@ import org.apache.logging.log4j.Logger;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class WebDriverArqUtils {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     

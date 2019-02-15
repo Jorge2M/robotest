@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.arq.utils.selenium;
 
-@SuppressWarnings("javadoc")
+
 public class BStackDesktop {
 
     String os;

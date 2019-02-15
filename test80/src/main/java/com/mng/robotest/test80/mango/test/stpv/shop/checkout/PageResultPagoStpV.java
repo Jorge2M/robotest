@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -22,7 +22,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageInputPedidoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageListPedidosStpV;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-@SuppressWarnings("javadoc")
+
 public class PageResultPagoStpV {
 
     public static void validaIsPageUntil(int maxSecondsToWait, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
@@ -130,7 +130,7 @@ public class PageResultPagoStpV {
                                                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }         
+        finally { StepAspect.storeDataAfterStep(datosStep); }         
                                 
         //Puede aparecer la página con la lista de pedidos o la de introducción de los datos del pedido
         if (PageListPedidos.isPage(dFTest.driver))
@@ -157,7 +157,7 @@ public class PageResultPagoStpV {
                                                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }         
+        finally { StepAspect.storeDataAfterStep(datosStep); }         
                                 
         //Validations
         if (userRegistered)
@@ -185,25 +185,26 @@ public class PageResultPagoStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         return datosStep;
     }
     
-    public static DatosStep selectLinkPedidoAndValidatePedido(DataPedido dataPedido, AppEcom app, DataFmwkTest dFTest) 
+    public static DatosStep selectLinkPedidoAndValidatePedido(DataPedido dataPedido, DataFmwkTest dFTest) 
     throws Exception {
         DatosStep datosStep = PageResultPagoStpV.selectMisPedidos(dataPedido, dFTest);
         if (datosStep.getResultSteps()==State.Ok) {
             if (PageListPedidos.isPage(dFTest.driver))
                 datosStep = PageListPedidosStpV.selectPedido(dataPedido.getCodpedido(), dFTest);
             else
-                datosStep = PageInputPedidoStpV.inputPedidoAndSubmit(dataPedido, app, dFTest);
+                datosStep = PageInputPedidoStpV.inputPedidoAndSubmit(dataPedido, dFTest);
         }
         
         return datosStep;
     }
     
-    public static DatosStep selectLinkMisComprasAndValidateCompra(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep selectLinkMisComprasAndValidateCompra(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    throws Exception {
         DatosStep datosStep = null;
         PageResultPagoStpV.selectMisCompras(dCtxSh.userRegistered, dFTest);
         DataPedido dataPedido = dCtxPago.getDataPedido();
@@ -213,7 +214,7 @@ public class PageResultPagoStpV {
         }
         else {
             PageAccesoMisComprasStpV.clickBlock(TypeBlock.NoRegistrado, dFTest);
-            datosStep = PageAccesoMisComprasStpV.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido(), dCtxSh.appE, dFTest);
+            datosStep = PageAccesoMisComprasStpV.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido(), dFTest);
         }
         
         return datosStep;

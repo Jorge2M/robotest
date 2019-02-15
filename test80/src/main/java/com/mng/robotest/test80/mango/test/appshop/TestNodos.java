@@ -8,7 +8,7 @@ import java.util.*;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -37,7 +37,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import org.openqa.selenium.WebDriver;
 
 
-@SuppressWarnings("javadoc")
+
 public class TestNodos extends GestorWebDriver {
     Pais españa = null;
     IdiomaPais castellano = null;
@@ -96,21 +96,21 @@ public class TestNodos extends GestorWebDriver {
         dCtxSh.idioma = this.castellano;
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        ThreadData.storeInThread(dCtxSh);
-        ThreadData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
+        TestCaseData.storeInThread(dCtxSh);
+        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
     }
 	
     @SuppressWarnings("unused")
     @AfterMethod (alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = ThreadData.getWebDriver();
+        WebDriver driver = TestCaseData.getWebDriver();
         super.quitWebDriver(driver, context);
     }	
 	
     @Test (description="Verificar funcionamiento general en un nodo. Validar status, acceso, click banner, navegación por las líneas...")
-    public void NOD001_TestNodo(ITestContext context, Method method) throws Throwable {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
-        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
+    public void NOD001_TestNodo() throws Throwable {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         DatosStep datosStep = null;
         AppEcom appE = this.nodo.getAppEcom();
         
@@ -126,7 +126,7 @@ public class TestNodos extends GestorWebDriver {
             //Si hemos encontrado un nodo con el que comparar, pues eso, comparamos
             //Validaciones comparativa del status de los 2 nodos (actual y anteior) concretos
             if (nodoAnt!=null)
-                AccesoStpV.validaCompareStatusNodos(datosStep, this.nodo, nodoAnt, dFTest);
+                AccesoStpV.validaCompareStatusNodos(datosStep, this.nodo, nodoAnt);
            
             //Step+Validacs. Accedemos a España con idioma Español
             PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, true/*execValidacs*/, dFTest);
@@ -159,7 +159,7 @@ public class TestNodos extends GestorWebDriver {
             //Step. Seleccionamos / Validamos el 1er Banner
             int maxBannersToLoad = 1;
             SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, dFTest.driver);
-            secBannersStpV.testPageBanners(dCtxSh, LineaType.she, 1, dFTest);
+            secBannersStpV.testPageBanners(dCtxSh, 1, dFTest);
             if (appE==AppEcom.outlet) {
                 Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
                 SecMenusWrapperStpV.accesoMenuXRef(menuVestidos, dCtxSh, dFTest);

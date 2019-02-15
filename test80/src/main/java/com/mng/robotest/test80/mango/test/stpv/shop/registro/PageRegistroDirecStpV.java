@@ -4,16 +4,16 @@ import java.util.HashMap;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageRegistroAddressData;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroDirec;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro.PageData;
 
-@SuppressWarnings("javadoc")
+
 public class PageRegistroDirecStpV {
     
     public static void isPageFromPais(Pais pais, DatosStep datosStep, DataFmwkTest dFTest) {
@@ -49,7 +49,7 @@ public class PageRegistroDirecStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         validateInputDataOk(datosStep, dFTest);
@@ -67,7 +67,7 @@ public class PageRegistroDirecStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }           
+        finally { StepAspect.storeDataAfterStep(datosStep); }           
             
         //Validaciones
         validateInputDataOk(datosStep, dFTest);
@@ -102,7 +102,7 @@ public class PageRegistroDirecStpV {
                                                                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones 
         PageRegistroFinStpV.isPage(datosStep, dFTest);

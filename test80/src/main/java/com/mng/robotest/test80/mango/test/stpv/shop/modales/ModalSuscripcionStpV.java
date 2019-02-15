@@ -2,14 +2,14 @@ package com.mng.robotest.test80.mango.test.stpv.shop.modales;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalSuscripcion;
 
-@SuppressWarnings("javadoc")
+
 public class ModalSuscripcionStpV {
 
 	 /**
@@ -21,7 +21,7 @@ public class ModalSuscripcionStpV {
                 "Los textos existen en el código fuente dependiendo del pais");
         datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
         datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        fmwkTest.grabStep(datosStep, dFTest);
+        StepAspect.storeDataAfterStep(datosStep);
             
     	//Validaciones
 		if (dCtxSh.pais.getRgpd().equals("S")) {

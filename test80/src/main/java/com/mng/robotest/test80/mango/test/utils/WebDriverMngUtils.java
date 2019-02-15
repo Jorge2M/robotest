@@ -30,7 +30,6 @@ import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.generic.ResultadoErrores;
 import com.mng.robotest.test80.mango.test.generic.stackTrace;
 
-@SuppressWarnings("javadoc")
 public class WebDriverMngUtils {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
@@ -89,7 +88,6 @@ public class WebDriverMngUtils {
         return nodo;
     }
 
-    @SuppressWarnings("boxing")
     public static stackTrace stackTaceException(WebDriver driver, ITestContext context) throws Exception {
         stackTrace resExcep = new stackTrace();
         resExcep.setException("");
@@ -190,7 +188,6 @@ public class WebDriverMngUtils {
      * @param maxErrors máximo de errores a partir del cual ya no hemos de mostrar warning
      * @return recopilación de todos los problemas detectados
      */
-    @SuppressWarnings("boxing")
     public static ResultadoErrores imagesBroken(WebDriver driver, int maxImages, int maxErrors, ITestContext ctx) throws Exception {
         ResultadoErrores resultado = new ResultadoErrores();
         resultado.setResultado(ResultadoErrores.Resultado.OK);

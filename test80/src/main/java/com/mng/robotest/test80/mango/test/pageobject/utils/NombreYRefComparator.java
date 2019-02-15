@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.utils;
 
 import java.util.Comparator;
 
-@SuppressWarnings("javadoc")
+
 public class NombreYRefComparator implements Comparator<NombreYRef> {
     
     @Override

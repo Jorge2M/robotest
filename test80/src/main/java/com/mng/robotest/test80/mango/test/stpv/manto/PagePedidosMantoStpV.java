@@ -5,9 +5,9 @@ import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -26,7 +26,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class PagePedidosMantoStpV {
 
     /**
@@ -127,7 +127,7 @@ public class PagePedidosMantoStpV {
 			datosStep.setResultSteps(State.Ok);
 
 		} finally {
-			fmwkTest.grabStep(datosStep, dFTest);
+			StepAspect.storeDataAfterStep(datosStep);
 		}
 
 		String descripValidac = "1) Tenemos código de pedido " + dPedidoPrueba.getCodpedido();
@@ -174,7 +174,7 @@ public class PagePedidosMantoStpV {
 			datosStep.setResultSteps(State.Ok);
 
 		} finally {
-			fmwkTest.grabStep(datosStep, dFTest);
+			StepAspect.storeDataAfterStep(datosStep);
 		}
 
 		String descripValidac = "1) El pedido tiene las referencias " + referencias.toString();
@@ -217,7 +217,7 @@ public class PagePedidosMantoStpV {
 			datosStep.setResultSteps(State.Ok);
 
 		} finally {
-			fmwkTest.grabStep(datosStep, dFTest);
+			StepAspect.storeDataAfterStep(datosStep);
 		}
 
 		String descripValidac = "1) Tenemos el DNI del cliente " + dPedidoPrueba.getPago().getDni() + "<br>"
@@ -260,7 +260,7 @@ public class PagePedidosMantoStpV {
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		} 
 		finally {
-			fmwkTest.grabStep(datosStep, dFTest);
+			StepAspect.storeDataAfterStep(datosStep);
 		}
 
 		String descripValidac = "1) Tenemos la tienda física " + dPedidoPrueba.getDataDeliveryPoint().getCodigo();

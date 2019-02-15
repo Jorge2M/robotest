@@ -2,16 +2,16 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checqueregalo;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputData;
 import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputData.*;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PageChequeRegaloInputDataStpV{
 
     public static void paginaConsultarSaldo(DataFmwkTest dFTest, String numTarjeta) throws Exception {
@@ -24,7 +24,7 @@ public class PageChequeRegaloInputDataStpV{
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep,dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
         int maxSecondsWait = 2;
@@ -61,7 +61,7 @@ public class PageChequeRegaloInputDataStpV{
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep,dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validar
         maxSecondsWait = 2;
@@ -94,7 +94,7 @@ public class PageChequeRegaloInputDataStpV{
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validations
         int maxSecondsWait = 2;
@@ -124,7 +124,8 @@ public class PageChequeRegaloInputDataStpV{
             PageChequeRegaloInputData.clickAndWait(ConsultaSaldo.volver, dFTest.driver);
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        } finally { fmwkTest.grabStep(datosStep,dFTest); }
+        } 
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
         maxSecondsWait = 2;
@@ -152,7 +153,7 @@ public class PageChequeRegaloInputDataStpV{
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep,dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
         String importesStr = java.util.Arrays.asList(PageChequeRegaloInputData.Importe.values()).toString();
@@ -188,7 +189,7 @@ public class PageChequeRegaloInputDataStpV{
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones.
         int maxSecondsWait = 3;
@@ -223,7 +224,7 @@ public class PageChequeRegaloInputDataStpV{
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }               
+        finally { StepAspect.storeDataAfterStep(datosStep); }               
             
         //Validaciones.
         PageCheckoutWrapperStpV.validaIsVersionChequeRegalo(chequeRegalo, datosStep, dFTest);

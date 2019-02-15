@@ -18,7 +18,7 @@ import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class GestorWebDrv {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     

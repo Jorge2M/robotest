@@ -4,18 +4,15 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques.ButtonsCheque;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques.TablaCheque;
 
-@SuppressWarnings("javadoc")
+
 public class PageGestorChequesStpV {
 
 	public static void validateIsPage(WebDriver driver) {

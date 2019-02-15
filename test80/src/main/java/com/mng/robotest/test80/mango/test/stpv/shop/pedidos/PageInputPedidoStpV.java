@@ -2,14 +2,14 @@ package com.mng.robotest.test80.mango.test.stpv.shop.pedidos;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageInputPedido;
 
-@SuppressWarnings("javadoc")
+
 public class PageInputPedidoStpV {
     
     public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
@@ -27,7 +27,7 @@ public class PageInputPedidoStpV {
         finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
-    public static DatosStep inputPedidoAndSubmit(DataPedido dataPedido, AppEcom app, DataFmwkTest dFTest) 
+    public static DatosStep inputPedidoAndSubmit(DataPedido dataPedido, DataFmwkTest dFTest) 
     throws Exception {
         //Step
         String usuarioAcceso = dataPedido.getEmailCheckout();
@@ -42,11 +42,11 @@ public class PageInputPedidoStpV {
                                                                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(dFTest.driver);
-        pageDetPedidoStpV.validateIsPageOk(dataPedido, app, datosStep, dFTest);
+        pageDetPedidoStpV.validateIsPageOk(dataPedido, datosStep, dFTest);
         
         return datosStep;
     }

@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -20,7 +20,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class PageConsultaPedidoBolsaStpV {
 
     /**
@@ -38,7 +38,7 @@ public class PageConsultaPedidoBolsaStpV {
                                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
                                     
         //Validaciones
         validacionesTotalesPedido(dataPedido, typeDetalle, appE, datosStep, dFTest);

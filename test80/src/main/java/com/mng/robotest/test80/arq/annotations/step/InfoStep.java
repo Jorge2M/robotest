@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 
 public class InfoStep {
@@ -43,8 +43,8 @@ public class InfoStep {
     	datosStep.setSaveImagePage(stepAnnotation.saveImagePage());
     	datosStep.setSaveErrorPage(stepAnnotation.saveErrorPage());
     	datosStep.setSaveHtmlPage(stepAnnotation.saveHtmlPage());
-    	if (ThreadData.getdFTest()!=null) {
-    		datosStep.setSaveNettrafic(stepAnnotation.saveNettraffic(), ThreadData.getdFTest().ctx);
+    	if (TestCaseData.getdFTest()!=null) {
+    		datosStep.setSaveNettrafic(stepAnnotation.saveNettraffic(), TestCaseData.getdFTest().ctx);
     	}
 
     	return datosStep;

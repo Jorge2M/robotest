@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.data;
 
-@SuppressWarnings("javadoc")
+
 public class ChannelEnum {
     public enum Channel {
         desktop,

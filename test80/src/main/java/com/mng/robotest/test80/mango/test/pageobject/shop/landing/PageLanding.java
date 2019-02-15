@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
 
-@SuppressWarnings("javadoc")
+
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la página HOME o HOMEMARCAS (la página inicial multimarca o la asociada a cada pestaña)
  * @author jorge.munoz

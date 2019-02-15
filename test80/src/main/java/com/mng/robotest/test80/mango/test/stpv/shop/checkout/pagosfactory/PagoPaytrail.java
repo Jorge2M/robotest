@@ -11,7 +11,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.paytrail.PagePaytra
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.paytrail.PagePaytrailIdConfirmStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.paytrail.PagePaytrailResultadoOkStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoPaytrail extends PagoStpV {
     
     public PagoPaytrail(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

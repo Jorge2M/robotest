@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.Mensajes;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
 
-@SuppressWarnings("javadoc")
+
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la sección de "Cabecera" (de Desktop y Movil)
  * @author jorge.munoz

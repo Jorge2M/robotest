@@ -2,14 +2,14 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.mercadopago;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrjDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrjMobil;
 
-@SuppressWarnings("javadoc")
+
 public class PageMercpagoDatosTrjStpV {
 	
 	public static class InputData {
@@ -83,7 +83,7 @@ public class PageMercpagoDatosTrjStpV {
                                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
             
         //Validaciones
         int maxSecondsToWait = 2;
@@ -113,7 +113,7 @@ public class PageMercpagoDatosTrjStpV {
                                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
             
         //Validaciones
         int maxSecondsToWait = 2;
@@ -159,7 +159,7 @@ public class PageMercpagoDatosTrjStpV {
                                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
             
         //Validaciones
         int maxSecondsToWait = 2;
@@ -188,7 +188,7 @@ public class PageMercpagoDatosTrjStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
             
         //Validaciones
         PageMercpagoConfStpV.validaIsPage(Channel.movil_web, datosStep, dFTest);
@@ -213,7 +213,7 @@ public class PageMercpagoDatosTrjStpV {
                                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
             
         //Validaciones
         PageMercpagoConfStpV.validaIsPage(Channel.desktop, datosStep, dFTest);

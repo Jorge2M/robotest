@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.datastored;
 
-@SuppressWarnings("javadoc")
+
 public class FlagsTestCkout {
     public boolean validaPasarelas = false;
     public boolean validaPagos = false;

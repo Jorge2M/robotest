@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.generic;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("javadoc")
+
 public class ResultadoErrores {
 
     public enum Resultado {OK, ERRORES, MAX_ERRORES}

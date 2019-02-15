@@ -10,7 +10,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapper
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.multibanco.PageMultibanco1rstStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.multibanco.PageMultibancoEnProgresoStpv;
 
-@SuppressWarnings("javadoc")
+
 public class PagoMultibanco extends PagoStpV {
 
     public PagoMultibanco(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

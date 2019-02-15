@@ -11,7 +11,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapper
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.sepa.PageSepa1rstStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.sepa.PageSepaResultMobilStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoSepa extends PagoStpV {
     
     public PagoSepa(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

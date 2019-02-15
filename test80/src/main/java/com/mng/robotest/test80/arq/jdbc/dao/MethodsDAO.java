@@ -20,7 +20,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 
-@SuppressWarnings("javadoc")
+
 public class MethodsDAO {
     public static String SQLSelectMethodsTestRun =
         "SELECT IDEXECSUITE, SUITE, TEST, METHOD, DESCRIPTION, RESULT_SCRIPT, RESULT_TNG, INICIO, FIN, TIME_MS, NUMBER_STEPS, CLASS_SIGNATURE, INSTANCIA " + 

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class SecSlidersOld extends WebdrvWrapp {
     static String XPathElegidoParaTi = "//div[@class='recommendations']";
     static String XPathElegidoParaTiCabecera = XPathElegidoParaTi + "/p";

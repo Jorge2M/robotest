@@ -6,7 +6,7 @@ import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageRecADomic;
 
-@SuppressWarnings("javadoc")
+
 public class PageRecogidaDomicStpV {
 
     public static void vaidaIsPageSinDevoluciones(DatosStep datosStep, DataFmwkTest dFTest) {

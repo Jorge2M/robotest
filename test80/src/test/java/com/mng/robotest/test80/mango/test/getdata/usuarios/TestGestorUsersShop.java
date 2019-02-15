@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop.StateUser;
 
-@SuppressWarnings("javadoc")
 public class TestGestorUsersShop {
 
     @Test

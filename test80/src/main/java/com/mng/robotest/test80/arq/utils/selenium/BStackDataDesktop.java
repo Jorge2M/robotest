@@ -5,7 +5,6 @@ import java.util.Map;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestContext;
 
-@SuppressWarnings("javadoc")
 public class BStackDataDesktop {
 
     //Nombre de los parámetros en la llamada a BrowserStack

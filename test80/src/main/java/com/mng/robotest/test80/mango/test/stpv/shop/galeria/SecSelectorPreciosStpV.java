@@ -2,16 +2,16 @@ package com.mng.robotest.test80.mango.test.stpv.shop.galeria;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 
-@SuppressWarnings({"javadoc", "static-access"})
+@SuppressWarnings({"static-access"})
 public class SecSelectorPreciosStpV {
 
     public static void validaIsSelector(DatosStep datosStep, DataFmwkTest dFTest) {
@@ -65,7 +65,7 @@ public class SecSelectorPreciosStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }         
+        finally { StepAspect.storeDataAfterStep(datosStep); }         
             
         //Validaciones
         PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);

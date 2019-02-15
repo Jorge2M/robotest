@@ -10,7 +10,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -45,7 +45,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalBuscadorTiendasStpV;
 
-@SuppressWarnings("javadoc")
+
 public class FichaProducto extends GestorWebDriver {
     Pais españa = null;
     IdiomaPais castellano = null;
@@ -71,23 +71,23 @@ public class FichaProducto extends GestorWebDriver {
             this.castellano = this.españa.getListIdiomas().get(0);
         }
         
-        ThreadData.storeInThread(dCtxSh);
-        ThreadData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        TestCaseData.storeInThread(dCtxSh);
+        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 	
     @SuppressWarnings("unused")
     @AfterMethod (groups={"FichaProducto", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = ThreadData.getWebDriver();
+        WebDriver driver = TestCaseData.getWebDriver();
         super.quitWebDriver(driver, context);
     }		
 	
     @Test (
         groups={"FichaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
         description="[Usuario registrado] Se testean las features principales de una ficha con origen el buscador: añadir a la bolsa, selección color/talla, buscar en tienda, añadir a favoritos")
-    public void FIC001_FichaFromSearch_PrimaryFeatures_Reg(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
-        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
+    public void FIC001_FichaFromSearch_PrimaryFeatures_Reg() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
@@ -127,9 +127,9 @@ public class FichaProducto extends GestorWebDriver {
     @Test (
         groups={"FichaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
         description="[Usuario no registrado] Se testean las features secundarias de una ficha con origen el buscador: guía de tallas, carrusel imágenes, imagen central, panel de opciones")
-    public void FIC002_FichaFromSearch_SecondaryFeatures_NoReg(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
-        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
+    public void FIC002_FichaFromSearch_SecondaryFeatures_NoReg() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userRegistered = false;
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
@@ -179,9 +179,9 @@ public class FichaProducto extends GestorWebDriver {
     @Test (
         groups={"FichaProducto", "Canal:desktop_App:shop"}, alwaysRun=true, 
         description="[Usuario no registrado] Desde Corea/coreano, se testea una ficha con origen la Galería validando el panel KcSafety")
-    public void FIC003_FichaFromGalery_CheckKcSafety(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
-        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
+    public void FIC003_FichaFromGalery_CheckKcSafety() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userRegistered = false;
         Integer codCorea = Integer.valueOf(728);
         List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(Arrays.asList(codCorea)));
@@ -213,9 +213,9 @@ public class FichaProducto extends GestorWebDriver {
     @Test (
         groups={"FichaProducto", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, 
         alwaysRun=true, description="[Usario no registrado] Testeo ficha con artículo con color y tallas no disponibles")
-    public void FIC004_Articulo_NoStock_Noreg(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
-        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
+    public void FIC004_Articulo_NoStock_Noreg() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
         dCtxSh.userRegistered = false;
@@ -229,15 +229,15 @@ public class FichaProducto extends GestorWebDriver {
         
         //Step
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dFTest);
-        pageFichaStpV.selectColorAndTallaNoDisponible(articulo, dCtxSh.appE);
+        pageFichaStpV.selectColorAndTallaNoDisponible(articulo);
     }
     
     @Test (
         groups={"FichaProducto", "Canal:all_App:shop"}, 
         alwaysRun=true, description="[Usario no registrado] Testeo Personalización bordados")
-    public void FIC005_Articulo_Personalizable_Noreg(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
-        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
+    public void FIC005_Articulo_Personalizable_Noreg() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
         dCtxSh.userRegistered = false;

@@ -18,7 +18,7 @@ import com.mng.robotest.test80.mango.test.stpv.manto.PageSelTdaMantoStpV;
 
 import org.openqa.selenium.WebDriver;
 
-@SuppressWarnings("javadoc")
+
 public class ListMenusManto {
 	
     @SuppressWarnings("unused")

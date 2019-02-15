@@ -19,7 +19,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 
-@SuppressWarnings("javadoc")
+
 public class StepsDAO {
 
     public static String SQLSelectLastStepMethod = 
@@ -74,7 +74,7 @@ public class StepsDAO {
             insert.setDate(10, datosStep.getHoraInicio());
             insert.setDate(11, datosStep.getHoraFin());
             insert.setFloat(12, datosStep.getHoraFin().getTime() - datosStep.getHoraInicio().getTime());
-            insert.setInt(13, 0);
+            insert.setInt(13, datosStep.getNumValidations());
             insert.setInt(16, datosStep.getTypePage());
             insert.executeUpdate();
         } catch (SQLException ex) {

@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class SecBillpay extends WebdrvWrapp {
     static String XPathBlockBillpayDesktop = "//div[@class[contains(.,'billpayFormulario')]]";
     static String XPathBlockRechnungMobil = "//div[@class[contains(.,'billpayinvoice')] and @class[contains(.,'show')]]";

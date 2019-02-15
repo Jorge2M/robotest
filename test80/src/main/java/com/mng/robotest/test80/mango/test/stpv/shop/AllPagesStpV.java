@@ -6,9 +6,9 @@ import org.openqa.selenium.By;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.WebDriverArqUtils;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -20,7 +20,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter;
 import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
 
-@SuppressWarnings("javadoc")
 public class AllPagesStpV {
     
     public static void validacionesEstandar(boolean validaSEO, boolean validaJS, boolean validaImgBroken, 
@@ -146,7 +145,7 @@ public class AllPagesStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
     }
     
 

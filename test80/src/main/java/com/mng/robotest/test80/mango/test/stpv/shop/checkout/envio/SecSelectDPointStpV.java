@@ -2,15 +2,15 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDroppoints;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.SecSelectDPoint.TypeDeliveryPoint;
 
-@SuppressWarnings({"javadoc", "static-access"})
+@SuppressWarnings({"static-access"})
 public class SecSelectDPointStpV {
     
     public static DatosStep searchPoblacion(DataSearchDeliveryPoint dataSearchDp, DataFmwkTest dFTest) 
@@ -26,7 +26,7 @@ public class SecSelectDPointStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }        
+        finally { StepAspect.storeDataAfterStep(datosStep); }        
 
         //Validación-2
         int maxSecondsToWait = 5;
@@ -86,7 +86,7 @@ public class SecSelectDPointStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         String descripValidac = 
             "1) Queda seleccionado el Droppoint #" + position;
@@ -113,7 +113,7 @@ public class SecSelectDPointStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validación
         ModalDroppointsStpV.secConfirmDatos.validateIsVisible(channel, datosStep, dFTest);

@@ -2,13 +2,13 @@ package com.mng.robotest.test80.mango.test.stpv.shop.galeria;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.ModalArticleNotAvailable;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.ModalArticleNotAvailable.StateModal;
 
-@SuppressWarnings("javadoc")
+
 public class ModalArticleNotAvailableStpV {
     
     public static boolean validateState(StateModal stateModal, DatosStep datosStep, DataFmwkTest dFTest) {
@@ -40,7 +40,7 @@ public class ModalArticleNotAvailableStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         validateState(StateModal.notvisible, datosStep, dFTest);
     }

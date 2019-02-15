@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraOnline;
 import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageDetallePedido.DetallePedido;
 
-@SuppressWarnings("javadoc")
+
 public class PageDetallePedidoStpV {
 	PageDetallePedido pageDetalle;
 	
@@ -56,7 +56,7 @@ public class PageDetallePedidoStpV {
         finally { listVals.checkAndStoreValidations(descripValidac); }
     }
         
-    public void validateIsPageOk(DataPedido dataPedido, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) {
+    public void validateIsPageOk(DataPedido dataPedido, DatosStep datosStep, DataFmwkTest dFTest) {
         String codPedido = dataPedido.getCodpedido();
         String importeTotalManto = dataPedido.getImporteTotalManto();
         String codPais = dataPedido.getCodigoPais();
@@ -106,7 +106,7 @@ public class PageDetallePedidoStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         return datosStep;
     }

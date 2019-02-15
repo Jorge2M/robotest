@@ -7,10 +7,10 @@ import org.testng.ITestContext;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.NetTrafficMng;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 
-@SuppressWarnings("javadoc")
+
 public class DatosStep {
 	
 	public enum SaveWhen {
@@ -23,7 +23,9 @@ public class DatosStep {
 		}
 	}
 
+	private boolean isStateUpdated = false;
 	private int step_number = 0;
+	private int numValidations = 0;
 	private String descripcion; 
 	private String res_expected; 
 	private SaveWhen saveImagePage = SaveWhen.IfProblem;
@@ -34,6 +36,7 @@ public class DatosStep {
 	private Date hora_inicio; 
 	private Date hora_fin;
 	private State result_steps = State.Nok;
+	private State resultLastValidation = State.Ok;
 	private boolean excep_exists = true;
 	private ListResultValidation listResultValidations;
 	private String nameMethodWithFactory = "";
@@ -47,18 +50,26 @@ public class DatosStep {
         this.descripcion = c_descripcion;
         this.res_expected = c_res_expected;
         this.hora_inicio = new Date(System.currentTimeMillis());
-    	DatosStep maxDatosStep = ThreadData.getMaxDatosStep();
+    	DatosStep maxDatosStep = TestCaseData.getDatosStepForValidation();
     	if (maxDatosStep!=null) {
     		setStepNumber(maxDatosStep.getStepNumber() + 1);
     	}
     	else {
     		setStepNumber(1);
     	}
-        ThreadData.storeInThread(this);
+        TestCaseData.storeInThread(this);
     }
 
     public void setStepNumber (int c_step_number) { 
         this.step_number = c_step_number; 
+    }
+    
+    public void setNumValidations(int numValidations) {
+    	this.numValidations = numValidations;
+    }
+    
+    public int getNumValidations() {
+    	return this.numValidations;
     }
 
     public void setDescripcion(String c_descripcion) { 
@@ -104,6 +115,19 @@ public class DatosStep {
     
     public void setResultSteps(State c_result_steps) {
         this.result_steps = c_result_steps; 
+        this.isStateUpdated = true;
+    }
+    
+    public void setResultLastValidation(State resultLastValidation) {
+    	this.resultLastValidation = resultLastValidation;
+    }
+    
+    public State getResultLastValidation() {
+    	return this.resultLastValidation;
+    }
+    
+    public boolean isStateUpdated() {
+    	return this.isStateUpdated;
     }
 
     public void setExcepExists(boolean c_excep_exists) {

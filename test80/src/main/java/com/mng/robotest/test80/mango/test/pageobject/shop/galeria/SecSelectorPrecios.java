@@ -6,7 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 /**
  * Page Object correspondiente al selector de precios de Desktop
  * @author jorge.munoz

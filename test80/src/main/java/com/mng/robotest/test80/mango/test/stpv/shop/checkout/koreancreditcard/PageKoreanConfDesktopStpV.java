@@ -5,12 +5,13 @@ import org.apache.logging.log4j.Logger;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoreanConfDesktop;
 
-@SuppressWarnings("javadoc")
+
 public class PageKoreanConfDesktopStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
@@ -40,7 +41,7 @@ public class PageKoreanConfDesktopStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         return datosStep;
     }

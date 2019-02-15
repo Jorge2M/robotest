@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageRegistroSegunda extends WebdrvWrapp {
 
     private static final String XPathNewsletterTitle = "//div[@class[contains(.,'additionalData')]]//span[@class='info']";

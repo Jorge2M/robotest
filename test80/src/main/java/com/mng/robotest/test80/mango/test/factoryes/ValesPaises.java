@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
 
-@SuppressWarnings("javadoc")
+
 public class ValesPaises {
 
     List<ValePais> listaPaisesVales = new ArrayList<>();

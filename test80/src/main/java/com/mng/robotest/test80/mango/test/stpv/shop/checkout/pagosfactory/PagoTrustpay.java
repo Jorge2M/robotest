@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapper
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.trustpay.PageTrustPayResultStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.trustpay.PageTrustpaySelectBankStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoTrustpay extends PagoStpV {
 
     public PagoTrustpay(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

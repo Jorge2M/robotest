@@ -2,13 +2,13 @@ package com.mng.robotest.test80.mango.test.stpv.shop.identificacion;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageRecuperaPasswd;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PageRecuperaPasswdStpV {
     
     public static void isPage(DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
@@ -45,7 +45,7 @@ public class PageRecuperaPasswdStpV {
                                                                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         int maxSecondsToWait = 2;

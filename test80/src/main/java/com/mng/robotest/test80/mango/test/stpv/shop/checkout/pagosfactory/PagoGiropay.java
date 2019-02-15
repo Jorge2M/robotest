@@ -11,7 +11,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapper
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.giropay.PageGiropay1rstStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.giropay.PageGiropayInputDataTestStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoGiropay extends PagoStpV {
     
     public PagoGiropay(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

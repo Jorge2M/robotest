@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 
-@SuppressWarnings("javadoc")
+
 public class ListTopImgBKMenus {
 	
     @Factory

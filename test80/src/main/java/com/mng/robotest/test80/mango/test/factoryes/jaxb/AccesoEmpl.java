@@ -2,7 +2,6 @@ package com.mng.robotest.test80.mango.test.factoryes.jaxb;
 
 import javax.xml.bind.annotation.*;
 
-@SuppressWarnings("javadoc")
 public class AccesoEmpl {
 
     String tarjeta;

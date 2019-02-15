@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class SecProductDescrOld extends WebdrvWrapp {
 
     public enum TypeStatePanel {folded, unfolded, missing}

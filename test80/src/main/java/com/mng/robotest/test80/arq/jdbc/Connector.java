@@ -10,7 +10,7 @@ import org.sqlite.SQLiteConfig.LockingMode;
 
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 
-@SuppressWarnings("javadoc")
+
 public class Connector {
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException {

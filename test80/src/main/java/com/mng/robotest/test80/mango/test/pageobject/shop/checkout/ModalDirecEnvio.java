@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-@SuppressWarnings("javadoc")
+
 public class ModalDirecEnvio extends ModalDireccion {
 
     static String XPathFormModal = "//form[@class[contains(.,'customFormIdENVIO')]]";

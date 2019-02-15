@@ -11,7 +11,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class SecDetalleProductNew extends WebdrvWrapp {
 
     public enum ItemBreadcrumb {linea, grupo, galeria}

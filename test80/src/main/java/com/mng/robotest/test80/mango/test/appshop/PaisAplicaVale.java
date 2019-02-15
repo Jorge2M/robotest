@@ -8,7 +8,7 @@ import java.util.List;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
@@ -21,7 +21,7 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsS
 
 import org.openqa.selenium.WebDriver;
 
-@SuppressWarnings("javadoc")
+
 public class PaisAplicaVale extends GestorWebDriver {
 
     String baseUrl;
@@ -57,21 +57,21 @@ public class PaisAplicaVale extends GestorWebDriver {
     @Parameters({"brwsr-path", "urlBase", "masProductos"})
     public void login(String bpath, String urlAcceso, String masProductosI, ITestContext context, Method method) throws Exception {
         //Creamos el WebDriver con el que ejecutaremos el Test
-    	ThreadData.getAndStoreDataFmwk(bpath, urlAcceso, this.index_fact, this.dCtxSh.channel, context, method);    
+    	TestCaseData.getAndStoreDataFmwk(bpath, urlAcceso, this.index_fact, this.dCtxSh.channel, context, method);    
     }
 	
     @SuppressWarnings("unused")
     @AfterMethod (alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = ThreadData.getWebDriver();
+        WebDriver driver = TestCaseData.getWebDriver();
         super.quitWebDriver(driver, context);
     }	
 	
     @Test (groups={"Pagos", "shop-movil-web"}, alwaysRun=true, description="Compra usuario no registrado")
     @Parameters({"validaPasarelas", "validaPagos", "validaPedidosEnManto"})
-    public void CHK001_Compra_noReg(String validaPasarelasStr, String validaPagosStr, String validaPedidosEnMantoStr, 
-    								ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
+    public void CHK001_Compra_noReg(String validaPasarelasStr, String validaPagosStr, String validaPedidosEnMantoStr) 
+    throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
         CHK001_Compra_noReg_Impl(validaPasarelasStr, validaPagosStr, validaPedidosEnMantoStr, dFTest);
     }
 	

@@ -19,7 +19,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMiCuentaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMisComprasStpV;
 
 @Test
-@SuppressWarnings({"javadoc", "unused"})
+@SuppressWarnings({"unused"})
 public class ClassWithTCasesStub {
     Pais españa = null;
     IdiomaPais castellano = null;

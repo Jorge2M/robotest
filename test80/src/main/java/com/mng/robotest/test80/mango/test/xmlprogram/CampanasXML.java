@@ -15,7 +15,7 @@ import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.ParamsBean;
 
-@SuppressWarnings("javadoc")
+
 public class CampanasXML {
 
     /**

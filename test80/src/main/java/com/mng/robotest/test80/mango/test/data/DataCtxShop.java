@@ -6,7 +6,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
 
-@SuppressWarnings("javadoc")
+
 public class DataCtxShop implements Cloneable {
 
     public String urlAcceso = "";

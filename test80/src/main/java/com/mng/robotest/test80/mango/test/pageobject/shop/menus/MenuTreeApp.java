@@ -8,7 +8,7 @@ import java.util.Set;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 
-@SuppressWarnings("javadoc")
+
 public class MenuTreeApp {
 	private static final List<MenuTreeApp> cacheMenusForEachApp = new ArrayList<>();
 	AppEcom app;

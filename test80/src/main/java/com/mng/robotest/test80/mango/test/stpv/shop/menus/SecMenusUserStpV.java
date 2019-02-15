@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -29,7 +29,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV
  * @author jorge.munoz
  *
  */
-@SuppressWarnings({"javadoc", "static-access"})
+@SuppressWarnings({"static-access"})
 public class SecMenusUserStpV {
     
     public static DatosStep selectFavoritos(DataFavoritos dataFavoritos, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
@@ -42,7 +42,7 @@ public class SecMenusUserStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }           
+        finally { StepAspect.storeDataAfterStep(datosStep); }           
             
         //Validaciones
         PageFavoritosStpV.validaIsPageOK(dataFavoritos, dFTest);
@@ -62,7 +62,7 @@ public class SecMenusUserStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }           
+        finally { StepAspect.storeDataAfterStep(datosStep); }           
             
         //Validaciones
         PageRegistroIniStpV.validaIsPage(datosStep, dFTest);
@@ -83,7 +83,7 @@ public class SecMenusUserStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         int maxSecondsToWait = 3;
@@ -114,7 +114,7 @@ public class SecMenusUserStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         String descripValidac = 
@@ -144,7 +144,7 @@ public class SecMenusUserStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }		
+        finally { StepAspect.storeDataAfterStep(datosStep); }		
 		
         PageMiCuentaStpV.validateIsPage(datosStep, dFTest);
 	}
@@ -159,7 +159,7 @@ public class SecMenusUserStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest);}
+        finally { StepAspect.storeDataAfterStep(datosStep);}
 
         //Validaciones. 
         ModalCambioPaisStpV.validateIsVisible(datosStep, dFTest);

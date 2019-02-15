@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageMenusManto extends WebdrvWrapp {
 
 	static String iniXPathTitulo = "//td[@class='txt11B' and text()[contains(.,'";

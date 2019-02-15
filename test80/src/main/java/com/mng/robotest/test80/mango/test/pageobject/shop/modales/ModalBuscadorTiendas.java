@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class ModalBuscadorTiendas extends WebdrvWrapp {
 
     static String XPathModalContainer = "//div[@class[contains(.,'garment-finder-container')]]";

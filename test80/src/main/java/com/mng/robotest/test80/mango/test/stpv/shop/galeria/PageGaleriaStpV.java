@@ -8,9 +8,9 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -53,7 +53,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
-@SuppressWarnings("javadoc")
+
 public class PageGaleriaStpV {
 
     public static SecSelectorPreciosStpV secSelectorPrecios;
@@ -97,7 +97,7 @@ public class PageGaleriaStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel, dFTest);
@@ -128,7 +128,7 @@ public class PageGaleriaStpV {
                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dFTest);
@@ -155,7 +155,7 @@ public class PageGaleriaStpV {
                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
             
         //Validaciones
         int maxSecondsToWait = 1;
@@ -189,7 +189,7 @@ public class PageGaleriaStpV {
                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         boolean isVisibleAvisame = ModalArticleNotAvailableStpV.validateState(StateModal.notvisible, datosStep, dFTest);
@@ -230,7 +230,7 @@ public class PageGaleriaStpV {
                               
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones.
         String descripValidac = 
@@ -346,7 +346,7 @@ public class PageGaleriaStpV {
                
            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
        }
-       finally { fmwkTest.grabStep(datosStep, dFTest); }         
+       finally { StepAspect.storeDataAfterStep(datosStep); }         
        
        //Validaciones.
        String descripValidac = 
@@ -413,7 +413,7 @@ public class PageGaleriaStpV {
            
            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
        }
-       finally { fmwkTest.grabStep(datosStep, dFTest); }
+       finally { StepAspect.storeDataAfterStep(datosStep); }
        
        //Validaciones
        int maxSecondsWait = 2;
@@ -473,7 +473,7 @@ public class PageGaleriaStpV {
            
            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
        }
-       finally { fmwkTest.grabStep(datosStep, dFTest); }         
+       finally { StepAspect.storeDataAfterStep(datosStep); }         
        
        //Validaciones.
        String descripValidac = 
@@ -535,7 +535,7 @@ public class PageGaleriaStpV {
            
            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
        }
-       finally { fmwkTest.grabStep(datosStep, dFTest); }
+       finally { StepAspect.storeDataAfterStep(datosStep); }
        
        //Validaciones.
        String srcImg2oSlider = "";
@@ -595,7 +595,7 @@ public class PageGaleriaStpV {
                
            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
        }
-       finally { fmwkTest.grabStep(datosStep, dFTest); }         
+       finally { StepAspect.storeDataAfterStep(datosStep); }         
 
        //Validaciones.
        int maxSecondsToWait = 3;
@@ -723,7 +723,7 @@ public class PageGaleriaStpV {
                
            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
        }
-       finally { fmwkTest.grabStep(datosStep, dFTest); }       
+       finally { StepAspect.storeDataAfterStep(datosStep); }       
        
        //Validaciones
        String descripValidac = 
@@ -754,7 +754,7 @@ public class PageGaleriaStpV {
                
            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
        }
-       finally { fmwkTest.grabStep(datosStep, dFTest); }         
+       finally { StepAspect.storeDataAfterStep(datosStep); }         
 
        //Validaciones.
        String descripValidac = 
@@ -856,7 +856,7 @@ public class PageGaleriaStpV {
 	               
 	           datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 	       }
-	       finally { fmwkTest.grabStep(datosStep, dFTest); }     
+	       finally { StepAspect.storeDataAfterStep(datosStep); }     
 	       
 	       validaArtEnContenido(datosStep);
 	   }
@@ -1119,7 +1119,7 @@ public class PageGaleriaStpV {
                
            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
        }
-       finally { fmwkTest.grabStep(datosStep, dFTest); }         
+       finally { StepAspect.storeDataAfterStep(datosStep); }         
 
        //Validaciones
        int maxSecondsToWait = 1;

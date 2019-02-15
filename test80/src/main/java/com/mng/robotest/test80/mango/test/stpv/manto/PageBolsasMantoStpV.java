@@ -19,7 +19,7 @@ public class PageBolsasMantoStpV {
      * Se valida que está apareciendo una línea de bolsa con los datos del pedido
      * @return si existe el link correspondiente al código de pedido
      */
-    @SuppressWarnings("javadoc")
+    
     public static boolean validaLineaBolsa(DataPedido dataPedido, AppEcom appE, DatosStep datosStep, DataFmwkTest dFTest) {
 //    	//TODO tratamiento específico temporal para el entorno de CI con Adyen -> Level.Info 
 //    	//(hasta que dispongamos de la CI que despliega Adyen y el resto de artefactos satelitales)

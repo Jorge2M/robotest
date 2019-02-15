@@ -14,7 +14,7 @@ import com.mng.robotest.test80.arq.utils.mail.beans.AttachMail;
 
 import java.util.*;
 
-@SuppressWarnings("javadoc")
+
 public class MailClient {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
         

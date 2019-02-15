@@ -5,7 +5,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-@SuppressWarnings("javadoc")
+
 public class PageKoCardAdyen extends WebdrvWrapp {
 
     private final static String XPathIconKoreanCreditCard = "//input[@name='brandName']";

@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@SuppressWarnings("javadoc")
+
 public class DataFoto {
     private String srcRegexGeneral = ".*?rcs/pics/static/T(.\\d?)/fotos(|/pasarela|/outfit)/S(.\\d?)/(|A\\d/)(.\\d+)_(\\w{2})_*(.*|.?).(jpg|png).*";
     private String srcRegexPropios = ".*?rcs/pics/static/T(.\\d?)/colv3/(.\\d+)_(.\\d+)_*(.*|.?).(jpg|png).*";

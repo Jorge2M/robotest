@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.factoryes.NodoStatus;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class gestorDatosStatusJSON {
 
     JSONObject dataStatusNode = null;

@@ -2,13 +2,13 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecKrediKarti;
 
-@SuppressWarnings("javadoc")
+
 public class SecKrediKartiStpV {
 
     public static DatosStep inputNumTarjeta(String numTarjeta, Channel channel, DataFmwkTest dFTest) {
@@ -21,7 +21,7 @@ public class SecKrediKartiStpV {
                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
                 
         //Validaciones
         int maxSecondsWait = 5;
@@ -54,7 +54,7 @@ public class SecKrediKartiStpV {
                                                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         return datosStep;
     }

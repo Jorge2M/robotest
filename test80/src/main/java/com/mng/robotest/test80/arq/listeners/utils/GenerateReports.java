@@ -35,7 +35,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest.TypeEvidencia;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 
-@SuppressWarnings("javadoc")
+
 public class GenerateReports extends EmailableReporter {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 

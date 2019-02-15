@@ -25,7 +25,7 @@ import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings({"javadoc", "static-access"})
+@SuppressWarnings({"static-access"})
 public class AccesoNavigations {
 
 	public static void goToInitURL(String urlInit, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {

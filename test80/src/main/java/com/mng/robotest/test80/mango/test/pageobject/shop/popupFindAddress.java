@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 /**
  * Implementa la API para el pupup que aparece cuando seleccionamos el botón "Find Address" desde la página de introducción de datos del usuario (actualmente sólo existe en Corea del Sur)
  * @author jorge.munoz

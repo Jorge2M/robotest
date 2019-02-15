@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-@SuppressWarnings("javadoc")
+
 public class SecStoreCredit extends WebdrvWrapp {
 
     static String XPathStoreCreditBlock = "//div[@class='customer-balance']";

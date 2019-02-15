@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mng.robotest.test80.Test80mng.TypeAccessFmwk;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.utils;
@@ -30,7 +31,6 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion;
@@ -53,7 +53,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.favoritos.PageFavoritosStpV;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
 
-@SuppressWarnings("javadoc")
+
 public class PagoNavigationsStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
@@ -86,7 +86,7 @@ public class PagoNavigationsStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones analítica (sólo para firefox y NetAnalysis)
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
@@ -191,11 +191,11 @@ public class PagoNavigationsStpV {
         HashMap<String, String> datosRegistro = Page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, validaCharNoLatinos, dFTest);
         dCtxPago.setDatosRegistro(datosRegistro);
         if (validaCharNoLatinos) {
-            datosStep = Page2IdentCheckoutStpV.clickContinuar(dCtxSh.userRegistered,true/*validaDirecCharNoLatinos*/, dataBag, dCtxSh.channel, dCtxSh.appE, dFTest);
+            datosStep = Page2IdentCheckoutStpV.clickContinuar(dCtxSh.userRegistered,true/*validaDirecCharNoLatinos*/, dataBag, dCtxSh.channel, dFTest);
             datosRegistro = Page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, false/*validaCharNoLatinos*/, dFTest);
         }
         
-        datosStep = Page2IdentCheckoutStpV.clickContinuar(dCtxSh.userRegistered, false/*validaDirecCharNoLatinos*/, dataBag, dCtxSh.channel, dCtxSh.appE, dFTest);
+        datosStep = Page2IdentCheckoutStpV.clickContinuar(dCtxSh.userRegistered, false/*validaDirecCharNoLatinos*/, dataBag, dCtxSh.channel, dFTest);
         
         //Validaciones para analytics (sólo para firefox y NetAnalysis)
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
@@ -229,7 +229,7 @@ public class PagoNavigationsStpV {
                     if (testMisCompras(dCtxPago, dCtxSh))
                         PageResultPagoStpV.selectLinkMisComprasAndValidateCompra(dCtxPago, dCtxSh, dFTest);
                     else
-                        PageResultPagoStpV.selectLinkPedidoAndValidatePedido(dataPedido, dCtxSh.appE, dFTest);
+                        PageResultPagoStpV.selectLinkPedidoAndValidatePedido(dataPedido, dFTest);
                 }
             }
             else
@@ -263,7 +263,7 @@ public class PagoNavigationsStpV {
     /**
      * Proceso que vuelve a la página de inicio y realiza un proceso mínimo hasta la página de resumen-checkout
      */
-    public static void fluxQuickInitToCheckout(DataCtxShop dCtxSh, DataCtxPago dCtxPago, ArticuloScreen articuloDisp, DataFmwkTest dFTest)
+    public static void fluxQuickInitToCheckout(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest)
     throws Exception {
         DataPedido dataPedido = dCtxPago.getDataPedido();
         DataBag dataBag = dataPedido.getDataBag();
@@ -275,7 +275,7 @@ public class PagoNavigationsStpV {
                                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Step. Cambiamos de país 
         //(en Chrome, cuando existe paralelización en ocasiones se pierden las cookies cuando se completa un pago con pasarela externa)
@@ -370,8 +370,6 @@ public class PagoNavigationsStpV {
      */
     public static void validaPasarelasPagoPais(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) 
     throws Exception {
-        DataBag dataBag = dCtxPago.getDataPedido().getDataBag();
-        ArticuloScreen articuloDisp = dataBag.getArticulo(dataBag.getListArticulos().size() - 1);
         List<Pago> listPagos = dCtxSh.pais.getListPagosTest(dCtxSh.appE, dCtxPago.getFTCkout().isEmpl);
         for (int i=0; i<listPagos.size(); i++) {
             Pago pago = listPagos.get(i);
@@ -384,7 +382,7 @@ public class PagoNavigationsStpV {
                     if (pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0 &&
                         !PageCheckoutWrapper.isArticulos(dCtxSh.channel, dFTest.driver))
                         //Proceso que vuelve a la página de inicio y realiza un proceso mínimo hasta la página de resumen-checkout
-                        fluxQuickInitToCheckout(dCtxSh, dCtxPago, articuloDisp, dFTest);
+                        fluxQuickInitToCheckout(dCtxSh, dCtxPago, dFTest);
                 }
                                         
                 checkPasarelaPago(dCtxPago, dCtxSh, dFTest);

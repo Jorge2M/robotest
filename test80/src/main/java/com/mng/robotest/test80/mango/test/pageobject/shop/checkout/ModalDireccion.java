@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion.DataDirType;
 
-@SuppressWarnings("javadoc")
+
 public abstract class ModalDireccion extends WebdrvWrapp {
 
     static String XPathInputNif = "//input[@id[contains(.,'cfDni')]]";

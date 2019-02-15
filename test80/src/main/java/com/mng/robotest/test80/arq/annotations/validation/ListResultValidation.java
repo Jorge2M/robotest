@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 
-@SuppressWarnings("javadoc")
+
 public class ListResultValidation {
 	private final List<ResultValidation> listResultValidations;
 	private State stateValidation = State.Nok;
@@ -25,7 +25,7 @@ public class ListResultValidation {
 	}
 	
 	public static ListResultValidation getNew() {
-		DatosStep datosStep = ThreadData.getMaxDatosStep();
+		DatosStep datosStep = TestCaseData.getDatosStepForValidation();
 		return (getNew(datosStep));
 	}
 	
@@ -89,7 +89,9 @@ public class ListResultValidation {
     	}
     	
     	datosStep.setResultSteps(stateValidation);
+    	datosStep.setResultLastValidation(State.getMoreCritic(stateValidation, datosStep.getResultSteps()));
     	datosStep.setListResultValidations(this);
+    	datosStep.setNumValidations(datosStep.getNumValidations() + 1);
     }
     
     private boolean isStepFinishedWithException() {
@@ -127,6 +129,6 @@ public class ListResultValidation {
 	}
     
     public void storeGroupValidations(String descripcionValidations) {
-    	fmwkTest.grabStepValidation(datosStep, descripcionValidations, ThreadData.getdFTest());
+    	fmwkTest.grabStepValidation(datosStep, descripcionValidations, TestCaseData.getdFTest());
     }
 }

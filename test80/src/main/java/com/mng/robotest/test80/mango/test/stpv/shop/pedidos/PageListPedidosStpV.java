@@ -2,12 +2,12 @@ package com.mng.robotest.test80.mango.test.stpv.shop.pedidos;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageListPedidos;
 
-@SuppressWarnings("javadoc")
+
 public class PageListPedidosStpV {
 
     public static void validateIsPage(String codigoPedido, DatosStep datosStep, DataFmwkTest dFTest) {
@@ -38,7 +38,7 @@ public class PageListPedidosStpV {
                                                                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         return datosStep;
     }

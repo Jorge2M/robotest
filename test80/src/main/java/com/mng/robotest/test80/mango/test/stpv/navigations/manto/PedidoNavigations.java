@@ -28,7 +28,7 @@ import com.mng.robotest.test80.mango.test.stpv.manto.pedido.PageGenerarPedidoStp
 import com.mng.robotest.test80.mango.test.stpv.manto.pedido.PagePedidosMantoStpV;
 import static com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageGenerarPedido.EstadoPedido.*;
 
-@SuppressWarnings("javadoc")
+
 public class PedidoNavigations {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 

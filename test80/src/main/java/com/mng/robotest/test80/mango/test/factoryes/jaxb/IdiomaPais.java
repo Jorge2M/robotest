@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.*;
 
 import com.mng.robotest.test80.mango.test.data.CodigoIdioma;
 
-@SuppressWarnings("javadoc")
+
 public class IdiomaPais {
 
     String acceso;

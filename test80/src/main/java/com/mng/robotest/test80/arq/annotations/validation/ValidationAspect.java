@@ -7,7 +7,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
-@SuppressWarnings("javadoc")
+
 @Aspect
 public class ValidationAspect {
 	

@@ -6,7 +6,7 @@ import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 
-@SuppressWarnings("javadoc")
+
 public class Menu2onLevel implements MenuLateralDesktop {
 
     private KeyMenu2onLevel key;

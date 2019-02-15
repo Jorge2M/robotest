@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum;
@@ -37,7 +37,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
-@SuppressWarnings("javadoc")
+
 public class MiCuenta extends GestorWebDriver {
     Pais españa = null;
     IdiomaPais castellano = null;
@@ -91,15 +91,15 @@ public class MiCuenta extends GestorWebDriver {
         }
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        ThreadData.storeInThread(dCtxSh);
-        ThreadData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
+        TestCaseData.storeInThread(dCtxSh);
+        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
     }
 
 
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Micuenta", "Canal:all_App:all", "SupportsFactoryCountrys"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = ThreadData.getWebDriver();
+        WebDriver driver = TestCaseData.getWebDriver();
         super.quitWebDriver(driver, context);
     }       
 
@@ -107,9 +107,10 @@ public class MiCuenta extends GestorWebDriver {
         groups={"Micuenta", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true, 
         description="Verificar opciones de 'mi cuenta'")
     @Parameters({"userConDevolucionPeroSoloEnPRO", "passwordUserConDevolucion"})
-    public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion, ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
-        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
+    public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion) 
+    throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userConnected = userConDevolucionPeroNoEnPRO;
         dCtxSh.passwordUser = passwordUserConDevolucion;
             
@@ -145,9 +146,9 @@ public class MiCuenta extends GestorWebDriver {
         groups={"Micuenta", "Canal:all_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
         description="Consulta de mis compras con un usuario con datos a nivel de Tienda y Online")
     @Parameters({"userConComprasPeroSoloOnlineEnPRO", "passwordUserConCompras"})
-    public void MIC002_CheckConsultaMisCompras(String userConCompras, String passwordUserConCompras, ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
-        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
+    public void MIC002_CheckConsultaMisCompras(String userConCompras, String passwordUserConCompras) throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userConnected = userConCompras;
         dCtxSh.passwordUser = passwordUserConCompras;
         dCtxSh.userRegistered = true;

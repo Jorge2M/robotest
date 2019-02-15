@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.sofort;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSofort1rst;
 
@@ -13,7 +13,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSo
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class PageSofortIconosBancoStpV {
 	public static void validateIsPage(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
         int maxSecondsToWait = 3;
@@ -40,7 +40,7 @@ public class PageSofortIconosBancoStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
         PageSofort2onStpV.validaIsPage(datosStep, dFTest);

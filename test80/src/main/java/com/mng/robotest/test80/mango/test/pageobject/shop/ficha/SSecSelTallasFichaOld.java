@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class SSecSelTallasFichaOld extends WebdrvWrapp {
     
     static String XPathSelectTalla = "//select[@id[contains(.,'productFormSelect')]]";

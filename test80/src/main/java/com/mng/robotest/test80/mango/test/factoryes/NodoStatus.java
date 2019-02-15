@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.getdata.json.gestorDatosStatusJSON;
 import com.mng.robotest.test80.mango.test.pageobject.utils.NombreYRef;
 import com.mng.robotest.test80.mango.test.pageobject.utils.NombreYRefList;
 
-@SuppressWarnings("javadoc")
+
 public class NodoStatus {
 
     String ip;

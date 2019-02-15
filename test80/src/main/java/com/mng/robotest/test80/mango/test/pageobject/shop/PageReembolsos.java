@@ -7,7 +7,7 @@ import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-@SuppressWarnings("javadoc")
+
 /**
  * Define las interacciones vía XPATH con la página de Reembolsos 
  * @author jorge.munoz

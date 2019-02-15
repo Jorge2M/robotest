@@ -5,9 +5,9 @@ import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.Descuento;
@@ -23,10 +23,10 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopChe
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 
-@SuppressWarnings("javadoc")
+
 public class Page1DktopCheckoutStpV {
     
-    public static void validateIsPageOK(DataBag dataBag, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
+    public static void validateIsPageOK(DataBag dataBag, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
         //Validaciones
         int maxSecondsToWait = 5;
@@ -104,10 +104,6 @@ public class Page1DktopCheckoutStpV {
         AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
     }
     
-    public static void inputListOfValesWithSameArticles(List<ValePais> listVales, DataBag dataBag, AppEcom app, DataFmwkTest dFTest) {
-    	//,,,
-    }
-    
     /**
      * Introduce un vale de descuento activo y comprueba el resultado
      */
@@ -125,7 +121,7 @@ public class Page1DktopCheckoutStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }         
+        finally { StepAspect.storeDataAfterStep(datosStep); }         
 
         //Validaciones
         String validacion2 = "";
@@ -200,7 +196,7 @@ public class Page1DktopCheckoutStpV {
                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
                         
         //Validaciones
         int maxSecondsToWait = 1;
@@ -232,7 +228,7 @@ public class Page1DktopCheckoutStpV {
                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
                         
         //Validaciones.
         String descripValidac = 

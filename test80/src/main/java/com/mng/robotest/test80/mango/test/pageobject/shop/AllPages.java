@@ -14,7 +14,6 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
 public class AllPages extends WebdrvWrapp {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     

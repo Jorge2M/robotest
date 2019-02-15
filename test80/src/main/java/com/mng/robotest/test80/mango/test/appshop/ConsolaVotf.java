@@ -10,12 +10,12 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.stpv.votfcons.ConsolaVotfStpV;
 
-@SuppressWarnings("javadoc")
+
 public class ConsolaVotf extends GestorWebDriver {
 
     String prodDisponible1 = "";
@@ -23,20 +23,20 @@ public class ConsolaVotf extends GestorWebDriver {
     @BeforeMethod
     @Parameters({ "brwsr-path", "urlBase", "prodDisponible1" })
     public void login(final String bpath, final String urlAcceso, final ITestContext context, final Method method, String prodDisponible1I) throws Exception {
-    	ThreadData.getAndStoreDataFmwk(bpath, urlAcceso, "", Channel.desktop, context, method);
+    	TestCaseData.getAndStoreDataFmwk(bpath, urlAcceso, "", Channel.desktop, context, method);
         this.prodDisponible1 = prodDisponible1I;
     }
 
     @SuppressWarnings("unused")
     @AfterMethod(alwaysRun = true)
     public void logout(final ITestContext context, final Method method) throws Exception {
-        WebDriver driver = ThreadData.getWebDriver();
+        WebDriver driver = TestCaseData.getWebDriver();
         super.quitWebDriver(driver, context);
     }
 
     @Test (description="[PRE] Generar pedido mediante la consola de VOTF")
-    public void VOFT001_GenerarPedido(final ITestContext context, final Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
+    public void VOFT001_GenerarPedido(final ITestContext context) throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
     	
 		//Step. Acceso a la página inicial de VOTF
 		String paginaIniVOTF = (String) context.getAttribute("appPath");

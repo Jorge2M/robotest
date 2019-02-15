@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 
-@SuppressWarnings("javadoc")
+
 public class SecKrediKartiCheckout {
 
     static String XPathFormularioTarjeta = "//div[@class='msuFormularioTarjeta']";

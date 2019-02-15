@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-@SuppressWarnings("javadoc")
+
 public class ArticuloScreen {
 	
     String referencia = "";

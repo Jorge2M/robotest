@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageMisDatos extends WebdrvWrapp {
     static String XPathIsPage = "//div[@class='myDetails']";
     static String XPathTitleOk = "//h2[text()[contains(.,'Mis datos')]]";

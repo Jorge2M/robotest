@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageRedirectPasarelaLoading extends WebdrvWrapp {
 
 public static String XPathIsPage = "//div[@class[contains(.,'payment-redirect')]]/div[@class='loading' or @class='logo']";

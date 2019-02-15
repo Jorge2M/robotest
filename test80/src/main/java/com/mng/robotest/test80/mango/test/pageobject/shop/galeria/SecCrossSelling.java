@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class SecCrossSelling extends WebdrvWrapp {
     static String XPathSection = "//section[@class='cross-selling']";
     

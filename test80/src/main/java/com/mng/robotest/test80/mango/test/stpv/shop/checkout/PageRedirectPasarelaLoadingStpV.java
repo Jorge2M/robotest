@@ -4,10 +4,10 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageRedirectPasarelaLoading;
 
-@SuppressWarnings("javadoc")
+
 public class PageRedirectPasarelaLoadingStpV {
     
     public static void validateDisappeared(DatosStep datosStep, DataFmwkTest dFTest) { 

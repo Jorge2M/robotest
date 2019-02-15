@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageRecADomic extends WebdrvWrapp {
 
     static String XPathIsPageRecogida ="//h1[text()[contains(.,'RECOGIDA A DOMICILIO')]]";

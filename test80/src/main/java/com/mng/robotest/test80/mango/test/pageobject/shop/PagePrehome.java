@@ -23,7 +23,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAf
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
 import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
 
-@SuppressWarnings("javadoc")
+
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la página de "GALERÍA DE PRODUCTOS"
  * @author jorge.munoz

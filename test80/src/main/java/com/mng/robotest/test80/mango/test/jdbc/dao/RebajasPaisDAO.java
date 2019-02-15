@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-@SuppressWarnings("javadoc")
+
 public class RebajasPaisDAO {
     public static String SQLSelectRebajasPais = 
         "SELECT REBAJAS " +

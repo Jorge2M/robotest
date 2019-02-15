@@ -5,7 +5,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 
-@SuppressWarnings("javadoc")
+
 public class DataCtxPago {
 
     FlagsTestCkout FTCkout;

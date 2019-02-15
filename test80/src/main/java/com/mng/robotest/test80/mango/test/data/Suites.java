@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.data;
 
-@SuppressWarnings("javadoc")
+
 public enum Suites {
     SmokeTest(8),
     SmokeManto(8),

@@ -11,7 +11,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.mng.robotest.test80.mango.test.jdbc.dao.ParamsDAO;
 
-@SuppressWarnings("javadoc")
 @RunWith(PowerMockRunner.class)
 @PowerMockIgnore("javax.management.*")
 @PrepareForTest(ParamsDAO.class)

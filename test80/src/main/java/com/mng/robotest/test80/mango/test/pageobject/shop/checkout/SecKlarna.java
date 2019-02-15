@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class SecKlarna extends WebdrvWrapp {
 
     //Parte del error que aparece cuando se introduce un teléfono incorrecto desde Desktop

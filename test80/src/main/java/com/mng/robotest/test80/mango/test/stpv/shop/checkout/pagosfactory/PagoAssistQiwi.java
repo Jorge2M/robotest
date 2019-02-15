@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapper
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.assistqiwi.PageAssistQiwi1rstStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.assistqiwi.PageQiwiInputTlfnStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoAssistQiwi extends PagoStpV {
 
     public PagoAssistQiwi(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

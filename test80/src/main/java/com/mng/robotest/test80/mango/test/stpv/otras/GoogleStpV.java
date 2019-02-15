@@ -2,14 +2,14 @@ package com.mng.robotest.test80.mango.test.stpv.otras;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.otras.PageGoogle;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
 
-@SuppressWarnings("javadoc")
+
 public class GoogleStpV {
 
     public static void accessGoogleAndSearchMango(DataFmwkTest dFTest) throws Exception {
@@ -23,7 +23,7 @@ public class GoogleStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }           
+        finally { StepAspect.storeDataAfterStep(datosStep); }           
     
         //Validaciones
         int maxSecondsWait = 5;
@@ -55,7 +55,7 @@ public class GoogleStpV {
     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
     
         //Validaciones.
         String descripValidac = 

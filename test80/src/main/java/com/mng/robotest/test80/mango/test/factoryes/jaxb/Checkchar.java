@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.*;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class Checkchar {
 
     String check;

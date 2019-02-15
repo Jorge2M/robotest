@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavoritos;
 
-@SuppressWarnings("javadoc")
+
 public class SecMenusUserMobil extends WebdrvWrapp {
 
     static String XPathCapaMenus = "//ul[@class[contains(.,'menu-section-links')]]";

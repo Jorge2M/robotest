@@ -17,7 +17,6 @@ import com.mng.robotest.test80.mango.test.xmlprogram.commonsXML;
 
 import org.testng.xml.XmlTest;
 
-@SuppressWarnings("javadoc")
 public class TestNGxmlStub {
 
     public final String classWithTestAnnotations = "com.mng.robotest.test80.arq.utils.filter.resources.ClassWithTCasesStub";

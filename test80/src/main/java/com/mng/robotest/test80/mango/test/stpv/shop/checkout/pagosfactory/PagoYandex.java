@@ -11,7 +11,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.yandex.PageYandex1r
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.yandex.PageYandexMoneyStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.yandex.PageYandexPayingByCodeStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoYandex extends PagoStpV {
     
     public PagoYandex(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageMultibancoEnProgreso extends WebdrvWrapp {
     
     static String XPathCabeceraEnProgreso = "//h2[text()[contains(.,'Pagamento em progresso')]]";

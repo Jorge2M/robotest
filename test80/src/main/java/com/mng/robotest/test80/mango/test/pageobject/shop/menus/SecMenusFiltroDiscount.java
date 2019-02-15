@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class SecMenusFiltroDiscount extends WebdrvWrapp {
     public enum TypeMenuDiscount {UpTo50, UpTo60, Between50y60, off60, From60, From70}
     static String XPathDivMenus = "//nav[@id='descuentoFilter']";

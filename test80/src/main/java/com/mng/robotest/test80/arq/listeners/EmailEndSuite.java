@@ -19,7 +19,7 @@ import com.mng.robotest.test80.arq.utils.mail.MailClient;
 import com.mng.robotest.test80.arq.utils.mail.beans.AttachMail;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 
-@SuppressWarnings("javadoc")
+
 public class EmailEndSuite {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     final String from = "Robotest QA<jorge.munoz.sge@mango.com>";

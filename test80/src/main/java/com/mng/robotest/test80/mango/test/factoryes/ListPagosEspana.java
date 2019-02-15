@@ -13,7 +13,7 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 
 import org.testng.ITestContext;
 
-@SuppressWarnings("javadoc")
+
 public class ListPagosEspana {
 	
 	Pais espana = null;
@@ -28,7 +28,6 @@ public class ListPagosEspana {
     boolean twoArticles = true;
     boolean anulPedido = true;
 	
-    @SuppressWarnings("unused")
     @Factory
     @Test (
         groups={"Compra", "Canal:all_App:all"}, alwaysRun=true, priority=1, 

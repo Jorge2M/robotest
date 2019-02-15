@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class SecFooter extends WebdrvWrapp {
 
     public static String XPathCapaShop = "//div[@id='nav-footer']";
@@ -121,12 +121,12 @@ public class SecFooter extends WebdrvWrapp {
         return (isElementVisible(driver, By.xpath(xpath)));
     }    
     
-    public static void clickLink(FooterLink footerType, AppEcom app, WebDriver driver) throws Exception {
+    public static void clickLink(FooterLink footerType, WebDriver driver) throws Exception {
     	clickAndWaitLoad(driver, By.xpath(footerType.getXPathRelativeCapa()));
     }
     
-    public static String clickLinkAndGetWindowFatherHandle(FooterLink footerType, AppEcom app, WebDriver driver) throws Exception {
-    	clickLink(footerType, app, driver);
+    public static String clickLinkAndGetWindowFatherHandle(FooterLink footerType, WebDriver driver) throws Exception {
+    	clickLink(footerType, driver);
     	String windowFatherHandle = driver.getWindowHandle();
 	    if (footerType.pageInNewTab) {
 	        switchToAnotherWindow(driver, windowFatherHandle);

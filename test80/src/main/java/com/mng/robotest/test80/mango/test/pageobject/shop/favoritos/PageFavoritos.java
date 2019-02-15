@@ -19,7 +19,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 
-@SuppressWarnings("javadoc")
+
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la sección de "Wishlist"
  * @author jorge.munoz

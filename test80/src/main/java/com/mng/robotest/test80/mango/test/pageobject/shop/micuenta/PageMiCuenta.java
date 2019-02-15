@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageMiCuenta extends WebdrvWrapp {
     static String XPathLinkMisDatos = "//a[@href[contains(.,'account/personalinfo')]]";
     static String XPathLinkMisPedidos = "//a[@href[contains(.,'account/orders')]]";

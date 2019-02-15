@@ -2,13 +2,13 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.assistqiwi;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi.PageQiwiConfirm;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi.PageQiwiInputTlfn;
 
-@SuppressWarnings("javadoc")
+
 public class PageQiwiInputTlfnStpV {
                  
     public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) { 
@@ -37,7 +37,7 @@ public class PageQiwiInputTlfnStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
             
         //En caso de que aparezca la página de confirmación...
         if (PageQiwiConfirm.isPage(dFTest.driver)) {
@@ -49,7 +49,7 @@ public class PageQiwiInputTlfnStpV {
                             
                 datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
             }
-            finally { fmwkTest.grabStep(datosStep, dFTest); }            
+            finally { StepAspect.storeDataAfterStep(datosStep); }            
         }
         
         return datosStep;

@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.stpv.votf;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -13,7 +13,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.votf.PageSelectLineaVOTF;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PageSelectLineaVOTFStpV {
 
     public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) { 
@@ -60,7 +60,7 @@ public class PageSelectLineaVOTFStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         SectionBarraSupVOTFStpV.validate(pais.getAccesoVOTF().getUsuario(), datosStep, dFTest);

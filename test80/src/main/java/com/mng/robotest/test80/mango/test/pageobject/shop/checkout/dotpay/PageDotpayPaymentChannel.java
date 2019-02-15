@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageDotpayPaymentChannel extends WebdrvWrapp {
 
     static String XPathSectionPaymentChannels = "//section[@id='payment-channels']";

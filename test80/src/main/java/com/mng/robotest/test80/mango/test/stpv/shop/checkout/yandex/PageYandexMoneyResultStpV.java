@@ -6,7 +6,7 @@ import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandexMoneyResult;
 
-@SuppressWarnings("javadoc")
+
 public class PageYandexMoneyResultStpV {
     
     public static void validateIsResultOk(DatosStep datosStep, DataFmwkTest dFTest) {

@@ -6,7 +6,7 @@ import com.mng.robotest.test80.arq.utils.selenium.plugins.chrome.PluginChrome.ty
 import com.mng.robotest.test80.arq.utils.selenium.plugins.firefox.PluginFirefox;
 import com.mng.robotest.test80.arq.utils.selenium.plugins.firefox.PluginFirefox.typePluginFirefox;
 
-@SuppressWarnings("javadoc")
+
 public class PluginBrowserFactory {
     
     public static PluginChrome makePluginChrome(typePluginChrome typePlugin) {
@@ -22,7 +22,8 @@ public class PluginBrowserFactory {
         return pluginMaked;
     }
     
-    public static PluginFirefox makePluginFirefox(typePluginFirefox typePlugin) {
+    @SuppressWarnings("unused")
+	public static PluginFirefox makePluginFirefox(typePluginFirefox typePlugin) {
         PluginFirefox extensionMaked = null; 
         //switch (typePlugin) {
         //case HARExportTrigger:

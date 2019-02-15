@@ -13,7 +13,7 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 
 import org.testng.ITestContext;
 
-@SuppressWarnings("javadoc")
+
 public class ListRegistrosXPais {
     @SuppressWarnings("unused")
     @Factory

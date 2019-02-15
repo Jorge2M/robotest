@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.arq.utils.otras;
 import java.util.regex.Pattern;
 
-@SuppressWarnings("javadoc")
+
 public class Constantes {
 
     public static final String XMLPaises = "/inicio_paises_v3.xml";

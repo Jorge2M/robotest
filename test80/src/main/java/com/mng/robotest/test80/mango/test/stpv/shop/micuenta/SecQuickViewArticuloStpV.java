@@ -7,7 +7,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompras;
 
-@SuppressWarnings("javadoc")
+
 public class SecQuickViewArticuloStpV {
     
     @SuppressWarnings("static-access")

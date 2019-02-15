@@ -11,7 +11,7 @@ import javax.net.ssl.HttpsURLConnection;
 import com.google.common.base.Splitter;
 import com.mng.robotest.test80.mango.test.utils.ManageConnectionHTTP;
 
-@SuppressWarnings("javadoc")
+
 public class CallBack {
     String reportTSuiteURL = "";
     String callBackMethod = null;

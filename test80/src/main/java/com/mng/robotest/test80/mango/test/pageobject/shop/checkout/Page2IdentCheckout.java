@@ -20,7 +20,7 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.popupFindAddress;
 
-@SuppressWarnings("javadoc")
+
 public class Page2IdentCheckout extends WebdrvWrapp {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     

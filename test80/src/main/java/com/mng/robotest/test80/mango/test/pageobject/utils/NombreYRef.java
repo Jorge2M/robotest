@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.pageobject.utils;
 
-@SuppressWarnings("javadoc")
+
 public class NombreYRef {
 
     String nombre = "";

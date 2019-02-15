@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRegistry;
  * 
  */
 @XmlRegistry
-@SuppressWarnings("javadoc")
+
 public class ObjectFactory {
 
 

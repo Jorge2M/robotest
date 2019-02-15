@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock;
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
 
-@SuppressWarnings("javadoc")
+
 public class UtilsTestMango {
     /**
      * @return si se ha de crear un test para un país concreto

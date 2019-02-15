@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PagePedidos;
 
 
-@SuppressWarnings("javadoc")
+
 public class PageDetalleCliente extends WebdrvWrapp {
 
 

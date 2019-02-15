@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageD3DJPTestSelectOption extends WebdrvWrapp {
     
     public enum  OptionD3D {Card_Default, Successful, User_Authentication_Failed, PARes_Validation_failed, Signature_error, Technical_Error_in_3D_system}

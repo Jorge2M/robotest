@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
 import java.text.Normalizer;
 import java.util.regex.Pattern;
 
-@SuppressWarnings("javadoc")
+
 public class GestorWebDriver extends fmwkTest {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     static Object startupSync = new Object();
@@ -58,7 +58,7 @@ public class GestorWebDriver extends fmwkTest {
             boolean netAnalysis = isParamNetTrafficActive(context);
             driver = gestorWd.getWebDrvFree(canalWebDriver, moreDataWdrv);
             if (driver == null) {
-                driver = CreateWebDriver.getWebDriver(canalWebDriver, channel, netAnalysis, context, method);
+                driver = CreateWebDriver.getWebDriver(canalWebDriver, channel, netAnalysis, context);
                 
                 //Almacenamos el WebDriver creado en el gestor marcándolo con estado 'busy' y especificando los parámetros que definen sus características
                 gestorWd.storeWebDriver(driver, StoredWebDrv.stateWd.busy, canalWebDriver, moreDataWdrv);

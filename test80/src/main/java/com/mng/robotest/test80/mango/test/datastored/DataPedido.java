@@ -6,7 +6,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.DataDeliveryPoint;
 
-@SuppressWarnings("javadoc")
+
 public class DataPedido {
     String emailCheckout;
     DataBag dataBag = new DataBag();

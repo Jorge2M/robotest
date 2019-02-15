@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoKlarna extends PagoStpV {
     
     public PagoKlarna(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

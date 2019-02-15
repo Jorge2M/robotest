@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapper
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.assist.PageAssist1rstStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.assist.PageAssistLastStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoAssist extends PagoStpV {
     
     public PagoAssist(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

@@ -7,7 +7,7 @@ import org.testng.ITestContext;
 
 import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
 
-@SuppressWarnings("javadoc")
+
 public class DataFmwkTest {
 
     public WebDriver driver;

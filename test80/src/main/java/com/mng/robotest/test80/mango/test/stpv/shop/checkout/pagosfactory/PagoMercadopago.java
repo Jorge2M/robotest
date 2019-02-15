@@ -13,7 +13,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.mercadopago.PageMer
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.mercadopago.PageMercpagoDatosTrjStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.mercadopago.PageMercpagoLoginStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoMercadopago extends PagoStpV {
 
     public PagoMercadopago(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

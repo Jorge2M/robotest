@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class ModalAvisoCambioPais extends WebdrvWrapp {
 
     static String XPathModal = "//div[@class[contains(.,'modal-alert-change-country')]]";

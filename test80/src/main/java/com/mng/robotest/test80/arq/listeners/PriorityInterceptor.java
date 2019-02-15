@@ -11,7 +11,7 @@ import org.testng.ITestContext;
 
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 
-@SuppressWarnings("javadoc")
+
 public class PriorityInterceptor implements IMethodInterceptor {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 

@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDes
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.bloqueMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 
-@SuppressWarnings({"javadoc", "static-access"})
+@SuppressWarnings({"static-access"})
 public class SecCrossSellingStpV {
 
     public static void validaIsCorrect(LineaType lineaType, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 

@@ -55,7 +55,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "sitemap"
 })
 @XmlRootElement(name = "sitemapindex")
-@SuppressWarnings("javadoc")
+
 public class Sitemapindex {
 
     protected List<Sitemapindex.Sitemap> sitemap;

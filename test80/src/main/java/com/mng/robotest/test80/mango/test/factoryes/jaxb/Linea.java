@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.*;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 
-@SuppressWarnings("javadoc")
+
 public class Linea {
 
     public static enum LineaType { 

@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PagePostfRedirect extends WebdrvWrapp {
 
     static String XPathButtonOK = "//form/input[@type='button' and @value[contains(.,'OK')]]"; 

@@ -10,7 +10,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -20,7 +20,7 @@ import com.mng.robotest.test80.mango.test.stpv.manto.PageLoginMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageMenusMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageSelTdaMantoStpV;
 
-@SuppressWarnings("javadoc")
+
 public class Menus  extends GestorWebDriver {
 
 	DataMantoAccess dMantoAcc;
@@ -47,21 +47,21 @@ public class Menus  extends GestorWebDriver {
 		this.dMantoAcc.userManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramUsrmanto);
 		this.dMantoAcc.passManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramPasmanto);
 		this.dMantoAcc.appE = AppEcom.shop;
-		ThreadData.getAndStoreDataFmwk(bpath, urlBase, this.index_fact, Channel.desktop, ctx, method);
+		TestCaseData.getAndStoreDataFmwk(bpath, urlBase, this.index_fact, Channel.desktop, ctx, method);
 	}
 
 	@SuppressWarnings("unused")
 	@AfterMethod (groups={"Menus", "Canal:desktop_App:all", "SupportsFactoryCountrys"}, alwaysRun = true)
 	public void logout(ITestContext context, Method method) throws Exception {
-		WebDriver driver = ThreadData.getWebDriver();
+		WebDriver driver = TestCaseData.getWebDriver();
 		super.quitWebDriver(driver, context);
 	}
 
 	@Test(
 		groups={"Menus", "Canal:desktop_App:all"},
 		description="Consulta de menús")
-	public void MAN005_ConsultaMenus(ITestContext context, Method method) throws Exception {
-		DataFmwkTest dFTest = ThreadData.getdFTest();
+	public void MAN005_ConsultaMenus() throws Exception {
+		DataFmwkTest dFTest = TestCaseData.getdFTest();
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)

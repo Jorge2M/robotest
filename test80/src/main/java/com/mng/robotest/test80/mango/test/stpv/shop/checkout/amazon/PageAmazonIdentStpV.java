@@ -10,7 +10,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.amazon.PageAmazonIdent;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-@SuppressWarnings("javadoc")
+
 public class PageAmazonIdentStpV {
     
     public static void validateIsPage(Pais pais, Channel channel, DataPedido dataPedido, DatosStep datosStep, DataFmwkTest dFTest) {

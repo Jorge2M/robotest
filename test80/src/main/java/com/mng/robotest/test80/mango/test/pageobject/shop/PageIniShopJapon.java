@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 /**
  * Clase para operar con la página inicial de la shop de Japón vía API de driver
  * @author jorge.munoz

@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapper
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.d3d.PageD3DJPTestSelectOptionStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.d3d.PageD3DLoginStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoTarjetaIntegrada extends PagoStpV {
 
     public PagoTarjetaIntegrada(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

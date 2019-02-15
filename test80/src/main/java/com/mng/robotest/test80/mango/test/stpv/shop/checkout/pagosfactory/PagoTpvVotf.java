@@ -7,7 +7,7 @@ import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoTpvVotf extends PagoStpV {
     
     public PagoTpvVotf(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {
@@ -18,7 +18,7 @@ public class PagoTpvVotf extends PagoStpV {
     @Override
     public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
         String nombrePago = this.dCtxPago.getDataPedido().getPago().getNombre(this.dCtxSh.channel);
-        DatosStep datosStep = PageCheckoutWrapperStpV.noClickIconoVotf(nombrePago, this.dFTest);
+        DatosStep datosStep = PageCheckoutWrapperStpV.noClickIconoVotf(nombrePago);
         if (execPay)
             datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
         

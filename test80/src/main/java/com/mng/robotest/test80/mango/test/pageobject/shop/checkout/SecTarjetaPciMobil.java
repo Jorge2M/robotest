@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class SecTarjetaPciMobil extends WebdrvWrapp implements SecTarjetaPci {
 
     static String XPathBlock = "//div[@data-form-card-content='form']";

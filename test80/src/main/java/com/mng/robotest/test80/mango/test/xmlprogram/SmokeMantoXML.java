@@ -17,7 +17,7 @@ import com.mng.robotest.test80.ParamsBean;
 import com.mng.robotest.test80.arq.utils.filter.FilterTNGxmlTRun;
 import com.mng.robotest.test80.arq.utils.filter.TestMethod;
 
-@SuppressWarnings("javadoc")
+
 public class SmokeMantoXML {
 
     ParamsBean params = null;

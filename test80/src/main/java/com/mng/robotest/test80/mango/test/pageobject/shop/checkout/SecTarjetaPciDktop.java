@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class SecTarjetaPciDktop extends WebdrvWrapp implements SecTarjetaPci {
 
     static String XPathBlock = "//span[@id[contains(.,'panelTarjetasForm')]]";

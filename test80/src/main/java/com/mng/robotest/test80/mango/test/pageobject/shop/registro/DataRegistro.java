@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.registro;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro.DataRegType;
 
-@SuppressWarnings("javadoc")
+
 public class DataRegistro {
     public DataRegType dataRegType;
     public String data;

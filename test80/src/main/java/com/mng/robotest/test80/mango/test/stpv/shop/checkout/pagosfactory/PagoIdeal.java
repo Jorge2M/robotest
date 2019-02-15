@@ -10,7 +10,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapper
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.ideal.PageIdealSimuladorStpV;
 
 
-@SuppressWarnings("javadoc")
+
 public class PagoIdeal extends PagoStpV {
     
     public PagoIdeal(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

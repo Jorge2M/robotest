@@ -12,7 +12,7 @@ import org.testng.ITestContext;
 import com.mng.robotest.test80.arq.jdbc.Connector;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 
-@SuppressWarnings("javadoc")
+
 public class CorreosDAO {
     
     public static String SQLInsertCorreoEnviado = 

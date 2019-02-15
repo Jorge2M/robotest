@@ -2,14 +2,14 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestionarClientes;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestionarClientes.TypeThirdButton;
 
-@SuppressWarnings("javadoc")
+
 public class PageGestionarClientesStpV {
 
 
@@ -51,7 +51,7 @@ public class PageGestionarClientesStpV {
 
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		}
-		finally { fmwkTest.grabStep(datosStep, dFTest); }        
+		finally { StepAspect.storeDataAfterStep(datosStep); }        
 
 		int maxSecondsToWait = 1;
 		String descripValidac = 
@@ -92,7 +92,7 @@ public class PageGestionarClientesStpV {
 
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		}
-		finally { fmwkTest.grabStep(datosStep, dFTest); }        
+		finally { StepAspect.storeDataAfterStep(datosStep); }        
 
 		int maxSecondsToWait = 2;
 		String descripValidac = 
@@ -127,7 +127,7 @@ public class PageGestionarClientesStpV {
 
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		}
-		finally { fmwkTest.grabStep(datosStep, dFTest); }        
+		finally { StepAspect.storeDataAfterStep(datosStep); }        
 
 		String descripValidac = 
 			"1) Aparece el id del cliente \""+ idCliente +"\"<br>" +

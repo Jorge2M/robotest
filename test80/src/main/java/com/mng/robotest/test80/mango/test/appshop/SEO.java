@@ -10,13 +10,13 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.stpv.otras.BrowserStpV;
 
-@SuppressWarnings("javadoc")
+
 public class SEO extends GestorWebDriver {
 
     boolean isMobile;
@@ -37,23 +37,23 @@ public class SEO extends GestorWebDriver {
         dCtxSh.urlAcceso = urlAcceso;
 
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        ThreadData.storeInThread(dCtxSh);        
-        ThreadData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        TestCaseData.storeInThread(dCtxSh);        
+        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 
     @SuppressWarnings("unused")
     @AfterMethod(groups = { "Otras", "Canal:all_App:all" }, alwaysRun = true)
     public void logout(final ITestContext context, final Method method) throws Exception {
-        WebDriver driver = ThreadData.getWebDriver();
+        WebDriver driver = TestCaseData.getWebDriver();
         super.quitWebDriver(driver, context);
     }
 
     @Test(
         groups = { "Otras", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, 
         description="Comprobar existencia y contenido del fichero robots.txt")
-    public void SEO001_check_RobotsSitemap(final ITestContext context, final Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
-        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
+    public void SEO001_check_RobotsSitemap() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         
         //Este test sólo aplica al entorno productivo
         if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest))

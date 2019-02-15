@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.DataDeliveryPoint;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.DataSearchDeliveryPoint;
 
-@SuppressWarnings("javadoc")
+
 public class SecSelectDPoint extends WebdrvWrapp {
     
     public static enum TypeDeliveryPoint {tienda, droppoint, any}

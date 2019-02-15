@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
 
-@SuppressWarnings("javadoc")
+
 public class AllPagesSEO {
 
     /**

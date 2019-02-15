@@ -10,7 +10,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class ModNoStock extends WebdrvWrapp {
 
     static String XPathModalNoStock = "//div[@class='modalNoStock show']";

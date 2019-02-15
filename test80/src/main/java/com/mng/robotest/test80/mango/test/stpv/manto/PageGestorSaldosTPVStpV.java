@@ -2,13 +2,13 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorSaldosTPV;
 
-@SuppressWarnings("javadoc")
+
 public class PageGestorSaldosTPVStpV {
 
 
@@ -42,7 +42,7 @@ public class PageGestorSaldosTPVStpV {
 
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		}
-		finally { fmwkTest.grabStep(datosStep, dFTest); }
+		finally { StepAspect.storeDataAfterStep(datosStep); }
 
 		String descripValidac = 
 			"1) Aparece la tabla de saldos<br>" +
@@ -74,7 +74,7 @@ public class PageGestorSaldosTPVStpV {
 
 			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
 		}
-		finally { fmwkTest.grabStep(datosStep, dFTest); }
+		finally { StepAspect.storeDataAfterStep(datosStep); }
 
 		String descripValidac = 
 			"1) Aparece el mensaje \"La tpv seleccionada no existe\"";

@@ -10,7 +10,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings("javadoc")
+
 public class ModCompartirNew extends WebdrvWrapp {
 
     //El valor es el que figura en el data-ga del ancor

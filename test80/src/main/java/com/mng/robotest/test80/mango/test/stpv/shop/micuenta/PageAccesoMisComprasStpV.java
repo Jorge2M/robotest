@@ -2,16 +2,15 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras.TypeBlock;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PageAccesoMisComprasStpV {
     
     public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
@@ -48,7 +47,7 @@ public class PageAccesoMisComprasStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }        
+        finally { StepAspect.storeDataAfterStep(datosStep); }        
         
         //Validation
         int maxSecondsToWait = 1;
@@ -77,7 +76,7 @@ public class PageAccesoMisComprasStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }        
+        finally { StepAspect.storeDataAfterStep(datosStep); }        
         
         //Validation
         PageMisComprasStpV.validateIsPage(datosStep, dFTest);
@@ -85,7 +84,7 @@ public class PageAccesoMisComprasStpV {
         return datosStep;
     }
     
-    public static DatosStep buscarPedidoForNoRegistrado(DataPedido dataPedido, AppEcom app, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep buscarPedidoForNoRegistrado(DataPedido dataPedido, DataFmwkTest dFTest) throws Exception {
         //Step.
         String usuario = dataPedido.getEmailCheckout();
         DatosStep datosStep = new DatosStep     (
@@ -97,11 +96,11 @@ public class PageAccesoMisComprasStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }        
+        finally { StepAspect.storeDataAfterStep(datosStep); }        
         
         //Validation
         PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(dFTest.driver);
-        pageDetPedidoStpV.validateIsPageOk(dataPedido, app, datosStep, dFTest);
+        pageDetPedidoStpV.validateIsPageOk(dataPedido, datosStep, dFTest);
         
         return datosStep;        
     }

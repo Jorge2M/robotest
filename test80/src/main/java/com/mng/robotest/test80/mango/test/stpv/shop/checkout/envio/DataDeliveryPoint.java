@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.SecSelectDPoint.TypeDeliveryPoint;
 
-@SuppressWarnings("javadoc")
+
 public class DataDeliveryPoint {
     TypeDeliveryPoint typeDeliveryPoint;
     String codigo;

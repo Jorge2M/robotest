@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.generic.beans;
 
-@SuppressWarnings("javadoc")
+
 public class Version {
     
     String codigo;

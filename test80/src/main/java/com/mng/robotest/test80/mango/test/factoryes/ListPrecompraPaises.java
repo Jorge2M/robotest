@@ -19,7 +19,7 @@ import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 import org.testng.ITestContext;
 
-@SuppressWarnings("javadoc")
+
 public class ListPrecompraPaises {
 	
 	Collection<Integer> Pais5SHOPDAY = new ArrayList<>();

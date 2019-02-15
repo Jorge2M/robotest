@@ -11,7 +11,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2IdentCheckout;
 
-@SuppressWarnings("javadoc")
+
 public class PageRegistroDirec extends WebdrvWrapp {
 
     private static String XPathDivError = "//div[@class='errorValidation']";

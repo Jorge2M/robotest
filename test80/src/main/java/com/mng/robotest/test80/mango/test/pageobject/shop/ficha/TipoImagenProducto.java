@@ -19,7 +19,7 @@ import java.util.List;
  * @author rmore
  * 
  */
-@SuppressWarnings("javadoc")
+
 public enum TipoImagenProducto implements Serializable {
 
     /**

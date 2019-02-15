@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageAmexResult extends WebdrvWrapp {
 
     static String XPathSectionOK = "//div[@class[contains(.,'code ok')]]";

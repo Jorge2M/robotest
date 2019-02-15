@@ -14,7 +14,7 @@ import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 
-public class ThreadData {
+public class TestCaseData {
     static ThreadLocal<DataCtxShop> dCtxShInThread = new ThreadLocal<>();
     static ThreadLocal<DataFmwkTest> dFTestInThread = new ThreadLocal<>();
     static ThreadLocal<Queue<DatosStep>> datosStepStack = new ThreadLocal<>();
@@ -32,18 +32,22 @@ public class ThreadData {
     	return (getdFTest().driver);
     }
     
-    public static DatosStep pollDatosStep() {
+    public static DatosStep pollDatosStepForStep() {
     	Queue<DatosStep> datosStepStackTmp = datosStepStack.get();
     	return (datosStepStackTmp.poll());
     }
     
-    public static DatosStep peekDatosStep() {
+    public static DatosStep peekDatosStepForStep() {
     	Queue<DatosStep> datosStepStackTmp = datosStepStack.get();
     	if (datosStepStackTmp!=null && !datosStepStackTmp.isEmpty()) {
     		return (datosStepStackTmp.peek());
     	}
     	
     	return null;
+    }
+    
+    public static DatosStep getDatosStepForValidation() {
+    	return (maxDatosStep.get());
     }
    
     public static void storeInThread(DataCtxShop dCtxShop, DataFmwkTest dFTest) {
@@ -77,8 +81,5 @@ public class ThreadData {
 		DataFmwkTest dFTest = new DataFmwkTest(driver, TypeDriver.valueOf(bpath), method, context);
 		storeInThread(dFTest);
     }
-    
-    public static DatosStep getMaxDatosStep() {
-    	return (maxDatosStep.get());
-    }
+
 }

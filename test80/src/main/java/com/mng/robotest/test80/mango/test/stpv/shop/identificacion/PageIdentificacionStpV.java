@@ -2,15 +2,15 @@ package com.mng.robotest.test80.mango.test.stpv.shop.identificacion;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PageIdentificacionStpV {
 
     public static DatosStep inicioSesionDatosKO(String usrExistente, String password, Channel channel, AppEcom appE, DataFmwkTest dFTest) throws Exception {
@@ -23,7 +23,7 @@ public class PageIdentificacionStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
         String descripValidac = 
@@ -56,7 +56,7 @@ public class PageIdentificacionStpV {
                                                                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }           
+        finally { StepAspect.storeDataAfterStep(datosStep); }           
 
         //Validaciones
         PageRecuperaPasswdStpV.isPage(datosStep, dFTest);

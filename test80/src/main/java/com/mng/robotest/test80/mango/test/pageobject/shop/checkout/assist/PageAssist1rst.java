@@ -11,7 +11,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 /**
  * Se trata de un objeto que intenta englobar todas las páginas de pasarelas diversas que permiten la introducción de datos de tarjetas
  * @author jorge.munoz

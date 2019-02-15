@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.data.Suites;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 
-@SuppressWarnings("javadoc")
+
 public class ParamsBean {
 
     String SuiteName = "";

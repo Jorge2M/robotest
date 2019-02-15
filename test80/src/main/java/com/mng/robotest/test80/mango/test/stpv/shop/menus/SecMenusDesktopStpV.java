@@ -7,9 +7,9 @@ import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -48,7 +48,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
 
-@SuppressWarnings({"javadoc", "static-access"})
+@SuppressWarnings({"static-access"})
 public class SecMenusDesktopStpV {
 
     public static SecMenusUserStpV secMenusUser;
@@ -68,7 +68,7 @@ public class SecMenusDesktopStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, datosStep, dFTest);
@@ -87,7 +87,7 @@ public class SecMenusDesktopStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }           
+        finally { StepAspect.storeDataAfterStep(datosStep); }           
             
         //Validaciones
         SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, datosStep, dFTest);
@@ -107,7 +107,7 @@ public class SecMenusDesktopStpV {
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }           
+        finally { StepAspect.storeDataAfterStep(datosStep); }           
             
         //Validaciones
         SecMenusWrapperStpV.validaSelecMenu(menu2onLevel, dCtxSh, datosStep, dFTest);
@@ -136,7 +136,6 @@ public class SecMenusDesktopStpV {
     /**
      * Validaciones de selección de un menú de 1er nivel (superior o lateral) (las específicas de Desktop)
      */
-    @SuppressWarnings("static-access")
     public static void validationsSelecMenuEspecificDesktop(MenuLateralDesktop menu, Channel channel, AppEcom app, 
     														DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, dFTest);
@@ -244,7 +243,7 @@ public class SecMenusDesktopStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         validaPaginaResultMenu(menu1rstLevel, channel, app, datosStep, dFTest);
@@ -277,7 +276,7 @@ public class SecMenusDesktopStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok); 
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
     
         //Validaciones
         if (linea.getType()!=LineaType.rebajas) {
@@ -332,7 +331,7 @@ public class SecMenusDesktopStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones. Aparece la galería de nuevo correcta
         PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);
@@ -399,7 +398,7 @@ public class SecMenusDesktopStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }            
+        finally { StepAspect.storeDataAfterStep(datosStep); }            
         
         //Validaciones
         validaSelecLinea(datosStep, lineaType, null/*sublineaType*/, dCtxSh, dFTest);
@@ -423,7 +422,7 @@ public class SecMenusDesktopStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
         validaSelecLinea(datosStep, lineaType, sublineaType, dCtxSh, dFTest);
@@ -492,7 +491,7 @@ public class SecMenusDesktopStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
         int numPestanyas_C;
@@ -552,7 +551,7 @@ public class SecMenusDesktopStpV {
                 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);
@@ -605,7 +604,7 @@ public class SecMenusDesktopStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
     	Menu1rstLevel menu1erNivel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.he, null, "zapatos"));
@@ -638,7 +637,7 @@ public class SecMenusDesktopStpV {
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
         DataFichaArt datosArticulo = new DataFichaArt(articulo.getReference(), "");

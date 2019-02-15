@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais.LayoutPago;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
 
-@SuppressWarnings("javadoc")
+
 /**
  * PageObject asociado a la página-2 del checkout de móvil ("Datos de Pago" con los métodos de pago)
  * @author jorge.munoz

@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageConsultaIdEans extends WebdrvWrapp {
     
 	static String XPathTituloPagina = "//form[@id='formTempl']//td[text()[contains(.,'s / EANS')]]";

@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageResultPagoTpv;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-@SuppressWarnings("javadoc")
+
 public class PageResultPagoTpvStpV {
     
     public static void validateIsPageOk(DataPedido dataPedido, String codPais, DatosStep datosStep, DataFmwkTest dFTest) {

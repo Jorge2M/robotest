@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.arq.utils.mail.beans;
 
-@SuppressWarnings("javadoc")
+
 public class AttachMail {
     String path;
     String nameInMail;

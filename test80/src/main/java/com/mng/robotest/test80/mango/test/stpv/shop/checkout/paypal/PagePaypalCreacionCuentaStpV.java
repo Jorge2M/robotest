@@ -1,12 +1,12 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.paypal;
 
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal.PagePaypalCreacionCuenta;
 
-@SuppressWarnings("javadoc")
+
 public class PagePaypalCreacionCuentaStpV {
     
     public static DatosStep clickButtonIniciarSesion(DataFmwkTest dFTest) throws Exception {
@@ -20,7 +20,7 @@ public class PagePaypalCreacionCuentaStpV {
                             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
         PagePaypalLoginStpV.validateIsPageUntil(10/*maxSecondsToWait*/, datosStep, dFTest);

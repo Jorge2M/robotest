@@ -5,7 +5,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
 
-@SuppressWarnings("javadoc")
+
 public class FactoryPagos {
     
     /**

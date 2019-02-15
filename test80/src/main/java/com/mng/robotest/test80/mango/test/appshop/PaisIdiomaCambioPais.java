@@ -4,7 +4,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
@@ -14,7 +14,7 @@ import org.openqa.selenium.*;
 
 import java.lang.reflect.Method;
 
-@SuppressWarnings("javadoc")
+
 public class PaisIdiomaCambioPais extends GestorWebDriver /*Funcionalidades gen√©ricas propias de MANGO*/ {
 
     String baseUrl;
@@ -38,19 +38,19 @@ public class PaisIdiomaCambioPais extends GestorWebDriver /*Funcionalidades gen√
     @BeforeMethod
     @Parameters({"brwsr-path","urlBase"})
     public void login(String bpath, String urlAcceso, ITestContext context, Method method) throws Exception {
-    	ThreadData.getAndStoreDataFmwk(bpath, urlAcceso, this.index_fact, this.dCtxSh.channel, context, method);
+    	TestCaseData.getAndStoreDataFmwk(bpath, urlAcceso, this.index_fact, this.dCtxSh.channel, context, method);
     }
 	
     @SuppressWarnings("unused")
     @AfterMethod (alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = ThreadData.getWebDriver();
+        WebDriver driver = TestCaseData.getWebDriver();
         super.quitWebDriver(driver, context);
     }	
 	
     @Test
-    public void CAM001_PR_CambioPais(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
+    public void CAM001_PR_CambioPais() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
         AccesoStpV.accesoPRYCambioPais(this.dCtxSh, this.paisDestino, this.idiomaDestino, dFTest);
     }
 }

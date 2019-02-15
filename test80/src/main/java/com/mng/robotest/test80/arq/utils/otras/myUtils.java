@@ -3,7 +3,7 @@ package com.mng.robotest.test80.arq.utils.otras;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-@SuppressWarnings("javadoc")
+
 public class myUtils {
 	
     /**

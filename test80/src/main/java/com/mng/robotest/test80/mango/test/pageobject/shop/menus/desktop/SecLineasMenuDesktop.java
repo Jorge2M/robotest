@@ -58,7 +58,7 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
     	return XPathImagesSublineaWithTags.replace(TagIdLinea, lineaId.name()).replace(TagIdSublinea, sublineaType.toString());
     }
     
-    public static String getXPathSublineaLink(LineaType lineaType, SublineaNinosType sublineaType, AppEcom app) {
+    public static String getXPathSublineaLink(SublineaNinosType sublineaType, AppEcom app) {
         String idSublineaEnDom = sublineaType.getId(app);
     	return (XPathSublineaLinkWithTag.replace(TagIdSublinea, idSublineaEnDom));
     }
@@ -143,7 +143,7 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
     	return (isElementVisibleUntil(driver, By.xpath(xpathImg), maxSecondsToWait));
     }
     
-    public static void clickImgSublineaIfVisible(LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, WebDriver driver) 
+    public static void clickImgSublineaIfVisible(LineaType lineaType, SublineaNinosType sublineaType, WebDriver driver) 
     throws Exception {
     	int maxSecondsToWait = 1;
         if (isVisibleImgSublineaUntil(lineaType, sublineaType, maxSecondsToWait, driver)) {
@@ -186,8 +186,8 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
 
     public static void selectSublinea(LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, WebDriver driver) throws Exception {
     	hoverLinea(lineaType, app, driver);
-       	clickImgSublineaIfVisible(lineaType, sublineaType, app, driver);
-        String xpathLinkSublinea = getXPathSublineaLink(lineaType, sublineaType, app);
+       	clickImgSublineaIfVisible(lineaType, sublineaType, driver);
+        String xpathLinkSublinea = getXPathSublineaLink(sublineaType, app);
         
         //Esperamos que esté visible la sublínea y realizamos un Hover
         isElementVisibleUntil(driver, By.xpath(xpathLinkSublinea), 2);

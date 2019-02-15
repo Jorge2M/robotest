@@ -28,7 +28,7 @@ import com.mng.robotest.test80.mango.test.jdbc.dao.ProductCacheDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@SuppressWarnings("javadoc")
+
 public class InvokeListener extends TestListenerAdapter implements ISuiteListener {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 

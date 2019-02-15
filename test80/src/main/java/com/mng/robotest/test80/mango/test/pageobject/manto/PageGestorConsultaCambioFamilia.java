@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageGestorConsultaCambioFamilia extends WebdrvWrapp {
 
     public static String titulo = "Consulta y cambio de familia";

@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -24,7 +24,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
-@SuppressWarnings("javadoc")
+
 public class Buscador extends GestorWebDriver {
 
     Pais españa = null;
@@ -62,14 +62,14 @@ public class Buscador extends GestorWebDriver {
         dCtxSh.pais = this.españa;
         dCtxSh.idioma = this.castellano;
         
-        ThreadData.storeInThread(dCtxSh);
-        ThreadData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        TestCaseData.storeInThread(dCtxSh);
+        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Buscador", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = ThreadData.getWebDriver();
+        WebDriver driver = TestCaseData.getWebDriver();
         super.quitWebDriver(driver, context);
     }       
 
@@ -77,10 +77,10 @@ public class Buscador extends GestorWebDriver {
         groups={"Buscador", "Canal:all_App:all"}, alwaysRun=true, 
         description="[Usuario no registrado] Verificar existencia e inexistencia de productos y categorías en el buscador de artículos")
     @Parameters({"categoriaProdExistente", "catProdInexistente"})
-    public void BUS001_Buscador_NoReg(String categoriaProdExistente, String catProdInexistente, ITestContext context, Method method) 
+    public void BUS001_Buscador_NoReg(String categoriaProdExistente, String catProdInexistente) 
     throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
-        DataCtxShop dCtxSh = ThreadData.getdCtxSh();
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userRegistered = false;
 
         DatosStep datosStep = AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);

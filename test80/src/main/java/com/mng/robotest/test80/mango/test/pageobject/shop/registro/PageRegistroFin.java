@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageRegistroFin extends WebdrvWrapp {
 
     private static final String xpathButtonIrShopping = "//input[@type='submit' and @value='Ir de shopping']";

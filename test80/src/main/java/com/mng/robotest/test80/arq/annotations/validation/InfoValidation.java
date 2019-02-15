@@ -6,7 +6,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 
 import com.mng.robotest.test80.arq.annotations.MatcherWithMethodParams;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 
 public class InfoValidation {
@@ -50,8 +50,8 @@ public class InfoValidation {
     		}
     	}
     	
-    	if (ThreadData.getMaxDatosStep()!=null) {
-    		return (ThreadData.getMaxDatosStep());
+    	if (TestCaseData.getDatosStepForValidation()!=null) {
+    		return (TestCaseData.getDatosStepForValidation());
     	}
     	
     	throw (new RuntimeException("A parameter of Type DatosStep is mandatory in method with @Validation annotation"));

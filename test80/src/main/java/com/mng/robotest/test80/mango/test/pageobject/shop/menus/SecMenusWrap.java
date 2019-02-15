@@ -19,7 +19,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenus
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil.TypeLocator;
 
-@SuppressWarnings({"javadoc", "static-access"}) 
+@SuppressWarnings({"static-access"}) 
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la sección de "Menús" (de Desktop y Movil)
  * @author jorge.munoz
@@ -73,7 +73,6 @@ public class SecMenusWrap {
     /**
      * Función que ejecuta la identificación del usuario. Introduce las credenciales del usuario y seleccióna el botón de submit
      */
-    @SuppressWarnings("static-access")
 	public static void closeSessionIfUserLogged(Channel channel, AppEcom app, WebDriver driver) throws Exception {
         if (channel==Channel.movil_web) {
         	if (SecCabeceraMobil.getNew(app, driver).isVisible(Icono.MiCuenta))

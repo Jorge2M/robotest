@@ -3,8 +3,6 @@ package com.mng.robotest.test80.mango.test.appmanto;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
@@ -13,7 +11,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.ThreadData;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -37,7 +35,7 @@ import com.mng.robotest.test80.mango.test.stpv.manto.SecFiltrosMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.SecFiltrosMantoStpV.TypeSearch;
 import com.mng.robotest.test80.mango.test.stpv.manto.pedido.PagePedidosMantoStpV;
 
-@SuppressWarnings("javadoc")
+
 public class Manto extends GestorWebDriver {
 
 	DataMantoAccess dMantoAcc;
@@ -58,21 +56,21 @@ public class Manto extends GestorWebDriver {
 		this.dMantoAcc.userManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramUsrmanto);
 		this.dMantoAcc.passManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramPasmanto);
 		this.dMantoAcc.appE = AppEcom.shop;
-		ThreadData.getAndStoreDataFmwk(bpath, urlBase, "", Channel.desktop, ctx, method);
+		TestCaseData.getAndStoreDataFmwk(bpath, urlBase, "", Channel.desktop, ctx, method);
 	}
 
 	@SuppressWarnings("unused")
 	@AfterMethod (groups={"Manto", "Canal:desktop_App:all", "SupportsFactoryCountrys"}, alwaysRun = true)
 	public void logout(ITestContext context, Method method) throws Exception {
-		WebDriver driver = ThreadData.getWebDriver();
+		WebDriver driver = TestCaseData.getWebDriver();
 		super.quitWebDriver(driver, context);
 	}
 	
     @Test(
     	groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
         description="Compra en España")
-    public void MAN000_GenerarPedidoFicticioMANTO(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
+    public void MAN000_GenerarPedidoFicticioMANTO() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
     	PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
@@ -100,8 +98,8 @@ public class Manto extends GestorWebDriver {
 		dependsOnMethods = { "MAN000_GenerarPedidoFicticioMANTO" },
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta de varios una tienda existente y otra no existente")
-	public void MAN001_ConsultaTiendas(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
+	public void MAN001_ConsultaTiendas() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
@@ -124,8 +122,8 @@ public class Manto extends GestorWebDriver {
 		dependsOnMethods = { "MAN000_GenerarPedidoFicticioMANTO" },
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta de la información referente a varios pedidos")
-	public void MAN002_Consulta_ID_EAN(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
+	public void MAN002_Consulta_ID_EAN() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
@@ -151,8 +149,8 @@ public class Manto extends GestorWebDriver {
 		dependsOnMethods = { "MAN000_GenerarPedidoFicticioMANTO" },
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta y gestión de clientes")
-	public void MAN003_GestionarClientes(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
+	public void MAN003_GestionarClientes() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
@@ -172,8 +170,8 @@ public class Manto extends GestorWebDriver {
 	@Test(
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta de cheques")
-	public void MAN004_GestorCheques(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
+	public void MAN004_GestorCheques() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
@@ -196,8 +194,8 @@ public class Manto extends GestorWebDriver {
 	@Test(
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta de estadísticas de pedidos")
-	public void MAN005_GestorEstadisticasPedidos(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
+	public void MAN005_GestorEstadisticasPedidos() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 	
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
@@ -214,8 +212,8 @@ public class Manto extends GestorWebDriver {
 	@Test(
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Gestor de saldos de TPV")
-	public void MAN006_GestorSaldosTPV(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
+	public void MAN006_GestorSaldosTPV() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 	
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
@@ -233,8 +231,8 @@ public class Manto extends GestorWebDriver {
 	@Test(
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Gestor de consulta y cambio de familia")
-	public void MAN007_GestorConsultaCambioFamilia(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
+	public void MAN007_GestorConsultaCambioFamilia() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 	
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
@@ -249,8 +247,8 @@ public class Manto extends GestorWebDriver {
 	@Test(
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Comprueba el correcto funcionamiento del ordenador de prendas")
-	public void MAN008_Ordenador_de_Prendas(ITestContext context, Method method) throws Exception {
-    	DataFmwkTest dFTest = ThreadData.getdFTest();
+	public void MAN008_Ordenador_de_Prendas() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)

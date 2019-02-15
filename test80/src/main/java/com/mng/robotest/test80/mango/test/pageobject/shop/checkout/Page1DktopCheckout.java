@@ -22,7 +22,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-@SuppressWarnings("javadoc")
+
 public class Page1DktopCheckout extends WebdrvWrapp {
     public static SecStoreCredit secStoreCredit;
     public static SecTarjetaPciDktop secTarjetaPci = new SecTarjetaPciDktop();

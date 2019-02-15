@@ -17,7 +17,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2IdentCheckout;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro.DataRegType;
 
-@SuppressWarnings("javadoc")
+
 public class PageRegistroIni extends WebdrvWrapp {
 	static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 	

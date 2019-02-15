@@ -22,7 +22,7 @@ import com.mng.robotest.test80.arq.utils.selenium.EnumsBrowserStack.PlatformMobi
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 
-@SuppressWarnings("javadoc")
+
 public class commonsXML {
     
     public static BStackDataMovil bsMovilAndroid = new BStackDataMovil(PlatformMobilBS.Android.getValueaAPI(), "7.0", "Samsung Galaxy S8", "true", "chrome");

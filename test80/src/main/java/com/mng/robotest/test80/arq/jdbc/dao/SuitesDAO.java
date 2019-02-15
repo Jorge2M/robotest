@@ -19,7 +19,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 
-@SuppressWarnings("javadoc")
+
 public class SuitesDAO {
     public static String SQLSelectSuite = 
         "SELECT IDEXECSUITE, SUITE, STATE "  +

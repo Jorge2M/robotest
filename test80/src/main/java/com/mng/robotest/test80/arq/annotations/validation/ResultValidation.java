@@ -3,7 +3,7 @@ package com.mng.robotest.test80.arq.annotations.validation;
 import com.mng.robotest.test80.arq.utils.State;
 
 
-@SuppressWarnings("javadoc")
+
 public class ResultValidation {
 	//TODO este campo es prescindible cuando esté completada la migración a Aspectos
     private final int id;

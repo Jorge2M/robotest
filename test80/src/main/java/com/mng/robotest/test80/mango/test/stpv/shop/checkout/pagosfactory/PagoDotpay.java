@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Dotpay.PageDotpayAc
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Dotpay.PageDotpayPaymentChannelStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Dotpay.PageDotpayResultadoStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoDotpay extends PagoStpV {
     
     public PagoDotpay(DataCtxShop dCtxSh, DataCtxPago dataPago, DataFmwkTest dFTest) {

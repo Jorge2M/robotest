@@ -13,7 +13,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Response;
 import com.mng.robotest.test80.mango.test.jdbc.dao.ParamsDAO;
 
-@SuppressWarnings("javadoc")
+
 public class Utilidades {
 
     /**

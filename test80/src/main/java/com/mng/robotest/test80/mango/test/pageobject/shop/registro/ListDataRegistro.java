@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.registro;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("javadoc")
+
 public class ListDataRegistro {
     
     public enum DataRegType {name, apellidos, email, password, telefono, codpostal, codpais, numlineas, lineascomaseparated, clicklineas, direccion, poblacion, provincia}

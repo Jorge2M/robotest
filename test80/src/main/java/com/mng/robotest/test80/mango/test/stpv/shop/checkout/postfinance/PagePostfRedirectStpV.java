@@ -6,7 +6,7 @@ import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance.PagePostfRedirect;
 
-@SuppressWarnings("javadoc")
+
 public class PagePostfRedirectStpV {
 
     public static void isPageAndFinallyDisappears(DatosStep datosStep, DataFmwkTest dFTest) throws Exception {

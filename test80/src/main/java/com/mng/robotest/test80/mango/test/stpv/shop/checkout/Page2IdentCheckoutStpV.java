@@ -4,18 +4,17 @@ import java.util.HashMap;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2IdentCheckout;
 
-@SuppressWarnings("javadoc")
+
 public class Page2IdentCheckoutStpV {
     
     public static void validateIsPage(boolean emailYetExists, DatosStep datosStep, DataFmwkTest dFTest) {
@@ -53,7 +52,7 @@ public class Page2IdentCheckoutStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }        
+        finally { StepAspect.storeDataAfterStep(datosStep); }        
         
         //Validaciones
         int maxSecondsToWait = 5;
@@ -76,7 +75,7 @@ public class Page2IdentCheckoutStpV {
     /**
      * @param validaDirecCharNoLatinos indica si se ha de validar que en la dirección no pueden figurar carácteres no latinos
      */
-    public static DatosStep clickContinuar(boolean userRegistered, boolean validaDirecCharNoLatinos, DataBag dataBag, Channel channel, AppEcom app, DataFmwkTest dFTest)
+    public static DatosStep clickContinuar(boolean userRegistered, boolean validaDirecCharNoLatinos, DataBag dataBag, Channel channel, DataFmwkTest dFTest)
     throws Exception {
         
         String descripIniTest = "";
@@ -98,7 +97,7 @@ public class Page2IdentCheckoutStpV {
 
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }        
+        finally { StepAspect.storeDataAfterStep(datosStep); }        
         
         //Validaciones
         if (validaDirecCharNoLatinos) {
@@ -116,7 +115,7 @@ public class Page2IdentCheckoutStpV {
             finally { listVals.checkAndStoreValidations(descripValidac); }
         }
         else 
-            PageCheckoutWrapperStpV.validateIsFirstPage(userRegistered, dataBag, channel, app, datosStep, dFTest);
+            PageCheckoutWrapperStpV.validateIsFirstPage(userRegistered, dataBag, channel, datosStep, dFTest);
         
         return datosStep;
     }

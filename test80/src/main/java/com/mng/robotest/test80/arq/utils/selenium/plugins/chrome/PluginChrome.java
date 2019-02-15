@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-@SuppressWarnings("javadoc")
+
 public abstract class PluginChrome {
     public String folderInResources = "pluginsBrowser"; 
     public static enum typePluginChrome { HTML5Autoplay }

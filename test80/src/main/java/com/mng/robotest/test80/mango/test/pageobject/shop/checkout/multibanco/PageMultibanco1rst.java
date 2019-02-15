@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageMultibanco1rst extends WebdrvWrapp {
 	final static String TagEmail = "@TagEmail";
     final static String XPathListOfPayments = "//ul[@id='paymentMethods']";

@@ -5,7 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 
-@SuppressWarnings("javadoc")
+
 public class Page1IdentCheckoutStpV {
     
     public static SecSoyNuevoStpV secSoyNuevo;

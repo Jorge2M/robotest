@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.mng.robotest.test80.mango.test.data.ValesData.Campanya;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 
-@SuppressWarnings("javadoc")
+
 @XmlRootElement
 public class ValePais {
 	public enum EffectToArticle {aplica, noaplica};

@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.generic;
 
-@SuppressWarnings("javadoc")
+
 public class stackTrace {
     private boolean existe;
     private boolean repetida;

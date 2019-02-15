@@ -2,7 +2,7 @@ package com.mng.robotest.test80.arq.jdbc.to;
 
 import com.mng.robotest.test80.arq.utils.StateSuite;
 
-@SuppressWarnings("javadoc")
+
 public class Suite {
     public String idExecution;
     public String suiteName;

@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsS
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.amazon.PageAmazonIdentStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoAmazon extends PagoStpV {
 
     public PagoAmazon(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

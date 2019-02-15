@@ -19,7 +19,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
  * @author jorge.munoz
  *
  */
-@SuppressWarnings({"javadoc", "static-access"})
+@SuppressWarnings({"static-access"})
 public class ModalFichaFavoritosStpV {
     
     @Validation

@@ -2,13 +2,13 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.PageAmexInputCip;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-@SuppressWarnings("javadoc")
+
 public class PageAmexInputCipStpV {
     
     public static void validateIsPageOk(String importeTotal, String codigoPais, DatosStep datosStep, DataFmwkTest dFTest) {
@@ -43,7 +43,7 @@ public class PageAmexInputCipStpV {
                                
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
                     
         //Validaciones
         PageAmexResultStpV.validateIsPageOk(datosStep, importeTotal, codigoPais, dFTest);

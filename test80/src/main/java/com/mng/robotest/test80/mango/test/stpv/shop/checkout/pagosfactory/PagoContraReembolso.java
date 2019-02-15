@@ -7,7 +7,7 @@ import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 
-@SuppressWarnings("javadoc")
+
 public class PagoContraReembolso extends PagoStpV {
     
     public PagoContraReembolso(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {

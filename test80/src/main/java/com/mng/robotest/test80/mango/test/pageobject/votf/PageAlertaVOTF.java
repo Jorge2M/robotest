@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-@SuppressWarnings("javadoc")
+
 public class PageAlertaVOTF extends WebdrvWrapp {
     
     private static final String XPathCapaAlerta = "//div[@class='alert']";

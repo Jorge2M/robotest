@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.ModCompartirNew;
@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecBolsaButtonAn
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecDetalleProductNew.ItemBreadcrumb;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld.TypePanel;
 
-@SuppressWarnings("javadoc")
+
 public class SecBolsaButtonAndLinksNewStpV {
     
     public static void selectEnvioYDevoluciones(DataFmwkTest dFTest) throws Exception {
@@ -28,7 +28,7 @@ public class SecBolsaButtonAndLinksNewStpV {
                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
                 
         //Validaciones
         ModEnvioYdevolNewStpV.validateIsVisible(datosStep, dFTest);
@@ -44,7 +44,7 @@ public class SecBolsaButtonAndLinksNewStpV {
                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
                 
         //Validaciones
         int maxSecondsToWait = 3;
@@ -113,7 +113,7 @@ public class SecBolsaButtonAndLinksNewStpV {
                         
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }
-        finally { fmwkTest.grabStep(datosStep, dFTest); }
+        finally { StepAspect.storeDataAfterStep(datosStep); }
                 
         //Validaciones
         int maxSecondsToWait = 1;
