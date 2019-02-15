@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageOrdenacionDePrendas;
 import org.openqa.selenium.By;
@@ -51,36 +52,34 @@ public class PageOrdenacionDePrendasStpV {
                 PageOrdenacionDePrendas.isElementInStateUntil(Orden.verTiendas, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         return validations;
     }
-	private static void selectPreProduccion(DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep (
-				"Seleccionamos en el desplegable la opción <b>PreProduccion</b>",
-				"Aparecen los diferentes indicadores de secciones");
-		try {
-			SecModalPersonalizacion.selectInDropDown(Orden.desplegableTiendas, "shop.pre.mango.com", dFTest.driver);
-			SecModalPersonalizacion.clickAndWait(Orden.verTiendas, dFTest.driver);
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		} finally { StepAspect.storeDataAfterStep(datosStep); }
 
-		//Validations
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-		validatePreProductionElements(datosStep, dFTest.driver);
+	@Step(
+			description="Seleccionamos en el desplegable la opción <b>PreProduccion</b>",
+			expected="Aparecen los diferentes indicadores de secciones",
+			saveErrorPage = SaveWhen.Never)
+	private static void selectPreProduccion(DataFmwkTest dFTest) throws Exception {
+		PageOrdenacionDePrendas.selectInDropDown(Orden.desplegableTiendas, "shop.pre.mango.com", dFTest.driver);
+		PageOrdenacionDePrendas.clickAndWait(Orden.verTiendas, dFTest.driver);
+
+		//Validaciones
+		validatePreProductionElements(dFTest.driver);
 	}
 
     @Validation
-    public static ListResultValidation validatePreProductionElements(DatosStep datosStep, WebDriver driver) {
-        ListResultValidation validations = ListResultValidation.getNew(datosStep);
+	private static ListResultValidation validatePreProductionElements(WebDriver driver) {
+        ListResultValidation validations = ListResultValidation.getNew();
         int maxSecondsWait = 10;
         validations.add(
                 "Está presente el enlace de <b>She</b><br>",
                 PageOrdenacionDePrendas.isElementInStateUntil(Section.She, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
-                "Está presente el enlace de <b>He</b>",
+                "Está presente el enlace de <b>He</b><br>",
                 PageOrdenacionDePrendas.isElementInStateUntil(Section.He, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
-                "Está presente el enlace de <b>Nina</b><br><br>",
+                "Está presente el enlace de <b>Nina</b><br>",
                 PageOrdenacionDePrendas.isElementInStateUntil(Section.Nina, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
-                "Aparece correctamente el boton de <b>cancelar</b>",
+                "Aparece correctamente el boton de <b>cancelar</b><br>",
                 PageOrdenacionDePrendas.isElementInStateUntil(Section.Nino, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
                 "Está presente el enlace de <b>Violeta</b>",
@@ -88,44 +87,38 @@ public class PageOrdenacionDePrendasStpV {
         return validations;
     }
 
+	@Step(
+			description="Seleccionamos la seccion de <b>She</b>",
+			expected="Podemos seleccionar que queremos realizar",
+			saveErrorPage = SaveWhen.Never)
 	private static void selectShe(DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep (
-				"Seleccionamos la seccion de <b>She</b>",
-				"Podemos seleccionar que queremos realizar");
-		try {
-			SecModalPersonalizacion.selectElement(Section.She, dFTest.driver);
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		} finally { StepAspect.storeDataAfterStep(datosStep); }
+		SecModalPersonalizacion.selectElement(Section.She, dFTest.driver);
 
-		//Validations
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-		validateSectionShe(datosStep, 13, "1) Está presente el selector de secciones dentro de <b>She</b>", dFTest.driver);
+		//Validaciones
+		validateSectionShe(13, dFTest.driver);
 	}
 
 	@Validation(
 			description="1) Está presente el selector de secciones dentro de <b>She</b>",
 			level=State.Warn)
-	public static boolean validateSectionShe(DatosStep datosStep, int maxSecondsWait, String validacion, WebDriver driver) {
+	private static boolean validateSectionShe(int maxSecondsWait, WebDriver driver) {
 		return (PageOrdenacionDePrendas.isElementInStateUntil(Orden.selectorOrdenacion, StateElem.Visible, maxSecondsWait, driver));
 	}
 
+	@Step(
+			description="Seleccionamos la sección de <b>prendas</b> en el desplegable",
+			expected="Nos aparece otro desplegable con los tipos de prenda",
+			saveErrorPage = SaveWhen.Never)
 	private static void selectSectionPrenda(DataFmwkTest dFTest){
-		DatosStep datosStep = new DatosStep (
-				"Seleccionamos la sección de <b>prendas</b> en el desplegable",
-				"Nos aparece otro desplegable con los tipos de prenda");
-		try {
-			PageOrdenacionDePrendas.selectInDropDown(Orden.selectorOrdenacion, "prendas_she", dFTest.driver);
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		} finally { StepAspect.storeDataAfterStep(datosStep); }
+		PageOrdenacionDePrendas.selectInDropDown(Orden.selectorOrdenacion, "prendas_she", dFTest.driver);
 
 		//Validaciones
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-		validateSectionPrenda(datosStep, dFTest.driver);
+		validateSectionPrenda(dFTest.driver);
 	}
 
     @Validation
-    public static ListResultValidation validateSectionPrenda(DatosStep datosStep, WebDriver driver) {
-        ListResultValidation validations = ListResultValidation.getNew(datosStep);
+	private static ListResultValidation validateSectionPrenda(WebDriver driver) {
+        ListResultValidation validations = ListResultValidation.getNew();
         int maxSecondsWait = 13;
         validations.add(
                 "Se vuelve visible el selector de tipo de <b>Prendas</b><br>",
@@ -136,25 +129,21 @@ public class PageOrdenacionDePrendasStpV {
         return validations;
     }
 
+	@Step(
+			description="Seleccionamos <b>Camisas</b> en el desplegable de tipo de prenda y confirmamos nuestra seleccion",
+			expected="Aparecen fotos en pantalla",
+			saveErrorPage = SaveWhen.Never)
 	private static void selectTipoPrenda(DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep (
-				"Seleccionamos <b>Camisas</b> en el desplegable de tipo de prenda y confirmamos nuestra seleccion", "Aparecen fotos en pantalla");
-		datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		try {
-			SecModalPersonalizacion.selectInDropDown(Orden.selectorPrendas, "camisas_she", dFTest.driver);
-			int secondsWaitElement = 10;
-			SecModalPersonalizacion.selectElementWaitingForAvailability(Orden.verPrendas, secondsWaitElement, dFTest.driver);
-		} finally { StepAspect.storeDataAfterStep(datosStep); }
-
-		//Validations
-		int maxSecondsWait = 10;
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-		validateTipoPrenda(datosStep, dFTest.driver, maxSecondsWait);
+		SecModalPersonalizacion.selectInDropDown(Orden.selectorPrendas, "camisas_she", dFTest.driver);
+		int secondsWaitElement = 10;
+		SecModalPersonalizacion.selectElementWaitingForAvailability(Orden.verPrendas, secondsWaitElement, dFTest.driver);
+		//Validaciones
+		validateTipoPrenda(dFTest.driver, secondsWaitElement);
 	}
 
 	@Validation
-    public static ListResultValidation validateTipoPrenda(DatosStep datosStep, WebDriver driver, int maxSecondsWait) {
-        ListResultValidation validations = ListResultValidation.getNew(datosStep);
+	private static ListResultValidation validateTipoPrenda(WebDriver driver, int maxSecondsWait) {
+        ListResultValidation validations = ListResultValidation.getNew();
         validations.add(
                 "Aparecen imagenes en la nueva página<br>",
                 PageOrdenacionDePrendas.isElementInStateUntil(Orden.pruebaImagen, StateElem.Visible, maxSecondsWait, driver), State.Defect);
@@ -164,25 +153,21 @@ public class PageOrdenacionDePrendasStpV {
         return validations;
     }
 
+	@Step(
+			description="Enviamos la primera prenda al final",
+			expected="La prenda ha cambiado",
+			saveErrorPage = SaveWhen.Never)
 	private static void bajarPrenda(DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep (
-				"Enviamos la primera prenda al final", "La prenda ha cambiado");
-		datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		refPrenda = validationPrenda(dFTest, Orden.primeraPrenda);
+		PageOrdenacionDePrendas.clickAndWait(Orden.primeraPrenda, dFTest.driver);
+		PageOrdenacionDePrendas.moveToAndSelectElement(Orden.bajarPrenda, dFTest.driver);
 
-		try {
-			SecModalPersonalizacion.clickAndWait(Orden.primeraPrenda, dFTest.driver);
-			SecModalPersonalizacion.moveToAndSelectElement(Orden.bajarPrenda, dFTest.driver);
-		} finally { StepAspect.storeDataAfterStep(datosStep); }
-
-		//Validations
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-		validateBajarPrenda(datosStep, dFTest.driver, 15);
+		//Validaciones
+		validateBajarPrenda(dFTest.driver, 15);
 	}
 
     @Validation
-    public static ListResultValidation validateBajarPrenda(DatosStep datosStep, WebDriver driver, int maxSecondsWait) {
-        ListResultValidation validations = ListResultValidation.getNew(datosStep);
+    private static ListResultValidation validateBajarPrenda(WebDriver driver, int maxSecondsWait) {
+        ListResultValidation validations = ListResultValidation.getNew();
         validations.add(
                 "Se sigue viendo la segunda prenda<br>",
                 PageOrdenacionDePrendas.isElementInStateUntil(Orden.segundaPrenda, StateElem.Visible, maxSecondsWait, driver), State.Defect);
@@ -192,23 +177,20 @@ public class PageOrdenacionDePrendasStpV {
         return validations;
     }
 
-	private static void aplicarOrden(DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep (
-				"Aplicamos el nuevo orden a las prendas", "Se despliega el modal de la ordenacion de predas");
-		datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+	@Step(
+			description="Aplicamos el nuevo orden a las prendas",
+			expected="Se despliega el modal de la ordenacion de predas",
+			saveErrorPage = SaveWhen.Never)
+	private static void aplicarOrden (DataFmwkTest dFTest) throws Exception {
+		PageOrdenacionDePrendas.selectElement(Orden.aplicarOrden, dFTest.driver);
 
-		try {
-			SecModalPersonalizacion.selectElement(Orden.aplicarOrden, dFTest.driver);
-		} finally { StepAspect.storeDataAfterStep(datosStep); }
-
-		//Validations
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-		validateAplicarOrden(datosStep, dFTest.driver);
+		//Validaciones
+		validateAplicarOrden(dFTest.driver);
 	}
 
     @Validation
-    public static ListResultValidation validateAplicarOrden(DatosStep datosStep, WebDriver driver) {
-        ListResultValidation validations = ListResultValidation.getNew(datosStep);
+	private static ListResultValidation validateAplicarOrden(WebDriver driver) {
+        ListResultValidation validations = ListResultValidation.getNew();
         int maxSecondsWait = 15;
         validations.add(
                 "Aparece correctamente el modal de confirmacion<br>",
@@ -225,18 +207,15 @@ public class PageOrdenacionDePrendasStpV {
         return validations;
     }
 
-	private static void aceptarOrdenPais(DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep (
-				"Aplicamos el orden por pais", "La prenda desaparece");
-		datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+	@Step(
+			description="Aplicamos el nuevo orden a las prendas",
+			expected="Se despliega el modal de la ordenacion de predas",
+			saveErrorPage = SaveWhen.Never)
+	private static void aceptarOrdenPais (DataFmwkTest dFTest) throws Exception {
+		SecModalPersonalizacion.selectElement(Modal.applyCountry, dFTest.driver);
 
-		try {
-			SecModalPersonalizacion.selectElement(Modal.applyCountry, dFTest.driver);
-		} finally { StepAspect.storeDataAfterStep(datosStep); }
-
-		//Validations
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-		validateBajarPrenda(datosStep, dFTest.driver, 10);
+		//Validaciones
+		validateBajarPrenda(dFTest.driver, 10);
 	}
 
 	private static String validationPrenda(DataFmwkTest dFTest, Orden prenda){
