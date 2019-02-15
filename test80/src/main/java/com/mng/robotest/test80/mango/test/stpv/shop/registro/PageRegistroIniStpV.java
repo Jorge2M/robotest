@@ -18,7 +18,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroI
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
-
 public class PageRegistroIniStpV {
     
 	@Validation (

@@ -20,7 +20,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.PageIniShopJapon;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroSegunda;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 
-
 public class PageRegistroSegundaStpV {
     
 	@Validation

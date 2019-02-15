@@ -17,6 +17,7 @@ import com.mng.robotest.test80.arq.jdbc.dao.ValidationsDAO;
 import com.mng.robotest.test80.arq.jdbc.to.ResultMethod;
 import com.mng.robotest.test80.arq.jdbc.to.ResultTestRun;
 import com.mng.robotest.test80.arq.utils.StateSuite;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.GestorWebDrv;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
@@ -223,6 +224,7 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
     }
   
     private void tratamientoFinMetodo(ITestResult tr) {
+    	TestCaseData.clearStackDatosStep();
         String idExecSuite = tr.getTestContext().getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx);
         StateSuite stateSuite = SuitesDAO.getStateSuite(idExecSuite);
         if (stateSuite!=StateSuite.STOPPING) {

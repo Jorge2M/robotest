@@ -46,6 +46,12 @@ public class TestCaseData {
     	return null;
     }
     
+    public static void clearStackDatosStep() {
+    	Queue<DatosStep> datosStepStackTmp = datosStepStack.get();
+    	datosStepStackTmp.clear();
+    	maxDatosStep.remove();
+    }
+    
     public static DatosStep getDatosStepForValidation() {
     	return (maxDatosStep.get());
     }
