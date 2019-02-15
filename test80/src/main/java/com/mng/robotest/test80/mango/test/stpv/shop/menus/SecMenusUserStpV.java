@@ -65,10 +65,11 @@ public class SecMenusUserStpV {
         finally { StepAspect.storeDataAfterStep(datosStep); }           
             
         //Validaciones
-        PageRegistroIniStpV.validaIsPage(datosStep, dFTest);
+        int maxSecondsWait = 5;
+        PageRegistroIniStpV.validaIsPageUntil(maxSecondsWait, dFTest);
         
         //Validacion RGPD
-        PageRegistroIniStpV.validaIsRGPDVisible(datosStep, dCtxSh, dFTest);
+        PageRegistroIniStpV.validaIsRGPDVisible(dCtxSh, dFTest.driver);
         
         return datosStep;
     }
@@ -131,7 +132,7 @@ public class SecMenusUserStpV {
         finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/, dFTest);
     }
     
 	public static void clickMenuMiCuenta(Channel channel, AppEcom app, DataFmwkTest dFTest) throws Exception {

@@ -102,7 +102,7 @@ public class PagoNavigationsStpV {
                 PageFavoritosStpV.clearAll(dCtxSh, dFTest);
             
             //Validaciones estándar. 
-            AllPagesStpV.validacionesEstandar(false/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
+            AllPagesStpV.validacionesEstandar(false/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/, dFTest);
         }
         
         int maxArticlesAwayVale = 2;

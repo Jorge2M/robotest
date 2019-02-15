@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
@@ -22,8 +23,9 @@ import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
 
 public class AllPagesStpV {
     
-    public static void validacionesEstandar(boolean validaSEO, boolean validaJS, boolean validaImgBroken, 
-    										DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void validacionesEstandar(boolean validaSEO, boolean validaJS, boolean validaImgBroken, DataFmwkTest dFTest) 
+    throws Exception {
+    	DatosStep datosStep = TestCaseData.getDatosStepForValidation();
         validacionesEstandar(validaSEO, State.Info_NoHardcopy, validaJS, State.Info_NoHardcopy, validaImgBroken, State.Warn, datosStep, dFTest);
     }
     
@@ -74,8 +76,9 @@ public class AllPagesStpV {
             //4)
             descripValidac+=
             	"4) No hay literales sin traducir (contienen \"???\" o \"#\")";
-            if (AllPages.isCodLiteralSinTraducir(dFTest.driver))
+            if (AllPages.isCodLiteralSinTraducir(dFTest.driver)) {
                 listVals.add(4, State.Warn);
+            }
            
             datosStep.setListResultValidations(listVals);
         }

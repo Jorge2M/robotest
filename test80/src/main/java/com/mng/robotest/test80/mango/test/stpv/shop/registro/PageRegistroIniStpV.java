@@ -1,12 +1,13 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.registro;
 
 import java.util.HashMap;
+import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
@@ -14,270 +15,181 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.DataRegistro;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroIni;
-import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro.PageData;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 
 public class PageRegistroIniStpV {
     
-    public static void validaIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
-    	int maxSecondsWait = 5;
-        String descripValidac =
-            "1) Aparece la página inicial del proceso de registro (la esperamos hasta " + maxSecondsWait + " segundos)";
-        datosStep.setNOKstateByDefault();     
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);   
-        try {
-            if (!PageRegistroIni.isPageUntil(maxSecondsWait, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-        
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation (
+		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{maxSecondsWait} segundos)",
+		level=State.Defect)
+    public static boolean validaIsPageUntil(int maxSecondsWait, DataFmwkTest dFTest) {
+        return (PageRegistroIni.isPageUntil(maxSecondsWait, dFTest.driver));
     }
     
+	@Step (
+		description="Introducir los datos correctos para el país #{pais.getNombre_pais} (Si aparece, seleccionar link de publicidad: <b>#{lickPubli}</b>)", 
+        expected="No aparece ningún mensaje de dato incorrecto")
     public static HashMap<String,String> sendDataAccordingCountryToInputs(Pais pais, String emailNonExistent, boolean clickPubli, DataFmwkTest dFTest) 
     throws Exception {
         HashMap<String,String> dataSended = new HashMap<>();
-
-        //Step. Introducir datos en el registro según el país
-        DatosStep datosStep = new DatosStep       (
-            "Introducir los datos correctos para el país " + pais.getNombre_pais() + " (Si aparece, seleccionar link de publicidad: <b>" + clickPubli + "</b>)", 
-            "No aparece ningún mensaje de dato incorrecto");
-        try {
-            dataSended = PageRegistroIni.sendDataAccordingCountryToInputs(pais, emailNonExistent, clickPubli, dFTest.driver);
-    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }           
+        dataSended = PageRegistroIni.sendDataAccordingCountryToInputs(pais, emailNonExistent, clickPubli, dFTest.driver);
             
         //Validaciones
-        String descripValidac = 
-            "1) No aparece mensaje de error en los campos con datos correctos"; 
-        datosStep.setNOKstateByDefault();   
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (PageRegistroIni.isVisibleAnyInputErrorMessage(dFTest.driver)) {
-                listVals.add(1, State.Warn);                    
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+        validateNotAreErrorMessageInCorrectFields(dFTest.driver);
         
         return dataSended;
     }
+	
+	@Validation (
+		description="No aparece mensaje de error en los campos con datos correctos",
+		level=State.Warn)
+	public static boolean validateNotAreErrorMessageInCorrectFields(WebDriver driver) {
+		return (!PageRegistroIni.isVisibleAnyInputErrorMessage(driver));
+	}
     
-    public static DatosStep sendFixedDataToInputs(ListDataRegistro dataToSend, DataFmwkTest dFTest) {
-        //Step. Introducir datos en el registro
-        DatosStep datosStep = new DatosStep       (
-            "Introducir los datos:<br>" + dataToSend.getFormattedHTMLData(PageData.pageInicial), 
-            "En los datos incorrectos aparece error y en los correctos no");
-        try {
-        	
-            PageRegistroIni.sendDataToInputs(dataToSend, dFTest.driver);
-    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }           
+	@SuppressWarnings("unused")
+	@Step (
+		description="Introducir los datos:<br>#{dataToSendInHtmlFormat}",
+        expected="En los datos incorrectos aparece error y en los correctos no")
+    public static void sendFixedDataToInputs(ListDataRegistro dataToSend, String dataToSendInHtmlFormat, DataFmwkTest dFTest) {
+        PageRegistroIni.sendDataToInputs(dataToSend, dFTest.driver);       
             
         //Validaciones
-        String descripValidac = 
-            "1) No aparece mensaje de error en los campos con datos correctos<br>" + 
-            "2) Sí aparece mensaje de error en los campos con datos incorrectos:<br>";
+        validateMessagesErrorDependingInputs(dataToSend, dFTest.driver);
+    }
+	
+	@Validation
+    public static ListResultValidation validateMessagesErrorDependingInputs(ListDataRegistro dataToSend, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
         for (DataRegistro dataInput : dataToSend.getDataPageInicial()) {
-            if (!dataInput.isValidPrevRegistro()) {
-                descripValidac+=
-                	dataInput.getDataRegType() + 
-                	" (<b>" + 
-                	dataInput.getData() + "</b>). Error:\"" + 
-                	PageRegistroIni.getXPathDataInput(dataInput.getDataRegType()).getMsgErrorPrevRegistro() + 
-                	"\"<br>";  
+        	String dataInputString = dataInput.getDataRegType() + " (<b>" + dataInput.getData() + "</b>)";
+            if (dataInput.isValidPrevRegistro()) {
+            	validations.add(
+            		"No aparece mensaje de error el el campo con datos correctos: <b>" + dataInputString + "</b><br>",
+            		PageRegistroIni.getNumberMsgInputInvalid(dataInput.dataRegType, driver) <= 0, State.Warn);
             }
+            else {
+            	validations.add(
+            		"Sí aparece mensaje de error el el campo con datos incorrectos: <b>" + dataInputString + "</b><br>",
+            		PageRegistroIni.getNumberMsgInputInvalid(dataInput.dataRegType, driver) > 0, State.Warn);
+	        }
         }
         
-        datosStep.setNOKstateByDefault();    
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            for (DataRegistro dataInput : dataToSend.getDataPageInicial()) {
-                if (dataInput.isValidPrevRegistro()) {
-                    if (PageRegistroIni.getNumberMsgInputInvalid(dataInput.dataRegType, dFTest.driver) > 0) {
-                        listVals.add(1, State.Warn);                    
-                    }
-                }
-                else {
-                    if (!PageRegistroIni.isVisibleMsgInputInvalid(dataInput.dataRegType, dFTest.driver)) {
-                        listVals.add(2, State.Warn);                    
-                    }
-                }
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
+        return validations;
     }
     
-    public static DatosStep clickRegistrateButton(Pais paisRegistro, boolean usrExists, AppEcom app, HashMap<String,String> dataRegistro, DataFmwkTest dFTest) 
+	@Step (
+		description="Seleccionar el botón <b>Regístrate</b>")
+    public static void clickRegistrateButton(Pais paisRegistro, boolean usrExists, AppEcom app, HashMap<String,String> dataRegistro, DataFmwkTest dFTest) 
     throws Exception {
-        //Step. 
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionar el botón \"<b>Regístrate</b>\"", 
-            "");
-        try {
-            PageRegistroIni.clickButtonRegistrate(dFTest.driver);
-            Thread.sleep(1000);
-                                                                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+        PageRegistroIni.clickButtonRegistrate(dFTest.driver);
+        Thread.sleep(1000);
 
-        //Validacion
-        validaIsInvisibleCapaLoading(datosStep, dFTest);
+        //Validaciones
+        int maxSecondsWait = 3;
+        validaIsInvisibleCapaLoading(maxSecondsWait, dFTest);
+        if (usrExists || PageRegistroIni.getNumInputsObligatoriosNoInformados(dFTest.driver) > 0) {
+        	if (usrExists) {
+	        	maxSecondsWait=5;
+	        	validaEmailYaRegistradoShown(maxSecondsWait, dFTest.driver);
+        	}
+            int numInputsObligatoriosNoInf = PageRegistroIni.getNumInputsObligatoriosNoInformados(dFTest.driver);
+            if (numInputsObligatoriosNoInf > 0) {
+            	validateAreInputsWithErrorMessageAssociated(numInputsObligatoriosNoInf, paisRegistro, dFTest.driver);  
+            }
+        }
+        else {
+            PageRegistroSegundaStpV.validaIsPageRegistroOK(paisRegistro, app, dataRegistro, dFTest.driver);
+        }
         
-        //Validaciones para los casos de error
-        if (usrExists ||
-            PageRegistroIni.getNumInputsObligatoriosNoInformados(dFTest.driver) > 0)
-            validaRegistroKO(paisRegistro, usrExists, datosStep, dFTest);        
-        else
-            PageRegistroSegundaStpV.validaIsPageRegistroOK(paisRegistro, app, dataRegistro, datosStep, dFTest);
-        
-        //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
-        
-        return datosStep;
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
     }
     
-	public static void validaIsInvisibleCapaLoading(DatosStep datosStep, DataFmwkTest dFTest) {
-		int maxSecondsToWait = 3;
-        String descripValidac =
-            "1) Desparece la capa de loading (lo esperamos hasta " + maxSecondsToWait + " segundos)";         
-        datosStep.setNOKstateByDefault();       
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);    
-        try {
-            if (!PageRegistroIni.isCapaLoadingInvisibleUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-    
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation (
+		description="Desaparece la capa de loading (lo esperamos hasta #{maxSecondsWait} segundos)",
+		level=State.Warn)
+	public static boolean validaIsInvisibleCapaLoading(int maxSecondsWait, DataFmwkTest dFTest) {
+		return (PageRegistroIni.isCapaLoadingInvisibleUntil(maxSecondsWait, dFTest.driver));
 	}
 	
-    private static void validaRegistroKO(Pais pais, boolean usrExists, DatosStep datosStep, DataFmwkTest dFTest) {
-        //Validaciones para el caso de usuario ya existente
-        if (usrExists) {
-        	int maxSecondsWait = 5;
-            String descripValidac =
-                "1) Aparece un error \"Email ya registrado\" (lo esperamos hasta " + maxSecondsWait + " segundos)";         
-            datosStep.setNOKstateByDefault();   
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);    
-            try {
-                if (!PageRegistroIni.isVisibleErrorUsrDuplicadoUntil(dFTest.driver, maxSecondsWait)) {
-                    listVals.add(1, State.Defect);
-                }
+	@Validation (
+		description="Aparece un error <b>Email ya registrado<\b> (lo esperamos hasta #{maxSecondsWait} segundos)",
+		level=State.Defect)
+    private static boolean validaEmailYaRegistradoShown(int maxSecondsWait, WebDriver driver) {
+		return(PageRegistroIni.isVisibleErrorUsrDuplicadoUntil(driver, maxSecondsWait));
+    }
+	
+	@Validation
+	public static ListResultValidation validateAreInputsWithErrorMessageAssociated(int numInputsObligatoriosNoInf, Pais pais, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
+        int numInputsTypePassrod = PageRegistroIni.getNumberInputsTypePassword(driver);
+        int numErrCampObligatorio = PageRegistroIni.getNumberMsgCampoObligatorio(driver);
         
-                datosStep.setListResultValidations(listVals);
-            }
-            finally { listVals.checkAndStoreValidations(descripValidac); }
-        }
-        
-        //Validaciones para el caso de campos obligatorions no informados
-        int inputsObligNoInf = PageRegistroIni.getNumInputsObligatoriosNoInformados(dFTest.driver);
-        if (inputsObligNoInf > 0) {
-            int numInputsTypePassrod = PageRegistroIni.getNumberInputsTypePassword(dFTest.driver);
-            int numErrCampObligatorio = PageRegistroIni.getNumberMsgCampoObligatorio(dFTest.driver);
-            String descripValidac = 
-                "1) Aparecen " + inputsObligNoInf + " errores de campo obligatorio<br>" +
-                "2) Si existe, en el desplegable aparece seleccionado el país con código " + pais.getCodigo_pais() + " (" + pais.getNombre_pais() + ")";
-            datosStep.setNOKstateByDefault();    
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-            try {
-                if ((inputsObligNoInf + numInputsTypePassrod) < numErrCampObligatorio) {
-                    listVals.add(1, State.Warn);
-                }
-                if (PageRegistroIni.isVisibleSelectPais(dFTest.driver)) {
-                    if (!PageRegistroIni.isSelectedOptionPais(dFTest.driver, pais.getCodigo_pais())) {
-                        listVals.add(2, State.Warn);
-                    }
-                }
-    
-                datosStep.setListResultValidations(listVals);
-            }
-            finally { listVals.checkAndStoreValidations(descripValidac); }
-        }
+    	validations.add(
+    		"Aparecen " + numInputsObligatoriosNoInf + " errores de campo obligatorio<br>",
+    		(numInputsObligatoriosNoInf + numInputsTypePassrod) >= numErrCampObligatorio, State.Warn);
+    	if (PageRegistroIni.isVisibleSelectPais(driver)) {
+	    	validations.add(
+	    		"Existe desplegable país -> aparece seleccionado el país con código " + pais.getCodigo_pais() + " (" + pais.getNombre_pais() + ")",
+	    		PageRegistroIni.isSelectedOptionPais(driver, pais.getCodigo_pais()), State.Warn);
+    	}
+    	
+    	return validations;
     }
     
-    public static void validaRebajasJun2018(IdiomaPais idioma, DatosStep datosStep, DataFmwkTest dFTest) {
-        //Validaciones
+	@Validation (
+		description=
+        "<b style=\"color:blue\">Rebajas</b></br>" +
+        "1) El mensaje de NewsLetter no aparece o si aparece no contiene el símbolo de porcentaje",
+        level=State.Info_NoHardcopy)
+    public static boolean validaRebajasJun2018(IdiomaPais idioma, DataFmwkTest dFTest) {
         String percentageSymbol = UtilsTestMango.getPercentageSymbol(idioma);
-        String descripValidac = 
-            "<b style=\"color:blue\">Rebajas</b></br>" +
-            "1) El mensaje de NewsLetter no aparece o si aparece no contiene \"" + percentageSymbol + "\""; 
-        datosStep.setNOKstateByDefault();  
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (PageRegistroIni.newsLetterTitleContains(percentageSymbol, dFTest.driver)) {
-                listVals.add(1, State.Info_NoHardcopy);
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
+		return (!PageRegistroIni.newsLetterTitleContains(percentageSymbol, dFTest.driver));       
     }
 
-	public static void validaIsRGPDVisible(DatosStep datosStep, DataCtxShop dCtxSh, DataFmwkTest dFTest) {
-		//Validaciones
+	public static void validaIsRGPDVisible(DataCtxShop dCtxSh, WebDriver driver) {
 		if (dCtxSh.pais.getRgpd().equals("S")) {
-			int maxSeconds = 1;
-	        String descripValidac = 
-	            "1) El texto de info de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>" + 
-	            "2) El texto legal de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>" + 
-	            "3) <b>SI</b> está presente el checkbox para recibir promociones e información personalizada para el pais " + 
-	            	dCtxSh.pais.getCodigo_pais() + " (lo esperamos hasta " + maxSeconds + " segundos)"; 
-	        datosStep.setNOKstateByDefault();   
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-	        try {
-		        if (!PageRegistroIni.isTextoRGPDVisible(dFTest.driver)) {           	
-	                listVals.add(1, State.Defect);
-		        }
-	            if (!PageRegistroIni.isTextoLegalRGPDVisible(dFTest.driver)) {
-	                listVals.add(2, State.Defect);
-	            }
-	            if (!PageRegistroIni.isCheckboxRecibirInfoPresentUntil(maxSeconds, dFTest.driver)) {
-	                listVals.add(3, State.Defect);
-	            }
-	            
-	            datosStep.setListResultValidations(listVals);
-	        }
-	        finally { listVals.checkAndStoreValidations(descripValidac); }   
+			validateRGPD_inCountryWithRgpd(dCtxSh, driver);
 		}
 		
 		else {
-			int maxSeconds = 1;
-			String descripValidac = 
-	            "1) El texto de info de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>" + 
-	            "2) El texto legal de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>" + 
-	            "3) <b>NO</b> es visible el checkbox para recibir promociones e información personalizada para el pais " + 
-	            	dCtxSh.pais.getCodigo_pais() + " (lo esperamos hasta " + maxSeconds + " segundos)"; 
-	        datosStep.setNOKstateByDefault();   
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-	        try {
-	            if (PageRegistroIni.isTextoRGPDVisible(dFTest.driver)) {
-	                listVals.add(1, State.Defect);
-	            }
-	            if (PageRegistroIni.isTextoLegalRGPDVisible(dFTest.driver)) {
-	                listVals.add(2, State.Defect);
-	            }
-	            if (PageRegistroIni.isCheckboxRecibirInfoPresentUntil(maxSeconds, dFTest.driver)) {
-	                listVals.add(3, State.Defect);
-	            }
-	            
-	            datosStep.setListResultValidations(listVals);
-	        }
-	        finally { listVals.checkAndStoreValidations(descripValidac); } 
+			validateRGPD_inCountryWithoutRgpd(dCtxSh, driver);
 		}
-	}    
+	}  
+	
+	@Validation
+	public static ListResultValidation validateRGPD_inCountryWithRgpd(DataCtxShop dCtxSh, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
+		int maxSeconds = 1;
+    	validations.add(
+    		"El texto de info de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>",
+    		PageRegistroIni.isTextoRGPDVisible(driver), State.Defect);
+    	validations.add(
+    		"El texto legal de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>",
+    		PageRegistroIni.isTextoLegalRGPDVisible(driver), State.Defect);
+    	validations.add(
+    		"<b>SI</b> está presente el checkbox para recibir promociones e información personalizada para el pais" +
+    		dCtxSh.pais.getCodigo_pais() + " (lo esperamos hasta " + maxSeconds + " segundos)",
+    		PageRegistroIni.isCheckboxRecibirInfoPresentUntil(maxSeconds, driver), State.Defect);
+    	return validations;
+	}
+	
+	@Validation
+	public static ListResultValidation validateRGPD_inCountryWithoutRgpd(DataCtxShop dCtxSh, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
+		int maxSeconds = 1;
+    	validations.add(
+    		"El texto de info de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>",
+    		!PageRegistroIni.isTextoRGPDVisible(driver), State.Defect);
+    	validations.add(
+    		"El texto legal de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>",
+    		!PageRegistroIni.isTextoLegalRGPDVisible(driver), State.Defect);
+    	validations.add(
+    		"<b>NO</b> es visible el checkbox para recibir promociones e información personalizada para el pais " + 
+    		dCtxSh.pais.getCodigo_pais() + " (lo esperamos hasta " + maxSeconds + " segundos)",
+    		!PageRegistroIni.isCheckboxRecibirInfoPresentUntil(maxSeconds, driver), State.Defect);
+    	return validations;
+	}
 }

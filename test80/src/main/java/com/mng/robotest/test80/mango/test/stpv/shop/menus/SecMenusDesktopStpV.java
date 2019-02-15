@@ -466,7 +466,7 @@ public class SecMenusDesktopStpV {
         AllPagesStpV.validatePageWithFooter(dCtxSh.pais, dCtxSh.appE, datosStep, dFTest);
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, datosStep, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, dFTest);
     }
     
     /**
@@ -797,7 +797,7 @@ public class SecMenusDesktopStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }
        
        //Validaciones estándar. 
-       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, datosStep, dFTest);
+       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, dFTest);
     }    
     
     public static void validationsRebajas(Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 

@@ -110,7 +110,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
         
         //Step&Validation
         datosStep = SecMenusWrapperStpV.secMenuUser.selectRegistrate(Channel.desktop, dCtxSh, dFTest);
-        PageRegistroIniStpV.validaRebajasJun2018(dCtxSh.idioma, datosStep, dFTest);
+        PageRegistroIniStpV.validaRebajasJun2018(dCtxSh.idioma, dFTest);
         
         //Aplicamos el test a las líneas/sublíneas
         for (Linea linea : this.lineasAprobar) {

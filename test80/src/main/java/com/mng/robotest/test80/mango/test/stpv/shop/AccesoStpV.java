@@ -170,7 +170,7 @@ public class AccesoStpV {
         finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(false/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
+        AllPagesStpV.validacionesEstandar(false/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
         
         //Validaciones para Analytics (sólo para firefox y NetAnalysis)´
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(Constantes.AnalyticsVal.GoogleAnalytics,
@@ -243,7 +243,7 @@ public class AccesoStpV {
             datosStep = PageSelectIdiomaVOTFStpV.selectIdiomaAndContinue(dCtxSh.idioma, dFTest);
         
         PageSelectLineaVOTFStpV.validateIsPage(datosStep, dFTest);
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
         PageSelectLineaVOTFStpV.selectMenuAndLogoMango(1/*numMenu*/, dCtxSh.pais, dFTest);
         
         return datosStep;

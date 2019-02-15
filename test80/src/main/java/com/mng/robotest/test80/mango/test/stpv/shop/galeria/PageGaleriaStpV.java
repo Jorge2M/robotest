@@ -324,7 +324,7 @@ public class PageGaleriaStpV {
         }
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, dataForScroll.validaImgBroken, datosStep, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, dataForScroll.validaImgBroken, dFTest);
         
         //VALIDACIONES - PARA ANALYTICS (sólo para firefox y NetAnalysis)
         PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, datosStep, dFTest);
@@ -393,7 +393,7 @@ public class PageGaleriaStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }                
 
        //Validaciones estándar. 
-       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
+       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
        
        return numArticulosPant;
    }
@@ -625,7 +625,7 @@ public class PageGaleriaStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }
 
        //Validaciones estándar. 
-       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
+       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
        
        //VALIDACIONES - PARA ANALYTICS (sólo para firefox y NetAnalysis)
        PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, datosStep, dFTest);        
