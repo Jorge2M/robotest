@@ -182,5 +182,4 @@ public class CompraFact extends GestorWebDriver {
     		this.testVale && 
     		!UtilsMangoTest.isEntornoPRO(app, dFTest));
     }
-
 }
