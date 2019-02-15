@@ -57,10 +57,11 @@ public class PageGenerarPedido extends WebdrvWrapp {
 		return false;
 	}
 	
-	public static void selectEstado(EstadoPedido estado, WebDriver driver) {
+	public static void selectEstado(EstadoPedido estado, WebDriver driver) throws Exception {
 		selectByValue(
 			GestionPostCompra.EstadoPedidoSelect, 
 			String.valueOf(estado.value), 
 			OptionSelect.ByValue, driver);
+		WebdrvWrapp.waitForPageLoaded(driver);
 	}
 }
