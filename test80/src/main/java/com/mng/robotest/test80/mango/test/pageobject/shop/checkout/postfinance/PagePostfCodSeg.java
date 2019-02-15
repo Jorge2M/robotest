@@ -72,7 +72,7 @@ public class PagePostfCodSeg extends WebdrvWrapp {
         driver.findElement(By.xpath(XPathInputCodSeg)).sendKeys(codigoSeg);
     }
 
-	public static void waitLoadPage(WebDriver driver) throws Exception {
+	public static void waitLoadPage() throws Exception {
 		Thread.sleep(5000);
 	}
 	

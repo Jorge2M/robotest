@@ -615,10 +615,12 @@ public class PageCheckoutWrapperStpV {
         
     public static void validaResultImputPromoEmpl(DataBag dataBag, Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
-        if (channel==Channel.movil_web)
-            Page1EnvioCheckoutMobilStpV.validaResultImputPromoEmpl(dataBag, app, datosStep, dFTest);
-        else
+        if (channel==Channel.movil_web) {
+            Page1EnvioCheckoutMobilStpV.validaResultImputPromoEmpl(app, datosStep, dFTest);
+        }
+        else {
             Page1DktopCheckoutStpV.validaResultImputPromoEmpl(dataBag, app, datosStep, dFTest);
+        }
     }    
     
     public static void validaIsVersionChequeRegalo(ChequeRegalo chequeRegalo, DatosStep datosStep, DataFmwkTest dFTest) {

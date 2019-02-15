@@ -42,7 +42,7 @@ public class PageMercpagoLoginStpV {
         finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
-    public static DatosStep loginMercadopago(Pago pago, String importeTotal, String codigoPais, Channel channel, DataFmwkTest dFTest) 
+    public static DatosStep loginMercadopago(Pago pago, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
         //Step
         DatosStep datosStep = new DatosStep       (

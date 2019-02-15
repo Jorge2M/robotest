@@ -29,7 +29,7 @@ public class PageYandexPayingByCode extends WebdrvWrapp {
         return ("//div[@class[contains(.,'data-unit__base')] and text()[contains(.,'" + value + "')]]");
     }
     
-    public static boolean isPage(Channel channel, WebDriver driver) {
+    public static boolean isPage(WebDriver driver) {
         return (isElementVisible(driver, By.xpath(XPathDivPaymentCode)));
     }
         

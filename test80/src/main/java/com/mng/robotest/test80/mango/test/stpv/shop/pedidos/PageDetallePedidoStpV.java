@@ -7,7 +7,6 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraOnline;

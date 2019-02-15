@@ -123,10 +123,10 @@ public class Favoritos extends GestorWebDriver {
 
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);
         List<Integer> iconsToMark = Arrays.asList(1, 3, 4);  
-        pageGaleriaStpV.clickArticlesHearthIcons(iconsToMark, TypeActionFav.Marcar, dCtxSh, dataFavoritos);
+        pageGaleriaStpV.clickArticlesHearthIcons(iconsToMark, TypeActionFav.Marcar, dataFavoritos);
         
         List<Integer> iconsToUnmark = Arrays.asList(3);
-        pageGaleriaStpV.clickArticlesHearthIcons(iconsToUnmark, TypeActionFav.Desmarcar, dCtxSh, dataFavoritos);
+        pageGaleriaStpV.clickArticlesHearthIcons(iconsToUnmark, TypeActionFav.Desmarcar, dataFavoritos);
         
         SecMenusWrapperStpV.secMenuUser.selectFavoritos(dataFavoritos, dCtxSh, dFTest);
         ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);

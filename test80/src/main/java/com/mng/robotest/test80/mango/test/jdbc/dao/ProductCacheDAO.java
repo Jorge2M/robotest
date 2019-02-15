@@ -76,7 +76,7 @@ public class ProductCacheDAO {
             }        
     }
     
-    public List<ProductCache> findProductsNoCaducadosRelaxingFilters(String app, String codigoPais, String almacen, int max) {
+    public List<ProductCache> findProductsNoCaducadosRelaxingFilters(String app, String almacen, int max) {
     	Date caducidad = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         try (Connection conn = Connector.getConnection(true/*forReadOnly*/);
             PreparedStatement select = conn.prepareStatement(SQLSelectProductCacheAlmacenRelaxingFilters)) {      

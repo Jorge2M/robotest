@@ -30,7 +30,7 @@ public class PagoMercadopago extends PagoStpV {
         PageMercpago1rstStpV.validateIsPage(datosStep, dFTest);
         datosStep = PageMercpago1rstStpV.clickLinkRegistration(this.dFTest);
         if (execPay) {
-            PageMercpagoLoginStpV.loginMercadopago(dataPedido.getPago(), this.dCtxPago.getDataPedido().getImporteTotal(), this.dCtxSh.pais.getCodigo_pais(), this.dCtxSh.channel, this.dFTest);
+            PageMercpagoLoginStpV.loginMercadopago(dataPedido.getPago(), this.dCtxSh.channel, this.dFTest);
             PageMercpagoDatosTrjStpV.inputNumTarjeta(dataPedido.getPago().getNumtarj(), this.dCtxSh.channel, this.dFTest);
             
             PageMercpagoDatosTrjStpV.InputData inputData = new PageMercpagoDatosTrjStpV.InputData();

@@ -99,13 +99,13 @@ public class PageOrdenacionDePrendasStpV {
 
 		//Validations
 	    datosStep.setSaveErrorPage(SaveWhen.Never);
-		validateSectionShe(datosStep, 13, "1) Está presente el selector de secciones dentro de <b>She</b>", dFTest.driver);
+		validateSectionShe(datosStep, 13, dFTest.driver);
 	}
 
 	@Validation(
 			description="1) Está presente el selector de secciones dentro de <b>She</b>",
 			level=State.Warn)
-	public static boolean validateSectionShe(DatosStep datosStep, int maxSecondsWait, String validacion, WebDriver driver) {
+	public static boolean validateSectionShe(DatosStep datosStep, int maxSecondsWait, WebDriver driver) {
 		return (PageOrdenacionDePrendas.isElementInStateUntil(Orden.selectorOrdenacion, StateElem.Visible, maxSecondsWait, driver));
 	}
 

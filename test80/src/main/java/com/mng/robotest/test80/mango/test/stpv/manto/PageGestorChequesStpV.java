@@ -16,14 +16,14 @@ import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques.Tab
 public class PageGestorChequesStpV {
 
 	public static void validateIsPage(WebDriver driver) {
-		validatePage(PageGestorCheques.titulo, driver);
+		validatePage(driver);
 		validateButtons(driver);
 	}
 
 	@Validation(
-			description="1) Estamos en la página \"#{titulo} \"",
+			description="1) Estamos en la página Gestord de Cheques",
 			level=State.Defect)
-	public static boolean validatePage(String titulo, WebDriver driver) {
+	public static boolean validatePage(WebDriver driver) {
 		return (PageGestorCheques.isPage(driver));
 	}
 

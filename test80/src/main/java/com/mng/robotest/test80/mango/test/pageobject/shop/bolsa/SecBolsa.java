@@ -62,13 +62,14 @@ public class SecBolsa extends WebdrvWrapp {
     /**
      * @return el XPATH correspondiente al link de borrar/eliminar artículo de la bolsa (asociado a cada artículo)
      */
-    private static String getXPATH_LinkBorrarArt(Channel channel, WebDriver driver) {
-        return getXPATH_LinkBorrarArt(channel, ""/*refArticle*/, driver);
+    private static String getXPATH_LinkBorrarArt(Channel channel) {
+        return getXPATH_LinkBorrarArt(channel, "");
     }
     
-    private static String getXPATH_LinkBorrarArt(Channel channel, String refArticle, WebDriver driver) {
-        if (channel==Channel.movil_web)
+    private static String getXPATH_LinkBorrarArt(Channel channel, String refArticle) {
+        if (channel==Channel.movil_web) {
             return (XPathLinkBorrarArtMobilNew.replace(tagRefArticle, refArticle));
+        }
 
         return (XPathLinkBorrarArtDesktop.replace(tagRefArticle, refArticle)); 
     }
@@ -278,7 +279,7 @@ public class SecBolsa extends WebdrvWrapp {
     
     public static void clearArticuloAndWait(Channel channel, String refArticulo, WebDriver driver) throws Exception {
         //Seleccionar el link de la papelera para eliminar de la bolsa
-        String xpathClearArt = getXPATH_LinkBorrarArt(channel, refArticulo, driver);
+        String xpathClearArt = getXPATH_LinkBorrarArt(channel, refArticulo);
         driver.findElement(By.xpath(xpathClearArt)).click();
         waitForPageLoaded(driver); 
     }
@@ -289,7 +290,7 @@ public class SecBolsa extends WebdrvWrapp {
     @SuppressWarnings("static-access")
 	public static void clearArticulos(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
     	setBolsaToStateIfNotYet(StateBolsa.Open, dCtxSh.channel, dCtxSh.appE, driver);
-        String xpathDeleteArt = SecBolsa.getXPATH_LinkBorrarArt(dCtxSh.channel, driver);
+        String xpathDeleteArt = SecBolsa.getXPATH_LinkBorrarArt(dCtxSh.channel);
         int ii = 0;
         do {
             // Se comprueba si la bolsa tiene artículos

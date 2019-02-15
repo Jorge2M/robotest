@@ -46,7 +46,7 @@ public class ArticlesStockCacheBD implements ArticlesStockGetter {
         case CacheBd_NotRelaxFilters:
         	return (productCacheDAO.findProductsNoCaducados(app.name(), this.urlTestAppMango, countryId, storeId, 99));
         case CacheBd_RelaxFilters: 
-        	return (productCacheDAO.findProductsNoCaducadosRelaxingFilters(app.name(), countryId, storeId, 99));
+        	return (productCacheDAO.findProductsNoCaducadosRelaxingFilters(app.name(), storeId, 99));
         default:
         	return null;
         }

@@ -23,7 +23,7 @@ public class PageGestorConsultaCambioFamilia extends WebdrvWrapp {
     	return (iniXPathTitulo + title + "')]]");
     }  
     
-    public static String getXPathConsultaButtonDisabled(String consultaButton) {
+    public static String getXPathConsultaButtonDisabled() {
     	return (iniXPathConsultaButton + " and @disabled='disabled']");
     }
     
@@ -36,7 +36,7 @@ public class PageGestorConsultaCambioFamilia extends WebdrvWrapp {
 	}
 
 	public static boolean isDisabledConsultaButton(WebDriver driver) {
-		return isElementPresent(driver, By.xpath(getXPathConsultaButtonDisabled(iniXPathConsultaButton)));
+		return isElementPresent(driver, By.xpath(getXPathConsultaButtonDisabled()));
 	}
 
 	public static void selectAccesoriosAndClickConsultaPorFamiliaButton(WebDriver driver) throws Exception {

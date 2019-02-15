@@ -12,7 +12,7 @@ public class ModalLoyaltyAfterAccess extends WebdrvWrapp {
 	final static String XPathAspaForClose = XPathCapaContainer + "//span[@class='modal-close-icon']";
 	
 	public static boolean isModalVisibleUntil(int maxSecondsToWait, WebDriver driver) {
-		return (isElementVisible(driver, By.xpath(XPathCapaContainer)));
+		return (isElementVisibleUntil(driver, By.xpath(XPathCapaContainer), maxSecondsToWait));
 	}
 	
 	public static void closeModal(WebDriver driver) throws Exception {

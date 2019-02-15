@@ -690,8 +690,8 @@ public class PageGaleriaStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }
    }   
    
-   public DatosStep clickArticlesHearthIcons(List<Integer> posIconsToClick, TypeActionFav actionFav, DataCtxShop dCtxSh, 
-		   									 DataFavoritos dataFavoritos) throws Exception {
+   public DatosStep clickArticlesHearthIcons(List<Integer> posIconsToClick, TypeActionFav actionFav, DataFavoritos dataFavoritos) 
+   throws Exception {
        String estadoFinal = "";
        switch (actionFav) {
        case Marcar:

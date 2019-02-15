@@ -29,11 +29,13 @@ public class PagePostfCodSegStpV {
      * @throws Exception 
      */
     public static void postfinanceValidate1rstPage(String nombrePago, String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
-    	PagePostfCodSeg.waitLoadPage(dFTest.driver);
-    	if (PagePostfCodSeg.isPasarelaTest(dFTest.driver))
+    	PagePostfCodSeg.waitLoadPage();
+    	if (PagePostfCodSeg.isPasarelaTest(dFTest.driver)) {
             PagePostfCodSegStpV.validateIsPageTest(nombrePago, importeTotal, codPais, datosStep, dFTest);
-        else
+    	}
+        else {
             PagePostfCodSegStpV.validateIsPagePro(importeTotal, codPais, datosStep, dFTest);
+        }
     }
     
     public static void validateIsPageTest(String nombrePago, String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) {

@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class PageYandexPayingByCodeStpV {
     
-    public static String validateIsPage(String emailUsr, String importeTotal, String codPais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
+    public static String validateIsPage(String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) {
         String paymentCodeForReturn = "";
         String descripValidac = 
             "1) Aparece la página de <b>Paying by code</b><br>" +
@@ -21,7 +21,7 @@ public class PageYandexPayingByCodeStpV {
         datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
-            if (!PageYandexPayingByCode.isPage(channel, dFTest.driver)) {
+            if (!PageYandexPayingByCode.isPage(dFTest.driver)) {
                 listVals.add(1, State.Warn);
             }
             if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver)) {

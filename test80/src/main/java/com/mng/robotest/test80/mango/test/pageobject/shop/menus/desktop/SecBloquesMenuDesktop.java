@@ -38,7 +38,7 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
         return XPathCapaMenusLineaNoNuevoWithTag.replace(TagIdLinea, idLineaDom);
     }
 
-    static String getXPathCapaMenusSublinea(LineaType lineaType, SublineaNinosType sublineaType) {
+    static String getXPathCapaMenusSublinea(SublineaNinosType sublineaType) {
         String idSublineaEnDom = sublineaType.getId(AppEcom.shop);
         return XPathCapaMenusLineaNoNuevoWithTag.replace(TagIdLinea, idSublineaEnDom);
     }
@@ -55,10 +55,12 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
     
     static String getXPathMenusSuperiorLinkVisibles(LineaType lineaType, SublineaNinosType sublineaType, TypeMenuDesktop typeMenu) {
         String xpathCapaMenuLinea = "";
-        if (sublineaType==null)
+        if (sublineaType==null) {
             xpathCapaMenuLinea = getXPathCapaMenusLinea(lineaType);
-        else
-        	xpathCapaMenuLinea = getXPathCapaMenusSublinea(lineaType, sublineaType);
+        }
+        else {
+        	xpathCapaMenuLinea = getXPathCapaMenusSublinea(sublineaType);
+        }
         
         String xpathMenu = getXPathLinkMenuSuperiorRelativeToCapa(typeMenu);
         return (xpathCapaMenuLinea + xpathMenu);

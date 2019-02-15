@@ -28,7 +28,7 @@ import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
 @SuppressWarnings({"static-access"})
 public class AccesoNavigations {
 
-	public static void goToInitURL(String urlInit, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+	public static void goToInitURL(String urlInit, DataFmwkTest dFTest) throws Exception {
     	String currentUrl = dFTest.driver.getCurrentUrl();
     	if (currentUrl.compareTo(urlInit)!=0)
     		dFTest.driver.get(urlInit);
@@ -61,7 +61,7 @@ public class AccesoNavigations {
      */
     public static void accesoVOTF(DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
-        PageLoginVOTF.goToFromUrlAndSetTestABs(dCtxSh.urlAcceso, dCtxSh, dFTest);
+        PageLoginVOTF.goToFromUrlAndSetTestABs(dCtxSh.urlAcceso, dFTest);
         PageLoginVOTF.inputUsuario(dCtxSh.pais.getAccesoVOTF().getUsuario(), dFTest.driver);
         PageLoginVOTF.inputPassword(dCtxSh.pais.getAccesoVOTF().getPassword(), dFTest.driver);
         PageLoginVOTF.clickButtonContinue(dFTest.driver);

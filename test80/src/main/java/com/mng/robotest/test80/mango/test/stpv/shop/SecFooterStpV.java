@@ -48,7 +48,7 @@ public class SecFooterStpV {
      * @param pageInNewTab indica si el link abrirá la página en una nueva ventana
      * @param closeTabAtEnd indicamos si queremos que finalmente se cierre la ventana o no (porque posteriormente queremos proseguir con la prueba)
      */
-    public static DatosStep clickLinkFooter(FooterLink typeFooter, boolean closeAtEnd, Channel channel, AppEcom app, DataFmwkTest dFTest) 
+    public static DatosStep clickLinkFooter(FooterLink typeFooter, boolean closeAtEnd, Channel channel, DataFmwkTest dFTest) 
     throws Exception { 
         //Step
     	PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter, channel);
