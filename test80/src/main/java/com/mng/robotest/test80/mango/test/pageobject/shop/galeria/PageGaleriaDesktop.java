@@ -428,8 +428,7 @@ public class PageGaleriaDesktop extends PageGaleria {
     	return dataTextArticles;
     }
     
-    public List<String> getArticlesTemporadaxRebajadosWithLiteralInLabel(ControlTemporada controlTemporada, List<Integer> listTemporadas, 
-    																	 List<LabelArticle> listLabels) {
+    public List<String> getArticlesTemporadaxRebajadosWithLiteralInLabel(List<Integer> listTemporadas, List<LabelArticle> listLabels) {
     	List<String> listArtSaleWithLabel = getArticlesRebajadosWithLiteralInLabel(listLabels);
     	if (listArtSaleWithLabel.size() == 0) {
     		return listArtSaleWithLabel;

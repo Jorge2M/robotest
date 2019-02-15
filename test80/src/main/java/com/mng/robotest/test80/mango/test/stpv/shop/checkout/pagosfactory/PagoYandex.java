@@ -27,13 +27,13 @@ public class PagoYandex extends PagoStpV {
         PageYandex1rstStpv.validateIsPage(dataPedido.getEmailCheckout(), dataPedido.getImporteTotal(), this.dCtxSh.pais.getCodigo_pais(), datosStep, this.dFTest);
         if (execPay) {
             this.dCtxPago.getDataPedido().setCodtipopago("?");
-            String paymentCode = PageYandex1rstStpv.inputTlfnAndclickContinuar("+7 900 000 00 00", dataPedido.getEmailCheckout(), dataPedido.getImporteTotal(), 
-            																   this.dCtxSh.pais.getCodigo_pais(), this.dCtxSh.channel, this.dFTest);
+            String telefono = "+7 900 000 00 00";
+            String paymentCode = PageYandex1rstStpv.inputTlfnAndclickContinuar(telefono, dataPedido.getImporteTotal(), 
+            																   this.dCtxSh.pais.getCodigo_pais(), this.dFTest);
             String windowHandlePageYandex1rst = this.dFTest.driver.getWindowHandle();
 
             if (PageYandex1rstStpv.hasFailed(dFTest.driver)){
-                paymentCode = PageYandex1rstStpv.retry("+7 900 000 00 00", dataPedido.getEmailCheckout(), this.dCtxSh.pais.getCodigo_pais(),
-                                                        datosStep, this.dCtxSh.channel, this.dFTest);
+                paymentCode = PageYandex1rstStpv.retry(dataPedido.getImporteTotal(), this.dCtxSh.pais.getCodigo_pais(), datosStep, this.dFTest);
             }
 
             String tabNameYandexMoney = "yandexMoney";

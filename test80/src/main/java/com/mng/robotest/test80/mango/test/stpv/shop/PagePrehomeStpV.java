@@ -31,7 +31,7 @@ public class PagePrehomeStpV {
             "Acceder a la página de inicio y seleccionar el país " + dCtxSh.pais.getNombre_pais(),
             "Se selecciona el país/idioma correctamente");
         try {
-            PagePrehome.goToPagePrehome(urlAcceso, dCtxSh, dFTest);
+            PagePrehome.goToPagePrehome(urlAcceso, dFTest);
             PagePrehome.selecionPais(dCtxSh, dFTest);
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);

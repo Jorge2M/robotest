@@ -25,7 +25,7 @@ public class PageLoginVOTFStpV {
             dCtxSh.pais.getNombre_pais() + " (" + usuarioVOTF + " / " + passwordVOTF + ")",
             resultadoEsperado);
         try {
-            PageLoginVOTF.goToFromUrlAndSetTestABs(urlAcceso, dCtxSh, dFTest);
+            PageLoginVOTF.goToFromUrlAndSetTestABs(urlAcceso, dFTest);
             PageLoginVOTF.inputUsuario(usuarioVOTF, dFTest.driver);
             PageLoginVOTF.inputPassword(passwordVOTF, dFTest.driver);
             PageLoginVOTF.clickButtonContinue(dFTest.driver);

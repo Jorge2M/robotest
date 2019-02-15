@@ -7,7 +7,6 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandex1rst;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -18,9 +17,9 @@ public class PageYandex1rstStpv {
         //Validation
         //Esta validación debería hacerse en un punto posterior, una vez se ha intentado enviar el input que es cuando se genera el botón retry.
         String descripValidac =
-                    "1) Aparece la página inicial de Yandex<br>" +
-                            "2) Figura preinformado el email del usuario: " + emailUsr + "<br>" +
-                            "3) Aparece el importe de la compra por pantalla: " + importeTotal;
+        	"1) Aparece la página inicial de Yandex<br>" +
+            "2) Figura preinformado el email del usuario: " + emailUsr + "<br>" +
+            "3) Aparece el importe de la compra por pantalla: " + importeTotal;
 
         datosStep.setNOKstateByDefault();   
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
@@ -44,7 +43,7 @@ public class PageYandex1rstStpv {
         finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
-    public static String inputTlfnAndclickContinuar(String telefonoRuso, String emailUsr, String importeTotal, String codPais, Channel channel, DataFmwkTest dFTest) 
+    public static String inputTlfnAndclickContinuar(String telefonoRuso, String importeTotal, String codPais, DataFmwkTest dFTest) 
     throws Exception {
         //Step
         DatosStep datosStep = new DatosStep       (
@@ -60,10 +59,10 @@ public class PageYandex1rstStpv {
 
         if (!PageYandex1rst.retryButtonExists(dFTest.driver)) {
             //Validation
-            String paymentCode = PageYandexPayingByCodeStpV.validateIsPage(emailUsr, importeTotal, codPais, channel, datosStep, dFTest);
+            String paymentCode = PageYandexPayingByCodeStpV.validateIsPage(importeTotal, codPais, datosStep, dFTest);
             return paymentCode;
         } else {
-            String paymentCode = retry(emailUsr, importeTotal, codPais, datosStep, channel, dFTest);
+            String paymentCode = retry(importeTotal, codPais, datosStep, dFTest);
             return paymentCode;
         }
     }
@@ -72,10 +71,11 @@ public class PageYandex1rstStpv {
         return PageYandex1rst.retryButtonExists(driver);
     }
 
-    public static String retry(String emailUsr, String importeTotal, String codPais, DatosStep datosStep, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static String retry(String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) 
+    throws Exception {
         PageYandex1rst.clickOnRetry(dFTest.driver);
         PageYandex1rst.clickContinue(dFTest.driver);
-        String paymentCode = PageYandexPayingByCodeStpV.validateIsPage(emailUsr, importeTotal, codPais, channel, datosStep, dFTest);
+        String paymentCode = PageYandexPayingByCodeStpV.validateIsPage(importeTotal, codPais, datosStep, dFTest);
         return paymentCode;
     }
 }

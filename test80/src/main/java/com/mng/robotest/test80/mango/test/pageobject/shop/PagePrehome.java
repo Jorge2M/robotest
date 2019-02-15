@@ -230,7 +230,7 @@ public class PagePrehome extends WebdrvWrapp {
      * Ejecuta una acceso a la shop vía la páinga de prehome
      */
     public static void accesoShopViaPrehome(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
-        goToPagePrehome(dCtxSh.urlAcceso, dCtxSh, dFTest);
+        goToPagePrehome(dCtxSh.urlAcceso, dFTest);
         
     	//Forzamos galería sin React
     	int versionSinReact = 0;
@@ -256,10 +256,10 @@ public class PagePrehome extends WebdrvWrapp {
     /**
      * Nos posiconamos en la página de Prehome desde una URL (sorteando la página de JCAS si aparece)
      */
-    public static void goToPagePrehome(String urlPreHome, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+    public static void goToPagePrehome(String urlPreHome, DataFmwkTest dFTest) throws Exception {
     	//Temporal para test Canary!!!
     	//AccesoNavigations.goToInitURL(urlPreHome + "?canary=true", dCtxSh, dFTest);
-    	AccesoNavigations.goToInitURL(urlPreHome, dCtxSh, dFTest);
+    	AccesoNavigations.goToInitURL(urlPreHome, dFTest);
         waitForPageLoaded(dFTest.driver);
         if (PageJCAS.thisPageIsShown(dFTest.driver))
             PageJCAS.identication(dFTest.driver, "jorge.munoz", "2010martina");

@@ -51,7 +51,7 @@ public class PagoPaypal extends PagoStpV {
             }
             
             ModalPreloaderSppinerStpV.validateIsVanished(maxSecondsWait, datosStep, dFTest);
-            if (getPostLoginPagePaypal(dFTest.driver)==PostLoginPagePaypal.SelectPago) {
+            if (getPostLoginPagePaypal()==PostLoginPagePaypal.SelectPago) {
             	PagePaypalSelectPagoStpV.validateIsPageUntil(0, datosStep, dFTest);
             	datosStep = PagePaypalSelectPagoStpV.clickContinuarButton(this.dFTest);      
             }
@@ -82,12 +82,11 @@ public class PagoPaypal extends PagoStpV {
         return InitPagePaypal.Login;
     }
     
-    private PostLoginPagePaypal getPostLoginPagePaypal(WebDriver driver) {
+    private PostLoginPagePaypal getPostLoginPagePaypal() {
     	int maxSecondsWait = 5;
     	if (PagePaypalSelectPago.isPageUntil(maxSecondsWait, dFTest.driver)) {
     		return PostLoginPagePaypal.SelectPago;
     	}
-    	
     	if (PagePaypalConfirmacion.isPageUntil(0, dFTest.driver)) {
     		return PostLoginPagePaypal.Confirmacion;
     	}

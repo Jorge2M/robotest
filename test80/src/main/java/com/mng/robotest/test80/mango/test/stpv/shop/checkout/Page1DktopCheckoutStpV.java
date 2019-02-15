@@ -1,7 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
 import java.util.EnumSet;
-import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;

@@ -89,15 +89,15 @@ public class Footer extends GestorWebDriver {
         for (FooterLink footerLinkToValidate : listFooterLinksToValidate) {
         	switch (footerLinkToValidate) {
         	case ayuda:
-        		datosStep = SecFooterStpV.clickLinkFooter(footerLinkToValidate, false, dCtxSh.channel, dCtxSh.appE, dFTest);
+        		datosStep = SecFooterStpV.clickLinkFooter(footerLinkToValidate, false, dCtxSh.channel, dFTest);
         		SecFooterStpV.validaPaginaAyuda(dCtxSh.channel, datosStep, dFTest);
         		break;
         	case mango_card:
-        		SecFooterStpV.clickLinkFooter(footerLinkToValidate, false, dCtxSh.channel, dCtxSh.appE, dFTest);
+        		SecFooterStpV.clickLinkFooter(footerLinkToValidate, false, dCtxSh.channel, dFTest);
                 SecFooterStpV.checkSolicitarTarjeta(dCtxSh.channel, dFTest);
         		break;
         	default:
-                SecFooterStpV.clickLinkFooter(footerLinkToValidate, true, dCtxSh.channel, dCtxSh.appE, dFTest);
+                SecFooterStpV.clickLinkFooter(footerLinkToValidate, true, dCtxSh.channel, dFTest);
                 dFTest.driver.get(urlInitialPage);
         	}
         	

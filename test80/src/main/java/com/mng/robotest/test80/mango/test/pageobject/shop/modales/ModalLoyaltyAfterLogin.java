@@ -11,7 +11,7 @@ public class ModalLoyaltyAfterLogin extends WebdrvWrapp {
 	final static String XPathIrDeShoppingLink = XPathCapaContainer + "//a[@class[contains(.,'loyalty-irdeshopping')]]";
 	
 	public static boolean isModalVisibleUntil(int maxSecondsToWait, WebDriver driver) {
-		return (isElementVisible(driver, By.xpath(XPathIrDeShoppingLink)));
+		return (isElementVisibleUntil(driver, By.xpath(XPathIrDeShoppingLink), maxSecondsToWait));
 	}
 	
 	public static void closeModal(WebDriver driver) throws Exception {

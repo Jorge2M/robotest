@@ -269,12 +269,12 @@ public class PageGaleriaMobil extends PageGaleria {
     		clickHearthIcon(hearthIcon);
     	}
     	catch (WebDriverException e) {
-    		hideElementsThatCanOverloapHearthIcon(hearthIcon);
+    		hideElementsThatCanOverloapHearthIcon();
     		clickHearthIcon(hearthIcon);
     	}
     }
     
-    private void hideElementsThatCanOverloapHearthIcon(WebElement hearthIcon) {
+    private void hideElementsThatCanOverloapHearthIcon() {
 	    hideHtmlComponent(HtmlLocator.ClassName, "orders-filters", driver);
 	    hideHtmlComponent(HtmlLocator.ClassName, "order-filters", driver);
 	    hideHtmlComponent(HtmlLocator.TagName, "header", driver);

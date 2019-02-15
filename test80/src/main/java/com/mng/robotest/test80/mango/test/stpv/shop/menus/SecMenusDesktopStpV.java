@@ -816,7 +816,7 @@ public class SecMenusDesktopStpV {
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             List<String> listArtWrong = 
-            	pageGaleriaDesktop.getArticlesTemporadaxRebajadosWithLiteralInLabel(ControlTemporada.articlesFrom, tempSales, listLabelsWrong);
+            	pageGaleriaDesktop.getArticlesTemporadaxRebajadosWithLiteralInLabel(tempSales, listLabelsWrong);
             	//pageGaleriaDesktop.getArticlesRebajadosWithLiteralInLabel(listLabelsWrong);
             if (listArtWrong.size() > 0) {
                 listVals.add(1, State.Warn);

@@ -221,9 +221,9 @@ public class Otras extends GestorWebDriver {
     /**
     /* Acceso a la prehome, selección de Japón/Japonés y validaciones de que aparece la portada de la shop específica de Japón
      */
-    @Test (
-        groups={"Otras", "Canal:desktop_App:shop"}, 
-        description="Pruebas aspectos")
+//    @Test (
+//        groups={"Otras", "Canal:desktop_App:shop"}, 
+//        description="Pruebas aspectos")
     public void OTR006_PruebasAspectos(ITestContext context) throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
