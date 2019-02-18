@@ -10,6 +10,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
@@ -161,12 +162,14 @@ public class SecMenusWrapperStpV {
         return datosStep;
     }
     
-    public static DatosStep selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static void selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
-        if (dCtxSh.channel==Channel.movil_web)
-            return SecMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, dFTest);
-        
-        return SecMenusDesktopStpV.selectMenuSuperiorTypeCatalog(menu1rstLevel, dCtxSh, dFTest);
+        if (dCtxSh.channel==Channel.movil_web) {
+            SecMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, dFTest);
+        }
+        else {	
+        	SecMenusDesktopStpV.selectMenuSuperiorTypeCatalog(menu1rstLevel, dCtxSh, dFTest);
+        }
     }
     
     public static DatosStep selectMenuLateral1erLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
@@ -180,50 +183,12 @@ public class SecMenusWrapperStpV {
     /**
      * Validación de la selección de un menú lateral de 1er o 2o nivel 
      */
-	public static void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh, DatosStep datosStep, DataFmwkTest dFTest)
+	public static void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh, DataFmwkTest dFTest)
     throws Exception {
-        //Validaciones
-    	int maxSecondsToWaitArticle = 3;
-    	int maxSecondsToWaitIcon = 2;
-        String descripValidac = 
-            "1) Como mínimo se obtiene un artículo (lo esperamos hasta " + maxSecondsToWaitArticle + " segundos)<br>";
-        if (dCtxSh.appE==AppEcom.shop) {
-        	descripValidac+=
-        	"2) El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + maxSecondsToWaitIcon + " segundos)<br>";
-            descripValidac+=
-            "3) Cada artículo tiene 1 icono de favoritos asociado";
+		validateGaleriaAfeterSelectMenu(dCtxSh, dFTest.driver);
+        if (dCtxSh.channel==Channel.desktop) {
+            SecMenusDesktopStpV.validationsSelecMenuEspecificDesktop(menu, dCtxSh.channel, dCtxSh.appE, dFTest);
         }
-        else
-            descripValidac+=
-            "3) No aparece ningún icono de favoritos asociado a ningún artículo";        
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            PageGaleria pageGaleria = PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-            if (!pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, maxSecondsToWaitArticle)) {
-                listVals.add(1, State.Warn);
-            }
-            if (dCtxSh.appE==AppEcom.shop) {
-            	if (!pageGaleria.isArticleWithHearthIconPresentUntil(1, maxSecondsToWaitIcon)) {
-            		listVals.add(2, State.Defect);
-            	}
-                if (!pageGaleria.eachArticlesHasOneFavoriteIcon()) {
-                    listVals.add(3, State.Warn);            
-                }
-            }
-            else {
-                if (pageGaleria.getNumFavoritoIcons() > 0) {
-                    listVals.add(3, State.Defect);
-                }
-            }
-                    
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        //Validaciones específicas para el caso de Desktop
-        if (dCtxSh.channel==Channel.desktop)
-            SecMenusDesktopStpV.validationsSelecMenuEspecificDesktop(menu, dCtxSh.channel, dCtxSh.appE, datosStep, dFTest);
        
         //Validaciones estándar. 
         AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
@@ -234,7 +199,35 @@ public class SecMenusWrapperStpV {
                                                                   Constantes.AnalyticsVal.Criteo,
                                                                   Constantes.AnalyticsVal.DataLayer);
         
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, menu.getLinea(), analyticSet, datosStep, dFTest);
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, menu.getLinea(), analyticSet, dFTest);
+    }
+    
+	@Validation
+    public static ListResultValidation validateGaleriaAfeterSelectMenu(DataCtxShop dCtxSh, WebDriver driver) 
+	throws Exception {
+		ListResultValidation validations = ListResultValidation.getNew();
+		PageGaleria pageGaleria = PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		int maxSecondsToWaitArticle = 3;
+		int maxSecondsToWaitIcon = 2;
+		
+		validations.add (
+			"Como mínimo se obtiene un artículo (lo esperamos hasta " + maxSecondsToWaitArticle + " segundos)<br>",
+			pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, maxSecondsToWaitArticle), State.Warn);
+		if (dCtxSh.appE==AppEcom.shop) {
+			validations.add (
+				"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + maxSecondsToWaitIcon + " segundos)<br>",
+				pageGaleria.isArticleWithHearthIconPresentUntil(1, maxSecondsToWaitIcon), State.Defect);
+			validations.add (
+				"Cada artículo tiene 1 icono de favoritos asociado",
+				pageGaleria.eachArticlesHasOneFavoriteIcon(), State.Warn);
+		}
+		else {
+			validations.add (
+				"No aparece ningún icono de favoritos asociado a ningún artículo",
+				pageGaleria.getNumFavoritoIcons() == 0, State.Defect);
+		}
+		
+		return validations;
     }
     
     public static DatosStep seleccionLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
@@ -290,11 +283,11 @@ public class SecMenusWrapperStpV {
 	        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, dFTest);
 	        if (typeMenu == FilterCollection.sale) {
 	            pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles(), datosStep);
-	            pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.norebajado, State.Warn, datosStep);
+	            pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.norebajado, State.Warn);
 	        }
 	        
 	        if (typeMenu == FilterCollection.nextSeason) {
-	        	pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Info_NoHardcopy, datosStep);
+	        	pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Info_NoHardcopy);
 	        	pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles(), State.Info_NoHardcopy, datosStep);
 	        }
         }

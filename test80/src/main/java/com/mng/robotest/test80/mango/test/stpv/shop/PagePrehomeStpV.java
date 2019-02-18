@@ -113,7 +113,7 @@ public class PagePrehomeStpV {
             Constantes.AnalyticsVal.GoogleAnalytics,
             Constantes.AnalyticsVal.NetTraffic, 
             Constantes.AnalyticsVal.DataLayer);        
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, datosStep, dFTest);
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, dFTest);
         
         if (execValidacs) {
             //Validaciones

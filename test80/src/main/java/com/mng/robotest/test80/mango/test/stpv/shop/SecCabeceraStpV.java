@@ -15,11 +15,9 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraDe
 public class SecCabeceraStpV {
 
 	private final SecCabecera secCabecera;
-	private final DataFmwkTest dFTest;
 	private final DataCtxShop dCtxSh;
 	
 	private SecCabeceraStpV(DataCtxShop dCtxSh, DataFmwkTest dFTest) {
-		this.dFTest = dFTest;
 		this.dCtxSh = dCtxSh;
 		this.secCabecera = SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
 	}

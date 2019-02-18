@@ -147,7 +147,7 @@ public class TestNodos extends GestorWebDriver {
                 }
                 
                 //Validaciones. En shop validamos que exista un porcentaje mínimo de panorámicas
-                pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS, datosStep);
+                pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
             }
 			
             //Step. Seleccionar la línea She

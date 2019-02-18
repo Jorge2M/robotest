@@ -3,11 +3,12 @@ package com.mng.robotest.test80.mango.test.appshop;
 import org.testng.ITestContext;
 import java.lang.reflect.Method;
 import org.testng.annotations.*;
+import java.util.List;
+import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -31,11 +32,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusDesktopStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV;
-
-import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-
 
 public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas propias de MANGO*/ {
 
@@ -86,30 +82,30 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
     public void REB001_RebajasDic2018() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
-        DatosStep datosStep = null;
         int numLineasPais = dCtxSh.pais.getShoponline().getNumLineasTiendas(dCtxSh.appE);
             
         //Step&Validation
-        datosStep = PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest);
-        if (numLineasPais==1)
+        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest);
+        if (numLineasPais==1) {
             return;
+        }
         
-        PageHomeMarcasStpV.validaRebajasJun2018(TypeHome.Multimarca, true/*areBanners*/, dCtxSh, datosStep, dFTest);
+        PageHomeMarcasStpV.validaRebajasJun2018(TypeHome.Multimarca, true/*areBanners*/, dCtxSh, dFTest);
         if (dCtxSh.pais.isVentaOnline()) {
 	        //Step&Validation
         	int maxBannersToLoad = 1;
         	int posBannerToTest = 1;
         	boolean applyValidations = true;
         	SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, dFTest.driver);
-	        datosStep = secBannersStpV.seleccionarBanner(posBannerToTest, applyValidations, dCtxSh.appE, dCtxSh.channel, dFTest);
+	        secBannersStpV.seleccionarBanner(posBannerToTest, applyValidations, dCtxSh.appE, dCtxSh.channel, dFTest);
 	        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);
-	        pageGaleriaStpV.validaRebajasJun2018Desktop(true/*isGaleriaSale*/, dCtxSh.pais, dCtxSh.idioma, LineaType.she, bloqueMenu.prendas, datosStep);
+	        pageGaleriaStpV.validaRebajasJun2018Desktop(true/*isGaleriaSale*/, dCtxSh.pais, dCtxSh.idioma, LineaType.she, bloqueMenu.prendas);
 	        PageGaleriaStpV.clickMoreInfoBannerRebajasJun2018(dFTest);
 	        SecMenusDesktopStpV.stepValidaCarrusels(dCtxSh.pais, LineaType.rebajas, dCtxSh.appE, dFTest);
         }
         
         //Step&Validation
-        datosStep = SecMenusWrapperStpV.secMenuUser.selectRegistrate(Channel.desktop, dCtxSh, dFTest);
+        SecMenusWrapperStpV.secMenuUser.selectRegistrate(Channel.desktop, dCtxSh, dFTest);
         PageRegistroIniStpV.validaRebajasJun2018(dCtxSh.idioma, dFTest);
         
         //Aplicamos el test a las líneas/sublíneas
@@ -132,18 +128,18 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
             sublineaType = sublinea.getTypeSublinea();
         
         //Selección de la línea/sublínea
-        DatosStep datosStep = SecMenusWrapperStpV.seleccionLinea(lineaType, sublineaType, dCtxSh, dFTest);
-        PageHomeMarcasStpV.validaRebajasJun2018(TypeHome.PortadaLinea, areBanners, dCtxSh, datosStep, dFTest);
+        SecMenusWrapperStpV.seleccionLinea(lineaType, sublineaType, dCtxSh, dFTest);
+        PageHomeMarcasStpV.validaRebajasJun2018(TypeHome.PortadaLinea, areBanners, dCtxSh, dFTest);
         if (SecMenusWrap.canClickMenuArticles(dCtxSh.pais, linea, sublinea)) {
             PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);
             
         	Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "pantalones"));
-            datosStep = SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh, dFTest);
-            pageGaleriaStpV.validaRebajasJun2018Desktop(false/*isGaleriaSale*/, dCtxSh.pais, dCtxSh.idioma, linea.getType(), bloqueMenu.prendas, datosStep);
+            SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh, dFTest);
+            pageGaleriaStpV.validaRebajasJun2018Desktop(false/*isGaleriaSale*/, dCtxSh.pais, dCtxSh.idioma, linea.getType(), bloqueMenu.prendas);
             
             Menu1rstLevel menuZapatos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "zapatos"));
-            datosStep = SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuZapatos, dCtxSh, dFTest);
-            pageGaleriaStpV.validaRebajasJun2018Desktop(false/*isGaleriaSale*/, dCtxSh.pais, dCtxSh.idioma, linea.getType(), bloqueMenu.accesorios, datosStep);
+            SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuZapatos, dCtxSh, dFTest);
+            pageGaleriaStpV.validaRebajasJun2018Desktop(false/*isGaleriaSale*/, dCtxSh.pais, dCtxSh.idioma, linea.getType(), bloqueMenu.accesorios);
             
             //Click filtros laterales de rebajas
             SecMenusWrapperStpV.selectFiltroCollection(FilterCollection.sale, dCtxSh.channel, dCtxSh.appE, dFTest);
@@ -153,19 +149,19 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
             String dataGaMenuNuevaTemporada = getDataGaLabelNuevaTemporada(dCtxSh.pais.getCodigo_pais(), sublineaType);
             menuNuevaTemp.setDataGaLabel(dataGaMenuNuevaTemporada);
 
-            datosStep = SecMenusDesktopStpV.stepEntradaMenuDesktop(menuNuevaTemp, "", dCtxSh.channel, dCtxSh.appE, dFTest);
-            pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Defect, datosStep);
+            SecMenusDesktopStpV.stepEntradaMenuDesktop(menuNuevaTemp, "", dCtxSh.channel, dCtxSh.appE, dFTest);
+            pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Defect);
             //PageGaleriaStpV.validaArticlesOfTemporadas(tempArticlesNextSeason, validaNotNewArticles, datosStep, dFTest);
             
             Menu1rstLevel menuRebajas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "rebajas"));
             menuRebajas.setDataGaLabel("rebajas");
-            datosStep = SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuRebajas, dCtxSh, dFTest);
-            pageGaleriaStpV.validaRebajasJun2018Desktop(true/*isGaleriaSale*/, dCtxSh.pais, dCtxSh.idioma, linea.getType(), bloqueMenu.prendas, datosStep);
+            SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuRebajas, dCtxSh, dFTest);
+            pageGaleriaStpV.validaRebajasJun2018Desktop(true/*isGaleriaSale*/, dCtxSh.pais, dCtxSh.idioma, linea.getType(), bloqueMenu.prendas);
             PageGaleriaStpV.clickMoreInfoBannerRebajasJun2018(dFTest);
             
             int maxRebajas = RebajasPaisDAO.getMaxRebajas(dCtxSh.pais.getCodigo_pais());
             if (maxRebajas==70) {
-            	pageGaleriaStpV.validaRebajasHasta70Jun2018(dCtxSh.idioma, datosStep);
+            	pageGaleriaStpV.validaRebajasHasta70Jun2018(dCtxSh.idioma);
             }
         }
     }

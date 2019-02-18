@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -60,8 +61,8 @@ public class PageHomeMarcasStpV {
     }
     
     public enum TypeHome {Multimarca, PortadaLinea}
-    public static void validaRebajasJun2018(TypeHome typeHome, boolean areBanners, DataCtxShop dCtxSh, 
-    										DatosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaRebajasJun2018(TypeHome typeHome, boolean areBanners, DataCtxShop dCtxSh, DataFmwkTest dFTest) {
+    	DatosStep datosStep = TestCaseData.getDatosStepForValidation();
         int maxSeconds = 3;
         String validacion1 = "Aparece la línea \"Rebajas\" (lo esperamos hasta " + maxSeconds + " segundos)";
         if (!dCtxSh.pais.isVentaOnline())

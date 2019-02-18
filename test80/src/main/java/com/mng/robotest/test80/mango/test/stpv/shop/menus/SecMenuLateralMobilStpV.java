@@ -48,7 +48,7 @@ public class SecMenuLateralMobilStpV {
         finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
-        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, datosStep, dFTest);
+        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, dFTest);
         
         return datosStep;
     }
