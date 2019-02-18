@@ -70,6 +70,11 @@ public class ListResultValidation {
     }
     
     private void checkValidations() {
+    	checkAndSetStateValidation();
+    	setDatosStepAfterCheckValidation();
+    }
+    
+    private void checkAndSetStateValidation() {
     	if (isStepFinishedWithException()) {
     		stateValidation = State.Nok;
     	}
@@ -87,9 +92,13 @@ public class ListResultValidation {
     			}
     		}
     	}
-    	
-    	datosStep.setResultSteps(stateValidation);
-    	datosStep.setResultLastValidation(State.getMoreCritic(stateValidation, datosStep.getResultSteps()));
+    }
+    
+    private void setDatosStepAfterCheckValidation() {
+    	datosStep.setResultLastValidation(stateValidation);
+    	if (stateValidation.isMoreCriticThan(datosStep.getResultSteps()) || !datosStep.isStateUpdated()) {
+    		datosStep.setResultSteps(stateValidation);
+    	}
     	datosStep.setListResultValidations(this);
     	datosStep.setNumValidations(datosStep.getNumValidations() + 1);
     }

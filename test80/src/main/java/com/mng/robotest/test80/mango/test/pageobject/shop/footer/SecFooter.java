@@ -45,7 +45,7 @@ public class SecFooter extends WebdrvWrapp {
     	envio(footerOutlet, channelAll, "//a[@data-ga-label='envio' and text()[contains(.,'Envío')]]", false), 
     	formas_de_pago(footerOutlet, channelAll, "//a[@data-ga-label='pago' and text()[contains(.,'Formas de pago')]]", false), 
     	guia_de_tallas(footerOutlet, channelAll, "//a[@data-ga-label='guiaTallas']", true),
-    	mango(footerOutlet, channelAll, "//a[@data-ga-label='shop' and text()[contains(.,'MANGO')]]", true), 
+    	mango(footerOutlet, channelAll, "//a[@data-ga-label='shop' and (text()[contains(.,'MANGO')] or text()[contains(.,'Mango')])]", true), 
     	trabaja_con_nosotros_outlet(footerOutlet, channelAll, "//a[@data-ga-label='pieTrabajarNew' and text()[contains(.,'Trabaja')]]", true);
     	
     	List<AppEcom> appList;

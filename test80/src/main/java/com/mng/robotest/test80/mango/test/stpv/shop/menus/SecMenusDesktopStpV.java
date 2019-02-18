@@ -63,9 +63,9 @@ public class SecMenusDesktopStpV {
         saveNettraffic=SaveWhen.Always)
     public static void selectMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
-            SecMenusDesktop.
-            	secMenuSuperior.
-            	secBlockMenus.clickMenuAndGetName(menu1rstLevel, dCtxSh.appE, dFTest.driver);
+        SecMenusDesktop.
+        	secMenuSuperior.
+        	secBlockMenus.clickMenuAndGetName(menu1rstLevel, dCtxSh.appE, dFTest.driver);
         
         //Validaciones
         SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, dFTest);
