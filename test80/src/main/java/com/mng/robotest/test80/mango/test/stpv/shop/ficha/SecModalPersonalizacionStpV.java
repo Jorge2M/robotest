@@ -98,7 +98,7 @@ public class SecModalPersonalizacionStpV {
 	@Step(
 			description="Seleccionamos el link <b>Añadir personalización</b>",
 			expected="Aparece el modal para la personalización de la prenda")
-	public void selectCustomization (Channel channel, WebDriver driver) throws Exception {
+	private void selectCustomization (Channel channel, WebDriver driver) throws Exception {
 		//Step
 		if(channel == Channel.movil_web)
 			WebdrvWrapp.moveToElement(By.xpath(ModalElement.BotonIniciar.getXPath(channel)), driver);
@@ -111,15 +111,15 @@ public class SecModalPersonalizacionStpV {
 	@Validation(
 			description="1) Aparece el modal de personalización de la prenda",
 			level=State.Warn)
-	public static boolean validateModal(int maxSecondsWait, WebDriver driver) {
-		return (!SecModalPersonalizacion.isElementInStateUntil(ModalElement.Modal, StateElem.Visible, maxSecondsWait, driver));
+	private static boolean validateModal(int maxSecondsWait, WebDriver driver) {
+		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Modal, StateElem.Visible, maxSecondsWait, driver));
 	}
 
 	@Step(
 			description="Seleccionamos el botón <b>Empezar</b>",
 			expected="Aparecen las primeras opciones de personalizacion del artículo"
 	)
-	public void startCustomization (Channel channel, WebDriver driver) throws Exception {
+	private void startCustomization (Channel channel, WebDriver driver) throws Exception {
 		//Step
 		SecModalPersonalizacion.selectElement(ModalElement.StartProcces, channel, driver);
 
@@ -134,7 +134,7 @@ public class SecModalPersonalizacionStpV {
 	@Validation(
 			description="1) Aparece la cabecera correspondiente a la personalizacion de la prenda",
 			level=State.Warn)
-	public static boolean validationInitMblCustomization(int maxSecondsWait, ModalElement element, Channel channel, WebDriver driver) {
+	private static boolean validationInitMblCustomization(int maxSecondsWait, ModalElement element, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
@@ -142,7 +142,7 @@ public class SecModalPersonalizacionStpV {
 			description="Seleccionamos la opción <b>Un icono</b>",
 			expected="Aparece la lista de iconos"
 	)
-	public void selectIconCustomization (Channel channel, WebDriver driver) throws Exception {
+	private void selectIconCustomization (Channel channel, WebDriver driver) throws Exception {
 		//Step
 		SecModalPersonalizacion.selectElement(ModalElement.RadioIcon, channel, driver);
 
@@ -159,7 +159,7 @@ public class SecModalPersonalizacionStpV {
 	@Validation(
 			description="1) Aparece la lista de iconos seleccionables",
 			level=State.Warn)
-	public static boolean validationIconSelection(int maxSecondsWait, ModalElement element, Channel channel, WebDriver driver) {
+	private static boolean validationIconSelection(int maxSecondsWait, ModalElement element, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
@@ -167,7 +167,7 @@ public class SecModalPersonalizacionStpV {
 			description="Seleccionamos el primer icono",
 			expected="Aparece el botón Confirmar"
 	)
-	public void selectFirstIcon (Channel channel, WebDriver driver) throws Exception {
+	private void selectFirstIcon (Channel channel, WebDriver driver) throws Exception {
 		//Step
 		SecModalPersonalizacion.selectElement(ModalElement.IconSelecction, channel, driver, WebdrvWrapp.TypeOfClick.javascript);
 
@@ -180,7 +180,7 @@ public class SecModalPersonalizacionStpV {
 	}
 
 	@Validation
-	public static ListResultValidation validateIconSelected(WebDriver driver) {
+	private static ListResultValidation validateIconSelected(WebDriver driver) {
 		ListResultValidation validations = ListResultValidation.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
@@ -188,14 +188,14 @@ public class SecModalPersonalizacionStpV {
 				SecModalPersonalizacion.isElementInStateUntil(ModalElement.IconSelecction, StateElem.Visible, maxSecondsWait, driver), State.Warn);
 		validations.add(
 				"Podemos confirmar nuestra seleccion",
-				SecModalPersonalizacion.isElementInStateUntil(ModalElement.PositionButton, StateElem.Visible, maxSecondsWait, driver), State.Warn);
+				SecModalPersonalizacion.isElementInStateUntil(ModalElement.Continue, StateElem.Visible, maxSecondsWait, driver), State.Warn);
 		return validations;
 	}
 
 	@Validation(
 			description="1) Aparece seleccionado el primer icono y podemos confirmar nuestra seleccion",
 			level=State.Warn)
-	public static boolean validateFirstIconSelectionMvl(int maxSecondsWait, ModalElement element, Channel channel, WebDriver driver) {
+	private static boolean validateFirstIconSelectionMvl(int maxSecondsWait, ModalElement element, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
@@ -203,7 +203,7 @@ public class SecModalPersonalizacionStpV {
 			description="Seleccionamos el botón \"Confirmar\"",
 			expected="Se hace visible el paso-2"
 	)
-	public void selectWhere (Channel channel, WebDriver driver) throws Exception {
+	private void selectWhere (Channel channel, WebDriver driver) throws Exception {
 		//Step
 		if (channel == Channel.desktop)
 			SecModalPersonalizacion.selectElement(ModalElement.Continue, channel, driver);
@@ -220,7 +220,7 @@ public class SecModalPersonalizacionStpV {
 	}
 
 	@Validation
-	public static ListResultValidation validateWhere(WebDriver driver) {
+	private static ListResultValidation validateWhere(WebDriver driver) {
 		ListResultValidation validations = ListResultValidation.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
@@ -228,14 +228,14 @@ public class SecModalPersonalizacionStpV {
 				SecModalPersonalizacion.isElementInStateUntil(ModalElement.PositionButton, StateElem.Visible, maxSecondsWait, driver), State.Warn);
 		validations.add(
 				"Podemos confirmar nuestra seleccion",
-				SecModalPersonalizacion.isElementInStateUntil(ModalElement.StepProof, StateElem.Visible, maxSecondsWait, driver), State.Warn);
+				SecModalPersonalizacion.isElementInStateUntil(ModalElement.Continue, StateElem.Visible, maxSecondsWait, driver), State.Warn);
 		return validations;
 	}
 
 	@Validation(
 			description="1) En el flujo mobil, ahora aparecen los colores disponibles",
 			level=State.Warn)
-	public static boolean validateColorsMvl(int maxSecondsWait, ModalElement element, Channel channel, WebDriver driver) {
+	private static boolean validateColorsMvl(int maxSecondsWait, ModalElement element, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
@@ -243,7 +243,7 @@ public class SecModalPersonalizacionStpV {
 			description="Seleccionamos el botón \"Confirmar\"",
 			expected="Aparece el apartado 3 de la personalización"
 	)
-	public void selectColor (Channel channel, WebDriver driver) throws Exception {
+	private void selectColor (Channel channel, WebDriver driver) throws Exception {
 		//Step
 		SecModalPersonalizacion.selectElement(ModalElement.Continue, channel, driver, WebdrvWrapp.TypeOfClick.javascript);
 
@@ -258,7 +258,7 @@ public class SecModalPersonalizacionStpV {
 	}
 
 	@Validation
-	public static ListResultValidation validateSelectionColor(WebDriver driver) {
+	private static ListResultValidation validateSelectionColor(WebDriver driver) {
 		ListResultValidation validations = ListResultValidation.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
@@ -273,7 +273,7 @@ public class SecModalPersonalizacionStpV {
 	@Validation(
 			description="1) Podemos continuar con nuestro proceso de personalizacion",
 			level=State.Warn)
-	public static boolean validateContinuesMvl (int maxSecondsWait, Channel channel, WebDriver driver) {
+	private static boolean validateContinuesMvl (int maxSecondsWait, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Continue, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
@@ -281,7 +281,7 @@ public class SecModalPersonalizacionStpV {
 			description="Seleccionamos el botón \"Confirmar\"",
 			expected="Aparece el apartado 4 de la personalización"
 	)
-	public void selectSize (Channel channel, WebDriver driver) throws Exception {
+	private void selectSize (Channel channel, WebDriver driver) throws Exception {
 		//Step
 		SecModalPersonalizacion.clickAndWait(channel, ModalElement.Continue, driver);
 
@@ -296,14 +296,14 @@ public class SecModalPersonalizacionStpV {
 	@Validation(
 			description="1) Aparecen los posibles tamaños",
 			level=State.Warn)
-	public static boolean validateSizeList(int maxSecondsWait, Channel channel, WebDriver driver) {
+	private static boolean validateSizeList(int maxSecondsWait, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.SizeContainer, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
 	@Validation(
 			description="1) Es visible el botón #{descripcion}que nos permite añadir ese producto a la bolsa",
 			level=State.Warn)
-	public static boolean validateAddBagMvl(String descripcion, int maxSecondsWait, Channel channel, WebDriver driver) {
+	private static boolean validateAddBagMvl(String descripcion, int maxSecondsWait, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.addToBag, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
@@ -311,7 +311,7 @@ public class SecModalPersonalizacionStpV {
 			description="Seleccionamos el botón \"Añadir a la bolsa\"",
 			expected="Aparece el modal con las opciones para ver la bolsa o seguir comprando"
 	)
-	public void confirmCustomization (Channel channel, WebDriver driver) throws Exception {
+	private void confirmCustomization (Channel channel, WebDriver driver) throws Exception {
 		//Step
 		if (channel != Channel.movil_web) {
 			SecModalPersonalizacion.selectElement(ModalElement.Continue, driver);
@@ -331,7 +331,7 @@ public class SecModalPersonalizacionStpV {
 	@Validation(
 			description="1) Aparece el botón para añadir a la bolsa",
 			level=State.Warn)
-	public static boolean validateAddBag(int maxSecondsWait, Channel channel, WebDriver driver) {
+	private static boolean validateAddBag(int maxSecondsWait, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Continue, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
@@ -339,7 +339,7 @@ public class SecModalPersonalizacionStpV {
 			description="Seleccionamos el botón \"Añadir a la bolsa\"",
 			expected="El artículo se da de alta correctamente en la bolsa"
 	)
-	public void checkCustomizationProof (Channel channel, WebDriver driver) throws Exception {
+	private void checkCustomizationProof (Channel channel, WebDriver driver) throws Exception {
 		//Step
 		if (channel == Channel.desktop) {
 			SecModalPersonalizacion.selectElement(ModalElement.Continue, channel, driver);
@@ -355,7 +355,7 @@ public class SecModalPersonalizacionStpV {
 	@Validation(
 			description="1) En la bolsa aparece el apartado correspondiente a la personalización (lo esperamos hasta #{maxSecondsWait} segundos)",
 			level=State.Defect)
-	public static boolean validateCustomizationProof(int maxSecondsWait, ModalElement element, Channel channel, WebDriver driver) {
+	private static boolean validateCustomizationProof(int maxSecondsWait, ModalElement element, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
@@ -382,7 +382,7 @@ public class SecModalPersonalizacionStpV {
 	@Validation(
 			description="1) Es visible el apartado #{numApartado} de la personalización",
 			level=State.Defect)
-	public static boolean validateSection(int maxSecondsWait, ModalElement element, int numApartado, Channel channel, WebDriver driver) {
+	private static boolean validateSection(int maxSecondsWait, ModalElement element, int numApartado, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 
@@ -390,7 +390,7 @@ public class SecModalPersonalizacionStpV {
 	@Validation(
 			description="1) #{descripcion}",
 			level=State.Warn)
-	public static boolean validateCabeceraMvl(String descripcion, int maxSecondsWait, Channel channel, WebDriver driver) {
+	private static boolean validateCabeceraMvl(String descripcion, int maxSecondsWait, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.HeaderProof, StateElem.Visible, maxSecondsWait, channel, driver));
 	}
 

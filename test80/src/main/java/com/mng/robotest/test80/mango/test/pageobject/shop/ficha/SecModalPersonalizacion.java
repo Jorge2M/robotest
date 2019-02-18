@@ -7,28 +7,28 @@ public class SecModalPersonalizacion extends WebdrvWrapp {
 
 	public enum ModalElement implements ElementPage {
 		Seccion("//div[@class='customization-form']"),
-		StartProcces("//button[@class[contains(.,'customization-add-bag')]]", null),
+		StartProcces("//button[@class[contains(.,'customization-add')]]", null),
 		BotonIniciar("//button[@class='customization-btn']", "//button[@id='productFormPersonalize']"),
 		PantallaPrevia("div[@class='customization-action']"),
 
 		StepProof("//li[@class[contains(.,'breadcrumb--active')]]", null),
-		Step1Proof("//h1[text()[contains(.,'1.')]]"),
-		Step2Proof("//h1[text()[contains(.,'2.')]]"),
-		Step3Proof("//h1[text()[contains(.,'3.')]]"),
-		Step4Proof("//h1[text()[contains(.,'4.')]]"),
+		Step1Proof("//*[text()[contains(.,'1. ')]]"),
+		Step2Proof("//*[text()[contains(.,'2. ')]]"),
+		Step3Proof("//*[text()[contains(.,'3. ')]]"),
+		Step4Proof("//*[text()[contains(.,'4. ')]]"),
 		
 		HeaderProof("//div[@class='customization-header']", null),
 		BackProof("//button[@class='back-btn']", null),
 		BolsaProof("//div[@class='sbi-customization-content']", null),
-		Continue("//button[@class[contains(.,'sg-t-btn')]]", "//button[@class='sg-s-btn']"),
+		Continue("//button[@class[contains(.,'sg-t-btn')] or @class[contains(.,'sg-p-btn')]]", "//button[@class='sg-t-btn' or @class='sg-s-btn']"),
 		addToBag("", "//button[@class[contains(.,'sg-s-btn')]]"),
 		
-		Modal("//div[@class[contains(.,'customization-wrapper')]]", "//div[@class='customization']"),
+		Modal("//div[@class[contains(.,'customization')]]", "//div[@class[contains(.,'customization')]]"),
 		Icons("//div[@class='custom-icons']", null),
 		Initials("//button[@class='motif-option'][1]", null),
 		RadioIcon("//button[@class='motif-option'][2]", null),
 		IconSelecction("//div[@class[contains(.,'custom-icons')]]", "//img[@alt='Abejorro']"),
-		PositionButton("//button[@class[contains(.,'customization-position-item')]][1]", "//div[@class='customization-position-item'][1]"),
+		PositionButton("//button[@class[contains(.,'position')]][1]", "//div[@class[contains(.,'position')]][1]"),
 		ColorsContainer("//div[@class='colors']"),
 		SizeContainer("//div[@class='customization-size']"),
 		GoToBag("//span[@class[contains(.,'cart-button')]]");
