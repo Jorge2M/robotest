@@ -111,7 +111,7 @@ public class PageChequeRegaloInputDataStpV{
                 listVals.add(2, State.Defect);
             }
             if (!PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.mensajeTarjetaSinSaldo, StateElem.Present, maxSecondsWait + 2, dFTest.driver)) {
-                listVals.add(3, State.Defect);
+                listVals.add(3, State.Warn);
             }
             datosStep.setListResultValidations(listVals);
         } finally { listVals.checkAndStoreValidations(descripValidac); }
