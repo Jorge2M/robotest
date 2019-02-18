@@ -21,12 +21,12 @@ public class ListPagosEspana {
 	Pais francia = null;
 	IdiomaPais frances = null;
 	
-    boolean usrReg = true;
-    boolean empleado = true;
-    boolean testVale = true;
-    boolean manyArticles = true;
-    boolean twoArticles = true;
-    boolean anulPedido = true;
+    final boolean usrReg = true;
+    final boolean empleado = true;
+    final boolean testVale = true;
+    final boolean manyArticles = true;
+    final boolean twoArticles = true;
+    final boolean anulPedido = true;
 	
     @Factory
     @Test (
@@ -69,6 +69,7 @@ public class ListPagosEspana {
         //Crearemos 3 tests para el pago VISA y 1 para los restantes 
         int prioridad = 1;
         List<Pago> listPagosToTest = espana.getListPagosTest(appE, false/*isEmpl*/);
+        boolean usrRegIntermitente = true;
         for (Pago pago : listPagosToTest) {
         	if (pago.isNeededTestPasarelaDependingFilter(channel, ctx)) {
 	        	if (pago.getTestpago()!=null && "s".compareTo(pago.getTestpago())==0) {
@@ -78,8 +79,8 @@ public class ListPagosEspana {
 		        		createTestPago(listTests, espana, castellano, pago, appE, channel, usrReg, empleado, !testVale, !manyArticles, !anulPedido, prioridad);
 		        	}
 		        	else {
-		        		createTestPago(listTests, espana, castellano, pago, appE, channel, usrReg, !empleado, !testVale, !manyArticles, !anulPedido, prioridad);
-		            	usrReg=!usrReg; //Iremos alternando entre usr registrado y no-registrado
+		        		createTestPago(listTests, espana, castellano, pago, appE, channel, usrRegIntermitente, !empleado, !testVale, !manyArticles, !anulPedido, prioridad);
+		        		usrRegIntermitente=!usrRegIntermitente; //Iremos alternando entre usr registrado y no-registrado
 		        	}
 		        	
 		    		prioridad+=1;

@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
@@ -28,7 +29,7 @@ public class PasosGenAnalitica {
     /**
      * Aplica las validaciones estándar a nivel de Analítica
      */
-    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DataFmwkTest dFTest) throws Exception {
         //Por defecto aplicaremos todas las avalidaciones (Google Analytics, Criteo, NetTraffic y DataLayer)
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(Constantes.AnalyticsVal.GoogleAnalytics,
                                                                   Constantes.AnalyticsVal.NetTraffic, 
@@ -36,16 +37,17 @@ public class PasosGenAnalitica {
                                                                   Constantes.AnalyticsVal.Bing,
                                                                   Constantes.AnalyticsVal.DataLayer);
         
-        validaHTTPAnalytics(app, lineaId, analyticSet, datosStep, dFTest);
+        validaHTTPAnalytics(app, lineaId, analyticSet, dFTest);
     }
     
-    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, EnumSet<Constantes.AnalyticsVal> analyticSet, DatosStep datosStep, DataFmwkTest dFTest) 
+    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, EnumSet<Constantes.AnalyticsVal> analyticSet, DataFmwkTest dFTest) 
     throws Exception {
-        validaHTTPAnalytics(app, lineaId, null/*DataProcessPago*/, analyticSet, datosStep, dFTest);
+        validaHTTPAnalytics(app, lineaId, null/*DataProcessPago*/, analyticSet, dFTest);
     }
     
-    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DataPedido dataPedido, EnumSet<Constantes.AnalyticsVal> analyticSet, DatosStep datosStep, DataFmwkTest dFTest) 
+    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DataPedido dataPedido, EnumSet<Constantes.AnalyticsVal> analyticSet, DataFmwkTest dFTest) 
     throws Exception {
+    	DatosStep datosStep = TestCaseData.getDatosStepForValidation();
         SaveWhen whenSaveNettraffic = datosStep.getSaveNettrafic();
         if (whenSaveNettraffic == SaveWhen.Always &&
             dFTest.driver.toString().toLowerCase().contains("firefox")) {

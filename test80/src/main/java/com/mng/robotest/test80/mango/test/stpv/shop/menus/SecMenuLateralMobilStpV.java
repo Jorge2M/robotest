@@ -48,7 +48,7 @@ public class SecMenuLateralMobilStpV {
         finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
-        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, datosStep, dFTest);
+        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, dFTest);
         
         return datosStep;
     }
@@ -361,6 +361,6 @@ public class SecMenuLateralMobilStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }
         
        //Validaciones estándar. 
-       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, datosStep, dFTest);
+       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, dFTest);
     }
 }

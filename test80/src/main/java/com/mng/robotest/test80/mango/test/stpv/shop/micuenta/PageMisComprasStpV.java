@@ -53,7 +53,7 @@ public class PageMisComprasStpV {
         finally { listVals.checkAndStoreValidations(descripValidac); }
 
         //Validaciones estÃ¡ndar.
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
     }
 
     public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
@@ -81,7 +81,7 @@ public class PageMisComprasStpV {
         finally { listVals.checkAndStoreValidations(descripValidac); }
             
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
     }
     
     /**

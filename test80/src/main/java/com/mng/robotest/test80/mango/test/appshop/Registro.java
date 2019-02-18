@@ -39,6 +39,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataNinos
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.DataNino.sexoType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro.DataRegType;
+import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro.PageData;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
@@ -153,7 +154,8 @@ public class Registro extends GestorWebDriver {
         dataKOToSend.add(DataRegType.password, "passsinnumeros", false);
         dataKOToSend.add(DataRegType.telefono, "66501512A", false);
         dataKOToSend.add(DataRegType.codpostal, "0872A", false);
-        PageRegistroIniStpV.sendFixedDataToInputs(dataKOToSend, dFTest);
+        String dataToSendInHtmlFormat = dataKOToSend.getFormattedHTMLData(PageData.pageInicial);
+        PageRegistroIniStpV.sendFixedDataToInputs(dataKOToSend, dataToSendInHtmlFormat, dFTest);
 
         //Step. Introducir datos correctos pero usuario ya existente
         ListDataRegistro dataToSend = new ListDataRegistro(); 
@@ -163,7 +165,8 @@ public class Registro extends GestorWebDriver {
         dataToSend.add(DataRegType.password, "Sirjorge74", true);
         dataToSend.add(DataRegType.telefono, "665015122", true);
         dataToSend.add(DataRegType.codpostal, "08720", true);
-        PageRegistroIniStpV.sendFixedDataToInputs(dataToSend, dFTest);
+        dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.pageInicial);
+        PageRegistroIniStpV.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat, dFTest);
         
         //Step. Seleccionamos el botón "Regístrate" y validar que aparece el mensaje de error de usuario ya existente
         PageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, true/*usrExists*/, dCtxSh.appE, dataRegister, dFTest);

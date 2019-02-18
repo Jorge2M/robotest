@@ -8,8 +8,11 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -52,7 +55,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
-
 
 public class PageGaleriaStpV {
 
@@ -324,10 +326,10 @@ public class PageGaleriaStpV {
         }
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, dataForScroll.validaImgBroken, datosStep, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, dataForScroll.validaImgBroken, dFTest);
         
         //VALIDACIONES - PARA ANALYTICS (sólo para firefox y NetAnalysis)
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, datosStep, dFTest);
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, dFTest);
         
         datosScroll.datosStep = datosStep;
         return datosScroll;
@@ -393,7 +395,7 @@ public class PageGaleriaStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }                
 
        //Validaciones estándar. 
-       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
+       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
        
        return numArticulosPant;
    }
@@ -625,29 +627,20 @@ public class PageGaleriaStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }
 
        //Validaciones estándar. 
-       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
+       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
        
        //VALIDACIONES - PARA ANALYTICS (sólo para firefox y NetAnalysis)
-       PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, datosStep, dFTest);        
+       PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, dFTest);        
    }
    
-   public void hayPanoramicasEnGaleriaDesktop(float porcentaje, DatosStep datosStep) {
-       //Validaciones
+   @Validation(
+	description = "Como mínimo el #{porcentaje} % de los productos son panorámicas",
+	level=State.Info_NoHardcopy)
+   public boolean hayPanoramicasEnGaleriaDesktop(float porcentaje) {
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-       String descripValidac = 
-           "1) Como mínimo el " + porcentaje + " % de los productos son panorámicas";
-       datosStep.setNOKstateByDefault();   
-       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-       try {
-           float numArtTotal = pageGaleria.getNumArticulos();
-           float numArtPanoramicos = pageGaleriaDesktop.getNumArticulos(TypeArticleDesktop.Panoramica);
-           if (articlesUnderPercentage(numArtTotal, numArtPanoramicos, porcentaje)) {
-               listVals.add(1, State.Info_NoHardcopy);
-           }
-       
-           datosStep.setListResultValidations(listVals);
-       }
-       finally { listVals.checkAndStoreValidations(descripValidac); }
+       float numArtTotal = pageGaleria.getNumArticulos();
+       float numArtPanoramicos = pageGaleriaDesktop.getNumArticulos(TypeArticleDesktop.Panoramica);
+       return (!articlesUnderPercentage(numArtTotal, numArtPanoramicos, porcentaje));
    }
    
    private static boolean articlesUnderPercentage(float numArtTotal, float numArtToMesure, float percentage) {
@@ -822,7 +815,8 @@ public class PageGaleriaStpV {
    }
 
    @SuppressWarnings("static-access")
-   public void validateBannerSuperiorIfExistsDesktop(DatosStep datosStep) {
+   public void validateBannerSuperiorIfExistsDesktop() {
+	   DatosStep datosStep = TestCaseData.getDatosStepForValidation();
 	   boolean bannerIsVisible = PageGaleriaDesktop.secBannerHead.isVisible(dFTest.driver);
 	   if (bannerIsVisible) {
 		   if (!PageGaleriaDesktop.secBannerHead.isBannerWithoutTextAccesible(dFTest.driver)) {
@@ -863,7 +857,8 @@ public class PageGaleriaStpV {
    }
    
    @SuppressWarnings("static-access")
-   public void validaRebajasHasta70Jun2018(IdiomaPais idioma, DatosStep datosStep) {
+   public void validaRebajasHasta70Jun2018(IdiomaPais idioma) {
+	   DatosStep datosStep = TestCaseData.getDatosStepForValidation();
 	   boolean filtrosPercActivated = false;
 	   String maxPercDiscount = "70";
 	   int minMenusVisibles = 1;
@@ -907,9 +902,10 @@ public class PageGaleriaStpV {
    }
    
    @SuppressWarnings("static-access")
-   public void validaRebajasJun2018Desktop(boolean isGaleriaSale, Pais pais, IdiomaPais idioma, LineaType lineaType, 
-		   								   bloqueMenu menuType, DatosStep datosStep) throws Exception {
+   public void validaRebajasJun2018Desktop(boolean isGaleriaSale, Pais pais, IdiomaPais idioma, LineaType lineaType, bloqueMenu menuType) 
+   throws Exception {
        //Validaciones
+	   DatosStep datosStep = TestCaseData.getDatosStepForValidation();
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
        String descripValidac = 
            "1) Estamos en la página de Galería";
@@ -1084,29 +1080,32 @@ public class PageGaleriaStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }	   
    }
    
-   public void validaNotArticlesOfTypeDesktop(TypeArticle typeArticle, State levelError, DatosStep datosStep) {
-	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-       String descripValidac =
-           "<b style=\"color:blue\">Rebajas</b></br>" +
-           "1) No hay ningún artículo del tipo <b>" + typeArticle + "</b>";
-       datosStep.setNOKstateByDefault();      
-       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-       try {
-           ArrayList<String> listArtWrong = pageGaleriaDesktop.getArticlesOfType(typeArticle);
-           if (listArtWrong.size() > 0) {
-               listVals.add(1, levelError);
-               descripValidac+=
-                   "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
-                   "hay " + listArtWrong.size() + " artículos que son del tipo <b>" + typeArticle + "</b><br>:";
-               for (String nameWrong : listArtWrong)
-            	   descripValidac+=(nameWrong + "<br>");
-               descripValidac+="</lin>";
-           }
-                
-           datosStep.setListResultValidations(listVals);
-       }
-       finally { listVals.checkAndStoreValidations(descripValidac); }	   
+   @Validation
+   public ListResultValidation validaNotArticlesOfTypeDesktop(TypeArticle typeArticle, State levelError) {
+	   	ListResultValidation validations = ListResultValidation.getNew();
+	   	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
+	   	List<String> listArtWrong = pageGaleriaDesktop.getArticlesOfType(typeArticle);
+	   	validations.add(
+	   		"<b style=\"color:blue\">Rebajas</b></br>" +
+	   		"1) No hay ningún artículo del tipo <b>" + typeArticle + "</b>",
+	   		listArtWrong.size()==0, levelError);
+   		if (listArtWrong.size() > 0) {
+   			addInfoArtWrongToDescription(listArtWrong, typeArticle, validations.get(0));
+   		}
+	   	return validations; 
    }   
+   
+   private void addInfoArtWrongToDescription(List<String> listArtWrong, TypeArticle typeArticle, ResultValidation validation) {
+       String textToAdd =
+           "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
+           "hay " + listArtWrong.size() + " artículos que son del tipo <b>" + typeArticle + "</b><br>:";
+       for (String nameWrong : listArtWrong) {
+    	   textToAdd+=(nameWrong + "<br>");
+       }
+       textToAdd+="</lin>";
+       String descriptionOrigin = validation.getDescription();
+       validation.setDescription(descriptionOrigin + textToAdd);
+   }
    
    @SuppressWarnings("static-access")
    public static void clickMoreInfoBannerRebajasJun2018(DataFmwkTest dFTest) throws Exception {

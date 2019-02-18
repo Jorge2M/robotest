@@ -73,7 +73,7 @@ public class PageFichaArtStpV {
         }
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, datosStep, this.dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, this.dFTest);
     }
     
     public void validateIsFichaArtDisponible(String refArticulo, DatosStep datosStep) { 

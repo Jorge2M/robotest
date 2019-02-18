@@ -113,7 +113,7 @@ public class PagePrehomeStpV {
             Constantes.AnalyticsVal.GoogleAnalytics,
             Constantes.AnalyticsVal.NetTraffic, 
             Constantes.AnalyticsVal.DataLayer);        
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, datosStep, dFTest);
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, dFTest);
         
         if (execValidacs) {
             //Validaciones
@@ -136,7 +136,7 @@ public class PagePrehomeStpV {
         }
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
 
         return datosStep;
     }    

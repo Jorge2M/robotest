@@ -100,7 +100,7 @@ public class Page1DktopCheckoutStpV {
         finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
     }
     
     /**
@@ -182,7 +182,7 @@ public class Page1DktopCheckoutStpV {
             Constantes.AnalyticsVal.Criteo,
             Constantes.AnalyticsVal.NetTraffic, 
             Constantes.AnalyticsVal.DataLayer);
-        PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, analyticSet, datosStep, dFTest);
+        PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, analyticSet, dFTest);
     }
     
     public static void clearValeIfLinkExists(DataFmwkTest dFTest) throws Exception {

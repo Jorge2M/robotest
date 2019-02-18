@@ -238,7 +238,7 @@ public class SecBolsaStpV {
                                                                   Constantes.AnalyticsVal.Criteo,
                                                                   Constantes.AnalyticsVal.NetTraffic, 
                                                                   Constantes.AnalyticsVal.DataLayer);
-        PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, analyticSet, datosStep, dFTest);
+        PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, analyticSet, dFTest);
     }
     
     public static void validaNumArtEnBolsa(DataBag dataBag, Channel channel, AppEcom app, DataFmwkTest dFTest) 

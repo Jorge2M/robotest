@@ -7,6 +7,8 @@ import java.util.List;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
@@ -29,7 +31,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollecti
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.LabelArticle;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.ControlTemporada;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
@@ -56,24 +57,18 @@ public class SecMenusDesktopStpV {
     /**
      * Selección de un menú superior (lateral en el caso de móvil) con un catálogo de artículos asociado (p.e. vestidos, camisas, etc.)
      */
-    public static DatosStep selectMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    @Step(
+    	description="Seleccionar el menú superior <b>#{menu1rstLevel}</b>", 
+        expected="Aparece la galería asociada al menú",
+        saveNettraffic=SaveWhen.Always)
+    public static void selectMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
-        DatosStep datosStep = new DatosStep     (
-            "Seleccionar el menú superior <b>" + menu1rstLevel + "</b>", 
-            "Aparece la galería asociada al menú");
-        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
-        try {
             SecMenusDesktop.
-            	secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel, dCtxSh.appE, dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+            	secMenuSuperior.
+            	secBlockMenus.clickMenuAndGetName(menu1rstLevel, dCtxSh.appE, dFTest.driver);
         
         //Validaciones
-        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, datosStep, dFTest);
-        
-        return datosStep;
+        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, dFTest);
     }
     
     public static DatosStep selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
@@ -90,7 +85,7 @@ public class SecMenusDesktopStpV {
         finally { StepAspect.storeDataAfterStep(datosStep); }           
             
         //Validaciones
-        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, datosStep, dFTest);
+        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, dFTest);
         
         return datosStep;
     }
@@ -110,7 +105,7 @@ public class SecMenusDesktopStpV {
         finally { StepAspect.storeDataAfterStep(datosStep); }           
             
         //Validaciones
-        SecMenusWrapperStpV.validaSelecMenu(menu2onLevel, dCtxSh, datosStep, dFTest);
+        SecMenusWrapperStpV.validaSelecMenu(menu2onLevel, dCtxSh, dFTest);
         
         return datosStep;
     }
@@ -137,9 +132,10 @@ public class SecMenusDesktopStpV {
      * Validaciones de selección de un menú de 1er nivel (superior o lateral) (las específicas de Desktop)
      */
     public static void validationsSelecMenuEspecificDesktop(MenuLateralDesktop menu, Channel channel, AppEcom app, 
-    														DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    														DataFmwkTest dFTest) throws Exception {
+    	DatosStep datosStep = TestCaseData.getDatosStepForValidation();
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, dFTest);
-    	pageGaleriaStpV.validateBannerSuperiorIfExistsDesktop(datosStep);
+    	pageGaleriaStpV.validateBannerSuperiorIfExistsDesktop();
         if (menu.isMenuLateral()) {
             //Validaciones
             int maxSecondsToWait = 2;
@@ -255,7 +251,7 @@ public class SecMenusDesktopStpV {
         SecMenusDesktopStpV.validateIsLineaSelected(lineaResult, app, datosStep, dFTest);
         
         //VALIDACIONES - PARA ANALYTICS (sólo para firefox y NetAnalysis)
-        PasosGenAnalitica.validaHTTPAnalytics(app, lineaMenu, datosStep, dFTest);
+        PasosGenAnalitica.validaHTTPAnalytics(app, lineaMenu, dFTest);
         
         return datosStep;
     }
@@ -466,7 +462,7 @@ public class SecMenusDesktopStpV {
         AllPagesStpV.validatePageWithFooter(dCtxSh.pais, dCtxSh.appE, datosStep, dFTest);
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, datosStep, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, dFTest);
     }
     
     /**
@@ -608,7 +604,7 @@ public class SecMenusDesktopStpV {
 
         //Validaciones
     	Menu1rstLevel menu1erNivel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.he, null, "zapatos"));
-        validationsSelecMenuEspecificDesktop(menu1erNivel, channel, app, datosStep, dFTest);
+        validationsSelecMenuEspecificDesktop(menu1erNivel, channel, app, dFTest);
         
         return datosStep;
     }
@@ -797,7 +793,7 @@ public class SecMenusDesktopStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }
        
        //Validaciones estándar. 
-       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, datosStep, dFTest);
+       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, dFTest);
     }    
     
     public static void validationsRebajas(Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 

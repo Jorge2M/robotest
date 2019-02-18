@@ -93,7 +93,7 @@ public class PagoNavigationsStpV {
             Constantes.AnalyticsVal.GoogleAnalytics,
             Constantes.AnalyticsVal.NetTraffic, 
             Constantes.AnalyticsVal.DataLayer );
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, datosStep, dFTest);
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, dFTest);
         
         if (dCtxSh.userRegistered) {
             //Step. Vaciamos la bolsa y los favoritos
@@ -102,7 +102,7 @@ public class PagoNavigationsStpV {
                 PageFavoritosStpV.clearAll(dCtxSh, dFTest);
             
             //Validaciones estándar. 
-            AllPagesStpV.validacionesEstandar(false/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
+            AllPagesStpV.validacionesEstandar(false/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/, dFTest);
         }
         
         int maxArticlesAwayVale = 2;
@@ -205,7 +205,7 @@ public class PagoNavigationsStpV {
             Constantes.AnalyticsVal.DataLayer
         );
         
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, datosStep, dFTest);
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, dFTest);
 
         return datosStep;
     }
@@ -248,7 +248,7 @@ public class PagoNavigationsStpV {
                 dataPedido.getPago().getTestpolyvore().compareTo("s")==0) 
                 analyticSet.add(Constantes.AnalyticsVal.Polyvore);
             
-            PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, dataPedido, analyticSet, datosStep, dFTest);
+            PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, dataPedido, analyticSet, dFTest);
         }
     }
     

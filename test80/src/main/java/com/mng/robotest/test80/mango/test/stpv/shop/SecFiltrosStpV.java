@@ -74,11 +74,11 @@ public class SecFiltrosStpV {
             EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
                     Constantes.AnalyticsVal.GoogleAnalytics,
                     Constantes.AnalyticsVal.DataLayer);
-            PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, analyticSet, datosStep, dFTest);
+            PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, analyticSet, dFTest);
         }
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, datosStep, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
         
         return numArticulos1page;
     }
