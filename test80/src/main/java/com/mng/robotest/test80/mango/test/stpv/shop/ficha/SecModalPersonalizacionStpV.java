@@ -301,7 +301,7 @@ public class SecModalPersonalizacionStpV {
 	}
 
 	@Validation(
-			description="1) Es visible el botón #{descripcion}que nos permite añadir ese producto a la bolsa",
+			description="1) Es visible el botón #{descripcion} que nos permite añadir ese producto a la bolsa",
 			level=State.Warn)
 	private static boolean validateAddBagMvl(String descripcion, int maxSecondsWait, Channel channel, WebDriver driver) {
 		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.addToBag, StateElem.Visible, maxSecondsWait, channel, driver));
@@ -315,8 +315,6 @@ public class SecModalPersonalizacionStpV {
 		//Step
 		if (channel != Channel.movil_web) {
 			SecModalPersonalizacion.selectElement(ModalElement.Continue, driver);
-		} else {
-			SecModalPersonalizacion.selectElement(ModalElement.addToBag, channel, driver);
 		}
 
 		//Validation
@@ -336,7 +334,7 @@ public class SecModalPersonalizacionStpV {
 	}
 
 	@Step(
-			description="Seleccionamos el botón \"Añadir a la bolsa\"",
+			description="Comprobamos que el artículo se haya dado de alta correctamente observando la bolsa",
 			expected="El artículo se da de alta correctamente en la bolsa"
 	)
 	private void checkCustomizationProof (Channel channel, WebDriver driver) throws Exception {
@@ -349,14 +347,18 @@ public class SecModalPersonalizacionStpV {
 		}
 
 		//Validation
-		validateCustomizationProof(2, ModalElement.BolsaProof, channel, driver);
+		validateCustomizationProof(2, channel, driver);
 	}
 
 	@Validation(
 			description="1) En la bolsa aparece el apartado correspondiente a la personalización (lo esperamos hasta #{maxSecondsWait} segundos)",
 			level=State.Defect)
-	private static boolean validateCustomizationProof(int maxSecondsWait, ModalElement element, Channel channel, WebDriver driver) {
-		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, channel, driver));
+	private static boolean validateCustomizationProof(int maxSecondsWait, Channel channel, WebDriver driver) {
+		if (channel==Channel.movil_web){
+			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.BolsaProof, StateElem.Present, maxSecondsWait, channel, driver));
+		} else {
+			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.BolsaProof, StateElem.Visible, maxSecondsWait, channel, driver));
+		}
 	}
 
 	private static void validateIsApartadoVisible(int numApartado, WebDriver driver, Channel channel) {

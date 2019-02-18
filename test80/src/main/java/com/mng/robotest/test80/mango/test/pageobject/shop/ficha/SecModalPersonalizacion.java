@@ -19,7 +19,7 @@ public class SecModalPersonalizacion extends WebdrvWrapp {
 		
 		HeaderProof("//div[@class='customization-header']", null),
 		BackProof("//button[@class='back-btn']", null),
-		BolsaProof("//div[@class='sbi-customization-content']", null),
+		BolsaProof("//div[@class='sbi-customization-content']"),
 		Continue("//button[@class[contains(.,'sg-t-btn')] or @class[contains(.,'sg-p-btn')]]", "//button[@class='sg-t-btn' or @class='sg-s-btn']"),
 		addToBag("", "//button[@class[contains(.,'sg-s-btn')]]"),
 		
