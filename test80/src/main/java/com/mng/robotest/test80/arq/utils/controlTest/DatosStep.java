@@ -184,7 +184,7 @@ public class DatosStep {
     
     public void setNOKstateByDefault() {
     	setExcepExists(true); 
-    	setResultSteps(State.Nok);
+    	//setResultSteps(State.Nok);
     }
     
     public void setNameMethodWithFactory(String nameMethodWithFactory) {
