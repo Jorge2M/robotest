@@ -220,7 +220,7 @@ public class PageChequeRegaloInputDataStpV{
             "Aparece la página de identificación del usuario");
         try {
             PageChequeRegaloInputData.inputDataCheque(chequeRegalo, dFTest.driver);
-            PageChequeRegaloInputData.clickButtonComprar(dFTest.driver);
+            PageChequeRegaloInputData.clickButtonComprar(chequeRegalo, dFTest.driver);
                     
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         }

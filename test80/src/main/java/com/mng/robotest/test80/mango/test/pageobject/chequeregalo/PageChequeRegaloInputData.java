@@ -7,6 +7,7 @@ import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPage;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp.TypeOfClick;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.PageFromFooter;
 
 
@@ -118,16 +119,23 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
         clickAndWait(ConsultaSaldo.validar, driver);
     }
 
-    public static void clickButtonComprar(WebDriver driver) throws Exception {
+    public static void clickButtonComprar(ChequeRegalo chequeRegalo, WebDriver driver) throws Exception {
         clickAndWait(ElementCheque.compraAhora, driver);
         
-        //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-        int maxSecondsToWait = 2;
-        if (isElementInStateUntil(ElementCheque.compraAhora, StateElem.Present, maxSecondsToWait, driver))
-        	clickAndWait(ElementCheque.compraAhora, driver);
+        //Existe un problema en Firefox-Gecko muy extraño: a veces, después de seleccionar el botón "comprar ahora" te muestra error en todos
+        //los campos de input y no avanza a la siguiente página
+        for (int i=0; i<5; i++) {
+        	if (!WebdrvWrapp.isElementInvisibleUntil(driver, By.xpath(ElementCheque.compraAhora.getXPath()), 3)) {
+	        	inputDataCheque(chequeRegalo, driver);
+        		clickAndWait(ElementCheque.compraAhora, driver);
+	        }
+	        else {
+	        	break;
+	        }
+        }
     }
-
-    public static void inputDataCheque(ChequeRegalo chequeRegalo, WebDriver driver) throws Exception{
+    
+    public static void inputDataCheque(ChequeRegalo chequeRegalo, WebDriver driver) throws Exception {
         inputDataInElement(InputCheque.nombre, chequeRegalo.getNombre(), driver);
         inputDataInElement(InputCheque.apellidos, chequeRegalo.getApellidos(), driver);
         inputDataInElement(InputCheque.email, chequeRegalo.getEmail(), driver);

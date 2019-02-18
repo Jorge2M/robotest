@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp.OptionSelect;
+import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp.TypeOfClick;
 
 public class ElementPageFunctions {
 
@@ -61,6 +62,11 @@ public class ElementPageFunctions {
 
     public static void clickAndWait(ElementPage element, int maxSecondsToWait, WebDriver driver) throws Exception {
         WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(element.getXPath()), maxSecondsToWait);
+    }
+    
+    public static void clickAndWait(ElementPage element, TypeOfClick typeOfClick, WebDriver driver) throws Exception {
+    	By by = By.xpath(element.getXPath());
+    	WebdrvWrapp.clickAndWaitLoad(driver, by, typeOfClick);
     }
     
     public static void clickElementVisibleAndWaitLoad(ElementPage element, int maxSecondsToWait, WebDriver driver) throws Exception {
