@@ -368,7 +368,7 @@
 	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="10" anycad="2020" cvc="7373">&TPV-555;</pago>
 <pago 
 	type="Sofort" shop="s" outlet="s" votf="n" empleado="n" ordenpantalla="8" 
-	nombre="SOFORTÜBERWEISUNG" testpasarela='s' testpago='s' paissofort='AT' bankcode='00000' usrsofort='88888888' passsofort='88888888' tansofort='12345'>&TPV-016;</pago>
+	nombre="SOFORTÜBERWEISUNG" namefilter="SOFORT" testpasarela='s' testpago='s' paissofort='AT' bankcode='00000' usrsofort='88888888' passsofort='88888888' tansofort='12345'>&TPV-016;</pago>
 <pago 
 	type="Paypal" shop="s" outlet="s" votf="n" empleado="n" ordenpantalla="9" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
@@ -1008,13 +1008,13 @@
 	nombre="SEPA" testpasarela='s' testpago='s' numtarj="DE89370400440532013000">&TPV-050;</pago>
 <pago 
 	type="ContraReembolso" shop="s" outlet="s" votf="n" empleado="n" ordenpantalla="5"  
-	nombre="BANKÜBERWEISUNG" testpasarela='s' testpago='s'>&TPV-107;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
+	nombre="BANKÜBERWEISUNG" namefilter="BANKUBERWEISUNG" testpasarela='s' testpago='s'>&TPV-107;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <pago 
 	type="TRJintegrada" shop="s" outlet="s" votf="n" empleado="s" ordenpantalla="6"  
 	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="10" anycad="2020" cvc="7373">&TPV-555;</pago>
 <pago 
 	type="Sofort" shop="s" outlet="s" votf="n" empleado="n" ordenpantalla="7"  
-	nombre="SOFORTÜBERWEISUNG" testpasarela='s' testpago='s' paissofort='DE' bankcode='88888888' usrsofort='88888888' passsofort='88888888' tansofort='12345'>&TPV-016;</pago>
+	nombre="SOFORTÜBERWEISUNG" namefilter="SOFORT" testpasarela='s' testpago='s' paissofort='DE' bankcode='88888888' usrsofort='88888888' passsofort='88888888' tansofort='12345'>&TPV-016;</pago>
 <pago 
 	type="Giropay" shop="s" outlet="s" votf="n" empleado="n" ordenpantalla="8"  
 	nombre="GIROPAY" testpasarela='s' testpago='s' bankidgiropay="Test DE Bank" scgiropay="10" extscgiropay="4000" iban="DE36444488881234567890">&TPV-055;</pago>
@@ -2681,7 +2681,7 @@
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-300;</pago>
 <pago 
 	type="ContraReembolso" shop="s" outlet="s" votf="n" ordenpantalla="8"  
-	nombre="BANKÜBERWEISUNG" testpasarela='s' testpago='s'>&TPV-109;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
+	nombre="BANKÜBERWEISUNG" namefilter="BANKUBERWEISUNG" testpasarela='s' testpago='s'>&TPV-109;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <!-- Se elimina temporalmente por problemas en el funcionamiento de American Express
 <pago 
 	type="TRJintegrada" shop="s" outlet="s" votf="n" ordenpantalla="9"  

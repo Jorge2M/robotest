@@ -11,7 +11,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSo
  * @author jorge.munoz
  *
  */
-
 public class PageSofort4thStpV {
     
 	@Validation (

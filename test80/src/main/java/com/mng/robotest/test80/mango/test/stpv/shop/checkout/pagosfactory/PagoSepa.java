@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -22,17 +23,18 @@ public class PagoSepa extends PagoStpV {
     @Override
     public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
         Pago pago = this.dCtxPago.getDataPedido().getPago();
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
-        DatosStep datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
-        String importeTotal = this.dCtxPago.getDataPedido().getImporteTotal();
-        PageSepa1rstStpV.validateIsPage(pago.getNombre(this.dCtxSh.channel), importeTotal, this.dCtxSh.pais.getCodigo_pais(), this.dCtxSh.channel, datosStep, this.dFTest);
+        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, dCtxSh, dFTest);
+        PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, dFTest);
+        String importeTotal = dCtxPago.getDataPedido().getImporteTotal();
+        PageSepa1rstStpV.validateIsPage(pago.getNombre(dCtxSh.channel), importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, dFTest.driver);
         
         if (execPay) {
-            datosStep = PageSepa1rstStpV.inputDataAndclickPay(pago.getNumtarj(), pago.getTitular(), importeTotal, this.dCtxSh.pais.getCodigo_pais(), this.dCtxSh.channel, this.dFTest);
-            if (this.dCtxSh.channel==Channel.movil_web)
-                datosStep = PageSepaResultMobilStpV.clickButtonPagar(this.dFTest);
+            PageSepa1rstStpV.inputDataAndclickPay(pago.getNumtarj(), pago.getTitular(), importeTotal, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, dFTest.driver);
+            if (dCtxSh.channel==Channel.movil_web) {
+                PageSepaResultMobilStpV.clickButtonPagar(dFTest.driver);
+            }
         }
         
-        return datosStep;
+        return (TestCaseData.getDatosStepForValidation());
     }
 }
