@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -19,19 +20,19 @@ public class PagoPostfinance extends PagoStpV {
     
     @Override
     public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
-        DataPedido dataPedido = this.dCtxPago.getDataPedido();
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
-        DatosStep datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
+        DataPedido dataPedido = dCtxPago.getDataPedido();
+        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, dFTest);
+        PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, dCtxSh.channel, dFTest);
         String nombrePago = dataPedido.getPago().getNombre(this.dCtxSh.channel);
         String importeTotal = dataPedido.getImporteTotal();
         String codPais = this.dCtxSh.pais.getCodigo_pais();
-        PagePostfCodSegStpV.postfinanceValidate1rstPage(nombrePago, importeTotal, codPais, datosStep, dFTest);
+        PagePostfCodSegStpV.postfinanceValidate1rstPage(nombrePago, importeTotal, codPais, dFTest.driver);
         
         if (execPay) {
             dataPedido.setCodtipopago("P");
-            datosStep = PagePostfCodSegStpV.inputCodigoSeguridadAndAccept("11152", nombrePago, this.dFTest);
+            PagePostfCodSegStpV.inputCodigoSeguridadAndAccept("11152", nombrePago, dFTest.driver);
         }
         	
-        return datosStep;
+        return TestCaseData.getDatosStepForValidation();
     }    
 }

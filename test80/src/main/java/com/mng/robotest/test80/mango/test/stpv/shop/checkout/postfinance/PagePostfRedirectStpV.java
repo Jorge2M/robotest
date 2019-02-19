@@ -1,31 +1,23 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.postfinance;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance.PagePostfRedirect;
-
 
 public class PagePostfRedirectStpV {
 
-    public static void isPageAndFinallyDisappears(DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
-        int maxSecondsToWait = 10;
-        String descripValidac = 
-            "1) Aparece una página de redirección con un botón OK<br>" +
-            "2) La página de redirección acaba desapareciendo (esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (!PagePostfRedirect.isPresentButtonOk(dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (!PagePostfRedirect.isInvisibleButtonOkUntil(dFTest.driver, maxSecondsToWait)) {
-                listVals.add(2, State.Defect);
-            }
-    
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+    public static ListResultValidation isPageAndFinallyDisappears(WebDriver driver) throws Exception {
+		ListResultValidation validations = ListResultValidation.getNew();
+        int maxSecondsWait = 10;
+	   	validations.add(
+    		"Aparece una página de redirección con un botón OK<br>",
+    		PagePostfRedirect.isPresentButtonOk(driver), State.Defect);    
+	   	validations.add(
+    		"La página de redirección acaba desapareciendo (esperamos hasta " + maxSecondsWait + " segundos)",
+    		PagePostfRedirect.isInvisibleButtonOkUntil(driver, maxSecondsWait), State.Defect);  	   	
+		return validations;
     }
 }
