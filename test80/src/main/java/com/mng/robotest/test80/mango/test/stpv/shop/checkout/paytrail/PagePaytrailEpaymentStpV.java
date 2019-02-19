@@ -1,53 +1,34 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.paytrail;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.epayment.PageEpaymentIdent;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paytrail.PagePaytrailEpayment;
 
-
 public class PagePaytrailEpaymentStpV {
     
-    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) { 
-        String descripValidac = 
-            "1) Aparece la página inicial de E-Payment<br>" +
-            "2) Figuran el input correspondientes al \"User ID\"";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageEpaymentIdent.isPage(dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            if (!PageEpaymentIdent.isPresentInputUserTypePassword(dFTest.driver)) {
-                listVals.add(2, State.Warn);
-            }
-                                                
-            datosStep.setListResultValidations(listVals);
-        }
-        catch (Exception e) {
-            //
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+    public static ListResultValidation validateIsPage(WebDriver driver) { 
+		ListResultValidation validations = ListResultValidation.getNew();
+	   	validations.add(
+    		"Aparece la página inicial de E-Payment<br>",
+    		PageEpaymentIdent.isPage(driver), State.Warn);
+	   	validations.add(
+    		"Figuran el input correspondientes al \"User ID\"",
+    		PageEpaymentIdent.isPresentInputUserTypePassword(driver), State.Warn);	   	
+	   	return validations;
     }
     
-    public static DatosStep clickCodeCardOK(String importeTotal, String codPais, DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep (
-            "Click en el botón \"OK\"del apartado \"Code card\"", 
-            "Aparece la página de introducción del <b>ID de confirmación</b>");
-        try {
-            PagePaytrailEpayment.clickOkFromCodeCard(dFTest.driver);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+	@Step (
+		description="Click en el botón \"OK\" del apartado \"Code card\"", 
+        expected="Aparece la página de introducción del <b>ID de confirmación</b>")
+    public static void clickCodeCardOK(String importeTotal, String codPais, WebDriver driver) throws Exception {
+        PagePaytrailEpayment.clickOkFromCodeCard(driver);
         
         //Validation
-        PagePaytrailIdConfirmStpV.validateIsPage(importeTotal, codPais, datosStep, dFTest);
-        
-        return datosStep;
+        PagePaytrailIdConfirmStpV.validateIsPage(importeTotal, codPais, driver);
     }
 }

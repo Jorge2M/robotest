@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -21,19 +22,19 @@ public class PagoPaytrail extends PagoStpV {
     
     @Override
     public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
-        DatosStep datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
-        PagePaytrail1rstStpV.validateIsPage(this.dCtxPago.getDataPedido().getImporteTotal(), this.dCtxSh.pais.getCodigo_pais(), this.dCtxSh.channel, datosStep, this.dFTest);
-        datosStep = PagePaytrail1rstStpV.selectBancoAndContinue(this.dCtxSh.channel, this.dFTest);
+        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, dFTest);
+        PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, dFTest);
+        PagePaytrail1rstStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, dFTest.driver);
+        PagePaytrail1rstStpV.selectBancoAndContinue(dCtxSh.channel, dFTest.driver);
         
         if (execPay) {
             this.dCtxPago.getDataPedido().setCodtipopago("F");
             String codigoPais = this.dCtxPago.getDataPedido().getCodigoPais();
-            PagePaytrailEpaymentStpV.clickCodeCardOK(this.dCtxPago.getDataPedido().getImporteTotal(), codigoPais, this.dFTest);            
-            PagePaytrailIdConfirmStpV.inputIDAndClickConfirmar("V2360A71", this.dCtxPago.getDataPedido().getImporteTotal(), codigoPais, this.dFTest);
-            datosStep = PagePaytrailResultadoOkStpV.clickVolverAMangoButton(this.dFTest);
+            PagePaytrailEpaymentStpV.clickCodeCardOK(dCtxPago.getDataPedido().getImporteTotal(), codigoPais, dFTest.driver);            
+            PagePaytrailIdConfirmStpV.inputIDAndClickConfirmar("V2360A71", dCtxPago.getDataPedido().getImporteTotal(), codigoPais, dFTest.driver);
+            PagePaytrailResultadoOkStpV.clickVolverAMangoButton(dFTest.driver);
         }
         
-        return datosStep;
+        return TestCaseData.getDatosStepForValidation();
     }
 }
