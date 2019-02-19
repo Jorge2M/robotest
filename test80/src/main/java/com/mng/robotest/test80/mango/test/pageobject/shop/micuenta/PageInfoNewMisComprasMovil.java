@@ -11,7 +11,7 @@ public class PageInfoNewMisComprasMovil extends WebdrvWrapp {
     static String XPathButtonToMisCompras = "//div[@class[contains(.,'button')] and @id='goToMyPurchases']";
     
     public static boolean isPage(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathButtonToMisCompras)));
+        return (isElementVisibleUntil(driver, By.xpath(XPathButtonToMisCompras), 2));
     }
     
     public static void clickButtonToMisCompras(WebDriver driver) throws Exception {
