@@ -324,7 +324,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
@@ -736,7 +736,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ DKK</moneda>
 <maximo_bolsa>11200</maximo_bolsa>
@@ -855,7 +855,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
