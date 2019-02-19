@@ -124,7 +124,7 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
         
         //Existe un problema en Firefox-Gecko muy extraño: a veces, después de seleccionar el botón "comprar ahora" te muestra error en todos
         //los campos de input y no avanza a la siguiente página
-        for (int i=0; i<5; i++) {
+        for (int i=0; i<10; i++) {
         	if (!WebdrvWrapp.isElementInvisibleUntil(driver, By.xpath(ElementCheque.compraAhora.getXPath()), 3)) {
 	        	inputDataCheque(chequeRegalo, driver);
         		clickAndWait(ElementCheque.compraAhora, driver);
