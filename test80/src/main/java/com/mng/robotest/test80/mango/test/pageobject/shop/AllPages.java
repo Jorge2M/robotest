@@ -56,8 +56,9 @@ public class AllPages extends WebdrvWrapp {
     public static boolean validateUrlNotMatchUntil(String url, int maxSecondsWait, WebDriver driver) throws Exception {
     	int seconds = 0;
     	do {
-    		if (url.compareTo(driver.getCurrentUrl())!=0)
+    		if (url.compareTo(driver.getCurrentUrl())!=0) {
     			return true;
+    		}
     		Thread.sleep(1000);
     		seconds+=1;
     	}

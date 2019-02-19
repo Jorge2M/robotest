@@ -200,8 +200,7 @@ public class SecFooterStpV {
              descripValidac = 
 		      	 "1) Aparece una nueva ventana<br>" +
 		         "2) Aparece un modal de aviso de trámite de la solicitud con un botón \"Continuar\" (la esperamos hasta " + secondsToWait + " segundos)";
-                 
-             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok); 
+             datosStep.setNOKstateByDefault();
              listVals = ListResultValidation.getNew(datosStep);    
              try {
                  ventanaPadre = dFTest.driver.getWindowHandle();
@@ -217,7 +216,6 @@ public class SecFooterStpV {
              }
              finally { listVals.checkAndStoreValidations(descripValidac); }
         
-                 
              //Step
              datosStep = new DatosStep       (
                  "Seleccionar el botón \"Continuar\"", 

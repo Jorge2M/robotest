@@ -160,7 +160,7 @@ public class PageFichaArtStpV {
         //Validaciones
         String descripValidac = 
             "1) Aparece la página de Ficha";
-        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!pageFicha.isPageUntil(0)) {

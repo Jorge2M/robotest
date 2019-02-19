@@ -71,7 +71,7 @@ public class PageHomeMarcasStpV {
         String descripValidac = 
             "<b style=\"color:blue\">Rebajas</b></br>" +
             "1) " + validacion1;
-        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (dCtxSh.pais.isVentaOnline()) {
@@ -98,7 +98,7 @@ public class PageHomeMarcasStpV {
                 "<b style=\"color:blue\">Rebajas</b></br>" +
                 "1) Existen banners<br>" +
                 "2) El 1er Banner linca con la sección de rebajas";
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
+            datosStep.setNOKstateByDefault();
             listVals = ListResultValidation.getNew(datosStep);
             try {
                 if (!managerBannersScreen.existBanners()) {
@@ -128,7 +128,7 @@ public class PageHomeMarcasStpV {
 	                	i + ") El 1er Banner contiene links a la línea " + linea.getType() + "<br>";
 	                	i++;
 	                }
-	                datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
+	                datosStep.setNOKstateByDefault();
                     listVals = ListResultValidation.getNew(datosStep);
 	                try {
 	                    //i)
@@ -152,7 +152,7 @@ public class PageHomeMarcasStpV {
             descripValidac = 
                 "<b style=\"color:blue\">Rebajas</b></br>" +
                 "1) El mensaje de NewsLetter del Footer no contiene \"" + percentageSymbol + "\"";
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
+            datosStep.setNOKstateByDefault();
             listVals = ListResultValidation.getNew(datosStep);
             try {
                 if (SecFooter.getNewsLetterMsgText(dFTest.driver).contains(percentageSymbol)) {

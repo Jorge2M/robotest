@@ -67,7 +67,7 @@ public class SecBannersStpV {
         String descripValidac = 
             "1) Los datos de la campaña son correctos<br>" +
             	getReportCompareDataInCuteHtml(dataCampana, dataBanner);
-        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
 //            if (getReportCompareDataCampanaTableHTML(dataCampana, dataBanner)) {
@@ -95,10 +95,10 @@ public class SecBannersStpV {
             descripcion, 
             "Aparece una página correcta (con banners o artículos)");
         try {
-            datosStep.setDescripcion(descripcion);
+           datosStep.setDescripcion(descripcion);
            this.managerBannersScreen.clickBannerAndWaitLoad(posBanner, dFTest.driver);
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+           datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 
         finally { StepAspect.storeDataAfterStep(datosStep); }
 
@@ -123,7 +123,7 @@ public class SecBannersStpV {
         
     public void validacionesGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
-    	int maxSecondsWait1 = 1;
+    	int maxSecondsWait1 = 3;
     	int maxSecondsWait2 = 1;
     	int marginElements = 3;
         String descripValidac = 
@@ -132,7 +132,8 @@ public class SecBannersStpV {
             	"con respecto al original (" + elementosPagPadre + ")<br>" +
             "3) No hay imágenes cortadas<br>" +
             "4) El dominio de la página se corresponde con el de la página padre:" + uriPagPadre.getHost();
-        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
+        datosStep.setNOKstateByDefault();
+        //datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!AllPages.validateUrlNotMatchUntil(urlPagPadre, maxSecondsWait1, dFTest.driver)) {
@@ -165,7 +166,7 @@ public class SecBannersStpV {
         //Validaciones
         String descripValidac = 
             "1) Aparece una página con secciones, galería, banners, bloque de contenido con imágenes o página acceso";
-        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);
+        datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             if (!PageLanding.haySecc_Art_Banners(app, dFTest.driver)) {

@@ -78,7 +78,7 @@ public class PageMenusMantoStpV {
                 
             //Validaciones
             String descripValidac = "1) Aparece la página de Bolsas";
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);      
+            datosStep.setNOKstateByDefault();      
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
                 /*1*/assertTrue(PageBolsas.isPage(dFTest.driver));
@@ -101,7 +101,7 @@ public class PageMenusMantoStpV {
             //Validaciones
             String descripValidac = 
                 "1) Aparece la página de Pedidos";
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Nok);      
+            datosStep.setNOKstateByDefault();     
             ListResultValidation listVals = ListResultValidation.getNew(datosStep);
             try {
                 assertTrue(PagePedidos.isPage(dFTest.driver));
