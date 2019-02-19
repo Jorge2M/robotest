@@ -1,10 +1,11 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.sofort;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+
+import org.openqa.selenium.WebDriver;
+
+import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSofort2on;
 
@@ -13,43 +14,25 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSo
  * @author jorge.munoz
  *
  */
-
 public class PageSofort2onStpV {
     
-    public static void validaIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
-        int maxSecondsToWait = 3;
-        String descripValidac = 
-            "1) Aparece la página de selección del país/banco (la esperamos hasta " + maxSecondsToWait + " segundos)"; 
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageSofort2on.isPageUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation (
+		description="Aparece la página de selección del país/banco (la esperamos hasta #{maxSecondsWait} segundos)",
+		level=State.Defect)
+    public static boolean validaIsPageUntil(int maxSecondsWait, WebDriver driver) {
+		return (PageSofort2on.isPageUntil(maxSecondsWait, driver));
     }
     
-    public static DatosStep selectPaisYBanco(String paisSofort, String bankCode, DataFmwkTest dFTest) throws Exception {
-        //Step.
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionamos el país con código <b>" + paisSofort + "</b> y el código de banco <b>" + bankCode + "</b> y pulsamos \"Weiter\"", 
-            "Aparece la página de indentificación en SOFORT");
-        try {
-            PageSofort2on.selectPais(dFTest.driver, paisSofort);
-            PageSofort2on.inputBankcode(bankCode, dFTest.driver);
-            WebdrvWrapp.waitForPageLoaded(dFTest.driver, 5);
-            PageSofort2on.clickSubmitButtonPage3(dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+	@Step (
+		description="Seleccionamos el país con código <b>#{paisSofort}</b> y el código de banco <b>#{bankCode}</b> y pulsamos \"Weiter\"",
+		expected="Aparece la página de indentificación en SOFORT")
+    public static void selectPaisYBanco(String paisSofort, String bankCode, WebDriver driver) throws Exception {
+        PageSofort2on.selectPais(driver, paisSofort);
+        PageSofort2on.inputBankcode(bankCode, driver);
+        WebdrvWrapp.waitForPageLoaded(driver, 5);
+        PageSofort2on.clickSubmitButtonPage3(driver);
     
         //Validaciones
-        PageSofort4thStpV.validaIsPage(datosStep, dFTest);
-
-        return datosStep;
+        PageSofort4thStpV.validaIsPage(driver);
     }
 }

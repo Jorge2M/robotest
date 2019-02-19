@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -22,27 +23,27 @@ public class PagoSofort extends PagoStpV {
     
     @Override
     public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
-        DatosStep datosStep = 
-        	PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
-        boolean isPageIconoSofort = PageSofort1rst.isPageVisibleUntil(3, this.dCtxSh.channel, this.dFTest.driver);
+        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, dFTest);
+        PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, dCtxSh.channel, dFTest);
+        boolean isPageIconoSofort = PageSofort1rst.isPageVisibleUntil(3, dCtxSh.channel, dFTest.driver);
         
         //En ocasiones se salta desde la página de Checkout-Mango hasta la página de selección del banco
         //saltándose la página de selección del icono de sofort
         if (isPageIconoSofort) {
-            PageSofortIconosBancoStpV.validateIsPage(this.dCtxSh.channel, datosStep, dFTest);
-            datosStep = PageSofortIconosBancoStpV.clickIconoSofort(this.dCtxSh.channel, this.dFTest);
+        	int maxSecondsWait = 3;
+            PageSofortIconosBancoStpV.validateIsPageUntil(maxSecondsWait, dCtxSh.channel, dFTest.driver);
+            PageSofortIconosBancoStpV.clickIconoSofort(dCtxSh.channel, dFTest.driver);
         }
 
         if (execPay) {
             Pago pago = this.dCtxPago.getDataPedido().getPago();
-            PageSofort2onStpV.selectPaisYBanco(pago.getPaissofort(), pago.getBankcode(), this.dFTest);
-            PageSofort4thStpV.inputCredencialesUsr(pago.getUsrsofort(), pago.getPasssofort(), this.dFTest);            
-            PageSofort4thStpV.select1rstCtaAndAccept(this.dFTest);
-            datosStep = PageSofort4thStpV.inputTANandAccept(pago.getTansofort(), this.dFTest);
+            PageSofort2onStpV.selectPaisYBanco(pago.getPaissofort(), pago.getBankcode(), dFTest.driver);
+            PageSofort4thStpV.inputCredencialesUsr(pago.getUsrsofort(), pago.getPasssofort(), dFTest.driver);            
+            PageSofort4thStpV.select1rstCtaAndAccept(dFTest.driver);
+            PageSofort4thStpV.inputTANandAccept(pago.getTansofort(), dFTest.driver);
             this.dCtxPago.getDataPedido().setCodtipopago("F");
         }
         
-        return datosStep;
+        return TestCaseData.getDatosStepForValidation();
     }    
 }

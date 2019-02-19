@@ -1,10 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.sofort;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSofort4th;
 
 /**
@@ -15,92 +14,54 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSo
 
 public class PageSofort4thStpV {
     
-    public static void validaIsPage(DatosStep datosStep, DataFmwkTest dFTest) { 
-        String descripValidac = 
-            "1) Aparece la página de introducción del Usuario/Password de \"SOFORT\"";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageSofort4th.isPage(dFTest.driver)) {
-                listVals.add(1,State.Warn);
-            }
-
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation (
+		description="Aparece la página de introducción del Usuario/Password de \"SOFORT\"",
+		level=State.Warn)
+    public static boolean validaIsPage(WebDriver driver) { 
+		return (PageSofort4th.isPage(driver));
     }
     
-    public static DatosStep inputCredencialesUsr(String usrSofort, String passSofort, DataFmwkTest dFTest) throws Exception {
-        DatosStep datosStep = new DatosStep       (
-            "Introducir el usuario/password de DEMO: " + usrSofort + " / " + passSofort, 
-            "Aparece la página de selección de cuenta");
-        try {
-            PageSofort4th.inputUserPass(dFTest.driver, usrSofort, passSofort);
-            PageSofort4th.clickSubmitButton(dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+	@Step (
+		description="Introducir el usuario/password de DEMO: #{usrSofort} / #{passSofort}", 
+        expected="Aparece la página de selección de cuenta")
+    public static void inputCredencialesUsr(String usrSofort, String passSofort, WebDriver driver) throws Exception {
+        PageSofort4th.inputUserPass(driver, usrSofort, passSofort);
+        PageSofort4th.clickSubmitButton(driver);
 
         //Validaciones
-        String descripValidac = 
-            "1) Aparece un formulario para la selección de la cuenta"; 
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep); 
-        try {
-            if (!PageSofort4th.isVisibleFormSelCta(dFTest.driver)) {
-                listVals.add(1,State.Warn);
-            }
-
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
+        validateAppearsCtaForm(driver);
     }
+	
+	@Validation (
+		description="Aparece un formulario para la selección de la cuenta",
+		level=State.Warn)
+	public static boolean validateAppearsCtaForm(WebDriver driver) {
+		return (PageSofort4th.isVisibleFormSelCta(driver));
+	}
     
-    public static DatosStep select1rstCtaAndAccept(DataFmwkTest dFTest) throws Exception { 
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionamos la 1a cuenta y pulsamos aceptar", 
-            "Aparece la página de confirmación de la transacción");
-        try {
-            //Seleccionamos el radio correspondiente a la 1a cuenta + submit
-            PageSofort4th.selectRadioCta(dFTest.driver, 1);
-            PageSofort4th.clickSubmitButton(dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+	@Step (
+		description="Seleccionamos la 1a cuenta y pulsamos aceptar", 
+        expected="Aparece la página de confirmación de la transacción")
+    public static void select1rstCtaAndAccept(WebDriver driver) throws Exception { 
+            PageSofort4th.selectRadioCta(driver, 1);
+            PageSofort4th.clickSubmitButton(driver);
         
         //Validaciones
-        String descripValidac = 
-            "1) Aparece un campo para la introducción del TAN"; 
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageSofort4th.isVisibleInputTAN(dFTest.driver)) {
-                listVals.add(1,State.Warn);
-            }
-
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
+        validateAppearsInputTAN(driver);
     }
+	
+	@Validation (
+		description="Aparece un campo para la introducción del TAN",
+		level=State.Warn)
+	public static boolean validateAppearsInputTAN(WebDriver driver) {
+		return (PageSofort4th.isVisibleInputTAN(driver));
+	}
     
-    public static DatosStep inputTANandAccept(String TANSofort, DataFmwkTest dFTest) throws Exception {
-        DatosStep datosStep = new DatosStep       (
-            "Introducción del TAN: " + TANSofort + " y pulsamos aceptar", 
-            "El pago se realiza correctamente");
-        try {
-            PageSofort4th.inputTAN(dFTest.driver, TANSofort);
-            PageSofort4th.clickSubmitButton(dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        return datosStep;
+	@Step (
+		description="Introducción del TAN: #{TANSofort} y pulsamos aceptar", 
+        expected="El pago se realiza correctamente")
+    public static void inputTANandAccept(String TANSofort, WebDriver driver) throws Exception {
+		PageSofort4th.inputTAN(driver, TANSofort);
+		PageSofort4th.clickSubmitButton(driver);
     }
 }
