@@ -18,7 +18,7 @@ public class ListRegistrosEspanyaMasivos {
         ArrayList<Object> listTests = new ArrayList<>();
         AppEcom appE = AppEcomEnum.getAppEcom(appEStr);
         try {
-        	for (int i=0; i<30; i++) {
+        	for (int i=0; i<2; i++) {
 	            listTests.add(new Registro(i));
 	            System.out.println(
 	                "Creado Test #" + i

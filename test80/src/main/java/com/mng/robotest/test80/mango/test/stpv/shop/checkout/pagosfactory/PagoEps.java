@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -14,8 +15,6 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsS
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.eps.PageEpsSelBancoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.eps.PageEpsSimuladorStpV;
-
-
 
 public class PagoEps extends PagoStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
@@ -31,22 +30,23 @@ public class PagoEps extends PagoStpV {
     	//activateTestABforMethodEPS();
     	this.dFTest.driver.navigate().refresh();
     	
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
-        PageCheckoutWrapperStpV.selectBancoEPS(this.dCtxSh, this.dFTest);
-        DatosStep datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
+        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, dFTest);
+        PageCheckoutWrapperStpV.selectBancoEPS(dCtxSh, dFTest);
+        PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, dFTest);
         if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest)) {
-        	PageEpsSimuladorStpV.validateIsPage(datosStep, dFTest);
-        	PageEpsSimuladorStpV.selectDelay(TypeDelay.OneMinutes, dFTest);
+        	PageEpsSimuladorStpV.validateIsPage(dFTest.driver);
+        	PageEpsSimuladorStpV.selectDelay(TypeDelay.OneMinutes, dFTest.driver);
         }
-        else
-        	PageEpsSelBancoStpV.validateIsPage(this.dCtxPago.getDataPedido().getImporteTotal(), this.dCtxSh.pais.getCodigo_pais(), this.dCtxSh.channel, datosStep, this.dFTest);
+        else {
+        	PageEpsSelBancoStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, dFTest.driver);
+        }
         
         if (execPay) {
             this.dCtxPago.getDataPedido().setCodtipopago("F");
-            datosStep = PageEpsSimuladorStpV.clickContinueButton(this.dFTest);
+            PageEpsSimuladorStpV.clickContinueButton(dFTest.driver);
         }
         
-        return datosStep;
+        return TestCaseData.getDatosStepForValidation();
     }
     
 //    private void activateTestABforMethodEPS() {

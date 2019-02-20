@@ -1,56 +1,32 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.eps;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.eps.PageEpsSimulador;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.eps.PageEpsSimulador.TypeDelay;
 
-
 public class PageEpsSimuladorStpV {
     
-    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) { 
-        String descripValidac = 
-            "1) Aparece la página de simulación de EPS"; 
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);  
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (!PageEpsSimulador.isPage(dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-                    
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation (
+		description="Aparece la página de simulación de EPS",
+		level=State.Defect)
+    public static boolean validateIsPage(WebDriver driver) { 
+        return (PageEpsSimulador.isPage(driver));
     }
     
-    public static DatosStep selectDelay(TypeDelay typeDelay, DataFmwkTest dFTest) {
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionar la opción <b>" + typeDelay + "</b> del apartado \"pending-authorised\"", 
-            "La opción se selecciona correctamente");
-        try {
-            PageEpsSimulador.selectDelayAuthorised(typeDelay, dFTest.driver);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        return datosStep;
+	@Step (
+		description="Seleccionar la opción <b>#{typeDelay}</b> del apartado \"pending-authorised\"", 
+        expected="La opción se selecciona correctamente")
+    public static void selectDelay(TypeDelay typeDelay, WebDriver driver) {
+		PageEpsSimulador.selectDelayAuthorised(typeDelay, driver);
     }
     
-    public static DatosStep clickContinueButton(DataFmwkTest dFTest) throws Exception {
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionar el botón \"pending > autrhorised\"", 
-            "El pago se realiza correctamente");
-        try {
-            //Selecionamos el botón "Continuar"
-            PageEpsSimulador.clickButtonContinue(dFTest.driver);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        return datosStep;
+	@Step (
+		description="Seleccionar el botón \"pending > autrhorised\"", 
+        expected="El pago se realiza correctamente")
+    public static void clickContinueButton(WebDriver driver) throws Exception {
+		PageEpsSimulador.clickButtonContinue(driver);
     }
 }

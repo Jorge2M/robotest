@@ -34,6 +34,9 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.DataNino;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataNinos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro;
@@ -44,6 +47,8 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsS
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
+import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMiCuentaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalSuscripcionStpV;
@@ -238,6 +243,7 @@ public class Registro extends GestorWebDriver {
 	        
 	        //TODO Checkout temporal para Loyalty
 	        if (loyaltyTest) {
+	        	navegaGaleria(dFTest);
 	        	testPago(dataRegistro, dFTest);
 	        }
 
@@ -245,6 +251,15 @@ public class Registro extends GestorWebDriver {
         else {
         	SecFooterStpV.validaRGPDFooter(clickRegister, dCtxSh, dFTest);
         }
+    }
+    
+    private void navegaGaleria(DataFmwkTest dFTest) throws Exception {
+        Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
+        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest);
+        
+        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);
+        LocationArticle loc1rsArticle1rstPage = LocationArticle.getInstanceInPage(2, 1);
+        pageGaleriaStpV.selectArticuloEnPestanyaAndBack(loc1rsArticle1rstPage);
     }
     
     private void testPago(HashMap<String,String> dataRegistro, DataFmwkTest dFTest) throws Exception {
