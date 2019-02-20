@@ -1,78 +1,53 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.multibanco;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.multibanco.PageMultibanco1rst;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-
 public class PageMultibanco1rstStpV {
-    public static void validateIsPage(String nombrePago, String importeTotal, String emailUsr, String codPais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) Figura el bloque correspondiente al pago <b>" + nombrePago + "</b><br>" +
-            "2) Aparece el importe de la compra: " + importeTotal + "<br>" +
-            "3) Aparece la cabecera indicando la 'etapa' del pago";
-        if (channel==Channel.desktop)
-            descripValidac+="<br>" +
-            "4) Aparece un campo de introducción de email (informado con <b>" + emailUsr + "</b>)<br>" +
-            "5) Figura un botón de pago";
-        datosStep.setNOKstateByDefault();    
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageMultibanco1rst.isPresentEntradaPago(nombrePago, channel, dFTest.driver)) {
-                listVals.add(1,State.Warn);
-            }
-            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver)) {
-                if (channel==Channel.movil_web) {
-                    listVals.add(2, State.Info);
-                }
-                else {
-                    listVals.add(2, State.Warn);
-                }
-            }
-            if (!PageMultibanco1rst.isPresentCabeceraStep(dFTest.driver)) {
-                listVals.add(3, State.Warn);
-            }
-            if (channel==Channel.desktop) {
-                if (!PageMultibanco1rst.isPresentEmailUsr(emailUsr, dFTest.driver)) {
-                    listVals.add(4, State.Warn);
-                }
-            }
-            if (channel==Channel.desktop) {
-                if (!PageMultibanco1rst.isPresentButtonPagoDesktop(dFTest.driver)) {
-                    listVals.add(5, State.Defect);
-                }
-            }
-                                                
-            datosStep.setListResultValidations(listVals);
+	
+	@Validation
+    public static ListResultValidation validateIsPage(String nombrePago, String importeTotal, String emailUsr, String codPais, Channel channel, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
+	   	validations.add(
+    		"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b><br>",
+    		PageMultibanco1rst.isPresentEntradaPago(nombrePago, channel, driver), State.Warn);
+	   	
+	   	State stateVal = State.Warn;
+        if (channel==Channel.movil_web) {
+        	stateVal = State.Info;
         }
-        catch (Exception e) {
-            /*
-             * 
-             */
+	   	validations.add(
+    		"Aparece el importe de la compra: " + importeTotal + "<br>",
+    		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal);
+	   	validations.add(
+    		"Aparece la cabecera indicando la 'etapa' del pago<br>",
+    		PageMultibanco1rst.isPresentCabeceraStep(driver), State.Warn);
+	   	
+        if (channel==Channel.desktop) {
+    	   	validations.add(
+	    		"Aparece un campo de introducción de email (informado con <b>" + emailUsr + "</b>)<br>",
+	    		PageMultibanco1rst.isPresentEmailUsr(emailUsr, driver), State.Warn);
+    	   	validations.add(
+	    		"Figura un botón de pago",
+	    		PageMultibanco1rst.isPresentButtonPagoDesktop(driver), State.Defect);    	   	
         }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+        
+        return validations;
     }
     
-    public static DatosStep continueToNextPage(Channel channel, DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep (
-            "Seleccionar el botón \"Pagar\"", 
-            "Aparece la página de \"En progreso\"");
-        try {
-            PageMultibanco1rst.continueToNextPage(channel, dFTest.driver);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+	@Step (
+		description="Seleccionar el botón \"Pagar\"", 
+        expected="Aparece la página de \"En progreso\"")
+    public static void continueToNextPage(Channel channel, WebDriver driver) throws Exception {
+        PageMultibanco1rst.continueToNextPage(channel, driver);
         
         //Validaciones
-        PageMultibancoEnProgresoStpv.validateIsPage(datosStep, dFTest);
-        
-        return datosStep;
+        PageMultibancoEnProgresoStpv.validateIsPage(driver);
     }
 }
