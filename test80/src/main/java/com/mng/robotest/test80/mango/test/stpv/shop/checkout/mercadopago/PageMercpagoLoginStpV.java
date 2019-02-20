@@ -1,10 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.mercadopago;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoLogin;
@@ -14,57 +14,34 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.P
  * @author jorge.munoz
  *
  */
-
 public class PageMercpagoLoginStpV {
 
-    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) Aparece la página de identificación de Mercadopago<br>" + 
-            "2) En la página figuran los campos de identificación (email + password)";
-        datosStep.setNOKstateByDefault();       
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if ((!PageMercpagoLogin.isPage(dFTest.driver))) {
-                listVals.add(1, State.Defect);
-            }
-            if (!PageMercpagoLogin.isInputUserVisible(dFTest.driver) ||
-                !PageMercpagoLogin.isInputPasswordVisible(dFTest.driver)) {
-                listVals.add(2, State.Defect);
-            }
-
-            datosStep.setListResultValidations(listVals);
-        }
-        catch (Exception e) {
-            /*
-             * 
-             */
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+    public static ListResultValidation validateIsPage(WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
+    	validations.add(
+    		"Aparece la página de identificación de Mercadopago<br>",
+    		PageMercpagoLogin.isPage(driver), State.Defect);
+    	validations.add(
+    		"En la página figuran los campos de identificación (email + password)",
+    		PageMercpagoLogin.isInputUserVisible(driver) &&
+            PageMercpagoLogin.isInputPasswordVisible(driver), State.Defect);
+    	return validations;
     }
     
-    public static DatosStep loginMercadopago(Pago pago, Channel channel, DataFmwkTest dFTest) 
+	@Step (
+		description="Introducir el usuario/password de mercadopago (#{pago.getUseremail()} / #{pago.getPasswordemail()}) + click botón \"Ingresar\"",
+		expected=
+			"Aparece alguna de las páginas:<br>" +
+	        " - Elección medio pago<br>" +
+	        " - Introducción CVC")
+    public static void loginMercadopago(Pago pago, Channel channel, WebDriver driver) 
     throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep       (
-            "Introducir el usuario/password de mercadopago (" + pago.getUseremail() + " / " + pago.getPasswordemail() + ") + click botón \"Ingresar\"",
-            "Aparece alguna de las páginas:<br>" +
-            " - Elección medio pago<br>" +
-            " - Introducción CVC");
-        try {
-            PageMercpagoLogin.sendInputUser(dFTest.driver, pago.getUseremail());
-            PageMercpagoLogin.sendInputPassword(dFTest.driver, pago.getPasswordemail());
-            PageMercpagoLogin.clickBotonContinuar(dFTest.driver);
-                                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+        PageMercpagoLogin.sendInputUser(driver, pago.getUseremail());
+        PageMercpagoLogin.sendInputPassword(driver, pago.getPasswordemail());
+        PageMercpagoLogin.clickBotonContinuar(driver);
 
         //Validaciones
-        //if (PageMercpagoDatosTrjDesktop.isPage(dFTest.driver))
-            PageMercpagoDatosTrjStpV.validaIsPage(channel, datosStep, dFTest);
-//        else
-//            PageMercpagoSelPagoStpV.validateIsPage(importeTotal, codigoPais, datosStep, dFTest);
-        
-        return datosStep;
+        PageMercpagoDatosTrjStpV.validaIsPage(channel, driver);
     }
 }

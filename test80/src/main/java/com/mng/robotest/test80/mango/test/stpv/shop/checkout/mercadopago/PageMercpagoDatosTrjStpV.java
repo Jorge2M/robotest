@@ -1,14 +1,18 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.mercadopago;
 
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrjDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrjMobil;
-
 
 public class PageMercpagoDatosTrjStpV {
 	
@@ -21,120 +25,83 @@ public class PageMercpagoDatosTrjStpV {
 		public String codigoSeguridad;
 	}
     
-    public static void validaIsPage(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
+    public static void validaIsPage(Channel channel, WebDriver driver) {
         switch (channel) {
         case movil_web:
-            validaIsPageMobil(datosStep, dFTest);
+            validaIsPageMobil(driver);
             break;
         default:
         case desktop:
-            validaIsPageDesktop(datosStep, dFTest);
+        	int maxSecondsWait = 5;
+            validaIsPageDesktop(maxSecondsWait, driver);
         }
     }
     
-    public static void validaIsPageMobil(DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) Estamos en la página de introducción de los datos de la tarjeta";   
-        datosStep.setNOKstateByDefault();   
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (!PageMercpagoDatosTrjMobil.isPage(dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-                                                                
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation (
+    	description="Estamos en la página de introducción de los datos de la tarjeta",
+    	level=State.Defect)
+    public static boolean validaIsPageMobil(WebDriver driver) {
+    	return (PageMercpagoDatosTrjMobil.isPage(driver));
     }
     
-    public static void validaIsPageDesktop(DatosStep datosStep, DataFmwkTest dFTest) {
-    	int maxSecondsToWait = 5;
-        String descripValidac = 
-            "1) Estamos en la página de introducción del CVC (la esperamos hasta " + maxSecondsToWait + " segundos)";   
-        datosStep.setNOKstateByDefault();   
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (!PageMercpagoDatosTrjDesktop.isPageUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-                                                                
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation (
+    	description="Estamos en la página de introducción del CVC (la esperamos hasta #{maxSecondsWait} segundos)",
+    	level=State.Defect)
+    public static boolean validaIsPageDesktop(int maxSecondsWait, WebDriver driver) {
+    	return (PageMercpagoDatosTrjDesktop.isPageUntil(maxSecondsWait, driver));
     }    
     
-    public static DatosStep inputNumTarjeta(String numTarjeta, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public static void inputNumTarjeta(String numTarjeta, Channel channel, WebDriver driver) throws Exception {
         switch (channel) {
         case movil_web:
-            return inputNumTarjetaMobil(numTarjeta, dFTest);
+            inputNumTarjetaMobil(numTarjeta, driver);
+            break;
         default:
         case desktop:
-            return inputNumTarjetaDesktop(numTarjeta, dFTest);
+            inputNumTarjetaDesktop(numTarjeta, driver);
+            break;
         }
     }
     
-    public static DatosStep inputNumTarjetaMobil(String numTarjeta, DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep (
-            "Introducir el número de tarjeta (" + numTarjeta + ")", 
-            "El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa");
-        try {
-            PageMercpagoDatosTrjMobil.sendNumTarj(numTarjeta, dFTest.driver);
-                                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+    @Step (
+    	description="Introducir el número de tarjeta #{numTarjeta}", 
+        expected="El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa")
+    public static void inputNumTarjetaMobil(String numTarjeta, WebDriver driver) throws Exception {
+        PageMercpagoDatosTrjMobil.sendNumTarj(numTarjeta, driver);
             
         //Validaciones
-        int maxSecondsToWait = 2;
-        String descripValidac = 
-            "1) El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa (lo esperamos hasta " + maxSecondsToWait + " segundos)";   
-        datosStep.setNOKstateByDefault();   
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (!PageMercpagoDatosTrjMobil.isActiveWrapperVisaUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-                                                                
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
+        int maxSecondsWait = 2;
+        isWrapperTarjetaVisibleVisaDataMobil(maxSecondsWait, driver);
     }
     
-    public static DatosStep inputNumTarjetaDesktop(String numTarjeta, DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep (
-            "Introducir el número de tarjeta (" + numTarjeta + ")", 
-            "Aparece el icono de Visa a la derecha de la tarjeta introducida");
-        try {
-            PageMercpagoDatosTrjDesktop.sendNumTarj(numTarjeta, dFTest.driver);
-                                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+    @Validation (
+    	description="El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa (lo esperamos hasta #{maxSecondsWait} segundos)",
+    	level=State.Warn)
+    private static boolean isWrapperTarjetaVisibleVisaDataMobil(int maxSecondsWait, WebDriver driver) {
+	     return (PageMercpagoDatosTrjMobil.isActiveWrapperVisaUntil(maxSecondsWait, driver));
+    }
+    
+    @Step (
+    	description="Introducir el número de tarjeta #{numTarjeta})", 
+        expected="Aparece el icono de Visa a la derecha de la tarjeta introducida")
+    public static void inputNumTarjetaDesktop(String numTarjeta, WebDriver driver) throws Exception {
+    	PageMercpagoDatosTrjDesktop.sendNumTarj(numTarjeta, driver);
             
         //Validaciones
-        int maxSecondsToWait = 2;
-        String descripValidac = 
-            "1) Aparece el icono de Visa a la derecha de la tarjeta (lo esperamos hasta " + maxSecondsToWait + " segundos)";   
-        datosStep.setNOKstateByDefault();   
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (!PageMercpagoDatosTrjDesktop.isVisibleVisaIconUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-                                                                
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
+    	int maxSecondsWait = 2;
+    	isVisaIconAtRightTrjDesktop(maxSecondsWait, driver);
     }
     
-    public static DatosStep inputDataAndPay(InputData inputData, Channel channel, DataFmwkTest dFTest) 
+    @Validation (
+    	description="Aparece el icono de Visa a la derecha de la tarjeta (lo esperamos hasta #{maxSecondsWait} segundos)",
+    	level=State.Warn)
+    private static boolean isVisaIconAtRightTrjDesktop(int maxSecondsWait, WebDriver driver) {
+    	return (PageMercpagoDatosTrjDesktop.isVisibleVisaIconUntil(maxSecondsWait, driver));
+    }
+    
+    public static DatosStep inputDataAndPay(InputData inputData, Channel channel, WebDriver driver) 
     throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
         switch (channel) {
         case movil_web:
             inputDataMobil(inputData, dFTest);
