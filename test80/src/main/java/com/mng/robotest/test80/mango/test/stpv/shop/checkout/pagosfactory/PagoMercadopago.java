@@ -35,15 +35,15 @@ public class PagoMercadopago extends PagoStpV {
             PageMercpagoDatosTrjStpV.inputNumTarjeta(dataPedido.getPago().getNumtarj(), dCtxSh.channel, dFTest.driver);
             
             PageMercpagoDatosTrjStpV.InputData inputData = new PageMercpagoDatosTrjStpV.InputData();
-            inputData.banco = "Visa";
+            inputData.setBanco("Visa");
             if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest)) {
-                inputData.banco = "Bancomer";
+                inputData.setBanco("Bancomer");
             }
-            inputData.mesVencimiento = dataPedido.getPago().getMescad();
-            inputData.anyVencimiento = dataPedido.getPago().getAnycad();
-            inputData.codigoSeguridad = "123";
+            inputData.setMesVencimiento(dataPedido.getPago().getMescad());
+            inputData.setAnyVencimiento(dataPedido.getPago().getAnycad());
+            inputData.setCodigoSeguridad("123");
             PageMercpagoDatosTrjStpV.inputDataAndPay(inputData, dCtxSh.channel, dFTest.driver);
-            PageMercpagoConfStpV.clickPagar(dCtxSh.channel, dFTest);
+            PageMercpagoConfStpV.clickPagar(dCtxSh.channel, dFTest.driver);
             dataPedido.setCodtipopago("D");
         }
 

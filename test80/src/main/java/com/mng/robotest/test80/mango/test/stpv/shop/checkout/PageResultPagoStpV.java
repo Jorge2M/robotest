@@ -1,9 +1,12 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -22,102 +25,81 @@ import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageInputPedidoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageListPedidosStpV;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-
 public class PageResultPagoStpV {
 
-    public static void validaIsPageUntil(int maxSecondsToWait, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" (la esperamos hasta " + maxSecondsToWait + " segundos)";   
-        datosStep.setNOKstateByDefault();   
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (!PageResultPago.isVisibleTextoConfirmacionPago(dFTest.driver, channel, maxSecondsToWait)) {
-                listVals.add(1, State.Defect);
-            }
-                                                                
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation (
+		description="Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" (la esperamos hasta #{maxSecondsToWait} segundos)",
+		level=State.Defect)
+    public static boolean validaIsPageUntil(int maxSecondsToWait, Channel channel, WebDriver driver) {
+		return (PageResultPago.isVisibleTextoConfirmacionPago(driver, channel, maxSecondsToWait));
     }
     
-    public static void validateIsPageOk(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DatosStep datosStep, DataFmwkTest dFTest) 
+    public static void validateIsPageOk(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
+        validateTextConfirmacionPago(dCtxSh.channel, driver);
+        validateDataPedido(dCtxPago, dCtxSh, driver);
+    }
+    
+    @Validation
+    public static ListResultValidation validateTextConfirmacionPago(Channel channel, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	    int maxSecondsWait1 = 10;
+	    boolean isVisibleTextConfirmacion = PageResultPago.isVisibleTextoConfirmacionPago(driver, channel, maxSecondsWait1);
+       	validations.add(
+    		"Aparece un texto de confirmación del pago (lo esperamos hasta " + maxSecondsWait1 + " segundos)<br>",
+    		isVisibleTextConfirmacion, State.Warn);
+       	if (!isVisibleTextConfirmacion) {
+   		    int maxSecondsWait2 = 20;
+           	validations.add(
+        		"Si no aparece lo esperamos " + maxSecondsWait2 + " segundos",
+        		PageResultPago.isVisibleTextoConfirmacionPago(driver, channel, maxSecondsWait2), State.Defect);
+       	}
+       	
+       	return validations;
+    }
+    
+    @Validation
+    public static ListResultValidation validateDataPedido(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
         String importeTotal = "";
         DataBag dataBag = dCtxPago.getDataPedido().getDataBag(); 
-        if (dataBag!=null && "".compareTo(dataBag.getImporteTotal())!=0)
+        if (dataBag!=null && "".compareTo(dataBag.getImporteTotal())!=0) {
             importeTotal = dataBag.getImporteTotal();
-        else
+        }
+        else {
             importeTotal = dCtxPago.getDataPedido().getImporteTotal();
+        }
+      	validations.add(
+      		"Aparece el importe " + importeTotal + " de la operación<br>",
+      		ImporteScreen.isPresentImporteInScreen(importeTotal, dCtxSh.pais.getCodigo_pais(), driver), State.Warn);
         
-        //Validations
-        validateTextConfirmacionPago(dCtxSh.channel, datosStep, dFTest);
-       
-        String tagPedido = "[PEDIDO]";
-        String codigoPed = "";
-        String validacion2 = "";
-        if (dCtxSh.channel==Channel.desktop) {
-            if (dCtxSh.pais.isPaisWithMisCompras() && dCtxSh.appE==AppEcom.shop)
-                validacion2 =  "2) Aparece el link hacia las compras<br>";
-            else
-                validacion2 = "2) Aparece el link hacia los pedidos<br>";
-        }
-
-        DataPedido dataPedido = dCtxPago.getDataPedido();
-        String descripValidac = 
-            "1) Aparece el importe " + importeTotal + " de la operación<br>" +
-            validacion2 + 
-            "3) Aparece el código de pedido (" + tagPedido + ") (lo esperamos 5 segundos)";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, dCtxSh.pais.getCodigo_pais(), dFTest.driver)) {
-                listVals.add(1, State.Warn);   
-            }
-            if (dCtxSh.channel==Channel.desktop) {
-                if (dCtxSh.pais.isPaisWithMisCompras() && dCtxSh.appE==AppEcom.shop) {
-                    if (!PageResultPago.isLinkMisComprasDesktop(dFTest.driver)) {
-                        listVals.add(2, State.Warn);
-                    }
-                }
-                else {
-                    if (!PageResultPago.isLinkPedidosDesktop(dFTest.driver)) {
-                        listVals.add(2, State.Warn);
-                    }
-                }
-            }
-            codigoPed = PageResultPago.getCodigoPedido(dFTest.driver, dCtxSh.channel, 5/*secondsWait*/);
-            if ("".compareTo(codigoPed)==0)
-                listVals.add(3, State.Defect);
-            else
-                dataPedido.setResejecucion(State.Ok);            
-                        
-            descripValidac = descripValidac.replace(tagPedido, codigoPed);
-            dataPedido.setCodpedido(codigoPed);
-            
-            datosStep.setListResultValidations(listVals); 
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-    }
-    
-    public static void validateTextConfirmacionPago(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
-	    int maxSecondsWait1 = 10;
-	    int maxSecondsWait2 = 20;
-	    String descripValidac = 
-	        "1) Aparece un texto de confirmación del pago (lo esperamos hasta " + maxSecondsWait1 + " segundos)<br>" +
-	    	"2) Si no aparece lo esperamos " + maxSecondsWait2 + " segundos";
-	    datosStep.setNOKstateByDefault();
-	    ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-	    try { 
-	        if (!PageResultPago.isVisibleTextoConfirmacionPago(dFTest.driver, channel, maxSecondsWait1)) {
-	            listVals.add(1, State.Warn);
-	            if (!PageResultPago.isVisibleTextoConfirmacionPago(dFTest.driver, channel, maxSecondsWait2)) {
-	            	listVals.add(2, State.Defect);
-	            }
+	    if (dCtxSh.channel==Channel.desktop) {
+	        if (dCtxSh.pais.isPaisWithMisCompras() && dCtxSh.appE==AppEcom.shop) {
+	        	validations.add(
+              		"Aparece el link hacia las compras<br>",
+              		PageResultPago.isLinkMisComprasDesktop(driver), State.Warn);
 	        }
-	        
-	        datosStep.setListResultValidations(listVals); 
+	        else {
+	        	validations.add(
+              		"Aparece el link hacia los pedidos<br>",
+              		PageResultPago.isLinkPedidosDesktop(driver), State.Warn);
+	        }
 	    }
-	    finally { listVals.checkAndStoreValidations(descripValidac); }
+	    
+	    int maxSecondsWait = 5;
+        String codigoPed = PageResultPago.getCodigoPedido(driver, dCtxSh.channel, maxSecondsWait);
+        boolean isCodPedidoVisible = "".compareTo(codigoPed)!=0;
+    	validations.add(
+      		"Aparece el código de pedido (" + codigoPed + ") (lo esperamos hasta " + maxSecondsWait + " segundos)",
+      		isCodPedidoVisible, State.Defect);
+	    
+		DataPedido dataPedido = dCtxPago.getDataPedido();
+    	if (isCodPedidoVisible) {
+            dataPedido.setResejecucion(State.Ok);
+    	}
+    	dataPedido.setCodpedido(codigoPed);
+    	
+    	return validations;
     }
     
     public static DatosStep selectMisPedidos(DataPedido dataPedido, DataFmwkTest dFTest) throws Exception {

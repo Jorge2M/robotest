@@ -1,15 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.mercadopago;
 
 import org.openqa.selenium.WebDriver;
-
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrjDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrjMobil;
@@ -17,12 +11,49 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.P
 public class PageMercpagoDatosTrjStpV {
 	
 	public static class InputData {
-		public String numTarjeta;
-		public String banco;
-		public String nombreYApellido;
-		public String mesVencimiento;
-		public String anyVencimiento;
-		public String codigoSeguridad;
+		private String numTarjeta;
+		private String banco;
+		private String nombreYApellido;
+		private String mesVencimiento;
+		private String anyVencimiento;
+		private String codigoSeguridad;
+		
+		public String getNumTarjeta() {
+			return numTarjeta;
+		}
+		public void setNumTarjeta(String numTarjeta) {
+			this.numTarjeta = numTarjeta;
+		}
+		public String getBanco() {
+			return banco;
+		}
+		public void setBanco(String banco) {
+			this.banco = banco;
+		}
+		public String getNombreYApellido() {
+			return nombreYApellido;
+		}
+		public void setNombreYApellido(String nombreYApellido) {
+			this.nombreYApellido = nombreYApellido;
+		}
+		public String getMesVencimiento() {
+			return mesVencimiento;
+		}
+		public void setMesVencimiento(String mesVencimiento) {
+			this.mesVencimiento = mesVencimiento;
+		}
+		public String getAnyVencimiento() {
+			return anyVencimiento;
+		}
+		public void setAnyVencimiento(String anyVencimiento) {
+			this.anyVencimiento = anyVencimiento;
+		}
+		public String getCodigoSeguridad() {
+			return codigoSeguridad;
+		}
+		public void setCodigoSeguridad(String codigoSeguridad) {
+			this.codigoSeguridad = codigoSeguridad;
+		}
 	}
     
     public static void validaIsPage(Channel channel, WebDriver driver) {
@@ -99,92 +130,74 @@ public class PageMercpagoDatosTrjStpV {
     	return (PageMercpagoDatosTrjDesktop.isVisibleVisaIconUntil(maxSecondsWait, driver));
     }
     
-    public static DatosStep inputDataAndPay(InputData inputData, Channel channel, WebDriver driver) 
+    public static void inputDataAndPay(InputData inputData, Channel channel, WebDriver driver) 
     throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
         switch (channel) {
         case movil_web:
-            inputDataMobil(inputData, dFTest);
-            return clickButtonPayMobil(dFTest);
+            inputDataMobil(inputData, driver);
+            clickButtonPayMobil(driver);
+            break;
         default:
         case desktop:
-            return inputDataAndPayDesktop(inputData, dFTest);
+            inputDataAndPayDesktop(inputData, driver);
+            break;
         }
     }
     
-    public static DatosStep inputDataMobil(InputData inputData, DataFmwkTest dFTest) throws Exception {
-        String fechaVencimiento = inputData.mesVencimiento + "/" + inputData.anyVencimiento;        
-        DatosStep datosStep = new DatosStep (
-            "Introducir la fecha de vencimiento (" + fechaVencimiento + "), " + 
-            "el banco (" + inputData.banco + ") " + 
-            "security code (" + inputData.codigoSeguridad + ") " + 
-            "y confirmar", 
-            "Aparece la página de resultado");
-        try {
-            PageMercpagoDatosTrjMobil.sendCaducidadTarj(fechaVencimiento, dFTest.driver);
-            PageMercpagoDatosTrjMobil.sendCVC(inputData.codigoSeguridad, dFTest.driver);            
-                                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+    @Step (
+    	description=
+    		"Introducir la fecha de vencimiento (#{inputData.getMesVencimiento()} / #{inputData.getAnyVencimiento()}), " + 
+    	     "el banco #{inputData.getBanco()}, " +   
+    	     "el security code #{inputData.codigoSeguridad} " + 
+    	     "y confirmar", 
+    	expected=
+    		"Aparece la página de resultado")
+    public static void inputDataMobil(InputData inputData, WebDriver driver) throws Exception {
+        String fechaVencimiento = inputData.getMesVencimiento() + "/" + inputData.getAnyVencimiento();        
+        PageMercpagoDatosTrjMobil.sendCaducidadTarj(fechaVencimiento, driver);
+        PageMercpagoDatosTrjMobil.sendCVC(inputData.codigoSeguridad, driver);            
             
         //Validaciones
-        int maxSecondsToWait = 2;
-        String descripValidac = 
-            "1) Aparece activado el botón \"Next\" para continuar con el pago (lo esperamos hasta " + maxSecondsToWait + " segundos)";   
-        datosStep.setNOKstateByDefault();   
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (!PageMercpagoDatosTrjMobil.isClickableButtonNextPayUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-                                                                
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
+        int maxSecondsWait = 2;
+        isEnabledButtonNextMobil(maxSecondsWait, driver);
     }
     
-    public static DatosStep clickButtonPayMobil(DataFmwkTest dFTest) throws Exception {
-        DatosStep datosStep = new DatosStep (
-            "Seleccionar el botón \"Next\" para pagar", 
-            "Aparece la página de resultado");
-        try {
-            PageMercpagoDatosTrjMobil.clickButtonNextPay(dFTest.driver);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+    @Validation (
+    	description="Aparece activado el botón \"Next\" para continuar con el pago (lo esperamos hasta #{maxSecondsWait} segundos)",
+    	level=State.Warn)
+    private static boolean isEnabledButtonNextMobil(int maxSecondsWait, WebDriver driver) {
+    	return (PageMercpagoDatosTrjMobil.isClickableButtonNextPayUntil(maxSecondsWait, driver));
+	}
+    
+    @Step (
+    	description="Seleccionar el botón \"Next\" para pagar", 
+        expected="Aparece la página de resultado")
+    public static void clickButtonPayMobil(WebDriver driver) throws Exception {
+    	PageMercpagoDatosTrjMobil.clickButtonNextPay(driver);
             
         //Validaciones
-        PageMercpagoConfStpV.validaIsPage(Channel.movil_web, datosStep, dFTest);
-        
-        return datosStep;
+    	int maxSecondsWait = 5;
+        PageMercpagoConfStpV.validaIsPageUntil(maxSecondsWait, Channel.movil_web, driver);
     }    
     
-    public static DatosStep inputDataAndPayDesktop(InputData inputData, DataFmwkTest dFTest) 
+    @Step (
+    	description=
+    		"Introducir la fecha de vencimiento (#{inputData.getMesVencimiento()} / #{inputData.getAnyVencimiento()}, " + 
+            "security code (#{inputData.getCodigoSeguridad(), " + 
+            "Banco (#{inputData.getBanco()}) " +
+            "y confirmar", 
+        expected=
+        	"Aparece la página de resultado")
+    public static void inputDataAndPayDesktop(InputData inputData, WebDriver driver) 
     throws Exception {
         String fechaVencimiento = inputData.mesVencimiento + "/" + inputData.anyVencimiento;     
-        DatosStep datosStep = new DatosStep (
-            "Introducir la fecha de vencimiento (" + fechaVencimiento + "), " + 
-            "security code (" + inputData.codigoSeguridad + "), " + 
-            "Banco (" + inputData.banco  + ") " +
-            "y confirmar", 
-            "Aparece la página de resultado");
-        try {
-            PageMercpagoDatosTrjDesktop.sendCaducidadTarj(fechaVencimiento, dFTest.driver);
-            PageMercpagoDatosTrjDesktop.sendCVC(inputData.codigoSeguridad, dFTest.driver);
-            PageMercpagoDatosTrjDesktop.selectBanco(inputData.banco, dFTest.driver);
-            PageMercpagoDatosTrjDesktop.clickBotonContinuar(dFTest.driver);
-                                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-            
+        PageMercpagoDatosTrjDesktop.sendCaducidadTarj(fechaVencimiento, driver);
+        PageMercpagoDatosTrjDesktop.sendCVC(inputData.codigoSeguridad, driver);
+        PageMercpagoDatosTrjDesktop.selectBanco(inputData.banco, driver);
+        PageMercpagoDatosTrjDesktop.clickBotonContinuar(driver);
+
         //Validaciones
-        PageMercpagoConfStpV.validaIsPage(Channel.desktop, datosStep, dFTest);
-        
-        return datosStep;
+        int maxSecondsWait = 30;
+        PageMercpagoConfStpV.validaIsPageUntil(maxSecondsWait, Channel.desktop, driver);
     }
 }

@@ -224,7 +224,7 @@ public class PagoNavigationsStpV {
         if (execPay) {
             //Validaciones
             if (pagoToTest.getTypePago()!=TypePago.TpvVotf) {
-                PageResultPagoStpV.validateIsPageOk(dCtxPago, dCtxSh, datosStep, dFTest);
+                PageResultPagoStpV.validateIsPageOk(dCtxPago, dCtxSh, dFTest.driver);
                 if (dCtxSh.channel==Channel.desktop && !dCtxPago.getFTCkout().isChequeRegalo) {
                     if (testMisCompras(dCtxPago, dCtxSh))
                         PageResultPagoStpV.selectLinkMisComprasAndValidateCompra(dCtxPago, dCtxSh, dFTest);
