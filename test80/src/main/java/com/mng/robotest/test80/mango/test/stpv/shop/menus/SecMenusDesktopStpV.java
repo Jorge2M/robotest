@@ -133,7 +133,7 @@ public class SecMenusDesktopStpV {
      */
     public static void validationsSelecMenuEspecificDesktop(MenuLateralDesktop menu, Channel channel, AppEcom app, 
     														DataFmwkTest dFTest) throws Exception {
-    	DatosStep datosStep = TestCaseData.getDatosStepForValidation();
+    	DatosStep datosStep = TestCaseData.getDatosLastStep();
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, dFTest);
     	pageGaleriaStpV.validateBannerSuperiorIfExistsDesktop();
         if (menu.isMenuLateral()) {
@@ -462,7 +462,7 @@ public class SecMenusDesktopStpV {
         //AllPagesStpV.validatePageWithFooter(dCtxSh.pais, dCtxSh.appE, datosStep, dFTest);
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/);
     }
     
     /**
@@ -793,7 +793,7 @@ public class SecMenusDesktopStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }
        
        //Validaciones estándar. 
-       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, dFTest);
+       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/);
     }    
     
     public static void validationsRebajas(Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 

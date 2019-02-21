@@ -62,7 +62,7 @@ public class PageHomeMarcasStpV {
     
     public enum TypeHome {Multimarca, PortadaLinea}
     public static void validaRebajasJun2018(TypeHome typeHome, boolean areBanners, DataCtxShop dCtxSh, DataFmwkTest dFTest) {
-    	DatosStep datosStep = TestCaseData.getDatosStepForValidation();
+    	DatosStep datosStep = TestCaseData.getDatosLastStep();
         int maxSeconds = 3;
         String validacion1 = "Aparece la línea \"Rebajas\" (lo esperamos hasta " + maxSeconds + " segundos)";
         if (!dCtxSh.pais.isVentaOnline())

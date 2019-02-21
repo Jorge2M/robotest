@@ -90,7 +90,7 @@ public class PagePostfCodSegStpV {
     	try {
 	        if (isPostfinanceEcard(nombreMetodo)) {
 	            //El código de seguridad sólo lo pide en el caso de "PostFinance Card" no en el de "PostFinance e-finance"
-	        	DatosStep datosStep = TestCaseData.getDatosStepForValidation();
+	        	DatosStep datosStep = TestCaseData.getDatosLastStep();
 	        	datosStep.setDescripcion("Introducir el código de seguridad " + codSeguridad + ". " + datosStep.getDescripcion());
 	        	PagePostfCodSeg.inputCodigoSeguridad(driver, codSeguridad);
 	        }

@@ -56,7 +56,7 @@ public class PageSepa1rstStpV {
     public static void inputDataAndclickPay(String iban, String titular, String importeTotal, String codPais, Channel channel, WebDriver driver) 
     throws Exception {
         if (channel==Channel.movil_web) {
-        	DatosStep datosStep = TestCaseData.peekDatosStepForStep();
+        	DatosStep datosStep = TestCaseData.getDatosCurrentStep();
         	datosStep.setDescripcion("Seleccionamos el icono de SEPA. " + datosStep.getDescripcion());
         	PageSepa1rst.clickIconoSepa(channel, driver);
         }

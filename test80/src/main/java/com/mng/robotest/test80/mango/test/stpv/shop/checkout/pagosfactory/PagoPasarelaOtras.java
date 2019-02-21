@@ -27,6 +27,6 @@ public class PagoPasarelaOtras extends PagoStpV {
             throw new PaymethodWithoutTestPayImplemented(MsgNoPayImplemented);
         }
         
-        return (TestCaseData.getDatosStepForValidation());
+        return (TestCaseData.getDatosLastStep());
     }    
 }

@@ -1,45 +1,30 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.pedidos;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageListPedidos;
-
 
 public class PageListPedidosStpV {
 
-    public static void validateIsPage(String codigoPedido, DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) La página contiene el bloque correspondiente a la lista de pedidos<br>" +
-            "2) Figura la línea correspondiente al pedido " + codigoPedido;
-        datosStep.setNOKstateByDefault();      
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (!PageListPedidos.isPage(dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (!PageListPedidos.isVisibleCodPedido(codigoPedido, dFTest.driver)) {
-                listVals.add(2, State.Info);
-            }
-                            
-            datosStep.setListResultValidations(listVals); 
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+    public static ListResultValidation validateIsPage(String codigoPedido, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
+      	validations.add(
+      		"La página contiene el bloque correspondiente a la lista de pedidos<br>",
+      		PageListPedidos.isPage(driver), State.Defect);	
+      	validations.add(
+      		"Figura la línea correspondiente al pedido " + codigoPedido,
+      		PageListPedidos.isVisibleCodPedido(codigoPedido, driver), State.Info);	
+		return validations;
     }
     
-    public static DatosStep selectPedido(String codPedido, DataFmwkTest dFTest) throws Exception {
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionar el pedido de la lista <b>" + codPedido + "</b>", 
-            "Apareca la página con los datos correctos del pedido");
-        try {
-            PageListPedidos.selectLineaPedido(codPedido, dFTest.driver);
-                                                                        
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        return datosStep;
+	@Step (
+		description="Seleccionar el pedido de la lista <b>#{codPedido}</b>", 
+        expected="Apareca la página con los datos correctos del pedido")
+    public static void selectPedido(String codPedido, WebDriver driver) throws Exception {
+		PageListPedidos.selectLineaPedido(codPedido, driver);
     }
 }

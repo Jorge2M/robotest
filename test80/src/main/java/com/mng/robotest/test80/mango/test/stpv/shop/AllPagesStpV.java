@@ -23,9 +23,10 @@ import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
 
 public class AllPagesStpV {
     
-    public static void validacionesEstandar(boolean validaSEO, boolean validaJS, boolean validaImgBroken, DataFmwkTest dFTest) 
+    public static void validacionesEstandar(boolean validaSEO, boolean validaJS, boolean validaImgBroken) 
     throws Exception {
-    	DatosStep datosStep = TestCaseData.getDatosStepForValidation();
+    	DatosStep datosStep = TestCaseData.getDatosLastStep();
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
         validacionesEstandar(validaSEO, State.Info_NoHardcopy, validaJS, State.Info_NoHardcopy, validaImgBroken, State.Warn, datosStep, dFTest);
     }
     

@@ -157,7 +157,7 @@ public class SecMenusWrapperStpV {
         } finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/);
 
         return datosStep;
     }
@@ -191,7 +191,7 @@ public class SecMenusWrapperStpV {
         }
        
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
         
         //Por defecto aplicaremos todas las avalidaciones (Google Analytics, Criteo, NetTraffic y DataLayer)
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(Constantes.AnalyticsVal.GoogleAnalytics,

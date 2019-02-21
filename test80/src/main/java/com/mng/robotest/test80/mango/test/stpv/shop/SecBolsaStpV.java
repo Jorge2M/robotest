@@ -208,7 +208,7 @@ public class SecBolsaStpV {
     public static void validaAltaArtBolsa(DataBag dataBag, Channel channel, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
         //Validaciones
-    	DatosStep datosStep = TestCaseData.getDatosStepForValidation();
+    	DatosStep datosStep = TestCaseData.getDatosLastStep();
         validaNumArtEnBolsa(dataBag, channel, app, dFTest);
         if (channel==Channel.desktop) {
             int maxSecondsToWait = 1;
@@ -243,7 +243,7 @@ public class SecBolsaStpV {
     
     public static void validaNumArtEnBolsa(DataBag dataBag, Channel channel, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
-    	DatosStep datosStep = TestCaseData.getDatosStepForValidation();
+    	DatosStep datosStep = TestCaseData.getDatosLastStep();
         int maxSecondsToWait = 2;
         String descripValidac =
             "1) Existen " + dataBag.getListArticulos().size() + 

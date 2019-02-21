@@ -31,7 +31,7 @@ public class PageRecuperaPasswdStpV {
         finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/);
     }
     
     public static void inputMailAndClickEnviar(String email, DataFmwkTest dFTest) throws Exception {
@@ -67,6 +67,6 @@ public class PageRecuperaPasswdStpV {
         finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones estándar
-        AllPagesStpV.validacionesEstandar(false/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
+        AllPagesStpV.validacionesEstandar(false/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
     }
 }

@@ -203,7 +203,7 @@ public class Reembolsos extends GestorWebDriver {
         PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, dFTest);
         
         //Volvemos a la portada (Seleccionamos el link "Seguir de shopping" o el icono de Mango)
-        PageResultPagoStpV.selectSeguirDeShopping(dCtxSh.channel, dCtxSh.appE, dFTest);
+        PageResultPagoStpV.selectSeguirDeShopping(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         
         //Calculamos el saldo en cuenta que debería quedar (según si se ha realizado o no el pago);
         float saldoCtaEsperado;

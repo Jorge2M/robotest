@@ -44,6 +44,6 @@ public class PagoSofort extends PagoStpV {
             this.dCtxPago.getDataPedido().setCodtipopago("F");
         }
         
-        return TestCaseData.getDatosStepForValidation();
+        return TestCaseData.getDatosLastStep();
     }    
 }

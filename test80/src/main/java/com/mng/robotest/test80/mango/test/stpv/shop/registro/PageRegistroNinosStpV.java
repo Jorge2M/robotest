@@ -38,6 +38,6 @@ public class PageRegistroNinosStpV {
         PageRegistroDirecStpV.isPageFromPais(pais, dFTest);
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/);
     }
 }

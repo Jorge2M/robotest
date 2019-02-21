@@ -103,7 +103,7 @@ public class PageRegistroIniStpV {
             PageRegistroSegundaStpV.validaIsPageRegistroOK(paisRegistro, app, dataRegistro, dFTest.driver);
         }
         
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
     }
     
 	@Validation (

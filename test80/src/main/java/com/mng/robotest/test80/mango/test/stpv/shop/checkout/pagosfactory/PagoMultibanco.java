@@ -32,6 +32,6 @@ public class PagoMultibanco extends PagoStpV {
             PageMultibancoEnProgresoStpv.clickButtonNextStep(this.dFTest);
         }
         
-        return TestCaseData.getDatosStepForValidation();
+        return TestCaseData.getDatosLastStep();
     }    
 }

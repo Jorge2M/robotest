@@ -102,7 +102,7 @@ public class PagoNavigationsStpV {
                 PageFavoritosStpV.clearAll(dCtxSh, dFTest);
             
             //Validaciones estándar. 
-            AllPagesStpV.validacionesEstandar(false/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/, dFTest);
+            AllPagesStpV.validacionesEstandar(false/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/);
         }
         
         int maxArticlesAwayVale = 2;
@@ -226,14 +226,17 @@ public class PagoNavigationsStpV {
             if (pagoToTest.getTypePago()!=TypePago.TpvVotf) {
                 PageResultPagoStpV.validateIsPageOk(dCtxPago, dCtxSh, dFTest.driver);
                 if (dCtxSh.channel==Channel.desktop && !dCtxPago.getFTCkout().isChequeRegalo) {
-                    if (testMisCompras(dCtxPago, dCtxSh))
+                    if (testMisCompras(dCtxPago, dCtxSh)) {
                         PageResultPagoStpV.selectLinkMisComprasAndValidateCompra(dCtxPago, dCtxSh, dFTest);
-                    else
-                        PageResultPagoStpV.selectLinkPedidoAndValidatePedido(dataPedido, dFTest);
+                    }
+                    else {
+                        PageResultPagoStpV.selectLinkPedidoAndValidatePedido(dataPedido, dFTest.driver);
+                    }
                 }
             }
-            else
+            else {
                 PageResultPagoTpvStpV.validateIsPageOk(dataPedido, dCtxSh.pais.getCodigo_pais(), datosStep, dFTest);
+            }
             
             //Almacenamos el pedido en el contexto para la futura validación en Manto
             pagoStpV.storePedidoForMantoAndResetData();

@@ -46,7 +46,7 @@ public class PagoEps extends PagoStpV {
             PageEpsSimuladorStpV.clickContinueButton(dFTest.driver);
         }
         
-        return TestCaseData.getDatosStepForValidation();
+        return TestCaseData.getDatosLastStep();
     }
     
 //    private void activateTestABforMethodEPS() {

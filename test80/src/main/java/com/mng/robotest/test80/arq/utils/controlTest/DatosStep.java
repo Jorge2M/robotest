@@ -50,7 +50,7 @@ public class DatosStep {
         this.descripcion = c_descripcion;
         this.res_expected = c_res_expected;
         this.hora_inicio = new Date(System.currentTimeMillis());
-    	DatosStep maxDatosStep = TestCaseData.getDatosStepForValidation();
+    	DatosStep maxDatosStep = TestCaseData.getDatosLastStep();
     	if (maxDatosStep!=null) {
     		setStepNumber(maxDatosStep.getStepNumber() + 1);
     	}

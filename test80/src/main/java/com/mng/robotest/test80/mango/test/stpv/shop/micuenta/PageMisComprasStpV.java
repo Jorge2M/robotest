@@ -2,8 +2,12 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -22,7 +26,7 @@ public class PageMisComprasStpV {
     public static SecQuickViewArticuloStpV SecQuickViewArticulo;
     public static void validateIsPage(DataCtxShop dataCtxShop, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
         if (dataCtxShop.pais.isTicketStoreEnabled()) {
-            validateIsPage(datosStep, dFTest);
+            validateIsPage(dFTest.driver);
         } else {
             validateIsPageWhenNotExistTabs(datosStep, dFTest);
         }
@@ -53,35 +57,23 @@ public class PageMisComprasStpV {
         finally { listVals.checkAndStoreValidations(descripValidac); }
 
         //Validaciones estÃ¡ndar.
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
     }
 
-    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
-        //Validaciones.
-    	int maxSecondsToWait = 2;
-        String descripValidac = 
-            "1) Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
-            "2) Aparece el bloque de \"Tienda\"<br>" +
-            "3) Aparece el bloque de \"Online\"";
-        datosStep.setNOKstateByDefault();      
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageMisCompras.isPageUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            if (!PageMisCompras.isPresentBlockUntil(0/*maxSedondsToWait*/, TypeCompra.Tienda, dFTest.driver)) {
-                listVals.add(2, State.Warn);
-            }
-            if (!PageMisCompras.isPresentBlockUntil(0/*maxSedondsToWait*/, TypeCompra.Online, dFTest.driver)) {
-                listVals.add(3, State.Warn);
-            }
-        
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-            
-        //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
+    @Validation
+    public static ListResultValidation validateIsPage(WebDriver driver) throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	int maxSecondsWait = 2;
+      	validations.add(
+    		"Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		PageMisCompras.isPageUntil(maxSecondsWait, driver), State.Warn);
+      	validations.add(
+    		"Aparece el bloque de \"Tienda\"<br>",
+    		PageMisCompras.isPresentBlockUntil(0, TypeCompra.Tienda, driver), State.Warn);
+      	validations.add(
+      		"Aparece el bloque de \"Online\"",
+      		PageMisCompras.isPresentBlockUntil(0, TypeCompra.Online, driver), State.Warn);
+      	return validations;
     }
     
     /**
@@ -195,7 +187,7 @@ public class PageMisComprasStpV {
         
         //Validaciones
         PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(dFTest.driver);
-        pageDetPedidoStpV.validateIsPageOk(compraOnline, codPais, datosStep, dFTest);
+        pageDetPedidoStpV.validateIsPageOk(compraOnline, codPais, dFTest.driver);
         
         return pageDetPedidoStpV;        
     }

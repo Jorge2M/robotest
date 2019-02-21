@@ -3,8 +3,8 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
@@ -19,6 +19,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageResultPag
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras.TypeBlock;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompras.TypeCompra;
 import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageListPedidos;
+import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageAccesoMisComprasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMisComprasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageInputPedidoStpV;
@@ -102,93 +103,68 @@ public class PageResultPagoStpV {
     	return validations;
     }
     
-    public static DatosStep selectMisPedidos(DataPedido dataPedido, DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep (
-            "Seleccionar el link \"Mis pedidos\"", 
-            "Apareca la página de identificación del pedido");
-        try {
-            PageResultPago.clickMisPedidos(dFTest.driver);
-                                                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }         
+    @Step (
+    	description="Seleccionar el link \"Mis pedidos\"", 
+        expected="Apareca la página de identificación del pedido")
+    public static void selectMisPedidos(DataPedido dataPedido, WebDriver driver) throws Exception {
+        PageResultPago.clickMisPedidos(driver);      
                                 
-        //Puede aparecer la página con la lista de pedidos o la de introducción de los datos del pedido
-        if (PageListPedidos.isPage(dFTest.driver))
-            PageListPedidosStpV.validateIsPage(dataPedido.getCodpedido(), datosStep, dFTest);
-        else
-            PageInputPedidoStpV.validateIsPage(datosStep, dFTest);
-        
-        return datosStep;
+        //Validations. Puede aparecer la página con la lista de pedidos o la de introducción de los datos del pedido
+        if (PageListPedidos.isPage(driver)) {
+        	PageListPedidosStpV.validateIsPage(dataPedido.getCodpedido(), driver);
+        }
+        else {
+        	PageInputPedidoStpV.validateIsPage(driver);
+        }
     }    
     
-    public static DatosStep selectMisCompras(boolean userRegistered, DataFmwkTest dFTest) throws Exception {
-        //Step
-        String resultadoEsperado = "";
-        if (userRegistered)
-            resultadoEsperado = "Aparece la página de \"Mis compras\"";
-        else
-            resultadoEsperado = "Aparece la página de acceso a \"Mis compras\"";
-            
-        DatosStep datosStep = new DatosStep (
-            "Seleccionar el link \"Mis Compras\"", 
-            resultadoEsperado);
-        try {
-            PageResultPago.clickMisCompras(dFTest.driver);
-                                                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }         
+    @Step (
+    	description="Seleccionar el link \"Mis Compras\"",
+    	expected="Aparece la página de \"Mis compras\" o la de \"Acceso a Mis compras\" según si el usuario está o no loginado")
+    public static void selectMisCompras(boolean userRegistered, WebDriver driver) throws Exception {
+        PageResultPago.clickMisCompras(driver);     
                                 
         //Validations
-        if (userRegistered)
-            PageMisComprasStpV.validateIsPage(datosStep, dFTest);
-        else
-            PageAccesoMisComprasStpV.validateIsPage(datosStep, dFTest);
-        
-        return datosStep;
+        if (userRegistered) {
+            PageMisComprasStpV.validateIsPage(driver);
+            AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
+        }
+        else {
+            PageAccesoMisComprasStpV.validateIsPage(driver);
+        }
     }    
     
-    public static DatosStep selectSeguirDeShopping(Channel channel, AppEcom app, DataFmwkTest dFTest) throws Exception {  
-        //Step
-        DatosStep datosStep = new DatosStep   (
-            "Seleccionar el link \"Seguir de shopping\" o el icono de Mango", 
-            "Volvemos a la portada");
-        try {
-            //Si es clicable seleccionamos el link "Seguir de shopping", sinó seleccionamos el icono de Mango
-            if (PageResultPago.isClickableSeguirDeShopping(dFTest.driver, channel)) {
-                PageResultPago.clickSeguirDeShopping(dFTest.driver, channel);
-            }
-            else {
-                SecCabecera.getNew(channel, app, dFTest.driver).
-                	clickLogoMango();
-            }
-    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+    @Step (
+    	description="Seleccionar el link \"Seguir de shopping\" o el icono de Mango", 
+        expected="Volvemos a la portada")
+    public static void selectSeguirDeShopping(Channel channel, AppEcom app, WebDriver driver) throws Exception {  
+        //Si es clicable seleccionamos el link "Seguir de shopping", sinó seleccionamos el icono de Mango
+        if (PageResultPago.isClickableSeguirDeShopping(driver, channel)) {
+            PageResultPago.clickSeguirDeShopping(driver, channel);
         }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        return datosStep;
+        else {
+            SecCabecera.getNew(channel, app, driver).clickLogoMango();
+        }
     }
     
-    public static DatosStep selectLinkPedidoAndValidatePedido(DataPedido dataPedido, DataFmwkTest dFTest) 
+    public static void selectLinkPedidoAndValidatePedido(DataPedido dataPedido, WebDriver driver) 
     throws Exception {
-        DatosStep datosStep = PageResultPagoStpV.selectMisPedidos(dataPedido, dFTest);
+        PageResultPagoStpV.selectMisPedidos(dataPedido, driver);
+        DatosStep datosStep = TestCaseData.getDatosLastStep();
         if (datosStep.getResultSteps()==State.Ok) {
-            if (PageListPedidos.isPage(dFTest.driver))
-                datosStep = PageListPedidosStpV.selectPedido(dataPedido.getCodpedido(), dFTest);
-            else
-                datosStep = PageInputPedidoStpV.inputPedidoAndSubmit(dataPedido, dFTest);
+            if (PageListPedidos.isPage(driver)) {
+                PageListPedidosStpV.selectPedido(dataPedido.getCodpedido(), driver);
+            }
+            else {
+                PageInputPedidoStpV.inputPedidoAndSubmit(dataPedido, driver);
+            }
         }
-        
-        return datosStep;
     }
     
     public static DatosStep selectLinkMisComprasAndValidateCompra(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         DatosStep datosStep = null;
-        PageResultPagoStpV.selectMisCompras(dCtxSh.userRegistered, dFTest);
+        PageResultPagoStpV.selectMisCompras(dCtxSh.userRegistered, dFTest.driver);
         DataPedido dataPedido = dCtxPago.getDataPedido();
         if (dCtxSh.userRegistered) {
             datosStep = PageMisComprasStpV.selectBlock(TypeCompra.Online, true/*ordersExpected*/, dFTest);

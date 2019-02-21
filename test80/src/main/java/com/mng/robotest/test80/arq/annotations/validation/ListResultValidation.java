@@ -25,7 +25,7 @@ public class ListResultValidation {
 	}
 	
 	public static ListResultValidation getNew() {
-		DatosStep datosStep = TestCaseData.getDatosStepForValidation();
+		DatosStep datosStep = TestCaseData.getDatosLastStep();
 		return (getNew(datosStep));
 	}
 	
@@ -69,29 +69,44 @@ public class ListResultValidation {
     	storeGroupValidations(descripcionValidations);
     }
     
+    public State calculateStateValidation() {
+    	State stateToReturn;
+    	if (isStepFinishedWithException()) {
+    		stateToReturn = State.Nok;
+    	}
+    	else {
+	    	stateToReturn = State.Ok;
+    	}
+    	
+    	for (ResultValidation resultValidation : listResultValidations) {
+    		if (!resultValidation.isOvercomed()) {
+    			State criticityValidation = resultValidation.getLevelResult();
+    			if (criticityValidation.isMoreCriticThan(stateToReturn)) {
+    				stateToReturn = criticityValidation;
+    			}
+    		}
+    	}
+    	
+    	return stateToReturn;
+    }
+    
     private void checkValidations() {
     	checkAndSetStateValidation();
     	setDatosStepAfterCheckValidation();
     }
     
     private void checkAndSetStateValidation() {
-    	if (isStepFinishedWithException()) {
-    		stateValidation = State.Nok;
-    	}
-    	else {
-	    	stateValidation = State.Ok;
+    	stateValidation = calculateStateValidation();
+    	descripcionValidations=calculateDescriptionValidation();
+    }
+    
+    private String calculateDescriptionValidation() {
+    	String descriptionToReturn = "";
+    	for (ResultValidation resultValidation : listResultValidations) {
+    		descriptionToReturn+=resultValidation.getDescription();
     	}
     	
-    	descripcionValidations = "";
-    	for (ResultValidation resultValidation : listResultValidations) {
-    		descripcionValidations+=resultValidation.getDescription();
-    		if (!resultValidation.isOvercomed()) {
-    			State criticityValidation = resultValidation.getLevelResult();
-    			if (criticityValidation.isMoreCriticThan(stateValidation)) {
-    				stateValidation = criticityValidation;
-    			}
-    		}
-    	}
+    	return descriptionToReturn;
     }
     
     private void setDatosStepAfterCheckValidation() {

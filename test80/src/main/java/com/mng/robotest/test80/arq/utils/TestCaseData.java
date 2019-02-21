@@ -52,8 +52,12 @@ public class TestCaseData {
     	maxDatosStep.remove();
     }
     
-    public static DatosStep getDatosStepForValidation() {
+    public static DatosStep getDatosLastStep() {
     	return (maxDatosStep.get());
+    }
+    
+    public static DatosStep getDatosCurrentStep() {
+    	return (peekDatosStepForStep());
     }
    
     public static void storeInThread(DataCtxShop dCtxShop, DataFmwkTest dFTest) {

@@ -66,6 +66,6 @@ public class PageSelectLineaVOTFStpV {
         SectionBarraSupVOTFStpV.validate(pais.getAccesoVOTF().getUsuario(), datosStep, dFTest);
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
     }
 }

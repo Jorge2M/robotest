@@ -361,6 +361,6 @@ public class SecMenuLateralMobilStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }
         
        //Validaciones estándar. 
-       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, dFTest);
+       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/);
     }
 }

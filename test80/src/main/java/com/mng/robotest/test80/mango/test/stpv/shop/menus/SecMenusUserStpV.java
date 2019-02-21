@@ -132,7 +132,7 @@ public class SecMenusUserStpV {
         finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/);
     }
     
 	public static void clickMenuMiCuenta(Channel channel, AppEcom app, DataFmwkTest dFTest) throws Exception {

@@ -112,6 +112,6 @@ public class SecBuscadorStpV {
         }
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(false/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/, dFTest);
+        AllPagesStpV.validacionesEstandar(false/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/);
     }
 }

@@ -33,7 +33,7 @@ public class StepAspect {
     
     private DatosStep getFromJoinPointAndStoreDatosStep(JoinPoint joinPoint, InfoStep infoStep) {
     	DatosStep datosStep = infoStep.getDatosStep();
-    	DatosStep maxDatosStep = TestCaseData.getDatosStepForValidation();
+    	DatosStep maxDatosStep = TestCaseData.getDatosLastStep();
     	if (maxDatosStep!=null) {
     		datosStep.setStepNumber(maxDatosStep.getStepNumber()+1);
     	}

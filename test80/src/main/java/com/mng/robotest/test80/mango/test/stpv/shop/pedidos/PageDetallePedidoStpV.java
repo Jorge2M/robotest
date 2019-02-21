@@ -6,6 +6,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -29,33 +30,28 @@ public class PageDetallePedidoStpV {
     	return this.pageDetalle;
     }
     
-    public void validateIsPageOk(CompraOnline compraOnline, String codPais, DatosStep datosStep, DataFmwkTest dFTest) 
+    public void validateIsPageOk(CompraOnline compraOnline, String codPais, WebDriver driver) 
     throws Exception {
         String codPedido = compraOnline.numPedido;
         String importeTotal = compraOnline.importe.replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
-        validateIsPageOk(codPedido, importeTotal, codPais, datosStep, dFTest);
-        
-        //+Validaciones
-        int maxSecondsToWait = 2;
-        String descripValidac =
-        	"1) Es visible alguna prenda (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
-            "2) Aparecen " + compraOnline.numPrendas + " prendas"; 
-        datosStep.setNOKstateByDefault(); 
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);               
-        try { 
-            if (!pageDetalle.isVisiblePrendaUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Info);            
-            }
-            if (pageDetalle.getNumPrendas(dFTest.driver)!=compraOnline.numPrendas) {
-                listVals.add(2, State.Warn);
-            }
-                                                                
-            datosStep.setListResultValidations(listVals); 
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+        validateIsPageOk(codPedido, importeTotal, codPais, driver);
+        areOkPrendasOnline(compraOnline.numPrendas, driver);
     }
-        
-    public void validateIsPageOk(DataPedido dataPedido, DatosStep datosStep, DataFmwkTest dFTest) {
+    
+    @Validation
+    public ListResultValidation areOkPrendasOnline(int numPrendasCompraOnline, WebDriver driver) throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	    int maxSecondsWait = 2;
+      	validations.add(
+      		"Es visible alguna prenda (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+      		pageDetalle.isVisiblePrendaUntil(maxSecondsWait, driver), State.Info);	
+      	validations.add(
+      		"Aparecen " + numPrendasCompraOnline + " prendas",
+      		pageDetalle.getNumPrendas(driver)==numPrendasCompraOnline, State.Warn);	
+    	return validations;
+    }
+    
+    public void validateIsPageOk(DataPedido dataPedido, WebDriver driver) {
         String codPedido = dataPedido.getCodpedido();
         String importeTotalManto = dataPedido.getImporteTotalManto();
         String codPais = dataPedido.getCodigoPais();
@@ -63,36 +59,22 @@ public class PageDetallePedidoStpV {
 //    	//TODO tratamiento específico temporal para el entorno de CI con Adyen -> Level.Info 
 //    	//(hasta que dispongamos de la CI que despliega Adyen y el resto de artefactos satelitales)
 //        boolean isAdyenAndCI = (dataPedido.getPago().isAdyen() && UtilsMangoTest.isEntornoCI(app, dFTest));
-        validateIsPageOk(codPedido, importeTotalManto, codPais, datosStep, dFTest);
+        validateIsPageOk(codPedido, importeTotalManto, codPais, driver);
     }
     
-    private void validateIsPageOk(String codPedido, String importeTotalWithoutCurrency, String codPais, 
-    							  DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) Aparece la página de detalle del pedido<br>" + 
-            "2) En la página figura el Nº de pedido: " + codPedido + "<br>" +
-            "3) Como total figura el importe: " + importeTotalWithoutCurrency;
-        datosStep.setNOKstateByDefault();       
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (!pageDetalle.isPage(dFTest.driver)) {
-//            	//TODO tratamiento específico temporal para el entorno de CI con Adyen -> Level.Info 
-//            	//(hasta que dispongamos de la CI que despliega Adyen y el resto de artefactos satelitales)
-//                if (isAdyenAndCI)
-//                	listVals.add(1, State.Info);
-//                else
-                	listVals.add(1, State.Warn);
-            }
-            if (!dFTest.driver.getPageSource().contains(codPedido)) { 
-                listVals.add(2, State.Info);
-            }
-            if (!pageDetalle.isPresentImporteTotal(importeTotalWithoutCurrency, codPais, dFTest.driver)) {
-                listVals.add(3, State.Info);
-            }
-                                                            
-            datosStep.setListResultValidations(listVals); 
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation
+    private ListResultValidation validateIsPageOk(String codPedido, String importeTotalWithoutCurrency, String codPais, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+      	validations.add(
+      		"Aparece la página de detalle del pedido<br>",
+      		pageDetalle.isPage(driver), State.Warn);	   
+      	validations.add(
+      		"En la página figura el Nº de pedido: " + codPedido + "<br>",
+      		driver.getPageSource().contains(codPedido), State.Info);	
+      	validations.add(
+      		"Como total figura el importe: " + importeTotalWithoutCurrency,
+      		pageDetalle.isPresentImporteTotal(importeTotalWithoutCurrency, codPais, driver), State.Info);
+      	return validations;
     }
     
     public DatosStep clickBackButton(Channel channel, DataFmwkTest dFTest) throws Exception {

@@ -1,7 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
@@ -13,7 +15,9 @@ import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStp
 
 public class PageAccesoMisComprasStpV {
     
-    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateIsPage(WebDriver driver) {
+    	DatosStep datosStep = TestCaseData.getDatosLastStep();
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
         //Validaciones.
         String descripValidac = 
             "1) Aparece la página de \"Acceso a Mis Compras\"<br>" +
@@ -79,7 +83,7 @@ public class PageAccesoMisComprasStpV {
         finally { StepAspect.storeDataAfterStep(datosStep); }        
         
         //Validation
-        PageMisComprasStpV.validateIsPage(datosStep, dFTest);
+        PageMisComprasStpV.validateIsPage(dFTest.driver);
         
         return datosStep;
     }
@@ -100,7 +104,7 @@ public class PageAccesoMisComprasStpV {
         
         //Validation
         PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(dFTest.driver);
-        pageDetPedidoStpV.validateIsPageOk(dataPedido, datosStep, dFTest);
+        pageDetPedidoStpV.validateIsPageOk(dataPedido, dFTest.driver);
         
         return datosStep;        
     }

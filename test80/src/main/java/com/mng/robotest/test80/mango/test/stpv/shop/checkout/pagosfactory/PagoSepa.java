@@ -35,6 +35,6 @@ public class PagoSepa extends PagoStpV {
             }
         }
         
-        return (TestCaseData.getDatosStepForValidation());
+        return (TestCaseData.getDatosLastStep());
     }
 }

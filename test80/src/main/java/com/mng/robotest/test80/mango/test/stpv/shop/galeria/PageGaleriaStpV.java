@@ -326,7 +326,7 @@ public class PageGaleriaStpV {
         }
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, dataForScroll.validaImgBroken, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, dataForScroll.validaImgBroken);
         
         //VALIDACIONES - PARA ANALYTICS (sólo para firefox y NetAnalysis)
         PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, dFTest);
@@ -395,7 +395,7 @@ public class PageGaleriaStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }                
 
        //Validaciones estándar. 
-       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
+       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
        
        return numArticulosPant;
    }
@@ -627,7 +627,7 @@ public class PageGaleriaStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }
 
        //Validaciones estándar. 
-       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
+       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
        
        //VALIDACIONES - PARA ANALYTICS (sólo para firefox y NetAnalysis)
        PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, dFTest);        
@@ -816,7 +816,7 @@ public class PageGaleriaStpV {
 
    @SuppressWarnings("static-access")
    public void validateBannerSuperiorIfExistsDesktop() {
-	   DatosStep datosStep = TestCaseData.getDatosStepForValidation();
+	   DatosStep datosStep = TestCaseData.getDatosLastStep();
 	   boolean bannerIsVisible = PageGaleriaDesktop.secBannerHead.isVisible(dFTest.driver);
 	   if (bannerIsVisible) {
 		   if (!PageGaleriaDesktop.secBannerHead.isBannerWithoutTextAccesible(dFTest.driver)) {
@@ -858,7 +858,7 @@ public class PageGaleriaStpV {
    
    @SuppressWarnings("static-access")
    public void validaRebajasHasta70Jun2018(IdiomaPais idioma) {
-	   DatosStep datosStep = TestCaseData.getDatosStepForValidation();
+	   DatosStep datosStep = TestCaseData.getDatosLastStep();
 	   boolean filtrosPercActivated = false;
 	   String maxPercDiscount = "70";
 	   int minMenusVisibles = 1;
@@ -905,7 +905,7 @@ public class PageGaleriaStpV {
    public void validaRebajasJun2018Desktop(boolean isGaleriaSale, Pais pais, IdiomaPais idioma, LineaType lineaType, bloqueMenu menuType) 
    throws Exception {
        //Validaciones
-	   DatosStep datosStep = TestCaseData.getDatosStepForValidation();
+	   DatosStep datosStep = TestCaseData.getDatosLastStep();
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
        String descripValidac = 
            "1) Estamos en la página de Galería";

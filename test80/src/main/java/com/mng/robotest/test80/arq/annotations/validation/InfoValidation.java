@@ -50,8 +50,8 @@ public class InfoValidation {
     		}
     	}
     	
-    	if (TestCaseData.getDatosStepForValidation()!=null) {
-    		return (TestCaseData.getDatosStepForValidation());
+    	if (TestCaseData.getDatosLastStep()!=null) {
+    		return (TestCaseData.getDatosLastStep());
     	}
     	
     	throw (new RuntimeException("A parameter of Type DatosStep is mandatory in method with @Validation annotation"));

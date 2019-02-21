@@ -35,6 +35,6 @@ public class PagoPaytrail extends PagoStpV {
             PagePaytrailResultadoOkStpV.clickVolverAMangoButton(dFTest.driver);
         }
         
-        return TestCaseData.getDatosStepForValidation();
+        return TestCaseData.getDatosLastStep();
     }
 }

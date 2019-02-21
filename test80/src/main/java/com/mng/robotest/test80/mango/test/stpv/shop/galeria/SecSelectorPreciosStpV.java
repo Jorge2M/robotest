@@ -91,7 +91,7 @@ public class SecSelectorPreciosStpV {
         finally { listVals.checkAndStoreValidations(descripValidac); }        
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
         
         return datosStep;
     }

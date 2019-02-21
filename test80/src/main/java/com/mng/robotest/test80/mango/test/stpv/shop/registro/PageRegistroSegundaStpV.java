@@ -8,7 +8,6 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
@@ -16,7 +15,6 @@ import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.pageobject.shop.PageIniShopJapon;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroSegunda;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 
@@ -93,7 +91,7 @@ public class PageRegistroSegundaStpV {
         }
         
         //Rewrite description step
-        DatosStep datosStep = TestCaseData.peekDatosStepForStep();
+        DatosStep datosStep = TestCaseData.getDatosCurrentStep();
         datosStep.setDescripcion(stepDescription);
 
         PageRegistroSegunda.setFechaNacimiento(dFTest.driver, fechaNacimiento);
@@ -115,6 +113,6 @@ public class PageRegistroSegundaStpV {
             PageRegistroDirecStpV.isPageFromPais(pais, dFTest);
         }
         
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/, dFTest);
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/);
     }
 }

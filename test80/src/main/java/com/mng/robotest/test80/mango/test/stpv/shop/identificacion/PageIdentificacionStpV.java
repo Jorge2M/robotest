@@ -40,7 +40,7 @@ public class PageIdentificacionStpV {
         finally { listVals.checkAndStoreValidations(descripValidac); }
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/, dFTest);        
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/);        
 
         return datosStep;
     }

@@ -33,6 +33,6 @@ public class PagoPostfinance extends PagoStpV {
             PagePostfCodSegStpV.inputCodigoSeguridadAndAccept("11152", nombrePago, dFTest.driver);
         }
         	
-        return TestCaseData.getDatosStepForValidation();
+        return TestCaseData.getDatosLastStep();
     }    
 }

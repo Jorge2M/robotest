@@ -47,6 +47,6 @@ public class PagoMercadopago extends PagoStpV {
             dataPedido.setCodtipopago("D");
         }
 
-        return TestCaseData.getDatosStepForValidation();
+        return TestCaseData.getDatosLastStep();
     }
 }
