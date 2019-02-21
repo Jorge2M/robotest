@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -18,14 +19,15 @@ public class PagoAmazon extends PagoStpV {
     
     @Override
     public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
-        DatosStep datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
-        PageAmazonIdentStpV.validateIsPage(this.dCtxSh.pais, this.dCtxSh.channel, this.dCtxPago.getDataPedido(), datosStep, this.dFTest);
+        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, dFTest);
+        PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, dFTest);
+        PageAmazonIdentStpV.validateIsPage(dCtxSh.pais, dCtxSh.channel, dCtxPago.getDataPedido(), dFTest.driver);
         
-        if (execPay)
+        if (execPay) {
             throw new PaymethodWithoutTestPayImplemented(MsgNoPayImplemented);
+        }
 
-        return datosStep;
+        return TestCaseData.getDatosLastStep();
     }
     
 }

@@ -26,6 +26,9 @@ public class MatcherWithMethodParams {
     	while (m.find()) {
     	  String group = m.group(1);
     	  String valueParameter = getStringValueParameterFromMethod(group);
+    	  if (valueParameter==null) {
+    		  valueParameter="null";
+    	  }
     	  litToReturn = litToReturn.replace("#{" + group + "}", valueParameter);
     	}
     	
@@ -44,7 +47,7 @@ public class MatcherWithMethodParams {
 	    	}
     	}
     	catch (Exception e) {
-    		return "Unknown";
+    		return "null";
     	}
     	
     	return paramNameInDescrValidation;
@@ -54,7 +57,7 @@ public class MatcherWithMethodParams {
 		if ("".compareTo(tagData.methodWithoutParams)!=0) {
 			for (Method methodFromParam : parameter.getClass().getMethods()) {
 				if (tagData.methodWithoutParams.compareTo(methodFromParam.getName())==0) {
-					return ((String)methodFromParam.invoke(parameter));
+					return (methodFromParam.invoke(parameter).toString());
 				}
 			}
 		}

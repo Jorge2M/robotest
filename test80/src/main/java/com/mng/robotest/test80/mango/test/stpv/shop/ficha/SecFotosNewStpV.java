@@ -2,6 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.DataFoto;
@@ -11,8 +12,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.TipoImagenProduc
 
 public class SecFotosNewStpV {
 
-    public static void validaLayoutFotosNew(boolean isFichaAccesorios, DatosStep datosStep, DataFmwkTest dFTest) {
-        //Validaciones
+    public static void validaLayoutFotosNew(boolean isFichaAccesorios, DataFmwkTest dFTest) {
+        DatosStep datosStep = TestCaseData.getDatosLastStep();
         String descripValidac = 
             "1) La 1a foto es de tipo <b>" + TipoImagenProducto.DETALLES + " o " + TipoImagenProducto.OUTFIT + " o " + TipoImagenProducto.BODEGON + "</b>";
         datosStep.setNOKstateByDefault();

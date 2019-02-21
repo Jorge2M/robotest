@@ -412,7 +412,7 @@ public class SecBolsaStpV {
     
         //Validaciones.
         String refArticulo = articuloClickado.getReferencia();
-        PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(app, channel, dFTest);
+        PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(app, channel);
         pageFichaStpv.validateIsFichaArtDisponible(refArticulo, datosStep);
     }
 }

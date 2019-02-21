@@ -102,7 +102,7 @@ public class PageGaleriaStpV {
         finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
-        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel, dFTest);
+        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel);
         pageFichaStpV.validaDetallesProducto(datosArticulo, datosStep);
         
         //Cerramos la pestaña y cambiamos a la ventana padre
@@ -133,7 +133,7 @@ public class PageGaleriaStpV {
         finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
-        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dFTest);
+        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         pageFichaStpV.validaDetallesProducto(datosArticulo, datosStep);
         pageFichaStpV.validaPrevNext(locationArt, dCtxSh, datosStep);
 

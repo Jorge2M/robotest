@@ -11,7 +11,6 @@ import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -44,7 +43,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalBuscadorTiendasStpV;
-
 
 public class FichaProducto extends GestorWebDriver {
     Pais españa = null;
@@ -98,9 +96,9 @@ public class FichaProducto extends GestorWebDriver {
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true/*clearArticulos*/, dFTest);
         ArticleStock articleWithColors = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithMoreOneColour, dCtxSh);
-        SecBuscadorStpV.searchArticuloAndValidateBasic(articleWithColors, dCtxSh, dFTest);
+        SecBuscadorStpV.searchArticuloAndValidateBasic(articleWithColors, dCtxSh, dFTest.driver);
         
-        PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dFTest);
+        PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         boolean isTallaUnica = pageFichaStpv.selectAnadirALaBolsaTallaPrevNoSelected();
         
         ArticuloScreen articulo = new ArticuloScreen(articleWithColors);
@@ -135,12 +133,12 @@ public class FichaProducto extends GestorWebDriver {
         dCtxSh.idioma=this.castellano;
 
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
-        DatosStep datosStep = SecBuscadorStpV.searchArticuloAndValidateBasic(TypeArticleStock.articlesWithTotalLook, dCtxSh, dFTest);
+        SecBuscadorStpV.searchArticuloAndValidateBasic(TypeArticleStock.articlesWithTotalLook, dCtxSh, dFTest.driver);
         
-        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dFTest);
+        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
-            pageFichaStpV.validaExistsImgsCarruselIzqFichaOld(datosStep);
-            pageFichaStpV.secProductDescOld.validateAreInStateInitial(dCtxSh.appE, datosStep, dFTest);
+            pageFichaStpV.validaExistsImgsCarruselIzqFichaOld();
+            pageFichaStpV.secProductDescOld.validateAreInStateInitial(dCtxSh.appE, dFTest);
             PageFicha pageFicha = PageFicha.newInstance(dCtxSh.appE, dCtxSh.channel, dFTest.driver);
             if (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() > 2) 
                 pageFichaStpV.selectImgCarruselIzqFichaOld(2/*numImagen*/);
@@ -160,19 +158,19 @@ public class FichaProducto extends GestorWebDriver {
         }
         else {
             boolean isFichaAccesorio = pageFichaStpV.getFicha().isFichaAccesorio(); 
-            pageFichaStpV.secFotosNew.validaLayoutFotosNew(isFichaAccesorio, datosStep, dFTest);
+            pageFichaStpV.secFotosNew.validaLayoutFotosNew(isFichaAccesorio, dFTest);
             pageFichaStpV.secBolsaButtonAndLinksNew.selectEnvioYDevoluciones(dFTest);
             pageFichaStpV.modEnvioYdevol.clickAspaForClose(dFTest);
             pageFichaStpV.secBolsaButtonAndLinksNew.selectDetalleDelProducto(dCtxSh.appE, LineaType.she, dFTest);
             pageFichaStpV.secBolsaButtonAndLinksNew.selectLinkCompartir(dCtxSh.pais.getCodigo_pais(), dFTest);
         }
             
-        datosStep = pageFichaStpV.selectGuiaDeTallas();
+        pageFichaStpV.selectGuiaDeTallas();
         if (dCtxSh.appE==AppEcom.shop)
-            pageFichaStpV.validateSliderIfExists(Slider.ElegidoParaTi, datosStep);
+            pageFichaStpV.validateSliderIfExists(Slider.ElegidoParaTi);
         
         if (dCtxSh.appE!=AppEcom.outlet)
-            pageFichaStpV.validateSliderIfExists(Slider.CompletaTuLook, datosStep);
+            pageFichaStpV.validateSliderIfExists(Slider.CompletaTuLook);
     }
     
     @SuppressWarnings("static-access")
@@ -197,7 +195,7 @@ public class FichaProducto extends GestorWebDriver {
         LocationArticle location1rstArticle = LocationArticle.getInstanceInCatalog(1);
         DataFichaArt dataArtOrigin = pageGaleriaStpV.selectArticulo(location1rstArticle, dCtxSh).dataFichaArticulo;
         
-        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dFTest);
+        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
             if (TypePanel.KcSafety.getListApps().contains(dCtxSh.appE))
                 pageFichaStpV.secProductDescOld.selectPanel(TypePanel.KcSafety, dFTest);
@@ -225,10 +223,10 @@ public class FichaProducto extends GestorWebDriver {
         
         //Step
         ArticleStock articulo = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithoutStock, dCtxSh);
-        SecBuscadorStpV.searchArticuloAndValidateBasic(articulo, dCtxSh, dFTest);
+        SecBuscadorStpV.searchArticuloAndValidateBasic(articulo, dCtxSh, dFTest.driver);
         
         //Step
-        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dFTest);
+        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         pageFichaStpV.selectColorAndTallaNoDisponible(articulo);
     }
     
@@ -248,7 +246,7 @@ public class FichaProducto extends GestorWebDriver {
         modalPersonalizacionStpV.searchForCustomization(dCtxSh.channel, dFTest, dCtxSh);
         
         //Step
-        PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dFTest);
+        PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         pageFichaStpv.selectTalla(1);
         
         //Steps propios del modal de personalizacion

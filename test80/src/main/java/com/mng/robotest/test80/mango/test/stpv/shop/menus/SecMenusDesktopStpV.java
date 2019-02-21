@@ -637,7 +637,7 @@ public class SecMenusDesktopStpV {
 
         //Validaciones
         DataFichaArt datosArticulo = new DataFichaArt(articulo.getReference(), "");
-        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dFTest);
+        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         pageFichaStpV.validaDetallesProducto(datosArticulo, datosStep);
         
         return datosStep;

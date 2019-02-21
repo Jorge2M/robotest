@@ -165,7 +165,7 @@ public class Favoritos extends GestorWebDriver {
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);
         pageGaleriaStpV.selectArticulo(article1, dCtxSh);
         
-        PageFichaArtStpV pageFichaArtStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dFTest);
+        PageFichaArtStpV pageFichaArtStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         pageFichaArtStpv.selectAnadirAFavoritos(dataFavoritos);
         
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();

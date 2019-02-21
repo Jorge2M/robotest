@@ -2,6 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
@@ -45,8 +46,8 @@ public class PageFichaArtStpV {
     public static SecFotosNewStpV secFotosNew;
     public static SecFitFinderStpV secFitFinder;
     
-    public PageFichaArtStpV(AppEcom appE, Channel channel, DataFmwkTest dFTest) {
-        this.dFTest = dFTest;
+    public PageFichaArtStpV(AppEcom appE, Channel channel) {
+        this.dFTest = TestCaseData.getdFTest();
         this.channel = channel;
         this.app = appE;
         this.pageFicha = PageFicha.newInstance(appE, channel, dFTest.driver);
@@ -56,8 +57,8 @@ public class PageFichaArtStpV {
         return this.pageFicha;
     }
     
-    public void validateIsFichaAccordingTypeProduct(ArticleStock articulo, DatosStep datosStep) 
-    throws Exception {
+    public void validateIsFichaAccordingTypeProduct(ArticleStock articulo) throws Exception {
+    	DatosStep datosStep = TestCaseData.getDatosLastStep();
         switch (articulo.getType()) {
         case articlesNotExistent:
             validateIsFichaArtNoDisponible(articulo.getReference(), datosStep);
@@ -543,8 +544,8 @@ public class PageFichaArtStpV {
         return datosStep;
     }
     
-    public void validateSliderIfExists(Slider typeSlider, DatosStep datosStep) {
-        //Validaciones
+    public void validateSliderIfExists(Slider typeSlider) {
+    	DatosStep datosStep = TestCaseData.getDatosLastStep();
         boolean existsBlock = true;
         String descripValidac = 
             "1) Es visible el slider de artículos de tipo <b>" + typeSlider + "</b>";
@@ -638,8 +639,8 @@ public class PageFichaArtStpV {
     
     //------------------------------------------------------------------------
     //Específic Ficha Old
-    public void validaExistsImgsCarruselIzqFichaOld(DatosStep datosStep) {
-        //Validaciones
+    public void validaExistsImgsCarruselIzqFichaOld() {
+        DatosStep datosStep = TestCaseData.getDatosLastStep();
         String descripValidac = 
             "1) Existe más de una imagen de carrusel a la izquierda de la imagen principal";
         datosStep.setNOKstateByDefault();

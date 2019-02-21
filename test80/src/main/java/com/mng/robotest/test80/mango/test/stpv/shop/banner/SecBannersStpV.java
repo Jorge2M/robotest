@@ -108,7 +108,7 @@ public class SecBannersStpV {
             validacionesGeneralesBanner(urlPagPrincipal, uriPagPrincipal, elementosPagPrincipal, datosStep, dFTest);
             switch (dataBanner.getDestinoType()) {
             case Ficha:
-            	PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel, dFTest);
+            	PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel);
             	pageFichaStpV.validateIsFichaCualquierArticulo(datosStep);
                 break;
             default:                

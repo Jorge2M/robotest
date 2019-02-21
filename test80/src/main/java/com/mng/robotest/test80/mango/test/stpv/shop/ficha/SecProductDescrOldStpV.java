@@ -2,6 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
@@ -13,7 +14,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrO
 
 public class SecProductDescrOldStpV {
     
-    public static void validateAreInStateInitial(AppEcom appE, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void validateAreInStateInitial(AppEcom appE, DataFmwkTest dFTest) throws Exception {
+    	DatosStep datosStep = TestCaseData.getDatosLastStep();
         String descripValidac = "";
         datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);

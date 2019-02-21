@@ -85,9 +85,9 @@ public class Buscador extends GestorWebDriver {
 
         DatosStep datosStep = AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
         PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, datosStep, dFTest);
-        SecBuscadorStpV.searchArticuloAndValidateBasic(TypeArticleStock.articlesWithMoreOneColour, dCtxSh, dFTest);
-        SecBuscadorStpV.searchArticuloAndValidateBasic(TypeArticleStock.articlesNotExistent, dCtxSh, dFTest);
-        SecBuscadorStpV.busquedaCategoriaProducto(categoriaProdExistente, true/*categoriaExiste*/, dCtxSh.appE, dCtxSh.channel, dFTest);
-        SecBuscadorStpV.busquedaCategoriaProducto(catProdInexistente, false/*categoriaExiste*/, dCtxSh.appE, dCtxSh.channel, dFTest);
+        SecBuscadorStpV.searchArticuloAndValidateBasic(TypeArticleStock.articlesWithMoreOneColour, dCtxSh, dFTest.driver);
+        SecBuscadorStpV.searchArticuloAndValidateBasic(TypeArticleStock.articlesNotExistent, dCtxSh, dFTest.driver);
+        SecBuscadorStpV.busquedaCategoriaProducto(categoriaProdExistente, true/*categoriaExiste*/, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
+        SecBuscadorStpV.busquedaCategoriaProducto(catProdInexistente, false/*categoriaExiste*/, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
     }
 }

@@ -1,10 +1,11 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.buscador;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -18,100 +19,74 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
 
-
 public class SecBuscadorStpV {
     /**
      * Utiliza el buscador para localizar una referencia y aplica validaciones específicas según la disponibilidad: disponible, no_disponible, algún_color_no_disponible
      */
-    public static DatosStep searchArticuloAndValidateBasic(TypeArticleStock typeArticle, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static void searchArticuloAndValidateBasic(TypeArticleStock typeArticle, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
     	ArticleStock articulo = ManagerArticlesStock.getArticleStock(typeArticle, dCtxSh);
-    	return (searchArticuloAndValidateBasic(articulo, dCtxSh, dFTest));
+    	searchArticuloAndValidateBasic(articulo, dCtxSh, driver);
     }
     
     /**
      * Utiliza el buscador para localizar una referencia y aplica validaciones específicas según la disponibilidad: disponible, no_disponible, algún_color_no_disponible
      */
-    public static DatosStep searchArticuloAndValidateBasic(ArticleStock articulo, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    @Step (
+    	description=
+    		"Buscar un producto de tipo: <b>#{articulo.getType()}</b> " +
+    		"(#{articulo.getReference()} color:#{articulo.getColourCode()}, size:#{articulo.getSize()})", 
+    	expected=
+    		"Aparece una ficha de producto de typo <b>#{articulo.getType()}</b>")
+    public static void searchArticuloAndValidateBasic(ArticleStock articulo, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep     (
-            "Buscar un producto de tipo: <b>" + articulo.getType() + "</b> " +
-            "(" + articulo.getReference() + " color:" + articulo.getColourCode() + ", size:" + articulo.getSize() + ")", 
-            "Aparece una ficha de producto de typo <b>" + articulo.getType() + "</b>");
-        try {
-            SecBuscadorWrapper.buscarArticulo(articulo, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-            WebdrvWrapp.waitForPageLoaded(dFTest.driver);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }         
+        SecBuscadorWrapper.buscarArticulo(articulo, dCtxSh.channel, dCtxSh.appE, driver);
+        WebdrvWrapp.waitForPageLoaded(driver);  
 
         //Validations
-        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel, dFTest);
-        pageFichaStpV.validateIsFichaAccordingTypeProduct(articulo, datosStep);
-        
-        return datosStep;
+        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
+        pageFichaStpV.validateIsFichaAccordingTypeProduct(articulo);
     }
     
-    
+    @Step (
+    	description="Introducir la categoría de producto <b>#{categoriaABuscar} </b>(existe categoría: #{categoriaExiste})</b>", 
+        expected="El resultado de la búsqueda es el correcto :-)")
     public static void busquedaCategoriaProducto(String categoriaABuscar, boolean categoriaExiste, AppEcom app, 
-    											 Channel channel, DataFmwkTest dFTest) throws Exception {
-    	PageGaleria pageGaleria = (PageGaleria)PageGaleria.getInstance(channel, app, dFTest.driver); 
-    	String categoriaExisteStr = "No";
-        if (categoriaExiste)
-            categoriaExisteStr = "Sí";
+    											 Channel channel, WebDriver driver) throws Exception {
+    	PageGaleria pageGaleria = (PageGaleria)PageGaleria.getInstance(channel, app, driver); 
+        SecBuscadorWrapper.buscarTexto(categoriaABuscar, channel, app, driver);
+        WebdrvWrapp.waitForPageLoaded(driver);    
         
-        DatosStep datosStep = new DatosStep       (
-            "Introducir la categoría de producto <b>" + categoriaABuscar + " </b>(" + categoriaExisteStr + " existe)</b>", 
-            "El resultado de la búsqueda es el correcto :-)");
-        try {
-            //Introducimos la categoría de producto existente en el buscador y lo seleccionamos
-            SecBuscadorWrapper.buscarTexto(categoriaABuscar, channel, app, dFTest.driver);
-            WebdrvWrapp.waitForPageLoaded(dFTest.driver);           
-                                                                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }           
-            
+        //Validaciones
         if (categoriaExiste) { 
-            //Validaciones
-            String producSin1erCaracter = categoriaABuscar.substring(1, categoriaABuscar.length()-1).toLowerCase();
-            int maxSecondsWait = 3;
-            String descripValidac = 
-                "1) Aparece como mínimo un producto de tipo " + producSin1erCaracter + " (lo esperamos hasta " + maxSecondsWait + " segundos)<br>" +
-                "2) Aparece la categoría en el resultado de la búsqueda";
-            datosStep.setNOKstateByDefault();
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-            try {
-                if ("".compareTo(pageGaleria.getArticuloWithText(producSin1erCaracter, maxSecondsWait))==0) {
-                    listVals.add(1, State.Defect);
-                }
-                if (!pageGaleria.isCabeceraResBusqueda(producSin1erCaracter)) {
-                    listVals.add(2, State.Defect);  
-                }
-    
-                datosStep.setListResultValidations(listVals);
-            }
-            finally { listVals.checkAndStoreValidations(descripValidac); } 
+        	appearsProductsOfCategoria(categoriaABuscar, pageGaleria);
         }
         else {
-            //Validaciones
-            String descripValidac =
-                "1) Aparece la página de error en la búsqueda con el encabezado<b>" + categoriaABuscar + "</b>";
-            datosStep.setNOKstateByDefault();
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-            try {
-                if (!PageErrorBusqueda.isCabeceraResBusqueda(dFTest.driver, categoriaABuscar)) {
-                    listVals.add(1, State.Warn);
-                }
-                  
-                datosStep.setListResultValidations(listVals);
-            }
-            finally { listVals.checkAndStoreValidations(descripValidac); }
+        	appearsSearchErrorPage(categoriaABuscar, driver);
         }
         
         //Validaciones estándar. 
         AllPagesStpV.validacionesEstandar(false/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/);
+    }
+    
+    @Validation
+    private static ListResultValidation appearsProductsOfCategoria(String categoriaABuscar, PageGaleria pageGaleria) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+        int maxSecondsWait = 3;
+    	String producSin1erCaracter = categoriaABuscar.substring(1, categoriaABuscar.length()-1).toLowerCase();
+    	validations.add(
+    		"Aparece como mínimo un producto de tipo " + producSin1erCaracter + " (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		"".compareTo(pageGaleria.getArticuloWithText(producSin1erCaracter, maxSecondsWait))!=0, State.Defect);
+    	validations.add(
+    		"Aparece la categoría en el resultado de la búsqueda",
+    		pageGaleria.isCabeceraResBusqueda(producSin1erCaracter), State.Defect);
+    	return validations;
+    }
+    
+    @Validation (
+    	description="Aparece la página de error en la búsqueda con el encabezado<b>#{categoriaABuscar}</b>",
+    	level=State.Warn)
+    private static boolean appearsSearchErrorPage(String categoriaABuscar, WebDriver driver) {
+    	return (PageErrorBusqueda.isCabeceraResBusqueda(driver, categoriaABuscar));
     }
 }
