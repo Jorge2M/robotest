@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -21,17 +22,16 @@ public class PagoIdeal extends PagoStpV {
     @SuppressWarnings("static-access")
 	@Override
     public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
-        DatosStep datosStep = PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
-        PageCheckoutWrapperStpV.secIdeal.validateIsSectionOk(this.dCtxSh.channel, datosStep, this.dFTest);
+        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, dCtxSh, dFTest);
+        PageCheckoutWrapperStpV.secIdeal.validateIsSectionOk(this.dCtxSh.channel, dFTest.driver);
         
         if (execPay) {
-            PageCheckoutWrapperStpV.secIdeal.clickBanco(BancoSeleccionado.TestIssuer, this.dCtxSh.channel, this.dFTest);
-            
-            datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
-            PageIdealSimuladorStpV.validateIsPage(datosStep, dFTest);
-            datosStep = PageIdealSimuladorStpV.clickContinueButton(this.dFTest);
+            PageCheckoutWrapperStpV.secIdeal.clickBanco(BancoSeleccionado.TestIssuer, dCtxSh.channel, dFTest.driver);
+            PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, dFTest);
+            PageIdealSimuladorStpV.validateIsPage(dFTest.driver);
+            PageIdealSimuladorStpV.clickContinueButton(dFTest.driver);
         }
         
-        return datosStep;
+        return TestCaseData.getDatosLastStep();
     }
 }

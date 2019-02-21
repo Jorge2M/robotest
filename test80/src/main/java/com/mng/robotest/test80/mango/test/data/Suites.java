@@ -15,7 +15,7 @@ public enum Suites {
     ListFavoritos(10),
     ListMiCuenta(10),
     RegistrosPaises(10),
-    RegistroEspanyaMasivos(10),
+    LoyaltyMasivos(10),
     RebajasPaises(10);
     
     private final int maxSecondsToWaitStart;

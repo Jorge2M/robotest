@@ -349,9 +349,9 @@ public class Test80mng {
                 listRegistros.testRunner(params);
                 break;     
             //TODO temporal para pruebas de Loyalty
-            case RegistroEspanyaMasivos:
-            	RegistrosEspanyaMasivosXML listRegistrosEspanya = new RegistrosEspanyaMasivosXML();
-            	listRegistrosEspanya.testRunner(params);
+            case LoyaltyMasivos:
+            	LoyaltyMasivosXML listLoyaltyTcases = new LoyaltyMasivosXML();
+            	listLoyaltyTcases.testRunner(params);
                 break;       
             case RebajasPaises:
                 RebajasFactoryXML listRebajas = new RebajasFactoryXML();

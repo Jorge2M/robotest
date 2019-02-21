@@ -1,10 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.d3d;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.d3d.PageD3DJPTestSelectOption;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.d3d.PageD3DJPTestSelectOption.OptionD3D;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -12,42 +11,25 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class PageD3DJPTestSelectOptionStpV {
     
-    public static boolean validateIsPage(String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) {
-        boolean isD3DJP = true;
-        int maxSecondsToWait = 1;
-        String descripValidac = 
-            "1) Aparece la página de Test correspondiente al D3D de JPMorgan (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" + 
-            "2) Aparece el importe " + importeTotal + " de la operación";
-        datosStep.setNOKstateByDefault(); 
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageD3DJPTestSelectOption.isPageUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-                isD3DJP = false;
-            }
-            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver)) {
-                listVals.add(2, State.Warn);
-            }
-    
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return isD3DJP;
+	@Validation (
+		description="Aparece la página de Test correspondiente al D3D de JPMorgan (la esperamos hasta #{maxSecondsWait} segundos)",
+		level=State.Warn)
+    public static boolean validateIsD3D(int maxSecondsWait, WebDriver driver) {
+		return (PageD3DJPTestSelectOption.isPageUntil(maxSecondsWait, driver));
+    }	
+	
+	@Validation (
+		description="Aparece el importe #{importeTotal} de la operación",
+		level=State.Warn)
+    public static boolean isImporteVisible(String importeTotal, String codPais, WebDriver driver) {
+		return (ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver));
     }
     
-    public static DatosStep clickSubmitButton(DataFmwkTest dFTest) throws Exception {
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionamos la opción \"Successful\" y clickamos en el botón \"Submit\"", 
-            "Aparece la página de resultado OK");
-        try {
-            PageD3DJPTestSelectOption.selectOption(OptionD3D.Successful, dFTest.driver);
-            PageD3DJPTestSelectOption.clickSubmitButton(dFTest.driver);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        return datosStep;
+	@Step (
+		description="Seleccionamos la opción \"Successful\" y clickamos en el botón \"Submit\"", 
+        expected="Aparece la página de resultado OK")
+    public static void clickSubmitButton(WebDriver driver) throws Exception {
+        PageD3DJPTestSelectOption.selectOption(OptionD3D.Successful, driver);
+        PageD3DJPTestSelectOption.clickSubmitButton(driver);
     }
 }

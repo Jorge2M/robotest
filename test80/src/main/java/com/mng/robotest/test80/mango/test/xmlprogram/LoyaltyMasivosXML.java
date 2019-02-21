@@ -18,14 +18,14 @@ import com.mng.robotest.test80.ParamsBean;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 
 
-public class RegistrosEspanyaMasivosXML {
+public class LoyaltyMasivosXML {
 
     /**
      * Ejecución desde el Online
      * @param params
      *    params.version
-     *          V1 - Sólo Registro
-     *          V2 - Registro + posterior login + validación datos + logoff
+     *          V1 - Registro
+     *          V2 - Login + Galeria + Ficha + Checkout
      *    params.browser
      *          chrome, firefox
      *          browserstack
@@ -63,7 +63,7 @@ public class RegistrosEspanyaMasivosXML {
         suite.setThreadCount(5);
         
         //Sólo ejecutamos 1 TestRun
-        joinSuiteWithTestRunLocal(suite, "RegistrosTRun");
+        joinSuiteWithTestRunLocal(suite, "RegistrosTRun", params);
         
         return suite;
     }
@@ -88,10 +88,10 @@ public class RegistrosEspanyaMasivosXML {
         parametersSuite.put("isVOTF", "false");
     }
     
-    public XmlTest joinSuiteWithTestRunLocal(XmlSuite suite, String testRunName) {
+    public XmlTest joinSuiteWithTestRunLocal(XmlSuite suite, String testRunName, ParamsBean params) {
         XmlTest testRun = commonsXML.createTestRun(suite, testRunName);
         testRun.setGroups(createGroups());
-        testRun.setXmlClasses(createClasses());     
+        testRun.setXmlClasses(createClasses(params));     
         return testRun;
     }
     
@@ -118,9 +118,17 @@ public class RegistrosEspanyaMasivosXML {
         return dependencies;
     }
     
-    private List<XmlClass> createClasses() {
+    private List<XmlClass> createClasses(ParamsBean params) {
         List<XmlClass> listClasses = new ArrayList<>();
-        listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.factoryes.ListRegistrosEspanyaMasivos"));
+        String version = params.getVersion();
+        switch (version) {
+        case "V1":
+        	listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.factoryes.ListRegistrosEspanyaMasivos"));
+        	break;
+        case "V2":
+        	listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.factoryes.ListGaleriaYcompraMasivos"));
+        	break;
+        }
         
         return listClasses;
     }

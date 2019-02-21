@@ -243,57 +243,14 @@ public class Registro extends GestorWebDriver {
 	        
 	        //TODO Checkout temporal para Loyalty
 	        if (loyaltyTest) {
-	        	navegaGaleria(dFTest);
-	        	testPago(dataRegistro, dFTest);
+//	        	navegaGaleria(dFTest);
+//	        	testPago(dataRegistro, dFTest);
 	        }
 
         }
         else {
         	SecFooterStpV.validaRGPDFooter(clickRegister, dCtxSh, dFTest);
         }
-    }
-    
-    private void navegaGaleria(DataFmwkTest dFTest) throws Exception {
-        Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
-        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest);
-        
-        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);
-        LocationArticle loc1rsArticle1rstPage = LocationArticle.getInstanceInPage(2, 1);
-        pageGaleriaStpV.selectArticuloEnPestanyaAndBack(loc1rsArticle1rstPage);
-    }
-    
-    private void testPago(HashMap<String,String> dataRegistro, DataFmwkTest dFTest) throws Exception {
-        dCtxSh.userRegistered = true;
-        dCtxSh.userConnected = dataRegistro.get("cfEmail");
-        
-        FlagsTestCkout FTCkout = new FlagsTestCkout();
-        FTCkout.validaPasarelas = true;  
-        FTCkout.validaPagos = true;
-        FTCkout.emailExist = true; 
-        FTCkout.trjGuardada = false;
-        FTCkout.isEmpl = false;
-        DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
-        dCtxPago.setFTCkout(FTCkout);
-        
-        int maxArticlesAwayVale = 1;
-        List<ArticleStock> listArticles = UtilsTestMango.getArticlesForTestDependingVale(dCtxSh, maxArticlesAwayVale);
-        
-        DataBag dataBag = dCtxPago.getDataPedido().getDataBag();
-        SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, dFTest);
-
-        //Steps. Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
-        dCtxPago.getFTCkout().testCodPromocional = true;
-        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, dFTest);
-        
-        //Pago
-        Pago pagoVisaToTest = this.españa.getPago("VISA");
-        DataPedido dataPedido = new DataPedido(dCtxSh.pais);
-        dataPedido.setPago(pagoVisaToTest);
-        
-        PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, dFTest.driver);
-        dCtxPago.setDataPedido(dataPedido);
-        dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
-        PagoNavigationsStpV.testPagoFromCheckoutToEnd(dCtxPago, dCtxSh, pagoVisaToTest, dFTest);
     }
     
     @SuppressWarnings("static-access")
