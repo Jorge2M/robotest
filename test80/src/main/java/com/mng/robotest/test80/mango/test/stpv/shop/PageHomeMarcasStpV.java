@@ -2,18 +2,19 @@ package com.mng.robotest.test80.mango.test.stpv.shop;
 
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
+import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageHomeMarcas;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.DataBanner;
@@ -23,145 +24,123 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
-
 public class PageHomeMarcasStpV {
+	
+	private final static String PrefixRebajas = "<b style=\"color:blue\">Rebajas</b></br>";
 
-    public static DatosStep validateIsPageWithCorrectLineas(Pais pais, Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) {
-        //Validaciones
-        AllPagesStpV.validateMainContentPais(pais, datosStep, dFTest);
-
-        //Validaciones
-        validateIsPageOk(pais, app, datosStep, dFTest);
-        
-        //Validaciones de las líneas asociadas al país
-        SecMenusWrapperStpV.validateLineas(pais, app, channel, datosStep, dFTest);
-
-        return datosStep;
+    public static void validateIsPageWithCorrectLineas(Pais pais, Channel channel, AppEcom app, WebDriver driver) 
+    throws Exception {
+        AllPagesStpV.validateMainContentPais(pais, driver);
+        validateIsPageOk(pais, app, driver);
+        SecMenusWrapperStpV.validateLineas(pais, app, channel, driver);
     }
     
-    public static void validateIsPageOk(Pais pais, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) Aparece la home de marcas/multimarcas según el país<br>" +
-            "2) No aparece ningún tag de error";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (app!=AppEcom.outlet) {
-                if (!PageHomeMarcas.isHomeMarcasMultimarcasDependingCountry(pais, app, dFTest.driver)) {
-                    listVals.add(1, State.Warn);
-                }
-            }
-            if (WebdrvWrapp.isElementPresent(dFTest.driver, By.xpath("//error"))) {
-                listVals.add(2, State.Warn);
-            }
-           
-            datosStep.setListResultValidations(listVals);
-        } 
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation
+    public static ListResultValidation validateIsPageOk(Pais pais, AppEcom app, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	if (app!=AppEcom.outlet) {
+			validations.add(
+				"Aparece la home de marcas/multimarcas según el país<br>",
+				PageHomeMarcas.isHomeMarcasMultimarcasDependingCountry(pais, app, driver), State.Warn);    
+    	}
+		validations.add(
+			"No aparece ningún tag de error",
+			!WebdrvWrapp.isElementPresent(driver, By.xpath("//error")), State.Warn);
+		return validations;
     }
     
     public enum TypeHome {Multimarca, PortadaLinea}
-    public static void validaRebajasJun2018(TypeHome typeHome, boolean areBanners, DataCtxShop dCtxSh, DataFmwkTest dFTest) {
-    	DatosStep datosStep = TestCaseData.getDatosLastStep();
+    public static void validaRebajasJun2018(boolean salesOnInCountry, TypeHome typeHome, boolean testBanner, DataCtxShop dCtxSh, WebDriver driver) 
+    throws Exception {
+    	checkLineaRebajas(salesOnInCountry, dCtxSh, driver);
+    	if (testBanner) {
+    		checkBannerRebajas(salesOnInCountry, typeHome, dCtxSh, driver);
+    	}
+    	//checkMsgNewsletterFooter(salesOnInCountry, dCtxSh.idioma, driver);
+    }
+    
+    @Validation
+    private static ListResultValidation checkLineaRebajas(boolean salesOnInCountry, DataCtxShop dCtxSh, WebDriver driver) {
+        ListResultValidation validations = ListResultValidation.getNew();
         int maxSeconds = 3;
-        String validacion1 = "Aparece la línea \"Rebajas\" (lo esperamos hasta " + maxSeconds + " segundos)";
-        if (!dCtxSh.pais.isVentaOnline())
-        	validacion1 = "No aparece la línea \"Rebajas\"";
-        
-        String descripValidac = 
-            "<b style=\"color:blue\">Rebajas</b></br>" +
-            "1) " + validacion1;
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (dCtxSh.pais.isVentaOnline()) {
-	            if (!SecMenusWrap.isLineaPresentUntil(LineaType.rebajas, dCtxSh.appE, dCtxSh.channel, maxSeconds, dFTest.driver)) {
-	                listVals.add(1, State.Defect);
-	            }
-            }
-            else {
-                if (SecMenusWrap.isLineaPresentUntil(LineaType.rebajas, dCtxSh.appE, dCtxSh.channel, 0, dFTest.driver)) {
-                    listVals.add(1, State.Defect);
-                }
-            }
-
-            datosStep.setListResultValidations(listVals);
-            
-        } 
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        if (areBanners) {
-        	int maxBannersToLoad = 1;
-        	DataBanner dataBanner1 = null;
-            ManagerBannersScreen managerBannersScreen = new ManagerBannersScreen(maxBannersToLoad, dFTest.driver);
-            descripValidac = 
-                "<b style=\"color:blue\">Rebajas</b></br>" +
-                "1) Existen banners<br>" +
-                "2) El 1er Banner linca con la sección de rebajas";
-            datosStep.setNOKstateByDefault();
-            listVals = ListResultValidation.getNew(datosStep);
-            try {
-                if (!managerBannersScreen.existBanners()) {
-                    listVals.add(1, State.Defect);
-                }
-                if (managerBannersScreen.existBanners()) {
-                    dataBanner1 = managerBannersScreen.getBanner(1);
-                    if (!dataBanner1.getUrlBanner().contains("seccion=Rebajas")) {
-                        listVals.add(2, State.Warn);
-                    }
-                }
-                else {
-                    listVals.add(2, State.Warn);
-                }
-    
-                datosStep.setListResultValidations(listVals);
-                
-            } finally { listVals.checkAndStoreValidations(descripValidac); }        
-            
-            if (dataBanner1!=null && typeHome==TypeHome.Multimarca) {
-            	List<Linea> listLineas = dCtxSh.pais.getShoponline().getListLineasTiendas(dCtxSh.appE);
-            	if (listLineas.size()>1) {
-	                descripValidac = "<b style=\"color:blue\">Rebajas</b></br>";
-	                int i=1;
-	                for (Linea linea : listLineas) {
-	                	descripValidac+=
-	                	i + ") El 1er Banner contiene links a la línea " + linea.getType() + "<br>";
-	                	i++;
-	                }
-	                datosStep.setNOKstateByDefault();
-                    listVals = ListResultValidation.getNew(datosStep);
-	                try {
-	                    //i)
-	                    String urlLink;
-		                i=1;
-		                for (Linea linea : listLineas) {
-		                    urlLink = dataBanner1.getUrlLinkLinea(linea.getType());
-		                    if (!urlLink.contains("seccion=Rebajas_" + linea.getType().getId3())) {
-		                    	listVals.add(i, State.Warn);		                	
-		                    }
-		                    i++;
-		                }
-		                
-	                    datosStep.setListResultValidations(listVals);
-	                    
-	                } finally { listVals.checkAndStoreValidations(descripValidac); }        
-            	}
-            }
-            
-            String percentageSymbol = UtilsTestMango.getPercentageSymbol(dCtxSh.idioma);
-            descripValidac = 
-                "<b style=\"color:blue\">Rebajas</b></br>" +
-                "1) El mensaje de NewsLetter del Footer no contiene \"" + percentageSymbol + "\"";
-            datosStep.setNOKstateByDefault();
-            listVals = ListResultValidation.getNew(datosStep);
-            try {
-                if (SecFooter.getNewsLetterMsgText(dFTest.driver).contains(percentageSymbol)) {
-                    listVals.add(1, State.Info_NoHardcopy);
-                }
-    
-                datosStep.setListResultValidations(listVals);
-                
-            } finally { listVals.checkAndStoreValidations(descripValidac); }
+        boolean isPresentLinRebajas = SecMenusWrap.isLineaPresentUntil(LineaType.rebajas, dCtxSh.appE, dCtxSh.channel, maxSeconds, driver);
+        if (salesOnInCountry && dCtxSh.pais.isVentaOnline()) {
+	    	validations.add(
+	    		PrefixRebajas + "Aparece la línea \"Rebajas\" (lo esperamos hasta " + maxSeconds + " segundos)",
+	    		isPresentLinRebajas, State.Defect);
         }
+        else {
+	    	validations.add(
+	    		PrefixRebajas + "No aparece la línea \"Rebajas\"",
+	    		!isPresentLinRebajas, State.Defect);
+        }
+        
+        return validations;
+    }
+    
+    @Validation
+    private static ListResultValidation checkBannerRebajas(boolean salesOnInCountry, TypeHome typeHome, DataCtxShop dCtxSh, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	int maxBannersToLoad = 1;
+    	DataBanner dataBanner1 = null;
+        ManagerBannersScreen managerBannersScreen = new ManagerBannersScreen(maxBannersToLoad, driver);
+        boolean existenBanners = managerBannersScreen.existBanners();
+    	validations.add(
+    		PrefixRebajas + "Existen banners<br>",
+    		existenBanners, State.Defect);    	
+    	if (existenBanners) {
+    		if (!salesOnInCountry) {
+    			boolean isBannerThatLinkWithSale = false;
+    			for (DataBanner dataBanner : managerBannersScreen.getListDataBanners()) {
+    				if (dataBanner.getUrlBanner().contains("seccion=Rebajas")) {
+    					isBannerThatLinkWithSale=true;
+    					break;
+    				}
+    			}
+	        	validations.add(
+	        		"No hay ningún banner que linque con la sección de rebajas",
+	        		!isBannerThatLinkWithSale, State.Warn);
+    		}
+    		else {
+        		dataBanner1 = managerBannersScreen.getBanner(1);
+        		boolean bannerLinkedWhithSales = dataBanner1.getUrlBanner().contains("seccion=Rebajas");
+	        	validations.add(
+	        		"El 1er Banner Sí linca con la sección de rebajas",
+	        		bannerLinkedWhithSales, State.Warn);
+        
+	        	if (dataBanner1!=null && typeHome==TypeHome.Multimarca) {
+		        	List<Linea> listLineas = dCtxSh.pais.getShoponline().getListLineasTiendas(dCtxSh.appE);
+		        	if (listLineas.size()>1) {
+		                for (Linea linea : listLineas) {
+		                    String urlLink = dataBanner1.getUrlLinkLinea(linea.getType());
+		                	validations.add(
+		                		"El 1er Banner contiene links a la línea " + linea.getType() + "<br>",
+		                		urlLink.contains("seccion=Rebajas_" + linea.getType().getId3()), State.Warn);
+		                }
+		        	}
+	        	}
+    		}
+    	}
+    	
+    	return validations;
+    }
+            
+    @Validation
+    private static ListResultValidation checkMsgNewsletterFooter(boolean salesOnInCountry, IdiomaPais idioma, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	String percentageSymbol = UtilsTestMango.getPercentageSymbol(idioma);
+    	boolean isMsgWithPercentageSimbol = SecFooter.getNewsLetterMsgText(driver).contains(percentageSymbol);
+    	if (salesOnInCountry) {
+	    	validations.add(
+	    		PrefixRebajas + "El mensaje de NewsLetter del Footer No contiene \"" + percentageSymbol + "\"",
+	    		!isMsgWithPercentageSimbol, State.Info_NoHardcopy);    
+    	}
+    	else {
+	    	validations.add(
+	    		PrefixRebajas + "El mensaje de NewsLetter del Footer Sí contiene \"" + percentageSymbol + "\"",
+	    		isMsgWithPercentageSimbol, State.Warn);    
+    	}
+    	
+    	return validations;
     }
 }

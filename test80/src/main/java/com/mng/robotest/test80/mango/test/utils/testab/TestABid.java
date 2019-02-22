@@ -53,6 +53,16 @@ public enum TestABid {
 			"V0-Galería sin React", //Este es el único caso posible en Outlet
 			"V1-Galería con React")
 	),
+	//TODO es posible eliminarlo en cuanto se ejecute el planchado
+	GaleriaDesktopReactPRESemanal(
+		TypeTestAB.GoogleExperiments,
+		"KLzroOP0TgOP5Q9bUV9rLw",
+		"sub_8rhk5o_wc6i3wg92ap",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Galería sin React", //Este es el único caso posible en Outlet
+			"V1-Galería con React")
+		),
 	//Este TestAB se definió únicamente para certificar que el Robotest soportaba la V1 sin necesidad de aplicar ningún cambio
 	//Si se tuviera que activar hay que tener en cuenta que sólo funciona si después de aplicar el TestAB se refresca la portada
 //	HeaderMobileFreeShipping (

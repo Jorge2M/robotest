@@ -332,10 +332,11 @@ public class UtilsMangoTest {
     /**
      * @return indica si se ha de probar o no una determinada línea
      */
-    public static boolean validarLinea(Pais pais, Linea linea, AppEcom app) {
+    public static boolean validarLinea(Pais pais, Linea linea, AppEcom app) throws Exception {
         //En caso de tratarse de la línea de rebajas miramos si se ha de probar
-        if (linea.getType().compareTo(LineaType.rebajas)==0)
+        if (linea.getType().compareTo(LineaType.rebajas)==0) {
             return validarLineaRebajas(pais);
+        }
 
         //Indicador de si la línea es la única principal del país
         boolean solo1Linea = pais.getShoponline().isLineaTienda(linea) && pais.getShoponline().getNumLineasTiendas(app) == 1;
@@ -345,12 +346,12 @@ public class UtilsMangoTest {
     /**
      * @return indica si se ha de probar o no la línea de rebajas
      */
-    public static boolean validarLineaRebajas(Pais pais) {
+    public static boolean validarLineaRebajas(Pais pais) throws Exception {
         //Obtenemos el indicador de si se han de validar las rebajas
         boolean validarPestRebajas = Utilidades.validarRebajasFromBD();
         if (validarPestRebajas) {
             //Obtenemos el indicador de si las rebajas están activas para ese país concreto
-            return RebajasPaisDAO.isRebajasPais(pais.getCodigo_pais());
+            return RebajasPaisDAO.isRebajasEnabledPais(pais.getCodigo_pais());
         }
         
         return false;

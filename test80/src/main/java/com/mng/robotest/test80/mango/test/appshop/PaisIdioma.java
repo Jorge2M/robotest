@@ -124,10 +124,9 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
     public void PAR001_Lineas() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxShI = TestCaseData.getdCtxSh();
-        DatosStep datosStep = null;
             
-        datosStep = PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxShI, dFTest);
-        PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxShI.pais, dCtxShI.channel, dCtxShI.appE, datosStep, dFTest);
+        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxShI, dFTest);
+        PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxShI.pais, dCtxShI.channel, dCtxShI.appE, dFTest.driver);
 
         //Aplicamos el test a las líneas/sublíneas
         for (Linea linea : this.lineasAprobar) {

@@ -44,6 +44,9 @@ public interface TestAB {
     	if (channel==Channel.desktop) {
 	    	TestAB testAB = TestAB.getInstance(TestABid.GaleriaDesktopReact, app);
 	    	testAB.activateTestAB(versionTestAB, driver);
+	    	
+	    	testAB = TestAB.getInstance(TestABid.GaleriaDesktopReactPRESemanal, app);
+	    	testAB.activateTestAB(versionTestAB, driver);
     	}
     }
     

@@ -1,12 +1,15 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.testng.ITestContext;
 import java.lang.reflect.Method;
 import org.testng.annotations.*;
+import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
@@ -17,13 +20,6 @@ import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PageHomeMarcasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.buscador.SecBuscadorStpV;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-
 
 public class Buscador extends GestorWebDriver {
 
@@ -83,8 +79,8 @@ public class Buscador extends GestorWebDriver {
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userRegistered = false;
 
-        DatosStep datosStep = AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
-        PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, datosStep, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         SecBuscadorStpV.searchArticuloAndValidateBasic(TypeArticleStock.articlesWithMoreOneColour, dCtxSh, dFTest.driver);
         SecBuscadorStpV.searchArticuloAndValidateBasic(TypeArticleStock.articlesNotExistent, dCtxSh, dFTest.driver);
         SecBuscadorStpV.busquedaCategoriaProducto(categoriaProdExistente, true/*categoriaExiste*/, dCtxSh.appE, dCtxSh.channel, dFTest.driver);

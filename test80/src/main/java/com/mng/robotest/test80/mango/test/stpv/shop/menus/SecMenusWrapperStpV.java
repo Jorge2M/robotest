@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
@@ -42,13 +43,15 @@ public class SecMenusWrapperStpV {
 	
     public static SecMenusUserStpV secMenuUser;
     
-    public static void validateLineas(Pais pais, AppEcom app, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
+    public static void validateLineas(Pais pais, AppEcom app, Channel channel, WebDriver driver) 
+    throws Exception {
+    	DatosStep datosStep = TestCaseData.getDatosLastStep();
         String descripValidac = "";
         datosStep.setNOKstateByDefault();
         ListResultValidation listVals = ListResultValidation.getNew(datosStep);
         try {
             //Ejecutamos las validaciones y obtenemos el literal con la descrpción de cada una de ellas
-            descripValidac = getListaValidacionesLineas(listVals, pais, app, channel, dFTest.driver);
+            descripValidac = getListaValidacionesLineas(listVals, pais, app, channel, driver);
             
             datosStep.setListResultValidations(listVals);
         } 
@@ -60,7 +63,8 @@ public class SecMenusWrapperStpV {
      * @listVals con la lista de validaciones fallidas si las hubiera
      * @return la lista de validaciones
      */
-    private static String getListaValidacionesLineas(ListResultValidation listVals, Pais pais, AppEcom app, Channel channel, WebDriver driver) {
+    private static String getListaValidacionesLineas(ListResultValidation listVals, Pais pais, AppEcom app, Channel channel, WebDriver driver) 
+    throws Exception {
         LineaType[] lineasToTest = Linea.LineaType.values();
         int numValidacion = 0;
         String descripValidac = "";

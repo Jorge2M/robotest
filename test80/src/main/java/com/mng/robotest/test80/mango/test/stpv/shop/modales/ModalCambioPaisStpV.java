@@ -43,7 +43,7 @@ public class ModalCambioPaisStpV {
         finally { StepAspect.storeDataAfterStep(datosStep);}
         
         //Validation. Aparece el país destino con todas las líneas de dicho país
-        PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, datosStep, dFTest);
+        PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         
         return datosStep;
     }
