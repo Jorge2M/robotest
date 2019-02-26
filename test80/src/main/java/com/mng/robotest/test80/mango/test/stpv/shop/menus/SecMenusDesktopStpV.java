@@ -212,7 +212,7 @@ public class SecMenusDesktopStpV {
         }
         
         //Validaciones. Aparece el selector de precios
-        PageGaleriaStpV.secSelectorPrecios.validaIsSelector(datosStep, dFTest);
+        PageGaleriaStpV.secSelectorPrecios.validaIsSelector(dFTest.driver);
         
         //Obtenemos la línea a la que debería redirigir el menú
         LineaType lineaResult = SecMenusWrap.getLineaResultAfterClickMenu(menu.getLinea(), menu.getNombre());

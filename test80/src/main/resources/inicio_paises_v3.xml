@@ -1924,7 +1924,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ PLZ</moneda>
 <maximo_bolsa>5800</maximo_bolsa>

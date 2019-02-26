@@ -1,10 +1,11 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.galeria;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
@@ -14,85 +15,68 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 @SuppressWarnings({"static-access"})
 public class SecSelectorPreciosStpV {
 
-    public static void validaIsSelector(DatosStep datosStep, DataFmwkTest dFTest) {
-        //Validaciones
-        String descripValidac = 
-            "1) Es visible el selector de precios"; 
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageGaleriaDesktop.secSelectorPrecios.isVisible(dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-    
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation (
+		description="Es visible el selector de precios",
+		level=State.Warn)
+    public static boolean validaIsSelector(WebDriver driver) {
+        return (PageGaleriaDesktop.secSelectorPrecios.isVisible(driver));
     }
     
     /**
      * Selecciona un intervalo de precio mínimo/precio máximo. 
      * No es posible pasar como parámetro el mínimo/máximo pues lo único que podemos hacer es 'click por la derecha' + 'click por la izquierda'
       */
-    public static DatosStep seleccionaIntervalo(AppEcom app, DataFmwkTest dFTest) 
-    throws Exception {
-    
-        int minimoOrig = 0;
-        int maximoOrig = 0;
-        int minimoFinal = 0;
-        int maximoFinal = 0;
-        String tagMinimo = "[MINIMO]";
-        String tagMaximo = "[MAXIMO]";
-            
-        DatosStep datosStep = new DatosStep       (
-            "Utilizar el selector de precio: Mínimo=" + tagMinimo + " Máximo=" + tagMaximo, 
-            "Aparecen artículos con precio en el intervalo seleccionado");
-        try {
-            //Obtenemos los mínimo/máximo originales
-            minimoOrig = PageGaleriaDesktop.secSelectorPrecios.getImporteMinimo(dFTest.driver);
-            maximoOrig = PageGaleriaDesktop.secSelectorPrecios.getImporteMaximo(dFTest.driver);
-                    
-            //Seleccionamos un intervalo de mínimo/máximo
-            PageGaleriaDesktop.secSelectorPrecios.clickMinAndMax(30/*margenPixelsIzquierda*/, 30/*margenPixelsDerecha*/, dFTest.driver);
-    
-            //Obtenemos el nuevo mínimo/máximo
-            minimoFinal = PageGaleriaDesktop.secSelectorPrecios.getImporteMinimo(dFTest.driver);
-            maximoFinal = PageGaleriaDesktop.secSelectorPrecios.getImporteMaximo(dFTest.driver);
-                    
-            //Sustituímos los tags
-            datosStep.setDescripcion(datosStep.getDescripcion().replace(tagMinimo, String.valueOf(minimoFinal)));
-            datosStep.setDescripcion(datosStep.getDescripcion().replace(tagMaximo, String.valueOf(maximoFinal)));
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }         
+    final static String tagMinimo = "[MINIMO]";
+    final static String tagMaximo = "[MAXIMO]";
+	@Step (
+		description="Utilizar el selector de precio: Mínimo=" + tagMinimo + " Máximo=" + tagMaximo, 
+        expected="Aparecen artículos con precio en el intervalo seleccionado")
+    public static void seleccionaIntervalo(AppEcom app, WebDriver driver) throws Exception {
+		DataFilterPrecios dataFilter = new DataFilterPrecios();
+        
+        //Obtenemos los mínimo/máximo originales
+		dataFilter.minimoOrig = PageGaleriaDesktop.secSelectorPrecios.getImporteMinimo(driver);
+		dataFilter.maximoOrig = PageGaleriaDesktop.secSelectorPrecios.getImporteMaximo(driver);
+                
+        //Seleccionamos un intervalo de mínimo/máximo
+        PageGaleriaDesktop.secSelectorPrecios.clickMinAndMax(30/*margenPixelsIzquierda*/, 30/*margenPixelsDerecha*/, driver);
+
+        //Obtenemos el nuevo mínimo/máximo
+        dataFilter.minimoFinal = PageGaleriaDesktop.secSelectorPrecios.getImporteMinimo(driver);
+        dataFilter.maximoFinal = PageGaleriaDesktop.secSelectorPrecios.getImporteMaximo(driver);
+                
+        //Sustituímos los tags
+        TestCaseData.getDatosCurrentStep().replaceInDescription(tagMinimo, String.valueOf(dataFilter.minimoFinal));
+        TestCaseData.getDatosCurrentStep().replaceInDescription(tagMaximo, String.valueOf(dataFilter.maximoFinal));    
             
         //Validaciones
-        PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);
-        String descripValidac = 
-            "1) El nuevo mínimo es mayor que el anterior. Era de <b>" + minimoOrig + "</b> y ahora es <b>" + minimoFinal + "</b><br>" + 
-            "2) El nuevo máximo es menor que el anterior. Era de <b>" + maximoOrig + "</b> y ahora es <b>" + maximoFinal + "</b><br>" +
-            "3) Todos los precios están en el intervalo [" + minimoFinal + ", " + maximoFinal + "]";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (minimoFinal <= minimoOrig) {
-                listVals.add(1, State.Warn);
-            }
-            if (maximoFinal >= maximoOrig) {
-                listVals.add(2, State.Warn);
-            }
-            if (!pageGaleria.preciosInIntervalo(minimoFinal, maximoFinal)) {
-                listVals.add(3, State.Warn);
-            }
-    
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
+        checkResultSelectFiltro(dataFilter, app, driver);
         
         //Validaciones estándar. 
         AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
-        
-        return datosStep;
     }
+	
+	@Validation
+	private static ListResultValidation checkResultSelectFiltro(DataFilterPrecios dataFilter, AppEcom app, WebDriver driver) throws Exception {
+		ListResultValidation validations = ListResultValidation.getNew();
+    	validations.add(
+    		"El nuevo mínimo es mayor que el anterior. Era de <b>" + dataFilter.minimoOrig + "</b> y ahora es <b>" + dataFilter.minimoFinal + "</b><br>",
+    		dataFilter.minimoFinal > dataFilter.minimoOrig, State.Warn);
+    	validations.add(
+    		"El nuevo máximo es menor que el anterior. Era de <b>" + dataFilter.maximoOrig + "</b> y ahora es <b>" + dataFilter.maximoFinal + "</b><br>",
+    		dataFilter.maximoFinal < dataFilter.maximoOrig, State.Warn);
+    	PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
+    	validations.add(
+    		"Todos los precios están en el intervalo [" + dataFilter.minimoFinal + ", " + dataFilter.maximoFinal + "]",
+    		pageGaleria.preciosInIntervalo(dataFilter.minimoFinal, dataFilter.maximoFinal), State.Warn);
+    	return validations;
+	}
+}
+
+class DataFilterPrecios {
+    public int minimoOrig = 0;
+    public int maximoOrig = 0;
+    public int minimoFinal = 0;
+    public int maximoFinal = 0;
+    public DataFilterPrecios() {}
 }
