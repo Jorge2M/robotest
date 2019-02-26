@@ -9,7 +9,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class pageAyuda extends WebdrvWrapp {
+public class PageAyuda extends WebdrvWrapp {
 
     static private JSONParser parser = new JSONParser();
     static private JSONObject fileHAR = null;
