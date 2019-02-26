@@ -33,6 +33,10 @@ public class ElementPageFunctions {
     	By elemBy = By.xpath(element.getXPath(channel));
     	return (isElementInStateUntil(elemBy, state, maxSecondsWait, driver));
     }
+
+    public static boolean isElementInStateUntil(String xPath, StateElem state, int maxSecondsWait, WebDriver driver) {
+	    return (isElementInStateUntil(xPath, state, maxSecondsWait, driver));
+    }
     
     private static boolean isElementInStateUntil(By elemBy, StateElem state, int maxSecondsWait, WebDriver driver) {
     	switch (state) {
@@ -100,6 +104,10 @@ public class ElementPageFunctions {
 
     public static void selectElement(ElementPage element, WebDriver driver) throws Exception {
     	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(element.getXPath()), 3);
+    }
+
+    public static void selectElement(String xPath, WebDriver driver) throws Exception {
+	    WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xPath), 3);
     }
 
     public static void selectElement(ElementPage element, Channel channel, WebDriver driver, WebdrvWrapp.TypeOfClick typeOfClick) throws Exception {
