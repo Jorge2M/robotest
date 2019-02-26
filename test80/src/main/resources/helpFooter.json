@@ -71,7 +71,7 @@
 		{"Buscar una tienda": []},
 		{"Guía de tallas": []},
 		{"Mango Card": []},
-		{"Contactanos": "901159543"},
+		{"Contactanos": ["901159543"]},
 		{"Enviar un email": []}
 	]
 }
