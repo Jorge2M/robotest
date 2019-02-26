@@ -182,7 +182,7 @@ public class Page1DktopCheckoutStpV {
             Constantes.AnalyticsVal.Criteo,
             Constantes.AnalyticsVal.NetTraffic, 
             Constantes.AnalyticsVal.DataLayer);
-        PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, analyticSet, dFTest);
+        PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, analyticSet, dFTest.driver);
     }
     
     public static void clearValeIfLinkExists(DataFmwkTest dFTest) throws Exception {

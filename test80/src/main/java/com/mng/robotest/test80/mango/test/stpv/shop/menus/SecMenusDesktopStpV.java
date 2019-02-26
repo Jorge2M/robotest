@@ -257,7 +257,7 @@ public class SecMenusDesktopStpV {
         SecMenusDesktopStpV.validateIsLineaSelected(lineaResult, app, datosStep, dFTest);
         
         //VALIDACIONES - PARA ANALYTICS (sólo para firefox y NetAnalysis)
-        PasosGenAnalitica.validaHTTPAnalytics(app, lineaMenu, dFTest);
+        PasosGenAnalitica.validaHTTPAnalytics(app, lineaMenu, dFTest.driver);
         
         return datosStep;
     }
@@ -436,11 +436,11 @@ public class SecMenusDesktopStpV {
     									DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
     	SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh, dFTest);
         if (sublineaType==null) {
-        	secCabeceraStpV.validaLogoDesktop(lineaType, datosStep);
+        	secCabeceraStpV.validaLogoDesktop(1, lineaType);
             validateIsLineaSelected(lineaType, dCtxSh.appE, datosStep, dFTest);
         }
 
-        secCabeceraStpV.validateIconoBolsa(datosStep);
+        secCabeceraStpV.validateIconoBolsa();
 
         //Validaciones en función del tipo de página que debería aparecer al seleccionar la línea
         Linea linea = dCtxSh.pais.getShoponline().getLinea(lineaType);
@@ -644,7 +644,7 @@ public class SecMenusDesktopStpV {
         //Validaciones
         DataFichaArt datosArticulo = new DataFichaArt(articulo.getReference(), "");
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
-        pageFichaStpV.validaDetallesProducto(datosArticulo, datosStep);
+        pageFichaStpV.validaDetallesProducto(datosArticulo);
         
         return datosStep;
     }

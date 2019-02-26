@@ -1,60 +1,38 @@
 package com.mng.robotest.test80.mango.test.stpv.manto.pedido;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageGenerarPedido;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageGenerarPedido.EstadoPedido;
 import static com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageGenerarPedido.GestionPostCompra.*;
-
+import org.openqa.selenium.WebDriver;
 
 public class PageGenerarPedidoStpV {
 
-	public static void validateIsPage(String idPedido, DatosStep datosStep, DataFmwkTest dFTest) {
-		String descripValidac = 
-			"1) Aparece la página de generación asociada al pedido <b>" + idPedido + "</b>";
-		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-		try {
-			// 1)
-			if (!PageGenerarPedido.isPage(idPedido, dFTest.driver))
-				listVals.add(1, State.Defect);
-
-			datosStep.setListResultValidations(listVals);
-		} 
-		finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation (
+		description="Aparece la página de generación asociada al pedido <b>#{idPedido}</b>",
+		level=State.Defect)
+	public static boolean validateIsPage(String idPedido, WebDriver driver) {
+		return (PageGenerarPedido.isPage(idPedido, driver));
 	}
 	
-	public static DatosStep changePedidoToEstado(EstadoPedido newState, DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep (
-            "Seleccionamos el estado <b>" + newState + "</b> y pulsamos el botón <b>Generar Fichero</b>", 
-            "Aparece una página de la pasarela de resultado OK");
-        try {
-            PageGenerarPedido.selectEstado(newState, dFTest.driver);
-            PageGenerarPedido.clickAndWait(GenerarFicheroButton, dFTest.driver);
-                               
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+	@Step (
+		description="Seleccionamos el estado <b>#{newState}</b> y pulsamos el botón <b>Generar Fichero</b>", 
+        expected="Aparece una página de la pasarela de resultado OK")
+	public static void changePedidoToEstado(EstadoPedido newState, WebDriver driver) throws Exception {
+        PageGenerarPedido.selectEstado(newState, driver);
+        PageGenerarPedido.clickAndWait(GenerarFicheroButton, driver);
         
         //Validations
-		String descripValidac = 
-			"1) Aparece el mensaje de <b>Fichero creado correctamente</b>";
-		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-		try {
-			// 1)
-			if (!PageGenerarPedido.isElementInState(MessageOkFicheroCreado, StateElem.Visible, dFTest.driver))
-				listVals.add(1, State.Defect);
-
-			datosStep.setListResultValidations(listVals);
-		} 
-		finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
+        checkMsgFileCreatedCorrectly(driver);
+	}
+	
+	@Validation (
+		description="Aparece el mensaje de <b>Fichero creado correctamente</b>",
+		level=State.Defect)
+	private static boolean checkMsgFileCreatedCorrectly(WebDriver driver) {
+		return (PageGenerarPedido.isElementInState(MessageOkFicheroCreado, StateElem.Visible, driver));
 	}
 }

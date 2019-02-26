@@ -17,15 +17,16 @@ public class PageLoginVOTFStpV {
         
         //Step
         String resultadoEsperado = "Aparece la página de selección de la línea";
-        if (numIdiomas > 1)
+        if (numIdiomas > 1) {
             resultadoEsperado = "Aparece la página de selección del idioma";
+        }
         
         DatosStep datosStep = new DatosStep(
             "Acceder a la página de Login e identificarnos con un usuario de " + 
             dCtxSh.pais.getNombre_pais() + " (" + usuarioVOTF + " / " + passwordVOTF + ")",
             resultadoEsperado);
         try {
-            PageLoginVOTF.goToFromUrlAndSetTestABs(urlAcceso, dFTest);
+            PageLoginVOTF.goToFromUrlAndSetTestABs(urlAcceso, dFTest.driver);
             PageLoginVOTF.inputUsuario(usuarioVOTF, dFTest.driver);
             PageLoginVOTF.inputPassword(passwordVOTF, dFTest.driver);
             PageLoginVOTF.clickButtonContinue(dFTest.driver);

@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
@@ -29,7 +30,7 @@ public class PasosGenAnalitica {
     /**
      * Aplica las validaciones estándar a nivel de Analítica
      */
-    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DataFmwkTest dFTest) throws Exception {
+    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, WebDriver driver) throws Exception {
         //Por defecto aplicaremos todas las avalidaciones (Google Analytics, Criteo, NetTraffic y DataLayer)
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(Constantes.AnalyticsVal.GoogleAnalytics,
                                                                   Constantes.AnalyticsVal.NetTraffic, 
@@ -37,20 +38,21 @@ public class PasosGenAnalitica {
                                                                   Constantes.AnalyticsVal.Bing,
                                                                   Constantes.AnalyticsVal.DataLayer);
         
-        validaHTTPAnalytics(app, lineaId, analyticSet, dFTest);
+        validaHTTPAnalytics(app, lineaId, analyticSet, driver);
     }
     
-    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, EnumSet<Constantes.AnalyticsVal> analyticSet, DataFmwkTest dFTest) 
+    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, EnumSet<Constantes.AnalyticsVal> analyticSet, WebDriver driver) 
     throws Exception {
-        validaHTTPAnalytics(app, lineaId, null/*DataProcessPago*/, analyticSet, dFTest);
+        validaHTTPAnalytics(app, lineaId, null/*DataProcessPago*/, analyticSet, driver);
     }
     
-    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DataPedido dataPedido, EnumSet<Constantes.AnalyticsVal> analyticSet, DataFmwkTest dFTest) 
+    public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DataPedido dataPedido, EnumSet<Constantes.AnalyticsVal> analyticSet, WebDriver driver) 
     throws Exception {
     	DatosStep datosStep = TestCaseData.getDatosLastStep();
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
         SaveWhen whenSaveNettraffic = datosStep.getSaveNettrafic();
         if (whenSaveNettraffic == SaveWhen.Always &&
-            dFTest.driver.toString().toLowerCase().contains("firefox")) {
+            driver.toString().toLowerCase().contains("firefox")) {
 
             //Instanciamos el gestor de los datos HAR
             gestorDatosHarJSON gestorHAR = null;

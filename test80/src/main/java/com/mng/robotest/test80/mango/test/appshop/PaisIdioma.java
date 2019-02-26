@@ -125,7 +125,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxShI = TestCaseData.getdCtxSh();
             
-        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxShI, dFTest);
+        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxShI, dFTest.driver);
         PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxShI.pais, dCtxShI.channel, dCtxShI.appE, dFTest.driver);
 
         //Aplicamos el test a las líneas/sublíneas

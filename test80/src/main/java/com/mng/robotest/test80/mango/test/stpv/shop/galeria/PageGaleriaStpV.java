@@ -103,7 +103,7 @@ public class PageGaleriaStpV {
         
         //Validaciones
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel);
-        pageFichaStpV.validaDetallesProducto(datosArticulo, datosStep);
+        pageFichaStpV.validaDetallesProducto(datosArticulo);
         
         //Cerramos la pestaña y cambiamos a la ventana padre
         dFTest.driver.switchTo().window(detailWindowHandle);
@@ -134,13 +134,13 @@ public class PageGaleriaStpV {
         
         //Validaciones
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
-        pageFichaStpV.validaDetallesProducto(datosArticulo, datosStep);
-        pageFichaStpV.validaPrevNext(locationArt, dCtxSh, datosStep);
+        pageFichaStpV.validaDetallesProducto(datosArticulo);
+        pageFichaStpV.validaPrevNext(locationArt, dCtxSh);
 
         //Validaciones sección BreadCrumb + Next
         if (dCtxSh.channel==Channel.desktop) {
             if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old)
-                pageFichaStpV.validaBreadCrumbFichaOld(urlGaleria, datosStep);
+                pageFichaStpV.validaBreadCrumbFichaOld(urlGaleria);
         }
         
         return (ResultSelectArtStep.getNew(datosStep, datosArticulo));
@@ -194,13 +194,13 @@ public class PageGaleriaStpV {
         finally { StepAspect.storeDataAfterStep(datosStep); }
         
         //Validaciones
-        boolean isVisibleAvisame = ModalArticleNotAvailableStpV.validateState(StateModal.notvisible, datosStep, dFTest);
-        if (!isVisibleAvisame) {
+        boolean notVisibleAvisame = ModalArticleNotAvailableStpV.validateState(1, StateModal.notvisible, dFTest.driver);
+        if (notVisibleAvisame) {
             dataBag.addArticulo(articulo);
-            SecBolsaStpV.validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, dFTest);
+            SecBolsaStpV.validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE);
         }
         
-        return !isVisibleAvisame;
+        return notVisibleAvisame;
     }
     
     /**
@@ -329,7 +329,7 @@ public class PageGaleriaStpV {
         AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, dataForScroll.validaImgBroken);
         
         //VALIDACIONES - PARA ANALYTICS (sólo para firefox y NetAnalysis)
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, dFTest);
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, dFTest.driver);
         
         datosScroll.datosStep = datosStep;
         return datosScroll;
@@ -630,7 +630,7 @@ public class PageGaleriaStpV {
        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
        
        //VALIDACIONES - PARA ANALYTICS (sólo para firefox y NetAnalysis)
-       PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, dFTest);        
+       PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, dFTest.driver);        
    }
    
    @Validation(

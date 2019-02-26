@@ -74,7 +74,7 @@ public class SecFiltrosStpV {
             EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
                     Constantes.AnalyticsVal.GoogleAnalytics,
                     Constantes.AnalyticsVal.DataLayer);
-            PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, analyticSet, dFTest);
+            PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, analyticSet, dFTest.driver);
         }
         
         //Validaciones estándar. 

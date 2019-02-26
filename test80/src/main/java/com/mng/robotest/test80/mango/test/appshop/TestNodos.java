@@ -129,7 +129,7 @@ public class TestNodos extends GestorWebDriver {
                 AccesoStpV.validaCompareStatusNodos(datosStep, this.nodo, nodoAnt);
            
             //Step+Validacs. Accedemos a España con idioma Español
-            PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, true/*execValidacs*/, dFTest);
+            PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, true/*execValidacs*/, dFTest.driver);
             
             if (appE==AppEcom.shop) {
                 //Step. Seleccionar la línea Nuevo

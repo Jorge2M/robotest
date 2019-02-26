@@ -1,14 +1,16 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import org.testng.ITestContext;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.lang.reflect.Method;
-
+import org.testng.ITestContext;
 import org.testng.annotations.*;
+import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -30,13 +32,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMisDatosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageSuscripcionesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalDetalleMisComprasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStpV;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-
 
 public class MiCuenta extends GestorWebDriver {
     Pais españa = null;
@@ -114,19 +109,21 @@ public class MiCuenta extends GestorWebDriver {
         dCtxSh.userConnected = userConDevolucionPeroNoEnPRO;
         dCtxSh.passwordUser = passwordUserConDevolucion;
             
-        DatosStep datosStep = PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest);
+        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest.driver);
         dCtxSh.userRegistered = false;
         SecMenusWrapperStpV.seleccionLinea(LineaType.she, null/*sublineaType*/, dCtxSh, dFTest);
         dCtxSh.userRegistered = true;
         AccesoStpV.identificacionEnMango(dCtxSh, dFTest);                                           
-        datosStep = PageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected, dCtxSh.appE, dCtxSh.channel, dFTest);                
+        PageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected, dCtxSh.appE, dCtxSh.channel, dFTest);                
         String nombreActual = PageMisDatosStpV.modificaNombreYGuarda(dFTest);
-        datosStep = PageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected, dCtxSh.appE, dCtxSh.channel, dFTest);
-        PageMisDatosStpV.validaContenidoNombre(nombreActual, datosStep, dFTest);
-        if (dCtxSh.appE==AppEcom.shop)
+        PageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected, dCtxSh.appE, dCtxSh.channel, dFTest);
+        PageMisDatosStpV.validaContenidoNombre(nombreActual, dFTest.driver);
+        if (dCtxSh.appE==AppEcom.shop) {
             PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dCtxSh.channel, dFTest);
-        else
-            PageMiCuentaStpV.goToMisPedidos(dCtxSh.userConnected, dCtxSh.appE, dCtxSh.channel, dFTest);            
+        }
+        else {
+            PageMiCuentaStpV.goToMisPedidos(dCtxSh.userConnected, dCtxSh.appE, dCtxSh.channel, dFTest);  
+        }
             
         PageMiCuentaStpV.goToSuscripciones(dCtxSh.appE, dCtxSh.channel, dFTest);
         ArrayList<idNewsletters> listNewsletters = new ArrayList<>();
@@ -154,7 +151,7 @@ public class MiCuenta extends GestorWebDriver {
         dCtxSh.userRegistered = true;
         boolean isPRO = UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest);
             
-        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest);
+        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest.driver);
         AccesoStpV.identificacionEnMango(dCtxSh, dFTest);
         PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dCtxSh.channel, dFTest);
         PageMisComprasStpV.selectBlock(TypeCompra.Online, true/*ordersExpected*/, dFTest);

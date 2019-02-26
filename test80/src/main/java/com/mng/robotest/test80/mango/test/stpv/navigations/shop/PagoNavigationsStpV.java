@@ -93,7 +93,7 @@ public class PagoNavigationsStpV {
             Constantes.AnalyticsVal.GoogleAnalytics,
             Constantes.AnalyticsVal.NetTraffic, 
             Constantes.AnalyticsVal.DataLayer );
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, dFTest);
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, dFTest.driver);
         
         if (dCtxSh.userRegistered) {
             //Step. Vaciamos la bolsa y los favoritos
@@ -205,7 +205,7 @@ public class PagoNavigationsStpV {
             Constantes.AnalyticsVal.DataLayer
         );
         
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, dFTest);
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, dFTest.driver);
 
         return datosStep;
     }
@@ -251,7 +251,7 @@ public class PagoNavigationsStpV {
                 dataPedido.getPago().getTestpolyvore().compareTo("s")==0) 
                 analyticSet.add(Constantes.AnalyticsVal.Polyvore);
             
-            PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, dataPedido, analyticSet, dFTest);
+            PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, dataPedido, analyticSet, dFTest.driver);
         }
     }
     

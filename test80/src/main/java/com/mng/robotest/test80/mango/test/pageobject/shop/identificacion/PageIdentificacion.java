@@ -21,7 +21,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAf
  *
  */
 public class PageIdentificacion extends WebdrvWrapp {
-    public static String avisoCredencialesKO = "Tu e-mail o contraseña no son correctos";
+    private static String avisoCredencialesKO = "Tu e-mail o contraseña no son correctos";
     static String XPathErrorCredencialesKO = "//div[@class='formErrors']//li[text()[contains(.,'" + avisoCredencialesKO + "')]]";
     static String XPathHasOlvidadoContrasenya = "//span[text()[contains(.,'¿Has olvidado tu contraseña?')]]/../../a";
     static String XPathInputUser = "//input[@id[contains(.,'userMail')]]";
@@ -30,6 +30,10 @@ public class PageIdentificacion extends WebdrvWrapp {
     
     public static boolean isVisibleUserUntil(int maxSecondsToWait, WebDriver driver) {
         return isElementVisibleUntil(driver, By.xpath(XPathInputUser), maxSecondsToWait);
+    }
+    
+    public static String getLiteralAvisiCredencialesKO() {
+    	return avisoCredencialesKO;
     }
     
     public static void inputUserPassword(String usuario, String password, WebDriver driver) throws Exception {

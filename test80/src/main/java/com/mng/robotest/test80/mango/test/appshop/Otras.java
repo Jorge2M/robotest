@@ -126,8 +126,8 @@ public class Otras extends GestorWebDriver {
         description="Verificar en google la existencia de referencia Mango")
     public void OTR002_check_Busqueda_Google() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        GoogleStpV.accessGoogleAndSearchMango(dFTest);
-        GoogleStpV.selectFirstLinkSinPublicidad(dFTest);
+        GoogleStpV.accessGoogleAndSearchMango(dFTest.driver);
+        GoogleStpV.selectFirstLinkSinPublicidad(dFTest.driver);
     }
     
     @Test (
@@ -213,9 +213,9 @@ public class Otras extends GestorWebDriver {
 
         dCtxSh.pais = this.japon;
         dCtxSh.idioma = this.japones;
-        PagePrehomeStpV.seleccionPaisIdioma(urlBaseTest, dCtxSh, dFTest);
-        DatosStep datosStep = PagePrehomeStpV.entradaShopGivenPaisSeleccionado(this.japon, this.japones, dCtxSh.channel, dFTest);
-        PageIniShopJaponStpV.validaPageIniJapon(datosStep, dFTest);
+        PagePrehomeStpV.seleccionPaisIdioma(urlBaseTest, dCtxSh, dFTest.driver);
+        PagePrehomeStpV.entradaShopGivenPaisSeleccionado(this.japon, this.japones, dCtxSh.channel, dFTest.driver);
+        PageIniShopJaponStpV.validaPageIniJapon(2, dFTest.driver);
     }	
     
     /**
@@ -231,7 +231,7 @@ public class Otras extends GestorWebDriver {
 
         dCtxSh.pais = this.japon;
         dCtxSh.idioma = this.japones;
-        PagePrehomeStpV.seleccionPaisIdioma(urlBaseTest, dCtxSh, dFTest);
+        PagePrehomeStpV.seleccionPaisIdioma(urlBaseTest, dCtxSh, dFTest.driver);
         step1("Entrar", this.japon, this.japones, dCtxSh.channel, dFTest.driver);
         //validaPageIniJapon3(dFTest.driver);
         step2withException("Entrar", this.japon, this.japones, dCtxSh.channel, dFTest.driver);

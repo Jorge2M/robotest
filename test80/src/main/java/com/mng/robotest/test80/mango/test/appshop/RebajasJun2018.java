@@ -86,7 +86,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
     	boolean salesOnInCountry = RebajasPaisDAO.isRebajasEnabledPais(dCtxSh.pais.getCodigo_pais());
             
         //Step&Validation
-        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest);
+        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest.driver);
         if (numLineasPais==1) {
             return;
         }

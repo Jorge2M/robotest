@@ -8,10 +8,14 @@ import java.util.Date;
 import java.util.Iterator;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
+
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
@@ -196,22 +200,19 @@ public class BrowserStpV {
         finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
-    public static void inputSitemapURLandValidate(String urlBaseTest, DataFmwkTest dFTest) throws Exception {
-        URI uriBase = new URI(urlBaseTest);
-        String urlSitemap = urlBaseTest.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
-        
-        //Step. Comprobamos al URL correspondiente a SITEMAP.XML
-        DatosStep datosStep = new DatosStep(
-            "Ejecutamos la URL del sitemap: " + urlSitemap, 
-            "Se carga el contenido correcto");
-        try {
-            dFTest.driver.get(urlSitemap);
-    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        } 
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+    @Step (
+    	description="Ejecutamos la URL del sitemap: #{urlSitemap}", 
+        expected="Se carga el contenido correcto")
+    public static void inputSitemapURLandValidate(String urlSitemap, WebDriver driver) throws Exception {
+        driver.get(urlSitemap);
     
         //Validaciones.
+        checkResultUrlSitemal(driver);
+    }
+    
+    private static void checkResultUrlSitemal(WebDriver driver) throws Exception {
+    	DatosStep datosStep = TestCaseData.getDatosLastStep();
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
         Date currDateDayPrecision = removeTime(new Date());
         String currentDay = new SimpleDateFormat("yyyy-MM-dd").format(currDateDayPrecision);
     

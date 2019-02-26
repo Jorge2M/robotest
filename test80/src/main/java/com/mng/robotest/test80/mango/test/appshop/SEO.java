@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
 import java.lang.reflect.Method;
+import java.net.URI;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
@@ -61,6 +62,9 @@ public class SEO extends GestorWebDriver {
         
         String urlBaseTest = (String)dFTest.ctx.getAttribute("appPath");
         BrowserStpV.inputRobotsURLandValidate(urlBaseTest, dCtxSh.appE, dFTest);
-        BrowserStpV.inputSitemapURLandValidate(urlBaseTest, dFTest);
+        
+        URI uriBase = new URI(urlBaseTest);
+        String urlSitemap = urlBaseTest.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
+        BrowserStpV.inputSitemapURLandValidate(urlSitemap, dFTest.driver);
     }
 }

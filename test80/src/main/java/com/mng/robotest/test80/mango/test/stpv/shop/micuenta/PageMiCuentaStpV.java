@@ -74,7 +74,7 @@ public class PageMiCuentaStpV {
         }
         
         //Validaciones
-        PageMisComprasStpV.validateIsPage(dataCtxShop, datosStep, dFTest);
+        PageMisComprasStpV.validateIsPage(dataCtxShop, dFTest.driver);
         
         return datosStep;
     }    

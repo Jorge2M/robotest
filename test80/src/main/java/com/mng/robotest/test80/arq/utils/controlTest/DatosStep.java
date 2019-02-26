@@ -76,6 +76,10 @@ public class DatosStep {
         this.descripcion = c_descripcion; 
     }
     
+    public void replaceInDescription(String oldChar, String newChar) {
+    	this.descripcion = this.descripcion.replace(oldChar, newChar);
+    }
+    
     public void setResExpected(String c_res_expected) { 
         this.res_expected = c_res_expected; 
     }
