@@ -309,7 +309,6 @@ public class PagoNavigationsStpV {
     throws Exception {
         try {
             DataPedido dataPedido = dCtxPago.getDataPedido();
-            DatosStep datosStep=null;
 
             //En el caso de DESKTOP disponemos y almacenamos el importe total mostrado por pantalla (lo necesitaremos más adelante)
             if (dCtxSh.channel==Channel.desktop)
@@ -356,8 +355,8 @@ public class PagoNavigationsStpV {
                         dataDirEnvio.put(DataDirType.email, "jorge.munoz.sge@mango.com");
                         dataDirEnvio.put(DataDirType.telefono, "665015122");
                         PageCheckoutWrapperStpV.modalDirecEnvio.inputDataAndActualizar(dataDirEnvio, dFTest);
-                        datosStep = PageCheckoutWrapperStpV.modalAvisoCambioPais.clickConfirmar(paisChange, dFTest);
-                        PageCheckoutWrapperStpV.validaMetodosPagoDisponibles(datosStep, paisChange, dCtxPago.getFTCkout().isEmpl, dCtxSh.appE, dCtxSh.channel, dFTest);
+                        PageCheckoutWrapperStpV.modalAvisoCambioPais.clickConfirmar(paisChange, dFTest.driver);
+                        PageCheckoutWrapperStpV.validaMetodosPagoDisponibles(paisChange, dCtxPago.getFTCkout().isEmpl, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
                     }
                 }
             }

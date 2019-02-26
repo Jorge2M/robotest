@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance.PagePostfSelectPago;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -15,6 +16,7 @@ public class PagePosftSelectPagoStpV {
 
 	static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 	
+	@Validation
 	public static ListResultValidation validateIsPage(String nombrePago, String importeTotal, String codPais, WebDriver driver) {
 		ListResultValidation validations = ListResultValidation.getNew();
 		int maxSecondsWait = 5;

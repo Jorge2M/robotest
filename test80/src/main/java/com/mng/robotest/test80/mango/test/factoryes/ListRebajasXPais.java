@@ -1,7 +1,6 @@
 package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
-
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.mango.test.appshop.RebajasJun2018;
@@ -10,7 +9,6 @@ import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
 
 import org.testng.ITestContext;
 

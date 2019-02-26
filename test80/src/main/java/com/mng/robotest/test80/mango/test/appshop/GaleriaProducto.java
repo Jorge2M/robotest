@@ -225,7 +225,7 @@ public class GaleriaProducto extends GestorWebDriver {
     				"finalmente las combinamos con cambios de color")
     public void GPO006_SliderInDesktop() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();;
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userRegistered = false;
     
         //Ini script

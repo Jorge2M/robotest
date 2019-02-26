@@ -10,6 +10,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 
 public class PageRecuperaPasswdStpV {
     
+	@Validation
     public static ListResultValidation isPage(WebDriver driver) throws Exception {
     	ListResultValidation validations = ListResultValidation.getNew();
     	int maxSecondsToWait = 2;

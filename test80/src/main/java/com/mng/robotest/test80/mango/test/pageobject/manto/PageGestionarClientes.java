@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
-
 public class PageGestionarClientes extends WebdrvWrapp {
 
     public enum TypeThirdButton {

@@ -7,9 +7,7 @@ import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPage;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp.TypeOfClick;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.PageFromFooter;
-
 
 public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFooter {
     public enum Importe {euro25, euro50, euro100, euro150, euro200, euro250}
