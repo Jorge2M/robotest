@@ -3,12 +3,14 @@ package com.mng.robotest.test80.mango.test.stpv.shop;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.otras.WebDriverArqUtils;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
@@ -121,22 +123,11 @@ public class AllPagesStpV {
         } finally { listVals.checkAndStoreValidations(descripValidac); }
     }
     
-    /**
-     * Validaciones que comprueban que está apareciendo el Main Content asociado a un país concreto
-     */
-    public static void validateMainContentPais(Pais pais, DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) Aparece el div de contenido asociado al país " + pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ")";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!AllPages.isPresentMainContent(pais, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-
-            datosStep.setListResultValidations(listVals);
-        } 
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation (
+    	description="Aparece el div de contenido asociado al país #{pais.getNombre_pais()} (#{pais.getCodigo_pais()})",
+    	level=State.Warn)
+    public static boolean validateMainContentPais(Pais pais, WebDriver driver) {
+        return (AllPages.isPresentMainContent(pais, driver));
     }
 
     public static void backNagegador(DataFmwkTest dFTest) throws Exception {

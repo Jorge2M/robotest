@@ -32,7 +32,7 @@ public class ListRebajasXPais {
             Iterator<Continente> itContinentes = response.getResponse().iterator();
             
             //Obtenemos la lista de países en rebajas
-            ArrayList<String> listCountryCodesInSalePeriod = RebajasPaisDAO.listCountryCodesInRebajas();
+            //ArrayList<String> listCountryCodesInSalePeriod = RebajasPaisDAO.listCountryCodesInRebajas();
     	        
             //Iteramos a nivel de Continentes -> Países -> Idiomas
             int prioridad=0;
@@ -41,7 +41,7 @@ public class ListRebajasXPais {
                 Iterator<Pais> itPaises = continente.getPaises().iterator();
                 while (itPaises.hasNext()) {
                     Pais pais = itPaises.next();
-                    if (listCountryCodesInSalePeriod.contains(pais.getCodigo_pais())) {
+                    //if (listCountryCodesInSalePeriod.contains(pais.getCodigo_pais())) {
                         List<Linea> lineasAprobar = Utilidades.getLinesToTest(pais, appE, lineas);
                         Iterator<IdiomaPais> itIdiomas = pais.getListIdiomas().iterator();
                         while (itIdiomas.hasNext()) {
@@ -54,7 +54,7 @@ public class ListRebajasXPais {
                                 ",Idioma=" + idioma.getCodigo().getLiteral() 
                             );
                         }
-                    }
+                    //}
                 }
             }
         }

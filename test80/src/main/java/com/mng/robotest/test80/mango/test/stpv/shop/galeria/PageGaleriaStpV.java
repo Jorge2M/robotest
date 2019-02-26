@@ -902,7 +902,7 @@ public class PageGaleriaStpV {
    }
    
    @SuppressWarnings("static-access")
-   public void validaRebajasJun2018Desktop(boolean isGaleriaSale, Pais pais, IdiomaPais idioma, LineaType lineaType, bloqueMenu menuType) 
+   public void validaRebajasJun2018Desktop(boolean salesOnInCountry, boolean isGaleriaSale, Pais pais, IdiomaPais idioma, LineaType lineaType, bloqueMenu menuType) 
    throws Exception {
        //Validaciones
 	   DatosStep datosStep = TestCaseData.getDatosLastStep();
@@ -921,120 +921,161 @@ public class PageGaleriaStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }       
        
        //Validaciones.
-       String saleTraduction = UtilsTestMango.getSaleTraduction(idioma);
-       descripValidac =
-           "<b style=\"color:blue\">Rebajas</b></br>" +
-           "1) Es visible el banner de cabecera<br>" +
-           "2) El banner de cabecera es de rebajas  (contiene un símbolo de porcentaje o \"" + saleTraduction + "\")<br>" +
-           "3) El banner de cabecera no es lincable<br>" +
-           "4) El banner de cabecera contiene un link de \"Más info\"";
-       datosStep.setNOKstateByDefault();   
-       listVals = ListResultValidation.getNew(datosStep);
-       try {
-           if (!PageGaleriaDesktop.secBannerHead.isVisible(dFTest.driver)) {
-               listVals.add(1, State.Defect);
-           }
-           String textBanner = PageGaleriaDesktop.secBannerHead.getText(dFTest.driver);
-           if (!UtilsTestMango.textContainsPercentage(textBanner, idioma) &&
-               !textBanner.contains(saleTraduction)) {
-               listVals.add(2, State.Defect);
-           }
-           if (PageGaleriaDesktop.secBannerHead.isLinkable(dFTest.driver)) {
-               listVals.add(3, State.Info);
-           }
-           if (!PageGaleriaDesktop.secBannerHead.isVisibleLinkInfoRebajas(dFTest.driver)) {
-               listVals.add(4, State.Warn);           
-           }
-                
-           datosStep.setListResultValidations(listVals);
+       if (salesOnInCountry) {
+	       String saleTraduction = UtilsTestMango.getSaleTraduction(idioma);
+	       descripValidac =
+	           "<b style=\"color:blue\">Rebajas</b></br>" +
+	           "1) Es visible el banner de cabecera<br>" +
+	           "2) El banner de cabecera es de rebajas  (contiene un símbolo de porcentaje o \"" + saleTraduction + "\")<br>" +
+	           "3) El banner de cabecera no es lincable<br>" +
+	           "4) El banner de cabecera contiene un link de \"Más info\"";
+	       datosStep.setNOKstateByDefault();   
+	       listVals = ListResultValidation.getNew(datosStep);
+	       try {
+	           if (!PageGaleriaDesktop.secBannerHead.isVisible(dFTest.driver)) {
+	               listVals.add(1, State.Defect);
+	           }
+	           String textBanner = PageGaleriaDesktop.secBannerHead.getText(dFTest.driver);
+	           if (!UtilsTestMango.textContainsPercentage(textBanner, idioma) &&
+	               !textBanner.contains(saleTraduction)) {
+	               listVals.add(2, State.Defect);
+	           }
+	           if (PageGaleriaDesktop.secBannerHead.isLinkable(dFTest.driver)) {
+	               listVals.add(3, State.Info);
+	           }
+	           if (!PageGaleriaDesktop.secBannerHead.isVisibleLinkInfoRebajas(dFTest.driver)) {
+	               listVals.add(4, State.Warn);           
+	           }
+	                
+	           datosStep.setListResultValidations(listVals);
+	       }
+	       finally { listVals.checkAndStoreValidations(descripValidac); }
        }
-       finally { listVals.checkAndStoreValidations(descripValidac); }
+       else {
+	       String saleTraduction = UtilsTestMango.getSaleTraduction(idioma);
+	       descripValidac =
+	           "<b style=\"color:blue\">Rebajas</b></br>" +
+	           "1) El banner de cabecera NO es de rebajas  (NO contiene un símbolo de porcentaje o \"" + saleTraduction + "\")";
+	       datosStep.setNOKstateByDefault();   
+	       listVals = ListResultValidation.getNew(datosStep);
+	       try {
+	           if (PageGaleriaDesktop.secBannerHead.isVisible(dFTest.driver)) {
+		           String textBanner = PageGaleriaDesktop.secBannerHead.getText(dFTest.driver);
+		           if (UtilsTestMango.textContainsPercentage(textBanner, idioma) ||
+		               textBanner.contains(saleTraduction)) {
+		               listVals.add(1, State.Defect);
+		           }
+	           }
+	                
+	           datosStep.setListResultValidations(listVals);
+	       }
+	       finally { listVals.checkAndStoreValidations(descripValidac); }
+       }
        
        SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(Channel.desktop, AppEcom.shop, dFTest.driver);
-       if (!isGaleriaSale) {
+       if (salesOnInCountry) {
+	       if (!isGaleriaSale) {
+	           //Validaciones.
+	           descripValidac =
+	               "<b style=\"color:blue\">Rebajas</b></br>" +
+	               "1) Son visibles los menús laterales de filtro a nivel detemporadas (Collection)<br>" +
+	               "2) Aparece el filtro para todas las temporadas <b>All</b>)<br>" +
+	               "3) Aparece el filtro para las ofertas <b>Sale</b><br>" +
+	               "4) Aparece el filtro para la nueva temporada <b>Next season preview</b>";
+	           datosStep.setNOKstateByDefault();    
+	           listVals = ListResultValidation.getNew(datosStep);
+	           try {
+	               if (!filtrosCollection.isVisible()) {
+	                   listVals.add(1, State.Defect);
+	               }
+	               if (!filtrosCollection.isVisibleMenu(FilterCollection.all)) {
+	                   listVals.add(2, State.Warn);           
+	               }
+	               if (!filtrosCollection.isVisibleMenu(FilterCollection.sale)) {
+	                   listVals.add(3, State.Warn);
+	               }
+	               if (!filtrosCollection.isVisibleMenu(FilterCollection.nextSeason)) {
+	                   listVals.add(4, State.Warn);
+	               }
+	                    
+	               datosStep.setListResultValidations(listVals);
+	           }
+	           finally { listVals.checkAndStoreValidations(descripValidac); }       
+	       }
+	       else {
+	           //Validaciones.
+	           descripValidac =
+	               "<b style=\"color:blue\">Rebajas</b></br>" +
+	               "1) No son visibles los menús laterales de filtro a nivel detemporadas (Collection)<b>";
+	           datosStep.setNOKstateByDefault();   
+	           listVals = ListResultValidation.getNew(datosStep);
+	           try {
+	               if (filtrosCollection.isVisible()) {
+	                   listVals.add(1, State.Defect);
+	               }
+	                    
+	               datosStep.setListResultValidations(listVals);
+	           }
+	           finally { listVals.checkAndStoreValidations(descripValidac); }
+	       }
+       }
+       else {
            //Validaciones.
            descripValidac =
                "<b style=\"color:blue\">Rebajas</b></br>" +
-               "1) Son visibles los menús laterales de filtro a nivel detemporadas (Collection)<br>" +
-               "2) Aparece el filtro para todas las temporadas <b>All</b>)<br>" +
-               "3) Aparece el filtro para las ofertas <b>Sale</b><br>" +
-               "4) Aparece el filtro para la nueva temporada <b>Next season preview</b>";
+               "1) No aparece el filtro para las ofertas <b>Sale</b>";
            datosStep.setNOKstateByDefault();    
            listVals = ListResultValidation.getNew(datosStep);
            try {
-               if (!filtrosCollection.isVisible()) {
-                   listVals.add(1, State.Defect);
-               }
-               if (!filtrosCollection.isVisibleMenu(FilterCollection.all)) {
-                   listVals.add(2, State.Warn);           
-               }
-               if (!filtrosCollection.isVisibleMenu(FilterCollection.sale)) {
-                   listVals.add(3, State.Warn);
-               }
-               if (!filtrosCollection.isVisibleMenu(FilterCollection.nextSeason)) {
-                   listVals.add(4, State.Warn);
+               if (filtrosCollection.isVisibleMenu(FilterCollection.sale)) {
+                   listVals.add(1, State.Warn);
                }
                     
                datosStep.setListResultValidations(listVals);
            }
            finally { listVals.checkAndStoreValidations(descripValidac); }       
        }
-       else {
-           //Validaciones.
-           descripValidac =
-               "<b style=\"color:blue\">Rebajas</b></br>" +
-               "1) No son visibles los menús laterales de filtro a nivel detemporadas (Collection)<b>";
-           datosStep.setNOKstateByDefault();   
-           listVals = ListResultValidation.getNew(datosStep);
-           try {
-               if (filtrosCollection.isVisible()) {
-                   listVals.add(1, State.Defect);
-               }
-                    
-               datosStep.setListResultValidations(listVals);
-           }
-           finally { listVals.checkAndStoreValidations(descripValidac); }
-       }
        
-       //Validaciones.
-       FilterOrdenacion ordenType;
-       List<String> lineasInvertidas = RebajasPaisDAO.getLineasInvertidas(pais.getCodigo_pais(), menuType);
-       boolean temporadaInvertida = (lineasInvertidas!=null && lineasInvertidas.contains(lineaType.toString()));
-       if (!temporadaInvertida || isGaleriaSale)
-    	   ordenType = FilterOrdenacion.BloqueTemporadas_2y3_despues_la_4; 
-       else
-    	   ordenType = FilterOrdenacion.BloqueTemporada_4_despues_la_2y3;
-       
-       descripValidac =
-           "<b style=\"color:blue\">Rebajas</b></br>" +
-           "1) El 1er artículo pertenece a alguna de las temporadas " + ordenType.getTemporadasIniciales() + " <br>" +
-           "2) Los artículos aparecen ordenados por <b>" + ordenType.toString() + "</b>";
-       datosStep.setNOKstateByDefault(); 
-       listVals = ListResultValidation.getNew(datosStep);
-       try {
-           State levelErrorValidation2 = State.Info_NoHardcopy;
-           String ref1rstArticle = pageGaleria.getReferencia(1/*posArticle*/);
-           int temporada1rstArticle = 0;
-           if ("".compareTo(ref1rstArticle)!=0) {
-        	   temporada1rstArticle = Integer.valueOf(ref1rstArticle.substring(0,1));
-           }
-           
-           if (!ordenType.getTemporadasIniciales().contains(temporada1rstArticle)) {
-               listVals.add(1, State.Warn);
-               levelErrorValidation2 = State.Warn;
-           }
-           String notInOrder = pageGaleria.getAnyArticleNotInOrder(ordenType);
-           if ("".compareTo(notInOrder)!=0) {
-               descripValidac+=
-                   "<br>" +
-                   "<b>Warning!</b> " + notInOrder;
-               listVals.add(2, levelErrorValidation2);
-           }
-                
-           datosStep.setListResultValidations(listVals);
+       if (salesOnInCountry) {
+	       //Validaciones.
+	       FilterOrdenacion ordenType;
+	       List<String> lineasInvertidas = RebajasPaisDAO.getLineasInvertidas(pais.getCodigo_pais(), menuType);
+	       boolean temporadaInvertida = (lineasInvertidas!=null && lineasInvertidas.contains(lineaType.toString()));
+	       if (!temporadaInvertida || isGaleriaSale)
+	    	   ordenType = FilterOrdenacion.BloqueTemporadas_2y3_despues_la_4; 
+	       else
+	    	   ordenType = FilterOrdenacion.BloqueTemporada_4_despues_la_2y3;
+	       
+	       descripValidac =
+	           "<b style=\"color:blue\">Rebajas</b></br>" +
+	           "1) El 1er artículo pertenece a alguna de las temporadas " + ordenType.getTemporadasIniciales() + " <br>" +
+	           "2) Los artículos aparecen ordenados por <b>" + ordenType.toString() + "</b>";
+	       datosStep.setNOKstateByDefault(); 
+	       listVals = ListResultValidation.getNew(datosStep);
+	       try {
+	           State levelErrorValidation2 = State.Info_NoHardcopy;
+	           String ref1rstArticle = pageGaleria.getReferencia(1/*posArticle*/);
+	           int temporada1rstArticle = 0;
+	           if ("".compareTo(ref1rstArticle)!=0) {
+	        	   temporada1rstArticle = Integer.valueOf(ref1rstArticle.substring(0,1));
+	           }
+	           
+	           if (!ordenType.getTemporadasIniciales().contains(temporada1rstArticle)) {
+	               listVals.add(1, State.Warn);
+	               levelErrorValidation2 = State.Warn;
+	           }
+	           String notInOrder = pageGaleria.getAnyArticleNotInOrder(ordenType);
+	           if ("".compareTo(notInOrder)!=0) {
+	               descripValidac+=
+	                   "<br>" +
+	                   "<b>Warning!</b> " + notInOrder;
+	               listVals.add(2, levelErrorValidation2);
+	           }
+	                
+	           datosStep.setListResultValidations(listVals);
+	       }
+	       finally { listVals.checkAndStoreValidations(descripValidac); }      
        }
-       finally { listVals.checkAndStoreValidations(descripValidac); }       
-
    }
    
    public void validaArticlesOfTemporadas(List<Integer> listTemporadas, State levelError, DatosStep datosStep) {

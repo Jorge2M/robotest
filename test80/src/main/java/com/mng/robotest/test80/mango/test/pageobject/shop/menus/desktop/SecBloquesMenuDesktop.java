@@ -149,6 +149,15 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
         clickAndWaitLoad(driver, By.xpath(xpathMenu));
     }    
     
+    public static boolean isPresentMenuFirstLevel(Menu1rstLevel menu1rstLevel, AppEcom app, WebDriver driver) 
+    throws Exception {
+    	LineaType lineaMenu = menu1rstLevel.getLinea();
+    	SublineaNinosType sublineaMenu = menu1rstLevel.getSublinea();
+        SecLineasMenuDesktop.hoverLineaAndWaitForMenus(lineaMenu, sublineaMenu, app, driver);
+        String xpathMenu = getXPathMenuSuperiorLinkVisible(menu1rstLevel);
+        return (isElementVisibleUntil(driver, By.xpath(xpathMenu), 2));
+    }
+    
     public static void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel, WebDriver driver) 
     throws Exception {
         SecLineasMenuDesktop.hoverLineaAndWaitForMenus(menu1rstLevel.getLinea(), menu1rstLevel.getSublinea(), menu1rstLevel.getApp(), driver);

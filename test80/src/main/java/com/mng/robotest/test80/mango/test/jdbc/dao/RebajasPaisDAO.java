@@ -18,9 +18,12 @@ import java.util.Calendar;
 
 public class RebajasPaisDAO {
     public static String SQLSelectRebajasPais = 
-        "SELECT REBAJAS " +
+        "SELECT REBAJAS, INICIO, FIN " +
         "  FROM REBAJAS_PAISCOMPRA " +
-        " WHERE CODIGOPAIS = ?";
+        " WHERE CODIGOPAIS = ? AND" +
+        "  REBAJAS = 1 AND " +
+        "  INICIO is not null AND " +
+        "  FIN is not null";
     
     public static String SQLSelectMaxRebajasPais = 
     	"SELECT MAXREBAJAS " +
@@ -79,16 +82,24 @@ public class RebajasPaisDAO {
      * @param codigoPais en formato XXX
      * @return si están activadas o no las rebajas en dicho país
      */
-    public static boolean isRebajasPais(String codigoPais) {
+    public static boolean isRebajasEnabledPais(String codigoPais) throws Exception {
         boolean rebajas = false;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date fechaHoyDate = new Date(Calendar.getInstance().getTime().getTime());
         try (Connection conn = Connector.getConnection(true/*forReadOnly*/);
             PreparedStatement select = conn.prepareStatement(SQLSelectRebajasPais)) {
             select.setString(1, codigoPais);
             try (ResultSet resultado = select.executeQuery()) {
                 if (resultado.next()) {
                     int rebajasInt = resultado.getInt("REBAJAS");
-                    if (rebajasInt==1)
-                        rebajas = true;
+                    if (rebajasInt==1) {
+                        Date fechaIni = dateFormat.parse(resultado.getString("INICIO"));
+                        Date fechaFin = dateFormat.parse(resultado.getString("FIN"));
+                        if (fechaIni.getTime() < fechaHoyDate.getTime() &&
+                            fechaFin.getTime() > fechaHoyDate.getTime()) {                           
+                        	return true;
+                        }
+                    }
                 }
             }
             

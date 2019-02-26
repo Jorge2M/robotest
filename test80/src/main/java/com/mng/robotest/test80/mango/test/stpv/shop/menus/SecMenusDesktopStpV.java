@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -39,6 +42,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu2onLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecBloquesMenuDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataFichaArt;
@@ -52,6 +56,8 @@ import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
 @SuppressWarnings({"static-access"})
 public class SecMenusDesktopStpV {
 
+    private final static String prefixSale = "<b style=\"color:blue\">Rebajas</b></br>";
+	
     public static SecMenusUserStpV secMenusUser;
     
     /**
@@ -803,7 +809,7 @@ public class SecMenusDesktopStpV {
     	List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
     	List<Integer> tempSales = FilterCollection.sale.getListTempArticles();
         String descripValidac = 
-            "<b style=\"color:blue\">Rebajas</b></br>" +        		   
+            prefixSale +        		   
             "1) No hay artículos con las siguientes características:<br>" + 
             " * Rebajados</b><br>" +
             " * De temporadas anteriores " + tempSales + "<br>" +
@@ -832,7 +838,7 @@ public class SecMenusDesktopStpV {
         //Validación especialmente útil en periodo de Rebajas
         ArrayList<Integer> temporadaOld = new ArrayList<Integer>(Arrays.asList(2));  
         descripValidac = 
-            "<b style=\"color:blue\">Rebajas</b></br>" +        		   
+            prefixSale +        		   
             "1) No hay artículos <b>de Temporada " + temporadaOld + "</b> con alguna de las etiquetas <b>" + listLabelsWrong + "</b> " + 
               "(en sus correspondientes traducciones)"; 
         datosStep.setNOKstateByDefault();
@@ -856,7 +862,7 @@ public class SecMenusDesktopStpV {
     
         ArrayList<Integer> temporadaNew = new ArrayList<Integer>(Arrays.asList(3));
         descripValidac = 
-            "<b style=\"color:blue\">Rebajas</b></br>" +        		   
+            prefixSale +        		   
             "1) No hay artículos <b>de Temporada " + temporadaNew + "</b> con las 2 etiquetas <b>New Collection</b> y <b>New Now</b> " + 
               "(en sus correspondientes traducciones)"; 
         datosStep.setNOKstateByDefault();
@@ -878,5 +884,13 @@ public class SecMenusDesktopStpV {
             datosStep.setListResultValidations(listVals);
         } 
         finally { listVals.checkAndStoreValidations(descripValidac); }    	
+    }
+    
+    @Validation (
+    	description=prefixSale + "1) No es visible el menú superior <b>#{menu1rstLevel.getNombre()}</b>",
+    	level=State.Warn)
+    public static boolean isNotPresentMenuSuperior(Menu1rstLevel menu1rstLevel, AppEcom app, WebDriver driver) 
+    throws Exception {
+    	return (!SecBloquesMenuDesktop.isPresentMenuFirstLevel(menu1rstLevel, app, driver));
     }
 }
