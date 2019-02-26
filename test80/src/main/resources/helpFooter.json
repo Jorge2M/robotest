@@ -1,0 +1,81 @@
+{
+ 	"Caso": "Ayuda",
+ 	"Apartados": {
+		   "Preguntas Frecuentes": [
+				{"Apartado": "¿Dónde está mi pedido?" }
+		   ],
+
+		   "Como comprar": [
+				{"Apartado": "Comprar en Mango.com" },
+				{"Apartado": "Comprar a través de la App"},
+				{"Apartado": "Comprar por teléfono"},
+				{"Apartado": "Comprar en nuestras tiendas"}
+		   ],
+
+		   "Formas de pago": [
+				{"Apartado": "Métodos de pago" },
+				{"Apartado": "Seguridad" },
+				{"Apartado": "Limite de compre" }
+		   ],
+
+		   "Envio": [
+				{"Apartado": "Métodos y coste del envío" },
+				{"Apartado": "Múltiples pedidos" },
+				{"Apartado": "Seguimiento de tu pedido" },
+				{"Apartado": "Aún no he recibido mi pedido" },
+				{"Apartado": "Los artículos recibidos son incorrectos o tienen un defecto" },
+				{"Apartado": "No he recibido todos los artículos de mi compra" }
+		   ],
+
+		   "Cambios y devoluciones": [
+				{"Apartado": "Devolución gratuita en tienda" },
+				{"Apartado": "Recogida gratuita a domicilio" },
+				{"Apartado": "Devolución gratuita punto Celeritas" },
+				{"Apartado": "Cambios" },
+				{"Apartado": "Condiciones de devoluciones" },
+				{"Apartado": "Derecho de desistimiento" },
+				{"Apartado": "Reembolsos" },
+				{"Apartado": {
+					"Compras en tiendas mango": "Devoluciones"}
+				},
+				{"Apartado": {
+					"Compras en tienda mango a través de ipad": "Devoluciones"}
+				}
+		   ],
+
+		   "Registro": [
+				{"Apartado": "Registrarme en Mango.com" },
+				{"Apartado": "Actualizar o modificar las Newsletters que recibo por mail" },
+				{"Apartado": "Añadir un artículo a favoritos" },
+				{"Apartado": "Cambiar mis datos" },
+				{"Apartado": "He olvidado mi contraseña" },
+				{"Apartado": "Desactivar mi cuenta" }
+		   ],
+
+		   "Tarjetas regalo": [
+				{"Apartado": "Tarjeta Regalo Mango" },
+				{"Apartado": "¿Cómo utilizar la Tarjeta Regalo?" },
+				{"Apartado": "¿Dónde puedo consultar el saldo de mi Tarjeta Regalo?" }
+		   ],
+
+		   "Cuida tus prendas": [
+				{"Apartado": "10 consejos para que tus prendas estén siempre impecables" },
+				{"Apartado": "Símbolos de lavado" },
+				{"Apartado": "Fibras químicas" },
+				{"Apartado": "Fibras naturales" }
+		   ],
+
+		   "Contacto": [
+				{"Validacion": "Email" },
+				{"Validacion": "Teléfono" },
+				{"Validacion": "Correo postal" },
+				{"Validacion": "Ver mapa" }
+		   ],
+
+		   "Buscar una tienda": [],
+		   "Guía de tallas": [],
+		   "Mango Card": [],
+		   "Contactanos": "901159543",
+		   "Enviar un email": []
+	}
+}
