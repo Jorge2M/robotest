@@ -167,6 +167,7 @@ public class SmokeTestXML {
         
         //Existen un conjunto de tests que todavía no están implementados en el canal movil_web
         if (this.params.getChannel()==Channel.desktop) {
+            listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.appshop.Ayuda"));
             listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.appshop.Otras"));
             listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.appshop.SEO"));
             listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.appshop.IniciarSesion"));

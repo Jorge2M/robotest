@@ -1,77 +1,67 @@
 {
- 	"Caso": "Ayuda",
- 	"Apartados": [
-		{"Preguntas Frecuentes": [
-			"¿Dónde está mi pedido?"
-		]},
+ 	"Preguntas frecuentes": [
+		"¿Dónde está mi pedido?"
+	],
 
-		{"Como comprar": [
-			"Comprar en Mango.com",
-			"Comprar a través de la App",
-			"Comprar por teléfono",
-			"Comprar en nuestras tiendas"
-		]},
+	"Cómo comprar": [
+		"Comprar en Mango.com",
+		"Comprar a través de la app",
+		"Comprar por teléfono",
+		"Comprar en nuestras tiendas"
+	],
 
-		{"Formas de pago": [
-			"Métodos de pago",
-			"Seguridad",
-			"Limite de compre"
-		]},
+	"Formas de pago": [
+		"Métodos de pago",
+		"Seguridad",
+		"Límite de compra"
+	],
 
-		{"Envio": [
-			"Métodos y coste del envío",
-			"Múltiples pedidos",
-			"Seguimiento de tu pedido",
-			"Aún no he recibido mi pedido",
-			"Los artículos recibidos son incorrectos o tienen un defecto",
-			"No he recibido todos los artículos de mi compra"
-		]},
+	"Envío": [
+		"Métodos y coste del envío",
+		"Múltiples pedidos",
+		"Seguimiento de tu pedido",
+		"Aún no he recibido mi pedido",
+		"Los artículos recibidos son incorrectos o tienen un defecto",
+		"No he recibido todos los artículos de mi compra"
+	],
 
-		{"Cambios y devoluciones": [
-			"Devolución gratuita en tienda",
-			"Recogida gratuita a domicilio",
-			"Devolución gratuita punto Celeritas",
-			"Cambios",
-			"Condiciones de devoluciones",
-			"Derecho de desistimiento",
-			"Reembolsos",
-			{"Compras en tiendas mango": "Devoluciones"},
-			{"Compras en tienda mango a través de ipad": "Devoluciones"}
-		]},
+	"Cambios y devoluciones": [
+		"Devolución gratuita en tienda",
+		"Recogida gratuita a domicilio",
+		"Devolución gratuita punto Celeritas",
+		"Cambios",
+		"Condiciones de devoluciones",
+		"Derecho de desistimiento",
+		"Reembolsos"
+	],
 
-		{"Registro": [
-			"Registrarme en Mango.com",
-			"Actualizar o modificar las Newsletters que recibo por mail",
-			"Añadir un artículo a favoritos",
-			"Cambiar mis datos",
-			"He olvidado mi contraseña",
-			"Desactivar mi cuenta"
-		]},
+	"Registro": [
+		"Registrarme en Mango.com",
+		"Actualizar o modificar las Newsletters que recibo por email",
+		"Añadir un artículo a Favoritos",
+		"Cambiar mis datos",
+		"He olvidado mi contraseña",
+		"Desactivar mi cuenta"
+	],
 
-		{"Tarjetas regalo": [
-			"Tarjeta Regalo Mango",
-			"¿Cómo utilizar la Tarjeta Regalo?",
-			"¿Dónde puedo consultar el saldo de mi Tarjeta Regalo?"
-		]},
+	"Tarjetas regalo": [
+		"Tarjeta Regalo Mango",
+		"¿Cómo utilizar la Tarjeta Regalo?",
+		"¿Dónde puedo consultar el saldo de mi Tarjeta Regalo?"
+	],
 
-		{"Cuida tus prendas": [
-			"10 consejos para que tus prendas estén siempre impecables",
-			"Símbolos de lavado",
-			"Fibras químicas",
-			"Fibras naturales"
-		]},
+	"Cuida tus prendas": [
+		"10 consejos para que tus prendas estén siempre impecables",
+		"Símbolos de lavado",
+		"Fibras químicas",
+		"Fibras naturales"
+	],
 
-		{"Contacto": [
-			"Email",
-			"Teléfono",
-			"Correo postal",
-			"Ver mapa"
-		]},
-
-		{"Buscar una tienda": []},
-		{"Guía de tallas": []},
-		{"Mango Card": []},
-		{"Contactanos": ["901159543"]},
-		{"Enviar un email": []}
+	"Contacto": [
+		"EMAIL",
+		"TELÉFONO",
+		"CORREO POSTAL",
+		"Ver mapa"
 	]
+
 }

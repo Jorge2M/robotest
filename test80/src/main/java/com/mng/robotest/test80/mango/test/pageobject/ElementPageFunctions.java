@@ -34,10 +34,6 @@ public class ElementPageFunctions {
     	return (isElementInStateUntil(elemBy, state, maxSecondsWait, driver));
     }
 
-    public static boolean isElementInStateUntil(String xPath, StateElem state, int maxSecondsWait, WebDriver driver) {
-	    return (isElementInStateUntil(xPath, state, maxSecondsWait, driver));
-    }
-    
     private static boolean isElementInStateUntil(By elemBy, StateElem state, int maxSecondsWait, WebDriver driver) {
     	switch (state) {
     	case Visible:
@@ -48,6 +44,18 @@ public class ElementPageFunctions {
     	default:
         	return WebdrvWrapp.isElementPresentUntil(driver, elemBy, maxSecondsWait);
     	}
+    }
+
+    public static boolean isElementInStateUntil(String xPath, StateElem state, int maxSecondsWait, WebDriver driver) {
+	    switch (state) {
+        case Visible:
+            return WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(xPath), maxSecondsWait);
+        case Clickable:
+            return WebdrvWrapp.isElementClickableUntil(driver, By.xpath(xPath), maxSecondsWait);
+        case Present:
+        default:
+                return WebdrvWrapp.isElementPresentUntil(driver, By.xpath(xPath), maxSecondsWait);
+        }
     }
 
     public static void selectInDropDown(ElementPage dropDown, String value, WebDriver driver) {
@@ -73,7 +81,7 @@ public class ElementPageFunctions {
     	WebdrvWrapp.clickAndWaitLoad(driver, by, typeOfClick);
     }
     
-    public static void clickElementVisibleAndWaitLoad(ElementPage element, int maxSecondsToWait, WebDriver driver) throws Exception {
+    protected static void clickElementVisibleAndWaitLoad(ElementPage element, int maxSecondsToWait, WebDriver driver) throws Exception {
         WebdrvWrapp.clickElementVisibleAndWaitLoad(driver, By.xpath(element.getXPath()), maxSecondsToWait);
     }
 
@@ -123,11 +131,11 @@ public class ElementPageFunctions {
         selectElement(element, driver);
     }
 
-    public static void inputDataInElement(ElementPage element, String dataToInput, WebDriver driver) throws Exception {
+    public static void inputDataInElement(ElementPage element, String dataToInput, WebDriver driver) {
     	WebdrvWrapp.sendKeysWithRetry(2, dataToInput, By.xpath(element.getXPath()), driver);
     }
     
-    public static WebElement getElementWeb(ElementPage element, WebDriver driver) {
+    protected static WebElement getElementWeb(ElementPage element, WebDriver driver) {
     	try {
     		return (driver.findElement(By.xpath(element.getXPath())));
     	}
