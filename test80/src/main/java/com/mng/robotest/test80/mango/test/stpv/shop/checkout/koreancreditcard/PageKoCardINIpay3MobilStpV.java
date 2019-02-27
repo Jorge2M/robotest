@@ -1,48 +1,29 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay3Mobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay3Mobil.BodyPageKoCardINIpay3;
 
 public class PageKoCardINIpay3MobilStpV extends ElementPageFunctions {
 	
-	public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
-	    //Validation
-	    String descripValidac =
-	        "1) Aparece la 3a página de INIpay";
-        datosStep.setNOKstateByDefault(); 
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-	    try {
-	        if (!PageKoCardINIpay3Mobil.isPage(dFTest.driver)) {
-	        	listVals.add(1, State.Defect);
-	        }
-	        	
-	        datosStep.setListResultValidations(listVals);
-	    } 
-	    finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation (
+		description="Aparece la 3a página de INIpay",
+		level=State.Defect)
+	public static boolean validateIsPage(WebDriver driver) {
+	    return (PageKoCardINIpay3Mobil.isPage(driver));
 	}
 	
-	public static DatosStep clickNextButton(DataFmwkTest dFTest) throws Exception {
-	    //Step
-	    DatosStep datosStep = new DatosStep     (
-	        "Seleccionamos el <b>Next Button</b>",
-	        "Aparece la 4a y última página de INIpay con resultado OK");
-	    datosStep.setNOKstateByDefault();
-	    try {
-	    	clickElementVisibleAndWaitLoad(BodyPageKoCardINIpay3.nextButton, 0, dFTest.driver);
-	        
-	        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-	    } 
-	    finally { StepAspect.storeDataAfterStep(datosStep); }
+	@Step (
+		description="Seleccionamos el <b>Next Button</b>",
+	    expected="Aparece la 4a y última página de INIpay con resultado OK")
+	public static void clickNextButton(WebDriver driver) throws Exception {
+		clickElementVisibleAndWaitLoad(BodyPageKoCardINIpay3.nextButton, 0, driver);
 	    
 	    //Validations
-	    PageKoCardINIpay4MobilStpV.validateIsPage(datosStep, dFTest);
-
-	    return datosStep;
+	    PageKoCardINIpay4MobilStpV.validateIsPage(driver);
 	}
 }

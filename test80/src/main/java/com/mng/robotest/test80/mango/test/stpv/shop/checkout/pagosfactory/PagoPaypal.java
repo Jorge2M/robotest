@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -30,40 +31,40 @@ public class PagoPaypal extends PagoStpV {
     @Override
     public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
         PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
-        DatosStep datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
+        PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
         int maxSecondsWait = 10;
-        ModalPreloaderSppinerStpV.validateAppearsAndDisappears(datosStep, dFTest);
+        ModalPreloaderSppinerStpV.validateAppearsAndDisappears(dFTest.driver);
         switch (getInitPagePaypal(dFTest.driver)) {
         case Login:
-            PagePaypalLoginStpV.validateIsPageUntil(0, datosStep, this.dFTest);
+            PagePaypalLoginStpV.validateIsPageUntil(0, dFTest.driver);
             break;
         case CreacionCuenta:
-        	datosStep = PagePaypalCreacionCuentaStpV.clickButtonIniciarSesion(this.dFTest);
+        	PagePaypalCreacionCuentaStpV.clickButtonIniciarSesion(dFTest.driver);
         	break;
         }
         
         if (execPay) {
             DataPedido dataPedido = this.dCtxPago.getDataPedido();
             dataPedido.setCodtipopago("P");
-        	ModalPreloaderSppinerStpV.validateIsVanished(maxSecondsWait, datosStep, dFTest);
+        	ModalPreloaderSppinerStpV.validateIsVanished(maxSecondsWait, dFTest.driver);
             if (PagePaypalLogin.isPageUntil(0, this.dFTest.driver)) {
                 PagePaypalLoginStpV.loginPaypal(dataPedido.getPago().getUseremail(), dataPedido.getPago().getPasswordemail(), this.dFTest);
             }
             
-            ModalPreloaderSppinerStpV.validateIsVanished(maxSecondsWait, datosStep, dFTest);
+            ModalPreloaderSppinerStpV.validateIsVanished(maxSecondsWait, dFTest.driver);
             if (getPostLoginPagePaypal()==PostLoginPagePaypal.SelectPago) {
-            	PagePaypalSelectPagoStpV.validateIsPageUntil(0, datosStep, dFTest);
-            	datosStep = PagePaypalSelectPagoStpV.clickContinuarButton(this.dFTest);      
+            	PagePaypalSelectPagoStpV.validateIsPageUntil(0, dFTest.driver);
+            	PagePaypalSelectPagoStpV.clickContinuarButton(dFTest.driver);      
             }
             
             maxSecondsWait = 3;
             if (PagePaypalConfirmacion.isPageUntil(maxSecondsWait, dFTest.driver)) {
-	            PagePaypalConfirmacionStpV.validateIsPageUntil(0, datosStep, dFTest);
-	            datosStep = PagePaypalConfirmacionStpV.clickContinuarButton(dFTest);
+	            PagePaypalConfirmacionStpV.validateIsPageUntil(0, dFTest.driver);
+	            PagePaypalConfirmacionStpV.clickContinuarButton(dFTest.driver);
             }
         }
         
-        return datosStep;
+        return TestCaseData.getDatosLastStep();
     }
     
     private enum InitPagePaypal {Login, CreacionCuenta}

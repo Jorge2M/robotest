@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecFitFinder;
 public class SecFitFinderStpV {
     
 	@Validation
-    public static void validateIsOkAndClose(WebDriver driver) {
+    public static ListResultValidation validateIsOkAndClose(WebDriver driver) {
     	ListResultValidation validations = ListResultValidation.getNew();
     	int maxSecondsWait = 2;
       	validations.add(
@@ -23,5 +23,6 @@ public class SecFitFinderStpV {
     		SecFitFinder.isVisibleInputPeso(driver), State.Warn);
 
     	SecFitFinder.clickAspaForCloseAndWait(driver);
+    	return validations;
     }
 }

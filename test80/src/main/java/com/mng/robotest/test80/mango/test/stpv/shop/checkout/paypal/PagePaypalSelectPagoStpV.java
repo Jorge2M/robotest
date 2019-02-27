@@ -1,46 +1,27 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.paypal;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal.PagePaypalSelectPago;
-
 
 public class PagePaypalSelectPagoStpV {
     
-    public static void validateIsPageUntil(int maxSecondsWait, DatosStep datosStep, DataFmwkTest dFTest) {
-        //Validaciones
-        String descripValidac =
-            "1) Aparece la página de Selección del Pago (la esperamos hasta " + maxSecondsWait + " segundos)";      
-        datosStep.setNOKstateByDefault(); 
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {    
-            if (!PagePaypalSelectPago.isPageUntil(maxSecondsWait, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-                            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation (
+		description="Aparece la página de Selección del Pago (la esperamos hasta #{maxSecondsWait} segundos)",
+		level=State.Defect)
+    public static boolean validateIsPageUntil(int maxSecondsWait, WebDriver driver) {
+        return (PagePaypalSelectPago.isPageUntil(maxSecondsWait, driver));
     }
     
-    public static DatosStep clickContinuarButton(DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep     (
-            "Seleccionar el botón \"Continuar\"", 
-            "Aparece la página de Mango de resultado OK del pago");
-        datosStep.setNOKstateByDefault();    
-        try {       
-            PagePaypalSelectPago.clickContinuarButton(dFTest.driver);
+    @Step (
+    	description="Seleccionar el botón \"Continuar\"", 
+        expected="Aparece la página de Mango de resultado OK del pago")
+    public static void clickContinuarButton(WebDriver driver) throws Exception {     
+        PagePaypalSelectPago.clickContinuarButton(driver);
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-
-        ModalPreloaderSppinerStpV.validateAppearsAndDisappears(datosStep, dFTest);
-
-        return datosStep;
+        //Validations
+        ModalPreloaderSppinerStpV.validateAppearsAndDisappears(driver);
     }
 }

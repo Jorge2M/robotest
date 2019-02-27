@@ -39,7 +39,7 @@ public class SecConfirmDatosStpV {
 		ListResultValidation validations = ListResultValidation.getNew();
       	validations.add(
     		"Desaparece la capa de Droppoints<br>",
-    		ModalDroppoints.isVisible(channel, driver), State.Warn);
+    		!ModalDroppoints.isVisible(channel, driver), State.Warn);
       	
 	    DataDeliveryPoint dataDp = dataPedido.getDataDeliveryPoint();
 	    String textDireccionEnvioCompleta = PageCheckoutWrapper.getTextDireccionEnvioCompleta(channel, driver);
