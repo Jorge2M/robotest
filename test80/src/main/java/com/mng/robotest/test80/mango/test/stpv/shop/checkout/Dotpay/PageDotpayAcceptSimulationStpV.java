@@ -1,49 +1,33 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.Dotpay;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.dotpay.PageDotpayAcceptSimulation;
-
 
 public class PageDotpayAcceptSimulationStpV {
     
-    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) Aparece la página de Dotpay para la introducción de los datos del pagador<br>" +
-            "2) Figura un botón de aceptar rojo";
-        datosStep.setNOKstateByDefault();    
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageDotpayAcceptSimulation.isPage(dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            if (!PageDotpayAcceptSimulation.isPresentRedButtonAceptar(dFTest.driver)) {
-                listVals.add(2, State.Defect); 
-            }
-                                                
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+    public static ListResultValidation validateIsPage(WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
+      	validations.add(
+    		"Aparece la página de Dotpay para la introducción de los datos del pagador<br>",
+    		PageDotpayAcceptSimulation.isPage(driver), State.Warn);
+      	validations.add(
+    		"Figura un botón de aceptar rojo",
+    		PageDotpayAcceptSimulation.isPresentRedButtonAceptar(driver), State.Defect);
+      	return validations;
     }
     
-    public static DatosStep clickRedButtonAceptar(DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep (
-            "Seleccionar el botón rojo para aceptar", 
-            "Aparece la página resultado");
-        try {
-            PageDotpayAcceptSimulation.clickRedButtonAceptar(dFTest.driver);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+	@Step (
+		description="Seleccionar el botón rojo para aceptar", 
+        expected="Aparece la página resultado")
+    public static void clickRedButtonAceptar(WebDriver driver) throws Exception {
+        PageDotpayAcceptSimulation.clickRedButtonAceptar(driver);
         
         //Validation
-        PageDotpayResultadoStpV.validateIsPage(datosStep, dFTest);
-        
-        return datosStep;
+        PageDotpayResultadoStpV.validateIsPage(driver);
     }
 }

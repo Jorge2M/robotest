@@ -288,15 +288,17 @@ public class PageCheckoutWrapperStpV {
     }
     
     public static void validateSelectPagoTRJintegrada(Pago pago, Pais pais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
-        if (channel==Channel.desktop)
+        if (channel==Channel.desktop) {
             validateIsPresentButtonCompraDesktop(datosStep, dFTest);
+        }
         
-        PageCheckoutWrapperStpV.secTarjetaPci.validateIsSectionOk(pago, pais, channel, datosStep, dFTest);
+        PageCheckoutWrapperStpV.secTarjetaPci.validateIsSectionOk(pago, pais, channel, dFTest.driver);
     }
     
     public static void validateSelectPagoNoTRJintegrada(Pago pago, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
-        if (channel==Channel.desktop)
+        if (channel==Channel.desktop) {
             validateIsPresentButtonCompraDesktop(datosStep, dFTest);
+        }
 
         int maxSecondsToWait = 2;
         String descripValidac = 

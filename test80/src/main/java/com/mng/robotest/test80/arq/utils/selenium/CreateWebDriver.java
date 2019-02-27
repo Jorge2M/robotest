@@ -524,6 +524,7 @@ public class CreateWebDriver {
      */    
     private static void setDriverFirefox() {        
         FirefoxDriverManager.getInstance().version("0.24.0").setup();
+        //Nota: si se modifica la versión sería conveniente regenerar la AMI correspondiente al Robotest en Cloud
     }
     
     /**
@@ -531,6 +532,7 @@ public class CreateWebDriver {
      */
     private static void setDriverChrome() {        
         ChromeDriverManager.getInstance().version("73.0.3683.20").setup();
+        //Nota: si se modifica la versión sería conveniente regenerar la AMI correspondiente al Robotest en Cloud
     }
 
     /**
