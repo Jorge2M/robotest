@@ -30,7 +30,7 @@ public class SmokeTestXML {
     
     /**
      * Ejecución desde el Online
-     * @param params
+     *
      */
     public void testRunner(ParamsBean paramsToStore) {
         this.params = paramsToStore;
@@ -117,7 +117,7 @@ public class SmokeTestXML {
         return testRun;
     }    
     
-    public XmlTest createTestRunFilteredWithTestCases(XmlSuite suite, String testRunName, String[] testCaseList) {
+    private XmlTest createTestRunFilteredWithTestCases(XmlSuite suite, String testRunName, String[] testCaseList) {
         XmlTest testRun = commonsXML.createTestRun(suite, testRunName, testCaseList);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());
