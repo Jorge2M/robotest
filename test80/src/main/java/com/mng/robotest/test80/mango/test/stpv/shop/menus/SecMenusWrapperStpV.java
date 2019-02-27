@@ -203,7 +203,7 @@ public class SecMenusWrapperStpV {
                                                                   Constantes.AnalyticsVal.Criteo,
                                                                   Constantes.AnalyticsVal.DataLayer);
         
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, menu.getLinea(), analyticSet, dFTest);
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, menu.getLinea(), analyticSet, dFTest.driver);
     }
     
 	@Validation

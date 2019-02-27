@@ -11,7 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -22,7 +21,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMo
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
 import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
-
 
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la página de "GALERÍA DE PRODUCTOS"
@@ -229,17 +227,17 @@ public class PagePrehome extends WebdrvWrapp {
     /**
      * Ejecuta una acceso a la shop vía la páinga de prehome
      */
-    public static void accesoShopViaPrehome(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
-        goToPagePrehome(dCtxSh.urlAcceso, dFTest);
+    public static void accesoShopViaPrehome(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+        goToPagePrehome(dCtxSh.urlAcceso, driver);
         
     	//Forzamos galería sin React
     	int versionSinReact = 0;
-    	TestAB.activateTestABgaleriaReact(versionSinReact, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+    	TestAB.activateTestABgaleriaReact(versionSinReact, dCtxSh.channel, dCtxSh.appE, driver);
     	
-        PagePrehome.selecPaisIdiomaYAccede(dCtxSh, dFTest);
-        ModalLoyaltyAfterAccess.closeModalIfVisible(dFTest.driver);
+        PagePrehome.selecPaisIdiomaYAccede(dCtxSh, driver);
+        ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
         if (dCtxSh.channel==Channel.movil_web) {
-        	SecCabeceraMobil secCabecera = SecCabeceraMobil.getNew(dCtxSh.appE, dFTest.driver);
+        	SecCabeceraMobil secCabecera = SecCabeceraMobil.getNew(dCtxSh.appE, driver);
         	secCabecera.closeSmartBannerIfExists();
         }
     }
@@ -247,41 +245,43 @@ public class PagePrehome extends WebdrvWrapp {
     /**
      * Ejecuta el flujo correspondiente a la selección de un país + la posterior selección de provincia/idioma/enter (sirve para prehome y modal) 
      */
-    public static void selecPaisIdiomaYAccede(DataCtxShop dCtxSh, DataFmwkTest dFTest) //No modificar
+    public static void selecPaisIdiomaYAccede(DataCtxShop dCtxSh, WebDriver driver) //No modificar
     throws Exception {
-        selecionPais(dCtxSh, dFTest);
-        selecionProvIdiomAndEnter(dCtxSh.pais, dCtxSh.idioma, dCtxSh.channel, dFTest.driver);
+        selecionPais(dCtxSh, driver);
+        selecionProvIdiomAndEnter(dCtxSh.pais, dCtxSh.idioma, dCtxSh.channel, driver);
     }
     
     /**
      * Nos posiconamos en la página de Prehome desde una URL (sorteando la página de JCAS si aparece)
      */
-    public static void goToPagePrehome(String urlPreHome, DataFmwkTest dFTest) throws Exception {
+    public static void goToPagePrehome(String urlPreHome, WebDriver driver) throws Exception {
     	//Temporal para test Canary!!!
     	//AccesoNavigations.goToInitURL(urlPreHome + "?canary=true", dCtxSh, dFTest);
-    	AccesoNavigations.goToInitURL(urlPreHome, dFTest);
-        waitForPageLoaded(dFTest.driver);
-        if (PageJCAS.thisPageIsShown(dFTest.driver))
-            PageJCAS.identication(dFTest.driver, "jorge.munoz", "2010martina");
+    	AccesoNavigations.goToInitURL(urlPreHome, driver);
+        waitForPageLoaded(driver);
+        if (PageJCAS.thisPageIsShown(driver)) {
+            PageJCAS.identication(driver, "jorge.munoz", "2010martina");
+        }
     }    
     
     /**
      * Ejecuta el flujo para selecionar el país especificado
      */
-    public static void selecionPais(DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static void selecionPais(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        new WebDriverWait(dFTest.driver, 5).until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPathSelectPaises)));
+        new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPathSelectPaises)));
         
         //Damos de alta la cookie de newsLetter porque no podemos gestionar correctamente el cierre 
         //del modal en la página de portada (es aleatorio y aparece en un intervalo de 0 a 5 segundos)
-        addCookieNewsletter(dFTest.driver);
-        if (dCtxSh.channel==Channel.movil_web || !isPaisSelectedDesktop(dFTest.driver, dCtxSh.pais.getNombre_pais())) {
-            if (dCtxSh.channel!=Channel.movil_web)
+        addCookieNewsletter(driver);
+        if (dCtxSh.channel==Channel.movil_web || !isPaisSelectedDesktop(driver, dCtxSh.pais.getNombre_pais())) {
+            if (dCtxSh.channel!=Channel.movil_web) {
                 //Nos posicionamos y desplegamos la lista de países (en el caso de mobile no desplegamos 
             	//porque entonces es complejo manejar el desplegable que aparece en este tipo de dispositivos)
-                desplieguaListaPaises(dFTest.driver);
+                desplieguaListaPaises(driver);
+            }
             
-            inputPaisAndSelect(dFTest.driver, dCtxSh.pais.getNombre_pais(), dCtxSh.channel);
+            inputPaisAndSelect(driver, dCtxSh.pais.getNombre_pais(), dCtxSh.channel);
         }
     }
     

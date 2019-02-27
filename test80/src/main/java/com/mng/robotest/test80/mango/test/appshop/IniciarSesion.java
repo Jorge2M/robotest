@@ -65,11 +65,11 @@ public class IniciarSesion extends GestorWebDriver {
         dCtxSh.userRegistered = false;
                     
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
-        PageIdentificacionStpV.inicioSesionDatosKO("usuarioKeNoExiste@mango.com", "chuflapassw", dCtxSh.channel, dCtxSh.appE, dFTest);
-        PageIdentificacionStpV.inicioSesionDatosKO(Constantes.mail_standard, "chuflapassw", dCtxSh.channel, dCtxSh.appE, dFTest);
-        PageIdentificacionStpV.selectHasOlvidadoTuContrasenya(dFTest);
+        PageIdentificacionStpV.inicioSesionDatosKO("usuarioKeNoExiste@mango.com", "chuflapassw", dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        PageIdentificacionStpV.inicioSesionDatosKO(Constantes.mail_standard, "chuflapassw", dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        PageIdentificacionStpV.selectHasOlvidadoTuContrasenya(dFTest.driver);
         String emailQA = "eqp.ecommerce.qamango@mango.com";
-        PageRecuperaPasswdStpV.inputMailAndClickEnviar(emailQA, dFTest);
+        PageRecuperaPasswdStpV.inputMailAndClickEnviar(emailQA, dFTest.driver);
     }
 
     @Test (

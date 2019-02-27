@@ -28,10 +28,10 @@ import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
 @SuppressWarnings({"static-access"})
 public class AccesoNavigations {
 
-	public static void goToInitURL(String urlInit, DataFmwkTest dFTest) throws Exception {
-    	String currentUrl = dFTest.driver.getCurrentUrl();
+	public static void goToInitURL(String urlInit, WebDriver driver) throws Exception {
+    	String currentUrl = driver.getCurrentUrl();
     	if (currentUrl.compareTo(urlInit)!=0)
-    		dFTest.driver.get(urlInit);
+    		driver.get(urlInit);
 	}
 	
     /**
@@ -40,11 +40,11 @@ public class AccesoNavigations {
     public static void accesoHomeAppWeb(DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         if (dCtxSh.appE==AppEcom.votf) {
-            accesoVOTF(dCtxSh, dFTest);
+            accesoVOTF(dCtxSh, dFTest.driver);
             goFromLineasToMultimarcaVOTF(dFTest.driver);
         } 
         else {
-            PagePrehome.accesoShopViaPrehome(dCtxSh, dFTest);
+            PagePrehome.accesoShopViaPrehome(dCtxSh, dFTest.driver);
         }
         
         dFTest.ctx.setAttribute(Constantes.attrUrlPagPostAcceso, dFTest.driver.getCurrentUrl());
@@ -59,24 +59,24 @@ public class AccesoNavigations {
     /**
      * Acceso a VOTF (login + selección de idioma)
      */
-    public static void accesoVOTF(DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static void accesoVOTF(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        PageLoginVOTF.goToFromUrlAndSetTestABs(dCtxSh.urlAcceso, dFTest);
-        PageLoginVOTF.inputUsuario(dCtxSh.pais.getAccesoVOTF().getUsuario(), dFTest.driver);
-        PageLoginVOTF.inputPassword(dCtxSh.pais.getAccesoVOTF().getPassword(), dFTest.driver);
-        PageLoginVOTF.clickButtonContinue(dFTest.driver);
+        PageLoginVOTF.goToFromUrlAndSetTestABs(dCtxSh.urlAcceso, driver);
+        PageLoginVOTF.inputUsuario(dCtxSh.pais.getAccesoVOTF().getUsuario(), driver);
+        PageLoginVOTF.inputPassword(dCtxSh.pais.getAccesoVOTF().getPassword(), driver);
+        PageLoginVOTF.clickButtonContinue(driver);
         if (dCtxSh.pais.getListIdiomas().size() > 1) {
-            PageSelectIdiomaVOTF.selectIdioma(dCtxSh.idioma.getCodigo(), dFTest.driver);
-            PageSelectIdiomaVOTF.clickButtonAceptar(dFTest.driver);
+            PageSelectIdiomaVOTF.selectIdioma(dCtxSh.idioma.getCodigo(), driver);
+            PageSelectIdiomaVOTF.clickButtonAceptar(driver);
         }
 
-        if (PageAlertaVOTF.isPage(dFTest.driver)) {
-            PageAlertaVOTF.clickButtonContinuar(dFTest.driver);
+        if (PageAlertaVOTF.isPage(driver)) {
+            PageAlertaVOTF.clickButtonContinuar(driver);
         }
         
     	//Forzamos galería sin React
     	int versionSinReact = 0;
-    	TestAB.activateTestABgaleriaReact(versionSinReact, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+    	TestAB.activateTestABgaleriaReact(versionSinReact, dCtxSh.channel, dCtxSh.appE, driver);
     }    
     
     public static void cambioPaisFromHomeIfNeeded(DataCtxShop dCtxSh, DataFmwkTest dFTest) 

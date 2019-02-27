@@ -99,7 +99,7 @@ public class PedidoNavigations {
         DatosStep datosStep = SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.BOLSA, dFTest);
         boolean existLinkPedido = PageBolsasMantoStpV.validaLineaBolsa(dataPedido, app, datosStep, dFTest);
         if (existLinkPedido) {
-            PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.bolsa, app, dFTest);
+            PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.bolsa, app, dFTest.driver);
         }
     }
     
@@ -108,7 +108,7 @@ public class PedidoNavigations {
         DatosStep datosStep = SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.PEDIDO, dFTest);
         boolean existLinkPedido = PagePedidosMantoStpV.validaLineaPedido(dataPedido, app, datosStep, dFTest);
         if (existLinkPedido) {
-            PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.pedido, app, dFTest);
+            PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.pedido, app, dFTest.driver);
         }
     }
     
@@ -117,7 +117,7 @@ public class PedidoNavigations {
     		consultarPedidoStpV(dataPedido, app, dFTest);
     	}
     	
-    	PageConsultaPedidoBolsaStpV.clickButtonIrAGenerar(dataPedido.getCodigoPedidoManto(), dFTest);
-    	PageGenerarPedidoStpV.changePedidoToEstado(ANULADO, dFTest);
+    	PageConsultaPedidoBolsaStpV.clickButtonIrAGenerar(dataPedido.getCodigoPedidoManto(), dFTest.driver);
+    	PageGenerarPedidoStpV.changePedidoToEstado(ANULADO, dFTest.driver);
     }
 }

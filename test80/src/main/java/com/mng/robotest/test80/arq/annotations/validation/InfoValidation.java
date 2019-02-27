@@ -95,15 +95,17 @@ public class InfoValidation {
     }
     
     private void modifyValidationResultAccordingAnnotationParams(ListResultValidation valResult) {
-    	if ("".compareTo(valResult.get(0).getDescription())==0) {
-    		MatcherWithMethodParams matcher = MatcherWithMethodParams.from(joinPoint);
-    		String descripValidationMatched = matcher.match(valAnnotation.description());
-    		valResult.get(0).setDescription(descripValidationMatched);
-    	}
-    	
-    	if (valResult.get(0).getLevelResult()==State.Undefined &&
-    		valAnnotation.level()!=null) {
-    		valResult.get(0).setLevelResult(valAnnotation.level());
+    	if (valResult.size()>0) {
+	    	if ("".compareTo(valResult.get(0).getDescription())==0) {
+	    		MatcherWithMethodParams matcher = MatcherWithMethodParams.from(joinPoint);
+	    		String descripValidationMatched = matcher.match(valAnnotation.description());
+	    		valResult.get(0).setDescription(descripValidationMatched);
+	    	}
+	    	
+	    	if (valResult.get(0).getLevelResult()==State.Undefined &&
+	    		valAnnotation.level()!=null) {
+	    		valResult.get(0).setLevelResult(valAnnotation.level());
+	    	}
     	}
     }
     

@@ -176,36 +176,33 @@ public class AccesoStpV {
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(Constantes.AnalyticsVal.GoogleAnalytics,
                                                                   Constantes.AnalyticsVal.NetTraffic,
                                                                   Constantes.AnalyticsVal.DataLayer);
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, dFTest);
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, dFTest.driver);
     }
 
     /**
      * Accedemos a la aplicación (shop/outlet/votf)
      * Se ejecutan cada acción en un paso
      */
-    public static DatosStep accesoAplicacionEnVariosPasos(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
-        DatosStep datosStep = null;
+    public static void accesoAplicacionEnVariosPasos(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
         if (dCtxSh.appE==AppEcom.votf && !dCtxSh.userRegistered) { //En VOTF no tiene sentido identificarte con las credenciales del cliente
             //Steps Login Votf + Selección idioma
-            datosStep = AccesoStpV.accesoVOTFtoHOME(dCtxSh, dFTest);                    
+            AccesoStpV.accesoVOTFtoHOME(dCtxSh, dFTest);                    
         }
         else {
             //Step. Accesdo a la shop a través de la prehome
-            datosStep = PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, false/*execValidacs*/, dFTest);
+            PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, false/*execValidacs*/, dFTest.driver);
                 
             //En caso de prueba con usuario registrado ejecutamos el registro
             if (dCtxSh.userRegistered) {
                 identificacionEnMango(dCtxSh, dFTest);
                         
                 //Step Borrar datos bolsa y favorites
-                datosStep = SecBolsaStpV.clear(dCtxSh, dFTest);
+                SecBolsaStpV.clear(dCtxSh, dFTest);
                 if (dCtxSh.appE==AppEcom.shop) {
                     PageFavoritosStpV.clearAll(dCtxSh, dFTest);
                 }
             }
         }
-        
-        return datosStep;
     }    
     
     public static DatosStep identificacionEnMango(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {

@@ -8,10 +8,7 @@ import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.Descuento;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-import com.mng.robotest.test80.mango.test.data.Descuento.DiscountType;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1EnvioCheckoutMobil;
@@ -79,10 +76,12 @@ public class Page1EnvioCheckoutMobilStpV {
 
         //Validaciones
         validaBlockSelected(tipoTransporte, datosStep, dFTest);
-        if (tipoTransporte.isEntregaDomicilio())
-            modalDroppoints.validaIsNotVisible(Channel.movil_web, datosStep, dFTest);
-        else
-            modalDroppoints.validaIsVisible(Channel.movil_web, datosStep, dFTest);
+        if (tipoTransporte.isEntregaDomicilio()) {
+            modalDroppoints.validaIsNotVisible(Channel.movil_web, dFTest.driver);
+        }
+        else {
+            modalDroppoints.validaIsVisible(Channel.movil_web, dFTest.driver);
+        }
         
         return datosStep;
     }    
@@ -132,8 +131,8 @@ public class Page1EnvioCheckoutMobilStpV {
         return datosStep;
     }
     
-    public static void validaResultImputPromoEmpl(AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
-        Descuento descuento = new Descuento(app, DiscountType.Empleado);
+    public static void validaResultImputPromoEmpl(DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
+        //Descuento descuento = new Descuento(app, DiscountType.Empleado);
         int maxSecondsWait = 2;
         String descripValidac = 
             "1) Aparece el descuento total aplicado al empleado (en menos de " + maxSecondsWait + " segundos)<br>" +
@@ -144,7 +143,7 @@ public class Page1EnvioCheckoutMobilStpV {
             if (!Page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(dFTest.driver, maxSecondsWait)) {
                 listVals.add(1, State.Warn);
             }
-            if (!Page1EnvioCheckoutMobil.validateDiscountEmpleadoNotNull(descuento, dFTest.driver)) {
+            if (!Page1EnvioCheckoutMobil.validateDiscountEmpleadoNotNull(dFTest.driver)) {
                 listVals.add(2, State.Warn);
             }
                      

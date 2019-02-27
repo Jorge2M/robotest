@@ -27,22 +27,22 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
 
 # Install Browsers
 chocolatey install googlechrome -y --ignore-checksums
-chocolatey install firefox -y --version 64.0
+chocolatey install firefox -y --version 65.0
 
-# Install ChromeDriver 2.42 in a path accesible for webdrivermagnaer. 
+# Install ChromeDriver v73.0.3683 in a path accesible for webdrivermagnaer. 
 # This step is made for avoid the initial problems when is the webdrivermanager who download the chromedriver (specially in parallel browser-runs) 
 # Warning! the default version 2.38 that is downloaded will be modified in the future
 chocolatey feature enable -n allowGlobalConfirmation
 choco install selenium-chrome-driver
-$destination = 'C:\Windows\System32\config\systemprofile\.m2\repository\webdriver\chromedriver\win32\2.45\chromedriver.exe'
+$destination = 'C:\Windows\System32\config\systemprofile\.m2\repository\webdriver\chromedriver\win32\73.0.3683.20\chromedriver.exe'
 New-Item -ItemType File -Path $destination -Force
 Copy-Item -Force -Path 'C:\tools\selenium\chromedriver.exe' -Destination $destination 
 
-# Install ChromeDriver 0.22.0 in a path accesible for webdrivermagnaer.
+# Install ChromeDriver 0.24.0 in a path accesible for webdrivermagnaer.
 # This step is made for avoid the initial problems when is the webdrivermanager who download the geckodriver (specially in parallel browser-runs)
 # Warning! the default version 0.20.1 that is downloaded will be modified in the future
 choco install selenium-gecko-driver
-$destination = 'C:\Windows\System32\config\systemprofile\.m2\repository\webdriver\geckodriver\win64\0.23.0\geckodriver.exe'
+$destination = 'C:\Windows\System32\config\systemprofile\.m2\repository\webdriver\geckodriver\win64\0.24.0\geckodriver.exe'
 New-Item -ItemType File -Path $destination -Force
 Copy-Item -Force -Path 'C:\tools\selenium\geckodriver.exe' -Destination $destination 
 

@@ -1,10 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.manto.pedido;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -28,129 +28,88 @@ public class PageConsultaPedidoBolsaStpV extends ElementPageFunctions {
     /**
      * Se accede al detalle de un pedido desde la lista de pedidos o bolsas
      */
-    public static DatosStep detalleFromListaPedBol(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, DataFmwkTest dFTest) 
+	@Step (
+		description="Seleccionamos el código de pedido para acceder al Detalle", 
+        expected="Aparece la página de detalle de #{typeDetalle} correcta",
+        saveImagePage=SaveWhen.Always,
+        saveErrorPage=SaveWhen.Never)
+    public static void detalleFromListaPedBol(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, WebDriver driver) 
     throws Exception {
-        //Step. Accedemos al detalle del pedido desde la lista de pedidos
-        DatosStep datosStep = new DatosStep   (
-            "Seleccionamos el código de pedido para acceder al Detalle", 
-            "Aparece la página de detalle de " + typeDetalle + " correcta");
-        datosStep.setSaveImagePage(SaveWhen.Always);
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-        try {
-            PagePedidos.clickLinkPedidoInLineas(dFTest.driver, dataPedido.getCodigoPedidoManto(), typeDetalle);
-                                            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+        PagePedidos.clickLinkPedidoInLineas(driver, dataPedido.getCodigoPedidoManto(), typeDetalle);
                                     
         //Validaciones
-        validacionesTotalesPedido(dataPedido, typeDetalle, appE, datosStep, dFTest);
-        
-        return datosStep;
+        validacionesTotalesPedido(dataPedido, typeDetalle, appE, driver);
     }
     
-    public static void validacionesTotalesPedido(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, DatosStep datosStep, DataFmwkTest dFTest) {
-        validaDatosGeneralesPedido(dataPedido, appE, datosStep, dFTest);
-        validaDatosEnvioPedido(dataPedido, typeDetalle, appE, datosStep, dFTest);
+    public static void validacionesTotalesPedido(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, WebDriver driver) {
+        validaDatosGeneralesPedido(dataPedido, appE, driver);
+        validaDatosEnvioPedido(dataPedido, typeDetalle, appE, driver);
     }
     
-    public static void validaDatosEnvioPedido(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, DatosStep datosStep, DataFmwkTest dFTest) {
+    @Validation
+    public static ListResultValidation validaDatosEnvioPedido(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
         TipoTransporte tipoTransporte = dataPedido.getPago().getTipoEnvioType(appE);
-        String validacion2 = "";
-        String textEnvioTienda = "";
+    	validations.add(
+    		"El campo \"tipo servicio\" contiene el valor <b>" + tipoTransporte.getCodigoIntercambio() + "</b> (asociado al tipo de envío " + tipoTransporte + ")",
+    		PageDetallePedido.getTipoServicio(driver).compareTo(tipoTransporte.getCodigoIntercambio())==0, State.Info);    	
+    	
         if (typeDetalle==TypeDetalle.pedido && 
             dataPedido.getTypeEnvio()==TipoTransporte.TIENDA && 
             dataPedido.getDataDeliveryPoint()!=null) {
-            textEnvioTienda = dataPedido.getDataDeliveryPoint().getCodigo();
-            validacion2 = "<br>" +
-            "2) En los datos de envío aparece el texto <b>ENVIO A TIENDA " + textEnvioTienda + "</b>";
+            String textEnvioTienda = dataPedido.getDataDeliveryPoint().getCodigo();
+            validations.add(
+        		"En los datos de envío aparece el texto <b>ENVIO A TIENDA " + textEnvioTienda + "</b>",
+        		PageDetallePedido.get1rstLineDatosEnvioText(driver).contains(textEnvioTienda), State.Defect);              
         }
-            
-        String descripValidac = 
-            "1) El campo \"tipo servicio\" contiene el valor <b>" + tipoTransporte.getCodigoIntercambio() + "</b> (asociado al tipo de envío " + tipoTransporte + ")" + 
-            validacion2;
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (PageDetallePedido.getTipoServicio(dFTest.driver).compareTo(tipoTransporte.getCodigoIntercambio())!=0) {
-                listVals.add(1, State.Info);
-            }
-            if ("".compareTo(validacion2)!=0) { 
-                if (!PageDetallePedido.get1rstLineDatosEnvioText(dFTest.driver).contains(textEnvioTienda)) {
-                    listVals.add(2, State.Defect);
-                }
-            }
-                                            
-            datosStep.setListResultValidations(listVals);
-        }  
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
+        
+        return validations;
     }
     
-    public static void validaDatosGeneralesPedido(DataPedido dataPedido, AppEcom appE, DatosStep datosStep, DataFmwkTest dFTest) {
-        String validacion5 = "";
+    @Validation
+    public static ListResultValidation validaDatosGeneralesPedido(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	validations.add(
+    		"Aparece la pantalla de detalle del pedido<br>",
+    		PageDetallePedido.isPage(driver), State.Warn);
+    	validations.add(
+    		"Aparece un TOTAL de: " + dataPedido.getImporteTotalManto() + "<br>",
+    		ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), PageDetallePedido.XPathImporteTotal, driver), State.Warn);
+    	validations.add(
+    		"Las 3 líneas de la dirección de envío figuran en la dirección del pedido (" + dataPedido.getDireccionEnvio() +")<br>",
+    		PageDetallePedido.isDireccionPedido(driver, dataPedido.getDireccionEnvio()), State.Warn);
+    	validations.add(
+    		"Figura el código de país (" + dataPedido.getCodigoPais() + ")<br>",
+    		PageDetallePedido.isCodPaisPedido(driver, dataPedido.getCodigoPais()), State.Warn);
+    	
         Pago pago = dataPedido.getPago();
         if (pago.getTpv().getEstado()!=null &&
             pago.getTpv().getEstado().compareTo("")!=0 &&
             appE!=AppEcom.votf) {
-            validacion5 = "<br>5) Aparece uno de los resultados posibles según el TPV: " + pago.getTpv().getEstado(); 
-        }
-                                            
-        String descripValidac = 
-            "1) Aparece la pantalla de detalle del pedido<br>" +
-            "2) Aparece un TOTAL de: " + dataPedido.getImporteTotalManto() + "<br>" +
-            "3) Las 3 líneas de la dirección de envío figuran en la dirección del pedido (" + dataPedido.getDireccionEnvio() +")<br>" +
-            "4) Figura el código de país (" + dataPedido.getCodigoPais() + ")" +
-            validacion5;
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (!PageDetallePedido.isPage(dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            if (!ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), PageDetallePedido.XPathImporteTotal, dFTest.driver)) {
-                listVals.add(2, State.Warn);
-            }
-            if (!PageDetallePedido.isDireccionPedido(dFTest.driver, dataPedido.getDireccionEnvio())) {
-                listVals.add(3, State.Warn);
-            }
-            if (!PageDetallePedido.isCodPaisPedido(dFTest.driver, dataPedido.getCodigoPais())) {
-                listVals.add(4, State.Warn);
-            }
-            if (pago.getTpv().getEstado()!=null &&
-                pago.getTpv().getEstado().compareTo("")!=0 &&
-                appE!=AppEcom.votf) {
-                if (!PageDetallePedido.isStateInTpvStates(dFTest.driver, dataPedido)) {
-                	if (PageDetallePedido.isPedidoInStateMenos1NULL(dFTest.driver)) {
-                		listVals.add(5, State.Defect);
-                	}
-                	else {
-                		listVals.add(5, State.Warn);
-                	}
-                }
-            }
-                                            
-            datosStep.setListResultValidations(listVals);
+        	boolean isPedidoInStateTpv = PageDetallePedido.isStateInTpvStates(driver, dataPedido);
+        	boolean pedidoInStateMenos1Null = PageDetallePedido.isPedidoInStateMenos1NULL(driver);
+        	validations.add(
+        		"Aparece uno de los resultados posibles según el TPV: " + pago.getTpv().getEstado() + "<br>",
+        		isPedidoInStateTpv, State.Warn);
+        	if (!isPedidoInStateTpv) {
+	        	validations.add(
+	        		"El pedido no está en estado -1-NULL",
+	        		!pedidoInStateMenos1Null, State.Defect);
+        	}
         }  
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
+        
+        return validations;
     }
     
-    public static DatosStep clickButtonIrAGenerar(String idPedido, DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep (
-            "Seleccionamos el botón " + RightButtons.IrAGenerar, 
-            "Aparece la página de generación del pedido");
-        datosStep.setSaveImagePage(SaveWhen.Always);
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-        try {
-            clickAndWait(RightButtons.IrAGenerar, dFTest.driver);
-                                            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+    @Step (
+    	description="Seleccionamos el botón \"Ir A Generar\"", 
+        expected="Aparece la página de generación del pedido",
+        saveImagePage=SaveWhen.Always,
+	    saveErrorPage=SaveWhen.Never)
+    public static void clickButtonIrAGenerar(String idPedido, WebDriver driver) throws Exception {
+        clickAndWait(RightButtons.IrAGenerar, driver);
                                     
         //Validaciones
-        PageGenerarPedidoStpV.validateIsPage(idPedido, datosStep, dFTest);
-        
-        return datosStep;
+        PageGenerarPedidoStpV.validateIsPage(idPedido, driver);
     }
 }

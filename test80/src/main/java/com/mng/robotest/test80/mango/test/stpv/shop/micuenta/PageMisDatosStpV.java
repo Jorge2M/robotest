@@ -2,10 +2,13 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import java.util.HashMap;
 
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisDatos;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
@@ -144,18 +147,10 @@ public class PageMisDatosStpV {
         return nombreActual;
     }
     
-    public static void validaContenidoNombre(String nombre, DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) En el campo del nombre figura<b>: " + nombre + "<b>"; 
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageMisDatos.getValueNombreInput(dFTest.driver).contains(nombre)) {
-                listVals.add(1,State.Warn);
-            }
-
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation (
+    	description="En el campo del nombre figura<b>: #{nombre}<b>",
+    	level=State.Warn)
+    public static boolean validaContenidoNombre(String nombre, WebDriver driver) {
+        return (PageMisDatos.getValueNombreInput(driver).contains(nombre));
     }
 }

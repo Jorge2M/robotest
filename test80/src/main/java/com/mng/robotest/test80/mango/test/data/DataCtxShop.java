@@ -66,5 +66,13 @@ public class DataCtxShop implements Cloneable {
     public void setChannel(Channel channel) {
         this.channel = channel;
     }
+    
+    public String getNombrePais() {
+    	return pais.getNombre_pais();
+    }
+    
+    public String getLiteralIdioma() {
+    	return idioma.getCodigo().getLiteral();
+    }
 }
 

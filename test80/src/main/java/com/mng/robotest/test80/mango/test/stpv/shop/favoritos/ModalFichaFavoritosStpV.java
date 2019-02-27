@@ -48,7 +48,7 @@ public class ModalFichaFavoritosStpV {
         //Validaciones
         switch (channel) {
         case desktop:
-            SecBolsaStpV.validaAltaArtBolsa(dataBolsa, channel, AppEcom.shop, dFTest);
+            SecBolsaStpV.validaAltaArtBolsa(dataBolsa, channel, AppEcom.shop);
             break;
         default:
         case movil_web:

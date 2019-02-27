@@ -1,11 +1,12 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -35,7 +36,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalBuscadorTiendas
 @SuppressWarnings({"static-access"})
 public class PageFichaArtStpV {
     
-    DataFmwkTest dFTest;
+    WebDriver driver;
     Channel channel;
     AppEcom app;
     PageFicha pageFicha;
@@ -47,10 +48,10 @@ public class PageFichaArtStpV {
     public static SecFitFinderStpV secFitFinder;
     
     public PageFichaArtStpV(AppEcom appE, Channel channel) {
-        this.dFTest = TestCaseData.getdFTest();
+        this.driver = TestCaseData.getdFTest().driver;
         this.channel = channel;
         this.app = appE;
-        this.pageFicha = PageFicha.newInstance(appE, channel, dFTest.driver);
+        this.pageFicha = PageFicha.newInstance(appE, channel, driver);
     }
     
     public PageFicha getFicha() {
@@ -58,299 +59,197 @@ public class PageFichaArtStpV {
     }
     
     public void validateIsFichaAccordingTypeProduct(ArticleStock articulo) throws Exception {
-    	DatosStep datosStep = TestCaseData.getDatosLastStep();
         switch (articulo.getType()) {
         case articlesNotExistent:
-            validateIsFichaArtNoDisponible(articulo.getReference(), datosStep);
+            validateIsFichaArtNoDisponible(articulo.getReference());
             break;
         case articlesWithoutStock:
-        	validateIsArticleNotAvailable(articulo, datosStep);
+        	validateIsArticleNotAvailable(articulo);
             break;
         case articlesWithMoreOneColour:
         case articlesWithTotalLook: 
         case articlesOnlyInThisStore:
         default:            
-            validateIsFichaArtDisponible(articulo.getReference(), datosStep);
+            validateIsFichaArtDisponible(articulo.getReference(), 3);
         }
         
         //Validaciones estándar. 
         AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/);
     }
     
-    public void validateIsFichaArtDisponible(String refArticulo, DatosStep datosStep) { 
-        //Validaciones
-    	int maxSecondsToWait = 3;
-        String descripValidac = 
-            "1) Aparece la página correspondiente a la ficha del artículo " + refArticulo + 
-            " (La esperamos hasta " + maxSecondsToWait + " segundos)"; 
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!pageFicha.isFichaArticuloUntil(refArticulo, maxSecondsToWait)) {
-                listVals.add(1, State.Defect);
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation (
+    	description=
+    		"Aparece la página correspondiente a la ficha del artículo #{refArticulo}" + 
+    		" (La esperamos hasta #{maxSecondsWait} segundos)")
+    public boolean validateIsFichaArtDisponible(String refArticulo, int maxSecondsWait) { 
+    	return (pageFicha.isFichaArticuloUntil(refArticulo, maxSecondsWait));
     }
     
-    public void validateIsFichaArtNoDisponible(String refArticulo, DatosStep datosStep) {
-        //Validaciones
-        String descripValidac = 
-            "1) Aparece la página de resultado de una búsqueda KO<br>" +
-            "2) En el texto de resultado de la búsqueda aparece la referencia " + refArticulo;
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageErrorBusqueda.isPage(this.dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            if (!PageErrorBusqueda.isCabeceraResBusqueda(this.dFTest.driver, refArticulo)) {
-                listVals.add(2, State.Warn);
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation
+    public ListResultValidation validateIsFichaArtNoDisponible(String refArticulo) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	 	validations.add(
+			"Aparece la página de resultado de una búsqueda KO<br>",
+			PageErrorBusqueda.isPage(driver), State.Warn);    	
+	 	validations.add(
+			"En el texto de resultado de la búsqueda aparece la referencia " + refArticulo,
+			PageErrorBusqueda.isCabeceraResBusqueda(driver, refArticulo), State.Warn);    		 	
+    	return validations;
     }
     
-    public void validateIsArticleNotAvailable(ArticleStock article, DatosStep datosStep) {
-        //Validaciones
-    	int maxSecondsToWait = 2;
-        String descripValidac = 
-            "1) Aparece la página correspondiente a la ficha del artículo " + article.getReference() + 
-                " (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
-            "2) No está disponible La talla <b>" + article.getSize() + "</b> del color <b>" + article.getColourCode() + "</b>"; 
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!pageFicha.isFichaArticuloUntil(article.getReference(), maxSecondsToWait)) {
-                listVals.add(1, State.Defect);
-            }
-            if (pageFicha.secDataProduct.isTallaAvailable(article.getSize(), pageFicha.getTypeFicha(), dFTest.driver)) {
-                listVals.add(2, State.Warn);
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation
+    public ListResultValidation validateIsArticleNotAvailable(ArticleStock article) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	int maxSecondsWait = 2;
+	 	validations.add(
+			"Aparece la página correspondiente a la ficha del artículo " + article.getReference() + 
+			" (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+			pageFicha.isFichaArticuloUntil(article.getReference(), maxSecondsWait), State.Defect);   
+	 	validations.add(
+			"No está disponible La talla <b>" + article.getSize() + "</b> del color <b>" + article.getColourCode() + "</b>",
+			!pageFicha.secDataProduct.isTallaAvailable(article.getSize(), pageFicha.getTypeFicha(), driver), State.Warn); 
+	 	return validations;
     }        
     
-    public void validateIsFichaArtAlgunoColorNoDisponible(String refArticulo, DatosStep datosStep) {
-        //Validaciones
-        String descripValidac = 
-            "1) Aparece la página correspondiente a la ficha del artículo " + refArticulo + "<br>" +
-            "2) Aparece algún color no disponible";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!pageFicha.isFichaArticuloUntil(refArticulo, 0/*maxSecondsToWait*/)) {
-                listVals.add(1, State.Defect);                
-            }
-            if (!pageFicha.secDataProduct.isElementInState(ColorType.Unavailable, StateElem.Present, dFTest.driver)) {
-                listVals.add(2, State.Defect);
-            }
-            
-            datosStep.setListResultValidations(listVals);
+    @Validation
+    public ListResultValidation validateIsFichaArtAlgunoColorNoDisponible(String refArticulo) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	 	validations.add(
+			"Aparece la página correspondiente a la ficha del artículo " + refArticulo + "<br>",
+			pageFicha.isFichaArticuloUntil(refArticulo, 0), State.Defect); 
+	 	validations.add(
+			"Aparece algún color no disponible",
+			pageFicha.secDataProduct.isElementInState(ColorType.Unavailable, StateElem.Present, driver), State.Defect); 
+	 	return validations;
+    }
+    
+    @Validation (
+    	description="Aparece la página de Ficha",
+    	level=State.Warn)
+    public boolean validateIsFichaCualquierArticulo() {
+        return (pageFicha.isPageUntil(0));  
+    }
+    
+    @Validation
+    public ListResultValidation validaDetallesProducto(DataFichaArt datosArticulo) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+        if (datosArticulo.availableReferencia()) {
+            int maxSecondsWait = 3;
+		 	validations.add(
+				"Aparece la página con los datos de la ficha del producto " + datosArticulo.getReferencia() +
+				"(la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+				pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), maxSecondsWait), State.Defect);
         }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-    }
-    
-    public void validateIsFichaCualquierArticulo(DatosStep datosStep) {
-        //Validaciones
-        String descripValidac = 
-            "1) Aparece la página de Ficha";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!pageFicha.isPageUntil(0)) {
-                listVals.add(1, State.Warn);
-            }
-
-            datosStep.setListResultValidations(listVals);
-            
-        } 
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
-    }
-    
-    public void validaDetallesProducto(DataFichaArt datosArticulo, DatosStep datosStep) {
-        String validacion1 = "";
-        String validacion2 = "";
-        int maxSecondsToWait = 3;
-        if (datosArticulo.availableReferencia())
-            validacion1=
-            "1) Aparece la página con los datos de la ficha del producto " + datosArticulo.getReferencia() + 
-            " (la esperamos hasta " + maxSecondsToWait + " segundos)<br>";
             
         if (datosArticulo.availableNombre()) {
-            validacion2 =
-            "2) Como nombre del artículo aparece el seleccionado: " + datosArticulo.getNombre();
+        	String nombreArtFicha = pageFicha.secDataProduct.getTituloArt(channel, driver).trim();
+    	 	validations.add(
+				"Como nombre del artículo aparece el seleccionado: " + datosArticulo.getNombre(),
+				datosArticulo.getNombre().toLowerCase().compareTo(nombreArtFicha.toLowerCase())==0, State.Warn); 
         }
-            
-        String descripValidac = 
-             validacion1 +
-             validacion2;
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (datosArticulo.availableReferencia()) {
-                if (!pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), maxSecondsToWait)) {                 
-                    listVals.add(1, State.Defect);
-                }
-            }
-            if (datosArticulo.availableNombre()) {
-                String nombreArtFicha = pageFicha.secDataProduct.getTituloArt(this.channel, this.dFTest.driver).trim();
-                if (datosArticulo.getNombre().toLowerCase().compareTo(nombreArtFicha.toLowerCase())!=0) {
-                    listVals.add(2, State.Warn);
-                }
-            }
         
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+        return validations;
     }
 
-    public DatosStep selectColorAndSaveData(ArticuloScreen articulo) throws Exception {
-        DatosStep datosStep = selectColor(articulo.getCodigoColor());
-        articulo.setColor(pageFicha.secDataProduct.getNombreColorSelected(this.channel, this.dFTest.driver));
-        return datosStep;
+    public void selectColorAndSaveData(ArticuloScreen articulo) throws Exception {
+        selectColor(articulo.getCodigoColor());
+        articulo.setColor(pageFicha.secDataProduct.getNombreColorSelected(channel, driver));
     }
     
-    public DatosStep selectColor(String codigoColor) throws Exception {
-        //Step. 
-        DatosStep datosStep = new DatosStep(
-            "Seleccionar el color con código <b>" + codigoColor + "</b>", 
-            "Se muestra la ficha correspondiente al color seleccionado");
-        try {
-            if (pageFicha.secDataProduct.isClickableColor(codigoColor, this.dFTest.driver))
-                pageFicha.secDataProduct.selectColorWaitingForAvailability(codigoColor, this.dFTest.driver);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+    @Step (
+    	description="Seleccionar el color con código <b>#{codigoColor}</b>", 
+        expected="Se muestra la ficha correspondiente al color seleccionado")
+    public void selectColor(String codigoColor) throws Exception {
+        if (pageFicha.secDataProduct.isClickableColor(codigoColor, driver)) {
+            pageFicha.secDataProduct.selectColorWaitingForAvailability(codigoColor, driver);
         }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
-        String descripValidac = 
-        "1) Está seleccionado el color con código <b>" + codigoColor + "<b>";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            String codigoColorPage = pageFicha.secDataProduct.getCodeColor(ColorType.Selected, dFTest.driver); 
-            if (!codigoColorPage.contains(codigoColor)) {
-                listVals.add(1, State.Defect);
-            }
-                    
-            datosStep.setListResultValidations(listVals);
-        }  
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
+        checkIsSelectedColor(codigoColor);
     }
     
-    public DatosStep selectTallaAndSaveData(ArticuloScreen articulo) throws Exception {
-        DatosStep datosStep = selectTalla(articulo.getTallaNum());
+    @Validation (
+    	description="Está seleccionado el color con código <b>#{codigoColor}<b>",
+    	level=State.Defect)
+    private boolean checkIsSelectedColor(String codigoColor) {
+        String codigoColorPage = pageFicha.secDataProduct.getCodeColor(ColorType.Selected, driver); 
+        return (codigoColorPage.contains(codigoColor));
+    }
+    
+    public void selectTallaAndSaveData(ArticuloScreen articulo) throws Exception {
+        selectTalla(articulo.getTallaNum());
         articulo.setTallaAlf(pageFicha.getTallaAlfSelected());
         articulo.setTallaNum(pageFicha.getTallaNumSelected());
-        return datosStep;
     }
     
-    public DatosStep selectTalla(int positionTalla) throws Exception {
+    public void selectTalla(int positionTalla) throws Exception {
     	String tallaCodNum = pageFicha.getTallaCodNum(positionTalla);
-    	return (selectTalla(tallaCodNum));
+    	selectTalla(tallaCodNum);
 	}
     
-    public DatosStep selectTalla(String tallaCodNum) throws Exception {
-        //Step. 
-        DatosStep datosStep = new DatosStep(
-            "Seleccionar la talla con código <b>" + tallaCodNum + "</b> (previamente, si está abierta, cerramos la capa de la bolsa)", 
-            "Se cambia la talla correctamente");
-        try {
-        	SecBolsa.setBolsaToStateIfNotYet(StateBolsa.Closed, channel, app, dFTest.driver);
-            pageFicha.selectTallaByValue(tallaCodNum);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+    @Step (
+    	description="Seleccionar la talla con código <b>#{tallaCodNum}</b> (previamente, si está abierta, cerramos la capa de la bolsa)", 
+        expected="Se cambia la talla correctamente")
+    public void selectTalla(String tallaCodNum) throws Exception {
+    	SecBolsa.setBolsaToStateIfNotYet(StateBolsa.Closed, channel, app, driver);
+        pageFicha.selectTallaByValue(tallaCodNum);
         
         //Validaciones
-        String descripValidac = 
-        "1) Queda seleccionada la talla <b>" + tallaCodNum + "<b>";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            String tallaSelected = pageFicha.getTallaNumSelected(); 
-            if (tallaSelected.compareTo(tallaCodNum)!=0) {
-                listVals.add(1, State.Defect);
-            }
-                    
-            datosStep.setListResultValidations(listVals);
-        }  
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
+        checkTallaSelected(tallaCodNum);
+    }
+    
+    @Validation (
+    	description="Queda seleccionada la talla <b>#{tallaCodNum}<b>",
+    	level=State.Defect)
+    private boolean checkTallaSelected(String tallaCodNum) {
+        String tallaSelected = pageFicha.getTallaNumSelected(); 
+        return (tallaSelected.compareTo(tallaCodNum)==0);
     }
     
     /**
      * Precondición: estamos en una ficha correspondiente a un artículo con algún color no disponible 
      * Selección de un color no disponible + posterior selección de una talla (que necesariamente ha de estar no disponible)
      */
-    public void selectColorAndTallaNoDisponible(ArticleStock article) throws Exception {
-        //Step. 
-        DatosStep datosStep = new DatosStep(
-            "Seleccionar el color <b>" + article.getColourCode() + "<b>", 
-            "La talla " + article.getSize() + " no está disponible");
-        try {
-            pageFicha.secDataProduct.selectColorWaitingForAvailability(article.getColourCode(), dFTest.driver);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }                  
-            
-        //Step
-        datosStep = new DatosStep       (
-            "Seleccionar la talla <b>" + article.getSize() + "</b>", 
-            "Aparece una capa de introducción email para aviso");
-        try {
-        	pageFicha.secDataProduct.selectTallaByValue(article.getSize(), pageFicha.getTypeFicha(), dFTest.driver);
-                                                                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        //Validaciones
-        String descripValidac = 
-            "1) No aparece el botón \"COMPRAR\"<br>" +
-            "2) Aparece la capa de introducción de avísame";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (SecBolsa.isVisibleBotonComprar(Channel.desktop, this.dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            boolean isVisibleAvisame = pageFicha.secDataProduct.isVisibleCapaAvisame(this.dFTest.driver);
-            if (!isVisibleAvisame) {
-                listVals.add(2, State.Defect);
-            }
-                            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    public void selectColorAndTallaNoDisponible(ArticleStock artNoDisp) throws Exception {
+    	selectColorWithTallaNoDisp(artNoDisp);
+    	selectTallaNoDisp(artNoDisp);
     }
     
-    public DatosStep selectAnadirALaBolsaStep() throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionar el botón <b>\"Añadir a la bolsa\"</b>", 
-            "El comportamiento es el esperado... :-)");
-        try {
+    @Step (
+    	description="Seleccionar el color <b>#{artNoDisp.getColourCode()}<b>", 
+	    expected="La talla #{artNoDisp.getSize()} no está disponible")
+    public void selectColorWithTallaNoDisp(ArticleStock artNoDisp) throws Exception {
+    	pageFicha.secDataProduct.selectColorWaitingForAvailability(artNoDisp.getColourCode(), driver);
+    }
+    
+    @Step (
+    	description="Seleccionar la talla <b>#{artNoDisp.getSize()} </b>", 
+	    expected="Aparece una capa de introducción email para aviso")
+    public void selectTallaNoDisp(ArticleStock artNoDisp) {
+	    pageFicha.secDataProduct.selectTallaByValue(artNoDisp.getSize(), pageFicha.getTypeFicha(), driver);
+	    
+	    //Validaciones
+	    checkAppearsCapaAvisame();
+    }
+    
+    @Validation
+    public ListResultValidation checkAppearsCapaAvisame() {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	 	validations.add(
+			"No aparece el botón \"COMPRAR\"<br>",
+			!SecBolsa.isVisibleBotonComprar(Channel.desktop, driver), State.Defect);
+	 	boolean isVisibleAvisame = pageFicha.secDataProduct.isVisibleCapaAvisame(driver);
+	 	validations.add(
+			"Aparece la capa de introducción de avísame",
+			isVisibleAvisame, State.Defect);
+	 	return validations;
+    }
+    
+    @Step (
+    	description="Seleccionar el botón <b>\"Añadir a la bolsa\"</b>", 
+        expected="El comportamiento es el esperado... :-)")
+    public void selectAnadirALaBolsaStep() throws Exception {
             pageFicha.clickAnadirBolsaButtonAndWait();
-                        
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        return datosStep;
     }
     
     /**
@@ -359,382 +258,254 @@ public class PageFichaArtStpV {
      */
     public boolean selectAnadirALaBolsaTallaPrevNoSelected() throws Exception {
         //Step
-        DatosStep datosStep = selectAnadirALaBolsaStep();
+    	selectAnadirALaBolsaStep();
         
-        //Validation
+        //Validations
         boolean isTallaUnica = pageFicha.isTallaUnica();
         TypeFicha typeFichaAct = pageFicha.getTypeFicha();
-        String strApareceAviso = "SÍ";
-        if (isTallaUnica || typeFichaAct==TypeFicha.New)
-            strApareceAviso = "NO";
-        String descripValidac = 
-            "1) " + strApareceAviso + " Aparece un aviso indicando que hay que seleccionar la talla";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            boolean isVisibleAviso = pageFicha.secDataProduct.isVisibleAvisoSeleccionTalla(this.dFTest.driver);
-            if (isTallaUnica || typeFichaAct==TypeFicha.New) {
-                if (isVisibleAviso) {
-                    listVals.add(1, State.Warn);
-                }
-            }
-            else {
-                if (!isVisibleAviso) {
-                    listVals.add(1, State.Warn);
-                }
-            }
-                
-            datosStep.setListResultValidations(listVals);
-        }  
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
+        checkAvisoTallaUnica(isTallaUnica, typeFichaAct);
         if (!isTallaUnica && typeFichaAct==TypeFicha.New) {
-            descripValidac = 
-                "1) Se hace visible la lista de tallas";
-            datosStep.setNOKstateByDefault();
-            listVals = ListResultValidation.getNew(datosStep);
-            try {
-                if (!pageFicha.secDataProduct.secSelTallasNew.isVisibleListTallasForSelectUntil(0, this.dFTest.driver)) {
-                    listVals.add(1, State.Warn);
-                }
-        
-                datosStep.setListResultValidations(listVals);
-            }  
-            finally { listVals.checkAndStoreValidations(descripValidac); }            
+        	checkListaTallasVisible();
         }
             
         return isTallaUnica;
     }
     
+    @Validation
+    public ListResultValidation checkAvisoTallaUnica(boolean isTallaUnica, TypeFicha typeFichaAct) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	boolean isVisibleAviso = pageFicha.secDataProduct.isVisibleAvisoSeleccionTalla(driver);
+    	if (isTallaUnica || typeFichaAct==TypeFicha.New) {
+		 	validations.add(
+		 		"NO aparece un aviso indicando que hay que seleccionar la talla",
+		 		!isVisibleAviso, State.Defect);
+    	}
+    	else {
+		 	validations.add(
+		 		"SÍ aparece un aviso indicando que hay que seleccionar la talla",
+		 		isVisibleAviso, State.Defect);
+    	}
+    	return validations;
+    }
+    
+    @Validation (
+    	description="Se hace visible la lista de tallas",
+    	level=State.Warn)
+    public boolean checkListaTallasVisible() {
+    	return (pageFicha.secDataProduct.secSelTallasNew.isVisibleListTallasForSelectUntil(0, driver));
+    }
+    
     /**
      * Selección del botón "Añadir a la bolsa" en un contexto en el que previamente SÍ se ha seleccionado una talla
      */
-    public DatosStep selectAnadirALaBolsaTallaPrevSiSelected(ArticuloScreen articulo, DataCtxShop dCtxSh) 
+    public void selectAnadirALaBolsaTallaPrevSiSelected(ArticuloScreen articulo, DataCtxShop dCtxSh) 
     throws Exception {
         //Step, Validation
-        DatosStep datosStep = selectAnadirALaBolsaStep();
+        selectAnadirALaBolsaStep();
         DataBag dataBag = new DataBag();
         dataBag.addArticulo(articulo);
-        SecBolsaStpV.validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, this.dFTest);
-        return datosStep;
+        SecBolsaStpV.validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE);
     }    
 
-    public DatosStep selectAnadirAFavoritos() throws Exception {
+    public void selectAnadirAFavoritos() throws Exception {
         DataFavoritos dataFavoritos = new DataFavoritos();
-        return (selectAnadirAFavoritos(dataFavoritos));
+        selectAnadirAFavoritos(dataFavoritos);
     }
     
-    public DatosStep selectAnadirAFavoritos(DataFavoritos dataFavoritos) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep   (
-            "Seleccionar el botón <b>\"Añadir a Favoritos\"</b>", 
-            "El artículo se añade a Favoritos");
-        try {
-            pageFicha.selectAnadirAFavoritosButton();
-            ArticuloScreen articulo = pageFicha.getArticuloObject();
-            dataFavoritos.addArticulo(articulo);
-                            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }               
+    @Step (
+    	description="Seleccionar el botón <b>\"Añadir a Favoritos\"</b>", 
+        expected="El artículo se añade a Favoritos")
+    public void selectAnadirAFavoritos(DataFavoritos dataFavoritos) throws Exception {
+        pageFicha.selectAnadirAFavoritosButton();
+        ArticuloScreen articulo = pageFicha.getArticuloObject();
+        dataFavoritos.addArticulo(articulo);            
 
-        int maxSecondsToWait1 = 2;
-        int maxSecondsToWait2 = 3;
-        String descripValidac = 
-            "1) Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + maxSecondsToWait1 + " segundos)<br>" +
-            "2) La capa superior acaba desapareciendo (lo esperamos hasta " + maxSecondsToWait2 + " segundos)";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!pageFicha.isVisibleDivAnadiendoAFavoritosUntil(maxSecondsToWait1)) {
-                listVals.add(1, State.Info);
-            }
-            if (!pageFicha.isInvisibleDivAnadiendoAFavoritosUntil(maxSecondsToWait2)) {
-                listVals.add(2, State.Warn);
-            }
-                            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
         //Validaciones
-        validateVisibleButtonFavoritos(ActionFavButton.Remove, datosStep);
-        
-        return datosStep;
+        checkCapaAltaFavoritos();
+        validateVisibleButtonFavoritos(ActionFavButton.Remove);
     }
     
-    public DatosStep selectRemoveFromFavoritos() throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep   (
-            "Seleccionar el botón <b>\"Eliminar de Favoritos\"</b>", 
-            "El artículo se elimina de Favoritos");
-        try {
-            pageFicha.selectRemoveFromFavoritosButton();
-                            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }               
+    @Validation
+    private ListResultValidation checkCapaAltaFavoritos() {
+    	ListResultValidation validations = ListResultValidation.getNew();
+        int maxSecondsWait1 = 2;
+	 	validations.add(
+			"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + maxSecondsWait1 + " segundos)<br>",
+			pageFicha.isVisibleDivAnadiendoAFavoritosUntil(maxSecondsWait1), State.Info);
+        int maxSecondsWait2 = 3;
+	 	validations.add(
+			"La capa superior acaba desapareciendo (lo esperamos hasta " + maxSecondsWait2 + " segundos)",
+			pageFicha.isInvisibleDivAnadiendoAFavoritosUntil(maxSecondsWait2), State.Warn);
+    	return validations;
+    }
+    
+    @Step (
+    	description="Seleccionar el botón <b>\"Eliminar de Favoritos\"</b>", 
+        expected="El artículo se elimina de Favoritos")
+    public void selectRemoveFromFavoritos() throws Exception {
+        pageFicha.selectRemoveFromFavoritosButton();             
 
         //Validaciones
-        validateVisibleButtonFavoritos(ActionFavButton.Add, datosStep);
-        
-        return datosStep;
+        validateVisibleButtonFavoritos(ActionFavButton.Add);
     }    
     
-    public void validateVisibleButtonFavoritos(ActionFavButton buttonType, DatosStep datosStep) {
-        //Validaciones
-        String descripValidac = 
-            "1) Aparece el botón de " + buttonType + " a Favoritos";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            switch (buttonType) {
-            case Remove:
-                if (!pageFicha.isVisibleButtonElimFavoritos()) {
-                    listVals.add(1, State.Defect);
-                }
-                break;
-            case Add:
-            default:                
-                if (!pageFicha.isVisibleButtonAnadirFavoritos()) {
-                    listVals.add(1, State.Defect);
-                }
-            }
-                            
-            datosStep.setListResultValidations(listVals);
+    @Validation (
+    	description="Aparece el botón de #{buttonType} a Favoritos",
+    	level=State.Defect)
+    public boolean validateVisibleButtonFavoritos(ActionFavButton buttonType) {
+        switch (buttonType) {
+        case Remove:
+            return (pageFicha.isVisibleButtonElimFavoritos());
+        case Add:
+        default:                
+            return (pageFicha.isVisibleButtonAnadirFavoritos());
         }
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
     }
     
-    public DatosStep selectBuscarEnTiendaButton() throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep   (
-            "Seleccionar <b>" + pageFicha.getNameLinkBuscarEnTienda() + "</b>", 
-            "Aparece un resultado de la búsqueda correcta");
-        try {
-            pageFicha.selectBuscarEnTiendaLink();
-                            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }               
+    final String tagNameLink = "@TagNameLink";
+    @Step (
+    	description="Seleccionar <b>" + tagNameLink + "</b>", 
+        expected="Aparece un resultado de la búsqueda correcta")
+    public void selectBuscarEnTiendaButton() throws Exception {
+    	TestCaseData.getDatosCurrentStep().replaceInDescription(tagNameLink, pageFicha.getNameLinkBuscarEnTienda());
+        pageFicha.selectBuscarEnTiendaLink();             
 
         //Validaciones
-        ModalBuscadorTiendasStpV.validaBusquedaConResultados(datosStep, this.dFTest);
-        
-        return datosStep;
+        ModalBuscadorTiendasStpV.validaBusquedaConResultados(driver);
     }
     
-    public DatosStep selectGuiaDeTallas() throws Exception {
-        //Step.
-    	boolean isVisible = false;
-        DatosStep datosStep = new DatosStep   (
-            "Si está visible, Seleccionar el link \"<b>Guía de tallas</b>\"", 
-            "Aparece el Fit Finder");
-        try {
-            isVisible = 
-            	pageFicha.secDataProduct.selectGuiaDeTallasIfVisible(this.dFTest.driver);
-                            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+    @Step (
+    	description="Si está visible, Seleccionar el link \"<b>Guía de tallas</b>\"", 
+        expected="Aparece el Fit Finder")
+    public void selectGuiaDeTallas() throws Exception {
+    	boolean isVisible = pageFicha.secDataProduct.selectGuiaDeTallasIfVisible(driver);              
+        if (isVisible) {
+            secFitFinder.validateIsOkAndClose(driver);
         }
-        finally { StepAspect.storeDataAfterStep(datosStep); }               
-
-        if (isVisible)
-            secFitFinder.validateIsOkAndClose(datosStep, this.dFTest);
-        
-        return datosStep;
     }
     
     public void validateSliderIfExists(Slider typeSlider) {
-    	DatosStep datosStep = TestCaseData.getDatosLastStep();
-        boolean existsBlock = true;
-        String descripValidac = 
-            "1) Es visible el slider de artículos de tipo <b>" + typeSlider + "</b>";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!pageFicha.isVisibleSlider(typeSlider)) {
-                listVals.add(1, State.Info_NoHardcopy);
-                existsBlock = false;
-            }
-                            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        if (existsBlock) {
-            int numArtMin = 1;
-            descripValidac = 
-                "1) El número de artículos del slider de tipo <b>" + typeSlider + "</b> es > " + numArtMin;
-            datosStep.setNOKstateByDefault();
-            listVals = ListResultValidation.getNew(datosStep);
-            try {
-                if (pageFicha.getNumArtVisiblesSlider(typeSlider) <= numArtMin) {
-                    listVals.add(1, State.Warn);
-                    existsBlock = false;
-                }
-                                
-                datosStep.setListResultValidations(listVals);
-            }
-            finally { listVals.checkAndStoreValidations(descripValidac); }            
+    	boolean isVisibleSlider = checkSliderVisible(typeSlider);
+        if (isVisibleSlider) {
+        	checkNumArticlesSlider(1, typeSlider);
         }
     }
     
-    public void validaPrevNext(LocationArticle locationArt, DataCtxShop dCtxSh, DatosStep datosStep) {
-        String statePrevText = "Es visible";
-        if (locationArt.isFirstInGalery()) 
-            statePrevText = "No es visible";
-        
-        int maxSecondsToWait = 5;
-        String descripValidac = 
-            "1) " + statePrevText + " el link <b>Prev</b> (lo esperamos hasta " + maxSecondsToWait + " segundos)";          
-        if (dCtxSh.appE==AppEcom.outlet || dCtxSh.channel==Channel.desktop)
-        	descripValidac+="<br>2) Es visible el link <b>Next</b>";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (locationArt.isFirstInGalery()) {
-                if (pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Prev, maxSecondsToWait, this.dFTest.driver)) {
-                    listVals.add(1, State.Warn);
-                }
-            }
-            else {
-                if (!pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Prev, maxSecondsToWait, this.dFTest.driver)) {
-                    listVals.add(1, State.Warn);
-                }
-            }
-            if (app==AppEcom.outlet || dCtxSh.channel==Channel.desktop) {
-            	descripValidac = descripValidac + "2) Es visible el link <b>Next</b>";
-	            if (!pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Next, 0, this.dFTest.driver)) {
-	                listVals.add(2, State.Warn);            
-	            }
-            }            
-            datosStep.setListResultValidations(listVals);            
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation (
+    	description="Es visible el slider de artículos de tipo <b>#{typeSlider}</b>",
+    	level=State.Info_NoHardcopy)
+    public boolean checkSliderVisible(Slider typeSlider) {
+    	return (pageFicha.isVisibleSlider(typeSlider));
     }
     
-    public DatosStep selectLinkNavigation(ProductNav productNav, DataCtxShop dCtxSh, String refProductOrigin) 
+    @Validation (
+    	description="El número de artículos del slider de tipo <b>#{typeSlider}</b> es > #{numArtMin}",
+    	level=State.Warn)
+    public boolean checkNumArticlesSlider(int numArtMin, Slider typeSlider) {
+	    return (pageFicha.getNumArtVisiblesSlider(typeSlider) > numArtMin); 
+    }
+    
+    @Validation
+    public ListResultValidation validaPrevNext(LocationArticle locationArt, DataCtxShop dCtxSh) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+        int maxSecondsWait = 5;
+    	boolean isVisiblePrevLink = pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Prev, maxSecondsWait, driver);
+        if (locationArt.isFirstInGalery()) {
+		 	validations.add(
+		 		"No es visible el link <b>Prev</b> (lo esperamos hasta " + maxSecondsWait + " segundos)",
+		 		!isVisiblePrevLink, State.Warn);
+        }
+        else {
+		 	validations.add(
+		 		"Sí es visible el link <b>Prev</b> (lo esperamos hasta " + maxSecondsWait + " segundos)",
+		 		isVisiblePrevLink, State.Warn);
+        }
+        if (dCtxSh.appE==AppEcom.outlet || dCtxSh.channel==Channel.desktop) {
+		 	validations.add(
+		 		"Es visible el link <b>Next</b>",
+		 		pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Next, 0, driver), State.Warn);
+        }
+        
+        return validations;
+    }
+    
+    @Step (
+		description="Seleccionamos el link #{productNav}</b>", 
+        expected="Aparece una página de ficha correcta")
+    public void selectLinkNavigation(ProductNav productNav, DataCtxShop dCtxSh, String refProductOrigin) 
     throws Exception {
-        //Step. 
-        DatosStep datosStep = new DatosStep(
-            "Seleccionamos el link <b>" + productNav + "</b>", 
-            "Aparece una página de ficha correcta");
-        try {
-            pageFicha.secDataProduct.selectLinkNavigation(productNav, this.dFTest.driver);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+    	pageFicha.secDataProduct.selectLinkNavigation(productNav, driver);
+        if (productNav==ProductNav.Prev) {
+            validateIsFichaArtDisponible(refProductOrigin, 3);
         }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        if (productNav==ProductNav.Prev)
-            validateIsFichaArtDisponible(refProductOrigin, datosStep);
         
         if (productNav==ProductNav.Next) {
         	LocationArticle location2onArticle = LocationArticle.getInstanceInCatalog(2);
-        	validaPrevNext(location2onArticle, dCtxSh, datosStep);
+        	validaPrevNext(location2onArticle, dCtxSh);
         }
-        
-        return datosStep;
     }
     
     //------------------------------------------------------------------------
     //Específic Ficha Old
-    public void validaExistsImgsCarruselIzqFichaOld() {
-        DatosStep datosStep = TestCaseData.getDatosLastStep();
-        String descripValidac = 
-            "1) Existe más de una imagen de carrusel a la izquierda de la imagen principal";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() < 2) {
-                listVals.add(1, State.Warn);
-            }
     
-            datosStep.setListResultValidations(listVals);                    
-        }  
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation (
+    	description="Existe más de una imagen de carrusel a la izquierda de la imagen principal",
+    	level=State.Warn)
+    public boolean validaExistsImgsCarruselIzqFichaOld() {
+        return (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() >= 2);
     }
     
-    public DatosStep selectImgCarruselIzqFichaOld(int numImagen) throws Exception { 
-        //Step.
-        String pngImagen = "";
-        DatosStep datosStep = new DatosStep   (
-            "Seleccionar la " + numImagen + "a imagen del carrusel izquierdo", 
-            "La imagen se carga aumentada en la imagen central");
-        try {
-            pngImagen = ((PageFichaArtOld)pageFicha).getSrcImgCarruselIzq(numImagen);
-            ((PageFichaArtOld)pageFicha).clickImgCarruselIzq(numImagen);
-                            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }               
+    @Step (
+    	description="Seleccionar la #{numImagen}a imagen del carrusel izquierdo", 
+        expected="La imagen se carga aumentada en la imagen central")
+    public void selectImgCarruselIzqFichaOld(int numImagen) throws Exception { 
+        String pngImagenCarrusel = ((PageFichaArtOld)pageFicha).getSrcImgCarruselIzq(numImagen);
+        ((PageFichaArtOld)pageFicha).clickImgCarruselIzq(numImagen);           
                     
         //Validaciones
-        String descripValidac = 
-            "1) La imagen central se corresponde con la imagen del carrusel seleccionada (<b>" + pngImagen + "</b>)";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!((PageFichaArtOld)pageFicha).srcImagenCentralCorrespondsToImgCarrusel(pngImagen)) {
-                listVals.add(1, State.Defect);
-            }
-                            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
+        checkImgCentralIsAssociatedToCarruselSelect(pngImagenCarrusel);
     }
     
+    @Validation (
+    	description="La imagen central se corresponde con la imagen del carrusel seleccionada (<b>#{pngImagenCarrusel}</b>)",
+    	level=State.Defect)
+    private boolean checkImgCentralIsAssociatedToCarruselSelect(String pngImagenCarrusel) {
+    	return (((PageFichaArtOld)pageFicha).srcImagenCentralCorrespondsToImgCarrusel(pngImagenCarrusel));
+    }
+    
+    @Step (
+    	description="Seleccionar la imagen/ficha central", 
+    	expected="Se produce un zoom sobre la imagen")
     public void selectImagenCentralFichaOld() throws Exception {
-        //Step
         String pngImgCentralOriginal = ((PageFichaArtOld)pageFicha).getSrcImagenCentral();
-        DatosStep datosStep = new DatosStep (
-            "Seleccionar la imagen/ficha central", 
-            "Se produce un zoom sobre la imagen");
-        try {
-        	((PageFichaArtOld)pageFicha).clickImagenFichaCentral();
-                            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }         
+        ((PageFichaArtOld)pageFicha).clickImagenFichaCentral();       
                     
         //Validaciones
-        String descripValidac = 
-            "1) Se aplica un Zoom sobre la imagen central<br>" +
-            "2) La imagen central con Zoom sigue conteniendo la imagen original: " + pngImgCentralOriginal;
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!((PageFichaArtOld)pageFicha).isVisibleFichaConZoom()) {
-                listVals.add(1, State.Defect);
-            }
-            if (!((PageFichaArtOld)pageFicha).srcImagenCentralConZoomContains(pngImgCentralOriginal)) {
-                listVals.add(2, State.Defect);
-            }
-                            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+        checkImgCentralAfterZoom(pngImgCentralOriginal);
     }    
     
-    public void validaBreadCrumbFichaOld(String urlGaleryOrigin, DatosStep datosStep) {
-        String descripValidac = 
-            "1) Existen el bloque correspondiente a las <b>BreadCrumb</b><br>" + 
-            "2) El link correspondiente a la Galería del artículo linca a la URL " + urlGaleryOrigin;
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!SecBreadcrumbFichaOld.isVisibleBreadCrumb(this.dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            String urlGaleryBC = SecBreadcrumbFichaOld.getUrlItemBreadCrumb(ItemBCrumb.Galery, this.dFTest.driver);
-            if (!urlGaleryOrigin.contains(urlGaleryBC)) {
-                listVals.add(2, State.Warn);
-            }
-                            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation
+    public ListResultValidation checkImgCentralAfterZoom(String pngImgCentralOriginal) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	 	validations.add(
+	 		"Se aplica un Zoom sobre la imagen central<br>",
+	 		((PageFichaArtOld)pageFicha).isVisibleFichaConZoom(), State.Defect);
+	 	validations.add(
+	 		"La imagen central con Zoom sigue conteniendo la imagen original: " + pngImgCentralOriginal,
+	 		((PageFichaArtOld)pageFicha).srcImagenCentralConZoomContains(pngImgCentralOriginal), State.Defect);
+	 	return validations;
+    }
+    
+    @Validation
+    public ListResultValidation validaBreadCrumbFichaOld(String urlGaleryOrigin) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	 	validations.add(
+	 		"Existen el bloque correspondiente a las <b>BreadCrumb</b><br>",
+	 		SecBreadcrumbFichaOld.isVisibleBreadCrumb(driver), State.Defect);    	
+	 	String urlGaleryBC = SecBreadcrumbFichaOld.getUrlItemBreadCrumb(ItemBCrumb.Galery, driver);
+	 	validations.add(
+	 		"El link correspondiente a la Galería del artículo linca a la URL " + urlGaleryOrigin,
+	 		urlGaleryOrigin.contains(urlGaleryBC), State.Warn); 
+	 	return validations;
     }
 }

@@ -2,15 +2,13 @@ package com.mng.robotest.test80.mango.test.stpv.shop;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraDesktop;
-
 
 public class SecCabeceraStpV {
 
@@ -26,66 +24,34 @@ public class SecCabeceraStpV {
 		return (new SecCabeceraStpV(dCtxSh, dFTest));
 	}
 	
-    public void validaLogoDesktop(LineaType lineaType, DatosStep datosStep) {
-        //Validaciones.
-    	int maxSecondsWait = 1;
-        String descripValidac = 
-            "1) Aparece el logo/link correcto correspondiente al canal, país, línea " +
-               "(esperamos hasta " + maxSecondsWait + " segundos)";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!((SecCabeceraDesktop)secCabecera).isPresentLogoCorrectUntil(dCtxSh.pais, lineaType, maxSecondsWait)) {
-                listVals.add(1, State.Warn);
-            }
-                
-            datosStep.setListResultValidations(listVals);
-        } 
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation (
+		description="Aparece el logo/link correcto correspondiente al canal, país, línea (esperamos hasta #{maxSecondsWait} segundos)",
+		level=State.Warn)
+    public boolean validaLogoDesktop(int maxSecondsWait, LineaType lineaType) {
+		return (((SecCabeceraDesktop)secCabecera).isPresentLogoCorrectUntil(dCtxSh.pais, lineaType, maxSecondsWait));
     }
     
-    /**
-     * Selecciona el logo superior de Mango
-     */
+	@Step (
+		description="Seleccionar el logo de Mango", 
+        expected="Se accede a la página principal de la línea")
     public void selecLogo() throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep     (
-            "Seleccionar el logo de Mango", 
-            "Se accede a la página principal de la línea");
-        datosStep.setSaveImagePage(SaveWhen.Always);
-        try {
-            secCabecera.clickLogoMango();
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }              
+		secCabecera.clickLogoMango();            
     }    
     
-    public void validateIconoBolsa(DatosStep datosStep) {
-        String validacion1 = "";
-        if ("true".compareTo(dCtxSh.pais.getShop_online())==0)
-            validacion1 = "<b>Sí</b> es posible comprar (aparece la capa relacionada con la bolsa)";
-        else
-            validacion1 = "<b>No</b> es posible comprar (no aparece la capa relacionada con la bolsa)";
-    
-        String descripValidac = 
-            "1) " + validacion1;
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if ("true".compareTo(dCtxSh.pais.getShop_online())==0) {
-                if (!secCabecera.isVisibleIconoBolsa()) {
-                    listVals.add(1, State.Warn);
-                }
-            }
-            else {
-                if (secCabecera.isVisibleIconoBolsa()) {
-                    listVals.add(1, State.Warn);
-                }
-            }
-    
-            datosStep.setListResultValidations(listVals);
-        } 
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+    public ListResultValidation validateIconoBolsa() {
+		ListResultValidation validations = ListResultValidation.getNew();
+		boolean isVisibleIconoBolsa = secCabecera.isVisibleIconoBolsa();
+		if ("true".compareTo(dCtxSh.pais.getShop_online())==0) {
+	    	validations.add(
+    			"<b>Sí</b> es posible comprar (aparece la capa relacionada con la bolsa)",
+    			isVisibleIconoBolsa, State.Warn);
+		}
+		else {
+	    	validations.add(
+    			"<b>No</b> es posible comprar (aparece la capa relacionada con la bolsa)",
+    			!isVisibleIconoBolsa, State.Warn);
+		}
+		return validations;
     }
 }

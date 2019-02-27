@@ -1,17 +1,14 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 
 import java.util.StringTokenizer;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.robotest.test80.mango.test.data.Descuento;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen; 
-
 
 public class Page1EnvioCheckoutMobil extends WebdrvWrapp {
 	static String XPathLink1Envio = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step1']";
@@ -160,10 +157,11 @@ public class Page1EnvioCheckoutMobil extends WebdrvWrapp {
 		return (isElementVisibleUntil(driver, By.xpath(XPathDescuentoEmpleado), secondsToWait));
 	}
 	
-    public static boolean validateDiscountEmpleadoNotNull(Descuento descuento, WebDriver driver) throws Exception {
+    public static boolean validateDiscountEmpleadoNotNull(WebDriver driver) throws Exception {
     	String descuentoScreen = getImporteDescuentoEmpleado(driver);
-    	if ("".compareTo(descuentoScreen)==0)
+    	if ("".compareTo(descuentoScreen)==0) {
     		return false;
+    	}
     	
     	float descuentoFloat = ImporteScreen.getFloatFromImporteMangoScreen(descuentoScreen);
     	return (descuentoFloat > 0);

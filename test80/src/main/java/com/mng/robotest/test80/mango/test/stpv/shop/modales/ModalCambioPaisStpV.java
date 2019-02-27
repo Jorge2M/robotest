@@ -36,7 +36,7 @@ public class ModalCambioPaisStpV {
             "Cambiamos al país <b>" + dCtxSh.pais.getNombre_pais() + "</b> (" + dCtxSh.pais.getCodigo_pais() + "), idioma <b>" + dCtxSh.idioma.getCodigo().getLiteral() + "</b>", 
             "Se accede a la shop de " + dCtxSh.pais.getNombre_pais() + " en " + dCtxSh.idioma.getCodigo().getLiteral());
         try {
-            PagePrehome.selecPaisIdiomaYAccede(dCtxSh, dFTest);
+            PagePrehome.selecPaisIdiomaYAccede(dCtxSh, dFTest.driver);
             
             datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
         } 

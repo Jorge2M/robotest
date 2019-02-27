@@ -9,13 +9,17 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
 public class PageGoogle extends WebdrvWrapp {
 
-    public static final String URLacceso = "http://www.google.es";
+    private static final String URLacceso = "http://www.google.es";
     static final String XPath_inputText = "//input[@type='text']";
     static final String XPath_linkNoPubli = "//div[@class='rc']//a";
     static final String XPath_LinkNoPubliText = XPath_linkNoPubli + "/h3";
     
     public static void accessViaURL(WebDriver driver) {
         driver.get(URLacceso);
+    }
+    
+    public static String getUrlAcceso() {
+    	return URLacceso;
     }
     
     public static String getXPath_linkWithText(String textContained) {

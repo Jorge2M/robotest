@@ -109,7 +109,7 @@ public class SecBannersStpV {
             switch (dataBanner.getDestinoType()) {
             case Ficha:
             	PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel);
-            	pageFichaStpV.validateIsFichaCualquierArticulo(datosStep);
+            	pageFichaStpV.validateIsFichaCualquierArticulo();
                 break;
             default:                
             case Otros:

@@ -3,10 +3,8 @@ package com.mng.robotest.test80.mango.test.pageobject.votf;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
-
 
 public class PageLoginVOTF extends WebdrvWrapp {
 
@@ -14,9 +12,9 @@ public class PageLoginVOTF extends WebdrvWrapp {
     private static final String XPathInputPassword = "//input[@class='pwd']";
     private static final String XPathButtonContinue = "//input[@class[contains(.,'button submit')]]";
     
-    public static void goToFromUrlAndSetTestABs(String urlLogin, DataFmwkTest dFTest) throws Exception {    
-    	AccesoNavigations.goToInitURL(urlLogin, dFTest);
-        waitForPageLoaded(dFTest.driver);
+    public static void goToFromUrlAndSetTestABs(String urlLogin, WebDriver driver) throws Exception {    
+    	AccesoNavigations.goToInitURL(urlLogin, driver);
+        waitForPageLoaded(driver);
     }
     
     public static void inputUsuario(String usuario, WebDriver driver) {

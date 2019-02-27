@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
@@ -147,7 +150,7 @@ public class SecBolsaStpV {
             datosStep = altaBolsaArticulos(listArticlesForAdd, dataBag, dCtxSh, dFTest);
         
             //Validación
-            validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, dFTest);
+            validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE);
         }
         
         //Almacenamos el importe SubTotal y el de Transporte
@@ -205,9 +208,10 @@ public class SecBolsaStpV {
      * Validaciones posteriores al alta de una lista de artículos en la bolsa
      * @param listArtEnBolsa lista total de artículos dados de alta a la bolsa
      */
-    public static void validaAltaArtBolsa(DataBag dataBag, Channel channel, AppEcom app, DataFmwkTest dFTest) 
+    public static void validaAltaArtBolsa(DataBag dataBag, Channel channel, AppEcom app) 
     throws Exception {
         //Validaciones
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
     	DatosStep datosStep = TestCaseData.getDatosLastStep();
         validaNumArtEnBolsa(dataBag, channel, app, dFTest);
         if (channel==Channel.desktop) {
@@ -238,7 +242,7 @@ public class SecBolsaStpV {
                                                                   Constantes.AnalyticsVal.Criteo,
                                                                   Constantes.AnalyticsVal.NetTraffic, 
                                                                   Constantes.AnalyticsVal.DataLayer);
-        PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, analyticSet, dFTest);
+        PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, analyticSet, dFTest.driver);
     }
     
     public static void validaNumArtEnBolsa(DataBag dataBag, Channel channel, AppEcom app, DataFmwkTest dFTest) 
@@ -396,23 +400,23 @@ public class SecBolsaStpV {
         return datosStep;
     }
     
-    public static void click1erArticuloBolsa(DataBag dataBag, AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
-        //Step.
-        ArticuloScreen articuloClickado = dataBag.getArticulo(0);
-        DatosStep datosStep = new DatosStep       (
-            "Lincar con el 1er articulo existente en la bolsa" + " (" + articuloClickado.getReferencia() + ")", 
-            "El link al artículo es correcto");
-        try {
-        	SecBolsa.setBolsaToStateIfNotYet(StateBolsa.Open, channel, app, dFTest.driver);
-            SecBolsa.click1erArticuloBolsa(dFTest.driver);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); } 
+    public static void click1erArticuloBolsa(DataBag dataBag, AppEcom app, Channel channel, WebDriver driver) 
+    throws Exception {
+    	ArticuloScreen articuloClickado = dataBag.getArticulo(0);
+    	clickArticuloBolsa(articuloClickado, app, channel, driver);
+    }
+    
+    @Step (
+    	description="Lincar con el artículo existente en la bolsa" + " #{articuloClickado.getReferencia()})", 
+        expected="El link al artículo es correcto")
+    public static void clickArticuloBolsa(ArticuloScreen articuloClickado, AppEcom app, Channel channel, WebDriver driver) 
+    throws Exception {
+    	SecBolsa.setBolsaToStateIfNotYet(StateBolsa.Open, channel, app, driver);
+        SecBolsa.click1erArticuloBolsa(driver);
     
         //Validaciones.
         String refArticulo = articuloClickado.getReferencia();
         PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(app, channel);
-        pageFichaStpv.validateIsFichaArtDisponible(refArticulo, datosStep);
+        pageFichaStpv.validateIsFichaArtDisponible(refArticulo, 3);
     }
 }

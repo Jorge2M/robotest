@@ -24,40 +24,29 @@ public class PageMisComprasStpV {
 
     public static SecDetalleCompraTiendaStpV SecDetalleCompraTienda; 
     public static SecQuickViewArticuloStpV SecQuickViewArticulo;
-    public static void validateIsPage(DataCtxShop dataCtxShop, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    public static void validateIsPage(DataCtxShop dataCtxShop, WebDriver driver) throws Exception {
         if (dataCtxShop.pais.isTicketStoreEnabled()) {
-            validateIsPage(dFTest.driver);
+            validateIsPage(driver);
         } else {
-            validateIsPageWhenNotExistTabs(datosStep, dFTest);
+            validateIsPageWhenNotExistTabs(driver);
+            AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
         }
     }
 
-    private static void validateIsPageWhenNotExistTabs(DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
-        //Validaciones.
+    @Validation
+    private static ListResultValidation validateIsPageWhenNotExistTabs(WebDriver driver) throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
         int maxSecondsToWait = 2;
-        String descripValidac =
-        	"1) Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
-            "2) No aparece el bloque de \"Tienda\"<br>" +
-            "3) No aparece el bloque de \"Online\"";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageMisCompras.isPageUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            if (PageMisCompras.isPresentBlockUntil(0/*maxSedondsToWait*/, TypeCompra.Tienda, dFTest.driver)) {
-                listVals.add(2, State.Warn);
-            }
-            if (PageMisCompras.isPresentBlockUntil(0/*maxSedondsToWait*/, TypeCompra.Online, dFTest.driver)) {
-                listVals.add(3, State.Warn);
-            }
-
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-
-        //Validaciones estÃ¡ndar.
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
+      	validations.add(
+    		"Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)<br>",
+    		PageMisCompras.isPageUntil(maxSecondsToWait, driver), State.Warn);
+      	validations.add(
+    		"No aparece el bloque de \"Tienda\"<br>",
+    		!PageMisCompras.isPresentBlockUntil(0, TypeCompra.Tienda, driver), State.Warn);
+      	validations.add(
+    		"No aparece el bloque de \"Online\"",
+    		!PageMisCompras.isPresentBlockUntil(0, TypeCompra.Online, driver), State.Warn);
+      	return validations;
     }
 
     @Validation

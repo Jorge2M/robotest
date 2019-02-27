@@ -59,7 +59,7 @@ public class SecStoreCreditStpV {
         if (marcadoInicialmente) {
             //Validaciones saldo cuenta Desmarcado -> validamos los métodos de pago disponibles
             boolean isEmpl = dCtxPago.getFTCkout().isEmpl;
-            PageCheckoutWrapperStpV.validaMetodosPagoDisponibles(datosStep, pais, isEmpl, app, channel, dFTest);
+            PageCheckoutWrapperStpV.validaMetodosPagoDisponibles(pais, isEmpl, app, channel, dFTest.driver);
             
             //Almacenamos el importe total
             if (channel==Channel.desktop)

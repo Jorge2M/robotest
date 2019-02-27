@@ -10,6 +10,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
@@ -90,58 +91,39 @@ public class PageCheckoutWrapperStpV {
         finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones (validamos los métodos de pago disponibles)
-        validaMetodosPagoDisponibles(datosStep, pais, isEmpl, app, channel, dFTest);
+        validaMetodosPagoDisponibles(pais, isEmpl, app, channel, dFTest.driver);
         
         return datosStep;
     }
     
-    /**
-     * Valida los métodos de pago disponibles en la página de checkout
-     */
-    public static void validaMetodosPagoDisponibles(DatosStep datosStep, Pais pais, boolean isEmpl, AppEcom app, Channel channel, DataFmwkTest dFTest) {
-        //Validaciones
-        String descripValidac = 
-            "1) El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país (" + pais.getListPagosEnOrdenPantalla(app, isEmpl).size() + ")";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageCheckoutWrapper.isNumMetodosPagoOK(pais, app, channel, isEmpl, dFTest.driver)) {
-                listVals.add(1, State.Defect);
+    public static void validaMetodosPagoDisponibles(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) {
+    	checkAvailablePagos(pais, isEmpl, app, channel, driver);
+    	checkLogosPagos(pais, isEmpl, app, channel, driver);
+    }
+    
+    @Validation
+    private static ListResultValidation checkAvailablePagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	 	validations.add(
+			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país (" + pais.getListPagosEnOrdenPantalla(app, isEmpl).size() + ")",
+			PageCheckoutWrapper.isNumMetodosPagoOK(pais, app, channel, isEmpl, driver), State.Defect);    	
+    	return validations;
+    }
+    
+    @Validation
+    private static ListResultValidation checkLogosPagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) { 
+    	ListResultValidation validations = ListResultValidation.getNew();
+        List<Pago> listaPagosEnOrden = pais.getListPagosEnOrdenPantalla(app, isEmpl);
+        for (int i=0; i<listaPagosEnOrden.size(); i++) {
+            if (listaPagosEnOrden.get(i).getTypePago()!=TypePago.TpvVotf) {
+        	 	validations.add(
+        			"Aparece el logo/pestaña asociado al pago <b>" + listaPagosEnOrden.get(i).getNombre(channel) + "</b><br>",
+        			PageCheckoutWrapper.isMetodoPagoPresent(listaPagosEnOrden.get(i).getNombre(channel), listaPagosEnOrden.get(i).getIndexpant(), channel, pais.getLayoutPago(), driver),
+        			State.Defect);    
             }
-
-            datosStep.setListResultValidations(listVals);
-        }
-        catch (Exception e) {
-            /*
-             * 
-             */
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+        }   
         
-        //Validaciones
-        descripValidac = 
-            "1) Aparece un logo/pestaña por cada uno de los pagos asociados al país: " + pais.getStringPagosEnOrdenPantalla(app, isEmpl);
-        datosStep.setNOKstateByDefault();
-        listVals = ListResultValidation.getNew(datosStep);
-        try {
-            List<Pago> listaPagosEnOrden = pais.getListPagosEnOrdenPantalla(app, isEmpl);
-            for (int i=0; i<listaPagosEnOrden.size(); i++) {
-                if (listaPagosEnOrden.get(i).getTypePago()!=TypePago.TpvVotf) {
-                    if (!PageCheckoutWrapper.isMetodoPagoPresent(listaPagosEnOrden.get(i).getNombre(channel), listaPagosEnOrden.get(i).getIndexpant(), channel, pais.getLayoutPago(), dFTest.driver)) {                                 
-                        listVals.add(1, State.Defect); 
-                        break;
-                    }
-                }
-            }
-
-            datosStep.setListResultValidations(listVals); 
-        }
-        catch (Exception e) {
-            /*
-             * 
-             */
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }            
+        return validations;
     }
     
     /**
@@ -193,29 +175,28 @@ public class PageCheckoutWrapperStpV {
         return pagoPintado;
     }
     
-    public static DatosStep selectFranjaHorariaUrgente(Channel channel, DataFmwkTest dFTest) {
+    public static void selectFranjaHorariaUrgente(Channel channel, DataFmwkTest dFTest) {
         switch (channel) {
         case desktop:
-            return SecMetodoEnvioDesktopStpV.selectFranjaHorariaUrgente(1, dFTest);
+            SecMetodoEnvioDesktopStpV.selectFranjaHorariaUrgente(1, dFTest.driver);
+            break;
         case movil_web:
-            return Page1EnvioCheckoutMobilStpV.selectFranjaHorariaUrgente(1, dFTest);
-        default:
-            return null;
+            Page1EnvioCheckoutMobilStpV.selectFranjaHorariaUrgente(1, dFTest);
         }    
     }
 
-    public static DatosStep selectMetodoEnvio(DataCtxPago dCtxPago, String nombrePago, AppEcom appE, Channel channel, DataFmwkTest dFTest) 
+    public static void selectMetodoEnvio(DataCtxPago dCtxPago, String nombrePago, AppEcom appE, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
         alterTypeEnviosAccordingContext(dCtxPago, appE, channel, dFTest.driver);
         Pago pago = dCtxPago.getDataPedido().getPago();
         TipoTransporte tipoTransporte = pago.getTipoEnvioType(appE);
         switch (channel) {
         case desktop:
-            return SecMetodoEnvioDesktopStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, dFTest);
+            SecMetodoEnvioDesktopStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, dFTest.driver);
+            break;
         case movil_web:
-            return Page1EnvioCheckoutMobilStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, dFTest);
-        default:
-            return null;
+            Page1EnvioCheckoutMobilStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, dFTest);
+            break;
         }
     }
     
@@ -616,7 +597,7 @@ public class PageCheckoutWrapperStpV {
     public static void validaResultImputPromoEmpl(DataBag dataBag, Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
     throws Exception {
         if (channel==Channel.movil_web) {
-            Page1EnvioCheckoutMobilStpV.validaResultImputPromoEmpl(app, datosStep, dFTest);
+            Page1EnvioCheckoutMobilStpV.validaResultImputPromoEmpl(datosStep, dFTest);
         }
         else {
             Page1DktopCheckoutStpV.validaResultImputPromoEmpl(dataBag, app, datosStep, dFTest);

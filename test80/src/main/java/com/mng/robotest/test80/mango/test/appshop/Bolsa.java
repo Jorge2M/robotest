@@ -96,7 +96,7 @@ public class Bolsa extends GestorWebDriver {
         	pageGaleriaStpV.selectLinkAddArticuloToBagDesktop(posArticulo);
             articleAvailable = pageGaleriaStpV.selectTallaArticuloDesktop(posArticulo, 1/*posTalla*/, dataBag, dCtxSh);
             if (!articleAvailable) {
-                ModalArticleNotAvailableStpV.clickAspaForClose(dFTest);
+                ModalArticleNotAvailableStpV.clickAspaForClose(dFTest.driver);
                 posArticulo+=1;
             }
         }
@@ -181,6 +181,6 @@ public class Bolsa extends GestorWebDriver {
         SecBolsaStpV.forceStateBolsaTo(StateBolsa.Open, dCtxSh.appE, dCtxSh.channel, dFTest); 
         SecBolsaStpV.clear1erArticuloBolsa(dataBag, dCtxSh.appE, dCtxSh.channel, dFTest);                                
         SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest);
-        SecBolsaStpV.click1erArticuloBolsa(dataBag, dCtxSh.appE, dCtxSh.channel, dFTest);
+        SecBolsaStpV.click1erArticuloBolsa(dataBag, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
     }
 }

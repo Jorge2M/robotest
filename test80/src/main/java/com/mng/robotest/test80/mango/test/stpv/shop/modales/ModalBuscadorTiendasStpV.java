@@ -2,33 +2,29 @@ package com.mng.robotest.test80.mango.test.stpv.shop.modales;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompras;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalBuscadorTiendas;
-
 
 public class ModalBuscadorTiendasStpV {
 
-    public static void validaBusquedaConResultados(DatosStep datosStep, DataFmwkTest dFTest) {
-        //Validaciones
-        int maxSecondsToWait = 5;
-        String descripValidac = 
-            "1) La capa de búsqueda es visible<br>" +
-            "2) Se ha localizado alguna tienda (la esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {                                
-            if (!ModalBuscadorTiendas.isVisible(dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            if (!ModalBuscadorTiendas.isPresentAnyTiendaUntil(dFTest.driver, maxSecondsToWait)) {
-                listVals.add(2, State.Warn);
-            }
-    
-            datosStep.setListResultValidations(listVals);
-        }  
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+    public static ListResultValidation validaBusquedaConResultados(WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
+        int maxSecondsWait = 5;
+	 	validations.add(
+			"La capa de búsqueda es visible<br>",
+			ModalBuscadorTiendas.isVisible(driver), State.Warn);
+	 	validations.add(
+			"Se ha localizado alguna tienda (la esperamos hasta " + maxSecondsWait + " segundos)",
+			ModalBuscadorTiendas.isPresentAnyTiendaUntil(driver, maxSecondsWait), State.Warn);
+		return validations;
     }
     
     /**

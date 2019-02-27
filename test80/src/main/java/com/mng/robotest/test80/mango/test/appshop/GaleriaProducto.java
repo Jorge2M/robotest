@@ -5,7 +5,6 @@ import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.*;
 import com.mng.robotest.test80.mango.test.data.Color;
@@ -206,7 +205,7 @@ public class GaleriaProducto extends GestorWebDriver {
             pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
         }
         
-        PageGaleriaStpV.secSelectorPrecios.seleccionaIntervalo(dCtxSh.appE, dFTest);
+        PageGaleriaStpV.secSelectorPrecios.seleccionaIntervalo(dCtxSh.appE, dFTest.driver);
         if (dCtxSh.appE!=AppEcom.outlet) {
             PageGaleriaStpV.secCrossSelling.validaIsCorrect(LineaType.she, dCtxSh.appE, dFTest);
             pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
@@ -226,7 +225,7 @@ public class GaleriaProducto extends GestorWebDriver {
     				"finalmente las combinamos con cambios de color")
     public void GPO006_SliderInDesktop() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();;
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userRegistered = false;
     
         //Ini script
