@@ -15,6 +15,8 @@ import java.util.Iterator;
 
 public class PageAyuda extends WebdrvWrapp {
 
+    public static String xPathCloseBuscar = "//div[@class[contains(.,'close-modal')]]";
+
     private static JSONParser parser = new JSONParser();
     private static JSONObject fileHAR = null;
     private static ClassLoader classLoader = PageAyuda.class.getClassLoader();
