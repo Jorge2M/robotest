@@ -1,15 +1,15 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDroppoints;
-
 
 public class ModalDroppointsStpV {
     
@@ -17,44 +17,27 @@ public class ModalDroppointsStpV {
     public static SecConfirmDatosStpV secConfirmDatos;
     
     @SuppressWarnings("static-access")
-    public static void validaIsVisible(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
-        //Validación
-        int maxSecondsToWait = 3;
-        String descripValidac = 
-            "1) Desaparece el mensaje de \"Cargando...\" (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
-            "2) Aparece un 1er Droppoint visible (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
-            "3) Sí aparece el modal con el mapa de Droppoints";
-        datosStep.setNOKstateByDefault();     
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!ModalDroppoints.isInvisibleCargandoMsgUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            if (!ModalDroppoints.secSelectDPoint.isDroppointVisibleUntil(1, maxSecondsToWait, dFTest.driver)) {
-                listVals.add(2, State.Info);
-            }
-            if (!ModalDroppoints.isVisible(channel, dFTest.driver)) {
-                listVals.add(3, State.Defect);
-            }
-                            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation
+    public static ListResultValidation validaIsVisible(Channel channel, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+        int maxSecondsWait = 3;
+      	validations.add(
+    		"Desaparece el mensaje de \"Cargando...\" (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		ModalDroppoints.isInvisibleCargandoMsgUntil(maxSecondsWait, driver), State.Warn);
+      	validations.add(
+    		"Aparece un 1er Droppoint visible (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		ModalDroppoints.secSelectDPoint.isDroppointVisibleUntil(1, maxSecondsWait, driver), State.Info);
+      	validations.add(
+    		"Sí aparece el modal con el mapa de Droppoints",
+    		ModalDroppoints.isVisible(channel, driver), State.Defect);
+      	return validations;
     }
     
-    public static void validaIsNotVisible(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) No aparece el modal con el mapa de Droppoints";
-        datosStep.setNOKstateByDefault();   
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (ModalDroppoints.isVisible(channel, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-                            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
+    @Validation (
+    	description="No aparece el modal con el mapa de Droppoints",
+    	level=State.Defect)
+    public static boolean validaIsNotVisible(Channel channel, WebDriver driver) {
+        return (!ModalDroppoints.isVisible(channel, driver));
     }
     
     @SuppressWarnings("static-access")
@@ -65,7 +48,7 @@ public class ModalDroppointsStpV {
         DataDeliveryPoint dataDp = ModalDroppointsStpV.secSelectDPoint.clickDeliveryPointAndGetData(2/*position*/, dFTest);
         dCtxPago.getDataPedido().setTypeEnvio(pago.getTipoEnvioType(dCtxSh.appE));
         dCtxPago.getDataPedido().setDataDeliveryPoint(dataDp);
-        secSelectDPoint.clickSelectButton(dCtxSh.channel, dFTest);
-        secConfirmDatos.clickConfirmarDatosButton(dCtxSh.channel, dCtxPago.getDataPedido(), dFTest);                
+        secSelectDPoint.clickSelectButton(dCtxSh.channel, dFTest.driver);
+        secConfirmDatos.clickConfirmarDatosButton(dCtxSh.channel, dCtxPago.getDataPedido(), dFTest.driver);                
     }
 }

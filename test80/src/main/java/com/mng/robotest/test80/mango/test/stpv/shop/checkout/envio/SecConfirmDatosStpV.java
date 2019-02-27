@@ -1,10 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
@@ -14,61 +14,42 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDr
 @SuppressWarnings({"static-access"})
 public class SecConfirmDatosStpV {
     
-    public static void validateIsVisible(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
-        int maxSecondsToWait = 3;
-        String descripValidac = 
-            "1) Es visible la capa de confirmación de los datos (la esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!ModalDroppoints.secConfirmDatos.isVisibleUntil(maxSecondsToWait, channel, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-                          
-          datosStep.setListResultValidations(listVals);
-      }
-      finally { listVals.checkAndStoreValidations(descripValidac); }        
+	@Validation (
+		description="Es visible la capa de confirmación de los datos (la esperamos hasta #{maxSecondsWait} segundos)",
+		level=State.Defect)
+    public static boolean validateIsVisible(int maxSecondsWait, Channel channel, WebDriver driver) {
+        return (ModalDroppoints.secConfirmDatos.isVisibleUntil(maxSecondsWait, channel, driver));
     }
     
-    public static DatosStep clickConfirmarDatosButton(Channel channel, DataPedido dataPedido, DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep     (
-            "Clickamos el botón \"Confirmar Datos\"", 
-            "La dirección de envío se establece a la de la tienda");
-        try {
-            ModalDroppoints.secConfirmDatos.clickConfirmarDatosButtonAndWait(5/*maxSecondsToWait*/, dFTest.driver);
-            WebdrvWrapp.waitForPageLoaded(dFTest.driver, 2/*waitSeconds*/);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }        
+	@Step (
+		description="Clickamos el botón \"Confirmar Datos\"", 
+        expected="La dirección de envío se establece a la de la tienda")
+    public static void clickConfirmarDatosButton(Channel channel, DataPedido dataPedido, WebDriver driver) 
+    throws Exception {
+        ModalDroppoints.secConfirmDatos.clickConfirmarDatosButtonAndWait(5/*maxSecondsToWait*/, driver);
+        WebdrvWrapp.waitForPageLoaded(driver, 2/*waitSeconds*/);       
         
         //Validaciones
-        DataDeliveryPoint dataDp = dataPedido.getDataDeliveryPoint();
-        String descripValidac = 
-            "1) Desaparece la capa de Droppoints<br>" +
-            "2) Se modifica la dirección de envío por la del Delivery Point (" + dataDp.getDireccion() + ")<br>" +
-            "3) Se modifica el código postal de envío por el del Delivery Point (" + dataDp.getCPandPoblacion() + ")";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (ModalDroppoints.isVisible(channel, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            
-            String textDireccionEnvioCompleta = PageCheckoutWrapper.getTextDireccionEnvioCompleta(channel, dFTest.driver);
-            dataPedido.setDireccionEnvio(textDireccionEnvioCompleta);
-            if (!textDireccionEnvioCompleta.contains(dataDp.getDireccion())) {
-                listVals.add(2, State.Defect);
-            }
-            if (!textDireccionEnvioCompleta.contains(dataDp.getCPandPoblacion())) {
-                listVals.add(3, State.Defect);
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
+        checkConfirmacionCambioDireccionEnvio(dataPedido, channel, driver);
     }
+	
+	@Validation
+	private static ListResultValidation checkConfirmacionCambioDireccionEnvio(DataPedido dataPedido, Channel channel, WebDriver driver) 
+	throws Exception {
+		ListResultValidation validations = ListResultValidation.getNew();
+      	validations.add(
+    		"Desaparece la capa de Droppoints<br>",
+    		ModalDroppoints.isVisible(channel, driver), State.Warn);
+      	
+	    DataDeliveryPoint dataDp = dataPedido.getDataDeliveryPoint();
+	    String textDireccionEnvioCompleta = PageCheckoutWrapper.getTextDireccionEnvioCompleta(channel, driver);
+        dataPedido.setDireccionEnvio(textDireccionEnvioCompleta);
+      	validations.add(
+    		"Se modifica la dirección de envío por la del Delivery Point (" + dataDp.getDireccion() + ")<br>",
+    		textDireccionEnvioCompleta.contains(dataDp.getDireccion()), State.Defect);
+      	validations.add(
+    		"Se modifica el código postal de envío por el del Delivery Point (" + dataDp.getCPandPoblacion() + ")",
+    		textDireccionEnvioCompleta.contains(dataDp.getCPandPoblacion()), State.Defect);
+		return validations;
+	}
 }

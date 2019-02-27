@@ -96,7 +96,6 @@ public class PageCheckoutWrapperStpV {
         return datosStep;
     }
     
-
     public static void validaMetodosPagoDisponibles(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) {
     	checkAvailablePagos(pais, isEmpl, app, channel, driver);
     	checkLogosPagos(pais, isEmpl, app, channel, driver);
@@ -176,29 +175,28 @@ public class PageCheckoutWrapperStpV {
         return pagoPintado;
     }
     
-    public static DatosStep selectFranjaHorariaUrgente(Channel channel, DataFmwkTest dFTest) {
+    public static void selectFranjaHorariaUrgente(Channel channel, DataFmwkTest dFTest) {
         switch (channel) {
         case desktop:
-            return SecMetodoEnvioDesktopStpV.selectFranjaHorariaUrgente(1, dFTest);
+            SecMetodoEnvioDesktopStpV.selectFranjaHorariaUrgente(1, dFTest.driver);
+            break;
         case movil_web:
-            return Page1EnvioCheckoutMobilStpV.selectFranjaHorariaUrgente(1, dFTest);
-        default:
-            return null;
+            Page1EnvioCheckoutMobilStpV.selectFranjaHorariaUrgente(1, dFTest);
         }    
     }
 
-    public static DatosStep selectMetodoEnvio(DataCtxPago dCtxPago, String nombrePago, AppEcom appE, Channel channel, DataFmwkTest dFTest) 
+    public static void selectMetodoEnvio(DataCtxPago dCtxPago, String nombrePago, AppEcom appE, Channel channel, DataFmwkTest dFTest) 
     throws Exception {
         alterTypeEnviosAccordingContext(dCtxPago, appE, channel, dFTest.driver);
         Pago pago = dCtxPago.getDataPedido().getPago();
         TipoTransporte tipoTransporte = pago.getTipoEnvioType(appE);
         switch (channel) {
         case desktop:
-            return SecMetodoEnvioDesktopStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, dFTest);
+            SecMetodoEnvioDesktopStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, dFTest.driver);
+            break;
         case movil_web:
-            return Page1EnvioCheckoutMobilStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, dFTest);
-        default:
-            return null;
+            Page1EnvioCheckoutMobilStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, dFTest);
+            break;
         }
     }
     

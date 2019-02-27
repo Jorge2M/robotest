@@ -1,10 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
@@ -12,71 +12,49 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDr
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.SecMetodoEnvioDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 
-
 public class SecMetodoEnvioDesktopStpV {
 
     public static ModalDroppointsStpV modalDroppoints;
     
-    @SuppressWarnings("static-access")
-    public static DatosStep selectMetodoEnvio(TipoTransporte tipoTransporte, String nombrePago, DataCtxPago dCtxPago, DataFmwkTest dFTest) 
+    @SuppressWarnings({ "static-access", "unused" })
+    @Step (
+    	description="<b style=\"color:blue;\">#{nombrePago}</b>:Seleccionamos el método de envío <b>#{tipoTransporte}</b>", 
+        expected="Se selecciona el método de envío correctamente")
+    public static void selectMetodoEnvio(TipoTransporte tipoTransporte, String nombrePago, DataCtxPago dCtxPago, WebDriver driver) 
     throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep     (
-            "<b style=\"color:blue;\">" + nombrePago + "</b>:Seleccionamos el método de envío <b>" + tipoTransporte + "</b>", 
-            "Se selecciona el método de envío correctamente");
-        try {
-            SecMetodoEnvioDesktop.selectMetodo(tipoTransporte, dFTest.driver);
-            if (!tipoTransporte.isEntregaDomicilio()) {
-            	if (ModalDroppoints.isErrorMessageVisibleUntil(dFTest.driver))
-            		ModalDroppoints.searchAgainByUserCp(dCtxPago.getDatosRegistro().get("cfCp"), dFTest.driver);
-            }
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+        SecMetodoEnvioDesktop.selectMetodo(tipoTransporte, driver);
+        if (!tipoTransporte.isEntregaDomicilio()) {
+        	if (ModalDroppoints.isErrorMessageVisibleUntil(driver))
+        		ModalDroppoints.searchAgainByUserCp(dCtxPago.getDatosRegistro().get("cfCp"), driver);
         }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
-        validaBlockSelectedDesktop(tipoTransporte, datosStep, dFTest);
-        if (tipoTransporte.isEntregaDomicilio())
-            modalDroppoints.validaIsNotVisible(Channel.desktop, datosStep, dFTest);
-        else
-            modalDroppoints.validaIsVisible(Channel.desktop, datosStep, dFTest);
-        
-        return datosStep;
+        validaBlockSelectedDesktop(tipoTransporte, driver);
+        if (tipoTransporte.isEntregaDomicilio()) {
+            modalDroppoints.validaIsNotVisible(Channel.desktop, driver);
+        }
+        else {
+            modalDroppoints.validaIsVisible(Channel.desktop, driver);
+        }
     }
     
-    public static void validaBlockSelectedDesktop(TipoTransporte tipoTransporte, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
-        int maxSecondsToWait = 5;
-        String descripValidac = 
-            "1) Desaparece la capa de Loading  (lo esperamos hasta " + maxSecondsToWait + " segundos) <br>" +
-            "2) Queda seleccionado el bloque correspondiete a <b>" + tipoTransporte + "</b>";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageCheckoutWrapper.waitUntilNoDivLoading(dFTest.driver, maxSecondsToWait)) {
-                listVals.add(1, State.Warn);
-            }
-            if (!SecMetodoEnvioDesktop.isBlockSelectedUntil(tipoTransporte, maxSecondsToWait, dFTest.driver)) {
-                listVals.add(2, State.Warn);
-            }
-                            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation
+    public static ListResultValidation validaBlockSelectedDesktop(TipoTransporte tipoTransporte, WebDriver driver) throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
+        int maxSecondsWait = 5;
+      	validations.add(
+    		"Desaparece la capa de Loading  (lo esperamos hasta " + maxSecondsWait + " segundos) <br>",
+    		PageCheckoutWrapper.waitUntilNoDivLoading(driver, maxSecondsWait), State.Warn);
+      	validations.add(
+    		"Queda seleccionado el bloque correspondiete a <b>" + tipoTransporte + "</b>",
+    		SecMetodoEnvioDesktop.isBlockSelectedUntil(tipoTransporte, maxSecondsWait, driver), State.Warn);
+      	return validations;
     }
     
-    public static DatosStep selectFranjaHorariaUrgente(int posicion, DataFmwkTest dFTest) {
-        //Step
-        DatosStep datosStep = new DatosStep     (
-            "Seleccionamos la <b>" + posicion + "a<b> franja horaria del envío \"Urgente - Horario personalizado\"</b>", 
-            "La franja horaria se selecciona correctamente");
-        try {
-            SecMetodoEnvioDesktop.selectFranjaHorariaUrgente(posicion, dFTest.driver);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        return datosStep;
+    @Step (
+    	description="Seleccionamos la <b>#{posicion}a<b> franja horaria del envío \"Urgente - Horario personalizado\"</b>", 
+        expected="La franja horaria se selecciona correctamente")
+    public static void selectFranjaHorariaUrgente(int posicion, WebDriver driver) {
+    	SecMetodoEnvioDesktop.selectFranjaHorariaUrgente(posicion, driver);
     }
 }

@@ -35,6 +35,10 @@ public class ListResultValidation {
 		return listValidations;
 	}
 	
+	public int size() {
+		return listResultValidations.size();
+	}
+	
 	public ResultValidation get(int index) {
 		return (listResultValidations.get(index));
 	}
@@ -153,6 +157,8 @@ public class ListResultValidation {
 	}
     
     public void storeGroupValidations(String descripcionValidations) {
-    	fmwkTest.grabStepValidation(datosStep, descripcionValidations, TestCaseData.getdFTest());
+    	if ("".compareTo(descripcionValidations)!=0) {
+    		fmwkTest.grabStepValidation(datosStep, descripcionValidations, TestCaseData.getdFTest());
+    	}
     }
 }

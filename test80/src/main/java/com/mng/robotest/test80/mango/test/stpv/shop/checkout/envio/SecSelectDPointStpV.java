@@ -2,6 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+
+import org.openqa.selenium.WebDriver;
+
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
@@ -104,18 +108,15 @@ public class SecSelectDPointStpV {
         return dataDpToReturn;
     }
     
-    public static void clickSelectButton(Channel channel, DataFmwkTest dFTest) throws Exception {
-        DatosStep datosStep = new DatosStep     (
-            "Clickamos el botón de \"Select\" de la capa de Droppoints", 
-            "Desaparece al capa de droppoint");
-        try {
-            ModalDroppoints.secSelectDPoint.clickSelectButtonAndWait(5/*maxSecondsToWait*/, dFTest.driver);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+    @Step (
+    	description="Clickamos el botón de \"Select\" de la capa de Droppoints", 
+        expected="Desaparece al capa de droppoint")
+    public static void clickSelectButton(Channel channel, WebDriver driver) throws Exception {
+    	int maxSecondsWait = 5;
+        ModalDroppoints.secSelectDPoint.clickSelectButtonAndWait(maxSecondsWait, driver);
         
         //Validación
-        ModalDroppointsStpV.secConfirmDatos.validateIsVisible(channel, datosStep, dFTest);
+        maxSecondsWait = 3;
+        ModalDroppointsStpV.secConfirmDatos.validateIsVisible(maxSecondsWait, channel, driver);
     }
 }
