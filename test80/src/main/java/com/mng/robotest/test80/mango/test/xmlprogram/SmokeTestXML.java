@@ -30,7 +30,7 @@ public class SmokeTestXML {
     
     /**
      * Ejecución desde el Online
-     * @param params
+     *
      */
     public void testRunner(ParamsBean paramsToStore) {
         this.params = paramsToStore;
@@ -117,7 +117,7 @@ public class SmokeTestXML {
         return testRun;
     }    
     
-    public XmlTest createTestRunFilteredWithTestCases(XmlSuite suite, String testRunName, String[] testCaseList) {
+    private XmlTest createTestRunFilteredWithTestCases(XmlSuite suite, String testRunName, String[] testCaseList) {
         XmlTest testRun = commonsXML.createTestRun(suite, testRunName, testCaseList);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());
@@ -174,6 +174,7 @@ public class SmokeTestXML {
         }
 
         listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.appshop.FichaProducto"));
+        listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.appshop.Ayuda"));
         listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.appshop.Buscador"));
         listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.appshop.Footer"));
         listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.appshop.Registro"));
