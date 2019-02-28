@@ -76,7 +76,7 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         "//div[@id='avisoConfirmar']/div[@style='']/div[@class[contains(.,'tituloPago')]] | " +
         "//div[@class='mensajesContrarembolso'] | " +
         "//div[@class[contains(.,'cardContainerNotIntegrated')]] | " +
-        "//div[@class[contains(.,'falconFormularioTarjeta')]]";
+        "//div[@class[contains(.,'falconFormularioTarjeta')]]"; 
     static String XPathRadioTrjGuardada = "//input[@class[contains(.,'guardadaInput')]]";
     static String XPathLinkSolicitarFactura = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
     static String XPathLinkEditDirecEnvio = "//span[@class[contains(.,'cambiarDatosEnvio')]]";
