@@ -103,7 +103,7 @@ Invoke-WebRequest -UseBasicParsing $FullURL -Method POST -Headers $Headers -Body
 # WaitAndGet-FileFromS3 $pathTest80S3file $zipTest80LocalFile $bucketS3Name $accessKeyS3 $secreKeyS3 15
 
 # Get del pathWebmngtestZipS3file (de tipo webmngtest-RELEASE1.zip) from S3 (Wait for X loops)
-WaitAndGet-FileFromS3 $pathWebmngtestZipS3file $zipWebmngtestLocalFile $bucketS3Name $accessKeyS3 $secreKeyS3 15
+WaitAndGet-FileFromS3 $pathWebmngtestZipS3file $zipWebmngtestLocalFile $bucketS3Name $accessKeyS3 $secreKeyS3 20
 
 # Unzip $zipS3fileName to obtain the .war
 Remove-Item -Force *.war
