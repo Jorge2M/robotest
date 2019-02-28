@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
@@ -147,13 +149,14 @@ public class PageCheckoutWrapperStpV {
     /**
      * Realiza una navegación (conjunto de pasos/validaciones) mediante la que se selecciona el método de envío y finalmente el método de pago 
      */
-    public static DatosStep fluxSelectEnvioAndClickPaymentMethod(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static void fluxSelectEnvioAndClickPaymentMethod(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         boolean pagoPintado = false;
-        if (!dCtxPago.getFTCkout().isChequeRegalo)
+        if (!dCtxPago.getFTCkout().isChequeRegalo) {
             pagoPintado = fluxSelectEnvio(dCtxPago, dCtxSh, dFTest);
+        }
         
-        return PageCheckoutWrapperStpV.forceClickIconoPagoAndWait(dCtxSh.pais, dCtxPago.getDataPedido().getPago(), dCtxSh.channel, !pagoPintado, dFTest);
+        PageCheckoutWrapperStpV.forceClickIconoPagoAndWait(dCtxSh.pais, dCtxPago.getDataPedido().getPago(), dCtxSh.channel, !pagoPintado, dFTest.driver);
     }
     
     public static boolean fluxSelectEnvio(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
@@ -260,80 +263,62 @@ public class PageCheckoutWrapperStpV {
     /**
      * Paso consistente en clickar un determinado método de pago de la página de resumen de artículos (precompra)
      */
-    public static DatosStep forceClickIconoPagoAndWait(Pais pais, Pago pago, Channel channel, boolean pintaNombrePago, DataFmwkTest dFTest) throws Exception {
-        String pintaPago = "";
-        if (pintaNombrePago)
-            pintaPago = "<b style=\"color:blue;\">" + pago.getNombre(channel) + "</b>:"; 
-        DatosStep datosStep = new DatosStep     (
-            pintaPago + "Seleccionamos el icono/pestaña correspondiente al método de pago y esperamos la desaparición de los \"loading\"", 
-            "La operación se ejecuta correctamente");
+    @Step (
+    	description="Seleccionamos el icono/pestaña correspondiente al método de pago y esperamos la desaparición de los \"loading\"",
+    	expected="La operación se ejecuta correctamente")
+    public static void forceClickIconoPagoAndWait(Pais pais, Pago pago, Channel channel, boolean pintaNombrePago, WebDriver driver) throws Exception {
+        if (pintaNombrePago) {
+            String pintaPago = "<b style=\"color:blue;\">" + pago.getNombre(channel) + "</b>:"; 
+            String newDescription = pintaPago + TestCaseData.getDatosCurrentStep().getDescripcion();
+            TestCaseData.getDatosCurrentStep().setDescripcion(newDescription);
+        }
+
         try {
-            PageCheckoutWrapper.forceClickMetodoPagoAndWait(pago.getNombre(channel), pago.getIndexpant(), pais, channel, dFTest.driver);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+            PageCheckoutWrapper.forceClickMetodoPagoAndWait(pago.getNombre(channel), pago.getIndexpant(), pais, channel, driver);
         }
         catch (Exception e) {
             pLogger.warn("Problem clicking icono pago for payment {} in country {}", pago.getNombre(), pais.getNombre_pais(), e);
         }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         if (pago.getTypePago()==TypePago.TarjetaIntegrada || 
             pago.getTypePago()==TypePago.KrediKarti ||
-            pago.getTypePago()==TypePago.Bancontact)
-            PageCheckoutWrapperStpV.validateSelectPagoTRJintegrada(pago, pais, channel, datosStep, dFTest);
-        else
-            PageCheckoutWrapperStpV.validateSelectPagoNoTRJintegrada(pago, channel, datosStep, dFTest);
+            pago.getTypePago()==TypePago.Bancontact) {
+            PageCheckoutWrapperStpV.validateSelectPagoTRJintegrada(pago, pais, channel, driver);
+        }
+        else {
+            PageCheckoutWrapperStpV.validateSelectPagoNoTRJintegrada(pago, channel, driver);
+        }
+    }
+    
+    public static void validateSelectPagoTRJintegrada(Pago pago, Pais pais, Channel channel, WebDriver driver) {
+        if (channel==Channel.desktop) {
+            validateIsPresentButtonCompraDesktop(driver);
+        }
         
-        return datosStep;
+        PageCheckoutWrapperStpV.secTarjetaPci.validateIsSectionOk(pago, pais, channel, driver);
     }
     
-    public static void validateSelectPagoTRJintegrada(Pago pago, Pais pais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
-        if (channel==Channel.desktop)
-            validateIsPresentButtonCompraDesktop(datosStep, dFTest);
-        
-        PageCheckoutWrapperStpV.secTarjetaPci.validateIsSectionOk(pago, pais, channel, datosStep, dFTest);
-    }
-    
-    public static void validateSelectPagoNoTRJintegrada(Pago pago, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
-        if (channel==Channel.desktop)
-            validateIsPresentButtonCompraDesktop(datosStep, dFTest);
+    public static void validateSelectPagoNoTRJintegrada(Pago pago, Channel channel, WebDriver driver) {
+        if (channel==Channel.desktop) {
+            validateIsPresentButtonCompraDesktop(driver);
+        }
 
-        int maxSecondsToWait = 2;
-        String descripValidac = 
-            "1) Se hace visible el texto bajo el método de pago: " + pago.getNombre(channel) + " (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, channel, maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Warn);                    
-            }
-
-            datosStep.setListResultValidations(listVals);
-        }
-        catch (Exception e) {
-            /*
-             * 
-             */
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+        int maxSecondsWait = 2;
+        checkIsVisibleTextUnderPayment(pago.getNombre(channel), pago, maxSecondsWait, channel, driver);
     }
     
-    public static void validateIsPresentButtonCompraDesktop(DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-        	"1) Aparece el botón de \"Confirmar Compra\"";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageCheckoutWrapper.page1DktopCheckout.isPresentButtonConfPago(dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        }
-        catch (Exception e) {
-            //
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation (
+    	description="Se hace visible el texto bajo el método de pago: #{nombrePago} (lo esperamos hasta #{maxSecondsWait} segundos)",
+    	level=State.Warn)
+    private static boolean checkIsVisibleTextUnderPayment(@SuppressWarnings("unused") String nombrePago, Pago pago, int maxSecondsWait, Channel channel, WebDriver driver) {
+        return (PageCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, channel, maxSecondsWait, driver));
+    }
+    
+    @Validation (
+    	description="Aparece el botón de \"Confirmar Compra\"",
+    	level=State.Defect)
+    public static boolean validateIsPresentButtonCompraDesktop(WebDriver driver) {
+        return (PageCheckoutWrapper.page1DktopCheckout.isPresentButtonConfPago(driver));
     }
     
     public static DatosStep inputDataTrjAndConfirmPago(DataCtxPago dCtxPago, Channel channel, DataFmwkTest dFTest) 

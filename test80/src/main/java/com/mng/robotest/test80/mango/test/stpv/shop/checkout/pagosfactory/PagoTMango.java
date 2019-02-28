@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -24,19 +25,19 @@ public class PagoTMango extends PagoStpV {
     @Override
     public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
         DataPedido dataPedido = this.dCtxPago.getDataPedido();
-        DatosStep datosStep = PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
-        PageCheckoutWrapperStpV.secTMango.validateIsSectionOk(this.dCtxSh.channel, datosStep, this.dFTest);
-        PageCheckoutWrapperStpV.secTMango.clickTipoPago(SecTMango.TipoPago.pagoHabitual, this.dCtxSh.channel, this.dFTest);
-        datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
-        PageAmexInputTarjetaStpV.validateIsPageOk(dataPedido.getImporteTotal(), this.dCtxSh.pais.getCodigo_pais(), datosStep, this.dFTest);
+        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, dFTest);
+        PageCheckoutWrapperStpV.secTMango.validateIsSectionOk(dCtxSh.channel, dFTest.driver);
+        PageCheckoutWrapperStpV.secTMango.clickTipoPago(SecTMango.TipoPago.pagoHabitual, dCtxSh.channel, dFTest.driver);
+        PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, dFTest);
+        PageAmexInputTarjetaStpV.validateIsPageOk(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dFTest.driver);
         
         if (execPay) {
             dataPedido.setCodtipopago("M");
-            PageAmexInputTarjetaStpV.inputTarjetaAndPayButton(dataPedido.getPago().getNumtarj(), dataPedido.getPago().getMescad(), dataPedido.getPago().getAnycad(), dataPedido.getPago().getCvc(), dataPedido.getImporteTotal(), this.dCtxSh.pais.getCodigo_pais(), this.dFTest);
-            PageAmexInputCipStpV.inputCipAndAcceptButton(dataPedido.getPago().getCip(), dataPedido.getImporteTotal(), this.dCtxSh.pais.getCodigo_pais(), this.dFTest);
-            datosStep = PageAmexResultStpV.clickContinuarButton(this.dFTest);
+            PageAmexInputTarjetaStpV.inputTarjetaAndPayButton(dataPedido.getPago().getNumtarj(), dataPedido.getPago().getMescad(), dataPedido.getPago().getAnycad(), dataPedido.getPago().getCvc(), dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dFTest.driver);
+            PageAmexInputCipStpV.inputCipAndAcceptButton(dataPedido.getPago().getCip(), dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dFTest.driver);
+            PageAmexResultStpV.clickContinuarButton(dFTest.driver);
         }
         
-        return datosStep;
+        return TestCaseData.getDatosLastStep();
     }
 }

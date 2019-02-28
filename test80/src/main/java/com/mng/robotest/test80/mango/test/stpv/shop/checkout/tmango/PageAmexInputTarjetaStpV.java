@@ -2,72 +2,50 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.PageAmexInputTarjeta;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-
 public class PageAmexInputTarjetaStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 
-    public static void validateIsPageOk(String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) {
-        //Validaciones 
-        int maxSecondsToWait = 5;
-        String descripValidac = 
-            "1) Aparece la pasarela de pagos de Banco Sabadell (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" + 
-            "2) En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>" +
-            "3) Aparecen los campos de introducción de tarjeta, fecha caducidad y código de seguridad<br>" +
-            "4) Figura un botón de Aceptar";
-        datosStep.setNOKstateByDefault();    
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageAmexInputTarjeta.isPasarelaBancoSabadellUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver)) {
-                listVals.add(2, State.Warn);
-            }
-            if (!PageAmexInputTarjeta.isPresentNumTarj(dFTest.driver) ||
-                !PageAmexInputTarjeta.isPresentInputMesCad(dFTest.driver) ||
-                !PageAmexInputTarjeta.isPresentInputAnyCad(dFTest.driver) ||
-                !PageAmexInputTarjeta.isPresentInputCvc(dFTest.driver)) {
-                listVals.add(3, State.Defect);
-            }
-            if (!PageAmexInputTarjeta.isPresentPagarButton(dFTest.driver)) {
-                listVals.add(4, State.Defect);
-            }
-
-            datosStep.setListResultValidations(listVals);
-        }
-        catch (Exception e) {
-            pLogger.warn("Problem validating Page Amex for input tarjeta in country {}", codPais, e);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation
+    public static ListResultValidation validateIsPageOk(String importeTotal, String codPais, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
+        int maxSecondsWait = 5;
+	 	validations.add(
+			"Aparece la pasarela de pagos de Banco Sabadell (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+			PageAmexInputTarjeta.isPasarelaBancoSabadellUntil(maxSecondsWait, driver), State.Defect); 
+	 	validations.add(
+			"En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>",
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn); 
+	 	validations.add(
+			"Aparecen los campos de introducción de tarjeta, fecha caducidad y código de seguridad<br>",
+			PageAmexInputTarjeta.isPresentNumTarj(driver) &&
+            PageAmexInputTarjeta.isPresentInputMesCad(driver) &&
+            PageAmexInputTarjeta.isPresentInputAnyCad(driver) &&
+            PageAmexInputTarjeta.isPresentInputCvc(driver), State.Warn); 
+	 	validations.add(
+			"Figura un botón de Aceptar",
+			PageAmexInputTarjeta.isPresentPagarButton(driver), State.Defect); 
+	 	return validations;
     }
     
-    public static DatosStep inputTarjetaAndPayButton(String numTarj, String mesCad, String anyCad, String Cvc, String importeTotal, String codigoPais, DataFmwkTest dFTest) 
-    throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep (
-            "Introducimos los datos de la tarjeta: " + numTarj + " / " + mesCad + "-" + anyCad + " / " + Cvc + " y pulsamos el botón \"Pagar\""/*Descripción Test*/, 
-            "Aparece la página de introducción del CIP");
-        try {
-            PageAmexInputTarjeta.inputDataTarjeta(numTarj, mesCad, anyCad, Cvc, dFTest.driver);
-            PageAmexInputTarjeta.clickPagarButton(dFTest.driver);
-                               
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+    @Step (
+		description="Introducimos los datos de la tarjeta: #{numTarj} / #{mesCad}-#{anyCad} / #{Cvc} y pulsamos el botón \"Pagar\"", 
+        expected="Aparece la página de introducción del CIP")
+    public static void inputTarjetaAndPayButton(String numTarj, String mesCad, String anyCad, String Cvc, 
+    												 String importeTotal, String codigoPais, WebDriver driver) throws Exception {
+        PageAmexInputTarjeta.inputDataTarjeta(numTarj, mesCad, anyCad, Cvc, driver);
+        PageAmexInputTarjeta.clickPagarButton(driver);
                     
         //Validaciones
-        PageAmexInputCipStpV.validateIsPageOk(importeTotal, codigoPais, datosStep, dFTest);
-        
-        return datosStep;
+        PageAmexInputCipStpV.validateIsPageOk(importeTotal, codigoPais, driver);
     }
 }

@@ -1,25 +1,34 @@
-package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
+package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
 
-public class SecTarjetaPciMobil extends WebdrvWrapp implements SecTarjetaPci {
+public class SecTarjetaPciDktop extends WebdrvWrapp implements SecTarjetaPci {
 
-    static String XPathBlock = "//div[@data-form-card-content='form']";
-    static String XPathInputNumber = XPathBlock + "//input[@id[contains(.,'number-card')] or @id[contains(.,'card-pci')]]";
-    static String XPathInputTitular = XPathBlock + "//input[@id[contains(.,'card-holder')] or @id[contains(.,'holder-name-pci')]]";
-    static String XPathSelectMes = XPathBlock + "//select[@id[contains(.,'month')]]";
-    static String XPathSelectAny = XPathBlock + "//select[@id[contains(.,'year')]]";
-    static String XPathInputCvc = XPathBlock + "//input[@id[contains(.,'cvc')]]";
-    static String XPathInputDni = XPathBlock + "//input[@id[contains(.,'dni')]]"; //Specific for Codensa (Colombia)
+    static String XPathBlock = "//span[@id[contains(.,'panelTarjetasForm')]]";
+    static String XPathInputNumber = XPathBlock + "//input[@id[contains(.,'cardNumber')] or @id[contains(.,'cardnumber')] or @id[contains(.,'msu_cardpan')]]";
+    static String XPathInputTitular = XPathBlock + "//input[@data-encrypted-name[contains(.,'holderName')] or @class[contains(.,'holdername')] or @class[contains(.,'holderName')] or @class[contains(.,'msu_nameoncard')]]";
+    static String XPathSelectMes = XPathBlock + "//select[@class[contains(.,'selectMonth')] or @class[contains(.,'select gmo_month')] or @class[contains(.,'select msu_month')]]";
+    static String XPathSelectAny = XPathBlock + "//select[@class[contains(.,'selectYear')] or @class[contains(.,'select gmo_year')] or @class[contains(.,'select msu_year')]]";
+    static String XPathInputCvc = XPathBlock + "//input[@class[contains(.,'CVCInput')] or @class[contains(.,'CWInput')]]";
+    static String XPathInputDni = XPathBlock + "//input[@class[contains(.,'falcon_dni')]]"; //Specific for Codensa (Colombia)
+    
+    private SecTarjetaPciDktop() {}
+    public static SecTarjetaPciDktop make() {
+    	return (new SecTarjetaPciDktop());
+    }
+    
+    public static String getXPath_PanelPago(String nombrePago) {
+        return (XPathBlock + "//*[@id[contains(.,'CardName')] and text()='" + nombrePago + "']");
+    }
     
     @Override
     public boolean isVisiblePanelPagoUntil(String nombrePago, int maxSeconds, WebDriver driver) {
-        return true;
+        String xpathPanelPago = getXPath_PanelPago(nombrePago);
+        return (isElementVisibleUntil(driver, By.xpath(xpathPanelPago), maxSeconds));
     }
     
     @Override
@@ -78,11 +87,11 @@ public class SecTarjetaPciMobil extends WebdrvWrapp implements SecTarjetaPci {
     
     @Override
     public void selectMesByVisibleText(String mes, WebDriver driver) {
-        new Select(driver.findElement(By.xpath(XPathSelectMes))).selectByVisibleText(mes);
+        selectOption(By.xpath(XPathSelectMes), mes, OptionSelect.ByVisibleText, driver);
     }
     
     @Override
     public void selectAnyByVisibleText(String any, WebDriver driver) {
-        new Select(driver.findElement(By.xpath(XPathSelectAny))).selectByVisibleText(any);
+        selectOption(By.xpath(XPathSelectAny), any, OptionSelect.ByVisibleText, driver);
     }
 }

@@ -25,8 +25,8 @@ public class AyudaStpV {
     }
 
     @Step(
-            description = "Seleccionamos la seccion de <b>#{section}</b>",
-            expected = "Aparecen sus secciones internas")
+    	description = "Seleccionamos la seccion de <b>#{section}</b>",
+        expected = "Aparecen sus secciones internas")
     private static void accesAndValidationSection (String section, DataFmwkTest dFTest) throws Exception {
         JSONArray sectionToValidate = PageAyuda.getSectionFromJSON(section);
         PageAyuda.selectElement(PageAyuda.getXPath(section), dFTest.driver);
@@ -39,8 +39,8 @@ public class AyudaStpV {
     }
 
     @Validation(
-            description="1) Está presente el apartado de <b>#{validation}</b>",
-            level= State.Defect)
+    	description="1) Está presente el apartado de <b>#{validation}</b>",
+        level= State.Defect)
     private static boolean validateSectionsAyuda(String validation, WebDriver driver) {
         return (PageAyuda.isElementInStateUntil(PageAyuda.getXPath(validation), ElementPageFunctions.StateElem.Visible, 2, driver));
     }

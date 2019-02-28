@@ -19,18 +19,19 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais.LayoutPago;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci.SecTarjetaPci;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 
 public class Page1DktopCheckout extends WebdrvWrapp {
     public static SecStoreCredit secStoreCredit;
-    public static SecTarjetaPciDktop secTarjetaPci = new SecTarjetaPciDktop();
     public static SecTMango secTMango;
     public static SecBillpay secBillpay;
     public static SecKlarna secKlarna;
     public static SecEps secEps;
     public static ModalAvisoCambioPais modalAvisoCambioPais;
+    public static SecTarjetaPci secTarjetaPci = null;
     
     static String XPathConfPagoButtonDesktop = "//*[@id[contains(.,'btnCheckout')]]";
     static String XPathAlmacenInNoProEntorns = "//span[@class='labelTestShowAlmacenStrong']";
@@ -75,7 +76,7 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         "//div[@id='avisoConfirmar']/div[@style='']/div[@class[contains(.,'tituloPago')]] | " +
         "//div[@class='mensajesContrarembolso'] | " +
         "//div[@class[contains(.,'cardContainerNotIntegrated')]] | " +
-        "//div[@class[contains(.,'falconFormularioTarjeta')]]";
+        "//div[@class[contains(.,'falconFormularioTarjeta')]]"; 
     static String XPathRadioTrjGuardada = "//input[@class[contains(.,'guardadaInput')]]";
     static String XPathLinkSolicitarFactura = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
     static String XPathLinkEditDirecEnvio = "//span[@class[contains(.,'cambiarDatosEnvio')]]";
