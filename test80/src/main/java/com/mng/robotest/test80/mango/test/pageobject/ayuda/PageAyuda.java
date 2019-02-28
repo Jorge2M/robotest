@@ -6,12 +6,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
 import java.io.Reader;
 import java.io.IOException;
-import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class PageAyuda extends WebdrvWrapp {
 
@@ -19,16 +18,15 @@ public class PageAyuda extends WebdrvWrapp {
 
     private static JSONParser parser = new JSONParser();
     private static JSONObject fileHAR = null;
-    private static ClassLoader classLoader = PageAyuda.class.getClassLoader();
 
     public static JSONObject getFileJSON () {
         try {
-            File file = new File(classLoader.getResource("helpFooter.json").getFile());
-            Reader reader = new FileReader(file);
+            InputStream inputSt = PageAyuda.class.getResourceAsStream("/helpFooter.json");
+            Reader reader = new InputStreamReader(inputSt);
             Object JSONFile = parser.parse(reader);
             fileHAR = (JSONObject)JSONFile;
             reader.close();
-        } catch (ParseException | IOException | NullPointerException e) {
+        } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
         return fileHAR;
