@@ -18,6 +18,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais.LayoutPago;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.SecMetodoEnvioDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
+import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci.SecTarjetaPci;
 
 @SuppressWarnings({"static-access"})
 /**
@@ -35,11 +36,28 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
     //Abarca cualquier div de loading
     static String XPathDivLoading = "//div[@class[contains(.,'panel_loading')] or @class[contains(.,'container-full-centered-loading')] or @class[contains(.,'loading-panel')]]";
     
-    public static SecTarjetaPci getSecTarjetaPci(Channel channel) {
-        if (channel==Channel.movil_web)
-            return (page2MobilCheckout.secTarjetaPci); 
-        
-        return (page1DktopCheckout.secTarjetaPci);    
+    public static SecTarjetaPci getSecTarjetaPci(Channel channel, WebDriver driver) {
+    	SecTarjetaPci secTarjetaPci = getSecTarjetaPci(channel);
+    	if (secTarjetaPci==null) {
+    		secTarjetaPci = SecTarjetaPci.makeSecTarjetaPci(channel, driver);
+    		setSecTarjetaPci(secTarjetaPci, channel);
+    	}
+    	
+    	return secTarjetaPci;
+    }
+    
+    private static SecTarjetaPci getSecTarjetaPci(Channel channel) {
+    	if (channel==Channel.movil_web) {
+    		return (page2MobilCheckout.secTarjetaPci);
+    	}
+    	return page1DktopCheckout.secTarjetaPci;
+    }
+    
+    private static void setSecTarjetaPci(SecTarjetaPci secTarjetaPci, Channel channel) {
+    	if (channel==Channel.movil_web) {
+    		page2MobilCheckout.secTarjetaPci = secTarjetaPci;
+    	}
+    	page1DktopCheckout.secTarjetaPci = secTarjetaPci;
     }
 
     public static boolean isFirstPageUntil(Channel channel, int maxSecondsToWait, WebDriver driver) {

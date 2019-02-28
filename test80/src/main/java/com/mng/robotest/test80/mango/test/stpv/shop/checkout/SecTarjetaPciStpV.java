@@ -20,26 +20,26 @@ public class SecTarjetaPciStpV {
 		 	validations.add(
 				"Aparece el bloque correspondiente a la introducción de los datos del método de pago " + pago.getNombre(channel) + 
 				" (lo esperamos hasta " + maxSecondsWait + " segundo)<br>",
-				PageCheckoutWrapper.getSecTarjetaPci(channel).isVisiblePanelPagoUntil(pago.getNombre(channel), maxSecondsWait, driver), 
+				PageCheckoutWrapper.getSecTarjetaPci(channel, driver).isVisiblePanelPagoUntil(pago.getNombre(channel), maxSecondsWait, driver), 
 				State.Warn);    
     	}
     	
 	 	validations.add(
-			"Aparecen los 4 campos <b>Número, Titular, Mes, Año</b> para la introducción de los datos de la tarjeta",
-			PageCheckoutWrapper.getSecTarjetaPci(channel).isPresentInputNumberUntil(1, driver) &&
-            PageCheckoutWrapper.getSecTarjetaPci(channel).isPresentInputTitular(driver) &&
-            PageCheckoutWrapper.getSecTarjetaPci(channel).isPresentSelectMes(driver) &&
-            PageCheckoutWrapper.getSecTarjetaPci(channel).isPresentSelectAny(driver), State.Defect);  
+			"Aparecen los 4 campos <b>Número, Titular, Mes, Año</b> para la introducción de los datos de la tarjeta<br>",
+			PageCheckoutWrapper.getSecTarjetaPci(channel, driver).isPresentInputNumberUntil(1, driver) &&
+            PageCheckoutWrapper.getSecTarjetaPci(channel, driver).isPresentInputTitular(driver) &&
+            PageCheckoutWrapper.getSecTarjetaPci(channel, driver).isPresentSelectMes(driver) &&
+            PageCheckoutWrapper.getSecTarjetaPci(channel, driver).isPresentSelectAny(driver), State.Defect);  
 	 	
 	 	if (pago.getTypePago()!=TypePago.Bancontact) {
 		 	validations.add(
 				"Aparece también el campo <b>CVC</b>",
-				PageCheckoutWrapper.getSecTarjetaPci(channel).isPresentInputCvc(driver), State.Defect); 
+				PageCheckoutWrapper.getSecTarjetaPci(channel, driver).isPresentInputCvc(driver), State.Defect); 
 	 	}
         if (pago.getDni()!=null && "".compareTo(pago.getDni())!=0) {
 		 	validations.add(
 				"Aparece también el campo <b>DNI(C.C)</b>",
-				PageCheckoutWrapper.getSecTarjetaPci(channel).isPresentInputDni(driver), State.Defect); 
+				PageCheckoutWrapper.getSecTarjetaPci(channel, driver).isPresentInputDni(driver), State.Defect); 
         }
         return validations;
     }

@@ -1,52 +1,35 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.PageAmexResult;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-
 public class PageAmexResultStpV {
 
-    public static void validateIsPageOk(DatosStep datosStep, String importeTotal, String codigoPais, DataFmwkTest dFTest) {
-    	int maxSecondsToWait = 2;
-        String descripValidac = 
-            "1) Aparece una página con un mensaje de OK (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" + 
-            "2) Aparece el importe de la operación " + importeTotal + "<br>" +
-            "3) Aparece un botón \"CONTINUAR\"";            
-        datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok); 
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (!PageAmexResult.isResultOkUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codigoPais, dFTest.driver)) {
-                listVals.add(2,State.Warn);
-            }
-            if (!PageAmexResult.isPresentContinueButton(dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+    public static ListResultValidation validateIsPageOk(String importeTotal, String codigoPais, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
+    	int maxSecondsWait = 2;
+	 	validations.add(
+			"Aparece una página con un mensaje de OK (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+			PageAmexResult.isResultOkUntil(maxSecondsWait, driver), State.Defect); 
+	 	validations.add(
+			"Aparece el importe de la operación " + importeTotal + "<br>",
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codigoPais, driver), State.Warn); 
+	 	validations.add(
+			"Aparece un botón \"CONTINUAR\"",
+			PageAmexResult.isPresentContinueButton(driver), State.Defect);
+	 	return validations;
     }
     
-    
-    public static DatosStep clickContinuarButton(DataFmwkTest dFTest) throws Exception {
-        DatosStep datosStep = new DatosStep     (
-            "Seleccionamos el botón \"Continuar\"", 
-            "Aparece la página de Mango de resultado OK del pago");
-        try {
-            PageAmexResult.clickContinuarButton(dFTest.driver);
-                               
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        return datosStep;
+    @Step (
+    	description="Seleccionamos el botón \"Continuar\"", 
+        expected="Aparece la página de Mango de resultado OK del pago")
+    public static void clickContinuarButton(WebDriver driver) throws Exception {
+    	PageAmexResult.clickContinuarButton(driver);
     }
 }

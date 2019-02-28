@@ -1,7 +1,6 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,6 +12,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais.LayoutPago;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci.SecTarjetaPci;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
 
 
@@ -23,9 +23,9 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMa
 public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
 	enum TypeActionLinkFP {PlegarPagos, DesplegarPagos}
 	
-    public static SecTarjetaPciMobil secTarjetaPci = new SecTarjetaPciMobil();
     public static SecTMango secTMango;
     public static SecBillpay secBillpay;
+    public static SecTarjetaPci secTarjetaPci = null;
     
     static String XPathLink2DatosPago = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step2']";
     static String XPathButtonVerResumen = "//button[@id[contains(.,'complete-step2')]]";

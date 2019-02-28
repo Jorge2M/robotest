@@ -1,39 +1,31 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecBillpay;
 
-
 public class SecBillpayStpV {
     
-    public static void validateIsSectionOk(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
-        //Validaciones
-        String descripValidac = 
-            "1) Aparecen 3 desplegables para la selección de la fecha de nacimiento<br>" +
-            "2) Aparece el check de \"Acepto\"";
-        datosStep.setNOKstateByDefault(); 
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!SecBillpay.isPresentSelectBirthBirthYear(dFTest.driver) ||
-                !SecBillpay.isPresentSelectBirthMonth(dFTest.driver) ||
-                !SecBillpay.isPresentSelectBirthDay(dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (!SecBillpay.isPresentRadioAcepto(channel, dFTest.driver)) {
-                listVals.add(2, State.Defect);
-            }
-                                
-            datosStep.setListResultValidations(listVals);
-        }
-        catch (Exception e) {
-            //
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+    public static ListResultValidation validateIsSectionOk(Channel channel, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
+	 	validations.add(
+			"Aparecen 3 desplegables para la selección de la fecha de nacimiento<br>",
+			SecBillpay.isPresentSelectBirthBirthYear(driver) &&
+            SecBillpay.isPresentSelectBirthMonth(driver) &&
+            SecBillpay.isPresentSelectBirthDay(driver), 
+            State.Defect); 
+	 	validations.add(
+			"Aparece el check de \"Acepto\"",
+			SecBillpay.isPresentRadioAcepto(channel, driver), State.Defect); 
+	 	return validations;
     }
     
     /**

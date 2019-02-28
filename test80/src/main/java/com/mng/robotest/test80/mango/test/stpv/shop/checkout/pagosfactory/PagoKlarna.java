@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -19,19 +20,19 @@ public class PagoKlarna extends PagoStpV {
     @SuppressWarnings("static-access")
     @Override
     public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
-        DatosStep datosStep = PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
+        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, dFTest);
         Pago pago = this.dCtxPago.getDataPedido().getPago();
-        PageCheckoutWrapperStpV.secKlarna.inputNumPersonal(pago.getNumperklarna(), this.dCtxSh.channel, this.dFTest);
+        PageCheckoutWrapperStpV.secKlarna.inputNumPersonal(pago.getNumperklarna(), dCtxSh.channel, dFTest);
         if (pago.getSearchAddklarna().compareTo("s")==0) {
-            PageCheckoutWrapperStpV.secKlarna.searchAddress(pago, this.dFTest);
-            datosStep = PageCheckoutWrapperStpV.secKlarna.confirmAddress(pago, this.dCtxSh.channel, this.dFTest);
+            PageCheckoutWrapperStpV.secKlarna.searchAddress(pago, dFTest);
+            PageCheckoutWrapperStpV.secKlarna.confirmAddress(pago, dCtxSh.channel, dFTest);
         }
         
         if (execPay) {
             this.dCtxPago.getDataPedido().setCodtipopago("K");
-            datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
+            PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, dFTest);
         }
                 
-        return datosStep;
+        return TestCaseData.getDatosLastStep();
     }    
 }

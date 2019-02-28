@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -20,18 +21,19 @@ public class PagoBillpay extends PagoStpV {
     @Override
     public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
         DataPedido dataPedido = this.dCtxPago.getDataPedido();
-        DatosStep datosStep = PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(this.dCtxPago, this.dCtxSh, this.dFTest);
-        PageCheckoutWrapperStpV.secBillpay.validateIsSectionOk(this.dCtxSh.channel, datosStep, this.dFTest);
-        String nombrePago = dataPedido.getPago().getNombre(this.dCtxSh.channel);
-        datosStep = PageCheckoutWrapperStpV.secBillpay.inputDiaNacAndCheckAcepto("23-04-1974", nombrePago, this.dCtxSh.channel, this.dFTest);
-        if (nombrePago.compareTo("Lastschrift")==0)
-            datosStep = PageCheckoutWrapperStpV.secBillpay.inputDataInLastschrift(dataPedido.getPago().getIban(), dataPedido.getPago().getBic(), dataPedido.getPago().getTitular(), this.dFTest);
+        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, dFTest);
+        PageCheckoutWrapperStpV.secBillpay.validateIsSectionOk(dCtxSh.channel, dFTest.driver);
+        String nombrePago = dataPedido.getPago().getNombre(dCtxSh.channel);
+        PageCheckoutWrapperStpV.secBillpay.inputDiaNacAndCheckAcepto("23-04-1974", nombrePago, dCtxSh.channel, dFTest);
+        if (nombrePago.compareTo("Lastschrift")==0) {
+            PageCheckoutWrapperStpV.secBillpay.inputDataInLastschrift(dataPedido.getPago().getIban(), dataPedido.getPago().getBic(), dataPedido.getPago().getTitular(), dFTest);
+        }
         
         if (execPay) {
-            datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
+            PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, dFTest);
             throw new PaymethodWithoutTestPayImplemented(MsgNoPayImplemented);
         }
         
-        return datosStep;
+        return TestCaseData.getDatosLastStep();
     }    
 }
