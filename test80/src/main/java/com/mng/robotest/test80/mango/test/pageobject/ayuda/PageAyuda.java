@@ -19,20 +19,17 @@ public class PageAyuda extends WebdrvWrapp {
     private static JSONParser parser = new JSONParser();
     private static JSONObject fileHAR = null;
 
-    public static JSONObject getFileJSON () {
-        try {
-            InputStream inputSt = PageAyuda.class.getResourceAsStream("/helpFooter.json");
-            Reader reader = new InputStreamReader(inputSt);
-            Object JSONFile = parser.parse(reader);
-            fileHAR = (JSONObject)JSONFile;
-            reader.close();
-        } catch (ParseException | IOException e) {
-            e.printStackTrace();
-        }
+    public static JSONObject getFileJSON () throws Exception{
+        InputStream inputSt = PageAyuda.class.getResourceAsStream("/helpFooter.json");
+        Reader reader = new InputStreamReader(inputSt);
+        Object JSONFile = parser.parse(reader);
+        fileHAR = (JSONObject)JSONFile;
+        reader.close();
+
         return fileHAR;
     }
 
-    public static JSONArray getSectionFromJSON(String section) {
+    public static JSONArray getSectionFromJSON(String section) throws Exception{
         return (JSONArray)getFileJSON().get(section);
     }
 
