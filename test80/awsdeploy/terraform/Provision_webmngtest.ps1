@@ -48,7 +48,7 @@ function WaitAndGet-FileFromS3 {
 		}
 		catch {
 			Write-Output "Not available file " + $pathOfFileInS3 + "in S3 yet..."
-			Start-Sleep -s 10
+			Start-Sleep -s 5
 			$exception = 1;
 		}
 	} Until( ($exception -eq 0) -or ($i -gt $loops) )
