@@ -15,7 +15,7 @@ public class PagePedidosStpV {
             "Aparece la página de \"Mis Pedidos\"<br>",
             PageMispedidos.isPage(driver), State.Defect);
         validations.add(
-            "2) La página contiene " + usrRegistrado + "<br>",
+            "La página contiene " + usrRegistrado + "<br>",
             PageMispedidos.elementContainsText(driver, usrRegistrado), State.Warn);
         validations.add(
             "La lista de pedidos está vacía",
