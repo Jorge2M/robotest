@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
@@ -80,24 +79,24 @@ public class Footer extends GestorWebDriver {
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userRegistered = false;
 
-        DatosStep datosStep = AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
         String urlInitialPage = dFTest.driver.getCurrentUrl();
-        SecFooterStpV.validaLinksFooter(dCtxSh.channel, dCtxSh.appE, datosStep, dFTest);
+        SecFooterStpV.validaLinksFooter(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         
         List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(dCtxSh.appE, dCtxSh.channel);
         //List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinks(dCtxSh.appE, dCtxSh.channel);
         for (FooterLink footerLinkToValidate : listFooterLinksToValidate) {
         	switch (footerLinkToValidate) {
         	case ayuda:
-        		datosStep = SecFooterStpV.clickLinkFooter(footerLinkToValidate, false, dCtxSh.channel, dFTest);
-        		SecFooterStpV.validaPaginaAyuda(dCtxSh.channel, datosStep, dFTest);
+        		SecFooterStpV.clickLinkFooter(footerLinkToValidate, false, dCtxSh.channel, dFTest.driver);
+        		SecFooterStpV.validaPaginaAyuda(dCtxSh.channel, dFTest.driver);
         		break;
         	case mango_card:
-        		SecFooterStpV.clickLinkFooter(footerLinkToValidate, false, dCtxSh.channel, dFTest);
+        		SecFooterStpV.clickLinkFooter(footerLinkToValidate, false, dCtxSh.channel, dFTest.driver);
                 SecFooterStpV.checkSolicitarTarjeta(dCtxSh.channel, dFTest);
         		break;
         	default:
-                SecFooterStpV.clickLinkFooter(footerLinkToValidate, true, dCtxSh.channel, dFTest);
+                SecFooterStpV.clickLinkFooter(footerLinkToValidate, true, dCtxSh.channel, dFTest.driver);
                 dFTest.driver.get(urlInitialPage);
         	}
         	

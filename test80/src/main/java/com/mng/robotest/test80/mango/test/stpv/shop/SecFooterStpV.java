@@ -1,11 +1,14 @@
 package com.mng.robotest.test80.mango.test.stpv.shop;
 
 import java.util.List;
+import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -21,109 +24,77 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter.FooterLink;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalCambioPaisStpV;
 
-
 public class SecFooterStpV {
     
-    /**
-     * Valida que existe el footer con todas sus componentes
-     */
-    public static void validaLinksFooter(Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) throws Exception { 
-        //Validaciones
+	@Validation 
+    public static ListResultValidation validaLinksFooter(Channel channel, AppEcom app, WebDriver driver) throws Exception { 
+    	ListResultValidation validations = ListResultValidation.getNew();
     	List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(app, channel);
-        String descripValidac = 
-            "1) Aparecen los siguientes links en el footer <b>" + listFooterLinksToValidate + "</b>";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!SecFooter.checkFooters(listFooterLinksToValidate, app, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        } 
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
+    	validations.add(
+    		"Aparecen los siguientes links en el footer <b>" + listFooterLinksToValidate + "</b>",
+    		SecFooter.checkFooters(listFooterLinksToValidate, app, driver), State.Defect);
+    	return validations;      
     }
 
     /**
      * @param pageInNewTab indica si el link abrirá la página en una nueva ventana
      * @param closeTabAtEnd indicamos si queremos que finalmente se cierre la ventana o no (porque posteriormente queremos proseguir con la prueba)
      */
-    public static DatosStep clickLinkFooter(FooterLink typeFooter, boolean closeAtEnd, Channel channel, DataFmwkTest dFTest) 
+	@Step (
+		description="Seleccionar el link del footer <b>#{typeFooter}</b><br>", 
+        expected="Se redirige a la pantalla adecuada")
+    public static void clickLinkFooter(FooterLink typeFooter, boolean closeAtEnd, Channel channel, WebDriver driver) 
     throws Exception { 
-        //Step
-    	PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter, channel);
-    	String windowFatherHandle;
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionar el link del footer <b>" + typeFooter + "</b><br>", 
-            "Se redirige a la pantalla de " + pageObject.getName());
-        try {
-        	windowFatherHandle = 
-        		SecFooter.clickLinkAndGetWindowFatherHandle(typeFooter, dFTest.driver);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+    	String windowFatherHandle = SecFooter.clickLinkAndGetWindowFatherHandle(typeFooter, driver);
                 
         //Validaciones
-    	String windowActualHandle = dFTest.driver.getWindowHandle();
-    	boolean newWindowInNewTab = (windowActualHandle.compareTo(windowFatherHandle)!=0);
-        int maxSecondsToWait = 5;
-        String validation2 = "";
-        if (typeFooter.pageInNewTab())
-        	validation2 = "2) Aparece la página en una ventana aparte";
-        
-        String descripValidac = 
-            "1) Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
-            validation2;
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!pageObject.isPageCorrect(dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            if (typeFooter.pageInNewTab()) {
-            	if (!newWindowInNewTab) {
-            		listVals.add(2, State.Warn);
-            	}
-            }
-                
-            datosStep.setListResultValidations(listVals);
-        } 
-        finally {
-        	listVals.checkAndStoreValidations(descripValidac);
-            if (typeFooter.pageInNewTab()) {
-                if (closeAtEnd && newWindowInNewTab) {
-                    dFTest.driver.close();
-                    dFTest.driver.switchTo().window(windowFatherHandle);
-                }
-            }
-        }         
-        
-        return datosStep;
-     }
+    	checkPageCorrectAfterSelectLinkFooter(windowFatherHandle, typeFooter, closeAtEnd, channel, driver);
+    }
+	 
+	@Validation
+	private static ListResultValidation checkPageCorrectAfterSelectLinkFooter(String windowFatherHandle, FooterLink typeFooter, boolean closeAtEnd, 
+																			  Channel channel, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	    PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter, channel);
+		String windowActualHandle = driver.getWindowHandle();
+		boolean newWindowInNewTab = (windowActualHandle.compareTo(windowFatherHandle)!=0);
+		int maxSecondsToWait = 5;
+		try {
+	    	validations.add(
+	    		"Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + maxSecondsToWait + " segundos)<br>",
+	    		pageObject.isPageCorrect(driver), State.Warn);		
+		    if (typeFooter.pageInNewTab()) {
+		    	validations.add(
+	        		"Aparece la página en una ventana aparte",
+	        		newWindowInNewTab, State.Warn);		
+		    }
+		}
+	    finally {
+	        if (typeFooter.pageInNewTab()) {
+	            if (closeAtEnd && newWindowInNewTab) {
+	                driver.close();
+	                driver.switchTo().window(windowFatherHandle);
+	            }
+	        }
+	    }        
+	    
+	    return validations;
+	}
     
     /**
      * Método que valida la existencia del número de teléfono en el apartado Preguntas frecuentes
      */    
-    public static void validaPaginaAyuda(Channel channel, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
-        //Validación
-        String telefono = "901 150 543";
-        String descripValidac = 
-            "1) Aparece \"Preguntas Frecuentes\" en la página <br>" +
-            "2) Aparece la sección \"Contáctanos\" con el número de teléfono " + telefono;
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageAyuda.isPresentCabPreguntasFreq(channel, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            if (!PageAyuda.isPresentTelefono(dFTest.driver, telefono)) {
-                listVals.add(2, State.Warn);            
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+    public static ListResultValidation validaPaginaAyuda(Channel channel, WebDriver driver) throws Exception {
+		ListResultValidation validations = ListResultValidation.getNew();
+		String telefono = "901 150 543";
+    	validations.add(
+    		"Aparece \"Preguntas Frecuentes\" en la página <br>",
+    		PageAyuda.isPresentCabPreguntasFreq(channel, driver), State.Warn);	
+    	validations.add(
+    		"Aparece la sección \"Contáctanos\" con el número de teléfono " + telefono,
+    		PageAyuda.isPresentTelefono(driver, telefono), State.Warn);
+    	return validations;
     }
         
     /**
