@@ -3,7 +3,6 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.StringTokenizer;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,7 +21,6 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci.SecTarjetaPci;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
-
 
 public class Page1DktopCheckout extends WebdrvWrapp {
     public static SecStoreCredit secStoreCredit;

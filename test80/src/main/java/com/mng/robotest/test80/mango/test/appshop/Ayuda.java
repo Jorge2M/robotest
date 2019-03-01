@@ -66,7 +66,7 @@ public class Ayuda extends GestorWebDriver {
         dCtxSh.userRegistered = false;
 
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
-        SecFooterStpV.clickLinkFooter(SecFooter.FooterLink.ayuda, false, dCtxSh.channel, dFTest);
+        SecFooterStpV.clickLinkFooter(SecFooter.FooterLink.ayuda, false, dCtxSh.channel, dFTest.driver);
         AyudaStpV.selectTypeValidaciones(dCtxSh.channel, dFTest);
     }
 }
