@@ -17,8 +17,8 @@ import org.openqa.selenium.WebDriver;
 public class PageMiCuentaStpV {
 
     @Validation(
-            description="1) Aparece una pantalla de resultado OK (la esperamos hasta #{maxSecondsToWait} segundos)",
-            level=State.Defect)
+        description="1) Aparece una pantalla de resultado OK (la esperamos hasta #{maxSecondsToWait} segundos)",
+        level=State.Defect)
     public static boolean validateIsPage (int maxSecondsToWait, WebDriver driver) {
         return (PageMiCuenta.isPageUntil(maxSecondsToWait, driver));
     }
@@ -32,8 +32,8 @@ public class PageMiCuentaStpV {
     }
 
     @Step(
-            description = "Seleccionar el link \"Mis datos\"",
-            expected = "Aparece la página de \"Mis datos\"")
+        description = "Seleccionar el link \"Mis datos\"",
+        expected = "Aparece la página de \"Mis datos\"")
     private static void goToMisDatos (String usuarioReg, DataFmwkTest dFTest) throws Exception {
         PageMiCuenta.clickMisDatos(dFTest.driver);
 
@@ -75,8 +75,8 @@ public class PageMiCuentaStpV {
     }
 
     @Step(
-            description = "Seleccionar el link \"Suscripciones\"",
-            expected = "Aparece la página de \"Suscripciones\"")
+        description = "Seleccionar el link \"Suscripciones\"",
+        expected = "Aparece la página de \"Suscripciones\"")
     private static void goToSuscripciones(DataFmwkTest dFTest) throws Exception {
         //Step de aqui
         PageMiCuenta.clickSuscripciones(dFTest.driver);
@@ -101,8 +101,8 @@ public class PageMiCuentaStpV {
     }
 
     @Step(
-            description = "Seleccionar el link \"Mis pedidos\"",
-            expected = "Aparece la página de \"Mis pedidos\" sin pedidos")
+        description = "Seleccionar el link \"Mis pedidos\"",
+        expected = "Aparece la página de \"Mis pedidos\" sin pedidos")
     private static void goToMisPedidos(String usrRegistrado, DataFmwkTest dFTest) throws Exception {
         //Step de aqui
         PageMiCuenta.clickMisPedidos(dFTest.driver);
@@ -117,8 +117,8 @@ public class PageMiCuentaStpV {
     }
 
     @Step(
-            description = "Seleccionar el link \"Devoluciones\"",
-            expected = "Aparece la página de \"Devoluciones\"")
+        description = "Seleccionar el link \"Devoluciones\"",
+        expected = "Aparece la página de \"Devoluciones\"")
     private static void goToDevoluciones(DataFmwkTest dFTest) throws Exception {
         //Step de aqui
         PageMiCuenta.clickDevoluciones(dFTest.driver);
@@ -133,8 +133,8 @@ public class PageMiCuentaStpV {
     }
 
     @Step(
-            description = "Seleccionar el link \"Reembolsos\"",
-            expected = "Aparece la página de \"Reembolsos\"")
+        description = "Seleccionar el link \"Reembolsos\"",
+        expected = "Aparece la página de \"Reembolsos\"")
 	private static void goToReembolsos(DataFmwkTest dFTest) throws Exception {
 	    //Step de aqui
         PageMiCuenta.clickReembolsos(dFTest.driver);

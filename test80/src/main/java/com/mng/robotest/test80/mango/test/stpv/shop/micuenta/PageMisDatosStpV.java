@@ -86,8 +86,8 @@ public class PageMisDatosStpV {
     }
 
     @Step(
-            description = "Modificar el nombre (cambio de mayúsculas<->minúsculas) + Botón \"Modificar Datos\"",
-            expected = "Aparece la confirmación que los datos se han modificados")
+        description = "Modificar el nombre (cambio de mayúsculas<->minúsculas) + Botón \"Modificar Datos\"",
+        expected = "Aparece la confirmación que los datos se han modificados")
     public static String modificaNombreYGuarda (DataFmwkTest dFTest) throws Exception {
         String nombreActual = PageMisDatos.getValueNombreInput(dFTest.driver);
         if (nombreActual.compareTo(nombreActual.toUpperCase()) == 0) {
@@ -106,8 +106,8 @@ public class PageMisDatosStpV {
     }
 
     @Validation(
-            description = "1) Aparece una pantalla con el literal \"Tus datos han sido modificados en nuestra base de datos\"",
-            level = State.Defect)
+        description = "1) Aparece una pantalla con el literal \"Tus datos han sido modificados en nuestra base de datos\"",
+        level = State.Defect)
     private static boolean validateModificationOfData (WebDriver driver) {
         return (PageMisDatos.pageResOK(driver));
     }

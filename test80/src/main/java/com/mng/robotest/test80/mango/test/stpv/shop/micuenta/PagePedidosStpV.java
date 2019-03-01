@@ -12,14 +12,14 @@ public class PagePedidosStpV {
     public static ListResultValidation validaIsPageSinPedidos (String usrRegistrado, WebDriver driver) {
         ListResultValidation validations = ListResultValidation.getNew();
         validations.add(
-                "Aparece la página de \"Mis Pedidos\"<br>",
-                PageMispedidos.isPage(driver), State.Defect);
+            "Aparece la página de \"Mis Pedidos\"<br>",
+            PageMispedidos.isPage(driver), State.Defect);
         validations.add(
-                "2) La página contiene " + usrRegistrado + "<br>",
-                PageMispedidos.elementContainsText(driver, usrRegistrado), State.Warn);
+            "2) La página contiene " + usrRegistrado + "<br>",
+            PageMispedidos.elementContainsText(driver, usrRegistrado), State.Warn);
         validations.add(
-                "La lista de pedidos está vacía",
-                PageMispedidos.listaPedidosVacia(driver), State.Warn);
+            "La lista de pedidos está vacía",
+            PageMispedidos.listaPedidosVacia(driver), State.Warn);
         return validations;
     }
 }

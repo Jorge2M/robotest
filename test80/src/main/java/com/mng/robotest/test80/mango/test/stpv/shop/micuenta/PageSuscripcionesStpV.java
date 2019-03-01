@@ -24,8 +24,8 @@ import org.openqa.selenium.WebDriver;
 public class PageSuscripcionesStpV {
 
     @Validation(
-            description="1) Aparece la página de \"Suscripciones\"",
-            level=State.Warn)
+        description="1) Aparece la página de \"Suscripciones\"",
+        level=State.Warn)
     public static boolean validaIsPage (WebDriver driver) {
         return (PageSuscripciones.isPage(driver));
     }
@@ -39,23 +39,23 @@ public class PageSuscripcionesStpV {
 
         ListResultValidation validations = ListResultValidation.getNew();
         validations.add(
-                "Aparecen "  + numLineasTotales + " Newsletter<br>",
-                PageSuscripciones.getNumNewsletters(driver)==numLineasTotales, State.Warn);
+            "Aparecen "  + numLineasTotales + " Newsletter<br>",
+            PageSuscripciones.getNumNewsletters(driver)==numLineasTotales, State.Warn);
         validations.add(
-                "Aparecen "  + numLinDesmarcadas + " suscripciones desmarcadas<br>",
-                PageSuscripciones.getNumNewslettersDesmarcadas(driver)==numLinDesmarcadas, State.Warn);
+            "Aparecen "  + numLinDesmarcadas + " suscripciones desmarcadas<br>",
+            PageSuscripciones.getNumNewslettersDesmarcadas(driver)==numLinDesmarcadas, State.Warn);
         while (tokensLinDesmarcadas.hasMoreElements()) {
             String lineaStr = tokensLinDesmarcadas.nextToken();
             validations.add(
-                    "Aparecen desmarcadas las suscripciones de: " + lineasUnchecked,
-                    PageSuscripciones.isNewsletterDesmarcada(lineaStr, driver), State.Warn);
+                "Aparecen desmarcadas las suscripciones de: " + lineasUnchecked,
+                PageSuscripciones.isNewsletterDesmarcada(lineaStr, driver), State.Warn);
         }
         return validations;
     }
 
     @Step(
-            description = "Seleccionar los checkbox de las Newsletter <b>#{listNewsletters.toString()}</b> + Botón \"Guardar Cambios\"",
-            expected = "parece la confirmación que los datos se han modificado")
+        description = "Seleccionar los checkbox de las Newsletter <b>#{listNewsletters.toString()}</b> + Botón \"Guardar Cambios\"",
+        expected = "parece la confirmación que los datos se han modificado")
     public static void selectNewslettersAndGuarda(ArrayList<idNewsletters> listNewsletters, DataFmwkTest dFTest) throws Exception {
         for (idNewsletters idNewsletter : listNewsletters)
             PageSuscripciones.clickRadioNewsletter(dFTest.driver, idNewsletter);
@@ -67,8 +67,8 @@ public class PageSuscripcionesStpV {
     }
 
     @Validation(
-            description="1) Aparece una pantalla de resultado OK (la esperamos hasta #{maxSecondsToWait} segundos)",
-            level=State.Defect)
+        description="1) Aparece una pantalla de resultado OK (la esperamos hasta #{maxSecondsToWait} segundos)",
+        level=State.Defect)
     private static boolean validateIsPageResult (int maxSecondsToWait, WebDriver driver) {
         return (PageSuscripciones.isPageResOKUntil(maxSecondsToWait, driver));
     }
