@@ -4,11 +4,8 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.Reader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -20,8 +17,7 @@ public class PageAyuda extends WebdrvWrapp {
     private static JSONObject fileHAR = null;
 
     public static JSONObject getFileJSON () throws Exception{
-        InputStream inputSt = PageAyuda.class.getResourceAsStream("/helpFooter.json");
-        Reader reader = new InputStreamReader(inputSt);
+        Reader reader = new InputStreamReader(PageAyuda.class.getResourceAsStream("/helpFooter.json"), "utf-8");
         Object JSONFile = parser.parse(reader);
         fileHAR = (JSONObject)JSONFile;
         reader.close();
