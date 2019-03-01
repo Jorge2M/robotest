@@ -63,7 +63,7 @@ public class PageSuscripcionesStpV {
         PageSuscripciones.clickGuardarCambios(dFTest.driver);
 
         //Validation
-        validateIsPageResult(3, dFTest.driver);
+        validateIsPageResult(5, dFTest.driver);
     }
 
     @Validation(
