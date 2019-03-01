@@ -16,8 +16,8 @@ public class PageReembolsosStpV {
                 "Aparece la página de Reembolsos<br>",
                 PageReembolsos.isPage(driver), State.Defect);
         validations.add(
-                "parecen los inputs de BANCO, TITULAR e IBAN",
-                (PageReembolsos.existsInputBanco(driver) || PageReembolsos.existsInputTitular(driver) || PageReembolsos.existsInputIBAN(driver)), State.Warn);
+                "Aparecen los inputs de BANCO, TITULAR e IBAN",
+                (PageReembolsos.existsInputBanco(driver) && PageReembolsos.existsInputTitular(driver) && PageReembolsos.existsInputIBAN(driver)), State.Warn);
         return validations;
     }
 }
