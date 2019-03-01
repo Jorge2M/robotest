@@ -122,7 +122,7 @@ public class MiCuenta extends GestorWebDriver {
             PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dCtxSh.channel, dFTest);
         }
         else {
-            PageMiCuentaStpV.goToMisPedidos(dCtxSh.userConnected, dCtxSh.appE, dCtxSh.channel, dFTest);  
+            PageMiCuentaStpV.goToMisPedidos(dCtxSh.userConnected, dCtxSh.appE, dCtxSh.channel, dFTest);
         }
             
         PageMiCuentaStpV.goToSuscripciones(dCtxSh.appE, dCtxSh.channel, dFTest);
@@ -131,7 +131,7 @@ public class MiCuenta extends GestorWebDriver {
         PageSuscripcionesStpV.selectNewslettersAndGuarda(listNewsletters, dFTest);
         if (dCtxSh.appE!=AppEcom.outlet) {
             PageMiCuentaStpV.goToDevoluciones(dCtxSh.appE, dCtxSh.channel, dFTest);
-            PageDevolucionesStpV.solicitarRegogidaGratuitaADomicilio(dFTest); 
+            PageDevolucionesStpV.solicitarRegogidaGratuitaADomicilio(dFTest);
             PageMiCuentaStpV.goToReembolsos(dCtxSh.appE, dCtxSh.channel, dFTest);
         }
     }

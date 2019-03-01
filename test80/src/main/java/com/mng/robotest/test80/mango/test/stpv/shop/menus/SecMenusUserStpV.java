@@ -74,7 +74,7 @@ public class SecMenusUserStpV {
         return datosStep;
     }
     
-    public static void logoff(Channel channel, DataFmwkTest dFTest) throws Exception {
+    private static void logoff(Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step. Cerrar sesión + Identificarse
         DatosStep datosStep = new DatosStep (
             "Clicar el link de Logoff para cerrar la sesión", 
@@ -134,7 +134,7 @@ public class SecMenusUserStpV {
         //Validaciones estándar. 
         AllPagesStpV.validacionesEstandar(true/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/);
     }
-    
+
 	public static void clickMenuMiCuenta(Channel channel, AppEcom app, DataFmwkTest dFTest) throws Exception {
         //Step.
         DatosStep datosStep = new DatosStep     (
@@ -147,7 +147,7 @@ public class SecMenusUserStpV {
         }
         finally { StepAspect.storeDataAfterStep(datosStep); }		
 		
-        PageMiCuentaStpV.validateIsPage(datosStep, dFTest);
+        PageMiCuentaStpV.validateIsPage(2, dFTest.driver);
 	}
     
     public static DatosStep cambioPaisMobil(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {

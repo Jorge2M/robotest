@@ -1,60 +1,46 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
+import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageDevoluciones;
-import com.mng.robotest.test80.mango.test.pageobject.shop.PageDevoluciones.Devolucion;;
+import com.mng.robotest.test80.mango.test.pageobject.shop.PageDevoluciones.Devolucion;
+import org.openqa.selenium.WebDriver;
 
 
 public class PageDevolucionesStpV {
-    
-    public static void validaIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) Aparece la página de devoluciones<br>" +
-            "2) Aparece la opción de " + Devolucion.EnTienda.getLiteral() + "<br>" +
-            "3) Aparece la opción de " + Devolucion.EnDomicilio.getLiteral() + "<br>" +
-            "4) Aparece la opción de " + Devolucion.PuntoCeleritas.getLiteral();
-        datosStep.setNOKstateByDefault();      
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageDevoluciones.isPage(dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (!Devolucion.EnTienda.isPresentLink(dFTest.driver)) {
-                listVals.add(2, State.Defect);
-            }
-            if (!Devolucion.EnDomicilio.isPresentLink(dFTest.driver)) {
-                listVals.add(3, State.Defect);
-            }
-            if (!Devolucion.PuntoCeleritas.isPresentLink(dFTest.driver)) {
-                listVals.add(4, State.Defect);
-            }
 
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation
+    public static ListResultValidation validaIsPage (WebDriver driver) {
+        ListResultValidation validations = ListResultValidation.getNew();
+        validations.add(
+                "Aparece la página de devoluciones<br>",
+                PageDevoluciones.isPage(driver), State.Defect);
+        validations.add(
+                "Aparece la opción de " + Devolucion.EnTienda.getLiteral() + "<br>",
+                Devolucion.EnTienda.isPresentLink(driver), State.Defect);
+        validations.add(
+                "Aparece la opcion de " + Devolucion.EnDomicilio.getLiteral() + "<br>",
+                Devolucion.EnDomicilio.isPresentLink(driver), State.Defect);
+        validations.add(
+                "Aparece la opción de " + Devolucion.PuntoCeleritas.getLiteral(),
+                Devolucion.EnDomicilio.isPresentLink(driver), State.Defect);
+        return validations;
     }
-    
-    public static DatosStep solicitarRegogidaGratuitaADomicilio(DataFmwkTest dFTest) throws Exception {
-        DatosStep datosStep = new DatosStep (
-            "Pulsar \"Recogida gratuíta a domicilio\" + \"Solicitar Recogida\"", 
-            "Aparece la tabla de devoluciones sin ningún pedido");
-        try {
-        	boolean desplegada = true;
-            Devolucion.EnDomicilio.click(dFTest.driver);
-            Devolucion.EnDomicilio.waitForInState(desplegada, 2, dFTest.driver);
-            PageDevoluciones.clickSolicitarRecogida(dFTest.driver);
-                                                                        
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
 
-        //Validaciones.
-        PageRecogidaDomicStpV.vaidaIsPageSinDevoluciones(datosStep, dFTest);
-        
-        return datosStep;
+    @Step(
+            description = "Pulsar \"Recogida gratuíta a domicilio\" + \"Solicitar Recogida\"",
+            expected = "Aparece la tabla devoluciones sin ningún pedido")
+    public static void solicitarRegogidaGratuitaADomicilio(DataFmwkTest dFTest) throws Exception {
+        boolean desplegada = true;
+        Devolucion.EnDomicilio.click(dFTest.driver);
+        Devolucion.EnDomicilio.waitForInState(desplegada, 2, dFTest.driver);
+        PageDevoluciones.clickSolicitarRecogida(dFTest.driver);
+
+        //Validacion
+        PageRecogidaDomicStpV.vaidaIsPageSinDevoluciones(dFTest.driver);
     }
+
 }

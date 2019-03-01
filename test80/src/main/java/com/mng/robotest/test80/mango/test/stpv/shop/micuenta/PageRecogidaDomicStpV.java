@@ -1,34 +1,33 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageRecADomic;
+import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisDatos;
+import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
+import org.openqa.selenium.WebDriver;
 
 
 public class PageRecogidaDomicStpV {
 
-    public static void vaidaIsPageSinDevoluciones(DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) Aparece la página de Recogida a Domicilio<br>" +
-            "2) Aparece la tabla de devoluciones<br>" +
-            "3) No aparece ningún pedido";
-        datosStep.setNOKstateByDefault();  
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageRecADomic.isPage(dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (!PageRecADomic.isTableDevoluciones(dFTest.driver)) {
-                listVals.add(2, State.Defect);
-            }
-            if (PageRecADomic.hayPedidos(dFTest.driver)) {
-                listVals.add(3, State.Info);
-            }
+    @Validation
+    public static ListResultValidation vaidaIsPageSinDevoluciones (WebDriver driver) throws Exception {
+        ListResultValidation validations = ListResultValidation.getNew();
+        validations.add(
+                "Aparece la página de Recogida a Domicilio<br>",
+                PageRecADomic.isPage(driver), State.Defect);
+        validations.add(
+                "Aparece la tabla de devoluciones<br>",
+                PageRecADomic.isTableDevoluciones(driver), State.Defect);
+        validations.add(
+                "No aparece ningún pedido",
+                !PageRecADomic.hayPedidos(driver), State.Info);
 
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
+
+        return validations;
     }
 }
