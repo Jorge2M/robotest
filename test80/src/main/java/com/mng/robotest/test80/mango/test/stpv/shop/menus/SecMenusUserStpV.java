@@ -2,6 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+
+import org.openqa.selenium.WebDriver;
+
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
@@ -135,19 +139,12 @@ public class SecMenusUserStpV {
         AllPagesStpV.validacionesEstandar(true/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/);
     }
 
-	public static void clickMenuMiCuenta(Channel channel, AppEcom app, DataFmwkTest dFTest) throws Exception {
-        //Step.
-        DatosStep datosStep = new DatosStep     (
-            "Seleccionar el link \"Mi cuenta\"", 
-            "Aparece la página de \"Mi cuenta\"");
-        try {
-            SecMenusWrap.secMenusUser.clickMiCuenta(app, channel, dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }		
-		
-        PageMiCuentaStpV.validateIsPage(2, dFTest.driver);
+    @Step (
+    	description="Seleccionar el link \"Mi cuenta\"", 
+        expected="Aparece la página de \"Mi cuenta\"")
+	public static void clickMenuMiCuenta(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+        SecMenusWrap.secMenusUser.clickMiCuenta(app, channel, driver);	
+        PageMiCuentaStpV.validateIsPage(2, driver);
 	}
     
     public static DatosStep cambioPaisMobil(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {

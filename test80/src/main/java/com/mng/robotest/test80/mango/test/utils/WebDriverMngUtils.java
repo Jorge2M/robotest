@@ -23,6 +23,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest.TypeEvidencia;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
@@ -171,12 +172,14 @@ public class WebDriverMngUtils {
      * @param maxErrors máximo de errores a partir del cual ya no hemos de mostrar warning
      * @return recopilación de todos los problemas detectados
      */
-    public static ResultadoErrores imagesBroken(WebDriver driver, Channel channel, int maxErrors, ITestContext ctx) throws Exception {
+    public static ResultadoErrores imagesBroken(WebDriver driver, Channel channel, int maxErrors) throws Exception {
         int maxImages = 5000;
+        ITestContext ctx = TestCaseData.getdFTest().ctx;
 
         //En el caso de móvil sólo procesaremos 200 imágenes para paliar el caso en el que el script se ejecuta contra un dispositivo físico y el rendimiento es limitado
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             imagesBroken(driver,  200, maxErrors, ctx);
+        }
         
         return (imagesBroken(driver, maxImages, maxErrors, ctx));
     }

@@ -97,7 +97,7 @@ public class PagoNavigationsStpV {
         
         if (dCtxSh.userRegistered) {
             //Step. Vaciamos la bolsa y los favoritos
-            SecBolsaStpV.clear(dCtxSh, dFTest);
+            SecBolsaStpV.clear(dCtxSh, dFTest.driver);
             if (dCtxSh.appE==AppEcom.shop)
                 PageFavoritosStpV.clearAll(dCtxSh, dFTest);
             
@@ -110,7 +110,7 @@ public class PagoNavigationsStpV {
         	
 	    //Step
         DataBag dataBag = dCtxPago.getDataPedido().getDataBag();
-        SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, dFTest);
+        SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, dFTest.driver);
 
         //Steps. Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
         dCtxPago.getFTCkout().testCodPromocional = true;
@@ -126,11 +126,13 @@ public class PagoNavigationsStpV {
      */
     public static void testFromBolsaToCheckoutMetPago(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest)
     throws Exception {
-        SecBolsaStpV.selectButtonComprar(dCtxPago.getDataPedido().getDataBag(), dCtxSh, dFTest);
-        if (dCtxSh.userRegistered)
+        SecBolsaStpV.selectButtonComprar(dCtxPago.getDataPedido().getDataBag(), dCtxSh, dFTest.driver);
+        if (dCtxSh.userRegistered) {
             dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
-        else
+        }
+        else {
             testFromIdentToCheckoutIni(dCtxPago, dCtxSh, dFTest);
+        }
         
         test1rstPageCheckout(dCtxSh, dCtxPago, dFTest);
 
@@ -187,7 +189,7 @@ public class PagoNavigationsStpV {
         String emailCheckout = UtilsMangoTest.getEmailForCheckout(dCtxSh.pais, dCtxPago.getFTCkout().emailExist); 
         dCtxPago.getDataPedido().setEmailCheckout(emailCheckout);
 
-        Page1IdentCheckoutStpV.secSoyNuevo.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExist, dCtxSh.appE, dCtxSh.userRegistered, dCtxSh.pais, dCtxSh.channel, dFTest);
+        Page1IdentCheckoutStpV.secSoyNuevo.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExist, dCtxSh.appE, dCtxSh.userRegistered, dCtxSh.pais, dCtxSh.channel, dFTest.driver);
         HashMap<String, String> datosRegistro = Page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, validaCharNoLatinos, dFTest);
         dCtxPago.setDatosRegistro(datosRegistro);
         if (validaCharNoLatinos) {
@@ -285,7 +287,7 @@ public class PagoNavigationsStpV {
         AccesoNavigations.cambioPaisFromHomeIfNeeded(dCtxSh, dFTest);
         
         //Step. Seleccionar el artículo disponible y añadirlo a la bolsa
-        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest);
+        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest.driver);
 
         //STEPs Volvemos a comprar, identicarnos y ejecutar las acciones específicas sobre la página de checkout
         dCtxPago.getFTCkout().testCodPromocional = false;
@@ -354,7 +356,7 @@ public class PagoNavigationsStpV {
                         dataDirEnvio.put(DataDirType.direccion, "c./ mossen trens nº6 5º1ª");
                         dataDirEnvio.put(DataDirType.email, "jorge.munoz.sge@mango.com");
                         dataDirEnvio.put(DataDirType.telefono, "665015122");
-                        PageCheckoutWrapperStpV.modalDirecEnvio.inputDataAndActualizar(dataDirEnvio, dFTest);
+                        PageCheckoutWrapperStpV.modalDirecEnvio.inputDataAndActualizar(dataDirEnvio, dFTest.driver);
                         PageCheckoutWrapperStpV.modalAvisoCambioPais.clickConfirmar(paisChange, dFTest.driver);
                         PageCheckoutWrapperStpV.validaMetodosPagoDisponibles(paisChange, dCtxPago.getFTCkout().isEmpl, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
                     }

@@ -116,7 +116,7 @@ public class Favoritos extends GestorWebDriver {
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
         //TestAB.activateTestABfiltrosMobil(1, dCtxSh, getDriver().driver); //!!!!!
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
-        SecBolsaStpV.clear(dCtxSh, dFTest);
+        SecBolsaStpV.clear(dCtxSh, dFTest.driver);
         PageFavoritosStpV.clearAll(dataFavoritos, dCtxSh, dFTest);
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
         SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh, dFTest);
@@ -132,7 +132,7 @@ public class Favoritos extends GestorWebDriver {
         ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);
         PageFavoritosStpV.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dFTest);
         if (dCtxSh.channel==Channel.movil_web) {
-            SecBolsaStpV.clickAspaForCloseMobil(dFTest);
+            SecBolsaStpV.clickAspaForCloseMobil(dFTest.driver);
             PageFavoritosStpV.validaIsPageOK(dataFavoritos, dFTest);
         }
         
@@ -155,7 +155,7 @@ public class Favoritos extends GestorWebDriver {
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
         //TestAB.activateTestABfiltrosMobil(1, dCtxSh, getDriver().driver); //!!!!!
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
-        SecBolsaStpV.clear(dCtxSh, dFTest);
+        SecBolsaStpV.clear(dCtxSh, dFTest.driver);
         PageFavoritosStpV.clearAll(dataFavoritos, dCtxSh, dFTest);
         
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
@@ -173,7 +173,7 @@ public class Favoritos extends GestorWebDriver {
         dCtxSh.passwordUser = userShop.password;
         AccesoStpV.identificacionEnMango(dCtxSh, dFTest);
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-        SecBolsaStpV.clear(dCtxSh, dFTest);
+        SecBolsaStpV.clear(dCtxSh, dFTest.driver);
         
         SecMenusWrapperStpV.secMenuUser.selectFavoritos(dataFavoritos, dCtxSh, dFTest);
         

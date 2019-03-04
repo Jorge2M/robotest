@@ -144,7 +144,7 @@ public class CompraFact extends GestorWebDriver {
         	listArticles = Arrays.asList(listArticles.get(0));
         
         DataBag dataBag = new DataBag(); 
-        SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, dFTest);
+        SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, dFTest.driver);
         
         //Hasta página Checkout
         FlagsTestCkout fTCkout = new FlagsTestCkout();

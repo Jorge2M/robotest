@@ -144,7 +144,7 @@ public class PageFavoritosStpV {
         dataBolsa.addArticulo(artToAddBolsa);
 
         //Validaciones
-        SecBolsaStpV.validaAltaArtBolsa(dataBolsa, channel, AppEcom.shop);
+        SecBolsaStpV.validaAltaArtBolsa(dataBolsa, channel, AppEcom.shop, dFTest.driver);
     }
     
     @Step (

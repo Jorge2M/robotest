@@ -48,12 +48,12 @@ public class ModalFichaFavoritosStpV {
         //Validaciones
         switch (channel) {
         case desktop:
-            SecBolsaStpV.validaAltaArtBolsa(dataBolsa, channel, AppEcom.shop);
+            SecBolsaStpV.validaAltaArtBolsa(dataBolsa, channel, AppEcom.shop, dFTest.driver);
             break;
         default:
         case movil_web:
             //En este caso no se hace visible la bolsa después de añadir a Favoritos con lo que sólo validamos el número
-            SecBolsaStpV.validaNumArtEnBolsa(dataBolsa, channel, app, dFTest);
+            SecBolsaStpV.validaNumArtEnBolsa(dataBolsa, channel, app, dFTest.driver);
             break;
         }
     }

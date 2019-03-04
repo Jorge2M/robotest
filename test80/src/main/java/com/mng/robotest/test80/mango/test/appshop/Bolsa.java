@@ -142,7 +142,7 @@ public class Bolsa extends GestorWebDriver {
         AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest);
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
         SecMenusWrapperStpV.accesoMenuXRef(menuVestidos, dCtxSh, dFTest);
-        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest);
+        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest.driver);
         
         //Hasta página de Checkout
         FlagsTestCkout FTCkout = new FlagsTestCkout();
@@ -176,11 +176,11 @@ public class Bolsa extends GestorWebDriver {
     	//TestAB.activateTestABiconoBolsaDesktop(2, dCtxSh, dFTest.driver);
         DataBag dataBag = new DataBag();
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, dCtxSh.userRegistered/*clearArticulos*/, dFTest);
-        SecBolsaStpV.altaArticlosConColores(2, dataBag, dCtxSh, dFTest);
-        SecBolsaStpV.forceStateBolsaTo(StateBolsa.Closed, dCtxSh.appE, dCtxSh.channel, dFTest);
-        SecBolsaStpV.forceStateBolsaTo(StateBolsa.Open, dCtxSh.appE, dCtxSh.channel, dFTest); 
-        SecBolsaStpV.clear1erArticuloBolsa(dataBag, dCtxSh.appE, dCtxSh.channel, dFTest);                                
-        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest);
+        SecBolsaStpV.altaArticlosConColores(2, dataBag, dCtxSh, dFTest.driver);
+        SecBolsaStpV.forceStateBolsaTo(StateBolsa.Closed, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
+        SecBolsaStpV.forceStateBolsaTo(StateBolsa.Open, dCtxSh.appE, dCtxSh.channel, dFTest.driver); 
+        SecBolsaStpV.clear1erArticuloBolsa(dataBag, dCtxSh.appE, dCtxSh.channel, dFTest.driver);                                
+        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest.driver);
         SecBolsaStpV.click1erArticuloBolsa(dataBag, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
     }
 }

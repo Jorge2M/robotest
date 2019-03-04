@@ -456,7 +456,7 @@ public class SecMenusDesktopStpV {
         case banners:
         	int maxBannersToLoad = 1;
         	SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, dFTest.driver);
-        	secBannersStpV.validaBannEnContenido(datosStep, dFTest);
+        	secBannersStpV.validaBannEnContenido(dFTest.driver);
             break;
         case vacio:
             break;

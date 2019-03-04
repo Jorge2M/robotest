@@ -1,11 +1,13 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -26,34 +28,23 @@ public class Page1EnvioCheckoutMobilStpV {
 
     public static ModalDroppointsStpV modalDroppoints;
     
-    public static void validateIsPage(boolean userLogged, DatosStep datosStep, DataFmwkTest dFTest) {
-        
-    	String optionalValidac = "3) Aparece seleccionado el método de envío \"Estándar\"<br>";
-    	String descripValidac = 
-            "1) Aparece la página correspondiente al paso-1<br>" +
-            "2) Aparece el botón de introducción del código promocional";
-
-    	if (!userLogged)
-    		descripValidac += optionalValidac;
-    	
-    	datosStep.setNOKstateByDefault();   
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!WebdrvWrapp.isElementPresent(dFTest.driver, By.xpath("//h2[@data-toggle='step1']"))) {
-                listVals.add(1, State.Warn);
-            }
-            if (!Page1EnvioCheckoutMobil.isVisibleInputCodigoPromoUntil(0, dFTest.driver)) {
-                listVals.add(3, State.Defect);
-            }
-            if (!userLogged) {
-	            if (!WebdrvWrapp.isElementPresent(dFTest.driver, By.xpath("//div[@data-analytics-id='standard' and @class[contains(.,'checked')]]"))) {
-	                listVals.add(2, State.Warn);
-	            }
-            }
-                        
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation
+    public static ListResultValidation validateIsPage(boolean userLogged, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	 	validations.add(
+			"Aparece la página correspondiente al paso-1<br>",
+			WebdrvWrapp.isElementPresent(driver, By.xpath("//h2[@data-toggle='step1']")), State.Warn);
+	 	validations.add(
+			"Aparece el botón de introducción del código promocional",
+			Page1EnvioCheckoutMobil.isVisibleInputCodigoPromoUntil(0, driver), State.Defect);
+	 	if (!userLogged) {
+		 	validations.add(
+				"Aparece seleccionado el método de envío \"Estándar\"<br>",
+				WebdrvWrapp.isElementPresent(driver, By.xpath("//div[@data-analytics-id='standard' and @class[contains(.,'checked')]]")), 
+				State.Warn);
+	 	}
+	 	
+	 	return validations;
     }
     
     @SuppressWarnings("static-access")

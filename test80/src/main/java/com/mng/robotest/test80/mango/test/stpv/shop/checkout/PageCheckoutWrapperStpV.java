@@ -52,12 +52,14 @@ public class PageCheckoutWrapperStpV {
     public static Page1DktopCheckoutStpV page1DktopCheck;
     public static Page1EnvioCheckoutMobilStpV page1MobilCheck;
     
-    public static void validateIsFirstPage(boolean userLogged, DataBag dataBag, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) 
+    public static void validateIsFirstPage(boolean userLogged, DataBag dataBag, Channel channel, WebDriver driver) 
     throws Exception {
-        if (channel==Channel.movil_web)
-            page1MobilCheck.validateIsPage(userLogged, datosStep, dFTest);
-        else
-            page1DktopCheck.validateIsPageOK(dataBag, datosStep, dFTest);
+        if (channel==Channel.movil_web) {
+            page1MobilCheck.validateIsPage(userLogged, driver);
+        }
+        else {
+            page1DktopCheck.validateIsPageOK(dataBag, driver);
+        }
     } 
     
     public static void validateLoadingDisappears(DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
@@ -396,7 +398,7 @@ public class PageCheckoutWrapperStpV {
         finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
-        modalDirecEnvio.validateIsOk(datosStep, dFTest);
+        modalDirecEnvio.validateIsOk(dFTest.driver);
         
         return datosStep;
     }

@@ -99,7 +99,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
         	int posBannerToTest = 1;
         	boolean applyValidations = true;
         	SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, dFTest.driver);
-	        secBannersStpV.seleccionarBanner(posBannerToTest, applyValidations, dCtxSh.appE, dCtxSh.channel, dFTest);
+	        secBannersStpV.seleccionarBanner(posBannerToTest, applyValidations, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
 	        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);
 	        pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, true/*isGaleriaSale*/, dCtxSh.pais, dCtxSh.idioma, LineaType.she, bloqueMenu.prendas);
 	        PageGaleriaStpV.clickMoreInfoBannerRebajasJun2018(dFTest);

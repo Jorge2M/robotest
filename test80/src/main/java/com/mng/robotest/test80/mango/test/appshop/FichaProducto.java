@@ -108,7 +108,7 @@ public class FichaProducto extends GestorWebDriver {
         //Si es talla única -> Significa que lo dimos de alta en la bolsa cuando seleccionamos el click "Añadir a la bolsa"
         //-> Lo damos de baja
         if (isTallaUnica)
-            SecBolsaStpV.clear(dCtxSh, dFTest);
+            SecBolsaStpV.clear(dCtxSh, dFTest.driver);
         
         articulo = pageFichaStpv.getFicha().getArticuloObject();
         if (dCtxSh.appE==AppEcom.shop) { //"Buscar en Tienda" y "Favoritos" no existen en Outlet ni Votf

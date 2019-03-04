@@ -71,9 +71,6 @@ public class GaleriaProducto extends GestorWebDriver {
             this.castellano = this.españa.getListIdiomas().get(0);
         }
         
-        dCtxSh.pais = this.españa;
-        dCtxSh.idioma = this.castellano;
-        
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
         TestCaseData.storeInThread(dCtxSh); 
         TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);

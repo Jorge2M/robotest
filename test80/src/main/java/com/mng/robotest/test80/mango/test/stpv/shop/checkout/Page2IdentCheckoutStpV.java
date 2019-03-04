@@ -1,11 +1,13 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
+import org.openqa.selenium.WebDriver;
 import java.util.HashMap;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -14,27 +16,18 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2IdentCheckout;
 
-
 public class Page2IdentCheckoutStpV {
     
-    public static void validateIsPage(boolean emailYetExists, DatosStep datosStep, DataFmwkTest dFTest) {
-    	int maxSecondsToWait = 1;
-        String descripValidac = 
-            "1) Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + maxSecondsToWait + ")<br>" +
-            "2) Es <b>" + !emailYetExists + "</b> que aparece el input para la introducción de la contraseña";
-        datosStep.setNOKstateByDefault();         
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (!Page2IdentCheckout.isPageUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (!Page2IdentCheckout.isInputPasswordAccordingEmail(emailYetExists, dFTest.driver)) {
-                listVals.add(2, State.Defect);
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+    public static ListResultValidation validateIsPage(boolean emailYetExists, int maxSecondsWait, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	 	validations.add(
+			"Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + maxSecondsWait + ")<br>",
+			Page2IdentCheckout.isPageUntil(maxSecondsWait, driver), State.Defect);
+	 	validations.add(
+			"Es <b>" + !emailYetExists + "</b> que aparece el input para la introducción de la contraseña",
+			Page2IdentCheckout.isInputPasswordAccordingEmail(emailYetExists, driver), State.Defect);
+	 	return validations;
     }
     
     public static HashMap<String, String> inputDataPorDefecto(Pais pais, String emailUsr, boolean inputDireccCharNoLatinos, DataFmwkTest dFTest) 
@@ -114,43 +107,27 @@ public class Page2IdentCheckoutStpV {
             }
             finally { listVals.checkAndStoreValidations(descripValidac); }
         }
-        else 
-            PageCheckoutWrapperStpV.validateIsFirstPage(userRegistered, dataBag, channel, datosStep, dFTest);
+        else {
+            PageCheckoutWrapperStpV.validateIsFirstPage(userRegistered, dataBag, channel, dFTest.driver);
+        }
         
         return datosStep;
     }
     
-    public static void validaRGPDText(DatosStep datosStep, Pais pais, DataFmwkTest dFTest) {      
-    	//Validaciones
+    @Validation
+    public static ListResultValidation validaRGPDText(Pais pais, WebDriver driver) {  
+    	ListResultValidation validations = ListResultValidation.getNew();
 		if (pais.getRgpd().equals("S")) {
-	        String descripValidac = 
-	            "1) El texto legal de RGPD <b>SI</b> existe para el pais " + pais.getCodigo_pais() + "<br>";
-	        datosStep.setNOKstateByDefault();    
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-	        try {
-	            if (!Page2IdentCheckout.isTextoLegalRGPDVisible(dFTest.driver)) {
-	                listVals.add(1, State.Defect);
-	            }
-	            
-	            datosStep.setListResultValidations(listVals);
-	        }
-	        finally { listVals.checkAndStoreValidations(descripValidac); }   
+		 	validations.add(
+				"El texto legal de RGPD <b>SI</b> existe para el pais " + pais.getCodigo_pais() + "<br>",
+				Page2IdentCheckout.isTextoLegalRGPDVisible(driver), State.Defect);
+		}
+		else {
+		 	validations.add(
+				"El texto legal de RGPD <b>NO</b> existe para el pais " + pais.getCodigo_pais() + "<br>",
+				!Page2IdentCheckout.isTextoLegalRGPDVisible(driver), State.Defect);
 		}
 		
-		else {
-			String descripValidac = 
-	            "1) El texto legal de RGPD <b>NO</b> existe para el pais " + pais.getCodigo_pais() + "<br>";
-	        datosStep.setNOKstateByDefault();    
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-	        try {
-	            if (Page2IdentCheckout.isTextoLegalRGPDVisible(dFTest.driver)) {
-	                listVals.add(1, State.Defect);
-	            }
-	            
-	            datosStep.setListResultValidations(listVals);
-	        }
-	        finally { listVals.checkAndStoreValidations(descripValidac); } 
-	    }
+		return validations;
 	}
-    
 }

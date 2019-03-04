@@ -128,6 +128,10 @@ public class ManagerBannersScreen {
     
     public void clickBannerAndWaitLoad(int posBanner, WebDriver driver) throws Exception {
     	DataBanner dataBanner = getBanner(posBanner);
+    	clickBannerAndWaitLoad(dataBanner, driver);
+    }
+    
+    public void clickBannerAndWaitLoad(DataBanner dataBanner, WebDriver driver) throws Exception {
     	BannerObject bannerObject = BannerObjectFactory.make(dataBanner.getBannerType());
     	bannerObject.clickBannerAndWaitLoad(dataBanner, driver);
     }

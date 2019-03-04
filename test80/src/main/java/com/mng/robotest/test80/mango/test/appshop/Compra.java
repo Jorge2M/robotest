@@ -349,7 +349,7 @@ public class Compra extends GestorWebDriver {
         ArticleStock article = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithMoreOneColour, dCtxSh);
         listParaAlta.add(article);
         DataBag dataBag = new DataBag(); 
-        SecBolsaStpV.altaListaArticulosEnBolsa(listParaAlta, dataBag, dCtxSh, dFTest);        
+        SecBolsaStpV.altaListaArticulosEnBolsa(listParaAlta, dataBag, dCtxSh, dFTest.driver);        
         
         //Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
         FlagsTestCkout FTCkout = new FlagsTestCkout();

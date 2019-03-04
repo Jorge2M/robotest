@@ -125,22 +125,16 @@ public class Reembolsos extends GestorWebDriver {
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
 
         //Step (+validaciones) selección menú "Mi cuenta" + "Reembolsos"
-        PageReembolsosStpV.gotoRefundsFromMenu(paisConSaldoCta, dCtxSh.appE, dCtxSh.channel, dFTest);
+        PageReembolsosStpV.gotoRefundsFromMenu(paisConSaldoCta, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
         
         if (paisConSaldoCta) {
             if (PageReembolsos.isCheckedRadio(TypeReembolso.StoreCredit, dFTest.driver)) {
-                //Probamos la opción de Transferencia
-                PageReembolsosStpV.testConfTransferencia(dFTest);
-                
-                //Ejecutamos la configuración vía saldo en cuenta
-                PageReembolsosStpV.selectRadioSalCtaAndRefresh(dFTest);
+                PageReembolsosStpV.testConfTransferencia(dFTest.driver);
+                PageReembolsosStpV.selectRadioSalCtaAndRefresh(dFTest.driver);
             }
             else {
-                //Ejecutamos la configuración vía saldo en cuenta
-                PageReembolsosStpV.selectRadioSalCtaAndRefresh(dFTest);
-                                
-                //Ejecutamos la configuración vía transferencia
-                PageReembolsosStpV.testConfTransferencia(dFTest);
+                PageReembolsosStpV.selectRadioSalCtaAndRefresh(dFTest.driver);
+                PageReembolsosStpV.testConfTransferencia(dFTest.driver);
             }
         }        
     }
@@ -170,14 +164,16 @@ public class Reembolsos extends GestorWebDriver {
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true/*clearArticulos*/, dFTest);
         //TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, dFTest.driver);
-        PageReembolsosStpV.gotoRefundsFromMenu(dCtxSh.pais.existsPagoStoreCredit(), dCtxSh.appE, dCtxSh.channel, dFTest);
-        PageReembolsosStpV.selectRadioSalCtaAndRefresh(dFTest);
-        PageReembolsosStpV.clickSaveButtonStoreCreditIfExists(dFTest);
+        PageReembolsosStpV.gotoRefundsFromMenu(dCtxSh.pais.existsPagoStoreCredit(), dCtxSh.appE, dCtxSh.channel, dFTest.driver);
+        PageReembolsosStpV.selectRadioSalCtaAndRefresh(dFTest.driver);
+        if (PageReembolsos.isVisibleSaveButtonStoreCredit(dFTest.driver)) {
+        	PageReembolsosStpV.clickSaveButtonStoreCredit(dFTest.driver);
+        }
         float saldoCtaIni = PageReembolsos.getImporteStoreCredit(dFTest.driver);
         
         //Damos de alta 2 artículos en la bolsa
         DataBag dataBag = new DataBag(); 
-        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest);
+        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest.driver);
         
         //Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
         FlagsTestCkout FTCkout = new FlagsTestCkout();
@@ -217,7 +213,7 @@ public class Reembolsos extends GestorWebDriver {
             saldoCtaEsperado = saldoCtaIni;
         
         //Step (+validaciones) selección menú "Mi cuenta" + "Reembolsos"
-        PageReembolsosStpV.gotoRefundsFromMenuAndValidaSalCta(dCtxSh.pais.existsPagoStoreCredit(), saldoCtaEsperado, dCtxSh.appE, dCtxSh.channel, dFTest);
+        PageReembolsosStpV.gotoRefundsFromMenuAndValidaSalCta(dCtxSh.pais.existsPagoStoreCredit(), saldoCtaEsperado, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
         
         //Validación en Manto de los Pedidos (si existen)
     	List<CheckPedido> listChecks = Arrays.asList(

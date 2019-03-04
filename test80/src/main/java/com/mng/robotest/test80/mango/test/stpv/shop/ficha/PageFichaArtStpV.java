@@ -304,7 +304,7 @@ public class PageFichaArtStpV {
         selectAnadirALaBolsaStep();
         DataBag dataBag = new DataBag();
         dataBag.addArticulo(articulo);
-        SecBolsaStpV.validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE);
+        SecBolsaStpV.validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, driver);
     }    
 
     public void selectAnadirAFavoritos() throws Exception {

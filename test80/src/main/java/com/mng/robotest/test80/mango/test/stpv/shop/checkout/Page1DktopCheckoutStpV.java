@@ -1,11 +1,13 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
 import java.util.EnumSet;
+import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -22,33 +24,26 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopChe
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 
-
 public class Page1DktopCheckoutStpV {
     
-    public static void validateIsPageOK(DataBag dataBag, DatosStep datosStep, DataFmwkTest dFTest) 
-    throws Exception {
-        //Validaciones
-        int maxSecondsToWait = 5;
-        String descripValidac =
-            "1) Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>" +
-            "2) Si no ha aparecido la esperamos " + (maxSecondsToWait * 2) + " segundos más<br>" +
-            "3) Cuadran los artículos a nivel de la Referencia e Importe";
-        datosStep.setNOKstateByDefault();       
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!Page1DktopCheckout.isPageUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Warn_NoHardcopy);
-	            if (!Page1DktopCheckout.isPageUntil(maxSecondsToWait*2, dFTest.driver)) {
-	                listVals.add(2, State.Defect);
-	            }
-            }
-            if (!Page1DktopCheckout.validateArticlesAndImport(dataBag, dFTest.driver)) {
-                listVals.add(3, State.Warn);
-            }
-                                            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+    public static ListResultValidation validateIsPageOK(DataBag dataBag, WebDriver driver) throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
+        int maxSecondsWait = 5;
+        boolean isPageInitCheckout = Page1DktopCheckout.isPageUntil(maxSecondsWait, driver);
+	 	validations.add(
+			"Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSecondsWait + " segundos)<br>",
+			isPageInitCheckout, State.Warn_NoHardcopy);
+	 	if (!isPageInitCheckout) {
+		 	validations.add(
+				"Si no ha aparecido la esperamos " + (maxSecondsWait * 2) + " segundos más<br>",
+				Page1DktopCheckout.isPageUntil(maxSecondsWait*2, driver), State.Defect);
+	 	}
+	 	validations.add(
+			"Cuadran los artículos a nivel de la Referencia e Importe",
+			Page1DktopCheckout.validateArticlesAndImport(dataBag, driver), State.Warn);
+	 	
+	 	return validations;
     }
     
     public static void validateIsVersionChequeRegalo(ChequeRegalo chequeRegalo, DatosStep datosStep, DataFmwkTest dFTest) {

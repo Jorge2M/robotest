@@ -25,7 +25,7 @@ public class PageMiCuentaStpV {
 
     public static void goToMisDatos(String usuarioReg, AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
         //Step
-        SecMenusUserStpV.clickMenuMiCuenta(channel, app, dFTest);
+        SecMenusUserStpV.clickMenuMiCuenta(channel, app, dFTest.driver);
 
         //Step
         goToMisDatos(usuarioReg, dFTest);
@@ -42,7 +42,7 @@ public class PageMiCuentaStpV {
     }
 
     public static void goToMisComprasFromMenu (DataCtxShop dataCtxShop, Channel channel, DataFmwkTest dFTest) throws Exception {
-        SecMenusUserStpV.clickMenuMiCuenta(channel, dataCtxShop.appE, dFTest);
+        SecMenusUserStpV.clickMenuMiCuenta(channel, dataCtxShop.appE, dFTest.driver);
         goToMisComprasFromMenuAndValidate(dataCtxShop, channel, dFTest);
     }
 
@@ -70,7 +70,7 @@ public class PageMiCuentaStpV {
     }
 
     public static void goToSuscripciones(AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
-        SecMenusUserStpV.clickMenuMiCuenta(channel, app, dFTest);
+        SecMenusUserStpV.clickMenuMiCuenta(channel, app, dFTest.driver);
         goToSuscripciones(dFTest);
     }
 
@@ -96,7 +96,7 @@ public class PageMiCuentaStpV {
     }
 
     public static void goToMisPedidos (String usrRegistrado, AppEcom appE, Channel channel, DataFmwkTest dFTest) throws Exception {
-        SecMenusUserStpV.clickMenuMiCuenta(channel, appE, dFTest);
+        SecMenusUserStpV.clickMenuMiCuenta(channel, appE, dFTest.driver);
         goToMisPedidos(usrRegistrado, dFTest);
     }
 
@@ -112,7 +112,7 @@ public class PageMiCuentaStpV {
     }
 
     public static void goToDevoluciones(AppEcom appE, Channel channel, DataFmwkTest dFTest) throws Exception {
-        SecMenusUserStpV.clickMenuMiCuenta(channel, appE, dFTest);
+        SecMenusUserStpV.clickMenuMiCuenta(channel, appE, dFTest.driver);
         goToDevoluciones(dFTest);
     }
 
@@ -128,7 +128,7 @@ public class PageMiCuentaStpV {
     }
 
     public static void goToReembolsos(AppEcom appE, Channel channel, DataFmwkTest dFTest) throws Exception {
-        SecMenusUserStpV.clickMenuMiCuenta(channel, appE, dFTest);
+        SecMenusUserStpV.clickMenuMiCuenta(channel, appE, dFTest.driver);
         goToReembolsos(dFTest);
     }
 

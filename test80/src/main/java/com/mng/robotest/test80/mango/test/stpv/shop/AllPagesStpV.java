@@ -69,7 +69,8 @@ public class AllPagesStpV {
             if (validaImgBroken) {
                 descripValidac+=
                 	"3) No hay ninguna imagen cortada<br>";
-                ResultadoErrores resultadoImgs = WebDriverMngUtils.imagesBroken(dFTest.driver, Channel.desktop, 1/*maxErrors*/, dFTest.ctx);
+                int maxErrors = 1;
+                ResultadoErrores resultadoImgs = WebDriverMngUtils.imagesBroken(dFTest.driver, Channel.desktop, maxErrors);
                 if (resultadoImgs.getResultado() != ResultadoErrores.Resultado.OK) { //Si hay error lo pintamos en la descripción de la validación
                     descripValidac += resultadoImgs.getlistaLogError().toString();
                     if (resultadoImgs.getResultado() != ResultadoErrores.Resultado.MAX_ERRORES) //Sólo mostraremos warning en caso que alguno no se haya mostrado ya un máximo de veces durante el test

@@ -89,7 +89,7 @@ public class GaleriaYcompra extends GestorWebDriver {
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
         //dCtxSh.userConnected = "TESTCOMPRA22@GMAIL.COM";
-        dCtxSh.userConnected="mng_test_compras01@mango.com";
+        dCtxSh.userConnected="QAEV70000900000@MANGO.COM";
         dCtxSh.passwordUser = "mango123";
         dCtxSh.userRegistered=true;
         
@@ -122,7 +122,7 @@ public class GaleriaYcompra extends GestorWebDriver {
         List<ArticleStock> listArticles = UtilsTestMango.getArticlesForTestDependingVale(dCtxSh, maxArticlesAwayVale);
         
         DataBag dataBag = dCtxPago.getDataPedido().getDataBag();
-        SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, dFTest);
+        SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, dFTest.driver);
 
         //Steps. Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
         dCtxPago.getFTCkout().testCodPromocional = true;
