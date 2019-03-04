@@ -57,9 +57,9 @@ public class Ayuda extends GestorWebDriver {
         TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 
-//    @Test(
-//            groups = { "Ayuda", "Canal:all_App:shop" }, alwaysRun = true,
-//            description="Verificar que los elementos de la página ayuda están correctamente presentes")
+    @Test(
+        groups = { "Ayuda", "Canal:all_App:shop" }, alwaysRun = true,
+        description="Verificar que los elementos de la página ayuda están correctamente presentes")
     public void AYU001_Data() throws Exception {
         DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
