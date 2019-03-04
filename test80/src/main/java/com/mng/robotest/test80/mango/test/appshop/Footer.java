@@ -93,7 +93,7 @@ public class Footer extends GestorWebDriver {
         		break;
         	case mango_card:
         		SecFooterStpV.clickLinkFooter(footerLinkToValidate, false, dCtxSh.channel, dFTest.driver);
-                SecFooterStpV.checkSolicitarTarjeta(dCtxSh.channel, dFTest);
+                SecFooterStpV.checkSolicitarTarjeta(dCtxSh.channel, dFTest.driver);
         		break;
         	default:
                 SecFooterStpV.clickLinkFooter(footerLinkToValidate, true, dCtxSh.channel, dFTest.driver);

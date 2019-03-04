@@ -196,7 +196,7 @@ public class Otras extends GestorWebDriver {
         //Steps. Acabamos ejecutando la funcionalidad típica de cambio de país desde el footer
         dCtxSh.pais = this.francia;
         dCtxSh.idioma = this.francia_frances;
-        SecFooterStpV.cambioPais(dCtxSh, dFTest);
+        SecFooterStpV.cambioPais(dCtxSh, dFTest.driver);
     }
 
     

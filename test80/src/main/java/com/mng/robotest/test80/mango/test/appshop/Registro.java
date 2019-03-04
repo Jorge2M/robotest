@@ -23,32 +23,18 @@ import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.DataMango;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.datastored.DataBag;
-import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
-import com.mng.robotest.test80.mango.test.datastored.DataPedido;
-import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
-import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.DataNino;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataNinos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.DataNino.sexoType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro.DataRegType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro.PageData;
-import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
-import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMiCuentaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalSuscripcionStpV;
@@ -57,8 +43,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroFinStpV
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroNinosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroSegundaStpV;
-import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
-
 
 public class Registro extends GestorWebDriver {
     Pais españa = null;
@@ -226,7 +210,7 @@ public class Registro extends GestorWebDriver {
 	        PageRegistroDirecStpV.clickFinalizarButton(dFTest);
 	        PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, dFTest);
 	        //Validacion footer RGPD
-	        SecFooterStpV.validaRGPDFooter(clickRegister, dCtxSh, dFTest);
+	        SecFooterStpV.validaRGPDFooter(clickRegister, dCtxSh, dFTest.driver);
 	        
 	        if (loginAfter) {
 	            //Step. Cerramos sesión y nos volvemos a identificar con los datos del registro
@@ -249,7 +233,7 @@ public class Registro extends GestorWebDriver {
 
         }
         else {
-        	SecFooterStpV.validaRGPDFooter(clickRegister, dCtxSh, dFTest);
+        	SecFooterStpV.validaRGPDFooter(clickRegister, dCtxSh, dFTest.driver);
         }
     }
     

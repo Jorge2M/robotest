@@ -113,7 +113,7 @@ public class FichaProducto extends GestorWebDriver {
         articulo = pageFichaStpv.getFicha().getArticuloObject();
         if (dCtxSh.appE==AppEcom.shop) { //"Buscar en Tienda" y "Favoritos" no existen en Outlet ni Votf
             pageFichaStpv.selectBuscarEnTiendaButton();
-            ModalBuscadorTiendasStpV.close(dFTest);
+            ModalBuscadorTiendasStpV.close(dFTest.driver);
             pageFichaStpv.selectAnadirAFavoritos();
             pageFichaStpv.selectRemoveFromFavoritos();
         }
@@ -160,17 +160,19 @@ public class FichaProducto extends GestorWebDriver {
             boolean isFichaAccesorio = pageFichaStpV.getFicha().isFichaAccesorio(); 
             pageFichaStpV.secFotosNew.validaLayoutFotosNew(isFichaAccesorio, dFTest);
             pageFichaStpV.secBolsaButtonAndLinksNew.selectEnvioYDevoluciones(dFTest);
-            pageFichaStpV.modEnvioYdevol.clickAspaForClose(dFTest);
+            pageFichaStpV.modEnvioYdevol.clickAspaForClose(dFTest.driver);
             pageFichaStpV.secBolsaButtonAndLinksNew.selectDetalleDelProducto(dCtxSh.appE, LineaType.she, dFTest);
             pageFichaStpV.secBolsaButtonAndLinksNew.selectLinkCompartir(dCtxSh.pais.getCodigo_pais(), dFTest);
         }
             
         pageFichaStpV.selectGuiaDeTallas();
-        if (dCtxSh.appE==AppEcom.shop)
+        if (dCtxSh.appE==AppEcom.shop) {
             pageFichaStpV.validateSliderIfExists(Slider.ElegidoParaTi);
+        }
         
-        if (dCtxSh.appE!=AppEcom.outlet)
+        if (dCtxSh.appE!=AppEcom.outlet) {
             pageFichaStpV.validateSliderIfExists(Slider.CompletaTuLook);
+        }
     }
     
     @SuppressWarnings("static-access")

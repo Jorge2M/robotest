@@ -3,7 +3,6 @@ package com.mng.robotest.test80.mango.test.stpv.navigations.shop;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -79,22 +78,22 @@ public class AccesoNavigations {
     	TestAB.activateTestABgaleriaReact(versionSinReact, dCtxSh.channel, dCtxSh.appE, driver);
     }    
     
-    public static void cambioPaisFromHomeIfNeeded(DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static void cambioPaisFromHomeIfNeeded(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        String codigoPais = PageLanding.getCodigoPais(dFTest.driver);
-        if (dCtxSh.pais.getCodigo_pais().compareTo(codigoPais)!=0)
-            cambioPais(dCtxSh, dFTest);
+        String codigoPais = PageLanding.getCodigoPais(driver);
+        if (dCtxSh.pais.getCodigo_pais().compareTo(codigoPais)!=0) {
+            cambioPais(dCtxSh, driver);
+        }
     }
     
-    public static DatosStep cambioPais(DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static void cambioPais(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        DatosStep datosStep = null;
-        if (dCtxSh.channel==Channel.movil_web)
-            datosStep = SecMenusWrapperStpV.secMenuUser.cambioPaisMobil(dCtxSh, dFTest);
-        else
-            datosStep = SecFooterStpV.cambioPais(dCtxSh, dFTest);
-        
-        return datosStep;
+        if (dCtxSh.channel==Channel.movil_web) {
+            SecMenusWrapperStpV.secMenuUser.cambioPaisMobil(dCtxSh, driver);
+        }
+        else {
+            SecFooterStpV.cambioPais(dCtxSh, driver);
+        }
     }
         
 }

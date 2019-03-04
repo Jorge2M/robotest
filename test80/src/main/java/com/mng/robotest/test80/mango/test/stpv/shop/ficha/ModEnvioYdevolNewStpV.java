@@ -1,55 +1,34 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.ModEnvioYdevolNew;
-
 
 public class ModEnvioYdevolNewStpV {
 
-    public static void validateIsVisible(DatosStep datosStep, DataFmwkTest dFTest) {
+	@Validation (
+		description="Aparece el modal con los datos a nivel de envío y devolución",
+		level=State.Defect)
+    public static boolean validateIsVisible(WebDriver driver) {
         int maxSecondsToWait = 1;
-        String descripValidac = 
-            "1) Aparece el modal con los datos a nivel de envío y devolución";
-        datosStep.setNOKstateByDefault();  
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!ModEnvioYdevolNew.isVisibleUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        }  
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+        return (ModEnvioYdevolNew.isVisibleUntil(maxSecondsToWait, driver));
     }
     
-    public static void clickAspaForClose(DataFmwkTest dFTest) throws Exception {
-        //Step.
-        DatosStep datosStep = new DatosStep (
-            "Seleccionar el aspa para cerrar el modal de \"Envío y devolución\"",
-            "Desaparece el modal");
-        try {
-            ModEnvioYdevolNew.clickAspaForClose(dFTest.driver);
-                        
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }        
-        
-        int maxSecondsToWait = 1;
-        String descripValidac = 
-            "1) No es visible el modal con los datos a nivel de envío y devolución";
-        datosStep.setNOKstateByDefault();  
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (ModEnvioYdevolNew.isVisibleUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        }  
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Step (
+		description="Seleccionar el aspa para cerrar el modal de \"Envío y devolución\"",
+        expected="Desaparece el modal")
+    public static void clickAspaForClose(WebDriver driver) throws Exception {
+        ModEnvioYdevolNew.clickAspaForClose(driver);      
+        checkIsVisibleModalDatosEnvio(driver);
     }
+	
+	@Validation (
+		description="No es visible el modal con los datos a nivel de envío y devolución",
+		level=State.Warn)
+	private static boolean checkIsVisibleModalDatosEnvio(WebDriver driver) {
+       int maxSecondsToWait = 1;
+       return (!ModEnvioYdevolNew.isVisibleUntil(maxSecondsToWait, driver));
+	}
 }

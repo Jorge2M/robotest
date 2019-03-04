@@ -284,7 +284,7 @@ public class PagoNavigationsStpV {
         
         //Step. Cambiamos de país 
         //(en Chrome, cuando existe paralelización en ocasiones se pierden las cookies cuando se completa un pago con pasarela externa)
-        AccesoNavigations.cambioPaisFromHomeIfNeeded(dCtxSh, dFTest);
+        AccesoNavigations.cambioPaisFromHomeIfNeeded(dCtxSh, dFTest.driver);
         
         //Step. Seleccionar el artículo disponible y añadirlo a la bolsa
         SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest.driver);

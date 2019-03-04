@@ -31,7 +31,7 @@ public class SecBolsaButtonAndLinksNewStpV {
         finally { StepAspect.storeDataAfterStep(datosStep); }
                 
         //Validaciones
-        ModEnvioYdevolNewStpV.validateIsVisible(datosStep, dFTest);
+        ModEnvioYdevolNewStpV.validateIsVisible(dFTest.driver);
     }
     
     public static void selectDetalleDelProducto(AppEcom app, LineaType lineaType, DataFmwkTest dFTest) throws Exception {

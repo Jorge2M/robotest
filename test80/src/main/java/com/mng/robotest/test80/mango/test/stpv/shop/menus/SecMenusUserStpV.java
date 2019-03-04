@@ -147,24 +147,17 @@ public class SecMenusUserStpV {
         PageMiCuentaStpV.validateIsPage(2, driver);
 	}
     
-    public static DatosStep cambioPaisMobil(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
-        //Step. Seleccionamos el link para el cambio de país
-        DatosStep datosStep = new DatosStep(
-            "Se selecciona el menú para el cambio de país", 
-            "Aparece el modal para el cambio de país");
-        try {
-            SecMenuLateralMobil.secMenusUser.clickCambioPais(dCtxSh.appE, dFTest.driver);
-
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        } 
-        finally { StepAspect.storeDataAfterStep(datosStep);}
+    @Step (
+    	description="Se selecciona el menú para el cambio de país", 
+        expected="Aparece el modal para el cambio de país")
+    public static void cambioPaisMobil(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+        SecMenuLateralMobil.secMenusUser.clickCambioPais(dCtxSh.appE, driver);
 
         //Validaciones. 
-        ModalCambioPaisStpV.validateIsVisible(datosStep, dFTest);
+        int maxSecondsWait = 5;
+        ModalCambioPaisStpV.validateIsVisible(maxSecondsWait, driver);
         
         //Step.
-        ModalCambioPaisStpV.cambioPais(dCtxSh, dFTest);
-        
-        return datosStep;
+        ModalCambioPaisStpV.cambioPais(dCtxSh, driver);
     }
 }

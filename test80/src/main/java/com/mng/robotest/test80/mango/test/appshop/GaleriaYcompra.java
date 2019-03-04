@@ -89,8 +89,10 @@ public class GaleriaYcompra extends GestorWebDriver {
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
         //dCtxSh.userConnected = "TESTCOMPRA22@GMAIL.COM";
-        dCtxSh.userConnected="QAEV70000900000@MANGO.COM";
-        dCtxSh.passwordUser = "mango123";
+        //dCtxSh.userConnected="QAEV70000900000@MANGO.COM";
+        //dCtxSh.passwordUser = "mango123";
+        dCtxSh.userConnected="test.performance01@MANGO.COM";
+        dCtxSh.passwordUser = "Mango123";
         dCtxSh.userRegistered=true;
         
         boolean clearArticulos = true;
