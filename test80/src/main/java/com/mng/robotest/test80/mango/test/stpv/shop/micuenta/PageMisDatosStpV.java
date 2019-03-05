@@ -103,8 +103,6 @@ public class PageMisDatosStpV {
 
         PageMisDatos.setNombreInput(dFTest.driver, nombreActual);
         PageMisDatos.clickGuardarCambios(dFTest.driver);
-
-        //Validation
         validateModificationOfData(dFTest.driver);
 
         return nombreActual;

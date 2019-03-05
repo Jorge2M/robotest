@@ -1,72 +1,55 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld.TypePanel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld.TypeStatePanel;
 
-
 public class SecProductDescrOldStpV {
     
-    public static void validateAreInStateInitial(AppEcom appE, DataFmwkTest dFTest) throws Exception {
-    	DatosStep datosStep = TestCaseData.getDatosLastStep();
-        String descripValidac = "";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {               
-            //1 to X)
-            int validacion = 1;
-            for (TypePanel typePanel : TypePanel.values()) {
-                TypeStatePanel stateExpected = TypeStatePanel.missing;
-                if (typePanel.getListApps().contains(appE)) {
-                    stateExpected = typePanel.getStateInitial();
-                }
-                
-                descripValidac+=(validacion + ") El panel <b>" + typePanel + "</b> está en estado <b>" + stateExpected + "</b><br>");
-                validacion+=1;
-                if (SecProductDescrOld.getStatePanel(typePanel, dFTest.driver)!=stateExpected) {
-                    listVals.add(validacion, State.Defect);
-                }
+	@Validation
+    public static void validateAreInStateInitial(AppEcom appE, WebDriver driver) throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	for (TypePanel typePanel : TypePanel.values()) {
+    		TypeStatePanel stateExpected = TypeStatePanel.missing;
+            if (typePanel.getListApps().contains(appE)) {
+                stateExpected = typePanel.getStateInitial();
             }
-                    
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	      	validations.add(
+	    		"El panel <b>" + typePanel + "</b> está en estado <b>" + stateExpected + "</b><br>",
+	    		SecProductDescrOld.getStatePanel(typePanel, driver)==stateExpected, State.Defect);
+    	}
     }
     
-    public static void selectPanel(TypePanel typePanel, DataFmwkTest dFTest) throws Exception {
-        //Step.
-        TypeStatePanel statePanelIni = SecProductDescrOld.getStatePanel(typePanel, dFTest.driver);
+	final static String tagInitStatePanel = "@TagInitState";
+	final static String tagFinalStateExpected = "@TagFinalState";
+	@Step (
+		description="Seleccionar el panel <b>#{typePanel}</b> (en estado inicial: " + tagInitStatePanel + ")",
+        expected="La pestaña queda en estado " + tagFinalStateExpected)
+    public static void selectPanel(TypePanel typePanel, WebDriver driver) throws Exception {
+        TypeStatePanel statePanelIni = SecProductDescrOld.getStatePanel(typePanel, driver);
         TypeStatePanel stateExpectedAfterClick = SecProductDescrOld.getStatePanelAfterClick(statePanelIni);
-        DatosStep datosStep = new DatosStep (
-            "Seleccionar el panel <b>" + typePanel + "</b> (en estado inicial: " + statePanelIni + ")",
-            "La pestaña queda en estado " + stateExpectedAfterClick);
-        try {
-            SecProductDescrOld.clickPanel(typePanel, dFTest.driver);
-                        
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-                
-        //Validaciones
-        int maxSecondsToWait = 1;
-        String descripValidac = 
-            "1) La sección ha de quedar en estado <b>" + stateExpectedAfterClick + "</b> (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!SecProductDescrOld.isPanelInStateUntil(typePanel, stateExpectedAfterClick, maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        }  
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+        DatosStep datosStep = TestCaseData.getDatosCurrentStep();
+        datosStep.replaceInDescription(tagInitStatePanel, statePanelIni.toString());
+        datosStep.replaceInExpected(tagFinalStateExpected, stateExpectedAfterClick.toString());
+        
+        SecProductDescrOld.clickPanel(typePanel, driver);
+        int maxSecondsWait = 1;
+        checkPanelInState(typePanel, stateExpectedAfterClick, maxSecondsWait, driver);
     }
+	
+	@Validation (
+		description="La sección ha de quedar en estado <b>#{stateExpectedAfterClick}</b> (lo esperamos hasta #{maxSecondsWait} segundos)",
+		level=State.Defect)
+	private static boolean checkPanelInState(TypePanel typePanel, TypeStatePanel stateExpectedAfterClick, int maxSecondsWait, WebDriver driver) 
+	throws Exception {
+	    return (SecProductDescrOld.isPanelInStateUntil(typePanel, stateExpectedAfterClick, maxSecondsWait, driver));
+	}
 }

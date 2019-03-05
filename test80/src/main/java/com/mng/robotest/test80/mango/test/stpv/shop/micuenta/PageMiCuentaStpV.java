@@ -24,10 +24,7 @@ public class PageMiCuentaStpV {
     }
 
     public static void goToMisDatos(String usuarioReg, AppEcom app, Channel channel, WebDriver driver) throws Exception {
-        //Step
         SecMenusUserStpV.clickMenuMiCuenta(channel, app, driver);
-
-        //Step
         goToMisDatos(usuarioReg, driver);
     }
 
@@ -36,8 +33,6 @@ public class PageMiCuentaStpV {
         expected = "Aparece la página de \"Mis datos\"")
     private static void goToMisDatos (String usuarioReg, WebDriver driver) throws Exception {
         PageMiCuenta.clickMisDatos(driver);
-
-        //Validaciones
         PageMisDatosStpV.validaIsPage(usuarioReg, driver);
     }
 
@@ -62,10 +57,7 @@ public class PageMiCuentaStpV {
  
     public static void goToMisDatosAndValidateData(HashMap<String,String> dataRegistro, String codPais, AppEcom app, Channel channel, WebDriver driver)
     throws Exception {
-        //Step.
         goToMisDatos(dataRegistro.get("cfEmail"), app, channel, driver);
-        
-        //Validaciones.
         PageMisDatosStpV.validaIsDataAssociatedToRegister(dataRegistro, codPais, driver);
     }
 
@@ -78,10 +70,7 @@ public class PageMiCuentaStpV {
         description = "Seleccionar el link \"Suscripciones\"",
         expected = "Aparece la página de \"Suscripciones\"")
     private static void goToSuscripciones(WebDriver driver) throws Exception {
-        //Step de aqui
         PageMiCuenta.clickSuscripciones(driver);
-
-        //Validation
         PageSuscripcionesStpV.validaIsPage(driver);
         
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
@@ -93,10 +82,7 @@ public class PageMiCuentaStpV {
     
     public static void goToSuscripcionesAndValidateData(HashMap<String,String> datosRegOk, AppEcom app, Channel channel, WebDriver driver) 
     throws Exception {
-        //Step.
         goToSuscripciones(app, channel, driver);
-        
-        //Validaciones
         PageSuscripcionesStpV.validaIsDataAssociatedToRegister(datosRegOk, driver);
     }
 
@@ -110,10 +96,7 @@ public class PageMiCuentaStpV {
         description = "Seleccionar el link \"Mis pedidos\"",
         expected = "Aparece la página de \"Mis pedidos\" sin pedidos")
     private static void goToMisPedidos(String usrRegistrado, WebDriver driver) throws Exception {
-        //Step de aqui
         PageMiCuenta.clickMisPedidos(driver);
-
-        //Validation
         PagePedidosStpV.validaIsPageSinPedidos(usrRegistrado, driver);
     }
 
@@ -126,10 +109,7 @@ public class PageMiCuentaStpV {
         description = "Seleccionar el link \"Devoluciones\"",
         expected = "Aparece la página de \"Devoluciones\"")
     private static void goToDevoluciones(WebDriver driver) throws Exception {
-        //Step de aqui
         PageMiCuenta.clickDevoluciones(driver);
-
-        //Validation
         PageDevolucionesStpV.validaIsPage(driver);
     }
 
@@ -142,10 +122,7 @@ public class PageMiCuentaStpV {
         description = "Seleccionar el link \"Reembolsos\"",
         expected = "Aparece la página de \"Reembolsos\"")
 	private static void goToReembolsos(WebDriver driver) throws Exception {
-	    //Step de aqui
         PageMiCuenta.clickReembolsos(driver);
-
-        //Validation
         PageReembolsosStpV.validateIsPage(driver);
     }
 }

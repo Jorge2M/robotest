@@ -9,24 +9,23 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.PageDevoluciones;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageDevoluciones.Devolucion;
 import org.openqa.selenium.WebDriver;
 
-
 public class PageDevolucionesStpV {
 
     @Validation
     public static ListResultValidation validaIsPage (WebDriver driver) {
         ListResultValidation validations = ListResultValidation.getNew();
         validations.add(
-                "Aparece la página de devoluciones<br>",
-                PageDevoluciones.isPage(driver), State.Defect);
+        	"Aparece la página de devoluciones<br>",
+            PageDevoluciones.isPage(driver), State.Defect);
         validations.add(
-                "Aparece la opción de " + Devolucion.EnTienda.getLiteral() + "<br>",
-                Devolucion.EnTienda.isPresentLink(driver), State.Defect);
+        	"Aparece la opción de " + Devolucion.EnTienda.getLiteral() + "<br>",
+        	Devolucion.EnTienda.isPresentLink(driver), State.Defect);
         validations.add(
-                "Aparece la opcion de " + Devolucion.EnDomicilio.getLiteral() + "<br>",
-                Devolucion.EnDomicilio.isPresentLink(driver), State.Defect);
+        	"Aparece la opcion de " + Devolucion.EnDomicilio.getLiteral() + "<br>",
+        	Devolucion.EnDomicilio.isPresentLink(driver), State.Defect);
         validations.add(
-                "Aparece la opción de " + Devolucion.PuntoCeleritas.getLiteral(),
-                Devolucion.EnDomicilio.isPresentLink(driver), State.Defect);
+        	"Aparece la opción de " + Devolucion.PuntoCeleritas.getLiteral(),
+        	Devolucion.EnDomicilio.isPresentLink(driver), State.Defect);
         return validations;
     }
 
@@ -38,8 +37,6 @@ public class PageDevolucionesStpV {
         Devolucion.EnDomicilio.click(dFTest.driver);
         Devolucion.EnDomicilio.waitForInState(desplegada, 2, dFTest.driver);
         PageDevoluciones.clickSolicitarRecogida(dFTest.driver);
-
-        //Validacion
         PageRecogidaDomicStpV.vaidaIsPageSinDevoluciones(dFTest.driver);
     }
 

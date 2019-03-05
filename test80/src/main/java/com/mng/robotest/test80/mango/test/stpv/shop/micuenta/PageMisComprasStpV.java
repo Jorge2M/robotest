@@ -5,6 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
@@ -188,27 +189,15 @@ public class PageMisComprasStpV {
     }
     
     @SuppressWarnings("static-access")
-    public static DatosStep selectCompraTienda(int posInLista, Channel channel, DataFmwkTest dFTest) throws Exception {
-        //Step.
-        CompraTienda compraTienda = null;
-        DatosStep datosStep = new DatosStep     (
-            "Seleccionamos la " + posInLista + "a compra (tipo Tienda) de la lista", 
-            "Aparece una sección con los detalles de la Compra");
-        try {
-            compraTienda = PageMisCompras.getDataCompraTienda(posInLista, channel, dFTest.driver);
-            PageMisCompras.clickCompra(posInLista, dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }             
-        
-        //Validaciones
-        SecDetalleCompraTienda.validateIsOk(compraTienda, channel, datosStep, dFTest);
-        
-        return datosStep;        
+    @Step (
+    	description="Seleccionamos la #{posInLista}a compra (tipo Tienda) de la lista", 
+        expected="Aparece una sección con los detalles de la Compra")
+    public static void selectCompraTienda(int posInLista, Channel channel, WebDriver driver) throws Exception {
+    	CompraTienda compraTienda = PageMisCompras.getDataCompraTienda(posInLista, channel, driver);
+        PageMisCompras.clickCompra(posInLista, driver);       
+        SecDetalleCompraTienda.validateIsOk(compraTienda, channel, driver);      
     }
 
-    
 	public static void clickMoreInfo(DataFmwkTest dFTest) {
 		//Step.
 		String idArticulo = "";

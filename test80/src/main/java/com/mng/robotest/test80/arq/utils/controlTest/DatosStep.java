@@ -80,6 +80,10 @@ public class DatosStep {
     	this.descripcion = this.descripcion.replace(oldChar, newChar);
     }
     
+    public void replaceInExpected(String oldChar, String newChar) {
+    	this.res_expected = this.res_expected.replace(oldChar, newChar);
+    }
+    
     public void setResExpected(String c_res_expected) { 
         this.res_expected = c_res_expected; 
     }

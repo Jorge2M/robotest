@@ -3,23 +3,15 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
+import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum;
-import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions;
-import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion;
-import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMiCuenta;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageSuscripciones;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageSuscripciones.idNewsletters;
-import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
-import org.openqa.selenium.WebDriver;
 
 public class PageSuscripcionesStpV {
 
@@ -57,12 +49,11 @@ public class PageSuscripcionesStpV {
         description = "Seleccionar los checkbox de las Newsletter <b>#{listNewsletters.toString()}</b> + Botón \"Guardar Cambios\"",
         expected = "parece la confirmación que los datos se han modificado")
     public static void selectNewslettersAndGuarda(ArrayList<idNewsletters> listNewsletters, DataFmwkTest dFTest) throws Exception {
-        for (idNewsletters idNewsletter : listNewsletters)
+        for (idNewsletters idNewsletter : listNewsletters) {
             PageSuscripciones.clickRadioNewsletter(dFTest.driver, idNewsletter);
+        }
 
         PageSuscripciones.clickGuardarCambios(dFTest.driver);
-
-        //Validation
         validateIsPageResult(5, dFTest.driver);
     }
 

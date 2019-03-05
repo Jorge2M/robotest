@@ -21,9 +21,9 @@ public class PageLoginVOTFStpV {
         String usuarioVOTF = dCtxSh.pais.getAccesoVOTF().getUsuario();
         String passwordVOTF = dCtxSh.pais.getAccesoVOTF().getPassword();
         DatosStep datosStep = TestCaseData.getDatosCurrentStep();
-        datosStep.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
-        datosStep.replaceInDescription(tagUsuarioVotf, usuarioVOTF);
-        datosStep.replaceInDescription(tagPasswordVotf, tagPasswordVotf);
+        datosStep.replaceInExpected(tagNombrePais, dCtxSh.pais.getNombre_pais());
+        datosStep.replaceInExpected(tagUsuarioVotf, usuarioVOTF);
+        datosStep.replaceInExpected(tagPasswordVotf, tagPasswordVotf);
 
         int numIdiomas = dCtxSh.pais.getListIdiomas().size();
         if (numIdiomas > 1) {

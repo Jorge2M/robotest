@@ -1,88 +1,67 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraTienda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompras;
 
-
 public class SecDetalleCompraTiendaStpV {
+	
+	public static void validateIsOk(CompraTienda compraTienda, Channel channel, WebDriver driver) {
+		checkData(compraTienda, channel, driver);
+		if (channel==Channel.movil_web) {
+			checkIsVisibleImgCodigoBarrasMovil(driver);
+		}
+	}
+	
     @SuppressWarnings("static-access")
-    public static void validateIsOk(CompraTienda compraTienda, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
-        //Validaciones
-        int maxSecondsToWait = 1;
-        String descripValidac = 
-            "1) Es visible la capa correspondiente al detalle del tícket de compra (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
-            "2) Figura un número de tícket " + compraTienda.idCompra + "<br>" +
-            "3) Figura el importe " + compraTienda.importe + "<br>" +
-            "4) Figura la dirección " + compraTienda.direccion + "<br>" +
-            "5) Figura la fecha " + compraTienda.fecha + "<br>" +
-            "6) Existen " + compraTienda.numPrendas + " prendas";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageMisCompras.SecDetalleCompraTienda.isVisibleSectionUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            if (PageMisCompras.SecDetalleCompraTienda.getNumTicket(dFTest.driver).compareTo(compraTienda.idCompra)!=0) {
-                listVals.add(2, State.Warn);
-            }
-            if (PageMisCompras.SecDetalleCompraTienda.getImporte(dFTest.driver).compareTo(compraTienda.importe)!=0) {
-                listVals.add(3, State.Warn);
-            }
-            if (PageMisCompras.SecDetalleCompraTienda.getDireccion(dFTest.driver).compareTo(compraTienda.direccion)!=0) {
-                listVals.add(4, State.Warn);
-            }
-            if (PageMisCompras.SecDetalleCompraTienda.getFecha(channel, dFTest.driver).compareTo(compraTienda.fecha)!=0) {
-                listVals.add(5, State.Warn);
-            }
-            if (PageMisCompras.SecDetalleCompraTienda.getNumPrendas(dFTest.driver)!=compraTienda.numPrendas) {
-                listVals.add(6, State.Warn);
-            }
-        
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        if (channel==Channel.movil_web) {
-            descripValidac = 
-                "1) Aparece la imagen correspondiente al código de barras de la compra";
-            datosStep.setNOKstateByDefault();
-            listVals = ListResultValidation.getNew(datosStep);
-            try {
-                if (!PageMisCompras.SecDetalleCompraTienda.isVisibleCodigoBarrasImg(dFTest.driver)) {
-                    listVals.add(1, State.Warn);
-                }
-                
-                datosStep.setListResultValidations(listVals);
-            }
-            finally { listVals.checkAndStoreValidations(descripValidac); }
-        }
+    @Validation
+    private static ListResultValidation checkData(CompraTienda compraTienda, Channel channel, WebDriver driver) {
+        ListResultValidation validations = ListResultValidation.getNew();
+        int maxSecondsWait = 1;
+        validations.add(
+        	"Es visible la capa correspondiente al detalle del tícket de compra (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+        	PageMisCompras.SecDetalleCompraTienda.isVisibleSectionUntil(maxSecondsWait, driver), State.Warn);
+        validations.add(
+        	"Figura un número de tícket " + compraTienda.idCompra + "<br>",
+        	PageMisCompras.SecDetalleCompraTienda.getNumTicket(driver).compareTo(compraTienda.idCompra)==0, State.Warn);
+        validations.add(
+        	"Figura el importe " + compraTienda.importe + "<br>",
+        	PageMisCompras.SecDetalleCompraTienda.getImporte(driver).compareTo(compraTienda.importe)==0, State.Warn);
+        validations.add(
+        	"Figura la dirección " + compraTienda.direccion + "<br>",
+        	PageMisCompras.SecDetalleCompraTienda.getDireccion(driver).compareTo(compraTienda.direccion)==0, State.Warn);
+        validations.add(
+        	"Figura la fecha " + compraTienda.fecha + "<br>",
+        	PageMisCompras.SecDetalleCompraTienda.getFecha(channel, driver).compareTo(compraTienda.fecha)==0, State.Warn);
+        validations.add(
+        	"Existen " + compraTienda.numPrendas + " prendas",
+        	PageMisCompras.SecDetalleCompraTienda.getNumPrendas(driver)==compraTienda.numPrendas, State.Warn);
+        return validations;
     }
     
     @SuppressWarnings("static-access")
-    public static DatosStep selectArticulo(int posArticulo, DataFmwkTest dFTest) {
-        //Step.
-        ArticuloScreen articulo = null;
-        DatosStep datosStep = new DatosStep     (
-            "Seleccionar el " + posArticulo + "o artículo de la Compra", 
-            "Aparece la sección correspondiente al \"QuickView\" del artículo");
-        try {
-            articulo = PageMisCompras.SecDetalleCompraTienda.getDataArticulo(posArticulo, dFTest.driver);
-            PageMisCompras.SecDetalleCompraTienda.selectArticulo(posArticulo, dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+    @Validation (
+    	description="Aparece la imagen correspondiente al código de barras de la compra",
+    	level=State.Warn)
+    private static boolean checkIsVisibleImgCodigoBarrasMovil(WebDriver driver) {
+        return (PageMisCompras.SecDetalleCompraTienda.isVisibleCodigoBarrasImg(driver));
+    }
+    
+    @SuppressWarnings("static-access")
+    @Step (
+    	description="Seleccionar el #{posArticulo}o artículo de la Compra", 
+        expected="Aparece la sección correspondiente al \"QuickView\" del artículo")
+    public static void selectArticulo(int posArticulo, WebDriver driver) {
+        ArticuloScreen articulo = PageMisCompras.SecDetalleCompraTienda.getDataArticulo(posArticulo, driver);
+        PageMisCompras.SecDetalleCompraTienda.selectArticulo(posArticulo, driver);
         
         //Validaciones
-        PageMisComprasStpV.SecQuickViewArticulo.validateIsOk(articulo, datosStep, dFTest);
-        
-        return datosStep;
+        PageMisComprasStpV.SecQuickViewArticulo.validateIsOk(articulo, driver);
     }
 }

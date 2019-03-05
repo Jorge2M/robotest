@@ -30,8 +30,11 @@ public class ModalCambioPaisStpV {
     throws Exception {
         DatosStep datosStep = TestCaseData.getDatosCurrentStep();
         datosStep.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
+        datosStep.replaceInExpected(tagNombrePais, dCtxSh.pais.getNombre_pais());
         datosStep.replaceInDescription(tagCodigoPais, dCtxSh.pais.getCodigo_pais());
         datosStep.replaceInDescription(tagLiteralIdioma, dCtxSh.idioma.getCodigo().getLiteral());
+        datosStep.replaceInExpected(tagLiteralIdioma, dCtxSh.idioma.getCodigo().getLiteral());
+        
         PagePrehome.selecPaisIdiomaYAccede(dCtxSh, driver);
 
         //Validation

@@ -138,31 +138,32 @@ public class FichaProducto extends GestorWebDriver {
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
             pageFichaStpV.validaExistsImgsCarruselIzqFichaOld();
-            pageFichaStpV.secProductDescOld.validateAreInStateInitial(dCtxSh.appE, dFTest);
+            pageFichaStpV.secProductDescOld.validateAreInStateInitial(dCtxSh.appE, dFTest.driver);
             PageFicha pageFicha = PageFicha.newInstance(dCtxSh.appE, dCtxSh.channel, dFTest.driver);
             if (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() > 2) 
                 pageFichaStpV.selectImgCarruselIzqFichaOld(2/*numImagen*/);
                 
             pageFichaStpV.selectImagenCentralFichaOld();
-            if (TypePanel.Description.getListApps().contains(dCtxSh.appE))
-                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Description, dFTest);
-            
-            if (TypePanel.Composition.getListApps().contains(dCtxSh.appE))
-                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Composition, dFTest);
-            
-            if (TypePanel.Returns.getListApps().contains(dCtxSh.appE))
-                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Returns, dFTest);
-            
-            if (TypePanel.Shipment.getListApps().contains(dCtxSh.appE))
-                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Shipment, dFTest);            
+            if (TypePanel.Description.getListApps().contains(dCtxSh.appE)) {
+                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Description, dFTest.driver);
+            }
+            if (TypePanel.Composition.getListApps().contains(dCtxSh.appE)) {
+                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Composition, dFTest.driver);
+            }
+            if (TypePanel.Returns.getListApps().contains(dCtxSh.appE)) {
+                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Returns, dFTest.driver);
+            }
+            if (TypePanel.Shipment.getListApps().contains(dCtxSh.appE)) {
+                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Shipment, dFTest.driver);  
+            }
         }
         else {
             boolean isFichaAccesorio = pageFichaStpV.getFicha().isFichaAccesorio(); 
             pageFichaStpV.secFotosNew.validaLayoutFotosNew(isFichaAccesorio, dFTest.driver);
-            pageFichaStpV.secBolsaButtonAndLinksNew.selectEnvioYDevoluciones(dFTest);
+            pageFichaStpV.secBolsaButtonAndLinksNew.selectEnvioYDevoluciones(dFTest.driver);
             pageFichaStpV.modEnvioYdevol.clickAspaForClose(dFTest.driver);
-            pageFichaStpV.secBolsaButtonAndLinksNew.selectDetalleDelProducto(dCtxSh.appE, LineaType.she, dFTest);
-            pageFichaStpV.secBolsaButtonAndLinksNew.selectLinkCompartir(dCtxSh.pais.getCodigo_pais(), dFTest);
+            pageFichaStpV.secBolsaButtonAndLinksNew.selectDetalleDelProducto(dCtxSh.appE, LineaType.she, dFTest.driver);
+            pageFichaStpV.secBolsaButtonAndLinksNew.selectLinkCompartir(dCtxSh.pais.getCodigo_pais(), dFTest.driver);
         }
             
         pageFichaStpV.selectGuiaDeTallas();
@@ -199,12 +200,15 @@ public class FichaProducto extends GestorWebDriver {
         
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
-            if (TypePanel.KcSafety.getListApps().contains(dCtxSh.appE))
-                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.KcSafety, dFTest);
+            if (TypePanel.KcSafety.getListApps().contains(dCtxSh.appE)) {
+                pageFichaStpV.secProductDescOld.selectPanel(TypePanel.KcSafety, dFTest.driver);
+            }
         }
-        else 
-            if (TypePanel.KcSafety.getListApps().contains(dCtxSh.appE))
-                pageFichaStpV.secBolsaButtonAndLinksNew.selectDetalleDelProducto(dCtxSh.appE, LineaType.nina, dFTest);
+        else {
+            if (TypePanel.KcSafety.getListApps().contains(dCtxSh.appE)) {
+                pageFichaStpV.secBolsaButtonAndLinksNew.selectDetalleDelProducto(dCtxSh.appE, LineaType.nina, dFTest.driver);
+            }
+        }
         
         pageFichaStpV.selectLinkNavigation(ProductNav.Next, dCtxSh, dataArtOrigin.getReferencia());
         pageFichaStpV.selectLinkNavigation(ProductNav.Prev, dCtxSh, dataArtOrigin.getReferencia());
