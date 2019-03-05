@@ -29,7 +29,6 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     public static SecKlarna secKlarna;
     public static SecEps secEps;
     public static ModalAvisoCambioPais modalAvisoCambioPais;
-    public static SecTarjetaPci secTarjetaPci = null;
     
     static String XPathConfPagoButtonDesktop = "//*[@id[contains(.,'btnCheckout')]]";
     static String XPathAlmacenInNoProEntorns = "//span[@class='labelTestShowAlmacenStrong']";

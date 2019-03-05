@@ -25,7 +25,6 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
 	
     public static SecTMango secTMango;
     public static SecBillpay secBillpay;
-    public static SecTarjetaPci secTarjetaPci = null;
     
     static String XPathLink2DatosPago = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step2']";
     static String XPathButtonVerResumen = "//button[@id[contains(.,'complete-step2')]]";

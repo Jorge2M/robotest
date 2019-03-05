@@ -32,82 +32,50 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
     public static Page2DatosPagoCheckoutMobil page2MobilCheckout;
     public static Page3ResumenCheckoutMobil page3MobilCheckout;
     public static ModalAvisoCambioPais modalAvisoCambioPais;
+    private SecTarjetaPci secTarjetaPci;
     
     //Abarca cualquier div de loading
     static String XPathDivLoading = "//div[@class[contains(.,'panel_loading')] or @class[contains(.,'container-full-centered-loading')] or @class[contains(.,'loading-panel')]]";
     
-    public static SecTarjetaPci getSecTarjetaPci(Channel channel, WebDriver driver) {
-    	SecTarjetaPci secTarjetaPci = getSecTarjetaPci(channel);
-    	if (secTarjetaPci==null) {
-    		secTarjetaPci = SecTarjetaPci.makeSecTarjetaPci(channel, driver);
-    		setSecTarjetaPci(secTarjetaPci, channel);
+    public SecTarjetaPci getSecTarjetaPci(Channel channel, WebDriver driver) {
+    	if (this.secTarjetaPci==null) {
+    		this.secTarjetaPci = SecTarjetaPci.makeSecTarjetaPci(channel, driver);
     	}
     	
-    	return secTarjetaPci;
-    }
-    
-    private static SecTarjetaPci getSecTarjetaPci(Channel channel) {
-    	if (channel==Channel.movil_web) {
-    		return (page2MobilCheckout.secTarjetaPci);
-    	}
-    	return page1DktopCheckout.secTarjetaPci;
-    }
-    
-    private static void setSecTarjetaPci(SecTarjetaPci secTarjetaPci, Channel channel) {
-    	if (channel==Channel.movil_web) {
-    		page2MobilCheckout.secTarjetaPci = secTarjetaPci;
-    	}
-    	page1DktopCheckout.secTarjetaPci = secTarjetaPci;
+    	return this.secTarjetaPci;
     }
 
     public static boolean isFirstPageUntil(Channel channel, int maxSecondsToWait, WebDriver driver) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return (page1MobilCheckout.isVisibleLink1EnvioUntil(driver, maxSecondsToWait));
+        }
         
         return (page1DktopCheckout.isPageUntil(maxSecondsToWait, driver));    
     }
     
-    public static void inputNumberPci(String numtarj, Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web)
-            page2MobilCheckout.secTarjetaPci.inputNumber(numtarj, driver);
-        else
-            page1DktopCheckout.secTarjetaPci.inputNumber(numtarj, driver);
+    public void inputNumberPci(String numtarj, Channel channel, WebDriver driver) {
+    	getSecTarjetaPci(channel, driver).inputNumber(numtarj, driver);
     }
     
-    public static void inputTitularPci(String titular, Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web)
-            page2MobilCheckout.secTarjetaPci.inputTitular(titular, driver);
-        else
-            page1DktopCheckout.secTarjetaPci.inputTitular(titular, driver);
+    public void inputTitularPci(String titular, Channel channel, WebDriver driver) {
+    	getSecTarjetaPci(channel, driver).inputTitular(titular, driver);
     }
     
-    public static void selectMesByVisibleTextPci(String mesCaducidad, Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web)
-            page2MobilCheckout.secTarjetaPci.selectMesByVisibleText(mesCaducidad, driver);
-        else
-            page1DktopCheckout.secTarjetaPci.selectMesByVisibleText(mesCaducidad, driver);
+    public void selectMesByVisibleTextPci(String mesCaducidad, Channel channel, WebDriver driver) {
+    	getSecTarjetaPci(channel, driver).selectMesByVisibleText(mesCaducidad, driver);
     }
     
-    public static void selectAnyByVisibleTextPci(String anyCaducidad, Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web)
-            page2MobilCheckout.secTarjetaPci.selectAnyByVisibleText(anyCaducidad, driver);
-        else
-            page1DktopCheckout.secTarjetaPci.selectAnyByVisibleText(anyCaducidad, driver);
+    public void selectAnyByVisibleTextPci(String anyCaducidad, Channel channel, WebDriver driver) {
+    	getSecTarjetaPci(channel, driver).selectAnyByVisibleText(anyCaducidad, driver);
     }    
     
-    public static void inputCvcPci(String cvc, Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web)
-            page2MobilCheckout.secTarjetaPci.inputCvc(cvc, driver);
-        else
-            page1DktopCheckout.secTarjetaPci.inputCvc(cvc, driver);
+    public void inputCvcPci(String cvc, Channel channel, WebDriver driver) {
+    	getSecTarjetaPci(channel, driver).inputCvc(cvc, driver);
     }
     
     //Específico para método de Pago Codensa (Colombia)
-    public static void inputDniPci(String dni, Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web)
-            page2MobilCheckout.secTarjetaPci.inputDni(dni, driver);
-        else
-            page1DktopCheckout.secTarjetaPci.inputDni(dni, driver);
+    public void inputDniPci(String dni, Channel channel, WebDriver driver) {
+    	getSecTarjetaPci(channel, driver).inputDni(dni, driver);
     }
     
     public static void inputCodigoPromoAndAccept(String codigoPromo, Channel channel, WebDriver driver) throws Exception {

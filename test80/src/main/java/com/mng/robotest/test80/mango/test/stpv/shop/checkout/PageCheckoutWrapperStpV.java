@@ -337,22 +337,24 @@ public class PageCheckoutWrapperStpV {
             if (dCtxPago.getFTCkout().trjGuardada)
                 PageCheckoutWrapper.clickRadioTrjGuardada(channel, dFTest.driver);
             else {
-                if (pago.getNumtarj()!=null && "".compareTo(pago.getNumtarj())!=0)
-                    PageCheckoutWrapper.inputNumberPci(pago.getNumtarj(), channel, dFTest.driver);
+            	PageCheckoutWrapper pageCheckoutStpV = new PageCheckoutWrapper();
+                if (pago.getNumtarj()!=null && "".compareTo(pago.getNumtarj())!=0) {
+                	pageCheckoutStpV.inputNumberPci(pago.getNumtarj(), channel, dFTest.driver);
+                }
                 
-                PageCheckoutWrapper.inputTitularPci(pago.getTitular(), channel, dFTest.driver);
-                
-                if (pago.getMescad()!=null && "".compareTo(pago.getMescad())!=0)
-                    PageCheckoutWrapper.selectMesByVisibleTextPci(pago.getMescad(), channel, dFTest.driver);
-                
-                if (pago.getAnycad()!=null && "".compareTo(pago.getAnycad())!=0)
-                    PageCheckoutWrapper.selectAnyByVisibleTextPci(pago.getAnycad(), channel, dFTest.driver);
-                
-                if (pago.getCvc()!=null && "".compareTo(pago.getCvc())!=0)
-                    PageCheckoutWrapper.inputCvcPci(pago.getCvc(), channel, dFTest.driver);
-                
-                if (pago.getDni()!=null && "".compareTo(pago.getDni())!=0)
-                    PageCheckoutWrapper.inputDniPci(pago.getDni(), channel, dFTest.driver);                
+                pageCheckoutStpV.inputTitularPci(pago.getTitular(), channel, dFTest.driver);
+                if (pago.getMescad()!=null && "".compareTo(pago.getMescad())!=0) {
+                	pageCheckoutStpV.selectMesByVisibleTextPci(pago.getMescad(), channel, dFTest.driver);
+                }
+                if (pago.getAnycad()!=null && "".compareTo(pago.getAnycad())!=0) {
+                	pageCheckoutStpV.selectAnyByVisibleTextPci(pago.getAnycad(), channel, dFTest.driver);
+                }
+                if (pago.getCvc()!=null && "".compareTo(pago.getCvc())!=0) {
+                	pageCheckoutStpV.inputCvcPci(pago.getCvc(), channel, dFTest.driver);
+                }
+                if (pago.getDni()!=null && "".compareTo(pago.getDni())!=0) {
+                	pageCheckoutStpV.inputDniPci(pago.getDni(), channel, dFTest.driver);   
+                }
             }
 
             PageCheckoutWrapper.confirmarPagoFromMetodos(channel, dCtxPago.getDataPedido(), dFTest.driver);
