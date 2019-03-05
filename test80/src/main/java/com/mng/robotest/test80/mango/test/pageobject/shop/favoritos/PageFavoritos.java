@@ -153,14 +153,16 @@ public class PageFavoritos extends WebdrvWrapp {
     }
     
     public static boolean areVisibleArticlesUntil(DataFavoritos dataFavoritos, int maxSecondsToWait, WebDriver driver) {
-        if (dataFavoritos.isEmpty())
+        if (dataFavoritos.isEmpty()) {
             return (!hayArticulos(driver));
+        }
         
         Iterator<ArticuloScreen> itArticulos = dataFavoritos.getListArticulos().iterator();
         while (itArticulos.hasNext()) {
             ArticuloScreen articulo = itArticulos.next();
-            if (!isVisibleArticleUntil(articulo.getRefProducto(), articulo.getCodigoColor(), maxSecondsToWait, driver))
+            if (!isVisibleArticleUntil(articulo.getRefProducto(), articulo.getCodigoColor(), maxSecondsToWait, driver)) {
                 return false;
+            }
         }
         
         return true;

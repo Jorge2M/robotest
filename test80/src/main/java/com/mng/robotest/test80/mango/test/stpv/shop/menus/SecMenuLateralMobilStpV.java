@@ -23,6 +23,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLat
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil.TypeLocator;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 
 
@@ -361,6 +362,10 @@ public class SecMenuLateralMobilStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }
         
        //Validaciones estándar. 
-       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/);
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = true;
+        flagsVal.validaJS = true;
+        flagsVal.validaImgBroken = true;
+        AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
     }
 }

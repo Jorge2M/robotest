@@ -122,7 +122,7 @@ public class Reembolsos extends GestorWebDriver {
         }
             
         //Step. Accedemos a Arabia Saudi/Árabe. Nos registramos con un usuario asociado a ese país. Se vacía la bolsa/favorites
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
 
         //Step (+validaciones) selección menú "Mi cuenta" + "Reembolsos"
         PageReembolsosStpV.gotoRefundsFromMenu(paisConSaldoCta, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
@@ -162,7 +162,7 @@ public class Reembolsos extends GestorWebDriver {
             dCtxSh.passwordUser = dCtxSh.pais.getPassuser();
         }
         
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true/*clearArticulos*/, dFTest.driver);
         //TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, dFTest.driver);
         PageReembolsosStpV.gotoRefundsFromMenu(dCtxSh.pais.existsPagoStoreCredit(), dCtxSh.appE, dCtxSh.channel, dFTest.driver);
         PageReembolsosStpV.selectRadioSalCtaAndRefresh(dFTest.driver);

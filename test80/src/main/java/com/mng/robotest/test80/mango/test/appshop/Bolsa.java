@@ -83,7 +83,7 @@ public class Bolsa extends GestorWebDriver {
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userRegistered = false;
         
-        AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest);
+        AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest.driver);
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
         SecMenusWrapperStpV.accesoMenuXRef(menuVestidos, dCtxSh, dFTest);
         DataBag dataBag = new DataBag();
@@ -139,7 +139,7 @@ public class Bolsa extends GestorWebDriver {
         DataBag dataBag = new DataBag();
         
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-        AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest);
+        AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest.driver);
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
         SecMenusWrapperStpV.accesoMenuXRef(menuVestidos, dCtxSh, dFTest);
         SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest.driver);
@@ -175,7 +175,7 @@ public class Bolsa extends GestorWebDriver {
     throws Exception {
     	//TestAB.activateTestABiconoBolsaDesktop(2, dCtxSh, dFTest.driver);
         DataBag dataBag = new DataBag();
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, dCtxSh.userRegistered/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, dCtxSh.userRegistered/*clearArticulos*/, dFTest.driver);
         SecBolsaStpV.altaArticlosConColores(2, dataBag, dCtxSh, dFTest.driver);
         SecBolsaStpV.forceStateBolsaTo(StateBolsa.Closed, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
         SecBolsaStpV.forceStateBolsaTo(StateBolsa.Open, dCtxSh.appE, dCtxSh.channel, dFTest.driver); 

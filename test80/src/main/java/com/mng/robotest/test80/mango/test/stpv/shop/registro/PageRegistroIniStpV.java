@@ -16,6 +16,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.registro.DataRegistro;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroIni;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 public class PageRegistroIniStpV {
@@ -103,7 +104,11 @@ public class PageRegistroIniStpV {
             PageRegistroSegundaStpV.validaIsPageRegistroOK(paisRegistro, app, dataRegistro, dFTest.driver);
         }
         
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = true;
+        flagsVal.validaJS = true;
+        flagsVal.validaImgBroken = false;
+        AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
     }
     
 	@Validation (

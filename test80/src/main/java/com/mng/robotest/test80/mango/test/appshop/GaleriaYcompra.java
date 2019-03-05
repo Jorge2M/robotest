@@ -96,7 +96,7 @@ public class GaleriaYcompra extends GestorWebDriver {
         dCtxSh.userRegistered=true;
         
         boolean clearArticulos = true;
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, clearArticulos, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, clearArticulos, dFTest.driver);
     	navegaGaleria(dCtxSh, dFTest);
     	testPago(dCtxSh, dFTest);
     }

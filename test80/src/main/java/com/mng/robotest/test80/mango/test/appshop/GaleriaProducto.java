@@ -71,6 +71,9 @@ public class GaleriaProducto extends GestorWebDriver {
             this.castellano = this.españa.getListIdiomas().get(0);
         }
         
+        dCtxSh.pais = this.españa;
+        dCtxSh.idioma = this.castellano;
+        
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
         TestCaseData.storeInThread(dCtxSh); 
         TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
@@ -95,14 +98,14 @@ public class GaleriaProducto extends GestorWebDriver {
         dCtxSh.userRegistered = true;
         String tipoPrendasGaleria = "camisa";
             
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
         SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest);
         
         List<Color> colorsToFilter = new ArrayList<>();
         colorsToFilter.add(Color.Blanco);
         colorsToFilter.add(Color.Azul);
-        SecFiltrosStpV.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, true/*validaciones*/, "Camisas", colorsToFilter, dFTest);
+        SecFiltrosStpV.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, true/*validaciones*/, "Camisas", colorsToFilter, dFTest.driver);
 
         //Pruebas a nivel del cambio de galería de 2<->4 columnas
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);
@@ -144,14 +147,14 @@ public class GaleriaProducto extends GestorWebDriver {
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userRegistered = false;
             
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
         SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest);
                         
         List<Color> colorsToFilter = new ArrayList<>();
         colorsToFilter.add(Color.Blanco);
         colorsToFilter.add(Color.Negro);
-        SecFiltrosStpV.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, false/*validaciones*/, "Camisas", colorsToFilter, dFTest);
+        SecFiltrosStpV.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, false/*validaciones*/, "Camisas", colorsToFilter, dFTest.driver);
             
         //Scrollar hasta la 3a página
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);
@@ -170,7 +173,7 @@ public class GaleriaProducto extends GestorWebDriver {
             
         LocationArticle loc1rsArticleLastPage = LocationArticle.getInstanceInPage(datosScrollFinalGaleria.paginaFinal, 1);
         pageGaleriaStpV.selectArticulo(loc1rsArticleLastPage, dCtxSh);
-        AllPagesStpV.backNagegador(dFTest);
+        AllPagesStpV.backNagegador(dFTest.driver);
 
         //Scrollar hasta el final de la Galería (comprobaremos que el número de artículos es el mismo que en el anterior scroll hasta el final)
         dataScroll.validateArticlesExpected = true;
@@ -190,7 +193,7 @@ public class GaleriaProducto extends GestorWebDriver {
         dCtxSh.passwordUser = userShop.password;
         dCtxSh.userRegistered = true;
     
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
         if (dCtxSh.appE==AppEcom.outlet)
@@ -226,7 +229,7 @@ public class GaleriaProducto extends GestorWebDriver {
         dCtxSh.userRegistered = false;
     
         //Ini script
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
         SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest);
                 

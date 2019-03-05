@@ -6,11 +6,16 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 import org.json.simple.JSONObject;
+import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -40,232 +45,190 @@ import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
 @SuppressWarnings({"static-access"})
 public class AccesoStpV {
 
-    /**
-     * Accedemos a la aplicación (shop/outlet/votf)
-     * Se ejecutan todas las acciones en un único paso
-     */
-    public static DatosStep accesoAplicacionEnUnPaso(DataCtxShop dCtxSh, boolean clearArticulos, DataFmwkTest dFTest) 
+	final static String tagNombrePais = "@TagNombrePais";
+	final static String tagLiteralIdioma = "@TagLiteralIdioma";
+	final static String tagRegistro = "@TagRegistro";
+	@Step (
+		description="Acceder a Mango (" + tagNombrePais + "/" + tagLiteralIdioma + ")<br>" + tagRegistro, 
+        expected="Se accede correctamente",
+        saveNettraffic=SaveWhen.Always)
+    public static void accesoAplicacionEnUnPaso(DataCtxShop dCtxSh, boolean clearArticulos, WebDriver driver) 
     throws Exception {
         String registro = "";
-        if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf)
+        if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) {
             registro = "Identificarse con el usuario " + dCtxSh.userConnected + "<br>"; 
+        }
        
-        if (clearArticulos)
-            registro+= "Borrar la Bolsa/Favoritos<br>";              
-
-        DatosStep datosStep = new DatosStep (
-            "Acceder a Mango (" + dCtxSh.pais.getNombre_pais() + "/" + dCtxSh.idioma.getCodigo().getLiteral() + ")<br>" + registro, 
-            "Se accede correctamente");
-        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
-        try {
-            AccesoNavigations.accesoHomeAppWeb(dCtxSh, dFTest);
-            
-            //En caso necesario nos identificamos
-            if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf)
-                PageIdentificacion.iniciarSesion(dCtxSh, dFTest.driver);
-            
-            if (clearArticulos) {
-                SecBolsa.clearArticulos(dCtxSh, dFTest.driver);
-                if (dCtxSh.appE==AppEcom.shop)
-                    PageFavoritos.clearAllArticulos(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        if (clearArticulos) {
+            registro+= "Borrar la Bolsa/Favoritos<br>";        
+        }
+        
+        DatosStep datosStep = TestCaseData.getDatosCurrentStep();
+        datosStep.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
+        datosStep.replaceInDescription(tagLiteralIdioma, dCtxSh.idioma.getCodigo().getLiteral());
+        datosStep.replaceInDescription(tagRegistro, registro);
+        
+        AccesoNavigations.accesoHomeAppWeb(dCtxSh, driver);
+        if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) {
+            PageIdentificacion.iniciarSesion(dCtxSh, driver);
+        }
+        
+        if (clearArticulos) {
+            SecBolsa.clearArticulos(dCtxSh, driver);
+            if (dCtxSh.appE==AppEcom.shop) {
+                PageFavoritos.clearAllArticulos(dCtxSh.channel, dCtxSh.appE, driver);
             }
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { 
-        	StepAspect.storeDataAfterStep(datosStep); 
         }
         
-        if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) 
-            validaIdentificacionEnShop(dCtxSh, datosStep, dFTest);
-        
-        return datosStep;
+        if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) {
+            validaIdentificacionEnShop(dCtxSh, driver);
+        }
     }
     
-
-	/**
-     * Validaciones posteriores a la identificación con un usuario/password
-     */
-    public static void validaIdentificacionEnShop(DataCtxShop dCtxSh, DatosStep datosStep, DataFmwkTest dFTest) 
-    throws Exception {
-        //Validaciones
-        int maxSecondsToWait = 5;
-        String validac2 = "";
-        String validac3 = "";
-        if (dCtxSh.appE==AppEcom.outlet) { 
-            validac2 = 
-            "2) NO aparece el link \"Favoritos\"<br>";
-            validac3 = 
-            "3) Aparece el link \"Mis Pedidos\"<br>";                    
-        }
-        else {
-            validac2 = 
-            "2) Aparece el link \"Favoritos\"<br>";
-            if (dCtxSh.pais.isMisCompras())
-                validac3 =
-                "3) Aparece el link \"Mis Compras\"<br>";            
-            else
-                validac3 =
-                "3) NO aparece el link \"Mis Compras\"<br>";
-        }
-            
-        String descripValidac = 
-            "1) Aparece el link \"Mi cuenta\" (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
-            validac2 +
-            validac3 +
-            "4) Aparece el link \"Ayuda\"<br>" +
-            "5) Aparece el link \"Cerrar sesión\"<br>";
-        
-        if (dCtxSh.channel==Channel.desktop)
-            descripValidac+=
-            "6) Aparece una página con menús de MANGO";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!SecMenusWrap.secMenusUser.isPresentMiCuentaUntil(dCtxSh.channel, maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (dCtxSh.appE==AppEcom.outlet) {
-                if (SecMenusWrap.secMenusUser.isPresentFavoritos(dCtxSh.channel, dFTest.driver)) {
-                    listVals.add(2, State.Defect);
-                }
-            }
-            else {
-                if (!SecMenusWrap.secMenusUser.isPresentFavoritos(dCtxSh.channel, dFTest.driver)) {
-                    listVals.add(2, State.Defect);
-                }
-            }
-            if (dCtxSh.appE==AppEcom.outlet) {
-                if (!SecMenusWrap.secMenusUser.isPresentPedidos(dCtxSh.channel, dFTest.driver)) {
-                    listVals.add(3, State.Defect);
-                }
-            }
-            else {
-                if (dCtxSh.pais.isMisCompras()) {
-                    if (!SecMenusWrap.secMenusUser.isPresentMisCompras(dCtxSh.channel, dFTest.driver)) {
-                        listVals.add(3, State.Defect);
-                    }
-                }
-                else {
-                    if (SecMenusWrap.secMenusUser.isPresentMisCompras(dCtxSh.channel, dFTest.driver)) {
-                        listVals.add(3, State.Defect);
-                    }
-                }
-            }
-            if (!SecMenusWrap.secMenusUser.isPresentAyuda(dCtxSh.channel, dFTest.driver)) {
-                listVals.add(4, State.Defect);
-            }
-            if (!SecMenusWrap.secMenusUser.isPresentCerrarSesion(dCtxSh.channel, dFTest.driver)) {
-                listVals.add(5, State.Defect);
-            }
-            if (dCtxSh.channel==Channel.desktop) {
-                if (!SecMenusDesktop
-                	.secMenuSuperior.secLineas.isPresentLineasMenuWrapp(dFTest.driver)) {
-                    listVals.add(6, State.Warn);
-                }
-            }
-    
-            datosStep.setListResultValidations(listVals);
-        } 
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
+    public static void validaIdentificacionEnShop(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+		checkLinksAfterLogin(dCtxSh, driver);
+		
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(false/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = false;
+        flagsVal.validaJS = true;
+        flagsVal.validaImgBroken = false;
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
         
         //Validaciones para Analytics (sólo para firefox y NetAnalysis)´
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(Constantes.AnalyticsVal.GoogleAnalytics,
                                                                   Constantes.AnalyticsVal.NetTraffic,
                                                                   Constantes.AnalyticsVal.DataLayer);
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, dFTest.driver);
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, analyticSet, driver);
     }
+	
+	@Validation
+	private static ListResultValidation checkLinksAfterLogin(DataCtxShop dCtxSh, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
+        int maxSecondsWait = 5;
+    	validations.add(
+    		"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		SecMenusWrap.secMenusUser.isPresentMiCuentaUntil(dCtxSh.channel, maxSecondsWait, driver), State.Defect);
+		
+		boolean isVisibleLinkFavoritos = SecMenusWrap.secMenusUser.isPresentFavoritos(dCtxSh.channel, driver);
+		if (dCtxSh.appE==AppEcom.outlet) { 
+	    	validations.add(
+	    		"NO aparece el link \"Favoritos\"<br>",
+	    		!isVisibleLinkFavoritos, State.Defect);
+	    	validations.add(
+	    		"Aparece el link \"Mis Pedidos\"<br>",
+	    		SecMenusWrap.secMenusUser.isPresentPedidos(dCtxSh.channel, driver), State.Defect);
+		}
+		else {
+	    	validations.add(
+	    		"Aparece el link \"Favoritos\"<br>",
+	    		isVisibleLinkFavoritos, State.Defect);
+	    	
+	    	boolean isPresentLinkMisCompras = SecMenusWrap.secMenusUser.isPresentMisCompras(dCtxSh.channel, driver);
+	    	if (dCtxSh.pais.isMisCompras()) {
+		    	validations.add(
+		    		"Aparece el link \"Mis Compras\"<br>",
+		    		isPresentLinkMisCompras, State.Defect);
+	    	}
+	    	else {
+		    	validations.add(
+		    		"No aparece el link \"Mis Compras\"<br>",
+		    		!isPresentLinkMisCompras, State.Defect);
+	    	}
+		}
+		
+    	validations.add(
+    		"Aparece el link \"Ayuda\"<br>",
+    		SecMenusWrap.secMenusUser.isPresentAyuda(dCtxSh.channel, driver), State.Defect);
+    	validations.add(
+    		"Aparece el link \"Cerrar sesión\"<br>",
+    		SecMenusWrap.secMenusUser.isPresentCerrarSesion(dCtxSh.channel, driver), State.Defect);
+    	
+        if (dCtxSh.channel==Channel.desktop) {
+        	validations.add(
+        		"Aparece una página con menús de MANGO",
+        		SecMenusDesktop.secMenuSuperior.secLineas.isPresentLineasMenuWrapp(driver), State.Warn);
+        }
+        
+        return validations;
+	}
 
     /**
      * Accedemos a la aplicación (shop/outlet/votf)
      * Se ejecutan cada acción en un paso
      */
-    public static void accesoAplicacionEnVariosPasos(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+    public static void accesoAplicacionEnVariosPasos(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         if (dCtxSh.appE==AppEcom.votf && !dCtxSh.userRegistered) { //En VOTF no tiene sentido identificarte con las credenciales del cliente
-            //Steps Login Votf + Selección idioma
-            AccesoStpV.accesoVOTFtoHOME(dCtxSh, dFTest);                    
+            AccesoStpV.accesoVOTFtoHOME(dCtxSh, driver);                    
         }
         else {
-            //Step. Accesdo a la shop a través de la prehome
-            PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, false/*execValidacs*/, dFTest.driver);
-                
-            //En caso de prueba con usuario registrado ejecutamos el registro
+            PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, false/*execValidacs*/, driver);
             if (dCtxSh.userRegistered) {
-                identificacionEnMango(dCtxSh, dFTest);
-                        
-                //Step Borrar datos bolsa y favorites
-                SecBolsaStpV.clear(dCtxSh, dFTest.driver);
+                identificacionEnMango(dCtxSh, driver);
+                SecBolsaStpV.clear(dCtxSh, driver);
                 if (dCtxSh.appE==AppEcom.shop) {
-                    PageFavoritosStpV.clearAll(dCtxSh, dFTest);
+                    PageFavoritosStpV.clearAll(dCtxSh, driver);
                 }
             }
         }
     }    
     
-    public static DatosStep identificacionEnMango(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
-        DatosStep datosStep = new DatosStep();
-
-        //Si existe el link "Cerrar sesión" nos damos por registrados y no hacemos nada
-        if (!SecMenusUserWrap.isPresentCerrarSesion(dCtxSh.channel, dFTest.driver)) {
-            //Step
-            datosStep = new DatosStep (
-                "Seleccionar \"Iniciar Sesión\" e identificarse con " + dCtxSh.userConnected + " / " + dCtxSh.passwordUser, 
-                "La identificación es correcta" /* Resultado esperado */);
-            datosStep.setSaveHtmlPage(SaveWhen.Always);
-            datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
-            try {
-                PageIdentificacion.iniciarSesion(dCtxSh, dFTest.driver);
-                
-                datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-            } 
-            finally { StepAspect.storeDataAfterStep(datosStep); }
-            
-            //Validación
-            validaIdentificacionEnShop(dCtxSh, datosStep, dFTest);
+    public static void identificacionEnMango(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+        if (!SecMenusUserWrap.isPresentCerrarSesion(dCtxSh.channel, driver)) {
+        	iniciarSesion(dCtxSh, driver);
         }
-
-        return datosStep;
+    }
+    
+    @Step (
+    	description="Seleccionar \"Iniciar Sesión\" e identificarse con #{dCtxSh.getUserConnected()} / #{dCtxSh.getPasswordUser()}", 
+        expected="La identificación es correcta",
+        saveHtmlPage=SaveWhen.Always,
+        saveNettraffic=SaveWhen.Always)
+    private static void iniciarSesion(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+        PageIdentificacion.iniciarSesion(dCtxSh, driver);
+        validaIdentificacionEnShop(dCtxSh, driver);
     }
     
     //Acceso a VOTF (identificación + selección idioma + HOME she)
-    public static DatosStep accesoVOTFtoHOME(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
-        String urlAcceso = (String)dFTest.ctx.getAttribute("appPath");
+    public static void accesoVOTFtoHOME(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    	ITestContext ctx = TestCaseData.getdFTest().ctx;
+        String urlAcceso = (String)ctx.getAttribute("appPath");
         int numIdiomas = dCtxSh.pais.getListIdiomas().size();
+        PageLoginVOTFStpV.goToAndLogin(urlAcceso, dCtxSh, driver);
+        if (numIdiomas > 1) {
+            PageSelectIdiomaVOTFStpV.selectIdiomaAndContinue(dCtxSh.idioma, driver);
+        }
         
-        DatosStep datosStep = PageLoginVOTFStpV.goToAndLogin(urlAcceso, dCtxSh, dFTest);
-        if (numIdiomas > 1)
-            datosStep = PageSelectIdiomaVOTFStpV.selectIdiomaAndContinue(dCtxSh.idioma, dFTest);
+        PageSelectLineaVOTFStpV.validateIsPage(driver);
         
-        PageSelectLineaVOTFStpV.validateIsPage(datosStep, dFTest);
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
-        PageSelectLineaVOTFStpV.selectMenuAndLogoMango(1/*numMenu*/, dCtxSh.pais, dFTest);
-        
-        return datosStep;
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = false;
+        flagsVal.validaJS = true;
+        flagsVal.validaImgBroken = false;
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+        PageSelectLineaVOTFStpV.selectMenuAndLogoMango(1/*numMenu*/, dCtxSh.pais, driver);
     }
     
     //Accedemos a un país/idioma desde la prehome y realizamos un cambio a otro país/idioma
-    public static void accesoPRYCambioPais(DataCtxShop dCtxSh, Pais paisDestino, IdiomaPais idiomaDestino, DataFmwkTest dFTest) throws Exception {
-        //Accedemos a la shop con el país/idioma origen
-        AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest);
+    public static void accesoPRYCambioPais(DataCtxShop dCtxSh, Pais paisDestino, IdiomaPais idiomaDestino, WebDriver driver) 
+    throws Exception {
+        AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, driver);
 
         //TODO esto es temporal
         // Se realiza una captura de ./errorPage.faces pues allí se pueden encontrar los datos de la instancia
-        String nodoOrigen = WebDriverMngUtils.getNodeFromErrorPage(dFTest.driver);
+        String nodoOrigen = WebDriverMngUtils.getNodeFromErrorPage(driver);
         
         // STEPs REALIZAMOS EL PROCESO DE CAMBIO DE PAÍS
         Pais paisOriginal = dCtxSh.pais;
         IdiomaPais idiomaOriginal = dCtxSh.idioma;
         dCtxSh.pais = paisDestino;
         dCtxSh.idioma = idiomaDestino;
-        SecFooterStpV.cambioPais(dCtxSh, dFTest.driver);
+        SecFooterStpV.cambioPais(dCtxSh, driver);
         dCtxSh.pais = paisOriginal;
         dCtxSh.idioma = idiomaOriginal;
         
         //TODO esto es temporal
-        String nodoDestino = WebDriverMngUtils.getNodeFromErrorPage(dFTest.driver);
+        String nodoDestino = WebDriverMngUtils.getNodeFromErrorPage(driver);
         
         // STEP (TEMPORAL) INFORMAR DE LOS PAÍSES / NODOS
         DatosStep datosStep = new DatosStep(

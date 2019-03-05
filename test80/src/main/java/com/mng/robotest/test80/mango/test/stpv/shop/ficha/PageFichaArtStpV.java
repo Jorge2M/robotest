@@ -30,6 +30,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecDataProduct.P
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataFichaArt;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalBuscadorTiendasStpV;
 
@@ -74,7 +75,11 @@ public class PageFichaArtStpV {
         }
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/);
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = true;
+        flagsVal.validaJS = true;
+        flagsVal.validaImgBroken = true;
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
     }
     
     @Validation (

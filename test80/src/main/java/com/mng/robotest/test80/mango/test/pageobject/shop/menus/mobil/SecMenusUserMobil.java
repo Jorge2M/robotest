@@ -71,7 +71,7 @@ public class SecMenusUserMobil extends WebdrvWrapp {
     public static void clickFavoritosAndWait(AppEcom appE, WebDriver driver) throws Exception {
     	boolean toOpen = true;
     	SecCabeceraMobil.getNew(appE, driver).clickIconoMenuHamburguer(toOpen);
-        clickAndWaitLoad(driver, By.xpath(XPathMenuFavoritos));
+        clickAndWaitLoad(driver, By.xpath(XPathMenuFavoritos), 3);
         PageFavoritos.isSectionArticlesVisibleUntil(2/*maxSecondsToWait*/, driver);
     }
     

@@ -1,21 +1,16 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import java.util.HashMap;
-import java.util.StringTokenizer;
-
-import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageSuscripciones;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisDatos;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
-
+import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 
 public class PageMisDatosStpV {
 
@@ -32,13 +27,18 @@ public class PageMisDatosStpV {
             "El campo de email contiene " + usuarioReg,
             PageMisDatos.getValueEmailInput(driver).compareTo(usuarioReg.toUpperCase())==0, State.Warn);
 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = true;
+        flagsVal.validaJS = true;
+        flagsVal.validaImgBroken = false;
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
 
         return validations;
     }
 
     @Validation
-    public static ListResultValidation validaIsDataAssociatedToRegister (HashMap<String,String> datosRegOk, String codpais, WebDriver driver) throws Exception {
+    public static ListResultValidation validaIsDataAssociatedToRegister (HashMap<String,String> datosRegOk, String codpais, WebDriver driver) 
+    throws Exception {
         String nombre = datosRegOk.get("cfName");
         String apellidos = datosRegOk.get("cfSname");
         String email = datosRegOk.get("cfEmail");
@@ -49,38 +49,43 @@ public class PageMisDatosStpV {
 
         ListResultValidation validations = ListResultValidation.getNew();
         validations.add(
-                "Aparece un campo de contraseña de tipo password<br>",
-                PageMisDatos.isVisiblePasswordTypePassword(driver), State.Defect);
+            "Aparece un campo de contraseña de tipo password<br>",
+            PageMisDatos.isVisiblePasswordTypePassword(driver), State.Defect);
         validations.add(
-                "El resto de campos de tipo \"inputContent\" están informados<br>",
-                PageMisDatos.emailIsDisabled(driver), State.Defect);
+            "El resto de campos de tipo \"inputContent\" están informados<br>",
+            PageMisDatos.emailIsDisabled(driver), State.Defect);
         validations.add(
-                "El Nombre contiene el definido durante el registro: <b>" + nombre + "</b><br>",
-                !(PageMisDatos.getNumInputContentVoid(driver) > 1), State.Defect);
+            "El Nombre contiene el definido durante el registro: <b>" + nombre + "</b><br>",
+            !(PageMisDatos.getNumInputContentVoid(driver) > 1), State.Defect);
         validations.add(
-                "El Apellidos contiene el definido durante el registro: <b>" + apellidos + "</b><br>",
-                (PageMisDatos.getText_inputNombre(driver).compareTo(nombre)==0), State.Defect);
+            "El Apellidos contiene el definido durante el registro: <b>" + apellidos + "</b><br>",
+            (PageMisDatos.getText_inputNombre(driver).compareTo(nombre)==0), State.Defect);
         validations.add(
-                "El Email contiene el definido durante el registro: <b>" + email + "</b><br>",
-                (PageMisDatos.getText_inputEmail(driver).toLowerCase().compareTo(email.toLowerCase())==0), State.Defect);
+            "El Email contiene el definido durante el registro: <b>" + email + "</b><br>",
+            (PageMisDatos.getText_inputEmail(driver).toLowerCase().compareTo(email.toLowerCase())==0), State.Defect);
         validations.add(
-                "La Dirección contiene la definida durante el registro: <b>" + direccion + "</b><br>",
-                (PageMisDatos.getText_inputDireccion(driver).compareTo(direccion)==0), State.Defect);
+            "La Dirección contiene la definida durante el registro: <b>" + direccion + "</b><br>",
+            (PageMisDatos.getText_inputDireccion(driver).compareTo(direccion)==0), State.Defect);
         validations.add(
-                "El Código postal contiene el definido durante el registro: <b>" + codpostal + "</b><br>",
-                (PageMisDatos.getText_inputCodPostal(driver).compareTo(codpostal)==0), State.Defect);
+            "El Código postal contiene el definido durante el registro: <b>" + codpostal + "</b><br>",
+            (PageMisDatos.getText_inputCodPostal(driver).compareTo(codpostal)==0), State.Defect);
         validations.add(
-                "La población contiene la definida durante el registro: <b>" + poblacion + "</b><br>",
-                (PageMisDatos.getText_inputPoblacion(driver).compareTo(poblacion)==0), State.Defect);
+            "La población contiene la definida durante el registro: <b>" + poblacion + "</b><br>",
+            (PageMisDatos.getText_inputPoblacion(driver).compareTo(poblacion)==0), State.Defect);
         validations.add(
-                "Está seleccionado el país definido durante el registro: <b>" + codpais + "</b><br>",
-                (PageMisDatos.getCodPaisSelected(driver).compareTo(codpais)==0), State.Defect);
+            "Está seleccionado el país definido durante el registro: <b>" + codpais + "</b><br>",
+            (PageMisDatos.getCodPaisSelected(driver).compareTo(codpais)==0), State.Defect);
         if (provincia != null){
             validations.add(
-                    "Está seleccionada la provincia definida durante el registro: <b>" + provincia + "</b>",
-                    (PageMisDatos.getProvinciaSelected(driver).compareTo(provincia)==0), State.Defect);
+                "Está seleccionada la provincia definida durante el registro: <b>" + provincia + "</b>",
+                (PageMisDatos.getProvinciaSelected(driver).compareTo(provincia)==0), State.Defect);
         }
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
+        
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = true;
+        flagsVal.validaJS = true;
+        flagsVal.validaImgBroken = false;
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
 
         return validations;
     }

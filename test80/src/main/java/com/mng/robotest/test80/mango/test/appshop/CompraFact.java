@@ -135,7 +135,7 @@ public class CompraFact extends GestorWebDriver {
         }
         
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, this.usrRegistrado/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, this.usrRegistrado/*clearArticulos*/, dFTest.driver);
         TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, dFTest.driver);
         
         int maxArticlesAwayVale = 3;

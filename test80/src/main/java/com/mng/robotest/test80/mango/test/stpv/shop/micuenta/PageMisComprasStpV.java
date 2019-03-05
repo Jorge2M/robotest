@@ -17,6 +17,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompra
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompras.TypeCompra;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalDetalleMisCompras;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStpV;
 
 
@@ -29,7 +30,12 @@ public class PageMisComprasStpV {
             validateIsPage(driver);
         } else {
             validateIsPageWhenNotExistTabs(driver);
-            AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
+            
+            StdValidationFlags flagsVal = StdValidationFlags.newOne();
+            flagsVal.validaSEO = true;
+            flagsVal.validaJS = true;
+            flagsVal.validaImgBroken = false;
+            AllPagesStpV.validacionesEstandar(flagsVal, driver);
         }
     }
 

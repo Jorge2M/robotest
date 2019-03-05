@@ -74,5 +74,13 @@ public class DataCtxShop implements Cloneable {
     public String getLiteralIdioma() {
     	return idioma.getCodigo().getLiteral();
     }
+    
+    public String getUserConnected() {
+    	return this.userConnected;
+    }
+    
+    public String getPasswordUser() {
+    	return this.passwordUser;
+    }
 }
 

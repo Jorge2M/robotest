@@ -1,55 +1,37 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.trustpay;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.trustpay.PageTrustpayTestConfirm;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.trustpay.PageTrustpayTestConfirm.typeButtons;
 
-
 public class PageTrustpayTestConfirmStpV {
     
-    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) Figura el botón \"OK\"<br>" +
-            "2) Figura el botón \"ANNOUNCED\"<br>" +
-            "3) Figura el botón \"FAIL\"<br>" +
-            "4) Figura el botón \"PENDING\"";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageTrustpayTestConfirm.isPresentButton(typeButtons.OK, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (!PageTrustpayTestConfirm.isPresentButton(typeButtons.ANNOUNCED, dFTest.driver)) {
-                listVals.add(2, State.Warn);
-            }
-            if (!PageTrustpayTestConfirm.isPresentButton(typeButtons.FAIL, dFTest.driver)) {
-                listVals.add(3, State.Warn);
-            }
-            if (!PageTrustpayTestConfirm.isPresentButton(typeButtons.PENDING, dFTest.driver)) {
-                listVals.add(4, State.Warn);
-            }
-                                                
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+    public static ListResultValidation validateIsPage(WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
+    	validations.add(
+    		"Figura el botón \"OK\"<br>",
+    		PageTrustpayTestConfirm.isPresentButton(typeButtons.OK, driver), State.Defect);
+    	validations.add(
+    		"Figura el botón \"ANNOUNCED\"<br>",
+    		PageTrustpayTestConfirm.isPresentButton(typeButtons.ANNOUNCED, driver), State.Warn);
+    	validations.add(
+    		"Figura el botón \"FAIL\"<br>",
+    		PageTrustpayTestConfirm.isPresentButton(typeButtons.FAIL, driver), State.Warn);
+    	validations.add(
+    		"Figura el botón \"PENDING\"",
+    		PageTrustpayTestConfirm.isPresentButton(typeButtons.PENDING, driver), State.Warn);
+    	return validations;
     }
     
-    public static DatosStep clickButtonOK(DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionar el botón para continuar con el pago", 
-            "El pago se completa correctamente");
-        try {
-            PageTrustpayTestConfirm.clickButton(typeButtons.OK, dFTest.driver);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        return datosStep;
+	@Step (
+		description="Seleccionar el botón para continuar con el pago", 
+        expected="El pago se completa correctamente")
+    public static void clickButtonOK(WebDriver driver) throws Exception {
+		PageTrustpayTestConfirm.clickButton(typeButtons.OK, driver);
     }
 }

@@ -9,6 +9,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataNinos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroNinos;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 
 
 public class PageRegistroNinosStpV {
@@ -37,7 +38,11 @@ public class PageRegistroNinosStpV {
         //Validaciones
         PageRegistroDirecStpV.isPageFromPais(pais, dFTest);
         
-        //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/);
+        //Validaciones estándar.
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = true;
+        flagsVal.validaJS = false;
+        flagsVal.validaImgBroken = false;
+        AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
     }
 }

@@ -126,7 +126,7 @@ public class Registro extends GestorWebDriver {
             return;
             
         //Step. Acceso a Shop/Outlet/VOTF
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
             
         //Seleccionamos el menú superior "Registrate"
         SecMenusWrapperStpV.secMenuUser.selectRegistrate(dCtxSh.channel, dCtxSh, dFTest);
@@ -185,7 +185,7 @@ public class Registro extends GestorWebDriver {
         if (utils.getTypeAccessFmwk(dFTest.ctx)==TypeAccessFmwk.Bat)
             return;
         
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         //Validación modal suscripcion RGPD
         if (!dCtxSh.userRegistered) {
         	ModalSuscripcionStpV.validaRGPDModal(dCtxSh, dFTest);
@@ -219,10 +219,10 @@ public class Registro extends GestorWebDriver {
 	            SecMenusWrapperStpV.secMenuUser.logoffLogin(emailUsr, password, dCtxSh.channel, dCtxSh.appE, dFTest);
 	                
 	            //Step. Ejecutamos la consulta de Mis datos comprobando que son coherentes con los utilizados en el registro
-	            PageMiCuentaStpV.goToMisDatosAndValidateData(dataRegistro, dCtxSh.pais.getCodigo_pais(), dCtxSh.appE, dCtxSh.channel, dFTest);
+	            PageMiCuentaStpV.goToMisDatosAndValidateData(dataRegistro, dCtxSh.pais.getCodigo_pais(), dCtxSh.appE, dCtxSh.channel, dFTest.driver);
 	                
 	            //Step. Ejecutamos la consulta de suscripciones comprobando que los datos son coherentes con los utilizados en el registro
-	            PageMiCuentaStpV.goToSuscripcionesAndValidateData(dataRegistro, dCtxSh.appE, dCtxSh.channel, dFTest);        
+	            PageMiCuentaStpV.goToSuscripcionesAndValidateData(dataRegistro, dCtxSh.appE, dCtxSh.channel, dFTest.driver);        
 	        }
 	        
 	        //TODO Checkout temporal para Loyalty
@@ -252,7 +252,7 @@ public class Registro extends GestorWebDriver {
             return;
         }
         
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         SecMenusWrapperStpV.secMenuUser.selectRegistrate(dCtxSh.channel, dCtxSh, dFTest);
         String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
         HashMap<String,String> dataRegistro = PageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dFTest);

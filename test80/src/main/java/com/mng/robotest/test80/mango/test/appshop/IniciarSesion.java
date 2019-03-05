@@ -64,7 +64,7 @@ public class IniciarSesion extends GestorWebDriver {
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userRegistered = false;
                     
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         PageIdentificacionStpV.inicioSesionDatosKO("usuarioKeNoExiste@mango.com", "chuflapassw", dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         PageIdentificacionStpV.inicioSesionDatosKO(Constantes.mail_standard, "chuflapassw", dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         PageIdentificacionStpV.selectHasOlvidadoTuContrasenya(dFTest.driver);
@@ -84,6 +84,6 @@ public class IniciarSesion extends GestorWebDriver {
         dCtxSh.userRegistered = true;
             
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-        AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest);
+        AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest.driver);
     }
 }

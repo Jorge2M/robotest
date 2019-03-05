@@ -1,8 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.navigations.shop;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -36,17 +37,18 @@ public class AccesoNavigations {
     /**
     /* Acceso a la página inicial (home) de la APP Web (shop o VOTF)
      */
-    public static void accesoHomeAppWeb(DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static void accesoHomeAppWeb(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
         if (dCtxSh.appE==AppEcom.votf) {
-            accesoVOTF(dCtxSh, dFTest.driver);
-            goFromLineasToMultimarcaVOTF(dFTest.driver);
+            accesoVOTF(dCtxSh, driver);
+            goFromLineasToMultimarcaVOTF(driver);
         } 
         else {
-            PagePrehome.accesoShopViaPrehome(dCtxSh, dFTest.driver);
+            PagePrehome.accesoShopViaPrehome(dCtxSh, driver);
         }
         
-        dFTest.ctx.setAttribute(Constantes.attrUrlPagPostAcceso, dFTest.driver.getCurrentUrl());
+        ITestContext ctx = TestCaseData.getdFTest().ctx;
+        ctx.setAttribute(Constantes.attrUrlPagPostAcceso, driver.getCurrentUrl());
     }
     
     public static void goFromLineasToMultimarcaVOTF(WebDriver driver) throws Exception {

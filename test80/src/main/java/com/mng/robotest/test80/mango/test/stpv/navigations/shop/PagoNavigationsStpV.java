@@ -40,6 +40,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Page1DktopCheckoutStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Page1EnvioCheckoutMobilStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Page1IdentCheckoutStpV;
@@ -80,7 +81,7 @@ public class PagoNavigationsStpV {
             "Se accede a Mango");
         datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
         try {
-            AccesoNavigations.accesoHomeAppWeb(dCtxSh, dFTest);
+            AccesoNavigations.accesoHomeAppWeb(dCtxSh, dFTest.driver);
             TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, dFTest.driver);
             PageIdentificacion.loginOrLogoff(dCtxSh, dFTest.driver);
                 
@@ -98,11 +99,16 @@ public class PagoNavigationsStpV {
         if (dCtxSh.userRegistered) {
             //Step. Vaciamos la bolsa y los favoritos
             SecBolsaStpV.clear(dCtxSh, dFTest.driver);
-            if (dCtxSh.appE==AppEcom.shop)
-                PageFavoritosStpV.clearAll(dCtxSh, dFTest);
+            if (dCtxSh.appE==AppEcom.shop) {
+                PageFavoritosStpV.clearAll(dCtxSh, dFTest.driver);
+            }
             
             //Validaciones estándar. 
-            AllPagesStpV.validacionesEstandar(false/*validaSEO*/, false/*validaJS*/, false/*validaImgBroken*/);
+            StdValidationFlags flagsVal = StdValidationFlags.newOne();
+            flagsVal.validaSEO = false;
+            flagsVal.validaJS = false;
+            flagsVal.validaImgBroken = false;
+            AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
         }
         
         int maxArticlesAwayVale = 2;

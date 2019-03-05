@@ -35,9 +35,9 @@ public class PageFavoritosStpV {
     	return validations;
     }
     
-    public static void clearAll(DataFavoritos dataFavoritos, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+    public static void clearAll(DataFavoritos dataFavoritos, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         dataFavoritos.clear();
-        clearAll(dCtxSh, dFTest);
+        clearAll(dCtxSh, driver);
     }
     
     public static void clear(ArticuloScreen articulo, DataFavoritos dataFavoritos, DataFmwkTest dFTest) throws Exception {
@@ -113,11 +113,11 @@ public class PageFavoritosStpV {
     @Step (
     	description="Eliminamos de Favoritos los posibles artículos existentes",
     	expected="No queda ningún artículo en Favoritos")
-    public static void clearAll(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
-        PageFavoritos.clearAllArticulos(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+    public static void clearAll(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+        PageFavoritos.clearAllArticulos(dCtxSh.channel, dCtxSh.appE, driver);
         
         //Validaciones
-        checkFavoritosWithoutArticles(dFTest.driver);
+        checkFavoritosWithoutArticles(driver);
     }
     
     @Validation

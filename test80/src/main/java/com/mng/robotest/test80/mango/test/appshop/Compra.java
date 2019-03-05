@@ -167,7 +167,7 @@ public class Compra extends GestorWebDriver {
         //Creamos una estructura para ir almacenando los datos del proceso de pagos
         String nTarjeta;
         String cvvTarjeta = "";
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         SecMenusWrapperStpV.seleccionLinea(LineaType.she, null/*sublineaType*/, dCtxSh, dFTest);
         SecFooterStpV.clickLinkFooter(FooterLink.cheque_regalo, false, dCtxSh.channel, dFTest.driver);
         if(dCtxSh.channel != Channel.movil_web){
@@ -287,7 +287,7 @@ public class Compra extends GestorWebDriver {
                 datosRegistro.put("cfPass", password);
                 datosRegistro.put("", "Barcelona");
                 datosRegistro.put("provinciaPais", "Barcelona");
-                PageMiCuentaStpV.goToMisDatosAndValidateData(datosRegistro, dCtxSh.pais.getCodigo_pais(), dCtxSh.appE, dCtxSh.channel, dFTest);
+                PageMiCuentaStpV.goToMisDatosAndValidateData(datosRegistro, dCtxSh.pais.getCodigo_pais(), dCtxSh.appE, dCtxSh.channel, dFTest.driver);
             }            
             
             //Validación en Manto de los Pedidos (si existen)
@@ -342,7 +342,7 @@ public class Compra extends GestorWebDriver {
         dCtxSh.userRegistered = false;
         
         //Acceder a Colombia
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         
         //Alta artículos en la bolsa
         ArrayList<ArticleStock> listParaAlta = new ArrayList<>();

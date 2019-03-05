@@ -1,40 +1,41 @@
 package com.mng.robotest.test80.mango.test.stpv.votf;
 
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.State;
+import org.openqa.selenium.WebDriver;
+
+import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.votf.PageLoginVOTF;
 
-
 public class PageLoginVOTFStpV {
 
-    public static DatosStep goToAndLogin(String urlAcceso, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+	final static String tagNombrePais = "@TagNombrePais";
+	final static String tagUsuarioVotf = "@TagUsuarioVotf";
+	final static String tagPasswordVotf = "@TagPasswordVotf";
+	@Step (
+		description=
+			"Acceder a la página de Login e identificarnos con un usuario de " + 
+			tagNombrePais + " (" + tagUsuarioVotf + " / " + tagPasswordVotf + ")") 
+    public static void goToAndLogin(String urlAcceso, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         String usuarioVOTF = dCtxSh.pais.getAccesoVOTF().getUsuario();
         String passwordVOTF = dCtxSh.pais.getAccesoVOTF().getPassword();
+        DatosStep datosStep = TestCaseData.getDatosCurrentStep();
+        datosStep.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
+        datosStep.replaceInDescription(tagUsuarioVotf, usuarioVOTF);
+        datosStep.replaceInDescription(tagPasswordVotf, tagPasswordVotf);
+
         int numIdiomas = dCtxSh.pais.getListIdiomas().size();
-        
-        //Step
-        String resultadoEsperado = "Aparece la página de selección de la línea";
         if (numIdiomas > 1) {
-            resultadoEsperado = "Aparece la página de selección del idioma";
+            datosStep.setResExpected("Aparece la página de selección del idioma");
+        }
+        else {
+        	datosStep.setResExpected("Aparece la página de selección de la línea");
         }
         
-        DatosStep datosStep = new DatosStep(
-            "Acceder a la página de Login e identificarnos con un usuario de " + 
-            dCtxSh.pais.getNombre_pais() + " (" + usuarioVOTF + " / " + passwordVOTF + ")",
-            resultadoEsperado);
-        try {
-            PageLoginVOTF.goToFromUrlAndSetTestABs(urlAcceso, dFTest.driver);
-            PageLoginVOTF.inputUsuario(usuarioVOTF, dFTest.driver);
-            PageLoginVOTF.inputPassword(passwordVOTF, dFTest.driver);
-            PageLoginVOTF.clickButtonContinue(dFTest.driver);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        } 
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        return datosStep;
+        PageLoginVOTF.goToFromUrlAndSetTestABs(urlAcceso, driver);
+        PageLoginVOTF.inputUsuario(usuarioVOTF, driver);
+        PageLoginVOTF.inputPassword(passwordVOTF, driver);
+        PageLoginVOTF.clickButtonContinue(driver);
     }
 }

@@ -53,6 +53,7 @@ import com.mng.robotest.test80.mango.test.pageobject.utils.NombreYRef;
 import com.mng.robotest.test80.mango.test.pageobject.utils.NombreYRefList;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
@@ -326,7 +327,11 @@ public class PageGaleriaStpV {
         }
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, dataForScroll.validaImgBroken);
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = true;
+        flagsVal.validaJS = true;
+        flagsVal.validaImgBroken = dataForScroll.validaImgBroken;
+        AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
         
         //VALIDACIONES - PARA ANALYTICS (sólo para firefox y NetAnalysis)
         PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, dFTest.driver);
@@ -395,7 +400,11 @@ public class PageGaleriaStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }                
 
        //Validaciones estándar. 
-       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
+       StdValidationFlags flagsVal = StdValidationFlags.newOne();
+       flagsVal.validaSEO = true;
+       flagsVal.validaJS = true;
+       flagsVal.validaImgBroken = false;
+       AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
        
        return numArticulosPant;
    }
@@ -627,7 +636,11 @@ public class PageGaleriaStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }
 
        //Validaciones estándar. 
-       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
+       StdValidationFlags flagsVal = StdValidationFlags.newOne();
+       flagsVal.validaSEO = true;
+       flagsVal.validaJS = true;
+       flagsVal.validaImgBroken = false;
+       AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
        
        //VALIDACIONES - PARA ANALYTICS (sólo para firefox y NetAnalysis)
        PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, dFTest.driver);        

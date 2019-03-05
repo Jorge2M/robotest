@@ -20,6 +20,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMis
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompras.TypeCompra;
 import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageListPedidos;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageAccesoMisComprasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMisComprasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageInputPedidoStpV;
@@ -127,7 +128,12 @@ public class PageResultPagoStpV {
         //Validations
         if (userRegistered) {
             PageMisComprasStpV.validateIsPage(driver);
-            AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
+            
+            StdValidationFlags flagsVal = StdValidationFlags.newOne();
+            flagsVal.validaSEO = true;
+            flagsVal.validaJS = true;
+            flagsVal.validaImgBroken = false;
+            AllPagesStpV.validacionesEstandar(flagsVal, driver);
         }
         else {
             PageAccesoMisComprasStpV.validateIsPage(driver);

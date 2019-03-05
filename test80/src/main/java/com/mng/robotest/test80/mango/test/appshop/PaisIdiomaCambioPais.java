@@ -51,6 +51,6 @@ public class PaisIdiomaCambioPais extends GestorWebDriver /*Funcionalidades gen√
     @Test
     public void CAM001_PR_CambioPais() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        AccesoStpV.accesoPRYCambioPais(this.dCtxSh, this.paisDestino, this.idiomaDestino, dFTest);
+        AccesoStpV.accesoPRYCambioPais(this.dCtxSh, this.paisDestino, this.idiomaDestino, dFTest.driver);
     }
 }

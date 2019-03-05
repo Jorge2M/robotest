@@ -35,6 +35,10 @@ public class IdiomaPais {
         URI uri = new URI(urlBase);
         return (urlBase.replace(uri.getPath(), "") + "/" + getAcceso());            
     }
+    
+    public String getLiteral() {
+    	return (getCodigo().getLiteral());
+    }
         
     @Override
     public String toString() {

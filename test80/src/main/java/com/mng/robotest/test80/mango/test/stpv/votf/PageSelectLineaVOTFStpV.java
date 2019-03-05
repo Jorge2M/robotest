@@ -1,10 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.votf;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -12,60 +12,47 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.votf.PageSelectLineaVOTF;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
-
+import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 
 public class PageSelectLineaVOTFStpV {
 
-    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) { 
-        String descripValidac = 
-            "1) Aparece el banner correspondiente a SHE<br>" +
-            "2) Aparece el banner correspondiente a MAN<br>" +
-            "3) Aparece el banner correspondiente a NIÑAS<br>" +
-            "4) Aparece el banner correspondiente a NIÑOS<br>" +
-            "5) Aparece el banner correspondiente a VIOLETA";
-        datosStep.setNOKstateByDefault();   
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageSelectLineaVOTF.isBannerPresent(LineaType.she, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            if (!PageSelectLineaVOTF.isBannerPresent(LineaType.he, dFTest.driver)) {
-                listVals.add(2, State.Warn);
-            }
-            if (!PageSelectLineaVOTF.isBannerPresent(LineaType.nina, dFTest.driver)) {
-                listVals.add(3, State.Warn);
-            }
-            if (!PageSelectLineaVOTF.isBannerPresent(LineaType.nino, dFTest.driver)) {
-                listVals.add(4, State.Warn);            
-            }
-            if (!PageSelectLineaVOTF.isBannerPresent(LineaType.violeta, dFTest.driver)) {
-                listVals.add(5, State.Warn);
-            }
-                
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+    public static ListResultValidation validateIsPage(WebDriver driver) { 
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	validations.add(
+    		"Aparece el banner correspondiente a SHE<br>",
+    		PageSelectLineaVOTF.isBannerPresent(LineaType.she, driver), State.Warn);
+    	validations.add(
+    		"Aparece el banner correspondiente a MAN<br>",
+    		PageSelectLineaVOTF.isBannerPresent(LineaType.he, driver), State.Warn);
+    	validations.add(
+    		"Aparece el banner correspondiente a NIÑAS<br>",
+    		PageSelectLineaVOTF.isBannerPresent(LineaType.nina, driver), State.Warn);
+    	validations.add(
+    		"Aparece el banner correspondiente a NIÑOS<br>",
+    		PageSelectLineaVOTF.isBannerPresent(LineaType.nino, driver), State.Warn);
+    	validations.add(
+    		"Aparece el banner correspondiente a VIOLETA",
+    		PageSelectLineaVOTF.isBannerPresent(LineaType.violeta, driver), State.Warn);
+    	return validations;
     }
     
-    public static void selectMenuAndLogoMango(int numMenu, Pais pais, DataFmwkTest dFTest) throws Exception {
-        //Step. 
-        DatosStep datosStep = new DatosStep(
-            "Seleccionar el " + numMenu + "o menu de " + LineaType.she + " y finalmente seleccionar el logo de Mango",
-            "Aparece la página inicial de SHE");
-        try {
-            PageSelectLineaVOTF.clickBanner(LineaType.she, dFTest.driver);
-            PageSelectLineaVOTF.clickMenu(LineaType.she, numMenu, dFTest.driver);
-            SecCabecera.getNew(Channel.desktop, AppEcom.votf, dFTest.driver)
-            	.clickLogoMango();
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        } 
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+	@Step (
+		description="Seleccionar el #{umMenu}o menu de Mujer y finalmente seleccionar el logo de Mango",
+        expected="Aparece la página inicial de SHE")
+    public static void selectMenuAndLogoMango(int numMenu, Pais pais, WebDriver driver) throws Exception {
+        PageSelectLineaVOTF.clickBanner(LineaType.she, driver);
+        PageSelectLineaVOTF.clickMenu(LineaType.she, numMenu, driver);
+        SecCabecera.getNew(Channel.desktop, AppEcom.votf, driver).clickLogoMango();
         
         //Validaciones
-        SectionBarraSupVOTFStpV.validate(pais.getAccesoVOTF().getUsuario(), datosStep, dFTest);
+        SectionBarraSupVOTFStpV.validate(pais.getAccesoVOTF().getUsuario(), driver);
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, false/*validaImgBroken*/);
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = true;
+        flagsVal.validaJS = true;
+        flagsVal.validaImgBroken = false;
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
     }
 }

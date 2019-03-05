@@ -94,7 +94,7 @@ public class FichaProducto extends GestorWebDriver {
         dCtxSh.userRegistered=true;
         
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true/*clearArticulos*/, dFTest.driver);
         ArticleStock articleWithColors = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithMoreOneColour, dCtxSh);
         SecBuscadorStpV.searchArticuloAndValidateBasic(articleWithColors, dCtxSh, dFTest.driver);
         
@@ -132,7 +132,7 @@ public class FichaProducto extends GestorWebDriver {
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
 
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         SecBuscadorStpV.searchArticuloAndValidateBasic(TypeArticleStock.articlesWithTotalLook, dCtxSh, dFTest.driver);
         
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
@@ -158,7 +158,7 @@ public class FichaProducto extends GestorWebDriver {
         }
         else {
             boolean isFichaAccesorio = pageFichaStpV.getFicha().isFichaAccesorio(); 
-            pageFichaStpV.secFotosNew.validaLayoutFotosNew(isFichaAccesorio, dFTest);
+            pageFichaStpV.secFotosNew.validaLayoutFotosNew(isFichaAccesorio, dFTest.driver);
             pageFichaStpV.secBolsaButtonAndLinksNew.selectEnvioYDevoluciones(dFTest);
             pageFichaStpV.modEnvioYdevol.clickAspaForClose(dFTest.driver);
             pageFichaStpV.secBolsaButtonAndLinksNew.selectDetalleDelProducto(dCtxSh.appE, LineaType.she, dFTest);
@@ -189,7 +189,7 @@ public class FichaProducto extends GestorWebDriver {
         dCtxSh.pais = UtilsMangoTest.getPaisFromCodigo("728", listaPaises); //Corea
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0); //Coreano
         
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.nina, null, "pantalones"));
         SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh, dFTest);
 
@@ -221,7 +221,7 @@ public class FichaProducto extends GestorWebDriver {
         dCtxSh.userRegistered = false;
                     
         //Step
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         
         //Step
         ArticleStock articulo = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithoutStock, dCtxSh);
@@ -244,7 +244,7 @@ public class FichaProducto extends GestorWebDriver {
         SecModalPersonalizacionStpV modalPersonalizacionStpV = new SecModalPersonalizacionStpV(dCtxSh.appE, dCtxSh.channel, dFTest);                
         
         //Step
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         modalPersonalizacionStpV.searchForCustomization(dCtxSh.channel, dFTest, dCtxSh);
         
         //Step

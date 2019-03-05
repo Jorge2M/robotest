@@ -17,6 +17,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorBusqueda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecBuscadorWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
 
 public class SecBuscadorStpV {
@@ -66,7 +67,11 @@ public class SecBuscadorStpV {
         }
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(false/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/);
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = false;
+        flagsVal.validaJS = true;
+        flagsVal.validaImgBroken = true;
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
     }
     
     @Validation

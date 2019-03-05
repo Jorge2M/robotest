@@ -79,7 +79,7 @@ public class Footer extends GestorWebDriver {
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userRegistered = false;
 
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         String urlInitialPage = dFTest.driver.getCurrentUrl();
         SecFooterStpV.validaLinksFooter(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         

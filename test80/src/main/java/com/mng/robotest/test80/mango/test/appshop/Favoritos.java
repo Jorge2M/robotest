@@ -115,9 +115,9 @@ public class Favoritos extends GestorWebDriver {
         
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
         //TestAB.activateTestABfiltrosMobil(1, dCtxSh, getDriver().driver); //!!!!!
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         SecBolsaStpV.clear(dCtxSh, dFTest.driver);
-        PageFavoritosStpV.clearAll(dataFavoritos, dCtxSh, dFTest);
+        PageFavoritosStpV.clearAll(dataFavoritos, dCtxSh, dFTest.driver);
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
         SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh, dFTest);
 
@@ -137,7 +137,7 @@ public class Favoritos extends GestorWebDriver {
         }
         
         PageFavoritosStpV.clear(artToPlay, dataFavoritos, dFTest);
-        PageFavoritosStpV.clearAll(dataFavoritos, dCtxSh, dFTest);
+        PageFavoritosStpV.clearAll(dataFavoritos, dCtxSh, dFTest.driver);
     }
     
     @Test(
@@ -154,9 +154,9 @@ public class Favoritos extends GestorWebDriver {
         //Script
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
         //TestAB.activateTestABfiltrosMobil(1, dCtxSh, getDriver().driver); //!!!!!
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         SecBolsaStpV.clear(dCtxSh, dFTest.driver);
-        PageFavoritosStpV.clearAll(dataFavoritos, dCtxSh, dFTest);
+        PageFavoritosStpV.clearAll(dataFavoritos, dCtxSh, dFTest.driver);
         
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
         SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh, dFTest);
@@ -171,7 +171,7 @@ public class Favoritos extends GestorWebDriver {
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;
-        AccesoStpV.identificacionEnMango(dCtxSh, dFTest);
+        AccesoStpV.identificacionEnMango(dCtxSh, dFTest.driver);
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
         SecBolsaStpV.clear(dCtxSh, dFTest.driver);
         

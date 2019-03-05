@@ -7,7 +7,7 @@ public class UtilsPageGaleria {
 	
     public static String getCodColorFromSrcImg(String srcImagenColor) {
         String codColor = "";
-        Pattern pattern = Pattern.compile("_(.*?)_(.*?).jpg");
+        Pattern pattern = Pattern.compile("_(.*?)-(.*?)_(.*?).jpg");
         Matcher matcher = pattern.matcher(srcImagenColor);
         if (matcher.find()) {
             codColor = matcher.group(1);

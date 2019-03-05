@@ -1,17 +1,15 @@
 package com.mng.robotest.test80.mango.test.stpv.shop;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.otras.WebDriverArqUtils;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -25,103 +23,81 @@ import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
 
 public class AllPagesStpV {
     
-    public static void validacionesEstandar(boolean validaSEO, boolean validaJS, boolean validaImgBroken) 
+    public static void validacionesEstandar(StdValidationFlags flagsVal, WebDriver driver) 
     throws Exception {
-    	DatosStep datosStep = TestCaseData.getDatosLastStep();
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        validacionesEstandar(validaSEO, State.Info_NoHardcopy, validaJS, State.Info_NoHardcopy, validaImgBroken, State.Warn, datosStep, dFTest);
+    	ITestContext ctx = TestCaseData.getdFTest().ctx;
+    	flagsVal.stateValidaSEO = State.Info_NoHardcopy;
+    	flagsVal.stateValidaJS = State.Info_NoHardcopy;
+    	flagsVal.stateValidaImgBroken = State.Warn;
+        validacionesEstandar(flagsVal, driver, ctx);
     }
     
-    public static void validacionesEstandar(boolean validaSEO, State levelAlertSEO, boolean validaJS, 
-    										State levelAlertJS, boolean validaImgBroken, State levelAlertImgBroken, 
-    										DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
-        //Validaciones
-        String descripValidac = "";
-        datosStep.setNOKstateByDefault();     
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (validaSEO) {
-                descripValidac+=
-                	"1) Se cumplen las validaciones genéricas de SEO<br>"; 
-                ResultadoErrores resValidac = AllPagesSEO.validacionesGenericasSEO(dFTest.driver);
-                if (!resValidac.isOK()) {
-                    descripValidac += resValidac.getlistaLogError().toString() + "<br>";
-                    listVals.add(1, levelAlertSEO);
+    @Validation
+    public static ListResultValidation validacionesEstandar(StdValidationFlags flagsVal, WebDriver driver, ITestContext ctx) 
+    throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	if (flagsVal.validaSEO) {
+    		ResultadoErrores resValidac = AllPagesSEO.validacionesGenericasSEO(driver);
+    		String descripValidac = "Se cumplen las validaciones genéricas de SEO<br>";
+    		if (!resValidac.isOK()) {
+    			descripValidac += resValidac.getlistaLogError().toString() + "<br>";
+    		}
+			validations.add(
+				descripValidac,
+				resValidac.isOK(), flagsVal.stateValidaSEO);
+    	}
+    	
+    	if (flagsVal.validaJS) {
+        	//Nota: No funciona con GeckoDriver porque no están implementados los servicios al no formar parte del protocolo W3C https://github.com/w3c/webdriver/issues/406
+        	if (WebdrvWrapp.getTypeDriver(driver)!=TypeDriver.firefox &&
+        		WebdrvWrapp.getTypeDriver(driver)!=TypeDriver.firefoxhless) {
+        		int maxErrors = 1;
+        		ResultadoErrores resultadoLogs = WebDriverArqUtils.getLogErrors(Level.WARNING, driver, maxErrors, ctx);
+        		String descripValidac = "No hay errores JavaScript<br>";
+        		boolean resultadoOK = resultadoLogs.getResultado() == ResultadoErrores.Resultado.OK;
+                if (!resultadoOK) { 
+                	descripValidac += resultadoLogs.getlistaLogError().toString()  + "<br>";
                 }
+                
+                //Sólo mostraremos warning en caso que alguno no se haya mostrado ya un máximo de veces durante el test
+    			validations.add(
+					descripValidac,
+					resultadoOK || (resultadoLogs.getResultado()==ResultadoErrores.Resultado.MAX_ERRORES), flagsVal.stateValidaJS);
+        	}
+    	}
+    	
+    	if (flagsVal.validaImgBroken) {
+            int maxErrors = 1;
+            ResultadoErrores resultadoImgs = WebDriverMngUtils.imagesBroken(driver, Channel.desktop, maxErrors);
+            boolean resultadoOK = (resultadoImgs.getResultado() == ResultadoErrores.Resultado.OK);
+    		String descripValidac = "No hay ninguna imagen cortada<br>";
+            if (resultadoOK) {
+            	descripValidac+=resultadoImgs.getlistaLogError().toString();
             }
-            if (validaJS) {
-            	//Nota: No funciona con GeckoDriver porque no están implementados los servicios al no formar parte del protocolo W3C https://github.com/w3c/webdriver/issues/406
-            	if (WebdrvWrapp.getTypeDriver(dFTest.driver)!=TypeDriver.firefox &&
-            		WebdrvWrapp.getTypeDriver(dFTest.driver)!=TypeDriver.firefoxhless) {
-	                descripValidac+=
-	                	"2) No hay errores JavaScript<br>";
-	                ResultadoErrores resultadoLogs = WebDriverArqUtils.getLogErrors(Level.WARNING, dFTest.driver, 1/*maxErrors*/, dFTest.ctx);
-	                if (resultadoLogs.getResultado() != ResultadoErrores.Resultado.OK) { //Si hay error lo pintamos en la descripción de la validación
-	                    descripValidac += resultadoLogs.getlistaLogError().toString()  + "<br>";
-	                    if (resultadoLogs.getResultado() != ResultadoErrores.Resultado.MAX_ERRORES) {
-	                    	//Sólo mostraremos warning en caso que alguno no se haya mostrado ya un máximo de veces durante el test
-	                        listVals.add(2, levelAlertJS);
-	                    }
-	                }
-            	}
-            }
-            //3)
-            if (validaImgBroken) {
-                descripValidac+=
-                	"3) No hay ninguna imagen cortada<br>";
-                int maxErrors = 1;
-                ResultadoErrores resultadoImgs = WebDriverMngUtils.imagesBroken(dFTest.driver, Channel.desktop, maxErrors);
-                if (resultadoImgs.getResultado() != ResultadoErrores.Resultado.OK) { //Si hay error lo pintamos en la descripción de la validación
-                    descripValidac += resultadoImgs.getlistaLogError().toString();
-                    if (resultadoImgs.getResultado() != ResultadoErrores.Resultado.MAX_ERRORES) //Sólo mostraremos warning en caso que alguno no se haya mostrado ya un máximo de veces durante el test
-                        listVals.add(3, levelAlertImgBroken);
-                }
-            }
-            //4)
-            descripValidac+=
-            	"4) No hay literales sin traducir (contienen \"???\" o \"#\")";
-            if (AllPages.isCodLiteralSinTraducir(dFTest.driver)) {
-                listVals.add(4, State.Warn);
-            }
-           
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+            
+         	//Sólo mostraremos warning en caso que alguno no se haya mostrado ya un máximo de veces durante el test
+			validations.add(
+				descripValidac,
+				resultadoOK || (resultadoImgs.getResultado()==ResultadoErrores.Resultado.MAX_ERRORES), flagsVal.stateValidaImgBroken);
+    	}
+    	
+    	return validations;
     }
     
-    public static void validatePageWithFooter(Pais pais, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
-        //Validaciones
-        String descripValidac = 
-            "1) No hay SRCs con HTTPs maliciosos<br>" + 
-            "2) Aparece el footer<br>";
-        if (pais!=null)
-            descripValidac+=
-            "3) Aparece el div de contenido asociado al país " + pais.getCodigo_pais();
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (datosStep.getResultSteps() == State.Ok) {
-                ArrayList<String> srcMalicious = AllPages.httpMalicious(dFTest.driver, dFTest.ctx, pais);
-                if (srcMalicious.size() > 0) {
-                    descripValidac += srcMalicious.toString();
-                    listVals.add(1, State.Warn);
-                }
-            }
-            if (!SecFooter.isPresent(app, dFTest.driver)) {
-                listVals.add(2, State.Warn);
-                if (WebdrvWrapp.isElementPresent(dFTest.driver, By.xpath("//footer"))) {
-                    descripValidac += "<br><b>data-cache-id footer</b>: " + dFTest.driver.findElement(By.xpath("//footer")).getAttribute("data-cache-id");
-                    descripValidac += "<br><b>style footer</b>: " + dFTest.driver.findElement(By.xpath("//footer")).getAttribute("style");
-                }
-            }
-            if (pais!=null) {
-                if (!WebdrvWrapp.isElementPresent(dFTest.driver, By.xpath("//div[@class[contains(.,'main-content')] and @data-pais='" + pais.getCodigo_pais() + "']"))) {
-                    listVals.add(3, State.Warn);
-                }
-            }
-    
-            datosStep.setListResultValidations(listVals);
-        } finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation
+    public static ListResultValidation validatePageWithFooter(Pais pais, AppEcom app, WebDriver driver) throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
+		validations.add(
+			"Aparece el footer<br>",
+			SecFooter.isPresent(app, driver), State.Warn);
+		
+		if (pais!=null) {
+			validations.add(
+				"Aparece el div de contenido asociado al país " + pais.getCodigo_pais(),
+				WebdrvWrapp.isElementPresent(driver, By.xpath("//div[@class[contains(.,'main-content')] and @data-pais='" + pais.getCodigo_pais() + "']")), 
+				State.Warn);
+		}
+		return validations;
     }
     
     @Validation (
@@ -131,18 +107,12 @@ public class AllPagesStpV {
         return (AllPages.isPresentMainContent(pais, driver));
     }
 
-    public static void backNagegador(DataFmwkTest dFTest) throws Exception {
-        DatosStep datosStep = new DatosStep       (
-            "Realizamos un <b>back</b> del navegador", 
-            "Se vuelve a la página anterior");
-        try {
-            dFTest.driver.navigate().back();
-            WebdrvWrapp.waitForPageLoaded(dFTest.driver, 10/*segundos*/);
-
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+    @Step (
+    	description="Realizamos un <b>back</b> del navegador", 
+        expected="Se vuelve a la página anterior")
+    public static void backNagegador(WebDriver driver) throws Exception {
+        driver.navigate().back();
+        int maxSecondsWait = 10;
+        WebdrvWrapp.waitForPageLoaded(driver, maxSecondsWait);
     }
-    
-
 }

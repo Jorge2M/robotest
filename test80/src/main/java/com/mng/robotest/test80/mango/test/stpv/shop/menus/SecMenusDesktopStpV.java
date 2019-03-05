@@ -48,6 +48,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPai
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataFichaArt;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.banner.SecBannersStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
@@ -468,7 +469,11 @@ public class SecMenusDesktopStpV {
         //AllPagesStpV.validatePageWithFooter(dCtxSh.pais, dCtxSh.appE, datosStep, dFTest);
         
         //Validaciones estándar. 
-        AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/);
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = true;
+        flagsVal.validaJS = true;
+        flagsVal.validaImgBroken = true;
+        AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
     }
     
     /**
@@ -799,7 +804,11 @@ public class SecMenusDesktopStpV {
        finally { listVals.checkAndStoreValidations(descripValidac); }
        
        //Validaciones estándar. 
-       AllPagesStpV.validacionesEstandar(true/*validaSEO*/, true/*validaJS*/, true/*validaImgBroken*/);
+       StdValidationFlags flagsVal = StdValidationFlags.newOne();
+       flagsVal.validaSEO = true;
+       flagsVal.validaJS = true;
+       flagsVal.validaImgBroken = true;
+       AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
     }    
     
     public static void validationsRebajas(Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
