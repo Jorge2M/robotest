@@ -169,18 +169,17 @@ public class PageResultPagoStpV {
     
     public static DatosStep selectLinkMisComprasAndValidateCompra(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
-        DatosStep datosStep = null;
         PageResultPagoStpV.selectMisCompras(dCtxSh.userRegistered, dFTest.driver);
         DataPedido dataPedido = dCtxPago.getDataPedido();
         if (dCtxSh.userRegistered) {
-            datosStep = PageMisComprasStpV.selectBlock(TypeCompra.Online, true/*ordersExpected*/, dFTest);
-            PageMisComprasStpV.validateIsCompraOnlineVisible(dataPedido.getCodpedido(), dCtxPago.getFTCkout().isChequeRegalo, datosStep, dFTest);
+            PageMisComprasStpV.selectBlock(TypeCompra.Online, true/*ordersExpected*/, dFTest);
+            PageMisComprasStpV.validateIsCompraOnlineVisible(dataPedido.getCodpedido(), dCtxPago.getFTCkout().isChequeRegalo, dFTest.driver);
         }
         else {
-            PageAccesoMisComprasStpV.clickBlock(TypeBlock.NoRegistrado, dFTest);
-            datosStep = PageAccesoMisComprasStpV.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido(), dFTest);
+            PageAccesoMisComprasStpV.clickBlock(TypeBlock.NoRegistrado, dFTest.driver);
+            PageAccesoMisComprasStpV.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido(), dFTest.driver);
         }
         
-        return datosStep;
+        return TestCaseData.getDatosLastStep();
     }
 }

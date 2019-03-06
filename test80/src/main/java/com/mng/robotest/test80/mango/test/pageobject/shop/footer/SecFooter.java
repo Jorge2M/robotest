@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalClubMangoLikes;
 
 
 public class SecFooter extends WebdrvWrapp {
@@ -26,7 +27,6 @@ public class SecFooter extends WebdrvWrapp {
     static List<Channel> channelAll = Arrays.asList(Channel.desktop, Channel.movil_web);    
     
     public static enum FooterLink {
-
     	ayuda(footerShop, channelAll, "//a[@data-ga-label='ayuda' and text()[contains(.,'Ayuda')]]", false), 
     	miscompras(footerShop, channelAll, "//a[@data-ga-label='miscompras']", false), 
     	devoluciones(footerAll, channelAll, "//a[@data-ga-label='devoluciones' and text()[contains(.,'Devoluciones')]]", false), 
@@ -104,7 +104,7 @@ public class SecFooter extends WebdrvWrapp {
     	return (getXPathCapaFooter(app) + footerType.getXPathRelativeCapa());
     }
     
-    public static String getXPathLinkCambioPais(AppEcom app) {
+    private static String getXPathLinkCambioPais(AppEcom app) {
         if (app==AppEcom.outlet)
             return XPathCambioPaisOutlet;
         
@@ -122,6 +122,7 @@ public class SecFooter extends WebdrvWrapp {
     }    
     
     public static void clickLink(FooterLink footerType, WebDriver driver) throws Exception {
+    	ModalClubMangoLikes.closeModalIfVisible(driver);
     	clickAndWaitLoad(driver, By.xpath(footerType.getXPathRelativeCapa()));
     }
     
@@ -168,7 +169,8 @@ public class SecFooter extends WebdrvWrapp {
         return (getNewsLetterMsgText(driver).contains(literal));
     }
 
-	public static void clickFooterSuscripcion(WebDriver driver) {
+	public static void clickFooterSuscripcion(WebDriver driver) throws Exception {
+		ModalClubMangoLikes.closeModalIfVisible(driver);
 		driver.findElement(By.xpath(XPathTextAreaMailSuscripcion)).click();
 	}
 

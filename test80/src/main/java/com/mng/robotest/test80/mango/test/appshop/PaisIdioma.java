@@ -163,7 +163,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
             	Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "pantalones"));
                 SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxShI, dFTest);
                 if (this.recorreBanners) {
-                    PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);
+                    PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);
                 	pageGaleriaStpV.clickBannerSuperiorIfLinkableDesktop();
                 }
             }

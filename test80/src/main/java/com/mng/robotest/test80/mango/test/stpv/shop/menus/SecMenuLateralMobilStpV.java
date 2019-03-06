@@ -2,6 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+
+import org.openqa.selenium.WebDriver;
+
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
@@ -31,27 +35,14 @@ public class SecMenuLateralMobilStpV {
     
     public static SecMenusUserStpV secMenusUser;
     
-    /**
-     * Selección de un menú lateral de 1er nivel con un catálogo de artículos asociado (p.e. vestidos, camisas, etc.)
-     */
-    public static DatosStep selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    @Step (
+    	description="Seleccionar el menú lateral de 1er nivel <b>#{menu1rstLevel}</b>", 
+        expected="Aparece la galería de productos asociada al menú",
+        saveNettraffic=SaveWhen.Always)
+    public static void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep     (
-            "Seleccionar el menú lateral de 1er nivel <b>" + menu1rstLevel + "</b>", 
-            "Aparece la galería de productos asociada al menú");
-        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
-        try {
-            SecMenuLateralMobil.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, dCtxSh.pais, dFTest.driver);
-
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        //Validaciones
-        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, dFTest);
-        
-        return datosStep;
+        SecMenuLateralMobil.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, dCtxSh.pais, driver);
+        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, driver);
     }
     
     /**
@@ -224,7 +215,7 @@ public class SecMenuLateralMobilStpV {
             validaSelecLineaNinosWithSublineas(lineaType, app, datosStep, dFTest);
             break;
         case articulos:
-            PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.movil_web, app, dFTest);
+            PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.movil_web, app);
             pageGaleriaStpV.validaArtEnContenido(datosStep);
             break;
         default:

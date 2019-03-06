@@ -40,7 +40,7 @@ public class SecModalPersonalizacionStpV {
 	}
 
 	public void searchForCustomization(Channel channel, DataFmwkTest dFTest, DataCtxShop dCtxSh) throws Exception {
-		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, dCtxSh.appE, dFTest);
+		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, dCtxSh.appE);
 
 		boolean customizable = false;
 		int maxArticlesToReview = 8;

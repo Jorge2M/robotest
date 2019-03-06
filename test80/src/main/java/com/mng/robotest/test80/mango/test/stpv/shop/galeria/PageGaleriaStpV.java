@@ -75,7 +75,8 @@ public class PageGaleriaStpV {
     	pageGaleria = PageGaleria.getInstance(channel, app, dFTest.driver);
     }
     
-    public static PageGaleriaStpV getInstance(Channel channel, AppEcom app, DataFmwkTest dFTest) throws Exception {
+    public static PageGaleriaStpV getInstance(Channel channel, AppEcom app) throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
         return (new PageGaleriaStpV(channel, app, dFTest));
     }
 

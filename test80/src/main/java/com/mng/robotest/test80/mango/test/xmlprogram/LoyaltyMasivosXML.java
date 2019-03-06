@@ -17,7 +17,6 @@ import org.testng.xml.XmlSuite.ParallelMode;
 import com.mng.robotest.test80.ParamsBean;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 
-
 public class LoyaltyMasivosXML {
 
     /**

@@ -4,8 +4,8 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
@@ -40,6 +40,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu2onLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop.GroupMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecBloquesMenuDesktop;
@@ -70,197 +71,139 @@ public class SecMenusDesktopStpV {
         saveNettraffic=SaveWhen.Always)
     public static void selectMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
-        SecMenusDesktop.
-        	secMenuSuperior.
-        	secBlockMenus.clickMenuAndGetName(menu1rstLevel, dCtxSh.appE, dFTest.driver);
+        SecMenusDesktop
+        	.secMenuSuperior
+        	.secBlockMenus.clickMenuAndGetName(menu1rstLevel, dCtxSh.appE, dFTest.driver);
         
-        //Validaciones
-        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, dFTest);
+        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, dFTest.driver);
     }
     
-    public static DatosStep selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    @Step (
+    	description="Seleccionar el menú lateral de 1er nivel <b>#{menu1rstLevel}</b>", 
+        expected="Aparecen artículos de tipo Camiseta",
+        saveNettraffic=SaveWhen.Always)
+    public static void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionar el menú lateral de 1er nivel <b>" + menu1rstLevel + "</b>", 
-            "Aparecen artículos de tipo Camiseta");
-        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
-        try {
-            SecMenusDesktop.secMenuLateral.clickMenu(menu1rstLevel, dFTest.driver);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }           
-            
-        //Validaciones
-        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, dFTest);
-        
-        return datosStep;
+        SecMenusDesktop.secMenuLateral.clickMenu(menu1rstLevel, driver);         
+        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, driver);
     }
     
-    public static DatosStep selectMenuLateral2oLevel(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    @Step (
+    	description="Seleccionar el menú lateral de 2o nivel <b>#{menu2onLevel}</b>", 
+        expected="Aparecen artículos asociados al menú",
+        saveNettraffic=SaveWhen.Always)
+    public static void selectMenuLateral2oLevel(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        //Step.
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionar el menú lateral de 2o nivel <b>" + menu2onLevel + "</b>", 
-            "Aparecen artículos asociados al menú");
-        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
-        try {
-            SecMenusDesktop.secMenuLateral.clickMenu(menu2onLevel, dFTest.driver);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }           
-            
-        //Validaciones
-        SecMenusWrapperStpV.validaSelecMenu(menu2onLevel, dCtxSh, dFTest);
-        
-        return datosStep;
+        SecMenusDesktop.secMenuLateral.clickMenu(menu2onLevel, driver);        
+        SecMenusWrapperStpV.validaSelecMenu(menu2onLevel, dCtxSh, driver);
     }
     
-
-    public static void validateIsLineaSelected(LineaType lineaType, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) Está seleccionada la línea <b>" + lineaType + "</b>";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!SecMenusDesktop
-            	.secMenuSuperior.secLineas.isLineaSelected(lineaType, app, dFTest.driver)) {
-            	//TODO provisionalmente lo ponemos a Info, cuando pasen las rebajas o cuando se resuelva el tícket https://jira.mangodev.net/jira/browse/GPS-621
-                listVals.add(1, State.Info);
-            }
-                
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
+    @Validation (
+    	description="Está seleccionada la línea <b>#{lineaType}</b>",
+    	//TODO provisionalmente lo ponemos a Info, cuando pasen las rebajas o cuando se resuelva 
+    	//el tícket https://jira.mangodev.net/jira/browse/GPS-621
+    	level=State.Info)
+    public static boolean validateIsLineaSelected(LineaType lineaType, AppEcom app, WebDriver driver) {
+    	return (SecMenusDesktop.secMenuSuperior.secLineas.isLineaSelected(lineaType, app, driver));
     }
     
     /**
      * Validaciones de selección de un menú de 1er nivel (superior o lateral) (las específicas de Desktop)
      */
     public static void validationsSelecMenuEspecificDesktop(MenuLateralDesktop menu, Channel channel, AppEcom app, 
-    														DataFmwkTest dFTest) throws Exception {
-    	DatosStep datosStep = TestCaseData.getDatosLastStep();
-        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, dFTest);
+    														WebDriver driver) throws Exception {
+        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app);
     	pageGaleriaStpV.validateBannerSuperiorIfExistsDesktop();
-        if (menu.isMenuLateral()) {
-            //Validaciones
-            int maxSecondsToWait = 2;
-            String descripValidac = 
-                "1) Aparece seleccionado el menú lateral <b>" + menu.getNombre() + "</b> (lo esperamos hasta " + maxSecondsToWait + "segundos)";
-            datosStep.setNOKstateByDefault();
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-            try {
-                if (!SecMenusDesktop.secMenuLateral.isSelectedMenu(menu, maxSecondsToWait, dFTest.driver)) {
-                    listVals.add(1, State.Warn);
-                }
-                    
-                datosStep.setListResultValidations(listVals);
-            }
-            finally { listVals.checkAndStoreValidations(descripValidac); }
-        }
-        
-        //Validación específica para Menú de 1er nivel
+    	if (menu.isMenuLateral()) {
+    		int maxSecondsWait = 2;
+    		checkIsSelectedLateralMenu(menu, maxSecondsWait, driver);
+    	}
+    	
         if (menu instanceof Menu1rstLevel) {
         	Menu1rstLevel menu1rstLevel = (Menu1rstLevel) menu;
         	List<Menu2onLevel> menus2onLevel = menu1rstLevel.getListMenus2onLevel();
 	        if (menus2onLevel!=null && menus2onLevel.size()>0) {
-	            //Validaciones
-	            String descripValidac = 
-	                "1) Aparecen los submenús de 2o nivel: ";
-	            for (Menu2onLevel menu2oNivelTmp : menus2onLevel)
-	                descripValidac = descripValidac + "<br>" + menu2oNivelTmp.getNombre();
-	
-	            datosStep.setNOKstateByDefault();       
-	            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-	            try {
-	                if (!SecMenusDesktop.secMenuLateral.areVisibleMenus2oNivel(menu1rstLevel, dFTest.driver)) {
-	                    listVals.add(1, State.Warn);
-	                }
-	                    
-	                datosStep.setListResultValidations(listVals);
-	            }
-	            finally { listVals.checkAndStoreValidations(descripValidac); }
-	        }        
-        }
-    
-        //En caso de que tengamos substrings para validar los nombres de los artículos en la galería...
+	        	checkVisibility2onLevelMenus(menus2onLevel, driver);
+	        }
+    	}
+        
         if (menu.isDataForValidateArticleNames()) {
-            //Validaciones 
-            String[] textsArticlesGalery = menu.getTextsArticlesGalery();
-            String descripValidac =  
-                "1) Todos los artículos contienen alguno de los literales: ";
-                for (int i=0; i<textsArticlesGalery.length; i++)
-                    descripValidac =  descripValidac + "<br>" + textsArticlesGalery[i];
- 
-            datosStep.setNOKstateByDefault();
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-            try {
-                PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);
-                ArrayList<String> listTxtArtNoValidos = pageGaleriaDesktop.nombreArticuloNoValido(textsArticlesGalery);
-                if (listTxtArtNoValidos.size() > 0) {
-                    descripValidac+="<br>" + "<b>Warning!</b> Hay Algún artículo extraño, p.e.:";
-                    for (String txtArtNoValido : listTxtArtNoValidos) {
-                        descripValidac+=("<br>" + txtArtNoValido);
-                    }
-                    
-                    listVals.add(1, State.Warn);
-                }                
-            
-                datosStep.setListResultValidations(listVals);
-            }
-            finally { listVals.checkAndStoreValidations(descripValidac); }
+        	String[] textsArticlesGalery = menu.getTextsArticlesGalery();
+        	checkArticlesContainsLiterals(textsArticlesGalery, app, driver);
         }
         
-        //Validaciones. Aparece el selector de precios
-        PageGaleriaStpV.secSelectorPrecios.validaIsSelector(dFTest.driver);
-        
-        //Obtenemos la línea a la que debería redirigir el menú
+        PageGaleriaStpV.secSelectorPrecios.validaIsSelector(driver);
         LineaType lineaResult = SecMenusWrap.getLineaResultAfterClickMenu(menu.getLinea(), menu.getNombre());
-        
-        //La línea actual es la correcta según el menú seleccionado
-        validateIsLineaSelected(lineaResult, app, datosStep, dFTest);        
+        validateIsLineaSelected(lineaResult, app, driver);    
+    }
+    
+    @Validation (
+    	description="Aparece seleccionado el menú lateral <b>#{menu.getNombre()}</b> (lo esperamos hasta #{maxSecondsWait} segundos)",
+    	level=State.Warn)
+    private static boolean checkIsSelectedLateralMenu(MenuLateralDesktop menu, int maxSecondsWait, WebDriver driver) {
+        return (SecMenusDesktop.secMenuLateral.isSelectedMenu(menu, maxSecondsWait, driver));
+    }
+      
+    @Validation
+    private static ListResultValidation checkVisibility2onLevelMenus(List<Menu2onLevel> menus2onLevel, WebDriver driver) 
+    throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
+        for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
+	    	validations.add(
+	    		"Aparecen el menú de 2o nivel <b>" + menu2oNivelTmp.getNombre() + "</b>",
+	    		SecMenusDesktop.secMenuLateral.isVisibleMenu(driver, menu2oNivelTmp), State.Warn);
+        }
+        return validations;
+    }
+    
+    @Validation
+    private static ListResultValidation checkArticlesContainsLiterals(String[] textsArticlesGalery, AppEcom app, WebDriver driver) 
+    throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	
+    	String litsToContain = "";
+        for (int i=0; i<textsArticlesGalery.length; i++) {
+        	litsToContain+= "<br>" + textsArticlesGalery[i];
+        }
+        PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, driver);
+        ArrayList<String> listTxtArtNoValidos = pageGaleriaDesktop.nombreArticuloNoValido(textsArticlesGalery);
+        String articlesWrongWarning = "";
+        if (listTxtArtNoValidos.size() > 0) {
+        	articlesWrongWarning+="<br>" + "<b>Warning!</b> Hay Algún artículo extraño, p.e.:";
+	        for (String txtArtNoValido : listTxtArtNoValidos) {
+	        	articlesWrongWarning+=("<br>" + txtArtNoValido);
+	        }
+        }
+	 	validations.add(
+			"Todos los artículos contienen alguno de los literales: " + litsToContain + articlesWrongWarning,
+			listTxtArtNoValidos.size()==0, State.Defect);
+    
+    	return validations;
     }
     
     /**
      * Función que ejecuta el paso/validaciones correspondiente a la selección de una entrada el menú superior de Desktop
      */
-    public static DatosStep stepEntradaMenuDesktop(Menu1rstLevel menu1rstLevel, String paginaLinea, Channel channel, 
-    											   AppEcom app, DataFmwkTest dFTest) throws Exception {
-        String tagMenu = "[UnknownText]";
+    final static String tagMenu = "@TagMenu";
+    @Step (
+    	description="Selección del menú <b>" + tagMenu + "</b> (data-ga-label=#{menu1rstLevel.getDataGaLabelMenuSuperiorDesktop()})", 
+        expected="El menú se ejecuta correctamente",
+        saveNettraffic=SaveWhen.Always)
+    public static void stepEntradaMenuDesktop(Menu1rstLevel menu1rstLevel, String paginaLinea, Channel channel, 
+    										  AppEcom app, WebDriver driver) throws Exception {
+        //Si en la pantalla no existen los menús volvemos a la página inicial de la línea
         LineaType lineaMenu = menu1rstLevel.getLinea();
+    	if (!SecMenusDesktop.secMenuSuperior.secLineas.isLineaVisible(lineaMenu, app, driver)) {
+            driver.get(paginaLinea);
+    	}
+        SecMenusDesktop.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel, app, driver);
+        TestCaseData.getDatosCurrentStep().replaceInDescription(tagMenu, menu1rstLevel.getNombre());
+        ModalCambioPais.closeModalIfVisible(driver);
         
-        //Step
-        DatosStep datosStep = new DatosStep     (
-        	"Selección del menú <b>" + tagMenu + "</b> (data-ga-label=" + menu1rstLevel.getDataGaLabelMenuSuperiorDesktop() + ")", 
-            "El menú se ejecuta correctamente");
-        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
-        try {
-            //Si en la pantalla no existen los menús volvemos a la página inicial de la línea
-        	if (!SecMenusDesktop.secMenuSuperior.secLineas.isLineaVisible(lineaMenu, app, dFTest.driver))
-                dFTest.driver.get(paginaLinea);
-            
-            SecMenusDesktop.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel, app, dFTest.driver);
-            datosStep.setDescripcion(datosStep.getDescripcion().replace(tagMenu, menu1rstLevel.getNombre()));
-            ModalCambioPais.closeModalIfVisible(dFTest.driver);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        //Validaciones
-        validaPaginaResultMenu(menu1rstLevel, channel, app, datosStep, dFTest);
-        
-        //Obtenemos la línea a la que debería redirigir el menú
+        validaPaginaResultMenu(menu1rstLevel, channel, app, driver);
         LineaType lineaResult = SecMenusWrap.getLineaResultAfterClickMenu(lineaMenu, menu1rstLevel.getNombre());
-        
-        //La línea actual es la correcta según el menú seleccionado
-        SecMenusDesktopStpV.validateIsLineaSelected(lineaResult, app, datosStep, dFTest);
-        
-        //VALIDACIONES - PARA ANALYTICS (sólo para firefox y NetAnalysis)
-        PasosGenAnalitica.validaHTTPAnalytics(app, lineaMenu, dFTest.driver);
-        
-        return datosStep;
+        SecMenusDesktopStpV.validateIsLineaSelected(lineaResult, app, driver);
+        PasosGenAnalitica.validaHTTPAnalytics(app, lineaMenu, driver);
     }
     
     /**
@@ -438,7 +381,7 @@ public class SecMenusDesktopStpV {
     	SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh, dFTest);
         if (sublineaType==null) {
         	secCabeceraStpV.validaLogoDesktop(1, lineaType);
-            validateIsLineaSelected(lineaType, dCtxSh.appE, datosStep, dFTest);
+            validateIsLineaSelected(lineaType, dCtxSh.appE, dFTest.driver);
         }
 
         secCabeceraStpV.validateIconoBolsa();
@@ -451,7 +394,7 @@ public class SecMenusDesktopStpV {
             
         switch (linea.getContentDeskType()) {
         case articulos:
-        	PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.desktop, dCtxSh.appE, dFTest);
+        	PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.desktop, dCtxSh.appE);
             pageGaleriaStpV.validaArtEnContenido(datosStep);
             break;
         case banners:
@@ -615,7 +558,7 @@ public class SecMenusDesktopStpV {
 
         //Validaciones
     	Menu1rstLevel menu1erNivel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.he, null, "zapatos"));
-        validationsSelecMenuEspecificDesktop(menu1erNivel, channel, app, dFTest);
+        validationsSelecMenuEspecificDesktop(menu1erNivel, channel, app, dFTest.driver);
         
         return datosStep;
     }
@@ -654,167 +597,91 @@ public class SecMenusDesktopStpV {
         return datosStep;
     }
     
-    public static void validaPaginaResultMenu(MenuLateralDesktop menu, Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
+    public static void validaPaginaResultMenu(MenuLateralDesktop menu, Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-        String validacion1 = "";
-        String validacion2_2 = "";
-        boolean containsArt = false;
-        boolean containsBan = false;
-        boolean validac2_2 = false;
-        boolean containsArtsObannersOmaps = false;
-        String datagalabel_MenuSuperior = menu.getDataGaLabelMenuSuperiorDesktop();
-
-        //En función de la columna determinamos si la página resultante ha de contener banners o artículos
-        if (datagalabel_MenuSuperior.contains("nuevo")) {
-            containsArt = true;
-            validacion1 = "1) Menú perteneciente a la columna con id \"nuevo\" -> aparecen artículos";
-        }
-        else {
-            if (datagalabel_MenuSuperior.contains("prendas-")) {
-                validac2_2 = true;
-                containsArt = true;
-                validacion1 = "1) Menú perteneciente a la columna con id \"prendas\" -> aparecen artículos";
-            }
-            else  {
-                if (datagalabel_MenuSuperior.contains("accesorios-")) {
-                    validac2_2 = true;
-                    containsArt = true;
-                    validacion1 = "1) Menú perteneciente a la columna con id \"accesorios\" -> aparecen artículos";
-                }
-                else {
-                    if (datagalabel_MenuSuperior.contains("recien_nacido")) {
-                        validac2_2 = true;
-                        containsArt = true;
-                        validacion1 = "1) Menú perteneciente a la columna con id \"recien nacido\" -> aparecen artículos";
-                    }
-                    else {
-                        if (datagalabel_MenuSuperior.contains("bebe_nina")) {
-                            validac2_2 = true;
-                            containsArt = true;
-                            validacion1 = "1) Menú perteneciente a la columna con id \"bebe nina\" -> aparecen artículos";
-                        }
-                        else {
-                            if (datagalabel_MenuSuperior.contains("bebe_nino")) {
-                                validac2_2 = true;
-                                containsArt = true;
-                                validacion1 = "1) Menú perteneciente a la columna con id \"bebe nino\" -> aparecen artículos";
-                            }
-                            else {
-                                if (datagalabel_MenuSuperior.contains("colecciones-")) {
-                                    validac2_2 = true;
-                                    containsArt = true;
-                                    validacion1 = "1) Menú perteneciente a la columna con id \"colecciones\" -> aparecen artículos";
-                                }
-                                else {
-                                    if (datagalabel_MenuSuperior.contains("extras-")) {
-                                        containsBan = true;
-                                        validacion1 = "1) Menú perteneciente a la columna con id \"extras\" -> aparecen campañas";
-                                    }
-                                    else {
-                                        containsArtsObannersOmaps = true;
-                                        validacion1 = "1) Menú perteneciente a columna con id desconocido (\"" + datagalabel_MenuSuperior + "\") -> aparecen artículos, campañas, sliders, maps, iframes";
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        if (validac2_2)
-            validacion2_2 = "<br>2) El title de la página es el asociado al menú<b>" + menu.getNombre() + "</b>";
+    	checkResultDependingMenuGroup(menu, app, driver);
+    	checkErrorPageWithoutException(driver);
+    	GroupMenu groupMenu = menu.getGroup();
+    	if (groupMenu.containsArticles()) {
+            validationsRebajas(channel, app, driver);
+    	}
+    	
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = true;
+        flagsVal.validaJS = true;
+        flagsVal.validaImgBroken = true;
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+    }
     
-        PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);
-        String descripValidac = validacion1;
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!containsArtsObannersOmaps) {
-                if (containsArt && 
-                    !pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, 3/*seconds*/) ||
-                    (containsBan && 
-                    !ManagerBannersScreen.existBanners(dFTest.driver))) {
-                    listVals.add(1, State.Warn);
-                }
+    @Validation
+    private static ListResultValidation checkResultDependingMenuGroup(MenuLateralDesktop menu, AppEcom app, WebDriver driver) 
+    throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	GroupMenu groupMenu = menu.getGroup();
+    	if (groupMenu.containsArticles()) {
+    		PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
+    		int maxSecondsWait = 3;
+    	 	validations.add(
+    			"Aparecen artículos (es un menú perteneciente al grupo <b>" + groupMenu + ")</b><br>",
+    			pageGaleria.isVisibleArticleUntil(1, maxSecondsWait), State.Warn);
+            
+    	 	String guiones = "--";
+    	 	validations.add(
+    			"No hay artículos con \"" + guiones + "\"<br>",
+    			!((PageGaleriaDesktop)pageGaleria).isArticuloWithStringInName(guiones), State.Warn);
+    	}
+    	
+    	if (groupMenu.isTitleEquivalentToMenuName()) {
+    		//TODO modificación temporal para no grabar la imagen en caso de Baby. Hasta que se corrija (http://ci.mangodev.net/redmine/issues/50111)
+    		State stateVal = State.Warn;
+            if (groupMenu==GroupMenu.BebeNina || groupMenu==GroupMenu.BebeNino) {
+            	stateVal = State.Info_NoHardcopy;
             }
-            else {
-                if (!pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, 3/*seconds*/) &&
-                    !PageLanding.hayIframes(dFTest.driver) &&
-                    !PageLanding.hayMaps(dFTest.driver) &&
-                    !PageLanding.haySliders(dFTest.driver) &&
-                    !ManagerBannersScreen.existBanners(dFTest.driver)) {
-                    listVals.add(1, State.Warn);
-                }
-            }
-                
-            datosStep.setListResultValidations(listVals);
-       }
-       finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-       if (containsArt) {
-           String guiones = "--";
-           descripValidac = 
-               "1) No hay artículos con \"" + guiones + "\""; 
-           datosStep.setNOKstateByDefault();
-           listVals = ListResultValidation.getNew(datosStep);
-           try {
-               if (((PageGaleriaDesktop)pageGaleria).isArticuloWithStringInName(guiones)) {
-                   listVals.add(1, State.Warn);
-               }
-
-               datosStep.setListResultValidations(listVals);
-           } 
-           finally { listVals.checkAndStoreValidations(descripValidac); }
-
-           //Validaciones relacionadas con Rebajas
-           validationsRebajas(channel, app, datosStep, dFTest);
-       }
-       
-       descripValidac = 
-           "1) El errorPage.faces no devuelve una excepción" +
-           validacion2_2;
-       datosStep.setNOKstateByDefault();
-       listVals = ListResultValidation.getNew(datosStep);
-       try {
-           stackTrace exception = WebDriverMngUtils.stackTaceException(dFTest.driver, dFTest.ctx);
-           if (exception.getRepetida()) {
-               descripValidac+="<br><b>Warning!</b>Se ha detectado una excepción detectada previamente (" + exception.getNumExcepciones() + ")";
-           }
-           else {
-               if (exception.getExiste()) {
-                   listVals.add(1, State.Warn);
-               }
-           }                     
-           if (validac2_2) {
-               if (!AllPages.isTitleAssociatedToMenu(menu.getNombre(), dFTest.driver)) {
-                   //TODO modificación temporal para no grabar la imagen en caso de Baby. Hasta que se corrija (http://ci.mangodev.net/redmine/issues/50111)
-            	   String datagalabel_Menu = menu.getDataGaLabelMenuLateralDesktop();
-                   if (datagalabel_Menu.contains("bebe")) {
-                       listVals.add(2, State.Info_NoHardcopy);
-                   }
-                   else {
-                       listVals.add(2, State.Warn);
-                   }
-               }
-           }
-        
-           datosStep.setListResultValidations(listVals);
-       }
-       finally { listVals.checkAndStoreValidations(descripValidac); }
-       
-       //Validaciones estándar. 
-       StdValidationFlags flagsVal = StdValidationFlags.newOne();
-       flagsVal.validaSEO = true;
-       flagsVal.validaJS = true;
-       flagsVal.validaImgBroken = true;
-       AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
+    	 	validations.add(
+    			"El title de la página es el asociado al menú<b>" + menu.getNombre() + "</b><br>",
+    			AllPages.isTitleAssociatedToMenu(menu.getNombre(), driver), stateVal);
+    	}
+    	
+    	if (groupMenu.containsOnlyCampaigns()) {
+    	 	validations.add(
+    			"Aparecen campañas (es un menú perteneciente al grupo " + groupMenu + ")<br>",
+    			ManagerBannersScreen.existBanners(driver), State.Warn);
+    	}
+    	
+    	if (groupMenu==GroupMenu.Desconocido) {
+    		int maxSecondsWait = 3;
+    		PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
+    	 	validations.add(
+    			"Aparecen artículos, campañas, sliders, maps, iframes (es un menú perteneciente al grupo " + groupMenu + ")<br>",
+    		pageGaleria.isVisibleArticleUntil(1, maxSecondsWait) ||
+            PageLanding.hayIframes(driver) ||
+            PageLanding.hayMaps(driver) ||
+            PageLanding.haySliders(driver) ||
+            ManagerBannersScreen.existBanners(driver), State.Warn);
+    	}
+    	
+	 	return validations;
     }    
     
-    public static void validationsRebajas(Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
+    public static ListResultValidation checkErrorPageWithoutException(WebDriver driver) throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
+		ITestContext ctx = TestCaseData.getdFTest().ctx;
+	    stackTrace exception = WebDriverMngUtils.stackTaceException(driver, ctx);
+	    String excepcionDuplicada = "";
+	    if (exception.getRepetida()) {
+	    	excepcionDuplicada+="<br><b>Warning!</b>Se ha detectado una excepción detectada previamente (" + exception.getNumExcepciones() + ")<br>";
+	    }
+	 	validations.add(
+			"El errorPage.faces no devuelve una excepción" + excepcionDuplicada,
+			!exception.getExiste(), State.Warn);
+	 	return validations;
+    }
+    
+    public static void validationsRebajas(Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
         //Validación especialmente útil en periodo de Rebajas
-    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(channel, app, dFTest.driver);
+    	DatosStep datosStep = TestCaseData.getDatosLastStep();
+    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(channel, app, driver);
     	List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
     	List<Integer> tempSales = FilterCollection.sale.getListTempArticles();
         String descripValidac = 

@@ -1,10 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
@@ -20,7 +18,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalDetalleMi
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStpV;
-
 
 public class PageMisComprasStpV {
 
@@ -148,23 +145,17 @@ public class PageMisComprasStpV {
         return datosStep;
     }
     
-    public static void validateIsCompraOnlineVisible(String codPedido, boolean isChequeRegalo, DatosStep datosStep, DataFmwkTest dFTest) {
-        //Validaciones
-        String descripValidac = 
-            "1) Es visible la compra " + TypeCompra.Online + " asociada al pedido <b>" + codPedido + "</b>";
-        datosStep.setNOKstateByDefault();       
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageMisCompras.isVisibleCompraOnline(codPedido, dFTest.driver)) {
-                if (isChequeRegalo)
-                    listVals.add(1, State.Info_NoHardcopy);
-                else
-                    listVals.add(1, State.Warn);
-            }
-        
-            datosStep.setListResultValidations(listVals);
+    @Validation
+    public static ListResultValidation validateIsCompraOnlineVisible(String codPedido, boolean isChequeRegalo, WebDriver driver) {
+        ListResultValidation validations = ListResultValidation.getNew();
+        State stateVal = State.Warn;
+        if (isChequeRegalo) {
+            stateVal = State.Info_NoHardcopy;
         }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+        validations.add(
+        	"Es visible la compra " + TypeCompra.Online + " asociada al pedido <b>" + codPedido + "</b>",
+        	PageMisCompras.isVisibleCompraOnline(codPedido, driver), stateVal);
+        return validations;
     }
     
     public static PageDetallePedidoStpV selectCompraOnline(int posInLista, String codPais, Channel channel, DataFmwkTest dFTest) throws Exception {

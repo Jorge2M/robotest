@@ -108,7 +108,7 @@ public class GaleriaProducto extends GestorWebDriver {
         SecFiltrosStpV.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, true/*validaciones*/, "Camisas", colorsToFilter, dFTest.driver);
 
         //Pruebas a nivel del cambio de galería de 2<->4 columnas
-        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);
+        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);
         if (dCtxSh.channel==Channel.desktop && dCtxSh.appE!=AppEcom.outlet) {
         	PageGaleriaDesktop pageGaleria = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, dCtxSh.appE, dFTest.driver);
             NombreYRefList listArticlesGaleria2Cols = pageGaleria.getListaNombreYRefArticulos();
@@ -157,7 +157,7 @@ public class GaleriaProducto extends GestorWebDriver {
         SecFiltrosStpV.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, false/*validaciones*/, "Camisas", colorsToFilter, dFTest.driver);
             
         //Scrollar hasta la 3a página
-        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);
+        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);
         DataForScrollStep dataScroll = new DataForScrollStep();
         dataScroll.numPageToScroll = 3;
         dataScroll.ordenacionExpected = FilterOrdenacion.NOordenado;
@@ -194,7 +194,7 @@ public class GaleriaProducto extends GestorWebDriver {
         dCtxSh.userRegistered = true;
     
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
-        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);
+        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
         if (dCtxSh.appE==AppEcom.outlet)
             SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest);
@@ -214,9 +214,9 @@ public class GaleriaProducto extends GestorWebDriver {
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
         SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh, dFTest);
         
-        SecMenusWrapperStpV.selectMenuLateral1erLevelTypeCatalog(menuCamisas, dCtxSh, dFTest);
+        SecMenusWrapperStpV.selectMenuLateral1erLevelTypeCatalog(menuCamisas, dCtxSh, dFTest.driver);
         Menu2onLevel menuCamisasTops = MenuTreeApp.getMenuLevel2From(menuCamisas, "tops");
-        SecMenusDesktopStpV.selectMenuLateral2oLevel(menuCamisasTops, dCtxSh, dFTest);
+        SecMenusDesktopStpV.selectMenuLateral2oLevel(menuCamisasTops, dCtxSh, dFTest.driver);
     }
     
     @Test (
@@ -233,7 +233,7 @@ public class GaleriaProducto extends GestorWebDriver {
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
         SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest);
                 
-        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);
+        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);
         ArrayList<TypeSlider> typeSliderList = new ArrayList<>();
         typeSliderList.add(TypeSlider.next);
         String src2onImage = pageGaleriaStpV.clicksSliderArticuloConColores(1/*numArtConColores*/, typeSliderList);

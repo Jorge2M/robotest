@@ -1,111 +1,71 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras.TypeBlock;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStpV;
 
-
 public class PageAccesoMisComprasStpV {
-    
-    public static void validateIsPage(WebDriver driver) {
-    	DatosStep datosStep = TestCaseData.getDatosLastStep();
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        //Validaciones.
-        String descripValidac = 
-            "1) Aparece la página de \"Acceso a Mis Compras\"<br>" +
-            "2) Aparecen el bloque \"Ya estoy registrado\"<br>" +
-            "3) Aparece el bloque de \"No estoy registrado\"";
-        datosStep.setNOKstateByDefault();      
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageAccesoMisCompras.isPage(dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            if (!PageAccesoMisCompras.isPresentBlock(TypeBlock.SiRegistrado, dFTest.driver)) {
-                listVals.add(2, State.Warn);
-            }
-            if (!PageAccesoMisCompras.isPresentBlock(TypeBlock.NoRegistrado, dFTest.driver)) {
-                listVals.add(3, State.Warn);
-            }
-        
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+
+	@Validation
+    public static ListResultValidation validateIsPage(WebDriver driver) {
+        ListResultValidation validations = ListResultValidation.getNew();
+        validations.add(
+        	"Aparece la página de \"Acceso a Mis Compras\"<br>",
+        	PageAccesoMisCompras.isPage(driver), State.Warn);
+        validations.add(
+        	"Aparecen el bloque \"Ya estoy registrado\"<br>",
+        	PageAccesoMisCompras.isPresentBlock(TypeBlock.SiRegistrado, driver), State.Warn);
+        validations.add(
+        	"Aparece el bloque de \"No estoy registrado\"",
+        	PageAccesoMisCompras.isPresentBlock(TypeBlock.NoRegistrado, driver), State.Warn);
+        return validations;
     }
     
-    public static void clickBlock(TypeBlock typeBlock, DataFmwkTest dFTest) {
-        //Step.
-        DatosStep datosStep = new DatosStep     (
-            "Seleccionar el bloque \"" + typeBlock + "\"", 
-            "Se hace visible el bloque de " + typeBlock);
-        try {
-            PageAccesoMisCompras.clickBlock(typeBlock, dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }        
-        
-        //Validation
-        int maxSecondsToWait = 1;
-        String descripValidac = 
-            "1) Se hace visible el bloque de \"" + typeBlock + "\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setNOKstateByDefault();      
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageAccesoMisCompras.isVisibleBlockUntil(typeBlock, maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
+	@Step (
+		description="Seleccionar el bloque \"#{typeBlock}\"", 
+        expected="Se hace visible el bloque de #{typeBlock}")
+    public static void clickBlock(TypeBlock typeBlock, WebDriver driver) {
+        PageAccesoMisCompras.clickBlock(typeBlock, driver);
+        int maxSecondsWait = 1;
+        checkIsVisibleBlock(typeBlock, maxSecondsWait, driver);
+     
+    }
+	
+	@Validation (
+		description="Se hace visible el bloque de \"#{typeBlock}\" (lo esperamos hasta #{maxSecondsWait} segundos)",
+		level=State.Warn)
+	private static boolean checkIsVisibleBlock(TypeBlock typeBlock, int maxSecondsWait, WebDriver driver) {
+	    return (PageAccesoMisCompras.isVisibleBlockUntil(typeBlock, maxSecondsWait, driver));
+	}
+    
+	@Step (
+		description="En el bloque de \"Si Registrado\", introducir el usuario/password (#{usuario}/#{password}) y pulsar \"Entrar\"", 
+        expected="Aparece la página de \"Mis compras\"")
+    public static void enterForSiRegistrado(String usuario, String password, WebDriver driver) throws Exception {
+        PageAccesoMisCompras.inputUserPasswordBlockSi(usuario, password, driver); 
+        PageAccesoMisCompras.clickEntrarBlockSi(driver);   
+        PageMisComprasStpV.validateIsPage(driver);
     }
     
-    public static DatosStep enterForSiRegistrado(String usuario, String password, DataFmwkTest dFTest) throws Exception {
-        //Step.
-        DatosStep datosStep = new DatosStep     (
-            "En el bloque de \"Si Registrado\", introducir el usuario/password (" + usuario + "/" + password + ") y pulsar \"Entrar\"", 
-            "Aparece la página de \"Mis compras\"");
-        try {
-            PageAccesoMisCompras.inputUserPasswordBlockSi(usuario, password, dFTest.driver); 
-            PageAccesoMisCompras.clickEntrarBlockSi(dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }        
-        
-        //Validation
-        PageMisComprasStpV.validateIsPage(dFTest.driver);
-        
-        return datosStep;
-    }
-    
-    public static DatosStep buscarPedidoForNoRegistrado(DataPedido dataPedido, DataFmwkTest dFTest) throws Exception {
-        //Step.
+	final static String tagUsuario = "@TagUsuario";
+	@Step (
+		description="En el bloque de \"No Registrado\", introducir el usuario/núm pedido (" + tagUsuario + "/#{dataPedido.getCodpedido()}) y pulsar \"Buscar pedido\"", 
+        expected="Aparece la página de detalle del pedido")
+    public static void buscarPedidoForNoRegistrado(DataPedido dataPedido, WebDriver driver) throws Exception {
         String usuario = dataPedido.getEmailCheckout();
-        DatosStep datosStep = new DatosStep     (
-            "En el bloque de \"No Registrado\", introducir el usuario/núm pedido (" + usuario + "/" + dataPedido.getCodpedido() + ") y pulsar \"Buscar pedido\"", 
-            "Aparece la página de detalle del pedido");
-        try {
-            PageAccesoMisCompras.inputUserAndNumPedidoBlockNo(usuario, dataPedido.getCodpedido(), dFTest.driver); 
-            PageAccesoMisCompras.clickBuscarPedidoBlockNo(dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }        
+        TestCaseData.getDatosCurrentStep().replaceInDescription(tagUsuario, usuario);
         
-        //Validation
-        PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(dFTest.driver);
-        pageDetPedidoStpV.validateIsPageOk(dataPedido, dFTest.driver);
+        PageAccesoMisCompras.inputUserAndNumPedidoBlockNo(usuario, dataPedido.getCodpedido(), driver); 
+        PageAccesoMisCompras.clickBuscarPedidoBlockNo(driver); 
         
-        return datosStep;        
+        PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(driver);
+        pageDetPedidoStpV.validateIsPageOk(dataPedido, driver);      
     }
 }

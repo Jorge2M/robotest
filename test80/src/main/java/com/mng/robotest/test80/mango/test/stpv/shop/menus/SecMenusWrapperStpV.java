@@ -113,10 +113,12 @@ public class SecMenusWrapperStpV {
             	//Creamos un menú con el nombre=dataGaLabel (pues todavía no lo conocemos)
             	Menu1rstLevel menu1rstLevel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(lineaType, sublineaType, listMenusLabel.get(i)));
             	menu1rstLevel.setDataGaLabel(listMenusLabel.get(i));
-                if (channel==Channel.movil_web)
+                if (channel==Channel.movil_web) {
                     SecMenuLateralMobilStpV.stepClickMenu1rstLevel(menu1rstLevel, pais, app, dFTest);
-                else
-                    SecMenusDesktopStpV.stepEntradaMenuDesktop(menu1rstLevel, paginaLinea, channel, app, dFTest);
+                }
+                else {
+                    SecMenusDesktopStpV.stepEntradaMenuDesktop(menu1rstLevel, paginaLinea, channel, app, dFTest.driver);
+                }
             }
             catch (Exception e) {
                 //En caso de excepción no queremos que el caso de prueba pare
@@ -174,29 +176,31 @@ public class SecMenusWrapperStpV {
     public static void selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
-            SecMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, dFTest);
+            SecMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, dFTest.driver);
         }
         else {	
         	SecMenusDesktopStpV.selectMenuSuperiorTypeCatalog(menu1rstLevel, dCtxSh, dFTest);
         }
     }
     
-    public static DatosStep selectMenuLateral1erLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static void selectMenuLateral1erLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        if (dCtxSh.channel==Channel.movil_web)
-            return SecMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, dFTest); 
-        
-        return SecMenusDesktopStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, dFTest);        
+        if (dCtxSh.channel==Channel.movil_web) {
+            SecMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, driver); 
+        }
+        else {
+        	SecMenusDesktopStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, driver);        
+        }
     }
     
     /**
      * Validación de la selección de un menú lateral de 1er o 2o nivel 
      */
-	public static void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh, DataFmwkTest dFTest)
+	public static void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh, WebDriver driver)
     throws Exception {
-		validateGaleriaAfeterSelectMenu(dCtxSh, dFTest.driver);
+		validateGaleriaAfeterSelectMenu(dCtxSh, driver);
         if (dCtxSh.channel==Channel.desktop) {
-            SecMenusDesktopStpV.validationsSelecMenuEspecificDesktop(menu, dCtxSh.channel, dCtxSh.appE, dFTest);
+            SecMenusDesktopStpV.validationsSelecMenuEspecificDesktop(menu, dCtxSh.channel, dCtxSh.appE, driver);
         }
        
         //Validaciones estándar. 
@@ -204,7 +208,7 @@ public class SecMenusWrapperStpV {
         flagsVal.validaSEO = true;
         flagsVal.validaJS = true;
         flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
         
         //Por defecto aplicaremos todas las avalidaciones (Google Analytics, Criteo, NetTraffic y DataLayer)
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(Constantes.AnalyticsVal.GoogleAnalytics,
@@ -212,7 +216,7 @@ public class SecMenusWrapperStpV {
                                                                   Constantes.AnalyticsVal.Criteo,
                                                                   Constantes.AnalyticsVal.DataLayer);
         
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, menu.getLinea(), analyticSet, dFTest.driver);
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, menu.getLinea(), analyticSet, driver);
     }
     
 	@Validation
@@ -293,7 +297,7 @@ public class SecMenusWrapperStpV {
             
         //Validaciones
         if (channel==Channel.desktop) {
-	        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, dFTest);
+	        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app);
 	        if (typeMenu == FilterCollection.sale) {
 	            pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles(), datosStep);
 	            pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.norebajado, State.Warn);

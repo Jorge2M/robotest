@@ -4,8 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu2onLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop;
 
 public class SecMenuLateralDesktop extends WebdrvWrapp {
@@ -41,16 +39,4 @@ public class SecMenuLateralDesktop extends WebdrvWrapp {
         String xpathMenu = getXPathLinkMenu(menu);
         return (isElementVisible(driver, By.xpath(xpathMenu)));
     }    
-
-    /**
-     * @return si son visibles una lista de menús de 2o nivel asociados a uno concreto de 1er nivel
-     */
-    public static boolean areVisibleMenus2oNivel(Menu1rstLevel menu1rstLevel, WebDriver driver) throws Exception {
-        for (Menu2onLevel menu2oNivelTmp : menu1rstLevel.getListMenus2onLevel()) {
-            if (!isVisibleMenu(driver, menu2oNivelTmp)) 
-            	return false;
-        }
-        
-        return true;
-    }
 }

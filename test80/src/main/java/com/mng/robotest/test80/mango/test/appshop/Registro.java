@@ -122,13 +122,11 @@ public class Registro extends GestorWebDriver {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         dCtxSh.userRegistered = false;
-        if (dCtxSh.appE==AppEcom.votf)
+        if (dCtxSh.appE==AppEcom.votf) {
             return;
+        }
             
-        //Step. Acceso a Shop/Outlet/VOTF
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
-            
-        //Seleccionamos el menú superior "Registrate"
         SecMenusWrapperStpV.secMenuUser.selectRegistrate(dCtxSh.channel, dCtxSh, dFTest);
         
         //Step. Click inicial a Registrate (sin haber introducido ningún dato) -> Aparecerán los correspondientes mensajes de error

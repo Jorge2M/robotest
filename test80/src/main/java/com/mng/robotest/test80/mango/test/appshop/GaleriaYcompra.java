@@ -91,8 +91,10 @@ public class GaleriaYcompra extends GestorWebDriver {
         //dCtxSh.userConnected = "TESTCOMPRA22@GMAIL.COM";
         //dCtxSh.userConnected="QAEV70000900000@MANGO.COM";
         //dCtxSh.passwordUser = "mango123";
-        dCtxSh.userConnected="test.performance01@MANGO.COM";
-        dCtxSh.passwordUser = "Mango123";
+        //dCtxSh.userConnected="test.performance01@MANGO.COM";
+        //dCtxSh.passwordUser = "Mango123";
+        dCtxSh.userConnected="mng_test_2019-03-06101748.347@mango.com";
+        dCtxSh.passwordUser = "sirjorge74";
         dCtxSh.userRegistered=true;
         
         boolean clearArticulos = true;
@@ -105,7 +107,7 @@ public class GaleriaYcompra extends GestorWebDriver {
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
         SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest);
         
-        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest);
+        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);
         LocationArticle loc1rsArticle1rstPage = LocationArticle.getInstanceInPage(2, 1);
         pageGaleriaStpV.selectArticuloEnPestanyaAndBack(loc1rsArticle1rstPage);
     }

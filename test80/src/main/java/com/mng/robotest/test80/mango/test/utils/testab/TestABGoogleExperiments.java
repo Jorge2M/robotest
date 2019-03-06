@@ -1,6 +1,8 @@
 package com.mng.robotest.test80.mango.test.utils.testab;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.openqa.selenium.Cookie;
@@ -44,11 +46,28 @@ public class TestABGoogleExperiments implements TestAB {
 	@Override
 	public void activateTestAB(WebDriver driver) throws Exception {
 		String valueCookieRemovingTestAB = getValueCookieResetingAllTestABvariants(driver);
-        String testABvalueForVariant = testAB.getValueCookie(app) + "%3A" + varianteActivada + "%2C";
-        String newValueCookie = valueCookieRemovingTestAB + testABvalueForVariant;
-        driver.manage().deleteCookieNamed(nameCookieGoogleExperiments);
-        Cookie ck = new Cookie(nameCookieGoogleExperiments, newValueCookie);
-        driver.manage().addCookie(ck);
+		if (valueCookieRemovingTestAB!=null) { 
+	        String testABvalueForVariant = testAB.getValueCookie(app) + "%3A" + varianteActivada + "%2C";
+	        String newValueCookie = valueCookieRemovingTestAB + testABvalueForVariant;
+	        Cookie actualCookie = driver.manage().getCookieNamed(nameCookieGoogleExperiments);
+	        Cookie newCookie = getClonedWithNewValue(actualCookie, newValueCookie);
+	        driver.manage().deleteCookieNamed(nameCookieGoogleExperiments);
+	        driver.manage().addCookie(newCookie);
+		}
+	}
+	
+	private Cookie getClonedWithNewValue(Cookie actualCookie, String newValue) {
+        Map<String,Object> jsonCookie = actualCookie.toJson();
+        Cookie newCookie = 
+        	new Cookie(
+        		(String)jsonCookie.get("name"), 
+        		newValue, 
+        		(String)jsonCookie.get("domain"), 
+        		(String)jsonCookie.get("path"), 
+        		(Date)jsonCookie.get("expiry"), 
+        		(boolean)jsonCookie.get("secure"), 
+        		(boolean)jsonCookie.get("httpOnly"));
+        return newCookie;
 	}
 	
 	@Override
@@ -59,10 +78,13 @@ public class TestABGoogleExperiments implements TestAB {
 	String getValueCookieResetingAllTestABvariants(WebDriver driver) {
 		List<Integer> listVariantes = testAB.getVariantesInt();
 		String valueCookie = getValueCookieGoogleExperiments(driver);
-		for (Integer variante : listVariantes)
-			valueCookie = getValueCookieResetingTestABVariant(variante, valueCookie, driver);
-		
-		return valueCookie;
+		if (valueCookie!=null) {
+			for (Integer variante : listVariantes) {
+				valueCookie = getValueCookieResetingTestABVariant(variante, valueCookie, driver);
+			}
+			return valueCookie;
+		}
+		return null;
 	}
 	
 	private String getValueCookieResetingTestABVariant(int variante, String valueCookie, WebDriver driver) {
@@ -71,7 +93,7 @@ public class TestABGoogleExperiments implements TestAB {
 			return (valueCookie.replaceAll(valueTestABvariant, ""));
 		}
 		
-		return "";
+		return valueCookie;
 	}
 	
 	
@@ -84,7 +106,7 @@ public class TestABGoogleExperiments implements TestAB {
 	 */
 	public int getVariantFromCookie(WebDriver driver) {
 		String valueCookie = getValueCookieGoogleExperiments(driver);
-		if ("".compareTo(valueCookie)!=0) {
+		if (valueCookie!=null) {
 			List<Integer> listVariantes = testAB.getVariantesInt();
 			for (Integer variante : listVariantes) {
 				String valueTestABvariantExpected = getValueExpectedInCookie(testAB, variante);
@@ -103,10 +125,11 @@ public class TestABGoogleExperiments implements TestAB {
 	
 	String getValueCookieGoogleExperiments(WebDriver driver) {
 		Cookie cookieGoogleExperiments = driver.manage().getCookieNamed(nameCookieGoogleExperiments);
-		if (cookieGoogleExperiments!=null)
+		if (cookieGoogleExperiments!=null) {
 			return (cookieGoogleExperiments.getValue());
+		}
 		
-		return "";
+		return null;
 	}
 	
 	@Override
