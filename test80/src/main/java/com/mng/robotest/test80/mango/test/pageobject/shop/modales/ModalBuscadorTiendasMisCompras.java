@@ -6,9 +6,9 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
 
-public class ModalBuscadorTallaTiendas extends WebdrvWrapp {
+public class ModalBuscadorTiendasMisCompras extends WebdrvWrapp {
 
-    static String XPathModalContainer = "//div[@class[contains(.,'container')]]";
+    static String XPathModalContainer = "//div[@class[contains(.,'selectStoreContainer')]]";
     static String XPathTienda = XPathModalContainer + "//div[@class[contains(.,'dp__element')]]";
     static String XPathAspaForClose = "//span[@class[contains(.,'iconClose')]]";
     

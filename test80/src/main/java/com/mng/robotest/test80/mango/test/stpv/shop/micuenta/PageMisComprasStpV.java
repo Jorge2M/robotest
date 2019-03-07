@@ -1,13 +1,12 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraOnline;
@@ -69,81 +68,56 @@ public class PageMisComprasStpV {
       	return validations;
     }
     
-    /**
-     * Selección de un bloque para el que esperamos que SÍ existan pedidos
-     */
-    public static DatosStep selectBlock(TypeCompra typeCompra, boolean ordersExpected, DataFmwkTest dFTest) {
-        //Step.
-        DatosStep datosStep = new DatosStep     (
-            "Seleccionar el bloque \"" + typeCompra + "\"", 
-            "Se hace visible el bloque de " + typeCompra);
-        try {
-            PageMisCompras.clickBlock(typeCompra, dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        //Validaciones
-        int maxSecondsToWait = 2;
-        String descripValidac =
-            "1) Queda seleccionado el bloque de \"" + typeCompra + "\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageMisCompras.isSelectedBlockUntil(maxSecondsToWait, typeCompra, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
+    @Step (
+    	description="Seleccionar el bloque <b>#{typeCompra}<b>", 
+        expected="Se hace visible el bloque #{typeCompra}")
+    public static void selectBlock(TypeCompra typeCompra, boolean ordersExpected, WebDriver driver) {
+    	PageMisCompras.clickBlock(typeCompra, driver);
+        int maxSecondsWait = 2;
+    	checkBlockSelected(typeCompra, maxSecondsWait, driver);
         if (ordersExpected) {
-            maxSecondsToWait = 2;
-            descripValidac = 
-                "1) Aparece una lista con algún artículo (lo esperamos hasta " + maxSecondsToWait + " segundos) <br>" +
-                "2) El 1er artículo es de tipo \"" + typeCompra + "\"";
-            datosStep.setNOKstateByDefault();            
-            listVals = ListResultValidation.getNew(datosStep);
-            try {
-                boolean isVisibleAnyCompra = PageMisCompras.isVisibleAnyCompraUntil(maxSecondsToWait, dFTest.driver); 
-                if (!isVisibleAnyCompra) {
-                    listVals.add(1, State.Warn);
-                }
-                if (isVisibleAnyCompra) {
-                    if (PageMisCompras.getTypeCompra(1/*posInLista*/, dFTest.driver)!=typeCompra) {
-                        listVals.add(2, State.Warn);
-                    }
-                }
-            
-                datosStep.setListResultValidations(listVals);
-            }
-            finally { listVals.checkAndStoreValidations(descripValidac); }        
+        	checkArticlesInList(typeCompra, driver);
         }
         else {
-            //Validaciones
-            descripValidac = 
-                "1) No aparece ningún artículo<br>" +
-                "2) Es visible la imagen asociada a \"Lista Vacía\" para " + typeCompra;
-            datosStep.setNOKstateByDefault();
-            listVals = ListResultValidation.getNew(datosStep);
-            try {
-                boolean isVisibleAnyCompra = PageMisCompras.isVisibleAnyCompraUntil(0/*maxSecondsToWait*/, dFTest.driver); 
-                if (isVisibleAnyCompra) {
-                    listVals.add(1, State.Warn);
-                }
-                if (!PageMisCompras.isVisibleEmptyListImage(typeCompra, dFTest.driver)) {
-                    listVals.add(2, State.Warn);
-                }
-            
-                datosStep.setListResultValidations(listVals);
-            }
-            finally { listVals.checkAndStoreValidations(descripValidac); }            
+        	checkListArticlesVoid(typeCompra, driver);
         }
-        
-        return datosStep;
     }
+
+	@Validation (
+		description="Queda seleccionado el bloque de <b>#{typeCompra}</b> (lo esperamos hasta #{maxSecondsWait} segundos)",
+		level=State.Warn)
+	private static boolean checkBlockSelected(TypeCompra typeCompra, int maxSecondsWait, WebDriver driver) {
+		return (PageMisCompras.isSelectedBlockUntil(maxSecondsWait, typeCompra, driver));
+	}
+	
+	@Validation
+	private static ListResultValidation checkArticlesInList(TypeCompra typeCompra, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	int maxSecondsWait = 2;
+    	boolean isVisibleAnyCompra = PageMisCompras.isVisibleAnyCompraUntil(maxSecondsWait, driver); 
+      	validations.add(
+    		"Aparece una lista con algún artículo (lo esperamos hasta " + maxSecondsWait + " segundos) <br>",
+    		isVisibleAnyCompra, State.Warn);
+      	if (isVisibleAnyCompra) {
+          	validations.add(
+        		"El 1er artículo es de tipo <b>" + typeCompra + "</b>",
+        		PageMisCompras.getTypeCompra(1, driver)==typeCompra, State.Warn);
+      	}
+		return validations;      
+	}
+		
+	@Validation
+	private static ListResultValidation checkListArticlesVoid(TypeCompra typeCompra, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	boolean isVisibleAnyCompra = PageMisCompras.isVisibleAnyCompraUntil(0, driver);
+      	validations.add(
+    		"No aparece ningún artículo<br>",
+    		!isVisibleAnyCompra, State.Warn);
+      	validations.add(
+    		"Es visible la imagen asociada a <b>Lista Vacía</b> para " + typeCompra,
+    		PageMisCompras.isVisibleEmptyListImage(typeCompra, driver), State.Warn);
+      	return validations;
+	}
     
     @Validation
     public static ListResultValidation validateIsCompraOnlineVisible(String codPedido, boolean isChequeRegalo, WebDriver driver) {
@@ -158,25 +132,17 @@ public class PageMisComprasStpV {
         return validations;
     }
     
-    public static PageDetallePedidoStpV selectCompraOnline(int posInLista, String codPais, Channel channel, DataFmwkTest dFTest) throws Exception {
-        //Step.
-        CompraOnline compraOnline = null;
-        DatosStep datosStep = new DatosStep     (
-            "Seleccionamos la " + posInLista + "a compra (tipo Online) de la lista", 
-            "Aparece la página con los detalles del pedido");
-        try {
-            compraOnline = PageMisCompras.getDataCompraOnline(posInLista, channel, dFTest.driver);
-            PageMisCompras.clickCompra(posInLista, dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }             
+    @Step (
+    	description="Seleccionamos la #{posInLista}a compra (tipo Online) de la lista", 
+        expected="Aparece la página con los detalles del pedido",
+        saveHtmlPage=SaveWhen.IfProblem)
+    public static void selectCompraOnline(int posInLista, String codPais, Channel channel, WebDriver driver) throws Exception {
+    	CompraOnline compraOnline = PageMisCompras.getDataCompraOnline(posInLista, channel, driver);
+        PageMisCompras.clickCompra(posInLista, driver);       
         
         //Validaciones
-        PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(dFTest.driver);
-        pageDetPedidoStpV.validateIsPageOk(compraOnline, codPais, dFTest.driver);
-        
-        return pageDetPedidoStpV;        
+        PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(driver);
+        pageDetPedidoStpV.validateIsPageOk(compraOnline, codPais, driver);       
     }
     
     @SuppressWarnings("static-access")
@@ -189,37 +155,26 @@ public class PageMisComprasStpV {
         SecDetalleCompraTienda.validateIsOk(compraTienda, channel, driver);      
     }
 
-	public static void clickMoreInfo(DataFmwkTest dFTest) {
-		//Step.
-		String idArticulo = "";
-        DatosStep datosStep = new DatosStep     (
-            "Seleccionamos el primer artículo que aparece con referencia ", 
-            "Aparece el modal con información del artículo");
-        try {
-        	
-        	idArticulo = PageMisCompras.getReferenciaPrimerArticulo(dFTest.driver);
-            PageMisCompras.clickMasInfoArticulo(dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }             
-        
-        //Validaciones
-        String descripValidac = 
-        	"1) Aparece el modal con información del artículo<br>" + 
-            "2) La referencia que aparece en el modal es correcta " + idArticulo;
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!ModalDetalleMisCompras.isVisible(dFTest.driver)) {
-            	listVals.add(1, State.Defect);
-            }
-            if (!ModalDetalleMisCompras.isReferenciaValidaModal(idArticulo, dFTest.driver)) {
-            	listVals.add(2, State.Defect);
-            }
-        
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }      
-		
+    final static String tagReferencia = "@TagReferencia";
+    @Step (
+    	description="Seleccionamos link <b>Más Info</b> del 1er artículo <b>" + tagReferencia + "</b>", 
+        expected="Aparece el modal con información del artículo")
+	public static void clickMoreInfo(WebDriver driver) {
+    	String infoArticle = PageMisCompras.getReferenciaPrimerArticulo(driver);
+    	TestCaseData.getDatosCurrentStep().replaceInDescription(tagReferencia, infoArticle);
+        PageMisCompras.clickMasInfoArticulo(driver);           
+        checkModalArticle(infoArticle, driver);
 	}    
+    
+    @Validation
+    private static ListResultValidation checkModalArticle(String infoArticle, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	validations.add(
+    		"Aparece el modal con información del artículo<br>",
+    		ModalDetalleMisCompras.isVisible(driver), State.Defect);
+    	validations.add(
+    		"La información del artículo que aparece en el modal es correcta " + infoArticle,
+    		ModalDetalleMisCompras.isReferenciaValidaModal(infoArticle, driver), State.Defect);
+    	return validations;
+    }
 }

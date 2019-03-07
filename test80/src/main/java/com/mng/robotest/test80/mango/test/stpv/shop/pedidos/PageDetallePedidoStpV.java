@@ -4,16 +4,14 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraOnline;
 import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageDetallePedido.DetallePedido;
-
 
 public class PageDetallePedidoStpV {
 	PageDetallePedido pageDetalle;
@@ -77,18 +75,10 @@ public class PageDetallePedidoStpV {
       	return validations;
     }
     
-    public DatosStep clickBackButton(Channel channel, DataFmwkTest dFTest) throws Exception {
-        //Step.
-        DatosStep datosStep = new DatosStep (
-            "Seleccionar el botón \"Volver\"", 
-            "Se vuelve a la página anterior");
-        try {
-            pageDetalle.clickBackButton(channel, dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        return datosStep;
+    @Step (
+    	description="Seleccionar el link necesario para volver a la página inicial de \"Mis Compras\"",
+    	expected="Se vuelve a la página inicial de \"Mis Compras\"")
+    public void clickBackButton(Channel channel, DataFmwkTest dFTest) throws Exception {
+        pageDetalle.clickBackButton(channel, dFTest.driver);
     }
 }

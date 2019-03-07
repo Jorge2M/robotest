@@ -186,7 +186,7 @@ public class Registro extends GestorWebDriver {
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         //Validación modal suscripcion RGPD
         if (!dCtxSh.userRegistered) {
-        	ModalSuscripcionStpV.validaRGPDModal(dCtxSh, dFTest);
+        	ModalSuscripcionStpV.validaRGPDModal(dCtxSh, dFTest.driver);
         }
         
         SecMenusWrapperStpV.secMenuUser.selectRegistrate(dCtxSh.channel, dCtxSh, dFTest);

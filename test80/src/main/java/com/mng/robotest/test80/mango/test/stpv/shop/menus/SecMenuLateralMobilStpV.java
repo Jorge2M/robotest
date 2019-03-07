@@ -216,7 +216,8 @@ public class SecMenuLateralMobilStpV {
             break;
         case articulos:
             PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.movil_web, app);
-            pageGaleriaStpV.validaArtEnContenido(datosStep);
+            int maxSecondsWait = 3;
+            pageGaleriaStpV.validaArtEnContenido(maxSecondsWait);
             break;
         default:
             break;

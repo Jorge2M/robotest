@@ -400,8 +400,9 @@ public abstract class PageGaleria extends WebdrvWrapp {
     
     public NombreYRefList getListaNombreYRefArticulos() {
         NombreYRefList listReturn = new NombreYRefList();
-        for (WebElement articulo : getListaArticulos())
-            listReturn.add(getNombreYRefArticulo(articulo));       
+        for (WebElement articulo : getListaArticulos()) {
+            listReturn.add(getNombreYRefArticulo(articulo)); 
+        }
         return listReturn;
     }
 

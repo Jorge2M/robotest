@@ -14,7 +14,14 @@ public class PageInfoNewMisComprasMovil extends WebdrvWrapp {
         return (isElementVisibleUntil(driver, By.xpath(XPathButtonToMisCompras), 2));
     }
     
+    public static boolean isVisibleButtonToMisCompras(WebDriver driver) {
+    	return (WebdrvWrapp.isElementVisible(driver, By.xpath(XPathButtonToMisCompras)));
+    }
+    
     public static void clickButtonToMisCompras(WebDriver driver) throws Exception {
         clickAndWaitLoad(driver, By.xpath(XPathButtonToMisCompras));
+        if (isVisibleButtonToMisCompras(driver)) {
+        	clickAndWaitLoad(driver, By.xpath(XPathButtonToMisCompras), TypeOfClick.javascript);
+        }
     }
 }

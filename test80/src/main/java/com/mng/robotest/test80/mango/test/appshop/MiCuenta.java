@@ -154,14 +154,15 @@ public class MiCuenta extends GestorWebDriver {
         PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest.driver);
         AccesoStpV.identificacionEnMango(dCtxSh, dFTest.driver);
         PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dCtxSh.channel, dFTest.driver);
-        PageMisComprasStpV.selectBlock(TypeCompra.Online, true/*ordersExpected*/, dFTest);
+        PageMisComprasStpV.selectBlock(TypeCompra.Online, true/*ordersExpected*/, dFTest.driver);
         int posicionCompra = 1;
-        PageDetallePedidoStpV pageDetPedidoStpV = 
-            PageMisComprasStpV.selectCompraOnline(posicionCompra, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, dFTest);
+        PageMisComprasStpV.selectCompraOnline(posicionCompra, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, dFTest.driver);
         if (dCtxSh.channel == ChannelEnum.Channel.desktop) {
-	        PageMisComprasStpV.clickMoreInfo(dFTest);
-	        ModalDetalleMisComprasStpV.clickBuscarTiendaButton(dFTest);
+	        PageMisComprasStpV.clickMoreInfo(dFTest.driver);
+	        ModalDetalleMisComprasStpV.clickBuscarTiendaButton(dFTest.driver);
+	        ModalDetalleMisComprasStpV.clickCloseModalBuscadorTiendas(dFTest.driver);
         }
+        PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(dFTest.driver);
         if (pageDetPedidoStpV.getPageDetalle().getTypeDetalle()==DetallePedido.New) {
         	//Tratamiento específico para el nuevo Detalle del Pedido...
         	//,,,
@@ -171,7 +172,7 @@ public class MiCuenta extends GestorWebDriver {
         
         //Estamos utilizando un usuario que en PRO no dispone de tíckets de Compra en tienda 
         if (isPRO)
-            PageMisComprasStpV.selectBlock(TypeCompra.Tienda, false/*ordersExpected*/, dFTest);
+            PageMisComprasStpV.selectBlock(TypeCompra.Tienda, false/*ordersExpected*/, dFTest.driver);
         //TODO actualmente no funciona el alta automática de compras en PRE mediante Flyway
 //        else {
 //            PageMisComprasStpV.selectBlock(TypeCompra.Tienda, true/*ordersExpected*/, dFTest);

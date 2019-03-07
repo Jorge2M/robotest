@@ -347,7 +347,7 @@ public class SecMenusDesktopStpV {
         finally { StepAspect.storeDataAfterStep(datosStep); }            
         
         //Validaciones
-        validaSelecLinea(datosStep, lineaType, null/*sublineaType*/, dCtxSh, dFTest);
+        validaSelecLinea(lineaType, null/*sublineaType*/, dCtxSh, dFTest);
         
         return datosStep;
     }
@@ -371,12 +371,12 @@ public class SecMenusDesktopStpV {
         finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
-        validaSelecLinea(datosStep, lineaType, sublineaType, dCtxSh, dFTest);
+        validaSelecLinea(lineaType, sublineaType, dCtxSh, dFTest);
         
         return datosStep;
     }    
     
-    public static void validaSelecLinea(DatosStep datosStep, LineaType lineaType, SublineaNinosType sublineaType, 
+    public static void validaSelecLinea(LineaType lineaType, SublineaNinosType sublineaType, 
     									DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
     	SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh, dFTest);
         if (sublineaType==null) {
@@ -395,7 +395,8 @@ public class SecMenusDesktopStpV {
         switch (linea.getContentDeskType()) {
         case articulos:
         	PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.desktop, dCtxSh.appE);
-            pageGaleriaStpV.validaArtEnContenido(datosStep);
+        	int maxSecondsWait = 3;
+            pageGaleriaStpV.validaArtEnContenido(maxSecondsWait);
             break;
         case banners:
         	int maxBannersToLoad = 1;

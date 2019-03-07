@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
+import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
 
 
@@ -291,35 +292,36 @@ public class PageGaleriaMobil extends PageGaleria {
      */
     @Override
     public String getRefColorArticulo(WebElement articulo) {
-    	//TODO esto está ligado al TestA/B relacionado con los Filtros (TestAB.MenuMobil)
-    	//cuando desaparezca dicho TestAB podremos dejar un único procedimiento
+    	int lengthReferencia = 11;
     	String refWithColor = getRefColorArticuloMethod1(articulo);
-    	if ("".compareTo(refWithColor)==0)
+    	if ("".compareTo(refWithColor)==0) {
     		refWithColor = getRefColorArticuloMethod2(articulo);
+    	}
     		
+    	if (refWithColor.length()>lengthReferencia) {
+    		return (refWithColor.substring(0, lengthReferencia));
+    	}
     	return refWithColor;
     }
     
-    private String getRefColorArticuloMethod1(WebElement articulo) {
-    	int lengthReferencia = 10;
-    	String id = articulo.getAttribute("id");
-    	if (id.length()>lengthReferencia)
-    		return (id.substring(0, lengthReferencia));
-    	
-    	return id;
-    }
+//    private String getRefColorArticuloMethod1(WebElement articulo) {
+//    	return (articulo.getAttribute("id"));
+//    }
     
+    private String getRefColorArticuloMethod1(WebElement articulo) {
+    	String xpathDivRelativeArticle = "//div[@id and @class='product-container-image']";
+    	if (WebdrvWrapp.isElementPresent(articulo, By.xpath("." + xpathDivRelativeArticle))) {
+	    	return (articulo.findElement(By.xpath(xpathDivRelativeArticle)).getAttribute("id"));
+    	}
+    	return "";
+    }
+
     private String getRefColorArticuloMethod2(WebElement articulo) {
-    	int lengthReferencia = 10;
-    	String id = "";
     	WebElement ancorArticle = getElementVisible(articulo, By.xpath(".//a"));
     	if (ancorArticle!=null) {
     		String hrefArticle = ancorArticle.getAttribute("href");
-    		id = UtilsPageGaleria.getReferenciaAndCodColorFromURLficha(hrefArticle);
-    		if (id.length()>lengthReferencia)
-    			return (id.substring(0, lengthReferencia));
+    		return (UtilsPageGaleria.getReferenciaAndCodColorFromURLficha(hrefArticle));
     	}
-    	
-    	return id;
+    	return "";
     }
 }

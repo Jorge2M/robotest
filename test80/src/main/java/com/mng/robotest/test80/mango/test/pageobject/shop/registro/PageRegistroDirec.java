@@ -92,8 +92,9 @@ public class PageRegistroDirec extends WebdrvWrapp {
         clickAndWaitLoad(driver, By.xpath(XPathFinalizarButton));
         
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-        if (isVisibleFinalizarButton(driver))
+        if (isVisibleFinalizarButton(driver)) {
             clickAndWaitLoad(driver, By.xpath(XPathFinalizarButton), TypeOfClick.javascript);
+        }
     }
     
     private static void sendKeysToInputIfNotExist(String dataToSend, String xpathInput, WebDriver driver) {

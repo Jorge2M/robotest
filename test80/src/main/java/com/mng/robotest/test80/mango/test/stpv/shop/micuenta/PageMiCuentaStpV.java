@@ -47,7 +47,7 @@ public class PageMiCuentaStpV {
     private static void goToMisComprasFromMenuAndValidate (DataCtxShop dataCtxShop, Channel channel, WebDriver driver) 
     throws Exception {
         PageMiCuenta.clickMisCompras(driver);
-        if (channel == Channel.movil_web){
+        if (channel == Channel.movil_web) {
             PageInfoNewMisComprasMovilStpV.validateIsPage(driver);
             PageInfoNewMisComprasMovilStpV.clickButtonToMisComprasAndNoValidate(driver);
         }

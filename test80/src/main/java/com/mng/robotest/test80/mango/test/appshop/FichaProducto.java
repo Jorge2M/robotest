@@ -107,8 +107,9 @@ public class FichaProducto extends GestorWebDriver {
         
         //Si es talla única -> Significa que lo dimos de alta en la bolsa cuando seleccionamos el click "Añadir a la bolsa"
         //-> Lo damos de baja
-        if (isTallaUnica)
+        if (isTallaUnica) {
             SecBolsaStpV.clear(dCtxSh, dFTest.driver);
+        }
         
         articulo = pageFichaStpv.getFicha().getArticuloObject();
         if (dCtxSh.appE==AppEcom.shop) { //"Buscar en Tienda" y "Favoritos" no existen en Outlet ni Votf
@@ -196,7 +197,7 @@ public class FichaProducto extends GestorWebDriver {
 
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);
         LocationArticle location1rstArticle = LocationArticle.getInstanceInCatalog(1);
-        DataFichaArt dataArtOrigin = pageGaleriaStpV.selectArticulo(location1rstArticle, dCtxSh).dataFichaArticulo;
+        DataFichaArt dataArtOrigin = pageGaleriaStpV.selectArticulo(location1rstArticle, dCtxSh);
         
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {

@@ -3,12 +3,13 @@ package com.mng.robotest.test80.mango.test.stpv.shop.galeria;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.ResultValidation;
@@ -80,28 +81,21 @@ public class PageGaleriaStpV {
         return (new PageGaleriaStpV(channel, app, dFTest));
     }
 
+    @Step (
+    	description="Seleccionamos el artículo #{locationArt} en una pestaña aparte", 
+        expected="Aparece la ficha del artículo seleccionado en una pestaña aparte")
     public void selectArticuloEnPestanyaAndBack(LocationArticle locationArt) 
     throws Exception {
         String galeryWindowHandle = dFTest.driver.getWindowHandle();
-        String detailWindowHandle = "";
         DataFichaArt datosArticulo = new DataFichaArt();
-
         
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionamos el artículo " + locationArt + " en una pestaña aparte", 
-            "Aparece la ficha del artículo seleccionado en una pestaña aparte");
-        try {
-            //Almacenamos el nombre del artículo y su referencia
-            WebElement articulo = pageGaleria.getArticulo(locationArt);
-            datosArticulo.setNombre(pageGaleria.getNombreArticulo(articulo));
-            datosArticulo.setReferencia(PageGaleria.getRefArticulo(articulo));
-    
-            //Seleccionamos el artículo y lo cargamos en una pestaña aparte
-            detailWindowHandle = pageGaleria.openArticuloPestanyaAndGo(articulo, app);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+        //Almacenamos el nombre del artículo y su referencia
+        WebElement articulo = pageGaleria.getArticulo(locationArt);
+        datosArticulo.setNombre(pageGaleria.getNombreArticulo(articulo));
+        datosArticulo.setReferencia(PageGaleria.getRefArticulo(articulo));
+
+        //Seleccionamos el artículo y lo cargamos en una pestaña aparte
+        String detailWindowHandle = pageGaleria.openArticuloPestanyaAndGo(articulo, app);
         
         //Validaciones
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel);
@@ -113,26 +107,21 @@ public class PageGaleriaStpV {
         dFTest.driver.switchTo().window(galeryWindowHandle);
     }
     
-    public ResultSelectArtStep selectArticulo(LocationArticle locationArt, DataCtxShop dCtxSh) 
+    @Step (
+    	description="Seleccionar el artículo #{locationArt}", 
+        expected="Aparece la ficha del artículo seleccionado")
+    public DataFichaArt selectArticulo(LocationArticle locationArt, DataCtxShop dCtxSh) 
     throws Exception {
         DataFichaArt datosArticulo = new DataFichaArt();
         String urlGaleria = dFTest.driver.getCurrentUrl();
         
-        DatosStep datosStep = new DatosStep (
-            "Seleccionar el artículo " + locationArt, 
-            "Aparece la ficha del artículo seleccionado");
-        try { 
-            //Almacenamos el nombre del artículo y su referencia
-            WebElement articulo = pageGaleria.getArticulo(locationArt);
-            datosArticulo.setNombre(pageGaleria.getNombreArticulo(articulo));
-            datosArticulo.setReferencia(PageGaleriaDesktop.getRefArticulo(articulo));
-                    
-            //Seleccionar el artículo
-            pageGaleria.clickArticulo(articulo);
-                            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+        //Almacenamos el nombre del artículo y su referencia
+        WebElement articulo = pageGaleria.getArticulo(locationArt);
+        datosArticulo.setNombre(pageGaleria.getNombreArticulo(articulo));
+        datosArticulo.setReferencia(PageGaleriaDesktop.getRefArticulo(articulo));
+                
+        //Seleccionar el artículo
+        pageGaleria.clickArticulo(articulo);
         
         //Validaciones
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
@@ -141,11 +130,12 @@ public class PageGaleriaStpV {
 
         //Validaciones sección BreadCrumb + Next
         if (dCtxSh.channel==Channel.desktop) {
-            if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old)
+            if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
                 pageFichaStpV.validaBreadCrumbFichaOld(urlGaleria);
+            }
         }
         
-        return (ResultSelectArtStep.getNew(datosStep, datosArticulo));
+        return (datosArticulo);
     }
     
     public void selectLinkAddArticuloToBagDesktop(int posArticulo)
@@ -177,25 +167,14 @@ public class PageGaleriaStpV {
         finally { listVals.checkAndStoreValidations(descripValidac); }        
     }    
     
-    /**
-     * @return si el artículo estaba disonible
-     */
+    @Step (
+    	description="Del #{posArticulo}o artículo, seleccionamos la #{posTalla}a talla", 
+        expected="Se da de alta correctamente el artículo en la bolsa",
+        saveHtmlPage=SaveWhen.Always)
     public boolean selectTallaArticuloDesktop(int posArticulo, int posTalla, DataBag dataBag, DataCtxShop dCtxSh) 
     throws Exception {
     	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-        ArticuloScreen articulo = null;
-        DatosStep datosStep = new DatosStep (
-            "Del " + posArticulo + "o artículo, seleccionamos la " + posTalla + "a talla", 
-            "Se da de alta correctamente el artículo en la bolsa");
-        datosStep.setSaveHtmlPage(SaveWhen.Always);
-        try { 
-            articulo = pageGaleriaDesktop.selectTallaArticle(posArticulo, posTalla);
-                            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        //Validaciones
+        ArticuloScreen articulo = pageGaleriaDesktop.selectTallaArticle(posArticulo, posTalla);
         boolean notVisibleAvisame = ModalArticleNotAvailableStpV.validateState(1, StateModal.notvisible, dFTest.driver);
         if (notVisibleAvisame) {
             dataBag.addArticulo(articulo);
@@ -209,140 +188,113 @@ public class PageGaleriaStpV {
      * Escrollamos hasta llegar a la página indicada en toPage
      * @param toPage indica el número de página en el que nos queremos posicionar. Si es PageGaleria.scrollToLast asumimos que queremos llegar hasta el final del catálogo
      */
+    final static String tagIdPage = "@TagIdPage";
+    @Step (
+    	description="Escrollar hasta posicionarse en la " + tagIdPage + " página", 
+        expected="Se escrolla correctamente",
+        saveNettraffic=SaveWhen.Always)
     public DataScroll scrollFromFirstPage(DataForScrollStep dataForScroll, DataCtxShop dCtxSh) 
     throws Exception {
         DataScroll datosScroll = null;
         int pageToScroll = dataForScroll.numPageToScroll;
-        if (dCtxSh.channel == Channel.movil_web)
+        if (dCtxSh.channel == Channel.movil_web) {
         	pageToScroll = 3;
+        }
         
         String idPage = pageToScroll + "a";
-        String apareceElFooter = "No";
         if (pageToScroll>=PageGaleriaDesktop.maxPageToScroll) {
             idPage = "última";
-            apareceElFooter = "Sí";
         }
-        
-        //Step
+        TestCaseData.getDatosCurrentStep().replaceInDescription(tagIdPage, idPage);
         int numArticulosInicio = pageGaleria.getNumArticulos();
-        DatosStep datosStep = new DatosStep (
-            "Escrollar hasta posicionarse en la " + idPage + " página", 
-            "Se escrolla correctamente");
-        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
-        try {
-        	datosScroll = pageGaleria.scrollToPageFromFirst(pageToScroll, dCtxSh.appE);
-                              
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+        datosScroll = pageGaleria.scrollToPageFromFirst(pageToScroll, dCtxSh.appE);
         
-        //Validaciones.
-        String descripValidac = 
-            "1) " + apareceElFooter + " aparece el footer";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (pageToScroll>=PageGaleriaDesktop.maxPageToScroll) {
-                if (!SecFooter.isVisible(dCtxSh.appE, dFTest.driver)) {
-                    listVals.add(1, State.Warn);
-                }
-            }
-            else {
-                if (SecFooter.isVisible(dCtxSh.appE, dFTest.driver)) {
-                    listVals.add(1, State.Warn);
-                }
-            }
-    
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); } 
-
+        checkVisibilityFooter(pageToScroll, dCtxSh.appE, dFTest.driver);
         if (pageToScroll < PageGaleriaDesktop.maxPageToScroll) {
-            //Validaciones.
-            descripValidac = 
-                "1) En pantalla aparecen más artículos (" + datosScroll.articulosMostrados + ") " + 
-                "de los que había inicialmente (" + numArticulosInicio + ")";
-            datosStep.setNOKstateByDefault();  
-            listVals = ListResultValidation.getNew(datosStep);
-            try {
-                if (datosScroll.articulosMostrados <= numArticulosInicio) {
-                    listVals.add(1, State.Warn);
-                }
-                    
-                datosStep.setListResultValidations(listVals);
-            }
-            finally { listVals.checkAndStoreValidations(descripValidac); }
+        	checkAreMoreArticlesThatInitially(datosScroll.articulosMostrados, numArticulosInicio);
         }
-        
         if (dataForScroll.ordenacionExpected != FilterOrdenacion.NOordenado) {
-            //Validaciones
-            descripValidac = "1) Los artículos aparecen " + dataForScroll.ordenacionExpected;
-            datosStep.setNOKstateByDefault();       
-            listVals = ListResultValidation.getNew(datosStep);
-            try {
-                if (!pageGaleria.articlesInOrder(dataForScroll.ordenacionExpected)) {
-                    listVals.add(1, State.Defect);
-                }
-                    
-                datosStep.setListResultValidations(listVals);
-            }
-            finally { listVals.checkAndStoreValidations(descripValidac); }
+        	checkArticlesOrdered(dataForScroll.ordenacionExpected);
         }
-        
-        //Validaciones
-        descripValidac = 
-            "1) No aparece ningún artículo repetido";
-        datosStep.setNOKstateByDefault();  
-        listVals = ListResultValidation.getNew(datosStep);
-        try {
-            ArrayList<NombreYRef> productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
-            if (productsRepeated!=null && productsRepeated.size()>0) {
-                listVals.add(1, State.Defect);
-                descripValidac+=
-                	"<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: " + 
-                	"hay productos " + productsRepeated.size() + " repetidos, " + 
-                	"por ejemplo el <b>" + productsRepeated.get(0).toString() + "</b>";
-            }
-    
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
+        checkNotRepeatedArticles();
         if (dataForScroll.validateArticlesExpected) {
-            //Validación
-            descripValidac = 
-                "1) En pantalla aparecen exactamente " + dataForScroll.numArticlesExpected + " artículos " + 
-                "(están apareciendo " + datosScroll.articulosTotalesPagina + ")";
-            datosStep.setNOKstateByDefault();  
-            listVals = ListResultValidation.getNew(datosStep);
-            try {
-                if (dataForScroll.numArticlesExpected != datosScroll.articulosTotalesPagina) {
-                    listVals.add(1, State.Info);
-                }
-                
-                datosStep.setListResultValidations(listVals);
-            }
-            finally { listVals.checkAndStoreValidations(descripValidac); }
-            
-            datosScroll.datosStep = datosStep;
+        	checkNumArticlesInScreen(datosScroll.articulosTotalesPagina, dataForScroll.numArticlesExpected);
         }
         
-        //Validaciones estándar. 
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
         flagsVal.validaSEO = true;
         flagsVal.validaJS = true;
         flagsVal.validaImgBroken = dataForScroll.validaImgBroken;
         AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
         
-        //VALIDACIONES - PARA ANALYTICS (sólo para firefox y NetAnalysis)
         PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, dFTest.driver);
         
-        datosScroll.datosStep = datosStep;
+        datosScroll.datosStep = TestCaseData.getDatosCurrentStep();
         return datosScroll;
-   }
-
+    }
+    
+    @Validation
+    private ListResultValidation checkVisibilityFooter(int pageToScroll, AppEcom app, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+        boolean isVisibleFooter = SecFooter.isVisible(app, driver);
+        if (pageToScroll>=PageGaleriaDesktop.maxPageToScroll) {
+          	validations.add(
+        		"Sí aparece el footer",
+        		isVisibleFooter, State.Warn);
+        }
+        else {
+          	validations.add(
+        		"No aparece el footer",
+        		!isVisibleFooter, State.Warn);
+        }
+        
+        return validations;
+    }
+    
+    @Validation (
+    	description=
+    		"En pantalla aparecen más artículos (#{numArticlesCurrently}) " + 
+    		"de los que había inicialmente (#{numArticlesInit})",
+    	level=State.Warn)
+    private boolean checkAreMoreArticlesThatInitially(int numArticlesCurrently, int numArticlesInit) {
+	    return (numArticlesCurrently > numArticlesInit);
+    }
+    
+    @Validation (
+    	description="Los artículos aparecen ordenados por #{orderExpected}",
+    	level=State.Defect)
+    private boolean checkArticlesOrdered(FilterOrdenacion orderExpected) {
+	    return (pageGaleria.articlesInOrder(orderExpected));
+    }
+    
+    @Validation
+    private ListResultValidation checkNotRepeatedArticles() {
+    	ListResultValidation validations = ListResultValidation.getNew();
+        ArrayList<NombreYRef> productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
+        String producRepeatedWarning = "";
+        if (productsRepeated!=null && productsRepeated.size()>0) {
+        	producRepeatedWarning+=
+            	"<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: " + 
+            	"hay " + productsRepeated.size() + " productos repetidos, " + 
+            	"por ejemplo el <b>" + productsRepeated.get(0).toString() + "</b>";
+        }
+      	validations.add(
+    		"No aparece ningún artículo repetido" + producRepeatedWarning,
+    		productsRepeated==null || productsRepeated.size()==0, State.Defect);
+      	
+      	return validations;
+    }
+    
+    @Validation (
+    	description=
+    		"En pantalla aparecen exactamente #{numArticlesInPage} artículos " + 
+	        "(están apareciendo #{numArticlesExpected}",
+	    level=State.Info)
+    private boolean checkNumArticlesInScreen(int numArticlesInPage, int numArticlesExpected) {
+	    return (numArticlesInPage==numArticlesExpected);
+    }
    
-   public int seleccionaOrdenacionGaleria(FilterOrdenacion typeOrdenacion, String tipoPrendasGaleria, int numArticulosValidar, 
+    public int seleccionaOrdenacionGaleria(FilterOrdenacion typeOrdenacion, String tipoPrendasGaleria, int numArticulosValidar, 
 		   										 DataCtxShop dCtxSh) throws Exception {
        //Step. Seleccionar el link "Descendente" / "Ascendente"
        DatosStep datosStep = new DatosStep       (
@@ -591,62 +543,58 @@ public class PageGaleriaStpV {
        return listStr;
    }
     
-   @SuppressWarnings("static-access")
-   public void selecArticuloGaleriaStep(int numArtConColores) throws Exception {
-       WebElement articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
-       String nombre1erArt = pageGaleria.getNombreArticulo(articuloColores);
-       String precio1erArt = pageGaleria.getPrecioArticulo(articuloColores);
-       
-       //Step. Seleccionar el Xer artículo con variedad de colores
-       DatosStep datosStep = new DatosStep       (
-           "Seleccionar el " + numArtConColores + "o artículo con variedad de colores (" + nombre1erArt + " " + precio1erArt + ")", 
-           "Aparece el artículo original(" + nombre1erArt + " " + precio1erArt + ")");
-       datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);       
-       try {
-           pageGaleria.clickArticulo(articuloColores);
-               
-           datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-       }
-       finally { StepAspect.storeDataAfterStep(datosStep); }         
+   	final static String tagNumArtConColores = "@TagNumArtConColores";
+   	final static String tagNombre1erArt = "@TagNombre1erArt";
+   	final static String tagPrecio1erArt = "@TagPrecio1erArt";
+    @Step (
+    	description="Seleccionar el " + tagNumArtConColores + "o artículo con variedad de colores (" + tagNombre1erArt + " " + tagPrecio1erArt + ")", 
+        expected="Aparece el artículo original(" + tagNombre1erArt + " " + tagPrecio1erArt + ")",
+        saveNettraffic=SaveWhen.Always)
+    public void selecArticuloGaleriaStep(int numArtConColores) throws Exception {
+	    WebElement articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
+	    String nombre1erArt = pageGaleria.getNombreArticulo(articuloColores);
+	    String precio1erArt = pageGaleria.getPrecioArticulo(articuloColores);
+	    DatosStep datosStep = TestCaseData.getDatosCurrentStep();
+	    datosStep.replaceInDescription(tagNumArtConColores, String.valueOf(numArtConColores));
+	    datosStep.replaceInDescription(tagNombre1erArt, nombre1erArt);
+	    datosStep.replaceInDescription(tagPrecio1erArt, precio1erArt);
+	    
+        pageGaleria.clickArticulo(articuloColores);
+        int maxSecondsWait = 3;
+        checkIsFichaArticle(nombre1erArt, precio1erArt, maxSecondsWait);
 
-       //Validaciones.
-       int maxSecondsToWait = 3;
-       String descripValidac = 
-           "1) Aparece la página de ficha (la esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
-           "2) Aparece el artículo anteriormente seleccionado: <br>" +
-           "   - Nombre " + nombre1erArt + "<br>" +
-           "   - Precio " + precio1erArt;
-       datosStep.setNOKstateByDefault();  
-       ListResultValidation listVals = ListResultValidation.getNew(datosStep);            
-       try {
-           PageFicha pageFicha = PageFicha.newInstance(app, channel, dFTest.driver);
-           if (!pageFicha.isPageUntil(maxSecondsToWait)) {
-               listVals.add(1, State.Warn);
-           }
-           String nombreArtFicha = pageFicha.secDataProduct.getTituloArt(channel, dFTest.driver);
-           String precioArtFicha = pageFicha.secDataProduct.getPrecioFinalArticulo(dFTest.driver);
-           if (!nombreArtFicha.toUpperCase().contains(nombre1erArt.toUpperCase())) {
-               listVals.add(2, State.Info_NoHardcopy);
-           }
-           if (!precioArtFicha.replaceAll(" ", "").toUpperCase().contains(precio1erArt.replaceAll(" ", "").toUpperCase())) {
-               listVals.add(2, State.Info_NoHardcopy);
-           }
-               
-           datosStep.setListResultValidations(listVals);
-       }
-       finally { listVals.checkAndStoreValidations(descripValidac); }
-
-       //Validaciones estándar. 
-       StdValidationFlags flagsVal = StdValidationFlags.newOne();
-       flagsVal.validaSEO = true;
-       flagsVal.validaJS = true;
-       flagsVal.validaImgBroken = false;
-       AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
-       
-       //VALIDACIONES - PARA ANALYTICS (sólo para firefox y NetAnalysis)
-       PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, dFTest.driver);        
-   }
+        //Validaciones estándar. 
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = true;
+        flagsVal.validaJS = true;
+        flagsVal.validaImgBroken = false;
+        AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
+        PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, dFTest.driver);        
+    }
    
+   	@SuppressWarnings("static-access")
+    @Validation
+    private ListResultValidation checkIsFichaArticle(String nombre1erArt, String precio1erArt, int maxSecondsWait) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	
+    	PageFicha pageFicha = PageFicha.newInstance(app, channel, dFTest.driver);
+      	validations.add(
+    		"Aparece la página de ficha (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		pageFicha.isPageUntil(maxSecondsWait), State.Warn);
+      	
+        String nombreArtFicha = pageFicha.secDataProduct.getTituloArt(channel, dFTest.driver);
+        String precioArtFicha = pageFicha.secDataProduct.getPrecioFinalArticulo(dFTest.driver);
+      	validations.add(
+    		"Aparece el artículo anteriormente seleccionado: <br>\" +\n" + 
+    		"   - Nombre " + nombre1erArt + "<br>" + 
+    		"   - Precio " + precio1erArt,
+    		nombreArtFicha.toUpperCase().contains(nombre1erArt.toUpperCase()) &&
+    		precioArtFicha.replaceAll(" ", "").toUpperCase().contains(precio1erArt.replaceAll(" ", "").toUpperCase()),
+    		State.Info_NoHardcopy);
+    	
+      	return validations;
+    }
+    
    @Validation(
 	description = "Como mínimo el #{porcentaje} % de los productos son panorámicas",
 	level=State.Info_NoHardcopy)
@@ -658,43 +606,25 @@ public class PageGaleriaStpV {
    }
    
    private static boolean articlesUnderPercentage(float numArtTotal, float numArtToMesure, float percentage) {
-	   if (numArtTotal==0)
+	   if (numArtTotal==0) {
 		   return true;
-	   
+	   }
 	   return ((numArtToMesure / numArtTotal) < (percentage / 100));
    }
    
-   public void validaHayVideoEnGaleria(DatosStep datosStep) {
-       //Validaciones
-	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-       String descripValidac = 
-           "1) Existe algún vídeo en la galería";
-       datosStep.setNOKstateByDefault(); 
-       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-       try {
-           if (!pageGaleriaDesktop.isPresentAnyArticle(TypeArticleDesktop.Video)) {
-               listVals.add(1,State.Warn);
-           }
-       
-           datosStep.setListResultValidations(listVals);
-       }
-       finally { listVals.checkAndStoreValidations(descripValidac); }
-   }
+    @Validation (
+    	description="Existe algún vídeo en la galería",
+    	level=State.Warn)
+    public boolean validaHayVideoEnGaleria() {
+	    PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
+      	return (pageGaleriaDesktop.isPresentAnyArticle(TypeArticleDesktop.Video));
+    }
    
-   // Validación que comprueba que está apareciendo una galería de artículos
-   public void validaArtEnContenido(DatosStep datosStep) {
-       String descripValidac = "1) Aparece una página con artículos (la esperamos 3 segundos)";
-       datosStep.setNOKstateByDefault();
-       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-       try {
-           boolean articulos = pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, 3/*seconds*/);
-           if (!articulos) {
-               listVals.add(1, State.Warn);
-           }
-
-           datosStep.setListResultValidations(listVals);
-       } 
-       finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation (
+    	description="Aparece una página con artículos (la esperamos #{maxSecondsWait} segundos)",
+    	level=State.Warn)
+    public boolean validaArtEnContenido(int maxSecondsWait) {
+    	return (pageGaleria.isVisibleArticleUntil(1, maxSecondsWait));
    }   
    
    public DatosStep clickArticlesHearthIcons(List<Integer> posIconsToClick, TypeActionFav actionFav, DataFavoritos dataFavoritos) 
@@ -866,7 +796,8 @@ public class PageGaleriaStpV {
 	       }
 	       finally { StepAspect.storeDataAfterStep(datosStep); }     
 	       
-	       validaArtEnContenido(datosStep);
+	       int maxSecondsWait = 3;
+	       validaArtEnContenido(maxSecondsWait);
 	   }
    }
    

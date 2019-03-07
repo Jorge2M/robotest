@@ -172,7 +172,7 @@ public class PageResultPagoStpV {
         PageResultPagoStpV.selectMisCompras(dCtxSh.userRegistered, dFTest.driver);
         DataPedido dataPedido = dCtxPago.getDataPedido();
         if (dCtxSh.userRegistered) {
-            PageMisComprasStpV.selectBlock(TypeCompra.Online, true/*ordersExpected*/, dFTest);
+            PageMisComprasStpV.selectBlock(TypeCompra.Online, true/*ordersExpected*/, dFTest.driver);
             PageMisComprasStpV.validateIsCompraOnlineVisible(dataPedido.getCodpedido(), dCtxPago.getFTCkout().isChequeRegalo, dFTest.driver);
         }
         else {

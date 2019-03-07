@@ -41,7 +41,7 @@ public class UtilsPageGaleria {
 
     public static String getColorFromURLficha(String urlFicha) {
         String codColor = "";
-        Pattern pattern = Pattern.compile("\\?c=([0-9]{2})");
+        Pattern pattern = Pattern.compile("\\?c=([a-zA-Z0-9]{2})");
         Matcher matcher = pattern.matcher(urlFicha);
         if (matcher.find())
             codColor = matcher.group(1);

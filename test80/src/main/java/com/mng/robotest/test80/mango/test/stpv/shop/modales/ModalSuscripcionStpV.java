@@ -1,67 +1,53 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.modales;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalSuscripcion;
 
-
 public class ModalSuscripcionStpV {
 
-	 /**
-     * Validaciones del código fuente de la página para ver si están presentes o no los textos legales de RGPD
-     */
-    public static DatosStep validaRGPDModal(DataCtxShop dCtxSh, DataFmwkTest dFTest) {
-    	DatosStep datosStep = new DatosStep (
-                "Comprobar que se incluyen o no los textos legales de RGPD en el modal de suscripcion (el modal está en el HTML de la página no visible)<br>",
-                "Los textos existen en el código fuente dependiendo del pais");
-        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
-        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        StepAspect.storeDataAfterStep(datosStep);
-            
-    	//Validaciones
+	@Step (
+		description="Comprobar que se incluyen o no los textos legales de RGPD en el modal de suscripcion (el modal está en el HTML de la página no visible)<br>",
+        expected="Los textos existen en el código fuente dependiendo del pais",
+        saveNettraffic=SaveWhen.Always)
+    public static void validaRGPDModal(DataCtxShop dCtxSh, WebDriver driver) {
+    	//Nothing
+
+		String codPais = dCtxSh.pais.getCodigo_pais();
 		if (dCtxSh.pais.getRgpd().equals("S")) {
-	        String descripValidac = 
-	            "1) El texto de info de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>" + 
-	            "2) El texto legal de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>";
-	        datosStep.setNOKstateByDefault();     
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-	        try {
-	            if (!ModalSuscripcion.isTextoRGPDPresent(dFTest.driver)) {
-	                listVals.add(1, State.Defect);
-	            }
-	            if (!ModalSuscripcion.isTextoLegalRGPDPresent(dFTest.driver)) {
-	                listVals.add(2, State.Defect);
-	            }
-	            
-	            datosStep.setListResultValidations(listVals);
-	        }
-	        finally { listVals.checkAndStoreValidations(descripValidac); }   
+			checkExistsTextsRGPD(codPais, driver);
 		}
-		
 		else {
-			String descripValidac = 
-	            "1) El texto de info de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>" + 
-	            "2) El texto legal de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>";
-	        datosStep.setNOKstateByDefault();    
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-	        try {
-	            if (ModalSuscripcion.isTextoRGPDPresent(dFTest.driver)) {
-	                listVals.add(1, State.Defect);
-	            }
-	            if (ModalSuscripcion.isTextoLegalRGPDPresent(dFTest.driver)) {
-	                listVals.add(2, State.Defect);
-	            }
-	            
-	            datosStep.setListResultValidations(listVals);
-	        }
-	        finally { listVals.checkAndStoreValidations(descripValidac); } 
+			checkNotExistsTextsRGPD(codPais, driver);
 		}
-		return datosStep;
     }
-    
+	
+	@Validation
+	private static ListResultValidation checkExistsTextsRGPD(String codigoPais, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+      	validations.add(
+    		"El texto de info de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + codigoPais + "<br>",
+    		ModalSuscripcion.isTextoRGPDPresent(driver), State.Defect);		
+      	validations.add(
+    		"El texto legal de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + codigoPais + "<br>",
+    		ModalSuscripcion.isTextoLegalRGPDPresent(driver), State.Defect);	
+      	return validations;
+	}
+	
+	@Validation
+	private static ListResultValidation checkNotExistsTextsRGPD(String codigoPais, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+      	validations.add(
+    		"El texto de info de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + codigoPais + "<br>",
+    		!ModalSuscripcion.isTextoRGPDPresent(driver), State.Defect);		
+      	validations.add(
+    		"El texto legal de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + codigoPais + "<br>",
+    		!ModalSuscripcion.isTextoLegalRGPDPresent(driver), State.Defect);
+      	return validations;
+	}
 }
