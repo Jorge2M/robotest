@@ -114,7 +114,7 @@ public class SecMenusWrapperStpV {
             	Menu1rstLevel menu1rstLevel = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, listMenusLabel.get(i)));
             	menu1rstLevel.setDataGaLabel(listMenusLabel.get(i));
                 if (dCtxSh.channel==Channel.movil_web) {
-                    SecMenuLateralMobilStpV.stepClickMenu1rstLevel(menu1rstLevel, dCtxSh.pais, dCtxSh.appE, dFTest);
+                    SecMenuLateralMobilStpV.stepClickMenu1rstLevel(menu1rstLevel, dCtxSh.pais, dCtxSh.appE, dFTest.driver);
                 }
                 else {
                     SecMenusDesktopStpV.stepEntradaMenuDesktop(menu1rstLevel, paginaLinea, dCtxSh, dFTest.driver);
@@ -129,7 +129,7 @@ public class SecMenusWrapperStpV {
     
     public static void navSeleccionaCarruselsLinea(Pais pais, LineaType lineaNuevoOReb, AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
         if (channel==Channel.movil_web)
-            SecMenuLateralMobilStpV.navClickLineaAndCarrusels(lineaNuevoOReb, pais, app, dFTest);
+            SecMenuLateralMobilStpV.navClickLineaAndCarrusels(lineaNuevoOReb, pais, app, dFTest.driver);
         else
             SecMenusDesktopStpV.stepValidaCarrusels(pais, lineaNuevoOReb, app, dFTest);
     }
@@ -258,19 +258,23 @@ public class SecMenusWrapperStpV {
     
     public static DatosStep seleccionLinea(LineaType lineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
-            return SecMenuLateralMobilStpV.seleccionLinea(lineaType, dCtxSh.pais, dCtxSh.appE, dFTest);
+            SecMenuLateralMobilStpV.seleccionLinea(lineaType, dCtxSh.pais, dCtxSh.appE, dFTest.driver);
+            return TestCaseData.getDatosLastStep();
         }
         
-        return SecMenusDesktopStpV.seleccionLinea(lineaType, dCtxSh, dFTest);
+        SecMenusDesktopStpV.seleccionLinea(lineaType, dCtxSh, dFTest);
+        return TestCaseData.getDatosLastStep();
     }
     
     public static DatosStep seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest)
     throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
-            return SecMenuLateralMobilStpV.seleccionSublineaNinos(lineaType, sublineaType, dCtxSh, dFTest);
+            SecMenuLateralMobilStpV.seleccionSublineaNinos(lineaType, sublineaType, dCtxSh, dFTest.driver);
+            return TestCaseData.getDatosLastStep();
         }
         
-        return SecMenusDesktopStpV.seleccionSublinea(lineaType, sublineaType, dCtxSh, dFTest);
+        SecMenusDesktopStpV.seleccionSublinea(lineaType, sublineaType, dCtxSh, dFTest);
+        return TestCaseData.getDatosLastStep();
     }
     
     public static void selectFiltroCollectionIfExists(FilterCollection typeMenu, Channel channel, AppEcom app, WebDriver driver) 

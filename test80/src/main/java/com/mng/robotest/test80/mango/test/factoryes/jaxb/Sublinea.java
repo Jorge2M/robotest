@@ -26,6 +26,10 @@ public class Sublinea extends Linea {
     			return idShop;
     		}
     	}
+    	
+    	public String getNameUpper() {
+    		return name().toUpperCase();
+    	}
     }
     
     public SublineaNinosType getTypeSublinea() {

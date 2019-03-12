@@ -37,6 +37,10 @@ public class Linea {
     		return this.literal;
     	}
     	
+    	public String getNameUpper() {
+    		return name().toUpperCase();
+    	}
+    	
     	public String getSufixOutlet(Channel channel) {
     		if (this.compareTo(LineaType.she)==0) {
 	            if (channel==Channel.movil_web)
