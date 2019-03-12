@@ -4,3 +4,6 @@
 /.project
 /.gradle/
 .idea/
+/output-library
+!/output-library/static
+!/output-library/sqlite
