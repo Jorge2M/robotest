@@ -1,24 +1,23 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 
-
 public abstract class PagoStpV {
     public DataCtxShop dCtxSh;
     public DataCtxPago dCtxPago;
-    public DataFmwkTest dFTest;
+    public WebDriver driver;
     public static String MsgNoPayImplemented = "No está diponible la parte del test que permite completar/ejecutar el pago";
     
     public boolean isAvailableExecPay = false;
     
-    public PagoStpV(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {
+    public PagoStpV(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
         this.dCtxSh = dCtxSh;
         this.dCtxPago = dCtxPago;
-        this.dFTest = dFTest;
+        this.driver = driver;
     }
     
     public boolean isAvailableExecPay() {
@@ -29,7 +28,7 @@ public abstract class PagoStpV {
      * @param execPay indica si, además de las pruebas iniciales de la pasarela, hemos de ejecutar el último/s pasos que confirman el pago y generan un pedido
      * @return
      */
-    public abstract DatosStep testPagoFromCheckout(boolean execPay) throws Exception;
+    public abstract void testPagoFromCheckout(boolean execPay) throws Exception;
 
     public void storePedidoForMantoAndResetData() {
         this.dCtxPago.storePedidoForManto();

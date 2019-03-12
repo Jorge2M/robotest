@@ -1,7 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.paypal;
 
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
@@ -19,14 +18,14 @@ public class PagePaypalLoginStpV {
 	@Step (
 		description="Introducimos las credenciales (#{userMail} - #{password}) y pulsamos el botón \"Iniciar sesión\"", 
         expected="Aparece la página de inicio de sesión en Paypal")
-    public static void loginPaypal(String userMail, String password, DataFmwkTest dFTest) throws Exception {  
-        String paginaPadre = dFTest.driver.getWindowHandle();                                                  
-        PagePaypalLogin.inputUserAndPassword(userMail, password, dFTest.driver);
-        PagePaypalLogin.clickIniciarSesion(dFTest.driver);
-        dFTest.driver.switchTo().window(paginaPadre); //Salimos del iframe
+    public static void loginPaypal(String userMail, String password, WebDriver driver) throws Exception {  
+        String paginaPadre = driver.getWindowHandle();                                                  
+        PagePaypalLogin.inputUserAndPassword(userMail, password, driver);
+        PagePaypalLogin.clickIniciarSesion(driver);
+        driver.switchTo().window(paginaPadre); //Salimos del iframe
         
         //Validaciones
         int maxSecondsWait = 20;
-        PagePaypalSelectPagoStpV.validateIsPageUntil(maxSecondsWait, dFTest.driver);
+        PagePaypalSelectPagoStpV.validateIsPageUntil(maxSecondsWait, driver);
     }
 }

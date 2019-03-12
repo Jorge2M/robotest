@@ -440,13 +440,27 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return common;
     }
     
-    public ArrayList<String> getArticlesOfType(TypeArticle typeArticle) {
-    	ArrayList<String> dataTextArticles = new ArrayList<String>();
-    	String xpathArtReb = getXPathDataArticuloOfType(typeArticle);
-    	for (WebElement litWebEl : driver.findElements(By.xpath(xpathArtReb)))
-    		dataTextArticles.add(litWebEl.getText());
+    public List<String> getArticles(TypeArticle typeArticle, List<Integer> listTemporadas) {
+    	List<String> listArtOfType = getArticlesOfType(typeArticle);
+    	if (listArtOfType.size()>0) {
+    		List<String> listArtTempX = getArticlesTemporadasX(ControlTemporada.articlesFrom, listTemporadas);
+    		List<String> common = new ArrayList<String>(listArtTempX);
+    		common.retainAll(listArtOfType);
+    		return common;
+    	}
     	
-    	return dataTextArticles;
+    	return listArtOfType;
+    }
+    
+    public List<String> getArticlesOfType(TypeArticle typeArticle) {
+    	//ArrayList<String> dataTextArticles = new ArrayList<String>();
+    	String xpathArtReb = getXPathDataArticuloOfType(typeArticle);
+
+//    	for (WebElement litWebEl : driver.findElements(By.xpath(xpathArtReb))) {
+//    		dataTextArticles.add(litWebEl.getText());
+//    	}
+//    	return dataTextArticles;
+    	return (getDataFromArticlesLiteral(xpathArtReb));
     }
     
     public List<String> getArticlesTemporadasX(ControlTemporada controlTemporada, List<Integer> listTemporadas) {

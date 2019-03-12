@@ -193,7 +193,7 @@ public class FichaProducto extends GestorWebDriver {
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.nina, null, "pantalones"));
-        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh, dFTest);
+        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh, dFTest.driver);
 
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);
         LocationArticle location1rstArticle = LocationArticle.getInstanceInCatalog(1);
@@ -246,20 +246,27 @@ public class FichaProducto extends GestorWebDriver {
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
         dCtxSh.userRegistered = false;
-        SecModalPersonalizacionStpV modalPersonalizacionStpV = new SecModalPersonalizacionStpV(dCtxSh.appE, dCtxSh.channel, dFTest);                
+        SecModalPersonalizacionStpV modalPersonalizacionStpV = SecModalPersonalizacionStpV.getNewOne(dCtxSh, dFTest.driver);                
         
         //Step
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
-        modalPersonalizacionStpV.searchForCustomization(dCtxSh.channel, dFTest, dCtxSh);
+        modalPersonalizacionStpV.searchForCustomization();
         
         //Step
         PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         pageFichaStpv.selectTalla(1);
         
         //Steps propios del modal de personalizacion
- 
-        modalPersonalizacionStpV.startCustomizationProcces(dCtxSh.channel, dFTest);
-        modalPersonalizacionStpV.customizationProcces(dCtxSh.channel, dFTest);
-        modalPersonalizacionStpV.endAndCheckCustomization(dCtxSh.channel, dFTest);
+        modalPersonalizacionStpV.selectCustomization();
+        modalPersonalizacionStpV.startCustomization();
+
+        modalPersonalizacionStpV.selectIconCustomization();
+        modalPersonalizacionStpV.selectFirstIcon();
+        modalPersonalizacionStpV.selectWhere();
+        modalPersonalizacionStpV.selectColor();
+        modalPersonalizacionStpV.selectSize();
+
+        modalPersonalizacionStpV.confirmCustomization();
+        modalPersonalizacionStpV.checkCustomizationProof();
     }
 }

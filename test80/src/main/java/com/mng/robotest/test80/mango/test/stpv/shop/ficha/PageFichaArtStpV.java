@@ -198,8 +198,6 @@ public class PageFichaArtStpV {
     public void selectTalla(String tallaCodNum) throws Exception {
     	SecBolsa.setBolsaToStateIfNotYet(StateBolsa.Closed, channel, app, driver);
         pageFicha.selectTallaByValue(tallaCodNum);
-        
-        //Validaciones
         checkTallaSelected(tallaCodNum);
     }
     
@@ -254,7 +252,7 @@ public class PageFichaArtStpV {
     	description="Seleccionar el botón <b>\"Añadir a la bolsa\"</b>", 
         expected="El comportamiento es el esperado... :-)")
     public void selectAnadirALaBolsaStep() throws Exception {
-            pageFicha.clickAnadirBolsaButtonAndWait();
+    	pageFicha.clickAnadirBolsaButtonAndWait();
     }
     
     /**

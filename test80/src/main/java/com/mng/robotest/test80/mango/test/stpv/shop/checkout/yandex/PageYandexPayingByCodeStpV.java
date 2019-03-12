@@ -1,61 +1,35 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.yandex;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandexPayingByCode;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-
 public class PageYandexPayingByCodeStpV {
     
-    public static String validateIsPage(String importeTotal, String codPais, DatosStep datosStep, DataFmwkTest dFTest) {
-        String paymentCodeForReturn = "";
-        String descripValidac = 
-            "1) Aparece la página de <b>Paying by code</b><br>" +
-            "2) Aparece el importe de la compra por pantalla: " + importeTotal + "<br>" +
-            "3) Aparece un <b>PaymentCode</b>";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageYandexPayingByCode.isPage(dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver)) {
-                listVals.add(2, State.Warn);
-            }
-            if (!PageYandexPayingByCode.isVisiblePaymentCode(dFTest.driver)) {
-                listVals.add(3, State.Defect);
-            }
-            else {
-                paymentCodeForReturn = PageYandexPayingByCode.getPaymentCode(dFTest.driver);
-            }
-                                                
-            datosStep.setListResultValidations(listVals);
-        }
-        catch (Exception e) {
-            //
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return paymentCodeForReturn;
+	@Validation
+    public static ListResultValidation validateIsPage(String importeTotal, String codPais, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	 	validations.add(
+			"Aparece la página de <b>Paying by code</b><br>",
+			PageYandexPayingByCode.isPage(driver), State.Warn);
+	 	validations.add(
+			"Aparece el importe de la compra por pantalla: " + importeTotal + "<br>",
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
+	 	validations.add(
+			"Aparece un <b>PaymentCode</b>",
+			PageYandexPayingByCode.isVisiblePaymentCode(driver), State.Defect);
+	 	return validations;
     }
     
-    public static DatosStep clickBackToMango(Channel channel, DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep (
-            "Seleccionamos el botón para volver a Mango", 
-            "Aparece la página Mango de resultado OK del pago");
-        try {
-            PageYandexPayingByCode.clickBackToMango(channel, dFTest.driver);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        return datosStep;
+	@Step (
+		description="Seleccionamos el botón para volver a Mango", 
+        expected="Aparece la página Mango de resultado OK del pago")
+    public static void clickBackToMango(Channel channel, WebDriver driver) throws Exception {
+		PageYandexPayingByCode.clickBackToMango(channel, driver);
     }
 }

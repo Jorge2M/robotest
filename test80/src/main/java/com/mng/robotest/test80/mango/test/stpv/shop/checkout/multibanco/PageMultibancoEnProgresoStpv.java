@@ -1,7 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.multibanco;
 
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
@@ -26,7 +25,7 @@ public class PageMultibancoEnProgresoStpv {
 	@Step (
 		description="Seleccionar el botón \"Continuar\"", 
         expected="El pago se ejecuta correctamente y aparece la correspondiente página de resultado de Mango")
-    public static void clickButtonNextStep(DataFmwkTest dFTest) throws Exception {
-		PageMultibancoEnProgreso.clickButtonNextStep(dFTest.driver);
+    public static void clickButtonNextStep(WebDriver driver) throws Exception {
+		PageMultibancoEnProgreso.clickButtonNextStep(driver);
     }
 }

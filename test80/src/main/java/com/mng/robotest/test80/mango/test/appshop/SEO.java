@@ -55,13 +55,11 @@ public class SEO extends GestorWebDriver {
     public void SEO001_check_RobotsSitemap() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
-        
-        //Este test sólo aplica al entorno productivo
-        if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest))
+        if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest.driver)) {
             return;
-        
+        }
         String urlBaseTest = (String)dFTest.ctx.getAttribute("appPath");
-        BrowserStpV.inputRobotsURLandValidate(urlBaseTest, dCtxSh.appE, dFTest);
+        BrowserStpV.inputRobotsURLandValidate(urlBaseTest, dCtxSh.appE, dFTest.driver);
         
         URI uriBase = new URI(urlBaseTest);
         String urlSitemap = urlBaseTest.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";

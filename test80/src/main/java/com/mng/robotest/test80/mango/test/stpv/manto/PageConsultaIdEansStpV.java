@@ -2,10 +2,14 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 
 import java.util.List;
 
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageConsultaIdEans;
@@ -36,47 +40,31 @@ public class PageConsultaIdEansStpV {
         finally { listVals.checkAndStoreValidations(descripValidac); }
     }
 
+    @Step (
+    	description="Introducimos datos de pedido válido y consultamos los datos de contacto", 
+	    expected="Deben mostrar la información de contacto",
+	    saveErrorPage=SaveWhen.Never)
+	public static void consultaDatosContacto(List<String> pedidosPrueba, WebDriver driver) {
+	    PageConsultaIdEans.inputPedidosAndClickBuscarDatos(pedidosPrueba, driver);
+	    checkAfterConsultContact(pedidosPrueba, driver);
+	}
     
-    
-    
-	public static void consultaDatosContacto(List<String> pedidosPrueba, DataFmwkTest dFTest) {
-	    DatosStep datosStep = new DatosStep       (
-	        "Introducimos datos de pedido válido y consultamos los datos de contacto", 
-	        "Deben mostrar la información de contacto");
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-	    try {
-	        PageConsultaIdEans.inputPedidosAndClickBuscarDatos(pedidosPrueba, dFTest.driver);
-	            
-	        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-	    }
-	    finally { StepAspect.storeDataAfterStep(datosStep); }
-		
-	    int maxSecondsToWait = 2;
-	    String descripValidac = 
-	        "1) Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>" +
-	        "2) El número de líneas de pedido es " + pedidosPrueba.size() + "<br>" +
-	        "3) Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.toString() + "</b>";
-            datosStep.setNOKstateByDefault();
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-            try {
-                if (!PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, dFTest.driver)) {
-                    listVals.add(1, State.Defect);
-                }
-                if (PageConsultaIdEans.getLineasPedido(dFTest.driver)!=pedidosPrueba.size()) {
-                    listVals.add(2, State.Defect);            
-                }
-                if (!PageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba, dFTest.driver)) {
-                    listVals.add(3, State.Defect);
-                }
-    
-                datosStep.setListResultValidations(listVals);
-            } 
-            finally { listVals.checkAndStoreValidations(descripValidac); }
-    	}
+    @Validation
+    private static ListResultValidation checkAfterConsultContact(List<String> pedidosPrueba, WebDriver driver) {
+		ListResultValidation validations = ListResultValidation.getNew();
+	    int maxSecondsWait = 2;
+    	validations.add(
+    		"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsWait + " segundos)<br>",
+    		PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsWait, driver), State.Defect);
+    	validations.add(
+    		"El número de líneas de pedido es " + pedidosPrueba.size() + "<br>",
+    		PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsWait, driver), State.Defect);
+    	validations.add(
+    		"Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.size() + "</b>",
+    		PageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba, driver), State.Defect);
+    	return validations;
+    }
 
-	
-	
-	
 	public static void consultaIdentificadoresPedido(List<String> pedidosPrueba, DataFmwkTest dFTest) {
 		DatosStep datosStep = new DatosStep       (
 	            "Introducimos datos de pedido válido y consultamos los Identificadores que tiene", 

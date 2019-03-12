@@ -32,8 +32,6 @@ public class PageRegistroDirecStpV {
         expected="No aparece ningún mensaje de error")
     public static void sendDataAccordingCountryToInputs(HashMap<String,String> dataRegistro, Pais pais, DataFmwkTest dFTest) throws Exception {
         PageRegistroDirec.sendDataAccordingCountryToInputs(dataRegistro, pais, dFTest.driver);
-        
-        //Validaciones
         validateInputDataOk(dFTest);
     }
     
@@ -50,8 +48,6 @@ public class PageRegistroDirecStpV {
     public static void clickFinalizarButton(DataFmwkTest dFTest) 
     throws Exception {
         PageRegistroDirec.clickFinalizarButton(dFTest.driver);
-
-        //Validaciones 
         int maxSecondsWait = 5;
         PageRegistroFinStpV.isPageUntil(maxSecondsWait, dFTest);
     }

@@ -1,8 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.State;
+import org.openqa.selenium.WebDriver;
+
+import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -19,31 +20,28 @@ public class SecFiltrosMantoStpV {
 
     public enum TypeSearch {BOLSA, PEDIDO} 
     
-    /**
-     * Establecemos los filtros y seleccionamos el botón "Buscar"
-     */
-    public static DatosStep setFiltrosHoyYbuscar(DataPedido dataPedido, TypeSearch typeSearch, DataFmwkTest dFTest) throws Exception {
-        //Step. Seteamos los filtros
-        DatosStep datosStep = new DatosStep     (
-            "Buscamos a nivel de " + typeSearch + " el pedido <b style=\"color:blue;\">" + dataPedido.getCodigoPedidoManto() + "</b> con filtros: <br>" +
-            "- Método pago: <b>" + dataPedido.getPago().getNombre() + "</b><br>" +
-            "- Tienda: <b>" + SecCabecera.getLitTienda(dFTest.driver) + "</b><br>" +
-            "- País: <b>" + dataPedido.getNombrePais() + "</b> (" + dataPedido.getCodigoPais() + ")", 
-            "La búsqueda es correcta");
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-        try {
-        	if (dataPedido.getCodigoPedidoManto() != null)
-	            SecFiltros.setFiltroCodPedido(dFTest.driver, dataPedido.getCodigoPedidoManto());
-        	
-        	SecFiltros.setFiltroCodPaisIfExists(dFTest.driver, dataPedido.getCodigoPais());
-            String fechaHoy = SecFiltros.getFechaHastaValue(dFTest.driver);
-            SecFiltros.setFiltroFDesde(dFTest.driver, fechaHoy);
-            SecFiltros.clickButtonBuscar(dFTest.driver);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        return datosStep;
+    final static String tagNombrePago = "@TagNombrePago";
+    final static String tagLitTienda = "@TagLitTienda";
+    @Step (
+    	description=
+    		"Buscamos a nivel de #{typeSearch} el pedido <b style=\"color:blue;\">#{dataPedido.getCodigoPedidoManto()}</b> con filtros: <br>" +
+    	    "- Método pago: <b>" + tagNombrePago + "</b><br>" +
+    	    "- Tienda: <b>" + tagLitTienda + "</b><br>" +
+    	    "- País: <b>#{dataPedido.getNombrePais()}</b> (#{dataPedido.getCodigoPais()})",
+    	expected="La búsqueda es correcta",
+    	saveErrorPage=SaveWhen.Never)
+    public static void setFiltrosHoyYbuscar(DataPedido dataPedido, @SuppressWarnings("unused") TypeSearch typeSearch, WebDriver driver) 
+    throws Exception {
+    	DatosStep datosStep = TestCaseData.getDatosCurrentStep();
+    	datosStep.replaceInDescription(tagNombrePago, dataPedido.getPago().getNombre());
+    	datosStep.replaceInDescription(tagLitTienda, SecCabecera.getLitTienda(driver));
+    	
+    	if (dataPedido.getCodigoPedidoManto()!=null) {
+            SecFiltros.setFiltroCodPedido(driver, dataPedido.getCodigoPedidoManto());
+    	}
+    	SecFiltros.setFiltroCodPaisIfExists(driver, dataPedido.getCodigoPais());
+        String fechaHoy = SecFiltros.getFechaHastaValue(driver);
+        SecFiltros.setFiltroFDesde(driver, fechaHoy);
+        SecFiltros.clickButtonBuscar(driver);
     }
 }

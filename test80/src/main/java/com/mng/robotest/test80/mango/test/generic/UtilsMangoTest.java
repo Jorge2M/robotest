@@ -17,8 +17,10 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.ITestContext;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataMango;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -65,19 +67,20 @@ public class UtilsMangoTest {
     /**
      * Usa diferentes métodos para posicionarse en la página inicial
      */
-    public static void goToPaginaInicio(Channel channel, AppEcom app, DataFmwkTest dFTest) 
+    public static void goToPaginaInicio(Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
         // Seleccionamos el logo de MANGO
-    	boolean existeLogo = SecCabecera.getNew(channel, app, dFTest.driver).clickLogoMango();
+    	boolean existeLogo = SecCabecera.getNew(channel, app, driver).clickLogoMango();
         if (!existeLogo) {
-            String urlPaginaPostAcceso = (String)dFTest.ctx.getAttribute(Constantes.attrUrlPagPostAcceso); 
+        	ITestContext ctx = TestCaseData.getdFTest().ctx;
+            String urlPaginaPostAcceso = (String)ctx.getAttribute(Constantes.attrUrlPagPostAcceso); 
             if (urlPaginaPostAcceso!=null) {
-                dFTest.driver.get(urlPaginaPostAcceso);
+                driver.get(urlPaginaPostAcceso);
             }
             else {
-                if (WebdrvWrapp.isElementPresent(dFTest.driver, By.xpath("//base"))) {
-                    String urlBase = dFTest.driver.findElement(By.xpath("//base")).getAttribute("href");
-                    dFTest.driver.get(urlBase);
+                if (WebdrvWrapp.isElementPresent(driver, By.xpath("//base"))) {
+                    String urlBase = driver.findElement(By.xpath("//base")).getAttribute("href");
+                    driver.get(urlBase);
                 }
             }
         }
@@ -284,12 +287,13 @@ public class UtilsMangoTest {
     /**
      * Determina si nos encontramos en un entorno de PRO
      */
-    public static boolean isEntornoPRO(AppEcom app, DataFmwkTest dFTest) {
+    public static boolean isEntornoPRO(AppEcom app, WebDriver driver) {
         boolean isEntornoPRO = false;
         List<String> URLsProShop   = Arrays.asList("shop.mango.com", "shoptest.pro.mango.com");
         List<String> URLsProOutlet = Arrays.asList("www.mangooutlet.com", "outlettest.pro.mango.com");
-        String xmlURL = ((String)dFTest.ctx.getAttribute("appPath"));
-        String browserURL = dFTest.driver.getCurrentUrl();
+        ITestContext ctx = TestCaseData.getdFTest().ctx;
+        String xmlURL = ((String)ctx.getAttribute("appPath"));
+        String browserURL = driver.getCurrentUrl();
         Iterator<String> itURLsPRO = null;
         if (app==AppEcom.outlet)
             itURLsPRO = URLsProOutlet.iterator();

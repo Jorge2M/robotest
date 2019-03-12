@@ -113,8 +113,9 @@ public class SecBolsa extends WebdrvWrapp {
     
     public static void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected, Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-        if (!isInStateUntil(stateBolsaExpected, channel, 0, driver))
+        if (!isInStateUntil(stateBolsaExpected, channel, 1, driver)) {
         	setBolsaToState(stateBolsaExpected, channel, app, driver);
+        }
     }
     
     static void setBolsaToState(StateBolsa stateBolsaExpected, Channel channel, AppEcom app, WebDriver driver) 

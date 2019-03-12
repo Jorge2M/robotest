@@ -16,7 +16,6 @@ public class GestorUsersShop {
     public static void setGestorUsersShopIfVoid() {
         if (ListUsers==null) {
             ListUsers = new CopyOnWriteArrayList<>();
-            ListUsers.add(new UserShop("jorge.munoz@mango.com", "sirjorge74"));
             ListUsers.add(new UserShop("listablanca003@mango.com", "sirjorge74"));
 
             //Tenemos 50 usuarios de este tipo 

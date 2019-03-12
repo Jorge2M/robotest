@@ -1,104 +1,104 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
-
 
 public class FactoryPagos {
     
     /**
      * @return Factoría de objetos de tipo 'PagoStpV' en el que se implementan los pasos/validaciones específicos a partir de la página de checkout
      */
-    public static PagoStpV makePagoStpV(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {
+    public static PagoStpV makePagoStpV(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
         TypePago typePago = dCtxPago.getDataPedido().getPago().getTypePago();
         
         PagoStpV pagoMaked = null; 
         switch (typePago) {
         case TarjetaIntegrada:
-            pagoMaked = new PagoTarjetaIntegrada(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoTarjetaIntegrada(dCtxSh, dCtxPago, driver);
             break;
         case KrediKarti:
-            pagoMaked = new PagoKrediKarti(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoKrediKarti(dCtxSh, dCtxPago, driver);
             break;
         case TMango:
-            pagoMaked = new PagoTMango(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoTMango(dCtxSh, dCtxPago, driver);
             break;
         case Billpay:
-            pagoMaked = new PagoBillpay(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoBillpay(dCtxSh, dCtxPago, driver);
             break;
         case Paypal:
-            pagoMaked = new PagoPaypal(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoPaypal(dCtxSh, dCtxPago, driver);
             break;  
         case Mercadopago:
-            pagoMaked = new PagoMercadopago(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoMercadopago(dCtxSh, dCtxPago, driver);
             break;
         case Amazon:
-            pagoMaked = new PagoAmazon(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoAmazon(dCtxSh, dCtxPago, driver);
             break;            
         case Postfinance:
-            pagoMaked = new PagoPostfinance(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoPostfinance(dCtxSh, dCtxPago, driver);
             break;            
         case Trustpay:
-            pagoMaked = new PagoTrustpay(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoTrustpay(dCtxSh, dCtxPago, driver);
             break;            
         case Multibanco:
-            pagoMaked = new PagoMultibanco(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoMultibanco(dCtxSh, dCtxPago, driver);
             break;            
         case Paytrail:
-            pagoMaked = new PagoPaytrail(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoPaytrail(dCtxSh, dCtxPago, driver);
             break;            
         case Dotpay:
-            pagoMaked = new PagoDotpay(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoDotpay(dCtxSh, dCtxPago, driver);
             break;            
         case Ideal:
-            pagoMaked = new PagoIdeal(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoIdeal(dCtxSh, dCtxPago, driver);
             break;   
         case Eps:
-            pagoMaked = new PagoEps(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoEps(dCtxSh, dCtxPago, driver);
             break;  
         case Sepa:
-            pagoMaked = new PagoSepa(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoSepa(dCtxSh, dCtxPago, driver);
             break;            
         case Giropay:
-            pagoMaked = new PagoGiropay(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoGiropay(dCtxSh, dCtxPago, driver);
             break;            
         case Sofort:
-            pagoMaked = new PagoSofort(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoSofort(dCtxSh, dCtxPago, driver);
             break;       
         case Klarna:
-            pagoMaked = new PagoKlarna(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoKlarna(dCtxSh, dCtxPago, driver);
             break;
         case KlarnaDeutsch:
-            pagoMaked = new PagoKlarnaDeutsch(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoKlarnaDeutsch(dCtxSh, dCtxPago, driver);
             break;            
         case AssistQiwi:
-            pagoMaked = new PagoAssistQiwi(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoAssistQiwi(dCtxSh, dCtxPago, driver);
             break;
         case StoreCredit:
-            pagoMaked = new PagoStoreCredit(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoStoreCredit(dCtxSh, dCtxPago, driver);
             break;
         case Assist:
-            pagoMaked = new PagoAssist(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoAssist(dCtxSh, dCtxPago, driver);
             break;            
         case Yandex:
-            pagoMaked = new PagoYandex(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoYandex(dCtxSh, dCtxPago, driver);
             break;
         case PasarelaOtras:
-            pagoMaked = new PagoPasarelaOtras(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoPasarelaOtras(dCtxSh, dCtxPago, driver);
             break;
         case KoreanCreditCard:
-        	pagoMaked = new PagoKoreanCreditCard(dCtxSh, dCtxPago, dFTest);
+        	pagoMaked = new PagoKoreanCreditCard(dCtxSh, dCtxPago, driver);
         	break;
         case ContraReembolso:            
-            pagoMaked = new PagoContraReembolso(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoContraReembolso(dCtxSh, dCtxPago, driver);
             break;
         case Bancontact:
-            pagoMaked = new PagoBancontact(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoBancontact(dCtxSh, dCtxPago, driver);
             break;            
         case TpvVotf:
-            pagoMaked = new PagoTpvVotf(dCtxSh, dCtxPago, dFTest);
+            pagoMaked = new PagoTpvVotf(dCtxSh, dCtxPago, driver);
             break;
         default:
             break;

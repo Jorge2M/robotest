@@ -119,7 +119,7 @@ public class Favoritos extends GestorWebDriver {
         SecBolsaStpV.clear(dCtxSh, dFTest.driver);
         PageFavoritosStpV.clearAll(dataFavoritos, dCtxSh, dFTest.driver);
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
-        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh, dFTest);
+        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh, dFTest.driver);
 
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);
         List<Integer> iconsToMark = Arrays.asList(1, 3, 4);  
@@ -159,7 +159,7 @@ public class Favoritos extends GestorWebDriver {
         PageFavoritosStpV.clearAll(dataFavoritos, dCtxSh, dFTest.driver);
         
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
-        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh, dFTest);
+        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh, dFTest.driver);
         LocationArticle article1 = LocationArticle.getInstanceInCatalog(1);
         
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);

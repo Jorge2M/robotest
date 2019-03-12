@@ -531,6 +531,10 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         return ImporteScreen.getFloatFromImporteMangoScreen(precioArticulo);
     }
     
+    public static boolean isVisibleRadioTrjGuardada(WebDriver driver)  {
+    	return (WebdrvWrapp.isElementVisible(driver, By.xpath(XPathRadioTrjGuardada)));
+    }
+    
     public static void clickRadioTrjGuardada(WebDriver driver) throws Exception {
         clickAndWaitLoad(driver, By.xpath(XPathRadioTrjGuardada));
     }

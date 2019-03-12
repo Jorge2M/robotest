@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
@@ -24,7 +23,7 @@ public class PageKoreanConfDesktopStpV {
     @Step (
     	description="Seleccionar el botón para Confirmar", 
         expected="Aparece la página de Mango de resultado OK del pago")
-    public static void clickConfirmarButton(DataFmwkTest dFTest) throws Exception {    
-    	PageKoreanConfDesktop.clickButtonSubmit(dFTest.driver);
+    public static void clickConfirmarButton(WebDriver driver) throws Exception {    
+    	PageKoreanConfDesktop.clickButtonSubmit(driver);
     }
 }

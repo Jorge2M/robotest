@@ -138,34 +138,22 @@ public class PageGaleriaStpV {
         return (datosArticulo);
     }
     
+    @Step (
+    	description="Posicionarse sobre el artículo en la posición <b>#{posArticulo}</b>, esperar que aparezca el link \"Añadir\" y seleccionarlo", 
+        expected="Aparece la capa con la información de las tallas")
     public void selectLinkAddArticuloToBagDesktop(int posArticulo)
     throws Exception {
-    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-        DatosStep datosStep = new DatosStep (
-            "Posicionarse sobre el artículo en la posición <b>" + posArticulo + "</b>, esperar que aparezca el link \"Añadir\" y seleccionarlo", 
-            "Aparece la capa con la información de las tallas");
-        try { 
-            pageGaleriaDesktop.selectLinkAddArticleToBagDesktop(posArticulo);
-                            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-            
-        //Validaciones
-        int maxSecondsToWait = 1;
-        String descripValidac = 
-            "1) Aparece la capa con la información de las tallas (la esperamos hasta " + maxSecondsToWait + ")";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!pageGaleriaDesktop.isVisibleArticleCapaTallasDesktopUntil(posArticulo, maxSecondsToWait)) {
-                listVals.add(1, State.Warn);
-            }
+    	((PageGaleriaDesktop)pageGaleria).selectLinkAddArticleToBagDesktop(posArticulo);
+        int maxSecondsWait = 1;
+        checkIsVisibleCapaInfoTallas(posArticulo, maxSecondsWait);
+    }   
     
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
-    }    
+    @Validation (
+    	description="Aparece la capa con la información de las tallas (la esperamos hasta #{maxSecondsWait}",
+    	level=State.Warn)
+    private boolean checkIsVisibleCapaInfoTallas(int posArticulo, int maxSecondsWait) {
+        return (((PageGaleriaDesktop)pageGaleria).isVisibleArticleCapaTallasDesktopUntil(posArticulo, maxSecondsWait));
+    }
     
     @Step (
     	description="Del #{posArticulo}o artículo, seleccionamos la #{posTalla}a talla", 
@@ -294,169 +282,122 @@ public class PageGaleriaStpV {
 	    return (numArticlesInPage==numArticlesExpected);
     }
    
+    @Step (
+    	description="Seleccionar la ordenación #{typeOrdenacion}", 
+        expected="Los artículos se ordenan correctamente")
     public int seleccionaOrdenacionGaleria(FilterOrdenacion typeOrdenacion, String tipoPrendasGaleria, int numArticulosValidar, 
-		   										 DataCtxShop dCtxSh) throws Exception {
-       //Step. Seleccionar el link "Descendente" / "Ascendente"
-       DatosStep datosStep = new DatosStep       (
-           "Seleccionar la ordenación " + typeOrdenacion.name(), 
-           "Los artículos se ordenan correctamente");
-       try {
-           SecFiltros secFiltros = SecFiltros.newInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-           secFiltros.selecOrdenacionAndReturnNumArticles(typeOrdenacion); 
-               
-           datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-       }
-       finally { StepAspect.storeDataAfterStep(datosStep); }         
+		   								   DataCtxShop dCtxSh) throws Exception {
+        SecFiltros secFiltros = SecFiltros.newInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        secFiltros.selecOrdenacionAndReturnNumArticles(typeOrdenacion);    
+        
+        checkIsVisiblePageWithTitle(tipoPrendasGaleria);
+        int numArticulosPant = pageGaleria.getNumArticulos() + pageGaleria.getNumArticulos();
+        checkOrderListArticles(typeOrdenacion, numArticulosPant, numArticulosValidar);
+
+        //Validaciones estándar. 
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = true;
+        flagsVal.validaJS = true;
+        flagsVal.validaImgBroken = false;
+        AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
        
-       //Validaciones.
-       String descripValidac = 
-           "1) Aparece una pantalla en la que el title contiene \"" + tipoPrendasGaleria;
-       datosStep.setNOKstateByDefault(); 
-       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-       try {
-           if (!dFTest.driver.getTitle().toLowerCase().contains(tipoPrendasGaleria)) {
-               listVals.add(1, State.Warn);
-           }
+        return numArticulosPant;
+    }
+    
+    @Validation (
+    	description="Aparece una pantalla en la que el title contiene <b>#{tipoPrendasGaleria}",
+    	level=State.Warn)
+    private boolean checkIsVisiblePageWithTitle(String tipoPrendasGaleria) {
+    	return (dFTest.driver.getTitle().toLowerCase().contains(tipoPrendasGaleria));
+    }
+    
+    @Validation
+    private ListResultValidation checkOrderListArticles(FilterOrdenacion typeOrdenacion, int numArticulosPant, int numArticulosValidar) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+      	validations.add(
+    		"Aparecen > 1 prendas<br>",
+    		numArticulosPant > 1, State.Warn);
+	    if (numArticulosValidar>=0) {
+	      	validations.add(
+        		"Aparecen " + numArticulosValidar + " artículos<br>",
+        		numArticulosValidar==numArticulosPant, State.Info);
+	    }
+      	validations.add(
+    		"Los artículos aparecen ordenados por " + typeOrdenacion.name(),
+    		pageGaleria.articlesInOrder(typeOrdenacion), State.Warn);
+      	
+      	return validations;
+    }
    
-           datosStep.setListResultValidations(listVals);
-       }
-       finally { listVals.checkAndStoreValidations(descripValidac); }
-       
-       //Validaciones
-       int numArticulosPant = 0;
-       String validacion2 = ""; 
-       if (numArticulosValidar >=0 )
-           validacion2 = "2) Aparecen " + numArticulosValidar + " artículos<br>"; 
-       
-       descripValidac = 
-           "1) Aparecen > 1 prendas<br>" + 
-           validacion2 +
-           "3) Los artículos aparecen ordenados por " + typeOrdenacion.name();
-       datosStep.setNOKstateByDefault();           
-       listVals = ListResultValidation.getNew(datosStep);
-       try {
-           numArticulosPant = pageGaleria.getNumArticulos() + pageGaleria.getNumArticulos();
-           if (numArticulosPant <= 1) {
-               listVals.add(1, State.Warn);
-           }
-           if (numArticulosValidar >= 0) {
-               if (numArticulosValidar != numArticulosPant) {
-                   listVals.add(2, State.Info);
-               }
-           }
-           if (!pageGaleria.articlesInOrder(typeOrdenacion)) {
-               listVals.add(3, State.Warn);
-           }
-   
-           datosStep.setListResultValidations(listVals);
-       }
-       finally { listVals.checkAndStoreValidations(descripValidac); }                
+    @Step (
+    	description="Volver al 1er artículo de la galería (mediante selección del icono de la flecha Up)", 
+        expected="Se visualiza el 1er elemento")
+    public void backTo1erArticleMobilStep(DataCtxShop dCtxSh) throws Exception {
+        pageGaleria.backTo1erArticulo();
+        checkBackTo1ersElementOk(dCtxSh);
+    }
+    
+    @Validation
+    private ListResultValidation checkBackTo1ersElementOk(DataCtxShop dCtxSh) throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
+      	validations.add(
+    		"Es clickable el 1er elemento de la lista<br>",
+    		pageGaleria.isClickableArticuloUntil(1, 0), State.Warn);
+      	
+        SecFiltros secFiltros = SecFiltros.newInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        int maxSecondsWait = 2;
+      	validations.add(
+    		"Es clickable el bloque de filtros (esperamos hasta " + maxSecondsWait + " segundos)",
+    		secFiltros.isClickableFiltroUntil(maxSecondsWait), State.Warn);
+      	
+      	return validations;
+    }
 
-       //Validaciones estándar. 
-       StdValidationFlags flagsVal = StdValidationFlags.newOne();
-       flagsVal.validaSEO = true;
-       flagsVal.validaJS = true;
-       flagsVal.validaImgBroken = false;
-       AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
+    /**
+     * Pasos/Validaciones consistentes en seleccionar un determinado color de un determinado artículo
+     * @param posColor posición del color en la lista de colores del artículo
+     * @param numArtConColores posición del artículo entre el conjunto de artículos con variedad de colores
+     * @return src de la imagen obtenida al ejecutar el click sobre el color
+     */
+    final static String tagSrcPng2oColor = "@srcPng2oColor";
+    final static String tagNombre1erArtic = "@nombre1erArt";
+    final static String tagPrecio1erArtic = "@precio1erArt";
+    @Step (
+    	description=
+    		"Seleccionar el #{posColor}o color (" + tagSrcPng2oColor +") no seleccionado del #{numArtConColores}o " + 
+    		"artículo con variedad de colores (" + tagNombre1erArtic + ", " + tagPrecio1erArtic +")", 
+        expected="Se selecciona el color")
+    public String selecColorFromArtGaleriaStep(int numArtConColores, int posColor) 
+    throws Exception {
+        //En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax. En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
+        WebdrvWrapp.waitForPageLoaded(dFTest.driver, 2/*waitSeconds*/);
        
-       return numArticulosPant;
-   }
-   
-   /**
-    * Paso/Validación consistente en seleccionar el icono de la flecha up (de la galería de productos) para volver al 1er artículo de la página
-    * @throws InterruptedException 
-    */
-   public void backTo1erArticleMobilStep(DataCtxShop dCtxSh) throws Exception {
-       //Step
-       DatosStep datosStep = new DatosStep (
-           "Volver al 1er artículo de la galería (mediante selección del icono de la flecha Up)", 
-           "Se visualiza el 1er elemento");
-       try {
-           //Volvemos al 1er elemento
-           pageGaleria.backTo1erArticulo();
-           
-           datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-       }
-       finally { StepAspect.storeDataAfterStep(datosStep); }
+        DatosStep datosStep = TestCaseData.getDatosCurrentStep();
+        WebElement articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
+        datosStep.replaceInDescription(tagNombre1erArtic, pageGaleria.getNombreArticulo(articuloColores));
        
-       //Validaciones
-       int maxSecondsWait = 2;
-       String descripValidac = 
-           "1) Es clickable el 1er elemento de la lista<br>" +
-           "2) Es clickable el bloque de filtros (esperamos hasta " + maxSecondsWait + " segundos)";
-       datosStep.setNOKstateByDefault();     
-       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-       try {
-           if (!pageGaleria.isClickableArticuloUntil(5, 0/*seconds*/)) {
-               listVals.add(1, State.Warn);
-           }
-
-           SecFiltros secFiltros = SecFiltros.newInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-           if (!secFiltros.isClickableFiltroUntil(maxSecondsWait)) {
-               listVals.add(2, State.Warn);
-           }
-          
-           datosStep.setListResultValidations(listVals);
-       }
-       finally { listVals.checkAndStoreValidations(descripValidac); }                
-   }
-
-   /**
-    * Pasos/Validaciones consistentes en seleccionar un determinado color de un determinado artículo
-    * @param posColor posición del color en la lista de colores del artículo
-    * @param numArtConColores posición del artículo entre el conjunto de artículos con variedad de colores
-    * @return src de la imagen obtenida al ejecutar el click sobre el color
-    */
-   public String selecColorFromArtGaleriaStep(int numArtConColores, int posColor) 
-   throws Exception {
-       String TAGsrcPng2oColor = "@srcPng2oColor";
-       String TAGnombre1erArt = "@nombre1erArt";
-       String TAGprecio1erArt = "@precio1erArt";
-       String srcImg1erArt = "";
-       String srcImgAfterClickColor = "";
-       WebElement articuloColores = null;
-       WebElement colorToClick = null;
+        WebElement colorToClick = pageGaleria.getColorArticulo(articuloColores, false/*selected*/, posColor);
+        datosStep.replaceInDescription(tagPrecio1erArtic, pageGaleria.getPrecioArticulo(articuloColores));
        
-       //Step. Seleccionar el Xo color (posColor) del Y artículo (numArtConColores) con variedad de colores
-       DatosStep datosStep = new DatosStep       (
-           "Seleccionar el " + posColor + "o color (" + TAGsrcPng2oColor +") no seleccionado del " + numArtConColores + "o artículo con variedad de colores (" + TAGnombre1erArt + ", " + TAGprecio1erArt +")", 
-           "Se selecciona el color");
-       try {
-           //En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax. En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
-           WebdrvWrapp.waitForPageLoaded(dFTest.driver, 2/*waitSeconds*/);
-           
-           articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
-           datosStep.setDescripcion(datosStep.getDescripcion().replace(TAGnombre1erArt, pageGaleria.getNombreArticulo(articuloColores)));
-           colorToClick = pageGaleria.getColorArticulo(articuloColores, false/*selected*/, posColor);
-           datosStep.setDescripcion(datosStep.getDescripcion().replace(TAGprecio1erArt, pageGaleria.getPrecioArticulo(articuloColores)));
-           srcImg1erArt = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
-           datosStep.setDescripcion(datosStep.getDescripcion().replace(TAGsrcPng2oColor, colorToClick.getAttribute("src")));
-           
-           WebdrvWrapp.forceClick(dFTest.driver, colorToClick, null);
-           Thread.sleep(100);
-           
-           datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-       }
-       finally { StepAspect.storeDataAfterStep(datosStep); }         
+        String srcImg1erArt = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
+        datosStep.replaceInDescription(tagSrcPng2oColor, colorToClick.getAttribute("src"));
        
-       //Validaciones.
-       String descripValidac = 
-           "1) Se modifica la imagen correspondiente al artículo ";
-       datosStep.setNOKstateByDefault();   
-       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-       try {
-           srcImgAfterClickColor = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
-           if (srcImgAfterClickColor.contains(srcImg1erArt)) {
-               listVals.add(1, State.Defect);
-           }
-               
-           datosStep.setListResultValidations(listVals);
-       }
-       finally { listVals.checkAndStoreValidations(descripValidac); }               
+        WebdrvWrapp.forceClick(dFTest.driver, colorToClick, null);
+        Thread.sleep(100);
+        
+        String srcImgAfterClickColor = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
+        checkImageIsModified(srcImg1erArt, srcImgAfterClickColor);
        
-       return srcImgAfterClickColor;
-   }
-
+        return srcImgAfterClickColor;
+    }
+    
+    @Validation (
+    	description="Se modifica la imagen correspondiente al artículo",
+    	level=State.Defect)
+    private boolean checkImageIsModified(String srcImg1erArt, String srcImgAfterClickColor) {
+        return (!srcImgAfterClickColor.contains(srcImg1erArt));        
+    }
+    
     /**
      * @return src de la imagen obtenida al ejecutar los clicks
      */
@@ -468,78 +409,60 @@ public class PageGaleriaStpV {
     /**
      * @param srcImageExpected el src esperado para la imagen resultante de la secuencia de clicks en el slider. Si tiene valor "" no aplicamos validación
      */
+    final static String tagNombreArt = "@TagNombreArt";
+    final static String tagSliderList = "@TagSliderList";
+    @Step (
+    	description=
+    		"Clickar la siguiente secuencia de sliders: <b>" + tagSliderList + "</b> del #{numArtConColores}o " + 
+    		" artículo con variedad de colores (" + tagNombreArt + "). Previamente realizamos un \"Hover\" sobre dicho artículo", 
+        expected="Aparece el artículo original(" + tagNombreArt + ")")
     public String clicksSliderArticuloConColores(int numArtConColores, ArrayList<TypeSlider> typeSliderList, String srcImageExpected) 
     throws Exception {
        if (channel!=Channel.desktop) {
            throw new RuntimeException("Method clickSliderArticuloConColores doesn't support channel " + channel);
        }
        
-       PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-       String TAGnombreArt = "@nombreArt";
-       String TAGsrc1erSlider = "@srcPng2oColor";
-       String srcImg1erSlider = "";
-       WebElement articuloColores = null;
-       
        String slidersListStr = getStringSliderList(typeSliderList);
-       DatosStep datosStep = new DatosStep       (
-           "Clickar la siguiente secuencia de sliders: <b>" + slidersListStr + "</b> del " + numArtConColores + "o artículo con variedad de colores (" + TAGnombreArt + "). Previamente realizamos un \"Hover\" sobre dicho artículo", 
-           "Aparece el artículo original(" + TAGnombreArt + ")");
-       try {
-           //En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax. En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
-           WebdrvWrapp.waitForPageLoaded(dFTest.driver, 2/*waitSeconds*/);
-           
-           articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHoverNoDoble(numArtConColores);
-           datosStep.setDescripcion(datosStep.getDescripcion().replace(TAGnombreArt, pageGaleria.getNombreArticulo(articuloColores)));
-           srcImg1erSlider = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
-           datosStep.setDescripcion(datosStep.getDescripcion().replace(TAGsrc1erSlider, srcImg1erSlider));
-                  	   
-           pageGaleriaDesktop.clickSliderAfterHoverArticle(articuloColores, typeSliderList);
-          
-           //PageGaleriaDesktop.slideAction(numArtConColores, dFTest.driver);
-           
-           datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-       }
-       finally { StepAspect.storeDataAfterStep(datosStep); }
+       DatosStep datosStep = TestCaseData.getDatosCurrentStep();
+       datosStep.replaceInDescription(tagSliderList, slidersListStr);
        
-       //Validaciones.
-       String srcImg2oSlider = "";
-       String descripValidac = 
-           "1) Se modifica la imagen asociada al artículo (<b>antes</b>: " + srcImg1erSlider + ", <b>ahora</b>: " + srcImg2oSlider + ")";
-       datosStep.setNOKstateByDefault(); 
-       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-       try {
-           srcImg2oSlider = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
-           if (srcImg2oSlider.compareTo(srcImg1erSlider)==0) {
-               listVals.add(1, State.Defect);
-           }
-               
-           datosStep.setListResultValidations(listVals);
-       }
-       finally { listVals.checkAndStoreValidations(descripValidac); }
+       //En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax. 
+	   //En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
+       WebdrvWrapp.waitForPageLoaded(dFTest.driver, 2);
+       PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
+       WebElement articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHoverNoDoble(numArtConColores);
+       datosStep.replaceInDescription(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
+       datosStep.replaceInExpected(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
+       String srcImg1erSlider = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
+       pageGaleriaDesktop.clickSliderAfterHoverArticle(articuloColores, typeSliderList);
        
+       String srcImg2oSlider = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
+       checkImageSliderArticleHasChanged(srcImg1erSlider, srcImg2oSlider);
        if ("".compareTo(srcImageExpected)!=0) {
-           descripValidac = 
-               "1) El src de la imagen <b>ahora</b> (" + srcImg2oSlider + ") es la <b>original</b> (" + srcImageExpected + ")";
-           datosStep.setNOKstateByDefault();     
-           listVals = ListResultValidation.getNew(datosStep);
-           try {
-               if (srcImg2oSlider.compareTo(srcImageExpected)!=0) {
-                   listVals.add(1, State.Defect);
-               }
-                   
-               datosStep.setListResultValidations(listVals);
-           }
-           finally { listVals.checkAndStoreValidations(descripValidac); }
+    	   checkActualImgSliderIsTheExpected(srcImg2oSlider, srcImageExpected);
        }
-       
        return srcImg2oSlider;
+   }
+    
+   @Validation (
+	  description="Se modifica la imagen asociada al artículo (<b>antes</b>: #{srcImg1erSlider}, <b>ahora</b>: #{srcImg2oSlider})",
+	  level=State.Defect)
+   private boolean checkImageSliderArticleHasChanged(String srcImg1erSlider, String srcImg2oSlider) {
+       return (srcImg2oSlider.compareTo(srcImg1erSlider)!=0); 
+   }
+   
+   @Validation (
+	   description="El src de la imagen <b>ahora</b> (#{srcImgActual}) es la <b>original</b> (#{srcImgOriginalExpected})",
+	   level=State.Defect)
+   private boolean checkActualImgSliderIsTheExpected(String srcImgActual, String srcImgOriginalExpected) {
+       return (srcImgActual.compareTo(srcImgOriginalExpected)==0);
    }
     
    private static String getStringSliderList(ArrayList<TypeSlider> typeSliderList) {
        String listStr = "";
-       for (TypeSlider typeSlider : typeSliderList)
+       for (TypeSlider typeSlider : typeSliderList) {
            listStr+=(typeSlider + ", ");
-       
+       }
        return listStr;
    }
     

@@ -1,8 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -12,35 +11,41 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.d3d.PageD3DLoginStp
 
 public class PagoTarjetaIntegrada extends PagoStpV {
 
-    public PagoTarjetaIntegrada(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {
-        super(dCtxSh, dCtxPago, dFTest);
+    public PagoTarjetaIntegrada(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+        super(dCtxSh, dCtxPago, driver);
         super.isAvailableExecPay = true;
     }
     
     @Override
-    public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
+    public void testPagoFromCheckout(boolean execPay) throws Exception {
         DataPedido dataPedido = this.dCtxPago.getDataPedido();
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, dFTest);
+        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, driver);
         
         if (execPay) {
             dataPedido.setCodtipopago("U");
-            PageCheckoutWrapperStpV.inputDataTrjAndConfirmPago(dCtxPago, dCtxSh.channel, dFTest);
+            if (dCtxPago.getFTCkout().trjGuardada && 
+            	PageCheckoutWrapperStpV.isTarjetaGuardadaAvailable(dCtxSh.channel, driver)) {
+            	PageCheckoutWrapperStpV.selectTrjGuardadaAndConfirmPago(dCtxPago, dCtxSh.channel, driver);
+            }
+            else {
+            	PageCheckoutWrapperStpV.inputDataTrjAndConfirmPago(dCtxPago, dCtxSh.channel, driver);
+            }
             switch (dataPedido.getPago().getTipotarjEnum()) {
             case VISAD3D:
-                boolean isD3D = PageD3DLoginStpV.validateIsD3D(1, dFTest.driver);
-                PageD3DLoginStpV.isImporteVisible(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dFTest.driver);
+                boolean isD3D = PageD3DLoginStpV.validateIsD3D(1, driver);
+                PageD3DLoginStpV.isImporteVisible(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), driver);
                 dataPedido.setCodtipopago("Y");
                 if (isD3D) {
-                    PageD3DLoginStpV.loginAndClickSubmit(dataPedido.getPago().getUsrd3d(), dataPedido.getPago().getPassd3d(), dFTest.driver);
+                    PageD3DLoginStpV.loginAndClickSubmit(dataPedido.getPago().getUsrd3d(), dataPedido.getPago().getPassd3d(), driver);
                 }
                 
                 break;
             case VISAD3D_JP:
-            	boolean isD3DJP = PageD3DJPTestSelectOptionStpV.validateIsD3D(1, dFTest.driver);
-            	PageD3DJPTestSelectOptionStpV.isImporteVisible(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dFTest.driver);
+            	boolean isD3DJP = PageD3DJPTestSelectOptionStpV.validateIsD3D(1, driver);
+            	PageD3DJPTestSelectOptionStpV.isImporteVisible(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), driver);
                 dataPedido.setCodtipopago("Y");
                 if (isD3DJP) {
-                    PageD3DJPTestSelectOptionStpV.clickSubmitButton(dFTest.driver);
+                    PageD3DJPTestSelectOptionStpV.clickSubmitButton(driver);
                 }
                 
                 break;
@@ -48,7 +53,5 @@ public class PagoTarjetaIntegrada extends PagoStpV {
             default:
             }
         }
-        
-        return TestCaseData.getDatosLastStep();
     }
 }

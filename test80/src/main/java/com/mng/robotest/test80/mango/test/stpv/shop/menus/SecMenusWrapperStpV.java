@@ -101,23 +101,23 @@ public class SecMenusWrapperStpV {
     /**
      * Recorre todos los menús existentes en la página y crea un step por cada uno de ellos
      */
-    public static void stepsMenusLinea(Pais pais, LineaType lineaType, SublineaNinosType sublineaType, Channel channel, AppEcom app, DataFmwkTest dFTest) 
+    public static void stepsMenusLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         String paginaLinea = dFTest.driver.getCurrentUrl();
         
         //Obtenemos la lista de menús de la línea
-        Linea linea = pais.getShoponline().getLinea(lineaType);
-        List<String> listMenusLabel = SecMenusWrap.getListDataLabelsMenus(linea, sublineaType, channel, app, dFTest.driver);
+        Linea linea = dCtxSh.pais.getShoponline().getLinea(lineaType);
+        List<String> listMenusLabel = SecMenusWrap.getListDataLabelsMenus(linea, sublineaType, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         for (int i=0; i<listMenusLabel.size(); i++) {
             try {
             	//Creamos un menú con el nombre=dataGaLabel (pues todavía no lo conocemos)
-            	Menu1rstLevel menu1rstLevel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(lineaType, sublineaType, listMenusLabel.get(i)));
+            	Menu1rstLevel menu1rstLevel = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, listMenusLabel.get(i)));
             	menu1rstLevel.setDataGaLabel(listMenusLabel.get(i));
-                if (channel==Channel.movil_web) {
-                    SecMenuLateralMobilStpV.stepClickMenu1rstLevel(menu1rstLevel, pais, app, dFTest);
+                if (dCtxSh.channel==Channel.movil_web) {
+                    SecMenuLateralMobilStpV.stepClickMenu1rstLevel(menu1rstLevel, dCtxSh.pais, dCtxSh.appE, dFTest);
                 }
                 else {
-                    SecMenusDesktopStpV.stepEntradaMenuDesktop(menu1rstLevel, paginaLinea, channel, app, dFTest.driver);
+                    SecMenusDesktopStpV.stepEntradaMenuDesktop(menu1rstLevel, paginaLinea, dCtxSh, dFTest.driver);
                 }
             }
             catch (Exception e) {
@@ -173,13 +173,13 @@ public class SecMenusWrapperStpV {
         return datosStep;
     }
     
-    public static void selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static void selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
-            SecMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, dFTest.driver);
+            SecMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, driver);
         }
         else {	
-        	SecMenusDesktopStpV.selectMenuSuperiorTypeCatalog(menu1rstLevel, dCtxSh, dFTest);
+        	SecMenusDesktopStpV.selectMenuSuperiorTypeCatalog(menu1rstLevel, dCtxSh, driver);
         }
     }
     
@@ -273,11 +273,13 @@ public class SecMenusWrapperStpV {
         return SecMenusDesktopStpV.seleccionSublinea(lineaType, sublineaType, dCtxSh, dFTest);
     }
     
-    public static void selectFiltroCollectionIfExists(FilterCollection typeMenu, Channel channel, AppEcom app, DataFmwkTest dFTest) 
+    public static void selectFiltroCollectionIfExists(FilterCollection typeMenu, Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-    	SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app, dFTest.driver);
-    	if (filtrosCollection.isVisibleMenu(FilterCollection.nextSeason)) 
+    	SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app, driver);
+    	if (filtrosCollection.isVisibleMenu(FilterCollection.nextSeason)) {
+    		DataFmwkTest dFTest = TestCaseData.getdFTest();
     		selectFiltroCollection(typeMenu, channel, app, dFTest);
+    	}
     }
     
     public static DatosStep selectFiltroCollection(FilterCollection typeMenu, Channel channel, AppEcom app, DataFmwkTest dFTest) 

@@ -1,8 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -13,31 +12,28 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Dotpay.PageDotpayAc
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Dotpay.PageDotpayPaymentChannelStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Dotpay.PageDotpayResultadoStpV;
 
-
 public class PagoDotpay extends PagoStpV {
     
-    public PagoDotpay(DataCtxShop dCtxSh, DataCtxPago dataPago, DataFmwkTest dFTest) {
-        super(dCtxSh, dataPago, dFTest);
+    public PagoDotpay(DataCtxShop dCtxSh, DataCtxPago dataPago, WebDriver driver) {
+        super(dCtxSh, dataPago, driver);
         super.isAvailableExecPay = true;
     }
     
     @Override
-    public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, dFTest);
-        PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, dFTest);
+    public void testPagoFromCheckout(boolean execPay) throws Exception {
+        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, driver);
+        PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, driver);
         DataPedido dataPedido = dCtxPago.getDataPedido(); 
         String nombrePago = dataPedido.getPago().getNombre(this.dCtxSh.channel);
-        PageDotpay1rstStpV.validateIsPage(nombrePago, dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, dFTest.driver);
+        PageDotpay1rstStpV.validateIsPage(nombrePago, dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
         
         if (execPay) {
-            PageDotpay1rstStpV.clickToPay(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, dFTest.driver);
-            PageDotpayPaymentChannelStpV.selectPayment(1, dFTest.driver);
-            PageDotpayPaymentChannelStpV.inputNameAndConfirm("Jorge", "Muñoz", dFTest.driver);
-            PageDotpayAcceptSimulationStpV.clickRedButtonAceptar(dFTest.driver);
-            PageDotpayResultadoStpV.clickNext(dFTest.driver);
+            PageDotpay1rstStpV.clickToPay(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
+            PageDotpayPaymentChannelStpV.selectPayment(1, driver);
+            PageDotpayPaymentChannelStpV.inputNameAndConfirm("Jorge", "Muñoz", driver);
+            PageDotpayAcceptSimulationStpV.clickRedButtonAceptar(driver);
+            PageDotpayResultadoStpV.clickNext(driver);
             dataPedido.setCodtipopago("F");
         }
-        
-        return TestCaseData.getDatosLastStep();
     }
 }

@@ -34,6 +34,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollecti
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.LabelArticle;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.ControlTemporada;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
@@ -69,13 +70,13 @@ public class SecMenusDesktopStpV {
     	description="Seleccionar el menú superior <b>#{menu1rstLevel}</b>", 
         expected="Aparece la galería asociada al menú",
         saveNettraffic=SaveWhen.Always)
-    public static void selectMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static void selectMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
         SecMenusDesktop
         	.secMenuSuperior
-        	.secBlockMenus.clickMenuAndGetName(menu1rstLevel, dCtxSh.appE, dFTest.driver);
+        	.secBlockMenus.clickMenuAndGetName(menu1rstLevel, dCtxSh.appE, driver);
         
-        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, dFTest.driver);
+        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, driver);
     }
     
     @Step (
@@ -189,21 +190,20 @@ public class SecMenusDesktopStpV {
     	description="Selección del menú <b>" + tagMenu + "</b> (data-ga-label=#{menu1rstLevel.getDataGaLabelMenuSuperiorDesktop()})", 
         expected="El menú se ejecuta correctamente",
         saveNettraffic=SaveWhen.Always)
-    public static void stepEntradaMenuDesktop(Menu1rstLevel menu1rstLevel, String paginaLinea, Channel channel, 
-    										  AppEcom app, WebDriver driver) throws Exception {
+    public static void stepEntradaMenuDesktop(Menu1rstLevel menu1rstLevel, String paginaLinea, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         //Si en la pantalla no existen los menús volvemos a la página inicial de la línea
         LineaType lineaMenu = menu1rstLevel.getLinea();
-    	if (!SecMenusDesktop.secMenuSuperior.secLineas.isLineaVisible(lineaMenu, app, driver)) {
+    	if (!SecMenusDesktop.secMenuSuperior.secLineas.isLineaVisible(lineaMenu, dCtxSh.appE, driver)) {
             driver.get(paginaLinea);
     	}
-        SecMenusDesktop.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel, app, driver);
+        SecMenusDesktop.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel, dCtxSh.appE, driver);
         TestCaseData.getDatosCurrentStep().replaceInDescription(tagMenu, menu1rstLevel.getNombre());
         ModalCambioPais.closeModalIfVisible(driver);
         
-        validaPaginaResultMenu(menu1rstLevel, channel, app, driver);
+        validaPaginaResultMenu(menu1rstLevel, dCtxSh, driver);
         LineaType lineaResult = SecMenusWrap.getLineaResultAfterClickMenu(lineaMenu, menu1rstLevel.getNombre());
-        SecMenusDesktopStpV.validateIsLineaSelected(lineaResult, app, driver);
-        PasosGenAnalitica.validaHTTPAnalytics(app, lineaMenu, driver);
+        SecMenusDesktopStpV.validateIsLineaSelected(lineaResult, dCtxSh.appE, driver);
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, lineaMenu, driver);
     }
     
     /**
@@ -598,13 +598,22 @@ public class SecMenusDesktopStpV {
         return datosStep;
     }
     
-    public static void validaPaginaResultMenu(MenuLateralDesktop menu, Channel channel, AppEcom app, WebDriver driver) 
+    public static void validaPaginaResultMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-    	checkResultDependingMenuGroup(menu, app, driver);
+    	checkResultDependingMenuGroup(menu, dCtxSh.appE, driver);
     	checkErrorPageWithoutException(driver);
     	GroupMenu groupMenu = menu.getGroup();
     	if (groupMenu.containsArticles()) {
-            validationsRebajas(channel, app, driver);
+            Menu1rstLevel menuPromocion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(menu.getLinea(), menu.getSublinea(), "promocion"));
+            menuPromocion.setDataGaLabel("promocion");
+//    		if (!SecBloquesMenuDesktop.isPresentMenuFirstLevel(menuPromocion, app, driver)) {
+//    			//Validación específica fin de rebajas para países sin el menú "Promoción"
+//    			validationsSpecificEndRebajas(channel, app, driver);
+//    		}
+            if (dCtxSh.pais.getCodigo_pais().compareTo("720")==0) {
+            	validationsSpecificEndRebajasChina(dCtxSh, driver);
+            }
+            validationsRebajas(dCtxSh.channel, dCtxSh.appE, driver);
     	}
     	
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
@@ -677,6 +686,65 @@ public class SecMenusDesktopStpV {
 			!exception.getExiste(), State.Warn);
 	 	return validations;
     }
+    
+//    //Temporal para prueba solicitada por Ángela
+//    public static void validationsSpecificEndRebajas(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+//    	DatosStep datosStep = TestCaseData.getDatosLastStep();
+//    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(channel, app, driver);
+//    	List<Integer> tempNextSeason = FilterCollection.nextSeason.getListTempArticles();
+//        String descripValidac = 
+//            prefixSale +        		   
+//            "1) No hay artículos con las siguientes características:<br>" + 
+//            " * Rebajados</b><br>" +
+//            " * De temporadas T4 " + tempNextSeason;
+//        datosStep.setNOKstateByDefault();
+//        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+//        try {
+//            List<String> listArtWrong = pageGaleriaDesktop.getArticles(TypeArticle.rebajado, tempNextSeason);
+//            if (listArtWrong.size() > 0) {
+//                listVals.add(1, State.Defect);
+//                descripValidac+=
+//                    "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
+//                    "hay " + listArtWrong.size() + " artículos rebajados con label errónea:<br>";
+//                for (String nameWrong : listArtWrong) {
+//             	   descripValidac+=(nameWrong + "<br>");
+//                }
+//                descripValidac+="</lin>";
+//            }
+//
+//            datosStep.setListResultValidations(listVals);
+//        } 
+//        finally { listVals.checkAndStoreValidations(descripValidac); }
+//    }
+    
+	  //Temporal para prueba fin rebajas en China
+	  public static void validationsSpecificEndRebajasChina(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+	  	DatosStep datosStep = TestCaseData.getDatosLastStep();
+	  	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+	  	List<Integer> tempSale = FilterCollection.sale.getListTempArticles();
+	      String descripValidac = 
+	          prefixSale +        		   
+	          "1) No hay artículos con las siguientes características:<br>" + 
+	          " * De temporadas T2 y T3 " + tempSale;
+	      datosStep.setNOKstateByDefault();
+	      ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+	      try {
+	          List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFrom, tempSale);
+	          if (listArtWrong.size() > 0) {
+	              listVals.add(1, State.Defect);
+	              descripValidac+=
+	                  "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
+	                  "hay " + listArtWrong.size() + " artículos de T2 ó T3:<br>";
+	              for (String nameWrong : listArtWrong) {
+	           	   descripValidac+=(nameWrong + "<br>");
+	              }
+	              descripValidac+="</lin>";
+	          }
+	
+	          datosStep.setListResultValidations(listVals);
+	      } 
+	      finally { listVals.checkAndStoreValidations(descripValidac); }
+	  }
     
     public static void validationsRebajas(Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
@@ -769,5 +837,13 @@ public class SecMenusDesktopStpV {
     public static boolean isNotPresentMenuSuperior(Menu1rstLevel menu1rstLevel, AppEcom app, WebDriver driver) 
     throws Exception {
     	return (!SecBloquesMenuDesktop.isPresentMenuFirstLevel(menu1rstLevel, app, driver));
+    }
+    
+    @Validation (
+    	description=prefixSale + "1) Sí es visible el menú superior <b>#{menu1rstLevel.getNombre()}</b>",
+    	level=State.Warn)
+    public static boolean isPresentMenuSuperior(Menu1rstLevel menu1rstLevel, AppEcom app, WebDriver driver) 
+    throws Exception {
+    	return (SecBloquesMenuDesktop.isPresentMenuFirstLevel(menu1rstLevel, app, driver));
     }
 }

@@ -1,69 +1,47 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.ModalDirecFactura;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopCheckout;
 
-
 public class ModalDirecFacturaStpV {
 
-    public static void validateIsOk(DatosStep datosStep, DataFmwkTest dFTest) {
-        //Validaciones
-        int maxSeconds = 5;
-        String descripValidac = 
-            "1) Es visible el formulario para la introducción de la \"Dirección de facturación\" (lo esperamos hasta " + maxSeconds + " seconds)<br>" +
-            "2) Es visible el botón \"Actualizar\"";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!ModalDirecFactura.isVisibleFormUntil(maxSeconds, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (!ModalDirecFactura.isVisibleButtonActualizar(dFTest.driver)) {
-                listVals.add(2, State.Defect);
-            }
-
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+    public static ListResultValidation validateIsOk(WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+        int maxSecondsWait = 5;
+	 	validations.add(
+			"Es visible el formulario para la introducción de la \"Dirección de facturación\" (lo esperamos hasta " + maxSecondsWait + " seconds)<br>",
+			ModalDirecFactura.isVisibleFormUntil(maxSecondsWait, driver), State.Defect);    
+	 	validations.add(
+			"Es visible el botón \"Actualizar\"",
+	 		ModalDirecFactura.isVisibleButtonActualizar(driver), State.Defect);   
+    	return validations;
     }
     
-    public static DatosStep inputDataAndActualizar(DataDireccion dataDirFactura, DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep (
-            "Introducir los datos y pulsar \"Actualizar\"<br>" + dataDirFactura.getFormattedHTMLData(), 
-            "Los datos se actualizan correctamente");
-        try {
-            ModalDirecFactura.sendDataToInputs(dataDirFactura, dFTest.driver);
-            ModalDirecFactura.clickActualizar(dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        //Validaciones
-        String descripValidac = 
-            "1) Desaparece el modal de introducción de los datos de la dirección <br>" +
-            "2) Queda marcado el radiobutton \"Quiero recibir una factura\"";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (ModalDirecFactura.isVisibleFormUntil(0/*maxSeconds*/, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (!Page1DktopCheckout.isMarkedQuieroFactura(dFTest.driver)) { 
-                listVals.add(2, State.Defect);
-            }
-
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
+	@Step (
+		description="Introducir los datos y pulsar \"Actualizar\"<br>#{dataDirFactura.getFormattedHTMLData()}", 
+        expected="Los datos se actualizan correctamente")
+    public static void inputDataAndActualizar(DataDireccion dataDirFactura, WebDriver driver) throws Exception {
+        ModalDirecFactura.sendDataToInputs(dataDirFactura, driver);
+        ModalDirecFactura.clickActualizar(driver);
+        checkAfterChangeDireccion(driver);
     }
+	
+	@Validation
+	private static ListResultValidation checkAfterChangeDireccion(WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	 	validations.add(
+			"Desaparece el modal de introducción de los datos de la dirección<br>",
+	 		!ModalDirecFactura.isVisibleFormUntil(0, driver), State.Defect);    
+	 	validations.add(
+			"Queda marcado el radiobutton \"Quiero recibir una factura\"",
+			Page1DktopCheckout.isMarkedQuieroFactura(driver), State.Defect); 
+	 	return validations;
+	}
 }

@@ -108,8 +108,8 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
         return true;
     }
 
-    public static void clickImporteCheque(WebDriver driver) throws  Exception {
-        clickAndWaitLoad(driver, By.xpath(getXPathRadioImporte(Importe.euro50)));
+    public static void clickImporteCheque(Importe importeToClick, WebDriver driver) throws  Exception {
+        clickAndWaitLoad(driver, By.xpath(getXPathRadioImporte(importeToClick)));
     }
 
     public static void introducirTarjetaConsultaSaldo(WebDriver driver, String numTarjeta) throws Exception {

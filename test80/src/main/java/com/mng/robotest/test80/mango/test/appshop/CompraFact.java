@@ -158,12 +158,12 @@ public class CompraFact extends GestorWebDriver {
         dCtxPago.setFTCkout(fTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
         dCtxPago.getFTCkout().testCodPromocional = this.testVale || this.empleado;
-        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, dFTest);
+        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, dFTest.driver);
         
         //Pago
         dCtxPago.getFTCkout().validaPagos = true;
         dCtxPago.getDataPedido().setPago(this.pago);
-        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, dFTest);
+        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, dFTest.driver);
         
         //Validación en Manto de los Pedidos (si existen)
         if (fTCkout.validaPedidosEnManto) {
@@ -180,6 +180,6 @@ public class CompraFact extends GestorWebDriver {
     private boolean includeValeValidation(AppEcom app, DataFmwkTest dFTest) {
     	return (
     		this.testVale && 
-    		!UtilsMangoTest.isEntornoPRO(app, dFTest));
+    		!UtilsMangoTest.isEntornoPRO(app, dFTest.driver));
     }
 }

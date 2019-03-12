@@ -1,111 +1,82 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.State;
-
 import org.openqa.selenium.WebDriver;
+import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDroppoints;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.SecSelectDPoint.TypeDeliveryPoint;
+import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.DataSearchDeliveryPoint.DataSearchDp;
 
 @SuppressWarnings({"static-access"})
 public class SecSelectDPointStpV {
     
-    public static DatosStep searchPoblacion(DataSearchDeliveryPoint dataSearchDp, DataFmwkTest dFTest) 
+	final static String tagSearchDp = "@TagSearchDp";
+	@Step (
+		description="Introducimos la provincia <b>" + tagSearchDp + "</b> + Return", 
+        expected="Aparecen puntos de recogida de " + tagSearchDp)
+    public static void searchPoblacion(DataSearchDeliveryPoint dataSearchDp, WebDriver driver) 
     throws Exception {
-        //Step
+		DatosStep datosStep = TestCaseData.getDatosCurrentStep();
+		datosStep.replaceInDescription(tagSearchDp, dataSearchDp.data);
+		datosStep.replaceInExpected(tagSearchDp, dataSearchDp.data);
+		
     	TypeDeliveryPoint typeDp = dataSearchDp.tipoTransporte.getTypeDeliveryPoint();
-        DatosStep datosStep = new DatosStep     (
-            "Introducimos la provincia <b>" + dataSearchDp.data + "</b> + Return", 
-            "Aparecen puntos de recogida de " + dataSearchDp.data);
-        try {
-            ModalDroppoints.secSelectDPoint.sendProvincia(dataSearchDp.data, dFTest.driver);
-            WebdrvWrapp.waitForPageLoaded(dFTest.driver, 5/*maxSecondsToWait*/);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }        
+        ModalDroppoints.secSelectDPoint.sendProvincia(dataSearchDp.data, driver);
+        WebdrvWrapp.waitForPageLoaded(driver, 5);   
 
-        //Validación-2
-        int maxSecondsToWait = 5;
-        String descripValidac = 
-            "1) La dirección del droppoint seleccionado contiene <b>" + dataSearchDp.data + "</b> (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!ModalDroppoints.secSelectDPoint.deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, maxSecondsToWait, dFTest.driver)) {
-            	switch (dataSearchDp.typeData) {
-            	case Provincia:
-            		listVals.add(1, State.Warn);
-            		break;
-            	case CodigoPostal:
-            		listVals.add(1, State.Info);
-            		break;
-            	}
-            }
-                            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        //Validación-1
-        validaDeliveryPointOfType(typeDp, datosStep, dFTest);
-        
-        return datosStep;
+        checkDroppointSelectedContainsDirecc(dataSearchDp, driver);
+        validaDeliveryPointOfType(typeDp, driver);
+    }
+	
+	@Validation
+	private static ListResultValidation checkDroppointSelectedContainsDirecc(DataSearchDeliveryPoint dataSearchDp, WebDriver driver) 
+	throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	    int maxSecondsWait = 5;
+	    State stateVal = State.Warn;
+	    if (dataSearchDp.typeData==DataSearchDp.CodigoPostal) {
+	    	stateVal = State.Info;
+    	}
+	 	validations.add(
+			"La dirección del droppoint seleccionado contiene <b>" + dataSearchDp.data + "</b> (lo esperamos hasta " + maxSecondsWait + " segundos)",
+			ModalDroppoints.secSelectDPoint.deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, maxSecondsWait, driver), stateVal);
+		return validations;
+	}
+    
+    @Validation
+    public static ListResultValidation validaDeliveryPointOfType(TypeDeliveryPoint typeDp, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+        int maxSecondsWait = 3;
+	 	validations.add(
+			"Es visible el 1er delivery point de la lista (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+			ModalDroppoints.secSelectDPoint.isDroppointVisibleUntil(1, maxSecondsWait, driver), State.Defect);
+	 	validations.add(
+			"El 1er delivery point de la lista es de tipo <b>" + typeDp + "</b>",
+			ModalDroppoints.secSelectDPoint.getTypeDeliveryPoint(1, driver)==typeDp, State.Defect);
+	 	return validations;
     }
     
-    public static void validaDeliveryPointOfType(TypeDeliveryPoint typeDp, DatosStep datosStep, DataFmwkTest dFTest) {
-        int maxSecondsToWait = 3;
-        String descripValidac = 
-            "1) Es visible el 1er delivery point de la lista (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
-            "2) El 1er delivery point de la lista es de tipo <b>" + typeDp + "</b>";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!ModalDroppoints.secSelectDPoint.isDroppointVisibleUntil(1, maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (ModalDroppoints.secSelectDPoint.getTypeDeliveryPoint(1, dFTest.driver)!=typeDp) {
-                listVals.add(2, State.Defect);
-            }
-                            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-    }
-    
-    public static DataDeliveryPoint clickDeliveryPointAndGetData(int position, DataFmwkTest dFTest) throws Exception {
-        DataDeliveryPoint dataDpToReturn = null;
-        DatosStep datosStep = new DatosStep     (
-            "Clickamos en el <b>#" + position + "</b> droppoint", 
-            "El droppoint queda seleccionado");
-        try {
-            dataDpToReturn = ModalDroppoints.secSelectDPoint.clickDeliveryPointAndGetData(position, dFTest.driver);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        String descripValidac = 
-            "1) Queda seleccionado el Droppoint #" + position;
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!ModalDroppoints.secSelectDPoint.isDroppointSelected(position, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-                            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
+    @Step (
+    	description="Clickamos en el <b>#{position}º</b> droppoint", 
+        expected="El droppoint queda seleccionado")
+    public static DataDeliveryPoint clickDeliveryPointAndGetData(int position, WebDriver driver) throws Exception {
+    	DataDeliveryPoint dataDpToReturn = ModalDroppoints.secSelectDPoint.clickDeliveryPointAndGetData(position, driver);
+    	checkIsSelectedDroppoint(position, driver);
         return dataDpToReturn;
+    }
+    
+    @Validation (
+    	description="Queda seleccionado el Droppoint #{position}",
+    	level=State.Defect)
+    private static boolean checkIsSelectedDroppoint(int position, WebDriver driver) {
+        return (ModalDroppoints.secSelectDPoint.isDroppointSelected(position, driver));
     }
     
     @Step (
@@ -114,9 +85,6 @@ public class SecSelectDPointStpV {
     public static void clickSelectButton(Channel channel, WebDriver driver) throws Exception {
     	int maxSecondsWait = 5;
         ModalDroppoints.secSelectDPoint.clickSelectButtonAndWait(maxSecondsWait, driver);
-        
-        //Validación
-        maxSecondsWait = 3;
-        ModalDroppointsStpV.secConfirmDatos.validateIsVisible(maxSecondsWait, channel, driver);
+        ModalDroppointsStpV.secConfirmDatos.validateIsVisible(3, channel, driver);
     }
 }

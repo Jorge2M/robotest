@@ -17,7 +17,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 public class SecFotosNew extends WebdrvWrapp {
 
 	private final static String XPathCapa = "//div[@class[contains(.,'product-images')]]";
-	private final static String XPathLineFoto = XPathCapa + "//div[@class[contains(.,'columns')]]";
+	private final static String XPathLineFoto = XPathCapa + "//*[@class[contains(.,'columns')]]";
     
     private static String getXPathLineFotos(int line) {
         return (XPathLineFoto + "[" + line + "]");

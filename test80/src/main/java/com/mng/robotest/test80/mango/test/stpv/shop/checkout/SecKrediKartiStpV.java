@@ -1,61 +1,34 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecKrediKarti;
 
 
 public class SecKrediKartiStpV {
 
-    public static DatosStep inputNumTarjeta(String numTarjeta, Channel channel, DataFmwkTest dFTest) {
-        //Step
-        DatosStep datosStep = new DatosStep (
-            "Introducimos el número de cuenta " + numTarjeta,
-            "Aparece la capa correspondiente a las opciones a plazo");
-        try {
-            SecKrediKarti.inputCardNumberAndTab(dFTest.driver, numTarjeta);
-                        
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-                
-        //Validaciones
-        int maxSecondsWait = 5;
-        String descripValidac = 
-            "1) Se carga la capa correspondiente al pago a plazos (en menos de " + maxSecondsWait + " segundos)";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!SecKrediKarti.isVisiblePagoAPlazoUntil(dFTest.driver, channel, maxSecondsWait)) {
-                listVals.add(1, State.Defect);
-            }
-                        
-            datosStep.setListResultValidations(listVals); 
-        }
-        catch (Exception e) {
-            //
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
+	@Step (
+		description="Introducimos el número de cuenta #{numTarjeta}",
+        expected="Aparece la capa correspondiente a las opciones a plazo")
+    public static void inputNumTarjeta(String numTarjeta, Channel channel, WebDriver driver) {
+        SecKrediKarti.inputCardNumberAndTab(driver, numTarjeta);
+        isVisibleCapaPagoAplazo(channel, 5, driver);
     }
+	
+	@Validation (
+		description="Se carga la capa correspondiente al pago a plazos (en menos de #{maxSecondsWait} segundos)",
+		level=State.Defect)
+	private static boolean isVisibleCapaPagoAplazo(Channel channel, int maxSecondsWait, WebDriver driver) {
+	    return (SecKrediKarti.isVisiblePagoAPlazoUntil(driver, channel, maxSecondsWait));
+	}
     
-    public static DatosStep clickOpcionPagoAPlazo(int numOpcion, Channel channel, DataFmwkTest dFTest) {
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionamos la " + numOpcion + "a de las opciones de pago a plazo", 
-            "La opción se selecciona correctamente");
-        try {
-            //Seleccionamos la 1a de las opciones de pago a plazo
-            SecKrediKarti.clickRadioPlazo(numOpcion, dFTest.driver, channel);
-                                                        
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        return datosStep;
+	@Step (
+		description="Seleccionamos la #{numOpcion}a de las opciones de pago a plazo", 
+        expected="La opción se selecciona correctamente")
+    public static void clickOpcionPagoAPlazo(int numOpcion, Channel channel, WebDriver driver) {
+		SecKrediKarti.clickRadioPlazo(numOpcion, driver, channel);
     }
 }

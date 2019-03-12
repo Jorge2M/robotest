@@ -1,7 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
@@ -167,19 +166,17 @@ public class PageResultPagoStpV {
         }
     }
     
-    public static DatosStep selectLinkMisComprasAndValidateCompra(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static void selectLinkMisComprasAndValidateCompra(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        PageResultPagoStpV.selectMisCompras(dCtxSh.userRegistered, dFTest.driver);
+        PageResultPagoStpV.selectMisCompras(dCtxSh.userRegistered, driver);
         DataPedido dataPedido = dCtxPago.getDataPedido();
         if (dCtxSh.userRegistered) {
-            PageMisComprasStpV.selectBlock(TypeCompra.Online, true/*ordersExpected*/, dFTest.driver);
-            PageMisComprasStpV.validateIsCompraOnlineVisible(dataPedido.getCodpedido(), dCtxPago.getFTCkout().isChequeRegalo, dFTest.driver);
+            PageMisComprasStpV.selectBlock(TypeCompra.Online, true/*ordersExpected*/, driver);
+            PageMisComprasStpV.validateIsCompraOnlineVisible(dataPedido.getCodpedido(), dCtxPago.getFTCkout().isChequeRegalo, driver);
         }
         else {
-            PageAccesoMisComprasStpV.clickBlock(TypeBlock.NoRegistrado, dFTest.driver);
-            PageAccesoMisComprasStpV.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido(), dFTest.driver);
+            PageAccesoMisComprasStpV.clickBlock(TypeBlock.NoRegistrado, driver);
+            PageAccesoMisComprasStpV.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido(), driver);
         }
-        
-        return TestCaseData.getDatosLastStep();
     }
 }

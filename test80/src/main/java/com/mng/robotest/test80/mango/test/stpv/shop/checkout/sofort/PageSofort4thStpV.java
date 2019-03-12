@@ -26,8 +26,6 @@ public class PageSofort4thStpV {
     public static void inputCredencialesUsr(String usrSofort, String passSofort, WebDriver driver) throws Exception {
         PageSofort4th.inputUserPass(driver, usrSofort, passSofort);
         PageSofort4th.clickSubmitButton(driver);
-
-        //Validaciones
         validateAppearsCtaForm(driver);
     }
 	
@@ -42,10 +40,8 @@ public class PageSofort4thStpV {
 		description="Seleccionamos la 1a cuenta y pulsamos aceptar", 
         expected="Aparece la página de confirmación de la transacción")
     public static void select1rstCtaAndAccept(WebDriver driver) throws Exception { 
-            PageSofort4th.selectRadioCta(driver, 1);
-            PageSofort4th.clickSubmitButton(driver);
-        
-        //Validaciones
+        PageSofort4th.selectRadioCta(driver, 1);
+        PageSofort4th.clickSubmitButton(driver);
         validateAppearsInputTAN(driver);
     }
 	

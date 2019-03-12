@@ -8,17 +8,13 @@ import java.util.Date;
 import java.util.Iterator;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
-
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.sitemap.Sitemapindex;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.sitemap.Sitemapindex.Sitemap;
@@ -29,26 +25,25 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
  * @author jorge.munoz
  *
  */
-
 public class BrowserStpV {
 
-    public static void inputRobotsURLandValidate(String urlBaseTest, AppEcom app, DataFmwkTest dFTest) throws Exception {
+	final static String tagUrlRobots = "@TagUrlRobots";
+	@Step (
+		description="Ejecutamos la URL del robots: " + tagUrlRobots, 
+        expected="Se carga el contenido correcto")
+    public static void inputRobotsURLandValidate(String urlBaseTest, AppEcom app, WebDriver driver) throws Exception {
         URI uriBase = new URI(urlBaseTest);
         String urlRobots = urlBaseTest.replace(uriBase.getPath(), "") + "/" + "robots.txt";
+        TestCaseData.getDatosCurrentStep().replaceInDescription(tagUrlRobots, urlRobots);
         String urlSitemap = urlBaseTest.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
         
-        //Step. Comprobamos la URL correspondiente a robots.txt
-        DatosStep datosStep = new DatosStep(
-            "Ejecutamos la URL del robots: " + urlRobots, 
-            "Se carga el contenido correcto");
-        try {
-            dFTest.driver.get(urlRobots);
+        driver.get(urlRobots);
+        checkPageRobotsTxt(urlSitemap, app, driver);
+	}
     
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        } 
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-    
-        //Validaciones.
+	@Validation
+	private static ListResultValidation checkPageRobotsTxt(String urlSitemap, AppEcom app, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
         String contRobots1 = 
             "sitemap: " + urlSitemap;
                 
@@ -173,31 +168,20 @@ public class BrowserStpV {
             "\n" +
             "User-agent: grub-client\n" +
             "Disallow: /";
-        
-        String descripValidac = 
-            "1) Figura el siguiente contenido: <br>" + contRobots1.replace("\n", "<br>") + "<br>" +
-            "2) Figura el siguiente contenido: <br>" + contRobots2.replace("\n", "<br>") + "<br>" +
-            "3) Figura el siguiente contenido: <br>" + contRobots3.replace("\n", "<br>") + "<br>" +
-            "4) Figura el siguiente contenido: <br>" + contRobots4.replace("\n", "<br>");
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!dFTest.driver.getPageSource().toLowerCase().contains(contRobots1.toLowerCase())) {
-                listVals.add(1, State.Defect);                
-            }
-            if (!dFTest.driver.getPageSource().contains(contRobots2)) {
-                listVals.add(2, State.Defect);
-            }
-            if (!dFTest.driver.getPageSource().contains(contRobots3)) {
-                listVals.add(3, State.Defect);
-            }
-            if (!dFTest.driver.getPageSource().contains(contRobots4)) {
-                listVals.add(4, State.Defect);
-            }
-    
-            datosStep.setListResultValidations(listVals);
-        } 
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    		
+    	validations.add(
+            "Figura el siguiente contenido: <br>" + contRobots1.replace("\n", "<br>") + "<br>",
+            driver.getPageSource().toLowerCase().contains(contRobots1.toLowerCase()), State.Defect);
+    	validations.add(
+            "Figura el siguiente contenido: <br>" + contRobots2.replace("\n", "<br>") + "<br>",
+            driver.getPageSource().contains(contRobots2), State.Defect);
+    	validations.add(
+    		"Figura el siguiente contenido: <br>" + contRobots3.replace("\n", "<br>") + "<br>",
+    		driver.getPageSource().contains(contRobots3), State.Defect);
+    	validations.add(
+    		"Figura el siguiente contenido: <br>" + contRobots4.replace("\n", "<br>"),
+    		driver.getPageSource().contains(contRobots4), State.Defect);
+    	return validations;
     }
     
     @Step (
@@ -205,40 +189,44 @@ public class BrowserStpV {
         expected="Se carga el contenido correcto")
     public static void inputSitemapURLandValidate(String urlSitemap, WebDriver driver) throws Exception {
         driver.get(urlSitemap);
-    
-        //Validaciones.
         checkResultUrlSitemal(driver);
     }
     
-    private static void checkResultUrlSitemal(WebDriver driver) throws Exception {
-    	DatosStep datosStep = TestCaseData.getDatosLastStep();
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        Date currDateDayPrecision = removeTime(new Date());
-        String currentDay = new SimpleDateFormat("yyyy-MM-dd").format(currDateDayPrecision);
-    
-        String descripValidac = 
-            "1) Obtenemos un XML con formato de sitemap<br>" + 
-            "2) Todos los tags <b>lastmod</b> contienen la fecha del día: " + currentDay;
-        datosStep.setExcepExists(false); datosStep.setResultSteps(State.Warn);
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            State resultado = State.Ok;
-            //1)
-            JAXBContext jaxbContext = JAXBContext.newInstance(Sitemapindex.class);
-            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            StringReader reader = new StringReader(UtilsMangoTest.getPageSource(dFTest.driver));
-            Sitemapindex sitemapIndex = (Sitemapindex) jaxbUnmarshaller.unmarshal(reader);
-            //2)
+    @Validation
+    private static ListResultValidation checkResultUrlSitemal(WebDriver driver) throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	
+    	Sitemapindex sitemapIndex = null;
+    	try {
+	        JAXBContext jaxbContext = JAXBContext.newInstance(Sitemapindex.class);
+	        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+	        StringReader reader = new StringReader(UtilsMangoTest.getPageSource(driver));
+	        sitemapIndex = (Sitemapindex) jaxbUnmarshaller.unmarshal(reader);
+    	}
+    	catch (Exception e) {}
+    	validations.add(
+            "Obtenemos un XML con formato de sitemap<br>",
+            sitemapIndex!=null, State.Defect);
+    	
+    	if (sitemapIndex!=null) {
+            Date currDateDayPrecision = removeTime(new Date());
+            String currentDay = new SimpleDateFormat("yyyy-MM-dd").format(currDateDayPrecision);
             Iterator<Sitemap> itSites = sitemapIndex.getSitemap().iterator();
+            boolean lastModsContainsCurrentDay = true;
             while (itSites.hasNext()) {
                 Sitemap sitemap = itSites.next();
                 Date lastmodDate = removeTime(sitemap.getLastmod().toGregorianCalendar().getTime());
-                Assert.assertTrue(lastmodDate.equals(currDateDayPrecision));
+                if (!lastmodDate.equals(currDateDayPrecision)) {
+                	lastModsContainsCurrentDay = false;
+                	break;
+                }
             }
-    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(resultado);
-        } 
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+        	validations.add(
+                "Todos los tags <b>lastmod</b> contienen la fecha del día: " + currentDay,
+                lastModsContainsCurrentDay, State.Defect);
+    	}
+    	
+    	return validations;
     }
     
     public static Date removeTime(Date date) {    

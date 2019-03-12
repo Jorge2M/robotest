@@ -1,88 +1,55 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.yandex;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
+
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
+import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandexMoney;
-
 
 public class PageYandexMoneyStpV {
 
-    public static DatosStep accessInNewTab(String tabTitle, DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep       (
-            "Accedemos a la URL de <b>YandexMoney</b>: " + PageYandexMoney.urlAccess, 
-            "Aparece la página de YandexMoney");
-        try {
-            PageYandexMoney.goToPageInNewTab(tabTitle, dFTest.driver);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        //Validation
-        validateIsPage(datosStep, dFTest);
-        
-        return datosStep;
+	final static String tagUrlYandex = "@TagUrlYandex";
+	@Step (
+		description="Accedemos a la URL de <b>YandexMoney</b>: " + tagUrlYandex, 
+        expected="Aparece la página de YandexMoney")
+    public static void accessInNewTab(String tabTitle, WebDriver driver) throws Exception {
+		TestCaseData.getDatosCurrentStep().replaceInDescription(tagUrlYandex, PageYandexMoney.urlAccess);
+        PageYandexMoney.goToPageInNewTab(tabTitle, driver);
+        checkIsPage(driver);
     }
     
-    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) Aparece el input para el <b>Payment Code</b><br>" +
-            "2) Aparece el input para el importe";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageYandexMoney.isVisibleInputPaymentCode(dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            if (!PageYandexMoney.isVisibleInputImport(dFTest.driver)) {
-                listVals.add(2, State.Warn);
-            }
-                                                
-            datosStep.setListResultValidations(listVals);
-        }
-        catch (Exception e) {
-            //
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+    private static ListResultValidation checkIsPage(WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	 	validations.add(
+			"Aparece el input para el <b>Payment Code</b><br>",
+			PageYandexMoney.isVisibleInputPaymentCode(driver), State.Warn);
+	 	validations.add(
+			"Aparece el input para el importe",
+			PageYandexMoney.isVisibleInputImport(driver), State.Warn);
+	 	return validations;
     }
     
-    public static DatosStep inputDataAndPay(String paymentCode, String importe, DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep       (
-            "Introducimos el paymentCode <b>" + paymentCode + "</b>, el importe <b>" + importe + "</b> y pulsamos el botón de Pago", 
-            "Aparece la página de resultado del pago a nivel de Yandex");
-        try {
-            PageYandexMoney.inputPaymentCode(paymentCode, dFTest.driver);
-            PageYandexMoney.inputImport(importe, dFTest.driver);
-            PageYandexMoney.clickPayButton(dFTest.driver);
-
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-
-        //Validaciones
-        PageYandexMoneyResultStpV.validateIsResultOk(datosStep, dFTest);
-        
-        return datosStep;
+	@Step (
+		description="Introducimos el paymentCode <b>#{paymentCode}</b>, el importe <b>#{importe}</b> y pulsamos el botón de Pago", 
+        expected="Aparece la página de resultado del pago a nivel de Yandex")
+    public static void inputDataAndPay(String paymentCode, String importe, WebDriver driver) throws Exception {
+        PageYandexMoney.inputPaymentCode(paymentCode, driver);
+        PageYandexMoney.inputImport(importe, driver);
+        PageYandexMoney.clickPayButton(driver);
+        PageYandexMoneyResultStpV.validateIsResultOk(driver);
     }
     
-    public static DatosStep closeTabByTitle(String tabTitle, String windowHandlePageToSwitch, DataFmwkTest dFTest) {
-        //Step
-        DatosStep datosStep = new DatosStep       (
-            "Cerramos la actual pestaña con nombre <b>" + tabTitle + "</b>", 
-            "Desaparece la pestaña");
-        try {
-            PageYandexMoney.closeActualTabByTitle(tabTitle, dFTest.driver);
-            dFTest.driver.switchTo().window(windowHandlePageToSwitch);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }        
-        
-        return datosStep;
+	@Step (
+		description="Cerramos la actual pestaña con nombre <b>#{tabTitle}</b>", 
+        expected="Desaparece la pestaña")
+    public static void closeTabByTitle(String tabTitle, String windowHandlePageToSwitch, WebDriver driver) {
+        PageYandexMoney.closeActualTabByTitle(tabTitle, driver);
+        driver.switchTo().window(windowHandlePageToSwitch);
     }
 }

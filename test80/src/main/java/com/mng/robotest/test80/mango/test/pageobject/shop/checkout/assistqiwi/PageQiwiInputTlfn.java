@@ -15,11 +15,15 @@ public class PageQiwiInputTlfn extends WebdrvWrapp {
         driver.findElement(By.xpath(XPathInputPhone)).sendKeys(phone);
     }
     
-    public static void waitAndClickAceptar(WebDriver driver, int seconds) throws Exception {
-        clickAndWaitLoad(driver, seconds/*waitForLinkToClick*/, By.xpath(XPathLinkAceptar));
-    }
-    
     public static boolean isPresentInputPhone(WebDriver driver) {
         return (isElementPresent(driver, By.xpath(XPathInputPhone)));
     }    
+    
+    public static boolean isVisibleLinkAceptar(int maxSecondsWait, WebDriver driver) {
+    	return (WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(XPathLinkAceptar), maxSecondsWait));
+    }
+    
+    public static void clickLinkAceptar(WebDriver driver) throws Exception {
+    	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(XPathLinkAceptar));
+    }
 }

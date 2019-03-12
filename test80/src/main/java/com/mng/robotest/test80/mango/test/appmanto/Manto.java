@@ -85,7 +85,7 @@ public class Manto extends GestorWebDriver {
     	
     	PageMenusMantoStpV.goToPedidos(dFTest);
     	
-    	SecFiltrosMantoStpV.setFiltrosHoyYbuscar(this.dPedidoPrueba, TypeSearch.PEDIDO, dFTest);
+    	SecFiltrosMantoStpV.setFiltrosHoyYbuscar(this.dPedidoPrueba, TypeSearch.PEDIDO, dFTest.driver);
     	//this.dPedidoPrueba = PagePedidosMantoStpV.getDataPedidoUsuarioRegistrado(this.dPedidoPrueba, dFTest);
     	this.dPedidoPrueba = PagePedidosMantoStpV.getPedidoUsuarioRegistrado(this.dPedidoPrueba, dFTest);
     	this.dPedidoPrueba = PagePedidosMantoStpV.getDataPedido(this.dPedidoPrueba, dFTest);
@@ -138,7 +138,7 @@ public class Manto extends GestorWebDriver {
 		for (int i = 0; i < this.dPedidoPrueba.getDataBag().getListArticulos().size(); i++)
 			articulosPrueba.add(this.dPedidoPrueba.getDataBag().getListArticulos().get(i).getReferencia().toString());
 
-		PageConsultaIdEansStpV.consultaDatosContacto(pedidosPrueba, dFTest);
+		PageConsultaIdEansStpV.consultaDatosContacto(pedidosPrueba, dFTest.driver);
 		PageConsultaIdEansStpV.consultaIdentificadoresPedido(pedidosPrueba, dFTest);
 		PageConsultaIdEansStpV.consultaTrackings(pedidosPrueba, dFTest);
 		PageConsultaIdEansStpV.consultaDatosEan(articulosPrueba, dFTest);

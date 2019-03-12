@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 public class SSecSelTallasFichaNew extends WebdrvWrapp {
     static String XPathSelectorTallas = "//form/div[@class='sizes']";
     static String XPathListTallsForSelect = XPathSelectorTallas + "//div[@class[contains(.,'selector-list')]]";
-    static String XPathTallaItem = XPathSelectorTallas + "//span[@role='button' and not(@data-available='false')]";
+    static String XPathTallaItem = XPathSelectorTallas + "//span[(@role='option' or @role='button') and not(@data-available='false')]";
     static String XPathTallaAvailable = XPathTallaItem + "//self::span[@data-available='true' or @class='single-size']";
     static String XPathTallaUnavailable = XPathTallaItem + "//self::span[not(@data-available) and not(@class='single-size')]";
     static String XPathTallaSelected = XPathTallaItem + "//self::span[@class[contains(.,'selector-trigger')] or @class='single-size']";
@@ -80,11 +80,12 @@ public class SSecSelTallasFichaNew extends WebdrvWrapp {
     public static boolean unfoldListTallasIfNotYet(WebDriver driver) {
         if (!isElementVisible(driver, By.xpath(XPathListTallsForSelect))) {
             //En el caso de talla única no existe XPathSelectorTallas
-            if (isElementVisible(driver, By.xpath(XPathSelectorTallas)))
+            if (isElementVisible(driver, By.xpath(XPathSelectorTallas))) {
                 driver.findElement(By.xpath(XPathSelectorTallas)).click();
-            else
+            }
+            else {
                 return true;
-                
+            }
             return (isVisibleListTallasForSelectUntil(1, driver));
         }
         

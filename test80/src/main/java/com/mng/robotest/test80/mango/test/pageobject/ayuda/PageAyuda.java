@@ -4,6 +4,8 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import java.io.Reader;
 import java.io.InputStreamReader;
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 
 public class PageAyuda extends WebdrvWrapp {
 
-    public static String xPathCloseBuscar = "//div[@class[contains(.,'close-modal')]]";
+    public final static String xPathCloseBuscar = "//div[@class[contains(.,'close-modal')]]";
 
     private static JSONParser parser = new JSONParser();
     private static JSONObject fileHAR = null;
@@ -39,5 +41,16 @@ public class PageAyuda extends WebdrvWrapp {
 
     public static String getXPath(String apartado) {
         return ("//*[text()='" + apartado + "']");
+    }
+    
+    public enum StateApartado {	collapsed, expanded};
+    
+    private static String getXPathApartado(String apartado, StateApartado stateApartado) {
+    	return ("//article[@class[contains(.,'" + stateApartado + "')]]" + getXPath(apartado));
+    }
+    
+    public static boolean isApartadoInStateUntil(String apartado, StateApartado stateApartado, int maxSecondsWait, WebDriver driver) {
+    	String xpathApartado = getXPathApartado(apartado, stateApartado);
+    	return (WebdrvWrapp.isElementPresentUntil(driver, By.xpath(xpathApartado), maxSecondsWait));
     }
 }

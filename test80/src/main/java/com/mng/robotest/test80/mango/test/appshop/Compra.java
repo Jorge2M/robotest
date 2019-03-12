@@ -117,9 +117,11 @@ public class Compra extends GestorWebDriver {
     public void COM001_Compra_TrjSaved_Empl() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
-        UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-        dCtxSh.userConnected = userShop.user;
-        dCtxSh.passwordUser = userShop.password;
+//        UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
+//        dCtxSh.userConnected = userShop.user;
+//        dCtxSh.passwordUser = userShop.password;
+        dCtxSh.userConnected = "jorge.munoz@mango.com";
+        dCtxSh.passwordUser = "sirjorge74";
         dCtxSh.userRegistered = true;
 
         //To checkout
@@ -142,7 +144,9 @@ public class Compra extends GestorWebDriver {
         PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, dFTest.driver);
         dCtxPago.setDataPedido(dataPedido);
         dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
-        PagoNavigationsStpV.testPagoFromCheckoutToEnd(dCtxPago, dCtxSh, pagoVisaToTest, dFTest);
+        dCtxPago.getFTCkout().validaPasarelas = true;
+        dCtxPago.getFTCkout().validaPagos = true;
+        PagoNavigationsStpV.testPagoFromCheckoutToEnd(dCtxPago, dCtxSh, pagoVisaToTest, dFTest.driver);
         
         //Validación en Manto de los Pedidos (si existen)
     	List<CheckPedido> listChecks = Arrays.asList(
@@ -173,12 +177,12 @@ public class Compra extends GestorWebDriver {
         if(dCtxSh.channel != Channel.movil_web){
             nTarjeta = "100000040043";
             cvvTarjeta = "618";
-            PageChequeRegaloInputDataStpV.paginaConsultarSaldo(dFTest, nTarjeta);
-            PageChequeRegaloInputDataStpV.insertCVVConsultaSaldo(dFTest, cvvTarjeta);
+            PageChequeRegaloInputDataStpV.paginaConsultarSaldo(nTarjeta, dFTest.driver);
+            PageChequeRegaloInputDataStpV.insertCVVConsultaSaldo(cvvTarjeta, dFTest.driver);
         }
 
-        PageChequeRegaloInputDataStpV.seleccionarCantidades(dFTest);
-        PageChequeRegaloInputDataStpV.clickQuieroComprarChequeRegalo(dFTest);
+        PageChequeRegaloInputDataStpV.seleccionarCantidades(Importe.euro50, dFTest.driver);
+        PageChequeRegaloInputDataStpV.clickQuieroComprarChequeRegalo(dFTest.driver);
             
         ChequeRegalo chequeRegalo = new ChequeRegalo();
         chequeRegalo.setNombre("Jorge");
@@ -186,7 +190,7 @@ public class Compra extends GestorWebDriver {
         chequeRegalo.setEmail(Constantes.mail_standard);
         chequeRegalo.setImporte(Importe.euro50);
         chequeRegalo.setMensaje("Ya sólo queda por determinar si el universo partió de cero o del infinito");
-        PageChequeRegaloInputDataStpV.inputDataAndClickComprar(chequeRegalo, dFTest);
+        PageChequeRegaloInputDataStpV.inputDataAndClickComprar(chequeRegalo, dFTest.driver);
 
         //Ejecutar el pago
         FlagsTestCkout fTCkout = new FlagsTestCkout();
@@ -205,12 +209,12 @@ public class Compra extends GestorWebDriver {
         dataPedido.setImporteTotal(PageCheckoutWrapper.getPrecioTotalFromResumen(dCtxSh.channel, dFTest.driver));
         dataPedido.setDireccionEnvio("");
         dataPedido.setEmailCheckout(dCtxSh.userConnected);
-        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, dFTest);
+        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, dFTest.driver);
         if (fTCkout.validaPedidosEnManto) {
         	List<CheckPedido> listChecks = Arrays.asList(
         		CheckPedido.consultarBolsa, 
-        		CheckPedido.consultarPedido, 
-        		CheckPedido.anular);
+        		CheckPedido.consultarPedido,
+        		CheckPedido.anular); 
         	DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
             PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, dFTest);
         }
@@ -238,7 +242,7 @@ public class Compra extends GestorWebDriver {
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-        PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(paisesDestino, dCtxSh, dCtxPago, dFTest);
+        PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(paisesDestino, dCtxSh, dCtxPago, dFTest.driver, dFTest.ctx);
         if (FTCkout.validaPedidosEnManto) {
         	List<CheckPedido> listChecks = Arrays.asList(
         		CheckPedido.consultarBolsa, 
@@ -363,14 +367,14 @@ public class Compra extends GestorWebDriver {
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
-        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, dFTest);
+        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, dFTest.driver);
         
         //Informamos datos varios necesarios para el proceso de pagos de modo que se pruebe el pago Codensa sobre el país de colombia
         dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
         dCtxPago.getFTCkout().validaPagos = true;
         Pago pagoCodensa = dCtxSh.pais.getPago("CODENSA");
         dCtxPago.getDataPedido().setPago(pagoCodensa);
-        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, dFTest);        
+        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, dFTest.driver);        
         
         //Validación en Manto de los Pedidos (si existen)
         if (FTCkout.validaPedidosEnManto) {

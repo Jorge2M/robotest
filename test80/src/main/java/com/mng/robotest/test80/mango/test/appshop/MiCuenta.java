@@ -149,7 +149,7 @@ public class MiCuenta extends GestorWebDriver {
         dCtxSh.userConnected = userConCompras;
         dCtxSh.passwordUser = passwordUserConCompras;
         dCtxSh.userRegistered = true;
-        boolean isPRO = UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest);
+        boolean isPRO = UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest.driver);
             
         PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest.driver);
         AccesoStpV.identificacionEnMango(dCtxSh, dFTest.driver);

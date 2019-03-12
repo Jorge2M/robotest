@@ -96,8 +96,8 @@ public class PedidoNavigations {
     
     private static void consultarBolsaStpV(DataPedido dataPedido, AppEcom app, DataFmwkTest dFTest) throws Exception {
         PageMenusMantoStpV.goToBolsas(dFTest);
-        DatosStep datosStep = SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.BOLSA, dFTest);
-        boolean existLinkPedido = PageBolsasMantoStpV.validaLineaBolsa(dataPedido, app, datosStep, dFTest);
+        SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.BOLSA, dFTest.driver);
+        boolean existLinkPedido = PageBolsasMantoStpV.validaLineaBolsa(dataPedido, app, dFTest);
         if (existLinkPedido) {
             PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.bolsa, app, dFTest.driver);
         }
@@ -105,8 +105,8 @@ public class PedidoNavigations {
     
     private static void consultarPedidoStpV(DataPedido dataPedido, AppEcom app, DataFmwkTest dFTest) throws Exception {
         PageMenusMantoStpV.goToPedidos(dFTest);
-        DatosStep datosStep = SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.PEDIDO, dFTest);
-        boolean existLinkPedido = PagePedidosMantoStpV.validaLineaPedido(dataPedido, app, datosStep, dFTest);
+        SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.PEDIDO, dFTest.driver);
+        boolean existLinkPedido = PagePedidosMantoStpV.validaLineaPedido(dataPedido, app, dFTest);
         if (existLinkPedido) {
             PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.pedido, app, dFTest.driver);
         }

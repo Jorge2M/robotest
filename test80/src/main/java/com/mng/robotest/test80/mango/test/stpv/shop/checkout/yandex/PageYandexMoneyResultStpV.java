@@ -1,33 +1,22 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.yandex;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandexMoneyResult;
-
 
 public class PageYandexMoneyResultStpV {
     
-    public static void validateIsResultOk(DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) Aparece la página de resultado de Yandex Money<br>" +
-            "2) Aparece un mensaje de transferencia con éxito";
-        datosStep.setNOKstateByDefault();         
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageYandexMoneyResult.isPage(dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (!PageYandexMoneyResult.isVisibleMsgTransferOk(dFTest.driver)) {
-                listVals.add(2, State.Defect);
-            }
-                                                
-            datosStep.setListResultValidations(listVals);
-        }
-        catch (Exception e) {
-            //
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
+	@Validation
+    public static ListResultValidation validateIsResultOk(WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	 	validations.add(
+			"Aparece la página de resultado de Yandex Money<br>",
+			PageYandexMoneyResult.isPage(driver), State.Defect);
+	 	validations.add(
+			"Aparece un mensaje de transferencia con éxito",
+			PageYandexMoneyResult.isVisibleMsgTransferOk(driver), State.Defect);
+		return validations;   
     }
 }

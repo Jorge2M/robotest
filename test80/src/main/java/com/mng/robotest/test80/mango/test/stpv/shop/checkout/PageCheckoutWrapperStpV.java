@@ -10,7 +10,6 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
@@ -62,42 +61,22 @@ public class PageCheckoutWrapperStpV {
         }
     } 
     
-    public static void validateLoadingDisappears(DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
-    //Validaciones
-	    int maxSecondsToWait = 10;
-	    String descripValidac = "1) Acaba desapareciendo la capa de \"Cargando...\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-	    datosStep.setNOKstateByDefault();  
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-	    try {
-	        Thread.sleep(200); //Damos tiempo a que aparezca la capa de "Cargando"
-	        if (!PageCheckoutWrapper.isNoDivLoadingUntil(maxSecondsToWait, dFTest.driver)) {
-	            listVals.add(1, State.Warn);     
-	        }
-	
-	        datosStep.setListResultValidations(listVals);
-	    }
-	    finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation (
+    	description="Acaba desapareciendo la capa de \"Cargando...\" (lo esperamos hasta #{maxSecondsWait} segundos)",
+    	level=State.Warn)
+    public static boolean validateLoadingDisappears(int maxSecondsWait, WebDriver driver) throws Exception {
+        Thread.sleep(200); //Damos tiempo a que aparezca la capa de "Cargando"
+        return (PageCheckoutWrapper.isNoDivLoadingUntil(maxSecondsWait, driver));
     }
     
-    /**
-     * Despliega (si no lo están) los métodos de pago y valida que realmente sean los correctos
-     */
-    public static DatosStep despliegaYValidaMetodosPago(Pais pais, boolean isEmpl, AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep (
-            "Si existen y están plegados, desplegamos el bloque con los métodos de pago", 
-            "Aparecen los métodos de pagos asociados al país: " + pais.getStringPagosTest(app, isEmpl));
-        try {
-            PageCheckoutWrapper.despliegaMetodosPago(channel, dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-
-        //Validaciones (validamos los métodos de pago disponibles)
-        validaMetodosPagoDisponibles(pais, isEmpl, app, channel, dFTest.driver);
-        
-        return datosStep;
+    @Step (
+    	description="Si existen y están plegados, desplegamos el bloque con los métodos de pago", 
+        expected="Aparecen los métodos de pagos asociados al país")
+    public static void despliegaYValidaMetodosPago(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) 
+    throws Exception {
+    	TestCaseData.getDatosCurrentStep().addExpectedText(": " + pais.getStringPagosTest(app, isEmpl));
+        PageCheckoutWrapper.despliegaMetodosPago(channel, driver);
+        validaMetodosPagoDisponibles(pais, isEmpl, app, channel, driver);
     }
     
     public static void validaMetodosPagoDisponibles(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) {
@@ -130,51 +109,42 @@ public class PageCheckoutWrapperStpV {
         return validations;
     }
     
-    /**
-     * Paso ficticio consistente en "no-clicar" el icono de VOTF.
-     */
-    public static DatosStep noClickIconoVotf(String nombrePagoTpvVOTF) throws Exception {        
-        DatosStep datosStep = null;
-        
-        //Step. No hacemos nada pues el pago con TPV en VOTF no tiene icono ni pasarelas asociadas
-        datosStep = new DatosStep       (
-            "<b>" + nombrePagoTpvVOTF + "</b>: no clickamos el icono pues no existe", 
-            "No aplica");
-        try {
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }         
-            
-        return datosStep;
+    @Step (
+    	description="<b>#{nombrePagoTpvVOTF}</b>: no clickamos el icono pues no existe", 
+        expected="No aplica")
+    public static void noClickIconoVotf(@SuppressWarnings("unused") String nombrePagoTpvVOTF) throws Exception {        
+        //No hacemos nada pues el pago con TPV en VOTF no tiene icono ni pasarelas asociadas
     }
     
     /**
      * Realiza una navegación (conjunto de pasos/validaciones) mediante la que se selecciona el método de envío y finalmente el método de pago 
      */
-    public static void fluxSelectEnvioAndClickPaymentMethod(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static void fluxSelectEnvioAndClickPaymentMethod(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
         boolean pagoPintado = false;
         if (!dCtxPago.getFTCkout().isChequeRegalo) {
-            pagoPintado = fluxSelectEnvio(dCtxPago, dCtxSh, dFTest);
+            pagoPintado = fluxSelectEnvio(dCtxPago, dCtxSh);
         }
         
-        PageCheckoutWrapperStpV.forceClickIconoPagoAndWait(dCtxSh.pais, dCtxPago.getDataPedido().getPago(), dCtxSh.channel, !pagoPintado, dFTest.driver);
+        PageCheckoutWrapperStpV.forceClickIconoPagoAndWait(dCtxSh.pais, dCtxPago.getDataPedido().getPago(), dCtxSh.channel, !pagoPintado, driver);
     }
     
-    public static boolean fluxSelectEnvio(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static boolean fluxSelectEnvio(DataCtxPago dCtxPago, DataCtxShop dCtxSh) 
     throws Exception {
         boolean pagoPintado = false;
         Pago pago = dCtxPago.getDataPedido().getPago();
+        DataFmwkTest dFTest = TestCaseData.getdFTest();
         if (pago.getTipoEnvio(dCtxSh.appE)!=null) {
             String nombrePago = dCtxPago.getDataPedido().getPago().getNombre(dCtxSh.channel);
             selectMetodoEnvio(dCtxPago, nombrePago, dCtxSh.appE, dCtxSh.channel, dFTest);
             pagoPintado = true;
             TipoTransporte tipoEnvio = pago.getTipoEnvioType(dCtxSh.appE);
             if (tipoEnvio.isDroppoint())
-            	ModalDroppointsStpV.fluxSelectDroppoint(dCtxPago, dCtxSh, dFTest);
+            	ModalDroppointsStpV.fluxSelectDroppoint(dCtxPago, dCtxSh, dFTest.driver);
             
-            if (tipoEnvio.isFranjaHoraria())
+            if (tipoEnvio.isFranjaHoraria()) {
             	selectFranjaHorariaUrgente(dCtxSh.channel, dFTest);
+            }
         }        
         
         return pagoPintado;
@@ -186,7 +156,7 @@ public class PageCheckoutWrapperStpV {
             SecMetodoEnvioDesktopStpV.selectFranjaHorariaUrgente(1, dFTest.driver);
             break;
         case movil_web:
-            Page1EnvioCheckoutMobilStpV.selectFranjaHorariaUrgente(1, dFTest);
+            Page1EnvioCheckoutMobilStpV.selectFranjaHorariaUrgente(1, dFTest.driver);
         }    
     }
 
@@ -200,7 +170,7 @@ public class PageCheckoutWrapperStpV {
             SecMetodoEnvioDesktopStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, dFTest.driver);
             break;
         case movil_web:
-            Page1EnvioCheckoutMobilStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, dFTest);
+            Page1EnvioCheckoutMobilStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, dFTest.driver);
             break;
         }
     }
@@ -323,313 +293,215 @@ public class PageCheckoutWrapperStpV {
         return (PageCheckoutWrapper.page1DktopCheckout.isPresentButtonConfPago(driver));
     }
     
-    public static DatosStep inputDataTrjAndConfirmPago(DataCtxPago dCtxPago, Channel channel, DataFmwkTest dFTest) 
+    final static String tagTipoTarj = "@TagTipoTarj";
+    final static String tagNumTarj = "@TagNumTarj";
+    @Step (
+    	description="Introducimos los datos de la tarjeta (" + tagTipoTarj + ") " + tagNumTarj + " y pulsamos el botón \"Confirmar pago\"",
+    	expected="Aparece la página de resultado OK")
+    public static void inputDataTrjAndConfirmPago(DataCtxPago dCtxPago, Channel channel, WebDriver driver) 
     throws Exception {
         Pago pago = dCtxPago.getDataPedido().getPago();
-        String descripcionStep = "Introducimos los datos de la tarjeta (" + pago.getTipotarj() + ") " + pago.getNumtarj() + " y pulsamos el botón \"Confirmar pago\"";
-        if (dCtxPago.getFTCkout().trjGuardada)
-            descripcionStep = "Seleccionamos la tarjeta guardada y pulsamos el botón \"Confirmar pago\""; 
-        
-        DatosStep datosStep = new DatosStep       (
-            descripcionStep, 
-            "Aparece la página de resultado OK");
-        try {
-            if (dCtxPago.getFTCkout().trjGuardada)
-                PageCheckoutWrapper.clickRadioTrjGuardada(channel, dFTest.driver);
-            else {
-            	PageCheckoutWrapper pageCheckoutStpV = new PageCheckoutWrapper();
-                if (pago.getNumtarj()!=null && "".compareTo(pago.getNumtarj())!=0) {
-                	pageCheckoutStpV.inputNumberPci(pago.getNumtarj(), channel, dFTest.driver);
-                }
-                
-                pageCheckoutStpV.inputTitularPci(pago.getTitular(), channel, dFTest.driver);
-                if (pago.getMescad()!=null && "".compareTo(pago.getMescad())!=0) {
-                	pageCheckoutStpV.selectMesByVisibleTextPci(pago.getMescad(), channel, dFTest.driver);
-                }
-                if (pago.getAnycad()!=null && "".compareTo(pago.getAnycad())!=0) {
-                	pageCheckoutStpV.selectAnyByVisibleTextPci(pago.getAnycad(), channel, dFTest.driver);
-                }
-                if (pago.getCvc()!=null && "".compareTo(pago.getCvc())!=0) {
-                	pageCheckoutStpV.inputCvcPci(pago.getCvc(), channel, dFTest.driver);
-                }
-                if (pago.getDni()!=null && "".compareTo(pago.getDni())!=0) {
-                	pageCheckoutStpV.inputDniPci(pago.getDni(), channel, dFTest.driver);   
-                }
-            }
-
-            PageCheckoutWrapper.confirmarPagoFromMetodos(channel, dCtxPago.getDataPedido(), dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+        DatosStep datosStep = TestCaseData.getDatosCurrentStep();
+        datosStep.replaceInDescription(tagTipoTarj, pago.getTipotarj());
+        datosStep.replaceInDescription(tagNumTarj, pago.getNumtarj());
+       
+    	PageCheckoutWrapper pageCheckoutStpV = new PageCheckoutWrapper();
+        if (pago.getNumtarj()!=null && "".compareTo(pago.getNumtarj())!=0) {
+        	pageCheckoutStpV.inputNumberPci(pago.getNumtarj(), channel, driver);
         }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        //Validaciones
-        PageRedirectPasarelaLoadingStpV.validateDisappeared(datosStep, dFTest);
-        
-        return datosStep;
+        pageCheckoutStpV.inputTitularPci(pago.getTitular(), channel, driver);
+        if (pago.getMescad()!=null && "".compareTo(pago.getMescad())!=0) {
+        	pageCheckoutStpV.selectMesByVisibleTextPci(pago.getMescad(), channel, driver);
+        }
+        if (pago.getAnycad()!=null && "".compareTo(pago.getAnycad())!=0) {
+        	pageCheckoutStpV.selectAnyByVisibleTextPci(pago.getAnycad(), channel, driver);
+        }
+        if (pago.getCvc()!=null && "".compareTo(pago.getCvc())!=0) {
+        	pageCheckoutStpV.inputCvcPci(pago.getCvc(), channel, driver);
+        }
+        if (pago.getDni()!=null && "".compareTo(pago.getDni())!=0) {
+        	pageCheckoutStpV.inputDniPci(pago.getDni(), channel, driver);   
+        }
+
+        PageCheckoutWrapper.confirmarPagoFromMetodos(channel, dCtxPago.getDataPedido(), driver);
+        PageRedirectPasarelaLoadingStpV.validateDisappeared(5, driver);
     }
     
-    public static DatosStep clickSolicitarFactura(Channel channel, DataFmwkTest dFTest) {
-        //Step
-        DatosStep datosStep = new DatosStep (
-            "Seleccionar el radiobutton \"Quiero recibir una factura\"", 
-            "Aparece el modal para la introducción de la dirección de facturación");
-        try {
-            PageCheckoutWrapper.clickSolicitarFactura(channel, dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-
-        //Validaciones
-        modalDirecFactura.validateIsOk(datosStep, dFTest);
-        
-        return datosStep;
+    @Validation (
+    	description="Está disponible una tarjeta guardada",
+    	level=State.Warn)
+    public static boolean isTarjetaGuardadaAvailable(Channel channel, WebDriver driver) {
+    	return (PageCheckoutWrapper.isAvailableTrjGuardada(channel, driver));
     }
     
-    public static DatosStep clickEditarDirecEnvio(DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep (
-            "Seleccionar el botón \"Editar\" asociado a la Dirección de Envío", 
-            "Aparece el modal para la introducción de la dirección de envío");
-        try {
-            PageCheckoutWrapper.clickEditDirecEnvio(Channel.desktop, dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-
-        //Validaciones
-        modalDirecEnvio.validateIsOk(dFTest.driver);
-        
-        return datosStep;
+    @Step (
+    	description="Seleccionamos la tarjeta guardada y pulsamos el botón \"Confirmar pago\"",
+    	expected="Aparece la página de resultado OK")
+    public static void selectTrjGuardadaAndConfirmPago(DataCtxPago dCtxPago, Channel channel, WebDriver driver) 
+    throws Exception {
+        PageCheckoutWrapper.clickRadioTrjGuardada(channel, driver);
+        PageCheckoutWrapper.confirmarPagoFromMetodos(channel, dCtxPago.getDataPedido(), driver);
+        PageRedirectPasarelaLoadingStpV.validateDisappeared(5, driver);
     }
     
-    //Seleccionar el botón necesario para aceptar la compra
-    public static DatosStep pasoBotonAceptarCompraDesktop(DataFmwkTest dFTest) throws Exception {
-        DatosStep datosStep = new DatosStep (
-            "Seleccionamos el botón \"Confirmar Pago\"", 
-            "Aparece una pasarela de pago");
-        datosStep.setSaveImagePage(SaveWhen.Always);
-        try {
-            PageCheckoutWrapper.page1DktopCheckout.clickConfirmarPago(dFTest.driver);
-
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        catch (Exception e) {
-            //
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-
-        return datosStep;
+    @Step (
+    	description="Seleccionar el radiobutton \"Quiero recibir una factura\"", 
+        expected="Aparece el modal para la introducción de la dirección de facturación")
+    public static void clickSolicitarFactura(Channel channel, WebDriver driver) {
+        PageCheckoutWrapper.clickSolicitarFactura(channel, driver);
+        modalDirecFactura.validateIsOk(driver);
+    }
+    
+    @Step (
+    	description="Seleccionar el botón \"Editar\" asociado a la Dirección de Envío", 
+        expected="Aparece el modal para la introducción de la dirección de envío")
+    public static void clickEditarDirecEnvio(WebDriver driver) throws Exception {
+        PageCheckoutWrapper.clickEditDirecEnvio(Channel.desktop, driver);
+        modalDirecEnvio.validateIsOk(driver);
+    }
+    
+    @Step (
+    	description="Seleccionamos el botón \"Confirmar Pago\"", 
+        expected="Aparece una pasarela de pago",
+        saveImagePage=SaveWhen.Always)
+    public static void pasoBotonAceptarCompraDesktop(WebDriver driver) throws Exception {
+    	PageCheckoutWrapper.page1DktopCheckout.clickConfirmarPago(driver);
     }
 
-    //Seleccionar el botón "Ver resumen" de la página-2 de checkout (2. Datos de pago) de móvil 
-    public static DatosStep pasoBotonVerResumenCheckout2Mobil(DataFmwkTest dFTest) throws Exception {
-        int maxSecondsToWait = 2;
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionamos el botón \"Ver resumen\" (lo esperamos " + maxSecondsToWait + " segundos)", 
-            "Aparece la página-3 del checkout");
-        datosStep.setSaveImagePage(SaveWhen.Always);
-        try {
-            PageCheckoutWrapper.page2MobilCheckout.waitAndClickVerResumen(maxSecondsToWait, dFTest.driver);
-
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        catch (Exception e) {
-            //
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-
-        //Validaciones
-        maxSecondsToWait = 2;
-        String descripValidac = "1) Aparece el botón de \"Confirmar Pago\" (esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (!PageCheckoutWrapper.page3MobilCheckout.isClickableButtonConfirmarPagoUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1,State.Warn);
-            }
-                                            
-            datosStep.setListResultValidations(listVals); 
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-                            
-        return datosStep;
+    @Step (
+    	description="Seleccionamos el botón \"Ver resumen\"", 
+        expected="Aparece la página-3 del checkout",
+        saveImagePage=SaveWhen.Always)
+    public static void pasoBotonVerResumenCheckout2Mobil(WebDriver driver) throws Exception {
+        PageCheckoutWrapper.page2MobilCheckout.waitAndClickVerResumen(2, driver);
+        checkAfterClickVerResumen(2, driver);
     }       
+    
+    @Validation (
+    	description="Aparece el botón de \"Confirmar Pago\" (esperamos hasta #{maxSecondsToWait} segundos)",
+    	level=State.Warn)
+    private static boolean checkAfterClickVerResumen(int maxSecondsWait, WebDriver driver) {
+        return (PageCheckoutWrapper.page3MobilCheckout.isClickableButtonConfirmarPagoUntil(maxSecondsWait, driver));
+    }
             
-    /**
-     * Seleccionar el botón "Confirmar pago" de la página-3 de checkout (3. Resumen) de móvil
-     */
-    public static DatosStep pasoBotonConfirmarPagoCheckout3Mobil(DataFmwkTest dFTest) throws Exception {
-        int maxSecondsToWait = 20;
-        DatosStep datosStep = new DatosStep (
-            "Seleccionamos el botón \"Confirmar pago\" (esperamos hasta " + maxSecondsToWait + " a que desaparezca la capa \"Espera unos segundos...\")", 
-            "Aparece una pasarela de pago");
-        datosStep.setSaveImagePage(SaveWhen.Always);
+    @Step (
+    	description="Seleccionamos el botón \"Confirmar pago\" (previamente esperamos hasta 20 segundos a que desaparezca la capa \"Espera unos segundos...\")", 
+        expected="Aparece una pasarela de pago",
+        saveImagePage=SaveWhen.Always)
+    public static void pasoBotonConfirmarPagoCheckout3Mobil(WebDriver driver) throws Exception {
         try {
-            PageCheckoutWrapper.page3MobilCheckout.clickConfirmaPagoAndWait(maxSecondsToWait, dFTest.driver);
-                                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+            int maxSecondsToWait = 20;
+            PageCheckoutWrapper.page3MobilCheckout.clickConfirmaPagoAndWait(maxSecondsToWait, driver);
         }
         catch (Exception e) {
             pLogger.warn("Problem in click Confirm payment button", e);
         }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
                             
-        //Validaciones
-        PageRedirectPasarelaLoadingStpV.validateDisappeared(datosStep, dFTest);
-
-        return datosStep;
+        PageRedirectPasarelaLoadingStpV.validateDisappeared(5, driver);
     }    
     
-    public static DatosStep inputTarjetaEmplEnCodPromo(Pais pais, Channel channel, DataFmwkTest dFTest) throws Exception {
-        //Step.
-        DatosStep datosStep = new DatosStep     (
-            "Introducir la tarjeta de empleado " + pais.getAccesoEmpl().getTarjeta() + " y pulsar el botón \"Aplicar\"", 
-            "Aparecen los datos para la introducción del 1er apellido y el nif");
-        try {   
-            PageCheckoutWrapper.inputCodigoPromoAndAccept(pais.getAccesoEmpl().getTarjeta(), channel, dFTest.driver);
-        
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        //Validaciones
-        int maxSecondsToWait = 5;
-        String descripcion2 = "";
-        if (pais.getAccesoEmpl().getNif()!=null) 
-            descripcion2 = "<br>2) SÍ Aparece el campo de introducción del DNI/Pasaporte";
-        else
-            descripcion2 = "<br>2) NO Aparece el campo de introducción del DNI/Pasaporte";
-        
-        String descripcion3 = "";
-        if (pais.getAccesoEmpl().getFecnac()!=null) 
-            descripcion3 = "<br>3) SÍ Aparece el campo de introducción de la fecha de nacimiento";
-        else
-            descripcion3 = "<br>3) NO Aparece el campo de introducción de la fecha de nacimiento";
-    
-        String descripValidac = 
-            "1) Aparece el campo de introducción del primer apellido (lo esperamos hasta " + maxSecondsToWait + " segundos)" +
-            descripcion2 +
-            descripcion3;
-        datosStep.setNOKstateByDefault();  
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(channel, maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (pais.getAccesoEmpl().getNif()!=null) { 
-                if (!PageCheckoutWrapper.isPresentInputDNIPromoEmpl(channel, dFTest.driver)) {
-                    listVals.add(2,State.Defect);
-                }
-            }
-            else {
-                if (PageCheckoutWrapper.isPresentInputDNIPromoEmpl(channel, dFTest.driver)) {
-                    listVals.add(2,State.Defect);
-                }
-            }
-            if (pais.getAccesoEmpl().getFecnac()!=null) { 
-                if (!PageCheckoutWrapper.isPresentDiaNaciPromoEmpl(channel, dFTest.driver)) {
-                    listVals.add(3, State.Defect);
-                }
-            }
-            else {
-                if (PageCheckoutWrapper.isPresentDiaNaciPromoEmpl(channel, dFTest.driver)) {
-                    listVals.add(3, State.Defect);
-                }
-            }
-    
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
+    final static String tagTarjeta = "@TagTarjeta";
+    @Step (
+    	description="Introducir la tarjeta de empleado " + tagTarjeta + " y pulsar el botón \"Aplicar\"", 
+        expected="Aparecen los datos para la introducción del 1er apellido y el nif")
+    public static void inputTarjetaEmplEnCodPromo(Pais pais, Channel channel, WebDriver driver) throws Exception {
+    	TestCaseData.getDatosCurrentStep().replaceInDescription(tagTarjeta, pais.getAccesoEmpl().getTarjeta());
+        PageCheckoutWrapper.inputCodigoPromoAndAccept(pais.getAccesoEmpl().getTarjeta(), channel, driver);
+        checkAfterInputTarjetaEmpleado(pais, channel, driver);
     }
     
-    public static DatosStep inputDataEmplEnPromoAndAccept(DataBag dataBag, Pais pais, Channel channel, AppEcom app, DataFmwkTest dFTest) 
+    @Validation
+    private static ListResultValidation checkAfterInputTarjetaEmpleado(Pais pais, Channel channel, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	    int maxSecondsWait = 5;
+	 	validations.add(
+			"Aparece el campo de introducción del primer apellido (lo esperamos hasta " + maxSecondsWait + " segundos)",
+			PageCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(channel, maxSecondsWait, driver), State.Defect);
+    	
+    	boolean isPresentInputDni = PageCheckoutWrapper.isPresentInputDNIPromoEmpl(channel, driver);
+    	if (pais.getAccesoEmpl().getNif()!=null) {
+		 	validations.add(
+				"Aparece el campo de introducción del DNI/Pasaporte",
+				isPresentInputDni, State.Defect);
+    	}
+    	else {
+		 	validations.add(
+				"Noparece el campo de introducción del DNI/Pasaporte",
+				!isPresentInputDni, State.Defect);
+    	}
+    	
+    	boolean isPresentInputFechaNac = PageCheckoutWrapper.isPresentDiaNaciPromoEmpl(channel, driver);
+    	if (pais.getAccesoEmpl().getFecnac()!=null) {
+		 	validations.add(
+				"Aparece el campo de introducción de la fecha de nacimiento",
+				isPresentInputFechaNac, State.Defect);
+    	}
+    	else {
+		 	validations.add(
+				"No aparece el campo de introducción de la fecha de nacimiento",
+				!isPresentInputFechaNac, State.Defect);	
+    	}
+    	
+    	return validations;
+    }
+    
+    final static String tag1erApellido = "@Tag1erApellido";
+    @Step (
+    	description="Introducir el primer apellido " + tag1erApellido + " y pulsar el botón \"Guardar\"", 
+        expected="Se aplican los descuentos correctamente")
+    public static void inputDataEmplEnPromoAndAccept(DataBag dataBag, Pais pais, Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-        //Step.
-        String descrStep = "";
-        if (pais.getAccesoEmpl().getNif()!=null) 
-            descrStep = "Introducir el NIF del usuario " + pais.getAccesoEmpl().getNif() + ". ";
-        
-        if (pais.getAccesoEmpl().getFecnac()!=null) 
-            descrStep += "Introducir la fecha de nacimiento " + pais.getAccesoEmpl().getFecnac() + ". ";
-        
-        String primerApellido = (new StringTokenizer(pais.getAccesoEmpl().getNombre(), " ")).nextToken();
-    
-        DatosStep datosStep = new DatosStep       (
-            descrStep + "Introducir el primer apellido " + primerApellido + " y pulsar el botón \"Guardar\"", 
-            "Se aplican los descuentos correctamente");
-        try {
-            if (pais.getAccesoEmpl().getNif()!=null)
-                PageCheckoutWrapper.inputDNIPromoEmpl(pais.getAccesoEmpl().getNif(), channel, dFTest.driver);
-                
-            PageCheckoutWrapper.inputApellidoPromoEmpl(primerApellido, channel, dFTest.driver);
-            
-            if (pais.getAccesoEmpl().getFecnac()!=null)
-                PageCheckoutWrapper.selectFechaNacPromoEmpl(pais.getAccesoEmpl().getFecnac(), channel, dFTest.driver);  
-            
-            PageCheckoutWrapper.clickButtonAceptarPromoEmpl(channel, dFTest.driver);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+    	DatosStep datosStep = TestCaseData.getDatosCurrentStep();
+    	String primerApellido = (new StringTokenizer(pais.getAccesoEmpl().getNombre(), " ")).nextToken();
+    	datosStep.replaceInDescription(tag1erApellido, primerApellido);
+    	
+        if (pais.getAccesoEmpl().getNif()!=null) {
+        	datosStep.addRightDescriptionText("Introducir el NIF del usuario " + pais.getAccesoEmpl().getNif() + ". ");
+        	PageCheckoutWrapper.inputDNIPromoEmpl(pais.getAccesoEmpl().getNif(), channel, driver);
         }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
+        PageCheckoutWrapper.inputApellidoPromoEmpl(primerApellido, channel, driver);
+        if (pais.getAccesoEmpl().getFecnac()!=null) {
+        	datosStep.addRightDescriptionText("Introducir la fecha de nacimiento " + pais.getAccesoEmpl().getFecnac() + ". ");
+        	PageCheckoutWrapper.selectFechaNacPromoEmpl(pais.getAccesoEmpl().getFecnac(), channel, driver); 
+        }
+        PageCheckoutWrapper.clickButtonAceptarPromoEmpl(channel, driver);
         
-        //Validaciones
-        validaResultImputPromoEmpl(dataBag, channel, app, datosStep, dFTest);
-        
-        return datosStep;
+        validaResultImputPromoEmpl(dataBag, channel, app, driver);
     }
         
-    public static void validaResultImputPromoEmpl(DataBag dataBag, Channel channel, AppEcom app, DatosStep datosStep, DataFmwkTest dFTest) 
+    public static void validaResultImputPromoEmpl(DataBag dataBag, Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
         if (channel==Channel.movil_web) {
-            Page1EnvioCheckoutMobilStpV.validaResultImputPromoEmpl(datosStep, dFTest);
+            Page1EnvioCheckoutMobilStpV.validaResultImputPromoEmpl(driver);
         }
         else {
-            Page1DktopCheckoutStpV.validaResultImputPromoEmpl(dataBag, app, datosStep, dFTest);
+            Page1DktopCheckoutStpV.validaResultImputPromoEmpl(dataBag, app, driver);
         }
     }    
     
-    public static void validaIsVersionChequeRegalo(ChequeRegalo chequeRegalo, DatosStep datosStep, DataFmwkTest dFTest) {
-        Page1DktopCheckoutStpV.validateIsVersionChequeRegalo(chequeRegalo, datosStep, dFTest);
+    public static void validaIsVersionChequeRegalo(ChequeRegalo chequeRegalo, WebDriver driver) {
+        Page1DktopCheckoutStpV.validateIsVersionChequeRegalo(chequeRegalo, driver);
     }
-
     
-	public static DatosStep selectBancoEPS(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
-        //Step.
-		String nombreBanco = "Easybank";
-		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest))
+    final static String tagNombreBanco = "@TagNombreBanco";
+    @Step (
+    	description="Escogemos el banco \"" + tagNombreBanco + "\" en la pestaña de selección", 
+        expected="El banco aparece seleccionado")
+	public static void selectBancoEPS(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    	String nombreBanco = "Easybank";
+		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
 			nombreBanco = "Test Issuer";
-		
-        DatosStep datosStep = new DatosStep       (
-            "Escogemos el banco \"" + nombreBanco + "\" en la pestaña de selección", 
-            "El banco aparece seleccionado");
-        try {
-        	
-            PageCheckoutWrapper.selectBancoEPS(nombreBanco, dFTest);
+		}
+		TestCaseData.getDatosCurrentStep().replaceInDescription(tagNombreBanco, nombreBanco);
             
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-      //Validaciones
-        String descripValidac = 
-                "1) Aparece el banco \"" + nombreBanco + "\" en el cuadro de selección";
-        datosStep.setNOKstateByDefault();      
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageCheckoutWrapper.isBancoSeleccionado(nombreBanco, dFTest)) {
-                listVals.add(1, State.Defect);
-            }
-    
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
-		
+		PageCheckoutWrapper.selectBancoEPS(nombreBanco, driver);
+		checkIsVisibleBank(nombreBanco, driver);
 	}
+    
+    @Validation (
+    	description="Aparece el banco \"#{ombreBanco}\" en el cuadro de selección",
+    	level=State.Defect)
+    private static boolean checkIsVisibleBank(String nombreBanco, WebDriver driver) {
+        return (PageCheckoutWrapper.isBancoSeleccionado(nombreBanco, driver));
+    }
 }

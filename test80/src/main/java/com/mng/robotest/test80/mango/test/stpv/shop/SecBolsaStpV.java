@@ -298,11 +298,7 @@ public class SecBolsaStpV {
 	public static void selectButtonComprar(DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
     	int maxSecondsWait = 10;
     	SecBolsa.clickBotonComprar(driver, dCtxSh.channel, maxSecondsWait);
-        
-        //Validaciones
         validaSelectButtonComprar(dataBag, dCtxSh, driver);
-        
-        //Validaciones RGPD
         if(!dCtxSh.userRegistered) {
         	Page1IdentCheckoutStpV.secSoyNuevo.validaRGPDText(dCtxSh, driver);
         }

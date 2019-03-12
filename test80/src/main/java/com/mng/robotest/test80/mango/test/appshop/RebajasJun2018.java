@@ -129,8 +129,9 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
         //Obtenemos el tipo de línea/sublínea
         LineaType lineaType = linea.getType();
         SublineaNinosType sublineaType = null;
-        if (sublinea!=null)
+        if (sublinea!=null) {
             sublineaType = sublinea.getTypeSublinea();
+        }
         
         //Selección de la línea/sublínea
         SecMenusWrapperStpV.seleccionLinea(lineaType, sublineaType, dCtxSh, dFTest);
@@ -138,32 +139,32 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
         if (SecMenusWrap.canClickMenuArticles(dCtxSh.pais, linea, sublinea)) {
             PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);
             
-        	Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "pantalones"));
-            SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh, dFTest);
-            boolean isGaleriaSale = true;
-            pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, !isGaleriaSale, dCtxSh.pais, dCtxSh.idioma, linea.getType(), bloqueMenu.prendas);
+//        	  Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "pantalones"));
+//            SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh, dFTest.driver);
+//            boolean isGaleriaSale = true;
+//            pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, !isGaleriaSale, dCtxSh.pais, dCtxSh.idioma, linea.getType(), bloqueMenu.prendas);
+//            
+//            Menu1rstLevel menuZapatos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "zapatos"));
+//            SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuZapatos, dCtxSh, dFTest.driver);
+//            pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, !isGaleriaSale, dCtxSh.pais, dCtxSh.idioma, linea.getType(), bloqueMenu.accesorios);
             
-            Menu1rstLevel menuZapatos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "zapatos"));
-            SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuZapatos, dCtxSh, dFTest);
-            pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, !isGaleriaSale, dCtxSh.pais, dCtxSh.idioma, linea.getType(), bloqueMenu.accesorios);
-            
-            Menu1rstLevel menuRebajas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "rebajas"));
+            Menu1rstLevel menuRebajas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "promoción"));
             menuRebajas.setDataGaLabel("rebajas");
             if (salesOnInCountry) {
 	            //Click filtros laterales de rebajas
 	            SecMenusWrapperStpV.selectFiltroCollection(FilterCollection.sale, dCtxSh.channel, dCtxSh.appE, dFTest);
-	            SecMenusWrapperStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason, dCtxSh.channel, dCtxSh.appE, dFTest);
+	            SecMenusWrapperStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
 	            
 	            Menu1rstLevel menuNuevaTemp = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "nueva temporada"));
 	            String dataGaMenuNuevaTemporada = getDataGaLabelNuevaTemporada(dCtxSh.pais.getCodigo_pais(), sublineaType);
 	            menuNuevaTemp.setDataGaLabel(dataGaMenuNuevaTemporada);
 	
-	            SecMenusDesktopStpV.stepEntradaMenuDesktop(menuNuevaTemp, "", dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+	            SecMenusDesktopStpV.stepEntradaMenuDesktop(menuNuevaTemp, "", dCtxSh, dFTest.driver);
 	            pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Defect);
 	            //PageGaleriaStpV.validaArticlesOfTemporadas(tempArticlesNextSeason, validaNotNewArticles, datosStep, dFTest);
             
 
-	            SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuRebajas, dCtxSh, dFTest);
+	            SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuRebajas, dCtxSh, dFTest.driver);
 	            pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, true/*isGaleriaSale*/, dCtxSh.pais, dCtxSh.idioma, linea.getType(), bloqueMenu.prendas);
 	            PageGaleriaStpV.clickMoreInfoBannerRebajasJun2018(dFTest);
 	            
@@ -173,6 +174,10 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
 	            }
             }
             else {
+                Menu1rstLevel menuPromocion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "promocion"));
+                menuPromocion.setDataGaLabel("promocion");
+            	SecMenusDesktopStpV.isPresentMenuSuperior(menuPromocion, dCtxSh.appE, dFTest.driver);
+            	
             	SecMenusDesktopStpV.isNotPresentMenuSuperior(menuRebajas, dCtxSh.appE, dFTest.driver);
             }
         }

@@ -1,8 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -13,33 +12,31 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.d3d.PageD3DLoginStp
 
 public class PagoBancontact extends PagoStpV {
     
-    public PagoBancontact(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {
-        super(dCtxSh, dCtxPago, dFTest);
+    public PagoBancontact(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+        super(dCtxSh, dCtxPago, driver);
         super.isAvailableExecPay = true;
     }
     
     @Override
-    public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
+    public void testPagoFromCheckout(boolean execPay) throws Exception {
         boolean isD3D = true;
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, dFTest);
+        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, driver);
         this.dCtxPago.getFTCkout().trjGuardada = false;
         
         if (execPay) {
-        	PageCheckoutWrapperStpV.inputDataTrjAndConfirmPago(this.dCtxPago, dCtxSh.channel, dFTest);
+        	PageCheckoutWrapperStpV.inputDataTrjAndConfirmPago(this.dCtxPago, dCtxSh.channel, driver);
             DataPedido dataPedido = this.dCtxPago.getDataPedido(); 
             dataPedido.setCodtipopago("U");
             Pago pago = dataPedido.getPago();
             //En el caso de Bancontact siempre saltará el D3D
             if (dataPedido.getPago().getTipotarjEnum()==TypeTarj.VISAD3D) {
-                isD3D = PageD3DLoginStpV.validateIsD3D(1, dFTest.driver);
-                PageD3DLoginStpV.isImporteVisible(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dFTest.driver);
+                isD3D = PageD3DLoginStpV.validateIsD3D(1, driver);
+                PageD3DLoginStpV.isImporteVisible(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), driver);
                 if (isD3D) {
                     dataPedido.setCodtipopago("Y");
-                    PageD3DLoginStpV.loginAndClickSubmit(pago.getUsrd3d(), pago.getPassd3d(), dFTest.driver);
+                    PageD3DLoginStpV.loginAndClickSubmit(pago.getUsrd3d(), pago.getPassd3d(), driver);
                 }
             }
         }
-        
-        return TestCaseData.getDatosLastStep();
     }    
 }

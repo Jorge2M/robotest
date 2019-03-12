@@ -1,7 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
@@ -41,14 +40,14 @@ public class ModalDroppointsStpV {
     }
     
     @SuppressWarnings("static-access")
-    public static void fluxSelectDroppoint(DataCtxPago dCtxPago, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+    public static void fluxSelectDroppoint(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         Pago pago = dCtxPago.getDataPedido().getPago();
     	DataSearchDeliveryPoint dataSearchDp = DataSearchDeliveryPoint.getInstance(pago, dCtxSh.appE, dCtxSh.pais);
-        secSelectDPoint.searchPoblacion(dataSearchDp, dFTest);
-        DataDeliveryPoint dataDp = ModalDroppointsStpV.secSelectDPoint.clickDeliveryPointAndGetData(2/*position*/, dFTest);
+        secSelectDPoint.searchPoblacion(dataSearchDp, driver);
+        DataDeliveryPoint dataDp = ModalDroppointsStpV.secSelectDPoint.clickDeliveryPointAndGetData(2/*position*/, driver);
         dCtxPago.getDataPedido().setTypeEnvio(pago.getTipoEnvioType(dCtxSh.appE));
         dCtxPago.getDataPedido().setDataDeliveryPoint(dataDp);
-        secSelectDPoint.clickSelectButton(dCtxSh.channel, dFTest.driver);
-        secConfirmDatos.clickConfirmarDatosButton(dCtxSh.channel, dCtxPago.getDataPedido(), dFTest.driver);                
+        secSelectDPoint.clickSelectButton(dCtxSh.channel, driver);
+        secConfirmDatos.clickConfirmarDatosButton(dCtxSh.channel, dCtxPago.getDataPedido(), driver);                
     }
 }

@@ -305,6 +305,10 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
         return (driver.findElement(By.xpath(XPathRedError)).getText());
     }
     
+    public static boolean isVisibleRadioTrjGuardada(WebDriver driver)  {
+    	return (WebdrvWrapp.isElementVisible(driver, By.xpath(XPathRadioTrjGuardada)));
+    }
+    
     public static void clickRadioTrjGuardada(WebDriver driver) throws Exception {
         clickAndWaitLoad(driver, By.xpath(XPathRadioTrjGuardada));
     }    

@@ -115,7 +115,7 @@ public class ElementPageFunctions {
     }
 
     public static void selectElement(String xPath, WebDriver driver) throws Exception {
-	    WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xPath), 3);
+	    WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xPath), TypeOfClick.javascript);
     }
 
     public static void selectElement(ElementPage element, Channel channel, WebDriver driver, WebdrvWrapp.TypeOfClick typeOfClick) throws Exception {

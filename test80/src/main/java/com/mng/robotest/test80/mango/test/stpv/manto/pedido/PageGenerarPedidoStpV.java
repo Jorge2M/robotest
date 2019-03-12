@@ -24,14 +24,12 @@ public class PageGenerarPedidoStpV {
 	public static void changePedidoToEstado(EstadoPedido newState, WebDriver driver) throws Exception {
         PageGenerarPedido.selectEstado(newState, driver);
         PageGenerarPedido.clickAndWait(GenerarFicheroButton, driver);
-        
-        //Validations
         checkMsgFileCreatedCorrectly(driver);
 	}
 	
 	@Validation (
 		description="Aparece el mensaje de <b>Fichero creado correctamente</b>",
-		level=State.Defect)
+		level=State.Warn)
 	private static boolean checkMsgFileCreatedCorrectly(WebDriver driver) {
 		return (PageGenerarPedido.isElementInState(MessageOkFicheroCreado, StateElem.Visible, driver));
 	}

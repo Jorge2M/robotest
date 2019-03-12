@@ -1,8 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -17,31 +16,29 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard.Pa
 
 public class PagoKoreanCreditCard extends PagoStpV {
     
-    public PagoKoreanCreditCard(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {
-        super(dCtxSh, dCtxPago, dFTest);
+    public PagoKoreanCreditCard(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+        super(dCtxSh, dCtxPago, driver);
         super.isAvailableExecPay = true;
     }
     
     @Override
-    public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, dFTest);
-        PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, dFTest);
-        PageKoCardAdyenStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais, dCtxSh.channel, dFTest.driver);
-    	PageKoCardAdyenStpV.clickIconForContinue(dCtxSh.channel, dFTest.driver);
+    public void testPagoFromCheckout(boolean execPay) throws Exception {
+        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, driver);
+        PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, driver);
+        PageKoCardAdyenStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais, dCtxSh.channel, driver);
+    	PageKoCardAdyenStpV.clickIconForContinue(dCtxSh.channel, driver);
     	if (execPay) {
 	        if (dCtxSh.channel == Channel.movil_web) {
-	        	PageKoCardINIpay1MobilStpV2.checkTerminosBox(dFTest.driver);
-	        	PageKoCardINIpay1MobilStpV2.continuarConPagoCoreaMobile(dFTest.driver);
-	        	PageKoCardINIpay2MobilStpV.confirmMainPaymentCorea(dFTest.driver);
-	        	PageKoCardINIpay3MobilStpV.clickNextButton(dFTest.driver);
-	        	PageKoCardINIpay4MobilStpV.clickConfirmarButton(dFTest.driver);
+	        	PageKoCardINIpay1MobilStpV2.checkTerminosBox(driver);
+	        	PageKoCardINIpay1MobilStpV2.continuarConPagoCoreaMobile(driver);
+	        	PageKoCardINIpay2MobilStpV.confirmMainPaymentCorea(driver);
+	        	PageKoCardINIpay3MobilStpV.clickNextButton(driver);
+	        	PageKoCardINIpay4MobilStpV.clickConfirmarButton(driver);
 	        }
 	        
 	        if (dCtxSh.channel == Channel.desktop) {
-	        	PageKoreanConfDesktopStpV.clickConfirmarButton(dFTest);
+	        	PageKoreanConfDesktopStpV.clickConfirmarButton(driver);
 	        }
     	}
-
-        return TestCaseData.getDatosLastStep();
     }    
 }

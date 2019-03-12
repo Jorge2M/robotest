@@ -7,7 +7,6 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.mango.test.data.Descuento;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -262,6 +261,15 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
             page1DktopCheckout.forceClickMetodoPagoAndWait(metodoPago, indexpant, pais, driver);
     }
     
+    public static boolean isAvailableTrjGuardada(Channel channel, WebDriver driver) {
+    	if (channel==Channel.movil_web) {
+    		return (page2MobilCheckout.isVisibleRadioTrjGuardada(driver));
+    	}
+    	else {
+    		return (page1DktopCheckout.isVisibleRadioTrjGuardada(driver));
+    	}
+    }
+    
     public static void clickRadioTrjGuardada(Channel channel, WebDriver driver) throws Exception {
         if (channel==Channel.movil_web)
             page2MobilCheckout.clickRadioTrjGuardada(driver);
@@ -429,12 +437,12 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
         return (precioTotal);
     }
     
-    public static void selectBancoEPS(String nombreBanco, DataFmwkTest dFTest) {
-		SecEps.selectBanco(nombreBanco, dFTest.driver);
+    public static void selectBancoEPS(String nombreBanco, WebDriver driver) {
+		SecEps.selectBanco(nombreBanco, driver);
 	}
 
-	public static boolean isBancoSeleccionado(String nombreBanco, DataFmwkTest dFTest) {
-		return SecEps.isBancoSeleccionado(nombreBanco, dFTest.driver);
+	public static boolean isBancoSeleccionado(String nombreBanco, WebDriver driver) {
+		return SecEps.isBancoSeleccionado(nombreBanco, driver);
 	}
 
 }

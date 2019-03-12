@@ -106,9 +106,9 @@ public class Reembolsos extends GestorWebDriver {
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
 	    
         //Este test sólo aplica al entornos no productivos
-        if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest))
+        if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest.driver)) {
             return;        
-        
+        }
         //Revisamos si el país tiene configurado el saldo en cuenta
         boolean paisConSaldoCta = dCtxSh.pais.existsPagoStoreCredit();
         
@@ -150,9 +150,9 @@ public class Reembolsos extends GestorWebDriver {
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         
         //Este test sólo aplica al entornos no productivos
-        if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest))
+        if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest.driver)) {
             return;
-        
+        }
         //Obtenemos el usuario/password de acceso
         dCtxSh.userConnected = Constantes.mail_standard;
         dCtxSh.passwordUser = Constantes.pass_standard;
@@ -187,7 +187,7 @@ public class Reembolsos extends GestorWebDriver {
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
-        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, dFTest); 
+        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, dFTest.driver); 
         
         //Informamos datos varios necesarios para el proceso de pagos de modo que se pruebe el pago StoreCredit
         dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
@@ -196,7 +196,7 @@ public class Reembolsos extends GestorWebDriver {
         dCtxPago.getFTCkout().validaPagos = true;
         Pago pagoStoreCredit = dCtxSh.pais.getPago("STORECREDIT");
         dCtxPago.getDataPedido().setPago(pagoStoreCredit);
-        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, dFTest);
+        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, dFTest.driver);
         
         //Volvemos a la portada (Seleccionamos el link "Seguir de shopping" o el icono de Mango)
         PageResultPagoStpV.selectSeguirDeShopping(dCtxSh.channel, dCtxSh.appE, dFTest.driver);

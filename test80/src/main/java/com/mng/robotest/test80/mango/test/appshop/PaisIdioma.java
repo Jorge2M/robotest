@@ -154,14 +154,14 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
             
         //Validamos si hemos de ejecutar los pasos correspondientes al recorrido de los menús
         if (testMenus(linea, sublinea)) {
-            SecMenusWrapperStpV.stepsMenusLinea(dCtxShI.pais, lineaType, sublineaType, dCtxShI.channel, dCtxShI.appE, dFTest);
+            SecMenusWrapperStpV.stepsMenusLinea(lineaType, sublineaType, dCtxShI, dFTest);
         	if (existsRightBannerMenu(linea, sublinea, dCtxShI.channel))
                 SecMenusDesktopStpV.clickRightBanner(lineaType, sublineaType, dCtxShI.appE, dFTest);
         }
         else {
             if (SecMenusWrap.canClickMenuArticles(dCtxShI.pais, linea, sublinea)) {
             	Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "pantalones"));
-                SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxShI, dFTest);
+                SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxShI, dFTest.driver);
                 if (this.recorreBanners) {
                     PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);
                 	pageGaleriaStpV.clickBannerSuperiorIfLinkableDesktop();

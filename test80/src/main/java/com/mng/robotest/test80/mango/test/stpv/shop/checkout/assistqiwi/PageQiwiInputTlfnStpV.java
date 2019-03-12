@@ -1,57 +1,38 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.assistqiwi;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi.PageQiwiConfirm;
+import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi.PageQiwiInputTlfn;
-
 
 public class PageQiwiInputTlfnStpV {
                  
-    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) { 
-        String descripValidac = 
-            "1) Aparece una página con el campo de introducción del Qiwi Mobile Phone"; 
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (!PageQiwiInputTlfn.isPresentInputPhone(dFTest.driver)) {
-                listVals.add(1,State.Warn);
-            }
-    
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation (
+		description="Aparece una página con el campo de introducción del Qiwi Mobile Phone",
+		level=State.Warn)
+    public static boolean validateIsPage(WebDriver driver) { 
+        return (PageQiwiInputTlfn.isPresentInputPhone(driver));
     }
     
-    public static DatosStep inputTlfnAndAceptar(String tlfnQiwi, DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep     (
-            "Introducimos el Qiwi Mobile Phone " + tlfnQiwi + " y pulsamos el botón \"Aceptar\"", 
-            "Aparece la página de confirmación de Qiwi o la de resultado del pago de Mango");
-        try {
-            PageQiwiInputTlfn.inputQiwiPhone(dFTest.driver, tlfnQiwi);
-            PageQiwiInputTlfn.waitAndClickAceptar(dFTest.driver, 1/*seconds*/);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-            
-        //En caso de que aparezca la página de confirmación...
-        if (PageQiwiConfirm.isPage(dFTest.driver)) {
-            datosStep = new DatosStep     (
-                "Seleccionar el botón \"Confirmar\" de la página de confirmación de Qiwi", 
-                "Aparece la página de resultado del pago de Mango");
-            try {
-                PageQiwiConfirm.clickConfirmar(dFTest.driver);
-                            
-                datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-            }
-            finally { StepAspect.storeDataAfterStep(datosStep); }            
-        }
-        
-        return datosStep;
+	@Step (
+		description="Introducimos el Qiwi Mobile Phone #{tlfnQiwi} y pulsamos el botón \"Aceptar\"", 
+        expected="Aparece la página de confirmación de Qiwi o la de resultado del pago de Mango")
+	public static void inputTelefono(String tlfnQiwi, WebDriver driver) throws Exception {
+        PageQiwiInputTlfn.inputQiwiPhone(driver, tlfnQiwi);
+        checkIsVisibleAceptarButton(driver);
+	}
+	
+	@Validation (
+		description="Aparece el link de Aceptar")
+	private static boolean checkIsVisibleAceptarButton(WebDriver driver) {
+		return (PageQiwiInputTlfn.isVisibleLinkAceptar(1, driver));
+	}	
+	
+	@Step (
+		description="Seleccionar el link <b>Aceptar</b>",
+		expected="Aparece la página de confirmación del pago-Qiwi")
+    public static void clickConfirmarButton(WebDriver driver) throws Exception { 
+    	PageQiwiInputTlfn.clickLinkAceptar(driver);
     }
 }

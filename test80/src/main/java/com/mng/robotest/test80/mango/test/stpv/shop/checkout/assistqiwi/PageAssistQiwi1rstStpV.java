@@ -1,56 +1,37 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.assistqiwi;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi.PageAssistQiwi1rst;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi.PageAssistQiwi1rst.pasarelasAssist;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
-
 public class PageAssistQiwi1rstStpV {
     
-    public static void validateIsPage(String importeTotal, String codPais, Channel channel, DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) Aparece el icono de Assist<br>" + 
-            "2) En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>" +
-            "3) Aparece el icono de Qiwi";
-        datosStep.setNOKstateByDefault();    
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageAssistQiwi1rst.isPresentIconoAssist(dFTest.driver, channel)) {
-                listVals.add(1, State.Warn);
-            }
-            if (!ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, dFTest.driver)) {
-                listVals.add(2, State.Warn);
-            }
-            if (!PageAssistQiwi1rst.isPresentIconPasarelas(dFTest.driver, channel)) {
-                listVals.add(3, State.Warn);
-            }
-                                    
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }            
+	@Validation
+    public static ListResultValidation validateIsPage(String importeTotal, String codPais, Channel channel, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	 	validations.add(
+			"Aparece el icono de Assist<br>",
+			PageAssistQiwi1rst.isPresentIconoAssist(driver, channel), State.Warn);
+	 	validations.add(
+			"En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>",
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
+	 	validations.add(
+			"Aparece el icono de Qiwi",
+			PageAssistQiwi1rst.isPresentIconPasarelas(driver, channel), State.Warn);
+	 	return validations;         
     }
     
-    public static DatosStep clickIconPasarelaQiwi(Channel channel, DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep     (
-            "Seleccionar la opción de Qiwi Kошелек", 
-            "Aparece la página de introducción del número de teléfono");
-        try {
-            PageAssistQiwi1rst.clickIconPasarela(dFTest.driver, channel, pasarelasAssist.qiwikошелек);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-
-        //Validaciones
-        PageQiwiInputTlfnStpV.validateIsPage(datosStep, dFTest);
-        
-        return datosStep;
+	@Step (
+		description="Seleccionar la opción de Qiwi Kошелек", 
+        expected="Aparece la página de introducción del número de teléfono")
+    public static void clickIconPasarelaQiwi(Channel channel, WebDriver driver) throws Exception {
+        PageAssistQiwi1rst.clickIconPasarela(driver, channel, pasarelasAssist.qiwikошелек);
+        PageQiwiInputTlfnStpV.validateIsPage(driver);
     }
 }

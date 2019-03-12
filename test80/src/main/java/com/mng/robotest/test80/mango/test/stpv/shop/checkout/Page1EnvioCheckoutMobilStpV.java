@@ -3,15 +3,14 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1EnvioCheckoutMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
@@ -48,113 +47,70 @@ public class Page1EnvioCheckoutMobilStpV {
     }
     
     @SuppressWarnings("static-access")
-    public static DatosStep selectMetodoEnvio(TipoTransporte tipoTransporte, String nombrePago, DataCtxPago dCtxPago, DataFmwkTest dFTest) 
-    throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep     (
-            "<b style=\"color:blue;\">" + nombrePago + "</b>:Seleccionamos el método de envío <b>" + tipoTransporte + "</b> (previamente, si no lo estamos, nos posicionamos en el apartado \"1. Envio\")", 
-            "Se selecciona el método de envío correctamente");
-        try {
-            Page1EnvioCheckoutMobil.selectMetodoAfterPositioningIn1Envio(tipoTransporte, dFTest.driver);
-            if (!tipoTransporte.isEntregaDomicilio()) {
-            	if (ModalDroppoints.isErrorMessageVisibleUntil(dFTest.driver))
-            		ModalDroppoints.searchAgainByUserCp(dCtxPago.getDatosRegistro().get("cfCp"), dFTest.driver);
-            }
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+    @Step (
+    	description="<b style=\"color:blue;\">#{nombrePago}</b>:Seleccionamos el método de envío <b>#{tipoTransporte}</b> (previamente, si no lo estamos, nos posicionamos en el apartado \"1. Envio\")", 
+        expected="Se selecciona el método de envío correctamente")
+    public static void selectMetodoEnvio(TipoTransporte tipoTransporte, @SuppressWarnings("unused") String nombrePago, 
+    									 DataCtxPago dCtxPago, WebDriver driver) throws Exception {
+        Page1EnvioCheckoutMobil.selectMetodoAfterPositioningIn1Envio(tipoTransporte, driver);
+        if (!tipoTransporte.isEntregaDomicilio()) {
+        	if (ModalDroppoints.isErrorMessageVisibleUntil(driver)) {
+        		ModalDroppoints.searchAgainByUserCp(dCtxPago.getDatosRegistro().get("cfCp"), driver);
+        	}
         }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
 
         //Validaciones
-        validaBlockSelected(tipoTransporte, datosStep, dFTest);
+        validaBlockSelected(tipoTransporte, 3, driver);
         if (tipoTransporte.isEntregaDomicilio()) {
-            modalDroppoints.validaIsNotVisible(Channel.movil_web, dFTest.driver);
+            modalDroppoints.validaIsNotVisible(Channel.movil_web, driver);
         }
         else {
-            modalDroppoints.validaIsVisible(Channel.movil_web, dFTest.driver);
+            modalDroppoints.validaIsVisible(Channel.movil_web, driver);
         }
-        
-        return datosStep;
     }    
     
-    public static void validaBlockSelected(TipoTransporte tipoTransporte, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
-        int maxSecondsToWait = 2;
-        String descripValidac = 
-            "1) Queda seleccionado el bloque correspondiete a <b>" + tipoTransporte + "</b> (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setNOKstateByDefault();       
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!Page1EnvioCheckoutMobil.isBlockSelectedUntil(tipoTransporte, 3/*maxSecondsToWait*/, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-                            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+    @Validation (
+    	description="Queda seleccionado el bloque correspondiete a <b>#{tipoTransporte}</b> (lo esperamos hasta #{maxSecondsWait} segundos)",
+    	level=State.Warn)
+    public static boolean validaBlockSelected(TipoTransporte tipoTransporte, int maxSecondsWait, WebDriver driver) 
+    throws Exception {
+        return (Page1EnvioCheckoutMobil.isBlockSelectedUntil(tipoTransporte, maxSecondsWait, driver));
     }
     
-    public static DatosStep clickContinuarToMetodosPago(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
-        //Step.
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionar el botón \"Continuar\"", 
-            "Aparece la página de checkout con los métodos de pago");
-        try {
-            Page1EnvioCheckoutMobil.clickContinuar(dFTest.driver);
-                                        
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-                
-        PageCheckoutWrapperStpV.validateLoadingDisappears(datosStep, dFTest);
-        
-        String descripValidac = "1) Aparece la página con los métodos de Pago";
-        datosStep.setNOKstateByDefault();           
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!PageCheckoutWrapper.isPresentMetodosPago(dCtxSh.pais, dCtxSh.channel, dFTest.driver)) {
-                listVals.add(1, State.Defect);  
-            }
-    
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
- 
-        return datosStep;
+    @Step (
+    	description="Seleccionar el botón \"Continuar\"", 
+        expected="Aparece la página de checkout con los métodos de pago")
+    public static void clickContinuarToMetodosPago(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    	Page1EnvioCheckoutMobil.clickContinuar(driver);
+        PageCheckoutWrapperStpV.validateLoadingDisappears(10, driver);
+        checkAppearsPageWithPaymentMethods(dCtxSh.pais, dCtxSh.channel, driver);
     }
     
-    public static void validaResultImputPromoEmpl(DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
-        //Descuento descuento = new Descuento(app, DiscountType.Empleado);
+    @Validation (
+    	description="Aparece la página con los métodos de Pago",
+    	level=State.Defect)
+    private static boolean checkAppearsPageWithPaymentMethods(Pais pais, Channel channel, WebDriver driver) {
+        return (PageCheckoutWrapper.isPresentMetodosPago(pais, channel, driver));
+    }
+    
+    @Validation
+    public static ListResultValidation validaResultImputPromoEmpl(WebDriver driver) throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
         int maxSecondsWait = 2;
-        String descripValidac = 
-            "1) Aparece el descuento total aplicado al empleado (en menos de " + maxSecondsWait + " segundos)<br>" +
-            "2) Aparece un descuento de empleado mayor que 0";
-        datosStep.setNOKstateByDefault();           
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!Page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(dFTest.driver, maxSecondsWait)) {
-                listVals.add(1, State.Warn);
-            }
-            if (!Page1EnvioCheckoutMobil.validateDiscountEmpleadoNotNull(dFTest.driver)) {
-                listVals.add(2, State.Warn);
-            }
-                     
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	 	validations.add(
+			"Aparece el descuento total aplicado al empleado (en menos de " + maxSecondsWait + " segundos)<br>",
+			Page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(driver, maxSecondsWait), State.Warn);
+	 	validations.add(
+			"Aparece un descuento de empleado mayor que 0",
+			Page1EnvioCheckoutMobil.validateDiscountEmpleadoNotNull(driver), State.Warn);
+	 	return validations;
     }
     
-    public static DatosStep selectFranjaHorariaUrgente(int posicion, DataFmwkTest dFTest) {
-        //Step
-        DatosStep datosStep = new DatosStep     (
-            "Seleccionamos la <b>" + posicion + "a<b> franja horaria del envío \"Urgente - Horario personalizado\"</b>", 
-            "La franja horaria se selecciona correctamente");
-        try {
-            Page1EnvioCheckoutMobil.selectFranjaHorariaUrgente(posicion, dFTest.driver);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        return datosStep;
+    @Step (
+    	description="Seleccionamos la <b>#{posicion}a<b> franja horaria del envío \"Urgente - Horario personalizado\"</b>", 
+        expected="La franja horaria se selecciona correctamente"
+    		)
+    public static void selectFranjaHorariaUrgente(int posicion, WebDriver driver) {
+    	Page1EnvioCheckoutMobil.selectFranjaHorariaUrgente(posicion, driver);
     }
 }

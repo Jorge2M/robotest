@@ -1,8 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -13,31 +12,28 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango.PageAmexInpu
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango.PageAmexInputTarjetaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango.PageAmexResultStpV;
 
-
 public class PagoTMango extends PagoStpV {
 
-    public PagoTMango(DataCtxShop dCtxSh, DataCtxPago dataPago, DataFmwkTest dFTest) {
-        super(dCtxSh, dataPago, dFTest);
+    public PagoTMango(DataCtxShop dCtxSh, DataCtxPago dataPago, WebDriver driver) {
+        super(dCtxSh, dataPago, driver);
         super.isAvailableExecPay = true;
     }
     
     @SuppressWarnings("static-access")
     @Override
-    public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
+    public void testPagoFromCheckout(boolean execPay) throws Exception {
         DataPedido dataPedido = this.dCtxPago.getDataPedido();
-        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, dFTest);
-        PageCheckoutWrapperStpV.secTMango.validateIsSectionOk(dCtxSh.channel, dFTest.driver);
-        PageCheckoutWrapperStpV.secTMango.clickTipoPago(SecTMango.TipoPago.pagoHabitual, dCtxSh.channel, dFTest.driver);
-        PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, dFTest);
-        PageAmexInputTarjetaStpV.validateIsPageOk(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dFTest.driver);
+        PageCheckoutWrapperStpV.fluxSelectEnvioAndClickPaymentMethod(dCtxPago, dCtxSh, driver);
+        PageCheckoutWrapperStpV.secTMango.validateIsSectionOk(dCtxSh.channel, driver);
+        PageCheckoutWrapperStpV.secTMango.clickTipoPago(SecTMango.TipoPago.pagoHabitual, dCtxSh.channel, driver);
+        PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, driver);
+        PageAmexInputTarjetaStpV.validateIsPageOk(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), driver);
         
         if (execPay) {
             dataPedido.setCodtipopago("M");
-            PageAmexInputTarjetaStpV.inputTarjetaAndPayButton(dataPedido.getPago().getNumtarj(), dataPedido.getPago().getMescad(), dataPedido.getPago().getAnycad(), dataPedido.getPago().getCvc(), dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dFTest.driver);
-            PageAmexInputCipStpV.inputCipAndAcceptButton(dataPedido.getPago().getCip(), dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dFTest.driver);
-            PageAmexResultStpV.clickContinuarButton(dFTest.driver);
+            PageAmexInputTarjetaStpV.inputTarjetaAndPayButton(dataPedido.getPago().getNumtarj(), dataPedido.getPago().getMescad(), dataPedido.getPago().getAnycad(), dataPedido.getPago().getCvc(), dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), driver);
+            PageAmexInputCipStpV.inputCipAndAcceptButton(dataPedido.getPago().getCip(), dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), driver);
+            PageAmexResultStpV.clickContinuarButton(driver);
         }
-        
-        return TestCaseData.getDatosLastStep();
     }
 }

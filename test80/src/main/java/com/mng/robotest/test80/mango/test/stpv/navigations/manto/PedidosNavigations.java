@@ -9,7 +9,6 @@ import com.mng.robotest.test80.Test80mng.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.utils;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -25,7 +24,6 @@ import com.mng.robotest.test80.mango.test.stpv.manto.PagePedidosMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageSelTdaMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.SecFiltrosMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.SecFiltrosMantoStpV.TypeSearch;
-
 
 public class PedidosNavigations {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
@@ -85,8 +83,8 @@ public class PedidosNavigations {
         
         //Establecemos los filtros de las bolsas con el día de hoy + el pedido + el código de país asociado al pedido y pulsamos "Buscar"
         PageMenusMantoStpV.goToBolsas(dFTest);
-        DatosStep datosStep = SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.BOLSA, dFTest);
-        boolean existLinkPedido = PageBolsasMantoStpV.validaLineaBolsa(dataPedido, appE, datosStep, dFTest);
+        SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.BOLSA, dFTest.driver);
+        boolean existLinkPedido = PageBolsasMantoStpV.validaLineaBolsa(dataPedido, appE, dFTest);
         if (existLinkPedido) {
             PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.bolsa, appE, dFTest);
         }
@@ -94,8 +92,8 @@ public class PedidosNavigations {
         if (appE!=AppEcom.votf) {
             //Establecemos los filtros de los pedidos con el día de hoy + el pedido + el código de país asociado al pedido y pulsamos "Buscar"
             PageMenusMantoStpV.goToPedidos(dFTest);
-            datosStep = SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.PEDIDO, dFTest);
-            existLinkPedido = PagePedidosMantoStpV.validaLineaPedido(dataPedido, appE, datosStep, dFTest);
+            SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.PEDIDO, dFTest.driver);
+            existLinkPedido = PagePedidosMantoStpV.validaLineaPedido(dataPedido, appE, dFTest);
                                         
             //Si existe el link del pedido, Accedemos al detalle del pedido (la página de detalle es común para consulta de pedido/bolsa)
             if (existLinkPedido) {

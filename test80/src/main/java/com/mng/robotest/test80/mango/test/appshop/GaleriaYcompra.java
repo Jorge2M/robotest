@@ -105,7 +105,7 @@ public class GaleriaYcompra extends GestorWebDriver {
     
     private void navegaGaleria(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
-        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest);
+        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest.driver);
         
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);
         LocationArticle loc1rsArticle1rstPage = LocationArticle.getInstanceInPage(2, 1);
@@ -130,7 +130,7 @@ public class GaleriaYcompra extends GestorWebDriver {
 
         //Steps. Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
         dCtxPago.getFTCkout().testCodPromocional = true;
-        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, dFTest);
+        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, dFTest.driver);
         
         //Pago
         Pago pagoVisaToTest = this.españa.getPago("VISA");
@@ -140,6 +140,6 @@ public class GaleriaYcompra extends GestorWebDriver {
         PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, dFTest.driver);
         dCtxPago.setDataPedido(dataPedido);
         dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
-        PagoNavigationsStpV.testPagoFromCheckoutToEnd(dCtxPago, dCtxSh, pagoVisaToTest, dFTest);
+        PagoNavigationsStpV.testPagoFromCheckoutToEnd(dCtxPago, dCtxSh, pagoVisaToTest, dFTest.driver);
     }
 }

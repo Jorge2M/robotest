@@ -1,32 +1,32 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory;
 
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageCheckoutWrapperStpV;
 
-
 public class PagoStoreCredit extends PagoStpV {
     
-    public PagoStoreCredit(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) {
-        super(dCtxSh, dCtxPago, dFTest);
+    public PagoStoreCredit(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) {
+        super(dCtxSh, dCtxPago, driver);
         super.isAvailableExecPay = true;
     }
     
     @SuppressWarnings("static-access")
     @Override
-    public DatosStep testPagoFromCheckout(boolean execPay) throws Exception {
-        PageCheckoutWrapperStpV.secStoreCredit.validateInitialStateOk(this.dCtxSh.channel, this.dCtxPago, this.dFTest);
-        PageCheckoutWrapperStpV.secStoreCredit.selectSaldoEnCuentaBlock(this.dCtxSh.pais, this.dCtxPago, this.dCtxSh.appE, this.dCtxSh.channel, this.dFTest);
-        DatosStep datosStep = PageCheckoutWrapperStpV.secStoreCredit.selectSaldoEnCuentaBlock(this.dCtxSh.pais, this.dCtxPago, this.dCtxSh.appE, this.dCtxSh.channel, this.dFTest);
+    public void testPagoFromCheckout(boolean execPay) throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        PageCheckoutWrapperStpV.secStoreCredit.validateInitialStateOk(dCtxSh.channel, dCtxPago, dFTest.driver);
+        PageCheckoutWrapperStpV.secStoreCredit.selectSaldoEnCuentaBlock(dCtxSh.pais, dCtxPago, dCtxSh.appE, dCtxSh.channel, dFTest);
+        PageCheckoutWrapperStpV.secStoreCredit.selectSaldoEnCuentaBlock(dCtxSh.pais, dCtxPago, dCtxSh.appE, dCtxSh.channel, dFTest);
         
         if (execPay) {
-            datosStep = PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(this.dCtxPago, this.dCtxSh.channel, this.dFTest);
+            PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, driver);
             this.dCtxPago.getDataPedido().setCodtipopago("U");
         }
-
-        return datosStep;
     }
 }

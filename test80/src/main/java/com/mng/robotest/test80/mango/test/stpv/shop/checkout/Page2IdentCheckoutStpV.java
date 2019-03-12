@@ -3,12 +3,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 import org.openqa.selenium.WebDriver;
 import java.util.HashMap;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -30,88 +29,53 @@ public class Page2IdentCheckoutStpV {
 	 	return validations;
     }
     
-    public static HashMap<String, String> inputDataPorDefecto(Pais pais, String emailUsr, boolean inputDireccCharNoLatinos, DataFmwkTest dFTest) 
+	@Step (
+		description="Introducimos los datos del cliente según el país", 
+        expected="Se hace clickable el botón \"Continuar\"",
+        saveImagePage=SaveWhen.Always)
+    public static HashMap<String, String> inputDataPorDefecto(Pais pais, String emailUsr, boolean inputDireccCharNoLatinos, WebDriver driver) 
     throws Exception {
-        HashMap<String, String> datosRegistro = null;
-        
-        //Step
-        DatosStep datosStep = new DatosStep (
-            "Introdumios los datos del cliente según el país", 
-            "Se hace clickable el botón \"Continuar\"");
-        datosStep.setSaveImagePage(SaveWhen.Always);
-        try {
-            datosRegistro = Page2IdentCheckout.inputDataPorDefectoSegunPais(pais, emailUsr, inputDireccCharNoLatinos, false, dFTest.driver);
-            datosStep.setDescripcion(datosStep.getDescripcion() + ". Utilizando los datos: "+ UtilsMangoTest.listaCamposHTML(datosRegistro));
-
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }        
-        
-        //Validaciones
-        int maxSecondsToWait = 5;
-        String descripValidac = 
-            "1) Se hace clickable el botón \"Continuar\" (lo esperamos hasta " + maxSecondsToWait + ")";
-        datosStep.setNOKstateByDefault();           
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try { 
-            if (!Page2IdentCheckout.isContinuarClickableUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
-        
+        HashMap<String, String> datosRegistro = 
+            Page2IdentCheckout.inputDataPorDefectoSegunPais(pais, emailUsr, inputDireccCharNoLatinos, false, driver);
+        TestCaseData.getDatosCurrentStep().addDescriptionText(". Utilizando los datos: "+ UtilsMangoTest.listaCamposHTML(datosRegistro)); 
+        checkIsVisibleContiueButton(5, driver);
         return datosRegistro;
     }
+	
+	@Validation (
+		description="Se hace clickable el botón \"Continuar\" (lo esperamos hasta #{maxSecondsWait})",
+		level=State.Defect)
+	private static boolean checkIsVisibleContiueButton(int maxSecondsWait, WebDriver driver) {
+	    return (Page2IdentCheckout.isContinuarClickableUntil(maxSecondsWait, driver));
+	}
     
-    /**
-     * @param validaDirecCharNoLatinos indica si se ha de validar que en la dirección no pueden figurar carácteres no latinos
-     */
-    public static DatosStep clickContinuar(boolean userRegistered, boolean validaDirecCharNoLatinos, DataBag dataBag, Channel channel, DataFmwkTest dFTest)
+	@Step (
+		description="Seleccionamos el botón \"Continuar\"",
+		expected="Aparece la página de Checkout",
+		saveImagePage=SaveWhen.Always)
+    public static void clickContinuar(boolean userRegistered, DataBag dataBag, Channel channel, WebDriver driver)
     throws Exception {
-        
-        String descripIniTest = "";
-        String descripResult = "Aparece la página de Checkout";
         int maxSecondsToWait = 20;
-        if (validaDirecCharNoLatinos) {
-            descripIniTest = "(Hay carácteres no-latinos introducidos en la dirección). ";
-            descripResult = "Aparece un aviso indicando que en la dirección no pueden figurar carácteres no-latinos";
-            maxSecondsToWait = 2;
-        }
-        
-        //Step
-        DatosStep datosStep = new DatosStep (
-            descripIniTest + "Seleccionamos el botón \"Continuar\"", 
-            descripResult /*Resultado esperado*/);
-        datosStep.setSaveImagePage(SaveWhen.Always);
-        try {
-            Page2IdentCheckout.clickBotonContinuarAndWait(maxSecondsToWait, dFTest.driver);
-
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }        
-        
-        //Validaciones
-        if (validaDirecCharNoLatinos) {
-            String descripValidac = 
-                "1) Aparece el aviso a nivel de aduanas que indica que la dirección contiene carácteres no-latinos";
-            datosStep.setNOKstateByDefault();    
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);        
-            try { 
-                if (!Page2IdentCheckout.isDisplayedAvisoAduanas(dFTest.driver)) {
-                    listVals.add(1, State.Defect);
-                }
-                
-                datosStep.setListResultValidations(listVals);
-            }
-            finally { listVals.checkAndStoreValidations(descripValidac); }
-        }
-        else {
-            PageCheckoutWrapperStpV.validateIsFirstPage(userRegistered, dataBag, channel, dFTest.driver);
-        }
-        
-        return datosStep;
+        Page2IdentCheckout.clickBotonContinuarAndWait(maxSecondsToWait, driver);   
+        PageCheckoutWrapperStpV.validateIsFirstPage(userRegistered, dataBag, channel, driver);
+    }
+	
+	@Step (
+		description="Seleccionamos el botón \"Continuar\" (hay carácteres no-latinos introducidos en la dirección)",
+        expected="Aparece un aviso indicando que en la dirección no pueden figurar carácteres no-latinos",
+        saveImagePage=SaveWhen.Always)
+    public static void clickContinuarAndExpectAvisoDirecWithNoLatinCharacters(WebDriver driver)
+    throws Exception {
+        int maxSecondsToWait = 2;
+        Page2IdentCheckout.clickBotonContinuarAndWait(maxSecondsToWait, driver);      
+        checkAvisoDireccionWithNoLatinCharacters(driver);
+    }
+            
+    @Validation (
+    	description="Aparece el aviso a nivel de aduanas que indica que la dirección contiene carácteres no-latinos",
+    	level=State.Defect)
+    private static boolean checkAvisoDireccionWithNoLatinCharacters(WebDriver driver) {
+        return (Page2IdentCheckout.isDisplayedAvisoAduanas(driver));
     }
     
     @Validation

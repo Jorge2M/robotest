@@ -64,38 +64,40 @@ public class PasosGenAnalitica {
                 pLogger.warn(". Not located file HAR associated to method {}, step {}", dFTest.meth.getName(), Integer.valueOf(datosStep.getStepNumber()), e);
             }
             
-            //Aplicamos todas las validaciones indicadas en analyticsSet
-            Iterator<Constantes.AnalyticsVal> it = analyticSet.iterator();
-            while (it.hasNext()) { 
-                switch (it.next()) {
-                    case GoogleAnalytics:
-                        //Validaciones a nivel de la petición de Google Analytics
-                        validaGoogleAnalytics(datosStep, gestorHAR, app);
-                        break;
-                    case Criteo:
-                        //Validaciones a nivel de la petición de Criteo
-                        validaCriteo(datosStep, gestorHAR, lineaId);
-                        break;
-                    case Bing:
-                        //Validaciones a nivel de la petición de Bing
-                        validaBing(datosStep, gestorHAR, app, dFTest);
-                        break;
-                    case Polyvore:
-                        //Validaciones a nivel del tráfico de Polyvore (sólo USA)
-                        if (dataPedido!=null && dataPedido.getCodigoPais().compareTo("400")==0)
-                            validaPolyvore(datosStep, gestorHAR, dataPedido);
-                        break;                            
-                    case NetTraffic:
-                        //Validaciones a nivel del tráfico de red
-                        validaNetTraffic(datosStep, gestorHAR);                            
-                        break;
-                    case DataLayer:
-                        //Validaciones a nivel del tag datalayer (realmente no es una validación a nivel de HTTP)
-                        validaDatalayer(datosStep, dFTest);                            
-                        break;
-                    default:
-                        break;
-                }
+            if (gestorHAR!=null) {
+	            //Aplicamos todas las validaciones indicadas en analyticsSet
+	            Iterator<Constantes.AnalyticsVal> it = analyticSet.iterator();
+	            while (it.hasNext()) { 
+	                switch (it.next()) {
+	                    case GoogleAnalytics:
+	                        //Validaciones a nivel de la petición de Google Analytics
+	                        validaGoogleAnalytics(datosStep, gestorHAR, app);
+	                        break;
+	                    case Criteo:
+	                        //Validaciones a nivel de la petición de Criteo
+	                        validaCriteo(datosStep, gestorHAR, lineaId);
+	                        break;
+	                    case Bing:
+	                        //Validaciones a nivel de la petición de Bing
+	                        validaBing(datosStep, gestorHAR, app, dFTest);
+	                        break;
+	                    case Polyvore:
+	                        //Validaciones a nivel del tráfico de Polyvore (sólo USA)
+	                        if (dataPedido!=null && dataPedido.getCodigoPais().compareTo("400")==0)
+	                            validaPolyvore(datosStep, gestorHAR, dataPedido);
+	                        break;                            
+	                    case NetTraffic:
+	                        //Validaciones a nivel del tráfico de red
+	                        validaNetTraffic(datosStep, gestorHAR);                            
+	                        break;
+	                    case DataLayer:
+	                        //Validaciones a nivel del tag datalayer (realmente no es una validación a nivel de HTTP)
+	                        validaDatalayer(datosStep, dFTest);                            
+	                        break;
+	                    default:
+	                        break;
+	                }
+	            }
             }
         }
     }
@@ -265,7 +267,7 @@ public class PasosGenAnalitica {
     
     public static void validaBing(DatosStep datosStep, gestorDatosHarJSON gestorHAR, AppEcom app, DataFmwkTest dFTest) throws Exception {
         //El tracking de Bing sólo se encuentra activo en PRO
-        if (UtilsMangoTest.isEntornoPRO(app, dFTest)) {
+        if (UtilsMangoTest.isEntornoPRO(app, dFTest.driver)) {
             //Validaciones
             String tagUrl1aReq = "<URL_1A_REQUEST>";
             String urlBing = "://bat.bing.com/action/0?";

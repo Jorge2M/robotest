@@ -54,9 +54,9 @@ public class PageYandexPayingByCode extends WebdrvWrapp {
     
     public static String getPaymentCode(WebDriver driver) {
         WebElement paymentCode = driver.findElement(By.xpath(XPathPaymentCode));
-        if (paymentCode==null)
+        if (paymentCode==null) {
             return "";
-        
+        }
         return (driver.findElement(By.xpath(XPathPaymentCode)).getText());
     }
 }

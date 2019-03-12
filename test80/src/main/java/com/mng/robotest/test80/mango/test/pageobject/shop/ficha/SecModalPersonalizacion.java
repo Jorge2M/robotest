@@ -28,7 +28,7 @@ public class SecModalPersonalizacion extends WebdrvWrapp {
 		Initials("//button[@class='motif-option'][1]", null),
 		RadioIcon("//button[@class='motif-option'][2]", null),
 		IconSelecction("//div[@class[contains(.,'custom-icons')]]", "//img[@alt='Abejorro']"),
-		PositionButton("//button[@class[contains(.,'position')]][1]", "//div[@class[contains(.,'position')]][1]"),
+		PositionButton("//button[@class[contains(.,'position')]][1]", "//div[@class[contains(.,'position')]][1]//a"),
 		ColorsContainer("//div[@class='colors']"),
 		SizeContainer("//div[@class='customization-size']"),
 		GoToBag("//span[@class[contains(.,'cart-button')]]");

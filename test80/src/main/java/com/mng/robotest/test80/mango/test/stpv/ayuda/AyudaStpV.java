@@ -6,7 +6,10 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions;
+import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.ayuda.PageAyuda;
+import com.mng.robotest.test80.mango.test.pageobject.ayuda.PageAyuda.StateApartado;
+
 import org.json.simple.JSONArray;
 import org.openqa.selenium.WebDriver;
 
@@ -39,32 +42,40 @@ public class AyudaStpV {
     }
 
     @Validation(
-    	description="1) Está presente el apartado de <b>#{validation}</b>",
+    	description="Está presente el apartado de <b>#{validation}</b>",
         level= State.Defect)
     private static boolean validateSectionsAyuda(String validation, WebDriver driver) {
         return (PageAyuda.isElementInStateUntil(PageAyuda.getXPath(validation), ElementPageFunctions.StateElem.Visible, 2, driver));
     }
 
     @Step(
-            description = "Seleccionamos el enlace a la tarjeta regalo",
-            expected = "Aparece una nueva página que contiene la información de cheque regalo")
+        description="Seleccionamos el enlace a la tarjeta regalo",
+        expected="Aparece una nueva página que contiene la información de cheque regalo")
     private static void helpToChequeRegalo(String textToCheck, WebDriver driver) throws Exception {
         PageAyuda.selectElement(PageAyuda.getXPath(textToCheck), driver);
+        checkIsApartadoInState(textToCheck, StateApartado.expanded, driver);	
         PageAyuda.selectElement(PageAyuda.getXPath("COMPRAR TARJETA REGALO"), driver);
         validatePageTarjetaRegalo(driver);
         driver.navigate().back();
     }
 
     @Validation(
-            description = "1) Estamos en la página de <b>Tarjeta Regalo</b>",
-            level = State.Defect)
+    	description="Se despliega el bloque asociado a <b>#{textSection}</b>",
+    	level=State.Warn)
+    private static boolean checkIsApartadoInState(String textSection, StateApartado stateApartado, WebDriver driver) {
+    	return (PageAyuda.isApartadoInStateUntil(textSection, stateApartado, 1, driver));
+    }
+    
+    @Validation(
+        description = "1) Estamos en la página de <b>Tarjeta Regalo</b>",
+        level = State.Defect)
     private static boolean validatePageTarjetaRegalo(WebDriver driver) {
         return (PageAyuda.currentURLContains("giftVoucher", 5, driver));
     }
 
     @Step(
-            description = "Seleccionamos el enlace de \"Buscar tu Tienda\"",
-            expected = "Aparece el modal de busqueda de tiendas")
+        description = "Seleccionamos el enlace de \"Buscar tu Tienda\"",
+        expected = "Aparece el modal de busqueda de tiendas")
     private static void helpToBuscarTienda(String textToCheck, WebDriver driver) throws Exception {
         PageAyuda.selectElement(PageAyuda.getXPath(textToCheck), driver);
         validateBuscarTienda(driver);
@@ -72,8 +83,8 @@ public class AyudaStpV {
     }
 
     @Validation(
-            description = "1) Es visible la cabecera de <b>Encuentra tu tienda</b>",
-            level = State.Defect)
+        description = "1) Es visible la cabecera de <b>Encuentra tu tienda</b>",
+        level = State.Defect)
     private static boolean validateBuscarTienda(WebDriver driver) {
         return (PageAyuda.isElementInStateUntil(PageAyuda.getXPath("Encuentra tu tienda"), ElementPageFunctions.StateElem.Visible, 4, driver));
     }
