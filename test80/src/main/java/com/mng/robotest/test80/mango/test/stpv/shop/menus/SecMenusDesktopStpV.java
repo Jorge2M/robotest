@@ -190,7 +190,8 @@ public class SecMenusDesktopStpV {
     	description="Selección del menú <b>" + tagMenu + "</b> (data-ga-label=#{menu1rstLevel.getDataGaLabelMenuSuperiorDesktop()})", 
         expected="El menú se ejecuta correctamente",
         saveNettraffic=SaveWhen.Always)
-    public static void stepEntradaMenuDesktop(Menu1rstLevel menu1rstLevel, String paginaLinea, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    public static void stepEntradaMenuDesktop(Menu1rstLevel menu1rstLevel, String paginaLinea, DataCtxShop dCtxSh, WebDriver driver) 
+    throws Exception {
         //Si en la pantalla no existen los menús volvemos a la página inicial de la línea
         LineaType lineaMenu = menu1rstLevel.getLinea();
     	if (!SecMenusDesktop.secMenuSuperior.secLineas.isLineaVisible(lineaMenu, dCtxSh.appE, driver)) {
@@ -206,182 +207,116 @@ public class SecMenusDesktopStpV {
         PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, lineaMenu, driver);
     }
     
-    /**
-     * Ejecuta el hover sobre el menú nuevo de Desktop y valida los carrusels que aparecen 
-     */
-    public static void stepValidaCarrusels(Pais pais, LineaType lineaType, AppEcom app, DataFmwkTest dFTest) throws Exception {
+    final static String tagCarruselsLinea = "@TagCarrusels";
+    @Step (
+    	description="Realizar \"hover\" sobre la línea #{lineaType}",
+        expected="Aparecen los carrusels correspondientes a la línea " + tagCarruselsLinea)
+    public static void stepValidaCarrusels(Pais pais, LineaType lineaType, AppEcom app, WebDriver driver) throws Exception {
         Linea linea = pais.getShoponline().getLinea(lineaType);
+        TestCaseData.getDatosCurrentStep().replaceInDescription(tagCarruselsLinea, linea.getCarrusels());
         
-        //Step
-        DatosStep datosStep = new DatosStep(
-            "Realizar \"hover\" sobre la línea " + linea.getType(),
-            "Aparecen los carrusels correspondientes a la línea " + linea.getCarrusels());
-        try {
-            SecMenusDesktop.
-            	secMenuSuperior.secLineas.hoverLinea(lineaType, null/*sublineaType*/, app, dFTest.driver);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok); 
-        } 
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-    
-        //Validaciones
+        SecMenusDesktop.secMenuSuperior.secLineas.hoverLinea(lineaType, null, app, driver);
         if (linea.getType()!=LineaType.rebajas) {
-	        int maxSecondsToWait = 1;
-	        String descripValidac =
-	        	"1) Aparece el bloque de menús de la línea " + linea.getType() + " (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
-	            "2) El número de carrusels es de " + linea.getListCarrusels().length + "<br>" +
-	            "3) Aparecen los carrusels: " + linea.getCarrusels().toString();
-	        datosStep.setNOKstateByDefault();
-	        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-	        try {
-	            if (!SecMenusDesktop.secMenuSuperior.secBlockMenus.isCapaMenusLineaVisibleUntil(linea.getType(), maxSecondsToWait, dFTest.driver)) {
-	            	listVals.add(1, State.Warn);
-	            }
-	            if (linea.getListCarrusels().length != SecMenusDesktop.secMenuSuperior.secCarrusel.getNumCarrousels(linea.getType(), dFTest.driver)) {
-	                listVals.add(2, State.Warn);
-	            }
-	            if (!SecMenusDesktop.secMenuSuperior.secCarrusel.isVisibleCarrusels(linea, dFTest.driver)) {
-	                listVals.add(3, State.Warn);
-	            }
-	
-	            datosStep.setListResultValidations(listVals);
-	        } 
-	        finally { listVals.checkAndStoreValidations(descripValidac); }
-	
-	        //Steps - Selección de cada uno de los carrusels asociados a la línea
-	        String[] listCarrusels = linea.getListCarrusels();
-	        for (int i=0; i<listCarrusels.length; i++) {
-	            //Pare evitar KOs, sólo seleccionaremos el carrusel si realmente existe (si no existe previamente ya habremos dado un Warning)
-	            if (SecMenusDesktop.secMenuSuperior.secCarrusel.isPresentCarrusel(linea, listCarrusels[i], dFTest.driver))
-	                stepSeleccionaCarrusel(pais, lineaType, listCarrusels[i], app, dFTest);
-	        }
+        	checkCarruselsAfterHoverLinea(linea, driver);
+        	
+    	    //Steps - Selección de cada uno de los carrusels asociados a la línea
+    	    String[] listCarrusels = linea.getListCarrusels();
+    	    for (int i=0; i<listCarrusels.length; i++) {
+    	        //Pare evitar KOs, sólo seleccionaremos el carrusel si realmente existe (si no existe previamente ya habremos dado un Warning)
+    	        if (SecMenusDesktop.secMenuSuperior.secCarrusel.isPresentCarrusel(linea, listCarrusels[i], driver)) {
+    	            stepSeleccionaCarrusel(pais, lineaType, listCarrusels[i], app, driver);
+    	        }
+    	    }
         }
     }
     
-    /**
-     * Ejecuta el paso/validación que selecciona un determinado bloque del "nuevo" (de los que aparecen al realizar 'hover' sobre la línea)
-     */
-    public static DatosStep stepSeleccionaCarrusel(Pais pais, LineaType lineaType, String idCarrusel, AppEcom app, DataFmwkTest dFTest) 
+    @Validation
+    private static ListResultValidation checkCarruselsAfterHoverLinea(Linea linea, WebDriver driver) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+	    int maxSecondsWait = 1;
+      	validations.add(
+    		"Aparece el bloque de menús de la línea " + linea.getType() + " (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		SecMenusDesktop.secMenuSuperior.secBlockMenus.isCapaMenusLineaVisibleUntil(linea.getType(), maxSecondsWait, driver), 
+    		State.Warn);
+      	validations.add(
+    		"El número de carrusels es de " + linea.getListCarrusels().length + "<br>",
+    		linea.getListCarrusels().length==SecMenusDesktop.secMenuSuperior.secCarrusel.getNumCarrousels(linea.getType(), driver), 
+    		State.Warn);
+      	validations.add(
+    		"Aparecen los carrusels: " + linea.getCarrusels().toString(),
+    		SecMenusDesktop.secMenuSuperior.secCarrusel.isVisibleCarrusels(linea, driver), State.Warn);
+    	return validations;
+    }
+    
+    @Step (
+    	description="Seleccionar el carrusel de la línea #{lineaType} correspondiente a <b>#{idCarrusel}</b>",
+        expected="Aparece la página asociada al carrusel #{lineaType} / #{idCarrusel}")
+    public static void stepSeleccionaCarrusel(Pais pais, LineaType lineaType, String idCarrusel, AppEcom app, WebDriver driver) 
     throws Exception {
         Linea linea = pais.getShoponline().getLinea(lineaType);
-        
-        //Step. Seleccionamos el bloque asociado a las lineas de tipo she, he, niños, niñas
-        DatosStep datosStep = new DatosStep(
-            "Seleccionar el carrusel de la línea " + lineaType + " correspondiente a <b>" + idCarrusel + "</b>",
-            "Aparece la página asociada al carrusel " + lineaType + " / " + idCarrusel);
-        try {
-            SecMenusDesktop.
-            	secMenuSuperior.secLineas.hoverLinea(lineaType, null/*sublineaType*/, app, dFTest.driver);
-            SecMenusDesktop.
-            	secMenuSuperior.secCarrusel.clickCarrousel(pais, lineaType, idCarrusel, dFTest.driver);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        } 
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        //Validaciones. Aparece la galería de nuevo correcta
-        PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);
-        boolean panoramEnLinea = (linea.getPanoramicas()!=null && linea.getPanoramicas().compareTo("s")==0);
-        String validacion3 = "";
-        String validacion4 = "";
-        if (lineaType!=LineaType.nuevo)
-        	validacion3 = 
-            "3) El 1er artículo es de la línea " + idCarrusel + "<br>";        	
-        
-        if (panoramEnLinea)
-            validacion4 = 
-            "4) Aparece algún artículo en panorámica";
-
-        int maxSecondsWait = 3;
-        String descripValidac = 
-            "1) Aparece algún artículo (lo esperamos hasta " + maxSecondsWait + " segundos)<br>" +
-            "2) El 1er artículo es de tipo " + linea.getType() + "<br>" +
-            validacion3 +
-            validacion4;
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!pageGaleriaDesktop.isVisibleArticleUntil(1, maxSecondsWait)) {
-                listVals.add(1, State.Info_NoHardcopy);
-            }
-            
-            if (!pageGaleriaDesktop.isArticleFromLinea(1/*numArticle*/, lineaType)) {
-                listVals.add(2, State.Warn);
-            }
-            if (lineaType!=LineaType.nuevo) {
-            	if (!pageGaleriaDesktop.isArticleFromCarrusel(1/*numArticle*/, linea, idCarrusel)) {
-            		listVals.add(3, State.Warn);
-            	}
-            }
-            
-            if (panoramEnLinea) {
-                if (pageGaleriaDesktop.getNumArticulos(TypeArticleDesktop.Panoramica)==0) {
-                	listVals.add(4, State.Warn);
-                }
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        } 
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
+        SecMenusDesktop.secMenuSuperior.secLineas.hoverLinea(lineaType, null, app, driver);
+        SecMenusDesktop.secMenuSuperior.secCarrusel.clickCarrousel(pais, lineaType, idCarrusel, driver);
+        checkAfterSelectCarrusel(linea, idCarrusel, app, driver);
     }
     
-    /**
-     * Selecciona una línea (he, she, he...) o sublínea (p.e. bebe_nino)
-     */
-    public static DatosStep seleccionLinea(LineaType lineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    @Validation
+    private static ListResultValidation checkAfterSelectCarrusel(Linea linea, String idCarrusel, AppEcom app, WebDriver driver) 
     throws Exception {
-        //Step
-        DatosStep datosStep = null;
-        String nombreLinea = "<b style=\"color:brown;\">\"" + lineaType.name().toUpperCase() + "\"</b>";
-        datosStep = new DatosStep(
-            "Seleccionar la <b style=\"color:chocolate\">Línea</b> " + nombreLinea,
-            "Aparece la página correcta asociada a la línea " + lineaType.name().toUpperCase());
-        try {
-            SecMenusDesktop.
-            	secMenuSuperior.secLineas.selecLinea(dCtxSh.pais, lineaType, dCtxSh.appE, dFTest.driver);
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	LineaType lineaType = linea.getType();
+	    PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, driver);
 
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        } 
-        finally { StepAspect.storeDataAfterStep(datosStep); }            
-        
-        //Validaciones
-        validaSelecLinea(lineaType, null/*sublineaType*/, dCtxSh, dFTest);
-        
-        return datosStep;
+	    int maxSecondsWait = 3;
+      	validations.add(
+    		"Aparece algún artículo (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		pageGaleriaDesktop.isVisibleArticleUntil(1, maxSecondsWait), State.Info_NoHardcopy);
+      	validations.add(
+    		"El 1er artículo es de tipo " + linea.getType() + "<br>",
+    		pageGaleriaDesktop.isArticleFromLinea(1, lineaType), State.Warn);
+	    if (lineaType!=LineaType.nuevo) {
+	      	validations.add(
+        		"El 1er artículo es de la línea " + idCarrusel + "<br>",
+        		pageGaleriaDesktop.isArticleFromCarrusel(1, linea, idCarrusel), State.Warn);
+	    }
+	    boolean panoramEnLinea = (linea.getPanoramicas()!=null && linea.getPanoramicas().compareTo("s")==0);
+	    if (panoramEnLinea) {
+	      	validations.add(
+        		"Aparece algún artículo en panorámica",
+        		pageGaleriaDesktop.getNumArticulos(TypeArticleDesktop.Panoramica)!=0, State.Warn);
+	    }
+	    	
+	    return validations;
     }
     
-    /**
-     * Selecciona una línea (he, she, he...) o sublínea (p.e. bebe_nino)
-     */
-    public static DatosStep seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, 
-    										  DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
-        //Step. 
-        String nombreLineaSublinea = "<b style=\"color:brown;\">\"" + lineaType.name() + " / " + sublineaType.name().toUpperCase() + "\"</b>";
-        DatosStep datosStep = new DatosStep(
-            "Seleccionar la línea / <b style=\"color:chocolate\">Sublínea</b> " + nombreLineaSublinea,
-            "Aparece la página correcta asociada a la línea/sublínea");
-        try {
-            SecMenusDesktop.
-            	secMenuSuperior.secLineas.selectSublinea(lineaType, sublineaType, dCtxSh.appE, dFTest.driver);
-
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        } 
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-
-        //Validaciones
-        validaSelecLinea(lineaType, sublineaType, dCtxSh, dFTest);
-        
-        return datosStep;
+    @Step (
+    	description=
+    		"Seleccionar la <b style=\"color:chocolate\">Línea</b> " + 
+    		"<b style=\"color:brown;\">\"#{lineaType.getNameUpper()}</b>",
+        expected=
+    		"Aparece la página correcta asociada a la línea #{lineaType.getNameUpper()}")
+    public static void seleccionLinea(LineaType lineaType, DataCtxShop dCtxSh, WebDriver driver) 
+    throws Exception {
+        SecMenusDesktop.secMenuSuperior.secLineas.selecLinea(dCtxSh.pais, lineaType, dCtxSh.appE, driver);       
+        validaSelecLinea(lineaType, null, dCtxSh, driver);
+    }
+    
+    @Step (
+    	description=
+    		"Seleccionar la línea / <b style=\"color:chocolate\">Sublínea</b> " + 
+    		"<b style=\"color:brown;\">\"#{lineaType.name()} / #{sublineaType.getNameUpper()}</b>",
+        expected=
+    		"Aparece la página correcta asociada a la línea/sublínea")
+    public static void seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, 
+    									 DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+        validaSelecLinea(lineaType, sublineaType, dCtxSh, driver);
     }    
     
     public static void validaSelecLinea(LineaType lineaType, SublineaNinosType sublineaType, 
-    									DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
-    	SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh, dFTest);
+    									DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    	SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh, driver);
         if (sublineaType==null) {
         	secCabeceraStpV.validaLogoDesktop(1, lineaType);
-            validateIsLineaSelected(lineaType, dCtxSh.appE, dFTest.driver);
+            validateIsLineaSelected(lineaType, dCtxSh.appE, driver);
         }
 
         secCabeceraStpV.validateIconoBolsa();
@@ -400,8 +335,8 @@ public class SecMenusDesktopStpV {
             break;
         case banners:
         	int maxBannersToLoad = 1;
-        	SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, dFTest.driver);
-        	secBannersStpV.validaBannEnContenido(dFTest.driver);
+        	SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, driver);
+        	secBannersStpV.validaBannEnContenido(driver);
             break;
         case vacio:
             break;
@@ -417,75 +352,54 @@ public class SecMenusDesktopStpV {
         flagsVal.validaSEO = true;
         flagsVal.validaJS = true;
         flagsVal.validaImgBroken = true;
-        AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
     }
     
-    /**
-     * Contamos los menús de una línea (she, he, nina, niño, violeta), validamos que sean iguales y los almacenamos en el contexto
-     */
-    public static DatosStep countSaveMenusEntorno(LineaType lineaType, SublineaNinosType sublineaType, String inodo, String urlBase, AppEcom app, DataFmwkTest dFTest) 
+    @Step (
+    	description="Contamos el número de pestañas y menús de #{lineaType} / #{sublineaType}",
+        expected="El número de pestañas/menús coincide con el del nodo anterior")
+    public static void countSaveMenusEntorno(LineaType lineaType, SublineaNinosType sublineaType, String inodo, String urlBase, AppEcom app, WebDriver driver) 
     throws Exception {
-        //Step. Contamos los menús
-        int numPestanyas = 0;
-        int numMenus = 0;
-        String descripValidac = "";
-        DatosStep datosStep = new DatosStep(
-            "Contamos el número de pestañas y menús de " + lineaType + "/" + sublineaType,
-            "El número de pestañas/menús coincide con el del nodo anterior");
-        try {
-            numPestanyas = 
-            	SecMenusDesktop.
-            		secMenuSuperior.secLineas.getListaLineas(dFTest.driver).size();
-            numMenus = 
-            	SecMenusDesktop.
-            		secMenuSuperior.secBlockMenus.getListMenusLinea(lineaType, sublineaType, app, dFTest.driver).size();
-
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        } 
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-
-        //Validaciones
-        int numPestanyas_C;
-        int numMenus_C;
+    	int numPestanyas = SecMenusDesktop.secMenuSuperior.secLineas.getListaLineas(driver).size();
+        int numMenus = SecMenusDesktop.secMenuSuperior.secBlockMenus.getListMenusLinea(lineaType, sublineaType, app, driver).size();
+        checkNumPestanyasYmenusEqualsInBothNodes(numPestanyas, numMenus, lineaType, sublineaType, inodo, urlBase);
+    }    
+    
+    @Validation
+    private static ListResultValidation checkNumPestanyasYmenusEqualsInBothNodes(int numPestanyas, int numMenus, LineaType lineaType, SublineaNinosType sublineaType, 
+    																			 String inodo, String urlBase) {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+    	
         String clave = lineaType.name();
-        if (sublineaType!=null)
+        if (sublineaType!=null) {
             clave+=sublineaType.name();
-            
-        clave+=urlBase;        
-
+        }
+        clave+=urlBase;    
+        
         //Si están registrados en el contexto el número de pestañas y menús...
         if (dFTest.ctx.getAttribute("numPestanyas" + clave) != null && 
             dFTest.ctx.getAttribute("numMenus" + clave) != null) {
-            
+        	
             //Obtenemos el número de pestañas y menús almacenados en el contexto
-            numPestanyas_C = ((Integer)dFTest.ctx.getAttribute("numPestanyas" + clave)).intValue();
-            numMenus_C = ((Integer)dFTest.ctx.getAttribute("numMenus" + clave)).intValue();
-            
-            //Validaciones. Comprobamos que el número de pestañas/menús no ha variado con respecto a otro nodo anterior
-            descripValidac = 
-                "1) El número de pestañas (" + numPestanyas + ") coincide con el del nodo " + dFTest.ctx.getAttribute("NodoMenus" + clave) + " (" + numPestanyas_C + ")<br>" + 
-                "2) El número de menús (" + numMenus + ") coincide con el del nodo " + dFTest.ctx.getAttribute("NodoMenus" + clave) + " (" + numMenus_C + ")";
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-            try {
-                if (numPestanyas != numPestanyas_C || numMenus != numMenus_C) {
-                    datosStep.setResultSteps(State.Warn);
-                }
-                else {
-                    datosStep.setResultSteps(State.Ok);
-                }
-
-                datosStep.setExcepExists(false);
-            } 
-            finally { listVals.checkAndStoreValidations(descripValidac); }
+            int numPestanyas_C = ((Integer)dFTest.ctx.getAttribute("numPestanyas" + clave)).intValue();
+            int numMenus_C = ((Integer)dFTest.ctx.getAttribute("numMenus" + clave)).intValue();
+        	
+	      	validations.add(
+	    		"El número de pestañas (" + numPestanyas + ") coincide con el del nodo " + dFTest.ctx.getAttribute("NodoMenus" + clave) + " (" + numPestanyas_C + ")<br>",
+	    		(numPestanyas==numPestanyas_C), State.Warn);
+	      	validations.add(
+	    		"El número de menús (" + numMenus + ") coincide con el del nodo " + dFTest.ctx.getAttribute("NodoMenus" + clave) + " (" + numMenus_C + ")",
+	    		(numMenus==numMenus_C), State.Warn);
         }
 
         //Almacenamos los nuevos datos en el contexto
         dFTest.ctx.setAttribute("numPestanyas" + clave, Integer.valueOf(numPestanyas));
         dFTest.ctx.setAttribute("numMenus" + clave, Integer.valueOf(numMenus));
         dFTest.ctx.setAttribute("NodoMenus" + clave, inodo);
-
-        return datosStep;
-    }    
+        
+        return validations;
+    }
     
     /**
      * Función que ejecuta el paso/validaciones correspondiente a la selección de una entrada el menú superior de Desktop

@@ -89,8 +89,9 @@ public class SecMenusWrapperStpV {
                 else {
                     numValidacion+=1;
                     descripValidac+=numValidacion + ") <b>No</b> aparece el link de la línea \"<b>" + lineaType + "</b>\"<br>";
-                    if (SecMenusWrap.isLineaPresent(lineaType, app, channel, driver))
+                    if (SecMenusWrap.isLineaPresent(lineaType, app, channel, driver)) {
                         listVals.add(numValidacion, State.Warn);
+                    }
                 }
             }
         }
@@ -131,7 +132,7 @@ public class SecMenusWrapperStpV {
         if (channel==Channel.movil_web)
             SecMenuLateralMobilStpV.navClickLineaAndCarrusels(lineaNuevoOReb, pais, app, dFTest.driver);
         else
-            SecMenusDesktopStpV.stepValidaCarrusels(pais, lineaNuevoOReb, app, dFTest);
+            SecMenusDesktopStpV.stepValidaCarrusels(pais, lineaNuevoOReb, app, dFTest.driver);
     }
     
     public static DatosStep accesoMenuXRef(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
@@ -250,19 +251,19 @@ public class SecMenusWrapperStpV {
     public static DatosStep seleccionLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
     throws Exception {
         if (sublineaType==null) {
-            return seleccionLinea(lineaType, dCtxSh, dFTest);
+            return seleccionLinea(lineaType, dCtxSh, dFTest.driver);
         }
         
         return seleccionSublinea(lineaType, sublineaType, dCtxSh, dFTest);
     }
     
-    public static DatosStep seleccionLinea(LineaType lineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
+    public static DatosStep seleccionLinea(LineaType lineaType, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
-            SecMenuLateralMobilStpV.seleccionLinea(lineaType, dCtxSh.pais, dCtxSh.appE, dFTest.driver);
+            SecMenuLateralMobilStpV.seleccionLinea(lineaType, dCtxSh.pais, dCtxSh.appE, driver);
             return TestCaseData.getDatosLastStep();
         }
         
-        SecMenusDesktopStpV.seleccionLinea(lineaType, dCtxSh, dFTest);
+        SecMenusDesktopStpV.seleccionLinea(lineaType, dCtxSh, driver);
         return TestCaseData.getDatosLastStep();
     }
     
@@ -273,7 +274,7 @@ public class SecMenusWrapperStpV {
             return TestCaseData.getDatosLastStep();
         }
         
-        SecMenusDesktopStpV.seleccionSublinea(lineaType, sublineaType, dCtxSh, dFTest);
+        SecMenusDesktopStpV.seleccionSublinea(lineaType, sublineaType, dCtxSh, dFTest.driver);
         return TestCaseData.getDatosLastStep();
     }
     

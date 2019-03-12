@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
@@ -15,13 +15,13 @@ public class SecCabeceraStpV {
 	private final SecCabecera secCabecera;
 	private final DataCtxShop dCtxSh;
 	
-	private SecCabeceraStpV(DataCtxShop dCtxSh, DataFmwkTest dFTest) {
+	private SecCabeceraStpV(DataCtxShop dCtxSh, WebDriver driver) {
 		this.dCtxSh = dCtxSh;
-		this.secCabecera = SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+		this.secCabecera = SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 	}
 	
-	public static SecCabeceraStpV getNew(DataCtxShop dCtxSh, DataFmwkTest dFTest) {
-		return (new SecCabeceraStpV(dCtxSh, dFTest));
+	public static SecCabeceraStpV getNew(DataCtxShop dCtxSh, WebDriver driver) {
+		return (new SecCabeceraStpV(dCtxSh, driver));
 	}
 	
 	@Validation (

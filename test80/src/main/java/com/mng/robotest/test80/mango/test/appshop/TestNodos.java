@@ -151,10 +151,10 @@ public class TestNodos extends GestorWebDriver {
             }
 			
             //Step. Seleccionar la línea She
-            SecMenusDesktopStpV.seleccionLinea(LineaType.she, dCtxSh, dFTest);
+            SecMenusDesktopStpV.seleccionLinea(LineaType.she, dCtxSh, dFTest.driver);
 			
             //Step. Contamos / Validamos / almacenamos los menús de She (comprobamos que son iguales que en anteriores nodos)
-            SecMenusDesktopStpV.countSaveMenusEntorno(LineaType.she, null/*sublineaType*/, this.nodo.getIp(), this.autAddr, dCtxSh.appE, dFTest);
+            SecMenusDesktopStpV.countSaveMenusEntorno(LineaType.she, null/*sublineaType*/, this.nodo.getIp(), this.autAddr, dCtxSh.appE, dFTest.driver);
 			
             //Step. Seleccionamos / Validamos el 1er Banner
             int maxBannersToLoad = 1;
@@ -167,32 +167,32 @@ public class TestNodos extends GestorWebDriver {
             else {
             	Linea lineaNuevo = dCtxSh.pais.getShoponline().getLinea(LineaType.nuevo);
             	String idCarruselMujer = lineaNuevo.getListCarrusels()[0];
-                SecMenusDesktopStpV.stepSeleccionaCarrusel(dCtxSh.pais, LineaType.nuevo, idCarruselMujer, dCtxSh.appE, dFTest);
+                SecMenusDesktopStpV.stepSeleccionaCarrusel(dCtxSh.pais, LineaType.nuevo, idCarruselMujer, dCtxSh.appE, dFTest.driver);
             }
 			
             //Step. Seleccionar el link 'H.E.BY MANGO'
             datosStep = SecMenusWrapperStpV.seleccionLinea(LineaType.he, null/*sublineaType*/, dCtxSh, dFTest);
 	
             //Step. Contamos / Validamos / almacenamos los menús de HE (Comprobamos que son iguales que en anteriores nodos)
-            SecMenusDesktopStpV.countSaveMenusEntorno (LineaType.he, null/*sublineaType*/, this.nodo.getIp(), this.autAddr,dCtxSh.appE, dFTest);
+            SecMenusDesktopStpV.countSaveMenusEntorno (LineaType.he, null/*sublineaType*/, this.nodo.getIp(), this.autAddr,dCtxSh.appE, dFTest.driver);
 			
             //Step. Seleccionar la sublinea nina/nina
             datosStep = SecMenusWrapperStpV.seleccionLinea(LineaType.nina, SublineaNinosType.nina, dCtxSh, dFTest);	
 			
             //Step. Contamos / Validamos / Almacenamos los menús de Kids (comprobamos que son iguales que en anteriores nodos)
-            SecMenusDesktopStpV.countSaveMenusEntorno(LineaType.nina, SublineaNinosType.nina, this.nodo.getIp(), this.autAddr, dCtxSh.appE, dFTest);
+            SecMenusDesktopStpV.countSaveMenusEntorno(LineaType.nina, SublineaNinosType.nina, this.nodo.getIp(), this.autAddr, dCtxSh.appE, dFTest.driver);
             
             //Step. Seleccionar la sublinea nino/bebe_nino
             datosStep = SecMenusWrapperStpV.seleccionLinea(LineaType.nino, SublineaNinosType.bebe_nino, dCtxSh, dFTest);     
                         
             //Step. Contamos / Validamos / Almacenamos los menús de Kids (comprobamos que son iguales que en anteriores nodos)
-            SecMenusDesktopStpV.countSaveMenusEntorno(LineaType.nino, SublineaNinosType.bebe_nino, this.nodo.getIp(), this.autAddr, dCtxSh.appE, dFTest);
+            SecMenusDesktopStpV.countSaveMenusEntorno(LineaType.nino, SublineaNinosType.bebe_nino, this.nodo.getIp(), this.autAddr, dCtxSh.appE, dFTest.driver);
 	
             //Step. Seleccionar el link 'VIOLETA'
             datosStep = SecMenusWrapperStpV.seleccionLinea(LineaType.violeta, null, dCtxSh, dFTest);	
 			
             //Step. Contamos / Validamos / Almacenamos los menús de Violeta (comprobamos que son iguales que en ateriores nodos)
-            SecMenusDesktopStpV.countSaveMenusEntorno (LineaType.violeta, null/*sublineaType*/, this.nodo.getIp(), this.autAddr, dCtxSh.appE, dFTest);
+            SecMenusDesktopStpV.countSaveMenusEntorno (LineaType.violeta, null/*sublineaType*/, this.nodo.getIp(), this.autAddr, dCtxSh.appE, dFTest.driver);
             
             this.nodo.setTested(true);
         }
