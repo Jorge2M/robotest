@@ -3,7 +3,7 @@
 /.classpath
 /.project
 /.gradle/
-.idea/
+.idea
 /output-library
 !/output-library/static
 !/output-library/sqlite
