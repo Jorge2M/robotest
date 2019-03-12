@@ -21,8 +21,8 @@ public class PagoStoreCredit extends PagoStpV {
     public void testPagoFromCheckout(boolean execPay) throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         PageCheckoutWrapperStpV.secStoreCredit.validateInitialStateOk(dCtxSh.channel, dCtxPago, dFTest.driver);
-        PageCheckoutWrapperStpV.secStoreCredit.selectSaldoEnCuentaBlock(dCtxSh.pais, dCtxPago, dCtxSh.appE, dCtxSh.channel, dFTest);
-        PageCheckoutWrapperStpV.secStoreCredit.selectSaldoEnCuentaBlock(dCtxSh.pais, dCtxPago, dCtxSh.appE, dCtxSh.channel, dFTest);
+        PageCheckoutWrapperStpV.secStoreCredit.selectSaldoEnCuentaBlock(dCtxSh.pais, dCtxPago, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
+        PageCheckoutWrapperStpV.secStoreCredit.selectSaldoEnCuentaBlock(dCtxSh.pais, dCtxPago, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
         
         if (execPay) {
             PagoNavigationsStpV.aceptarCompraDesdeMetodosPago(dCtxPago, dCtxSh.channel, driver);
