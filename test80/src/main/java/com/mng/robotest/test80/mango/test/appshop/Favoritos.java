@@ -113,8 +113,6 @@ public class Favoritos extends GestorWebDriver {
         DataFavoritos dataFavoritos = new DataFavoritos();
         DataBag dataBolsa = new DataBag();
         
-        //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-        //TestAB.activateTestABfiltrosMobil(1, dCtxSh, getDriver().driver); //!!!!!
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         SecBolsaStpV.clear(dCtxSh, dFTest.driver);
         PageFavoritosStpV.clearAll(dataFavoritos, dCtxSh, dFTest.driver);
