@@ -2,13 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -255,33 +253,25 @@ public class SecMenuLateralMobilStpV {
         validaPaginaResultMenu2onLevel(app, driver);
     }    
     
-    @Validation
     public static void validaPaginaResultMenu2onLevel(AppEcom app, WebDriver driver) throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-    	DatosStep datosStep = TestCaseData.getDatosLastStep();
-    	PageGaleria pageGaleria = PageGaleria.getInstance(Channel.movil_web, app, dFTest.driver);
-        String descripValidac = 
-            "1) Aparecen artículos, banners, frames, maps o Sliders";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, 3/*seconds*/) &&
-                !PageLanding.hayIframes(dFTest.driver) &&
-                !PageLanding.hayMaps(dFTest.driver) &&
-                !PageLanding.haySliders(dFTest.driver) &&
-                !ManagerBannersScreen.existBanners(dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-                
-            datosStep.setListResultValidations(listVals);
-       }
-       finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-       //Validaciones estándar. 
+    	checkElementsAfterClickMenu2onLevel(app, driver);
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
         flagsVal.validaSEO = true;
         flagsVal.validaJS = true;
         flagsVal.validaImgBroken = true;
-        AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+    }
+    
+    @Validation (
+    	description="Aparecen artículos, banners, frames, maps o Sliders",
+    	level=State.Warn)
+    private static boolean checkElementsAfterClickMenu2onLevel(AppEcom app, WebDriver driver) throws Exception {
+    	PageGaleria pageGaleria = PageGaleria.getInstance(Channel.movil_web, app, driver);
+        return (
+        	pageGaleria.isVisibleArticleUntil(1, 3) ||
+            PageLanding.hayIframes(driver) ||
+            PageLanding.hayMaps(driver) ||
+            PageLanding.haySliders(driver) ||
+            ManagerBannersScreen.existBanners(driver));
     }
 }

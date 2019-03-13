@@ -6,7 +6,7 @@
   <packaging>pom</packaging>
   <modules>
   	<module>test80</module>
-  	<module>webmngtest</module>
+  	<module>webmngtest</module> 
   </modules>
   
   <properties>

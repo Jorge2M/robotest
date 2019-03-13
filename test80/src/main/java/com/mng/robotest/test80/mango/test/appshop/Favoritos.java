@@ -126,12 +126,12 @@ public class Favoritos extends GestorWebDriver {
         List<Integer> iconsToUnmark = Arrays.asList(3);
         pageGaleriaStpV.clickArticlesHearthIcons(iconsToUnmark, TypeActionFav.Desmarcar, dataFavoritos);
         
-        SecMenusWrapperStpV.secMenuUser.selectFavoritos(dataFavoritos, dCtxSh, dFTest);
+        SecMenusWrapperStpV.secMenuUser.selectFavoritos(dataFavoritos, dCtxSh, dFTest.driver);
         ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);
         PageFavoritosStpV.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dFTest);
         if (dCtxSh.channel==Channel.movil_web) {
             SecBolsaStpV.clickAspaForCloseMobil(dFTest.driver);
-            PageFavoritosStpV.validaIsPageOK(dataFavoritos, dFTest);
+            PageFavoritosStpV.validaIsPageOK(dataFavoritos, dFTest.driver);
         }
         
         PageFavoritosStpV.clear(artToPlay, dataFavoritos, dFTest);
@@ -173,7 +173,7 @@ public class Favoritos extends GestorWebDriver {
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
         SecBolsaStpV.clear(dCtxSh, dFTest.driver);
         
-        SecMenusWrapperStpV.secMenuUser.selectFavoritos(dataFavoritos, dCtxSh, dFTest);
+        SecMenusWrapperStpV.secMenuUser.selectFavoritos(dataFavoritos, dCtxSh, dFTest.driver);
         
         // TODO
         // Cuando la funcionalidad de "Share Favorites" suba a producción, este if debería eliminarse
@@ -187,7 +187,7 @@ public class Favoritos extends GestorWebDriver {
         PageFavoritosStpV.clickArticuloImg(artToPlay, dFTest);
         PageFavoritosStpV.modalFichaFavoritos.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dCtxSh.appE, dFTest);       
         if (dCtxSh.channel==Channel.movil_web) {
-            PageFavoritosStpV.validaIsPageOK(dataFavoritos, dFTest);
+            PageFavoritosStpV.validaIsPageOK(dataFavoritos, dFTest.driver);
         }
         else {
             PageFavoritosStpV.modalFichaFavoritos.closeFicha(artToPlay, dFTest);

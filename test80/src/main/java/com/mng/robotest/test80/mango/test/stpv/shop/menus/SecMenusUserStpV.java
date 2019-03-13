@@ -1,14 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.State;
-
 import org.openqa.selenium.WebDriver;
-
+import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -37,112 +32,69 @@ import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV
 @SuppressWarnings({"static-access"})
 public class SecMenusUserStpV {
     
-    public static DatosStep selectFavoritos(DataFavoritos dataFavoritos, DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
-        //Step.
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionar el menú de usuario \"Favoritos\"", 
-            "Aparece la página de gestión de favoritos con los artículos correctos");
-        try {
-            SecMenusWrap.secMenusUser.clickFavoritosAndWait(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }           
-            
-        //Validaciones
-        PageFavoritosStpV.validaIsPageOK(dataFavoritos, dFTest);
-        
-        return datosStep;
+	@Step (
+		description="Seleccionar el menú de usuario \"Favoritos\"", 
+        expected="Aparece la página de gestión de favoritos con los artículos correctos")
+    public static void selectFavoritos(DataFavoritos dataFavoritos, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+        SecMenusWrap.secMenusUser.clickFavoritosAndWait(dCtxSh.channel, dCtxSh.appE, driver);      
+        PageFavoritosStpV.validaIsPageOK(dataFavoritos, driver);
     }
     
-    public static DatosStep selectRegistrate(Channel channel, DataCtxShop dCtxSh,  DataFmwkTest dFTest) 
+	@Step (
+		description="Seleccionar el menú de usuario \"Regístrate\"", 
+        expected="Aparece al página inicial del registro",
+        saveHtmlPage=SaveWhen.Always)
+    public static void selectRegistrate(Channel channel, DataCtxShop dCtxSh,  WebDriver driver) 
     throws Exception {
-        //Step.
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionar el menú de usuario \"Regístrate\"", 
-            "Aparece al página inicial del registro");
-        datosStep.setSaveHtmlPage(SaveWhen.Always);
-        try {
-            SecMenusWrap.secMenusUser.clickRegistrate(channel, dFTest.driver);
-    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }           
+        SecMenusWrap.secMenusUser.clickRegistrate(channel, driver);    
             
-        //Validaciones
         int maxSecondsWait = 5;
-        PageRegistroIniStpV.validaIsPageUntil(maxSecondsWait, dFTest);
-        
-        //Validacion RGPD
-        PageRegistroIniStpV.validaIsRGPDVisible(dCtxSh, dFTest.driver);
-        
-        return datosStep;
+        PageRegistroIniStpV.validaIsPageUntil(maxSecondsWait, driver);
+        PageRegistroIniStpV.validaIsRGPDVisible(dCtxSh, driver);
     }
     
-    private static void logoff(Channel channel, DataFmwkTest dFTest) throws Exception {
-        //Step. Cerrar sesión + Identificarse
-        DatosStep datosStep = new DatosStep (
-            "Clicar el link de Logoff para cerrar la sesión", 
-            "Aparece el link de login");
-        try {
-            SecMenusWrap.secMenusUser.clickCerrarSesion(Channel.desktop, dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        //Validaciones
-        int maxSecondsToWait = 3;
-        String descripValidac = 
-            "1) Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!SecMenusWrap.secMenusUser.isPresentIniciarSesionUntil(channel, maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
+	@Step (
+		description="Clicar el link de Logoff para cerrar la sesión", 
+        expected="Aparece el link de login")
+    private static void logoff(Channel channel, WebDriver driver) throws Exception {
+        SecMenusWrap.secMenusUser.clickCerrarSesion(Channel.desktop, driver);
+        checkIsVisibleIniciarSesionLink(channel, 3, driver);
     }
-    
-    public static void logoffLogin(String userConnect, String userPassword, Channel channel, AppEcom appE, DataFmwkTest dFTest) throws Exception {
-        //Step. Cerrar sesión + 
-        logoff(channel, dFTest);
+	
+	@Validation (
+		description="Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta #{maxSecondsWait} segundos)",
+		level=State.Defect)
+	private static boolean checkIsVisibleIniciarSesionLink(Channel channel, int maxSecondsWait, WebDriver driver) {
+        return (SecMenusWrap.secMenusUser.isPresentIniciarSesionUntil(channel, maxSecondsWait, driver));
+	}
+	
+	public static void logoffLogin(String userConnect, String userPassword, Channel channel, AppEcom appE, WebDriver driver) 
+	throws Exception {
+		logoff(channel, driver);
+		identification(userConnect, userPassword, channel, appE, driver);
+	}
+	
+	@Step (
+		description="Identificarse con los datos del registro (#{userConnect} / #{userPassword})", 
+        expected="La nueva identificación es correcta")
+    public static void identification(String userConnect, String userPassword, Channel channel, AppEcom appE, WebDriver driver) 
+    throws Exception {
+        PageIdentificacion.iniciarSesion(userConnect, userPassword, channel, appE, driver);
+        checkIsVisibleLinkCerrarSesion(channel, driver);
         
-        //Step. Identificarse
-        DatosStep datosStep = new DatosStep (
-            "Identificarse con los datos del registro (" + userConnect + " / " + userPassword + ")", 
-            "La nueva identificación es correcta");
-        try {
-            PageIdentificacion.iniciarSesion(userConnect, userPassword, channel, appE, dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        //Validaciones
-        String descripValidac = 
-            "1) Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!SecMenusWrap.secMenusUser.isPresentCerrarSesion(channel, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        //Validaciones estándar. 
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
         flagsVal.validaSEO = true;
         flagsVal.validaJS = false;
         flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
     }
+	
+	@Validation (
+		description="Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)",
+		level=State.Defect)
+	private static boolean checkIsVisibleLinkCerrarSesion(Channel channel, WebDriver driver) {	
+	    return (SecMenusWrap.secMenusUser.isPresentCerrarSesion(channel, driver));
+	}
 
     @Step (
     	description="Seleccionar el link \"Mi cuenta\"", 
@@ -157,12 +109,7 @@ public class SecMenusUserStpV {
         expected="Aparece el modal para el cambio de país")
     public static void cambioPaisMobil(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         SecMenuLateralMobil.secMenusUser.clickCambioPais(dCtxSh.appE, driver);
-
-        //Validaciones. 
-        int maxSecondsWait = 5;
-        ModalCambioPaisStpV.validateIsVisible(maxSecondsWait, driver);
-        
-        //Step.
+        ModalCambioPaisStpV.validateIsVisible(5, driver);
         ModalCambioPaisStpV.cambioPais(dCtxSh, driver);
     }
 }

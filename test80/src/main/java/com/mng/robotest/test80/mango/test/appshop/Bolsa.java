@@ -85,7 +85,7 @@ public class Bolsa extends GestorWebDriver {
         
         AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest.driver);
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
-        SecMenusWrapperStpV.accesoMenuXRef(menuVestidos, dCtxSh, dFTest);
+        SecMenusWrapperStpV.accesoMenuXRef(menuVestidos, dCtxSh, dFTest.driver);
         DataBag dataBag = new DataBag();
         
         //Seleccionamos artículos/tallas hasta que damos con uno disponible (no aparece el modal de "Avísame")
@@ -141,7 +141,7 @@ public class Bolsa extends GestorWebDriver {
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
         AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest.driver);
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
-        SecMenusWrapperStpV.accesoMenuXRef(menuVestidos, dCtxSh, dFTest);
+        SecMenusWrapperStpV.accesoMenuXRef(menuVestidos, dCtxSh, dFTest.driver);
         SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest.driver);
         
         //Hasta página de Checkout

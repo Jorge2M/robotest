@@ -1,15 +1,13 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
 import org.testng.ITestContext;
-
 import java.lang.reflect.Method;
 import java.util.*;
-
 import org.testng.annotations.*;
+import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -33,10 +31,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.banner.SecBannersStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusDesktopStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
-
-import org.openqa.selenium.WebDriver;
-
-
 
 public class TestNodos extends GestorWebDriver {
     Pais españa = null;
@@ -111,11 +105,10 @@ public class TestNodos extends GestorWebDriver {
     public void NOD001_TestNodo() throws Throwable {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
-        DatosStep datosStep = null;
         AppEcom appE = this.nodo.getAppEcom();
         
         //Step+Validation. Acceso y testeo del estado del nodo (+ almacenamiento de datos en el gestor JSON)
-        datosStep = AccesoStpV.testNodoState(this.nodo, dFTest);
+        AccesoStpV.testNodoState(this.nodo, dFTest.driver);
 		
         //Sólo validamos el nodo si se encuentra en estado ok
         if (this.nodo.getStatusJSON().isStatusOk()) {
@@ -125,15 +118,16 @@ public class TestNodos extends GestorWebDriver {
             
             //Si hemos encontrado un nodo con el que comparar, pues eso, comparamos
             //Validaciones comparativa del status de los 2 nodos (actual y anteior) concretos
-            if (nodoAnt!=null)
-                AccesoStpV.validaCompareStatusNodos(datosStep, this.nodo, nodoAnt);
+            if (nodoAnt!=null) {
+                AccesoStpV.validaCompareStatusNodos(this.nodo, nodoAnt);
+            }
            
             //Step+Validacs. Accedemos a España con idioma Español
             PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, true/*execValidacs*/, dFTest.driver);
             
             if (appE==AppEcom.shop) {
                 //Step. Seleccionar la línea Nuevo
-                datosStep = SecMenusWrapperStpV.seleccionLinea(LineaType.nuevo, null/*sublineaType*/, dCtxSh, dFTest);
+                SecMenusWrapperStpV.seleccionLinea(LineaType.nuevo, null/*sublineaType*/, dCtxSh, dFTest);
 
                 //Obtenemos y almacenamos los artículos de la galería Nuevo
                 PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, dCtxSh.appE, dFTest.driver);
@@ -143,7 +137,7 @@ public class TestNodos extends GestorWebDriver {
                 //Validamos que los artículos de la galería son los mismos (y están igualmente ordenados) que en el nodo anterior
                 PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);
                 if (nodoAnt!=null && nodoAnt.getArticlesNuevo()!=null) {
-                    pageGaleriaStpV.validaNombresYRefEnOrden(nodoAnt, this.nodo, datosStep);
+                    pageGaleriaStpV.validaNombresYRefEnOrden(nodoAnt, this.nodo);
                 }
                 
                 //Validaciones. En shop validamos que exista un porcentaje mínimo de panorámicas
@@ -162,7 +156,7 @@ public class TestNodos extends GestorWebDriver {
             secBannersStpV.testPageBanners(dCtxSh, 1, dFTest);
             if (appE==AppEcom.outlet) {
                 Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
-                SecMenusWrapperStpV.accesoMenuXRef(menuVestidos, dCtxSh, dFTest);
+                SecMenusWrapperStpV.accesoMenuXRef(menuVestidos, dCtxSh, dFTest.driver);
             }
             else {
             	Linea lineaNuevo = dCtxSh.pais.getShoponline().getLinea(LineaType.nuevo);
@@ -170,28 +164,13 @@ public class TestNodos extends GestorWebDriver {
                 SecMenusDesktopStpV.stepSeleccionaCarrusel(dCtxSh.pais, LineaType.nuevo, idCarruselMujer, dCtxSh.appE, dFTest.driver);
             }
 			
-            //Step. Seleccionar el link 'H.E.BY MANGO'
-            datosStep = SecMenusWrapperStpV.seleccionLinea(LineaType.he, null/*sublineaType*/, dCtxSh, dFTest);
-	
-            //Step. Contamos / Validamos / almacenamos los menús de HE (Comprobamos que son iguales que en anteriores nodos)
+            SecMenusWrapperStpV.seleccionLinea(LineaType.he, null/*sublineaType*/, dCtxSh, dFTest);
             SecMenusDesktopStpV.countSaveMenusEntorno (LineaType.he, null/*sublineaType*/, this.nodo.getIp(), this.autAddr,dCtxSh.appE, dFTest.driver);
-			
-            //Step. Seleccionar la sublinea nina/nina
-            datosStep = SecMenusWrapperStpV.seleccionLinea(LineaType.nina, SublineaNinosType.nina, dCtxSh, dFTest);	
-			
-            //Step. Contamos / Validamos / Almacenamos los menús de Kids (comprobamos que son iguales que en anteriores nodos)
+            SecMenusWrapperStpV.seleccionLinea(LineaType.nina, SublineaNinosType.nina, dCtxSh, dFTest);	
             SecMenusDesktopStpV.countSaveMenusEntorno(LineaType.nina, SublineaNinosType.nina, this.nodo.getIp(), this.autAddr, dCtxSh.appE, dFTest.driver);
-            
-            //Step. Seleccionar la sublinea nino/bebe_nino
-            datosStep = SecMenusWrapperStpV.seleccionLinea(LineaType.nino, SublineaNinosType.bebe_nino, dCtxSh, dFTest);     
-                        
-            //Step. Contamos / Validamos / Almacenamos los menús de Kids (comprobamos que son iguales que en anteriores nodos)
+            SecMenusWrapperStpV.seleccionLinea(LineaType.nino, SublineaNinosType.bebe_nino, dCtxSh, dFTest);     
             SecMenusDesktopStpV.countSaveMenusEntorno(LineaType.nino, SublineaNinosType.bebe_nino, this.nodo.getIp(), this.autAddr, dCtxSh.appE, dFTest.driver);
-	
-            //Step. Seleccionar el link 'VIOLETA'
-            datosStep = SecMenusWrapperStpV.seleccionLinea(LineaType.violeta, null, dCtxSh, dFTest);	
-			
-            //Step. Contamos / Validamos / Almacenamos los menús de Violeta (comprobamos que son iguales que en ateriores nodos)
+            SecMenusWrapperStpV.seleccionLinea(LineaType.violeta, null, dCtxSh, dFTest);	
             SecMenusDesktopStpV.countSaveMenusEntorno (LineaType.violeta, null/*sublineaType*/, this.nodo.getIp(), this.autAddr, dCtxSh.appE, dFTest.driver);
             
             this.nodo.setTested(true);

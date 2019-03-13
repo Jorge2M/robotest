@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
@@ -135,43 +136,27 @@ public class SecMenusWrapperStpV {
             SecMenusDesktopStpV.stepValidaCarrusels(pais, lineaNuevoOReb, app, dFTest.driver);
     }
     
-    public static DatosStep accesoMenuXRef(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    @Step (
+    	description="Seleccionar el menú <b>#{menu1rstLevel}</b>",
+        expected="Se obtiene el catálogo de artículos asociados al menú")
+    public static void accesoMenuXRef(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep(
-            "Seleccionar el menú <b>" + menu1rstLevel + "</b>",
-            "Se obtiene el catálogo de artículos asociados al menú");
-        try {
-            SecMenusWrap.seleccionarMenuXHref(menu1rstLevel, dCtxSh.pais, dCtxSh.channel, dFTest.driver);
-
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        } 
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-
-        //Validaciones
-        int maxSecondsWait = 3;
-        String descripValidac =
-            "1) Como mínimo se obtiene 1 artículo (lo esperamos un máximo de " + maxSecondsWait + " segundos)";
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            PageGaleria pageGaleria = PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-            if (!pageGaleria.isVisibleArticuloUntil(1, maxSecondsWait)) {
-                listVals.add(1, State.Warn_NoHardcopy);
-            }
-                 
-            datosStep.setListResultValidations(listVals);
-            
-        } finally { listVals.checkAndStoreValidations(descripValidac); }
+        SecMenusWrap.seleccionarMenuXHref(menu1rstLevel, dCtxSh.pais, dCtxSh.channel, driver);
+        checkIsVisibleAarticle(dCtxSh, 3, driver);
         
-        //Validaciones estándar. 
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
         flagsVal.validaSEO = true;
         flagsVal.validaJS = true;
         flagsVal.validaImgBroken = true;
-        AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
-
-        return datosStep;
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+    }
+    
+    @Validation (
+    	description="Como mínimo se obtiene 1 artículo (lo esperamos un máximo de #{maxSecondsWait} segundos)",
+    	level=State.Warn_NoHardcopy)
+    private static boolean checkIsVisibleAarticle(DataCtxShop dCtxSh, int maxSecondsWait, WebDriver driver) throws Exception {
+        PageGaleria pageGaleria = PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+        return (pageGaleria.isVisibleArticuloUntil(1, maxSecondsWait));
     }
     
     public static void selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, WebDriver driver) 
@@ -287,35 +272,24 @@ public class SecMenusWrapperStpV {
     	}
     }
     
-    public static DatosStep selectFiltroCollection(FilterCollection typeMenu, Channel channel, AppEcom app, DataFmwkTest dFTest) 
+    @Step (
+    	description="Seleccionar filtro de colecciones <b>#{typeMenu}</b>", 
+        expected="Aparece una galería con artículos de temporadas#{typeMenu.getListTempArticles()}")
+    public static void selectFiltroCollection(FilterCollection typeMenu, Channel channel, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
-        //Step.
     	SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app, dFTest.driver);
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionar filtro de colecciones <b>" + typeMenu + "</b>", 
-            "Aparece una galería con artículos de temporadas" + typeMenu.getListTempArticles());
-        datosStep.setSaveNettrafic(SaveWhen.Always, dFTest.ctx);
-        try {
-        	filtrosCollection.click(typeMenu);
-                    
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }           
-            
-        //Validaciones
+    	filtrosCollection.click(typeMenu);        
         if (channel==Channel.desktop) {
 	        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app);
 	        if (typeMenu == FilterCollection.sale) {
-	            pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles(), datosStep);
+	            pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles());
 	            pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.norebajado, State.Warn);
 	        }
 	        
 	        if (typeMenu == FilterCollection.nextSeason) {
 	        	pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Info_NoHardcopy);
-	        	pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles(), State.Info_NoHardcopy, datosStep);
+	        	pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles(), State.Info_NoHardcopy);
 	        }
         }
-        
-        return datosStep;
     }    
 }

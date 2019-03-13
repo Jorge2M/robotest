@@ -156,7 +156,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
         if (testMenus(linea, sublinea)) {
             SecMenusWrapperStpV.stepsMenusLinea(lineaType, sublineaType, dCtxShI, dFTest);
         	if (existsRightBannerMenu(linea, sublinea, dCtxShI.channel))
-                SecMenusDesktopStpV.clickRightBanner(lineaType, sublineaType, dCtxShI.appE, dFTest);
+                SecMenusDesktopStpV.clickRightBanner(lineaType, sublineaType, dCtxShI.appE, dFTest.driver);
         }
         else {
             if (SecMenusWrap.canClickMenuArticles(dCtxShI.pais, linea, sublinea)) {

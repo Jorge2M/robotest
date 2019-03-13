@@ -24,8 +24,8 @@ public class PageRegistroIniStpV {
 	@Validation (
 		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{maxSecondsWait} segundos)",
 		level=State.Defect)
-    public static boolean validaIsPageUntil(int maxSecondsWait, DataFmwkTest dFTest) {
-        return (PageRegistroIni.isPageUntil(maxSecondsWait, dFTest.driver));
+    public static boolean validaIsPageUntil(int maxSecondsWait, WebDriver driver) {
+        return (PageRegistroIni.isPageUntil(maxSecondsWait, driver));
     }
     
 	@Step (

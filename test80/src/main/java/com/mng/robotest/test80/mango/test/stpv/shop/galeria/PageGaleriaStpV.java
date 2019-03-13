@@ -656,29 +656,25 @@ public class PageGaleriaStpV {
        return listArticlesGaleriaAct;
    }
    
-   /**
-    * Valida que por pantalla está apareciendo una lista análoga (en contenido y orden) que la que le pasamos como parámetro (perteneciente a otro nodo)
-    */
-   public void validaNombresYRefEnOrden(NodoStatus nodoAnt, NodoStatus nodoAct, DatosStep datosStep) {
-       String descripValidac = 
-           "1) El número de artículos de la galería Nuevo (" + nodoAct.getArticlesNuevo().size() + ") es igual al del nodo " + nodoAnt.getIp() + " (" + nodoAnt.getArticlesNuevo().size() + ")<br>" +
-           "2) El orden y contenido de los artículos en ambos nodos es el mismo";
-       datosStep.setNOKstateByDefault(); 
-       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-       try {
-           if (nodoAct.getArticlesNuevo().size()!=nodoAct.getArticlesNuevo().size()) {
-               listVals.add(1, State.Warn);
-           }
-           NombreYRef articleGaleryActualNotFit = nodoAct.getArticleNuevoThatNotFitWith(nodoAnt);
-           if (articleGaleryActualNotFit!=null) {
-               listVals.add(2, State.Warn);
-               descripValidac+="<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: hay productos de la galería que no cuadran con los de la galería del nodo " + nodoAnt.getIp() + " (por ejemplo <b>" + articleGaleryActualNotFit.toString() + "</b>). ";
-               descripValidac+=nodoAct.getArticlesNuevo().getTableHTLMCompareArticlesGaleria(nodoAnt.getArticlesNuevo());
-           }
-       
-           datosStep.setListResultValidations(listVals);
-       }
-       finally { listVals.checkAndStoreValidations(descripValidac); }
+   @Validation
+   public ListResultValidation validaNombresYRefEnOrden(NodoStatus nodoAnt, NodoStatus nodoAct) {
+   		ListResultValidation validations = ListResultValidation.getNew();
+   		validations.add(
+    		"El número de artículos de la galería Nuevo (" + nodoAct.getArticlesNuevo().size() + ") es igual al del nodo " + 
+    		nodoAnt.getIp() + " (" + nodoAnt.getArticlesNuevo().size() + ")<br>",
+    		nodoAct.getArticlesNuevo().size()==nodoAct.getArticlesNuevo().size(), State.Warn);
+   		
+   		NombreYRef articleGaleryActualNotFit = nodoAct.getArticleNuevoThatNotFitWith(nodoAnt);
+   		String messageWarning = "";
+        if (articleGaleryActualNotFit!=null) {
+        	messageWarning+="<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: hay productos de la galería que no cuadran con los de la galería del nodo " + nodoAnt.getIp() + " (por ejemplo <b>" + articleGaleryActualNotFit.toString() + "</b>). ";
+        	messageWarning+=nodoAct.getArticlesNuevo().getTableHTLMCompareArticlesGaleria(nodoAnt.getArticlesNuevo());
+        }
+   		validations.add(
+    		"El orden y contenido de los artículos en ambos nodos es el mismo" + messageWarning,
+    		articleGaleryActualNotFit==null, State.Warn);
+	   
+   		return validations;
    }
 
    @SuppressWarnings("static-access")
@@ -946,47 +942,47 @@ public class PageGaleriaStpV {
        }
    }
    
-   public void validaArticlesOfTemporadas(List<Integer> listTemporadas, State levelError, DatosStep datosStep) {
-	   validaArticlesOfTemporadas(listTemporadas, false, levelError, datosStep);
+   public void validaArticlesOfTemporadas(List<Integer> listTemporadas, State levelError) {
+	   validaArticlesOfTemporadas(listTemporadas, false, levelError);
    }
    
-   public void validaArticlesOfTemporadas(List<Integer> listTemporadas, DatosStep datosStep) {
-	   validaArticlesOfTemporadas(listTemporadas, false, State.Warn, datosStep);
+   public void validaArticlesOfTemporadas(List<Integer> listTemporadas) {
+	   validaArticlesOfTemporadas(listTemporadas, false, State.Warn);
    }
    
-   public void validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles, DatosStep datosStep) {
-	   validaArticlesOfTemporadas(listTemporadas, validaNotNewArticles, State.Warn, datosStep);
+   public void validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles) {
+	   validaArticlesOfTemporadas(listTemporadas, validaNotNewArticles, State.Warn);
    }
    
-   public void validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles, 
-		   								  State levelError, DatosStep datosStep) {
+   @Validation
+   public ListResultValidation validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles, State levelError) {
+	   ListResultValidation validations = ListResultValidation.getNew();
+	   	
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-       String descripValidac =
-           "<b style=\"color:blue\">Rebajas</b></br>" +
-           "1) Todos los artículos pertenecen a las temporadas <b>" + listTemporadas.toString() + "</b>";
-       if (validaNotNewArticles)
-    	   descripValidac+=" y no contienen alguna de las etiquetas de artículo nuevo (" + PageGaleria.listLabelsNew + ")";
-       datosStep.setNOKstateByDefault();        
-       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-       try {
-           List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFromOther, listTemporadas);
-           if (validaNotNewArticles) {
-        	   listArtWrong = PageGaleria.getNotNewArticlesFrom(listArtWrong);
-           }
-           
-           if (listArtWrong.size() > 0) {
-               listVals.add(1, levelError);
-               descripValidac+=
-                   "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
-                   "hay " + listArtWrong.size() + " artículos que no pertenecen a las temporadas " + listTemporadas + ":<br>";
-               for (String nameWrong : listArtWrong)
-            	   descripValidac+=(nameWrong + "<br>");
-               descripValidac+="</lin>";
-           }
-                
-           datosStep.setListResultValidations(listVals);
+	   List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFromOther, listTemporadas);
+       if (validaNotNewArticles) {
+     	  listArtWrong = PageGaleria.getNotNewArticlesFrom(listArtWrong);
        }
-       finally { listVals.checkAndStoreValidations(descripValidac); }	   
+       String validaNotNewArticlesStr = "";
+       if (validaNotNewArticles) {
+       	validaNotNewArticlesStr = " y no contienen alguna de las etiquetas de artículo nuevo (" + PageGaleria.listLabelsNew + ")";
+       }
+       String infoWarning = "";
+       if (listArtWrong.size() > 0) {
+    	   infoWarning+=
+               "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
+               "hay " + listArtWrong.size() + " artículos que no pertenecen a las temporadas " + listTemporadas + ":<br>";
+           for (String nameWrong : listArtWrong) {
+        	   infoWarning+=(nameWrong + "<br>");
+           }
+           infoWarning+="</lin>";
+       }
+	   validations.add(
+	   		"<b style=\"color:blue\">Rebajas</b></br>" +
+	   		"Todos los artículos pertenecen a las temporadas <b>" + listTemporadas.toString() + "</b>" + validaNotNewArticlesStr + infoWarning,
+	   		listArtWrong.size()==0, levelError);
+	   	
+	   return validations;   
    }
    
    @Validation

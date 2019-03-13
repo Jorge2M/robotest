@@ -108,7 +108,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
         
         if (salesOnInCountry) {
 	        //Step&Validation
-	        SecMenusWrapperStpV.secMenuUser.selectRegistrate(Channel.desktop, dCtxSh, dFTest);
+	        SecMenusWrapperStpV.secMenuUser.selectRegistrate(Channel.desktop, dCtxSh, dFTest.driver);
 	        PageRegistroIniStpV.validaRebajasJun2018(dCtxSh.idioma, dFTest);
         }
         

@@ -1,10 +1,14 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.modales;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
 
@@ -51,6 +55,20 @@ public class ModalCambioPais extends WebdrvWrapp {
     public static boolean isLinkToConfirmPais(WebDriver driver, String hrefPais) {
         String xpath = getXPath_linkToConfirmPais(hrefPais);
         return (isElementPresent(driver, By.xpath(xpath)));
+    }
+    
+    public static Pais getPaisOfButtonForChangePais(List<Pais> listPaisesCandidatos, String urlBaseTest, WebDriver driver) 
+    throws Exception {
+    	Iterator<Pais> it = listPaisesCandidatos.iterator();
+	    while (it.hasNext()) {
+	        Pais paisCandidato = it.next();
+	        String urlAccesoPais = paisCandidato.getUrlPaisEstandar(urlBaseTest);
+	        if (ModalCambioPais.isButtonToChangePais(driver, urlAccesoPais)) {
+	            return (paisCandidato);
+	        }
+	    }
+	    
+	    return null;
     }
     
     /**

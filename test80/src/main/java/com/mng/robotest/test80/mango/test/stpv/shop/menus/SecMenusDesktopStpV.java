@@ -11,10 +11,8 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -401,115 +399,83 @@ public class SecMenusDesktopStpV {
         return validations;
     }
     
-    /**
-     * Función que ejecuta el paso/validaciones correspondiente a la selección de una entrada el menú superior de Desktop
-     */
-    public static DatosStep clickRightBanner(LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, DataFmwkTest dFTest) 
+    @Step (
+    	description="Seleccionar el banner existente a la derecha de los menús", 
+         expected="Aparece una página con banners o artículos")
+    public static void clickRightBanner(LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, WebDriver driver) 
     throws Exception {
-        //Step
-        DatosStep datosStep = new DatosStep     (
-            "Seleccionar el banner existente a la derecha de los menús", 
-            "Aparece una página con banners o artículos");
-        try {
-            SecMenusDesktop.
-            	secMenuSuperior.secBlockMenus.clickRightBanner(lineaType, sublineaType, app, dFTest.driver);
-                
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        //Validaciones
-        PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);
-        String descripValidac = 
-            "1) Aparece una página con banners, artículos, iframes, maps o sliders";
-        datosStep.setNOKstateByDefault();  
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, 3/*seconds*/) &&
-                !PageLanding.hayIframes(dFTest.driver) &&
-                !PageLanding.hayMaps(dFTest.driver) &&
-                !PageLanding.haySliders(dFTest.driver)) {
-            	int maxBannersToLoad = 1;
-            	ManagerBannersScreen managerBanners = new ManagerBannersScreen(maxBannersToLoad, dFTest.driver);
-            	if (!managerBanners.existBanners()) {
-                    listVals.add(1, State.Warn);
-            	}
-            }
-                            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
+        SecMenusDesktop.secMenuSuperior.secBlockMenus.clickRightBanner(lineaType, sublineaType, app, driver);
+        checkAreValidMangoObjectsInPage(app, driver);
     }
     
-    /**
-     * Chequear una URL de redirect que linca a HE - Zapatos
-     */
-    public static DatosStep checkURLRedirectZapatosHeEspanya(Channel channel, AppEcom app, DataFmwkTest dFTest) 
+    @Validation (
+    	description="Aparece una página con banners, artículos, iframes, maps o sliders",
+    	level=State.Warn)
+    private static boolean checkAreValidMangoObjectsInPage(AppEcom app, WebDriver driver) throws Exception {
+        PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
+        if (!pageGaleria.isVisibleArticleUntil(1, 3) ||
+            !PageLanding.hayIframes(driver) ||
+            !PageLanding.hayMaps(driver) ||
+            !PageLanding.haySliders(driver)) {
+            int maxBannersToLoad = 1;
+            ManagerBannersScreen managerBanners = new ManagerBannersScreen(maxBannersToLoad, driver);
+            return (managerBanners.existBanners());
+        }
+        return false;
+    }
+    
+    final static String tagUrlAcceso = "@TagUrlAcceso";
+    @Step (
+    	description="Cargar la siguiente URL de redirect a <b>España / HE / Zapatos</b>:<br>" + tagUrlAcceso,
+        expected="Aparece desplegada la página de Zapatos (HE)")
+    public static void checkURLRedirectZapatosHeEspanya(Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-        URI uri = new URI(dFTest.driver.getCurrentUrl());
+        URI uri = new URI(driver.getCurrentUrl());
         String tiendaId = "he";
-        if (app==AppEcom.outlet)
+        if (app==AppEcom.outlet) {
             tiendaId = "outletH";
-        
+        }
         String urlAccesoCorreo = 
         	uri.getScheme() + "://" + 
         	uri.getHost() + 
         	"/redirect.faces?op=conta&seccion=accesorios_he&tiendaid=" + 
         	tiendaId + 
         	"&menu_temporada=2&menu_accesorio=140";
+        TestCaseData.getDatosCurrentStep().replaceInDescription(tagUrlAcceso, urlAccesoCorreo);
 
-        //Step
-        DatosStep datosStep = new DatosStep(
-            "Cargar la siguiente URL de redirect a <b>España / HE / Zapatos</b>:<br>" + urlAccesoCorreo,
-            "Aparece desplegada la página de Zapatos (HE)");
-        try {
-            dFTest.driver.navigate().to(urlAccesoCorreo);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        } 
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-
-        //Validaciones
+        driver.navigate().to(urlAccesoCorreo);
     	Menu1rstLevel menu1erNivel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.he, null, "zapatos"));
-        validationsSelecMenuEspecificDesktop(menu1erNivel, channel, app, dFTest.driver);
-        
-        return datosStep;
+        validationsSelecMenuEspecificDesktop(menu1erNivel, channel, app, driver);
     }
     
-    /**
-     * Chequear una URL de redirect que linca a HE - Zapatos
-     */
-    public static DatosStep checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    final static String tagRefArticle = "@TagRefArticle";
+    @Step (
+    	description=
+    		"Cargar la siguiente URL de redirect a la ficha del producto <b>" + tagRefArticle + 
+    		" (#{pais.getNombre_pais()})</b>:<br>" + tagUrlAcceso,
+        expected=
+        	"Aparece la ficha del producto " + tagRefArticle)
+    public static void checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
     	ArticleStock articulo = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithMoreOneColour, dCtxSh);
-        URI uri = new URI(dFTest.driver.getCurrentUrl());
+    	TestCaseData.getDatosCurrentStep().replaceInDescription(tagRefArticle, articulo.getReference());
+    	TestCaseData.getDatosCurrentStep().replaceInExpected(tagRefArticle, articulo.getReference());
+    	
+        URI uri = new URI(driver.getCurrentUrl());
         String tiendaId = "she";
-        if (dCtxSh.appE==AppEcom.outlet)
+        if (dCtxSh.appE==AppEcom.outlet) {
             tiendaId = "outlet";
+        }
         
         String urlAccesoCorreo = 
         	uri.getScheme() + "://" + uri.getHost() + "/redirect.faces?op=conta&tiendaid=" + tiendaId + "&pais=" + pais.getCodigo_pais() + 
         	"&producto=" + articulo.getReference() + "&color=" + articulo.getColourCode() ;
+        TestCaseData.getDatosCurrentStep().replaceInExpected(tagUrlAcceso, urlAccesoCorreo);
+        driver.navigate().to(urlAccesoCorreo);
 
-        //Step
-        DatosStep datosStep = new DatosStep(
-            "Cargar la siguiente URL de redirect a la ficha del producto <b>" + articulo.getReference() + " (" + pais.getNombre_pais()+ ")</b>:<br>" + urlAccesoCorreo,
-            "Aparece la ficha del producto " + articulo.getReference());
-        try {
-            dFTest.driver.navigate().to(urlAccesoCorreo);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        } 
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-
-        //Validaciones
         DataFichaArt datosArticulo = new DataFichaArt(articulo.getReference(), "");
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         pageFichaStpV.validaDetallesProducto(datosArticulo);
-        
-        return datosStep;
     }
     
     public static void validaPaginaResultMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh, WebDriver driver) 
@@ -632,117 +598,117 @@ public class SecMenusDesktopStpV {
 //    }
     
 	  //Temporal para prueba fin rebajas en China
-	  public static void validationsSpecificEndRebajasChina(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-	  	DatosStep datosStep = TestCaseData.getDatosLastStep();
-	  	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-	  	List<Integer> tempSale = FilterCollection.sale.getListTempArticles();
-	      String descripValidac = 
-	          prefixSale +        		   
-	          "1) No hay artículos con las siguientes características:<br>" + 
-	          " * De temporadas T2 y T3 " + tempSale;
-	      datosStep.setNOKstateByDefault();
-	      ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-	      try {
-	          List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFrom, tempSale);
-	          if (listArtWrong.size() > 0) {
-	              listVals.add(1, State.Defect);
-	              descripValidac+=
-	                  "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
-	                  "hay " + listArtWrong.size() + " artículos de T2 ó T3:<br>";
-	              for (String nameWrong : listArtWrong) {
-	           	   descripValidac+=(nameWrong + "<br>");
-	              }
-	              descripValidac+="</lin>";
-	          }
-	
-	          datosStep.setListResultValidations(listVals);
-	      } 
-	      finally { listVals.checkAndStoreValidations(descripValidac); }
-	  }
+    @Validation
+    public static ListResultValidation validationsSpecificEndRebajasChina(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
+    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+      	List<Integer> tempSale = FilterCollection.sale.getListTempArticles();
+      	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFrom, tempSale);
+      	String warningMessage = "";
+        if (listArtWrong.size() > 0) {
+        	warningMessage+=
+                "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
+                "hay " + listArtWrong.size() + " artículos de T2 ó T3:<br>";
+            for (String nameWrong : listArtWrong) {
+            	warningMessage+=(nameWrong + "<br>");
+            }
+            warningMessage+="</lin>";
+        }
+        
+    	validations.add(
+    		prefixSale +     
+    		"No hay artículos con las siguientes características:<br>" + 
+    		" * De temporadas T2 y T3 " + tempSale + warningMessage,
+    		listArtWrong.size()==0, State.Defect);
+      	return validations;
+    }
     
-    public static void validationsRebajas(Channel channel, AppEcom app, WebDriver driver) 
+    public static void validationsRebajas(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+    	checkNoArticlesRebajadosWithLabelIncorrect(channel, app, driver);
+    	checkNoArticlesTemporadaOldWithLabelsWrong(channel, app, driver);
+    	checkNoArticlesTemporadaNewWithLabelsWrong(channel, app, driver);
+    }
+    
+    @Validation
+    private static ListResultValidation checkNoArticlesRebajadosWithLabelIncorrect(Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-        //Validación especialmente útil en periodo de Rebajas
-    	DatosStep datosStep = TestCaseData.getDatosLastStep();
+    	ListResultValidation validations = ListResultValidation.getNew();
     	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(channel, app, driver);
     	List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
     	List<Integer> tempSales = FilterCollection.sale.getListTempArticles();
-        String descripValidac = 
-            prefixSale +        		   
-            "1) No hay artículos con las siguientes características:<br>" + 
+    	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaxRebajadosWithLiteralInLabel(tempSales, listLabelsWrong);
+    	String warningMessage = "";
+        if (listArtWrong.size() > 0) {
+        	warningMessage+=
+                "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
+                "hay " + listArtWrong.size() + " artículos rebajados con label errónea:<br>";
+            for (String nameWrong : listArtWrong) {
+            	warningMessage+=(nameWrong + "<br>");
+            }
+            warningMessage+="</lin>";
+        }
+    	
+    	validations.add(
+			prefixSale +        		   
+            "No hay artículos con las siguientes características:<br>" + 
             " * Rebajados</b><br>" +
             " * De temporadas anteriores " + tempSales + "<br>" +
-            " * Con alguna de las etiquetas <b>" + listLabelsWrong + "</b> (en sus correspondientes traducciones)"; 
-        datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            List<String> listArtWrong = 
-            	pageGaleriaDesktop.getArticlesTemporadaxRebajadosWithLiteralInLabel(tempSales, listLabelsWrong);
-            	//pageGaleriaDesktop.getArticlesRebajadosWithLiteralInLabel(listLabelsWrong);
-            if (listArtWrong.size() > 0) {
-                listVals.add(1, State.Warn);
-                descripValidac+=
-                    "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
-                    "hay " + listArtWrong.size() + " artículos rebajados con label errónea:<br>";
-                for (String nameWrong : listArtWrong) {
-             	   descripValidac+=(nameWrong + "<br>");
-                }
-                descripValidac+="</lin>";
-            }
-
-            datosStep.setListResultValidations(listVals);
-        } 
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        //Validación especialmente útil en periodo de Rebajas
-        ArrayList<Integer> temporadaOld = new ArrayList<Integer>(Arrays.asList(2));  
-        descripValidac = 
-            prefixSale +        		   
-            "1) No hay artículos <b>de Temporada " + temporadaOld + "</b> con alguna de las etiquetas <b>" + listLabelsWrong + "</b> " + 
-              "(en sus correspondientes traducciones)"; 
-        datosStep.setNOKstateByDefault();
-        listVals = ListResultValidation.getNew(datosStep);
-        try {
-            List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaOld, listLabelsWrong);
-            if (listArtWrong.size() > 0) {
-                listVals.add(1, State.Warn);
-                descripValidac+=
-                    "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
-                    "hay " + listArtWrong.size() + " artículos de temporada " + temporadaOld + " con label errónea:<br>";
-                for (String nameWrong : listArtWrong) {
-             	   descripValidac+=(nameWrong + "<br>");
-                }
-                descripValidac+="</lin>";
-            }
-
-            datosStep.setListResultValidations(listVals);
-        } 
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+            " * Con alguna de las etiquetas <b>" + listLabelsWrong + "</b> (en sus correspondientes traducciones)" + warningMessage,
+    		listArtWrong.size()==0, State.Warn);
+    	return validations;
+    }
     
-        ArrayList<Integer> temporadaNew = new ArrayList<Integer>(Arrays.asList(3));
-        descripValidac = 
-            prefixSale +        		   
-            "1) No hay artículos <b>de Temporada " + temporadaNew + "</b> con las 2 etiquetas <b>New Collection</b> y <b>New Now</b> " + 
-              "(en sus correspondientes traducciones)"; 
-        datosStep.setNOKstateByDefault();
-        listVals = ListResultValidation.getNew(datosStep);
-        try {
-            List<String> listArtWrong = 
-            	pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaNew, LabelArticle.NewNow, LabelArticle.NewCollection);
-            if (listArtWrong.size() > 0) {
-                listVals.add(1, State.Info_NoHardcopy);
-                descripValidac+=
-                    "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
-                    "hay " + listArtWrong.size() + " artículos de temporada " + temporadaNew + " con las 2 labels asociadas:<br>";
-                for (String nameWrong : listArtWrong) {
-             	    descripValidac+=(nameWrong + "<br>");
-                }
-                descripValidac+="</lin>";
+    @Validation
+    private static ListResultValidation checkNoArticlesTemporadaOldWithLabelsWrong(Channel channel, AppEcom app, WebDriver driver) 
+    throws Exception {
+    	ListResultValidation validations = ListResultValidation.getNew();
+        ArrayList<Integer> temporadaOld = new ArrayList<Integer>(Arrays.asList(2));  
+       	List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
+    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(channel, app, driver);
+       	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaOld, listLabelsWrong);
+    	String warningMessage = "";
+        if (listArtWrong.size() > 0) {
+        	warningMessage+=
+                "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
+                "hay " + listArtWrong.size() + " artículos de temporada " + temporadaOld + " con label errónea:<br>";
+            for (String nameWrong : listArtWrong) {
+            	warningMessage+=(nameWrong + "<br>");
             }
-
-            datosStep.setListResultValidations(listVals);
-        } 
-        finally { listVals.checkAndStoreValidations(descripValidac); }    	
+            warningMessage+="</lin>";
+        }
+    	
+    	validations.add(
+			prefixSale +        		   
+            "No hay artículos <b>de Temporada " + temporadaOld + "</b> con alguna de las etiquetas <b>" + listLabelsWrong + "</b> " + 
+            "(en sus correspondientes traducciones)" + warningMessage,
+    		listArtWrong.size()==0, State.Warn);
+    	return validations;
+    }
+    	
+    @Validation
+    private static ListResultValidation checkNoArticlesTemporadaNewWithLabelsWrong(Channel channel, AppEcom app, WebDriver driver) 
+    throws Exception {
+		ListResultValidation validations = ListResultValidation.getNew();
+        ArrayList<Integer> temporadaNew = new ArrayList<Integer>(Arrays.asList(3));
+        PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(channel, app, driver);
+        List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaNew, LabelArticle.NewNow, LabelArticle.NewCollection);
+        String warningMessage = "";
+        if (listArtWrong.size() > 0) {
+        	warningMessage+=
+                "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
+                "hay " + listArtWrong.size() + " artículos de temporada " + temporadaNew + " con las 2 labels asociadas:<br>";
+            for (String nameWrong : listArtWrong) {
+            	warningMessage+=(nameWrong + "<br>");
+            }
+            warningMessage+="</lin>";
+        }
+        
+    	validations.add(
+			prefixSale +        		   
+            "No hay artículos <b>de Temporada " + temporadaNew + "</b> con las 2 etiquetas <b>New Collection</b> y <b>New Now</b> " +
+            "(en sus correspondientes traducciones)" + warningMessage,
+    		listArtWrong.size()==0, State.Info_NoHardcopy);
+        return validations;	
     }
     
     @Validation (

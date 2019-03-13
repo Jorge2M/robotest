@@ -109,7 +109,7 @@ public class Otras extends GestorWebDriver {
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
                             
         //Step. Valida que la URL de acceso desde correo a HE es correcta
-        SecMenusDesktopStpV.checkURLRedirectZapatosHeEspanya(dCtxSh.channel, dCtxSh.appE, dFTest);
+        SecMenusDesktopStpV.checkURLRedirectZapatosHeEspanya(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         
         //Step. Acceso a la aplicación shop/outlet/VOTF sin registrarse posteriormente
         dCtxSh.pais = this.francia;
@@ -117,7 +117,7 @@ public class Otras extends GestorWebDriver {
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         
         //Step. Acceso a la redirección de Ficha        
-        SecMenusDesktopStpV.checkURLRedirectFicha(this.francia, dCtxSh, dFTest);
+        SecMenusDesktopStpV.checkURLRedirectFicha(this.francia, dCtxSh, dFTest.driver);
     }
 	
     
@@ -165,33 +165,33 @@ public class Otras extends GestorWebDriver {
         //   país de acceso: suecia (no asociado a la IP del usuario)
         //   país de acceso previo: ninguno (null)
         //   país previamente confirmado: ninguno (null)
-        Pais paisAsocIP = AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, this.suecia, null/*paisAccesoPrevio*/, null/*paisConfirmado*/, 0/*vecesPaisConfPrev*/, listPaisAsocIP, dFTest);
+        Pais paisAsocIP = AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, this.suecia, null/*paisAccesoPrevio*/, null, 0, listPaisAsocIP, dFTest.driver);
                 
         //Acceso vía URL con:
         //   país de acceso: francia (no asociado a la IP del usuario)
         //   país de acceso previo: suecia
         //   país previamente confirmado: ninguno (null)
-        AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, this.francia, this.suecia, null/*paisConfirmado*/, 0/*vecesPaisConfPrev*/, listPaisAsocIP, dFTest);
+        AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, this.francia, this.suecia, null, 0, listPaisAsocIP, dFTest.driver);
                     
         //Step. Confirmamos el país del modal (España, Irlanda o USA... el de paisAsocIP)
-        AccesoStpV.selectConfirmPaisModal(dFTest);        
+        AccesoStpV.selectConfirmPaisModal(dFTest.driver);        
 
         //Acceso vía URL con:
         //   país de acceso: francia (no asociado a la IP del usuario)
         //   país de acceso previo: suecia
         //   país previamente confirmado: paisAsocIp (España, Irlanda o USA)
         //   número de veces confirmado: 1
-        AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, this.francia, this.suecia, paisAsocIP/*paisConfirmado*/, 1/*vecesPaisConfPrev*/, listPaisAsocIP, dFTest);
+        AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, this.francia, this.suecia, paisAsocIP, 1, listPaisAsocIP, dFTest.driver);
             
         //Step. Confirmamos el país del modal (España, Irlanda o USA... el de paisAsocIP)
-        AccesoStpV.selectConfirmPaisModal(dFTest);
+        AccesoStpV.selectConfirmPaisModal(dFTest.driver);
             
         //Acceso vía URL con:
         //   país de acceso: suecia (no asociado a la IP del usuario)
         //   país de acceso previo: francia
         //   país previamente confirmado: paisAsocIp (España, Irlanda o USA)
         //   número de veces confirmado: 2
-        AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, this.suecia, this.francia, paisAsocIP/*paisConfirmado*/, 2/*vecesPaisConfPrev*/, listPaisAsocIP, dFTest);            
+        AccesoStpV.accesoConURLPaisNoIP(urlBaseTest, this.suecia, this.francia, paisAsocIP, 2, listPaisAsocIP, dFTest.driver);            
                 
         //Steps. Acabamos ejecutando la funcionalidad típica de cambio de país desde el footer
         dCtxSh.pais = this.francia;

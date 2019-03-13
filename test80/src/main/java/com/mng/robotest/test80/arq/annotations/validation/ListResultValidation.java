@@ -15,6 +15,12 @@ public class ListResultValidation {
     private final DatosStep datosStep; //TODO Creo que se puede llegar eliminar
     private String descripcionValidations;
 	
+    public ListResultValidation() {
+    	DatosStep datosStep = TestCaseData.getDatosLastStep();
+    	listResultValidations = new ArrayList<>();
+    	this.datosStep = datosStep;
+    }
+    
 	private ListResultValidation(DatosStep datosStep) {
 		listResultValidations = new ArrayList<>();
 		this.datosStep = datosStep;
@@ -25,8 +31,7 @@ public class ListResultValidation {
 	}
 	
 	public static ListResultValidation getNew() {
-		DatosStep datosStep = TestCaseData.getDatosLastStep();
-		return (getNew(datosStep));
+		return (new ListResultValidation());
 	}
 	
 	public static ListResultValidation of(ResultValidation resultValidation, DatosStep datosStep) {

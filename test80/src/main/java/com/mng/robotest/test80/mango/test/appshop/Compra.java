@@ -282,7 +282,7 @@ public class Compra extends GestorWebDriver {
                 //Cerramos sesión y nos volvemos a identificar con los datos del registro
                 String usrEmail = dCtxPago.getDatosRegistro().get("cfEmail");
                 String password = dCtxPago.getDatosRegistro().get("cfPass");
-                SecMenusWrapperStpV.secMenuUser.logoffLogin(usrEmail, password, dCtxSh.channel, dCtxSh.appE, dFTest);
+                SecMenusWrapperStpV.secMenuUser.logoffLogin(usrEmail, password, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
                     
                 //Ejecutamos la consulta de Mis datos comprobando que son coherentes con los utilizados en el registro
                 //ListDataRegistro dataRegistroOK = new ListDataRegistro();

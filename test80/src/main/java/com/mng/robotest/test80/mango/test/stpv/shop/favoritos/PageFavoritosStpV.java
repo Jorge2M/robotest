@@ -22,16 +22,16 @@ public class PageFavoritosStpV {
     public static ModalFichaFavoritosStpV modalFichaFavoritos;
     
     @Validation
-    public static ListResultValidation validaIsPageOK(DataFavoritos dataFavoritos, DataFmwkTest dFTest) {
+    public static ListResultValidation validaIsPageOK(DataFavoritos dataFavoritos, WebDriver driver) {
     	ListResultValidation validations = ListResultValidation.getNew();
         int maxSecondsToWaitCapa = 3;
         int maxSecondsToWaitArticles = 1;
     	validations.add(
     		"Está visible la capa de favoritos con artículos (la esperamos hasta " + maxSecondsToWaitCapa + " segundos)<br>",
-    		PageFavoritos.isSectionArticlesVisibleUntil(maxSecondsToWaitCapa, dFTest.driver), State.Defect);
+    		PageFavoritos.isSectionArticlesVisibleUntil(maxSecondsToWaitCapa, driver), State.Defect);
     	validations.add(
     		"Aparecen los artículos (los esperamos hasta " + maxSecondsToWaitArticles + " segundos): <br>" + dataFavoritos.getListArtDescHTML(),
-    		PageFavoritos.areVisibleArticlesUntil(dataFavoritos, maxSecondsToWaitArticles, dFTest.driver), State.Defect);
+    		PageFavoritos.areVisibleArticlesUntil(dataFavoritos, maxSecondsToWaitArticles, driver), State.Defect);
     	return validations;
     }
     
