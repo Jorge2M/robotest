@@ -222,7 +222,7 @@ public class PageGaleriaStpV {
     }
     
     @Validation
-    private ListResultValidation checkVisibilityFooter(int pageToScroll, AppEcom app, WebDriver driver) {
+    private ListResultValidation checkVisibilityFooter(int pageToScroll, AppEcom app, WebDriver driver) throws Exception {
     	ListResultValidation validations = ListResultValidation.getNew();
         boolean isVisibleFooter = SecFooter.isVisible(app, driver);
         if (pageToScroll>=PageGaleriaDesktop.maxPageToScroll) {
@@ -230,12 +230,6 @@ public class PageGaleriaStpV {
         		"Sí aparece el footer",
         		isVisibleFooter, State.Warn);
         }
-        else {
-          	validations.add(
-        		"No aparece el footer",
-        		!isVisibleFooter, State.Warn);
-        }
-        
         return validations;
     }
     

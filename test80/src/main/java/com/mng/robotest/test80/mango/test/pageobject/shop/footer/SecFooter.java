@@ -116,8 +116,9 @@ public class SecFooter extends WebdrvWrapp {
         return (isElementPresent(driver, By.xpath(xpath)));
     }
     
-    public static boolean isVisible(AppEcom app, WebDriver driver) {
+    public static boolean isVisible(AppEcom app, WebDriver driver) throws Exception {
         String xpath = getXPathCapaFooter(app);
+        waitForPageLoaded(driver);
         return (isElementVisible(driver, By.xpath(xpath)));
     }    
     
