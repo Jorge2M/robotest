@@ -6,11 +6,9 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.ResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
@@ -65,20 +63,19 @@ public class PageGaleriaStpV {
     
     public enum TypeActionFav {Marcar, Desmarcar}
     PageGaleria pageGaleria = null;
-    DataFmwkTest dFTest = null;
+    WebDriver driver = null;
     Channel channel = null;
     AppEcom app = null;
     
-    private PageGaleriaStpV(Channel channel, AppEcom app, DataFmwkTest dFTest) throws Exception {
-    	this.dFTest = dFTest;
+    private PageGaleriaStpV(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+    	this.driver = driver;
     	this.channel = channel;
     	this.app = app;
-    	pageGaleria = PageGaleria.getInstance(channel, app, dFTest.driver);
+    	pageGaleria = PageGaleria.getInstance(channel, app, driver);
     }
     
-    public static PageGaleriaStpV getInstance(Channel channel, AppEcom app) throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        return (new PageGaleriaStpV(channel, app, dFTest));
+    public static PageGaleriaStpV getInstance(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+        return (new PageGaleriaStpV(channel, app, driver));
     }
 
     @Step (
@@ -86,7 +83,7 @@ public class PageGaleriaStpV {
         expected="Aparece la ficha del artículo seleccionado en una pestaña aparte")
     public void selectArticuloEnPestanyaAndBack(LocationArticle locationArt) 
     throws Exception {
-        String galeryWindowHandle = dFTest.driver.getWindowHandle();
+        String galeryWindowHandle = driver.getWindowHandle();
         DataFichaArt datosArticulo = new DataFichaArt();
         
         //Almacenamos el nombre del artículo y su referencia
@@ -102,9 +99,9 @@ public class PageGaleriaStpV {
         pageFichaStpV.validaDetallesProducto(datosArticulo);
         
         //Cerramos la pestaña y cambiamos a la ventana padre
-        dFTest.driver.switchTo().window(detailWindowHandle);
-        dFTest.driver.close();
-        dFTest.driver.switchTo().window(galeryWindowHandle);
+        driver.switchTo().window(detailWindowHandle);
+        driver.close();
+        driver.switchTo().window(galeryWindowHandle);
     }
     
     @Step (
@@ -113,7 +110,7 @@ public class PageGaleriaStpV {
     public DataFichaArt selectArticulo(LocationArticle locationArt, DataCtxShop dCtxSh) 
     throws Exception {
         DataFichaArt datosArticulo = new DataFichaArt();
-        String urlGaleria = dFTest.driver.getCurrentUrl();
+        String urlGaleria = driver.getCurrentUrl();
         
         //Almacenamos el nombre del artículo y su referencia
         WebElement articulo = pageGaleria.getArticulo(locationArt);
@@ -163,10 +160,10 @@ public class PageGaleriaStpV {
     throws Exception {
     	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
         ArticuloScreen articulo = pageGaleriaDesktop.selectTallaArticle(posArticulo, posTalla);
-        boolean notVisibleAvisame = ModalArticleNotAvailableStpV.validateState(1, StateModal.notvisible, dFTest.driver);
+        boolean notVisibleAvisame = ModalArticleNotAvailableStpV.validateState(1, StateModal.notvisible, driver);
         if (notVisibleAvisame) {
             dataBag.addArticulo(articulo);
-            SecBolsaStpV.validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+            SecBolsaStpV.validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, driver);
         }
         
         return notVisibleAvisame;
@@ -197,7 +194,7 @@ public class PageGaleriaStpV {
         int numArticulosInicio = pageGaleria.getNumArticulos();
         datosScroll = pageGaleria.scrollToPageFromFirst(pageToScroll, dCtxSh.appE);
         
-        checkVisibilityFooter(pageToScroll, dCtxSh.appE, dFTest.driver);
+        checkVisibilityFooter(pageToScroll, dCtxSh.appE, driver);
         if (pageToScroll < PageGaleriaDesktop.maxPageToScroll) {
         	checkAreMoreArticlesThatInitially(datosScroll.articulosMostrados, numArticulosInicio);
         }
@@ -213,9 +210,9 @@ public class PageGaleriaStpV {
         flagsVal.validaSEO = true;
         flagsVal.validaJS = true;
         flagsVal.validaImgBroken = dataForScroll.validaImgBroken;
-        AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
         
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, dFTest.driver);
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, driver);
         
         datosScroll.datosStep = TestCaseData.getDatosCurrentStep();
         return datosScroll;
@@ -281,7 +278,7 @@ public class PageGaleriaStpV {
         expected="Los artículos se ordenan correctamente")
     public int seleccionaOrdenacionGaleria(FilterOrdenacion typeOrdenacion, String tipoPrendasGaleria, int numArticulosValidar, 
 		   								   DataCtxShop dCtxSh) throws Exception {
-        SecFiltros secFiltros = SecFiltros.newInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        SecFiltros secFiltros = SecFiltros.newInstance(dCtxSh.channel, dCtxSh.appE, driver);
         secFiltros.selecOrdenacionAndReturnNumArticles(typeOrdenacion);    
         
         checkIsVisiblePageWithTitle(tipoPrendasGaleria);
@@ -293,7 +290,7 @@ public class PageGaleriaStpV {
         flagsVal.validaSEO = true;
         flagsVal.validaJS = true;
         flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
        
         return numArticulosPant;
     }
@@ -302,7 +299,7 @@ public class PageGaleriaStpV {
     	description="Aparece una pantalla en la que el title contiene <b>#{tipoPrendasGaleria}",
     	level=State.Warn)
     private boolean checkIsVisiblePageWithTitle(String tipoPrendasGaleria) {
-    	return (dFTest.driver.getTitle().toLowerCase().contains(tipoPrendasGaleria));
+    	return (driver.getTitle().toLowerCase().contains(tipoPrendasGaleria));
     }
     
     @Validation
@@ -338,7 +335,7 @@ public class PageGaleriaStpV {
     		"Es clickable el 1er elemento de la lista<br>",
     		pageGaleria.isClickableArticuloUntil(1, 0), State.Warn);
       	
-        SecFiltros secFiltros = SecFiltros.newInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        SecFiltros secFiltros = SecFiltros.newInstance(dCtxSh.channel, dCtxSh.appE, driver);
         int maxSecondsWait = 2;
       	validations.add(
     		"Es clickable el bloque de filtros (esperamos hasta " + maxSecondsWait + " segundos)",
@@ -364,7 +361,7 @@ public class PageGaleriaStpV {
     public String selecColorFromArtGaleriaStep(int numArtConColores, int posColor) 
     throws Exception {
         //En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax. En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
-        WebdrvWrapp.waitForPageLoaded(dFTest.driver, 2/*waitSeconds*/);
+        WebdrvWrapp.waitForPageLoaded(driver, 2);
        
         DatosStep datosStep = TestCaseData.getDatosCurrentStep();
         WebElement articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
@@ -376,7 +373,7 @@ public class PageGaleriaStpV {
         String srcImg1erArt = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
         datosStep.replaceInDescription(tagSrcPng2oColor, colorToClick.getAttribute("src"));
        
-        WebdrvWrapp.forceClick(dFTest.driver, colorToClick, null);
+        WebdrvWrapp.forceClick(driver, colorToClick, null);
         Thread.sleep(100);
         
         String srcImgAfterClickColor = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
@@ -422,7 +419,7 @@ public class PageGaleriaStpV {
        
        //En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax. 
 	   //En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
-       WebdrvWrapp.waitForPageLoaded(dFTest.driver, 2);
+       WebdrvWrapp.waitForPageLoaded(driver, 2);
        PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
        WebElement articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHoverNoDoble(numArtConColores);
        datosStep.replaceInDescription(tagNombreArt, pageGaleria.getNombreArticulo(articuloColores));
@@ -485,8 +482,8 @@ public class PageGaleriaStpV {
         flagsVal.validaSEO = true;
         flagsVal.validaJS = true;
         flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
-        PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, dFTest.driver);        
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+        PasosGenAnalitica.validaHTTPAnalytics(app, LineaType.she, driver);        
     }
    
    	@SuppressWarnings("static-access")
@@ -494,13 +491,13 @@ public class PageGaleriaStpV {
     private ListResultValidation checkIsFichaArticle(String nombre1erArt, String precio1erArt, int maxSecondsWait) {
     	ListResultValidation validations = ListResultValidation.getNew();
     	
-    	PageFicha pageFicha = PageFicha.newInstance(app, channel, dFTest.driver);
+    	PageFicha pageFicha = PageFicha.newInstance(app, channel, driver);
       	validations.add(
     		"Aparece la página de ficha (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
     		pageFicha.isPageUntil(maxSecondsWait), State.Warn);
       	
-        String nombreArtFicha = pageFicha.secDataProduct.getTituloArt(channel, dFTest.driver);
-        String precioArtFicha = pageFicha.secDataProduct.getPrecioFinalArticulo(dFTest.driver);
+        String nombreArtFicha = pageFicha.secDataProduct.getTituloArt(channel, driver);
+        String precioArtFicha = pageFicha.secDataProduct.getPrecioFinalArticulo(driver);
       	validations.add(
     		"Aparece el artículo anteriormente seleccionado: <br>\" +\n" + 
     		"   - Nombre " + nombre1erArt + "<br>" + 
@@ -542,116 +539,86 @@ public class PageGaleriaStpV {
     	level=State.Warn)
     public boolean validaArtEnContenido(int maxSecondsWait) {
     	return (pageGaleria.isVisibleArticleUntil(1, maxSecondsWait));
-   }   
+    }   
    
-   public DatosStep clickArticlesHearthIcons(List<Integer> posIconsToClick, TypeActionFav actionFav, DataFavoritos dataFavoritos) 
-   throws Exception {
-       String estadoFinal = "";
-       switch (actionFav) {
-       case Marcar:
-           estadoFinal = "Marcados";
-           break;
-       case Desmarcar:
-           estadoFinal = "Desmarcados";
-           break;
-       default:
-           break;
-       }
-
-       //Step
-       DatosStep datosStep = new DatosStep       (
-           "Seleccionamos (para <b>" + actionFav + "</b>) los \"Hearth Icons\" asociados a los artículos con posiciones <b>" + posIconsToClick + "</b>", 
-           "Los \"Hearth Icons\" quedan " + estadoFinal);
-       try {
-           ArrayList<ArticuloScreen> listAddFav = pageGaleria.clickArticleHearthIcons(posIconsToClick);
-           switch (actionFav) {
-           case Marcar:
-               dataFavoritos.addToLista(listAddFav);
-               break;
-           case Desmarcar:
-               dataFavoritos.removeFromLista(listAddFav);
-               break;
-           default:
-               break;
-           }
-               
-           datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-       }
-       finally { StepAspect.storeDataAfterStep(datosStep); }       
-       
-       //Validaciones
-       String descripValidac = 
-           "1) Quedan " + estadoFinal + " los iconos asociados a los artículos con posiciones <b>" + posIconsToClick.toString() + "</b>";
-       datosStep.setNOKstateByDefault();
-       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-       try {
-           if (!pageGaleria.iconsInCorrectState(posIconsToClick, actionFav)) {
-               listVals.add(1, State.Warn);
-           }
-
-           datosStep.setListResultValidations(listVals);
-       } 
-       finally { listVals.checkAndStoreValidations(descripValidac); }
-       
-       return datosStep;
-   }
+    final static String tagEstadoFinal = "@TagEstadoFinal";
+    @Step (
+    	description="Seleccionamos (para <b>#{actionFav}</b>) los \"Hearth Icons\" asociados a los artículos con posiciones <b>#{posIconsToClick}</b>", 
+        expected="Los \"Hearth Icons\" quedan " + tagEstadoFinal)
+    public void clickArticlesHearthIcons(List<Integer> posIconsToClick, TypeActionFav actionFav, DataFavoritos dataFavoritos) 
+    throws Exception {
+        ArrayList<ArticuloScreen> listAddFav = pageGaleria.clickArticleHearthIcons(posIconsToClick);
+        String estadoFinal = "";
+        switch (actionFav) {
+        case Marcar:
+            estadoFinal = "Marcados";
+            dataFavoritos.addToLista(listAddFav);
+            break;
+        case Desmarcar:
+            estadoFinal = "Desmarcados";
+            dataFavoritos.removeFromLista(listAddFav);
+            break;
+        default:
+            break;
+        }
+        TestCaseData.getDatosCurrentStep().replaceInDescription(tagEstadoFinal, estadoFinal); 
+        checkIconosInCorrectState(actionFav, estadoFinal, posIconsToClick);
+    }
+    
+    @Validation (
+    	description="Quedan #{estadoFinal} los iconos asociados a los artículos con posiciones <b>#{posIconsSelected.toString()}</b>",
+    	level=State.Warn)
+    private boolean checkIconosInCorrectState(TypeActionFav actionFav, @SuppressWarnings("unused") String estadoFinal, 
+    										  List<Integer> posIconsSelected) {
+        return (pageGaleria.iconsInCorrectState(posIconsSelected, actionFav));
+    }
    
-   public NombreYRefList selectListadoXColumnasDesktop(NumColumnas numColumnas, NombreYRefList listArticlesGaleriaAnt) 
-   throws Exception {
-       //Step
-	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-       DatosStep datosStep = new DatosStep       (
-           "Seleccionar el link del listado a <b>" + numColumnas.name() + " columnas</b>", 
-           "Aparece un listado de artículos a " + numColumnas.name() + " columnas");
-       try {
-           pageGaleriaDesktop.clickLinkColumnas(numColumnas);
-               
-           datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-       }
-       finally { StepAspect.storeDataAfterStep(datosStep); }         
-
-       //Validaciones.
-       String descripValidac = 
-           "1) Aparece el layout correspondiente al listado a <b>" + numColumnas.name() + " columnas</b>";
-       datosStep.setNOKstateByDefault();  
-       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-       try {
-           if (pageGaleria.getLayoutNumColumnas() != pageGaleriaDesktop.getNumColumnas(numColumnas)) {
-               listVals.add(1, State.Warn);
-           }
-                
-           datosStep.setListResultValidations(listVals);
-       }
-       finally { listVals.checkAndStoreValidations(descripValidac); }       
+    @Step (
+    	description="Seleccionar el link del listado a <b>#{numColumnas.name()} columnas</b>", 
+        expected="Aparece un listado de artículos a #{numColumnas.name()} columnas")
+    public NombreYRefList selectListadoXColumnasDesktop(NumColumnas numColumnas, NombreYRefList listArticlesGaleriaAnt) 
+    throws Exception {
+	    ((PageGaleriaDesktop)pageGaleria).clickLinkColumnas(numColumnas);
+	    checkIsVisibleLayoutListadoXcolumns(numColumnas);
        
-       //Obtenemos y almacenamos los artículos de la galería Nuevo
-       NombreYRefList listArticlesGaleriaAct = pageGaleria.getListaNombreYRefArticulos();
+        NombreYRefList listArticlesGaleriaAct = pageGaleria.getListaNombreYRefArticulos();
+        if (listArticlesGaleriaAnt!=null) {
+        	int articulosComprobar = 20;
+        	checkArticlesEqualsToPreviousGalery(articulosComprobar, listArticlesGaleriaAnt, listArticlesGaleriaAct, numColumnas);
+        }
        
-       int articulosComprobar = 20;
-       if (listArticlesGaleriaAnt!=null) {
-           descripValidac = 
-               "1) Los primeros " + articulosComprobar + " artículos de la galería a " + numColumnas.name() + 
-               " columnas son iguales a los de la anterior galería";
-           datosStep.setNOKstateByDefault();  
-           listVals = ListResultValidation.getNew(datosStep);
-           try {
-               if (!listArticlesGaleriaAct.isArticleListEquals(listArticlesGaleriaAnt, articulosComprobar)) {
-                   listVals.add(2, State.Info);
-                   NombreYRef articleGaleryActualNotFit = listArticlesGaleriaAct.getFirstArticleThatNotFitWith(listArticlesGaleriaAnt);
-                   descripValidac+="<br><b style=\"color:" + State.Info.getColorCss() + "\">Warning!</b>: hay productos de la galería que no cuadran con los de la galería anterior (por ejemplo <b>" + articleGaleryActualNotFit.toString() + "</b>). ";
-                   descripValidac+=listArticlesGaleriaAct.getTableHTLMCompareArticlesGaleria(listArticlesGaleriaAnt);
-               }
-               
-               datosStep.setListResultValidations(listVals);
-           }
-           finally { listVals.checkAndStoreValidations(descripValidac); }
-       }
-       
-       return listArticlesGaleriaAct;
-   }
+        return listArticlesGaleriaAct;
+    }
+    
+    @Validation
+    private ListResultValidation checkArticlesEqualsToPreviousGalery(int articulosComprobar, NombreYRefList listArticlesGaleriaAnt, 
+    																 NombreYRefList listArticlesGaleriaAct, NumColumnas numColumnas) {
+   		ListResultValidation validations = ListResultValidation.getNew();
+   		
+   		boolean articlesEquals = listArticlesGaleriaAct.isArticleListEquals(listArticlesGaleriaAnt, articulosComprobar);
+   		String infoWarning = "";
+   		if (!articlesEquals) {
+   			NombreYRef articleGaleryActualNotFit = listArticlesGaleriaAct.getFirstArticleThatNotFitWith(listArticlesGaleriaAnt);
+   			infoWarning+="<br><b style=\"color:" + State.Info.getColorCss() + "\">Warning!</b>: hay productos de la galería que no cuadran con los de la galería anterior (por ejemplo <b>" + articleGaleryActualNotFit.toString() + "</b>). ";
+   			infoWarning+=listArticlesGaleriaAct.getTableHTLMCompareArticlesGaleria(listArticlesGaleriaAnt);
+   		}
+   		validations.add(
+   			"Los primeros " + articulosComprobar + " artículos de la galería a " + 
+   			numColumnas.name() + " columnas son iguales a los de la anterior galería" + infoWarning,
+   			articlesEquals, State.Info);
+   		
+   		return validations;
+    }
+    
+    @Validation (
+    	description="Aparece el layout correspondiente al listado a <b>#{numColumnas.name()} columnas</b>",
+    	level=State.Warn)
+    private boolean checkIsVisibleLayoutListadoXcolumns(NumColumnas numColumnas) {
+    	return (pageGaleria.getLayoutNumColumnas()==((PageGaleriaDesktop)pageGaleria).getNumColumnas(numColumnas));
+    }
    
-   @Validation
-   public ListResultValidation validaNombresYRefEnOrden(NodoStatus nodoAnt, NodoStatus nodoAct) {
+    @Validation
+    public ListResultValidation validaNombresYRefEnOrden(NodoStatus nodoAnt, NodoStatus nodoAct) {
    		ListResultValidation validations = ListResultValidation.getNew();
    		validations.add(
     		"El número de artículos de la galería Nuevo (" + nodoAct.getArticlesNuevo().size() + ") es igual al del nodo " + 
@@ -669,20 +636,20 @@ public class PageGaleriaStpV {
     		articleGaleryActualNotFit==null, State.Warn);
 	   
    		return validations;
-   }
+    }
 
-   @SuppressWarnings("static-access")
-   public void validateBannerSuperiorIfExistsDesktop() {
+    @SuppressWarnings("static-access")
+    public void validateBannerSuperiorIfExistsDesktop() {
 	   DatosStep datosStep = TestCaseData.getDatosLastStep();
-	   boolean bannerIsVisible = PageGaleriaDesktop.secBannerHead.isVisible(dFTest.driver);
+	   boolean bannerIsVisible = PageGaleriaDesktop.secBannerHead.isVisible(driver);
 	   if (bannerIsVisible) {
-		   if (!PageGaleriaDesktop.secBannerHead.isBannerWithoutTextAccesible(dFTest.driver)) {
+		   if (!PageGaleriaDesktop.secBannerHead.isBannerWithoutTextAccesible(driver)) {
 		       String descripValidac =
 	               "1) El Banner de Cabecera contiene algún texto";
 	           datosStep.setNOKstateByDefault();  
                ListResultValidation listVals = ListResultValidation.getNew(datosStep);            
 	           try {
-	               String textBanner = PageGaleriaDesktop.secBannerHead.getText(dFTest.driver);
+	               String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
 	               if ("".compareTo(textBanner)==0) {
 	                   listVals.add(1, State.Defect);
 	               }
@@ -695,23 +662,12 @@ public class PageGaleriaStpV {
    }
    
    @SuppressWarnings("static-access")
+   @Step (
+       description="Seleccionar el banner superior", 
+       expected="Aparece una galería de artículos")
    public void clickBannerSuperiorIfLinkableDesktop() throws Exception {
-	   boolean bannerIsLincable = PageGaleriaDesktop.secBannerHead.isLinkable(dFTest.driver);
-	   if (bannerIsLincable) {
-	       //Step
-	       DatosStep datosStep = new DatosStep       (
-	           "Seleccionar el banner superior", 
-	           "Aparece una galería de artículos");
-	       try {
-	           PageGaleriaDesktop.secBannerHead.clickBannerIfClickable(dFTest.driver);
-	               
-	           datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-	       }
-	       finally { StepAspect.storeDataAfterStep(datosStep); }     
-	       
-	       int maxSecondsWait = 3;
-	       validaArtEnContenido(maxSecondsWait);
-	   }
+	   PageGaleriaDesktop.secBannerHead.clickBannerIfClickable(driver);     
+	   validaArtEnContenido(3);
    }
    
    @SuppressWarnings("static-access")
@@ -735,14 +691,14 @@ public class PageGaleriaStpV {
        datosStep.setNOKstateByDefault();      
        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
        try {
-           if (!PageGaleriaDesktop.secBannerHead.isVisible(dFTest.driver)) {
+           if (!PageGaleriaDesktop.secBannerHead.isVisible(driver)) {
                listVals.add(1, State.Defect);
            }
-           String textBanner = PageGaleriaDesktop.secBannerHead.getText(dFTest.driver);
+           String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
            if (!UtilsTestMango.textContainsSetenta(textBanner, idioma)) {
                listVals.add(2, State.Warn);
            }
-           int menusDescVisibles = SecMenusDesktop.secMenusFiltroDiscount.getNumberOfVisibleMenus(dFTest.driver);
+           int menusDescVisibles = SecMenusDesktop.secMenusFiltroDiscount.getNumberOfVisibleMenus(driver);
            if (filtrosPercActivated) {
 	           if (menusDescVisibles < minMenusVisibles) {
 	               listVals.add(3, State.Defect);      
@@ -790,18 +746,18 @@ public class PageGaleriaStpV {
 	       datosStep.setNOKstateByDefault();   
 	       listVals = ListResultValidation.getNew(datosStep);
 	       try {
-	           if (!PageGaleriaDesktop.secBannerHead.isVisible(dFTest.driver)) {
+	           if (!PageGaleriaDesktop.secBannerHead.isVisible(driver)) {
 	               listVals.add(1, State.Defect);
 	           }
-	           String textBanner = PageGaleriaDesktop.secBannerHead.getText(dFTest.driver);
+	           String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
 	           if (!UtilsTestMango.textContainsPercentage(textBanner, idioma) &&
 	               !textBanner.contains(saleTraduction)) {
 	               listVals.add(2, State.Defect);
 	           }
-	           if (PageGaleriaDesktop.secBannerHead.isLinkable(dFTest.driver)) {
+	           if (PageGaleriaDesktop.secBannerHead.isLinkable(driver)) {
 	               listVals.add(3, State.Info);
 	           }
-	           if (!PageGaleriaDesktop.secBannerHead.isVisibleLinkInfoRebajas(dFTest.driver)) {
+	           if (!PageGaleriaDesktop.secBannerHead.isVisibleLinkInfoRebajas(driver)) {
 	               listVals.add(4, State.Warn);           
 	           }
 	                
@@ -817,8 +773,8 @@ public class PageGaleriaStpV {
 	       datosStep.setNOKstateByDefault();   
 	       listVals = ListResultValidation.getNew(datosStep);
 	       try {
-	           if (PageGaleriaDesktop.secBannerHead.isVisible(dFTest.driver)) {
-		           String textBanner = PageGaleriaDesktop.secBannerHead.getText(dFTest.driver);
+	           if (PageGaleriaDesktop.secBannerHead.isVisible(driver)) {
+		           String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
 		           if (UtilsTestMango.textContainsPercentage(textBanner, idioma) ||
 		               textBanner.contains(saleTraduction)) {
 		               listVals.add(1, State.Defect);
@@ -830,7 +786,7 @@ public class PageGaleriaStpV {
 	       finally { listVals.checkAndStoreValidations(descripValidac); }
        }
        
-       SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(Channel.desktop, AppEcom.shop, dFTest.driver);
+       SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(Channel.desktop, AppEcom.shop, driver);
        if (salesOnInCountry) {
 	       if (!isGaleriaSale) {
 	           //Validaciones.
@@ -1006,37 +962,27 @@ public class PageGaleriaStpV {
        validation.setDescription(descriptionOrigin + textToAdd);
    }
    
-   @SuppressWarnings("static-access")
-   public static void clickMoreInfoBannerRebajasJun2018(DataFmwkTest dFTest) throws Exception {
-       //Step
-       DatosStep datosStep = new DatosStep       (
-           "Seleccionamos el link <b>Más Info</b>", 
-           "Se hace visible el aviso legal");
-       try {
-    	   PageGaleriaDesktop.secBannerHead.clickLinkInfoRebajas(dFTest.driver);
-               
-           datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-       }
-       finally { StepAspect.storeDataAfterStep(datosStep); }         
-
-       //Validaciones
-       int maxSecondsToWait = 1;
-       String descripValidac = 
-           "<b style=\"color:blue\">Rebajas</b></br>" +
-           "1) Se despliega la información relativa a las rebajas (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" +
-           "2) Aparece el link de <b>Menos info</b>";
-       datosStep.setNOKstateByDefault();      
-       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-       try {
-           if (!PageGaleriaDesktop.secBannerHead.isVisibleInfoRebajasUntil(maxSecondsToWait, dFTest.driver)) {
-           	   listVals.add(1, State.Warn);
-           }
-           if (!PageGaleriaDesktop.secBannerHead.isVisibleLinkTextInfoRebajas(TypeLinkInfo.less, dFTest.driver)) {
-               listVals.add(2, State.Warn);
-           }
-                
-           datosStep.setListResultValidations(listVals);
-       }
-       finally { listVals.checkAndStoreValidations(descripValidac); }	   
-   }
+    @SuppressWarnings("static-access")
+    @Step (
+    	description="Seleccionamos el link <b>Más Info</b>", 
+        expected="Se hace visible el aviso legal")
+    public static void clickMoreInfoBannerRebajasJun2018(WebDriver driver) throws Exception {
+    	PageGaleriaDesktop.secBannerHead.clickLinkInfoRebajas(driver);     
+    	checkAfterClickInfoRebajas(driver);
+    }
+    
+    @SuppressWarnings("static-access")
+    @Validation
+    private static ListResultValidation checkAfterClickInfoRebajas(WebDriver driver) throws Exception {
+		ListResultValidation validations = ListResultValidation.getNew();
+	    int maxSecondsToWait = 1;
+    	validations.add(
+    		"<b style=\"color:blue\">Rebajas</b></br>" +
+    		"Se despliega la información relativa a las rebajas (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>",
+    		PageGaleriaDesktop.secBannerHead.isVisibleInfoRebajasUntil(maxSecondsToWait, driver), State.Warn);
+    	validations.add(
+    		"Aparece el link de <b>Menos info</b>",
+    		PageGaleriaDesktop.secBannerHead.isVisibleLinkTextInfoRebajas(TypeLinkInfo.less, driver), State.Warn);
+    	return validations;
+    }
 }

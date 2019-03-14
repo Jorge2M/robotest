@@ -10,11 +10,9 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
@@ -267,20 +265,19 @@ public class SecMenusWrapperStpV {
     throws Exception {
     	SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app, driver);
     	if (filtrosCollection.isVisibleMenu(FilterCollection.nextSeason)) {
-    		DataFmwkTest dFTest = TestCaseData.getdFTest();
-    		selectFiltroCollection(typeMenu, channel, app, dFTest);
+    		selectFiltroCollection(typeMenu, channel, app, driver);
     	}
     }
     
     @Step (
     	description="Seleccionar filtro de colecciones <b>#{typeMenu}</b>", 
         expected="Aparece una galería con artículos de temporadas#{typeMenu.getListTempArticles()}")
-    public static void selectFiltroCollection(FilterCollection typeMenu, Channel channel, AppEcom app, DataFmwkTest dFTest) 
+    public static void selectFiltroCollection(FilterCollection typeMenu, Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-    	SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app, dFTest.driver);
+    	SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app, driver);
     	filtrosCollection.click(typeMenu);        
         if (channel==Channel.desktop) {
-	        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app);
+	        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, driver);
 	        if (typeMenu == FilterCollection.sale) {
 	            pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles());
 	            pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.norebajado, State.Warn);

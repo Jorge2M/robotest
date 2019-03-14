@@ -165,7 +165,7 @@ public class SecMenuLateralMobilStpV {
             validaSelecLineaNinosWithSublineas(lineaType, app, driver);
             break;
         case articulos:
-            PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.movil_web, app);
+            PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.movil_web, app, driver);
             int maxSecondsWait = 3;
             pageGaleriaStpV.validaArtEnContenido(maxSecondsWait);
             break;

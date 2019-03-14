@@ -92,7 +92,7 @@ public class Bolsa extends GestorWebDriver {
         int posArticulo=1;
         boolean articleAvailable = false;
         while (!articleAvailable && posArticulo<5) {
-        	PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);
+        	PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         	pageGaleriaStpV.selectLinkAddArticuloToBagDesktop(posArticulo);
             articleAvailable = pageGaleriaStpV.selectTallaArticuloDesktop(posArticulo, 1/*posTalla*/, dataBag, dCtxSh);
             if (!articleAvailable) {

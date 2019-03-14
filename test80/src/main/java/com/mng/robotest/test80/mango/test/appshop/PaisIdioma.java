@@ -20,6 +20,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.TypeContentDesk;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
+import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
@@ -138,6 +139,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
         }
     }
     
+	@SuppressWarnings("static-access")
 	private void validaLinea(Linea linea, Sublinea sublinea, DataCtxShop dCtxShI, DataFmwkTest dFTest) throws Exception {
         //Obtenemos el tipo de línea/sublínea
         LineaType lineaType = linea.getType();
@@ -163,8 +165,11 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
             	Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "pantalones"));
                 SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxShI, dFTest.driver);
                 if (this.recorreBanners) {
-                    PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);
-                	pageGaleriaStpV.clickBannerSuperiorIfLinkableDesktop();
+                    PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+					boolean bannerIsLincable = PageGaleriaDesktop.secBannerHead.isLinkable(dFTest.driver);
+                    if (bannerIsLincable) {
+                    	pageGaleriaStpV.clickBannerSuperiorIfLinkableDesktop();
+                    }
                 }
             }
         }

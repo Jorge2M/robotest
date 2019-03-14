@@ -135,7 +135,7 @@ public class TestNodos extends GestorWebDriver {
                 this.nodo.setArticlesNuevo(listArticlesNuevoAct);
                 
                 //Validamos que los artículos de la galería son los mismos (y están igualmente ordenados) que en el nodo anterior
-                PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);
+                PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
                 if (nodoAnt!=null && nodoAnt.getArticlesNuevo()!=null) {
                     pageGaleriaStpV.validaNombresYRefEnOrden(nodoAnt, this.nodo);
                 }

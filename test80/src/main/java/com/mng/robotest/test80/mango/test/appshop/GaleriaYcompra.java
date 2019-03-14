@@ -107,7 +107,7 @@ public class GaleriaYcompra extends GestorWebDriver {
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
         SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest.driver);
         
-        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE);
+        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         LocationArticle loc1rsArticle1rstPage = LocationArticle.getInstanceInPage(2, 1);
         pageGaleriaStpV.selectArticuloEnPestanyaAndBack(loc1rsArticle1rstPage);
     }

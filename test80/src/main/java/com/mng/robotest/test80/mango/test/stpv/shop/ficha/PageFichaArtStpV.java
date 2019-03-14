@@ -331,7 +331,7 @@ public class PageFichaArtStpV {
     @Validation
     private ListResultValidation checkCapaAltaFavoritos() {
     	ListResultValidation validations = ListResultValidation.getNew();
-        int maxSecondsWait1 = 2;
+        int maxSecondsWait1 = 3;
 	 	validations.add(
 			"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + maxSecondsWait1 + " segundos)<br>",
 			pageFicha.isVisibleDivAnadiendoAFavoritosUntil(maxSecondsWait1), State.Info);
