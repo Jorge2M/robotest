@@ -24,7 +24,7 @@ import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.xmlprogram.*;
 
-public class Test80mng {
+public class Test80mng { 
 
     public static String HelpNameParam = "help";
     public static String SuiteNameParam = "suite";
