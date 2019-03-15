@@ -68,9 +68,9 @@ public class Loyalty extends GestorWebDriver {
     /**
      * Realiza un checkout utilizando el Saldo en Cuenta 
      */
-    @Test (
-        groups={"Loyalty", "Canal:desktop_App:shop"},
-        description="Se realiza una compra mediante un usuario loyalty")
+//    @Test (
+//        groups={"Loyalty", "Canal:desktop_App:shop"},
+//        description="Se realiza una compra mediante un usuario loyalty")
     public void LOY001_compra() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
