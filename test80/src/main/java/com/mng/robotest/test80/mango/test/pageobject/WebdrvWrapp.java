@@ -29,7 +29,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
 
 
-public class WebdrvWrapp extends ElementPageFunctions {
+public class WebdrvWrapp extends ElementPageFunctions { 
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     public enum TypeOfClick {webdriver, javascript}
 
