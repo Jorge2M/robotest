@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.ResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
@@ -219,8 +219,8 @@ public class PageGaleriaStpV {
     }
     
     @Validation
-    private ListResultValidation checkVisibilityFooter(int pageToScroll, AppEcom app, WebDriver driver) throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private ChecksResult checkVisibilityFooter(int pageToScroll, AppEcom app, WebDriver driver) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
         boolean isVisibleFooter = SecFooter.isVisible(app, driver);
         if (pageToScroll>=PageGaleriaDesktop.maxPageToScroll) {
           	validations.add(
@@ -247,8 +247,8 @@ public class PageGaleriaStpV {
     }
     
     @Validation
-    private ListResultValidation checkNotRepeatedArticles() {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private ChecksResult checkNotRepeatedArticles() {
+    	ChecksResult validations = ChecksResult.getNew();
         ArrayList<NombreYRef> productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
         String producRepeatedWarning = "";
         if (productsRepeated!=null && productsRepeated.size()>0) {
@@ -303,8 +303,8 @@ public class PageGaleriaStpV {
     }
     
     @Validation
-    private ListResultValidation checkOrderListArticles(FilterOrdenacion typeOrdenacion, int numArticulosPant, int numArticulosValidar) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private ChecksResult checkOrderListArticles(FilterOrdenacion typeOrdenacion, int numArticulosPant, int numArticulosValidar) {
+    	ChecksResult validations = ChecksResult.getNew();
       	validations.add(
     		"Aparecen > 1 prendas<br>",
     		numArticulosPant > 1, State.Warn);
@@ -329,8 +329,8 @@ public class PageGaleriaStpV {
     }
     
     @Validation
-    private ListResultValidation checkBackTo1ersElementOk(DataCtxShop dCtxSh) throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private ChecksResult checkBackTo1ersElementOk(DataCtxShop dCtxSh) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
       	validations.add(
     		"Es clickable el 1er elemento de la lista<br>",
     		pageGaleria.isClickableArticuloUntil(1, 0), State.Warn);
@@ -488,8 +488,8 @@ public class PageGaleriaStpV {
    
    	@SuppressWarnings("static-access")
     @Validation
-    private ListResultValidation checkIsFichaArticle(String nombre1erArt, String precio1erArt, int maxSecondsWait) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private ChecksResult checkIsFichaArticle(String nombre1erArt, String precio1erArt, int maxSecondsWait) {
+    	ChecksResult validations = ChecksResult.getNew();
     	
     	PageFicha pageFicha = PageFicha.newInstance(app, channel, driver);
       	validations.add(
@@ -591,9 +591,9 @@ public class PageGaleriaStpV {
     }
     
     @Validation
-    private ListResultValidation checkArticlesEqualsToPreviousGalery(int articulosComprobar, NombreYRefList listArticlesGaleriaAnt, 
+    private ChecksResult checkArticlesEqualsToPreviousGalery(int articulosComprobar, NombreYRefList listArticlesGaleriaAnt, 
     																 NombreYRefList listArticlesGaleriaAct, NumColumnas numColumnas) {
-   		ListResultValidation validations = ListResultValidation.getNew();
+   		ChecksResult validations = ChecksResult.getNew();
    		
    		boolean articlesEquals = listArticlesGaleriaAct.isArticleListEquals(listArticlesGaleriaAnt, articulosComprobar);
    		String infoWarning = "";
@@ -618,8 +618,8 @@ public class PageGaleriaStpV {
     }
    
     @Validation
-    public ListResultValidation validaNombresYRefEnOrden(NodoStatus nodoAnt, NodoStatus nodoAct) {
-   		ListResultValidation validations = ListResultValidation.getNew();
+    public ChecksResult validaNombresYRefEnOrden(NodoStatus nodoAnt, NodoStatus nodoAct) {
+   		ChecksResult validations = ChecksResult.getNew();
    		validations.add(
     		"El número de artículos de la galería Nuevo (" + nodoAct.getArticlesNuevo().size() + ") es igual al del nodo " + 
     		nodoAnt.getIp() + " (" + nodoAnt.getArticlesNuevo().size() + ")<br>",
@@ -647,7 +647,7 @@ public class PageGaleriaStpV {
 		       String descripValidac =
 	               "1) El Banner de Cabecera contiene algún texto";
 	           datosStep.setNOKstateByDefault();  
-               ListResultValidation listVals = ListResultValidation.getNew(datosStep);            
+               ChecksResult listVals = ChecksResult.getNew(datosStep);            
 	           try {
 	               String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
 	               if ("".compareTo(textBanner)==0) {
@@ -689,7 +689,7 @@ public class PageGaleriaStpV {
     	   descripValidac+=
     	   "3) No aparece ningún filtro de descuento";
        datosStep.setNOKstateByDefault();      
-       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+       ChecksResult listVals = ChecksResult.getNew(datosStep);
        try {
            if (!PageGaleriaDesktop.secBannerHead.isVisible(driver)) {
                listVals.add(1, State.Defect);
@@ -724,7 +724,7 @@ public class PageGaleriaStpV {
        String descripValidac = 
            "1) Estamos en la página de Galería";
        datosStep.setNOKstateByDefault();     
-       ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+       ChecksResult listVals = ChecksResult.getNew(datosStep);
        try {
            if (!pageGaleriaDesktop.isPage()) {
                listVals.add(1, State.Warn);
@@ -744,7 +744,7 @@ public class PageGaleriaStpV {
 	           "3) El banner de cabecera no es lincable<br>" +
 	           "4) El banner de cabecera contiene un link de \"Más info\"";
 	       datosStep.setNOKstateByDefault();   
-	       listVals = ListResultValidation.getNew(datosStep);
+	       listVals = ChecksResult.getNew(datosStep);
 	       try {
 	           if (!PageGaleriaDesktop.secBannerHead.isVisible(driver)) {
 	               listVals.add(1, State.Defect);
@@ -771,7 +771,7 @@ public class PageGaleriaStpV {
 	           "<b style=\"color:blue\">Rebajas</b></br>" +
 	           "1) El banner de cabecera NO es de rebajas  (NO contiene un símbolo de porcentaje o \"" + saleTraduction + "\")";
 	       datosStep.setNOKstateByDefault();   
-	       listVals = ListResultValidation.getNew(datosStep);
+	       listVals = ChecksResult.getNew(datosStep);
 	       try {
 	           if (PageGaleriaDesktop.secBannerHead.isVisible(driver)) {
 		           String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
@@ -797,7 +797,7 @@ public class PageGaleriaStpV {
 	               "3) Aparece el filtro para las ofertas <b>Sale</b><br>" +
 	               "4) Aparece el filtro para la nueva temporada <b>Next season preview</b>";
 	           datosStep.setNOKstateByDefault();    
-	           listVals = ListResultValidation.getNew(datosStep);
+	           listVals = ChecksResult.getNew(datosStep);
 	           try {
 	               if (!filtrosCollection.isVisible()) {
 	                   listVals.add(1, State.Defect);
@@ -822,7 +822,7 @@ public class PageGaleriaStpV {
 	               "<b style=\"color:blue\">Rebajas</b></br>" +
 	               "1) No son visibles los menús laterales de filtro a nivel detemporadas (Collection)<b>";
 	           datosStep.setNOKstateByDefault();   
-	           listVals = ListResultValidation.getNew(datosStep);
+	           listVals = ChecksResult.getNew(datosStep);
 	           try {
 	               if (filtrosCollection.isVisible()) {
 	                   listVals.add(1, State.Defect);
@@ -839,7 +839,7 @@ public class PageGaleriaStpV {
                "<b style=\"color:blue\">Rebajas</b></br>" +
                "1) No aparece el filtro para las ofertas <b>Sale</b>";
            datosStep.setNOKstateByDefault();    
-           listVals = ListResultValidation.getNew(datosStep);
+           listVals = ChecksResult.getNew(datosStep);
            try {
                if (filtrosCollection.isVisibleMenu(FilterCollection.sale)) {
                    listVals.add(1, State.Warn);
@@ -865,7 +865,7 @@ public class PageGaleriaStpV {
 	           "1) El 1er artículo pertenece a alguna de las temporadas " + ordenType.getTemporadasIniciales() + " <br>" +
 	           "2) Los artículos aparecen ordenados por <b>" + ordenType.toString() + "</b>";
 	       datosStep.setNOKstateByDefault(); 
-	       listVals = ListResultValidation.getNew(datosStep);
+	       listVals = ChecksResult.getNew(datosStep);
 	       try {
 	           State levelErrorValidation2 = State.Info_NoHardcopy;
 	           String ref1rstArticle = pageGaleria.getReferencia(1/*posArticle*/);
@@ -905,8 +905,8 @@ public class PageGaleriaStpV {
    }
    
    @Validation
-   public ListResultValidation validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles, State levelError) {
-	   ListResultValidation validations = ListResultValidation.getNew();
+   public ChecksResult validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles, State levelError) {
+	   ChecksResult validations = ChecksResult.getNew();
 	   	
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 	   List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFromOther, listTemporadas);
@@ -936,8 +936,8 @@ public class PageGaleriaStpV {
    }
    
    @Validation
-   public ListResultValidation validaNotArticlesOfTypeDesktop(TypeArticle typeArticle, State levelError) {
-	   	ListResultValidation validations = ListResultValidation.getNew();
+   public ChecksResult validaNotArticlesOfTypeDesktop(TypeArticle typeArticle, State levelError) {
+	   	ChecksResult validations = ChecksResult.getNew();
 	   	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 	   	List<String> listArtWrong = pageGaleriaDesktop.getArticlesOfType(typeArticle);
 	   	validations.add(
@@ -973,8 +973,8 @@ public class PageGaleriaStpV {
     
     @SuppressWarnings("static-access")
     @Validation
-    private static ListResultValidation checkAfterClickInfoRebajas(WebDriver driver) throws Exception {
-		ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkAfterClickInfoRebajas(WebDriver driver) throws Exception {
+		ChecksResult validations = ChecksResult.getNew();
 	    int maxSecondsToWait = 1;
     	validations.add(
     		"<b style=\"color:blue\">Rebajas</b></br>" +

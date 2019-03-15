@@ -14,7 +14,7 @@ public class InfoValidation {
 	private final JoinPoint joinPoint;
 	private final Validation valAnnotation;
 	private final Object resultMethod;
-	private final ListResultValidation listResultValidations;
+	private final ChecksResult listResultValidations;
 	
 	private InfoValidation(JoinPoint joinPoint, Object resultMethod) {
 		this.joinPoint = joinPoint;
@@ -38,7 +38,7 @@ public class InfoValidation {
 		return (new InfoValidation(joinPoint));
 	}
 	
-	public ListResultValidation getListResultValidation() {
+	public ChecksResult getListResultValidation() {
 		return listResultValidations;
 	}
 	
@@ -64,15 +64,15 @@ public class InfoValidation {
         return (validationAnnotation);
     }
 	
-	private ListResultValidation getValResultFromMethodData() {
-		ListResultValidation valResult = getValidationResultFromObjectMethodReturn();
+	private ChecksResult getValResultFromMethodData() {
+		ChecksResult valResult = getValidationResultFromObjectMethodReturn();
 		modifyValidationResultAccordingAnnotationParams(valResult);
 		return valResult;
 	}
 	
-    private ListResultValidation getValidationResultFromObjectMethodReturn() {
+    private ChecksResult getValidationResultFromObjectMethodReturn() {
     	DatosStep datosStep = getDatosStepParam();
-    	ListResultValidation valResult = ListResultValidation.getNew(datosStep);
+    	ChecksResult valResult = ChecksResult.getNew(datosStep);
     	if (resultMethod!=null) {
 	        if (resultMethod instanceof Boolean) {
 	        	ResultValidation validation = new ResultValidation(1);
@@ -81,8 +81,8 @@ public class InfoValidation {
 	        	return valResult;
 	        }
 	        
-	        if (resultMethod instanceof ListResultValidation) {
-	        	valResult = (ListResultValidation)resultMethod;
+	        if (resultMethod instanceof ChecksResult) {
+	        	valResult = (ChecksResult)resultMethod;
 	        	return valResult;
 	        }
 	        
@@ -94,7 +94,7 @@ public class InfoValidation {
     	}
     }
     
-    private void modifyValidationResultAccordingAnnotationParams(ListResultValidation valResult) {
+    private void modifyValidationResultAccordingAnnotationParams(ChecksResult valResult) {
     	if (valResult.size()>0) {
 	    	if ("".compareTo(valResult.get(0).getDescription())==0) {
 	    		MatcherWithMethodParams matcher = MatcherWithMethodParams.from(joinPoint);

@@ -7,7 +7,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -58,7 +58,7 @@ public class PagePedidosMantoStpV {
             "6) En pantalla aparece el importe asociado: " +  dataPedido.getImporteTotalManto() + "<br>" +
             "7) En la columna " + IdColumn.tarjeta.textoColumna + " aparece el tipo de tarjeta: " + dataPedido.getCodtipopago();
         datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {
             if (!PagePedidos.isInvisibleCapaLoadingUntil(maxSecondsToWait, dFTest.driver)) {
                 listVals.add(1, State.Warn);
@@ -133,7 +133,7 @@ public class PagePedidosMantoStpV {
 
 		String descripValidac = "1) Tenemos código de pedido " + dPedidoPrueba.getCodpedido();
 		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+		ChecksResult listVals = ChecksResult.getNew(datosStep);
 		try {
 			if (dPedidoPrueba.getCodpedido().equals("")) {
 				listVals.add(1, State.Defect);
@@ -179,7 +179,7 @@ public class PagePedidosMantoStpV {
 
 		String descripValidac = "1) El pedido tiene las referencias " + referencias.toString();
 		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+		ChecksResult listVals = ChecksResult.getNew(datosStep);
 		try {
 			if (dPedidoPrueba.getDataBag().getListArticulos().isEmpty()) {
 				listVals.add(1, State.Defect);
@@ -224,7 +224,7 @@ public class PagePedidosMantoStpV {
 		String descripValidac = "1) Tenemos el DNI del cliente " + dPedidoPrueba.getPago().getDni() + "<br>"
 				+ "2) Tenemos el Email del cliente " + dPedidoPrueba.getPago().getUseremail();
 		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+		ChecksResult listVals = ChecksResult.getNew(datosStep);
 		try {
 			if (dPedidoPrueba.getPago().getDni().equals("")) {
 				listVals.add(1, State.Defect);
@@ -265,7 +265,7 @@ public class PagePedidosMantoStpV {
 
 		String descripValidac = "1) Tenemos la tienda física " + dPedidoPrueba.getDataDeliveryPoint().getCodigo();
 		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+		ChecksResult listVals = ChecksResult.getNew(datosStep);
 		try {
 			if (dPedidoPrueba.getDataDeliveryPoint().getCodigo().equals("")) {
 				listVals.add(1, State.Defect);

@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
@@ -41,7 +41,7 @@ public class PageBolsasMantoStpV {
         descripValidac+=
             "4) En la columna 7 aparece el email asociado: " + dataPedido.getEmailCheckout();
         datosStep.setNOKstateByDefault(); 
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {
             if (!PageBolsas.presentLinkPedidoInBolsaUntil(dataPedido.getCodigoPedidoManto(), maxSecondsToWait, dFTest.driver)) {
                 listVals.add(1, State.Warn);

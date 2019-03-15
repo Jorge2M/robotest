@@ -5,7 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -36,9 +36,9 @@ public class SecSelectDPointStpV {
     }
 	
 	@Validation
-	private static ListResultValidation checkDroppointSelectedContainsDirecc(DataSearchDeliveryPoint dataSearchDp, WebDriver driver) 
+	private static ChecksResult checkDroppointSelectedContainsDirecc(DataSearchDeliveryPoint dataSearchDp, WebDriver driver) 
 	throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    	ChecksResult validations = ChecksResult.getNew();
 	    int maxSecondsWait = 5;
 	    State stateVal = State.Warn;
 	    if (dataSearchDp.typeData==DataSearchDp.CodigoPostal) {
@@ -51,8 +51,8 @@ public class SecSelectDPointStpV {
 	}
     
     @Validation
-    public static ListResultValidation validaDeliveryPointOfType(TypeDeliveryPoint typeDp, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validaDeliveryPointOfType(TypeDeliveryPoint typeDp, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 3;
 	 	validations.add(
 			"Es visible el 1er delivery point de la lista (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",

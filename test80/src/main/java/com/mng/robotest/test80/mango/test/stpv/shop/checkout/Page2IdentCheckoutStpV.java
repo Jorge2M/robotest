@@ -6,7 +6,7 @@ import java.util.HashMap;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -18,8 +18,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2IdentChe
 public class Page2IdentCheckoutStpV {
     
 	@Validation
-    public static ListResultValidation validateIsPage(boolean emailYetExists, int maxSecondsWait, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsPage(boolean emailYetExists, int maxSecondsWait, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + maxSecondsWait + ")<br>",
 			Page2IdentCheckout.isPageUntil(maxSecondsWait, driver), State.Defect);
@@ -79,8 +79,8 @@ public class Page2IdentCheckoutStpV {
     }
     
     @Validation
-    public static ListResultValidation validaRGPDText(Pais pais, WebDriver driver) {  
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validaRGPDText(Pais pais, WebDriver driver) {  
+    	ChecksResult validations = ChecksResult.getNew();
 		if (pais.getRgpd().equals("S")) {
 		 	validations.add(
 				"El texto legal de RGPD <b>SI</b> existe para el pais " + pais.getCodigo_pais() + "<br>",

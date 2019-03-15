@@ -10,7 +10,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
@@ -48,7 +48,7 @@ public class SecMenusWrapperStpV {
     	DatosStep datosStep = TestCaseData.getDatosLastStep();
         String descripValidac = "";
         datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {
             //Ejecutamos las validaciones y obtenemos el literal con la descrpción de cada una de ellas
             descripValidac = getListaValidacionesLineas(listVals, pais, app, channel, driver);
@@ -63,7 +63,7 @@ public class SecMenusWrapperStpV {
      * @listVals con la lista de validaciones fallidas si las hubiera
      * @return la lista de validaciones
      */
-    private static String getListaValidacionesLineas(ListResultValidation listVals, Pais pais, AppEcom app, Channel channel, WebDriver driver) 
+    private static String getListaValidacionesLineas(ChecksResult listVals, Pais pais, AppEcom app, Channel channel, WebDriver driver) 
     throws Exception {
         LineaType[] lineasToTest = Linea.LineaType.values();
         int numValidacion = 0;
@@ -204,9 +204,9 @@ public class SecMenusWrapperStpV {
     }
     
 	@Validation
-    public static ListResultValidation validateGaleriaAfeterSelectMenu(DataCtxShop dCtxSh, WebDriver driver) 
+    public static ChecksResult validateGaleriaAfeterSelectMenu(DataCtxShop dCtxSh, WebDriver driver) 
 	throws Exception {
-		ListResultValidation validations = ListResultValidation.getNew();
+		ChecksResult validations = ChecksResult.getNew();
 		PageGaleria pageGaleria = PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		int maxSecondsToWaitArticle = 3;
 		int maxSecondsToWaitIcon = 2;

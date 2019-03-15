@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -75,8 +75,8 @@ public class SecBuscadorStpV {
     }
     
     @Validation
-    private static ListResultValidation appearsProductsOfCategoria(String categoriaABuscar, PageGaleria pageGaleria) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult appearsProductsOfCategoria(String categoriaABuscar, PageGaleria pageGaleria) {
+    	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 3;
     	String producSin1erCaracter = categoriaABuscar.substring(1, categoriaABuscar.length()-1).toLowerCase();
     	validations.add(

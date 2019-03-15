@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.amazon;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -14,8 +14,8 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PageAmazonIdentStpV {
     
 	@Validation
-    public static ListResultValidation validateIsPage(Pais pais, Channel channel, DataPedido dataPedido, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsPage(Pais pais, Channel channel, DataPedido dataPedido, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
     	validations.add(
     		"Aparece una página con el logo de Amazon<br>",
     		PageAmazonIdent.isLogoAmazon(driver), State.Warn);

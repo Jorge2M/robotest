@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
@@ -42,8 +42,8 @@ public class PagePostfCodSegStpV {
     }
     
     @Validation
-    public static ListResultValidation validateIsPageTest(String nombrePago, String importeTotal, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsPageTest(String nombrePago, String importeTotal, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
 	   	validations.add(
     		"Aparece la pasarela de pagos de PostFinance E-Payment de Test<br>",
     		PagePostfCodSeg.isPasarelaPostfinanceTest(driver, nombrePago), State.Defect);
@@ -67,8 +67,8 @@ public class PagePostfCodSegStpV {
     }
     
     @Validation
-    public static ListResultValidation validateIsPagePro(String importeTotal, String codPais, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsPagePro(String importeTotal, String codPais, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 5;
 	   	validations.add(
     		"Aparece la pasarela de pagos de PostFinance E-Payment (la esperamos hasta " + maxSecondsWait + " segundos)<br>",

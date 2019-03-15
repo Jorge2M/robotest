@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -39,8 +39,8 @@ public class SecMetodoEnvioDesktopStpV {
     }
     
     @Validation
-    public static ListResultValidation validaBlockSelectedDesktop(TipoTransporte tipoTransporte, WebDriver driver) throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validaBlockSelectedDesktop(TipoTransporte tipoTransporte, WebDriver driver) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
       	validations.add(
     		"Desaparece la capa de Loading  (lo esperamos hasta " + maxSecondsWait + " segundos) <br>",

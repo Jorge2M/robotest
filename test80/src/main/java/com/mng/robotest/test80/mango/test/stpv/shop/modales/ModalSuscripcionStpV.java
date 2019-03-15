@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.modales;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -28,8 +28,8 @@ public class ModalSuscripcionStpV {
     }
 	
 	@Validation
-	private static ListResultValidation checkExistsTextsRGPD(String codigoPais, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkExistsTextsRGPD(String codigoPais, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
       	validations.add(
     		"El texto de info de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + codigoPais + "<br>",
     		ModalSuscripcion.isTextoRGPDPresent(driver), State.Defect);		
@@ -40,8 +40,8 @@ public class ModalSuscripcionStpV {
 	}
 	
 	@Validation
-	private static ListResultValidation checkNotExistsTextsRGPD(String codigoPais, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkNotExistsTextsRGPD(String codigoPais, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
       	validations.add(
     		"El texto de info de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + codigoPais + "<br>",
     		!ModalSuscripcion.isTextoRGPDPresent(driver), State.Defect);		

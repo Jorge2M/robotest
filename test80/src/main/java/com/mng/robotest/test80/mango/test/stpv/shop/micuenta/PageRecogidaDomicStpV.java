@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageRecADomic;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
@@ -11,8 +11,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 public class PageRecogidaDomicStpV {
 
     @Validation
-    public static ListResultValidation vaidaIsPageSinDevoluciones (WebDriver driver) throws Exception {
-        ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult vaidaIsPageSinDevoluciones (WebDriver driver) throws Exception {
+        ChecksResult validations = ChecksResult.getNew();
         validations.add(
         	"Aparece la página de Recogida a Domicilio<br>",
         	PageRecADomic.isPage(driver), State.Defect);

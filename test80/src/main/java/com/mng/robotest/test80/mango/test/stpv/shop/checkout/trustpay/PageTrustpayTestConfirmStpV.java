@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.trustpay;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.trustpay.PageTrustpayTestConfirm;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.trustpay.PageTrustpayTestConfirm.typeButtons;
@@ -11,8 +11,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.trustpay.Page
 public class PageTrustpayTestConfirmStpV {
     
 	@Validation
-    public static ListResultValidation validateIsPage(WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsPage(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
     	validations.add(
     		"Figura el botón \"OK\"<br>",
     		PageTrustpayTestConfirm.isPresentButton(typeButtons.OK, driver), State.Defect);

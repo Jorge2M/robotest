@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard;
 
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
@@ -17,8 +17,8 @@ public class PageKoCardINIpay1MobilStpV2 {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
     @Validation
-    public static ListResultValidation validateIsPage(WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsPage(WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
       	validations.add(
     		"Aparece una página de INIpay<br>",
     		PageKoCardINIpay1Mobil.isPage(driver), State.Warn);

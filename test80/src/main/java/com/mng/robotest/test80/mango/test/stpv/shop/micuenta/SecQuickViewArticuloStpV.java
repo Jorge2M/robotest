@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompras;
@@ -11,8 +11,8 @@ public class SecQuickViewArticuloStpV {
     
     @SuppressWarnings("static-access")
     @Validation
-    public static ListResultValidation validateIsOk(ArticuloScreen articulo, WebDriver driver) {
-        ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsOk(ArticuloScreen articulo, WebDriver driver) {
+        ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 2;
         validations.add(
         	"Aparece el quickview correspondiente al artículo (la esperamos hasta " + maxSecondsWait + " segundos)<br>",

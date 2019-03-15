@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.PageAmexInputTarjeta;
@@ -16,8 +16,8 @@ public class PageAmexInputTarjetaStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 
     @Validation
-    public static ListResultValidation validateIsPageOk(String importeTotal, String codPais, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsPageOk(String importeTotal, String codPais, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
 	 	validations.add(
 			"Aparece la pasarela de pagos de Banco Sabadell (la esperamos hasta " + maxSecondsWait + " segundos)<br>",

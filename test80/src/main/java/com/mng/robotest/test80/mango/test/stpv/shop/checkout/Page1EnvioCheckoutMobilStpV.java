@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -28,8 +28,8 @@ public class Page1EnvioCheckoutMobilStpV {
     public static ModalDroppointsStpV modalDroppoints;
     
     @Validation
-    public static ListResultValidation validateIsPage(boolean userLogged, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsPage(boolean userLogged, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"Aparece la página correspondiente al paso-1<br>",
 			WebdrvWrapp.isElementPresent(driver, By.xpath("//h2[@data-toggle='step1']")), State.Warn);
@@ -94,8 +94,8 @@ public class Page1EnvioCheckoutMobilStpV {
     }
     
     @Validation
-    public static ListResultValidation validaResultImputPromoEmpl(WebDriver driver) throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validaResultImputPromoEmpl(WebDriver driver) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 2;
 	 	validations.add(
 			"Aparece el descuento total aplicado al empleado (en menos de " + maxSecondsWait + " segundos)<br>",

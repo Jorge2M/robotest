@@ -3,15 +3,15 @@ package com.mng.robotest.test80.mango.test.stpv.shop.modales;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalBuscadorTiendas;
 
 public class ModalBuscadorTiendasStpV {
 
 	@Validation
-    public static ListResultValidation validaBusquedaConResultados(WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validaBusquedaConResultados(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
 	 	validations.add(
 			"La capa de búsqueda es visible<br>",

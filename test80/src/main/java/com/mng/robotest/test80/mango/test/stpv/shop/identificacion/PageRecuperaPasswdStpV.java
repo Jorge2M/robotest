@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.identificacion;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageRecuperaPasswd;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
@@ -12,8 +12,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 public class PageRecuperaPasswdStpV {
     
 	@Validation
-    public static ListResultValidation isPage(WebDriver driver) throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult isPage(WebDriver driver) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsToWait = 2;
     	validations.add(
     		"Aparece la pantalla de recuperación de la contraseña (la esperamos hasta " + maxSecondsToWait + " segundos)<br>",
@@ -42,8 +42,8 @@ public class PageRecuperaPasswdStpV {
     }
     
     @Validation
-    private static ListResultValidation isPageCambioPassword(WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult isPageCambioPassword(WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsToWait = 2;
     	validations.add(
         	"Aparece el mensaje de \"Revisa tu email\" (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>",

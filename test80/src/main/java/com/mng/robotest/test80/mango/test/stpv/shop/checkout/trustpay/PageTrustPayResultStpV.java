@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.trustpay;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.trustpay.PageTrustPayResult;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -11,8 +11,8 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PageTrustPayResultStpV {
     
 	@Validation
-    public static ListResultValidation validateIsPage(String importeTotal, String codPais, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsPage(String importeTotal, String codPais, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 		String textHeader = "Payment In Progress";
 	 	validations.add(
 			"Figura el encabezamiento \"" + textHeader + "<br>",

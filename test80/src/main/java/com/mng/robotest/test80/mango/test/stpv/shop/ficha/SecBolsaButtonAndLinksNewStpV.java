@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -48,8 +48,8 @@ public class SecBolsaButtonAndLinksNewStpV {
 	}
 	
 	@Validation
-	private static ListResultValidation checkBreadCrumbs(WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkBreadCrumbs(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"Figura el bloque de BreadCrumbs<br>",
 			SecDetalleProductNew.isVisibleBreadcrumbs(0, driver), State.Warn);
@@ -81,8 +81,8 @@ public class SecBolsaButtonAndLinksNewStpV {
     }    
 	
 	@Validation
-	private static ListResultValidation checkAppearsModalShareSocial(String codigoPais, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkAppearsModalShareSocial(String codigoPais, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 	    int maxSecondsWait = 1;
 	 	validations.add(
 	 		"Aparece el modal para compartir a nivel social (lo esperamos hasta " + maxSecondsWait + " segundos) ",

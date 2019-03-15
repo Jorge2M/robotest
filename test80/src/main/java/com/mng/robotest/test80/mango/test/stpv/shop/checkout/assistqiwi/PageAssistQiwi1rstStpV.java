@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.assistqiwi;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi.PageAssistQiwi1rst;
@@ -13,8 +13,8 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PageAssistQiwi1rstStpV {
     
 	@Validation
-    public static ListResultValidation validateIsPage(String importeTotal, String codPais, Channel channel, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsPage(String importeTotal, String codPais, Channel channel, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"Aparece el icono de Assist<br>",
 			PageAssistQiwi1rst.isPresentIconoAssist(driver, channel), State.Warn);

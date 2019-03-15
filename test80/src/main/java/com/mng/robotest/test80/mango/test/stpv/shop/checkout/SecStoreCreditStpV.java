@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -69,9 +69,9 @@ public class SecStoreCreditStpV {
     }
    
     @Validation
-    public static ListResultValidation validaBloqueSaldoEnCuenta(boolean checkedSaldoEnCta, Channel channel, DataCtxPago dCtxPago, WebDriver driver) 
+    public static ChecksResult validaBloqueSaldoEnCuenta(boolean checkedSaldoEnCta, Channel channel, DataCtxPago dCtxPago, WebDriver driver) 
     throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    	ChecksResult validations = ChecksResult.getNew();
       	validations.add(
     		"Es visible el bloque correspondiente al pago mediante \"Saldo en cuenta\"<br>",
     		Page1DktopCheckout.secStoreCredit.isVisible(driver), State.Defect);

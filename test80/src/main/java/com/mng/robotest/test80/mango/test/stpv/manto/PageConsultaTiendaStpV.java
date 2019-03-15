@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageConsultaTienda;
@@ -15,7 +15,7 @@ public class PageConsultaTiendaStpV {
         String descripValidac = 
             "1) Es visible el input para la introducción de la tienda";
         datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {
             if (!PageConsultaTienda.isVisibleInputTienda(dFTest.driver)) {
                 listVals.add(1, State.Defect);
@@ -42,7 +42,7 @@ public class PageConsultaTiendaStpV {
         String descripValidac = 
             "1) Aparece el mensaje La tienda no existe.";
         datosStep.setNOKstateByDefault();     
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {
             if (!PageConsultaTienda.apareceMensajeTiendaNoExiste(dFTest.driver)) {
                 listVals.add(1, State.Defect);
@@ -71,7 +71,7 @@ public class PageConsultaTiendaStpV {
             "1) Aparece la información de la tienda<br>" + 
             "2) No aparece el mensaje de tienda no existe";
         datosStep.setNOKstateByDefault();        
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {
             if (!PageConsultaTienda.apareceInformacionTienda(dFTest.driver)) {
                 listVals.add(1, State.Defect);

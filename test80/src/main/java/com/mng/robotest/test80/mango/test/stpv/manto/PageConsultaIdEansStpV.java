@@ -8,7 +8,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
@@ -23,7 +23,7 @@ public class PageConsultaIdEansStpV {
             "2) Es visible el contenido de la pestaña Busqueda Rapida<br>" +
             "3) Es visible el título de página correcto";
         datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {
             if (!PageConsultaIdEans.isVisibleDivBusquedaExcel(dFTest.driver)) {
                 listVals.add(1, State.Defect);
@@ -50,8 +50,8 @@ public class PageConsultaIdEansStpV {
 	}
     
     @Validation
-    private static ListResultValidation checkAfterConsultContact(List<String> pedidosPrueba, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkAfterConsultContact(List<String> pedidosPrueba, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 	    int maxSecondsWait = 2;
     	validations.add(
     		"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsWait + " segundos)<br>",
@@ -83,7 +83,7 @@ public class PageConsultaIdEansStpV {
 	        "2) El número de líneas de pedido es " + pedidosPrueba.size() + "<br>" +
 	        "3) Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.toString() + "</b>";
         datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {
             if (!PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, dFTest.driver)) {
                 listVals.add(1, State.Defect);
@@ -116,7 +116,7 @@ public class PageConsultaIdEansStpV {
 		String descripValidac = 
 			"1) Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>";
         datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {
             if (!PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, dFTest.driver)) {
                 listVals.add(1, State.Defect);
@@ -145,7 +145,7 @@ public class PageConsultaIdEansStpV {
 		    "2) El número de líneas de artículos es " + articulosPrueba.size() + "<br>" +
 		    "3) Aparece una línea por cada uno de los artículos <b>" + articulosPrueba.toString() + "</b>";
         datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {
             if (!PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, dFTest.driver)) {
                 listVals.add(1, State.Defect);

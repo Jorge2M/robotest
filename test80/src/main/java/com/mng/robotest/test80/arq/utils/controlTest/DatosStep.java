@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.testng.ITestContext;
 
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.NetTrafficMng;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
@@ -38,7 +38,7 @@ public class DatosStep {
 	private State result_steps = State.Nok;
 	private State resultLastValidation = State.Ok;
 	private boolean excep_exists = true;
-	private ListResultValidation listResultValidations;
+	private ChecksResult listResultValidations;
 	private String nameMethodWithFactory = "";
 
     public DatosStep() {
@@ -215,7 +215,7 @@ public class DatosStep {
     	return this.nameMethodWithFactory;
     }
     
-    public void setListResultValidations(ListResultValidation listResultValidations) {
+    public void setListResultValidations(ChecksResult listResultValidations) {
     	setExcepExists(false);
     	this.listResultValidations = listResultValidations;
     }

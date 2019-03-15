@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.ModalDirecFactura;
@@ -12,8 +12,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopChe
 public class ModalDirecFacturaStpV {
 
 	@Validation
-    public static ListResultValidation validateIsOk(WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsOk(WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
 	 	validations.add(
 			"Es visible el formulario para la introducción de la \"Dirección de facturación\" (lo esperamos hasta " + maxSecondsWait + " seconds)<br>",
@@ -34,8 +34,8 @@ public class ModalDirecFacturaStpV {
     }
 	
 	@Validation
-	private static ListResultValidation checkAfterChangeDireccion(WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkAfterChangeDireccion(WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"Desaparece el modal de introducción de los datos de la dirección<br>",
 	 		!ModalDirecFactura.isVisibleFormUntil(0, driver), State.Defect);    

@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.votf;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -17,8 +17,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 public class PageSelectLineaVOTFStpV {
 
 	@Validation
-    public static ListResultValidation validateIsPage(WebDriver driver) { 
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsPage(WebDriver driver) { 
+    	ChecksResult validations = ChecksResult.getNew();
     	validations.add(
     		"Aparece el banner correspondiente a SHE<br>",
     		PageSelectLineaVOTF.isBannerPresent(LineaType.she, driver), State.Warn);

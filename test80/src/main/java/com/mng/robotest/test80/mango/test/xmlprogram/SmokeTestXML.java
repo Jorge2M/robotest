@@ -185,6 +185,7 @@ public class SmokeTestXML {
         listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.appshop.MiCuenta"));
         listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.appshop.Favoritos"));
         listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.appshop.Reembolsos"));
+        listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.appshop.Loyalty"));
         
         return listClasses;
     }

@@ -9,7 +9,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
@@ -48,8 +49,8 @@ public class PasosGenAnalitica {
     
     public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DataPedido dataPedido, EnumSet<Constantes.AnalyticsVal> analyticSet, WebDriver driver) 
     throws Exception {
-    	DatosStep datosStep = TestCaseData.getDatosLastStep();
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
+    	DatosStep datosStep = TestCaseData.getDatosLastStep();
         SaveWhen whenSaveNettraffic = datosStep.getSaveNettrafic();
         if (whenSaveNettraffic == SaveWhen.Always &&
             driver.toString().toLowerCase().contains("firefox")) {
@@ -71,28 +72,29 @@ public class PasosGenAnalitica {
 	                switch (it.next()) {
 	                    case GoogleAnalytics:
 	                        //Validaciones a nivel de la petición de Google Analytics
-	                        validaGoogleAnalytics(datosStep, gestorHAR, app);
+	                        validaGoogleAnalytics(gestorHAR, app);
 	                        break;
 	                    case Criteo:
 	                        //Validaciones a nivel de la petición de Criteo
-	                        validaCriteo(datosStep, gestorHAR, lineaId);
+	                        validaCriteo(gestorHAR, lineaId);
 	                        break;
 	                    case Bing:
 	                        //Validaciones a nivel de la petición de Bing
-	                        validaBing(datosStep, gestorHAR, app, dFTest);
+	                        validaBing(gestorHAR, app, dFTest.driver);
 	                        break;
 	                    case Polyvore:
 	                        //Validaciones a nivel del tráfico de Polyvore (sólo USA)
-	                        if (dataPedido!=null && dataPedido.getCodigoPais().compareTo("400")==0)
-	                            validaPolyvore(datosStep, gestorHAR, dataPedido);
+	                        if (dataPedido!=null && dataPedido.getCodigoPais().compareTo("400")==0) {
+	                            validaPolyvore(gestorHAR, dataPedido);
+	                        }
 	                        break;                            
 	                    case NetTraffic:
 	                        //Validaciones a nivel del tráfico de red
-	                        validaNetTraffic(datosStep, gestorHAR);                            
+	                        validaNetTraffic(gestorHAR);                            
 	                        break;
 	                    case DataLayer:
 	                        //Validaciones a nivel del tag datalayer (realmente no es una validación a nivel de HTTP)
-	                        validaDatalayer(datosStep, dFTest);                            
+	                        validaDatalayer(dFTest.driver);                            
 	                        break;
 	                    default:
 	                        break;
@@ -102,339 +104,250 @@ public class PasosGenAnalitica {
         }
     }
 
-    public static void validaPolyvore(DatosStep datosStep, gestorDatosHarJSON gestorHAR, DataPedido dataPedido)
-    throws Exception {
-        //VALIDACIONES POLYVORE PARA USA (sólo en el "Confirmar Compra")
+    @Validation
+    public static ChecksResult validaPolyvore(gestorDatosHarJSON gestorHAR, DataPedido dataPedido) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
+    	
         String urlPolyvore = "://www.polyvore.com/conversion/beacon.gif?";
         String paramPolyvore = "adv=mango.com";
-
-        //Obtenemos la lista con las referencias de artículo en formato String
-        String listaArtsStr = "";
-        Iterator<ArticuloScreen> it = dataPedido.getDataBag().getListArticulos().iterator();
-        while (it.hasNext()) {
-            listaArtsStr = listaArtsStr + it.next().getReferencia();
-            if (it.hasNext()) listaArtsStr = listaArtsStr + ", ";
-        }
-        
-        String descripValidac = 
-            "1) Está lanzándose 1 petición que contiene <b>" + urlPolyvore + "</b> y el parámetro <b>\"" + paramPolyvore + "\"</b><br>" +
-            "2) La petición es de tipo <b>\"GET\"</b><br>" +
-            "3) El response status de la petición es <b>2xx</b> o <b>3xx</b><br>" +
-            "4) En la petición figura el parámetro <b>\"atm\"</b> y contiene el importe total del pedido <b>" + dataPedido.getImporteTotal() + "\"</b><br>" +
-            "5) En la petición figura el parámetro <b>\"oid\"</b> y contiene <b>\"MNG\"</b><br>" +
-            "6) En la petición figura el parámetro <b>\"skus\"</b> y contiene los artículos del pedido <b>" + listaArtsStr + "</b>";
-        datosStep.setNOKstateByDefault();
-    	ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            JSONArray listEntriesFiltered = gestorHAR.getListEntriesFilterURL(urlPolyvore, paramPolyvore);
-            if (listEntriesFiltered.size()!=1) {
-                listVals.add(1, State.Warn);
+        JSONArray listEntriesFiltered = gestorHAR.getListEntriesFilterURL(urlPolyvore, paramPolyvore);
+	 	validations.add(
+			"Está lanzándose 1 petición que contiene <b>" + urlPolyvore + "</b> y el parámetro <b>" + paramPolyvore + "</b><br>",
+			listEntriesFiltered.size()==1, State.Warn);   
+	 	
+        if (listEntriesFiltered.size()==1) {
+            JSONObject entrieJSON = (JSONObject)listEntriesFiltered.get(0);
+            JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
+            JSONObject paramAtm = gestorHAR.getParameterFromRequestQuery(requestJSON, "amt");
+            JSONObject paramOid = gestorHAR.getParameterFromRequestQuery(requestJSON, "oid");
+            JSONObject paramSkus = gestorHAR.getParameterFromRequestQuery(requestJSON, "skus");  
+            JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
+    	 	validations.add(
+				"La petición es de tipo <b>\"GET\"</b><br>",
+				requestJSON.get("method").toString().compareTo("GET")==0, State.Warn);   
+    	 	validations.add(
+				"El response status de la petición es <b>2xx</b> o <b>3xx</b><br>",
+				responseJSON.get("status").toString().matches("[2|3]\\d\\d"), State.Warn);   
+    	 	validations.add(
+				"En la petición figura el parámetro <b>\"atm\"</b> y contiene el importe total del pedido <b>" + dataPedido.getImporteTotal() + "\"</b><br>",
+				(paramAtm!=null && ((String)paramAtm.get("value")).contains(dataPedido.getImporteTotal())), State.Warn); 
+    	 	validations.add(
+				"En la petición figura el parámetro <b>\"oid\"</b> y contiene <b>\"MNG\"</b><br>",
+				(paramOid!=null && ((String)paramOid.get("value")).contains("MNG")), State.Warn);
+    	 	
+    	 	boolean isParamSkus = true;
+            if (paramSkus==null) {
+            	isParamSkus = false;
             }
             else {
-                JSONObject entrieJSON = (JSONObject)listEntriesFiltered.get(0);
-                JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
-                     
-                //Obtenemos el parámetro 'atm' existente en el request de Polyvore (en el queryString)
-                JSONObject paramAtm = gestorHAR.getParameterFromRequestQuery(requestJSON, "amt");
-                     
-                //Obtenemos el parámetro 'oid' existente en el request de Polyvore (en el queryString)
-                JSONObject paramOid = gestorHAR.getParameterFromRequestQuery(requestJSON, "oid");
-                     
-                //Obtenemos el parámetro 'skus' existente en el request de Polyvore (en el queryString)
-                JSONObject paramSkus = gestorHAR.getParameterFromRequestQuery(requestJSON, "skus");                     
-                     
-                JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
-                if (requestJSON.get("method").toString().compareTo("GET")!=0) {
-                    listVals.add(2, State.Warn);
-                }
-                if (!responseJSON.get("status").toString().matches("[2|3]\\d\\d")) {
-                    listVals.add(3, State.Warn);
-                }
-                if (paramAtm==null || !((String)paramAtm.get("value")).contains(dataPedido.getImporteTotal())) {
-                    listVals.add(4, State.Warn);
-                }
-                if (paramOid==null || !((String)paramOid.get("value")).contains("MNG")) {
-                    listVals.add(5, State.Warn);
-                }
-                if (paramSkus==null) {
-                    listVals.add(6, State.Warn);
-                }
-                else {
-                    Iterator<ArticuloScreen> it2 = dataPedido.getDataBag().getListArticulos().iterator();
-                    while (it2.hasNext()) {
-                        String refPedido = it2.next().getReferencia();
-                        if (!((String)paramSkus.get("value")).contains(refPedido)) {
-                            listVals.add(6,State.Warn);
-                        }
+                Iterator<ArticuloScreen> it2 = dataPedido.getDataBag().getListArticulos().iterator();
+                while (it2.hasNext()) {
+                    String refPedido = it2.next().getReferencia();
+                    if (!((String)paramSkus.get("value")).contains(refPedido)) {
+                    	isParamSkus = false;
                     }
                 }
             }
-
-            datosStep.setListResultValidations(listVals);
+            //Obtenemos la lista con las referencias de artículo en formato String
+            String listaArtsStr = "";
+            Iterator<ArticuloScreen> it = dataPedido.getDataBag().getListArticulos().iterator();
+            while (it.hasNext()) {
+                listaArtsStr = listaArtsStr + it.next().getReferencia();
+                if (it.hasNext()) listaArtsStr = listaArtsStr + ", ";
+            }
+    	 	validations.add(
+				"En la petición figura el parámetro <b>\"skus\"</b> y contiene los artículos del pedido <b>" + listaArtsStr + "</b>",
+				isParamSkus, State.Warn);
         }
-        catch (Exception e) {
-            //Tratamos una excepción en los datos del JSON como un warning
-            datosStep.setExcepExists(false);
-            datosStep.setResultSteps(State.Warn);
-            pLogger.warn("Problem in validations of tracking Polyvore", e);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+        
+        return validations;
     }    
     
     @SuppressWarnings("rawtypes")
-    public static void validaCriteo(DatosStep datosStep, gestorDatosHarJSON gestorHAR, LineaType lineaId) 
-    throws Exception {
-        //En el caso de violeta no está activado Criteo
+    @Validation
+    public static ChecksResult validaCriteo(gestorDatosHarJSON gestorHAR, LineaType lineaId) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
         if (lineaId!=LineaType.violeta) {
-            String tagReferrer = "<REFERRER_1A_REQ>";
             String urlCriteo = ".criteo.com/dis/dis.aspx?";
             String paramCriteo = "sc_r=1920x1080";
+            String referer1aRequest = getReferer1rstRequestWithState2xx(gestorHAR);
             
-            //VALIDACIONES CRITEO
-            String descripValidac = 
-                "1) Está lanzándose 1 petición que contiene <b>" + urlCriteo + "</b> y el parámetro <b>\"" + paramCriteo + "\"</b><br>" +
-                "2) La petición es de tipo <b>\"GET\"</b><br>" +
-                "3) El response status de la petición es de tipo <b>2xx</b> o <b>3xx</b><br>" +
-                "4) En la petición figura el parámetro <b>\"ref\"</b> y contiene el referer de la 1a request (prioridad a las de estado 2xx) \"" + tagReferrer + "\"</b>";
-            datosStep.setNOKstateByDefault();  
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-            try {
-                //Obtenemos la 1a request de tipo "text/html"con estado 2xx 
-                JSONArray petsTextHtml = gestorHAR.getListEntriesOfMimeType("text/html");
-                JSONObject primeraRequest = null;
-                boolean requestEncontrada = false;
-
-                JSONArray listEntriesFiltered = null;
-                String referer1aRequest = "undefined";
-                if (petsTextHtml.size()>0) {
-                    Iterator it = petsTextHtml.iterator();
-                    while (it.hasNext() && !requestEncontrada) {
-                        JSONObject requestTmp = (JSONObject)it.next();
-                        JSONObject responseJSON = (JSONObject)requestTmp.get("response");
-                        if (responseJSON.get("status").toString().matches("2\\d\\d")) {
-                            primeraRequest = requestTmp;
-                            requestEncontrada = true;
-                        }
-                    }
-                    
-                    //Si no hemos encontrado ninguna nos quedamos con la 1a
-                    if (primeraRequest == null)
-                        primeraRequest = (JSONObject)petsTextHtml.get(0);
-                    
-                    //Buscamos el atributo 'Referer' en las cabeceras de la 1a petición
-                    JSONObject refererPrimeraReqJSON = gestorHAR.getParameterFromRequestCabe(primeraRequest, "Referer");
-                    if (refererPrimeraReqJSON!=null)
-                        referer1aRequest = refererPrimeraReqJSON.get("value").toString();
-                    
-                    descripValidac = descripValidac.replace(tagReferrer, referer1aRequest);
-                    
-                    //Obtenemos las peticiones de Criteo
-                    listEntriesFiltered = gestorHAR.getListEntriesFilterURL(urlCriteo, paramCriteo);
-                }
-                
-                if (listEntriesFiltered==null || listEntriesFiltered.size()!=1) {
-                    listVals.add(1,State.Info);
-                }
-                else {
-                    JSONObject entrieJSON = (JSONObject)listEntriesFiltered.get(0);
-                    JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
-                    
-                    //Obtenemos el parámetro href existente en el request de criteo (en el queryString)
-                    JSONObject paramRef = gestorHAR.getParameterFromRequestQuery(requestJSON, "ref");
-                    JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
-                    if (requestJSON.get("method").toString().compareTo("GET")!=0) {
-                        listVals.add(2,State.Warn);
-                    }
-                    if (!responseJSON.get("status").toString().matches("[2|3]\\d\\d")) {
-                        listVals.add(3,State.Info);
-                    }
-                    if (paramRef==null || !((String)paramRef.get("value")).contains(referer1aRequest)) {
-                        listVals.add(4,State.Warn);
-                    }
-                }
-
-                datosStep.setListResultValidations(listVals);
-            }
-            catch (Exception e) {
-                //Tratamos una excepción en los datos del JSON como un warning
-                datosStep.setExcepExists(false);
-                datosStep.setResultSteps(State.Warn);
-                pLogger.warn("Problem in validations of tracking Criteo", e);
-            }
-            finally { listVals.checkAndStoreValidations(descripValidac); }
+            JSONArray listEntriesFiltered = gestorHAR.getListEntriesFilterURL(urlCriteo, paramCriteo);
+            boolean isArequestWithParamCriteo = listEntriesFiltered!=null && listEntriesFiltered.size()==1;
+		 	validations.add(
+				"Está lanzándose 1 petición que contiene <b>" + urlCriteo + "</b> y el parámetro <b>\"" + paramCriteo + "\"</b><br>",
+				isArequestWithParamCriteo, State.Info); 
+		 	
+		 	if (isArequestWithParamCriteo) {
+                JSONObject entrieJSON = (JSONObject)listEntriesFiltered.get(0);
+                JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
+                JSONObject paramRef = gestorHAR.getParameterFromRequestQuery(requestJSON, "ref");
+                JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
+			 	validations.add(
+					"La petición es de tipo <b>\"GET\"</b><br>",
+					requestJSON.get("method").toString().compareTo("GET")==0, State.Warn); 
+			 	validations.add(
+					"El response status de la petición es de tipo <b>2xx</b> o <b>3xx</b><br>",
+					responseJSON.get("status").toString().matches("[2|3]\\d\\d"), State.Info); 
+			 	validations.add(
+					"En la petición figura el parámetro <b>\"ref\"</b> y contiene el referer de la 1a request (prioridad a las de estado 2xx) \"" + referer1aRequest + "\"</b>",
+					paramRef!=null && ((String)paramRef.get("value")).contains(referer1aRequest), State.Warn); 
+		 	}
         }
+        
+        return validations;
     }
-    
-    public static void validaBing(DatosStep datosStep, gestorDatosHarJSON gestorHAR, AppEcom app, DataFmwkTest dFTest) throws Exception {
-        //El tracking de Bing sólo se encuentra activo en PRO
-        if (UtilsMangoTest.isEntornoPRO(app, dFTest.driver)) {
-            //Validaciones
-            String tagUrl1aReq = "<URL_1A_REQUEST>";
+
+	private static String getReferer1rstRequestWithState2xx(gestorDatosHarJSON gestorHAR) throws Exception {
+        JSONArray petsTextHtml = gestorHAR.getListEntriesOfMimeType("text/html");
+        JSONObject primeraRequest = null;
+        boolean requestEncontrada = false;
+        String referer1aRequest = "undefined";
+        
+        if (petsTextHtml.size()>0) {
+			Iterator<JSONObject> it = petsTextHtml.iterator();
+            while (it.hasNext() && !requestEncontrada) {
+                JSONObject requestTmp = it.next();
+                JSONObject responseJSON = (JSONObject)requestTmp.get("response");
+                if (responseJSON.get("status").toString().matches("2\\d\\d")) {
+                    primeraRequest = requestTmp;
+                    requestEncontrada = true;
+                }
+            }
+            
+            //Si no hemos encontrado ninguna nos quedamos con la 1a
+            if (primeraRequest == null) {
+                primeraRequest = (JSONObject)petsTextHtml.get(0);
+            }
+            
+            //Buscamos el atributo 'Referer' en las cabeceras de la 1a petición
+            JSONObject refererPrimeraReqJSON = gestorHAR.getParameterFromRequestCabe(primeraRequest, "Referer");
+            if (refererPrimeraReqJSON!=null) {
+                referer1aRequest = refererPrimeraReqJSON.get("value").toString();
+            }
+        }
+        
+        return referer1aRequest;
+	}
+        
+    @Validation
+    public static ChecksResult validaBing(gestorDatosHarJSON gestorHAR, AppEcom app, WebDriver driver) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
+        if (UtilsMangoTest.isEntornoPRO(app, driver)) { //El tracking de Bing sólo se encuentra activo en PRO
             String urlBing = "://bat.bing.com/action/0?";
             String paramBing = "ti=5039068";
     
-            String descripValidac = 
-                "1) Está lanzándose 1 petición que contiene <b>" + urlBing + "</b> y el parámetro <b>\"" + paramBing + "\"</b><br>" +
-                "2) La petición es de tipo <b>\"GET\"</b><br>" +
-                "3) El response status de la petición es de tipo <b>2xx</b><br>" +
-                "4) En la petición figura el parámetro <b>\"p\"</b> y contiene la URL de la 1a request " + tagUrl1aReq + "\"</b>";
-            datosStep.setNOKstateByDefault();   
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-            try { 
-                //Obtenemos la URL de la 1a URL de type "text/html" que se ha lanzado
-                JSONArray petsTextHtml = gestorHAR.getListEntriesOfMimeType("text/html");
-                JSONObject primeraRequest = (JSONObject)petsTextHtml.get(0);
-                
-                //Buscamos la URL entre los parametros del "request"
-                String url1aRequest = ((JSONObject)primeraRequest.get("request")).get("url").toString();
-                descripValidac = descripValidac.replace(tagUrl1aReq, url1aRequest);
-                
-                //Obtenemos las peticiones de Bing
-                JSONArray listEntriesFiltered = gestorHAR.getListEntriesFilterURL(urlBing, paramBing);
-                if (listEntriesFiltered.size()!=1) {
-                    listVals.add(1, State.Warn);
-                }
-                else {
-                     JSONObject entrieJSON = (JSONObject)listEntriesFiltered.get(0);
-                     JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
-                     
-                     //Obtenemos el parámetro 'p' existente en el request de criteo (en el queryString)
-                     JSONObject paramP = gestorHAR.getParameterFromRequestQuery(requestJSON, "p");
-                     JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
-                     if (requestJSON.get("method").toString().compareTo("GET")!=0) {
-                         listVals.add(2, State.Warn);
-                     }
-                     if (!responseJSON.get("status").toString().matches("2\\d\\d")) {
-                         listVals.add(3, State.Warn);
-                     }
-                     if (paramP==null || !((String)paramP.get("value")).contains(url1aRequest)) {
-                         listVals.add(4, State.Warn);
-                     }
-                }
-
-                datosStep.setListResultValidations(listVals);
-            }
-            catch (Exception e) {
-                //Tratamos una excepción en los datos del JSON como un warning
-                datosStep.setExcepExists(false);
-                datosStep.setResultSteps(State.Warn);
-                pLogger.warn("Problem in validations of tracking Bing", e);
-            }
-            finally { listVals.checkAndStoreValidations(descripValidac); }
-        }
-    }
-    
-    public static void validaGoogleAnalytics(DatosStep datosStep, gestorDatosHarJSON gestorHAR, AppEcom app) {
-        //TODO esta validación es temporal. Actualmente hay activados 2 formas de lanzar Google Analytics con lo que es normal que en algún
-        //caso se ejecuten 2 peticiones. Cuando dejen sólo una forma habrá que restaurar la validación original
-        String valueTid1 = "UA-855910-26";
-        String valueTid2 = "UA-855910-3";
-        String valueTid3 = "UA-855910-34";
-        if (app==AppEcom.outlet) {
-            valueTid1 = "UA-855910-5";
-            valueTid2 = "UA-855910-5";
-            valueTid2 = "UA-855910-5";
+            JSONArray petsTextHtml = gestorHAR.getListEntriesOfMimeType("text/html");
+            JSONObject primeraRequest = (JSONObject)petsTextHtml.get(0);
+            String url1aRequest = ((JSONObject)primeraRequest.get("request")).get("url").toString();
+            JSONArray listEntriesFiltered = gestorHAR.getListEntriesFilterURL(urlBing, paramBing);
+		 	validations.add(
+				"Está lanzándose 1 petición que contiene <b>" + urlBing + "</b> y el parámetro <b>\"" + paramBing + "\"</b><br>",
+				listEntriesFiltered.size()==1, State.Warn); 
+		 	
+		 	if (listEntriesFiltered.size()==1) {
+                JSONObject entrieJSON = (JSONObject)listEntriesFiltered.get(0);
+                JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
+                JSONObject paramP = gestorHAR.getParameterFromRequestQuery(requestJSON, "p");
+                JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
+			 	validations.add(
+					"La petición es de tipo <b>\"GET\"</b><br>",
+					requestJSON.get("method").toString().compareTo("GET")==0, State.Warn); 
+			 	validations.add(
+					"El response status de la petición es de tipo <b>2xx</b><br>",
+					responseJSON.get("status").toString().matches("2\\d\\d"), State.Warn); 
+			 	validations.add(
+					"En la petición figura el parámetro <b>\"p\"</b> y contiene la URL de la 1a request " + url1aRequest + "\"</b>",
+					paramP!=null && ((String)paramP.get("value")).contains(url1aRequest), State.Warn); 
+		 	}
         }
         
-        String urlGoogleAnalytics = "://www.google-analytics.com/collect";
-        String descripValidac = 
-            "1) Está lanzándose 1 petición que contiene <b>" + urlGoogleAnalytics + "</b> y el parámetro <b>\"t=pageview\"</b><br>" +
-            "2) La petición es de tipo <b>\"GET\"</b><br>" +
-            "3) El response status de la petición es de tipo <b>2xx</b><br>" +
-            "4) En la petición figura el parámetro <b>\"tid=" + valueTid1 + "\" o \"tid=" + valueTid2 + "\" o o \"tid=" + valueTid3 + "\"</b>";
-        datosStep.setNOKstateByDefault();    
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            JSONArray listEntriesFilteredPage = gestorHAR.getListEntriesFilterURL("://www.google-analytics.com/collect","t=pageview");
-            int numLineas = listEntriesFilteredPage.size(); 
-                    
-	        if (numLineas==0) {
-	            listVals.add(1, State.Warn);
-	        }
-	        else {
-	            JSONObject entrieJSON = (JSONObject)listEntriesFilteredPage.get(0);
-	            JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
-	            JSONObject paramTid = gestorHAR.getParameterFromRequestQuery(requestJSON, "tid");
-	            JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
-	            if (requestJSON.get("method").toString().compareTo("GET")!=0) {
-	                listVals.add(2, State.Warn);
-	            }
-	            if (!responseJSON.get("status").toString().matches("2\\d\\d")) {
-	                listVals.add(3, State.Warn);
-	            }
-	            if (paramTid==null || 
-	               ( ((String)paramTid.get("value")).compareTo(valueTid1)!=0 && 
-	               ((String)paramTid.get("value")).compareTo(valueTid2)!=0 &&
-	               ((String)paramTid.get("value")).compareTo(valueTid3)!=0) ) {
-	                listVals.add(4, State.Warn);
-	            }
-	        }
-
-            datosStep.setListResultValidations(listVals);            
-        }
-        catch (Exception e) {
-            //Tratamos una excepción en los datos del JSON como un warning
-            datosStep.setExcepExists(false);
-            datosStep.setResultSteps(State.Warn);
-            pLogger.warn("Problem in validations of tracking Google Analytics", e);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	 	return validations;
     }
     
-    public static void validaDatalayer(DatosStep datosStep, DataFmwkTest dFTest) {
+    @Validation
+    public static ChecksResult validaGoogleAnalytics(gestorDatosHarJSON gestorHAR, AppEcom app) throws Exception {
+        //TODO esta validación es temporal. Actualmente hay activados 2 formas de lanzar Google Analytics con lo que es normal que en algún
+        //caso se ejecuten 2 peticiones. Cuando dejen sólo una forma habrá que restaurar la validación original
+    	ChecksResult validations = ChecksResult.getNew();
+    	
+        JSONArray listEntriesFilteredPage = gestorHAR.getListEntriesFilterURL("://www.google-analytics.com/collect","t=pageview");
+        int numLineas = listEntriesFilteredPage.size(); 
+        String urlGoogleAnalytics = "://www.google-analytics.com/collect";
+	 	validations.add(
+			"Está lanzándose 1 petición que contiene <b>" + urlGoogleAnalytics + "</b> y el parámetro <b>\"t=pageview\"</b><br>",
+			numLineas==0, State.Warn);
+	 	
+	 	if (numLineas!=0) {
+            JSONObject entrieJSON = (JSONObject)listEntriesFilteredPage.get(0);
+            JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
+            JSONObject paramTid = gestorHAR.getParameterFromRequestQuery(requestJSON, "tid");
+            JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
+		 	validations.add(
+				"La petición es de tipo <b>\"GET\"</b><br>",
+				requestJSON.get("method").toString().compareTo("GET")!=0, State.Warn);
+		 	validations.add(
+				"El response status de la petición es de tipo <b>2xx</b><br>",
+				responseJSON.get("status").toString().matches("2\\d\\d"), State.Warn);
+		 	
+	        String valueTid1 = "UA-855910-26";
+	        String valueTid2 = "UA-855910-3";
+	        String valueTid3 = "UA-855910-34";
+	        if (app==AppEcom.outlet) {
+	            valueTid1 = "UA-855910-5";
+	            valueTid2 = "UA-855910-5";
+	            valueTid2 = "UA-855910-5";
+	        }
+		 	validations.add(
+				"En la petición figura el parámetro <b>\"tid=" + valueTid1 + "\" o \"tid=" + valueTid2 + "\" o o \"tid=" + valueTid3 + "\"</b>",
+				paramTid!=null && 
+	            (((String)paramTid.get("value")).compareTo(valueTid1)==0 || 
+	             ((String)paramTid.get("value")).compareTo(valueTid2)==0 ||
+	             ((String)paramTid.get("value")).compareTo(valueTid3)==0), State.Warn);
+	 	}
+	 	
+	 	return validations;
+    }
+    
+    @Validation
+    public static ChecksResult validaDatalayer(WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
         String firstLineDataLayerFunction = "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':"; 
-        String descripValidac = 
-            "1) Figura el código JavaScript del tag <b>dataLayer</b>. Validamos la existencia de la 1a línea de la función: " + firstLineDataLayerFunction;
-        datosStep.setNOKstateByDefault();  
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            if (!dFTest.driver.getPageSource().contains(firstLineDataLayerFunction))
-                listVals.add(1, State.Warn);
-            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
+	 	validations.add(
+			"Figura el código JavaScript del tag <b>dataLayer</b>. Validamos la existencia de la 1a línea de la función: " + firstLineDataLayerFunction,
+			driver.getPageSource().contains(firstLineDataLayerFunction), State.Warn);
+	 	return validations;
     }
     
     @SuppressWarnings({ "rawtypes" })
-    public static void validaNetTraffic(DatosStep datosStep, gestorDatosHarJSON gestorHAR) {
-        String descripValidac = 
-            "1) En el tráfico de red no existe ninguna sin respuesta o con status KO";
-        datosStep.setNOKstateByDefault();     
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-        try {
-            //Obtenemos todas las entradas sin filtrar por URL
-            JSONArray listEntriesTotal = gestorHAR.getListEntriesFilterURL("","");
-            boolean petKOencontrada = false;
-            Iterator entriesJSON = listEntriesTotal.iterator();
-            while (entriesJSON.hasNext() && !petKOencontrada) {
-                JSONObject entrieJSON = (JSONObject)entriesJSON.next();
-                JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
-                JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
-                if (responseJSON==null) {
-                    listVals.add(1, State.Warn);
-                    descripValidac+="<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: hay peticiones sin respuesta, por ejemplo la <a href=\"" + (String)requestJSON.get("url") + "\">" + (String)requestJSON.get("url") + "</a>";
-                    petKOencontrada = true;
-                }
-                else {
-                    long statusResponse = (long)responseJSON.get("status");
-                    if (statusResponse >= 400) {
-                        listVals.add(1, State.Warn);
-                        descripValidac+="<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: hay peticiones con status KO, por ejemplo la <a href=\"" + (String)requestJSON.get("url") + "\">" + (String)requestJSON.get("url") + "</a> ( " + statusResponse + ")";
-                        petKOencontrada = true;
-                    }
+    @Validation
+    public static ChecksResult validaNetTraffic(gestorDatosHarJSON gestorHAR) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
+    	boolean peticionesOk = true;
+    	String infoWarnings = "";
+        JSONArray listEntriesTotal = gestorHAR.getListEntriesFilterURL("","");
+        Iterator entriesJSON = listEntriesTotal.iterator();
+        while (entriesJSON.hasNext() && peticionesOk) {
+            JSONObject entrieJSON = (JSONObject)entriesJSON.next();
+            JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
+            JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
+            if (responseJSON==null) {
+            	infoWarnings+="<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: hay peticiones sin respuesta, por ejemplo la <a href=\"" + (String)requestJSON.get("url") + "\">" + (String)requestJSON.get("url") + "</a>";
+                peticionesOk = false;
+            }
+            else {
+                long statusResponse = (long)responseJSON.get("status");
+                if (statusResponse >= 400) {
+                	infoWarnings+="<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: hay peticiones con status KO, por ejemplo la <a href=\"" + (String)requestJSON.get("url") + "\">" + (String)requestJSON.get("url") + "</a> ( " + statusResponse + ")";
+                    peticionesOk = false;
                 }
             }
-
-            datosStep.setListResultValidations(listVals);
         }
-        catch (Exception e) {
-            //Tratamos una excepción en los datos del JSON como un warning
-            datosStep.setExcepExists(false);
-            datosStep.setResultSteps(State.Warn);
-            pLogger.warn("Problem in validations of NetTraffic", e);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }        
+	 	validations.add(
+			"En el tráfico de red no existe ninguna sin respuesta o con status KO" + infoWarnings,
+			peticionesOk, State.Warn);
+    	
+	 	return validations;
     }
     
    

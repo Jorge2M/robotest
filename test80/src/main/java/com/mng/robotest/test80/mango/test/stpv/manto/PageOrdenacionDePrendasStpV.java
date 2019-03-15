@@ -6,7 +6,7 @@ import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageOrdenacionDePrendas;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
@@ -34,8 +34,8 @@ public class PageOrdenacionDePrendasStpV {
 	}
 
     @Validation
-    public static ListResultValidation validateIsPage(DatosStep datosStep, WebDriver driver) {
-        ListResultValidation validations = ListResultValidation.getNew(datosStep);
+    public static ChecksResult validateIsPage(DatosStep datosStep, WebDriver driver) {
+        ChecksResult validations = ChecksResult.getNew(datosStep);
         int maxSecondsWait = 10;
         validations.add(
         	"Estamos en la página " + Orden.titulo.getXPath() + "<br>",
@@ -62,8 +62,8 @@ public class PageOrdenacionDePrendasStpV {
 	}
 
     @Validation
-	private static ListResultValidation validatePreProductionElements(WebDriver driver) {
-        ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult validatePreProductionElements(WebDriver driver) {
+        ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 10;
         validations.add(
         	"Está presente el enlace de <b>She</b><br>",
@@ -113,8 +113,8 @@ public class PageOrdenacionDePrendasStpV {
 	}
 
     @Validation
-	private static ListResultValidation validateSectionPrenda(WebDriver driver) {
-        ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult validateSectionPrenda(WebDriver driver) {
+        ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 13;
         validations.add(
             "Se vuelve visible el selector de tipo de <b>Prendas</b><br>",
@@ -138,8 +138,8 @@ public class PageOrdenacionDePrendasStpV {
 	}
 
 	@Validation
-	private static ListResultValidation validateTipoPrenda(WebDriver driver, int maxSecondsWait) {
-        ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult validateTipoPrenda(WebDriver driver, int maxSecondsWait) {
+        ChecksResult validations = ChecksResult.getNew();
         validations.add(
             "Aparecen imagenes en la nueva página<br>",
             PageOrdenacionDePrendas.isElementInStateUntil(Orden.pruebaImagen, StateElem.Visible, maxSecondsWait, driver), State.Defect);
@@ -162,8 +162,8 @@ public class PageOrdenacionDePrendasStpV {
 	}
 
     @Validation
-    private static ListResultValidation validateBajarPrenda(WebDriver driver, int maxSecondsWait) {
-        ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult validateBajarPrenda(WebDriver driver, int maxSecondsWait) {
+        ChecksResult validations = ChecksResult.getNew();
         validations.add(
             "Se sigue viendo la segunda prenda<br>",
             PageOrdenacionDePrendas.isElementInStateUntil(Orden.segundaPrenda, StateElem.Visible, maxSecondsWait, driver), State.Defect);
@@ -185,8 +185,8 @@ public class PageOrdenacionDePrendasStpV {
 	}
 
     @Validation
-	private static ListResultValidation validateAplicarOrden(WebDriver driver) {
-        ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult validateAplicarOrden(WebDriver driver) {
+        ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 15;
         validations.add(
             "Aparece correctamente el modal de confirmacion<br>",

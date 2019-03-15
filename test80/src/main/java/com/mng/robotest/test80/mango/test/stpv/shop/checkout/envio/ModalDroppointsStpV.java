@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -17,8 +17,8 @@ public class ModalDroppointsStpV {
     
     @SuppressWarnings("static-access")
     @Validation
-    public static ListResultValidation validaIsVisible(Channel channel, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validaIsVisible(Channel channel, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 3;
       	validations.add(
     		"Desaparece el mensaje de \"Cargando...\" (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",

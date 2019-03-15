@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageBolsas;
@@ -47,7 +47,7 @@ public class PageMenusMantoStpV {
         	"1) Aparece la página asociada al menú <b>" + subMenu + "</b><br>" +
         	"2) No aparece ninguna ventana de alerta";
         datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {
             if (!PageMenusManto.validateIsPage(subMenu, dFTest.driver)) {
                 listVals.add(1, State.Defect);
@@ -79,7 +79,7 @@ public class PageMenusMantoStpV {
             //Validaciones
             String descripValidac = "1) Aparece la página de Bolsas";
             datosStep.setNOKstateByDefault();      
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+            ChecksResult listVals = ChecksResult.getNew(datosStep);
             try {
                 /*1*/assertTrue(PageBolsas.isPage(dFTest.driver));
                                           
@@ -102,7 +102,7 @@ public class PageMenusMantoStpV {
             String descripValidac = 
                 "1) Aparece la página de Pedidos";
             datosStep.setNOKstateByDefault();     
-            ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+            ChecksResult listVals = ChecksResult.getNew(datosStep);
             try {
                 assertTrue(PagePedidos.isPage(dFTest.driver));
                                           

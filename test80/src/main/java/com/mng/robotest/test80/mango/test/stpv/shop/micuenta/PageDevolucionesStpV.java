@@ -4,7 +4,7 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageDevoluciones;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageDevoluciones.Devolucion;
 import org.openqa.selenium.WebDriver;
@@ -12,8 +12,8 @@ import org.openqa.selenium.WebDriver;
 public class PageDevolucionesStpV {
 
     @Validation
-    public static ListResultValidation validaIsPage (WebDriver driver) {
-        ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validaIsPage (WebDriver driver) {
+        ChecksResult validations = ChecksResult.getNew();
         validations.add(
         	"Aparece la página de devoluciones<br>",
             PageDevoluciones.isPage(driver), State.Defect);

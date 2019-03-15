@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance.PagePostfSelectPago;
@@ -17,8 +17,8 @@ public class PagePosftSelectPagoStpV {
 	static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 	
 	@Validation
-	public static ListResultValidation validateIsPage(String nombrePago, String importeTotal, String codPais, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	public static ChecksResult validateIsPage(String nombrePago, String importeTotal, String codPais, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 		int maxSecondsWait = 5;
 	   	validations.add(
     		"Aparece la 1a pantalla para la selección del método <b>" + nombrePago + "</b> (la esperamos hasta " + maxSecondsWait + " segundos)<br>",

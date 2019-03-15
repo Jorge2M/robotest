@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.DataFoto;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecFotosNew;
@@ -16,8 +16,8 @@ public class SecFotosNewStpV {
     }
     
     @Validation
-    private static ListResultValidation checkTypeOfFirstFoto(WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkTypeOfFirstFoto(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 		DataFoto dataFoto = SecFotosNew.getDataFoto(1, 1, driver);
 	 	validations.add(
 			"La 1a foto es de tipo <b>" + TipoImagenProducto.DETALLES + " o " + 
@@ -32,8 +32,8 @@ public class SecFotosNewStpV {
 	}
           
     @Validation 
-    private static ListResultValidation checkLayoutFicha(boolean isFichaAccesorios, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkLayoutFicha(boolean isFichaAccesorios, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
 	    int numFotosExpected1rstLine_A = 1;
 	    int numFotosExpected1rstLine_B = 2;
 	    if (isFichaAccesorios) {

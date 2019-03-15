@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -61,8 +61,8 @@ public class PageRegistroIniStpV {
     }
 	
 	@Validation
-    public static ListResultValidation validateMessagesErrorDependingInputs(ListDataRegistro dataToSend, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateMessagesErrorDependingInputs(ListDataRegistro dataToSend, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
         for (DataRegistro dataInput : dataToSend.getDataPageInicial()) {
         	String dataInputString = dataInput.getDataRegType() + " (<b>" + dataInput.getData() + "</b>)";
             if (dataInput.isValidPrevRegistro()) {
@@ -126,8 +126,8 @@ public class PageRegistroIniStpV {
     }
 	
 	@Validation
-	public static ListResultValidation validateAreInputsWithErrorMessageAssociated(int numInputsObligatoriosNoInf, Pais pais, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	public static ChecksResult validateAreInputsWithErrorMessageAssociated(int numInputsObligatoriosNoInf, Pais pais, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
         int numInputsTypePassrod = PageRegistroIni.getNumberInputsTypePassword(driver);
         int numErrCampObligatorio = PageRegistroIni.getNumberMsgCampoObligatorio(driver);
         
@@ -164,8 +164,8 @@ public class PageRegistroIniStpV {
 	}  
 	
 	@Validation
-	public static ListResultValidation validateRGPD_inCountryWithRgpd(DataCtxShop dCtxSh, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	public static ChecksResult validateRGPD_inCountryWithRgpd(DataCtxShop dCtxSh, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 		int maxSeconds = 1;
     	validations.add(
     		"El texto de info de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>",
@@ -181,8 +181,8 @@ public class PageRegistroIniStpV {
 	}
 	
 	@Validation
-	public static ListResultValidation validateRGPD_inCountryWithoutRgpd(DataCtxShop dCtxSh, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	public static ChecksResult validateRGPD_inCountryWithoutRgpd(DataCtxShop dCtxSh, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 		int maxSeconds = 1;
     	validations.add(
     		"El texto de info de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>",

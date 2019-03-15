@@ -5,7 +5,7 @@ import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques;
@@ -41,8 +41,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ListResultValidation validateInitData(int numPedidos, String mail, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	public static ChecksResult validateInitData(int numPedidos, String mail, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 		validations.add(
 				"Aparecen más de \"" + numPedidos + "\" pedidos<br>",
 				PageGestorCheques.comprobarNumeroPedidos(numPedidos, driver), State.Defect);
@@ -69,8 +69,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ListResultValidation validateDetailsCheques(String pedido, String mail, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	public static ChecksResult validateDetailsCheques(String pedido, String mail, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 		validations.add(
 				"Aparece la página de" + PageGestorCheques.tituloDetalles + "<br>",
 				PageGestorCheques.isPageDetalles(driver), State.Defect);
@@ -96,8 +96,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ListResultValidation validateButtons(WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	public static ChecksResult validateButtons(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 				"Existe el botón de <b>Id del pedido</b><br>",
@@ -118,8 +118,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ListResultValidation validateSecondDataCheque(WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	public static ChecksResult validateSecondDataCheque(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 				"En la tabla activo existe un apartado para <b>ACTIVO</b><br>",
@@ -138,8 +138,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ListResultValidation validateThirdDataCheque(WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	public static ChecksResult validateThirdDataCheque(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 				"En la tabla divisa existe un apartado para <b>DIVISA</b><br>",
@@ -160,8 +160,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ListResultValidation validatePedidosData(WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	public static ChecksResult validatePedidosData(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 				"En la tabla pedidos realizados existe un apartado para <b>Id</b><br>",
@@ -182,8 +182,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ListResultValidation validateButtonsDataCheque(WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	public static ChecksResult validateButtonsDataCheque(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 				"Existe el boton para <b>Modificar</b><br>",
@@ -255,8 +255,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ListResultValidation validateInitDataCheque( WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	public static ChecksResult validateInitDataCheque( WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 				"Existe la tabla que contiene <b>Activo</b><br>",

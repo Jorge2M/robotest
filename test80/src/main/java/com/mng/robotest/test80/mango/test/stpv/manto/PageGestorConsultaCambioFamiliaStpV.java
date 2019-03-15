@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorConsultaCambioFamilia;
@@ -19,7 +19,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 			"2) Aparece la tabla de \"Consulta\"" +
 			"3) El botón \"Consulta está\" \"disabled\"";
 		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+		ChecksResult listVals = ChecksResult.getNew(datosStep);
 		try {
 			if (!PageGestorConsultaCambioFamilia.isPage(dFTest.driver)) {
 				listVals.add(1, State.Defect);
@@ -52,7 +52,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 			"1) Aparece la tabla con los productos<br>" +
 			"2) El campo de la tabla \"Traducción familia principal\" de la primera fila contiene el atributo \"Accesorios\"";
 		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+		ChecksResult listVals = ChecksResult.getNew(datosStep);
 		try {
 			if (!PageGestorConsultaCambioFamilia.isTablaProductosVisible(dFTest.driver)) {
 				listVals.add(1, State.Defect);
@@ -84,7 +84,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 			"1) Aparece la tabla con las opciones para los cambios de familia<br>" + 
 			"2) El botón \"Consulta\" ya no está \"disabled\"";
 		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+		ChecksResult listVals = ChecksResult.getNew(datosStep);
 		try {
 			if (!PageGestorConsultaCambioFamilia.isTablaCambioFamiliaVisible(dFTest.driver)) {
 				listVals.add(1, State.Defect);

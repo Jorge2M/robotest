@@ -5,7 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -91,8 +91,8 @@ public class PageFichaArtStpV {
     }
     
     @Validation
-    public ListResultValidation validateIsFichaArtNoDisponible(String refArticulo) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public ChecksResult validateIsFichaArtNoDisponible(String refArticulo) {
+    	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"Aparece la página de resultado de una búsqueda KO<br>",
 			PageErrorBusqueda.isPage(driver), State.Warn);    	
@@ -103,8 +103,8 @@ public class PageFichaArtStpV {
     }
     
     @Validation
-    public ListResultValidation validateIsArticleNotAvailable(ArticleStock article) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public ChecksResult validateIsArticleNotAvailable(ArticleStock article) {
+    	ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 2;
 	 	validations.add(
 			"Aparece la página correspondiente a la ficha del artículo " + article.getReference() + 
@@ -117,8 +117,8 @@ public class PageFichaArtStpV {
     }        
     
     @Validation
-    public ListResultValidation validateIsFichaArtAlgunoColorNoDisponible(String refArticulo) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public ChecksResult validateIsFichaArtAlgunoColorNoDisponible(String refArticulo) {
+    	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"Aparece la página correspondiente a la ficha del artículo " + refArticulo + "<br>",
 			pageFicha.isFichaArticuloUntil(refArticulo, 0), State.Defect); 
@@ -136,8 +136,8 @@ public class PageFichaArtStpV {
     }
     
     @Validation
-    public ListResultValidation validaDetallesProducto(DataFichaArt datosArticulo) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public ChecksResult validaDetallesProducto(DataFichaArt datosArticulo) {
+    	ChecksResult validations = ChecksResult.getNew();
         if (datosArticulo.availableReferencia()) {
             int maxSecondsWait = 3;
 		 	validations.add(
@@ -169,7 +169,6 @@ public class PageFichaArtStpV {
             pageFicha.secDataProduct.selectColorWaitingForAvailability(codigoColor, driver);
         }
 
-        //Validaciones
         checkIsSelectedColor(codigoColor);
     }
     
@@ -236,8 +235,8 @@ public class PageFichaArtStpV {
     }
     
     @Validation
-    public ListResultValidation checkAppearsCapaAvisame() {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public ChecksResult checkAppearsCapaAvisame() {
+    	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"No aparece el botón \"COMPRAR\"<br>",
 			!SecBolsa.isVisibleBotonComprar(Channel.desktop, driver), State.Defect);
@@ -275,8 +274,8 @@ public class PageFichaArtStpV {
     }
     
     @Validation
-    public ListResultValidation checkAvisoTallaUnica(boolean isTallaUnica, TypeFicha typeFichaAct) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public ChecksResult checkAvisoTallaUnica(boolean isTallaUnica, TypeFicha typeFichaAct) {
+    	ChecksResult validations = ChecksResult.getNew();
     	boolean isVisibleAviso = pageFicha.secDataProduct.isVisibleAvisoSeleccionTalla(driver);
     	if (isTallaUnica || typeFichaAct==TypeFicha.New) {
 		 	validations.add(
@@ -329,8 +328,8 @@ public class PageFichaArtStpV {
     }
     
     @Validation
-    private ListResultValidation checkCapaAltaFavoritos() {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private ChecksResult checkCapaAltaFavoritos() {
+    	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait1 = 3;
 	 	validations.add(
 			"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + maxSecondsWait1 + " segundos)<br>",
@@ -347,8 +346,6 @@ public class PageFichaArtStpV {
         expected="El artículo se elimina de Favoritos")
     public void selectRemoveFromFavoritos() throws Exception {
         pageFicha.selectRemoveFromFavoritosButton();             
-
-        //Validaciones
         validateVisibleButtonFavoritos(ActionFavButton.Add);
     }    
     
@@ -409,8 +406,8 @@ public class PageFichaArtStpV {
     }
     
     @Validation
-    public ListResultValidation validaPrevNext(LocationArticle locationArt, DataCtxShop dCtxSh) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public ChecksResult validaPrevNext(LocationArticle locationArt, DataCtxShop dCtxSh) {
+    	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
     	boolean isVisiblePrevLink = pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Prev, maxSecondsWait, driver);
         if (locationArt.isFirstInGalery()) {
@@ -488,8 +485,8 @@ public class PageFichaArtStpV {
     }    
     
     @Validation
-    public ListResultValidation checkImgCentralAfterZoom(String pngImgCentralOriginal) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public ChecksResult checkImgCentralAfterZoom(String pngImgCentralOriginal) {
+    	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 	 		"Se aplica un Zoom sobre la imagen central<br>",
 	 		((PageFichaArtOld)pageFicha).isVisibleFichaConZoom(), State.Defect);
@@ -500,8 +497,8 @@ public class PageFichaArtStpV {
     }
     
     @Validation
-    public ListResultValidation validaBreadCrumbFichaOld(String urlGaleryOrigin) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public ChecksResult validaBreadCrumbFichaOld(String urlGaleryOrigin) {
+    	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 	 		"Existen el bloque correspondiente a las <b>BreadCrumb</b><br>",
 	 		SecBreadcrumbFichaOld.isVisibleBreadCrumb(driver), State.Defect);    	

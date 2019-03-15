@@ -13,7 +13,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.sitemap.Sitemapindex;
@@ -42,8 +42,8 @@ public class BrowserStpV {
 	}
     
 	@Validation
-	private static ListResultValidation checkPageRobotsTxt(String urlSitemap, AppEcom app, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkPageRobotsTxt(String urlSitemap, AppEcom app, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
         String contRobots1 = 
             "sitemap: " + urlSitemap;
                 
@@ -193,8 +193,8 @@ public class BrowserStpV {
     }
     
     @Validation
-    private static ListResultValidation checkResultUrlSitemal(WebDriver driver) throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkResultUrlSitemal(WebDriver driver) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
     	
     	Sitemapindex sitemapIndex = null;
     	try {

@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestionarClientes;
@@ -20,7 +20,7 @@ public class PageGestionarClientesStpV {
 			"2) Aparece el apartado de \"Buscar clientes\"<br>" +
 			"3) Aparece el apartado de \"Tratar clientes\"";
 		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+		ChecksResult listVals = ChecksResult.getNew(datosStep);
 		try {
 			if (!PageGestionarClientes.isPage(dFTest.driver)) {
 				listVals.add(1, State.Defect);
@@ -59,7 +59,7 @@ public class PageGestionarClientesStpV {
 				"2) Aparece el DNI <b>" + dni + "</b> en la tabla<br>" +
 				"3) Aparece el botón de Alta o Baja (los esperamos un máximo de " + maxSecondsToWait + " segundos)";
 		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+		ChecksResult listVals = ChecksResult.getNew(datosStep);
 		try {
 			if (!PageGestionarClientes.isVisibleTablaInformacion(dFTest.driver)) {
 				listVals.add(1, State.Defect);
@@ -99,7 +99,7 @@ public class PageGestionarClientesStpV {
 			"1) Aparece el mensaje \""+ typeButton.getMensaje() +"\"<br>" +
 			"2) Aparece el botón \"Alta\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
 		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+		ChecksResult listVals = ChecksResult.getNew(datosStep);
 		try {
 			if (!PageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton, dFTest.driver)) {
 				listVals.add(1, State.Defect);
@@ -133,7 +133,7 @@ public class PageGestionarClientesStpV {
 			"1) Aparece el id del cliente \""+ idCliente +"\"<br>" +
 			"2) Aparece el dni del cliente \""+ dni +"\"";
 		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+		ChecksResult listVals = ChecksResult.getNew(datosStep);
 		try {
 			if (!PageGestionarClientes.isVisibleIdClienteClickDetallesButton(idCliente, dFTest.driver)) {
 				listVals.add(1, State.Defect);

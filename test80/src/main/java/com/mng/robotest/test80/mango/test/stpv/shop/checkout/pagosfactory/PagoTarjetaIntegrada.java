@@ -23,8 +23,9 @@ public class PagoTarjetaIntegrada extends PagoStpV {
         
         if (execPay) {
             dataPedido.setCodtipopago("U");
+        	String metodoPago = dCtxPago.getDataPedido().getPago().getNombre();
             if (dCtxPago.getFTCkout().trjGuardada && 
-            	PageCheckoutWrapperStpV.isTarjetaGuardadaAvailable(dCtxSh.channel, driver)) {
+            	PageCheckoutWrapperStpV.isTarjetaGuardadaAvailable(metodoPago, dCtxSh.channel, driver)) {
             	PageCheckoutWrapperStpV.selectTrjGuardadaAndConfirmPago(dCtxPago, dCtxSh.channel, driver);
             }
             else {

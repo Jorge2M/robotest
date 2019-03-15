@@ -9,7 +9,7 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageSuscripciones;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageSuscripciones.idNewsletters;
 
@@ -23,13 +23,13 @@ public class PageSuscripcionesStpV {
     }
 
     @Validation
-    public static ListResultValidation validaIsDataAssociatedToRegister (HashMap<String,String> datosRegOk, WebDriver driver) {
+    public static ChecksResult validaIsDataAssociatedToRegister (HashMap<String,String> datosRegOk, WebDriver driver) {
         int numLineasTotales = Integer.valueOf(datosRegOk.get("numlineas")).intValue();
         String lineasUnchecked = datosRegOk.get("clicklineas");
         StringTokenizer tokensLinDesmarcadas = new StringTokenizer(lineasUnchecked, ",");
         int numLinDesmarcadas = tokensLinDesmarcadas.countTokens();
 
-        ListResultValidation validations = ListResultValidation.getNew();
+        ChecksResult validations = ChecksResult.getNew();
         validations.add(
             "Aparecen "  + numLineasTotales + " Newsletter<br>",
             PageSuscripciones.getNumNewsletters(driver)==numLineasTotales, State.Warn);

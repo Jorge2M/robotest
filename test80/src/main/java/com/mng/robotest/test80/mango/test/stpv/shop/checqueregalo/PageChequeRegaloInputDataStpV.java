@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checqueregalo;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
@@ -27,8 +27,8 @@ public class PageChequeRegaloInputDataStpV{
 	}
 
 	@Validation
-	private static ListResultValidation checkInputDataTarjeta(WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkInputDataTarjeta(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 2;
     	validations.add(
     		"Aparece el cuadro de introduccion de datos determinado (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
@@ -55,8 +55,8 @@ public class PageChequeRegaloInputDataStpV{
     }
 	
 	@Validation
-	private static ListResultValidation checkInputOtherData(WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkInputOtherData(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 2;
     	validations.add(
     		"Es visible el campo de <b>cvv</b> (lo esperamos hasta " + maxSecondsWait + " segundos)</br>",
@@ -85,8 +85,8 @@ public class PageChequeRegaloInputDataStpV{
     }
 	
 	@Validation
-	private static ListResultValidation checkConsultaSaldoTarjeta(WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkConsultaSaldoTarjeta(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 2;
     	validations.add(
     		"Se pueden validar los datos (lo esperamos hasta " + maxSecondsWait + " segundos)</br>",
@@ -127,8 +127,8 @@ public class PageChequeRegaloInputDataStpV{
     }
 	
 	@Validation
-	private static ListResultValidation checkImporteSelected(WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkImporteSelected(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 	    int maxSecondsWait = 2;
     	validations.add(
     		"Aparece el titulo de la página correctamente (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",

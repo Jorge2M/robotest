@@ -5,7 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -22,8 +22,8 @@ public class PageFavoritosStpV {
     public static ModalFichaFavoritosStpV modalFichaFavoritos;
     
     @Validation
-    public static ListResultValidation validaIsPageOK(DataFavoritos dataFavoritos, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validaIsPageOK(DataFavoritos dataFavoritos, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsToWaitCapa = 3;
         int maxSecondsToWaitArticles = 1;
     	validations.add(
@@ -56,8 +56,8 @@ public class PageFavoritosStpV {
     }
     
     @Validation
-    public static ListResultValidation checkShareIsOk(WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult checkShareIsOk(WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
     	int secondsToWait = 5;
     	validations.add(
     		"Aparece el modal de favoritos compartidos <br>",
@@ -121,8 +121,8 @@ public class PageFavoritosStpV {
     }
     
     @Validation
-    public static ListResultValidation checkFavoritosWithoutArticles(WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult checkFavoritosWithoutArticles(WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
     	validations.add(
     		"No queda ningún artículo en Favoritos<br>",
     		!PageFavoritos.hayArticulos(driver), State.Defect);

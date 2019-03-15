@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.registro;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataNinos;
@@ -15,8 +15,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 public class PageRegistroNinosStpV {
     
 	@Validation
-    public static ListResultValidation validaIsPageWithNinos(int numNinos, DataFmwkTest dFTest) {
-		ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validaIsPageWithNinos(int numNinos, DataFmwkTest dFTest) {
+		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsToWait = 5;
     	validations.add(
     		"Aparece la página de introducción de datos del niño (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>",

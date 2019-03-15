@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisDatos;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
@@ -15,8 +15,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 public class PageMisDatosStpV {
 
     @Validation
-    public static ListResultValidation validaIsPage (String usuarioReg, WebDriver driver) throws Exception {
-        ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validaIsPage (String usuarioReg, WebDriver driver) throws Exception {
+        ChecksResult validations = ChecksResult.getNew();
         validations.add(
             "Aparece una página con el la cabecera \"Mis datos\"<br>",
             PageMisDatos.isPage(driver), State.Warn);
@@ -37,7 +37,7 @@ public class PageMisDatosStpV {
     }
 
     @Validation
-    public static ListResultValidation validaIsDataAssociatedToRegister (HashMap<String,String> datosRegOk, String codpais, WebDriver driver) 
+    public static ChecksResult validaIsDataAssociatedToRegister (HashMap<String,String> datosRegOk, String codpais, WebDriver driver) 
     throws Exception {
         String nombre = datosRegOk.get("cfName");
         String apellidos = datosRegOk.get("cfSname");
@@ -47,7 +47,7 @@ public class PageMisDatosStpV {
         String poblacion = datosRegOk.get("cfCity");
         String provincia = datosRegOk.get("estadosPais");
 
-        ListResultValidation validations = ListResultValidation.getNew();
+        ChecksResult validations = ChecksResult.getNew();
         validations.add(
             "Aparece un campo de contraseña de tipo password<br>",
             PageMisDatos.isVisiblePasswordTypePassword(driver), State.Defect);

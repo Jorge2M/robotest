@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -62,8 +62,8 @@ public class SecSelectorPreciosStpV {
     }
 	
 	@Validation
-	private static ListResultValidation checkResultSelectFiltro(DataFilterPrecios dataFilter, AppEcom app, WebDriver driver) throws Exception {
-		ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkResultSelectFiltro(DataFilterPrecios dataFilter, AppEcom app, WebDriver driver) throws Exception {
+		ChecksResult validations = ChecksResult.getNew();
     	validations.add(
     		"El nuevo mínimo es mayor que el anterior. Era de <b>" + dataFilter.minimoOrig + "</b> y ahora es <b>" + dataFilter.minimoFinal + "</b><br>",
     		dataFilter.minimoFinal > dataFilter.minimoOrig, State.Warn);

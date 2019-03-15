@@ -92,6 +92,10 @@ public class PedidoNavigations {
 	        	anularPedidoStpV(dataPedido, app, dFTest);
 	        }
         }
+        
+        if (listChecks.contains(CheckPedido.consultarBolsa)) {
+        	
+        }
     }
     
     private static void consultarBolsaStpV(DataPedido dataPedido, AppEcom app, DataFmwkTest dFTest) throws Exception {

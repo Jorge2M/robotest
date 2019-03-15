@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.appshop.campanas.CampanasData;
 import com.mng.robotest.test80.mango.test.appshop.campanas.DataCampana;
@@ -63,8 +63,8 @@ public class SecBannersStpV {
     }
     
     @Validation
-    private ListResultValidation validateCamapanaWithBannerInScreen(DataCampana dataCampana, DataBanner dataBanner) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private ChecksResult validateCamapanaWithBannerInScreen(DataCampana dataCampana, DataBanner dataBanner) {
+    	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"Los datos de la campaña son correctos<br>\" +\n" + getReportCompareDataInCuteHtml(dataCampana, dataBanner),
 			true, State.Defect);    	
@@ -110,9 +110,9 @@ public class SecBannersStpV {
     }
         
     @Validation
-    public ListResultValidation validacionesGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre, 
+    public ChecksResult validacionesGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre, 
     														WebDriver driver) throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    	ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait1 = 3;
     	int marginElements = 3;
     	int maxSecondsWait2 = 1;

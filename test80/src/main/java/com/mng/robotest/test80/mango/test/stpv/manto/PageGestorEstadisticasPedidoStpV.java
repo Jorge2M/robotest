@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorEstadisticasPedido;
@@ -19,7 +19,7 @@ public class PageGestorEstadisticasPedidoStpV {
 			"2) Aparece el input de fecha de inicio<br>" + 
 			"3) Aparece el input de fecha fin";
 		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+		ChecksResult listVals = ChecksResult.getNew(datosStep);
 		try {
 			if (!PageGestorEstadisticasPedido.isPage(dFTest.driver)) {
 				listVals.add(1, State.Defect);
@@ -53,7 +53,7 @@ public class PageGestorEstadisticasPedidoStpV {
 			"2) Las columnas de comparación en verde contienen \"0 €\"<br>" +
 			"3) Las columnas de comparación en rojo contienen \"0 %\"";
 		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+		ChecksResult listVals = ChecksResult.getNew(datosStep);
 		try {
 			if (!PageGestorEstadisticasPedido.isTablaInformacionVisible(dFTest.driver)) {
 				listVals.add(1, State.Defect);
@@ -86,7 +86,7 @@ public class PageGestorEstadisticasPedidoStpV {
 			"1) Las columnas de comparación en verde no contienen \"0 €\"<br>" +
 			"2) Las columnas de comparación en rojo no contienen \"0 %\"";
 		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+		ChecksResult listVals = ChecksResult.getNew(datosStep);
 		try {
 			if (!PageGestorEstadisticasPedido.isColumnaCompararVerdeNoZero(dFTest.driver)) {
 				listVals.add(1, State.Defect);

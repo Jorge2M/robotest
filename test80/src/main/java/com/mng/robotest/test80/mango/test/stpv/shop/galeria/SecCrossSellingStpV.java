@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -19,7 +19,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenus
 public class SecCrossSellingStpV {
 
 	@Validation
-    public static ListResultValidation validaIsCorrect(LineaType lineaType, AppEcom app, DataFmwkTest dFTest) 
+    public static ChecksResult validaIsCorrect(LineaType lineaType, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
         //Obtenemos la lista de menús de Mujer-Prendas
         List<WebElement> listaMenusBloque = 
@@ -29,7 +29,7 @@ public class SecCrossSellingStpV {
         String litMenu2 = listaMenusBloque.get(1).getAttribute("innerHTML");
         String litMenu3 = listaMenusBloque.get(2).getAttribute("innerHTML");
         
-    	ListResultValidation validations = ListResultValidation.getNew();
+    	ChecksResult validations = ChecksResult.getNew();
         PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, dFTest.driver);
     	if (!PageGaleriaDesktop.secCrossSelling.isSection(dFTest.driver)) {
             pageGaleria.scrollToPageFromFirst(PageGaleriaDesktop.maxPageToScroll, app);

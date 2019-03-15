@@ -18,7 +18,6 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais.LayoutPago;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
-import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci.SecTarjetaPci;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -49,7 +48,6 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     static String XPathAceptarPromoEmpl = "//div[@class[contains(.,'botoneraEmpleado')]]/span[@class='botonNew']";
     static String XPathDescuentoEmpleado = "//p[@class[contains(.,'descuento-aplicado')]]//span[@class='price-format']";
 
-    
     static String XPathPrecioRelArticle = "//div[@class[contains(.,'precioNormal')]]";
 	static String XPathPrecioNoTachadoRelArticle = XPathPrecioRelArticle + "//self::div[not(@class[contains(.,'tachado')])]";
 	static String XPathPrecioSiTachadoRelArticle = XPathPrecioRelArticle + "//self::div[@class[contains(.,'tachado')]]";
@@ -74,7 +72,11 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         "//div[@class='mensajesContrarembolso'] | " +
         "//div[@class[contains(.,'cardContainerNotIntegrated')]] | " +
         "//div[@class[contains(.,'falconFormularioTarjeta')]]"; 
+    
+    static String tagMetodoPago = "@TagMetodoPago";
+    static String XPathBlockTarjetaGuardadaPagoWithTag = "//div[@class[contains(.,'tarjetaGuardada')] and @data-analytics-value='" + tagMetodoPago + "']";
     static String XPathRadioTrjGuardada = "//input[@class[contains(.,'guardadaInput')]]";
+    
     static String XPathLinkSolicitarFactura = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
     static String XPathLinkEditDirecEnvio = "//span[@class[contains(.,'cambiarDatosEnvio')]]";
     static String XPathFirstArticulo = "//div[@class[contains(.,'firstArticulo')]]";
@@ -89,6 +91,15 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     
     static String getXPathLinArticle(String referencia) {
         return ("//div[@class[contains(.,'ref')] and text()[contains(.,'" + referencia + "')]]/ancestor::div[@class[contains(.,'articuloResBody')]]");
+    }
+    
+    static String getXPathBlockTarjetaGuardada(String metodoPago) {
+    	return (XPathBlockTarjetaGuardadaPagoWithTag.replace(tagMetodoPago, metodoPago.toLowerCase()));
+    }
+    
+    static String getXPathRadioTarjetaGuardada(String metodoPago) {
+    	String xpathMethod = getXPathBlockTarjetaGuardada(metodoPago);
+    	return (xpathMethod + XPathRadioTrjGuardada);
     }
     
     @SuppressWarnings("static-access")
@@ -530,9 +541,11 @@ public class Page1DktopCheckout extends WebdrvWrapp {
 
         return ImporteScreen.getFloatFromImporteMangoScreen(precioArticulo);
     }
+
     
-    public static boolean isVisibleRadioTrjGuardada(WebDriver driver)  {
-    	return (WebdrvWrapp.isElementVisible(driver, By.xpath(XPathRadioTrjGuardada)));
+    public static boolean isVisibleRadioTrjGuardada(String metodoPago, WebDriver driver)  {
+    	String xpathRadioTrjGuardada = getXPathRadioTarjetaGuardada(metodoPago);
+    	return (WebdrvWrapp.isElementVisible(driver, By.xpath(xpathRadioTrjGuardada)));
     }
     
     public static void clickRadioTrjGuardada(WebDriver driver) throws Exception {

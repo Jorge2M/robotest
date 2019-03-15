@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -24,8 +24,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalCambioPaisStpV;
 public class SecFooterStpV {
     
 	@Validation 
-    public static ListResultValidation validaLinksFooter(Channel channel, AppEcom app, WebDriver driver) throws Exception { 
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validaLinksFooter(Channel channel, AppEcom app, WebDriver driver) throws Exception { 
+    	ChecksResult validations = ChecksResult.getNew();
     	List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(app, channel);
     	validations.add(
     		"Aparecen los siguientes links en el footer <b>" + listFooterLinksToValidate + "</b>",
@@ -49,9 +49,9 @@ public class SecFooterStpV {
     }
 	 
 	@Validation
-	private static ListResultValidation checkPageCorrectAfterSelectLinkFooter(String windowFatherHandle, FooterLink typeFooter, boolean closeAtEnd, 
+	private static ChecksResult checkPageCorrectAfterSelectLinkFooter(String windowFatherHandle, FooterLink typeFooter, boolean closeAtEnd, 
 																			  Channel channel, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    	ChecksResult validations = ChecksResult.getNew();
 	    PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter, channel);
 		String windowActualHandle = driver.getWindowHandle();
 		boolean newWindowInNewTab = (windowActualHandle.compareTo(windowFatherHandle)!=0);
@@ -82,8 +82,8 @@ public class SecFooterStpV {
      * Método que valida la existencia del número de teléfono en el apartado Preguntas frecuentes
      */    
 	@Validation
-    public static ListResultValidation validaPaginaAyuda(Channel channel, WebDriver driver) throws Exception {
-		ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validaPaginaAyuda(Channel channel, WebDriver driver) throws Exception {
+		ChecksResult validations = ChecksResult.getNew();
 		String telefono = "901 150 543";
     	validations.add(
     		"Aparece \"Preguntas Frecuentes\" en la página <br>",
@@ -118,8 +118,8 @@ public class SecFooterStpV {
      }
      
      @Validation
-     private static ListResultValidation checkAfterClickLoQuieroAhoraButton(WebDriver driver) throws Exception {
- 		ListResultValidation validations = ListResultValidation.getNew();
+     private static ChecksResult checkAfterClickLoQuieroAhoraButton(WebDriver driver) throws Exception {
+ 		ChecksResult validations = ChecksResult.getNew();
      	validations.add(
      		"Aparece el campo <b>Nombre</b><br>",
      		PageMangoCard.isPresentNameField(driver), State.Warn);	
@@ -151,8 +151,8 @@ public class SecFooterStpV {
      }
      
      @Validation
-     private static ListResultValidation checkAfterClickLoQuieroAhoraUnderForm(WebDriver driver) throws Exception {
-  		ListResultValidation validations = ListResultValidation.getNew();
+     private static ChecksResult checkAfterClickLoQuieroAhoraUnderForm(WebDriver driver) throws Exception {
+  		ChecksResult validations = ChecksResult.getNew();
         String ventanaPadre = driver.getWindowHandle();
         WebdrvWrapp.switchToAnotherWindow(driver, ventanaPadre);    
         Thread.sleep(1000); //El javascript lanzado por "waitForPageLoaded" rompe la carga de la página -> hemos de aplicar wait explícito previo
@@ -177,8 +177,8 @@ public class SecFooterStpV {
      }
      
      @Validation
-     private static ListResultValidation checkValidPageTarjetaMango(String ventanaOriginal, WebDriver driver) {
-  		ListResultValidation validations = ListResultValidation.getNew();
+     private static ChecksResult checkValidPageTarjetaMango(String ventanaOriginal, WebDriver driver) {
+  		ChecksResult validations = ChecksResult.getNew();
      	validations.add(
      		"Aparece la página de Solicitud de tu Tarjeta MANGO<br>",
      		PageInputDataSolMangoCard.isPage2(driver), State.Defect);
@@ -247,8 +247,8 @@ public class SecFooterStpV {
     }
      
     @Validation
-    private static ListResultValidation checkIsRGPDpresent(String codigoPais, WebDriver driver) {
-  		ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkIsRGPDpresent(String codigoPais, WebDriver driver) {
+  		ChecksResult validations = ChecksResult.getNew();
      	validations.add(
      		"El texto de info de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + codigoPais + "<br>",
      		SecFooter.isTextoRGPDPresent(driver), State.Defect);
@@ -259,8 +259,8 @@ public class SecFooterStpV {
     }
     
     @Validation
-    private static ListResultValidation checkIsNotPresentRGPD(String codigoPais, WebDriver driver) {
-  		ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkIsNotPresentRGPD(String codigoPais, WebDriver driver) {
+  		ChecksResult validations = ChecksResult.getNew();
      	validations.add(
      		"El texto de info de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + codigoPais + "<br>",
      		!SecFooter.isTextoRGPDPresent(driver), State.Defect);

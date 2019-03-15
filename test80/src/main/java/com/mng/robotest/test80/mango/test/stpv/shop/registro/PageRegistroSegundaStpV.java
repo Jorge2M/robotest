@@ -8,7 +8,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
@@ -22,9 +22,9 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 public class PageRegistroSegundaStpV {
     
 	@Validation
-    public static ListResultValidation validaIsPageRegistroOK(Pais paisRegistro, AppEcom app, HashMap<String,String> dataRegistro, WebDriver driver) 
+    public static ChecksResult validaIsPageRegistroOK(Pais paisRegistro, AppEcom app, HashMap<String,String> dataRegistro, WebDriver driver) 
     throws Exception {
-		ListResultValidation validations = ListResultValidation.getNew();
+		ChecksResult validations = ChecksResult.getNew();
         String lineasComaSeparated = "";
         int numLineas = 0;
         if (paisRegistro.getShoponline().stateLinea(LineaType.she, app)==ThreeState.TRUE) {

@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageResultPagoTpv;
@@ -11,8 +11,8 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PageResultPagoTpvStpV {
     
 	@Validation
-    public static ListResultValidation validateIsPageOk(DataPedido dataPedido, String codPais, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsPageOk(DataPedido dataPedido, String codPais, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"Aparece un texto de confirmación de la compra<br>",
 			PageResultPagoTpv.isPresentCabeceraConfCompra(driver), State.Warn);

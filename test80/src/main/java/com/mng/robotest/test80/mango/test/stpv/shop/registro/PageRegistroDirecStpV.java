@@ -5,7 +5,7 @@ import java.util.HashMap;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageRegistroAddressData;
@@ -14,8 +14,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroD
 public class PageRegistroDirecStpV {
     
 	@Validation
-    public static ListResultValidation isPageFromPais(Pais pais, DataFmwkTest dFTest) {
-		ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult isPageFromPais(Pais pais, DataFmwkTest dFTest) {
+		ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 3;
     	validations.add(
     		"Aparece la página de introducción de datos de la dirección (la esperamos un máximo de " + maxSecondsWait + " segundos)",

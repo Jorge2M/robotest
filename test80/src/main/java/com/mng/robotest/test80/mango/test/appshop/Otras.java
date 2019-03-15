@@ -10,7 +10,7 @@ import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
@@ -286,8 +286,8 @@ public class Otras extends GestorWebDriver {
     }
     
     @Validation
-    public ListResultValidation validaPageIniJapon3(WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public ChecksResult validaPageIniJapon3(WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 3;
     	validations.add(
     		"Estamos en la página inicial de Japón (la esperamos hasta " + maxSecondsWait + ")<br>",
@@ -304,7 +304,7 @@ public class Otras extends GestorWebDriver {
         	"1) Estamos en la página inicial de Japón (la esperamos hasta " + maxSecondsWait + ")<br>" +
         	"2) Estamos en la página inicial de Japón (la esperamos hasta " + maxSecondsWait + ")";
         datosStep.setNOKstateByDefault();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {
             if (!PageIniShopJapon.isPageUntil(maxSecondsWait, driver)) {
                 listVals.add(1, State.Defect);

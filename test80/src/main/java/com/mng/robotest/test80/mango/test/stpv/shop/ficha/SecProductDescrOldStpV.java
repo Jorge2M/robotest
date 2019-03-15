@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -16,7 +16,7 @@ public class SecProductDescrOldStpV {
     
 	@Validation
     public static void validateAreInStateInitial(AppEcom appE, WebDriver driver) throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    	ChecksResult validations = ChecksResult.getNew();
     	for (TypePanel typePanel : TypePanel.values()) {
     		TypeStatePanel stateExpected = TypeStatePanel.missing;
             if (typePanel.getListApps().contains(appE)) {

@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -33,8 +33,8 @@ public class SecSoyNuevoStpV {
     
     @SuppressWarnings("static-access")
     @Validation
-	public static ListResultValidation validaRGPDText(DataCtxShop dCtxSh, WebDriver driver) {  
-    	ListResultValidation validations = ListResultValidation.getNew();
+	public static ChecksResult validaRGPDText(DataCtxShop dCtxSh, WebDriver driver) {  
+    	ChecksResult validations = ChecksResult.getNew();
 		if (dCtxSh.pais.getRgpd().equals("S")) {
 		 	validations.add(
 				"El texto de info de RGPD <b>SI</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>",

@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
@@ -28,8 +28,8 @@ public class SecKlarnaStpV {
     }
 	
 	@Validation
-	private static ListResultValidation checkIsVisibleModalDirecciones(Pago pago, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkIsVisibleModalDirecciones(Pago pago, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 3;
       	validations.add(
     		"Aparece el modal de las direcciones de Klarna (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",

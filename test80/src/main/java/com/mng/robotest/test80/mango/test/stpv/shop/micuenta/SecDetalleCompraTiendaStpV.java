@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
@@ -21,8 +21,8 @@ public class SecDetalleCompraTiendaStpV {
 	
     @SuppressWarnings("static-access")
     @Validation
-    private static ListResultValidation checkData(CompraTienda compraTienda, Channel channel, WebDriver driver) {
-        ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkData(CompraTienda compraTienda, Channel channel, WebDriver driver) {
+        ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 1;
         validations.add(
         	"Es visible la capa correspondiente al detalle del tícket de compra (la esperamos hasta " + maxSecondsWait + " segundos)<br>",

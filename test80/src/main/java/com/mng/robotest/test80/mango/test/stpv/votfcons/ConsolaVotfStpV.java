@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.votfcons;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.votfcons.IframeResult;
@@ -34,7 +34,7 @@ public class ConsolaVotfStpV {
             "1) Aparece el apartado \"Test servicios VOTF\"<br>" +
             "2) Aparece el apartado \"Consola comandos VOTF";
         datosStep.setExcepExists(true);  
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {  
             if (!PageConsola.existTestServVOTF(dFTest.driver)) {
                 listVals.add(1, State.Warn);
@@ -119,7 +119,7 @@ public class ConsolaVotfStpV {
         String descripValidac = 
             "1) En el bloque de \"Petición/Resultado\" aparece el literal \"" + PageConsola.msgConsTiposEnvioOK + "\"";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {
             //Nos posicionamos en el iframe correspondiente al resultado
             PageConsola.switchToResultIFrame(dFTest.driver);
@@ -168,7 +168,7 @@ public class ConsolaVotfStpV {
             "3) En la tabla figuran los tipos " + codigosTransporte.replace("\n", ",");
         datosStep.setExcepExists(true); 
         datosStep.setResultSteps(State.Ok);
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {  
             if (!PageConsola.isDataSelectCodigoTransporte(maxSecondsToWait, dFTest.driver)) {
                 listVals.add(1, State.Defect);
@@ -225,7 +225,7 @@ public class ConsolaVotfStpV {
             "2) Aparece una línea de \"TipoStock:\" con contenido";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);          
         paginaPadre = dFTest.driver.getWindowHandle();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {  
             PageConsola.switchToResultIFrame(dFTest.driver);
             if (IframeResult.existsTransportes(dFTest.driver)) {
@@ -277,7 +277,7 @@ public class ConsolaVotfStpV {
             "2) Aparece un código de pedido<br>" +
             "3) Aparece el literal \"Resultado creación pedido: (0) Total\"";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {  
             PageConsola.switchToResultIFrame(dFTest.driver);
             if (!IframeResult.isPresentCodigoPedido(dFTest.driver)) {
@@ -331,7 +331,7 @@ public class ConsolaVotfStpV {
             "1) En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Pedidos\"<br>" +
             "2) En la lista de pedidos aparece el generado anteriormente: " + codigoPedido;
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {  
             PageConsola.switchToResultIFrame(dFTest.driver);
             if (!IframeResult.isPresentListaPedidos(dFTest.driver)) {
@@ -381,7 +381,7 @@ public class ConsolaVotfStpV {
         String descripValidac = 
             "1) En el bloque de \"Petición/Resultado\" aparece una línea \"Seleccionado: " + codigoPedidoFull + "\"";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {  
             PageConsola.switchToResultIFrame(dFTest.driver);
             if (IframeResult.resSelectPedidoOk(dFTest.driver, codigoPedidoFull)) {
@@ -425,7 +425,7 @@ public class ConsolaVotfStpV {
             "2) Aparece un XML con el dato \"&lt;pedido&gt;" + codigoPedidoFull + "&lt;/pedido&gt;\"";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);          
         paginaPadre = dFTest.driver.getWindowHandle();
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {  
             PageConsola.switchToResultIFrame(dFTest.driver);
             boolean[] resultado = IframeResult.resSelPreconfPedidoOk(dFTest.driver, codigoPedidoFull);
@@ -471,7 +471,7 @@ public class ConsolaVotfStpV {
         String descripValidac = 
             "1) En el bloque de \"Petición/Resultado\" aparece una línea \"Confirmado: " + codigoPedidoFull + "\"";
         datosStep.setExcepExists(true); datosStep.setResultSteps(State.Ok);
-        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+        ChecksResult listVals = ChecksResult.getNew(datosStep);
         try {  
             PageConsola.switchToResultIFrame(dFTest.driver);
             if (!IframeResult.resConfPedidoOk(dFTest.driver, codigoPedidoFull)) {

@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -39,8 +39,8 @@ public class PageReembolsosStpV {
     }
     
     @Validation
-    private static ListResultValidation checkClickReembolsos(boolean paisConSaldoCta, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkClickReembolsos(boolean paisConSaldoCta, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
     	validations.add(
     		"Aparece la página de reembolsos<br>",
     		PageReembolsos.isPage(driver), State.Defect);    	
@@ -128,8 +128,8 @@ public class PageReembolsosStpV {
     }
     
     @Validation
-    private static ListResultValidation checkAfterModifyDataTransferencia(WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkAfterModifyDataTransferencia(WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsToWait = 10;
     	validations.add(
     		"Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>",
@@ -153,8 +153,8 @@ public class PageReembolsosStpV {
     }
     
     @Validation
-    private static ListResultValidation checkAfterSelectStoreCredit(WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkAfterSelectStoreCredit(WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
        	validations.add(
     		"Aparece seleccionado el radiobutton de \"Store Credit\"<br>",
     		PageReembolsos.isCheckedRadio(TypeReembolso.StoreCredit, driver), State.Warn);

@@ -11,7 +11,7 @@ import org.aspectj.lang.annotation.Pointcut;
 @Aspect
 public class ValidationAspect {
 	
-	ListResultValidation listResultValidations;
+	ChecksResult listResultValidations;
 	
     @Pointcut("@annotation(Validation)")
     public void annotationValidationPointcut() {}

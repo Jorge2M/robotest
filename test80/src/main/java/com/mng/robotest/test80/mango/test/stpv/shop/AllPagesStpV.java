@@ -8,7 +8,7 @@ import org.testng.ITestContext;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.otras.WebDriverArqUtils;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
@@ -33,9 +33,9 @@ public class AllPagesStpV {
     }
     
     @Validation
-    public static ListResultValidation validacionesEstandar(StdValidationFlags flagsVal, WebDriver driver, ITestContext ctx) 
+    public static ChecksResult validacionesEstandar(StdValidationFlags flagsVal, WebDriver driver, ITestContext ctx) 
     throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    	ChecksResult validations = ChecksResult.getNew();
     	if (flagsVal.validaSEO) {
     		ResultadoErrores resValidac = AllPagesSEO.validacionesGenericasSEO(driver);
     		String descripValidac = "Se cumplen las validaciones genéricas de SEO<br>";
@@ -85,8 +85,8 @@ public class AllPagesStpV {
     }
     
     @Validation
-    public static ListResultValidation validatePageWithFooter(Pais pais, AppEcom app, WebDriver driver) throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validatePageWithFooter(Pais pais, AppEcom app, WebDriver driver) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
 		validations.add(
 			"Aparece el footer<br>",
 			SecFooter.isPresent(app, driver), State.Warn);

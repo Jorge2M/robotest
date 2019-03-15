@@ -5,7 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -37,8 +37,8 @@ public class PageMisComprasStpV {
     }
 
     @Validation
-    private static ListResultValidation validateIsPageWhenNotExistTabs(WebDriver driver) throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult validateIsPageWhenNotExistTabs(WebDriver driver) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsToWait = 2;
       	validations.add(
     		"Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)<br>",
@@ -53,8 +53,8 @@ public class PageMisComprasStpV {
     }
 
     @Validation
-    public static ListResultValidation validateIsPage(WebDriver driver) throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsPage(WebDriver driver) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 2;
       	validations.add(
     		"Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
@@ -91,8 +91,8 @@ public class PageMisComprasStpV {
 	}
 	
 	@Validation
-	private static ListResultValidation checkArticlesInList(TypeCompra typeCompra, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkArticlesInList(TypeCompra typeCompra, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 2;
     	boolean isVisibleAnyCompra = PageMisCompras.isVisibleAnyCompraUntil(maxSecondsWait, driver); 
       	validations.add(
@@ -107,8 +107,8 @@ public class PageMisComprasStpV {
 	}
 		
 	@Validation
-	private static ListResultValidation checkListArticlesVoid(TypeCompra typeCompra, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkListArticlesVoid(TypeCompra typeCompra, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
     	boolean isVisibleAnyCompra = PageMisCompras.isVisibleAnyCompraUntil(0, driver);
       	validations.add(
     		"No aparece ningún artículo<br>",
@@ -120,8 +120,8 @@ public class PageMisComprasStpV {
 	}
     
     @Validation
-    public static ListResultValidation validateIsCompraOnlineVisible(String codPedido, boolean isChequeRegalo, WebDriver driver) {
-        ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsCompraOnlineVisible(String codPedido, boolean isChequeRegalo, WebDriver driver) {
+        ChecksResult validations = ChecksResult.getNew();
         State stateVal = State.Warn;
         if (isChequeRegalo) {
             stateVal = State.Info_NoHardcopy;
@@ -167,8 +167,8 @@ public class PageMisComprasStpV {
 	}    
     
     @Validation
-    private static ListResultValidation checkModalArticle(String infoArticle, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkModalArticle(String infoArticle, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
     	validations.add(
     		"Aparece el modal con información del artículo<br>",
     		ModalDetalleMisCompras.isVisible(driver), State.Defect);

@@ -9,33 +9,33 @@ import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 
 
-public class ListResultValidation {
+public class ChecksResult {
 	private final List<ResultValidation> listResultValidations;
 	private State stateValidation = State.Nok;
     private final DatosStep datosStep; //TODO Creo que se puede llegar eliminar
     private String descripcionValidations;
 	
-    public ListResultValidation() {
+    public ChecksResult() {
     	DatosStep datosStep = TestCaseData.getDatosLastStep();
     	listResultValidations = new ArrayList<>();
     	this.datosStep = datosStep;
     }
     
-	private ListResultValidation(DatosStep datosStep) {
+	private ChecksResult(DatosStep datosStep) {
 		listResultValidations = new ArrayList<>();
 		this.datosStep = datosStep;
 	}
 	
-	public static ListResultValidation getNew(DatosStep datosStep) {
-		return (new ListResultValidation(datosStep));
+	public static ChecksResult getNew(DatosStep datosStep) {
+		return (new ChecksResult(datosStep));
 	}
 	
-	public static ListResultValidation getNew() {
-		return (new ListResultValidation());
+	public static ChecksResult getNew() {
+		return (new ChecksResult());
 	}
 	
-	public static ListResultValidation of(ResultValidation resultValidation, DatosStep datosStep) {
-		ListResultValidation listValidations = new ListResultValidation(datosStep);
+	public static ChecksResult of(ResultValidation resultValidation, DatosStep datosStep) {
+		ChecksResult listValidations = new ChecksResult(datosStep);
 		listValidations.add(resultValidation);
 		return listValidations;
 	}

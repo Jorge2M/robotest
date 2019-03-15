@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -35,8 +35,8 @@ public class PageHomeMarcasStpV {
     }
     
     @Validation
-    public static ListResultValidation validateIsPageOk(Pais pais, AppEcom app, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsPageOk(Pais pais, AppEcom app, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
     	if (app!=AppEcom.outlet) {
 			validations.add(
 				"Aparece la home de marcas/multimarcas según el país<br>",
@@ -59,8 +59,8 @@ public class PageHomeMarcasStpV {
     }
     
     @Validation
-    private static ListResultValidation checkLineaRebajas(boolean salesOnInCountry, DataCtxShop dCtxSh, WebDriver driver) {
-        ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkLineaRebajas(boolean salesOnInCountry, DataCtxShop dCtxSh, WebDriver driver) {
+        ChecksResult validations = ChecksResult.getNew();
         int maxSeconds = 3;
         boolean isPresentLinRebajas = SecMenusWrap.isLineaPresentUntil(LineaType.rebajas, dCtxSh.appE, dCtxSh.channel, maxSeconds, driver);
         if (salesOnInCountry && dCtxSh.pais.isVentaOnline()) {
@@ -78,8 +78,8 @@ public class PageHomeMarcasStpV {
     }
     
     @Validation
-    private static ListResultValidation checkBannerRebajas(boolean salesOnInCountry, TypeHome typeHome, DataCtxShop dCtxSh, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkBannerRebajas(boolean salesOnInCountry, TypeHome typeHome, DataCtxShop dCtxSh, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
     	int maxBannersToLoad = 1;
     	DataBanner dataBanner1 = null;
         ManagerBannersScreen managerBannersScreen = new ManagerBannersScreen(maxBannersToLoad, driver);
@@ -125,8 +125,8 @@ public class PageHomeMarcasStpV {
     }
             
     @Validation
-    private static ListResultValidation checkMsgNewsletterFooter(boolean salesOnInCountry, IdiomaPais idioma, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkMsgNewsletterFooter(boolean salesOnInCountry, IdiomaPais idioma, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
     	String percentageSymbol = UtilsTestMango.getPercentageSymbol(idioma);
     	boolean isMsgWithPercentageSimbol = SecFooter.getNewsLetterMsgText(driver).contains(percentageSymbol);
     	if (salesOnInCountry) {

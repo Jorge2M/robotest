@@ -169,6 +169,10 @@ public class PagoNavigationsStpV {
         if (dCtxSh.appE==AppEcom.votf && dCtxSh.pais.getCodigo_pais().compareTo("001")==0 /*España*/) {
             Page1DktopCheckoutStpV.stepIntroduceCodigoVendedorVOTF("111111", driver);
         }
+        
+//        if (dCtxPago.getFTCkout().isLoyalty) {
+//        	Page1DktopCheckoutStpV.checkLoyalty();
+//        }
     }
     
     @SuppressWarnings("unused")

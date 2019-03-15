@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -39,8 +39,8 @@ public class SecCabeceraStpV {
     }    
     
 	@Validation
-    public ListResultValidation validateIconoBolsa() {
-		ListResultValidation validations = ListResultValidation.getNew();
+    public ChecksResult validateIconoBolsa() {
+		ChecksResult validations = ChecksResult.getNew();
 		boolean isVisibleIconoBolsa = secCabecera.isVisibleIconoBolsa();
 		if ("true".compareTo(dCtxSh.pais.getShop_online())==0) {
 	    	validations.add(
@@ -54,4 +54,12 @@ public class SecCabeceraStpV {
 		}
 		return validations;
     }
+	
+	@Validation (
+		description="Es visible el bloque de Likes en la cabecera",
+		level=State.Defect)
+	public boolean checkIsVisibleLikesDesktop() {
+		//TODO implementar "isVisibleLikes" a nivel de la interfaz
+		return (((SecCabeceraDesktop)secCabecera).isVisibleLikes());
+	}
 }

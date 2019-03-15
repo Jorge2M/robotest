@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.otras;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.otras.PageGoogle;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
@@ -23,8 +23,8 @@ public class GoogleStpV {
     }
 	
 	@Validation
-	private static ListResultValidation checkLinksMango(WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkLinksMango(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
     	validations.add(
     		"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + maxSecondsWait + " segundos)<br>",

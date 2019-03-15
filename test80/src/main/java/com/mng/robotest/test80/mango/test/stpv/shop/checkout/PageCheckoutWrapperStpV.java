@@ -10,7 +10,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
@@ -85,8 +85,8 @@ public class PageCheckoutWrapperStpV {
     }
     
     @Validation
-    private static ListResultValidation checkAvailablePagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkAvailablePagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país (" + pais.getListPagosEnOrdenPantalla(app, isEmpl).size() + ")",
 			PageCheckoutWrapper.isNumMetodosPagoOK(pais, app, channel, isEmpl, driver), State.Defect);    	
@@ -94,8 +94,8 @@ public class PageCheckoutWrapperStpV {
     }
     
     @Validation
-    private static ListResultValidation checkLogosPagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) { 
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkLogosPagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) { 
+    	ChecksResult validations = ChecksResult.getNew();
         List<Pago> listaPagosEnOrden = pais.getListPagosEnOrdenPantalla(app, isEmpl);
         for (int i=0; i<listaPagosEnOrden.size(); i++) {
             if (listaPagosEnOrden.get(i).getTypePago()!=TypePago.TpvVotf) {
@@ -328,10 +328,10 @@ public class PageCheckoutWrapperStpV {
     }
     
     @Validation (
-    	description="Está disponible una tarjeta guardada",
+    	description="Está disponible una tarjeta guardada de tipo #{tipoTarjeta}",
     	level=State.Warn)
-    public static boolean isTarjetaGuardadaAvailable(Channel channel, WebDriver driver) {
-    	return (PageCheckoutWrapper.isAvailableTrjGuardada(channel, driver));
+    public static boolean isTarjetaGuardadaAvailable(String tipoTarjeta, Channel channel, WebDriver driver) {
+    	return (PageCheckoutWrapper.isAvailableTrjGuardada(tipoTarjeta, channel, driver));
     }
     
     @Step (
@@ -411,8 +411,8 @@ public class PageCheckoutWrapperStpV {
     }
     
     @Validation
-    private static ListResultValidation checkAfterInputTarjetaEmpleado(Pais pais, Channel channel, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkAfterInputTarjetaEmpleado(Pais pais, Channel channel, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
 	    int maxSecondsWait = 5;
 	 	validations.add(
 			"Aparece el campo de introducción del primer apellido (lo esperamos hasta " + maxSecondsWait + " segundos)",

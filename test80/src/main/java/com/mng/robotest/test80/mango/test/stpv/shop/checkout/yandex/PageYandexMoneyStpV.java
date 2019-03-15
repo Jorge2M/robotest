@@ -6,7 +6,7 @@ import com.mng.robotest.test80.arq.utils.TestCaseData;
 
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandexMoney;
@@ -24,8 +24,8 @@ public class PageYandexMoneyStpV {
     }
     
 	@Validation
-    private static ListResultValidation checkIsPage(WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkIsPage(WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"Aparece el input para el <b>Payment Code</b><br>",
 			PageYandexMoney.isVisibleInputPaymentCode(driver), State.Warn);

@@ -12,9 +12,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais.LayoutPago;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
-import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci.SecTarjetaPci;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
-
 
 /**
  * PageObject asociado a la página-2 del checkout de móvil ("Datos de Pago" con los métodos de pago)
@@ -29,7 +27,11 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     static String XPathLink2DatosPago = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step2']";
     static String XPathButtonVerResumen = "//button[@id[contains(.,'complete-step2')]]";
     static String XPathRedError = "//div[@class[contains(.,'step-error')]]/p";
-    static String XPathRadioTrjGuardada = "//div[@clas[contains(.,'saved-card')]]//div[@class[contains(.,'radio')]]";
+    
+    static String tagMetodoPago = "@TagMetodoPago";
+    static String XPathBlockTarjetaGuardadaPagoWithTag = "//div[@data-analytics-value='" + tagMetodoPago + "']";
+    static String XPathRadioTrjGuardada = "//div[@clas[contains(.,'saved-card')]//div[@class[contains(.,'radio')]]";
+    
     static String XPathLinkSolicitarFactura = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
     static String XPathLinkFormasPago = "//div[@class[contains(.,'payment-method')]]//span[@class[contains(.,'others-title')]]"; 
     static String XPathLineaPagoLayoutLinea = "//div[@class[contains(.,'payment-method')] and @data-id]";
@@ -37,6 +39,15 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     
     //secciones de pagos (que se pueden mostrar/ocultar) disponibles en países como México
     static String XPathSectionsPagosMobil = "//*[@class[contains(.,'group-card-js')]]"; 
+    
+    static String getXPathBlockTarjetaGuardada(String metodoPago) {
+    	return (XPathBlockTarjetaGuardadaPagoWithTag.replace(tagMetodoPago, metodoPago));
+    }
+    
+    static String getXPathRadioTarjetaGuardada(String metodoPago) {
+    	String xpathMethod = getXPathBlockTarjetaGuardada(metodoPago);
+    	return (xpathMethod + XPathRadioTrjGuardada);
+    }
     
     static String getXPathPagoLayoutLinea(String nombrePago) {
     	return (XPathLineaPagoLayoutLinea + "/div[@data-analytics-value='" + nombrePago.toLowerCase() + "']/..");
@@ -305,8 +316,9 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
         return (driver.findElement(By.xpath(XPathRedError)).getText());
     }
     
-    public static boolean isVisibleRadioTrjGuardada(WebDriver driver)  {
-    	return (WebdrvWrapp.isElementVisible(driver, By.xpath(XPathRadioTrjGuardada)));
+    public static boolean isVisibleRadioTrjGuardada(String metodoPago, WebDriver driver)  {
+    	String xpathRadioTrjGuardada = getXPathRadioTarjetaGuardada(metodoPago);
+    	return (WebdrvWrapp.isElementVisible(driver, By.xpath(xpathRadioTrjGuardada)));
     }
     
     public static void clickRadioTrjGuardada(WebDriver driver) throws Exception {

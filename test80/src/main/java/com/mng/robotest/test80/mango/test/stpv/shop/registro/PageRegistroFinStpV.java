@@ -5,7 +5,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
@@ -35,8 +35,8 @@ public class PageRegistroFinStpV {
     }
 	
 	@Validation
-	public static ListResultValidation validateWeAreLogged(DataCtxShop dCtxSh, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	public static ChecksResult validateWeAreLogged(DataCtxShop dCtxSh, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
     	validations.add(
     		"El logo de Mango redirige al país/idioma origen: " + dCtxSh.idioma.getAcceso() + "<br>",
     		SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, driver).validaLogoMangoGoesToIdioma(dCtxSh.idioma), State.Warn);

@@ -2,15 +2,15 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.postfinance;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance.PagePostfRedirect;
 
 public class PagePostfRedirectStpV {
 
 	@Validation
-    public static ListResultValidation isPageAndFinallyDisappears(WebDriver driver) throws Exception {
-		ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult isPageAndFinallyDisappears(WebDriver driver) throws Exception {
+		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 10;
 	   	validations.add(
     		"Aparece una página de redirección con un botón OK<br>",

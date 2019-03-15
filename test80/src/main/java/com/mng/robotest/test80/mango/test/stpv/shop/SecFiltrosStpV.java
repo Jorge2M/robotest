@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -52,9 +52,9 @@ public class SecFiltrosStpV {
     }
 	
 	@Validation
-	private static ListResultValidation checkAfterSelectFiltroColores(List<Color> colorsSelected, String litMenu, 
+	private static ChecksResult checkAfterSelectFiltroColores(List<Color> colorsSelected, String litMenu, 
 																	  int numArticulos1page, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsToWait = 1;
         List<String> listCodColors = Color.getListCodigosColor(colorsSelected);
         String currentUrl = driver.getCurrentUrl();

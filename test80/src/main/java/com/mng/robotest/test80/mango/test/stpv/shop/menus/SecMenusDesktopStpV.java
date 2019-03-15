@@ -11,7 +11,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -144,9 +144,9 @@ public class SecMenusDesktopStpV {
     }
       
     @Validation
-    private static ListResultValidation checkVisibility2onLevelMenus(List<Menu2onLevel> menus2onLevel, WebDriver driver) 
+    private static ChecksResult checkVisibility2onLevelMenus(List<Menu2onLevel> menus2onLevel, WebDriver driver) 
     throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    	ChecksResult validations = ChecksResult.getNew();
         for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
 	    	validations.add(
 	    		"Aparecen el menú de 2o nivel <b>" + menu2oNivelTmp.getNombre() + "</b>",
@@ -156,9 +156,9 @@ public class SecMenusDesktopStpV {
     }
     
     @Validation
-    private static ListResultValidation checkArticlesContainsLiterals(String[] textsArticlesGalery, AppEcom app, WebDriver driver) 
+    private static ChecksResult checkArticlesContainsLiterals(String[] textsArticlesGalery, AppEcom app, WebDriver driver) 
     throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    	ChecksResult validations = ChecksResult.getNew();
     	
     	String litsToContain = "";
         for (int i=0; i<textsArticlesGalery.length; i++) {
@@ -229,8 +229,8 @@ public class SecMenusDesktopStpV {
     }
     
     @Validation
-    private static ListResultValidation checkCarruselsAfterHoverLinea(Linea linea, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkCarruselsAfterHoverLinea(Linea linea, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
 	    int maxSecondsWait = 1;
       	validations.add(
     		"Aparece el bloque de menús de la línea " + linea.getType() + " (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
@@ -258,9 +258,9 @@ public class SecMenusDesktopStpV {
     }
     
     @Validation
-    private static ListResultValidation checkAfterSelectCarrusel(Linea linea, String idCarrusel, AppEcom app, WebDriver driver) 
+    private static ChecksResult checkAfterSelectCarrusel(Linea linea, String idCarrusel, AppEcom app, WebDriver driver) 
     throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    	ChecksResult validations = ChecksResult.getNew();
     	LineaType lineaType = linea.getType();
 	    PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, driver);
 
@@ -364,9 +364,9 @@ public class SecMenusDesktopStpV {
     }    
     
     @Validation
-    private static ListResultValidation checkNumPestanyasYmenusEqualsInBothNodes(int numPestanyas, int numMenus, LineaType lineaType, SublineaNinosType sublineaType, 
+    private static ChecksResult checkNumPestanyasYmenusEqualsInBothNodes(int numPestanyas, int numMenus, LineaType lineaType, SublineaNinosType sublineaType, 
     																			 String inodo, String urlBase) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    	ChecksResult validations = ChecksResult.getNew();
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
     	
         String clave = lineaType.name();
@@ -504,9 +504,9 @@ public class SecMenusDesktopStpV {
     }
     
     @Validation
-    private static ListResultValidation checkResultDependingMenuGroup(MenuLateralDesktop menu, AppEcom app, WebDriver driver) 
+    private static ChecksResult checkResultDependingMenuGroup(MenuLateralDesktop menu, AppEcom app, WebDriver driver) 
     throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    	ChecksResult validations = ChecksResult.getNew();
     	GroupMenu groupMenu = menu.getGroup();
     	if (groupMenu.containsArticles()) {
     		PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
@@ -553,8 +553,8 @@ public class SecMenusDesktopStpV {
 	 	return validations;
     }    
     
-    public static ListResultValidation checkErrorPageWithoutException(WebDriver driver) throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult checkErrorPageWithoutException(WebDriver driver) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
 		ITestContext ctx = TestCaseData.getdFTest().ctx;
 	    stackTrace exception = WebDriverMngUtils.stackTaceException(driver, ctx);
 	    String excepcionDuplicada = "";
@@ -599,8 +599,8 @@ public class SecMenusDesktopStpV {
     
 	  //Temporal para prueba fin rebajas en China
     @Validation
-    public static ListResultValidation validationsSpecificEndRebajasChina(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validationsSpecificEndRebajasChina(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
     	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
       	List<Integer> tempSale = FilterCollection.sale.getListTempArticles();
       	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFrom, tempSale);
@@ -630,9 +630,9 @@ public class SecMenusDesktopStpV {
     }
     
     @Validation
-    private static ListResultValidation checkNoArticlesRebajadosWithLabelIncorrect(Channel channel, AppEcom app, WebDriver driver) 
+    private static ChecksResult checkNoArticlesRebajadosWithLabelIncorrect(Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    	ChecksResult validations = ChecksResult.getNew();
     	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(channel, app, driver);
     	List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
     	List<Integer> tempSales = FilterCollection.sale.getListTempArticles();
@@ -659,9 +659,9 @@ public class SecMenusDesktopStpV {
     }
     
     @Validation
-    private static ListResultValidation checkNoArticlesTemporadaOldWithLabelsWrong(Channel channel, AppEcom app, WebDriver driver) 
+    private static ChecksResult checkNoArticlesTemporadaOldWithLabelsWrong(Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    	ChecksResult validations = ChecksResult.getNew();
         ArrayList<Integer> temporadaOld = new ArrayList<Integer>(Arrays.asList(2));  
        	List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
     	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(channel, app, driver);
@@ -686,9 +686,9 @@ public class SecMenusDesktopStpV {
     }
     	
     @Validation
-    private static ListResultValidation checkNoArticlesTemporadaNewWithLabelsWrong(Channel channel, AppEcom app, WebDriver driver) 
+    private static ChecksResult checkNoArticlesTemporadaNewWithLabelsWrong(Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-		ListResultValidation validations = ListResultValidation.getNew();
+		ChecksResult validations = ChecksResult.getNew();
         ArrayList<Integer> temporadaNew = new ArrayList<Integer>(Arrays.asList(3));
         PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(channel, app, driver);
         List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaNew, LabelArticle.NewNow, LabelArticle.NewCollection);

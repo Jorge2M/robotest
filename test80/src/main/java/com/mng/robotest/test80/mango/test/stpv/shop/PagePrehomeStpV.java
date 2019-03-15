@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop;
 import java.util.EnumSet;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
@@ -32,8 +32,8 @@ public class PagePrehomeStpV {
     }
 	
 	@Validation
-	private static ListResultValidation checkPaisSelected(DataCtxShop dCtxSh, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkPaisSelected(DataCtxShop dCtxSh, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 	    if (dCtxSh.channel==Channel.desktop) {
 	    	validations.add(
 				"Queda seleccionado el país con código " + dCtxSh.pais.getCodigo_pais() + " (" + dCtxSh.pais.getNombre_pais() + ")<br>",
@@ -93,8 +93,8 @@ public class PagePrehomeStpV {
     }    
     
     @Validation
-    private static ListResultValidation checkPagePostPreHome(AppEcom app, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkPagePostPreHome(AppEcom app, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
     	String title = driver.getTitle().toLowerCase();
     	if (app==AppEcom.outlet) {
 	    	validations.add(

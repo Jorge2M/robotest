@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.assist;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
@@ -16,8 +16,8 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PageAssist1rstStpV {
     
 	@Validation
-    public static ListResultValidation validateIsPage(String importeTotal, Pais pais, Channel channel, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateIsPage(String importeTotal, Pais pais, Channel channel, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"Está presente el logo de Assist<br>",
 			PageAssist1rst.isPresentLogoAssist(channel, driver), State.Warn);
@@ -53,8 +53,8 @@ public class PageAssist1rstStpV {
     }
 	
 	@Validation
-	private static ListResultValidation checkAfterClickPayButton(Channel channel, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkAfterClickPayButton(Channel channel, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 10;
 	 	validations.add(
 			"Desaparece la página con el botón de pago (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",

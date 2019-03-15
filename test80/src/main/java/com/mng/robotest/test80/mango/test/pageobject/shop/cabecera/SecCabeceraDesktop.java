@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
+import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecBuscadorDesktop;
 
 
@@ -23,6 +24,9 @@ public class SecCabeceraDesktop extends SecCabecera {
     public final static String XPathLinkLogoMango = "//div[@class='nav-logo' or @class[contains(.,'logo_menu')] or @class='logo']/a";
     private final static String XPathIconoMangoOutlet = XPathLinkLogoMango + "[@class[contains(.,'logo_outlet')]]";
     private final static String XPathDivNavTools = "//div[@id='navTools']";
+    
+    //TODO solicitar id al maquetador de Loyalty
+    private final static String XPahtLikes = "//a[@id='userMenuTrigger']/span[text()[contains(.,'LIKES')]]";
     
     private SecCabeceraDesktop(AppEcom app, WebDriver driver) {
     	this.app = app;
@@ -135,5 +139,9 @@ public class SecCabeceraDesktop extends SecCabecera {
     public void focusAwayBolsa(WebDriver driver) {
     	//The moveElement doens't works properly for hide the Bolsa-Modal
     	driver.findElement(By.xpath(XPathDivNavTools)).click();
+    }
+    
+    public boolean isVisibleLikes() {
+    	return (WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(XPahtLikes), 1));
     }
 }

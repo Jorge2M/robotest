@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorSaldosTPV;
@@ -18,7 +18,7 @@ public class PageGestorSaldosTPVStpV {
 			"1) Estamos en la página \"" + PageGestorSaldosTPV.titulo + " \"<br>" +
 			"2) Aparece el input de fecha de TPV";
 		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+		ChecksResult listVals = ChecksResult.getNew(datosStep);
 		try {
 			if (!PageGestorSaldosTPV.isPage(dFTest.driver)) {
 				listVals.add(1, State.Defect);
@@ -48,7 +48,7 @@ public class PageGestorSaldosTPVStpV {
 			"1) Aparece la tabla de saldos<br>" +
 			"2) Aparece el ID de la TPV \"" + tpv + "\" en la tabla";
 		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+		ChecksResult listVals = ChecksResult.getNew(datosStep);
 		try {
 			if (!PageGestorSaldosTPV.isTablaSaldosVisible(dFTest.driver)) {
 				listVals.add(1, State.Defect);
@@ -79,7 +79,7 @@ public class PageGestorSaldosTPVStpV {
 		String descripValidac = 
 			"1) Aparece el mensaje \"La tpv seleccionada no existe\"";
 		datosStep.setNOKstateByDefault();
-		ListResultValidation listVals = ListResultValidation.getNew(datosStep);
+		ChecksResult listVals = ChecksResult.getNew(datosStep);
 		try {
 			if (!PageGestorSaldosTPV.isUnvalidTPVMessageVisible(dFTest.driver)) {
 				listVals.add(1, State.Defect);

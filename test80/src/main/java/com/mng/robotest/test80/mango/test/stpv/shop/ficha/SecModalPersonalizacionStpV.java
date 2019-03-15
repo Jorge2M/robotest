@@ -5,7 +5,7 @@ import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import org.openqa.selenium.By;
 
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -144,8 +144,8 @@ public class SecModalPersonalizacionStpV {
 	}
 
 	@Validation
-	private ListResultValidation validateIconSelected() {
-		ListResultValidation validations = ListResultValidation.getNew();
+	private ChecksResult validateIconSelected() {
+		ChecksResult validations = ChecksResult.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 			"Aparece seleccionado el primer icono<br>",
@@ -185,8 +185,8 @@ public class SecModalPersonalizacionStpV {
 	}
 
 	@Validation
-	private ListResultValidation validateWhereDesktop() {
-		ListResultValidation validations = ListResultValidation.getNew();
+	private ChecksResult validateWhereDesktop() {
+		ChecksResult validations = ChecksResult.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 			"Aparecen los radio-button correspondientes a la seccion<br>",
@@ -220,8 +220,8 @@ public class SecModalPersonalizacionStpV {
 	}
 
 	@Validation
-	private ListResultValidation validateSelectionColor() {
-		ListResultValidation validations = ListResultValidation.getNew();
+	private ChecksResult validateSelectionColor() {
+		ChecksResult validations = ChecksResult.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 			"Aparecen los radio-button correspondientes a los colores<br>",

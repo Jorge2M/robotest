@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -42,8 +42,8 @@ public class PageResultPagoStpV {
     }
     
     @Validation
-    public static ListResultValidation validateTextConfirmacionPago(Channel channel, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateTextConfirmacionPago(Channel channel, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
 	    int maxSecondsWait1 = 10;
 	    boolean isVisibleTextConfirmacion = PageResultPago.isVisibleTextoConfirmacionPago(driver, channel, maxSecondsWait1);
        	validations.add(
@@ -60,8 +60,8 @@ public class PageResultPagoStpV {
     }
     
     @Validation
-    public static ListResultValidation validateDataPedido(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validateDataPedido(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
         String importeTotal = "";
         DataBag dataBag = dCtxPago.getDataPedido().getDataBag(); 
         if (dataBag!=null && "".compareTo(dataBag.getImporteTotal())!=0) {

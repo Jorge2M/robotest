@@ -10,7 +10,7 @@ import org.testng.ITestContext;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
@@ -99,8 +99,8 @@ public class AccesoStpV {
     }
 	
 	@Validation
-	private static ListResultValidation checkLinksAfterLogin(DataCtxShop dCtxSh, WebDriver driver) {
-		ListResultValidation validations = ListResultValidation.getNew();
+	private static ChecksResult checkLinksAfterLogin(DataCtxShop dCtxSh, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
     	validations.add(
     		"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
@@ -337,7 +337,7 @@ public class AccesoStpV {
      * @throws Exception
      */
     @Validation
-    private static ListResultValidation validacAccesoNoApareceModal(String urlBaseTest, Pais paisPrevConf, WebDriver driver) 
+    private static ChecksResult validacAccesoNoApareceModal(String urlBaseTest, Pais paisPrevConf, WebDriver driver) 
     throws Exception {
     	ResultValWithPais validations = ResultValWithPais.getNew();
     	validations.add(
@@ -398,8 +398,8 @@ public class AccesoStpV {
     }
 
     @Validation
-    public static ListResultValidation validaCompareStatusNodos(NodoStatus nodoAct, NodoStatus nodoAnt) throws Exception {
-       	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validaCompareStatusNodos(NodoStatus nodoAct, NodoStatus nodoAnt) throws Exception {
+       	ChecksResult validations = ChecksResult.getNew();
         JSONObject stockAct = nodoAct.getStatusJSON().getWarehouses();
         String vShopCAct = nodoAct.getStatusJSON().getVShopconfig();
         String vShopCAnt = nodoAnt.getStatusJSON().getVShopconfig();
@@ -422,7 +422,7 @@ public class AccesoStpV {
     	return validations;
     }
     
-    public static class ResultValWithPais extends ListResultValidation {
+    public static class ResultValWithPais extends ChecksResult {
     	Pais pais;
     	private ResultValWithPais() {
     		super();

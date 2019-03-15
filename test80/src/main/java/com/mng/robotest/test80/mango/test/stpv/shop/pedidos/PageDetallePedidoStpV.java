@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -37,8 +37,8 @@ public class PageDetallePedidoStpV {
     }
     
     @Validation
-    public ListResultValidation areOkPrendasOnline(int numPrendasCompraOnline, WebDriver driver) throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public ChecksResult areOkPrendasOnline(int numPrendasCompraOnline, WebDriver driver) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
 	    int maxSecondsWait = 2;
       	validations.add(
       		"Es visible alguna prenda (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
@@ -61,8 +61,8 @@ public class PageDetallePedidoStpV {
     }
     
     @Validation
-    private ListResultValidation validateIsPageOk(String codPedido, String importeTotalWithoutCurrency, String codPais, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private ChecksResult validateIsPageOk(String codPedido, String importeTotalWithoutCurrency, String codPais, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
       	validations.add(
       		"Aparece la página de detalle del pedido<br>",
       		pageDetalle.isPage(driver), State.Warn);	   

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ListResultValidation;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -89,8 +89,8 @@ public class SecMenuLateralMobilStpV {
     }
     
     @Validation
-    private static ListResultValidation checkGaleriaAfterSelectNuevo(AppEcom app, WebDriver driver) throws Exception {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    private static ChecksResult checkGaleriaAfterSelectNuevo(AppEcom app, WebDriver driver) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
 	    PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
 	    int maxSecondsWait = 3;
 	 	validations.add(
@@ -175,8 +175,8 @@ public class SecMenuLateralMobilStpV {
     }
     
     @Validation
-    public static ListResultValidation validaSelectLineaNuevoWithCarrusels(Pais pais, AppEcom app, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validaSelectLineaNuevoWithCarrusels(Pais pais, AppEcom app, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
     	
         String listCarrusels = "";
         boolean carruselsOk = true;
@@ -196,8 +196,8 @@ public class SecMenuLateralMobilStpV {
     }
         
     @Validation
-    public static ListResultValidation validaSelectLineaRebajasWithSublineas(Pais pais, AppEcom app, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validaSelectLineaRebajasWithSublineas(Pais pais, AppEcom app, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
 
         String listSublineas = "";
         boolean isSublineasOk = true;
@@ -217,8 +217,8 @@ public class SecMenuLateralMobilStpV {
     }
      
     @Validation
-    public static ListResultValidation validaSelecLineaNinosWithSublineas(LineaType lineaNinosType, AppEcom appE, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    public static ChecksResult validaSelecLineaNinosWithSublineas(LineaType lineaNinosType, AppEcom appE, WebDriver driver) {
+    	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"Está seleccionada la línea <b>" + lineaNinosType + "</b><br>",
 			SecMenuLateralMobil.isSelectedLinea(lineaNinosType, appE, driver), State.Warn);
@@ -229,9 +229,9 @@ public class SecMenuLateralMobilStpV {
     }
     
     @Validation
-    public static ListResultValidation validaSelecLineaWithMenus2onLevelAssociated(LineaType lineaType, SublineaNinosType sublineaType, 
+    public static ChecksResult validaSelecLineaWithMenus2onLevelAssociated(LineaType lineaType, SublineaNinosType sublineaType, 
     																			   AppEcom appE, WebDriver driver) {
-    	ListResultValidation validations = ListResultValidation.getNew();
+    	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"Está seleccionada la línea <b>" + lineaType + "</b><br>",
 			SecMenuLateralMobil.isSelectedLinea(lineaType, appE, driver), State.Warn);
