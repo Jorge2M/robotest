@@ -29,7 +29,6 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
     public static Page1DktopCheckout page1DktopCheckout;
     public static Page1EnvioCheckoutMobil page1MobilCheckout;
     public static Page2DatosPagoCheckoutMobil page2MobilCheckout;
-    public static Page3ResumenCheckoutMobil page3MobilCheckout;
     public static ModalAvisoCambioPais modalAvisoCambioPais;
     private SecTarjetaPci secTarjetaPci;
     
@@ -203,8 +202,9 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
     }
 
     public static String getPrecioTotalFromResumen(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web)
-            return (page3MobilCheckout.getPrecioTotalFromResumen(driver));
+        if (channel==Channel.movil_web) {
+            return (page2MobilCheckout.getPrecioTotalFromResumen(driver));
+        }
         
         return (page1DktopCheckout.getPrecioTotalFromResumen(driver));
     }
@@ -322,10 +322,10 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
     
     public static String getTextDireccionEnvioCompleta(Channel channel, WebDriver driver) throws Exception {
         if (channel==Channel.movil_web) {
-            if (Page1EnvioCheckoutMobil.isPageUntil(0, driver))
+            if (Page1EnvioCheckoutMobil.isPageUntil(0, driver)) {
                 return (page1MobilCheckout.getTextDireccionEnvioCompleta(driver));
-            
-            return (page3MobilCheckout.getTextDireccionEnvioCompleta(driver));
+            }
+            return (page2MobilCheckout.getTextDireccionEnvioCompleta(driver));
         }
         
         return (page1DktopCheckout.getTextDireccionEnvioCompleta(driver));

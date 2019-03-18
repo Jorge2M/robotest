@@ -381,7 +381,7 @@ public class PageCheckoutWrapperStpV {
     	description="Aparece el botón de \"Confirmar Pago\" (esperamos hasta #{maxSecondsToWait} segundos)",
     	level=State.Warn)
     private static boolean checkAfterClickVerResumen(int maxSecondsWait, WebDriver driver) {
-        return (PageCheckoutWrapper.page3MobilCheckout.isClickableButtonConfirmarPagoUntil(maxSecondsWait, driver));
+        return (PageCheckoutWrapper.page2MobilCheckout.isClickableButtonConfirmarPagoUntil(maxSecondsWait, driver));
     }
             
     @Step (
@@ -391,7 +391,7 @@ public class PageCheckoutWrapperStpV {
     public static void pasoBotonConfirmarPagoCheckout3Mobil(WebDriver driver) throws Exception {
         try {
             int maxSecondsToWait = 20;
-            PageCheckoutWrapper.page3MobilCheckout.clickConfirmaPagoAndWait(maxSecondsToWait, driver);
+            PageCheckoutWrapper.page2MobilCheckout.clickConfirmaPagoAndWait(maxSecondsToWait, driver);
         }
         catch (Exception e) {
             pLogger.warn("Problem in click Confirm payment button", e);
