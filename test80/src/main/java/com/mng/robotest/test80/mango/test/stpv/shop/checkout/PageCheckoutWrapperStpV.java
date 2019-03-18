@@ -373,7 +373,7 @@ public class PageCheckoutWrapperStpV {
         expected="Aparece la página-3 del checkout",
         saveImagePage=SaveWhen.Always)
     public static void pasoBotonVerResumenCheckout2Mobil(WebDriver driver) throws Exception {
-        PageCheckoutWrapper.page2MobilCheckout.waitAndClickVerResumen(2, driver);
+        PageCheckoutWrapper.page2MobilCheckout.waitAndClickFinalizarCompra(2, driver);
         checkAfterClickVerResumen(2, driver);
     }       
     
@@ -381,17 +381,17 @@ public class PageCheckoutWrapperStpV {
     	description="Aparece el botón de \"Confirmar Pago\" (esperamos hasta #{maxSecondsToWait} segundos)",
     	level=State.Warn)
     private static boolean checkAfterClickVerResumen(int maxSecondsWait, WebDriver driver) {
-        return (PageCheckoutWrapper.page2MobilCheckout.isClickableButtonConfirmarPagoUntil(maxSecondsWait, driver));
+        return (PageCheckoutWrapper.page2MobilCheckout.isClickableButtonFinalizarCompraUntil(maxSecondsWait, driver));
     }
             
     @Step (
-    	description="Seleccionamos el botón \"Confirmar pago\" (previamente esperamos hasta 20 segundos a que desaparezca la capa \"Espera unos segundos...\")", 
+    	description="Seleccionamos el botón \"Finalizar Compra\" (previamente esperamos hasta 20 segundos a que desaparezca la capa \"Espera unos segundos...\")", 
         expected="Aparece una pasarela de pago",
         saveImagePage=SaveWhen.Always)
     public static void pasoBotonConfirmarPagoCheckout3Mobil(WebDriver driver) throws Exception {
         try {
             int maxSecondsToWait = 20;
-            PageCheckoutWrapper.page2MobilCheckout.clickConfirmaPagoAndWait(maxSecondsToWait, driver);
+            PageCheckoutWrapper.page2MobilCheckout.clickFinalizarCompraAndWait(maxSecondsToWait, driver);
         }
         catch (Exception e) {
             pLogger.warn("Problem in click Confirm payment button", e);

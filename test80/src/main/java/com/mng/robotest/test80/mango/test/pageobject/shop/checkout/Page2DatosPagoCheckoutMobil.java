@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +13,6 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais.LayoutPago;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp.TypeOfClick;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -27,7 +27,7 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     public static SecBillpay secBillpay;
     
     static String XPathLink2DatosPago = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step2']";
-    static String XPathButtonVerResumen = "//button[@id[contains(.,'complete-step2')]]";
+    static String XPathButtonFinalizarCompra = "//button[@id[contains(.,'complete-step2')]]";
     static String XPathRedError = "//div[@class[contains(.,'step-error')]]/p";
     
     static String tagMetodoPago = "@TagMetodoPago";
@@ -101,7 +101,7 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     }
     
     public static boolean isPageUntil(int maxSecondsToWait, WebDriver driver) {
-        return isClickableButtonVerResumenUntil(driver, maxSecondsToWait);
+        return isClickableButtonFinalizarCompraUntil(maxSecondsToWait, driver);
     }
     
     /**
@@ -117,21 +117,22 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
             clickLink2DatosPagoAndWait(driver);
     }
     
-    public static void clickButtonVerResumen(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonVerResumen), TypeOfClick.javascript);    
+    public static void clickButtonFinalizarCompra(WebDriver driver) throws Exception {
+        clickAndWaitLoad(driver, By.xpath(XPathButtonFinalizarCompra), TypeOfClick.javascript);    
     }
     
-    public static boolean isClickableButtonVerResumenUntil(WebDriver driver, int seconds) {
-        return (isElementClickableUntil(driver, By.xpath(XPathButtonVerResumen), seconds));
+    public static boolean isClickableButtonFinalizarCompraUntil(int seconds, WebDriver driver) {
+        return (isElementClickableUntil(driver, By.xpath(XPathButtonFinalizarCompra), seconds));
     }
     
-    public static void waitAndClickVerResumen(int maxSecondsToWait, WebDriver driver) throws Exception {
-    	isClickableButtonVerResumenUntil(driver, maxSecondsToWait);
-    	clickButtonVerResumen(driver);
+    public static void waitAndClickFinalizarCompra(int maxSecondsToWait, WebDriver driver) throws Exception {
+    	isClickableButtonFinalizarCompraUntil(maxSecondsToWait, driver);
+    	clickButtonFinalizarCompra(driver);
         
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-        if (isClickableButtonVerResumenUntil(driver, 0))
-        	clickButtonVerResumen(driver);  
+        if (isClickableButtonFinalizarCompraUntil(0, driver)) {
+        	clickButtonFinalizarCompra(driver);  
+        }
     }
     
     public static boolean isMetodoPagoPresent(String nombrePago, LayoutPago layoutPago, WebDriver driver) {
@@ -331,17 +332,14 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
         driver.findElement(By.xpath(XPathLinkSolicitarFactura)).click();
     }    
 
-    /**
-     * Función que indica si existe algún artículo en la página del checkout (métodos de pago)
-     */
+    static String XPathArticleBolsa = "//div[@id[contains(.,'panelBolsa:iteradorEntrega')]]";
     public static boolean isArticulos(WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(XPathButtonVerResumen)));
+        return (isElementPresent(driver, By.xpath(XPathArticleBolsa)));
     }
     
     public static void confirmarPagoFromMetodos(DataPedido dataPedido, WebDriver driver) throws Exception {
-        clickButtonVerResumen(driver);
+    	clickButtonFinalizarCompra(driver);
         PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, Channel.movil_web, driver);
-        clickConfirmarPago(driver);
     }
     
     public static boolean isMarkedQuieroFactura(WebDriver driver) {
@@ -353,52 +351,44 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
         return false;
     }
     
-    static String XPathLink3Resumen = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step3']";
-    static String XPathButtonConfirmarPago = "//button[@id[contains(.,'complete-step3')]]";
     static String XPathPrecioTotal = "//div[@class[contains(.,'summary-total-price')]]/p";
     static String XPathDescuento = "//div[@class[contains(.,'summary-subtotal-price')]]/p/span[@class='price-negative']/..";
     static String XPathDireccionEnvioText = "//p[@class='summary-info-subdesc']";
-    
-    public static void clickConfirmarPago(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonConfirmarPago), TypeOfClick.javascript);
-    }
-    
-    public static boolean isClickableButtonConfirmarPagoUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementClickableUntil(driver, By.xpath(XPathButtonConfirmarPago), maxSecondsToWait));
-    }
-    
-    public static void clickConfirmaPagoAndWait(int maxSecondsToWait, WebDriver driver) throws Exception {
-        clickConfirmarPago(driver);
+
+    public static void clickFinalizarCompraAndWait(int maxSecondsToWait, WebDriver driver) throws Exception {
+        clickButtonFinalizarCompra(driver);
         
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-        if (isClickableButtonConfirmarPagoUntil(0, driver)) {
-        	clickConfirmarPago(driver);  
-        	if (isClickableButtonConfirmarPagoUntil(1, driver))
-        		clickConfirmarPago(driver);  
+        if (isClickableButtonFinalizarCompraUntil(0, driver)) {
+        	clickButtonFinalizarCompra(driver);  
+        	if (isClickableButtonFinalizarCompraUntil(1, driver)) {
+        		clickButtonFinalizarCompra(driver);  
+        	}
         }
         
         PageRedirectPasarelaLoading.isPageNotVisibleUntil(maxSecondsToWait, driver);
     }
-
+    
     public static String getPrecioTotalFromResumen(WebDriver driver) throws Exception {
         String precioTotal = "";
-        
-        //En el caso de móvil, si estamos en el Paso-2 "Datos del pago" iremos al Paso-3 de "Resumen" puesto que es allí donde se encuentra el importe total. 
-        //Finalmente volveremos al Paso-2
-        if (Page2DatosPagoCheckoutMobil.isClickableButtonVerResumenUntil(driver, 0/*seconds*/)) {
-            Page2DatosPagoCheckoutMobil.clickButtonVerResumen(driver);
+//        
+//        //En el caso de móvil, si estamos en el Paso-2 "Datos del pago" iremos al Paso-3 de "Resumen" puesto que es allí donde se encuentra el importe total. 
+//        //Finalmente volveremos al Paso-2
+//        if (Page2DatosPagoCheckoutMobil.isClickableButtonVerResumenUntil(driver, 0/*seconds*/)) {
+//            Page2DatosPagoCheckoutMobil.clickButtonVerResumen(driver);
+//            precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathPrecioTotal, driver);
+//            if (precioTotal.indexOf("0")==0)
+//                //Si el total es 0 podríamos estar en el caso de saldo en cuenta (el importe total = importe del descuento)
+//                precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathDescuento, driver);
+//            Page2DatosPagoCheckoutMobil.clickLink2DatosPagoAndWait(driver);
+//        }
+//        else {
             precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathPrecioTotal, driver);
-            if (precioTotal.indexOf("0")==0)
+            if (precioTotal.indexOf("0")==0) {
                 //Si el total es 0 podríamos estar en el caso de saldo en cuenta (el importe total = importe del descuento)
                 precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathDescuento, driver);
-            Page2DatosPagoCheckoutMobil.clickLink2DatosPagoAndWait(driver);
-        }
-        else {
-            precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathPrecioTotal, driver);
-            if (precioTotal.indexOf("0")==0)
-                //Si el total es 0 podríamos estar en el caso de saldo en cuenta (el importe total = importe del descuento)
-                precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathDescuento, driver);
-        }
+            }
+//        }
         
         return (ImporteScreen.normalizeImportFromScreen(precioTotal));
     }
