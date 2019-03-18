@@ -135,7 +135,7 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     public static boolean isMetodoPagoPresent(String nombrePago, LayoutPago layoutPago, WebDriver driver) {
         String xpathClickPago = getXPathClickMetodoPago(nombrePago, layoutPago);
         if (isElementPresent(driver, By.xpath(xpathClickPago)))
-            return true;
+            return true; 
         
         return false;
     }
