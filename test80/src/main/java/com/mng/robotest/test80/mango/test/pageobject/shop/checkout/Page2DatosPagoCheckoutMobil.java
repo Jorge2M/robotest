@@ -353,7 +353,7 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     
     static String XPathPrecioTotal = "//div[@class[contains(.,'summary-total-price')]]/p";
     static String XPathDescuento = "//div[@class[contains(.,'summary-subtotal-price')]]/p/span[@class='price-negative']/..";
-    static String XPathDireccionEnvioText = "//p[@class='summary-info-subdesc']";
+    static String XPathDireccionEnvioText = "//p[@class='address']";
 
     public static void clickFinalizarCompraAndWait(int maxSecondsToWait, WebDriver driver) throws Exception {
         clickButtonFinalizarCompra(driver);

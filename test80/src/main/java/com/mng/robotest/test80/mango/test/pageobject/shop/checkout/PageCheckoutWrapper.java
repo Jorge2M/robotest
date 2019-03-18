@@ -332,7 +332,10 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
     }
     
     public static void getDataPedidoFromCheckout(DataPedido dataPedido, Channel channel, WebDriver driver) throws Exception {
-    	dataPedido.setDireccionEnvio(PageCheckoutWrapper.getTextDireccionEnvioCompleta(channel, driver));
+    	String direcEnvio = PageCheckoutWrapper.getTextDireccionEnvioCompleta(channel, driver);
+    	if ("".compareTo(direcEnvio)!=0) {
+    		dataPedido.setDireccionEnvio(direcEnvio);
+    	}
     	dataPedido.setImporteTotal(PageCheckoutWrapper.getPrecioTotalFromResumen(channel, driver));
     	dataPedido.setCodigoAlmacen(getAlmacenFromNoProdEntorn(channel, driver));
     }
