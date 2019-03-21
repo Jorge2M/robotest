@@ -11,10 +11,12 @@ import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusUserDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.favoritos.PageFavoritosStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.loyalty.PageHomeLikesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMiCuentaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalCambioPaisStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV;
@@ -112,4 +114,13 @@ public class SecMenusUserStpV {
         ModalCambioPaisStpV.validateIsVisible(5, driver);
         ModalCambioPaisStpV.cambioPais(dCtxSh, driver);
     }
+    
+    @Step (
+    	description="Seleccionar el link \"Mango Likes You\"", 
+        expected="Aparece la página de \"Mi cuenta\"")
+	public static void clickMenuMiCuenta(WebDriver driver) throws Exception {
+    	SecMenusUserDesktop.clickMangoLikesYou(driver);	
+    	PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(driver);
+    	pageHomeLikesStpV.checkIsPageOk();
+	}
 }

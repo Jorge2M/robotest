@@ -29,6 +29,8 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsS
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Page1DktopCheckoutStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 
 public class Loyalty extends GestorWebDriver {
 	
@@ -68,15 +70,15 @@ public class Loyalty extends GestorWebDriver {
     /**
      * Realiza un checkout utilizando el Saldo en Cuenta 
      */
-//    @Test (
-//        groups={"Loyalty", "Canal:desktop_App:shop"},
-//        description="Se realiza una compra mediante un usuario loyalty")
-    public void LOY001_compra() throws Exception {
+    @Test (
+        groups={"Loyalty", "Canal:desktop_App:shop"},
+        description="Se realiza una compra mediante un usuario loyalty")
+    public void LOY001_Compra_0LikesStored() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         
         //Obtenemos el usuario/password de acceso
-        dCtxSh.userConnected = "mangotest123@mango.com";
+        dCtxSh.userConnected = "sergio.herrero@mango.com";
         dCtxSh.passwordUser = "mango123";
         dCtxSh.userRegistered = true;
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, dFTest.driver);
@@ -94,11 +96,13 @@ public class Loyalty extends GestorWebDriver {
         FTCkout.validaPasarelas = false;  
         FTCkout.validaPagos = false;
         FTCkout.emailExist = true; 
-        FTCkout.isLoyalty = true;
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
         PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, dFTest.driver); 
+        
+        //Validar bloque Loyalty en página de Checkout
+        Page1DktopCheckoutStpV.validateBlockLoyalty(dFTest.driver);
         
         //Informamos datos varios necesarios para el proceso de pagos de modo que se pruebe el pago StoreCredit
         dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
@@ -115,4 +119,29 @@ public class Loyalty extends GestorWebDriver {
         DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
         PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, dFTest);
     }
+    
+    
+    /**
+     * Realiza un checkout utilizando el Saldo en Cuenta 
+     */
+    @Test (
+        groups={"Loyalty", "Canal:desktop_App:shop"},
+        description="Se accede a la Home Mango Likes You con un usuario Loyalty")
+    public void LOY002_LikesHome_0LikesStored() throws Exception {
+    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        
+        //Obtenemos el usuario/password de acceso
+        dCtxSh.userConnected = "sergio.herrero@mango.com";
+        dCtxSh.passwordUser = "mango123";
+        dCtxSh.userRegistered = true;
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, dFTest.driver);
+        
+        //Validación header...
+        SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh, dFTest.driver);
+        secCabeceraStpV.checkIsVisibleLikesDesktop();
+        
+        SecMenusUserStpV.clickMenuMiCuenta(dFTest.driver);
+    }
+    
 }

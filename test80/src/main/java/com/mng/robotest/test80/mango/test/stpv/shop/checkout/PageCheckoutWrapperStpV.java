@@ -504,4 +504,5 @@ public class PageCheckoutWrapperStpV {
     private static boolean checkIsVisibleBank(String nombreBanco, WebDriver driver) {
         return (PageCheckoutWrapper.isBancoSeleccionado(nombreBanco, driver));
     }
+
 }

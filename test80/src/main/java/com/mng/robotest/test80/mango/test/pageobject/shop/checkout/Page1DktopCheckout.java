@@ -617,4 +617,10 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         
         return true;
     }
+    
+    static String idBlockLoyalty = "mngLoyalty";
+    public static boolean isVisibleBlockLoyalty(WebDriver driver) {
+    	By blockLoyaltyBy = By.id(idBlockLoyalty);
+    	return (WebdrvWrapp.isElementVisible(driver, blockLoyaltyBy));
+    }
 }

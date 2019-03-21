@@ -9,6 +9,7 @@ import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.Descuento;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -166,4 +167,12 @@ public class Page1DktopCheckoutStpV {
 			Page1DktopCheckout.isVisibleCodigoVendedorVOTF(codigoVendedor, driver), State.Defect);
 	 	return validations;
     }
+    
+    
+	@Validation (
+		description="Aparece el blouqe con la información de puntos Loyalty",
+		level=State.Defect)
+	public static boolean validateBlockLoyalty(WebDriver driver) {
+		return (Page1DktopCheckout.isVisibleBlockLoyalty(driver));
+	}
 }

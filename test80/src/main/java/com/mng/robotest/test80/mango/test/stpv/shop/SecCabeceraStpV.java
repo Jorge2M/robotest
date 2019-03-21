@@ -59,7 +59,6 @@ public class SecCabeceraStpV {
 		description="Es visible el bloque de Likes en la cabecera",
 		level=State.Defect)
 	public boolean checkIsVisibleLikesDesktop() {
-		//TODO implementar "isVisibleLikes" a nivel de la interfaz
 		return (((SecCabeceraDesktop)secCabecera).isVisibleLikes());
 	}
 }

@@ -114,6 +114,10 @@ public class SecCabeceraDesktop extends SecCabecera {
     public void buscarReferenciaNoWait(String referencia) throws Exception {
     	SecBuscadorDesktop.buscarReferenciaNoWait(referencia, driver);
     }
+    
+    public boolean isVisibleLikes() {
+    	return (WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(XPahtLikes), 1));
+    }
 
     public String getXPathIconoBolsa() {
         switch (app) {
@@ -140,8 +144,5 @@ public class SecCabeceraDesktop extends SecCabecera {
     	//The moveElement doens't works properly for hide the Bolsa-Modal
     	driver.findElement(By.xpath(XPathDivNavTools)).click();
     }
-    
-    public boolean isVisibleLikes() {
-    	return (WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(XPahtLikes), 1));
-    }
+
 }
