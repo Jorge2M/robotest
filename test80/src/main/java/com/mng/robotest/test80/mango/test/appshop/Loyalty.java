@@ -72,7 +72,7 @@ public class Loyalty extends GestorWebDriver {
      */
     @Test (
         groups={"Loyalty", "Canal:desktop_App:shop"},
-        description="Se realiza una compra mediante un usuario loyalty")
+        description="Se realiza una compra mediante un usuario loyalty con 0 Likes")
     public void LOY001_Compra_0LikesStored() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
@@ -126,7 +126,7 @@ public class Loyalty extends GestorWebDriver {
      */
     @Test (
         groups={"Loyalty", "Canal:desktop_App:shop"},
-        description="Se accede a la Home Mango Likes You con un usuario Loyalty")
+        description="Se accede a la Home Mango Likes You con un usuario Loyalty con 0 Likes")
     public void LOY002_LikesHome_0LikesStored() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
