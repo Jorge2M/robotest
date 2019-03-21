@@ -15,7 +15,8 @@ public class KeyMenu2onLevel {
     	return new KeyMenu2onLevel(menu1rstLevel, nombreMenu2onLevel);
     }
     
-    @Override public boolean equals(Object o) {
+    @Override 
+    public boolean equals(Object o) {
     	if (o == this)
     		return true;
     	if (!(o instanceof KeyMenu2onLevel))

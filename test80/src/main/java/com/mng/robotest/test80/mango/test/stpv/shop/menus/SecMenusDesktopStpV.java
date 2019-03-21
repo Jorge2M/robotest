@@ -173,9 +173,13 @@ public class SecMenusDesktopStpV {
 	        	articlesWrongWarning+=("<br>" + txtArtNoValido);
 	        }
         }
+        State stateVal = State.Defect;
+        if (listTxtArtNoValidos.size()<2) {
+        	stateVal = State.Warn;
+        }
 	 	validations.add(
 			"Todos los artículos contienen alguno de los literales: " + litsToContain + articlesWrongWarning,
-			listTxtArtNoValidos.size()==0, State.Defect);
+			listTxtArtNoValidos.size()==0, stateVal);
     
     	return validations;
     }

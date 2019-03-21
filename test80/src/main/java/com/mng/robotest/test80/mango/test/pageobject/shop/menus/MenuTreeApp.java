@@ -54,8 +54,9 @@ public class MenuTreeApp {
 
     private static Menu2onLevel getMenuLevel2From(KeyMenu2onLevel key) {
         for (Menu2onLevel menu2onLevel : key.menu1rstLevel.getListMenus2onLevel()) {
-            if (key.equals(menu2onLevel.getKey()))
+            if (key.equals(menu2onLevel.getKey())) {
             	return menu2onLevel;
+            }
         }
         
         return null;

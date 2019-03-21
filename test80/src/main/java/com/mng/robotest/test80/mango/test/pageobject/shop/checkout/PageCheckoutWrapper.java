@@ -150,16 +150,16 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
     }
     
     public static String getImporteDescuentoEmpleado(Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return (page1MobilCheckout.getImporteDescuentoEmpleado(driver));
-        
+        }
         return (page1DktopCheckout.getImporteDescuentoEmpleado(driver));
     }
     
     public static boolean isVisibleDescuentoEmpleadoUntil(Channel channel, WebDriver driver, int secondsToWait) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return (page1MobilCheckout.isVisibleDescuentoEmpleadoUntil(driver, secondsToWait));
-        
+        }
         return (page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(driver, secondsToWait)); 
     }
 
