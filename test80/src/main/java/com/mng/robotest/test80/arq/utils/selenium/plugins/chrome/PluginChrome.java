@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public abstract class PluginChrome {
+public abstract class PluginChrome { 
     public String folderInResources = "pluginsBrowser"; 
     public static enum typePluginChrome { HTML5Autoplay }
     
