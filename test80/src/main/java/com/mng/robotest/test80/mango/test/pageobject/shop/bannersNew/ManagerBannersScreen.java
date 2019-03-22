@@ -41,7 +41,7 @@ public class ManagerBannersScreen {
 		clearBannersData(listBannerTypes);
 		for (BannerType bannerType : listBannerTypes) {
 			BannerObject bannerObject = BannerObjectFactory.make(bannerType);
-			List<DataBanner> listBannersOfType = bannerObject.getListBannersData(maxBannersToLoad, driver);
+			List<DataBanner> listBannersOfType = bannerObject.getListBannersDataUntil(maxBannersToLoad, 1, driver);
 			addBanners(listBannersOfType);
 		}
 	}

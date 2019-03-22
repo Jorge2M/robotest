@@ -62,29 +62,16 @@ public class GenerateReports extends EmailableReporter {
     }
 
     private void generateReportHTML(indexSuite suite, String outputDirectory, ITestContext context) throws Exception {
-        //Creamos un objeto para gestionar los datos de la construcción del report HTML
         BuildingReport buildReport = new BuildingReport(outputDirectory);
         buildReport.serverDNS = context.getCurrentXmlTest().getParameter(Constantes.paramApplicationDNS);
 
-        //Obtenemos de la BD los datos de la Suite
         Suite suiteBD = SuitesDAO.getSuite(suite);
-
-        //Pinta la cabecera y el inicio del Body del Report HTML
         pintaCabeceraHTML(buildReport);
-
-        //Pinta los headers del Tablemain
         pintaHeadersTableMain(buildReport, suiteBD, context);        
-        
-        //Pintamos los TESTRUNS / METHODS / STEPS / VALIDATIONS asociados a la Suite en la tabla Tablemain
         pintaTestRunsSuite(buildReport, suite);
-        
-        //Cierre de los tag HTML
         pintaCierreHTML(buildReport);
-
-        //Incrustamos en el HTML el valor correspondiente al valuesTree que indica la jerarquía de las filas de la tabla
+        
         buildReport.replaceTagWithTree("@VALUES_TREE");
-
-        //Creamos el fichero correspondiente al ReportHTML
         createFileReportHTML(buildReport);
     }
 
@@ -529,41 +516,52 @@ public class GenerateReports extends EmailableReporter {
     /**
      * Formateamos el string con las validaciones según el resultado obtenido para cada una de ellas
      */
+    //TODO refactor en una clase aparte que genere un CheckResults
     private String formatDescripValidations(String descripValidOrig, String listResultVals) {
         String descripValidReturn = descripValidOrig;
         if (listResultVals.compareTo("")!=0) {
             List<String> listResValidacs = Arrays.asList(listResultVals.split("\\s*,\\s*"));
             int iValidac = 1;
-            for (String resValidac : listResValidacs) {
-                int resValidacInt = Integer.valueOf(resValidac).intValue();
-                
-                //Formatear el texto de la validación en el color correspondiente
-                if (resValidacInt!=State.Ok.getIdNumerid()) {
-                    String color = State.getState(resValidacInt).getColorCss();
-                    
-                    //Incrustamos el estilo con el color en la validación del descripion
-                    int iniValidac = descripValidOrig.indexOf(iValidac + ")"); 
-                    if (iniValidac > -1) {
-                        //Obtenemos el literal correspondiente a la validación
-                        String restoDescripValid = descripValidOrig.substring(iniValidac);
-                        int finValidac = restoDescripValid.indexOf(iValidac + 1 + ")");
-                        
-                        if (finValidac < 0) 
-                            finValidac = restoDescripValid.indexOf("<br>");
-                        
-                        if (finValidac < 0)
-                            finValidac = restoDescripValid.length();
-                        
-                        if (finValidac > 0) {
-                            //Finalmente sustituímos el literal con la validación por el mismo literal con el tag de estilo/color correspondiente
-                            String validacStr = restoDescripValid.substring(0, finValidac);
-                            String validacStrNew = "<validac style=\"color:" + color + "\">" + validacStr + "</validac>";
-                            descripValidReturn = descripValidReturn.replace(validacStr, validacStrNew);
-                        }
-                    }
-                }
-                
-                iValidac+=1;
+            if (listResValidacs.size()>1) {
+	            for (String resValidac : listResValidacs) {
+	                int resValidacInt = Integer.valueOf(resValidac).intValue();
+	                
+	                //Formatear el texto de la validación en el color correspondiente
+	                if (resValidacInt!=State.Ok.getIdNumerid()) {
+	                    String color = State.getState(resValidacInt).getColorCss();
+	                    
+	                    //Incrustamos el estilo con el color en la validación del descripion
+	                    int iniValidac = descripValidOrig.indexOf(iValidac + ")"); 
+	                    if (iniValidac > -1) {
+	                        //Obtenemos el literal correspondiente a la validación
+	                        String restoDescripValid = descripValidOrig.substring(iniValidac);
+	                        int finValidac = restoDescripValid.indexOf(iValidac + 1 + ")");
+	                        if (finValidac < 0) {
+	                            finValidac = restoDescripValid.indexOf("<br>");
+	                        }
+	                        if (finValidac < 0) {
+	                            finValidac = restoDescripValid.length();
+	                        }
+	                        if (finValidac > 0) {
+	                            //Finalmente sustituímos el literal con la validación por el mismo literal con el tag de estilo/color correspondiente
+	                            String validacStr = restoDescripValid.substring(0, finValidac);
+	                            String validacStrNew = "<validac style=\"color:" + color + "\">" + validacStr + "</validac>";
+	                            descripValidReturn = descripValidReturn.replace(validacStr, validacStrNew);
+	                        }
+	                    }
+	                }
+	                
+	                iValidac+=1;
+	            }
+            }
+            else {
+            	//1 sola validación
+            	int intValidac = Integer.valueOf(listResValidacs.get(0));
+            	State stateValidac = State.getState(intValidac);
+            	if (stateValidac!=State.Ok) {
+                    String color = stateValidac.getColorCss();
+                    descripValidReturn = "<validac style=\"color:" + color + "\">" + descripValidOrig + "</validac>";
+            	}
             }
         }
         

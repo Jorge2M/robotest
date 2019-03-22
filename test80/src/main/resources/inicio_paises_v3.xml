@@ -1243,7 +1243,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
-<outlet_online>true</outlet_online>
+<outlet_online>false</outlet_online>
 <miscompras>true</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1500</maximo_bolsa>

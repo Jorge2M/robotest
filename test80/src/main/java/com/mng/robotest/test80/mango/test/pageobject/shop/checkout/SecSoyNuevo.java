@@ -81,7 +81,6 @@ public class SecSoyNuevo extends WebdrvWrapp {
     public static void clickContinue(Channel channel, WebDriver driver) throws Exception {
         String xpathButton = getXPath_BotonContinue(channel);
         clickAndWaitLoad(driver, By.xpath(xpathButton), TypeOfClick.javascript);
-        //driver.findElement(By.xpath(xpathButton)).click();
     }   
     
 	public static boolean isTextoRGPDVisible(WebDriver driver) {

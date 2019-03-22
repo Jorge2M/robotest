@@ -12,7 +12,8 @@ public class BannerEditsObject extends BannerObject {
 	final static String tagAnalytics = "@data-analytics and not(@data-analytics='')";
 	final static String XPathBannerV1 = "//div[@class[contains(.,'vsv-')] and " + tagAnalytics + "]//a";
 	final static String XPathBannerV2 = "//div[@class[contains(.,'vsv-')]]//a[" + tagAnalytics + "]";
-	final static String XPathBanner = "(" + XPathBannerV1 + " | " + XPathBannerV2 + ")";
+	final static String XPathBannerV3 = "//div[@class[contains(.,'swiper-slide-active')]]//a";
+	final static String XPathBanner = "(" + XPathBannerV1 + " | " + XPathBannerV2 + "|" + XPathBannerV3 + ")";
 	
 	public BannerEditsObject(BannerType bannerType) {
 		super(bannerType, XPathBanner);

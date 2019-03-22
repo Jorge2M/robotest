@@ -24,29 +24,30 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.popupFindAddress;
 public class Page2IdentCheckout extends WebdrvWrapp {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
-    static String XPathMainForm = "//form[@action[contains(.,'/expressregister')]]";
-    static String XPathInputPassword = "//input[@id[contains(.,'cfPass')]]";
-    static String XPathInputNombreUsr = "//input[@id[contains(.,':cfName')]]";
-    static String XPathInputApellidosUsr = "//input[@id[contains(.,':cfSname')]]";
-    static String XPathInputTelefono = "//input[@id[contains(.,':cfTelf')]]";
-    static String XPathInputDireccion1 = "//input[@id[contains(.,':cfDir1')]]";
-    static String XPathInputDireccion2 = "//input[@id[contains(.,':cfDir2')]]";
-    static String XPathCheckPublicidad = "//div[@id[contains(.,':cfPubli')] or @id[contains(.,'_cfPubli')]]";
-    static String XPathInputEmail = "//input[@id[contains(.,':cfEmail')]]";
-    static String XPathInputDNI = "//input[@id[contains(.,':cfDni')]]";
-    static String XPathInputCodPost = "//input[@id[contains(.,':cfCp')]]";
-    static String XPathInputProvEstadoActive = "//input[@id[contains(.,':cfState')] and not(@disabled) and not(@readonly)]";
-    static String XPathInputPoblacionActive = "//input[@id[contains(.,':cfCity')] and not(@disabled) and not(@readonly)]";
-    static String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
-    static String XPathSelectProvPais = "//select[@id[contains(.,'provinciaPais')]]";
-    static String XPathSelectEstadosPais = "//select[@id[contains(.,'estadosPais')]]";
-    static String XPathSelectLocalidadesProvCity = "//select[@id[contains(.,'localidadesProvCity')]]";
-    static String XPathCheckHombre = "//div[@id[contains(.,':cfGener_H')]]";
-    static String XPathCheckCondiciones = "//input[@id[contains(.,':cfPriv')]]";
-    static String XPathBotonFindAddress = "//input[@class[contains(.,'load-button')] and @type='button']";
-    static String XPathBotonContinuar = "//div[@class='submitContent']/input[@type='submit']";
-    private static String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
-    private static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
+    final static String XPathMainForm = "//form[@action[contains(.,'/expressregister')]]";
+    final static String XPathInputPassword = "//input[@id[contains(.,'cfPass')]]";
+    final static String XPathInputNombreUsr = "//input[@id[contains(.,':cfName')]]";
+    final static String XPathInputApellidosUsr = "//input[@id[contains(.,':cfSname')]]";
+    final static String XPathInputTelefono = "//input[@id[contains(.,':cfTelf')]]";
+    final static String XPathInputDireccion1 = "//input[@id[contains(.,':cfDir1')]]";
+    final static String XPathInputDireccion2 = "//input[@id[contains(.,':cfDir2')]]";
+    final static String XPathCheckPublicidad = "//div[@id[contains(.,':cfPubli')] or @id[contains(.,'_cfPubli')]]";
+    final static String XPathInputEmail = "//input[@id[contains(.,':cfEmail')]]";
+    final static String XPathInputDNI = "//input[@id[contains(.,':cfDni')]]";
+    final static String XPathInputCodPost = "//input[@id[contains(.,':cfCp')]]";
+    final static String XPathInputProvEstadoActive = "//input[@id[contains(.,':cfState')] and not(@disabled) and not(@readonly)]";
+    final static String XPathInputPoblacionActive = "//input[@id[contains(.,':cfCity')] and not(@disabled) and not(@readonly)]";
+    final static String XPathSelectPais = "//select[@id[contains(.,':pais')]]";
+    final static String XPathSelectProvPais = "//select[@id[contains(.,'provinciaPais')]]";
+    final static String XPathSelectEstadosPais = "//select[@id[contains(.,'estadosPais')]]";
+    final static String XPathSelectLocalidadesProvCity = "//select[@id[contains(.,'localidadesProvCity')]]";
+    final static String XPathCheckHombre = "//div[@id[contains(.,':cfGener_H')]]";
+    final static String XPathCheckCondiciones = "//input[@id[contains(.,':cfPriv')]]";
+    final static String XPathBotonFindAddress = "//input[@class[contains(.,'load-button')] and @type='button']";
+    final static String XPathBotonContinuar = "//div[@class='submitContent']/input[@type='submit']";
+    final static String XPathMsgAduanas = "//div[@class='aduanas']";
+    final static String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
+    final static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
     
     //Con el substring simulamos un ends-with (que no está disponible en xpath 1.0)
     static String XPathSelectLocalidades = "//select[substring(@id, string-length(@id) - string-length('localidades') +1) = 'localidades']";
@@ -505,18 +506,12 @@ public class Page2IdentCheckout extends WebdrvWrapp {
         }
     }
     
-    /**
-     * @return si se ha displayado el aviso que aparece en algunos países (p.e. Hungría-Maygar) cuando se introducen carácteres cirílicos en la dirección
-     */
     public static boolean isDisplayedAvisoAduanas(WebDriver driver) {
-    
-        boolean avisoDisplayed = false;
-        
-        if (isElementPresent(driver, By.xpath("//div[@class='aduanas']")) && 
-            driver.findElement(By.xpath("//div[@class='aduanas']")).isDisplayed())
-            avisoDisplayed = true;
-        
-        return avisoDisplayed;
+        return (
+        	isElementVisibleUntil(driver, By.xpath(XPathMsgAduanas), 1)
+        	//isElementPresent(driver, By.xpath(XPathMsgAduanas)) && 
+            //driver.findElement(By.xpath(XPathMsgAduanas)).isDisplayed()
+        );
     }
     
     public static boolean isTextoRGPDVisible(WebDriver driver) {

@@ -23,9 +23,7 @@ public class SecSoyNuevoStpV {
         SecSoyNuevo.inputEmail(email, driver);
         SecSoyNuevo.clickContinue(channel, driver);
         
-        //Validaciones
-        int maxSecondsWait = 1;
-        Page2IdentCheckoutStpV.validateIsPage(emailExistsYet, maxSecondsWait, driver);
+        Page2IdentCheckoutStpV.validateIsPage(emailExistsYet, 2, driver);
         if (!userRegistered && appE != AppEcom.votf) {
         	Page2IdentCheckoutStpV.validaRGPDText(pais, driver);
         }

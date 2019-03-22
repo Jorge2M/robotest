@@ -47,6 +47,28 @@ public abstract class BannerObject {
     	return listDataBannersReturn;
     }
     
+    public List<DataBanner> getListBannersDataUntil(int maxBannersToLoad, int maxSecondsWait, WebDriver driver) {
+    	List<DataBanner> listBanners = new ArrayList<>();
+    	for (int i=0; i<maxSecondsWait; i++) {
+    		listBanners = getListBannersData(maxBannersToLoad, driver);
+    		if (listBanners.size()>0) {
+    			break;
+    		}
+    		myWait(1000);
+    	}
+    	
+    	return listBanners;
+    }
+    
+    private void myWait(int milliSeconds) {
+		try {
+			Thread.sleep(milliSeconds);
+		}
+		catch (Exception e) {
+			//
+		}
+    }
+    
     public String getTextBanner(WebElement bannerScreen) {
     	String texto = bannerScreen.getAttribute("textContent"); 	
     	return (getTextBannerNormalized(texto));

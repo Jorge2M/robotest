@@ -21,7 +21,7 @@ public class Page2IdentCheckoutStpV {
     public static ChecksResult validateIsPage(boolean emailYetExists, int maxSecondsWait, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + maxSecondsWait + ")<br>",
+			"Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
 			Page2IdentCheckout.isPageUntil(maxSecondsWait, driver), State.Defect);
 	 	validations.add(
 			"Es <b>" + !emailYetExists + "</b> que aparece el input para la introducción de la contraseña",

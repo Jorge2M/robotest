@@ -412,12 +412,12 @@ public class PageFichaArtStpV {
     	boolean isVisiblePrevLink = pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Prev, maxSecondsWait, driver);
         if (locationArt.isFirstInGalery()) {
 		 	validations.add(
-		 		"No es visible el link <b>Prev</b> (lo esperamos hasta " + maxSecondsWait + " segundos)",
+		 		"No es visible el link <b>Prev</b> (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
 		 		!isVisiblePrevLink, State.Warn);
         }
         else {
 		 	validations.add(
-		 		"Sí es visible el link <b>Prev</b> (lo esperamos hasta " + maxSecondsWait + " segundos)",
+		 		"Sí es visible el link <b>Prev</b> (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
 		 		isVisiblePrevLink, State.Warn);
         }
         if (dCtxSh.appE==AppEcom.outlet || dCtxSh.channel==Channel.desktop) {
