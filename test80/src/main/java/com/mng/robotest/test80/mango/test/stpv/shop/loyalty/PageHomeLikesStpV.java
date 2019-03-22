@@ -1,5 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.loyalty;
 
+import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.robotest.test80.mango.test.pageobject.shop.loyalty.PageHomePurchaseWithDiscount;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
@@ -30,5 +32,26 @@ public class PageHomeLikesStpV {
     		"Aparecen bloques para el canjeo de Likes",
     		pageLikes.areVisibleBlocksExchangeLikes(), State.Defect);
     	return validations;
+	}
+
+	@Step(
+			description="Seleccionar el link \"Compra un descuento\"",
+			expected="Aparece la página de \"Compra con descuento\"")
+	public void clickOpcionCompraUnDescuento() throws Exception {
+		PageHomeLikes pageLikes = PageHomeLikes.getNewInstance(driver);
+		pageLikes.clickPurchaseWithDiscount();
+	}
+
+	@Validation
+	public ChecksResult checkHomePurchaseWithDiscountPageOk() {
+		ChecksResult validations = ChecksResult.getNew();
+		PageHomePurchaseWithDiscount pageHomePurchaseWithDiscount = PageHomePurchaseWithDiscount.getNewInstance(driver);
+		validations.add(
+				"Aparece la página de <b>Descuento Mango likes you</b><br>",
+				pageHomePurchaseWithDiscount.checkIsPage(), State.Defect);
+		validations.add(
+				"Aparece el boton que permite <b>comprar ahora</b><br>",
+				pageHomePurchaseWithDiscount.areVisibleButtonPurchaseNow(), State.Defect);
+		return validations;
 	}
 }

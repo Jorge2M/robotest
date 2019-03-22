@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.mng.robotest.test80.mango.test.stpv.shop.loyalty.PageHomeLikesStpV;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
@@ -142,6 +143,11 @@ public class Loyalty extends GestorWebDriver {
         secCabeceraStpV.checkIsVisibleLikesDesktop();
         
         SecMenusUserStpV.clickMenuMiCuenta(dFTest.driver);
+
+        //Validación sección de loyalty pagina principal
+        PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(dFTest.driver);
+        pageHomeLikesStpV.clickOpcionCompraUnDescuento();
+        pageHomeLikesStpV.checkHomePurchaseWithDiscountPageOk();
     }
     
 }
