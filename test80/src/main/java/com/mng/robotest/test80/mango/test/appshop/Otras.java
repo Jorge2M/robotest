@@ -86,7 +86,6 @@ public class Otras extends GestorWebDriver {
             this.japones = this.japon.getListIdiomas().get(0);
        }
     }
-
 	
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Otras", "Canal:all_App:all"}, alwaysRun = true)

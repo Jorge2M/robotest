@@ -144,21 +144,21 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
         //Obtenemos el tipo de línea/sublínea
         LineaType lineaType = linea.getType();
         SublineaNinosType sublineaType = null;
-        if (sublinea!=null)
+        if (sublinea!=null) {
             sublineaType = sublinea.getTypeSublinea();
+        }
         
-        //Selección de la línea/sublínea
         SecMenusWrapperStpV.seleccionLinea(lineaType, sublineaType, dCtxShI, dFTest);
-        
-        //En el caso de la Línea se testean características específicas (que no están en la sublínea)
-        if (sublinea==null)
+        if (sublinea==null) {
             testSpecificFeaturesForLinea(linea, dCtxShI, dFTest);
+        }
             
         //Validamos si hemos de ejecutar los pasos correspondientes al recorrido de los menús
         if (testMenus(linea, sublinea)) {
-            SecMenusWrapperStpV.stepsMenusLinea(lineaType, sublineaType, dCtxShI, dFTest);
-        	if (existsRightBannerMenu(linea, sublinea, dCtxShI.channel))
+            //SecMenusWrapperStpV.stepsMenusLinea(lineaType, sublineaType, dCtxShI, dFTest);
+        	if (existsRightBannerMenu(linea, sublinea, dCtxShI.channel)) {
                 SecMenusDesktopStpV.clickRightBanner(lineaType, sublineaType, dCtxShI.appE, dFTest.driver);
+        	}
         }
         else {
             if (SecMenusWrap.canClickMenuArticles(dCtxShI.pais, linea, sublinea)) {

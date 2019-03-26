@@ -1,40 +1,31 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestionarClientes;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestionarClientes.TypeThirdButton;
 
-
 public class PageGestionarClientesStpV {
 
-
-
-	public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
-		String descripValidac = 
-			"1) Estamos en la página \"" + PageGestionarClientes.titulo + " \"<br>" + 
-			"2) Aparece el apartado de \"Buscar clientes\"<br>" +
-			"3) Aparece el apartado de \"Tratar clientes\"";
-		datosStep.setNOKstateByDefault();
-		ChecksResult listVals = ChecksResult.getNew(datosStep);
-		try {
-			if (!PageGestionarClientes.isPage(dFTest.driver)) {
-				listVals.add(1, State.Defect);
-			}
-			if (!PageGestionarClientes.isVisibleFormBuscarClientes(dFTest.driver)) {
-				listVals.add(2, State.Defect);
-			}
-			if (!PageGestionarClientes.isVisibleFormTratarClientes(dFTest.driver)) {
-				listVals.add(3, State.Defect);
-			}
-
-			datosStep.setListResultValidations(listVals);
-		} 
-		finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+	public static ChecksResult validateIsPage(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
+	 	validations.add(
+			"Estamos en la página " + PageGestionarClientes.titulo +  "<br>",
+			PageGestionarClientes.isPage(driver), State.Defect);
+	 	validations.add(
+			"Aparece el apartado de \"Buscar clientes\"<br>",
+			PageGestionarClientes.isVisibleFormBuscarClientes(driver), State.Defect);
+	 	validations.add(
+			"Aparece el apartado de \"Tratar clientes\"",
+			PageGestionarClientes.isVisibleFormTratarClientes(driver), State.Defect);
+		return validations;
 	}
 
 	public static void inputDniAndClickBuscar(String dni, DataFmwkTest dFTest) throws Exception {
@@ -76,9 +67,6 @@ public class PageGestionarClientesStpV {
 		} 
 		finally { listVals.checkAndStoreValidations(descripValidac); }
 	}
-
-
-
 
 	public static void clickThirdButton(DataFmwkTest dFTest) throws Exception {
 		TypeThirdButton typeButton = PageGestionarClientes.getTypeThirdButton(dFTest.driver);	    

@@ -89,7 +89,7 @@ public class SecBuscadorStpV {
     }
     
     @Validation (
-    	description="Aparece la página de error en la búsqueda con el encabezado<b>#{categoriaABuscar}</b>",
+    	description="Aparece la página de error en la búsqueda con el encabezado <b>#{categoriaABuscar}</b>",
     	level=State.Warn)
     private static boolean appearsSearchErrorPage(String categoriaABuscar, WebDriver driver) {
     	return (PageErrorBusqueda.isCabeceraResBusqueda(driver, categoriaABuscar));

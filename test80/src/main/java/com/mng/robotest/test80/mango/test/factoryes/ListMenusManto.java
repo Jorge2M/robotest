@@ -63,7 +63,7 @@ public class ListMenusManto {
         PageLoginMantoStpV.login(urlBaseManto, Constantes.userManto, Constantes.passwordManto, dFTest);
         String codigoEspanya = "001";
         String almacenEspanya = "001";
-        PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, AppEcom.shop, dFTest);
+        PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, AppEcom.shop, dFTest.driver);
         ArrayList<String> listMenuNames = PageMenusManto.getListCabecerasMenusName(dFTest.driver);
         dFTest.driver.quit();
         return listMenuNames;

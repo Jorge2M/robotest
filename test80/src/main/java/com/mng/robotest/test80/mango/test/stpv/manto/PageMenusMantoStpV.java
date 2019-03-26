@@ -1,13 +1,12 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
-import static org.testng.Assert.assertTrue;
 import java.util.ArrayList;
+import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageBolsas;
 import com.mng.robotest.test80.mango.test.pageobject.manto.SecCabecera;
@@ -22,151 +21,100 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.PageMenusManto;
 
 public class PageMenusMantoStpV {
 
-    public static DatosStep goToMainMenusAndClickMenu(String subMenu, DataFmwkTest dFTest) throws Exception {
-        //Step. Accedemos al menú de Bolsas
-        DatosStep datosStep = new DatosStep     (
-            "Desde la página de menús, seleccionamos el menú \"" + subMenu + "\"", 
-            "Aparece la página al menú seleccionado");
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-        String textAlert = "";
-        try {
-            //Si no estamos en la página de menús nos posicionamos en ella
-            if (!PageMenusManto.isPage(dFTest.driver)) {
-            	Thread.sleep(1000);
-                SecCabecera.clickLinkVolverMenuAndWait(dFTest.driver, 60);
-            }
-                    
-            textAlert = PageMenusManto.clickMenuAndAcceptAlertIfExists(subMenu, dFTest.driver);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
+	@Step (
+		description="Desde la página de menús, seleccionamos el menú \"#{subMenu}\"", 
+        expected="Aparece la página al menú seleccionado",
+        saveErrorPage=SaveWhen.Never)
+    public static void goToMainMenusAndClickMenu(String subMenu, WebDriver driver) throws Exception {
+        if (!PageMenusManto.isPage(driver)) {
+        	Thread.sleep(1000);
+            SecCabecera.clickLinkVolverMenuAndWait(driver, 60);
         }
-        finally { StepAspect.storeDataAfterStep(datosStep); }
-        
-        //Validaciones
-        String descripValidac = 
-        	"1) Aparece la página asociada al menú <b>" + subMenu + "</b><br>" +
-        	"2) No aparece ninguna ventana de alerta";
-        datosStep.setNOKstateByDefault();
-        ChecksResult listVals = ChecksResult.getNew(datosStep);
-        try {
-            if (!PageMenusManto.validateIsPage(subMenu, dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if ("".compareTo(textAlert)!=0) {
-            	descripValidac+=
-            		"<br>" +
-            		"<b>Warning!</b> Ha aparecido una alerta con el mensaje: " + textAlert;
-            	listVals.add(2, State.Warn);
-            }
-            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return datosStep;
+        String textAlert = PageMenusManto.clickMenuAndAcceptAlertIfExists(subMenu, driver);
+        checkIsPageOfSubmenu(subMenu, textAlert, driver);
     }
+	
+	@Validation
+	private static ChecksResult checkIsPageOfSubmenu(String subMenu, String textAlertObtained, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
+	 	validations.add(
+			"Aparece la página asociada al menú <b>" + subMenu + "</b><br>",
+			PageMenusManto.validateIsPage(subMenu, driver), State.Defect);
+	 	validations.add(
+			"No aparece ninguna ventana de alerta",
+			"".compareTo(textAlertObtained)==0, State.Warn);
+	 	return validations;
+	}
     
     /**
      * Se accede a la opción de menú de "Bolsas" (sólo en caso de que no estemos ya en ella)
      */
-    public static void goToBolsas(DataFmwkTest dFTest) throws Exception {
-        
-        //Si ya estamos en la página en cuestión no hacemos nada
-        if (!PageBolsas.isPage(dFTest.driver)) {
-            //Step
-            DatosStep datosStep = goToMainMenusAndClickMenu("Bolsas", dFTest);
-                
-            //Validaciones
-            String descripValidac = "1) Aparece la página de Bolsas";
-            datosStep.setNOKstateByDefault();      
-            ChecksResult listVals = ChecksResult.getNew(datosStep);
-            try {
-                /*1*/assertTrue(PageBolsas.isPage(dFTest.driver));
-                                          
-                datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-            }  
-            finally { listVals.checkAndStoreValidations(descripValidac); }
+    public static void goToBolsas(WebDriver driver) throws Exception {
+        if (!PageBolsas.isPage(driver)) {
+            goToMainMenusAndClickMenu("Bolsas", driver);
+            checkIsVisiblePageBolsas(driver); 
         }
     }
     
-    /**
-     * Se accede a la opción de menú de "Pedidos" (sólo en caso de que no estemos ya en ella)
-     */
-    public static void goToPedidos(DataFmwkTest dFTest) throws Exception {
+    @Validation (
+    	description="Aparece la página de Bolsas",
+    	level=State.Defect)
+    private static boolean checkIsVisiblePageBolsas(WebDriver driver) {
+        return (PageBolsas.isPage(driver));
+    }
+    
+    public static void goToPedidos(WebDriver driver) throws Exception {
         //Si ya estamos en la página en cuestión no hacemos nada
-        if (!PagePedidos.isPage(dFTest.driver)) {
-            //Step. 
-            DatosStep datosStep = goToMainMenusAndClickMenu("Pedidos", dFTest);
-                
-            //Validaciones
-            String descripValidac = 
-                "1) Aparece la página de Pedidos";
-            datosStep.setNOKstateByDefault();     
-            ChecksResult listVals = ChecksResult.getNew(datosStep);
-            try {
-                assertTrue(PagePedidos.isPage(dFTest.driver));
-                                          
-                datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-            }  
-            finally { listVals.checkAndStoreValidations(descripValidac); }
+        if (!PagePedidos.isPage(driver)) {
+            goToMainMenusAndClickMenu("Pedidos", driver);
+            checkIsVisiblePagePedidos(driver);
         }        
     }    
     
-    /**
-     * Se accede a la opción de menú de "Consultar Tiendas" (sólo en caso de que no estemos ya en ella)
-     */
-    public static void goToConsultarTiendas(DataFmwkTest dFTest) throws Exception {
-        //Step
-        DatosStep datosStep = goToMainMenusAndClickMenu("Consultar Tiendas", dFTest);
-            
-        //Validaciones
-        PageConsultaTiendaStpV.validateIsPage(datosStep, dFTest);
+    @Validation (
+    	description="Aparece la página de Pedidos",
+    	level=State.Defect)
+    private static boolean checkIsVisiblePagePedidos(WebDriver driver) {
+    	return (PagePedidos.isPage(driver));
+    }
+    
+    public static void goToConsultarTiendas(WebDriver driver) throws Exception {
+    	goToMainMenusAndClickMenu("Consultar Tiendas", driver);
+        PageConsultaTiendaStpV.validateIsPage(driver);
     }
 
     /**
      * Se accede a la opción de menú de "ID/EANS" (sólo en caso de que no estemos ya en ella)
      */
-	public static void goToIdEans(DataFmwkTest dFTest)  throws Exception{
-		//Step
-        DatosStep datosStep = goToMainMenusAndClickMenu("EANS", dFTest);
-            
-        //Validaciones
-        PageConsultaIdEansStpV.validateIsPage(datosStep, dFTest);
+	public static void goToIdEans(WebDriver driver)  throws Exception{
+		goToMainMenusAndClickMenu("EANS", driver);
+        PageConsultaIdEansStpV.validateIsPage(driver);
 	}
 
 	/**
      * Se accede a la opción de menú de "Gestionar Clientes" (sólo en caso de que no estemos ya en ella)
      */
-	public static void goToGestionarClientes(DataFmwkTest dFTest) throws Exception{
-		//Step
-        DatosStep datosStep = goToMainMenusAndClickMenu("Gestionar Clientes", dFTest);
-            
-        //Validaciones
-        PageGestionarClientesStpV.validateIsPage(datosStep, dFTest);
+	public static void goToGestionarClientes(WebDriver driver) throws Exception{
+        goToMainMenusAndClickMenu("Gestionar Clientes", driver);
+        PageGestionarClientesStpV.validateIsPage(driver);
 	}
 	
 	/**
      * Se accede a la opción de menú de "Gestor de Cheques" (sólo en caso de que no estemos ya en ella)
 	 * @throws Exception 
      */
-	public static void goToGestorCheques(DataFmwkTest dFTest) throws Exception {
-		//Step
-        goToMainMenusAndClickMenu("Gestor de Cheques", dFTest);
-            
-        //Validaciones
-        PageGestorChequesStpV.validateIsPage(dFTest.driver);
+	public static void goToGestorCheques(WebDriver driver) throws Exception {
+        goToMainMenusAndClickMenu("Gestor de Cheques", driver);
+        PageGestorChequesStpV.validateIsPage(driver);
 	}
 	
 	/**
      * Se accede a la opción de menú de "Estadísticas Pedidos" (sólo en caso de que no estemos ya en ella)
 	 * @throws Exception 
      */
-	public static void goToGestorEstadisticasPedido(DataFmwkTest dFTest) throws Exception {
-		//Step
-        DatosStep datosStep = goToMainMenusAndClickMenu("Estadisticas Pedidos", dFTest);
-            
-        //Validaciones
-        PageGestorEstadisticasPedidoStpV.validateIsPage(datosStep, dFTest);
+	public static void goToGestorEstadisticasPedido(WebDriver driver) throws Exception {
+        goToMainMenusAndClickMenu("Estadisticas Pedidos", driver);
+        PageGestorEstadisticasPedidoStpV.validateIsPage(driver);
 	}
 	
 	
@@ -174,25 +122,18 @@ public class PageMenusMantoStpV {
      * Se accede a la opción de menú de "Gestor de Saldos de TPV" (sólo en caso de que no estemos ya en ella)
 	 * @throws Exception 
      */
-	public static void goToGestorSaldosTPV(DataFmwkTest dFTest) throws Exception {
-		//Step
-        DatosStep datosStep = goToMainMenusAndClickMenu("Gestor de Saldos de TPV", dFTest);
-            
-        //Validaciones
-        PageGestorSaldosTPVStpV.validateIsPage(datosStep, dFTest);
-		
+	public static void goToGestorSaldosTPV(WebDriver driver) throws Exception {
+        goToMainMenusAndClickMenu("Gestor de Saldos de TPV", driver);
+        PageGestorSaldosTPVStpV.validateIsPage(driver);
 	}
 	
 	/**
      * Se accede a la opción de menú de "Consulta y cambio de familia" (sólo en caso de que no estemos ya en ella)
 	 * @throws Exception 
      */
-	public static void goToGestorConsultaCambioFamilia(DataFmwkTest dFTest) throws Exception {
-		//Step
-        DatosStep datosStep = goToMainMenusAndClickMenu("Gestor de familias", dFTest);
-            
-        //Validaciones
-        PageGestorConsultaCambioFamiliaStpV.validateIsPage(datosStep, dFTest);
+	public static void goToGestorConsultaCambioFamilia(WebDriver driver) throws Exception {
+        goToMainMenusAndClickMenu("Gestor de familias", driver);
+        PageGestorConsultaCambioFamiliaStpV.validateIsPage(driver);
 		
 	}
 	
@@ -201,38 +142,16 @@ public class PageMenusMantoStpV {
 	 * @throws Exception 
      */
 	
-	public static void goToOrdenadorDePrendas(DataFmwkTest dFTest) throws Exception {
-		//Step
-		DatosStep datosStep = goToMainMenusAndClickMenu("Ordenador de Prendas", dFTest);
-		
-		//Validaciones
-		PageOrdenacionDePrendasStpV.validateIsPage(datosStep, dFTest.driver);
+	public static void goToOrdenadorDePrendas(WebDriver driver) throws Exception {
+		goToMainMenusAndClickMenu("Ordenador de Prendas", driver);
+		PageOrdenacionDePrendasStpV.validateIsPage(driver);
 	}
 	
-	/**
-     * Se accede a las distintas opciones de menú en Manto por bloques y se comprueba que la página funciona
-	 * @param listMenuNames 
-	 * @throws Exception 
-     */
-	public static void comprobarMenusManto(String cabeceraName, String cabeceraNameNext, DataFmwkTest dFTest) throws Exception{
-		//Obtenemos todos los Submenus del bloque
-		ArrayList<String> listSubMenuNames = PageMenusManto.getListSubMenusName(cabeceraName, cabeceraNameNext, dFTest.driver);
-
-		for (String subMenu : listSubMenuNames)
-		    goToMainMenusAndClickMenu(subMenu, dFTest);
-		
+	public static void comprobarMenusManto(String cabeceraName, String cabeceraNameNext, WebDriver driver) 
+	throws Exception {
+		ArrayList<String> listSubMenuNames = PageMenusManto.getListSubMenusName(cabeceraName, cabeceraNameNext, driver);
+		for (String subMenu : listSubMenuNames) {
+		    goToMainMenusAndClickMenu(subMenu, driver);
+		}
 	}
-
-
 }
-
-
-
-
-
-
-
-
-
-
-

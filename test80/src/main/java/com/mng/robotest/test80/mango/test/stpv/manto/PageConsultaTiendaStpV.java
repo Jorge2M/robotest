@@ -2,8 +2,12 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageConsultaTienda;
@@ -11,19 +15,11 @@ import com.mng.robotest.test80.mango.test.pageobject.manto.PageConsultaTienda;
 
 public class PageConsultaTiendaStpV {
 
-    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) Es visible el input para la introducción de la tienda";
-        datosStep.setNOKstateByDefault();
-        ChecksResult listVals = ChecksResult.getNew(datosStep);
-        try {
-            if (!PageConsultaTienda.isVisibleInputTienda(dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-
-            datosStep.setListResultValidations(listVals);
-        } 
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation (
+		description="Es visible el input para la introducción de la tienda",
+		level=State.Defect)
+    public static boolean validateIsPage(WebDriver driver) {
+        return (PageConsultaTienda.isVisibleInputTienda(driver));
     }
 
 	public static void consultaTiendaInexistente(String tiendaNoExistente, DataFmwkTest dFTest) {

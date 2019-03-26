@@ -2,34 +2,28 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+
+import org.openqa.selenium.WebDriver;
+
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorSaldosTPV;
 
-
 public class PageGestorSaldosTPVStpV {
 
-
-
-	public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
-		String descripValidac = 
-			"1) Estamos en la página \"" + PageGestorSaldosTPV.titulo + " \"<br>" +
-			"2) Aparece el input de fecha de TPV";
-		datosStep.setNOKstateByDefault();
-		ChecksResult listVals = ChecksResult.getNew(datosStep);
-		try {
-			if (!PageGestorSaldosTPV.isPage(dFTest.driver)) {
-				listVals.add(1, State.Defect);
-			}
-			if (!PageGestorSaldosTPV.isVisibleTPVInput(dFTest.driver)) {
-				listVals.add(2, State.Defect);
-			}
-
-			datosStep.setListResultValidations(listVals);
-		} 
-		finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+	public static ChecksResult validateIsPage(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
+	 	validations.add(
+			"Estamos en la página " + PageGestorSaldosTPV.titulo + " <br>",
+			PageGestorSaldosTPV.isPage(driver), State.Defect);
+	 	validations.add(
+			"Aparece el input de fecha de TPV",
+			PageGestorSaldosTPV.isVisibleTPVInput(driver), State.Defect);
+	 	return validations;
 	}
 	
 	public static void searchValidTPV(String tpv, DataFmwkTest dFTest) throws Exception {

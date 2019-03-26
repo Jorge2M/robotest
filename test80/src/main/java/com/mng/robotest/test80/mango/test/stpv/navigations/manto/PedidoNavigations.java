@@ -3,11 +3,11 @@ package com.mng.robotest.test80.mango.test.stpv.navigations.manto;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.Test80mng.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.utils;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -27,7 +27,6 @@ import com.mng.robotest.test80.mango.test.stpv.manto.pedido.PageConsultaPedidoBo
 import com.mng.robotest.test80.mango.test.stpv.manto.pedido.PageGenerarPedidoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.pedido.PagePedidosMantoStpV;
 import static com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageGenerarPedido.EstadoPedido.*;
-
 
 public class PedidoNavigations {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
@@ -78,9 +77,9 @@ public class PedidoNavigations {
      */
     public static void validaPedidoStpVs(DataPedido dataPedido, List<CheckPedido> listChecks, AppEcom app, DataFmwkTest dFTest) 
     throws Exception {
-        PageSelTdaMantoStpV.selectTienda(dataPedido.getCodigoAlmacen(), dataPedido.getCodigoPais(), app, dFTest);
+        PageSelTdaMantoStpV.selectTienda(dataPedido.getCodigoAlmacen(), dataPedido.getCodigoPais(), app, dFTest.driver);
         if (listChecks.contains(CheckPedido.consultarBolsa)) {
-        	consultarBolsaStpV(dataPedido, app, dFTest);
+        	consultarBolsaStpV(dataPedido, app, dFTest.driver);
         }
         
         if (app!=AppEcom.votf) {
@@ -98,17 +97,17 @@ public class PedidoNavigations {
         }
     }
     
-    private static void consultarBolsaStpV(DataPedido dataPedido, AppEcom app, DataFmwkTest dFTest) throws Exception {
-        PageMenusMantoStpV.goToBolsas(dFTest);
-        SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.BOLSA, dFTest.driver);
-        boolean existLinkPedido = PageBolsasMantoStpV.validaLineaBolsa(dataPedido, app, dFTest);
+    private static void consultarBolsaStpV(DataPedido dataPedido, AppEcom app, WebDriver driver) throws Exception {
+        PageMenusMantoStpV.goToBolsas(driver);
+        SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.BOLSA, driver);
+        boolean existLinkPedido = PageBolsasMantoStpV.validaLineaBolsa(dataPedido, app, driver).getExistsLinkCodPed();
         if (existLinkPedido) {
-            PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.bolsa, app, dFTest.driver);
+            PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.bolsa, app, driver);
         }
     }
     
     private static void consultarPedidoStpV(DataPedido dataPedido, AppEcom app, DataFmwkTest dFTest) throws Exception {
-        PageMenusMantoStpV.goToPedidos(dFTest);
+        PageMenusMantoStpV.goToPedidos(dFTest.driver);
         SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.PEDIDO, dFTest.driver);
         boolean existLinkPedido = PagePedidosMantoStpV.validaLineaPedido(dataPedido, app, dFTest);
         if (existLinkPedido) {

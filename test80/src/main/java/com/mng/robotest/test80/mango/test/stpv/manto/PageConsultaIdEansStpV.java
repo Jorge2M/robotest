@@ -1,7 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
 import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
@@ -14,30 +13,21 @@ import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageConsultaIdEans;
 
-
 public class PageConsultaIdEansStpV {
 
-    public static void validateIsPage(DatosStep datosStep, DataFmwkTest dFTest) {
-        String descripValidac = 
-            "1) Es visible el contenido de la pestaña Busqueda Excel<br>" + 
-            "2) Es visible el contenido de la pestaña Busqueda Rapida<br>" +
-            "3) Es visible el título de página correcto";
-        datosStep.setNOKstateByDefault();
-        ChecksResult listVals = ChecksResult.getNew(datosStep);
-        try {
-            if (!PageConsultaIdEans.isVisibleDivBusquedaExcel(dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (!PageConsultaIdEans.isVisibleDivBusquedaRapida(dFTest.driver)) {
-                listVals.add(2, State.Defect);
-            }
-            if (!PageConsultaIdEans.isVisibleTituloPagina(dFTest.driver)) {
-                listVals.add(3, State.Defect);
-            }
-
-            datosStep.setListResultValidations(listVals);
-        } 
-        finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Validation
+    public static ChecksResult validateIsPage(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
+	 	validations.add(
+			"Es visible el contenido de la pestaña Busqueda Excel<br>",
+			PageConsultaIdEans.isVisibleDivBusquedaExcel(driver), State.Defect);
+	 	validations.add(
+			"Es visible el contenido de la pestaña Busqueda Rapida<br>",
+			PageConsultaIdEans.isVisibleDivBusquedaRapida(driver), State.Defect);
+	 	validations.add(
+			"Es visible el título de página correcto",
+			PageConsultaIdEans.isVisibleTituloPagina(driver), State.Defect);
+	 	return validations;
     }
 
     @Step (

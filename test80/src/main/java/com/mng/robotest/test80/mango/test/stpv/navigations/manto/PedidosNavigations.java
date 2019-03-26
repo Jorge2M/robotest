@@ -79,25 +79,25 @@ public class PedidosNavigations {
      */
     public static void validaPedidoStpVs(DataPedido dataPedido, AppEcom appE, DataFmwkTest dFTest) throws Exception {
         //Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
-        PageSelTdaMantoStpV.selectTienda(dataPedido.getCodigoAlmacen(), dataPedido.getCodigoPais(), appE, dFTest);
+        PageSelTdaMantoStpV.selectTienda(dataPedido.getCodigoAlmacen(), dataPedido.getCodigoPais(), appE, dFTest.driver);
         
         //Establecemos los filtros de las bolsas con el día de hoy + el pedido + el código de país asociado al pedido y pulsamos "Buscar"
-        PageMenusMantoStpV.goToBolsas(dFTest);
+        PageMenusMantoStpV.goToBolsas(dFTest.driver);
         SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.BOLSA, dFTest.driver);
-        boolean existLinkPedido = PageBolsasMantoStpV.validaLineaBolsa(dataPedido, appE, dFTest);
+        boolean existLinkPedido = PageBolsasMantoStpV.validaLineaBolsa(dataPedido, appE, dFTest.driver).getExistsLinkCodPed();
         if (existLinkPedido) {
-            PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.bolsa, appE, dFTest);
+            PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.bolsa, appE, dFTest.driver);
         }
         
         if (appE!=AppEcom.votf) {
             //Establecemos los filtros de los pedidos con el día de hoy + el pedido + el código de país asociado al pedido y pulsamos "Buscar"
-            PageMenusMantoStpV.goToPedidos(dFTest);
+            PageMenusMantoStpV.goToPedidos(dFTest.driver);
             SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.PEDIDO, dFTest.driver);
             existLinkPedido = PagePedidosMantoStpV.validaLineaPedido(dataPedido, appE, dFTest);
                                         
             //Si existe el link del pedido, Accedemos al detalle del pedido (la página de detalle es común para consulta de pedido/bolsa)
             if (existLinkPedido) {
-                PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.pedido, appE, dFTest);
+                PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.pedido, appE, dFTest.driver);
             }
         }
         

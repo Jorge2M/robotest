@@ -405,7 +405,7 @@ public class SecMenusDesktopStpV {
     
     @Step (
     	description="Seleccionar el banner existente a la derecha de los menús", 
-         expected="Aparece una página con banners o artículos")
+        expected="Aparece una página con banners o artículos")
     public static void clickRightBanner(LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, WebDriver driver) 
     throws Exception {
         SecMenusDesktop.secMenuSuperior.secBlockMenus.clickRightBanner(lineaType, sublineaType, app, driver);
@@ -571,37 +571,7 @@ public class SecMenusDesktopStpV {
 	 	return validations;
     }
     
-//    //Temporal para prueba solicitada por Ángela
-//    public static void validationsSpecificEndRebajas(Channel channel, AppEcom app, WebDriver driver) throws Exception {
-//    	DatosStep datosStep = TestCaseData.getDatosLastStep();
-//    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(channel, app, driver);
-//    	List<Integer> tempNextSeason = FilterCollection.nextSeason.getListTempArticles();
-//        String descripValidac = 
-//            prefixSale +        		   
-//            "1) No hay artículos con las siguientes características:<br>" + 
-//            " * Rebajados</b><br>" +
-//            " * De temporadas T4 " + tempNextSeason;
-//        datosStep.setNOKstateByDefault();
-//        ListResultValidation listVals = ListResultValidation.getNew(datosStep);
-//        try {
-//            List<String> listArtWrong = pageGaleriaDesktop.getArticles(TypeArticle.rebajado, tempNextSeason);
-//            if (listArtWrong.size() > 0) {
-//                listVals.add(1, State.Defect);
-//                descripValidac+=
-//                    "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
-//                    "hay " + listArtWrong.size() + " artículos rebajados con label errónea:<br>";
-//                for (String nameWrong : listArtWrong) {
-//             	   descripValidac+=(nameWrong + "<br>");
-//                }
-//                descripValidac+="</lin>";
-//            }
-//
-//            datosStep.setListResultValidations(listVals);
-//        } 
-//        finally { listVals.checkAndStoreValidations(descripValidac); }
-//    }
-    
-	  //Temporal para prueba fin rebajas en China
+	//Temporal para prueba fin rebajas en China
     @Validation
     public static ChecksResult validationsSpecificEndRebajasChina(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
     	ChecksResult validations = ChecksResult.getNew();

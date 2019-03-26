@@ -13,10 +13,11 @@ public class UtilsPageGaleria {
             codColor = matcher.group(1);
         }
         else {
-            pattern = Pattern.compile("_(.*?).jpg");
+            pattern = Pattern.compile("_(.*?)(_.*?.jpg|.jpg)");
             matcher = pattern.matcher(srcImagenColor);
-            if (matcher.find())
+            if (matcher.find()) {
                 codColor = matcher.group(1);
+            }
         }
         
         return codColor;

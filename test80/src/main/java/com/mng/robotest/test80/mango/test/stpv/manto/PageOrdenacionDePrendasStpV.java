@@ -7,7 +7,6 @@ import com.mng.robotest.test80.mango.test.pageobject.manto.PageOrdenacionDePrend
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageOrdenacionDePrendas.*;
@@ -34,8 +33,8 @@ public class PageOrdenacionDePrendasStpV {
 	}
 
     @Validation
-    public static ChecksResult validateIsPage(DatosStep datosStep, WebDriver driver) {
-        ChecksResult validations = ChecksResult.getNew(datosStep);
+    public static ChecksResult validateIsPage(WebDriver driver) {
+        ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 10;
         validations.add(
         	"Estamos en la página " + Orden.titulo.getXPath() + "<br>",

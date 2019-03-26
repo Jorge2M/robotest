@@ -2,6 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.otras;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
@@ -13,22 +14,22 @@ public class GoogleStpV {
 
 	@Step (
 		description="Accedemos a la URL de Google (http://www.google.es\") y buscamos \"MANGO\"", 
-        expected="Aparecen los links de Mango con contenido correcto")
+        expected="Aparecen los links de Mango con contenido correcto",
+        saveHtmlPage=SaveWhen.IfProblem)
     public static void accessGoogleAndSearchMango(WebDriver driver) throws Exception {
         PageGoogle.accessViaURL(driver);
         PageGoogle.searchTextAndWait(driver, "MANGO");       
-    
-        //Validations
         checkLinksMango(driver);
     }
 	
 	@Validation
 	private static ChecksResult checkLinksMango(WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
-        int maxSecondsWait = 5;
+        int maxSecondsWait = 3;
     	validations.add(
     		"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + maxSecondsWait + " segundos)<br>",
-    		PageGoogle.validaFirstLinkContainsUntil("MANGO", maxSecondsWait, driver), State.Defect);		
+    		PageGoogle.validaFirstLinkContainsUntil("MANGO", maxSecondsWait, driver) ||
+    		PageGoogle.validaFirstLinkContains("Mango", driver), State.Defect);		
     	validations.add(
     		"El 1er link no-anuncion no contiene \"robots.txt\"",
     		!PageGoogle.validaFirstLinkContainsUntil("robots.txt", 0, driver), State.Warn);

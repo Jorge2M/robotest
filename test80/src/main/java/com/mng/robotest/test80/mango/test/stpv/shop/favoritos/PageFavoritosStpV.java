@@ -50,8 +50,6 @@ public class PageFavoritosStpV {
     	expected="El modal de favoritos compartidos aparece correctamente")
     public static void clickShareIsOk(DataFmwkTest dFTest) {
     	PageFavoritos.openShareModal(dFTest.driver);
-    	
-    	//Validaciones
     	checkShareIsOk(dFTest.driver);
     }
     
@@ -80,8 +78,6 @@ public class PageFavoritosStpV {
     public static void closeShareModal(DataFmwkTest dFTest) throws Exception {
        	PageFavoritos.closeShareModal(dFTest.driver);
     	int maxSecondsWait = 2;
-    	
-    	//Validaciones
     	checkShareIsClosedUntil(maxSecondsWait, dFTest.driver);
     }
     
@@ -98,8 +94,6 @@ public class PageFavoritosStpV {
     public static void clear(String refArticulo, String codColor, DataFmwkTest dFTest) throws Exception {
         PageFavoritos.clearArticuloAndWait(refArticulo, codColor, dFTest.driver);
         int maxSecondsWait = 5;
-        
-        //Validaciones
         checkArticleDisappearsFromFavoritesUntil(refArticulo, codColor, maxSecondsWait, dFTest.driver);
     }
     
@@ -115,8 +109,6 @@ public class PageFavoritosStpV {
     	expected="No queda ningún artículo en Favoritos")
     public static void clearAll(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         PageFavoritos.clearAllArticulos(dCtxSh.channel, dCtxSh.appE, driver);
-        
-        //Validaciones
         checkFavoritosWithoutArticles(driver);
     }
     
@@ -142,8 +134,6 @@ public class PageFavoritosStpV {
         String tallaSelected = PageFavoritos.addArticleToBag(refProductoToAdd, codigoColor, 1, dFTest.driver);
         artToAddBolsa.setTallaAlf(tallaSelected);
         dataBolsa.addArticulo(artToAddBolsa);
-
-        //Validaciones
         SecBolsaStpV.validaAltaArtBolsa(dataBolsa, channel, AppEcom.shop, dFTest.driver);
     }
     
@@ -154,8 +144,6 @@ public class PageFavoritosStpV {
         String refProducto = artToPlay.getRefProducto();
         String codigoColor = artToPlay.getCodigoColor();
         PageFavoritos.clickImgProducto(refProducto, codigoColor, dFTest.driver);
-
-        //Validaciones
         modalFichaFavoritos.validaIsVisibleFicha(artToPlay, dFTest.driver);
     }
 }

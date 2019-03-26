@@ -81,9 +81,9 @@ public class Manto extends GestorWebDriver {
 		this.dPagoPrueba.setNombre("");
 		this.dPedidoPrueba.setPago(this.dPagoPrueba);
 		
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest);
+		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
     	
-    	PageMenusMantoStpV.goToPedidos(dFTest);
+    	PageMenusMantoStpV.goToPedidos(dFTest.driver);
     	
     	SecFiltrosMantoStpV.setFiltrosHoyYbuscar(this.dPedidoPrueba, TypeSearch.PEDIDO, dFTest.driver);
     	//this.dPedidoPrueba = PagePedidosMantoStpV.getDataPedidoUsuarioRegistrado(this.dPedidoPrueba, dFTest);
@@ -103,9 +103,9 @@ public class Manto extends GestorWebDriver {
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest);
+		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
 
-		PageMenusMantoStpV.goToConsultarTiendas(dFTest);
+		PageMenusMantoStpV.goToConsultarTiendas(dFTest.driver);
 
 		String tiendaNoExistente = "423";
 		PageConsultaTiendaStpV.consultaTiendaInexistente(tiendaNoExistente, dFTest);
@@ -127,9 +127,9 @@ public class Manto extends GestorWebDriver {
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest);
+		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
 
-		PageMenusMantoStpV.goToIdEans(dFTest);
+		PageMenusMantoStpV.goToIdEans(dFTest.driver);
 
 		List<String> pedidosPrueba = new ArrayList<>();
 		pedidosPrueba.add(this.dPedidoPrueba.getCodigoPedidoManto());
@@ -154,9 +154,9 @@ public class Manto extends GestorWebDriver {
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest);
+		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
 
-		PageMenusMantoStpV.goToGestionarClientes(dFTest);
+		PageMenusMantoStpV.goToGestionarClientes(dFTest.driver);
 
 		String dni = this.dPedidoPrueba.getPago().getDni();
 		
@@ -175,9 +175,9 @@ public class Manto extends GestorWebDriver {
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest);
+		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
 
-		PageMenusMantoStpV.goToGestorCheques(dFTest);
+		PageMenusMantoStpV.goToGestorCheques(dFTest.driver);
 
 		String mail = "esther.esteve@mango.com";
 		String cheque = "204028046151";
@@ -199,9 +199,9 @@ public class Manto extends GestorWebDriver {
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 	
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest);
+		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
 	
-		PageMenusMantoStpV.goToGestorEstadisticasPedido(dFTest);
+		PageMenusMantoStpV.goToGestorEstadisticasPedido(dFTest.driver);
 	
 		PageGestorEstadisticasPedidoStpV.searchZalandoOrdersInformation(dFTest);
 		
@@ -217,9 +217,9 @@ public class Manto extends GestorWebDriver {
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 	
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest);
+		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
 	
-		PageMenusMantoStpV.goToGestorSaldosTPV(dFTest);
+		PageMenusMantoStpV.goToGestorSaldosTPV(dFTest.driver);
 	
 		this.tpv = "600";
 		PageGestorSaldosTPVStpV.searchValidTPV(this.tpv, dFTest);
@@ -236,9 +236,9 @@ public class Manto extends GestorWebDriver {
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 	
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest);
+		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
 	
-		PageMenusMantoStpV.goToGestorConsultaCambioFamilia(dFTest);
+		PageMenusMantoStpV.goToGestorConsultaCambioFamilia(dFTest.driver);
 	
 		PageGestorConsultaCambioFamiliaStpV.selectAccesoriosAndClickConsultaPorFamiliaButton(dFTest);
 		PageGestorConsultaCambioFamiliaStpV.clickCambioFamiliaButton(dFTest);
@@ -252,9 +252,9 @@ public class Manto extends GestorWebDriver {
 		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
 
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest);
+		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
 		
-		PageMenusMantoStpV.goToOrdenadorDePrendas(dFTest);
+		PageMenusMantoStpV.goToOrdenadorDePrendas(dFTest.driver);
 		PageOrdenacionDePrendasStpV.mantoOrdenacionInicio(dFTest);
 		PageOrdenacionDePrendasStpV.mantoSeccionPrendas(dFTest);
 		PageOrdenacionDePrendasStpV.ordenacionModal(dFTest);		

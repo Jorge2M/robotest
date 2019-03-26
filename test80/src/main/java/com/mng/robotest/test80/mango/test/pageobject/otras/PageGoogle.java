@@ -33,6 +33,10 @@ public class PageGoogle extends WebdrvWrapp {
         waitForPageLoaded(driver);
     }
     
+    public static boolean validaFirstLinkContains(String textToBeContained, WebDriver driver) {
+    	return (validaFirstLinkContainsUntil(textToBeContained, 0, driver));
+    }
+    
     public static boolean validaFirstLinkContainsUntil(String textToBeContained, int maxSecondsToWait, WebDriver driver) {
         String xpathLink = getXPath_linkWithText(textToBeContained);
         return (isElementPresentUntil(driver, By.xpath(xpathLink), maxSecondsToWait));

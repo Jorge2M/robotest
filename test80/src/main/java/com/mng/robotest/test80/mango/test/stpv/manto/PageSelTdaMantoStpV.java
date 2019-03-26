@@ -1,10 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
-import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
+import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.TiendaMantoEnum.TiendaManto;
@@ -20,60 +20,40 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.PageMenusManto;
 
 public class PageSelTdaMantoStpV {
 	
-    public static DatosStep selectTienda(String codigoAlmacen, String codigoPais, AppEcom appE, DataFmwkTest dFTest) 
+	final static String TagTienda = "@TagTienda";
+	@Step (
+		description="Seleccionamos el entorno \"" + TagTienda + "\"", 
+        expected="Aparece la página de Menús",
+        saveErrorPage=SaveWhen.Never)
+    public static void selectTienda(String codigoAlmacen, String codigoPais, AppEcom appE, WebDriver driver) 
     throws Exception {
         TiendaManto tienda = TiendaManto.getTienda(codigoAlmacen, codigoPais, appE);
+        TestCaseData.getDatosCurrentStep().replaceInDescription(TagTienda, tienda.name());
         
-        //Step.
-        DatosStep datosStep = new DatosStep       (
-            "Seleccionamos el entorno \"" + tienda + "\"", 
-            "Aparece la página de Menús");
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-        try {
-            //Si no estamos en la página de selección de tienda vamos a ella mediante selección del botón "Seleccionar tienda"
-            if (!PageSelTda.isPage(dFTest.driver))
-                SecCabecera.clickButtonSelTienda(dFTest.driver);
-            
-            //Seleccionamos el entorno asociado al almacén (Alemania, Europa Palau...)
-            PageSelTda.selectTienda(tienda, dFTest.driver);
-            
-            datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-        }
-        finally {
-            if (dFTest.ctx!=null)
-                StepAspect.storeDataAfterStep(datosStep); 
+        if (!PageSelTda.isPage(driver)) {
+            SecCabecera.clickButtonSelTienda(driver);
         }
         
-        //Validaciones
-        String descripValidac = 
-            "1) Aparece la página del Menú principal de Manto donde se encuentran todas las opciones de éste";
-        datosStep.setNOKstateByDefault();
-        ChecksResult listVals = ChecksResult.getNew(datosStep);
-        try {
-            if (!PageMenusManto.isPage(dFTest.driver)) {
-                listVals.add(1, State.Defect);
-            }
-                
-            datosStep.setListResultValidations(listVals);
-        }  
-        finally {
-            if (dFTest.ctx!=null) {
-            	listVals.checkAndStoreValidations(descripValidac);
-            }
-        }
-        
-        return datosStep;
+        PageSelTda.selectTienda(tienda, driver);
+        checkIsPageMenusManto(driver);
     }
     
+	@Validation(
+		description="Aparece la página del Menú principal de Manto donde se encuentran todas las opciones de éste",
+		level=State.Defect)
+	private static boolean checkIsPageMenusManto(WebDriver driver) {
+		return (PageMenusManto.isPage(driver));
+	}
 
     /**
      * Accede a la tienda asociada al almacén (sólo si no estamos en ella ya)
      */
-    public static void goToTiendaPais(String codigoAlmacen, String codigoPais,  AppEcom appE, DataFmwkTest dFTest) 
+    public static void goToTiendaPais(String codigoAlmacen, String codigoPais,  AppEcom appE, WebDriver driver) 
     throws Exception {
-        String tiendaActual = SecCabecera.getLitTienda(dFTest.driver);
+        String tiendaActual = SecCabecera.getLitTienda(driver);
         TiendaManto tiendaToGo = TiendaManto.getTienda(codigoAlmacen, codigoPais, appE);
-        if (!tiendaActual.contains(tiendaToGo.litPantManto))
-            selectTienda(codigoAlmacen, codigoPais, appE, dFTest);
+        if (!tiendaActual.contains(tiendaToGo.litPantManto)) {
+            selectTienda(codigoAlmacen, codigoPais, appE, driver);
+        }
     }
 }

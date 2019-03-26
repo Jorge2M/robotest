@@ -32,7 +32,6 @@ public class PageErrorBusqueda extends WebdrvWrapp {
      */
     public static boolean isCabeceraResBusqueda(WebDriver driver, String textoBuscado) {
         String xpathCabe = getXPath_cabeceraBusquedaProd(textoBuscado);
-        return (isElementPresent(driver, By.xpath(xpathCabe)));
+        return (isElementPresentUntil(driver, By.xpath(xpathCabe), 1));
     }
-    
 }
