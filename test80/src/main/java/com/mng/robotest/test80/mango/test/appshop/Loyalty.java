@@ -29,7 +29,6 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigatio
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Page1DktopCheckoutStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 
@@ -74,7 +73,7 @@ public class Loyalty extends GestorWebDriver {
     @Test (
         groups={"Loyalty", "Canal:desktop_App:shop"},
         description="Se realiza una compra mediante un usuario loyalty con 0 Likes")
-    public void LOY001_Compra_0LikesStored() throws Exception {
+    public void LOY001_Compra_LikesStored() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         
@@ -84,10 +83,8 @@ public class Loyalty extends GestorWebDriver {
         dCtxSh.userRegistered = true;
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, dFTest.driver);
         
-        //Validación header...
-        SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh, dFTest.driver);
-        secCabeceraStpV.checkIsVisibleLikesDesktop();
-
+        validationsLoyalty(dFTest.driver);
+        
         //Damos de alta 1 artículos en la bolsa
         DataBag dataBag = new DataBag(); 
         SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest.driver);
@@ -128,7 +125,7 @@ public class Loyalty extends GestorWebDriver {
     @Test (
         groups={"Loyalty", "Canal:desktop_App:shop"},
         description="Se accede a la Home Mango Likes You con un usuario Loyalty con 0 Likes")
-    public void LOY002_LikesHome_0LikesStored() throws Exception {
+    public void LOY002_LikesHome_LikesStored() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         
@@ -138,10 +135,7 @@ public class Loyalty extends GestorWebDriver {
         dCtxSh.userRegistered = true;
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, dFTest.driver);
         
-        //Validación header...
-        SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh, dFTest.driver);
-        secCabeceraStpV.checkIsVisibleLikesDesktop();
-        
+        validationsLoyalty(dFTest.driver);
         SecMenusUserStpV.clickMenuMiCuenta(dFTest.driver);
 
         //Validación sección de loyalty pagina principal
@@ -150,4 +144,12 @@ public class Loyalty extends GestorWebDriver {
         pageHomeLikesStpV.checkHomePurchaseWithDiscountPageOk();
     }
     
+    private void validationsLoyalty(WebDriver driver) throws Exception {
+	    SecMenusUserStpV.checkIsVisibleLinkMangoLikesYou(driver);
+	    if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
+	    	//Sólo podemos realizar esta validación en entornos de test porque en PRO el usuario no tiene Loyalty Points
+	    	SecMenusUserStpV.hoverLinkForShowMenu(driver);
+	    	SecMenusUserStpV.checkIsPresentLoyaltyPoints(2, driver);
+	    }
+    }
 }

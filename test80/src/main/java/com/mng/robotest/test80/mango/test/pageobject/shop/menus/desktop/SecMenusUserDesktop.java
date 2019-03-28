@@ -1,7 +1,9 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavoritos;
@@ -9,7 +11,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavorito
 
 public class SecMenusUserDesktop extends WebdrvWrapp {
 
-    static String XPathCapaMenus = "//div[@id='userMenuContainer' or @id[contains(.,'linksHeader')]]"; //Caso Shop y Outlet 
+    final static String idUserMenuLink = "userMenuTrigger";
+    final static String XPathCapaMenus = "//div[@id='userMenuContainer' or @id[contains(.,'linksHeader')]]"; //Caso Shop y Outlet 
     
     public enum MenuUserDesktop {
         ayuda (XPathCapaMenus + "//a[@href[contains(.,'/help/')]]"),    
@@ -119,5 +122,33 @@ public class SecMenusUserDesktop extends WebdrvWrapp {
     public static void clickMangoLikesYou(WebDriver driver) throws Exception {
     	String xpath = MenuUserDesktop.mangoLikesYou.getXPath();
         clickAndWaitLoad(driver, By.xpath(xpath));
+    }
+    
+    public static boolean isPresentMangoLikesYou(WebDriver driver) {
+    	String xpath = MenuUserDesktop.mangoLikesYou.getXPath();
+    	return (WebdrvWrapp.isElementPresent(driver, By.xpath(xpath)));
+    }
+    
+    public static boolean isPresentLoyaltyPointsUntil(int maxSecondsWait, WebDriver driver) throws Exception {
+    	//TODO Workarround for manage shadow-dom Elements. Remove when WebDriver would support shadow-dom
+    	WebElement shadowHost = driver.findElement(By.tagName("loyalty-user-menu"));
+    	if (shadowHost!=null) {
+    		for (int i=0; i<maxSecondsWait; i++) {
+		    	Object prueba = ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot", shadowHost);
+		    	WebElement objectWeb = (WebElement)prueba;
+		    	if (objectWeb.getAttribute("innerHTML").contains("likes-you-have")) {
+		    		return true;
+		    	}
+		    	
+		    	Thread.sleep(1000);
+    		}
+    	}
+    	
+    	return false;
+    }
+    
+    public static void hoverLinkForShowMenu(WebDriver driver) {
+    	By byElem = By.id(idUserMenuLink);
+    	WebdrvWrapp.moveToElement(byElem, driver);
     }
 }

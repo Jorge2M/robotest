@@ -123,4 +123,24 @@ public class SecMenusUserStpV {
     	PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(driver);
     	pageHomeLikesStpV.checkIsPageOk();
 	}
+    
+	@Validation (
+		description="Aparece el link de \"Mango Likes You\" en el menú de usuario",
+		level=State.Defect)
+	public static boolean checkIsVisibleLinkMangoLikesYou(WebDriver driver) {	
+	    return (SecMenusUserDesktop.isPresentMangoLikesYou(driver));
+	}
+
+	@Validation (
+		description="Aparecen Loyalty Points en el menú de usuario (lo esperamos hasta ${maxSecondsWait})",
+		level=State.Defect)
+	public static boolean checkIsPresentLoyaltyPoints(int maxSecondsWait, WebDriver driver) throws Exception {	
+	    return (SecMenusUserDesktop.isPresentLoyaltyPointsUntil(maxSecondsWait, driver));
+	}
+	
+	@Step (
+		description="Hover sobre el link <b>Iniciar Sesión</b> o <b>Mi cuenta</b> para mostrar el menú de usuario")
+	public static void hoverLinkForShowMenu(WebDriver driver) {
+		SecMenusUserDesktop.hoverLinkForShowMenu(driver);
+	}
 }

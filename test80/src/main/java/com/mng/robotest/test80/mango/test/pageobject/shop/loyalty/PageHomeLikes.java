@@ -8,7 +8,7 @@ public class PageHomeLikes extends WebdrvWrapp {
 
 	WebDriver driver;
 	
-	String idWrapperLoyalty = "mngLoyalty";
+	String idLoyaltySpace = "loyaltyLoyaltySpace";
 	String xpathBlockExchange = "//ul[@class='cards-list']/li";
 	String xpathButtonPurchaseWithDiscount = "//button[text()='Compra con descuento']";
 	
@@ -21,7 +21,7 @@ public class PageHomeLikes extends WebdrvWrapp {
 	}
 	
 	public boolean checkIsPage() {
-		return (WebdrvWrapp.isElementVisibleUntil(driver, By.id(idWrapperLoyalty), 1));
+		return (WebdrvWrapp.isElementVisibleUntil(driver, By.id(idLoyaltySpace), 2));
 	}
 	
 	public boolean areVisibleBlocksExchangeLikes() {

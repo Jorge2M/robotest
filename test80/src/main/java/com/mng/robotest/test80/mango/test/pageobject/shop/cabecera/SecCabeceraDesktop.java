@@ -25,8 +25,8 @@ public class SecCabeceraDesktop extends SecCabecera {
     private final static String XPathIconoMangoOutlet = XPathLinkLogoMango + "[@class[contains(.,'logo_outlet')]]";
     private final static String XPathDivNavTools = "//div[@id='navTools']";
     
-    //TODO solicitar id al maquetador de Loyalty
-    private final static String XPahtLikes = "//a[@id='userMenuTrigger']/span[text()[contains(.,'LIKES')]]";
+    //TODO cuando suba a PRO el tema de los Likes en el menú de usuario habrá que eliminar el XPathLikesCabecera
+    private final static String XPahtLikesCabecera = "//a[@id='userMenuTrigger']/span[text()[contains(.,'LIKES')]]";
     
     private SecCabeceraDesktop(AppEcom app, WebDriver driver) {
     	this.app = app;
@@ -116,7 +116,7 @@ public class SecCabeceraDesktop extends SecCabecera {
     }
     
     public boolean isVisibleLikes() {
-    	return (WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(XPahtLikes), 1));
+    	return (WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(XPahtLikesCabecera), 1));
     }
 
     public String getXPathIconoBolsa() {

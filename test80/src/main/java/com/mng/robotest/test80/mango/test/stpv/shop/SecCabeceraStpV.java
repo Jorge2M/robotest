@@ -54,11 +54,4 @@ public class SecCabeceraStpV {
 		}
 		return validations;
     }
-	
-	@Validation (
-		description="Es visible el bloque de Likes en la cabecera",
-		level=State.Defect)
-	public boolean checkIsVisibleLikesDesktop() {
-		return (((SecCabeceraDesktop)secCabecera).isVisibleLikes());
-	}
 }
