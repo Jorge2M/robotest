@@ -21,7 +21,7 @@ public class PageHomeLikes extends WebdrvWrapp {
 	}
 	
 	public boolean checkIsPage() {
-		return (WebdrvWrapp.isElementVisible(driver, By.id(idWrapperLoyalty)));
+		return (WebdrvWrapp.isElementVisibleUntil(driver, By.id(idWrapperLoyalty), 1));
 	}
 	
 	public boolean areVisibleBlocksExchangeLikes() {

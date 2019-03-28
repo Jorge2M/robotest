@@ -93,12 +93,12 @@ public class SecBolsaButtonAndLinksNewStpV {
 	        boolean isVisibleIcon = ModCompartirNew.isVisibleIcon(icon, driver);
 	        if (isPaisChina != icon.isSpecificChina()) {
 			 	validations.add(
-			 		"No es visible el icono de " + icon,
+			 		"No es visible el icono de " + icon + "<br>",
 			 		!isVisibleIcon, State.Warn);
 	        }
 	        else {
 			 	validations.add(
-			 		"Sí es visible el icono de " + icon,
+			 		"Sí es visible el icono de " + icon + "<br>",
 			 		isVisibleIcon, State.Warn);
 	        }
 	    }        

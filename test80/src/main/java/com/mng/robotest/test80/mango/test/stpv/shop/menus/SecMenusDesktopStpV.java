@@ -39,6 +39,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu2onLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop.Element;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop.GroupMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
@@ -369,7 +370,7 @@ public class SecMenusDesktopStpV {
     
     @Validation
     private static ChecksResult checkNumPestanyasYmenusEqualsInBothNodes(int numPestanyas, int numMenus, LineaType lineaType, SublineaNinosType sublineaType, 
-    																			 String inodo, String urlBase) {
+    																	 String inodo, String urlBase) {
     	ChecksResult validations = ChecksResult.getNew();
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
     	
@@ -487,13 +488,9 @@ public class SecMenusDesktopStpV {
     	checkResultDependingMenuGroup(menu, dCtxSh.appE, driver);
     	checkErrorPageWithoutException(driver);
     	GroupMenu groupMenu = menu.getGroup();
-    	if (groupMenu.containsArticles()) {
+    	if (groupMenu.canContainElement(Element.article)) {
             Menu1rstLevel menuPromocion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(menu.getLinea(), menu.getSublinea(), "promocion"));
             menuPromocion.setDataGaLabel("promocion");
-//    		if (!SecBloquesMenuDesktop.isPresentMenuFirstLevel(menuPromocion, app, driver)) {
-//    			//Validación específica fin de rebajas para países sin el menú "Promoción"
-//    			validationsSpecificEndRebajas(channel, app, driver);
-//    		}
             if (dCtxSh.pais.getCodigo_pais().compareTo("720")==0) {
             	validationsSpecificEndRebajasChina(dCtxSh, driver);
             }
@@ -512,13 +509,14 @@ public class SecMenusDesktopStpV {
     throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
     	GroupMenu groupMenu = menu.getGroup();
-    	if (groupMenu.containsArticles()) {
+    	List<Element> elemsCanBeContained = groupMenu.getElementsCanBeContained();
+    	boolean contentPageOk = PageLanding.isSomeElementVisibleInPage(elemsCanBeContained, app, driver);
+	 	validations.add(
+			"Aparecen alguno de los siguientes elementos: <b>" + elemsCanBeContained + "</b> (es un menú perteneciente al grupo <b>" + groupMenu + ")</b><br>",
+			contentPageOk, State.Warn);
+    	
+    	if (groupMenu.canContainElement(Element.article)) {
     		PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
-    		int maxSecondsWait = 3;
-    	 	validations.add(
-    			"Aparecen artículos (es un menú perteneciente al grupo <b>" + groupMenu + ")</b><br>",
-    			pageGaleria.isVisibleArticleUntil(1, maxSecondsWait), State.Warn);
-            
     	 	String guiones = "--";
     	 	validations.add(
     			"No hay artículos con \"" + guiones + "\"<br>",
@@ -536,27 +534,9 @@ public class SecMenusDesktopStpV {
     			AllPages.isTitleAssociatedToMenu(menu.getNombre(), driver), stateVal);
     	}
     	
-    	if (groupMenu.containsOnlyCampaigns()) {
-    	 	validations.add(
-    			"Aparecen campañas (es un menú perteneciente al grupo " + groupMenu + ")<br>",
-    			ManagerBannersScreen.existBanners(driver), State.Warn);
-    	}
-    	
-    	if (groupMenu==GroupMenu.Desconocido) {
-    		int maxSecondsWait = 3;
-    		PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
-    	 	validations.add(
-    			"Aparecen artículos, campañas, sliders, maps, iframes (es un menú perteneciente al grupo " + groupMenu + ")<br>",
-    		pageGaleria.isVisibleArticleUntil(1, maxSecondsWait) ||
-            PageLanding.hayIframes(driver) ||
-            PageLanding.hayMaps(driver) ||
-            PageLanding.haySliders(driver) ||
-            ManagerBannersScreen.existBanners(driver), State.Warn);
-    	}
-    	
 	 	return validations;
     }    
-    
+
     public static ChecksResult checkErrorPageWithoutException(WebDriver driver) throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
 		ITestContext ctx = TestCaseData.getdFTest().ctx;

@@ -1,5 +1,8 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.menus;
 
+import java.util.List;
+import java.util.Arrays;
+
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
@@ -15,36 +18,38 @@ public interface MenuLateralDesktop {
     abstract public boolean isDataForValidateArticleNames();
     abstract public String[] getTextsArticlesGalery();
     
+    public enum Element {
+    	article, campaign, slider, map, iframe
+    }
+    
     public enum GroupMenu {
-    	Nuevo(true, false, false), 
-    	Prendas(true, true, false),
-    	Accesorios(true, true, false),
-    	RecienNacido(true, true, false),
-    	BebeNina(true, true, false),
-    	BebeNino(true, true, false),
-    	Colecciones(true, true, false),
-    	Extras(false, false, true),
-    	Desconocido(false, false, false);
+    	Nuevo(Arrays.asList(Element.article), false), 
+    	Prendas(Arrays.asList(Element.article), true),
+    	Accesorios(Arrays.asList(Element.article), true),
+    	RecienNacido(Arrays.asList(Element.article), true),
+    	BebeNina(Arrays.asList(Element.article), true),
+    	BebeNino(Arrays.asList(Element.article), true),
+    	Colecciones(Arrays.asList(Element.article, Element.campaign), true),
+    	Extras(Arrays.asList(Element.campaign), false),
+    	Desconocido(Arrays.asList(Element.article, Element.campaign, Element.slider, Element.map, Element.iframe), false);
     	
-    	private boolean containsArticles;
+    	private List<Element> elementsCanBeContained;
     	private boolean isTitleEquivalentToMenuName;
-    	private boolean containsOnlyCampaigns;
-    	private GroupMenu(boolean containsArticles, boolean isTitleEquivalentToMenuName, boolean containsOnlyCampaigns) {
-    		this.containsArticles = containsArticles;
+    	private GroupMenu(List<Element> elementsCanBeContained, boolean isTitleEquivalentToMenuName) {
+    		this.elementsCanBeContained = elementsCanBeContained;
     		this.isTitleEquivalentToMenuName = isTitleEquivalentToMenuName;
-    		this.containsOnlyCampaigns = containsOnlyCampaigns;
     	}
     	
-    	public boolean containsArticles() {
-    		return this.containsArticles;
+    	public List<Element> getElementsCanBeContained() {
+    		return this.elementsCanBeContained;
     	}
     	
     	public boolean isTitleEquivalentToMenuName() {
     		return this.isTitleEquivalentToMenuName;
     	}
     	
-    	public boolean containsOnlyCampaigns() {
-    		return this.containsOnlyCampaigns;
+    	public boolean canContainElement(Element element) {
+    		return (getElementsCanBeContained().contains(element));
     	}
     }
     

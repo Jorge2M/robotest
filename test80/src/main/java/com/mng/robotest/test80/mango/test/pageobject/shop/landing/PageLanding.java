@@ -12,8 +12,10 @@ import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBannersScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop.Element;
 
 
 /**
@@ -145,5 +147,36 @@ public class PageLanding extends WebdrvWrapp {
         		isElementPresent(driver, By.xpath("(//section[@id='section1'] | " + 
                                                               "//div[@class[contains(.,'datos_ficha_producto')]] | " +
                                                               "//*[@class='celda'])")));
+    }
+    
+    public static boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, AppEcom app, WebDriver driver) 
+    throws Exception {
+    	for (Element element : elementsCanBeContained) {
+    		boolean elementContained = false;
+    		switch (element) {
+    		case article:
+    			PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
+    			elementContained = pageGaleria.isVisibleArticleUntil(1, 3);
+    			break;
+    		case campaign:
+    			elementContained = ManagerBannersScreen.existBanners(driver);
+    			break;
+    		case slider:
+    			elementContained = PageLanding.haySliders(driver);
+    			break;
+    		case map:
+    			elementContained = PageLanding.hayMaps(driver);
+    			break;
+    		case iframe:
+    			elementContained = PageLanding.hayIframes(driver);
+    			break;
+    		}
+    			
+    		if (elementContained) {
+    			return true;
+    		}
+    	}
+    	
+    	return false;
     }
 }

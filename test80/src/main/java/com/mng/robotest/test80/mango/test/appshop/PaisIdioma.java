@@ -155,7 +155,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
             
         //Validamos si hemos de ejecutar los pasos correspondientes al recorrido de los menús
         if (testMenus(linea, sublinea)) {
-            //SecMenusWrapperStpV.stepsMenusLinea(lineaType, sublineaType, dCtxShI, dFTest);
+            SecMenusWrapperStpV.stepsMenusLinea(lineaType, sublineaType, dCtxShI, dFTest);
         	if (existsRightBannerMenu(linea, sublinea, dCtxShI.channel)) {
                 SecMenusDesktopStpV.clickRightBanner(lineaType, sublineaType, dCtxShI.appE, dFTest.driver);
         	}
