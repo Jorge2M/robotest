@@ -28,7 +28,7 @@ public class CorreoReport {
      * @param args[0] - del tipo http://robottest.mangodev.net (+:port si fuera preciso)
      * 
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception { 
         String serverDNS = args[0];
         
         //Construimos el HTML con la lista de tests ejecutados
