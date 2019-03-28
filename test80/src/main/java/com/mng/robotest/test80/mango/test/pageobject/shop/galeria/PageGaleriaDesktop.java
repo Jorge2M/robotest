@@ -86,6 +86,7 @@ public class PageGaleriaDesktop extends PageGaleria {
     private final static String XPathImgCodColorWithTagColor = "//img[@class[contains(.,'other-color')] and @data-id='" + TagIdColor + "']";
     private final static String XPathImgColorRelativeArticleWithTagSelected = "//div[@class[contains(.,'color" + TagFlagSelected + "')]]//img";
     private final static String XPpathIconoUpGalery = "//div[@id='scroll-top-step']";
+    private final static String XpathTallaNoDisponibleArticulo = "//span[@data-id and (@class[contains(.,'no-stock')])]";
     
     @Override
     public String getXPathLinkRelativeToArticle() {
@@ -208,12 +209,16 @@ public class PageGaleriaDesktop extends PageGaleria {
             
         return (xpathCapaAdd + "//div[@class[contains(.,'add-cart-sizes-container')] and " + classSegunVisible + "]");
     }
-    
+
     private static String getXPathArticleTallaAvailableDesktop(int posArticulo, int posTalla) {
         String xpathCapaTallas = getXPathArticleCapaTallasDesktop(posArticulo, true/*capaVisible*/);
         return "(" + xpathCapaTallas + "//span[@data-id and not(@class[contains(.,'no-stock')])]" + ")[" + posTalla + "]";
     }
-    
+
+    private static String getXPathArticleTallaNotAvailableDesktop() {
+        return  XpathTallaNoDisponibleArticulo;
+    }
+
     private static String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
     	return ("//span[@class='swiper-button-" + typeSlider + "']");
     }
@@ -554,6 +559,13 @@ public class PageGaleriaDesktop extends PageGaleria {
         articulo.setTallaNum(tallaToSelect.getAttribute("data-id"));
         tallaToSelect.click();
         return articulo;
+    }
+
+    public void selectTallaArticleNotAvalaible() throws Exception {
+
+        String xpathTallaNoDipo = getXPathArticleTallaNotAvailableDesktop();
+        By byTallaToSelect = By.xpath(xpathTallaNoDipo);
+        clickAndWaitLoad(driver, byTallaToSelect);
     }
     
     public boolean isVisibleAnyArticle() {

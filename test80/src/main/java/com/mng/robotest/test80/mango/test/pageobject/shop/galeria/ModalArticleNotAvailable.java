@@ -11,6 +11,7 @@ public class ModalArticleNotAvailable extends WebdrvWrapp {
     public enum StateModal {visible, notvisible}    
     static String XPathModal = "//div[@id='bocataAvisame']";
     static String XPathAspaForClose = XPathModal + "//div[@class[contains(.,'botonCerrarAvisame')]]";
+    static String XPathRPGDText = XPathModal + "//p[@class='gdpr-text gdpr-data-protection']";
     
     public static boolean inStateUntil(StateModal stateModal, int maxSecondsToWait, WebDriver driver) {
         switch (stateModal) {
@@ -28,6 +29,10 @@ public class ModalArticleNotAvailable extends WebdrvWrapp {
     
     public static boolean isNotVisibleUntil(int maxSecondsToWait, WebDriver driver) {
         return (isElementInvisibleUntil(driver, By.xpath(XPathModal), maxSecondsToWait));
+    }
+
+    public static boolean isVisibleRPGD(int maxSecondsToWait, WebDriver driver) {
+        return (isElementVisibleUntil(driver, By.xpath(XPathModal), maxSecondsToWait));
     }
     
     public static void clickAspaForClose(WebDriver driver) {

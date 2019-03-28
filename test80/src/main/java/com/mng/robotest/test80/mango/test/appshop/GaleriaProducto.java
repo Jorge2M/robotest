@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
+import com.mng.robotest.test80.mango.test.stpv.shop.galeria.ModalArticleNotAvailableStpV;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
@@ -259,5 +260,29 @@ public class GaleriaProducto extends GestorWebDriver {
         typeSliderList.add(TypeSlider.prev);
         typeSliderList.add(TypeSlider.prev);
         pageGaleriaStpV.clicksSliderArticuloConColores(numArtConColores, typeSliderList, srcImgAfterClickColor);
+    }
+    @Test (
+            groups={"GaleriaProducto", "Canal:desktop_App:shop"}, alwaysRun=true,
+            description="[Usuario registrado] Acceder a galería camisas. Forzar caso avisame en listado")
+    public void GPO007_Galeria_Camisas() throws Exception {
+        DataFmwkTest dFTest = TestCaseData.getdFTest();
+        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
+        dCtxSh.userConnected = userShop.user;
+        dCtxSh.passwordUser = userShop.password;
+        dCtxSh.userRegistered = true;
+        String tipoPrendasGaleria = "camisa";
+
+        // Abrir listado de mujer camisas
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
+        Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
+        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest.driver);
+
+        // Abrir avisame desde el listado buscando primera talla sin stock y comprobar que se abierto y que contiene texto RGPD
+        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        pageGaleriaStpV.selectTallaNoDisponibleArticuloDesktop();
+        ModalArticleNotAvailableStpV modalArticleNotAvailableStpV = ModalArticleNotAvailableStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        modalArticleNotAvailableStpV.checkVisibleAvisame();
+
     }
 }
