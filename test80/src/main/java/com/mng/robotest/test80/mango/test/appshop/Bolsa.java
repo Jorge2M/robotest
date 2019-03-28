@@ -96,7 +96,8 @@ public class Bolsa extends GestorWebDriver {
         	pageGaleriaStpV.selectLinkAddArticuloToBagDesktop(posArticulo);
             articleAvailable = pageGaleriaStpV.selectTallaArticuloDesktop(posArticulo, 1/*posTalla*/, dataBag, dCtxSh);
             if (!articleAvailable) {
-                ModalArticleNotAvailableStpV.clickAspaForClose(dFTest.driver);
+                ModalArticleNotAvailableStpV modalArticleNotAvailableStpV = ModalArticleNotAvailableStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+                modalArticleNotAvailableStpV.clickAspaForClose(dFTest.driver);
                 posArticulo+=1;
             }
         }

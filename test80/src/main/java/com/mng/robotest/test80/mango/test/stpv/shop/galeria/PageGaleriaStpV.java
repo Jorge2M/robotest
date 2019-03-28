@@ -160,13 +160,24 @@ public class PageGaleriaStpV {
     throws Exception {
     	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
         ArticuloScreen articulo = pageGaleriaDesktop.selectTallaArticle(posArticulo, posTalla);
-        boolean notVisibleAvisame = ModalArticleNotAvailableStpV.validateState(1, StateModal.notvisible, driver);
+        ModalArticleNotAvailableStpV modalArticleNotAvailableStpV = ModalArticleNotAvailableStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+        boolean notVisibleAvisame = modalArticleNotAvailableStpV.validateState(1, StateModal.notvisible, driver);
         if (notVisibleAvisame) {
             dataBag.addArticulo(articulo);
             SecBolsaStpV.validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, driver);
         }
         
         return notVisibleAvisame;
+    }
+
+    @Step (
+            description="Seleccionamos la primera talla no disponible del listado",
+            expected="Se abre el modal de avimase de la prenda",
+            saveHtmlPage=SaveWhen.Always)
+    public void selectTallaNoDisponibleArticuloDesktop()
+            throws Exception {
+        PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
+        pageGaleriaDesktop.selectTallaArticleNotAvalaible();
     }
     
     /**
