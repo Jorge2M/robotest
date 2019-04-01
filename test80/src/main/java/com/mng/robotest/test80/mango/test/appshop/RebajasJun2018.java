@@ -160,7 +160,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
 	            menuNuevaTemp.setDataGaLabel(dataGaMenuNuevaTemporada);
 	
 	            SecMenusDesktopStpV.stepEntradaMenuDesktop(menuNuevaTemp, "", dCtxSh, dFTest.driver);
-	            pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Defect);
+	            pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Defect, false);
 	            //PageGaleriaStpV.validaArticlesOfTemporadas(tempArticlesNextSeason, validaNotNewArticles, datosStep, dFTest);
             
 
@@ -177,7 +177,6 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
                 Menu1rstLevel menuPromocion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "promocion"));
                 menuPromocion.setDataGaLabel("promocion");
             	SecMenusDesktopStpV.isPresentMenuSuperior(menuPromocion, dCtxSh.appE, dFTest.driver);
-            	
             	SecMenusDesktopStpV.isNotPresentMenuSuperior(menuRebajas, dCtxSh.appE, dFTest.driver);
             }
         }

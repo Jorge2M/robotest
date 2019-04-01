@@ -132,7 +132,7 @@ public class SecMenusUserStpV {
 	}
 
 	@Validation (
-		description="Aparecen Loyalty Points en el menú de usuario (lo esperamos hasta ${maxSecondsWait})",
+		description="Aparecen Loyalty Points en el menú de usuario (lo esperamos hasta #{maxSecondsWait})",
 		level=State.Defect)
 	public static boolean checkIsPresentLoyaltyPoints(int maxSecondsWait, WebDriver driver) throws Exception {	
 	    return (SecMenusUserDesktop.isPresentLoyaltyPointsUntil(maxSecondsWait, driver));

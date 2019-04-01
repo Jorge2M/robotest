@@ -393,7 +393,8 @@ public class PageFichaArtStpV {
     
     @Validation (
     	description="Es visible el slider de artículos de tipo <b>#{typeSlider}</b>",
-    	level=State.Info_NoHardcopy)
+    	level=State.Info,
+    	avoidEvidences=true)
     public boolean checkSliderVisible(Slider typeSlider) {
     	return (pageFicha.isVisibleSlider(typeSlider));
     }

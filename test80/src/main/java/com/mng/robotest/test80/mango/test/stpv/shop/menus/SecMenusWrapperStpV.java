@@ -151,7 +151,8 @@ public class SecMenusWrapperStpV {
     
     @Validation (
     	description="Como mínimo se obtiene 1 artículo (lo esperamos un máximo de #{maxSecondsWait} segundos)",
-    	level=State.Warn_NoHardcopy)
+    	level=State.Warn,
+    	avoidEvidences=true)
     private static boolean checkIsVisibleAarticle(DataCtxShop dCtxSh, int maxSecondsWait, WebDriver driver) throws Exception {
         PageGaleria pageGaleria = PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
         return (pageGaleria.isVisibleArticuloUntil(1, maxSecondsWait));
@@ -280,12 +281,12 @@ public class SecMenusWrapperStpV {
 	        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, driver);
 	        if (typeMenu == FilterCollection.sale) {
 	            pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles());
-	            pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.norebajado, State.Warn);
+	            pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.norebajado, State.Warn, false);
 	        }
 	        
 	        if (typeMenu == FilterCollection.nextSeason) {
-	        	pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Info_NoHardcopy);
-	        	pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles(), State.Info_NoHardcopy);
+	        	pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Info, true);
+	        	pageGaleriaStpV.validaArticlesOfTemporadas(typeMenu.getListTempArticles(), State.Info, true);
 	        }
         }
     }    

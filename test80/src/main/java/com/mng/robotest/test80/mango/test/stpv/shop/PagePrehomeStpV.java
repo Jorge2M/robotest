@@ -26,8 +26,6 @@ public class PagePrehomeStpV {
     throws Exception {
         PagePrehome.goToPagePrehome(urlAcceso, driver);
         PagePrehome.selecionPais(dCtxSh, driver);
-        
-        //Validaciones
         checkPaisSelected(dCtxSh, driver);
     }
 	
@@ -37,19 +35,19 @@ public class PagePrehomeStpV {
 	    if (dCtxSh.channel==Channel.desktop) {
 	    	validations.add(
 				"Queda seleccionado el país con código " + dCtxSh.pais.getCodigo_pais() + " (" + dCtxSh.pais.getNombre_pais() + ")<br>",
-				PagePrehome.isPaisSelectedDesktop(driver, dCtxSh.pais.getNombre_pais()), State.Warn_NoHardcopy);
+				PagePrehome.isPaisSelectedDesktop(driver, dCtxSh.pais.getNombre_pais()), State.Warn, true);
 	    }
 	    
 	    boolean isPaisWithMarcaCompra = PagePrehome.isPaisSelectedWithMarcaCompra(driver);
 	    if (dCtxSh.pais.isVentaOnline()) {
 	    	validations.add(
 				"El país <b>Sí</b> tiene la marca de venta online\"",
-				isPaisWithMarcaCompra, State.Warn_NoHardcopy);
+				isPaisWithMarcaCompra, State.Warn, true);
 	    }
 	    else {
 	    	validations.add(
 				"El país <b>No</b> tiene la marca de venta online\"",
-				!isPaisWithMarcaCompra, State.Warn_NoHardcopy);	    	
+				!isPaisWithMarcaCompra, State.Warn, true);	    	
 	    }
 	    return validations;
 	}

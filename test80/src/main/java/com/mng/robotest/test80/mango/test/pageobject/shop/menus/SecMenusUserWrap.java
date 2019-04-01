@@ -23,7 +23,7 @@ public class SecMenusUserWrap {
 		switch (channel) {
 		case desktop:
 			SecMenusUserDesktop.clickFavoritosAndWait(driver);
-		break;
+			break;
 		case movil_web:
 			SecMenusUserMobil.clickFavoritosAndWait(appE, driver);
 		}

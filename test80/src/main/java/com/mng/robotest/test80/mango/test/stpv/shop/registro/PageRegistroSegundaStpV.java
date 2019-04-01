@@ -61,12 +61,12 @@ public class PageRegistroSegundaStpV {
     		PageRegistroSegunda.isPageUntil(driver, maxSecondsWait), State.Warn);
     	validations.add(
     		"Se pueden seleccionar las colecciones " + lineasComaSeparated + "<br>",
-    		PageRegistroSegunda.isPresentInputForLineas(driver, lineasComaSeparated), State.Info_NoHardcopy);
+    		PageRegistroSegunda.isPresentInputForLineas(driver, lineasComaSeparated), State.Info, true);
     	
         int numColecciones = PageRegistroSegunda.getNumColecciones(driver);
     	validations.add(
     		"Aparece un número de colecciones coincidente con el número de líneas (" + numLineas + ")",
-    		numColecciones==numLineas, State.Info_NoHardcopy);
+    		numColecciones==numLineas, State.Info, true);
     	
     	return validations;
     }

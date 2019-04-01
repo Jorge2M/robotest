@@ -130,7 +130,7 @@ public class SecMenusUserDesktop extends WebdrvWrapp {
     }
     
     public static boolean isPresentLoyaltyPointsUntil(int maxSecondsWait, WebDriver driver) throws Exception {
-    	//TODO Workarround for manage shadow-dom Elements. Remove when WebDriver would support shadow-dom
+    	//TODO Workarround for manage shadow-dom Elements. Remove when WebDriver supports shadow-dom
     	WebElement shadowHost = driver.findElement(By.tagName("loyalty-user-menu"));
     	if (shadowHost!=null) {
     		for (int i=0; i<maxSecondsWait; i++) {

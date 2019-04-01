@@ -148,8 +148,9 @@ public class SecMenuLateralMobilStpV {
     throws Exception {
         Linea linea = pais.getShoponline().getLinea(lineaType);
         TypeContentMobil typeContent = linea.getContentMobilType();
-        if (sublineaType!=null)
+        if (sublineaType!=null) {
             typeContent = linea.getSublineaNinos(sublineaType).getContentMobilType();
+        }
         
         switch (typeContent) {
         case bloquesnuevo:

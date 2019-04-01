@@ -147,7 +147,8 @@ public class PageRegistroIniStpV {
 		description=
         "<b style=\"color:blue\">Rebajas</b></br>" +
         "1) El mensaje de NewsLetter no aparece o si aparece no contiene el símbolo de porcentaje",
-        level=State.Info_NoHardcopy)
+        level=State.Info,
+        avoidEvidences=true)
     public static boolean validaRebajasJun2018(IdiomaPais idioma, DataFmwkTest dFTest) {
         String percentageSymbol = UtilsTestMango.getPercentageSymbol(idioma);
 		return (!PageRegistroIni.newsLetterTitleContains(percentageSymbol, dFTest.driver));       

@@ -26,8 +26,8 @@ public class AllPagesStpV {
     public static void validacionesEstandar(StdValidationFlags flagsVal, WebDriver driver) 
     throws Exception {
     	ITestContext ctx = TestCaseData.getdFTest().ctx;
-    	flagsVal.stateValidaSEO = State.Info_NoHardcopy;
-    	flagsVal.stateValidaJS = State.Info_NoHardcopy;
+    	flagsVal.stateValidaSEO = State.Info;
+    	flagsVal.stateValidaJS = State.Info;
     	flagsVal.stateValidaImgBroken = State.Warn;
         validacionesEstandar(flagsVal, driver, ctx);
     }
@@ -44,7 +44,7 @@ public class AllPagesStpV {
     		}
 			validations.add(
 				descripValidac,
-				resValidac.isOK(), flagsVal.stateValidaSEO);
+				resValidac.isOK(), flagsVal.stateValidaSEO, true);
     	}
     	
     	if (flagsVal.validaJS) {
@@ -62,7 +62,7 @@ public class AllPagesStpV {
                 //Sólo mostraremos warning en caso que alguno no se haya mostrado ya un máximo de veces durante el test
     			validations.add(
 					descripValidac,
-					resultadoOK || (resultadoLogs.getResultado()==ResultadoErrores.Resultado.MAX_ERRORES), flagsVal.stateValidaJS);
+					resultadoOK || (resultadoLogs.getResultado()==ResultadoErrores.Resultado.MAX_ERRORES), flagsVal.stateValidaJS, true);
         	}
     	}
     	

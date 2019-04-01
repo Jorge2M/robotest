@@ -123,12 +123,14 @@ public class PageMisComprasStpV {
     public static ChecksResult validateIsCompraOnlineVisible(String codPedido, boolean isChequeRegalo, WebDriver driver) {
         ChecksResult validations = ChecksResult.getNew();
         State stateVal = State.Warn;
+        boolean avoidEvidences = false;
         if (isChequeRegalo) {
-            stateVal = State.Info_NoHardcopy;
+            stateVal = State.Info;
+            avoidEvidences = true;
         }
         validations.add(
         	"Es visible la compra " + TypeCompra.Online + " asociada al pedido <b>" + codPedido + "</b>",
-        	PageMisCompras.isVisibleCompraOnline(codPedido, driver), stateVal);
+        	PageMisCompras.isVisibleCompraOnline(codPedido, driver), stateVal, avoidEvidences);
         return validations;
     }
     

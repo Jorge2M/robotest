@@ -31,7 +31,7 @@ public class Page1DktopCheckoutStpV {
         boolean isPageInitCheckout = Page1DktopCheckout.isPageUntil(maxSecondsWait, driver);
 	 	validations.add(
 			"Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSecondsWait + " segundos)<br>",
-			isPageInitCheckout, State.Warn_NoHardcopy);
+			isPageInitCheckout, State.Warn, true);
 	 	if (!isPageInitCheckout) {
 		 	validations.add(
 				"Si no ha aparecido la esperamos " + (maxSecondsWait * 2) + " segundos más<br>",

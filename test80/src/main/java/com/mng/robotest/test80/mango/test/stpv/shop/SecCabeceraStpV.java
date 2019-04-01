@@ -6,9 +6,7 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraDesktop;
 
 public class SecCabeceraStpV {
 
@@ -23,13 +21,6 @@ public class SecCabeceraStpV {
 	public static SecCabeceraStpV getNew(DataCtxShop dCtxSh, WebDriver driver) {
 		return (new SecCabeceraStpV(dCtxSh, driver));
 	}
-	
-	@Validation (
-		description="Aparece el logo/link correcto correspondiente al canal, país, línea (esperamos hasta #{maxSecondsWait} segundos)",
-		level=State.Warn)
-    public boolean validaLogoDesktop(int maxSecondsWait, LineaType lineaType) {
-		return (((SecCabeceraDesktop)secCabecera).isPresentLogoCorrectUntil(dCtxSh.pais, lineaType, maxSecondsWait));
-    }
     
 	@Step (
 		description="Seleccionar el logo de Mango", 

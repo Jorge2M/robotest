@@ -13,4 +13,5 @@ import com.mng.robotest.test80.arq.utils.State;
 public @interface Validation {
 	String description() default "";
 	State level() default State.Warn;
+	boolean avoidEvidences() default false;
 }

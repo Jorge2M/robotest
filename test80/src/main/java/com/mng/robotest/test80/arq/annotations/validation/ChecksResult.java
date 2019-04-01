@@ -12,7 +12,8 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 public class ChecksResult {
 	private final List<ResultValidation> listResultValidations;
 	private State stateValidation = State.Nok;
-    private final DatosStep datosStep; //TODO Creo que se puede llegar eliminar
+	private boolean avoidEvidences;
+	private final DatosStep datosStep; //TODO Creo que se puede llegar eliminar
     private String descripcionValidations;
 	
     public ChecksResult() {
@@ -39,6 +40,7 @@ public class ChecksResult {
 		listValidations.add(resultValidation);
 		return listValidations;
 	}
+
 	
 	public int size() {
 		return listResultValidations.size();
@@ -52,13 +54,25 @@ public class ChecksResult {
 		return this.datosStep;
 	}
 	
+    public boolean isAvoidEvidences() {
+		return avoidEvidences;
+	}
+    
+	public void setAvoidEvidences(boolean avoidEvidences) {
+		this.avoidEvidences = avoidEvidences;
+	}
+	
 	public void add(ResultValidation resultValidation) {
 		listResultValidations.add(resultValidation);
 	}
 	
 	public void add(String description, boolean overcomed, State levelResult) {
+		add(description, overcomed, levelResult, false);
+	}
+	
+	public void add(String description, boolean overcomed, State levelResult, boolean avoidEvidences) {
 		int id = listResultValidations.size() + 1;
-		ResultValidation resultValidation = ResultValidation.of(id, id + ") " + description, overcomed, levelResult);
+		ResultValidation resultValidation = ResultValidation.of(id, id + ") " + description, overcomed, levelResult, avoidEvidences);
 		add(resultValidation);
 	}
 	
@@ -81,12 +95,10 @@ public class ChecksResult {
     public State calculateStateValidation() {
     	State stateToReturn;
     	if (isStepFinishedWithException()) {
-    		stateToReturn = State.Nok;
-    	}
-    	else {
-	    	stateToReturn = State.Ok;
+    		return State.Nok;
     	}
     	
+    	stateToReturn = State.Ok;
     	for (ResultValidation resultValidation : listResultValidations) {
     		if (!resultValidation.isOvercomed()) {
     			State criticityValidation = resultValidation.getLevelResult();
@@ -99,6 +111,18 @@ public class ChecksResult {
     	return stateToReturn;
     }
     
+    public boolean calculateAvoidEvidences() {
+    	for (ResultValidation resultValidation : listResultValidations) {
+    		if (!resultValidation.isOvercomed() &&
+    			resultValidation.getLevelResult()!=State.Ok &&
+    			!resultValidation.isAvoidEvidences()) {
+    			return false;
+    		}
+    	}
+    	
+    	return true;
+    }
+    
     private void checkValidations() {
     	checkAndSetStateValidation();
     	setDatosStepAfterCheckValidation();
@@ -107,6 +131,7 @@ public class ChecksResult {
     private void checkAndSetStateValidation() {
     	stateValidation = calculateStateValidation();
     	descripcionValidations=calculateDescriptionValidation();
+    	avoidEvidences=calculateAvoidEvidences();
     }
     
     private String calculateDescriptionValidation() {
@@ -120,6 +145,7 @@ public class ChecksResult {
     
     private void setDatosStepAfterCheckValidation() {
     	datosStep.setResultLastValidation(stateValidation);
+    	datosStep.setAvoidEvidences(avoidEvidences);
     	if (stateValidation.isMoreCriticThan(datosStep.getResultSteps()) || !datosStep.isStateUpdated()) {
     		datosStep.setResultSteps(stateValidation);
     	}

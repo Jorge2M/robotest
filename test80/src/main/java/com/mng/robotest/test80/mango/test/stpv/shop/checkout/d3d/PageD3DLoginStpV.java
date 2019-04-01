@@ -11,7 +11,8 @@ public class PageD3DLoginStpV {
     
 	@Validation (
 		description="Aparece la página de identificación D3D (la esperamos hasta #{maxSecondsWait} segundos)<br>",
-		level=State.Info_NoHardcopy)
+		level=State.Info,
+		avoidEvidences=true)
     public static boolean validateIsD3D(int maxSecondsWait, WebDriver driver) {
 		return (PageD3DLogin.isPageUntil(maxSecondsWait, driver));
     }

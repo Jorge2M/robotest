@@ -19,12 +19,14 @@ public class PageDotpay1rstStpV {
     		PageDotpay1rst.isPresentEntradaPago(nombrePago, channel, driver), State.Warn);
       	
       	State stateVal = State.Warn;
+      	boolean avoidEvidences = false;
         if (channel==Channel.movil_web) {
-        	stateVal = State.Info_NoHardcopy;
+        	stateVal = State.Info;
+        	avoidEvidences = true;
         }
       	validations.add(
     		"Aparece el importe de la compra: " + importeTotal + "<br>",
-    		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal);
+    		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal, avoidEvidences);
       	validations.add(
     		"Aparece la cabecera indicando la 'etapa' del pago<br>",
     		PageDotpay1rst.isPresentCabeceraStep(nombrePago, channel, driver), State.Warn);

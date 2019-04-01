@@ -96,19 +96,19 @@ public class fmwkTest {
     //TODO refactor
     @SuppressWarnings({ "unchecked"})
     public static void grabStepValidation(DatosStep datosStep, String descripValidac, DataFmwkTest dFTest) {
-        boolean avoidEvidences = false;
-        switch (datosStep.getResultSteps()) {
-        case Warn_NoHardcopy:
-            datosStep.setResultSteps(State.Warn);
-            avoidEvidences = true;
-            break;
-        case Info_NoHardcopy:
-            datosStep.setResultSteps(State.Info);
-            avoidEvidences = true;
-            break;
-        default:
-            avoidEvidences = false;
-        }
+//        boolean avoidEvidences = false;
+//        switch (datosStep.getResultSteps()) {
+//        case Warn_NoHardcopy:
+//            datosStep.setResultSteps(State.Warn);
+//            avoidEvidences = true;
+//            break;
+//        case Info_NoHardcopy:
+//            datosStep.setResultSteps(State.Info);
+//            avoidEvidences = true;
+//            break;
+//        default:
+//            avoidEvidences = false;
+//        }
         if ("ROBOTEST2".equals(System.getProperty("ROBOTEST2"))) {
             Map<DatosStep, List<String>> stepMap = (Map<DatosStep, List<String>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_STEP_VALIDATIONS");
@@ -132,7 +132,7 @@ public class fmwkTest {
                 stepMapStatus.get(datosStep).add(datosStep.getResultSteps());
             }
             System.out.println("ROBOTEST2: LAZY REPORT VALIDATION REDIRECT");
-            if (!avoidEvidences) {
+            if (!datosStep.isAvoidEvidences()) {
                 boolean browserGUI = true;
                 int grabImg = 0;
                 if (dFTest.ctx.getAttribute("grabImg") != null) {
@@ -194,7 +194,7 @@ public class fmwkTest {
         }
         sendSkipTestExceptionIfSuiteStopping(dFTest.ctx);
         ValidationsDAO.insertValidationInStep(descripValidac, datosStep, dFTest.meth, dFTest.ctx);
-        if (!avoidEvidences) {
+        if (!datosStep.isAvoidEvidences()) {
             storeFileEvidencesIfNeeded(datosStep, TypeStore.validation, dFTest);
         }
     }
@@ -216,13 +216,16 @@ public class fmwkTest {
         	createPathForEvidencesStore(nameMethodWithFactory, dFTest.ctx);
         	storeNetTrafficIfNeeded(datosStep, dFTest.ctx);
         }
+        
     	boolean browserGUI = true;
         Object browserGUIObj = dFTest.ctx.getAttribute("browserGUI");
         if (browserGUIObj!=null) {
             browserGUI = ((Boolean)browserGUIObj).booleanValue();
         }
-        storeHardcopyIfNeeded(browserGUI, datosStep, dFTest);
-        storeErrorPageIfNeeded(browserGUI, datosStep, dFTest);
+        boolean storeEvidences = (!datosStep.isAvoidEvidences() && browserGUI);
+        		
+        storeHardcopyIfNeeded(storeEvidences, datosStep, dFTest);
+        storeErrorPageIfNeeded(storeEvidences, datosStep, dFTest);
         storeHTMLIfNeeded(datosStep, dFTest);
     }
     
@@ -232,9 +235,9 @@ public class fmwkTest {
         directorio.mkdirs();
     }
     
-    private static void storeHardcopyIfNeeded(boolean browserGUI, DatosStep datosStep, DataFmwkTest dFTest) {
+    private static void storeHardcopyIfNeeded(boolean storeImage, DatosStep datosStep, DataFmwkTest dFTest) {
         try {
-            if (isStoreImage(browserGUI, datosStep, dFTest)) {
+            if (isStoreImage(storeImage, datosStep, dFTest)) {
                 String nombreImagen = getPathFileEvidenciaStep(dFTest.ctx, datosStep.getNameMethodWithFactory(), datosStep.getStepNumber(), TypeEvidencia.imagen);
                 WebDriverArqUtils.captureEntirePageMultipleBrowsers(dFTest.driver, dFTest.ctx, nombreImagen);
             }

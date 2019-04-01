@@ -5,11 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecBuscadorDesktop;
-
 
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la sección de "Cabecera" (de Desktop y Movil)
@@ -22,7 +19,6 @@ public class SecCabeceraDesktop extends SecCabecera {
     private final static String XPathIconoBolsaShop = "//div[@id[contains(.,'shoppingBag')]]//span";
 
     public final static String XPathLinkLogoMango = "//div[@class='nav-logo' or @class[contains(.,'logo_menu')] or @class='logo']/a";
-    private final static String XPathIconoMangoOutlet = XPathLinkLogoMango + "[@class[contains(.,'logo_outlet')]]";
     private final static String XPathDivNavTools = "//div[@id='navTools']";
     
     //TODO cuando suba a PRO el tema de los Likes en el menú de usuario habrá que eliminar el XPathLikesCabecera
@@ -35,43 +31,6 @@ public class SecCabeceraDesktop extends SecCabecera {
     
     public static SecCabeceraDesktop getNew(AppEcom app, WebDriver driver) {
     	return (new SecCabeceraDesktop(app, driver));
-    }
-    
-    private String getXPathIcono(Pais pais, LineaType lineaType) {
-        if (app==AppEcom.outlet)
-            return XPathIconoMangoOutlet;
-            
-        String class_logo_contains = "";
-        switch (lineaType) {
-        case she:
-        case nuevo:
-        case rebajas:            
-            class_logo_contains = "logo-she";
-            break;
-        case edits:
-            //En el caso de la línea edits el logo no cambia
-            class_logo_contains = "";
-            break;
-        case he:
-            class_logo_contains = "logo-he";
-            break;
-        case nina:
-            class_logo_contains = "logo-nina";
-            break;
-        case nino:
-            class_logo_contains = "logo-nino";
-            break;            
-        case violeta:
-            class_logo_contains = "logo-violeta";
-            break;
-        default:
-            break;
-        }
-        
-        if (pais == null || pais.getMarcamng().compareTo("N")==0)
-            return (XPathLinkLogoMango + "[@class[contains(.,'" + class_logo_contains + "')] and @class[not(contains(.,'mng'))]]");
-        
-        return (XPathLinkLogoMango + "[@class[contains(.,'" + class_logo_contains + " mng')]]");
     }
     
     @Override
@@ -128,11 +87,6 @@ public class SecCabeceraDesktop extends SecCabecera {
         default:
             return XPathIconoBolsaShop;
         }
-    }
-    
-    public boolean isPresentLogoCorrectUntil(Pais pais, LineaType lineaType, int maxSecondsWait) {
-        String xpathLogo = getXPathIcono(pais, lineaType);
-        return (isElementPresentUntil(driver, By.xpath(xpathLogo), maxSecondsWait));
     }
     
     public void moveToLogo(WebDriver driver) {

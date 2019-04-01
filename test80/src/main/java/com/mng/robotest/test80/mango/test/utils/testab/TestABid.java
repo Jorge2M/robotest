@@ -46,7 +46,7 @@ public enum TestABid {
 	),
 	GaleriaDesktopReact(
 		TypeTestAB.GoogleExperiments,
-		"LgtNo3S3SWCTsPzuWFIT-Q",
+		"KgtNo3S3SWCTsPzuWFIT-Q",
 		"sub_8rhk5o_wc6i3wg92ap",
 		Arrays.asList(0,1),
 		Arrays.asList(

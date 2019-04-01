@@ -10,16 +10,18 @@ public class ResultValidation {
     
 	private String description = "";
     private State levelResult = State.Undefined;
-    boolean overcomed = false;
+    private boolean avoidEvidences = false;
+	boolean overcomed = false;
     
     public ResultValidation(int id) {
     	this.id = id;
     }
     
-    public static ResultValidation of(int id, String description, boolean overcomed, State levelResult) {
+    public static ResultValidation of(int id, String description, boolean overcomed, State levelResult, boolean avoidEvidences) {
     	ResultValidation resultValidation = of(id, levelResult);
     	resultValidation.setDescription(description);
     	resultValidation.setOvercomed(overcomed);
+    	resultValidation.setAvoidEvidences(avoidEvidences);
     	return resultValidation;
     }
     
@@ -44,6 +46,12 @@ public class ResultValidation {
 	}
 	public void setLevelResult(State levelError) {
 		this.levelResult = levelError;
+	}
+    public boolean isAvoidEvidences() {
+		return avoidEvidences;
+	}
+	public void setAvoidEvidences(boolean avoidEvidences) {
+		this.avoidEvidences = avoidEvidences;
 	}
     public boolean isOvercomed() {
 		return overcomed;

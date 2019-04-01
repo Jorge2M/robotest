@@ -71,8 +71,7 @@ public class StepAspect {
     public static void storeDataAfterStep(DatosStep datosStep) {
     	if (!datosStep.isStateUpdated() && !datosStep.getExcepExists()) {
     		storeStep(State.Ok, false, datosStep);
-    	}
-    	else {
+    	} else {
     		fmwkTest.grabStep(datosStep, TestCaseData.getdFTest());
     	}
     }

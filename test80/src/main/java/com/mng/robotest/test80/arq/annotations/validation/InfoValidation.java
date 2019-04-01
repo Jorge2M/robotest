@@ -106,6 +106,10 @@ public class InfoValidation {
 	    		valAnnotation.level()!=null) {
 	    		valResult.get(0).setLevelResult(valAnnotation.level());
 	    	}
+	    	
+	    	if (valAnnotation.avoidEvidences()) {
+	    		valResult.get(0).setAvoidEvidences(true);
+	    	}
     	}
     }
     

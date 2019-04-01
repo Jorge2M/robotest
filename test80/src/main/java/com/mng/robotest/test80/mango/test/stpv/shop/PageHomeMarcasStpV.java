@@ -132,7 +132,7 @@ public class PageHomeMarcasStpV {
     	if (salesOnInCountry) {
 	    	validations.add(
 	    		PrefixRebajas + "El mensaje de NewsLetter del Footer No contiene \"" + percentageSymbol + "\"",
-	    		!isMsgWithPercentageSimbol, State.Info_NoHardcopy);    
+	    		!isMsgWithPercentageSimbol, State.Info, true);    
     	}
     	else {
 	    	validations.add(

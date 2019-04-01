@@ -515,14 +515,15 @@ public class PageGaleriaStpV {
     		"   - Precio " + precio1erArt,
     		nombreArtFicha.toUpperCase().contains(nombre1erArt.toUpperCase()) &&
     		precioArtFicha.replaceAll(" ", "").toUpperCase().contains(precio1erArt.replaceAll(" ", "").toUpperCase()),
-    		State.Info_NoHardcopy);
+    		State.Info, true);
     	
       	return validations;
     }
     
    @Validation(
 	description = "Como mínimo el #{porcentaje} % de los productos son panorámicas",
-	level=State.Info_NoHardcopy)
+	level=State.Info,
+	avoidEvidences=true)
    public boolean hayPanoramicasEnGaleriaDesktop(float porcentaje) {
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
        float numArtTotal = pageGaleria.getNumArticulos();
@@ -862,61 +863,62 @@ public class PageGaleriaStpV {
        }
        
        if (salesOnInCountry) {
-	       //Validaciones.
-	       FilterOrdenacion ordenType;
-	       List<String> lineasInvertidas = RebajasPaisDAO.getLineasInvertidas(pais.getCodigo_pais(), menuType);
-	       boolean temporadaInvertida = (lineasInvertidas!=null && lineasInvertidas.contains(lineaType.toString()));
-	       if (!temporadaInvertida || isGaleriaSale)
-	    	   ordenType = FilterOrdenacion.BloqueTemporadas_2y3_despues_la_4; 
-	       else
-	    	   ordenType = FilterOrdenacion.BloqueTemporada_4_despues_la_2y3;
-	       
-	       descripValidac =
-	           "<b style=\"color:blue\">Rebajas</b></br>" +
-	           "1) El 1er artículo pertenece a alguna de las temporadas " + ordenType.getTemporadasIniciales() + " <br>" +
-	           "2) Los artículos aparecen ordenados por <b>" + ordenType.toString() + "</b>";
-	       datosStep.setNOKstateByDefault(); 
-	       listVals = ChecksResult.getNew(datosStep);
-	       try {
-	           State levelErrorValidation2 = State.Info_NoHardcopy;
-	           String ref1rstArticle = pageGaleria.getReferencia(1/*posArticle*/);
-	           int temporada1rstArticle = 0;
-	           if ("".compareTo(ref1rstArticle)!=0) {
-	        	   temporada1rstArticle = Integer.valueOf(ref1rstArticle.substring(0,1));
-	           }
-	           
-	           if (!ordenType.getTemporadasIniciales().contains(temporada1rstArticle)) {
-	               listVals.add(1, State.Warn);
-	               levelErrorValidation2 = State.Warn;
-	           }
-	           String notInOrder = pageGaleria.getAnyArticleNotInOrder(ordenType);
-	           if ("".compareTo(notInOrder)!=0) {
-	               descripValidac+=
-	                   "<br>" +
-	                   "<b>Warning!</b> " + notInOrder;
-	               listVals.add(2, levelErrorValidation2);
-	           }
-	                
-	           datosStep.setListResultValidations(listVals);
-	       }
-	       finally { listVals.checkAndStoreValidations(descripValidac); }      
+    	   checkArticlesCountryWithSalesOn(pais, lineaType, menuType, isGaleriaSale, driver);
        }
    }
    
-   public void validaArticlesOfTemporadas(List<Integer> listTemporadas, State levelError) {
-	   validaArticlesOfTemporadas(listTemporadas, false, levelError);
+    private ChecksResult checkArticlesCountryWithSalesOn(Pais pais, LineaType lineaType, bloqueMenu menuType, boolean isGaleriaSale, WebDriver driver) {
+	   	ChecksResult validations = ChecksResult.getNew();
+	   	
+	    FilterOrdenacion ordenType;
+	    List<String> lineasInvertidas = RebajasPaisDAO.getLineasInvertidas(pais.getCodigo_pais(), menuType);
+	    boolean temporadaInvertida = (lineasInvertidas!=null && lineasInvertidas.contains(lineaType.toString()));
+	    if (!temporadaInvertida || isGaleriaSale) {
+		    ordenType = FilterOrdenacion.BloqueTemporadas_2y3_despues_la_4;
+	    } else {
+		    ordenType = FilterOrdenacion.BloqueTemporada_4_despues_la_2y3;
+	    }
+	    
+        String ref1rstArticle = pageGaleria.getReferencia(1);
+        int temporada1rstArticle = 0;
+        if ("".compareTo(ref1rstArticle)!=0) {
+    	    temporada1rstArticle = Integer.valueOf(ref1rstArticle.substring(0,1));
+        }
+	    boolean temp1rstArticleOk = ordenType.getTemporadasIniciales().contains(temporada1rstArticle);
+	 	validations.add(
+	 		"<b style=\"color:blue\">Rebajas</b></br>" +
+	 		"El 1er artículo pertenece a alguna de las temporadas " + ordenType.getTemporadasIniciales() + " <br>",
+	 		temp1rstArticleOk, State.Warn);
+	 	
+	 	State stateValidac = State.Info;
+	 	boolean avoidEvidences = true;
+	 	if (!temp1rstArticleOk) {
+		 	stateValidac = State.Warn;
+		 	avoidEvidences = false;
+	 	}
+	 	String notInOrder = pageGaleria.getAnyArticleNotInOrder(ordenType);
+	 	validations.add(
+	 		"Los artículos aparecen ordenados por <b>" + ordenType.toString() + "</b>",
+	 		"".compareTo(notInOrder)==0, stateValidac, avoidEvidences);
+	   
+	 	return validations;
+   }
+   
+   public void validaArticlesOfTemporadas(List<Integer> listTemporadas, State levelError, boolean avoidEvidences) {
+	   validaArticlesOfTemporadas(listTemporadas, false, levelError, avoidEvidences);
    }
    
    public void validaArticlesOfTemporadas(List<Integer> listTemporadas) {
-	   validaArticlesOfTemporadas(listTemporadas, false, State.Warn);
+	   validaArticlesOfTemporadas(listTemporadas, false, State.Warn, false);
    }
    
    public void validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles) {
-	   validaArticlesOfTemporadas(listTemporadas, validaNotNewArticles, State.Warn);
+	   validaArticlesOfTemporadas(listTemporadas, validaNotNewArticles, State.Warn, false);
    }
    
    @Validation
-   public ChecksResult validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles, State levelError) {
+   public ChecksResult validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles, 
+		   										  State levelError, boolean avoidEvidences) {
 	   ChecksResult validations = ChecksResult.getNew();
 	   	
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
@@ -941,20 +943,20 @@ public class PageGaleriaStpV {
 	   validations.add(
 	   		"<b style=\"color:blue\">Rebajas</b></br>" +
 	   		"Todos los artículos pertenecen a las temporadas <b>" + listTemporadas.toString() + "</b>" + validaNotNewArticlesStr + infoWarning,
-	   		listArtWrong.size()==0, levelError);
+	   		listArtWrong.size()==0, levelError, avoidEvidences);
 	   	
 	   return validations;   
    }
    
    @Validation
-   public ChecksResult validaNotArticlesOfTypeDesktop(TypeArticle typeArticle, State levelError) {
+   public ChecksResult validaNotArticlesOfTypeDesktop(TypeArticle typeArticle, State levelError, boolean avoidEvidences) {
 	   	ChecksResult validations = ChecksResult.getNew();
 	   	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 	   	List<String> listArtWrong = pageGaleriaDesktop.getArticlesOfType(typeArticle);
 	   	validations.add(
 	   		"<b style=\"color:blue\">Rebajas</b></br>" +
-	   		"1) No hay ningún artículo del tipo <b>" + typeArticle + "</b>",
-	   		listArtWrong.size()==0, levelError);
+	   		"No hay ningún artículo del tipo <b>" + typeArticle + "</b>",
+	   		listArtWrong.size()==0, levelError, avoidEvidences);
    		if (listArtWrong.size() > 0) {
    			addInfoArtWrongToDescription(listArtWrong, typeArticle, validations.get(0));
    		}

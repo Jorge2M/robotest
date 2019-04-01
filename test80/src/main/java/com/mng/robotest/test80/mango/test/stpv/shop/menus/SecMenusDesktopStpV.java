@@ -272,7 +272,7 @@ public class SecMenusDesktopStpV {
 	    int maxSecondsWait = 3;
       	validations.add(
     		"Aparece algún artículo (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
-    		pageGaleriaDesktop.isVisibleArticleUntil(1, maxSecondsWait), State.Info_NoHardcopy);
+    		pageGaleriaDesktop.isVisibleArticleUntil(1, maxSecondsWait), State.Info, true);
       	validations.add(
     		"El 1er artículo es de tipo " + linea.getType() + "<br>",
     		pageGaleriaDesktop.isArticleFromLinea(1, lineaType), State.Warn);
@@ -318,7 +318,6 @@ public class SecMenusDesktopStpV {
     									DataCtxShop dCtxSh, WebDriver driver) throws Exception {
     	SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh, driver);
         if (sublineaType==null) {
-        	secCabeceraStpV.validaLogoDesktop(1, lineaType);
             validateIsLineaSelected(lineaType, dCtxSh.appE, driver);
         }
 
@@ -526,12 +525,14 @@ public class SecMenusDesktopStpV {
     	if (groupMenu.isTitleEquivalentToMenuName()) {
     		//TODO modificación temporal para no grabar la imagen en caso de Baby. Hasta que se corrija (http://ci.mangodev.net/redmine/issues/50111)
     		State stateVal = State.Warn;
+    		boolean avoidEvidences = false;
             if (groupMenu==GroupMenu.BebeNina || groupMenu==GroupMenu.BebeNino) {
-            	stateVal = State.Info_NoHardcopy;
+            	stateVal = State.Info;
+            	avoidEvidences = true;
             }
     	 	validations.add(
     			"El title de la página es el asociado al menú<b>" + menu.getNombre() + "</b><br>",
-    			AllPages.isTitleAssociatedToMenu(menu.getNombre(), driver), stateVal);
+    			AllPages.isTitleAssociatedToMenu(menu.getNombre(), driver), stateVal, avoidEvidences);
     	}
     	
 	 	return validations;
@@ -661,7 +662,7 @@ public class SecMenusDesktopStpV {
 			prefixSale +        		   
             "No hay artículos <b>de Temporada " + temporadaNew + "</b> con las 2 etiquetas <b>New Collection</b> y <b>New Now</b> " +
             "(en sus correspondientes traducciones)" + warningMessage,
-    		listArtWrong.size()==0, State.Info_NoHardcopy);
+    		listArtWrong.size()==0, State.Info, true);
         return validations;	
     }
     

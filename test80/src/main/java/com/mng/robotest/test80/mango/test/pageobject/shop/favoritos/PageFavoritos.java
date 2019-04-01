@@ -138,9 +138,9 @@ public class PageFavoritos extends WebdrvWrapp {
     @SuppressWarnings("static-access")
     public static void clearAllArticulos(Channel channel, AppEcom appE, WebDriver driver) throws Exception {
         //Si la sección no es visible clickamos en favoritos
-        if (!isSectionVisible(driver))
+        if (!isSectionVisible(driver)) {
             SecMenusWrap.secMenusUser.clickFavoritosAndWait(channel, appE, driver);
-        
+        }
         int i=0; //Para evitar posibles bucles infinitos
         while (hayArticulos(driver) && i<50) {
             clear1rstArticuloAndWait(driver);

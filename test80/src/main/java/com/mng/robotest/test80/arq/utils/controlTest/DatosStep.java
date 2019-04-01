@@ -37,6 +37,7 @@ public class DatosStep {
 	private Date hora_fin;
 	private State result_steps = State.Nok;
 	private State resultLastValidation = State.Ok;
+	private boolean avoidEvidences;
 	private boolean excep_exists = true;
 	private ChecksResult listResultValidations;
 	private String nameMethodWithFactory = "";
@@ -201,6 +202,14 @@ public class DatosStep {
     public boolean getExcepExists() { 
         return this.excep_exists; 
     }
+    
+	public boolean isAvoidEvidences() {
+		return avoidEvidences;
+	}
+
+	public void setAvoidEvidences(boolean avoidEvidences) {
+		this.avoidEvidences = avoidEvidences;
+	}
     
     public void setNOKstateByDefault() {
     	setExcepExists(true); 

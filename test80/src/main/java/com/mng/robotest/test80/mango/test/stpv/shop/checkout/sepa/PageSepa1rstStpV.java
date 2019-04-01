@@ -22,12 +22,14 @@ public class PageSepa1rstStpV {
     		PageSepa1rst.isPresentIconoSepa(channel, driver), State.Warn);
     	
     	State stateVal = State.Warn;
+    	boolean avoidEvidences = false;
         if (channel==Channel.movil_web) {
-            stateVal = State.Info_NoHardcopy;
+            stateVal = State.Info;
+            avoidEvidences = true;
         }
     	validations.add(
     		"Aparece el importe de la compra: " + importeTotal + "<br>",
-    		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal);		
+    		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal, avoidEvidences);		
     	validations.add(
     		"Aparece la cabecera indicando la 'etapa' del pago<br>",
     		PageSepa1rst.isPresentCabeceraStep(driver), State.Warn);		
