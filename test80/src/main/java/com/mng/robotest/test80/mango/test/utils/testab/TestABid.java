@@ -56,7 +56,7 @@ public enum TestABid {
 	//TODO es posible eliminarlo en cuanto se ejecute el planchado
 	GaleriaDesktopReactPRESemanal(
 		TypeTestAB.GoogleExperiments,
-		"KLzroOP0TgOP5Q9bUV9rLw",
+		"LgtNo3S3SWCTsPzuWFIT-Q",
 		"sub_8rhk5o_wc6i3wg92ap",
 		Arrays.asList(0,1),
 		Arrays.asList(

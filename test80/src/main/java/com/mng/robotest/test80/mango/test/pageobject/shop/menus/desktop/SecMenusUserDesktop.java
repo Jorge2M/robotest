@@ -1,10 +1,13 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.google.common.collect.Maps;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavoritos;
 
@@ -134,12 +137,19 @@ public class SecMenusUserDesktop extends WebdrvWrapp {
     	WebElement shadowHost = driver.findElement(By.tagName("loyalty-user-menu"));
     	if (shadowHost!=null) {
     		for (int i=0; i<maxSecondsWait; i++) {
-		    	Object prueba = ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot", shadowHost);
-		    	WebElement objectWeb = (WebElement)prueba;
-		    	if (objectWeb.getAttribute("innerHTML").contains("likes-you-have")) {
-		    		return true;
+		    	Object shadowLoyaltyPoints = ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot", shadowHost);
+		    	if (shadowLoyaltyPoints instanceof WebElement) {
+			    	WebElement loyaltyPoints = (WebElement)shadowLoyaltyPoints;
+			    	if (loyaltyPoints.getAttribute("innerHTML").contains("likes-you-have")) {
+			    		return true;
+			    	}
 		    	}
-		    	
+		    	else {
+		    		if (shadowLoyaltyPoints.toString().contains("likes-you-have")) {
+		    			return true;
+					}
+		    	}
+
 		    	Thread.sleep(1000);
     		}
     	}
