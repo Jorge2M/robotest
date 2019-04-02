@@ -142,6 +142,12 @@ public class Loyalty extends GestorWebDriver {
         PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(dFTest.driver);
         pageHomeLikesStpV.clickOpcionCompraUnDescuento();
         pageHomeLikesStpV.checkHomePurchaseWithDiscountPageOk();
+
+        SecMenusUserStpV.clickMenuMiCuenta(dFTest.driver);
+
+        //Validacion seccion de loyalty pagina donar likes
+        pageHomeLikesStpV.clickOpcionDonarLikes();
+        pageHomeLikesStpV.checkHomeDonateLikesPageOk();
     }
     
     private void validationsLoyalty(WebDriver driver) throws Exception {
