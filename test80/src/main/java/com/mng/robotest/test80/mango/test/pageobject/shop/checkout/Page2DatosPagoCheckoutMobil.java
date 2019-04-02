@@ -339,7 +339,6 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     
     public static void confirmarPagoFromMetodos(DataPedido dataPedido, WebDriver driver) throws Exception {
     	clickButtonFinalizarCompra(driver);
-        PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, Channel.movil_web, driver);
     }
     
     public static boolean isMarkedQuieroFactura(WebDriver driver) {

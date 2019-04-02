@@ -18,7 +18,7 @@ public class PageD3DLoginStpV {
     }
 	
 	@Validation (
-		description="Aparece la página de identificación D3D (la esperamos hasta #{maxSecondsToWait} segundos)<br>",
+		description="Es visible el importe total de la operación #{importeTotal}<br>",
 		level=State.Warn)
     public static boolean isImporteVisible(String importeTotal, String codPais, WebDriver driver) {
 		return (ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver));

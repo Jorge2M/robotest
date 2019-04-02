@@ -176,9 +176,9 @@ public class ImporteScreen {
             }
         }
         importeTotalSpaces = importeTotalSpaces.trim();
-        if (importeTotalSpaces.charAt(0) == charToInsert)
+        if (importeTotalSpaces.charAt(0) == charToInsert) {
             importeTotalSpaces = importeTotalSpaces.substring(1);
-
+        }
         return importeTotalSpaces;
     }
     

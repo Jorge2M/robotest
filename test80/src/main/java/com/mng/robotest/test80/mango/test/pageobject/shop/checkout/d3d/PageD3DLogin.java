@@ -22,6 +22,6 @@ public class PageD3DLogin extends WebdrvWrapp {
     }
            
     public static void clickButtonSubmit(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonSubmit));        
+        clickAndWaitLoad(driver, By.xpath(XPathButtonSubmit), TypeOfClick.javascript);        
     }
 }

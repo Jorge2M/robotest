@@ -378,7 +378,7 @@ public class PageCheckoutWrapperStpV {
     }       
     
     @Validation (
-    	description="Aparece el botón de \"Confirmar Pago\" (esperamos hasta #{maxSecondsToWait} segundos)",
+    	description="Aparece el botón de \"Confirmar Pago\" (esperamos hasta #{maxSecondsWait} segundos)",
     	level=State.Warn)
     private static boolean checkAfterClickVerResumen(int maxSecondsWait, WebDriver driver) {
         return (PageCheckoutWrapper.page2MobilCheckout.isClickableButtonFinalizarCompraUntil(maxSecondsWait, driver));

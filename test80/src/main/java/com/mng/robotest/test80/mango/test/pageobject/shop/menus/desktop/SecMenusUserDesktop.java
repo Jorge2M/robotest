@@ -1,13 +1,9 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import com.google.common.collect.Maps;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavoritos;
 
