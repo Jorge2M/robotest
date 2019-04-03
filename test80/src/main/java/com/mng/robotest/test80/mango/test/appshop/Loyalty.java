@@ -145,9 +145,11 @@ public class Loyalty extends GestorWebDriver {
 
         SecMenusUserStpV.clickMenuMiCuenta(dFTest.driver);
 
-        //Validacion seccion de loyalty pagina donar likes
-        pageHomeLikesStpV.clickOpcionDonarLikes();
-        pageHomeLikesStpV.checkHomeDonateLikesPageOk();
+        if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest.driver)) {
+            //Validacion seccion de loyalty pagina donar likes
+            pageHomeLikesStpV.clickOpcionDonarLikes();
+            pageHomeLikesStpV.checkHomeDonateLikesPageOk();
+        }
     }
     
     private void validationsLoyalty(WebDriver driver) throws Exception {
