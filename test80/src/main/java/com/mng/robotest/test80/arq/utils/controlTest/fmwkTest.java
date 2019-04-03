@@ -29,6 +29,7 @@ import org.testng.ISuite;
 import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.xml.XmlSuite;
+import org.testng.xml.XmlTest;
 
 import com.mng.robotest.test80.arq.jdbc.dao.StepsDAO;
 import com.mng.robotest.test80.arq.jdbc.dao.SuitesDAO;
@@ -60,6 +61,10 @@ public class fmwkTest {
      */
     @SuppressWarnings({ "unchecked"})    
     public static void grabStep(DatosStep datosStep, DataFmwkTest dFTest) {
+    	if (dFTest==null || dFTest.ctx==null || dFTest.meth==null) {
+    		return;
+    	}
+    	
     	//TODO eliminar este If cuando hayamos migrado todo a AspectJ
     	if (TestCaseData.peekDatosStepForStep()==datosStep) {
     		TestCaseData.pollDatosStepForStep();
@@ -96,19 +101,10 @@ public class fmwkTest {
     //TODO refactor
     @SuppressWarnings({ "unchecked"})
     public static void grabStepValidation(DatosStep datosStep, String descripValidac, DataFmwkTest dFTest) {
-//        boolean avoidEvidences = false;
-//        switch (datosStep.getResultSteps()) {
-//        case Warn_NoHardcopy:
-//            datosStep.setResultSteps(State.Warn);
-//            avoidEvidences = true;
-//            break;
-//        case Info_NoHardcopy:
-//            datosStep.setResultSteps(State.Info);
-//            avoidEvidences = true;
-//            break;
-//        default:
-//            avoidEvidences = false;
-//        }
+    	if (dFTest==null || dFTest.ctx==null || dFTest.meth==null) {
+    		return;
+    	}
+    	
         if ("ROBOTEST2".equals(System.getProperty("ROBOTEST2"))) {
             Map<DatosStep, List<String>> stepMap = (Map<DatosStep, List<String>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_STEP_VALIDATIONS");
@@ -203,10 +199,13 @@ public class fmwkTest {
      * Si se ha marcado la Suite como STOPPED en BD skipeamos el Test
      */
     public static void sendSkipTestExceptionIfSuiteStopping(ITestContext context) {
-        String executionId = context.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx);
-        StateSuite stateSuite = SuitesDAO.getStateSuite(executionId);
-        if (stateSuite==StateSuite.STOPPING)
-            throw new SkipException("Received Signal for stop TestSuite");
+    	if (context!=null) {
+    		String executionId = context.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx);
+	        StateSuite stateSuite = SuitesDAO.getStateSuite(executionId);
+	        if (stateSuite==StateSuite.STOPPING) {
+	            throw new SkipException("Received Signal for stop TestSuite");
+	        }
+    	}
     }
 
     private static void storeFileEvidencesIfNeeded(DatosStep datosStep, TypeStore typeStore, DataFmwkTest dFTest) {
@@ -397,9 +396,9 @@ public class fmwkTest {
 
     public static String getMethodWithFactory(Method method, ITestContext context) {
         String factory = (String)context.getAttribute("factory-" + String.valueOf(Thread.currentThread().getId()));
-        if (factory!=null)
+        if (factory!=null) {
             return (method.getName() + "(" + factory + ")");
-
+        }
         return method.getName();
     }
 

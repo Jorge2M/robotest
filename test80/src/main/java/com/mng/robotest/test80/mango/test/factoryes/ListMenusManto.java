@@ -6,6 +6,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
 import com.mng.robotest.test80.arq.utils.selenium.CreateWebDriver;
@@ -37,7 +38,7 @@ public class ListMenusManto {
             	//if (listCabeceraMenus.get(i).compareTo("Atencion al Cliente")==0) {
             	if (i < listCabeceraMenus.size()-1){
             		listTests.add(new Menus(listCabeceraMenus.get(i), listCabeceraMenus.get(i+1), prioridad));
-            	}else{
+            	} else {
             		listTests.add(new Menus(listCabeceraMenus.get(i), null, prioridad));
             	}
                 prioridad+=1;
@@ -59,7 +60,7 @@ public class ListMenusManto {
         WebDriver driver = CreateWebDriver.getWebDriver(TypeDriver.firefox);
         
         //Nos posicionamos en la página de Menús mediante WebDriver y obtenemos la lista
-        DataFmwkTest dFTest = new DataFmwkTest(driver, TypeDriver.firefox, null/*context*/);
+        DataFmwkTest dFTest = new DataFmwkTest(driver, TypeDriver.firefox, null);
         PageLoginMantoStpV.login(urlBaseManto, Constantes.userManto, Constantes.passwordManto, dFTest);
         String codigoEspanya = "001";
         String almacenEspanya = "001";
