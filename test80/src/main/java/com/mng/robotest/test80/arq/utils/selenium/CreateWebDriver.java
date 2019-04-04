@@ -227,13 +227,15 @@ public class CreateWebDriver {
 
         if (channel!=Channel.movil_web) {
             java.awt.Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            if (screenSize.height<=1024)
+            if (screenSize.height<=1024) {
                 //Esta ñapa es la única que se ha encontrado para solventar el problema del Chrome (no-headless) cuando se ejecuta contra una máquina virtual con un Tomcat as a Service
                 //En ese contexto se abre un Chrome con resolución de 1024x768 y no hay forma de modificarlo. En cambio con headless funciona correctamente.  
                 headlessToUse=true;
+            }
             
-            if (headlessToUse)
+            if (headlessToUse) {
                 options.addArguments("--window-size=1920x1080");
+            }
         }
         
         //Configuración del Navegador / Webdriver

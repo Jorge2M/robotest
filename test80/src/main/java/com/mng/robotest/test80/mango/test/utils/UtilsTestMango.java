@@ -9,6 +9,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
+import com.mng.robotest.test80.mango.test.generic.beans.FactoryVale;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais.EffectToArticle;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
@@ -92,7 +93,8 @@ public class UtilsTestMango {
 	throws Exception {
 		ValePais valeTest = null;
 		if (withValeTest) {
-			valeTest = ValePais.makeValeTest(dCtxSh.pais.getCodigo_alf());
+			FactoryVale factoryVale = new FactoryVale();
+			valeTest = factoryVale.makeValeTest(dCtxSh.pais.getCodigo_alf());
 			dCtxSh.vale = valeTest;
 		}
 		
@@ -115,7 +117,7 @@ public class UtilsTestMango {
     	listArticles = managerArticles.getArticles(dCtxSh.pais.getCodigo_pais(), TypeArticleStock.articlesWithMoreOneColour);
         if (dCtxSh.vale!=null) {
         	List<String> listReferences = getListArticleReferences(listArticles);
-        	ValePais.setArticlesToVale(dCtxSh.vale, listReferences, EffectToArticle.aplica);
+        	FactoryVale.setArticlesToVale(dCtxSh.vale, listReferences, EffectToArticle.aplica);
         	listArticles = dCtxSh.vale.getArticlesFromVale();
         }
         

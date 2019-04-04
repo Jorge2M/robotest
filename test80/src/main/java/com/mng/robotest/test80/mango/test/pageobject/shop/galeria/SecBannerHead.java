@@ -12,7 +12,7 @@ public class SecBannerHead extends WebdrvWrapp {
     static String XPathBanner = "//div[@class='bannerHead' or @class='firstBanner']";
     static String XPathBannerWithVideo = XPathBanner + "//div[@data-video]";
     static String XPathBannerWithBackgroundImage = XPathBanner + "//div[@style[contains(.,'background-image')]]";
-    static String XPathText = XPathBanner + "//div[@class='textinfo']";
+    static String XPathText = XPathBanner + "//div[@class[contains(.,'textinfo')]]";
     static String XPathTextLinkInfoRebajas = XPathBanner + "//div[@class[contains(.,'infotext')]]";
     static String XPathTextLinkMoreInfoRebajas = XPathTextLinkInfoRebajas + "//self::*[@class[contains(.,'max')]]";
     static String XPathTextLinkLessInfoRebajas = XPathTextLinkInfoRebajas + "//self::*[@class[contains(.,'min')]]";

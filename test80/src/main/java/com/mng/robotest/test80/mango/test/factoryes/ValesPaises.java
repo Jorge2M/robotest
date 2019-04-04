@@ -28,22 +28,22 @@ public class ValesPaises {
     	AppEcom app = AppEcomEnum.getAppEcom(appStr);
         Calendar currDtCal = Calendar.getInstance();
         boolean filterCal = false;
-        if ("true".compareTo(filtroCalendarStr)==0)
+        if ("true".compareTo(filtroCalendarStr)==0) {
             filterCal = true;
-        
-        if (!filterCal ||
-        	currDtCal.getTimeInMillis() > Campanya.VIP18.getFechaInit().getTimeInMillis()) {
-        	this.listaPaisesVales.addAll(ValesData.getListVales(Campanya.VIP18, filterCal));
         }
         
         if (!filterCal ||
-            currDtCal.getTimeInMillis() > Campanya.VIPMNG.getFechaInit().getTimeInMillis()) {
-        	this.listaPaisesVales.addAll(ValesData.getListVales(Campanya.VIPMNG, filterCal));
+        	currDtCal.getTimeInMillis() > Campanya.GLAM19.getFechaInit().getTimeInMillis()) {
+        	this.listaPaisesVales.addAll(ValesData.getListVales(Campanya.GLAM19, filterCal));
         }
-
 //        if (!filterCal ||
-//            currDtCal.getTimeInMillis() > Campanya.IMPVIP.getFechaInit().getTimeInMillis()) {
-//        	this.listaPaisesVales.addAll(ValesData.getListVales(Campanya.IMPVIP, filterCal));
+//        	currDtCal.getTimeInMillis() > Campanya.VIP18.getFechaInit().getTimeInMillis()) {
+//        	this.listaPaisesVales.addAll(ValesData.getListVales(Campanya.VIP18, filterCal));
+//        }
+//        
+//        if (!filterCal ||
+//            currDtCal.getTimeInMillis() > Campanya.VIPMNG.getFechaInit().getTimeInMillis()) {
+//        	this.listaPaisesVales.addAll(ValesData.getListVales(Campanya.VIPMNG, filterCal));
 //        }
 
         ArrayList<PaisAplicaVale> listTests = new ArrayList<>();
@@ -92,7 +92,7 @@ public class ValesPaises {
     public List<ValePais> listValesPais(String codigo_pais) {      
         List<ValePais> listaValesPais = new ArrayList<>();
         for (ValePais valePais : listaPaisesVales) {
-            if (valePais.getCodigoPais().compareTo(codigo_pais)==0)
+            if (valePais.getPais().getCodigo_pais().compareTo(codigo_pais)==0)
                 listaValesPais.add(valePais);
         }
                 

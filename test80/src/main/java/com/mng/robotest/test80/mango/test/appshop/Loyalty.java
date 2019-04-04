@@ -154,8 +154,8 @@ public class Loyalty extends GestorWebDriver {
     
     private void validationsLoyalty(WebDriver driver) throws Exception {
 	    SecMenusUserStpV.checkIsVisibleLinkMangoLikesYou(driver);
-	    if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
-	    	//Sólo podemos realizar esta validación en entornos de test porque en PRO el usuario no tiene Loyalty Points
+	    if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver) && //Sólo podemos realizar esta validación en entornos de test porque en PRO el usuario no tiene Loyalty Points
+	    	false) { //No tenemos usuario de Test con LoyaltyPoints perpétuos
 	    	SecMenusUserStpV.hoverLinkForShowMenu(driver);
 	    	SecMenusUserStpV.checkIsPresentLoyaltyPoints(2, driver);
 	    }

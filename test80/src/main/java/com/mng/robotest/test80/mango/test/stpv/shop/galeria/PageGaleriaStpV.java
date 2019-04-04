@@ -652,26 +652,22 @@ public class PageGaleriaStpV {
 
     @SuppressWarnings("static-access")
     public void validateBannerSuperiorIfExistsDesktop() {
-	   DatosStep datosStep = TestCaseData.getDatosLastStep();
 	   boolean bannerIsVisible = PageGaleriaDesktop.secBannerHead.isVisible(driver);
 	   if (bannerIsVisible) {
 		   if (!PageGaleriaDesktop.secBannerHead.isBannerWithoutTextAccesible(driver)) {
-		       String descripValidac =
-	               "1) El Banner de Cabecera contiene algún texto";
-	           datosStep.setNOKstateByDefault();  
-               ChecksResult listVals = ChecksResult.getNew(datosStep);            
-	           try {
-	               String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
-	               if ("".compareTo(textBanner)==0) {
-	                   listVals.add(1, State.Defect);
-	               }
-	                
-	               datosStep.setListResultValidations(listVals);
-	           }
-	           finally { listVals.checkAndStoreValidations(descripValidac); }
+			   checkBannerContainsText();
 		   }
 	   }
    }
+  
+    @SuppressWarnings("static-access")
+	@Validation (
+    	description="El Banner de Cabecera contiene algún texto",
+    	level=State.Defect)
+    private boolean checkBannerContainsText() {
+        String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
+        return ("".compareTo(textBanner)!=0);
+	}
    
    @SuppressWarnings("static-access")
    @Step (

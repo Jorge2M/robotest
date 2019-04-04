@@ -274,6 +274,15 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     	sendKeysWithRetry(2, codigoPromo, By.xpath(xpathInputPromo), driver);
     }
     
+    final static String xpathTextValeCampaign = "//span[@class='texto_banner_promociones']";
+    public static boolean checkTextValeCampaingIs(String textoCampaingVale, WebDriver driver) {
+    	if (WebdrvWrapp.isElementVisible(driver, By.xpath(xpathTextValeCampaign))) {
+    		return (driver.findElement(By.xpath(xpathTextValeCampaign)).getText().toLowerCase().contains(textoCampaingVale.toLowerCase()));
+    	}
+    	
+    	return false;
+    }
+    
     public static String getImporteDescuentoEmpleado(WebDriver driver) {
         return (driver.findElement(By.xpath(XPathDescuentoEmpleado)).getText());
     }
@@ -284,9 +293,9 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     
     public static boolean isMetodoPagoPresent(String metodoPagoClick, String indexpant, LayoutPago layoutPago, WebDriver driver) {
         String xpathClickPago = getXPathClickMetodoPago(metodoPagoClick, layoutPago, indexpant);
-        if (isElementPresent(driver, By.xpath(xpathClickPago)))
+        if (isElementPresent(driver, By.xpath(xpathClickPago))) {
             return true;
-        
+        }
         return false;
     }
     

@@ -79,6 +79,20 @@ public class Page1DktopCheckoutStpV {
 	 	return validations;
     }
     
+	@Validation (
+		description="<b>Sí</b> aparece el texto del vale/campaña <b>#{valePais.getCampanya()}</b> (\"#{valePais.getTextoCheckout()}\")",
+		level=State.Defect)
+	public static boolean checkIsVisibleTextVale(ValePais valePais, WebDriver driver) {
+		return (Page1DktopCheckout.checkTextValeCampaingIs(valePais.getTextoCheckout(), driver));
+	}
+	
+	@Validation (
+		description="<b>No</b> aparece el texto del vale/campaña <b>#{valePais.getCampanya()}</b> (\"#{valePais.getTextoCheckout()}\")",
+		level=State.Defect)
+	public static boolean checkIsNotVisibleTextVale(ValePais valePais, WebDriver driver) {
+		return (!Page1DktopCheckout.checkTextValeCampaingIs(valePais.getTextoCheckout(), driver));
+	}
+	
 	@Step (
 		description="Introducir el vale <b style=\"color:blue;\">#{valePais.getCodigoVale()}</b> y pulsar el botón \"CONFIRMAR\"", 
         expected="Aparece la página de resumen de artículos con los descuentos correctamente aplicados",
@@ -107,13 +121,13 @@ public class Page1DktopCheckoutStpV {
         boolean isVisibleError = Page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(maxSecondsWait, driver);
         if (valePais.isValid()) {
 		 	validations.add(
-				"No aparece mensaje de error en rojo (rgba(255, 0, 0, 1) en el bloque correspondiente al \"Código promocional\"",
+				"<b>No</b> aparece mensaje de error en rojo (rgba(255, 0, 0, 1) en el bloque correspondiente al \"Código promocional\"",
 				!isVisibleError, State.Defect);
         }
         else {
 		 	validations.add(
-				"No aparece mensaje de error en rojo (rgba(255, 0, 0, 1) en el bloque correspondiente al \"Código promocional\"",
-				!isVisibleError, State.Defect);
+				"<b>Sí</b> aparece mensaje de error en rojo (rgba(255, 0, 0, 1) en el bloque correspondiente al \"Código promocional\"",
+				isVisibleError, State.Defect);
         }
         
 		return validations;

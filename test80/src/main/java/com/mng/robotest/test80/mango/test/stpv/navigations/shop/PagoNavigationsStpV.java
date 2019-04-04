@@ -21,10 +21,8 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.ValesData;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-import com.mng.robotest.test80.mango.test.data.ValesData.Campanya;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -56,7 +54,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory.PagoSt
 import com.mng.robotest.test80.mango.test.stpv.shop.favoritos.PageFavoritosStpV;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
-
 
 public class PagoNavigationsStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
@@ -106,8 +103,7 @@ public class PagoNavigationsStpV {
         DatosStep datosStep = TestCaseData.getDatosCurrentStep();    	
         if (dCtxSh.userRegistered) {
             datosStep.replaceInDescription(tagLoginOrLogoff, "e Identificarse");
-        }
-        else {
+        } else {
         	datosStep.replaceInDescription(tagLoginOrLogoff, "(si estamos logados cerramos sesión)");
         }
         
@@ -131,8 +127,7 @@ public class PagoNavigationsStpV {
         SecBolsaStpV.selectButtonComprar(dCtxPago.getDataPedido().getDataBag(), dCtxSh, driver);
         if (dCtxSh.userRegistered) {
             dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
-        }
-        else {
+        } else {
             testFromIdentToCheckoutIni(dCtxPago, dCtxSh, driver);
         }
         
@@ -152,16 +147,13 @@ public class PagoNavigationsStpV {
             DataBag dataBag = dCtxPago.getDataPedido().getDataBag();    
             if (dCtxPago.getFTCkout().isEmpl) {
                 testInputCodPromoEmpl(dCtxSh, dataBag, driver);
-            }
-            else {
+            } else {
                 if (dCtxSh.vale!=null) {
                     if (dCtxSh.channel == Channel.movil_web){
                         Page1EnvioCheckoutMobil.inputCodigoPromo(dCtxSh.vale.getCodigoVale(), driver);
-                    } 
-                    else {
-                        Page1DktopCheckoutStpV.inputValeDescuento(dCtxSh.vale, dataBag, dCtxSh.appE, driver);
+                    } else {
+                    	testValeDescuento(dCtxSh.vale, dataBag, dCtxSh.appE, driver);
                     }
-                    //testListOfVales(dCtxSh.vale.getCampanya(), dataBag, dCtxSh, dFTest);
                 }
             }
         }
@@ -169,22 +161,18 @@ public class PagoNavigationsStpV {
         if (dCtxSh.appE==AppEcom.votf && dCtxSh.pais.getCodigo_pais().compareTo("001")==0 /*España*/) {
             Page1DktopCheckoutStpV.stepIntroduceCodigoVendedorVOTF("111111", driver);
         }
-        
-//        if (dCtxPago.getFTCkout().isLoyalty) {
-//        	Page1DktopCheckoutStpV.checkLoyalty();
-//        }
     }
     
-    @SuppressWarnings("unused")
-	private static void testListOfVales(Campanya campanya, DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
-    	List<ValePais> listValesToTest = ValesData.getListVales(campanya, false);
-    	for (ValePais valeToTest : listValesToTest) {
-	        Page1DktopCheckoutStpV.inputValeDescuento(valeToTest, dataBag, dCtxSh.appE, driver);
-	        if (dCtxSh.vale.isValid()) {
-	        	Page1DktopCheckoutStpV.clearValeIfLinkExists(driver);
-	        }
+    private static void testValeDescuento(ValePais vale, DataBag dataBag, AppEcom app, WebDriver driver) throws Exception {
+    	if ("".compareTo(vale.getTextoCheckout())!=0) {
+    		if (vale.isValid()) {
+    			Page1DktopCheckoutStpV.checkIsVisibleTextVale(vale, driver);
+    		} else {
+    			Page1DktopCheckoutStpV.checkIsNotVisibleTextVale(vale, driver);
+    		}
     	}
+    	
+    	Page1DktopCheckoutStpV.inputValeDescuento(vale, dataBag, app, driver);
     }
     
     /**
@@ -237,13 +225,11 @@ public class PagoNavigationsStpV {
                 if (dCtxSh.channel==Channel.desktop && !dCtxPago.getFTCkout().isChequeRegalo) {
                     if (testMisCompras(dCtxPago, dCtxSh)) {
                         PageResultPagoStpV.selectLinkMisComprasAndValidateCompra(dCtxPago, dCtxSh, driver);
-                    }
-                    else {
+                    } else {
                         PageResultPagoStpV.selectLinkPedidoAndValidatePedido(dataPedido, driver);
                     }
                 }
-            }
-            else {
+            } else {
                 PageResultPagoTpvStpV.validateIsPageOk(dataPedido, dCtxSh.pais.getCodigo_pais(), driver);
             }
             
@@ -411,8 +397,7 @@ public class PagoNavigationsStpV {
         if (channel==Channel.desktop) {
         	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, channel, driver);
             PageCheckoutWrapperStpV.pasoBotonAceptarCompraDesktop(driver);
-        }
-        else {
+        } else {
             PageCheckoutWrapperStpV.pasoBotonVerResumenCheckout2Mobil(driver);
         	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, channel, driver);
             PageCheckoutWrapperStpV.pasoBotonConfirmarPagoCheckout3Mobil(driver);
