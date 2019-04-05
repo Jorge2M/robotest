@@ -132,7 +132,7 @@ public class PageChequeRegaloInputDataStpV{
 	    int maxSecondsWait = 2;
     	validations.add(
     		"Aparece el titulo de la página correctamente (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
-    		PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.validar, StateElem.Present, maxSecondsWait, driver), 
+    		PageChequeRegaloInputData.isElementInStateUntil(ElementCheque.titulo, StateElem.Present, maxSecondsWait, driver), 
     		State.Warn);
     	
 	    String importesStr = java.util.Arrays.asList(PageChequeRegaloInputData.Importe.values()).toString();

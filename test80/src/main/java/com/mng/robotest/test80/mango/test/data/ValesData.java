@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
-import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.FactoryVale;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
@@ -48,12 +47,11 @@ public class ValesData {
 	
 	public static List<ValePais> getValesGLAM19(Campanya campanya, boolean filterCal) throws Exception {
 		List<ValePais> listaPaisesVales = new ArrayList<>();
-		FactoryVale factoryVale = new FactoryVale(UtilsMangoTest.listaPaisesXML(true, null));
-		addValePais(factoryVale.makeWithArticles(campanya, PaisShop.Deutschland, 20, "06/04/2019 00:00", "14/06/2019 00:00", filterCal, Arrays.asList("43067768"), Arrays.asList("41093010")), listaPaisesVales);
-		addValePais(factoryVale.makeWithArticles(campanya, PaisShop.Nederland,   20, "06/04/2019 00:00", "14/06/2019 00:00", filterCal, Arrays.asList("43067768"), Arrays.asList("41093010")), listaPaisesVales);
-		addValePais(factoryVale.makeWithArticles(campanya, PaisShop.Hungary,     20, "11/04/2019 00:00", "14/06/2019 00:00", filterCal, Arrays.asList("43067768"), Arrays.asList("41093010")), listaPaisesVales);
-		addValePais(factoryVale.makeWithArticles(campanya, PaisShop.Austria,     20, "04/04/2019 00:00", "14/06/2019 00:00", filterCal, Arrays.asList("43067768"), Arrays.asList("41093010")), listaPaisesVales);
-	    addValePais(factoryVale.makeWithArticles(campanya, PaisShop.Russia,      20, "27/04/2019 00:00", "14/06/2019 00:00", filterCal, Arrays.asList("43085773"), Arrays.asList("41050718")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Deutschland, 20, "05/04/2019 22:00", "15/04/2019 00:00", filterCal, Arrays.asList("43067768"), Arrays.asList("41093010")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Nederland,   20, "05/04/2019 22:00", "07/04/2019 00:00", filterCal, Arrays.asList("43067768"), Arrays.asList("41093010")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Hungary,     20, "10/04/2019 21:00", "15/04/2019 00:00", filterCal, Arrays.asList("43067768"), Arrays.asList("41093010")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Austria,     20, "04/04/2019 00:00", "05/04/2019 00:00", filterCal, Arrays.asList("43067768"), Arrays.asList("41093010")), listaPaisesVales);
+	    addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Russia,      20, "27/04/2019 23:00", "12/05/2019 23:00", filterCal, Arrays.asList("43085773"), Arrays.asList("41050718")), listaPaisesVales);
 	    return listaPaisesVales;
 	}
 	

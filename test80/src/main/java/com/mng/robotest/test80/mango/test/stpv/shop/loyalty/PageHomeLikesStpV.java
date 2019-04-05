@@ -36,16 +36,16 @@ public class PageHomeLikesStpV {
 	}
 
 	@Step(
-			description="Seleccionar el link \"Compra un descuento\"",
-			expected="Aparece la página de \"Compra con descuento\"")
+		description="Seleccionar el link \"Compra un descuento\"",
+		expected="Aparece la página de \"Compra con descuento\"")
 	public void clickOpcionCompraUnDescuento() throws Exception {
 		PageHomeLikes pageLikes = PageHomeLikes.getNewInstance(driver);
 		pageLikes.clickPurchaseWithDiscount();
 	}
 
 	@Step(
-			description="Seleccionar el link \"Compra un descuento\"",
-			expected="Aparece la página de \"Compra con descuento\"")
+		description="Seleccionar el link \"Donar Likes\"",
+		expected="Aparece la página de \"Donar Likes\"")
 	public void clickOpcionDonarLikes() throws Exception {
 		PageHomeLikes pageLikes = PageHomeLikes.getNewInstance(driver);
 		pageLikes.clickDonateLikes();

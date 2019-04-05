@@ -10,8 +10,8 @@ public class PageHomeLikes extends WebdrvWrapp {
 	
 	String idLoyaltySpace = "loyaltyLoyaltySpace";
 	String xpathBlockExchange = "//ul[@class='cards-list']/li";
-	String xpathButtonPurchaseWithDiscount = "//button[text()='Compra con descuento']";
-	String xpathButtonDonateLikes = "//button[contains(text(), 'Donar mis Likes')]";
+	String xpathButtonPurchaseWithDiscount = "//span[text()='Compra con descuento']";
+	String xpathButtonDonateLikes = "//span[contains(text(), 'Donar mis Likes')]";
 	
 	private PageHomeLikes(WebDriver driver) {
 		this.driver = driver;

@@ -126,7 +126,7 @@ public class SecMenuLateralMobilStpV {
         expected="Aparece la página correcta asociada a la línea #{lineaType.getNameUpper()}")
     public static void seleccionLinea(LineaType lineaType, Pais pais, AppEcom app, WebDriver driver) 
     throws Exception {
-        SecMenuLateralMobil.selecLineaIfNotSelected(pais.getShoponline().getLinea(lineaType), app, driver); 
+        SecMenuLateralMobil.selecLinea(pais.getShoponline().getLinea(lineaType), app, driver); 
         validaSelecLinea(pais, lineaType, null, app, driver);
     }    
     

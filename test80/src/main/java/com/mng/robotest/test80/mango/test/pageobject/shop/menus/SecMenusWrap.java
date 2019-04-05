@@ -110,19 +110,19 @@ public class SecMenusWrap {
     }
     
     public static void selecLinea(Pais pais, LineaType lineaType, AppEcom app, Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web)
-            SecMenuLateralMobil.selecLineaIfNotSelected(pais.getShoponline().getLinea(lineaType), app, driver);
-        else
-            SecMenusDesktop.
-            	secMenuSuperior.secLineas.selecLinea(pais, lineaType, app, driver);
+        if (channel==Channel.movil_web) {
+            SecMenuLateralMobil.selecLinea(pais.getShoponline().getLinea(lineaType), app, driver);
+        } else {
+            SecMenusDesktop.secMenuSuperior.secLineas.selecLinea(pais, lineaType, app, driver);
+        }
     }
     
     public static void selecSublinea(Pais pais, LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web)
-            SecMenuLateralMobil.selectLineaIfNotSelected(pais.getShoponline().getLinea(lineaType), sublineaType, app, driver);
-        else
-            SecMenusDesktop.
-            	secMenuSuperior.secLineas.selectSublinea(lineaType, sublineaType, app, driver);
+        if (channel==Channel.movil_web) {
+            SecMenuLateralMobil.selectLinea(pais.getShoponline().getLinea(lineaType), sublineaType, app, driver);
+        } else {
+            SecMenusDesktop.secMenuSuperior.secLineas.selectSublinea(lineaType, sublineaType, app, driver);
+        }
     }    
     
     /**

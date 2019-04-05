@@ -14,22 +14,25 @@ import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 
 public class FactoryVale {
 	
-	private List<Pais> listPaises = null;
+	private static List<Pais> listPaises = null;
 	
-	public FactoryVale() {}
+	private FactoryVale() {}
 	
-	public FactoryVale(List<Pais> listPaises) {
-		this.listPaises = listPaises;
-	}
-	
-    public ValePais makeBase (Campanya campanya, String codigoPais, String codigoVale, int porcDescuento) {
+    public static ValePais makeBase (Campanya campanya, String codigoPais, String codigoVale, int porcDescuento) throws Exception {
     	ValePais vale = new ValePais();
     	vale.campanya = campanya;
     	vale.codigoVale = codigoVale;
     	vale.porcDescuento = porcDescuento;
     	vale.filterCal = false;
-    	vale.pais = UtilsMangoTest.getPaisFromCodigo(codigoPais, listPaises);
+    	vale.pais = UtilsMangoTest.getPaisFromCodigo(codigoPais, getListaPaisesSingleton());
     	return vale;
+    }
+    
+    private static List<Pais> getListaPaisesSingleton() throws Exception {
+    	if (listPaises==null) {
+    		listPaises = UtilsMangoTest.listaPaisesXML(true, null);
+    	}
+    	return listPaises;
     }
     
     /**
@@ -37,7 +40,7 @@ public class FactoryVale {
      * @param fechaInicio en formato "DD/MM/AAAA HH:MM"
      * @param fechaFin    en formato "DD/MM/AAAA HH:MM"
      */
-    public ValePais makeWithoutArticles (Campanya campanya, String codigoPais, String codigoVale, int porcDescuento, 
+    public static ValePais makeWithoutArticles (Campanya campanya, String codigoPais, String codigoVale, int porcDescuento, 
     											String fechaInicio, String fechaFin, boolean filterCal) 
     throws Exception {
     	ValePais vale = makeBase(campanya, codigoPais, codigoVale, porcDescuento);
@@ -57,16 +60,16 @@ public class FactoryVale {
         return cal;
     }
     
-    public ValePais makeWithArticles (Campanya campanya, PaisShop paisShop, int porcDescuento, 
-    								  String fechaInicio, String fechaFin, boolean filterCal, List<String> listArticlesSiAplica, 
-    								  List<String> listArticlesNoAplica) throws Exception {
+    public static ValePais makeWithArticles (
+    		Campanya campanya, PaisShop paisShop, int porcDescuento, String fechaInicio, String fechaFin, boolean filterCal, 
+    		List<String> listArticlesSiAplica, List<String> listArticlesNoAplica) throws Exception {
         ValePais vale = makeWithoutArticles(campanya, paisShop.getCodigoPais(), campanya.name(), porcDescuento, fechaInicio, fechaFin, filterCal);
         setArticlesToVale(vale, listArticlesSiAplica, EffectToArticle.aplica);
         setArticlesToVale(vale, listArticlesNoAplica, EffectToArticle.noaplica);
         return vale;
     }
     
-    public ValePais makeValeTest(String codigoPais) {
+    public static ValePais makeValeTest(String codigoPais) throws Exception {
 		return (makeBase(Campanya.Test, codigoPais, "TEST", 10));
     }
     
@@ -75,12 +78,14 @@ public class FactoryVale {
 	    	switch (effectToArticle) {
 	    	case aplica:
 	    		vale.listExamplesArtSiAplica = new ArrayList<>();
-	                for (String refArticle : listArticles)
+	                for (String refArticle : listArticles) {
 	                    vale.listExamplesArtSiAplica.add(new ArticleStock(refArticle));
+	                }
 	    		break;
 	    	case noaplica:
-	            for (String refArticle : listArticles)
+	            for (String refArticle : listArticles) {
 	                vale.listExamplesArtNoAplica.add(new ArticleStock(refArticle));
+	            }
 	    	}
     	}
     }

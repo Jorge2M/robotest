@@ -34,12 +34,15 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
     }
 
     public enum ElementCheque implements ElementPage {
+    	titulo(
+    		"//h1[text()='Tarjeta Regalo']",
+    		null),
         paginaForm(
-                "//div[@class='gc-form']//h1[text()[contains(.,'Tarjeta Regalo')]]",
-                "//div[@class='gc-header-title-container']//h1[text()[contains(.,'Tarjeta Regalo')]]"),
+        	"//h1[text()[contains(.,'Tarjeta Regalo')]]",
+        	"//h1[text()[contains(.,'Tarjeta Regalo')]]"),
         compraAhora(
-                "//button[text()[contains(.,'Comprar ahora')]]",
-                null);
+        	"//button[text()[contains(.,'Comprar ahora')]]",
+        	null);
 
         String element;
         String mobile_element;
