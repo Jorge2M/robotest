@@ -116,6 +116,7 @@ public class FichaProducto extends GestorWebDriver {
             pageFichaStpv.selectBuscarEnTiendaButton();
             ModalBuscadorTiendasStpV.close(dFTest.driver);
             pageFichaStpv.selectAnadirAFavoritos();
+            pageFichaStpv.changeColorGarment();
             pageFichaStpv.selectRemoveFromFavoritos();
         }
         
