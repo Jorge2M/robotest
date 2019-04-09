@@ -18,7 +18,7 @@ public class SecCabeceraDesktop extends SecCabecera {
     private final static String XPathIconoBolsaOutlet = "//div[@class[contains(.,'shoppingBagButton')]]";
     private final static String XPathIconoBolsaShop = "//div[@id[contains(.,'shoppingBag')]]//span";
 
-    public final static String XPathLinkLogoMango = "//div[@class='nav-logo' or @class[contains(.,'logo_menu')] or @class='logo']/a";
+    public final static String XPathLinkLogoMango = "//div[@class='nav-logo' or @class[contains(.,'header-content-logo')] or @class[contains(.,'logo_menu')] or @class='logo']/a";
     private final static String XPathDivNavTools = "//div[@id='navTools']";
     
     //TODO cuando suba a PRO el tema de los Likes en el menú de usuario habrá que eliminar el XPathLikesCabecera
