@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
 public class BannerCabeceraObject extends BannerObject {
@@ -39,6 +40,6 @@ public class BannerCabeceraObject extends BannerObject {
 	public void clickBannerAndWaitLoad(DataBanner dataBanner, WebDriver driver) throws Exception {
 		WebElement bannerWeb = dataBanner.getBannerWeb();
 		WebElement bannerLink = bannerWeb.findElement(By.xpath(XPathAncorRelativeBanner));
-    	WebdrvWrapp.clickAndWaitLoad(driver, bannerLink, 10, WebdrvWrapp.TypeOfClick.javascript);
+    	WebdrvWrapp.clickAndWaitLoad(driver, bannerLink, 10, TypeOfClick.javascript);
 	}
 }

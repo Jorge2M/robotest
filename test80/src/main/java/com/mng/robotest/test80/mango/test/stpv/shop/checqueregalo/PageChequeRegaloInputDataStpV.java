@@ -98,7 +98,7 @@ public class PageChequeRegaloInputDataStpV{
     	validations.add(
     		"La tarjeta introducida no tiene saldo disponible",
     		PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.mensajeTarjetaSinSaldo, StateElem.Present, maxSecondsWait+2, driver), 
-    		State.Defect);
+    		State.Warn);
     	return validations;
 	}
 	

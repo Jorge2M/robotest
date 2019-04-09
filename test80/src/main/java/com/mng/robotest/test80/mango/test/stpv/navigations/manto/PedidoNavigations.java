@@ -48,7 +48,7 @@ public class PedidoNavigations {
         //Si existen pedidos que validar y no se trata de un acceso desde la línea de comandos (típicamente .bat)
         TypeAccessFmwk typeAccess = utils.getTypeAccessFmwk(dFTest.ctx);
         if (dataCheckPedidos.areChecksToExecute() && typeAccess!=TypeAccessFmwk.Bat) {
-            PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, dFTest);
+            PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, dFTest.driver);
             PedidoNavigations.validacionListPedidosStpVs(dataCheckPedidos, dMantoAcc.appE, dFTest);
         }
     }

@@ -71,7 +71,7 @@ public class Manto extends GestorWebDriver {
         description="Compra en España")
     public void MAN000_GenerarPedidoFicticioMANTO() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-    	PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
+    	PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest.driver);
 
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
     	this.espanya.setCodigo_pais(this.codigoEspanya);
@@ -99,22 +99,20 @@ public class Manto extends GestorWebDriver {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta de varios una tienda existente y otra no existente")
 	public void MAN001_ConsultaTiendas() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
-
-		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
-
-		PageMenusMantoStpV.goToConsultarTiendas(dFTest.driver);
+		WebDriver driver = TestCaseData.getWebDriver();
+		
+		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
+		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
+		PageMenusMantoStpV.goToConsultarTiendas(driver);
 
 		String tiendaNoExistente = "423";
-		PageConsultaTiendaStpV.consultaTiendaInexistente(tiendaNoExistente, dFTest);
-
+		PageConsultaTiendaStpV.consultaTiendaInexistente(tiendaNoExistente, driver);
 		String tiendaExistente = this.dPedidoPrueba.getDataDeliveryPoint().getCodigo();
-		if (this.dPedidoPrueba.getDataDeliveryPoint().getCodigo() == null)
+		if (this.dPedidoPrueba.getDataDeliveryPoint().getCodigo() == null) {
 			tiendaExistente = "7543";
-		
-		PageConsultaTiendaStpV.consultaTiendaExistente(tiendaExistente, dFTest);
+		}
+			
+		PageConsultaTiendaStpV.consultaTiendaExistente(tiendaExistente, driver);
 	}
 
 
@@ -123,25 +121,23 @@ public class Manto extends GestorWebDriver {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta de la información referente a varios pedidos")
 	public void MAN002_Consulta_ID_EAN() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
-
-		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
-
-		PageMenusMantoStpV.goToIdEans(dFTest.driver);
+		WebDriver driver = TestCaseData.getWebDriver();
+		
+		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
+		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
+		PageMenusMantoStpV.goToIdEans(driver);
 
 		List<String> pedidosPrueba = new ArrayList<>();
 		pedidosPrueba.add(this.dPedidoPrueba.getCodigoPedidoManto());
 		List<String> articulosPrueba = new ArrayList<>();
-		
-		for (int i = 0; i < this.dPedidoPrueba.getDataBag().getListArticulos().size(); i++)
+		for (int i = 0; i < this.dPedidoPrueba.getDataBag().getListArticulos().size(); i++) {
 			articulosPrueba.add(this.dPedidoPrueba.getDataBag().getListArticulos().get(i).getReferencia().toString());
-
-		PageConsultaIdEansStpV.consultaDatosContacto(pedidosPrueba, dFTest.driver);
-		PageConsultaIdEansStpV.consultaIdentificadoresPedido(pedidosPrueba, dFTest);
-		PageConsultaIdEansStpV.consultaTrackings(pedidosPrueba, dFTest);
-		PageConsultaIdEansStpV.consultaDatosEan(articulosPrueba, dFTest);
+		}
+		
+		PageConsultaIdEansStpV.consultaDatosContacto(pedidosPrueba, driver);
+		PageConsultaIdEansStpV.consultaIdentificadoresPedido(pedidosPrueba, driver);
+		PageConsultaIdEansStpV.consultaTrackings(pedidosPrueba, driver);
+		PageConsultaIdEansStpV.consultaDatosEan(articulosPrueba, driver);
 	}
 
 
@@ -150,20 +146,17 @@ public class Manto extends GestorWebDriver {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta y gestión de clientes")
 	public void MAN003_GestionarClientes() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
-
-		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
-
-		PageMenusMantoStpV.goToGestionarClientes(dFTest.driver);
+		WebDriver driver = TestCaseData.getWebDriver();
+		
+		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
+		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
+		PageMenusMantoStpV.goToGestionarClientes(driver);
 
 		String dni = this.dPedidoPrueba.getPago().getDni();
-		
-		PageGestionarClientesStpV.inputDniAndClickBuscar(dni, dFTest);
-		PageGestionarClientesStpV.clickThirdButton(dFTest);
-		PageGestionarClientesStpV.clickThirdButton(dFTest);
-		PageGestionarClientesStpV.clickDetallesButton(dni, dFTest);
+		PageGestionarClientesStpV.inputDniAndClickBuscar(dni, driver);
+		PageGestionarClientesStpV.clickThirdButton(driver);
+		PageGestionarClientesStpV.clickThirdButton(driver);
+		PageGestionarClientesStpV.clickDetallesButton(dni, driver);
 	}
 	
 	
@@ -171,23 +164,21 @@ public class Manto extends GestorWebDriver {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta de cheques")
 	public void MAN004_GestorCheques() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
-
-		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
-
-		PageMenusMantoStpV.goToGestorCheques(dFTest.driver);
+		WebDriver driver = TestCaseData.getWebDriver();
+		
+		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
+		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
+		PageMenusMantoStpV.goToGestorCheques(driver);
 
 		String mail = "esther.esteve@mango.com";
 		String cheque = "204028046151";
-		PageGestorChequesStpV.inputMailAndClickCorreoCliente(mail, dFTest.driver);
+		PageGestorChequesStpV.inputMailAndClickCorreoCliente(mail, driver);
 		
-		PageGestorChequesStpV.clickPedido(10/*numFila*/, mail, dFTest.driver);
-		PageGestorChequesStpV.volverCheques(dFTest.driver);
-		PageGestorChequesStpV.inputCheque(cheque, dFTest.driver);
-		PageGestorChequesStpV.chequeDetails(dFTest.driver);
-		PageGestorChequesStpV.volverCheques(dFTest.driver);
+		PageGestorChequesStpV.clickPedido(10, mail, driver);
+		PageGestorChequesStpV.volverCheques(driver);
+		PageGestorChequesStpV.inputCheque(cheque, driver);
+		PageGestorChequesStpV.chequeDetails(driver);
+		PageGestorChequesStpV.volverCheques(driver);
 	}
 	
 	
@@ -196,7 +187,7 @@ public class Manto extends GestorWebDriver {
 		description="Consulta de estadísticas de pedidos")
 	public void MAN005_GestorEstadisticasPedidos() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
+		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest.driver);
 	
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
 		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
@@ -214,7 +205,7 @@ public class Manto extends GestorWebDriver {
 		description="Gestor de saldos de TPV")
 	public void MAN006_GestorSaldosTPV() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
+		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest.driver);
 	
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
 		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
@@ -233,7 +224,7 @@ public class Manto extends GestorWebDriver {
 		description="Gestor de consulta y cambio de familia")
 	public void MAN007_GestorConsultaCambioFamilia() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
+		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest.driver);
 	
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
 		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
@@ -241,7 +232,7 @@ public class Manto extends GestorWebDriver {
 		PageMenusMantoStpV.goToGestorConsultaCambioFamilia(dFTest.driver);
 	
 		PageGestorConsultaCambioFamiliaStpV.selectAccesoriosAndClickConsultaPorFamiliaButton(dFTest);
-		PageGestorConsultaCambioFamiliaStpV.clickCambioFamiliaButton(dFTest);
+		PageGestorConsultaCambioFamiliaStpV.clickCambioFamiliaButton(dFTest.driver);
 	}
 	
 	@Test(
@@ -249,7 +240,7 @@ public class Manto extends GestorWebDriver {
 		description="Comprueba el correcto funcionamiento del ordenador de prendas")
 	public void MAN008_Ordenador_de_Prendas() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
+		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest.driver);
 
 		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
 		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);

@@ -9,7 +9,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -59,15 +58,11 @@ public class Menus  extends GestorWebDriver {
 		groups={"Menus", "Canal:desktop_App:all"},
 		description="Consulta de menús")
 	public void MAN005_ConsultaMenus() throws Exception {
-		DataFmwkTest dFTest = TestCaseData.getdFTest();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest);
-
-		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
+		WebDriver driver = TestCaseData.getWebDriver();
+		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
 		String codigoEspanya = "001";
 		String codigoAlmacenEspanya = "001";
-		PageSelTdaMantoStpV.selectTienda(codigoAlmacenEspanya, codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
-
-		//ArrayList<String> listMenuNames = PageMenusManto.getListCabecerasMenusName(dFTest.driver);
-		PageMenusMantoStpV.comprobarMenusManto(this.cabeceraName, this.cabeceraNameNext, dFTest.driver);
+		PageSelTdaMantoStpV.selectTienda(codigoAlmacenEspanya, codigoEspanya, this.dMantoAcc.appE, driver);
+		PageMenusMantoStpV.comprobarMenusManto(this.cabeceraName, this.cabeceraNameNext, driver);
 	}
 }

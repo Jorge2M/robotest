@@ -296,25 +296,4 @@ public class Otras extends GestorWebDriver {
     		!PageIniShopJapon.isPageUntil(maxSecondsWait, driver), State.Warn);
     	return validations;
     }
-    
-    public void validaPageIniJapon4(DatosStep datosStep, WebDriver driver) {
-    	int maxSecondsWait = 3;
-        String descripValidac = 
-        	"1) Estamos en la página inicial de Japón (la esperamos hasta " + maxSecondsWait + ")<br>" +
-        	"2) Estamos en la página inicial de Japón (la esperamos hasta " + maxSecondsWait + ")";
-        datosStep.setNOKstateByDefault();
-        ChecksResult listVals = ChecksResult.getNew(datosStep);
-        try {
-            if (!PageIniShopJapon.isPageUntil(maxSecondsWait, driver)) {
-                listVals.add(1, State.Defect);
-            }
-            if (PageIniShopJapon.isPageUntil(maxSecondsWait, driver)) {
-                listVals.add(2, State.Warn);
-            }            
-            datosStep.setListResultValidations(listVals);
-        }
-        finally { 
-        	listVals.checkAndStoreValidations(descripValidac); 
-        }
-    }
 }

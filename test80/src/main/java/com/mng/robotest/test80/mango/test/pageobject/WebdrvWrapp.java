@@ -31,9 +31,7 @@ import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
 
 public class WebdrvWrapp extends ElementPageFunctions { 
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
-    public enum TypeOfClick {webdriver, javascript}
 
-    
     public static boolean titleContainsUntil(final WebDriver driver, final String title, int seconds) {
         try {
             new WebDriverWait(driver,seconds).until(ExpectedConditions.titleContains(title));

@@ -121,7 +121,7 @@ public class SecMenuLateralMobilStpV {
     
     @Step (
     	description=
-    		"Si no lo está, seleccionar la <b style=\"color:chocolate\">Línea</b> " + 
+    		"Seleccionar la <b style=\"color:chocolate\">Línea</b> " + 
     		"<b style=\"color:brown;\">#{lineaType.getNameUpper()}</b>",
         expected="Aparece la página correcta asociada a la línea #{lineaType.getNameUpper()}")
     public static void seleccionLinea(LineaType lineaType, Pais pais, AppEcom app, WebDriver driver) 
@@ -132,7 +132,7 @@ public class SecMenuLateralMobilStpV {
     
     @Step (
     	description=
-    		"Si no lo está, seleccionar la línea / <b style=\"color:chocolate\">Sublínea</b> " + 
+    		"Seleccionar la línea / <b style=\"color:chocolate\">Sublínea</b> " + 
     		"<b style=\"color:brown;\">#{lineaType.name()} / #{sublineaType.getNameUpper()}</b>",
         expected="Aparece la página correcta asociada a la línea/sublínea")
     public static void seleccionSublineaNinos(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, WebDriver driver) 

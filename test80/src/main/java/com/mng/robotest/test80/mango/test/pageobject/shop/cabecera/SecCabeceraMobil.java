@@ -9,9 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
+import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
 import com.mng.robotest.test80.mango.test.pageobject.shop.Mensajes;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
-
 
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la sección de "Cabecera" (de Desktop y Movil)
@@ -209,13 +209,15 @@ public class SecCabeceraMobil extends SecCabecera {
      *              'false' queremos que el menú lateral de móvil se cierre
      */
     public void clickIconoMenuHamburguer(boolean toOpenMenus) throws Exception {
-        boolean menuVisible = SecMenuLateralMobil.isMenuInStateUntil(toOpenMenus, 1/*maxSecondsToWait*/, app, driver);
+        boolean menuVisible = SecMenuLateralMobil.isMenuInStateUntil(toOpenMenus, 1, app, driver);
         int i=0;
+        TypeOfClick typeClick = TypeOfClick.webdriver;
         while ((menuVisible!=toOpenMenus) && i<5) {
             try {
-                isVisibleIconoMenuHamburguesaUntil(5/*maxSecondsToWait*/);
-                clickIconoMenuHamburguesaWhenReady(driver);
-                menuVisible = SecMenuLateralMobil.isMenuInStateUntil(toOpenMenus, 2/*maxSecondsToWait*/, app, driver);
+                isVisibleIconoMenuHamburguesaUntil(5);
+                clickIconoMenuHamburguesaWhenReady(typeClick, driver);
+                typeClick = TypeOfClick.next(typeClick);
+                menuVisible = SecMenuLateralMobil.isMenuInStateUntil(toOpenMenus, 2, app, driver);
             }
             catch (Exception e) {
                 LogManager.getLogger(fmwkTest.log4jLogger).warn("Exception in click icono Hamburguer", e);
@@ -229,7 +231,7 @@ public class SecCabeceraMobil extends SecCabecera {
         return (isElementVisibleUntil(driver, By.xpath(XPathIconoMenuHamburguesa), maxSecondsToWait));
     }
     
-    public void clickIconoMenuHamburguesaWhenReady(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathIconoMenuHamburguesa));
+    public void clickIconoMenuHamburguesaWhenReady(TypeOfClick typeOfClick, WebDriver driver) throws Exception {
+        clickAndWaitLoad(driver, By.xpath(XPathIconoMenuHamburguesa), typeOfClick);
     }
 }

@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.modales;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
 public class ModalLoyaltyAfterAccess extends WebdrvWrapp {

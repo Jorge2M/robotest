@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
 
 @SuppressWarnings({"static-access"})
 /**
@@ -34,7 +35,7 @@ public class PageFichaArtOld extends PageFicha {
     private static final String XPathImagenCentralConZoom = XPathFichaConZoom + "//img";
     private static final String XPathUltimosProductosSection = "//*[@id='ultimos_productos']";
     private static final String XPathModalNoStock = "//div[@class='modalNoStock show']";
-    private static final String XPathImagenCarruselIzq = "//div[@class='product-images-carousel']//img[@class[contains(.,'carousel-img')]]";
+    private static final String XPathImagenCarruselIzq = "//div[@class='carousel-img-container']//img[@class[contains(.,'carousel-img')]]";
     
     private PageFichaArtOld(Channel channel, WebDriver driver) {
         this.driver = driver;

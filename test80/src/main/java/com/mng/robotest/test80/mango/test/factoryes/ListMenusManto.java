@@ -5,8 +5,6 @@ import java.util.*;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
 import com.mng.robotest.test80.arq.utils.selenium.CreateWebDriver;
@@ -18,7 +16,6 @@ import com.mng.robotest.test80.mango.test.stpv.manto.PageLoginMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageSelTdaMantoStpV;
 
 import org.openqa.selenium.WebDriver;
-
 
 public class ListMenusManto {
 	
@@ -59,14 +56,12 @@ public class ListMenusManto {
     private ArrayList<String> getListCabecerasMenus(String urlBaseManto) throws Exception { 
         WebDriver driver = CreateWebDriver.getWebDriver(TypeDriver.firefox);
         
-        //Nos posicionamos en la página de Menús mediante WebDriver y obtenemos la lista
-        DataFmwkTest dFTest = new DataFmwkTest(driver, TypeDriver.firefox, null);
-        PageLoginMantoStpV.login(urlBaseManto, Constantes.userManto, Constantes.passwordManto, dFTest);
+        PageLoginMantoStpV.login(urlBaseManto, Constantes.userManto, Constantes.passwordManto, driver);
         String codigoEspanya = "001";
         String almacenEspanya = "001";
-        PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, AppEcom.shop, dFTest.driver);
-        ArrayList<String> listMenuNames = PageMenusManto.getListCabecerasMenusName(dFTest.driver);
-        dFTest.driver.quit();
+        PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, AppEcom.shop, driver);
+        ArrayList<String> listMenuNames = PageMenusManto.getListCabecerasMenusName(driver);
+        driver.quit();
         return listMenuNames;
     }
 }

@@ -1,12 +1,11 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestionarClientes;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestionarClientes.TypeThirdButton;
@@ -28,110 +27,88 @@ public class PageGestionarClientesStpV {
 		return validations;
 	}
 
-	public static void inputDniAndClickBuscar(String dni, DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep       (
-			"Introducimos el DNI <b>" + dni + "</b> y pulsamos el botón \"Buscar\"", 
-			"Aparece una lista de clientes válida");
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-        datosStep.setSaveImagePage(SaveWhen.Always);
+	@Step (
+		description="Introducimos el DNI <b>#{dni}</b> y pulsamos el botón \"Buscar\"",
+		expected="Aparece una lista de clientes válida",
+		saveErrorPage=SaveWhen.Never,
+		saveImagePage=SaveWhen.Always)
+	public static void inputDniAndClickBuscar(String dni, WebDriver driver) throws Exception {
 		int waitSeconds = 20;
-		try {
-			PageGestionarClientes.inputDniAndClickBuscarButton(dni, waitSeconds, dFTest.driver);
-			//PageGestionarClientes.inputDni(dni, dFTest.driver);
-			//PageGestionarClientes.clickBuscarButtonAndWaitSeconds(waitSeconds, dFTest.driver);
-
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		}
-		finally { StepAspect.storeDataAfterStep(datosStep); }        
-
+		PageGestionarClientes.inputDniAndClickBuscarButton(dni, waitSeconds, driver);     
+		checkAfterSearchByDni(dni, driver);
+	}
+	
+	@Validation
+	private static ChecksResult checkAfterSearchByDni(String dni, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
+	 	validations.add(
+			"Se muestra la tabla de información<br>",
+			PageGestionarClientes.isVisibleTablaInformacion(driver), State.Defect);
+	 	validations.add(
+			"Aparece el DNI <b>" + dni + "</b> en la tabla<br>",
+			PageGestionarClientes.getDniTabla(dni, driver), State.Defect);
 		int maxSecondsToWait = 1;
-		String descripValidac = 
-				"1) Se muestra la tabla de información<br>" +
-				"2) Aparece el DNI <b>" + dni + "</b> en la tabla<br>" +
-				"3) Aparece el botón de Alta o Baja (los esperamos un máximo de " + maxSecondsToWait + " segundos)";
-		datosStep.setNOKstateByDefault();
-		ChecksResult listVals = ChecksResult.getNew(datosStep);
-		try {
-			if (!PageGestionarClientes.isVisibleTablaInformacion(dFTest.driver)) {
-				listVals.add(1, State.Defect);
-			}
-			if (!PageGestionarClientes.getDniTabla(dni, dFTest.driver)) {
-				listVals.add(2, State.Defect);            
-			}
-			if (!PageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Baja, maxSecondsToWait, dFTest.driver) &&
-				!PageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Alta, maxSecondsToWait, dFTest.driver)) {
-				listVals.add(3, State.Defect);
-			}
-
-			datosStep.setListResultValidations(listVals);
-		} 
-		finally { listVals.checkAndStoreValidations(descripValidac); }
+	 	validations.add(
+			"Aparece el botón de Alta o Baja (los esperamos un máximo de " + maxSecondsToWait + " segundos)",
+			PageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Baja, maxSecondsToWait, driver) ||
+			PageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Alta, maxSecondsToWait, driver), 
+			State.Defect);
+	 	
+	 	return validations;
 	}
 
-	public static void clickThirdButton(DataFmwkTest dFTest) throws Exception {
-		TypeThirdButton typeButton = PageGestionarClientes.getTypeThirdButton(dFTest.driver);	    
-		DatosStep datosStep = new DatosStep       (
-				"Tras haber introducido un DNI y haber dado al botón \"Buscar\", damos click al botón \"" + typeButton + "\"", 
-				"Aparece el mensaje correspondiente y el botón Alta");
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
+	final static String TagTypeButton = "@TagTypeButton";
+	@Step (
+		description="Tras haber introducido un DNI y haber dado al botón \"Buscar\", damos click al botón \"" + TagTypeButton + "\"",
+		expected="Aparece el mensaje correspondiente y el botón Alta",
+		saveErrorPage=SaveWhen.Never)
+	public static void clickThirdButton(WebDriver driver) throws Exception {
+		TypeThirdButton typeButton = PageGestionarClientes.getTypeThirdButton(driver);	
+		TestCaseData.getDatosCurrentStep().replaceInDescription(TagTypeButton, typeButton.toString());
+		
 		int waitSeconds = 3;
-		try {
-			PageGestionarClientes.clickThirdButtonAndWaitSeconds(typeButton, waitSeconds, dFTest.driver);
-
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		}
-		finally { StepAspect.storeDataAfterStep(datosStep); }        
-
-		int maxSecondsToWait = 2;
-		String descripValidac = 
-			"1) Aparece el mensaje \""+ typeButton.getMensaje() +"\"<br>" +
-			"2) Aparece el botón \"Alta\" (lo esperamos hasta " + maxSecondsToWait + " segundos)";
-		datosStep.setNOKstateByDefault();
-		ChecksResult listVals = ChecksResult.getNew(datosStep);
-		try {
-			if (!PageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton, dFTest.driver)) {
-				listVals.add(1, State.Defect);
-			}
-			TypeThirdButton buttonExpected = typeButton.buttonExpectedAfterClick();
-			if (!PageGestionarClientes.isVisibleThirdButtonUntil(buttonExpected, maxSecondsToWait, dFTest.driver)) {
-				listVals.add(2, State.Defect);            
-			}
-
-			datosStep.setListResultValidations(listVals);
-		} 
-		finally { listVals.checkAndStoreValidations(descripValidac); }
+		PageGestionarClientes.clickThirdButtonAndWaitSeconds(typeButton, waitSeconds, driver);   
+		checkAfterClickButton(typeButton, driver);
+	}
+	
+	@Validation
+	private static ChecksResult checkAfterClickButton(TypeThirdButton typeButton, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
+	 	validations.add(
+			"Aparece el mensaje <b>" + typeButton.getMensaje() + "</b><br>",
+			PageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton, driver), State.Defect);
+	 	
+		int maxSecondsWait = 2;
+		TypeThirdButton buttonExpected = typeButton.buttonExpectedAfterClick();
+	 	validations.add(
+			"Aparece el botón \"Alta\" (lo esperamos hasta " + maxSecondsWait + " segundos)",
+			PageGestionarClientes.isVisibleThirdButtonUntil(buttonExpected, maxSecondsWait, driver), State.Defect);
+		
+	 	return validations;
 	}
 
-	public static void clickDetallesButton(String dni, DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep       (
-			"Tras haber introducido un DNI y haber dado al botón \"Buscar\", damos click al botón \"Detalles\"", 
-			"Muestra los detalles del cliente correctamente");
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
+	@Step(
+		description="Tras haber introducido un DNI y haber dado al botón \"Buscar\", damos click al botón \"Detalles\"",
+		expected="Muestra los detalles del cliente correctamente",
+		saveErrorPage=SaveWhen.Never)
+	public static void clickDetallesButton(String dni, WebDriver driver) throws Exception {
 		String idCliente;
 		int waitSeconds = 3;
-		try {
-			idCliente = PageGestionarClientes.getIdClienteTablaFromDni(dni, dFTest.driver);
-			PageGestionarClientes.clickDetallesButtonAndWaitSeconds(waitSeconds, dFTest.driver);
-
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		}
-		finally { StepAspect.storeDataAfterStep(datosStep); }        
-
-		String descripValidac = 
-			"1) Aparece el id del cliente \""+ idCliente +"\"<br>" +
-			"2) Aparece el dni del cliente \""+ dni +"\"";
-		datosStep.setNOKstateByDefault();
-		ChecksResult listVals = ChecksResult.getNew(datosStep);
-		try {
-			if (!PageGestionarClientes.isVisibleIdClienteClickDetallesButton(idCliente, dFTest.driver)) {
-				listVals.add(1, State.Defect);
-			}
-			if (!PageGestionarClientes.isVisibleDniClickDetallesButton(dni, dFTest.driver)) {
-				listVals.add(2, State.Defect);            
-			}
-
-			datosStep.setListResultValidations(listVals);
-		} 
-		finally { listVals.checkAndStoreValidations(descripValidac); }
+		idCliente = PageGestionarClientes.getIdClienteTablaFromDni(dni, driver);
+		PageGestionarClientes.clickDetallesButtonAndWaitSeconds(waitSeconds, driver);    
+		checkAfterClickDetalles(dni, idCliente, driver);
+	}
+	
+	@Validation
+	private static ChecksResult checkAfterClickDetalles(String dni, String idCliente, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
+	 	validations.add(
+			"Aparece el id del cliente <b>" + idCliente + "</b><br>",
+			PageGestionarClientes.isVisibleIdClienteClickDetallesButton(idCliente, driver), State.Defect);
+	 	validations.add(
+			"Aparece el dni del cliente <b>" + dni + "</b>",
+			PageGestionarClientes.isVisibleDniClickDetallesButton(dni, driver), State.Defect);
+	 	
+	 	return validations;
 	}
 }

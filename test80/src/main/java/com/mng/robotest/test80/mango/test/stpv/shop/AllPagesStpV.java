@@ -71,7 +71,7 @@ public class AllPagesStpV {
             ResultadoErrores resultadoImgs = WebDriverMngUtils.imagesBroken(driver, Channel.desktop, maxErrors);
             boolean resultadoOK = (resultadoImgs.getResultado() == ResultadoErrores.Resultado.OK);
     		String descripValidac = "No hay ninguna imagen cortada<br>";
-            if (resultadoOK) {
+            if (!resultadoOK) {
             	descripValidac+=resultadoImgs.getlistaLogError().toString();
             }
             

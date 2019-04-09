@@ -11,6 +11,7 @@ import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
+import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion.ModalElement;
@@ -134,7 +135,7 @@ public class SecModalPersonalizacionStpV {
 		description="Seleccionamos el primer icono",
 		expected="Aparece el botón Confirmar")
 	public void selectFirstIcon() throws Exception {
-		SecModalPersonalizacion.selectElement(ModalElement.IconSelecction, dCtxSh.channel, driver, WebdrvWrapp.TypeOfClick.javascript);
+		SecModalPersonalizacion.selectElement(ModalElement.IconSelecction, dCtxSh.channel, driver, TypeOfClick.javascript);
 		if (dCtxSh.channel == Channel.desktop) {
 			validateIconSelected();
 		} 
@@ -208,7 +209,7 @@ public class SecModalPersonalizacionStpV {
 		description="Seleccionamos el botón \"Confirmar\"",
 		expected="Aparece el apartado 3 de la personalización")
 	public void selectColor() throws Exception {
-		SecModalPersonalizacion.selectElement(ModalElement.Continue, dCtxSh.channel, driver, WebdrvWrapp.TypeOfClick.javascript);
+		SecModalPersonalizacion.selectElement(ModalElement.Continue, dCtxSh.channel, driver, TypeOfClick.javascript);
 		if (dCtxSh.channel == Channel.desktop) {
 			validateIsApartadoVisible(3);
 			validateSelectionColor();

@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
+import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
 public abstract class BannerObject {
@@ -107,6 +108,6 @@ public abstract class BannerObject {
     
     public void clickBannerAndWaitLoad(DataBanner dataBanner, WebDriver driver) throws Exception {
     	WebElement bannerWeb = dataBanner.getBannerWeb();
-    	WebdrvWrapp.clickAndWaitLoad(driver, bannerWeb, 10, WebdrvWrapp.TypeOfClick.javascript);
+    	WebdrvWrapp.clickAndWaitLoad(driver, bannerWeb, 10, TypeOfClick.javascript);
     }
 }
