@@ -216,13 +216,12 @@ public class PagePrehome extends WebdrvWrapp {
         }
     }
     
-    /**
-     * Añadimos la cookie de Newsletter con valor 0 para que no aparezca el modal
-     * @param driver
-     */
-    public static void addCookieNewsletter(WebDriver driver) {
+    public static void setInitialModalsOff(WebDriver driver) {
         Cookie ck = new Cookie("modalRegistroNewsletter", "0");
         driver.manage().addCookie(ck);
+        
+        Cookie ck2 = new Cookie("modalAdhesionLoyalty", "false");
+        driver.manage().addCookie(ck2);
     }
 
     /**
@@ -274,7 +273,7 @@ public class PagePrehome extends WebdrvWrapp {
         
         //Damos de alta la cookie de newsLetter porque no podemos gestionar correctamente el cierre 
         //del modal en la página de portada (es aleatorio y aparece en un intervalo de 0 a 5 segundos)
-        addCookieNewsletter(driver);
+        setInitialModalsOff(driver);
         if (dCtxSh.channel==Channel.movil_web || !isPaisSelectedDesktop(driver, dCtxSh.pais.getNombre_pais())) {
             if (dCtxSh.channel!=Channel.movil_web) {
                 //Nos posicionamos y desplegamos la lista de países (en el caso de mobile no desplegamos 
