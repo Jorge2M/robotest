@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import com.mng.robotest.test80.mango.test.data.ChannelEnum;
+import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
@@ -207,6 +209,11 @@ public class Registro extends GestorWebDriver {
 	        PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dFTest);
 	        PageRegistroDirecStpV.clickFinalizarButton(dFTest);
 	        PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, dFTest);
+
+	        //Seleccionar el logo de la cabecera
+            SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh, dFTest.driver);
+            secCabeceraStpV.selecLogo();
+
 	        //Validacion footer RGPD
 	        SecFooterStpV.validaRGPDFooter(clickRegister, dCtxSh, dFTest.driver);
 	        

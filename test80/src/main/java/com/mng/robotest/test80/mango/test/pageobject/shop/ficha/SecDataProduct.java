@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.regex.Matcher;
@@ -87,6 +88,9 @@ public class SecDataProduct extends WebdrvWrapp {
     //El class es diferente en ficha old y la new (product-price-sale vs product-sale)
     private static final String XPathItemsPrecioFinalArt = "//span[(@class[contains(.,'product-prices-sale')] or @class[contains(.,'product-sale')]) and not(@class[contains(.,'--cross')])]";
     private static final String XPathItemsPrecioSinDesc = "//span[(@class[contains(.,'product-prices-sale--cross')] or @class[contains(.,'product-sale--cross')])]";
+
+    //xpaths asociados a los colores de la prenda
+    private static final String XPathColoresPrendaSinIdentificar = "//div[@class='color-container']";
     
     private static String getXPathPastillaColorClick(String codigoColor) {
         return ("//div[@class[contains(.,'color-container')] and @id='" + codigoColor + "']/img");
@@ -329,5 +333,20 @@ public class SecDataProduct extends WebdrvWrapp {
     public static void selectLinkNavigation(ProductNav productNav, WebDriver driver) throws Exception {
         String xpathLink = getXPathLinkProductNav(productNav);
         waitClickAndWaitLoad(driver, 2/*waitForLinkToClick*/, By.xpath(xpathLink));
+    }
+
+    //zona de colores dentro de la ficha
+
+    public static ArrayList<String> getColorsGarment(WebDriver driver) {
+        ArrayList<String> colors = new ArrayList<>();
+        for (WebElement element : driver.findElements(By.xpath(XPathColoresPrendaSinIdentificar))) {
+            colors.add(element.getAttribute("id"));
+        }
+        return colors;
+    }
+
+    public static void selectColor(String codeColor, WebDriver driver) throws Exception {
+        String path = getXPathPastillaColorClick(codeColor);
+        clickAndWaitLoad(driver, By.xpath(path));
     }
 }

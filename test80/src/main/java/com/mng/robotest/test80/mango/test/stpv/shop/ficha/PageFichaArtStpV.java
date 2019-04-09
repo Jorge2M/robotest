@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
+import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.*;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
@@ -18,10 +19,6 @@ import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateE
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorBusqueda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
-import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
-import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFichaArtOld;
-import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecBreadcrumbFichaOld;
-import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.Slider;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha.TypeFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecBolsaButtonAndLinksNew.ActionFavButton;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecBreadcrumbFichaOld.ItemBCrumb;
@@ -33,6 +30,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalBuscadorTiendasStpV;
+
+import java.util.ArrayList;
 
 @SuppressWarnings({"static-access"})
 public class PageFichaArtStpV {
@@ -325,6 +324,35 @@ public class PageFichaArtStpV {
         //Validaciones
         checkCapaAltaFavoritos();
         validateVisibleButtonFavoritos(ActionFavButton.Remove);
+    }
+
+    @Step (
+            description="Cambiar de color dentro de la misma ficha.",
+            expected="El articulo es cambiado de color.")
+    public void changeColorGarment() throws Exception {
+        ArticuloScreen articulo = pageFicha.getArticuloObject();
+        ArrayList<String> colors = SecDataProduct.getColorsGarment(driver);
+        String codeColor = colors.get(0);
+        SecDataProduct.selectColor(codeColor, driver);
+
+        //Validaciones
+        validateNotVisibleButtonFavoritos(ActionFavButton.Add);
+
+        SecDataProduct.selectColor(articulo.getCodigoColor(), driver);
+
+    }
+
+    @Validation (
+            description="No aparece el icono de favorito marcado al cambiar de color",
+            level=State.Defect)
+    public boolean validateNotVisibleButtonFavoritos(ActionFavButton buttonType) {
+        switch (buttonType) {
+            case Remove:
+                return (pageFicha.isVisibleButtonElimFavoritos());
+            case Add:
+            default:
+                return (pageFicha.isVisibleButtonAnadirFavoritos());
+        }
     }
     
     @Validation
