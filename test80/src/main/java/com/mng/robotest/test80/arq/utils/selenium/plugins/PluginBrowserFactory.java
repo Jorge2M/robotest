@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.arq.utils.selenium.plugins;
+package com.mng.robotest.test80.arq.utils.selenium.plugins; 
 
 import com.mng.robotest.test80.arq.utils.selenium.plugins.chrome.PluginChrome;
 import com.mng.robotest.test80.arq.utils.selenium.plugins.chrome.PluginHTML5Autoplay;
