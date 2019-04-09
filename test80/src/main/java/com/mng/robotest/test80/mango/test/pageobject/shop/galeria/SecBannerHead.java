@@ -10,10 +10,10 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
 public class SecBannerHead extends WebdrvWrapp {
 	public enum TypeLinkInfo {more, less};
-    static String XPathBanner = "//div[@class='bannerHead' or @class='firstBanner']";
+    static String XPathBanner = "//div[@class='bannerHead' or @class='firstBanner' or @class='innerBanner']";
     static String XPathBannerWithVideo = XPathBanner + "//div[@data-video]";
     static String XPathBannerWithBackgroundImage = XPathBanner + "//div[@style[contains(.,'background-image')]]";
-    static String XPathText = XPathBanner + "//div[@class[contains(.,'textinfo')]]";
+    static String XPathText = XPathBanner + "//div[@class[contains(.,'textinfo')] or @class='vsv-text']";
     static String XPathTextLinkInfoRebajas = XPathBanner + "//div[@class[contains(.,'infotext')]]";
     static String XPathTextLinkMoreInfoRebajas = XPathTextLinkInfoRebajas + "//self::*[@class[contains(.,'max')]]";
     static String XPathTextLinkLessInfoRebajas = XPathTextLinkInfoRebajas + "//self::*[@class[contains(.,'min')]]";
@@ -47,8 +47,9 @@ public class SecBannerHead extends WebdrvWrapp {
     }
     
     public static void clickBannerIfClickable(WebDriver driver) throws Exception {
-    	if (isLinkable(driver))
+    	if (isLinkable(driver)) {
     		clickAndWaitLoad(driver, By.xpath(XPathBanner));
+    	}
     }
     
     public static String getText(WebDriver driver) {
