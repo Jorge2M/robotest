@@ -3,6 +3,8 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.galeria;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -19,6 +21,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
+import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 
 
@@ -409,8 +412,9 @@ public class PageGaleriaDesktop extends PageGaleria {
     @Override
     public WebElement getArticleFromPagina(int numPagina, int numArticle) {
     	List<WebElement> listArticles = getListArticulosFromPagina(numPagina);
-    	if (listArticles.size()>=numArticle)
+    	if (listArticles.size()>=numArticle) {
     		return listArticles.get(numArticle-1);
+    	}
     	return null;
     }
     
@@ -422,6 +426,45 @@ public class PageGaleriaDesktop extends PageGaleria {
     @Override
     public boolean backTo1erArticulo() throws InterruptedException {
     	return backTo1erArticulo(XPpathIconoUpGalery);
+    }
+    
+    /**
+     * @return la lista de referencia+color de los artículos incorrectos (size div != attr width de la imagen)
+     */
+    public ListSizesArticle getArticlesWithWrongSize(int numPagina, int marginPixelsError) {	
+    	ListSizesArticle listSizesArtWrong = ListSizesArticle.getInstance();
+    	List<WebElement> listArticles = getListArticulosFromPagina(numPagina);
+    	for (WebElement article : listArticles) {
+    		int attrWidthImg = getWidthFromAtricleSrcImg(article);
+    		int widthArticle = getWidthArticle(article);
+    		if (attrWidthImg!=0 && Math.abs(attrWidthImg-widthArticle) > 1) {
+    			listSizesArtWrong.addData(getRefColorArticulo(article), attrWidthImg, widthArticle);
+    		}
+    	}
+    	
+    	return listSizesArtWrong;
+    }
+    
+    private int getWidthFromAtricleSrcImg(WebElement article) {
+    	int widthImg = 0;
+    	By byImgArticle = By.xpath("." + XPathImgRelativeArticle);
+    	if (WebdrvWrapp.isElementPresent(article, byImgArticle)) {
+    		WebElement imgArticle = article.findElement(byImgArticle);
+	    	String srcImgArticle = imgArticle.getAttribute("data-original");
+	    	if (srcImgArticle!=null) {
+		    	Pattern pattern = Pattern.compile("(.*?)width=(.*?)&(.*?)");
+		        Matcher matcher = pattern.matcher(srcImgArticle);
+		        if (matcher.find()) {
+		             widthImg = Integer.valueOf(matcher.group(2));
+		        }
+	    	}
+    	}
+    	
+        return widthImg;
+    }
+    
+    private int getWidthArticle(WebElement article) {
+    	return (article.getSize().getWidth());
     }
     
     public ArrayList<String> getArticlesRebajadosWithLiteralInLabel(List<LabelArticle> listLabels) {

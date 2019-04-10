@@ -90,13 +90,10 @@ public class PedidosNavigations {
         }
         
         if (appE!=AppEcom.votf) {
-            //Establecemos los filtros de los pedidos con el día de hoy + el pedido + el código de país asociado al pedido y pulsamos "Buscar"
             PageMenusMantoStpV.goToPedidos(dFTest.driver);
             SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.PEDIDO, dFTest.driver);
-            existLinkPedido = PagePedidosMantoStpV.validaLineaPedido(dataPedido, appE, dFTest);
-                                        
-            //Si existe el link del pedido, Accedemos al detalle del pedido (la página de detalle es común para consulta de pedido/bolsa)
-            if (existLinkPedido) {
+            boolean existsLinkCodPed = PagePedidosMantoStpV.validaLineaPedido(dataPedido, appE, dFTest.driver).getExistsLinkCodPed();    
+            if (existsLinkCodPed) {
                 PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.pedido, appE, dFTest.driver);
             }
         }

@@ -31,7 +31,7 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     
     //New
     //Capa líneas shop y outlet
-    static String XPathCapaLevelLinea = "//div[@class='menu-section']";
+    static String XPathCapaLevelLinea = "//div[@class[contains(.,'menu-section')]]";
     static String IniXPathLinkLinea = XPathCapaLevelLinea + "//li/div[@class[contains(.,'menu-item-label')] and @id"; 
     static String XPathLinkLineaRebajas = IniXPathLinkLinea + "[contains(.,'sections_rebajas')]]"; 
     static String XPathLinkLineaNuevo = IniXPathLinkLinea + "[contains(.,'sections_nuevo')]]";

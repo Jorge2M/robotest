@@ -1,13 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorConsultaCambioFamilia;
 
@@ -28,34 +25,25 @@ public class PageGestorConsultaCambioFamiliaStpV {
 		return validations;
 	}
 	
-	public static void selectAccesoriosAndClickConsultaPorFamiliaButton(DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep       (
-			"Buscamos productos por la familia \"Accesorios\" ", 
-			"Muestra la tabla con productos que corresponden con esta familia");
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-		try {
-			PageGestorConsultaCambioFamilia.selectAccesoriosAndClickConsultaPorFamiliaButton(dFTest.driver);
-
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		}
-		finally { StepAspect.storeDataAfterStep(datosStep); }
-
-		String descripValidac = 
-			"1) Aparece la tabla con los productos<br>" +
-			"2) El campo de la tabla \"Traducción familia principal\" de la primera fila contiene el atributo \"Accesorios\"";
-		datosStep.setNOKstateByDefault();
-		ChecksResult listVals = ChecksResult.getNew(datosStep);
-		try {
-			if (!PageGestorConsultaCambioFamilia.isTablaProductosVisible(dFTest.driver)) {
-				listVals.add(1, State.Defect);
-			}
-			if (!PageGestorConsultaCambioFamilia.checkFirstRowProductIsRight(dFTest.driver)) {
-				listVals.add(2, State.Defect);
-			}
-          
-			datosStep.setListResultValidations(listVals);
-		} 
-		finally { listVals.checkAndStoreValidations(descripValidac); }
+	@Step (
+		description="Buscamos productos por la familia <b>Accesorios</b>",
+		expected="Muestra la tabla con productos que corresponden con esta familia",
+		saveErrorPage=SaveWhen.Never)
+	public static void selectAccesoriosAndClickConsultaPorFamiliaButton(WebDriver driver) throws Exception {
+		PageGestorConsultaCambioFamilia.selectAccesoriosAndClickConsultaPorFamiliaButton(driver);
+		checkAfterSearchProductXfamilia(driver);
+	}
+	
+	@Validation
+	private static ChecksResult checkAfterSearchProductXfamilia(WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
+		validations.add(
+			"Aparece la tabla con los productos<br>",
+			PageGestorConsultaCambioFamilia.isTablaProductosVisible(driver), State.Defect);
+		validations.add(
+			"El campo de la tabla \"Traducción familia principal\" de la primera fila contiene el atributo \"Accesorios\"",
+			PageGestorConsultaCambioFamilia.checkFirstRowProductIsRight(driver), State.Defect);
+		return validations;
 	}
 
 	@Step (

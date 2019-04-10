@@ -21,10 +21,10 @@ public class PageOrdenacionDePrendasStpV {
 		selectShe(dFTest);
 	}
 
-	public static void mantoSeccionPrendas(DataFmwkTest dFTest) throws Exception {
-		selectSectionPrenda(dFTest);
-		selectTipoPrenda(dFTest);
-		bajarPrenda(dFTest);
+	public static void mantoSeccionPrendas(WebDriver driver) throws Exception {
+		selectSectionPrenda(driver);
+		selectTipoPrenda(driver);
+		bajarPrenda(driver);
 	}
 
 	public static void ordenacionModal(DataFmwkTest dFTest) throws Exception {
@@ -55,8 +55,6 @@ public class PageOrdenacionDePrendasStpV {
 	private static void selectPreProduccion(DataFmwkTest dFTest) throws Exception {
 		PageOrdenacionDePrendas.selectInDropDown(Orden.desplegableTiendas, "shop.pre.mango.com", dFTest.driver);
 		PageOrdenacionDePrendas.clickAndWait(Orden.verTiendas, dFTest.driver);
-
-		//Validaciones
 		validatePreProductionElements(dFTest.driver);
 	}
 
@@ -88,8 +86,6 @@ public class PageOrdenacionDePrendasStpV {
 		saveErrorPage = SaveWhen.Never)
 	private static void selectShe(DataFmwkTest dFTest) throws Exception {
 		SecModalPersonalizacion.selectElement(Section.She, dFTest.driver);
-
-		//Validaciones
 		validateSectionShe(13, dFTest.driver);
 	}
 
@@ -104,11 +100,9 @@ public class PageOrdenacionDePrendasStpV {
 		description="Seleccionamos la sección de <b>prendas</b> en el desplegable",
 		expected="Nos aparece otro desplegable con los tipos de prenda",
 		saveErrorPage = SaveWhen.Never)
-	private static void selectSectionPrenda(DataFmwkTest dFTest){
-		PageOrdenacionDePrendas.selectInDropDown(Orden.selectorOrdenacion, "prendas_she", dFTest.driver);
-
-		//Validaciones
-		validateSectionPrenda(dFTest.driver);
+	private static void selectSectionPrenda(WebDriver driver){
+		PageOrdenacionDePrendas.selectInDropDown(Orden.selectorOrdenacion, "prendas_she", driver);
+		validateSectionPrenda(driver);
 	}
 
     @Validation
@@ -128,23 +122,23 @@ public class PageOrdenacionDePrendasStpV {
 		description="Seleccionamos <b>Camisas</b> en el desplegable de tipo de prenda y confirmamos nuestra seleccion",
 		expected="Aparecen fotos en pantalla",
 		saveErrorPage = SaveWhen.Never)
-	private static void selectTipoPrenda(DataFmwkTest dFTest) throws Exception {
-		SecModalPersonalizacion.selectInDropDown(Orden.selectorPrendas, "camisas_she", dFTest.driver);
-		int secondsWaitElement = 10;
-		SecModalPersonalizacion.selectElementWaitingForAvailability(Orden.verPrendas, secondsWaitElement, dFTest.driver);
-		//Validaciones
-		validateTipoPrenda(dFTest.driver, secondsWaitElement);
+	private static void selectTipoPrenda(WebDriver driver) throws Exception {
+		SecModalPersonalizacion.selectInDropDown(Orden.selectorPrendas, "camisas_she", driver);
+		int secondsWaitElement = 2;
+		SecModalPersonalizacion.selectElementWaitingForAvailability(Orden.verPrendas, secondsWaitElement, driver);
+		validateTipoPrenda(driver);
 	}
 
 	@Validation
-	private static ChecksResult validateTipoPrenda(WebDriver driver, int maxSecondsWait) {
+	private static ChecksResult validateTipoPrenda(WebDriver driver) {
         ChecksResult validations = ChecksResult.getNew();
+        int maxSecondsWait = 20;
         validations.add(
-            "Aparecen imagenes en la nueva página<br>",
+            "Aparecen imagenes en la nueva página (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
             PageOrdenacionDePrendas.isElementInStateUntil(Orden.pruebaImagen, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
             "Estamos en la sección que corresponde <b>camisas</b>",
-            PageOrdenacionDePrendas.isElementInStateUntil(Orden.pruebaCamisa, StateElem.Visible, maxSecondsWait, driver), State.Defect);
+            PageOrdenacionDePrendas.isElementInState(Orden.pruebaCamisa, StateElem.Visible, driver), State.Defect);
         return validations;
     }
 
@@ -152,12 +146,10 @@ public class PageOrdenacionDePrendasStpV {
 		description="Enviamos la primera prenda al final",
 		expected="La prenda ha cambiado",
 		saveErrorPage = SaveWhen.Never)
-	private static void bajarPrenda(DataFmwkTest dFTest) throws Exception {
-		PageOrdenacionDePrendas.clickAndWait(Orden.primeraPrenda, dFTest.driver);
-		PageOrdenacionDePrendas.moveToAndSelectElement(Orden.bajarPrenda, dFTest.driver);
-
-		//Validaciones
-		validateBajarPrenda(dFTest.driver, 15);
+	private static void bajarPrenda(WebDriver driver) throws Exception {
+		PageOrdenacionDePrendas.clickAndWait(Orden.primeraPrenda, driver);
+		PageOrdenacionDePrendas.moveToAndSelectElement(Orden.bajarPrenda, driver);
+		validateBajarPrenda(driver, 15);
 	}
 
     @Validation
@@ -178,8 +170,6 @@ public class PageOrdenacionDePrendasStpV {
 		saveErrorPage = SaveWhen.Never)
 	private static void aplicarOrden (DataFmwkTest dFTest) throws Exception {
 		PageOrdenacionDePrendas.selectElement(Orden.aplicarOrden, dFTest.driver);
-
-		//Validaciones
 		validateAplicarOrden(dFTest.driver);
 	}
 
@@ -208,8 +198,6 @@ public class PageOrdenacionDePrendasStpV {
 		saveErrorPage = SaveWhen.Never)
 	private static void aceptarOrdenPais (DataFmwkTest dFTest) throws Exception {
 		SecModalPersonalizacion.selectElement(Modal.applyCountry, dFTest.driver);
-
-		//Validaciones
 		validateBajarPrenda(dFTest.driver, 10);
 	}
 }

@@ -93,7 +93,6 @@ public class Manto extends GestorWebDriver {
     	this.dPedidoPrueba = PagePedidosMantoStpV.getTiendaFisicaListaPedidos(this.dPedidoPrueba, dFTest);
     }
 
-
 	@Test(
 		dependsOnMethods = { "MAN000_GenerarPedidoFicticioMANTO" },
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
@@ -186,17 +185,13 @@ public class Manto extends GestorWebDriver {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta de estadísticas de pedidos")
 	public void MAN005_GestorEstadisticasPedidos() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest.driver);
-	
-		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
-	
-		PageMenusMantoStpV.goToGestorEstadisticasPedido(dFTest.driver);
-	
-		PageGestorEstadisticasPedidoStpV.searchZalandoOrdersInformation(dFTest);
+		WebDriver driver = TestCaseData.getWebDriver();
 		
-		PageGestorEstadisticasPedidoStpV.compareLastDayInformation(dFTest);
+		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
+		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
+		PageMenusMantoStpV.goToGestorEstadisticasPedido(driver);
+		PageGestorEstadisticasPedidoStpV.searchZalandoOrdersInformation(driver);
+		PageGestorEstadisticasPedidoStpV.compareLastDayInformation(driver);
 	}
 	
 	
@@ -204,35 +199,31 @@ public class Manto extends GestorWebDriver {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Gestor de saldos de TPV")
 	public void MAN006_GestorSaldosTPV() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest.driver);
+		WebDriver driver = TestCaseData.getWebDriver();
+		
+		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
+		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
 	
-		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
-	
-		PageMenusMantoStpV.goToGestorSaldosTPV(dFTest.driver);
+		PageMenusMantoStpV.goToGestorSaldosTPV(driver);
 	
 		this.tpv = "600";
-		PageGestorSaldosTPVStpV.searchValidTPV(this.tpv, dFTest);
+		PageGestorSaldosTPVStpV.searchValidTPV(this.tpv, driver);
 		
 		this.tpv = "4238";
-		PageGestorSaldosTPVStpV.searchUnvalidTPV(this.tpv, dFTest);
+		PageGestorSaldosTPVStpV.searchUnvalidTPV(this.tpv, driver);
 	}
 	
 	@Test(
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Gestor de consulta y cambio de familia")
 	public void MAN007_GestorConsultaCambioFamilia() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest.driver);
-	
-		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
-	
-		PageMenusMantoStpV.goToGestorConsultaCambioFamilia(dFTest.driver);
-	
-		PageGestorConsultaCambioFamiliaStpV.selectAccesoriosAndClickConsultaPorFamiliaButton(dFTest);
-		PageGestorConsultaCambioFamiliaStpV.clickCambioFamiliaButton(dFTest.driver);
+		WebDriver driver = TestCaseData.getWebDriver();
+		
+		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
+		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
+		PageMenusMantoStpV.goToGestorConsultaCambioFamilia(driver);
+		PageGestorConsultaCambioFamiliaStpV.selectAccesoriosAndClickConsultaPorFamiliaButton(driver);
+		PageGestorConsultaCambioFamiliaStpV.clickCambioFamiliaButton(driver);
 	}
 	
 	@Test(
@@ -247,7 +238,7 @@ public class Manto extends GestorWebDriver {
 		
 		PageMenusMantoStpV.goToOrdenadorDePrendas(dFTest.driver);
 		PageOrdenacionDePrendasStpV.mantoOrdenacionInicio(dFTest);
-		PageOrdenacionDePrendasStpV.mantoSeccionPrendas(dFTest);
+		PageOrdenacionDePrendasStpV.mantoSeccionPrendas(dFTest.driver);
 		PageOrdenacionDePrendasStpV.ordenacionModal(dFTest);		
 	}
 }

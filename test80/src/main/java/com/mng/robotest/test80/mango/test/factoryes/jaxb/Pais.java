@@ -388,6 +388,10 @@ public class Pais {
         
         return false;
     }
+    
+    public boolean isEspanya() {
+    	return ("001".compareTo(getCodigo_pais())==0);
+    }
         
     /**
      * Obtiene la lista de pagos correspondientes al Shop, Outlet o votf en el orden en el que se testearán 

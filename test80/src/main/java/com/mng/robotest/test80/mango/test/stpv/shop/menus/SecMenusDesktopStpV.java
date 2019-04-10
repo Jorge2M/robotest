@@ -30,6 +30,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBannersScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.LabelArticle;
+import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.ListSizesArticle;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.ControlTemporada;
@@ -488,12 +489,17 @@ public class SecMenusDesktopStpV {
     	checkErrorPageWithoutException(driver);
     	GroupMenu groupMenu = menu.getGroup();
     	if (groupMenu.canContainElement(Element.article)) {
+    		if (dCtxSh.pais.isEspanya()) {
+    			checkSizeDivImages(dCtxSh, driver);
+    		}
             Menu1rstLevel menuPromocion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(menu.getLinea(), menu.getSublinea(), "promocion"));
             menuPromocion.setDataGaLabel("promocion");
-            if (dCtxSh.pais.getCodigo_pais().compareTo("720")==0) {
-            	validationsSpecificEndRebajasChina(dCtxSh, driver);
-            }
-            validationsRebajas(dCtxSh.channel, dCtxSh.appE, driver);
+
+            //TODO activar en época de rebajas
+//            if (dCtxSh.pais.getCodigo_pais().compareTo("720")==0) {
+//            	validationsSpecificEndRebajasChina(dCtxSh, driver);
+//            }
+//            validationsRebajas(dCtxSh.channel, dCtxSh.appE, driver);
     	}
     	
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
@@ -501,6 +507,35 @@ public class SecMenusDesktopStpV {
         flagsVal.validaJS = true;
         flagsVal.validaImgBroken = true;
         AllPagesStpV.validacionesEstandar(flagsVal, driver);
+    }
+    
+    @Validation
+    private static ChecksResult checkSizeDivImages(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		int numPage = 1; 
+		int marginPixelsError = 1;
+	  	ListSizesArticle listArtWrong1rstPage = pageGaleriaDesktop.getArticlesWithWrongSize(numPage, marginPixelsError);
+	 	validations.add(
+			"Los div de los artículos de la " + numPage + "a página tienen un tamaño acorde al especificado en el atributo width de su imagen " + 
+			"(con un margen de error de " + marginPixelsError + " píxeles)" +
+			getLiteralWarningArticlesSizesWrong(listArtWrong1rstPage),
+			listArtWrong1rstPage.size()==0, State.Defect);
+	 	
+	 	return validations;
+    }
+    
+    private static String getLiteralWarningArticlesSizesWrong(ListSizesArticle listArtWrong) {
+	  	String warningMessage = "";
+	    if (listArtWrong.size() > 0) {
+	    	warningMessage+=(
+	            "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
+	            "hay " + listArtWrong.size() + " artículos con tamaño incorrecto:<br>" +
+	            listArtWrong.getListHtml() +
+	            "</lin>");
+	    }
+	    
+	    return warningMessage;
     }
     
     @Validation

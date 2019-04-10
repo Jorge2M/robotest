@@ -18,14 +18,7 @@ public class PageBolsasMantoStpV {
 
 	@Validation
     public static ChecksResultWithFlagLinkCodPed validaLineaBolsa(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
-//    	//TODO tratamiento específico temporal para el entorno de CI con Adyen -> Level.Info 
-//    	//(hasta que dispongamos de la CI que despliega Adyen y el resto de artefactos satelitales)
-//        State levelByCIAdyen = State.Warn;
-//    	if (dataPedido.getPago().isAdyen() &&
-//        	UtilsMangoTest.isEntornoCI(appE, dFTest))
-//    		levelByCIAdyen = State.Info;
 		ChecksResultWithFlagLinkCodPed validations = ChecksResultWithFlagLinkCodPed.getNew();
-		
         int maxSecondsWait = 1;
         boolean isPresentLinkPedido = PageBolsas.presentLinkPedidoInBolsaUntil(dataPedido.getCodigoPedidoManto(), maxSecondsWait, driver);
 	 	if (isPresentLinkPedido) {
@@ -53,23 +46,5 @@ public class PageBolsasMantoStpV {
 			PageBolsas.presentCorreoInBolsa(driver, dataPedido.getEmailCheckout()), State.Warn);
         
         return validations;
-    }
-	
-    public static class ChecksResultWithFlagLinkCodPed extends ChecksResult {
-    	boolean existsLinkCodPed;
-    	private ChecksResultWithFlagLinkCodPed() {
-    		super();
-    	}
-    	public static ChecksResultWithFlagLinkCodPed getNew() {
-    		return (new ChecksResultWithFlagLinkCodPed());
-    	}
-    	
-    	public boolean getExistsLinkCodPed() {
-    		return this.existsLinkCodPed;
-    	}
-    	
-    	public void setExistsLinkCodPed(boolean existsLinkCodPed) {
-    		this.existsLinkCodPed = existsLinkCodPed;
-    	}
     }
 }

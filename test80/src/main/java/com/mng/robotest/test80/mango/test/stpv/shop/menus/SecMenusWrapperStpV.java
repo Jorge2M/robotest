@@ -43,32 +43,11 @@ public class SecMenusWrapperStpV {
 	
     public static SecMenusUserStpV secMenuUser;
     
-    public static void validateLineas(Pais pais, AppEcom app, Channel channel, WebDriver driver) 
+    @Validation
+    public static ChecksResult validateLineas(Pais pais, AppEcom app, Channel channel, WebDriver driver) 
     throws Exception {
-    	DatosStep datosStep = TestCaseData.getDatosLastStep();
-        String descripValidac = "";
-        datosStep.setNOKstateByDefault();
-        ChecksResult listVals = ChecksResult.getNew(datosStep);
-        try {
-            //Ejecutamos las validaciones y obtenemos el literal con la descrpción de cada una de ellas
-            descripValidac = getListaValidacionesLineas(listVals, pais, app, channel, driver);
-            
-            datosStep.setListResultValidations(listVals);
-        } 
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-    }
-    
-    /**
-     * Genera los literales de las validacioens + Aplica dichas validaciones
-     * @listVals con la lista de validaciones fallidas si las hubiera
-     * @return la lista de validaciones
-     */
-    private static String getListaValidacionesLineas(ChecksResult listVals, Pais pais, AppEcom app, Channel channel, WebDriver driver) 
-    throws Exception {
+        ChecksResult validations = ChecksResult.getNew();
         LineaType[] lineasToTest = Linea.LineaType.values();
-        int numValidacion = 0;
-        String descripValidac = "";
-        
         for (LineaType lineaType : lineasToTest) {
             ThreeState stateLinea = pais.getShoponline().stateLinea(lineaType, app);
             if ( stateLinea!=ThreeState.UNKNOWN &&
@@ -76,26 +55,25 @@ public class SecMenusWrapperStpV {
                 ThreeState apareceLinea = stateLinea;
                 
                 //Caso especial de un país con una sóla línea de she -> No ha de aparecer la línea de she
-                if (lineaType==LineaType.she && app!=AppEcom.outlet && pais.getShoponline().getNumLineasTiendas(app)==1)
+                if (lineaType==LineaType.she && app!=AppEcom.outlet && pais.getShoponline().getNumLineasTiendas(app)==1) {
                     apareceLinea = ThreeState.FALSE;
+                }
                 
+                boolean isLineaPresent = SecMenusWrap.isLineaPresent(lineaType, app, channel, driver);
                 if (apareceLinea==ThreeState.TRUE) {
-                    numValidacion+=1;
-                    descripValidac+=numValidacion + ") <b>Sí</b> aparece el link de la línea \"<b>" + lineaType + "</b>\"<br>";
-                    if (!SecMenusWrap.isLineaPresent(lineaType, app, channel, driver))
-                        listVals.add(numValidacion, State.Warn);
+            		validations.add (
+        				"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b><br>",
+        				isLineaPresent, State.Warn);
                 }    
                 else {
-                    numValidacion+=1;
-                    descripValidac+=numValidacion + ") <b>No</b> aparece el link de la línea \"<b>" + lineaType + "</b>\"<br>";
-                    if (SecMenusWrap.isLineaPresent(lineaType, app, channel, driver)) {
-                        listVals.add(numValidacion, State.Warn);
-                    }
+            		validations.add (
+            			"<b>No</b> aparece el link de la línea <b>" + lineaType + "</b><br>",
+            			!isLineaPresent, State.Warn);
                 }
             }
         }
-        
-        return descripValidac;
+            
+        return validations;
     }
     
     /**
@@ -108,6 +86,7 @@ public class SecMenusWrapperStpV {
         //Obtenemos la lista de menús de la línea
         Linea linea = dCtxSh.pais.getShoponline().getLinea(lineaType);
         List<String> listMenusLabel = SecMenusWrap.getListDataLabelsMenus(linea, sublineaType, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        //for (int i=0; i<5; i++) {
         for (int i=0; i<listMenusLabel.size(); i++) {
             try {
             	//Creamos un menú con el nombre=dataGaLabel (pues todavía no lo conocemos)
@@ -211,7 +190,6 @@ public class SecMenusWrapperStpV {
 		PageGaleria pageGaleria = PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		int maxSecondsToWaitArticle = 3;
 		int maxSecondsToWaitIcon = 2;
-		
 		validations.add (
 			"Como mínimo se obtiene un artículo (lo esperamos hasta " + maxSecondsToWaitArticle + " segundos)<br>",
 			pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, maxSecondsToWaitArticle), State.Warn);

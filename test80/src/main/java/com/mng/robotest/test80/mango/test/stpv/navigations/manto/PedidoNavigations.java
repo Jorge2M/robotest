@@ -49,7 +49,7 @@ public class PedidoNavigations {
         TypeAccessFmwk typeAccess = utils.getTypeAccessFmwk(dFTest.ctx);
         if (dataCheckPedidos.areChecksToExecute() && typeAccess!=TypeAccessFmwk.Bat) {
             PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, dFTest.driver);
-            PedidoNavigations.validacionListPedidosStpVs(dataCheckPedidos, dMantoAcc.appE, dFTest);
+            PedidoNavigations.validacionListPedidosStpVs(dataCheckPedidos, dMantoAcc.appE, dFTest.driver);
         }
     }
     
@@ -57,13 +57,13 @@ public class PedidoNavigations {
      * Partiendo de la página de menús, ejecutamos todos los pasos/validaciones para validar una lista de pedidos
      * @param listPaisPedido lista de pedidos a validar
      */
-    public static void validacionListPedidosStpVs(DataCheckPedidos dataCheckPedidos, AppEcom appE, DataFmwkTest dFTest) 
+    public static void validacionListPedidosStpVs(DataCheckPedidos dataCheckPedidos, AppEcom appE, WebDriver driver) 
     throws Exception {
     	List<CheckPedido> listChecks = dataCheckPedidos.getListChecks();
         for (DataPedido dataPedido : dataCheckPedidos.getListPedidos()) {
             if (dataPedido.isResultadoOk()) {
                 try {
-                    validaPedidoStpVs(dataPedido, listChecks, appE, dFTest);
+                    validaPedidoStpVs(dataPedido, listChecks, appE, driver);
                 }
                 catch (Exception e) {
                     pLogger.warn("Problem in validation of Pedido", e);
@@ -75,20 +75,20 @@ public class PedidoNavigations {
     /**
      * Se ejecuta todo el flujo de pasos/validaciones para validar un pedido concreto y volvemos a la página de pedidos
      */
-    public static void validaPedidoStpVs(DataPedido dataPedido, List<CheckPedido> listChecks, AppEcom app, DataFmwkTest dFTest) 
+    public static void validaPedidoStpVs(DataPedido dataPedido, List<CheckPedido> listChecks, AppEcom app, WebDriver driver) 
     throws Exception {
-        PageSelTdaMantoStpV.selectTienda(dataPedido.getCodigoAlmacen(), dataPedido.getCodigoPais(), app, dFTest.driver);
+        PageSelTdaMantoStpV.selectTienda(dataPedido.getCodigoAlmacen(), dataPedido.getCodigoPais(), app, driver);
         if (listChecks.contains(CheckPedido.consultarBolsa)) {
-        	consultarBolsaStpV(dataPedido, app, dFTest.driver);
+        	consultarBolsaStpV(dataPedido, app, driver);
         }
         
         if (app!=AppEcom.votf) {
 	        if (listChecks.contains(CheckPedido.consultarPedido)) {
-	        	consultarPedidoStpV(dataPedido, app, dFTest);	
+	        	consultarPedidoStpV(dataPedido, app, driver);	
 	        }
 	        
 	        if (listChecks.contains(CheckPedido.anular)) {
-	        	anularPedidoStpV(dataPedido, app, dFTest);
+	        	anularPedidoStpV(dataPedido, app, driver);
 	        }
         }
         
@@ -106,21 +106,21 @@ public class PedidoNavigations {
         }
     }
     
-    private static void consultarPedidoStpV(DataPedido dataPedido, AppEcom app, DataFmwkTest dFTest) throws Exception {
-        PageMenusMantoStpV.goToPedidos(dFTest.driver);
-        SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.PEDIDO, dFTest.driver);
-        boolean existLinkPedido = PagePedidosMantoStpV.validaLineaPedido(dataPedido, app, dFTest);
+    private static void consultarPedidoStpV(DataPedido dataPedido, AppEcom app, WebDriver driver) throws Exception {
+        PageMenusMantoStpV.goToPedidos(driver);
+        SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.PEDIDO, driver);
+        boolean existLinkPedido = PagePedidosMantoStpV.validaLineaPedido(dataPedido, app, driver).getExistsLinkCodPed();
         if (existLinkPedido) {
-            PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.pedido, app, dFTest.driver);
+            PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.pedido, app, driver);
         }
     }
     
-    private static void anularPedidoStpV(DataPedido dataPedido, AppEcom app, DataFmwkTest dFTest) throws Exception {
-    	if (!PageDetallePedido.isPage(dataPedido.getCodigoPedidoManto(), dFTest.driver)) {
-    		consultarPedidoStpV(dataPedido, app, dFTest);
+    private static void anularPedidoStpV(DataPedido dataPedido, AppEcom app, WebDriver driver) throws Exception {
+    	if (!PageDetallePedido.isPage(dataPedido.getCodigoPedidoManto(), driver)) {
+    		consultarPedidoStpV(dataPedido, app, driver);
     	}
     	
-    	PageConsultaPedidoBolsaStpV.clickButtonIrAGenerar(dataPedido.getCodigoPedidoManto(), dFTest.driver);
-    	PageGenerarPedidoStpV.changePedidoToEstado(ANULADO, dFTest.driver);
+    	PageConsultaPedidoBolsaStpV.clickButtonIrAGenerar(dataPedido.getCodigoPedidoManto(), driver);
+    	PageGenerarPedidoStpV.changePedidoToEstado(ANULADO, driver);
     }
 }

@@ -2,12 +2,13 @@ package com.mng.robotest.test80.mango.test.stpv.manto.pedido;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.StepAspect;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
+import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
@@ -19,6 +20,7 @@ import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageDetallePed
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PagePedidos;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PagePedidos.IdColumn;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PagePedidos.TypeDetalle;
+import com.mng.robotest.test80.mango.test.stpv.manto.ChecksResultWithFlagLinkCodPed;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.DataDeliveryPoint;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -30,70 +32,49 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class PagePedidosMantoStpV {
 
-    /**
-     * Se valida que está apareciendo una línea de pedido con los datos del pedido
-     * @return si existe el link correspondiente al código de pedido 
-     */
-    public static boolean validaLineaPedido(DataPedido dataPedido, AppEcom appE, DataFmwkTest dFTest) {
-    	DatosStep datosStep = TestCaseData.getDatosLastStep();
-//    	//TODO tratamiento específico temporal para el entorno de CI con Adyen -> Level.Info 
-//    	//(hasta que dispongamos de la CI que despliega Adyen y el resto de artefactos satelitales)
-//        State levelByCIAdyen = State.Warn;
-//    	if (dataPedido.getPago().isAdyen() &&
-//        	UtilsMangoTest.isEntornoCI(appE, dFTest))
-//    		levelByCIAdyen = State.Info;
-
-        boolean existsLinkPedido = true;
+	@Validation
+    public static ChecksResultWithFlagLinkCodPed validaLineaPedido(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
+    	ChecksResultWithFlagLinkCodPed validations = ChecksResultWithFlagLinkCodPed.getNew();
+    	
         int maxSecondsToWait = 30;
-        String descripValidac =
-            "1) Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + maxSecondsToWait + " segundos) + <br>" +
-            "2) En la columna " + IdColumn.idpedido.textoColumna + " aparece el código de pedido: " + dataPedido.getCodigoPedidoManto() + "<br>" +                
-            "3) Aparece un solo pedido <br>";
-        if (appE!=AppEcom.outlet) //En el caso de Outlet no tenemos la información del TPV que toca
-            descripValidac+=
-            "4) En la columna " + IdColumn.tpv.textoColumna + " Aparece el Tpv asociado: " + dataPedido.getPago().getTpv().getId() + "<br>";
+	 	validations.add(
+			"Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + maxSecondsToWait + " segundos) + <br>",
+			PagePedidos.isInvisibleCapaLoadingUntil(maxSecondsToWait, driver), State.Warn);
+	 	
+        boolean existsLinkPedido = PagePedidos.isPresentDataInPedido(IdColumn.idpedido, dataPedido.getCodigoPedidoManto(), TypeDetalle.pedido, 0, driver);
+	 	validations.add(
+			"En la columna " + IdColumn.idpedido.textoColumna + " aparece el código de pedido: " + dataPedido.getCodigoPedidoManto() + "<br>",
+			existsLinkPedido, State.Warn);
+	 	validations.add(
+			"Aparece un solo pedido <br>",
+			PagePedidos.getNumLineas(driver)==1, State.Warn);
+    	
+	 	//En el caso de Outlet no tenemos la información del TPV que toca
+	 	if (appE!=AppEcom.outlet) {
+		 	validations.add(
+				"En la columna " + IdColumn.tpv.textoColumna + " Aparece el Tpv asociado: " + dataPedido.getPago().getTpv().getId() + "<br>",
+				PagePedidos.isPresentDataInPedido(IdColumn.tpv, dataPedido.getPago().getTpv().getId(), TypeDetalle.pedido, 0, driver), 
+				State.Warn);
+	 	}
+    	
+	 	validations.add(
+			"En la columna " + IdColumn.email.textoColumna + " aparece el email asociado: " + dataPedido.getEmailCheckout() + "<br>",
+			PagePedidos.isPresentDataInPedido(IdColumn.email, dataPedido.getEmailCheckout(), TypeDetalle.pedido, 0, driver), 
+			State.Warn);
+	 	
+	 	String xpathCeldaImporte = PagePedidos.getXPathCeldaLineaPedido(IdColumn.total, TypeDetalle.pedido, driver);
+	 	validations.add(
+			"En pantalla aparece el importe asociado: " +  dataPedido.getImporteTotalManto() + "<br>",
+			ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), xpathCeldaImporte, driver), 
+			State.Warn);
+	 	validations.add(
+			"En la columna " + IdColumn.tarjeta.textoColumna + " aparece el tipo de tarjeta: " + dataPedido.getCodtipopago(),
+			PagePedidos.isPresentDataInPedido(IdColumn.tarjeta, dataPedido.getCodtipopago(), TypeDetalle.pedido, 0, driver), 
+			State.Warn);
         
-        descripValidac+=
-            "5) En la columna " + IdColumn.email.textoColumna + " aparece el email asociado: " + dataPedido.getEmailCheckout() + "<br>" +
-            "6) En pantalla aparece el importe asociado: " +  dataPedido.getImporteTotalManto() + "<br>" +
-            "7) En la columna " + IdColumn.tarjeta.textoColumna + " aparece el tipo de tarjeta: " + dataPedido.getCodtipopago();
-        datosStep.setNOKstateByDefault();
-        ChecksResult listVals = ChecksResult.getNew(datosStep);
-        try {
-            if (!PagePedidos.isInvisibleCapaLoadingUntil(maxSecondsToWait, dFTest.driver)) {
-                listVals.add(1, State.Warn);
-            }
-            if (!PagePedidos.isPresentDataInPedido(IdColumn.idpedido, dataPedido.getCodigoPedidoManto(), TypeDetalle.pedido, 0/*wait*/, dFTest.driver)) {
-                listVals.add(2, State.Warn);
-                existsLinkPedido = false;
-            }
-            if (PagePedidos.getNumLineas(dFTest.driver)!=1) {
-                listVals.add(3, State.Warn);            
-            }
-            if (appE!=AppEcom.outlet) { 
-                if (!PagePedidos.isPresentDataInPedido(IdColumn.tpv, dataPedido.getPago().getTpv().getId(), TypeDetalle.pedido, 0/*wait*/, dFTest.driver)) {           	
-                    listVals.add(4, State.Warn);
-                }
-            }
-            if (!PagePedidos.isPresentDataInPedido(IdColumn.email, dataPedido.getEmailCheckout(), TypeDetalle.pedido, 0/*wait*/, dFTest.driver)) {
-                listVals.add(5, State.Warn);
-            }
-            String xpathCeldaImporte = PagePedidos.getXPathCeldaLineaPedido(IdColumn.total, TypeDetalle.pedido, dFTest.driver);
-            if (!ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), xpathCeldaImporte, dFTest.driver)) {
-                listVals.add(6, State.Warn);
-            }
-            if (!PagePedidos.isPresentDataInPedido(IdColumn.tarjeta, dataPedido.getCodtipopago(), TypeDetalle.pedido, 0/*wait*/, dFTest.driver)) {
-                listVals.add(7, State.Warn);     
-            }
-                                       
-            datosStep.setListResultValidations(listVals); 
-        }  
-        finally { listVals.checkAndStoreValidations(descripValidac); }
-        
-        return existsLinkPedido;
+        return validations;
     }
     
-
     /**
      * Se busca un pedido con DNI para las pruebas en manto
      * @return DataPedido con el ID pedido seteado
