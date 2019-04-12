@@ -1,7 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.navigations.manto;
 
 import java.util.concurrent.CopyOnWriteArrayList;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -15,13 +15,13 @@ public class SecQuickViewArticuloStpV {
         ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 2;
         validations.add(
-        	"Aparece el quickview correspondiente al artículo (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+        	"Aparece el quickview correspondiente al artículo (la esperamos hasta " + maxSecondsWait + " segundos)",
         	PageMisCompras.SecQuickViewArticulo.isVisibleUntil(maxSecondsWait, driver), State.Warn);
         validations.add(
-        	"Se muestra la referencia " + articulo.getReferencia() + "<br>",
+        	"Se muestra la referencia " + articulo.getReferencia(),
         	PageMisCompras.SecQuickViewArticulo.getReferencia(driver).compareTo(articulo.getReferencia())==0, State.Warn);
         validations.add(
-        	"Se muestra el nombre " + articulo.getNombre() + "<br>",
+        	"Se muestra el nombre " + articulo.getNombre(),
         	PageMisCompras.SecQuickViewArticulo.getNombre(driver).compareTo(articulo.getNombre())==0, State.Warn);
         validations.add(
         	"Se muestra el precio " + articulo.getPrecio(),

@@ -27,7 +27,7 @@ public class PageHomeLikesStpV {
     	ChecksResult validations = ChecksResult.getNew();
     	PageHomeLikes pageLikes = PageHomeLikes.getNewInstance(driver);
     	validations.add(
-    		"Aparece la página de <b>Mango likes you</b><br>",
+    		"Aparece la página de <b>Mango likes you</b>",
     		pageLikes.checkIsPage(), State.Defect);
     	validations.add(
     		"Aparecen bloques para el canjeo de Likes",
@@ -56,10 +56,10 @@ public class PageHomeLikesStpV {
 		ChecksResult validations = ChecksResult.getNew();
 		PageHomePurchaseWithDiscount pageHomePurchaseWithDiscount = PageHomePurchaseWithDiscount.getNewInstance(driver);
 		validations.add(
-				"Aparece la página de <b>Descuento Mango likes you</b><br>",
+				"Aparece la página de <b>Descuento Mango likes you</b>",
 				pageHomePurchaseWithDiscount.checkIsPage(), State.Defect);
 		validations.add(
-				"Aparece el boton que permite <b>comprar ahora</b><br>",
+				"Aparece el boton que permite <b>comprar ahora</b>",
 				pageHomePurchaseWithDiscount.areVisibleButtonPurchaseNow(), State.Defect);
 		return validations;
 	}
@@ -69,10 +69,10 @@ public class PageHomeLikesStpV {
 		ChecksResult validations = ChecksResult.getNew();
 		PageHomeDonateLikes pageHomeDonateLikes = PageHomeDonateLikes.getNewInstance(driver);
 		validations.add(
-				"Aparece la pagina de <b>Donar Likes<b><br>",
+				"Aparece la pagina de <b>Donar Likes<b>",
 				pageHomeDonateLikes.checkIsPage(), State.Defect);
 		validations.add(
-				"Aparece los botones de <b>Donar likes</b><br>",
+				"Aparece los botones de <b>Donar likes</b>",
 				pageHomeDonateLikes.areVisibleButtonsDonateLikes(), State.Defect);
 		return validations;
 	}

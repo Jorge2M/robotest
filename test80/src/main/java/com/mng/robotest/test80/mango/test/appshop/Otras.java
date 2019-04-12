@@ -289,7 +289,7 @@ public class Otras extends GestorWebDriver {
     	ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 3;
     	validations.add(
-    		"Estamos en la página inicial de Japón (la esperamos hasta " + maxSecondsWait + ")<br>",
+    		"Estamos en la página inicial de Japón (la esperamos hasta " + maxSecondsWait + ")",
     		PageIniShopJapon.isPageUntil(maxSecondsWait, driver), State.Defect);
     	validations.add(
     		"Estamos en la página inicial de Japón (la esperamos hasta " + maxSecondsWait + ")",

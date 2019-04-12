@@ -103,41 +103,41 @@ public class AccesoStpV {
 		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
     	validations.add(
-    		"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + maxSecondsWait + " segundos)",
     		SecMenusWrap.secMenusUser.isPresentMiCuentaUntil(dCtxSh.channel, maxSecondsWait, driver), State.Defect);
 		
 		boolean isVisibleLinkFavoritos = SecMenusWrap.secMenusUser.isPresentFavoritos(dCtxSh.channel, driver);
 		if (dCtxSh.appE==AppEcom.outlet) { 
 	    	validations.add(
-	    		"NO aparece el link \"Favoritos\"<br>",
+	    		"NO aparece el link \"Favoritos\"",
 	    		!isVisibleLinkFavoritos, State.Defect);
 	    	validations.add(
-	    		"Aparece el link \"Mis Pedidos\"<br>",
+	    		"Aparece el link \"Mis Pedidos\"",
 	    		SecMenusWrap.secMenusUser.isPresentPedidos(dCtxSh.channel, driver), State.Defect);
 		}
 		else {
 	    	validations.add(
-	    		"Aparece el link \"Favoritos\"<br>",
+	    		"Aparece el link \"Favoritos\"",
 	    		isVisibleLinkFavoritos, State.Defect);
 	    	
 	    	boolean isPresentLinkMisCompras = SecMenusWrap.secMenusUser.isPresentMisCompras(dCtxSh.channel, driver);
 	    	if (dCtxSh.pais.isMisCompras()) {
 		    	validations.add(
-		    		"Aparece el link \"Mis Compras\"<br>",
+		    		"Aparece el link \"Mis Compras\"",
 		    		isPresentLinkMisCompras, State.Defect);
 	    	}
 	    	else {
 		    	validations.add(
-		    		"No aparece el link \"Mis Compras\"<br>",
+		    		"No aparece el link \"Mis Compras\"",
 		    		!isPresentLinkMisCompras, State.Defect);
 	    	}
 		}
 		
     	validations.add(
-    		"Aparece el link \"Ayuda\"<br>",
+    		"Aparece el link \"Ayuda\"",
     		SecMenusWrap.secMenusUser.isPresentAyuda(dCtxSh.channel, driver), State.Defect);
     	validations.add(
-    		"Aparece el link \"Cerrar sesión\"<br>",
+    		"Aparece el link \"Cerrar sesión\"",
     		SecMenusWrap.secMenusUser.isPresentCerrarSesion(dCtxSh.channel, driver), State.Defect);
     	
         if (dCtxSh.channel==Channel.desktop) {
@@ -294,26 +294,26 @@ public class AccesoStpV {
     															 List<Pais> listPaisAsocIP, WebDriver driver) throws Exception {
     	ResultValWithPais validations = ResultValWithPais.getNew();
     	validations.add(
-    		"Aparece un modal solicitando confirmación de país<br>",
+    		"Aparece un modal solicitando confirmación de país",
     		ModalCambioPais.isVisibleModalUntil(driver, 0), State.Defect);
     	
         if (paisAccesoPrevio==null) {
         	validations.add(
         		"En el modal <b>No</b> aparece un link con la opción de confirmar el país " + paisAccesoNoIP.getNombre_pais() + 
-        		" (" + paisAccesoNoIP.getCodigo_pais() + ")<br>",
+        		" (" + paisAccesoNoIP.getCodigo_pais() + ")",
         		!ModalCambioPais.isLinkToConfirmPais(driver, paisAccesoNoIP.getNombre_pais()), State.Defect);
         }
         else {
         	if (paisConfirmado==null) {
 	        	validations.add(
 	        		"En el modal <b>Sí</b> aparece un link con la opción de confirmar el acceso al país por el que previsamente se ha accedido vía URL: " + 
-	        		paisAccesoPrevio.getNombre_pais() + " (" + paisAccesoPrevio.getCodigo_pais() + ")<br>",
+	        		paisAccesoPrevio.getNombre_pais() + " (" + paisAccesoPrevio.getCodigo_pais() + ")",
 	        		ModalCambioPais.isLinkToConfirmPais(driver, paisAccesoPrevio.getUrlPaisEstandar(urlBaseTest)), State.Defect);
         	}
         	else {
 	        	validations.add(
 	        		"En el modal <b>No</b> aparece un link con la opción de confirmar el acceso al país por el que previsamente se ha accedido vía URL: " + 
-	        		paisAccesoPrevio.getNombre_pais() + " (" + paisAccesoPrevio.getCodigo_pais() + ")<br>",
+	        		paisAccesoPrevio.getNombre_pais() + " (" + paisAccesoPrevio.getCodigo_pais() + ")",
 	        		!ModalCambioPais.isLinkToConfirmPais(driver, paisAccesoPrevio.getNombre_pais()), State.Defect);
         	}
         }
@@ -341,7 +341,7 @@ public class AccesoStpV {
     throws Exception {
     	ResultValWithPais validations = ResultValWithPais.getNew();
     	validations.add(
-    		"No aparece un modal solicitando confirmación de país<br>",
+    		"No aparece un modal solicitando confirmación de país",
     		!ModalCambioPais.isVisibleModalUntil(driver, 0), State.Defect);
     	
         String nombrePaisPrevConf = paisPrevConf.getNombre_pais();
@@ -407,10 +407,10 @@ public class AccesoStpV {
         int sessionCAct = nodoAct.getStatusJSON().getSessionCount();
         
     	validations.add(
-    		"El stock de los almacenes (" + stockAct + ") coincide (+-10%) con el del nodo " + nodoAnt.getIp() + "<br>",
+    		"El stock de los almacenes (" + stockAct + ") coincide (+-10%) con el del nodo " + nodoAnt.getIp(),
     		nodoAct.comparaStocksWarehouses(nodoAnt, 0.10), State.Warn);
     	validations.add(
-    		"La versión del shopconfig (" + vShopCAct + ") es igual que la del nodo " + nodoAnt.getIp() + "<br>",
+    		"La versión del shopconfig (" + vShopCAct + ") es igual que la del nodo " + nodoAnt.getIp(),
     		vShopCAct.compareTo(vShopCAnt)==0, State.Warn);
     	
         float divisor = Math.abs(sessionCAct - sessionCAnt);

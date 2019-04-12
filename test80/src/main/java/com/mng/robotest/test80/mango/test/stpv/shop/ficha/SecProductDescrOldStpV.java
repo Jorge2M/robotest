@@ -23,7 +23,7 @@ public class SecProductDescrOldStpV {
                 stateExpected = typePanel.getStateInitial();
             }
 	      	validations.add(
-	    		"El panel <b>" + typePanel + "</b> está en estado <b>" + stateExpected + "</b><br>",
+	    		"El panel <b>" + typePanel + "</b> está en estado <b>" + stateExpected + "</b>",
 	    		SecProductDescrOld.getStatePanel(typePanel, driver)==stateExpected, State.Defect);
     	}
     }

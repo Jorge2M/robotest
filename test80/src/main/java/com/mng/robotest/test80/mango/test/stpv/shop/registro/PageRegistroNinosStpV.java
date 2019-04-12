@@ -19,7 +19,7 @@ public class PageRegistroNinosStpV {
 		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsToWait = 5;
     	validations.add(
-    		"Aparece la página de introducción de datos del niño (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>",
+    		"Aparece la página de introducción de datos del niño (la esperamos un máximo de " + maxSecondsToWait + " segundos)",
     		PageRegistroNinos.isPageUntil(dFTest.driver, maxSecondsToWait), State.Defect);
     	validations.add(
     		"Aparecen inputs para introducir <b>" + numNinos + "</b>",

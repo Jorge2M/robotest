@@ -20,13 +20,13 @@ public class PageAmexInputTarjetaStpV {
 		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
 	 	validations.add(
-			"Aparece la pasarela de pagos de Banco Sabadell (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+			"Aparece la pasarela de pagos de Banco Sabadell (la esperamos hasta " + maxSecondsWait + " segundos)",
 			PageAmexInputTarjeta.isPasarelaBancoSabadellUntil(maxSecondsWait, driver), State.Defect); 
 	 	validations.add(
-			"En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>",
+			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn); 
 	 	validations.add(
-			"Aparecen los campos de introducción de tarjeta, fecha caducidad y código de seguridad<br>",
+			"Aparecen los campos de introducción de tarjeta, fecha caducidad y código de seguridad",
 			PageAmexInputTarjeta.isPresentNumTarj(driver) &&
             PageAmexInputTarjeta.isPresentInputMesCad(driver) &&
             PageAmexInputTarjeta.isPresentInputAnyCad(driver) &&

@@ -18,10 +18,10 @@ public class PageMisDatosStpV {
     public static ChecksResult validaIsPage (String usuarioReg, WebDriver driver) throws Exception {
         ChecksResult validations = ChecksResult.getNew();
         validations.add(
-            "Aparece una página con el la cabecera \"Mis datos\"<br>",
+            "Aparece una página con el la cabecera \"Mis datos\"",
             PageMisDatos.isPage(driver), State.Warn);
         validations.add(
-            "El campo de email está bloqueado<br>",
+            "El campo de email está bloqueado",
             PageMisDatos.emailIsDisabled(driver), State.Warn);
         validations.add(
             "El campo de email contiene " + usuarioReg,
@@ -49,31 +49,31 @@ public class PageMisDatosStpV {
 
         ChecksResult validations = ChecksResult.getNew();
         validations.add(
-            "Aparece un campo de contraseña de tipo password<br>",
+            "Aparece un campo de contraseña de tipo password",
             PageMisDatos.isVisiblePasswordTypePassword(driver), State.Defect);
         validations.add(
-            "El resto de campos de tipo \"inputContent\" están informados<br>",
+            "El resto de campos de tipo \"inputContent\" están informados",
             PageMisDatos.emailIsDisabled(driver), State.Defect);
         validations.add(
-            "El Nombre contiene el definido durante el registro: <b>" + nombre + "</b><br>",
+            "El Nombre contiene el definido durante el registro: <b>" + nombre + "</b>",
             !(PageMisDatos.getNumInputContentVoid(driver) > 1), State.Defect);
         validations.add(
-            "El Apellidos contiene el definido durante el registro: <b>" + apellidos + "</b><br>",
+            "El Apellidos contiene el definido durante el registro: <b>" + apellidos + "</b>",
             (PageMisDatos.getText_inputNombre(driver).compareTo(nombre)==0), State.Defect);
         validations.add(
-            "El Email contiene el definido durante el registro: <b>" + email + "</b><br>",
+            "El Email contiene el definido durante el registro: <b>" + email + "</b>",
             (PageMisDatos.getText_inputEmail(driver).toLowerCase().compareTo(email.toLowerCase())==0), State.Defect);
         validations.add(
-            "La Dirección contiene la definida durante el registro: <b>" + direccion + "</b><br>",
+            "La Dirección contiene la definida durante el registro: <b>" + direccion + "</b>",
             (PageMisDatos.getText_inputDireccion(driver).compareTo(direccion)==0), State.Defect);
         validations.add(
-            "El Código postal contiene el definido durante el registro: <b>" + codpostal + "</b><br>",
+            "El Código postal contiene el definido durante el registro: <b>" + codpostal + "</b>",
             (PageMisDatos.getText_inputCodPostal(driver).compareTo(codpostal)==0), State.Defect);
         validations.add(
-            "La población contiene la definida durante el registro: <b>" + poblacion + "</b><br>",
+            "La población contiene la definida durante el registro: <b>" + poblacion + "</b>",
             (PageMisDatos.getText_inputPoblacion(driver).compareTo(poblacion)==0), State.Defect);
         validations.add(
-            "Está seleccionado el país definido durante el registro: <b>" + codpais + "</b><br>",
+            "Está seleccionado el país definido durante el registro: <b>" + codpais + "</b>",
             (PageMisDatos.getCodPaisSelected(driver).compareTo(codpais)==0), State.Defect);
         if (provincia != null){
             validations.add(

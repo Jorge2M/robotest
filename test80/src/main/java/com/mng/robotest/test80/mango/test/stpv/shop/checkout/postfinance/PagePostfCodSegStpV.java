@@ -45,10 +45,10 @@ public class PagePostfCodSegStpV {
     public static ChecksResult validateIsPageTest(String nombrePago, String importeTotal, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	   	validations.add(
-    		"Aparece la pasarela de pagos de PostFinance E-Payment de Test<br>",
+    		"Aparece la pasarela de pagos de PostFinance E-Payment de Test",
     		PagePostfCodSeg.isPasarelaPostfinanceTest(driver, nombrePago), State.Defect);
 	   	validations.add(
-    		"En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>",
+    		"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
     		PagePostfCodSeg.isPresentButtonAceptar(driver), State.Defect);
 	   	
 	   	boolean existsCode = PagePostfCodSeg.isPresentInputCodSeg(driver);
@@ -71,10 +71,10 @@ public class PagePostfCodSegStpV {
     	ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 5;
 	   	validations.add(
-    		"Aparece la pasarela de pagos de PostFinance E-Payment (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		"Aparece la pasarela de pagos de PostFinance E-Payment (la esperamos hasta " + maxSecondsWait + " segundos)",
     		PagePostfCodSeg.isPasarelaPostfinanceProUntil(maxSecondsWait, driver), State.Defect);    	
 	   	validations.add(
-    		"En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>",
+    		"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
     		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);    		  
 	   	validations.add(
     		"Aparece el botón Weiter (Aceptar)",

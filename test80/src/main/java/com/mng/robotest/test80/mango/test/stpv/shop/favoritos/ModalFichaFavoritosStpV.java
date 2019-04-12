@@ -27,7 +27,7 @@ public class ModalFichaFavoritosStpV {
     	ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 2;
     	validations.add(
-    		"En Favoritos es visible el modal de la ficha del producto " + articulo.getRefProducto() + " (lo esperamos hasta " + maxSecondsWait + " segundos) <br>",
+    		"En Favoritos es visible el modal de la ficha del producto " + articulo.getRefProducto() + " (lo esperamos hasta " + maxSecondsWait + " segundos)",
     		PageFavoritos.modalFichaFavoritos.isVisibleFichaUntil(articulo.getRefProducto(), maxSecondsWait, driver), State.Warn);
     	validations.add(
             "Aparece seleccionado el color " + articulo.getColor(),

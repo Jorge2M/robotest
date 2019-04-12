@@ -14,7 +14,7 @@ public class PagePaytrailResultadoOkStpV {
     public static ChecksResult validateIsPage(String importeTotal, String codPais, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	   	validations.add(
-    		"Aparece la página de resultado Ok de Paytrail<br>",
+    		"Aparece la página de resultado Ok de Paytrail",
     		PagePaytrailResultadoOk.isPage(driver), State.Defect);
 	   	validations.add(
     		"Aparece el importe de la compra: " + importeTotal,

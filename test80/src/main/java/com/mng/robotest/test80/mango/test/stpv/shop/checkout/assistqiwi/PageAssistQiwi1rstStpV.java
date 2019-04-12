@@ -16,10 +16,10 @@ public class PageAssistQiwi1rstStpV {
     public static ChecksResult validateIsPage(String importeTotal, String codPais, Channel channel, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece el icono de Assist<br>",
+			"Aparece el icono de Assist",
 			PageAssistQiwi1rst.isPresentIconoAssist(driver, channel), State.Warn);
 	 	validations.add(
-			"En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>",
+			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
 	 	validations.add(
 			"Aparece el icono de Qiwi",

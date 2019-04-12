@@ -13,10 +13,10 @@ public class SecFitFinderStpV {
     	ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 2;
       	validations.add(
-    		"Es visible el Wrapper con la guía de tallas (lo esperamos hasta " + maxSecondsWait + " seconds)<br>",
+    		"Es visible el Wrapper con la guía de tallas (lo esperamos hasta " + maxSecondsWait + " seconds)",
     		SecFitFinder.isVisibleUntil(maxSecondsWait, driver), State.Defect);
       	validations.add(
-    		"Es visible el input para la introducción de la altura<br>",
+    		"Es visible el input para la introducción de la altura",
     		SecFitFinder.isVisibleInputAltura(driver), State.Warn);
       	validations.add(
     		"Es visible el input para la introducción del peso",

@@ -14,10 +14,10 @@ public class PageRecogidaDomicStpV {
     public static ChecksResult vaidaIsPageSinDevoluciones (WebDriver driver) throws Exception {
         ChecksResult validations = ChecksResult.getNew();
         validations.add(
-        	"Aparece la página de Recogida a Domicilio<br>",
+        	"Aparece la página de Recogida a Domicilio",
         	PageRecADomic.isPage(driver), State.Defect);
         validations.add(
-        	"Aparece la tabla de devoluciones<br>",
+        	"Aparece la tabla de devoluciones",
         	PageRecADomic.isTableDevoluciones(driver), State.Defect);
         validations.add(
         	"No aparece ningún pedido",

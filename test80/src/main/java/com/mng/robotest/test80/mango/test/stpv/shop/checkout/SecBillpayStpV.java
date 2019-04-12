@@ -14,7 +14,7 @@ public class SecBillpayStpV {
     public static ChecksResult validateIsSectionOk(Channel channel, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparecen 3 desplegables para la selección de la fecha de nacimiento<br>",
+			"Aparecen 3 desplegables para la selección de la fecha de nacimiento",
 			SecBillpay.isPresentSelectBirthBirthYear(driver) &&
             SecBillpay.isPresentSelectBirthMonth(driver) &&
             SecBillpay.isPresentSelectBirthDay(driver), 
@@ -43,10 +43,10 @@ public class SecBillpayStpV {
     private static ChecksResult checkLastschriftAfterAccept(WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece el campo para la introducción del titular<br>",
+			"Aparece el campo para la introducción del titular",
 			SecBillpay.isPresentInputTitular(driver), State.Defect);
 	 	validations.add(
-			"Aparece el campo para la introducción del IBAN<br>",
+			"Aparece el campo para la introducción del IBAN",
 	 		SecBillpay.isPresentInputIBAN(driver), State.Defect);
 	 	validations.add(
 			"Aparece el campo para la introducción del BIC",

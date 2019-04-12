@@ -17,10 +17,10 @@ public class PageAccesoMisComprasStpV {
     public static ChecksResult validateIsPage(WebDriver driver) {
         ChecksResult validations = ChecksResult.getNew();
         validations.add(
-        	"Aparece la página de \"Acceso a Mis Compras\"<br>",
+        	"Aparece la página de \"Acceso a Mis Compras\"",
         	PageAccesoMisCompras.isPage(driver), State.Warn);
         validations.add(
-        	"Aparecen el bloque \"Ya estoy registrado\"<br>",
+        	"Aparecen el bloque \"Ya estoy registrado\"",
         	PageAccesoMisCompras.isPresentBlock(TypeBlock.SiRegistrado, driver), State.Warn);
         validations.add(
         	"Aparece el bloque de \"No estoy registrado\"",

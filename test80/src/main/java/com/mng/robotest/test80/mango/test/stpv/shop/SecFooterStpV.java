@@ -38,7 +38,7 @@ public class SecFooterStpV {
      * @param closeTabAtEnd indicamos si queremos que finalmente se cierre la ventana o no (porque posteriormente queremos proseguir con la prueba)
      */
 	@Step (
-		description="Seleccionar el link del footer <b>#{typeFooter}</b><br>", 
+		description="Seleccionar el link del footer <b>#{typeFooter}</b>", 
         expected="Se redirige a la pantalla adecuada")
     public static void clickLinkFooter(FooterLink typeFooter, boolean closeAtEnd, Channel channel, WebDriver driver) 
     throws Exception { 
@@ -50,7 +50,7 @@ public class SecFooterStpV {
 	 
 	@Validation
 	private static ChecksResult checkPageCorrectAfterSelectLinkFooter(String windowFatherHandle, FooterLink typeFooter, boolean closeAtEnd, 
-																			  Channel channel, WebDriver driver) {
+																	  Channel channel, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	    PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter, channel);
 		String windowActualHandle = driver.getWindowHandle();
@@ -58,7 +58,7 @@ public class SecFooterStpV {
 		int maxSecondsToWait = 5;
 		try {
 	    	validations.add(
-	    		"Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + maxSecondsToWait + " segundos)<br>",
+	    		"Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + maxSecondsToWait + " segundos)",
 	    		pageObject.isPageCorrect(driver), State.Warn);		
 		    if (typeFooter.pageInNewTab()) {
 		    	validations.add(
@@ -86,7 +86,7 @@ public class SecFooterStpV {
 		ChecksResult validations = ChecksResult.getNew();
 		String telefono = "901 150 543";
     	validations.add(
-    		"Aparece \"Preguntas Frecuentes\" en la página <br>",
+    		"Aparece \"Preguntas Frecuentes\" en la página",
     		PageAyuda.isPresentCabPreguntasFreq(channel, driver), State.Warn);	
     	validations.add(
     		"Aparece la sección \"Contáctanos\" con el número de teléfono " + telefono,
@@ -121,19 +121,19 @@ public class SecFooterStpV {
      private static ChecksResult checkAfterClickLoQuieroAhoraButton(WebDriver driver) throws Exception {
  		ChecksResult validations = ChecksResult.getNew();
      	validations.add(
-     		"Aparece el campo <b>Nombre</b><br>",
+     		"Aparece el campo <b>Nombre</b>",
      		PageMangoCard.isPresentNameField(driver), State.Warn);	
      	validations.add(
-     		"Aparece el campo <b>Primer Apellido</b><br>",
+     		"Aparece el campo <b>Primer Apellido</b>",
      		PageMangoCard.isPresentFirstSurnameField(driver), State.Warn);	
      	validations.add(
-     		"Aparece el campo <b>Segundo Apellido</b><br>",
+     		"Aparece el campo <b>Segundo Apellido</b>",
      		PageMangoCard.isPresentSecondSurnameField(driver), State.Warn);	
      	validations.add(
-     		"Aparece el campo <b>Movil</b><br>",
+     		"Aparece el campo <b>Movil</b>",
      		PageMangoCard.isPresentMobileField(driver), State.Warn);
      	validations.add(
-     		"Aparece el campo <b>Mail</b><br>",
+     		"Aparece el campo <b>Mail</b>",
      		PageMangoCard.isPresentMailField(driver), State.Warn);
      	validations.add(
      		"Aparece el botón <b>¡Lo quiero ahora!</b>",
@@ -158,7 +158,7 @@ public class SecFooterStpV {
         Thread.sleep(1000); //El javascript lanzado por "waitForPageLoaded" rompe la carga de la página -> hemos de aplicar wait explícito previo
         WebdrvWrapp.waitForPageLoaded(driver, 10);
      	validations.add(
-     		"Aparece una nueva ventana<br>",
+     		"Aparece una nueva ventana",
      		true, State.Warn);	
      	
         int maxSecondsWait = 3;
@@ -180,26 +180,26 @@ public class SecFooterStpV {
      private static ChecksResult checkValidPageTarjetaMango(String ventanaOriginal, WebDriver driver) {
   		ChecksResult validations = ChecksResult.getNew();
      	validations.add(
-     		"Aparece la página de Solicitud de tu Tarjeta MANGO<br>",
+     		"Aparece la página de Solicitud de tu Tarjeta MANGO",
      		PageInputDataSolMangoCard.isPage2(driver), State.Defect);
      	
      	try {
 	        //Nos posicionamos en el iframe central para recorrer contenido (datos personales y datos bancarios).
 	        PageInputDataSolMangoCard.gotoiFramePage2(driver);
 	     	validations.add(
-	     		"Aparece el apartado \"Datos personales\"<br>",
+	     		"Aparece el apartado \"Datos personales\"",
 	     		PageInputDataSolMangoCard.isPresentDatosPersonalesPage2(driver), State.Warn);	
 	     	validations.add(
-	     		"Aparece el apartado \"Datos bancarios\"<br>",
+	     		"Aparece el apartado \"Datos bancarios\"",
 	     		PageInputDataSolMangoCard.isPresentDatosBancariosPage2(driver), State.Defect);	
 	     	validations.add(
-	     		"Aparece el apartado \"Datos de contacto\"<br>",
+	     		"Aparece el apartado \"Datos de contacto\"",
 	     		PageInputDataSolMangoCard.isPresentDatosContactoPage2(driver), State.Warn);	
 	     	validations.add(
-	     		"Aparece el apartado \"Datos socioeconómicos\"<br>",
+	     		"Aparece el apartado \"Datos socioeconómicos\"",
 	     		PageInputDataSolMangoCard.isPresentDatosSocioeconomicosPage2(driver), State.Warn);	
 	     	validations.add(
-	     		"Aparece el apartado \"Modalidad de pago de tu MANGO Card\"<br>",
+	     		"Aparece el apartado \"Modalidad de pago de tu MANGO Card\"",
 	     		PageInputDataSolMangoCard.isPresentModalidadpagoPage2(driver), State.Warn);	
 	     	validations.add(
 	     		"Aparece el botón \"Continuar\"",
@@ -228,7 +228,7 @@ public class SecFooterStpV {
      }
      
      @Step (
-    	description="Hacer click en el cuadro de suscripción del footer<br>",
+    	description="Hacer click en el cuadro de suscripción del footer",
         expected="Aparecen los textos legales de RGPD")
     public static void validaRGPDFooter(Boolean clickRegister, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
  		if (!clickRegister) {
@@ -250,10 +250,10 @@ public class SecFooterStpV {
     private static ChecksResult checkIsRGPDpresent(String codigoPais, WebDriver driver) {
   		ChecksResult validations = ChecksResult.getNew();
      	validations.add(
-     		"El texto de info de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + codigoPais + "<br>",
+     		"El texto de info de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + codigoPais,
      		SecFooter.isTextoRGPDPresent(driver), State.Defect);
      	validations.add(
-     		"El texto legal de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + codigoPais + "<br>",
+     		"El texto legal de RGPD <b>SI</b> existe en el modal de suscripción para el pais " + codigoPais,
      		SecFooter.isTextoLegalRGPDPresent(driver), State.Defect);
      	return validations;
     }
@@ -262,10 +262,10 @@ public class SecFooterStpV {
     private static ChecksResult checkIsNotPresentRGPD(String codigoPais, WebDriver driver) {
   		ChecksResult validations = ChecksResult.getNew();
      	validations.add(
-     		"El texto de info de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + codigoPais + "<br>",
+     		"El texto de info de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + codigoPais,
      		!SecFooter.isTextoRGPDPresent(driver), State.Defect);
      	validations.add(
-     		"El texto legal de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + codigoPais + "<br>",
+     		"El texto legal de RGPD <b>NO</b> existe en el modal de suscripción para el pais " + codigoPais,
      		!SecFooter.isTextoLegalRGPDPresent(driver), State.Defect);
      	return validations;
     }

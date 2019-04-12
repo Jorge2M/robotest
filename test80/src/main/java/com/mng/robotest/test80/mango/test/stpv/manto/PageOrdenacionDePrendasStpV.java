@@ -37,10 +37,10 @@ public class PageOrdenacionDePrendasStpV {
         ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 10;
         validations.add(
-        	"Estamos en la página " + Orden.titulo.getXPath() + "<br>",
+        	"Estamos en la página " + Orden.titulo.getXPath(),
             PageOrdenacionDePrendas.isElementInStateUntil(Orden.initialTitulo, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
-        	"Aparece el desplegable de tiendas<br>",
+        	"Aparece el desplegable de tiendas",
         	PageOrdenacionDePrendas.isElementInStateUntil(Orden.desplegableTiendas, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
         	"El botón <b>Ver Tiendas</b> está en la página",
@@ -63,16 +63,16 @@ public class PageOrdenacionDePrendasStpV {
         ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 10;
         validations.add(
-        	"Está presente el enlace de <b>She</b><br>",
+        	"Está presente el enlace de <b>She</b>",
             PageOrdenacionDePrendas.isElementInStateUntil(Section.She, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
-            "Está presente el enlace de <b>He</b><br>",
+            "Está presente el enlace de <b>He</b>",
             PageOrdenacionDePrendas.isElementInStateUntil(Section.He, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
-            "Está presente el enlace de <b>Nina</b><br>",
+            "Está presente el enlace de <b>Nina</b>",
             PageOrdenacionDePrendas.isElementInStateUntil(Section.Nina, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
-            "Aparece correctamente el boton de <b>cancelar</b><br>",
+            "Aparece correctamente el boton de <b>cancelar</b>",
             PageOrdenacionDePrendas.isElementInStateUntil(Section.Nino, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
             "Está presente el enlace de <b>Violeta</b>",
@@ -110,7 +110,7 @@ public class PageOrdenacionDePrendasStpV {
         ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 13;
         validations.add(
-            "Se vuelve visible el selector de tipo de <b>Prendas</b><br>",
+            "Se vuelve visible el selector de tipo de <b>Prendas</b>",
             PageOrdenacionDePrendas.isElementInStateUntil(Orden.selectorPrendas, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
             "Podemos ver el <b>botón</b> para ver las prendas",
@@ -134,7 +134,7 @@ public class PageOrdenacionDePrendasStpV {
         ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 20;
         validations.add(
-            "Aparecen imagenes en la nueva página (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+            "Aparecen imagenes en la nueva página (lo esperamos hasta " + maxSecondsWait + " segundos)",
             PageOrdenacionDePrendas.isElementInStateUntil(Orden.pruebaImagen, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
             "Estamos en la sección que corresponde <b>camisas</b>",
@@ -156,7 +156,7 @@ public class PageOrdenacionDePrendasStpV {
     private static ChecksResult validateBajarPrenda(WebDriver driver, int maxSecondsWait) {
         ChecksResult validations = ChecksResult.getNew();
         validations.add(
-            "Se sigue viendo la segunda prenda<br>",
+            "Se sigue viendo la segunda prenda",
             PageOrdenacionDePrendas.isElementInStateUntil(Orden.segundaPrenda, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
             "La primera prenda no se corresponde con la que había inicialmente",
@@ -178,13 +178,13 @@ public class PageOrdenacionDePrendasStpV {
         ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 15;
         validations.add(
-            "Aparece correctamente el modal de confirmacion<br>",
+            "Aparece correctamente el modal de confirmacion",
             PageOrdenacionDePrendas.isElementInStateUntil(Modal.container, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
-            "Aparece correctamente el boton de <b>aplicar general</b><br>",
+            "Aparece correctamente el boton de <b>aplicar general</b>",
             PageOrdenacionDePrendas.isElementInStateUntil(Modal.applyGeneric, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
-            "Aparece correctamente el boton de <b>aplicar pais</b><br>",
+            "Aparece correctamente el boton de <b>aplicar pais</b>",
             PageOrdenacionDePrendas.isElementInStateUntil(Modal.applyCountry, StateElem.Visible, maxSecondsWait, driver), State.Defect);
         validations.add(
             "Aparece correctamente el boton de <b>cancelar</b>",

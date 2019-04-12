@@ -20,16 +20,16 @@ public class PageSelectLineaVOTFStpV {
     public static ChecksResult validateIsPage(WebDriver driver) { 
     	ChecksResult validations = ChecksResult.getNew();
     	validations.add(
-    		"Aparece el banner correspondiente a SHE<br>",
+    		"Aparece el banner correspondiente a SHE",
     		PageSelectLineaVOTF.isBannerPresent(LineaType.she, driver), State.Warn);
     	validations.add(
-    		"Aparece el banner correspondiente a MAN<br>",
+    		"Aparece el banner correspondiente a MAN",
     		PageSelectLineaVOTF.isBannerPresent(LineaType.he, driver), State.Warn);
     	validations.add(
-    		"Aparece el banner correspondiente a NIÑAS<br>",
+    		"Aparece el banner correspondiente a NIÑAS",
     		PageSelectLineaVOTF.isBannerPresent(LineaType.nina, driver), State.Warn);
     	validations.add(
-    		"Aparece el banner correspondiente a NIÑOS<br>",
+    		"Aparece el banner correspondiente a NIÑOS",
     		PageSelectLineaVOTF.isBannerPresent(LineaType.nino, driver), State.Warn);
     	validations.add(
     		"Aparece el banner correspondiente a VIOLETA",

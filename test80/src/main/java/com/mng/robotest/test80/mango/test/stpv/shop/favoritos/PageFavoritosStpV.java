@@ -27,7 +27,7 @@ public class PageFavoritosStpV {
         int maxSecondsToWaitCapa = 3;
         int maxSecondsToWaitArticles = 1;
     	validations.add(
-    		"Está visible la capa de favoritos con artículos (la esperamos hasta " + maxSecondsToWaitCapa + " segundos)<br>",
+    		"Está visible la capa de favoritos con artículos (la esperamos hasta " + maxSecondsToWaitCapa + " segundos)",
     		PageFavoritos.isSectionArticlesVisibleUntil(maxSecondsToWaitCapa, driver), State.Defect);
     	validations.add(
     		"Aparecen los artículos (los esperamos hasta " + maxSecondsToWaitArticles + " segundos): <br>" + dataFavoritos.getListArtDescHTML(),
@@ -58,13 +58,13 @@ public class PageFavoritosStpV {
     	ChecksResult validations = ChecksResult.getNew();
     	int secondsToWait = 5;
     	validations.add(
-    		"Aparece el modal de favoritos compartidos <br>",
+    		"Aparece el modal de favoritos compartidos",
     		PageFavoritos.checkShareModalUntill(secondsToWait, driver), State.Defect);
     	validations.add(
-            "Aparece el boton de compartir por Telegram <br>",
+            "Aparece el boton de compartir por Telegram",
             PageFavoritos.isShareTelegramFavoritesVisible(driver), State.Defect);
         validations.add(
-            "Aparece el boton de compartir por WhatsApp <br>",
+            "Aparece el boton de compartir por WhatsApp",
             PageFavoritos.isShareWhatsappFavoritesVisible(driver), State.Defect);
         validations.add(
             "Aparece la url para copiarla y compartir como texto", 
@@ -116,7 +116,7 @@ public class PageFavoritosStpV {
     public static ChecksResult checkFavoritosWithoutArticles(WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
     	validations.add(
-    		"No queda ningún artículo en Favoritos<br>",
+    		"No queda ningún artículo en Favoritos",
     		!PageFavoritos.hayArticulos(driver), State.Defect);
     	validations.add(
             "Aparece el botón \"Inspírate con lo último\"",

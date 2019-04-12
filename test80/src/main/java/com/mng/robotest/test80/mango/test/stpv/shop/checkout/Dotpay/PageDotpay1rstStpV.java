@@ -15,7 +15,7 @@ public class PageDotpay1rstStpV {
     public static ChecksResult validateIsPage(String nombrePago, String importeTotal, String codPais, Channel channel, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
       	validations.add(
-    		"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b><br>",
+    		"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
     		PageDotpay1rst.isPresentEntradaPago(nombrePago, channel, driver), State.Warn);
       	
       	State stateVal = State.Warn;
@@ -25,10 +25,10 @@ public class PageDotpay1rstStpV {
         	avoidEvidences = true;
         }
       	validations.add(
-    		"Aparece el importe de la compra: " + importeTotal + "<br>",
+    		"Aparece el importe de la compra: " + importeTotal,
     		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal, avoidEvidences);
       	validations.add(
-    		"Aparece la cabecera indicando la 'etapa' del pago<br>",
+    		"Aparece la cabecera indicando la 'etapa' del pago",
     		PageDotpay1rst.isPresentCabeceraStep(nombrePago, channel, driver), State.Warn);
       	if (channel==Channel.desktop) {
           	validations.add(
@@ -44,8 +44,6 @@ public class PageDotpay1rstStpV {
         expected="Aparece la página de selección del canal de pago")
     public static void clickToPay(String importeTotal, String codPais, Channel channel, WebDriver driver) throws Exception {
         PageDotpay1rst.clickToPay(channel, driver);
-        
-        //Validaciones
         PageDotpayPaymentChannelStpV.validateIsPage(importeTotal, codPais, driver);
     }
 }

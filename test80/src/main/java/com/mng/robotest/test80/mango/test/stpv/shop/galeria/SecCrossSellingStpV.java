@@ -35,7 +35,7 @@ public class SecCrossSellingStpV {
             pageGaleria.scrollToPageFromFirst(PageGaleriaDesktop.maxPageToScroll, app);
     	}
     	validations.add(
-    		"La sección cross-selling existe (si de primeras no existe scrollamos hasta el final de la galería)<br>",
+    		"La sección cross-selling existe (si de primeras no existe scrollamos hasta el final de la galería)",
     		PageGaleriaDesktop.secCrossSelling.isSection(dFTest.driver), State.Defect);
     	validations.add(
     		"Aparecen los links correspondientes a los 3 primeros menús de Mujer-Prendas (<b>" + litMenu1 + ", " + litMenu2 + ", " + litMenu3 + "</b>)",

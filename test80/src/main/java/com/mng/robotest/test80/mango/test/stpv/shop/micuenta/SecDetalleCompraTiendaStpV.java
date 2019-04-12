@@ -25,19 +25,19 @@ public class SecDetalleCompraTiendaStpV {
         ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 1;
         validations.add(
-        	"Es visible la capa correspondiente al detalle del tícket de compra (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+        	"Es visible la capa correspondiente al detalle del tícket de compra (la esperamos hasta " + maxSecondsWait + " segundos)",
         	PageMisCompras.SecDetalleCompraTienda.isVisibleSectionUntil(maxSecondsWait, driver), State.Warn);
         validations.add(
-        	"Figura un número de tícket " + compraTienda.idCompra + "<br>",
+        	"Figura un número de tícket " + compraTienda.idCompra,
         	PageMisCompras.SecDetalleCompraTienda.getNumTicket(driver).compareTo(compraTienda.idCompra)==0, State.Warn);
         validations.add(
-        	"Figura el importe " + compraTienda.importe + "<br>",
+        	"Figura el importe " + compraTienda.importe,
         	PageMisCompras.SecDetalleCompraTienda.getImporte(driver).compareTo(compraTienda.importe)==0, State.Warn);
         validations.add(
-        	"Figura la dirección " + compraTienda.direccion + "<br>",
+        	"Figura la dirección " + compraTienda.direccion,
         	PageMisCompras.SecDetalleCompraTienda.getDireccion(driver).compareTo(compraTienda.direccion)==0, State.Warn);
         validations.add(
-        	"Figura la fecha " + compraTienda.fecha + "<br>",
+        	"Figura la fecha " + compraTienda.fecha,
         	PageMisCompras.SecDetalleCompraTienda.getFecha(channel, driver).compareTo(compraTienda.fecha)==0, State.Warn);
         validations.add(
         	"Existen " + compraTienda.numPrendas + " prendas",

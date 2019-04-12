@@ -12,10 +12,10 @@ public class PagePedidosStpV {
     public static ChecksResult validaIsPageSinPedidos (String usrRegistrado, WebDriver driver) {
         ChecksResult validations = ChecksResult.getNew();
         validations.add(
-            "Aparece la página de \"Mis Pedidos\"<br>",
+            "Aparece la página de \"Mis Pedidos\"",
             PageMispedidos.isPage(driver), State.Defect);
         validations.add(
-            "La página contiene " + usrRegistrado + "<br>",
+            "La página contiene " + usrRegistrado ,
             PageMispedidos.elementContainsText(driver, usrRegistrado), State.Warn);
         validations.add(
             "La lista de pedidos está vacía",

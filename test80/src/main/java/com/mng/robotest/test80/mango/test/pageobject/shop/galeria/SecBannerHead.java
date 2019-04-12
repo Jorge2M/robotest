@@ -4,8 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 
 public class SecBannerHead extends WebdrvWrapp {
@@ -31,6 +33,19 @@ public class SecBannerHead extends WebdrvWrapp {
     
     public static boolean isVisible(WebDriver driver) {
         return (isElementVisible(driver, By.xpath(XPathBanner)));
+    }
+    
+    public static boolean isSalesBanner(IdiomaPais idioma, WebDriver driver) {
+    	boolean isVisibleBanner = isVisible(driver);
+    	if (isVisibleBanner) {
+    		String textBanner = getText(driver);
+        	String saleTraduction = UtilsTestMango.getSaleTraduction(idioma);
+    		if (UtilsTestMango.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction)) {
+    			return true;
+    		}
+    	}
+    	
+    	return false;
     }
     
     public static boolean isBannerWithoutTextAccesible(WebDriver driver) {

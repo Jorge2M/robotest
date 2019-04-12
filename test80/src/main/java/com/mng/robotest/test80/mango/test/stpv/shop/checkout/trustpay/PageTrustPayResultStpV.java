@@ -15,10 +15,10 @@ public class PageTrustPayResultStpV {
 		ChecksResult validations = ChecksResult.getNew();
 		String textHeader = "Payment In Progress";
 	 	validations.add(
-			"Figura el encabezamiento \"" + textHeader + "<br>",
+			"Figura el encabezamiento \"" + textHeader,
 			PageTrustPayResult.headerContains(textHeader, driver), State.Defect); 
 	 	validations.add(
-			"Figura el importe total de la compra (" + importeTotal + ")<br>",
+			"Figura el importe total de la compra (" + importeTotal + ")",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn); 
 	 	validations.add(
 			"Figura el botón \"continue\"",

@@ -14,7 +14,7 @@ public class PagePaytrailEpaymentStpV {
     public static ChecksResult validateIsPage(WebDriver driver) { 
 		ChecksResult validations = ChecksResult.getNew();
 	   	validations.add(
-    		"Aparece la página inicial de E-Payment<br>",
+    		"Aparece la página inicial de E-Payment",
     		PageEpaymentIdent.isPage(driver), State.Warn);
 	   	validations.add(
     		"Figuran el input correspondientes al \"User ID\"",

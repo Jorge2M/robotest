@@ -20,7 +20,7 @@ public class PageMercpagoLoginStpV {
     public static ChecksResult validateIsPage(WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
     	validations.add(
-    		"Aparece la página de identificación de Mercadopago<br>",
+    		"Aparece la página de identificación de Mercadopago",
     		PageMercpagoLogin.isPage(driver), State.Defect);
     	validations.add(
     		"En la página figuran los campos de identificación (email + password)",

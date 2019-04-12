@@ -18,7 +18,7 @@ public class PageSepa1rstStpV {
     public static ChecksResult validateIsPage(String nombrePago, String importeTotal, String codPais, Channel channel, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
     	validations.add(
-    		"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b><br>",
+    		"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
     		PageSepa1rst.isPresentIconoSepa(channel, driver), State.Warn);
     	
     	State stateVal = State.Warn;
@@ -28,17 +28,17 @@ public class PageSepa1rstStpV {
             avoidEvidences = true;
         }
     	validations.add(
-    		"Aparece el importe de la compra: " + importeTotal + "<br>",
+    		"Aparece el importe de la compra: " + importeTotal,
     		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal, avoidEvidences);		
     	validations.add(
-    		"Aparece la cabecera indicando la 'etapa' del pago<br>",
+    		"Aparece la cabecera indicando la 'etapa' del pago",
     		PageSepa1rst.isPresentCabeceraStep(driver), State.Warn);		
     	if (channel==Channel.desktop) {
         	validations.add(
-        		"Figura el campo de introducción del titular<br>",
+        		"Figura el campo de introducción del titular",
         		PageSepa1rst.isPresentInputTitular(driver), State.Warn);
         	validations.add(
-        		"Figura el campo de introducción del la cuenta<br>",
+        		"Figura el campo de introducción del la cuenta",
         		PageSepa1rst.isPresentInputCuenta(driver), State.Warn);
         	validations.add(
         		"Figura un botón de pago",

@@ -16,7 +16,7 @@ public class PageRecuperaPasswdStpV {
     	ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsToWait = 2;
     	validations.add(
-    		"Aparece la pantalla de recuperación de la contraseña (la esperamos hasta " + maxSecondsToWait + " segundos)<br>",
+    		"Aparece la pantalla de recuperación de la contraseña (la esperamos hasta " + maxSecondsToWait + " segundos)",
     		PageRecuperaPasswd.isPageUntil(maxSecondsToWait, driver), State.Defect);
     	validations.add(
     		"Aparece el campo para la introducción del correo",
@@ -46,7 +46,7 @@ public class PageRecuperaPasswdStpV {
     	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsToWait = 2;
     	validations.add(
-        	"Aparece el mensaje de \"Revisa tu email\" (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>",
+        	"Aparece el mensaje de \"Revisa tu email\" (lo esperamos hasta " + maxSecondsToWait + " segundos)",
         	PageRecuperaPasswd.isVisibleRevisaTuEmailUntil(maxSecondsToWait, driver), State.Defect);
     	validations.add(
         	"Aparece el botón \"Ir de Shopping\"",

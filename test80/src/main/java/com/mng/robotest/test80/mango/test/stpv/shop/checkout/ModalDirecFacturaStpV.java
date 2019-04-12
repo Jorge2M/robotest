@@ -16,7 +16,7 @@ public class ModalDirecFacturaStpV {
     	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
 	 	validations.add(
-			"Es visible el formulario para la introducción de la \"Dirección de facturación\" (lo esperamos hasta " + maxSecondsWait + " seconds)<br>",
+			"Es visible el formulario para la introducción de la \"Dirección de facturación\" (lo esperamos hasta " + maxSecondsWait + " seconds)",
 			ModalDirecFactura.isVisibleFormUntil(maxSecondsWait, driver), State.Defect);    
 	 	validations.add(
 			"Es visible el botón \"Actualizar\"",
@@ -37,7 +37,7 @@ public class ModalDirecFacturaStpV {
 	private static ChecksResult checkAfterChangeDireccion(WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Desaparece el modal de introducción de los datos de la dirección<br>",
+			"Desaparece el modal de introducción de los datos de la dirección",
 	 		!ModalDirecFactura.isVisibleFormUntil(0, driver), State.Defect);    
 	 	validations.add(
 			"Queda marcado el radiobutton \"Quiero recibir una factura\"",

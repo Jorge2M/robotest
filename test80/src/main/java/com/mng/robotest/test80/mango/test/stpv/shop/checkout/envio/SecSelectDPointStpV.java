@@ -55,7 +55,7 @@ public class SecSelectDPointStpV {
     	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 3;
 	 	validations.add(
-			"Es visible el 1er delivery point de la lista (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+			"Es visible el 1er delivery point de la lista (lo esperamos hasta " + maxSecondsWait + " segundos)",
 			ModalDroppoints.secSelectDPoint.isDroppointVisibleUntil(1, maxSecondsWait, driver), State.Defect);
 	 	validations.add(
 			"El 1er delivery point de la lista es de tipo <b>" + typeDp + "</b>",

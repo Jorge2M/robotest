@@ -14,12 +14,12 @@ public class PageResultPagoTpvStpV {
     public static ChecksResult validateIsPageOk(DataPedido dataPedido, String codPais, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece un texto de confirmación de la compra<br>",
+			"Aparece un texto de confirmación de la compra",
 			PageResultPagoTpv.isPresentCabeceraConfCompra(driver), State.Warn);
 	 	
         String importeTotal = dataPedido.getImporteTotal();
 	 	validations.add(
-			"Aparece el importe " + importeTotal + " de la operación<br>",
+			"Aparece el importe " + importeTotal + " de la operación",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
 	 	
 	 	boolean isVisibleCodPedido = PageResultPagoTpv.isVisibleCodPedido(driver);

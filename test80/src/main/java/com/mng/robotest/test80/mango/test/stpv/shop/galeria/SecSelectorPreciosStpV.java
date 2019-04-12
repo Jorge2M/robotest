@@ -65,10 +65,10 @@ public class SecSelectorPreciosStpV {
 	private static ChecksResult checkResultSelectFiltro(DataFilterPrecios dataFilter, AppEcom app, WebDriver driver) throws Exception {
 		ChecksResult validations = ChecksResult.getNew();
     	validations.add(
-    		"El nuevo mínimo es mayor que el anterior. Era de <b>" + dataFilter.minimoOrig + "</b> y ahora es <b>" + dataFilter.minimoFinal + "</b><br>",
+    		"El nuevo mínimo es mayor que el anterior. Era de <b>" + dataFilter.minimoOrig + "</b> y ahora es <b>" + dataFilter.minimoFinal + "</b>",
     		dataFilter.minimoFinal > dataFilter.minimoOrig, State.Warn);
     	validations.add(
-    		"El nuevo máximo es menor que el anterior. Era de <b>" + dataFilter.maximoOrig + "</b> y ahora es <b>" + dataFilter.maximoFinal + "</b><br>",
+    		"El nuevo máximo es menor que el anterior. Era de <b>" + dataFilter.maximoOrig + "</b> y ahora es <b>" + dataFilter.maximoFinal + "</b>",
     		dataFilter.maximoFinal < dataFilter.maximoOrig, State.Warn);
     	PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
     	validations.add(

@@ -93,7 +93,7 @@ public class PageFichaArtStpV {
     public ChecksResult validateIsFichaArtNoDisponible(String refArticulo) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece la página de resultado de una búsqueda KO<br>",
+			"Aparece la página de resultado de una búsqueda KO",
 			PageErrorBusqueda.isPage(driver), State.Warn);    	
 	 	validations.add(
 			"En el texto de resultado de la búsqueda aparece la referencia " + refArticulo,
@@ -107,7 +107,7 @@ public class PageFichaArtStpV {
     	int maxSecondsWait = 2;
 	 	validations.add(
 			"Aparece la página correspondiente a la ficha del artículo " + article.getReference() + 
-			" (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+			" (la esperamos hasta " + maxSecondsWait + " segundos)",
 			pageFicha.isFichaArticuloUntil(article.getReference(), maxSecondsWait), State.Defect);   
 	 	validations.add(
 			"No está disponible La talla <b>" + article.getSize() + "</b> del color <b>" + article.getColourCode() + "</b>",
@@ -119,7 +119,7 @@ public class PageFichaArtStpV {
     public ChecksResult validateIsFichaArtAlgunoColorNoDisponible(String refArticulo) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece la página correspondiente a la ficha del artículo " + refArticulo + "<br>",
+			"Aparece la página correspondiente a la ficha del artículo " + refArticulo,
 			pageFicha.isFichaArticuloUntil(refArticulo, 0), State.Defect); 
 	 	validations.add(
 			"Aparece algún color no disponible",
@@ -141,7 +141,7 @@ public class PageFichaArtStpV {
             int maxSecondsWait = 3;
 		 	validations.add(
 				"Aparece la página con los datos de la ficha del producto " + datosArticulo.getReferencia() +
-				"(la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+				"(la esperamos hasta " + maxSecondsWait + " segundos)",
 				pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), maxSecondsWait), State.Defect);
         }
             
@@ -237,7 +237,7 @@ public class PageFichaArtStpV {
     public ChecksResult checkAppearsCapaAvisame() {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"No aparece el botón \"COMPRAR\"<br>",
+			"No aparece el botón \"COMPRAR\"",
 			!SecBolsa.isVisibleBotonComprar(Channel.desktop, driver), State.Defect);
 	 	boolean isVisibleAvisame = pageFicha.secDataProduct.isVisibleCapaAvisame(driver);
 	 	validations.add(
@@ -360,7 +360,7 @@ public class PageFichaArtStpV {
     	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait1 = 3;
 	 	validations.add(
-			"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + maxSecondsWait1 + " segundos)<br>",
+			"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + maxSecondsWait1 + " segundos)",
 			pageFicha.isVisibleDivAnadiendoAFavoritosUntil(maxSecondsWait1), State.Info);
         int maxSecondsWait2 = 3;
 	 	validations.add(
@@ -441,12 +441,12 @@ public class PageFichaArtStpV {
     	boolean isVisiblePrevLink = pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Prev, maxSecondsWait, driver);
         if (locationArt.isFirstInGalery()) {
 		 	validations.add(
-		 		"No es visible el link <b>Prev</b> (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+		 		"No es visible el link <b>Prev</b> (lo esperamos hasta " + maxSecondsWait + " segundos)",
 		 		!isVisiblePrevLink, State.Warn);
         }
         else {
 		 	validations.add(
-		 		"Sí es visible el link <b>Prev</b> (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+		 		"Sí es visible el link <b>Prev</b> (lo esperamos hasta " + maxSecondsWait + " segundos)",
 		 		isVisiblePrevLink, State.Warn);
         }
         if (dCtxSh.appE==AppEcom.outlet || dCtxSh.channel==Channel.desktop) {
@@ -517,7 +517,7 @@ public class PageFichaArtStpV {
     public ChecksResult checkImgCentralAfterZoom(String pngImgCentralOriginal) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-	 		"Se aplica un Zoom sobre la imagen central<br>",
+	 		"Se aplica un Zoom sobre la imagen central",
 	 		((PageFichaArtOld)pageFicha).isVisibleFichaConZoom(), State.Defect);
 	 	validations.add(
 	 		"La imagen central con Zoom sigue conteniendo la imagen original: " + pngImgCentralOriginal,
@@ -529,7 +529,7 @@ public class PageFichaArtStpV {
     public ChecksResult validaBreadCrumbFichaOld(String urlGaleryOrigin) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-	 		"Existen el bloque correspondiente a las <b>BreadCrumb</b><br>",
+	 		"Existen el bloque correspondiente a las <b>BreadCrumb</b>",
 	 		SecBreadcrumbFichaOld.isVisibleBreadCrumb(driver), State.Defect);    	
 	 	String urlGaleryBC = SecBreadcrumbFichaOld.getUrlItemBreadCrumb(ItemBCrumb.Galery, driver);
 	 	validations.add(

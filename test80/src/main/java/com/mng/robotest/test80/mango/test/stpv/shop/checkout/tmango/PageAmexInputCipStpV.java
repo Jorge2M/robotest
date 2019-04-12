@@ -16,7 +16,7 @@ public class PageAmexInputCipStpV {
 		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
 	 	validations.add(
-			"Aparece la página de introducción del CIP (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+			"Aparece la página de introducción del CIP (la esperamos hasta " + maxSecondsWait + " segundos)",
 			PageAmexInputCip.isPageUntil(maxSecondsWait, driver), State.Defect); 
 	 	validations.add(
 			"Aparece el importe de la operación " + importeTotal,

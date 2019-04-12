@@ -16,7 +16,7 @@ public class SecTMangoStpV {
     public static ChecksResult validateIsSectionOk(Channel channel, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece el bloque de selección de la forma de pago<br>",
+			"Aparece el bloque de selección de la forma de pago",
 			SecTMango.isVisibleUntil(channel, 0, driver), State.Defect); 
 	 	validations.add(
 			"Aparece disponible la modalidad de pago:<br>" + SecTMango.getDescripcionTipoPago(TipoPago.pagoHabitual), 

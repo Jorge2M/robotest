@@ -15,7 +15,7 @@ public class PageGiropay1rstStpV {
     public static ChecksResult validateIsPage(String nombrePago, String importeTotal, String codPais, Channel channel, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	   	validations.add(
-			"Figura el bloque correspondiente al pago <b>" + nombrePago.toLowerCase() + "</b><br>",
+			"Figura el bloque correspondiente al pago <b>" + nombrePago.toLowerCase() + "</b>",
 			PageGiropay1rst.isPresentIconoGiropay(channel, driver), State.Warn);	
 	   	
 	   	State stateVal = State.Warn;
@@ -25,15 +25,15 @@ public class PageGiropay1rstStpV {
         	avoidEvidences = true;
         }
 	   	validations.add(
-			"Aparece el importe de la compra: " + importeTotal + "<br>",
+			"Aparece el importe de la compra: " + importeTotal,
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal, avoidEvidences);
 	   	validations.add(
-			"Aparece la cabecera indicando la 'etapa' del pago<br>",
+			"Aparece la cabecera indicando la 'etapa' del pago",
 			PageGiropay1rst.isPresentCabeceraStep(driver), State.Warn);	
         int maxSecondsWait = 2;
 	   	if (channel==Channel.desktop) {
 		   	validations.add(
-		   		"Aparece un input para la introducción del Banco (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+		   		"Aparece un input para la introducción del Banco (lo esperamos hasta " + maxSecondsWait + " segundos)",
 		   		PageGiropay1rst.isVisibleInputBankUntil(maxSecondsWait, driver), State.Warn);
 		   	validations.add(
 		   		"Figura un botón de pago",

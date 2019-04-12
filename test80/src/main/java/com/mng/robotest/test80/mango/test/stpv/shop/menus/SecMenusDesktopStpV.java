@@ -239,11 +239,11 @@ public class SecMenusDesktopStpV {
     	ChecksResult validations = ChecksResult.getNew();
 	    int maxSecondsWait = 1;
       	validations.add(
-    		"Aparece el bloque de menús de la línea " + linea.getType() + " (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		"Aparece el bloque de menús de la línea " + linea.getType() + " (lo esperamos hasta " + maxSecondsWait + " segundos)",
     		SecMenusDesktop.secMenuSuperior.secBlockMenus.isCapaMenusLineaVisibleUntil(linea.getType(), maxSecondsWait, driver), 
     		State.Warn);
       	validations.add(
-    		"El número de carrusels es de " + linea.getListCarrusels().length + "<br>",
+    		"El número de carrusels es de " + linea.getListCarrusels().length,
     		linea.getListCarrusels().length==SecMenusDesktop.secMenuSuperior.secCarrusel.getNumCarrousels(linea.getType(), driver), 
     		State.Warn);
       	validations.add(
@@ -272,14 +272,14 @@ public class SecMenusDesktopStpV {
 
 	    int maxSecondsWait = 3;
       	validations.add(
-    		"Aparece algún artículo (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		"Aparece algún artículo (lo esperamos hasta " + maxSecondsWait + " segundos)",
     		pageGaleriaDesktop.isVisibleArticleUntil(1, maxSecondsWait), State.Info, true);
       	validations.add(
-    		"El 1er artículo es de tipo " + linea.getType() + "<br>",
+    		"El 1er artículo es de tipo " + linea.getType(),
     		pageGaleriaDesktop.isArticleFromLinea(1, lineaType), State.Warn);
 	    if (lineaType!=LineaType.nuevo) {
 	      	validations.add(
-        		"El 1er artículo es de la línea " + idCarrusel + "<br>",
+        		"El 1er artículo es de la línea " + idCarrusel,
         		pageGaleriaDesktop.isArticleFromCarrusel(1, linea, idCarrusel), State.Warn);
 	    }
 	    boolean panoramEnLinea = (linea.getPanoramicas()!=null && linea.getPanoramicas().compareTo("s")==0);
@@ -389,7 +389,7 @@ public class SecMenusDesktopStpV {
             int numMenus_C = ((Integer)dFTest.ctx.getAttribute("numMenus" + clave)).intValue();
         	
 	      	validations.add(
-	    		"El número de pestañas (" + numPestanyas + ") coincide con el del nodo " + dFTest.ctx.getAttribute("NodoMenus" + clave) + " (" + numPestanyas_C + ")<br>",
+	    		"El número de pestañas (" + numPestanyas + ") coincide con el del nodo " + dFTest.ctx.getAttribute("NodoMenus" + clave) + " (" + numPestanyas_C + ")",
 	    		(numPestanyas==numPestanyas_C), State.Warn);
 	      	validations.add(
 	    		"El número de menús (" + numMenus + ") coincide con el del nodo " + dFTest.ctx.getAttribute("NodoMenus" + clave) + " (" + numMenus_C + ")",
@@ -546,14 +546,14 @@ public class SecMenusDesktopStpV {
     	List<Element> elemsCanBeContained = groupMenu.getElementsCanBeContained();
     	boolean contentPageOk = PageLanding.isSomeElementVisibleInPage(elemsCanBeContained, app, driver);
 	 	validations.add(
-			"Aparecen alguno de los siguientes elementos: <b>" + elemsCanBeContained + "</b> (es un menú perteneciente al grupo <b>" + groupMenu + ")</b><br>",
+			"Aparecen alguno de los siguientes elementos: <b>" + elemsCanBeContained + "</b> (es un menú perteneciente al grupo <b>" + groupMenu + ")</b>",
 			contentPageOk, State.Warn);
     	
     	if (groupMenu.canContainElement(Element.article)) {
     		PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
     	 	String guiones = "--";
     	 	validations.add(
-    			"No hay artículos con \"" + guiones + "\"<br>",
+    			"No hay artículos con \"" + guiones + "\"",
     			!((PageGaleriaDesktop)pageGaleria).isArticuloWithStringInName(guiones), State.Warn);
     	}
     	
@@ -566,7 +566,7 @@ public class SecMenusDesktopStpV {
             	avoidEvidences = true;
             }
     	 	validations.add(
-    			"El title de la página es el asociado al menú<b>" + menu.getNombre() + "</b><br>",
+    			"El title de la página es el asociado al menú<b>" + menu.getNombre() + "</b>",
     			AllPages.isTitleAssociatedToMenu(menu.getNombre(), driver), stateVal, avoidEvidences);
     	}
     	
@@ -579,7 +579,7 @@ public class SecMenusDesktopStpV {
 	    stackTrace exception = WebDriverMngUtils.stackTaceException(driver, ctx);
 	    String excepcionDuplicada = "";
 	    if (exception.getRepetida()) {
-	    	excepcionDuplicada+="<br><b>Warning!</b>Se ha detectado una excepción detectada previamente (" + exception.getNumExcepciones() + ")<br>";
+	    	excepcionDuplicada+="<br><b>Warning!</b>Se ha detectado una excepción detectada previamente (" + exception.getNumExcepciones() + ")";
 	    }
 	 	validations.add(
 			"El errorPage.faces no devuelve una excepción" + excepcionDuplicada,

@@ -17,10 +17,10 @@ public class PageYandex1rstStpv {
         //Esta validación debería hacerse en un punto posterior, una vez se ha intentado enviar el input que es cuando se genera el botón retry.
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece la página inicial de Yandex<br>",
+			"Aparece la página inicial de Yandex",
 			PageYandex1rst.isPage(driver), State.Warn);
 	 	validations.add(
-			"Figura preinformado el email del usuario: " + emailUsr + "<br>",
+			"Figura preinformado el email del usuario: " + emailUsr,
 			PageYandex1rst.isValueEmail(emailUsr, driver), State.Warn);
 	 	validations.add(
 			"Aparece el importe de la compra por pantalla: " + importeTotal,

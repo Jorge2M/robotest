@@ -60,12 +60,12 @@ public class SecFiltrosStpV {
         String currentUrl = driver.getCurrentUrl();
 	 	validations.add(
 			"En la URL (*) aparece el parámetro c= que contiene los códigos de color <b>" + 
-			listCodColors.toString() + "</b> (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>" + 
+			listCodColors.toString() + "</b> (lo esperamos hasta " + maxSecondsToWait + " segundos)" + 
 			"(*) " + currentUrl + "<br>",
 			SecFiltros.checkUrlAfterFilterContainsColors(colorsSelected, currentUrl), State.Warn);    	
 		
 	 	validations.add(
-			"Aparece una pantalla en la que el title contiene \"" + litMenu.toUpperCase() + "<br>",
+			"Aparece una pantalla en la que el title contiene \"" + litMenu.toUpperCase(),
 			driver.getTitle().toUpperCase().contains(litMenu.toUpperCase()), State.Warn);    	
 	 	validations.add(
 			"En pantalla aparecen >1 artículos (están apareciendo " + numArticulos1page + ")",

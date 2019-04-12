@@ -43,7 +43,7 @@ public class SecMetodoEnvioDesktopStpV {
     	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
       	validations.add(
-    		"Desaparece la capa de Loading  (lo esperamos hasta " + maxSecondsWait + " segundos) <br>",
+    		"Desaparece la capa de Loading  (lo esperamos hasta " + maxSecondsWait + " segundos)",
     		PageCheckoutWrapper.waitUntilNoDivLoading(driver, maxSecondsWait), State.Warn);
       	validations.add(
     		"Queda seleccionado el bloque correspondiete a <b>" + tipoTransporte + "</b>",

@@ -38,7 +38,7 @@ public class PageMenusMantoStpV {
 	private static ChecksResult checkIsPageOfSubmenu(String subMenu, String textAlertObtained, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece la página asociada al menú <b>" + subMenu + "</b><br>",
+			"Aparece la página asociada al menú <b>" + subMenu + "</b>",
 			PageMenusManto.validateIsPage(subMenu, driver), State.Defect);
 	 	validations.add(
 			"No aparece ninguna ventana de alerta",

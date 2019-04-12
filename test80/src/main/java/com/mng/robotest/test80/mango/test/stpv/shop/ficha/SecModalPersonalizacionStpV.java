@@ -149,7 +149,7 @@ public class SecModalPersonalizacionStpV {
 		ChecksResult validations = ChecksResult.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
-			"Aparece seleccionado el primer icono<br>",
+			"Aparece seleccionado el primer icono",
 			SecModalPersonalizacion.isElementInStateUntil(ModalElement.IconSelecction, StateElem.Visible, maxSecondsWait, driver), State.Warn);
 		validations.add(
 			"Podemos confirmar nuestra seleccion",
@@ -190,7 +190,7 @@ public class SecModalPersonalizacionStpV {
 		ChecksResult validations = ChecksResult.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
-			"Aparecen los radio-button correspondientes a la seccion<br>",
+			"Aparecen los radio-button correspondientes a la seccion",
 			SecModalPersonalizacion.isElementInStateUntil(ModalElement.PositionButton, StateElem.Visible, maxSecondsWait, driver), State.Warn);
 		validations.add(
 			"Podemos confirmar nuestra seleccion",
@@ -225,7 +225,7 @@ public class SecModalPersonalizacionStpV {
 		ChecksResult validations = ChecksResult.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
-			"Aparecen los radio-button correspondientes a los colores<br>",
+			"Aparecen los radio-button correspondientes a los colores",
 			SecModalPersonalizacion.isElementInStateUntil(ModalElement.ColorsContainer, StateElem.Visible, maxSecondsWait, driver), State.Warn);
 		validations.add(
 			"Aparece el botón de \"Confirmar\"",

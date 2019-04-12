@@ -100,7 +100,7 @@ public class PageCheckoutWrapperStpV {
         for (int i=0; i<listaPagosEnOrden.size(); i++) {
             if (listaPagosEnOrden.get(i).getTypePago()!=TypePago.TpvVotf) {
         	 	validations.add(
-        			"Aparece el logo/pestaña asociado al pago <b>" + listaPagosEnOrden.get(i).getNombre(channel) + "</b><br>",
+        			"Aparece el logo/pestaña asociado al pago <b>" + listaPagosEnOrden.get(i).getNombre(channel) + "</b>",
         			PageCheckoutWrapper.isMetodoPagoPresent(listaPagosEnOrden.get(i).getNombre(channel), listaPagosEnOrden.get(i).getIndexpant(), channel, pais.getLayoutPago(), driver),
         			State.Defect);    
             }

@@ -20,18 +20,18 @@ public class PageKoCardINIpay1MobilStpV2 {
     public static ChecksResult validateIsPage(WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
       	validations.add(
-    		"Aparece una página de INIpay<br>",
+    		"Aparece una página de INIpay",
     		PageKoCardINIpay1Mobil.isPage(driver), State.Warn);
       	validations.add(
-    		"Existe el botón <b>SamsungPay</b><br>",
+    		"Existe el botón <b>SamsungPay</b>",
     		PageKoCardINIpay1Mobil.isElementInStateUntil(BodyPageKoCardINIpay1.terms, StateElem.Present, 2, driver), 
     		State.Warn);
       	validations.add(
-    		"Existe el checkbox para los <b>terminos</b> del pago<br>",
+    		"Existe el checkbox para los <b>terminos</b> del pago",
     		PageKoCardINIpay1Mobil.isElementInStateUntil(BodyPageKoCardINIpay1.terms, StateElem.Present, 2, driver), 
     		State.Warn);
       	validations.add(
-    		"Existe el titulo de los terminos<br>",
+    		"Existe el titulo de los terminos",
     		PageKoCardAdyen.isElementInStateUntil(BodyPageKoCardINIpay1.termsTitle, StateElem.Present, 2, driver), 
     		State.Defect);
       	return validations;

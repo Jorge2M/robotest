@@ -94,7 +94,7 @@ public class SecMenuLateralMobilStpV {
 	    PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
 	    int maxSecondsWait = 3;
 	 	validations.add(
-			"Aparece algún artículo (esperamos " + maxSecondsWait + " segundos)<br>",
+			"Aparece algún artículo (esperamos " + maxSecondsWait + " segundos)",
 			pageGaleria.isVisibleArticleUntil(1, maxSecondsWait), State.Warn);
 	 	validations.add(
 			"El 1er artículo es de tipo " + LineaType.nuevo,
@@ -221,7 +221,7 @@ public class SecMenuLateralMobilStpV {
     public static ChecksResult validaSelecLineaNinosWithSublineas(LineaType lineaNinosType, AppEcom appE, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Está seleccionada la línea <b>" + lineaNinosType + "</b><br>",
+			"Está seleccionada la línea <b>" + lineaNinosType + "</b>",
 			SecMenuLateralMobil.isSelectedLinea(lineaNinosType, appE, driver), State.Warn);
 	 	validations.add(
 			"Es visible el bloque con las sublíneas de " + lineaNinosType,
@@ -234,7 +234,7 @@ public class SecMenuLateralMobilStpV {
     																			   AppEcom appE, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Está seleccionada la línea <b>" + lineaType + "</b><br>",
+			"Está seleccionada la línea <b>" + lineaType + "</b>",
 			SecMenuLateralMobil.isSelectedLinea(lineaType, appE, driver), State.Warn);
 	 	validations.add(
 			"Son visibles links de Menú de 2o nivel",

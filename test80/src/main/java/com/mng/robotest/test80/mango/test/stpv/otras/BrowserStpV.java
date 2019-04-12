@@ -170,13 +170,13 @@ public class BrowserStpV {
             "Disallow: /";
     		
     	validations.add(
-            "Figura el siguiente contenido: <br>" + contRobots1.replace("\n", "<br>") + "<br>",
+            "Figura el siguiente contenido: <br>" + contRobots1.replace("\n", "<br>"),
             driver.getPageSource().toLowerCase().contains(contRobots1.toLowerCase()), State.Defect);
     	validations.add(
-            "Figura el siguiente contenido: <br>" + contRobots2.replace("\n", "<br>") + "<br>",
+            "Figura el siguiente contenido: <br>" + contRobots2.replace("\n", "<br>"),
             driver.getPageSource().contains(contRobots2), State.Defect);
     	validations.add(
-    		"Figura el siguiente contenido: <br>" + contRobots3.replace("\n", "<br>") + "<br>",
+    		"Figura el siguiente contenido: <br>" + contRobots3.replace("\n", "<br>"),
     		driver.getPageSource().contains(contRobots3), State.Defect);
     	validations.add(
     		"Figura el siguiente contenido: <br>" + contRobots4.replace("\n", "<br>"),
@@ -205,7 +205,7 @@ public class BrowserStpV {
     	}
     	catch (Exception e) {}
     	validations.add(
-            "Obtenemos un XML con formato de sitemap<br>",
+            "Obtenemos un XML con formato de sitemap",
             sitemapIndex!=null, State.Defect);
     	
     	if (sitemapIndex!=null) {

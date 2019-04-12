@@ -12,7 +12,7 @@ public class PageYandexMoneyResultStpV {
     public static ChecksResult validateIsResultOk(WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece la página de resultado de Yandex Money<br>",
+			"Aparece la página de resultado de Yandex Money",
 			PageYandexMoneyResult.isPage(driver), State.Defect);
 	 	validations.add(
 			"Aparece un mensaje de transferencia con éxito",

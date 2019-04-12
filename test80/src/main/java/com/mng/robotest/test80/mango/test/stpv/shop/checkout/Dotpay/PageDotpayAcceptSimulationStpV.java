@@ -13,7 +13,7 @@ public class PageDotpayAcceptSimulationStpV {
     public static ChecksResult validateIsPage(WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
       	validations.add(
-    		"Aparece la página de Dotpay para la introducción de los datos del pagador<br>",
+    		"Aparece la página de Dotpay para la introducción de los datos del pagador",
     		PageDotpayAcceptSimulation.isPage(driver), State.Warn);
       	validations.add(
     		"Figura un botón de aceptar rojo",

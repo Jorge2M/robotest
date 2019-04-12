@@ -15,10 +15,10 @@ public class PageAmexResultStpV {
 		ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 2;
 	 	validations.add(
-			"Aparece una página con un mensaje de OK (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+			"Aparece una página con un mensaje de OK (lo esperamos hasta " + maxSecondsWait + " segundos)",
 			PageAmexResult.isResultOkUntil(maxSecondsWait, driver), State.Defect); 
 	 	validations.add(
-			"Aparece el importe de la operación " + importeTotal + "<br>",
+			"Aparece el importe de la operación " + importeTotal,
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codigoPais, driver), State.Warn); 
 	 	validations.add(
 			"Aparece un botón \"CONTINUAR\"",

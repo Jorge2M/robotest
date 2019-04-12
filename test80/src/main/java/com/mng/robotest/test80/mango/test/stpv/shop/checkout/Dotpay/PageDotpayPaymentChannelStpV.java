@@ -14,7 +14,7 @@ public class PageDotpayPaymentChannelStpV {
     public static ChecksResult validateIsPage(String importeTotal, String codPais, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
       	validations.add(
-    		"Aparece la página de Dotpay para la selección del banco<br>",
+    		"Aparece la página de Dotpay para la selección del banco",
     		PageDotpayPaymentChannel.isPage(driver), State.Warn);
       	validations.add(
     		"Aparece el importe de la compra: " + importeTotal,

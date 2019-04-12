@@ -14,7 +14,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 	public static ChecksResult validateIsPage(WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Estamos en la página " + PageGestorConsultaCambioFamilia.titulo + "<br>",
+			"Estamos en la página " + PageGestorConsultaCambioFamilia.titulo,
 			PageGestorConsultaCambioFamilia.isPage(driver), State.Defect);
 	 	validations.add(
 			"Aparece la tabla de \"Consulta\"",
@@ -38,7 +38,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 	private static ChecksResult checkAfterSearchProductXfamilia(WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 		validations.add(
-			"Aparece la tabla con los productos<br>",
+			"Aparece la tabla con los productos",
 			PageGestorConsultaCambioFamilia.isTablaProductosVisible(driver), State.Defect);
 		validations.add(
 			"El campo de la tabla \"Traducción familia principal\" de la primera fila contiene el atributo \"Accesorios\"",
@@ -59,7 +59,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 	private static ChecksResult checkAfeterClickCambioFamilia(WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 		validations.add(
-			"Aparece la tabla con las opciones para los cambios de familia<br>",
+			"Aparece la tabla con las opciones para los cambios de familia",
 			PageGestorConsultaCambioFamilia.isTablaCambioFamiliaVisible(driver), State.Defect);
 		validations.add(
 			"El botón \"Consulta\" ya no está \"disabled\"",

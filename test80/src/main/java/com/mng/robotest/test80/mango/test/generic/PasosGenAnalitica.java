@@ -112,7 +112,7 @@ public class PasosGenAnalitica {
         String paramPolyvore = "adv=mango.com";
         JSONArray listEntriesFiltered = gestorHAR.getListEntriesFilterURL(urlPolyvore, paramPolyvore);
 	 	validations.add(
-			"Está lanzándose 1 petición que contiene <b>" + urlPolyvore + "</b> y el parámetro <b>" + paramPolyvore + "</b><br>",
+			"Está lanzándose 1 petición que contiene <b>" + urlPolyvore + "</b> y el parámetro <b>" + paramPolyvore + "</b>",
 			listEntriesFiltered.size()==1, State.Warn);   
 	 	
         if (listEntriesFiltered.size()==1) {
@@ -123,16 +123,16 @@ public class PasosGenAnalitica {
             JSONObject paramSkus = gestorHAR.getParameterFromRequestQuery(requestJSON, "skus");  
             JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
     	 	validations.add(
-				"La petición es de tipo <b>\"GET\"</b><br>",
+				"La petición es de tipo <b>\"GET\"</b>",
 				requestJSON.get("method").toString().compareTo("GET")==0, State.Warn);   
     	 	validations.add(
-				"El response status de la petición es <b>2xx</b> o <b>3xx</b><br>",
+				"El response status de la petición es <b>2xx</b> o <b>3xx</b>",
 				responseJSON.get("status").toString().matches("[2|3]\\d\\d"), State.Warn);   
     	 	validations.add(
-				"En la petición figura el parámetro <b>\"atm\"</b> y contiene el importe total del pedido <b>" + dataPedido.getImporteTotal() + "\"</b><br>",
+				"En la petición figura el parámetro <b>\"atm\"</b> y contiene el importe total del pedido <b>" + dataPedido.getImporteTotal() + "\"</b>",
 				(paramAtm!=null && ((String)paramAtm.get("value")).contains(dataPedido.getImporteTotal())), State.Warn); 
     	 	validations.add(
-				"En la petición figura el parámetro <b>\"oid\"</b> y contiene <b>\"MNG\"</b><br>",
+				"En la petición figura el parámetro <b>\"oid\"</b> y contiene <b>\"MNG\"</b>",
 				(paramOid!=null && ((String)paramOid.get("value")).contains("MNG")), State.Warn);
     	 	
     	 	boolean isParamSkus = true;
@@ -175,7 +175,7 @@ public class PasosGenAnalitica {
             JSONArray listEntriesFiltered = gestorHAR.getListEntriesFilterURL(urlCriteo, paramCriteo);
             boolean isArequestWithParamCriteo = listEntriesFiltered!=null && listEntriesFiltered.size()==1;
 		 	validations.add(
-				"Está lanzándose 1 petición que contiene <b>" + urlCriteo + "</b> y el parámetro <b>\"" + paramCriteo + "\"</b><br>",
+				"Está lanzándose 1 petición que contiene <b>" + urlCriteo + "</b> y el parámetro <b>\"" + paramCriteo + "\"</b>",
 				isArequestWithParamCriteo, State.Info); 
 		 	
 		 	if (isArequestWithParamCriteo) {
@@ -184,10 +184,10 @@ public class PasosGenAnalitica {
                 JSONObject paramRef = gestorHAR.getParameterFromRequestQuery(requestJSON, "ref");
                 JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
 			 	validations.add(
-					"La petición es de tipo <b>\"GET\"</b><br>",
+					"La petición es de tipo <b>\"GET\"</b>",
 					requestJSON.get("method").toString().compareTo("GET")==0, State.Warn); 
 			 	validations.add(
-					"El response status de la petición es de tipo <b>2xx</b> o <b>3xx</b><br>",
+					"El response status de la petición es de tipo <b>2xx</b> o <b>3xx</b>",
 					responseJSON.get("status").toString().matches("[2|3]\\d\\d"), State.Info); 
 			 	validations.add(
 					"En la petición figura el parámetro <b>\"ref\"</b> y contiene el referer de la 1a request (prioridad a las de estado 2xx) \"" + referer1aRequest + "\"</b>",
@@ -242,7 +242,7 @@ public class PasosGenAnalitica {
             String url1aRequest = ((JSONObject)primeraRequest.get("request")).get("url").toString();
             JSONArray listEntriesFiltered = gestorHAR.getListEntriesFilterURL(urlBing, paramBing);
 		 	validations.add(
-				"Está lanzándose 1 petición que contiene <b>" + urlBing + "</b> y el parámetro <b>\"" + paramBing + "\"</b><br>",
+				"Está lanzándose 1 petición que contiene <b>" + urlBing + "</b> y el parámetro <b>\"" + paramBing + "\"</b>",
 				listEntriesFiltered.size()==1, State.Warn); 
 		 	
 		 	if (listEntriesFiltered.size()==1) {
@@ -251,10 +251,10 @@ public class PasosGenAnalitica {
                 JSONObject paramP = gestorHAR.getParameterFromRequestQuery(requestJSON, "p");
                 JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
 			 	validations.add(
-					"La petición es de tipo <b>\"GET\"</b><br>",
+					"La petición es de tipo <b>\"GET\"</b>",
 					requestJSON.get("method").toString().compareTo("GET")==0, State.Warn); 
 			 	validations.add(
-					"El response status de la petición es de tipo <b>2xx</b><br>",
+					"El response status de la petición es de tipo <b>2xx</b>",
 					responseJSON.get("status").toString().matches("2\\d\\d"), State.Warn); 
 			 	validations.add(
 					"En la petición figura el parámetro <b>\"p\"</b> y contiene la URL de la 1a request " + url1aRequest + "\"</b>",
@@ -275,7 +275,7 @@ public class PasosGenAnalitica {
         int numLineas = listEntriesFilteredPage.size(); 
         String urlGoogleAnalytics = "://www.google-analytics.com/collect";
 	 	validations.add(
-			"Está lanzándose 1 petición que contiene <b>" + urlGoogleAnalytics + "</b> y el parámetro <b>\"t=pageview\"</b><br>",
+			"Está lanzándose 1 petición que contiene <b>" + urlGoogleAnalytics + "</b> y el parámetro <b>\"t=pageview\"</b>",
 			numLineas==0, State.Warn);
 	 	
 	 	if (numLineas!=0) {
@@ -284,10 +284,10 @@ public class PasosGenAnalitica {
             JSONObject paramTid = gestorHAR.getParameterFromRequestQuery(requestJSON, "tid");
             JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
 		 	validations.add(
-				"La petición es de tipo <b>\"GET\"</b><br>",
+				"La petición es de tipo <b>\"GET\"</b>",
 				requestJSON.get("method").toString().compareTo("GET")!=0, State.Warn);
 		 	validations.add(
-				"El response status de la petición es de tipo <b>2xx</b><br>",
+				"El response status de la petición es de tipo <b>2xx</b>",
 				responseJSON.get("status").toString().matches("2\\d\\d"), State.Warn);
 		 	
 	        String valueTid1 = "UA-855910-26";

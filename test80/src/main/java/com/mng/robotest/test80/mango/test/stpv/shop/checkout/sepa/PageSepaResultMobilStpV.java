@@ -17,7 +17,7 @@ public class PageSepaResultMobilStpV {
     public static ChecksResult validateIsPage(String importeTotal, String codPais, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
     	validations.add(
-    		"Aparece la página de resultado de SEPA para móvil<br>",
+    		"Aparece la página de resultado de SEPA para móvil",
     		PageSepaResultMobil.isPage(driver), State.Warn);	
     	validations.add(
     		"Aparece el importe de la compra: " + importeTotal,

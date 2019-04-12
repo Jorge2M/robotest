@@ -31,10 +31,10 @@ public class PageSuscripcionesStpV {
 
         ChecksResult validations = ChecksResult.getNew();
         validations.add(
-            "Aparecen "  + numLineasTotales + " Newsletter<br>",
+            "Aparecen "  + numLineasTotales + " Newsletter",
             PageSuscripciones.getNumNewsletters(driver)==numLineasTotales, State.Warn);
         validations.add(
-            "Aparecen "  + numLinDesmarcadas + " suscripciones desmarcadas<br>",
+            "Aparecen "  + numLinDesmarcadas + " suscripciones desmarcadas",
             PageSuscripciones.getNumNewslettersDesmarcadas(driver)==numLinDesmarcadas, State.Warn);
         while (tokensLinDesmarcadas.hasMoreElements()) {
             String lineaStr = tokensLinDesmarcadas.nextToken();

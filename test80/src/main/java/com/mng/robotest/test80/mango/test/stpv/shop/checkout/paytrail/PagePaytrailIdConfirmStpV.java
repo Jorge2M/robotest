@@ -14,7 +14,7 @@ public class PagePaytrailIdConfirmStpV {
     public static ChecksResult validateIsPage(String importeTotal, String codPais, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	   	validations.add(
-    		"Aparece la página de introducción del ID de confirmación<br>",
+    		"Aparece la página de introducción del ID de confirmación",
     		PagePaytrailIdConfirm.isPage(driver), State.Defect);
 	   	validations.add(
     		"Aparece el importe de la compra: " + importeTotal,

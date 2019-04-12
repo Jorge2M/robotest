@@ -14,7 +14,7 @@ public class PageEpsSelBancoStpV {
     public static ChecksResult validateIsPage(String importeTotal, String codPais, Channel channel, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
     	validations.add(
-    		"Figura el icono correspondiente al pago <b>EPS</b><br>",
+    		"Figura el icono correspondiente al pago <b>EPS</b>",
     		PageEpsSelBanco.isPresentIconoEps(driver), State.Warn);
     	
     	State stateVal = State.Warn;
@@ -22,7 +22,7 @@ public class PageEpsSelBancoStpV {
         	stateVal=State.Info;
         }
     	validations.add(
-    		"Aparece el importe de la compra: " + importeTotal + "<br>",
+    		"Aparece el importe de la compra: " + importeTotal,
     		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal);
     	validations.add(
     		"Aparece el logo del banco seleccionado",

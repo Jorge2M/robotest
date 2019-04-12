@@ -27,7 +27,7 @@ public class PageYandexMoneyStpV {
     private static ChecksResult checkIsPage(WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece el input para el <b>Payment Code</b><br>",
+			"Aparece el input para el <b>Payment Code</b>",
 			PageYandexMoney.isVisibleInputPaymentCode(driver), State.Warn);
 	 	validations.add(
 			"Aparece el input para el importe",

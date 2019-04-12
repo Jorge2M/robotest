@@ -28,7 +28,7 @@ public class ModalAvisoCambioPaisStpV {
     	ChecksResult validations = ChecksResult.getNew();
 	    int maxSecondsWait = 10;
 	 	validations.add(
-			"Desaparece el modal de aviso de cambio de país (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+			"Desaparece el modal de aviso de cambio de país (lo esperamos hasta " + maxSecondsWait + " segundos)",
 			ModalAvisoCambioPais.isInvisibleUntil(maxSecondsWait, driver), State.Defect);    	
 	 	validations.add(
 			"En la dirección de envió aparece el país " + paisEnvio.getNombre_pais(),

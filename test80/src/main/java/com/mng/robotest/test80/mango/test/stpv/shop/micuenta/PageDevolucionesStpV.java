@@ -15,13 +15,13 @@ public class PageDevolucionesStpV {
     public static ChecksResult validaIsPage (WebDriver driver) {
         ChecksResult validations = ChecksResult.getNew();
         validations.add(
-        	"Aparece la página de devoluciones<br>",
+        	"Aparece la página de devoluciones",
             PageDevoluciones.isPage(driver), State.Defect);
         validations.add(
-        	"Aparece la opción de " + Devolucion.EnTienda.getLiteral() + "<br>",
+        	"Aparece la opción de " + Devolucion.EnTienda.getLiteral(),
         	Devolucion.EnTienda.isPresentLink(driver), State.Defect);
         validations.add(
-        	"Aparece la opcion de " + Devolucion.EnDomicilio.getLiteral() + "<br>",
+        	"Aparece la opcion de " + Devolucion.EnDomicilio.getLiteral(),
         	Devolucion.EnDomicilio.isPresentLink(driver), State.Defect);
         validations.add(
         	"Aparece la opción de " + Devolucion.PuntoCeleritas.getLiteral(),

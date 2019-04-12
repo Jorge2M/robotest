@@ -38,9 +38,9 @@ public class AllPagesStpV {
     	ChecksResult validations = ChecksResult.getNew();
     	if (flagsVal.validaSEO) {
     		ResultadoErrores resValidac = AllPagesSEO.validacionesGenericasSEO(driver);
-    		String descripValidac = "Se cumplen las validaciones genéricas de SEO<br>";
+    		String descripValidac = "Se cumplen las validaciones genéricas de SEO";
     		if (!resValidac.isOK()) {
-    			descripValidac += resValidac.getlistaLogError().toString() + "<br>";
+    			descripValidac += resValidac.getlistaLogError().toString();
     		}
 			validations.add(
 				descripValidac,
@@ -53,10 +53,10 @@ public class AllPagesStpV {
         		WebdrvWrapp.getTypeDriver(driver)!=TypeDriver.firefoxhless) {
         		int maxErrors = 1;
         		ResultadoErrores resultadoLogs = WebDriverArqUtils.getLogErrors(Level.WARNING, driver, maxErrors, ctx);
-        		String descripValidac = "No hay errores JavaScript<br>";
+        		String descripValidac = "No hay errores JavaScript";
         		boolean resultadoOK = resultadoLogs.getResultado() == ResultadoErrores.Resultado.OK;
                 if (!resultadoOK) { 
-                	descripValidac += resultadoLogs.getlistaLogError().toString()  + "<br>";
+                	descripValidac += resultadoLogs.getlistaLogError().toString();
                 }
                 
                 //Sólo mostraremos warning en caso que alguno no se haya mostrado ya un máximo de veces durante el test
@@ -70,7 +70,7 @@ public class AllPagesStpV {
             int maxErrors = 1;
             ResultadoErrores resultadoImgs = WebDriverMngUtils.imagesBroken(driver, Channel.desktop, maxErrors);
             boolean resultadoOK = (resultadoImgs.getResultado() == ResultadoErrores.Resultado.OK);
-    		String descripValidac = "No hay ninguna imagen cortada<br>";
+    		String descripValidac = "No hay ninguna imagen cortada";
             if (!resultadoOK) {
             	descripValidac+=resultadoImgs.getlistaLogError().toString();
             }
@@ -88,7 +88,7 @@ public class AllPagesStpV {
     public static ChecksResult validatePageWithFooter(Pais pais, AppEcom app, WebDriver driver) throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
 		validations.add(
-			"Aparece el footer<br>",
+			"Aparece el footer",
 			SecFooter.isPresent(app, driver), State.Warn);
 		
 		if (pais!=null) {

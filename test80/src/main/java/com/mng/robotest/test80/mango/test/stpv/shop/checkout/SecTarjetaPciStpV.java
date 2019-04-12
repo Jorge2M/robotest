@@ -20,13 +20,13 @@ public class SecTarjetaPciStpV {
             int maxSecondsWait = 5;
 		 	validations.add(
 				"Aparece el bloque correspondiente a la introducción de los datos del método de pago " + pago.getNombre(channel) + 
-				" (lo esperamos hasta " + maxSecondsWait + " segundo)<br>",
+				" (lo esperamos hasta " + maxSecondsWait + " segundo)",
 				pageCheckoutStpV.getSecTarjetaPci(channel, driver).isVisiblePanelPagoUntil(pago.getNombre(channel), maxSecondsWait, driver), 
 				State.Warn);    
     	}
     	
 	 	validations.add(
-			"Aparecen los 4 campos <b>Número, Titular, Mes, Año</b> para la introducción de los datos de la tarjeta<br>",
+			"Aparecen los 4 campos <b>Número, Titular, Mes, Año</b> para la introducción de los datos de la tarjeta",
 			pageCheckoutStpV.getSecTarjetaPci(channel, driver).isPresentInputNumberUntil(1, driver) &&
 			pageCheckoutStpV.getSecTarjetaPci(channel, driver).isPresentInputTitular(driver) &&
 			pageCheckoutStpV.getSecTarjetaPci(channel, driver).isPresentSelectMes(driver) &&

@@ -38,14 +38,14 @@ public class SecConfirmDatosStpV {
 	throws Exception {
 		ChecksResult validations = ChecksResult.getNew();
       	validations.add(
-    		"Desaparece la capa de Droppoints<br>",
+    		"Desaparece la capa de Droppoints",
     		!ModalDroppoints.isVisible(channel, driver), State.Warn);
       	
 	    DataDeliveryPoint dataDp = dataPedido.getDataDeliveryPoint();
 	    String textDireccionEnvioCompleta = PageCheckoutWrapper.getTextDireccionEnvioCompleta(channel, driver);
         dataPedido.setDireccionEnvio(textDireccionEnvioCompleta);
       	validations.add(
-    		"Se modifica la dirección de envío por la del Delivery Point (" + dataDp.getDireccion() + ")<br>",
+    		"Se modifica la dirección de envío por la del Delivery Point (" + dataDp.getDireccion() + ")",
     		textDireccionEnvioCompleta.contains(dataDp.getDireccion()), State.Defect);
       	validations.add(
     		"Se modifica el código postal de envío por el del Delivery Point (" + dataDp.getCPandPoblacion() + ")",

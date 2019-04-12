@@ -13,7 +13,7 @@ public class PagePostfRedirectStpV {
 		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 10;
 	   	validations.add(
-    		"Aparece una página de redirección con un botón OK<br>",
+    		"Aparece una página de redirección con un botón OK",
     		PagePostfRedirect.isPresentButtonOk(driver), State.Defect);    
 	   	validations.add(
     		"La página de redirección acaba desapareciendo (esperamos hasta " + maxSecondsWait + " segundos)",

@@ -34,7 +34,7 @@ public class PagePrehomeStpV {
 		ChecksResult validations = ChecksResult.getNew();
 	    if (dCtxSh.channel==Channel.desktop) {
 	    	validations.add(
-				"Queda seleccionado el país con código " + dCtxSh.pais.getCodigo_pais() + " (" + dCtxSh.pais.getNombre_pais() + ")<br>",
+				"Queda seleccionado el país con código " + dCtxSh.pais.getCodigo_pais() + " (" + dCtxSh.pais.getNombre_pais() + ")",
 				PagePrehome.isPaisSelectedDesktop(driver, dCtxSh.pais.getNombre_pais()), State.Warn, true);
 	    }
 	    

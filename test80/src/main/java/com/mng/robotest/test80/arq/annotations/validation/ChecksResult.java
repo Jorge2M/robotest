@@ -1,7 +1,10 @@
 package com.mng.robotest.test80.arq.annotations.validation;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
@@ -81,12 +84,6 @@ public class ChecksResult {
 		add(resultValidation);
 	}
 	
-	public void checkAndStoreValidations(String descripcionValidation) {
-		checkValidations();
-		this.descripcionValidations = descripcionValidation;
-		storeGroupValidations(descripcionValidations);
-	}
-	
     public void checkAndStoreValidations() {
     	checkValidations();
     	storeGroupValidations(descripcionValidations);
@@ -135,12 +132,12 @@ public class ChecksResult {
     }
     
     private String calculateDescriptionValidation() {
-    	String descriptionToReturn = "";
+    	List<String> textValidations = new ArrayList<>();
     	for (ResultValidation resultValidation : listResultValidations) {
-    		descriptionToReturn+=resultValidation.getDescription();
+    		textValidations.add(resultValidation.getDescription());
     	}
-    	
-    	return descriptionToReturn;
+
+    	return (textValidations.stream().collect(Collectors.joining("<br>")));
     }
     
     private void setDatosStepAfterCheckValidation() {

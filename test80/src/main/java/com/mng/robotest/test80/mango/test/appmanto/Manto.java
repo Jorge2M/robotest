@@ -70,27 +70,25 @@ public class Manto extends GestorWebDriver {
     	groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
         description="Compra en España")
     public void MAN000_GenerarPedidoFicticioMANTO() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-    	PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, dFTest.driver);
-
-		//Accedemos a la tienda asociada al país/pedido (sólo si no estamos ya en ella)
+		WebDriver driver = TestCaseData.getWebDriver();
+    	PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
+    	
     	this.espanya.setCodigo_pais(this.codigoEspanya);
     	this.espanya.setNombre_pais("España");
     	this.dPedidoPrueba = new DataPedido(this.espanya);
 		this.dPedidoPrueba.setCodigopais(this.codigoEspanya);
 		this.dPagoPrueba.setNombre("");
 		this.dPedidoPrueba.setPago(this.dPagoPrueba);
-		
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, dFTest.driver);
+		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
     	
-    	PageMenusMantoStpV.goToPedidos(dFTest.driver);
+    	PageMenusMantoStpV.goToPedidos(driver);
     	
-    	SecFiltrosMantoStpV.setFiltrosHoyYbuscar(this.dPedidoPrueba, TypeSearch.PEDIDO, dFTest.driver);
+    	SecFiltrosMantoStpV.setFiltrosHoyYbuscar(this.dPedidoPrueba, TypeSearch.PEDIDO, driver);
     	//this.dPedidoPrueba = PagePedidosMantoStpV.getDataPedidoUsuarioRegistrado(this.dPedidoPrueba, dFTest);
-    	this.dPedidoPrueba = PagePedidosMantoStpV.getPedidoUsuarioRegistrado(this.dPedidoPrueba, dFTest);
-    	this.dPedidoPrueba = PagePedidosMantoStpV.getDataPedido(this.dPedidoPrueba, dFTest);
-    	this.dPedidoPrueba = PagePedidosMantoStpV.getDataCliente(this.dPedidoPrueba, dFTest);
-    	this.dPedidoPrueba = PagePedidosMantoStpV.getTiendaFisicaListaPedidos(this.dPedidoPrueba, dFTest);
+    	this.dPedidoPrueba = PagePedidosMantoStpV.getPedidoUsuarioRegistrado(this.dPedidoPrueba, driver);
+    	this.dPedidoPrueba = PagePedidosMantoStpV.getDataPedido(this.dPedidoPrueba, driver);
+    	this.dPedidoPrueba = PagePedidosMantoStpV.getDataCliente(this.dPedidoPrueba, driver);
+    	this.dPedidoPrueba = PagePedidosMantoStpV.getTiendaFisicaListaPedidos(this.dPedidoPrueba, driver);
     }
 
 	@Test(

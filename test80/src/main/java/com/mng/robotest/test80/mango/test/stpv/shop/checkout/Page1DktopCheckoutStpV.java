@@ -30,11 +30,11 @@ public class Page1DktopCheckoutStpV {
         int maxSecondsWait = 5;
         boolean isPageInitCheckout = Page1DktopCheckout.isPageUntil(maxSecondsWait, driver);
 	 	validations.add(
-			"Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSecondsWait + " segundos)<br>",
+			"Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSecondsWait + " segundos)",
 			isPageInitCheckout, State.Warn, true);
 	 	if (!isPageInitCheckout) {
 		 	validations.add(
-				"Si no ha aparecido la esperamos " + (maxSecondsWait * 2) + " segundos más<br>",
+				"Si no ha aparecido la esperamos " + (maxSecondsWait * 2) + " segundos más",
 				Page1DktopCheckout.isPageUntil(maxSecondsWait*2, driver), State.Defect);
 	 	}
 	 	validations.add(
@@ -68,7 +68,7 @@ public class Page1DktopCheckoutStpV {
     	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
 	 	validations.add(
-			"Aparece el descuento total aplicado al empleado (lo experamos hasta " + maxSecondsWait + " segundos)<br>",
+			"Aparece el descuento total aplicado al empleado (lo experamos hasta " + maxSecondsWait + " segundos)",
 			Page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(driver, maxSecondsWait), State.Defect);
 	 	
     	Descuento descuento = new Descuento(app, DiscountType.Empleado);
@@ -140,7 +140,7 @@ public class Page1DktopCheckoutStpV {
     	Descuento descuento = new Descuento(valePais.getPorcDescuento(), app);
 	 	validations.add(
 			"En los artículos a los que aplica, el descuento es de " +  
-			descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + "): <br>" +
+			descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + "):" +
 			dataBag.getListArtDescHTML(),
 			Page1DktopCheckout.validateArticlesAndDiscount(dataBag, descuento, driver), State.Defect);
 	 	return validations;
@@ -174,7 +174,7 @@ public class Page1DktopCheckoutStpV {
     private static ChecksResult checkAfterInputCodigoVendedor(String codigoVendedor, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Desaparece el campo de Input del código de vendedor<br>",
+			"Desaparece el campo de Input del código de vendedor",
 			!Page1DktopCheckout.isVisibleInputVendedorVOTF(driver), State.Defect);
 	 	validations.add(
 			"En su lugar se pinta el código de vendedor " + codigoVendedor,

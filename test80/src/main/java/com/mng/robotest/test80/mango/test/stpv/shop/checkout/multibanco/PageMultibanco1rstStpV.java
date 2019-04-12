@@ -15,7 +15,7 @@ public class PageMultibanco1rstStpV {
     public static ChecksResult validateIsPage(String nombrePago, String importeTotal, String emailUsr, String codPais, Channel channel, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	   	validations.add(
-    		"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b><br>",
+    		"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
     		PageMultibanco1rst.isPresentEntradaPago(nombrePago, channel, driver), State.Warn);
 	   	
 	   	State stateVal = State.Warn;
@@ -23,15 +23,15 @@ public class PageMultibanco1rstStpV {
         	stateVal = State.Info;
         }
 	   	validations.add(
-    		"Aparece el importe de la compra: " + importeTotal + "<br>",
+    		"Aparece el importe de la compra: " + importeTotal,
     		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal);
 	   	validations.add(
-    		"Aparece la cabecera indicando la 'etapa' del pago<br>",
+    		"Aparece la cabecera indicando la 'etapa' del pago",
     		PageMultibanco1rst.isPresentCabeceraStep(driver), State.Warn);
 	   	
         if (channel==Channel.desktop) {
     	   	validations.add(
-	    		"Aparece un campo de introducción de email (informado con <b>" + emailUsr + "</b>)<br>",
+	    		"Aparece un campo de introducción de email (informado con <b>" + emailUsr + "</b>)",
 	    		PageMultibanco1rst.isPresentEmailUsr(emailUsr, driver), State.Warn);
     	   	validations.add(
 	    		"Figura un botón de pago",
@@ -46,8 +46,6 @@ public class PageMultibanco1rstStpV {
         expected="Aparece la página de \"En progreso\"")
     public static void continueToNextPage(Channel channel, WebDriver driver) throws Exception {
         PageMultibanco1rst.continueToNextPage(channel, driver);
-        
-        //Validaciones
         PageMultibancoEnProgresoStpv.validateIsPage(driver);
     }
 }

@@ -14,13 +14,13 @@ public class PageTrustpayTestConfirmStpV {
     public static ChecksResult validateIsPage(WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
     	validations.add(
-    		"Figura el botón \"OK\"<br>",
+    		"Figura el botón \"OK\"",
     		PageTrustpayTestConfirm.isPresentButton(typeButtons.OK, driver), State.Defect);
     	validations.add(
-    		"Figura el botón \"ANNOUNCED\"<br>",
+    		"Figura el botón \"ANNOUNCED\"",
     		PageTrustpayTestConfirm.isPresentButton(typeButtons.ANNOUNCED, driver), State.Warn);
     	validations.add(
-    		"Figura el botón \"FAIL\"<br>",
+    		"Figura el botón \"FAIL\"",
     		PageTrustpayTestConfirm.isPresentButton(typeButtons.FAIL, driver), State.Warn);
     	validations.add(
     		"Figura el botón \"PENDING\"",

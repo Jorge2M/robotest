@@ -15,10 +15,10 @@ public class PageYandexPayingByCodeStpV {
     public static ChecksResult validateIsPage(String importeTotal, String codPais, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece la página de <b>Paying by code</b><br>",
+			"Aparece la página de <b>Paying by code</b>",
 			PageYandexPayingByCode.isPage(driver), State.Warn);
 	 	validations.add(
-			"Aparece el importe de la compra por pantalla: " + importeTotal + "<br>",
+			"Aparece el importe de la compra por pantalla: " + importeTotal,
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
 	 	validations.add(
 			"Aparece un <b>PaymentCode</b>",

@@ -67,12 +67,12 @@ public class PageRegistroIniStpV {
         	String dataInputString = dataInput.getDataRegType() + " (<b>" + dataInput.getData() + "</b>)";
             if (dataInput.isValidPrevRegistro()) {
             	validations.add(
-            		"No aparece mensaje de error el el campo con datos correctos: <b>" + dataInputString + "</b><br>",
+            		"No aparece mensaje de error el el campo con datos correctos: <b>" + dataInputString + "</b>",
             		PageRegistroIni.getNumberMsgInputInvalid(dataInput.dataRegType, driver) <= 0, State.Warn);
             }
             else {
             	validations.add(
-            		"Sí aparece mensaje de error el el campo con datos incorrectos: <b>" + dataInputString + "</b><br>",
+            		"Sí aparece mensaje de error el el campo con datos incorrectos: <b>" + dataInputString + "</b>",
             		PageRegistroIni.getNumberMsgInputInvalid(dataInput.dataRegType, driver) > 0, State.Warn);
 	        }
         }
@@ -132,7 +132,7 @@ public class PageRegistroIniStpV {
         int numErrCampObligatorio = PageRegistroIni.getNumberMsgCampoObligatorio(driver);
         
     	validations.add(
-    		"Aparecen " + numInputsObligatoriosNoInf + " errores de campo obligatorio<br>",
+    		"Aparecen " + numInputsObligatoriosNoInf + " errores de campo obligatorio",
     		(numInputsObligatoriosNoInf + numInputsTypePassrod) >= numErrCampObligatorio, State.Warn);
     	if (PageRegistroIni.isVisibleSelectPais(driver)) {
 	    	validations.add(
@@ -169,10 +169,10 @@ public class PageRegistroIniStpV {
 		ChecksResult validations = ChecksResult.getNew();
 		int maxSeconds = 1;
     	validations.add(
-    		"El texto de info de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>",
+    		"El texto de info de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais(),
     		PageRegistroIni.isTextoRGPDVisible(driver), State.Defect);
     	validations.add(
-    		"El texto legal de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>",
+    		"El texto legal de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais(),
     		PageRegistroIni.isTextoLegalRGPDVisible(driver), State.Defect);
     	validations.add(
     		"<b>SI</b> está presente el checkbox para recibir promociones e información personalizada para el pais" +
@@ -186,10 +186,10 @@ public class PageRegistroIniStpV {
 		ChecksResult validations = ChecksResult.getNew();
 		int maxSeconds = 1;
     	validations.add(
-    		"El texto de info de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>",
+    		"El texto de info de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais(),
     		!PageRegistroIni.isTextoRGPDVisible(driver), State.Defect);
     	validations.add(
-    		"El texto legal de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais() + "<br>",
+    		"El texto legal de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais(),
     		!PageRegistroIni.isTextoLegalRGPDVisible(driver), State.Defect);
     	validations.add(
     		"<b>NO</b> es visible el checkbox para recibir promociones e información personalizada para el pais " + 

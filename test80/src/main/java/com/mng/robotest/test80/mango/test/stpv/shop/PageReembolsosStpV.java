@@ -42,7 +42,7 @@ public class PageReembolsosStpV {
     private static ChecksResult checkClickReembolsos(boolean paisConSaldoCta, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
     	validations.add(
-    		"Aparece la página de reembolsos<br>",
+    		"Aparece la página de reembolsos",
     		PageReembolsos.isPage(driver), State.Defect);    	
     	
         int maxSecondsToWait = 5;
@@ -132,7 +132,7 @@ public class PageReembolsosStpV {
     	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsToWait = 10;
     	validations.add(
-    		"Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + maxSecondsToWait + " segundos)<br>",
+    		"Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + maxSecondsToWait + " segundos)",
     		PageReembolsos.isVisibleTextBancoUntil(maxSecondsToWait, driver) &&
             PageReembolsos.isVisibleTextTitular(driver) &&
             PageReembolsos.isVisibleTextIBAN(driver), State.Defect);
@@ -156,7 +156,7 @@ public class PageReembolsosStpV {
     private static ChecksResult checkAfterSelectStoreCredit(WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
        	validations.add(
-    		"Aparece seleccionado el radiobutton de \"Store Credit\"<br>",
+    		"Aparece seleccionado el radiobutton de \"Store Credit\"",
     		PageReembolsos.isCheckedRadio(TypeReembolso.StoreCredit, driver), State.Warn);
        	validations.add(
     		"Aparece un saldo >= 0",

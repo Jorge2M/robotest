@@ -117,18 +117,18 @@ public class SecBannersStpV {
     	int marginElements = 3;
     	int maxSecondsWait2 = 1;
 	 	validations.add(
-	 		"La URL de la página cambia (lo esperamos hasta un máximo de " + maxSecondsWait1 + " segundos)<br>",
+	 		"La URL de la página cambia (lo esperamos hasta un máximo de " + maxSecondsWait1 + " segundos)",
 	 		AllPages.validateUrlNotMatchUntil(urlPagPadre, maxSecondsWait1, driver), State.Defect);    
 	 	validations.add(
 	 		"La página cambia; el número de elementos DOM ha variado (en " + marginElements + " o más) " + 
-	 		"con respecto al original (" + elementosPagPadre + ")<br>",
+	 		"con respecto al original (" + elementosPagPadre + ")",
 	 		AllPages.validateElementsNotEqualsUntil(elementosPagPadre, marginElements, maxSecondsWait2, driver), State.Warn); 
 	 	
 	 	int maxErrors = 1;
         ResultadoErrores resultadoImgs = WebDriverMngUtils.imagesBroken(driver, Channel.desktop, maxErrors);
         if (resultadoImgs.getResultado() != ResultadoErrores.Resultado.OK) { // Si hay error lo pintamos en la descripción de la validación
 		 	validations.add(
-		 		"No hay imágenes cortadas<br>" + resultadoImgs.getlistaLogError().toString(),
+		 		"No hay imágenes cortadas" + resultadoImgs.getlistaLogError().toString(),
 		 		resultadoImgs.getResultado()==ResultadoErrores.Resultado.MAX_ERRORES, State.Defect);     
         }
 

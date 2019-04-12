@@ -41,10 +41,10 @@ public class PageMisComprasStpV {
     	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsToWait = 2;
       	validations.add(
-    		"Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)<br>",
+    		"Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)",
     		PageMisCompras.isPageUntil(maxSecondsToWait, driver), State.Warn);
       	validations.add(
-    		"No aparece el bloque de \"Tienda\"<br>",
+    		"No aparece el bloque de \"Tienda\"",
     		!PageMisCompras.isPresentBlockUntil(0, TypeCompra.Tienda, driver), State.Warn);
       	validations.add(
     		"No aparece el bloque de \"Online\"",
@@ -57,10 +57,10 @@ public class PageMisComprasStpV {
     	ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 2;
       	validations.add(
-    		"Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		"Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsWait + " segundos)",
     		PageMisCompras.isPageUntil(maxSecondsWait, driver), State.Warn);
       	validations.add(
-    		"Aparece el bloque de \"Tienda\"<br>",
+    		"Aparece el bloque de \"Tienda\"",
     		PageMisCompras.isPresentBlockUntil(0, TypeCompra.Tienda, driver), State.Warn);
       	validations.add(
       		"Aparece el bloque de \"Online\"",
@@ -96,7 +96,7 @@ public class PageMisComprasStpV {
     	int maxSecondsWait = 2;
     	boolean isVisibleAnyCompra = PageMisCompras.isVisibleAnyCompraUntil(maxSecondsWait, driver); 
       	validations.add(
-    		"Aparece una lista con algún artículo (lo esperamos hasta " + maxSecondsWait + " segundos) <br>",
+    		"Aparece una lista con algún artículo (lo esperamos hasta " + maxSecondsWait + " segundos)",
     		isVisibleAnyCompra, State.Warn);
       	if (isVisibleAnyCompra) {
           	validations.add(
@@ -111,7 +111,7 @@ public class PageMisComprasStpV {
     	ChecksResult validations = ChecksResult.getNew();
     	boolean isVisibleAnyCompra = PageMisCompras.isVisibleAnyCompraUntil(0, driver);
       	validations.add(
-    		"No aparece ningún artículo<br>",
+    		"No aparece ningún artículo",
     		!isVisibleAnyCompra, State.Warn);
       	validations.add(
     		"Es visible la imagen asociada a <b>Lista Vacía</b> para " + typeCompra,
@@ -172,7 +172,7 @@ public class PageMisComprasStpV {
     private static ChecksResult checkModalArticle(String infoArticle, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
     	validations.add(
-    		"Aparece el modal con información del artículo<br>",
+    		"Aparece el modal con información del artículo",
     		ModalDetalleMisCompras.isVisible(driver), State.Defect);
     	validations.add(
     		"La información del artículo que aparece en el modal es correcta " + infoArticle,

@@ -13,7 +13,7 @@ public class PageListPedidosStpV {
     public static ChecksResult validateIsPage(String codigoPedido, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
       	validations.add(
-      		"La página contiene el bloque correspondiente a la lista de pedidos<br>",
+      		"La página contiene el bloque correspondiente a la lista de pedidos",
       		PageListPedidos.isPage(driver), State.Defect);	
       	validations.add(
       		"Figura la línea correspondiente al pedido " + codigoPedido,

@@ -13,7 +13,7 @@ public class PageReembolsosStpV {
     public static ChecksResult validateIsPage (WebDriver driver) {
         ChecksResult validations = ChecksResult.getNew();
         validations.add(
-        	"Aparece la página de Reembolsos<br>",
+        	"Aparece la página de Reembolsos",
         	PageReembolsos.isPage(driver), State.Defect);
         validations.add(
         	"Aparecen los inputs de BANCO, TITULAR e IBAN",

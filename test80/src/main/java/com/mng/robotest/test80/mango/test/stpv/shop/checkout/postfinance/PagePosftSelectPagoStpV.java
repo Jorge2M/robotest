@@ -21,7 +21,7 @@ public class PagePosftSelectPagoStpV {
 		ChecksResult validations = ChecksResult.getNew();
 		int maxSecondsWait = 5;
 	   	validations.add(
-    		"Aparece la 1a pantalla para la selección del método <b>" + nombrePago + "</b> (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		"Aparece la 1a pantalla para la selección del método <b>" + nombrePago + "</b> (la esperamos hasta " + maxSecondsWait + " segundos)",
     		PagePostfSelectPago.isPageUntil(nombrePago, maxSecondsWait, driver), State.Defect);
 	   	validations.add(
     		"En la página resultante figura el importe total de la compra (" + importeTotal + ")",

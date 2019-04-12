@@ -51,13 +51,13 @@ public class SecBolsaButtonAndLinksNewStpV {
 	private static ChecksResult checkBreadCrumbs(WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Figura el bloque de BreadCrumbs<br>",
+			"Figura el bloque de BreadCrumbs",
 			SecDetalleProductNew.isVisibleBreadcrumbs(0, driver), State.Warn);
 	 	validations.add(
-			"Es visible el item " + ItemBreadcrumb.linea + "<br>",
+			"Es visible el item " + ItemBreadcrumb.linea,
 			SecDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.linea, driver), State.Warn);
 	 	validations.add(
-			"Es visible el item " + ItemBreadcrumb.grupo + "<br>",
+			"Es visible el item " + ItemBreadcrumb.grupo,
 			SecDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.grupo, driver), State.Warn);
 	 	validations.add(
 			"Es visible el item " + ItemBreadcrumb.galeria,
@@ -93,12 +93,12 @@ public class SecBolsaButtonAndLinksNewStpV {
 	        boolean isVisibleIcon = ModCompartirNew.isVisibleIcon(icon, driver);
 	        if (isPaisChina != icon.isSpecificChina()) {
 			 	validations.add(
-			 		"No es visible el icono de " + icon + "<br>",
+			 		"No es visible el icono de " + icon,
 			 		!isVisibleIcon, State.Warn);
 	        }
 	        else {
 			 	validations.add(
-			 		"Sí es visible el icono de " + icon + "<br>",
+			 		"Sí es visible el icono de " + icon,
 			 		isVisibleIcon, State.Warn);
 	        }
 	    }        

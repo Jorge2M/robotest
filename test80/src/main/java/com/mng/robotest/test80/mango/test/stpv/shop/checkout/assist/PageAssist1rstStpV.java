@@ -19,13 +19,13 @@ public class PageAssist1rstStpV {
     public static ChecksResult validateIsPage(String importeTotal, Pais pais, Channel channel, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Está presente el logo de Assist<br>",
+			"Está presente el logo de Assist",
 			PageAssist1rst.isPresentLogoAssist(channel, driver), State.Warn);
 	 	validations.add(
-			"En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>",
+			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, pais.getCodigo_pais(), driver), State.Warn);
 	 	validations.add(
-			"No se trata de la página de precompra (no aparece los logos de formas de pago)<br>",
+			"No se trata de la página de precompra (no aparece los logos de formas de pago)",
 			!PageCheckoutWrapper.isPresentMetodosPago(pais, channel, driver), State.Defect);
 	 	
 	 	boolean inputsTrjOk = PageAssist1rst.isPresentInputsForTrjData(channel, driver);
@@ -57,7 +57,7 @@ public class PageAssist1rstStpV {
     	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 10;
 	 	validations.add(
-			"Desaparece la página con el botón de pago (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+			"Desaparece la página con el botón de pago (lo esperamos hasta " + maxSecondsWait + " segundos)",
 			PageAssist1rst.invisibilityBotonPagoUntil(maxSecondsWait, channel, driver), State.Warn);
 	 	validations.add(
 			"Aparece una página intermedia con un botón de submit",

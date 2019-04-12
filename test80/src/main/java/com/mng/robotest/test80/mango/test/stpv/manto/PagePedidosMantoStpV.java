@@ -33,32 +33,32 @@ public class PagePedidosMantoStpV {
     	
         int maxSecondsWait = 30;
 	 	validations.add(
-			"Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + maxSecondsWait + " segundos) + <br>",
+			"Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + maxSecondsWait + " segundos)",
 			PagePedidos.isInvisibleCapaLoadingUntil(maxSecondsWait, driver), State.Defect);
 	 	
 	 	validations.setExistsLinkCodPed(PagePedidos.isPresentDataInPedido(IdColumn.idpedido, dataPedido.getCodigoPedidoManto(), TypeDetalle.pedido, 0, driver));
 	 	validations.add(
-			"En la columna " + IdColumn.idpedido.textoColumna + " aparece el código de pedido: " + dataPedido.getCodigoPedidoManto() + "<br>",
+			"En la columna " + IdColumn.idpedido.textoColumna + " aparece el código de pedido: " + dataPedido.getCodigoPedidoManto(),
 			validations.getExistsLinkCodPed(), State.Warn);
 	 	validations.add(
-			"Aparece un solo pedido <br>",
+			"Aparece un solo pedido",
 			PagePedidos.getNumLineas(driver)==1, State.Warn);
     	
         if (appE!=AppEcom.outlet) {
     	 	validations.add(
-				"En la columna " + IdColumn.tpv.textoColumna + " Aparece el Tpv asociado: " + dataPedido.getPago().getTpv().getId() + "<br>",
+				"En la columna " + IdColumn.tpv.textoColumna + " Aparece el Tpv asociado: " + dataPedido.getPago().getTpv().getId(),
 				PagePedidos.isPresentDataInPedido(IdColumn.tpv, dataPedido.getPago().getTpv().getId(), TypeDetalle.pedido, 0, driver), 
 				State.Warn);
         }
 
 	 	validations.add(
-			"En la columna " + IdColumn.email.textoColumna + " aparece el email asociado: " + dataPedido.getEmailCheckout() + "<br>",
+			"En la columna " + IdColumn.email.textoColumna + " aparece el email asociado: " + dataPedido.getEmailCheckout(),
 			PagePedidos.isPresentDataInPedido(IdColumn.email, dataPedido.getEmailCheckout(), TypeDetalle.pedido, 0, driver), 
 			State.Warn);
 	 	
 	 	String xpathCeldaImporte = PagePedidos.getXPathCeldaLineaPedido(IdColumn.total, TypeDetalle.pedido, driver);
 	 	validations.add(
-			"En pantalla aparece el importe asociado: " +  dataPedido.getImporteTotalManto() + "<br>",
+			"En pantalla aparece el importe asociado: " +  dataPedido.getImporteTotalManto(),
 			ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), xpathCeldaImporte, driver), 
 			State.Warn);
 	 	validations.add(
@@ -146,7 +146,7 @@ public class PagePedidosMantoStpV {
 	private static ChecksResult checkAfterSearchPedido(DataPedido dPedidoPrueba, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Tenemos el DNI del cliente " + dPedidoPrueba.getPago().getDni() + "<br>",
+			"Tenemos el DNI del cliente " + dPedidoPrueba.getPago().getDni(),
 			!dPedidoPrueba.getPago().getDni().equals(""), State.Defect);
 	 	validations.add(
 			"Tenemos el Email del cliente " + dPedidoPrueba.getPago().getUseremail(),

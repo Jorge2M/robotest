@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.StepAspect;
+import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -38,33 +36,33 @@ public class PagePedidosMantoStpV {
     	
         int maxSecondsToWait = 30;
 	 	validations.add(
-			"Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + maxSecondsToWait + " segundos) + <br>",
+			"Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + maxSecondsToWait + " segundos)",
 			PagePedidos.isInvisibleCapaLoadingUntil(maxSecondsToWait, driver), State.Warn);
 	 	
         boolean existsLinkPedido = PagePedidos.isPresentDataInPedido(IdColumn.idpedido, dataPedido.getCodigoPedidoManto(), TypeDetalle.pedido, 0, driver);
 	 	validations.add(
-			"En la columna " + IdColumn.idpedido.textoColumna + " aparece el código de pedido: " + dataPedido.getCodigoPedidoManto() + "<br>",
+			"En la columna " + IdColumn.idpedido.textoColumna + " aparece el código de pedido: " + dataPedido.getCodigoPedidoManto(),
 			existsLinkPedido, State.Warn);
 	 	validations.add(
-			"Aparece un solo pedido <br>",
+			"Aparece un solo pedido",
 			PagePedidos.getNumLineas(driver)==1, State.Warn);
     	
 	 	//En el caso de Outlet no tenemos la información del TPV que toca
 	 	if (appE!=AppEcom.outlet) {
 		 	validations.add(
-				"En la columna " + IdColumn.tpv.textoColumna + " Aparece el Tpv asociado: " + dataPedido.getPago().getTpv().getId() + "<br>",
+				"En la columna " + IdColumn.tpv.textoColumna + " Aparece el Tpv asociado: " + dataPedido.getPago().getTpv().getId(),
 				PagePedidos.isPresentDataInPedido(IdColumn.tpv, dataPedido.getPago().getTpv().getId(), TypeDetalle.pedido, 0, driver), 
 				State.Warn);
 	 	}
     	
 	 	validations.add(
-			"En la columna " + IdColumn.email.textoColumna + " aparece el email asociado: " + dataPedido.getEmailCheckout() + "<br>",
+			"En la columna " + IdColumn.email.textoColumna + " aparece el email asociado: " + dataPedido.getEmailCheckout(),
 			PagePedidos.isPresentDataInPedido(IdColumn.email, dataPedido.getEmailCheckout(), TypeDetalle.pedido, 0, driver), 
 			State.Warn);
 	 	
 	 	String xpathCeldaImporte = PagePedidos.getXPathCeldaLineaPedido(IdColumn.total, TypeDetalle.pedido, driver);
 	 	validations.add(
-			"En pantalla aparece el importe asociado: " +  dataPedido.getImporteTotalManto() + "<br>",
+			"En pantalla aparece el importe asociado: " +  dataPedido.getImporteTotalManto(),
 			ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), xpathCeldaImporte, driver), 
 			State.Warn);
 	 	validations.add(
@@ -75,187 +73,110 @@ public class PagePedidosMantoStpV {
         return validations;
     }
     
-    /**
-     * Se busca un pedido con DNI para las pruebas en manto
-     * @return DataPedido con el ID pedido seteado
-     */
-	public static DataPedido getPedidoUsuarioRegistrado(DataPedido dPedidoPrueba, DataFmwkTest dFTest)
-			throws Exception {
+	@Step (
+		description="Buscamos pedidos con id registro",
+		expected="Debemos obtener el ID del pedido",
+		saveErrorPage=SaveWhen.Never)
+	public static DataPedido getPedidoUsuarioRegistrado(DataPedido dPedidoPrueba, WebDriver driver) throws Exception {
 		int posicionPedidoActual = 6;
 		int posicionMaxPaginaPedidos = 105;
-		DatosStep datosStep = new DatosStep (
-				"Buscamos pedidos con id registro",
-				"Debemos obtener el ID del pedido");
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-		try {
-			do {
-				posicionPedidoActual++;
-				posicionPedidoActual = PagePedidos.getPosicionPedidoUsuarioRegistrado(posicionPedidoActual, dFTest.driver);
-				dPedidoPrueba.setCodpedido(PagePedidos.getCodigoPedidoUsuarioRegistrado(posicionPedidoActual, dFTest.driver));
-
-				//PagePedidos.clickLinkPedidoInLineas(dFTest.driver, PagePedidos.getCodigoPedidoUsuarioRegistrado(posicionPedidoActual, dFTest.driver));
-
-				//PageDetalleCliente.clickLinkVolverPedidos(dFTest.driver);ro
-
-				if (posicionPedidoActual == posicionMaxPaginaPedidos) {
-					posicionPedidoActual = 6;
-					PagePedidos.clickPaginaSiguientePedidos(dFTest.driver);
-				}
-			} while (dPedidoPrueba.getCodpedido().equals(""));
-
-			PagePedidos.clickLinkPedidoInLineas(dFTest.driver, PagePedidos.getCodigoPedidoUsuarioRegistrado(posicionPedidoActual, dFTest.driver), TypeDetalle.pedido);
-
-			datosStep.setExcepExists(false);
-			datosStep.setResultSteps(State.Ok);
-
-		} finally {
-			StepAspect.storeDataAfterStep(datosStep);
-		}
-
-		String descripValidac = "1) Tenemos código de pedido " + dPedidoPrueba.getCodpedido();
-		datosStep.setNOKstateByDefault();
-		ChecksResult listVals = ChecksResult.getNew(datosStep);
-		try {
-			if (dPedidoPrueba.getCodpedido().equals("")) {
-				listVals.add(1, State.Defect);
+		do {
+			posicionPedidoActual++;
+			posicionPedidoActual = PagePedidos.getPosicionPedidoUsuarioRegistrado(posicionPedidoActual, driver);
+			dPedidoPrueba.setCodpedido(PagePedidos.getCodigoPedidoUsuarioRegistrado(posicionPedidoActual, driver));
+			if (posicionPedidoActual == posicionMaxPaginaPedidos) {
+				posicionPedidoActual = 6;
+				PagePedidos.clickPaginaSiguientePedidos(driver);
 			}
+		} while (dPedidoPrueba.getCodpedido().equals(""));
 
-			datosStep.setListResultValidations(listVals);
-		} 
-		finally { listVals.checkAndStoreValidations(descripValidac); }
+		PagePedidos.clickLinkPedidoInLineas(driver, PagePedidos.getCodigoPedidoUsuarioRegistrado(posicionPedidoActual, driver), TypeDetalle.pedido);
+		checkCodePedidoOk(dPedidoPrueba);
 
 		return dPedidoPrueba;
 	}
+	
+	@Validation (
+		description="Tenemos código de pedido #{dPedidoPrueba.getCodpedido()}",
+		level=State.Defect)
+	private static boolean checkCodePedidoOk(DataPedido dPedidoPrueba) {
+		return (!dPedidoPrueba.getCodpedido().equals(""));
+	}
 
-	/**
-	 * Se busca la información del pedido
-	 * 
-	 * @return DataPedido con la información del pedido seteada
-	 */
-	public static DataPedido getDataPedido(DataPedido dPedidoPrueba, DataFmwkTest dFTest) throws Exception {
+	@Step (
+		description="Buscamos pedidos con id registro para obtener información del cliente",
+		expected="Debemos obtener la información del cliente",
+		saveErrorPage=SaveWhen.Never)
+	public static DataPedido getDataPedido(DataPedido dPedidoPrueba, WebDriver driver) throws Exception {
 		DataBag dBagPrueba = new DataBag();
 		List<String> referencias = new ArrayList<>();
 		ArticuloScreen articulo;
-		DatosStep datosStep = new DatosStep(
-			"Buscamos pedidos con id registro para obtener información del cliente",
-			"Debemos obtener la información del cliente");
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-		try {
-
-			referencias = PageDetallePedido.getReferenciasArticulosDetallePedido(dFTest.driver);
-
-			for (String referencia : referencias) {
-				articulo = new ArticuloScreen();
-				articulo.setReferencia(referencia);
-				dBagPrueba.addArticulo(articulo);
-			}
-			dPedidoPrueba.setDataBag(dBagPrueba);
-
-			datosStep.setExcepExists(false);
-			datosStep.setResultSteps(State.Ok);
-
-		} finally {
-			StepAspect.storeDataAfterStep(datosStep);
+		referencias = PageDetallePedido.getReferenciasArticulosDetallePedido(driver);
+		for (String referencia : referencias) {
+			articulo = new ArticuloScreen();
+			articulo.setReferencia(referencia);
+			dBagPrueba.addArticulo(articulo);
 		}
-
-		String descripValidac = "1) El pedido tiene las referencias " + referencias.toString();
-		datosStep.setNOKstateByDefault();
-		ChecksResult listVals = ChecksResult.getNew(datosStep);
-		try {
-			if (dPedidoPrueba.getDataBag().getListArticulos().isEmpty()) {
-				listVals.add(1, State.Defect);
-			}
-
-			datosStep.setListResultValidations(listVals);
-		} 
-		finally { listVals.checkAndStoreValidations(descripValidac); }
+		dPedidoPrueba.setDataBag(dBagPrueba);
+		checkPedidoWithReferences(referencias, dPedidoPrueba);
 
 		return dPedidoPrueba;
 	}
 
+	@Validation (
+		description="El pedido tiene las referencias #{referencias.toString()}",
+		level=State.Defect)
+	private static boolean checkPedidoWithReferences(List<String> referencias, DataPedido dPedidoPrueba) {
+		return (!dPedidoPrueba.getDataBag().getListArticulos().isEmpty());
+	}
 	
-	/**
-	 * Se busca la información del cliente
-	 * 
-	 * @return DataPedido con la información del cliente seteada
-	 */
-	public static DataPedido getDataCliente(DataPedido dPedidoPrueba, DataFmwkTest dFTest) throws Exception {
-		DatosStep datosStep = new DatosStep(
-			"Buscamos pedidos con id registro para obtener información del cliente",
-			"Debemos obtener la información del cliente");
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-		try {
-			PageDetallePedido.clickLinkDetallesCliente(dFTest.driver);
-
-			dPedidoPrueba.getPago().setDni(PageDetalleCliente.getUserDniText(dFTest.driver));
-			if (dPedidoPrueba.getPago().getDni().equals(""))
-				dPedidoPrueba.getPago().setDni("41507612h");
-			
-			dPedidoPrueba.getPago().setUseremail(PageDetalleCliente.getUserEmailText(dFTest.driver));
-
-			PageDetalleCliente.clickLinkVolverPedidos(dFTest.driver);
-
-			datosStep.setExcepExists(false);
-			datosStep.setResultSteps(State.Ok);
-
-		} finally {
-			StepAspect.storeDataAfterStep(datosStep);
+	@Step (
+		description="Buscamos pedidos con id registro para obtener información del cliente",
+		expected="Debemos obtener la información del cliente",
+		saveErrorPage=SaveWhen.Never)
+	public static DataPedido getDataCliente(DataPedido dPedidoPrueba, WebDriver driver) throws Exception {
+		PageDetallePedido.clickLinkDetallesCliente(driver);
+		dPedidoPrueba.getPago().setDni(PageDetalleCliente.getUserDniText(driver));
+		if (dPedidoPrueba.getPago().getDni().equals("")) {
+			dPedidoPrueba.getPago().setDni("41507612h");
 		}
-
-		String descripValidac = "1) Tenemos el DNI del cliente " + dPedidoPrueba.getPago().getDni() + "<br>"
-				+ "2) Tenemos el Email del cliente " + dPedidoPrueba.getPago().getUseremail();
-		datosStep.setNOKstateByDefault();
-		ChecksResult listVals = ChecksResult.getNew(datosStep);
-		try {
-			if (dPedidoPrueba.getPago().getDni().equals("")) {
-				listVals.add(1, State.Defect);
-			}
-			if (dPedidoPrueba.getPago().getUseremail().equals("")) {
-				listVals.add(2, State.Defect);
-			}
-
-			datosStep.setListResultValidations(listVals);
-		} 
-		finally { listVals.checkAndStoreValidations(descripValidac); }
+		
+		dPedidoPrueba.getPago().setUseremail(PageDetalleCliente.getUserEmailText(driver));
+		PageDetalleCliente.clickLinkVolverPedidos(driver);
+		checkAfterSearchPedidosWithIdRegister(dPedidoPrueba);
 
 		return dPedidoPrueba;
 	}
 
+	@Validation
+	private static ChecksResult checkAfterSearchPedidosWithIdRegister(DataPedido dPedidoPrueba) {
+		ChecksResult validations = ChecksResult.getNew();
+	 	validations.add(
+			"Tenemos el DNI del cliente " + dPedidoPrueba.getPago().getDni(),
+			!dPedidoPrueba.getPago().getDni().equals(""), State.Defect);
+	 	validations.add(
+			"Tenemos el Email del cliente " + dPedidoPrueba.getPago().getUseremail(),
+			!dPedidoPrueba.getPago().getUseremail().equals(""), State.Defect);
+		return validations;
+	}
 	
-	/**
-	 * Se busca una tienda física real en el gestor de pedidos
-	 * 
-	 * @return DataPedido con la tienda física añadida
-	 */
-	public static DataPedido getTiendaFisicaListaPedidos(DataPedido dPedidoPrueba, DataFmwkTest dFTest)
+	@Step (
+		description="Un pedido con tienda física en la lista de pedidos",
+		expected="Debemos obtener una tienda física válida",
+		saveErrorPage=SaveWhen.Never)
+	public static DataPedido getTiendaFisicaListaPedidos(DataPedido dPedidoPrueba, WebDriver driver)
 			throws Exception {
 		DataDeliveryPoint dEnvioPrueba = new DataDeliveryPoint();
-		DatosStep datosStep = new DatosStep(
-			"Un pedido con tienda física en la lista de pedidos",
-			"Debemos obtener una tienda física válida");
-	    datosStep.setSaveErrorPage(SaveWhen.Never);
-		try {
-			dPedidoPrueba.setDataDeliveryPoint(dEnvioPrueba);
-			dPedidoPrueba.getDataDeliveryPoint().setCodigo(PagePedidos.getTiendaFisicaFromListaPedidos(dFTest.driver));
-
-			datosStep.setExcepExists(false); datosStep.setResultSteps(State.Ok);
-		} 
-		finally {
-			StepAspect.storeDataAfterStep(datosStep);
-		}
-
-		String descripValidac = "1) Tenemos la tienda física " + dPedidoPrueba.getDataDeliveryPoint().getCodigo();
-		datosStep.setNOKstateByDefault();
-		ChecksResult listVals = ChecksResult.getNew(datosStep);
-		try {
-			if (dPedidoPrueba.getDataDeliveryPoint().getCodigo().equals("")) {
-				listVals.add(1, State.Defect);
-			}
-
-			datosStep.setListResultValidations(listVals);
-		} 
-		finally { listVals.checkAndStoreValidations(descripValidac); }
-
+		dPedidoPrueba.setDataDeliveryPoint(dEnvioPrueba);
+		dPedidoPrueba.getDataDeliveryPoint().setCodigo(PagePedidos.getTiendaFisicaFromListaPedidos(driver));
+		checkIsTiendaFisica(dPedidoPrueba.getDataDeliveryPoint().getCodigo());
 		return dPedidoPrueba;
+	}
+	
+	@Validation (
+		description="Tenemos la tienda física #{codigoDeliveryPoint}",
+		level=State.Defect)
+	private static boolean checkIsTiendaFisica(String codigoDeliveryPoint) {
+		return (!codigoDeliveryPoint.equals(""));
 	}
 }

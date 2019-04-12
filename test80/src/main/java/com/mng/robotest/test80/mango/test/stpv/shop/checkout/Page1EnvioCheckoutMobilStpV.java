@@ -31,14 +31,14 @@ public class Page1EnvioCheckoutMobilStpV {
     public static ChecksResult validateIsPage(boolean userLogged, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece la página correspondiente al paso-1<br>",
+			"Aparece la página correspondiente al paso-1",
 			WebdrvWrapp.isElementPresent(driver, By.xpath("//h2[@data-toggle='step1']")), State.Warn);
 	 	validations.add(
 			"Aparece el botón de introducción del código promocional",
 			Page1EnvioCheckoutMobil.isVisibleInputCodigoPromoUntil(0, driver), State.Defect);
 	 	if (!userLogged) {
 		 	validations.add(
-				"Aparece seleccionado el método de envío \"Estándar\"<br>",
+				"Aparece seleccionado el método de envío \"Estándar\"",
 				WebdrvWrapp.isElementPresent(driver, By.xpath("//div[@data-analytics-id='standard' and @class[contains(.,'checked')]]")), 
 				State.Warn);
 	 	}
@@ -98,7 +98,7 @@ public class Page1EnvioCheckoutMobilStpV {
     	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 2;
 	 	validations.add(
-			"Aparece el descuento total aplicado al empleado (en menos de " + maxSecondsWait + " segundos)<br>",
+			"Aparece el descuento total aplicado al empleado (en menos de " + maxSecondsWait + " segundos)",
 			Page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(driver, maxSecondsWait), State.Warn);
 	 	validations.add(
 			"Aparece un descuento de empleado mayor que 0",

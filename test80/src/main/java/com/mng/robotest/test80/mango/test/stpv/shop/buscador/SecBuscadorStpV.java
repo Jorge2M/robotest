@@ -80,7 +80,7 @@ public class SecBuscadorStpV {
         int maxSecondsWait = 3;
     	String producSin1erCaracter = categoriaABuscar.substring(1, categoriaABuscar.length()-1).toLowerCase();
     	validations.add(
-    		"Aparece como mínimo un producto de tipo " + producSin1erCaracter + " (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		"Aparece como mínimo un producto de tipo " + producSin1erCaracter + " (lo esperamos hasta " + maxSecondsWait + " segundos)",
     		"".compareTo(pageGaleria.getArticuloWithText(producSin1erCaracter, maxSecondsWait))!=0, State.Defect);
     	validations.add(
     		"Aparece la categoría en el resultado de la búsqueda",

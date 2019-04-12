@@ -16,10 +16,10 @@ public class PageConsultaIdEansStpV {
     public static ChecksResult validateIsPage(WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Es visible el contenido de la pestaña Busqueda Excel<br>",
+			"Es visible el contenido de la pestaña Busqueda Excel",
 			PageConsultaIdEans.isVisibleDivBusquedaExcel(driver), State.Defect);
 	 	validations.add(
-			"Es visible el contenido de la pestaña Busqueda Rapida<br>",
+			"Es visible el contenido de la pestaña Busqueda Rapida",
 			PageConsultaIdEans.isVisibleDivBusquedaRapida(driver), State.Defect);
 	 	validations.add(
 			"Es visible el título de página correcto",
@@ -41,13 +41,13 @@ public class PageConsultaIdEansStpV {
 		ChecksResult validations = ChecksResult.getNew();
 	    int maxSecondsWait = 2;
     	validations.add(
-    		"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsWait + " segundos)<br>",
+    		"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsWait + " segundos)",
     		PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsWait, driver), State.Defect);
     	validations.add(
-    		"El número de líneas de pedido es " + pedidosPrueba.size() + "<br>",
+    		"El número de líneas de pedido es " + pedidosPrueba.size(),
     		PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsWait, driver), State.Defect);
     	validations.add(
-    		"Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.size() + "</b>",
+    		"Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.size(),
     		PageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba, driver), State.Defect);
     	return validations;
     }
@@ -66,13 +66,13 @@ public class PageConsultaIdEansStpV {
 		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsToWait = 2;
     	validations.add(
-    		"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>",
+    		"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)",
     		PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, driver), State.Defect);
     	validations.add(
-    		"El número de líneas de pedido es " + pedidosPrueba.size() + "<br>",
+    		"El número de líneas de pedido es " + pedidosPrueba.size(),
     		PageConsultaIdEans.getLineasPedido(driver)==pedidosPrueba.size(), State.Defect);
     	validations.add(
-    		"Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.toString() + "</b>",
+    		"Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.toString(),
     		PageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba, driver), State.Defect);		
     	return validations;
     }
@@ -87,7 +87,7 @@ public class PageConsultaIdEansStpV {
 	}
 	
 	@Validation (
-		description="Se muestra la tabla de información (la esperamos un máximo de #{maxSecondsWait} segundos)<br>",
+		description="Se muestra la tabla de información (la esperamos un máximo de #{maxSecondsWait} segundos)",
 		level=State.Defect)
 	private static boolean checkIsTableTrackingsInformation(int maxSecondsWait, WebDriver driver) {
 		return (PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsWait, driver));
@@ -107,13 +107,13 @@ public class PageConsultaIdEansStpV {
 		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsToWait = 2;
     	validations.add(
-    		"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)<br>",
+    		"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)",
     		PageConsultaIdEans.isVisibleTablaInformacionUntil(maxSecondsToWait, driver), State.Defect);
     	validations.add(
-    		"El número de líneas de artículos es " + articulosPrueba.size() + "<br>",
+    		"El número de líneas de artículos es " + articulosPrueba.size(),
     		PageConsultaIdEans.getLineasPedido(driver)==articulosPrueba.size(), State.Defect);
     	validations.add(
-    		"Aparece una línea por cada uno de los artículos <b>" + articulosPrueba.toString() + "</b>",
+    		"Aparece una línea por cada uno de los artículos <b>" + articulosPrueba.toString(),
     		PageConsultaIdEans.isArticulosTablaCorrecto(articulosPrueba, driver), State.Defect);
     	return validations;
 	}

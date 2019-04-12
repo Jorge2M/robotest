@@ -70,16 +70,16 @@ public class PageConsultaPedidoBolsaStpV extends ElementPageFunctions {
     public static ChecksResult validaDatosGeneralesPedido(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
     	validations.add(
-    		"Aparece la pantalla de detalle del pedido<br>",
+    		"Aparece la pantalla de detalle del pedido",
     		PageDetallePedido.isPage(driver), State.Warn);
     	validations.add(
-    		"Aparece un TOTAL de: " + dataPedido.getImporteTotalManto() + "<br>",
+    		"Aparece un TOTAL de: " + dataPedido.getImporteTotalManto(),
     		ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), PageDetallePedido.XPathImporteTotal, driver), State.Warn);
     	validations.add(
-    		"Las 3 líneas de la dirección de envío figuran en la dirección del pedido (" + dataPedido.getDireccionEnvio() +")<br>",
+    		"Las 3 líneas de la dirección de envío figuran en la dirección del pedido (" + dataPedido.getDireccionEnvio() +")",
     		PageDetallePedido.isDireccionPedido(driver, dataPedido.getDireccionEnvio()), State.Warn);
     	validations.add(
-    		"Figura el código de país (" + dataPedido.getCodigoPais() + ")<br>",
+    		"Figura el código de país (" + dataPedido.getCodigoPais() + ")",
     		PageDetallePedido.isCodPaisPedido(driver, dataPedido.getCodigoPais()), State.Warn);
     	
         Pago pago = dataPedido.getPago();
@@ -89,7 +89,7 @@ public class PageConsultaPedidoBolsaStpV extends ElementPageFunctions {
         	boolean isPedidoInStateTpv = PageDetallePedido.isStateInTpvStates(driver, dataPedido);
         	boolean pedidoInStateMenos1Null = PageDetallePedido.isPedidoInStateMenos1NULL(driver);
         	validations.add(
-        		"Aparece uno de los resultados posibles según el TPV: " + pago.getTpv().getEstado() + "<br>",
+        		"Aparece uno de los resultados posibles según el TPV: " + pago.getTpv().getEstado(),
         		isPedidoInStateTpv, State.Warn);
         	if (!isPedidoInStateTpv) {
 	        	validations.add(

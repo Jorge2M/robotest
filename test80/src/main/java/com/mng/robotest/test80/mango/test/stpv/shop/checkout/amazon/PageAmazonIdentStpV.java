@@ -17,7 +17,7 @@ public class PageAmazonIdentStpV {
     public static ChecksResult validateIsPage(Pais pais, Channel channel, DataPedido dataPedido, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
     	validations.add(
-    		"Aparece una página con el logo de Amazon<br>",
+    		"Aparece una página con el logo de Amazon",
     		PageAmazonIdent.isLogoAmazon(driver), State.Warn);
     	validations.add(
     		"Aparece los campos para la identificación (usuario/password)",

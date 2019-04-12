@@ -47,7 +47,7 @@ public class PageResultPagoStpV {
 	    int maxSecondsWait1 = 10;
 	    boolean isVisibleTextConfirmacion = PageResultPago.isVisibleTextoConfirmacionPago(driver, channel, maxSecondsWait1);
        	validations.add(
-    		"Aparece un texto de confirmación del pago (lo esperamos hasta " + maxSecondsWait1 + " segundos)<br>",
+    		"Aparece un texto de confirmación del pago (lo esperamos hasta " + maxSecondsWait1 + " segundos)",
     		isVisibleTextConfirmacion, State.Warn);
        	if (!isVisibleTextConfirmacion) {
    		    int maxSecondsWait2 = 20;
@@ -71,18 +71,18 @@ public class PageResultPagoStpV {
             importeTotal = dCtxPago.getDataPedido().getImporteTotal();
         }
       	validations.add(
-      		"Aparece el importe " + importeTotal + " de la operación<br>",
+      		"Aparece el importe " + importeTotal + " de la operación",
       		ImporteScreen.isPresentImporteInScreen(importeTotal, dCtxSh.pais.getCodigo_pais(), driver), State.Warn);
         
 	    if (dCtxSh.channel==Channel.desktop) {
 	        if (dCtxSh.pais.isPaisWithMisCompras() && dCtxSh.appE==AppEcom.shop) {
 	        	validations.add(
-              		"Aparece el link hacia las compras<br>",
+              		"Aparece el link hacia las compras",
               		PageResultPago.isLinkMisComprasDesktop(driver), State.Warn);
 	        }
 	        else {
 	        	validations.add(
-              		"Aparece el link hacia los pedidos<br>",
+              		"Aparece el link hacia los pedidos",
               		PageResultPago.isLinkPedidosDesktop(driver), State.Warn);
 	        }
 	    }

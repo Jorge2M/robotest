@@ -195,7 +195,7 @@ public class SecBolsaStpV {
     	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 1;
 	 	validations.add(
-			"Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+			"Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + maxSecondsWait + " segundos)",
 			SecBolsa.isInStateUntil(StateBolsa.Open, Channel.desktop, maxSecondsWait, driver), State.Defect);
 	 	validations.add(
 			"Aparece el botón \"Comprar\" (lo esperamos hasta " + maxSecondsWait + " segundos)",
@@ -221,25 +221,25 @@ public class SecBolsaStpV {
     	ChecksResult validations = ChecksResult.getNew();
         ValidatorContentBolsa validatorBolsa = new ValidatorContentBolsa(dataBag, app, channel, driver);
 	 	validations.add(
-			"Cuadra el número de artículos existentes en la bolsa<br>",
+			"Cuadra el número de artículos existentes en la bolsa",
 			validatorBolsa.numArticlesIsCorrect(), State.Warn);
 	 	
         ArrayList<DataArtBolsa> listDataToValidate = new ArrayList<>();
         listDataToValidate.add(DataArtBolsa.Referencia);
 	 	validations.add(
-			"Cuadran los nombres de los artículos existentes en la bolsa<br>",
+			"Cuadran los nombres de los artículos existentes en la bolsa",
 			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), State.Warn);
 	 	
         listDataToValidate.clear();
         listDataToValidate.add(DataArtBolsa.Nombre);
 	 	validations.add(
-			"Cuadran los nombres de los artículos existentes en la bolsa<br>",
+			"Cuadran los nombres de los artículos existentes en la bolsa",
 			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), State.Warn);
 	 	
         listDataToValidate.clear();
         listDataToValidate.add(DataArtBolsa.Color);
 	 	validations.add(
-			"Cuadran los colores de los artículos existentes en la bolsa<br>",
+			"Cuadran los colores de los artículos existentes en la bolsa",
 			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), State.Warn);
 	 	
         listDataToValidate.clear();
@@ -249,7 +249,7 @@ public class SecBolsaStpV {
         listDataToValidate.add(DataArtBolsa.TallaAlf);
         boolean tallaAlfOk = validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate);
 	 	validations.add(
-			"Cuadran las tallas de los artículos existentes en la bolsa<br>",
+			"Cuadran las tallas de los artículos existentes en la bolsa",
 			tallaNumOk || tallaAlfOk, State.Warn);
 	 	
         listDataToValidate.clear();

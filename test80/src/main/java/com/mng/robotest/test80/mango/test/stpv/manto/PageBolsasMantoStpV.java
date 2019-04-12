@@ -26,18 +26,18 @@ public class PageBolsasMantoStpV {
 	 	}
         validations.setExistsLinkCodPed(isPresentLinkPedido);
 	 	validations.add(
-			"En la columna 1 aparece el código de pedido: " + dataPedido.getCodigoPedidoManto() + " (lo esperamos hasta " + maxSecondsWait + " segundos) <br>",
+			"En la columna 1 aparece el código de pedido: " + dataPedido.getCodigoPedidoManto() + " (lo esperamos hasta " + maxSecondsWait + " segundos)",
 			isPresentLinkPedido, State.Warn);
 	 	
 	 	validations.add(
-			"Aparece una sola bolsa <br>",
+			"Aparece una sola bolsa",
 			PageBolsas.getNumLineas(driver)==1, State.Warn);
 	 	
 	 	//En el caso de Outlet no tenemos la información del TPV que toca
 	 	if (appE!=AppEcom.outlet) {
 	 		String idTpv = dataPedido.getPago().getTpv().getId();
 		 	validations.add(
-				"En la columna 8 Aparece el Tpv asociado: " + idTpv + "<br>",
+				"En la columna 8 Aparece el Tpv asociado: " + idTpv,
 				PageBolsas.presentIdTpvInBolsa(driver, idTpv), State.Warn);
 	 	}
 	 	

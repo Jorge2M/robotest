@@ -17,7 +17,7 @@ public class PagePaytrail1rstStpV {
 		String nombrePagoCabecera = "Finnish E-Banking";
 		int maxSecondsToWait = 2;
     	validations.add(
-    		"Figura el bloque correspondiente al pago <b>" + nombrePagoCabecera + "</b><br>",
+    		"Figura el bloque correspondiente al pago <b>" + nombrePagoCabecera + "</b>",
     		PagePaytrail1rst.isPresentEntradaPago(nombrePagoCabecera, driver), State.Warn);
     	
     	State stateVal = State.Warn;
@@ -25,12 +25,12 @@ public class PagePaytrail1rstStpV {
         	stateVal = State.Info;
         }
     	validations.add(
-    		"Aparece el importe de la compra: \" + importeTotal<br>",
+    		"Aparece el importe de la compra: \" + importeTotal",
     		ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal);  
     	
 		if (channel==Channel.desktop) {
 	    	validations.add(
-        		"Es visible el desplegable de bancos (lo esperamos hasta " + maxSecondsToWait + " seconds)<br>",
+        		"Es visible el desplegable de bancos (lo esperamos hasta " + maxSecondsToWait + " seconds)",
         		PagePaytrail1rst.isVisibleSelectBancosUntil(maxSecondsToWait, driver), State.Warn);
 	    	validations.add(
         		"Figura un botón de pago",

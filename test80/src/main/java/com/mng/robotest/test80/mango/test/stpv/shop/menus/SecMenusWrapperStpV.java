@@ -62,12 +62,12 @@ public class SecMenusWrapperStpV {
                 boolean isLineaPresent = SecMenusWrap.isLineaPresent(lineaType, app, channel, driver);
                 if (apareceLinea==ThreeState.TRUE) {
             		validations.add (
-        				"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b><br>",
+        				"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b>",
         				isLineaPresent, State.Warn);
                 }    
                 else {
             		validations.add (
-            			"<b>No</b> aparece el link de la línea <b>" + lineaType + "</b><br>",
+            			"<b>No</b> aparece el link de la línea <b>" + lineaType + "</b>",
             			!isLineaPresent, State.Warn);
                 }
             }
@@ -191,11 +191,11 @@ public class SecMenusWrapperStpV {
 		int maxSecondsToWaitArticle = 3;
 		int maxSecondsToWaitIcon = 2;
 		validations.add (
-			"Como mínimo se obtiene un artículo (lo esperamos hasta " + maxSecondsToWaitArticle + " segundos)<br>",
+			"Como mínimo se obtiene un artículo (lo esperamos hasta " + maxSecondsToWaitArticle + " segundos)",
 			pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, maxSecondsToWaitArticle), State.Warn);
 		if (dCtxSh.appE==AppEcom.shop) {
 			validations.add (
-				"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + maxSecondsToWaitIcon + " segundos)<br>",
+				"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + maxSecondsToWaitIcon + " segundos)",
 				pageGaleria.isArticleWithHearthIconPresentUntil(1, maxSecondsToWaitIcon), State.Defect);
 			validations.add (
 				"Cada artículo tiene 1 icono de favoritos asociado",

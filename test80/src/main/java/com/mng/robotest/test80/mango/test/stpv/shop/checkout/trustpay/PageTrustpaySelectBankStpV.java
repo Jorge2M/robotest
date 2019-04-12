@@ -19,7 +19,7 @@ public class PageTrustpaySelectBankStpV {
     public static ChecksResult validateIsPage(String nombrePago, String importeTotal, String codPais, Channel channel, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b><br>",
+			"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
 			PageTrustpaySelectBank.isPresentEntradaPago(nombrePago, channel, driver), State.Warn);
 	 	
 	 	State level = State.Warn;
@@ -27,14 +27,14 @@ public class PageTrustpaySelectBankStpV {
             level = State.Info;
         }
 	 	validations.add(
-			"Aparece el importe de la compra: " + importeTotal + "<br>",
+			"Aparece el importe de la compra: " + importeTotal,
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), level); 
 	 	validations.add(
-			"Aparece la cabecera indicando la 'etapa' del pago<br>",
+			"Aparece la cabecera indicando la 'etapa' del pago",
 			PageTrustpaySelectBank.isPresentCabeceraStep(nombrePago, channel, driver), State.Warn); 
         if (channel==Channel.desktop) {
 		 	validations.add(
-				"Figura el desplegable de bancos<br>",
+				"Figura el desplegable de bancos",
 				PageTrustpaySelectBank.isPresentSelectBancos(driver), State.Warn); 
 		 	validations.add(
 				"Figura un botón de pago",

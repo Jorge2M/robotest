@@ -41,7 +41,7 @@ public class PageDetallePedidoStpV {
     	ChecksResult validations = ChecksResult.getNew();
 	    int maxSecondsWait = 2;
       	validations.add(
-      		"Es visible alguna prenda (la esperamos hasta " + maxSecondsWait + " segundos)<br>",
+      		"Es visible alguna prenda (la esperamos hasta " + maxSecondsWait + " segundos)",
       		pageDetalle.isVisiblePrendaUntil(maxSecondsWait, driver), State.Info);	
       	validations.add(
       		"Aparecen " + numPrendasCompraOnline + " prendas",
@@ -64,10 +64,10 @@ public class PageDetallePedidoStpV {
     private ChecksResult validateIsPageOk(String codPedido, String importeTotalWithoutCurrency, String codPais, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
       	validations.add(
-      		"Aparece la página de detalle del pedido<br>",
+      		"Aparece la página de detalle del pedido",
       		pageDetalle.isPage(driver), State.Warn);	   
       	validations.add(
-      		"En la página figura el Nº de pedido: " + codPedido + "<br>",
+      		"En la página figura el Nº de pedido: " + codPedido,
       		driver.getPageSource().contains(codPedido), State.Info);	
       	validations.add(
       		"Como total figura el importe: " + importeTotalWithoutCurrency,

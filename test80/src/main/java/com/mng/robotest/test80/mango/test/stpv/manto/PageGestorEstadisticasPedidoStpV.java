@@ -17,10 +17,10 @@ public class PageGestorEstadisticasPedidoStpV {
 	public static ChecksResult validateIsPage(WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Estamos en la página " + PageGestorEstadisticasPedido.titulo + "<br>",
+			"Estamos en la página " + PageGestorEstadisticasPedido.titulo,
 			PageGestorEstadisticasPedido.isPage(driver), State.Defect);
 	 	validations.add(
-			"Aparece el input de fecha de inicio<br>",
+			"Aparece el input de fecha de inicio",
 			PageGestorEstadisticasPedido.isVisibleStartDateInput(driver), State.Defect);
 	 	validations.add(
 			"Aparece el input de fecha fin",
@@ -41,10 +41,10 @@ public class PageGestorEstadisticasPedidoStpV {
 	private static ChecksResult checkAfterSelectMostrarPedidosZalandos(WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece la tabla de información<br>",
+			"Aparece la tabla de información",
 			PageGestorEstadisticasPedido.isTablaInformacionVisible(driver), State.Defect);
 	 	validations.add(
-			"Las columnas de comparación en verde contienen \"0 €\"<br>",
+			"Las columnas de comparación en verde contienen \"0 €\"",
 			PageGestorEstadisticasPedido.isColumnaCompararVerdeZero(driver), State.Defect);
 	 	validations.add(
 			"Las columnas de comparación en rojo contienen \"0 %\"",
@@ -65,7 +65,7 @@ public class PageGestorEstadisticasPedidoStpV {
 	private static ChecksResult checkAfterCompararDias(WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Las columnas de comparación en verde no contienen \"0 €\"<br>",
+			"Las columnas de comparación en verde no contienen \"0 €\"",
 			PageGestorEstadisticasPedido.isColumnaCompararVerdeNoZero(driver), State.Defect);
 	 	validations.add(
 			"Las columnas de comparación en rojo no contienen \"0 %\"",

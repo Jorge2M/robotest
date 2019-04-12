@@ -14,7 +14,7 @@ public class PageMultibancoEnProgresoStpv {
 		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsToWait = 3;
 	   	validations.add(
-    		"Aparece la cabecera <b>Pagamento em progreso</b> (la esperamos hasta " + maxSecondsToWait + " segundos<br>",
+    		"Aparece la cabecera <b>Pagamento em progreso</b> (la esperamos hasta " + maxSecondsToWait + " segundos",
     		PageMultibancoEnProgreso.isPageUntil(maxSecondsToWait, driver), State.Warn);
 	   	validations.add(
     		"Figura un botón para ir al siguiente paso",

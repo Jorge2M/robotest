@@ -31,11 +31,11 @@ public class PageChequeRegaloInputDataStpV{
 		ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 2;
     	validations.add(
-    		"Aparece el cuadro de introduccion de datos determinado (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		"Aparece el cuadro de introduccion de datos determinado (lo esperamos hasta " + maxSecondsWait + " segundos)",
     		PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.numeroTarjeta, StateElem.Present, maxSecondsWait, driver), 
     		State.Defect);
     	validations.add(
-    		"Podemos validar la tarjeta<br>",
+    		"Podemos validar la tarjeta",
     		PageChequeRegaloInputData.isElementInState(ConsultaSaldo.validar, StateElem.Present, driver), 
     		State.Defect);
     	validations.add(
@@ -131,13 +131,13 @@ public class PageChequeRegaloInputDataStpV{
 		ChecksResult validations = ChecksResult.getNew();
 	    int maxSecondsWait = 2;
     	validations.add(
-    		"Aparece el titulo de la página correctamente (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		"Aparece el titulo de la página correctamente (lo esperamos hasta " + maxSecondsWait + " segundos)",
     		PageChequeRegaloInputData.isElementInStateUntil(ElementCheque.titulo, StateElem.Present, maxSecondsWait, driver), 
     		State.Warn);
     	
 	    String importesStr = java.util.Arrays.asList(PageChequeRegaloInputData.Importe.values()).toString();
     	validations.add(
-    		"Es posible seleccionar cheques de " + importesStr + "<br>",
+    		"Es posible seleccionar cheques de " + importesStr,
     		PageChequeRegaloInputData.isPresentInputImportes(driver), State.Defect);
     	validations.add(
     		"Es visible el link de <b>Consultar saldo</b>",
@@ -155,7 +155,7 @@ public class PageChequeRegaloInputDataStpV{
     }
 	
 	@Validation (
-		description="Aparece la capa para introducir los datos del cheque regalo (la esperamos hasta #{maxSecondsWait} segundos)<br>",
+		description="Aparece la capa para introducir los datos del cheque regalo (la esperamos hasta #{maxSecondsWait} segundos)",
 		level=State.Defect)
 	private static boolean checkIsVisibleCapaInputCheque(int maxSecondsWait, WebDriver driver) {
 		return (PageChequeRegaloInputData.isElementInStateUntil(InputCheque.dataProof, StateElem.Present, maxSecondsWait, driver));

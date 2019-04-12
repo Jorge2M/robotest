@@ -39,7 +39,7 @@ public class PageHomeMarcasStpV {
     	ChecksResult validations = ChecksResult.getNew();
     	if (app!=AppEcom.outlet) {
 			validations.add(
-				"Aparece la home de marcas/multimarcas según el país<br>",
+				"Aparece la home de marcas/multimarcas según el país",
 				PageHomeMarcas.isHomeMarcasMultimarcasDependingCountry(pais, app, driver), State.Warn);    
     	}
 		validations.add(
@@ -85,7 +85,7 @@ public class PageHomeMarcasStpV {
         ManagerBannersScreen managerBannersScreen = new ManagerBannersScreen(maxBannersToLoad, driver);
         boolean existenBanners = managerBannersScreen.existBanners();
     	validations.add(
-    		PrefixRebajas + "Existen banners<br>",
+    		PrefixRebajas + "Existen banners",
     		existenBanners, State.Defect);    	
     	if (existenBanners) {
     		if (!salesOnInCountry) {
@@ -113,7 +113,7 @@ public class PageHomeMarcasStpV {
 		                for (Linea linea : listLineas) {
 		                    String urlLink = dataBanner1.getUrlLinkLinea(linea.getType());
 		                	validations.add(
-		                		"El 1er Banner contiene links a la línea " + linea.getType() + "<br>",
+		                		"El 1er Banner contiene links a la línea " + linea.getType(),
 		                		urlLink.contains("seccion=Rebajas_" + linea.getType().getId3()), State.Warn);
 		                }
 		        	}

@@ -14,7 +14,7 @@ public class PageGestorSaldosTPVStpV {
 	public static ChecksResult validateIsPage(WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Estamos en la página " + PageGestorSaldosTPV.titulo + " <br>",
+			"Estamos en la página " + PageGestorSaldosTPV.titulo,
 			PageGestorSaldosTPV.isPage(driver), State.Defect);
 	 	validations.add(
 			"Aparece el input de fecha de TPV",
@@ -35,7 +35,7 @@ public class PageGestorSaldosTPVStpV {
 	private static ChecksResult checkAfterConsultSaldosTpv(String tpv, WebDriver driver) throws Exception {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece la tabla de saldos<br>",
+			"Aparece la tabla de saldos",
 			PageGestorSaldosTPV.isTablaSaldosVisible(driver), State.Defect);
 	 	validations.add(
 			"Aparece el ID de la TPV <b>" + tpv + "</b> en la tabla",

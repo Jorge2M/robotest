@@ -43,7 +43,7 @@ public class SecFotosNewStpV {
 	    
 	    int numFotos1rstLine = SecFotosNew.getNumFotosLine(1, driver);
 	 	validations.add(
-			"La 1a línea tiene " + numFotosExpected1rstLine_A + " o " + numFotosExpected1rstLine_B + " fotos<br>",
+			"La 1a línea tiene " + numFotosExpected1rstLine_A + " o " + numFotosExpected1rstLine_B + " fotos",
 			numFotos1rstLine==numFotosExpected1rstLine_A || numFotos1rstLine==numFotosExpected1rstLine_B, State.Warn);
 	 	
 	 	int numLinesFotos = SecFotosNew.getNumLinesFotos(driver);
@@ -53,7 +53,7 @@ public class SecFotosNewStpV {
         }
         int minFotosExpectedLastLine = 5;
 	 	validations.add(
-			"La última línea tiene < " + minFotosExpectedLastLine + " fotos<br>",
+			"La última línea tiene < " + minFotosExpectedLastLine + " fotos",
 			numFotosLastLine<minFotosExpectedLastLine, State.Warn);
 	 	
 	 	if (numLinesFotos > 2) {

@@ -47,7 +47,7 @@ public class PageConsultaTiendaStpV {
 	private static ChecksResult checkAfterInputTienda(WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece la información de la tienda<br>",
+			"Aparece la información de la tienda",
 			PageConsultaTienda.apareceInformacionTienda(driver), State.Defect);
 	 	validations.add(
 			"No aparece el mensaje de tienda no existe",

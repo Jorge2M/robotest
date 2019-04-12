@@ -14,7 +14,7 @@ public class ModalBuscadorTiendasStpV {
 		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
 	 	validations.add(
-			"La capa de búsqueda es visible<br>",
+			"La capa de búsqueda es visible",
 			ModalBuscadorTiendas.isVisible(driver), State.Warn);
 	 	validations.add(
 			"Se ha localizado alguna tienda (la esperamos hasta " + maxSecondsWait + " segundos)",

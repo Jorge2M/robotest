@@ -22,11 +22,11 @@ public class PageKoCardAdyenStpV {
     	ChecksResult validations = ChecksResult.getNew();
     	if (channel==Channel.desktop) {
 	      	validations.add(
-	    		"En la página resultante figura el importe total de la compra (" + importeTotal + ")<br>",
+	    		"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
 	    		ImporteScreen.isPresentImporteInScreen(importeTotal, pais.getCodigo_pais(), driver), State.Warn);
     	}
       	validations.add(
-    		"No se trata de la página de precompra (no aparece los logos de formas de pago <br>",
+    		"No se trata de la página de precompra (no aparece los logos de formas de pago",
     		!PageCheckoutWrapper.isPresentMetodosPago(pais, channel, driver), State.Defect);
       	validations.add(
     		"Aparece la página de Adyen / Korean Kredit Cards",

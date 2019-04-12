@@ -63,14 +63,14 @@ public class PageConsultaPedidoBolsaStpV {
     public static ChecksResult validaDatosGeneralesPedido(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece la pantalla de detalle del pedido<br>",
+			"Aparece la pantalla de detalle del pedido",
 			PageDetallePedido.isPage(driver), State.Warn);
 	 	validations.add(
-			"Aparece un TOTAL de: " + dataPedido.getImporteTotalManto() + "<br>",
+			"Aparece un TOTAL de: " + dataPedido.getImporteTotalManto(),
 			ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), PageDetallePedido.XPathImporteTotal, driver), 
 			State.Warn);
 	 	validations.add(
-			"Las 3 líneas de la dirección de envío figuran en la dirección del pedido (" + dataPedido.getDireccionEnvio() +")<br>",
+			"Las 3 líneas de la dirección de envío figuran en la dirección del pedido (" + dataPedido.getDireccionEnvio() +")",
 			PageDetallePedido.isDireccionPedido(driver, dataPedido.getDireccionEnvio()), State.Warn);
 	 	validations.add(
 			"Figura el código de país (" + dataPedido.getCodigoPais() + ")",

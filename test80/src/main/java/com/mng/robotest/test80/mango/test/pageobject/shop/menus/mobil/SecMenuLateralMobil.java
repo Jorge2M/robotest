@@ -52,7 +52,7 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     static String XPathLinkLineaNewFor388and743 = XPathCapaLevelLinea + "//li/a[@class[contains(.,'menu-item-label')] and @data-label[contains(.,'nuevo')]]";
     
     //Sublíneas niños
-    static String XPathCapa2onLevelMenu = "//div[@class='section-detail-list']";
+    static String XPathCapa2onLevelMenu = "//div[@class[contains(.,'section-detail-list')]]";
     static String IniXPathLinkSublinea = XPathCapa2onLevelMenu + "//div[@data-label[contains(.,'interior-"; 
     static String XPathLinkSublineaNina =  IniXPathLinkSublinea + "nina')]]";
     static String XPathLinkSublineaBebeNina = IniXPathLinkSublinea + "bebe_nina')]]";

@@ -32,7 +32,7 @@ public class SecKlarnaStpV {
     	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 3;
       	validations.add(
-    		"Aparece el modal de las direcciones de Klarna (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+    		"Aparece el modal de las direcciones de Klarna (lo esperamos hasta " + maxSecondsWait + " segundos)",
     		SecKlarna.isModalDireccionesVisibleUntil(maxSecondsWait, driver), State.Defect);
       	validations.add(
     		"Aparecen los datos asociados al Nº persona: " + pago.getNomklarna() + " - " + pago.getDirecklarna() + " - " + pago.getProvinklarna(),

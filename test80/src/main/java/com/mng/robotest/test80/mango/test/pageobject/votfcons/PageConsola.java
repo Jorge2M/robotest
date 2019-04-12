@@ -12,7 +12,7 @@ public class PageConsola extends WebdrvWrapp {
     /**
      * Mensaje que aparece en el caso de una consulta de tipos de envío OK 
      */
-    public static String msgConsTiposEnvioOK = "Servicios - Envio a tienda y a domicilio";
+    public final static String msgConsTiposEnvioOK = "Servicios - Envio a tienda y a domicilio";
     
     /**
      * @return el xpath correspondiente al desplegable (select) del entorno (aparado "Test servicios VOTF")

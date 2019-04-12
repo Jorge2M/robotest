@@ -16,10 +16,10 @@ public class PageGestionarClientesStpV {
 	public static ChecksResult validateIsPage(WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Estamos en la página " + PageGestionarClientes.titulo +  "<br>",
+			"Estamos en la página " + PageGestionarClientes.titulo,
 			PageGestionarClientes.isPage(driver), State.Defect);
 	 	validations.add(
-			"Aparece el apartado de \"Buscar clientes\"<br>",
+			"Aparece el apartado de \"Buscar clientes\"",
 			PageGestionarClientes.isVisibleFormBuscarClientes(driver), State.Defect);
 	 	validations.add(
 			"Aparece el apartado de \"Tratar clientes\"",
@@ -42,10 +42,10 @@ public class PageGestionarClientesStpV {
 	private static ChecksResult checkAfterSearchByDni(String dni, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Se muestra la tabla de información<br>",
+			"Se muestra la tabla de información",
 			PageGestionarClientes.isVisibleTablaInformacion(driver), State.Defect);
 	 	validations.add(
-			"Aparece el DNI <b>" + dni + "</b> en la tabla<br>",
+			"Aparece el DNI <b>" + dni + "</b> en la tabla",
 			PageGestionarClientes.getDniTabla(dni, driver), State.Defect);
 		int maxSecondsToWait = 1;
 	 	validations.add(
@@ -75,7 +75,7 @@ public class PageGestionarClientesStpV {
 	private static ChecksResult checkAfterClickButton(TypeThirdButton typeButton, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece el mensaje <b>" + typeButton.getMensaje() + "</b><br>",
+			"Aparece el mensaje <b>" + typeButton.getMensaje() + "</b>",
 			PageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton, driver), State.Defect);
 	 	
 		int maxSecondsWait = 2;
@@ -103,7 +103,7 @@ public class PageGestionarClientesStpV {
 	private static ChecksResult checkAfterClickDetalles(String dni, String idCliente, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"Aparece el id del cliente <b>" + idCliente + "</b><br>",
+			"Aparece el id del cliente <b>" + idCliente + "</b>",
 			PageGestionarClientes.isVisibleIdClienteClickDetallesButton(idCliente, driver), State.Defect);
 	 	validations.add(
 			"Aparece el dni del cliente <b>" + dni + "</b>",

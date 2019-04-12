@@ -16,7 +16,7 @@ public class ModalDirecEnvioStpV {
     	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
 	 	validations.add(
-			"Es visible el formulario para la introducción de la \"Dirección de envío\" (lo esperamos hasta #{maxSeconds} seconds)<br>",
+			"Es visible el formulario para la introducción de la \"Dirección de envío\" (lo esperamos hasta #{maxSeconds} seconds)",
 			ModalDirecEnvio.isVisibleFormUntil(maxSecondsWait, driver), State.Defect); 
 	 	validations.add(
 			"Es visible el botón \"Actualizar\"",
@@ -42,7 +42,7 @@ public class ModalDirecEnvioStpV {
     	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 2;
 	 	validations.add(
-			"Desaparece el modal de introducción de los datos de la dirección (lo esperamos hasta " + maxSecondsWait + " segundos)<br>",
+			"Desaparece el modal de introducción de los datos de la dirección (lo esperamos hasta " + maxSecondsWait + " segundos)",
 			ModalDirecEnvio.isInvisibleFormUntil(maxSecondsWait, driver), State.Defect); 
 	 	validations.add(
 			"Aparece un modal de alerta alertando de un posible cambio de precios (lo esperamos hasta " + maxSecondsWait + " segundos)",

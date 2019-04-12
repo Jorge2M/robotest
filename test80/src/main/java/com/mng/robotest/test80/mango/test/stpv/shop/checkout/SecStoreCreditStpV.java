@@ -73,18 +73,18 @@ public class SecStoreCreditStpV {
     throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
       	validations.add(
-    		"Es visible el bloque correspondiente al pago mediante \"Saldo en cuenta\"<br>",
+    		"Es visible el bloque correspondiente al pago mediante \"Saldo en cuenta\"",
     		Page1DktopCheckout.secStoreCredit.isVisible(driver), State.Defect);
       	
       	boolean isCheckedBlock = Page1DktopCheckout.secStoreCredit.isChecked(driver);
       	if (checkedSaldoEnCta) {
           	validations.add(
-        		"Está marcado el radio del bloque de \"Saldo en cuenta\"<br>",
+        		"Está marcado el radio del bloque de \"Saldo en cuenta\"",
         		isCheckedBlock, State.Defect);
       	}
       	else {
           	validations.add(
-        		"No está marcado el radio del bloque de \"Saldo en cuenta\"<br>",
+        		"No está marcado el radio del bloque de \"Saldo en cuenta\"",
         		!isCheckedBlock, State.Warn);
       	}
       	
@@ -92,7 +92,7 @@ public class SecStoreCreditStpV {
             String impTotResumen = PageCheckoutWrapper.getPrecioTotalFromResumen(channel, driver);
             float impFloat = ImporteScreen.getFloatFromImporteMangoScreen(impTotResumen);
           	validations.add(
-        		"Figura un importe total de 0<br>",
+        		"Figura un importe total de 0",
         		impFloat==0.0, State.Warn);
       	}
 

@@ -57,10 +57,10 @@ public class PageRegistroSegundaStpV {
         dataRegistro.put("lineascomaseparated", lineasComaSeparated);
         int maxSecondsWait = 5;
     	validations.add(
-    		"Aparece la 2ª página de introducción de datos (la esperamos hasta " + maxSecondsWait + " segs)<br>",
+    		"Aparece la 2ª página de introducción de datos (la esperamos hasta " + maxSecondsWait + " segs)",
     		PageRegistroSegunda.isPageUntil(driver, maxSecondsWait), State.Warn);
     	validations.add(
-    		"Se pueden seleccionar las colecciones " + lineasComaSeparated + "<br>",
+    		"Se pueden seleccionar las colecciones " + lineasComaSeparated,
     		PageRegistroSegunda.isPresentInputForLineas(driver, lineasComaSeparated), State.Info, true);
     	
         int numColecciones = PageRegistroSegunda.getNumColecciones(driver);
