@@ -86,9 +86,9 @@ public class SuitesDAO {
             try (PreparedStatement select = conn.prepareStatement(SQLSelectSuite)) {
                 select.setString(1, executionId);
                 try (ResultSet resultado = select.executeQuery()) {
-                    if (resultado.next()) 
+                    if (resultado.next()) {
                         return StateSuite.valueOf(resultado.getString("STATE"));
-                    
+                    }
                     return StateSuite.NOTEXISTS;
                 }
             }
@@ -189,8 +189,9 @@ public class SuitesDAO {
                 select.setString(1, suiteExecId);
                 select.setString(2, suite);
                 try (ResultSet resultado = select.executeQuery()) {
-                    if (resultado.next())
+                    if (resultado.next()) {
                         suiteObj = mapSuiteRowToObject(resultado);
+                    }
                 }
             }
         } catch (SQLException ex) {

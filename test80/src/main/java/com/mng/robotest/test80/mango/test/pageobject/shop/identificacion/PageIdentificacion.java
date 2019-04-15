@@ -47,10 +47,11 @@ public class PageIdentificacion extends WebdrvWrapp {
      * Realizamos un login/logoff según el parámetro 'accUsrReg' que identifica si es preciso que el usuario esté logado
      */
     public static void loginOrLogoff(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-        if (dCtxSh.userRegistered)
+        if (dCtxSh.userRegistered) {
             iniciarSesion(dCtxSh, driver);
-        else
+        } else {
             SecMenusWrap.closeSessionIfUserLogged(dCtxSh.channel, dCtxSh.appE, driver);
+        }
     }
     
     /**
@@ -76,8 +77,9 @@ public class PageIdentificacion extends WebdrvWrapp {
     	clickAndWaitLoad(driver, By.xpath(XPathSubmitButton));
 
     	//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-        if (isButtonEntrarVisible(driver))
+        if (isButtonEntrarVisible(driver)) {
         	clickAndWaitLoad(driver, By.xpath(XPathSubmitButton), TypeOfClick.javascript);
+        }
     }
     
     public static boolean isButtonEntrarVisible(WebDriver driver) {
@@ -100,8 +102,9 @@ public class PageIdentificacion extends WebdrvWrapp {
             boolean menuClicado = SecMenusWrap.secMenusUser.clickCerrarSessionIfLinkExists(channel, driver);
             
             //Si hemos clicado el menú 'Cerrar Sesión' volvemos a abrir los menús
-            if (menuClicado)
+            if (menuClicado) {
             	secCabeceraMobil.clickIconoMenuHamburguer(toOpen);
+            }
         }
         
         SecMenusWrap.secMenusUser.MoveAndclickIniciarSesion(channel, driver);

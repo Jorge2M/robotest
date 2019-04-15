@@ -156,12 +156,12 @@ public class DataPedido {
     }
     
     public String getImporteTotalManto() {
-        if ("".compareTo(this.importeTotalSinSaldoCta)!=0)
+        if ("".compareTo(this.importeTotalSinSaldoCta)!=0) {
             return this.importeTotalSinSaldoCta;
-        
-        if ("".compareTo(this.importeTotal)!=0)
+        }
+        if ("".compareTo(this.importeTotal)!=0) {
             return this.importeTotal;
-            
+        }
         return this.dataBag.importeTotal;
     }    
 	

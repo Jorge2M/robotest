@@ -29,12 +29,12 @@ public class PagePostfCodSeg extends WebdrvWrapp {
      */
     public static boolean isPasarelaPostfinanceTest(WebDriver driver, String metodoPago) {
         boolean isPasarela = false;
-        if (metodoPago.toUpperCase().contains("E-FINANCE") && driver.getTitle().contains("e-finance"))
+        if (metodoPago.toUpperCase().contains("E-FINANCE") && driver.getTitle().contains("e-finance")) {
             isPasarela = true;
-            
-        if (metodoPago.toUpperCase().contains("CARD") && driver.getTitle().contains("Card"))
+        }
+        if (metodoPago.toUpperCase().contains("CARD") && driver.getTitle().contains("Card")) {
             isPasarela = true;
-            
+        }
         return isPasarela;
     }
     

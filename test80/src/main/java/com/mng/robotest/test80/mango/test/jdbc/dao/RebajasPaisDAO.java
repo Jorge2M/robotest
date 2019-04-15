@@ -63,8 +63,9 @@ public class RebajasPaisDAO {
                     Date fechaIni = dateFormat.parse(resultado.getString("INICIO"));
                     Date fechaFin = dateFormat.parse(resultado.getString("FIN"));
                     if (fechaIni.getTime() < fechaHoyDate.getTime() &&
-                        fechaFin.getTime() > fechaHoyDate.getTime())                            
+                        fechaFin.getTime() > fechaHoyDate.getTime()) {
                         listCountryCodes.add(resultado.getString("CODIGOPAIS"));
+                    }
                 }
             }
             
@@ -123,8 +124,9 @@ public class RebajasPaisDAO {
             PreparedStatement select = conn.prepareStatement(SQLSelectMaxRebajasPais)) {
             select.setString(1, codigoPais);
             try (ResultSet resultado = select.executeQuery()) {
-                if (resultado.next())
+                if (resultado.next()) {
                     maxrebajas = resultado.getInt("MAXREBAJAS");
+                }
             }
             
             return maxrebajas;

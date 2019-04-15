@@ -42,8 +42,9 @@ public class PedidosNavigations {
     private static void testPedidosEnManto(DataMantoAccess dMantoAcc, CopyOnWriteArrayList<DataPedido> listPedidos, DataFmwkTest dFTest) 
     throws Exception {
         //En caso de ejecución desde .bat no accederemos a Manto 
-        if (utils.getTypeAccessFmwk(dFTest.ctx)==TypeAccessFmwk.Bat)
+        if (utils.getTypeAccessFmwk(dFTest.ctx)==TypeAccessFmwk.Bat) {
             return;
+        }
 
         //Si existen pedidos que validar y no se trata de un acceso desde la línea de comandos (típicamente .bat)
         TypeAccessFmwk typeAccess = utils.getTypeAccessFmwk(dFTest.ctx);

@@ -20,9 +20,9 @@ public class PageGestionarClientes extends WebdrvWrapp {
         }
         
         public TypeThirdButton buttonExpectedAfterClick() {
-            if (this==TypeThirdButton.Alta)
+            if (this==TypeThirdButton.Alta) {
                 return TypeThirdButton.Baja;
-            
+            }
             return TypeThirdButton.Alta;
         }
     } 
@@ -97,9 +97,9 @@ public class PageGestionarClientes extends WebdrvWrapp {
 	}
 
 	public static TypeThirdButton getTypeThirdButton(WebDriver driver) {
-	    if (isVisibleThirdButtonUntil(TypeThirdButton.Alta, 0, driver))
+	    if (isVisibleThirdButtonUntil(TypeThirdButton.Alta, 0, driver)) {
 	        return (TypeThirdButton.Alta);
-	    
+	    }
 	    return (TypeThirdButton.Baja); 
 	}
 	

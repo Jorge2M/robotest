@@ -52,8 +52,9 @@ public enum State  {
     
     public static State getState(int idNumericI) {
         for (State estado : State.values()) {
-            if (estado.getIdNumerid() == idNumericI)
+            if (estado.getIdNumerid() == idNumericI) {
                 return estado;
+            }
         }
         
         return null;

@@ -58,8 +58,9 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
       
         //Borramos todos los WebDriver si quedara alguno
         GestorWebDrv gestorDrv = GestorWebDrv.getGestorFromCtx(this.ctx1erTestRun);
-        if (gestorDrv!=null)
+        if (gestorDrv!=null) {
             gestorDrv.removeAllStrWd();
+        }
         
         //Ejecutamos la llamada al CallBack en caso que sea necesario
         this.httpUrlCallBack = callBackIfNeeded(suite);
@@ -135,8 +136,9 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
             calToPurge.set(Calendar.MINUTE, 0);
             calToPurge.set(Calendar.SECOND, 0);
             calToPurge.set(Calendar.MILLISECOND, 0);
-            if (calLastPurge.before(calToPurge))
+            if (calLastPurge.before(calToPurge)) {
                 return true;
+            }
         }
         
         return false;

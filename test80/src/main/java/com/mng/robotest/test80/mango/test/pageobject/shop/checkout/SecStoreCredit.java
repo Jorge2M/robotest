@@ -37,8 +37,9 @@ public class SecStoreCredit extends WebdrvWrapp {
         boolean isChecked = false;
         if (isVisible(driver)) {
             WebElement optionStoreC = driver.findElement(By.xpath(XPathStoreCreditOption));
-            if (optionStoreC!=null && optionStoreC.getAttribute("class").contains("-checked"))
+            if (optionStoreC!=null && optionStoreC.getAttribute("class").contains("-checked")) {
                 isChecked = true;
+            }
         }
         
         return isChecked;

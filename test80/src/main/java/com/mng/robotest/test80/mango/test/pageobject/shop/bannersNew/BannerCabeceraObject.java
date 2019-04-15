@@ -25,9 +25,9 @@ public class BannerCabeceraObject extends BannerObject {
     		urlBanner = ancor.getAttribute("href");
     	}
     	
-        if (urlBanner==null || "".compareTo(urlBanner)==0)
+        if (urlBanner==null || "".compareTo(urlBanner)==0) {
         	urlBanner = getUrlDestinoSearchingForAnchor(bannerScreen);
-        
+        }
         return urlBanner;
     }
     

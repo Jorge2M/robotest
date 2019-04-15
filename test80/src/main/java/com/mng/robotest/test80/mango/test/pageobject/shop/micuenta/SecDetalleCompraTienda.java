@@ -40,9 +40,9 @@ public class SecDetalleCompraTienda extends WebdrvWrapp {
     
     
     public static String getXPathFecha (Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathFechaMovil;
-        
+        }
         return XPathFechaDesktop;
     }
     
@@ -82,10 +82,7 @@ public class SecDetalleCompraTienda extends WebdrvWrapp {
             //Consideramos que la imagen ha de tener unas dimensiones mínimas de 30x50 para ser visible
             int width=driver.findElement(By.xpath(XPathCodigoBarrasImg)).getSize().getWidth();
             int height=driver.findElement(By.xpath(XPathCodigoBarrasImg)).getSize().getHeight();
-            if (width>=30 && height>=50)
-                return true;
-            
-            return false;
+            return (width>=30 && height>=50);
         }
         
         return false;

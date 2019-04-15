@@ -190,8 +190,9 @@ public class CreateWebDriver {
         FirefoxDriver firefoxDriver = new FirefoxDriver(options);
 
         //Indicamos que el WebDriver tiene interface gráfica
-        if (context != null)
+        if (context != null) {
             context.setAttribute("browserGUI", Boolean.valueOf(true));
+        }
 
         if (channel==Channel.movil_web) {
             //En caso de móvil redimensionaremos el navegador a unas dimensiones tipo 'móvil'

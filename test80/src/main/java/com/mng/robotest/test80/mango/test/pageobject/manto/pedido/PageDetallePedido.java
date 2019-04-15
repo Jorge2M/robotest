@@ -78,8 +78,9 @@ public class PageDetallePedido extends WebdrvWrapp {
     		String lineaTexto = driver.findElement(By.xpath(XPathLinkEnvioTienda)).getText();
             Pattern pattern = Pattern.compile("(.*?)ENVIO A TIENDA(.*?)(\\d+)");//(^[0-9])
             Matcher matcher = pattern.matcher(lineaTexto);
-            if (matcher.find())
+            if (matcher.find()) {
                 return matcher.group(3);
+            }
     	}
     	
     	return "";
@@ -128,8 +129,9 @@ public class PageDetallePedido extends WebdrvWrapp {
         if (direcPedido.contains(dirLinea1) &&
             direcPedido.contains(dirLinea2) &&
             direcPedido.contains(codPostal) &&
-            direcPedido.contains(poblacion))
+            direcPedido.contains(poblacion)) {
             return true;
+        }
         
         return false;
     }
@@ -153,8 +155,9 @@ public class PageDetallePedido extends WebdrvWrapp {
         String estadoPant = getEstadoPedido(driver);
         while(st.hasMoreTokens()) {
             String estado = st.nextToken();
-            if (estadoPant.contains(estado + " -")) 
+            if (estadoPant.contains(estado + " -")) {
                 estadoEncontrado = true;
+            }
         }
         
         return estadoEncontrado;
@@ -165,8 +168,9 @@ public class PageDetallePedido extends WebdrvWrapp {
      * Se vuelve a la lista de pedidos mediante selección del link "Volver a pedidos" (si existe)
      */
     public static void gotoListaPedidos(WebDriver driver) throws Exception {
-        if (isElementPresent(driver, By.xpath(XPathLinkVolverPedidos)))
+        if (isElementPresent(driver, By.xpath(XPathLinkVolverPedidos))) {
             clickAndWaitLoad(driver, By.xpath(XPathLinkVolverPedidos));
+        }
     }
 
 	/**

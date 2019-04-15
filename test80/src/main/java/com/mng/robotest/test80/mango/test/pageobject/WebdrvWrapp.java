@@ -94,8 +94,9 @@ public class WebdrvWrapp extends ElementPageFunctions {
     public static int getNumElementsVisible(WebDriver driver, By by) {
         int numberOfElements = 0;
         for (WebElement element : driver.findElements(by)) {
-            if (element.isDisplayed())
+            if (element.isDisplayed()) {
                 numberOfElements+=1;
+            }
         }
         
         return numberOfElements;
@@ -103,8 +104,9 @@ public class WebdrvWrapp extends ElementPageFunctions {
     
     public static WebElement getElementVisible(WebDriver driver, By by) {
         for (WebElement element : driver.findElements(by)) {
-            if (element.isDisplayed())
+            if (element.isDisplayed()) {
                 return element;
+            }
         }
         
         return null;
@@ -112,8 +114,9 @@ public class WebdrvWrapp extends ElementPageFunctions {
     
     public static WebElement getElementVisible(WebElement elementInput, By by) {
         for (WebElement element : elementInput.findElements(by)) {
-            if (element.isDisplayed())
+            if (element.isDisplayed()) {
                 return element;
+            }
         }
         
         return null;
@@ -121,8 +124,9 @@ public class WebdrvWrapp extends ElementPageFunctions {
     
     public static WebElement getElementWithSizeNot0(WebDriver driver, By by) {
         for (WebElement element : driver.findElements(by)) {
-            if (element.getSize().height!=0 || element.getSize().width!=0)
+            if (element.getSize().height!=0 || element.getSize().width!=0) {
                 return element;
+            }
         }
         
         return null;
@@ -131,8 +135,9 @@ public class WebdrvWrapp extends ElementPageFunctions {
     public static List<WebElement> getElementsVisible(WebDriver driver, By by) {
         List<WebElement> listaReturn = new ArrayList<>();
         for (WebElement element : driver.findElements(by)) {
-            if (element.isDisplayed())
+            if (element.isDisplayed()) {
                 listaReturn.add(element);
+            }
         }
         
         return listaReturn;
@@ -140,8 +145,9 @@ public class WebdrvWrapp extends ElementPageFunctions {
     
     public static WebElement getElementClickable(WebDriver driver, By by) {
         for (WebElement element : driver.findElements(by)) {
-            if (isElementClickable(driver, by))
+            if (isElementClickable(driver, by)) {
                 return element;
+            }
         }
         
         return null;
@@ -268,9 +274,9 @@ public class WebdrvWrapp extends ElementPageFunctions {
     
     public static boolean waitClickAndWaitLoad(WebDriver driver, int waitForLinkToClick, By by, int waitSeconds, TypeOfClick typeOfClick) 
     throws Exception {
-        if (waitForLinkToClick > 0)
+        if (waitForLinkToClick > 0) {
             new WebDriverWait(driver,waitForLinkToClick).until(ExpectedConditions.elementToBeClickable(by));
-
+        }
         WebElement webElem = driver.findElement(by);
         return(
         clickAndWaitLoad(driver, webElem, waitSeconds, typeOfClick));
@@ -310,13 +316,14 @@ public class WebdrvWrapp extends ElementPageFunctions {
     // Fuerza un click para que funcione SIEMPRE correctamente con WebDriver + Explorer 9 (partiendo de un WebElement)
     public static void forceClick(WebDriver driver, WebElement element, By by, int waitSeconds, TypeOfClick typeOfClick) throws Exception {
         WebElement link;
-        if (by != null)
+        if (by != null) {
             link = element.findElement(by);
-        else
+        } else {
             link = element;
+        }
 
-       click(typeOfClick, link, driver);
-       waitForPageLoaded(driver, waitSeconds);
+        click(typeOfClick, link, driver);
+        waitForPageLoaded(driver, waitSeconds);
     }
     
     private static void click(TypeOfClick typeOfClick, WebElement link, WebDriver driver) {
@@ -360,8 +367,9 @@ public class WebdrvWrapp extends ElementPageFunctions {
     
     public static void ifNotValueSetedSendKeysWithRetry(int numRetry, WebElement input, String keys) {
     	boolean valueSeted = input.getAttribute("value").compareTo(keys)==0;
-    	if (!valueSeted)
+    	if (!valueSeted) {
     		sendKeysWithRetry(numRetry, input, keys);
+    	}
     }   
     
     public static void sendKeysWithRetry(int numRetry, WebElement input, String keys) {
@@ -420,9 +428,9 @@ public class WebdrvWrapp extends ElementPageFunctions {
         //Este evento no funciona en Safari (siempre retorna "complete"). Indica que el DOM está cargado (incluye la carga de imágenes, estilos...)
         Object readyState = ((JavascriptExecutor)driver).executeScript("return document.readyState");
         if (readyState!=null && readyState.equals("complete") && 
-            domContentLoaded!=null && domContentLoaded.toString().compareTo("0")!=0)
+            domContentLoaded!=null && domContentLoaded.toString().compareTo("0")!=0) {
             pageLoaded = true;
-        
+        }
         return pageLoaded;
     }
 
@@ -447,8 +455,9 @@ public class WebdrvWrapp extends ElementPageFunctions {
                     // return should be a number
                     if (numberOfAjaxConnections instanceof Long) {
                         Long n = (Long) numberOfAjaxConnections;
-                        if (n.longValue() == 0L)
+                        if (n.longValue() == 0L) {
                             break;
+                        }
                     }
                     Thread.sleep(1000);
                 }
@@ -487,8 +496,9 @@ public class WebdrvWrapp extends ElementPageFunctions {
             if (!windowParent.equals(window)) {
                 //Cambiamos a la ventana encontrada
                 driver.switchTo().window(window);
-                if (driver.getTitle().toLowerCase().contains(title))
+                if (driver.getTitle().toLowerCase().contains(title)) {
                     return true;
+                }
                 
                 //Si no se trata del popup que buscamos restauramos la ventana padre
                 driver.switchTo().window(windowParent);
@@ -526,9 +536,9 @@ public class WebdrvWrapp extends ElementPageFunctions {
               Boolean contains = Boolean.valueOf(false);
               try {
                 this.currentValue = element.getAttribute(attribute);
-                if (this.currentValue == null || this.currentValue.isEmpty())
-                  this.currentValue = element.getCssValue(attribute);
-    
+                if (this.currentValue == null || this.currentValue.isEmpty()) {
+                	this.currentValue = element.getCssValue(attribute);
+                }
                 contains = Boolean.valueOf(this.currentValue.contains(value));
               } 
               catch (Exception e) {

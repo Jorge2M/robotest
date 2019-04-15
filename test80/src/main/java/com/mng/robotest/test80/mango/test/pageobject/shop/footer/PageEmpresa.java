@@ -19,9 +19,9 @@ public class PageEmpresa extends WebdrvWrapp implements PageFromFooter {
 	
 	@Override
 	public boolean isPageCorrect(WebDriver driver) {
-		if (isNewPage(driver))
+		if (isNewPage(driver)) {
 			return true;
-		
+		}
 		driver.switchTo().frame(driver.findElement(By.xpath(XPathIdFrameOld)));
 		return (isElementPresent(driver, By.xpath(XPathForIdPageOld)));
 	}

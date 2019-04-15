@@ -33,8 +33,9 @@ public class CampanasExcel extends CampanasData {
 		
 		public static TypeCell getTypeCell(String encabezado) {
 			for (TypeCell typeCell : TypeCell.values()) {
-				if (encabezado.compareTo(typeCell.getEncabezado())==0)
+				if (encabezado.compareTo(typeCell.getEncabezado())==0) {
 					return typeCell;
+				}
 			}
 			
 			return null;

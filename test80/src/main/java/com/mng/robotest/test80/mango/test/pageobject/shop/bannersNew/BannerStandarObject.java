@@ -25,18 +25,18 @@ public class BannerStandarObject extends BannerObject {
 	@Override
     protected String getUrlBanner(WebElement bannerScreen) {
         String urlBanner = bannerScreen.getAttribute("data-cta");
-        if (urlBanner==null || "".compareTo(urlBanner)==0)
+        if (urlBanner==null || "".compareTo(urlBanner)==0) {
         	urlBanner = getUrlDestinoSearchingForAnchor(bannerScreen);
-        
+        }
         return urlBanner;
     }
     
 	@Override
     protected String getSrcImageBanner(WebElement bannerScreen) {
     	List<WebElement> listImgsBanner = UtilsMangoTest.findDisplayedElements(bannerScreen, By.xpath("." + XPathImageRelativeBanner));
-    	if (listImgsBanner.size() > 0)
+    	if (listImgsBanner.size() > 0) {
     		return (listImgsBanner.get(0).getAttribute("src"));
-    		
+    	}
     	return "";
     }
 }

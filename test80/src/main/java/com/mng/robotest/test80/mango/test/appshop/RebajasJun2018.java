@@ -182,9 +182,9 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
     }
     
     private String getDataGaLabelNuevaTemporada(String codigoPais, SublineaNinosType sublineaType) {
-        if ("075".compareTo(codigoPais)==0 && sublineaType==SublineaNinosType.nino)
+        if ("075".compareTo(codigoPais)==0 && sublineaType==SublineaNinosType.nino) {
         	return ("nueva_coleccion");
-        
+        }
         return "nueva_temporada";
     }
 }

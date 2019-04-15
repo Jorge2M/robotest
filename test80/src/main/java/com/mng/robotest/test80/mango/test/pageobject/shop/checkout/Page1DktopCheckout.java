@@ -139,15 +139,16 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     private static String getXPathClickPagoLayoutLinea(String metodoPago, String indexpant) {
         String xpathReturn = "";
         String metodoPagoClick = PageCheckoutWrapper.getMethodInputValue(metodoPago, Channel.desktop);
-        if (metodoPagoClick.toUpperCase().compareTo("VISA")==0)
+        if (metodoPagoClick.toUpperCase().compareTo("VISA")==0) {
             xpathReturn = "//div[@class[contains(.,'cuadroPago')]]/input[@value='" + metodoPagoClick + "']/../input[@type='radio']";
-        else
+        } else {
             xpathReturn = "//div[@class[contains(.,'cuadroPago')]]/input[@value[contains(.,'" + metodoPagoClick + "')]]/../input[@type='radio']";
-        
+        }
+            
         //Esto lo hacemos para el caso concreto de Mercadopago (México) pues hay 2 métodos idénticos e indistingibles
-        if (Integer.valueOf(indexpant).intValue() > 1)
+        if (Integer.valueOf(indexpant).intValue() > 1) {
             xpathReturn = "(" + xpathReturn + ")[" + indexpant + "]";
-        
+        }
         return xpathReturn;
     }
     
@@ -251,9 +252,9 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     }
     
     public static void showInputCodigoPromoAndAccept(String codigoPromo, WebDriver driver) throws Exception {
-        if (!isVisibleBlockCodigoPromoUntil(0/*maxSecondsToWait*/, driver))
+        if (!isVisibleBlockCodigoPromoUntil(0, driver)) {
             clickLinkToViewBlockPromo(driver);
-    
+        }
         int maxSecondsWait = 5;
         if (isVisibleBlockCodigoPromoUntil(maxSecondsWait, driver)) {
             inputCodigoPromo(codigoPromo, driver);
@@ -267,8 +268,9 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     
     public static void clickEliminarValeIfExists(WebDriver driver) throws Exception {
     	By byEliminar = By.xpath(XPathLinkEliminarPromo);
-    	if (isElementVisible(driver, byEliminar))
+    	if (isElementVisible(driver, byEliminar)) {
     		clickAndWaitLoad(driver, byEliminar);
+    	}
     }
     
     public static void inputCodigoPromo(String codigoPromo, WebDriver driver) {
@@ -355,11 +357,9 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     }
 
     public static boolean areMetodosPagoPlegados(WebDriver driver) {
-        if (isElementPresent(driver, By.xpath(XPathOtrasFormasPago)) &&
-            !isElementVisible(driver, By.xpath(XPathOtrasFormasPago)))
-            return true;
-        
-        return false;
+        return (
+        	isElementPresent(driver, By.xpath(XPathOtrasFormasPago)) &&
+            !isElementVisible(driver, By.xpath(XPathOtrasFormasPago)));
     }    
     
     /**
@@ -403,10 +403,7 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     }
     
     public static boolean isRedErrorVisible(WebDriver driver) {
-        if (isElementVisible(driver, By.xpath(XPathRedError)))
-            return true;
-         
-        return false;
+        return (isElementVisible(driver, By.xpath(XPathRedError)));
     }
     
     public static String getTextRedError(WebDriver driver) {
@@ -427,13 +424,13 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     
     public static String getTextDireccionEnvioCompleta(WebDriver driver) throws Exception {
     	waitForPageLoaded(driver); //For avoid StaleElementReferenceException
-        if (isElementPresent(driver, By.xpath(XPathDirecionEnvio)))
+        if (isElementPresent(driver, By.xpath(XPathDirecionEnvio))) {
             return (
                 driver.findElement(By.xpath(XPathDirecionEnvio)).getText() + ", " +
                 driver.findElement(By.xpath(XPathPoblacionEnvio)).getText() + ", " +
                 driver.findElement(By.xpath(XPathProvinciaEnvio)).getText()
             );
-        
+        }
         return "";
     }
     
@@ -446,29 +443,31 @@ public class Page1DktopCheckout extends WebdrvWrapp {
      * @return el código de almacén que es posible obtener en el caso de la página de checkout de entornos no-productivos
      */
     public static String getAlmacenFromNoProdEntorn(WebDriver driver) {
-    	if (isElementPresent(driver, By.xpath(XPathAlmacenInNoProEntorns)))
+    	if (isElementPresent(driver, By.xpath(XPathAlmacenInNoProEntorns))) {
     		return (driver.findElement(By.xpath(XPathAlmacenInNoProEntorns)).getText());
-    			
+    	}
     	return "";
     }
     
     public static WebElement getLineaArticle(String referencia, WebDriver driver) {
     	By byLinArticle = By.xpath(getXPathLinArticle(referencia));
-    	if (isElementPresent(driver, byLinArticle))
+    	if (isElementPresent(driver, byLinArticle)) {
     		return (driver.findElement(byLinArticle));
-    	
+    	}
     	return null;
     }
     
     public static boolean validateArticlesAndImport(DataBag dataBag, WebDriver driver) throws Exception {
     	for (ArticuloScreen articulo : dataBag.getListArticlesTypeViewInBolsa()) {
     		WebElement lineaArticulo = getLineaArticle(articulo.getReferencia(), driver);
-    		if (lineaArticulo==null)
+    		if (lineaArticulo==null) {
     			return false;
+    		}
     		
     		PreciosArticulo preciosArticuloScreen = getPreciosArticuloResumen(lineaArticulo);
-    		if (!validateArticleImport(preciosArticuloScreen, articulo.getPrecio()))
+    		if (!validateArticleImport(preciosArticuloScreen, articulo.getPrecio())) {
     			return false;
+    		}
     	}
     	
     	return true;
@@ -481,17 +480,20 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     public static boolean validateArticlesAndDiscount(DataBag dataBag, Descuento descuento, WebDriver driver) throws Exception {
     	for (ArticuloScreen articulo : dataBag.getListArticlesTypeViewInBolsa()) {
     		WebElement lineaArticulo = getLineaArticle(articulo.getReferencia(), driver);
-    		if (lineaArticulo==null)
+    		if (lineaArticulo==null) {
     			return false;
+    		}
     		
     		PreciosArticulo preciosArticuloScreen = getPreciosArticuloResumen(lineaArticulo);
     		if (articulo.getValePais()!=null) {
-	    		if (!PageCheckoutWrapper.validateDiscountOk(preciosArticuloScreen, descuento))
+	    		if (!PageCheckoutWrapper.validateDiscountOk(preciosArticuloScreen, descuento)) {
 	    			return false;
+	    		}
     		} else {
     			Descuento descuentoZero = new Descuento(0);
-	    		if (!PageCheckoutWrapper.validateDiscountOk(preciosArticuloScreen, descuentoZero))
+	    		if (!PageCheckoutWrapper.validateDiscountOk(preciosArticuloScreen, descuentoZero)) {
 	    			return false;
+	    		}
     		}
     	}
     	
@@ -522,8 +524,9 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         	float precio = getFloatFromImporteScreen(precioSiTachado); 
         	if (precio!=0) {
 	        	precios.ultimaRebaja = precio;
-	        	if (precios.original==0 || precios.original==precios.definitivo)
+	        	if (precios.original==0 || precios.original==precios.definitivo) {
 	        		precios.original = getFloatFromImporteScreen(precioSiTachado);
+	        	}
         	}
         }
         
@@ -567,10 +570,9 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     
     public static boolean isMarkedQuieroFactura(WebDriver driver) {
         WebElement radio = driver.findElement(By.xpath(XPathLinkSolicitarFactura));
-        if (radio.getAttribute("checked")!=null &&
-            radio.getAttribute("checked").contains("true"))
+        if (radio.getAttribute("checked")!=null && radio.getAttribute("checked").contains("true")) {
             return true;
-         
+        }
         return false;
     }
     

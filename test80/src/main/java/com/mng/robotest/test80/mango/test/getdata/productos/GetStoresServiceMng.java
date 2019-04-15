@@ -65,8 +65,9 @@ public class GetStoresServiceMng {
     	String url = "https://" +  uriBaseTest.getHost() + "/services/shopconfig-countries/countries"; 
     	if (!(countryId==null && storeId==null)) {
     		url+= "/" + storeId;
-    		if (countryId!=null)
+    		if (countryId!=null) {
     			url+= "/" + countryId;
+    		}
     	}
     	
     	return url;

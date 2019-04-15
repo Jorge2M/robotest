@@ -59,9 +59,9 @@ public class Page2IdentCheckout extends WebdrvWrapp {
         
     public static boolean isInputPasswordAccordingEmail(boolean emailYetExists, WebDriver driver) {
         boolean isVisiblePassword = isElementVisible(driver, By.xpath(XPathInputPassword));
-        if (emailYetExists==isVisiblePassword)
+        if (emailYetExists==isVisiblePassword) {
             return false;
-        
+        }
         return true;
     }
 
@@ -93,32 +93,37 @@ public class Page2IdentCheckout extends WebdrvWrapp {
     
     public static void setNombreUsuarioIfVisible(String nombreUsr, HashMap<String,String> datosRegistro, WebDriver driver) {
         boolean datoSeteado = setInputIfVisible(XPathInputNombreUsr, nombreUsr, driver);
-        if (datoSeteado) 
+        if (datoSeteado) {
             datosRegistro.put("cfName", nombreUsr);
+        }
     }
     
     public static void setApellidosUsuarioIfVisible(String apellidosUsr, HashMap<String,String> dataPago, WebDriver driver) {
         boolean datoSeteado = setInputIfVisible(XPathInputApellidosUsr, apellidosUsr, driver);
-        if (datoSeteado) 
+        if (datoSeteado) {
             dataPago.put("cfSname", apellidosUsr);
+        }
     }
     
     public static void setPasswordIfVisible(String password, HashMap<String,String> datosRegistro, WebDriver driver) {
         boolean datoSeteado = setInputIfVisible(XPathInputPassword, password, driver);
-        if (datoSeteado) 
+        if (datoSeteado) {
             datosRegistro.put("cfPass", password);
+        }
     }
     
     public static void setTelefonoIfVisible(String movil, HashMap<String,String> datosRegistro, WebDriver driver) {
         boolean datoSeteado = setInputIfVisible(XPathInputTelefono, movil, driver);
-        if (datoSeteado) 
+        if (datoSeteado) {
             datosRegistro.put("cfTelf", movil);
+        }
     }    
     
     public static void setInputPoblacionIfVisible(String cfCity, HashMap<String,String> datosRegistro, WebDriver driver) {
         boolean datoSeteado = setInputIfVisible(XPathInputPoblacionActive, cfCity, driver);
-        if (datoSeteado)
+        if (datoSeteado) {
             datosRegistro.put("cfCity", cfCity);
+        }
     }
     
     public static void setInputDireccion1IfVisible(String direccion1, WebDriver driver) {
@@ -133,20 +138,23 @@ public class Page2IdentCheckout extends WebdrvWrapp {
     
     public static void setInputDireccion2IfVisible(String direccion1, HashMap<String,String> datosRegistro, WebDriver driver) {
         boolean datoSeteado = setInputIfVisible(XPathInputDireccion2, direccion1, driver);
-        if (datoSeteado)
+        if (datoSeteado) {
             datosRegistro.put("cfDir2", direccion1);
+        }
     }
     
     public static void setInputProvEstadoIfVisible(String cfState, HashMap<String,String> datosRegistro, WebDriver driver) {
         boolean datoSeteado = setInputIfVisible(XPathInputProvEstadoActive, cfState, driver);
-        if (datoSeteado)
+        if (datoSeteado) {
             datosRegistro.put("cfState", cfState);
+        }
     }    
 
     public static void setInputDniIfVisible(String dni, HashMap<String,String> datosRegistro, WebDriver driver) {
         boolean datoSeteado = setInputIfVisible(XPathInputDNI, dni, driver);        
-        if (datoSeteado)
+        if (datoSeteado) {
             datosRegistro.put("cfDni", dni);
+        }
     }
     
     /**
@@ -159,8 +167,9 @@ public class Page2IdentCheckout extends WebdrvWrapp {
             if (cfCodpostalList.size() > 0) {
                 //Si existe el tag 'onkeyup' (se desencadena petición Ajax) tenemos que esperaremos un máximo de 2 segundos hasta que aparezca el desplegable con las poblaciones
                 if (cfCodpostalList.get(0).getAttribute("onkeyup")!=null && 
-                    cfCodpostalList.get(0).getAttribute("onkeyup").compareTo("")!=0)
-                    isElementVisibleUntil(driver, By.xpath(XPathSelectLocalidades), 2/*seconds*/);
+                    cfCodpostalList.get(0).getAttribute("onkeyup").compareTo("")!=0) {
+                    isElementVisibleUntil(driver, By.xpath(XPathSelectLocalidades), 2);
+                }
             }
         }        
         
@@ -169,8 +178,9 @@ public class Page2IdentCheckout extends WebdrvWrapp {
     
     public static void setCodPostalIfExistsAndWait(String codigoPostal, HashMap<String,String> datosRegistro, WebDriver driver) {
         boolean datoSeteado = setCodPostalIfExistsAndWait(codigoPostal, driver);
-        if (datoSeteado)
+        if (datoSeteado) {
             datosRegistro.put("cfCp", codigoPostal);
+        }
     }    
     
     /**
@@ -220,8 +230,9 @@ public class Page2IdentCheckout extends WebdrvWrapp {
     
     public static void setPaisIfVisibleAndNotSelected(String codigoPais, HashMap<String,String> datosRegistro, WebDriver driver) {
         boolean datoSeteado = setPaisIfVisibleAndNotSelected(codigoPais, driver);
-        if (datoSeteado)
+        if (datoSeteado) {
             datosRegistro.put(":pais", codigoPais);
+        }
     }    
     
     public static void clickBotonFindAddress(WebDriver driver) throws Exception {
@@ -257,9 +268,9 @@ public class Page2IdentCheckout extends WebdrvWrapp {
     }
     
     public static String getCodigoPostal(WebDriver driver) {
-        if (isElementPresent(driver, By.xpath(XPathInputCodPost)))
+        if (isElementPresent(driver, By.xpath(XPathInputCodPost))) {
             return (driver.findElement(By.xpath(XPathInputCodPost)).getAttribute("value"));
-        
+        }
         return "";
     }
     
@@ -310,8 +321,9 @@ public class Page2IdentCheckout extends WebdrvWrapp {
     
     public static void setSelectLocalidadesIfVisible(WebDriver driver, int posInSelect, HashMap<String,String> datosRegistro) throws Exception {
         String datoSeteado = setSelectLocalidadesIfVisible(posInSelect, driver);
-        if ("".compareTo(datoSeteado)!=0)
+        if ("".compareTo(datoSeteado)!=0) {
             datosRegistro.put("cfCity", datoSeteado);
+        }
     }
     
     /**
@@ -330,8 +342,9 @@ public class Page2IdentCheckout extends WebdrvWrapp {
     
     public static void setSelectProvPaisIfVisible(int posInSelect, HashMap<String,String> datosRegistro, WebDriver driver) {
         String datoSeteado = setSelectProvPaisIfVisible(posInSelect, driver);
-        if ("".compareTo(datoSeteado)!=0)
+        if ("".compareTo(datoSeteado)!=0) {
             datosRegistro.put("provinciaPais", datoSeteado);
+        }
     }    
     
     public static String setSelectEstadosPaisIfVisible(int posInSelect, WebDriver driver) throws Exception {
@@ -364,8 +377,9 @@ public class Page2IdentCheckout extends WebdrvWrapp {
     
     public static void setSelectEstadosPaisIfVisible(int posInSelect, HashMap<String,String> datosRegistro, WebDriver driver) throws Exception {
         String datoSeteado = setSelectEstadosPaisIfVisible(posInSelect, driver);
-        if ("".compareTo(datoSeteado)!=0)
+        if ("".compareTo(datoSeteado)!=0) {
             datosRegistro.put("estadosPais", datoSeteado);
+        }
     }    
     
     /**
@@ -403,8 +417,9 @@ public class Page2IdentCheckout extends WebdrvWrapp {
     
     public static void setSelectLocalidadesProvCity(int posInSelect, HashMap<String,String> datosRegistro, WebDriver driver) throws Exception {
         String datoSeteado = setSelectLocalidadesProvCity(posInSelect, driver);
-        if ("".compareTo(datoSeteado)!=0)
+        if ("".compareTo(datoSeteado)!=0) {
             datosRegistro.put("localidadesProvCity", datoSeteado);
+        }
     }        
     
     public static boolean setCheckHombreIfVisible(WebDriver driver) {
@@ -419,8 +434,9 @@ public class Page2IdentCheckout extends WebdrvWrapp {
     
     public static void setCheckHombreIfVisible(HashMap<String,String> datosRegistro, WebDriver driver) {
         boolean datoSeteado = setCheckHombreIfVisible(driver);
-        if (datoSeteado)
+        if (datoSeteado) {
             datosRegistro.put("cfGener", "H");
+        }
     }    
     
     public static boolean setCheckCondicionesIfVisible(WebDriver driver) {
@@ -436,8 +452,9 @@ public class Page2IdentCheckout extends WebdrvWrapp {
     
     public static void setCheckCondicionesIfVisible(HashMap<String,String> datosRegistro, WebDriver driver) {
         boolean datoSeteado = setCheckCondicionesIfVisible(driver);
-        if (datoSeteado)
+        if (datoSeteado) {
             datosRegistro.put("cfPriv", "true");
+        }
     }
     
     /**
@@ -450,9 +467,9 @@ public class Page2IdentCheckout extends WebdrvWrapp {
         String apellidosUsr = "Muñoz Martínez";
         String codigoPais = pais.getCodigo_pais();
         String direccion1 = "c./ mossen trens n6 5 1a";
-        if (testCharNoLatinos)
+        if (testCharNoLatinos) {
             direccion1 = pais.getDireccharnolatinos().getText();
-        
+        }
         String direccion2 = "6";
         String cfCity = "VILAFRANCA";
         String codPostalPais = UtilsMangoTest.codigoPostal(pais);

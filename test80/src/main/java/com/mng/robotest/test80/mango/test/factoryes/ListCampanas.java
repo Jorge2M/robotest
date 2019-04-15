@@ -69,8 +69,9 @@ public class ListCampanas {
     	HashSet<String> listCountrysExcel = dataCamp.getListCodPais();
     	for (String codPais : listCountrysExcel) {
     		int codPaisInt = Integer.valueOf(codPais);
-    		if (listaPaisesInt.size()==0 || listaPaisesInt.contains(codPaisInt))
+    		if (listaPaisesInt.size()==0 || listaPaisesInt.contains(codPaisInt)) {
     			listFiterResult.add(codPaisInt);
+    		}
     	}
     	
     	Response response = Utilidades.filtradoListaPaises(false/*todosPaises*/, listFiterResult);
@@ -82,8 +83,9 @@ public class ListCampanas {
     	HashSet<String> setIdiomasPaisCamp = dataCamp.getListIdiomas(pais.getCodigo_pais());
     	List<IdiomaPais> listIdiomaPais = pais.getListIdiomas(); 
     	for (IdiomaPais idiomaPais : listIdiomaPais) {
-    		if (setIdiomasPaisCamp.contains(idiomaPais.getCodigo().toString()))
+    		if (setIdiomasPaisCamp.contains(idiomaPais.getCodigo().toString())) {
     			listIdiomasResult.add(idiomaPais);
+    		}
     	}
     	
     	return listIdiomasResult;
@@ -97,9 +99,9 @@ public class ListCampanas {
     	HashSet<String> setLineasPais = dataCamp.getListLines(pais.getCodigo_pais(), idioma.getCodigo().toString());
     	List<Linea> listLineasPais = Utilidades.getLinesToTest(pais, app, filterLines);
     	for (Linea linea : listLineasPais) {
-    		if (setLineasPais.contains(linea.getId()) &&
-    			Utilidades.lineaToTest(linea, app))
+    		if (setLineasPais.contains(linea.getId()) && Utilidades.lineaToTest(linea, app)) {
     			listLineasResult.add(linea);
+    		}
     	}
     	
     	return listLineasResult;

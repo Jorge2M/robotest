@@ -35,8 +35,9 @@ public class PageRegistroSegunda extends WebdrvWrapp {
     public static String getNewsLetterTitleText(WebDriver driver) {
         try {
             WebElement titleNws = driver.findElement(By.xpath(XPathNewsletterTitle));
-            if (titleNws!=null)
+            if (titleNws!=null) {
                 return driver.findElement(By.xpath(XPathNewsletterTitle)).getText();
+            }
         }
         catch (Exception e) {
             //retornaremos ""
@@ -129,13 +130,14 @@ public class PageRegistroSegunda extends WebdrvWrapp {
             String lineaStr=tokensLin.nextToken();
             if (Math.random() < 0.5) {
                 String xpathLineaClick = getXPath_checkboxLineaClickable(lineaStr);
-                if (isElementPresent(driver, By.xpath(xpathLineaClick)))
+                if (isElementPresent(driver, By.xpath(xpathLineaClick))) {
                     clickAndWaitLoad(driver, By.xpath(xpathLineaClick));
+                }
                         
                 //Las líneas que desmarcamos las guardamos
-                if (i>0) 
+                if (i>0) {
                     lineasDesmarcadas+=",";
-                
+                }
                 lineasDesmarcadas+=lineaStr;
                 i+=1;
             }

@@ -232,8 +232,9 @@ public class PageFavoritos extends WebdrvWrapp {
         List<WebElement> listTallas = getListaTallas(refProducto, codigoColor, driver);
         List<WebElement> listTallasAvailable = new ArrayList<>();
         for (WebElement talla : listTallas) {
-            if (!isElementPresent(talla, By.xpath("./span")))
+            if (!isElementPresent(talla, By.xpath("./span"))) {
                 listTallasAvailable.add(talla);
+            }
         }
        
         WebElement tallaDisponible = listTallasAvailable.get(posicionTalla - 1); 

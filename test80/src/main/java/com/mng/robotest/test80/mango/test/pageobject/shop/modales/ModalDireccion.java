@@ -105,9 +105,9 @@ public abstract class ModalDireccion extends WebdrvWrapp {
         String xpathInput = XPathFormModal + getXPathInput(inputType);
         String contenido = driver.findElement(By.xpath(xpathInput)).getAttribute("value");
         if (contenido.compareTo(dataToSend)!=0) {
-            if ("".compareTo(contenido)!=0)
+            if ("".compareTo(contenido)!=0) {
                 driver.findElement(By.xpath(xpathInput)).clear();
-            
+            }
             driver.findElement(By.xpath(xpathInput)).sendKeys(dataToSend);
             driver.findElement(By.xpath(xpathInput)).sendKeys(Keys.TAB);
         }

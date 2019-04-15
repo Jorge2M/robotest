@@ -21,8 +21,9 @@ public class PageSelectIdiomaVOTF extends WebdrvWrapp {
         clickAndWaitLoad(driver, By.xpath(XPathButtonAceptar));
     	
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-        if (isVisibleButtonAceptar(driver))
+        if (isVisibleButtonAceptar(driver)) {
         	clickAndWaitLoad(driver, By.xpath(XPathButtonAceptar));
+        }
     }
     
     public static boolean isVisibleButtonAceptar(WebDriver driver) {

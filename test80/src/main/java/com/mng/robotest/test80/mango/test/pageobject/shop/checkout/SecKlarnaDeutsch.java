@@ -21,16 +21,16 @@ public class SecKlarnaDeutsch extends WebdrvWrapp {
     static String XPathLinkRadioAceptoMobil = "//div[@class[contains(.,'klarnaTerms')]]";
     
     public static String getXPath_capaKlarna(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathCapaKlarnaMobil;
-        
+        }
         return XPathCapaKlarnaDesktop; 
     }
     
     public static String getXPath_linkRadioAcepto(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathLinkRadioAceptoMobil;
-        
+        }
         return XPathRadioAceptoDesktop;
     }
     

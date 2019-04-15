@@ -80,10 +80,11 @@ public class PageMenusManto extends WebdrvWrapp {
     	String subMenuText = subMenu.replace("· ", "");
     	if (menuHeaderText.contains(subMenuText) || menuHeaderText.contains(subMenuText.toUpperCase()) || menuHeaderText.toUpperCase().contains(subMenuText.toUpperCase())){
     		return true;
-    	}else if(isMenuHeaderVisible(driver)){
-    		return true;
+    	} else {
+    		if(isMenuHeaderVisible(driver)) {
+    			return true;
+    		}
     	}
-    		
     	
     	return false;
 	} 
@@ -102,10 +103,7 @@ public class PageMenusManto extends WebdrvWrapp {
     private static boolean isNextXPathMenuHeader(String XPathPosicionInicial, String nextMenuName, WebDriver driver) {
 		String XPathNextPosicion = XPathPosicionInicial + "/../following::td/child::node()";
 		String texto = driver.findElement(By.xpath(XPathNextPosicion)).getText();
-		if (!nextMenuName.equals(texto))
-			return true;
-		
-		return false;
+		return (!nextMenuName.equals(texto));
 	}
     
     /**
@@ -114,9 +112,9 @@ public class PageMenusManto extends WebdrvWrapp {
      */
     private static boolean isNextXPathEndTable(String XPathPosicionInicial, WebDriver driver) {
 		String XPathNextPosicion = XPathPosicionInicial + "/../following::td/child::node()";
-		if (!isElementPresent(driver,By.xpath(XPathNextPosicion)))
+		if (!isElementPresent(driver,By.xpath(XPathNextPosicion))) {
 			return false;
-			
+		}
 		//String texto = driver.findElement(By.xpath(XPathNextPosicion)).getText();
 		//String lastPositionText = driver.findElement(By.xpath(XPathTableLastElement)).getText();
 		return true;
@@ -131,8 +129,9 @@ public class PageMenusManto extends WebdrvWrapp {
     		clickMenu(textoMenu, driver);
 		} catch (UnhandledAlertException f) {
 	        String textAlert = WebdrvWrapp.acceptAlertIfExists(driver);
-	        if ("".compareTo(textAlert)==0)
+	        if ("".compareTo(textAlert)==0) {
 	        	return "Unknown or Empty";
+	        }
 	        return textAlert;
 	    }
     	
@@ -146,12 +145,12 @@ public class PageMenusManto extends WebdrvWrapp {
     public static void clickMenu(String textoMenu, WebDriver driver) throws Exception {
     	int maxTimeToWait = 60;
     	int timeWaited = 0;
-    	if (textoMenu.contains("'")){
+    	if (textoMenu.contains("'")) {
     		int positionDelete = textoMenu.indexOf("'");
     		String textoMenuRecortado = textoMenu.substring(positionDelete+1, textoMenu.length());
     		//clickAndWaitLoad(driver, By.xpath(getXpath_linkMenu(textoMenuRecortado)), 200);
     		waitClickAndWaitLoad(driver, 60, By.xpath(getXpath_linkMenu(textoMenuRecortado)), 60, TypeOfClick.webdriver);
-    	}else{
+    	}else {
     		//clickAndWaitLoad(driver, By.xpath(getXpath_linkMenu(textoMenu)), 200);
     		waitClickAndWaitLoad(driver, 60,By.xpath(getXpath_linkMenu(textoMenu)), 60, TypeOfClick.webdriver);
     	}
@@ -220,7 +219,7 @@ public class PageMenusManto extends WebdrvWrapp {
 		String XPathPosicionInicial = getXPathFirstElement(menuName);
 		List<WebElement> elements = new ArrayList<>();
 		elements.add(driver.findElement(By.xpath(XPathPosicionInicial)));
-		if (nextMenuName==null){
+		if (nextMenuName==null) {
 			while (isNextXPathEndTable(XPathPosicionInicial, driver)){
 				XPathPosicionInicial = getXPathNextElement(XPathPosicionInicial);
 				elements.add(driver.findElement(By.xpath(XPathPosicionInicial)));

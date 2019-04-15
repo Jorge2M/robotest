@@ -114,8 +114,9 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     }
     
     public static void clickLink2DatosPagoIfVisible(WebDriver driver) throws Exception {
-        if (isElementVisible(driver, By.xpath(XPathLink2DatosPago)))
+        if (isElementVisible(driver, By.xpath(XPathLink2DatosPago))) {
             clickLink2DatosPagoAndWait(driver);
+        }
     }
     
     public static void clickButtonFinalizarCompra(WebDriver driver) throws Exception {
@@ -138,10 +139,7 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     
     public static boolean isMetodoPagoPresent(String nombrePago, LayoutPago layoutPago, WebDriver driver) {
         String xpathClickPago = getXPathClickMetodoPago(nombrePago, layoutPago);
-        if (isElementPresent(driver, By.xpath(xpathClickPago)))
-            return true; 
-        
-        return false;
+        return (isElementPresent(driver, By.xpath(xpathClickPago)));
     }
     
     /**
@@ -168,10 +166,11 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
         int i=0;
         while (!isPageUntil(1, driver) && i<3) {
             i+=1;
-            if (Page1EnvioCheckoutMobil.isPageUntil(0, driver))
+            if (Page1EnvioCheckoutMobil.isPageUntil(0, driver)) {
                 Page1EnvioCheckoutMobil.clickContinuarAndWaitPage2(driver);
-            else
+            } else {
                 clickLink2DatosPagoAndWait(driver);
+            }
         }
     }
     
@@ -264,8 +263,9 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
         hideHtmlComponent(HtmlLocator.TagName, "header", driver);
 
         //Si el icono sigue sin estar visible y existen secciones plegadas que pueden estar ocultándolo (como p.e. en México) buscaremos el pago en dichas secciones
-        if (!driver.findElement(By.xpath(xpathClickMetodoPago)).isDisplayed())
+        if (!driver.findElement(By.xpath(xpathClickMetodoPago)).isDisplayed()) {
         	searchMetPagoLayoutLineaInSections(nombrePago, driver);
+        }
         
         clickAndWaitLoad(driver, By.xpath(xpathClickMetodoPago), TypeOfClick.javascript);
     }    
@@ -307,10 +307,7 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     }    
     
     public static boolean isRedErrorVisible(WebDriver driver) {
-        if (isElementVisible(driver, By.xpath(XPathRedError)))
-            return true;
-         
-        return false;
+        return (isElementVisible(driver, By.xpath(XPathRedError)));
     }
     
     /**
@@ -344,11 +341,9 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     
     public static boolean isMarkedQuieroFactura(WebDriver driver) {
         WebElement radio = driver.findElement(By.xpath(XPathLinkSolicitarFactura));
-        if (radio.getAttribute("checked")!=null &&
-            radio.getAttribute("checked").contains("true"))
-            return true;
-         
-        return false;
+        return (
+        	radio.getAttribute("checked")!=null &&
+            radio.getAttribute("checked").contains("true"));
     }
     
     static String XPathPrecioTotal = "//div[@class[contains(.,'summary-total-price')]]/p";
@@ -394,9 +389,9 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     }
 
     public static String getTextDireccionEnvioCompleta(WebDriver driver) {
-        if (isElementPresent(driver, By.xpath(XPathDireccionEnvioText)))
+        if (isElementPresent(driver, By.xpath(XPathDireccionEnvioText))) {
             return (driver.findElement(By.xpath(XPathDireccionEnvioText)).getText());
-        
+        }
         return "";
     }    
 }

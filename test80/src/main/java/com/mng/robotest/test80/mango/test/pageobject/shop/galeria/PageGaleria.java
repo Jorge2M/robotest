@@ -211,8 +211,9 @@ public abstract class PageGaleria extends WebdrvWrapp {
     	List<WebElement> listaArticulos = getListaArticulos(); 
     	for (WebElement articulo : listaArticulos) {
 	        WebElement precio = getElementVisible(articulo, By.xpath("." + XPathPrecioDefinitivoRelativeArticle));
-	        if (precio!=null)
+	        if (precio!=null) {
 	        	listPrecios.add(precio);
+	        }
     	}
     	
     	return listPrecios;
@@ -221,15 +222,17 @@ public abstract class PageGaleria extends WebdrvWrapp {
     public String getAnyPrecioNotInOrder(FilterOrdenacion typeOrden) {
         List<WebElement> listaPreciosPrendas = getListaPreciosPrendas();
         float precioAnt = 0;
-        if (typeOrden==FilterOrdenacion.PrecioDesc)
+        if (typeOrden==FilterOrdenacion.PrecioDesc) {
             precioAnt = 9999999;
+        }
 
         for (WebElement prendaPrecio : listaPreciosPrendas) {
             String entero = prendaPrecio.getText();
             float precioActual = Float.valueOf(entero.replace(",",".").replaceAll("[^\\d.]", "")).floatValue();
             if (typeOrden==FilterOrdenacion.PrecioAsc) {
-                if (precioActual < precioAnt)
+                if (precioActual < precioAnt) {
                     return (precioAnt + "->" + precioActual);
+                }
             } else {
                 if (precioActual > precioAnt) {
                     return (precioAnt + "->" + precioActual);
@@ -253,21 +256,25 @@ public abstract class PageGaleria extends WebdrvWrapp {
                 int tempAnteriorInt = Integer.valueOf(tempAnterior).intValue();
                 switch (typeOrden) {
                 case TemporadaDesc:
-                    if (tempActualInt > tempAnteriorInt)
+                    if (tempActualInt > tempAnteriorInt) {
                         return (refAnterior + "->" + refActual);
+                    }
                     break;
                 case TemporadaAsc:
-                    if (tempActualInt < tempAnteriorInt)
+                    if (tempActualInt < tempAnteriorInt) {
                         return (refAnterior + "->" + refActual);
+                    }
                     break;
             	case BloqueTemporadas_2y3_despues_la_4:
-            		if ((tempActualInt==1 || tempActualInt==2) && tempAnteriorInt==3)
+            		if ((tempActualInt==1 || tempActualInt==2) && tempAnteriorInt==3) {
             			return (refAnterior + "->" + refActual);
+            		}
             		break;
             	case BloqueTemporada_4_despues_la_2y3:
             	default:
-            		if (tempActualInt==3 && (tempAnteriorInt==1 || tempAnteriorInt==2))
+            		if (tempActualInt==3 && (tempAnteriorInt==1 || tempAnteriorInt==2)) {
             			return (refAnterior + "->" + refActual);
+            		}
             		break;
                 }
             }
@@ -306,9 +313,9 @@ public abstract class PageGaleria extends WebdrvWrapp {
     }
     
     public String getReferencia(int posArticle) {
-        if (getListaReferenciasPrendas().size()>0)
+        if (getListaReferenciasPrendas().size()>0) {
             return (getListaReferenciasPrendas().get(posArticle-1));
-        
+        }
         return "";
     }
     
@@ -329,9 +336,9 @@ public abstract class PageGaleria extends WebdrvWrapp {
     
     public WebElement getArticulo(int numArticulo) {
         List<WebElement> listArticulos = getArticulos();
-        if (listArticulos.size()>=numArticulo)
+        if (listArticulos.size()>=numArticulo) {
         	return (listArticulos.get(numArticulo-1));
-        
+        }
         return null;
     }
     
@@ -339,9 +346,9 @@ public abstract class PageGaleria extends WebdrvWrapp {
     	int lengthReferencia = 8;
     	String id = articulo.getAttribute("id");
     	if ("".compareTo(id)!=0) {
-	    	if (id.length()>lengthReferencia)
+	    	if (id.length()>lengthReferencia) {
 	    		return (id.substring(0, lengthReferencia));
-	    	
+	    	}
 	    	return id;
     	}
     	
@@ -380,13 +387,15 @@ public abstract class PageGaleria extends WebdrvWrapp {
     static StateFavorito getStateHearthIcon(WebElement hearthIcon) {
     	String dataFav = hearthIcon.getAttribute("data-fav");
     	if (dataFav!=null) {
-	        if (hearthIcon.getAttribute("data-fav").contains(StateFavorito.Desmarcado.getDataFav()))
+	        if (hearthIcon.getAttribute("data-fav").contains(StateFavorito.Desmarcado.getDataFav())) {
 	            return StateFavorito.Desmarcado;
+	        }
 	        return StateFavorito.Marcado;
     	}
     	
-    	if (hearthIcon.getAttribute("class").contains("active"))
+    	if (hearthIcon.getAttribute("class").contains("active")) {
     		return StateFavorito.Marcado;
+    	}
     	return StateFavorito.Desmarcado;
     }
     
@@ -416,12 +425,14 @@ public abstract class PageGaleria extends WebdrvWrapp {
             WebElement hearthIcon = driver.findElement(By.xpath(XPathIcon));
             switch (typeAction) {
             case Marcar:
-                if (getStateHearthIcon(hearthIcon)!=StateFavorito.Marcado)
+                if (getStateHearthIcon(hearthIcon)!=StateFavorito.Marcado) {
                     return false;
+                }
                 break;
             case Desmarcar:
-                if (getStateHearthIcon(hearthIcon)!=StateFavorito.Desmarcado)
+                if (getStateHearthIcon(hearthIcon)!=StateFavorito.Desmarcado) {
                     return false;
+                }
                 break;
             default:
                 break;
@@ -443,8 +454,9 @@ public abstract class PageGaleria extends WebdrvWrapp {
     
     public void clickIconoUpToGaleryIfVisible(String xpathIconoUpGalery) {
     	int maxSecondsToWait = 1;
-        if (isElementVisibleUntil(driver, By.xpath(xpathIconoUpGalery), maxSecondsToWait))
+        if (isElementVisibleUntil(driver, By.xpath(xpathIconoUpGalery), maxSecondsToWait)) {
             driver.findElement(By.xpath(xpathIconoUpGalery)).click();
+        }
     }
     
     /**
@@ -476,9 +488,11 @@ public abstract class PageGaleria extends WebdrvWrapp {
     public boolean isCabeceraResBusqueda(String categoriaProducto) {
         boolean isCabecera = false;
         String xpathCabe = getXPathCabeceraBusquedaProd();
-        if (isElementPresent(driver, By.xpath(xpathCabe)))
-            if (driver.findElement(By.xpath(xpathCabe)).getText().toLowerCase().contains(categoriaProducto.toLowerCase()))
+        if (isElementPresent(driver, By.xpath(xpathCabe))) {
+            if (driver.findElement(By.xpath(xpathCabe)).getText().toLowerCase().contains(categoriaProducto.toLowerCase())) {
                 isCabecera = true;
+            }
+        }
         
         return isCabecera;
     }
@@ -502,8 +516,9 @@ public abstract class PageGaleria extends WebdrvWrapp {
         	forceScroll();
         	int newLastPage = getNumLastPage();
         	updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, newLastPage);
-        	if (newLastPage==lastPage)
+        	if (newLastPage==lastPage) {
         		break;
+        	}
         	lastPage=newLastPage;
         }
         
@@ -516,17 +531,17 @@ public abstract class PageGaleria extends WebdrvWrapp {
     }
     
     private int getPageToScroll(int numPage) {
-        if (numPage > maxPageToScroll)
+        if (numPage > maxPageToScroll) {
             return maxPageToScroll;
-        
+        }
         return numPage;
     }
     
     private void goToInitPageAndWaitForArticle() throws Exception {
 	    Long pagePosition = (Long) ((JavascriptExecutor) driver).executeScript("return window.pageYOffset;");
-	    if (pagePosition != 0)
+	    if (pagePosition != 0) {
 	    	backTo1erArticulo();
-	    
+	    }
 	    int maxSecondsWait = 2;
 	    isVisibleArticleUntil(1, maxSecondsWait);
     }
@@ -561,9 +576,9 @@ public abstract class PageGaleria extends WebdrvWrapp {
     
     private int getTotalNumArticles(List<Integer> numArticlesXpage) {
     	int numTotalArticles = 0;
-    	for (int i=0; i<numArticlesXpage.size(); i++)
+    	for (int i=0; i<numArticlesXpage.size(); i++) {
     		numTotalArticles+=numArticlesXpage.get(i);
-    	
+    	}
     	return numTotalArticles;
     }
     
@@ -588,9 +603,9 @@ public abstract class PageGaleria extends WebdrvWrapp {
     	int lastPageWatched = 0;
     	while (lastPageWatched<maxPagesToReview) {
     		int pageToReview = lastPageWatched + 1;
-    		if (!isPresentPagina(pageToReview))
+    		if (!isPresentPagina(pageToReview)) {
     			return lastPageWatched;
-    	
+    		}
     		lastPageWatched=pageToReview;
     	}
     	
@@ -632,8 +647,9 @@ public abstract class PageGaleria extends WebdrvWrapp {
     public static List<String> getNotNewArticlesFrom(List<String> listNameAndLabelArticles) {
     	List<String> listArtToReturn = new ArrayList<>();
     	for (String nameAndLabelArticle : listNameAndLabelArticles) {
-    		if (!isArticleNew(nameAndLabelArticle))
+    		if (!isArticleNew(nameAndLabelArticle)) {
     			listArtToReturn.add(nameAndLabelArticle);
+    		}
     	}
     	   
     	return listArtToReturn;
@@ -642,13 +658,12 @@ public abstract class PageGaleria extends WebdrvWrapp {
     private static boolean isArticleNew(String nameAndLabelArticle) {
     	for (LabelArticle label : listLabelsNew) {
     		for (String labelNew : label.getListTraducciones()) {
-    			if (nameAndLabelArticle.contains(labelNew) || nameAndLabelArticle.contains(labelNew.toUpperCase()))
+    			if (nameAndLabelArticle.contains(labelNew) || nameAndLabelArticle.contains(labelNew.toUpperCase())) {
     				return true;
+    			}
     		}
     	}
     	   
     	return false;
     }
-    
-
 }

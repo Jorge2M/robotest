@@ -99,9 +99,9 @@ public class SmokeTestXML {
         XmlTest testRun = commonsXML.joinSuiteWithTestRunMobilBStack(webdriverType, suite, bsMovil);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());
-        if (this.params.getListaTestCases()!=null)
+        if (this.params.getListaTestCases()!=null) {
             FilterTNGxmlTRun.filterWithTCasesToExec(testRun, this.params.getListaTestCases(), this.params.getChannel(), this.params.getAppE());
-            
+        }
         return testRun;
     }
     
@@ -109,9 +109,9 @@ public class SmokeTestXML {
         XmlTest testRun = commonsXML.joinSuiteWithTestRunDesktopBStack(webdriverType, suite, bsDesktop);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());
-        if (this.params.getListaTestCases()!=null)
+        if (this.params.getListaTestCases()!=null) {
             FilterTNGxmlTRun.filterWithTCasesToExec(testRun, this.params.getListaTestCases(), this.params.getChannel(), this.params.getAppE());
-            
+        }
         return testRun;
     }    
     

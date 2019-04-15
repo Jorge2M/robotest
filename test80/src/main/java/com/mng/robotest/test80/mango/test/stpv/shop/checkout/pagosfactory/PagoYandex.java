@@ -31,7 +31,7 @@ public class PagoYandex extends PagoStpV {
             																   dCtxSh.pais.getCodigo_pais(), driver);
             String windowHandlePageYandex1rst = driver.getWindowHandle();
 
-            if (PageYandex1rstStpv.hasFailed(driver)){
+            if (PageYandex1rstStpv.hasFailed(driver)) {
                 paymentCode = PageYandex1rstStpv.retry(dataPedido.getImporteTotal(), dCtxSh.pais.getCodigo_pais(), driver);
             }
 

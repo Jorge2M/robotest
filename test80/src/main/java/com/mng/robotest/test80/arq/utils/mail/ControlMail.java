@@ -55,8 +55,9 @@ public class ControlMail {
             message.setReplyTo(replyTo);
         }
         
-        if (info.getSubject() != null)
+        if (info.getSubject() != null) {
         	message.setSubject(info.getSubject());
+        }
         
         MimeMultipart multipart = new MimeMultipart();
         MimeBodyPart bodyPartText = new MimeBodyPart();

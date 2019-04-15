@@ -85,12 +85,14 @@ public class SSecSelTallasFichaOld extends WebdrvWrapp {
         String tallaVisible = select.getFirstSelectedOption().getText(); 
         
         //Tratamos el caso relacionado con los entornos de test y eliminamos la parte a partir de " - " para contemplar casos como el de 'S - Delivery in 4-7 business day')
-        if (tallaVisible.indexOf(" - ") >= 0)
+        if (tallaVisible.indexOf(" - ") >= 0) {
             tallaVisible = tallaVisible.substring(0, tallaVisible.indexOf(" - "));
+        }
         
         //Tratamos el caso de talla única donde unificamos el valor a "U"
-        if (getTallaNumSelected(driver).compareTo("99")==0)
+        if (getTallaNumSelected(driver).compareTo("99")==0) {
             tallaVisible = "U";
+        }
         
         return tallaVisible;        
     }
@@ -105,17 +107,17 @@ public class SSecSelTallasFichaOld extends WebdrvWrapp {
     
     public static String getTallaAlf(int posicion, WebDriver driver) {
     	String xpathTalla = "(" + XPathOptionTalla + ")[" + posicion + "]";
-    	if (isElementPresent(driver, By.xpath(xpathTalla)))
+    	if (isElementPresent(driver, By.xpath(xpathTalla))) {
     		return (driver.findElement(By.xpath(xpathTalla)).getText());
-    	
+    	}
     	return "";
     }
     
     public static String getTallaCodNum(int posicion, WebDriver driver) {
     	String xpathTalla = "(" + XPathOptionTalla + ")[" + posicion + "]";
-    	if (isElementPresent(driver, By.xpath(xpathTalla)))
+    	if (isElementPresent(driver, By.xpath(xpathTalla))) {
     		return (driver.findElement(By.xpath(xpathTalla)).getAttribute("value"));
-    	
+    	}
     	return "";
     }
 }

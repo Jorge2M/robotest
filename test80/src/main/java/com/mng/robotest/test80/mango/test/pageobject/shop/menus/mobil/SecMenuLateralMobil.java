@@ -96,26 +96,31 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
         case nuevo:
             return XPathLinkLineaNuevo + " | " + XPathLinkLineaNewFor388and743;           
         case she: 
-            if (appE==AppEcom.outlet)
+            if (appE==AppEcom.outlet) {
                 return XPathLinkLineaMujerOutlet;
+            }
             return XPathLinkLineaMujerShop;
         case he: 
-            if (appE==AppEcom.outlet)
+            if (appE==AppEcom.outlet) {
                 return XPathLinkLineaHombreOutlet;
+            }
             return XPathLinkLineaHombreShop;
         case nina:
-            if (appE==AppEcom.outlet)
+            if (appE==AppEcom.outlet) {
                 return XPathLinkLineaNinaOutlet;
+            }
             return XPathLinkLineaNinaShop;
         case nino: 
-            if (appE==AppEcom.outlet)
+            if (appE==AppEcom.outlet) {
                 return XPathLinkLineaNinoOutlet;
+            }
             return XPathLinkLineaNinoShop;
         case kids: 
             return XPathLinkLineaKids;
         case violeta: 
-            if (appE==AppEcom.outlet)
+            if (appE==AppEcom.outlet) {
                 return XPathLinkLineaVioletaOutlet;
+            }
             return XPathLinkLineaVioletaShop;
         case edits:
         default:
@@ -248,9 +253,9 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     
     public static boolean isSelectedLinea(LineaType lineaType, AppEcom appE, WebDriver driver) {
         String xpathLinea = getXPathLiLinea(lineaType, appE);
-        if (isElementPresent(driver, By.xpath(xpathLinea)))
+        if (isElementPresent(driver, By.xpath(xpathLinea))) {
             return (driver.findElement(By.xpath(xpathLinea)).getAttribute("class").contains("selected"));
-        
+        }
         return false;
     }
     
@@ -297,8 +302,9 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     public static void clickCarruselNuevo(Linea lineaNuevo, LineaType lineaType, AppEcom appE, WebDriver driver) throws Exception {
         selecLinea(lineaNuevo, appE, driver);
         String xpathCarrusel = getXPathCarruselNuevo(lineaType);
-        if (xpathCarrusel!=null)
+        if (xpathCarrusel!=null) {
             clickAndWaitLoad(driver, By.xpath(xpathCarrusel), TypeOfClick.javascript);
+        }
     }
     
     public static boolean isSublineaRebajasVisible(LineaType lineaType, WebDriver driver) {
@@ -310,15 +316,16 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     throws Exception {
         selecLinea(lineaRebajas, appE, driver);
         String xpathSublinea = getXPathSublineaRebajasLink(lineaType);
-        if (xpathSublinea!=null)
+        if (xpathSublinea!=null) {
             clickAndWaitLoad(driver, By.xpath(xpathSublinea));
+        }
     }    
     
     public static boolean isVisibleMenuSublineaRebajas(LineaType lineaType, WebDriver driver) {
         String xpathMenus = getXPathBlockMenusSublineaRebajas(lineaType);
-        if (isElementVisible(driver, By.xpath(xpathMenus)))
+        if (isElementVisible(driver, By.xpath(xpathMenus))) {
             return (driver.findElement(By.xpath(xpathMenus)).getAttribute("class").contains("open"));
-            
+        }
         return false;    
     }
     
@@ -338,8 +345,9 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
         List<String> listMenusLabel = new ArrayList<>();
         for (int i=0; i<listMenus.size(); i++) {
             String data_ga_label = listMenus.get(i).getAttribute("data-label");
-            if (data_ga_label!=null && data_ga_label.compareTo("")!=0)
+            if (data_ga_label!=null && data_ga_label.compareTo("")!=0) {
                 listMenusLabel.add(data_ga_label);
+            }
         }
         
         return listMenusLabel;
@@ -353,9 +361,9 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     public static String getLiteralMenuVisible(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel, WebDriver driver) {
         By byMenu = By.xpath(getXPathMenuByTypeLocator(typeLocator, menu1rstLevel));
         moveToElement(byMenu, driver);
-        if (isElementVisible(driver, byMenu))
+        if (isElementVisible(driver, byMenu)) {
             return driver.findElement(byMenu).getAttribute("innerHTML");
-        
+        }
         return "";
     }
     
@@ -367,9 +375,9 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
             String xpathLineaShe = getXPathLineaLink(LineaType.she, appE);
             String xpathLineaNuevo = getXPathLineaLink(LineaType.nuevo, appE);
             String xpathValidation = xpathLineaShe + " | " + xpathLineaNuevo;
-            if (open)
+            if (open) {
                 return (isElementVisibleUntil(driver, By.xpath(xpathValidation), maxSecondsToWait));
-            
+            }
             return (isElementInvisibleUntil(driver, By.xpath(xpathValidation), maxSecondsToWait));
         }
         catch (Exception e) {
@@ -399,5 +407,3 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     	Thread.sleep(500);
     }
 }
-
-

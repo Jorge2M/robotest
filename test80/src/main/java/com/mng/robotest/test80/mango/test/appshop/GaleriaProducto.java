@@ -124,9 +124,9 @@ public class GaleriaProducto extends GestorWebDriver {
         dataScroll.validaImgBroken = true;
         DataScroll datosScrollFinalGaleria = pageGaleriaStpV.scrollFromFirstPage(dataScroll, dCtxSh);
         
-        if (dCtxSh.channel==Channel.movil_web)
+        if (dCtxSh.channel==Channel.movil_web) {
             pageGaleriaStpV.backTo1erArticleMobilStep(dCtxSh);
-            
+        }
         int numArticulosPantalla = 
         	pageGaleriaStpV.seleccionaOrdenacionGaleria(FilterOrdenacion.PrecioDesc, tipoPrendasGaleria, -1/*numArticulosValidar*/, dCtxSh);
         

@@ -39,9 +39,9 @@ public class PageLanding extends WebdrvWrapp {
     }
     
     public static String getCodigoPais(WebDriver driver) {
-        if (isElementPresent(driver, By.xpath(XPathMainContentPais)))
+        if (isElementPresent(driver, By.xpath(XPathMainContentPais))) {
             return (driver.findElement(By.xpath(XPathMainContentPais)).getAttribute("data-pais"));
-        
+        }
         return "";
     }
     
@@ -56,20 +56,13 @@ public class PageLanding extends WebdrvWrapp {
      * Función que indica si hay maps o no en el contenido de la página
      */
     public static boolean hayMaps(WebDriver driver) {
-        boolean hayMaps = false;
         List<WebElement> listaMaps = getListaMaps(driver);
-        if (listaMaps!=null && listaMaps.size()>0)
-            hayMaps = true;
-        
-        return hayMaps;
+        return (listaMaps!=null && listaMaps.size()>0);
     }
     
     public static boolean hayItemsEdits(WebDriver driver) {
         List<WebElement> listaItemsEdits = getListaItemsEdit(driver);
-        if (listaItemsEdits!=null && listaItemsEdits.size()>0)
-            return true;
-        
-        return false;
+        return (listaItemsEdits!=null && listaItemsEdits.size()>0);
     }
     
     /**
@@ -93,12 +86,8 @@ public class PageLanding extends WebdrvWrapp {
      * Función que indica si hay secciones de vídeo
      */
     public static boolean hayIframes(WebDriver driver) {
-        boolean hayIFrames = false;
         List<WebElement> listaIFrames = UtilsMangoTest.findDisplayedElements(driver, By.xpath("//iframe"));
-        if (listaIFrames!=null && listaIFrames.size()>0)
-            hayIFrames = true;
-        
-        return hayIFrames;
+        return (listaIFrames!=null && listaIFrames.size()>0);
     }
     
     /**

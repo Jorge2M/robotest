@@ -155,8 +155,9 @@ public class SecBolsaStpV {
         for (int i=0; i<listParaAlta.size(); i++) {
             ArticleStock artTmp = listParaAlta.get(i);
             listaArtStr = listaArtStr + artTmp.getReference();
-            if (artTmp.isVale())
+            if (artTmp.isVale()) {
                 listaArtStr = listaArtStr + " (le aplica el vale " + artTmp.getValePais().getCodigoVale() + ")";
+            }
             
             //Si no es el último artículo le añadimos una coma
             if (i < (listParaAlta.size() - 1)) {

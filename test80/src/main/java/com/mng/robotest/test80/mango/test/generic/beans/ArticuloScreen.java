@@ -116,9 +116,9 @@ public class ArticuloScreen {
     public String getTallaSinAlmacen() {
         String tallaSinAlmacen = this.tallaAlf;
         int inicioAlm = this.tallaAlf.indexOf(" [");
-        if (inicioAlm>0)
+        if (inicioAlm>0) {
             tallaSinAlmacen = this.tallaAlf.substring(0,inicioAlm);
-	    
+        }
         return tallaSinAlmacen;
     }
 	
@@ -129,9 +129,9 @@ public class ArticuloScreen {
 	
     public float getPrecioDescontado() {
         float precioDescontado = ImporteScreen.getFloatFromImporteMangoScreen(this.precio);
-        if (this.valePais!=null) 
+        if (this.valePais!=null) {
             precioDescontado = precioDescontado - (precioDescontado * (this.valePais.getPorcDescuento()/100));
-		
+        }
         return precioDescontado;
     }
 	
@@ -157,16 +157,17 @@ public class ArticuloScreen {
         if (this.referencia.trim().compareTo(articulo.getReferencia().trim())==0 &&
             this.nombre.compareTo(articulo.getNombre())==0 &&
             this.color.compareTo(articulo.getColor())==0 &&
-            this.tallaAlf.compareTo(articulo.getTallaAlf())==0)
+            this.tallaAlf.compareTo(articulo.getTallaAlf())==0) {
             iguales = true;
-		
+        }
         return iguales;
     }
 	
     public boolean isPresentInList(ArrayList<ArticuloScreen> listaArticulos) {
         for (ArticuloScreen articulo : listaArticulos) {
-        	if (isTheSame(articulo))
+        	if (isTheSame(articulo)) {
         		return true;
+        	}
         }
 		
         return false;

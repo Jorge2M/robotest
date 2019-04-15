@@ -17,9 +17,9 @@ public class SecCabecera extends WebdrvWrapp {
      */
     public static String getLitTienda(WebDriver driver) {
         String litTienda = "";
-        if (isElementPresent(driver, By.xpath(XPathLitTienda)))
+        if (isElementPresent(driver, By.xpath(XPathLitTienda))) {
             litTienda = driver.findElement(By.xpath(XPathLitTienda)).getText();    
-
+        }
         return litTienda;
     }
     

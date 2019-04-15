@@ -35,16 +35,16 @@ public class PageAssist1rst extends WebdrvWrapp {
     static String XPathBotonPagoMobil = "//input[@type='Submit' and not(@disabled)]";
 
     public static String getXPath_LogoAssist(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathLogoAssistMobil; 
-        
+        }
         return XPathLogoAssistDesktop;
     }
     
     public static String getXPath_buttonPago(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathBotonPagoMovilAvailable;
-        
+        }
         return XPathBotonPagoDesktopAvailable;
     }
     
@@ -98,10 +98,11 @@ public class PageAssist1rst extends WebdrvWrapp {
     }
     
     public static void clickBotonPago(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             clickAndWaitLoad(driver, By.xpath(XPathBotonPagoMobil));
-        else
+        } else {
             clickAndWaitLoad(driver, By.xpath(XPathBotonPagoDesktop));
+        }
     }
     
     public static void waitForBotonAvailable(Channel channel, int maxSecondsToWait, WebDriver driver) {

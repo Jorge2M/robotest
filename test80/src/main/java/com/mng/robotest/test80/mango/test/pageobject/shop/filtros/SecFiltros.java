@@ -42,13 +42,15 @@ public interface SecFiltros {
 	public static boolean checkUrlAfterFilterContainsColors(List<Color> listColorsToValidate, String url) {
 	    Pattern patternUrlFiltroColor = Pattern.compile("\\?c=(.*)");
 	    Matcher matcher = patternUrlFiltroColor.matcher(url);
-	    if (!matcher.find())
+	    if (!matcher.find()) {
 	    	return false;
-	    
+	    }
+	    	
 	    List<String> listCodColorsInUrl = getCodColoresFromListCommaSeparated(matcher.group(1));
 	    for (Color color : listColorsToValidate) {
-	    	if (!listCodColorsInUrl.contains(color.getCodigoColor()))
+	    	if (!listCodColorsInUrl.contains(color.getCodigoColor())) {
 	    		return false;
+	    	}
 	    }
 	    
 	    return true;
@@ -57,9 +59,9 @@ public interface SecFiltros {
 	public static List<String> getCodColoresFromListCommaSeparated(String listCodColorsCommaSeparated) {
 	    List<String> listCodColores = new ArrayList<>();
 	    StringTokenizer tokensColores = new StringTokenizer(listCodColorsCommaSeparated, ",");
-	    while (tokensColores.hasMoreElements())
+	    while (tokensColores.hasMoreElements()) {
 	    	listCodColores.add(tokensColores.nextToken());
-	    
+	    }
 	    return listCodColores;
 	}
 }

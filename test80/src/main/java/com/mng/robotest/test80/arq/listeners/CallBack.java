@@ -112,9 +112,9 @@ public class CallBack {
     
     private URL getComposedURL(String schema) throws Exception {
         String composedUrl = schema + "://" + getCallBackResource() + "?";
-        if (getCallBackParams()!=null)
+        if (getCallBackParams()!=null) {
             composedUrl+=getParamsForAddToURL();
-            
+        }
         composedUrl+=("&callbackreport=" + getReportTSuiteURL());
         return new URL(composedUrl);
     }
@@ -135,8 +135,9 @@ public class CallBack {
             String key = itKeys.next();
             String value = pairsKeyValue.get(key);
             paramsForURL+=(key + "=" + value);
-            if (itKeys.hasNext())
+            if (itKeys.hasNext()) {
                 paramsForURL+="&";
+            }
         }
         
         return paramsForURL;

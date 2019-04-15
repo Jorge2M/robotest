@@ -23,8 +23,9 @@ public class SecBuscadorWrapper {
     		PageFicha pageFicha = PageFicha.newInstance(app, Channel.desktop, driver);
 		    if (pageFicha.secDataProduct.isClickableColor(colourCode, driver)) {
 		        int maxSecondsToWait = 5;
-		        if (pageFicha.isPageUntil(maxSecondsToWait))
+		        if (pageFicha.isPageUntil(maxSecondsToWait)) {
 		        	pageFicha.secDataProduct.selectColorWaitingForAvailability(colourCode, driver);
+		        }
 	        }
     	}
     }

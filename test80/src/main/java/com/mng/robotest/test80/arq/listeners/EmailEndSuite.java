@@ -93,13 +93,14 @@ public class EmailEndSuite {
                 if (suiteObj!=null) {
                     //Revisamos si alguna de las suites no es OK
                     boolean suiteOK = true;
-                    if (Integer.valueOf(suiteObj.getResultScript()).intValue() > State.Warn.getCriticity())
+                    if (Integer.valueOf(suiteObj.getResultScript()).intValue() > State.Warn.getCriticity()) {
                         suiteOK = false;
-                                
-                    if (suiteOK)
+                    }
+                    if (suiteOK) {
                         setAsunto(getAsunto() + " (OK)");
-                    else
+                    } else {
                         setAsunto(getAsunto() + " (Con problemas)");
+                    }
                                 
                     if (isSiempreMail() || (!suiteOK)) {
                         //Construimos el mensaje HTML contenido en el correo

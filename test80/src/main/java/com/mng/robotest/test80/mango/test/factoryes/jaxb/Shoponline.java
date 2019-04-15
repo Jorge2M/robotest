@@ -27,8 +27,9 @@ public class Shoponline {
     public List<Linea> getLineasToTest(AppEcom app) {
         List<Linea> lineasToTest = new ArrayList<>();
         for (Linea linea : getLineas()) {    
-            if (stateLinea(linea, app)==ThreeState.TRUE) 
+            if (stateLinea(linea, app)==ThreeState.TRUE) {
                 lineasToTest.add(linea);
+            }
         }
         
         return lineasToTest;
@@ -76,8 +77,9 @@ public class Shoponline {
     //Identifica si la línea pertenece a una de las 5 líneas de tipo 'tienda' (she, he, nino, nina, violeta)
     public boolean isLineaTienda(Linea linea) {
         for (LineaBasica lineaTda : LineaBasica.values()) {
-            if (lineaTda.name().compareTo(linea.getType().name())==0)
+            if (lineaTda.name().compareTo(linea.getType().name())==0) {
                 return true;
+            }
         }
         
         return false;
@@ -101,12 +103,12 @@ public class Shoponline {
     public int getNumLineas(AppEcom app) {
         int numLineas = 0;
         for (Linea linea : this.Lineas) {
-            if (this.stateLinea(linea, app)==ThreeState.TRUE) 
+            if (this.stateLinea(linea, app)==ThreeState.TRUE) {
                 numLineas+=1;
+            }
         }
         
         return numLineas;
-        
     }
     
     /**
@@ -115,9 +117,9 @@ public class Shoponline {
     public List<Linea> getListLineasTiendas(AppEcom app) {
     	List<Linea> listLineas = new ArrayList<>();
         for (Linea linea : this.Lineas) {
-            if (this.stateLinea(linea, app)==ThreeState.TRUE &&
-                this.isLineaTienda(linea))
+            if (this.stateLinea(linea, app)==ThreeState.TRUE && this.isLineaTienda(linea)) {
                 listLineas.add(linea);
+            }
         }
         
         return listLineas;

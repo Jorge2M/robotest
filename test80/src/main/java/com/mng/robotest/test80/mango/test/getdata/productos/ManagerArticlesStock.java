@@ -49,11 +49,12 @@ public class ManagerArticlesStock {
 		this.app = app;
 		this.urlApp = urlApp;
 		this.minArticlesDesired = minArticlesDesired;
-		if (listArticlesStock == null)
+		if (listArticlesStock == null) {
 			listArticlesStock = new CopyOnWriteArrayList<>();
-		
-		if (listStoresOfCountry == null)
+		}
+		if (listStoresOfCountry == null) {
 			listStoresOfCountry = new CopyOnWriteArrayList<>();
+		}
 	}
 	
 	public void setMinArticlesDesired(int minArticlesDesired) {
@@ -91,8 +92,9 @@ public class ManagerArticlesStock {
 	
 	private void deleteArticleFromMemory(String refArticle) {
 		for (ArticleStock articleStock : listArticlesStock) {
-			if (articleStock.getReference().compareTo(refArticle)==0)
+			if (articleStock.getReference().compareTo(refArticle)==0) {
 				listArticlesStock.remove(articleStock);
+			}
 		}
 	}
 	
@@ -106,8 +108,9 @@ public class ManagerArticlesStock {
 	}
 	
 	private ArrayList<ArticleStock> getArticlesFiltered() throws Exception {
-		if (filterTypeArticle==TypeArticleStock.articlesNotExistent)
+		if (filterTypeArticle==TypeArticleStock.articlesNotExistent) {
 			return getArticlesNotExistentHardcoded();
+		}
 		
 		boolean relaxFilters = true;
 		ArrayList<ArticleStock> listArticlesToReturn = getListArticlesFilteredFromMemory(!relaxFilters);
@@ -148,8 +151,9 @@ public class ManagerArticlesStock {
 	throws Exception {
 		ArrayList<ArticleStock> listArticlesToReturn = new ArrayList<>();
 		for (ArticleStock articleStock : listArticlesStock) {
-			if (matchesArticleWithFilter(articleStock, relaxFilters))
+			if (matchesArticleWithFilter(articleStock, relaxFilters)) {
 				listArticlesToReturn.add(articleStock);
+			}
 		}
 		
 		return listArticlesToReturn;
@@ -167,9 +171,9 @@ public class ManagerArticlesStock {
 	
 	private boolean isAnyStoreAssociated(String countryId, String storeId, AppEcom app) throws Exception {
 		Store store = getStoreAssociated(countryId, storeId, app);
-		if (store!=null)
+		if (store!=null) {
 			return true;
-
+		}
 		return false;
 	}
 	
@@ -177,8 +181,9 @@ public class ManagerArticlesStock {
 		CopyOnWriteArrayList<Store> listStoresOfCountry = getStoresOfCountry(countryId);
 		for (Store storeOfCountry : listStoresOfCountry) {
 			if (storeOfCountry.storeId.compareTo(idStore)==0 &&
-				matchesSaleStoreAndApp(storeOfCountry.sale, app))
+				matchesSaleStoreAndApp(storeOfCountry.sale, app)) {
 				return storeOfCountry;
+			}
 		}
 		
 		return null;
@@ -209,8 +214,9 @@ public class ManagerArticlesStock {
 		ArrayList<String> listStoresToReturn = new ArrayList<>();
 		CopyOnWriteArrayList<Store> listStores = getStoresOfCountry(countryId);
 		for (Store store : listStores) {
-			if (!listStoresToReturn.contains(store.storeId))
+			if (!listStoresToReturn.contains(store.storeId)) {
 				listStoresToReturn.add(store.storeId);
+			}
 		}
 		
 		return listStoresToReturn;
@@ -220,8 +226,9 @@ public class ManagerArticlesStock {
 		if (listStoresOfCountry!=null) {
 			ArrayList<Store> listStoresToReturn = new ArrayList<>();
 			for (Store store : listStoresOfCountry) {
-				if (countryId.compareTo(store.countryId)==0)
+				if (countryId.compareTo(store.countryId)==0) {
 					listStoresToReturn.add(store);
+				}
 			}
 		}
 		
@@ -241,8 +248,9 @@ public class ManagerArticlesStock {
 			ArrayList<String> listStoresIdOfCountry = getListOfStoresIdOfCountry(countryId);
 			for (String storeId : listStoresIdOfCountry) {
 				ArrayList<ArticleStock> listArticlesGetted = getProducts.getProducts(storeId, countryId);
-				if (listArticlesGetted!=null)
+				if (listArticlesGetted!=null) {
 					listNewArticles.addAll(listArticlesGetted);
+				}
 			}
 		}
 		else
@@ -254,8 +262,9 @@ public class ManagerArticlesStock {
 	
 	private void storeNewArticlesInMemoryOrdererByQuality(ArrayList<ArticleStock> listNewArticles) {
 		for (ArticleStock articleNew : listNewArticles) {
-			if (!isArticleInMemory(articleNew))
+			if (!isArticleInMemory(articleNew)) {
 				listArticlesStock.add(articleNew);
+			}
 		}
 		
 		orderArticlesByQualityOfSourceData();
@@ -270,20 +279,21 @@ public class ManagerArticlesStock {
 	    public int compare(ArticleStock a1, ArticleStock a2) {
 	    	int levelQualityA1 = a1.getSource().getLevelQualityOfData();
 	    	int levelQualityA2 = a2.getSource().getLevelQualityOfData();
-	        if (levelQualityA1 == levelQualityA2)
+	        if (levelQualityA1 == levelQualityA2) {
 	        	return 0;
-	        
-	        if (levelQualityA1 > levelQualityA2)
+	        }
+	        if (levelQualityA1 > levelQualityA2) {
 	        	return 1;
-	        
+	        }
 	        return -1;
 	    }
 	}
 	
 	protected boolean isArticleInMemory(ArticleStock articleStock) {
 		for (ArticleStock articleStockMemory : listArticlesStock) {
-			if (articleStockMemory.equals(articleStock))
+			if (articleStockMemory.equals(articleStock)) {
 				return true;
+			}
 		}
 		
 		return false;

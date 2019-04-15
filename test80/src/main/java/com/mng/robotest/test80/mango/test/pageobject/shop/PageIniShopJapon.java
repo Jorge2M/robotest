@@ -19,11 +19,8 @@ public class PageIniShopJapon extends WebdrvWrapp {
      * @return si se trata o no de la página inicial de la shop de Japón
      */
     public static boolean isPageUntil(int maxSecondsToWait, WebDriver driver) {
-        //Comprobamos la URL y el título
-        if (titleContainsUntil(driver, Title, maxSecondsToWait) &&
-        	driver.getCurrentUrl().contains(URL))
-            return true;
-        
-        return false;
+        return (
+        	titleContainsUntil(driver, Title, maxSecondsToWait) &&
+        	driver.getCurrentUrl().contains(URL));
     }
 }

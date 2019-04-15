@@ -92,8 +92,9 @@ public class ValesPaises {
     public List<ValePais> listValesPais(String codigo_pais) {      
         List<ValePais> listaValesPais = new ArrayList<>();
         for (ValePais valePais : listaPaisesVales) {
-            if (valePais.getPais().getCodigo_pais().compareTo(codigo_pais)==0)
+            if (valePais.getPais().getCodigo_pais().compareTo(codigo_pais)==0) {
                 listaValesPais.add(valePais);
+            }
         }
                 
         return listaValesPais;

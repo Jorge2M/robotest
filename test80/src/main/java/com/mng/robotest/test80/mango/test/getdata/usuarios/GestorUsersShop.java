@@ -21,9 +21,9 @@ public class GestorUsersShop {
             //Tenemos 50 usuarios de este tipo 
             for (int i=1; i<=50; i++) {
                 String number = String.valueOf(i);
-                if (i<10) 
+                if (i<10) {
                     number = "0" + number;
-                
+                }
                 ListUsers.add(new UserShop("test.performance" + number + "@mango.com", "Mango123"));
             }
         }
@@ -45,13 +45,16 @@ public class GestorUsersShop {
                 return user;
             }
             
-            if (userBusyOldest==null || user.dateLastCheckout.before(userBusyOldest.dateLastCheckout))
+            if (userBusyOldest==null || user.dateLastCheckout.before(userBusyOldest.dateLastCheckout)) {
                 userBusyOldest = user;
+            }
         }
         
-        if (userBusyOldest!=null)
+        if (userBusyOldest!=null) {
             userBusyOldest.dateLastCheckout = Calendar.getInstance();
-            return userBusyOldest;
+        }
+        
+        return userBusyOldest;
     }
     
     public static void liberateUsersDependingDate() {
@@ -60,8 +63,9 @@ public class GestorUsersShop {
             if (user.stateUser==StateUser.busy) {
                 Calendar dateToLiberateUser = (Calendar)user.dateLastCheckout.clone();
                 dateToLiberateUser.add(Calendar.MINUTE, minutesForUserLiberation);
-                if (hoy.after(dateToLiberateUser))
+                if (hoy.after(dateToLiberateUser)) {
                     user.stateUser=StateUser.free;
+                }
             }
         }
     }
@@ -79,9 +83,9 @@ public class GestorUsersShop {
      * Añadir usuario. Básicamete para dar soporte a los Tests
      */
     public static void addUserShop(UserShop userShop) {
-        if (ListUsers==null)
+        if (ListUsers==null) {
             ListUsers = new CopyOnWriteArrayList<>();
-        
+        }
         ListUsers.add(userShop);
     }
     

@@ -383,9 +383,9 @@ public class Test80mng {
         ParamsBean params = null;
         CommandLineParser parser = new DefaultParser();
         CommandLine cmdLine = parser.parse(options, args);
-        if (checkParamValues(cmdLine))
+        if (checkParamValues(cmdLine)) {
             params = storeParamsFromCommandLine(cmdLine);
-        
+        }
         return params;
     }
     
@@ -526,13 +526,17 @@ public class Test80mng {
     
     public static TreeSet<String> getListPagoFilterNames(String codCountrysCommaSeparated, Channel channel, AppEcom appE, boolean isEmpl) 
     throws Exception {
-        if ("".compareTo(codCountrysCommaSeparated)==0 || "*".compareTo(codCountrysCommaSeparated)==0 || "X".compareTo(codCountrysCommaSeparated)==0)
+        if ("".compareTo(codCountrysCommaSeparated)==0 || 
+        	"*".compareTo(codCountrysCommaSeparated)==0 || 
+        	"X".compareTo(codCountrysCommaSeparated)==0) {
             return (getListPagoFilterNames(channel, appE, isEmpl));
+        }
             
         String[] listCountrys = codCountrysCommaSeparated.split(",");
         ArrayList<Integer> listCodCountrys = new ArrayList<>();
-        for (String codCountry : listCountrys)
+        for (String codCountry : listCountrys) {
             listCodCountrys.add(Integer.valueOf(codCountry));
+        }
         
         return (UtilsMangoTest.getListPagoFilterNames(listCodCountrys, channel, appE, isEmpl));
     }

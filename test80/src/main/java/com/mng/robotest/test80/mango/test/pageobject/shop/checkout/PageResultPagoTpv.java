@@ -20,9 +20,9 @@ public class PageResultPagoTpv extends WebdrvWrapp {
     }
     
     public static String getCodigoPedido(WebDriver driver) {
-        if (isVisibleCodPedido(driver)) 
+        if (isVisibleCodPedido(driver)) {
             return (driver.findElement(By.xpath(XPathCodPedido)).getText());
-        
+        }
         return "";
     }
     

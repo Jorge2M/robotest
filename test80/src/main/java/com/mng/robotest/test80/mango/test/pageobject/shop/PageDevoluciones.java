@@ -28,8 +28,9 @@ public class PageDevoluciones extends WebdrvWrapp {
 		}
 		
 		private String getXPath(boolean plegada) {
-			if (plegada)
+			if (plegada) {
 				return xpathLinkPlegada;
+			}
 			return xpathLinkDesplegada;
 		}
 		
@@ -69,8 +70,9 @@ public class PageDevoluciones extends WebdrvWrapp {
         
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un par de veces
         for (int i=0; i<2; i++) {
-	        if (isVisibleSolicitarRecogidaButton(driver))
+	        if (isVisibleSolicitarRecogidaButton(driver)) {
 	        	clickAndWaitLoad(driver, By.xpath(XPathButtonSolicitarRecogida), TypeOfClick.javascript);
+	        }
         }
     }
     

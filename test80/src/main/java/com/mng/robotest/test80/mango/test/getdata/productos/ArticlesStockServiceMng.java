@@ -55,8 +55,9 @@ public class ArticlesStockServiceMng implements ArticlesStockGetter {
 	
     @SuppressWarnings("unchecked")
 	private ArrayList<ArticleStock> mapDataJsonToListArticles(String countryId, LinkedHashMap<String,Object> dataJsonArticles) {
-    	if (dataJsonArticles==null)
+    	if (dataJsonArticles==null) {
     		return null;
+    	}
     	
     	ArrayList<ArticleStock> listArticlesToReturn = new ArrayList<>();
     	ArrayList<LinkedHashMap<String,Object>> listStores = (ArrayList<LinkedHashMap<String,Object>>)dataJsonArticles.get("stock");
@@ -107,12 +108,12 @@ public class ArticlesStockServiceMng implements ArticlesStockGetter {
     private String getUrlService(String storeId, String countryId) throws Exception {
 		URI urlTestAppMangoURI = new URI(urlTestAppMango);
 	    String url = "https://" +  urlTestAppMangoURI.getHost() + "/services/shopconfig-stock/stock";
-	    if (storeId!=null)
+	    if (storeId!=null) {
 	        url+= "/" + storeId;
-	        
-	    if (countryId!=null)
+	    }
+	    if (countryId!=null) {
 	        url+= "/" + countryId;
-	    
+	    }
 	    return url;
     }
 }

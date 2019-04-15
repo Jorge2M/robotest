@@ -181,9 +181,10 @@ public class Registro extends GestorWebDriver {
         dCtxSh.userRegistered = false;
             
         //En caso de ejecución desde .bat no ejecutaremos el Registro 
-        if (utils.getTypeAccessFmwk(dFTest.ctx)==TypeAccessFmwk.Bat)
+        if (utils.getTypeAccessFmwk(dFTest.ctx)==TypeAccessFmwk.Bat) {
             return;
-        
+        }
+            
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         //Validación modal suscripcion RGPD
         if (!dCtxSh.userRegistered) {

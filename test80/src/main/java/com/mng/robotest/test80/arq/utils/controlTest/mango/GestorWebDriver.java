@@ -79,8 +79,9 @@ public class GestorWebDriver extends fmwkTest {
 	
     public void quitWebDriver(WebDriver driver, ITestContext contextTng) {
     	//Borramos el proxy para la gestión del NetTraffic asociado a nivel de Thread de TestNG
-    	if (isParamNetTrafficActive(contextTng))
+    	if (isParamNetTrafficActive(contextTng)) {
         	NetTrafficMng.stopNetTrafficThread();
+    	}
     	
         //Obtenemos el gestor de WebDrivers (lo busca en el contexto)
         GestorWebDrv gestorWd = GestorWebDrv.getGestorFromCtx(contextTng);
@@ -99,8 +100,9 @@ public class GestorWebDriver extends fmwkTest {
             
             //Los WebDriver se crean al comenzar un método y se destruyen al finalizar
             try {
-                if (driver!=null)
+                if (driver!=null) {
                     driver.quit();
+                }
             }
             catch (Exception e) {
                 pLogger.error("Problem deleging WebDriver",  e);
@@ -131,9 +133,9 @@ public class GestorWebDriver extends fmwkTest {
         switch (canalWebDriver) {
         //En el caso de BrowserStack como información específica del WebDriver incluiremos el modelo de dispositivo móvil asociado
         case browserstack:
-            if (contextTng.getCurrentXmlTest().getParameter(BStackDataMovil.device_paramname)!=null)
+            if (contextTng.getCurrentXmlTest().getParameter(BStackDataMovil.device_paramname)!=null) {
                 moreDataWdrv = contextTng.getCurrentXmlTest().getParameter(BStackDataMovil.device_paramname);
-            
+            }
             break;
 	        
         //En el resto de tipos de WebDriver no habrá información específica sobre el WebDriver / Dispositivo de ejecución
@@ -158,8 +160,9 @@ public class GestorWebDriver extends fmwkTest {
     private boolean getRecycleWD(ITestContext contextTng) {
         if (contextTng.getCurrentXmlTest().getParameter(Constantes.paramRecycleWD)!=null) {
             String recycleWDStr = contextTng.getCurrentXmlTest().getParameter(Constantes.paramRecycleWD);
-            if ("true".compareTo(recycleWDStr)==0)
+            if ("true".compareTo(recycleWDStr)==0) {
                 return true;
+            }
         }
             
         return false;

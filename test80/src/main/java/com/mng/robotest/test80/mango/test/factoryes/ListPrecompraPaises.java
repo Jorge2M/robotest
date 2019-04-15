@@ -36,9 +36,10 @@ public class ListPrecompraPaises {
 	        Channel channel = ChannelEnum.getChannel(channelStr);
 	        
 	        boolean isEmpl=false;
-	        if (IsEmpl.compareTo("true")==0) 
+	        if (IsEmpl.compareTo("true")==0) {
 	            isEmpl = true;
-
+	        }
+	            
 	        //Obtenemos la lista de países como lista de enteros
 	        List<Integer> listaPaisesInt = UtilsMangoTest.getListaPaisesInt(countrysStr);
     			

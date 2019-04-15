@@ -98,11 +98,12 @@ public class MethodsDAO {
             insert.setString(12, tr.getTestClass().toString()); 
             int posArroba = tr.getInstance().toString().lastIndexOf("@");
             
-            if (posArroba>=0)
+            if (posArroba>=0) {
                 insert.setString(13, tr.getInstance().toString().substring(posArroba));
-            else
+            }
+            else {
                 insert.setString(13, "");
-            
+            }
             insert.executeUpdate();
          } 
          catch (SQLException ex) {
@@ -124,11 +125,12 @@ public class MethodsDAO {
             resultTestRun.numberMethods+=1;
             int maxResultScript = Integer.valueOf((String)methodHash.get("RESULT_SCRIPT")).intValue();
             int maxresultTNG = Integer.valueOf((String)methodHash.get("RESULT_TNG")).intValue();
-            if (maxResultScript > resultTestRun.maxResultScript.getCriticity()) 
+            if (maxResultScript > resultTestRun.maxResultScript.getCriticity()) {
                 resultTestRun.maxResultScript = State.getState(maxResultScript);
-             
-            if (maxresultTNG > resultTestRun.maxresultTNG.getCriticity()) 
+            }
+            if (maxresultTNG > resultTestRun.maxresultTNG.getCriticity()) {
                 resultTestRun.maxresultTNG = State.getState(maxresultTNG);
+            }
         }
         
         return resultTestRun;

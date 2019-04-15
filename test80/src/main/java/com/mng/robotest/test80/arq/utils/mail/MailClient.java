@@ -48,7 +48,9 @@ public class MailClient {
         try {
             message.setFrom(new InternetAddress(from));
             message.setRecipients(Message.RecipientType.TO,to);
-            if (cc!=null) message.setRecipients(Message.RecipientType.CC,cc);
+            if (cc!=null) {
+            	message.setRecipients(Message.RecipientType.CC,cc);
+            }
             message.setSubject(subject);    
 
             Multipart multipart = new MimeMultipart();

@@ -35,8 +35,9 @@ public class LineasArticuloBolsa {
 			if (channel==Channel.movil_web) {
 				List<DataArtBolsa> listData = new ArrayList<>();
 				for (DataArtBolsa dataArt : DataArtBolsa.values()) {
-					if (dataArt.validMobilWeb)
+					if (dataArt.validMobilWeb) {
 						listData.add(dataArt);
+					}
 				}
 				
 				return listData;
@@ -178,8 +179,9 @@ public class LineasArticuloBolsa {
 	}
 	
 	private static String getDataArticle(DataArtBolsa typeData, WebElement lineaArticle, Channel channel) {
-		if (!DataArtBolsa.getValuesValidForChannel(channel).contains(typeData))
+		if (!DataArtBolsa.getValuesValidForChannel(channel).contains(typeData)) {
 			return "";
+		}
 		
 		String xpathData = getXPathDataRelativeArticle(typeData, channel);
 		WebElement dataWebElement;
@@ -191,17 +193,17 @@ public class LineasArticuloBolsa {
 		}
 		
 		String totalData = dataWebElement.getText();
-		if ("".compareTo(totalData)==0)
+		if ("".compareTo(totalData)==0) {
 			totalData = dataWebElement.getAttribute("innerHTML").trim();
-
+		}
 		return (removeLitIzquierdaDosPuntosIfExists(totalData));
 	}
 	
 	private static String removeLitIzquierdaDosPuntosIfExists(String data) {
         int finLiteral = data.indexOf(": ");
-        if (finLiteral > 0)
+        if (finLiteral > 0) {
             return (data.substring(finLiteral + 2, data.length()));
-        
+        }
         return data;
 	}
 	
@@ -214,9 +216,9 @@ public class LineasArticuloBolsa {
 	private static String getReferenciaArticle(WebElement lineaArticleWeb, Channel channel) {
 		String xpathLinRelative = getXPathLinkRelativeArticle(channel);
 		WebElement link = lineaArticleWeb.findElement(By.xpath(xpathLinRelative));
-		if (link==null)
+		if (link==null) {
 			return "";
-		
+		}
 		return (UtilsTestMango.getReferenciaFromHref(link.getAttribute("href")));
 	}
 
@@ -234,8 +236,9 @@ public class LineasArticuloBolsa {
 	}
 	
 	private static ArticuloDataBolsaScreen getArticuloBolsaData(WebElement lineaArticleWeb, Channel channel) {
-		if (lineaArticleWeb==null)
+		if (lineaArticleWeb==null) {
 			return null;
+		}
 		
 		ArticuloDataBolsaScreen articleData = new ArticuloDataBolsaScreen();
 		articleData.referencia = getReferenciaArticle(lineaArticleWeb, channel);

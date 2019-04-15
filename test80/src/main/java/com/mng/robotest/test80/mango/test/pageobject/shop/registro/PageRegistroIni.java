@@ -75,8 +75,9 @@ public class PageRegistroIni extends WebdrvWrapp {
     public static String getNewsLetterTitleText(WebDriver driver) {
         try {
             WebElement titleNws = driver.findElement(By.xpath(XPathNewsletterTitle));
-            if (titleNws!=null)
+            if (titleNws!=null) {
                 return driver.findElement(By.xpath(XPathNewsletterTitle)).getText();
+            }
         }
         catch (Exception e) {
             //Retornamos ""
@@ -145,10 +146,11 @@ public class PageRegistroIni extends WebdrvWrapp {
     public static void sendDataToInputs(ListDataRegistro dataToSend, WebDriver driver) {
     	clickRegisterTab(driver);
         for (DataRegistro dataInput : dataToSend.getDataPageInicial()) {
-            if (dataInput.dataRegType!=DataRegType.codpais)
+            if (dataInput.dataRegType!=DataRegType.codpais) {
                 sendKeysToInput(dataInput.dataRegType, dataInput.data, driver);
-            else
+            } else {
                 selectPais(dataInput.data, driver);
+            }
         }
         
         driver.findElement(By.xpath("//body")).sendKeys(Keys.TAB);
@@ -170,9 +172,9 @@ public class PageRegistroIni extends WebdrvWrapp {
      */
     public static int getNumberMsgInputInvalid(DataRegType inputType, WebDriver driver) {
         String xpathError = getXPathDataInput(inputType).getXPathDivError() + "//span";
-        if (isElementPresent(driver, By.xpath(xpathError)))
+        if (isElementPresent(driver, By.xpath(xpathError))) {
             return (getNumElementsVisible(driver, By.xpath(xpathError)));
-        
+        }
         return 0;
     }
     

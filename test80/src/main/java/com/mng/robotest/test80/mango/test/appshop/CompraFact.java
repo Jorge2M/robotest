@@ -78,22 +78,26 @@ public class CompraFact extends GestorWebDriver {
     
     private String getIndexFactoria(Pais pais, Pago pago, AppEcom appE, Channel channel) {
     	String index = 
-    	    pais.getNombre_pais().replace(" (Península y Baleares)", "") + 
-    	    "-" + 
-    		pago.getNameFilter(channel) +
-    		"-" +
-    		pago.getTipoEnvioType(appE);
-    		if (usrRegistrado)
-    			index+="-síUsrReg";	
-    		if (empleado)
-    			index+="-síEmpl";
-    		if (testVale)
-    			index+="-síVale";
-    		if (manyArticles)
-    			index+="-síManyArt";
-    		if (checkAnulaPedido)
-    			index+="-anulPedido";
-    			
+	    pais.getNombre_pais().replace(" (Península y Baleares)", "") + 
+	    "-" + 
+		pago.getNameFilter(channel) +
+		"-" +
+		pago.getTipoEnvioType(appE);
+		if (usrRegistrado) {
+			index+="-síUsrReg";
+		}
+		if (empleado) {
+			index+="-síEmpl";
+		}
+		if (testVale) {
+			index+="-síVale";
+		}
+		if (manyArticles) {
+			index+="-síManyArt";
+		}
+		if (checkAnulaPedido) {
+			index+="-anulPedido";
+		}
     	return index;
     }
     

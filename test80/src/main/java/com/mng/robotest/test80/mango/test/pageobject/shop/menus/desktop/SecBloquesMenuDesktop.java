@@ -33,8 +33,9 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
     
     public static String getXPathCapaMenusLinea(LineaType lineaId) {
         String idLineaDom = SecMenusWrap.getIdLineaEnDOM(lineaId, AppEcom.shop, Channel.desktop);
-        if (lineaId==LineaType.nuevo)
+        if (lineaId==LineaType.nuevo) {
         	return XPathCapaMenusLineaNuevoWithTag.replace(TagIdLinea, idLineaDom);
+        }
         return XPathCapaMenusLineaNoNuevoWithTag.replace(TagIdLinea, idLineaDom);
     }
 
@@ -116,8 +117,9 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
         List<String> listMenusLabel = new ArrayList<>();
         for (int i=0; i<listMenus.size(); i++) {
             String data_ga_label = listMenus.get(i).getAttribute("data-label");
-            if (data_ga_label!=null && data_ga_label.compareTo("")!=0)
+            if (data_ga_label!=null && data_ga_label.compareTo("")!=0) {
                 listMenusLabel.add(data_ga_label);
+            }
         }
         
         return listMenusLabel;

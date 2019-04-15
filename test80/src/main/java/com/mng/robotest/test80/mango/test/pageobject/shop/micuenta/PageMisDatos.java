@@ -49,16 +49,16 @@ public class PageMisDatos extends WebdrvWrapp {
     }
     
     public static String getCodPaisSelected(WebDriver driver) {
-        if (isElementPresent(driver, By.xpath(XPathOptionPaisSelected)))
+        if (isElementPresent(driver, By.xpath(XPathOptionPaisSelected))) {
             return (driver.findElement(By.xpath(XPathOptionPaisSelected)).getAttribute("value"));
-        
+        }
         return "";
     }
     
     public static String getProvinciaSelected(WebDriver driver) {
-        if (isElementPresent(driver, By.xpath(XPathOptionProvinciaSelected)))
+        if (isElementPresent(driver, By.xpath(XPathOptionProvinciaSelected))) {
             return (driver.findElement(By.xpath(XPathOptionProvinciaSelected)).getText());
-        
+        }
         return "";
     }    
     

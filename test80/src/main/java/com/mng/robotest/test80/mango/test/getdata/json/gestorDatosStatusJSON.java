@@ -83,15 +83,17 @@ public class gestorDatosStatusJSON {
         //Sustituímos las cookies de sesión por las que teníamos almacenadas en el objecto Nodo
         webdriver.manage().deleteAllCookies();
         Cookie cookieJS = nodo.getCookieByName("MNGSESSIONID");
-        if (cookieJS==null)
+        if (cookieJS==null) {
             cookieJS = nodo.getCookieByName("JSESSIONID");
-        if (cookieJS==null)
+        }
+        if (cookieJS==null) {
             cookieJS = nodo.getCookieByName("JSESSIONID2");
-
+        }
         webdriver.manage().addCookie(cookieJS);
         Cookie cookieAW = nodo.getCookieByName("AWSELB");
-        if (cookieAW!=null) 
+        if (cookieAW!=null) {
             webdriver.manage().addCookie(cookieAW);
+        }
         
         //Obtenemos la URL del servicio de status
         URI uriBaseTest = new URI(nodo.getSourceDataURL());

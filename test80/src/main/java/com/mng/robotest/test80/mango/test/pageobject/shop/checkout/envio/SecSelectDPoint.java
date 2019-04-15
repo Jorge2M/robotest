@@ -33,10 +33,11 @@ public class SecSelectDPoint extends WebdrvWrapp {
     private static String XPathSeleccionarButton = XPathContainerList + "//span[@id[contains(.,'selectButton')]]";
     
     public static void sendProvincia(String provincia, WebDriver driver) {
-    	if (isInputProvinciaVisible(driver))
+    	if (isInputProvinciaVisible(driver)) {
     		sendProvinciaToInput(provincia, driver);
-    	else
+    	} else {
     		sendProvinciaToSelect(provincia, driver);
+    	}
     }
     
     private static boolean isInputProvinciaVisible(WebDriver driver) {
@@ -80,9 +81,9 @@ public class SecSelectDPoint extends WebdrvWrapp {
     
     public static TypeDeliveryPoint getTypeDeliveryPoint(WebElement dpElement) {
     	WebElement dpTitle = getElementVisible(dpElement, By.xpath(XPathNameDPoint));
-    	if (dpTitle!=null && !dpTitle.getText().toLowerCase().contains("mango"))
+    	if (dpTitle!=null && !dpTitle.getText().toLowerCase().contains("mango")) {
             return TypeDeliveryPoint.droppoint;
-        
+    	}
         return TypeDeliveryPoint.tienda;        
     }
     
@@ -100,21 +101,21 @@ public class SecSelectDPoint extends WebdrvWrapp {
         dataDp.setCodigo(dpSelected.getAttribute("data-shopid"));
         
         //Recuperamos los datos del DeliveryPoint mirando de evitar excepciones de "StaleElement"
-        if (isElementPresent(driver, By.xpath(XPathDeliveryPointSelected + XPathNameDPoint)))
+        if (isElementPresent(driver, By.xpath(XPathDeliveryPointSelected + XPathNameDPoint))) {
             dataDp.setName(driver.findElement(By.xpath(XPathDeliveryPointSelected + XPathNameDPoint)).getText());
-        
-        if (isElementPresent(driver, By.xpath(XPathDeliveryPointSelected + XPathColeccionesDPoint)))
+        }
+        if (isElementPresent(driver, By.xpath(XPathDeliveryPointSelected + XPathColeccionesDPoint))) {
             dataDp.setColecciones(driver.findElement(By.xpath(XPathDeliveryPointSelected + XPathColeccionesDPoint)).getText());
-        
-        if (isElementPresent(driver, By.xpath(XPathDeliveryPointSelected + XPathAddressDPoint)))
+        }
+        if (isElementPresent(driver, By.xpath(XPathDeliveryPointSelected + XPathAddressDPoint))) {
             dataDp.setDireccion(driver.findElement(By.xpath(XPathDeliveryPointSelected + XPathAddressDPoint)).getText());
-        
-        if (isElementPresent(driver, By.xpath(XPathDeliveryPointSelected + XPathPostalcodeDPoint)))
+        }
+        if (isElementPresent(driver, By.xpath(XPathDeliveryPointSelected + XPathPostalcodeDPoint))) {
             dataDp.setCodPostal(driver.findElement(By.xpath(XPathDeliveryPointSelected + XPathPostalcodeDPoint)).getText());
-        
-        if (isElementPresent(driver, By.xpath(XPathTelefonoDPoint)))
+        }
+        if (isElementPresent(driver, By.xpath(XPathTelefonoDPoint))) {
             dataDp.setTelefono(driver.findElement(By.xpath(XPathTelefonoDPoint)).getText());
-        
+        }
         return dataDp;
     }
     
@@ -129,12 +130,14 @@ public class SecSelectDPoint extends WebdrvWrapp {
             	DataDeliveryPoint dataDp = getDataDeliveryPointSelected(driver);
             	switch (dataSearchDp.typeData) {
             	case Provincia:
-	                if (dataDp.getCPandPoblacion().contains(dataSearchDp.data))
+	                if (dataDp.getCPandPoblacion().contains(dataSearchDp.data)) {
 	                    return true;
+	                }
 	                break;
             	case CodigoPostal:
-	                if (dataDp.getCodPostal().contains(dataSearchDp.data))
+	                if (dataDp.getCodPostal().contains(dataSearchDp.data)) {
 	                    return true;
+	                }
 	                break;
             	}
             }

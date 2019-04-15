@@ -45,9 +45,9 @@ public class ModalFichaFavoritos extends WebdrvWrapp {
     }
     
     public static String getNombreColorSelectedFicha(WebDriver driver) {
-        if (isElementVisible(driver, By.xpath(XPathImgColorSelectedFicha)))
+        if (isElementVisible(driver, By.xpath(XPathImgColorSelectedFicha))) {
             return (driver.findElement(By.xpath(XPathImgColorSelectedFicha)).getAttribute("title"));
-        
+        }
         return "";
     }
     
@@ -97,8 +97,9 @@ public class ModalFichaFavoritos extends WebdrvWrapp {
         //Filtramos y nos quedamos sólo con las tallas disponibles
         List<WebElement> listTallasAvailable = new ArrayList<>();
         for (WebElement talla : listTallas) {
-            if (!isElementPresent(talla, By.xpath("./span")))
+            if (!isElementPresent(talla, By.xpath("./span"))) {
                 listTallasAvailable.add(talla);
+            }
         }
         
         WebElement tallaDisponible = listTallasAvailable.get(posicionTalla - 1); 

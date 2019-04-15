@@ -17,16 +17,16 @@ public class PageMultibanco1rst extends WebdrvWrapp {
     final static String XPathInputEmailWithTag = "//input[@id[contains(.,'multibanco')] and @value[contains(.,'" + TagEmail + "')]]";
     
     public static String getXPathEntradaPago(String nombrePago, Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return (XPathListOfPayments + "//input[@class[contains(.,'" + nombrePago.toLowerCase() + "')]]");
-        
+        }
         return (XPathListOfPayments + "/li[@data-variant[contains(.,'" + nombrePago.toLowerCase() + "')]]");
     }
     
     public static String getXPathButtonContinuePay(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathButtonContinueMobil;
-        
+        }
         return XPathButtonPagoDesktop;
     }
     
@@ -56,8 +56,9 @@ public class PageMultibanco1rst extends WebdrvWrapp {
         //En el caso de móvil hemos de seleccionar el icono de banco para visualizar el botón de continue
         if (channel==Channel.movil_web) {
             String xpathButton = getXPathButtonContinuePay(channel);
-            if (!isElementVisible(driver, By.xpath(xpathButton)))
+            if (!isElementVisible(driver, By.xpath(xpathButton))) {
                 clickIconoBanco(driver);
+            }
         }
         
         clickButtonContinuePay(channel, driver);

@@ -75,7 +75,7 @@ public class PageMisDatosStpV {
         validations.add(
             "Está seleccionado el país definido durante el registro: <b>" + codpais + "</b>",
             (PageMisDatos.getCodPaisSelected(driver).compareTo(codpais)==0), State.Defect);
-        if (provincia != null){
+        if (provincia != null) {
             validations.add(
                 "Está seleccionada la provincia definida durante el registro: <b>" + provincia + "</b>",
                 (PageMisDatos.getProvinciaSelected(driver).compareTo(provincia)==0), State.Defect);

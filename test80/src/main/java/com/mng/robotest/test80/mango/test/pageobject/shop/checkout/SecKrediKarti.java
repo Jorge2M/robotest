@@ -17,9 +17,9 @@ public class SecKrediKarti {
     static String XPathCapaPagoPlazoDesktop = "//div[@class[contains(.,'installmentsTable')]]"; 
     
     public static String getXPath_capaPagoPlazo(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathCapaPagoPlazoMobil;
-        
+        }
         return XPathCapaPagoPlazoDesktop;
     }
     
@@ -29,9 +29,9 @@ public class SecKrediKarti {
      */    
     public static String getXPath_checkPlazos(int posicion, Channel channel) {
         String xpathDivPlazo = getXPath_capaPagoPlazo(channel);
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return (xpathDivPlazo + "//div[@class[contains(.,'custom-radio')] and @data-custom-radio-id][" + posicion + "]");
-        
+        }
         return (xpathDivPlazo + "//input[@type='radio' and @name='installment'][" + posicion + "]"); 
     }
  

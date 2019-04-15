@@ -25,8 +25,9 @@ public class ModalBuscadorTiendas extends WebdrvWrapp implements PageFromFooter 
 	
 	@Override
 	public boolean isPageCorrect(WebDriver driver) {
-		if (channel==Channel.movil_web)
+		if (channel==Channel.movil_web) {
 			return (isElementPresent(driver, By.xpath(XPathForIdPageMobile)));
+		}
 		return (isElementPresent(driver, By.xpath(XPathForIdPage)));
 	}
 }

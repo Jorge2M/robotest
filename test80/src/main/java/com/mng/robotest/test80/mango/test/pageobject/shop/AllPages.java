@@ -70,8 +70,9 @@ public class AllPages extends WebdrvWrapp {
     throws Exception {
     	int seconds = 0;
     	do {
-    		if (Math.abs(elementosPagina - driver.findElements(By.xpath("//*")).size()) > margin)
+    		if (Math.abs(elementosPagina - driver.findElements(By.xpath("//*")).size()) > margin) {
     			return true;
+    		}
     		Thread.sleep(1000);
     		seconds+=1;
     	}
@@ -173,9 +174,9 @@ public class AllPages extends WebdrvWrapp {
             }
         }
 
-        if (malicious)
+        if (malicious) {
             context.setAttribute("httpMalicious." + src, "");
-
+        }
         return malicious;
     }
     
@@ -186,9 +187,9 @@ public class AllPages extends WebdrvWrapp {
     
     public static boolean isTitleAssociatedToMenu(String menuName, WebDriver driver) {
         String titlePage = driver.getTitle();
-        if (titlePage.toLowerCase().contains(menuName.toLowerCase()))
+        if (titlePage.toLowerCase().contains(menuName.toLowerCase())) {
             return true;
-        
+        }
         return false;
     }
 }

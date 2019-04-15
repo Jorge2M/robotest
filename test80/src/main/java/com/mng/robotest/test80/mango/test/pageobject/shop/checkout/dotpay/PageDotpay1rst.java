@@ -14,9 +14,9 @@ public class PageDotpay1rst extends WebdrvWrapp {
     static String XPathButtonPago = "//input[@name='pay' and @type='submit']";
     
     public static String getXPathEntradaPago(String nombrePago, Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return (XPathListOfPayments + "/li/input[@class[contains(.,'" + nombrePago.toLowerCase() + "')]]");
-        
+        }
         return (XPathListOfPayments + "/li[@data-variant[contains(.,'" + nombrePago.toLowerCase() + "')]]");
     }
     
@@ -35,9 +35,10 @@ public class PageDotpay1rst extends WebdrvWrapp {
     }
     
     public static void clickToPay(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             clickAndWaitLoad(driver, By.xpath(XPathInputIconoDotpay));
-        else
+        } else {
             clickAndWaitLoad(driver, By.xpath(XPathButtonPago));
+        }
     }
 }

@@ -105,10 +105,11 @@ public class SecMenusWrapperStpV {
     }
     
     public static void navSeleccionaCarruselsLinea(Pais pais, LineaType lineaNuevoOReb, AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             SecMenuLateralMobilStpV.navClickLineaAndCarrusels(lineaNuevoOReb, pais, app, dFTest.driver);
-        else
+        } else {
             SecMenusDesktopStpV.stepValidaCarrusels(pais, lineaNuevoOReb, app, dFTest.driver);
+        }
     }
     
     @Step (

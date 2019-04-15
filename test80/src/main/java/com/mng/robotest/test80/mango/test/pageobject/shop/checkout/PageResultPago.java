@@ -24,9 +24,9 @@ public class PageResultPago extends WebdrvWrapp {
      * @return el xpath correspondiente al elemento que contiene el texto con la confirmación del pago
      */
     public static String getXPathTextoConfirmacionPago(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathTextoConfirmacionPagoMobil;
-         
+        }
         return XPathTextoConfirmacionPagoDesktop;
     }    
     
@@ -34,9 +34,9 @@ public class PageResultPago extends WebdrvWrapp {
      * @return el xpath correspondiente al elemento lincable de "Seguir de shopping"
      */
     public static String getXPathLinkSeguirDeShopping(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathLinkSeguirDeShoppingMobil;
-        
+        }
         return XPathLinkSeguirDeShoppingDesktop;
     }
     
@@ -44,9 +44,9 @@ public class PageResultPago extends WebdrvWrapp {
      * @return el xpath correspondiente al elemento que contiene el texto con el id del pedido
      */
     public static String getXPathTextPedido(Channel channel) {
-        if (channel==Channel.movil_web) 
+        if (channel==Channel.movil_web) {
             return XPathTextPedidoMobil;
-        
+        }
         return XPathTextPedidoDesktop;
     }
     
@@ -77,9 +77,9 @@ public class PageResultPago extends WebdrvWrapp {
     public static String getCodigoPedido(WebDriver driver, Channel channel, int secondsWait) throws Exception {
         String codPedido = "";
         String xpathPedido = getXPathTextPedido(channel);
-        if (isElementPresentUntil(driver, By.xpath(xpathPedido), secondsWait))
+        if (isElementPresentUntil(driver, By.xpath(xpathPedido), secondsWait)) {
             codPedido = driver.findElements(By.xpath(xpathPedido)).get(0).getText();
-        
+        }
         return codPedido;
     }
     

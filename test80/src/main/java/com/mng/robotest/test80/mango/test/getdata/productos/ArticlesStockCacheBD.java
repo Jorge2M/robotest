@@ -116,8 +116,9 @@ public class ArticlesStockCacheBD implements ArticlesStockGetter {
         //Calculamos un número de horas aleatorio entre el minHoras y el maxHoras
         //En el caso concreto de España aplicaremos siempre la caducidad mínima
         int intervaloHoras = 0;
-        if (codigoPais.compareTo("001")==0)
+        if (codigoPais.compareTo("001")==0) {
             intervaloHoras = maxHoras - minHoras;
+        }
 
         //Calculamos las horas de caducidad y las sumamos a la fecha actual
         int calcHoras = (Double.valueOf((minHoras + (Math.random() * intervaloHoras)))).intValue();

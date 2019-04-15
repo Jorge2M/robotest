@@ -53,8 +53,9 @@ public class SecMenusFiltroDiscount extends WebdrvWrapp {
     public static int getNumberOfVisibleMenus(WebDriver driver) {
     	int numberMenusVisibles = 0;
     	for (TypeMenuDiscount typeMenu : TypeMenuDiscount.values()) {
-    		if (isVisibleMenu(typeMenu, driver))
+    		if (isVisibleMenu(typeMenu, driver)) {
     			numberMenusVisibles+=1;
+    		}
     	}
     	
     	return numberMenusVisibles;

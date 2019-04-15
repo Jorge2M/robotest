@@ -23,9 +23,9 @@ public class PageTrustpaySelectBank extends WebdrvWrapp {
     static String XPathButtonContinueMobil = "//input[@type='submit' and @value='continue']";
     
     public static String getXPathEntradaPago(String nombrePago, Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return (XPathListOfPayments + "/li/input[@class[contains(.,'" + nombrePago.toLowerCase() + "')]]");
-        
+        }
         return (XPathListOfPayments + "/li[@data-variant[contains(.,'" + nombrePago.toLowerCase() + "')]]");
     }
     
@@ -65,14 +65,16 @@ public class PageTrustpaySelectBank extends WebdrvWrapp {
             }
         }
         
-        if (elementFind!=null)
+        if (elementFind!=null) {
             selectBank.selectByValue(elementFind.getAttribute("value"));
+        }
     }
     
     private static boolean stringContainsAnyValue(String str, ArrayList<String> listOfValues) {
         for (String strValue : listOfValues) {
-            if (str.contains(strValue))
+            if (str.contains(strValue)) {
                 return true;
+            }
         }
         
         return false;
@@ -83,9 +85,10 @@ public class PageTrustpaySelectBank extends WebdrvWrapp {
     }
     
     public static void clickButtonToContinuePay(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             clickAndWaitLoad(driver, By.xpath(XPathButtonContinueMobil));
-        else
+        } else {
             clickAndWaitLoad(driver, By.xpath(XPathButtonPayDesktop));
+        }
     }
 }

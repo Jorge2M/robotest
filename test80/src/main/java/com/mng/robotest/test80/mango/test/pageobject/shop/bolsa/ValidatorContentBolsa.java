@@ -41,9 +41,9 @@ public class ValidatorContentBolsa {
 	}
 	
 	public boolean articlesMatch() {
-		if (!numArticlesIsCorrect())
+		if (!numArticlesIsCorrect()) {
 			return false;
-		
+		}
 		List<DataArtBolsa> allDataToMatch = DataArtBolsa.getValuesValidForChannel(channel);
 		return (allArticlesExpectedDataAreInScreen(allDataToMatch));
 	}
@@ -55,8 +55,9 @@ public class ValidatorContentBolsa {
 	public boolean allArticlesExpectedDataAreInScreen(List<DataArtBolsa> listDataToMatch) {
 		for (ArticuloScreen articleExpected : linesArticlesExpected) {
 			boolean articleMatches = anyArticleInScreenMatchesArticleData(articleExpected, listDataToMatch);
-			if (articleMatches)
+			if (articleMatches) {
 				return true;
+			}
 		}
 		
 		return false;
@@ -64,13 +65,15 @@ public class ValidatorContentBolsa {
 	
 	private boolean anyArticleInScreenMatchesArticleData(ArticuloScreen articleExpected, List<DataArtBolsa> listDataToMatch) {
 		ArticuloDataBolsaScreen articuloScreen = getArticleInScreenByReference(articleExpected.getReferencia());
-		if (articuloScreen==null)
+		if (articuloScreen==null) {
 			return false;
+		}
 		
 		for (DataArtBolsa typeDataToMatch : listDataToMatch) {
 			if (DataArtBolsa.getValuesValidForChannel(channel).contains(typeDataToMatch))
-				if (articleInScreenMatchArticleData(articleExpected, articuloScreen, typeDataToMatch))
+				if (articleInScreenMatchArticleData(articleExpected, articuloScreen, typeDataToMatch)) {
 					return true;
+				}
 		}
 		
 		return true;
@@ -82,30 +85,36 @@ public class ValidatorContentBolsa {
 		case Referencia:
 			break;
 		case Nombre:
-			if (!articleExpected.getNombre().contains(articuloScreen.nombre))
+			if (!articleExpected.getNombre().contains(articuloScreen.nombre)) {
 				return false;
+			}
 			break;
 		case Color:
 			if (articleExpected.getColor().toLowerCase().compareTo(articuloScreen.color.toLowerCase())!=0 &&
-				articleExpected.getColor().compareTo(Constantes.colorDesconocido)!=0)
+				articleExpected.getColor().compareTo(Constantes.colorDesconocido)!=0) {
 				return false;
+			}
 			break;
 		case TallaAlf:
-			if (articleExpected.getTallaAlf().compareTo(articuloScreen.tallaAlf)!=0)
+			if (articleExpected.getTallaAlf().compareTo(articuloScreen.tallaAlf)!=0) {
 				return false;
+			}
 			break;					
 		case TallaNum:
-			if (articleExpected.getTallaNum().compareTo(articuloScreen.tallaNum)!=0)
+			if (articleExpected.getTallaNum().compareTo(articuloScreen.tallaNum)!=0) {
 				return false;
+			}
 			break;
 		case Cantidad:
-			if (articleExpected.getNumero()!=Integer.valueOf(articuloScreen.cantidad))
+			if (articleExpected.getNumero()!=Integer.valueOf(articuloScreen.cantidad)) {
 				return false;
+			}
 			break;
 		case PrecioTotal:
 			float precioArticulosExpected = articleExpected.getPrecioDescontado() * articleExpected.getNumero();
-			if (precioArticulosExpected!=articuloScreen.precio)
+			if (precioArticulosExpected!=articuloScreen.precio) {
 				return false;
+			}
 			break;
 		}
 		
@@ -114,8 +123,9 @@ public class ValidatorContentBolsa {
 	
 	private ArticuloDataBolsaScreen getArticleInScreenByReference(String reference) {
 		for (ArticuloDataBolsaScreen articuloScreen : linesArticlesInScreen) {
-			if (articuloScreen.referencia.equals(reference))
+			if (articuloScreen.referencia.equals(reference)) {
 				return articuloScreen;
+			}
 		}
 		
 		return null;

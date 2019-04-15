@@ -96,8 +96,9 @@ public class StepsDAO {
         for (HashMap<String, Object> stepHash : listStepsMethod) {
             resultMethod.numberSteps+=1;
             int maxResult = Integer.valueOf((String)stepHash.get("RESULTADO")).intValue();
-            if (maxResult > resultMethod.maxResultadoStep.getCriticity()) 
+            if (maxResult > resultMethod.maxResultadoStep.getCriticity()) {
                 resultMethod.maxResultadoStep = State.getState(maxResult);
+            }
         }
         
         return resultMethod;

@@ -95,18 +95,18 @@ public class ElementPageFunctions {
 
     public static void clickAndRetry(ElementPage element, WebDriver driver) throws Exception {
         clickAndWait(element, driver);
-
         int maxSecondsToWait = 2;
-        if (isElementInStateUntil(element, StateElem.Present, maxSecondsToWait, driver))
+        if (isElementInStateUntil(element, StateElem.Present, maxSecondsToWait, driver)) {
             clickAndWait(element, driver);
+        }
     }
 
     public static void clickAndRetry(Channel channel, ElementPage element, WebDriver driver) throws Exception {
         clickAndWait(channel, element, driver);
-
         int maxSecondsToWait = 2;
-        if (isElementInStateUntil(element, StateElem.Present, maxSecondsToWait, channel, driver))
+        if (isElementInStateUntil(element, StateElem.Present, maxSecondsToWait, channel, driver)) {
             clickAndWait(channel, element, driver);
+        }
     }
 
     public static void selectElement(ElementPage element, WebDriver driver) throws Exception {

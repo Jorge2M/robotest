@@ -164,18 +164,20 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
 	    	hoverLinea(lineaType, sublineaType, app, driver);
 	    	int maxSecondsToWait = 2;
 	    	isCapaMenusVisible = SecBloquesMenuDesktop.isCapaMenusLineaVisibleUntil(lineaType, maxSecondsToWait, driver);
-	    	if (!isCapaMenusVisible)
+	    	if (!isCapaMenusVisible) {
 	    		pLogger.warn("No se hacen visibles los menús después de Hover sobre línea " + lineaType);
+	    	}
 	    	i+=1;
     	}
     	while (!isCapaMenusVisible && i<2);
     }
     
     public static void hoverLinea(LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, WebDriver driver) throws Exception {
-    	if (sublineaType==null)
+    	if (sublineaType==null) {
     		hoverLinea(lineaType, app, driver);
-    	else
+    	} else {
     		selectSublinea(lineaType, sublineaType, app, driver);
+    	}
     }
     
     public static void hoverLinea(LineaType lineaType, AppEcom app, WebDriver driver) throws Exception {

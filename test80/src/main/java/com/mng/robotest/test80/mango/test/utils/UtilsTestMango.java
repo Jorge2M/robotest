@@ -78,9 +78,9 @@ public class UtilsTestMango {
 	public static String getReferenciaFromHref(String hrefArticulo) {
         Pattern pattern = Pattern.compile("(\\d+).html");
         Matcher matcher = pattern.matcher(hrefArticulo);
-        if (matcher.find())
+        if (matcher.find()) {
             return matcher.group(1);
-        
+        }
         return "";
 	}
 	
@@ -108,8 +108,9 @@ public class UtilsTestMango {
     	ArrayList<ArticleStock> listArticles;
     	if (dCtxSh.vale!=null) {
     		listArticles = dCtxSh.vale.getArticlesFromVale();
-    		if (listArticles.size()>0)
+    		if (listArticles.size()>0) {
     			return listArticles;
+    		}
     	}
     	
     	ManagerArticlesStock managerArticles = new ManagerArticlesStock(dCtxSh.appE, dCtxSh.urlAcceso, maxArticlesAwayVale);
@@ -120,9 +121,9 @@ public class UtilsTestMango {
         	listArticles = dCtxSh.vale.getArticlesFromVale();
         }
         
-        if (listArticles.size() > maxArticlesAwayVale)
+        if (listArticles.size() > maxArticlesAwayVale) {
         	return (listArticles.subList(0, maxArticlesAwayVale));
-        
+        }
         return listArticles;
     }
     

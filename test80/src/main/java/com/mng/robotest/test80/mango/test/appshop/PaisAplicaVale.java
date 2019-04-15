@@ -79,19 +79,20 @@ public class PaisAplicaVale extends GestorWebDriver {
     									 DataFmwkTest dFTest) throws Exception {
         this.dCtxSh.userRegistered = false;
         FlagsTestCkout fTCkout = new FlagsTestCkout();
-        if (validaPasarelasStr.compareTo("true")==0) 
+        if (validaPasarelasStr.compareTo("true")==0) {
             fTCkout.validaPasarelas = true;
-            
-        if (validaPagosStr.compareTo("true")==0) 
+        }
+        if (validaPagosStr.compareTo("true")==0) {
             fTCkout.validaPagos = true;
+        }
         
     	String forceTestMisComprasStr = dFTest.ctx.getCurrentXmlTest().getParameter("forceTestMisCompras");
-        if (forceTestMisComprasStr!=null && "true".compareTo(forceTestMisComprasStr)==0)
+        if (forceTestMisComprasStr!=null && "true".compareTo(forceTestMisComprasStr)==0) {
         	fTCkout.forceTestMisCompras = true;
-        
-        if (validaPedidosEnMantoStr.compareTo("true")==0) 
+        }
+        if (validaPedidosEnMantoStr.compareTo("true")==0) {
             fTCkout.validaPedidosEnManto = true;        
-            
+        }
         fTCkout.emailExist = true; 
         fTCkout.trjGuardada = false;
         fTCkout.isEmpl = this.isEmpl;

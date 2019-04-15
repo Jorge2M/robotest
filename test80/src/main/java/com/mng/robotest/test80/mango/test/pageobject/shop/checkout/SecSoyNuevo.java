@@ -21,22 +21,22 @@ public class SecSoyNuevo extends WebdrvWrapp {
     public static String getXPath_checkPubliNewsletter(Channel channel, boolean active) {
         String sufix = "";
         if (channel==Channel.movil_web) {
-            if (active)
+            if (active) {
                 sufix = " on";
-                
+            }
             return ("//div[@class[contains(.,'subscribe__checkbox" + sufix + "')]]");
         }
         
-        if (active)
+        if (active) {
             sufix = "active";
-            
+        }
         return ("//div[@id='publicidad']//div[@class[contains(.,'checkbox__image')] and @class[contains(.,'" + sufix + "')]]");
     }
     
     public static String getXPath_BotonContinue(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathBotonContinueMobil;
-        
+        }
         return XPathBotonContinueDesktop;
     }
     
@@ -46,10 +46,7 @@ public class SecSoyNuevo extends WebdrvWrapp {
     
     public static boolean isCheckedPubliNewsletter(WebDriver driver, Channel channel) {
         String xpathCheckActive = getXPath_checkPubliNewsletter(channel, true/*active*/);
-        if (isElementPresent(driver, By.xpath(xpathCheckActive)))
-            return true;
-         
-        return false;
+        return (isElementPresent(driver, By.xpath(xpathCheckActive)));
     }
     
     /**

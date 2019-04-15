@@ -185,40 +185,29 @@ public class PageFichaArtOld extends PageFicha {
     private static String getNameFileImgArticleWithoutExt(String srcImgCarrusel) {
         Pattern pattern = Pattern.compile("(.*?).jpg");
         Matcher matcher = pattern.matcher(srcImgCarrusel);
-        if (matcher.find())
+        if (matcher.find()) {
             return matcher.group(1);
-        
+        }
         return "";
     }
     
     public boolean srcImagenCentralConZoomContains(String srcImagen) {
         String srcImagenCentralConZoom = getSrcImagenCentralConZoom();
-        if ("".compareTo(srcImagen)!=0 &&
+        return (
+        	"".compareTo(srcImagen)!=0 &&
             "".compareTo(srcImagenCentralConZoom)!=0 &&
-            srcImagenCentralConZoom.contains(srcImagen))
-            return true;
-        
-        return false;
+            srcImagenCentralConZoom.contains(srcImagen));
     }    
     
     public boolean isVisibleFichaConZoom() {
         return (isElementVisible(driver, By.xpath(XPathFichaConZoom)));
     }
     
-
-    
     public void selectGuiaDeTallasLink() throws Exception {
         clickAndWaitLoad(driver, By.xpath(XPathGuiaDeTallasLink));
     }
     
-    /**
-     * @param seconds tiempo máximo que espera hasta que el elemento está presente
-     * @return si estamos en la página de Ficha
-     */
     public boolean isPresentPageUntil(int seconds) {
-        if (isElementPresentUntil(driver, By.xpath(XPathHtmlFicha), seconds))
-            return true;
-        
-        return false;
+        return (isElementPresentUntil(driver, By.xpath(XPathHtmlFicha), seconds));
     }
 }

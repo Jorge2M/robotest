@@ -55,23 +55,27 @@ public class ParamsBean {
     }
     
     public void setIdExecutedSuiteIfNotSetted(String idSuiteExecution) {
-        if (this.idSuiteExecution==null || "".compareTo(this.idSuiteExecution)==0)
+        if (this.idSuiteExecution==null || "".compareTo(this.idSuiteExecution)==0) {
             setIdExecutedSuite(idSuiteExecution);
+        }
     }
     
     public void setTypeAccess(TypeAccessFmwk typeAccess) {
-        if (typeAccess!=null)
+        if (typeAccess!=null) {
             this.typeAccess = typeAccess;
+        }
     }
     
     public void setTypeAccessFromStr(String typeAccess) {
-        if (typeAccess!=null)
+        if (typeAccess!=null) {
             this.typeAccess = TypeAccessFmwk.valueOf(typeAccess);
+        }
     }
     
     public void setTypeAccessIfNotSetted(TypeAccessFmwk typeAccess) {
-        if (this.typeAccess==null)
+        if (this.typeAccess==null) {
             setTypeAccess(typeAccess);
+        }
     }    
     
     public AppEcom getAppE() {
@@ -127,9 +131,9 @@ public class ParamsBean {
     }
     
     public String getListaPaisesStr() {
-        if (getListaPaises()!=null && getListaPaises().length>0)
+        if (getListaPaises()!=null && getListaPaises().length>0) {
             return String.join(",", getListaPaises());
-        
+        }
         return "";
     }    
     
@@ -138,9 +142,9 @@ public class ParamsBean {
     }
     
     public String getListaLineasStr() {
-        if (getListaLineas()!=null && getListaLineas().length>0)
+        if (getListaLineas()!=null && getListaLineas().length>0) {
             return String.join(",", getListaLineas());
-        
+        }
         return "";
     }
     
@@ -149,9 +153,9 @@ public class ParamsBean {
     }
     
     public String getListaPaymentsStr() {
-        if (getListaPayments()!=null && getListaPayments().length>0)
+        if (getListaPayments()!=null && getListaPayments().length>0) {
             return String.join(",", getListaPayments());
-        
+        }
         return "";
     }    
     
@@ -160,9 +164,9 @@ public class ParamsBean {
     }    
     
     public String getListaTestCasesStr() {
-        if (getListaTestCases()!=null && getListaTestCases().length>0)
+        if (getListaTestCases()!=null && getListaTestCases().length>0) {
             return String.join(",", getListaTestCases());
-        
+        }
         return "";
     }
     
@@ -183,13 +187,15 @@ public class ParamsBean {
     }
     
     public void setListaPaises(String ListaPaises) {
-        if (ListaPaises!=null)
+        if (ListaPaises!=null) {
             this.ListaPaises = ListaPaises.split("\\s*,\\s*");
+        }
     }
     
     public void setListaTestCases(String ListaTestCases) {
-        if (ListaTestCases!=null)
+        if (ListaTestCases!=null) {
             this.ListaTestCases= ListaTestCases.split("\\s*,\\s*");
+        }
     }
     
     public void setListaTestCases(String[] ListaTestCases) {
@@ -221,8 +227,9 @@ public class ParamsBean {
     }
     
     public void setNetAnalysis(String netAnalysis) {
-        if (netAnalysis!=null)
+        if (netAnalysis!=null) {
             this.netAnalysis = netAnalysis;
+        }
     }    
     
     public String getEnvioCorreo() {

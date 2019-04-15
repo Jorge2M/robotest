@@ -104,8 +104,9 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
     public static boolean isPresentInputImportes(WebDriver driver) {
         for (Importe importe : Importe.values()) {
             String xpathRadio = getXPathRadioImporte(importe);
-            if (!isElementPresent(driver, By.xpath(xpathRadio)))
+            if (!isElementPresent(driver, By.xpath(xpathRadio))) {
                 return false;
+            }
         }
         
         return true;

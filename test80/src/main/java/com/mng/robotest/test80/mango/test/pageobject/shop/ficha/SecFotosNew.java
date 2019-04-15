@@ -36,24 +36,24 @@ public class SecFotosNew extends WebdrvWrapp {
     public static DataFoto getDataFoto(int line, int position, WebDriver driver) {
         String xpathFoto = getXPathFoto(line, position);
         List<WebElement> listFotos = driver.findElements(By.xpath(xpathFoto));
-        if (listFotos.size() < 1)
+        if (listFotos.size() < 1) {
             return null;
-            
+        }
         return (new DataFoto(listFotos.get(0).getAttribute("src")));
     }
 
     public static int getNumLinesFotos(WebDriver driver) {
-        if (!isElementPresent(driver, By.xpath(XPathLineFoto)))
+        if (!isElementPresent(driver, By.xpath(XPathLineFoto))) {
             return 0;
-            
+        }
         return (driver.findElements(By.xpath(XPathLineFoto)).size());
     }
         
     public static int getNumFotosLine(int line, WebDriver driver) {
         String xpathFotoLine = getXPathFoto(line);
-        if (!isElementPresent(driver, By.xpath(xpathFotoLine)))
+        if (!isElementPresent(driver, By.xpath(xpathFotoLine))) {
             return 0;
-        
+        }
         return (driver.findElements(By.xpath(xpathFotoLine)).size());
     }
 }

@@ -17,8 +17,9 @@ public class PageAyuda extends WebdrvWrapp {
     }
     
     public static boolean isPresentCabPreguntasFreq(Channel channel, WebDriver driver) {
-    	if (channel==Channel.movil_web)
+    	if (channel==Channel.movil_web) {
     		return (isElementPresent(driver, By.xpath(XPathFAQMobile)));
+    	}
         return (isElementPresent(driver, By.xpath(XPathCabPreguntasFreq)));
     }
     

@@ -17,16 +17,16 @@ public class PageAssistQiwi1rst extends WebdrvWrapp {
     static String XPathIconoPasarelasDesktop = "//form/div[@class='tip']";
     
     public static String getXPATH_icono(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathIconoMobil;
-        
+        }
         return XPathIconoDesktop;
     }
         
     public static String getXPATH_iconPasarelas(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathIconoPasarelasMobil;
-        
+        }
         return XPathIconoPasarelasDesktop;
     }
     

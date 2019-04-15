@@ -30,9 +30,9 @@ public class Direccharnolatinos {
     }
 	
     public boolean check() {
-        if (this.getCheck()!=null && this.getCheck().compareTo("s")==0)
+        if (this.getCheck()!=null && this.getCheck().compareTo("s")==0) {
             return true;
-         
+        }
         return false;
     }
 		

@@ -13,11 +13,9 @@ public class SectionBarraSupVOTF extends WebdrvWrapp {
     
     public static boolean isPresentUsuario(String usuarioVOTF, WebDriver driver) {
         String usuarioLit = titleUserName + usuarioVOTF;
-        if (isElementPresent(driver, By.xpath(XPathBarra)) &&
-            driver.findElement(By.xpath(XPathBarra)).getText().toLowerCase().contains(usuarioLit.toLowerCase()))
-            return true;
-        
-        return false;
+        return (
+        	isElementPresent(driver, By.xpath(XPathBarra)) &&
+            driver.findElement(By.xpath(XPathBarra)).getText().toLowerCase().contains(usuarioLit.toLowerCase()));
     }
     
 }

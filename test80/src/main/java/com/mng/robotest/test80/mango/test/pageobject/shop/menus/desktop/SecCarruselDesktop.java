@@ -31,8 +31,9 @@ public class SecCarruselDesktop extends WebdrvWrapp {
     public static boolean isVisibleCarrusels(Linea linea, WebDriver driver) {
         String[] listCarrusels = linea.getListCarrusels();
         for (int i=0; (i<listCarrusels.length); i++) {
-            if (!isVisibleCarrusel(linea, listCarrusels[i], driver))
+            if (!isVisibleCarrusel(linea, listCarrusels[i], driver)) {
                 return false;
+            }
         }
         
         return true;

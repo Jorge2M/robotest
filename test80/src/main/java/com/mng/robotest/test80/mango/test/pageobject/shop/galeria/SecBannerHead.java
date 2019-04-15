@@ -68,9 +68,9 @@ public class SecBannerHead extends WebdrvWrapp {
     }
     
     public static String getText(WebDriver driver) {
-        if (isElementPresent(driver, By.xpath(XPathText)))
+        if (isElementPresent(driver, By.xpath(XPathText))) {
             return (driver.findElement(By.xpath(XPathBanner)).getText());
-            
+        }
         return "";    
     }
     

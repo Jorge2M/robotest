@@ -83,8 +83,9 @@ public class PagePedidos extends WebdrvWrapp {
     	for (WebElement tdColumn : listColumns) {
     		i+=1;
     		if (isElementPresent(tdColumn, By.xpath("./span")) &&
-    			tdColumn.findElement(By.xpath("./span")).getText().compareTo(idColumn.textoColumna)==0)
+    			tdColumn.findElement(By.xpath("./span")).getText().compareTo(idColumn.textoColumna)==0) {
     			return i;
+    		}
     	}
     	
     	return i;
@@ -93,9 +94,9 @@ public class PagePedidos extends WebdrvWrapp {
     public static String getXPathCeldaLineaPedido(IdColumn idColumn, TypeDetalle typeDetalle, WebDriver driver) {
     	int posicColumn = getPosicionColumn(idColumn, typeDetalle, driver);
     	String elem = "span";
-    	if (idColumn.isLink)
+    	if (idColumn.isLink) {
     		elem = "a";
-    	
+    	}
     	return ("//table//tr/td[" + posicColumn + "]/" + elem); 
     }
     

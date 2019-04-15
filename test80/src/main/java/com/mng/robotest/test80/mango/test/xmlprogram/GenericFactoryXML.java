@@ -78,10 +78,11 @@ public class GenericFactoryXML {
         commonsXML.setCommonsParamsSuite(parametersSuite, params);
 
         //Parámetros que especifican el tipo de canal
-        if (params.getChannel()==Channel.movil_web)
+        if (params.getChannel()==Channel.movil_web) {
             parametersSuite.put("isMobil", "true");
-        else
+        } else {
             parametersSuite.put("isMobil", "false");
+        }
 
         //Indica si hemos de realizar las pruebas introduciendo una tarjeta de empleado como vale descuento (Más adelante esto dependerá del parámetro 'versión')
         parametersSuite.put("isEmpl", "false"); 
@@ -99,20 +100,15 @@ public class GenericFactoryXML {
     }
     
     private XmlGroups createGroups() {
-        
         XmlGroups groups = new XmlGroups();
         groups.setRun(createRun());
-        
         groups.setXmlDependencies(createDependencies());
-            
         return groups;
     }    
     
     private XmlRun createRun() {
-
         XmlRun run = new XmlRun();
         run.onInclude("SupportsFactoryCountrys");
-        
         return run;
     }
     

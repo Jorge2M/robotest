@@ -67,9 +67,9 @@ public class PageMisCompras extends WebdrvWrapp {
     public static String getXPathBlock(TypeCompra typeCompra, boolean active) {
         String xpathBlock = getXPathBlock(typeCompra);
         String attributeActive = "@class[contains(.,'active')]";
-        if (active)
+        if (active) {
             return xpathBlock.replace("']", "' and " + attributeActive + "]");
-
+        }
         return xpathBlock.replace("']", "' and not(" + attributeActive + "])");
     }
     
@@ -86,17 +86,17 @@ public class PageMisCompras extends WebdrvWrapp {
     }    
 
     public static String getXPathNumPrendasCompra(int posInLista, Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return (getXPathCompra(posInLista) + "//span[@class='prendas']");
-            
+        }
         return (getXPathCompra(posInLista) + "//div[@class='box-info']//div[@class='shop-look']");
     }
     
     public static String getXPathEstadoCompraOnline(int posInLista, Channel channel) {
         String lastElem = "p[3]";
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             lastElem = "/li[@class='regular'][2]";
-
+        }
         return (getXPathCompra(posInLista) + "//div[@class='box-info']/div[@class='shop']/" + lastElem);
     }
     
@@ -134,9 +134,9 @@ public class PageMisCompras extends WebdrvWrapp {
     
     public static TypeCompra getTypeCompra(int posInLista, WebDriver driver) {
         String idCompra = getIdCompra(posInLista, driver);
-        if (StringUtils.isNumeric(idCompra))
+        if (StringUtils.isNumeric(idCompra)) {
             return TypeCompra.Tienda;
-        
+        }
         return TypeCompra.Online;
     }
     
@@ -185,8 +185,9 @@ public class PageMisCompras extends WebdrvWrapp {
     public static boolean isVisibleCompraOnline(String codPedido, WebDriver driver) {
         List<WebElement> listaCompras = getListaCompras(driver);
         for (int posInLista=1; posInLista<=listaCompras.size(); posInLista++) {
-            if (getIdCompra(posInLista, driver).compareTo(codPedido)==0)
+            if (getIdCompra(posInLista, driver).compareTo(codPedido)==0) {
                 return true;
+            }
         }
         
         return false;

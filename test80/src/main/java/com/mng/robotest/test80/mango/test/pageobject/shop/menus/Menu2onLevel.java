@@ -77,10 +77,12 @@ public class Menu2onLevel implements MenuLateralDesktop {
     }
     
     @Override public boolean equals(Object o) {
-    	if (o == this)
+    	if (o == this) {
     		return true;
-    	if (!(o instanceof Menu2onLevel))
+    	}
+    	if (!(o instanceof Menu2onLevel)) {
     		return false;
+    	}
     	Menu2onLevel menu2onLevel = (Menu2onLevel) o;
     	return (menu2onLevel.key.equals(key));
     }

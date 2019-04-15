@@ -109,9 +109,9 @@ public class ValePais {
     public boolean isInDates() {
         Calendar currDtCal = Calendar.getInstance();
         if (currDtCal.getTimeInMillis() > this.fechaInicio.getTimeInMillis() &&
-            currDtCal.getTimeInMillis() < this.fechaFin.getTimeInMillis())
+            currDtCal.getTimeInMillis() < this.fechaFin.getTimeInMillis()) {
             return true;
-
+        }
         return false;
     }
     

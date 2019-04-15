@@ -53,9 +53,9 @@ public class ArticleStock {
     }
     
 	public String getReference() {
-		if (idArticle!=null && "".compareTo(idArticle)!=0)
+		if (idArticle!=null && "".compareTo(idArticle)!=0) {
 			return (idArticle.substring(0, 8));
-		
+		}
 		return "";
 	}
 	
@@ -76,9 +76,9 @@ public class ArticleStock {
     } 
         
     public boolean isVale() {
-        if (this.valePais==null)
+        if (this.valePais==null) {
             return false;
-        
+        }
         return true;
     }
 

@@ -68,8 +68,9 @@ public class PageRegistroDirec extends WebdrvWrapp {
     
     public static void sendDataToPaisIfNotExist(String codigoPais, WebDriver driver) {
         String xpathSelectedPais = XPathSelectPais + "/option[@selected='selected' and @value='" + codigoPais + "']";
-        if (isElementPresent(driver, By.xpath(xpathSelectedPais))) 
+        if (isElementPresent(driver, By.xpath(xpathSelectedPais))) {
             new Select(driver.findElement(By.xpath(XPathSelectPais))).selectByValue(codigoPais);
+        }
     }    
     
     public static void sendDataToCodPostalIfNotExist(String codPostal, WebDriver driver) {

@@ -22,14 +22,16 @@ public class Utilidades {
      */
     public static List<Linea> getLinesToTest(Pais pais, AppEcom appE, String lineasParam) {
         List<Linea> lineasXML = pais.getShoponline().getLineasToTest(appE);
-        if ("".compareTo(lineasParam)==0)
+        if ("".compareTo(lineasParam)==0) {
             return lineasXML;
+        }
         
         List<Linea> lineasToTest = new ArrayList<>();
         ArrayList<String> lineasArray = new ArrayList<>(Arrays.asList(lineasParam.split(",")));
         for (Linea linea : lineasXML) {
-             if (lineasArray.contains(linea.getId()))
+             if (lineasArray.contains(linea.getId())) {
                  lineasToTest.add(linea);
+             }
         }
         
         return lineasToTest;
@@ -49,8 +51,11 @@ public class Utilidades {
         listTop10.add("005"); //Italia
         listTop10.add("075"); //Россия (Российская Федерация)
         boolean encontrado = false;
-        for (int i=0; i<numTops && i<10; i++)
-            if (listTop10.get(i).compareTo(codigoPais)==0) encontrado = true;
+        for (int i=0; i<numTops && i<10; i++) {
+            if (listTop10.get(i).compareTo(codigoPais)==0) {
+            	encontrado = true;
+            }
+        }
                 
         return encontrado;
     }
@@ -69,9 +74,9 @@ public class Utilidades {
         listTop.add(Integer.valueOf(075)); //Россия (Российская Федерация)");
         listTop.add(Integer.valueOf(720)); //中国");
         boolean encontrado = false;
-        if (listTop.contains(Integer.valueOf(codigo_pais))) 
+        if (listTop.contains(Integer.valueOf(codigo_pais))) {
             encontrado = true;
-		
+        }
         return encontrado;
     }
 	
@@ -116,8 +121,9 @@ public class Utilidades {
                 Iterator<Pais> itPaises = continente.getPaises().iterator();
                 while (itPaises.hasNext()) {
                     Pais pais = itPaises.next(); 
-                    if (!listaCodPais.contains(Integer.valueOf(pais.getCodigo_pais())))
+                    if (!listaCodPais.contains(Integer.valueOf(pais.getCodigo_pais()))) {
                         itPaises.remove();
+                    }
                 }
             }
         }
@@ -159,23 +165,22 @@ public class Utilidades {
     public static boolean validarRebajasFromBD() {
         boolean rebajas = false;
         HashMap<String, String> listParams = ParamsDAO.listParams();
-        if (listParams.get("REBAJAS_VALIDAR")!=null)
+        if (listParams.get("REBAJAS_VALIDAR")!=null) {
             rebajas = ((listParams.get("REBAJAS_VALIDAR")).compareTo("1")==0);
-        
+        }
         return rebajas;
     }    
     
     public static boolean lineaToTest(Linea linea, AppEcom appE) {
-        if (appE==AppEcom.outlet && linea.getOutlet().compareTo("s")!=0)
+        if (appE==AppEcom.outlet && linea.getOutlet().compareTo("s")!=0) {
             return false;
-            
-        if (appE!=AppEcom.outlet && linea.getShop().compareTo("s")!=0)
+        }
+        if (appE!=AppEcom.outlet && linea.getShop().compareTo("s")!=0) {
             return false;
-            
-        if (linea.getMenus().compareTo("s")!=0 &&
-            !linea.existsSublineas())
+        }
+        if (linea.getMenus().compareTo("s")!=0 && !linea.existsSublineas()) {
             return false;
-                    
+        }
         return true;
     }    
 }

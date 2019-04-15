@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
 public class PageRegistroFin extends WebdrvWrapp {
 
-    private static final String xpathButtonIrShopping = "//input[@type='submit' and @value='Ir de shopping']";
+    private static final String xpathButtonIrShopping = "//div[@class[contains(.,'ir-de-shopping')]]/input[@type='submit']";
  
     public static boolean isPageUntil(int maxSecondsToWait, WebDriver driver) {
         return (isElementPresentUntil(driver, By.xpath(xpathButtonIrShopping), maxSecondsToWait));
@@ -19,8 +19,9 @@ public class PageRegistroFin extends WebdrvWrapp {
         clickAndWaitLoad(driver, By.xpath(xpathButtonIrShopping), TypeOfClick.javascript);
         
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-        if (isVisibleButtonIrDeShopping(driver))
+        if (isVisibleButtonIrDeShopping(driver)) {
         	clickAndWaitLoad(driver, By.xpath(xpathButtonIrShopping), TypeOfClick.javascript);
+        }
     }
     
     public static boolean isVisibleButtonIrDeShopping(WebDriver driver) {

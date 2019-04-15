@@ -86,8 +86,10 @@ public class fmwkTest {
                 screnshootsMap.put(datosStep, new ArrayList<byte[]>());
                 htmlsourcesMap.put(datosStep, new ArrayList<byte[]>());
             }
-            if (datosStep.getHoraFin()==null)
+            if (datosStep.getHoraFin()==null) {
                 datosStep.setHoraFin(new Date(System.currentTimeMillis()));
+            }
+            
             System.out.println("ROBOTEST2: LAZY REPORT STEP REDIRECT");
         }
         sendSkipTestExceptionIfSuiteStopping(dFTest.ctx);                
@@ -321,9 +323,9 @@ public class fmwkTest {
     public static String getOutputDirectory(String userDir, String suiteName, String idExecutedSuite) {
         String userDirOK = userDir;
         String lastCharUserDir = userDirOK.substring(userDirOK.length() - 1);
-        if (File.separator.compareTo(lastCharUserDir)!=0)
+        if (File.separator.compareTo(lastCharUserDir)!=0) {
             userDirOK+=File.separator;
-
+        }
         return (userDirOK + getPathOutputDirectoryFromUserDir(suiteName, idExecutedSuite));
     }
 

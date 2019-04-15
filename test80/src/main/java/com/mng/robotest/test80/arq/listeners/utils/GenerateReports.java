@@ -374,8 +374,9 @@ public class GenerateReports extends EmailableReporter {
 
                 // Comprobación existencia página error errorPagefaces
                 indexFile = new File(ErrorFileStep);
-                if (indexFile.exists())
+                if (indexFile.exists()) {
                     linkErrorNew = " \\ <a href=\"" + getRelativePathEvidencia(testRun, methodName, Integer.parseInt(stepNumber), TypeEvidencia.errorpage) + "\" target=\"_blank\">ErrorPage</a>";
+                }
                 
                 // Comprobación existencia de archivo .HARP
                 indexFile = new File(HARPFileStep);
@@ -386,13 +387,15 @@ public class GenerateReports extends EmailableReporter {
                 
                 // Comprobación existencia de archivo .HAR
                 indexFile = new File(HARFileStep);
-                if (indexFile.exists())
+                if (indexFile.exists()) {
                     linkHarNew = " \\ <a href=\"" + getRelativePathEvidencia(testRun, methodName, Integer.parseInt(stepNumber), TypeEvidencia.har) + "\" target=\"_blank\">NetJSON</a>";
+                }
                 
                 // Comprobación de la existencia del archivo .HTML
                 indexFile = new File(HtmlFileStep);
-                if (indexFile.exists())
+                if (indexFile.exists()) {
                     linkHtmlNew = "<a href=\"" + getRelativePathEvidencia(testRun, methodName, Integer.parseInt(stepNumber), TypeEvidencia.html) + "\">HTML Page</a>";
+                }
             }
 
             description = (String) stepHash.get("DESCRIPTION");
@@ -624,10 +627,11 @@ public class GenerateReports extends EmailableReporter {
         
         public void addValueToTree(int value) {
             
-            if ("".compareTo(this.valuesTree)==0)
+            if ("".compareTo(this.valuesTree)==0) {
                 this.valuesTree = this.valuesTree + value;
-            else
+            } else {
                 this.valuesTree = this.valuesTree + "," + value;
+            }
         }
         
         public String getOutputDirectory () {

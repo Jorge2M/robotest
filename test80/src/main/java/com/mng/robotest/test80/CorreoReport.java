@@ -112,8 +112,9 @@ public class CorreoReport {
     		
             String numDisps = String.valueOf(Integer.valueOf(numOKs) + Integer.valueOf(numIFs) + Integer.valueOf(numWRs) + Integer.valueOf(numDEs));
             String tiempoSegs = ""; 
-            if (listSuites.get(i).getTimeMs()!=null)
+            if (listSuites.get(i).getTimeMs()!=null) {
                 tiempoSegs = df1.format(Double.valueOf(listSuites.get(i).getTimeMs()).doubleValue() / 1000 / 60);
+            }
     		
             //Acumulamos los datos
             totalOKs += Integer.valueOf(numOKs);
@@ -123,16 +124,31 @@ public class CorreoReport {
             totalDEs += Integer.valueOf(numDEs);
             totalSKs += Integer.valueOf(numSKs);
             totalDisp += Integer.valueOf(numDisps);
-            if (listSuites.get(i).getTimeMs()!=null)
-                totalMINs += Double.valueOf(listSuites.get(i).getTimeMs()) / 1000 / 60;			
+            if (listSuites.get(i).getTimeMs()!=null) {
+                totalMINs += Double.valueOf(listSuites.get(i).getTimeMs()) / 1000 / 60;
+            }
     		
-            if (numOKs.compareTo("0")==0) numOKs = "";
-            if (numIFs.compareTo("0")==0) numIFs = "";
-            if (numWRs.compareTo("0")==0) numWRs = "";
-            if (numDEs.compareTo("0")==0) numDEs = "";
-            if (numNKs.compareTo("0")==0) numNKs = "";
-            if (numSKs.compareTo("0")==0) numSKs = "";
-            if (numDisps.compareTo("0")==0) numDisps = "";
+            if (numOKs.compareTo("0")==0) {
+            	numOKs = "";
+            }
+            if (numIFs.compareTo("0")==0) {
+            	numIFs = "";
+            }
+            if (numWRs.compareTo("0")==0) {
+            	numWRs = "";
+            }
+            if (numDEs.compareTo("0")==0) {
+            	numDEs = "";
+            }
+            if (numNKs.compareTo("0")==0) {
+            	numNKs = "";
+            }
+            if (numSKs.compareTo("0")==0) {
+            	numSKs = "";
+            }
+            if (numDisps.compareTo("0")==0) {
+            	numDisps = "";
+            }
     		
             html+= 
     		"<tr>" + 

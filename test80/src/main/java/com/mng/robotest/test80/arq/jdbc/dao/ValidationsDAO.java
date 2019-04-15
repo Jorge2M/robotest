@@ -133,20 +133,20 @@ public class ValidationsDAO {
                 }
     
                 List<Integer> listVals = datosStep.getListCodeNumStateValidations();
-                if (listVals!=null)
+                if (listVals!=null) {
                     insert.setString(9, listVals.toString().replace("[","").replace("]",""));
-                else
+                } else {
                     insert.setString(9, "");
-    
+                }
                 insert.executeUpdate();
             }
             
             try (PreparedStatement updateStep = conn.prepareStatement(SQLUpdateStep)) {
-                if (datosStep.getExcepExists())
+                if (datosStep.getExcepExists()) {
                     updateStep.setInt(1, State.Nok.getIdNumerid());
-                else
+                } else {
                     updateStep.setInt(1, datosStep.getResultSteps().getIdNumerid());
-    
+                }
                 updateStep.setString(2, ctx.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx));
                 updateStep.setString(3, ctx.getSuite().getName());
                 updateStep.setString(4, ctx.getName());

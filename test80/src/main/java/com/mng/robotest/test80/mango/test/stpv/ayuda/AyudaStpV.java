@@ -19,7 +19,7 @@ public class AyudaStpV {
     public static void selectTypeValidaciones (Channel channel, DataFmwkTest dFTest) throws Exception {
         ArrayList<String> sections = PageAyuda.getKeysFromJSON(PageAyuda.getFileJSON());
         for(String section : sections){
-             if (section.equals("Buscar una tienda") && channel!=Channel.movil_web){
+             if (section.equals("Buscar una tienda") && channel!=Channel.movil_web) {
                 helpToBuscarTienda(section, dFTest.driver);
              } else {
                  accesAndValidationSection(section, dFTest);

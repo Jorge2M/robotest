@@ -169,8 +169,9 @@ public class MiCuenta extends GestorWebDriver {
         pageDetPedidoStpV.clickBackButton(dCtxSh.channel, dFTest);
         
         //Estamos utilizando un usuario que en PRO no dispone de tíckets de Compra en tienda 
-        if (isPRO)
+        if (isPRO) {
             PageMisComprasStpV.selectBlock(TypeCompra.Tienda, false/*ordersExpected*/, dFTest.driver);
+        }
         //TODO actualmente no funciona el alta automática de compras en PRE mediante Flyway
 //        else {
 //            PageMisComprasStpV.selectBlock(TypeCompra.Tienda, true/*ordersExpected*/, dFTest);

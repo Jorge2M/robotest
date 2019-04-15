@@ -73,8 +73,9 @@ public class PageConsultaIdEans extends WebdrvWrapp {
 	public static boolean isPedidosTablaCorrecto(List<String> pedidosPrueba, WebDriver driver) {
 	    for (String pedido : pedidosPrueba) {
         	String xpathLineaPedido = getXPathLineaPedido(pedido);
-        	if (!isElementVisible(driver, By.xpath(xpathLineaPedido)))
+        	if (!isElementVisible(driver, By.xpath(xpathLineaPedido))) {
         	    return false;
+        	}
 	    }
 	    
 	    return true;
@@ -119,8 +120,9 @@ public class PageConsultaIdEans extends WebdrvWrapp {
 	public static boolean isArticulosTablaCorrecto(List<String> articulosPrueba, WebDriver driver) {
 		for (String articulo : articulosPrueba) {
         	String xpathLineaPedido = getXPathLineaPedido(articulo);
-        	if (!isElementVisible(driver, By.xpath(xpathLineaPedido)))
+        	if (!isElementVisible(driver, By.xpath(xpathLineaPedido))) {
         	    return false;
+        	}
 	    }
 	    
 	    return true;

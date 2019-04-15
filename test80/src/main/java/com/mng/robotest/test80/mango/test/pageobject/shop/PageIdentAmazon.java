@@ -16,20 +16,15 @@ public class PageIdentAmazon extends WebdrvWrapp {
      * @return indicador de si realmente estamos en la página de identificación de Amazon (comprobamos si aparece el logo de Amazon)
      */
     public static boolean isLogoAmazon(WebDriver driver) { 
-        if (isElementVisible(driver, By.xpath(XPathImgLogoAmazon)))
-            return true;
-        
-        return false; 
+        return (isElementVisible(driver, By.xpath(XPathImgLogoAmazon)));
     }
     
     /**
      * @return indicador de si la página contiene los campos de usuario/password para la identificación
      */
     public static boolean isPageIdent(WebDriver driver) {
-        if (isElementVisible(driver, By.xpath(XPathInputEmail)) &&
-            isElementVisible(driver, By.xpath(XPathInputPassword)) )
-            return true;
-        
-        return false;
+        return (
+        	isElementVisible(driver, By.xpath(XPathInputEmail)) &&
+            isElementVisible(driver, By.xpath(XPathInputPassword)));
     }
 }

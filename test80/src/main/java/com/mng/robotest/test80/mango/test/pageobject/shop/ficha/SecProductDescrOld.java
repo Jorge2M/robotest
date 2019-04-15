@@ -80,13 +80,14 @@ public class SecProductDescrOld extends WebdrvWrapp {
     public static TypeStatePanel getStatePanel(TypePanel typePanel, WebDriver driver) throws Exception {
         Thread.sleep(200);
         String xpathPanel = getXPathPanel(typePanel);
-        if (!isElementVisible(driver, By.xpath(xpathPanel)))
+        if (!isElementVisible(driver, By.xpath(xpathPanel))) {
             return TypeStatePanel.missing;
-            
-       WebElement panel = driver.findElement(By.xpath(xpathPanel));
-       if (panel.getAttribute("class").contains("-active"))
-            return TypeStatePanel.unfolded;
+        }
         
+        WebElement panel = driver.findElement(By.xpath(xpathPanel));
+        if (panel.getAttribute("class").contains("-active")) {
+            return TypeStatePanel.unfolded;
+        }
         return TypeStatePanel.folded;
     }
     
@@ -100,10 +101,7 @@ public class SecProductDescrOld extends WebdrvWrapp {
             statePanel = getStatePanel(typePanel, driver);
         }
 
-        if (statePanel==stateExpected)
-            return true;
-        
-        return false;
+        return (statePanel==stateExpected);
     }
     
     public static void clickPanel(TypePanel typePanel, WebDriver driver) throws Exception {

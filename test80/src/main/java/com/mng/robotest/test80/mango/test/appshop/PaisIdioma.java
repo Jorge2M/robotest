@@ -73,9 +73,9 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
     public PaisIdioma(DataCtxShop dCtxSh, List<Linea> lineasAprobar, boolean recorreMenus, boolean recorreBanners, int prioridad) {
         this.dCtxSh = dCtxSh;
         String lineaStr = "";
-        if (lineasAprobar.size()==1)
+        if (lineasAprobar.size()==1) {
             lineaStr = "-" + lineasAprobar.get(0).getType();
-	              
+        }   
         this.index_fact = dCtxSh.pais.getNombre_pais() + " (" + dCtxSh.pais.getCodigo_pais() + ") " + "-" + dCtxSh.idioma.getCodigo().getLiteral() + lineaStr;
         this.lineasAprobar = lineasAprobar;
         this.recorreMenus = recorreMenus;
@@ -184,14 +184,16 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
         if (testBanners(linea)) {
         	int maxBannersToTest = getMaxBannersToTest(dCtxShI.pais, dCtxShI.appE);
         	SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToTest, dFTest.driver);
-        	if (this.dataCamp==null)
+        	if (this.dataCamp==null) {
         		secBannersStpV.testPageBanners(dCtxShI, maxBannersToTest, dFTest);
-        	else
+        	} else {
         		secBannersStpV.testCampanas(dataCamp, dCtxShI, lineaType, dFTest);
+        	}
         }
         
-        if (linea.getCarrusels()!=null)
+        if (linea.getCarrusels()!=null) {
             SecMenusWrapperStpV.navSeleccionaCarruselsLinea(dCtxShI.pais, lineaType, dCtxShI.appE, dCtxShI.channel, dFTest);
+        }
     }
     
     private boolean testBanners(Linea linea) {
@@ -201,9 +203,9 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
     
     private boolean testMenus(Linea linea, Sublinea sublinea) {
         if (this.recorreMenus) {
-            if (sublinea==null)
+            if (sublinea==null) {
                 return linea.getMenus().compareTo("s")==0;
-            
+            }
             return sublinea.getMenus().compareTo("s")==0;
         }
         
@@ -224,30 +226,30 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
     }
     
     private static int getMaxBannersToTestShop(Pais pais) {
-        if (pais.isPaisTop())
+        if (pais.isPaisTop()) {
             return Constantes.MAX_BAN_PAIS_TOP_SHOP;
-        
-        if (pais.getShop_online().compareTo("true")==0)
+        }
+        if (pais.getShop_online().compareTo("true")==0) {
             return (Constantes.MAX_BAN_PAIS_SICOMPRA_SHOP);
-        
+        }
         return Constantes.MAX_BAN_PAIS_NOCOMPRA_SHOP;
     }
     
     private static int getMaxBannersToTestOutlet(Pais pais) {
-        if (pais.isPaisTop())
+        if (pais.isPaisTop()) {
             return Constantes.MAX_BAN_PAIS_TOP_OUTLET;
-        
-        if (pais.getShop_online().compareTo("true")==0)
+        }
+        if (pais.getShop_online().compareTo("true")==0) {
             return (Constantes.MAX_BAN_PAIS_SICOMPRA_OUTLET);
-        
+        }
         return Constantes.MAX_BAN_PAIS_NOCOMPRA_OUTLET;
     }
     
     private boolean existsRightBannerMenu(Linea linea, Sublinea sublinea, Channel channel) {
     	if (channel==Channel.desktop) {
-    		if (sublinea!=null)
+    		if (sublinea!=null) {
     			return ("s".compareTo(sublinea.getMenusart())==0); 
-    		
+    		}
     		return ("s".compareTo(linea.getMenusart())==0); 
     	}
     	

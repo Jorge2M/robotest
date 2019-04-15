@@ -60,9 +60,9 @@ public class AllPagesSEO {
     public static ArrayList<String> validaTagTitle(WebDriver driver) {
         ArrayList<String> listaErrorsInHtmlFormat = new ArrayList<>();
         String title = driver.getTitle();
-        if (title == null || "".compareTo(title) == 0)
+        if (title == null || "".compareTo(title) == 0) {
             listaErrorsInHtmlFormat.add("<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">No existe el title o es nulo</c>");
-        
+        }
         return listaErrorsInHtmlFormat;
     }
     
@@ -90,8 +90,9 @@ public class AllPagesSEO {
             if (PageLanding.isPage(driver) || ((PageGaleriaDesktop)pageGaleria).isPage() || pageFicha.isPageUntil(0)) {
                 String currentURL = driver.getCurrentUrl(); 
                 //Hemos de añadir un par de excepciones
-                if (!currentURL.contains("catalogPc.faces?") && !currentURL.contains("search?") && !currentURL.contains("favorites.faces?"))
+                if (!currentURL.contains("catalogPc.faces?") && !currentURL.contains("search?") && !currentURL.contains("favorites.faces?")) {
                     listaErrorsInHtmlFormat.add("<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">Estamos en Home (no favorites.faces?), Galeria (no catalogPc.faces? ni search?) o Ficha pero no existe el tag canonical</c>");
+                }
             }
         }
         
@@ -110,27 +111,28 @@ public class AllPagesSEO {
         String currentURL = driver.getCurrentUrl();
         
         //El tag con name = 'robots' y content[contains(.,'noindex')] sólo aparece en el buscador de ítems y en ficha.faces, catalog.faces y iframe.faces
-        if (currentURL.contains("ficha.faces")) 
+        if (currentURL.contains("ficha.faces")) {
             operativaRobots = "ficha.faces";
-        
-        if (currentURL.contains("catalog.faces")) 
+        }
+        if (currentURL.contains("catalog.faces")) {
             operativaRobots = "catalog.faces";
-        
-        if (currentURL.contains("iframe.faces")) 
+        }
+        if (currentURL.contains("iframe.faces")) {
             operativaRobots = "iframe.faces";
-        
+        }
 //        if (currentURL.contains("sel=true") || currentURL.contains("m=color&c=")) 
 //            operativaRobots = "filtro color/talla";
         
-        if (currentURL.contains("/asc/") || currentURL.contains("/desc/")) 
+        if (currentURL.contains("/asc/") || currentURL.contains("/desc/")) {
             operativaRobots = "ordenación asc/desc";
-        
-        if (currentURL.contains("/search") && currentURL.contains("?kw=")) 
+        }
+        if (currentURL.contains("/search") && currentURL.contains("?kw=")) {
             operativaRobots = "buscador";
-        
+        }
         if ("".compareTo(operativaRobots)!=0) {
-            if (!robotNoindex)
+            if (!robotNoindex) {
                 listaErrorsInHtmlFormat.add("<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">Estamos en <b>" + operativaRobots + "</b> pero no aparece el tag 'robots'</c>");
+            }
         } else {
             if (robotNoindex && !currentURL.contains(".faces")) {
                 listaErrorsInHtmlFormat .add(
@@ -148,8 +150,9 @@ public class AllPagesSEO {
         //Si existe el tag canonical (apuntando a la propia página) no ha de exitir el tag robot/noindex
         if (AllPages.isPresentTagCanonical(driver)) {
             String urlTagCanonical = AllPages.getURLTagCanonical(driver);
-            if (robotNoindex && urlTagCanonical.compareTo(driver.getCurrentUrl())!=0)
+            if (robotNoindex && urlTagCanonical.compareTo(driver.getCurrentUrl())!=0) {
                 listaErrorsInHtmlFormat.add("<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">Existe el tag robot/noindex junto el canonical apuntando a URL de otra página (" + urlTagCanonical + ")</c>");
+            }
         }
         
         return listaErrorsInHtmlFormat;

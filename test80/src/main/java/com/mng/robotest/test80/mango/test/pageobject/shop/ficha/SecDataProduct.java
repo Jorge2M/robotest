@@ -108,9 +108,9 @@ public class SecDataProduct extends WebdrvWrapp {
     }
     
     private static String getXPathNombreArt(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathNombreArticuloMobil;
-        
+        }
         return XPathNombreArticuloDesktop;
     }
     
@@ -132,9 +132,9 @@ public class SecDataProduct extends WebdrvWrapp {
         String url = driver.getCurrentUrl();
         Pattern pattern = Pattern.compile("_(.*?).html");
         Matcher matcher = pattern.matcher(url);
-        if (matcher.find())
+        if (matcher.find()) {
             return matcher.group(1);
-        
+        }
         return "";
     }
     
@@ -143,8 +143,9 @@ public class SecDataProduct extends WebdrvWrapp {
         List<WebElement> listArticles = getElementsVisible(driver, By.xpath(xpathNombreArt));
         if (listArticles.size()>0) {
 	        WebElement tituloArt = listArticles.get(0);
-	        if (tituloArt!=null)
+	        if (tituloArt!=null) {
 	        	return (tituloArt.getText());
+	        }
         }
         
         return "";
@@ -159,17 +160,18 @@ public class SecDataProduct extends WebdrvWrapp {
     
     public static String getNombreColorMobil(ColorType colorType, WebDriver driver) {
     	WebElement color = getElementWeb(colorType, driver);
-    	if (color!=null)
+    	if (color!=null) {
     		return (color.getAttribute("title"));
+    	}
     	return Constantes.colorDesconocido;
     }
     
     public static String getNombreColorSelected(Channel channel, WebDriver driver) {
         switch (channel) {
         case desktop:
-            if (isElementPresent(driver, By.xpath(XPathNombreColorSelectedDesktop)))
+            if (isElementPresent(driver, By.xpath(XPathNombreColorSelectedDesktop))) {
                 return (driver.findElement(By.xpath(XPathNombreColorSelectedDesktop)).getAttribute("alt"));
-            
+            }
             return Constantes.colorDesconocido;
         case movil_web:
         default:
@@ -217,9 +219,9 @@ public class SecDataProduct extends WebdrvWrapp {
             String precioSinDesc = driver.findElement(By.xpath(XPathItemsPrecioSinDesc + "[1]")).getText();
     
             // Decimales
-            if (isElementPresent(driver, By.xpath(XPathItemsPrecioSinDesc + "[2]")))
+            if (isElementPresent(driver, By.xpath(XPathItemsPrecioSinDesc + "[2]"))) {
                 precioSinDesc += driver.findElement(By.xpath(XPathItemsPrecioSinDesc + "[2]")).getText();
-            
+            }
             return (ImporteScreen.normalizeImportFromScreen(precioSinDesc));
         }
         
@@ -241,86 +243,89 @@ public class SecDataProduct extends WebdrvWrapp {
     
     public static boolean selectGuiaDeTallasIfVisible(WebDriver driver) throws Exception {
     	boolean isVisible = isElementVisible(driver, By.xpath(XPathGuiaDeTallasLink)); 
-    	if (isVisible)
+    	if (isVisible) {
     		selectGuiaDeTallasLink(driver);
-    	
+    	}
     	return isVisible;
     }
 
     public static String getTallaAlfSelected(TypeFicha typeFicha, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old)
+        if (typeFicha==TypeFicha.Old) {
             return secSelTallasOld.getTallaAlfSelected(driver);
-        
+        }
         return secSelTallasNew.getTallaAlfSelected(driver);
     }
     
     public static String getTallaNumSelected(TypeFicha typeFicha, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old)
+        if (typeFicha==TypeFicha.Old) {
             return secSelTallasOld.getTallaNumSelected(driver);
-        
+        }
         return secSelTallasNew.getTallaNumSelected(driver);
     }    
     
     public static String getTallaAlf(TypeFicha typeFicha, int posicion, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old)
+        if (typeFicha==TypeFicha.Old) {
             return secSelTallasOld.getTallaAlf(posicion, driver);
-        
+        }
         return secSelTallasNew.getTallaAlf(posicion, driver);
     }    
     
     public static String getTallaCodNum(TypeFicha typeFicha, int posicion, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old)
+        if (typeFicha==TypeFicha.Old) {
             return secSelTallasOld.getTallaCodNum(posicion, driver);
-        
+        }
         return secSelTallasNew.getTallaCodNum(posicion, driver);
     }    
     
     public static boolean isTallaUnica(TypeFicha typeFicha, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old)
+        if (typeFicha==TypeFicha.Old) {
             return secSelTallasOld.isTallaUnica(driver);
-        
+        }
         return secSelTallasNew.isTallaUnica(driver);
     }    
     
     public static void selectTallaByValue(String codigoNumericoTalla, TypeFicha typeFicha, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old)
+        if (typeFicha==TypeFicha.Old) {
             secSelTallasOld.selectTallaByValue(codigoNumericoTalla, driver);
-        else
+        } else {
             secSelTallasNew.selectTallaByValue(codigoNumericoTalla, driver);
+        }
     }
     
     public static void selectTallaByIndex(int posicion, TypeFicha typeFicha, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old)
+        if (typeFicha==TypeFicha.Old) {
             secSelTallasOld.selectTallaByIndex(posicion, driver);
-        else
+        } else {
             secSelTallasNew.selectTallaByIndex(posicion, driver);
+        }
     }        
     
     public static void selectFirstTallaAvailable(TypeFicha typeFicha, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old)
+        if (typeFicha==TypeFicha.Old) {
             secSelTallasOld.selectFirstTallaAvailable(driver);
-        else
+        } else {
             secSelTallasNew.selectFirstTallaAvailable(driver);
+        }
     }    
     
     public static boolean isTallaAvailable(String talla, TypeFicha typeFicha, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old)
+        if (typeFicha==TypeFicha.Old) {
             return (secSelTallasOld.isTallaAvailable(talla, driver));
-        
+        }
         return (secSelTallasNew.isTallaAvailable(talla, driver));
     }
     
     public static int getNumOptionsTallasNoDisponibles(TypeFicha typeFicha, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old)
+        if (typeFicha==TypeFicha.Old) {
             return (secSelTallasOld.getNumOptionsTallasNoDisponibles(driver));
-        
+        }
         return (secSelTallasNew.getNumOptionsTallasNoDisponibles(driver));
     }
     
     public static int getNumOptionsTallas(TypeFicha typeFicha, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old)
+        if (typeFicha==TypeFicha.Old) {
             return (secSelTallasOld.getNumOptionsTallas(driver));
-        
+        }
         return (secSelTallasNew.getNumOptionsTallas(driver));
     }    
     

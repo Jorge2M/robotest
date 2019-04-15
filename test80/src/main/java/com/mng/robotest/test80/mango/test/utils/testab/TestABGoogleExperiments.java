@@ -110,8 +110,9 @@ public class TestABGoogleExperiments implements TestAB {
 			List<Integer> listVariantes = testAB.getVariantesInt();
 			for (Integer variante : listVariantes) {
 				String valueTestABvariantExpected = getValueExpectedInCookie(testAB, variante);
-				if (valueCookie.contains(valueTestABvariantExpected))
+				if (valueCookie.contains(valueTestABvariantExpected)) {
 					return variante;
+				}
 			}
 		}
 		

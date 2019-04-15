@@ -98,10 +98,12 @@ public final class Menu1rstLevel implements MenuLateralDesktop {
     }
 
     @Override public boolean equals(Object o) {
-    	if (o == this)
+    	if (o == this) {
     		return true;
-    	if (!(o instanceof Menu1rstLevel))
+    	}
+    	if (!(o instanceof Menu1rstLevel)) {
     		return false;
+    	}
     	Menu1rstLevel menu1rNivel = (Menu1rstLevel) o;
     	return (menu1rNivel.key.equals(key));
     }

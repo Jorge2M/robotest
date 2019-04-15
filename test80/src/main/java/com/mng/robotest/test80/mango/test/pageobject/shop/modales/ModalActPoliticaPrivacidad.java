@@ -19,7 +19,8 @@ public class ModalActPoliticaPrivacidad extends WebdrvWrapp {
 	}
 	
 	public static void clickOkIfVisible(WebDriver driver) throws Exception {
-		if (isVisible(driver))
+		if (isVisible(driver)) {
 			clickOk(driver);
+		}
 	}
 }

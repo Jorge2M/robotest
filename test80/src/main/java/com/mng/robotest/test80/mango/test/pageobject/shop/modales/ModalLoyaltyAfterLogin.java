@@ -23,7 +23,8 @@ public class ModalLoyaltyAfterLogin extends WebdrvWrapp {
 	}
 	
 	public static void closeModalIfVisibleUntil(int maxSecondsToWait, WebDriver driver) throws Exception {
-		if (isModalVisibleUntil(maxSecondsToWait, driver))
+		if (isModalVisibleUntil(maxSecondsToWait, driver)) {
 			closeModal(driver);
+		}
 	}
 }

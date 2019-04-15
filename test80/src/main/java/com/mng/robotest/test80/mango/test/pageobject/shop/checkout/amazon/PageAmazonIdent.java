@@ -12,17 +12,17 @@ public class PageAmazonIdent extends WebdrvWrapp {
     static String XPathInputPassword = "//input[@id='ap_password']";
     
     public static boolean isLogoAmazon(WebDriver driver) { 
-        if (isElementVisible(driver, By.xpath(XPathImgLogoAmazon)))
+        if (isElementVisible(driver, By.xpath(XPathImgLogoAmazon))) {
             return true;
-        
+        }
         return false;
     }
     
     public static boolean isPageIdent(WebDriver driver) {
         if (isElementVisible(driver, By.xpath(XPathInputEmail)) &&
-            isElementVisible(driver, By.xpath(XPathInputPassword)) )
+            isElementVisible(driver, By.xpath(XPathInputPassword))) {
             return true;
-        
+        }
         return false;
     }
 }

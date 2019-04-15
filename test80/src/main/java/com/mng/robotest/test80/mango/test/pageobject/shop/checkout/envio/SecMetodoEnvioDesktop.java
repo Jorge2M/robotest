@@ -35,8 +35,9 @@ public class SecMetodoEnvioDesktop extends WebdrvWrapp {
     
     public static void selectMetodoIfNotSelected(TipoTransporte tipoTransporte, WebDriver driver) throws Exception {
     	int zeroSecondsToWait = 0;
-        if (!isBlockSelectedUntil(tipoTransporte, zeroSecondsToWait, driver))
+        if (!isBlockSelectedUntil(tipoTransporte, zeroSecondsToWait, driver)) {
         	selectMetodo(tipoTransporte, driver);
+        }
     }
     
     public static void selectMetodo(TipoTransporte tipoTransporte, WebDriver driver) throws Exception {

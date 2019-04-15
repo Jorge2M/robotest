@@ -36,9 +36,9 @@ public class FilterTNGxmlTRun {
      */
     public static void filterWithTCasesToExec(XmlTest testRun, String[] testCaseList, Channel channel, AppEcom appE) {
         try {
-            if (testCaseList!=null && testCaseList.length>0 && "*".compareTo(testCaseList[0])!=0)
+            if (testCaseList!=null && testCaseList.length>0 && "*".compareTo(testCaseList[0])!=0) {
                 includeOnlyTestCasesInXmlTest(testRun, testCaseList);
-                
+            }
             removeDependenciesWithGroupsNotExecuted((XmlTestP80)testRun, channel, appE);
         }
         catch (ClassNotFoundException e) {
@@ -58,8 +58,9 @@ public class FilterTNGxmlTRun {
         //Filter by possible groups based in channel and app
         ArrayList<String> listOfPossibleGroups = commonsXML.getListOfPossibleGroups(channel, appE);
         for (TestMethod tmethod : listTests) {
-            if (groupsContainsAnyGroup(tmethod.getAnnotationTest().groups(), listOfPossibleGroups))
+            if (groupsContainsAnyGroup(tmethod.getAnnotationTest().groups(), listOfPossibleGroups)) {
                 listTestToReturn.add(tmethod);
+            }
         }
         
         return listTestToReturn;
@@ -67,8 +68,9 @@ public class FilterTNGxmlTRun {
     
     private static boolean groupsContainsAnyGroup(String[] groupsTest, ArrayList<String> possibleGroups) {
         for (int i=0; i<groupsTest.length; i++) {
-            if (possibleGroups.contains(groupsTest[i]))
+            if (possibleGroups.contains(groupsTest[i])) {
                 return true;
+            }
         }
         
         return false;
@@ -86,8 +88,9 @@ public class FilterTNGxmlTRun {
                 for (Method method : methodListToRun) {
                     ArrayList<Annotation> annotationsList = new ArrayList<>(Arrays.asList(method.getDeclaredAnnotations()));
                     for (Annotation annotation : annotationsList) {
-                        if (annotation.annotationType()==org.testng.annotations.Test.class)
+                        if (annotation.annotationType()==org.testng.annotations.Test.class) {
                             listOfAnnotationsOfTestCases.add(new TestMethod((Test)annotation, method));
+                        }
                     }
                 }
             }
@@ -107,8 +110,9 @@ public class FilterTNGxmlTRun {
         for (Iterator<XmlClass> iterator = testRun.getClasses().iterator(); iterator.hasNext(); ) {
             XmlClass xmlClass = iterator.next();
             includeOnlyTestCasesInXmlClass(xmlClass, testCasesForInclude);
-            if (xmlClass.getIncludedMethods().size()==0)
+            if (xmlClass.getIncludedMethods().size()==0) {
                 iterator.remove();
+            }
         }
     }
     
@@ -163,14 +167,16 @@ public class FilterTNGxmlTRun {
         List<XmlInclude> includedMethods = xmlClass.getIncludedMethods();
         
         //Si no existe un include de método a nivel de Clase -> incluiremos todos los métodos de dicha clase 
-        if (xmlClass.getIncludedMethods().isEmpty())
+        if (xmlClass.getIncludedMethods().isEmpty()) {
             return methodListOfClass;
+        }
 
         //Si existe un include -> incluiremos sólo los métodos asociados a includes
         ArrayList<Method> methodListFiltered = new ArrayList<>();
         for (Method methodOfClass : methodListOfClass) {
-            if (listOfIncludesContains(includedMethods, methodOfClass))
+            if (listOfIncludesContains(includedMethods, methodOfClass)) {
                 methodListFiltered.add(methodOfClass);
+            }
         }
         
         return methodListFiltered;
@@ -178,8 +184,9 @@ public class FilterTNGxmlTRun {
     
     private static boolean listOfIncludesContains(List<XmlInclude> listOfIncludes, Method method) {
         for (XmlInclude include : listOfIncludes) {
-            if (include.getName().compareTo(method.getName())==0)
+            if (include.getName().compareTo(method.getName())==0) {
                 return true;
+            }
         }
         
         return false;
@@ -188,8 +195,9 @@ public class FilterTNGxmlTRun {
     public static boolean testCasesContainsMethod(ArrayList<String> testCases, String methodName) {
         for (String testCase : testCases) {
             if (testCase.contains(methodName) ||  
-                methodName.indexOf(getCodeFromTestCase(testCase))==0)
+                methodName.indexOf(getCodeFromTestCase(testCase))==0) {
                 return true;
+            }
         }
         
         return false;
@@ -197,9 +205,9 @@ public class FilterTNGxmlTRun {
     
     private static String getCodeFromTestCase(String testCase) {
         int posUnderscore = testCase.indexOf("_");
-        if (posUnderscore<0)
+        if (posUnderscore<0) {
             return testCase;
-        
+        }
         return testCase.substring(0, posUnderscore);
     }
 }

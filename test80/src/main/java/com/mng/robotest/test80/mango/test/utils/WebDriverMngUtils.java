@@ -201,8 +201,9 @@ public class WebDriverMngUtils {
         List<WebElement> allImages = eventFiringWebDriver.findElements(By.xpath("//img[@src and not(@src=\"\")]"));
         
         //Si el tamaño de la lista de imágenes es superior al máximo obtenemos un subconjunto
-        if (allImages.size() > maxImages)
+        if (allImages.size() > maxImages) {
             allImages = allImages.subList(0, maxImages-1);
+        }
         
         // Declaring a dynamic string of array which will store src of all the broken images
         List<String> BrokenimageUrl = new ArrayList<>();
@@ -237,8 +238,9 @@ public class WebDriverMngUtils {
                             // Buscamos el error en el contexto y obtenemos el número
                             String descError = ". <br><b>Image Broken!</b> " + ",id:" + image.getAttribute("id") + ",src: " + currentImageUrl + " ";
                             int numErrors = 0;
-                            if (ctx.getAttribute(descError) != null)
+                            if (ctx.getAttribute(descError) != null) {
                                 numErrors = (Integer)ctx.getAttribute(descError);
+                            }
     
                             // Actualizamos el número de errores en el contexto
                             numErrors += 1;
@@ -246,11 +248,12 @@ public class WebDriverMngUtils {
     
                             // Sólo si hemos superado el máximo de errores (para todas las imágenes cortadas detectadas) mostraremos el warning en el caso de prueba
                             if (numErrors > maxErrors) {
-                                if (!(resultado.getResultado() == ResultadoErrores.Resultado.ERRORES))
+                                if (!(resultado.getResultado() == ResultadoErrores.Resultado.ERRORES)) {
                                     resultado.setResultado(ResultadoErrores.Resultado.MAX_ERRORES);
-                            } 
-                            else
+                                }
+                            } else {
                                 resultado.setResultado(ResultadoErrores.Resultado.ERRORES);
+                            }
     
                             // Siempre pintaremos el mensaje de warning en el caso de prueba y en la consola
                             listaImgBroken.add(driver.getCurrentUrl() + descError);
@@ -279,8 +282,9 @@ public class WebDriverMngUtils {
         src = image.getAttribute("src");
         if (src==null || "".compareTo(src)==0) {
             data_src = image.getAttribute("data-src");
-            if (data_src!=null && "".compareTo(data_src)!=0)
+            if (data_src!=null && "".compareTo(data_src)!=0) {
                 src = data_src;
+            }
         }
         
         return src;
@@ -292,8 +296,9 @@ public class WebDriverMngUtils {
             HttpGet request = new HttpGet(getImageSrc(imgElement));
             try (CloseableHttpResponse response = client.execute(request)) {
                 // verifying response code he HttpStatus should be 2xx if not, increment as invalid images count
-                if (String.valueOf(response.getStatusLine().getStatusCode()).matches("[2]\\d\\d"))
+                if (String.valueOf(response.getStatusLine().getStatusCode()).matches("[2]\\d\\d")) {
                     imgActive = true;
+                }
             }
         } catch (Exception e) {
             pLogger.warn("Problem verifying Image Active", e);
@@ -330,9 +335,9 @@ public class WebDriverMngUtils {
             }
         }
 
-        if (id.contains("sonar-tracking"))
+        if (id.contains("sonar-tracking")) {
             broken = false;
-
+        }
         return broken;
     }
 }

@@ -29,13 +29,14 @@ public class SSecSelTallasFichaNew extends WebdrvWrapp {
     
     public static String getTallaAlfSelected(WebDriver driver) {
         if (isElementPresent(driver, By.xpath(XPathTallaSelected))) {
-            if (isTallaUnica(driver))
+            if (isTallaUnica(driver)) {
                return "unitalla";
+            }
             
             String textTalla = driver.findElement(By.xpath(XPathTallaSelected)).getText();
-            if (textTalla.contains(" ["))
+            if (textTalla.contains(" [")) {
                 return (textTalla.substring(0, textTalla.indexOf(" [")));
-            
+            }
             return textTalla;
         }
         
@@ -44,9 +45,9 @@ public class SSecSelTallasFichaNew extends WebdrvWrapp {
     
     public static String getTallaNumSelected(WebDriver driver) {
         if (isElementPresent(driver, By.xpath(XPathTallaSelected))) {
-            if (isElementPresent(driver, By.xpath(XPathTallaUnica)))
+            if (isElementPresent(driver, By.xpath(XPathTallaUnica))) {
                 return ("99");
-                
+            }
             return (driver.findElement(By.xpath(XPathTallaSelected)).getAttribute("data-value"));
         }    
         
@@ -55,17 +56,17 @@ public class SSecSelTallasFichaNew extends WebdrvWrapp {
     
     public static String getTallaAlf(int posicion, WebDriver driver) {
     	String xpathTalla = "(" + XPathTallaItem + ")[" + posicion + "]";
-    	if (isElementPresent(driver, By.xpath(xpathTalla)))
+    	if (isElementPresent(driver, By.xpath(xpathTalla))) {
     		return (driver.findElement(By.xpath(xpathTalla)).getAttribute("innerHTML"));
-    	
+    	}
     	return "";
     }
     
     public static String getTallaCodNum(int posicion, WebDriver driver) {
     	String xpathTalla = "(" + XPathTallaItem + ")[" + posicion + "]";
-    	if (isElementPresent(driver, By.xpath(xpathTalla)))
+    	if (isElementPresent(driver, By.xpath(xpathTalla))) {
     		return (driver.findElement(By.xpath(xpathTalla)).getAttribute("data-value"));
-    	
+    	}
     	return "";
     }
 
@@ -98,21 +99,24 @@ public class SSecSelTallasFichaNew extends WebdrvWrapp {
     public static void selectTallaByValue(String codigoNumericoTalla, WebDriver driver) {
         unfoldListTallasIfNotYet(driver);
         String xpathTalla = getXPathTallaByCodigo(codigoNumericoTalla);
-        if (isElementClickable(driver, By.xpath(xpathTalla)))
+        if (isElementClickable(driver, By.xpath(xpathTalla))) {
             driver.findElement(By.xpath(xpathTalla)).click();
+        }
     }
     
     public static void selectTallaByIndex(int posicion, WebDriver driver) {
         unfoldListTallasIfNotYet(driver);
         String xpathTallaByPos = "(" + XPathTallaItem + ")[" + posicion + "]";
-        if (isElementClickable(driver, By.xpath(xpathTallaByPos)))
+        if (isElementClickable(driver, By.xpath(xpathTallaByPos))) {
             driver.findElement(By.xpath(xpathTallaByPos)).click();
+        }
     }
     
     public static void selectFirstTallaAvailable(WebDriver driver) {
         unfoldListTallasIfNotYet(driver);
-        if (isElementClickable(driver, By.xpath(XPathTallaAvailable)))
+        if (isElementClickable(driver, By.xpath(XPathTallaAvailable))) {
             driver.findElement(By.xpath(XPathTallaAvailable)).click();
+        }
     }
     
     public static int getNumOptionsTallasNoDisponibles(WebDriver driver) {

@@ -34,9 +34,10 @@ public class NetTrafficMng {
 	final static String nameProxyInContext = "BrowserMobProxy";
 	
 	public NetTrafficMng() {
-		if (proxyInThread==null) 
+		if (proxyInThread==null) {
 			proxyInThread = new ThreadLocal<>();
-		
+		}
+			
 		BrowserMobProxy proxy = getProxy();
 		if (proxy==null || ((BrowserMobProxyServer)proxy).isStopped()) {
 			//Creación del proxy
@@ -80,21 +81,23 @@ public class NetTrafficMng {
 	}
 	
 	public static BrowserMobProxy getProxy() {
-		if (proxyInThread!=null)
+		if (proxyInThread!=null) {
 			return proxyInThread.get();
-		
+		}
 		return null;
 	}
 	
 	public static void destroyProxy() {
-		if (proxyInThread!=null)
+		if (proxyInThread!=null) {
 			proxyInThread.remove();
+		}
 	}
 	
 	private int checkoutPort(int numPort) {
 		for (int i=0; i<listPortsAssigned.size(); i++) {
-			if (listPortsAssigned.get(i)==numPort)
+			if (listPortsAssigned.get(i)==numPort) {
 				listPortsAssigned.remove(i);
+			}
 		}
 	
 		listPortsAssigned.addLast(numPort);
@@ -103,8 +106,9 @@ public class NetTrafficMng {
 	
 	public int checkoutPort() {
 		synchronized(NetTrafficMng.class) {
-			if (listPortsAssigned==null)
+			if (listPortsAssigned==null) {
 				listPortsAssigned = new LinkedList<>();
+			}
 			
 			if (!listPortsAssigned.isEmpty()) {
 				if (listPortsAssigned.size()>=maxSizeListPorts) {

@@ -32,12 +32,13 @@ public class ListAllCountrys {
             Channel channel = ChannelEnum.getChannel(channelStr);
             
             boolean recorreMenus=false;
-            if (RecorreMenus.compareTo("true")==0) 
+            if (RecorreMenus.compareTo("true")==0) {
                 recorreMenus = true;
-			
+            }
             boolean recorreBanners=false;
-            if (RecorreBanners.compareTo("true")==0) 
+            if (RecorreBanners.compareTo("true")==0) {
                 recorreBanners = true;
+            }
 	
             //Obtenemos la lista de países como lista de enteros
             List<Integer> listaPaisesInt = UtilsMangoTest.getListaPaisesInt(countrysStr);
@@ -83,12 +84,13 @@ public class ListAllCountrys {
                                 break;
                             case "3": //Test acceso país + cambio de país
                                 //En el 1er caso de prueba país/idioma origen y país/idioma destino serán los mismos
-                                if (paisAnt==null) 
+                                if (paisAnt==null) {
                                     paisAnt = pais;
-                                
-                                if (idiomaAnt==null) 
+                                }
+                                if (idiomaAnt==null) {
                                     idiomaAnt = idioma;
-        	            					    
+                                }			    
+                                
                                 //Probamos el acceso con el país actual + el cambio de país con el anterior
                                 listTestsCambioPais.add(new PaisIdiomaCambioPais(dCtxSh, paisAnt, idiomaAnt, prioridad));
                                 System.out.println(

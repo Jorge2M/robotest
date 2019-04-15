@@ -43,8 +43,9 @@ public class ListAllNodes {
             this.addNodosToMap(mapNodosTotal, accesos, urlErrorpage, appEcom);
 	        
             boolean testLinksPieFlag = false;
-            if (testLinksPie.compareTo("true")==0)
-        	testLinksPieFlag = true;
+            if (testLinksPie.compareTo("true")==0) {
+            	testLinksPieFlag = true;
+            }
 	
             int ii=0;
             int prioridad=0;

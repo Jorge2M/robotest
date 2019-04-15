@@ -282,9 +282,9 @@ public class Pais {
     }
     
     public LayoutPago getLayoutPago() {
-    	if (getTipopago()==null || getTipopago().compareTo("PSP")!=0)
+    	if (getTipopago()==null || getTipopago().compareTo("PSP")!=0) {
     		return LayoutPago.Linea;
-    	
+    	}
     	return LayoutPago.Pestaña;
     }    
 
@@ -383,9 +383,9 @@ public class Pais {
      * @return si el país tiene o no venta online
      */
     public boolean isVentaOnline() {
-        if (this.shop_online.compareTo("true")==0)
+        if (this.shop_online.compareTo("true")==0) {
             return true;
-        
+        }
         return false;
     }
     
@@ -412,27 +412,30 @@ public class Pais {
                     switch (app) {
                     case votf:
                         if (pago.getVotf()!=null && pago.getVotf().compareTo("n")!=0) {
-                            if (pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0)
+                            if (pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0) {
                                 listPagosTest.add(pago);
-                            else
+                            } else {
                                 listPagosApp.add(pago);
+                            }
                         }
                         break;
                     case shop:
                         if (pago.getShop().compareTo("n")!=0) {
-                            if (pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0)
+                            if (pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0) {
                                 listPagosTest.add(pago);
-                            else
+                            } else {
                                 listPagosApp.add(pago);
+                            }
                         }
                         break;
                     case outlet:
                     default:
                         if (pago.getOutlet().compareTo("n")!=0) {
-                            if (pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0)
+                            if (pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0) {
                                 listPagosTest.add(pago);
-                            else
-                                listPagosApp.add(pago);  
+                            } else {
+                                listPagosApp.add(pago);
+                            }
                         }                        
                         break;
                     }
@@ -490,8 +493,9 @@ public class Pais {
         Iterator<Pago> itPagos = listaPagos.iterator();
         while (itPagos.hasNext()) {
             Pago pago = itPagos.next();
-            if (pago.validoAlmacenMontcada())
+            if (pago.validoAlmacenMontcada()) {
                 listaPagosReturn.add(pago);
+            }
         }
     	
         return listaPagosReturn;
@@ -524,8 +528,9 @@ public class Pais {
     	
         //Comprimimos la lista
         for (int i=0; i<listaTmpEnOrden.size(); i++) {
-            if (listaTmpEnOrden.get(i)!=null) 
+            if (listaTmpEnOrden.get(i)!=null) {
                 listaEnOrdenRet.add(listaTmpEnOrden.get(i));
+            }
         }
     	
         return listaEnOrdenRet;
@@ -540,8 +545,9 @@ public class Pais {
         List<Pago> listPagosApp = getListPagosTest(app, testEmpleado); 
         for (int i=0; i<listPagosApp.size(); i++) {
             //Filtramos el pago "storecredit"
-            if (listPagosApp.get(i).getTypePago()!=TypePago.StoreCredit)
+            if (listPagosApp.get(i).getTypePago()!=TypePago.StoreCredit) {
                 metodosPago = metodosPago + ",<br> " + listPagosApp.get(i).getNombre();
+            }
         }
     	
         return metodosPago;

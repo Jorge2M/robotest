@@ -25,16 +25,16 @@ public class SecBillpay extends WebdrvWrapp {
      * @return el XPATH correspondiente al radio 'acepto' de billpay
      */
     public static String getXPath_radioAcepto(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathRadioAceptoMobil;
-        
+        }
         return XPathRadioAceptoDesktop;
     }
 
     public static boolean isVisibleUntil(Channel channel, int maxSecondsToWait, WebDriver driver) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return (isElementVisibleUntil(driver, By.xpath(XPathBlockRechnungMobil + " | " + XPathBlockLastschriftMobil), maxSecondsToWait));
-
+        }
         return (isElementVisibleUntil(driver, By.xpath(XPathBlockBillpayDesktop), maxSecondsToWait));
     }
     

@@ -47,8 +47,9 @@ public abstract class CampanasData {
 	public HashSet<String> getListIdiomas(String codPais) {
 		HashSet<String> listIdiomas = new HashSet<>();
 		for (DataCampana dataCampana : listCampanas) {
-			if (dataCampana.codPais.compareTo(codPais)==0)
+			if (dataCampana.codPais.compareTo(codPais)==0) {
 				listIdiomas.add(dataCampana.codIdioma);
+			}
 		}
 		
 		return listIdiomas;		
@@ -57,8 +58,9 @@ public abstract class CampanasData {
 	public HashSet<String> getListLines(String codPais) {
 		HashSet<String> listLines = new HashSet<>();
 		for (DataCampana dataCampana : listCampanas) {
-			if (dataCampana.codPais.compareTo(codPais)==0)
+			if (dataCampana.codPais.compareTo(codPais)==0) {
 				listLines.add(dataCampana.linea);
+			}
 		}
 		
 		return listLines;		

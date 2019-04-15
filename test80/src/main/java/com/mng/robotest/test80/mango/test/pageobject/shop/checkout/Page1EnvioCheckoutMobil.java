@@ -114,8 +114,9 @@ public class Page1EnvioCheckoutMobil extends WebdrvWrapp {
 		// Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no
 		// funciona así que ejecutamos un 2o
 		Thread.sleep(200);
-		if (isVisibleButtonAceptarPromoEmpl(driver))
+		if (isVisibleButtonAceptarPromoEmpl(driver)) {
 			clickAndWaitLoad(driver, By.xpath(XPathAceptarPromoEmpl));
+		}
 	}
 
 	public static void inputCodigoPromoAndAccept(String codigoPromo, WebDriver driver) throws Exception {
@@ -144,13 +145,14 @@ public class Page1EnvioCheckoutMobil extends WebdrvWrapp {
 	
     public static void clickEliminarValeIfExists(WebDriver driver) throws Exception {
     	By byEliminar = By.xpath(XPathLinkCancelarCodigo);
-    	if (isElementVisible(driver, byEliminar))
+    	if (isElementVisible(driver, byEliminar)) {
     		clickAndWaitLoad(driver, byEliminar);
+    	}
     }
 	public static String getImporteDescuentoEmpleado(WebDriver driver) {
-		if (isElementPresent(driver, By.xpath(XPathDescuentoEmpleado)))
+		if (isElementPresent(driver, By.xpath(XPathDescuentoEmpleado))) {
 			return (driver.findElement(By.xpath(XPathDescuentoEmpleado)).getText());
-		
+		}
 		return "";
 	}
 
@@ -170,9 +172,9 @@ public class Page1EnvioCheckoutMobil extends WebdrvWrapp {
 
 	public static void selectMetodoAfterPositioningIn1Envio(TipoTransporte tipoTransporte, WebDriver driver)
 	throws Exception {
-		if (!isPageUntil(0, driver))
+		if (!isPageUntil(0, driver)) {
 			clickLink1EnvioAndWaitForPage(driver);
-
+		}
 		selectMetodoEnvioAfterLinkOtrosIfNeeded(tipoTransporte, driver);
 	}
 
@@ -189,8 +191,9 @@ public class Page1EnvioCheckoutMobil extends WebdrvWrapp {
 	}
 
 	public static void openOtrosMetodosDeEnvio(WebDriver driver) throws Exception {
-		if (isClosedOtrosMetodos(driver))
+		if (isClosedOtrosMetodos(driver)) {
 			clickAndWaitLoad(driver, By.xpath(XPathLinkOtrosMetEnvioClosed), TypeOfClick.javascript);
+		}
 	}
 
 	public static boolean isClosedOtrosMetodos(WebDriver driver) {
@@ -203,8 +206,9 @@ public class Page1EnvioCheckoutMobil extends WebdrvWrapp {
 		for (int i = 0; i < maxSecondsToWait; i++) {
 			try {
 				if (driver.findElement(By.xpath(xpathBlock)) != null && 
-					driver.findElement(By.xpath(xpathBlock)).getAttribute("class").contains("selected"))
+					driver.findElement(By.xpath(xpathBlock)).getAttribute("class").contains("selected")) {
 					return true;
+				}
 			} catch (StaleElementReferenceException ex) {
 				//
 			}
@@ -221,9 +225,9 @@ public class Page1EnvioCheckoutMobil extends WebdrvWrapp {
 
 	public static String getTextDireccionEnvioCompleta(WebDriver driver) {
 		String direccion = "";
-		if (getElementsVisible(driver, By.xpath(XPathDireccionEnvio)).size() > 0)
+		if (getElementsVisible(driver, By.xpath(XPathDireccionEnvio)).size() > 0) {
 			direccion = getElementsVisible(driver, By.xpath(XPathDireccionEnvio)).get(0).getText();
-
+		}
 		return direccion;
 	}
 
@@ -236,8 +240,9 @@ public class Page1EnvioCheckoutMobil extends WebdrvWrapp {
 
 		// Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no
 		// funciona así que ejecutamos un 2o
-		if (isVisibleButtonContinuarUntil(2, driver))
+		if (isVisibleButtonContinuarUntil(2, driver)) {
 			clickAndWaitLoad(driver, By.xpath(XPathBotonContinuar), TypeOfClick.javascript);
+		}
 	}
 
 	public static void clickContinuarAndWaitPage2(WebDriver driver) throws Exception {

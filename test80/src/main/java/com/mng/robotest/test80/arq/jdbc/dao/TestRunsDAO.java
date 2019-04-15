@@ -87,9 +87,9 @@ public class TestRunsDAO {
                 
                 //De momento en DEVICE introducimos el dispositivo de BrowserStack
                 String device = "";
-                if (null != ctx.getCurrentXmlTest().getParameter(BStackDataMovil.device_paramname))
+                if (null != ctx.getCurrentXmlTest().getParameter(BStackDataMovil.device_paramname)) {
                     device = ctx.getCurrentXmlTest().getParameter(BStackDataMovil.device_paramname);
-                
+                }
                 insert.setString(4, device); //
                 insert.setInt(5, resultStep.maxResultScript.getIdNumerid());
                 insert.setInt(6, resultStep.maxresultTNG.getIdNumerid());

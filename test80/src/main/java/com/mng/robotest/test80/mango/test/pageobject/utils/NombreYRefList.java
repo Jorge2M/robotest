@@ -18,9 +18,9 @@ public class NombreYRefList {
     }
     
     public int size() {
-        if (this.listNombreYRef==null)
+        if (this.listNombreYRef==null) {
             return 0;
-        
+        }
         return this.listNombreYRef.size();
     }
     
@@ -46,11 +46,12 @@ public class NombreYRefList {
     
     public NombreYRef getFirstArticleThatNotFitWith(NombreYRefList otherList) {
         for (int i=0; i<this.size(); i++) {
-            if (i>=otherList.size())
+            if (i>=otherList.size()) {
                 return this.get(i);
-            
-            if (!this.get(i).equals(otherList.get(i)))
-               return this.get(i);                    
+            }
+            if (!this.get(i).equals(otherList.get(i))) {
+            	return this.get(i);                    
+            }
         }
         
         return null;
@@ -87,16 +88,17 @@ public class NombreYRefList {
            
            //Artículo nodo actual
            result += "<div style=\"display:table-cell;border:solid;border-width:thin;padding-left:3px;padding-right:3px;\">";
-           if (it1.hasNext())
+           if (it1.hasNext()) {
                result+=it1.next().toString();
+           }
            result+="</div>";
            
            //Artículo nodo anterior
            result += "<div style=\"display:table-cell;border:solid;border-width:thin;padding-left:3px;padding-right:3px;\">";
-           if (it2.hasNext())
+           if (it2.hasNext()) {
                result+=it2.next().toString();
+           }
            result+="</div>";
-           
            result+="</div>";
        }
        

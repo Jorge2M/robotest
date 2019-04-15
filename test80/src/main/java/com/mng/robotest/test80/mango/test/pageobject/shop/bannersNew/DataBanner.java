@@ -104,16 +104,16 @@ public class DataBanner {
 	}
 	
 	public String getText() {
-		if ("".compareTo(getDirectText())!=0)
+		if ("".compareTo(getDirectText())!=0) {
 			return getDirectText();
-		
+		}
 		return (getFloatingText());
 	}
 	
     public DestinoType getDestinoType() {
-        if (urlBanner!=null && urlBanner.contains("redirect.faces") && urlBanner.contains("producto="))
+        if (urlBanner!=null && urlBanner.contains("redirect.faces") && urlBanner.contains("producto=")) {
             return (DestinoType.Ficha);
-        
+        }
         return (DestinoType.Otros);
     }
     

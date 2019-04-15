@@ -42,8 +42,9 @@ public abstract class SecCabecera extends WebdrvWrapp {
     
     public void hoverLogoMango() throws Exception {
         String xpathLink = getXPathLogoMango();
-        if (isElementPresent(driver, By.xpath(xpathLink)))
+        if (isElementPresent(driver, By.xpath(xpathLink))) {
         	moveToElement(By.xpath(xpathLink), driver);
+        }
     }
     
     public boolean validaLogoMangoGoesToIdioma(IdiomaPais idioma) {
@@ -55,9 +56,9 @@ public abstract class SecCabecera extends WebdrvWrapp {
     public int getNumArticulosBolsa() throws Exception {
         int numArticulos = 0;
         String numArtStr = getNumberArtIcono();
-        if (numArtStr.matches("\\d+$"))
+        if (numArtStr.matches("\\d+$")) {
             numArticulos = Integer.valueOf(numArtStr).intValue();
-        
+        }
         return numArticulos;
     }    
     
@@ -69,9 +70,9 @@ public abstract class SecCabecera extends WebdrvWrapp {
         String articulos = "0";
         waitForPageLoaded(driver); //Para evitar staleElement en la línea posterior
         String xpathNumberArtIcono = getXPathNumberArtIcono();
-        if (isElementVisible(driver, By.xpath(xpathNumberArtIcono)))
+        if (isElementVisible(driver, By.xpath(xpathNumberArtIcono))) {
             articulos = driver.findElement(By.xpath(xpathNumberArtIcono)).getText();
-        
+        }
         return articulos;
     }
 }

@@ -33,7 +33,8 @@ public class ModalDirecFactura extends ModalDireccion {
         clickAndWaitLoad(driver, By.xpath(XPathButtonUpdate));
         
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-        if (isVisibleButtonActualizar(driver))
+        if (isVisibleButtonActualizar(driver)) {
         	clickAndWaitLoad(driver, By.xpath(XPathButtonUpdate));
+        }
     }
 }

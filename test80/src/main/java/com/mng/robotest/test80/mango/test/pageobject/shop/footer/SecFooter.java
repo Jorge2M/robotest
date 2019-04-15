@@ -71,8 +71,9 @@ public class SecFooter extends WebdrvWrapp {
     	public static List<FooterLink> getFooterLinksFiltered(AppEcom app, Channel channel) {
     		List<FooterLink> listLinksToReturn = new ArrayList<>();
     		for (FooterLink footerLink : FooterLink.values()) {
-    			if (footerLink.appList.contains(app) && footerLink.channel.contains(channel))
+    			if (footerLink.appList.contains(app) && footerLink.channel.contains(channel)) {
     				listLinksToReturn.add(footerLink);
+    			}
     		}
 
     		return listLinksToReturn;
@@ -105,9 +106,9 @@ public class SecFooter extends WebdrvWrapp {
     }
     
     private static String getXPathLinkCambioPais(AppEcom app) {
-        if (app==AppEcom.outlet)
+        if (app==AppEcom.outlet) {
             return XPathCambioPaisOutlet;
-        
+        }
         return XPathCambioPaisShop;
     }
     
@@ -146,8 +147,9 @@ public class SecFooter extends WebdrvWrapp {
     public static boolean checkFooters(List<FooterLink> listFooterLinksToValidate, AppEcom app, WebDriver driver) {
         for (FooterLink footerLink : listFooterLinksToValidate) {
         	String xpathLink = getXPathLink(footerLink, app);
-            if (!isElementPresent(driver, By.xpath(xpathLink)))
+            if (!isElementPresent(driver, By.xpath(xpathLink))) {
                 return false;
+            }
         }
         
         return true;
@@ -156,8 +158,9 @@ public class SecFooter extends WebdrvWrapp {
     public static String getNewsLetterMsgText(WebDriver driver) {
         try {
             WebElement titleNws = driver.findElement(By.xpath(XPathNewsLetterMsg));
-            if (titleNws!=null)
+            if (titleNws!=null) {
                 return driver.findElement(By.xpath(XPathNewsLetterMsg)).getText();
+            }
         }
         catch (Exception e) {
             //Retornamos ""

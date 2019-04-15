@@ -96,9 +96,9 @@ public abstract class BannerObject {
     }
     
     protected String getUrlDestinoSearchingForAnchor(WebElement banner) {
-        if (WebdrvWrapp.isElementPresent(banner, By.xpath(".//a")))
+        if (WebdrvWrapp.isElementPresent(banner, By.xpath(".//a"))) {
             return (banner.findElement(By.xpath(".//a")).getAttribute("href"));
-        
+        }
         return "";
     }
     

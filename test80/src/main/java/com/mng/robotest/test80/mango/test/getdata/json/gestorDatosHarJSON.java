@@ -52,8 +52,9 @@ public class gestorDatosHarJSON {
             JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
             if (requestJSON.get("url")!=null) {
                 if ("".compareTo(urlFilter1)==0 || requestJSON.get("url").toString().indexOf(urlFilter1)>0) {
-                    if ("".compareTo(urlFilter2)==0 || ("".compareTo(urlFilter2)!=0 && requestJSON.get("url").toString().indexOf(urlFilter2)>0))
+                    if ("".compareTo(urlFilter2)==0 || ("".compareTo(urlFilter2)!=0 && requestJSON.get("url").toString().indexOf(urlFilter2)>0)) {
                         entriesFilteredToReturn.add(entrieJSON);
+                    }
                 }
             }
         }
@@ -78,8 +79,9 @@ public class gestorDatosHarJSON {
             JSONObject entrieJSON = (JSONObject)iteratorEntries.next();
             JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
             JSONObject contentJSON = (JSONObject)responseJSON.get("content");
-            if (contentJSON.get("mimeType")!=null && contentJSON.get("mimeType").toString().contains(mimeType))
+            if (contentJSON.get("mimeType")!=null && contentJSON.get("mimeType").toString().contains(mimeType)) {
                 entriesOfMimeType.add(entrieJSON);
+            }
         }
             
         return entriesOfMimeType;

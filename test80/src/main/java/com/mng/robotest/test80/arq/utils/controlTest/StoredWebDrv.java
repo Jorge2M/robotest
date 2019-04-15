@@ -50,18 +50,16 @@ public class StoredWebDrv {
     }
     
     public boolean isFree() {
-        
-        if (this.state == stateWd.free)
+        if (this.state == stateWd.free) {
             return true;
-        
+        }
         return false;
     }
     
     public boolean isBusy() {
-        
-        if (this.state == stateWd.busy)
+        if (this.state == stateWd.busy) {
             return true;
-        
+        }
         return false;
     }
 

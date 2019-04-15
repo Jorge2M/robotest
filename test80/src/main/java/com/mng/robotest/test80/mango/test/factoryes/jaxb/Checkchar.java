@@ -31,9 +31,9 @@ public class Checkchar {
     }
 	
     public boolean checkChar() {
-        if (this.getCheck()!=null && this.getCheck().compareTo("s")==0)
+        if (this.getCheck()!=null && this.getCheck().compareTo("s")==0) {
             return true;
-
+        }
         return false;
     }
 		

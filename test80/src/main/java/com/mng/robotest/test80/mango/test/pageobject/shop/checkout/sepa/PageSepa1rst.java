@@ -20,9 +20,9 @@ public class PageSepa1rst extends WebdrvWrapp {
     static String XPathIconoSepaDesktop = XPathListOfPayments + "/li[@data-variant[contains(.,'sepa')]]";
     
     public static String getXPathIconoSepa(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathIconoSepaMobil;
-        
+        }
         return XPathIconoSepaDesktop;
     }
     
@@ -45,10 +45,11 @@ public class PageSepa1rst extends WebdrvWrapp {
     }
 
     public static void clickButtonContinuePago(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             clickAndWaitLoad(driver, By.xpath(XPathButtonContinueMobil));
-        else
+        } else {
             clickAndWaitLoad(driver, By.xpath(XPathButtonPagoDesktop));
+        }
     }
     
     public static boolean isPresentInputTitular(WebDriver driver) { 

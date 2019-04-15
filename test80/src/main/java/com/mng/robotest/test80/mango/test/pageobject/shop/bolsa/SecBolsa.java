@@ -47,16 +47,16 @@ public class SecBolsa extends WebdrvWrapp {
     private static final String XPathLinkArticulo = "//div[@class[contains(.,'itemDesc')]]/a";
     
     private static String getXPathPanelBolsa(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathPanelBolsaMobil;
- 
+        }
         return XPathPanelBolsaDesktop;
     }
     
     private static String getXPATH_BotonComprar(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathBotonComprarMobil;
-
+        }
         return XPathBotonComprarDesktop;
     }
     
@@ -79,9 +79,9 @@ public class SecBolsa extends WebdrvWrapp {
      * @return el xpath correspondiente al elemento que contiene el precio subtotal (sin el importe)
      */
     private static String getXPATH_precioSubTotal(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathPrecioSubTotalMobil;
-        
+        }
         return XPathPrecioSubTotalDesktop; 
     }    
     
@@ -90,21 +90,23 @@ public class SecBolsa extends WebdrvWrapp {
      */
     private static String getXPATH_precioTransporte(Channel channel) {
         String xpathCapaBolsa = SecBolsa.getXPathPanelBolsa(channel);
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return "(" + xpathCapaBolsa + "//div[@class[contains(.,'totalPriceContainer')]])[2]";
-
+        }
         return xpathCapaBolsa + "//*[@class='contenedor_precio_transporte']"; 
     }
 
     public static boolean isInStateUntil(StateBolsa stateBolsaExpected, Channel channel, int maxSecondsWait, WebDriver driver) {
     	switch (stateBolsaExpected) {
     	case Open:
-    		if (isElementVisibleUntil(driver, By.xpath(SecBolsa.getXPathPanelBolsa(channel)), maxSecondsWait))
+    		if (isElementVisibleUntil(driver, By.xpath(SecBolsa.getXPathPanelBolsa(channel)), maxSecondsWait)) {
     			return true;
+    		}
     		break;
     	case Closed:
-    		if (isElementInvisibleUntil(driver, By.xpath(SecBolsa.getXPathPanelBolsa(channel)), maxSecondsWait))
+    		if (isElementInvisibleUntil(driver, By.xpath(SecBolsa.getXPathPanelBolsa(channel)), maxSecondsWait)) {
     			return true;
+    		}
     		break;
     	}
     	
@@ -170,9 +172,9 @@ public class SecBolsa extends WebdrvWrapp {
     										 int maxSecodsToWait, WebDriver driver) throws Exception {
         for (int i=0; i<=maxSecodsToWait; i++) {
             String itemsPantalla = SecBolsa.getNumberArtIcono(channel, app, driver);
-            if (itemsMightHave.compareTo(itemsPantalla)==0)
+            if (itemsMightHave.compareTo(itemsPantalla)==0) {
                 return true;
-            
+            }
             Thread.sleep(1000);
         }
         
@@ -299,11 +301,13 @@ public class SecBolsa extends WebdrvWrapp {
             while (numArticulos > 0 && i < 50) { // 50 para evitar bucles infinitos
                 // Seleccionamos el link de borrar asociado a cada uno de los artículos
                 try {
-                    if (isElementPresent(driver, By.xpath(xpathDeleteArt)))
+                    if (isElementPresent(driver, By.xpath(xpathDeleteArt))) {
                         driver.findElement(By.xpath(xpathDeleteArt)).click();
+                    }
                 } catch (Exception e) {
-                    if (i==49) 
+                    if (i==49) {
                         pLogger.warn("Problem clearing articles from Bag. " + e.getClass().getName() + ". " + e.getMessage());
+                    }
                 }
 
                 try {
@@ -332,8 +336,9 @@ public class SecBolsa extends WebdrvWrapp {
     //Función que clicka en el icono de aspa que cierra la bolsa
     public static void clickIconoClose(WebDriver driver, Channel channel) throws Exception {
         if (channel==Channel.movil_web) {
-            if (isElementVisible(driver, By.xpath("//a[@class[contains(.,'icon-cross')]]")))
+            if (isElementVisible(driver, By.xpath("//a[@class[contains(.,'icon-cross')]]"))) {
                 clickAndWaitLoad(driver, By.xpath("//a[@class[contains(.,'icon-cross')]]"));
+            }
         } else {
             if (!UtilsMangoTest.findDisplayedElements(driver, By.cssSelector("p.bolsa_close.icono")).isEmpty()) {
                 clickAndWaitLoad(driver, By.cssSelector("p.bolsa_close.icono"));
@@ -348,9 +353,9 @@ public class SecBolsa extends WebdrvWrapp {
     static boolean isUnitalla(String talla) {
         if (talla.toLowerCase().compareTo("u")==0 ||
             talla.toLowerCase().compareTo("unitalla")==0 ||
-            talla.toLowerCase().compareTo("99")==0)
+            talla.toLowerCase().compareTo("99")==0) {
             return true;
-         
+        }
         return false;
     }
     

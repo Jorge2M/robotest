@@ -20,8 +20,9 @@ public class MenuTreeApp {
     
     static MenuTreeApp of(AppEcom app) {
     	for (MenuTreeApp menuTree : cacheMenusForEachApp) {
-    		if (app==menuTree.getApp())
+    		if (app==menuTree.getApp()) {
     			return menuTree;
+    		}
     	}
     	
     	//If doesnt exists -> creation, initialization and store in cache
@@ -42,8 +43,9 @@ public class MenuTreeApp {
     
     private Menu1rstLevel getMenuLevel1From(KeyMenu1rstLevel key) {
     	for (Menu1rstLevel menu1rstLevel : menus1rstLevel) {
-    		if (key.equals(menu1rstLevel.getKey()))
+    		if (key.equals(menu1rstLevel.getKey())) {
     			return menu1rstLevel;
+    		}
     	}
         
     	//Si no existe lo creamos y almacenamos en caché

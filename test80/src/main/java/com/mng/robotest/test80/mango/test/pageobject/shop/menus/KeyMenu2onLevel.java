@@ -17,10 +17,12 @@ public class KeyMenu2onLevel {
     
     @Override 
     public boolean equals(Object o) {
-    	if (o == this)
+    	if (o == this) {
     		return true;
-    	if (!(o instanceof KeyMenu2onLevel))
+    	}
+    	if (!(o instanceof KeyMenu2onLevel)) {
     		return false;
+    	}
     	KeyMenu2onLevel key = (KeyMenu2onLevel) o;
     	return (key.menu1rstLevel.equals(menu1rstLevel) &&
     			key.nombreMenu.compareTo(nombreMenu)==0);

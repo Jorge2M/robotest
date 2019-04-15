@@ -38,10 +38,11 @@ public abstract class PageFicha extends WebdrvWrapp {
     
     //Constructor estático
     public static PageFicha newInstance(AppEcom appE, Channel channel, WebDriver driver) {
-        if (appE==AppEcom.outlet || channel==Channel.movil_web)
+        if (appE==AppEcom.outlet || channel==Channel.movil_web) {
         	return (PageFichaArtOld.getNewInstance(channel, driver));
-        else
+        } else {
         	return (PageFichaArtNew.getNewInstance(channel, driver));
+        }
     }
     
     public static PageFicha newInstanceFichaNew(Channel channel, WebDriver driver) {

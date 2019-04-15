@@ -33,9 +33,9 @@ public class commonsXML {
     public static BStackDataDesktop bsDktopOSXSafari = new BStackDataDesktop(PlatformDesktopBS.OSX.getValueaAPI(), "High Sierra", "Safari", "11.0", "1920x1080");
     
     public static String getDescriptionTestRun(ParamsBean params) {
-        if (params.getVersion()==null)
+        if (params.getVersion()==null) {
             return params.getAppE() + "-" + params.getChannel() + "-" + params.getBrowser();
-        
+        }
         return params.getVersion() + "-" + params.getAppE() + "-" + params.getChannel() + "-" + params.getBrowser();
     }
     
@@ -76,10 +76,11 @@ public class commonsXML {
             parametersSuite.put(Constantes.paramEnvioCorreo, params.getEnvioCorreo());
             parametersSuite.put(Constantes.paramSiempreMail, "true");
             ArrayList<String> correosGroup = CorreosGroupDAO.getCorreosGroup(params.getEnvioCorreo());
-            if (correosGroup!=null)
+            if (correosGroup!=null) {
                 parametersSuite.put(Constantes.paramToListMail, toCommaSeparated(correosGroup));
-            else
+            } else {
                 parametersSuite.put(Constantes.paramToListMail, "eqp.ecommerce.qamango@mango.com");
+            }
             
             parametersSuite.put(Constantes.paramCcListMail, "jorge.munoz.sge@mango.com");
             parametersSuite.put(Constantes.paramAsuntoMail,  "Result TestSuite " + params.getSuiteName() + " (" + params.getAppE() + " / " + params.getURLBase() + ")");
@@ -107,18 +108,20 @@ public class commonsXML {
         //RecicleWD: Indica el modo de gestión de los webdriver/browsers
         //    true:  reutiliza el webdriver para futuros casos de prueba
         //    false: cuando acaba un caso de prueba cierra el webdriver
-        if (params.getRecicleWD()!=null && params.getRecicleWD().compareTo("true")==0)
+        if (params.getRecicleWD()!=null && params.getRecicleWD().compareTo("true")==0) {
             parametersSuite.put(Constantes.paramRecycleWD, "true");
-        else
+        } else {
             parametersSuite.put(Constantes.paramRecycleWD, "false");
+        }
         
         //Credenciales acceso a Manto
         parametersSuite.put(Constantes.paramUsrmanto, Constantes.userManto);
         parametersSuite.put(Constantes.paramPasmanto, Constantes.passwordManto);
-        if (params.getUrlManto()!=null)
+        if (params.getUrlManto()!=null) {
             parametersSuite.put(Constantes.paramUrlmanto, params.getUrlManto());
-        else
+        } else {
             parametersSuite.put(Constantes.paramUrlmanto, "http://manto.pre.mango.com");
+        }
         
         //Parámetros de acceso a Proxy
         parametersSuite.put("proxyHost", "");

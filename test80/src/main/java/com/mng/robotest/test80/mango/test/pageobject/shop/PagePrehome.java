@@ -102,12 +102,9 @@ public class PagePrehome extends WebdrvWrapp {
      * Averigua si existe el desplegable de provincias
      */
     public static boolean existeDesplProvincias(WebDriver driver) {
-        boolean existe = false;
-        if (isElementPresent(driver, By.xpath(XPathDivProvincias)) && 
-            driver.findElement(By.xpath(XPathDivProvincias)).isDisplayed())
-            existe = true;
-        
-        return existe;
+        return (
+        	isElementPresent(driver, By.xpath(XPathDivProvincias)) && 
+            driver.findElement(By.xpath(XPathDivProvincias)).isDisplayed());
     }    
     
     /**
@@ -174,8 +171,9 @@ public class PagePrehome extends WebdrvWrapp {
     public static void selectButtonForEnter(WebDriver driver, String codigoPais) {
         try {
         	boolean buttonEnterSelected = clickButtonForEnterIfExists(ButtonEnter.Enter, codigoPais, driver); 
-            if (!buttonEnterSelected)
+            if (!buttonEnterSelected) {
             	clickButtonForEnterIfExists(ButtonEnter.Continuar, codigoPais, driver);
+            }
         } 
         catch (Exception e) {
         	pLogger.warn("Exception clicking button for Enter. But perhaps the click have work fine", e);
@@ -289,10 +287,11 @@ public class PagePrehome extends WebdrvWrapp {
      */
     public static void selecionProvIdiomAndEnter(Pais pais, final IdiomaPais idioma, Channel channel, WebDriver driver) 
     throws Exception { 
-        if (existeDesplProvincias(driver))
+        if (existeDesplProvincias(driver)) {
             //Selecciona la provincia "Barcelona"
             seleccionaProvincia(driver, pais.getNombre_pais(), channel);
-    
+        }
+        
         if (pais.getListIdiomas().size() > 1) {
             //Si el país tiene más de 1 idioma seleccionar el que nos llega como parámetro
             seleccionaIdioma(driver, pais.getNombre_pais(), idioma.getCodigo().getLiteral());

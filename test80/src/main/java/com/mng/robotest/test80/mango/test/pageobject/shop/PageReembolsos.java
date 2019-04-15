@@ -125,10 +125,10 @@ public class PageReembolsos extends WebdrvWrapp {
      * @return si son visible los 3 inputs para configurar el reembolso por transferencia: banco, titular e iban
      */
     public static boolean isVisibleInputsTransf(WebDriver driver) {
-        if (isVisibleInputBanco(driver) && isVisibleInputTitular(driver) && isVisibleInputIBAN(driver))
-            return true;
-        
-        return false;
+        return (
+        	isVisibleInputBanco(driver) && 
+        	isVisibleInputTitular(driver) && 
+        	isVisibleInputIBAN(driver));
     }
     
     /**
@@ -168,8 +168,9 @@ public class PageReembolsos extends WebdrvWrapp {
      */
     public static void clickButtonSaveTransfForce(WebDriver driver) throws Exception {
         clickAndWaitLoad(driver, By.xpath(XPathButtonSaveTransf));
-        if (isElementPresent(driver, By.xpath(XPathButtonSaveTransf)))
+        if (isElementPresent(driver, By.xpath(XPathButtonSaveTransf))) {
             clickAndWaitLoad(driver, By.xpath(XPathButtonSaveTransf));
+        }
     }
     
     public static void clickButtonSaveTransf(WebDriver driver) throws Exception {
@@ -243,7 +244,8 @@ public class PageReembolsos extends WebdrvWrapp {
         clickAndWaitLoad(driver, By.xpath(XPathSaveButtonStoreCredit));
         
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-        if (isVisibleSaveButtonStoreCredit(driver))
-        	clickAndWaitLoad(driver, By.xpath(XPathSaveButtonStoreCredit));        
+        if (isVisibleSaveButtonStoreCredit(driver)) {
+        	clickAndWaitLoad(driver, By.xpath(XPathSaveButtonStoreCredit));       
+        }
     }
 }

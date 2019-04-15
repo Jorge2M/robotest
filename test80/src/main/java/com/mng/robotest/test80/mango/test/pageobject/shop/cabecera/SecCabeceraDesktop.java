@@ -59,8 +59,9 @@ public class SecCabeceraDesktop extends SecCabecera {
     public void clickIconoBolsaWhenDisp(int maxSecondsToWait) 
     throws Exception {
         String xpathBolsaLink = getXPathIconoBolsa();
-        if (isElementClickableUntil(driver, By.xpath(xpathBolsaLink), maxSecondsToWait))
+        if (isElementClickableUntil(driver, By.xpath(xpathBolsaLink), maxSecondsToWait)) {
         	clickAndWaitLoad(driver, By.xpath(xpathBolsaLink));
+        }
     }
     
     @Override

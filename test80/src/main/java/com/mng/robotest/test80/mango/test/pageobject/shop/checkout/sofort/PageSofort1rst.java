@@ -17,10 +17,11 @@ public class PageSofort1rst extends WebdrvWrapp {
     final static String xPathIconoSofort = "//input[@name='brandName' and @type='submit']";
     
     static String getXPathClickToFollow(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return xPathIconoSofort;
-        else
+        } else {
             return xPathFigurasButtonDesktop;
+        }
     }
     
     public static boolean isPageVisibleUntil(int maxSeconds, Channel channel, WebDriver driver) {

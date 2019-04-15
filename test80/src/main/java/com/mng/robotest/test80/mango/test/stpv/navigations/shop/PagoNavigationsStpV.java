@@ -149,7 +149,7 @@ public class PagoNavigationsStpV {
                 testInputCodPromoEmpl(dCtxSh, dataBag, driver);
             } else {
                 if (dCtxSh.vale!=null) {
-                    if (dCtxSh.channel == Channel.movil_web){
+                    if (dCtxSh.channel == Channel.movil_web) {
                         Page1EnvioCheckoutMobil.inputCodigoPromo(dCtxSh.vale.getCodigoVale(), driver);
                     } else {
                     	testValeDescuento(dCtxSh.vale, dataBag, dCtxSh.appE, driver);
@@ -243,8 +243,9 @@ public class PagoNavigationsStpV {
                     Constantes.AnalyticsVal.Criteo,
                     Constantes.AnalyticsVal.DataLayer);
             if (dataPedido.getPago().getTestpolyvore()!=null && 
-                dataPedido.getPago().getTestpolyvore().compareTo("s")==0) 
+                dataPedido.getPago().getTestpolyvore().compareTo("s")==0) { 
                 analyticSet.add(Constantes.AnalyticsVal.Polyvore);
+            }
             
             PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, dataPedido, analyticSet, driver);
         }

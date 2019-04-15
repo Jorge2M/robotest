@@ -21,15 +21,14 @@ public class NombreYRef {
     
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof NombreYRef))
+        if (!(o instanceof NombreYRef)) {
             return false;
+        }
         
         NombreYRef otherObject = (NombreYRef)o;
-        if (this.nombre.compareTo(otherObject.getNombre())==0 &&
-            this.referencia.compareTo(otherObject.getReferencia())==0)
-            return true;
-        
-        return false;    
+        return (
+        	this.nombre.compareTo(otherObject.getNombre())==0 &&
+            this.referencia.compareTo(otherObject.getReferencia())==0);   
     }
     
     @Override

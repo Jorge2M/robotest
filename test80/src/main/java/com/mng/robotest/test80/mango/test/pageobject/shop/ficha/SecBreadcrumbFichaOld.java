@@ -36,17 +36,17 @@ public class SecBreadcrumbFichaOld extends WebdrvWrapp {
     
     public static String getUrlItemBreadCrumb(ItemBCrumb itemBCrumb, WebDriver driver) {
         String xpathItem = getXPathBreadCrumbItem(itemBCrumb) + "//a";
-        if (isElementVisible(driver, By.xpath(xpathItem)))
+        if (isElementVisible(driver, By.xpath(xpathItem))) {
             return driver.findElement(By.xpath(xpathItem)).getAttribute("href");
-            
+        }
         return "";
     }
     
     public static String getNameItemBreadCrumb(ItemBCrumb itemBCrumb, WebDriver driver) {
         String xpathItem = getXPathBreadCrumbItem(itemBCrumb) + "//span";
-        if (isElementVisible(driver, By.xpath(xpathItem)))
+        if (isElementVisible(driver, By.xpath(xpathItem))) {
             return driver.findElement(By.xpath(xpathItem)).getAttribute("innerHTML");
-            
+        }
         return "";        
     }
 }

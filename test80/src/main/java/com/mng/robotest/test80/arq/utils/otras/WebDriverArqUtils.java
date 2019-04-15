@@ -40,17 +40,18 @@ public class WebDriverArqUtils {
     public static void captureEntirePageMultipleBrowsers (WebDriver driver, ITestContext contextTNG, String filename) 
     throws RuntimeException {
         boolean browserGUI = true;
-        if (contextTNG.getAttribute("browserGUI")!=null)
+        if (contextTNG.getAttribute("browserGUI")!=null) {
             browserGUI = ((Boolean)contextTNG.getAttribute("browserGUI")).booleanValue();
-		
+        }
         if (driver != null && browserGUI) {
             try {
                 //Este código sólo se ejecuta si no se ha producido una excepción (x timeout) en waitForPageLoaded;
                 WebDriver newWebDriver = null;
-                if (driver.getClass() == RemoteWebDriver.class)
+                if (driver.getClass() == RemoteWebDriver.class) {
                     newWebDriver = new Augmenter().augment(driver);
-                else
+                } else {
                     newWebDriver = driver;
+                }
                 
                 File screenshot = ((TakesScreenshot)newWebDriver).getScreenshotAs(OutputType.FILE);
                 FileUtils.copyFile(screenshot, new File(filename));
@@ -181,8 +182,9 @@ public class WebDriverArqUtils {
                         listaLogError.add("<br>" + descError);
             
                         int numErrors = 0;
-                        if (context.getAttribute(descError) != null)
+                        if (context.getAttribute(descError) != null) {
                             numErrors = ((Integer)context.getAttribute(descError)).intValue();
+                        }
             
                         // Comprobamos si ya se había superado el máximo de errores
                         if (j == 0) {
@@ -204,9 +206,9 @@ public class WebDriverArqUtils {
 
         // Retornamos la lista de errores y el estado
         resultado.setListaLogError(listaLogError);
-        if (resultado.getResultado() == ResultadoErrores.Resultado.ERRORES && supMaximosList.indexOf(Boolean.valueOf(false)) < 0)
+        if (resultado.getResultado() == ResultadoErrores.Resultado.ERRORES && supMaximosList.indexOf(Boolean.valueOf(false)) < 0) {
             resultado.setResultado(ResultadoErrores.Resultado.MAX_ERRORES);
-
+        }
         return resultado;
     }
 }

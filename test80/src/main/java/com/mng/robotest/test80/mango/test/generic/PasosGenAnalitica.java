@@ -152,7 +152,9 @@ public class PasosGenAnalitica {
             Iterator<ArticuloScreen> it = dataPedido.getDataBag().getListArticulos().iterator();
             while (it.hasNext()) {
                 listaArtsStr = listaArtsStr + it.next().getReferencia();
-                if (it.hasNext()) listaArtsStr = listaArtsStr + ", ";
+                if (it.hasNext()) {
+                	listaArtsStr = listaArtsStr + ", ";
+                }
             }
     	 	validations.add(
 				"En la petición figura el parámetro <b>\"skus\"</b> y contiene los artículos del pedido <b>" + listaArtsStr + "</b>",

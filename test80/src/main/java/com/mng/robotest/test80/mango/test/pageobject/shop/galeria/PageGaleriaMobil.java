@@ -100,8 +100,9 @@ public class PageGaleriaMobil extends PageGaleria {
     
     static String getXPathImgColorRelativeArticle(boolean selected) {
         String selectedStr = "";
-        if (selected)
+        if (selected) {
             selectedStr = "selected";
+        }
         return (XPathImgColorRelativeArticleWithTagSelected.replace(TagFlagSelected, selectedStr));
     }
     
@@ -171,9 +172,9 @@ public class PageGaleriaMobil extends PageGaleria {
     
     @Override
     public String getPrecioArticulo(WebElement articulo) {
-    	if (isArticleRebajado(articulo))
+    	if (isArticleRebajado(articulo)) {
             return (articulo.findElement(By.xpath("." + XPathPrecioRebajadoRelativeArticle)).getText());    
-
+    	}
         return (articulo.findElement(By.xpath("." + XPathPrecioOriginalRelativeArticle)).getText());
     }    
     
@@ -192,9 +193,9 @@ public class PageGaleriaMobil extends PageGaleria {
     @Override
     public String getNameColorFromCodigo(String codigoColor) {
     	String xpathImgColor = getXPathImgCodigoColor(codigoColor);
-    	if (!isElementPresent(driver, By.xpath(xpathImgColor)))
+    	if (!isElementPresent(driver, By.xpath(xpathImgColor))) {
     		return Constantes.colorDesconocido;
-    	
+    	}
     	WebElement imgColorWeb = driver.findElement(By.xpath(xpathImgColor));
     	return (imgColorWeb.getAttribute("title"));
     }
@@ -250,8 +251,9 @@ public class PageGaleriaMobil extends PageGaleria {
     @Override
     public WebElement getArticleFromPagina(int numPagina, int numArticle) {
     	List<WebElement> listArticles = getListArticulosFromPagina(numPagina);
-    	if (listArticles.size()>=numArticle)
+    	if (listArticles.size()>=numArticle) {
     		return listArticles.get(numArticle);
+    	}
     	return null;
     }
     

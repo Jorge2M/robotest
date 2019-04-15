@@ -192,8 +192,9 @@ public class TestNodos extends GestorWebDriver {
                 nodoCandidato.getAppEcom() == nodoAct.getAppEcom() &&
                 nodoCandidato.getIp().compareTo(nodoAct.getIp())!=0) {
                 nodoAnt = nodoCandidato;
-                if (this.nodo.getTested())
+                if (this.nodo.getTested()) {
                     encontrado = true;
+                }
             }
         }
         

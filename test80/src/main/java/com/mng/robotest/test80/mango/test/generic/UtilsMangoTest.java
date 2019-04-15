@@ -49,8 +49,9 @@ public class UtilsMangoTest {
     public static String codigoPostal(final Pais pais) {
         String codigoPostal = "08720";
         if (pais != null) {
-            if (pais.getCodigo_pais() != null)
+            if (pais.getCodigo_pais() != null) {
                 codigoPostal = pais.getCodpos();
+            }
         }
 
         return codigoPostal;
@@ -58,9 +59,9 @@ public class UtilsMangoTest {
     
     public static String getPageSource(WebDriver driver) {
         String idWebKit = "webkit-xml-viewer-source-xml";
-        if (WebdrvWrapp.isElementPresent(driver, By.id(idWebKit)))
+        if (WebdrvWrapp.isElementPresent(driver, By.id(idWebKit))) {
             return driver.findElement(By.id(idWebKit)).getAttribute("innerHTML");
-        
+        }
         return driver.getPageSource();
     }
 
@@ -107,9 +108,9 @@ public class UtilsMangoTest {
      */
     public static boolean importesEnIntervalo(final float importe1, final float importe2, final float intervalo) {
         boolean enIntervalo = false;
-        if (importe1 >= importe2 * (1 - intervalo / 100.0) && importe1 <= importe2 * (1 + intervalo / 100.0))
+        if (importe1 >= importe2 * (1 - intervalo / 100.0) && importe1 <= importe2 * (1 + intervalo / 100.0)) {
             enIntervalo = true;
-
+        }
         return enIntervalo;
     }
     
@@ -166,8 +167,9 @@ public class UtilsMangoTest {
         List<WebElement> displayedOptions = new ArrayList<>();
         try {
             for (WebElement option : elementOptions) {
-                if (option.isDisplayed())
+                if (option.isDisplayed()) {
                     displayedOptions.add(option);
+                }
             }
         }
         catch (org.openqa.selenium.StaleElementReferenceException e) {
@@ -258,8 +260,9 @@ public class UtilsMangoTest {
         Iterator<Pais> itPaises = listaPaises.iterator();
         while (!encontrado && itPaises.hasNext()) {
             pais = itPaises.next();
-            if (codigoPais.compareTo(pais.getCodigo_pais()) == 0)
+            if (codigoPais.compareTo(pais.getCodigo_pais()) == 0) {
                 encontrado = true;
+            }
         }
 
         return pais;
@@ -294,15 +297,17 @@ public class UtilsMangoTest {
         String xmlURL = ((String)ctx.getAttribute("appPath"));
         String browserURL = driver.getCurrentUrl();
         Iterator<String> itURLsPRO = null;
-        if (app==AppEcom.outlet)
+        if (app==AppEcom.outlet) {
             itURLsPRO = URLsProOutlet.iterator();
-        else
+        } else {
             itURLsPRO = URLsProShop.iterator();
+        }
         
         while (itURLsPRO.hasNext() && !isEntornoPRO) {
             String URL = itURLsPRO.next();
-            if (xmlURL.contains(URL) || browserURL.contains(URL)) 
+            if (xmlURL.contains(URL) || browserURL.contains(URL)) {
                 isEntornoPRO = true; 
+            }
         }
         
         return isEntornoPRO;
@@ -311,8 +316,9 @@ public class UtilsMangoTest {
     public static boolean isEntornoCI(AppEcom app, DataFmwkTest dFTest) {
     	if (app==AppEcom.shop) { //De momento sólo tenemos CI para Shop
     		String xmlURL = ((String)dFTest.ctx.getAttribute("appPath"));
-    		if (xmlURL.contains("shop-ci."))
+    		if (xmlURL.contains("shop-ci.")) {
     			return true;
+    		}
     	}
     	
     	return false;
@@ -323,10 +329,11 @@ public class UtilsMangoTest {
      */
     public static void accesoMenusManto(WebDriver driver, String criterio1, String criterio2) throws Exception {
         if (criterio1 != null && !criterio1.isEmpty() && "".compareTo(criterio1)!=0) {
-            if (criterio2 != null && !criterio2.isEmpty() && "".compareTo(criterio2)!=0)
+            if (criterio2 != null && !criterio2.isEmpty() && "".compareTo(criterio2)!=0) {
                 WebdrvWrapp.clickAndWaitLoad(driver, By.xpath("//a[text()[contains(.,'" + criterio1 + "') and contains(.,'" + criterio2 + "')]]"));
-            else
+            } else {
                 WebdrvWrapp.clickAndWaitLoad(driver, By.xpath("//a[text()[contains(.,'" + criterio1 + "')]]"));
+            }
         }
         
         WebdrvWrapp.waitForPageLoaded(driver, 5);
@@ -368,10 +375,11 @@ public class UtilsMangoTest {
         if (pais != null && pais.getEmailuser() != null && pais.getEmailuser().trim().compareTo("") != 0) {
             emailCheckout = pais.getEmailuser();
         } else {
-            if (emailThatExists) 
+            if (emailThatExists) {
                 emailCheckout = Constantes.mail_standard;
-            else
+            } else {
                 emailCheckout = DataMango.getEmailNonExistentTimestamp();
+            }
         }
         
         return emailCheckout;

@@ -24,8 +24,9 @@ public class SecMetodoEnvioDesktopStpV {
     throws Exception {
         SecMetodoEnvioDesktop.selectMetodo(tipoTransporte, driver);
         if (!tipoTransporte.isEntregaDomicilio()) {
-        	if (ModalDroppoints.isErrorMessageVisibleUntil(driver))
+        	if (ModalDroppoints.isErrorMessageVisibleUntil(driver)) {
         		ModalDroppoints.searchAgainByUserCp(dCtxPago.getDatosRegistro().get("cfCp"), driver);
+        	}
         }
 
         //Validaciones

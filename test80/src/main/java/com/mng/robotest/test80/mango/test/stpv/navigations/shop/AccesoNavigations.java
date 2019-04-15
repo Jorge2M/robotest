@@ -30,8 +30,9 @@ public class AccesoNavigations {
 
 	public static void goToInitURL(String urlInit, WebDriver driver) throws Exception {
     	String currentUrl = driver.getCurrentUrl();
-    	if (currentUrl.compareTo(urlInit)!=0)
+    	if (currentUrl.compareTo(urlInit)!=0) {
     		driver.get(urlInit);
+    	}
 	}
 	
     /**

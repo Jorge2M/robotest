@@ -26,9 +26,9 @@ public class SecCrossSelling extends WebdrvWrapp {
         WebElement link = getElementVisible(driver, By.xpath(xpathLink));
         if (link!=null &&
             link.getAttribute("innerHTML").compareTo(menu1erNivel.getAttribute("innerHTML"))==0 &&
-            link.getAttribute("href").compareTo(menu1erNivel.getAttribute("href"))==0)
+            link.getAttribute("href").compareTo(menu1erNivel.getAttribute("href"))==0) {
             return true;
-         
+        }
         return false;
     }
 }

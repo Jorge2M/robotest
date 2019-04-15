@@ -138,9 +138,9 @@ public class PageCheckoutWrapperStpV {
             selectMetodoEnvio(dCtxPago, nombrePago, dCtxSh.appE, dCtxSh.channel, dFTest);
             pagoPintado = true;
             TipoTransporte tipoEnvio = pago.getTipoEnvioType(dCtxSh.appE);
-            if (tipoEnvio.isDroppoint())
+            if (tipoEnvio.isDroppoint()) {
             	ModalDroppointsStpV.fluxSelectDroppoint(dCtxPago, dCtxSh, dFTest.driver);
-            
+            }
             if (tipoEnvio.isFranjaHoraria()) {
             	selectFranjaHorariaUrgente(dCtxSh.channel, dFTest);
             }
@@ -209,9 +209,9 @@ public class PageCheckoutWrapperStpV {
         	pago.getTipoEnvioType(appE)==TipoTransporte.SAMEDAY ||
         	pago.getTipoEnvioType(appE)==TipoTransporte.SAMEDAY_NEXTDAY_FRANJAS) {
         	for (int i=0; i<4; i++) {
-	            if (PageCheckoutWrapper.isPresentBlockMetodo(pago.getTipoEnvioType(appE), channel, driver))
+	            if (PageCheckoutWrapper.isPresentBlockMetodo(pago.getTipoEnvioType(appE), channel, driver)) {
 	            	break;
-	            
+	            }
             	switch (pago.getTipoEnvioType(appE)) {
             	case NEXTDAY:
                     pago.setTipoEnvioShop(TipoTransporte.NEXTDAY_FRANJAS);

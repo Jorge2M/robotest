@@ -50,16 +50,17 @@ public class ManagerBannersScreen {
         Iterator<DataBanner> itDataBanner = listDataBannersOrderedByPosition.iterator();
         while (itDataBanner.hasNext()) {
             DataBanner dataBanner = itDataBanner.next(); 
-            if (listBannerTypes.contains(dataBanner.getBannerType()))
+            if (listBannerTypes.contains(dataBanner.getBannerType())) {
                 itDataBanner.remove();
+            }
         }
 	}
 	
 	public DataBanner getBanner(int position) {
 		int indexList = position - 1;
-		if (indexList>=0 && (listDataBannersOrderedByPosition.size()) > indexList)
+		if (indexList>=0 && (listDataBannersOrderedByPosition.size()) > indexList) {
 			return listDataBannersOrderedByPosition.get(indexList);
-		
+		}
 		return null;
 	}
 	
@@ -82,14 +83,16 @@ public class ManagerBannersScreen {
 					Point locationBanner1 = banner1.getLocation();
 					Point locationBanner2 = banner2.getLocation();
 					if (locationBanner1.y != locationBanner2.y) {
-						if (locationBanner1.y > locationBanner2.y)
+						if (locationBanner1.y > locationBanner2.y) {
 							return 1;
+						}
 						return -1;
 					}
 					
 					if (locationBanner1.x != locationBanner1.x) {
-						if (locationBanner1.x > locationBanner2.x)
+						if (locationBanner1.x > locationBanner2.x) {
 							return 1;
+						}
 						return -1;
 					}
 					

@@ -19,30 +19,36 @@ public class DataFoto {
     
     public DataFoto(String srcFoto) {
         this.srcFoto = srcFoto;
-        if (getDataFotoBase())
+        if (getDataFotoBase()) {
             return;
-        if (getDataFotoPropios())
+        }
+        if (getDataFotoPropios()) {
             return;
-        if (getDataFotoVideos())
+        }
+        if (getDataFotoVideos()) {
             return;        
-        if (getDataFotoGeneral())
+        }
+        if (getDataFotoGeneral()) {
             return;
+        }
     }
     
     private boolean getDataFotoGeneral() {
         Pattern pattern = Pattern.compile(this.srcRegexGeneral);
         Matcher matcher = pattern.matcher(this.srcFoto);
-        if (!matcher.matches())
+        if (!matcher.matches()) {
             return false;
+        }
         
         this.temporada = matcher.group(1);  
         this.size = matcher.group(3);
         this.referencia = matcher.group(5);
         this.color = matcher.group(6);
-        if ("".compareTo(matcher.group(7))==0)
+        if ("".compareTo(matcher.group(7))==0) {
             this.typeImage = getTipoForBlankSufix();
-        else
+        } else {
             this.typeImage = TipoImagenProducto.getTipoImagenProductoFromSufijo(matcher.group(7));
+        }
         
         return true;
     }    
@@ -50,16 +56,18 @@ public class DataFoto {
     private boolean getDataFotoPropios() {
         Pattern pattern = Pattern.compile(this.srcRegexPropios);
         Matcher matcher = pattern.matcher(this.srcFoto);
-        if (!matcher.matches())
+        if (!matcher.matches()) {
             return false;
+        }
         
         this.temporada = matcher.group(1);  
         this.referencia = matcher.group(2);
         this.color = matcher.group(3);
-        if ("".compareTo(matcher.group(4))==0)
+        if ("".compareTo(matcher.group(4))==0) {
             this.typeImage = getTipoForBlankSufix();
-        else
+        } else {
             this.typeImage = TipoImagenProducto.getTipoImagenProductoFromSufijo(matcher.group(4));
+        }
         
         return true;        
     }
@@ -67,8 +75,9 @@ public class DataFoto {
     private boolean getDataFotoVideos() {
         Pattern pattern = Pattern.compile(this.srcRegexVideos);
         Matcher matcher = pattern.matcher(this.srcFoto);
-        if (!matcher.matches())
+        if (!matcher.matches()) {
             return false;
+        }
         
         this.temporada = matcher.group(1);  
         this.referencia = matcher.group(3);
@@ -80,8 +89,9 @@ public class DataFoto {
     private boolean getDataFotoBase() {
         Pattern pattern = Pattern.compile(this.srcRegexBase);
         Matcher matcher = pattern.matcher(this.srcFoto);
-        if (!matcher.matches())
+        if (!matcher.matches()) {
             return false;
+        }
         
         this.referencia = matcher.group(1);
         this.color = matcher.group(2);
@@ -90,12 +100,15 @@ public class DataFoto {
     }
     
     private TipoImagenProducto getTipoForBlankSufix() {
-        if (this.srcFoto.contains("/pasarela/"))
+        if (this.srcFoto.contains("/pasarela/")) {
             return TipoImagenProducto.PASARELA;
-        if (this.srcFoto.contains("/videos/"))
+        }
+        if (this.srcFoto.contains("/videos/")) {
             return TipoImagenProducto.VIDEO;
-        if (this.srcFoto.contains("col_nrf_v3"))
+        }
+        if (this.srcFoto.contains("col_nrf_v3")) {
             return TipoImagenProducto.BASE;
+        }
             
         return TipoImagenProducto.DETALLES;        
     }

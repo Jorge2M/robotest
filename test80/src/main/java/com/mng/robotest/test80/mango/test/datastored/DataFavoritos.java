@@ -49,8 +49,9 @@ public class DataFavoritos {
         ArrayList<ArticuloScreen> listResult = new ArrayList<ArticuloScreen>();
         for (ArticuloScreen artFavs : this.listArticulos) {
             if (artFavs.getReferencia().compareTo(articulo.getReferencia())!=0 ||
-            	artFavs.getCodigoColor().compareTo(articulo.getCodigoColor())!=0)
+            	artFavs.getCodigoColor().compareTo(articulo.getCodigoColor())!=0) {
             	listResult.add(artFavs);
+            }
         }
         
         this.listArticulos = listResult;

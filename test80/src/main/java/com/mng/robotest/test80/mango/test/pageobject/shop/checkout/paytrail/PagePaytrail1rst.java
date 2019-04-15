@@ -48,8 +48,9 @@ public class PagePaytrail1rst extends WebdrvWrapp {
     public static void selectBanco(String visibleText, Channel channel, WebDriver driver) throws Exception {
         //En el caso de móvil hemos de seleccionar el icono del banco para visualizar el desplegable
         if (channel==Channel.movil_web) {
-            if (!isElementVisible(driver, By.xpath(XPathSelectBancos)))
+            if (!isElementVisible(driver, By.xpath(XPathSelectBancos))) {
                 clickIconoBanco(driver);
+            }
         }
             
         new Select(driver.findElement(By.xpath(XPathSelectBancos))).selectByVisibleText(visibleText);

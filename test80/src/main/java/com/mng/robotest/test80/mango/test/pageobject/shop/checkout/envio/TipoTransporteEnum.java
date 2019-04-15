@@ -197,10 +197,11 @@ public class TipoTransporteEnum {
 		
 		public TypeDeliveryPoint getTypeDeliveryPoint() {
 			if (this.isDroppoint()) {
-				if (this.compareTo(TIENDA)==0)
+				if (this.compareTo(TIENDA)==0) {
 					return TypeDeliveryPoint.tienda;
-				else
+				} else {
 					return TypeDeliveryPoint.droppoint;
+				}
 			}
 			
 			return TypeDeliveryPoint.any;

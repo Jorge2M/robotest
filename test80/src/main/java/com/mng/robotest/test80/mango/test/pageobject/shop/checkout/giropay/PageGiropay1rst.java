@@ -18,9 +18,9 @@ public class PageGiropay1rst extends WebdrvWrapp {
     static String XPathIconoGiropayDesktop = XPathListOfPayments + "/li[@data-variant[contains(.,'giropay')]]";
     
     public static String getXPathIconoGiropay(Channel channel) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return XPathIconoGiropayMobil;
-        
+        }
         return XPathIconoGiropayDesktop;
     }
     
@@ -47,8 +47,9 @@ public class PageGiropay1rst extends WebdrvWrapp {
     
     public static void inputBank(String bank, Channel channel, WebDriver driver) throws Exception {
         if (channel==Channel.movil_web) {
-            if (!isElementVisible(driver, By.xpath(XPathInputBank)))
+            if (!isElementVisible(driver, By.xpath(XPathInputBank))) {
                 clickIconoGiropay(channel, driver);
+            }
         }
         
         driver.findElement(By.xpath(XPathInputBank)).sendKeys(bank);
@@ -66,10 +67,11 @@ public class PageGiropay1rst extends WebdrvWrapp {
     }
     
     public static void clickButtonContinuePay(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             clickButtonContinueMobil(driver);
-        else
+        } else {
             clickButtonPagoDesktop(driver);
+        }
     }
     
     public static void clickButtonPagoDesktop(WebDriver driver) throws Exception {

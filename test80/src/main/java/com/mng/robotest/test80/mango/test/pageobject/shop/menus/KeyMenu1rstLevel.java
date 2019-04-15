@@ -21,10 +21,12 @@ public class KeyMenu1rstLevel {
     }
     
     @Override public boolean equals(Object o) {
-    	if (o == this)
+    	if (o == this) {
     		return true;
-    	if (!(o instanceof KeyMenu1rstLevel))
+    	}
+    	if (!(o instanceof KeyMenu1rstLevel)) {
     		return false;
+    	}
     	KeyMenu1rstLevel key = (KeyMenu1rstLevel) o;
     	return (key.lineaType==lineaType &&
     			key.sublineaType==sublineaType &&

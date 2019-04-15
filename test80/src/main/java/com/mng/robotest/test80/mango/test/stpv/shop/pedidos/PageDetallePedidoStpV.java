@@ -18,10 +18,11 @@ public class PageDetallePedidoStpV {
 	
     public PageDetallePedidoStpV(WebDriver driver) {
 		PageDetallePedido pageDetalle = DetallePedido.New.getPageObject();
-		if (pageDetalle.isPage(driver))
+		if (pageDetalle.isPage(driver)) {
 			this.pageDetalle = pageDetalle;
-		else
+		} else {
 			this.pageDetalle = DetallePedido.Old.getPageObject();
+		}
     }
     
     public PageDetallePedido getPageDetalle() {

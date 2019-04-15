@@ -21,9 +21,9 @@ public class PageSofort4th extends WebdrvWrapp {
     
     public static boolean isPage(WebDriver driver) {
         if (driver.getTitle().toLowerCase().contains("sofort") && 
-            isElementVisible(driver, By.xpath(XPathInputUser)))
+            isElementVisible(driver, By.xpath(XPathInputUser))) {
             return true;
-        
+        }
         return false;
     }
     
@@ -37,10 +37,7 @@ public class PageSofort4th extends WebdrvWrapp {
     }
     
     public static boolean isVisibleFormSelCta(WebDriver driver) {
-        if (isElementVisible(driver, By.xpath(XPathFormSelCta)))
-            return true;
-        
-        return false;
+        return (isElementVisible(driver, By.xpath(XPathFormSelCta)));
     }
     
     public static void selectRadioCta(WebDriver driver, int posCta) {
@@ -48,10 +45,7 @@ public class PageSofort4th extends WebdrvWrapp {
     }
     
     public static boolean isVisibleInputTAN(WebDriver driver) {
-        if (isElementVisible(driver, By.xpath(XPathInputTAN)))
-            return true;
-        
-        return false;
+        return (isElementVisible(driver, By.xpath(XPathInputTAN)));
     }
     
     public static void inputTAN(WebDriver driver, String TAN) {

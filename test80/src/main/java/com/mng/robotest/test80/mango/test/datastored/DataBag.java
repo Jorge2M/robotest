@@ -75,10 +75,11 @@ public class DataBag {
         ListIterator<ArticuloScreen> it = this.listArticulos.listIterator();
         while (it.hasNext()) {
             ArticuloScreen articulo = it.next();
-            if (articulo.isPresentInList(listToReturn)) 
+            if (articulo.isPresentInList(listToReturn)) {
             	articulo.incrementarCantidad(1);
-            else
+            } else {
             	listToReturn.add(articulo);
+            }
         }
 
         return listToReturn;
@@ -108,9 +109,9 @@ public class DataBag {
             ArticuloScreen art = itArt.next();
             String articuloStr = art.getReferencia() + " (" + art.getNombre() + ") ";
             String descuentoStr = "<b>Sin descuento</b>";
-            if (art.getValePais()!=null)        
+            if (art.getValePais()!=null) {      
                 descuentoStr = " - Descuento <b>" + art.getValePais().getPorcDescuento() + "%</b>";
-                    
+            }
             listaStr = listaStr + articuloStr + descuentoStr + "<br>";
         }
         

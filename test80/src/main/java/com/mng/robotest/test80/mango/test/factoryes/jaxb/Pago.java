@@ -241,9 +241,9 @@ public class Pago {
     }    
     
     public String getNameFilter(Channel channel) {
-        if ("".compareTo(this.namefilter)!=0)
+        if ("".compareTo(this.namefilter)!=0) {
             return this.namefilter;
-        
+        }
         return (getNombre(channel));
     }
         
@@ -268,13 +268,14 @@ public class Pago {
     public boolean isNeededTestPasarelaDependingFilter(Channel channel, ITestContext ctx) {
         if (getTestpasarela().compareTo("s")==0) {
             String listPayments = ctx.getCurrentXmlTest().getParameter(Constantes.paramPayments);
-            if (listPayments==null || "".compareTo(listPayments)==0)
+            if (listPayments==null || "".compareTo(listPayments)==0) {
                 return true;
-                
+            }
             ArrayList<String> paymentsArray = new ArrayList<>(Arrays.asList(listPayments.split(",")));
             for (String paymentFilterName : paymentsArray) {
-                if (paymentFilterName.compareTo(getNameFilter(channel))==0)
+                if (paymentFilterName.compareTo(getNameFilter(channel))==0) {
                     return true;
+                }
             }
         }
         
@@ -676,9 +677,9 @@ public class Pago {
     }
 
     public boolean validoAlmacenMontcada() {
-        if (this.almacenmontcada==null || this.almacenmontcada.compareTo("s")==0) 
+        if (this.almacenmontcada==null || this.almacenmontcada.compareTo("s")==0) {
             return true;
-        
+        }
         return false;
     }
     
@@ -692,9 +693,9 @@ public class Pago {
     }
     
     public String getNombre(Channel channel) {
-        if (channel==Channel.movil_web && getNombremovil()!=null && "".compareTo(getNombremovil())!=0)
+        if (channel==Channel.movil_web && getNombremovil()!=null && "".compareTo(getNombremovil())!=0) {
             return getNombremovil();
-        
+        }
         return getNombre();
     }
     

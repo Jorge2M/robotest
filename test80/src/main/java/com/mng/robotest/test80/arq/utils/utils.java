@@ -18,12 +18,12 @@ public class utils {
     }
     
     public static State getEstadoMethod(int resultSCRint, int resultTNGint) {
-        if (resultTNGint==2) 
+        if (resultTNGint==2) {
             return State.Nok;
-        
-        if (resultTNGint==3) 
+        }
+        if (resultTNGint==3) { 
             return State.Skip;
-        
+        }
         return State.getState(resultSCRint);
     }
     

@@ -56,10 +56,9 @@ public class GestorWebDrv {
      * @return el gestor de WebDrivers almacenado en el contexto
      */
     public static GestorWebDrv getGestorFromCtx(ITestContext context) {
-        
-        if (context.getAttribute(nameGestorInCtx)!=null)
+        if (context.getAttribute(nameGestorInCtx)!=null) {
             return ((GestorWebDrv)context.getAttribute(nameGestorInCtx));
-
+        }
         return null;
     }
     
@@ -91,9 +90,9 @@ public class GestorWebDrv {
             }
         }
         
-        if (!encontrado)
+        if (!encontrado) {
             pLogger.debug("No encontrado Webdriver free. Type: {}, moreDataWrdrv: {}", typeWdrv, moreDataWdrv);
-        
+        }
         return webdriverFree;
     }
     
@@ -119,8 +118,9 @@ public class GestorWebDrv {
         StoredWebDrv strWd = searchWebDriver(driver);
         
         //Si existe lo borramos
-        if (strWd != null) 
+        if (strWd != null) {
             deleteStrWedDriver(strWd);
+        }
     }
     
     /**

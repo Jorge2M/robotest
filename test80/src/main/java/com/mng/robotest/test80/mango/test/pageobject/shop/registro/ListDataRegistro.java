@@ -30,8 +30,9 @@ public class ListDataRegistro {
     public ArrayList<DataRegistro> getDataPageInicial() {
         ArrayList<DataRegistro> listDataPageIni = new ArrayList<>();
         for (DataRegistro dataReg : this.dataRegistro) {
-            if (isDataPageIni(dataReg.getDataRegType()))
+            if (isDataPageIni(dataReg.getDataRegType())) {
                 listDataPageIni.add(dataReg);
+            }
         }
         
         return listDataPageIni;
@@ -43,8 +44,9 @@ public class ListDataRegistro {
     public ArrayList<DataRegistro> getDataPageDirec() {
         ArrayList<DataRegistro> listDataPageDirec = new ArrayList<>();
         for (DataRegistro dataReg : this.dataRegistro) {
-            if (isDataPageDirec(dataReg.getDataRegType()))
+            if (isDataPageDirec(dataReg.getDataRegType())) {
                 listDataPageDirec.add(dataReg);
+            }
         }
         
         return listDataPageDirec;
@@ -55,8 +57,9 @@ public class ListDataRegistro {
      */
     private boolean isDataPageIni(DataRegType dataReg) {
         for (DataPageIni dataPageIni : DataPageIni.values()) {
-            if (dataReg.name().compareTo(dataPageIni.name())==0)
+            if (dataReg.name().compareTo(dataPageIni.name())==0) {
                 return true;
+            }
         }
         
         return false;
@@ -67,8 +70,9 @@ public class ListDataRegistro {
      */
     private boolean isDataPageDirec(DataRegType dataReg) {
         for (DataPageDirec dataPageDirec : DataPageDirec.values()) {
-            if (dataReg.name().compareTo(dataPageDirec.name())==0)
+            if (dataReg.name().compareTo(dataPageDirec.name())==0) {
                 return true;
+            }
         }
         
         return false;

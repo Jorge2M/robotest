@@ -266,7 +266,7 @@ public class SecModalPersonalizacionStpV {
 		description="1) En la bolsa aparece el apartado correspondiente a la personalización (lo esperamos hasta #{maxSecondsWait} segundos)",
 		level=State.Defect)
 	private boolean validateCustomizationProof(int maxSecondsWait) {
-		if (dCtxSh.channel==Channel.movil_web){
+		if (dCtxSh.channel==Channel.movil_web) {
 			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.BolsaProof, StateElem.Present, maxSecondsWait, dCtxSh.channel, driver));
 		} else {
 			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.BolsaProof, StateElem.Visible, maxSecondsWait, dCtxSh.channel, driver));

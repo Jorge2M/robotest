@@ -44,8 +44,9 @@ public class IframeResult extends WebdrvWrapp {
         boolean contains = true;
         String[] listTrans = codigosTransporte.trim().split("\n");
         for (int i=0; i<listTrans.length; i++) {
-            if (!isElementPresent(driver, By.xpath(XPathBlockTransportes + "//table//tr[" + (i+3) + "]/td[1][text()='" + listTrans[i] + "']"))) 
+            if (!isElementPresent(driver, By.xpath(XPathBlockTransportes + "//table//tr[" + (i+3) + "]/td[1][text()='" + listTrans[i] + "']"))) { 
                contains = false;
+            }
         }
         
         return contains;
@@ -56,17 +57,17 @@ public class IframeResult extends WebdrvWrapp {
     }
     
     public static boolean isPresentCodigoPedido(WebDriver driver) {
-        if (!isElementPresent(driver, By.xpath(XPathBlockResultPedido)))
+        if (!isElementPresent(driver, By.xpath(XPathBlockResultPedido))) {
             return false;
-        
+        }
         return (driver.findElement(By.xpath(XPathBlockResultPedido)).getText().contains("Código pedido")); 
     }
     
     public static String getCodigoPedido(WebDriver driver) {
         String codigoPedido = "";
-        if (isElementPresent(driver, By.xpath(XPathBlockCodigoPedido)))
+        if (isElementPresent(driver, By.xpath(XPathBlockCodigoPedido))) {
             codigoPedido = driver.findElement(By.xpath(XPathBlockCodigoPedido)).getText();
-        
+        }
         return codigoPedido;
     }
     
@@ -81,8 +82,9 @@ public class IframeResult extends WebdrvWrapp {
         Iterator<WebElement> it = listPedidos.iterator();
         while (it.hasNext()) {
             WebElement pedido = it.next();
-            if (pedido.getText().contains(codPedidoShort))
+            if (pedido.getText().contains(codPedidoShort)) {
                 pedidoFull = pedido.getText();
+            }
         }
         
         return pedidoFull;
@@ -90,9 +92,9 @@ public class IframeResult extends WebdrvWrapp {
     
     public static boolean resCreacionPedidoOk(WebDriver driver) { 
         boolean resultado = false;
-        if (isElementPresent(driver, By.xpath(XPathBlockResultado)))
+        if (isElementPresent(driver, By.xpath(XPathBlockResultado))) {
             resultado = driver.findElement(By.xpath(XPathBlockResultado)).getText().contains("Resultado creación pedido: (0) Total");
-        
+        }
         return resultado;
     }
 
@@ -100,9 +102,9 @@ public class IframeResult extends WebdrvWrapp {
      * @return si está presente el bloque correspondiente a la lista de pedidos (resultante de selección del botón "Obtener Pedidos")
      */
     public static boolean isPresentListaPedidos(WebDriver driver) {
-        if (!isElementPresent(driver, By.xpath(XPathBlockListPedidos)))
+        if (!isElementPresent(driver, By.xpath(XPathBlockListPedidos))) {
             return false;
-        
+        }
         return (driver.findElement(By.xpath(XPathBlockListPedidos)).getText().contains("Pedidos:"));
     }
     
@@ -111,9 +113,9 @@ public class IframeResult extends WebdrvWrapp {
      */
     public static boolean resSelectPedidoOk(WebDriver driver, String codigoPedidoFull) {
         boolean resultado = false;
-        if (isElementPresent(driver, By.xpath(XPathBlockResultPedido)))
+        if (isElementPresent(driver, By.xpath(XPathBlockResultPedido))) {
             resultado = driver.findElement(By.xpath(XPathBlockResultPedido)).getText().contains("Seleccionado: " + codigoPedidoFull);
-        
+        }
         return resultado;        
     }
     
@@ -139,10 +141,10 @@ public class IframeResult extends WebdrvWrapp {
      */
     public static boolean resConfPedidoOk(WebDriver driver, String codigoPedidoFull) {
         boolean resultado = false;
-        if (isElementPresent(driver, By.xpath(XPathBlockResultado)))
+        if (isElementPresent(driver, By.xpath(XPathBlockResultado))) {
             //En el bloque de "Petición/Resultado" aparece una línea "Confirmado: + codigoPedidoFull"
             resultado = driver.findElement(By.xpath(XPathBlockResultado)).getText().contains("Confirmado: " + codigoPedidoFull);
-        
+        }
         return resultado;        
     }
 }

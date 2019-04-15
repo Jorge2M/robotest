@@ -145,8 +145,9 @@ public class SecCabeceraMobil extends SecCabecera {
     
     public void clickIfClickableUntil(Icono icono, int maxSecondsToWait) 
     throws Exception {
-    	if (isClickableUntil(icono, maxSecondsToWait))
+    	if (isClickableUntil(icono, maxSecondsToWait)) {
     		click(icono);
+    	}
     }
     
     public void click(Icono icono) throws Exception {
@@ -199,8 +200,9 @@ public class SecCabeceraMobil extends SecCabecera {
      * Si existe, cierra el banner de aviso en móvil (p.e. el que sale proponiendo la descarga de la App)
      */
     public void closeSmartBannerIfExists() throws Exception {
-        if (isElementVisible(driver, By.xpath(XPathLinkCloseSmartBanner))) 
+        if (isElementVisible(driver, By.xpath(XPathLinkCloseSmartBanner))) {
             clickAndWaitLoad(driver, By.xpath(XPathLinkCloseSmartBanner));
+        }
     }
     
     /**

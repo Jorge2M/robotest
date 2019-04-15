@@ -33,9 +33,9 @@ public class UtilsPageGaleria {
         String referencia = "";
         Pattern pattern = Pattern.compile("_(.*?).html");
         Matcher matcher = pattern.matcher(urlFicha);
-        if (matcher.find())
+        if (matcher.find()) {
             referencia = matcher.group(1);
-        
+        }
         return referencia;
     }
 
@@ -43,9 +43,9 @@ public class UtilsPageGaleria {
         String codColor = "";
         Pattern pattern = Pattern.compile("\\?c=([a-zA-Z0-9]{2})");
         Matcher matcher = pattern.matcher(urlFicha);
-        if (matcher.find())
+        if (matcher.find()) {
             codColor = matcher.group(1);
-        
+        }
         return codColor;
     }
 }

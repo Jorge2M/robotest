@@ -18,29 +18,31 @@ public class ImporteScreen {
     	//Remove first and last character if "." o ","
     	if (impToReturn.length()>0) {
     		String firstChar = impToReturn.substring(0,1);
-    		if ((".".compareTo(firstChar)==0 || ",".compareTo(firstChar)==0))
+    		if ((".".compareTo(firstChar)==0 || ",".compareTo(firstChar)==0)) {
     			impToReturn = impToReturn.substring(1); 
+    		}
     	}
     		
     	if (impToReturn.length()>0) {
     		String lastChar = impToReturn.substring(impToReturn.length()-1,impToReturn.length());
-    		if (".".compareTo(lastChar)==0 || ",".compareTo(lastChar)==0)
+    		if (".".compareTo(lastChar)==0 || ",".compareTo(lastChar)==0) {
     			impToReturn = impToReturn.substring(0, impToReturn.length()-1);
+    		}
     	}
     	
         //Si hay más de un punto eliminamos el 1o
-        if (impToReturn.indexOf(".")!=impToReturn.lastIndexOf("."))
+        if (impToReturn.indexOf(".")!=impToReturn.lastIndexOf(".")) {
         	impToReturn = impToReturn.replaceFirst("\\.", "");
-        
-        if (impToReturn.indexOf(".") < impToReturn.length() - 3)
+        }
+        if (impToReturn.indexOf(".") < impToReturn.length() - 3) {
         	impToReturn = impToReturn.replace(".", "");
-
-        if (impToReturn.indexOf(",") < impToReturn.length() - 3)
+        }
+        if (impToReturn.indexOf(",") < impToReturn.length() - 3) {
         	impToReturn = impToReturn.replace(",", "");
-        
-        if (impToReturn.indexOf(".") == impToReturn.length())
+        }
+        if (impToReturn.indexOf(".") == impToReturn.length()) {
         	impToReturn = impToReturn.replace(".", "");
-    	
+        }
     	return impToReturn;
     }
     
@@ -49,9 +51,9 @@ public class ImporteScreen {
      */
     public static float getFloatFromImporteMangoScreen(String screenImport) {
         String importeResult = normalizeImportFromScreen(screenImport);
-        if (importeResult.compareTo("") == 0)
+        if (importeResult.compareTo("") == 0) {
             return (0);
-
+        }
         return (Float.parseFloat(importeResult.replace(',', '.')));
     }
 	
@@ -68,14 +70,11 @@ public class ImporteScreen {
     }
     
     private static boolean isAnyImportInScreen(ArrayList<String> possibleImports, String xpathElementsWhereSearch, WebDriver driver) {
-        if (isAnyImportInScreenMethodXpath(possibleImports, xpathElementsWhereSearch, driver))
+        if (isAnyImportInScreenMethodXpath(possibleImports, xpathElementsWhereSearch, driver)) {
     		return true;
-    		
+        }
         int itemsToIterate = 10;
-    	if (isAnyImportInScreenMethodIterate(possibleImports, xpathElementsWhereSearch, itemsToIterate, driver))   		
-    		return true;
-    	
-    	return false;
+    	return (isAnyImportInScreenMethodIterate(possibleImports, xpathElementsWhereSearch, itemsToIterate, driver));
     }
     
     /**
@@ -103,8 +102,9 @@ public class ImporteScreen {
         while (itElements.hasNext() && i<itemsToIterate) {
             String textElelments = itElements.next().getText();
             for (String possibleImport : possibleImports) {
-            	if (textElelments.contains(possibleImport))
+            	if (textElelments.contains(possibleImport)) {
             		return true;
+            	}
             }
             
             i+=1;
@@ -117,14 +117,15 @@ public class ImporteScreen {
     	//Posibles importes a nivel General
     	ArrayList<String> listOfImports = new ArrayList<String>();
     	listOfImports.add(importe);
-    	if (importe.contains("."))
+    	if (importe.contains(".")) {
     		listOfImports.add(importe.replace(".", ","));
-    	
+    	}
     	if (importe.contains(",")) {
     		listOfImports.add(importe.replace(",", "."));
             int ultimaComa = importe.lastIndexOf(",");
-            if (importe.length() - ultimaComa == 4)
+            if (importe.length() - ultimaComa == 4) {
             	listOfImports.add(importe.replace(",", "")); //Importe sin carácter de miles
+            }
     	}
     	
 		listOfImports.add(insertCharInMiles(importe, ' ')); //Importe con un espacio indicando los miles
@@ -145,8 +146,9 @@ public class ImporteScreen {
 		case "036":
 			int importeSize = importe.length();
 			String lastNum = importe.substring(importeSize-1, importeSize);
-			if ("0".compareTo(lastNum)==0)
+			if ("0".compareTo(lastNum)==0) {
 				listOfImports.add(importe.substring(0, importeSize-1)); //En ocasiones, cuando el 2o es 0, aparece 1 solo decimal
+			}
 			break;
 		case "061"/*Czech Repúblic*/:
 		case "720"/*China*/:

@@ -32,18 +32,18 @@ public class SecMenusWrap {
     public enum bloqueMenu {prendas, accesorios, colecciones}
     
 	public static boolean isLineaPresent(LineaType lineaType, AppEcom app, Channel channel, WebDriver driver) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return SecMenuLateralMobil.isLineaPresent(lineaType, app, driver);
-        
+        }
         return 
         	SecMenusDesktop.
         		secMenuSuperior.secLineas.isLineaPresent(lineaType, app, driver);
     }
     
     public static boolean isLineaPresentUntil(LineaType lineaType, AppEcom app, Channel channel, int maxSeconds, WebDriver driver) {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return SecMenuLateralMobil.isLineaPresent(lineaType, app, driver);
-        
+        }
         return 
         	SecMenusDesktop.
         		secMenuSuperior.secLineas.isLineaPresentUntil(lineaType, app, maxSeconds, driver);
@@ -75,18 +75,19 @@ public class SecMenusWrap {
      */
 	public static void closeSessionIfUserLogged(Channel channel, AppEcom app, WebDriver driver) throws Exception {
         if (channel==Channel.movil_web) {
-        	if (SecCabeceraMobil.getNew(app, driver).isVisible(Icono.MiCuenta))
+        	if (SecCabeceraMobil.getNew(app, driver).isVisible(Icono.MiCuenta)) {
         		SecMenuLateralMobil.secMenusUser.clickCerrarSessionIfLinkExists(driver);
-        }
-        else            
+        	}
+        } else {       
         	SecMenusDesktop.secMenusUser.clickCerrarSessionIfLinkExists(driver);
+        }
     }
     
     public static List<String> getListDataLabelsMenus(Linea linea, SublineaNinosType sublineaType, Channel channel, AppEcom appE, WebDriver driver) 
     throws Exception {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             return SecMenuLateralMobil.getListDataLabelsMenus(linea, sublineaType, appE, driver);
-            
+        }
         return 
         	SecMenusDesktop.
         		secMenuSuperior.secBlockMenus.getListDataLabelsMenus(linea.getType(), sublineaType, appE, driver);        
@@ -103,9 +104,9 @@ public class SecMenusWrap {
      * @return el id con el que se identifica la línea a nivel del DOM-HTML
      */
     public static String getIdLineaEnDOM(LineaType lineaShop, AppEcom app, Channel channel) {
-        if (app==AppEcom.outlet)
+        if (app==AppEcom.outlet) {
             return lineaShop.getSufixOutlet(channel);
-        
+        }
         return lineaShop.name();
     }
     
@@ -132,20 +133,22 @@ public class SecMenusWrap {
      */
     public static void clickMenu1erNivel(Pais pais, Menu1rstLevel menu1rstLevel, AppEcom app, Channel channel, WebDriver driver) 
     throws Exception {
-        if (channel==Channel.desktop)
+        if (channel==Channel.desktop) {
             SecMenusDesktop.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel, app, driver);
-        else
+        } else {
         	SecMenuLateralMobil.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais, driver);
+        }
     }
     
     /**
      * Función que selecciona una determinada línea->menú (lo busca en el href como último elemento del path)
      */
     public static void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel, Pais pais, Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             SecMenuLateralMobil.clickMenuLateral1rstLevel(TypeLocator.hrefPortion, menu1rstLevel, pais, driver);
-        else
+        } else {
         	SecMenusDesktop.secMenuSuperior.secBlockMenus.seleccionarMenuXHref(menu1rstLevel, driver);
+        }
     }    
     
     /**
@@ -159,9 +162,9 @@ public class SecMenusWrap {
     
     public static boolean canClickMenuArticles(Pais paisI, Linea linea, Sublinea sublinea) {
         if (paisI.getShop_online().compareTo("true")==0) {
-            if (sublinea==null)
+            if (sublinea==null) {
                 return (linea.getMenusart().compareTo("s")==0);
-                     
+            }
             return sublinea.getMenusart().compareTo("s")==0;
         }
         

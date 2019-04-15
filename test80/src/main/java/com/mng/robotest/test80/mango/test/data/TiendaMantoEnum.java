@@ -27,17 +27,18 @@ public class TiendaMantoEnum {
 		
 		public static TiendaManto getTienda(String codAlmacen, String codigoPais, AppEcom appE) {
 			String codigo = codAlmacen;
-			if ("".compareTo(codigo)==0)
+			if ("".compareTo(codigo)==0) {
 				codigo = codigoPais;
-				
+			}
 			for (TiendaManto tiendaManto : TiendaManto.values()) {
-				if (tiendaManto.codAlmacen.compareTo(codigo)==0 && tiendaManto.appE==appE)
+				if (tiendaManto.codAlmacen.compareTo(codigo)==0 && tiendaManto.appE==appE) {
 					return tiendaManto;
+				}
 			}
 			
-			if (appE==AppEcom.shop)
+			if (appE==AppEcom.shop) {
 				return TiendaManto.EuropaShop;
-			
+			}
 			return TiendaManto.EuropaOutlet;
 		}
 	}

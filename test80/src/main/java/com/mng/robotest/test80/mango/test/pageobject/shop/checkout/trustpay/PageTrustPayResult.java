@@ -14,9 +14,9 @@ public class PageTrustPayResult extends WebdrvWrapp {
     
     public static String getHeaderText(WebDriver driver) {
         WebElement titleNws = driver.findElement(By.xpath(XPathHeader));
-        if (titleNws!=null)
+        if (titleNws!=null) {
             return driver.findElement(By.xpath(XPathHeader)).getText();
-        
+        }
         return "";
     }
     

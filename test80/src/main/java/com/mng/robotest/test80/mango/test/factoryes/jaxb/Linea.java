@@ -43,8 +43,9 @@ public class Linea {
     	
     	public String getSufixOutlet(Channel channel) {
     		if (this.compareTo(LineaType.she)==0) {
-	            if (channel==Channel.movil_web)
+	            if (channel==Channel.movil_web) {
 	                return "outlet ";
+	            }
     		}
     		
     		return this.sufixOutlet;
@@ -60,8 +61,9 @@ public class Linea {
     	
         public static LineaType getLineaType(String id) {
         	for (LineaType lineaType : LineaType.values()) {
-        		if (lineaType.toString().compareTo(id)==0)
+        		if (lineaType.toString().compareTo(id)==0) {
         			return lineaType;
+        		}
         	}
         	
         	return null;
