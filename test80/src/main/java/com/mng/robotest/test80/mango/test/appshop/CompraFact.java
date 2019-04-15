@@ -140,8 +140,9 @@ public class CompraFact extends GestorWebDriver {
         
         int maxArticlesAwayVale = 3;
         List<ArticleStock> listArticles = UtilsTestMango.getArticlesForTest(dCtxSh, maxArticlesAwayVale, this.testVale);
-        if (!manyArticles)
+        if (!manyArticles) {
         	listArticles = Arrays.asList(listArticles.get(0));
+        }
         
         DataBag dataBag = new DataBag(); 
         SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, dFTest.driver);
@@ -170,8 +171,9 @@ public class CompraFact extends GestorWebDriver {
         	List<CheckPedido> listChecks = new ArrayList<CheckPedido>(Arrays.asList(
         		CheckPedido.consultarBolsa, 
         		CheckPedido.consultarPedido));
-        	if (checkAnulaPedido)
+        	if (checkAnulaPedido) {
         		listChecks.add(CheckPedido.anular);
+        	}
             DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
             PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, dFTest);
         }

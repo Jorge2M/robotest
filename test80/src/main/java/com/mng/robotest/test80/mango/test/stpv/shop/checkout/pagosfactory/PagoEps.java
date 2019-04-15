@@ -34,8 +34,7 @@ public class PagoEps extends PagoStpV {
         if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
         	PageEpsSimuladorStpV.validateIsPage(driver);
         	PageEpsSimuladorStpV.selectDelay(TypeDelay.OneMinutes, driver);
-        }
-        else {
+        } else {
         	PageEpsSelBancoStpV.validateIsPage(dCtxPago.getDataPedido().getImporteTotal(), dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, driver);
         }
         

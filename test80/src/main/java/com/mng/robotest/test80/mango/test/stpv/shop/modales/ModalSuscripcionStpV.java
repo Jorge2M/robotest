@@ -19,8 +19,7 @@ public class ModalSuscripcionStpV {
 		String codPais = dCtxSh.pais.getCodigo_pais();
 		if (dCtxSh.pais.getRgpd().equals("S")) {
 			checkExistsTextsRGPD(codPais, driver);
-		}
-		else {
+		} else {
 			checkNotExistsTextsRGPD(codPais, driver);
 		}
     }

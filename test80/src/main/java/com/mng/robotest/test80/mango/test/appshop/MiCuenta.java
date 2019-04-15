@@ -79,8 +79,7 @@ public class MiCuenta extends GestorWebDriver {
 	        
 	        dCtxSh.pais = this.españa;
 	        dCtxSh.idioma = this.castellano;
-	    }
-        else {
+	    } else {
             dCtxSh.pais = this.paisFactory;
             dCtxSh.idioma = this.idiomaFactory;        	
         }
@@ -120,8 +119,7 @@ public class MiCuenta extends GestorWebDriver {
         PageMisDatosStpV.validaContenidoNombre(nombreActual, dFTest.driver);
         if (dCtxSh.appE==AppEcom.shop) {
             PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dCtxSh.channel, dFTest.driver);
-        }
-        else {
+        } else {
             PageMiCuentaStpV.goToMisPedidos(dCtxSh.userConnected, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
         }
             

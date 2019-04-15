@@ -79,8 +79,7 @@ public class PagosPaisesXML {
             //Asociamos a la suite X testruns (de momento pasamos datos hardcodeados pero deberán llegarnos vía parámetro)
             joinSuiteWithTestRunBStack(TypeDriver.browserstack, suite, commonsXML.bsMovilAndroid);
             joinSuiteWithTestRunBStack(TypeDriver.browserstack, suite, commonsXML.bsMovilIOS);
-        }
-        else {
+        } else {
             //En caso <> browserstack paralelizaremos a nivel de los métodos (casos de prueba)
             suite.setParallel(ParallelMode.METHODS);
             suite.setThreadCount(4);

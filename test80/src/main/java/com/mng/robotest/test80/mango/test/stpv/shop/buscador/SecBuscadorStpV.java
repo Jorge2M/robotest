@@ -61,8 +61,7 @@ public class SecBuscadorStpV {
         //Validaciones
         if (categoriaExiste) { 
         	appearsProductsOfCategoria(categoriaABuscar, pageGaleria);
-        }
-        else {
+        } else {
         	appearsSearchErrorPage(categoriaABuscar, driver);
         }
         

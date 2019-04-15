@@ -47,8 +47,7 @@ public class SecBolsaStpV {
     throws Exception {
         if (channel==Channel.movil_web) {
             clickAspaForCloseMobil(driver);
-        }
-        else {
+        } else {
         	forceStateBolsaTo(StateBolsa.Closed, app, channel, driver);
         }
     }
@@ -312,8 +311,7 @@ public class SecBolsaStpV {
     throws Exception {
         if (dCtxSh.userRegistered) {
             PageCheckoutWrapperStpV.validateIsFirstPage(dCtxSh.userRegistered, dataBag, dCtxSh.channel, driver);
-        }
-        else {
+        } else {
         	int maxSecondsWait = 5;
             Page1IdentCheckoutStpV.validateIsPage(maxSecondsWait, driver);
         }

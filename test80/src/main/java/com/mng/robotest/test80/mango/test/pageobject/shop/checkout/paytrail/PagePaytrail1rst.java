@@ -40,8 +40,7 @@ public class PagePaytrail1rst extends WebdrvWrapp {
     public static void clickButtonContinue(Channel channel, WebDriver driver) throws Exception {
         if (channel==Channel.movil_web) {
             clickAndWaitLoad(driver, By.xpath(XPathButtonContinueMobil));
-        }
-        else {
+        } else {
             clickAndWaitLoad(driver, By.xpath(XPathButtonPagoDesktop));
         }
     }

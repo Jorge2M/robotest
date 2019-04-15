@@ -199,8 +199,7 @@ public class SecBolsa extends WebdrvWrapp {
         if (channel==Channel.movil_web) {
             itTotalEntero = driver.findElements(By.xpath("(" + xpathCapaBolsa + xpathSubtotal + ")[1]" + "//span[@style[not(contains(.,'padding'))]][1]")).listIterator();
             itTotalDecimal = driver.findElements(By.xpath("(" + xpathCapaBolsa + xpathSubtotal + ")[1]" + "//span[@style[not(contains(.,'padding'))]][2]")).listIterator();
-        } 
-        else {
+        } else {
             itTotalEntero = driver.findElements(By.xpath(xpathCapaBolsa + xpathSubtotal + "//*[@class='bolsa_price_big']")).listIterator();
             itTotalDecimal = driver.findElements(By.xpath(xpathCapaBolsa + xpathSubtotal + "//*[@class='bolsa_price_small']")).listIterator();
         }
@@ -234,8 +233,7 @@ public class SecBolsa extends WebdrvWrapp {
             if (channel==Channel.movil_web) {
                 itTotalEntero = driver.findElements(By.xpath("(" + xpathImpTransp + ")[1]" + "//span[1]")).listIterator();
                 itTotalDecimal = driver.findElements(By.xpath("(" + xpathImpTransp + ")[1]" + "//span[2]")).listIterator();
-            } 
-            else {
+            } else {
                 itTotalEntero = driver.findElements(By.xpath(xpathImpTransp + "//*[@class='bolsa_price_big']")).listIterator();
                 itTotalDecimal = driver.findElements(By.xpath(xpathImpTransp + "//*[@class='bolsa_price_small']")).listIterator();
             }
@@ -336,13 +334,13 @@ public class SecBolsa extends WebdrvWrapp {
         if (channel==Channel.movil_web) {
             if (isElementVisible(driver, By.xpath("//a[@class[contains(.,'icon-cross')]]")))
                 clickAndWaitLoad(driver, By.xpath("//a[@class[contains(.,'icon-cross')]]"));
-        }
-        else {
-            if (!UtilsMangoTest.findDisplayedElements(driver, By.cssSelector("p.bolsa_close.icono")).isEmpty())
+        } else {
+            if (!UtilsMangoTest.findDisplayedElements(driver, By.cssSelector("p.bolsa_close.icono")).isEmpty()) {
                 clickAndWaitLoad(driver, By.cssSelector("p.bolsa_close.icono"));
-            else { 
-                if (!UtilsMangoTest.findDisplayedElements(driver, By.cssSelector("bolsa_close")).isEmpty())
+            } else { 
+                if (!UtilsMangoTest.findDisplayedElements(driver, By.cssSelector("bolsa_close")).isEmpty()) {
                     clickAndWaitLoad(driver, By.className("bolsa_close"));
+                }
             }
         }
     }    

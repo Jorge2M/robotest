@@ -52,8 +52,7 @@ public class PageReembolsosStpV {
 	    	validations.add(
 	    		"El país SÍ tiene asociado Saldo en Cuenta -> Aparecen las secciones de \"Saldo en cuenta\" y \"Transferencia bancaria\"",
 	    		isVisibleTransferenciaSection && isVisibleStoreCreditSection, State.Defect);
-    	}
-    	else {
+    	} else {
 	    	validations.add(
 	    		"El país NO tiene asociado Saldo en Cuenta -> Aparece la sección de \"Transferencia bancaria\" y no la de \"Saldo en cuenta\"",
 	    		isVisibleTransferenciaSection && !isVisibleStoreCreditSection, State.Defect);

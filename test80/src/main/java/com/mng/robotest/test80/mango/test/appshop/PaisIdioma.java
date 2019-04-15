@@ -159,8 +159,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
         	if (existsRightBannerMenu(linea, sublinea, dCtxShI.channel)) {
                 SecMenusDesktopStpV.clickRightBanner(lineaType, sublineaType, dCtxShI.appE, dFTest.driver);
         	}
-        }
-        else {
+        } else {
             if (SecMenusWrap.canClickMenuArticles(dCtxShI.pais, linea, sublinea)) {
             	Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "pantalones"));
                 SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxShI, dFTest.driver);

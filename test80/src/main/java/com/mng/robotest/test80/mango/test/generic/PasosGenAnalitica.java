@@ -138,8 +138,7 @@ public class PasosGenAnalitica {
     	 	boolean isParamSkus = true;
             if (paramSkus==null) {
             	isParamSkus = false;
-            }
-            else {
+            } else {
                 Iterator<ArticuloScreen> it2 = dataPedido.getDataBag().getListArticulos().iterator();
                 while (it2.hasNext()) {
                     String refPedido = it2.next().getReferencia();
@@ -334,8 +333,7 @@ public class PasosGenAnalitica {
             if (responseJSON==null) {
             	infoWarnings+="<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: hay peticiones sin respuesta, por ejemplo la <a href=\"" + (String)requestJSON.get("url") + "\">" + (String)requestJSON.get("url") + "</a>";
                 peticionesOk = false;
-            }
-            else {
+            } else {
                 long statusResponse = (long)responseJSON.get("status");
                 if (statusResponse >= 400) {
                 	infoWarnings+="<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: hay peticiones con status KO, por ejemplo la <a href=\"" + (String)requestJSON.get("url") + "\">" + (String)requestJSON.get("url") + "</a> ( " + statusResponse + ")";

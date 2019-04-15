@@ -51,8 +51,7 @@ public class utils {
         if (applicationDNS!=null && "".compareTo(applicationDNS)!=0) {
             pathReport = filePath.substring(filePath.indexOf(Constantes.directoryOutputTests));
             pathReport = applicationDNS + "\\" + pathReport;
-        } 
-        else {
+        } else {
             Pattern patternDrive = Pattern.compile("^[a-zA-Z]:");
             pathReport = patternDrive.matcher(filePath).replaceFirst("\\\\\\\\" + myUtils.getNamePC());
         }

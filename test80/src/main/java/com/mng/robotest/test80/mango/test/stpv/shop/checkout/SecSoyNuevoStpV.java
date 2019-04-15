@@ -40,8 +40,7 @@ public class SecSoyNuevoStpV {
 		 	validations.add(
 				"El texto legal de RGPD <b>SI</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais(),
 				Page1IdentCheckout.secSoyNuevo.isTextoLegalRGPDVisible(driver), State.Defect);
-		}
-		else {
+		} else {
 		 	validations.add(
 				"El texto de info de RGPD <b>NO</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais(),
 				!Page1IdentCheckout.secSoyNuevo.isTextoRGPDVisible(driver), State.Defect);			

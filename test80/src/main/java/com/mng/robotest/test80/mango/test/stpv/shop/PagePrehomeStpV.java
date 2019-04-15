@@ -43,8 +43,7 @@ public class PagePrehomeStpV {
 	    	validations.add(
 				"El país <b>Sí</b> tiene la marca de venta online\"",
 				isPaisWithMarcaCompra, State.Warn, true);
-	    }
-	    else {
+	    } else {
 	    	validations.add(
 				"El país <b>No</b> tiene la marca de venta online\"",
 				!isPaisWithMarcaCompra, State.Warn, true);	    	
@@ -98,8 +97,7 @@ public class PagePrehomeStpV {
 	    	validations.add(
 				"Aparece una pantalla en la que el título contiene <b>outlet</b>",
 				title.contains("outlet"), State.Defect);
-    	}
-    	else {
+    	} else {
 	    	validations.add(
 				"Aparece una pantalla en la que el título contiene <b>mango</b>",
 				title.contains("mango"), State.Defect);

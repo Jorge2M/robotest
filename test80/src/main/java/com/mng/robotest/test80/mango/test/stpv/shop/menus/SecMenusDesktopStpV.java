@@ -418,15 +418,15 @@ public class SecMenusDesktopStpV {
     	level=State.Warn)
     private static boolean checkAreValidMangoObjectsInPage(AppEcom app, WebDriver driver) throws Exception {
         PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
-        if (!pageGaleria.isVisibleArticleUntil(1, 3) ||
-            !PageLanding.hayIframes(driver) ||
-            !PageLanding.hayMaps(driver) ||
+        if (!pageGaleria.isVisibleArticleUntil(1, 3) &&
+            !PageLanding.hayIframes(driver) &&
+            !PageLanding.hayMaps(driver) &&
             !PageLanding.haySliders(driver)) {
             int maxBannersToLoad = 1;
             ManagerBannersScreen managerBanners = new ManagerBannersScreen(maxBannersToLoad, driver);
             return (managerBanners.existBanners());
         }
-        return false;
+        return true;
     }
     
     final static String tagUrlAcceso = "@TagUrlAcceso";
@@ -514,11 +514,11 @@ public class SecMenusDesktopStpV {
     	ChecksResult validations = ChecksResult.getNew();
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		int numPage = 1; 
-		int marginPixelsError = 1;
-	  	ListSizesArticle listArtWrong1rstPage = pageGaleriaDesktop.getArticlesWithWrongSize(numPage, marginPixelsError);
+		double marginPercError = 2;
+	  	ListSizesArticle listArtWrong1rstPage = pageGaleriaDesktop.getArticlesWithWrongSize(numPage, marginPercError);
 	 	validations.add(
 			"Los div de los artículos de la " + numPage + "a página tienen un tamaño acorde al especificado en el atributo width de su imagen " + 
-			"(con un margen de error de " + marginPixelsError + " píxeles)" +
+			"(margen del " + marginPercError + "%)" +
 			getLiteralWarningArticlesSizesWrong(listArtWrong1rstPage),
 			listArtWrong1rstPage.size()==0, State.Defect);
 	 	

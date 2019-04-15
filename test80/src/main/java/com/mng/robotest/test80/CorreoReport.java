@@ -208,10 +208,7 @@ public class CorreoReport {
         InternetAddress[] myToList = InternetAddress.parse("eqp.ecommerce.qamango@mango.com,");
         InternetAddress[] myCcList = InternetAddress.parse(
         	"jordi.pereta@mango.com," + 
-        	"joan.pallas@mango.com," + 
         	"antonio.hernandez@mango.com," +
-        	"joan.pallas@mango.com," + 
-        	"omunoz.redsauce@gmail.com," +
         	"eqp.ecommerce.payments@mango.com," +
         	"eqp.ebusiness.test@mango.com");
         //InternetAddress[] myToList = InternetAddress.parse("jorge.munoz@mango.com");

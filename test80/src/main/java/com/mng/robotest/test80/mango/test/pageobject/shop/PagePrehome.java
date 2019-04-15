@@ -161,8 +161,7 @@ public class PagePrehome extends WebdrvWrapp {
             
             // Seleccionamos el país encontrado
             driver.findElement(By.xpath("//div[@class='chosen-drop']/ul/li")).click();        
-        }
-        else {
+        } else {
             //En el caso de mobile no ejecutamos los despliegues porque es muy complejo tratar con los desplegables nativos del dispositivo
             //Seleccionamos el país a partir de su código de país
             driver.findElement(By.xpath(XPathSelectPaises + "/option[@value='" + codigoPais + "']")).click();
@@ -294,10 +293,10 @@ public class PagePrehome extends WebdrvWrapp {
             //Selecciona la provincia "Barcelona"
             seleccionaProvincia(driver, pais.getNombre_pais(), channel);
     
-        if (pais.getListIdiomas().size() > 1)
+        if (pais.getListIdiomas().size() > 1) {
             //Si el país tiene más de 1 idioma seleccionar el que nos llega como parámetro
             seleccionaIdioma(driver, pais.getNombre_pais(), idioma.getCodigo().getLiteral());
-        else {
+        } else {
             String codigoPais = getCodigoPais(driver, pais.getNombre_pais());
             selectButtonForEnter(driver, codigoPais);
         }

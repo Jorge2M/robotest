@@ -98,8 +98,7 @@ public class Registro extends GestorWebDriver {
             
             dCtxSh.pais = this.españa;
             dCtxSh.idioma = this.castellano;
-        }
-        else {
+        } else {
             dCtxSh.pais = this.paisFactory;
             dCtxSh.idioma = this.idiomaFactory;
         }        
@@ -236,8 +235,7 @@ public class Registro extends GestorWebDriver {
 //	        	testPago(dataRegistro, dFTest);
 	        }
 
-        }
-        else {
+        } else {
         	SecFooterStpV.validaRGPDFooter(clickRegister, dCtxSh, dFTest.driver);
         }
     }

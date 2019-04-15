@@ -119,11 +119,11 @@ public class ElementPageFunctions {
 
     public static void selectElement(ElementPage element, Channel channel, WebDriver driver, TypeOfClick typeOfClick) 
     throws Exception {
-        WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(element.getXPath(channel)), 3);
+        WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(element.getXPath(channel)), typeOfClick);
 	}
 
     public static void selectElement(ElementPage element, Channel channel, WebDriver driver) throws Exception {
-    	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(element.getXPath(channel)), 3);
+    	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(element.getXPath(channel)));
     }
 
     public static void moveToAndSelectElement(ElementPage element, WebDriver driver) throws Exception {

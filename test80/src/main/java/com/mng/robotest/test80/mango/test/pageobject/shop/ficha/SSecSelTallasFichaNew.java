@@ -82,8 +82,7 @@ public class SSecSelTallasFichaNew extends WebdrvWrapp {
             //En el caso de talla única no existe XPathSelectorTallas
             if (isElementVisible(driver, By.xpath(XPathSelectorTallas))) {
                 driver.findElement(By.xpath(XPathSelectorTallas)).click();
-            }
-            else {
+            } else {
                 return true;
             }
             return (isVisibleListTallasForSelectUntil(1, driver));

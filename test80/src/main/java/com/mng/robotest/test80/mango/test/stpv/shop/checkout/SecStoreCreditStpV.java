@@ -51,8 +51,7 @@ public class SecStoreCreditStpV {
             if (channel==Channel.desktop) {
                 dCtxPago.getDataPedido().setImporteTotalSinSaldoCta(PageCheckoutWrapper.getPrecioTotalFromResumen(channel, driver));
             }
-        }
-        else {
+        } else {
         	checkAfterMarkSaldoEnCuenta(channel, pais, driver);
             if (channel==Channel.movil_web) {
                 dCtxPago.getDataPedido().setImporteTotalSinSaldoCta(PageCheckoutWrapper.getPrecioTotalFromResumen(channel, driver));
@@ -81,8 +80,7 @@ public class SecStoreCreditStpV {
           	validations.add(
         		"Está marcado el radio del bloque de \"Saldo en cuenta\"",
         		isCheckedBlock, State.Defect);
-      	}
-      	else {
+      	} else {
           	validations.add(
         		"No está marcado el radio del bloque de \"Saldo en cuenta\"",
         		!isCheckedBlock, State.Warn);

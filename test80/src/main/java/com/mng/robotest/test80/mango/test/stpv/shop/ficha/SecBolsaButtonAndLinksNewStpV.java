@@ -95,8 +95,7 @@ public class SecBolsaButtonAndLinksNewStpV {
 			 	validations.add(
 			 		"No es visible el icono de " + icon,
 			 		!isVisibleIcon, State.Warn);
-	        }
-	        else {
+	        } else {
 			 	validations.add(
 			 		"Sí es visible el icono de " + icon,
 			 		isVisibleIcon, State.Warn);

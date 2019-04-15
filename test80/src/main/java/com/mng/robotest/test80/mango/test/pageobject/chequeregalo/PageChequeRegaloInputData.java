@@ -129,8 +129,7 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
         	if (!WebdrvWrapp.isElementInvisibleUntil(driver, By.xpath(ElementCheque.compraAhora.getXPath()), 3)) {
 	        	inputDataCheque(chequeRegalo, driver);
         		clickAndWait(ElementCheque.compraAhora, driver);
-	        }
-	        else {
+	        } else {
 	        	break;
 	        }
         }

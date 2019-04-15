@@ -57,8 +57,7 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
         String xpathCapaMenuLinea = "";
         if (sublineaType==null) {
             xpathCapaMenuLinea = getXPathCapaMenusLinea(lineaType);
-        }
-        else {
+        } else {
         	xpathCapaMenuLinea = getXPathCapaMenusSublinea(sublineaType);
         }
         

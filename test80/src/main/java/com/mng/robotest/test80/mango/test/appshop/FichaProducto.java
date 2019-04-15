@@ -30,6 +30,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.Slider;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha.TypeFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecDataProduct.ProductNav;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld.TypePanel;
+import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
@@ -158,8 +159,7 @@ public class FichaProducto extends GestorWebDriver {
             if (TypePanel.Shipment.getListApps().contains(dCtxSh.appE)) {
                 pageFichaStpV.secProductDescOld.selectPanel(TypePanel.Shipment, dFTest.driver);  
             }
-        }
-        else {
+        } else {
             boolean isFichaAccesorio = pageFichaStpV.getFicha().isFichaAccesorio(); 
             pageFichaStpV.secFotosNew.validaLayoutFotosNew(isFichaAccesorio, dFTest.driver);
             pageFichaStpV.secBolsaButtonAndLinksNew.selectEnvioYDevoluciones(dFTest.driver);
@@ -205,8 +205,7 @@ public class FichaProducto extends GestorWebDriver {
             if (TypePanel.KcSafety.getListApps().contains(dCtxSh.appE)) {
                 pageFichaStpV.secProductDescOld.selectPanel(TypePanel.KcSafety, dFTest.driver);
             }
-        }
-        else {
+        } else {
             if (TypePanel.KcSafety.getListApps().contains(dCtxSh.appE)) {
                 pageFichaStpV.secBolsaButtonAndLinksNew.selectDetalleDelProducto(dCtxSh.appE, LineaType.nina, dFTest.driver);
             }
@@ -226,14 +225,9 @@ public class FichaProducto extends GestorWebDriver {
         dCtxSh.idioma=this.castellano;
         dCtxSh.userRegistered = false;
                     
-        //Step
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
-        
-        //Step
         ArticleStock articulo = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithoutStock, dCtxSh);
         SecBuscadorStpV.searchArticuloAndValidateBasic(articulo, dCtxSh, dFTest.driver);
-        
-        //Step
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         pageFichaStpV.selectColorAndTallaNoDisponible(articulo);
     }
@@ -247,20 +241,21 @@ public class FichaProducto extends GestorWebDriver {
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
         dCtxSh.userRegistered = false;
-        SecModalPersonalizacionStpV modalPersonalizacionStpV = SecModalPersonalizacionStpV.getNewOne(dCtxSh, dFTest.driver);                
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
         
-        //Step
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
-        modalPersonalizacionStpV.searchForCustomization();
+		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+		Menu1rstLevel menuPersonalizacion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.he, null, "personalizacion"));
+		SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh, dFTest.driver);
+		SecMenusWrapperStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+		LocationArticle articleNum = LocationArticle.getInstanceInCatalog(1);
+		pageGaleriaStpV.selectArticulo(articleNum, dCtxSh);
+        SecModalPersonalizacionStpV modalPersonalizacionStpV = SecModalPersonalizacionStpV.getNewOne(dCtxSh, dFTest.driver); 
+        modalPersonalizacionStpV.checkAreArticleCustomizable();
         
-        //Step
         PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         pageFichaStpv.selectTalla(1);
-        
-        //Steps propios del modal de personalizacion
-        modalPersonalizacionStpV.selectCustomization();
+        modalPersonalizacionStpV.selectLinkPersonalizacion();
         modalPersonalizacionStpV.startCustomization();
-
         modalPersonalizacionStpV.selectIconCustomization();
         modalPersonalizacionStpV.selectFirstIcon();
         modalPersonalizacionStpV.selectWhere();

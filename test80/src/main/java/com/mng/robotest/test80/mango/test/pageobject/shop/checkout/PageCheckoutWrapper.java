@@ -264,8 +264,7 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
     public static boolean isAvailableTrjGuardada(String metodoPago, Channel channel, WebDriver driver) {
     	if (channel==Channel.movil_web) {
     		return (page2MobilCheckout.isVisibleRadioTrjGuardada(metodoPago, driver));
-    	}
-    	else {
+    	} else {
     		return (page1DktopCheckout.isVisibleRadioTrjGuardada(metodoPago, driver));
     	}
     }

@@ -101,16 +101,14 @@ public class PageRegistroSegundaStpV {
         dataRegistroOK.put("clicklineas", lineasDesmarcadas);
         if (paisConNinos) {
             PageRegistroSegunda.setNumeroNinos(numNinos, dFTest.driver);
-        }
-        else {
+        } else {
             PageRegistroSegunda.clickButtonContinuar(dFTest.driver);
         }                
 
         //Validaciones.
         if (paisConNinos) {
             PageRegistroNinosStpV.validaIsPageWithNinos(numNinos, dFTest);
-        }
-        else {
+        } else {
             PageRegistroDirecStpV.isPageFromPais(pais, dFTest);
         }
         

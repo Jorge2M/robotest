@@ -76,8 +76,7 @@ public class UtilsMangoTest {
             String urlPaginaPostAcceso = (String)ctx.getAttribute(Constantes.attrUrlPagPostAcceso); 
             if (urlPaginaPostAcceso!=null) {
                 driver.get(urlPaginaPostAcceso);
-            }
-            else {
+            } else {
                 if (WebdrvWrapp.isElementPresent(driver, By.xpath("//base"))) {
                     String urlBase = driver.findElement(By.xpath("//base")).getAttribute("href");
                     driver.get(urlBase);
@@ -366,9 +365,9 @@ public class UtilsMangoTest {
      */
     public static String getEmailForCheckout(Pais pais, boolean emailThatExists) {
         String emailCheckout = "";
-        if (pais != null && pais.getEmailuser() != null && pais.getEmailuser().trim().compareTo("") != 0)
+        if (pais != null && pais.getEmailuser() != null && pais.getEmailuser().trim().compareTo("") != 0) {
             emailCheckout = pais.getEmailuser();
-        else {
+        } else {
             if (emailThatExists) 
                 emailCheckout = Constantes.mail_standard;
             else

@@ -33,8 +33,7 @@ public class PageAssist1rstStpV {
     	 	validations.add(
 				"Figuran 5 campos de input para los datos de la tarjeta: 1 para el número de tarjeta, 2 para la fecha de caducidad, 1 para el titular y 1 para el CVC",
 				inputsTrjOk, State.Warn);
-        }
-        else {
+        } else {
     	 	validations.add(
 				"Figuran 5 campos de input para los datos de la tarjeta: 4 para el número de tarjeta, 2 para la fecha de caducidad, 1 para el titular y 1 para el CVC",
 				inputsTrjOk, State.Warn);

@@ -131,8 +131,7 @@ public class AllPagesSEO {
         if ("".compareTo(operativaRobots)!=0) {
             if (!robotNoindex)
                 listaErrorsInHtmlFormat.add("<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">Estamos en <b>" + operativaRobots + "</b> pero no aparece el tag 'robots'</c>");
-        } 
-        else {
+        } else {
             if (robotNoindex && !currentURL.contains(".faces")) {
                 listaErrorsInHtmlFormat .add(
                     "<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\"> " + 

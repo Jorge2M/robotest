@@ -193,15 +193,16 @@ public class CreateWebDriver {
         if (context != null)
             context.setAttribute("browserGUI", Boolean.valueOf(true));
 
-        if (channel==Channel.movil_web)
+        if (channel==Channel.movil_web) {
             //En caso de móvil redimensionaremos el navegador a unas dimensiones tipo 'móvil'
             firefoxDriver.manage().window().setSize(new Dimension(640, 1136));
-        else {
+        } else {
             //En caso de Desktop maximizamos la ventana
             firefoxDriver.manage().window().maximize();
             java.awt.Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            if (screenSize.height<=1024)
+            if (screenSize.height<=1024) {
             	firefoxDriver.manage().window().setSize(new Dimension(1920, 1080));
+            }
         }
         
         return firefoxDriver;

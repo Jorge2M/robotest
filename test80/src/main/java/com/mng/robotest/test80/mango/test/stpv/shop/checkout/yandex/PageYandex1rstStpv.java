@@ -38,8 +38,7 @@ public class PageYandex1rstStpv {
         if (!PageYandex1rst.retryButtonExists(driver)) {
             PageYandexPayingByCodeStpV.validateIsPage(importeTotal, codPais, driver);
             return (PageYandexPayingByCode.getPaymentCode(driver));
-        } 
-        else {
+        } else {
             return (retry(importeTotal, codPais, driver));
         }
     }

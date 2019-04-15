@@ -108,8 +108,6 @@ public class PageConsultaPedidoBolsaStpV extends ElementPageFunctions {
 	    saveErrorPage=SaveWhen.Never)
     public static void clickButtonIrAGenerar(String idPedido, WebDriver driver) throws Exception {
         clickAndWait(RightButtons.IrAGenerar, driver);
-                                    
-        //Validaciones
         PageGenerarPedidoStpV.validateIsPage(idPedido, driver);
     }
 }

@@ -197,9 +197,9 @@ public class GaleriaProducto extends GestorWebDriver {
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
-        if (dCtxSh.appE==AppEcom.outlet)
+        if (dCtxSh.appE==AppEcom.outlet) {
             SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest.driver);
-        else {
+        } else {
         	Menu1rstLevel menuNuevo = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "New Now"));
             SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuNuevo, dCtxSh, dFTest.driver);
             PageGaleriaStpV.secCrossSelling.validaIsCorrect(LineaType.she, dCtxSh.appE, dFTest);

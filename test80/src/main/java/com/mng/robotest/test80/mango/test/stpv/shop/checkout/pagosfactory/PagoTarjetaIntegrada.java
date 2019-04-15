@@ -27,8 +27,7 @@ public class PagoTarjetaIntegrada extends PagoStpV {
             if (dCtxPago.getFTCkout().trjGuardada && 
             	PageCheckoutWrapperStpV.isTarjetaGuardadaAvailable(metodoPago, dCtxSh.channel, driver)) {
             	PageCheckoutWrapperStpV.selectTrjGuardadaAndConfirmPago(dCtxPago, dCtxSh.channel, driver);
-            }
-            else {
+            } else {
             	PageCheckoutWrapperStpV.inputDataTrjAndConfirmPago(dCtxPago, dCtxSh.channel, driver);
             }
             switch (dataPedido.getPago().getTipotarjEnum()) {

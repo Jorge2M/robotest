@@ -34,8 +34,7 @@ public class ArticuloNavigations {
                 pageFicha.secDataProduct.selectColorWaitingForAvailability(articleStock.getColourCode(), driver);
             
             articulo.setCodigoColor(articleStock.getColourCode());
-        }
-        else {
+        } else {
         	pageFicha.secDataProduct.clickIfPossibleAndWait(ColorType.Available, driver);
             articulo.setCodigoColor(pageFicha.secDataProduct.getCodeColor(ColorType.Selected, driver));
         }

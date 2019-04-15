@@ -22,11 +22,11 @@ public class PagePaypalLogin extends WebdrvWrapp {
     	sendKeysWithRetry(2, userMail, By.xpath(XPathInputLogin), driver);
         if (isElementVisible(driver, By.xpath(XPathInputPassword))) {
             driver.findElement(By.xpath(XPathInputPassword)).sendKeys(password);
-        }
-        else {
+        } else {
             PagePaypalLogin.clickIniciarSesion(driver);
-            if (isElementVisibleUntil(driver, By.xpath(XPathInputPassword), 3/*seconds*/))
+            if (isElementVisibleUntil(driver, By.xpath(XPathInputPassword), 3)) {
                 driver.findElement(By.xpath(XPathInputPassword)).sendKeys(password);
+            }
         }
     }
 

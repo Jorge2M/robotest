@@ -39,10 +39,11 @@ public class PagePedidosMantoStpV {
 			"Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + maxSecondsToWait + " segundos)",
 			PagePedidos.isInvisibleCapaLoadingUntil(maxSecondsToWait, driver), State.Warn);
 	 	
-        boolean existsLinkPedido = PagePedidos.isPresentDataInPedido(IdColumn.idpedido, dataPedido.getCodigoPedidoManto(), TypeDetalle.pedido, 0, driver);
+        validations.setExistsLinkCodPed(
+        	PagePedidos.isPresentDataInPedido(IdColumn.idpedido, dataPedido.getCodigoPedidoManto(), TypeDetalle.pedido, 0, driver));
 	 	validations.add(
 			"En la columna " + IdColumn.idpedido.textoColumna + " aparece el código de pedido: " + dataPedido.getCodigoPedidoManto(),
-			existsLinkPedido, State.Warn);
+			validations.getExistsLinkCodPed(), State.Warn);
 	 	validations.add(
 			"Aparece un solo pedido",
 			PagePedidos.getNumLineas(driver)==1, State.Warn);

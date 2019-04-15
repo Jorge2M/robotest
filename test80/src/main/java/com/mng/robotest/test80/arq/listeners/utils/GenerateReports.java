@@ -553,8 +553,7 @@ public class GenerateReports extends EmailableReporter {
 	                
 	                iValidac+=1;
 	            }
-            }
-            else {
+            } else {
             	//1 sola validación
             	int intValidac = Integer.valueOf(listResValidacs.get(0));
             	State stateValidac = State.getState(intValidac);

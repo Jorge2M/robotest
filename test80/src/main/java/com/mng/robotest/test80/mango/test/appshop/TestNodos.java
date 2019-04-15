@@ -157,8 +157,7 @@ public class TestNodos extends GestorWebDriver {
             if (appE==AppEcom.outlet) {
                 Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
                 SecMenusWrapperStpV.accesoMenuXRef(menuVestidos, dCtxSh, dFTest.driver);
-            }
-            else {
+            } else {
             	Linea lineaNuevo = dCtxSh.pais.getShoponline().getLinea(LineaType.nuevo);
             	String idCarruselMujer = lineaNuevo.getListCarrusels()[0];
                 SecMenusDesktopStpV.stepSeleccionaCarrusel(dCtxSh.pais, LineaType.nuevo, idCarruselMujer, dCtxSh.appE, dFTest.driver);

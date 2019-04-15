@@ -93,8 +93,7 @@ public class GestorWebDriver extends fmwkTest {
 	        
             //Lo buscamos en el gestor y marcamos nuestro webdriver a estado 'free'
             gestorWd.setWebDriverToFree(driver);
-        }
-        else {
+        } else {
             //Lo buscamos en el gestor de WebDrivers y lo eliminamos
             gestorWd.deleteStrWebDriver(driver);
             

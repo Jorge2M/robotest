@@ -128,8 +128,7 @@ public class ValidationsDAO {
                 insert.setString(7, descripValidac);
                 if (datosStep.getExcepExists()) {
                     insert.setInt(8, State.Nok.getIdNumerid());
-                }
-                else {
+                } else {
                     insert.setInt(8, datosStep.getResultLastValidation().getIdNumerid());
                 }
     

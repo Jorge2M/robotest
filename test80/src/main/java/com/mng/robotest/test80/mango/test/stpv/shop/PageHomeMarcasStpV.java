@@ -67,8 +67,7 @@ public class PageHomeMarcasStpV {
 	    	validations.add(
 	    		PrefixRebajas + "Aparece la línea \"Rebajas\" (lo esperamos hasta " + maxSeconds + " segundos)",
 	    		isPresentLinRebajas, State.Defect);
-        }
-        else {
+        } else {
 	    	validations.add(
 	    		PrefixRebajas + "No aparece la línea \"Rebajas\"",
 	    		!isPresentLinRebajas, State.Defect);
@@ -99,8 +98,7 @@ public class PageHomeMarcasStpV {
 	        	validations.add(
 	        		"No hay ningún banner que linque con la sección de rebajas",
 	        		!isBannerThatLinkWithSale, State.Warn);
-    		}
-    		else {
+    		} else {
         		dataBanner1 = managerBannersScreen.getBanner(1);
         		boolean bannerLinkedWhithSales = dataBanner1.getUrlBanner().contains("seccion=Rebajas");
 	        	validations.add(
@@ -133,8 +131,7 @@ public class PageHomeMarcasStpV {
 	    	validations.add(
 	    		PrefixRebajas + "El mensaje de NewsLetter del Footer No contiene \"" + percentageSymbol + "\"",
 	    		!isMsgWithPercentageSimbol, State.Info, true);    
-    	}
-    	else {
+    	} else {
 	    	validations.add(
 	    		PrefixRebajas + "El mensaje de NewsLetter del Footer Sí contiene \"" + percentageSymbol + "\"",
 	    		isMsgWithPercentageSimbol, State.Warn);    

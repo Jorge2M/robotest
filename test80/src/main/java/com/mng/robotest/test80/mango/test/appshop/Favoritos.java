@@ -83,8 +83,7 @@ public class Favoritos extends GestorWebDriver {
             
             dCtxSh.pais = this.españa;
             dCtxSh.idioma = this.castellano;
-        }
-        else {
+        } else {
             dCtxSh.pais = this.paisFactory;
             dCtxSh.idioma = this.idiomaFactory;
         }
@@ -188,8 +187,7 @@ public class Favoritos extends GestorWebDriver {
         PageFavoritosStpV.modalFichaFavoritos.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dCtxSh.appE, dFTest);       
         if (dCtxSh.channel==Channel.movil_web) {
             PageFavoritosStpV.validaIsPageOK(dataFavoritos, dFTest.driver);
-        }
-        else {
+        } else {
             PageFavoritosStpV.modalFichaFavoritos.closeFicha(artToPlay, dFTest);
         }
         

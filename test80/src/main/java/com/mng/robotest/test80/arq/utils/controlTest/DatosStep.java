@@ -54,8 +54,7 @@ public class DatosStep {
     	DatosStep maxDatosStep = TestCaseData.getDatosLastStep();
     	if (maxDatosStep!=null) {
     		setStepNumber(maxDatosStep.getStepNumber() + 1);
-    	}
-    	else {
+    	} else {
     		setStepNumber(1);
     	}
         TestCaseData.storeInThread(this);

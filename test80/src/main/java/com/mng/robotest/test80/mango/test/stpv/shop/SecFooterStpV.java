@@ -232,16 +232,12 @@ public class SecFooterStpV {
         expected="Aparecen los textos legales de RGPD")
     public static void validaRGPDFooter(Boolean clickRegister, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
  		if (!clickRegister) {
- 			SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, driver)
- 				.clickLogoMango();
+ 			SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, driver).clickLogoMango();
  		}
         SecFooter.clickFooterSuscripcion(driver);
-             
-     	//Validaciones
  		if (dCtxSh.pais.getRgpd().equals("S")) {
  			checkIsRGPDpresent(dCtxSh.pais.getCodigo_pais(), driver);
- 		}
- 		else {
+ 		} else {
  			checkIsNotPresentRGPD(dCtxSh.pais.getCodigo_pais(), driver);
  		}
     }

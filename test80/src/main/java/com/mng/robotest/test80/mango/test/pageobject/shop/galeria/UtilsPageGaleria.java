@@ -11,8 +11,7 @@ public class UtilsPageGaleria {
         Matcher matcher = pattern.matcher(srcImagenColor);
         if (matcher.find()) {
             codColor = matcher.group(1);
-        }
-        else {
+        } else {
             pattern = Pattern.compile("_(.*?)(_.*?.jpg|.jpg)");
             matcher = pattern.matcher(srcImagenColor);
             if (matcher.find()) {

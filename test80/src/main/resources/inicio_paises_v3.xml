@@ -2193,7 +2193,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -3260,7 +3260,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ MXP</moneda>
 <maximo_bolsa>13000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>

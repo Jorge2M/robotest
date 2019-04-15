@@ -259,8 +259,7 @@ public class WebDriverMngUtils {
                         else
                             pLogger.warn("Imagen con SRC {} y status OK (2xx) pero con tamaño nulo en la página {} and id {}", currentImageUrl, i, image.getAttribute("id"));
                     }
-                } 
-                else {
+                } else {
                     // No podemos considerar este caso como un error pues en MANGO hay imágenes 'válidas' sin SRC. P.e:
                     // <img onclick="zoomOut()" />
                     // <img id="zoomFicha_img" class="_mng_zoomImage" />

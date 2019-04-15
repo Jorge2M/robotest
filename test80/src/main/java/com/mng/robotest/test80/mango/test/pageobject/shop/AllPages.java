@@ -121,9 +121,9 @@ public class AllPages extends WebdrvWrapp {
         String id = tagHttp.getAttribute("id");
 
         // Si ya habíamos registrado el warning no lo vamos a mostrar de nuevo (1 warning de este tipo x test)
-        if (context.getAttribute("httpMalicious." + src) != null)
+        if (context.getAttribute("httpMalicious." + src) != null) {
             malicious = false;
-        else {
+        } else {
             ArrayList<String> dominiosOK = new ArrayList<>();
             dominiosOK.add("mngbcn.com");
             dominiosOK.add("mango.com");

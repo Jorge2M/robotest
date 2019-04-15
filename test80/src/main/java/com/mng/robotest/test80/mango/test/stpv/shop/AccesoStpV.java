@@ -114,8 +114,7 @@ public class AccesoStpV {
 	    	validations.add(
 	    		"Aparece el link \"Mis Pedidos\"",
 	    		SecMenusWrap.secMenusUser.isPresentPedidos(dCtxSh.channel, driver), State.Defect);
-		}
-		else {
+		} else {
 	    	validations.add(
 	    		"Aparece el link \"Favoritos\"",
 	    		isVisibleLinkFavoritos, State.Defect);
@@ -125,8 +124,7 @@ public class AccesoStpV {
 		    	validations.add(
 		    		"Aparece el link \"Mis Compras\"",
 		    		isPresentLinkMisCompras, State.Defect);
-	    	}
-	    	else {
+	    	} else {
 		    	validations.add(
 		    		"No aparece el link \"Mis Compras\"",
 		    		!isPresentLinkMisCompras, State.Defect);
@@ -156,8 +154,7 @@ public class AccesoStpV {
     public static void accesoAplicacionEnVariosPasos(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         if (dCtxSh.appE==AppEcom.votf && !dCtxSh.userRegistered) { //En VOTF no tiene sentido identificarte con las credenciales del cliente
             AccesoStpV.accesoVOTFtoHOME(dCtxSh, driver);                    
-        }
-        else {
+        } else {
             PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, false/*execValidacs*/, driver);
             if (dCtxSh.userRegistered) {
                 identificacionEnMango(dCtxSh, driver);
@@ -276,8 +273,7 @@ public class AccesoStpV {
             //Si se ha confirmado el país < 2 veces debería aparecer el modal del cambio de país
         	ResultValWithPais resultVal = validacAccesoSiApareceModal(urlBaseTest, paisAccesoNoIP, paisAccesoPrevio, paisPrevConf, listPaisAsocIP, driver);
             paisAsocIP = resultVal.getPais();
-        }
-        else {
+        } else {
             //Si el país se ha confirmado > 1 vez no debería aparecer el modal de cambio de país
             validacAccesoNoApareceModal(urlBaseTest, paisPrevConf, driver);
         }
@@ -302,15 +298,13 @@ public class AccesoStpV {
         		"En el modal <b>No</b> aparece un link con la opción de confirmar el país " + paisAccesoNoIP.getNombre_pais() + 
         		" (" + paisAccesoNoIP.getCodigo_pais() + ")",
         		!ModalCambioPais.isLinkToConfirmPais(driver, paisAccesoNoIP.getNombre_pais()), State.Defect);
-        }
-        else {
+        } else {
         	if (paisConfirmado==null) {
 	        	validations.add(
 	        		"En el modal <b>Sí</b> aparece un link con la opción de confirmar el acceso al país por el que previsamente se ha accedido vía URL: " + 
 	        		paisAccesoPrevio.getNombre_pais() + " (" + paisAccesoPrevio.getCodigo_pais() + ")",
 	        		ModalCambioPais.isLinkToConfirmPais(driver, paisAccesoPrevio.getUrlPaisEstandar(urlBaseTest)), State.Defect);
-        	}
-        	else {
+        	} else {
 	        	validations.add(
 	        		"En el modal <b>No</b> aparece un link con la opción de confirmar el acceso al país por el que previsamente se ha accedido vía URL: " + 
 	        		paisAccesoPrevio.getNombre_pais() + " (" + paisAccesoPrevio.getCodigo_pais() + ")",

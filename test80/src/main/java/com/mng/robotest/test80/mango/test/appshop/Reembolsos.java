@@ -131,8 +131,7 @@ public class Reembolsos extends GestorWebDriver {
             if (PageReembolsos.isCheckedRadio(TypeReembolso.StoreCredit, dFTest.driver)) {
                 PageReembolsosStpV.testConfTransferencia(dFTest.driver);
                 PageReembolsosStpV.selectRadioSalCtaAndRefresh(dFTest.driver);
-            }
-            else {
+            } else {
                 PageReembolsosStpV.selectRadioSalCtaAndRefresh(dFTest.driver);
                 PageReembolsosStpV.testConfTransferencia(dFTest.driver);
             }

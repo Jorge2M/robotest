@@ -69,8 +69,7 @@ public class PageRegistroIniStpV {
             	validations.add(
             		"No aparece mensaje de error el el campo con datos correctos: <b>" + dataInputString + "</b>",
             		PageRegistroIni.getNumberMsgInputInvalid(dataInput.dataRegType, driver) <= 0, State.Warn);
-            }
-            else {
+            } else {
             	validations.add(
             		"Sí aparece mensaje de error el el campo con datos incorrectos: <b>" + dataInputString + "</b>",
             		PageRegistroIni.getNumberMsgInputInvalid(dataInput.dataRegType, driver) > 0, State.Warn);
@@ -99,8 +98,7 @@ public class PageRegistroIniStpV {
             if (numInputsObligatoriosNoInf > 0) {
             	validateAreInputsWithErrorMessageAssociated(numInputsObligatoriosNoInf, paisRegistro, dFTest.driver);  
             }
-        }
-        else {
+        } else {
             PageRegistroSegundaStpV.validaIsPageRegistroOK(paisRegistro, app, dataRegistro, dFTest.driver);
         }
         
@@ -157,9 +155,7 @@ public class PageRegistroIniStpV {
 	public static void validaIsRGPDVisible(DataCtxShop dCtxSh, WebDriver driver) {
 		if (dCtxSh.pais.getRgpd().equals("S")) {
 			validateRGPD_inCountryWithRgpd(dCtxSh, driver);
-		}
-		
-		else {
+		} else {
 			validateRGPD_inCountryWithoutRgpd(dCtxSh, driver);
 		}
 	}  

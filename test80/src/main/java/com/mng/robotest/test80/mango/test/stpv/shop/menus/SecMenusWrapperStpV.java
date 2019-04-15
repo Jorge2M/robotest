@@ -64,8 +64,7 @@ public class SecMenusWrapperStpV {
             		validations.add (
         				"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b>",
         				isLineaPresent, State.Warn);
-                }    
-                else {
+                } else {
             		validations.add (
             			"<b>No</b> aparece el link de la línea <b>" + lineaType + "</b>",
             			!isLineaPresent, State.Warn);
@@ -94,8 +93,7 @@ public class SecMenusWrapperStpV {
             	menu1rstLevel.setDataGaLabel(listMenusLabel.get(i));
                 if (dCtxSh.channel==Channel.movil_web) {
                     SecMenuLateralMobilStpV.stepClickMenu1rstLevel(menu1rstLevel, dCtxSh.pais, dCtxSh.appE, dFTest.driver);
-                }
-                else {
+                } else {
                     SecMenusDesktopStpV.stepEntradaMenuDesktop(menu1rstLevel, paginaLinea, dCtxSh, dFTest.driver);
                 }
             }
@@ -141,8 +139,7 @@ public class SecMenusWrapperStpV {
     throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
             SecMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, driver);
-        }
-        else {	
+        } else {	
         	SecMenusDesktopStpV.selectMenuSuperiorTypeCatalog(menu1rstLevel, dCtxSh, driver);
         }
     }
@@ -151,8 +148,7 @@ public class SecMenusWrapperStpV {
     throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
             SecMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, driver); 
-        }
-        else {
+        } else {
         	SecMenusDesktopStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, driver);        
         }
     }
@@ -199,9 +195,8 @@ public class SecMenusWrapperStpV {
 				pageGaleria.isArticleWithHearthIconPresentUntil(1, maxSecondsToWaitIcon), State.Defect);
 			validations.add (
 				"Cada artículo tiene 1 icono de favoritos asociado",
-				pageGaleria.eachArticlesHasOneFavoriteIcon(), State.Warn);
-		}
-		else {
+				pageGaleria.eachArticlesHasOneFavoriteIcon(), State.Info, true);
+		} else {
 			validations.add (
 				"No aparece ningún icono de favoritos asociado a ningún artículo",
 				pageGaleria.getNumFavoritoIcons() == 0, State.Defect);

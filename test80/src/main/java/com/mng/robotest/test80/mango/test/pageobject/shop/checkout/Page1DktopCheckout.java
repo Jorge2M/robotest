@@ -488,8 +488,7 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     		if (articulo.getValePais()!=null) {
 	    		if (!PageCheckoutWrapper.validateDiscountOk(preciosArticuloScreen, descuento))
 	    			return false;
-    		}
-    		else {
+    		} else {
     			Descuento descuentoZero = new Descuento(0);
 	    		if (!PageCheckoutWrapper.validateDiscountOk(preciosArticuloScreen, descuentoZero))
 	    			return false;

@@ -139,8 +139,7 @@ public class SecMenusUserDesktop extends WebdrvWrapp {
 			    	if (loyaltyPoints.getAttribute("innerHTML").contains("likes-you-have")) {
 			    		return true;
 			    	}
-		    	}
-		    	else {
+		    	} else {
 		    		if (shadowLoyaltyPoints.toString().contains("likes-you-have")) {
 		    			return true;
 					}

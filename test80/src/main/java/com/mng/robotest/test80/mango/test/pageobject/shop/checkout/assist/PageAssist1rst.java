@@ -60,12 +60,12 @@ public class PageAssist1rst extends WebdrvWrapp {
                 !isElementPresent(driver, By.xpath(XPathSelectMMCaducMovil)) ||
                 !isElementPresent(driver, By.xpath(XPathSelectAACaducMovil)))
                 inputsOk = false;
-        }
-        else {
+        } else {
             if (!isElementPresent(driver, By.xpath(XPathInputNumTrjDesktop)) ||
                 !isElementPresent(driver, By.xpath(XPathInputMMCaducDesktop)) ||
-                !isElementPresent(driver, By.xpath(XPathInputAACaducDesktop)))
+                !isElementPresent(driver, By.xpath(XPathInputAACaducDesktop))) {
                 inputsOk = false;
+            }
         }
         
         if (!isElementPresent(driver, By.xpath(XPathInputTitular)) ||
@@ -81,9 +81,7 @@ public class PageAssist1rst extends WebdrvWrapp {
             driver.findElement(By.xpath(XPathInputNumTrjMovil)).sendKeys(pago.getNumtarj());
             new Select(driver.findElement(By.xpath(XPathSelectMMCaducMovil))).selectByValue(pago.getMescad());
             new Select(driver.findElement(By.xpath(XPathSelectAACaducMovil))).selectByValue("20" + pago.getAnycad()); //Atención con el efecto 2100!!!
-            
-        }
-        else {
+        } else {
             driver.findElement(By.xpath(XPathInputNumTrjDesktop)).sendKeys(pago.getNumtarj());
             waitForPageLoaded(driver);
             driver.findElement(By.xpath(XPathInputMMCaducDesktop)).sendKeys(pago.getMescad());

@@ -73,14 +73,12 @@ public class SmokeTestXML {
             if (paramsI.getChannel()==Channel.movil_web) {
                 joinSuiteWithTestRunMobilBStack(TypeDriver.browserstack, suite, commonsXML.bsMovilAndroid);
                 joinSuiteWithTestRunMobilBStack(TypeDriver.browserstack, suite, commonsXML.bsMovilIOS);            
-            }
-            else {
+            } else {
                 //joinSuiteWithTestRunDesktopBStack(TypeDriver.browserstack, suite, commonsXML.bsDktopWin10Explorer);
                 joinSuiteWithTestRunDesktopBStack(TypeDriver.browserstack, suite, commonsXML.bsDktopOSXSafari);
                 joinSuiteWithTestRunDesktopBStack(TypeDriver.browserstack, suite, commonsXML.bsDktopWin8Firefox);
             }
-        }
-        else {
+        } else {
             //En caso <> BrowserStack paralelizaremos a nivel de los Métodos (casos de prueba)
             suite.setParallel(ParallelMode.METHODS);
             suite.setThreadCount(3);

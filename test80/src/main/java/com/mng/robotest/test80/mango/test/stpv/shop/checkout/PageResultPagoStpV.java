@@ -66,8 +66,7 @@ public class PageResultPagoStpV {
         DataBag dataBag = dCtxPago.getDataPedido().getDataBag(); 
         if (dataBag!=null && "".compareTo(dataBag.getImporteTotal())!=0) {
             importeTotal = dataBag.getImporteTotal();
-        }
-        else {
+        } else {
             importeTotal = dCtxPago.getDataPedido().getImporteTotal();
         }
       	validations.add(
@@ -79,8 +78,7 @@ public class PageResultPagoStpV {
 	        	validations.add(
               		"Aparece el link hacia las compras",
               		PageResultPago.isLinkMisComprasDesktop(driver), State.Warn);
-	        }
-	        else {
+	        } else {
 	        	validations.add(
               		"Aparece el link hacia los pedidos",
               		PageResultPago.isLinkPedidosDesktop(driver), State.Warn);
@@ -112,8 +110,7 @@ public class PageResultPagoStpV {
         //Validations. Puede aparecer la página con la lista de pedidos o la de introducción de los datos del pedido
         if (PageListPedidos.isPage(driver)) {
         	PageListPedidosStpV.validateIsPage(dataPedido.getCodpedido(), driver);
-        }
-        else {
+        } else {
         	PageInputPedidoStpV.validateIsPage(driver);
         }
     }    
@@ -133,8 +130,7 @@ public class PageResultPagoStpV {
             flagsVal.validaJS = true;
             flagsVal.validaImgBroken = false;
             AllPagesStpV.validacionesEstandar(flagsVal, driver);
-        }
-        else {
+        } else {
             PageAccesoMisComprasStpV.validateIsPage(driver);
         }
     }    
@@ -146,8 +142,7 @@ public class PageResultPagoStpV {
         //Si es clicable seleccionamos el link "Seguir de shopping", sinó seleccionamos el icono de Mango
         if (PageResultPago.isClickableSeguirDeShopping(driver, channel)) {
             PageResultPago.clickSeguirDeShopping(driver, channel);
-        }
-        else {
+        } else {
             SecCabecera.getNew(channel, app, driver).clickLogoMango();
         }
     }
@@ -159,8 +154,7 @@ public class PageResultPagoStpV {
         if (datosStep.getResultSteps()==State.Ok) {
             if (PageListPedidos.isPage(driver)) {
                 PageListPedidosStpV.selectPedido(dataPedido.getCodpedido(), driver);
-            }
-            else {
+            } else {
                 PageInputPedidoStpV.inputPedidoAndSubmit(dataPedido, driver);
             }
         }
@@ -173,8 +167,7 @@ public class PageResultPagoStpV {
         if (dCtxSh.userRegistered) {
             PageMisComprasStpV.selectBlock(TypeCompra.Online, true/*ordersExpected*/, driver);
             PageMisComprasStpV.validateIsCompraOnlineVisible(dataPedido.getCodpedido(), dCtxPago.getFTCkout().isChequeRegalo, driver);
-        }
-        else {
+        } else {
             PageAccesoMisComprasStpV.clickBlock(TypeBlock.NoRegistrado, driver);
             PageAccesoMisComprasStpV.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido(), driver);
         }

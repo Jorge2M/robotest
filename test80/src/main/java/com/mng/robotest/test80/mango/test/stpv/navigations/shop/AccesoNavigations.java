@@ -42,8 +42,7 @@ public class AccesoNavigations {
         if (dCtxSh.appE==AppEcom.votf) {
             accesoVOTF(dCtxSh, driver);
             goFromLineasToMultimarcaVOTF(driver);
-        } 
-        else {
+        } else {
             PagePrehome.accesoShopViaPrehome(dCtxSh, driver);
         }
         
@@ -92,8 +91,7 @@ public class AccesoNavigations {
     throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
             SecMenusWrapperStpV.secMenuUser.cambioPaisMobil(dCtxSh, driver);
-        }
-        else {
+        } else {
             SecFooterStpV.cambioPais(dCtxSh, driver);
         }
     }

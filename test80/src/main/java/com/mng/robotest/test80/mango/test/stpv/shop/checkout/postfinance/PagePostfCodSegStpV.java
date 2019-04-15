@@ -35,8 +35,7 @@ public class PagePostfCodSegStpV {
     	PagePostfCodSeg.waitLoadPage();
     	if (PagePostfCodSeg.isPasarelaTest(driver)) {
             PagePostfCodSegStpV.validateIsPageTest(nombrePago, importeTotal, driver);
-    	}
-        else {
+    	} else {
             PagePostfCodSegStpV.validateIsPagePro(importeTotal, codPais, driver);
         }
     }
@@ -56,8 +55,7 @@ public class PagePostfCodSegStpV {
 		   	validations.add(
 	    		"SÍ existe el campo de introducción del código de seguridad",
 	    		existsCode, State.Defect);
-	   	}
-	   	else {
+	   	} else {
 		   	validations.add(
 	    		"NO existe el campo de introducción del código de seguridad",
 	    		!existsCode, State.Defect);

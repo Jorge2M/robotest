@@ -184,9 +184,9 @@ public class Page2IdentCheckout extends WebdrvWrapp {
         if (cfEmailList.size() > 0) {
             //Revisamos si está protegido el campo de input
             String cfMailStatus = cfEmailList.get(0).getAttribute("disabled");
-            if (cfMailStatus != null && cfMailStatus.compareTo("true") == 0)
+            if (cfMailStatus != null && cfMailStatus.compareTo("true") == 0) {
                 emailRegistro = cfEmailList.get(0).getAttribute("value");
-            else {
+            } else {
                 emailRegistro = email;
                 //Revisamos si el input ya está seteado con ese valor
                 if (cfEmailList.get(0).getAttribute("value").compareTo(emailRegistro) != 0) {

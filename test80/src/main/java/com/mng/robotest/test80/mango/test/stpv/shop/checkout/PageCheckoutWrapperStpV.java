@@ -55,8 +55,7 @@ public class PageCheckoutWrapperStpV {
     throws Exception {
         if (channel==Channel.movil_web) {
             page1MobilCheck.validateIsPage(userLogged, driver);
-        }
-        else {
+        } else {
             page1DktopCheck.validateIsPageOK(dataBag, driver);
         }
     } 
@@ -256,8 +255,7 @@ public class PageCheckoutWrapperStpV {
             pago.getTypePago()==TypePago.KrediKarti ||
             pago.getTypePago()==TypePago.Bancontact) {
             PageCheckoutWrapperStpV.validateSelectPagoTRJintegrada(pago, pais, channel, driver);
-        }
-        else {
+        } else {
             PageCheckoutWrapperStpV.validateSelectPagoNoTRJintegrada(pago, channel, driver);
         }
     }
@@ -423,8 +421,7 @@ public class PageCheckoutWrapperStpV {
 		 	validations.add(
 				"Aparece el campo de introducción del DNI/Pasaporte",
 				isPresentInputDni, State.Defect);
-    	}
-    	else {
+    	} else {
 		 	validations.add(
 				"Noparece el campo de introducción del DNI/Pasaporte",
 				!isPresentInputDni, State.Defect);
@@ -435,8 +432,7 @@ public class PageCheckoutWrapperStpV {
 		 	validations.add(
 				"Aparece el campo de introducción de la fecha de nacimiento",
 				isPresentInputFechaNac, State.Defect);
-    	}
-    	else {
+    	} else {
 		 	validations.add(
 				"No aparece el campo de introducción de la fecha de nacimiento",
 				!isPresentInputFechaNac, State.Defect);	
@@ -473,8 +469,7 @@ public class PageCheckoutWrapperStpV {
     throws Exception {
         if (channel==Channel.movil_web) {
             Page1EnvioCheckoutMobilStpV.validaResultImputPromoEmpl(driver);
-        }
-        else {
+        } else {
             Page1DktopCheckoutStpV.validaResultImputPromoEmpl(dataBag, app, driver);
         }
     }    

@@ -32,8 +32,7 @@ public class SecMetodoEnvioDesktopStpV {
         validaBlockSelectedDesktop(tipoTransporte, driver);
         if (tipoTransporte.isEntregaDomicilio()) {
             modalDroppoints.validaIsNotVisible(Channel.desktop, driver);
-        }
-        else {
+        } else {
             modalDroppoints.validaIsVisible(Channel.desktop, driver);
         }
     }

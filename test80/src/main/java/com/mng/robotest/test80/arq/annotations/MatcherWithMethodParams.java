@@ -79,8 +79,7 @@ public class MatcherWithMethodParams {
         	if (m.find()) {
           	  nameParameter = m.group(1);
           	  methodWithoutParams = m.group(2).replace(")","").replace("(","");
-          	}
-        	else {
+          	} else {
         		nameParameter = varAndMethod;
         	}
         }

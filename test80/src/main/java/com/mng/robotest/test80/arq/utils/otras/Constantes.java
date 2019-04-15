@@ -63,7 +63,7 @@ public class Constantes {
     public enum AnalyticsVal {GoogleAnalytics, Criteo, Bing, Polyvore, NetTraffic, DataLayer} 
 	
     //Máximo de banners a probar según el tipo de país
-    public static final int MAX_BAN_PAIS_TOP_SHOP = 8;
+    public static final int MAX_BAN_PAIS_TOP_SHOP = 6;
     public static final int MAX_BAN_PAIS_SICOMPRA_SHOP = 3;
     public static final int MAX_BAN_PAIS_NOCOMPRA_SHOP = 1;
     public static final int MAX_BAN_PAIS_TOP_OUTLET = 4;

@@ -280,8 +280,7 @@ public class PageFichaArtStpV {
 		 	validations.add(
 		 		"NO aparece un aviso indicando que hay que seleccionar la talla",
 		 		!isVisibleAviso, State.Defect);
-    	}
-    	else {
+    	} else {
 		 	validations.add(
 		 		"SÍ aparece un aviso indicando que hay que seleccionar la talla",
 		 		isVisibleAviso, State.Defect);
@@ -443,8 +442,7 @@ public class PageFichaArtStpV {
 		 	validations.add(
 		 		"No es visible el link <b>Prev</b> (lo esperamos hasta " + maxSecondsWait + " segundos)",
 		 		!isVisiblePrevLink, State.Warn);
-        }
-        else {
+        } else {
 		 	validations.add(
 		 		"Sí es visible el link <b>Prev</b> (lo esperamos hasta " + maxSecondsWait + " segundos)",
 		 		isVisiblePrevLink, State.Warn);

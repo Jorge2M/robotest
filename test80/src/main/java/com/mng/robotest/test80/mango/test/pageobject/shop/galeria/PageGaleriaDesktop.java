@@ -431,14 +431,18 @@ public class PageGaleriaDesktop extends PageGaleria {
     /**
      * @return la lista de referencia+color de los artículos incorrectos (size div != attr width de la imagen)
      */
-    public ListSizesArticle getArticlesWithWrongSize(int numPagina, int marginPixelsError) {	
+    public ListSizesArticle getArticlesWithWrongSize(int numPagina, double marginPercError) {	
     	ListSizesArticle listSizesArtWrong = ListSizesArticle.getInstance();
     	List<WebElement> listArticles = getListArticulosFromPagina(numPagina);
     	for (WebElement article : listArticles) {
     		int attrWidthImg = getWidthFromAtricleSrcImg(article);
     		int widthArticle = getWidthArticle(article);
-    		if (attrWidthImg!=0 && Math.abs(attrWidthImg-widthArticle) > 1) {
-    			listSizesArtWrong.addData(getRefColorArticulo(article), attrWidthImg, widthArticle);
+    		int numPixelsDiff = Math.abs(attrWidthImg-widthArticle);
+    		if (attrWidthImg!=0) {
+    			double diffPercentage = (numPixelsDiff / Double.valueOf(attrWidthImg)) * 100;
+    			if (diffPercentage > marginPercError) {
+    				listSizesArtWrong.addData(getRefColorArticulo(article), attrWidthImg, widthArticle);
+    			}
     		}
     	}
     	
@@ -652,9 +656,9 @@ public class PageGaleriaDesktop extends PageGaleria {
     	String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
     	WebElement slider = article.findElement(By.xpath("." + xpathSlider));
     	hoverArticle(article);
-    	if (getTypeDriver(driver)!=TypeDriver.firefox)
+    	if (getTypeDriver(driver)!=TypeDriver.firefox) {
     		isElementClickableUntil(driver, slider, 5);
-    	else {
+    	} else {
     		//TODO En el caso de Firefox-Geckodriver hay problemas con los moveToElement. 
     		//En este caso parece que se posiciona en la esquina superior izquierda
     		//Cuando se solvente podremos eliminar este código específico

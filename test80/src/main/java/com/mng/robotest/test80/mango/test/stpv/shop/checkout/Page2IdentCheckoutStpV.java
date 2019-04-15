@@ -85,8 +85,7 @@ public class Page2IdentCheckoutStpV {
 		 	validations.add(
 				"El texto legal de RGPD <b>SI</b> existe para el pais " + pais.getCodigo_pais(),
 				Page2IdentCheckout.isTextoLegalRGPDVisible(driver), State.Defect);
-		}
-		else {
+		} else {
 		 	validations.add(
 				"El texto legal de RGPD <b>NO</b> existe para el pais " + pais.getCodigo_pais(),
 				!Page2IdentCheckout.isTextoLegalRGPDVisible(driver), State.Defect);

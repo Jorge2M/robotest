@@ -28,8 +28,7 @@ public class PageLoginVOTFStpV {
         int numIdiomas = dCtxSh.pais.getListIdiomas().size();
         if (numIdiomas > 1) {
             datosStep.setResExpected("Aparece la página de selección del idioma");
-        }
-        else {
+        } else {
         	datosStep.setResExpected("Aparece la página de selección de la línea");
         }
         

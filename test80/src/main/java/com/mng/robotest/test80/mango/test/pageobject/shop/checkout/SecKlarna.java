@@ -70,10 +70,10 @@ public class SecKlarna extends WebdrvWrapp {
         if (channel==Channel.movil_web) {
             if (mensajeError.contains(errorTlfMovil))
                 isError = true;
-        }
-        else {
-            if (mensajeError.contains(errorTlfDesktop))
+        } else {
+            if (mensajeError.contains(errorTlfDesktop)) {
                 isError = true;
+            }
         }
         
         return isError;

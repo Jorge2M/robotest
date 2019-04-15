@@ -230,10 +230,10 @@ public abstract class PageGaleria extends WebdrvWrapp {
             if (typeOrden==FilterOrdenacion.PrecioAsc) {
                 if (precioActual < precioAnt)
                     return (precioAnt + "->" + precioActual);
-            } 
-            else {
-                if (precioActual > precioAnt)
+            } else {
+                if (precioActual > precioAnt) {
                     return (precioAnt + "->" + precioActual);
+                }
             }
 
             precioAnt = precioActual;

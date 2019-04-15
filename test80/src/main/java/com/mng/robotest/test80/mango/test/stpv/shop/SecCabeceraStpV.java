@@ -37,8 +37,7 @@ public class SecCabeceraStpV {
 	    	validations.add(
     			"<b>Sí</b> es posible comprar (aparece la capa relacionada con la bolsa)",
     			isVisibleIconoBolsa, State.Warn);
-		}
-		else {
+		} else {
 	    	validations.add(
     			"<b>No</b> es posible comprar (aparece la capa relacionada con la bolsa)",
     			!isVisibleIconoBolsa, State.Warn);

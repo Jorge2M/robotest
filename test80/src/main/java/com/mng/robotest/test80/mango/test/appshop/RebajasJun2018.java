@@ -172,8 +172,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
 	            if (maxRebajas==70) {
 	            	pageGaleriaStpV.validaRebajasHasta70Jun2018(dCtxSh.idioma);
 	            }
-            }
-            else {
+            } else {
                 Menu1rstLevel menuPromocion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "promocion"));
                 menuPromocion.setDataGaLabel("promocion");
             	SecMenusDesktopStpV.isPresentMenuSuperior(menuPromocion, dCtxSh.appE, dFTest.driver);

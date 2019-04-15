@@ -43,8 +43,7 @@ public class ListPagosEspana {
         	if (appE!=AppEcom.votf) {
         		createTestPagosEspana(listTests, appE, channel);
         		createTestPagosFrancia(listTests, appE, channel);
-        	}
-        	else {
+        	} else {
         		createTestPagosVotf(listTests, appE, channel);
         	}
         }
@@ -79,8 +78,7 @@ public class ListPagosEspana {
 		        		createTestPago(listTests, espana, castellano, pago, appE, channel, !usrReg, !empleado, testVale, manyArticles, !anulPedido, prioridad);
 		        		createTestPago(listTests, espana, castellano, pago, appE, channel, usrReg, !empleado, !testVale, !manyArticles, !anulPedido, prioridad);
 		        		createTestPago(listTests, espana, castellano, pago, appE, channel, usrReg, empleado, !testVale, !manyArticles, !anulPedido, prioridad);
-		        	}
-		        	else {
+		        	} else {
 		        		createTestPago(listTests, espana, castellano, pago, appE, channel, usrRegIntermitente, !empleado, !testVale, !manyArticles, !anulPedido, prioridad);
 		        		usrRegIntermitente=!usrRegIntermitente; //Iremos alternando entre usr registrado y no-registrado
 		        	}

@@ -87,8 +87,7 @@ public class InfoValidation {
 	        }
 	        
 	        throw (new RuntimeException("The return of a method marked with @Validation annotation must be of type boolean or ValidationResult"));
-    	}
-    	else {
+    	} else {
     		valResult.add(new ResultValidation(1));
     		return valResult;
     	}

@@ -68,8 +68,7 @@ public class PaisIdiomaXML {
             //Asociamos a la suite X testruns (de momento pasamos datos hardcodeados pero deberán llegarnos vía parámetro)
             joinSuiteWithTestRunMobilBStack(TypeDriver.browserstack, suite, commonsXML.bsMovilAndroid);
             joinSuiteWithTestRunMobilBStack(TypeDriver.browserstack, suite, commonsXML.bsMovilIOS);
-        }
-        else {
+        } else {
             //En caso <> browserstack paralelizaremos a nivel de los métodos (casos de prueba)
             suite.setParallel(ParallelMode.METHODS);
             suite.setThreadCount(3);

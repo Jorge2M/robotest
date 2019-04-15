@@ -63,8 +63,7 @@ public class Page1EnvioCheckoutMobilStpV {
         validaBlockSelected(tipoTransporte, 3, driver);
         if (tipoTransporte.isEntregaDomicilio()) {
             modalDroppoints.validaIsNotVisible(Channel.movil_web, driver);
-        }
-        else {
+        } else {
             modalDroppoints.validaIsVisible(Channel.movil_web, driver);
         }
     }    

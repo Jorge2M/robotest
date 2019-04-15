@@ -17,10 +17,10 @@ public class PageHomeMarcas {
         if (numLineas < 3 || pais.getCodigo_pais().equals("512") || pais.getCodigo_pais().equals("504") || pais.getCodigo_pais().equals("520")) {
             if(!driver.getPageSource().contains("home")) 
                 return false;
-        } 
-        else {
-            if(!driver.getPageSource().contains("homeMarcas")) 
+        }  else {
+            if (!driver.getPageSource().contains("homeMarcas")) {
                 return false;
+            }
         }
         
         return true;

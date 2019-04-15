@@ -77,8 +77,7 @@ public class PageMisComprasStpV {
     	checkBlockSelected(typeCompra, maxSecondsWait, driver);
         if (ordersExpected) {
         	checkArticlesInList(typeCompra, driver);
-        }
-        else {
+        } else {
         	checkListArticlesVoid(typeCompra, driver);
         }
     }

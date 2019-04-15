@@ -123,8 +123,7 @@ public class Page1DktopCheckoutStpV {
 		 	validations.add(
 				"<b>No</b> aparece mensaje de error en rojo (rgba(255, 0, 0, 1) en el bloque correspondiente al \"Código promocional\"",
 				!isVisibleError, State.Defect);
-        }
-        else {
+        } else {
 		 	validations.add(
 				"<b>Sí</b> aparece mensaje de error en rojo (rgba(255, 0, 0, 1) en el bloque correspondiente al \"Código promocional\"",
 				isVisibleError, State.Defect);

@@ -148,7 +148,7 @@ public class PageMercpagoDatosTrjStpV {
     	description=
     		"Introducir la fecha de vencimiento (#{inputData.getMesVencimiento()} / #{inputData.getAnyVencimiento()}), " + 
     	     "el banco #{inputData.getBanco()}, " +   
-    	     "el security code #{inputData.codigoSeguridad} " + 
+    	     "el security code #{inputData.getCodigoSeguridad()} " + 
     	     "y confirmar", 
     	expected=
     		"Aparece la página de resultado")
@@ -183,7 +183,7 @@ public class PageMercpagoDatosTrjStpV {
     @Step (
     	description=
     		"Introducir la fecha de vencimiento (#{inputData.getMesVencimiento()} / #{inputData.getAnyVencimiento()}, " + 
-            "security code (#{inputData.getCodigoSeguridad(), " + 
+            "security code (#{inputData.getCodigoSeguridad()}, " + 
             "Banco (#{inputData.getBanco()}) " +
             "y confirmar", 
         expected=
@@ -195,9 +195,6 @@ public class PageMercpagoDatosTrjStpV {
         PageMercpagoDatosTrjDesktop.sendCVC(inputData.codigoSeguridad, driver);
         PageMercpagoDatosTrjDesktop.selectBanco(inputData.banco, driver);
         PageMercpagoDatosTrjDesktop.clickBotonContinuar(driver);
-
-        //Validaciones
-        int maxSecondsWait = 30;
-        PageMercpagoConfStpV.validaIsPageUntil(maxSecondsWait, Channel.desktop, driver);
+        PageMercpagoConfStpV.validaIsPageUntil(30, Channel.desktop, driver);
     }
 }

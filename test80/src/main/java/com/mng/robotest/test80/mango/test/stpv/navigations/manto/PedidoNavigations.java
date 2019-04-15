@@ -110,7 +110,7 @@ public class PedidoNavigations {
         PageMenusMantoStpV.goToPedidos(driver);
         SecFiltrosMantoStpV.setFiltrosHoyYbuscar(dataPedido, TypeSearch.PEDIDO, driver);
         boolean existLinkPedido = PagePedidosMantoStpV.validaLineaPedido(dataPedido, app, driver).getExistsLinkCodPed();
-        if (existLinkPedido) {
+        if (existLinkPedido) { 
             PageConsultaPedidoBolsaStpV.detalleFromListaPedBol(dataPedido, TypeDetalle.pedido, app, driver);
         }
     }

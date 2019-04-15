@@ -40,9 +40,9 @@ public class NetTrafficMng {
 		BrowserMobProxy proxy = getProxy();
 		if (proxy==null || ((BrowserMobProxyServer)proxy).isStopped()) {
 			//Creación del proxy
-	        if (proxy==null)
+	        if (proxy==null) {
 		        proxy = forceCreateProxy();
-	        else {
+	        } else {
 	        	int initPort = proxy.getPort();
 		        proxy = new BrowserMobProxyServer();
 		        proxy.setTrustAllServers(true);
