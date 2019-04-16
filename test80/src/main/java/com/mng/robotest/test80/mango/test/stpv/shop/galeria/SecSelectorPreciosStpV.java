@@ -39,21 +39,14 @@ public class SecSelectorPreciosStpV {
 		dataFilter.minimoOrig = PageGaleriaDesktop.secSelectorPrecios.getImporteMinimo(driver);
 		dataFilter.maximoOrig = PageGaleriaDesktop.secSelectorPrecios.getImporteMaximo(driver);
                 
-        //Seleccionamos un intervalo de mínimo/máximo
         PageGaleriaDesktop.secSelectorPrecios.clickMinAndMax(30/*margenPixelsIzquierda*/, 30/*margenPixelsDerecha*/, driver);
-
-        //Obtenemos el nuevo mínimo/máximo
         dataFilter.minimoFinal = PageGaleriaDesktop.secSelectorPrecios.getImporteMinimo(driver);
         dataFilter.maximoFinal = PageGaleriaDesktop.secSelectorPrecios.getImporteMaximo(driver);
                 
-        //Sustituímos los tags
         TestCaseData.getDatosCurrentStep().replaceInDescription(tagMinimo, String.valueOf(dataFilter.minimoFinal));
         TestCaseData.getDatosCurrentStep().replaceInDescription(tagMaximo, String.valueOf(dataFilter.maximoFinal));    
-            
-        //Validaciones
         checkResultSelectFiltro(dataFilter, app, driver);
         
-        //Validaciones estándar. 
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
         flagsVal.validaSEO = true;
         flagsVal.validaJS = true;

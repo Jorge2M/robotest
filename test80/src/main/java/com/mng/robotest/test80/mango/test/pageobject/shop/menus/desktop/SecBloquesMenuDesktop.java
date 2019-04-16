@@ -25,23 +25,22 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
 	static String TagIdTypeMenu = "@TypeMenu";
     static String XPathContainerMenus = "//div[@class[contains(.,'section-detail-container')]]";
     static String XPathCapaMenus = XPathContainerMenus + "//div[@class[contains(.,'section-detail-list')]]";
-    static String XPathCapaMenusLineaNoNuevoWithTag = XPathCapaMenus + "/ul/li[@id[contains(.,'" + TagIdLinea + "')]]/../..";
-    static String XPathCapaMenusLineaNuevoWithTag = XPathCapaMenus + "//self::*[@data-brand[contains(.,'" + TagIdLinea + "')]]";
+    static String XPathCapaMenusLineaWithTag = XPathCapaMenus + "//self::*[@data-brand[contains(.,'" + TagIdLinea + "')]]";
     static String XPathEntradaMenuLineaRelativeToCapaWithTag = 
-    	"//ul[@class='" + TagIdTypeMenu + "']/li[@class[contains(.,'menu-item')] and not(@class[contains(.,'desktop-label-hidden')])]/a"; 
+    	"//ul[@class[contains(.,'" + TagIdTypeMenu + "')]]" +
+    	"/li[@class[contains(.,'menu-item')] and not(@class[contains(.,'desktop-label-hidden')])]/a"; 
     static String XPathEntradaMenuBloqueRelativeWithTag = "//ul/li/a[@data-label[contains(.,'" + TagIdBloque + "-')]]";
     
     public static String getXPathCapaMenusLinea(LineaType lineaId) {
         String idLineaDom = SecMenusWrap.getIdLineaEnDOM(lineaId, AppEcom.shop, Channel.desktop);
-        if (lineaId==LineaType.nuevo) {
-        	return XPathCapaMenusLineaNuevoWithTag.replace(TagIdLinea, idLineaDom);
-        }
-        return XPathCapaMenusLineaNoNuevoWithTag.replace(TagIdLinea, idLineaDom);
+        return XPathCapaMenusLineaWithTag.replace(TagIdLinea, idLineaDom);
     }
 
     static String getXPathCapaMenusSublinea(SublineaNinosType sublineaType) {
-        String idSublineaEnDom = sublineaType.getId(AppEcom.shop);
-        return XPathCapaMenusLineaNoNuevoWithTag.replace(TagIdLinea, idSublineaEnDom);
+        //String idSublineaEnDom = sublineaType.getId(AppEcom.shop);
+    	//return XPathCapaMenusLineaWithTag.replace(TagIdLinea, idSublineaEnDom);
+    	LineaType parentLine = sublineaType.getParentLine();
+    	return (getXPathCapaMenusLinea(parentLine));
     }
     
     static String getXPathLinkMenuSuperiorRelativeToCapa(TypeMenuDesktop typeMenu) {
@@ -70,8 +69,10 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
     	LineaType lineaMenu = menu1rstLevel.getLinea();
     	SublineaNinosType sublineaMenu = menu1rstLevel.getSublinea();
     	String nombreMenuInLower = menu1rstLevel.getNombre().toLowerCase();
-        return (getXPathMenusSuperiorLinkVisibles(lineaMenu, sublineaMenu, TypeMenuDesktop.Link) + 
-        		"[@href[contains(.,'/" + nombreMenuInLower + "')] and @href[not(contains(.,'/" + nombreMenuInLower + "/'))]]");
+        return (
+        	getXPathMenusSuperiorLinkVisibles(lineaMenu, sublineaMenu, TypeMenuDesktop.Link) + 
+        	"[@href[contains(.,'/" + nombreMenuInLower + 
+        	"')] and @href[not(contains(.,'/" + nombreMenuInLower + "/'))]]");
     }
     
     static String getXPathMenuSuperiorLinkVisible(Menu1rstLevel menu1rstLevel) {
@@ -81,14 +82,20 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
         String xpathMenuVisible = getXPathMenusSuperiorLinkVisibles(lineaMenu, sublineaMenu, TypeMenuDesktop.Link);
         if (dataGaLabelMenu.contains("'")) {
             //En el caso de que el data_ga_label contenga ' 
-            //no parece existir carácter de escape, así que hemos de desglosar en 2 bloques y aplicar el 'contains' en cada uno de ellos
+            //no parece existir carácter de escape, así que hemos de desglosar en 2 bloques y aplicar el 'contains' en cada uno
             int posApostrophe = dataGaLabelMenu.indexOf("'");
             String block1 = dataGaLabelMenu.substring(0, posApostrophe);
             String block2 = dataGaLabelMenu.substring(posApostrophe + 1);
-            return xpathMenuVisible + "[@data-label[contains(.,'" + block1 + "')] and @data-label[contains(.,'" + block2 + "')]]";
+            return (
+            	xpathMenuVisible + 
+            	"[@data-label[contains(.,'" + block1 + "')] and @data-label[contains(.,'" + 
+            	block2 + "')]]");
         }
 
-        return xpathMenuVisible + "[@data-label[contains(.,'" + dataGaLabelMenu + "')] or @data-label[contains(.,'" + dataGaLabelMenu.toLowerCase() + "')]]";
+        return (
+        	xpathMenuVisible + 
+        	"[@data-label[contains(.,'" + dataGaLabelMenu + "')] or @data-label[contains(.,'" + 
+        	dataGaLabelMenu.toLowerCase() + "')]]");
     }
     
     public static boolean isCapaMenusLineaVisibleUntil(LineaType lineaId, int maxSecondsToWait, WebDriver driver) {

@@ -6,16 +6,18 @@ import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 public class Sublinea extends Linea {
 
     public static enum SublineaNinosType { 
-    	nina("nina", "outletA"), 
-    	bebe_nina("babyNina", "outletBA"), 
-    	nino("nino", "outletO"), 
-    	bebe_nino("babyNino", "outletBO"); 
+    	nina("nina", "outletA", LineaType.nina), 
+    	bebe_nina("babyNina", "outletBA", LineaType.nina), 
+    	nino("nino", "outletO", LineaType.nino), 
+    	bebe_nino("babyNino", "outletBO", LineaType.nino); 
     	
     	String idShop = "";
     	String idOutlet = "";
-    	private SublineaNinosType(String idShop, String idOutlet) {
+    	LineaType parentLine;
+    	private SublineaNinosType(String idShop, String idOutlet, LineaType parentLine) {
     		this.idShop = idShop;
     		this.idOutlet = idOutlet;
+    		this.parentLine = parentLine;
     	}
     	
     	public String getId(AppEcom app) {
@@ -29,6 +31,10 @@ public class Sublinea extends Linea {
     	
     	public String getNameUpper() {
     		return name().toUpperCase();
+    	}
+    	
+    	public LineaType getParentLine() {
+    		return this.parentLine;
     	}
     }
     

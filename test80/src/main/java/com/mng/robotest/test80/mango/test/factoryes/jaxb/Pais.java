@@ -6,6 +6,8 @@ import java.util.*;
 
 import javax.xml.bind.annotation.*;
 
+import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.arq.utils.otras.LevelPais;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
 
@@ -582,6 +584,16 @@ public class Pais {
     
     public boolean isPagoPSP() {
         return (getTipopago()!=null && getTipopago().compareTo("PSP")==0);
+    }
+    
+    public LevelPais getLevelPais() {
+        if (isPaisTop()) {
+            return LevelPais.top;
+        }
+        if (getShop_online().compareTo("true")==0) {
+            return LevelPais.conCompraNoTop;
+        }
+        return LevelPais.sinCompra;
     }
     
     @Override

@@ -187,37 +187,37 @@ public class GaleriaProducto extends GestorWebDriver {
         groups={"GaleriaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
         description="[Usuario registrado] Acceder a galería. Navegación menú lateral de primer y segundo nivel. Selector de precios")
     public void GPO005_Galeria_Menu_Lateral() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+    	WebDriver  driver = TestCaseData.getdFTest().driver;
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;
         dCtxSh.userRegistered = true;
     
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
-        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, driver);
+        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
         if (dCtxSh.appE==AppEcom.outlet) {
-            SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest.driver);
+            SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, driver);
         } else {
         	Menu1rstLevel menuNuevo = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "New Now"));
-            SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuNuevo, dCtxSh, dFTest.driver);
-            PageGaleriaStpV.secCrossSelling.validaIsCorrect(LineaType.she, dCtxSh.appE, dFTest);
+            SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuNuevo, dCtxSh, driver);
+            PageGaleriaStpV.secCrossSelling.validaIsCorrect(LineaType.she, dCtxSh.appE, driver);
             pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
         }
         
-        PageGaleriaStpV.secSelectorPrecios.seleccionaIntervalo(dCtxSh.appE, dFTest.driver);
+        PageGaleriaStpV.secSelectorPrecios.seleccionaIntervalo(dCtxSh.appE, driver);
         if (dCtxSh.appE!=AppEcom.outlet) {
-            PageGaleriaStpV.secCrossSelling.validaIsCorrect(LineaType.she, dCtxSh.appE, dFTest);
+            PageGaleriaStpV.secCrossSelling.validaIsCorrect(LineaType.she, dCtxSh.appE, driver);
             pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
         }    
                 
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
-        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh, dFTest.driver);
+        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh, driver);
         
-        SecMenusWrapperStpV.selectMenuLateral1erLevelTypeCatalog(menuCamisas, dCtxSh, dFTest.driver);
+        SecMenusWrapperStpV.selectMenuLateral1erLevelTypeCatalog(menuCamisas, dCtxSh, driver);
         Menu2onLevel menuCamisasTops = MenuTreeApp.getMenuLevel2From(menuCamisas, "tops");
-        SecMenusDesktopStpV.selectMenuLateral2oLevel(menuCamisasTops, dCtxSh, dFTest.driver);
+        SecMenusDesktopStpV.selectMenuLateral2oLevel(menuCamisasTops, dCtxSh, driver);
     }
     
     @Test (

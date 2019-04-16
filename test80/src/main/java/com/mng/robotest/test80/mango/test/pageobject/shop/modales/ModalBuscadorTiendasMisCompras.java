@@ -20,7 +20,8 @@ public class ModalBuscadorTiendasMisCompras extends WebdrvWrapp {
         return (isElementPresentUntil(driver, By.xpath(XPathTienda), maxSecondsToWait));
     }
     
-    public static void clickAspaForClose(WebDriver driver) {
+    public static void clickAspaForClose(WebDriver driver) throws Exception {
         driver.findElement(By.xpath(XPathAspaForClose)).click();
+        WebdrvWrapp.waitForPageLoaded(driver);
     }
 }

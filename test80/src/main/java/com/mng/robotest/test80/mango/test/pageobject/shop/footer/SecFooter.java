@@ -185,4 +185,12 @@ public class SecFooter extends WebdrvWrapp {
 	public static boolean isTextoLegalRGPDPresent(WebDriver driver) {
 		return isElementPresent(driver, By.xpath(XPathLegalRGPD));
 	}
+	
+	public static void moveTo(AppEcom app, WebDriver driver) {
+		String xpath = getXPathCapaFooter(app);
+		By footer = By.xpath(xpath);
+		if (isElementVisible(driver, footer)) {
+			WebdrvWrapp.moveToElement(footer, driver);
+		}
+	}
 }

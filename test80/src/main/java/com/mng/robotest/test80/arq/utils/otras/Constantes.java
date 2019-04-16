@@ -1,6 +1,8 @@
 package com.mng.robotest.test80.arq.utils.otras;
 import java.util.regex.Pattern;
 
+import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+
 
 public class Constantes {
 
@@ -61,15 +63,7 @@ public class Constantes {
 	
     //Conjunto de las validaciones disponibles a nivel de Analítica
     public enum AnalyticsVal {GoogleAnalytics, Criteo, Bing, Polyvore, NetTraffic, DataLayer} 
-	
-    //Máximo de banners a probar según el tipo de país
-    public static final int MAX_BAN_PAIS_TOP_SHOP = 6;
-    public static final int MAX_BAN_PAIS_SICOMPRA_SHOP = 3;
-    public static final int MAX_BAN_PAIS_NOCOMPRA_SHOP = 1;
-    public static final int MAX_BAN_PAIS_TOP_OUTLET = 4;
-    public static final int MAX_BAN_PAIS_SICOMPRA_OUTLET = 2;
-    public static final int MAX_BAN_PAIS_NOCOMPRA_OUTLET = 1;
-    
+
     //ID parámetros contexto relacionados con BrowserStack
     public static final String UserBStack = "UserBStack";
     public static final String PassBStack = "PassBStack";

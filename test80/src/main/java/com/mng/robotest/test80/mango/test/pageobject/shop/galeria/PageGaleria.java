@@ -511,8 +511,7 @@ public abstract class PageGaleria extends WebdrvWrapp {
         List<Integer> numArticlesDoubleXpage = new ArrayList<>();
         initializeDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, pageToScroll);
         updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, lastPage);
-        while (!SecFooter.isVisible(app, driver) &&
-               lastPage < pageToScroll) {
+        while (!SecFooter.isVisible(app, driver) && lastPage < pageToScroll) {
         	forceScroll();
         	int newLastPage = getNumLastPage();
         	updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, newLastPage);
@@ -520,6 +519,10 @@ public abstract class PageGaleria extends WebdrvWrapp {
         		break;
         	}
         	lastPage=newLastPage;
+        }
+        
+        if (SecFooter.isVisible(app, driver)) {
+        	SecFooter.moveTo(app, driver);
         }
         
         datosScroll.paginaFinal = lastPage;

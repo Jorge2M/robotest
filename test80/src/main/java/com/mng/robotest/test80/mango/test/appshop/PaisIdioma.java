@@ -215,34 +215,9 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
     /**
      * Retorna el máximo de banners a probar por cada una de las líneas dependiendo de las características del país
      */
-    private static int getMaxBannersToTest(Pais pais, AppEcom appE) {
-        switch (appE) {
-        case shop:
-            return getMaxBannersToTestShop(pais);
-        case outlet:
-        default:
-            return getMaxBannersToTestOutlet(pais);
-        }
-    }
-    
-    private static int getMaxBannersToTestShop(Pais pais) {
-        if (pais.isPaisTop()) {
-            return Constantes.MAX_BAN_PAIS_TOP_SHOP;
-        }
-        if (pais.getShop_online().compareTo("true")==0) {
-            return (Constantes.MAX_BAN_PAIS_SICOMPRA_SHOP);
-        }
-        return Constantes.MAX_BAN_PAIS_NOCOMPRA_SHOP;
-    }
-    
-    private static int getMaxBannersToTestOutlet(Pais pais) {
-        if (pais.isPaisTop()) {
-            return Constantes.MAX_BAN_PAIS_TOP_OUTLET;
-        }
-        if (pais.getShop_online().compareTo("true")==0) {
-            return (Constantes.MAX_BAN_PAIS_SICOMPRA_OUTLET);
-        }
-        return Constantes.MAX_BAN_PAIS_NOCOMPRA_OUTLET;
+    private static int getMaxBannersToTest(Pais pais, AppEcom app) {
+    	LevelPais levelPais = pais.getLevelPais();
+    	return levelPais.getNumBannersTest(app);
     }
     
     private boolean existsRightBannerMenu(Linea linea, Sublinea sublinea, Channel channel) {

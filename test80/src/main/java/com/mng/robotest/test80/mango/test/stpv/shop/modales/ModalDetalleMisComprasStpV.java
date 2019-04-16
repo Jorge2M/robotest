@@ -31,7 +31,7 @@ public class ModalDetalleMisComprasStpV {
 	@Step (
 		description="Cerramos el modal del buscador de tiendas mediante click en el aspa superior derecha",
 		expected="Desaparece el modal del buscador de tiendas")
-	public static void clickCloseModalBuscadorTiendas(WebDriver driver) {
+	public static void clickCloseModalBuscadorTiendas(WebDriver driver) throws Exception {
 		ModalBuscadorTiendasMisCompras.clickAspaForClose(driver);
 		checkIsInvisibleModalBuscadorTiendas(driver);
 	}
