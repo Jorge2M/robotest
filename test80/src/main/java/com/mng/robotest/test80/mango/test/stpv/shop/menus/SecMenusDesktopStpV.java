@@ -221,13 +221,13 @@ public class SecMenusDesktopStpV {
         
         SecMenusDesktop.secMenuSuperior.secLineas.hoverLinea(lineaType, null, app, driver);
         if (linea.getType()!=LineaType.rebajas) {
-        	checkCarruselsAfterHoverLinea(linea, driver);
+        	checkCarruselsAfterHoverLinea(linea, app, driver);
         	
     	    //Steps - Selección de cada uno de los carrusels asociados a la línea
     	    String[] listCarrusels = linea.getListCarrusels();
     	    for (int i=0; i<listCarrusels.length; i++) {
     	        //Pare evitar KOs, sólo seleccionaremos el carrusel si realmente existe (si no existe previamente ya habremos dado un Warning)
-    	        if (SecMenusDesktop.secMenuSuperior.secCarrusel.isPresentCarrusel(linea, listCarrusels[i], driver)) {
+    	        if (SecMenusDesktop.secMenuSuperior.secCarrusel.isPresentCarrusel(linea, listCarrusels[i], app, driver)) {
     	            stepSeleccionaCarrusel(pais, lineaType, listCarrusels[i], app, driver);
     	        }
     	    }
@@ -235,20 +235,20 @@ public class SecMenusDesktopStpV {
     }
     
     @Validation
-    private static ChecksResult checkCarruselsAfterHoverLinea(Linea linea, WebDriver driver) {
+    private static ChecksResult checkCarruselsAfterHoverLinea(Linea linea, AppEcom app, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	    int maxSecondsWait = 1;
       	validations.add(
     		"Aparece el bloque de menús de la línea " + linea.getType() + " (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		SecMenusDesktop.secMenuSuperior.secBlockMenus.isCapaMenusLineaVisibleUntil(linea.getType(), maxSecondsWait, driver), 
+    		SecMenusDesktop.secMenuSuperior.secBlockMenus.isCapaMenusLineaVisibleUntil(linea.getType(), maxSecondsWait, app, driver), 
     		State.Warn);
       	validations.add(
     		"El número de carrusels es de " + linea.getListCarrusels().length,
-    		linea.getListCarrusels().length==SecMenusDesktop.secMenuSuperior.secCarrusel.getNumCarrousels(linea.getType(), driver), 
+    		linea.getListCarrusels().length==SecMenusDesktop.secMenuSuperior.secCarrusel.getNumCarrousels(linea.getType(), app, driver), 
     		State.Warn);
       	validations.add(
     		"Aparecen los carrusels: " + linea.getCarrusels().toString(),
-    		SecMenusDesktop.secMenuSuperior.secCarrusel.isVisibleCarrusels(linea, driver), State.Warn);
+    		SecMenusDesktop.secMenuSuperior.secCarrusel.isVisibleCarrusels(linea, app, driver), State.Warn);
     	return validations;
     }
     
@@ -259,7 +259,7 @@ public class SecMenusDesktopStpV {
     throws Exception {
         Linea linea = pais.getShoponline().getLinea(lineaType);
         SecMenusDesktop.secMenuSuperior.secLineas.hoverLinea(lineaType, null, app, driver);
-        SecMenusDesktop.secMenuSuperior.secCarrusel.clickCarrousel(pais, lineaType, idCarrusel, driver);
+        SecMenusDesktop.secMenuSuperior.secCarrusel.clickCarrousel(pais, lineaType, idCarrusel, app, driver);
         checkAfterSelectCarrusel(linea, idCarrusel, app, driver);
     }
     
@@ -706,7 +706,7 @@ public class SecMenusDesktopStpV {
     	level=State.Warn)
     public static boolean isNotPresentMenuSuperior(Menu1rstLevel menu1rstLevel, AppEcom app, WebDriver driver) 
     throws Exception {
-    	return (!SecBloquesMenuDesktop.isPresentMenuFirstLevel(menu1rstLevel, app, driver));
+    	return (!SecBloquesMenuDesktop.isPresentMenuFirstLevel(menu1rstLevel, driver));
     }
     
     @Validation (
@@ -714,6 +714,6 @@ public class SecMenusDesktopStpV {
     	level=State.Warn)
     public static boolean isPresentMenuSuperior(Menu1rstLevel menu1rstLevel, AppEcom app, WebDriver driver) 
     throws Exception {
-    	return (SecBloquesMenuDesktop.isPresentMenuFirstLevel(menu1rstLevel, app, driver));
+    	return (SecBloquesMenuDesktop.isPresentMenuFirstLevel(menu1rstLevel, driver));
     }
 }
