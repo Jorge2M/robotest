@@ -3282,7 +3282,7 @@
 <!-- Mercadopago x Débito -->
 <pago 
 	type="Mercadopago" shop="s" outlet="s" ordenpantalla="1" 
-	nombre="mercadopago" indexpant="1" testpasarela='s' testpago='s' numtarj="4509953566233704" mescad="12" anycad="20" useremail='test_user_722183@testuser.com' passwordemail='qatest4406' usrcaptcha="Genjuro" passcaptcha="sirgenjuro">&TPV-222;</pago>
+	nombre="mercadopago" indexpant="1" testpasarela='s' testpago='s' numtarj="4189141221267633" mescad="12" anycad="20" useremail='test_user_722183@testuser.com' passwordemail='qatest4406' usrcaptcha="Genjuro" passcaptcha="sirgenjuro">&TPV-222;</pago>
 <pago 
 	type="TRJintegrada" shop="s" outlet="s" ordenpantalla="2" 
 	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="10" anycad="2020" cvc="737">&TPV-561;</pago>

@@ -40,8 +40,8 @@ public class PageMercpagoLoginStpV {
         PageMercpagoLogin.sendInputUser(driver, pago.getUseremail());
         PageMercpagoLogin.sendInputPassword(driver, pago.getPasswordemail());
         PageMercpagoLogin.clickBotonContinuar(driver);
-
-        //Validaciones
-        PageMercpagoDatosTrjStpV.validaIsPage(channel, driver);
+        
+        PageMercpagoDatosTrjStpV pageMercpagoDatosTrjStpV = PageMercpagoDatosTrjStpV.newInstance(channel, driver);
+        pageMercpagoDatosTrjStpV.validaIsPage(0);
     }
 }

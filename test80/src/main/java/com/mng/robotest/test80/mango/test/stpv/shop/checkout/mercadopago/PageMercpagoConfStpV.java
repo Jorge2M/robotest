@@ -22,9 +22,6 @@ public class PageMercpagoConfStpV {
         expected="Aparece la página de resultado")
     public static void clickPagar(Channel channel, WebDriver driver) throws Exception {
         PageMercpagoConf.clickPagar(driver);
-            
-        //Validaciones
-        int maxSecondsWait = 30;
-        PageResultPagoStpV.validaIsPageUntil(maxSecondsWait, channel, driver);
+        PageResultPagoStpV.validaIsPageUntil(30, channel, driver);
     }
 }

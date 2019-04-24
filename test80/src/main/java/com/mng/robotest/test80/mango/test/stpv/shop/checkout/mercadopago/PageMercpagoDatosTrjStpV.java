@@ -5,14 +5,189 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrj;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrjDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoDatosTrjMobil;
+import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageResultPagoStpV;
 
 public class PageMercpagoDatosTrjStpV {
 	
+	private final PageMercpagoDatosTrj pageMercpagoDatosTrj;
+	private Channel channel;
+	private WebDriver driver;
+	
+	private PageMercpagoDatosTrjStpV(Channel channel, WebDriver driver) {
+		this.channel = channel;
+		this.driver = driver;
+		this.pageMercpagoDatosTrj = PageMercpagoDatosTrj.newInstance(channel, driver);
+	}
+	
+	public static PageMercpagoDatosTrjStpV newInstance(Channel channel, WebDriver driver) {
+		return (new PageMercpagoDatosTrjStpV(channel, driver));
+	}
+	
+	public PageMercpagoDatosTrj getPageObject() {
+		return this.pageMercpagoDatosTrj;
+	}
+
+    @Validation (
+    	description="Estamos en la página de introducción de los datos de la tarjeta (la esperamos hasta #{maxSecondsWait} segundos)",
+    	level=State.Defect)
+    public boolean validaIsPage(int maxSecondsWait) {
+    	return (pageMercpagoDatosTrj.isPageUntil(maxSecondsWait));
+    }    
+    
+    public void inputNumTarjeta(String numTarjeta) throws Exception {
+        switch (channel) {
+        case movil_web:
+            inputNumTarjetaMobil(numTarjeta);
+            break;
+        default:
+        case desktop:
+            inputNumTarjetaDesktop(numTarjeta);
+            break;
+        }
+    }
+    
+    @Step (
+    	description="Introducir el número de tarjeta #{numTarjeta}", 
+        expected="El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa")
+    public void inputNumTarjetaMobil(String numTarjeta) throws Exception {
+        pageMercpagoDatosTrj.sendNumTarj(numTarjeta);
+        isWrapperTarjetaVisibleVisaDataMobil(2);
+    }
+    
+    @Validation (
+    	description="El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa (lo esperamos hasta #{maxSecondsWait} segundos)",
+    	level=State.Warn)
+    private boolean isWrapperTarjetaVisibleVisaDataMobil(int maxSecondsWait) {
+	     return (((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).isActiveWrapperVisaUntil(maxSecondsWait));
+    }
+    
+    @Step (
+    	description="Introducir el número de tarjeta #{numTarjeta})", 
+        expected="Aparece el icono de Visa a la derecha de la tarjeta introducida")
+    public void inputNumTarjetaDesktop(String numTarjeta) throws Exception {
+    	pageMercpagoDatosTrj.sendNumTarj(numTarjeta);
+    	isVisaIconAtRightTrjDesktop(2);
+    }
+    
+    @Validation (
+    	description="Aparece el icono de Visa a la derecha de la tarjeta (lo esperamos hasta #{maxSecondsWait} segundos)",
+    	level=State.Warn)
+    private boolean isVisaIconAtRightTrjDesktop(int maxSecondsWait) {
+    	return (((PageMercpagoDatosTrjDesktop)pageMercpagoDatosTrj).isVisibleVisaIconUntil(maxSecondsWait));
+    }
+    
+    public void inputDataAndPay(InputData inputData) throws Exception {
+    	inputData(inputData);
+    	clickButtonForPay(false);
+    }
+    
+    public void inputCvcAndPay(String cvc) throws Exception {
+    	inputCvc(cvc);
+    	clickButtonForPay(true);
+    }
+    
+    @Step (
+    	description="Introducir el CVC <b>#{cvc}</b>",
+    	expected="El cvc se informa correctamente")
+    public void inputCvc(String cvc) {
+    	pageMercpagoDatosTrj.sendCvc(cvc);
+    }
+    
+    private void inputData(InputData inputData) throws Exception {
+        switch (channel) {
+        case movil_web:
+            inputDataMobil(inputData);
+            break;
+        default:
+        case desktop:
+            inputDataDesktop(inputData);
+            break;
+        }
+    }
+    
+    private void clickButtonForPay(boolean afterTrjGuardada) throws Exception {
+        switch (channel) {
+        case movil_web:
+            clickButtonForPayMobil(afterTrjGuardada);
+            break;
+        default:
+        case desktop:
+            clickButtonForPayDesktop(afterTrjGuardada);
+            break;
+        }
+    }
+    
+    @Step (
+    	description=
+    		"Introducir la fecha de vencimiento (#{inputData.getMesVencimiento()} / #{inputData.getAnyVencimiento()}), " + 
+    	     "el banco #{inputData.getBanco()}, " +   
+    	     "el security code #{inputData.getCodigoSeguridad()} " + 
+    	     "y confirmar", 
+    	expected=
+    		"Aparece la página de resultado")
+    public void inputDataMobil(InputData inputData) throws Exception {
+        String fechaVencimiento = inputData.getMesVencimiento() + "/" + inputData.getAnyVencimiento();        
+        pageMercpagoDatosTrj.sendCaducidadTarj(fechaVencimiento);
+        pageMercpagoDatosTrj.sendCvc(inputData.codigoSeguridad);            
+        isEnabledButtonNextMobil(2);
+    }
+    
+    @Validation (
+    	description="Aparece activado el botón \"Next\" para continuar con el pago (lo esperamos hasta #{maxSecondsWait} segundos)",
+    	level=State.Warn)
+    private boolean isEnabledButtonNextMobil(int maxSecondsWait) {
+    	return (((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).isClickableButtonNextPayUntil(maxSecondsWait));
+	}
+    
+    @Step (
+    	description="Seleccionar el botón \"Next\" para pagar", 
+        expected="Aparece la página de resultado")
+    public void clickButtonForPayMobil(boolean afterTrjGuardada) throws Exception {
+    	((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).clickButtonForPay();
+    	if (afterTrjGuardada) {
+    		PageResultPagoStpV.validaIsPageUntil(30, channel, driver);
+    	}
+    	else {
+    		PageMercpagoConfStpV.validaIsPageUntil(5, Channel.movil_web, driver);
+    	}
+    }    
+    
+    @Step (
+    	description=
+    		"Introducir la fecha de vencimiento (#{inputData.getMesVencimiento()} / #{inputData.getAnyVencimiento()}, " + 
+            "security code (#{inputData.getCodigoSeguridad()}, " + 
+            "Banco (#{inputData.getBanco()}) " +
+            "y confirmar", 
+        expected=
+        	"Los campos se informan correctamente")
+    public void inputDataDesktop(InputData inputData) 
+    throws Exception {
+        String fechaVencimiento = inputData.mesVencimiento + "/" + inputData.anyVencimiento;    
+        PageMercpagoDatosTrjDesktop pageDesktop = (PageMercpagoDatosTrjDesktop)pageMercpagoDatosTrj;
+        pageDesktop.sendCaducidadTarj(fechaVencimiento);
+        pageDesktop.sendCvc(inputData.codigoSeguridad);
+    }
+    
+    @Step (
+    	description= "Pulsar el botón Continuar/Pagar para efectuar el pago", 
+        expected= "Aparece la página de resultado")
+    public void clickButtonForPayDesktop(boolean afterTrjGuardada) 
+    throws Exception {  
+        PageMercpagoDatosTrjDesktop pageDesktop = (PageMercpagoDatosTrjDesktop)pageMercpagoDatosTrj;
+        pageDesktop.clickBotonForContinue();
+        if (afterTrjGuardada) {
+        	PageResultPagoStpV.validaIsPageUntil(30, channel, driver);
+        }
+        else {
+        	PageMercpagoConfStpV.validaIsPageUntil(10, Channel.desktop, driver);
+        }
+    }
+    
 	public static class InputData {
 		private String numTarjeta;
-		private String banco;
 		private String nombreYApellido;
 		private String mesVencimiento;
 		private String anyVencimiento;
@@ -23,12 +198,6 @@ public class PageMercpagoDatosTrjStpV {
 		}
 		public void setNumTarjeta(String numTarjeta) {
 			this.numTarjeta = numTarjeta;
-		}
-		public String getBanco() {
-			return banco;
-		}
-		public void setBanco(String banco) {
-			this.banco = banco;
 		}
 		public String getNombreYApellido() {
 			return nombreYApellido;
@@ -55,146 +224,4 @@ public class PageMercpagoDatosTrjStpV {
 			this.codigoSeguridad = codigoSeguridad;
 		}
 	}
-    
-    public static void validaIsPage(Channel channel, WebDriver driver) {
-        switch (channel) {
-        case movil_web:
-            validaIsPageMobil(driver);
-            break;
-        default:
-        case desktop:
-        	int maxSecondsWait = 5;
-            validaIsPageDesktop(maxSecondsWait, driver);
-        }
-    }
-    
-    @Validation (
-    	description="Estamos en la página de introducción de los datos de la tarjeta",
-    	level=State.Defect)
-    public static boolean validaIsPageMobil(WebDriver driver) {
-    	return (PageMercpagoDatosTrjMobil.isPage(driver));
-    }
-    
-    @Validation (
-    	description="Estamos en la página de introducción del CVC (la esperamos hasta #{maxSecondsWait} segundos)",
-    	level=State.Defect)
-    public static boolean validaIsPageDesktop(int maxSecondsWait, WebDriver driver) {
-    	return (PageMercpagoDatosTrjDesktop.isPageUntil(maxSecondsWait, driver));
-    }    
-    
-    public static void inputNumTarjeta(String numTarjeta, Channel channel, WebDriver driver) throws Exception {
-        switch (channel) {
-        case movil_web:
-            inputNumTarjetaMobil(numTarjeta, driver);
-            break;
-        default:
-        case desktop:
-            inputNumTarjetaDesktop(numTarjeta, driver);
-            break;
-        }
-    }
-    
-    @Step (
-    	description="Introducir el número de tarjeta #{numTarjeta}", 
-        expected="El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa")
-    public static void inputNumTarjetaMobil(String numTarjeta, WebDriver driver) throws Exception {
-        PageMercpagoDatosTrjMobil.sendNumTarj(numTarjeta, driver);
-            
-        //Validaciones
-        int maxSecondsWait = 2;
-        isWrapperTarjetaVisibleVisaDataMobil(maxSecondsWait, driver);
-    }
-    
-    @Validation (
-    	description="El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa (lo esperamos hasta #{maxSecondsWait} segundos)",
-    	level=State.Warn)
-    private static boolean isWrapperTarjetaVisibleVisaDataMobil(int maxSecondsWait, WebDriver driver) {
-	     return (PageMercpagoDatosTrjMobil.isActiveWrapperVisaUntil(maxSecondsWait, driver));
-    }
-    
-    @Step (
-    	description="Introducir el número de tarjeta #{numTarjeta})", 
-        expected="Aparece el icono de Visa a la derecha de la tarjeta introducida")
-    public static void inputNumTarjetaDesktop(String numTarjeta, WebDriver driver) throws Exception {
-    	PageMercpagoDatosTrjDesktop.sendNumTarj(numTarjeta, driver);
-            
-        //Validaciones
-    	int maxSecondsWait = 2;
-    	isVisaIconAtRightTrjDesktop(maxSecondsWait, driver);
-    }
-    
-    @Validation (
-    	description="Aparece el icono de Visa a la derecha de la tarjeta (lo esperamos hasta #{maxSecondsWait} segundos)",
-    	level=State.Warn)
-    private static boolean isVisaIconAtRightTrjDesktop(int maxSecondsWait, WebDriver driver) {
-    	return (PageMercpagoDatosTrjDesktop.isVisibleVisaIconUntil(maxSecondsWait, driver));
-    }
-    
-    public static void inputDataAndPay(InputData inputData, Channel channel, WebDriver driver) 
-    throws Exception {
-        switch (channel) {
-        case movil_web:
-            inputDataMobil(inputData, driver);
-            clickButtonPayMobil(driver);
-            break;
-        default:
-        case desktop:
-            inputDataAndPayDesktop(inputData, driver);
-            break;
-        }
-    }
-    
-    @Step (
-    	description=
-    		"Introducir la fecha de vencimiento (#{inputData.getMesVencimiento()} / #{inputData.getAnyVencimiento()}), " + 
-    	     "el banco #{inputData.getBanco()}, " +   
-    	     "el security code #{inputData.getCodigoSeguridad()} " + 
-    	     "y confirmar", 
-    	expected=
-    		"Aparece la página de resultado")
-    public static void inputDataMobil(InputData inputData, WebDriver driver) throws Exception {
-        String fechaVencimiento = inputData.getMesVencimiento() + "/" + inputData.getAnyVencimiento();        
-        PageMercpagoDatosTrjMobil.sendCaducidadTarj(fechaVencimiento, driver);
-        PageMercpagoDatosTrjMobil.sendCVC(inputData.codigoSeguridad, driver);            
-            
-        //Validaciones
-        int maxSecondsWait = 2;
-        isEnabledButtonNextMobil(maxSecondsWait, driver);
-    }
-    
-    @Validation (
-    	description="Aparece activado el botón \"Next\" para continuar con el pago (lo esperamos hasta #{maxSecondsWait} segundos)",
-    	level=State.Warn)
-    private static boolean isEnabledButtonNextMobil(int maxSecondsWait, WebDriver driver) {
-    	return (PageMercpagoDatosTrjMobil.isClickableButtonNextPayUntil(maxSecondsWait, driver));
-	}
-    
-    @Step (
-    	description="Seleccionar el botón \"Next\" para pagar", 
-        expected="Aparece la página de resultado")
-    public static void clickButtonPayMobil(WebDriver driver) throws Exception {
-    	PageMercpagoDatosTrjMobil.clickButtonNextPay(driver);
-            
-        //Validaciones
-    	int maxSecondsWait = 5;
-        PageMercpagoConfStpV.validaIsPageUntil(maxSecondsWait, Channel.movil_web, driver);
-    }    
-    
-    @Step (
-    	description=
-    		"Introducir la fecha de vencimiento (#{inputData.getMesVencimiento()} / #{inputData.getAnyVencimiento()}, " + 
-            "security code (#{inputData.getCodigoSeguridad()}, " + 
-            "Banco (#{inputData.getBanco()}) " +
-            "y confirmar", 
-        expected=
-        	"Aparece la página de resultado")
-    public static void inputDataAndPayDesktop(InputData inputData, WebDriver driver) 
-    throws Exception {
-        String fechaVencimiento = inputData.mesVencimiento + "/" + inputData.anyVencimiento;     
-        PageMercpagoDatosTrjDesktop.sendCaducidadTarj(fechaVencimiento, driver);
-        PageMercpagoDatosTrjDesktop.sendCVC(inputData.codigoSeguridad, driver);
-        PageMercpagoDatosTrjDesktop.selectBanco(inputData.banco, driver);
-        PageMercpagoDatosTrjDesktop.clickBotonContinuar(driver);
-        PageMercpagoConfStpV.validaIsPageUntil(30, Channel.desktop, driver);
-    }
 }
