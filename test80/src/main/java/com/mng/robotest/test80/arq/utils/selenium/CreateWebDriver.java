@@ -120,7 +120,7 @@ public class CreateWebDriver {
      * 
      * @param isMarionette indica si el driver utilizará GekoDriver
      * @param isMobil indica si queremos simular la ejecución de móvil
-     * @param netAnalysis indica si queremos análisis del tráfico de red (con lo que activaríamos el plugin NetExport para poder expotrar dicho tráfico)
+     * @param netAnalysis indica si queremos análisis del tráfico de red
      * @return webdriver de Firefox (FirefoxDriver)
      */
     private static FirefoxDriver createFirefoxDriver(Channel channel, boolean netAnalysis, boolean headless, boolean isMarionette, ITestContext context) 
@@ -151,10 +151,14 @@ public class CreateWebDriver {
         // Con esto no esperamos a que la página cargue completamente (si tarda más de 30 segundos (implicitlyWait)) y seguimos operando
         // (Problemas con Selenium 2.46)
         // fp.setPreference("webdriver.load.strategy", "unstable");
-        fp.setPreference("media.autoplay.enabled", false); // Con esto desactivamos la visualización de los videos
-        fp.setPreference("media.ogg.enabled", false); // Con esto desactivamos la visualización de los videos
-        fp.setPreference("media.webm.enabled", false); // Con esto desactivamos la visualización de los videos
-        fp.setPreference("media.windows-media-foundation.enabled", false); // Con esto desactivamos la visualización de los videos
+        
+        // Con esto desactivamos la visualización de los videos
+        fp.setPreference("media.autoplay.default", 1); 
+        fp.setPreference("media.autoplay.allow-muted", false);
+        fp.setPreference("media.autoplay.enabled", false);
+        fp.setPreference("media.ogg.enabled", false); 
+        fp.setPreference("media.webm.enabled", false); 
+        fp.setPreference("media.windows-media-foundation.enabled", false); 
 
         /*
          * String PROXY = "proxy.ext.pro.mango.com:3128"; org.openqa.selenium.Proxy proxy = new org.openqa.selenium.Proxy(); proxy.setHttpProxy(PROXY) .setFtpProxy(PROXY)
@@ -535,7 +539,7 @@ public class CreateWebDriver {
      * Establece el chromedriver.exe a nivel de parámetro webdriver.chrome.driver
      */
     private static void setDriverChrome() {        
-        ChromeDriverManager.getInstance().version("73.0.3683.20").setup();
+        ChromeDriverManager.getInstance().version("74.0.3729.6").setup();
         //Nota: si se modifica la versión sería conveniente regenerar la AMI correspondiente al Robotest en Cloud
     }
 

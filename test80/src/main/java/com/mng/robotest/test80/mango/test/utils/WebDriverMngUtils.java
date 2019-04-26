@@ -228,6 +228,7 @@ public class WebDriverMngUtils {
 
             if (imgStatus.equals(Boolean.valueOf(false))) {
                 String imageSrc = getImageSrc(image);
+                String imageId = image.getAttribute("id");
                 if (imageSrc != null && imageSrc.trim().compareTo("") != 0 && !imageSrc.toLowerCase().contains(".svg")) {
                     if (revisionBrokenHttp(image)) {
                         String currentImageUrl = imageSrc;
@@ -236,7 +237,7 @@ public class WebDriverMngUtils {
                             BrokenimageUrl.add(imageUrl);
     
                             // Buscamos el error en el contexto y obtenemos el número
-                            String descError = ". <br><b>Image Broken!</b> " + ",id:" + image.getAttribute("id") + ",src: " + currentImageUrl + " ";
+                            String descError = ". <br><b>Image Broken!</b> " + ",id:" + imageId + ",src: " + currentImageUrl + " ";
                             int numErrors = 0;
                             if (ctx.getAttribute(descError) != null) {
                                 numErrors = (Integer)ctx.getAttribute(descError);
@@ -259,8 +260,9 @@ public class WebDriverMngUtils {
                             listaImgBroken.add(driver.getCurrentUrl() + descError);
                             pLogger.warn(driver.getCurrentUrl() + descError);
                         }
-                        else
-                            pLogger.warn("Imagen con SRC {} y status OK (2xx) pero con tamaño nulo en la página {} and id {}", currentImageUrl, i, image.getAttribute("id"));
+                        else {
+                            pLogger.warn("Imagen con SRC {} y status OK (2xx) pero con tamaño nulo en la página {} and id {}", currentImageUrl, i, imageId);
+                        }
                     }
                 } else {
                     // No podemos considerar este caso como un error pues en MANGO hay imágenes 'válidas' sin SRC. P.e:

@@ -91,12 +91,13 @@ public class PageGaleriaDesktop extends PageGaleria {
     private final static String XPathImgColorRelativeArticleWithTagSelected = "//div[@class[contains(.,'color" + TagFlagSelected + "')]]//img";
     private final static String XPpathIconoUpGalery = "//div[@id='scroll-top-step']";
     private final static String XpathTallaNoDisponibleArticulo = "//span[@data-id and (@class[contains(.,'no-stock')])]";
+    private final static String XPathHeaderArticles = "//div[@id[contains(.,'title')]]/h1";
     
     @Override
     public String getXPathLinkRelativeToArticle() {
     	return XPathNombreRelativeToArticle;
     }
-
+ 
     private PageGaleriaDesktop(AppEcom app, WebDriver driver) {
     	this.app = app;
     	this.driver = driver;
@@ -810,6 +811,16 @@ public class PageGaleriaDesktop extends PageGaleria {
             break;
         }        
     }
+    
+    @Override
+    public boolean isHeaderArticlesVisible(String textHeader) {
+    	By byHeader = By.xpath(XPathHeaderArticles);
+    	if (WebdrvWrapp.isElementVisible(driver, byHeader)) {
+    		return (driver.findElement(byHeader).getText().toLowerCase().contains(textHeader.toLowerCase()));
+    	}
+    	
+    	return false;
+    }
 
     public void clickLinkColumnas(NumColumnas numColumnas) throws Exception {
         String xpathLink = getXPathLinkNumColumnas(numColumnas);
@@ -820,4 +831,5 @@ public class PageGaleriaDesktop extends PageGaleria {
     	String xpathVideo = getXPathArticulo(typeArticle);
     	return (isElementPresent(driver, By.xpath(xpathVideo)));
     }
+
 }

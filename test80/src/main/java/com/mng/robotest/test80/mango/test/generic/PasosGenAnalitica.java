@@ -71,29 +71,23 @@ public class PasosGenAnalitica {
 	            while (it.hasNext()) { 
 	                switch (it.next()) {
 	                    case GoogleAnalytics:
-	                        //Validaciones a nivel de la petición de Google Analytics
 	                        validaGoogleAnalytics(gestorHAR, app);
 	                        break;
 	                    case Criteo:
-	                        //Validaciones a nivel de la petición de Criteo
 	                        validaCriteo(gestorHAR, lineaId);
 	                        break;
 	                    case Bing:
-	                        //Validaciones a nivel de la petición de Bing
 	                        validaBing(gestorHAR, app, dFTest.driver);
 	                        break;
 	                    case Polyvore:
-	                        //Validaciones a nivel del tráfico de Polyvore (sólo USA)
 	                        if (dataPedido!=null && dataPedido.getCodigoPais().compareTo("400")==0) {
 	                            validaPolyvore(gestorHAR, dataPedido);
 	                        }
 	                        break;                            
 	                    case NetTraffic:
-	                        //Validaciones a nivel del tráfico de red
 	                        validaNetTraffic(gestorHAR);                            
 	                        break;
 	                    case DataLayer:
-	                        //Validaciones a nivel del tag datalayer (realmente no es una validación a nivel de HTTP)
 	                        validaDatalayer(dFTest.driver);                            
 	                        break;
 	                    default:

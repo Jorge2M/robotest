@@ -549,8 +549,8 @@ public class SecMenusDesktopStpV {
 			"Aparecen alguno de los siguientes elementos: <b>" + elemsCanBeContained + "</b> (es un menú perteneciente al grupo <b>" + groupMenu + ")</b>",
 			contentPageOk, State.Warn);
     	
+		PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
     	if (groupMenu.canContainElement(Element.article)) {
-    		PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
     	 	String guiones = "--";
     	 	validations.add(
     			"No hay artículos con \"" + guiones + "\"",
@@ -558,16 +558,15 @@ public class SecMenusDesktopStpV {
     	}
     	
     	if (groupMenu.isTitleEquivalentToMenuName()) {
-    		//TODO modificación temporal para no grabar la imagen en caso de Baby. Hasta que se corrija (http://ci.mangodev.net/redmine/issues/50111)
-    		State stateVal = State.Warn;
-    		boolean avoidEvidences = false;
-            if (groupMenu==GroupMenu.BebeNina || groupMenu==GroupMenu.BebeNino) {
-            	stateVal = State.Info;
-            	avoidEvidences = true;
-            }
+    		boolean isTitleAccording = AllPages.isTitleAssociatedToMenu(menu.getNombre(), driver);
     	 	validations.add(
-    			"El title de la página es el asociado al menú<b>" + menu.getNombre() + "</b>",
-    			AllPages.isTitleAssociatedToMenu(menu.getNombre(), driver), stateVal, avoidEvidences);
+    			"El title de la página es el asociado al menú <b>" + menu.getNombre() + "</b>",
+    			isTitleAccording, State.Info);
+    	 	if (!isTitleAccording) {
+        	 	validations.add(
+        			"El título no coincide -> Validamos que exista el header <b>" + menu.getNombre() + "</b> en el inicio de la galería",
+        			pageGaleria.isHeaderArticlesVisible(menu.getNombre()), State.Warn, false);
+    	 	}
     	}
     	
 	 	return validations;

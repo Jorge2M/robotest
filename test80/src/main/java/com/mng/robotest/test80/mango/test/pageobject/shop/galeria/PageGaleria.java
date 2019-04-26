@@ -57,6 +57,7 @@ public abstract class PageGaleria extends WebdrvWrapp {
 	abstract String getXPathPagina(int pagina);
 	abstract int getNumArticulosFromPagina(int pagina, TypeArticleDesktop sizeArticle);
 	abstract public WebElement getArticleFromPagina(int numPagina, int numArticle);
+	abstract public boolean isHeaderArticlesVisible(String textHeader);
     
     public static List<LabelArticle> listLabelsNew = Arrays.asList(
     	    LabelArticle.ComingSoon, 
@@ -619,6 +620,7 @@ public abstract class PageGaleria extends WebdrvWrapp {
     	String xpathPagina = getXPathPagina(pagina);
     	return (isElementVisible(driver, By.xpath(xpathPagina)));
     }
+
     
     public void clickArticulo(WebElement articulo) throws Exception {
     	WebElement articleName = articulo.findElement(By.xpath("." + getXPathLinkRelativeToArticle()));

@@ -62,6 +62,7 @@ public class PageGaleriaMobil extends PageGaleria {
     final static String XPathFiltersDiv = "//div[@class='order-filters-fixed']";
     final static String TagNumPagina = "@tagNumPagina";
     final static String XPathPaginaWithTag = "//div[@id='page" + TagNumPagina + "']";
+    final static String XPathHeaderArticles = "//h1[@class='catalog-title']";
     
     static String classProductName = 
         	"(@class[contains(.,'productList__name')] or " +
@@ -255,6 +256,18 @@ public class PageGaleriaMobil extends PageGaleria {
     		return listArticles.get(numArticle);
     	}
     	return null;
+    }
+    
+
+    
+    @Override
+    public boolean isHeaderArticlesVisible(String textHeader) {
+    	By byHeader = By.xpath(XPathHeaderArticles);
+    	if (WebdrvWrapp.isElementVisible(driver, byHeader)) {
+    		return (driver.findElement(byHeader).getText().contains(textHeader));
+    	}
+    	
+    	return false;
     }
     
     private List<WebElement> getListArticulosFromPagina(int numPagina) {
