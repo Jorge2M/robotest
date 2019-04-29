@@ -1,6 +1,8 @@
 package com.mng.robotest.test80.mango.test.pageobject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +17,7 @@ import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -674,4 +677,32 @@ public class WebdrvWrapp extends ElementPageFunctions {
         	"document.getElementsByClassName('" + className + "')[0].style.zIndex=99; " + 
         	"document.getElementsByClassName('" + className + "')[0].style.display='none'");    	
     }
+    
+	public static void orderElementsByPositionInScreen(List<WebElement> listElements) {
+		Collections.sort(
+			listElements, 
+			new Comparator<WebElement>() {
+				@Override
+			    public int compare(WebElement banner1, WebElement banner2) {
+					Point locationBanner1 = banner1.getLocation();
+					Point locationBanner2 = banner2.getLocation();
+					if (locationBanner1.y != locationBanner2.y) {
+						if (locationBanner1.y > locationBanner2.y) {
+							return 1;
+						}
+						return -1;
+					}
+					
+					if (locationBanner1.x != locationBanner1.x) {
+						if (locationBanner1.x > locationBanner2.x) {
+							return 1;
+						}
+						return -1;
+					}
+					
+					return 0;
+			    }
+			}
+		);
+	}
 }

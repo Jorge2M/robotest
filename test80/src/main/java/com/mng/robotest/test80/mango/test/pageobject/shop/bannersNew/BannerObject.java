@@ -1,10 +1,13 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -27,7 +30,7 @@ public abstract class BannerObject {
 	
     public List<DataBanner> getListBannersData(int maxBannersToLoad, WebDriver driver) {
     	List<DataBanner> listDataBannersReturn = new ArrayList<>();
-    	List<WebElement> listBannersScreen = getDisplayedBanners(driver);
+    	List<WebElement> listBannersScreen = getDisplayedBannersInOrder(driver);
         Iterator<WebElement> itBannerScreen = listBannersScreen.iterator();
         int i=0;
         while (itBannerScreen.hasNext() && i<maxBannersToLoad) {
@@ -90,8 +93,9 @@ public abstract class BannerObject {
     	return texto;
     }
 	
-    protected List<WebElement> getDisplayedBanners(WebDriver driver) {
+    protected List<WebElement> getDisplayedBannersInOrder(WebDriver driver) {
         List<WebElement> listBanners = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathBanner));
+        WebdrvWrapp.orderElementsByPositionInScreen(listBanners);
         return listBanners;
     }
     

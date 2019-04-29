@@ -114,7 +114,7 @@ public class SecMenusDesktopStpV {
     public static void validationsSelecMenuEspecificDesktop(MenuLateralDesktop menu, Channel channel, AppEcom app, 
     														WebDriver driver) throws Exception {
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, driver);
-    	pageGaleriaStpV.validateBannerSuperiorIfExistsDesktop();
+    	pageGaleriaStpV.bannerHead.validateBannerSuperiorIfExistsDesktop();
     	if (menu.isMenuLateral()) {
     		int maxSecondsWait = 2;
     		checkIsSelectedLateralMenu(menu, maxSecondsWait, driver);
@@ -339,7 +339,7 @@ public class SecMenusDesktopStpV {
         case banners:
         	int maxBannersToLoad = 1;
         	SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, driver);
-        	secBannersStpV.validaBannEnContenido(driver);
+        	secBannersStpV.validaBannEnContenido();
             break;
         case vacio:
             break;

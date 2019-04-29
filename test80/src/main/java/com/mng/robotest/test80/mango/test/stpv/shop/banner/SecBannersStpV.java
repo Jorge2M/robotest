@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
@@ -30,33 +29,42 @@ public class SecBannersStpV {
 	
 	int maxBannersToLoad;
 	ManagerBannersScreen managerBannersScreen;
+	WebDriver driver;
 	
 	public SecBannersStpV(int maxBannersToLoad, WebDriver driver) {
+		this.driver = driver;
 		managerBannersScreen = new ManagerBannersScreen(maxBannersToLoad, driver);
 	}
 	
-    public void testPageBanners(DataCtxShop dCtxSh, int maximoBanners, DataFmwkTest dFTest) 
+	public ManagerBannersScreen getManagerBannerScreen() {
+		return managerBannersScreen;
+	}
+	
+    public void testPageBanners(DataCtxShop dCtxSh, int maximoBanners) 
     throws Exception { 
-        String urlPagPrincipal = dFTest.driver.getCurrentUrl();
+        String urlPagPrincipal = driver.getCurrentUrl();
         int sizeListBanners = managerBannersScreen.getListDataBanners().size();
         for (int posBanner=1; posBanner<=sizeListBanners && posBanner<=maximoBanners; posBanner++) {
         	boolean makeValidations = true;
-            seleccionarBanner(posBanner, makeValidations, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
-            dFTest.driver.get(urlPagPrincipal);
-            WebdrvWrapp.waitForPageLoaded(dFTest.driver);
-            managerBannersScreen.reloadBanners(dFTest.driver); //For avoid StaleElement Exception
+            seleccionarBanner(posBanner, makeValidations, dCtxSh.appE, dCtxSh.channel);
+            driver.get(urlPagPrincipal);
+            WebdrvWrapp.waitForPageLoaded(driver);
+            managerBannersScreen.reloadBanners(driver); //For avoid StaleElement Exception
             sizeListBanners = managerBannersScreen.getListDataBanners().size();
         }
     }
     
-    public void testCampanas(CampanasData listCampanas, DataCtxShop dCtxSh, LineaType lineaType,	DataFmwkTest dFTest) throws Exception {
-    	ArrayList<DataCampana> listCampanasToTest = listCampanas.getListCampanas(dCtxSh.pais.getCodigo_pais(), 
-    																			 dCtxSh.idioma.getCodigo().name(), 
-    																			 lineaType.toString());
+    public void testCampanas(CampanasData listCampanas, DataCtxShop dCtxSh, LineaType lineaType) throws Exception {
+    	ArrayList<DataCampana> listCampanasToTest = 
+    		listCampanas.getListCampanas(
+    			dCtxSh.pais.getCodigo_pais(), 
+    			dCtxSh.idioma.getCodigo().name(), 
+    			lineaType.toString());
+    	
     	for (DataCampana dataCampToTest : listCampanasToTest) {
     		int posBanner = Integer.valueOf(dataCampToTest.posicion);
     		boolean makeValidations = true;
-    		seleccionarBanner(posBanner, makeValidations, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
+    		seleccionarBanner(posBanner, makeValidations, dCtxSh.appE, dCtxSh.channel);
     		DataBanner dataBanner = managerBannersScreen.getBanner(posBanner);
     		validateCamapanaWithBannerInScreen(dataCampToTest, dataBanner);
     	}
@@ -71,10 +79,10 @@ public class SecBannersStpV {
 	 	return validations;
     }
     
-    public void seleccionarBanner(int posBanner, boolean validaciones, AppEcom app, Channel channel, WebDriver driver) 
+    public void seleccionarBanner(int posBanner, boolean validaciones, AppEcom app, Channel channel) 
     throws Exception {
         DataBanner dataBanner = this.managerBannersScreen.getBanner(posBanner);
-        seleccionarBanner(dataBanner, validaciones, app, channel, driver);
+        seleccionarBanner(dataBanner, validaciones, app, channel);
     }
     
     @Step (
@@ -84,7 +92,7 @@ public class SecBannersStpV {
             	"<b>imagen</b>: #{dataBanner.getSrcImage()}<br>" + 
                 "<b>texto</b>: #{dataBanner.getText()}",
         expected="Aparece una página correcta (con banners o artículos)")
-    private void seleccionarBanner(DataBanner dataBanner, boolean validaciones, AppEcom app, Channel channel, WebDriver driver) 
+    public void seleccionarBanner(DataBanner dataBanner, boolean validaciones, AppEcom app, Channel channel) 
     throws Exception {
         String urlPagPrincipal = driver.getCurrentUrl();
         URI uriPagPrincipal = new URI(urlPagPrincipal);
@@ -95,7 +103,7 @@ public class SecBannersStpV {
         dataBanner.setUrlDestino(driver.getCurrentUrl());
         if (validaciones) {
             //Validaciones
-            validacionesGeneralesBanner(urlPagPrincipal, uriPagPrincipal, elementosPagPrincipal, driver);
+            validacionesGeneralesBanner(urlPagPrincipal, uriPagPrincipal, elementosPagPrincipal);
             switch (dataBanner.getDestinoType()) {
             case Ficha:
             	PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel);
@@ -103,15 +111,15 @@ public class SecBannersStpV {
                 break;
             default:                
             case Otros:
-                validacionesBannerEstandar(app, driver);
+                validacionesBannerEstandar(app);
                 break;
             }
         }
     }
         
     @Validation
-    public ChecksResult validacionesGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre, 
-    														WebDriver driver) throws Exception {
+    public ChecksResult validacionesGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre) 
+    throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait1 = 3;
     	int marginElements = 3;
@@ -144,7 +152,7 @@ public class SecBannersStpV {
     @Validation (
     	description="Aparece una página con secciones, galería, banners, bloque de contenido con imágenes o página acceso",
     	level=State.Warn)
-    public boolean validacionesBannerEstandar(AppEcom app, WebDriver driver) throws Exception {
+    public boolean validacionesBannerEstandar(AppEcom app) throws Exception {
         if (!PageLanding.haySecc_Art_Banners(app, driver)) {
             return (PageLanding.hayImgsEnContenido(driver));
         }
@@ -155,7 +163,7 @@ public class SecBannersStpV {
     @Validation (
     	description="El bloque de contenido (homeContent o bannerHome) existe y tiene >= 1 banner o >=1 map o >=1 items-edit",
     	level=State.Warn)
-    public boolean validaBannEnContenido(WebDriver driver) {
+    public boolean validaBannEnContenido() {
         boolean existBanners = managerBannersScreen.existBanners();
         boolean existsMaps = PageLanding.hayMaps(driver);
         boolean existsEditItems = PageLanding.hayItemsEdits(driver);

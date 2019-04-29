@@ -18,8 +18,8 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.PageHomeMarcasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.buscador.SecBuscadorStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV;
 
 public class Buscador extends GestorWebDriver {
 

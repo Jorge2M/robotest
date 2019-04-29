@@ -14,6 +14,8 @@ import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import static com.mng.robotest.test80.arq.utils.otras.Constantes.PrefixRebajas;
+
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -72,6 +74,24 @@ public class SecMenusWrapperStpV {
             }
         }
             
+        return validations;
+    }
+    
+    @Validation
+    public static ChecksResult checkLineaRebajas(boolean salesOnInCountry, DataCtxShop dCtxSh, WebDriver driver) {
+        ChecksResult validations = ChecksResult.getNew();
+        int maxSeconds = 3;
+        boolean isPresentLinRebajas = SecMenusWrap.isLineaPresentUntil(LineaType.rebajas, dCtxSh.appE, dCtxSh.channel, maxSeconds, driver);
+        if (salesOnInCountry && dCtxSh.pais.isVentaOnline()) {
+        	validations.add(
+        		PrefixRebajas + "Aparece la línea \"Rebajas\" (lo esperamos hasta " + maxSeconds + " segundos)",
+	    		isPresentLinRebajas, State.Defect);
+        } else {
+        	validations.add(
+	    		PrefixRebajas + "No aparece la línea \"Rebajas\"",
+	    		!isPresentLinRebajas, State.Defect);
+        }
+       
         return validations;
     }
     
@@ -206,13 +226,13 @@ public class SecMenusWrapperStpV {
 		return validations;
     }
     
-    public static DatosStep seleccionLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static DatosStep seleccionLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
         if (sublineaType==null) {
-            return seleccionLinea(lineaType, dCtxSh, dFTest.driver);
+            return seleccionLinea(lineaType, dCtxSh, driver);
         }
         
-        return seleccionSublinea(lineaType, sublineaType, dCtxSh, dFTest);
+        return seleccionSublinea(lineaType, sublineaType, dCtxSh, driver);
     }
     
     public static DatosStep seleccionLinea(LineaType lineaType, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
@@ -225,14 +245,14 @@ public class SecMenusWrapperStpV {
         return TestCaseData.getDatosLastStep();
     }
     
-    public static DatosStep seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest)
+    public static DatosStep seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, WebDriver driver)
     throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
-            SecMenuLateralMobilStpV.seleccionSublineaNinos(lineaType, sublineaType, dCtxSh, dFTest.driver);
+            SecMenuLateralMobilStpV.seleccionSublineaNinos(lineaType, sublineaType, dCtxSh, driver);
             return TestCaseData.getDatosLastStep();
         }
         
-        SecMenusDesktopStpV.seleccionSublinea(lineaType, sublineaType, dCtxSh, dFTest.driver);
+        SecMenusDesktopStpV.seleccionSublinea(lineaType, sublineaType, dCtxSh, driver);
         return TestCaseData.getDatosLastStep();
     }
     

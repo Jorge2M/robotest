@@ -126,8 +126,7 @@ public class TestNodos extends GestorWebDriver {
             PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, true/*execValidacs*/, dFTest.driver);
             
             if (appE==AppEcom.shop) {
-                //Step. Seleccionar la línea Nuevo
-                SecMenusWrapperStpV.seleccionLinea(LineaType.nuevo, null/*sublineaType*/, dCtxSh, dFTest);
+                SecMenusWrapperStpV.seleccionLinea(LineaType.nuevo, null/*sublineaType*/, dCtxSh, dFTest.driver);
 
                 //Obtenemos y almacenamos los artículos de la galería Nuevo
                 PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, dCtxSh.appE, dFTest.driver);
@@ -153,7 +152,7 @@ public class TestNodos extends GestorWebDriver {
             //Step. Seleccionamos / Validamos el 1er Banner
             int maxBannersToLoad = 1;
             SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, dFTest.driver);
-            secBannersStpV.testPageBanners(dCtxSh, 1, dFTest);
+            secBannersStpV.testPageBanners(dCtxSh, 1);
             if (appE==AppEcom.outlet) {
                 Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
                 SecMenusWrapperStpV.accesoMenuXRef(menuVestidos, dCtxSh, dFTest.driver);
@@ -163,13 +162,13 @@ public class TestNodos extends GestorWebDriver {
                 SecMenusDesktopStpV.stepSeleccionaCarrusel(dCtxSh.pais, LineaType.nuevo, idCarruselMujer, dCtxSh.appE, dFTest.driver);
             }
 			
-            SecMenusWrapperStpV.seleccionLinea(LineaType.he, null/*sublineaType*/, dCtxSh, dFTest);
+            SecMenusWrapperStpV.seleccionLinea(LineaType.he, null/*sublineaType*/, dCtxSh, dFTest.driver);
             SecMenusDesktopStpV.countSaveMenusEntorno (LineaType.he, null/*sublineaType*/, this.nodo.getIp(), this.autAddr,dCtxSh.appE, dFTest.driver);
-            SecMenusWrapperStpV.seleccionLinea(LineaType.nina, SublineaNinosType.nina, dCtxSh, dFTest);	
+            SecMenusWrapperStpV.seleccionLinea(LineaType.nina, SublineaNinosType.nina, dCtxSh, dFTest.driver);	
             SecMenusDesktopStpV.countSaveMenusEntorno(LineaType.nina, SublineaNinosType.nina, this.nodo.getIp(), this.autAddr, dCtxSh.appE, dFTest.driver);
-            SecMenusWrapperStpV.seleccionLinea(LineaType.nino, SublineaNinosType.bebe_nino, dCtxSh, dFTest);     
+            SecMenusWrapperStpV.seleccionLinea(LineaType.nino, SublineaNinosType.bebe_nino, dCtxSh, dFTest.driver);     
             SecMenusDesktopStpV.countSaveMenusEntorno(LineaType.nino, SublineaNinosType.bebe_nino, this.nodo.getIp(), this.autAddr, dCtxSh.appE, dFTest.driver);
-            SecMenusWrapperStpV.seleccionLinea(LineaType.violeta, null, dCtxSh, dFTest);	
+            SecMenusWrapperStpV.seleccionLinea(LineaType.violeta, null, dCtxSh, dFTest.driver);	
             SecMenusDesktopStpV.countSaveMenusEntorno (LineaType.violeta, null/*sublineaType*/, this.nodo.getIp(), this.autAddr, dCtxSh.appE, dFTest.driver);
             
             this.nodo.setTested(true);

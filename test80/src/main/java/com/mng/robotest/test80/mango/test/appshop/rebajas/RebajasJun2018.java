@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.appshop;
+package com.mng.robotest.test80.mango.test.appshop.rebajas;
 
 import org.testng.ITestContext;
 import java.lang.reflect.Method;
@@ -24,11 +24,11 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.bloqueMenu;
-import com.mng.robotest.test80.mango.test.stpv.shop.PageHomeMarcasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PagePrehomeStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.PageHomeMarcasStpV.TypeHome;
 import com.mng.robotest.test80.mango.test.stpv.shop.banner.SecBannersStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV.TypeHome;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusDesktopStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV;
@@ -91,15 +91,17 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
             return;
         }
         
-        boolean testBanners = true;
-        PageHomeMarcasStpV.validaRebajasJun2018(salesOnInCountry, TypeHome.Multimarca, testBanners, dCtxSh, dFTest.driver);
+    	SecMenusWrapperStpV.checkLineaRebajas(salesOnInCountry, dCtxSh, dFTest.driver);
+    	PageHomeMarcasStpV.bannerRebajas2018.checkBanner(salesOnInCountry, TypeHome.Multimarca, dCtxSh, dFTest.driver);
+    	//checkMsgNewsletterFooter(salesOnInCountry, dCtxSh.idioma, driver);
+        
         if (salesOnInCountry && dCtxSh.pais.isVentaOnline()) {
 	        //Step&Validation
         	int maxBannersToLoad = 1;
         	int posBannerToTest = 1;
         	boolean applyValidations = true;
         	SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, dFTest.driver);
-	        secBannersStpV.seleccionarBanner(posBannerToTest, applyValidations, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
+	        secBannersStpV.seleccionarBanner(posBannerToTest, applyValidations, dCtxSh.appE, dCtxSh.channel);
 	        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
 	        pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, true/*isGaleriaSale*/, dCtxSh.pais, dCtxSh.idioma, LineaType.she, bloqueMenu.prendas);
 	        PageGaleriaStpV.clickMoreInfoBannerRebajasJun2018(dFTest.driver);
@@ -134,8 +136,12 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
         }
         
         //Selección de la línea/sublínea
-        SecMenusWrapperStpV.seleccionLinea(lineaType, sublineaType, dCtxSh, dFTest);
-        PageHomeMarcasStpV.validaRebajasJun2018(salesOnInCountry, TypeHome.PortadaLinea, areBanners, dCtxSh, dFTest.driver);
+        SecMenusWrapperStpV.seleccionLinea(lineaType, sublineaType, dCtxSh, dFTest.driver);
+    	SecMenusWrapperStpV.checkLineaRebajas(salesOnInCountry, dCtxSh, dFTest.driver);
+    	if (areBanners) {
+    		PageHomeMarcasStpV.bannerRebajas2018.checkBanner(salesOnInCountry, TypeHome.Multimarca, dCtxSh, dFTest.driver);
+    	}
+    	//checkMsgNewsletterFooter(salesOnInCountry, dCtxSh.idioma, driver);
         if (SecMenusWrap.canClickMenuArticles(dCtxSh.pais, linea, sublinea)) {
             PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
             

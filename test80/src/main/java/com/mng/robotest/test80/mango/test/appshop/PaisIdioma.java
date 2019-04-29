@@ -25,10 +25,10 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
-import com.mng.robotest.test80.mango.test.stpv.shop.PageHomeMarcasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PagePrehomeStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.banner.SecBannersStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusDesktopStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 
@@ -148,7 +148,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
             sublineaType = sublinea.getTypeSublinea();
         }
         
-        SecMenusWrapperStpV.seleccionLinea(lineaType, sublineaType, dCtxShI, dFTest);
+        SecMenusWrapperStpV.seleccionLinea(lineaType, sublineaType, dCtxShI, dFTest.driver);
         if (sublinea==null) {
             testSpecificFeaturesForLinea(linea, dCtxShI, dFTest);
         }
@@ -167,7 +167,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
                     PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
 					boolean bannerIsLincable = PageGaleriaDesktop.secBannerHead.isLinkable(dFTest.driver);
                     if (bannerIsLincable) {
-                    	pageGaleriaStpV.clickBannerSuperiorIfLinkableDesktop();
+                    	pageGaleriaStpV.bannerHead.clickBannerSuperiorIfLinkableDesktop();
                     }
                 }
             }
@@ -185,9 +185,9 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
         	int maxBannersToTest = getMaxBannersToTest(dCtxShI.pais, dCtxShI.appE);
         	SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToTest, dFTest.driver);
         	if (this.dataCamp==null) {
-        		secBannersStpV.testPageBanners(dCtxShI, maxBannersToTest, dFTest);
+        		secBannersStpV.testPageBanners(dCtxShI, maxBannersToTest);
         	} else {
-        		secBannersStpV.testCampanas(dataCamp, dCtxShI, lineaType, dFTest);
+        		secBannersStpV.testCampanas(dataCamp, dCtxShI, lineaType);
         	}
         }
         

@@ -172,7 +172,7 @@ public class Compra extends GestorWebDriver {
         String nTarjeta;
         String cvvTarjeta = "";
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
-        SecMenusWrapperStpV.seleccionLinea(LineaType.she, null/*sublineaType*/, dCtxSh, dFTest);
+        SecMenusWrapperStpV.seleccionLinea(LineaType.she, null/*sublineaType*/, dCtxSh, dFTest.driver);
         SecFooterStpV.clickLinkFooter(FooterLink.cheque_regalo, false, dCtxSh.channel, dFTest.driver);
         if(dCtxSh.channel != Channel.movil_web){
             nTarjeta = "100000040043";

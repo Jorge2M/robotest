@@ -10,7 +10,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 
-public class SecBannerHead extends WebdrvWrapp {
+public class SecBannerHeadGallery extends WebdrvWrapp {
 	public enum TypeLinkInfo {more, less};
     static String XPathBanner = "//div[@class='bannerHead' or @class='firstBanner' or @class='innerBanner']";
     static String XPathBannerWithVideo = XPathBanner + "//div[@data-video]";

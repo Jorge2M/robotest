@@ -105,4 +105,6 @@ public class Constantes {
     public static final String paramUrlBase = "urlBase";
 	
     public static final String URL_SOFTWAREISHARD = "http://www.softwareishard.com/har/viewer/?inputUrl=";
+    
+	public final static String PrefixRebajas = "<b style=\"color:blue\">Rebajas</b></br>";
 }

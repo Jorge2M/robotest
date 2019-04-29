@@ -32,7 +32,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenus
 public class PageGaleriaDesktop extends PageGaleria {
 	//TODO REFACTORIZAR!!!
     //TODO acabar de modificar orientando a "WebElement articulo"
-    public static SecBannerHead secBannerHead;
+    public static SecBannerHeadGallery secBannerHead;
     public static SecSelectorPrecios secSelectorPrecios;
     public static SecCrossSelling secCrossSelling;
     

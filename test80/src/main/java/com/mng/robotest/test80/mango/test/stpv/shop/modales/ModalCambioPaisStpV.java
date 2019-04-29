@@ -9,7 +9,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
-import com.mng.robotest.test80.mango.test.stpv.shop.PageHomeMarcasStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV;
 
 public class ModalCambioPaisStpV {
     

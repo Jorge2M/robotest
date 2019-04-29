@@ -3,15 +3,15 @@ package com.mng.robotest.test80.mango.test.factoryes;
 import java.util.*;
 import org.testng.annotations.*;
 
-import com.mng.robotest.test80.mango.test.appshop.RebajasJun2018;
+import com.mng.robotest.test80.mango.test.appshop.rebajas.RebajasSpringIsHere2019;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
+import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
 
 import org.testng.ITestContext;
-
 
 public class ListRebajasXPais {
     @SuppressWarnings("unused")
@@ -30,7 +30,7 @@ public class ListRebajasXPais {
             Iterator<Continente> itContinentes = response.getResponse().iterator();
             
             //Obtenemos la lista de países en rebajas
-            //ArrayList<String> listCountryCodesInSalePeriod = RebajasPaisDAO.listCountryCodesInRebajas();
+            ArrayList<String> listCountryCodesInSalePeriod = RebajasPaisDAO.listCountryCodesInRebajas();
     	        
             //Iteramos a nivel de Continentes -> Países -> Idiomas
             int prioridad=0;
@@ -39,12 +39,13 @@ public class ListRebajasXPais {
                 Iterator<Pais> itPaises = continente.getPaises().iterator();
                 while (itPaises.hasNext()) {
                     Pais pais = itPaises.next();
-                    //if (listCountryCodesInSalePeriod.contains(pais.getCodigo_pais())) {
+                    if (listCountryCodesInSalePeriod.contains(pais.getCodigo_pais())) {
                         List<Linea> lineasAprobar = Utilidades.getLinesToTest(pais, appE, lineas);
                         Iterator<IdiomaPais> itIdiomas = pais.getListIdiomas().iterator();
                         while (itIdiomas.hasNext()) {
                             IdiomaPais idioma = itIdiomas.next();
-                            listTests.add(new RebajasJun2018(pais, idioma, lineasAprobar, prioridad));
+                            //listTests.add(new RebajasJun2018(pais, idioma, lineasAprobar, prioridad));
+                            listTests.add(new RebajasSpringIsHere2019(pais, idioma, lineasAprobar, prioridad));
                             prioridad+=1;
                             System.out.println(
                                 "Creado Test con datos: Continente=" + continente.getNombre_continente() +
@@ -52,7 +53,7 @@ public class ListRebajasXPais {
                                 ",Idioma=" + idioma.getCodigo().getLiteral() 
                             );
                         }
-                    //}
+                    }
                 }
             }
         }
