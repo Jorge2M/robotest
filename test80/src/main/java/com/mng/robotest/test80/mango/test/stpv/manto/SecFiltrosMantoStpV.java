@@ -42,7 +42,19 @@ public class SecFiltrosMantoStpV {
     	SecFiltros.setFiltroCodPaisIfExists(driver, dataPedido.getCodigoPais());
         String fechaHoy = SecFiltros.getFechaHastaValue(driver);
         SecFiltros.setFiltroFDesde(fechaHoy, driver);
-        SecFiltros.setFiltroImporteTotal("19.99", driver); //Con esto evitamos mostrar cheques regalo
         SecFiltros.clickButtonBuscar(driver);
+    }
+    
+    public static void setFiltrosHoyWithoutChequeRegaloYbuscar(DataPedido dataPedido, TypeSearch typeSearch, WebDriver driver) 
+    throws Exception {
+    	setFiltroForAvoidChequeRegalo(driver);
+    	setFiltrosHoyYbuscar(dataPedido, typeSearch, driver);
+    }
+    
+    @Step (
+    	description="Introducimos un importe total de 19.99 euros para evitar obtener pedidos asociados a cheques regalo",
+    	expected="El filtro se setea correctamente")
+    public static void setFiltroForAvoidChequeRegalo(WebDriver driver) {
+        SecFiltros.setFiltroImporteTotal("19.99", driver);
     }
 }

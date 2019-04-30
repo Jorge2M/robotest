@@ -80,11 +80,9 @@ public class Manto extends GestorWebDriver {
 		this.dPagoPrueba.setNombre("");
 		this.dPedidoPrueba.setPago(this.dPagoPrueba);
 		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
-    	
     	PageMenusMantoStpV.goToPedidos(driver);
     	
-    	SecFiltrosMantoStpV.setFiltrosHoyYbuscar(this.dPedidoPrueba, TypeSearch.PEDIDO, driver);
-    	//this.dPedidoPrueba = PagePedidosMantoStpV.getDataPedidoUsuarioRegistrado(this.dPedidoPrueba, dFTest);
+    	SecFiltrosMantoStpV.setFiltrosHoyWithoutChequeRegaloYbuscar(this.dPedidoPrueba, TypeSearch.PEDIDO, driver);
     	this.dPedidoPrueba = PagePedidosMantoStpV.getPedidoUsuarioRegistrado(this.dPedidoPrueba, driver);
     	this.dPedidoPrueba = PagePedidosMantoStpV.getDataPedido(this.dPedidoPrueba, driver);
     	this.dPedidoPrueba = PagePedidosMantoStpV.getDataCliente(this.dPedidoPrueba, driver);
