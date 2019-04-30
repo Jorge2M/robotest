@@ -37,11 +37,12 @@ public class SecFiltrosMantoStpV {
     	datosStep.replaceInDescription(tagLitTienda, SecCabecera.getLitTienda(driver));
     	
     	if (dataPedido.getCodigoPedidoManto()!=null) {
-            SecFiltros.setFiltroCodPedido(driver, dataPedido.getCodigoPedidoManto());
+            SecFiltros.setFiltroCodPedido(dataPedido.getCodigoPedidoManto(), driver);
     	}
     	SecFiltros.setFiltroCodPaisIfExists(driver, dataPedido.getCodigoPais());
         String fechaHoy = SecFiltros.getFechaHastaValue(driver);
-        SecFiltros.setFiltroFDesde(driver, fechaHoy);
+        SecFiltros.setFiltroFDesde(fechaHoy, driver);
+        SecFiltros.setFiltroImporteTotal("19.99", driver); //Con esto evitamos mostrar cheques regalo
         SecFiltros.clickButtonBuscar(driver);
     }
 }

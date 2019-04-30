@@ -8,16 +8,17 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
 public class SecFiltros extends WebdrvWrapp {
 
-    static String XPathFiltroCodPedido = "//input[@id[contains(.,':id')]]";
-    static String XPathFiltroCodPais = "//input[@id[contains(.,'pais')]]";
-    static String XPathFiltroFDesde = "//input[@id[contains(.,'desde')]]";
-    static String XPathFiltroFHasta = "//input[@id[contains(.,'hasta')]]";
-    static String XPathButtonBuscar = "//input[@value='Buscar']";
+    final static String XPathFiltroCodPedido = "//input[@id[contains(.,':id')]]";
+    final static String XPathFiltroCodPais = "//input[@id[contains(.,'pais')]]";
+    final static String XPathFiltroFDesde = "//input[@id[contains(.,'desde')]]";
+    final static String XPathFiltroFHasta = "//input[@id[contains(.,'hasta')]]";
+    final static String XPathFiltroImporteTotal = "//input[@id[contains(.,':total')]]";
+    final static String XPathButtonBuscar = "//input[@value='Buscar']";
 
     /**
      * Seteo del código de pedido
      */
-    public static void setFiltroCodPedido(WebDriver driver, String codigoPedidoManto) {
+    public static void setFiltroCodPedido(String codigoPedidoManto, WebDriver driver) {
         driver.findElement(By.xpath(XPathFiltroCodPedido)).clear();
         driver.findElement(By.xpath(XPathFiltroCodPedido)).sendKeys(codigoPedidoManto);
     }
@@ -25,9 +26,14 @@ public class SecFiltros extends WebdrvWrapp {
     /**
      * Seteo del filtro correspondiente a la fecha desde
      */
-    public static void setFiltroFDesde(WebDriver driver, String fechaDesde) {
+    public static void setFiltroFDesde(String fechaDesde, WebDriver driver) {
         driver.findElement(By.xpath(XPathFiltroFDesde)).clear();
         driver.findElement(By.xpath(XPathFiltroFDesde)).sendKeys(fechaDesde);
+    }
+    
+    public static void setFiltroImporteTotal(String importeTotal, WebDriver driver) {
+        driver.findElement(By.xpath(XPathFiltroImporteTotal)).clear();
+        driver.findElement(By.xpath(XPathFiltroImporteTotal)).sendKeys(importeTotal);
     }
     
     /**

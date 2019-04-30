@@ -28,7 +28,7 @@ public class PageConsultaIdEansStpV {
     }
 
     @Step (
-    	description="Introducimos datos de pedido válido y consultamos los datos de contacto", 
+    	description="Introducimos datos de pedidos válidos #{pedidosPrueba} y consultamos los datos de contacto", 
 	    expected="Deben mostrar la información de contacto",
 	    saveErrorPage=SaveWhen.Never)
 	public static void consultaDatosContacto(List<String> pedidosPrueba, WebDriver driver) {
@@ -53,7 +53,7 @@ public class PageConsultaIdEansStpV {
     }
 
     @Step (
-    	description="Introducimos datos de pedido válido y consultamos los Identificadores que tiene",
+    	description="Introducimos datos de pedidos válidos #{pedidosPrueba} y consultamos los Identificadores que tiene",
     	expected="Debe mostrar los identificadores del pedido",
     	saveErrorPage=SaveWhen.Never)
 	public static void consultaIdentificadoresPedido(List<String> pedidosPrueba, WebDriver driver) {
@@ -78,7 +78,7 @@ public class PageConsultaIdEansStpV {
     }
 	
 	@Step (
-		description="Introducimos datos de pedido válido y consultamos el trackings",
+		description="Introducimos datos de pedidos válidos #{pedidosPrueba} y consultamos el trackings",
 		expected="Debe mostrar el tracking",
 		saveErrorPage=SaveWhen.Never)
 	public static void consultaTrackings(List<String> pedidosPrueba, WebDriver driver) {
@@ -94,7 +94,7 @@ public class PageConsultaIdEansStpV {
 	}
 
 	@Step (
-		description="Introducimos artículos válidos y consultamos el EAN",
+		description="Introducimos artículos válidos #{articulosPrueba} y consultamos el EAN",
 		expected="Debe mostrar el EAN",
 		saveErrorPage=SaveWhen.Never)
 	public static void consultaDatosEan(List<String> articulosPrueba, WebDriver driver) {
