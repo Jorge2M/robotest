@@ -21,15 +21,19 @@ public interface SecTarjetaPci {
     public void selectAnyByVisibleText(String any, WebDriver driver);
     
     public static SecTarjetaPci makeSecTarjetaPci(Channel channel, WebDriver driver) {
+		//TODO cuando suba a PRO pci en iframe se podrá eliminar SecTarjetaPciNotInIframeMobil y SecTarjetaPciNotInIframeDesktop
 		if (channel==Channel.desktop) {
-		    return (SecTarjetaPciDktop.make());
+			SecTarjetaPci secTarjetaPci = SecTarjetaPciNotInIframeDesktop.make();
+			if (secTarjetaPci.isPresentInputNumberUntil(1, driver)) {
+				return secTarjetaPci;
+			}
+			return (SecTarjetaPciInIframe.make());    
 		}
 		
-		//TODO cuando suba a PRE pci en iframe se podrá eliminar SecTarjetaPciNotInIframeMobil.
 		SecTarjetaPci secTarjetaPci = SecTarjetaPciNotInIframeMobil.make();
 		if (secTarjetaPci.isPresentInputNumberUntil(1, driver)) {
 			return secTarjetaPci;
 		}
-		return (SecTarjetaPciInIframeMobil.make());    
+		return (SecTarjetaPciInIframe.make());    
     }
 }

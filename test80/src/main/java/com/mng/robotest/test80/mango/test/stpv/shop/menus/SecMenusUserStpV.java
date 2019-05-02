@@ -118,7 +118,8 @@ public class SecMenusUserStpV {
     @Step (
     	description="Seleccionar el link \"Mango Likes You\"", 
         expected="Aparece la página de \"Mi cuenta\"")
-	public static void clickMenuMiCuenta(WebDriver driver) throws Exception {
+	public static void clickMenuMangoLikesYou(Channel channel, WebDriver driver) throws Exception {
+    	SecMenusWrap.secMenusUser.clickMangoLikesYou(channel, driver);
     	SecMenusUserDesktop.clickMangoLikesYou(driver);	
     	PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(driver);
     	pageHomeLikesStpV.checkIsPageOk();
@@ -127,12 +128,12 @@ public class SecMenusUserStpV {
 	@Validation (
 		description="Aparece el link de \"Mango Likes You\" en el menú de usuario",
 		level=State.Defect)
-	public static boolean checkIsVisibleLinkMangoLikesYou(WebDriver driver) {	
-	    return (SecMenusUserDesktop.isPresentMangoLikesYou(driver));
+	public static boolean checkIsVisibleLinkMangoLikesYou(Channel channel, WebDriver driver) {	
+		return (SecMenusWrap.secMenusUser.isPresentMangoLikesYou(channel, driver));  
 	}
 
 	@Validation (
-		description="Aparecen Loyalty Points en el menú de usuario (lo esperamos hasta #{maxSecondsWait})",
+		description="Aparecen Loyalty Points en el menú de usuario (lo esperamos hasta #{maxSecondsWait} segundos)",
 		level=State.Defect)
 	public static boolean checkIsPresentLoyaltyPoints(int maxSecondsWait, WebDriver driver) throws Exception {	
 	    return (SecMenusUserDesktop.isPresentLoyaltyPointsUntil(maxSecondsWait, driver));

@@ -689,7 +689,7 @@ public class PageGaleriaStpV {
     
     private void checkSalesOn(Pais pais, IdiomaPais idioma, LineaType lineaType, bloqueMenu menuType, boolean isGaleriaSale) 
     throws Exception {
-    	bannerHead.checkBannerHeadSalesOn(idioma);
+    	bannerHead.checkBannerHeadSalesOn(pais, idioma);
     	SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(Channel.desktop, AppEcom.shop, driver);
     	if (!isGaleriaSale) {
     		checkFiltrosSalesOnInGalerySale(filtrosCollection);

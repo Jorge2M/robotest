@@ -8,6 +8,7 @@ import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavoritos;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusUserDesktop.MenuUserDesktop;
 
 
 public class SecMenusUserMobil extends WebdrvWrapp {
@@ -22,6 +23,7 @@ public class SecMenusUserMobil extends WebdrvWrapp {
     static String XPathMenuIniciarSesion = XPathCapaMenus + "//a[@href[contains(.,'/login?')]]";
     static String XPathMenuMiCuenta = XPathCapaMenus + "//a[@data-label='mi_cuenta']";
     static String XPathMenuRegistrate = XPathCapaMenus + "//a[@href[contains(.,'/signup?')]]";
+    static String XPathMenuMangoLikesYou = XPathCapaMenus + "//a[@href[contains(.,'/mangolikesyou')]]";
     
     public static boolean isPresentCerrarSesion(WebDriver driver) {
         return (isElementPresent(driver, By.xpath(XPathMenuCerrarSesion)));
@@ -100,5 +102,13 @@ public class SecMenusUserMobil extends WebdrvWrapp {
     
     public static boolean isPresentAyuda(WebDriver driver) {
         return (isElementPresent(driver, By.xpath(XPathMenuAyuda)));
+    }
+    
+    public static boolean isPresentMangoLikesYou(WebDriver driver) {
+    	return (WebdrvWrapp.isElementPresent(driver, By.xpath(XPathMenuMangoLikesYou)));
+    }
+    
+    public static void clickMangoLikesYou(WebDriver driver) throws Exception {
+        clickAndWaitLoad(driver, By.xpath(XPathMenuMangoLikesYou));
     }
 }

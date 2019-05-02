@@ -138,4 +138,25 @@ public class SecMenusUserWrap {
 			SecMenusUserMobil.clickRegistrate(driver);
 		}
 	}	
+	
+	public static boolean isPresentMangoLikesYou(Channel channel, WebDriver driver) {
+		switch (channel) {
+		case movil_web:
+			return (SecMenusUserMobil.isPresentMangoLikesYou(driver));
+		case desktop:
+		default:
+			return (SecMenusUserDesktop.isPresentMangoLikesYou(driver));
+		}
+	}
+	
+    public static void clickMangoLikesYou(Channel channel, WebDriver driver) throws Exception {
+    	switch (channel) {
+    	case movil_web:
+    		SecMenusUserMobil.clickMangoLikesYou(driver);
+	    	break;
+    	case desktop:
+    		SecMenusUserDesktop.clickMangoLikesYou(driver);
+	        break;
+    	}
+    }
 }

@@ -73,7 +73,7 @@ public class BannerSpringIsHere2019StpV {
 	}
 	
     @Validation
-    public ChecksResultWithFlagBannerExists checkBanner(boolean salesOnInCountry, TypeHome typeHome) {
+    public ChecksResultWithFlagBannerExists checkBanner(TypeHome typeHome) {
     	ChecksResultWithFlagBannerExists validations = ChecksResultWithFlagBannerExists.getNew();
     	boolean existenBanners = managerBannersScreen.existBanners();
     	validations.setexistBanner(posBannerSpringIsHere > 0);
@@ -81,35 +81,22 @@ public class BannerSpringIsHere2019StpV {
     		PrefixRebajas + "Existen banners",
     		existenBanners, State.Defect);    	
     	if (existenBanners) {
-    		if (!salesOnInCountry) {
-    			boolean isBannerThatLinkWithSale = false;
-    			for (DataBanner dataBanner : managerBannersScreen.getListDataBanners()) {
-    				if (dataBanner.getUrlBanner().contains("seccion=Rebajas")) {
-    					isBannerThatLinkWithSale=true;
-    					break;
-    				}
-    			}
-	        	validations.add(
-	        		"No hay ningún banner que linque con la sección de rebajas",
-	        		!isBannerThatLinkWithSale, State.Warn);
-    		} else {
-	        	validations.add(
-	        		"El 1er Banner contiene el texto " + textsPossible.get(0),
-	        		posBannerSpringIsHere > 0, State.Warn);
-        
-	        	if (posBannerSpringIsHere>0 && typeHome==TypeHome.Multimarca) {
-		        	List<Linea> listLineas = dCtxSh.pais.getShoponline().getListLineasTiendas(dCtxSh.appE);
-		        	if (listLineas.size()>1) {
-		                for (Linea linea : listLineas) {
-		                    String urlLink = getBanner().getUrlLinkLinea(linea.getType());
-		                    String textToBeContainedInUrl = "seccion=hellosummer_" + linea.getType().getId3();
-		                	validations.add(
-		                		"El link del 1er banner contiene " + textToBeContainedInUrl,
-		                		urlLink.contains(textToBeContainedInUrl), State.Warn);
-		                }
-		        	}
+        	validations.add(
+        		"El 1er Banner contiene el texto " + textsPossible.get(0),
+        		posBannerSpringIsHere > 0, State.Warn);
+    
+        	if (posBannerSpringIsHere>0 && typeHome==TypeHome.Multimarca) {
+	        	List<Linea> listLineas = dCtxSh.pais.getShoponline().getListLineasTiendas(dCtxSh.appE);
+	        	if (listLineas.size()>1) {
+	                for (Linea linea : listLineas) {
+	                    String urlLink = getBanner().getUrlLinkLinea(linea.getType());
+	                    String textToBeContainedInUrl = "seccion=hellosummer_" + linea.getType().getId3();
+	                	validations.add(
+	                		"El link del 1er banner contiene " + textToBeContainedInUrl,
+	                		urlLink.contains(textToBeContainedInUrl), State.Warn);
+	                }
 	        	}
-    		}
+        	}
     	}
     	
     	return validations;

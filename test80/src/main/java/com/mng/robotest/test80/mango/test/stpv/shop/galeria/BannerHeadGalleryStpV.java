@@ -9,6 +9,7 @@ import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV.TypeGalery;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
@@ -66,13 +67,13 @@ public class BannerHeadGalleryStpV {
 	    pageGaleriaParent.validaArtEnContenido(3);
     }
    
-    public void checkBannerHeadSalesOn(IdiomaPais idioma) {
-	    checkBannerSalesHead(TypeGalery.Sales, idioma);
+    public void checkBannerHeadSalesOn(Pais pais, IdiomaPais idioma) {
+	    checkBannerSalesHead(TypeGalery.Sales, pais, idioma);
     }
    
     @SuppressWarnings("static-access")
     @Validation
-    public ChecksResult checkBannerSalesHead(TypeGalery typeGalery, IdiomaPais idioma) {
+    public ChecksResult checkBannerSalesHead(TypeGalery typeGalery, Pais pais, IdiomaPais idioma) {
     	ChecksResult validations = ChecksResult.getNew();
     	validations.add(
     		"<b style=\"color:blue\">Rebajas</b></br>" +
@@ -90,7 +91,7 @@ public class BannerHeadGalleryStpV {
     		PageGaleriaDesktop.secBannerHead.isVisibleLinkInfoRebajas(driver), State.Warn);	
     	
     	boolean bannerLincable = PageGaleriaDesktop.secBannerHead.isLinkable(driver);
-    	if (typeGalery==TypeGalery.Sales) {
+    	if (typeGalery==TypeGalery.Sales || !pais.isVentaOnline()) {
 	     	validations.add(
 	     		"El banner de cabecera no es lincable",
 	     		!bannerLincable, State.Info);

@@ -303,22 +303,22 @@ public class PageCheckoutWrapperStpV {
         datosStep.replaceInDescription(tagTipoTarj, pago.getTipotarj());
         datosStep.replaceInDescription(tagNumTarj, pago.getNumtarj());
        
-    	PageCheckoutWrapper pageCheckoutStpV = new PageCheckoutWrapper();
+    	PageCheckoutWrapper pageCheckout = new PageCheckoutWrapper();
         if (pago.getNumtarj()!=null && "".compareTo(pago.getNumtarj())!=0) {
-        	pageCheckoutStpV.inputNumberPci(pago.getNumtarj(), channel, driver);
+        	pageCheckout.inputNumberPci(pago.getNumtarj(), channel, driver);
         }
-        pageCheckoutStpV.inputTitularPci(pago.getTitular(), channel, driver);
+        pageCheckout.inputTitularPci(pago.getTitular(), channel, driver);
         if (pago.getMescad()!=null && "".compareTo(pago.getMescad())!=0) {
-        	pageCheckoutStpV.selectMesByVisibleTextPci(pago.getMescad(), channel, driver);
+        	pageCheckout.selectMesByVisibleTextPci(pago.getMescad(), channel, driver);
         }
         if (pago.getAnycad()!=null && "".compareTo(pago.getAnycad())!=0) {
-        	pageCheckoutStpV.selectAnyByVisibleTextPci(pago.getAnycad(), channel, driver);
+        	pageCheckout.selectAnyByVisibleTextPci(pago.getAnycad(), channel, driver);
         }
         if (pago.getCvc()!=null && "".compareTo(pago.getCvc())!=0) {
-        	pageCheckoutStpV.inputCvcPci(pago.getCvc(), channel, driver);
+        	pageCheckout.inputCvcPci(pago.getCvc(), channel, driver);
         }
         if (pago.getDni()!=null && "".compareTo(pago.getDni())!=0) {
-        	pageCheckoutStpV.inputDniPci(pago.getDni(), channel, driver);   
+        	pageCheckout.inputDniPci(pago.getDni(), channel, driver);   
         }
 
         PageCheckoutWrapper.confirmarPagoFromMetodos(channel, dCtxPago.getDataPedido(), driver);

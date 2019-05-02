@@ -3,6 +3,8 @@ package com.mng.robotest.test80.mango.test.appshop.rebajas;
 import org.testng.ITestContext;
 import java.lang.reflect.Method;
 import org.testng.annotations.*;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
@@ -36,9 +38,35 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
     IdiomaPais idiomaFactory = null;
     List<Linea> lineasAprobar = null;
     
+
+    
+    final static List<String> countrysWithoutCampaignInHE;
+    final static List<String> countrysWithCampaignInNINOS;
+    
+    static {
+    	countrysWithoutCampaignInHE = Arrays.asList(
+    	    "043",	/*ANDORRA*/
+    		"001",	/*ESPAÑA*/
+    		"021",	/*CANARIAS*/
+    		"022",	/*CEUTA*/
+    		"023",	/*MELILLA*/
+    		"010",	/*PORTUGAL*/
+    		"052"	/*TURQUIA*/
+    	);
+    	
+    	countrysWithCampaignInNINOS = Arrays.asList(
+    		"706",	/*SINGAPORE*/
+    		"701",	/*MALAYSIA*/
+    		"700"	/*INDONESIA*/
+        );
+    			
+    }
+    
     final static List<String> helloSunshineCountrys;
     final static List<String> springIsHereCountrys;
     final static List<String> aPrimaveraeAquiCountrys;
+    final static List<String> cestLePrintemsCountrys;
+    final static List<String> stigloJeProljeceCountrys;
     
     static {
     	helloSunshineCountrys = Arrays.asList(
@@ -69,7 +97,6 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
 	    	"091",	/*ESLOVENIA*/
 	    	"001",	/*ESPAÑA*/
 	    	"032",	/*FINLANDIA*/
-	    	"011",	/*FRANCIA*/
 	    	"064",	/*HUNGRIA*/
 	    	"007",	/*IRLANDA*/
 	    	"021",	/*ISLAS CANARIAS*/
@@ -83,7 +110,7 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
 	    	"061",	/*REPUBLICA CHECA*/
 	    	"066",	/*RUMANIA*/
 	    	"030",	/*SUECIA*/
-	    	"036",	/*SUIZA*/
+    	    "036",	/*SUIZA*/
 	    	"052",	/*TURQUIA*/
 	    	"602",	/*CHIPRE NORTE*/
 	    	"076",	/*GEORGIA*/
@@ -96,7 +123,18 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
     	aPrimaveraeAquiCountrys = Arrays.asList(
     		"010"	/*PORTUGAL*/
     	);
+    	
+    	cestLePrintemsCountrys = Arrays.asList(
+    	    "036",	/*SUIZA*/
+	    	"018",	/*LUXEMBURGO*/
+    		"011"	/*FRANCIA*/
+    	);
+    	
+    	stigloJeProljeceCountrys = Arrays.asList(
+    	    "092"	/*CROACIA*/
+    	);
     }
+
     
     //Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
     public RebajasSpringIsHere2019() {}
@@ -111,13 +149,42 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
     }
     
     private static List<String> getPossibleTextPromotion(String codigoPais) {
+    	List<String> possibleText = new ArrayList<>();
     	if (helloSunshineCountrys.contains(codigoPais)) {
-    		return (Arrays.asList("Hello sunshine!"));
+    		possibleText.addAll(Arrays.asList("Hello sunshine!"));
     	}
     	if (aPrimaveraeAquiCountrys.contains(codigoPais)) {
-        	return (Arrays.asList("A PRIMAVERA é AQUI!", "A PRIMAVERA  é  AQUI!"));
+    		possibleText.addAll(Arrays.asList("A PRIMAVERA é AQUI!", "A PRIMAVERA  é  AQUI!"));
     	}
-    	return (Arrays.asList("SPRING is HERE!", "SPRING  is  HERE!"));
+    	if (springIsHereCountrys.contains(codigoPais)) {
+    		possibleText.addAll(Arrays.asList("SPRING is HERE!", "SPRING  is  HERE!"));
+    	}
+    	if (cestLePrintemsCountrys.contains(codigoPais)) {
+    		possibleText.addAll(Arrays.asList("C'EST  le  PRINTEMPS !", "C'EST le PRINTEMPS !"));
+    	}
+    	if (stigloJeProljeceCountrys.contains(codigoPais)) {
+    		possibleText.addAll(Arrays.asList("STIGLO  je  PROLJEĆE!", "STIGLO je PROLJEĆE!"));
+    	}
+    	
+    	return possibleText;
+    }
+    
+    private boolean bannerMustBeInPortada(String codigoPais, Linea linea, Sublinea sublinea) {
+    	switch (linea.getType()) {
+    	case she:
+    	case violeta:
+    		return true;
+    	case he:
+    		return (!countrysWithoutCampaignInHE.contains(codigoPais));
+    	case nina:
+    	case nino:
+    		if (sublinea==null) {
+    			return (countrysWithCampaignInNINOS.contains(codigoPais));
+    		}
+    		return false;
+    	default:
+    		return false;
+    	}
     }
 	  
     @BeforeMethod (groups={"RebajasSpringIsHere2019", "Canal:desktop_App:shop", "SupportsFactoryCountrys"})
@@ -148,10 +215,6 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
     	WebDriver  driver = TestCaseData.getdFTest().driver;
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         int numLineasPais = dCtxSh.pais.getShoponline().getNumLineasTiendas(dCtxSh.appE);
-        
-        //TODO pendiente de las fechas
-    	//boolean salesOnInCountry = RebajasPaisDAO.isRebajasEnabledPais(dCtxSh.pais.getCodigo_pais());
-        boolean salesOnInCountry = true;
             
         PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
         if (numLineasPais==1) {
@@ -161,31 +224,31 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
         BannerSpringIsHere2019StpV.clickCircleToForceStopInCampaing(1, driver);
         List<String> textPossible = getPossibleTextPromotion(dCtxSh.pais.getCodigo_pais());
         BannerSpringIsHere2019StpV bannerSpringIsHere2019 = new BannerSpringIsHere2019StpV(textPossible, dCtxSh, driver);
-    	boolean bannerExists = bannerSpringIsHere2019.checkBanner(salesOnInCountry, TypeHome.Multimarca).getExistBanner();
+    	boolean bannerExists = bannerSpringIsHere2019.checkBanner(TypeHome.Multimarca).getExistBanner();
     	if (bannerExists) {
     		bannerSpringIsHere2019.clickBanner();
+	        if (dCtxSh.pais.isVentaOnline()) {
+		        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		        pageGaleriaStpV.validaArticlesOfTemporadas(Arrays.asList(4));
+		        pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.norebajado, State.Warn, false/*avoidEvidences*/);
+		        pageGaleriaStpV.bannerHead.checkBannerHeadSalesOn(dCtxSh.pais, dCtxSh.idioma);
+	        }
     	}
-        if (salesOnInCountry && dCtxSh.pais.isVentaOnline()) {
-	        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-	        pageGaleriaStpV.validaArticlesOfTemporadas(Arrays.asList(4));
-	        pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.norebajado, State.Warn, false/*avoidEvidences*/);
-	        pageGaleriaStpV.bannerHead.checkBannerHeadSalesOn(dCtxSh.idioma);
-        }
         
         for (Linea linea : this.lineasAprobar) {
             if (UtilsMangoTest.validarLinea(dCtxSh.pais, linea, dCtxSh.appE) &&
                 linea.getType()!=LineaType.edits &&
                 linea.getType()!=LineaType.nuevo) {
-                validaLinea(salesOnInCountry, linea, null, ("banners".compareTo(linea.getContentDesk())==0), dCtxSh, driver);
+                validaLinea(linea, null, ("banners".compareTo(linea.getContentDesk())==0), dCtxSh, driver);
                 for (Sublinea sublinea : linea.getListSublineas()) {
-                    validaLinea(salesOnInCountry, linea, sublinea, ("banners".compareTo(sublinea.getContentDesk())==0), dCtxSh, driver);
+                    validaLinea(linea, sublinea, ("banners".compareTo(sublinea.getContentDesk())==0), dCtxSh, driver);
                 }
             }
         }
     }
     
     @SuppressWarnings("static-access")
-	private void validaLinea(boolean salesOnInCountry, Linea linea, Sublinea sublinea, boolean areBanners, DataCtxShop dCtxSh, WebDriver driver) 
+	private void validaLinea(Linea linea, Sublinea sublinea, boolean areBanners, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
         LineaType lineaType = linea.getType();
         SublineaNinosType sublineaType = null;
@@ -196,27 +259,19 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
         SecMenusWrapperStpV.seleccionLinea(lineaType, sublineaType, dCtxSh, driver);
         List<String> textoPromotion = getPossibleTextPromotion(dCtxSh.pais.getCodigo_pais());
         BannerSpringIsHere2019StpV bannerSpringIsHere2019 = new BannerSpringIsHere2019StpV(textoPromotion, dCtxSh, driver);
-        if (lineaType==LineaType.she || 
-        	lineaType==LineaType.he || 
-        	lineaType==LineaType.violeta) {
-	    	boolean bannerExists = bannerSpringIsHere2019.checkBanner(salesOnInCountry, TypeHome.PortadaLinea).getExistBanner();
-	    	if (bannerExists) {
-	    		bannerSpringIsHere2019.clickBanner();
+        if (bannerMustBeInPortada(dCtxSh.pais.getCodigo_pais(), linea, sublinea)) {
+	    	boolean bannerExists = bannerSpringIsHere2019.checkBanner(TypeHome.PortadaLinea).getExistBanner();
+	    	if (bannerExists && dCtxSh.pais.isVentaOnline()) {
+		    	bannerSpringIsHere2019.clickBanner();
 	    	}
 	    	checkMenuLateralSpringPromotion(lineaType, sublineaType, dCtxSh, driver);
 	    	checkMenuSuperiorPantalones(lineaType, sublineaType, dCtxSh, driver); 
         }
-        
-        if (lineaType==LineaType.nina ||
-        	lineaType==LineaType.nino) {
-        	if (sublinea==null) {
-        		bannerSpringIsHere2019.checkIsNotBannerVisible();
-        	} else {
-		    	checkMenuLateralSpringPromotion(lineaType, sublineaType, dCtxSh, driver);
-	        }
+        else {
+        	bannerSpringIsHere2019.checkIsNotBannerVisible();
         }
     }
-    
+
     private void checkMenuLateralSpringPromotion(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
         Menu1rstLevel menuSpringPromotion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "Spring Promotion"));
@@ -230,16 +285,18 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
     	Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "pantalones"));
     	SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh, driver);
     	PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-    	pageGaleriaStpV.bannerHead.checkBannerSalesHead(TypeGalery.NoSales, dCtxSh.idioma);
-    	pageGaleriaStpV.bannerHead.clickBannerSuperiorIfLinkableDesktop();
-    	checkGaleryOfArticlesInPromotion(dCtxSh, driver);
+    	pageGaleriaStpV.bannerHead.checkBannerSalesHead(TypeGalery.NoSales, dCtxSh.pais, dCtxSh.idioma);
+    	if (dCtxSh.pais.isVentaOnline()) {
+	    	pageGaleriaStpV.bannerHead.clickBannerSuperiorIfLinkableDesktop();
+	    	checkGaleryOfArticlesInPromotion(dCtxSh, driver);
+    	}
     }
     
     private void checkGaleryOfArticlesInPromotion(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
     	PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
         pageGaleriaStpV.validaArticlesOfTemporadas(Arrays.asList(4));
         pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.norebajado, State.Warn, false/*avoidEvidences*/);
-        pageGaleriaStpV.bannerHead.checkBannerSalesHead(TypeGalery.Sales, dCtxSh.idioma);
+        pageGaleriaStpV.bannerHead.checkBannerSalesHead(TypeGalery.Sales, dCtxSh.pais, dCtxSh.idioma);
         List<String> textoPromotion = getPossibleTextPromotion(dCtxSh.pais.getCodigo_pais());
         pageGaleriaStpV.bannerHead.checkBannerContainsText(textoPromotion);
     }

@@ -16,6 +16,8 @@ import org.testng.annotations.Test;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
+import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
@@ -34,9 +36,12 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 
 public class Loyalty extends GestorWebDriver {
 	
+	final static String userWithLoyaltyPoints = "ticket_digital_es@mango.com";
+	final static String passwUserWithLoyaltyPoints = "mango123";
+			
     DataCtxShop dCtxSh;
 	
-    @BeforeMethod (groups={"Otras", "Canal:desktop_App:shop"})
+    @BeforeMethod (groups={"Otras", "Canal:all_App:shop"})
     @Parameters({"brwsr-path","urlBase", "AppEcom", "Channel"})
     public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) throws Exception {
         //Recopilación de parámetros
@@ -60,13 +65,12 @@ public class Loyalty extends GestorWebDriver {
      * @throws Exception
      */    
     @SuppressWarnings("unused")
-    @AfterMethod (groups={"Otras", "Canal:desktop_App:shop"}, alwaysRun = true)
+    @AfterMethod (groups={"Otras", "Canal:all_App:shop"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
         WebDriver driver = TestCaseData.getWebDriver();
         super.quitWebDriver(driver, context);
     }		
 	
-
     /**
      * Realiza un checkout utilizando el Saldo en Cuenta 
      */
@@ -78,12 +82,11 @@ public class Loyalty extends GestorWebDriver {
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         
         //Obtenemos el usuario/password de acceso
-        dCtxSh.userConnected = "sergio.herrero@mango.com";
-        dCtxSh.passwordUser = "mango123";
+        dCtxSh.userConnected = userWithLoyaltyPoints;
+        dCtxSh.passwordUser = passwUserWithLoyaltyPoints;
         dCtxSh.userRegistered = true;
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, dFTest.driver);
-        
-        validationsLoyalty(dFTest.driver);
+        validationsLoyalty(dCtxSh.channel, dFTest.driver);
         
         //Damos de alta 1 artículos en la bolsa
         DataBag dataBag = new DataBag(); 
@@ -123,28 +126,26 @@ public class Loyalty extends GestorWebDriver {
      * Realiza un checkout utilizando el Saldo en Cuenta 
      */
     @Test (
-        groups={"Loyalty", "Canal:desktop_App:shop"},
+        groups={"Loyalty", "Canal:all_App:shop"},
         description="Se accede a la Home Mango Likes You con un usuario Loyalty con 0 Likes")
     public void LOY002_LikesHome_LikesStored() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
         
         //Obtenemos el usuario/password de acceso
-        dCtxSh.userConnected = "sergio.herrero@mango.com";
-        dCtxSh.passwordUser = "mango123";
+        dCtxSh.userConnected = userWithLoyaltyPoints;
+        dCtxSh.passwordUser = passwUserWithLoyaltyPoints;
         dCtxSh.userRegistered = true;
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, dFTest.driver);
-        
-        validationsLoyalty(dFTest.driver);
-        SecMenusUserStpV.clickMenuMiCuenta(dFTest.driver);
+        validationsLoyalty(dCtxSh.channel, dFTest.driver);
+        SecMenusUserStpV.clickMenuMangoLikesYou(dCtxSh.channel, dFTest.driver);
 
         //Validación sección de loyalty pagina principal
         PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(dFTest.driver);
         pageHomeLikesStpV.clickOpcionCompraUnDescuento();
         pageHomeLikesStpV.checkHomePurchaseWithDiscountPageOk();
 
-        SecMenusUserStpV.clickMenuMiCuenta(dFTest.driver);
-
+        SecMenusUserStpV.clickMenuMangoLikesYou(dCtxSh.channel, dFTest.driver);
         if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest.driver)) {
             //Validacion seccion de loyalty pagina donar likes
             pageHomeLikesStpV.clickOpcionDonarLikes();
@@ -152,12 +153,9 @@ public class Loyalty extends GestorWebDriver {
         }
     }
     
-    private void validationsLoyalty(WebDriver driver) throws Exception {
-	    SecMenusUserStpV.checkIsVisibleLinkMangoLikesYou(driver);
-	    if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver) && //Sólo podemos realizar esta validación en entornos de test porque en PRO el usuario no tiene Loyalty Points
-	    	false) { //No tenemos usuario de Test con LoyaltyPoints perpétuos
-	    	SecMenusUserStpV.hoverLinkForShowMenu(driver);
-	    	SecMenusUserStpV.checkIsPresentLoyaltyPoints(2, driver);
-	    }
+    private void validationsLoyalty(Channel channel, WebDriver driver) throws Exception {
+	    SecMenusUserStpV.checkIsVisibleLinkMangoLikesYou(channel, driver);
+    	SecMenusUserStpV.hoverLinkForShowMenu(driver);
+    	SecMenusUserStpV.checkIsPresentLoyaltyPoints(2, driver);
     }
 }

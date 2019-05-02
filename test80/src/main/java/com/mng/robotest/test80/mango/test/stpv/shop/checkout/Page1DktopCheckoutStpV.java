@@ -183,9 +183,9 @@ public class Page1DktopCheckoutStpV {
     
     
 	@Validation (
-		description="Aparece el blouqe con la información de puntos Loyalty",
+		description="Aparece el botón que permite aplicar los Loyalty Points",
 		level=State.Defect)
 	public static boolean validateBlockLoyalty(WebDriver driver) {
-		return (Page1DktopCheckout.isVisibleBlockLoyalty(driver));
+		return (Page1DktopCheckout.isVisibleButtonForApplyLoyaltyPoints(driver));
 	}
 }

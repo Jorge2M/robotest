@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 
 
-public class SecTarjetaPciDktop extends WebdrvWrapp implements SecTarjetaPci {
+public class SecTarjetaPciNotInIframeDesktop extends WebdrvWrapp implements SecTarjetaPci {
 
     static String XPathBlock = "//span[@id[contains(.,'panelTarjetasForm')]]";
     static String XPathInputNumber = XPathBlock + "//input[@id[contains(.,'cardNumber')] or @id[contains(.,'cardnumber')] or @id[contains(.,'msu_cardpan')]]";
@@ -16,9 +16,9 @@ public class SecTarjetaPciDktop extends WebdrvWrapp implements SecTarjetaPci {
     static String XPathInputCvc = XPathBlock + "//input[@class[contains(.,'CVCInput')] or @class[contains(.,'CWInput')]]";
     static String XPathInputDni = XPathBlock + "//input[@class[contains(.,'falcon_dni')]]"; //Specific for Codensa (Colombia)
     
-    private SecTarjetaPciDktop() {}
-    public static SecTarjetaPciDktop make() {
-    	return (new SecTarjetaPciDktop());
+    private SecTarjetaPciNotInIframeDesktop() {}
+    public static SecTarjetaPciNotInIframeDesktop make() {
+    	return (new SecTarjetaPciNotInIframeDesktop());
     }
     
     public static String getXPath_PanelPago(String nombrePago) {
