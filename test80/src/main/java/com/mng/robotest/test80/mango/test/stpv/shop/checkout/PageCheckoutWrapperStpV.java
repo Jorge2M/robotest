@@ -500,4 +500,10 @@ public class PageCheckoutWrapperStpV {
         return (PageCheckoutWrapper.isBancoSeleccionado(nombreBanco, driver));
     }
 
+	@Validation (
+		description="Aparece el botón que permite aplicar los Loyalty Points",
+		level=State.Defect)
+	public static boolean validateBlockLoyalty(WebDriver driver) {
+		return (PageCheckoutWrapper.isVisibleButtonForApplyLoyaltyPoints(driver));
+	}
 }

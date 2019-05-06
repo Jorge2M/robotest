@@ -16,7 +16,6 @@ import org.testng.annotations.Test;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -31,7 +30,7 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigatio
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.checkout.Page1DktopCheckoutStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 
 public class Loyalty extends GestorWebDriver {
@@ -43,7 +42,8 @@ public class Loyalty extends GestorWebDriver {
 	
     @BeforeMethod (groups={"Otras", "Canal:all_App:shop"})
     @Parameters({"brwsr-path","urlBase", "AppEcom", "Channel"})
-    public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) throws Exception {
+    public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) 
+    throws Exception {
         //Recopilación de parámetros
         dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom(appEcom);
@@ -76,7 +76,7 @@ public class Loyalty extends GestorWebDriver {
      */
     @Test (
         groups={"Loyalty", "Canal:desktop_App:shop"},
-        description="Se realiza una compra mediante un usuario loyalty con 0 Likes")
+        description="Se realiza una compra mediante un usuario loyalty con Likes")
     public void LOY001_Compra_LikesStored() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
@@ -86,7 +86,7 @@ public class Loyalty extends GestorWebDriver {
         dCtxSh.passwordUser = passwUserWithLoyaltyPoints;
         dCtxSh.userRegistered = true;
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, dFTest.driver);
-        validationsLoyalty(dCtxSh.channel, dFTest.driver);
+        actionsLoyaltyPostLogin(dCtxSh.channel, dFTest.driver);
         
         //Damos de alta 1 artículos en la bolsa
         DataBag dataBag = new DataBag(); 
@@ -97,14 +97,12 @@ public class Loyalty extends GestorWebDriver {
         FTCkout.validaPasarelas = false;  
         FTCkout.validaPagos = false;
         FTCkout.emailExist = true; 
+        FTCkout.loyaltyPoints = true;
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
         PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, dFTest.driver); 
-        
-        //Validar bloque Loyalty en página de Checkout
-        Page1DktopCheckoutStpV.validateBlockLoyalty(dFTest.driver);
-        
+
         //Informamos datos varios necesarios para el proceso de pagos de modo que se pruebe el pago StoreCredit
         dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
         dCtxPago.getFTCkout().validaPagos = true;
@@ -121,13 +119,12 @@ public class Loyalty extends GestorWebDriver {
         PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, dFTest);
     }
     
-    
     /**
      * Realiza un checkout utilizando el Saldo en Cuenta 
      */
     @Test (
         groups={"Loyalty", "Canal:all_App:shop"},
-        description="Se accede a la Home Mango Likes You con un usuario Loyalty con 0 Likes")
+        description="Se accede a la Home Mango Likes You con un usuario Loyalty con Likes")
     public void LOY002_LikesHome_LikesStored() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
@@ -137,7 +134,7 @@ public class Loyalty extends GestorWebDriver {
         dCtxSh.passwordUser = passwUserWithLoyaltyPoints;
         dCtxSh.userRegistered = true;
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, dFTest.driver);
-        validationsLoyalty(dCtxSh.channel, dFTest.driver);
+        actionsLoyaltyPostLogin(dCtxSh.channel, dFTest.driver);
         SecMenusUserStpV.clickMenuMangoLikesYou(dCtxSh.channel, dFTest.driver);
 
         //Validación sección de loyalty pagina principal
@@ -153,9 +150,18 @@ public class Loyalty extends GestorWebDriver {
         }
     }
     
-    private void validationsLoyalty(Channel channel, WebDriver driver) throws Exception {
+    private void actionsLoyaltyPostLogin(Channel channel, WebDriver driver) throws Exception {
 	    SecMenusUserStpV.checkIsVisibleLinkMangoLikesYou(channel, driver);
-    	SecMenusUserStpV.hoverLinkForShowMenu(driver);
+	    makeLoyaltyPointsVisible(dCtxSh, driver);
     	SecMenusUserStpV.checkIsPresentLoyaltyPoints(2, driver);
+    }
+    
+    private void makeLoyaltyPointsVisible(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+	    if (dCtxSh.channel==Channel.desktop) {
+	    	SecMenusUserStpV.hoverLinkForShowMenu(driver);
+	    } else {
+	    	boolean setVisible = true;
+	    	SecCabeceraStpV.getNew(dCtxSh, driver).setVisibilityLeftMenuMobil(setVisible);
+	    }
     }
 }

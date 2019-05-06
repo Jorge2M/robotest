@@ -628,9 +628,4 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         
         return true;
     }
-    
-    final static String XpathButtonForApplyLoyaltyPoints = "//button[@class[contains(.,'redeem-likes')]]";
-    public static boolean isVisibleButtonForApplyLoyaltyPoints(WebDriver driver) {
-    	return WebdrvWrapp.isElementVisible(driver, By.xpath(XpathButtonForApplyLoyaltyPoints));
-    }
 }

@@ -89,11 +89,11 @@ public class PageChequeRegaloInputDataStpV{
 		ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 2;
     	validations.add(
-    		"Se pueden validar los datos (lo esperamos hasta " + maxSecondsWait + " segundos)</br>",
+    		"Se pueden validar los datos (lo esperamos hasta " + maxSecondsWait + " segundos)",
     		PageChequeRegaloInputData.isElementInStateUntil(ConsultaSaldo.validar, StateElem.Present, maxSecondsWait, driver), 
     		State.Defect);
     	validations.add(
-    		"Se puede volver atrás</br>",
+    		"Se puede volver atrás",
     		PageChequeRegaloInputData.isElementInState(ConsultaSaldo.volver, StateElem.Present, driver), State.Defect);
     	validations.add(
     		"La tarjeta introducida no tiene saldo disponible",

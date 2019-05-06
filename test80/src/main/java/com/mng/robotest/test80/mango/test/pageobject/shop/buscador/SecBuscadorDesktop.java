@@ -20,9 +20,9 @@ public class SecBuscadorDesktop extends WebdrvWrapp {
     public static void selectBuscador(WebDriver driver) throws Exception {
         driver.findElement(By.xpath(XPathInputLupaShopDesktop)).click(); 
         int maxSeconds = 1;
-        if (!isInputBuscadorVisibleUntil(maxSeconds, driver)) {
+        if (!isInputBuscadorPresentUntil(maxSeconds, driver)) {
         	driver.findElement(By.xpath(XPathInputLupaShopDesktop)).click();
-        	isInputBuscadorVisibleUntil(maxSeconds, driver);
+        	isInputBuscadorPresentUntil(maxSeconds, driver);
         }
         
         //No nos queda más remedio que incluir un delay puesto que el input_subrayado toma su tiempo para expandirse hacia la derecha
@@ -39,8 +39,8 @@ public class SecBuscadorDesktop extends WebdrvWrapp {
         setTextAndReturn(referencia, driver);
     }
     
-    public static boolean isInputBuscadorVisibleUntil(int maxSecondsToWait, WebDriver driver) {
-    	return (isElementVisibleUntil(driver, By.xpath(XPathInputBuscador), maxSecondsToWait));
+    public static boolean isInputBuscadorPresentUntil(int maxSecondsToWait, WebDriver driver) {
+    	return (isElementPresentUntil(driver, By.xpath(XPathInputBuscador), maxSecondsToWait));
     }
     
     /**

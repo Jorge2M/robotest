@@ -12,4 +12,5 @@ public class FlagsTestCkout {
     public boolean testCodPromocional = false;
     public boolean isChequeRegalo = false;
     public boolean isStoreCredit = false;
+    public boolean loyaltyPoints = false;
 }

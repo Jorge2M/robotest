@@ -19,6 +19,7 @@ public class PageResultPago extends WebdrvWrapp {
     //xpath del link hacia los pedidos (sólo aparecen en la versión Desktop de la página)
     static String XPathLinkPedidosDesktop = "//a[@href[contains(.,'/account/orders')] or @href[contains(.,'/loginPedidos.faces')]]"; 
     static String XPathLinkMisComprasDesktop = "//a[@href[contains(.,'/mypurchases')]]";
+	static String xpathBlockNewLoyaltyPoints = "//div[@class='simulate-likes']";
     
     /**
      * @return el xpath correspondiente al elemento que contiene el texto con la confirmación del pago
@@ -101,4 +102,8 @@ public class PageResultPago extends WebdrvWrapp {
     public static void clickMisCompras(WebDriver driver) throws Exception {
         clickAndWaitLoad(driver, By.xpath(XPathLinkMisComprasDesktop));
     }
+    
+	public static boolean isVisibleBlockNewLoyaltyPoints(WebDriver driver) {
+		return (WebdrvWrapp.isElementVisible(driver, By.xpath(xpathBlockNewLoyaltyPoints)));
+	}
 }

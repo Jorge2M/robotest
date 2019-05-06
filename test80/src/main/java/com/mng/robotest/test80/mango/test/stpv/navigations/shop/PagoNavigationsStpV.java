@@ -161,6 +161,10 @@ public class PagoNavigationsStpV {
         if (dCtxSh.appE==AppEcom.votf && dCtxSh.pais.getCodigo_pais().compareTo("001")==0 /*España*/) {
             Page1DktopCheckoutStpV.stepIntroduceCodigoVendedorVOTF("111111", driver);
         }
+        
+        if (dCtxPago.getFTCkout().loyaltyPoints) {
+	        PageCheckoutWrapperStpV.validateBlockLoyalty(driver);
+        }
     }
     
     private static void testValeDescuento(ValePais vale, DataBag dataBag, AppEcom app, WebDriver driver) throws Exception {

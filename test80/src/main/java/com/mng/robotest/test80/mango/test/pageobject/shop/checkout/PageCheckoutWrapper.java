@@ -129,6 +129,11 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
         }
     }    
     
+    final static String XpathButtonForApplyLoyaltyPoints = "//button[@class[contains(.,'redeem-likes')]]";
+    public static boolean isVisibleButtonForApplyLoyaltyPoints(WebDriver driver) {
+    	return WebdrvWrapp.isElementVisible(driver, By.xpath(XpathButtonForApplyLoyaltyPoints));
+    }
+    
     /**
      * @param fechaNaci en formato "dd-mm-aaaa"
      */

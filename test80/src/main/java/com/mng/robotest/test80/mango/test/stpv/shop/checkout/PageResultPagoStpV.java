@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
@@ -13,6 +14,7 @@ import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
+import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageResultPago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras.TypeBlock;
@@ -39,6 +41,9 @@ public class PageResultPagoStpV {
     throws Exception {
         validateTextConfirmacionPago(dCtxSh.channel, driver);
         validateDataPedido(dCtxPago, dCtxSh, driver);
+        if (dCtxPago.getFTCkout().loyaltyPoints) {
+        	validateBlockNewLoyaltyPoints(driver);
+        }
     }
     
     @Validation
@@ -99,6 +104,13 @@ public class PageResultPagoStpV {
     	dataPedido.setCodpedido(codigoPed);
     	
     	return validations;
+    }
+    
+    @Validation (
+    	description="Aparece el bloque informando que se han generado nuevos Loyalty Points",
+    	level=State.Defect)
+    public static boolean validateBlockNewLoyaltyPoints(WebDriver driver) {
+    	return (PageResultPago.isVisibleBlockNewLoyaltyPoints(driver));
     }
     
     @Step (

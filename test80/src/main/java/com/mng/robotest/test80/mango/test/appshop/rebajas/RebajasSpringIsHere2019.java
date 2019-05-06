@@ -51,15 +51,17 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
     		"022",	/*CEUTA*/
     		"023",	/*MELILLA*/
     		"010",	/*PORTUGAL*/
+	    	"708",	/*FILIPINAS*/
     		"052"	/*TURQUIA*/
     	);
     	
     	countrysWithCampaignInNINOS = Arrays.asList(
     		"706",	/*SINGAPORE*/
     		"701",	/*MALAYSIA*/
+	    	"708",	/*FILIPINAS*/
+	    	"052",	/*TURQUIA*/
     		"700"	/*INDONESIA*/
-        );
-    			
+        );	
     }
     
     final static List<String> helloSunshineCountrys;

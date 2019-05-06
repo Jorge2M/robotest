@@ -1,9 +1,13 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.menus;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusUserDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenusUserMobil;
 
@@ -148,7 +152,7 @@ public class SecMenusUserWrap {
 			return (SecMenusUserDesktop.isPresentMangoLikesYou(driver));
 		}
 	}
-	
+
     public static void clickMangoLikesYou(Channel channel, WebDriver driver) throws Exception {
     	switch (channel) {
     	case movil_web:
@@ -159,4 +163,35 @@ public class SecMenusUserWrap {
 	        break;
     	}
     }
+    
+	public static boolean isPresentLoyaltyPointsUntil(int maxSecondsWait, WebDriver driver) throws Exception {
+    	//TODO Workarround for manage shadow-dom Elements. Remove when WebDriver supports shadow-dom
+		By byLoyaltyUserMenu = By.tagName("loyalty-user-menu");
+		if (WebdrvWrapp.isElementVisible(driver, byLoyaltyUserMenu)) {
+	    	WebElement shadowHost = driver.findElement(byLoyaltyUserMenu);
+	    	if (shadowHost!=null) {
+	    		for (int i=0; i<maxSecondsWait; i++) {
+			    	Object shadowLoyaltyPoints = ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot", shadowHost);
+			    	if (shadowLoyaltyPoints instanceof WebElement) {
+				    	WebElement loyaltyPoints = (WebElement)shadowLoyaltyPoints;
+				    	//TODO pendiente el grupo de Loyalty nos proporcione un id
+				    	//TODO eliminar la versión de PRO cuando suba la de PRE
+				    	String innerHTML = loyaltyPoints.getAttribute("innerHTML");
+				    	if (innerHTML.contains("likes-you-have") /*versión PRO*/ ||
+				    		(innerHTML.contains("Hola") && innerHTML.contains("Likes")) /*versión PRE*/) {
+				    		return true;
+				    	}
+			    	} else {
+			    		if (shadowLoyaltyPoints.toString().contains("likes-you-have")) {
+			    			return true;
+						}
+			    	}
+	
+			    	Thread.sleep(1000);
+	    		}
+	    	}
+		}
+    	
+    	return false;
+	}
 }

@@ -8,8 +8,6 @@ import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavoritos;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusUserDesktop.MenuUserDesktop;
-
 
 public class SecMenusUserMobil extends WebdrvWrapp {
 

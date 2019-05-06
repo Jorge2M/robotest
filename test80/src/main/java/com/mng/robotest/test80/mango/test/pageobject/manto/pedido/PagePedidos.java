@@ -56,7 +56,7 @@ public class PagePedidos extends WebdrvWrapp {
     private static String XPathLineaPedido = XPathTablaPedidos + "//input[@type='checkbox' and @title='Multi almacén']";
     public static String XPathImporteLineaPedido = "//table//tr/td[22]";
     private static String XPathMainForm = "//form[@action='/pedidos.faces']";
-    private static String XPathCapaLoading = "//div[@id[contains(.,'loading')]]";
+    private static String XPathCapaLoading = "//div[@id[contains(.,'oading')]]";
     private static String iniXPathIdRegistro = "//table//tr[";
     private static String XPathLinkPaginaSiguientePedidos = "//a[text()='>']";
     

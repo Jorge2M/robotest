@@ -136,7 +136,11 @@ public class SecMenusUserDesktop extends WebdrvWrapp {
 		    	Object shadowLoyaltyPoints = ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot", shadowHost);
 		    	if (shadowLoyaltyPoints instanceof WebElement) {
 			    	WebElement loyaltyPoints = (WebElement)shadowLoyaltyPoints;
-			    	if (loyaltyPoints.getAttribute("innerHTML").contains("likes-you-have")) {
+			    	//TODO pendiente el grupo de Loyalty nos proporcione un id
+			    	//TODO eliminar la versión de PRO cuando suba la de PRE
+			    	String innerHTML = loyaltyPoints.getAttribute("innerHTML");
+			    	if (innerHTML.contains("likes-you-have") /*versión PRO*/ ||
+			    		(innerHTML.contains("Hola") && innerHTML.contains("Likes")) /*versión PRE*/) {
 			    		return true;
 			    	}
 		    	} else {
