@@ -140,9 +140,9 @@ public class PageGaleriaStpV {
     @Step (
     	description="Posicionarse sobre el artículo en la posición <b>#{posArticulo}</b>, esperar que aparezca el link \"Añadir\" y seleccionarlo", 
         expected="Aparece la capa con la información de las tallas")
-    public void selectLinkAddArticuloToBagDesktop(int posArticulo)
+    public void selectLinkAddArticuloToBag(int posArticulo)
     throws Exception {
-    	((PageGaleriaDesktop)pageGaleria).selectLinkAddArticleToBagDesktop(posArticulo);
+    	pageGaleria.selectLinkAddArticleToBag(posArticulo);
         int maxSecondsWait = 1;
         checkIsVisibleCapaInfoTallas(posArticulo, maxSecondsWait);
     }   
@@ -151,17 +151,16 @@ public class PageGaleriaStpV {
     	description="Aparece la capa con la información de las tallas (la esperamos hasta #{maxSecondsWait}",
     	level=State.Warn)
     private boolean checkIsVisibleCapaInfoTallas(int posArticulo, int maxSecondsWait) {
-        return (((PageGaleriaDesktop)pageGaleria).isVisibleArticleCapaTallasDesktopUntil(posArticulo, maxSecondsWait));
+        return pageGaleria.isVisibleArticleCapaTallasUntil(posArticulo, maxSecondsWait);
     }
     
     @Step (
     	description="Del #{posArticulo}o artículo, seleccionamos la #{posTalla}a talla", 
         expected="Se da de alta correctamente el artículo en la bolsa",
         saveHtmlPage=SaveWhen.Always)
-    public boolean selectTallaArticuloDesktop(int posArticulo, int posTalla, DataBag dataBag, DataCtxShop dCtxSh) 
+    public boolean selectTallaArticulo(int posArticulo, int posTalla, DataBag dataBag, DataCtxShop dCtxSh) 
     throws Exception {
-    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-        ArticuloScreen articulo = pageGaleriaDesktop.selectTallaArticle(posArticulo, posTalla);
+        ArticuloScreen articulo = pageGaleria.selectTallaArticle(posArticulo, posTalla);
         ModalArticleNotAvailableStpV modalArticleNotAvailableStpV = ModalArticleNotAvailableStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
         boolean notVisibleAvisame = modalArticleNotAvailableStpV.validateState(1, StateModal.notvisible, driver);
         if (notVisibleAvisame) {
@@ -176,7 +175,7 @@ public class PageGaleriaStpV {
             description="Seleccionamos la primera talla no disponible del listado",
             expected="Se abre el modal de avimase de la prenda",
             saveHtmlPage=SaveWhen.Always)
-    public void selectTallaNoDisponibleArticuloDesktop()
+    public void selectTallaNoDisponibleArticulo()
             throws Exception {
         PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
         pageGaleriaDesktop.selectTallaArticleNotAvalaible();

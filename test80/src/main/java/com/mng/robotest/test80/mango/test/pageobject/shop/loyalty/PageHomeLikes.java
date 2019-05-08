@@ -17,7 +17,7 @@ public class PageHomeLikes extends WebdrvWrapp {
 		this.driver = driver;
 	}
 	
-	public static PageHomeLikes getNewInstance(WebDriver driver) {
+	public static PageHomeLikes getNew(WebDriver driver) {
 		return (new PageHomeLikes(driver));
 	}
 	

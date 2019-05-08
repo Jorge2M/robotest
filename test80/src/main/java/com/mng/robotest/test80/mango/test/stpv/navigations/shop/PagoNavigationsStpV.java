@@ -164,6 +164,7 @@ public class PagoNavigationsStpV {
         
         if (dCtxPago.getFTCkout().loyaltyPoints) {
 	        PageCheckoutWrapperStpV.validateBlockLoyalty(driver);
+	        PageCheckoutWrapperStpV.loyaltyPointsApply(dCtxSh.channel, driver);
         }
     }
     

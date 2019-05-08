@@ -52,7 +52,7 @@ public class AccesoStpV {
     throws Exception {
         String registro = "";
         if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) {
-            registro = "Identificarse con el usuario " + dCtxSh.userConnected + "<br>"; 
+            registro = "Identificarse con el usuario <b>" + dCtxSh.userConnected + "</b><br>"; 
         }
        
         if (clearArticulos) {
@@ -434,5 +434,3 @@ public class AccesoStpV {
     	}
     }
 }
-
-

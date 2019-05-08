@@ -326,8 +326,8 @@ public class PageFichaArtStpV {
     }
 
     @Step (
-            description="Cambiar de color dentro de la misma ficha.",
-            expected="El articulo es cambiado de color.")
+    	description="Cambiar de color dentro de la misma ficha.",
+        expected="El articulo es cambiado de color.")
     public void changeColorGarment() throws Exception {
         ArticuloScreen articulo = pageFicha.getArticuloObject();
         ArrayList<String> colors = SecDataProduct.getColorsGarment(driver);
@@ -342,8 +342,8 @@ public class PageFichaArtStpV {
     }
 
     @Validation (
-            description="No aparece el icono de favorito marcado al cambiar de color",
-            level=State.Defect)
+       description="No aparece el icono de favorito marcado al cambiar de color",
+       level=State.Defect)
     public boolean validateNotVisibleButtonFavoritos(ActionFavButton buttonType) {
         switch (buttonType) {
             case Remove:

@@ -210,7 +210,7 @@ public class PageGaleriaDesktop extends PageGaleria {
         return (xpathCapaAdd + "//p[@class[contains(.,'first-step')] and " + classSegunVisible + "]");
     }
     
-    private static String getXPathArticleCapaTallasDesktop(int posArticulo, boolean capaVisible) {
+    private static String getXPathArticleCapaTallas(int posArticulo, boolean capaVisible) {
         String xpathCapaAdd = getXPathArticleCapaInferiorDesktop(posArticulo);
         String classSegunVisible = "not(@class[contains(.,'active')])";
         if (capaVisible) {
@@ -219,12 +219,12 @@ public class PageGaleriaDesktop extends PageGaleria {
         return (xpathCapaAdd + "//div[@class[contains(.,'add-cart-sizes-container')] and " + classSegunVisible + "]");
     }
 
-    private static String getXPathArticleTallaAvailableDesktop(int posArticulo, int posTalla) {
-        String xpathCapaTallas = getXPathArticleCapaTallasDesktop(posArticulo, true/*capaVisible*/);
+    private static String getXPathArticleTallaAvailable(int posArticulo, int posTalla) {
+        String xpathCapaTallas = getXPathArticleCapaTallas(posArticulo, true/*capaVisible*/);
         return "(" + xpathCapaTallas + "//span[@data-id and not(@class[contains(.,'no-stock')])]" + ")[" + posTalla + "]";
     }
 
-    private static String getXPathArticleTallaNotAvailableDesktop() {
+    private static String getXPathArticleTallaNotAvailable() {
         return  XpathTallaNoDisponibleArticulo;
     }
 
@@ -585,7 +585,8 @@ public class PageGaleriaDesktop extends PageGaleria {
         moveToElement(By.xpath(getXPathLinkArticulo(posArticulo) + "/.."), driver);
     }
     
-    public void selectLinkAddArticleToBagDesktop(int posArticulo) throws Exception {
+    @Override
+    public void selectLinkAddArticleToBag(int posArticulo) throws Exception {
         //Nos posicionamos en el artículo y clicamos la capa. 
         //Es un click muy extraño porque cuando lo ejecutas automáticamente posiciona la capa en el top del navegador y queda oculta por el menú
         moveToArticleAndGetObject(posArticulo);
@@ -605,18 +606,20 @@ public class PageGaleriaDesktop extends PageGaleria {
         }
     }
     
-    public boolean isVisibleArticleCapaTallasDesktopUntil(int posArticulo, int maxSecondsToWait) {
-        String xpathCapa = getXPathArticleCapaTallasDesktop(posArticulo, true/*capaVisible*/);
+    @Override
+    public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSecondsToWait) {
+        String xpathCapa = getXPathArticleCapaTallas(posArticulo, true/*capaVisible*/);
         return (isElementVisibleUntil(driver, By.xpath(xpathCapa), maxSecondsToWait));
     }
     
+    @Override
     public ArticuloScreen selectTallaArticle(int posArticulo, int posTalla) throws Exception {
         //Si no está visible la capa de tallas ejecutamos los pasos necesarios para hacer la visible 
-        if (!isVisibleArticleCapaTallasDesktopUntil(posArticulo, 0/*maxSecondsToWait*/)) {
-            selectLinkAddArticleToBagDesktop(posArticulo);
+        if (!isVisibleArticleCapaTallasUntil(posArticulo, 0/*maxSecondsToWait*/)) {
+            selectLinkAddArticleToBag(posArticulo);
         }
         
-        String xpathTalla = getXPathArticleTallaAvailableDesktop(posArticulo, posTalla);
+        String xpathTalla = getXPathArticleTallaAvailable(posArticulo, posTalla);
         WebElement tallaToSelect = driver.findElement(By.xpath(xpathTalla));
         ArticuloScreen articulo = getArticuloObject(posArticulo);
         articulo.setTallaAlf(tallaToSelect.getText());
@@ -627,7 +630,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 
     public void selectTallaArticleNotAvalaible() throws Exception {
 
-        String xpathTallaNoDipo = getXPathArticleTallaNotAvailableDesktop();
+        String xpathTallaNoDipo = getXPathArticleTallaNotAvailable();
         By byTallaToSelect = By.xpath(xpathTallaNoDipo);
         clickAndWaitLoad(driver, byTallaToSelect);
     }

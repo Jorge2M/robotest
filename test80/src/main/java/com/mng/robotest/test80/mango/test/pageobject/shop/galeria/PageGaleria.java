@@ -58,6 +58,9 @@ public abstract class PageGaleria extends WebdrvWrapp {
 	abstract int getNumArticulosFromPagina(int pagina, TypeArticleDesktop sizeArticle);
 	abstract public WebElement getArticleFromPagina(int numPagina, int numArticle);
 	abstract public boolean isHeaderArticlesVisible(String textHeader);
+	abstract public void selectLinkAddArticleToBag(int posArticulo) throws Exception;
+	abstract public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSecondsToWait);
+	abstract public ArticuloScreen selectTallaArticle(int posArticulo, int posTalla) throws Exception;
     
     public static List<LabelArticle> listLabelsNew = Arrays.asList(
     	    LabelArticle.ComingSoon, 
@@ -185,6 +188,10 @@ public abstract class PageGaleria extends WebdrvWrapp {
 	    List<WebElement> listaArticulos = driver.findElements(By.xpath(XPathArticulo));
 	    return (listaArticulos.size() > 0 &&
 	    		isElementPresent(listaArticulos.get(0), By.xpath("//a[@href[contains(.,'" + lineaType + "')]]")));
+    }
+    
+    public void moveToArticleAndGetObject(int posArticulo) {
+        moveToElement(By.xpath(getXPathLinkArticulo(posArticulo) + "/.."), driver);
     }
     
     /**

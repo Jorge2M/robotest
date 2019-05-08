@@ -1,5 +1,8 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.menus;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +13,7 @@ import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusUserDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenusUserMobil;
+import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class SecMenusUserWrap {
 
@@ -164,8 +168,9 @@ public class SecMenusUserWrap {
     	}
     }
     
-	public static boolean isPresentLoyaltyPointsUntil(int maxSecondsWait, WebDriver driver) throws Exception {
+	public static LoyaltyData checkAndGetLoyaltyPointsUntil(int maxSecondsWait, WebDriver driver) throws Exception {
     	//TODO Workarround for manage shadow-dom Elements. Remove when WebDriver supports shadow-dom
+		LoyaltyData loyaltyData = new LoyaltyData(false, 0);
 		By byLoyaltyUserMenu = By.tagName("loyalty-user-menu");
 		if (WebdrvWrapp.isElementVisible(driver, byLoyaltyUserMenu)) {
 	    	WebElement shadowHost = driver.findElement(byLoyaltyUserMenu);
@@ -175,15 +180,19 @@ public class SecMenusUserWrap {
 			    	if (shadowLoyaltyPoints instanceof WebElement) {
 				    	WebElement loyaltyPoints = (WebElement)shadowLoyaltyPoints;
 				    	//TODO pendiente el grupo de Loyalty nos proporcione un id
-				    	//TODO eliminar la versión de PRO cuando suba la de PRE
 				    	String innerHTML = loyaltyPoints.getAttribute("innerHTML");
-				    	if (innerHTML.contains("likes-you-have") /*versión PRO*/ ||
-				    		(innerHTML.contains("Hola") && innerHTML.contains("Likes")) /*versión PRE*/) {
-				    		return true;
+				        Pattern pattern = Pattern.compile("tienes (.*?) Likes");
+				        Matcher matcher = pattern.matcher(innerHTML);
+				    	if (matcher.find()) {
+				    		loyaltyData.isPresent = true;
+				    		float pointsFloat = ImporteScreen.getFloatFromImporteMangoScreen(matcher.group(1));
+				    		loyaltyData.numberPoints = (int)pointsFloat;
+				    		break;
 				    	}
 			    	} else {
 			    		if (shadowLoyaltyPoints.toString().contains("likes-you-have")) {
-			    			return true;
+			    			loyaltyData.isPresent = true;
+			    			break;
 						}
 			    	}
 	
@@ -192,6 +201,16 @@ public class SecMenusUserWrap {
 	    	}
 		}
     	
-    	return false;
+    	return loyaltyData;
+	}
+	
+	public static class LoyaltyData {
+		public boolean isPresent=false;
+		public int numberPoints=0;
+		
+		public LoyaltyData(boolean isPresent, int numberPoints) {
+			this.isPresent = isPresent;
+			this.numberPoints = numberPoints;
+		}
 	}
 }

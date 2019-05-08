@@ -1,7 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.loyalty;
 
 import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.mango.test.pageobject.shop.loyalty.PageHomeDonateLikes;
 import com.mng.robotest.test80.mango.test.pageobject.shop.loyalty.PageHomePurchaseWithDiscount;
 import org.openqa.selenium.WebDriver;
 
@@ -25,7 +24,7 @@ public class PageHomeLikesStpV {
 	@Validation
 	public ChecksResult checkIsPageOk() {
     	ChecksResult validations = ChecksResult.getNew();
-    	PageHomeLikes pageLikes = PageHomeLikes.getNewInstance(driver);
+    	PageHomeLikes pageLikes = PageHomeLikes.getNew(driver);
     	validations.add(
     		"Aparece la página de <b>Mango likes you</b>",
     		pageLikes.checkIsPage(), State.Defect);
@@ -39,16 +38,17 @@ public class PageHomeLikesStpV {
 		description="Seleccionar el link \"Compra un descuento\"",
 		expected="Aparece la página de \"Compra con descuento\"")
 	public void clickOpcionCompraUnDescuento() throws Exception {
-		PageHomeLikes pageLikes = PageHomeLikes.getNewInstance(driver);
+		PageHomeLikes pageLikes = PageHomeLikes.getNew(driver);
 		pageLikes.clickPurchaseWithDiscount();
+        checkHomePurchaseWithDiscountPageOk();
 	}
 
 	@Step(
 		description="Seleccionar el link \"Donar Likes\"",
 		expected="Aparece la página de \"Donar Likes\"")
 	public void clickOpcionDonarLikes() throws Exception {
-		PageHomeLikes pageLikes = PageHomeLikes.getNewInstance(driver);
-		pageLikes.clickDonateLikes();
+		PageHomeLikes.getNew(driver).clickDonateLikes();
+		PageHomeDonateLikesStpV.getNew(driver).checkIsPage();
 	}
 
 	@Validation
@@ -56,24 +56,11 @@ public class PageHomeLikesStpV {
 		ChecksResult validations = ChecksResult.getNew();
 		PageHomePurchaseWithDiscount pageHomePurchaseWithDiscount = PageHomePurchaseWithDiscount.getNewInstance(driver);
 		validations.add(
-				"Aparece la página de <b>Descuento Mango likes you</b>",
-				pageHomePurchaseWithDiscount.checkIsPage(), State.Defect);
+			"Aparece la página de <b>Descuento Mango likes you</b>",
+			pageHomePurchaseWithDiscount.checkIsPage(), State.Defect);
 		validations.add(
-				"Aparece el boton que permite <b>comprar ahora</b>",
-				pageHomePurchaseWithDiscount.areVisibleButtonPurchaseNow(), State.Defect);
-		return validations;
-	}
-
-	@Validation
-	public ChecksResult checkHomeDonateLikesPageOk() {
-		ChecksResult validations = ChecksResult.getNew();
-		PageHomeDonateLikes pageHomeDonateLikes = PageHomeDonateLikes.getNewInstance(driver);
-		validations.add(
-				"Aparece la pagina de <b>Donar Likes<b>",
-				pageHomeDonateLikes.checkIsPage(), State.Defect);
-		validations.add(
-				"Aparece los botones de <b>Donar likes</b>",
-				pageHomeDonateLikes.areVisibleButtonsDonateLikes(), State.Defect);
+			"Aparece el boton que permite <b>comprar ahora</b>",
+			pageHomePurchaseWithDiscount.areVisibleButtonPurchaseNow(), State.Defect);
 		return validations;
 	}
 }

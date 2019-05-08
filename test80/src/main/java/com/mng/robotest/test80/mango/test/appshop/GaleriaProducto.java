@@ -280,7 +280,7 @@ public class GaleriaProducto extends GestorWebDriver {
 
         // Abrir avisame desde el listado buscando primera talla sin stock y comprobar que se abierto y que contiene texto RGPD
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-        pageGaleriaStpV.selectTallaNoDisponibleArticuloDesktop();
+        pageGaleriaStpV.selectTallaNoDisponibleArticulo();
         ModalArticleNotAvailableStpV modalArticleNotAvailableStpV = ModalArticleNotAvailableStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         modalArticleNotAvailableStpV.checkVisibleAvisame();
 

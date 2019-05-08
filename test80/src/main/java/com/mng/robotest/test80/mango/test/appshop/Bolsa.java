@@ -25,6 +25,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBo
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
+import com.mng.robotest.test80.mango.test.stpv.navigations.shop.GaleriaNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
@@ -86,21 +87,7 @@ public class Bolsa extends GestorWebDriver {
         AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest.driver);
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
         SecMenusWrapperStpV.accesoMenuXRef(menuVestidos, dCtxSh, dFTest.driver);
-        DataBag dataBag = new DataBag();
-        
-        //Seleccionamos artículos/tallas hasta que damos con uno disponible (no aparece el modal de "Avísame")
-        int posArticulo=1;
-        boolean articleAvailable = false;
-        while (!articleAvailable && posArticulo<5) {
-        	PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-        	pageGaleriaStpV.selectLinkAddArticuloToBagDesktop(posArticulo);
-            articleAvailable = pageGaleriaStpV.selectTallaArticuloDesktop(posArticulo, 1/*posTalla*/, dataBag, dCtxSh);
-            if (!articleAvailable) {
-                ModalArticleNotAvailableStpV modalArticleNotAvailableStpV = ModalArticleNotAvailableStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-                modalArticleNotAvailableStpV.clickAspaForClose(dFTest.driver);
-                posArticulo+=1;
-            }
-        }
+        DataBag dataBag = GaleriaNavigationsStpV.selectArticleAvailableFromGaleria(dCtxSh, dFTest.driver);
                 
         //Hasta página de Checkout
         FlagsTestCkout FTCkout = new FlagsTestCkout();

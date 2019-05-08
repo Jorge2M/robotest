@@ -14,7 +14,6 @@ import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
 
-
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la página de "GALERÍA DE PRODUCTOS"
  * @author jorge.munoz
@@ -58,6 +57,8 @@ public class PageGaleriaMobil extends PageGaleria {
     final static String XPathHearthIconRelativeArticle = 
     	"//span[@class[contains(.,'product-list-fav')] or " + 
     		   "@class[contains(.,'product-favorite')]]";
+    final static String XPathButtonAnyadirRelativeArticle = "//div[@class[contains(.,'product-add')]]/button";
+    final static String XPathCapaTallasRelativeArticle = "//div[@class[contains(.,'product-sizes-container')]]";
     final static String XPpathIconoUpGalery = "//div[@id='scrollTop']";
     final static String XPathFiltersDiv = "//div[@class='order-filters-fixed']";
     final static String TagNumPagina = "@tagNumPagina";
@@ -110,6 +111,16 @@ public class PageGaleriaMobil extends PageGaleria {
     static String getXPathArticleHearthIcon(int posArticulo) {
         String xpathArticulo = "(" + XPathArticulo + ")[" + posArticulo + "]";
         return (xpathArticulo + XPathHearthIconRelativeArticle);
+    }
+    
+    static String getXPathButtonAnyadirArticle(int posArticulo) {
+    	String xpathArticulo = "(" + XPathArticulo + ")[" + posArticulo + "]";
+    	return (xpathArticulo + XPathButtonAnyadirRelativeArticle);
+    }
+    
+    static String getXPathArticleCapaTallas(int posArticulo) {
+    	String xpathArticulo = "(" + XPathArticulo + ")[" + posArticulo + "]";
+    	return (xpathArticulo + XPathCapaTallasRelativeArticle);
     }
     
     String getXPathPagina(int pagina) {
@@ -258,8 +269,6 @@ public class PageGaleriaMobil extends PageGaleria {
     	return null;
     }
     
-
-    
     @Override
     public boolean isHeaderArticlesVisible(String textHeader) {
     	By byHeader = By.xpath(XPathHeaderArticles);
@@ -268,6 +277,40 @@ public class PageGaleriaMobil extends PageGaleria {
     	}
     	
     	return false;
+    }
+    
+    @Override
+    public void selectLinkAddArticleToBag(int posArticulo) throws Exception {
+        moveToArticleAndGetObject(posArticulo);
+        String xpathButtonAnyadir = getXPathButtonAnyadirArticle(posArticulo);
+        WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xpathButtonAnyadir));
+    }
+    
+    @Override
+    public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSecondsToWait) {
+        String xpathCapa = getXPathArticleCapaTallas(posArticulo);
+        return (isElementVisibleUntil(driver, By.xpath(xpathCapa), maxSecondsToWait));
+    }
+    
+    private static String getXPathTallaAvailableArticle(int posArticulo, int posTalla) {
+        String xpathCapa = getXPathArticleCapaTallas(posArticulo);
+        return "(" + xpathCapa + "//button[@class='product-size']" + ")[" + posTalla + "]";
+    }
+    
+    @Override
+    public ArticuloScreen selectTallaArticle(int posArticulo, int posTalla) throws Exception {
+        //Si no está visible la capa de tallas ejecutamos los pasos necesarios para hacer la visible 
+        if (!isVisibleArticleCapaTallasUntil(posArticulo, 0/*maxSecondsToWait*/)) {
+            selectLinkAddArticleToBag(posArticulo);
+        }
+        
+        String xpathTalla = getXPathTallaAvailableArticle(posArticulo, posTalla);
+        WebElement tallaToSelect = driver.findElement(By.xpath(xpathTalla));
+        ArticuloScreen articulo = getArticuloObject(posArticulo);
+        articulo.setTallaAlf(tallaToSelect.getText());
+        articulo.setTallaNum(tallaToSelect.getAttribute("data-id"));
+        tallaToSelect.click();
+        return articulo;
     }
     
     private List<WebElement> getListArticulosFromPagina(int numPagina) {

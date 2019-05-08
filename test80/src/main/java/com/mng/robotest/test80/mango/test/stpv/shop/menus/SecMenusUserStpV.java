@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -10,6 +11,7 @@ import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusUserWrap.LoyaltyData;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusUserDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
@@ -132,12 +134,30 @@ public class SecMenusUserStpV {
 		return (SecMenusWrap.secMenusUser.isPresentMangoLikesYou(channel, driver));  
 	}
 
-	@Validation (
-		description="Aparecen Loyalty Points en el menú de usuario (lo esperamos hasta #{maxSecondsWait} segundos)",
-		level=State.Defect)
-	public static boolean checkIsPresentLoyaltyPoints(int maxSecondsWait, WebDriver driver) 
+	@Validation
+	public static ChecksResultWithNumberPoints checkAngGetLoyaltyPoints(int maxSecondsWait, WebDriver driver) 
 	throws Exception {
-		return (SecMenusWrap.secMenusUser.isPresentLoyaltyPointsUntil(maxSecondsWait, driver));
+		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
+		LoyaltyData loyaltyData = SecMenusWrap.secMenusUser.checkAndGetLoyaltyPointsUntil(maxSecondsWait, driver);
+		checks.setNumberPoints(loyaltyData.numberPoints);
+	 	checks.add(
+			"Aparecen Loyalty Points en el menú de usuario (lo esperamos hasta " + maxSecondsWait + " segundos)",
+			loyaltyData.isPresent, State.Defect);
+	 	
+		return checks;
+	}
+	
+	@Validation
+    public static ChecksResult checkLoyaltyPoints(int initPoints, int donatedPoints, int finalPoints) 
+    throws Exception {
+		ChecksResult checks = ChecksResult.getNew();
+ 		int loyaltyPointsExpected = initPoints - donatedPoints;
+	 	checks.add(
+			"Nos quedan <b>" + loyaltyPointsExpected + "</b> Loyalty Points " + 
+			"(teníamos " + initPoints + " y hemos donado " + donatedPoints + ")",
+			finalPoints==loyaltyPointsExpected, State.Defect);
+	 	
+	 	return checks;
 	}
 	
 	@Step (
@@ -145,4 +165,22 @@ public class SecMenusUserStpV {
 	public static void hoverLinkForShowMenu(WebDriver driver) {
 		SecMenusUserDesktop.hoverLinkForShowMenu(driver);
 	}
+	
+    public static class ChecksResultWithNumberPoints extends ChecksResult {
+    	int numberPoints ;
+    	private ChecksResultWithNumberPoints() {
+    		super();
+    	}
+    	public static ChecksResultWithNumberPoints getNew() {
+    		return (new ChecksResultWithNumberPoints());
+    	}
+    	
+    	public int getNumberPoints() {
+    		return this.numberPoints;
+    	}
+    	
+    	public void setNumberPoints(int numberPoints) {
+    		this.numberPoints = numberPoints;
+    	}
+    }
 }

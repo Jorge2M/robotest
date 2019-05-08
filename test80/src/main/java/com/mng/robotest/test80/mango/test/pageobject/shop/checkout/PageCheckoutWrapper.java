@@ -18,6 +18,7 @@ import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.SecMetodoEnvioDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci.SecTarjetaPci;
+import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 @SuppressWarnings({"static-access"})
 /**
@@ -129,9 +130,30 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
         }
     }    
     
-    final static String XpathButtonForApplyLoyaltyPoints = "//button[@class[contains(.,'redeem-likes')]]";
+    final static String XpathButtonForApplyLoyaltyPoints = "//button[@class[contains(.,'redeem-likes')] and @type='button']";
     public static boolean isVisibleButtonForApplyLoyaltyPoints(WebDriver driver) {
     	return WebdrvWrapp.isElementVisible(driver, By.xpath(XpathButtonForApplyLoyaltyPoints));
+    }
+    
+    public static float applyAndGetLoyaltyPoints(WebDriver driver) throws Exception {
+    	By byApplyButton = By.xpath(XpathButtonForApplyLoyaltyPoints);
+    	WebElement buttonLoyalty = WebdrvWrapp.getElementsVisible(driver, byApplyButton).get(0);
+    	String textButtonApply = buttonLoyalty.getAttribute("innerHTML");
+    	String importeButton = ImporteScreen.normalizeImportFromScreen(textButtonApply);
+    	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(XpathButtonForApplyLoyaltyPoints));
+		PageCheckoutWrapper.isNoDivLoadingUntil(1, driver);
+		return (ImporteScreen.getFloatFromImporteMangoScreen(importeButton));
+    }
+    
+    final static String XPathDiscountLoyaltyAppliedMobil = "//span[@class='redeem-likes__discount']";
+    public static float getDiscountLoyaltyAppliedMobil(WebDriver driver) {
+    	By byDiscountApplied = By.xpath(XPathDiscountLoyaltyAppliedMobil);
+    	if (WebdrvWrapp.isElementVisible(driver, byDiscountApplied)) {
+	    	String discountApplied = driver.findElement(byDiscountApplied).getAttribute("innerHTML");
+	    	return (ImporteScreen.getFloatFromImporteMangoScreen(discountApplied));
+    	}
+    	
+    	return 0;
     }
     
     /**
@@ -321,6 +343,11 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
         }
         return (page1DktopCheckout.isArticulos(driver));
     }
+    
+	public static float getImportSubtotalDesktop(WebDriver driver) throws Exception {
+		String textImporte = Page1DktopCheckout.getPrecioSubTotalFromResumen(driver);
+		return (ImporteScreen.getFloatFromImporteMangoScreen(textImporte));
+	}
     
     public static void confirmarPagoFromMetodos(Channel channel, DataPedido dataPedido, WebDriver driver) throws Exception {
         PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, channel, driver);

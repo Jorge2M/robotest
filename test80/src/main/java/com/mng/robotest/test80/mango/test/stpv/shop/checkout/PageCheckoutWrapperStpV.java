@@ -506,4 +506,65 @@ public class PageCheckoutWrapperStpV {
 	public static boolean validateBlockLoyalty(WebDriver driver) {
 		return (PageCheckoutWrapper.isVisibleButtonForApplyLoyaltyPoints(driver));
 	}
+	
+	@Step (
+		description="Seleccionamos el botón para aplicar el descuento de Loyalty Points",
+		expected="Se aplica correctamente el descuento")
+	public static void loyaltyPointsApply(Channel channel, WebDriver driver) throws Exception {
+		switch (channel) {
+		case desktop:
+			loyaltyPointsApplyDesktop(driver);
+			break;
+		case movil_web:
+		default:
+			loyaltyPointsApplyMobil(driver);
+		}
+	}
+	
+	public static void loyaltyPointsApplyDesktop(WebDriver driver) throws Exception {
+		float subTotalInicial = UtilsMangoTest.round(PageCheckoutWrapper.getImportSubtotalDesktop(driver), 2);
+		float loyaltyPointsNoRound = PageCheckoutWrapper.applyAndGetLoyaltyPoints(driver);
+		float loyaltyPoints = UtilsMangoTest.round(loyaltyPointsNoRound, 2);
+		validateLoyaltyPointsDiscountDesktopUntil(loyaltyPoints, subTotalInicial, 3, driver);
+	}
+	
+	@Validation (
+		description=
+			"Se aplica el descuento de <b>#{descuento}</b> al subtotal inicial de #{subtotalInicial} " + 
+			"(lo esperamos hasta #{maxSecondsWait)}",
+		level=State.Defect)
+	public static boolean validateLoyaltyPointsDiscountDesktopUntil(float descuento, float subtotalInicial, int maxSecondsWait, WebDriver driver) 
+	throws Exception {
+		for (int i=0; i<maxSecondsWait; i++) {
+			float subTotalActual = PageCheckoutWrapper.getImportSubtotalDesktop(driver);
+			if ((subtotalInicial - descuento) == subTotalActual) {
+				return true;
+			}
+			Thread.sleep(1000);
+		}
+		
+		return false;
+	}
+	
+	public static void loyaltyPointsApplyMobil(WebDriver driver) throws Exception {
+		float loyaltyPointsNoRound = PageCheckoutWrapper.applyAndGetLoyaltyPoints(driver);
+		float loyaltyPoints = UtilsMangoTest.round(loyaltyPointsNoRound, 2);
+		validateLoyaltyPointsDiscountMobilUntil(loyaltyPoints, 3, driver);
+	}
+	
+	@Validation (
+		description="Aparece un descuento aplicado de #{descuento} (lo esperamos hasta #{maxSecondsWait})",
+		level=State.Defect)
+	public static boolean validateLoyaltyPointsDiscountMobilUntil(float descuento, int maxSecondsWait, WebDriver driver) 
+	throws Exception {
+		for (int i=0; i<maxSecondsWait; i++) {
+			float discountApplied = UtilsMangoTest.round(PageCheckoutWrapper.getDiscountLoyaltyAppliedMobil(driver), 2);
+			if (discountApplied == descuento) {
+				return true;
+			}
+			Thread.sleep(1000);
+		}
+		
+		return false;
+	}
 }
