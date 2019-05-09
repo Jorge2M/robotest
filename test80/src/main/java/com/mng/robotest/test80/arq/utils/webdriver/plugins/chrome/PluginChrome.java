@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.arq.utils.selenium.plugins.chrome;
+package com.mng.robotest.test80.arq.utils.webdriver.plugins.chrome;
 
 import java.io.File;
 import java.io.InputStream;

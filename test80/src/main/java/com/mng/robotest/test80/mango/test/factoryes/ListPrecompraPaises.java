@@ -5,7 +5,7 @@ import java.util.*;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
-import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.test.appshop.PaisAplicaVale;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum;
@@ -18,7 +18,6 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 import org.testng.ITestContext;
-
 
 public class ListPrecompraPaises {
 	
@@ -69,7 +68,7 @@ public class ListPrecompraPaises {
 	                        //En caso de VOTF sólo crearemos el test si están definido el usuario/password de acceso para ese país concreto
 	                        if (!(appE==AppEcom.votf && pais.getAccesoVOTF().getUsuario()==null)) {
 	                            //Creamos un test u otro según si queremos NetTraffic o no
-	                            TypeDriver canalWebDriver = GestorWebDriver.getTypeWebdriver(bpath);
+	                            TypeWebDriver canalWebDriver = GestorWebDriver.getTypeWebdriver(bpath);
 	                            DataCtxShop dCtxSh = new DataCtxShop(appE, channel, pais, pais.getListIdiomas().get(0), urlAcceso);
 	                            listTests.add(new PaisAplicaVale(dCtxSh, continente, pais/*paisChange*/, isEmpl, prioridad));
 	                            prioridad+=1;

@@ -1,16 +1,16 @@
 package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
-
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
-import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
-import com.mng.robotest.test80.arq.utils.selenium.CreateWebDriver;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.test.appmanto.Menus;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageMenusManto;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageLoginMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageSelTdaMantoStpV;
@@ -29,7 +29,7 @@ public class ListMenusManto {
         AppEcom appEcom = AppEcomEnum.getAppEcom(appEcomI);
         try {
             //Obtenemos la lista de Menús
-            ArrayList<String> listCabeceraMenus = getListCabecerasMenus(urlBaseManto);
+            ArrayList<String> listCabeceraMenus = getListCabecerasMenus(urlBaseManto, context);
             for (int i=0; i<listCabeceraMenus.size(); i++) {
             	System.out.println("Creado Test con datos: URL=" + urlBaseManto + ", cabeceraMenuName=" + listCabeceraMenus.get(i));
             	//if (listCabeceraMenus.get(i).compareTo("Atencion al Cliente")==0) {
@@ -53,9 +53,11 @@ public class ListMenusManto {
     /**
      * Obtiene la lista con los nombres de las cabeceras de los grupos de menús de Manto
      */
-    private ArrayList<String> getListCabecerasMenus(String urlBaseManto) throws Exception { 
-        WebDriver driver = CreateWebDriver.getWebDriver(TypeDriver.firefox);
-        
+    private ArrayList<String> getListCabecerasMenus(String urlBaseManto, ITestContext context) throws Exception { 
+    	WebDriver driver = 
+    		FactoryWebdriverMaker.make(TypeWebDriver.firefox, context)
+				.setChannel(Channel.desktop)
+				.build(); 
         PageLoginMantoStpV.login(urlBaseManto, Constantes.userManto, Constantes.passwordManto, driver);
         String codigoEspanya = "001";
         String almacenEspanya = "001";

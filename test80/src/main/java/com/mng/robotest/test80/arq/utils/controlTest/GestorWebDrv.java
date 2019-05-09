@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
 import com.mng.robotest.test80.arq.utils.controlTest.StoredWebDrv.stateWd;
-import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 
 /**
  * Clase encargada de gestionar la lista de WebDriver en el contexto de TestNG. Se trata de una clase Singleton que recupera la instancia de dicho contexto de TestNG
@@ -69,7 +69,7 @@ public class GestorWebDrv {
      *                     actualmente sólo viene informado para el caso de 'BrowserStack' (especificamos el modelo de 'device' documentado en BrowserStack)
      *                     en el resto de casos viene a "".
      */
-    public synchronized WebDriver getWebDrvFree(TypeDriver typeWdrv, String moreDataWdrv) {
+    public synchronized WebDriver getWebDrvFree(TypeWebDriver typeWdrv, String moreDataWdrv) {
         WebDriver webdriverFree = null;
         Iterator<StoredWebDrv> itStrWd = this.listWd.iterator();
         pLogger.debug(": Buscando WebDriver free. Type {}, moreDataWrdrv {}", typeWdrv, moreDataWdrv);
@@ -139,7 +139,7 @@ public class GestorWebDrv {
      *                    actualmente sólo viene informado para el caso de 'browserstack' (especificamos el modelo de 'device' documentado en browserstack)
      *                    en el resto de casos viene a "". 
      */
-    public void storeWebDriver(WebDriver driver, stateWd state, TypeDriver type, String moreDataWdrv) {
+    public void storeWebDriver(WebDriver driver, stateWd state, TypeWebDriver type, String moreDataWdrv) {
         StoredWebDrv strWd = new StoredWebDrv(driver, state, type, moreDataWdrv);
         this.listWd.add(strWd);
         pLogger.debug("Alta Stored WebDriver: {} (state: {}, type: {}, moreDataWdrv: {})", driver, state, type, moreDataWdrv);

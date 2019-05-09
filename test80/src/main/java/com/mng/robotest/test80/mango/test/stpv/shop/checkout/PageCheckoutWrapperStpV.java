@@ -531,13 +531,14 @@ public class PageCheckoutWrapperStpV {
 	@Validation (
 		description=
 			"Se aplica el descuento de <b>#{descuento}</b> al subtotal inicial de #{subtotalInicial} " + 
-			"(lo esperamos hasta #{maxSecondsWait)}",
+			"(lo esperamos hasta #{maxSecondsWait})",
 		level=State.Defect)
 	public static boolean validateLoyaltyPointsDiscountDesktopUntil(float descuento, float subtotalInicial, int maxSecondsWait, WebDriver driver) 
 	throws Exception {
 		for (int i=0; i<maxSecondsWait; i++) {
 			float subTotalActual = PageCheckoutWrapper.getImportSubtotalDesktop(driver);
-			if ((subtotalInicial - descuento) == subTotalActual) {
+			float estimado = UtilsMangoTest.round(subtotalInicial - descuento, 2);
+			if (estimado == subTotalActual) {
 				return true;
 			}
 			Thread.sleep(1000);

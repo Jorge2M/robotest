@@ -1,10 +1,10 @@
-package com.mng.robotest.test80.arq.utils.selenium.plugins; 
+package com.mng.robotest.test80.arq.utils.webdriver.plugins; 
 
-import com.mng.robotest.test80.arq.utils.selenium.plugins.chrome.PluginChrome;
-import com.mng.robotest.test80.arq.utils.selenium.plugins.chrome.PluginHTML5Autoplay;
-import com.mng.robotest.test80.arq.utils.selenium.plugins.chrome.PluginChrome.typePluginChrome;
-import com.mng.robotest.test80.arq.utils.selenium.plugins.firefox.PluginFirefox;
-import com.mng.robotest.test80.arq.utils.selenium.plugins.firefox.PluginFirefox.typePluginFirefox;
+import com.mng.robotest.test80.arq.utils.webdriver.plugins.chrome.PluginChrome;
+import com.mng.robotest.test80.arq.utils.webdriver.plugins.chrome.PluginHTML5Autoplay;
+import com.mng.robotest.test80.arq.utils.webdriver.plugins.chrome.PluginChrome.typePluginChrome;
+import com.mng.robotest.test80.arq.utils.webdriver.plugins.firefox.PluginFirefox;
+import com.mng.robotest.test80.arq.utils.webdriver.plugins.firefox.PluginFirefox.typePluginFirefox;
 
 
 public class PluginBrowserFactory {

@@ -1,8 +1,6 @@
 package com.mng.robotest.test80.arq.utils.otras;
+
 import java.util.regex.Pattern;
-
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-
 
 public class Constantes {
 
@@ -53,9 +51,6 @@ public class Constantes {
 
     //Atributo almacenado en la sesión correspondiente a la página que aparece posteriormente al acceso del usuario (después de la selección de país/idioma)
     public static String attrUrlPagPostAcceso = "paginaPostAcceso";
-	
-    //Posibles webdrivers
-    public enum TypeDriver { firefox, firefoxhless, chrome, chromehless, explorer, appium, browserstack, phantomjs, htmlunit, safari }	
 	
     public static String BROWSERSTACK = "browserstack";
 	

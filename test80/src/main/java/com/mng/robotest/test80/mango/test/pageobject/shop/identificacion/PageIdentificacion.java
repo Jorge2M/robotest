@@ -8,6 +8,7 @@ import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalActPoliticaPrivacidad;
@@ -93,7 +94,7 @@ public class PageIdentificacion extends WebdrvWrapp {
     public static void clickIniciarSesionAndWait(Channel channel, AppEcom app, WebDriver driver) throws Exception {
         if (channel==Channel.movil_web) {
             //En el caso de mobile nos tenemos que asegurar que están desplegados los menús
-        	SecCabeceraMobil secCabeceraMobil = SecCabeceraMobil.getNew(app, driver);
+        	SecCabeceraMobil secCabeceraMobil = (SecCabeceraMobil)SecCabecera.getNew(Channel.movil_web, app, driver);
         	boolean toOpen = true;
         	secCabeceraMobil.clickIconoMenuHamburguer(toOpen);
             

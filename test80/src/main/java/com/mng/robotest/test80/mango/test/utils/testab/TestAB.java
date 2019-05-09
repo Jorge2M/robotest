@@ -49,4 +49,14 @@ public interface TestAB {
 	    	testAB.activateTestAB(versionTestAB, driver);
     	}
     }
+    
+    public static void activateTestABcabeceraDesktop(int versionTestAB, Channel channel, AppEcom app, WebDriver driver) 
+    throws Exception {
+    	if (channel==Channel.desktop) {
+	    	TestAB testAB = TestAB.getInstance(TestABid.HeaderDesktopNewIcons, app);
+	    	testAB.activateTestAB(versionTestAB, driver);
+    	}
+    }
 }
+
+

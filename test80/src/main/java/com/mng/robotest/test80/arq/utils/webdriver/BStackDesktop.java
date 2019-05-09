@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.arq.utils.selenium;
+package com.mng.robotest.test80.arq.utils.webdriver;
 
 
 public class BStackDesktop {

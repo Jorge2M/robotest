@@ -14,14 +14,13 @@ import com.mng.robotest.test80.arq.jdbc.dao.CorreosGroupDAO;
 import com.mng.robotest.test80.arq.listeners.CallBack;
 import com.mng.robotest.test80.arq.utils.XmlTestP80;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
-import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
-import com.mng.robotest.test80.arq.utils.selenium.BStackDataDesktop;
-import com.mng.robotest.test80.arq.utils.selenium.BStackDataMovil;
-import com.mng.robotest.test80.arq.utils.selenium.EnumsBrowserStack.PlatformDesktopBS;
-import com.mng.robotest.test80.arq.utils.selenium.EnumsBrowserStack.PlatformMobilBS;
+import com.mng.robotest.test80.arq.utils.webdriver.BStackDataDesktop;
+import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
+import com.mng.robotest.test80.arq.utils.webdriver.EnumsBrowserStack.PlatformDesktopBS;
+import com.mng.robotest.test80.arq.utils.webdriver.EnumsBrowserStack.PlatformMobilBS;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-
 
 public class commonsXML {
     
@@ -170,7 +169,7 @@ public class commonsXML {
         parametersSuite.put(Constantes.PassBStack, "qp3dr5VJbFMAxPsT4k1b");
     }
     
-    public static XmlTest joinSuiteWithTestRunMobilBStack(TypeDriver webdriverType, XmlSuite suite, BStackDataMovil bsMovil) {
+    public static XmlTest joinSuiteWithTestRunMobilBStack(TypeWebDriver webdriverType, XmlSuite suite, BStackDataMovil bsMovil) {
         XmlTest testRun = new XmlTestP80(suite);
         testRun.setName(suite.getName() + "_" + bsMovil.device);
         testRun.setPreserveOrder(Boolean.valueOf(true));
@@ -184,7 +183,7 @@ public class commonsXML {
         return testRun;
     }
     
-    public static XmlTest joinSuiteWithTestRunDesktopBStack(TypeDriver webdriverType, XmlSuite suite, BStackDataDesktop bsDesktop) {
+    public static XmlTest joinSuiteWithTestRunDesktopBStack(TypeWebDriver webdriverType, XmlSuite suite, BStackDataDesktop bsDesktop) {
         XmlTest testRun = new XmlTestP80(suite);
         testRun.setName(suite.getName() + "_" + bsDesktop.os + "_" + bsDesktop.browser + bsDesktop.browser_version);
         testRun.setPreserveOrder(Boolean.valueOf(true));

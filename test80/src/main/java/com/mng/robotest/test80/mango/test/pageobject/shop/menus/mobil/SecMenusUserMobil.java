@@ -4,8 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavoritos;
 
@@ -65,13 +67,15 @@ public class SecMenusUserMobil extends WebdrvWrapp {
     
     public static void clickMiCuenta(AppEcom appE, WebDriver driver) throws Exception {
     	boolean toOpen = true;
-    	SecCabeceraMobil.getNew(appE, driver).clickIconoMenuHamburguer(toOpen);
+    	SecCabeceraMobil secCabeceraMobil = (SecCabeceraMobil)SecCabecera.getNew(Channel.movil_web, appE, driver);
+    	secCabeceraMobil.clickIconoMenuHamburguer(toOpen);
         clickAndWaitLoad(driver, By.xpath(XPathMenuMiCuenta), TypeOfClick.javascript);
     }
     
     public static void clickFavoritosAndWait(AppEcom appE, WebDriver driver) throws Exception {
     	boolean toOpen = true;
-    	SecCabeceraMobil.getNew(appE, driver).clickIconoMenuHamburguer(toOpen);
+    	SecCabeceraMobil secCabeceraMobil = (SecCabeceraMobil)SecCabecera.getNew(Channel.movil_web, appE, driver);
+    	secCabeceraMobil.clickIconoMenuHamburguer(toOpen);
         clickAndWaitLoad(driver, By.xpath(XPathMenuFavoritos), 3);
         PageFavoritos.isSectionArticlesVisibleUntil(2/*maxSecondsToWait*/, driver);
     }
@@ -82,7 +86,8 @@ public class SecMenusUserMobil extends WebdrvWrapp {
     
     public static void clickCambioPais(AppEcom appE, WebDriver driver) throws Exception {
     	boolean toOpen = true;
-        SecCabeceraMobil.getNew(appE, driver).clickIconoMenuHamburguer(toOpen);
+    	SecCabeceraMobil secCabeceraMobil = (SecCabeceraMobil)SecCabecera.getNew(Channel.movil_web, appE, driver);
+        secCabeceraMobil.clickIconoMenuHamburguer(toOpen);
         clickAndWaitLoad(driver, By.xpath(XPathMenuCambioPais));
     }
     

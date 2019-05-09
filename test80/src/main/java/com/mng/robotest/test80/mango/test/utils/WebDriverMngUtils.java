@@ -26,7 +26,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest.TypeEvidencia;
-import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.generic.ResultadoErrores;
 import com.mng.robotest.test80.mango.test.generic.stackTrace;
@@ -38,7 +38,7 @@ public class WebDriverMngUtils {
      * Se realiza una captura de ./errorPage.faces pues allí se pueden encontrar los datos de la instancia
      */
     public static void capturaErrorPage(DataFmwkTest dFTest, int stepNumber) throws Exception {
-        if (dFTest.typeDriver!=TypeDriver.browserstack) {
+        if (dFTest.typeDriver!=TypeWebDriver.browserstack) {
             //Cargamos la página errorPage en una pestaña aparte y nos posicionamos en ella
             //BrowserStack parece que no soporta abrir ventanas aparte
             String windowHandle = loadErrorPage(dFTest.driver);

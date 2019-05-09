@@ -15,9 +15,8 @@ import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.ParamsBean;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
-import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
-import com.mng.robotest.test80.arq.utils.selenium.BStackDataMovil;
-
+import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 
 public class PaisIdiomaXML {
 
@@ -66,8 +65,8 @@ public class PaisIdiomaXML {
             suite.setThreadCount(Constantes.BSTACK_PARALLEL);
             
             //Asociamos a la suite X testruns (de momento pasamos datos hardcodeados pero deberán llegarnos vía parámetro)
-            joinSuiteWithTestRunMobilBStack(TypeDriver.browserstack, suite, commonsXML.bsMovilAndroid);
-            joinSuiteWithTestRunMobilBStack(TypeDriver.browserstack, suite, commonsXML.bsMovilIOS);
+            joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, commonsXML.bsMovilAndroid);
+            joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, commonsXML.bsMovilIOS);
         } else {
             //En caso <> browserstack paralelizaremos a nivel de los métodos (casos de prueba)
             suite.setParallel(ParallelMode.METHODS);
@@ -109,7 +108,7 @@ public class PaisIdiomaXML {
         parametersSuite.put("typeTest", "1");
     }
     
-    private XmlTest joinSuiteWithTestRunMobilBStack(TypeDriver webdriverType, XmlSuite suite, BStackDataMovil bsMovil) {
+    private XmlTest joinSuiteWithTestRunMobilBStack(TypeWebDriver webdriverType, XmlSuite suite, BStackDataMovil bsMovil) {
         XmlTest testRun = commonsXML.joinSuiteWithTestRunMobilBStack(webdriverType, suite, bsMovil);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());     

@@ -15,7 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
-import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -23,7 +23,6 @@ import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
-
 
 /**getArticuloConVariedadColoresAndHover
  * Clase que define la automatización de las diferentes funcionalidades de la página de "GALERÍA DE PRODUCTOS"
@@ -675,7 +674,7 @@ public class PageGaleriaDesktop extends PageGaleria {
     	String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
     	WebElement slider = article.findElement(By.xpath("." + xpathSlider));
     	hoverArticle(article);
-    	if (getTypeDriver(driver)!=TypeDriver.firefox) {
+    	if (getTypeDriver(driver)!=TypeWebDriver.firefox) {
     		isElementClickableUntil(driver, slider, 5);
     	} else {
     		//TODO En el caso de Firefox-Geckodriver hay problemas con los moveToElement. 

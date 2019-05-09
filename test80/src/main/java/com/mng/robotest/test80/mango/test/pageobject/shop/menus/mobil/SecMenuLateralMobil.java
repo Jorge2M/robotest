@@ -8,12 +8,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 
@@ -233,7 +235,8 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     
     public static void selecLinea(Linea linea, AppEcom appE, WebDriver driver) throws Exception {
     	boolean toOpenMenus = true;
-        SecCabeceraMobil.getNew(appE, driver).clickIconoMenuHamburguer(toOpenMenus);        
+    	SecCabeceraMobil secCabeceraMobil = (SecCabeceraMobil)SecCabecera.getNew(Channel.movil_web, appE, driver);
+        secCabeceraMobil.clickIconoMenuHamburguer(toOpenMenus);        
         if ("n".compareTo(linea.getExtended())==0) { 
             //if (!isSelectedLinea(linea.getType(), appE, driver)) {
                 clickAndWaitLoad(driver, By.xpath(getXPathLineaLink(linea.getType(), appE)), TypeOfClick.javascript);

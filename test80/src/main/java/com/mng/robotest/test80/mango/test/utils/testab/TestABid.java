@@ -16,6 +16,7 @@ public enum TestABid {
 			"V0-nueva", 
 			"V1-Antigua")
 	), 
+	
 	Ficha(
 		TypeTestAB.GoogleExperiments,
 		"zi8X3zIHR6uaNGgEta8YGA",
@@ -26,15 +27,7 @@ public enum TestABid {
 			"V1-nueva con 1 foto rande en la primera fila", 
 			"V2-ficha nueva con 2 fotos en la 1a fila")
 	),
-//	MenuMovil(
-//		TypeTestAB.GoogleExperiments,
-//		"4EaecYi3RAiS0UGayymTiA",
-//		"4EaecYi3RAiS0UGayymTiA",
-//		Arrays.asList(0,1),
-//		Arrays.asList(
-//			"V0-menú antiguo sin React y sin filtros de galerías", //Este es el único caso posible en Outlet
-//			"V1-menú nuevo en React y con filtros de galerías")
-//	),
+	
 	CheckoutMovilNpasos(
 		TypeTestAB.GoogleExperiments,
 		"ON4I2uBlSBSL6iffFMxy3Q",
@@ -44,6 +37,7 @@ public enum TestABid {
 			"V0-Checkout original en 3 pasos", //Este es el único caso posible en Outlet
 			"V1-checkout nuevo en 2 pasos")
 	),
+	
 	GaleriaDesktopReact(
 		TypeTestAB.GoogleExperiments,
 		"KgtNo3S3SWCTsPzuWFIT-Q",
@@ -53,6 +47,7 @@ public enum TestABid {
 			"V0-Galería sin React", //Este es el único caso posible en Outlet
 			"V1-Galería con React")
 	),
+	
 	//TODO es posible eliminarlo en cuanto se ejecute el planchado
 	GaleriaDesktopReactPRESemanal(
 		TypeTestAB.GoogleExperiments,
@@ -62,20 +57,28 @@ public enum TestABid {
 		Arrays.asList(
 			"V0-Galería sin React", //Este es el único caso posible en Outlet
 			"V1-Galería con React")
-		),
-	//Este TestAB se definió únicamente para certificar que el Robotest soportaba la V1 sin necesidad de aplicar ningún cambio
-	//Si se tuviera que activar hay que tener en cuenta que sólo funciona si después de aplicar el TestAB se refresca la portada
-//	HeaderMobileFreeShipping (
-//		TypeTestAB.GoogleOptimize,
-//		"GTM-5T8R33",
-//		"Header - Mobile - Free Shipping", 
-//	    "UWOU5vObVAZJ7ylnbAK2vQ",
-//	    "GTM-KWJ6XJ_OPT-MXVVB%24",
-//	    "QUICK_PREVIEW",
-//	    Arrays.asList(
-//	    	"V0-Original", 
-//	    	"V1-Barra Free Shipping arriba")
-//	),
+	),
+		
+	//Optimize
+	//La mejor forma para obtener los parámetros es:
+	//1) Acceder a Google Optimize con un usuario autorizado de Mango
+	//2) Consultar el Test AB en cuestión
+	//3) Seleccionar la opción "OBTENER VISTA PREVIA"
+	//4) Seleccionar "Compartir vista previa"
+	//5) Obtener los datos de la URL que se muestra
+	HeaderDesktopNewIcons (
+		TypeTestAB.GoogleOptimize,
+		"GTM-5T8R33",
+		"SHOP-126-Header-Desktop-Nuevos Iconos", 
+	    "UWOU5vObVAZJ7ylnbAK2vQ",
+	    "GTM-KWJ6XJ_OPT-T9VSJ%24",
+	    "QUICK_PREVIEW",
+	    Arrays.asList(
+	    	"V0-Original", 
+	    	"V1-Iconos con labels",
+	    	"V2-Iconos sin labels")
+    ),
+    
 	HeaderMobileFavoritos (
 		TypeTestAB.GoogleOptimize,
 		"GTM-5T8R33",
@@ -88,30 +91,6 @@ public enum TestABid {
 	    	"V1-Iconos sin texto", 
 	    	"V2-Iconos con texto")
 	);
-	
-//	BolsaDesktop (
-//			TypeTestAB.GoogleOptimize,
-//			"GTM-5T8R33",
-//			"Icono bolsa Desktop",
-//			"UWOU5vObVAZJ7ylnbAK2vQ",
-//			"GTM-KWJ6XJ_OPT-P4XWX$",
-//			"QUICK_PREVIEW",
-//			Arrays.asList(
-//				"V0-Original", 
-//				"V1-Opción con Hover Effect", 
-//				"V2-Opción con Segundo Click")
-//	)
-//	PagoAustriaEPS (
-//		TypeTestAB.GoogleOptimize,
-//	    "GTM-5T8R33",
-//		"Checkout - EPS Austria - Mostrar método de pago", 
-//		"UWOU5vObVAZJ7ylnbAK2vQ",
-//		"GTM-KWJ6XJ_OPT-PG7W2$",
-//		"QUICK_PREVIEW",
-//		Arrays.asList(
-//			"V0-No pago EPS", 
-//			"V1-Sí pago EPS")
-//	);
 	
 	//Code TestAB GoogleExperiments
 	public TypeTestAB typeTestAB;

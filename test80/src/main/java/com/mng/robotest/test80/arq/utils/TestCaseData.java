@@ -10,7 +10,7 @@ import org.testng.ITestContext;
 
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
-import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 
@@ -88,7 +88,7 @@ public class TestCaseData {
     throws Exception {
     	GestorWebDriver gestorWdrv = new GestorWebDriver();
 		WebDriver driver = gestorWdrv.getWebDriver(bpath, appPath, datosFactoria, channel, context, method);
-		DataFmwkTest dFTest = new DataFmwkTest(driver, TypeDriver.valueOf(bpath), method, context);
+		DataFmwkTest dFTest = new DataFmwkTest(driver, TypeWebDriver.valueOf(bpath), method, context);
 		storeInThread(dFTest);
     }
 

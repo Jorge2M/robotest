@@ -10,15 +10,14 @@ import com.mng.robotest.test80.arq.utils.controlTest.GestorWebDrv;
 import com.mng.robotest.test80.arq.utils.controlTest.StoredWebDrv;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
-import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
-import com.mng.robotest.test80.arq.utils.selenium.BStackDataMovil;
-import com.mng.robotest.test80.arq.utils.selenium.CreateWebDriver;
+import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 
 import java.lang.reflect.Method;
 import java.text.Normalizer;
 import java.util.regex.Pattern;
-
 
 public class GestorWebDriver extends fmwkTest {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
@@ -46,7 +45,7 @@ public class GestorWebDriver extends fmwkTest {
             String browser = bpath;
 
             //Obtenemos navegador/canal de ejecución de las pruebas en base al bpath del testng.xml
-            TypeDriver canalWebDriver = getTypeWebdriver(browser);
+            TypeWebDriver canalWebDriver = getTypeWebdriver(browser);
         	    	
             //Obtenemos el gestor de WebDrivers (lo busca en el contexto y si no existe lo crea/almacena en dicho contexto)
             GestorWebDrv gestorWd = GestorWebDrv.getInstance(context);
@@ -58,9 +57,12 @@ public class GestorWebDriver extends fmwkTest {
             boolean netAnalysis = isParamNetTrafficActive(context);
             driver = gestorWd.getWebDrvFree(canalWebDriver, moreDataWdrv);
             if (driver == null) {
-                driver = CreateWebDriver.getWebDriver(canalWebDriver, channel, netAnalysis, context);
+        		driver = 
+        			FactoryWebdriverMaker.make(canalWebDriver, context)
+        				.setChannel(channel)
+        				.setNettraffic(netAnalysis)
+        				.build();
                 
-                //Almacenamos el WebDriver creado en el gestor marcándolo con estado 'busy' y especificando los parámetros que definen sus características
                 gestorWd.storeWebDriver(driver, StoredWebDrv.stateWd.busy, canalWebDriver, moreDataWdrv);
             }
                     
@@ -119,8 +121,8 @@ public class GestorWebDriver extends fmwkTest {
     /**
      * Transforma el valor del bpath en un canal de ejecución de pruebas controlado
      */
-    public static TypeDriver getTypeWebdriver(String bpath) {
-        return TypeDriver.valueOf(bpath);
+    public static TypeWebDriver getTypeWebdriver(String bpath) {
+        return TypeWebDriver.valueOf(bpath);
     }
 	
     /**
@@ -128,7 +130,7 @@ public class GestorWebDriver extends fmwkTest {
      * actualmente sólo lo informaremos para el caso de 'BrowserStack' (devolvemos el modelo de de dispositivo móvil especificado en BrowserStack)
      * en el resto de casos devolveremos ""
      */
-    public String getMoreDataWdrv(TypeDriver canalWebDriver, ITestContext contextTng) {
+    public String getMoreDataWdrv(TypeWebDriver canalWebDriver, ITestContext contextTng) {
         String moreDataWdrv = "";
         switch (canalWebDriver) {
         //En el caso de BrowserStack como información específica del WebDriver incluiremos el modelo de dispositivo móvil asociado
@@ -141,10 +143,7 @@ public class GestorWebDriver extends fmwkTest {
         //En el resto de tipos de WebDriver no habrá información específica sobre el WebDriver / Dispositivo de ejecución
         case firefox:
         case chrome:
-        case explorer: 
-        case appium:
-        case phantomjs:
-        case htmlunit:
+        case edge:
             moreDataWdrv = "";
                 break;	  
         default:

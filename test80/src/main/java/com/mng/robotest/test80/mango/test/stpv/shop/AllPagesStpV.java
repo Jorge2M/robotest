@@ -11,7 +11,7 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.otras.WebDriverArqUtils;
-import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -49,8 +49,8 @@ public class AllPagesStpV {
     	
     	if (flagsVal.validaJS) {
         	//Nota: No funciona con GeckoDriver porque no están implementados los servicios al no formar parte del protocolo W3C https://github.com/w3c/webdriver/issues/406
-        	if (WebdrvWrapp.getTypeDriver(driver)!=TypeDriver.firefox &&
-        		WebdrvWrapp.getTypeDriver(driver)!=TypeDriver.firefoxhless) {
+        	if (WebdrvWrapp.getTypeDriver(driver)!=TypeWebDriver.firefox &&
+        		WebdrvWrapp.getTypeDriver(driver)!=TypeWebDriver.firefoxhless) {
         		int maxErrors = 1;
         		ResultadoErrores resultadoLogs = WebDriverArqUtils.getLogErrors(Level.WARNING, driver, maxErrors, ctx);
         		String descripValidac = "No hay errores JavaScript";

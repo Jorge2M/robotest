@@ -99,9 +99,6 @@ public class Loyalty extends GestorWebDriver {
         //Queremos asegurarnos que obtenemos artículos no-rebajados para poder aplicarle el descuento por Loyalty Points
         DataBag dataBag = addBagArticleNoRebajado(dFTest.driver);
         
-//        DataBag dataBag = new DataBag(); 
-//        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest.driver);
-        
         //Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
         FlagsTestCkout FTCkout = new FlagsTestCkout();
         FTCkout.validaPasarelas = false;  
@@ -176,7 +173,7 @@ public class Loyalty extends GestorWebDriver {
     
     private int checkAndGetLoyaltyPoints(WebDriver driver) throws Exception {
 	    makeLoyaltyPointsVisible(dCtxSh, driver);
-		int loyaltyPoints = SecMenusUserStpV.checkAngGetLoyaltyPoints(3, driver).getNumberPoints();
+		int loyaltyPoints = SecMenusUserStpV.checkAngGetLoyaltyPoints(5, driver).getNumberPoints();
 		return loyaltyPoints;
     }
     

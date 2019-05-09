@@ -1,20 +1,18 @@
 package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
-
 import org.testng.ITestContext;
 import org.testng.annotations.*;
+import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
-import com.mng.robotest.test80.arq.utils.selenium.CreateWebDriver;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.test.appshop.TestNodos;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorPage;
-
-import org.openqa.selenium.WebDriver;
-
 
 public class ListAllNodes {
 	
@@ -40,7 +38,7 @@ public class ListAllNodes {
 
             //Obtenemos la lista de nodos (ip+cookie)
             LinkedHashMap<String, NodoStatus> mapNodosTotal = new LinkedHashMap<>();
-            this.addNodosToMap(mapNodosTotal, accesos, urlErrorpage, appEcom);
+            this.addNodosToMap(mapNodosTotal, accesos, urlErrorpage, appEcom, context);
 	        
             boolean testLinksPieFlag = false;
             if (testLinksPie.compareTo("true")==0) {
@@ -78,28 +76,30 @@ public class ListAllNodes {
      * Obtiene la lista de nodos (ip+cookies) iterando contra la página de errorPage.faces
      * @param iteraciones número de iteraciones en busca de nuevos nodos
      */
-    private void addNodosToMap (HashMap<String, NodoStatus> mapNodos, int iteraciones, String urlErrorpage, AppEcom appE) throws Exception { 
-
-	//Creamos un WebDriver en Firefox
-        WebDriver driver = CreateWebDriver.getWebDriver(TypeDriver.chrome);
+    private void addNodosToMap (HashMap<String, NodoStatus> mapNodos, int iteraciones, String urlErrorpage, AppEcom appE, ITestContext context) 
+    throws Exception { 
+    	WebDriver driver = 
+    		FactoryWebdriverMaker.make(TypeWebDriver.chrome, context)
+    			.setChannel(Channel.desktop)
+    			.build();    	
 	    
-	for (int i=0; i<iteraciones; i++) {
-	    //Cargamos la página de error donde se encuentra la IP del nodo
-    	    driver.get(urlErrorpage);
-    	    WebdrvWrapp.waitForPageLoaded(driver);
-	    	
-	    //Creamos un nodo y lo almacenamos en la lista
-    	    NodoStatus nodo = new NodoStatus();
-    	    nodo.setIp(PageErrorPage.getIpNode(driver));
-    	    nodo.setCookies(driver.manage().getCookies());
-    	    nodo.setAppEcom(appE);
-    	    nodo.setSourceDataURL(urlErrorpage);
-    	    mapNodos.put(nodo.getIp(), nodo);
-	    	
-	    //Borramos las cookies para forzar una nueva sesión/ip en la siguiente llamada
-	    driver.manage().deleteAllCookies();
-	}
-	    
-	driver.quit();
+		for (int i=0; i<iteraciones; i++) {
+		    //Cargamos la página de error donde se encuentra la IP del nodo
+	    	    driver.get(urlErrorpage);
+	    	    WebdrvWrapp.waitForPageLoaded(driver);
+		    	
+		    //Creamos un nodo y lo almacenamos en la lista
+	    	    NodoStatus nodo = new NodoStatus();
+	    	    nodo.setIp(PageErrorPage.getIpNode(driver));
+	    	    nodo.setCookies(driver.manage().getCookies());
+	    	    nodo.setAppEcom(appE);
+	    	    nodo.setSourceDataURL(urlErrorpage);
+	    	    mapNodos.put(nodo.getIp(), nodo);
+		    	
+		    //Borramos las cookies para forzar una nueva sesión/ip en la siguiente llamada
+		    driver.manage().deleteAllCookies();
+		}
+		    
+		driver.quit();
     }
 }

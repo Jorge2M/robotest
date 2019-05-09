@@ -1890,7 +1890,7 @@
 	nombre="KLARNA-KONTO" testpasarela='s' testpago='s' numperklarna="01121579533" telefklarna = "40123456" nomklarna="Testperson-no Approved" direcklarna="Sæffleberggate 56" provinklarna="0563 Oslo" searchaddklarna="n">&TPV-209;</pago>
 <pago 
 	type="TRJintegrada" shop="s" outlet="s" votf="n" ordenpantalla="3" 
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="10" anycad="2020" cvc="737">&TPV-080;</pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='POSTNORD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="10" anycad="2020" cvc="737">&TPV-080;</pago>
 <pago 
 	type="TRJintegrada" shop="s" outlet="s" votf="n" ordenpantalla="4" 
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="10" anycad="2020" cvc="737" usrd3d="user" passd3d="password">&TPV-080;</pago>

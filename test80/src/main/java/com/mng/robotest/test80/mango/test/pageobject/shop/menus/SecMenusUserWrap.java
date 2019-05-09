@@ -172,33 +172,35 @@ public class SecMenusUserWrap {
     	//TODO Workarround for manage shadow-dom Elements. Remove when WebDriver supports shadow-dom
 		LoyaltyData loyaltyData = new LoyaltyData(false, 0);
 		By byLoyaltyUserMenu = By.tagName("loyalty-user-menu");
-		if (WebdrvWrapp.isElementVisible(driver, byLoyaltyUserMenu)) {
-	    	WebElement shadowHost = driver.findElement(byLoyaltyUserMenu);
-	    	if (shadowHost!=null) {
-	    		for (int i=0; i<maxSecondsWait; i++) {
+		for (int i=0; i<maxSecondsWait; i++) {
+			if (WebdrvWrapp.isElementVisible(driver, byLoyaltyUserMenu)) {
+		    	WebElement shadowHost = driver.findElement(byLoyaltyUserMenu);
+		    	if (shadowHost!=null) {
 			    	Object shadowLoyaltyPoints = ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot", shadowHost);
+			    	//TODO pendiente el grupo de Loyalty nos proporcione un id
+			    	String innerHTML;
 			    	if (shadowLoyaltyPoints instanceof WebElement) {
+			    		//Caso de Chrome
 				    	WebElement loyaltyPoints = (WebElement)shadowLoyaltyPoints;
-				    	//TODO pendiente el grupo de Loyalty nos proporcione un id
-				    	String innerHTML = loyaltyPoints.getAttribute("innerHTML");
-				        Pattern pattern = Pattern.compile("tienes (.*?) Likes");
-				        Matcher matcher = pattern.matcher(innerHTML);
-				    	if (matcher.find()) {
-				    		loyaltyData.isPresent = true;
-				    		float pointsFloat = ImporteScreen.getFloatFromImporteMangoScreen(matcher.group(1));
-				    		loyaltyData.numberPoints = (int)pointsFloat;
-				    		break;
-				    	}
-			    	} else {
-			    		if (shadowLoyaltyPoints.toString().contains("likes-you-have")) {
-			    			loyaltyData.isPresent = true;
-			    			break;
-						}
+				    	innerHTML = loyaltyPoints.getAttribute("innerHTML");
 			    	}
-	
-			    	Thread.sleep(1000);
-	    		}
-	    	}
+			    	else {
+				    	//Caso de Firefox
+			    		innerHTML = shadowLoyaltyPoints.toString();
+			    	}
+			    	
+			        Pattern pattern = Pattern.compile("tienes (.*?) Likes");
+			        Matcher matcher = pattern.matcher(innerHTML);
+			    	if (matcher.find()) {
+			    		loyaltyData.isPresent = true;
+			    		float pointsFloat = ImporteScreen.getFloatFromImporteMangoScreen(matcher.group(1));
+			    		loyaltyData.numberPoints = (int)pointsFloat;
+			    		break;
+			    	}
+		    	}
+			}
+			
+	    	Thread.sleep(1000);
 		}
     	
     	return loyaltyData;

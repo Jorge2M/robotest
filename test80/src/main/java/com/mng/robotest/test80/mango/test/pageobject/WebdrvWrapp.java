@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeoutException;
+import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,10 +29,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
-
 
 public class WebdrvWrapp extends ElementPageFunctions { 
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
@@ -631,10 +629,10 @@ public class WebdrvWrapp extends ElementPageFunctions {
         }
     }
     
-    public static TypeDriver getTypeDriver(WebDriver driver) {
+    public static TypeWebDriver getTypeDriver(WebDriver driver) {
     	Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
     	String browserName = caps.getBrowserName();
-    	return TypeDriver.valueOf(browserName);
+    	return TypeWebDriver.valueOf(browserName);
     }    
     
     public enum HtmlLocator {TagName, Id, ClassName};

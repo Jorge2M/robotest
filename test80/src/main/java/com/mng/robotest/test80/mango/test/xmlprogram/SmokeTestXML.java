@@ -18,11 +18,10 @@ import com.mng.robotest.test80.ParamsBean;
 import com.mng.robotest.test80.arq.utils.filter.FilterTNGxmlTRun;
 import com.mng.robotest.test80.arq.utils.filter.TestMethod;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
-import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
-import com.mng.robotest.test80.arq.utils.selenium.BStackDataDesktop;
-import com.mng.robotest.test80.arq.utils.selenium.BStackDataMovil;
+import com.mng.robotest.test80.arq.utils.webdriver.BStackDataDesktop;
+import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-
 
 public class SmokeTestXML {
 
@@ -71,12 +70,12 @@ public class SmokeTestXML {
             suite.setParallel(ParallelMode.TESTS);
             suite.setThreadCount(Constantes.BSTACK_PARALLEL);
             if (paramsI.getChannel()==Channel.movil_web) {
-                joinSuiteWithTestRunMobilBStack(TypeDriver.browserstack, suite, commonsXML.bsMovilAndroid);
-                joinSuiteWithTestRunMobilBStack(TypeDriver.browserstack, suite, commonsXML.bsMovilIOS);            
+                joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, commonsXML.bsMovilAndroid);
+                joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, commonsXML.bsMovilIOS);            
             } else {
                 //joinSuiteWithTestRunDesktopBStack(TypeDriver.browserstack, suite, commonsXML.bsDktopWin10Explorer);
-                joinSuiteWithTestRunDesktopBStack(TypeDriver.browserstack, suite, commonsXML.bsDktopOSXSafari);
-                joinSuiteWithTestRunDesktopBStack(TypeDriver.browserstack, suite, commonsXML.bsDktopWin8Firefox);
+                joinSuiteWithTestRunDesktopBStack(TypeWebDriver.browserstack, suite, commonsXML.bsDktopOSXSafari);
+                joinSuiteWithTestRunDesktopBStack(TypeWebDriver.browserstack, suite, commonsXML.bsDktopWin8Firefox);
             }
         } else {
             //En caso <> BrowserStack paralelizaremos a nivel de los Métodos (casos de prueba)
@@ -95,7 +94,7 @@ public class SmokeTestXML {
         commonsXML.setCommonsParamsSuite(parametersSuite, paramsI);
     }
     
-    private XmlTest joinSuiteWithTestRunMobilBStack(TypeDriver webdriverType, XmlSuite suite, BStackDataMovil bsMovil) {
+    private XmlTest joinSuiteWithTestRunMobilBStack(TypeWebDriver webdriverType, XmlSuite suite, BStackDataMovil bsMovil) {
         XmlTest testRun = commonsXML.joinSuiteWithTestRunMobilBStack(webdriverType, suite, bsMovil);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());
@@ -105,7 +104,7 @@ public class SmokeTestXML {
         return testRun;
     }
     
-    private XmlTest joinSuiteWithTestRunDesktopBStack(TypeDriver webdriverType, XmlSuite suite, BStackDataDesktop bsDesktop) {
+    private XmlTest joinSuiteWithTestRunDesktopBStack(TypeWebDriver webdriverType, XmlSuite suite, BStackDataDesktop bsDesktop) {
         XmlTest testRun = commonsXML.joinSuiteWithTestRunDesktopBStack(webdriverType, suite, bsDesktop);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());

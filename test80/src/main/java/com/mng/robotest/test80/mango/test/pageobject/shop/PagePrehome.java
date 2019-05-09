@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -231,10 +232,14 @@ public class PagePrehome extends WebdrvWrapp {
     	int versionSinReact = 0;
     	TestAB.activateTestABgaleriaReact(versionSinReact, dCtxSh.channel, dCtxSh.appE, driver);
     	
+    	//Foorzamos cabecera desktop sin iconos
+    	int versionSinIconos = 0;
+    	TestAB.activateTestABcabeceraDesktop(versionSinIconos, dCtxSh.channel, dCtxSh.appE, driver);
+    	
         PagePrehome.selecPaisIdiomaYAccede(dCtxSh, driver);
         ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
         if (dCtxSh.channel==Channel.movil_web) {
-        	SecCabeceraMobil secCabecera = SecCabeceraMobil.getNew(dCtxSh.appE, driver);
+        	SecCabeceraMobil secCabecera = (SecCabeceraMobil)SecCabeceraMobil.getNew(Channel.movil_web, dCtxSh.appE, driver);
         	secCabecera.closeSmartBannerIfExists();
         }
     }

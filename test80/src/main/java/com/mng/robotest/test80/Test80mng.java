@@ -17,7 +17,7 @@ import org.apache.commons.cli.ParseException;
 import com.mng.robotest.test80.arq.listeners.CallBack;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.filter.TestMethod;
-import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.test.data.Suites;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
@@ -450,11 +450,11 @@ public class Test80mng {
         }
         
         try {
-            TypeDriver.valueOf(cmdLine.getOptionValue(BrowserNameParam));
+            TypeWebDriver.valueOf(cmdLine.getOptionValue(BrowserNameParam));
         }
         catch (IllegalArgumentException e) {
             check=false;
-            System.out.println("Browser Name not valid. Posible values: " + Arrays.toString(getNames(TypeDriver.class)));
+            System.out.println("Browser Name not valid. Posible values: " + Arrays.toString(getNames(TypeWebDriver.class)));
         }
         
         //Not Mandatory Params

@@ -17,7 +17,7 @@ import com.mng.robotest.test80.arq.jdbc.to.ResultTestRun;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
-import com.mng.robotest.test80.arq.utils.selenium.BStackDataMovil;
+import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
 
 
 public class TestRunsDAO {

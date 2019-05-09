@@ -1,27 +1,25 @@
 package com.mng.robotest.test80.arq.utils.controlTest;
 
 import org.openqa.selenium.WebDriver;
-
-import com.mng.robotest.test80.arq.utils.otras.Constantes.TypeDriver;
-
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 
 public class StoredWebDrv {
 
     public enum stateWd {busy, free}
     
-    private TypeDriver typeWdrv = TypeDriver.firefox;
+    private TypeWebDriver typeWdrv = TypeWebDriver.firefox;
     private String moreDataWdrv = "";
     private WebDriver webdriver;
     private stateWd state = stateWd.free;
 
-    public StoredWebDrv(WebDriver webdriver, stateWd state, TypeDriver typeWdrv, String moreDataWdrv) {
+    public StoredWebDrv(WebDriver webdriver, stateWd state, TypeWebDriver typeWdrv, String moreDataWdrv) {
         this.webdriver   = webdriver;
         this.state       = state;
         this.typeWdrv    = typeWdrv;
         this.moreDataWdrv = moreDataWdrv;
     }
     
-    public TypeDriver getTypeWdrv() {
+    public TypeWebDriver getTypeWdrv() {
         return this.typeWdrv;
     }
     
