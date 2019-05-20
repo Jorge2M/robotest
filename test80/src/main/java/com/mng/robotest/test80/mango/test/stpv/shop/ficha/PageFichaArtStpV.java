@@ -185,9 +185,8 @@ public class PageFichaArtStpV {
         articulo.setTallaNum(pageFicha.getTallaNumSelected());
     }
     
-    public void selectTalla(int positionTalla) throws Exception {
-    	String tallaCodNum = pageFicha.getTallaCodNum(positionTalla);
-    	selectTalla(tallaCodNum);
+    public void selectFirstTallaAvailable() throws Exception {
+    	pageFicha.selectFirstTallaAvailable();
 	}
     
     @Step (

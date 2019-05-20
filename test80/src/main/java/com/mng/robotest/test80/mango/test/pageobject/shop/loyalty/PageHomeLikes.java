@@ -12,6 +12,7 @@ public class PageHomeLikes extends WebdrvWrapp {
 	String xpathBlockExchange = "//ul[@class='cards-list']/li";
 	String xpathButtonPurchaseWithDiscount = "//span[text()='Compra con descuento']";
 	String xpathButtonDonateLikes = "//span[contains(text(), 'Donar mis Likes')]";
+	String xpathButtonConseguirPor1200Likes = "//span[contains(text(), 'Conseguir por 1.200 Likes')]";
 	
 	private PageHomeLikes(WebDriver driver) {
 		this.driver = driver;
@@ -35,5 +36,9 @@ public class PageHomeLikes extends WebdrvWrapp {
 
 	public void clickDonateLikes() throws Exception {
 		clickAndWaitLoad(driver, By.xpath(xpathButtonDonateLikes));
+	}
+	
+	public void clickConseguirPor1200Likes() throws Exception {
+		clickAndWaitLoad(driver, By.xpath(xpathButtonConseguirPor1200Likes));
 	}
 }

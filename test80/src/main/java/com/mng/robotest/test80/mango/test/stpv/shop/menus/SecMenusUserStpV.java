@@ -127,11 +127,23 @@ public class SecMenusUserStpV {
     	pageHomeLikesStpV.checkIsPageOk();
 	}
     
-	@Validation (
-		description="Aparece el link de \"Mango Likes You\" en el menú de usuario",
-		level=State.Defect)
-	public static boolean checkIsVisibleLinkMangoLikesYou(Channel channel, WebDriver driver) {	
-		return (SecMenusWrap.secMenusUser.isPresentMangoLikesYou(channel, driver));  
+	@Validation
+	public static ChecksResult checkVisibilityLinkMangoLikesYou(Channel channel, AppEcom app, WebDriver driver) {	
+		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
+		boolean visibilityMLY = SecMenusWrap.secMenusUser.isPresentMangoLikesYou(channel, driver);
+		switch (app) {
+		case shop:
+			checks.add(
+				"Sí aparece el link de \"Mango Likes You\" en el menú de usuario",
+				visibilityMLY, State.Defect);
+			break;
+		default:
+			checks.add(
+				"No aparece el link de \"Mango Likes You\" en el menú de usuario",
+				!visibilityMLY, State.Defect);
+		}
+		
+		return checks;  
 	}
 
 	@Validation
@@ -154,7 +166,7 @@ public class SecMenusUserStpV {
  		int loyaltyPointsExpected = initPoints - donatedPoints;
 	 	checks.add(
 			"Nos quedan <b>" + loyaltyPointsExpected + "</b> Loyalty Points " + 
-			"(teníamos " + initPoints + " y hemos donado " + donatedPoints + ")",
+			"(teníamos " + initPoints + " y hemos utilizado " + donatedPoints + ")",
 			finalPoints==loyaltyPointsExpected, State.Defect);
 	 	
 	 	return checks;

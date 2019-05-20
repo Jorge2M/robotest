@@ -44,11 +44,19 @@ public class PageHomeLikesStpV {
 	}
 
 	@Step(
-		description="Seleccionar el link \"Donar Likes\"",
-		expected="Aparece la página de \"Donar Likes\"")
-	public void clickOpcionDonarLikes() throws Exception {
+		description="Seleccionar el 1er botón \"Donar mis Likes\"",
+		expected="Aparece una página para donar mis Likes")
+	public void clickButtonDonarLikes() throws Exception {
 		PageHomeLikes.getNew(driver).clickDonateLikes();
 		PageHomeDonateLikesStpV.getNew(driver).checkIsPage();
+	}
+	
+	@Step(
+		description="Seleccionar el 1er botón \"Conseguir por 1200 Likes\"",
+		expected="Aparece una página para conseguir por 1200 Likes")
+	public void clickButtonConseguirPor1200Likes() throws Exception {
+		PageHomeLikes.getNew(driver).clickConseguirPor1200Likes();
+		PageHomeConseguirPor1200LikesStpV.getNew(driver).checkIsPage();
 	}
 
 	@Validation

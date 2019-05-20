@@ -5,5 +5,5 @@ import org.openqa.selenium.WebDriver;
 public interface PageFromFooter {
 	
 	public String getName();
-	public boolean isPageCorrect(WebDriver driver);
+	public boolean isPageCorrectUntil(int maxSecondsWait, WebDriver driver);
 }

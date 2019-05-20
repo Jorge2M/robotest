@@ -85,7 +85,11 @@ public class SecFooter extends WebdrvWrapp {
     final static String XPathTextAreaMailSuscripcion = "//input[@id[contains(.,'FooterNewsletter')]]";
     final static String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
     final static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
-    final static String XPathCambioPaisShop = "//li[@class[contains(.,'modalCambioPaisShow')]]/a";
+    
+    //TODO Remove the Old version when the new change country block is released in PRO 
+    final static String XPathCambioPaisShopOld = "//li[@class[contains(.,'modalCambioPaisShow')]]/a";
+    final static String XPathCambioPaisShopNew = "//div[@class[contains(.,'modalCambioPaisShow')]]";
+    
     final static String XPathCambioPaisOutlet = "//span[@class[contains(.,'countrySelector')]]";
     
     /**
@@ -109,7 +113,7 @@ public class SecFooter extends WebdrvWrapp {
         if (app==AppEcom.outlet) {
             return XPathCambioPaisOutlet;
         }
-        return XPathCambioPaisShop;
+        return (XPathCambioPaisShopOld + " | " + XPathCambioPaisShopNew);
     }
     
     public static boolean isPresent(AppEcom app, WebDriver driver) {

@@ -136,6 +136,8 @@ public class CompraFact extends GestorWebDriver {
 	        UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
 	        dCtxSh.userConnected = userShop.user;
 	        dCtxSh.passwordUser = userShop.password;
+//	        dCtxSh.userConnected = "test.performance27@mango.com";
+//	        dCtxSh.passwordUser = "Mango123";
         }
         
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);

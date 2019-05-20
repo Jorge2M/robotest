@@ -59,7 +59,7 @@ public class SecModalPersonalizacionStpV {
 	public void startCustomization () throws Exception {
 		SecModalPersonalizacion.selectElement(ModalElement.StartProcces, dCtxSh.channel, driver, TypeOfClick.javascript);
 		if (dCtxSh.channel==Channel.desktop) {
-			validateIsApartadoVisible(1);
+			validateCabeceraStep(1);
 		} else {
 			validationInitMblCustomization(2, ModalElement.HeaderProof);
 		}
@@ -77,37 +77,29 @@ public class SecModalPersonalizacionStpV {
 		expected="Aparece la lista de iconos")
 	public void selectIconCustomization() throws Exception {
 		SecModalPersonalizacion.selectElement(ModalElement.RadioIcon, dCtxSh.channel, driver, TypeOfClick.javascript);
-		if (dCtxSh.channel==Channel.desktop) {
-			validateIsApartadoVisible(1);
-		} else {
-			validateCabeceraMvl(2);
-		}
-		
-		validationIconSelection(2);
+	       validationIconSelection(2);
 	}
 
 	@Validation(
 		description="1) Aparece la lista de iconos seleccionables",
 		level=State.Warn)
-	private boolean validationIconSelection(int maxSecondsWait) {
+	public boolean validationIconSelection(int maxSecondsWait) {
 		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.IconSelecction, StateElem.Visible, maxSecondsWait, dCtxSh.channel, driver));
 	}
 
 	@Step(
 		description="Seleccionamos el primer icono",
-		expected="Aparece el botón Confirmar")
+		expected="La selección es correcta")
 	public void selectFirstIcon() throws Exception {
 		if (dCtxSh.channel == Channel.desktop) {
 			SecModalPersonalizacion.selectElement(ModalElement.IconSelecction, dCtxSh.channel, driver);
-			validateIconSelected();
 		} else {
 			SecModalPersonalizacion.selectElement(ModalElement.IconSelecction, dCtxSh.channel, driver, TypeOfClick.javascript);
-			validateFirstIconSelectionMvl(2, ModalElement.PositionButton);
 		}
 	}
 
 	@Validation
-	private ChecksResult validateIconSelected() {
+	public ChecksResult validateIconSelectedDesktop() {
 		ChecksResult validations = ChecksResult.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
@@ -118,35 +110,34 @@ public class SecModalPersonalizacionStpV {
 			SecModalPersonalizacion.isElementInStateUntil(ModalElement.Continue, StateElem.Visible, maxSecondsWait, driver), State.Warn);
 		return validations;
 	}
-
-	@Validation(
-		description="1) Aparece seleccionado el primer icono y podemos confirmar nuestra seleccion",
-		level=State.Warn)
-	private boolean validateFirstIconSelectionMvl(int maxSecondsWait, ModalElement element) {
-		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, dCtxSh.channel, driver));
+	
+	@Step(
+		description="Seleccionamos la 1a opción a nivel del lugar del bordado",
+		expected="La selección es correcta")
+	public void selectFirstLugarBordado() throws Exception {
+		SecModalPersonalizacion.selectElement(ModalElement.botonLugarBordado, dCtxSh.channel, driver);
 	}
+
+//	@Validation(
+//		description="1) Aparece seleccionado el primer icono y podemos confirmar nuestra seleccion",
+//		level=State.Warn)
+//	private boolean validateFirstIconSelectionMvl(int maxSecondsWait, ModalElement element) {
+//		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, dCtxSh.channel, driver));
+//	}
 
 	@Step(
 		description="Seleccionamos el botón \"Confirmar\"",
 		expected="Se hace visible el paso-2")
-	public void selectWhere () throws Exception {
+	public void selectConfirmarButton () throws Exception {
 		if (dCtxSh.channel==Channel.desktop) {
 			SecModalPersonalizacion.selectElement(ModalElement.Continue, dCtxSh.channel, driver);
 		} else {
-			SecModalPersonalizacion.selectElement(ModalElement.PositionButton, dCtxSh.channel, driver);
-		}
-
-		if (dCtxSh.channel==Channel.desktop) {
-			validateIsApartadoVisible(2);
-			validateWhereDesktop();
-		} else {
-			validateCabeceraMvl(2);
-			validateColorsMvl(2, ModalElement.ColorsContainer);
+			SecModalPersonalizacion.selectElement(ModalElement.Continue, dCtxSh.channel, driver);
 		}
 	}
 
 	@Validation
-	private ChecksResult validateWhereDesktop() {
+	public ChecksResult validateWhereDesktop() {
 		ChecksResult validations = ChecksResult.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
@@ -161,26 +152,12 @@ public class SecModalPersonalizacionStpV {
 	@Validation(
 		description="1) En el flujo mobil, ahora aparecen los colores disponibles",
 		level=State.Warn)
-	private boolean validateColorsMvl(int maxSecondsWait, ModalElement element) {
+	public boolean validateColorsMvl(int maxSecondsWait, ModalElement element) {
 		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, dCtxSh.channel, driver));
 	}
 
-	@Step(
-		description="Seleccionamos el botón \"Confirmar\"",
-		expected="Aparece el apartado 3 de la personalización")
-	public void selectColor() throws Exception {
-		SecModalPersonalizacion.selectElement(ModalElement.Continue, dCtxSh.channel, driver, TypeOfClick.javascript);
-		if (dCtxSh.channel == Channel.desktop) {
-			validateIsApartadoVisible(3);
-			validateSelectionColor();
-		} else {
-			validateCabeceraMvl(2);
-			validateContinuesMvl(2);
-		}
-	}
-
 	@Validation
-	private ChecksResult validateSelectionColor() {
+	public ChecksResult validateSelectionColor() {
 		ChecksResult validations = ChecksResult.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
@@ -195,7 +172,7 @@ public class SecModalPersonalizacionStpV {
 	@Validation(
 		description="1) Podemos continuar con nuestro proceso de personalizacion",
 		level=State.Warn)
-	private boolean validateContinuesMvl (int maxSecondsWait) {
+	public boolean validateContinuesMvl (int maxSecondsWait) {
 		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Continue, StateElem.Visible, maxSecondsWait, dCtxSh.channel, driver));
 	}
 
@@ -273,37 +250,21 @@ public class SecModalPersonalizacionStpV {
 		}
 	}
 
-	private void validateIsApartadoVisible(int numApartado) {
-		ModalElement modalToValidate;
-		switch (numApartado) {
-			case 1:
-				modalToValidate = ModalElement.Step1Proof;
-				break;
-			case 2:
-				modalToValidate = ModalElement.Step2Proof;
-				break;
-			case 3:
-				modalToValidate = ModalElement.Step3Proof;
-				break;
-			case 4:
-			default:
-				modalToValidate = ModalElement.Step4Proof;
-		}
-
-		validateSection(numApartado, 4, modalToValidate);
-	}
-
 	@Validation(
-		description="1) Es visible el apartado #{numApartado} de la personalización",
-		level=State.Defect)
-	private boolean validateSection(@SuppressWarnings("unused") int numApartado, int maxSecondsWait, ModalElement element) {
-		return (SecModalPersonalizacion.isElementInStateUntil(element, StateElem.Visible, maxSecondsWait, dCtxSh.channel, driver));
-	}
-
-	@Validation(
-		description="1) #{descripcion}",
+		description="Es visible el apartado <b>#{level}</b>",
 		level=State.Warn)
-	private boolean validateCabeceraMvl(int maxSecondsWait) {
-		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.HeaderProof, StateElem.Visible, maxSecondsWait, dCtxSh.channel, driver));
+	public boolean validateCabeceraStep(int level) {
+		switch (level) {
+		case 1:
+			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Step1Proof, StateElem.Visible, 4, driver));
+		case 2:
+			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Step2Proof, StateElem.Visible, 4, driver));
+		case 3:
+			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Step3Proof, StateElem.Visible, 4, driver));
+		case 4:
+			return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Step4Proof, StateElem.Visible, 4, driver));
+		default:
+			return false;
+		}
 	}
 }

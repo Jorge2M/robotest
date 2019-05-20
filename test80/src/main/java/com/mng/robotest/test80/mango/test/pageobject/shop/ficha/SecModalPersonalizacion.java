@@ -23,6 +23,8 @@ public class SecModalPersonalizacion extends WebdrvWrapp {
 		Continue("//button[@class[contains(.,'sg-t-btn')] or @class[contains(.,'sg-p-btn')]]", "//button[@class='sg-t-btn' or @class='sg-s-btn']"),
 		addToBag("", "//button[@class[contains(.,'sg-s-btn')]]"),
 		
+		botonLugarBordado("//button[@class='customization-position-item']"),
+		
 		Modal("//div[@class[contains(.,'customization')]]", "//div[@class[contains(.,'customization')]]"),
 		Icons("//div[@class='custom-icons']", null),
 		Initials("//button[@class='motif-option'][1]", null),

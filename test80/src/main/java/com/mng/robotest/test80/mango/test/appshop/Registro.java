@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import com.mng.robotest.test80.mango.test.data.ChannelEnum;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
@@ -37,6 +36,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegis
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro.PageData;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMiCuentaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalSuscripcionStpV;
@@ -264,5 +264,6 @@ public class Registro extends GestorWebDriver {
         PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dFTest);
         PageRegistroDirecStpV.clickFinalizarButton(dFTest);
         PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, dFTest);
+        SecMenusUserStpV.checkVisibilityLinkMangoLikesYou(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
     }    
 }

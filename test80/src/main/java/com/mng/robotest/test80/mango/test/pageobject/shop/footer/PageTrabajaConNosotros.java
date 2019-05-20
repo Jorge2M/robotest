@@ -16,8 +16,8 @@ public class PageTrabajaConNosotros extends WebdrvWrapp implements PageFromFoote
 	}
 	
 	@Override
-	public boolean isPageCorrect(WebDriver driver) {
+	public boolean isPageCorrectUntil(int maxSecondsWait, WebDriver driver) {
 		driver.switchTo().frame(driver.findElement(By.xpath(XPathIdFrame)));
-		return (isElementPresent(driver, By.xpath(XPathForIdPage)));
+		return (isElementPresentUntil(driver, By.xpath(XPathForIdPage), maxSecondsWait));
 	}
 }

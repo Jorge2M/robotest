@@ -20,7 +20,8 @@ public class PageFichaArtOld extends PageFicha {
     public static SecProductDescrOld secProductDescr;
     public static SecSlidersOld secSliders; //Completa Tu Look, Elegido para ti, Lo último que has visto
     
-    private static final String XPathHtmlFicha = "//html[@class[contains(.,'ficha')]]";
+    //private static final String XPathHtmlFicha = "//html[@class[contains(.,'ficha')]]";
+    private static final String XPathContainerFicha = "//main[@class='product-detail']";
     
     //TODO En breve subirá un desarrollo de Juan Mesa que rompe todos los test que añadan a la bolsa algo -> Se debería cambiar por el xpath //*[@id='buttonAddCart'] 
     private static final String XPathAltaBolsaButton ="//*[@id='productFormAdd']";
@@ -49,13 +50,15 @@ public class PageFichaArtOld extends PageFicha {
     }
     
     private String getXPathIsPage(String referencia, Channel channel) {
-        return XPathHtmlFicha + secDataProduct.getXPathLinReferencia(referencia, channel);
+        return XPathContainerFicha + secDataProduct.getXPathLinReferencia(referencia, channel);
     }
     
     @Override
     public boolean isPageUntil(int maxSecondsWait) {
-        return (isElementPresentUntil(driver, By.xpath(XPathHtmlFicha), maxSecondsWait) &&
-                secDataProduct.secSelTallasOld.isVisibleSelectorTallasUntil(maxSecondsWait, driver));
+        return (
+        	isElementPresentUntil(driver, By.xpath(XPathContainerFicha), maxSecondsWait) &&
+            secDataProduct.secSelTallasOld.isVisibleSelectorTallasUntil(maxSecondsWait, driver)
+        );
     }
     
     @Override
@@ -208,6 +211,6 @@ public class PageFichaArtOld extends PageFicha {
     }
     
     public boolean isPresentPageUntil(int seconds) {
-        return (isElementPresentUntil(driver, By.xpath(XPathHtmlFicha), seconds));
+        return (isElementPresentUntil(driver, By.xpath(XPathContainerFicha), seconds));
     }
 }

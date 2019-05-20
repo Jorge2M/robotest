@@ -489,21 +489,21 @@ public abstract class PageGaleria extends WebdrvWrapp {
         return articulo;
     }
     
-    /**
-     * @return devuelve un artículo con un determinado texto (lo espera durante los segundos indicados) 
-     */
-
-    public boolean isCabeceraResBusqueda(String categoriaProducto) {
-        boolean isCabecera = false;
-        String xpathCabe = getXPathCabeceraBusquedaProd();
-        if (isElementPresent(driver, By.xpath(xpathCabe))) {
-            if (driver.findElement(By.xpath(xpathCabe)).getText().toLowerCase().contains(categoriaProducto.toLowerCase())) {
-                isCabecera = true;
-            }
-        }
-        
-        return isCabecera;
-    }
+//    /**
+//     * @return devuelve un artículo con un determinado texto (lo espera durante los segundos indicados) 
+//     */
+//
+//    public boolean isCabeceraResBusqueda(String categoriaProducto) {
+//        boolean isCabecera = false;
+//        String xpathCabe = getXPathCabeceraBusquedaProd();
+//        if (isElementPresent(driver, By.xpath(xpathCabe))) {
+//            if (driver.findElement(By.xpath(xpathCabe)).getText().toLowerCase().contains(categoriaProducto.toLowerCase())) {
+//                isCabecera = true;
+//            }
+//        }
+//        
+//        return isCabecera;
+//    }
     
     /**
      * Función que realiza un scroll/paginación hasta el final de los artículos. Retorna el número de elementos obtenidos

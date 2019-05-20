@@ -96,9 +96,8 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
 	}
 	
 	@Override
-	public boolean isPageCorrect(WebDriver driver) {
-		int maxSecondsToWait = 2;
-		return (isElementInStateUntil(ElementCheque.paginaForm, StateElem.Present, maxSecondsToWait, driver));
+	public boolean isPageCorrectUntil(int maxSecondsWait, WebDriver driver) {
+		return (isElementInStateUntil(ElementCheque.paginaForm, StateElem.Present, maxSecondsWait, driver));
 	}
     
     public static boolean isPresentInputImportes(WebDriver driver) {

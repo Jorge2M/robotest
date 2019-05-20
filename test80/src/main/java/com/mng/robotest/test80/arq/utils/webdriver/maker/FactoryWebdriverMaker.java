@@ -28,6 +28,8 @@ public class FactoryWebdriverMaker {
     		return (FirefoxdriverMaker.getNew(typeWebDriver));
     	case browserstack:
     		return (BrowserStackDriverMaker.getNew(context));
+    	case edge:
+    		return (EdgedriverMaker.getNew());
     	case chrome:
     	default:
     		return (ChromedriverMaker.getNew(typeWebDriver));

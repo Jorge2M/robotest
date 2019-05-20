@@ -43,8 +43,6 @@ public class SecBuscadorStpV {
     throws Exception {
         SecBuscadorWrapper.buscarArticulo(articulo, dCtxSh.channel, dCtxSh.appE, driver);
         WebdrvWrapp.waitForPageLoaded(driver);  
-
-        //Validations
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         pageFichaStpV.validateIsFichaAccordingTypeProduct(articulo);
     }
@@ -81,9 +79,9 @@ public class SecBuscadorStpV {
     	validations.add(
     		"Aparece como mínimo un producto de tipo " + producSin1erCaracter + " (lo esperamos hasta " + maxSecondsWait + " segundos)",
     		"".compareTo(pageGaleria.getArticuloWithText(producSin1erCaracter, maxSecondsWait))!=0, State.Defect);
-    	validations.add(
-    		"Aparece la categoría en el resultado de la búsqueda",
-    		pageGaleria.isCabeceraResBusqueda(producSin1erCaracter), State.Defect);
+//    	validations.add(
+//    		"Aparece la categoría en el resultado de la búsqueda",
+//    		pageGaleria.isCabeceraResBusqueda(producSin1erCaracter), State.Defect);
     	return validations;
     }
     

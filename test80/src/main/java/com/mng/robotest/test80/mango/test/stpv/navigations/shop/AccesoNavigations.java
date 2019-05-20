@@ -78,6 +78,10 @@ public class AccesoNavigations {
     	//Forzamos galería sin React
     	int versionSinReact = 0;
     	TestAB.activateTestABgaleriaReact(versionSinReact, dCtxSh.channel, dCtxSh.appE, driver);
+    	
+    	//Foorzamos cabecera desktop sin iconos
+    	int versionSinIconos = 0;
+    	TestAB.activateTestABcabeceraDesktop(versionSinIconos, dCtxSh.channel, dCtxSh.appE, driver);
     }    
     
     public static void cambioPaisFromHomeIfNeeded(DataCtxShop dCtxSh, WebDriver driver) 

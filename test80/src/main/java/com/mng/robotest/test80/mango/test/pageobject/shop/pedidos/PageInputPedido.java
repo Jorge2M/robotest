@@ -19,8 +19,8 @@ public class PageInputPedido extends WebdrvWrapp implements PageFromFooter {
 	}
 	
 	@Override
-	public boolean isPageCorrect(WebDriver driver) {
-		return (isElementPresent(driver, By.xpath(XPathInputPedido)));
+	public boolean isPageCorrectUntil(int maxSecondsWait, WebDriver driver) {
+		return (isElementPresentUntil(driver, By.xpath(XPathInputPedido), maxSecondsWait));
 	}
     
     public static boolean isVisibleInputPedido(WebDriver driver) {

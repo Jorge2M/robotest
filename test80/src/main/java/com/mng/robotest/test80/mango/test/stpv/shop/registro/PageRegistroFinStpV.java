@@ -29,8 +29,6 @@ public class PageRegistroFinStpV {
     throws Exception {
         PageRegistroFin.clickIrDeShopping(dFTest.driver);
         SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver).clickLogoMango();
-            
-        //Validaciones.
         validateWeAreLogged(dCtxSh, dFTest.driver);
     }
 	

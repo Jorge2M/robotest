@@ -1857,7 +1857,7 @@
 <idioma acceso="no-en">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>NO</tarifa>
-<codpos>0025</codpos>
+<codpos>0010</codpos>
 <telefono>40123456</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <shop_online>true</shop_online>

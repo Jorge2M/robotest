@@ -14,6 +14,7 @@ import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -29,6 +30,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFichaArtOld;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.Slider;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha.TypeFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecDataProduct.ProductNav;
+import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion.ModalElement;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld.TypePanel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
@@ -253,15 +255,29 @@ public class FichaProducto extends GestorWebDriver {
         modalPersonalizacionStpV.checkAreArticleCustomizable();
         
         PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
-        pageFichaStpv.selectTalla(1);
+        pageFichaStpv.selectFirstTallaAvailable();
         modalPersonalizacionStpV.selectLinkPersonalizacion();
         modalPersonalizacionStpV.startCustomization();
         modalPersonalizacionStpV.selectIconCustomization();
         modalPersonalizacionStpV.selectFirstIcon();
-        modalPersonalizacionStpV.selectWhere();
-        modalPersonalizacionStpV.selectColor();
+        if (dCtxSh.channel==Channel.desktop) {
+        	modalPersonalizacionStpV.validateIconSelectedDesktop();
+	        modalPersonalizacionStpV.selectConfirmarButton();
+	        modalPersonalizacionStpV.validateCabeceraStep(2);
+	        modalPersonalizacionStpV.validateWhereDesktop();
+	        modalPersonalizacionStpV.selectConfirmarButton();
+        	modalPersonalizacionStpV.validateCabeceraStep(3);
+        	modalPersonalizacionStpV.validateSelectionColor();
+        }
+        else {
+        	modalPersonalizacionStpV.selectFirstLugarBordado();
+        	modalPersonalizacionStpV.validateCabeceraStep(3);
+        	modalPersonalizacionStpV.validateColorsMvl(2, ModalElement.ColorsContainer);
+        	modalPersonalizacionStpV.validateContinuesMvl(2);
+	        modalPersonalizacionStpV.selectConfirmarButton();
+        }
+        
         modalPersonalizacionStpV.selectSize();
-
         modalPersonalizacionStpV.confirmCustomization();
         modalPersonalizacionStpV.checkCustomizationProof();
     }

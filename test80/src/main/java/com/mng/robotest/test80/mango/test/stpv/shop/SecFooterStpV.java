@@ -55,11 +55,11 @@ public class SecFooterStpV {
 	    PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter, channel);
 		String windowActualHandle = driver.getWindowHandle();
 		boolean newWindowInNewTab = (windowActualHandle.compareTo(windowFatherHandle)!=0);
-		int maxSecondsToWait = 5;
+		int maxSecondsWait = 5;
 		try {
 	    	validations.add(
-	    		"Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + maxSecondsToWait + " segundos)",
-	    		pageObject.isPageCorrect(driver), State.Warn);		
+	    		"Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + maxSecondsWait + " segundos)",
+	    		pageObject.isPageCorrectUntil(maxSecondsWait, driver), State.Warn);		
 		    if (typeFooter.pageInNewTab()) {
 		    	validations.add(
 	        		"Aparece la página en una ventana aparte",

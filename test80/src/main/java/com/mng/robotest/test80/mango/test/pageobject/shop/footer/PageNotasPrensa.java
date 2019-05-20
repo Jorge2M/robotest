@@ -15,7 +15,7 @@ public class PageNotasPrensa extends WebdrvWrapp implements PageFromFooter {
 	}
 	
 	@Override
-	public boolean isPageCorrect(WebDriver driver) {
-		return (isElementPresent(driver, By.xpath(XPathForIdPage)));
+	public boolean isPageCorrectUntil(int maxSecondsWait, WebDriver driver) {
+		return (isElementPresentUntil(driver, By.xpath(XPathForIdPage), maxSecondsWait));
 	}
 }
