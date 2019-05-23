@@ -227,15 +227,7 @@ public class PagePrehome extends WebdrvWrapp {
      */
     public static void accesoShopViaPrehome(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         goToPagePrehome(dCtxSh.urlAcceso, driver);
-        
-    	//Forzamos galería sin React
-    	int versionSinReact = 0;
-    	TestAB.activateTestABgaleriaReact(versionSinReact, dCtxSh.channel, dCtxSh.appE, driver);
-    	
-    	//Foorzamos cabecera desktop sin iconos
-    	int versionSinIconos = 0;
-    	TestAB.activateTestABcabeceraDesktop(versionSinIconos, dCtxSh.channel, dCtxSh.appE, driver);
-    	
+        TestAB.currentTestABsToActivate(dCtxSh, driver);
         PagePrehome.selecPaisIdiomaYAccede(dCtxSh, driver);
         ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
         if (dCtxSh.channel==Channel.movil_web) {

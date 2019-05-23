@@ -189,15 +189,7 @@ public class AccesoStpV {
         String urlAcceso = (String)ctx.getAttribute("appPath");
         int numIdiomas = dCtxSh.pais.getListIdiomas().size();
         PageLoginVOTFStpV.goToAndLogin(urlAcceso, dCtxSh, driver);
-        
-    	//Forzamos galería sin React
-    	int versionSinReact = 0;
-    	TestAB.activateTestABgaleriaReact(versionSinReact, dCtxSh.channel, dCtxSh.appE, driver);
-    	
-    	//Foorzamos cabecera desktop sin iconos
-    	int versionSinIconos = 0;
-    	TestAB.activateTestABcabeceraDesktop(versionSinIconos, dCtxSh.channel, dCtxSh.appE, driver);
-    	
+        activateTestsABs(dCtxSh, driver);
         if (numIdiomas > 1) {
             PageSelectIdiomaVOTFStpV.selectIdiomaAndContinue(dCtxSh.idioma, driver);
         }
@@ -209,7 +201,12 @@ public class AccesoStpV {
         flagsVal.validaJS = true;
         flagsVal.validaImgBroken = false;
         AllPagesStpV.validacionesEstandar(flagsVal, driver);
-        PageSelectLineaVOTFStpV.selectMenuAndLogoMango(1/*numMenu*/, dCtxSh.pais, driver);
+        PageSelectLineaVOTFStpV.selectMenuAndLogoMango(1, dCtxSh, driver);
+    }
+    
+    private static void activateTestsABs(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    	TestAB.currentTestABsToActivate(dCtxSh, driver);
+    	driver.navigate().refresh();
     }
     
     final static String tagNombrePaisOrigen = "@TagPaisOrigen";

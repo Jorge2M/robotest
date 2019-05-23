@@ -18,7 +18,6 @@ import com.mng.robotest.test80.mango.test.pageobject.votf.PageSelectIdiomaVOTF;
 import com.mng.robotest.test80.mango.test.pageobject.votf.PageSelectLineaVOTF;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
-import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
 
 /**
  * Clase que implementa los diferentes steps/validations asociados asociados a la página de Login de Manto
@@ -54,11 +53,6 @@ public class AccesoNavigations {
     public static void goFromLineasToMultimarcaVOTF(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         PageSelectLineaVOTF.clickBanner(LineaType.she, driver);
         PageSelectLineaVOTF.clickMenu(LineaType.she, 1/*numMenu*/, driver);
-        
-    	//Foorzamos cabecera desktop sin iconos
-    	int versionSinIconos = 0;
-    	TestAB.activateTestABcabeceraDesktop(versionSinIconos, dCtxSh.channel, dCtxSh.appE, driver);
-        
         SecCabecera.getNew(Channel.desktop, AppEcom.votf, driver).clickLogoMango();
     }
     
@@ -71,15 +65,6 @@ public class AccesoNavigations {
         PageLoginVOTF.inputUsuario(dCtxSh.pais.getAccesoVOTF().getUsuario(), driver);
         PageLoginVOTF.inputPassword(dCtxSh.pais.getAccesoVOTF().getPassword(), driver);
         PageLoginVOTF.clickButtonContinue(driver);
-        
-    	//Forzamos galería sin React
-    	int versionSinReact = 0;
-    	TestAB.activateTestABgaleriaReact(versionSinReact, dCtxSh.channel, dCtxSh.appE, driver);
-    	
-    	//Foorzamos cabecera desktop sin iconos
-    	int versionSinIconos = 0;
-    	TestAB.activateTestABcabeceraDesktop(versionSinIconos, dCtxSh.channel, dCtxSh.appE, driver);
-    	
         if (dCtxSh.pais.getListIdiomas().size() > 1) {
             PageSelectIdiomaVOTF.selectIdioma(dCtxSh.idioma.getCodigo(), driver);
             PageSelectIdiomaVOTF.clickButtonAceptar(driver);

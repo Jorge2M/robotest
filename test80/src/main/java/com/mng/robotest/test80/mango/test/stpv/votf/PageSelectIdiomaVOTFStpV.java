@@ -10,7 +10,7 @@ import com.mng.robotest.test80.mango.test.pageobject.votf.PageSelectIdiomaVOTF;
 public class PageSelectIdiomaVOTFStpV {
 
 	@Step (
-		description="Seleccionar el idioma <b>#{idioma.getgetLiteral()}</b> y pulsar \"Aceptar\" (si aparece una página de alerta la aceptamos)",
+		description="Seleccionar el idioma <b>#{idioma.getLiteral()}</b> y pulsar \"Aceptar\" (si aparece una página de alerta la aceptamos)",
         expected="Aparece la página de selección de la línea")
     public static void selectIdiomaAndContinue(IdiomaPais idioma, WebDriver driver) throws Exception {
         PageSelectIdiomaVOTF.selectIdioma(idioma.getCodigo(), driver);

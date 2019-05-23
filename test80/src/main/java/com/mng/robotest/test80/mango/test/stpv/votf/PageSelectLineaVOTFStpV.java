@@ -7,12 +7,13 @@ import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
+import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.votf.PageSelectLineaVOTF;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
+import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
 
 public class PageSelectLineaVOTFStpV {
 
@@ -40,13 +41,11 @@ public class PageSelectLineaVOTFStpV {
 	@Step (
 		description="Seleccionar el #{umMenu}o menu de Mujer y finalmente seleccionar el logo de Mango",
         expected="Aparece la página inicial de SHE")
-    public static void selectMenuAndLogoMango(int numMenu, Pais pais, WebDriver driver) throws Exception {
+    public static void selectMenuAndLogoMango(int numMenu, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         PageSelectLineaVOTF.clickBanner(LineaType.she, driver);
         PageSelectLineaVOTF.clickMenu(LineaType.she, numMenu, driver);
         SecCabecera.getNew(Channel.desktop, AppEcom.votf, driver).clickLogoMango();
-        
-        //Validaciones
-        SectionBarraSupVOTFStpV.validate(pais.getAccesoVOTF().getUsuario(), driver);
+        SectionBarraSupVOTFStpV.validate(dCtxSh.pais.getAccesoVOTF().getUsuario(), driver);
         
         //Validaciones estándar. 
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
