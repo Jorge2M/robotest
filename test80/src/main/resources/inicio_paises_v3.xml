@@ -894,9 +894,10 @@
 <pago 
 	type="TRJintegrada" shop="s" outlet="s" empleado="s" ordenpantalla="6" 
 	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="10" anycad="2020" cvc="7373">&TPV-555;</pago>
+<!-- Me comentan desde el grupo de pagos que este método lo pueden volver a activar en cualquier momento
 <pago 
 	type="Paytrail" shop="s" outlet="s" empleado="s" ordenpantalla="7" 
-	nombre="paytrail" testpasarela='s' testpago='s'>&TPV-125;</pago>
+	nombre="paytrail" testpasarela='s' testpago='s'>&TPV-125;</pago> -->
 <pago 
 	type="Paypal" shop="s" outlet="s" empleado="n" ordenpantalla="8" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>

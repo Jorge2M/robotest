@@ -129,6 +129,7 @@ public class SecFooter extends WebdrvWrapp {
     
     public static void clickLink(FooterLink footerType, WebDriver driver) throws Exception {
     	ModalClubMangoLikes.closeModalIfVisible(driver);
+    	WebdrvWrapp.moveToElement(By.xpath(footerType.getXPathRelativeCapa()), driver);
     	clickAndWaitLoad(driver, By.xpath(footerType.getXPathRelativeCapa()));
     }
     

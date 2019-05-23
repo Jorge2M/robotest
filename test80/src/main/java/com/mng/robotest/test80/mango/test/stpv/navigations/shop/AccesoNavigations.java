@@ -42,7 +42,7 @@ public class AccesoNavigations {
     throws Exception {
         if (dCtxSh.appE==AppEcom.votf) {
             accesoVOTF(dCtxSh, driver);
-            goFromLineasToMultimarcaVOTF(driver);
+            goFromLineasToMultimarcaVOTF(dCtxSh, driver);
         } else {
             PagePrehome.accesoShopViaPrehome(dCtxSh, driver);
         }
@@ -51,9 +51,14 @@ public class AccesoNavigations {
         ctx.setAttribute(Constantes.attrUrlPagPostAcceso, driver.getCurrentUrl());
     }
     
-    public static void goFromLineasToMultimarcaVOTF(WebDriver driver) throws Exception {
+    public static void goFromLineasToMultimarcaVOTF(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         PageSelectLineaVOTF.clickBanner(LineaType.she, driver);
         PageSelectLineaVOTF.clickMenu(LineaType.she, 1/*numMenu*/, driver);
+        
+    	//Foorzamos cabecera desktop sin iconos
+    	int versionSinIconos = 0;
+    	TestAB.activateTestABcabeceraDesktop(versionSinIconos, dCtxSh.channel, dCtxSh.appE, driver);
+        
         SecCabecera.getNew(Channel.desktop, AppEcom.votf, driver).clickLogoMango();
     }
     
@@ -66,14 +71,6 @@ public class AccesoNavigations {
         PageLoginVOTF.inputUsuario(dCtxSh.pais.getAccesoVOTF().getUsuario(), driver);
         PageLoginVOTF.inputPassword(dCtxSh.pais.getAccesoVOTF().getPassword(), driver);
         PageLoginVOTF.clickButtonContinue(driver);
-        if (dCtxSh.pais.getListIdiomas().size() > 1) {
-            PageSelectIdiomaVOTF.selectIdioma(dCtxSh.idioma.getCodigo(), driver);
-            PageSelectIdiomaVOTF.clickButtonAceptar(driver);
-        }
-
-        if (PageAlertaVOTF.isPage(driver)) {
-            PageAlertaVOTF.clickButtonContinuar(driver);
-        }
         
     	//Forzamos galería sin React
     	int versionSinReact = 0;
@@ -82,6 +79,15 @@ public class AccesoNavigations {
     	//Foorzamos cabecera desktop sin iconos
     	int versionSinIconos = 0;
     	TestAB.activateTestABcabeceraDesktop(versionSinIconos, dCtxSh.channel, dCtxSh.appE, driver);
+    	
+        if (dCtxSh.pais.getListIdiomas().size() > 1) {
+            PageSelectIdiomaVOTF.selectIdioma(dCtxSh.idioma.getCodigo(), driver);
+            PageSelectIdiomaVOTF.clickButtonAceptar(driver);
+        }
+
+        if (PageAlertaVOTF.isPage(driver)) {
+            PageAlertaVOTF.clickButtonContinuar(driver);
+        }
     }    
     
     public static void cambioPaisFromHomeIfNeeded(DataCtxShop dCtxSh, WebDriver driver) 

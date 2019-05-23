@@ -37,6 +37,7 @@ import com.mng.robotest.test80.mango.test.stpv.votf.PageLoginVOTFStpV;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageSelectIdiomaVOTFStpV;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageSelectLineaVOTFStpV;
 import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
+import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
 
 @SuppressWarnings({"static-access"})
 public class AccesoStpV {
@@ -188,6 +189,15 @@ public class AccesoStpV {
         String urlAcceso = (String)ctx.getAttribute("appPath");
         int numIdiomas = dCtxSh.pais.getListIdiomas().size();
         PageLoginVOTFStpV.goToAndLogin(urlAcceso, dCtxSh, driver);
+        
+    	//Forzamos galería sin React
+    	int versionSinReact = 0;
+    	TestAB.activateTestABgaleriaReact(versionSinReact, dCtxSh.channel, dCtxSh.appE, driver);
+    	
+    	//Foorzamos cabecera desktop sin iconos
+    	int versionSinIconos = 0;
+    	TestAB.activateTestABcabeceraDesktop(versionSinIconos, dCtxSh.channel, dCtxSh.appE, driver);
+    	
         if (numIdiomas > 1) {
             PageSelectIdiomaVOTFStpV.selectIdiomaAndContinue(dCtxSh.idioma, driver);
         }

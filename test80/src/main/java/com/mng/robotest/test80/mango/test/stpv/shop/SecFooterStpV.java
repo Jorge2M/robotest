@@ -43,8 +43,6 @@ public class SecFooterStpV {
     public static void clickLinkFooter(FooterLink typeFooter, boolean closeAtEnd, Channel channel, WebDriver driver) 
     throws Exception { 
     	String windowFatherHandle = SecFooter.clickLinkAndGetWindowFatherHandle(typeFooter, driver);
-                
-        //Validaciones
     	checkPageCorrectAfterSelectLinkFooter(windowFatherHandle, typeFooter, closeAtEnd, channel, driver);
     }
 	 

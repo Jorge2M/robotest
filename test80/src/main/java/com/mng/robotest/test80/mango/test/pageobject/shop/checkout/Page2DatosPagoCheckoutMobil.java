@@ -32,8 +32,11 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     static String XPathRedError = "//div[@class[contains(.,'step-error')]]/p";
     
     static String tagMetodoPago = "@TagMetodoPago";
-    static String XPathBlockTarjetaGuardadaPagoWithTag = "//div[@data-analytics-value='" + tagMetodoPago + "']";
-    static String XPathRadioTrjGuardada = "//div[@clas[contains(.,'saved-card')]//div[@class[contains(.,'radio')]]";
+    static String tagMetodoPagoLowerCase = "@LowerCaseTagMetodoPago";
+    static String XPathBlockTarjetaGuardadaPagoWithTag = "//div[" + 
+    	"@data-analytics-value='" + tagMetodoPago + "' or " + 
+    	"@data-analytics-value='" + tagMetodoPagoLowerCase + "']";
+    static String XPathRadioTrjGuardada = "//div[@data-custom-radio-id[contains(.,'-saved')]]";
     
     static String XPathLinkSolicitarFactura = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
     static String XPathLinkFormasPago = "//div[@class[contains(.,'payment-method')]]//span[@class[contains(.,'others-title')]]"; 
@@ -44,7 +47,9 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     static String XPathSectionsPagosMobil = "//*[@class[contains(.,'group-card-js')]]"; 
     
     static String getXPathBlockTarjetaGuardada(String metodoPago) {
-    	return (XPathBlockTarjetaGuardadaPagoWithTag.replace(tagMetodoPago, metodoPago));
+    	return (XPathBlockTarjetaGuardadaPagoWithTag
+    			.replace(tagMetodoPago, metodoPago)
+    			.replace(tagMetodoPagoLowerCase, metodoPago.toLowerCase()));
     }
     
     static String getXPathRadioTarjetaGuardada(String metodoPago) {
