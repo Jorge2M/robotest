@@ -563,7 +563,12 @@ public class WebdrvWrapp extends ElementPageFunctions {
         JavascriptExecutor js = (JavascriptExecutor)driver;
         js.executeScript("window.open('" + urlToLoad + "', '" + titlePant + "');");
         driver.switchTo().window(titlePant);
-        waitForPageLoaded(driver);
+        try {
+        	waitForPageLoaded(driver);
+        }
+        catch (WebDriverException e) {
+            pLogger.warn("Problem waiting for page loading in another tab", e);        	
+        }
     }
     
     public static void closeTabByTitle(String titleTab, WebDriver driver) {
