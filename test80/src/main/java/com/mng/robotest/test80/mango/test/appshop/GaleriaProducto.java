@@ -8,10 +8,10 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.*;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.data.Color;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -76,7 +76,7 @@ public class GaleriaProducto extends GestorWebDriver {
         dCtxSh.idioma = this.castellano;
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        TestCaseData.storeInThread(dCtxSh); 
+        TestCaseData.storeData(Constantes.idCtxSh, dCtxSh.clone());
         TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
     
@@ -92,7 +92,7 @@ public class GaleriaProducto extends GestorWebDriver {
         description="[Usuario registrado] Acceder a galería camisas. Filtros y ordenación. Seleccionar producto y color")
     public void GPO001_Galeria_Camisas() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;
@@ -145,7 +145,7 @@ public class GaleriaProducto extends GestorWebDriver {
         description="[Usuario no registrado][Chrome] Acceder a galería camisas. Filtro color. Scroll")
     public void GPO004_Navega_Galeria() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
             
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
@@ -188,7 +188,7 @@ public class GaleriaProducto extends GestorWebDriver {
         description="[Usuario registrado] Acceder a galería. Navegación menú lateral de primer y segundo nivel. Selector de precios")
     public void GPO005_Galeria_Menu_Lateral() throws Exception {
     	WebDriver  driver = TestCaseData.getdFTest().driver;
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;
@@ -226,7 +226,7 @@ public class GaleriaProducto extends GestorWebDriver {
     				"finalmente las combinamos con cambios de color")
     public void GPO006_SliderInDesktop() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
     
         //Ini script
@@ -266,7 +266,7 @@ public class GaleriaProducto extends GestorWebDriver {
             description="[Usuario registrado] Acceder a galería camisas. Forzar caso avisame en listado")
     public void GPO007_Galeria_Camisas() throws Exception {
         DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;

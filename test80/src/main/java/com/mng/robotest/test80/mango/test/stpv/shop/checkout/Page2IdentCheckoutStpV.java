@@ -9,7 +9,7 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;

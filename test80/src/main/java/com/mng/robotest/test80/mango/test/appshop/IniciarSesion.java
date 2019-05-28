@@ -45,7 +45,7 @@ public class IniciarSesion extends GestorWebDriver {
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        TestCaseData.storeInThread(dCtxSh);
+        TestCaseData.storeData(Constantes.idCtxSh, dCtxSh.clone());
         TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 
@@ -61,7 +61,7 @@ public class IniciarSesion extends GestorWebDriver {
         description="Verificar inicio sesión con usuario incorrecto")
     public void SES001_IniciarSesion_NOK() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
                     
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
@@ -77,7 +77,7 @@ public class IniciarSesion extends GestorWebDriver {
         description="[Usuario registrado] Verificar inicio sesión")
     public void SES002_IniciarSesion_OK() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;

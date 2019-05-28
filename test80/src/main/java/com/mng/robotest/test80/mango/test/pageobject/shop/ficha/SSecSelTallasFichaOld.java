@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 
 public class SSecSelTallasFichaOld extends WebdrvWrapp {

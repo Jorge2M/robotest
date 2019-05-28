@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay2Mobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay2Mobil.BodyPageKoCardINIpay2;
 

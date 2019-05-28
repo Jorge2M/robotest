@@ -17,10 +17,12 @@ import org.apache.commons.cli.ParseException;
 import com.mng.robotest.test80.arq.listeners.CallBack;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.filter.TestMethod;
+import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Suites;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.xmlprogram.*;
 
@@ -51,7 +53,6 @@ public class Test80mng {
     public static String CallBackUser = "callbackuser";
     public static String CallBackPassword = "callbackpassword";
     
-    public enum TypeAccessFmwk {CommandLine, Online, Bat}
     public enum TypeCallbackSchema {http, https}
     public enum TypeCallBackMethod {POST, GET}
     
@@ -298,7 +299,7 @@ public class Test80mng {
         params.setIdExecutedSuiteIfNotSetted(getIdForSuiteToExecute());
         params.setTypeAccessIfNotSetted(TypeAccessFmwk.Online);
         try {
-            switch (params.getSuite()) {
+            switch ((Suites)params.getSuite()) {
             case SmokeTest:
                 SmokeTestXML smokeTest = new SmokeTestXML();
                 smokeTest.testRunner(params);            
@@ -390,9 +391,9 @@ public class Test80mng {
     }
     
     public static ParamsBean storeParamsFromCommandLine(CommandLine cmdLine) {
-        ParamsBean params = new ParamsBean();
-        params.setSuiteName(cmdLine.getOptionValue(SuiteNameParam));
-        params.setAppE(cmdLine.getOptionValue(AppNameParam));
+    	String app = cmdLine.getOptionValue(AppNameParam);
+    	String suite = cmdLine.getOptionValue(SuiteNameParam);
+        ParamsBean params = new ParamsBean(AppEcom.valueOf(app), Suites.valueOf(suite));
         params.setChannel(cmdLine.getOptionValue(ChannelNameParam));
         params.setBrowser(cmdLine.getOptionValue(BrowserNameParam));
         params.setVersion(cmdLine.getOptionValue(VersionNameParam));
@@ -540,4 +541,5 @@ public class Test80mng {
         
         return (UtilsMangoTest.getListPagoFilterNames(listCodCountrys, channel, appE, isEmpl));
     }
+
 }

@@ -2,10 +2,10 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 @SuppressWarnings({"static-access"})
 public abstract class PageFicha extends WebdrvWrapp {

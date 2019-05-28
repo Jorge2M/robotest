@@ -14,10 +14,11 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.ParamsBean;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.arq.xmlprogram.commonsXML;
 
 
 public class PagosPaisesXML {

@@ -5,13 +5,12 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.test.appshop.TestNodos;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorPage;
 
 public class ListAllNodes {
@@ -22,7 +21,7 @@ public class ListAllNodes {
     public Object[] createInstances(String urlBase, String urlStatus, String urlErrorpage, String appEcomI, String testLinksPie, ITestContext context) 
     throws Exception {
         ArrayList<TestNodos> listTests = new ArrayList<TestNodos>();
-        AppEcom appEcom = AppEcomEnum.getAppEcom(appEcomI);
+        AppEcom appEcom = AppEcom.valueOf(appEcomI);
         try {
             //Calculamos el número de accesos según el canal para obtener los nodos existentes
             int accesos = 0;

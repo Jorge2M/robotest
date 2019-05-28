@@ -4,13 +4,13 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageAyuda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageInputDataSolMangoCard;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;

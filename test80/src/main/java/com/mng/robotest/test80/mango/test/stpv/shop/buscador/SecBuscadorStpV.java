@@ -2,17 +2,16 @@ package com.mng.robotest.test80.mango.test.stpv.shop.buscador;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
-
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock;
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorBusqueda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecBuscadorWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;

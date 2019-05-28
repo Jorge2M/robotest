@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
+import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -199,7 +200,7 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
         dCtxSh.pais = this.paisFactory;
         dCtxSh.idioma = this.idiomaFactory;
         dCtxSh.urlAcceso = urlAcceso;
-        TestCaseData.storeInThread(dCtxSh);
+        TestCaseData.storeData(Constantes.idCtxSh, dCtxSh.clone());
         TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
     }
 	
@@ -215,7 +216,7 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
     	   description="Validaciones específicas correspondientes a la promoción <b>Spring Is Here 2019</b>")
     public void REB001_RebajasSpringIsHere2019() throws Exception {
     	WebDriver  driver = TestCaseData.getdFTest().driver;
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         int numLineasPais = dCtxSh.pais.getShoponline().getNumLineasTiendas(dCtxSh.appE);
             
         PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);

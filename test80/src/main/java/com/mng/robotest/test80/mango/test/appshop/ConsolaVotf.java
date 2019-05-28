@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.stpv.votfcons.ConsolaVotfStpV;
 
 public class ConsolaVotf extends GestorWebDriver {

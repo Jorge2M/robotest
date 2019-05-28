@@ -1,9 +1,10 @@
 package org.pruebasws.utils;
 
 import java.util.Set;
-import java.util.ArrayList;
 
-import com.mng.robotest.test80.ParamsBean;
+import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+
+import java.util.ArrayList;
 
 @SuppressWarnings("javadoc")
 public class TSuiteThreadsManager {

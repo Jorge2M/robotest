@@ -6,8 +6,8 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.LineasArticuloBolsa.DataArtBolsa;

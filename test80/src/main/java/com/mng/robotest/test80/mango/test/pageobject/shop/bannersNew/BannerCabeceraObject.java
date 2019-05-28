@@ -4,8 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 public class BannerCabeceraObject extends BannerObject {
 

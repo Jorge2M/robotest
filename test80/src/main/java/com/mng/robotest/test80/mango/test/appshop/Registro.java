@@ -14,16 +14,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.mng.robotest.test80.Test80mng.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
+import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.DataMango;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -104,7 +104,7 @@ public class Registro extends GestorWebDriver {
         }        
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        TestCaseData.storeInThread(dCtxSh);
+        TestCaseData.storeData(Constantes.idCtxSh, dCtxSh.clone());
         TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
     }
 
@@ -121,7 +121,7 @@ public class Registro extends GestorWebDriver {
         description="Registro con errores en la introducción de los datos")
     public void REG001_RegistroNOK() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
         if (dCtxSh.appE==AppEcom.votf) {
             return;
@@ -177,7 +177,7 @@ public class Registro extends GestorWebDriver {
         }
         
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
             
         //En caso de ejecución desde .bat no ejecutaremos el Registro 
@@ -248,7 +248,7 @@ public class Registro extends GestorWebDriver {
     public void REG003_RegistroOK_NoPubli() throws Exception {
     	boolean clickPubli = false;
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
             
         //En caso de ejecución desde .bat no ejecutaremos el Registro 

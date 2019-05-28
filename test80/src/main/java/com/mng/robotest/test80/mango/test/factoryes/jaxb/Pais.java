@@ -3,14 +3,11 @@ package com.mng.robotest.test80.mango.test.factoryes.jaxb;
 import java.net.URI;
 import java.sql.Timestamp;
 import java.util.*;
-
 import javax.xml.bind.annotation.*;
 
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
-import com.mng.robotest.test80.arq.utils.otras.LevelPais;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
-
+import com.mng.robotest.test80.mango.test.utils.LevelPais;
 
 @XmlRootElement
 public class Pais {

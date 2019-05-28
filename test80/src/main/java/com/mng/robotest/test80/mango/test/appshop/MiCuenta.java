@@ -1,6 +1,5 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,9 +11,10 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -85,7 +85,7 @@ public class MiCuenta extends GestorWebDriver {
         }
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        TestCaseData.storeInThread(dCtxSh);
+        TestCaseData.storeData(Constantes.idCtxSh, dCtxSh.clone());
         TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
     }
 
@@ -104,7 +104,7 @@ public class MiCuenta extends GestorWebDriver {
     public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion) 
     throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userConnected = userConDevolucionPeroNoEnPRO;
         dCtxSh.passwordUser = passwordUserConDevolucion;
             
@@ -143,7 +143,7 @@ public class MiCuenta extends GestorWebDriver {
     @Parameters({"userConComprasPeroSoloOnlineEnPRO", "passwordUserConCompras"})
     public void MIC002_CheckConsultaMisCompras(String userConCompras, String passwordUserConCompras) throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userConnected = userConCompras;
         dCtxSh.passwordUser = passwordUserConCompras;
         dCtxSh.userRegistered = true;
@@ -155,7 +155,7 @@ public class MiCuenta extends GestorWebDriver {
         PageMisComprasStpV.selectBlock(TypeCompra.Online, true/*ordersExpected*/, dFTest.driver);
         int posicionCompra = 1;
         PageMisComprasStpV.selectCompraOnline(posicionCompra, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, dFTest.driver);
-        if (dCtxSh.channel == ChannelEnum.Channel.desktop) {
+        if (dCtxSh.channel == Channel.desktop) {
 	        PageMisComprasStpV.clickMoreInfo(dFTest.driver);
 	        ModalDetalleMisComprasStpV.clickBuscarTiendaButton(dFTest.driver);
 	        ModalDetalleMisComprasStpV.clickCloseModalBuscadorTiendas(dFTest.driver);

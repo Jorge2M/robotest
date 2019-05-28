@@ -2,8 +2,9 @@ package org.pruebasws.jdbc.to;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 
 /**
  * Bean associated to TESTS_SUITES

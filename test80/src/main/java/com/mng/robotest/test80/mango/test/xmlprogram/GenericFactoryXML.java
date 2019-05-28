@@ -14,9 +14,11 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.ParamsBean;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-
+import com.mng.robotest.test80.arq.jdbc.to.Suite;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.arq.xmlprogram.commonsXML;
+import com.mng.robotest.test80.mango.test.data.Suites;
 
 public class GenericFactoryXML {
 
@@ -59,7 +61,7 @@ public class GenericFactoryXML {
         
         //En caso <> browserstack paralelizaremos a nivel de los métodos (casos de prueba)
         suite.setParallel(ParallelMode.METHODS);
-        switch (params.getSuite()) {
+        switch ((Suites)params.getSuite()) {
         case ListFavoritos: 
         	suite.setThreadCount(1);
         default:

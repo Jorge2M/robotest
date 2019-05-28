@@ -3,19 +3,16 @@ package com.mng.robotest.test80.mango.test.factoryes;
 import java.util.*;
 import org.testng.annotations.*;
 
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.appshop.PaisIdioma;
 import com.mng.robotest.test80.mango.test.appshop.PaisIdiomaCambioPais;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
-
 
 public class ListAllCountrys {
 	
@@ -28,8 +25,8 @@ public class ListAllCountrys {
         ArrayList<PaisIdioma> listTests = new ArrayList<>();
         try {
             //Parseo de los parámetros de entrada
-            AppEcom appE = AppEcomEnum.getAppEcom(appEStr);
-            Channel channel = ChannelEnum.getChannel(channelStr);
+            AppEcom appE = AppEcom.valueOf(appEStr);
+            Channel channel = Channel.valueOf(channelStr);
             
             boolean recorreMenus=false;
             if (RecorreMenus.compareTo("true")==0) {

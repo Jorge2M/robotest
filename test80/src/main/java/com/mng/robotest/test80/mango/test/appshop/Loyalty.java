@@ -18,8 +18,9 @@ import org.testng.annotations.Test;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
@@ -66,7 +67,7 @@ public class Loyalty extends GestorWebDriver {
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        TestCaseData.storeInThread(dCtxSh);
+        TestCaseData.storeData(Constantes.idCtxSh, dCtxSh.clone());
         TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 
@@ -89,7 +90,7 @@ public class Loyalty extends GestorWebDriver {
         description="Se realiza una compra mediante un usuario loyalty con Likes")
     public void LOY001_Compra_LikesStored() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         
         //Obtenemos el usuario/password de acceso
         dCtxSh.userConnected = userWithLoyaltyPoints;
@@ -140,7 +141,7 @@ public class Loyalty extends GestorWebDriver {
         description="Exchange entrada de cine mediante 1200 Likes")
     public void LOY002_Exhange_Donacion_Likes() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         
         dCtxSh.userConnected = userWithLoyaltyPoints;
         dCtxSh.passwordUser = passwUserWithLoyaltyPoints;
@@ -168,7 +169,7 @@ public class Loyalty extends GestorWebDriver {
         description="Exchange mediante donación de Likes")
     public void LOY003_Exhange_Compra_Entrada() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         
         dCtxSh.userConnected = userWithLoyaltyPoints;
         dCtxSh.passwordUser = passwUserWithLoyaltyPoints;

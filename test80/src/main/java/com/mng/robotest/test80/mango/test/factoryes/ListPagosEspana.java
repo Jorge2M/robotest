@@ -5,11 +5,9 @@ import java.util.*;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.appshop.CompraFact;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 
@@ -36,8 +34,8 @@ public class ListPagosEspana {
     public Object[] COM010_PagoFactory(String appStr, String channelStr, ITestContext ctx) throws Exception {
     	this.ctx = ctx;
         ArrayList<Object> listTests = new ArrayList<>();
-        AppEcom appE = AppEcomEnum.getAppEcom(appStr);
-        Channel channel = ChannelEnum.getChannel(channelStr);
+        AppEcom appE = AppEcom.valueOf(appStr);
+        Channel channel = Channel.valueOf(channelStr);
         try {
         	getDataCountrys();
         	if (appE!=AppEcom.votf) {

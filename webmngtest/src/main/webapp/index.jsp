@@ -16,9 +16,11 @@ response.setDateHeader ("Expires", -1);
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.TreeSet"%>
 <%@ page import="com.mng.robotest.test80.Test80mng"%>
-<%@ page import="com.mng.robotest.test80.ParamsBean" %>
+<%@ page import="com.mng.robotest.test80.arq.xmlprogram.ParamsBean" %>
 <%@ page import="com.mng.robotest.test80.arq.utils.filter.TestMethod"%>
 <%@ page import="com.mng.robotest.test80.arq.utils.filter.FilterTNGxmlTRun"%>
+<%@ page import="com.mng.robotest.test80.mango.test.data.AppEcom" %>
+<%@ page import="com.mng.robotest.test80.mango.test.data.Suites" %>
 
 <!-- Bootstrap styles -->
 <link rel="stylesheet"
@@ -352,11 +354,11 @@ function updateData(suite, channel, dataToChange, newBrowser) {
 	
 <%!
 public static ParamsBean getParamsFromSuiteToGetTCases(SuiteTestData suiteTest) {
-    ParamsBean paramsTSuite = new ParamsBean();
-    paramsTSuite.setSuiteName(suiteTest.getSuite());
+	String app = suiteTest.getApplicationActual();
+	String suite = suiteTest.getSuite();
+    ParamsBean paramsTSuite = new ParamsBean(AppEcom.valueOf(app), Suites.valueOf(suite));
     paramsTSuite.setChannel(suiteTest.getChannel());
     paramsTSuite.setBrowser(suiteTest.getIdBrowser());
-    paramsTSuite.setAppE(suiteTest.getApplicationActual());
     paramsTSuite.setVersion(suiteTest.getVersionActual());
 
     return paramsTSuite;

@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard;
 
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

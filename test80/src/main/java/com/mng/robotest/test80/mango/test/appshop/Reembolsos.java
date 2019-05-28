@@ -80,7 +80,7 @@ public class Reembolsos extends GestorWebDriver {
         dCtxSh.idioma = this.arabia_arabe;
         
         //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        TestCaseData.storeInThread(dCtxSh);
+        TestCaseData.storeData(Constantes.idCtxSh, dCtxSh.clone());
         TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 
@@ -103,7 +103,7 @@ public class Reembolsos extends GestorWebDriver {
         description="Configura el reembolso vía transferencia y saldo en cuenta para un país/idioma determinado")
     public void REE001_configureReembolso() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
 	    
         //Este test sólo aplica al entornos no productivos
         if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest.driver)) {
@@ -146,7 +146,7 @@ public class Reembolsos extends GestorWebDriver {
         description="Se realiza un Checkout utilizando Saldo en Cuenta. Se accede a la configuración al inicio y al final para comprobar que el saldo en cuenta se resta correctamente")
     public void REE002_checkoutWithSaldoCta() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         
         //Este test sólo aplica al entornos no productivos
         if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest.driver)) {

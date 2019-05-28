@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 
 

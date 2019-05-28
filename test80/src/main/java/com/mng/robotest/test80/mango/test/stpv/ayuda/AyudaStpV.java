@@ -4,9 +4,9 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.ayuda.PageAyuda;
 import com.mng.robotest.test80.mango.test.pageobject.ayuda.PageAyuda.StateApartado;
 

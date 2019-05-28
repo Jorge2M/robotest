@@ -4,7 +4,7 @@ import java.util.Random;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 public class TestABGoogleOptimize implements TestAB {
 	

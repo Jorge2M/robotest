@@ -2,11 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageReembolsos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageReembolsos.TypeReembolso;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMiCuenta;

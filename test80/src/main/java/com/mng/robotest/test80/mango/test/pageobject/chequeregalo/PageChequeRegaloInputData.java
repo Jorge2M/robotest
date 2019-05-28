@@ -3,10 +3,10 @@ package com.mng.robotest.test80.mango.test.pageobject.chequeregalo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
-import com.mng.robotest.test80.mango.test.pageobject.ElementPage;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPage;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.PageFromFooter;
 
 public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFooter {

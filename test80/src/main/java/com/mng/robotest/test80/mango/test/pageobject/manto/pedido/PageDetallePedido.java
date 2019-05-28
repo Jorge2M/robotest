@@ -11,8 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
-import com.mng.robotest.test80.mango.test.pageobject.ElementPage;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPage;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 
 public class PageDetallePedido extends WebdrvWrapp {

@@ -2,10 +2,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancredit
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.mango.test.pageobject.ElementPage;
-import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPage;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions;
 
 public class PageKoCardINIpay2Mobil extends ElementPageFunctions {
+	
     public enum BodyPageKoCardINIpay2 implements ElementPage {
         inputEmail("//input[@type='email' and @name='email']"),
     	nextButton("//span[@id='cardNext2Btn']");

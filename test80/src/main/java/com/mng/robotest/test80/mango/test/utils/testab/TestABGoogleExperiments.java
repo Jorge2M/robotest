@@ -8,7 +8,7 @@ import java.util.Random;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 
 public class TestABGoogleExperiments implements TestAB {
     

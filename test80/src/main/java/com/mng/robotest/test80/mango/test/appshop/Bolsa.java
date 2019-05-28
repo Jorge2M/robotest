@@ -5,12 +5,12 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
+import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -29,12 +29,9 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.shop.GaleriaNavigatio
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.galeria.ModalArticleNotAvailableStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 
 import org.openqa.selenium.WebDriver;
-
 
 public class Bolsa extends GestorWebDriver {
 
@@ -65,7 +62,7 @@ public class Bolsa extends GestorWebDriver {
         dCtxSh.pais = this.españa;
         dCtxSh.idioma = this.castellano;
         
-        TestCaseData.storeInThread(dCtxSh);
+        TestCaseData.storeData(Constantes.idCtxSh, dCtxSh.clone());
         TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
     
@@ -81,7 +78,7 @@ public class Bolsa extends GestorWebDriver {
         description="[Usuario no registrado] Añadir artículo a la bolsa")
     public void BOR001_AddBolsaFromGaleria_NoReg() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
         
         AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest.driver);
@@ -109,7 +106,7 @@ public class Bolsa extends GestorWebDriver {
         description="[Usuario no registrado] Añadir y eliminar artículos de la bolsa")
     public void BOR005_Gest_Prod_Bolsa_Noreg() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
         BOR005_6_Gest_Prod_Bolsa(dCtxSh, dFTest);
     }
@@ -119,7 +116,7 @@ public class Bolsa extends GestorWebDriver {
         description="[Usuario registrado] Añadir artículo a la bolsa")
     public void BOR002_AnyadirBolsa_yCompra_SiReg() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;
@@ -151,7 +148,7 @@ public class Bolsa extends GestorWebDriver {
         description="[Usuario registrado] Añadir y eliminar artículos de la bolsa")
     public void BOR006_Gest_Prod_Bolsa_Sireg() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;

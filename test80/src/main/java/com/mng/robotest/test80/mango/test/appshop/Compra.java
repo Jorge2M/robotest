@@ -4,15 +4,13 @@ import org.testng.ITestContext;
 import java.lang.reflect.Method;
 import org.testng.annotations.*;
 
-import com.mng.robotest.test80.Test80mng.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.*;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.*;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -100,7 +98,7 @@ public class Compra extends GestorWebDriver {
         dCtxSh.idioma=this.castellano;
         dCtxSh.urlAcceso = urlAcceso;
         
-        TestCaseData.storeInThread(dCtxSh);
+        TestCaseData.storeData(Constantes.idCtxSh, dCtxSh.clone());
         TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
     }
 	
@@ -116,7 +114,7 @@ public class Compra extends GestorWebDriver {
         description="[Usuario registrado][Tarjeta guardada] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
     public void COM001_Compra_TrjSaved_Empl() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
 //        UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
 //        dCtxSh.userConnected = userShop.user;
 //        dCtxSh.passwordUser = userShop.password;
@@ -161,7 +159,7 @@ public class Compra extends GestorWebDriver {
         description="[Usuario registrado] Consulta datos cheque existente y posterior compra Cheque regalo")
     public void COM004_Cheque_Regalo_UsrReg_emailExist() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;        
@@ -225,7 +223,7 @@ public class Compra extends GestorWebDriver {
         description="[Usuario no registrado] Compra con cambio datos en dirección de envío en checkout")
     public void COM003_Compra_y_CambioPais_Noreg_emailExist() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
             
         //Indicamos la lista de países hacia los que queremos cambiar/verificar en la página de precompra 
@@ -258,7 +256,7 @@ public class Compra extends GestorWebDriver {
         description="[Usuario no registrado] Pre-compra. Cierre/Inicio sesión correcto")
     public void COM005_Compra_noReg_emailNoExist() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
 	    
         //No permitiremos la ejecución diaria de este tipo de checkout porque implica la ejecución de un registro de usuario con el nuevo email introducido 
@@ -310,7 +308,7 @@ public class Compra extends GestorWebDriver {
         description="description=[Usuario no registrado] Test en VOTF compra desde tienda Francia")
     public void COM006_Compra_Francia_Tienda() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.pais=this.francia;
         dCtxSh.idioma=this.frances;   
         dCtxSh.userRegistered = false;
@@ -340,7 +338,7 @@ public class Compra extends GestorWebDriver {
     //    description="description=[Usuario sin conectar] Alta pago con Codensa (Colombia) y posterior cambios de estado mediante API")
     public void COM008_Compra_ColombiaCodensa() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.pais=this.colombia;
         dCtxSh.idioma=this.castellanoColomb;   
         dCtxSh.userRegistered = false;

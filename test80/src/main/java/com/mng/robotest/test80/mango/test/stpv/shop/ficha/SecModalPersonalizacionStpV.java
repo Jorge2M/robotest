@@ -4,11 +4,11 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
-import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions.StateElem;
+import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion.ModalElement;

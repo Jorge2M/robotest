@@ -1,7 +1,8 @@
 package com.mng.robotest.test80.mango.test.data;
 
+import com.mng.robotest.test80.arq.utils.conf.SuiteTest;
 
-public enum Suites {
+public enum Suites implements SuiteTest {
     SmokeTest(8),
     SmokeManto(8),
     PagosPaises(10), 
@@ -24,7 +25,13 @@ public enum Suites {
         this.maxSecondsToWaitStart = maxSecondsToWaitStart;
     }
     
+    @Override
     public int getMaxSecondsToWaitStart() {
         return this.maxSecondsToWaitStart;
+    }
+    
+    @Override
+    public Suites getValueOf(String suiteName) {
+    	return this.valueOf(suiteName);
     }
 }

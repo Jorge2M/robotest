@@ -7,11 +7,10 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
-import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques.ButtonsCheque;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques.TablaCheque;
-
 
 public class PageGestorChequesStpV {
 

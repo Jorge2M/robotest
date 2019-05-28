@@ -2,10 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraTienda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompras;

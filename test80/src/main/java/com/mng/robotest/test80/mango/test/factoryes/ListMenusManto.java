@@ -5,12 +5,11 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.test.appmanto.Menus;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageMenusManto;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageLoginMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageSelTdaMantoStpV;
@@ -26,7 +25,7 @@ public class ListMenusManto {
     throws Exception {
     	int prioridad=0;
         ArrayList<Menus> listTests = new ArrayList<Menus>();
-        AppEcom appEcom = AppEcomEnum.getAppEcom(appEcomI);
+        AppEcom appEcom = AppEcom.valueOf(appEcomI);
         try {
             //Obtenemos la lista de Menús
             ArrayList<String> listCabeceraMenus = getListCabecerasMenus(urlBaseManto, context);

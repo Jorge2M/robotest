@@ -3,8 +3,8 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 /**
  * Section of Page Ficha that contains the button bolsa and the links below (Favoritos, Detalle del producto, Disponibilidad en tienda, Envio y devoluciones y Compartir)

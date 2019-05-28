@@ -26,12 +26,13 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest.TypeEvidencia;
+import com.mng.robotest.test80.arq.utils.otras.ResultadoErrores;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-import com.mng.robotest.test80.mango.test.generic.ResultadoErrores;
 import com.mng.robotest.test80.mango.test.generic.stackTrace;
 
 public class WebDriverMngUtils {
+	
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
     /**

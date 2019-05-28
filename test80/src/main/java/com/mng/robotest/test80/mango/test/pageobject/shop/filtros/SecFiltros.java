@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.data.Color;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 
 public interface SecFiltros {
 	

@@ -3,11 +3,11 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.identificacion;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
+import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;

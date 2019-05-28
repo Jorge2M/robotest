@@ -14,14 +14,15 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.ParamsBean;
 import com.mng.robotest.test80.arq.utils.filter.FilterTNGxmlTRun;
 import com.mng.robotest.test80.arq.utils.filter.TestMethod;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.BStackDataDesktop;
 import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.arq.xmlprogram.commonsXML;
 
 public class SmokeTestXML {
 

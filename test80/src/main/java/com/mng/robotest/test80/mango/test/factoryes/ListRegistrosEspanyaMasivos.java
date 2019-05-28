@@ -2,13 +2,9 @@ package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
 import org.testng.annotations.*;
-
 import com.mng.robotest.test80.mango.test.appshop.Registro;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 import org.testng.ITestContext;
-
 
 public class ListRegistrosEspanyaMasivos {
     @SuppressWarnings("unused")
@@ -16,7 +12,7 @@ public class ListRegistrosEspanyaMasivos {
     @Parameters({"AppEcom", "countrys", "lineas"})
     public Object[] createInstances(String appEStr, String listaPaisesStr, String lineas, ITestContext context) throws Exception {
         ArrayList<Object> listTests = new ArrayList<>();
-        AppEcom appE = AppEcomEnum.getAppEcom(appEStr);
+        AppEcom appE = AppEcom.valueOf(appEStr);
         try {
         	for (int i=0; i<100; i++) {
 	            listTests.add(new Registro(i));

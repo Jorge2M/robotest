@@ -1,12 +1,12 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.sofort;
 
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sofort.PageSofort1rst;
 
 /**

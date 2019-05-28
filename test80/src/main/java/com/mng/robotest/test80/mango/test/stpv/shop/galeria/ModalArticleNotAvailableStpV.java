@@ -4,8 +4,8 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.ModalArticleNotAvailable;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.ModalArticleNotAvailable.StateModal;
 import org.openqa.selenium.WebDriver;
@@ -13,16 +13,16 @@ import org.openqa.selenium.WebDriver;
 public class ModalArticleNotAvailableStpV {
 
     WebDriver driver = null;
-    ChannelEnum.Channel channel = null;
-    AppEcomEnum.AppEcom app = null;
+    Channel channel = null;
+    AppEcom app = null;
 
-    private ModalArticleNotAvailableStpV(ChannelEnum.Channel channel, AppEcomEnum.AppEcom app, WebDriver driver) throws Exception {
+    private ModalArticleNotAvailableStpV(Channel channel, AppEcom app, WebDriver driver) throws Exception {
         this.driver = driver;
         this.channel = channel;
         this.app = app;
     }
 
-    public static ModalArticleNotAvailableStpV getInstance(ChannelEnum.Channel channel, AppEcomEnum.AppEcom app, WebDriver driver) throws Exception {
+    public static ModalArticleNotAvailableStpV getInstance(Channel channel, AppEcom app, WebDriver driver) throws Exception {
         return (new ModalArticleNotAvailableStpV(channel, app, driver));
     }
 

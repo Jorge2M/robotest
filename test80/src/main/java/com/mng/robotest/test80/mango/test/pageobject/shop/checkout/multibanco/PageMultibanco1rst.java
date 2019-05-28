@@ -3,8 +3,8 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.multibanco;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 
 public class PageMultibanco1rst extends WebdrvWrapp {

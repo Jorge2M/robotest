@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.TreeSet;
 
 import com.mng.robotest.test80.Test80mng;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
+
 import org.pruebasws.jdbc.Connector;
 import org.pruebasws.jdbc.to.ApplicationSuite;
 import org.pruebasws.jdbc.to.BrowserSuite;
@@ -248,8 +249,11 @@ public class TestsDAO {
     
     public static TreeSet<String> getListPagos(String codCountrysCommaSeparated, Channel channel, AppEcom appE) 
     throws Exception {
-        if ("".compareTo(codCountrysCommaSeparated)==0 || "*".compareTo(codCountrysCommaSeparated)==0 || "X".compareTo(codCountrysCommaSeparated)==0)
+        if ("".compareTo(codCountrysCommaSeparated)==0 || 
+        	"*".compareTo(codCountrysCommaSeparated)==0 || 
+        	"X".compareTo(codCountrysCommaSeparated)==0) {
             return (Test80mng.getListPagoFilterNames(channel, appE, false/*isEmpl*/));
+        }
             
         return (Test80mng.getListPagoFilterNames(codCountrysCommaSeparated, channel, appE, false/*isEmpl*/));        
     }

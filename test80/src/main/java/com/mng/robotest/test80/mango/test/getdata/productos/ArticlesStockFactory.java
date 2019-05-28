@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.getdata.productos;
 
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.test.data.AppEcom;
 
 public class ArticlesStockFactory {
 
