@@ -104,6 +104,12 @@
 		        <verbose>true</verbose>
 		        <Xlint>ignore</Xlint>
 		        <encoding>UTF-8 </encoding>
+				<aspectLibraries>
+		            <aspectLibrary>
+						<groupId>com.mng</groupId>
+		                <artifactId>robocore</artifactId>
+		            </aspectLibrary>
+		        </aspectLibraries>
 		    </configuration>
 		    <executions>
 		    	<!-- Problema Eclipse Kepler Version -->
