@@ -37,7 +37,6 @@ import com.mng.robotest.test80.mango.test.stpv.votf.PageLoginVOTFStpV;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageSelectIdiomaVOTFStpV;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageSelectLineaVOTFStpV;
 import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
-import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
 
 @SuppressWarnings({"static-access"})
 public class AccesoStpV {
@@ -189,7 +188,6 @@ public class AccesoStpV {
         String urlAcceso = (String)ctx.getAttribute("appPath");
         int numIdiomas = dCtxSh.pais.getListIdiomas().size();
         PageLoginVOTFStpV.goToAndLogin(urlAcceso, dCtxSh, driver);
-        activateTestsABs(dCtxSh, driver);
         if (numIdiomas > 1) {
             PageSelectIdiomaVOTFStpV.selectIdiomaAndContinue(dCtxSh.idioma, driver);
         }
@@ -203,11 +201,7 @@ public class AccesoStpV {
         AllPagesStpV.validacionesEstandar(flagsVal, driver);
         PageSelectLineaVOTFStpV.selectMenuAndLogoMango(1, dCtxSh, driver);
     }
-    
-    private static void activateTestsABs(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	TestAB.currentTestABsToActivate(dCtxSh, driver);
-    	driver.navigate().refresh();
-    }
+
     
     final static String tagNombrePaisOrigen = "@TagPaisOrigen";
     final static String tagCodigoPaisOrigen = "@TagCodigoPaisOrigen";

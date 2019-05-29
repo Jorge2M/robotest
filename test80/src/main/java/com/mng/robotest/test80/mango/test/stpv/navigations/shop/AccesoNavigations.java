@@ -61,7 +61,7 @@ public class AccesoNavigations {
      */
     public static void accesoVOTF(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        PageLoginVOTF.goToFromUrlAndSetTestABs(dCtxSh.urlAcceso, driver);
+        PageLoginVOTF.goToFromUrlAndSetTestABs(dCtxSh.urlAcceso, dCtxSh, driver);
         PageLoginVOTF.inputUsuario(dCtxSh.pais.getAccesoVOTF().getUsuario(), driver);
         PageLoginVOTF.inputPassword(dCtxSh.pais.getAccesoVOTF().getPassword(), driver);
         PageLoginVOTF.clickButtonContinue(driver);
