@@ -7,7 +7,7 @@
     <artifactId>mangotest</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <artifactId>robotest</artifactId>
+  <artifactId>robocore</artifactId>
   <packaging>jar</packaging>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -65,4 +65,69 @@
 	    <scope>test</scope>
 	</dependency>
   </dependencies>
+  
+  <build>
+    <plugins>
+		<plugin>
+			<!-- Define Aspectj Nature -->
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-eclipse-plugin</artifactId>
+		    <configuration>
+		      <additionalProjectnatures>
+		        <projectnature>org.eclipse.ajdt.ui.ajnature</projectnature>
+		      </additionalProjectnatures>
+		      <additionalBuildcommands>
+		        <buildcommand>org.eclipse.ajdt.core.ajbuilder</buildcommand>
+		      </additionalBuildcommands>
+		    </configuration>
+		</plugin>  	
+       	<plugin>
+			<groupId>org.codehaus.mojo</groupId>
+		    <artifactId>aspectj-maven-plugin</artifactId>
+		    <version>1.7</version>
+		    <configuration>
+		        <complianceLevel>1.8</complianceLevel>
+		        <source>1.8</source>
+		        <target>1.8</target>
+		        <showWeaveInfo>true</showWeaveInfo>
+		        <verbose>true</verbose>
+		        <Xlint>ignore</Xlint>
+		        <encoding>UTF-8 </encoding>
+		    </configuration>
+		</plugin> 		
+	</plugins>
+	
+	<!-- </pluginManagement>-->
+	<pluginManagement>
+		<plugins>
+			<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+			<plugin>
+				<groupId>org.eclipse.m2e</groupId>
+				<artifactId>lifecycle-mapping</artifactId>
+				<version>1.0.0</version>
+				<configuration>
+					<lifecycleMappingMetadata>
+						<pluginExecutions>
+							<pluginExecution>
+								<pluginExecutionFilter>
+									<groupId>org.codehaus.mojo</groupId>
+									<artifactId>
+										aspectj-maven-plugin
+									</artifactId>
+									<versionRange>[1.7,)</versionRange>
+									<goals>
+										<goal>compile</goal>
+									</goals>
+								</pluginExecutionFilter>
+								<action>
+									<ignore></ignore>
+								</action>
+							</pluginExecution>
+						</pluginExecutions>
+					</lifecycleMappingMetadata>
+				</configuration>
+			</plugin>
+		</plugins>
+	</pluginManagement>  
+  </build>
 </project>

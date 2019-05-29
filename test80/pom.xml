@@ -10,7 +10,7 @@
   <dependencies>
   	  	<dependency>
 			<groupId>com.mng</groupId>
-			<artifactId>robotest</artifactId>
+			<artifactId>robocore</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 	  	</dependency>
 

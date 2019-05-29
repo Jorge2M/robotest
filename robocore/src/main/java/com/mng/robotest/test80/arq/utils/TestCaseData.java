@@ -96,5 +96,4 @@ public class TestCaseData {
 		DataFmwkTest dFTest = new DataFmwkTest(driver, TypeWebDriver.valueOf(bpath), method, context);
 		storeInThread(dFTest);
     }
-
 }
