@@ -1,11 +1,13 @@
-/.project
 target/
+target/**/*.txt
+/.project
 *.class
 *.jar
 *.war
 *.ear
 *.logs
 *.iml
+*.lst
 .idea/
 .eclipse
 /.classpath
