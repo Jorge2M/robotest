@@ -110,6 +110,12 @@
 		                <artifactId>testmaker</artifactId>
 		            </aspectLibrary>
 		        </aspectLibraries>
+				<weaveDependencies>
+		            <weaveDependency>
+						<groupId>com.mng</groupId>
+		                <artifactId>testmaker</artifactId>
+		            </weaveDependency>
+		          </weaveDependencies>
 		    </configuration>
 		    <executions>
 		    	<!-- Problema Eclipse Kepler Version -->
