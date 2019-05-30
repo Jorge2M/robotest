@@ -1,6 +1,13 @@
 /.project
 target/
+*.class
+*.jar
+*.war
+*.ear
+*.logs
+*.iml
+.idea/
+.eclipse
 /.classpath
 .idea/
 *.iml
-*.class
