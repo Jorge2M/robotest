@@ -16,8 +16,7 @@ import org.testng.xml.XmlSuite.ParallelMode;
 import com.mng.robotest.test80.arq.utils.filter.FilterTNGxmlTRun;
 import com.mng.robotest.test80.arq.utils.filter.TestMethod;
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
-import com.mng.robotest.test80.arq.xmlprogram.commonsXML;
-
+import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
 
 public class SmokeMantoXML {
 
@@ -54,7 +53,7 @@ public class SmokeMantoXML {
         //suite.setName("TestMovilWeb");
         suite.setFileName("tng_Funcionales_Movil.xml");
         suite.setName(paramsI.getSuiteName());
-        suite.setListeners(commonsXML.createStandardListeners());
+        suite.setListeners(CommonsXML.createStandardListeners());
 
         //Creamos los parámetros comunes y los asociamos a la suite
         Map<String, String> parametersSuite = new HashMap<>();
@@ -66,18 +65,18 @@ public class SmokeMantoXML {
         suite.setThreadCount(3);
         
         //Sólo ejecutamos 1 TestRun
-        createTestRunFilteredWithTestCases(suite, commonsXML.getDescriptionTestRun(this.params), this.params.getListaTestCases());
+        createTestRunFilteredWithTestCases(suite, CommonsXML.getDescriptionTestRun(this.params), this.params.getListaTestCases());
         
         return suite;
     }
     
     //Creación de los parámetros comunes a nivel de la Suite
     private void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean paramsI) {
-        commonsXML.setCommonsParamsSuite(parametersSuite, paramsI);
+    	CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, paramsI);
     }
     
     public XmlTest createTestRunFilteredWithTestCases(XmlSuite suite, String testRunName, String[] testCaseList) {
-        XmlTest testRun = commonsXML.createTestRun(suite, testRunName, testCaseList);
+        XmlTest testRun = CommonsXML.createTestRun(suite, testRunName, testCaseList);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());
         FilterTNGxmlTRun.filterWithTCasesToExec(testRun, testCaseList, this.params.getChannel(), this.params.getAppE());
@@ -92,7 +91,7 @@ public class SmokeMantoXML {
     
     private XmlRun createRun() {
         XmlRun run = new XmlRun();
-        for (String group : commonsXML.getListOfPossibleGroups(this.params.getChannel(), this.params.getAppE()))
+        for (String group : CommonsXML.getListOfPossibleGroups(this.params.getChannel(), this.params.getAppE()))
             run.onInclude(group);
         
         return run;

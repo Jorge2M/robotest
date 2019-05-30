@@ -23,7 +23,7 @@ import com.mng.robotest.test80.arq.utils.XmlTestP80;
 import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.xmlprogram.commonsXML;
+import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
 
 public class FilterTNGxmlTRun {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
@@ -55,7 +55,7 @@ public class FilterTNGxmlTRun {
         ArrayList<TestMethod> listTests = getListOfTestAnnotationsOfTCases(testRun);
         
         //Filter by possible groups based in channel and app
-        ArrayList<String> listOfPossibleGroups = commonsXML.getListOfPossibleGroups(channel, appE);
+        ArrayList<String> listOfPossibleGroups = CommonsXML.getListOfPossibleGroups(channel, appE);
         for (TestMethod tmethod : listTests) {
             if (groupsContainsAnyGroup(tmethod.getAnnotationTest().groups(), listOfPossibleGroups)) {
                 listTestToReturn.add(tmethod);

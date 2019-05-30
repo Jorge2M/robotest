@@ -14,10 +14,9 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.arq.jdbc.to.Suite;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
-import com.mng.robotest.test80.arq.xmlprogram.commonsXML;
+import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
 import com.mng.robotest.test80.mango.test.data.Suites;
 
 public class GenericFactoryXML {
@@ -52,7 +51,7 @@ public class GenericFactoryXML {
         //suite.setName("TestMovilWeb");
         suite.setFileName("tng_PagosPaises.xml");
         suite.setName(params.getSuiteName());
-        suite.setListeners(commonsXML.createStandardListeners());
+        suite.setListeners(CommonsXML.createStandardListeners());
 
         //Creamos los parámetros comunes y los asociamos a la suite
         Map<String, String> parametersSuite = new HashMap<>();
@@ -77,7 +76,7 @@ public class GenericFactoryXML {
     //Creación de los parámetros comunes a nivel de la Suite
     private void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean params) {
         //Establecemos los parámetros genéricos (válidos para todos los casos de prueba)
-        commonsXML.setCommonsParamsSuite(parametersSuite, params);
+    	CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, params);
 
         //Parámetros que especifican el tipo de canal
         if (params.getChannel()==Channel.movil_web) {
@@ -95,7 +94,7 @@ public class GenericFactoryXML {
     }
     
     public XmlTest joinSuiteWithTestRunLocal(XmlSuite suite, String testRunName) {
-        XmlTest testRun = commonsXML.createTestRun(suite, testRunName);
+        XmlTest testRun = CommonsXML.createTestRun(suite, testRunName);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());     
         return testRun;

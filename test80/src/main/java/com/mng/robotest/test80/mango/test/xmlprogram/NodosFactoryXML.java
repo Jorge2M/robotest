@@ -15,8 +15,7 @@ import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
-import com.mng.robotest.test80.arq.xmlprogram.commonsXML;
-
+import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
 
 public class NodosFactoryXML {
 
@@ -47,10 +46,10 @@ public class NodosFactoryXML {
         //suite.setName("TestMovilWeb");
         suite.setFileName("tng_Nodes.xml");
         suite.setName(params.getSuiteName());
-        suite.setListeners(commonsXML.createStandardListeners());
+        suite.setListeners(CommonsXML.createStandardListeners());
         
         //Componemos la descripción del TestRun
-        String testRunDescription = commonsXML.getDescriptionTestRun(params);
+        String testRunDescription = CommonsXML.getDescriptionTestRun(params);
         
         //Creamos los parámetros comunes y los asociamos a la suite
         Map<String, String> parametersSuite = new HashMap<>();
@@ -71,8 +70,7 @@ public class NodosFactoryXML {
      * Creación de los parámetros comunes a nivel de la Suite
      */
     private void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean params) throws Exception {
-        //Establecemos los parámetros genéricos (válidos para todos los casos de prueba)
-        commonsXML.setCommonsParamsSuite(parametersSuite, params);
+    	CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, params);
         
         //URL (en un futuro esto quizás podría llegar en el args)
         parametersSuite.put("url-status", createURLfromBase(params.getURLBase(), "/controles/status"));
@@ -88,7 +86,7 @@ public class NodosFactoryXML {
     }
     
     public XmlTest joinSuiteWithTestRunLocal(XmlSuite suite, String testRunName) {
-        XmlTest testRun = commonsXML.createTestRun(suite, testRunName);
+        XmlTest testRun = CommonsXML.createTestRun(suite, testRunName);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());     
         return testRun;

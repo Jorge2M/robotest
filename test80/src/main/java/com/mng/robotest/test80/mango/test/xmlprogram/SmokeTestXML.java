@@ -22,7 +22,7 @@ import com.mng.robotest.test80.arq.utils.webdriver.BStackDataDesktop;
 import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
-import com.mng.robotest.test80.arq.xmlprogram.commonsXML;
+import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
 
 public class SmokeTestXML {
 
@@ -59,7 +59,7 @@ public class SmokeTestXML {
         //suite.setName("TestMovilWeb");
         suite.setFileName("tng_Funcionales_Movil.xml");
         suite.setName(paramsI.getSuiteName());
-        suite.setListeners(commonsXML.createStandardListeners());
+        suite.setListeners(CommonsXML.createStandardListeners());
 
         //Creamos los parámetros comunes y los asociamos a la suite
         Map<String, String> parametersSuite = new HashMap<>();
@@ -71,12 +71,12 @@ public class SmokeTestXML {
             suite.setParallel(ParallelMode.TESTS);
             suite.setThreadCount(Constantes.BSTACK_PARALLEL);
             if (paramsI.getChannel()==Channel.movil_web) {
-                joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, commonsXML.bsMovilAndroid);
-                joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, commonsXML.bsMovilIOS);            
+                joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, CommonMangoDataForXML.bsMovilAndroid);
+                joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, CommonMangoDataForXML.bsMovilIOS);            
             } else {
                 //joinSuiteWithTestRunDesktopBStack(TypeDriver.browserstack, suite, commonsXML.bsDktopWin10Explorer);
-                joinSuiteWithTestRunDesktopBStack(TypeWebDriver.browserstack, suite, commonsXML.bsDktopOSXSafari);
-                joinSuiteWithTestRunDesktopBStack(TypeWebDriver.browserstack, suite, commonsXML.bsDktopWin8Firefox);
+                joinSuiteWithTestRunDesktopBStack(TypeWebDriver.browserstack, suite, CommonMangoDataForXML.bsDktopOSXSafari);
+                joinSuiteWithTestRunDesktopBStack(TypeWebDriver.browserstack, suite, CommonMangoDataForXML.bsDktopWin8Firefox);
             }
         } else {
             //En caso <> BrowserStack paralelizaremos a nivel de los Métodos (casos de prueba)
@@ -84,19 +84,18 @@ public class SmokeTestXML {
             suite.setThreadCount(3);
             
             //Sólo ejecutamos 1 TestRun
-            createTestRunFilteredWithTestCases(suite, commonsXML.getDescriptionTestRun(this.params), this.params.getListaTestCases());
+            createTestRunFilteredWithTestCases(suite, CommonsXML.getDescriptionTestRun(this.params), this.params.getListaTestCases());
         }
         
         return suite;
     }
     
-    //Creación de los parámetros comunes a nivel de la Suite
     private void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean paramsI) {
-        commonsXML.setCommonsParamsSuite(parametersSuite, paramsI);
+    	CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, paramsI);
     }
     
     private XmlTest joinSuiteWithTestRunMobilBStack(TypeWebDriver webdriverType, XmlSuite suite, BStackDataMovil bsMovil) {
-        XmlTest testRun = commonsXML.joinSuiteWithTestRunMobilBStack(webdriverType, suite, bsMovil);
+        XmlTest testRun = CommonsXML.joinSuiteWithTestRunMobilBStack(webdriverType, suite, bsMovil);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());
         if (this.params.getListaTestCases()!=null) {
@@ -106,7 +105,7 @@ public class SmokeTestXML {
     }
     
     private XmlTest joinSuiteWithTestRunDesktopBStack(TypeWebDriver webdriverType, XmlSuite suite, BStackDataDesktop bsDesktop) {
-        XmlTest testRun = commonsXML.joinSuiteWithTestRunDesktopBStack(webdriverType, suite, bsDesktop);
+        XmlTest testRun = CommonsXML.joinSuiteWithTestRunDesktopBStack(webdriverType, suite, bsDesktop);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());
         if (this.params.getListaTestCases()!=null) {
@@ -116,7 +115,7 @@ public class SmokeTestXML {
     }    
     
     private XmlTest createTestRunFilteredWithTestCases(XmlSuite suite, String testRunName, String[] testCaseList) {
-        XmlTest testRun = commonsXML.createTestRun(suite, testRunName, testCaseList);
+        XmlTest testRun = CommonsXML.createTestRun(suite, testRunName, testCaseList);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());
         FilterTNGxmlTRun.filterWithTCasesToExec(testRun, testCaseList, this.params.getChannel(), this.params.getAppE());
@@ -132,7 +131,7 @@ public class SmokeTestXML {
     
     private XmlRun createRun() {
         XmlRun run = new XmlRun();
-        for (String group : commonsXML.getListOfPossibleGroups(this.params.getChannel(), this.params.getAppE()))
+        for (String group : CommonsXML.getListOfPossibleGroups(this.params.getChannel(), this.params.getAppE()))
             run.onInclude(group);
         
         return run;

@@ -13,7 +13,7 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
-import com.mng.robotest.test80.arq.xmlprogram.commonsXML;
+import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
 
 import org.testng.xml.XmlTest;
 
@@ -55,7 +55,7 @@ public class TestNGxmlStub {
     }
     
     public XmlTest joinSuiteWithTestRunLocal(XmlSuite suite, String testRunName) {
-        XmlTest testRun = commonsXML.createTestRun(suite, testRunName);
+        XmlTest testRun = CommonsXML.createTestRun(suite, testRunName);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());     
         return testRun;
@@ -70,7 +70,7 @@ public class TestNGxmlStub {
     
     private XmlRun createRun() {
         XmlRun run = new XmlRun();
-        for (String group : commonsXML.getListOfPossibleGroups(this.params.getChannel(), this.params.getAppE()))
+        for (String group : CommonsXML.getListOfPossibleGroups(this.params.getChannel(), this.params.getAppE()))
             run.onInclude(group);
             
         return run;
