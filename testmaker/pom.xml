@@ -4,10 +4,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.mng</groupId>
-    <artifactId>mangotest</artifactId>
+    <artifactId>robotest</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <artifactId>robocore</artifactId>
+  <artifactId>testmaker</artifactId>
   <packaging>jar</packaging>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
