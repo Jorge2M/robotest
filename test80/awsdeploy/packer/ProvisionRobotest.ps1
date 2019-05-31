@@ -25,8 +25,8 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope LocalMachine
 # Install chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-# Install Chrome (version may match the chromedriver version in that file and in robotest)
-chocolatey install googlechrome --version 74.0.3729.6 -y --ignore-checksums
+# Install Chrome 
+chocolatey install googlechrome --version 74.0.3729.169 -y --ignore-checksums
 
 # Install Firefox
 chocolatey install firefox -y --version 67.0
