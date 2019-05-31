@@ -30,11 +30,7 @@ public class CorreoReport {
      */
     public static void main(String[] args) throws Exception { 
         String serverDNS = args[0];
-        
-        //Construimos el HTML con la lista de tests ejecutados
         String html = construirHTMLmail(serverDNS);
-
-        //Enviamos un correo con el listado de suites
         sendMailResult(html);
     }
 	
