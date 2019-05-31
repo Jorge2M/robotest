@@ -25,16 +25,17 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope LocalMachine
 # Install chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-# Install Browsers
-chocolatey install googlechrome -y --ignore-checksums
-chocolatey install firefox -y --version 65.0
+# Install Chrome (version may match the chromedriver version in that file and in robotest)
+chocolatey install googlechrome --version 74.0.3729.6 -y --ignore-checksums
 
-# Install ChromeDriver v73.0.3683 in a path accesible for webdrivermagnaer. 
+# Install Firefox
+chocolatey install firefox -y --version 67.0
+
+# Install ChromeDriver in a path accesible for webdrivermanager
 # This step is made for avoid the initial problems when is the webdrivermanager who download the chromedriver (specially in parallel browser-runs) 
-# Warning! the default version 2.38 that is downloaded will be modified in the future
 chocolatey feature enable -n allowGlobalConfirmation
-choco install selenium-chrome-driver
-$destination = 'C:\Windows\System32\config\systemprofile\.m2\repository\webdriver\chromedriver\win32\73.0.3683.20\chromedriver.exe'
+choco install selenium-chrome-driver -version 74.0.3729.6
+$destination = 'C:\Windows\System32\config\systemprofile\.m2\repository\webdriver\chromedriver\win32\74.0.3729.169\chromedriver.exe'
 New-Item -ItemType File -Path $destination -Force
 Copy-Item -Force -Path 'C:\tools\selenium\chromedriver.exe' -Destination $destination 
 
