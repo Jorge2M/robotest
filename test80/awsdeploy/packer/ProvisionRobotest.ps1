@@ -58,10 +58,13 @@ chocolatey install tomcat --version 9.0.20 --force
 refreshenv
 
 #Move file tomcat-users.xml that gives roles to tomcat user
+#Get-Location = C:\Users\Administrator
+#CATALINA_HOME = C:\ProgramData\chocolatey\lib\Tomcat\tools\apache-tomcat-9.0.20\
+#CATALINA_BASE = C:\ProgramData\Tomcat9
 $currentScriptDirectory = Get-Location
 $fileTomcatUsersOrigin = $currentScriptDirectory.tostring() + '\tomcat-users.xml'
-$catalinaHome = Get-EnvironmentVariable -Name 'CATALINA_HOME' -Scope User
-$fileTomcatUsersDestination = $catalinaHome + '\conf\tomcat-users.xml'
+$catalinaBase = Get-EnvironmentVariable -Name 'CATALINA_BASE' -Scope User
+$fileTomcatUsersDestination = $catalinaBase + '\conf\tomcat-users.xml'
 Copy-Item -Force -Path $fileTomcatUsersOrigin -Destination $fileTomcatUsersDestination
 
 # Install Tools AWS for Windows (https://aws.amazon.com/es/powershell/)

@@ -4235,7 +4235,7 @@
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesovotf usuario="tda01347" password="mng01347"/>
+<accesovotf usuario="tda01220" password="mng01220"/>
 </pais>
 
 <pais nombre_pais="Georgia" codigo="076">
@@ -4896,7 +4896,7 @@
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
-<accesovotf usuario="fra09113" password="mng09113"/>
+<accesovotf usuario="fra08894" password="mng08894"/>
 </pais>
 
 <pais nombre_pais="Maldives" codigo="667">
