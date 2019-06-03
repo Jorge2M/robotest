@@ -1,12 +1,17 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.footer;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 public class PageTrabajaConNosotros extends WebdrvWrapp implements PageFromFooter {
 	
+    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    
 	final String XPathIdFrame = "//iframe[@id='bodyFrame']";
 	final String XPathForIdPage = "//section[@id='all-jobs-link-section']";
 	
@@ -17,7 +22,17 @@ public class PageTrabajaConNosotros extends WebdrvWrapp implements PageFromFoote
 	
 	@Override
 	public boolean isPageCorrectUntil(int maxSecondsWait, WebDriver driver) {
-		driver.switchTo().frame(driver.findElement(By.xpath(XPathIdFrame)));
-		return (isElementPresentUntil(driver, By.xpath(XPathForIdPage), maxSecondsWait));
+		try {
+			boolean isFramePresent = isElementPresentUntil(driver, By.xpath(XPathIdFrame), maxSecondsWait);
+			if (isFramePresent) {
+				driver.switchTo().frame(driver.findElement(By.xpath(XPathIdFrame)));
+				return (isElementPresentUntil(driver, By.xpath(XPathForIdPage), maxSecondsWait));
+			}
+			return false;
+		}
+		catch (Exception e) {
+			pLogger.warn("Problem in switch to bodyFrame", e);
+			return false;
+		}
 	}
 }

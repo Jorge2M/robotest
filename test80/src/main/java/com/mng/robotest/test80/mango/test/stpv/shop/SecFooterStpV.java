@@ -30,7 +30,7 @@ public class SecFooterStpV {
     	validations.add(
     		"Aparecen los siguientes links en el footer <b>" + listFooterLinksToValidate + "</b>",
     		SecFooter.checkFooters(listFooterLinksToValidate, app, driver), State.Defect);
-    	return validations;      
+    	return validations;
     }
 
     /**
@@ -57,7 +57,7 @@ public class SecFooterStpV {
 		try {
 	    	validations.add(
 	    		"Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + maxSecondsWait + " segundos)",
-	    		pageObject.isPageCorrectUntil(maxSecondsWait, driver), State.Warn);		
+	    		pageObject.isPageCorrectUntil(maxSecondsWait, driver), State.Warn);
 		    if (typeFooter.pageInNewTab()) {
 		    	validations.add(
 	        		"Aparece la página en una ventana aparte",

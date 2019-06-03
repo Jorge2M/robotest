@@ -105,8 +105,11 @@ public class GaleriaProducto extends GestorWebDriver {
         
         List<Color> colorsToFilter = new ArrayList<>();
         colorsToFilter.add(Color.Blanco);
-        colorsToFilter.add(Color.Azul);
-        SecFiltrosStpV.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, true/*validaciones*/, "Camisas", colorsToFilter, dFTest.driver);
+        //En outlet/movil_web tenemos el antiguo filtro que sólo permite seleccionar un color
+        if (!(dCtxSh.appE==AppEcom.outlet && dCtxSh.channel==Channel.movil_web)) {
+        	colorsToFilter.add(Color.Azul);
+        }
+        SecFiltrosStpV.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, true, "Camisas", colorsToFilter, dFTest.driver);
 
         //Pruebas a nivel del cambio de galería de 2<->4 columnas
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
@@ -154,7 +157,10 @@ public class GaleriaProducto extends GestorWebDriver {
                         
         List<Color> colorsToFilter = new ArrayList<>();
         colorsToFilter.add(Color.Blanco);
-        colorsToFilter.add(Color.Negro);
+        //En outlet/movil_web tenemos el antiguo filtro que sólo permite seleccionar un color
+        if (!(dCtxSh.appE!=AppEcom.outlet && dCtxSh.channel==Channel.movil_web)) {
+        	colorsToFilter.add(Color.Negro);
+        }
         SecFiltrosStpV.selectFiltroColoresStep(dCtxSh.appE, dCtxSh.channel, false/*validaciones*/, "Camisas", colorsToFilter, dFTest.driver);
             
         //Scrollar hasta la 3a página

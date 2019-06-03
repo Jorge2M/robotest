@@ -53,7 +53,7 @@ public class SecFiltrosStpV {
 	
 	@Validation
 	private static ChecksResult checkAfterSelectFiltroColores(List<Color> colorsSelected, String litMenu, 
-																	  int numArticulos1page, WebDriver driver) {
+															  int numArticulos1page, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsToWait = 1;
         List<String> listCodColors = Color.getListCodigosColor(colorsSelected);
