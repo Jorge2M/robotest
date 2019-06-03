@@ -86,7 +86,7 @@ resource "aws_instance" "robotest" {
 	#ami           = "ami-fbd0e782"
 	#ami 		   = "ami-0864fcc37d7ff3d44"
 	#ami 		   = "ami-05ccb518d13cc79b3"
-	ami 		   = "ami-0f3fb83cf4ff07a68"
+	ami 		   = "ami-0813e9ea782e93578"
 	instance_type = "t2.medium"
 	
 	tags {

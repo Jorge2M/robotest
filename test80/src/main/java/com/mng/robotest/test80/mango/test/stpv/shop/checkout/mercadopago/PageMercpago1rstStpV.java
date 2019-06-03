@@ -20,8 +20,6 @@ public class PageMercpago1rstStpV {
         expected="Aparece la página de identificación")
     public static void clickLinkRegistration(WebDriver driver) throws Exception {
         PageMercpago1rst.clickLinkRegistro(driver);
-        
-        //Validaciones
         PageMercpagoLoginStpV.validateIsPage(driver);
     }
 }
