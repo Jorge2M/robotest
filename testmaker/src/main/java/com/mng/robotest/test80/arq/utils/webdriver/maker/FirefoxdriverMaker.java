@@ -83,7 +83,7 @@ public class FirefoxdriverMaker implements WebdriverMaker {
 	}
 	    
     private static void setDriverFirefox() {        
-        FirefoxDriverManager.getInstance().version(GeckoDriverVersion).setup();
+        FirefoxDriverManager.firefoxdriver().version(GeckoDriverVersion).setup();
     }
 	
 	private void activateLogs() {

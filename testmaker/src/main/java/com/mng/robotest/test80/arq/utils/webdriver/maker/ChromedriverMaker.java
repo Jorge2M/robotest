@@ -77,7 +77,7 @@ public class ChromedriverMaker implements WebdriverMaker {
 	}
 
     private void setDriverChrome() {       
-        ChromeDriverManager.getInstance().version(ChromeDriverVersion).setup();
+        ChromeDriverManager.chromedriver().version(ChromeDriverVersion).setup();
     }
 	
 	private boolean isDesktopInVirtualMachine() {

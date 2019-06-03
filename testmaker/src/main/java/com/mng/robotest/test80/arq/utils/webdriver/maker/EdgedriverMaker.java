@@ -43,6 +43,6 @@ public class EdgedriverMaker implements WebdriverMaker {
 	}
     
     private static void setDriverEdge() {        
-        EdgeDriverManager.getInstance().version(EdgeDriverVersion).setup();
+        EdgeDriverManager.edgedriver().version(EdgeDriverVersion).setup();
     }
 }
