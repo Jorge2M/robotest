@@ -52,7 +52,9 @@ Copy-Item -Force -Path 'C:\tools\selenium\geckodriver.exe' -Destination $destina
 #chocolatey uninstall tomcat
 
 #Install tomcat
-chocolatey install tomcat --version 9.0.20 --force -params "servicename=Tomcat9"
+#chocolatey install tomcat --version 9.0.20 --force -params "servicename=Tomcat9"
+chocolatey install jdk8
+chocolatey install tomcat --version 9.0.20 --force
 refreshenv
 
 #Move file tomcat-users.xml that gives roles to tomcat user
