@@ -1,6 +1,6 @@
 package com.mng.robotest.test80;
 
-import com.mng.robotest.test80.mango.test.data.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock;
 
 public class TestNewServiceJSON {

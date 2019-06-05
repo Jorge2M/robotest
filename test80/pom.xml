@@ -104,12 +104,14 @@
 		        <verbose>true</verbose>
 		        <Xlint>ignore</Xlint>
 		        <encoding>UTF-8 </encoding>
+		        <!-- 
 				<aspectLibraries>
 		            <aspectLibrary>
 						<groupId>com.mng</groupId>
 		                <artifactId>testmaker</artifactId>
 		            </aspectLibrary>
 		        </aspectLibraries>
+		        -->
 				<weaveDependencies>
 		            <weaveDependency>
 						<groupId>com.mng</groupId>

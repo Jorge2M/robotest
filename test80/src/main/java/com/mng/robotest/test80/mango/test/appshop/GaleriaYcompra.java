@@ -16,6 +16,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -70,8 +71,7 @@ public class GaleriaYcompra extends GestorWebDriver {
             this.castellano = this.españa.getListIdiomas().get(0);
         }
         
-        TestCaseData.storeData(Constantes.idCtxSh, dCtxSh.clone());
-        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
+        Utils.storeDataShopForTestMaker(bpath, this.index_fact, dCtxSh, context, method);
     }
 	
     @SuppressWarnings("unused")

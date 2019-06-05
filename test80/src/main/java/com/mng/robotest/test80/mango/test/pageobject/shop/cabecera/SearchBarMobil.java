@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.cabecera;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.mango.test.data.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil.Icono;
 
 public interface SearchBarMobil {

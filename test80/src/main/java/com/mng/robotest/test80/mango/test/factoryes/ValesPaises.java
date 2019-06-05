@@ -4,10 +4,10 @@ import java.util.*;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.PaisAplicaVale;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ValesData;
-import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.data.ValesData.Campanya;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
@@ -29,19 +29,14 @@ public class ValesPaises {
             filterCal = true;
         }
         
-        if (!filterCal ||
-        	currDtCal.getTimeInMillis() > Campanya.GLAM19.getFechaInit().getTimeInMillis()) {
-        	this.listaPaisesVales.addAll(ValesData.getListVales(Campanya.GLAM19, filterCal));
+        for (Campanya campanya : Campanya.values()) {
+        	if (!filterCal || currDtCal.getTimeInMillis() > Campanya.MNGVIP.getFechaInit().getTimeInMillis()) {
+        		List<ValePais> listaVales = ValesData.getListVales(campanya, filterCal);
+        		if (listaVales!=null) {
+        			this.listaPaisesVales.addAll(ValesData.getListVales(campanya, filterCal));
+        		}
+        	}
         }
-//        if (!filterCal ||
-//        	currDtCal.getTimeInMillis() > Campanya.VIP18.getFechaInit().getTimeInMillis()) {
-//        	this.listaPaisesVales.addAll(ValesData.getListVales(Campanya.VIP18, filterCal));
-//        }
-//        
-//        if (!filterCal ||
-//            currDtCal.getTimeInMillis() > Campanya.VIPMNG.getFechaInit().getTimeInMillis()) {
-//        	this.listaPaisesVales.addAll(ValesData.getListVales(Campanya.VIPMNG, filterCal));
-//        }
 
         ArrayList<PaisAplicaVale> listTests = new ArrayList<>();
                 

@@ -21,8 +21,8 @@ import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
-import com.mng.robotest.test80.mango.test.data.AppEcom;
-import com.mng.robotest.test80.mango.test.data.Suites;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.Suites;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.xmlprogram.*;
 

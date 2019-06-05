@@ -29,7 +29,7 @@ public class SecFiltrosMantoStpV {
     	    "- Tienda: <b>" + tagLitTienda + "</b><br>" +
     	    "- País: <b>#{dataPedido.getNombrePais()}</b> (#{dataPedido.getCodigoPais()})",
     	expected="La búsqueda es correcta",
-    	saveErrorPage=SaveWhen.Never)
+    	saveErrorData=SaveWhen.Never)
     public static void setFiltrosHoyYbuscar(DataPedido dataPedido, @SuppressWarnings("unused") TypeSearch typeSearch, WebDriver driver) 
     throws Exception {
     	DatosStep datosStep = TestCaseData.getDatosCurrentStep();

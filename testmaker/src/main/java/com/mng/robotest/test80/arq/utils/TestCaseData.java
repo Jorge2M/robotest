@@ -10,6 +10,7 @@ import java.util.Queue;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
+import com.mng.robotest.test80.arq.utils.conf.StorerErrorDataStepValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
@@ -89,11 +90,13 @@ public class TestCaseData {
     	maxDatosStep.set(datosStep);
     }
     
-    public static void getAndStoreDataFmwk(String bpath, String appPath, String datosFactoria, Channel channel, ITestContext context, Method method) 
+    public static void getAndStoreDataFmwk(String bpath, String appPath, String datosFactoria, Channel channel, 
+    									   StorerErrorDataStepValidation storerDataError, ITestContext context, Method method) 
     throws Exception {
     	GestorWebDriver gestorWdrv = new GestorWebDriver();
 		WebDriver driver = gestorWdrv.getWebDriver(bpath, appPath, datosFactoria, channel, context, method);
 		DataFmwkTest dFTest = new DataFmwkTest(driver, TypeWebDriver.valueOf(bpath), method, context);
+		dFTest.setStorerDataError(storerDataError);
 		storeInThread(dFTest);
     }
 }

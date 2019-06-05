@@ -28,7 +28,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 	@Step (
 		description="Buscamos productos por la familia <b>Accesorios</b>",
 		expected="Muestra la tabla con productos que corresponden con esta familia",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
 	public static void selectAccesoriosAndClickConsultaPorFamiliaButton(WebDriver driver) throws Exception {
 		PageGestorConsultaCambioFamilia.selectAccesoriosAndClickConsultaPorFamiliaButton(driver);
 		checkAfterSearchProductXfamilia(driver);
@@ -49,7 +49,7 @@ public class PageGestorConsultaCambioFamiliaStpV {
 	@Step (
 		description="Damos click al botón <b>Cambio Familia</b>",
 		expected="Muestra la página que permite gestionar los cambios de familia",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
 	public static void clickCambioFamiliaButton(WebDriver driver) throws Exception {
 		PageGestorConsultaCambioFamilia.clickCambioFamiliaButton(driver);
 		checkAfeterClickCambioFamilia(driver);

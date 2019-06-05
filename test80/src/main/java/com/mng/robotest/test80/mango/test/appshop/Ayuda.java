@@ -4,6 +4,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -51,10 +52,7 @@ public class Ayuda extends GestorWebDriver {
 
         dCtxSh.pais = this.españa;
         dCtxSh.idioma = this.castellano;
-
-        //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        TestCaseData.storeData(Constantes.idCtxSh, dCtxSh.clone());
-        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
     }
 
 //    @Test(

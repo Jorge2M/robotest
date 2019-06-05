@@ -19,7 +19,6 @@ import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.apache.logging.log4j.status.StatusLogger;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -152,26 +151,8 @@ public class fmwkTest {
                         }
                         byte[] screenshot = ((TakesScreenshot)captureDriver).getScreenshotAs(OutputType.BYTES);
                         screnshootsMap.get(datosStep).add(screenshot);
-                        System.out.println("ROBOTEST2: LAZY REPORT SCREENSHOT REDIRECT");
-                        
-//                         //Capture errorPage.faces
-//                         String currentURL = dFTest.driver.getCurrentUrl();
-//                         URI uri = new URI(currentURL);
-//                         if (datosStep.getSaveErrorPage().IfProblemSave() &&
-//                             (((String)dFTest.ctx.getAttribute("appPath")).contains(uri.getHost()) || uri.getHost().contains("mango.com")) &&
-//                             datosStep.getResultSteps()!=State.Ok) {
-//                             String windowHandle = WebDriverMngUtils.loadErrorPage(dFTest.driver);
-//                             try {
-//                                 byte[] errorFaces=dFTest.driver.getPageSource().getBytes();
-//                                 htmlsourcesMap.get(datosStep).add(errorFaces);                                                              
-//                             } finally {
-//                                 JavascriptExecutor js = (JavascriptExecutor) dFTest.driver;
-//                                 js.executeScript("window.close('" + Thread.currentThread().getName() + "');");
-//                                 dFTest.driver.switchTo().window(windowHandle);
-//                             }
-//
-//                         }    
-                         System.out.println("ROBOTEST2: LAZY REPORT ERROR.FACES REDIRECT");
+                        System.out.println("ROBOTEST2: LAZY REPORT SCREENSHOT REDIRECT");  
+                        System.out.println("ROBOTEST2: LAZY REPORT ERROR.FACES REDIRECT");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -249,8 +230,9 @@ public class fmwkTest {
     
     private static void storeErrorPageIfNeeded(boolean browserGUI, DatosStep datosStep, DataFmwkTest dFTest) {
     	try {
-		    if (isStoreError(browserGUI, datosStep, dFTest)) {
-		        //WebDriverMngUtils.capturaErrorPage(dFTest, datosStep.getStepNumber());
+		    if (isStoreError(browserGUI, datosStep, dFTest) &&
+		    	dFTest.storerDataError!=null) {
+		        dFTest.storerDataError.store(dFTest, datosStep);
 	        } 
     	}
 	    catch (Exception e) {

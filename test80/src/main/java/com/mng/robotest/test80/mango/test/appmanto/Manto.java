@@ -14,8 +14,8 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
-import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.mango.test.data.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -34,7 +34,6 @@ import com.mng.robotest.test80.mango.test.stpv.manto.PageSelTdaMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.SecFiltrosMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.SecFiltrosMantoStpV.TypeSearch;
 import com.mng.robotest.test80.mango.test.stpv.manto.pedido.PagePedidosMantoStpV;
-
 
 public class Manto extends GestorWebDriver {
 
@@ -56,7 +55,7 @@ public class Manto extends GestorWebDriver {
 		this.dMantoAcc.userManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramUsrmanto);
 		this.dMantoAcc.passManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramPasmanto);
 		this.dMantoAcc.appE = AppEcom.shop;
-		TestCaseData.getAndStoreDataFmwk(bpath, urlBase, "", Channel.desktop, ctx, method);
+        Utils.storeDataMantoForTestMaker(bpath, "", dMantoAcc, ctx, method);
 	}
 
 	@SuppressWarnings("unused")

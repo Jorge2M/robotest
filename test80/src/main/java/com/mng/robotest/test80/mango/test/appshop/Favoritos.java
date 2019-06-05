@@ -9,6 +9,7 @@ import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
@@ -89,8 +90,7 @@ public class Favoritos extends GestorWebDriver {
             dCtxSh.idioma = this.idiomaFactory;
         }
         
-        TestCaseData.storeData(Constantes.idCtxSh, dCtxSh.clone());
-        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
+        Utils.storeDataShopForTestMaker(bpath, this.index_fact, dCtxSh, context, method);
     }
 
     @SuppressWarnings("unused")

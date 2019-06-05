@@ -8,8 +8,8 @@ import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
@@ -256,10 +256,8 @@ public class PageFichaArtStpV {
      * @return si el artículo seleccionado tenía talla única
      */
     public boolean selectAnadirALaBolsaTallaPrevNoSelected() throws Exception {
-        //Step
     	selectAnadirALaBolsaStep();
         
-        //Validations
         boolean isTallaUnica = pageFicha.isTallaUnica();
         TypeFicha typeFichaAct = pageFicha.getTypeFicha();
         checkAvisoTallaUnica(isTallaUnica, typeFichaAct);
@@ -298,7 +296,6 @@ public class PageFichaArtStpV {
      */
     public void selectAnadirALaBolsaTallaPrevSiSelected(ArticuloScreen articulo, DataCtxShop dCtxSh) 
     throws Exception {
-        //Step, Validation
         selectAnadirALaBolsaStep();
         DataBag dataBag = new DataBag();
         dataBag.addArticulo(articulo);
@@ -317,8 +314,6 @@ public class PageFichaArtStpV {
         pageFicha.selectAnadirAFavoritosButton();
         ArticuloScreen articulo = pageFicha.getArticuloObject();
         dataFavoritos.addArticulo(articulo);            
-
-        //Validaciones
         checkCapaAltaFavoritos();
         validateVisibleButtonFavoritos(ActionFavButton.Remove);
     }

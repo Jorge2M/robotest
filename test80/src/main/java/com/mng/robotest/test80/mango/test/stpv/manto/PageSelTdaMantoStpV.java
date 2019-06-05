@@ -6,7 +6,7 @@ import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
-import com.mng.robotest.test80.mango.test.data.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.TiendaMantoEnum.TiendaManto;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageSelTda;
 import com.mng.robotest.test80.mango.test.pageobject.manto.SecCabecera;
@@ -24,7 +24,7 @@ public class PageSelTdaMantoStpV {
 	@Step (
 		description="Seleccionamos el entorno \"" + TagTienda + "\"", 
         expected="Aparece la página de Menús",
-        saveErrorPage=SaveWhen.Never)
+        saveErrorData=SaveWhen.Never)
     public static void selectTienda(String codigoAlmacen, String codigoPais, AppEcom appE, WebDriver driver) 
     throws Exception {
         TiendaManto tienda = TiendaManto.getTienda(codigoAlmacen, codigoPais, appE);

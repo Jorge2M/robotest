@@ -10,8 +10,8 @@ import org.apache.logging.log4j.Logger;
 
 import com.mng.robotest.test80.arq.utils.ManageConnectionHTTP;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticlesStockFactory.SourceArticles;
 
 import java.util.concurrent.CopyOnWriteArrayList;

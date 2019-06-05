@@ -12,6 +12,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -58,9 +59,7 @@ public class Buscador extends GestorWebDriver {
         
         dCtxSh.pais = this.españa;
         dCtxSh.idioma = this.castellano;
-        
-        TestCaseData.storeData(Constantes.idCtxSh, dCtxSh.clone());
-        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
     }
 
     @SuppressWarnings("unused")

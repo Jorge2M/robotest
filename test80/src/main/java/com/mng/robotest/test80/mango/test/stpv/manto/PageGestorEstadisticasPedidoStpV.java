@@ -31,7 +31,7 @@ public class PageGestorEstadisticasPedidoStpV {
 	@Step (
 		description="Seleccionamos \"Todos los zalandos\" y damos click a \"Mostrar Pedidos\"",
 		expected="Muestra la tabla de información correctamente",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
 	public static void searchZalandoOrdersInformation(WebDriver driver) throws Exception {
 		PageGestorEstadisticasPedido.selectZalandoAndClickShowOrdersButton(driver);
 		checkAfterSelectMostrarPedidosZalandos(driver);
@@ -55,7 +55,7 @@ public class PageGestorEstadisticasPedidoStpV {
 	@Step (
 		description="Seleccionamos el radio \"Día Anterior\" y damos click a \"Comparar\"",
 		expected="Se muestran las celdas rojas y verdes con valores correctos",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
 	public static void compareLastDayInformation(WebDriver driver) throws Exception {
 		PageGestorEstadisticasPedido.selectDiaAnteriorAndClickCompararButton(driver);
 		checkAfterCompararDias(driver);

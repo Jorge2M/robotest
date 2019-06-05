@@ -12,9 +12,10 @@ import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.*;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.appshop.campanas.CampanasData;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.TypeContentDesk;
@@ -104,8 +105,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
             this.recorreBanners = false;
         }
 
-        TestCaseData.storeData(Constantes.idCtxSh, dCtxSh.clone());
-        TestCaseData.getAndStoreDataFmwk(bpath, this.dCtxSh.urlAcceso, this.index_fact, this.dCtxSh.channel, context, method);
+        Utils.storeDataShopForTestMaker(bpath, index_fact, dCtxSh, context, method);
     }
 	
     @SuppressWarnings("unused")

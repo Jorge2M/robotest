@@ -14,9 +14,9 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 public class ValesData {
 	
 	public enum Campanya {
-		GLAM19("01/04/2019 00:00"),
-		VIP18("10/12/2018 00:00"),
-		VIPMNG("10/12/2018 00:00"),
+		MNGVIP("01/06/2019 00:00"),
+		IMVIP("01/06/2019 00:00"),
+		VIP19("01/06/2019 00:00"),
 		Test("01/01/2000 00:00");
 		
 		Calendar fechaInit;
@@ -34,8 +34,12 @@ public class ValesData {
 	
 	public static List<ValePais> getListVales(Campanya campanya, boolean filterCal) throws Exception {
 		switch (campanya) {
-		case GLAM19:
-			return getValesGLAM19(campanya, filterCal);
+		case MNGVIP:
+			return getMNGVIP2019(campanya, filterCal);
+		case IMVIP:
+			return getIMVIP2019(campanya, filterCal); 
+		case VIP19:
+			return getVIP19(campanya, filterCal);
 //		case VIP18:
 //			return getValesVIP18(campanya, filterCal);
 //		case VIPMNG:
@@ -45,13 +49,30 @@ public class ValesData {
 		}
 	}
 	
-	public static List<ValePais> getValesGLAM19(Campanya campanya, boolean filterCal) throws Exception {
+	public static List<ValePais> getMNGVIP2019(Campanya campanya, boolean filterCal) throws Exception {
 		List<ValePais> listaPaisesVales = new ArrayList<>();
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Deutschland, 20, "05/04/2019 22:00", "15/04/2019 00:00", filterCal, Arrays.asList("43067768"), Arrays.asList("41093010")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Nederland,   20, "05/04/2019 22:00", "07/04/2019 00:00", filterCal, Arrays.asList("43067768"), Arrays.asList("41093010")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Hungary,     20, "10/04/2019 21:00", "15/04/2019 00:00", filterCal, Arrays.asList("43067768"), Arrays.asList("41093010")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Austria,     20, "04/04/2019 00:00", "05/04/2019 00:00", filterCal, Arrays.asList("43067768"), Arrays.asList("41093010")), listaPaisesVales);
-	    addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Russia,      20, "27/04/2019 23:00", "12/05/2019 23:00", filterCal, Arrays.asList("43085773"), Arrays.asList("41050718")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.CoreaDelSur, 30, "04/06/2019 00:00", "01/01/2020 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.CoreaDelSur, 40, "04/06/2019 00:00", "01/01/2020 00:00", filterCal, Arrays.asList("41077792"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Philippines, 30, "04/06/2019 00:00", "01/01/2020 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Malaysia, 30, "04/06/2019 00:00", "01/01/2020 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Singapore, 30, "04/06/2019 00:00", "01/01/2020 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Russia, 30, "04/06/2019 00:00", "01/01/2020 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Russia, 40, "04/06/2019 00:00", "01/01/2020 00:00", filterCal, Arrays.asList("41077792"), Arrays.asList("53070658")), listaPaisesVales);
+	    return listaPaisesVales;
+	}
+	
+	public static List<ValePais> getIMVIP2019(Campanya campanya, boolean filterCal) throws Exception {
+		List<ValePais> listaPaisesVales = new ArrayList<>();
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Russia, 30, "04/06/2019 00:00", "01/01/2020 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Russia, 40, "04/06/2019 00:00", "01/01/2020 00:00", filterCal, Arrays.asList("41077792"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Deutschland, 30, "04/06/2019 00:00", "01/01/2020 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Nederland, 30, "04/06/2019 00:00", "01/01/2020 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
+	    return listaPaisesVales;
+	}
+	
+	public static List<ValePais> getVIP19(Campanya campanya, boolean filterCal) throws Exception {
+		List<ValePais> listaPaisesVales = new ArrayList<>();
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Denmark, 30, "04/06/2019 00:00", "01/01/2020 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 	    return listaPaisesVales;
 	}
 	
@@ -59,14 +80,14 @@ public class ValesData {
 		Campanya campanya = vale.getCampanya();
 		Pais pais = vale.getPais();
 		switch (campanya) {
-		case GLAM19:
-			return getTextCheckoutGLAM19(pais);
+//		case MNGVIP2019:
+//			return getTextCheckoutVALEEjemplo(pais);
 		default:
 			return "";
 		}
 	}
 	
-	private static String getTextCheckoutGLAM19(Pais pais) {
+	private static String getTextCheckoutVALEEjemplo(Pais pais) {
 		switch (pais.getCodigo_pais()) {
 		case "004":
 			return "GLAMOUR SHOPPING WEEK | -20 % auf die NEUE KOLLEKTION! Sichern Sie sich die Glamour Shopping-Card oder den Online-Code in der Glamour April-Ausgabe. Verleihen Sie Ihrer Garderobe etwas Glamour!";

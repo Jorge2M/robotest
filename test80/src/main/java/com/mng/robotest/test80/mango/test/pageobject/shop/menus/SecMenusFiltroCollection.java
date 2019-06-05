@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.mango.test.data.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusFiltroCollectionDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenusFiltroCollectionMobil;

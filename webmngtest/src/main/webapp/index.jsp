@@ -19,8 +19,8 @@ response.setDateHeader ("Expires", -1);
 <%@ page import="com.mng.robotest.test80.arq.xmlprogram.ParamsBean" %>
 <%@ page import="com.mng.robotest.test80.arq.utils.filter.TestMethod"%>
 <%@ page import="com.mng.robotest.test80.arq.utils.filter.FilterTNGxmlTRun"%>
-<%@ page import="com.mng.robotest.test80.mango.test.data.AppEcom" %>
-<%@ page import="com.mng.robotest.test80.mango.test.data.Suites" %>
+<%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
+<%@ page import="com.mng.robotest.test80.mango.conftestmaker.Suites" %>
 
 <!-- Bootstrap styles -->
 <link rel="stylesheet"

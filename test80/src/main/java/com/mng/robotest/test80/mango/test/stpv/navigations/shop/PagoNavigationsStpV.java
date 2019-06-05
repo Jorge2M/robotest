@@ -21,8 +21,8 @@ import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -133,7 +133,8 @@ public class PagoNavigationsStpV {
         
         test1rstPageCheckout(dCtxSh, dCtxPago, driver);
         if (dCtxSh.channel==Channel.movil_web) {
-        	Page1EnvioCheckoutMobilStpV.clickContinuarToMetodosPago(dCtxSh, driver);
+        	boolean isSaldoEnCuenta = dCtxPago.getFTCkout().isStoreCredit;
+        	Page1EnvioCheckoutMobilStpV.clickContinuarToMetodosPago(dCtxSh, isSaldoEnCuenta, driver);
         }
     }
     

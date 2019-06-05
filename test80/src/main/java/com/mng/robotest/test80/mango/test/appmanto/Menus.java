@@ -13,7 +13,8 @@ import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.mango.test.data.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.stpv.manto.DataMantoAccess;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageLoginMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageMenusMantoStpV;
@@ -38,14 +39,15 @@ public class Menus  extends GestorWebDriver {
 	}
 
 	@BeforeMethod(groups={"Menus", "Canal:desktop_App:all"}, alwaysRun = true)
-	@Parameters({"brwsr-path", "urlBase"})
-	public void login(String bpath, String urlBase, ITestContext ctx, Method method) throws Exception {
+	@Parameters({"brwsr-path"})
+	public void login(String bpath, ITestContext ctx, Method method) throws Exception {
 		this.dMantoAcc = new DataMantoAccess();
 		this.dMantoAcc.urlManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramUrlBase);
 		this.dMantoAcc.userManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramUsrmanto);
 		this.dMantoAcc.passManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramPasmanto);
+		this.dMantoAcc.channel = Channel.desktop;
 		this.dMantoAcc.appE = AppEcom.shop;
-		TestCaseData.getAndStoreDataFmwk(bpath, urlBase, this.index_fact, Channel.desktop, ctx, method);
+		Utils.storeDataMantoForTestMaker(bpath, this.index_fact, dMantoAcc, ctx, method);
 	}
 
 	@AfterMethod (groups={"Menus", "Canal:desktop_App:all", "SupportsFactoryCountrys"}, alwaysRun = true)

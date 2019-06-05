@@ -13,6 +13,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
@@ -44,9 +45,7 @@ public class IniciarSesion extends GestorWebDriver {
         dCtxSh.pais = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
         
-        //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        TestCaseData.storeData(Constantes.idCtxSh, dCtxSh.clone());
-        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
     }
 
     @SuppressWarnings("unused")

@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.utils.testab;
 import java.util.Arrays;
 import java.util.List;
 
-import com.mng.robotest.test80.mango.test.data.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.utils.testab.TestAB.TypeTestAB;
 
 public enum TestABid {

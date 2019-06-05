@@ -16,8 +16,8 @@ import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.mango.conftestmaker.Suites;
 import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
-import com.mng.robotest.test80.mango.test.data.Suites;
 
 public class GenericFactoryXML {
 

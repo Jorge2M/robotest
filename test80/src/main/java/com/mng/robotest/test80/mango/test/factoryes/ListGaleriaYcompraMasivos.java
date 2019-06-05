@@ -4,8 +4,8 @@ import java.util.*;
 import org.testng.annotations.*;
 import org.testng.ITestContext;
 
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.GaleriaYcompra;
-import com.mng.robotest.test80.mango.test.data.AppEcom;
 
 public class ListGaleriaYcompraMasivos {
     @SuppressWarnings("unused")

@@ -15,8 +15,8 @@ import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -475,7 +475,7 @@ public class SecMenusDesktopStpV {
         String urlAccesoCorreo = 
         	uri.getScheme() + "://" + uri.getHost() + "/redirect.faces?op=conta&tiendaid=" + tiendaId + "&pais=" + pais.getCodigo_pais() + 
         	"&producto=" + articulo.getReference() + "&color=" + articulo.getColourCode() ;
-        TestCaseData.getDatosCurrentStep().replaceInExpected(tagUrlAcceso, urlAccesoCorreo);
+        TestCaseData.getDatosCurrentStep().replaceInDescription(tagUrlAcceso, urlAccesoCorreo);
         driver.navigate().to(urlAccesoCorreo);
 
         DataFichaArt datosArticulo = new DataFichaArt(articulo.getReference(), "");

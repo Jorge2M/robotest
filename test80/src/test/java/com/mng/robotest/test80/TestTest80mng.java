@@ -6,7 +6,7 @@ import java.util.TreeSet;
 import org.junit.Test;
 
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.mango.test.data.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public class TestTest80mng {
 

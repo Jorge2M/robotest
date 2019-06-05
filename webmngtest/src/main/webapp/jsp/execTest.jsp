@@ -17,8 +17,8 @@ response.setDateHeader ("Expires", -1);%>
 	<%@ page import="com.mng.robotest.test80.arq.jdbc.to.Suite" %>
 	<%@ page import="com.mng.robotest.test80.arq.jdbc.dao.SuitesDAO" %>
 	<%@ page import="com.mng.robotest.test80.arq.listeners.CallBack" %>
-	<%@ page import="com.mng.robotest.test80.mango.test.data.Suites" %>
-	<%@ page import="com.mng.robotest.test80.mango.test.data.AppEcom" %>
+	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.Suites" %>
+	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
 
 	<style>
 	body {

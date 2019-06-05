@@ -3,6 +3,8 @@ package com.mng.robotest.test80.arq.utils;
 import java.lang.reflect.Method;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
+
+import com.mng.robotest.test80.arq.utils.conf.StorerErrorDataStepValidation;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 
 public class DataFmwkTest {
@@ -11,6 +13,7 @@ public class DataFmwkTest {
     public TypeWebDriver typeDriver;
     public Method meth;
     public ITestContext ctx;
+    public StorerErrorDataStepValidation storerDataError = null;
     
     public DataFmwkTest(WebDriver driver, TypeWebDriver typeDriver, Method methodI, ITestContext contextI) {
         this.driver = driver;
@@ -25,4 +28,8 @@ public class DataFmwkTest {
         this.meth = null;
         this.ctx = contextI;
     }    
+    
+    public void setStorerDataError(StorerErrorDataStepValidation storerDataError) {
+    	this.storerDataError = storerDataError;
+    }
 }

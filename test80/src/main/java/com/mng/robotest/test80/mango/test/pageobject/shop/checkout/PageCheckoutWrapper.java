@@ -8,8 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Descuento;
-import com.mng.robotest.test80.mango.test.data.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -239,6 +239,13 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
     public static String getPrecioTotalFromResumen(Channel channel, WebDriver driver) throws Exception {
         if (channel==Channel.movil_web) {
             return (page2MobilCheckout.getPrecioTotalFromResumen(driver));
+        }
+        return (page1DktopCheckout.getPrecioTotalFromResumen(driver));
+    }
+    
+    public static String getPrecioTotalSinSaldoEnCuenta(Channel channel, WebDriver driver) throws Exception {
+        if (channel==Channel.movil_web) {
+            return (page2MobilCheckout.getPrecioTotalSinSaldoEnCuenta(driver));
         }
         return (page1DktopCheckout.getPrecioTotalFromResumen(driver));
     }

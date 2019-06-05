@@ -3,8 +3,8 @@ package com.mng.robotest.test80.mango.test.utils.testab;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcom;
 
 public interface TestAB {
 	public void activateTestAB(int variante, WebDriver driver) throws Exception;

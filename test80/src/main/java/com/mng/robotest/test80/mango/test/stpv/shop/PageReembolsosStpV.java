@@ -6,7 +6,7 @@ import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.mango.test.data.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageReembolsos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageReembolsos.TypeReembolso;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMiCuenta;
@@ -68,10 +68,7 @@ public class PageReembolsosStpV {
      */
     public static void gotoRefundsFromMenuAndValidaSalCta(boolean paisConSaldoCta, float saldoCtaEsperado, AppEcom app, Channel channel, WebDriver driver) 
     throws Exception {
-        //Step (+validación) correspondiente a la selección del menú superior "Mi cuenta" + "Reembolsos"
         PageReembolsosStpV.gotoRefundsFromMenu(paisConSaldoCta, app, channel, driver);
-        
-        //Validations
         checkIsOkSaldoEnCuenta(saldoCtaEsperado, driver);
     }
     

@@ -13,6 +13,7 @@ import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1EnvioCheckoutMobil;
+import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2DatosPagoCheckoutMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDroppoints;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
@@ -78,15 +79,26 @@ public class Page1EnvioCheckoutMobilStpV {
     
     @Step (
     	description="Seleccionar el botón \"Continuar\"", 
-        expected="Aparece la página de checkout con los métodos de pago")
-    public static void clickContinuarToMetodosPago(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+        expected="Aparece la página asociada al Paso-2")
+    public static void clickContinuarToMetodosPago(DataCtxShop dCtxSh, boolean saldoEnCuenta, WebDriver driver) 
+    throws Exception {
     	Page1EnvioCheckoutMobil.clickContinuar(driver);
         PageCheckoutWrapperStpV.validateLoadingDisappears(10, driver);
-        checkAppearsPageWithPaymentMethods(dCtxSh.pais, dCtxSh.channel, driver);
+        checkAppearsStep2(driver);
+        if (!saldoEnCuenta) {
+        	checkAppearsPageWithPaymentMethods(dCtxSh.pais, dCtxSh.channel, driver);
+        }
     }
     
     @Validation (
-    	description="Aparece la página con los métodos de Pago",
+    	description="Aparee la página asociada al Paso-2",
+    	level=State.Defect)
+    private static boolean checkAppearsStep2(WebDriver driver) {
+    	return (Page2DatosPagoCheckoutMobil.isPageUntil(0, driver));
+    }
+    
+    @Validation (
+    	description="Están presentes los métodos de pago",
     	level=State.Defect)
     private static boolean checkAppearsPageWithPaymentMethods(Pais pais, Channel channel, WebDriver driver) {
         return (PageCheckoutWrapper.isPresentMetodosPago(pais, channel, driver));

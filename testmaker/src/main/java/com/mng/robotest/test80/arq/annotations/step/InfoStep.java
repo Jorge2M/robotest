@@ -41,7 +41,7 @@ public class InfoStep {
     	datosStep.setDescripcion(stepAnnotation.description());
     	datosStep.setResExpected(stepAnnotation.expected());
     	datosStep.setSaveImagePage(stepAnnotation.saveImagePage());
-    	datosStep.setSaveErrorPage(stepAnnotation.saveErrorPage());
+    	datosStep.setSaveErrorPage(stepAnnotation.saveErrorData());
     	datosStep.setSaveHtmlPage(stepAnnotation.saveHtmlPage());
     	if (TestCaseData.getdFTest()!=null) {
     		datosStep.setSaveNettrafic(stepAnnotation.saveNettraffic(), TestCaseData.getdFTest().ctx);

@@ -9,6 +9,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.*;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
@@ -79,9 +80,7 @@ public class Reembolsos extends GestorWebDriver {
         dCtxSh.pais = this.arabia;
         dCtxSh.idioma = this.arabia_arabe;
         
-        //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        TestCaseData.storeData(Constantes.idCtxSh, dCtxSh.clone());
-        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
     }
 
     /**
@@ -207,9 +206,9 @@ public class Reembolsos extends GestorWebDriver {
             DataPedido dataPedido = dCtxPago.getListPedidos().get(0);
             float importePago = ImporteScreen.getFloatFromImporteMangoScreen(dataPedido.getImporteTotalSinSaldoCta());
             saldoCtaEsperado = UtilsMangoTest.round(saldoCtaIni - importePago, 2);
-        }
-        else
+        } else {
             saldoCtaEsperado = saldoCtaIni;
+        }
         
         //Step (+validaciones) selección menú "Mi cuenta" + "Reembolsos"
         PageReembolsosStpV.gotoRefundsFromMenuAndValidaSalCta(dCtxSh.pais.existsPagoStoreCredit(), saldoCtaEsperado, dCtxSh.appE, dCtxSh.channel, dFTest.driver);

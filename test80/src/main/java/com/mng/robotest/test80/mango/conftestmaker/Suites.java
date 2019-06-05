@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.data;
+package com.mng.robotest.test80.mango.conftestmaker;
 
 import com.mng.robotest.test80.arq.utils.conf.SuiteTest;
 

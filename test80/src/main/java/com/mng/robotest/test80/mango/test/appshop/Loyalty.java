@@ -20,7 +20,8 @@ import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
-import com.mng.robotest.test80.mango.test.data.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
@@ -46,12 +47,12 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 
 public class Loyalty extends GestorWebDriver {
 	
-	final static String userWithLoyaltyPoints1 = "ticket_digital_es@mango.com";
-	final static String passwUserWithLoyaltyPoints1 = "mango123";
+	final static String userWithLPoints = "ticket_digital_es@mango.com";
+	final static String passwUserWithLPoints = "mango123";
 	
-	final static String userWithLoyaltyPoints2 = "test.performance10@mango.com";
-	final static String passwUserWithLoyaltyPoints2 = "Mango123";
-			
+	final static String userWithLPointsOnlyInTest = "test.performance10@mango.com";
+	final static String passwUserWithLPointsOnlyInTest = "Mango123";
+
     DataCtxShop dCtxSh;
 	
     @BeforeMethod (groups={"Otras", "Canal:all_App:shop"})
@@ -68,9 +69,7 @@ public class Loyalty extends GestorWebDriver {
         dCtxSh.pais = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
         
-        //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        TestCaseData.storeData(Constantes.idCtxSh, dCtxSh.clone());
-        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
     }
 
     /**
@@ -95,8 +94,8 @@ public class Loyalty extends GestorWebDriver {
         DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         
         //Obtenemos el usuario/password de acceso
-        dCtxSh.userConnected = userWithLoyaltyPoints1;
-        dCtxSh.passwordUser = passwUserWithLoyaltyPoints1;
+        dCtxSh.userConnected = userWithLPoints;
+        dCtxSh.passwordUser = passwUserWithLPoints;
         dCtxSh.userRegistered = true;
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, dFTest.driver);
         actionsLoyaltyPostLogin(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
@@ -145,8 +144,8 @@ public class Loyalty extends GestorWebDriver {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         
-        dCtxSh.userConnected = userWithLoyaltyPoints1;
-        dCtxSh.passwordUser = passwUserWithLoyaltyPoints1;
+        dCtxSh.userConnected = userWithLPoints;
+        dCtxSh.passwordUser = passwUserWithLPoints;
         dCtxSh.userRegistered = true;
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
         int loyaltyPointsIni = actionsLoyaltyPostLogin(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
@@ -172,18 +171,24 @@ public class Loyalty extends GestorWebDriver {
     public void LOY003_Exhange_Compra_Entrada() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
-        
-        //Hemos de utilizar usuarios diferentes en LOY002 y LOY003 porque la ejecución en paralelo
-        //puede afectar al cálculo de los Loyalty Points restantes y generar un Defect
-        dCtxSh.userConnected = userWithLoyaltyPoints2;
-        dCtxSh.passwordUser = passwUserWithLoyaltyPoints2;
+        boolean isEntornoPro = UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest.driver);
         dCtxSh.userRegistered = true;
+        if (isEntornoPro) {
+	        dCtxSh.userConnected = userWithLPoints;
+	        dCtxSh.passwordUser = passwUserWithLPoints;
+        } else {
+            //Hemos de utilizar usuarios diferentes en LOY002 y LOY003 porque la ejecución en paralelo
+            //puede afectar al cálculo de los Loyalty Points restantes y generar un Defect
+	        dCtxSh.userConnected = userWithLPointsOnlyInTest;
+	        dCtxSh.passwordUser = passwUserWithLPointsOnlyInTest;
+        }
+
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
         int loyaltyPointsIni = actionsLoyaltyPostLogin(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         SecMenusUserStpV.clickMenuMangoLikesYou(dCtxSh.channel, dFTest.driver);
 
         PageHomeLikesStpV.getNewInstance(dFTest.driver).clickButtonConseguirPor1200Likes();
-        if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest.driver)) {
+        if (!isEntornoPro) {
             PageHomeConseguirPor1200LikesStpV pageHomeConseguirPor1200LikesStpV = PageHomeConseguirPor1200LikesStpV.getNew(dFTest.driver);
             pageHomeConseguirPor1200LikesStpV.selectConseguirButton();
             

@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.factoryes.jaxb;
 
-import com.mng.robotest.test80.mango.test.data.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 
 public class Sublinea extends Linea {

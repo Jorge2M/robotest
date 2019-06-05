@@ -13,7 +13,7 @@ public @interface Step {
 	String description() default "";
 	String expected() default "";
 	SaveWhen saveImagePage() default SaveWhen.IfProblem;
-	SaveWhen saveErrorPage() default SaveWhen.IfProblem;
+	SaveWhen saveErrorData() default SaveWhen.IfProblem;
 	SaveWhen saveHtmlPage() default SaveWhen.Never;
 	SaveWhen saveNettraffic() default SaveWhen.Never;
 }
