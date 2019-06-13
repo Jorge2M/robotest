@@ -94,6 +94,7 @@
 <!ENTITY TPV-184 "<tpv id='184' clase='COD'                estado='0'   notificaciones='n'/>">
 <!ENTITY TPV-185 "<tpv id='185' clase='COD'                estado='0'   notificaciones='n'/>">
 <!ENTITY TPV-186 "<tpv id='186' clase='COD'                estado='0'   notificaciones='n'/>">
+<!ENTITY TPV-187 "<tpv id='187' clase='COD'                estado='0'   notificaciones='n'/>">
 <!ENTITY TPV-195 "<tpv id='195' clase='PagoTPV'            estado='0'   notificaciones='n'/>">
 <!ENTITY TPV-196 "<tpv id='196' clase='PagoTPV'            estado='0'   notificaciones='n'/>">
 <!ENTITY TPV-197 "<tpv id='197' clase='PagoTPV'            estado='0'   notificaciones='n'/>">
@@ -2707,10 +2708,10 @@
 <idioma acceso="ua" idioma_descripcion="IN">IN</idioma>
 <idioma acceso="ua-ru" idioma_descripcion="RU">RU</idioma>
 <tarifa>UA</tarifa>
-<codpos>08720</codpos>
-<telefono>665015122</telefono>
+<codpos>01001</codpos>
+<telefono>0501111111</telefono>
 <dni>34763592N</dni>
-<shop_online>false</shop_online>
+<shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
 <miscompras>false</miscompras>
 <moneda>%@ UAH</moneda>
@@ -2732,6 +2733,15 @@
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
+<pago 
+	type="TRJintegrada" shop="s" outlet="s" ordenpantalla="1" 
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="10" anycad="2020" cvc="737">&TPV-525;</pago>
+<pago 
+	type="TRJintegrada" shop="s" outlet="s" ordenpantalla="2" 
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="10" anycad="2020" cvc="737" usrd3d="user" passd3d="password">&TPV-525;</pago>
+<pago 
+	type="ContraReembolso" shop="s" outlet="s" ordenpantalla="4" 
+	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-187;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>

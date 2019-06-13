@@ -8,6 +8,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageInfoNewMisComprasMovil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMiCuenta;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
@@ -47,7 +48,8 @@ public class PageMiCuentaStpV {
     private static void goToMisComprasFromMenuAndValidate (DataCtxShop dataCtxShop, Channel channel, WebDriver driver) 
     throws Exception {
         PageMiCuenta.clickMisCompras(driver);
-        if (channel == Channel.movil_web) {
+        if (channel == Channel.movil_web &&
+        	PageInfoNewMisComprasMovil.isPage(driver)) {
             PageInfoNewMisComprasMovilStpV.validateIsPage(driver);
             PageInfoNewMisComprasMovilStpV.clickButtonToMisComprasAndNoValidate(driver);
         }

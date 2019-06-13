@@ -228,7 +228,7 @@ public class PageGaleriaDesktop extends PageGaleria {
     }
 
     private static String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
-    	return ("//span[@class='swiper-button-" + typeSlider + "']");
+    	return ("//span[@class='swiper-button-" + typeSlider + "' and @role]");
     }
     
     private static String getXPathArticuloConVariedadColores(int numArticulo) {
@@ -614,7 +614,8 @@ public class PageGaleriaDesktop extends PageGaleria {
     @Override
     public ArticuloScreen selectTallaArticle(int posArticulo, int posTalla) throws Exception {
         //Si no está visible la capa de tallas ejecutamos los pasos necesarios para hacer la visible 
-        if (!isVisibleArticleCapaTallasUntil(posArticulo, 0/*maxSecondsToWait*/)) {
+    	waitForPageLoaded(driver);
+        if (!isVisibleArticleCapaTallasUntil(posArticulo, 1)) {
             selectLinkAddArticleToBag(posArticulo);
         }
         

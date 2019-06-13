@@ -8,7 +8,7 @@ import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 public class ModalLoyaltyAfterAccess extends WebdrvWrapp {
 
-	final static String XPathCapaGlobal = "//div[@id='mngLoyalty']"; 
+	final static String XPathCapaGlobal = "//div[@id='adhesionModal']"; 
 	final static String XPathCapaContainer = XPathCapaGlobal + "//div[@class='modal-container']";
 	final static String XPathAspaForClose = XPathCapaContainer + "//span[@class='modal-close-icon']";
 	

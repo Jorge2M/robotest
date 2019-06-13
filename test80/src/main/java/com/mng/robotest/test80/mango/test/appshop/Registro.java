@@ -193,7 +193,8 @@ public class Registro extends GestorWebDriver {
         SecMenusWrapperStpV.secMenuUser.selectRegistrate(dCtxSh.channel, dCtxSh, dFTest.driver);
         if(clickRegister) {
 	        String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
-	        HashMap<String,String> dataRegistro = PageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dFTest);
+	        HashMap<String,String> dataRegistro = 
+	        	PageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dCtxSh.channel, dFTest);
 	        PageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false/*usrExists*/, dCtxSh.appE, dataRegistro, dFTest);
 	        boolean paisConNinos = dCtxSh.pais.getShoponline().stateLinea(LineaType.nina, dCtxSh.appE)==ThreeState.TRUE;
 	        PageRegistroSegundaStpV.setDataAndLineasRandom("23/4/1974", paisConNinos, 2/*numNinos*/, dCtxSh.pais, dataRegistro, dFTest);
@@ -205,7 +206,7 @@ public class Registro extends GestorWebDriver {
 	            PageRegistroNinosStpV.sendNinoDataAndContinue(listaNinos, dCtxSh.pais, dFTest);
 	        }
 	            
-	        PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dFTest);
+	        PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dCtxSh.channel, dFTest);
 	        PageRegistroDirecStpV.clickFinalizarButton(dFTest);
 	        PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, dFTest);
 
@@ -255,12 +256,13 @@ public class Registro extends GestorWebDriver {
             return;
         }
         
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
         SecMenusWrapperStpV.secMenuUser.selectRegistrate(dCtxSh.channel, dCtxSh, dFTest.driver);
         String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
-        HashMap<String,String> dataRegistro = PageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dFTest);
-        PageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false/*usrExists*/, dCtxSh.appE, dataRegistro, dFTest);
-        PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dFTest);
+        HashMap<String,String> dataRegistro = 
+        	PageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dCtxSh.channel, dFTest);
+        PageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false, dCtxSh.appE, dataRegistro, dFTest);
+        PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dCtxSh.channel, dFTest);
         PageRegistroDirecStpV.clickFinalizarButton(dFTest);
         PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, dFTest);
         SecMenusUserStpV.checkVisibilityLinkMangoLikesYou(dCtxSh.channel, dCtxSh.appE, dFTest.driver);

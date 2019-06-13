@@ -60,7 +60,7 @@ public class SecMenusUserStpV {
 	@Step (
 		description="Clicar el link de Logoff para cerrar la sesión", 
         expected="Aparece el link de login")
-    private static void logoff(Channel channel, WebDriver driver) throws Exception {
+    public static void logoff(Channel channel, WebDriver driver) throws Exception {
         SecMenusWrap.secMenusUser.clickCerrarSesion(Channel.desktop, driver);
         checkIsVisibleIniciarSesionLink(channel, 3, driver);
     }

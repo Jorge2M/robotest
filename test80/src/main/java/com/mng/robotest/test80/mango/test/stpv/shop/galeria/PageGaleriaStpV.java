@@ -155,7 +155,7 @@ public class PageGaleriaStpV {
     }
     
     @Step (
-    	description="Del #{posArticulo}o artículo, seleccionamos la #{posTalla}a talla", 
+    	description="Del #{posArticulo}o artículo, seleccionamos la #{posTalla}a talla disponible", 
         expected="Se da de alta correctamente el artículo en la bolsa",
         saveHtmlPage=SaveWhen.Always)
     public boolean selectTallaArticulo(int posArticulo, int posTalla, DataBag dataBag, DataCtxShop dCtxSh) 
@@ -172,9 +172,9 @@ public class PageGaleriaStpV {
     }
 
     @Step (
-            description="Seleccionamos la primera talla no disponible del listado",
-            expected="Se abre el modal de avimase de la prenda",
-            saveHtmlPage=SaveWhen.Always)
+    	description="Seleccionamos la primera talla no disponible del listado",
+        expected="Se abre el modal de avimase de la prenda",
+        saveHtmlPage=SaveWhen.Always)
     public void selectTallaNoDisponibleArticulo()
             throws Exception {
         PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;

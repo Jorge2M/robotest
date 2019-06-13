@@ -14,7 +14,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
@@ -28,6 +30,7 @@ public class Page2IdentCheckout extends WebdrvWrapp {
     final static String XPathInputPassword = "//input[@id[contains(.,'cfPass')]]";
     final static String XPathInputNombreUsr = "//input[@id[contains(.,':cfName')]]";
     final static String XPathInputApellidosUsr = "//input[@id[contains(.,':cfSname')]]";
+    final static String XPathInputMiddleNameUsr = "//input[@id[contains(.,':cfMiddleName')]]";
     final static String XPathInputTelefono = "//input[@id[contains(.,':cfTelf')]]";
     final static String XPathInputDireccion1 = "//input[@id[contains(.,':cfDir1')]]";
     final static String XPathInputDireccion2 = "//input[@id[contains(.,':cfDir2')]]";
@@ -101,6 +104,13 @@ public class Page2IdentCheckout extends WebdrvWrapp {
         boolean datoSeteado = setInputIfVisible(XPathInputApellidosUsr, apellidosUsr, driver);
         if (datoSeteado) {
             dataPago.put("cfSname", apellidosUsr);
+        }
+    }
+    
+    public static void setMiddleNameUsuarioIfVisible(String middleNameUsr, HashMap<String,String> dataPago, WebDriver driver) {
+        boolean datoSeteado = setInputIfVisible(XPathInputMiddleNameUsr, middleNameUsr, driver);
+        if (datoSeteado) {
+            dataPago.put("cfMiddleName", middleNameUsr);
         }
     }
     
@@ -328,19 +338,29 @@ public class Page2IdentCheckout extends WebdrvWrapp {
     /**
      * @param posInSelect: elemento del desplegable que queremos desplegar (comenzando desde el 1)
      */
-    public static String setSelectProvPaisIfVisible(int posInSelect, WebDriver driver) {
+    final static String firstProvinciaUkranie = "Ananivskyi";
+    final static String XPathOptionFirstProvUkranie = "//div[@class[contains(.,'choices')] and text()[contains(.,'" + firstProvinciaUkranie + "')]]";
+    public static String setSelectProvPaisIfVisible(int posInSelect, String codCountry, Channel channel, WebDriver driver) {
         String datoSeteado = "";
-        List<WebElement> provinciaPaisList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathSelectProvPais));
-        if (provinciaPaisList.size() > 0) {
-            new Select(provinciaPaisList.get(0)).selectByIndex(posInSelect);
-            datoSeteado = provinciaPaisList.get(0).getAttribute("value");
-        }        
+        WebElement provinciaPais = UtilsMangoTest.findElementPriorizingDisplayed(driver, By.xpath(XPathSelectProvPais));
+        if (provinciaPais!=null) {
+        	if (codCountry.compareTo(PaisShop.Ukraine.getCodigoPais())==0 &&
+        		channel==Channel.desktop) {
+            	driver.findElement(By.xpath(XPathSelectProvPais + "/..")).click();
+            	driver.findElement(By.xpath(XPathOptionFirstProvUkranie)).click();
+            	return firstProvinciaUkranie;
+        	} else {
+        		new Select(provinciaPais).selectByIndex(posInSelect);
+                datoSeteado = provinciaPais.getAttribute("value");
+                return datoSeteado;
+        	}
+        }      
         
-        return datoSeteado;
+        return "";
     }
     
-    public static void setSelectProvPaisIfVisible(int posInSelect, HashMap<String,String> datosRegistro, WebDriver driver) {
-        String datoSeteado = setSelectProvPaisIfVisible(posInSelect, driver);
+    public static void setSelectProvPaisIfVisible(int posInSelect, HashMap<String,String> datosRegistro, String codPais, Channel channel, WebDriver driver) {
+        String datoSeteado = setSelectProvPaisIfVisible(posInSelect, codPais, channel, driver);
         if ("".compareTo(datoSeteado)!=0) {
             datosRegistro.put("provinciaPais", datoSeteado);
         }
@@ -459,11 +479,13 @@ public class Page2IdentCheckout extends WebdrvWrapp {
     /**
      * Función que introduce los datos de cliente (sirve para la 1a página del registro y el checkout)
      */
-    public static HashMap<String,String> inputDataPorDefectoSegunPais(Pais pais, String emailUsr, boolean testCharNoLatinos, boolean clickPubli, WebDriver driver) 
-    throws Exception {
+    public static HashMap<String,String> inputDataPorDefectoSegunPais(
+    		Pais pais, String emailUsr, boolean testCharNoLatinos, boolean clickPubli, Channel channel, WebDriver driver)
+    		throws Exception {
         HashMap<String,String> datosSeteados = new HashMap<>();
         String nombreUsr = "Jorge";
         String apellidosUsr = "Muñoz Martínez";
+        String middleNameUsr = "Sputnik";
         String codigoPais = pais.getCodigo_pais();
         String direccion1 = "c./ mossen trens n6 5 1a";
         if (testCharNoLatinos) {
@@ -481,6 +503,7 @@ public class Page2IdentCheckout extends WebdrvWrapp {
         for (int i = 0; i < 2; i++) {
             setNombreUsuarioIfVisible(nombreUsr, datosSeteados, driver);
             setApellidosUsuarioIfVisible(apellidosUsr, datosSeteados, driver);
+            setMiddleNameUsuarioIfVisible(middleNameUsr, datosSeteados, driver);
             setTelefonoIfVisible(movil, datosSeteados, driver);
             setPasswordIfVisible(Constantes.pass_standard, datosSeteados, driver);
             setEmailIfExists(emailUsr, datosSeteados, driver);
@@ -490,8 +513,8 @@ public class Page2IdentCheckout extends WebdrvWrapp {
             setPaisIfVisibleAndNotSelected(codigoPais, datosSeteados, driver);
             setCodPostalIfExistsAndWait(codPostalPais, datosSeteados, driver);
             setInputPoblacionIfVisible(cfCity, datosSeteados, driver);
-            setSelectLocalidadesIfVisible(driver, 1/*posInSelect*/, datosSeteados);
-            setSelectProvPaisIfVisible(1/*posInSelect*/, datosSeteados, driver); // Desplegable provincia país (p.e. Turquía)
+            setSelectLocalidadesIfVisible(driver, 1, datosSeteados);
+            setSelectProvPaisIfVisible(1, datosSeteados, pais.getCodigo_pais(), channel, driver); // Desplegable provincia país (p.e. Turquía)
             setCheckCondicionesIfVisible(datosSeteados, driver); // Selección aceptación de condiciones (actualmente sólo en Turquía)
             setSelectLocalidadesProvCity(1/*posInSelect*/, datosSeteados, driver); // Desplegable específico de Turquía
             setInputProvEstadoIfVisible(cfState, datosSeteados, driver);

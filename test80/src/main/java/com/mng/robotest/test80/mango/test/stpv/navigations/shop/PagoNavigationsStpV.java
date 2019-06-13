@@ -193,11 +193,11 @@ public class PagoNavigationsStpV {
         dCtxPago.getDataPedido().setEmailCheckout(emailCheckout);
 
         Page1IdentCheckoutStpV.secSoyNuevo.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExist, dCtxSh.appE, dCtxSh.userRegistered, dCtxSh.pais, dCtxSh.channel, driver);
-        HashMap<String, String> datosRegistro = Page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, validaCharNoLatinos, driver);
+        HashMap<String, String> datosRegistro = Page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, validaCharNoLatinos, dCtxSh.channel, driver);
         dCtxPago.setDatosRegistro(datosRegistro);
         if (validaCharNoLatinos) {
             Page2IdentCheckoutStpV.clickContinuarAndExpectAvisoDirecWithNoLatinCharacters(driver);
-            datosRegistro = Page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, false, driver);
+            datosRegistro = Page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, false, dCtxSh.channel, driver);
         }
         
         Page2IdentCheckoutStpV.clickContinuar(dCtxSh.userRegistered, dataBag, dCtxSh.channel, driver);

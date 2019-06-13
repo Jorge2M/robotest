@@ -37,9 +37,6 @@ public class SecDetalleCompraTiendaStpV {
         	"Figura la dirección " + compraTienda.direccion,
         	PageMisCompras.SecDetalleCompraTienda.getDireccion(driver).compareTo(compraTienda.direccion)==0, State.Warn);
         validations.add(
-        	"Figura la fecha " + compraTienda.fecha,
-        	PageMisCompras.SecDetalleCompraTienda.getFecha(channel, driver).compareTo(compraTienda.fecha)==0, State.Warn);
-        validations.add(
         	"Existen " + compraTienda.numPrendas + " prendas",
         	PageMisCompras.SecDetalleCompraTienda.getNumPrendas(driver)==compraTienda.numPrendas, State.Warn);
         return validations;

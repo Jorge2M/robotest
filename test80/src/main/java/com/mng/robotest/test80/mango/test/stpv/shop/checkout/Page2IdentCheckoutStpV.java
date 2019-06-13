@@ -33,10 +33,10 @@ public class Page2IdentCheckoutStpV {
 		description="Introducimos los datos del cliente según el país", 
         expected="Se hace clickable el botón \"Continuar\"",
         saveImagePage=SaveWhen.Always)
-    public static HashMap<String, String> inputDataPorDefecto(Pais pais, String emailUsr, boolean inputDireccCharNoLatinos, WebDriver driver) 
-    throws Exception {
+    public static HashMap<String, String> inputDataPorDefecto(
+    		Pais pais, String emailUsr, boolean inputDireccCharNoLatinos, Channel channel, WebDriver driver) throws Exception {
         HashMap<String, String> datosRegistro = 
-            Page2IdentCheckout.inputDataPorDefectoSegunPais(pais, emailUsr, inputDireccCharNoLatinos, false, driver);
+            Page2IdentCheckout.inputDataPorDefectoSegunPais(pais, emailUsr, inputDireccCharNoLatinos, false, channel, driver);
         TestCaseData.getDatosCurrentStep().addDescriptionText(". Utilizando los datos: "+ UtilsMangoTest.listaCamposHTML(datosRegistro)); 
         checkIsVisibleContiueButton(5, driver);
         return datosRegistro;

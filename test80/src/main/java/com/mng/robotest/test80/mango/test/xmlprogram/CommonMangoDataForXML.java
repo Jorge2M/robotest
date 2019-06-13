@@ -70,8 +70,13 @@ public class CommonMangoDataForXML {
         parametersSuite.put("catProdInexistente", "Anchoas del Cantábrico");
         
         //Usuario con compras de ambos tipos (tienda, online) en PRE pero sólo de tipo online en PRO
-        parametersSuite.put("userConComprasPeroSoloOnlineEnPRO" ,"espana.test@mango.com");
-        parametersSuite.put("passwordUserConCompras" ,"mango123");
+//        parametersSuite.put("userConComprasPeroSoloOnlineEnPRO" ,"espana.test@mango.com");
+//        parametersSuite.put("passwordUserConCompras" ,"mango123");
+        
+        parametersSuite.put("userWithOnlinePurchases" ,"espana.test@mango.com");
+        parametersSuite.put("passUserWithOnlinePurchases" ,"mango123");
+        parametersSuite.put("userWithStorePurchases" ,"ticket_digital_es@mango.com");
+        parametersSuite.put("passUserWithStorePurchases" ,"mango123");
         
         parametersSuite.put("userConDevolucionPeroSoloEnPRO" ,"robot.test@mango.com");
         parametersSuite.put("passwordUserConDevolucion" ,"sirjorge74");

@@ -155,6 +155,19 @@ public class UtilsMangoTest {
         return (getDisplayedElementsFromList(elementOptions));
     }
     
+    public static WebElement findElementPriorizingDisplayed(WebDriver webdriver, By locator) {
+    	List<WebElement> elementOptions = webdriver.findElements(locator);
+    	if (elementOptions.size() > 0) {
+    		List<WebElement> displayedElements = getDisplayedElementsFromList(elementOptions);
+	    	if (displayedElements.size() > 0) {
+	    		return displayedElements.get(0);
+	    	}
+	    	return elementOptions.get(0);
+    	}
+    	
+    	return null;
+    }
+    
     /**
      * Obtenemos sólo los elementos visibles
      */

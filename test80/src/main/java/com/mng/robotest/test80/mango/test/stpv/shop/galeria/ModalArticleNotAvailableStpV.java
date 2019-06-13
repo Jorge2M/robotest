@@ -29,17 +29,15 @@ public class ModalArticleNotAvailableStpV {
     @Validation (
     description="El modal de \"Avísame\" por artículo no disponible está en estado #{stateModal} (lo esperamos hasta #{maxSecondsWait} segundos)",
     level=State.Info)
-    public boolean validateState(int maxSecondsWait, StateModal stateModal, WebDriver driver) {
+    public boolean validateState(int maxSecondsWait, StateModal stateModal, WebDriver driver) throws Exception {
 		return (ModalArticleNotAvailable.inStateUntil(stateModal, maxSecondsWait, driver));
     }
     
 	@Step (
 		description="Seleccionamos el aspa del modal para cerrarlo", 
         expected="El modal queda en estado No-visible")
-    public void clickAspaForClose(WebDriver driver) {
+    public void clickAspaForClose(WebDriver driver) throws Exception {
         ModalArticleNotAvailable.clickAspaForClose(driver);
-        
-        //Validaciones
         validateState(1, StateModal.notvisible, driver);
     }
 
@@ -49,11 +47,11 @@ public class ModalArticleNotAvailableStpV {
         boolean isVisibleModal = ModalArticleNotAvailable.isVisibleUntil(2, driver);
         boolean isVisibleRPGD = ModalArticleNotAvailable.isVisibleRPGD(2, driver);
         validations.add(
-                "Si aparece el modal de avisame",
-                isVisibleModal, State.Defect);
+            "Si aparece el modal de avisame",
+            isVisibleModal, State.Defect);
         validations.add(
-                "Si aparece la descripcion de RPGD de usuario",
-                isVisibleRPGD, State.Defect);
+            "Si aparece la descripcion de RPGD de usuario",
+            isVisibleRPGD, State.Defect);
         return validations;
     }
 }

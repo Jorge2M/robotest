@@ -22,6 +22,7 @@ public class PageMisComprasStpV {
 
     public static SecDetalleCompraTiendaStpV SecDetalleCompraTienda; 
     public static SecQuickViewArticuloStpV SecQuickViewArticulo;
+    
     public static void validateIsPage(DataCtxShop dataCtxShop, WebDriver driver) throws Exception {
         if (dataCtxShop.pais.isTicketStoreEnabled()) {
             validateIsPage(driver);

@@ -33,8 +33,6 @@ public class PageReembolsosStpV {
         expected="Aparece la página de reembolsos")
     public static void selectReembolsos(boolean paisConSaldoCta, WebDriver driver) throws Exception {
         PageMiCuenta.clickReembolsos(driver);
-    
-        //Validaciones
         checkClickReembolsos(paisConSaldoCta, driver);
     }
     
