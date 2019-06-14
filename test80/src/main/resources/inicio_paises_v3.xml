@@ -2684,11 +2684,9 @@
 <pago 
 	type="ContraReembolso" shop="s" outlet="s" votf="n" ordenpantalla="8"  
 	nombre="BANKÜBERWEISUNG" namefilter="BANKUBERWEISUNG" testpasarela='s' testpago='s'>&TPV-109;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<!-- Se elimina temporalmente por problemas en el funcionamiento de American Express
 <pago 
 	type="TRJintegrada" shop="s" outlet="s" votf="n" ordenpantalla="9"  
 	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="10" anycad="2020" cvc="7373">&TPV-304;</pago>
--->
 <pago 
 	type="Paypal" shop="s" outlet="s" votf="n" ordenpantalla="10" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-094;</pago>

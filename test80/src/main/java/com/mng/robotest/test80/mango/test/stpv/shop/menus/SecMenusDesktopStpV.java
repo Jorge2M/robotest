@@ -220,7 +220,7 @@ public class SecMenusDesktopStpV {
         TestCaseData.getDatosCurrentStep().replaceInDescription(tagCarruselsLinea, linea.getCarrusels());
         
         SecMenusDesktop.secMenuSuperior.secLineas.hoverLinea(lineaType, null, app, driver);
-        if (linea.getType()!=LineaType.rebajas) {
+        //if (linea.getType()!=LineaType.rebajas) {
         	checkCarruselsAfterHoverLinea(linea, app, driver);
         	
     	    //Steps - Selección de cada uno de los carrusels asociados a la línea
@@ -231,7 +231,7 @@ public class SecMenusDesktopStpV {
     	            stepSeleccionaCarrusel(pais, lineaType, listCarrusels[i], app, driver);
     	        }
     	    }
-        }
+        //}
     }
     
     @Validation

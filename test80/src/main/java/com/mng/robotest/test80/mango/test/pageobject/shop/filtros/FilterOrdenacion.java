@@ -8,9 +8,9 @@ public enum FilterOrdenacion {
 	PrecioDesc("escendente", "desc"), 
 	TemporadaAsc("", ""), 
 	TemporadaDesc("", ""),  
-	BloqueTemporadas_2y3_despues_la_4("", "", Arrays.asList(2,3)),
-	BloqueTemporada_4_despues_la_2y3("", "", Arrays.asList(4)),
-	Temporada3andAfter1and2("", ""),
+	BloqueTemporadas_3y4_despues_la_5("", "", Arrays.asList(3,4)),
+	BloqueTemporada_5_despues_la_3y4("", "", Arrays.asList(5)),
+	Temporada4andAfter2and3("", ""),
 	NOordenado("", "");
 	
 	String valueForDesktop;

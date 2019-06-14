@@ -124,7 +124,7 @@ public class PageReembolsosStpV {
     @Validation
     private static ChecksResult checkAfterModifyDataTransferencia(WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
-        int maxSecondsToWait = 10;
+        int maxSecondsToWait = 15;
     	validations.add(
     		"Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + maxSecondsToWait + " segundos)",
     		PageReembolsos.isVisibleTextBancoUntil(maxSecondsToWait, driver) &&

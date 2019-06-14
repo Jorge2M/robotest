@@ -20,7 +20,7 @@ import static com.mng.robotest.test80.arq.utils.otras.Constantes.PrefixRebajas;
 
 public class PageHomeMarcasStpV {
 	
-	public static BannerRebajas2018StpV bannerRebajas2018; 
+	public static BannerRebajas2019StpV bannerRebajas2019; 
 	public static BannerSpringIsHere2019StpV bannerSpringIsHere2019; 
 	
     public enum TypeHome {Multimarca, PortadaLinea}
@@ -47,7 +47,7 @@ public class PageHomeMarcasStpV {
     }
         
     @Validation
-    private static ChecksResult checkMsgNewsletterFooter(boolean salesOnInCountry, IdiomaPais idioma, WebDriver driver) {
+    public static ChecksResult checkMsgNewsletterFooter(boolean salesOnInCountry, IdiomaPais idioma, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
     	String percentageSymbol = UtilsTestMango.getPercentageSymbol(idioma);
     	boolean isMsgWithPercentageSimbol = SecFooter.getNewsLetterMsgText(driver).contains(percentageSymbol);

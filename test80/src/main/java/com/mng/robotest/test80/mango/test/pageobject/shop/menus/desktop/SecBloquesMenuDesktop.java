@@ -36,6 +36,9 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
     	if (lineaId==LineaType.nuevo) {
     		idLineaDom = "sections_nuevo";
     	}
+    	if (lineaId==LineaType.rebajas) {
+    		idLineaDom = "sections_rebajas_step1";
+    	}
         
         return XPathCapaMenusLineaWithTag.replace(TagIdLinea, idLineaDom);
     }

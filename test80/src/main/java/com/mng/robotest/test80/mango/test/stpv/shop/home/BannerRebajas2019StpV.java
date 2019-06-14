@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBann
 import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV.TypeHome;
 import static com.mng.robotest.test80.arq.utils.otras.Constantes.PrefixRebajas;
 
-public class BannerRebajas2018StpV {
+public class BannerRebajas2019StpV {
 	
     @Validation
     public static ChecksResult checkBanner(boolean salesOnInCountry, TypeHome typeHome, DataCtxShop dCtxSh, WebDriver driver) {

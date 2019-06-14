@@ -71,9 +71,9 @@ public class PagoNavigationsStpV {
     	accessShopAndLoginOrLogoff(dCtxSh, driver);
         if (dCtxSh.userRegistered) {
             SecBolsaStpV.clear(dCtxSh, driver);
-            if (dCtxSh.appE==AppEcom.shop) {
-                PageFavoritosStpV.clearAll(dCtxSh, driver);
-            }
+//            if (dCtxSh.appE==AppEcom.shop) {
+//                PageFavoritosStpV.clearAll(dCtxSh, driver);
+//            }
             
             StdValidationFlags flagsVal = StdValidationFlags.newOne();
             flagsVal.validaSEO = false;

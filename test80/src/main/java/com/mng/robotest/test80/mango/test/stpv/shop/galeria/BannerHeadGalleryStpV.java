@@ -94,7 +94,7 @@ public class BannerHeadGalleryStpV {
     	if (typeGalery==TypeGalery.Sales || !pais.isVentaOnline()) {
 	     	validations.add(
 	     		"El banner de cabecera no es lincable",
-	     		!bannerLincable, State.Info);
+	     		!bannerLincable, State.Info, true);
     	}
     	else {
 	     	validations.add(

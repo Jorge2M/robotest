@@ -206,8 +206,8 @@ public abstract class PageGaleria extends WebdrvWrapp {
             return getAnyPrecioNotInOrder(typeOrden);
         case TemporadaDesc:
         case TemporadaAsc:
-        case BloqueTemporadas_2y3_despues_la_4:
-        case BloqueTemporada_4_despues_la_2y3:
+        case BloqueTemporadas_3y4_despues_la_5:
+        case BloqueTemporada_5_despues_la_3y4:
             return getAnyRefNotInOrderTemporada(typeOrden);
         default:
             return "";
@@ -273,12 +273,12 @@ public abstract class PageGaleria extends WebdrvWrapp {
                         return (refAnterior + "->" + refActual);
                     }
                     break;
-            	case BloqueTemporadas_2y3_despues_la_4:
+            	case BloqueTemporadas_3y4_despues_la_5:
             		if ((tempActualInt==1 || tempActualInt==2) && tempAnteriorInt==3) {
             			return (refAnterior + "->" + refActual);
             		}
             		break;
-            	case BloqueTemporada_4_despues_la_2y3:
+            	case BloqueTemporada_5_despues_la_3y4:
             	default:
             		if (tempActualInt==3 && (tempAnteriorInt==1 || tempAnteriorInt==2)) {
             			return (refAnterior + "->" + refActual);

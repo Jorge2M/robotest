@@ -19,7 +19,7 @@ public class SecBannerHeadGallery extends WebdrvWrapp {
     static String XPathTextLinkInfoRebajas = XPathBanner + "//div[@class[contains(.,'infotext')]]";
     static String XPathTextLinkMoreInfoRebajas = XPathTextLinkInfoRebajas + "//self::*[@class[contains(.,'max')]]";
     static String XPathTextLinkLessInfoRebajas = XPathTextLinkInfoRebajas + "//self::*[@class[contains(.,'min')]]";
-    static String XPathTextInfoRebajas = XPathBanner + "//div[@class='text2']";
+    static String XPathTextInfoRebajas = XPathBanner + "//div[@class[contains(.,'text3')]]";
     
     public static String getXPathTextInfoRebajas(TypeLinkInfo typeLink) {
     	switch (typeLink) {

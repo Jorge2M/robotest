@@ -761,9 +761,9 @@ public class PageGaleriaStpV {
 	    List<String> lineasInvertidas = RebajasPaisDAO.getLineasInvertidas(pais.getCodigo_pais(), menuType);
 	    boolean temporadaInvertida = (lineasInvertidas!=null && lineasInvertidas.contains(lineaType.toString()));
 	    if (!temporadaInvertida || isGaleriaSale) {
-		    ordenType = FilterOrdenacion.BloqueTemporadas_2y3_despues_la_4;
+		    ordenType = FilterOrdenacion.BloqueTemporadas_3y4_despues_la_5;
 	    } else {
-		    ordenType = FilterOrdenacion.BloqueTemporada_4_despues_la_2y3;
+		    ordenType = FilterOrdenacion.BloqueTemporada_5_despues_la_3y4;
 	    }
 	    
         String ref1rstArticle = pageGaleria.getReferencia(1);

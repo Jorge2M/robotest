@@ -94,7 +94,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
         }
         
     	SecMenusWrapperStpV.checkLineaRebajas(salesOnInCountry, dCtxSh, dFTest.driver);
-    	PageHomeMarcasStpV.bannerRebajas2018.checkBanner(salesOnInCountry, TypeHome.Multimarca, dCtxSh, dFTest.driver);
+    	//PageHomeMarcasStpV.bannerRebajas2018.checkBanner(salesOnInCountry, TypeHome.Multimarca, dCtxSh, dFTest.driver);
     	//checkMsgNewsletterFooter(salesOnInCountry, dCtxSh.idioma, driver);
         
         if (salesOnInCountry && dCtxSh.pais.isVentaOnline()) {
@@ -141,7 +141,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
         SecMenusWrapperStpV.seleccionLinea(lineaType, sublineaType, dCtxSh, dFTest.driver);
     	SecMenusWrapperStpV.checkLineaRebajas(salesOnInCountry, dCtxSh, dFTest.driver);
     	if (areBanners) {
-    		PageHomeMarcasStpV.bannerRebajas2018.checkBanner(salesOnInCountry, TypeHome.Multimarca, dCtxSh, dFTest.driver);
+    		//PageHomeMarcasStpV.bannerRebajas2018.checkBanner(salesOnInCountry, TypeHome.Multimarca, dCtxSh, dFTest.driver);
     	}
     	//checkMsgNewsletterFooter(salesOnInCountry, dCtxSh.idioma, driver);
         if (SecMenusWrap.canClickMenuArticles(dCtxSh.pais, linea, sublinea)) {

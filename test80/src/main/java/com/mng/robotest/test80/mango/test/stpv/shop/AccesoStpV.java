@@ -159,9 +159,9 @@ public class AccesoStpV {
             if (dCtxSh.userRegistered) {
                 identificacionEnMango(dCtxSh, driver);
                 SecBolsaStpV.clear(dCtxSh, driver);
-                if (dCtxSh.appE==AppEcom.shop) {
-                    PageFavoritosStpV.clearAll(dCtxSh, driver);
-                }
+//                if (dCtxSh.appE==AppEcom.shop) {
+//                    PageFavoritosStpV.clearAll(dCtxSh, driver);
+//                }
             }
         }
     }    
