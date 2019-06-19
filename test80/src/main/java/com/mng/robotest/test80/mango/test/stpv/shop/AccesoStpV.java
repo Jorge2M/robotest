@@ -56,7 +56,7 @@ public class AccesoStpV {
         }
        
         if (clearArticulos) {
-            registro+= "Borrar la Bolsa/Favoritos<br>";        
+            registro+= "Borrar la Bolsa<br>";        
         }
         
         DatosStep datosStep = TestCaseData.getDatosCurrentStep();
@@ -71,9 +71,6 @@ public class AccesoStpV {
         
         if (clearArticulos) {
             SecBolsa.clearArticulos(dCtxSh, driver);
-            if (dCtxSh.appE==AppEcom.shop) {
-                PageFavoritos.clearAllArticulos(dCtxSh.channel, dCtxSh.appE, driver);
-            }
         }
         
         if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) {

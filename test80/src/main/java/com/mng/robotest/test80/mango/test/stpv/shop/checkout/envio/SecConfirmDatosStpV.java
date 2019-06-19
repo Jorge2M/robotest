@@ -6,6 +6,7 @@ import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
+import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
@@ -20,16 +21,29 @@ public class SecConfirmDatosStpV {
     public static boolean validateIsVisible(int maxSecondsWait, Channel channel, WebDriver driver) {
         return (ModalDroppoints.secConfirmDatos.isVisibleUntil(maxSecondsWait, channel, driver));
     }
-    
+	
+	public static void setDataIfNeeded(String codigoPais,WebDriver driver) throws Exception {
+		if (PaisShop.Deutschland == PaisShop.getPais(codigoPais)) {
+			if (ModalDroppoints.secConfirmDatos.isVisibleInputPostNumberIdDeutschland(driver)) {
+				inputPostNumberId("0038594352", driver);
+			}
+		}
+	}
+	
+	@Step (
+		description="Introducir <b>#{postNumberId}</b> en el Post Number Id",
+		expected="El valor queda correctamente introducido")
+	public static void inputPostNumberId(String postNumberId, WebDriver driver) throws Exception {
+		ModalDroppoints.secConfirmDatos.sendDataInputPostNumberIdDeutschland(postNumberId, driver);
+	}
+	
 	@Step (
 		description="Clickamos el botón \"Confirmar Datos\"", 
         expected="La dirección de envío se establece a la de la tienda")
     public static void clickConfirmarDatosButton(Channel channel, DataPedido dataPedido, WebDriver driver) 
     throws Exception {
-        ModalDroppoints.secConfirmDatos.clickConfirmarDatosButtonAndWait(5/*maxSecondsToWait*/, driver);
-        WebdrvWrapp.waitForPageLoaded(driver, 2/*waitSeconds*/);       
-        
-        //Validaciones
+        ModalDroppoints.secConfirmDatos.clickConfirmarDatosButtonAndWait(5, driver);
+        WebdrvWrapp.waitForPageLoaded(driver, 2);       
         checkConfirmacionCambioDireccionEnvio(dataPedido, channel, driver);
     }
 	

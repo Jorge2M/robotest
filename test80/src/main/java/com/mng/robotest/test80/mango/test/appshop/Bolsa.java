@@ -159,7 +159,7 @@ public class Bolsa extends GestorWebDriver {
     throws Exception {
     	//TestAB.activateTestABiconoBolsaDesktop(2, dCtxSh, dFTest.driver);
         DataBag dataBag = new DataBag();
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, dCtxSh.userRegistered/*clearArticulos*/, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, dCtxSh.userRegistered, dFTest.driver);
         SecBolsaStpV.altaArticlosConColores(2, dataBag, dCtxSh, dFTest.driver);
         SecBolsaStpV.forceStateBolsaTo(StateBolsa.Closed, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
         SecBolsaStpV.forceStateBolsaTo(StateBolsa.Open, dCtxSh.appE, dCtxSh.channel, dFTest.driver); 

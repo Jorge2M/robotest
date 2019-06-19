@@ -153,4 +153,14 @@ public enum PaisShop {
 	public String getCodigoPais() {
 		return this.codigoPais;
 	}
+	
+	public static PaisShop getPais(String codigoPais) {
+		for (PaisShop paisShop : PaisShop.values()) {
+			if (paisShop.getCodigoPais().compareTo(codigoPais)==0) {
+				return paisShop;
+			}
+		}
+		
+		return null;
+	}
 }

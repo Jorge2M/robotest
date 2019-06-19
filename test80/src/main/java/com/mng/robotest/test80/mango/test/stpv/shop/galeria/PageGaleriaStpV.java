@@ -731,7 +731,7 @@ public class PageGaleriaStpV {
      		filtrosCollection.isVisibleMenu(FilterCollection.sale), State.Warn);
      	validations.add(
      		"Aparece el filtro para la nueva temporada <b>Next season preview</b>",
-     		filtrosCollection.isVisibleMenu(FilterCollection.nextSeason), State.Warn);
+     		filtrosCollection.isVisibleMenu(FilterCollection.nextSeason), State.Info, true);
      	return validations;
     }
 	      

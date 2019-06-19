@@ -405,7 +405,7 @@ public class PagoNavigationsStpV {
         	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, channel, driver);
             PageCheckoutWrapperStpV.pasoBotonAceptarCompraDesktop(driver);
         } else {
-            PageCheckoutWrapperStpV.pasoBotonVerResumenCheckout2Mobil(driver);
+            //PageCheckoutWrapperStpV.pasoBotonVerResumenCheckout2Mobil(driver);
         	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, channel, driver);
             PageCheckoutWrapperStpV.pasoBotonConfirmarPagoCheckout3Mobil(driver);
         }       

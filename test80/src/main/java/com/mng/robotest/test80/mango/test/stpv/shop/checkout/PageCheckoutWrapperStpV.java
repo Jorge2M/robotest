@@ -366,14 +366,14 @@ public class PageCheckoutWrapperStpV {
     	PageCheckoutWrapper.page1DktopCheckout.clickConfirmarPago(driver);
     }
 
-    @Step (
-    	description="Seleccionamos el botón \"Ver resumen\"", 
-        expected="Aparece la página-3 del checkout",
-        saveImagePage=SaveWhen.Always)
-    public static void pasoBotonVerResumenCheckout2Mobil(WebDriver driver) throws Exception {
-        PageCheckoutWrapper.page2MobilCheckout.waitAndClickFinalizarCompra(2, driver);
-        checkAfterClickVerResumen(2, driver);
-    }       
+//    @Step (
+//    	description="Seleccionamos el botón \"Ver resumen\"", 
+//        expected="Aparece la página-3 del checkout",
+//        saveImagePage=SaveWhen.Always)
+//    public static void pasoBotonVerResumenCheckout2Mobil(WebDriver driver) throws Exception {
+//        PageCheckoutWrapper.page2MobilCheckout.waitAndClickFinalizarCompra(2, driver);
+//        checkAfterClickVerResumen(2, driver);
+//    }       
     
     @Validation (
     	description="Aparece el botón de \"Confirmar Pago\" (esperamos hasta #{maxSecondsWait} segundos)",

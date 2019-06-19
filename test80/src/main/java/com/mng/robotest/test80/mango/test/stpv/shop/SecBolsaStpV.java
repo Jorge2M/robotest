@@ -110,8 +110,6 @@ public class SecBolsaStpV {
     throws Exception {
         if (listArticlesForAdd!=null && !listArticlesForAdd.isEmpty()) {
             altaBolsaArticulos(listArticlesForAdd, dataBag, dCtxSh, driver);
-        
-            //Validación
             validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, driver);
         }
         

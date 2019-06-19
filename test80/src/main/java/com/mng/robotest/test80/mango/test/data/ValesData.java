@@ -52,20 +52,20 @@ public class ValesData {
 	public static List<ValePais> getMNGVIP2019(Campanya campanya, boolean filterCal) throws Exception {
 		List<ValePais> listaPaisesVales = new ArrayList<>();
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.CoreaDelSur, 30, "09/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.CoreaDelSur, 40, "09/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("41077792"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.CoreaDelSur, 40, "09/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43097700"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Philippines, 30, "08/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Malaysia, 30, "07/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Singapore, 30, "07/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Russia, 30, "03/06/2019 00:00", "09/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Russia, 40, "03/06/2019 00:00", "09/06/2019 00:00", filterCal, Arrays.asList("41077792"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.España, 30, "13/06/2019 00:00", "19/06/2019 00:00", filterCal, Arrays.asList("41077792"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.IslasCanarias, 30, "13/06/2019 00:00", "19/06/2019 00:00", filterCal, Arrays.asList("41077792"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Melilla, 30, "13/06/2019 00:00", "19/06/2019 00:00", filterCal, Arrays.asList("41077792"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Ceuta, 30, "13/06/2019 00:00", "19/06/2019 00:00", filterCal, Arrays.asList("41077792"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Kadjastan, 30, "07/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("41077792"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Portugal, 30, "10/06/2019 00:00", "16/06/2019 00:00", filterCal, Arrays.asList("41077792"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.UnitedKingdom, 30, "08/06/2019 00:00", "14/06/2019 00:00", filterCal, Arrays.asList("41077792"), Arrays.asList("53070658")), listaPaisesVales);
-		//addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Thailand, 30, "07/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("41077792"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Russia, 40, "03/06/2019 00:00", "09/06/2019 00:00", filterCal, Arrays.asList("43097700"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.España, 30, "13/06/2019 00:00", "19/06/2019 00:00", filterCal, Arrays.asList("43097700"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.IslasCanarias, 30, "13/06/2019 00:00", "19/06/2019 00:00", filterCal, Arrays.asList("43097700"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Melilla, 30, "13/06/2019 00:00", "19/06/2019 00:00", filterCal, Arrays.asList("43097700"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Ceuta, 30, "13/06/2019 00:00", "19/06/2019 00:00", filterCal, Arrays.asList("43097700"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Kadjastan, 30, "07/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43097700"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Portugal, 30, "10/06/2019 00:00", "16/06/2019 00:00", filterCal, Arrays.asList("43097700"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.UnitedKingdom, 30, "08/06/2019 00:00", "14/06/2019 00:00", filterCal, Arrays.asList("43097700"), Arrays.asList("53070658")), listaPaisesVales);
+		//addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Thailand, 30, "07/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43097700"), Arrays.asList("53070658")), listaPaisesVales);
 		
 	    return listaPaisesVales;
 	}
@@ -73,17 +73,17 @@ public class ValesData {
 	public static List<ValePais> getIMVIP2019(Campanya campanya, boolean filterCal) throws Exception {
 		List<ValePais> listaPaisesVales = new ArrayList<>();
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Russia, 30, "03/06/2019 00:00", "09/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Russia, 40, "03/06/2019 00:00", "09/06/2019 00:00", filterCal, Arrays.asList("41077792"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Russia, 40, "03/06/2019 00:00", "09/06/2019 00:00", filterCal, Arrays.asList("43097700"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Deutschland, 30, "03/06/2019 00:00", "09/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Nederland, 30, "03/06/2019 00:00", "09/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.España, 30, "13/06/2019 00:00", "19/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.IslasCanarias, 30, "13/06/2019 00:00", "19/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Italia, 30, "24/06/2019 00:00", "30/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Italia, 40, "24/06/2019 00:00", "30/06/2019 00:00", filterCal, Arrays.asList("41077792"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Italia, 30, "24/06/2019 00:00", "30/06/2019 00:00", filterCal, Arrays.asList("41059067"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Italia, 40, "24/06/2019 00:00", "30/06/2019 00:00", filterCal, Arrays.asList("41059067"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Poland, 30, "10/06/2019 00:00", "16/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.USA, 30, "10/06/2019 00:00", "16/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.USA, 40, "10/06/2019 00:00", "16/06/2019 00:00", filterCal, Arrays.asList("41077792"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.France, 40, "22/05/2019 00:00", "26/05/2019 00:00", filterCal, Arrays.asList("41077792"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.USA, 40, "10/06/2019 00:00", "16/06/2019 00:00", filterCal, Arrays.asList("43097700"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.France, 40, "22/05/2019 00:00", "26/05/2019 00:00", filterCal, Arrays.asList("43097700"), Arrays.asList("53070658")), listaPaisesVales);
 		
 	    return listaPaisesVales;
 	}
@@ -95,7 +95,7 @@ public class ValesData {
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Australia, 30, "13/06/2019 00:00", "16/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Austria, 30, "06/06/2019 00:00", "09/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Colombia, 30, "06/06/2019 00:00", "09/06/2019 00:00", filterCal, Arrays.asList("43088812"), Arrays.asList("51040889")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.México, 30, "06/06/2019 00:00", "09/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.México, 30, "06/06/2019 00:00", "09/06/2019 00:00", filterCal, Arrays.asList("41059067"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Nederland, 30, "06/06/2019 00:00", "09/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Russia, 30, "06/06/2019 00:00", "09/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Schweiz, 30, "06/06/2019 00:00", "09/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
@@ -106,19 +106,19 @@ public class ValesData {
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Croatia, 30, "09/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Slovakia, 30, "09/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Slovenia, 30, "06/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.España, 30, "15/06/2019 00:00", "16/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.España, 30, "15/06/2019 00:00", "19/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Philippines, 30, "10/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Finland, 30, "13/06/2019 00:00", "16/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.France, 30, "23/05/2019 00:00", "26/05/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Hungary, 30, "09/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Indonesia, 30, "10/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Ireland, 30, "11/06/2019 00:00", "14/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.IslasCanarias, 30, "13/06/2019 00:00", "16/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Italia, 30, "27/06/2019 00:00", "30/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.IslasCanarias, 30, "13/06/2019 00:00", "19/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Italia, 30, "27/06/2019 00:00", "30/06/2019 00:00", filterCal, Arrays.asList("41059067"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Kadjastan, 30, "07/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Malaysia, 30, "10/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Norway, 30, "13/06/2019 00:00", "16/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
-		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Poland, 30, "13/06/2019 00:00", "16/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
+		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Poland, 30, "13/06/2019 00:00", "17/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.Portugal, 30, "13/06/2019 00:00", "16/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.UnitedKingdom, 30, "11/06/2019 00:00", "14/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);
 		addValePais(FactoryVale.makeWithArticles(campanya, PaisShop.CzechRepublic, 30, "09/06/2019 00:00", "12/06/2019 00:00", filterCal, Arrays.asList("43029089"), Arrays.asList("53070658")), listaPaisesVales);

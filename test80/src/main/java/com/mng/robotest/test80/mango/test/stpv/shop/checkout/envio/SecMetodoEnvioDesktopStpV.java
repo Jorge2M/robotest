@@ -29,7 +29,6 @@ public class SecMetodoEnvioDesktopStpV {
         	}
         }
 
-        //Validaciones
         validaBlockSelectedDesktop(tipoTransporte, driver);
         if (tipoTransporte.isEntregaDomicilio()) {
             modalDroppoints.validaIsNotVisible(Channel.desktop, driver);
