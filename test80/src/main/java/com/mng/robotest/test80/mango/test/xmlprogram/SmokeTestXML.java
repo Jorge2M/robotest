@@ -14,6 +14,7 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
+import com.mng.robotest.test80.arq.utils.filter.DataFilterTCases;
 import com.mng.robotest.test80.arq.utils.filter.FilterTNGxmlTRun;
 import com.mng.robotest.test80.arq.utils.filter.TestMethod;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
@@ -27,13 +28,15 @@ import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
 public class SmokeTestXML {
 
     ParamsBean params = null;
+    final DataFilterTCases dFilter = new DataFilterTCases();
     
     /**
      * Ejecución desde el Online
      *
      */
     public void testRunner(ParamsBean paramsToStore) {
-        this.params = paramsToStore;
+        params = paramsToStore;
+        setDataFilterFromParams();
         
         // Lista de suites (sólo creamos una)
         List<XmlSuite> suites = new ArrayList<>();
@@ -45,14 +48,26 @@ public class SmokeTestXML {
         tng.run();
     }
     
-    public ArrayList<TestMethod> getDataTestAnnotationsToExec(ParamsBean paramsToStore) {
-        this.params = paramsToStore;
-        XmlSuite xmlSuite = createSuite(this.params);
-        return FilterTNGxmlTRun.getListOfTestAnnotationsOfTCasesToExecute(xmlSuite.getTests().get(0), this.params.getChannel(), this.params.getAppE());
+    public List<TestMethod> getDataTestAnnotationsToExec(ParamsBean paramsToStore) {
+        params = paramsToStore;
+        setDataFilterFromParams();
+        
+        XmlSuite xmlSuite = createSuite(params);
+        XmlTest testRun = xmlSuite.getTests().get(0);
+        return (
+        	FilterTNGxmlTRun.getInitialTestCaseCandidatesToExecute(testRun, dFilter.getChannel(), dFilter.getAppE())
+        );
     }
     
-    public XmlSuite createSuite(ParamsBean paramsI) {
-        
+    //Esto ha de estar en una clase padre
+    private void setDataFilterFromParams() {
+        dFilter.setAppE(params.getAppE());
+        dFilter.setChannel(params.getChannel());
+        dFilter.setGroupsFilter(params.getGroupsList());
+        dFilter.setTestCasesFilter(params.getTestCasesList());
+    }
+    
+    private XmlSuite createSuite(ParamsBean paramsI) {
         XmlSuite suite = new XmlSuite();
         
         //Asignamos un nombre a la suite, definimos sus atributos y los listeners
@@ -84,7 +99,7 @@ public class SmokeTestXML {
             suite.setThreadCount(3);
             
             //Sólo ejecutamos 1 TestRun
-            createTestRunFilteredWithTestCases(suite, CommonsXML.getDescriptionTestRun(this.params), this.params.getListaTestCases());
+            createTestRunFilteredWithTestCases(suite, CommonsXML.getDescriptionTestRun(this.params), this.params.getGroups(), this.params.getTestCases());
         }
         
         return suite;
@@ -98,9 +113,7 @@ public class SmokeTestXML {
         XmlTest testRun = CommonsXML.joinSuiteWithTestRunMobilBStack(webdriverType, suite, bsMovil);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());
-        if (this.params.getListaTestCases()!=null) {
-            FilterTNGxmlTRun.filterWithTCasesToExec(testRun, this.params.getListaTestCases(), this.params.getChannel(), this.params.getAppE());
-        }
+        FilterTNGxmlTRun.filterTestCasesToExec(testRun, dFilter);
         return testRun;
     }
     
@@ -108,17 +121,15 @@ public class SmokeTestXML {
         XmlTest testRun = CommonsXML.joinSuiteWithTestRunDesktopBStack(webdriverType, suite, bsDesktop);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());
-        if (this.params.getListaTestCases()!=null) {
-            FilterTNGxmlTRun.filterWithTCasesToExec(testRun, this.params.getListaTestCases(), this.params.getChannel(), this.params.getAppE());
-        }
+        FilterTNGxmlTRun.filterTestCasesToExec(testRun, dFilter);
         return testRun;
     }    
     
-    private XmlTest createTestRunFilteredWithTestCases(XmlSuite suite, String testRunName, String[] testCaseList) {
+    private XmlTest createTestRunFilteredWithTestCases(XmlSuite suite, String testRunName, String[] groups, String[] testCaseList) {
         XmlTest testRun = CommonsXML.createTestRun(suite, testRunName, testCaseList);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());
-        FilterTNGxmlTRun.filterWithTCasesToExec(testRun, testCaseList, this.params.getChannel(), this.params.getAppE());
+        FilterTNGxmlTRun.filterTestCasesToExec(testRun, dFilter);
         return testRun;
     }    
     

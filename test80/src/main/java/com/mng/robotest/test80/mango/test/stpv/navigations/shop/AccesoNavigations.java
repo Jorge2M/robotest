@@ -53,6 +53,8 @@ public class AccesoNavigations {
     public static void goFromLineasToMultimarcaVOTF(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         PageSelectLineaVOTF.clickBanner(LineaType.she, driver);
         PageSelectLineaVOTF.clickMenu(LineaType.she, 1/*numMenu*/, driver);
+        
+        //Cuando se selecciona el icono de Mango deja de tener efecto el forzado del TestAB de la cabecera que habíamos ejecutado previamente
         SecCabecera.getNew(Channel.desktop, AppEcom.votf, driver).clickLogoMango();
     }
     

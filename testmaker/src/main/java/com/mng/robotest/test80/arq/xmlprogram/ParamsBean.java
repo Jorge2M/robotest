@@ -1,5 +1,8 @@
 package com.mng.robotest.test80.arq.xmlprogram;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.mng.robotest.test80.arq.listeners.CallBack;
 import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.conf.SuiteTest;
@@ -9,6 +12,7 @@ import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
 public class ParamsBean {
 
     Channel channel = Channel.desktop;
+    String[] groups = {};
     String Browser = "";
     String recicleWD = null;
     String netAnalysis = "false";
@@ -92,6 +96,28 @@ public class ParamsBean {
     public void setChannel(String channel) {
         this.channel = Channel.valueOf(channel);
     }
+    
+    public String[] getGroups() {
+        return this.groups;
+    }
+    
+    public List<String> getGroupsList() {
+    	if (null!=getGroups()) {
+    		return Arrays.asList(getGroups());
+    	}
+    	return null;
+    }
+    
+    public String getGroupsStr() {
+        if (null!=getGroups() && getGroups().length>0) {
+            return String.join(",", getGroups());
+        }
+        return "";
+    }
+    
+    public void setGroups(String[] groups) {
+        this.groups = groups;
+    }
 	
     public String getBrowser() {
         return this.Browser;
@@ -150,13 +176,20 @@ public class ParamsBean {
         return "";
     }    
     
-    public String[] getListaTestCases() {
+    public String[] getTestCases() {
         return this.ListaTestCases;
     }    
     
+    public List<String> getTestCasesList() {
+    	if (null!=getTestCases()) {
+    		return Arrays.asList(getTestCases());
+    	}
+    	return null;
+    }
+    
     public String getListaTestCasesStr() {
-        if (getListaTestCases()!=null && getListaTestCases().length>0) {
-            return String.join(",", getListaTestCases());
+        if (getTestCases()!=null && getTestCases().length>0) {
+            return String.join(",", getTestCases());
         }
         return "";
     }

@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.TreeSet;
 
 import org.apache.commons.cli.CommandLine;
@@ -30,6 +31,7 @@ public class Test80mng {
 
     public static String HelpNameParam = "help";
     public static String SuiteNameParam = "suite";
+    public static String GroupsNameParam = "groups";
     public static String BrowserNameParam = "browser";
     public static String ChannelNameParam = "channel";
     public static String AppNameParam = "application";
@@ -88,6 +90,12 @@ public class Test80mng {
             .required(true)
             .hasArg()
             .desc("TestSuite Name")
+            .build();
+        
+        Option groups = Option.builder(GroupsNameParam)
+            .required(false)
+            .hasArg()
+            .desc("Groups of tests to include")
             .build();
                  
         Option browser = Option.builder(BrowserNameParam)
@@ -242,6 +250,7 @@ public class Test80mng {
         options.addOption(url);
         
         //Optional
+        options.addOption(groups);
         options.addOption(countrys);
         options.addOption(lineas);
         options.addOption(payments);        
@@ -395,6 +404,7 @@ public class Test80mng {
     	String suite = cmdLine.getOptionValue(SuiteNameParam);
         ParamsBean params = new ParamsBean(AppEcom.valueOf(app), Suites.valueOf(suite));
         params.setChannel(cmdLine.getOptionValue(ChannelNameParam));
+        params.setGroups(cmdLine.getOptionValues(GroupsNameParam));
         params.setBrowser(cmdLine.getOptionValue(BrowserNameParam));
         params.setVersion(cmdLine.getOptionValue(VersionNameParam));
         params.setURLBase(cmdLine.getOptionValue(URLNameParam));        
@@ -505,7 +515,7 @@ public class Test80mng {
         return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
     }
 
-    public static ArrayList<TestMethod> getDataTestAnnotationsToExec(ParamsBean params) throws Exception {
+    public static List<TestMethod> getDataTestAnnotationsToExec(ParamsBean params) throws Exception {
         params.setTypeAccessIfNotSetted(TypeAccessFmwk.Online);
         Suites suiteValue = Suites.valueOf(params.getSuiteName());
         switch (suiteValue) {

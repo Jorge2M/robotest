@@ -4,24 +4,25 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.Map.Entry;
 
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlInclude;
-import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
 import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.filter.FilterTNGxmlTRun;
 import com.mng.robotest.test80.arq.utils.filter.resources.TestNGxmlStub;
+import com.mng.robotest.test80.arq.utils.filter.resources.TestNGxmlStub.TypeStubTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
 
 public class TestFilterTNGxmlTRun {
 
-    TestNGxmlStub testNGxml = new TestNGxmlStub();
+	List<String> groupsVoid = null;
     public enum GroupDep {from, to}
     
     public enum AppEcom implements AppTest {
@@ -39,10 +40,14 @@ public class TestFilterTNGxmlTRun {
     public void getListOfTestMethodsFilteredByIncludesAndDesktopShop() {
         Channel channel = Channel.desktop;
         AppTest appE = AppEcom.shop;
-        XmlTest xmlTest = makeXmlTest(channel, appE, "V1"/*not filter methods with includes associated to class*/);
+        TestNGxmlStub testStub = makeTestStub(channel, appE, TypeStubTest.WithoutMethodsIncludedInClass);
+        XmlTest testRun = getTestRun(testStub, channel, appE);
         
         //Code to test
-        ArrayList<TestMethod> testMethods = FilterTNGxmlTRun.getListOfTestAnnotationsOfTCasesToExecute(xmlTest, channel, appE);
+        DataFilterTCases dFilter = new DataFilterTCases();
+        dFilter.setAppE(appE);
+        dFilter.setChannel(channel);
+        List<TestMethod> testMethods = FilterTNGxmlTRun.getTestCasesToExecute(testRun, dFilter);
         
         assertEquals("The number of tests is 3", 3, testMethods.size());
         ArrayList<String> testMethodsNames = new ArrayList<>();
@@ -62,25 +67,30 @@ public class TestFilterTNGxmlTRun {
     public void getListOfTestMethodsFilteredByIncludes() {
         Channel channel = Channel.desktop;
         AppEcom appE = AppEcom.shop;
-        XmlTest xmlTest = makeXmlTest(channel, appE, "V2"/*add include*/);
+        TestNGxmlStub testStub = makeTestStub(channel, appE, TypeStubTest.OnlyMethodGpo001includedInClass);
+        XmlTest xmlTest = getTestRun(testStub, channel, appE);
         
         //Code to test
-        ArrayList<TestMethod> testMethods = FilterTNGxmlTRun.getListOfTestAnnotationsOfTCases(xmlTest);
+        List<TestMethod> testMethods = FilterTNGxmlTRun.getTestsCasesInXMLClasses(xmlTest);
         
         String descriptionExpected = "[Usuario registrado] Acceder a galería camisas. Filtros y ordenación. Seleccionar producto y color";
         assertEquals("The number of tests is 1", 1, testMethods.size());
-        assertEquals("The description is " + this.testNGxml.methodGroupGaleriaProductoIncluded, descriptionExpected, testMethods.get(0).getAnnotationTest().description());
-        assertEquals("The method is " + this.testNGxml.methodGroupGaleriaProductoIncluded, this.testNGxml.methodGroupGaleriaProductoIncluded, testMethods.get(0).getMethod().getName());
+        
+        TestMethod methodIncluded = testMethods.get(0);
+        String methodNameExpected = testStub.getMethodsIncludedInClass().get(0);
+        assertEquals("The description is " + descriptionExpected, descriptionExpected, methodIncluded.getAnnotationTest().description());
+        assertEquals("The method is " + methodNameExpected, methodNameExpected, methodIncluded.getMethod().getName());
     }
     
     @Test
     public void getListOfTestMethodsNotFilteredByIncludes() {
         Channel channel = Channel.desktop;
         AppEcom appE = AppEcom.shop;
-        XmlTest xmlTest = makeXmlTest(channel, appE, "V1"/*not filter methods with includes associated to class*/);
+        TestNGxmlStub testStub = makeTestStub(channel, appE, TypeStubTest.WithoutMethodsIncludedInClass);
+        XmlTest testRun = getTestRun(testStub, channel, appE);
         
         //Code to test
-        ArrayList<TestMethod> testMethods = FilterTNGxmlTRun.getListOfTestAnnotationsOfTCases(xmlTest);
+        List<TestMethod> testMethods = FilterTNGxmlTRun.getTestsCasesInXMLClasses(testRun);
         
         assertEquals("The number of tests is 4", 4, testMethods.size());
     }
@@ -89,14 +99,18 @@ public class TestFilterTNGxmlTRun {
     public void filterListOfTestCasesVoidWithInclude() {
         Channel channel = Channel.desktop;
         AppEcom appE = AppEcom.shop;
-        XmlTest xmlTest = makeXmlTest(channel, appE, "V2"/*add include*/);
-        String[] voidTestCaseList = {};
+        TestNGxmlStub testStub = makeTestStub(channel, appE, TypeStubTest.OnlyMethodMic001includedInClass);
+        XmlTest xmlTest = getTestRun(testStub, channel, appE);
+        
         int initNumberXmlClasses = xmlTest.getXmlClasses().size();
         //int initNumberXmlDependencyGroups = xmlTest.getXmlDependencyGroups().size();
         int initNumberIncludeMethods = getIncludedMethodsCount(xmlTest.getXmlClasses());
 
         //Code to test
-        FilterTNGxmlTRun.filterWithTCasesToExec(xmlTest, voidTestCaseList, channel, appE);
+        DataFilterTCases dFilter = new DataFilterTCases();
+        dFilter.setAppE(appE);
+        dFilter.setChannel(channel);
+        FilterTNGxmlTRun.filterTestCasesToExec(xmlTest, dFilter);
         
         //The xmlTest is not changed 
         assertEquals("The number of classes remais equal", initNumberXmlClasses, xmlTest.getXmlClasses().size());
@@ -108,96 +122,115 @@ public class TestFilterTNGxmlTRun {
     public void filterListOfTestCasesVoidWithoutInclude() {
         Channel channel = Channel.desktop;
         AppEcom appE = AppEcom.shop;
-        XmlTest xmlTest = makeXmlTest(channel, appE, "V1"/*without includes*/);
-        String[] voidTestCaseList = {};
-        int initNumberXmlClasses = xmlTest.getXmlClasses().size();
-        int initNumberIncludeMethods = getIncludedMethodsCount(xmlTest.getXmlClasses());
+        TestNGxmlStub testStub = makeTestStub(channel, appE, TypeStubTest.WithoutMethodsIncludedInClass);
+        XmlTest testRun = getTestRun(testStub, channel, appE);
+        int initNumberXmlClasses = testRun.getXmlClasses().size();
 
         //Code to test
-        FilterTNGxmlTRun.filterWithTCasesToExec(xmlTest, voidTestCaseList, channel, appE);
+        DataFilterTCases dFilter = new DataFilterTCases();
+        dFilter.setAppE(appE);
+        dFilter.setChannel(channel);
+        FilterTNGxmlTRun.filterTestCasesToExec(testRun, dFilter);
         
-        //The xmlTest is not changed 
-        assertEquals("The number of classes remais equal", initNumberXmlClasses, xmlTest.getXmlClasses().size());
-        
-        //The list of groups of @Tests in ClassWithTCasesStub is "MiCuenta", "GaleriaProducto" and "Bolsa" -> Only survives the dependency "GaleriaProducto <- Micuenta"
-        assertEquals("The number of dependencies-group is " + 1, 1, xmlTest.getXmlDependencyGroups().size());
-        
-        assertEquals("The number of methods included remais equal", initNumberIncludeMethods, getIncludedMethodsCount(xmlTest.getXmlClasses()));
+        assertEquals("The number of classes remais equal", initNumberXmlClasses, testRun.getXmlClasses().size());
+        assertEquals("The number of dependencies-group is " + 1, 1, testRun.getXmlDependencyGroups().size());
+        assertEquals("The number of methods is " + testStub.numberTestsCasesDesktopShop, testStub.numberTestsCasesDesktopShop, getIncludedMethodsCount(testRun.getXmlClasses()));
     }
     
     @Test
     public void filterIncludeNewTestCase() {
         Channel channel = Channel.desktop;
         AppEcom appE = AppEcom.shop;
-        XmlTest xmlTest = makeXmlTest(channel, appE, "V2"/*add include*/);
-        String[] testCaseList = {this.testNGxml.methodGroupMiCuentaNotIncluded};
+        TestNGxmlStub testStub = makeTestStub(channel, appE, TypeStubTest.WithoutMethodsIncludedInClass);
+        XmlTest testRun = getTestRun(testStub, channel, appE);
+        String testExpectedToBeIncluded = testStub.methodGroupGaleriaProductoToInclude;
+        List<String> testCaseList = Arrays.asList(testExpectedToBeIncluded);
         
         //Code to test
-        FilterTNGxmlTRun.filterWithTCasesToExec(xmlTest, testCaseList, channel, appE);
+        DataFilterTCases dFilter = new DataFilterTCases();
+        dFilter.setAppE(appE);
+        dFilter.setChannel(channel);
+        dFilter.setTestCasesFilter(testCaseList);
+        FilterTNGxmlTRun.filterTestCasesToExec(testRun, dFilter);
         
-        assertTrue("The new method " + this.testNGxml.methodGroupMiCuentaNotIncluded + " is included", classIncludesMethod(xmlTest.getXmlClasses().get(0), this.testNGxml.methodGroupMiCuentaNotIncluded));
-        assertTrue("The old method " + this.testNGxml.methodGroupGaleriaProductoIncluded + " disappear", !classIncludesMethod(xmlTest.getXmlClasses().get(0), this.testNGxml.methodGroupGaleriaProductoIncluded));
-        assertEquals("No remains dependencies-group", 0, xmlTest.getXmlDependencyGroups().size());
+        String textExpectedToNotBeIncluded = testStub.methodGroupMiCuentaToInclude;
+        assertTrue("The new method " + testExpectedToBeIncluded + " is included", classIncludesMethod(testRun.getXmlClasses().get(0), testExpectedToBeIncluded));
+        assertTrue("The old method " + textExpectedToNotBeIncluded + " disappear", !classIncludesMethod(testRun.getXmlClasses().get(0), textExpectedToNotBeIncluded));
+        assertEquals("No remains dependencies-group", 0, testRun.getXmlDependencyGroups().size());
     }
     
     @Test
-    public void filterIncludeTwoTestCaseAnd1groupRemains() {
-        Channel channel = Channel.desktop;
-        AppEcom appE = AppEcom.shop;
-        XmlTest xmlTest = makeXmlTest(channel, appE, "V2"/*add include*/);
-        String[] testCaseList = {this.testNGxml.methodGroupMiCuentaNotIncluded, this.testNGxml.methodGroupGaleriaProductoIncluded};
-        execAndvalidateTestsTwoMethods(xmlTest, testCaseList);
+    public void filterIncludeTwoTestCaseByName_1groupRemains() {
+    	Channel channel = Channel.desktop;
+    	AppEcom app = AppEcom.shop;
+        TestNGxmlStub testStub = makeTestStub(channel, app, TypeStubTest.WithTwoMethodsIncludedInClass);
+        includeTwoTestsMethodsAndCheck(testStub, channel, app, true);
     }
     
     @Test
-    public void filterIncludeTwoTestCaseWithCode() {
-        Channel channel = Channel.desktop;
-        AppEcom appE = AppEcom.shop;
-        XmlTest xmlTest = makeXmlTest(channel, appE, "V2"/*add include*/);
-        String codeMethod1 = this.testNGxml.methodGroupMiCuentaNotIncluded.substring(0,5);
-        String codeMethod2 = this.testNGxml.methodGroupGaleriaProductoIncluded.substring(0,5);
-        String[] testCaseList = {codeMethod1, codeMethod2};
-        execAndvalidateTestsTwoMethods(xmlTest, testCaseList);
+    public void filterIncludeTwoTestCasesByCode_1groupRemains() {
+    	Channel channel = Channel.desktop;
+    	AppEcom app = AppEcom.shop;
+        TestNGxmlStub testStub = makeTestStub(channel, app, TypeStubTest.WithTwoMethodsIncludedInClass);
+        includeTwoTestsMethodsAndCheck(testStub, channel, app, false);
     }
     
-    private void execAndvalidateTestsTwoMethods(XmlTest xmlTest, String[] testCaseList) {
-        Channel channel = Channel.desktop;
-        AppEcom appE = AppEcom.shop;
+    private void includeTwoTestsMethodsAndCheck(TestNGxmlStub testStub, Channel channel, AppEcom app, boolean byName) {
+    	List<String> testCaseList;
+    	if (byName) {
+            testCaseList = Arrays.asList(
+            	testStub.methodGroupGaleriaProductoToInclude, 
+            	testStub.methodGroupMiCuentaToInclude);
+    	} else {
+            testCaseList = Arrays.asList(
+            	testStub.methodGroupGaleriaProductoToInclude.substring(0,6), 
+            	testStub.methodGroupMiCuentaToInclude.substring(0,6));
+    	}
+    	
+        XmlTest testRun = getTestRun(testStub, channel, app);
         
         //Code to test
-        FilterTNGxmlTRun.filterWithTCasesToExec(xmlTest, testCaseList, channel, appE);
-
-        assertEquals("Remains only 1 dependency-group ", 1, xmlTest.getXmlDependencyGroups().size());
-        assertTrue("Is present the group \"GaleriaProducto\"", isGroupInDependencies(xmlTest, "GaleriaProducto", GroupDep.to));
-        assertTrue("Is present the dependency \"Micuenta\"", isGroupInDependencies(xmlTest, "Micuenta", GroupDep.from));
-        assertTrue("The new method " + this.testNGxml.methodGroupMiCuentaNotIncluded + " is included", classIncludesMethod(xmlTest.getXmlClasses().get(0), this.testNGxml.methodGroupMiCuentaNotIncluded));
-        assertTrue("The old method " + this.testNGxml.methodGroupGaleriaProductoIncluded + " remains included", classIncludesMethod(xmlTest.getXmlClasses().get(0), this.testNGxml.methodGroupGaleriaProductoIncluded));        
+        DataFilterTCases dFilter = new DataFilterTCases();
+        dFilter.setAppE(app);
+        dFilter.setChannel(channel);
+        dFilter.setTestCasesFilter(testCaseList);
+        FilterTNGxmlTRun.filterTestCasesToExec(testRun, dFilter);
+        
+        assertEquals("Remains only 1 dependency-group ", 1, testRun.getXmlDependencyGroups().size());
+        assertTrue("Is present the group \"GaleriaProducto\"", isGroupInDependencies(testRun, "GaleriaProducto", GroupDep.to));
+        assertTrue("Is present the dependency \"Micuenta\"", isGroupInDependencies(testRun, "Micuenta", GroupDep.from));
+        assertTrue("The new method " + testStub.methodGroupGaleriaProductoToInclude + " is included", classIncludesMethod(testRun.getXmlClasses().get(0), testStub.methodGroupGaleriaProductoToInclude));
+        assertTrue("The old method " + testStub.methodGroupMiCuentaToInclude + " remains included", classIncludesMethod(testRun.getXmlClasses().get(0), testStub.methodGroupMiCuentaToInclude));        
     }
     
     @Test
     public void includeTestCaseThatDoesnotExists() {
         Channel channel = Channel.desktop;
         AppEcom appE = AppEcom.shop;
-        XmlTest xmlTest = makeXmlTest(channel, appE, "V2"/*add include*/);
-        String[] testCaseList = {this.testNGxml.methodThatDoesNotExists};
+        TestNGxmlStub testStub = makeTestStub(channel, appE, TypeStubTest.OnlyMethodThatDoesntExistInClass);
+        XmlTest testRun = getTestRun(testStub, channel, appE);        
+        List<String> testCaseList = Arrays.asList(testStub.methodThatDoesNotExistsInClass);
         
         //Code to test
-        FilterTNGxmlTRun.filterWithTCasesToExec(xmlTest, testCaseList, channel, appE);
+        DataFilterTCases dFilter = new DataFilterTCases();
+        dFilter.setAppE(appE);
+        dFilter.setChannel(channel);
+        dFilter.setTestCasesFilter(testCaseList);
+        FilterTNGxmlTRun.filterTestCasesToExec(testRun, dFilter);
         
-        assertEquals("No classes remains ", 0, xmlTest.getClasses().size());
+        assertEquals("No classes remains ", 0, testRun.getClasses().size());
     }
     
-    /**
-     * @param version
-     *  V1 - Include all methods
-     *  V2 - Include only the method this.methodGroupGaleriaProductoIncluded
-     */
-    private XmlTest makeXmlTest(Channel channel, AppTest appE, String version) {
+    private TestNGxmlStub makeTestStub(Channel channel, AppTest appE, TypeStubTest typeTest) {
         ParamsBean params = new ParamsBean(appE, null);
         params.setChannel(channel);
-        params.setVersion(version);
-        XmlSuite xmlSuite = this.testNGxml.createSuite(params);
-        return xmlSuite.getTests().get(0);        
+        return (TestNGxmlStub.newTest(typeTest));
+    }
+    
+    private XmlTest getTestRun(TestNGxmlStub testStub, Channel channel, AppTest appE) {
+        ParamsBean params = new ParamsBean(appE, null);
+        params.setChannel(channel);
+        return (testStub.createSuite(params).getTests().get(0));
     }
     
     private int getIncludedMethodsCount(List<XmlClass> listXmlClasses) {

@@ -213,8 +213,9 @@ for (SuiteTestData suiteTest : listTestSuites) {
 						<%
 						for (TestMethod testMethod : Test80mng.getDataTestAnnotationsToExec(getParamsFromSuiteToGetTCases(suiteTest))) {
 						    String selected = "";
-						    if (FilterTNGxmlTRun.testCasesContainsMethod(suiteTest.getListTCasesArray(), testMethod.getMethod().getName()))
+						    if (FilterTNGxmlTRun.methodInTestCaseList(testMethod.getMethod().getName(), suiteTest.getListTCasesArray())) {
 						        selected = "selected";
+						    }
 						%>
 							<option value="<%=testMethod.getMethod().getName()%>" <%=selected%> title="<%=testMethod.getAnnotationTest().description()%>"><%=testMethod.getMethod().getName()%></option>
 						<%}%>

@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.arq.utils.filter.resources;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.testng.TestNG;
@@ -19,12 +20,34 @@ import org.testng.xml.XmlTest;
 
 public class TestNGxmlStub {
 
+    public enum TypeStubTest {
+    	WithoutMethodsIncludedInClass,
+    	OnlyMethodGpo001includedInClass,
+    	OnlyMethodMic001includedInClass,
+    	WithTwoMethodsIncludedInClass,
+    	OnlyMethodThatDoesntExistInClass;
+    }
+	
     public final String classWithTestAnnotations = "com.mng.robotest.test80.arq.utils.filter.resources.ClassWithTCasesStub";
-    public final String methodGroupGaleriaProductoIncluded = "GPO001_Galeria_Camisas";
-    public final String methodGroupMiCuentaNotIncluded = "MIC001_Opciones_Mi_Cuenta";
-    public final String methodThatDoesNotExists = "COM001_Compra_TrjSaved_Empl";
+    public final String methodGroupGaleriaProductoToInclude = "GPO001_Galeria_Camisas";
+    public final String methodGroupMiCuentaToInclude = "MIC001_Opciones_Mi_Cuenta";
+    public final String methodThatDoesNotExistsInClass = "COM001_Compra_TrjSaved_Empl";
+    public final int numberTestsCasesDesktopShop = 3;
     
     ParamsBean params = null;
+    TypeStubTest typeTest;
+
+    private TestNGxmlStub() {};
+    
+    public static TestNGxmlStub newTest(TypeStubTest typeTest) {
+    	TestNGxmlStub test = new TestNGxmlStub();
+    	test.setTypeTest(typeTest);
+    	return test;
+    }
+    
+    private void setTypeTest(TypeStubTest typeTest) {
+    	this.typeTest = typeTest;
+    }
     
     /**
      * Ejecución desde el Online
@@ -54,7 +77,7 @@ public class TestNGxmlStub {
         return suite;
     }
     
-    public XmlTest joinSuiteWithTestRunLocal(XmlSuite suite, String testRunName) {
+    private XmlTest joinSuiteWithTestRunLocal(XmlSuite suite, String testRunName) {
         XmlTest testRun = CommonsXML.createTestRun(suite, testRunName);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());     
@@ -92,16 +115,41 @@ public class TestNGxmlStub {
         List<XmlClass> listClasses = new ArrayList<>();
         XmlClass xmlClass = new XmlClass(this.classWithTestAnnotations);
         List<XmlInclude>includeMethods = new ArrayList<>();
-        if ("V2".compareTo(this.params.getVersion())==0)
-            includeMethods.add(new XmlInclude(this.methodGroupGaleriaProductoIncluded));
-        
+        List<String> listMethodsToInclude = getMethodsIncludedInClass();
+        if (listMethodsToInclude!=null) {
+        	for (String method : listMethodsToInclude) {
+        		includeMethods.add(new XmlInclude(method));
+        	}
+        }
         xmlClass.setIncludedMethods(includeMethods);
         listClasses.add(xmlClass);
         
         return listClasses;
     }
     
-    public ParamsBean getParams() {
-        return this.params;
+    public List<String> getMethodsIncludedInClass() {
+    	switch (typeTest) {
+    	case OnlyMethodGpo001includedInClass:
+    		return (
+    			Arrays.asList(methodGroupGaleriaProductoToInclude)
+    		);
+    	case OnlyMethodMic001includedInClass:
+    		return (
+    			Arrays.asList(methodGroupMiCuentaToInclude)
+    		);
+    	case WithTwoMethodsIncludedInClass:
+    		return (
+    			Arrays.asList(
+    				methodGroupGaleriaProductoToInclude,
+    				methodGroupMiCuentaToInclude)
+    		);
+    	case OnlyMethodThatDoesntExistInClass:
+    		return (
+    			Arrays.asList(methodThatDoesNotExistsInClass)
+    	    );
+    	default:
+    	case WithoutMethodsIncludedInClass:
+    		return (new ArrayList<String>());
+    	}
     }
 }
