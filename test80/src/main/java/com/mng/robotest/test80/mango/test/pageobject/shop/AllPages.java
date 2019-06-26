@@ -12,7 +12,7 @@ import org.testng.ITestContext;
 
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 public class AllPages extends WebdrvWrapp {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);

@@ -15,15 +15,15 @@ import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.NodoStatus;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavoritos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
@@ -56,7 +56,7 @@ public class AccesoStpV {
         }
        
         if (clearArticulos) {
-            registro+= "Borrar la Bolsa/Favoritos<br>";        
+            registro+= "Borrar la Bolsa<br>";        
         }
         
         DatosStep datosStep = TestCaseData.getDatosCurrentStep();
@@ -71,9 +71,6 @@ public class AccesoStpV {
         
         if (clearArticulos) {
             SecBolsa.clearArticulos(dCtxSh, driver);
-            if (dCtxSh.appE==AppEcom.shop) {
-                PageFavoritos.clearAllArticulos(dCtxSh.channel, dCtxSh.appE, driver);
-            }
         }
         
         if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) {
@@ -159,9 +156,9 @@ public class AccesoStpV {
             if (dCtxSh.userRegistered) {
                 identificacionEnMango(dCtxSh, driver);
                 SecBolsaStpV.clear(dCtxSh, driver);
-                if (dCtxSh.appE==AppEcom.shop) {
-                    PageFavoritosStpV.clearAll(dCtxSh, driver);
-                }
+//                if (dCtxSh.appE==AppEcom.shop) {
+//                    PageFavoritosStpV.clearAll(dCtxSh, driver);
+//                }
             }
         }
     }    
@@ -201,6 +198,7 @@ public class AccesoStpV {
         AllPagesStpV.validacionesEstandar(flagsVal, driver);
         PageSelectLineaVOTFStpV.selectMenuAndLogoMango(1, dCtxSh, driver);
     }
+
     
     final static String tagNombrePaisOrigen = "@TagPaisOrigen";
     final static String tagCodigoPaisOrigen = "@TagCodigoPaisOrigen";

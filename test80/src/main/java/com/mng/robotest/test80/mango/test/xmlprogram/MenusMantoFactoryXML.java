@@ -14,9 +14,9 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.ParamsBean;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
 
 public class MenusMantoFactoryXML {
 
@@ -50,7 +50,7 @@ public class MenusMantoFactoryXML {
         //suite.setName("TestMovilWeb");
         suite.setFileName("tng_PagosPaises.xml");
         suite.setName(params.getSuiteName());
-        suite.setListeners(commonsXML.createStandardListeners());
+        suite.setListeners(CommonsXML.createStandardListeners());
         
         //suite.setObjectFactory(SingletonObjectFactory.instance());
 
@@ -69,12 +69,8 @@ public class MenusMantoFactoryXML {
         return suite;
     }
     
-    //Creación de los parámetros comunes a nivel de la Suite
     private void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean params) {
-        //Establecemos los parámetros genéricos (válidos para todos los casos de prueba)
-        commonsXML.setCommonsParamsSuite(parametersSuite, params);
-
-        //Parámetros que especifican el tipo de canal
+    	CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, params);
         if (params.getChannel()==Channel.movil_web) {
             parametersSuite.put("isMobil", "true");
         } else {
@@ -90,7 +86,7 @@ public class MenusMantoFactoryXML {
     }
     
     public XmlTest joinSuiteWithTestRunLocal(XmlSuite suite, String testRunName) {
-        XmlTest testRun = commonsXML.createTestRun(suite, testRunName);
+        XmlTest testRun = CommonsXML.createTestRun(suite, testRunName);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());     
         return testRun;

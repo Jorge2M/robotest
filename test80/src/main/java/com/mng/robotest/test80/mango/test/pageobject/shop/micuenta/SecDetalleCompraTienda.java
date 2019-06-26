@@ -3,19 +3,15 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.micuenta;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
-
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 public class SecDetalleCompraTienda extends WebdrvWrapp {
 
     static String XPathDataTicket = "//div[@class[contains(.,'ticket-container')]]";
     static String XPathNumTicket = XPathDataTicket + "//div[@class='info']/p[1]";  
-    static String XPathImporte = XPathDataTicket + "//div[@class='box-price' or @class='price']";
+    static String XPathImporte = XPathDataTicket + "//div[@class='box-price' or @class='price' or @class[contains(.,'price-shop')]]";
     static String XPathDireccion = XPathDataTicket + "//div[@class='info']/p[3]"; 
-    static String XPathFechaDesktop = XPathDataTicket + "//div[@class='number']/span";
-    static String XPathFechaMovil = XPathDataTicket + "//div[@class='number']/div[@class='date']";
     static String XPathCodigoBarrasImg = XPathDataTicket + "//div[@class='code']/img";
     static String XPathArticulo = "//div[@onclick[contains(.,'openProductDetails')]]";
 
@@ -38,14 +34,6 @@ public class SecDetalleCompraTienda extends WebdrvWrapp {
         return (xpathArticulo + "//div[@class='price' or @class[contains(.,'box-price')]]");
     }
     
-    
-    public static String getXPathFecha (Channel channel) {
-        if (channel==Channel.movil_web) {
-            return XPathFechaMovil;
-        }
-        return XPathFechaDesktop;
-    }
-    
     public static boolean isVisibleSectionUntil(int maxSecondsToWait, WebDriver driver) {
         return (isElementVisibleUntil(driver, By.xpath(XPathDataTicket), maxSecondsToWait));
     }
@@ -61,11 +49,6 @@ public class SecDetalleCompraTienda extends WebdrvWrapp {
     
     public static String getDireccion(WebDriver driver) {
         return (driver.findElement(By.xpath(XPathDireccion)).getText());
-    }
-    
-    public static String getFecha(Channel channel, WebDriver driver) {
-        String xpathFecha = getXPathFecha (channel);
-        return (driver.findElement(By.xpath(xpathFecha)).getText());
     }
     
     public static int getNumPrendas(WebDriver driver) {

@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.xml.bind.annotation.*;
 
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 
 

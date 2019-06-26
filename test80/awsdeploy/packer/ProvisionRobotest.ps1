@@ -25,16 +25,17 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope LocalMachine
 # Install chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-# Install Browsers
-chocolatey install googlechrome -y --ignore-checksums
-chocolatey install firefox -y --version 65.0
+# Install Chrome 
+chocolatey install googlechrome --version 74.0.3729.169 -y --ignore-checksums
 
-# Install ChromeDriver v73.0.3683 in a path accesible for webdrivermagnaer. 
+# Install Firefox
+chocolatey install firefox -y --version 67.0
+
+# Install ChromeDriver in a path accesible for webdrivermanager
 # This step is made for avoid the initial problems when is the webdrivermanager who download the chromedriver (specially in parallel browser-runs) 
-# Warning! the default version 2.38 that is downloaded will be modified in the future
 chocolatey feature enable -n allowGlobalConfirmation
-choco install selenium-chrome-driver
-$destination = 'C:\Windows\System32\config\systemprofile\.m2\repository\webdriver\chromedriver\win32\73.0.3683.20\chromedriver.exe'
+choco install selenium-chrome-driver -version 74.0.3729.6
+$destination = 'C:\Windows\System32\config\systemprofile\.m2\repository\webdriver\chromedriver\win32\74.0.3729.169\chromedriver.exe'
 New-Item -ItemType File -Path $destination -Force
 Copy-Item -Force -Path 'C:\tools\selenium\chromedriver.exe' -Destination $destination 
 
@@ -51,14 +52,19 @@ Copy-Item -Force -Path 'C:\tools\selenium\geckodriver.exe' -Destination $destina
 #chocolatey uninstall tomcat
 
 #Install tomcat
-chocolatey install tomcat --force -params "servicename=Tomcat8"
+#chocolatey install tomcat --version 9.0.20 --force -params "servicename=Tomcat9"
+chocolatey install jdk8
+chocolatey install tomcat --version 9.0.20 --force
 refreshenv
 
 #Move file tomcat-users.xml that gives roles to tomcat user
+#Get-Location = C:\Users\Administrator
+#CATALINA_HOME = C:\ProgramData\chocolatey\lib\Tomcat\tools\apache-tomcat-9.0.20\
+#CATALINA_BASE = C:\ProgramData\Tomcat9
 $currentScriptDirectory = Get-Location
 $fileTomcatUsersOrigin = $currentScriptDirectory.tostring() + '\tomcat-users.xml'
-$catalinaHome = Get-EnvironmentVariable -Name 'CATALINA_HOME' -Scope User
-$fileTomcatUsersDestination = $catalinaHome + '\conf\tomcat-users.xml'
+$catalinaBase = Get-EnvironmentVariable -Name 'CATALINA_BASE' -Scope User
+$fileTomcatUsersDestination = $catalinaBase + '\conf\tomcat-users.xml'
 Copy-Item -Force -Path $fileTomcatUsersOrigin -Destination $fileTomcatUsersDestination
 
 # Install Tools AWS for Windows (https://aws.amazon.com/es/powershell/)

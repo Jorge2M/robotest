@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
-import com.mng.robotest.test80.Test80mng.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
@@ -20,9 +19,10 @@ import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -71,9 +71,9 @@ public class PagoNavigationsStpV {
     	accessShopAndLoginOrLogoff(dCtxSh, driver);
         if (dCtxSh.userRegistered) {
             SecBolsaStpV.clear(dCtxSh, driver);
-            if (dCtxSh.appE==AppEcom.shop) {
-                PageFavoritosStpV.clearAll(dCtxSh, driver);
-            }
+//            if (dCtxSh.appE==AppEcom.shop) {
+//                PageFavoritosStpV.clearAll(dCtxSh, driver);
+//            }
             
             StdValidationFlags flagsVal = StdValidationFlags.newOne();
             flagsVal.validaSEO = false;
@@ -133,7 +133,8 @@ public class PagoNavigationsStpV {
         
         test1rstPageCheckout(dCtxSh, dCtxPago, driver);
         if (dCtxSh.channel==Channel.movil_web) {
-        	Page1EnvioCheckoutMobilStpV.clickContinuarToMetodosPago(dCtxSh, driver);
+        	boolean isSaldoEnCuenta = dCtxPago.getFTCkout().isStoreCredit;
+        	Page1EnvioCheckoutMobilStpV.clickContinuarToMetodosPago(dCtxSh, isSaldoEnCuenta, driver);
         }
     }
     
@@ -192,11 +193,11 @@ public class PagoNavigationsStpV {
         dCtxPago.getDataPedido().setEmailCheckout(emailCheckout);
 
         Page1IdentCheckoutStpV.secSoyNuevo.inputEmailAndContinue(emailCheckout, dCtxPago.getFTCkout().emailExist, dCtxSh.appE, dCtxSh.userRegistered, dCtxSh.pais, dCtxSh.channel, driver);
-        HashMap<String, String> datosRegistro = Page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, validaCharNoLatinos, driver);
+        HashMap<String, String> datosRegistro = Page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, validaCharNoLatinos, dCtxSh.channel, driver);
         dCtxPago.setDatosRegistro(datosRegistro);
         if (validaCharNoLatinos) {
             Page2IdentCheckoutStpV.clickContinuarAndExpectAvisoDirecWithNoLatinCharacters(driver);
-            datosRegistro = Page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, false, driver);
+            datosRegistro = Page2IdentCheckoutStpV.inputDataPorDefecto(dCtxSh.pais, emailCheckout, false, dCtxSh.channel, driver);
         }
         
         Page2IdentCheckoutStpV.clickContinuar(dCtxSh.userRegistered, dataBag, dCtxSh.channel, driver);
@@ -404,7 +405,7 @@ public class PagoNavigationsStpV {
         	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, channel, driver);
             PageCheckoutWrapperStpV.pasoBotonAceptarCompraDesktop(driver);
         } else {
-            PageCheckoutWrapperStpV.pasoBotonVerResumenCheckout2Mobil(driver);
+            //PageCheckoutWrapperStpV.pasoBotonVerResumenCheckout2Mobil(driver);
         	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, channel, driver);
             PageCheckoutWrapperStpV.pasoBotonConfirmarPagoCheckout3Mobil(driver);
         }       

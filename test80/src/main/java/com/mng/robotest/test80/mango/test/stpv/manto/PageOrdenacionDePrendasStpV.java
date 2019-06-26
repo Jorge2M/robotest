@@ -8,7 +8,7 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
-import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageOrdenacionDePrendas.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion;
 
@@ -51,7 +51,7 @@ public class PageOrdenacionDePrendasStpV {
 	@Step(
 		description="Seleccionamos en el desplegable la opción <b>PreProduccion</b>",
 		expected="Aparecen los diferentes indicadores de secciones",
-		saveErrorPage = SaveWhen.Never)
+		saveErrorData = SaveWhen.Never)
 	private static void selectPreProduccion(DataFmwkTest dFTest) throws Exception {
 		PageOrdenacionDePrendas.selectInDropDown(Orden.desplegableTiendas, "shop.pre.mango.com", dFTest.driver);
 		PageOrdenacionDePrendas.clickAndWait(Orden.verTiendas, dFTest.driver);
@@ -83,7 +83,7 @@ public class PageOrdenacionDePrendasStpV {
 	@Step(
 		description="Seleccionamos la seccion de <b>She</b>",
 		expected="Podemos seleccionar que queremos realizar",
-		saveErrorPage = SaveWhen.Never)
+		saveErrorData = SaveWhen.Never)
 	private static void selectShe(DataFmwkTest dFTest) throws Exception {
 		SecModalPersonalizacion.selectElement(Section.She, dFTest.driver);
 		validateSectionShe(13, dFTest.driver);
@@ -99,7 +99,7 @@ public class PageOrdenacionDePrendasStpV {
 	@Step(
 		description="Seleccionamos la sección de <b>prendas</b> en el desplegable",
 		expected="Nos aparece otro desplegable con los tipos de prenda",
-		saveErrorPage = SaveWhen.Never)
+		saveErrorData = SaveWhen.Never)
 	private static void selectSectionPrenda(WebDriver driver){
 		PageOrdenacionDePrendas.selectInDropDown(Orden.selectorOrdenacion, "prendas_she", driver);
 		validateSectionPrenda(driver);
@@ -121,7 +121,7 @@ public class PageOrdenacionDePrendasStpV {
 	@Step(
 		description="Seleccionamos <b>Camisas</b> en el desplegable de tipo de prenda y confirmamos nuestra seleccion",
 		expected="Aparecen fotos en pantalla",
-		saveErrorPage = SaveWhen.Never)
+		saveErrorData = SaveWhen.Never)
 	private static void selectTipoPrenda(WebDriver driver) throws Exception {
 		SecModalPersonalizacion.selectInDropDown(Orden.selectorPrendas, "camisas_she", driver);
 		int secondsWaitElement = 2;
@@ -145,7 +145,7 @@ public class PageOrdenacionDePrendasStpV {
 	@Step(
 		description="Enviamos la primera prenda al final",
 		expected="La prenda ha cambiado",
-		saveErrorPage = SaveWhen.Never)
+		saveErrorData = SaveWhen.Never)
 	private static void bajarPrenda(WebDriver driver) throws Exception {
 		PageOrdenacionDePrendas.clickAndWait(Orden.primeraPrenda, driver);
 		PageOrdenacionDePrendas.moveToAndSelectElement(Orden.bajarPrenda, driver);
@@ -167,7 +167,7 @@ public class PageOrdenacionDePrendasStpV {
 	@Step(
 		description="Aplicamos el nuevo orden a las prendas",
 		expected="Se despliega el modal de la ordenacion de predas",
-		saveErrorPage = SaveWhen.Never)
+		saveErrorData = SaveWhen.Never)
 	private static void aplicarOrden (DataFmwkTest dFTest) throws Exception {
 		PageOrdenacionDePrendas.selectElement(Orden.aplicarOrden, dFTest.driver);
 		validateAplicarOrden(dFTest.driver);
@@ -195,7 +195,7 @@ public class PageOrdenacionDePrendasStpV {
 	@Step(
 		description="Aplicamos el nuevo orden a las prendas",
 		expected="Se despliega el modal de la ordenacion de predas",
-		saveErrorPage = SaveWhen.Never)
+		saveErrorData = SaveWhen.Never)
 	private static void aceptarOrdenPais (DataFmwkTest dFTest) throws Exception {
 		SecModalPersonalizacion.selectElement(Modal.applyCountry, dFTest.driver);
 		validateBajarPrenda(dFTest.driver, 10);

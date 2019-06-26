@@ -10,7 +10,10 @@ import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
+import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.stpv.votfcons.ConsolaVotfStpV;
 
 public class ConsolaVotf extends GestorWebDriver {
@@ -19,8 +22,14 @@ public class ConsolaVotf extends GestorWebDriver {
     
     @BeforeMethod
     @Parameters({ "brwsr-path", "urlBase", "prodDisponible1" })
-    public void login(final String bpath, final String urlAcceso, final ITestContext context, final Method method, String prodDisponible1I) throws Exception {
-    	TestCaseData.getAndStoreDataFmwk(bpath, urlAcceso, "", Channel.desktop, context, method);
+    public void login( String bpath, String urlAcceso, ITestContext context, Method method, String prodDisponible1I) 
+    throws Exception {
+        DataCtxShop dCtxSh = new DataCtxShop();
+        dCtxSh.setAppEcom(AppEcom.votf);
+        dCtxSh.setChannel(Channel.desktop);
+        dCtxSh.urlAcceso = urlAcceso;
+        
+        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
         this.prodDisponible1 = prodDisponible1I;
     }
 

@@ -2,11 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageReembolsos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageReembolsos.TypeReembolso;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMiCuenta;
@@ -33,8 +33,6 @@ public class PageReembolsosStpV {
         expected="Aparece la página de reembolsos")
     public static void selectReembolsos(boolean paisConSaldoCta, WebDriver driver) throws Exception {
         PageMiCuenta.clickReembolsos(driver);
-    
-        //Validaciones
         checkClickReembolsos(paisConSaldoCta, driver);
     }
     
@@ -68,10 +66,7 @@ public class PageReembolsosStpV {
      */
     public static void gotoRefundsFromMenuAndValidaSalCta(boolean paisConSaldoCta, float saldoCtaEsperado, AppEcom app, Channel channel, WebDriver driver) 
     throws Exception {
-        //Step (+validación) correspondiente a la selección del menú superior "Mi cuenta" + "Reembolsos"
         PageReembolsosStpV.gotoRefundsFromMenu(paisConSaldoCta, app, channel, driver);
-        
-        //Validations
         checkIsOkSaldoEnCuenta(saldoCtaEsperado, driver);
     }
     
@@ -129,7 +124,7 @@ public class PageReembolsosStpV {
     @Validation
     private static ChecksResult checkAfterModifyDataTransferencia(WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
-        int maxSecondsToWait = 10;
+        int maxSecondsToWait = 15;
     	validations.add(
     		"Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + maxSecondsToWait + " segundos)",
     		PageReembolsos.isVisibleTextBancoUntil(maxSecondsToWait, driver) &&

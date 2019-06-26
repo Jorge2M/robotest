@@ -3,18 +3,15 @@ package com.mng.robotest.test80.mango.test.factoryes;
 import java.util.*;
 import org.testng.annotations.*;
 
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.PaisIdioma;
 import com.mng.robotest.test80.mango.test.appshop.campanas.CampanasData;
 import com.mng.robotest.test80.mango.test.appshop.campanas.CampanasExcel;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-
 
 public class ListCampanas {
 	
@@ -23,8 +20,8 @@ public class ListCampanas {
     public Object[] createInstances(String urlAcceso, String appEStr, String channelStr, String countrysFilterStr, String lineasFilter) 
     throws Exception {
         ArrayList<PaisIdioma> listTests = new ArrayList<>();
-        AppEcom appE = AppEcomEnum.getAppEcom(appEStr);
-        Channel channel = ChannelEnum.getChannel(channelStr);
+        AppEcom appE = AppEcom.valueOf(appEStr);
+        Channel channel = Channel.valueOf(channelStr);
         
         //Cargamos la lista de campañas del Excel
     	CampanasData dataCamp = new CampanasExcel();

@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.loyalty;
 
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -22,8 +22,8 @@ public class PageHomeLikes extends WebdrvWrapp {
 		return (new PageHomeLikes(driver));
 	}
 	
-	public boolean checkIsPage() {
-		return (WebdrvWrapp.isElementVisibleUntil(driver, By.id(idLoyaltySpace), 2));
+	public boolean checkIsPageUntil(int maxSecondsWait) {
+		return (WebdrvWrapp.isElementVisibleUntil(driver, By.id(idLoyaltySpace), maxSecondsWait));
 	}
 	
 	public boolean areVisibleBlocksExchangeLikes() {

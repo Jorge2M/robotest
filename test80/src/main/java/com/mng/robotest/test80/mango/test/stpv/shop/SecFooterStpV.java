@@ -4,13 +4,13 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageAyuda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageInputDataSolMangoCard;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
@@ -30,7 +30,7 @@ public class SecFooterStpV {
     	validations.add(
     		"Aparecen los siguientes links en el footer <b>" + listFooterLinksToValidate + "</b>",
     		SecFooter.checkFooters(listFooterLinksToValidate, app, driver), State.Defect);
-    	return validations;      
+    	return validations;
     }
 
     /**
@@ -57,7 +57,7 @@ public class SecFooterStpV {
 		try {
 	    	validations.add(
 	    		"Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + maxSecondsWait + " segundos)",
-	    		pageObject.isPageCorrectUntil(maxSecondsWait, driver), State.Warn);		
+	    		pageObject.isPageCorrectUntil(maxSecondsWait, driver), State.Warn);
 		    if (typeFooter.pageInNewTab()) {
 		    	validations.add(
 	        		"Aparece la página en una ventana aparte",

@@ -4,10 +4,10 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraOnline;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraTienda;
@@ -22,6 +22,7 @@ public class PageMisComprasStpV {
 
     public static SecDetalleCompraTiendaStpV SecDetalleCompraTienda; 
     public static SecQuickViewArticuloStpV SecQuickViewArticulo;
+    
     public static void validateIsPage(DataCtxShop dataCtxShop, WebDriver driver) throws Exception {
         if (dataCtxShop.pais.isTicketStoreEnabled()) {
             validateIsPage(driver);

@@ -4,15 +4,13 @@ import java.util.*;
 
 import org.testng.annotations.*;
 
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.Registro;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 
 import org.testng.ITestContext;
-
 
 public class ListRegistrosXPais {
     @SuppressWarnings("unused")
@@ -20,7 +18,7 @@ public class ListRegistrosXPais {
     @Parameters({"AppEcom", "countrys", "lineas"})
     public Object[] createInstances(String appEStr, String listaPaisesStr, String lineas, ITestContext context) throws Exception {
         ArrayList<Object> listTests = new ArrayList<>();
-        AppEcom appE = AppEcomEnum.getAppEcom(appEStr);
+        AppEcom appE = AppEcom.valueOf(appEStr);
         try {
             //Obtenemos la lista de países como lista de enteros
             List<Integer> listaPaisesInt = UtilsMangoTest.getListaPaisesInt(listaPaisesStr);

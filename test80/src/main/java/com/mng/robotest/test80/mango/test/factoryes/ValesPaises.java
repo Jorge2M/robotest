@@ -1,21 +1,18 @@
 package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
-
 import org.testng.annotations.*;
 
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.PaisAplicaVale;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.ValesData;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.data.ValesData.Campanya;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
-
 
 public class ValesPaises {
 
@@ -25,26 +22,21 @@ public class ValesPaises {
     @Parameters({"urlBase", "countrys", "AppEcom", "filtroCalendar"})
     public Object[] createInstances(String urlAcceso, String countrys, String appStr, String filtroCalendarStr) 
     throws Exception {
-    	AppEcom app = AppEcomEnum.getAppEcom(appStr);
+    	AppEcom app = AppEcom.valueOf(appStr);
         Calendar currDtCal = Calendar.getInstance();
         boolean filterCal = false;
         if ("true".compareTo(filtroCalendarStr)==0) {
             filterCal = true;
         }
         
-        if (!filterCal ||
-        	currDtCal.getTimeInMillis() > Campanya.GLAM19.getFechaInit().getTimeInMillis()) {
-        	this.listaPaisesVales.addAll(ValesData.getListVales(Campanya.GLAM19, filterCal));
+        for (Campanya campanya : Campanya.values()) {
+        	if (!filterCal || currDtCal.getTimeInMillis() > Campanya.MNGVIP.getFechaInit().getTimeInMillis()) {
+        		List<ValePais> listaVales = ValesData.getListVales(campanya, filterCal);
+        		if (listaVales!=null) {
+        			this.listaPaisesVales.addAll(ValesData.getListVales(campanya, filterCal));
+        		}
+        	}
         }
-//        if (!filterCal ||
-//        	currDtCal.getTimeInMillis() > Campanya.VIP18.getFechaInit().getTimeInMillis()) {
-//        	this.listaPaisesVales.addAll(ValesData.getListVales(Campanya.VIP18, filterCal));
-//        }
-//        
-//        if (!filterCal ||
-//            currDtCal.getTimeInMillis() > Campanya.VIPMNG.getFechaInit().getTimeInMillis()) {
-//        	this.listaPaisesVales.addAll(ValesData.getListVales(Campanya.VIPMNG, filterCal));
-//        }
 
         ArrayList<PaisAplicaVale> listTests = new ArrayList<>();
                 

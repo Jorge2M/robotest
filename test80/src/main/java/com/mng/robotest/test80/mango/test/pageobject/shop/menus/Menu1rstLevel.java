@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 

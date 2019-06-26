@@ -8,7 +8,7 @@ import java.util.List;
 import javax.xml.bind.annotation.*;
 
 import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 
 

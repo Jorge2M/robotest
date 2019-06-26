@@ -30,7 +30,7 @@ public class PageGestionarClientesStpV {
 	@Step (
 		description="Introducimos el DNI <b>#{dni}</b> y pulsamos el botón \"Buscar\"",
 		expected="Aparece una lista de clientes válida",
-		saveErrorPage=SaveWhen.Never,
+		saveErrorData=SaveWhen.Never,
 		saveImagePage=SaveWhen.Always)
 	public static void inputDniAndClickBuscar(String dni, WebDriver driver) throws Exception {
 		int waitSeconds = 20;
@@ -61,7 +61,7 @@ public class PageGestionarClientesStpV {
 	@Step (
 		description="Tras haber introducido un DNI y haber dado al botón \"Buscar\", damos click al botón \"" + TagTypeButton + "\"",
 		expected="Aparece el mensaje correspondiente y el botón Alta",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
 	public static void clickThirdButton(WebDriver driver) throws Exception {
 		TypeThirdButton typeButton = PageGestionarClientes.getTypeThirdButton(driver);	
 		TestCaseData.getDatosCurrentStep().replaceInDescription(TagTypeButton, typeButton.toString());
@@ -90,7 +90,7 @@ public class PageGestionarClientesStpV {
 	@Step(
 		description="Tras haber introducido un DNI y haber dado al botón \"Buscar\", damos click al botón \"Detalles\"",
 		expected="Muestra los detalles del cliente correctamente",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
 	public static void clickDetallesButton(String dni, WebDriver driver) throws Exception {
 		String idCliente;
 		int waitSeconds = 3;

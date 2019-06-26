@@ -11,9 +11,9 @@ import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Color;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.SecFiltros;
@@ -53,7 +53,7 @@ public class SecFiltrosStpV {
 	
 	@Validation
 	private static ChecksResult checkAfterSelectFiltroColores(List<Color> colorsSelected, String litMenu, 
-																	  int numArticulos1page, WebDriver driver) {
+															  int numArticulos1page, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
         int maxSecondsToWait = 1;
         List<String> listCodColors = Color.getListCodigosColor(colorsSelected);

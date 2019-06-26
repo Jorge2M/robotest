@@ -10,6 +10,7 @@ import org.testng.annotations.*;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -56,8 +57,8 @@ public class PaisAplicaVale extends GestorWebDriver {
     @BeforeMethod (groups={"shop-movil-web"})
     @Parameters({"brwsr-path", "urlBase", "masProductos"})
     public void login(String bpath, String urlAcceso, String masProductosI, ITestContext context, Method method) throws Exception {
-        //Creamos el WebDriver con el que ejecutaremos el Test
-    	TestCaseData.getAndStoreDataFmwk(bpath, urlAcceso, this.index_fact, this.dCtxSh.channel, context, method);    
+    	this.dCtxSh.urlAcceso = urlAcceso;
+    	Utils.storeDataShopForTestMaker(bpath, this.index_fact, this.dCtxSh, context, method);    
     }
 	
     @SuppressWarnings("unused")

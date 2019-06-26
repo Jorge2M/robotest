@@ -2,10 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraTienda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompras;
@@ -36,9 +36,6 @@ public class SecDetalleCompraTiendaStpV {
         validations.add(
         	"Figura la dirección " + compraTienda.direccion,
         	PageMisCompras.SecDetalleCompraTienda.getDireccion(driver).compareTo(compraTienda.direccion)==0, State.Warn);
-        validations.add(
-        	"Figura la fecha " + compraTienda.fecha,
-        	PageMisCompras.SecDetalleCompraTienda.getFecha(channel, driver).compareTo(compraTienda.fecha)==0, State.Warn);
         validations.add(
         	"Existen " + compraTienda.numPrendas + " prendas",
         	PageMisCompras.SecDetalleCompraTienda.getNumPrendas(driver)==compraTienda.numPrendas, State.Warn);

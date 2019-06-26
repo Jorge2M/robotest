@@ -12,8 +12,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2IdentCheckout;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro.DataRegType;
 
@@ -138,9 +139,9 @@ public class PageRegistroIni extends WebdrvWrapp {
         sendKeysWithRetry(3, dataToSend, By.xpath(xpathInput), driver);
     }
     
-    public static HashMap<String,String> sendDataAccordingCountryToInputs(Pais pais, String emailNonExistent, boolean clickPubli, WebDriver driver) 
-    throws Exception {
-        return (Page2IdentCheckout.inputDataPorDefectoSegunPais(pais, emailNonExistent, false, clickPubli, driver));
+    public static HashMap<String,String> sendDataAccordingCountryToInputs(
+    		Pais pais, String emailNonExistent, boolean clickPubli, Channel channel, WebDriver driver) throws Exception {
+        return (Page2IdentCheckout.inputDataPorDefectoSegunPais(pais, emailNonExistent, false, clickPubli, channel, driver));
     }
     
     public static void sendDataToInputs(ListDataRegistro dataToSend, WebDriver driver) {

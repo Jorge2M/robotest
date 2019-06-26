@@ -142,7 +142,7 @@ public class DataBanner {
     
 	private final static String TagLinea = "@TagLinea";
 	private final static String XPathLinkLineaWithTag = 
-		".//div[@class[contains(.,'link')] and @data-cta[contains(.,'tiendaid=" + TagLinea + "')]]";
+		".//a[@class[contains(.,'link')] and @data-cta[contains(.,'tiendaid=" + TagLinea + "')]]";
 	
 	private String getXPathLinkLinea(LineaType lineaType) {
 		return (XPathLinkLineaWithTag.replace(TagLinea, lineaType.toString()));

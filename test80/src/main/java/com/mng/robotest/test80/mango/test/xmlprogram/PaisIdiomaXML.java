@@ -13,10 +13,11 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.ParamsBean;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
 
 public class PaisIdiomaXML {
 
@@ -49,10 +50,10 @@ public class PaisIdiomaXML {
         //suite.setName("TestMovilWeb");
         suite.setFileName("tng_PaisesIdiom_PC_web.xml");
         suite.setName(params.getSuiteName());
-        suite.setListeners(commonsXML.createStandardListeners());
+        suite.setListeners(CommonsXML.createStandardListeners());
         
         //Componemos la descripción del TestRun
-        String testRunDescription = commonsXML.getDescriptionTestRun(params);
+        String testRunDescription = CommonsXML.getDescriptionTestRun(params);
         
         //Creamos los parámetros comunes y los asociamos a la suite
         Map<String, String> parametersSuite = new HashMap<>();
@@ -65,8 +66,8 @@ public class PaisIdiomaXML {
             suite.setThreadCount(Constantes.BSTACK_PARALLEL);
             
             //Asociamos a la suite X testruns (de momento pasamos datos hardcodeados pero deberán llegarnos vía parámetro)
-            joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, commonsXML.bsMovilAndroid);
-            joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, commonsXML.bsMovilIOS);
+            joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, CommonMangoDataForXML.bsMovilAndroid);
+            joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, CommonMangoDataForXML.bsMovilIOS);
         } else {
             //En caso <> browserstack paralelizaremos a nivel de los métodos (casos de prueba)
             suite.setParallel(ParallelMode.METHODS);
@@ -86,7 +87,7 @@ public class PaisIdiomaXML {
         String version = params.getVersion();
         
         //Establecemos los parámetros genéricos (válidos para todos los casos de prueba)
-        commonsXML.setCommonsParamsSuite(parametersSuite, params);
+        CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, params);
         
         //Flags en función de la versión a testear
         switch (version) {
@@ -109,14 +110,14 @@ public class PaisIdiomaXML {
     }
     
     private XmlTest joinSuiteWithTestRunMobilBStack(TypeWebDriver webdriverType, XmlSuite suite, BStackDataMovil bsMovil) {
-        XmlTest testRun = commonsXML.joinSuiteWithTestRunMobilBStack(webdriverType, suite, bsMovil);
+        XmlTest testRun = CommonsXML.joinSuiteWithTestRunMobilBStack(webdriverType, suite, bsMovil);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());     
         return testRun;
     }
     
     public XmlTest joinSuiteWithTestRunLocal(XmlSuite suite, String testRunName) {
-        XmlTest testRun = commonsXML.createTestRun(suite, testRunName);
+        XmlTest testRun = CommonsXML.createTestRun(suite, testRunName);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());     
         return testRun;

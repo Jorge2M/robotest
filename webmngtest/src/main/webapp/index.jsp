@@ -16,9 +16,11 @@ response.setDateHeader ("Expires", -1);
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.TreeSet"%>
 <%@ page import="com.mng.robotest.test80.Test80mng"%>
-<%@ page import="com.mng.robotest.test80.ParamsBean" %>
+<%@ page import="com.mng.robotest.test80.arq.xmlprogram.ParamsBean" %>
 <%@ page import="com.mng.robotest.test80.arq.utils.filter.TestMethod"%>
 <%@ page import="com.mng.robotest.test80.arq.utils.filter.FilterTNGxmlTRun"%>
+<%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
+<%@ page import="com.mng.robotest.test80.mango.conftestmaker.Suites" %>
 
 <!-- Bootstrap styles -->
 <link rel="stylesheet"
@@ -211,8 +213,9 @@ for (SuiteTestData suiteTest : listTestSuites) {
 						<%
 						for (TestMethod testMethod : Test80mng.getDataTestAnnotationsToExec(getParamsFromSuiteToGetTCases(suiteTest))) {
 						    String selected = "";
-						    if (FilterTNGxmlTRun.testCasesContainsMethod(suiteTest.getListTCasesArray(), testMethod.getMethod().getName()))
+						    if (FilterTNGxmlTRun.methodInTestCaseList(testMethod.getMethod().getName(), suiteTest.getListTCasesArray())) {
 						        selected = "selected";
+						    }
 						%>
 							<option value="<%=testMethod.getMethod().getName()%>" <%=selected%> title="<%=testMethod.getAnnotationTest().description()%>"><%=testMethod.getMethod().getName()%></option>
 						<%}%>
@@ -352,11 +355,11 @@ function updateData(suite, channel, dataToChange, newBrowser) {
 	
 <%!
 public static ParamsBean getParamsFromSuiteToGetTCases(SuiteTestData suiteTest) {
-    ParamsBean paramsTSuite = new ParamsBean();
-    paramsTSuite.setSuiteName(suiteTest.getSuite());
+	String app = suiteTest.getApplicationActual();
+	String suite = suiteTest.getSuite();
+    ParamsBean paramsTSuite = new ParamsBean(AppEcom.valueOf(app), Suites.valueOf(suite));
     paramsTSuite.setChannel(suiteTest.getChannel());
     paramsTSuite.setBrowser(suiteTest.getIdBrowser());
-    paramsTSuite.setAppE(suiteTest.getApplicationActual());
     paramsTSuite.setVersion(suiteTest.getVersionActual());
 
     return paramsTSuite;

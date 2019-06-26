@@ -30,8 +30,8 @@ public class PageDevolucionesStpV {
     }
 
     @Step(
-            description = "Pulsar \"Recogida gratuíta a domicilio\" + \"Solicitar Recogida\"",
-            expected = "Aparece la tabla devoluciones sin ningún pedido")
+    	description = "Pulsar \"Recogida gratuíta a domicilio\" + \"Solicitar Recogida\"",
+        expected = "Aparece la tabla devoluciones sin ningún pedido")
     public static void solicitarRegogidaGratuitaADomicilio(DataFmwkTest dFTest) throws Exception {
         boolean desplegada = true;
         Devolucion.EnDomicilio.click(dFTest.driver);
@@ -39,5 +39,4 @@ public class PageDevolucionesStpV {
         PageDevoluciones.clickSolicitarRecogida(dFTest.driver);
         PageRecogidaDomicStpV.vaidaIsPageSinDevoluciones(dFTest.driver);
     }
-
 }

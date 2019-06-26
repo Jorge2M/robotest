@@ -1,29 +1,21 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
 import org.testng.ITestContext;
-import static org.junit.Assert.assertTrue;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.testng.annotations.*;
 
-import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.*;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
+import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import com.mng.robotest.test80.mango.test.pageobject.shop.PageIniShopJapon;
-import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.stpv.otras.GoogleStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PageIniShopJaponStpV;
@@ -32,7 +24,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusDesktopStpV;
 
 import org.openqa.selenium.WebDriver;
-
 
 public class Otras extends GestorWebDriver {
 
@@ -61,9 +52,7 @@ public class Otras extends GestorWebDriver {
         dCtxSh.setChannel(channel);
         dCtxSh.urlAcceso = urlAcceso;
         
-        //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        TestCaseData.storeInThread(dCtxSh);
-        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
         
         if (this.españa==null) {
             Integer codEspanya = Integer.valueOf(1);
@@ -99,7 +88,7 @@ public class Otras extends GestorWebDriver {
         description="Comprobar acceso url desde email")
     public void OTR001_check_Redirects() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
 	    
         //Step. Acceso a la aplicación shop/outlet/VOTF sin registrarse posteriormente
         dCtxSh.pais = this.españa;
@@ -134,7 +123,7 @@ public class Otras extends GestorWebDriver {
         description="Verificar el cambio de país a través del modal")
     public void OTR003_cambioPais() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
 	    
         //Step. Acceder a la aplicación en España/Castellano y después realiza un cambio a Francia/Francés
         dCtxSh.pais = this.españa;
@@ -151,7 +140,7 @@ public class Otras extends GestorWebDriver {
         description="Verificar el cambio de país a través de url")
     public void OTR004_cambioPaisURL(ITestContext context) throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         String urlBaseTest = (String)context.getAttribute("appPath");
 
         //Definimos la lista de los 3 países que pueden estar asociados a la IP del usuario
@@ -207,7 +196,7 @@ public class Otras extends GestorWebDriver {
         description="Acceso al país Japón desde la preHome y comprobación de que redirige a la shop específica de este país")
     public void OTR005_accesoJapon(ITestContext context) throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         String urlBaseTest = (String)context.getAttribute("appPath");
 
         dCtxSh.pais = this.japon;
@@ -216,84 +205,4 @@ public class Otras extends GestorWebDriver {
         PagePrehomeStpV.entradaShopGivenPaisSeleccionado(this.japon, this.japones, dCtxSh.channel, dFTest.driver);
         PageIniShopJaponStpV.validaPageIniJapon(2, dFTest.driver);
     }	
-    
-    /**
-    /* Acceso a la prehome, selección de Japón/Japonés y validaciones de que aparece la portada de la shop específica de Japón
-     */
-//    @Test (
-//        groups={"Otras", "Canal:desktop_App:shop"}, 
-//        description="Pruebas aspectos")
-    public void OTR006_PruebasAspectos(ITestContext context) throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
-        String urlBaseTest = (String)context.getAttribute("appPath");
-
-        dCtxSh.pais = this.japon;
-        dCtxSh.idioma = this.japones;
-        PagePrehomeStpV.seleccionPaisIdioma(urlBaseTest, dCtxSh, dFTest.driver);
-        step1("Entrar", this.japon, this.japones, dCtxSh.channel, dFTest.driver);
-        //validaPageIniJapon3(dFTest.driver);
-        step2withException("Entrar", this.japon, this.japones, dCtxSh.channel, dFTest.driver);
-        //Ok...validaPageIniJapon1(datosStep, dFTest.driver);
-        //validaPageIniJapon1_5(datosStep, 3, "nos fumamos un porro", dFTest.driver);
-        //Ok... validaPageIniJapon1_6(datosStep, 3, "nos fumamos un porro", dFTest.driver);
-        //validaPageIniJapon3(dFTest.driver);
-        //validaPageIniJapon4(datosStep, dFTest.driver);
-    }	
-    
-    @Step (
-    	description="Pais con codigo <b>#{pais.getCodigo_pais()}</b> Si es preciso introducimos la provincia/idioma y finalmente seleccionamos el botón <b>#{litButton}</b>",
-        expected="Se accede a la Shop correctamente después de seleccionar el botón #{pais.getCodigo_pais()}",
-        saveImagePage=SaveWhen.Always,
-        saveErrorPage=SaveWhen.Never)
-    public void step1(String litButton, Pais pais, IdiomaPais idioma, Channel channel, WebDriver driver) 
-    throws Exception {
-    	PagePrehome.selecionProvIdiomAndEnter(pais, idioma, channel, driver);
-    	validaPageIniJapon3(driver);
-    }
-    
-    @Step (
-        description="Step2 seleccionamos el botón <b>#{litButton}</b>",
-        expected="Step2 seleccionar el botón #{litButton}")
-    public static void step2withException(String litButton, Pais pais, IdiomaPais idioma, Channel channel, WebDriver driver) 
-    throws Exception {
-    	assertTrue(1==2);
-    	PagePrehome.selecionProvIdiomAndEnter(pais, idioma, channel, driver);
-    }
-    
-    @Validation (
-    	description="1) Estamos en la página inicial de Japón",
-        level=State.Warn)
-    public boolean validaPageIniJapon1(DatosStep datosStep, WebDriver driver) {
-    	int maxSecondsToWait = 2;
-        return (PageIniShopJapon.isPageUntil(maxSecondsToWait, driver));
-    }
-    
-    @Validation (
-    	description="1) Estamos en la página inicial de Japón (la esperamos hasta #{maxSecondsWait} segundos y #{otraCosa})",
-        level=State.Warn)
-    public boolean validaPageIniJapon1_5(DatosStep datosStep, int maxSecondsWait, String otraCosa, WebDriver driver) {
-        return (!PageIniShopJapon.isPageUntil(maxSecondsWait, driver));
-    }
-    
-    @Validation (
-    	description="1) Estamos en la página inicial de Japón (la esperamos hasta #{maxSecondsWait} segundos y #{otraCosa}) y se va a producir una excepción",
-        level=State.Warn)
-    public boolean validaPageIniJapon1_6(DatosStep datosStep, int maxSecondsWait, String otraCosa, WebDriver driver) {
-    	assertTrue(2==26);
-        return (!PageIniShopJapon.isPageUntil(maxSecondsWait, driver));
-    }
-    
-    @Validation
-    public ChecksResult validaPageIniJapon3(WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
-    	int maxSecondsWait = 3;
-    	validations.add(
-    		"Estamos en la página inicial de Japón (la esperamos hasta " + maxSecondsWait + ")",
-    		PageIniShopJapon.isPageUntil(maxSecondsWait, driver), State.Defect);
-    	validations.add(
-    		"Estamos en la página inicial de Japón (la esperamos hasta " + maxSecondsWait + ")",
-    		!PageIniShopJapon.isPageUntil(maxSecondsWait, driver), State.Warn);
-    	return validations;
-    }
 }

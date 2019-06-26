@@ -30,7 +30,7 @@ public class PageLoginMantoStpV {
     		"Aparece la página de selección de login o selección de tienda",
     	expected=
     		"Aparece la página de selección de login o selección de tienda",
-    	saveErrorPage=SaveWhen.Never)
+    	saveErrorData=SaveWhen.Never)
     public static void goToManto(String urlManto, WebDriver driver) throws Exception {
     	driver.manage().deleteAllCookies();
         driver.get(urlManto);
@@ -39,7 +39,7 @@ public class PageLoginMantoStpV {
     @Step (
     	description="Identificarse desde la página de Jasig CAS con #{usrManto}",
     	expected="Aparece la página de selección de la tienda",
-    	saveErrorPage=SaveWhen.Never)
+    	saveErrorData=SaveWhen.Never)
     public static void identFromJasigCasPage(String usrManto, String passManto, WebDriver driver) throws Exception {
     	PageJCAS.identication(driver, usrManto, passManto);
     }

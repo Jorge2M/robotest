@@ -2,12 +2,10 @@ package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
 import org.testng.annotations.*;
-
-import com.mng.robotest.test80.mango.test.appshop.GaleriaYcompra;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-
 import org.testng.ITestContext;
+
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.appshop.GaleriaYcompra;
 
 public class ListGaleriaYcompraMasivos {
     @SuppressWarnings("unused")
@@ -15,7 +13,7 @@ public class ListGaleriaYcompraMasivos {
     @Parameters({"AppEcom", "countrys", "lineas"})
     public Object[] createInstances(String appEStr, String listaPaisesStr, String lineas, ITestContext context) throws Exception {
         ArrayList<Object> listTests = new ArrayList<>();
-        AppEcom appE = AppEcomEnum.getAppEcom(appEStr);
+        AppEcom appE = AppEcom.valueOf(appEStr);
         try {
         	for (int i=0; i<35; i++) {
 	            listTests.add(new GaleriaYcompra(i));

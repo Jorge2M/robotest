@@ -2,10 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDroppoints;
@@ -48,6 +48,7 @@ public class ModalDroppointsStpV {
         dCtxPago.getDataPedido().setTypeEnvio(pago.getTipoEnvioType(dCtxSh.appE));
         dCtxPago.getDataPedido().setDataDeliveryPoint(dataDp);
         secSelectDPoint.clickSelectButton(dCtxSh.channel, driver);
+        secConfirmDatos.setDataIfNeeded(dCtxSh.pais.getCodigo_pais(), driver);
         secConfirmDatos.clickConfirmarDatosButton(dCtxSh.channel, dCtxPago.getDataPedido(), driver);                
     }
 }

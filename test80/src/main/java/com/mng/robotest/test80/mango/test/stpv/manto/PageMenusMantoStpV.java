@@ -24,7 +24,7 @@ public class PageMenusMantoStpV {
 	@Step (
 		description="Desde la página de menús, seleccionamos el menú \"#{subMenu}\"", 
         expected="Aparece la página al menú seleccionado",
-        saveErrorPage=SaveWhen.Never)
+        saveErrorData=SaveWhen.Never)
     public static void goToMainMenusAndClickMenu(String subMenu, WebDriver driver) throws Exception {
         if (!PageMenusManto.isPage(driver)) {
         	Thread.sleep(1000);

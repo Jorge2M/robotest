@@ -4,13 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageHomeMarcas;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
@@ -20,7 +20,7 @@ import static com.mng.robotest.test80.arq.utils.otras.Constantes.PrefixRebajas;
 
 public class PageHomeMarcasStpV {
 	
-	public static BannerRebajas2018StpV bannerRebajas2018; 
+	public static BannerRebajas2019StpV bannerRebajas2019; 
 	public static BannerSpringIsHere2019StpV bannerSpringIsHere2019; 
 	
     public enum TypeHome {Multimarca, PortadaLinea}
@@ -47,7 +47,7 @@ public class PageHomeMarcasStpV {
     }
         
     @Validation
-    private static ChecksResult checkMsgNewsletterFooter(boolean salesOnInCountry, IdiomaPais idioma, WebDriver driver) {
+    public static ChecksResult checkMsgNewsletterFooter(boolean salesOnInCountry, IdiomaPais idioma, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
     	String percentageSymbol = UtilsTestMango.getPercentageSymbol(idioma);
     	boolean isMsgWithPercentageSimbol = SecFooter.getNewsLetterMsgText(driver).contains(percentageSymbol);

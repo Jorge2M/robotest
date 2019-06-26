@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.data;
 
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public class Descuento {
 	

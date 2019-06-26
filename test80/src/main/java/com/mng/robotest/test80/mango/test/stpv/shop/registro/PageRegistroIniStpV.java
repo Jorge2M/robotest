@@ -5,11 +5,12 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.DataRegistro;
@@ -31,14 +32,11 @@ public class PageRegistroIniStpV {
 	@Step (
 		description="Introducir los datos correctos para el país #{pais.getNombre_pais} (Si aparece, seleccionar link de publicidad: <b>#{lickPubli}</b>)", 
         expected="No aparece ningún mensaje de dato incorrecto")
-    public static HashMap<String,String> sendDataAccordingCountryToInputs(Pais pais, String emailNonExistent, boolean clickPubli, DataFmwkTest dFTest) 
-    throws Exception {
+    public static HashMap<String,String> sendDataAccordingCountryToInputs(
+    		Pais pais, String emailNonExistent, boolean clickPubli, Channel channel, DataFmwkTest dFTest) throws Exception {
         HashMap<String,String> dataSended = new HashMap<>();
-        dataSended = PageRegistroIni.sendDataAccordingCountryToInputs(pais, emailNonExistent, clickPubli, dFTest.driver);
-            
-        //Validaciones
+        dataSended = PageRegistroIni.sendDataAccordingCountryToInputs(pais, emailNonExistent, clickPubli, channel, dFTest.driver);
         validateNotAreErrorMessageInCorrectFields(dFTest.driver);
-        
         return dataSended;
     }
 	

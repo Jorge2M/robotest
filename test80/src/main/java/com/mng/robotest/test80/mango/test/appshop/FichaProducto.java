@@ -12,9 +12,11 @@ import org.testng.annotations.*;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -72,8 +74,7 @@ public class FichaProducto extends GestorWebDriver {
             this.castellano = this.españa.getListIdiomas().get(0);
         }
         
-        TestCaseData.storeInThread(dCtxSh);
-        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
     }
 	
     @SuppressWarnings("unused")
@@ -88,7 +89,7 @@ public class FichaProducto extends GestorWebDriver {
         description="[Usuario registrado] Se testean las features principales de una ficha con origen el buscador: añadir a la bolsa, selección color/talla, buscar en tienda, añadir a favoritos")
     public void FIC001_FichaFromSearch_PrimaryFeatures_Reg() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
@@ -132,7 +133,7 @@ public class FichaProducto extends GestorWebDriver {
         description="[Usuario no registrado] Se testean las features secundarias de una ficha con origen el buscador: guía de tallas, carrusel imágenes, imagen central, panel de opciones")
     public void FIC002_FichaFromSearch_SecondaryFeatures_NoReg() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
@@ -186,7 +187,7 @@ public class FichaProducto extends GestorWebDriver {
         description="[Usuario no registrado] Desde Corea/coreano, se testea una ficha con origen la Galería validando el panel KcSafety")
     public void FIC003_FichaFromGalery_CheckKcSafety() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
         Integer codCorea = Integer.valueOf(728);
         List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(Arrays.asList(codCorea)));
@@ -222,7 +223,7 @@ public class FichaProducto extends GestorWebDriver {
         alwaysRun=true, description="[Usario no registrado] Testeo ficha con artículo con color y tallas no disponibles")
     public void FIC004_Articulo_NoStock_Noreg() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
         dCtxSh.userRegistered = false;
@@ -239,7 +240,7 @@ public class FichaProducto extends GestorWebDriver {
         alwaysRun=true, description="[Usario no registrado] Testeo Personalización bordados")
     public void FIC005_Articulo_Personalizable_Noreg() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
         dCtxSh.userRegistered = false;

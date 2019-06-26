@@ -14,8 +14,9 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.ParamsBean;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
 
 public class LoyaltyMasivosXML {
 
@@ -50,7 +51,7 @@ public class LoyaltyMasivosXML {
         //suite.setName("TestMovilWeb");
         suite.setFileName("tng_PagosPaises.xml");
         suite.setName(params.getSuiteName());
-        suite.setListeners(commonsXML.createStandardListeners());
+        suite.setListeners(CommonsXML.createStandardListeners());
 
         //Creamos los parámetros comunes y los asociamos a la suite
         Map<String, String> parametersSuite = new HashMap<>();
@@ -69,7 +70,7 @@ public class LoyaltyMasivosXML {
     
     //Creación de los parámetros comunes a nivel de la Suite
     private void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean params) {
-        commonsXML.setCommonsParamsSuite(parametersSuite, params);
+    	CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, params);
         parametersSuite.put("register", "true");
         parametersSuite.put("loginAfterRegister", "false");
 
@@ -89,7 +90,7 @@ public class LoyaltyMasivosXML {
     }
     
     public XmlTest joinSuiteWithTestRunLocal(XmlSuite suite, String testRunName, ParamsBean params) {
-        XmlTest testRun = commonsXML.createTestRun(suite, testRunName);
+        XmlTest testRun = CommonsXML.createTestRun(suite, testRunName);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses(params));     
         return testRun;

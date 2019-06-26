@@ -5,13 +5,13 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 public class SearchBarMobilNew extends WebdrvWrapp implements SearchBarMobil {
 	
 	private final WebDriver driver;
 	
-	private final static String XPathCapa = "//div[@class='search-layer']";
+	private final static String XPathCapa = "//div[@class='search-layer' or @class='search-box']";
 	private final static String XPathInputBuscador = "//div[@class='search-component']//form[not(@class)]/input[@class='search-input']";
     private final static String XPathCancelarLink = "//div[@class[contains(.,'search-cancel')]]";
 	

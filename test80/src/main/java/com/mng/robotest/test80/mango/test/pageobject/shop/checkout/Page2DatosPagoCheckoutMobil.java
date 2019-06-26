@@ -6,14 +6,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais.LayoutPago;
-import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -371,24 +371,22 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     
     public static String getPrecioTotalFromResumen(WebDriver driver) throws Exception {
         String precioTotal = "";
-//        
-//        //En el caso de móvil, si estamos en el Paso-2 "Datos del pago" iremos al Paso-3 de "Resumen" puesto que es allí donde se encuentra el importe total. 
-//        //Finalmente volveremos al Paso-2
-//        if (Page2DatosPagoCheckoutMobil.isClickableButtonVerResumenUntil(driver, 0/*seconds*/)) {
-//            Page2DatosPagoCheckoutMobil.clickButtonVerResumen(driver);
-//            precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathPrecioTotal, driver);
-//            if (precioTotal.indexOf("0")==0)
-//                //Si el total es 0 podríamos estar en el caso de saldo en cuenta (el importe total = importe del descuento)
-//                precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathDescuento, driver);
-//            Page2DatosPagoCheckoutMobil.clickLink2DatosPagoAndWait(driver);
+        precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathPrecioTotal, driver);
+//        if (precioTotal.indexOf("0")==0) {
+//            //Si el total es 0 podríamos estar en el caso de saldo en cuenta (el importe total = importe del descuento)
+//            precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathDescuento, driver);
 //        }
-//        else {
-            precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathPrecioTotal, driver);
-            if (precioTotal.indexOf("0")==0) {
-                //Si el total es 0 podríamos estar en el caso de saldo en cuenta (el importe total = importe del descuento)
-                precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathDescuento, driver);
-            }
-//        }
+        
+        return (ImporteScreen.normalizeImportFromScreen(precioTotal));
+    }
+    
+    public static String getPrecioTotalSinSaldoEnCuenta(WebDriver driver) throws Exception {
+        String precioTotal = "";
+        precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathPrecioTotal, driver);
+        if (precioTotal.indexOf("0")==0) {
+            //Si el total es 0 podríamos estar en el caso de saldo en cuenta (el importe total = importe del descuento)
+            precioTotal = PageCheckoutWrapper.formateaPrecioTotal(XPathDescuento, driver);
+        }
         
         return (ImporteScreen.normalizeImportFromScreen(precioTotal));
     }

@@ -2,11 +2,17 @@ package com.mng.robotest.test80.mango.test.utils.testab;
 
 import java.util.Random;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 public class TestABGoogleOptimize implements TestAB {
+	
+    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 	
 	public TestABid testAB;
 	public int varianteActivada = 0;
@@ -41,8 +47,13 @@ public class TestABGoogleOptimize implements TestAB {
 			String urlToSetTestAB = getUrlOptimizeToSetTestAB(this.varianteActivada);
 			String titleTab = testAB.id;
 			String windowHandlerToReturn = driver.getWindowHandle();
-			WebdrvWrapp.loadUrlInAnotherTabTitle(urlToSetTestAB, titleTab, driver);
-			WebdrvWrapp.closeTabByTitleAndReturnToWidow(titleTab, windowHandlerToReturn, driver);
+			try {
+				WebdrvWrapp.loadUrlInAnotherTabTitle(urlToSetTestAB, titleTab, driver);
+				WebdrvWrapp.closeTabByTitleAndReturnToWidow(titleTab, windowHandlerToReturn, driver);
+			}
+			catch (WebDriverException e) {
+				pLogger.warn("Problem in activate TestAB", e);
+			}
 		}
 	}
 	

@@ -2,10 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDroppoints;
@@ -29,7 +29,6 @@ public class SecMetodoEnvioDesktopStpV {
         	}
         }
 
-        //Validaciones
         validaBlockSelectedDesktop(tipoTransporte, driver);
         if (tipoTransporte.isEntregaDomicilio()) {
             modalDroppoints.validaIsNotVisible(Channel.desktop, driver);

@@ -9,7 +9,7 @@ response.setDateHeader ("Expires", -1);%>
 </head>
 <body>
 	<%@ page import="com.mng.robotest.test80.Test80mng" %>
-	<%@ page import="com.mng.robotest.test80.ParamsBean" %>
+	<%@ page import="com.mng.robotest.test80.arq.xmlprogram.ParamsBean" %>
 	<%@ page import="java.io.BufferedReader" %>
 	<%@ page import="javax.servlet.ServletContext" %>
 	<%@ page import="java.io.InputStreamReader" %>
@@ -17,7 +17,8 @@ response.setDateHeader ("Expires", -1);%>
 	<%@ page import="com.mng.robotest.test80.arq.jdbc.to.Suite" %>
 	<%@ page import="com.mng.robotest.test80.arq.jdbc.dao.SuitesDAO" %>
 	<%@ page import="com.mng.robotest.test80.arq.listeners.CallBack" %>
-	<%@ page import="com.mng.robotest.test80.mango.test.data.Suites" %>
+	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.Suites" %>
+	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
 
 	<style>
 	body {
@@ -167,11 +168,11 @@ response.setDateHeader ("Expires", -1);%>
 	
 	public static ParamsBean storeParamsFromHttpRequest(HttpServletRequest request) {
 		//Parameters that come from index.jsp
-	    ParamsBean paramsTSuite = new ParamsBean();
-	    paramsTSuite.setSuiteName(request.getParameter(Test80mng.SuiteNameParam));
+		String app = request.getParameter(Test80mng.AppNameParam);
+    	String suite = request.getParameter(Test80mng.SuiteNameParam);
+        ParamsBean paramsTSuite = new ParamsBean(AppEcom.valueOf(app), Suites.valueOf(suite));
 	    paramsTSuite.setChannel(request.getParameter(Test80mng.ChannelNameParam));
 	    paramsTSuite.setBrowser(request.getParameter(Test80mng.BrowserNameParam));
-	    paramsTSuite.setAppE(request.getParameter(Test80mng.AppNameParam));
 	    paramsTSuite.setVersion(request.getParameter(Test80mng.VersionNameParam));
 	    paramsTSuite.setURLBase(request.getParameter(Test80mng.URLNameParam));
 	    paramsTSuite.setNetAnalysis(request.getParameter(Test80mng.NetAnalysis));

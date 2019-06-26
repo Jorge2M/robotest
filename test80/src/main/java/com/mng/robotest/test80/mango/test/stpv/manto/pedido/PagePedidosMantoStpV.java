@@ -9,7 +9,7 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
@@ -77,7 +77,7 @@ public class PagePedidosMantoStpV {
 	@Step (
 		description="Buscamos pedidos con id registro",
 		expected="Debemos obtener el ID del pedido",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
 	public static DataPedido getPedidoUsuarioRegistrado(DataPedido dPedidoPrueba, WebDriver driver) throws Exception {
 		int posicionPedidoActual = 6;
 		int posicionMaxPaginaPedidos = 105;
@@ -107,7 +107,7 @@ public class PagePedidosMantoStpV {
 	@Step (
 		description="Buscamos pedidos con id registro para obtener información del cliente",
 		expected="Debemos obtener la información del cliente",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
 	public static DataPedido getDataPedido(DataPedido dPedidoPrueba, WebDriver driver) throws Exception {
 		DataBag dBagPrueba = new DataBag();
 		List<String> referencias = new ArrayList<>();
@@ -134,7 +134,7 @@ public class PagePedidosMantoStpV {
 	@Step (
 		description="Buscamos pedidos con id registro para obtener información del cliente",
 		expected="Debemos obtener la información del cliente",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
 	public static DataPedido getDataCliente(DataPedido dPedidoPrueba, WebDriver driver) throws Exception {
 		PageDetallePedido.clickLinkDetallesCliente(driver);
 		dPedidoPrueba.getPago().setDni(PageDetalleCliente.getUserDniText(driver));
@@ -164,7 +164,7 @@ public class PagePedidosMantoStpV {
 	@Step (
 		description="Un pedido con tienda física en la lista de pedidos",
 		expected="Debemos obtener una tienda física válida",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
 	public static DataPedido getTiendaFisicaListaPedidos(DataPedido dPedidoPrueba, WebDriver driver)
 			throws Exception {
 		DataDeliveryPoint dEnvioPrueba = new DataDeliveryPoint();

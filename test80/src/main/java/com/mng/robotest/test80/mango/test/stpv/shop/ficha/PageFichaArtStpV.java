@@ -4,18 +4,17 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.*;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
-import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorBusqueda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
@@ -257,10 +256,8 @@ public class PageFichaArtStpV {
      * @return si el artículo seleccionado tenía talla única
      */
     public boolean selectAnadirALaBolsaTallaPrevNoSelected() throws Exception {
-        //Step
     	selectAnadirALaBolsaStep();
         
-        //Validations
         boolean isTallaUnica = pageFicha.isTallaUnica();
         TypeFicha typeFichaAct = pageFicha.getTypeFicha();
         checkAvisoTallaUnica(isTallaUnica, typeFichaAct);
@@ -299,7 +296,6 @@ public class PageFichaArtStpV {
      */
     public void selectAnadirALaBolsaTallaPrevSiSelected(ArticuloScreen articulo, DataCtxShop dCtxSh) 
     throws Exception {
-        //Step, Validation
         selectAnadirALaBolsaStep();
         DataBag dataBag = new DataBag();
         dataBag.addArticulo(articulo);
@@ -318,8 +314,6 @@ public class PageFichaArtStpV {
         pageFicha.selectAnadirAFavoritosButton();
         ArticuloScreen articulo = pageFicha.getArticuloObject();
         dataFavoritos.addArticulo(articulo);            
-
-        //Validaciones
         checkCapaAltaFavoritos();
         validateVisibleButtonFavoritos(ActionFavButton.Remove);
     }

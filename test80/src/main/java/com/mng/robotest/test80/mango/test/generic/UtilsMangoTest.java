@@ -22,9 +22,9 @@ import org.testng.ITestContext;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataMango;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Continente;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
@@ -35,7 +35,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.navigations.ArticuloNavigations;
@@ -153,6 +153,19 @@ public class UtilsMangoTest {
     public static List<WebElement> findDisplayedElements(WebDriver webdriver, By locator) {
         List<WebElement> elementOptions = webdriver.findElements(locator);
         return (getDisplayedElementsFromList(elementOptions));
+    }
+    
+    public static WebElement findElementPriorizingDisplayed(WebDriver webdriver, By locator) {
+    	List<WebElement> elementOptions = webdriver.findElements(locator);
+    	if (elementOptions.size() > 0) {
+    		List<WebElement> displayedElements = getDisplayedElementsFromList(elementOptions);
+	    	if (displayedElements.size() > 0) {
+	    		return displayedElements.get(0);
+	    	}
+	    	return elementOptions.get(0);
+    	}
+    	
+    	return null;
     }
     
     /**

@@ -12,15 +12,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
+import com.mng.robotest.test80.mango.test.pageobject.utils.LocalStorage;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
 import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
 
@@ -218,8 +218,10 @@ public class PagePrehome extends WebdrvWrapp {
         Cookie ck = new Cookie("modalRegistroNewsletter", "0");
         driver.manage().addCookie(ck);
         
-        Cookie ck2 = new Cookie("modalAdhesionLoyalty", "false");
-        driver.manage().addCookie(ck2);
+        LocalStorage localStorage = new LocalStorage(driver);
+        localStorage.setItemInLocalStorage("modalAdhesionLoyalty", "true");
+//        Cookie ck2 = new Cookie("modalAdhesionLoyalty", "false");
+//        driver.manage().addCookie(ck2);
     }
 
     /**

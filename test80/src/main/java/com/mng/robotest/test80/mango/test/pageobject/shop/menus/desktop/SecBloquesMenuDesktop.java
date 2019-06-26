@@ -7,11 +7,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.bloqueMenu;
@@ -35,6 +35,9 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
     	String idLineaDom = SecMenusWrap.getIdLineaEnDOM(lineaId, app, Channel.desktop);
     	if (lineaId==LineaType.nuevo) {
     		idLineaDom = "sections_nuevo";
+    	}
+    	if (lineaId==LineaType.rebajas) {
+    		idLineaDom = "sections_rebajas_step1";
     	}
         
         return XPathCapaMenusLineaWithTag.replace(TagIdLinea, idLineaDom);

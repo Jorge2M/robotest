@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
@@ -30,8 +31,9 @@ public class PageRegistroDirecStpV {
 	@Step (            
 		description="Introducir los datos correctos para el país #{pais.getNombre_pais()}", 
         expected="No aparece ningún mensaje de error")
-    public static void sendDataAccordingCountryToInputs(HashMap<String,String> dataRegistro, Pais pais, DataFmwkTest dFTest) throws Exception {
-        PageRegistroDirec.sendDataAccordingCountryToInputs(dataRegistro, pais, dFTest.driver);
+    public static void sendDataAccordingCountryToInputs(HashMap<String,String> dataRegistro, Pais pais, Channel channel, DataFmwkTest dFTest) 
+    throws Exception {
+        PageRegistroDirec.sendDataAccordingCountryToInputs(dataRegistro, pais, channel, dFTest.driver);
         validateInputDataOk(dFTest);
     }
     

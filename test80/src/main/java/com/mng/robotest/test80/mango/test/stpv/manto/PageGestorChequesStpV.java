@@ -7,11 +7,10 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
-import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions.StateElem;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques.ButtonsCheque;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques.TablaCheque;
-
 
 public class PageGestorChequesStpV {
 
@@ -30,7 +29,7 @@ public class PageGestorChequesStpV {
 	@Step(
 		description="Introducimos el email <b>#{mail}</b> y damos click al botón \"Correo del cliente\"",
 		expected="Muestra los cheques asociados al mail correctamente",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
 	public static void inputMailAndClickCorreoCliente(String mail, WebDriver driver) throws Exception {
 		PageGestorCheques.inputMailAndClickCorreoReceptorButton(mail, driver);
 		validateInitData(100, mail, driver);
@@ -51,7 +50,7 @@ public class PageGestorChequesStpV {
 	@Step(
 		description="Damos click al pedido de la #{numFila}a fila",
 		expected="Muestra la página de detalles del pedido",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
 	public static void clickPedido(int numFila, String mail, WebDriver driver) throws Exception {
 		String pedido;
 		pedido = PageGestorCheques.clickPedido(numFila, mail, driver);
@@ -76,7 +75,7 @@ public class PageGestorChequesStpV {
 	@Step(
 		description="Damos click a <b>Volver a cheques</b>",
 		expected="Muestra la página de información sobre los cheques",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
 	public static void volverCheques (WebDriver driver) throws Exception {
 		PageGestorCheques.clickAndWait(ButtonsCheque.volverCheques, driver);
 		validateButtons(driver);
@@ -202,7 +201,7 @@ public class PageGestorChequesStpV {
 	@Step(
 		description="Introducimos el numero de cheque con valor: <b>#{cheque}</b>",
 		expected="Muestra los cheques asociados al mail correctamente",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
 	public static void inputCheque (String cheque, WebDriver driver) throws Exception {
 		PageGestorCheques.inputChequeAndConfirm(cheque, driver);
 		validateDataCheque(cheque, driver);
@@ -218,7 +217,7 @@ public class PageGestorChequesStpV {
 	@Step(
 		description="Accedemos al numero de cheque",
 		expected="Aparece toda la información de dicho cheque pero no un email",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
 	public static void chequeDetails (WebDriver driver) throws Exception {
 		PageGestorCheques.clickAndWait(ButtonsCheque.chequeData, driver);
 		validateEmptyMail(driver);

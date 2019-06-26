@@ -21,7 +21,7 @@ public class PageConsultaTiendaStpV {
 	@Step (
 		description="Introducimos tienda #{tiendaNoExistente}</br>",
 		expected="No debe ser válida",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
 	public static void consultaTiendaInexistente(String tiendaNoExistente, WebDriver driver) {
         PageConsultaTienda.introducirTienda(tiendaNoExistente, driver);
         checkIsVisibleMessageTiendaNotExits(driver);
@@ -37,7 +37,7 @@ public class PageConsultaTiendaStpV {
 	@Step (
 		description="Introducimos tienda <b>#{tiendaExistente}</b>",
 		expected="No debe ser válida",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
 	public static void consultaTiendaExistente(String tiendaExistente, WebDriver driver) {
         PageConsultaTienda.introducirTienda(tiendaExistente, driver);
         checkAfterInputTienda(driver);

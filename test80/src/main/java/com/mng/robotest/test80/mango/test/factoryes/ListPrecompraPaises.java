@@ -5,13 +5,11 @@ import java.util.*;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.PaisAplicaVale;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
@@ -31,8 +29,8 @@ public class ListPrecompraPaises {
 	    ArrayList<Object> listTests = new ArrayList<>();
 	    try {
 	        //Parseo de los parámetros de entrada
-	        AppEcom appE = AppEcomEnum.getAppEcom(appEcom);
-	        Channel channel = ChannelEnum.getChannel(channelStr);
+	        AppEcom appE = AppEcom.valueOf(appEcom);
+	        Channel channel = Channel.valueOf(channelStr);
 	        
 	        boolean isEmpl=false;
 	        if (IsEmpl.compareTo("true")==0) {

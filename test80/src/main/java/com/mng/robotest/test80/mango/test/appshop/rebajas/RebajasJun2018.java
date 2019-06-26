@@ -10,8 +10,10 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
@@ -65,8 +67,8 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
         dCtxSh.pais = this.paisFactory;
         dCtxSh.idioma = this.idiomaFactory;
         dCtxSh.urlAcceso = urlAcceso;
-        TestCaseData.storeInThread(dCtxSh);
-        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
+        
+        Utils.storeDataShopForTestMaker(bpath, this.index_fact, dCtxSh, context, method);
     }
 	
     @SuppressWarnings("unused")
@@ -81,7 +83,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
     	   description="Validaciones específicas correspondientes a las Rebajas de Diciembre-2017")
     public void REB001_RebajasDic2018() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         int numLineasPais = dCtxSh.pais.getShoponline().getNumLineasTiendas(dCtxSh.appE);
     	boolean salesOnInCountry = RebajasPaisDAO.isRebajasEnabledPais(dCtxSh.pais.getCodigo_pais());
             
@@ -92,7 +94,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
         }
         
     	SecMenusWrapperStpV.checkLineaRebajas(salesOnInCountry, dCtxSh, dFTest.driver);
-    	PageHomeMarcasStpV.bannerRebajas2018.checkBanner(salesOnInCountry, TypeHome.Multimarca, dCtxSh, dFTest.driver);
+    	//PageHomeMarcasStpV.bannerRebajas2018.checkBanner(salesOnInCountry, TypeHome.Multimarca, dCtxSh, dFTest.driver);
     	//checkMsgNewsletterFooter(salesOnInCountry, dCtxSh.idioma, driver);
         
         if (salesOnInCountry && dCtxSh.pais.isVentaOnline()) {
@@ -139,7 +141,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
         SecMenusWrapperStpV.seleccionLinea(lineaType, sublineaType, dCtxSh, dFTest.driver);
     	SecMenusWrapperStpV.checkLineaRebajas(salesOnInCountry, dCtxSh, dFTest.driver);
     	if (areBanners) {
-    		PageHomeMarcasStpV.bannerRebajas2018.checkBanner(salesOnInCountry, TypeHome.Multimarca, dCtxSh, dFTest.driver);
+    		//PageHomeMarcasStpV.bannerRebajas2018.checkBanner(salesOnInCountry, TypeHome.Multimarca, dCtxSh, dFTest.driver);
     	}
     	//checkMsgNewsletterFooter(salesOnInCountry, dCtxSh.idioma, driver);
         if (SecMenusWrap.canClickMenuArticles(dCtxSh.pais, linea, sublinea)) {

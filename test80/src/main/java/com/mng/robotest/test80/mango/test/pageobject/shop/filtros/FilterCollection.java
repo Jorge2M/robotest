@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum FilterCollection {
-	all(Arrays.asList(2,3,4), "true,false", "Todo"), 
-	sale(Arrays.asList(2,3), "true", "Rebajas"), 
-	nextSeason(Arrays.asList(4), "false", "Nueva Temporada");
+	all(Arrays.asList(3,4,5), "true,false", "Todo"), 
+	sale(Arrays.asList(3,4), "true", "Rebajas"), 
+	nextSeason(Arrays.asList(5), "false", "Nueva Temporada");
 	
 	List<Integer> listTempArticles;
 	String dataFilterValue = "";

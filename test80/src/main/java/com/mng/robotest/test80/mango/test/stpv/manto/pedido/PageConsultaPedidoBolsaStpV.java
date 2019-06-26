@@ -6,10 +6,10 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
-import com.mng.robotest.test80.mango.test.pageobject.ElementPageFunctions;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageDetallePedido;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PagePedidos;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageDetallePedido.RightButtons;
@@ -32,7 +32,7 @@ public class PageConsultaPedidoBolsaStpV extends ElementPageFunctions {
 		description="Seleccionamos el código de pedido para acceder al Detalle", 
         expected="Aparece la página de detalle de #{typeDetalle} correcta",
         saveImagePage=SaveWhen.Always,
-        saveErrorPage=SaveWhen.Never)
+        saveErrorData=SaveWhen.Never)
     public static void detalleFromListaPedBol(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, WebDriver driver) 
     throws Exception {
         PagePedidos.clickLinkPedidoInLineas(driver, dataPedido.getCodigoPedidoManto(), typeDetalle);
@@ -105,7 +105,7 @@ public class PageConsultaPedidoBolsaStpV extends ElementPageFunctions {
     	description="Seleccionamos el botón \"Ir A Generar\"", 
         expected="Aparece la página de generación del pedido",
         saveImagePage=SaveWhen.Always,
-	    saveErrorPage=SaveWhen.Never)
+	    saveErrorData=SaveWhen.Never)
     public static void clickButtonIrAGenerar(String idPedido, WebDriver driver) throws Exception {
         clickAndWait(RightButtons.IrAGenerar, driver);
         PageGenerarPedidoStpV.validateIsPage(idPedido, driver);

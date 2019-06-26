@@ -8,8 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2IdentCheckout;
 
 
@@ -30,8 +31,9 @@ public class PageRegistroDirec extends WebdrvWrapp {
         return (getNumElementsVisible(driver, By.xpath(XPathDivError)));
     }
     
-    public static void sendDataAccordingCountryToInputs(HashMap<String,String> dataRegistro, Pais pais, WebDriver driver) throws Exception {
-        dataRegistro.putAll(Page2IdentCheckout.inputDataPorDefectoSegunPais(pais, dataRegistro.get("cfEmail"), false, false, driver));
+    public static void sendDataAccordingCountryToInputs(
+    		HashMap<String,String> dataRegistro, Pais pais, Channel channel, WebDriver driver) throws Exception {
+        dataRegistro.putAll(Page2IdentCheckout.inputDataPorDefectoSegunPais(pais, dataRegistro.get("cfEmail"), false, false, channel, driver));
     }
     
     public static void sendDataToInputs(ListDataRegistro dataToSend, WebDriver driver, int repeat) throws Exception {

@@ -34,7 +34,7 @@ public class ConsolaVotfStpV {
 	@Step (
 		description="Seleccionamos el entorno de #{entorno} en los apartados \"Test servicios VOTF\" y \"Consola comandos VOTF\"",
 		expected="El entorno se selecciona correctamente",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
     public static void selectEntornoTestAndCons(String entorno, WebDriver driver) {
         PageConsola.selectEntornoTestServ(driver, entorno);
         PageConsola.selectEntornoConsolaCom(driver, entorno);
@@ -43,7 +43,7 @@ public class ConsolaVotfStpV {
 	@Step (
 		description="Introducimos el artículo disponible #{articulo} (a nivel de  artículo disponible y de compra) + la tienda #{tienda}",
 		expected="Aparecen datos correspondientes a " + PageConsola.msgConsTiposEnvioOK,
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
     public static void inputArticleAndTiendaDisp(String articulo, String tienda, WebDriver driver) throws Exception {
         PageConsola.inputArticDispYCompra(driver, articulo);
         PageConsola.inputTiendas(tienda, driver);
@@ -52,7 +52,7 @@ public class ConsolaVotfStpV {
 	@Step (
 		description="Selección botón \"Consultar tipos de envío\"",
 		expected="Aparecen datos correspondientes a " + PageConsola.msgConsTiposEnvioOK,
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
     public static void consultarTiposEnvio(WebDriver driver) throws Exception {
 		PageConsola.clickButtonConsTiposEnvios(driver);           
         String paginaPadre = driver.getWindowHandle();
@@ -80,7 +80,7 @@ public class ConsolaVotfStpV {
 	@Step (
 		description="Introducimos el artículo #{articulo} (a nivel de  artículo disponible y de compra) + Seleccionar el botón \"Consultar Disponibilidad Envío Domicilio\"",
 		expected="Aparece la tabla de transportes con los tipos",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
     public static void consultarDispEnvDomic(String articulo, WebDriver driver) throws Exception {
         PageConsola.inputArticDispYCompra(driver, articulo);
         PageConsola.clickButtonConsultarDispEnvioDomicilio(driver);
@@ -120,7 +120,7 @@ public class ConsolaVotfStpV {
 	@Step (
 		description="Introducimos el artículo #{articulo} (a nivel de  artículo disponible y de compra) + Seleccionar el botón \"Consultar Disponibilidad Envío Tienda\"",
 		expected="Aparece el bloque de transportes y el tipo de stock",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
     public static void consultarDispEnvTienda(String articulo, WebDriver driver) throws Exception {
         PageConsola.inputArticDispYCompra(driver, articulo);
         PageConsola.consDispEnvioTienda(driver);
@@ -151,7 +151,7 @@ public class ConsolaVotfStpV {
 	@Step (
 		description="Seleccionar el botón \"Realizar Solicitud A Tienda\"",
 		expected="El pedido se crea correctamente",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
     public static String realizarSolicitudTienda(String articulo, WebDriver driver) throws Exception {
         PageConsola.inputArticDispYCompra(driver, articulo);
         PageConsola.clickButtonSolATienda(driver);
@@ -186,7 +186,7 @@ public class ConsolaVotfStpV {
 	@Step (
 		description="Seleccionar el botón \"Obtener Pedidos\"",
 		expected="Aparece la lista de pedidos",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
     public static String obtenerPedidos(String codigoPedido, WebDriver driver) throws Exception {
         PageConsola.clickButtonObtenerPedidos(driver);
         String codigoPedidoFull = switchToIframeAndCheckAfterObtenerPedidos(codigoPedido, driver);
@@ -217,7 +217,7 @@ public class ConsolaVotfStpV {
 	@Step (
 		description="Seleccionar el pedido #{codigoPedidoFull} en el desplegable \"Pedido\" y pulsar \"Seleccionar pedido\"",
 		expected="Aparece el pedido seleccionado",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
     public static void seleccionarPedido(String codigoPedidoFull, WebDriver driver) throws Exception {
         PageConsola.selectPedido(driver, codigoPedidoFull);
         PageConsola.clickButtonSelectPedido(driver);
@@ -246,7 +246,7 @@ public class ConsolaVotfStpV {
 	@Step (
 		description="Pulsar el botón \"Preconfirmar Pedido\"",
 		expected="Aparece el pedido como preconfirmado",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
     public static void selectPreconfPedido(String codigoPedidoFull, WebDriver driver) throws Exception {
 		PageConsola.clickButtonPreconfPedido(driver);
 		checkAfterPreconfirmarPedido(codigoPedidoFull, driver);
@@ -276,7 +276,7 @@ public class ConsolaVotfStpV {
 	@Step (
 		description="Pulsar el botón \"Confirmar Pedido\"",
 		expected="Aparece el pedido confirmado",
-		saveErrorPage=SaveWhen.Never)
+		saveErrorData=SaveWhen.Never)
     public static void selectConfPedido(String codigoPedidoFull, WebDriver driver) throws Exception {
 		PageConsola.clickButtonConfPedido(driver);
         checkAfterConfirmarPedido(codigoPedidoFull, driver);

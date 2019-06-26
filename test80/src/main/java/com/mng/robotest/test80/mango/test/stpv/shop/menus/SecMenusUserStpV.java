@@ -6,9 +6,9 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusUserWrap.LoyaltyData;
@@ -60,7 +60,7 @@ public class SecMenusUserStpV {
 	@Step (
 		description="Clicar el link de Logoff para cerrar la sesión", 
         expected="Aparece el link de login")
-    private static void logoff(Channel channel, WebDriver driver) throws Exception {
+    public static void logoff(Channel channel, WebDriver driver) throws Exception {
         SecMenusWrap.secMenusUser.clickCerrarSesion(Channel.desktop, driver);
         checkIsVisibleIniciarSesionLink(channel, 3, driver);
     }

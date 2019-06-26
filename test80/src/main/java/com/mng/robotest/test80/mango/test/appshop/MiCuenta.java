@@ -1,6 +1,5 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,24 +11,29 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompras.TypeCompra;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageSuscripciones.idNewsletters;
 import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageDetallePedido.DetallePedido;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PagePrehomeStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageDevolucionesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMiCuentaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMisComprasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMisDatosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageSuscripcionesStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.SecDetalleCompraTiendaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalDetalleMisComprasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStpV;
 
@@ -84,9 +88,7 @@ public class MiCuenta extends GestorWebDriver {
             dCtxSh.idioma = this.idiomaFactory;        	
         }
         
-        //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        TestCaseData.storeInThread(dCtxSh);
-        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
+        Utils.storeDataShopForTestMaker(bpath, this.index_fact, dCtxSh, context, method);
     }
 
 
@@ -98,13 +100,13 @@ public class MiCuenta extends GestorWebDriver {
     }       
 
     @Test (
-        groups={"Micuenta", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true, 
+        groups={"Canal:desktop_App:shop", "Canal:desktop_App:outlet", "Micuenta", "CI"}, alwaysRun=true, 
         description="Verificar opciones de 'mi cuenta'")
     @Parameters({"userConDevolucionPeroSoloEnPRO", "passwordUserConDevolucion"})
     public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion) 
     throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userConnected = userConDevolucionPeroNoEnPRO;
         dCtxSh.passwordUser = passwordUserConDevolucion;
             
@@ -140,43 +142,36 @@ public class MiCuenta extends GestorWebDriver {
     @Test (
         groups={"Micuenta", "Canal:all_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
         description="Consulta de mis compras con un usuario con datos a nivel de Tienda y Online")
-    @Parameters({"userConComprasPeroSoloOnlineEnPRO", "passwordUserConCompras"})
-    public void MIC002_CheckConsultaMisCompras(String userConCompras, String passwordUserConCompras) throws Exception {
+    @Parameters({"userWithOnlinePurchases", "userWithStorePurchases", "passUserWithOnlinePurchases", "passUserWithStorePurchases"})
+    public void MIC002_CheckConsultaMisCompras(
+    		String userWithOnlinePurchases, String userWithStorePurchases, 
+    		String passUserWithOnlinePurchases, String passUserWithStorePurchases) throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
-        dCtxSh.userConnected = userConCompras;
-        dCtxSh.passwordUser = passwordUserConCompras;
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
+        
+        //Test Compras Online
+        dCtxSh.userConnected = userWithOnlinePurchases;
+        dCtxSh.passwordUser = passUserWithOnlinePurchases;
         dCtxSh.userRegistered = true;
-        boolean isPRO = UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest.driver);
-            
         PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest.driver);
         AccesoStpV.identificacionEnMango(dCtxSh, dFTest.driver);
         PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dCtxSh.channel, dFTest.driver);
-        PageMisComprasStpV.selectBlock(TypeCompra.Online, true/*ordersExpected*/, dFTest.driver);
-        int posicionCompra = 1;
-        PageMisComprasStpV.selectCompraOnline(posicionCompra, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, dFTest.driver);
-        if (dCtxSh.channel == ChannelEnum.Channel.desktop) {
+        PageMisComprasStpV.selectBlock(TypeCompra.Online, true, dFTest.driver);
+        PageMisComprasStpV.selectCompraOnline(1, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, dFTest.driver);
+        if (dCtxSh.channel == Channel.desktop) {
 	        PageMisComprasStpV.clickMoreInfo(dFTest.driver);
 	        ModalDetalleMisComprasStpV.clickBuscarTiendaButton(dFTest.driver);
 	        ModalDetalleMisComprasStpV.clickCloseModalBuscadorTiendas(dFTest.driver);
         }
-        PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(dFTest.driver);
-        if (pageDetPedidoStpV.getPageDetalle().getTypeDetalle()==DetallePedido.New) {
-        	//Tratamiento específico para el nuevo Detalle del Pedido...
-        	//,,,
-        }
         
-        pageDetPedidoStpV.clickBackButton(dCtxSh.channel, dFTest);
-        
-        //Estamos utilizando un usuario que en PRO no dispone de tíckets de Compra en tienda 
-        if (isPRO) {
-            PageMisComprasStpV.selectBlock(TypeCompra.Tienda, false/*ordersExpected*/, dFTest.driver);
-        }
-        //TODO actualmente no funciona el alta automática de compras en PRE mediante Flyway
-//        else {
-//            PageMisComprasStpV.selectBlock(TypeCompra.Tienda, true/*ordersExpected*/, dFTest);
-//            PageMisComprasStpV.selectCompraTienda(1/*posArticle*/, dCtxSh.channel, dFTest);
-//            PageMisComprasStpV.SecDetalleCompraTienda.selectArticulo(1/*posPrenda*/, dFTest);
-//        }
+        //Test Compras en Tienda
+        dCtxSh.userConnected = userWithStorePurchases;
+        dCtxSh.passwordUser = passUserWithStorePurchases;
+        SecMenusUserStpV.logoff(dCtxSh.channel, dFTest.driver);
+        AccesoStpV.identificacionEnMango(dCtxSh, dFTest.driver);
+        PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dCtxSh.channel, dFTest.driver);
+        PageMisComprasStpV.selectBlock(TypeCompra.Tienda, true, dFTest.driver);
+        PageMisComprasStpV.selectCompraTienda(1, dCtxSh.channel, dFTest.driver);
+        SecDetalleCompraTiendaStpV.selectArticulo(1, dFTest.driver);
     }
 }

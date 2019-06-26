@@ -18,8 +18,10 @@ import org.testng.annotations.Test;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
@@ -45,16 +47,18 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 
 public class Loyalty extends GestorWebDriver {
 	
-	final static String userWithLoyaltyPoints = "ticket_digital_es@mango.com";
-	final static String passwUserWithLoyaltyPoints = "mango123";
-			
+	final static String userWithLPoints = "ticket_digital_es@mango.com";
+	final static String passwUserWithLPoints = "mango123";
+	
+	final static String userWithLPointsOnlyInTest = "test.performance10@mango.com";
+	final static String passwUserWithLPointsOnlyInTest = "Mango123";
+
     DataCtxShop dCtxSh;
 	
     @BeforeMethod (groups={"Otras", "Canal:all_App:shop"})
     @Parameters({"brwsr-path","urlBase", "AppEcom", "Channel"})
     public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) 
     throws Exception {
-        //Recopilación de parámetros
         dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom(appEcom);
         dCtxSh.setChannel(channel);
@@ -65,9 +69,7 @@ public class Loyalty extends GestorWebDriver {
         dCtxSh.pais = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
         
-        //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        TestCaseData.storeInThread(dCtxSh);
-        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
     }
 
     /**
@@ -89,11 +91,11 @@ public class Loyalty extends GestorWebDriver {
         description="Se realiza una compra mediante un usuario loyalty con Likes")
     public void LOY001_Compra_LikesStored() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         
         //Obtenemos el usuario/password de acceso
-        dCtxSh.userConnected = userWithLoyaltyPoints;
-        dCtxSh.passwordUser = passwUserWithLoyaltyPoints;
+        dCtxSh.userConnected = userWithLPoints;
+        dCtxSh.passwordUser = passwUserWithLPoints;
         dCtxSh.userRegistered = true;
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, dFTest.driver);
         actionsLoyaltyPostLogin(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
@@ -137,13 +139,13 @@ public class Loyalty extends GestorWebDriver {
     
     @Test (
         groups={"Loyalty", "Canal:all_App:shop"},
-        description="Exchange entrada de cine mediante 1200 Likes")
+        description="Exchange mediante donación de Likes")
     public void LOY002_Exhange_Donacion_Likes() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         
-        dCtxSh.userConnected = userWithLoyaltyPoints;
-        dCtxSh.passwordUser = passwUserWithLoyaltyPoints;
+        dCtxSh.userConnected = userWithLPoints;
+        dCtxSh.passwordUser = passwUserWithLPoints;
         dCtxSh.userRegistered = true;
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
         int loyaltyPointsIni = actionsLoyaltyPostLogin(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
@@ -165,22 +167,28 @@ public class Loyalty extends GestorWebDriver {
     
     @Test (
         groups={"Loyalty", "Canal:all_App:shop"},
-        description="Exchange mediante donación de Likes")
+        description="Exchange entrada de cine mediante 1200 Likes")
     public void LOY003_Exhange_Compra_Entrada() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
-        
-        dCtxSh.userConnected = userWithLoyaltyPoints;
-        dCtxSh.passwordUser = passwUserWithLoyaltyPoints;
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
+        boolean isEntornoPro = UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest.driver);
         dCtxSh.userRegistered = true;
+        if (isEntornoPro) {
+	        dCtxSh.userConnected = userWithLPoints;
+	        dCtxSh.passwordUser = passwUserWithLPoints;
+        } else {
+            //Hemos de utilizar usuarios diferentes en LOY002 y LOY003 porque la ejecución en paralelo
+            //puede afectar al cálculo de los Loyalty Points restantes y generar un Defect
+	        dCtxSh.userConnected = userWithLPointsOnlyInTest;
+	        dCtxSh.passwordUser = passwUserWithLPointsOnlyInTest;
+        }
+
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
         int loyaltyPointsIni = actionsLoyaltyPostLogin(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         SecMenusUserStpV.clickMenuMangoLikesYou(dCtxSh.channel, dFTest.driver);
 
-        PageHomeLikesStpV.getNewInstance(dFTest.driver).
-        	clickButtonConseguirPor1200Likes();
-        
-        if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest.driver)) {
+        PageHomeLikesStpV.getNewInstance(dFTest.driver).clickButtonConseguirPor1200Likes();
+        if (!isEntornoPro) {
             PageHomeConseguirPor1200LikesStpV pageHomeConseguirPor1200LikesStpV = PageHomeConseguirPor1200LikesStpV.getNew(dFTest.driver);
             pageHomeConseguirPor1200LikesStpV.selectConseguirButton();
             

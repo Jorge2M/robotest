@@ -14,16 +14,17 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.mng.robotest.test80.Test80mng.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
+import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.DataMango;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -103,9 +104,7 @@ public class Registro extends GestorWebDriver {
             dCtxSh.idioma = this.idiomaFactory;
         }        
         
-        //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        TestCaseData.storeInThread(dCtxSh);
-        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, this.index_fact, dCtxSh.channel, context, method);
+        Utils.storeDataShopForTestMaker(bpath, this.index_fact, dCtxSh, context, method);
     }
 
     @SuppressWarnings("unused")
@@ -121,7 +120,7 @@ public class Registro extends GestorWebDriver {
         description="Registro con errores en la introducción de los datos")
     public void REG001_RegistroNOK() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
         if (dCtxSh.appE==AppEcom.votf) {
             return;
@@ -177,7 +176,7 @@ public class Registro extends GestorWebDriver {
         }
         
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
             
         //En caso de ejecución desde .bat no ejecutaremos el Registro 
@@ -194,7 +193,8 @@ public class Registro extends GestorWebDriver {
         SecMenusWrapperStpV.secMenuUser.selectRegistrate(dCtxSh.channel, dCtxSh, dFTest.driver);
         if(clickRegister) {
 	        String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
-	        HashMap<String,String> dataRegistro = PageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dFTest);
+	        HashMap<String,String> dataRegistro = 
+	        	PageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dCtxSh.channel, dFTest);
 	        PageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false/*usrExists*/, dCtxSh.appE, dataRegistro, dFTest);
 	        boolean paisConNinos = dCtxSh.pais.getShoponline().stateLinea(LineaType.nina, dCtxSh.appE)==ThreeState.TRUE;
 	        PageRegistroSegundaStpV.setDataAndLineasRandom("23/4/1974", paisConNinos, 2/*numNinos*/, dCtxSh.pais, dataRegistro, dFTest);
@@ -206,7 +206,7 @@ public class Registro extends GestorWebDriver {
 	            PageRegistroNinosStpV.sendNinoDataAndContinue(listaNinos, dCtxSh.pais, dFTest);
 	        }
 	            
-	        PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dFTest);
+	        PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dCtxSh.channel, dFTest);
 	        PageRegistroDirecStpV.clickFinalizarButton(dFTest);
 	        PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, dFTest);
 
@@ -248,7 +248,7 @@ public class Registro extends GestorWebDriver {
     public void REG003_RegistroOK_NoPubli() throws Exception {
     	boolean clickPubli = false;
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
             
         //En caso de ejecución desde .bat no ejecutaremos el Registro 
@@ -256,12 +256,13 @@ public class Registro extends GestorWebDriver {
             return;
         }
         
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
         SecMenusWrapperStpV.secMenuUser.selectRegistrate(dCtxSh.channel, dCtxSh, dFTest.driver);
         String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
-        HashMap<String,String> dataRegistro = PageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dFTest);
-        PageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false/*usrExists*/, dCtxSh.appE, dataRegistro, dFTest);
-        PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dFTest);
+        HashMap<String,String> dataRegistro = 
+        	PageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dCtxSh.channel, dFTest);
+        PageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false, dCtxSh.appE, dataRegistro, dFTest);
+        PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dCtxSh.channel, dFTest);
         PageRegistroDirecStpV.clickFinalizarButton(dFTest);
         PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, dFTest);
         SecMenusUserStpV.checkVisibilityLinkMangoLikesYou(dCtxSh.channel, dCtxSh.appE, dFTest.driver);

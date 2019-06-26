@@ -117,19 +117,19 @@ ForEach-Object {
 
 # Start Tomcat as a Service and Wait 20 seconds to state "Running"
 # Removed start Tomcat as a service because there is a problem: the service is executed in background -> the browsers are executed in background -> the size is 1024x768
-$tomcat8Service = Get-Service Tomcat8
-Start-Service -InputObject $tomcat8Service
-$tomcat8Service.WaitForStatus('Running', '00:00:20')
+$tomcat9Service = Get-Service Tomcat9
+Start-Service -InputObject $tomcat9Service
+$tomcat9Service.WaitForStatus('Running', '00:00:20')
 
 #$catalinaHome = Get-EnvironmentVariable -Name 'CATALINA_HOME' -Scope User
-#$TomcatStartupBat = $catalinaHome + '\bin\tomcat8.exe'
+#$TomcatStartupBat = $catalinaHome + '\bin\tomcat9.exe'
 #Start-Process -FilePath $TomcatStartupBat -WindowStyle Maximized 
 #& $TomcatStartupBat
 
-# Aunque el Tomcat8 esté en estado "Running", por alguna razón hace falta esperar un tiempo prudencial antes de ejecutar el deploy
+# Aunque el Tomcat9 esté en estado "Running", por alguna razón hace falta esperar un tiempo prudencial antes de ejecutar el deploy
 #Start-Sleep -s 10
 
-# Deploy webmngtest.war in Tomcat8 (wait via 15 times Loop)
+# Deploy webmngtest.war in Tomcat9 (wait via 15 times Loop)
 $i=0
 Do {
 	$i++	

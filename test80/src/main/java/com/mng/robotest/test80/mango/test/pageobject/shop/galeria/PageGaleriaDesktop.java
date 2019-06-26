@@ -16,12 +16,12 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 
 /**getArticuloConVariedadColoresAndHover
@@ -228,7 +228,7 @@ public class PageGaleriaDesktop extends PageGaleria {
     }
 
     private static String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
-    	return ("//span[@class='swiper-button-" + typeSlider + "']");
+    	return ("//span[@class='swiper-button-" + typeSlider + "' and @role]");
     }
     
     private static String getXPathArticuloConVariedadColores(int numArticulo) {
@@ -614,7 +614,8 @@ public class PageGaleriaDesktop extends PageGaleria {
     @Override
     public ArticuloScreen selectTallaArticle(int posArticulo, int posTalla) throws Exception {
         //Si no está visible la capa de tallas ejecutamos los pasos necesarios para hacer la visible 
-        if (!isVisibleArticleCapaTallasUntil(posArticulo, 0/*maxSecondsToWait*/)) {
+    	waitForPageLoaded(driver);
+        if (!isVisibleArticleCapaTallasUntil(posArticulo, 1)) {
             selectLinkAddArticleToBag(posArticulo);
         }
         

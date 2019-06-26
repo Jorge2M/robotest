@@ -1,11 +1,10 @@
 package com.mng.robotest.test80.mango.test.data;
 
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
-
 
 public class DataCtxShop implements Cloneable {
 
@@ -52,7 +51,7 @@ public class DataCtxShop implements Cloneable {
     }
     
     public void setAppEcom(String app) {
-        this.appE = AppEcomEnum.getAppEcom(app);
+        this.appE = AppEcom.valueOf(app);
     }
     
     public void setAppEcom(AppEcom app) {
@@ -60,7 +59,7 @@ public class DataCtxShop implements Cloneable {
     }
     
     public void setChannel(String channel) {
-        this.channel = ChannelEnum.getChannel(channel);
+        this.channel = Channel.valueOf(channel);
     }
     
     public void setChannel(Channel channel) {

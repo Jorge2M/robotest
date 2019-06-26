@@ -14,9 +14,9 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -220,7 +220,7 @@ public class SecMenusDesktopStpV {
         TestCaseData.getDatosCurrentStep().replaceInDescription(tagCarruselsLinea, linea.getCarrusels());
         
         SecMenusDesktop.secMenuSuperior.secLineas.hoverLinea(lineaType, null, app, driver);
-        if (linea.getType()!=LineaType.rebajas) {
+        //if (linea.getType()!=LineaType.rebajas) {
         	checkCarruselsAfterHoverLinea(linea, app, driver);
         	
     	    //Steps - Selección de cada uno de los carrusels asociados a la línea
@@ -231,7 +231,7 @@ public class SecMenusDesktopStpV {
     	            stepSeleccionaCarrusel(pais, lineaType, listCarrusels[i], app, driver);
     	        }
     	    }
-        }
+        //}
     }
     
     @Validation
@@ -475,7 +475,7 @@ public class SecMenusDesktopStpV {
         String urlAccesoCorreo = 
         	uri.getScheme() + "://" + uri.getHost() + "/redirect.faces?op=conta&tiendaid=" + tiendaId + "&pais=" + pais.getCodigo_pais() + 
         	"&producto=" + articulo.getReference() + "&color=" + articulo.getColourCode() ;
-        TestCaseData.getDatosCurrentStep().replaceInExpected(tagUrlAcceso, urlAccesoCorreo);
+        TestCaseData.getDatosCurrentStep().replaceInDescription(tagUrlAcceso, urlAccesoCorreo);
         driver.navigate().to(urlAccesoCorreo);
 
         DataFichaArt datosArticulo = new DataFichaArt(articulo.getReference(), "");
@@ -499,7 +499,7 @@ public class SecMenusDesktopStpV {
 //            if (dCtxSh.pais.getCodigo_pais().compareTo("720")==0) {
 //            	validationsSpecificEndRebajasChina(dCtxSh, driver);
 //            }
-//            validationsRebajas(dCtxSh.channel, dCtxSh.appE, driver);
+            validationsRebajas(dCtxSh.channel, dCtxSh.appE, driver);
     	}
     	
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
@@ -651,15 +651,17 @@ public class SecMenusDesktopStpV {
     private static ChecksResult checkNoArticlesTemporadaOldWithLabelsWrong(Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
-        ArrayList<Integer> temporadaOld = new ArrayList<Integer>(Arrays.asList(2));  
+    	
+    	Integer temporadaOldOld = FilterCollection.sale.getListTempArticles().get(0);
+        ArrayList<Integer> temporadaOldOldList = new ArrayList<Integer>(Arrays.asList(temporadaOldOld));  
        	List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
     	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(channel, app, driver);
-       	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaOld, listLabelsWrong);
+       	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaOldOldList, listLabelsWrong);
     	String warningMessage = "";
         if (listArtWrong.size() > 0) {
         	warningMessage+=
                 "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
-                "hay " + listArtWrong.size() + " artículos de temporada " + temporadaOld + " con label errónea:<br>";
+                "hay " + listArtWrong.size() + " artículos de temporada " + temporadaOldOldList + " con label errónea:<br>";
             for (String nameWrong : listArtWrong) {
             	warningMessage+=(nameWrong + "<br>");
             }
@@ -668,7 +670,7 @@ public class SecMenusDesktopStpV {
     	
     	validations.add(
 			prefixSale +        		   
-            "No hay artículos <b>de Temporada " + temporadaOld + "</b> con alguna de las etiquetas <b>" + listLabelsWrong + "</b> " + 
+            "No hay artículos <b>de Temporada " + temporadaOldOldList + "</b> con alguna de las etiquetas <b>" + listLabelsWrong + "</b> " + 
             "(en sus correspondientes traducciones)" + warningMessage,
     		listArtWrong.size()==0, State.Warn);
     	return validations;
@@ -678,7 +680,8 @@ public class SecMenusDesktopStpV {
     private static ChecksResult checkNoArticlesTemporadaNewWithLabelsWrong(Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
 		ChecksResult validations = ChecksResult.getNew();
-        ArrayList<Integer> temporadaNew = new ArrayList<Integer>(Arrays.asList(3));
+		
+        List<Integer> temporadaNew = FilterCollection.nextSeason.getListTempArticles();
         PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(channel, app, driver);
         List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaNew, LabelArticle.NewNow, LabelArticle.NewCollection);
         String warningMessage = "";

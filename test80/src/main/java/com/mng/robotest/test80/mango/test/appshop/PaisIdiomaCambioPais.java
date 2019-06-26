@@ -6,6 +6,7 @@ import org.testng.annotations.*;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
@@ -38,7 +39,8 @@ public class PaisIdiomaCambioPais extends GestorWebDriver /*Funcionalidades gen√
     @BeforeMethod
     @Parameters({"brwsr-path","urlBase"})
     public void login(String bpath, String urlAcceso, ITestContext context, Method method) throws Exception {
-    	TestCaseData.getAndStoreDataFmwk(bpath, urlAcceso, this.index_fact, this.dCtxSh.channel, context, method);
+    	this.dCtxSh.urlAcceso = urlAcceso;
+    	Utils.storeDataShopForTestMaker(bpath, this.index_fact, this.dCtxSh, context, method);
     }
 	
     @SuppressWarnings("unused")

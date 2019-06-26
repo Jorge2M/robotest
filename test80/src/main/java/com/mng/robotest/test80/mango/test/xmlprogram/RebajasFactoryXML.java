@@ -14,9 +14,9 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.ParamsBean;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
-
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
 
 public class RebajasFactoryXML {
 
@@ -51,7 +51,7 @@ public class RebajasFactoryXML {
         //suite.setName("TestMovilWeb");
         suite.setFileName("tng_PagosPaises.xml");
         suite.setName(params.getSuiteName());
-        suite.setListeners(commonsXML.createStandardListeners());
+        suite.setListeners(CommonsXML.createStandardListeners());
         
         //suite.setObjectFactory(SingletonObjectFactory.instance());
 
@@ -70,14 +70,9 @@ public class RebajasFactoryXML {
         return suite;
     }
     
-    //Creación de los parámetros comunes a nivel de la Suite
     private void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean params) {
         String version = params.getVersion();
-        
-        //Establecemos los parámetros genéricos (válidos para todos los casos de prueba)
-        commonsXML.setCommonsParamsSuite(parametersSuite, params);
-
-        //Control versiones
+        CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, params);
         switch (version) {
         case "V1":
             parametersSuite.put("loginAfterRegister", "false");
@@ -104,7 +99,7 @@ public class RebajasFactoryXML {
     }
     
     public XmlTest joinSuiteWithTestRunLocal(XmlSuite suite, String testRunName) {
-        XmlTest testRun = commonsXML.createTestRun(suite, testRunName);
+        XmlTest testRun = CommonsXML.createTestRun(suite, testRunName);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());     
         return testRun;

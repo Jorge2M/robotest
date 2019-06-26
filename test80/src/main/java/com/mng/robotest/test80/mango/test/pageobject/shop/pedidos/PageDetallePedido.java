@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.pedidos;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 
 public interface PageDetallePedido {
 	

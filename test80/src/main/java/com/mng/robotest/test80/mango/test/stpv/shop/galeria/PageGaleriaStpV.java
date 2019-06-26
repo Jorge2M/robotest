@@ -13,9 +13,9 @@ import com.mng.robotest.test80.arq.annotations.validation.ResultValidation;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
 import com.mng.robotest.test80.mango.test.factoryes.NodoStatus;
@@ -25,7 +25,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha.TypeFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
@@ -155,7 +155,7 @@ public class PageGaleriaStpV {
     }
     
     @Step (
-    	description="Del #{posArticulo}o artículo, seleccionamos la #{posTalla}a talla", 
+    	description="Del #{posArticulo}o artículo, seleccionamos la #{posTalla}a talla disponible", 
         expected="Se da de alta correctamente el artículo en la bolsa",
         saveHtmlPage=SaveWhen.Always)
     public boolean selectTallaArticulo(int posArticulo, int posTalla, DataBag dataBag, DataCtxShop dCtxSh) 
@@ -172,9 +172,9 @@ public class PageGaleriaStpV {
     }
 
     @Step (
-            description="Seleccionamos la primera talla no disponible del listado",
-            expected="Se abre el modal de avimase de la prenda",
-            saveHtmlPage=SaveWhen.Always)
+    	description="Seleccionamos la primera talla no disponible del listado",
+        expected="Se abre el modal de avimase de la prenda",
+        saveHtmlPage=SaveWhen.Always)
     public void selectTallaNoDisponibleArticulo()
             throws Exception {
         PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
@@ -731,7 +731,7 @@ public class PageGaleriaStpV {
      		filtrosCollection.isVisibleMenu(FilterCollection.sale), State.Warn);
      	validations.add(
      		"Aparece el filtro para la nueva temporada <b>Next season preview</b>",
-     		filtrosCollection.isVisibleMenu(FilterCollection.nextSeason), State.Warn);
+     		filtrosCollection.isVisibleMenu(FilterCollection.nextSeason), State.Info, true);
      	return validations;
     }
 	      
@@ -761,9 +761,9 @@ public class PageGaleriaStpV {
 	    List<String> lineasInvertidas = RebajasPaisDAO.getLineasInvertidas(pais.getCodigo_pais(), menuType);
 	    boolean temporadaInvertida = (lineasInvertidas!=null && lineasInvertidas.contains(lineaType.toString()));
 	    if (!temporadaInvertida || isGaleriaSale) {
-		    ordenType = FilterOrdenacion.BloqueTemporadas_2y3_despues_la_4;
+		    ordenType = FilterOrdenacion.BloqueTemporadas_3y4_despues_la_5;
 	    } else {
-		    ordenType = FilterOrdenacion.BloqueTemporada_4_despues_la_2y3;
+		    ordenType = FilterOrdenacion.BloqueTemporada_5_despues_la_3y4;
 	    }
 	    
         String ref1rstArticle = pageGaleria.getReferencia(1);

@@ -11,13 +11,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test80.mango.test.pageobject.TypeOfClick;
-import com.mng.robotest.test80.mango.test.pageobject.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
+import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterOrdenacion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter;
@@ -206,8 +206,8 @@ public abstract class PageGaleria extends WebdrvWrapp {
             return getAnyPrecioNotInOrder(typeOrden);
         case TemporadaDesc:
         case TemporadaAsc:
-        case BloqueTemporadas_2y3_despues_la_4:
-        case BloqueTemporada_4_despues_la_2y3:
+        case BloqueTemporadas_3y4_despues_la_5:
+        case BloqueTemporada_5_despues_la_3y4:
             return getAnyRefNotInOrderTemporada(typeOrden);
         default:
             return "";
@@ -273,12 +273,12 @@ public abstract class PageGaleria extends WebdrvWrapp {
                         return (refAnterior + "->" + refActual);
                     }
                     break;
-            	case BloqueTemporadas_2y3_despues_la_4:
+            	case BloqueTemporadas_3y4_despues_la_5:
             		if ((tempActualInt==1 || tempActualInt==2) && tempAnteriorInt==3) {
             			return (refAnterior + "->" + refActual);
             		}
             		break;
-            	case BloqueTemporada_4_despues_la_2y3:
+            	case BloqueTemporada_5_despues_la_3y4:
             	default:
             		if (tempActualInt==3 && (tempAnteriorInt==1 || tempAnteriorInt==2)) {
             			return (refAnterior + "->" + refActual);

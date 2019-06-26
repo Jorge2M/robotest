@@ -15,9 +15,9 @@ import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
@@ -366,14 +366,14 @@ public class PageCheckoutWrapperStpV {
     	PageCheckoutWrapper.page1DktopCheckout.clickConfirmarPago(driver);
     }
 
-    @Step (
-    	description="Seleccionamos el botón \"Ver resumen\"", 
-        expected="Aparece la página-3 del checkout",
-        saveImagePage=SaveWhen.Always)
-    public static void pasoBotonVerResumenCheckout2Mobil(WebDriver driver) throws Exception {
-        PageCheckoutWrapper.page2MobilCheckout.waitAndClickFinalizarCompra(2, driver);
-        checkAfterClickVerResumen(2, driver);
-    }       
+//    @Step (
+//    	description="Seleccionamos el botón \"Ver resumen\"", 
+//        expected="Aparece la página-3 del checkout",
+//        saveImagePage=SaveWhen.Always)
+//    public static void pasoBotonVerResumenCheckout2Mobil(WebDriver driver) throws Exception {
+//        PageCheckoutWrapper.page2MobilCheckout.waitAndClickFinalizarCompra(2, driver);
+//        checkAfterClickVerResumen(2, driver);
+//    }       
     
     @Validation (
     	description="Aparece el botón de \"Confirmar Pago\" (esperamos hasta #{maxSecondsWait} segundos)",

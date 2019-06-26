@@ -3,9 +3,8 @@ package com.mng.robotest.test80.mango.test.factoryes;
 import java.util.*;
 import org.testng.annotations.*;
 
-import com.mng.robotest.test80.mango.test.appshop.rebajas.RebajasSpringIsHere2019;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.appshop.rebajas.RebajasJun2019;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
@@ -20,7 +19,7 @@ public class ListRebajasXPais {
     public Object[] createInstances(String appEStr, String listaPaisesStr, String lineas, ITestContext context) 
     throws Exception {
         ArrayList<Object> listTests = new ArrayList<>();
-        AppEcom appE = AppEcomEnum.getAppEcom(appEStr);
+        AppEcom appE = AppEcom.valueOf(appEStr);
         try {
             //Obtenemos la lista de países como lista de enteros
             List<Integer> listaPaisesInt = UtilsMangoTest.getListaPaisesInt(listaPaisesStr);
@@ -45,7 +44,8 @@ public class ListRebajasXPais {
                         while (itIdiomas.hasNext()) {
                             IdiomaPais idioma = itIdiomas.next();
                             //listTests.add(new RebajasJun2018(pais, idioma, lineasAprobar, prioridad));
-                            listTests.add(new RebajasSpringIsHere2019(pais, idioma, lineasAprobar, prioridad));
+                            //listTests.add(new RebajasSpringIsHere2019(pais, idioma, lineasAprobar, prioridad));
+                            listTests.add(new RebajasJun2019(pais, idioma, lineasAprobar, prioridad));
                             prioridad+=1;
                             System.out.println(
                                 "Creado Test con datos: Continente=" + continente.getNombre_continente() +

@@ -10,8 +10,8 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.mango.test.data.AppEcomEnum.AppEcom;
-import com.mng.robotest.test80.mango.test.data.ChannelEnum.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopCheckout;
@@ -32,12 +32,12 @@ public class SecStoreCreditStpV {
         TestCaseData.getDatosCurrentStep().replaceInExpected(tagNombrePago, nombrePago);
         
         dCtxPago.getDataPedido().setImporteTotal(PageCheckoutWrapper.getPrecioTotalFromResumen(channel, driver));
-        validaBloqueSaldoEnCuenta(true/*marcado*/, channel, dCtxPago, driver);
+        validaBloqueSaldoEnCuenta(true, channel, dCtxPago, driver);
     }
 
     @Step (
     	description="Seleccionamos el bloque de \"Saldo en cuenta\"", 
-        expected="Aparecen el resto de métodos de pago")
+        expected="El marcado o desmarcado es correcto")
     public static void selectSaldoEnCuentaBlock(Pais pais, DataCtxPago dCtxPago, AppEcom app, Channel channel, WebDriver driver) 
     throws Exception {
         boolean marcadoInicialmente = Page1DktopCheckout.secStoreCredit.isChecked(driver);
@@ -48,13 +48,13 @@ public class SecStoreCreditStpV {
         if (marcadoInicialmente) {
             boolean isEmpl = dCtxPago.getFTCkout().isEmpl;
             PageCheckoutWrapperStpV.validaMetodosPagoDisponibles(pais, isEmpl, app, channel, driver);
-            if (channel==Channel.desktop) {
-                dCtxPago.getDataPedido().setImporteTotalSinSaldoCta(PageCheckoutWrapper.getPrecioTotalFromResumen(channel, driver));
-            }
+            //if (channel==Channel.desktop) {
+                dCtxPago.getDataPedido().setImporteTotalSinSaldoCta(PageCheckoutWrapper.getPrecioTotalSinSaldoEnCuenta(channel, driver));
+            //}
         } else {
         	checkAfterMarkSaldoEnCuenta(channel, pais, driver);
             if (channel==Channel.movil_web) {
-                dCtxPago.getDataPedido().setImporteTotalSinSaldoCta(PageCheckoutWrapper.getPrecioTotalFromResumen(channel, driver));
+                dCtxPago.getDataPedido().setImporteTotalSinSaldoCta(PageCheckoutWrapper.getPrecioTotalSinSaldoEnCuenta(channel, driver));
             }
         }
     }
@@ -86,7 +86,7 @@ public class SecStoreCreditStpV {
         		!isCheckedBlock, State.Warn);
       	}
       	
-      	if (!checkedSaldoEnCta || channel==Channel.desktop) {
+      	if (checkedSaldoEnCta/* || channel==Channel.desktop*/) {
             String impTotResumen = PageCheckoutWrapper.getPrecioTotalFromResumen(channel, driver);
             float impFloat = ImporteScreen.getFloatFromImporteMangoScreen(impTotResumen);
           	validations.add(

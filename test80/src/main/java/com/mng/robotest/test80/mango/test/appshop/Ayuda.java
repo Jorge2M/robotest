@@ -3,6 +3,8 @@ package com.mng.robotest.test80.mango.test.appshop;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
+import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -14,7 +16,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -51,10 +52,7 @@ public class Ayuda extends GestorWebDriver {
 
         dCtxSh.pais = this.españa;
         dCtxSh.idioma = this.castellano;
-
-        //Almacenamiento final a nivel de Thread (para disponer de 1 x cada @Test)
-        TestCaseData.storeInThread(dCtxSh);
-        TestCaseData.getAndStoreDataFmwk(bpath, dCtxSh.urlAcceso, "", dCtxSh.channel, context, method);
+        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
     }
 
 //    @Test(
@@ -62,7 +60,7 @@ public class Ayuda extends GestorWebDriver {
 //        description="Verificar que los elementos de la página ayuda están correctamente presentes")
     public void AYU001_Data() throws Exception {
         DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = TestCaseData.getdCtxSh();
+        DataCtxShop dCtxSh = (DataCtxShop) TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
 
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
