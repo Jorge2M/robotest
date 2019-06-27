@@ -18,7 +18,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLat
  * @author jorge.munoz
  *
  */
-public class SecCabeceraMobil extends SecCabecera {
+public class SecCabeceraOutletMovil extends SecCabeceraOutlet {
 	
 	private SearchBarMobil searchBar = null; 
 	
@@ -72,13 +72,13 @@ public class SecCabeceraMobil extends SecCabecera {
     private final static String XPathLinkLogoMangoOutlet = "//a[@class[contains(.,'headerMobile__logoLink')]]";
     private final static String XPathIconoMenuHamburguesa = XPathHeader + "//div[@class[contains(.,'menu-open-button')]]";
     
-    private SecCabeceraMobil(AppEcom app, WebDriver driver) {
+    private SecCabeceraOutletMovil(AppEcom app, WebDriver driver) {
     	this.app = app;
     	this.driver = driver;
     }
     
-    public static SecCabeceraMobil getNew(AppEcom app, WebDriver driver) {
-    	return (new SecCabeceraMobil(app, driver));
+    public static SecCabeceraOutletMovil getNew(AppEcom app, WebDriver driver) {
+    	return (new SecCabeceraOutletMovil(app, driver));
     }
     
     public SearchBarMobil getSearchBar() throws Exception {

@@ -14,8 +14,8 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil.Icono;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMovil;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMovil.Icono;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil.TypeLocator;
@@ -76,7 +76,7 @@ public class SecMenusWrap {
      */
 	public static void closeSessionIfUserLogged(Channel channel, AppEcom app, WebDriver driver) throws Exception {
         if (channel==Channel.movil_web) {
-        	SecCabeceraMobil secCabeceraMobil = (SecCabeceraMobil)SecCabecera.getNew(Channel.movil_web, app, driver);
+        	SecCabeceraOutletMovil secCabeceraMobil = (SecCabeceraOutletMovil)SecCabecera.getNew(Channel.movil_web, app, driver);
         	if (secCabeceraMobil.isVisible(Icono.MiCuenta)) {
         		SecMenuLateralMobil.secMenusUser.clickCerrarSessionIfLinkExists(driver);
         	}

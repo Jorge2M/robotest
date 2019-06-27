@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMovil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalActPoliticaPrivacidad;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
@@ -94,7 +94,7 @@ public class PageIdentificacion extends WebdrvWrapp {
     public static void clickIniciarSesionAndWait(Channel channel, AppEcom app, WebDriver driver) throws Exception {
         if (channel==Channel.movil_web) {
             //En el caso de mobile nos tenemos que asegurar que están desplegados los menús
-        	SecCabeceraMobil secCabeceraMobil = (SecCabeceraMobil)SecCabecera.getNew(Channel.movil_web, app, driver);
+        	SecCabeceraOutletMovil secCabeceraMobil = (SecCabeceraOutletMovil)SecCabecera.getNew(Channel.movil_web, app, driver);
         	boolean toOpen = true;
         	secCabeceraMobil.clickIconoMenuHamburguer(toOpen);
             

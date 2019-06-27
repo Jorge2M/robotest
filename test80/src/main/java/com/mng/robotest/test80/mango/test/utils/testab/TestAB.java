@@ -64,7 +64,7 @@ public interface TestAB {
 		TestAB.activateTestABgaleriaReact(versionSinReact, dCtxSh.channel, dCtxSh.appE, driver);
 		
 		//Foorzamos cabecera desktop sin iconos
-		int versionSinIconos = 0;
-		TestAB.activateTestABcabeceraDesktop(versionSinIconos, dCtxSh.channel, dCtxSh.appE, driver);
+//		int versionSinIconos = 0;
+//		TestAB.activateTestABcabeceraDesktop(versionSinIconos, dCtxSh.channel, dCtxSh.appE, driver);
     }
 }

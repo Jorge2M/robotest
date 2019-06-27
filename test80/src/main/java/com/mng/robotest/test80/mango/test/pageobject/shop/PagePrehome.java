@@ -18,7 +18,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMovil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.test80.mango.test.pageobject.utils.LocalStorage;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
@@ -233,7 +233,7 @@ public class PagePrehome extends WebdrvWrapp {
         PagePrehome.selecPaisIdiomaYAccede(dCtxSh, driver);
         ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
         if (dCtxSh.channel==Channel.movil_web) {
-        	SecCabeceraMobil secCabecera = (SecCabeceraMobil)SecCabeceraMobil.getNew(Channel.movil_web, dCtxSh.appE, driver);
+        	SecCabeceraOutletMovil secCabecera = (SecCabeceraOutletMovil)SecCabeceraOutletMovil.getNew(Channel.movil_web, dCtxSh.appE, driver);
         	secCabecera.closeSmartBannerIfExists();
         }
     }

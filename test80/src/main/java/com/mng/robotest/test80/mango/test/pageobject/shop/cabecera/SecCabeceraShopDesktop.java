@@ -13,29 +13,19 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecBuscadorDe
  * @author jorge.munoz
  *
  */
-public class SecCabeceraDesktop extends SecCabecera {
+public class SecCabeceraShopDesktop extends SecCabeceraShop {
 	
     private final static String XPathIconoBolsaOutlet = "//div[@class[contains(.,'shoppingBagButton')]]";
     private final static String XPathIconoBolsaShop = "//div[@id[contains(.,'shoppingBag')]]//span";
 
-    public final static String XPathLinkLogoMango = "//div[@class='nav-logo' or @class[contains(.,'header-content-logo')] or @class[contains(.,'logo_menu')] or @class='logo']/a";
     private final static String XPathDivNavTools = "//div[@id='navTools']";
     
-    //TODO cuando suba a PRO el tema de los Likes en el menú de usuario habrá que eliminar el XPathLikesCabecera
-    private final static String XPahtLikesCabecera = "//a[@id='userMenuTrigger']/span[text()[contains(.,'LIKES')]]";
-    
-    private SecCabeceraDesktop(AppEcom app, WebDriver driver) {
-    	this.app = app;
-    	this.driver = driver;
+    private SecCabeceraShopDesktop(AppEcom app, WebDriver driver) {
+    	super(app, driver);
     }
     
-    public static SecCabeceraDesktop getNew(AppEcom app, WebDriver driver) {
-    	return (new SecCabeceraDesktop(app, driver));
-    }
-    
-    @Override
-    String getXPathLogoMango() {
-    	return XPathLinkLogoMango;
+    public static SecCabeceraShopDesktop getNew(AppEcom app, WebDriver driver) {
+    	return (new SecCabeceraShopDesktop(app, driver));
     }
     
     @Override
@@ -73,10 +63,6 @@ public class SecCabeceraDesktop extends SecCabecera {
     @Override
     public void buscarReferenciaNoWait(String referencia) throws Exception {
     	SecBuscadorDesktop.buscarReferenciaNoWait(referencia, driver);
-    }
-    
-    public boolean isVisibleLikes() {
-    	return (WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(XPahtLikesCabecera), 1));
     }
 
     public String getXPathIconoBolsa() {

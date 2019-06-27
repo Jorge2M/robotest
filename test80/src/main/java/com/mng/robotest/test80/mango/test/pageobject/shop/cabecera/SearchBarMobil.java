@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.cabecera;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil.Icono;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMovil.Icono;
 
 public interface SearchBarMobil {
 	public boolean isVisibleUntil(int maxSecondsWait);
@@ -42,6 +42,6 @@ public interface SearchBarMobil {
 	}
 	
 	static void makeSearchBarVisible(AppEcom app, WebDriver driver) throws Exception {
-		SecCabeceraMobil.click(Icono.Lupa, app, driver);
+		SecCabeceraOutletMovil.click(Icono.Lupa, app, driver);
 	}
 }

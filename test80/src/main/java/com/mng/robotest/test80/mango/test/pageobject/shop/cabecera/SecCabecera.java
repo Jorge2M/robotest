@@ -9,8 +9,10 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 
 public abstract class SecCabecera extends WebdrvWrapp {
-	AppEcom app;
-	WebDriver driver;
+	
+	final WebDriver driver;
+	final AppEcom app;
+	
 	abstract String getXPathLogoMango();
 	abstract String getXPathNumberArtIcono();
 	public abstract boolean isVisibleIconoBolsa();
@@ -19,13 +21,19 @@ public abstract class SecCabecera extends WebdrvWrapp {
 	public abstract void hoverIconoBolsa();
 	public abstract void buscarReferenciaNoWait(String referencia) throws Exception;
 	
+	protected SecCabecera(AppEcom app, WebDriver driver) {
+		this.driver = driver;
+		this.app = app;
+	}
+	
 	public static SecCabecera getNew(Channel channel, AppEcom app, WebDriver driver) {
-		switch (channel) {
-		case desktop:
-			return SecCabeceraDesktop.getNew(app, driver);
-		case movil_web:
+		switch (app) {
+		case shop:
+		case votf:
+			return SecCabeceraShop.getNew(channel, app, driver);
+		case outlet:
 		default:
-			return SecCabeceraMobil.getNew(app, driver);
+			return SecCabeceraOutlet.getNew(channel, app, driver);
 		}
 	}
 	
