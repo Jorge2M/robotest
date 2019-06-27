@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.pageobject.shop.cabecera;
+package com.mng.robotest.test80.mango.test.pageobject.shop.buscador;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -7,25 +7,19 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
-public class SearchBarMobilOld extends WebdrvWrapp implements SearchBarMobil {
+public class SecSearchMobilOutlet extends WebdrvWrapp implements SecSearch {
 	
 	private final WebDriver driver;
 	
-	private final static String XPathCapa = "//div[@class='menu-search-layer']";
     private final static String XPathInputBuscador = "//form[not(@class)]/input[@class='search-input']";
     private final static String XPathCancelarLink = "//div[@class='search-cancel']";
     
-    private SearchBarMobilOld(WebDriver driver) {
+    private SecSearchMobilOutlet(WebDriver driver) {
     	this.driver = driver;
     }
     
-    public static SearchBarMobilOld make(WebDriver driver) {
-    	return (new SearchBarMobilOld(driver));
-    }
-    
-    @Override
-    public boolean isVisibleUntil(int maxSecondsWait) {
-    	return (WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(XPathCapa), maxSecondsWait));
+    public static SecSearchMobilOutlet make(WebDriver driver) {
+    	return (new SecSearchMobilOutlet(driver));
     }
     
     @Override

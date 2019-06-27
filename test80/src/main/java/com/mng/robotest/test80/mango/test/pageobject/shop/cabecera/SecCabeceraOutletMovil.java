@@ -7,10 +7,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPage;
 import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.Mensajes;
+import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecSearch;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
 
 /**
@@ -20,13 +22,10 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLat
  */
 public class SecCabeceraOutletMovil extends SecCabeceraOutlet {
 	
-	private SearchBarMobil searchBar = null; 
+	private SecSearch searchBar = null; 
 	
 	final static String XPathHeader = "//header";
-	public enum Icono {
-		Lupa(
-			"//div[@class='menu-search-button' or @class='user-icon-button']",
-			"//div[@class='menu-search-button' or @class='user-icon-button']"),
+	public enum Icono implements ElementPage {
 		IniciarSesion(
 			"//div[@class='user-icon-button' and @id='login_mobile_any']",
 			"//a[@class[contains(.,'myAccount')] and @data-origin='login']"),
@@ -81,9 +80,9 @@ public class SecCabeceraOutletMovil extends SecCabeceraOutlet {
     	return (new SecCabeceraOutletMovil(app, driver));
     }
     
-    public SearchBarMobil getSearchBar() throws Exception {
+    public SecSearch getSearchBar() throws Exception {
     	if (searchBar==null) {
-    		searchBar = SearchBarMobil.make(app, driver);
+    		searchBar = SecSearch.make(app, driver);
     	}
     	
     	return searchBar;
@@ -126,7 +125,7 @@ public class SecCabeceraOutletMovil extends SecCabeceraOutlet {
     }
     
     @Override
-    public void buscarReferenciaNoWait(String referencia) throws Exception {
+    public void buscarTexto(String referencia) throws Exception {
         new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(Mensajes.getXPathCapaCargando())));
         buscarRefNoWait(referencia);
     }

@@ -19,7 +19,7 @@ public abstract class SecCabecera extends WebdrvWrapp {
 	public abstract void clickIconoBolsa() throws Exception;
 	public abstract void clickIconoBolsaWhenDisp(int maxSecondsToWait) throws Exception;
 	public abstract void hoverIconoBolsa();
-	public abstract void buscarReferenciaNoWait(String referencia) throws Exception;
+	public abstract void buscarTexto(String referencia) throws Exception;
 	
 	protected SecCabecera(AppEcom app, WebDriver driver) {
 		this.driver = driver;

@@ -13,8 +13,9 @@ import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorBusqueda;
-import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecBuscadorWrapper;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
+import com.mng.robotest.test80.mango.test.pageobject.shop.navigations.ArticuloNavigations;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
@@ -40,7 +41,7 @@ public class SecBuscadorStpV {
     		"Aparece una ficha de producto de typo <b>#{articulo.getType()}</b>")
     public static void searchArticuloAndValidateBasic(ArticleStock articulo, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        SecBuscadorWrapper.buscarArticulo(articulo, dCtxSh.channel, dCtxSh.appE, driver);
+        ArticuloNavigations.buscarArticulo(articulo, dCtxSh.channel, dCtxSh.appE, driver);
         WebdrvWrapp.waitForPageLoaded(driver);  
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         pageFichaStpV.validateIsFichaAccordingTypeProduct(articulo);
@@ -52,7 +53,7 @@ public class SecBuscadorStpV {
     public static void busquedaCategoriaProducto(String categoriaABuscar, boolean categoriaExiste, AppEcom app, 
     											 Channel channel, WebDriver driver) throws Exception {
     	PageGaleria pageGaleria = (PageGaleria)PageGaleria.getInstance(channel, app, driver); 
-        SecBuscadorWrapper.buscarTexto(categoriaABuscar, channel, app, driver);
+    	SecCabecera.getNew(channel, app, driver).buscarTexto(categoriaABuscar);
         WebdrvWrapp.waitForPageLoaded(driver);    
         
         //Validaciones

@@ -2,25 +2,29 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.cabecera;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.utils.otras.Channel;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import com.mng.robotest.test80.arq.webdriverwrapper.ElementPage;
-import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.pageobject.shop.Mensajes;
+import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecSearch;
+import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecSearchDesktop;
 
-public abstract class SecCabeceraShop extends SecCabecera {
+/**
+ * Cabecera Shop compatible con desktop y movil_web
+ *
+ */
+public class SecCabeceraShop extends SecCabecera {
 
+	private SecSearch searchBar = null; 
+	
 	protected SecCabeceraShop(AppEcom app, WebDriver driver) {
 		super(app, driver);
 	}
 	
-	public static SecCabeceraShop getNew(AppEcom app, Channel channel, WebDriver driver) {
-		switch (channel) {
-		case desktop:
-			return SecCabeceraShopDesktop.getNew(app, driver);
-		case movil_web:
-		default:
-			return SecCabeceraShopMovil.getNew(app, driver);
-		}
+	public static SecCabeceraShop getNew(AppEcom app, WebDriver driver) {
+		return (new SecCabeceraShop(app, driver));
 	}
 	
 	private final static String XPathLinkLogoMango = "//a[@class='logo-link']";
@@ -29,7 +33,8 @@ public abstract class SecCabeceraShop extends SecCabecera {
 	
     private enum IconoShop implements ElementPage {
     	buscar("//span[@class[contains(.,'-search')]]"),
-    	micuenta("//span[@class[contains(.,'-account')]]"),
+		iniciarsesion("//self::*[@id='login_any']/span[@class[contains(.,'-account')]]"),
+    	micuenta("//self::*[@id='login']/span[@class[contains(.,'-account')]]"),
 		favoritos("//span[@class[contains(.,'-favorites')]]"),
 		bolsa("//span[@class[contains(.,'-bag')]]");
 
@@ -40,10 +45,6 @@ public abstract class SecCabeceraShop extends SecCabecera {
 		}
 
 		public String getXPath() {
-			return this.xPath;
-		}
-
-		public String getXPath(Channel channel) {
 			return this.xPath;
 		}
 	}
@@ -60,27 +61,50 @@ public abstract class SecCabeceraShop extends SecCabecera {
     
     @Override
     public void hoverIconoBolsa() {
-        By iconoBolsaBy = By.xpath(IconoShop.bolsa.getXPath());
-        moveToElement(iconoBolsaBy, driver);
+    	hoverIcono(IconoShop.bolsa);
     }
     
     @Override
     public boolean isVisibleIconoBolsa() {
-    	return (isElementInState(IconoShop.bolsa, StateElem.Visible, driver));
+    	return (isVisibleIcono(IconoShop.bolsa));
     }
     
     @Override
     public void clickIconoBolsa() throws Exception {
-    	By iconoBolsaBy = By.xpath(IconoShop.bolsa.getXPath());
-    	clickAndWaitLoad(driver, iconoBolsaBy);
+    	clickIcono(IconoShop.bolsa);
+    }
+
+    @Override
+    public void clickIconoBolsaWhenDisp(int maxSecondsWait) throws Exception {
+    	boolean isIconoClickable = isElementInStateUntil(IconoShop.bolsa, StateElem.Clickable, maxSecondsWait, driver);
+        if (isIconoClickable) {
+        	clickIconoBolsa();
+        }
     }
     
     @Override
-    public void clickIconoBolsaWhenDisp(int maxSecondsToWait) throws Exception {
-    	
-        if (isElementClickableUntil(driver, By.xpath(xpathBolsaLink), maxSecondsToWait)) {
-        	clickAndWaitLoad(driver, By.xpath(xpathBolsaLink));
-        }
+    public void buscarTexto(String referencia) throws Exception {
+    	switch (channel) {
+    	case desktop:
+    		SecSearchDesktop.search(referencia, driver);
+    		break;
+    	case movil_web:
+            new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(Mensajes.getXPathCapaCargando())));
+            buscarRefNoWait(referencia);
+    	}
+    }
+    
+    public void clickIcono(IconoShop icono) throws Exception {
+    	clickAndWait(icono, driver);
+    }
+    
+    public boolean isVisibleIcono(IconoShop icono) {
+    	return (isElementInState(icono, StateElem.Visible, driver));
+    }
+    
+    public void hoverIcono(IconoShop icono) {
+        By iconoBy = By.xpath(icono.getXPath());
+        moveToElement(iconoBy, driver);
     }
     
     public void focusAwayBolsa(WebDriver driver) {
