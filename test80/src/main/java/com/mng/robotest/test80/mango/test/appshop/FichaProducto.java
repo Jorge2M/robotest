@@ -197,7 +197,8 @@ public class FichaProducto extends GestorWebDriver {
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.nina, null, "pantalones"));
-        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
 
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         LocationArticle location1rstArticle = LocationArticle.getInstanceInCatalog(1);
@@ -248,8 +249,9 @@ public class FichaProducto extends GestorWebDriver {
         
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
 		Menu1rstLevel menuPersonalizacion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.he, null, "personalizacion"));
-		SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh, dFTest.driver);
-		SecMenusWrapperStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
+        secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
 		LocationArticle articleNum = LocationArticle.getInstanceInCatalog(1);
 		pageGaleriaStpV.selectArticulo(articleNum, dCtxSh);
         SecModalPersonalizacionStpV modalPersonalizacionStpV = SecModalPersonalizacionStpV.getNewOne(dCtxSh, dFTest.driver); 

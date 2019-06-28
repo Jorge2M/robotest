@@ -38,9 +38,11 @@ public class PageRegistroFinStpV {
     	validations.add(
     		"El logo de Mango redirige al país/idioma origen: " + dCtxSh.idioma.getAcceso(),
     		SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, driver).validaLogoMangoGoesToIdioma(dCtxSh.idioma), State.Warn);
+    	
+    	SecMenusWrap secMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver);
     	validations.add(
     		"Aparece el link superior de <b>Cerrar Sesión</b> (estamos loginados)",
-    		SecMenusWrap.secMenusUser.isPresentCerrarSesion(dCtxSh.channel, driver), State.Defect);
+    		secMenus.getMenusUser().isPresentCerrarSesion(), State.Defect);
     	return validations;		
 	}
 }

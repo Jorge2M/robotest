@@ -6,7 +6,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.annotations.step.Step;
@@ -41,13 +40,33 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 
 public class SecMenusWrapperStpV {
+	
 	static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 	
-    public static SecMenusUserStpV secMenuUser;
+	private final Channel channel;
+	private final AppEcom app;
+	private final WebDriver driver;
+	private final SecMenusUserStpV secMenusUserStpV;
+    private final SecMenusWrap secMenusWrap;
+    
+    private SecMenusWrapperStpV(Channel channel, AppEcom app, WebDriver driver) {
+    	this.channel = channel;
+    	this.app = app;
+    	this.driver = driver;
+    	this.secMenusUserStpV = SecMenusUserStpV.getNew(channel, app, driver);
+    	this.secMenusWrap = SecMenusWrap.getNew(channel, app, driver);
+    }
+    
+    public static SecMenusWrapperStpV getNew(Channel channel, AppEcom app, WebDriver driver) {
+    	return (new SecMenusWrapperStpV(channel, app, driver));
+    }
+    
+    public SecMenusUserStpV getMenusUser() {
+    	return this.secMenusUserStpV;
+    }
     
     @Validation
-    public static ChecksResult validateLineas(Pais pais, AppEcom app, Channel channel, WebDriver driver) 
-    throws Exception {
+    public ChecksResult validateLineas(Pais pais) throws Exception {
         ChecksResult validations = ChecksResult.getNew();
         LineaType[] lineasToTest = Linea.LineaType.values();
         for (LineaType lineaType : lineasToTest) {
@@ -61,7 +80,7 @@ public class SecMenusWrapperStpV {
                     apareceLinea = ThreeState.FALSE;
                 }
                 
-                boolean isLineaPresent = SecMenusWrap.isLineaPresent(lineaType, app, channel, driver);
+                boolean isLineaPresent = secMenusWrap.isLineaPresent(lineaType);
                 if (apareceLinea==ThreeState.TRUE) {
             		validations.add (
         				"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b>",
@@ -78,10 +97,10 @@ public class SecMenusWrapperStpV {
     }
     
     @Validation
-    public static ChecksResult checkLineaRebajas(boolean salesOnInCountry, DataCtxShop dCtxSh, WebDriver driver) {
+    public ChecksResult checkLineaRebajas(boolean salesOnInCountry, DataCtxShop dCtxSh) {
         ChecksResult validations = ChecksResult.getNew();
         int maxSeconds = 3;
-        boolean isPresentLinRebajas = SecMenusWrap.isLineaPresentUntil(LineaType.rebajas, dCtxSh.appE, dCtxSh.channel, maxSeconds, driver);
+        boolean isPresentLinRebajas = secMenusWrap.isLineaPresentUntil(LineaType.rebajas, maxSeconds);
         if (salesOnInCountry && dCtxSh.pais.isVentaOnline()) {
         	validations.add(
         		PrefixRebajas + "Aparece la línea \"Rebajas\" (lo esperamos hasta " + maxSeconds + " segundos)",
@@ -98,13 +117,13 @@ public class SecMenusWrapperStpV {
     /**
      * Recorre todos los menús existentes en la página y crea un step por cada uno de ellos
      */
-    public static void stepsMenusLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public void stepsMenusLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh) 
     throws Exception {
-        String paginaLinea = dFTest.driver.getCurrentUrl();
+        String paginaLinea = driver.getCurrentUrl();
         
         //Obtenemos la lista de menús de la línea
         Linea linea = dCtxSh.pais.getShoponline().getLinea(lineaType);
-        List<String> listMenusLabel = SecMenusWrap.getListDataLabelsMenus(linea, sublineaType, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        List<String> listMenusLabel = secMenusWrap.getListDataLabelsMenus(linea, sublineaType);
         //for (int i=0; i<5; i++) {
         for (int i=0; i<listMenusLabel.size(); i++) {
             try {
@@ -112,9 +131,9 @@ public class SecMenusWrapperStpV {
             	Menu1rstLevel menu1rstLevel = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, listMenusLabel.get(i)));
             	menu1rstLevel.setDataGaLabel(listMenusLabel.get(i));
                 if (dCtxSh.channel==Channel.movil_web) {
-                    SecMenuLateralMobilStpV.stepClickMenu1rstLevel(menu1rstLevel, dCtxSh.pais, dCtxSh.appE, dFTest.driver);
+                    SecMenuLateralMobilStpV.stepClickMenu1rstLevel(menu1rstLevel, dCtxSh.pais, dCtxSh.appE, driver);
                 } else {
-                    SecMenusDesktopStpV.stepEntradaMenuDesktop(menu1rstLevel, paginaLinea, dCtxSh, dFTest.driver);
+                    SecMenusDesktopStpV.stepEntradaMenuDesktop(menu1rstLevel, paginaLinea, dCtxSh, driver);
                 }
             }
             catch (Exception e) {
@@ -124,21 +143,20 @@ public class SecMenusWrapperStpV {
         }
     }
     
-    public static void navSeleccionaCarruselsLinea(Pais pais, LineaType lineaNuevoOReb, AppEcom app, Channel channel, DataFmwkTest dFTest) throws Exception {
+    public void navSeleccionaCarruselsLinea(Pais pais, LineaType lineaNuevoOReb) throws Exception {
         if (channel==Channel.movil_web) {
-            SecMenuLateralMobilStpV.navClickLineaAndCarrusels(lineaNuevoOReb, pais, app, dFTest.driver);
+            SecMenuLateralMobilStpV.navClickLineaAndCarrusels(lineaNuevoOReb, pais, app, driver);
         } else {
-            SecMenusDesktopStpV.stepValidaCarrusels(pais, lineaNuevoOReb, app, dFTest.driver);
+            SecMenusDesktopStpV.stepValidaCarrusels(pais, lineaNuevoOReb, app, driver);
         }
     }
     
     @Step (
     	description="Seleccionar el menú <b>#{menu1rstLevel}</b>",
         expected="Se obtiene el catálogo de artículos asociados al menú")
-    public static void accesoMenuXRef(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
-        SecMenusWrap.seleccionarMenuXHref(menu1rstLevel, dCtxSh.pais, dCtxSh.channel, driver);
-        checkIsVisibleAarticle(dCtxSh, 3, driver);
+    public void accesoMenuXRef(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
+    	secMenusWrap.seleccionarMenuXHref(menu1rstLevel, dCtxSh.pais);
+        checkIsVisibleAarticle(dCtxSh, 3);
         
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
         flagsVal.validaSEO = true;
@@ -151,13 +169,12 @@ public class SecMenusWrapperStpV {
     	description="Como mínimo se obtiene 1 artículo (lo esperamos un máximo de #{maxSecondsWait} segundos)",
     	level=State.Warn,
     	avoidEvidences=true)
-    private static boolean checkIsVisibleAarticle(DataCtxShop dCtxSh, int maxSecondsWait, WebDriver driver) throws Exception {
+    private boolean checkIsVisibleAarticle(DataCtxShop dCtxSh, int maxSecondsWait) throws Exception {
         PageGaleria pageGaleria = PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
         return (pageGaleria.isVisibleArticuloUntil(1, maxSecondsWait));
     }
     
-    public static void selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
+    public void selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
             SecMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, driver);
         } else {	
@@ -165,8 +182,7 @@ public class SecMenusWrapperStpV {
         }
     }
     
-    public static void selectMenuLateral1erLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
+    public void selectMenuLateral1erLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
             SecMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, driver); 
         } else {
@@ -177,9 +193,8 @@ public class SecMenusWrapperStpV {
     /**
      * Validación de la selección de un menú lateral de 1er o 2o nivel 
      */
-	public static void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh, WebDriver driver)
-    throws Exception {
-		validateGaleriaAfeterSelectMenu(dCtxSh, driver);
+	public void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh) throws Exception {
+		validateGaleriaAfeterSelectMenu(dCtxSh);
         if (dCtxSh.channel==Channel.desktop) {
             SecMenusDesktopStpV.validationsSelecMenuEspecificDesktop(menu, dCtxSh.channel, dCtxSh.appE, driver);
         }
@@ -201,8 +216,7 @@ public class SecMenusWrapperStpV {
     }
     
 	@Validation
-    public static ChecksResult validateGaleriaAfeterSelectMenu(DataCtxShop dCtxSh, WebDriver driver) 
-	throws Exception {
+    public ChecksResult validateGaleriaAfeterSelectMenu(DataCtxShop dCtxSh) throws Exception {
 		ChecksResult validations = ChecksResult.getNew();
 		PageGaleria pageGaleria = PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 		int maxSecondsToWaitArticle = 3;
@@ -226,16 +240,15 @@ public class SecMenusWrapperStpV {
 		return validations;
     }
     
-    public static DatosStep seleccionLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
+    public DatosStep seleccionLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh) throws Exception {
         if (sublineaType==null) {
-            return seleccionLinea(lineaType, dCtxSh, driver);
+            return seleccionLinea(lineaType, dCtxSh);
         }
         
-        return seleccionSublinea(lineaType, sublineaType, dCtxSh, driver);
+        return seleccionSublinea(lineaType, sublineaType, dCtxSh);
     }
     
-    public static DatosStep seleccionLinea(LineaType lineaType, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    public DatosStep seleccionLinea(LineaType lineaType, DataCtxShop dCtxSh) throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
             SecMenuLateralMobilStpV.seleccionLinea(lineaType, dCtxSh.pais, dCtxSh.appE, driver);
             return TestCaseData.getDatosLastStep();
@@ -245,7 +258,7 @@ public class SecMenusWrapperStpV {
         return TestCaseData.getDatosLastStep();
     }
     
-    public static DatosStep seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, WebDriver driver)
+    public DatosStep seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh)
     throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
             SecMenuLateralMobilStpV.seleccionSublineaNinos(lineaType, sublineaType, dCtxSh, driver);
@@ -256,19 +269,17 @@ public class SecMenusWrapperStpV {
         return TestCaseData.getDatosLastStep();
     }
     
-    public static void selectFiltroCollectionIfExists(FilterCollection typeMenu, Channel channel, AppEcom app, WebDriver driver) 
-    throws Exception {
+    public void selectFiltroCollectionIfExists(FilterCollection typeMenu) throws Exception {
     	SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app, driver);
     	if (filtrosCollection.isVisibleMenu(FilterCollection.nextSeason)) {
-    		selectFiltroCollection(typeMenu, channel, app, driver);
+    		selectFiltroCollection(typeMenu);
     	}
     }
     
     @Step (
     	description="Seleccionar filtro de colecciones <b>#{typeMenu}</b>", 
         expected="Aparece una galería con artículos de temporadas#{typeMenu.getListTempArticles()}")
-    public static void selectFiltroCollection(FilterCollection typeMenu, Channel channel, AppEcom app, WebDriver driver) 
-    throws Exception {
+    public void selectFiltroCollection(FilterCollection typeMenu) throws Exception {
     	SecMenusFiltroCollection filtrosCollection = SecMenusFiltroCollection.make(channel, app, driver);
     	filtrosCollection.click(typeMenu);        
         if (channel==Channel.desktop) {

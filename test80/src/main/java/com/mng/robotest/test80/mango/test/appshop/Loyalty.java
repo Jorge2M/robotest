@@ -20,7 +20,6 @@ import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
-import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -98,7 +97,9 @@ public class Loyalty extends GestorWebDriver {
         dCtxSh.passwordUser = passwUserWithLPoints;
         dCtxSh.userRegistered = true;
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, dFTest.driver);
-        actionsLoyaltyPostLogin(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        
+        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        actionsLoyaltyPostLogin(userMenusStpV, dFTest.driver);
         
         //Queremos asegurarnos que obtenemos artículos no-rebajados para poder aplicarle el descuento por Loyalty Points
         DataBag dataBag = addBagArticleNoRebajado(dFTest.driver);
@@ -131,8 +132,9 @@ public class Loyalty extends GestorWebDriver {
     
     private DataBag addBagArticleNoRebajado(WebDriver driver) throws Exception {
 		Menu1rstLevel menuPersonalizacion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
-		SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh, driver);
-		SecMenusWrapperStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason, dCtxSh.channel, dCtxSh.appE, driver);
+		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
+		secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
         DataBag dataBag = GaleriaNavigationsStpV.selectArticleAvailableFromGaleria(dCtxSh, driver);
         return dataBag;
     }
@@ -148,20 +150,22 @@ public class Loyalty extends GestorWebDriver {
         dCtxSh.passwordUser = passwUserWithLPoints;
         dCtxSh.userRegistered = true;
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
-        int loyaltyPointsIni = actionsLoyaltyPostLogin(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-        SecMenusUserStpV.clickMenuMangoLikesYou(dCtxSh.channel, dFTest.driver);
+        
+        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        int loyaltyPointsIni = actionsLoyaltyPostLogin(userMenusStpV, dFTest.driver);
+        userMenusStpV.clickMenuMangoLikesYou();
 
         PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(dFTest.driver);
         pageHomeLikesStpV.clickOpcionCompraUnDescuento();
 
-        SecMenusUserStpV.clickMenuMangoLikesYou(dCtxSh.channel, dFTest.driver);
+        userMenusStpV.clickMenuMangoLikesYou();
         pageHomeLikesStpV.clickButtonDonarLikes();
         if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest.driver)) {
             PageHomeDonateLikesStpV pageHomeDonateLikesStpV = PageHomeDonateLikesStpV.getNew(dFTest.driver);
             ButtonLikes donateButton = ButtonLikes.Button50likes;
             pageHomeDonateLikesStpV.selectDonateButton(donateButton);
-            int loyaltyPointsFin = checkAndGetLoyaltyPoints(dFTest.driver);
-            SecMenusUserStpV.checkLoyaltyPoints(loyaltyPointsIni, donateButton.getNumLikes(), loyaltyPointsFin);
+            int loyaltyPointsFin = checkAndGetLoyaltyPoints(userMenusStpV, dFTest.driver);
+            userMenusStpV.checkLoyaltyPoints(loyaltyPointsIni, donateButton.getNumLikes(), loyaltyPointsFin);
         }
     }
     
@@ -184,33 +188,36 @@ public class Loyalty extends GestorWebDriver {
         }
 
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
-        int loyaltyPointsIni = actionsLoyaltyPostLogin(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-        SecMenusUserStpV.clickMenuMangoLikesYou(dCtxSh.channel, dFTest.driver);
+        
+        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        int loyaltyPointsIni = actionsLoyaltyPostLogin(userMenusStpV, dFTest.driver);
+        userMenusStpV.clickMenuMangoLikesYou();
 
         PageHomeLikesStpV.getNewInstance(dFTest.driver).clickButtonConseguirPor1200Likes();
         if (!isEntornoPro) {
             PageHomeConseguirPor1200LikesStpV pageHomeConseguirPor1200LikesStpV = PageHomeConseguirPor1200LikesStpV.getNew(dFTest.driver);
             pageHomeConseguirPor1200LikesStpV.selectConseguirButton();
             
-            int loyaltyPointsFin = checkAndGetLoyaltyPoints(dFTest.driver);
-            SecMenusUserStpV.checkLoyaltyPoints(loyaltyPointsIni, 1200, loyaltyPointsFin);
+            int loyaltyPointsFin = checkAndGetLoyaltyPoints(userMenusStpV, dFTest.driver);
+            userMenusStpV.checkLoyaltyPoints(loyaltyPointsIni, 1200, loyaltyPointsFin);
         }
     }
     
-    private int actionsLoyaltyPostLogin(Channel channel, AppEcom app, WebDriver driver) throws Exception {
-	    SecMenusUserStpV.checkVisibilityLinkMangoLikesYou(channel, app, driver);
-	    return (checkAndGetLoyaltyPoints(driver));
+    private int actionsLoyaltyPostLogin(SecMenusUserStpV secMenusUserStpV, WebDriver driver) throws Exception {
+    	secMenusUserStpV.checkVisibilityLinkMangoLikesYou();
+	    return (checkAndGetLoyaltyPoints(secMenusUserStpV, driver));
     }
     
-    private int checkAndGetLoyaltyPoints(WebDriver driver) throws Exception {
-	    makeLoyaltyPointsVisible(dCtxSh, driver);
-		int loyaltyPoints = SecMenusUserStpV.checkAngGetLoyaltyPoints(7, driver).getNumberPoints();
+    private int checkAndGetLoyaltyPoints(SecMenusUserStpV secMenusUserStpV, WebDriver driver) throws Exception {
+	    makeLoyaltyPointsVisible(dCtxSh, secMenusUserStpV, driver);
+		int loyaltyPoints = secMenusUserStpV.checkAngGetLoyaltyPoints(7).getNumberPoints();
 		return loyaltyPoints;
     }
     
-    private void makeLoyaltyPointsVisible(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    private void makeLoyaltyPointsVisible(DataCtxShop dCtxSh, SecMenusUserStpV secMenusUserStpV, WebDriver driver) 
+    throws Exception {
 	    if (dCtxSh.channel==Channel.desktop) {
-	    	SecMenusUserStpV.hoverLinkForShowMenu(driver);
+	    	secMenusUserStpV.hoverLinkForShowMenu();
 	    } else {
 	    	boolean setVisible = true;
 	    	SecCabeceraStpV.getNew(dCtxSh, driver).setVisibilityLeftMenuMobil(setVisible);

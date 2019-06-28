@@ -99,7 +99,8 @@ public class GaleriaProducto extends GestorWebDriver {
             
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
-        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
         
         List<Color> colorsToFilter = new ArrayList<>();
         colorsToFilter.add(Color.Blanco);
@@ -151,7 +152,8 @@ public class GaleriaProducto extends GestorWebDriver {
             
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
-        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
                         
         List<Color> colorsToFilter = new ArrayList<>();
         colorsToFilter.add(Color.Blanco);
@@ -201,11 +203,12 @@ public class GaleriaProducto extends GestorWebDriver {
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, driver);
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
         if (dCtxSh.appE==AppEcom.outlet) {
-            SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, driver);
+        	secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
         } else {
         	Menu1rstLevel menuNuevo = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "New Now"));
-            SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuNuevo, dCtxSh, driver);
+        	secMenusStpV.selectMenu1rstLevelTypeCatalog(menuNuevo, dCtxSh);
             PageGaleriaStpV.secCrossSelling.validaIsCorrect(LineaType.she, dCtxSh.appE, driver);
             pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
         }
@@ -217,9 +220,9 @@ public class GaleriaProducto extends GestorWebDriver {
         }    
                 
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
-        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh, driver);
+        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh);
         
-        SecMenusWrapperStpV.selectMenuLateral1erLevelTypeCatalog(menuCamisas, dCtxSh, driver);
+        secMenusStpV.selectMenuLateral1erLevelTypeCatalog(menuCamisas, dCtxSh);
         Menu2onLevel menuCamisasTops = MenuTreeApp.getMenuLevel2From(menuCamisas, "tops");
         SecMenusDesktopStpV.selectMenuLateral2oLevel(menuCamisasTops, dCtxSh, driver);
     }
@@ -236,7 +239,8 @@ public class GaleriaProducto extends GestorWebDriver {
         //Ini script
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
-        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
                 
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         ArrayList<TypeSlider> typeSliderList = new ArrayList<>();
@@ -275,12 +279,12 @@ public class GaleriaProducto extends GestorWebDriver {
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;
         dCtxSh.userRegistered = true;
-        String tipoPrendasGaleria = "camisa";
 
         // Abrir listado de mujer camisas
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
-        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
 
         // Abrir avisame desde el listado buscando primera talla sin stock y comprobar que se abierto y que contiene texto RGPD
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);

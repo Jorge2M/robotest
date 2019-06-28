@@ -38,7 +38,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegis
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMiCuentaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalSuscripcionStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroDirecStpV;
@@ -127,7 +126,9 @@ public class Registro extends GestorWebDriver {
         }
             
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
-        SecMenusWrapperStpV.secMenuUser.selectRegistrate(dCtxSh.channel, dCtxSh, dFTest.driver);
+        
+        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        userMenusStpV.selectRegistrate(dCtxSh);
         
         //Step. Click inicial a Registrate (sin haber introducido ningún dato) -> Aparecerán los correspondientes mensajes de error
         HashMap<String,String> dataRegister = new HashMap<>();        
@@ -190,7 +191,8 @@ public class Registro extends GestorWebDriver {
         	ModalSuscripcionStpV.validaRGPDModal(dCtxSh, dFTest.driver);
         }
         
-        SecMenusWrapperStpV.secMenuUser.selectRegistrate(dCtxSh.channel, dCtxSh, dFTest.driver);
+        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        userMenusStpV.selectRegistrate(dCtxSh);
         if(clickRegister) {
 	        String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
 	        HashMap<String,String> dataRegistro = 
@@ -221,7 +223,7 @@ public class Registro extends GestorWebDriver {
 	            //Step. Cerramos sesión y nos volvemos a identificar con los datos del registro
 	            String emailUsr = dataRegistro.get("cfEmail");
 	            String password = dataRegistro.get("cfPass");
-	            SecMenusWrapperStpV.secMenuUser.logoffLogin(emailUsr, password, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+	            userMenusStpV.logoffLogin(emailUsr, password);
 	                
 	            //Step. Ejecutamos la consulta de Mis datos comprobando que son coherentes con los utilizados en el registro
 	            PageMiCuentaStpV.goToMisDatosAndValidateData(dataRegistro, dCtxSh.pais.getCodigo_pais(), dCtxSh.appE, dCtxSh.channel, dFTest.driver);
@@ -257,7 +259,9 @@ public class Registro extends GestorWebDriver {
         }
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
-        SecMenusWrapperStpV.secMenuUser.selectRegistrate(dCtxSh.channel, dCtxSh, dFTest.driver);
+        
+        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        userMenusStpV.selectRegistrate(dCtxSh);
         String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
         HashMap<String,String> dataRegistro = 
         	PageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dCtxSh.channel, dFTest);
@@ -265,6 +269,6 @@ public class Registro extends GestorWebDriver {
         PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dCtxSh.channel, dFTest);
         PageRegistroDirecStpV.clickFinalizarButton(dFTest);
         PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, dFTest);
-        SecMenusUserStpV.checkVisibilityLinkMangoLikesYou(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        userMenusStpV.checkVisibilityLinkMangoLikesYou();
     }    
 }

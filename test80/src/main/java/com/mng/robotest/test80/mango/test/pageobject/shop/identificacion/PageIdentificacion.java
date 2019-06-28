@@ -49,7 +49,8 @@ public class PageIdentificacion extends WebdrvWrapp {
         if (dCtxSh.userRegistered) {
             iniciarSesion(dCtxSh, driver);
         } else {
-            SecMenusWrap.closeSessionIfUserLogged(dCtxSh.channel, dCtxSh.appE, driver);
+        	SecMenusWrap secMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+        	secMenus.closeSessionIfUserLogged();
         }
     }
     
@@ -98,7 +99,8 @@ public class PageIdentificacion extends WebdrvWrapp {
             
             // Si existe, nos posicionamos y seleccionamos el link \"CERRAR SESIÓN\" 
             // En el caso de iPhone parece que mantiene la sesión abierta después de un caso de prueba 
-            boolean menuClicado = SecMenusWrap.secMenusUser.clickCerrarSessionIfLinkExists(channel, driver);
+        	SecMenusWrap secMenus = SecMenusWrap.getNew(channel, app, driver);
+            boolean menuClicado = secMenus.getMenusUser().clickCerrarSessionIfLinkExists();
             
             //Si hemos clicado el menú 'Cerrar Sesión' volvemos a abrir los menús
             if (menuClicado) {
@@ -106,7 +108,8 @@ public class PageIdentificacion extends WebdrvWrapp {
             }
         }
         
-        SecMenusWrap.secMenusUser.MoveAndclickIniciarSesion(channel, driver);
+        SecMenusWrap secMenus = SecMenusWrap.getNew(channel, app, driver);
+        secMenus.getMenusUser().MoveAndclickIniciarSesion();
     }
     
     public static boolean isErrorEmailoPasswordKO(WebDriver driver) {

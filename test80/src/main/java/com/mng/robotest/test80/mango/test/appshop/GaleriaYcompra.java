@@ -106,7 +106,8 @@ public class GaleriaYcompra extends GestorWebDriver {
     
     private void navegaGaleria(DataCtxShop dCtxSh, DataFmwkTest dFTest) throws Exception {
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
-        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
         
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         LocationArticle loc1rsArticle1rstPage = LocationArticle.getInstanceInPage(2, 1);

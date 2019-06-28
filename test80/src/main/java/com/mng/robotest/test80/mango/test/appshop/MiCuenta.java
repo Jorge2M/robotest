@@ -20,10 +20,8 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisCompras.TypeCompra;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageSuscripciones.idNewsletters;
-import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageDetallePedido.DetallePedido;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PagePrehomeStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
@@ -35,7 +33,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMisDatosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageSuscripcionesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.SecDetalleCompraTiendaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalDetalleMisComprasStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.pedidos.PageDetallePedidoStpV;
 
 public class MiCuenta extends GestorWebDriver {
     Pais españa = null;
@@ -112,7 +109,8 @@ public class MiCuenta extends GestorWebDriver {
             
         PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest.driver);
         dCtxSh.userRegistered = false;
-        SecMenusWrapperStpV.seleccionLinea(LineaType.she, null/*sublineaType*/, dCtxSh, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
         dCtxSh.userRegistered = true;
         AccesoStpV.identificacionEnMango(dCtxSh, dFTest.driver);                                           
         PageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected, dCtxSh.appE, dCtxSh.channel, dFTest.driver);                
@@ -120,7 +118,7 @@ public class MiCuenta extends GestorWebDriver {
         PageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
         PageMisDatosStpV.validaContenidoNombre(nombreActual, dFTest.driver);
         if (dCtxSh.appE==AppEcom.shop) {
-            PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dCtxSh.channel, dFTest.driver);
+            PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dFTest.driver);
         } else {
             PageMiCuentaStpV.goToMisPedidos(dCtxSh.userConnected, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
         }
@@ -155,7 +153,7 @@ public class MiCuenta extends GestorWebDriver {
         dCtxSh.userRegistered = true;
         PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest.driver);
         AccesoStpV.identificacionEnMango(dCtxSh, dFTest.driver);
-        PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dCtxSh.channel, dFTest.driver);
+        PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dFTest.driver);
         PageMisComprasStpV.selectBlock(TypeCompra.Online, true, dFTest.driver);
         PageMisComprasStpV.selectCompraOnline(1, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, dFTest.driver);
         if (dCtxSh.channel == Channel.desktop) {
@@ -167,9 +165,11 @@ public class MiCuenta extends GestorWebDriver {
         //Test Compras en Tienda
         dCtxSh.userConnected = userWithStorePurchases;
         dCtxSh.passwordUser = passUserWithStorePurchases;
-        SecMenusUserStpV.logoff(dCtxSh.channel, dFTest.driver);
+        
+        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        userMenusStpV.logoff();
         AccesoStpV.identificacionEnMango(dCtxSh, dFTest.driver);
-        PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dCtxSh.channel, dFTest.driver);
+        PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dFTest.driver);
         PageMisComprasStpV.selectBlock(TypeCompra.Tienda, true, dFTest.driver);
         PageMisComprasStpV.selectCompraTienda(1, dCtxSh.channel, dFTest.driver);
         SecDetalleCompraTiendaStpV.selectArticulo(1, dFTest.driver);

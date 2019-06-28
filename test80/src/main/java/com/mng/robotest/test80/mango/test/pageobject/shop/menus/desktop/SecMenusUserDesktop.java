@@ -1,14 +1,12 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavoritos;
 
 
-public class SecMenusUserDesktop extends WebdrvWrapp { -> De esto se ha de hacer un Wrapper
+public class SecMenusUserDesktop extends WebdrvWrapp { 
 
     final static String idUserMenuLink = "userMenuTrigger";
     final static String XPathCapaMenus = "//div[@id='userMenuContainer' or @id[contains(.,'linksHeader')]]"; //Caso Shop y Outlet 
@@ -126,34 +124,6 @@ public class SecMenusUserDesktop extends WebdrvWrapp { -> De esto se ha de hacer
     public static boolean isPresentMangoLikesYou(WebDriver driver) {
     	String xpath = MenuUserDesktop.mangoLikesYou.getXPath();
     	return (WebdrvWrapp.isElementPresent(driver, By.xpath(xpath)));
-    }
-    
-    public static boolean isPresentLoyaltyPointsUntil(int maxSecondsWait, WebDriver driver) throws Exception {
-    	//TODO Workarround for manage shadow-dom Elements. Remove when WebDriver supports shadow-dom
-    	WebElement shadowHost = driver.findElement(By.tagName("loyalty-user-menu"));
-    	if (shadowHost!=null) {
-    		for (int i=0; i<maxSecondsWait; i++) {
-		    	Object shadowLoyaltyPoints = ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot", shadowHost);
-		    	if (shadowLoyaltyPoints instanceof WebElement) {
-			    	WebElement loyaltyPoints = (WebElement)shadowLoyaltyPoints;
-			    	//TODO pendiente el grupo de Loyalty nos proporcione un id
-			    	//TODO eliminar la versión de PRO cuando suba la de PRE
-			    	String innerHTML = loyaltyPoints.getAttribute("innerHTML");
-			    	if (innerHTML.contains("likes-you-have") /*versión PRO*/ ||
-			    		(innerHTML.contains("Hola") && innerHTML.contains("Likes")) /*versión PRE*/) {
-			    		return true;
-			    	}
-		    	} else {
-		    		if (shadowLoyaltyPoints.toString().contains("likes-you-have")) {
-		    			return true;
-					}
-		    	}
-
-		    	Thread.sleep(1000);
-    		}
-    	}
-    	
-    	return false;
     }
     
     public static void hoverLinkForShowMenu(WebDriver driver) {

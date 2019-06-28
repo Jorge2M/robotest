@@ -29,7 +29,8 @@ public class PageHomeMarcasStpV {
     throws Exception {
         AllPagesStpV.validateMainContentPais(pais, driver);
         validateIsPageOk(pais, app, driver);
-        SecMenusWrapperStpV.validateLineas(pais, app, channel, driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(channel, app, driver);
+        secMenusStpV.validateLineas(pais);
     }
     
     @Validation

@@ -32,7 +32,7 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
     static String XPathEntradaMenuBloqueRelativeWithTag = "//ul/li/a[@data-label[contains(.,'" + TagIdBloque + "-')]]";
     
     public static String getXPathCapaMenusLinea(LineaType lineaId, AppEcom app) {
-    	String idLineaDom = SecMenusWrap.getIdLineaEnDOM(lineaId, app, Channel.desktop);
+    	String idLineaDom = SecMenusWrap.getIdLineaEnDOM(lineaId, Channel.desktop, app);
     	if (lineaId==LineaType.nuevo) {
     		idLineaDom = "sections_nuevo";
     	}

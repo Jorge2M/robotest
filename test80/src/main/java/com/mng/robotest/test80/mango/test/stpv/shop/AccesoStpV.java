@@ -24,15 +24,15 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
-import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavoritos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusUserWrap;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.UserMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
-import com.mng.robotest.test80.mango.test.stpv.shop.favoritos.PageFavoritosStpV;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageLoginVOTFStpV;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageSelectIdiomaVOTFStpV;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageSelectLineaVOTFStpV;
@@ -99,24 +99,25 @@ public class AccesoStpV {
 	private static ChecksResult checkLinksAfterLogin(DataCtxShop dCtxSh, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
+        MenusUserWrapper userMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver).getMenusUser();
     	validations.add(
     		"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		SecMenusWrap.secMenusUser.isPresentMiCuentaUntil(dCtxSh.channel, maxSecondsWait, driver), State.Defect);
+    		userMenus.isPresentMiCuentaUntil(maxSecondsWait), State.Defect);
 		
-		boolean isVisibleLinkFavoritos = SecMenusWrap.secMenusUser.isPresentFavoritos(dCtxSh.channel, driver);
+		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(UserMenu.favoritos, StateElem.Present, 0);
 		if (dCtxSh.appE==AppEcom.outlet) { 
 	    	validations.add(
 	    		"NO aparece el link \"Favoritos\"",
-	    		!isVisibleLinkFavoritos, State.Defect);
+	    		!isVisibleMenuFav, State.Defect);
 	    	validations.add(
 	    		"Aparece el link \"Mis Pedidos\"",
-	    		SecMenusWrap.secMenusUser.isPresentPedidos(dCtxSh.channel, driver), State.Defect);
+	    		userMenus.isPresentPedidos(), State.Defect);
 		} else {
 	    	validations.add(
 	    		"Aparece el link \"Favoritos\"",
-	    		isVisibleLinkFavoritos, State.Defect);
+	    		isVisibleMenuFav, State.Defect);
 	    	
-	    	boolean isPresentLinkMisCompras = SecMenusWrap.secMenusUser.isPresentMisCompras(dCtxSh.channel, driver);
+	    	boolean isPresentLinkMisCompras = userMenus.isPresentMisCompras();
 	    	if (dCtxSh.pais.isMisCompras()) {
 		    	validations.add(
 		    		"Aparece el link \"Mis Compras\"",
@@ -130,10 +131,10 @@ public class AccesoStpV {
 		
     	validations.add(
     		"Aparece el link \"Ayuda\"",
-    		SecMenusWrap.secMenusUser.isPresentAyuda(dCtxSh.channel, driver), State.Defect);
+    		userMenus.isPresentAyuda(), State.Defect);
     	validations.add(
     		"Aparece el link \"Cerrar sesión\"",
-    		SecMenusWrap.secMenusUser.isPresentCerrarSesion(dCtxSh.channel, driver), State.Defect);
+    		userMenus.isPresentCerrarSesion(), State.Defect);
     	
         if (dCtxSh.channel==Channel.desktop) {
         	validations.add(
@@ -164,7 +165,8 @@ public class AccesoStpV {
     }    
     
     public static void identificacionEnMango(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-        if (!SecMenusUserWrap.isPresentCerrarSesion(dCtxSh.channel, driver)) {
+    	MenusUserWrapper userMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver).getMenusUser();
+        if (!userMenus.isPresentCerrarSesion()) {
         	iniciarSesion(dCtxSh, driver);
         }
     }

@@ -149,21 +149,23 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
             sublineaType = sublinea.getTypeSublinea();
         }
         
-        SecMenusWrapperStpV.seleccionLinea(lineaType, sublineaType, dCtxShI, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        secMenusStpV.seleccionLinea(lineaType, sublineaType, dCtxShI);
         if (sublinea==null) {
             testSpecificFeaturesForLinea(linea, dCtxShI, dFTest);
         }
             
         //Validamos si hemos de ejecutar los pasos correspondientes al recorrido de los menús
         if (testMenus(linea, sublinea)) {
-            SecMenusWrapperStpV.stepsMenusLinea(lineaType, sublineaType, dCtxShI, dFTest);
+        	secMenusStpV.stepsMenusLinea(lineaType, sublineaType, dCtxShI);
         	if (existsRightBannerMenu(linea, sublinea, dCtxShI.channel)) {
                 SecMenusDesktopStpV.clickRightBanner(lineaType, sublineaType, dCtxShI.appE, dFTest.driver);
         	}
         } else {
-            if (SecMenusWrap.canClickMenuArticles(dCtxShI.pais, linea, sublinea)) {
+        	SecMenusWrap secMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+            if (secMenus.canClickMenuArticles(dCtxShI.pais, linea, sublinea)) {
             	Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "pantalones"));
-                SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxShI, dFTest.driver);
+            	secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxShI);
                 if (this.recorreBanners) {
                     PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
 					boolean bannerIsLincable = PageGaleriaDesktop.secBannerHead.isLinkable(dFTest.driver);
@@ -193,7 +195,8 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
         }
         
         if (linea.getCarrusels()!=null) {
-            SecMenusWrapperStpV.navSeleccionaCarruselsLinea(dCtxShI.pais, lineaType, dCtxShI.appE, dCtxShI.channel, dFTest);
+        	SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        	secMenusStpV.navSeleccionaCarruselsLinea(dCtxShI.pais, lineaType);
         }
     }
     

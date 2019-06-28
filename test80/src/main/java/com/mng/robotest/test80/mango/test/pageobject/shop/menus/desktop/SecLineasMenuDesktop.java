@@ -41,7 +41,7 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
 	static String XPathSublineaLinkWithTag = "//div[@class[contains(.,'nav-item')] and @data-brand='" + TagIdSublinea + "']";
 
     public static String getXPathLinea(LineaType lineaType, AppEcom app) {
-        String lineaIddom = SecMenusWrap.getIdLineaEnDOM(lineaType, app, Channel.desktop);
+        String lineaIddom = SecMenusWrap.getIdLineaEnDOM(lineaType, Channel.desktop, app);
         return (XPathLineaSpecificWithTag.replace(TagIdLinea, lineaIddom));
     }
     

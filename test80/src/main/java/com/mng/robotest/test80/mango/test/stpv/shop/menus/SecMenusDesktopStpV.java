@@ -76,7 +76,8 @@ public class SecMenusDesktopStpV {
         	.secMenuSuperior
         	.secBlockMenus.clickMenuAndGetName(menu1rstLevel, dCtxSh.appE, driver);
         
-        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+        secMenusStpV.validaSelecMenu(menu1rstLevel, dCtxSh);
     }
     
     @Step (
@@ -86,7 +87,8 @@ public class SecMenusDesktopStpV {
     public static void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
         SecMenusDesktop.secMenuLateral.clickMenu(menu1rstLevel, driver);         
-        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+        secMenusStpV.validaSelecMenu(menu1rstLevel, dCtxSh);
     }
     
     @Step (
@@ -95,8 +97,9 @@ public class SecMenusDesktopStpV {
         saveNettraffic=SaveWhen.Always)
     public static void selectMenuLateral2oLevel(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        SecMenusDesktop.secMenuLateral.clickMenu(menu2onLevel, driver);        
-        SecMenusWrapperStpV.validaSelecMenu(menu2onLevel, dCtxSh, driver);
+        SecMenusDesktop.secMenuLateral.clickMenu(menu2onLevel, driver);       
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+        secMenusStpV.validaSelecMenu(menu2onLevel, dCtxSh);
     }
     
     @Validation (
@@ -134,7 +137,8 @@ public class SecMenusDesktopStpV {
         }
         
         PageGaleriaStpV.secSelectorPrecios.validaIsSelector(driver);
-        LineaType lineaResult = SecMenusWrap.getLineaResultAfterClickMenu(menu.getLinea(), menu.getNombre());
+        SecMenusWrap secMenus = SecMenusWrap.getNew(channel, app, driver);
+        LineaType lineaResult = secMenus.getLineaResultAfterClickMenu(menu.getLinea(), menu.getNombre());
         validateIsLineaSelected(lineaResult, app, driver);    
     }
     
@@ -206,7 +210,9 @@ public class SecMenusDesktopStpV {
         ModalCambioPais.closeModalIfVisible(driver);
         
         validaPaginaResultMenu(menu1rstLevel, dCtxSh, driver);
-        LineaType lineaResult = SecMenusWrap.getLineaResultAfterClickMenu(lineaMenu, menu1rstLevel.getNombre());
+        
+        SecMenusWrap secMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+        LineaType lineaResult = secMenus.getLineaResultAfterClickMenu(lineaMenu, menu1rstLevel.getNombre());
         SecMenusDesktopStpV.validateIsLineaSelected(lineaResult, dCtxSh.appE, driver);
         PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, lineaMenu, driver);
     }

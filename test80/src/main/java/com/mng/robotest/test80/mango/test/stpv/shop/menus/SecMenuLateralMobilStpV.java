@@ -39,7 +39,8 @@ public class SecMenuLateralMobilStpV {
     public static void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
         SecMenuLateralMobil.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, dCtxSh.pais, driver);
-        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+        secMenusStpV.validaSelecMenu(menu1rstLevel, dCtxSh);
     }
     
     /**
@@ -50,7 +51,8 @@ public class SecMenuLateralMobilStpV {
         expected="Aparecen los sublinks de #{lineaConCarrusels} correspondientes según el país")
     public static void navClickLineaAndCarrusels(LineaType lineaConCarrusels, Pais pais, AppEcom app, WebDriver driver) 
     throws Exception {
-        SecMenusWrap.selecLinea(pais, lineaConCarrusels, app, Channel.movil_web, driver); 
+    	SecMenusWrap secMenus = SecMenusWrap.getNew(Channel.movil_web, app, driver);    	
+        secMenus.selecLinea(pais, lineaConCarrusels); 
         validaSelecLinea(pais, lineaConCarrusels, null/*sublinea*/, app, driver);
         navSelectCarrusels(lineaConCarrusels, pais, app, driver);
     }

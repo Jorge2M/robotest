@@ -60,12 +60,12 @@ public class SecCabeceraShop extends SecCabecera {
     
     @Override
     public boolean isVisibleIconoBolsa() {
-    	return (isVisibleIcono(IconoShop.bolsa));
+    	return (isIconoInState(IconoShop.bolsa, StateElem.Visible));
     }
     
     @Override
     public void clickIconoBolsa() throws Exception {
-    	clickIcono(IconoShop.bolsa);
+    	clickIconoAndWait(IconoShop.bolsa);
     }
 
     @Override
@@ -76,12 +76,12 @@ public class SecCabeceraShop extends SecCabecera {
         }
     }
 
-    public void clickIcono(IconoShop icono) throws Exception {
+    public void clickIconoAndWait(IconoShop icono) throws Exception {
     	clickAndWait(icono, driver);
     }
     
-    public boolean isVisibleIcono(IconoShop icono) {
-    	return (isElementInState(icono, StateElem.Visible, driver));
+    public boolean isIconoInState(IconoShop icono, StateElem state) {
+    	return (isElementInState(icono, state, driver));
     }
     
     public void hoverIcono(IconoShop icono) {

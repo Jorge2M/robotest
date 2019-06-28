@@ -45,11 +45,7 @@ public abstract class SecCabecera extends WebdrvWrapp {
 		}
 	}
 	
-	public SecCabeceraShop getShopDesktop() {
-		return (SecCabeceraShop)this;
-	}
-	
-	public SecCabeceraShop getShopMobil() {
+	public SecCabeceraShop getShop() {
 		return (SecCabeceraShop)this;
 	}
 	
