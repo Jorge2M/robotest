@@ -7,17 +7,17 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public abstract class SecCabeceraOutlet extends SecCabecera {
 
-	protected SecCabeceraOutlet(AppEcom app, WebDriver driver) {
-		super (app, driver);
+	protected SecCabeceraOutlet(Channel channel, AppEcom app, WebDriver driver) {
+		super(channel, app, driver);
 	}
 	
 	public static SecCabeceraOutlet getNew(Channel channel, AppEcom app, WebDriver driver) {
 		switch (channel) {
 		case desktop:
-			return SecCabeceraOutletDesktop.getNew(app, driver);
+			return SecCabeceraOutletDesktop.getNew(channel, app, driver);
 		case movil_web:
 		default:
-			return SecCabeceraOutletMovil.getNew(app, driver);
+			return SecCabeceraOutletMobil.getNew(channel, app, driver);
 		}
 	}
 	

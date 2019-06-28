@@ -8,12 +8,12 @@ import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavoritos;
 
 
-public class SecMenusUserDesktop extends WebdrvWrapp {
+public class SecMenusUserDesktop extends WebdrvWrapp { -> De esto se ha de hacer un Wrapper
 
     final static String idUserMenuLink = "userMenuTrigger";
     final static String XPathCapaMenus = "//div[@id='userMenuContainer' or @id[contains(.,'linksHeader')]]"; //Caso Shop y Outlet 
     
-    public enum MenuUserDesktop {
+    public enum MenuUserDesktop { 
         ayuda (XPathCapaMenus + "//a[@href[contains(.,'/help/')]]"),    
         misCompras (XPathCapaMenus + "//a[@href[contains(.,'/mypurchases')]]"),    
         pedidos(XPathCapaMenus + "//a[@href[contains(.,'account/orders')]]"),    

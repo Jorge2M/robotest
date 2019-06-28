@@ -2,36 +2,30 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.cabecera;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.webdriverwrapper.ElementPage;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.pageobject.shop.Mensajes;
-import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecSearch;
-import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecSearchDesktop;
 
 /**
  * Cabecera Shop compatible con desktop y movil_web
  *
  */
 public class SecCabeceraShop extends SecCabecera {
-
-	private SecSearch searchBar = null; 
 	
-	protected SecCabeceraShop(AppEcom app, WebDriver driver) {
-		super(app, driver);
+	protected SecCabeceraShop(Channel channel, AppEcom app, WebDriver driver) {
+		super(channel, app, driver);
 	}
 	
-	public static SecCabeceraShop getNew(AppEcom app, WebDriver driver) {
-		return (new SecCabeceraShop(app, driver));
+	public static SecCabeceraShop getNew(Channel channel, AppEcom app, WebDriver driver) {
+		return (new SecCabeceraShop(channel, app, driver));
 	}
 	
 	private final static String XPathLinkLogoMango = "//a[@class='logo-link']";
     private final static String XPathDivNavTools = "//div[@id='navTools']";
     private final static String XPathNumArticlesBolsa = "//span[@class='icon-button-items']";
 	
-    private enum IconoShop implements ElementPage {
+    public enum IconoShop implements ElementPage {
     	buscar("//span[@class[contains(.,'-search')]]"),
 		iniciarsesion("//self::*[@id='login_any']/span[@class[contains(.,'-account')]]"),
     	micuenta("//self::*[@id='login']/span[@class[contains(.,'-account')]]"),
@@ -81,19 +75,7 @@ public class SecCabeceraShop extends SecCabecera {
         	clickIconoBolsa();
         }
     }
-    
-    @Override
-    public void buscarTexto(String referencia) throws Exception {
-    	switch (channel) {
-    	case desktop:
-    		SecSearchDesktop.search(referencia, driver);
-    		break;
-    	case movil_web:
-            new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(Mensajes.getXPathCapaCargando())));
-            buscarRefNoWait(referencia);
-    	}
-    }
-    
+
     public void clickIcono(IconoShop icono) throws Exception {
     	clickAndWait(icono, driver);
     }

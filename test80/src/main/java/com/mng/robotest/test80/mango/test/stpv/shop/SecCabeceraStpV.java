@@ -7,7 +7,7 @@ import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMovil;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMobil;
 
 public class SecCabeceraStpV {
 
@@ -50,6 +50,6 @@ public class SecCabeceraStpV {
 		description="Establecer con visibilidad #{setVisible} el menú izquierdo de móvil",
 		expected="El menú lateral se establece con visibilidad #{setVisible}")
 	public void setVisibilityLeftMenuMobil(boolean setVisible) throws Exception {
-		((SecCabeceraOutletMovil)secCabecera).clickIconoMenuHamburguer(setVisible);
+		((SecCabeceraOutletMobil)secCabecera).clickIconoMenuHamburguer(setVisible);
 	}
 }

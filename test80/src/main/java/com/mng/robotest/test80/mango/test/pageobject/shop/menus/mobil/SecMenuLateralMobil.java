@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosT
 import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMovil;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 
 
@@ -235,7 +235,7 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     
     public static void selecLinea(Linea linea, AppEcom appE, WebDriver driver) throws Exception {
     	boolean toOpenMenus = true;
-    	SecCabeceraOutletMovil secCabeceraMobil = (SecCabeceraOutletMovil)SecCabecera.getNew(Channel.movil_web, appE, driver);
+    	SecCabeceraOutletMobil secCabeceraMobil = (SecCabeceraOutletMobil)SecCabecera.getNew(Channel.movil_web, appE, driver);
         secCabeceraMobil.clickIconoMenuHamburguer(toOpenMenus);        
         if ("n".compareTo(linea.getExtended())==0) { 
             //if (!isSelectedLinea(linea.getType(), appE, driver)) {

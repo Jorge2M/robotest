@@ -39,7 +39,7 @@ public class SecSearchDesktopShop extends WebdrvWrapp implements SecSearch {
 
     private void selectLupa() throws Exception {
         driver.findElement(By.xpath(XPathIconoLupa)).click(); 
-        WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(XPathInputBuscador), 1);
+        isElementVisibleUntil(driver, By.xpath(XPathInputBuscador), 1);
     }
     
     private void setTextAndReturn(String referencia) throws Exception {

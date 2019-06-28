@@ -14,8 +14,8 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMovil;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMovil.Icono;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMobil;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMobil.Icono;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil.TypeLocator;
@@ -71,18 +71,15 @@ public class SecMenusWrap {
         return lineaType;
     }
 
-    /**
-     * Función que ejecuta la identificación del usuario. Introduce las credenciales del usuario y seleccióna el botón de submit
-     */
 	public static void closeSessionIfUserLogged(Channel channel, AppEcom app, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web) {
-        	SecCabeceraOutletMovil secCabeceraMobil = (SecCabeceraOutletMovil)SecCabecera.getNew(Channel.movil_web, app, driver);
-        	if (secCabeceraMobil.isVisible(Icono.MiCuenta)) {
-        		SecMenuLateralMobil.secMenusUser.clickCerrarSessionIfLinkExists(driver);
-        	}
-        } else {       
-        	SecMenusDesktop.secMenusUser.clickCerrarSessionIfLinkExists(driver);
-        }
+		switch (channel) {
+		case movil_web:
+        	SecMenuLateralMobil.secMenusUser.clickCerrarSessionIfLinkExists(driver);
+        	break;
+		default:
+		case desktop:
+			SecMenusDesktop.secMenusUser.clickCerrarSessionIfLinkExists(driver);
+		}
     }
     
     public static List<String> getListDataLabelsMenus(Linea linea, SublineaNinosType sublineaType, Channel channel, AppEcom appE, WebDriver driver) 

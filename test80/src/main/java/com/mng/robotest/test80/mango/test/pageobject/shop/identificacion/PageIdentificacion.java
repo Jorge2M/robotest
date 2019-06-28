@@ -9,12 +9,10 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMovil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalActPoliticaPrivacidad;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAfterLogin;
-
 
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la página de autentificación de 
@@ -94,9 +92,9 @@ public class PageIdentificacion extends WebdrvWrapp {
     public static void clickIniciarSesionAndWait(Channel channel, AppEcom app, WebDriver driver) throws Exception {
         if (channel==Channel.movil_web) {
             //En el caso de mobile nos tenemos que asegurar que están desplegados los menús
-        	SecCabeceraOutletMovil secCabeceraMobil = (SecCabeceraOutletMovil)SecCabecera.getNew(Channel.movil_web, app, driver);
+        	SecCabecera secCabeceraMobil = SecCabecera.getNew(Channel.movil_web, app, driver);
         	boolean toOpen = true;
-        	secCabeceraMobil.clickIconoMenuHamburguer(toOpen);
+        	secCabeceraMobil.clickIconoMenuHamburguerMobil(toOpen);
             
             // Si existe, nos posicionamos y seleccionamos el link \"CERRAR SESIÓN\" 
             // En el caso de iPhone parece que mantiene la sesión abierta después de un caso de prueba 
@@ -104,7 +102,7 @@ public class PageIdentificacion extends WebdrvWrapp {
             
             //Si hemos clicado el menú 'Cerrar Sesión' volvemos a abrir los menús
             if (menuClicado) {
-            	secCabeceraMobil.clickIconoMenuHamburguer(toOpen);
+            	secCabeceraMobil.clickIconoMenuHamburguerMobil(toOpen);
             }
         }
         

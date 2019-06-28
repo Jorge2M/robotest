@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.cabecera;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.webdriverwrapper.ElementPage;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecSearchDesktop;
 
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la sección de "Cabecera" (de Desktop y Movil)
@@ -33,19 +33,19 @@ public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
 	}
 
 	private final static String XPathNumArticles = "//span[@id[contains(.,'bolsa_articulosNum')]]";
-    private final static String XPathLinkLogoMangoOutlet = "//a[@class[contains(.,'headerMobile__logoLink')]]";
+    public final static String XPathLinkLogo = "//a[@class[contains(.,'headerMobile__logoLink')]]";
     
-    private SecCabeceraOutletDesktop(AppEcom app, WebDriver driver) {
-    	super(app, driver);
+    private SecCabeceraOutletDesktop(Channel channel, AppEcom app, WebDriver driver) {
+    	super(channel, app, driver);
     }
     
-    public static SecCabeceraOutletDesktop getNew(AppEcom app, WebDriver driver) {
-    	return (new SecCabeceraOutletDesktop(app, driver));
+    public static SecCabeceraOutletDesktop getNew(Channel channel, AppEcom app, WebDriver driver) {
+    	return (new SecCabeceraOutletDesktop(channel, app, driver));
     }
 
     @Override
     String getXPathLogoMango() {
-    	return XPathLinkLogoMangoOutlet;
+    	return XPathLinkLogo;
     }
     
     @Override
@@ -76,11 +76,6 @@ public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
     @Override
     public void hoverIconoBolsa() {
     	hoverElement(ElementOutlet.bolsa);
-    }
-
-    @Override
-    public void buscarTexto(String referencia) throws Exception {
-    	SecSearchDesktop.search(referencia, driver);
     }
     
     public boolean isVisibleElement(ElementOutlet element) {

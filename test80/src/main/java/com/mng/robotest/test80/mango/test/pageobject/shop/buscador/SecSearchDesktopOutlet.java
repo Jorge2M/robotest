@@ -1,7 +1,6 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.buscador;
 
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
-import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.Mensajes;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -9,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 public class SecSearchDesktopOutlet extends WebdrvWrapp implements SecSearch {
 	
@@ -39,15 +37,11 @@ public class SecSearchDesktopOutlet extends WebdrvWrapp implements SecSearch {
     	clickAndWaitLoad(driver, By.xpath(XPathCloseAspa));
 	}
 
-    /**
-     * Seleccionamos el icono de lupa/el label del buscador hasta que conseguimos que esté activado el input para poder introducir texto
-     */
     private void selectBuscador() throws Exception {
         driver.findElement(By.xpath(XPathIconoLupa)).click(); 
-        int maxSeconds = 1;
-        if (!isInputBuscadorPresentUntil(maxSeconds, driver)) {
+        if (!isElementVisibleUntil(driver, By.xpath(XPathInputBuscador), 1)) {
         	driver.findElement(By.xpath(XPathIconoLupa)).click();
-        	isInputBuscadorPresentUntil(maxSeconds, driver);
+        	isElementVisibleUntil(driver, By.xpath(XPathInputBuscador), 1);
         }
         
         //No nos queda más remedio que incluir un delay puesto que el input_subrayado toma su tiempo para expandirse hacia la derecha
