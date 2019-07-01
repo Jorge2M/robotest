@@ -21,7 +21,7 @@ public class PageFichaArtOld extends PageFicha {
     public static SecSlidersOld secSliders; //Completa Tu Look, Elegido para ti, Lo último que has visto
     
     //private static final String XPathHtmlFicha = "//html[@class[contains(.,'ficha')]]";
-    private static final String XPathContainerFicha = "//main[@class='product-detail']";
+    private static final String XPathContainerFicha = "//*[@class='product-detail']";
     
     //TODO En breve subirá un desarrollo de Juan Mesa que rompe todos los test que añadan a la bolsa algo -> Se debería cambiar por el xpath //*[@id='buttonAddCart'] 
     private static final String XPathAltaBolsaButton ="//*[@id='productFormAdd']";
