@@ -26,6 +26,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLat
 public class SecMenusWrap {
     
     private final MenusUserWrapper secMenusUser;
+    private final SecMenuLateralMobil secMenuLateralMobil;
+    private final SecMenusDesktop secMenusDesktop;
     private final Channel channel;
     private final AppEcom app;
     private final WebDriver driver;
@@ -37,6 +39,8 @@ public class SecMenusWrap {
     	this.app = app;
     	this.driver = driver;
     	this.secMenusUser = MenusUserWrapper.getNew(channel, app, driver);
+    	this.secMenuLateralMobil = SecMenuLateralMobil.getNew(app, driver);
+    	this.secMenusDesktop = SecMenusDesktop.getNew(app, driver);
     }
     
     public static SecMenusWrap getNew(Channel channel, AppEcom app, WebDriver driver) {
@@ -49,26 +53,22 @@ public class SecMenusWrap {
     
 	public boolean isLineaPresent(LineaType lineaType) {
         if (channel==Channel.movil_web) {
-            return SecMenuLateralMobil.isLineaPresent(lineaType, app, driver);
+            return secMenuLateralMobil.isLineaPresent(lineaType);
         }
-        return 
-        	SecMenusDesktop.
-        		secMenuSuperior.secLineas.isLineaPresent(lineaType, app, driver);
+        return secMenusDesktop.secMenuSuperior.secLineas.isLineaPresent(lineaType);
     }
     
     public boolean isLineaPresentUntil(LineaType lineaType, int maxSeconds) {
         if (channel==Channel.movil_web) {
-            return SecMenuLateralMobil.isLineaPresent(lineaType, app, driver);
+            return secMenuLateralMobil.isLineaPresent(lineaType);
         }
-        return 
-        	SecMenusDesktop.
-        		secMenuSuperior.secLineas.isLineaPresentUntil(lineaType, app, maxSeconds, driver);
+        return secMenusDesktop.secMenuSuperior.secLineas.isLineaPresentUntil(lineaType, maxSeconds);
     }    
     
     /**
      * @return la línea a la que se debería acceder cuando se selecciona el menú
      */
-    public LineaType getLineaResultAfterClickMenu(LineaType lineaType, String nombre) {
+    public static LineaType getLineaResultAfterClickMenu(LineaType lineaType, String nombre) {
         switch (nombre) {
         case "nuevo":
             if (lineaType==LineaType.she)
@@ -89,34 +89,33 @@ public class SecMenusWrap {
 	public void closeSessionIfUserLogged() throws Exception {
 		switch (channel) {
 		case movil_web:
-        	SecMenuLateralMobil.secMenusUser.clickCerrarSessionIfLinkExists(driver);
+			secMenusUser.clickCerrarSessionIfLinkExists();
         	break;
 		default:
 		case desktop:
-			SecMenusDesktop.secMenusUser.clickCerrarSessionIfLinkExists(driver);
+			secMenusUser.clickCerrarSessionIfLinkExists();
 		}
     }
     
     public List<String> getListDataLabelsMenus(Linea linea, SublineaNinosType sublineaType) throws Exception {
         if (channel==Channel.movil_web) {
-            return SecMenuLateralMobil.getListDataLabelsMenus(linea, sublineaType, app, driver);
+            return secMenuLateralMobil.getListDataLabelsMenus(linea, sublineaType);
         }
         return 
-        	SecMenusDesktop.
-        		secMenuSuperior.secBlockMenus.getListDataLabelsMenus(linea.getType(), sublineaType, app, driver);        
+        	secMenusDesktop.secMenuSuperior.secBlockMenus.getListDataLabelsMenus(linea.getType(), sublineaType);        
     }
     
     /**
      * @return codificación que se acostumbra a utilizar para identificar la línea en el DOM
      */
     public String getLineaDOM(LineaType lineaType) {
-        return (getIdLineaEnDOM(lineaType, channel, app));
+        return (getIdLineaEnDOM(lineaType));
     }
     
     /**
      * @return el id con el que se identifica la línea a nivel del DOM-HTML
      */
-    public static String getIdLineaEnDOM(LineaType lineaShop, Channel channel, AppEcom app) {
+    public String getIdLineaEnDOM(LineaType lineaShop) {
         if (app==AppEcom.outlet) {
             return lineaShop.getSufixOutlet(channel);
         }
@@ -125,17 +124,17 @@ public class SecMenusWrap {
     
     public void selecLinea(Pais pais, LineaType lineaType) throws Exception {
         if (channel==Channel.movil_web) {
-            SecMenuLateralMobil.selecLinea(pais.getShoponline().getLinea(lineaType), app, driver);
+        	secMenuLateralMobil.selecLinea(pais.getShoponline().getLinea(lineaType));
         } else {
-            SecMenusDesktop.secMenuSuperior.secLineas.selecLinea(pais, lineaType, app, driver);
+        	secMenusDesktop.secMenuSuperior.secLineas.selecLinea(pais, lineaType);
         }
     }
     
     public void selecSublinea(Pais pais, LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
         if (channel==Channel.movil_web) {
-            SecMenuLateralMobil.selectLinea(pais.getShoponline().getLinea(lineaType), sublineaType, app, driver);
+        	secMenuLateralMobil.selectLinea(pais.getShoponline().getLinea(lineaType), sublineaType);
         } else {
-            SecMenusDesktop.secMenuSuperior.secLineas.selectSublinea(lineaType, sublineaType, app, driver);
+        	secMenusDesktop.secMenuSuperior.secLineas.selectSublinea(lineaType, sublineaType);
         }
     }    
     
@@ -146,9 +145,9 @@ public class SecMenusWrap {
      */
     public void clickMenu1erNivel(Pais pais, Menu1rstLevel menu1rstLevel) throws Exception {
         if (channel==Channel.desktop) {
-            SecMenusDesktop.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel, app, driver);
+        	secMenusDesktop.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel);
         } else {
-        	SecMenuLateralMobil.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais, driver);
+        	secMenuLateralMobil.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais);
         }
     }
     
@@ -157,9 +156,9 @@ public class SecMenusWrap {
      */
     public void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel, Pais pais) throws Exception {
         if (channel==Channel.movil_web) {
-            SecMenuLateralMobil.clickMenuLateral1rstLevel(TypeLocator.hrefPortion, menu1rstLevel, pais, driver);
+        	secMenuLateralMobil.clickMenuLateral1rstLevel(TypeLocator.hrefPortion, menu1rstLevel, pais);
         } else {
-        	SecMenusDesktop.secMenuSuperior.secBlockMenus.seleccionarMenuXHref(menu1rstLevel, driver);
+        	secMenusDesktop.secMenuSuperior.secBlockMenus.seleccionarMenuXHref(menu1rstLevel);
         }
     }    
     

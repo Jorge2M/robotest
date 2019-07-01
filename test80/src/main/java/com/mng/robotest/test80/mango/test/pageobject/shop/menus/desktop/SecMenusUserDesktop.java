@@ -5,9 +5,10 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavoritos;
 
-
 public class SecMenusUserDesktop extends WebdrvWrapp { 
 
+	private final WebDriver driver;
+	
     final static String idUserMenuLink = "userMenuTrigger";
     final static String XPathCapaMenus = "//div[@id='userMenuContainer' or @id[contains(.,'linksHeader')]]"; //Caso Shop y Outlet 
     
@@ -32,101 +33,109 @@ public class SecMenusUserDesktop extends WebdrvWrapp {
         }
     }
     
-    public static boolean isPresentCerrarSesion(WebDriver driver) {
+    private	SecMenusUserDesktop(WebDriver driver) {
+    	this.driver = driver;
+    }
+    
+    public static SecMenusUserDesktop getNew(WebDriver driver) {
+    	return (new SecMenusUserDesktop(driver));
+    }
+    
+    public boolean isPresentCerrarSesion() {
     	String xpath = MenuUserDesktop.cerrarSesion.getXPath();
         return (isElementPresent(driver, By.xpath(xpath)));
     }
     
-    public static void clickCerrarSesion(WebDriver driver) throws Exception {
+    public void clickCerrarSesion() throws Exception {
     	String xpath = MenuUserDesktop.cerrarSesion.getXPath();
         clickAndWaitLoad(driver, By.xpath(xpath));
     }
 
-    public static boolean clickCerrarSessionIfLinkExists(WebDriver driver) throws Exception {
+    public boolean clickCerrarSessionIfLinkExists() throws Exception {
         boolean menuClicado = false;
-        if (isPresentCerrarSesion(driver)) {
+        if (isPresentCerrarSesion()) {
         	String xpath = MenuUserDesktop.cerrarSesion.getXPath();
         	moveToElement(By.xpath(xpath), driver);
-            clickCerrarSesion(driver);
+            clickCerrarSesion();
             menuClicado = true;
         }
         
         return menuClicado;
     }    
     
-    public static boolean isPresentIniciarSesionUntil(int maxSecondsToWait, WebDriver driver) {
+    public boolean isPresentIniciarSesionUntil(int maxSecondsToWait) {
     	String xpath = MenuUserDesktop.iniciarSesion.getXPath();
         return (isElementPresentUntil(driver, By.xpath(xpath), maxSecondsToWait));
     }    
     
-    public static void clickRegistrate(WebDriver driver) throws Exception {
+    public void clickRegistrate() throws Exception {
     	String xpath = MenuUserDesktop.registrate.getXPath();
         clickAndWaitLoad(driver, By.xpath(xpath));
     }
     
-    public static void clickIniciarSesion(WebDriver driver) throws Exception {
+    public void clickIniciarSesion() throws Exception {
     	String xpath = MenuUserDesktop.iniciarSesion.getXPath();
         clickAndWaitLoad(driver, By.xpath(xpath));
     }
     
-    public static void MoveAndclickIniciarSesion(WebDriver driver) throws Exception {
+    public void MoveAndclickIniciarSesion() throws Exception {
     	String xpath = MenuUserDesktop.iniciarSesion.getXPath();
     	moveToElement(By.xpath(xpath), driver);
-        clickIniciarSesion(driver);
+        clickIniciarSesion();
     }
     
-    public static void clickMiCuenta(WebDriver driver) throws Exception {
+    public void clickMiCuenta() throws Exception {
     	String xpath = MenuUserDesktop.miCuenta.getXPath();
         clickAndWaitLoad(driver, By.xpath(xpath));
     }
     
-    public static boolean isPresentMiCuentaUntil(int maxSecondsToWait, WebDriver driver) {
+    public boolean isPresentMiCuentaUntil(int maxSecondsToWait) {
     	String xpath = MenuUserDesktop.miCuenta.getXPath();
         return (isElementPresentUntil(driver, By.xpath(xpath), maxSecondsToWait));
     }
     
-    public static void clickFavoritosAndWait(WebDriver driver) throws Exception {
+    public void clickFavoritosAndWait() throws Exception {
     	String xpath = MenuUserDesktop.favoritos.getXPath();
         clickAndWaitLoad(driver, By.xpath(xpath));
-        PageFavoritos.isSectionArticlesVisibleUntil(2/*maxSecondsToWait*/, driver);
+        PageFavoritos.isSectionArticlesVisibleUntil(2, driver);
     }
     
-    public static boolean isPresentFavoritos(WebDriver driver) {
+    public boolean isPresentFavoritos() {
     	String xpath = MenuUserDesktop.favoritos.getXPath();
         return (isElementPresent(driver, By.xpath(xpath)));
     }    
     
-    public static boolean isVisibleCerrarSesion(WebDriver driver) {
+    public boolean isVisibleCerrarSesion() {
     	String xpath = MenuUserDesktop.cerrarSesion.getXPath();
         return (isElementVisible(driver, By.xpath(xpath)));
     }
     
-    public static boolean isPresentPedidos(WebDriver driver) {
+    public boolean isPresentPedidos() {
     	String xpath = MenuUserDesktop.pedidos.getXPath();
         return (isElementPresent(driver, By.xpath(xpath)));
     }
     
-    public static boolean isPresentMisCompras(WebDriver driver) {
+    public boolean isPresentMisCompras() {
     	String xpath = MenuUserDesktop.misCompras.getXPath();
         return (isElementPresent(driver, By.xpath(xpath)));
     }    
     
-    public static boolean isPresentAyuda(WebDriver driver) {
+    public boolean isPresentAyuda() {
     	String xpath = MenuUserDesktop.ayuda.getXPath();
         return (isElementPresent(driver, By.xpath(xpath)));
     }
     
-    public static void clickMangoLikesYou(WebDriver driver) throws Exception {
+    public void clickMangoLikesYou() throws Exception {
     	String xpath = MenuUserDesktop.mangoLikesYou.getXPath();
         clickAndWaitLoad(driver, By.xpath(xpath));
     }
     
-    public static boolean isPresentMangoLikesYou(WebDriver driver) {
+    public boolean isPresentMangoLikesYou() {
     	String xpath = MenuUserDesktop.mangoLikesYou.getXPath();
     	return (WebdrvWrapp.isElementPresent(driver, By.xpath(xpath)));
     }
     
-    public static void hoverLinkForShowMenu(WebDriver driver) {
+    public void hoverLinkForShowMenu() {
     	By byElem = By.id(idUserMenuLink);
     	WebdrvWrapp.moveToElement(byElem, driver);
     }

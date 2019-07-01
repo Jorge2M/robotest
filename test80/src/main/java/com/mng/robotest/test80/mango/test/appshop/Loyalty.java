@@ -220,7 +220,7 @@ public class Loyalty extends GestorWebDriver {
 	    	secMenusUserStpV.hoverLinkForShowMenu();
 	    } else {
 	    	boolean setVisible = true;
-	    	SecCabeceraStpV.getNew(dCtxSh, driver).setVisibilityLeftMenuMobil(setVisible);
+	    	SecCabeceraStpV.getNew(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver).setVisibilityLeftMenuMobil(setVisible);
 	    }
     }
 }

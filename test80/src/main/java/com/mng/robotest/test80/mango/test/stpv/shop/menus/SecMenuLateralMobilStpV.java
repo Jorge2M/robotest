@@ -30,15 +30,27 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 
 public class SecMenuLateralMobilStpV {
     
-    public static SecMenusUserStpV secMenusUser;
-    
+	private AppEcom app;
+	private WebDriver driver;
+	private SecMenuLateralMobil secMenuLateral;
+	
+	private SecMenuLateralMobilStpV(AppEcom app, WebDriver driver) {
+		this.app = app;
+		this.driver = driver;
+		secMenuLateral = SecMenuLateralMobil.getNew(app, driver);
+	}
+	
+	public SecMenuLateralMobilStpV getNew(AppEcom app, WebDriver drive) {
+		return (new SecMenuLateralMobilStpV(app, driver));
+	}
+	
     @Step (
     	description="Seleccionar el menú lateral de 1er nivel <b>#{menu1rstLevel}</b>", 
         expected="Aparece la galería de productos asociada al menú",
         saveNettraffic=SaveWhen.Always)
-    public static void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, WebDriver driver) 
+    public void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        SecMenuLateralMobil.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, dCtxSh.pais, driver);
+    	secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, dCtxSh.pais);
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
         secMenusStpV.validaSelecMenu(menu1rstLevel, dCtxSh);
     }
@@ -49,30 +61,28 @@ public class SecMenuLateralMobilStpV {
     @Step (
     	description="Realizar click sobre la línea <b>#{lineaConCarrusels}</b>",
         expected="Aparecen los sublinks de #{lineaConCarrusels} correspondientes según el país")
-    public static void navClickLineaAndCarrusels(LineaType lineaConCarrusels, Pais pais, AppEcom app, WebDriver driver) 
-    throws Exception {
+    public void navClickLineaAndCarrusels(LineaType lineaConCarrusels, Pais pais) throws Exception {
     	SecMenusWrap secMenus = SecMenusWrap.getNew(Channel.movil_web, app, driver);    	
         secMenus.selecLinea(pais, lineaConCarrusels); 
-        validaSelecLinea(pais, lineaConCarrusels, null/*sublinea*/, app, driver);
-        navSelectCarrusels(lineaConCarrusels, pais, app, driver);
+        validaSelecLinea(pais, lineaConCarrusels, null);
+        navSelectCarrusels(lineaConCarrusels, pais);
     }
     
     /**
      * Seleccionamos todos los sublinks de las líneas de móvil con 'carrusels' (nuevo u ofertas de momento)
      */
-    public static void navSelectCarrusels(LineaType lineaConCarrusels, Pais pais, AppEcom app, WebDriver driver) 
-    throws Exception {
+    public void navSelectCarrusels(LineaType lineaConCarrusels, Pais pais) throws Exception {
         for (Linea linea : pais.getShoponline().getLineasToTest(app)) {
             LineaType lineaDelPais = linea.getType();
             switch (lineaConCarrusels) {
             case rebajas:
-                if (SecMenuLateralMobil.isSublineaRebajasAssociated(lineaDelPais)) {
-                    selectSublineaRebajas(pais.getShoponline().getLinea(LineaType.rebajas), lineaDelPais, app, driver);
+                if (secMenuLateral.isSublineaRebajasAssociated(lineaDelPais)) {
+                    selectSublineaRebajas(pais.getShoponline().getLinea(LineaType.rebajas), lineaDelPais);
                 }
                 break;
             case nuevo:
-                if (SecMenuLateralMobil.isCarruselNuevoAssociated(lineaDelPais)) {
-                    selectCarruselNuevo(pais.getShoponline().getLinea(LineaType.nuevo), lineaDelPais, app, driver);
+                if (secMenuLateral.isCarruselNuevoAssociated(lineaDelPais)) {
+                    selectCarruselNuevo(pais.getShoponline().getLinea(LineaType.nuevo), lineaDelPais);
                 }
                 break;            
             default:
@@ -84,14 +94,13 @@ public class SecMenuLateralMobilStpV {
     @Step (
     	description="Seleccionar el carrusel \"nuevo\" asociado a la línea #{lineaType}",
         expected="Aparece la página de nuevo asociada a la línea #{lineaType}")
-    public static void selectCarruselNuevo(Linea lineaNuevo, LineaType lineaType, AppEcom appE, WebDriver driver) 
-    throws Exception {
-        SecMenuLateralMobil.clickCarruselNuevo(lineaNuevo, lineaType, appE, driver);
-        checkGaleriaAfterSelectNuevo(appE, driver);
+    public void selectCarruselNuevo(Linea lineaNuevo, LineaType lineaType) throws Exception {
+    	secMenuLateral.clickCarruselNuevo(lineaNuevo, lineaType);
+        checkGaleriaAfterSelectNuevo();
     }
     
     @Validation
-    private static ChecksResult checkGaleriaAfterSelectNuevo(AppEcom app, WebDriver driver) throws Exception {
+    private ChecksResult checkGaleriaAfterSelectNuevo() throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
 	    PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
 	    int maxSecondsWait = 3;
@@ -108,17 +117,16 @@ public class SecMenuLateralMobilStpV {
     @Step (
     	description="Seleccionar la sublínea de \"rebajas\" <b>#{lineaType}</b>",
         expected="Aparece la capa de menús asociada a la sublínea #{lineaType}")
-    public static void selectSublineaRebajas(Linea lineaRebajas, LineaType lineaType, AppEcom appE, WebDriver driver) 
-    throws Exception {
-        SecMenuLateralMobil.clickSublineaRebajas(lineaRebajas, lineaType, appE, driver);
-        checkIsVisibleSubmenusLinea(lineaType, driver);
+    public void selectSublineaRebajas(Linea lineaRebajas, LineaType lineaType) throws Exception {
+    	secMenuLateral.clickSublineaRebajas(lineaRebajas, lineaType);
+        checkIsVisibleSubmenusLinea(lineaType);
     }
     
     @Validation (
     	description="Se hace visible una capa de submenús asociada a #{lineaType}",
     	level=State.Defect)
-    private static boolean checkIsVisibleSubmenusLinea(LineaType lineaType, WebDriver driver) {
-	    return (SecMenuLateralMobil.isVisibleMenuSublineaRebajas(lineaType, driver));
+    private boolean checkIsVisibleSubmenusLinea(LineaType lineaType) {
+	    return (secMenuLateral.isVisibleMenuSublineaRebajas(lineaType));
     }
     
     @Step (
@@ -126,10 +134,9 @@ public class SecMenuLateralMobilStpV {
     		"Seleccionar la <b style=\"color:chocolate\">Línea</b> " + 
     		"<b style=\"color:brown;\">#{lineaType.getNameUpper()}</b>",
         expected="Aparece la página correcta asociada a la línea #{lineaType.getNameUpper()}")
-    public static void seleccionLinea(LineaType lineaType, Pais pais, AppEcom app, WebDriver driver) 
-    throws Exception {
-        SecMenuLateralMobil.selecLinea(pais.getShoponline().getLinea(lineaType), app, driver); 
-        validaSelecLinea(pais, lineaType, null, app, driver);
+    public void seleccionLinea(LineaType lineaType, Pais pais) throws Exception {
+    	secMenuLateral.selecLinea(pais.getShoponline().getLinea(lineaType)); 
+        validaSelecLinea(pais, lineaType, null);
     }    
     
     @Step (
@@ -137,17 +144,15 @@ public class SecMenuLateralMobilStpV {
     		"Seleccionar la línea / <b style=\"color:chocolate\">Sublínea</b> " + 
     		"<b style=\"color:brown;\">#{lineaType.name()} / #{sublineaType.getNameUpper()}</b>",
         expected="Aparece la página correcta asociada a la línea/sublínea")
-    public static void seleccionSublineaNinos(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
-        SecMenuLateralMobil.selecSublineaNinosIfNotSelected(dCtxSh.pais.getShoponline().getLinea(lineaType), sublineaType, dCtxSh.appE, driver);
-        validaSelecLinea(dCtxSh.pais, lineaType, sublineaType, dCtxSh.appE, driver);
+    public void seleccionSublineaNinos(LineaType lineaType, SublineaNinosType sublineaType, Pais pais) throws Exception {
+    	secMenuLateral.selecSublineaNinosIfNotSelected(pais.getShoponline().getLinea(lineaType), sublineaType);
+        validaSelecLinea(pais, lineaType, sublineaType);
     }
     
     /**
      * Validamos el resultado esperado después de seleccionar una línea (she, he, kids...) en Móbil
      */
-    public static void validaSelecLinea(Pais pais, LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, WebDriver driver) 
-    throws Exception {
+    public void validaSelecLinea(Pais pais, LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
         Linea linea = pais.getShoponline().getLinea(lineaType);
         TypeContentMobil typeContent = linea.getContentMobilType();
         if (sublineaType!=null) {
@@ -156,16 +161,16 @@ public class SecMenuLateralMobilStpV {
         
         switch (typeContent) {
         case bloquesnuevo:
-            validaSelectLineaNuevoWithCarrusels(pais, app, driver);
+            validaSelectLineaNuevoWithCarrusels(pais);
             break;
         case bloquesrebaj:
-            validaSelectLineaRebajasWithSublineas(pais, app, driver);
+            validaSelectLineaRebajasWithSublineas(pais);
             break;
         case menus2:
-            validaSelecLineaWithMenus2onLevelAssociated(lineaType, sublineaType, app, driver);
+            validaSelecLineaWithMenus2onLevelAssociated(lineaType, sublineaType);
             break;
         case sublineas:            
-            validaSelecLineaNinosWithSublineas(lineaType, app, driver);
+            validaSelecLineaNinosWithSublineas(lineaType);
             break;
         case articulos:
             PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.movil_web, app, driver);
@@ -178,15 +183,15 @@ public class SecMenuLateralMobilStpV {
     }
     
     @Validation
-    public static ChecksResult validaSelectLineaNuevoWithCarrusels(Pais pais, AppEcom app, WebDriver driver) {
+    public ChecksResult validaSelectLineaNuevoWithCarrusels(Pais pais) {
     	ChecksResult validations = ChecksResult.getNew();
     	
         String listCarrusels = "";
         boolean carruselsOk = true;
         for (Linea linea : pais.getShoponline().getLineasToTest(app)) {
-            if (SecMenuLateralMobil.isCarruselNuevoAssociated(linea.getType())) {
+            if (secMenuLateral.isCarruselNuevoAssociated(linea.getType())) {
                 listCarrusels+=(linea.getType() + " ");
-                if (!SecMenuLateralMobil.isCarruselNuevoVisible(linea.getType(), driver)) {
+                if (!secMenuLateral.isCarruselNuevoVisible(linea.getType())) {
                     carruselsOk=false;     
                 }
             }
@@ -199,15 +204,14 @@ public class SecMenuLateralMobilStpV {
     }
         
     @Validation
-    public static ChecksResult validaSelectLineaRebajasWithSublineas(Pais pais, AppEcom app, WebDriver driver) {
+    public ChecksResult validaSelectLineaRebajasWithSublineas(Pais pais) {
     	ChecksResult validations = ChecksResult.getNew();
-
         String listSublineas = "";
         boolean isSublineasOk = true;
         for (Linea linea : pais.getShoponline().getLineasToTest(app)) {
-            if (SecMenuLateralMobil.isSublineaRebajasAssociated(linea.getType())) {
+            if (secMenuLateral.isSublineaRebajasAssociated(linea.getType())) {
                 listSublineas+=(linea.getType() + " ");
-                if (!SecMenuLateralMobil.isSublineaRebajasVisible(linea.getType(), driver)) {
+                if (!secMenuLateral.isSublineaRebajasVisible(linea.getType())) {
                     isSublineasOk = false;      
                 }
             }
@@ -220,27 +224,26 @@ public class SecMenuLateralMobilStpV {
     }
      
     @Validation
-    public static ChecksResult validaSelecLineaNinosWithSublineas(LineaType lineaNinosType, AppEcom appE, WebDriver driver) {
+    public ChecksResult validaSelecLineaNinosWithSublineas(LineaType lineaNinosType) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"Está seleccionada la línea <b>" + lineaNinosType + "</b>",
-			SecMenuLateralMobil.isSelectedLinea(lineaNinosType, appE, driver), State.Warn);
+			secMenuLateral.isSelectedLinea(lineaNinosType), State.Warn);
 	 	validations.add(
 			"Es visible el bloque con las sublíneas de " + lineaNinosType,
-			SecMenuLateralMobil.isVisibleBlockSublineasNinos(lineaNinosType, driver), State.Warn);
+			secMenuLateral.isVisibleBlockSublineasNinos(lineaNinosType), State.Warn);
 	 	return validations;
     }
     
     @Validation
-    public static ChecksResult validaSelecLineaWithMenus2onLevelAssociated(LineaType lineaType, SublineaNinosType sublineaType, 
-    																			   AppEcom appE, WebDriver driver) {
+    public ChecksResult validaSelecLineaWithMenus2onLevelAssociated(LineaType lineaType, SublineaNinosType sublineaType) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"Está seleccionada la línea <b>" + lineaType + "</b>",
-			SecMenuLateralMobil.isSelectedLinea(lineaType, appE, driver), State.Warn);
+			secMenuLateral.isSelectedLinea(lineaType), State.Warn);
 	 	validations.add(
 			"Son visibles links de Menú de 2o nivel",
-			SecMenuLateralMobil.isMenus2onLevelDisplayed(sublineaType, driver), State.Warn);
+			secMenuLateral.isMenus2onLevelDisplayed(sublineaType), State.Warn);
 	 	return validations;
     }    
     
@@ -248,16 +251,15 @@ public class SecMenuLateralMobilStpV {
     @Step (
     	description="Selección del menú <b>" + tagTextMenu + "</b> (data-ga-label contains #{menu1rstLevel.getDataGaLabelMenuSuperiorDesktop()})", 
         expected="El menú se ejecuta correctamente")
-    public static void stepClickMenu1rstLevel(Menu1rstLevel menu1rstLevel, Pais pais, AppEcom app, WebDriver driver) 
-    throws Exception {
-        SecMenuLateralMobil.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais, driver);
+    public void stepClickMenu1rstLevel(Menu1rstLevel menu1rstLevel, Pais pais) throws Exception {
+    	secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais);
         TestCaseData.getDatosCurrentStep().replaceInDescription(tagTextMenu, menu1rstLevel.getNombre());
         ModalCambioPais.closeModalIfVisible(driver);
-        validaPaginaResultMenu2onLevel(app, driver);
+        validaPaginaResultMenu2onLevel();
     }    
     
-    public static void validaPaginaResultMenu2onLevel(AppEcom app, WebDriver driver) throws Exception {
-    	checkElementsAfterClickMenu2onLevel(app, driver);
+    public void validaPaginaResultMenu2onLevel() throws Exception {
+    	checkElementsAfterClickMenu2onLevel();
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
         flagsVal.validaSEO = true;
         flagsVal.validaJS = true;
@@ -268,7 +270,7 @@ public class SecMenuLateralMobilStpV {
     @Validation (
     	description="Aparecen artículos, banners, frames, maps o Sliders",
     	level=State.Warn)
-    private static boolean checkElementsAfterClickMenu2onLevel(AppEcom app, WebDriver driver) throws Exception {
+    private boolean checkElementsAfterClickMenu2onLevel() throws Exception {
     	PageGaleria pageGaleria = PageGaleria.getInstance(Channel.movil_web, app, driver);
         return (
         	pageGaleria.isVisibleArticleUntil(1, 3) ||

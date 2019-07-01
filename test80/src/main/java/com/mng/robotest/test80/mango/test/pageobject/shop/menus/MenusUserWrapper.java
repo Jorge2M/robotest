@@ -23,7 +23,6 @@ import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.shop;
 import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.outlet;
 import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.votf;
 
->>> He de seguir x aquí !!!
 
 public class MenusUserWrapper {
 

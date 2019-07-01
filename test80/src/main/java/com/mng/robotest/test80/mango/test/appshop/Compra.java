@@ -275,7 +275,7 @@ public class Compra extends GestorWebDriver {
             PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(dCtxSh, dCtxPago, dFTest);
                     
             //Seleccionamos el logo de Mango (necesitamos acceder a una página con los links del menú superior)
-            SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh, dFTest.driver);
+            SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
             secCabeceraStpV.selecLogo();
             if (dCtxSh.appE!=AppEcom.votf) {
                 //Cerramos sesión y nos volvemos a identificar con los datos del registro

@@ -11,16 +11,28 @@ import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 public class SecCarruselDesktop extends WebdrvWrapp {
 	
-	static String TagIdCarrusel = "@CarruselId";
-	static String XPathLinkCarrGenRelToLinea = "//div[@class[contains(.,'carousel-block')]]/a[@data-label]";
-    static String XPathLinkCarruselRelToGenWithTag = "//self::*[@data-label[contains(.,'-" + TagIdCarrusel + "')]]";
+	private final AppEcom app;
+	private final WebDriver driver;
+	
+	private static String TagIdCarrusel = "@CarruselId";
+	private static String XPathLinkCarrGenRelToLinea = "//div[@class[contains(.,'carousel-block')]]/a[@data-label]";
+    private static String XPathLinkCarruselRelToGenWithTag = "//self::*[@data-label[contains(.,'-" + TagIdCarrusel + "')]]";
     
-    static String getXPathCarrouselLink(LineaType lineaType, AppEcom app) {
+    private SecCarruselDesktop(AppEcom app, WebDriver driver) {
+    	this.app = app;
+    	this.driver = driver;
+    }
+    
+    public static SecCarruselDesktop getNew(AppEcom app, WebDriver driver) {
+    	return (new SecCarruselDesktop(app, driver));
+    }
+    
+    private String getXPathCarrouselLink(LineaType lineaType) {
         String xpathCapaMenuLinea = SecBloquesMenuDesktop.getXPathCapaMenusLinea(lineaType, app);
         return (xpathCapaMenuLinea + XPathLinkCarrGenRelToLinea);
     }
     
-    static String getXPathLinkCarruselLinea(LineaType lineaId, String idCarrusel, AppEcom app) {
+    private String getXPathLinkCarruselLinea(LineaType lineaId, String idCarrusel) {
         String xpathCarrGen = getXPathCarrouselLink(lineaId, app);
         String xpathCarrusel = XPathLinkCarruselRelToGenWithTag.replace(TagIdCarrusel, idCarrusel);
         return (xpathCarrGen + xpathCarrusel);
@@ -29,7 +41,7 @@ public class SecCarruselDesktop extends WebdrvWrapp {
     /**
      * @return indicador de si están visibles todos los bloques que aparecen al realizar 'Hover' sobre una línea
      */
-    public static boolean isVisibleCarrusels(Linea linea, AppEcom app, WebDriver driver) {
+    public boolean isVisibleCarrusels(Linea linea) {
         String[] listCarrusels = linea.getListCarrusels();
         for (int i=0; (i<listCarrusels.length); i++) {
             if (!isVisibleCarrusel(linea, listCarrusels[i], app, driver)) {
@@ -44,12 +56,12 @@ public class SecCarruselDesktop extends WebdrvWrapp {
      * @param idCarrusel el identificador del carrusel tal como se encuentra definidio en el XML de países
      * @return si es visible o no un carrusel concreto
      */
-    public static boolean isVisibleCarrusel(Linea linea, String idCarrusel, AppEcom app, WebDriver driver) {
+    public boolean isVisibleCarrusel(Linea linea, String idCarrusel) {
         String xpathCarrousel = getXPathLinkCarruselLinea(linea.getType(), idCarrusel, app);
         return (isElementVisible(driver, By.xpath(xpathCarrousel)));
     }
     
-    public static boolean isPresentCarrusel(Linea linea, String idCarrusel, AppEcom app, WebDriver driver) {
+    public boolean isPresentCarrusel(Linea linea, String idCarrusel) {
         String xpathCarrousel = getXPathLinkCarruselLinea(linea.getType(), idCarrusel, app);
         return (isElementPresent(driver, By.xpath(xpathCarrousel)));
     }    
@@ -57,7 +69,7 @@ public class SecCarruselDesktop extends WebdrvWrapp {
     /**
      * Retorna el número de bloques nuevo existentes en la página
      */
-    public static int getNumCarrousels(LineaType lineaNuevoId, AppEcom app, WebDriver driver) {
+    public int getNumCarrousels(LineaType lineaNuevoId) {
         String xpathCarrousels = getXPathCarrouselLink(lineaNuevoId, app);
         return (driver.findElements(By.xpath(xpathCarrousels)).size());
     }    
@@ -65,12 +77,12 @@ public class SecCarruselDesktop extends WebdrvWrapp {
     /**
      * Se clicka unos de los bloques (carrouseles) que aparecen cuando se realiza un 'Hover' sobre la línea Nuevo en Desktop
      */
-    public static void clickCarrousel(Pais pais, LineaType lineaType, String idCarrusel, AppEcom app, WebDriver driver) throws Exception {
+    public void clickCarrousel(Pais pais, LineaType lineaType, String idCarrusel) throws Exception {
         String xpathCarrousel = getXPathLinkCarruselLinea(lineaType, idCarrusel, app);
         waitClickAndWaitLoad(driver, 1, By.xpath(xpathCarrousel));
     }
     
-    public static boolean isPresentCarrousel(LineaType lineaType, AppEcom app, WebDriver driver) {
+    public boolean isPresentCarrousel(LineaType lineaType) {
         String xpathBanner = getXPathCarrouselLink(lineaType, app);
         return isElementPresent(driver, By.xpath(xpathBanner)); 
     }
