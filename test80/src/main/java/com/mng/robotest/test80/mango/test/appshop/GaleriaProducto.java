@@ -224,7 +224,7 @@ public class GaleriaProducto extends GestorWebDriver {
         
         secMenusStpV.selectMenuLateral1erLevelTypeCatalog(menuCamisas, dCtxSh);
         Menu2onLevel menuCamisasTops = MenuTreeApp.getMenuLevel2From(menuCamisas, "tops");
-        SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.appE, driver);
+        SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
         secMenusDesktopStpV.selectMenuLateral2oLevel(menuCamisasTops, dCtxSh);
     }
     

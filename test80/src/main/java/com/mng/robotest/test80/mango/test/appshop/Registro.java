@@ -213,7 +213,7 @@ public class Registro extends GestorWebDriver {
 	        PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, dFTest);
 
 	        //Seleccionar el logo de la cabecera
-            SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh, dFTest.driver);
+            SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
             secCabeceraStpV.selecLogo();
 
 	        //Validacion footer RGPD

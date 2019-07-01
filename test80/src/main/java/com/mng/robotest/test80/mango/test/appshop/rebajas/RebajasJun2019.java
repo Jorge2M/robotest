@@ -106,7 +106,9 @@ public class RebajasJun2019 extends GestorWebDriver /*Funcionalidades genéricas
 	        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
 	        pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, true/*isGaleriaSale*/, dCtxSh.pais, dCtxSh.idioma, LineaType.she, bloqueMenu.prendas);
 	        PageGaleriaStpV.clickMoreInfoBannerRebajasJun2018(dFTest.driver);
-	        SecMenusDesktopStpV.stepValidaCarrusels(dCtxSh.pais, LineaType.rebajas, dCtxSh.appE, dFTest.driver);
+	        
+	        SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, dFTest.driver);
+	        secMenusDesktopStpV.stepValidaCarrusels(LineaType.rebajas);
         }
         
         if (salesOnInCountry) {
@@ -158,6 +160,7 @@ public class RebajasJun2019 extends GestorWebDriver /*Funcionalidades genéricas
             
             Menu1rstLevel menuRebajas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "promoción"));
             menuRebajas.setDataGaLabel("rebajas");
+            SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, dFTest.driver);
             if (salesOnInCountry) {
             	secMenusStpV.selectFiltroCollection(FilterCollection.sale);
             	secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
@@ -166,7 +169,7 @@ public class RebajasJun2019 extends GestorWebDriver /*Funcionalidades genéricas
 	            String dataGaMenuNuevaTemporada = getDataGaLabelNuevaTemporada(dCtxSh.pais.getCodigo_pais(), sublineaType);
 	            menuNuevaTemp.setDataGaLabel(dataGaMenuNuevaTemporada);
 	
-	            SecMenusDesktopStpV.stepEntradaMenuDesktop(menuNuevaTemp, "", dCtxSh, dFTest.driver);
+	            secMenusDesktopStpV.stepEntradaMenuDesktop(menuNuevaTemp, "");
 	            pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Defect, false);
 	            pageGaleriaStpV.validaArticlesOfTemporadas(FilterCollection.nextSeason.getListTempArticles(), State.Warn, true); //?
             
@@ -181,8 +184,8 @@ public class RebajasJun2019 extends GestorWebDriver /*Funcionalidades genéricas
             } else {
                 Menu1rstLevel menuPromocion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "promocion"));
                 menuPromocion.setDataGaLabel("promocion");
-            	SecMenusDesktopStpV.isPresentMenuSuperior(menuPromocion, dCtxSh.appE, dFTest.driver);
-            	SecMenusDesktopStpV.isNotPresentMenuSuperior(menuRebajas, dCtxSh.appE, dFTest.driver);
+                secMenusDesktopStpV.isPresentMenuSuperior(menuPromocion);
+                secMenusDesktopStpV.isNotPresentMenuSuperior(menuRebajas);
             }
         }
     }

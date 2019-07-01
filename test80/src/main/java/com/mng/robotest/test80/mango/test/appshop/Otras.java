@@ -94,10 +94,10 @@ public class Otras extends GestorWebDriver {
         dCtxSh.pais = this.españa;
         dCtxSh.idioma = this.castellano;
         dCtxSh.userRegistered = false;
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
                             
         //Step. Valida que la URL de acceso desde correo a HE es correcta
-        SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.appE, dFTest.driver);
+        SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, dFTest.driver);
         secMenusDesktopStpV.checkURLRedirectZapatosHeEspanya();
         
         //Step. Acceso a la aplicación shop/outlet/VOTF sin registrarse posteriormente
@@ -106,7 +106,7 @@ public class Otras extends GestorWebDriver {
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         
         //Step. Acceso a la redirección de Ficha        
-        secMenusDesktopStpV.checkURLRedirectFicha(this.francia);
+        SecMenusDesktopStpV.checkURLRedirectFicha(this.francia, dCtxSh, dFTest.driver);
     }
 	
     

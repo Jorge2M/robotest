@@ -60,20 +60,22 @@ public class SecMenusDesktopStpV {
 
     private final static String prefixSale = "<b style=\"color:blue\">Rebajas</b></br>";
     
+    private final Pais pais;
     private final AppEcom app;
     private final WebDriver driver;
     private final SecMenusDesktop secMenus;
     private final SecMenusWrapperStpV secMenusWrappStpV;
     
-    private SecMenusDesktopStpV(AppEcom app, WebDriver driver) {
+    private SecMenusDesktopStpV(Pais pais, AppEcom app, WebDriver driver) {
+    	this.pais = pais;
     	this.app = app;
     	this.driver = driver;
     	this.secMenus = SecMenusDesktop.getNew(app, driver);
     	this.secMenusWrappStpV = SecMenusWrapperStpV.getNew(Channel.desktop, app, driver);
     }
     
-    public static SecMenusDesktopStpV getNew(AppEcom app, WebDriver driver) {
-    	return (new SecMenusDesktopStpV(app, driver));
+    public static SecMenusDesktopStpV getNew(Pais pais, AppEcom app, WebDriver driver) {
+    	return (new SecMenusDesktopStpV(pais, app, driver));
     }
     
     /**
@@ -202,7 +204,7 @@ public class SecMenusDesktopStpV {
     	description="Selección del menú <b>" + tagMenu + "</b> (data-ga-label=#{menu1rstLevel.getDataGaLabelMenuSuperiorDesktop()})", 
         expected="El menú se ejecuta correctamente",
         saveNettraffic=SaveWhen.Always)
-    public void stepEntradaMenuDesktop(Menu1rstLevel menu1rstLevel, String paginaLinea, Pais pais) throws Exception {
+    public void stepEntradaMenuDesktop(Menu1rstLevel menu1rstLevel, String paginaLinea) throws Exception {
         //Si en la pantalla no existen los menús volvemos a la página inicial de la línea
         LineaType lineaMenu = menu1rstLevel.getLinea();
     	if (!secMenus.secMenuSuperior.secLineas.isLineaVisible(lineaMenu)) {
@@ -212,7 +214,7 @@ public class SecMenusDesktopStpV {
         TestCaseData.getDatosCurrentStep().replaceInDescription(tagMenu, menu1rstLevel.getNombre());
         ModalCambioPais.closeModalIfVisible(driver);
         
-        validaPaginaResultMenu(menu1rstLevel, pais);
+        validaPaginaResultMenu(menu1rstLevel);
         
         SecMenusWrap secMenus = SecMenusWrap.getNew(Channel.desktop, app, driver);
         LineaType lineaResult = secMenus.getLineaResultAfterClickMenu(lineaMenu, menu1rstLevel.getNombre());
@@ -224,7 +226,7 @@ public class SecMenusDesktopStpV {
     @Step (
     	description="Realizar \"hover\" sobre la línea #{lineaType}",
         expected="Aparecen los carrusels correspondientes a la línea " + tagCarruselsLinea)
-    public void stepValidaCarrusels(Pais pais, LineaType lineaType) throws Exception {
+    public void stepValidaCarrusels(LineaType lineaType) throws Exception {
         Linea linea = pais.getShoponline().getLinea(lineaType);
         TestCaseData.getDatosCurrentStep().replaceInDescription(tagCarruselsLinea, linea.getCarrusels());
         
@@ -237,7 +239,7 @@ public class SecMenusDesktopStpV {
     	    for (int i=0; i<listCarrusels.length; i++) {
     	        //Pare evitar KOs, sólo seleccionaremos el carrusel si realmente existe (si no existe previamente ya habremos dado un Warning)
     	        if (secMenus.secMenuSuperior.secCarrusel.isPresentCarrusel(linea, listCarrusels[i])) {
-    	            stepSeleccionaCarrusel(pais, lineaType, listCarrusels[i]);
+    	            stepSeleccionaCarrusel(lineaType, listCarrusels[i]);
     	        }
     	    }
         //}
@@ -264,7 +266,7 @@ public class SecMenusDesktopStpV {
     @Step (
     	description="Seleccionar el carrusel de la línea #{lineaType} correspondiente a <b>#{idCarrusel}</b>",
         expected="Aparece la página asociada al carrusel #{lineaType} / #{idCarrusel}")
-    public void stepSeleccionaCarrusel(Pais pais, LineaType lineaType, String idCarrusel) throws Exception {
+    public void stepSeleccionaCarrusel(LineaType lineaType, String idCarrusel) throws Exception {
         Linea linea = pais.getShoponline().getLinea(lineaType);
         secMenus.secMenuSuperior.secLineas.hoverLinea(lineaType, null);
         secMenus.secMenuSuperior.secCarrusel.clickCarrousel(pais, lineaType, idCarrusel);
@@ -305,9 +307,9 @@ public class SecMenusDesktopStpV {
     		"<b style=\"color:brown;\">\"#{lineaType.getNameUpper()}</b>",
         expected=
     		"Aparece la página correcta asociada a la línea #{lineaType.getNameUpper()}")
-    public void seleccionLinea(LineaType lineaType, Pais pais) throws Exception {
+    public void seleccionLinea(LineaType lineaType) throws Exception {
     	secMenus.secMenuSuperior.secLineas.selecLinea(pais, lineaType);       
-        validaSelecLinea(lineaType, null, pais);
+        validaSelecLinea(lineaType, null);
     }
     
     @Step (
@@ -316,11 +318,11 @@ public class SecMenusDesktopStpV {
     		"<b style=\"color:brown;\">\"#{lineaType.name()} / #{sublineaType.getNameUpper()}</b>",
         expected=
     		"Aparece la página correcta asociada a la línea/sublínea")
-    public void seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, Pais pais) throws Exception {
-        validaSelecLinea(lineaType, sublineaType, pais);
+    public void seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+        validaSelecLinea(lineaType, sublineaType);
     }    
     
-    public void validaSelecLinea(LineaType lineaType, SublineaNinosType sublineaType, Pais pais) throws Exception {
+    public void validaSelecLinea(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
     	SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(pais, Channel.desktop, app, driver);
         if (sublineaType==null) {
             validateIsLineaSelected(lineaType);
@@ -462,14 +464,14 @@ public class SecMenusDesktopStpV {
     		" (#{pais.getNombre_pais()})</b>:<br>" + tagUrlAcceso,
         expected=
         	"Aparece la ficha del producto " + tagRefArticle)
-    public void checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh) throws Exception {
+    public static void checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
     	ArticleStock articulo = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithMoreOneColour, dCtxSh);
     	TestCaseData.getDatosCurrentStep().replaceInDescription(tagRefArticle, articulo.getReference());
     	TestCaseData.getDatosCurrentStep().replaceInExpected(tagRefArticle, articulo.getReference());
     	
         URI uri = new URI(driver.getCurrentUrl());
         String tiendaId = "she";
-        if (app==AppEcom.outlet) {
+        if (dCtxSh.appE==AppEcom.outlet) {
             tiendaId = "outlet";
         }
         
@@ -484,9 +486,9 @@ public class SecMenusDesktopStpV {
         pageFichaStpV.validaDetallesProducto(datosArticulo);
     }
     
-    public void validaPaginaResultMenu(MenuLateralDesktop menu, Pais pais) throws Exception {
+    public void validaPaginaResultMenu(MenuLateralDesktop menu) throws Exception {
     	checkResultDependingMenuGroup(menu);
-    	checkErrorPageWithoutException(driver);
+    	checkErrorPageWithoutException();
     	GroupMenu groupMenu = menu.getGroup();
     	if (groupMenu.canContainElement(Element.article)) {
     		if (pais.isEspanya()) {
@@ -571,7 +573,7 @@ public class SecMenusDesktopStpV {
 	 	return validations;
     }    
 
-    public ChecksResult checkErrorPageWithoutException(WebDriver driver) throws Exception {
+    public ChecksResult checkErrorPageWithoutException() throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
 		ITestContext ctx = TestCaseData.getdFTest().ctx;
 	    stackTrace exception = WebDriverMngUtils.stackTaceException(driver, ctx);
@@ -587,9 +589,9 @@ public class SecMenusDesktopStpV {
     
 	//Temporal para prueba fin rebajas en China
     @Validation
-    public ChecksResult validationsSpecificEndRebajasChina(DataCtxShop dCtxSh) throws Exception {
+    public ChecksResult validationsSpecificEndRebajasChina() throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
-    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, driver);
       	List<Integer> tempSale = FilterCollection.sale.getListTempArticles();
       	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFrom, tempSale);
       	String warningMessage = "";
