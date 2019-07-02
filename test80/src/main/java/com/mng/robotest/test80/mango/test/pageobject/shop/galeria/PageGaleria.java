@@ -642,7 +642,8 @@ public abstract class PageGaleria extends WebdrvWrapp {
         
         //En el caso de Firefox-Geckodriver el moveToElement (que se acaba realizando mediante el workarround basado en JavaScript) 
         //nos posiciona en la esquina superior izquierda que queda debajo del menú superior... así que tenemos que enviar dicho menú al fondo
-        SecMenusDesktop.secMenuSuperior.secLineas.bringMenuBackground(app, driver);
+        SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
+        secMenus.secMenuSuperior.secLineas.bringMenuBackground();
         
         WebElement articleName = article.findElement(By.xpath("." + getXPathLinkRelativeToArticle()));
         UtilsMangoTest.openLinkInNewTab(driver, articleName);

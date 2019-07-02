@@ -54,7 +54,8 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
 	}
 	
     public String getXPathLinea(LineaType lineaType) {
-        String lineaIddom = SecMenusWrap.getIdLineaEnDOM(lineaType, Channel.desktop, app);
+    	SecMenusWrap secMenusWrapp = SecMenusWrap.getNew(Channel.desktop, app, driver);
+        String lineaIddom = secMenusWrapp.getIdLineaEnDOM(lineaType);
         return (XPathLineaSpecificWithTag.replace(TagIdLinea, lineaIddom));
     }
     

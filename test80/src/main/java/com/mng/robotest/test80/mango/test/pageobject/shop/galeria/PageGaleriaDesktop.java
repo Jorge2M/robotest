@@ -797,7 +797,8 @@ public class PageGaleriaDesktop extends PageGaleria {
         moveToElement(hearthIcon, driver);
         
         //Hacemos el menú superior transparente porque en ocasiones tapa el icono de favoritos
-        SecMenusDesktop.secMenuSuperior.secLineas.bringMenuBackground(app, driver);
+        SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
+        secMenus.secMenuSuperior.secLineas.bringMenuBackground();
         
         //Clicamos y esperamos a que el icono cambie de estado
         StateFavorito estadoInicial = getStateHearthIcon(hearthIcon);

@@ -28,12 +28,13 @@ public class SecCarruselDesktop extends WebdrvWrapp {
     }
     
     private String getXPathCarrouselLink(LineaType lineaType) {
-        String xpathCapaMenuLinea = SecBloquesMenuDesktop.getXPathCapaMenusLinea(lineaType, app);
+    	SecBloquesMenuDesktop secBloquesMenu = SecBloquesMenuDesktop.getNew(app, driver);
+        String xpathCapaMenuLinea = secBloquesMenu.getXPathCapaMenusLinea(lineaType);
         return (xpathCapaMenuLinea + XPathLinkCarrGenRelToLinea);
     }
     
     private String getXPathLinkCarruselLinea(LineaType lineaId, String idCarrusel) {
-        String xpathCarrGen = getXPathCarrouselLink(lineaId, app);
+        String xpathCarrGen = getXPathCarrouselLink(lineaId);
         String xpathCarrusel = XPathLinkCarruselRelToGenWithTag.replace(TagIdCarrusel, idCarrusel);
         return (xpathCarrGen + xpathCarrusel);
     }
@@ -44,7 +45,7 @@ public class SecCarruselDesktop extends WebdrvWrapp {
     public boolean isVisibleCarrusels(Linea linea) {
         String[] listCarrusels = linea.getListCarrusels();
         for (int i=0; (i<listCarrusels.length); i++) {
-            if (!isVisibleCarrusel(linea, listCarrusels[i], app, driver)) {
+            if (!isVisibleCarrusel(linea, listCarrusels[i])) {
                 return false;
             }
         }
@@ -57,12 +58,12 @@ public class SecCarruselDesktop extends WebdrvWrapp {
      * @return si es visible o no un carrusel concreto
      */
     public boolean isVisibleCarrusel(Linea linea, String idCarrusel) {
-        String xpathCarrousel = getXPathLinkCarruselLinea(linea.getType(), idCarrusel, app);
+        String xpathCarrousel = getXPathLinkCarruselLinea(linea.getType(), idCarrusel);
         return (isElementVisible(driver, By.xpath(xpathCarrousel)));
     }
     
     public boolean isPresentCarrusel(Linea linea, String idCarrusel) {
-        String xpathCarrousel = getXPathLinkCarruselLinea(linea.getType(), idCarrusel, app);
+        String xpathCarrousel = getXPathLinkCarruselLinea(linea.getType(), idCarrusel);
         return (isElementPresent(driver, By.xpath(xpathCarrousel)));
     }    
     
@@ -70,7 +71,7 @@ public class SecCarruselDesktop extends WebdrvWrapp {
      * Retorna el número de bloques nuevo existentes en la página
      */
     public int getNumCarrousels(LineaType lineaNuevoId) {
-        String xpathCarrousels = getXPathCarrouselLink(lineaNuevoId, app);
+        String xpathCarrousels = getXPathCarrouselLink(lineaNuevoId);
         return (driver.findElements(By.xpath(xpathCarrousels)).size());
     }    
     
@@ -78,12 +79,12 @@ public class SecCarruselDesktop extends WebdrvWrapp {
      * Se clicka unos de los bloques (carrouseles) que aparecen cuando se realiza un 'Hover' sobre la línea Nuevo en Desktop
      */
     public void clickCarrousel(Pais pais, LineaType lineaType, String idCarrusel) throws Exception {
-        String xpathCarrousel = getXPathLinkCarruselLinea(lineaType, idCarrusel, app);
+        String xpathCarrousel = getXPathLinkCarruselLinea(lineaType, idCarrusel);
         waitClickAndWaitLoad(driver, 1, By.xpath(xpathCarrousel));
     }
     
     public boolean isPresentCarrousel(LineaType lineaType) {
-        String xpathBanner = getXPathCarrouselLink(lineaType, app);
+        String xpathBanner = getXPathCarrouselLink(lineaType);
         return isElementPresent(driver, By.xpath(xpathBanner)); 
     }
 }

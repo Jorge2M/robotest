@@ -128,7 +128,8 @@ public abstract class SecCabecera extends WebdrvWrapp {
      *              'false' queremos que el menú lateral de móvil se cierre
      */
     public void clickIconoMenuHamburguerMobil(boolean toOpenMenus) throws Exception {
-        boolean menuVisible = SecMenuLateralMobil.isMenuInStateUntil(toOpenMenus, 1, app, driver);
+    	SecMenuLateralMobil secMenuLateral = SecMenuLateralMobil.getNew(app, driver);
+        boolean menuVisible = secMenuLateral.isMenuInStateUntil(toOpenMenus, 1);
         int i=0;
         TypeOfClick typeClick = TypeOfClick.webdriver;
         while ((menuVisible!=toOpenMenus) && i<5) {
@@ -136,7 +137,7 @@ public abstract class SecCabecera extends WebdrvWrapp {
                 isVisibleIconoMenuHamburguesaUntil(5);
                 clickIconoMenuHamburguesaWhenReady(typeClick, driver);
                 typeClick = TypeOfClick.next(typeClick);
-                menuVisible = SecMenuLateralMobil.isMenuInStateUntil(toOpenMenus, 2, app, driver);
+                menuVisible = secMenuLateral.isMenuInStateUntil(toOpenMenus, 2);
             }
             catch (Exception e) {
                 LogManager.getLogger(fmwkTest.log4jLogger).warn("Exception in click icono Hamburguer", e);
