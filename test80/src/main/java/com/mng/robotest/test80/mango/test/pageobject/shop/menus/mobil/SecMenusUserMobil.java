@@ -62,7 +62,7 @@ public class SecMenusUserMobil extends WebdrvWrapp {
     }    
     
     public boolean isPresentIniciarSesionUntil(int maxSecondsToWait) {
-        return (isElementPresentUntil(driver, By.xpath(XPathMenuIniciarSesion), maxSecondsToWait));
+        return (isElementPresentUntil(driver, By.xpath(XPathMenuIniciarSesion), maxSecondsToWait)); 
     }
     
     public void clickIniciarSesion() throws Exception {
