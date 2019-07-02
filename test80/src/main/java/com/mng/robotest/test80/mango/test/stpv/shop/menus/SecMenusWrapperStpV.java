@@ -45,20 +45,30 @@ public class SecMenusWrapperStpV {
 	
 	private final Channel channel;
 	private final AppEcom app;
+	private final Pais pais;
 	private final WebDriver driver;
 	private final SecMenusUserStpV secMenusUserStpV;
+    private final SecMenuLateralMobilStpV secMenuLateralMobilStpV;
+    private final SecMenusDesktopStpV secMenusDesktopStpV;
     private final SecMenusWrap secMenusWrap;
     
-    private SecMenusWrapperStpV(Channel channel, AppEcom app, WebDriver driver) {
+    private SecMenusWrapperStpV(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
     	this.channel = channel;
     	this.app = app;
+    	this.pais = pais;
     	this.driver = driver;
     	this.secMenusUserStpV = SecMenusUserStpV.getNew(channel, app, driver);
+    	this.secMenuLateralMobilStpV = SecMenuLateralMobilStpV.getNew(app, driver);
+    	this.secMenusDesktopStpV = SecMenusDesktopStpV.getNew(pais, app, driver);
     	this.secMenusWrap = SecMenusWrap.getNew(channel, app, driver);
     }
     
-    public static SecMenusWrapperStpV getNew(Channel channel, AppEcom app, WebDriver driver) {
-    	return (new SecMenusWrapperStpV(channel, app, driver));
+    public static SecMenusWrapperStpV getNew(Channel channel, AppEcom app, Pais pais, WebDriver driver) {
+    	return (new SecMenusWrapperStpV(channel, app, pais, driver));
+    }
+    
+    public static SecMenusWrapperStpV getNew(DataCtxShop dCtxSh, WebDriver driver) {
+    	return (getNew(dCtxSh.channel, dCtxSh.appE, dCtxSh.pais, driver));
     }
     
     public SecMenusUserStpV getMenusUser() {
@@ -117,23 +127,22 @@ public class SecMenusWrapperStpV {
     /**
      * Recorre todos los menús existentes en la página y crea un step por cada uno de ellos
      */
-    public void stepsMenusLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh) 
-    throws Exception {
+    public void stepsMenusLinea(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
         String paginaLinea = driver.getCurrentUrl();
         
         //Obtenemos la lista de menús de la línea
-        Linea linea = dCtxSh.pais.getShoponline().getLinea(lineaType);
+        Linea linea = pais.getShoponline().getLinea(lineaType);
         List<String> listMenusLabel = secMenusWrap.getListDataLabelsMenus(linea, sublineaType);
         //for (int i=0; i<5; i++) {
         for (int i=0; i<listMenusLabel.size(); i++) {
             try {
             	//Creamos un menú con el nombre=dataGaLabel (pues todavía no lo conocemos)
-            	Menu1rstLevel menu1rstLevel = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, listMenusLabel.get(i)));
+            	Menu1rstLevel menu1rstLevel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(lineaType, sublineaType, listMenusLabel.get(i)));
             	menu1rstLevel.setDataGaLabel(listMenusLabel.get(i));
-                if (dCtxSh.channel==Channel.movil_web) {
-                    SecMenuLateralMobilStpV.stepClickMenu1rstLevel(menu1rstLevel, dCtxSh.pais, dCtxSh.appE, driver);
+                if (channel==Channel.movil_web) {
+                    secMenuLateralMobilStpV.stepClickMenu1rstLevel(menu1rstLevel, pais);
                 } else {
-                    SecMenusDesktopStpV.stepEntradaMenuDesktop(menu1rstLevel, paginaLinea, dCtxSh, driver);
+                    secMenusDesktopStpV.stepEntradaMenuDesktop(menu1rstLevel, paginaLinea);
                 }
             }
             catch (Exception e) {
@@ -145,9 +154,9 @@ public class SecMenusWrapperStpV {
     
     public void navSeleccionaCarruselsLinea(Pais pais, LineaType lineaNuevoOReb) throws Exception {
         if (channel==Channel.movil_web) {
-            SecMenuLateralMobilStpV.navClickLineaAndCarrusels(lineaNuevoOReb, pais, app, driver);
+            secMenuLateralMobilStpV.navClickLineaAndCarrusels(lineaNuevoOReb, pais);
         } else {
-            SecMenusDesktopStpV.stepValidaCarrusels(pais, lineaNuevoOReb, app, driver);
+            secMenusDesktopStpV.stepValidaCarrusels(lineaNuevoOReb);
         }
     }
     
@@ -176,17 +185,17 @@ public class SecMenusWrapperStpV {
     
     public void selectMenu1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
-            SecMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, driver);
+            secMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh);
         } else {	
-        	SecMenusDesktopStpV.selectMenuSuperiorTypeCatalog(menu1rstLevel, dCtxSh, driver);
+        	secMenusDesktopStpV.selectMenuSuperiorTypeCatalog(menu1rstLevel, dCtxSh);
         }
     }
     
     public void selectMenuLateral1erLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
-            SecMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, driver); 
+            secMenuLateralMobilStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh); 
         } else {
-        	SecMenusDesktopStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh, driver);        
+        	secMenusDesktopStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh);        
         }
     }
     
@@ -196,7 +205,7 @@ public class SecMenusWrapperStpV {
 	public void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh) throws Exception {
 		validateGaleriaAfeterSelectMenu(dCtxSh);
         if (dCtxSh.channel==Channel.desktop) {
-            SecMenusDesktopStpV.validationsSelecMenuEspecificDesktop(menu, dCtxSh.channel, dCtxSh.appE, driver);
+            secMenusDesktopStpV.validationsSelecMenuEspecificDesktop(menu);
         }
        
         //Validaciones estándar. 
@@ -242,30 +251,30 @@ public class SecMenusWrapperStpV {
     
     public DatosStep seleccionLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh) throws Exception {
         if (sublineaType==null) {
-            return seleccionLinea(lineaType, dCtxSh);
+            return seleccionLinea(lineaType);
         }
         
         return seleccionSublinea(lineaType, sublineaType, dCtxSh);
     }
     
-    public DatosStep seleccionLinea(LineaType lineaType, DataCtxShop dCtxSh) throws Exception {
-        if (dCtxSh.channel==Channel.movil_web) {
-            SecMenuLateralMobilStpV.seleccionLinea(lineaType, dCtxSh.pais, dCtxSh.appE, driver);
+    public DatosStep seleccionLinea(LineaType lineaType) throws Exception {
+        if (channel==Channel.movil_web) {
+            secMenuLateralMobilStpV.seleccionLinea(lineaType, pais);
             return TestCaseData.getDatosLastStep();
         }
         
-        SecMenusDesktopStpV.seleccionLinea(lineaType, dCtxSh, driver);
+        secMenusDesktopStpV.seleccionLinea(lineaType);
         return TestCaseData.getDatosLastStep();
     }
     
     public DatosStep seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh)
     throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
-            SecMenuLateralMobilStpV.seleccionSublineaNinos(lineaType, sublineaType, dCtxSh, driver);
+            secMenuLateralMobilStpV.seleccionSublineaNinos(lineaType, sublineaType, pais);
             return TestCaseData.getDatosLastStep();
         }
         
-        SecMenusDesktopStpV.seleccionSublinea(lineaType, sublineaType, dCtxSh, driver);
+        secMenusDesktopStpV.seleccionSublinea(lineaType, sublineaType);
         return TestCaseData.getDatosLastStep();
     }
     

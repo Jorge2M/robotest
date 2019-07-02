@@ -40,7 +40,7 @@ public class SecMenuLateralMobilStpV {
 		secMenuLateral = SecMenuLateralMobil.getNew(app, driver);
 	}
 	
-	public SecMenuLateralMobilStpV getNew(AppEcom app, WebDriver drive) {
+	public static SecMenuLateralMobilStpV getNew(AppEcom app, WebDriver driver) {
 		return (new SecMenuLateralMobilStpV(app, driver));
 	}
 	
@@ -48,10 +48,9 @@ public class SecMenuLateralMobilStpV {
     	description="Seleccionar el menú lateral de 1er nivel <b>#{menu1rstLevel}</b>", 
         expected="Aparece la galería de productos asociada al menú",
         saveNettraffic=SaveWhen.Always)
-    public void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
+    public void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
     	secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, dCtxSh.pais);
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         secMenusStpV.validaSelecMenu(menu1rstLevel, dCtxSh);
     }
     

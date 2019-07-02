@@ -132,7 +132,7 @@ public class Loyalty extends GestorWebDriver {
     
     private DataBag addBagArticleNoRebajado(WebDriver driver) throws Exception {
 		Menu1rstLevel menuPersonalizacion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
-		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
 		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
 		secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
         DataBag dataBag = GaleriaNavigationsStpV.selectArticleAvailableFromGaleria(dCtxSh, driver);
@@ -217,7 +217,7 @@ public class Loyalty extends GestorWebDriver {
     private void makeLoyaltyPointsVisible(DataCtxShop dCtxSh, SecMenusUserStpV secMenusUserStpV, WebDriver driver) 
     throws Exception {
 	    if (dCtxSh.channel==Channel.desktop) {
-	    	secMenusUserStpV.hoverLinkForShowMenu();
+	    	secMenusUserStpV.hoverLinkForShowUserMenuDesktop();
 	    } else {
 	    	boolean setVisible = true;
 	    	SecCabeceraStpV.getNew(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver).setVisibilityLeftMenuMobil(setVisible);

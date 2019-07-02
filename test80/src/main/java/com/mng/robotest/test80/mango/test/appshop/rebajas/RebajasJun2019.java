@@ -92,7 +92,7 @@ public class RebajasJun2019 extends GestorWebDriver /*Funcionalidades genéricas
             return;
         }
         
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
         secMenusStpV.checkLineaRebajas(salesOnInCountry, dCtxSh);
     	PageHomeMarcasStpV.bannerRebajas2019.checkBanner(salesOnInCountry, TypeHome.Multimarca, dCtxSh, dFTest.driver);
     	PageHomeMarcasStpV.checkMsgNewsletterFooter(salesOnInCountry, dCtxSh.idioma, dFTest.driver); //?
@@ -137,7 +137,7 @@ public class RebajasJun2019 extends GestorWebDriver /*Funcionalidades genéricas
             sublineaType = sublinea.getTypeSublinea();
         }
         
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
         secMenusStpV.seleccionLinea(lineaType, sublineaType, dCtxSh);
         secMenusStpV.checkLineaRebajas(salesOnInCountry, dCtxSh);
     	if (areBanners) {

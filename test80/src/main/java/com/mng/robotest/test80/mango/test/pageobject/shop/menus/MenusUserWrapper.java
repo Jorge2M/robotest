@@ -31,6 +31,7 @@ public class MenusUserWrapper {
 	final WebDriver driver;
 	final SecCabecera secCabecera;
 	final SecMenusUserDesktop secMenusUserDesktop;
+	final SecMenusUserMobil secMenusUserMobil;
 	
 	public enum UserMenu {
 		iniciarSesion(Arrays.asList(shop, outlet)),
@@ -42,7 +43,8 @@ public class MenusUserWrapper {
 		misCompras(Arrays.asList(shop)),
 		pedidos(Arrays.asList(outlet)),
 		mangoLikesYou(Arrays.asList(shop)),
-		ayuda(Arrays.asList(shop, outlet, votf));
+		ayuda(Arrays.asList(shop, outlet, votf)),
+		cambioPais(Arrays.asList(shop, outlet, votf));
 
 		List<AppEcom> apps;
 		private UserMenu(List<AppEcom> apps) {
@@ -60,6 +62,7 @@ public class MenusUserWrapper {
 		this.driver = driver;
 		this.secCabecera = SecCabecera.getNew(channel, app, driver);
 		this.secMenusUserDesktop = SecMenusUserDesktop.getNew(driver);
+		this.secMenusUserMobil = SecMenusUserMobil.getNew(app, driver);
 	}
 	
 	public static MenusUserWrapper getNew(Channel channel, AppEcom app, WebDriver driver) {
@@ -118,7 +121,7 @@ public class MenusUserWrapper {
 			return (secMenusUserDesktop.isPresentIniciarSesionUntil(maxSecondsToWait));
 		case movil_web:
 		default:
-			return (SecMenusUserMobil.isPresentIniciarSesionUntil(maxSecondsToWait, driver));
+			return (secMenusUserMobil.isPresentIniciarSesionUntil(maxSecondsToWait));
 		}
 	}
 	
@@ -128,7 +131,7 @@ public class MenusUserWrapper {
 			secMenusUserDesktop.MoveAndclickIniciarSesion();
 		break;
 		case movil_web:
-			SecMenusUserMobil.MoveAndclickIniciarSesion(driver);
+			secMenusUserMobil.MoveAndclickIniciarSesion();
 		}		
 	}
 
@@ -139,7 +142,7 @@ public class MenusUserWrapper {
 			return (secMenusUserDesktop.isPresentCerrarSesion());
 		case movil_web:
 		default:
-			return (SecMenusUserMobil.isPresentCerrarSesion(driver));
+			return (secMenusUserMobil.isPresentCerrarSesion());
 		}		
 	}
 	
@@ -149,7 +152,7 @@ public class MenusUserWrapper {
 			return (secMenusUserDesktop.clickCerrarSessionIfLinkExists());
 		case movil_web:
 		default:
-			return (SecMenusUserMobil.clickCerrarSessionIfLinkExists(driver));
+			return (secMenusUserMobil.clickCerrarSessionIfLinkExists());
 		}		
 	}
 	
@@ -159,7 +162,7 @@ public class MenusUserWrapper {
 			secMenusUserDesktop.clickCerrarSesion();
 		break;
 		case movil_web:
-			SecMenusUserMobil.clickCerrarSesion(driver);
+			secMenusUserMobil.clickCerrarSesion();
 		}
 	}	
 
@@ -170,7 +173,7 @@ public class MenusUserWrapper {
 			return (secMenusUserDesktop.isPresentMiCuentaUntil(maxSecondsToWait));
 		case movil_web:
 		default:
-			return (SecMenusUserMobil.isPresentMiCuentaUntil(maxSecondsToWait, driver));
+			return (secMenusUserMobil.isPresentMiCuentaUntil(maxSecondsToWait));
 		}		
 	}
 	
@@ -180,7 +183,7 @@ public class MenusUserWrapper {
 			secMenusUserDesktop.clickMiCuenta();
 		break;
 		case movil_web:
-			SecMenusUserMobil.clickMiCuenta(app, driver);
+			secMenusUserMobil.clickMiCuenta();
 		}
 	}
 	
@@ -190,7 +193,7 @@ public class MenusUserWrapper {
 			return (secMenusUserDesktop.isPresentPedidos());
 		case movil_web:
 		default:
-			return (SecMenusUserMobil.isPresentPedidos(driver));
+			return (secMenusUserMobil.isPresentPedidos());
 		}		
 	}	
 	
@@ -200,7 +203,7 @@ public class MenusUserWrapper {
 			return (secMenusUserDesktop.isPresentMisCompras());
 		case movil_web:
 		default:
-			return (SecMenusUserMobil.isPresentMisCompras(driver));
+			return (secMenusUserMobil.isPresentMisCompras());
 		}		
 	}	
 	
@@ -210,7 +213,7 @@ public class MenusUserWrapper {
 			return (secMenusUserDesktop.isPresentAyuda());
 		case movil_web:
 		default:
-			return (SecMenusUserMobil.isPresentAyuda(driver));
+			return (secMenusUserMobil.isPresentAyuda());
 		}		
 	}	
 	
@@ -220,14 +223,14 @@ public class MenusUserWrapper {
 			secMenusUserDesktop.clickRegistrate();
 		break;
 		case movil_web:
-			SecMenusUserMobil.clickRegistrate(driver);
+			secMenusUserMobil.clickRegistrate();
 		}
 	}	
 	
 	public boolean isPresentMangoLikesYou() {
 		switch (channel) {
 		case movil_web:
-			return (SecMenusUserMobil.isPresentMangoLikesYou(driver));
+			return (secMenusUserMobil.isPresentMangoLikesYou());
 		case desktop:
 		default:
 			return (secMenusUserDesktop.isPresentMangoLikesYou());
@@ -237,7 +240,7 @@ public class MenusUserWrapper {
     public void clickMangoLikesYou() throws Exception {
     	switch (channel) {
     	case movil_web:
-    		SecMenusUserMobil.clickMangoLikesYou(driver);
+    		secMenusUserMobil.clickMangoLikesYou();
 	    	break;
     	case desktop:
     		secMenusUserDesktop.clickMangoLikesYou();
@@ -291,5 +294,9 @@ public class MenusUserWrapper {
 			this.isPresent = isPresent;
 			this.numberPoints = numberPoints;
 		}
+	}
+	
+	public void hoverLinkForShowMenuDesktop() {
+		secMenusUserDesktop.hoverLinkForShowMenu();
 	}
 }

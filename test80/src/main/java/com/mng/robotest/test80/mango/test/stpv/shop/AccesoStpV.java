@@ -137,9 +137,10 @@ public class AccesoStpV {
     		userMenus.isPresentCerrarSesion(), State.Defect);
     	
         if (dCtxSh.channel==Channel.desktop) {
+        	SecMenusDesktop secMenus = SecMenusDesktop.getNew(dCtxSh.appE, driver);
         	validations.add(
         		"Aparece una página con menús de MANGO",
-        		SecMenusDesktop.secMenuSuperior.secLineas.isPresentLineasMenuWrapp(driver), State.Warn);
+        		secMenus.secMenuSuperior.secLineas.isPresentLineasMenuWrapp(), State.Warn);
         }
         
         return validations;

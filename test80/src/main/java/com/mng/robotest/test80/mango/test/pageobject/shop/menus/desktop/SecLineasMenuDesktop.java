@@ -174,7 +174,8 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
     	do {
 	    	hoverLinea(lineaType, sublineaType);
 	    	int maxSecondsToWait = 2;
-	    	isCapaMenusVisible = SecBloquesMenuDesktop.isCapaMenusLineaVisibleUntil(lineaType, maxSecondsToWait, app, driver);
+	    	SecBloquesMenuDesktop secBloques = SecBloquesMenuDesktop.getNew(app, driver);
+	    	isCapaMenusVisible = secBloques.isCapaMenusLineaVisibleUntil(lineaType, maxSecondsToWait);
 	    	if (!isCapaMenusVisible) {
 	    		pLogger.warn("No se hacen visibles los menús después de Hover sobre línea " + lineaType);
 	    	}

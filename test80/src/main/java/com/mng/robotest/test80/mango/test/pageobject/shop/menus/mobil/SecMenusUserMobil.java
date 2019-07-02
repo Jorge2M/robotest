@@ -12,105 +12,116 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavorito
 
 public class SecMenusUserMobil extends WebdrvWrapp {
 
-    static String XPathCapaMenus = "//ul[@class[contains(.,'menu-section-links')]]";
-    static String XPathMenuAyuda = XPathCapaMenus + "//a[@href[contains(.,'/help/')]]";
-    static String XPathMenuMisCompras = XPathCapaMenus + "//a[@href[contains(.,'/mypurchases')]]";
-    static String XPathMenuPedidos = XPathCapaMenus + "//a[@href[contains(.,'account/orders')]]";
-    static String XPathMenuCambioPais = XPathCapaMenus + "//a[@href[contains(.,'/preHome.faces')]]";
-    static String XPathMenuCerrarSesion = XPathCapaMenus + "//a[@href[contains(.,'/logout')]]";
-    static String XPathMenuFavoritos = XPathCapaMenus + "//a[@href[contains(.,'/favorites')]]";
-    static String XPathMenuIniciarSesion = XPathCapaMenus + "//a[@href[contains(.,'/login?')]]";
-    static String XPathMenuMiCuenta = XPathCapaMenus + "//a[@data-label='mi_cuenta']";
-    static String XPathMenuRegistrate = XPathCapaMenus + "//a[@href[contains(.,'/signup?')]]";
-    static String XPathMenuMangoLikesYou = XPathCapaMenus + "//a[@href[contains(.,'/mangolikesyou')]]";
+	final AppEcom app;
+	final WebDriver driver;
+	final SecCabecera secCabecera;
+	
+	private SecMenusUserMobil(AppEcom app, WebDriver driver) {
+		this.app = app;
+		this.driver = driver;
+		this.secCabecera = SecCabecera.getNew(Channel.movil_web, app, driver);
+	}
+	
+	public static SecMenusUserMobil getNew(AppEcom app, WebDriver driver) {
+		return (new SecMenusUserMobil(app, driver));
+	}
+	
+    private static String XPathCapaMenus = "//ul[@class[contains(.,'menu-section-links')]]";
+    private static String XPathMenuAyuda = XPathCapaMenus + "//a[@href[contains(.,'/help/')]]";
+    private static String XPathMenuMisCompras = XPathCapaMenus + "//a[@href[contains(.,'/mypurchases')]]";
+    private static String XPathMenuPedidos = XPathCapaMenus + "//a[@href[contains(.,'account/orders')]]";
+    private static String XPathMenuCambioPais = XPathCapaMenus + "//a[@href[contains(.,'/preHome.faces')]]";
+    private static String XPathMenuCerrarSesion = XPathCapaMenus + "//a[@href[contains(.,'/logout')]]";
+    private static String XPathMenuFavoritos = XPathCapaMenus + "//a[@href[contains(.,'/favorites')]]";
+    private static String XPathMenuIniciarSesion = XPathCapaMenus + "//a[@href[contains(.,'/login?')]]";
+    private static String XPathMenuMiCuenta = XPathCapaMenus + "//a[@data-label='mi_cuenta']";
+    private static String XPathMenuRegistrate = XPathCapaMenus + "//a[@href[contains(.,'/signup?')]]";
+    private static String XPathMenuMangoLikesYou = XPathCapaMenus + "//a[@href[contains(.,'/mangolikesyou')]]";
     
-    public static boolean isPresentCerrarSesion(WebDriver driver) {
+    public boolean isPresentCerrarSesion() {
         return (isElementPresent(driver, By.xpath(XPathMenuCerrarSesion)));
     }
     
-    public static boolean isVisibleCerrarSesion(WebDriver driver) {
+    public boolean isVisibleCerrarSesion() {
         return (isElementVisible(driver, By.xpath(XPathMenuCerrarSesion)));
     }
     
-    public static void clickCerrarSesion(WebDriver driver) throws Exception {
+    public void clickCerrarSesion() throws Exception {
         clickAndWaitLoad(driver, By.xpath(XPathMenuCerrarSesion));
     }
     
-    public static boolean clickCerrarSessionIfLinkExists(WebDriver driver) throws Exception {
+    public boolean clickCerrarSessionIfLinkExists() throws Exception {
         boolean menuClicado = false;
-        if (isPresentCerrarSesion(driver)) {
+        if (isPresentCerrarSesion()) {
         	moveToElement(By.xpath(XPathMenuCerrarSesion), driver);
-            clickCerrarSesion(driver);
+            clickCerrarSesion();
             menuClicado = true;
         }
         
         return menuClicado;
     }    
     
-    public static boolean isPresentIniciarSesionUntil(int maxSecondsToWait, WebDriver driver) {
+    public boolean isPresentIniciarSesionUntil(int maxSecondsToWait) {
         return (isElementPresentUntil(driver, By.xpath(XPathMenuIniciarSesion), maxSecondsToWait));
     }
     
-    public static void clickIniciarSesion(WebDriver driver) throws Exception {
+    public void clickIniciarSesion() throws Exception {
         clickAndWaitLoad(driver, By.xpath(XPathMenuIniciarSesion), TypeOfClick.javascript);
     }
     
-    public static void MoveAndclickIniciarSesion(WebDriver driver) throws Exception {
+    public void MoveAndclickIniciarSesion() throws Exception {
     	moveToElement(By.xpath(XPathMenuIniciarSesion), driver);
-        clickIniciarSesion(driver);
+        clickIniciarSesion();
     }
     
-    public static void clickRegistrate(WebDriver driver) throws Exception {
+    public void clickRegistrate() throws Exception {
         clickAndWaitLoad(driver, By.xpath(XPathMenuRegistrate));
     }
     
-    public static void clickMiCuenta(AppEcom appE, WebDriver driver) throws Exception {
+    public void clickMiCuenta() throws Exception {
     	boolean toOpen = true;
-    	SecCabecera secCabecera = SecCabecera.getNew(Channel.movil_web, appE, driver);
     	secCabecera.clickIconoMenuHamburguerMobil(toOpen);
         clickAndWaitLoad(driver, By.xpath(XPathMenuMiCuenta), TypeOfClick.javascript);
     }
     
-    public static void clickFavoritosAndWait(AppEcom appE, WebDriver driver) throws Exception {
+    public void clickFavoritosAndWait() throws Exception {
     	boolean toOpen = true;
-    	SecCabecera secCabecera = SecCabecera.getNew(Channel.movil_web, appE, driver);
     	secCabecera.clickIconoMenuHamburguerMobil(toOpen);
         clickAndWaitLoad(driver, By.xpath(XPathMenuFavoritos), 3);
         PageFavoritos.isSectionArticlesVisibleUntil(2/*maxSecondsToWait*/, driver);
     }
     
-    public static boolean isPresentMiCuentaUntil(int maxSecondsToWait, WebDriver driver) {
+    public boolean isPresentMiCuentaUntil(int maxSecondsToWait) {
         return (isElementPresentUntil(driver, By.xpath(XPathMenuMiCuenta), maxSecondsToWait));
     }
     
-    public static void clickCambioPais(AppEcom appE, WebDriver driver) throws Exception {
+    public void clickCambioPais() throws Exception {
     	boolean toOpen = true;
-    	SecCabecera secCabecera = SecCabecera.getNew(Channel.movil_web, appE, driver);
         secCabecera.clickIconoMenuHamburguerMobil(toOpen);
         clickAndWaitLoad(driver, By.xpath(XPathMenuCambioPais));
     }
     
-    public static boolean isPresentFavoritos(WebDriver driver) {
+    public boolean isPresentFavoritos() {
         return (isElementPresent(driver, By.xpath(XPathMenuFavoritos)));
     }    
     
-    public static boolean isPresentPedidos(WebDriver driver) {
+    public boolean isPresentPedidos() {
         return (isElementPresent(driver, By.xpath(XPathMenuPedidos)));
     }
     
-    public static boolean isPresentMisCompras(WebDriver driver) {
+    public boolean isPresentMisCompras() {
         return (isElementPresent(driver, By.xpath(XPathMenuMisCompras)));
     }    
     
-    public static boolean isPresentAyuda(WebDriver driver) {
+    public boolean isPresentAyuda() {
         return (isElementPresent(driver, By.xpath(XPathMenuAyuda)));
     }
     
-    public static boolean isPresentMangoLikesYou(WebDriver driver) {
+    public boolean isPresentMangoLikesYou() {
     	return (WebdrvWrapp.isElementPresent(driver, By.xpath(XPathMenuMangoLikesYou)));
     }
     
-    public static void clickMangoLikesYou(WebDriver driver) throws Exception {
+    public void clickMangoLikesYou() throws Exception {
         clickAndWaitLoad(driver, By.xpath(XPathMenuMangoLikesYou));
     }
 }

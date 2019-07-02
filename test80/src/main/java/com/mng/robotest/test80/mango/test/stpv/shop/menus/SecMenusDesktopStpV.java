@@ -71,7 +71,7 @@ public class SecMenusDesktopStpV {
     	this.app = app;
     	this.driver = driver;
     	this.secMenus = SecMenusDesktop.getNew(app, driver);
-    	this.secMenusWrappStpV = SecMenusWrapperStpV.getNew(Channel.desktop, app, driver);
+    	this.secMenusWrappStpV = SecMenusWrapperStpV.getNew(Channel.desktop, app, pais, driver);
     }
     
     public static SecMenusDesktopStpV getNew(Pais pais, AppEcom app, WebDriver driver) {

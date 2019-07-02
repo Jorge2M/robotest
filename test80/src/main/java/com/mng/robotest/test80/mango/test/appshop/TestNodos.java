@@ -124,7 +124,7 @@ public class TestNodos extends GestorWebDriver {
             //Step+Validacs. Accedemos a España con idioma Español
             PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, true/*execValidacs*/, dFTest.driver);
             
-            SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+            SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
             if (appE==AppEcom.shop) {
             	secMenusStpV.seleccionLinea(LineaType.nuevo, null, dCtxSh);
 

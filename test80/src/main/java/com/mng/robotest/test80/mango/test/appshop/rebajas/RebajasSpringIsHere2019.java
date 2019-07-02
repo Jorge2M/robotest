@@ -260,7 +260,7 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
             sublineaType = sublinea.getTypeSublinea();
         }
         
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         secMenusStpV.seleccionLinea(lineaType, sublineaType, dCtxSh);
         List<String> textoPromotion = getPossibleTextPromotion(dCtxSh.pais.getCodigo_pais());
         BannerSpringIsHere2019StpV bannerSpringIsHere2019 = new BannerSpringIsHere2019StpV(textoPromotion, dCtxSh, driver);
@@ -281,7 +281,7 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
     throws Exception {
         Menu1rstLevel menuSpringPromotion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "Spring Promotion"));
         menuSpringPromotion.setDataGaLabel("promos-spring_promotion");
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         secMenusStpV.selectMenu1rstLevelTypeCatalog(menuSpringPromotion, dCtxSh);
         checkGaleryOfArticlesInPromotion(dCtxSh, driver);
     }
@@ -289,7 +289,7 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
     private void checkMenuSuperiorPantalones(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
     	Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "pantalones"));
-    	SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+    	SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
     	secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
     	PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
     	pageGaleriaStpV.bannerHead.checkBannerSalesHead(TypeGalery.NoSales, dCtxSh.pais, dCtxSh.idioma);

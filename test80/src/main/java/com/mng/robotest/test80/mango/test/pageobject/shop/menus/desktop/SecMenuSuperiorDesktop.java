@@ -13,7 +13,7 @@ public class SecMenuSuperiorDesktop {
 	private SecMenuSuperiorDesktop(AppEcom app, WebDriver driver) {
 		secLineas = SecLineasMenuDesktop.getNew(app, driver);
 		secBlockMenus = SecBloquesMenuDesktop.getNew(app, driver);
-		secCarrusel = SecCarruselDesktop.getNew();
+		secCarrusel = SecCarruselDesktop.getNew(app, driver);
 	}
 	
 	public static SecMenuSuperiorDesktop getNew(AppEcom app, WebDriver driver) {

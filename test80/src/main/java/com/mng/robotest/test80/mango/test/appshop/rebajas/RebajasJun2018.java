@@ -90,7 +90,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
             return;
         }
         
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
         secMenusStpV.checkLineaRebajas(salesOnInCountry, dCtxSh);
     	//PageHomeMarcasStpV.bannerRebajas2018.checkBanner(salesOnInCountry, TypeHome.Multimarca, dCtxSh, dFTest.driver);
     	//checkMsgNewsletterFooter(salesOnInCountry, dCtxSh.idioma, driver);
@@ -138,7 +138,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
         }
         
         //Selección de la línea/sublínea
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
         secMenusStpV.seleccionLinea(lineaType, sublineaType, dCtxSh);
         secMenusStpV.checkLineaRebajas(salesOnInCountry, dCtxSh);
     	if (areBanners) {

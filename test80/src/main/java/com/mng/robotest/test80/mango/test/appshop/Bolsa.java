@@ -81,7 +81,7 @@ public class Bolsa extends GestorWebDriver {
         dCtxSh.userRegistered = false;
         
         AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest.driver);
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
         secMenusStpV.accesoMenuXRef(menuVestidos, dCtxSh);
         DataBag dataBag = GaleriaNavigationsStpV.selectArticleAvailableFromGaleria(dCtxSh, dFTest.driver);
@@ -125,7 +125,7 @@ public class Bolsa extends GestorWebDriver {
         
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
         AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest.driver);
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
         secMenusStpV.accesoMenuXRef(menuVestidos, dCtxSh);
         SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest.driver);

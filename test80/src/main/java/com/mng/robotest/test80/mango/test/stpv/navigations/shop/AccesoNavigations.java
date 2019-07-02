@@ -88,7 +88,7 @@ public class AccesoNavigations {
     public static void cambioPais(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
-        	SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+        	SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         	secMenusStpV.getMenusUser().cambioPaisMobil(dCtxSh);
         } else {
             SecFooterStpV.cambioPais(dCtxSh, driver);

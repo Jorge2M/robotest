@@ -170,7 +170,7 @@ public class Compra extends GestorWebDriver {
         String nTarjeta;
         String cvvTarjeta = "";
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
         secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
         SecFooterStpV.clickLinkFooter(FooterLink.cheque_regalo, false, dCtxSh.channel, dFTest.driver);
         if(dCtxSh.channel != Channel.movil_web){
@@ -281,7 +281,7 @@ public class Compra extends GestorWebDriver {
                 //Cerramos sesión y nos volvemos a identificar con los datos del registro
                 String usrEmail = dCtxPago.getDatosRegistro().get("cfEmail");
                 String password = dCtxPago.getDatosRegistro().get("cfPass");
-                SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+                SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
                 secMenusStpV.getMenusUser().logoffLogin(usrEmail, password);
                     
                 //Ejecutamos la consulta de Mis datos comprobando que son coherentes con los utilizados en el registro

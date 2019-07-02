@@ -149,7 +149,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
             sublineaType = sublinea.getTypeSublinea();
         }
         
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
         secMenusStpV.seleccionLinea(lineaType, sublineaType, dCtxShI);
         if (sublinea==null) {
             testSpecificFeaturesForLinea(linea, dCtxShI, dFTest);
@@ -157,7 +157,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
             
         //Validamos si hemos de ejecutar los pasos correspondientes al recorrido de los menús
         if (testMenus(linea, sublinea)) {
-        	secMenusStpV.stepsMenusLinea(lineaType, sublineaType, dCtxShI);
+        	secMenusStpV.stepsMenusLinea(lineaType, sublineaType);
         	if (existsRightBannerMenu(linea, sublinea, dCtxShI.channel)) {
         		SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxShI.pais, dCtxShI.appE, dFTest.driver);
         		secMenusDesktopStpV.clickRightBanner(lineaType, sublineaType);
@@ -196,7 +196,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
         }
         
         if (linea.getCarrusels()!=null) {
-        	SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        	SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
         	secMenusStpV.navSeleccionaCarruselsLinea(dCtxShI.pais, lineaType);
         }
     }

@@ -15,8 +15,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.UserMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusUserDesktop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.favoritos.PageFavoritosStpV;
@@ -126,7 +124,7 @@ public class SecMenusUserStpV {
     	description="Se selecciona el menú para el cambio de país", 
         expected="Aparece el modal para el cambio de país")
     public void cambioPaisMobil(DataCtxShop dCtxSh) throws Exception {
-        SecMenuLateralMobil.secMenusUser.clickCambioPais(dCtxSh.appE, driver);
+        userMenus.clickMenuAndWait(UserMenu.cambioPais);
         ModalCambioPaisStpV.validateIsVisible(5, driver);
         ModalCambioPaisStpV.cambioPais(dCtxSh, driver);
     }
@@ -136,7 +134,6 @@ public class SecMenusUserStpV {
         expected="Aparece la página de \"Mi cuenta\"")
 	public void clickMenuMangoLikesYou() throws Exception {
     	userMenus.clickMangoLikesYou();
-    	SecMenusUserDesktop.clickMangoLikesYou(driver);	
     	PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(driver);
     	pageHomeLikesStpV.checkIsPageOk();
 	}
@@ -187,8 +184,8 @@ public class SecMenusUserStpV {
 	
 	@Step (
 		description="Hover sobre el link <b>Iniciar Sesión</b> o <b>Mi cuenta</b> para mostrar el menú de usuario")
-	public void hoverLinkForShowMenu() {
-		SecMenusUserDesktop.hoverLinkForShowMenu(driver);
+	public void hoverLinkForShowUserMenuDesktop() {
+		userMenus.hoverLinkForShowMenuDesktop();
 	}
 	
     public static class ChecksResultWithNumberPoints extends ChecksResult {

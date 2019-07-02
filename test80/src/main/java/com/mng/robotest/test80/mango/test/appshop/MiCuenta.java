@@ -109,7 +109,7 @@ public class MiCuenta extends GestorWebDriver {
             
         PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest.driver);
         dCtxSh.userRegistered = false;
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
         secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
         dCtxSh.userRegistered = true;
         AccesoStpV.identificacionEnMango(dCtxSh, dFTest.driver);                                           
