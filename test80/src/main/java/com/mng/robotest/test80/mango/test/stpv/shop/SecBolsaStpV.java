@@ -127,13 +127,9 @@ public class SecBolsaStpV {
     public static void altaBolsaArticulos(List<ArticleStock> listParaAlta, DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
     	includeListaArtInTestCaseDescription(listParaAlta);
-        
-    	//Damos de alta la lista de productos en la bolsa
         for (int i=0; i<listParaAlta.size(); i++) {
             ArticleStock artTmp = listParaAlta.get(i);
             ArticuloScreen articulo = UtilsMangoTest.addArticuloBolsa(artTmp, dCtxSh.appE, dCtxSh.channel, driver);
-            
-            //En caso de tener vale asociado lo añadimos también
             if (artTmp.isVale()) {
                 articulo.setVale(artTmp.getValePais());
             }

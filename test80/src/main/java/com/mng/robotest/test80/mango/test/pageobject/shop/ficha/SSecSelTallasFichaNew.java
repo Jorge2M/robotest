@@ -7,7 +7,7 @@ import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 
 public class SSecSelTallasFichaNew extends WebdrvWrapp {
-    static String XPathSelectorTallas = "//form/div[@class='sizes']";
+    static String XPathSelectorTallas = "//form//div[@class='selector']";
     static String XPathListTallsForSelect = XPathSelectorTallas + "//div[@class[contains(.,'selector-list')]]";
     static String XPathTallaItem = XPathSelectorTallas + "//span[(@role='option' or @role='button') and not(@data-available='false')]";
     static String XPathTallaAvailable = XPathTallaItem + "//self::span[@data-available='true' or @class='single-size']";
