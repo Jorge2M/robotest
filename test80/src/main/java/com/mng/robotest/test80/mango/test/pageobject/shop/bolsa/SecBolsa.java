@@ -122,23 +122,9 @@ public class SecBolsa extends WebdrvWrapp {
     
     static void setBolsaToState(StateBolsa stateBolsaExpected, Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-    	int secondsWaitToIconoBolsaDisp = 2;
-    	//TODO ahora resulta que el test A/B que ha ganado era el original
-//    	if (channel==Channel.movil_web || app==AppEcom.outlet)
-    		SecCabecera secCabecera = SecCabecera.getNew(channel, app, driver);
-    		secCabecera.clickIconoBolsaWhenDisp(secondsWaitToIconoBolsaDisp);
-//    	else {
-//    		switch (stateBolsaExpected) {
-//    		case Open:
-//    			SecCabeceraWrapper.hoverIconoBolsa(channel, app, driver);
-//    			break;
-//    		case Closed:
-//    			SecCabeceraDesktop.focusAwayBolsa(driver);
-//    		}
-//    	}
-        
-        int maxSecondsToWait = 2;
-        isInStateUntil(stateBolsaExpected, channel, maxSecondsToWait, driver);
+		SecCabecera secCabecera = SecCabecera.getNew(channel, app, driver);
+		secCabecera.clickIconoBolsaWhenDisp(2);
+        isInStateUntil(stateBolsaExpected, channel, 2, driver);
     }
     
     public static boolean isVisibleBotonComprar(Channel channel, WebDriver driver) {

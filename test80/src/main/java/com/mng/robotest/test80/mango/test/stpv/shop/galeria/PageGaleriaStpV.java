@@ -886,4 +886,28 @@ public class PageGaleriaStpV {
     		PageGaleriaDesktop.secBannerHead.isVisibleLinkTextInfoRebajas(TypeLinkInfo.less, driver), State.Warn);
     	return validations;
     }
+    
+	@Validation
+    public ChecksResult validateGaleriaAfeterSelectMenu(DataCtxShop dCtxSh) throws Exception {
+		ChecksResult validations = ChecksResult.getNew();
+		int maxSecondsToWaitArticle = 3;
+		int maxSecondsToWaitIcon = 2;
+		validations.add (
+			"Como mínimo se obtiene un artículo (lo esperamos hasta " + maxSecondsToWaitArticle + " segundos)",
+			pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, maxSecondsToWaitArticle), State.Warn);
+		if (dCtxSh.appE==AppEcom.shop) {
+			validations.add (
+				"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + maxSecondsToWaitIcon + " segundos)",
+				pageGaleria.isArticleWithHearthIconPresentUntil(1, maxSecondsToWaitIcon), State.Defect);
+			validations.add (
+				"Cada artículo tiene 1 icono de favoritos asociado",
+				pageGaleria.eachArticlesHasOneFavoriteIcon(), State.Info, true);
+		} else {
+			validations.add (
+				"No aparece ningún icono de favoritos asociado a ningún artículo",
+				pageGaleria.getNumFavoritoIcons() == 0, State.Defect);
+		}
+		
+		return validations;
+    }
 }

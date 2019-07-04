@@ -7,12 +7,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.UserMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil.TypeLocator;
@@ -87,14 +89,7 @@ public class SecMenusWrap {
     }
 
 	public void closeSessionIfUserLogged() throws Exception {
-		switch (channel) {
-		case movil_web:
-			secMenusUser.clickCerrarSessionIfLinkExists();
-        	break;
-		default:
-		case desktop:
-			secMenusUser.clickCerrarSessionIfLinkExists();
-		}
+		secMenusUser.clickMenuIfInState(UserMenu.cerrarSesion, StateElem.Clickable);
     }
     
     public List<String> getListDataLabelsMenus(Linea linea, SublineaNinosType sublineaType) throws Exception {
@@ -109,13 +104,13 @@ public class SecMenusWrap {
      * @return codificación que se acostumbra a utilizar para identificar la línea en el DOM
      */
     public String getLineaDOM(LineaType lineaType) {
-        return (getIdLineaEnDOM(lineaType));
+        return (getIdLineaEnDOM(channel, app, lineaType));
     }
     
     /**
      * @return el id con el que se identifica la línea a nivel del DOM-HTML
      */
-    public String getIdLineaEnDOM(LineaType lineaShop) {
+    public static String getIdLineaEnDOM(Channel channel, AppEcom app, LineaType lineaShop) {
         if (app==AppEcom.outlet) {
             return lineaShop.getSufixOutlet(channel);
         }

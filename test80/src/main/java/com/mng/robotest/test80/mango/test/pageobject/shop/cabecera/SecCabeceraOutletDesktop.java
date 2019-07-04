@@ -14,16 +14,17 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
  */
 public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
 	
-	public enum ElementOutlet implements ElementPage {
+	public enum LinkCabeceraOutletDesktop implements ElementPage {
 		registrate("//a[@data-origin='register']"),
 		iniciarsesion("//a[@data-origin='login']"),
 		cerrarsesion("//span[@class[contains(.,'_logout')]]"),
+		micuenta("//a[@href[contains(.,'/account')]]"),
 		pedidos("//a[@class[contains(.,'_pedidos')]]"),
 		ayuda("//a[@class[contains(.,'_pedidos')]]"),
 		bolsa("//div[@class[contains(.,'shoppingCart')]]");
 		
 		private String xpath;
-		private ElementOutlet(String xpath) {
+		private LinkCabeceraOutletDesktop(String xpath) {
 			this.xpath = xpath;
 		}
 		
@@ -54,20 +55,20 @@ public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
     }
     
     @Override
-    public boolean isVisibleIconoBolsa() {
-    	return (isVisibleElement(ElementOutlet.bolsa));
+    public boolean isInStateIconoBolsa(StateElem state) {
+    	return (isElementInState(LinkCabeceraOutletDesktop.bolsa, state));
     }
 
     
     @Override
     public void clickIconoBolsa() throws Exception {
-    	clickElement(ElementOutlet.bolsa);
+    	clickElement(LinkCabeceraOutletDesktop.bolsa);
     }
 
     
     @Override
     public void clickIconoBolsaWhenDisp(int maxSecondsWait) throws Exception {
-    	boolean isIconoClickable = isElementInStateUntil(ElementOutlet.bolsa, StateElem.Clickable, maxSecondsWait, driver);
+    	boolean isIconoClickable = isElementInStateUntil(LinkCabeceraOutletDesktop.bolsa, StateElem.Clickable, maxSecondsWait, driver);
         if (isIconoClickable) {
         	clickIconoBolsa();
         }
@@ -75,18 +76,22 @@ public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
     
     @Override
     public void hoverIconoBolsa() {
-    	hoverElement(ElementOutlet.bolsa);
+    	hoverElement(LinkCabeceraOutletDesktop.bolsa);
     }
     
-    public boolean isVisibleElement(ElementOutlet element) {
-    	return (isElementInState(element, StateElem.Visible, driver));
+    public boolean isElementInState(LinkCabeceraOutletDesktop element, StateElem state) {
+    	return (isElementInState(element, state, driver));
     }
     
-    public void clickElement(ElementOutlet element) throws Exception {
+    public boolean isElementInStateUntil(LinkCabeceraOutletDesktop element, StateElem state, int maxSecondsWait) {
+    	return (isElementInStateUntil(element, state, maxSecondsWait, driver));
+    }
+    
+    public void clickElement(LinkCabeceraOutletDesktop element) throws Exception {
     	clickAndWait(element, driver);
     }
     
-    public void hoverElement(ElementOutlet element) {
+    public void hoverElement(LinkCabeceraOutletDesktop element) {
         By elementBy = By.xpath(element.getXPath());
         moveToElement(elementBy, driver);
     }

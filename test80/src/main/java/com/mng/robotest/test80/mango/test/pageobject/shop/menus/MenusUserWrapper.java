@@ -11,18 +11,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPage;
 import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop.IconoShop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusUserDesktop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenusUserMobil;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletDesktop.LinkCabeceraOutletDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop.IconoCabeceraShop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenusUserMobil.MenuUserMobil;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.shop;
 import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.outlet;
 import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.votf;
-
 
 public class MenusUserWrapper {
 
@@ -30,8 +32,7 @@ public class MenusUserWrapper {
 	final AppEcom app;
 	final WebDriver driver;
 	final SecCabecera secCabecera;
-	final SecMenusUserDesktop secMenusUserDesktop;
-	final SecMenusUserMobil secMenusUserMobil;
+	final SecMenuLateralMobil secMenuLateralMobil;
 	
 	public enum UserMenu {
 		iniciarSesion(Arrays.asList(shop, outlet)),
@@ -61,12 +62,61 @@ public class MenusUserWrapper {
 		this.app = app;
 		this.driver = driver;
 		this.secCabecera = SecCabecera.getNew(channel, app, driver);
-		this.secMenusUserDesktop = SecMenusUserDesktop.getNew(driver);
-		this.secMenusUserMobil = SecMenusUserMobil.getNew(app, driver);
+		this.secMenuLateralMobil = SecMenuLateralMobil.getNew(app, driver);
 	}
 	
 	public static MenusUserWrapper getNew(Channel channel, AppEcom app, WebDriver driver) {
 		return (new MenusUserWrapper(channel, app, driver));
+	}
+	
+	public boolean isMenuInState(UserMenu menu, StateElem state) throws Exception {
+		return (isMenuInStateUntil(menu, state, 0));
+	}
+	
+	public boolean isMenuInStateUntil(UserMenu menu, StateElem state, int maxSecondsWait) throws Exception {
+		checkAppSupported(app, menu);
+		if (menu==UserMenu.bolsa) {
+			return (secCabecera.isInStateIconoBolsa(state));
+		} else {
+			ElementPage menuElement = getMenu(menu);
+			return (isMenuInStateUntil(menuElement, state, maxSecondsWait));
+		}
+	}
+	
+	public void clickMenuAndWait(UserMenu menu) throws Exception {
+		checkAppSupported(app, menu);
+		if (menu==UserMenu.bolsa) {
+			secCabecera.clickIconoBolsa();
+		} else {
+			ElementPage menuElement = getMenu(menu);
+			clickMenuAndWait(menuElement);
+		}
+	}
+	
+	public boolean clickMenuIfInState(UserMenu menu, StateElem state) throws Exception {
+		if (isMenuInStateUntil(menu, state, 0)) {
+			clickMenuAndWait(menu);
+			return true;
+		}
+		return false;
+	}
+	
+	public void moveToMenu(UserMenu menu) throws Exception {
+		if (menu==UserMenu.bolsa) {
+			secCabecera.hoverIconoBolsa();
+		} else {
+			ElementPage menuElement = getMenu(menu);
+			WebdrvWrapp.moveToElement(menuElement, driver);
+		}
+	}
+	
+	public void moveAndClick(UserMenu menu) throws Exception {
+		moveToMenu(menu);
+		clickMenuAndWait(menu);
+	}
+	
+	public void hoverIconForShowUserMenuDesktopShop() throws Exception {
+		secCabecera.getShop().hoverIconForShowUserMenuDesktop();
 	}
 	
 	private void checkAppSupported(AppEcom app, UserMenu userMenu) {
@@ -74,186 +124,190 @@ public class MenusUserWrapper {
 			throw new IllegalArgumentException("The application " + app + " doesn't include the user menu " + userMenu);
 		}
 	}
-	
-	public boolean isMenuInStateUntil(UserMenu menu, StateElem state, int maxSecondsWait) {
-		checkAppSupported(app, menu);
-		
+
+	private ElementPage getMenu(UserMenu menu) {
 		switch (menu) {
-		case iniciarSesion:
-		case cerrarSesion:
-		case registrate:
-		case miCuenta:
-		case favoritos:
-			return (secCabecera.getShop().isIconoInState(IconoShop.favoritos, state));
-		case bolsa:
-		case misCompras:
-		case pedidos:
-		case mangoLikesYou:
-		case ayuda:
-			
+			case iniciarSesion:
+				return getMenuIniciarSesion();
+			case cerrarSesion:
+				return getMenuCerrarSesion();
+			case registrate:
+				return getMenuRegistrate();
+			case miCuenta:
+				return getMenuMiCuenta();
+			case favoritos:
+				return getMenuFavoritos();
+			case misCompras:
+				return getMenuMisCompras();
+			case pedidos:
+				return getMenuPedidos();
+			case mangoLikesYou:
+				return getMenuMangoLikesYou();
+			case ayuda:
+				return getMenuAyuda();
+			default:
+				return null;
 		}
-		
+	}
+
+	private boolean isMenuInStateUntil(ElementPage menu, StateElem state, int maxSecondsWait) throws Exception {
+		if (menu instanceof IconoCabeceraShop) {
+			return (secCabecera.getShop().isIconoInStateUntil((IconoCabeceraShop)menu, state, maxSecondsWait));
+		}
+		if (menu instanceof LinkCabeceraOutletDesktop) {
+			return (secCabecera.getOutletDesktop().isElementInStateUntil((LinkCabeceraOutletDesktop) menu, state, maxSecondsWait));
+		}
+		if (menu instanceof MenuUserDesktop) {
+			return (secCabecera.getShop().getModalUserSesionDesktop().isMenuInStateUntil((MenuUserDesktop)menu, state, maxSecondsWait));
+		}
+		if (menu instanceof MenuUserMobil) {
+			return (secMenuLateralMobil.getUserMenu().isMenuInStateUntil((MenuUserMobil)menu, state, maxSecondsWait));
+		}
 		return false;
 	}
 	
-	public void clickMenuAndWait(UserMenu menu) throws Exception {
-		checkAppSupported(app, menu);
-		
-		switch (menu) {
-		case iniciarSesion:
-		case cerrarSesion:
-		case registrate:
-		case miCuenta:
-		case favoritos:
-			secCabecera.getShop().clickIconoAndWait(IconoShop.favoritos);
-		case bolsa:
-		case misCompras:
-		case pedidos:
-		case mangoLikesYou:
-		case ayuda:
-			
+	private void clickMenuAndWait(ElementPage menu) throws Exception {
+		if (menu instanceof IconoCabeceraShop) {
+			secCabecera.getShop().clickIconoAndWait((IconoCabeceraShop)menu);
+		}
+		if (menu instanceof LinkCabeceraOutletDesktop) {
+			secCabecera.getOutletDesktop().clickElement((LinkCabeceraOutletDesktop)menu);
+		}
+		if (menu instanceof MenuUserDesktop) {
+			secCabecera.getShop().hoverIconForShowUserMenuDesktop();
+			secCabecera.getShop().getModalUserSesionDesktop().wait1sForItAndclickMenu((MenuUserDesktop)menu);
+		}
+		if (menu instanceof MenuUserMobil) {
+			secMenuLateralMobil.getUserMenu().clickMenu((MenuUserMobil)menu);
 		}
 	}
 	
-	public boolean isPresentIniciarSesionUntil(int maxSecondsToWait) {
-		switch (channel) {
-		case desktop:
-			return (secMenusUserDesktop.isPresentIniciarSesionUntil(maxSecondsToWait));
-		case movil_web:
-		default:
-			return (secMenusUserMobil.isPresentIniciarSesionUntil(maxSecondsToWait));
+	private ElementPage getMenuIniciarSesion() {
+		if (app==AppEcom.shop || app==AppEcom.votf) {
+			return IconoCabeceraShop.iniciarsesion;
 		}
-	}
-	
-	public void MoveAndclickIniciarSesion() throws Exception {
-		switch (channel) {
-		case desktop:
-			secMenusUserDesktop.MoveAndclickIniciarSesion();
-		break;
-		case movil_web:
-			secMenusUserMobil.MoveAndclickIniciarSesion();
-		}		
-	}
-
-
-	public boolean isPresentCerrarSesion() {
-		switch (channel) {
-		case desktop:
-			return (secMenusUserDesktop.isPresentCerrarSesion());
-		case movil_web:
-		default:
-			return (secMenusUserMobil.isPresentCerrarSesion());
-		}		
-	}
-	
-	public boolean clickCerrarSessionIfLinkExists() throws Exception {
-		switch (channel) {
-		case desktop:
-			return (secMenusUserDesktop.clickCerrarSessionIfLinkExists());
-		case movil_web:
-		default:
-			return (secMenusUserMobil.clickCerrarSessionIfLinkExists());
-		}		
-	}
-	
-	public void clickCerrarSesion() throws Exception {
-		switch (channel) {
-		case desktop:
-			secMenusUserDesktop.clickCerrarSesion();
-		break;
-		case movil_web:
-			secMenusUserMobil.clickCerrarSesion();
+		if (app==AppEcom.outlet) {
+			if (channel==Channel.desktop) {
+				return LinkCabeceraOutletDesktop.iniciarsesion;
+			}
+			if (channel==Channel.movil_web) {
+				return MenuUserMobil.iniciarsesion;
+			}
 		}
-	}	
-
-	
-	public boolean isPresentMiCuentaUntil(int maxSecondsToWait) {
-		switch (channel) {
-		case desktop:
-			return (secMenusUserDesktop.isPresentMiCuentaUntil(maxSecondsToWait));
-		case movil_web:
-		default:
-			return (secMenusUserMobil.isPresentMiCuentaUntil(maxSecondsToWait));
-		}		
+		return null;
 	}
 	
-	public void clickMiCuenta() throws Exception {
-		switch (channel) {
-		case desktop:
-			secMenusUserDesktop.clickMiCuenta();
-		break;
-		case movil_web:
-			secMenusUserMobil.clickMiCuenta();
+	private ElementPage getMenuCerrarSesion() {
+		if (channel==Channel.desktop) {
+			if (app==AppEcom.shop || app==AppEcom.votf) {
+				return MenuUserDesktop.cerrarSesion;
+			}
+			if (app==AppEcom.outlet) {
+				return LinkCabeceraOutletDesktop.cerrarsesion;
+			}
 		}
+		if (channel==Channel.movil_web) {
+			return MenuUserMobil.cerrarsesion;
+		}
+		return null;
 	}
 	
-	public boolean isPresentPedidos() {
-		switch (channel) {
-		case desktop:
-			return (secMenusUserDesktop.isPresentPedidos());
-		case movil_web:
-		default:
-			return (secMenusUserMobil.isPresentPedidos());
-		}		
-	}	
-	
-	public boolean isPresentMisCompras() {
-		switch (channel) {
-		case desktop:
-			return (secMenusUserDesktop.isPresentMisCompras());
-		case movil_web:
-		default:
-			return (secMenusUserMobil.isPresentMisCompras());
-		}		
-	}	
-	
-	public boolean isPresentAyuda() {
-		switch (channel) {
-		case desktop:
-			return (secMenusUserDesktop.isPresentAyuda());
-		case movil_web:
-		default:
-			return (secMenusUserMobil.isPresentAyuda());
-		}		
-	}	
-	
-	public void clickRegistrate() throws Exception {
-		switch (channel) {
-		case desktop:
-			secMenusUserDesktop.clickRegistrate();
-		break;
-		case movil_web:
-			secMenusUserMobil.clickRegistrate();
+	private ElementPage getMenuRegistrate() {
+		if (channel==Channel.desktop) {
+			if (app==AppEcom.shop || app==AppEcom.votf) {
+				return MenuUserDesktop.registrate;
+			}
+			if (app==AppEcom.outlet) {
+				return LinkCabeceraOutletDesktop.registrate;
+			}
 		}
-	}	
-	
-	public boolean isPresentMangoLikesYou() {
-		switch (channel) {
-		case movil_web:
-			return (secMenusUserMobil.isPresentMangoLikesYou());
-		case desktop:
-		default:
-			return (secMenusUserDesktop.isPresentMangoLikesYou());
+		if (channel==Channel.movil_web) {
+			return MenuUserMobil.registrate;
 		}
+		return null;
 	}
-
-    public void clickMangoLikesYou() throws Exception {
-    	switch (channel) {
-    	case movil_web:
-    		secMenusUserMobil.clickMangoLikesYou();
-	    	break;
-    	case desktop:
-    		secMenusUserDesktop.clickMangoLikesYou();
-	        break;
-    	}
-    }
-    
+	
+	private ElementPage getMenuMiCuenta() {
+		if (app==AppEcom.shop || app==AppEcom.votf) {
+			return IconoCabeceraShop.micuenta;
+		}
+		if (app==AppEcom.outlet) {
+			if (channel==Channel.desktop) {
+				return LinkCabeceraOutletDesktop.micuenta;
+			}
+			if (channel==Channel.movil_web) {
+				return MenuUserMobil.micuenta;
+			}
+		}
+		return null;
+	}
+	
+	private ElementPage getMenuFavoritos() {
+		if (app==AppEcom.shop || app==AppEcom.votf) {
+			return IconoCabeceraShop.favoritos;
+		}
+		return null;
+	}
+	
+	private ElementPage getMenuMisCompras() {
+		if (app==AppEcom.shop || app==AppEcom.votf) {
+			if (channel==Channel.desktop) {
+				return MenuUserDesktop.misCompras;
+			}
+			if (channel==Channel.movil_web) {
+				return MenuUserMobil.miscompras;
+			}
+		}
+		return null;
+	}
+	
+	private ElementPage getMenuPedidos() {
+		if (app==AppEcom.outlet) {
+			if (channel==Channel.desktop) {
+				return LinkCabeceraOutletDesktop.pedidos;
+			}
+			if (channel==Channel.movil_web) {
+				return MenuUserMobil.pedidos;
+			}
+		}
+		return null;
+	}
+	
+	private ElementPage getMenuMangoLikesYou() {
+		if (app==AppEcom.shop || app==AppEcom.votf) {
+			if (channel==Channel.desktop) {
+				return MenuUserDesktop.mangoLikesYou;
+			}
+			if (channel==Channel.movil_web) {
+				return MenuUserMobil.mangolikesyou;
+			}
+		}
+		return null;
+	}
+	
+	private ElementPage getMenuAyuda() {
+		if (channel==Channel.desktop) {
+			if (app==AppEcom.shop || app==AppEcom.votf) {
+				return MenuUserDesktop.ayuda;
+			}
+			if (app==AppEcom.outlet) {
+				return LinkCabeceraOutletDesktop.ayuda;
+			}
+		}
+		if (channel==Channel.movil_web) {
+			if (app==AppEcom.shop || app==AppEcom.votf) {
+				return MenuUserMobil.ayuda;
+			}
+		}
+		return null;
+	}
+	
 	public LoyaltyData checkAndGetLoyaltyPointsUntil(int maxSecondsWait) throws Exception {
     	//TODO Workarround for manage shadow-dom Elements. Remove when WebDriver supports shadow-dom
 		LoyaltyData loyaltyData = new LoyaltyData(false, 0);
 		By byLoyaltyUserMenu = By.tagName("loyalty-user-menu");
 		for (int i=0; i<maxSecondsWait; i++) {
-			if (WebdrvWrapp.isElementVisible(driver, byLoyaltyUserMenu)) {
+			if (WebdrvWrapp.isElementPresent(driver, byLoyaltyUserMenu)) {
 		    	WebElement shadowHost = driver.findElement(byLoyaltyUserMenu);
 		    	if (shadowHost!=null) {
 			    	Object shadowLoyaltyPoints = ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot", shadowHost);
@@ -294,9 +348,5 @@ public class MenusUserWrapper {
 			this.isPresent = isPresent;
 			this.numberPoints = numberPoints;
 		}
-	}
-	
-	public void hoverLinkForShowMenuDesktop() {
-		secMenusUserDesktop.hoverLinkForShowMenu();
 	}
 }

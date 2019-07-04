@@ -1,5 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 
+import java.util.EnumSet;
+
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.State;
@@ -9,6 +11,7 @@ import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
@@ -16,10 +19,12 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.TypeContentMobil;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
+import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBannersScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil.TypeLocator;
@@ -50,8 +55,27 @@ public class SecMenuLateralMobilStpV {
         saveNettraffic=SaveWhen.Always)
     public void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
     	secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, dCtxSh.pais);
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-        secMenusStpV.validaSelecMenu(menu1rstLevel, dCtxSh);
+        validaSelecMenu(menu1rstLevel, dCtxSh);
+    }
+    
+	public void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh) throws Exception {
+		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		pageGaleriaStpV.validateGaleriaAfeterSelectMenu(dCtxSh);
+       
+        //Validaciones estándar. 
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = true;
+        flagsVal.validaJS = true;
+        flagsVal.validaImgBroken = false;
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+        
+        //Por defecto aplicaremos todas las avalidaciones (Google Analytics, Criteo, NetTraffic y DataLayer)
+        EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(Constantes.AnalyticsVal.GoogleAnalytics,
+                                                                  Constantes.AnalyticsVal.NetTraffic, 
+                                                                  Constantes.AnalyticsVal.Criteo,
+                                                                  Constantes.AnalyticsVal.DataLayer);
+        
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, menu.getLinea(), analyticSet, driver);
     }
     
     /**

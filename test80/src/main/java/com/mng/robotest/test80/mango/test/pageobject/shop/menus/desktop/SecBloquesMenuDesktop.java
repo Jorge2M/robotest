@@ -19,7 +19,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.blo
 public class SecBloquesMenuDesktop extends WebdrvWrapp {
 	
 	private final WebDriver driver;
-	private final SecMenusWrap secMenusWrap;
+	private final AppEcom app;
 	private final SecLineasMenuDesktop secLineasMenu;
 	
 	public enum TypeMenuDesktop {Link, Banner}
@@ -37,7 +37,7 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
     
     private SecBloquesMenuDesktop(AppEcom app, WebDriver driver) {
     	this.driver = driver;
-    	this.secMenusWrap = SecMenusWrap.getNew(Channel.desktop, app, driver);
+    	this.app = app;
     	this.secLineasMenu = SecLineasMenuDesktop.getNew(app, driver);
     }
     
@@ -46,7 +46,7 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
     }
     
     public String getXPathCapaMenusLinea(LineaType lineaId) {
-    	String idLineaDom = secMenusWrap.getIdLineaEnDOM(lineaId);
+    	String idLineaDom = SecMenusWrap.getIdLineaEnDOM(Channel.desktop, app, lineaId);
     	if (lineaId==LineaType.nuevo) {
     		idLineaDom = "sections_nuevo";
     	}

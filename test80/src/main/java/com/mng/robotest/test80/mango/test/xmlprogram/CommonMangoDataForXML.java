@@ -42,6 +42,7 @@ public class CommonMangoDataForXML {
         if (params.getUrlManto()!=null) {
             parametersSuite.put(Constantes.paramUrlmanto, params.getUrlManto());
         } else {
+        	//parametersSuite.put(Constantes.paramUrlmanto, "https://ogiol-zfs-manto.dev.mango.com");
             parametersSuite.put(Constantes.paramUrlmanto, "http://manto.pre.mango.com");
         }
         

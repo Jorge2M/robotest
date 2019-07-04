@@ -1,6 +1,5 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 
-import java.util.EnumSet;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,7 +14,6 @@ import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import static com.mng.robotest.test80.arq.utils.otras.Constantes.PrefixRebajas;
 
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -24,14 +22,12 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
-import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticle;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusFiltroCollection;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
@@ -197,56 +193,6 @@ public class SecMenusWrapperStpV {
         } else {
         	secMenusDesktopStpV.selectMenuLateral1rstLevelTypeCatalog(menu1rstLevel, dCtxSh);        
         }
-    }
-    
-    /**
-     * Validación de la selección de un menú lateral de 1er o 2o nivel 
-     */
-	public void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh) throws Exception {
-		validateGaleriaAfeterSelectMenu(dCtxSh);
-        if (dCtxSh.channel==Channel.desktop) {
-            secMenusDesktopStpV.validationsSelecMenuEspecificDesktop(menu);
-        }
-       
-        //Validaciones estándar. 
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
-        
-        //Por defecto aplicaremos todas las avalidaciones (Google Analytics, Criteo, NetTraffic y DataLayer)
-        EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(Constantes.AnalyticsVal.GoogleAnalytics,
-                                                                  Constantes.AnalyticsVal.NetTraffic, 
-                                                                  Constantes.AnalyticsVal.Criteo,
-                                                                  Constantes.AnalyticsVal.DataLayer);
-        
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, menu.getLinea(), analyticSet, driver);
-    }
-    
-	@Validation
-    public ChecksResult validateGaleriaAfeterSelectMenu(DataCtxShop dCtxSh) throws Exception {
-		ChecksResult validations = ChecksResult.getNew();
-		PageGaleria pageGaleria = PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-		int maxSecondsToWaitArticle = 3;
-		int maxSecondsToWaitIcon = 2;
-		validations.add (
-			"Como mínimo se obtiene un artículo (lo esperamos hasta " + maxSecondsToWaitArticle + " segundos)",
-			pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, maxSecondsToWaitArticle), State.Warn);
-		if (dCtxSh.appE==AppEcom.shop) {
-			validations.add (
-				"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + maxSecondsToWaitIcon + " segundos)",
-				pageGaleria.isArticleWithHearthIconPresentUntil(1, maxSecondsToWaitIcon), State.Defect);
-			validations.add (
-				"Cada artículo tiene 1 icono de favoritos asociado",
-				pageGaleria.eachArticlesHasOneFavoriteIcon(), State.Info, true);
-		} else {
-			validations.add (
-				"No aparece ningún icono de favoritos asociado a ningún artículo",
-				pageGaleria.getNumFavoritoIcons() == 0, State.Defect);
-		}
-		
-		return validations;
     }
     
     public DatosStep seleccionLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh) throws Exception {

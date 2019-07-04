@@ -7,6 +7,7 @@ import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
@@ -65,25 +66,25 @@ public class SecMenusUserStpV {
         expected="Aparece al página inicial del registro",
         saveHtmlPage=SaveWhen.Always)
     public void selectRegistrate(DataCtxShop dCtxSh) throws Exception {
-		userMenus.clickRegistrate();    
+		userMenus.clickMenuAndWait(UserMenu.registrate);    
         int maxSecondsWait = 5;
         PageRegistroIniStpV.validaIsPageUntil(maxSecondsWait, driver);
         PageRegistroIniStpV.validaIsRGPDVisible(dCtxSh, driver);
     }
     
 	@Step (
-		description="Clicar el link de Logoff para cerrar la sesión", 
+		description="Clicar el link de Cerrar Sesión", 
         expected="Aparece el link de login")
     public void logoff() throws Exception {
-		userMenus.clickCerrarSesion();
+		userMenus.clickMenuAndWait(UserMenu.cerrarSesion);
         checkIsVisibleIniciarSesionLink(3);
     }
 	
 	@Validation (
 		description="Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta #{maxSecondsWait} segundos)",
 		level=State.Defect)
-	private boolean checkIsVisibleIniciarSesionLink(int maxSecondsWait) {
-        return (userMenus.isPresentIniciarSesionUntil(maxSecondsWait));
+	private boolean checkIsVisibleIniciarSesionLink(int maxSecondsWait) throws Exception {
+        return (userMenus.isMenuInStateUntil(UserMenu.iniciarSesion, StateElem.Present, maxSecondsWait));
 	}
 	
 	public void logoffLogin(String userConnect, String userPassword) throws Exception {
@@ -108,15 +109,18 @@ public class SecMenusUserStpV {
 	@Validation (
 		description="Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)",
 		level=State.Defect)
-	private boolean checkIsVisibleLinkCerrarSesion() {	
-	    return (userMenus.isPresentCerrarSesion());
+	public boolean checkIsVisibleLinkCerrarSesion() throws Exception {	
+		if (channel==Channel.desktop && app==AppEcom.shop) {
+			userMenus.hoverIconForShowUserMenuDesktopShop();
+		}
+	    return (userMenus.isMenuInState(UserMenu.cerrarSesion, StateElem.Present));
 	}
 
     @Step (
     	description="Seleccionar el link \"Mi cuenta\"", 
         expected="Aparece la página de \"Mi cuenta\"")
 	public void clickMenuMiCuenta() throws Exception {
-        userMenus.clickMiCuenta();	
+        userMenus.clickMenuAndWait(UserMenu.miCuenta);	
         PageMiCuentaStpV.validateIsPage(2, driver);
 	}
     
@@ -133,15 +137,18 @@ public class SecMenusUserStpV {
     	description="Seleccionar el link \"Mango Likes You\"", 
         expected="Aparece la página de \"Mi cuenta\"")
 	public void clickMenuMangoLikesYou() throws Exception {
-    	userMenus.clickMangoLikesYou();
+    	userMenus.clickMenuAndWait(UserMenu.mangoLikesYou);
     	PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(driver);
     	pageHomeLikesStpV.checkIsPageOk();
 	}
     
 	@Validation
-	public ChecksResult checkVisibilityLinkMangoLikesYou() {	
+	public ChecksResult checkVisibilityLinkMangoLikesYou() throws Exception {	
 		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
-		boolean visibilityMLY = userMenus.isPresentMangoLikesYou();
+		if (channel==Channel.desktop) {
+			userMenus.hoverIconForShowUserMenuDesktopShop();
+		}
+		boolean visibilityMLY = userMenus.isMenuInStateUntil(UserMenu.mangoLikesYou, StateElem.Present, 1);
 		switch (app) {
 		case shop:
 			checks.add(
@@ -160,6 +167,9 @@ public class SecMenusUserStpV {
 	@Validation
 	public ChecksResultWithNumberPoints checkAngGetLoyaltyPoints(int maxSecondsWait) throws Exception {
 		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
+		if (channel==Channel.desktop) {
+			userMenus.hoverIconForShowUserMenuDesktopShop();
+		}
 		LoyaltyData loyaltyData = userMenus.checkAndGetLoyaltyPointsUntil(maxSecondsWait);
 		checks.setNumberPoints(loyaltyData.numberPoints);
 	 	checks.add(
@@ -184,8 +194,8 @@ public class SecMenusUserStpV {
 	
 	@Step (
 		description="Hover sobre el link <b>Iniciar Sesión</b> o <b>Mi cuenta</b> para mostrar el menú de usuario")
-	public void hoverLinkForShowUserMenuDesktop() {
-		userMenus.hoverLinkForShowMenuDesktop();
+	public void hoverLinkForShowUserMenuDesktop() throws Exception {
+		userMenus.hoverIconForShowUserMenuDesktopShop();
 	}
 	
     public static class ChecksResultWithNumberPoints extends ChecksResult {

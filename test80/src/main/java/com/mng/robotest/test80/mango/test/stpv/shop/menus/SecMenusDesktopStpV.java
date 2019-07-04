@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
@@ -15,6 +16,7 @@ import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
@@ -64,14 +66,12 @@ public class SecMenusDesktopStpV {
     private final AppEcom app;
     private final WebDriver driver;
     private final SecMenusDesktop secMenus;
-    private final SecMenusWrapperStpV secMenusWrappStpV;
     
     private SecMenusDesktopStpV(Pais pais, AppEcom app, WebDriver driver) {
     	this.pais = pais;
     	this.app = app;
     	this.driver = driver;
     	this.secMenus = SecMenusDesktop.getNew(app, driver);
-    	this.secMenusWrappStpV = SecMenusWrapperStpV.getNew(Channel.desktop, app, pais, driver);
     }
     
     public static SecMenusDesktopStpV getNew(Pais pais, AppEcom app, WebDriver driver) {
@@ -86,11 +86,8 @@ public class SecMenusDesktopStpV {
         expected="Aparece la galería asociada al menú",
         saveNettraffic=SaveWhen.Always)
     public void selectMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
-    	secMenus
-        	.secMenuSuperior
-        	.secBlockMenus.clickMenuAndGetName(menu1rstLevel);
-        
-    	secMenusWrappStpV.validaSelecMenu(menu1rstLevel, dCtxSh);
+    	secMenus.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel);
+    	validaSelecMenu(menu1rstLevel, dCtxSh);
     }
     
     @Step (
@@ -99,7 +96,7 @@ public class SecMenusDesktopStpV {
         saveNettraffic=SaveWhen.Always)
     public void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
     	secMenus.secMenuLateral.clickMenu(menu1rstLevel);         
-    	secMenusWrappStpV.validaSelecMenu(menu1rstLevel, dCtxSh);
+    	validaSelecMenu(menu1rstLevel, dCtxSh);
     }
     
     @Step (
@@ -108,7 +105,31 @@ public class SecMenusDesktopStpV {
         saveNettraffic=SaveWhen.Always)
     public void selectMenuLateral2oLevel(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh) throws Exception {
     	secMenus.secMenuLateral.clickMenu(menu2onLevel);       
-    	secMenusWrappStpV.validaSelecMenu(menu2onLevel, dCtxSh);
+    	validaSelecMenu(menu2onLevel, dCtxSh);
+    }
+    
+    /**
+     * Validación de la selección de un menú lateral de 1er o 2o nivel 
+     */
+	public void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh) throws Exception {
+		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		pageGaleriaStpV.validateGaleriaAfeterSelectMenu(dCtxSh);
+        validationsSelecMenuEspecificDesktop(menu);
+       
+        //Validaciones estándar. 
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = true;
+        flagsVal.validaJS = true;
+        flagsVal.validaImgBroken = false;
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+        
+        //Por defecto aplicaremos todas las avalidaciones (Google Analytics, Criteo, NetTraffic y DataLayer)
+        EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(Constantes.AnalyticsVal.GoogleAnalytics,
+                                                                  Constantes.AnalyticsVal.NetTraffic, 
+                                                                  Constantes.AnalyticsVal.Criteo,
+                                                                  Constantes.AnalyticsVal.DataLayer);
+        
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, menu.getLinea(), analyticSet, driver);
     }
     
     @Validation (

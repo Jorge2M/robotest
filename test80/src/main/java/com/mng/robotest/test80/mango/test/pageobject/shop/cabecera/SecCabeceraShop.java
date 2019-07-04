@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.webdriverwrapper.ElementPage;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop;
 
 /**
  * Cabecera Shop compatible con desktop y movil_web
@@ -13,28 +14,22 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
  */
 public class SecCabeceraShop extends SecCabecera {
 	
-	protected SecCabeceraShop(Channel channel, AppEcom app, WebDriver driver) {
-		super(channel, app, driver);
-	}
+	private final ModalUserSesionShopDesktop modalUserSesionShopDesktop;
 	
-	public static SecCabeceraShop getNew(Channel channel, AppEcom app, WebDriver driver) {
-		return (new SecCabeceraShop(channel, app, driver));
-	}
-	
-	private final static String XPathLinkLogoMango = "//a[@class='logo-link']";
+	private final static String XPathLinkLogoMango = "//a[@class='logo-link' or @class[contains(.,'logo_')]]";
     private final static String XPathDivNavTools = "//div[@id='navTools']";
     private final static String XPathNumArticlesBolsa = "//span[@class='icon-button-items']";
 	
-    public enum IconoShop implements ElementPage {
+    public enum IconoCabeceraShop implements ElementPage {
     	buscar("//span[@class[contains(.,'-search')]]"),
-		iniciarsesion("//self::*[@id='login_any']/span[@class[contains(.,'-account')]]"),
-    	micuenta("//self::*[@id='login']/span[@class[contains(.,'-account')]]"),
-		favoritos("//span[@class[contains(.,'-favorites')]]"),
-		bolsa("//span[@class[contains(.,'-bag')]]");
+		iniciarsesion("//self::*[@id='login_any']/span[@class[contains(.,'-account')]]/.."),
+    	micuenta("//self::*[@id='login']/span[@class[contains(.,'-account')]]/.."),
+		favoritos("//span[@class[contains(.,'-favorites')]]/.."),
+		bolsa("//span[@class[contains(.,'-bag')]]/..");
 
 		private String xPath;
-		final static String XPathIcon = "//div[@class='user-icon-button']";
-		IconoShop(String xPath) {
+		final static String XPathIcon = "//div[@class[contains(.,'user-icon-button')]]";
+		IconoCabeceraShop(String xPath) {
 			this.xPath = XPathIcon + xPath;
 		}
 
@@ -43,6 +38,19 @@ public class SecCabeceraShop extends SecCabecera {
 		}
 	}
     
+	protected SecCabeceraShop(Channel channel, AppEcom app, WebDriver driver) {
+		super(channel, app, driver);
+		this.modalUserSesionShopDesktop = ModalUserSesionShopDesktop.getNew(driver);
+	}
+	
+	public static SecCabeceraShop getNew(Channel channel, AppEcom app, WebDriver driver) {
+		return (new SecCabeceraShop(channel, app, driver));
+	}
+	
+	public ModalUserSesionShopDesktop getModalUserSesionDesktop() {
+		return modalUserSesionShopDesktop;
+	}
+
     @Override
     String getXPathLogoMango() {
     	return XPathLinkLogoMango;
@@ -55,42 +63,55 @@ public class SecCabeceraShop extends SecCabecera {
     
     @Override
     public void hoverIconoBolsa() {
-    	hoverIcono(IconoShop.bolsa);
+    	hoverIcono(IconoCabeceraShop.bolsa);
     }
     
     @Override
-    public boolean isVisibleIconoBolsa() {
-    	return (isIconoInState(IconoShop.bolsa, StateElem.Visible));
+    public boolean isInStateIconoBolsa(StateElem state) {
+    	return (isIconoInState(IconoCabeceraShop.bolsa, state));
     }
     
     @Override
     public void clickIconoBolsa() throws Exception {
-    	clickIconoAndWait(IconoShop.bolsa);
+    	clickIconoAndWait(IconoCabeceraShop.bolsa);
     }
 
     @Override
     public void clickIconoBolsaWhenDisp(int maxSecondsWait) throws Exception {
-    	boolean isIconoClickable = isElementInStateUntil(IconoShop.bolsa, StateElem.Clickable, maxSecondsWait, driver);
+    	boolean isIconoClickable = isElementInStateUntil(IconoCabeceraShop.bolsa, StateElem.Clickable, maxSecondsWait, driver);
         if (isIconoClickable) {
-        	clickIconoBolsa();
+        	clickIconoBolsa(); 
         }
     }
 
-    public void clickIconoAndWait(IconoShop icono) throws Exception {
+    public void clickIconoAndWait(IconoCabeceraShop icono) throws Exception {
     	clickAndWait(icono, driver);
     }
     
-    public boolean isIconoInState(IconoShop icono, StateElem state) {
+    public boolean isIconoInState(IconoCabeceraShop icono, StateElem state) {
     	return (isElementInState(icono, state, driver));
     }
     
-    public void hoverIcono(IconoShop icono) {
-        By iconoBy = By.xpath(icono.getXPath());
-        moveToElement(iconoBy, driver);
+    public boolean isIconoInStateUntil(IconoCabeceraShop icono, StateElem state, int maxSecondsWait) {
+    	return (isElementInStateUntil(icono, state, maxSecondsWait, driver));
+    }
+    
+    public void hoverIcono(IconoCabeceraShop icono) {
+        moveToElement(icono, driver);
     }
     
     public void focusAwayBolsa(WebDriver driver) {
     	//The moveElement doens't works properly for hide the Bolsa-Modal
     	driver.findElement(By.xpath(XPathDivNavTools)).click();
     }
+    
+	public void hoverIconForShowUserMenuDesktop() throws Exception {
+		if (!modalUserSesionShopDesktop.isVisible()) { 
+			if (isIconoInState(IconoCabeceraShop.iniciarsesion, StateElem.Visible)) {
+				hoverIcono(IconoCabeceraShop.iniciarsesion);
+			} else {
+				hoverIcono(IconoCabeceraShop.micuenta);
+			}
+		}
+	}
 }

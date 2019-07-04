@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
@@ -34,7 +35,7 @@ public class SecCabeceraStpV {
 	@Validation
     public ChecksResult validateIconoBolsa() {
 		ChecksResult validations = ChecksResult.getNew();
-		boolean isVisibleIconoBolsa = secCabecera.isVisibleIconoBolsa();
+		boolean isVisibleIconoBolsa = secCabecera.isInStateIconoBolsa(StateElem.Visible);
 		if ("true".compareTo(pais.getShop_online())==0) {
 	    	validations.add(
     			"<b>Sí</b> es posible comprar (aparece la capa relacionada con la bolsa)",

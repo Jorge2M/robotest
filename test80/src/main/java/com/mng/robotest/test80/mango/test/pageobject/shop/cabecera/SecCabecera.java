@@ -19,10 +19,11 @@ public abstract class SecCabecera extends WebdrvWrapp {
 	protected final Channel channel;
 	protected final AppEcom app;
 	protected final SecSearch secSearch;
+
 	
 	abstract String getXPathLogoMango();
 	abstract String getXPathNumberArtIcono();
-	public abstract boolean isVisibleIconoBolsa();
+	public abstract boolean isInStateIconoBolsa(StateElem state);
 	public abstract void clickIconoBolsa() throws Exception;
 	public abstract void clickIconoBolsaWhenDisp(int maxSecondsToWait) throws Exception;
 	public abstract void hoverIconoBolsa();
@@ -32,6 +33,7 @@ public abstract class SecCabecera extends WebdrvWrapp {
 		this.app = app;
 		this.driver = driver;
 		this.secSearch = SecSearch.getNew(channel, app, driver);
+
 	}
 	
 	public static SecCabecera getNew(Channel channel, AppEcom app, WebDriver driver) {

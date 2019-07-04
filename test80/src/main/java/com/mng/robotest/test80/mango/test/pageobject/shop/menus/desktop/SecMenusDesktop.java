@@ -10,7 +10,7 @@ public class SecMenusDesktop {
 	
 	public final SecBloquesMenuDesktop secBloquesMenu;
 	public final SecMenuSuperiorDesktop secMenuSuperior;
-    public final SecMenusUserDesktop secMenusUser;
+    public final ModalUserSesionShopDesktop secMenusUser;
     public final SecMenuLateralDesktop secMenuLateral;
     //public final SecMenusFiltroCollection secMenusFitroCollection;
     public final SecMenusFiltroDiscount secMenusFiltroDiscount;
@@ -18,7 +18,7 @@ public class SecMenusDesktop {
 	private SecMenusDesktop(AppEcom app, WebDriver driver) {
 		secBloquesMenu = SecBloquesMenuDesktop.getNew(app, driver);
 		secMenuSuperior = SecMenuSuperiorDesktop.getNew(app, driver);
-	    secMenusUser = SecMenusUserDesktop.getNew(driver);
+	    secMenusUser = ModalUserSesionShopDesktop.getNew(driver);
 	    secMenuLateral = SecMenuLateralDesktop.getNew(driver);
 	    secMenusFiltroDiscount = SecMenusFiltroDiscount.getNew(driver);
 	}

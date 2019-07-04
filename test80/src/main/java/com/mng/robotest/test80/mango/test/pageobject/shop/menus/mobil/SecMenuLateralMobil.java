@@ -22,6 +22,7 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
 	
 	private final AppEcom app;
 	private final WebDriver driver;
+	private final SecMenusUserMobil secUserMenu;
     
     public enum TypeLocator {dataGaLabelPortion, hrefPortion}
     
@@ -90,16 +91,21 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     private SecMenuLateralMobil(AppEcom app, WebDriver driver) {
     	this.app = app;
     	this.driver = driver;
+    	this.secUserMenu = SecMenusUserMobil.getNew(app, driver);
     }
     
     public static SecMenuLateralMobil getNew(AppEcom app, WebDriver driver) {
     	return (new SecMenuLateralMobil(app, driver));
     }
     
+    public SecMenusUserMobil getUserMenu() {
+    	return secUserMenu;
+    }
+    
     /**
      * @return retornamos el XPATH correspondiente al link de cada una de las líneas (she, he, kids...)
      */
-    public String getXPathLineaLink(LineaType lineaType) {
+    private String getXPathLineaLink(LineaType lineaType) {
         switch (lineaType) {
         case rebajas:
             return XPathLinkLineaRebajas;
@@ -138,12 +144,12 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
         }
     }
     
-    public String getXPathLiLinea(LineaType lineaType) {
+    private String getXPathLiLinea(LineaType lineaType) {
         String xpathLinkLinea = getXPathLineaLink(lineaType);        
         return (xpathLinkLinea + "/..");
     }
     
-    public String getXPathSublineaNinosLink(SublineaNinosType sublineaType) {
+    private String getXPathSublineaNinosLink(SublineaNinosType sublineaType) {
         switch (sublineaType) {
         case nina:
         	return XPathLinkSublineaNina;
@@ -157,17 +163,17 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
         }
     }
     
-    public String getXPathLiSublineaNinos(SublineaNinosType sublineaType) {
+    private String getXPathLiSublineaNinos(SublineaNinosType sublineaType) {
         String xpathLinkSublinea = getXPathSublineaNinosLink(sublineaType);        
         return (xpathLinkSublinea + "/..");
     }
     
-    public String getXPathBlockSublineasNinos(SublineaNinosType sublineaType) {
+    private String getXPathBlockSublineasNinos(SublineaNinosType sublineaType) {
         String xpathSublineaLi = getXPathLiSublineaNinos(sublineaType);        
         return (xpathSublineaLi + "/..");
     }
     
-    public String getXPathSublineaRebajasLink(LineaType lineaType) {
+    private String getXPathSublineaRebajasLink(LineaType lineaType) {
         switch (lineaType) {
         case she:
             return XPathLinkSublineaRebajasMujer;
@@ -184,7 +190,7 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
         }
     }
     
-    public String getXPathBlockMenusSublineaRebajas(LineaType lineaType) {
+    private String getXPathBlockMenusSublineaRebajas(LineaType lineaType) {
         String xpathLinkSublinea = getXPathSublineaRebajasLink(lineaType);        
         return (xpathLinkSublinea + "/..");
     }
@@ -193,7 +199,7 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
         return (getXPathSublineaRebajasLink(lineaType)!=null);
     }    
     
-    public String getXPathCarruselNuevo(LineaType lineaType) {
+    private String getXPathCarruselNuevo(LineaType lineaType) {
         switch (lineaType) {
         case she:
             return XPathCarruselNuevoMujerLink;
@@ -212,7 +218,7 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
         return (getXPathCarruselNuevo(lineaType)!=null);
     }
     
-    public String getXPathLinksMenus(SublineaNinosType sublineaType) {
+    private String getXPathLinksMenus(SublineaNinosType sublineaType) {
         if (sublineaType==null) {
             return XPathCapa2onLevelMenu + XPathLinkMenuVisibleFromLi;
         }
@@ -221,7 +227,7 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
         return divSublineaNinos + "/.." + XPathLinkMenuVisibleFromLi;
     }
     
-    public String getXPathMenuByTypeLocator(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel) {
+    private String getXPathMenuByTypeLocator(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel) {
         String xpath2oLevelMenuLink = getXPathLinksMenus(menu1rstLevel.getSublinea());
         switch (typeLocator) {
         case dataGaLabelPortion:

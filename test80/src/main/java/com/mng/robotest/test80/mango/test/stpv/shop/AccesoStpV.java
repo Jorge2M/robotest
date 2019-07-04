@@ -96,13 +96,13 @@ public class AccesoStpV {
     }
 	
 	@Validation
-	private static ChecksResult checkLinksAfterLogin(DataCtxShop dCtxSh, WebDriver driver) {
+	private static ChecksResult checkLinksAfterLogin(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
         MenusUserWrapper userMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver).getMenusUser();
     	validations.add(
     		"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		userMenus.isPresentMiCuentaUntil(maxSecondsWait), State.Defect);
+    		userMenus.isMenuInStateUntil(UserMenu.miCuenta, StateElem.Present, maxSecondsWait), State.Defect);
 		
 		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(UserMenu.favoritos, StateElem.Present, 0);
 		if (dCtxSh.appE==AppEcom.outlet) { 
@@ -111,30 +111,34 @@ public class AccesoStpV {
 	    		!isVisibleMenuFav, State.Defect);
 	    	validations.add(
 	    		"Aparece el link \"Mis Pedidos\"",
-	    		userMenus.isPresentPedidos(), State.Defect);
+	    		userMenus.isMenuInState(UserMenu.pedidos, StateElem.Present), State.Defect);
 		} else {
 	    	validations.add(
 	    		"Aparece el link \"Favoritos\"",
 	    		isVisibleMenuFav, State.Defect);
 	    	
-	    	boolean isPresentLinkMisCompras = userMenus.isPresentMisCompras();
-	    	if (dCtxSh.pais.isMisCompras()) {
-		    	validations.add(
-		    		"Aparece el link \"Mis Compras\"",
-		    		isPresentLinkMisCompras, State.Defect);
-	    	} else {
-		    	validations.add(
-		    		"No aparece el link \"Mis Compras\"",
-		    		!isPresentLinkMisCompras, State.Defect);
+	    	if (dCtxSh.channel!=Channel.desktop) {
+		    	boolean isPresentLinkMisCompras = userMenus.isMenuInState(UserMenu.misCompras, StateElem.Present);
+		    	if (dCtxSh.pais.isMisCompras()) {
+			    	validations.add(
+			    		"Aparece el link \"Mis Compras\"",
+			    		isPresentLinkMisCompras, State.Defect);
+		    	} else {
+			    	validations.add(
+			    		"No aparece el link \"Mis Compras\"",
+			    		!isPresentLinkMisCompras, State.Defect);
+		    	}
 	    	}
 		}
 		
-    	validations.add(
-    		"Aparece el link \"Ayuda\"",
-    		userMenus.isPresentAyuda(), State.Defect);
-    	validations.add(
-    		"Aparece el link \"Cerrar sesión\"",
-    		userMenus.isPresentCerrarSesion(), State.Defect);
+		if (dCtxSh.channel!=Channel.desktop || dCtxSh.appE!=AppEcom.shop) {
+	    	validations.add(
+	    		"Aparece el link \"Ayuda\"",
+	    		userMenus.isMenuInState(UserMenu.ayuda, StateElem.Visible), State.Defect);
+	    	validations.add(
+	    		"Aparece el link \"Cerrar sesión\"",
+	    		userMenus.isMenuInState(UserMenu.cerrarSesion, StateElem.Present), State.Defect);
+		}
     	
         if (dCtxSh.channel==Channel.desktop) {
         	SecMenusDesktop secMenus = SecMenusDesktop.getNew(dCtxSh.appE, driver);
@@ -167,7 +171,7 @@ public class AccesoStpV {
     
     public static void identificacionEnMango(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
     	MenusUserWrapper userMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver).getMenusUser();
-        if (!userMenus.isPresentCerrarSesion()) {
+        if (!userMenus.isMenuInState(UserMenu.cerrarSesion, StateElem.Present)) {
         	iniciarSesion(dCtxSh, driver);
         }
     }

@@ -80,10 +80,7 @@ public class SecBolsaStpV {
     public static void forceStateBolsaTo(StateBolsa stateBolsaExpected, AppEcom app, Channel channel, WebDriver driver) 
     throws Exception {
     	SecBolsa.setBolsaToStateIfNotYet(stateBolsaExpected, channel, app, driver);
-    
-        //Validaciones
-    	int maxSecondsWait = 1;
-        validateBolsaInState(stateBolsaExpected, maxSecondsWait, channel, driver);
+        validateBolsaInState(stateBolsaExpected, 1, channel, driver);
     }
     
     @Validation (

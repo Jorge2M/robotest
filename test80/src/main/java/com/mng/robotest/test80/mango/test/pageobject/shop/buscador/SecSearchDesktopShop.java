@@ -14,7 +14,7 @@ public class SecSearchDesktopShop extends WebdrvWrapp implements SecSearch {
 	private final WebDriver driver;
 	
     private final static String XPathIconoLupa = "//span[@class[contains(.,'icon-outline-search')]]";
-    private final static String XPathInputBuscador = "//input[@class='search-input']";
+    private final static String XPathInputBuscador = "//input[@class[contains(.,'search-input')]]";
     private final static String XPathCloseAspa = "//span[@class[contains(.,'icon-outline-close')]]";
     
     private SecSearchDesktopShop(WebDriver driver) {
@@ -44,7 +44,7 @@ public class SecSearchDesktopShop extends WebdrvWrapp implements SecSearch {
     
     private void setTextAndReturn(String referencia) throws Exception {
         WebElement input = getElementVisible(driver, By.xpath(XPathInputBuscador));
-        sendKeysWithRetry(5, input, referencia);
+        sendKeysWithRetry(5, input, referencia); 
         input.sendKeys(Keys.RETURN);
         waitForPageLoaded(driver);
     }
