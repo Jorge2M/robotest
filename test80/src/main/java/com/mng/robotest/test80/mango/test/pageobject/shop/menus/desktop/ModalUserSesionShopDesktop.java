@@ -13,7 +13,7 @@ public class ModalUserSesionShopDesktop extends WebdrvWrapp {
     
     public enum MenuUserDesktop implements ElementPage { 
         iniciarSesion (XPathCapaMenus + "//div[@class[contains(.,'login-button')]]"),
-        registrate (XPathCapaMenus + "//div[@class='login-register']"),
+        registrate (XPathCapaMenus + "//span[@class='login-register-link']"),
         miCuenta (XPathCapaMenus + "//div[@class[contains(.,'mi_cuenta')]]"),
         misCompras (XPathCapaMenus + "//div[@class[contains(.,'mis_compras')]]"),     
         mangoLikesYou (XPathCapaMenus + "//div[@class[contains(.,'mango_likes_you')]]"),

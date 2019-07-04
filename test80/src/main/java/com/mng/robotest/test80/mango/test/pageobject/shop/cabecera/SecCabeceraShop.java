@@ -97,6 +97,7 @@ public class SecCabeceraShop extends SecCabecera {
     }
     
     public void hoverIcono(IconoCabeceraShop icono) {
+    	moveToElement(By.xpath(icono.getXPath() + "/*"), driver); //Workaround problema hover en Firefox
         moveToElement(icono, driver);
     }
     
@@ -108,7 +109,7 @@ public class SecCabeceraShop extends SecCabecera {
 	public void hoverIconForShowUserMenuDesktop() throws Exception {
 		if (!modalUserSesionShopDesktop.isVisible()) { 
 			if (isIconoInState(IconoCabeceraShop.iniciarsesion, StateElem.Visible)) {
-				hoverIcono(IconoCabeceraShop.iniciarsesion);
+				hoverIcono(IconoCabeceraShop.iniciarsesion); 
 			} else {
 				hoverIcono(IconoCabeceraShop.micuenta);
 			}
