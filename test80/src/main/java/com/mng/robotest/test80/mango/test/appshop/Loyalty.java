@@ -20,6 +20,7 @@ import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -216,7 +217,7 @@ public class Loyalty extends GestorWebDriver {
     
     private void makeLoyaltyPointsVisible(DataCtxShop dCtxSh, SecMenusUserStpV secMenusUserStpV, WebDriver driver) 
     throws Exception {
-	    if (dCtxSh.channel==Channel.desktop) {
+	    if (dCtxSh.channel==Channel.desktop && dCtxSh.appE==AppEcom.shop) {
 	    	secMenusUserStpV.hoverLinkForShowUserMenuDesktop();
 	    } else {
 	    	boolean setVisible = true;

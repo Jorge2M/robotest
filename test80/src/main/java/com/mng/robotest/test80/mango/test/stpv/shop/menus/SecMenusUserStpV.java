@@ -145,7 +145,7 @@ public class SecMenusUserStpV {
 	@Validation
 	public ChecksResult checkVisibilityLinkMangoLikesYou() throws Exception {	
 		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
-		if (channel==Channel.desktop) {
+		if (channel==Channel.desktop && app==AppEcom.shop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
 		boolean visibilityMLY = userMenus.isMenuInStateUntil(UserMenu.mangoLikesYou, StateElem.Present, 1);

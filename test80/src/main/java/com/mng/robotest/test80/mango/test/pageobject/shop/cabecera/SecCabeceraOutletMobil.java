@@ -15,11 +15,12 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
  */
 public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
 	
-	public enum IconoCab implements ElementPage {
-		bolsa("//a[@class[contains(.,'cartlink')]]");
+	public enum IconoCabOutletMobil implements ElementPage {
+		bolsa("//a[@class[contains(.,'cartlink')]]"),
+		lupa("//div[@class='menu-search-button']");
 		
 		private String xpath;
-		private IconoCab(String xpath) {
+		private IconoCabOutletMobil(String xpath) {
 			this.xpath = xpath;
 		}
 		
@@ -28,7 +29,6 @@ public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
 		}
 	}
 		
-    private final static String XPathLinkLogo = SecCabeceraOutletDesktop.XPathLinkLogo;
 	private final static String XPathNumArticles = "//span[@class[contains(.,'_cartNum')]]";
 
     private SecCabeceraOutletMobil(Channel channel, AppEcom app, WebDriver driver) {
@@ -38,11 +38,6 @@ public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
     public static SecCabeceraOutletMobil getNew(Channel channel, AppEcom app, WebDriver driver) {
     	return (new SecCabeceraOutletMobil(channel, app, driver));
     }
-
-    @Override
-    String getXPathLogoMango() {
-    	return XPathLinkLogo;
-    }
     
     @Override
     String getXPathNumberArtIcono() {
@@ -51,44 +46,48 @@ public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
     
     @Override
     public boolean isInStateIconoBolsa(StateElem state) {
-    	return (isElementInState(IconoCab.bolsa, state, driver));
+    	return (isElementInStateUntil(IconoCabOutletMobil.bolsa, state, 0));
     }
     
     @Override
     public void clickIconoBolsa() throws Exception {
-    	click(IconoCab.bolsa);
+    	click(IconoCabOutletMobil.bolsa);
     }
     
     @Override
     public void clickIconoBolsaWhenDisp(int maxSecondsToWait) throws Exception {
-    	clickIfClickableUntil(IconoCab.bolsa, maxSecondsToWait);
+    	clickIfClickableUntil(IconoCabOutletMobil.bolsa, maxSecondsToWait);
     }
     
     @Override
     public void hoverIconoBolsa() {
-    	hoverIcono(IconoCab.bolsa);
+    	hoverIcono(IconoCabOutletMobil.bolsa);
     }
     
-    public boolean isClickableUntil(IconoCab icono, int maxSeconds) {
+    public boolean isElementInStateUntil(IconoCabOutletMobil icono, StateElem state, int maxSecondsWait) {
+    	return (isElementInStateUntil(icono, state, maxSecondsWait, driver));
+    }
+    
+    public boolean isClickableUntil(IconoCabOutletMobil icono, int maxSeconds) {
     	return (isElementClickableUntil(driver, By.xpath(icono.getXPath()), maxSeconds));
     }
     
-    public void clickIfClickableUntil(IconoCab icono, int maxSecondsToWait) 
+    public void clickIfClickableUntil(IconoCabOutletMobil icono, int maxSecondsToWait) 
     throws Exception {
     	if (isClickableUntil(icono, maxSecondsToWait)) {
     		click(icono);
     	}
     }
     
-    public void click(IconoCab icono) throws Exception {
+    public void click(IconoCabOutletMobil icono) throws Exception {
     	click(icono, app, driver);
     }
     
-    public static void click(IconoCab icono, AppEcom app, WebDriver driver) throws Exception {
+    public static void click(IconoCabOutletMobil icono, AppEcom app, WebDriver driver) throws Exception {
     	clickAndWaitLoad(driver, By.xpath(icono.getXPath()), TypeOfClick.javascript);
     }
     
-    public void hoverIcono(IconoCab icono) {
+    public void hoverIcono(IconoCabOutletMobil icono) {
     	moveToElement(icono, driver);
     }
 }

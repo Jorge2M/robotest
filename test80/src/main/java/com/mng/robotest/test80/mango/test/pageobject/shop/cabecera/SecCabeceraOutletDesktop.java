@@ -15,6 +15,7 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
 	
 	public enum LinkCabeceraOutletDesktop implements ElementPage {
+		lupa("//span[@class='menu-search-icon']"),
 		registrate("//a[@data-origin='register']"),
 		iniciarsesion("//a[@data-origin='login']"),
 		cerrarsesion("//span[@class[contains(.,'_logout')]]"),
@@ -42,11 +43,6 @@ public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
     
     public static SecCabeceraOutletDesktop getNew(Channel channel, AppEcom app, WebDriver driver) {
     	return (new SecCabeceraOutletDesktop(channel, app, driver));
-    }
-
-    @Override
-    String getXPathLogoMango() {
-    	return XPathLinkLogo;
     }
     
     @Override

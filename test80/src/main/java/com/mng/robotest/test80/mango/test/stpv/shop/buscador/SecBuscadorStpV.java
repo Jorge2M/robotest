@@ -52,8 +52,8 @@ public class SecBuscadorStpV {
         expected="El resultado de la búsqueda es el correcto :-)")
     public static void busquedaCategoriaProducto(String categoriaABuscar, boolean categoriaExiste, AppEcom app, 
     											 Channel channel, WebDriver driver) throws Exception {
+    	SecCabecera.buscarTexto(categoriaABuscar, channel, app, driver);
     	PageGaleria pageGaleria = (PageGaleria)PageGaleria.getInstance(channel, app, driver); 
-    	SecCabecera.getNew(channel, app, driver).buscarTexto(categoriaABuscar);
         WebdrvWrapp.waitForPageLoaded(driver);    
         
         //Validaciones

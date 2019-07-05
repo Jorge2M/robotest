@@ -10,6 +10,8 @@ import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecDataProduct.ColorType;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.UserMenu;
 
 @SuppressWarnings({"static-access"})
 public class ArticuloNavigations {
@@ -84,7 +86,7 @@ public class ArticuloNavigations {
     
 	public static void buscarArticulo(ArticleStock articulo, Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-		SecCabecera.getNew(channel, app, driver).buscarTexto(articulo.getReference());
+		SecCabecera.buscarTexto(articulo.getReference(), channel, app, driver);
     	selectColorIfExists(articulo.getColourCode(), app, driver);
     }
     

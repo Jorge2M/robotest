@@ -11,6 +11,8 @@ import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecSearch;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.UserMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
 
 public abstract class SecCabecera extends WebdrvWrapp {
@@ -20,8 +22,8 @@ public abstract class SecCabecera extends WebdrvWrapp {
 	protected final AppEcom app;
 	protected final SecSearch secSearch;
 
-	
-	abstract String getXPathLogoMango();
+	private final static String XPathLinkLogoMango = "//a[@class='logo-link' or @class[contains(.,'logo_')]]";
+
 	abstract String getXPathNumberArtIcono();
 	public abstract boolean isInStateIconoBolsa(StateElem state);
 	public abstract void clickIconoBolsa() throws Exception;
@@ -59,29 +61,29 @@ public abstract class SecCabecera extends WebdrvWrapp {
 		return (SecCabeceraOutletMobil)this;
 	}
 	
-    public void buscarTexto(String referencia) throws Exception {
+    public static void buscarTexto(String referencia, Channel channel, AppEcom app, WebDriver driver) throws Exception {
+    	MenusUserWrapper menusUser = MenusUserWrapper.getNew(channel, app, driver);
+    	menusUser.clickMenuAndWait(UserMenu.lupa);
+    	SecSearch secSearch = SecSearch.getNew(channel, app, driver);
     	secSearch.search(referencia);
     }
 	
     public boolean clickLogoMango() throws Exception {
-        String xpathLink = getXPathLogoMango();
-        if (isElementPresentUntil(driver, By.xpath(xpathLink), 2)) {
-            clickAndWaitLoad(driver, By.xpath(xpathLink));
+        if (isElementPresentUntil(driver, By.xpath(XPathLinkLogoMango), 2)) {
+            clickAndWaitLoad(driver, By.xpath(XPathLinkLogoMango));
             return true;
         }
         return false;
     }
     
     public void hoverLogoMango() throws Exception {
-        String xpathLink = getXPathLogoMango();
-        if (isElementPresent(driver, By.xpath(xpathLink))) {
-        	moveToElement(By.xpath(xpathLink), driver);
+        if (isElementPresent(driver, By.xpath(XPathLinkLogoMango))) {
+        	moveToElement(By.xpath(XPathLinkLogoMango), driver);
         }
     }
     
     public boolean validaLogoMangoGoesToIdioma(IdiomaPais idioma) {
-        String xpathLink = getXPathLogoMango();
-        String xpathLogoIdiom = xpathLink + "[@href[contains(.,'/" + idioma.getAcceso() + "')]]";
+        String xpathLogoIdiom = XPathLinkLogoMango + "[@href[contains(.,'/" + idioma.getAcceso() + "')]]";
         return (isElementPresent(driver, By.xpath(xpathLogoIdiom)));
     }
     

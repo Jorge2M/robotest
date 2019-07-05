@@ -23,7 +23,8 @@ public class SecSearchMobilShop extends WebdrvWrapp implements SecSearch {
     }
 	
     @Override
-	public void search(String text) {
+	public void search(String text) throws Exception {
+    	isElementVisibleUntil(driver, By.xpath(XPathInputBuscador), 2);
         WebElement input = driver.findElement(By.xpath(XPathInputBuscador));
         input.clear();
         sendKeysWithRetry(5, input, text);

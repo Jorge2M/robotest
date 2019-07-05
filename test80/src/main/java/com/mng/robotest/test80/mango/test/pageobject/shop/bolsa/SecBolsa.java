@@ -15,7 +15,6 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
@@ -123,7 +122,11 @@ public class SecBolsa extends WebdrvWrapp {
     static void setBolsaToState(StateBolsa stateBolsaExpected, Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
 		SecCabecera secCabecera = SecCabecera.getNew(channel, app, driver);
-		secCabecera.clickIconoBolsaWhenDisp(2);
+		if (stateBolsaExpected==StateBolsa.Open || channel==Channel.desktop) {
+			secCabecera.clickIconoBolsaWhenDisp(2);
+		} else {
+			clickIconoCloseMobil(driver, channel);
+		}
         isInStateUntil(stateBolsaExpected, channel, 2, driver);
     }
     
@@ -308,7 +311,7 @@ public class SecBolsa extends WebdrvWrapp {
             }
 
             //Cerramos la bolsa medialnte selección de la aspa de close
-            SecBolsa.clickIconoClose(driver, dCtxSh.channel);
+            //SecBolsa.clickIconoClose(driver, dCtxSh.channel);
                 
             ii += 1;
         }
@@ -318,20 +321,10 @@ public class SecBolsa extends WebdrvWrapp {
         setBolsaToStateIfNotYet(StateBolsa.Closed, dCtxSh.channel, dCtxSh.appE, driver);
     }
     
-    //Función que clicka en el icono de aspa que cierra la bolsa
-    public static void clickIconoClose(WebDriver driver, Channel channel) throws Exception {
-        if (channel==Channel.movil_web) {
-            if (isElementVisible(driver, By.xpath("//a[@class[contains(.,'icon-cross')]]"))) {
-                clickAndWaitLoad(driver, By.xpath("//a[@class[contains(.,'icon-cross')]]"));
-            }
-        } else {
-            if (!UtilsMangoTest.findDisplayedElements(driver, By.cssSelector("p.bolsa_close.icono")).isEmpty()) {
-                clickAndWaitLoad(driver, By.cssSelector("p.bolsa_close.icono"));
-            } else { 
-                if (!UtilsMangoTest.findDisplayedElements(driver, By.cssSelector("bolsa_close")).isEmpty()) {
-                    clickAndWaitLoad(driver, By.className("bolsa_close"));
-                }
-            }
+    private static void clickIconoCloseMobil(WebDriver driver, Channel channel) throws Exception {
+    	String xpathAspa =  "//div[@id='close_mobile']";
+        if (isElementVisible(driver, By.xpath(xpathAspa))) {
+            clickAndWaitLoad(driver, By.xpath(xpathAspa));
         }
     }    
 

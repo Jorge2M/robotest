@@ -17,6 +17,7 @@ import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletDesktop.LinkCabeceraOutletDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMobil.IconoCabOutletMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraShop.IconoCabeceraShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
@@ -35,6 +36,7 @@ public class MenusUserWrapper {
 	final SecMenuLateralMobil secMenuLateralMobil;
 	
 	public enum UserMenu {
+		lupa(Arrays.asList(shop, outlet)),
 		iniciarSesion(Arrays.asList(shop, outlet)),
 		cerrarSesion(Arrays.asList(shop, outlet)),
 		registrate(Arrays.asList(shop, outlet)),
@@ -74,7 +76,7 @@ public class MenusUserWrapper {
 	}
 	
 	public boolean isMenuInStateUntil(UserMenu menu, StateElem state, int maxSecondsWait) throws Exception {
-		checkAppSupported(app, menu);
+		//checkAppSupported(app, menu);
 		if (menu==UserMenu.bolsa) {
 			return (secCabecera.isInStateIconoBolsa(state));
 		} else {
@@ -116,6 +118,10 @@ public class MenusUserWrapper {
 	}
 	
 	public void hoverIconForShowUserMenuDesktopShop() throws Exception {
+		if (channel!=Channel.desktop && app!=AppEcom.shop) {
+			throw new IllegalArgumentException(
+				"This function doesn't support the channel " + channel + " and the application " + app);
+		}
 		secCabecera.getShop().hoverIconForShowUserMenuDesktop();
 	}
 	
@@ -127,6 +133,8 @@ public class MenusUserWrapper {
 
 	private ElementPage getMenu(UserMenu menu) {
 		switch (menu) {
+			case lupa:
+				return getMenuLupa();
 			case iniciarSesion:
 				return getMenuIniciarSesion();
 			case cerrarSesion:
@@ -163,6 +171,9 @@ public class MenusUserWrapper {
 		if (menu instanceof MenuUserMobil) {
 			return (secMenuLateralMobil.getUserMenu().isMenuInStateUntil((MenuUserMobil)menu, state, maxSecondsWait));
 		}
+		if (menu instanceof IconoCabOutletMobil) {
+			return (secCabecera.getOutletMobil().isElementInStateUntil((IconoCabOutletMobil)menu, state, maxSecondsWait));
+		}
 		return false;
 	}
 	
@@ -180,6 +191,24 @@ public class MenusUserWrapper {
 		if (menu instanceof MenuUserMobil) {
 			secMenuLateralMobil.getUserMenu().clickMenu((MenuUserMobil)menu);
 		}
+		if (menu instanceof IconoCabOutletMobil) {
+			secCabecera.getOutletMobil().click((IconoCabOutletMobil)menu);
+		}
+	}
+	
+	private ElementPage getMenuLupa() {
+		if (app==AppEcom.shop || app==AppEcom.votf) {
+			return IconoCabeceraShop.lupa;
+		}
+		if (app==AppEcom.outlet) {
+			if (channel==Channel.desktop) {
+				return LinkCabeceraOutletDesktop.lupa;
+			}
+			if (channel==Channel.movil_web) {
+				return IconoCabOutletMobil.lupa;
+			}
+		}
+		return null;
 	}
 	
 	private ElementPage getMenuIniciarSesion() {

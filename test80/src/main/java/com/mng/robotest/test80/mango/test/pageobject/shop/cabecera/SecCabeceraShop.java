@@ -16,14 +16,13 @@ public class SecCabeceraShop extends SecCabecera {
 	
 	private final ModalUserSesionShopDesktop modalUserSesionShopDesktop;
 	
-	private final static String XPathLinkLogoMango = "//a[@class='logo-link' or @class[contains(.,'logo_')]]";
     private final static String XPathDivNavTools = "//div[@id='navTools']";
     private final static String XPathNumArticlesBolsa = "//span[@class='icon-button-items']";
 	
     public enum IconoCabeceraShop implements ElementPage {
-    	buscar("//span[@class[contains(.,'-search')]]"),
-		iniciarsesion("//self::*[@id='login_any']/span[@class[contains(.,'-account')]]/.."),
-    	micuenta("//self::*[@id='login']/span[@class[contains(.,'-account')]]/.."),
+    	lupa("//span[@class[contains(.,'-search')]]"),
+		iniciarsesion("//self::*[@id='login_any' or @id='login_mobile_any']/span[@class[contains(.,'-account')]]/.."),
+    	micuenta("//self::*[@id='login' or @id='login_mobile']/span[@class[contains(.,'-account')]]/.."),
 		favoritos("//span[@class[contains(.,'-favorites')]]/.."),
 		bolsa("//span[@class[contains(.,'-bag')]]/..");
 
@@ -50,11 +49,6 @@ public class SecCabeceraShop extends SecCabecera {
 	public ModalUserSesionShopDesktop getModalUserSesionDesktop() {
 		return modalUserSesionShopDesktop;
 	}
-
-    @Override
-    String getXPathLogoMango() {
-    	return XPathLinkLogoMango;
-    }
 
     @Override
     String getXPathNumberArtIcono() {
