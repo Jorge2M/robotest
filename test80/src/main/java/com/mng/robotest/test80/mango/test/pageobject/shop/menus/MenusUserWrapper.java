@@ -36,7 +36,7 @@ public class MenusUserWrapper {
 	final SecMenuLateralMobil secMenuLateralMobil;
 	
 	public enum UserMenu {
-		lupa(Arrays.asList(shop, outlet)),
+		lupa(Arrays.asList(shop, outlet, votf)),
 		iniciarSesion(Arrays.asList(shop, outlet)),
 		cerrarSesion(Arrays.asList(shop, outlet)),
 		registrate(Arrays.asList(shop, outlet)),
@@ -324,9 +324,7 @@ public class MenusUserWrapper {
 			}
 		}
 		if (channel==Channel.movil_web) {
-			if (app==AppEcom.shop || app==AppEcom.votf) {
-				return MenuUserMobil.ayuda;
-			}
+			return MenuUserMobil.ayuda;
 		}
 		return null;
 	}

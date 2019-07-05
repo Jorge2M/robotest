@@ -26,7 +26,7 @@ public interface SecSearch {
 			case votf:
 				return SecSearchMobilShop.getNew(driver);
 			case outlet:
-				return SecSearchMobilShop.getNew(driver);
+				return SecSearchMobilOutlet.getNew(driver);
 			}
 		}
 		

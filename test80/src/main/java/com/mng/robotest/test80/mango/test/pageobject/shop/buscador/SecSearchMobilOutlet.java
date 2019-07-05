@@ -18,7 +18,7 @@ public class SecSearchMobilOutlet extends WebdrvWrapp implements SecSearch {
     	this.driver = driver;
     }
     
-    public static SecSearchMobilOutlet make(WebDriver driver) {
+    public static SecSearchMobilOutlet getNew(WebDriver driver) {
     	return (new SecSearchMobilOutlet(driver));
     }
     

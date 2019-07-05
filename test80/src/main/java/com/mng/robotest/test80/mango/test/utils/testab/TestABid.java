@@ -90,6 +90,20 @@ public enum TestABid {
 	    	"V0-Original", 
 	    	"V1-Iconos sin texto", 
 	    	"V2-Iconos con texto")
+	),
+	
+	MobileSelectorTallaColor (
+		TypeTestAB.GoogleOptimize,
+		"GTM-5T8R33",
+		"SHOP-176-PLP-Mobile-Selector talla/color",
+	    "UWOU5vObVAZJ7ylnbAK2vQ",
+	    "GTM-KWJ6XJ_OPT-PHJV7$",
+	    "QUICK_PREVIEW",
+	    Arrays.asList(
+	    	"V0-Original", 
+	    	"V1-B - Color en link + CTA añadir con selectores como overlay", 
+	    	"V2-C - Color CTA + CTA añadir con selectores en modal",
+	    	"V3-D - Color en link + CTA añadir con selectores en modal")
 	);
 	
 	//Code TestAB GoogleExperiments
