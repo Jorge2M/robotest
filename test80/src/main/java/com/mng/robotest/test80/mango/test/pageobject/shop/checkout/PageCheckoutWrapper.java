@@ -140,7 +140,7 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
     	WebElement buttonLoyalty = WebdrvWrapp.getElementsVisible(driver, byApplyButton).get(0);
     	String textButtonApply = buttonLoyalty.getAttribute("innerHTML");
     	String importeButton = ImporteScreen.normalizeImportFromScreen(textButtonApply);
-    	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(XpathButtonForApplyLoyaltyPoints));
+    	clickAndWaitLoad(driver, By.xpath(XpathButtonForApplyLoyaltyPoints));
 		PageCheckoutWrapper.isNoDivLoadingUntil(1, driver);
 		return (ImporteScreen.getFloatFromImporteMangoScreen(importeButton));
     }

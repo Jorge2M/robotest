@@ -22,6 +22,8 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  * @author jorge.munoz
  */
 public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
+	
+	public enum StateMethod {unselected, selecting, selected}
 	enum TypeActionLinkFP {PlegarPagos, DesplegarPagos}
 	
     public static SecTMango secTMango;
@@ -62,7 +64,8 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     }
     
     static String getXPathRadioPagoLayoutLinea(String nombrePago) {
-    	return (getXPathPagoLayoutLinea(nombrePago) + "//div[@class[contains(.,'custom-radio')]]/div");
+    	//return (getXPathPagoLayoutLinea(nombrePago) + "//div[@class[contains(.,'custom-radio')]]/div");
+    	return (getXPathPagoLayoutLinea(nombrePago) + "//div[@data-custom-radio-id]");
     }
     
     static String getXPathPagoLayoutPestanya(String nombrePago) {
@@ -92,7 +95,7 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     		return (getXPathPagoLayoutPestanya(nombrePago));
     	}
     }
-    
+
     /**
      * @return el XPath correspondiente al link para plegar/desplegar los métodos de pago
      */
@@ -146,6 +149,37 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
         String xpathClickPago = getXPathClickMetodoPago(nombrePago, layoutPago);
         return (isElementPresent(driver, By.xpath(xpathClickPago)));
     }
+
+    public static StateMethod getStateMethod(String nombrePago, LayoutPago layoutPago, WebDriver driver) {
+    	if (layoutPago==LayoutPago.Pestaña) {
+    		//Sólo hay 1 método de Pago de este típo: Turquía-Kredi Karti (que es único en ese país). 
+    		//Así que no nos complicamos la vida
+    		return StateMethod.selected;
+    	}
+    	String xpathRadio = getXPathClickMetodoPago(nombrePago, layoutPago);
+    	WebElement radio = driver.findElement(By.xpath(xpathRadio));
+    	String classRadio = radio.getAttribute("class");
+    	if (classRadio.contains("checked")) {
+    		return StateMethod.selected;
+    	}
+//    	if (classRadio.contains("reload")) {
+//    		return StateMethod.selecting;
+//    	}
+    	return StateMethod.unselected;
+    }
+    
+    public static boolean isMethodInStateUntil(
+    		String nombrePago, StateMethod stateExpected, LayoutPago layoutPago, int maxSecondsWait, WebDriver driver) throws Exception {
+    	for (int i=0; i<maxSecondsWait; i++) {
+    		StateMethod actualState = getStateMethod(nombrePago, layoutPago, driver);
+    		if (actualState==stateExpected) {
+    			return true;
+    		}
+    		Thread.sleep(1000);
+    	}
+    	
+    	return false;
+    }
     
     /**
      * @return si el número de métodos de pago visualizados en pantalla es el correcto
@@ -186,9 +220,9 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
         goToPageFromCheckoutIfNeeded(driver);
         despliegaMetodosPago(driver);
         moveToFirstMetodoPagoLine(pais.getLayoutPago(), driver);
-        PageCheckoutWrapper.waitUntilNoDivLoading(driver, 2/*seconds*/);
-        clickMetodoPago(pais, nombrePago, driver);
-        PageCheckoutWrapper.waitUntilNoDivLoading(driver, 10/*seconds*/);
+        PageCheckoutWrapper.waitUntilNoDivLoading(driver, 2);
+        clickMetodoPagoAndWait(pais, nombrePago, driver);
+        PageCheckoutWrapper.waitUntilNoDivLoading(driver, 10);
         waitForPageLoaded(driver); //For avoid StaleElementReferenceException
     }
     
@@ -235,8 +269,9 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
         while (!inStateOk && i<seconds);
     }    
     
-    public static void clickMetodoPago(Pais pais, String nombrePago, WebDriver driver) throws Exception {
+    public static void clickMetodoPagoAndWait(Pais pais, String nombrePago, WebDriver driver) throws Exception {
     	clickMetodoPago(pais.getLayoutPago(), nombrePago, driver);
+    	isMethodInStateUntil(nombrePago, StateMethod.selected, pais.getLayoutPago(), 1, driver);
     }
 
     private static void clickMetodoPago(LayoutPago layoutPago, String nombrePago, WebDriver driver) throws Exception {
