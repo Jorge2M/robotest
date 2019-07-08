@@ -170,10 +170,7 @@ public class SecBolsaStpV {
         	checkIsBolsaVisibleInDesktop(driver);
         }
         
-        //Validaciones. Cuadran los artículos en la volsa
         validaCuadranArticulosBolsa(dataBag, app, channel, driver);
-        
-        //Validaciones para analytics (sólo para firefox y NetAnalysis)
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(Constantes.AnalyticsVal.GoogleAnalytics,
                                                                   Constantes.AnalyticsVal.Criteo,
                                                                   Constantes.AnalyticsVal.NetTraffic, 
@@ -287,8 +284,7 @@ public class SecBolsaStpV {
     	expected="Se muestra la página de identificación",
     	saveNettraffic=SaveWhen.Always)
 	public static void selectButtonComprar(DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	int maxSecondsWait = 10;
-    	SecBolsa.clickBotonComprar(driver, dCtxSh.channel, maxSecondsWait);
+    	SecBolsa.clickBotonComprar(driver, dCtxSh.channel, 10);
         validaSelectButtonComprar(dataBag, dCtxSh, driver);
         if(!dCtxSh.userRegistered) {
         	Page1IdentCheckoutStpV.secSoyNuevo.validaRGPDText(dCtxSh, driver);

@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 public class SecCabeceraOutletMobil extends SecCabeceraOutlet {
 	
 	public enum IconoCabOutletMobil implements ElementPage {
-		bolsa("//a[@class[contains(.,'cartlink')]]"),
+		bolsa("//a[@class[contains(.,'cartLink')]]"),
 		lupa("//div[@class='menu-search-button']");
 		
 		private String xpath;
