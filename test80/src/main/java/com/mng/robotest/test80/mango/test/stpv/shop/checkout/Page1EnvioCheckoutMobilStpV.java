@@ -119,8 +119,7 @@ public class Page1EnvioCheckoutMobilStpV {
     
     @Step (
     	description="Seleccionamos la <b>#{posicion}a<b> franja horaria del envío \"Urgente - Horario personalizado\"</b>", 
-        expected="La franja horaria se selecciona correctamente"
-    		)
+        expected="La franja horaria se selecciona correctamente")
     public static void selectFranjaHorariaUrgente(int posicion, WebDriver driver) {
     	Page1EnvioCheckoutMobil.selectFranjaHorariaUrgente(posicion, driver);
     }
