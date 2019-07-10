@@ -70,7 +70,7 @@ public class SecMenusWrap {
     /**
      * @return la línea a la que se debería acceder cuando se selecciona el menú
      */
-    public static LineaType getLineaResultAfterClickMenu(LineaType lineaType, String nombre) {
+    public static LineaType getLineaResultAfterClickMenu(LineaType lineaType, String nombre) { 
         switch (nombre) {
         case "nuevo":
             if (lineaType==LineaType.she)
