@@ -331,7 +331,7 @@ public class SecBolsa extends WebdrvWrapp {
     static boolean isUnitalla(String talla) {
         if (talla.toLowerCase().compareTo("u")==0 ||
             talla.toLowerCase().compareTo("unitalla")==0 ||
-            talla.toLowerCase().compareTo("99")==0) {
+            talla.toLowerCase().compareTo("0")==0) {
             return true;
         }
         return false;

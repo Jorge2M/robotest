@@ -25,7 +25,11 @@ public class ArticuloScreen {
     public ArticuloScreen(ArticleStock articleStock) {
         this.referencia = articleStock.getReference();
         this.codigoColor = articleStock.getColourCode();
-        this.tallaNum = articleStock.getSize();
+        if ("99".compareTo(articleStock.getSize())==0) {
+        	this.tallaNum = "0";
+        } else {
+        	this.tallaNum = articleStock.getSize();
+        }
         this.valePais = articleStock.getValePais();
     }
     

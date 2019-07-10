@@ -389,8 +389,6 @@ public class PageFichaArtStpV {
     public void selectBuscarEnTiendaButton() throws Exception {
     	TestCaseData.getDatosCurrentStep().replaceInDescription(tagNameLink, pageFicha.getNameLinkBuscarEnTienda());
         pageFicha.selectBuscarEnTiendaLink();             
-
-        //Validaciones
         ModalBuscadorTiendasStpV.validaBusquedaConResultados(driver);
     }
     

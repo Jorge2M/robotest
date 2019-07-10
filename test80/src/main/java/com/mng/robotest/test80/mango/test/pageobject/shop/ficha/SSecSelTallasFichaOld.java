@@ -90,7 +90,7 @@ public class SSecSelTallasFichaOld extends WebdrvWrapp {
         }
         
         //Tratamos el caso de talla única donde unificamos el valor a "U"
-        if (getTallaNumSelected(driver).compareTo("99")==0) {
+        if (getTallaNumSelected(driver).compareTo("0")==0) {
             tallaVisible = "U";
         }
         

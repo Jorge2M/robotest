@@ -7,9 +7,10 @@ import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 
 public class SSecSelTallasFichaNew extends WebdrvWrapp {
-	static String XPathSelectorTallas = "//form//div[@class='selector']";
+	static String XPathCapaTallas = "//form/div[@class='sizes']";
+	static String XPathSelectorTallas = XPathCapaTallas + "/div[@class='selector']";
     static String XPathListTallsForSelect = XPathSelectorTallas + "//div[@class[contains(.,'selector-list')]]";
-    static String XPathTallaItem = XPathSelectorTallas + "//span[(@role='option' or @role='button') and not(@data-available='false')]";
+    static String XPathTallaItem = XPathCapaTallas + "//span[(@role='option' or @role='button') and not(@data-available='false')]";
     static String XPathTallaAvailable = XPathTallaItem + "//self::span[@data-available='true' or @class='single-size']";
     static String XPathTallaUnavailable = XPathTallaItem + "//self::span[not(@data-available) and not(@class='single-size')]";
     static String XPathTallaSelected = XPathTallaItem + "//self::span[@class[contains(.,'selector-trigger')] or @class='single-size']";
@@ -46,7 +47,7 @@ public class SSecSelTallasFichaNew extends WebdrvWrapp {
     public static String getTallaNumSelected(WebDriver driver) {
         if (isElementPresent(driver, By.xpath(XPathTallaSelected))) {
             if (isElementPresent(driver, By.xpath(XPathTallaUnica))) {
-                return ("99");
+                return ("0");
             }
             return (driver.findElement(By.xpath(XPathTallaSelected)).getAttribute("data-value"));
         }    
