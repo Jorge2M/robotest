@@ -276,8 +276,8 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     }
     
     public boolean isMenus2onLevelDisplayed(SublineaNinosType sublineaType) {
-        String xpath2oLevelMenuLink = getXPathLinksMenus(sublineaType);
-        return (isElementVisible(driver, By.xpath(xpath2oLevelMenuLink)));
+    	List<WebElement> listMenus = getListMenusDisplayed(sublineaType);
+    	return (listMenus!=null && listMenus.size()>0);
     }
     
     public void selecSublineaNinosIfNotSelected(Linea linea, SublineaNinosType sublineaType) throws Exception {
@@ -349,8 +349,12 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
      */
     public List<WebElement> getListMenusAfterSelectLinea(Linea linea, SublineaNinosType sublineaType) throws Exception {
         selectLinea(linea, sublineaType);
-        String xpath2oLevelMenuLink = getXPathLinksMenus(sublineaType);
-        return (getElementsVisible(driver, By.xpath(xpath2oLevelMenuLink)));
+        return (getListMenusDisplayed(sublineaType));
+    }
+    
+    private List<WebElement> getListMenusDisplayed(SublineaNinosType sublineaType) {
+	    String xpath2oLevelMenuLink = getXPathLinksMenus(sublineaType);
+	    return (getElementsVisible(driver, By.xpath(xpath2oLevelMenuLink)));
     }
     
     public List<String> getListDataLabelsMenus(Linea linea, SublineaNinosType sublineaType) throws Exception {
