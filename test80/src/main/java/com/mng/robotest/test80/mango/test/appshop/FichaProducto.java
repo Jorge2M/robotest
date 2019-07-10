@@ -98,7 +98,7 @@ public class FichaProducto extends GestorWebDriver {
         dCtxSh.userRegistered=true;
         
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true/*clearArticulos*/, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, dFTest.driver);
         ArticleStock articleWithColors = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithMoreOneColour, dCtxSh);
         SecBuscadorStpV.searchArticuloAndValidateBasic(articleWithColors, dCtxSh, dFTest.driver);
         
@@ -271,8 +271,7 @@ public class FichaProducto extends GestorWebDriver {
 	        modalPersonalizacionStpV.selectConfirmarButton();
         	modalPersonalizacionStpV.validateCabeceraStep(3);
         	modalPersonalizacionStpV.validateSelectionColor();
-        }
-        else {
+        } else {
         	modalPersonalizacionStpV.selectFirstLugarBordado();
         	modalPersonalizacionStpV.validateCabeceraStep(3);
         	modalPersonalizacionStpV.validateColorsMvl(2, ModalElement.ColorsContainer);
