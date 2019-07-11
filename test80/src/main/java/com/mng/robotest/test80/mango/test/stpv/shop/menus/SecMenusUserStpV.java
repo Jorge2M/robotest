@@ -185,8 +185,9 @@ public class SecMenusUserStpV {
 		ChecksResult checks = ChecksResult.getNew();
  		int loyaltyPointsExpected = initPoints - donatedPoints;
 	 	checks.add(
-			"Nos quedan <b>" + loyaltyPointsExpected + "</b> Loyalty Points " + 
-			"(teníamos " + initPoints + " y hemos utilizado " + donatedPoints + ")",
+			"Los Loyalty Points que figuran ahora en la web (<b>" + finalPoints + "</b>) " + 
+			"coinciden con los <b>" + loyaltyPointsExpected + "</b> esperados " + 
+			"(inicialmente teníamos " + initPoints + " y hemos utilizado " + donatedPoints + ")",
 			finalPoints==loyaltyPointsExpected, State.Defect);
 	 	
 	 	return checks;

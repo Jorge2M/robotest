@@ -97,7 +97,6 @@ public class FichaProducto extends GestorWebDriver {
         dCtxSh.passwordUser = userShop.password;
         dCtxSh.userRegistered=true;
         
-        //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, dFTest.driver);
         ArticleStock articleWithColors = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithMoreOneColour, dCtxSh);
         SecBuscadorStpV.searchArticuloAndValidateBasic(articleWithColors, dCtxSh, dFTest.driver);
@@ -138,7 +137,7 @@ public class FichaProducto extends GestorWebDriver {
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
 
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
         SecBuscadorStpV.searchArticuloAndValidateBasic(TypeArticleStock.articlesWithTotalLook, dCtxSh, dFTest.driver);
         
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
