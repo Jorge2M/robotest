@@ -50,7 +50,7 @@ public class PageFichaArtStpV {
         this.driver = TestCaseData.getdFTest().driver;
         this.channel = channel;
         this.app = appE;
-        this.pageFicha = PageFicha.newInstance(appE, channel, driver);
+        this.pageFicha = PageFicha.newInstance(channel, appE, driver);
     }
     
     public PageFicha getFicha() {

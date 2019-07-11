@@ -144,7 +144,7 @@ public class FichaProducto extends GestorWebDriver {
         if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
             pageFichaStpV.validaExistsImgsCarruselIzqFichaOld();
             pageFichaStpV.secProductDescOld.validateAreInStateInitial(dCtxSh.appE, dFTest.driver);
-            PageFicha pageFicha = PageFicha.newInstance(dCtxSh.appE, dCtxSh.channel, dFTest.driver);
+            PageFicha pageFicha = PageFicha.newInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
             if (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() > 2) {
                 pageFichaStpV.selectImgCarruselIzqFichaOld(2);
             }

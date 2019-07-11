@@ -25,7 +25,7 @@ public class ArticuloNavigations {
         buscarArticulo(articleStock, channel, app, driver);
 
         //Esperamos un máximo de 10 segundos a que aparezca la ficha del artículo
-        PageFicha pageFicha = PageFicha.newInstance(app, channel, driver);
+        PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
         int maxSecondsToWait = 10;
         pageFicha.isFichaArticuloUntil(articulo.getReferencia(), maxSecondsToWait);
 
@@ -93,7 +93,7 @@ public class ArticuloNavigations {
     @SuppressWarnings("static-access")
     private static void selectColorIfExists(String colourCode, AppEcom app, WebDriver driver) throws Exception {
     	if (colourCode!=null && "".compareTo(colourCode)!=0) {
-    		PageFicha pageFicha = PageFicha.newInstance(app, Channel.desktop, driver);
+    		PageFicha pageFicha = PageFicha.newInstance(Channel.desktop, app, driver);
 		    if (pageFicha.secDataProduct.isClickableColor(colourCode, driver)) {
 		        int maxSecondsToWait = 5;
 		        if (pageFicha.isPageUntil(maxSecondsToWait)) {

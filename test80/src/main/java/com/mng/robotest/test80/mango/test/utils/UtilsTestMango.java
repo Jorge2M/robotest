@@ -134,4 +134,13 @@ public class UtilsTestMango {
     	
     	return listReferences;
     }
+    
+    public static String getCodigoTallaUnica(AppEcom app) {
+    	switch (app) {
+    	case outlet:
+    		return "99";
+    	default:
+    		return "0";
+    	}
+    }
 }

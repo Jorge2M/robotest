@@ -5,11 +5,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Arrays;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.webdriverwrapper.ElementPage;
 import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions.StateElem;
@@ -29,6 +32,8 @@ import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.votf;
 
 public class MenusUserWrapper {
 
+    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+	
 	final Channel channel;
 	final AppEcom app;
 	final WebDriver driver;
@@ -334,32 +339,34 @@ public class MenusUserWrapper {
 		LoyaltyData loyaltyData = new LoyaltyData(false, 0);
 		By byLoyaltyUserMenu = By.tagName("loyalty-user-menu");
 		for (int i=0; i<maxSecondsWait; i++) {
-			if (WebdrvWrapp.isElementPresent(driver, byLoyaltyUserMenu)) {
-		    	WebElement shadowHost = driver.findElement(byLoyaltyUserMenu);
-		    	if (shadowHost!=null) {
-			    	Object shadowLoyaltyPoints = ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot", shadowHost);
-			    	//TODO pendiente el grupo de Loyalty nos proporcione un id
-			    	String innerHTML;
-			    	if (shadowLoyaltyPoints instanceof WebElement) {
-			    		//Caso de Chrome
-				    	WebElement loyaltyPoints = (WebElement)shadowLoyaltyPoints;
-				    	innerHTML = loyaltyPoints.getAttribute("innerHTML");
-			    	}
-			    	else {
-				    	//Caso de Firefox
-			    		innerHTML = shadowLoyaltyPoints.toString();
-			    	}
-			    	
-			        Pattern pattern = Pattern.compile("tienes (.*?) Likes");
-			        Matcher matcher = pattern.matcher(innerHTML);
-			    	if (matcher.find()) {
-			    		loyaltyData.isPresent = true;
-			    		float pointsFloat = ImporteScreen.getFloatFromImporteMangoScreen(matcher.group(1));
-			    		loyaltyData.numberPoints = (int)pointsFloat;
-			    		break;
-			    	}
+			WebElement blockLoyalty = WebdrvWrapp.getElementVisible(driver, byLoyaltyUserMenu);
+			if (blockLoyalty!=null) {
+				//if (WebdrvWrapp.isElementPresent(driver, byLoyaltyUserMenu)) {
+				//WebElement shadowHost = driver.findElement(byLoyaltyUserMenu);
+		    	Object shadowLoyaltyPoints = ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot", blockLoyalty);
+		    	//TODO pendiente el grupo de Loyalty nos proporcione un id
+		    	String innerHTML;
+		    	if (shadowLoyaltyPoints instanceof WebElement) {
+		    		//Caso de Chrome
+			    	WebElement loyaltyPoints = (WebElement)shadowLoyaltyPoints;
+			    	innerHTML = loyaltyPoints.getAttribute("innerHTML");
 		    	}
-			}
+		    	else {
+			    	//Caso de Firefox
+		    		innerHTML = shadowLoyaltyPoints.toString();
+		    	}
+		    	int numberBlocksLoyalty = driver.findElements(By.tagName("loyalty-user-menu")).size();
+		    	pLogger.info("Contenido del elemento HTML loyalty-user-menu  " + innerHTML);
+		    	pLogger.info("Número de bloques de Loyalty " + numberBlocksLoyalty);
+		        Pattern pattern = Pattern.compile("tienes (.*?) Likes");
+		        Matcher matcher = pattern.matcher(innerHTML);
+		    	if (matcher.find()) {
+		    		loyaltyData.isPresent = true;
+		    		float pointsFloat = ImporteScreen.getFloatFromImporteMangoScreen(matcher.group(1));
+		    		loyaltyData.numberPoints = (int)pointsFloat;
+		    		break;
+		    	}
+	    	}
 			
 	    	Thread.sleep(1000);
 		}

@@ -651,7 +651,7 @@ public abstract class PageGaleria extends WebdrvWrapp {
         //Cambiamos el foco de driver a la nueva pestaña que hemos creado y esperamos hasta que está disponible
         String detailWindowHandle = switchToAnotherWindow(driver, galeryWindowHandle);
         
-        PageFicha pageFicha = PageFicha.newInstance(app, Channel.desktop, driver);
+        PageFicha pageFicha = PageFicha.newInstance(Channel.desktop, app, driver);
         pageFicha.isPageUntil(10/*maxSecondsWait*/);
         
         return detailWindowHandle;

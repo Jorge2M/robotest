@@ -32,6 +32,10 @@ public class ArticleStock {
         this.size = articulo.getTallaNum();
     }
     
+    public AppEcom getApp() {
+    	return this.app;
+    }
+    
     public String idCountry() {
     	return this.idCountry;
     }

@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.arq.webdriverwrapper.ElementPage;
 import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
@@ -114,15 +115,15 @@ public class SecDataProduct extends WebdrvWrapp {
         return XPathNombreArticuloDesktop;
     }
     
-    public static ArticuloScreen getArticuloObject(Channel channel, TypeFicha typeFicha, WebDriver driver) {
+    public static ArticuloScreen getArticuloObject(Channel channel, AppEcom app, TypeFicha typeFicha, WebDriver driver) {
         ArticuloScreen articulo = new ArticuloScreen();
         articulo.setReferencia(getReferenciaProducto(driver));
         articulo.setNombre(getTituloArt(channel, driver));
         articulo.setPrecio(getPrecioFinalArticulo(driver));
         articulo.setCodigoColor(getCodeColor(ColorType.Selected, driver));
         articulo.setColor(getNombreColorSelected(channel, driver));
-        articulo.setTallaAlf(getTallaAlfSelected(typeFicha, driver));
-        articulo.setTallaNum(getTallaNumSelected(typeFicha, driver));
+        articulo.setTallaAlf(getTallaAlfSelected(typeFicha, app, driver));
+        articulo.setTallaNum(getTallaNumSelected(typeFicha, app, driver));
         articulo.setNumero(1);
         return articulo;
     }
@@ -249,18 +250,18 @@ public class SecDataProduct extends WebdrvWrapp {
     	return isVisible;
     }
 
-    public static String getTallaAlfSelected(TypeFicha typeFicha, WebDriver driver) {
+    public static String getTallaAlfSelected(TypeFicha typeFicha, AppEcom app, WebDriver driver) {
         if (typeFicha==TypeFicha.Old) {
-            return secSelTallasOld.getTallaAlfSelected(driver);
+            return secSelTallasOld.getTallaAlfSelected(app, driver);
         }
         return secSelTallasNew.getTallaAlfSelected(driver);
     }
     
-    public static String getTallaNumSelected(TypeFicha typeFicha, WebDriver driver) {
+    public static String getTallaNumSelected(TypeFicha typeFicha, AppEcom app, WebDriver driver) {
         if (typeFicha==TypeFicha.Old) {
             return secSelTallasOld.getTallaNumSelected(driver);
         }
-        return secSelTallasNew.getTallaNumSelected(driver);
+        return secSelTallasNew.getTallaNumSelected(app, driver);
     }    
     
     public static String getTallaAlf(TypeFicha typeFicha, int posicion, WebDriver driver) {

@@ -503,7 +503,7 @@ public class PageGaleriaStpV {
     private ChecksResult checkIsFichaArticle(String nombre1erArt, String precio1erArt, int maxSecondsWait) {
     	ChecksResult validations = ChecksResult.getNew();
     	
-    	PageFicha pageFicha = PageFicha.newInstance(app, channel, driver);
+    	PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
       	validations.add(
     		"Aparece la página de ficha (la esperamos hasta " + maxSecondsWait + " segundos)",
     		pageFicha.isPageUntil(maxSecondsWait), State.Warn);

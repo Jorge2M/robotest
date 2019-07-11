@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 @SuppressWarnings({"static-access"})
 /**

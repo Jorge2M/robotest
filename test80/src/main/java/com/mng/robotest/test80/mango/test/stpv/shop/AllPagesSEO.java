@@ -85,7 +85,7 @@ public class AllPagesSEO {
         ArrayList<String> listaErrorsInHtmlFormat = new ArrayList<>();
         if (!AllPages.isPresentTagCanonical(driver)) {
             //El canonical ha de aparecer como mínimo en las páginas de Portada, Catálogo y Ficha
-        	PageFicha pageFicha = PageFicha.newInstanceFichaNew(Channel.desktop, driver);
+        	PageFicha pageFicha = PageFicha.newInstanceFichaNew(Channel.desktop, AppEcom.shop, driver);
         	PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, AppEcom.shop, driver);
             if (PageLanding.isPage(driver) || ((PageGaleriaDesktop)pageGaleria).isPage() || pageFicha.isPageUntil(0)) {
                 String currentURL = driver.getCurrentUrl(); 

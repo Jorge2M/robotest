@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 
 public class SSecSelTallasFichaNew extends WebdrvWrapp {
@@ -44,10 +46,10 @@ public class SSecSelTallasFichaNew extends WebdrvWrapp {
         return "";
     }
     
-    public static String getTallaNumSelected(WebDriver driver) {
+    public static String getTallaNumSelected(AppEcom app, WebDriver driver) {
         if (isElementPresent(driver, By.xpath(XPathTallaSelected))) {
             if (isElementPresent(driver, By.xpath(XPathTallaUnica))) {
-                return ("0");
+                return (UtilsTestMango.getCodigoTallaUnica(app));
             }
             return (driver.findElement(By.xpath(XPathTallaSelected)).getAttribute("data-value"));
         }    

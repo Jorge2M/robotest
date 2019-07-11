@@ -92,7 +92,7 @@ public class UtilsMangoTest {
     public static ArticuloScreen addArticuloBolsa(ArticleStock selArticulo, AppEcom app, Channel channel, WebDriver driver)
     throws Exception {
         ArticuloScreen articulo = ArticuloNavigations.selectArticuloTallaColorByRef(selArticulo, app, channel, driver);
-        PageFicha pageFicha = PageFicha.newInstance(app, channel, driver);
+        PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
         pageFicha.clickAnadirBolsaButtonAndWait(); 
         return articulo;
     }    
