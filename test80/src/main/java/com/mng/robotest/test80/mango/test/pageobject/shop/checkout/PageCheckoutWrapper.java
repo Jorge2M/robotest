@@ -13,7 +13,6 @@ import com.mng.robotest.test80.mango.test.data.Descuento;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais.LayoutPago;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.SecMetodoEnvioDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
@@ -53,28 +52,28 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
     }
     
     public void inputNumberPci(String numtarj, Channel channel, WebDriver driver) {
-    	getSecTarjetaPci(channel, driver).inputNumber(numtarj, driver);
+    	getSecTarjetaPci(channel, driver).inputNumber(numtarj);
     }
     
     public void inputTitularPci(String titular, Channel channel, WebDriver driver) {
-    	getSecTarjetaPci(channel, driver).inputTitular(titular, driver);
+    	getSecTarjetaPci(channel, driver).inputTitular(titular);
     }
     
     public void selectMesByVisibleTextPci(String mesCaducidad, Channel channel, WebDriver driver) {
-    	getSecTarjetaPci(channel, driver).selectMesByVisibleText(mesCaducidad, driver);
+    	getSecTarjetaPci(channel, driver).selectMesByVisibleText(mesCaducidad);
     }
     
     public void selectAnyByVisibleTextPci(String anyCaducidad, Channel channel, WebDriver driver) {
-    	getSecTarjetaPci(channel, driver).selectAnyByVisibleText(anyCaducidad, driver);
+    	getSecTarjetaPci(channel, driver).selectAnyByVisibleText(anyCaducidad);
     }    
     
     public void inputCvcPci(String cvc, Channel channel, WebDriver driver) {
-    	getSecTarjetaPci(channel, driver).inputCvc(cvc, driver);
+    	getSecTarjetaPci(channel, driver).inputCvc(cvc);
     }
     
     //Específico para método de Pago Codensa (Colombia)
     public void inputDniPci(String dni, Channel channel, WebDriver driver) {
-    	getSecTarjetaPci(channel, driver).inputDni(dni, driver);
+    	getSecTarjetaPci(channel, driver).inputDni(dni);
     }
     
     public static void inputCodigoPromoAndAccept(String codigoPromo, Channel channel, WebDriver driver) throws Exception {
@@ -207,25 +206,25 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
         return page1DktopCheckout.isNumMetodosPagoOK(driver, pais, app, isEmpl);
     }
     
-    public static boolean isNumpagos(int numPagosExpected, Channel channel, Pais pais, WebDriver driver) {
+    public static boolean isNumpagos(int numPagosExpected, Channel channel, WebDriver driver) {
         if (channel==Channel.movil_web) {
-            page2MobilCheckout.isNumpagos(numPagosExpected, pais.getLayoutPago(), driver);
+            page2MobilCheckout.isNumpagos(numPagosExpected, driver);
         }
-        return page1DktopCheckout.isNumpagos(numPagosExpected, pais, driver);
+        return page1DktopCheckout.isNumpagos(numPagosExpected, driver);
     }
     
-    public static boolean isPresentMetodosPago(Pais pais, Channel channel, WebDriver driver) {
+    public static boolean isPresentMetodosPago(Channel channel, WebDriver driver) {
         if (channel==Channel.movil_web) {
-            return page2MobilCheckout.isPresentMetodosPago(pais.getLayoutPago(), driver);
+            return page2MobilCheckout.isPresentMetodosPago(driver);
         }
-        return page1DktopCheckout.isPresentMetodosPago(pais, driver);
+        return page1DktopCheckout.isPresentMetodosPago(driver);
     }    
     
-    public static boolean isMetodoPagoPresent(String metodoPago, String indexpant, Channel channel, LayoutPago layoutPago, WebDriver driver) {
+    public static boolean isMetodoPagoPresent(String metodoPago, String indexpant, Channel channel, WebDriver driver) {
         if (channel==Channel.movil_web) {
-            return page2MobilCheckout.isMetodoPagoPresent(metodoPago, layoutPago, driver);
+            return page2MobilCheckout.isMetodoPagoPresent(metodoPago, driver);
         }
-        return page1DktopCheckout.isMetodoPagoPresent(metodoPago, indexpant, layoutPago, driver);
+        return page1DktopCheckout.isMetodoPagoPresent(metodoPago, indexpant, driver);
     }
     
     public static void despliegaMetodosPago(Channel channel, WebDriver driver) throws Exception {

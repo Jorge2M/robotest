@@ -3,41 +3,12 @@ package com.mng.robotest.test80.mango.test.utils.testab;
 import java.util.Arrays;
 import java.util.List;
 
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.utils.testab.TestAB.TypeTestAB;
 
 public enum TestABid {
-	Galeria(
-		TypeTestAB.GoogleExperiments,
-		"6YnA_5gERfC87CROPLRUKw",
-		"6YnA_5gERfC87CROPLRUKw",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"V0-nueva", 
-			"V1-Antigua")
-	), 
-	
-	Ficha(
-		TypeTestAB.GoogleExperiments,
-		"zi8X3zIHR6uaNGgEta8YGA",
-		"nKrTsm6AQHe8oivoI8cxVw",
-		Arrays.asList(0,1,2),
-		Arrays.asList(
-			"V0-intermedia", 
-			"V1-nueva con 1 foto rande en la primera fila", 
-			"V2-ficha nueva con 2 fotos en la 1a fila")
-	),
-	
-	CheckoutMovilNpasos(
-		TypeTestAB.GoogleExperiments,
-		"ON4I2uBlSBSL6iffFMxy3Q",
-		"ON4I2uBlSBSL6iffFMxy3Q",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"V0-Checkout original en 3 pasos", //Este es el único caso posible en Outlet
-			"V1-checkout nuevo en 2 pasos")
-	),
-	
+
 	GaleriaDesktopReact(
 		TypeTestAB.GoogleExperiments,
 		"KgtNo3S3SWCTsPzuWFIT-Q",
@@ -45,7 +16,9 @@ public enum TestABid {
 		Arrays.asList(0,1),
 		Arrays.asList(
 			"V0-Galería sin React", //Este es el único caso posible en Outlet
-			"V1-Galería con React")
+			"V1-Galería con React"),
+	    Arrays.asList(Channel.desktop),
+	    Arrays.asList(AppEcom.shop)
 	),
 	
 	//TODO es posible eliminarlo en cuanto se ejecute el planchado
@@ -56,7 +29,9 @@ public enum TestABid {
 		Arrays.asList(0,1),
 		Arrays.asList(
 			"V0-Galería sin React", //Este es el único caso posible en Outlet
-			"V1-Galería con React")
+			"V1-Galería con React"),
+	    Arrays.asList(Channel.desktop),
+	    Arrays.asList(AppEcom.shop)
 	),
 		
 	//Optimize
@@ -66,32 +41,6 @@ public enum TestABid {
 	//3) Seleccionar la opción "OBTENER VISTA PREVIA"
 	//4) Seleccionar "Compartir vista previa"
 	//5) Obtener los datos de la URL que se muestra
-	HeaderDesktopNewIcons (
-		TypeTestAB.GoogleOptimize,
-		"GTM-5T8R33",
-		"SHOP-126-Header-Desktop-Nuevos Iconos", 
-	    "UWOU5vObVAZJ7ylnbAK2vQ",
-	    "GTM-KWJ6XJ_OPT-T9VSJ%24",
-	    "QUICK_PREVIEW",
-	    Arrays.asList(
-	    	"V0-Original", 
-	    	"V1-Iconos con labels",
-	    	"V2-Iconos sin labels")
-    ),
-    
-	HeaderMobileFavoritos (
-		TypeTestAB.GoogleOptimize,
-		"GTM-5T8R33",
-		"Header Mobile Visibilidad Mi Cuenta Favoritos", 
-	    "UWOU5vObVAZJ7ylnbAK2vQ",
-	    "GTM-KWJ6XJ_OPT-WV3FC$",
-	    "QUICK_PREVIEW",
-	    Arrays.asList(
-	    	"V0-Original", 
-	    	"V1-Iconos sin texto", 
-	    	"V2-Iconos con texto")
-	),
-	
 	MobileSelectorTallaColor (
 		TypeTestAB.GoogleOptimize,
 		"GTM-5T8R33",
@@ -103,7 +52,23 @@ public enum TestABid {
 	    	"V0-Original", 
 	    	"V1-B - Color en link + CTA añadir con selectores como overlay", 
 	    	"V2-C - Color CTA + CTA añadir con selectores en modal",
-	    	"V3-D - Color en link + CTA añadir con selectores en modal")
+	    	"V3-D - Color en link + CTA añadir con selectores en modal"),
+	    Arrays.asList(Channel.movil_web),
+	    Arrays.asList(AppEcom.shop)
+	),
+	
+	MVPCheckoutDesktop (
+		TypeTestAB.GoogleOptimize,
+		"GTM-5T8R33",
+		"MVP Checkout - desktopr",
+	    "UWOU5vObVAZJ7ylnbAK2vQ",
+	    "GTM-KWJ6XJ_OPT-TXX7V$",
+	    "QUICK_PREVIEW",
+	    Arrays.asList(
+	    	"V0-Original", 
+	    	"V1-MVP Checkout Desktop"),
+	    Arrays.asList(Channel.desktop),
+	    Arrays.asList(AppEcom.shop)
 	);
 	
 	//Code TestAB GoogleExperiments
@@ -112,12 +77,18 @@ public enum TestABid {
 	public String valueCookieOutlet;
 	public List<Integer> variantesInt;
 	public List<String> variantes;
-	private TestABid(TypeTestAB typeTestAB, String valueCookieShop, String valueCookieOutlet, List<Integer> variantesInt, List<String> variantes) {
+	public List<Channel> channels;
+	public List<AppEcom> apps;
+	private TestABid(
+			TypeTestAB typeTestAB, String valueCookieShop, String valueCookieOutlet, List<Integer> variantesInt, List<String> variantes, 
+			List<Channel> channels, List<AppEcom> apps) {
 		this.typeTestAB = typeTestAB;
 		this.valueCookieShop = valueCookieShop;
 		this.valueCookieOutlet = valueCookieOutlet;
 		this.variantesInt = variantesInt;
 		this.variantes = variantes;
+		this.channels = channels;
+		this.apps = apps;
 	}
 	
 	public String getValueCookie(AppEcom app) {
@@ -143,13 +114,17 @@ public enum TestABid {
 	public String auth;
 	String experiment;
 	public String preview;
-	private TestABid(TypeTestAB typeTestAB, String id, String descripcion, String auth, String experiment, String preview, List<String> variantes) {
+	private TestABid(
+			TypeTestAB typeTestAB, String id, String descripcion, String auth, String experiment, String preview, List<String> variantes,
+			List<Channel> channels, List<AppEcom> apps) {
 		this.typeTestAB = typeTestAB;
 		this.id = id;
 		this.auth = auth;
 		this.experiment = experiment;
 		this.preview = preview;
 		this.variantes = variantes;
+		this.channels = channels;
+		this.apps = apps;
 	}
 	
 	public String getExperimentWithVariant(int variante) {

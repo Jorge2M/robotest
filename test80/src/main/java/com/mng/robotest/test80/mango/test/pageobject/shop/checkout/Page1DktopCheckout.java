@@ -14,7 +14,6 @@ import com.mng.robotest.test80.mango.test.data.Descuento;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais.LayoutPago;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
@@ -90,6 +89,8 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     static String XPathPrecioChequeRegalo = XPathContentChequeRegalo + "//div[@class='span2']";
     static String XPathMensajeChequeRegalo = XPathContentChequeRegalo + "//div[@class='span4']";
     
+    static String XPathMetodoPago = "//*[@class[contains(.,'cardBox')]]/div";
+    
     static String getXPathLinArticle(String referencia) {
         return ("//div[@class[contains(.,'ref')] and text()[contains(.,'" + referencia + "')]]/ancestor::div[@class[contains(.,'articuloResBody')]]");
     }
@@ -122,49 +123,25 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         }
     }
     
-    public static String getXPathClickMetodoPago(String metodoPago, LayoutPago layoutPago, String indexpant) {
-    	switch (layoutPago) {
-    	case Linea:
-    		return (getXPathClickPagoLayoutLinea(metodoPago, indexpant));
-    	case Pestaña:
-    	default:
-    		return (getXPathClickPagoLayoutPestanya(metodoPago));
-    	}
-    }
-
-    private static String getXPathClickPagoLayoutPestanya(String metodoPagoClick) {
-        return ("//div[@id='tabs']/div[@class[contains(.,'groupTitle')]]/span[text()[contains(.,'" + metodoPagoClick + "')]]");
-    }
+    final private static String TagMetodoPago = "@TagMetodoPago";
+    final private static String XPathRadioPagoWithTag = "//div[@class[contains(.,'cuadroPago')]]/input[@value='" + TagMetodoPago + "']/../input[@type='radio']";
     
-    private static String getXPathClickPagoLayoutLinea(String metodoPago, String indexpant) {
-        String xpathReturn = "";
+    final private static String TextKrediKarti = "KREDİ KARTI";
+    final private static String XPathPestanyaKrediKarti = "//div[@class[contains(.,'pmGroupTitle')]]/span[text()='" + TextKrediKarti + "']";
+    private static String getXPathClickMetodoPago(String metodoPago, String indexpant) {
         String metodoPagoClick = PageCheckoutWrapper.getMethodInputValue(metodoPago, Channel.desktop);
-        if (metodoPagoClick.toUpperCase().compareTo("VISA")==0) {
-            xpathReturn = "//div[@class[contains(.,'cuadroPago')]]/input[@value='" + metodoPagoClick + "']/../input[@type='radio']";
-        } else {
-            xpathReturn = "//div[@class[contains(.,'cuadroPago')]]/input[@value[contains(.,'" + metodoPagoClick + "')]]/../input[@type='radio']";
+        if (TextKrediKarti.compareTo(metodoPago)==0) {
+        	return XPathPestanyaKrediKarti;
         }
-            
-        //Esto lo hacemos para el caso concreto de Mercadopago (México) pues hay 2 métodos idénticos e indistingibles
+        
+        String xpathReturn = XPathRadioPagoWithTag.replace(TagMetodoPago, metodoPagoClick);
         if (Integer.valueOf(indexpant).intValue() > 1) {
+            //Esto lo hacemos para el caso concreto de Mercadopago (México) pues hay 2 métodos idénticos e indistingibles
             xpathReturn = "(" + xpathReturn + ")[" + indexpant + "]";
         }
         return xpathReturn;
     }
-    
-    /**
-     * @return el XPATH necesario para localizar los bloques correspondientes a los métodos de pago
-     */
-    public static String getXPath_MetodoPago(Pais pais) {
-    	switch (pais.getLayoutPago()) {
-    	case Linea:
-            return ("//*[@class[contains(.,'cardBox')]]/div");
-    	case Pestaña:
-    	default:
-    		return ("//div[@id='tabs']/div[@class[contains(.,'groupTitle')]]");
-    	}
-    }
-    
+
     public static String getXPathCodigoVendedorVOTF(String codigoVendedor) {
         return ("//form[@id[contains(.,'Dependienta')]]//span[text()[contains(.,'" + codigoVendedor + "')]]");
     }
@@ -294,19 +271,16 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         return (isElementVisibleUntil(driver, By.xpath(XPathDescuentoEmpleado), secondsToWait)); 
     }
     
-    public static boolean isMetodoPagoPresent(String metodoPagoClick, String indexpant, LayoutPago layoutPago, WebDriver driver) {
-        String xpathClickPago = getXPathClickMetodoPago(metodoPagoClick, layoutPago, indexpant);
-        if (isElementPresent(driver, By.xpath(xpathClickPago))) {
-            return true;
-        }
-        return false;
+    public static boolean isMetodoPagoPresent(String metodoPagoClick, String indexpant, WebDriver driver) {
+        String xpathClickPago = getXPathClickMetodoPago(metodoPagoClick, indexpant);
+        return (isElementPresent(driver, By.xpath(xpathClickPago)));
     }
     
     /**
      * @return si el número de métodos de pago visualizados en pantalla es el correcto
      */
     public static boolean isNumMetodosPagoOK(WebDriver driver, Pais pais, AppEcom app, boolean isEmpl) {
-        int numPagosPant = driver.findElements(By.xpath(getXPath_MetodoPago(pais))).size();
+        int numPagosPant = driver.findElements(By.xpath(XPathMetodoPago)).size();
         if (app!=AppEcom.votf) {
             //Se comprueba que el número de métodos de pago en pantalla coincida con los asociados al país
             int numPagosPais = pais.getListPagosTest(app, isEmpl).size();
@@ -317,13 +291,13 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         return (numPagosPant == 0);
     }
     
-    public static boolean isNumpagos(int numPagosExpected, Pais pais, WebDriver driver) {
-        int numPagosPant = driver.findElements(By.xpath(getXPath_MetodoPago(pais))).size();
+    public static boolean isNumpagos(int numPagosExpected, WebDriver driver) {
+        int numPagosPant = driver.findElements(By.xpath(XPathMetodoPago)).size();
         return (numPagosPant == numPagosExpected);
     }
     
-    public static boolean isPresentMetodosPago(Pais pais, WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(getXPath_MetodoPago(pais))));
+    public static boolean isPresentMetodosPago(WebDriver driver) {
+        return (isElementPresent(driver, By.xpath(XPathMetodoPago)));
     }
 
     /**
@@ -382,24 +356,8 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     }    
     
     public static void clickMetodoPago(Pais pais, String metodoPago, String indexpant, WebDriver driver) throws Exception {
-    	switch (pais.getLayoutPago()) {
-    	case Pestaña:
-            clickPagoLayoutPestanya(metodoPago, indexpant, driver);
-            break;
-    	case Linea:
-    	default:
-            clickPagoLayoutLinea(metodoPago, indexpant, driver);
-    	}
-    }
-
-    private static void clickPagoLayoutPestanya(String metodoPago, String indexpant, WebDriver driver) {
-        String xpathClickMetodoPago = getXPathClickMetodoPago(metodoPago, LayoutPago.Pestaña, indexpant);
-        driver.findElement(By.xpath(xpathClickMetodoPago)).click();
-    }
-    
-    private static void clickPagoLayoutLinea(String metodoPago, String indexpant, WebDriver driver) throws Exception {
-        String xpathClickMetodoPago = getXPathClickMetodoPago(metodoPago, LayoutPago.Linea, indexpant);
-        waitClickAndWaitLoad(driver, 2/*waitForLinkToClick*/, By.xpath(xpathClickMetodoPago), 1/*waitSeconds*/, TypeOfClick.webdriver);
+        String xpathClickMetodoPago = getXPathClickMetodoPago(metodoPago, indexpant);
+        waitClickAndWaitLoad(driver, 2, By.xpath(xpathClickMetodoPago), 1, TypeOfClick.webdriver);
     }
     
     public static boolean isRedErrorVisible(WebDriver driver) {

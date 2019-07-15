@@ -38,10 +38,10 @@ public class PageCheckoutWrapperStpV {
 
     public static SecMetodoEnvioDesktopStpV secMetodoEnvio;
     public static SecStoreCreditStpV secStoreCredit;
-    public static SecTarjetaPciStpV secTarjetaPci;
+    //public static SecTarjetaPciStpV secTarjetaPci;
     public static SecIdealStpV secIdeal;
     public static SecTMangoStpV secTMango;
-    public static SecKrediKartiStpV secKrediKarti;
+    private static SecKrediKartiStpV secKrediKarti;
     public static SecBillpayStpV secBillpay;
     public static SecKlarnaStpV secKlarna;
     public static SecKlarnaDeutschStpV secKlarnaDeutsch;
@@ -50,6 +50,14 @@ public class PageCheckoutWrapperStpV {
     public static ModalAvisoCambioPaisStpV modalAvisoCambioPais;
     public static Page1DktopCheckoutStpV page1DktopCheck;
     public static Page1EnvioCheckoutMobilStpV page1MobilCheck;
+    
+    public static SecTarjetaPciStpV getSecTarjetaPciStpV(Channel channel, WebDriver driver) {
+    	return (SecTarjetaPciStpV.getNew(channel, driver));
+    }
+    
+    public static SecKrediKartiStpV getSecKrediKartiStpV(Channel channel, WebDriver driver) {
+    	return SecKrediKartiStpV.getNew(channel, driver);
+    }
     
     public static void validateIsFirstPage(boolean userLogged, DataBag dataBag, Channel channel, WebDriver driver) 
     throws Exception {
@@ -100,7 +108,7 @@ public class PageCheckoutWrapperStpV {
             if (listaPagosEnOrden.get(i).getTypePago()!=TypePago.TpvVotf) {
         	 	validations.add(
         			"Aparece el logo/pestaña asociado al pago <b>" + listaPagosEnOrden.get(i).getNombre(channel) + "</b>",
-        			PageCheckoutWrapper.isMetodoPagoPresent(listaPagosEnOrden.get(i).getNombre(channel), listaPagosEnOrden.get(i).getIndexpant(), channel, pais.getLayoutPago(), driver),
+        			PageCheckoutWrapper.isMetodoPagoPresent(listaPagosEnOrden.get(i).getNombre(channel), listaPagosEnOrden.get(i).getIndexpant(), channel, driver),
         			State.Defect);    
             }
         }   
@@ -265,7 +273,7 @@ public class PageCheckoutWrapperStpV {
             validateIsPresentButtonCompraDesktop(driver);
         }
         
-        PageCheckoutWrapperStpV.secTarjetaPci.validateIsSectionOk(pago, pais, channel, driver);
+        PageCheckoutWrapperStpV.getSecTarjetaPciStpV(channel, driver).validateIsSectionOk(pago, pais);
     }
     
     public static void validateSelectPagoNoTRJintegrada(Pago pago, Channel channel, WebDriver driver) {

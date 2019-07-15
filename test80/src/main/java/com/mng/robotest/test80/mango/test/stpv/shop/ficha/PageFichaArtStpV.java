@@ -405,7 +405,7 @@ public class PageFichaArtStpV {
     public void validateSliderIfExists(Slider typeSlider) {
     	boolean isVisibleSlider = checkSliderVisible(typeSlider);
         if (isVisibleSlider) {
-        	checkNumArticlesSlider(1, typeSlider);
+        	checkNumArticlesSlider(0, typeSlider);
         }
     }
     

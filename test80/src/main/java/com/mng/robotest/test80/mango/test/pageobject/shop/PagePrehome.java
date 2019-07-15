@@ -229,7 +229,7 @@ public class PagePrehome extends WebdrvWrapp {
      */
     public static void accesoShopViaPrehome(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         goToPagePrehome(dCtxSh.urlAcceso, driver);
-        TestAB.currentTestABsToActivate(dCtxSh, driver);
+        TestAB.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
         PagePrehome.selecPaisIdiomaYAccede(dCtxSh, driver);
         ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
         if (dCtxSh.channel==Channel.movil_web) {

@@ -8,6 +8,8 @@ import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 public class SecTarjetaPciNotInIframeMobil extends WebdrvWrapp implements SecTarjetaPci {
 
+	private final WebDriver driver;
+	
     static String XPathBlock = "//div[@data-form-card-content='form']";
     static String XPathInputNumber = XPathBlock + "//input[@id[contains(.,'number-card')] or @id[contains(.,'card-pci')]]";
     static String XPathInputTitular = XPathBlock + "//input[@id[contains(.,'card-holder')] or @id[contains(.,'holder-name-pci')]]";
@@ -16,78 +18,80 @@ public class SecTarjetaPciNotInIframeMobil extends WebdrvWrapp implements SecTar
     static String XPathInputCvc = XPathBlock + "//input[@id[contains(.,'cvc')]]";
     static String XPathInputDni = XPathBlock + "//input[@id[contains(.,'dni')]]"; //Specific for Codensa (Colombia)
     
-    private SecTarjetaPciNotInIframeMobil() {}
+    private SecTarjetaPciNotInIframeMobil(WebDriver driver) {
+    	this.driver = driver;
+    }
     
-    public static SecTarjetaPciNotInIframeMobil make() {
-    	return (new SecTarjetaPciNotInIframeMobil());
+    public static SecTarjetaPciNotInIframeMobil getNew(WebDriver driver) {
+    	return (new SecTarjetaPciNotInIframeMobil(driver));
     }
     
     @Override
-    public boolean isVisiblePanelPagoUntil(String nombrePago, int maxSeconds, WebDriver driver) {
+    public boolean isVisiblePanelPagoUntil(String nombrePago, int maxSeconds) {
         return true;
     }
     
     @Override
-    public boolean isPresentInputNumberUntil(int maxSecondsToWait, WebDriver driver) {
+    public boolean isPresentInputNumberUntil(int maxSecondsToWait) {
         return (isElementPresentUntil(driver, By.xpath(XPathInputNumber), maxSecondsToWait));
     }
     
     @Override
-    public boolean isPresentInputTitular(WebDriver driver) {
+    public boolean isPresentInputTitular() {
         return (isElementPresent(driver, By.xpath(XPathInputTitular)));
     }
     
     @Override
-    public boolean isPresentSelectMes(WebDriver driver) {
+    public boolean isPresentSelectMes() {
         return (isElementPresent(driver, By.xpath(XPathSelectMes)));
     }
      
     @Override
-    public boolean isPresentSelectAny(WebDriver driver) {
+    public boolean isPresentSelectAny() {
         return (isElementPresent(driver, By.xpath(XPathSelectAny)));
     }
     
     @Override
-    public boolean isPresentInputCvc(WebDriver driver) {
+    public boolean isPresentInputCvc() {
         return (isElementPresent(driver, By.xpath(XPathInputCvc)));
     }
     
     @Override
-    public boolean isPresentInputDni(WebDriver driver) {
+    public boolean isPresentInputDni() {
         return (isElementPresent(driver, By.xpath(XPathInputDni)));
     }    
     
     @Override
-    public void inputNumber(String number, WebDriver driver) {
+    public void inputNumber(String number) {
         driver.findElement(By.xpath(XPathInputNumber)).clear();
         driver.findElement(By.xpath(XPathInputNumber)).sendKeys(number);
     }
     
     @Override
-    public void inputTitular(String titular, WebDriver driver) {
+    public void inputTitular(String titular) {
         driver.findElement(By.xpath(XPathInputTitular)).clear();
         driver.findElement(By.xpath(XPathInputTitular)).sendKeys(titular);
     }
     
     @Override
-    public void inputCvc(String cvc, WebDriver driver) {
+    public void inputCvc(String cvc) {
         driver.findElement(By.xpath(XPathInputCvc)).clear();
         driver.findElement(By.xpath(XPathInputCvc)).sendKeys(cvc);
     }
     
     @Override
-    public void inputDni(String dni, WebDriver driver) {
+    public void inputDni(String dni) {
         driver.findElement(By.xpath(XPathInputDni)).clear();
         driver.findElement(By.xpath(XPathInputDni)).sendKeys(dni);
     }    
     
     @Override
-    public void selectMesByVisibleText(String mes, WebDriver driver) {
+    public void selectMesByVisibleText(String mes) {
         new Select(driver.findElement(By.xpath(XPathSelectMes))).selectByVisibleText(mes);
     }
     
     @Override
-    public void selectAnyByVisibleText(String any, WebDriver driver) {
+    public void selectAnyByVisibleText(String any) {
         new Select(driver.findElement(By.xpath(XPathSelectAny))).selectByVisibleText(any);
     }
 }

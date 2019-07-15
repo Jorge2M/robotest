@@ -27,7 +27,7 @@ public class PagePasarelaOtrasStpV {
         }
 	   	validations.add(
     		"No se trata de la página de precompra (no aparece los logos de formas de pago)",
-    		PageCheckoutWrapper.isPresentMetodosPago(pais, channel, driver), State.Defect);
+    		PageCheckoutWrapper.isPresentMetodosPago(channel, driver), State.Defect);
 	   	
 	   	return validations;
     }

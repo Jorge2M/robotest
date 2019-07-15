@@ -11,7 +11,6 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais.LayoutPago;
 import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
@@ -59,41 +58,17 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     	return (xpathMethod + XPathRadioTrjGuardada);
     }
     
-    static String getXPathPagoLayoutLinea(String nombrePago) {
+    static String getXPathPago(String nombrePago) {
     	return (XPathLineaPagoLayoutLinea + "/div[@data-analytics-value='" + nombrePago.toLowerCase() + "']/..");
     }
     
-    static String getXPathRadioPagoLayoutLinea(String nombrePago) {
+    static String getXPathRadioPago(String nombrePago) {
     	//return (getXPathPagoLayoutLinea(nombrePago) + "//div[@class[contains(.,'custom-radio')]]/div");
-    	return (getXPathPagoLayoutLinea(nombrePago) + "//div[@data-custom-radio-id]");
+    	return (getXPathPago(nombrePago) + "//div[@data-custom-radio-id]");
     }
     
-    static String getXPathPagoLayoutPestanya(String nombrePago) {
-    	return (XPathLineaPagoLayoutPestanya + "//self::*[text()[contains(.,'" + nombrePago.toLowerCase() + "')]]");
-    }    
-    
-    static String getXPathTextUnderPagoLayoutLinea(String nombrePago) {
-    	return (getXPathPagoLayoutLinea(nombrePago) + "//div[@class='variable-card-content']");
-    }
-    
-    static String getXPathClickMetodoPagoGeneric(LayoutPago layoutPago) {
-    	switch (layoutPago) {
-    	case Linea:
-    		return XPathLineaPagoLayoutLinea;
-    	case Pestaña:
-    	default:
-    		return XPathLineaPagoLayoutPestanya;
-    	}    	
-    }
-    
-    static String getXPathClickMetodoPago(String nombrePago, LayoutPago layoutPago) {
-    	switch (layoutPago) {
-    	case Linea:
-    		return (getXPathRadioPagoLayoutLinea(nombrePago));
-    	case Pestaña:
-    	default:
-    		return (getXPathPagoLayoutPestanya(nombrePago));
-    	}
+    static String getXPathTextUnderPago(String nombrePago) {
+    	return (getXPathPago(nombrePago) + "//div[@class='variable-card-content']");
     }
 
     /**
@@ -145,18 +120,13 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
         }
     }
     
-    public static boolean isMetodoPagoPresent(String nombrePago, LayoutPago layoutPago, WebDriver driver) {
-        String xpathClickPago = getXPathClickMetodoPago(nombrePago, layoutPago);
+    public static boolean isMetodoPagoPresent(String nombrePago, WebDriver driver) {
+        String xpathClickPago = getXPathRadioPago(nombrePago);
         return (isElementPresent(driver, By.xpath(xpathClickPago)));
     }
 
-    public static StateMethod getStateMethod(String nombrePago, LayoutPago layoutPago, WebDriver driver) {
-    	if (layoutPago==LayoutPago.Pestaña) {
-    		//Sólo hay 1 método de Pago de este típo: Turquía-Kredi Karti (que es único en ese país). 
-    		//Así que no nos complicamos la vida
-    		return StateMethod.selected;
-    	}
-    	String xpathRadio = getXPathClickMetodoPago(nombrePago, layoutPago);
+    public static StateMethod getStateMethod(String nombrePago, WebDriver driver) {
+    	String xpathRadio = getXPathRadioPago(nombrePago);
     	WebElement radio = driver.findElement(By.xpath(xpathRadio));
     	String classRadio = radio.getAttribute("class");
     	if (classRadio.contains("checked")) {
@@ -169,9 +139,9 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     }
     
     public static boolean isMethodInStateUntil(
-    		String nombrePago, StateMethod stateExpected, LayoutPago layoutPago, int maxSecondsWait, WebDriver driver) throws Exception {
+    		String nombrePago, StateMethod stateExpected, int maxSecondsWait, WebDriver driver) throws Exception {
     	for (int i=0; i<maxSecondsWait; i++) {
-    		StateMethod actualState = getStateMethod(nombrePago, layoutPago, driver);
+    		StateMethod actualState = getStateMethod(nombrePago, driver);
     		if (actualState==stateExpected) {
     			return true;
     		}
@@ -185,20 +155,18 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
      * @return si el número de métodos de pago visualizados en pantalla es el correcto
      */
     public static boolean isNumMetodosPagoOK(Pais pais, AppEcom app, boolean isEmpl, WebDriver driver) {
-        int numPagosPant = driver.findElements(By.xpath(getXPathClickMetodoPagoGeneric(pais.getLayoutPago()))).size();
-        
-        //Se comprueba que el número de métodos de pago en pantalla coincida con los asociados al país
+        int numPagosPant = driver.findElements(By.xpath(XPathLineaPagoLayoutLinea)).size();
         int numPagosPais = pais.getListPagosTest(app, isEmpl).size();
         return (numPagosPais == numPagosPant);
     }
     
-    public static boolean isNumpagos(int numPagosExpected, LayoutPago layoutPago, WebDriver driver) {
-        int numPagosPant = driver.findElements(By.xpath(getXPathClickMetodoPagoGeneric(layoutPago))).size();
+    public static boolean isNumpagos(int numPagosExpected, WebDriver driver) {
+        int numPagosPant = driver.findElements(By.xpath(XPathLineaPagoLayoutLinea)).size();
         return (numPagosPant == numPagosExpected);
     }
     
-    public static boolean isPresentMetodosPago(LayoutPago layoutPago, WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(getXPathClickMetodoPagoGeneric(layoutPago))));
+    public static boolean isPresentMetodosPago(WebDriver driver) {
+        return (isElementPresent(driver, By.xpath(XPathLineaPagoLayoutLinea)));
     }
 
     public static void goToPageFromCheckoutIfNeeded(WebDriver driver) throws Exception {
@@ -219,7 +187,7 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     public static void forceClickMetodoPagoAndWait(String nombrePago, Pais pais, WebDriver driver) throws Exception {
         goToPageFromCheckoutIfNeeded(driver);
         despliegaMetodosPago(driver);
-        moveToFirstMetodoPagoLine(pais.getLayoutPago(), driver);
+        moveToFirstMetodoPagoLine(driver);
         PageCheckoutWrapper.waitUntilNoDivLoading(driver, 2);
         clickMetodoPagoAndWait(pais, nombrePago, driver);
         PageCheckoutWrapper.waitUntilNoDivLoading(driver, 10);
@@ -230,9 +198,8 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
         driver.findElement(By.xpath(getXPathLinkFormasPagoFor(typeAction))).click();
     }
     
-    public static void moveToFirstMetodoPagoLine(LayoutPago layoutPago, WebDriver driver) {
-    	String xpath1rstPago = getXPathClickMetodoPagoGeneric(layoutPago);
-    	moveToElement(By.xpath(xpath1rstPago), driver);
+    public static void moveToFirstMetodoPagoLine(WebDriver driver) {
+    	moveToElement(By.xpath(XPathLineaPagoLayoutLinea), driver);
     }
     
     /**
@@ -270,32 +237,12 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     }    
     
     public static void clickMetodoPagoAndWait(Pais pais, String nombrePago, WebDriver driver) throws Exception {
-    	clickMetodoPago(pais.getLayoutPago(), nombrePago, driver);
-    	isMethodInStateUntil(nombrePago, StateMethod.selected, pais.getLayoutPago(), 1, driver);
+    	clickMetodoPago(nombrePago, driver);
+    	isMethodInStateUntil(nombrePago, StateMethod.selected, 1, driver);
     }
 
-    private static void clickMetodoPago(LayoutPago layoutPago, String nombrePago, WebDriver driver) throws Exception {
-    	switch (layoutPago) {
-    	case Linea:
-    		clickMetodoPagoLayoutLinea(nombrePago, driver);
-    		break;
-    	case Pestaña:
-    	default:
-    		clickMetodoPagoLayoutPestanya(nombrePago, driver);
-    		break;
-    	}
-    }
-    
-    private static void clickMetodoPagoLayoutPestanya(String nombrePago, WebDriver driver) {
-        String xpathClickMetodoPago = getXPathClickMetodoPago(nombrePago, LayoutPago.Pestaña);
-        driver.findElement(By.xpath(xpathClickMetodoPago)).click();    	
-    }
-
-    /**
-     * Selecciona un método de pago de tipo normal (no PSP)
-     */
-    private static void clickMetodoPagoLayoutLinea(String nombrePago, WebDriver driver) throws Exception {
-        String xpathClickMetodoPago = getXPathClickMetodoPago(nombrePago, LayoutPago.Linea);
+    private static void clickMetodoPago(String nombrePago, WebDriver driver) throws Exception {
+        String xpathClickMetodoPago = getXPathPago(nombrePago);
         moveToElement(By.xpath(xpathClickMetodoPago), driver);
         
         //El icono queda debajo del header "Checkout" y es posible scrollar un poco más porque no funciona el moveByOffset así que falla el click
@@ -307,10 +254,9 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
         	searchMetPagoLayoutLineaInSections(nombrePago, driver);
         }
         
-        clickAndWaitLoad(driver, By.xpath(xpathClickMetodoPago), TypeOfClick.javascript);
-    }    
+        clickAndWaitLoad(driver, By.xpath(xpathClickMetodoPago));
+    }
 
-    
     /**
     * Nos dice si es visible el bloque correspondiente a un determinado pago externo que aparece al seleccionar el método de pago
     */
@@ -322,7 +268,7 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
         case Billpay:
             return (secBillpay.isVisibleUntil(Channel.movil_web, maxSecondsToWait, driver));
         default:
-        	String xpathTexto = getXPathTextUnderPagoLayoutLinea(pago.getNombre(channel));
+        	String xpathTexto = getXPathTextUnderPago(pago.getNombre(channel));
             return (isElementVisibleUntil(driver, By.xpath(xpathTexto), maxSecondsToWait));
         }
     }
@@ -332,7 +278,7 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
      * y las va desplegando hasta que encuentra el método de pago   
      */
     private static void searchMetPagoLayoutLineaInSections(String nombrePago, WebDriver driver) throws Exception {
-        String xpathClickMetodoPago = getXPathClickMetodoPago(nombrePago, LayoutPago.Linea);
+        String xpathClickMetodoPago = getXPathPago(nombrePago);
         boolean methodDisplayed = driver.findElement(By.xpath(xpathClickMetodoPago)).isDisplayed();
         if (!methodDisplayed) {
             List<WebElement> listSecciones = driver.findElements(By.xpath(XPathSectionsPagosMobil));

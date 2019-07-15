@@ -4,55 +4,72 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
-
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public class TestABGoogleExperiments implements TestAB {
     
 	public final static String nameCookieGoogleExperiments = "googleexperiments";
-    public TestABid testAB;
-	public int varianteActivada = 0;
-	public AppEcom app;
+    final public TestABid testAB;
+	final Channel channelTest;
+	final AppEcom appTest;
+	final WebDriver driver;
 	
-	public TestABGoogleExperiments(TestABid testAB, AppEcom app) {
+	public int varianteActivada = 0;
+	
+	public TestABGoogleExperiments(TestABid testAB, Channel channel, AppEcom app, WebDriver driver) {
 		this.testAB = testAB;
-		this.app = app;
+		this.channelTest = channel;
+		this.appTest = app;
+		this.driver = driver;
 	}
 	
-	public TestABGoogleExperiments(TestABid testAB, AppEcom app, int variante) {
+	public TestABGoogleExperiments(TestABid testAB, int variante, Channel channel, AppEcom app, WebDriver driver) {
 		this.testAB = testAB;
 		this.varianteActivada = variante;
-		this.app = app;
+		this.channelTest = channel;
+		this.appTest = app;
+		this.driver = driver;
 	}
 	
-	public TestABGoogleExperiments(String paramWithPointSeparator, AppEcom app) {
+	public TestABGoogleExperiments(String paramWithPointSeparator, Channel channel, AppEcom app, WebDriver driver) {
 		int posPoint = paramWithPointSeparator.indexOf(".");
 	    String idTestAB = paramWithPointSeparator.substring(0, posPoint);
 	    int variante = Integer.valueOf(paramWithPointSeparator.substring(posPoint + 1));
 	    this.testAB = TestABid.valueOf(idTestAB);
 	    this.varianteActivada = variante;
-	    this.app = app;
+	    this.channelTest = channel;
+	    this.appTest = app;
+	    this.driver = driver;
+	}
+	
+	public static void activateTestsAB(List<ActivationData> testsABtoActive, Channel channel, AppEcom app, WebDriver driver) throws Exception {
+		for (ActivationData testABtoActive : testsABtoActive) {
+			TestABGoogleExperiments testAB = new TestABGoogleExperiments(testABtoActive.getTestAB(), testABtoActive.getvToActive(), channel, app, driver);
+			testAB.activateTestAB();
+		}
 	}
 	
 	@Override
-	public void activateTestAB(int variante, WebDriver driver) throws Exception {
+	public void activateTestAB(int variante) throws Exception {
         this.varianteActivada = variante;
-        activateTestAB(driver);
+        activateTestAB();
 	}
 	
 	@Override
-	public void activateTestAB(WebDriver driver) throws Exception {
-		String valueCookieRemovingTestAB = getValueCookieResetingAllTestABvariants(driver);
-		if (valueCookieRemovingTestAB!=null) { 
-	        String testABvalueForVariant = testAB.getValueCookie(app) + "%3A" + varianteActivada + "%2C";
-	        String newValueCookie = valueCookieRemovingTestAB + testABvalueForVariant;
-	        Cookie actualCookie = driver.manage().getCookieNamed(nameCookieGoogleExperiments);
-	        Cookie newCookie = getClonedWithNewValue(actualCookie, newValueCookie);
-	        driver.manage().deleteCookieNamed(nameCookieGoogleExperiments);
-	        driver.manage().addCookie(newCookie);
+	public void activateTestAB() throws Exception {
+		if (isActiveForChannelAndApp()) {
+			String valueCookieRemovingTestAB = getValueCookieResetingAllTestABvariants(driver);
+			if (valueCookieRemovingTestAB!=null) { 
+		        String testABvalueForVariant = testAB.getValueCookie(appTest) + "%3A" + varianteActivada + "%2C";
+		        String newValueCookie = valueCookieRemovingTestAB + testABvalueForVariant;
+		        Cookie actualCookie = driver.manage().getCookieNamed(nameCookieGoogleExperiments);
+		        Cookie newCookie = getClonedWithNewValue(actualCookie, newValueCookie);
+		        driver.manage().deleteCookieNamed(nameCookieGoogleExperiments);
+		        driver.manage().addCookie(newCookie);
+			}
 		}
 	}
 	
@@ -71,7 +88,7 @@ public class TestABGoogleExperiments implements TestAB {
 	}
 	
 	@Override
-	public int getVariant(WebDriver driver) {
+	public int getVariant() {
 		return (getVariantFromCookie(driver));
 	}
 	
@@ -120,7 +137,7 @@ public class TestABGoogleExperiments implements TestAB {
 	}
 	
 	String getValueExpectedInCookie(TestABid testAB, int variante) {
-		return (testAB.getValueCookie(app) + "%3A" + variante + "%2C");
+		return (testAB.getValueCookie(appTest) + "%3A" + variante + "%2C");
 	}
 
 	
@@ -134,15 +151,21 @@ public class TestABGoogleExperiments implements TestAB {
 	}
 	
 	@Override
-	public void activateRandomTestABInBrowser(WebDriver driver) throws Exception {
+	public void activateRandomTestABInBrowser() throws Exception {
 		int numVariantes = testAB.variantes.size();
 		int variante = RandomNumber(0, numVariantes-1);
-		activateTestAB(variante, driver);
+		activateTestAB(variante);
 	}
 	
 	private int RandomNumber(int minimo, int maximo) {
 		Random random = new Random();
 		return (random.nextInt(maximo - minimo + 1) + minimo);
+	}
+	
+	private boolean isActiveForChannelAndApp() {
+		return (
+			testAB.channels.contains(channelTest) &&
+			testAB.apps.contains(appTest));
 	}
 
 }

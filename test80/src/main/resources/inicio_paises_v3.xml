@@ -5464,7 +5464,6 @@
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<tipopago>PSP</tipopago>
 <!-- Hay un pequeño problema y es que en Shop aparece "KREDİ KARTI"  y en Outlet "KREDI KARTI". Mientras que siga así tendremos que definir las siguientes 2 líneas-->
 <pago 
 	type="KrediKarti" shop="s" outlet="n" votf="n" ordenpantalla="1" 

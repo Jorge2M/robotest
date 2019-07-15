@@ -20,7 +20,8 @@ public class SecCabeceraShop extends SecCabecera {
     private final static String XPathNumArticlesBolsa = "//span[@class='icon-button-items']";
 	
     public enum IconoCabeceraShop implements ElementPage {
-    	lupa("//span[@class[contains(.,'-search')]]"),
+    	lupa("//span[@class[contains(.,'-search')]]/.."),
+    	//lupa("//self::*[@id='search_icon_button']"),
 		iniciarsesion("//self::*[@id='login_any' or @id='login_mobile_any']/span[@class[contains(.,'-account')]]/.."),
     	micuenta("//self::*[@id='login' or @id='login_mobile']/span[@class[contains(.,'-account')]]/.."),
 		favoritos("//span[@class[contains(.,'-favorites')]]/.."),

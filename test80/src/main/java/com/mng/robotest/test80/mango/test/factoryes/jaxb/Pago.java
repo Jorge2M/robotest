@@ -67,7 +67,6 @@ public class Pago {
     String tipoenviooutlet = "STANDARD";
     String provinciaenvio;
     String tipotarj;
-    String codigopsp;
     String numtarj;
     String mescad;
     String anycad;
@@ -377,15 +376,6 @@ public class Pago {
     
     public TypeTarj getTipotarjEnum() {
         return TypeTarj.valueOf(getTipotarj());
-    }
-	
-    public String getCodigopsp() {
-        return this.codigopsp;
-    }
-	
-    @XmlAttribute(name="codigopsp")
-    public void setCodigopsp(String codigopsp) {
-        this.codigopsp = codigopsp;
     }
 	
     public String getNumtarj() {

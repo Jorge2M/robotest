@@ -12,7 +12,6 @@ import com.mng.robotest.test80.mango.test.utils.LevelPais;
 @XmlRootElement
 public class Pais {
 
-	public enum LayoutPago {Linea, Pestaña} //Pestaña actualmente sólo disponible en Turquía
     public static final int MAX_PAGOS = 25;
 	
     String nombre_pais;
@@ -44,8 +43,6 @@ public class Pais {
     Shoponline shoponline = new Shoponline();
     AccesoEmpl accesoEmpl = new AccesoEmpl();
     AccesoVOTF accesoVOTF = new AccesoVOTF();
-    
-    String tipopago;
     
     @XmlElement(name="pago") 
     List<Pago> listPagos = new LinkedList<>();
@@ -274,23 +271,7 @@ public class Pais {
     @XmlElement(name="accesovotf")
     public void setAccesoVOTF(AccesoVOTF accesoVOTF) {
         this.accesoVOTF = accesoVOTF;
-    }
-    
-    public String getTipopago() {
-        return this.tipopago;
-    }
-    
-    public LayoutPago getLayoutPago() {
-    	if (getTipopago()==null || getTipopago().compareTo("PSP")!=0) {
-    		return LayoutPago.Linea;
-    	}
-    	return LayoutPago.Pestaña;
-    }    
-
-    @XmlElement
-    public void setTipopago(String tipopago) {
-        this.tipopago = tipopago;
-    }
+    } 
     
     public List<Pago> getListPagos() {
         return this.listPagos;
@@ -577,10 +558,6 @@ public class Pais {
         }
         
         return urlRes;
-    }
-    
-    public boolean isPagoPSP() {
-        return (getTipopago()!=null && getTipopago().compareTo("PSP")==0);
     }
     
     public LevelPais getLevelPais() {

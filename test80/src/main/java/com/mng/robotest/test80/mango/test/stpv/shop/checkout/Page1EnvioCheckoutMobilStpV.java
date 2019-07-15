@@ -101,7 +101,7 @@ public class Page1EnvioCheckoutMobilStpV {
     	description="Están presentes los métodos de pago",
     	level=State.Defect)
     private static boolean checkAppearsPageWithPaymentMethods(Pais pais, Channel channel, WebDriver driver) {
-        return (PageCheckoutWrapper.isPresentMetodosPago(pais, channel, driver));
+        return (PageCheckoutWrapper.isPresentMetodosPago(channel, driver));
     }
     
     @Validation

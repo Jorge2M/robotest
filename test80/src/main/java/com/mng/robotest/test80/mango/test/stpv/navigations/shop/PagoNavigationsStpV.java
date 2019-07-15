@@ -51,9 +51,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageResultPagoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageResultPagoTpvStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory.FactoryPagos;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory.PagoStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.favoritos.PageFavoritosStpV;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
-import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
 
 public class PagoNavigationsStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
@@ -108,7 +106,7 @@ public class PagoNavigationsStpV {
         }
         
         AccesoNavigations.accesoHomeAppWeb(dCtxSh, driver);
-        TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, driver);
+        //TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, driver);
         PageIdentificacion.loginOrLogoff(dCtxSh, driver);
 
         //Validaciones analítica (sólo para firefox y NetAnalysis)

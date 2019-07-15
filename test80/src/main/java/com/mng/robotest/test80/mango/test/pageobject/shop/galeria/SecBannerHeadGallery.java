@@ -15,7 +15,7 @@ public class SecBannerHeadGallery extends WebdrvWrapp {
     static String XPathBanner = "//div[@class='bannerHead' or @class='firstBanner' or @class='innerBanner']";
     static String XPathBannerWithVideo = XPathBanner + "//div[@data-video]";
     static String XPathBannerWithBackgroundImage = XPathBanner + "//div[@style[contains(.,'background-image')]]";
-    static String XPathText = XPathBanner + "//div[@class[contains(.,'textinfo')] or @class='vsv-text']";
+    static String XPathText = XPathBanner + "//div[@class[contains(.,'textinfo')] or @class='vsv-text' or @class='vsv-content-text']";
     static String XPathTextLinkInfoRebajas = XPathBanner + "//div[@class[contains(.,'infotext')]]";
     static String XPathTextLinkMoreInfoRebajas = XPathTextLinkInfoRebajas + "//self::*[@class[contains(.,'max')]]";
     static String XPathTextLinkLessInfoRebajas = XPathTextLinkInfoRebajas + "//self::*[@class[contains(.,'min')]]";
