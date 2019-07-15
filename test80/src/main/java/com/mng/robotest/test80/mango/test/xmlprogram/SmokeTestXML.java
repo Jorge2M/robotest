@@ -34,7 +34,7 @@ public class SmokeTestXML {
      * Ejecución desde el Online
      *
      */
-    public void testRunner(ParamsBean paramsToStore) {
+    public void testRunner(ParamsBean paramsToStore) { 
         params = paramsToStore;
         setDataFilterFromParams();
         
