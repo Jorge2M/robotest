@@ -14,8 +14,9 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
+import com.mng.robotest.test80.TestMaker;
 import com.mng.robotest.test80.arq.utils.filter.DataFilterTCases;
-import com.mng.robotest.test80.arq.utils.filter.FilterTNGxmlTRun;
+import com.mng.robotest.test80.arq.utils.filter.FilterTestsSuiteXML;
 import com.mng.robotest.test80.arq.utils.filter.TestMethod;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
@@ -23,75 +24,62 @@ import com.mng.robotest.test80.arq.utils.webdriver.BStackDataDesktop;
 import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.arq.xmlprogram.TestMakerSuiteXML;
 import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
 
-public class SmokeTestXML {
+public class SmokeTestXML extends TestMakerSuiteXML {
 
-    ParamsBean params = null;
-    final DataFilterTCases dFilter = new DataFilterTCases();
+    private SmokeTestXML(ParamsBean params, TestMaker testMaker) {
+    	super(params, testMaker);
+    }
     
     /**
      * Ejecución desde el Online
      *
      */
-    public void testRunner(ParamsBean paramsToStore) { 
-        params = paramsToStore;
-        setDataFilterFromParams();
-        
-        // Lista de suites (sólo creamos una)
+    public void testRunner() { 
         List<XmlSuite> suites = new ArrayList<>();
-        suites.add(createSuite(this.params));    
-          
+        suites.add(xmlSuite);    
         TestNG tng = new TestNG();
         tng.setXmlSuites(suites);
         tng.setUseDefaultListeners(false);
         tng.run();
     }
     
-    public List<TestMethod> getDataTestAnnotationsToExec(ParamsBean paramsToStore) {
-        params = paramsToStore;
-        setDataFilterFromParams();
-        
-        XmlSuite xmlSuite = createSuite(params);
+    public List<TestMethod> getDataTestAnnotationsToExec() {
         XmlTest testRun = xmlSuite.getTests().get(0);
         return (
-        	FilterTNGxmlTRun.getInitialTestCaseCandidatesToExecute(testRun, dFilter.getChannel(), dFilter.getAppE())
+        	getInitialTestCaseCandidatesToExecute(testRun, dFilter.getChannel(), dFilter.getAppE())
         );
     }
     
     //Esto ha de estar en una clase padre
-    private void setDataFilterFromParams() {
-        dFilter.setAppE(params.getAppE());
-        dFilter.setChannel(params.getChannel());
-        dFilter.setGroupsFilter(params.getGroupsList());
-        dFilter.setTestCasesFilter(params.getTestCasesList());
-    }
-    
-    private XmlSuite createSuite(ParamsBean paramsI) {
+
+    private static XmlSuite createSuite(ParamsBean params) {
         XmlSuite suite = new XmlSuite();
         
         //Asignamos un nombre a la suite, definimos sus atributos y los listeners
         //suite.setName("TestMovilWeb");
         suite.setFileName("tng_Funcionales_Movil.xml");
-        suite.setName(paramsI.getSuiteName());
+        suite.setName(params.getSuiteName());
         suite.setListeners(CommonsXML.createStandardListeners());
 
         //Creamos los parámetros comunes y los asociamos a la suite
         Map<String, String> parametersSuite = new HashMap<>();
-        createCommonParamsSuite(parametersSuite, paramsI);
+        createCommonParamsSuite(parametersSuite, params);
         suite.setParameters(parametersSuite);
         
-        if (paramsI.getBrowser().compareTo(Constantes.BROWSERSTACK)==0) {
+        if (params.getBrowser().compareTo(Constantes.BROWSERSTACK)==0) {
             //En el caso de BrowserStack paralelizaremos a nivel de los TestRuns (1 hilo x cada TestRun asociado a un dispositivo/browser)
             suite.setParallel(ParallelMode.TESTS);
             suite.setThreadCount(Constantes.BSTACK_PARALLEL);
-            if (paramsI.getChannel()==Channel.movil_web) {
-                joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, CommonMangoDataForXML.bsMovilAndroid);
-                joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, CommonMangoDataForXML.bsMovilIOS);            
+            if (params.getChannel()==Channel.movil_web) {
+                joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, params, suite, CommonMangoDataForXML.bsMovilAndroid);
+                joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, params, suite, CommonMangoDataForXML.bsMovilIOS);            
             } else {
                 //joinSuiteWithTestRunDesktopBStack(TypeDriver.browserstack, suite, commonsXML.bsDktopWin10Explorer);
-                joinSuiteWithTestRunDesktopBStack(TypeWebDriver.browserstack, suite, CommonMangoDataForXML.bsDktopOSXSafari);
-                joinSuiteWithTestRunDesktopBStack(TypeWebDriver.browserstack, suite, CommonMangoDataForXML.bsDktopWin8Firefox);
+                joinSuiteWithTestRunDesktopBStack(TypeWebDriver.browserstack, params, suite, CommonMangoDataForXML.bsDktopOSXSafari);
+                joinSuiteWithTestRunDesktopBStack(TypeWebDriver.browserstack, params, suite, CommonMangoDataForXML.bsDktopWin8Firefox);
             }
         } else {
             //En caso <> BrowserStack paralelizaremos a nivel de los Métodos (casos de prueba)
@@ -99,58 +87,58 @@ public class SmokeTestXML {
             suite.setThreadCount(3);
             
             //Sólo ejecutamos 1 TestRun
-            createTestRunFilteredWithTestCases(suite, CommonsXML.getDescriptionTestRun(this.params), this.params.getGroups(), this.params.getTestCases());
+            createTestRunFilteredWithTestCases(params, suite, CommonsXML.getDescriptionTestRun(params), params.getGroups(), params.getTestCases());
         }
         
         return suite;
     }
     
-    private void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean paramsI) {
+    private static void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean paramsI) {
     	CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, paramsI);
     }
     
-    private XmlTest joinSuiteWithTestRunMobilBStack(TypeWebDriver webdriverType, XmlSuite suite, BStackDataMovil bsMovil) {
+    private static XmlTest joinSuiteWithTestRunMobilBStack(TypeWebDriver webdriverType, ParamsBean params, XmlSuite suite, BStackDataMovil bsMovil) {
         XmlTest testRun = CommonsXML.joinSuiteWithTestRunMobilBStack(webdriverType, suite, bsMovil);
-        testRun.setGroups(createGroups());
-        testRun.setXmlClasses(createClasses());
-        FilterTNGxmlTRun.filterTestCasesToExec(testRun, dFilter);
+        testRun.setGroups(createGroups(params));
+        testRun.setXmlClasses(createClasses(params));
+        filterTestCasesToExec(testRun);
         return testRun;
     }
     
-    private XmlTest joinSuiteWithTestRunDesktopBStack(TypeWebDriver webdriverType, XmlSuite suite, BStackDataDesktop bsDesktop) {
+    private static XmlTest joinSuiteWithTestRunDesktopBStack(TypeWebDriver webdriverType, ParamsBean params, XmlSuite suite, BStackDataDesktop bsDesktop) {
         XmlTest testRun = CommonsXML.joinSuiteWithTestRunDesktopBStack(webdriverType, suite, bsDesktop);
-        testRun.setGroups(createGroups());
-        testRun.setXmlClasses(createClasses());
-        FilterTNGxmlTRun.filterTestCasesToExec(testRun, dFilter);
+        testRun.setGroups(createGroups(params));
+        testRun.setXmlClasses(createClasses(params));
+        filterTestCasesToExec(testRun);
         return testRun;
     }    
     
-    private XmlTest createTestRunFilteredWithTestCases(XmlSuite suite, String testRunName, String[] groups, String[] testCaseList) {
+    private static XmlTest createTestRunFilteredWithTestCases(ParamsBean params, XmlSuite suite, String testRunName, String[] groups, String[] testCaseList) {
         XmlTest testRun = CommonsXML.createTestRun(suite, testRunName, testCaseList);
-        testRun.setGroups(createGroups());
-        testRun.setXmlClasses(createClasses());
-        FilterTNGxmlTRun.filterTestCasesToExec(testRun, dFilter);
+        testRun.setGroups(createGroups(params));
+        testRun.setXmlClasses(createClasses(params));
+        filterTestCasesToExec(testRun);
         return testRun;
     }    
     
-    private XmlGroups createGroups() {
+    private static XmlGroups createGroups(ParamsBean params) {
         XmlGroups groups = new XmlGroups();
-        groups.setRun(createRun());
-        groups.setXmlDependencies(createDependencies());
+        groups.setRun(createRun(params));
+        groups.setXmlDependencies(createDependencies(params));
         return groups;
     }    
     
-    private XmlRun createRun() {
+    private static XmlRun createRun(ParamsBean params) {
         XmlRun run = new XmlRun();
-        for (String group : CommonsXML.getListOfPossibleGroups(this.params.getChannel(), this.params.getAppE()))
+        for (String group : CommonsXML.getListOfPossibleGroups(params.getChannel(), params.getAppE()))
             run.onInclude(group);
         
         return run;
     }
     
-    private XmlDependencies createDependencies() {
+    private static XmlDependencies createDependencies(ParamsBean params) {
         XmlDependencies dependencies = new XmlDependencies();
-        switch (this.params.getChannel()) {
+        switch (params.getChannel()) {
         case desktop:
 //            //dependencies.onGroup("Buscador", "Registro");
 //            dependencies.onGroup("Buscador", "IniciarSesion");
@@ -170,11 +158,11 @@ public class SmokeTestXML {
         return dependencies;
     }
     
-    private List<XmlClass> createClasses() {
+    private static List<XmlClass> createClasses(ParamsBean params) {
         List<XmlClass> listClasses = new ArrayList<>();
         
         //Existen un conjunto de tests que todavía no están implementados en el canal movil_web
-        if (this.params.getChannel()==Channel.desktop) {
+        if (params.getChannel()==Channel.desktop) {
             listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.appshop.Otras"));
             listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.appshop.SEO"));
             listClasses.add(new XmlClass("com.mng.robotest.test80.mango.test.appshop.IniciarSesion"));

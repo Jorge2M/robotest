@@ -14,11 +14,13 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.arq.xmlprogram.TestMakerSuiteXML;
+import com.mng.robotest.test80.TestMaker;
 import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
 
 import org.testng.xml.XmlTest;
 
-public class TestNGxmlStub {
+public class TestNGxmlStub extends TestMakerSuiteXML {
 
     public enum TypeStubTest {
     	WithoutMethodsIncludedInClass,
@@ -34,19 +36,16 @@ public class TestNGxmlStub {
     public final String methodThatDoesNotExistsInClass = "COM001_Compra_TrjSaved_Empl";
     public final int numberTestsCasesDesktopShop = 3;
     
-    ParamsBean params = null;
     TypeStubTest typeTest;
 
-    private TestNGxmlStub() {};
-    
-    public static TestNGxmlStub newTest(TypeStubTest typeTest) {
-    	TestNGxmlStub test = new TestNGxmlStub();
-    	test.setTypeTest(typeTest);
-    	return test;
+    private TestNGxmlStub(TypeStubTest typeTest, ParamsBean params, TestMaker testMaker) {
+    	super(params, testMaker);
+    	this.typeTest = typeTest;
     }
     
-    private void setTypeTest(TypeStubTest typeTest) {
-    	this.typeTest = typeTest;
+    public static TestNGxmlStub getNew(TypeStubTest typeTest, ParamsBean params, TestMaker testMaker) {
+    	TestNGxmlStub test = new TestNGxmlStub(typeTest, params, testMaker); 
+    	return test;
     }
     
     /**
@@ -55,7 +54,7 @@ public class TestNGxmlStub {
      */
     public void testRunner(ParamsBean paramsToStore) {
         List<XmlSuite> suites = new ArrayList<>();
-        suites.add(createSuite(paramsToStore));    
+        suites.add(createSuite());    
         TestNG tng = new TestNG();
         tng.setXmlSuites(suites);
         tng.setUseDefaultListeners(false);
@@ -67,8 +66,8 @@ public class TestNGxmlStub {
      *  V1 - Include all methods
      *  V2 - Include only the method this.methodGroupGaleriaProductoIncluded
      */
-    public XmlSuite createSuite(ParamsBean paramsToStore) {
-        this.params = paramsToStore;
+    @Override
+    public XmlSuite createSuite() {
         XmlSuite suite = new XmlSuite();
         suite.setName("Suite Example");
         suite.setParallel(ParallelMode.METHODS);

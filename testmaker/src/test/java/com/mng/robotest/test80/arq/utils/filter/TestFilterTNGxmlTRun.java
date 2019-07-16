@@ -14,7 +14,7 @@ import org.testng.xml.XmlInclude;
 import org.testng.xml.XmlTest;
 
 import com.mng.robotest.test80.arq.utils.conf.AppTest;
-import com.mng.robotest.test80.arq.utils.filter.FilterTNGxmlTRun;
+import com.mng.robotest.test80.arq.utils.filter.FilterTestsSuiteXML;
 import com.mng.robotest.test80.arq.utils.filter.resources.TestNGxmlStub;
 import com.mng.robotest.test80.arq.utils.filter.resources.TestNGxmlStub.TypeStubTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
@@ -47,7 +47,7 @@ public class TestFilterTNGxmlTRun {
         DataFilterTCases dFilter = new DataFilterTCases();
         dFilter.setAppE(appE);
         dFilter.setChannel(channel);
-        List<TestMethod> testMethods = FilterTNGxmlTRun.getTestCasesToExecute(testRun, dFilter);
+        List<TestMethod> testMethods = FilterTestsSuiteXML.getTestCasesToExecute(testRun, dFilter);
         
         assertEquals("The number of tests is 3", 3, testMethods.size());
         ArrayList<String> testMethodsNames = new ArrayList<>();
@@ -71,7 +71,7 @@ public class TestFilterTNGxmlTRun {
         XmlTest xmlTest = getTestRun(testStub, channel, appE);
         
         //Code to test
-        List<TestMethod> testMethods = FilterTNGxmlTRun.getTestsCasesInXMLClasses(xmlTest);
+        List<TestMethod> testMethods = FilterTestsSuiteXML.getTestsCasesInXMLClasses(xmlTest);
         
         String descriptionExpected = "[Usuario registrado] Acceder a galería camisas. Filtros y ordenación. Seleccionar producto y color";
         assertEquals("The number of tests is 1", 1, testMethods.size());
@@ -90,7 +90,7 @@ public class TestFilterTNGxmlTRun {
         XmlTest testRun = getTestRun(testStub, channel, appE);
         
         //Code to test
-        List<TestMethod> testMethods = FilterTNGxmlTRun.getTestsCasesInXMLClasses(testRun);
+        List<TestMethod> testMethods = FilterTestsSuiteXML.getTestsCasesInXMLClasses(testRun);
         
         assertEquals("The number of tests is 4", 4, testMethods.size());
     }
@@ -110,7 +110,7 @@ public class TestFilterTNGxmlTRun {
         DataFilterTCases dFilter = new DataFilterTCases();
         dFilter.setAppE(appE);
         dFilter.setChannel(channel);
-        FilterTNGxmlTRun.filterTestCasesToExec(xmlTest, dFilter);
+        FilterTestsSuiteXML.filterTestCasesToExec(xmlTest, dFilter);
         
         //The xmlTest is not changed 
         assertEquals("The number of classes remais equal", initNumberXmlClasses, xmlTest.getXmlClasses().size());
@@ -130,7 +130,7 @@ public class TestFilterTNGxmlTRun {
         DataFilterTCases dFilter = new DataFilterTCases();
         dFilter.setAppE(appE);
         dFilter.setChannel(channel);
-        FilterTNGxmlTRun.filterTestCasesToExec(testRun, dFilter);
+        FilterTestsSuiteXML.filterTestCasesToExec(testRun, dFilter);
         
         assertEquals("The number of classes remais equal", initNumberXmlClasses, testRun.getXmlClasses().size());
         assertEquals("The number of dependencies-group is " + 1, 1, testRun.getXmlDependencyGroups().size());
@@ -151,7 +151,7 @@ public class TestFilterTNGxmlTRun {
         dFilter.setAppE(appE);
         dFilter.setChannel(channel);
         dFilter.setTestCasesFilter(testCaseList);
-        FilterTNGxmlTRun.filterTestCasesToExec(testRun, dFilter);
+        FilterTestsSuiteXML.filterTestCasesToExec(testRun, dFilter);
         
         String textExpectedToNotBeIncluded = testStub.methodGroupMiCuentaToInclude;
         assertTrue("The new method " + testExpectedToBeIncluded + " is included", classIncludesMethod(testRun.getXmlClasses().get(0), testExpectedToBeIncluded));
@@ -194,7 +194,7 @@ public class TestFilterTNGxmlTRun {
         dFilter.setAppE(app);
         dFilter.setChannel(channel);
         dFilter.setTestCasesFilter(testCaseList);
-        FilterTNGxmlTRun.filterTestCasesToExec(testRun, dFilter);
+        FilterTestsSuiteXML.filterTestCasesToExec(testRun, dFilter);
         
         assertEquals("Remains only 1 dependency-group ", 1, testRun.getXmlDependencyGroups().size());
         assertTrue("Is present the group \"GaleriaProducto\"", isGroupInDependencies(testRun, "GaleriaProducto", GroupDep.to));
@@ -216,7 +216,7 @@ public class TestFilterTNGxmlTRun {
         dFilter.setAppE(appE);
         dFilter.setChannel(channel);
         dFilter.setTestCasesFilter(testCaseList);
-        FilterTNGxmlTRun.filterTestCasesToExec(testRun, dFilter);
+        FilterTestsSuiteXML.filterTestCasesToExec(testRun, dFilter);
         
         assertEquals("No classes remains ", 0, testRun.getClasses().size());
     }
@@ -224,13 +224,13 @@ public class TestFilterTNGxmlTRun {
     private TestNGxmlStub makeTestStub(Channel channel, AppTest appE, TypeStubTest typeTest) {
         ParamsBean params = new ParamsBean(appE, null);
         params.setChannel(channel);
-        return (TestNGxmlStub.newTest(typeTest));
+        return (TestNGxmlStub.getNew(typeTest, params, null));
     }
     
     private XmlTest getTestRun(TestNGxmlStub testStub, Channel channel, AppTest appE) {
         ParamsBean params = new ParamsBean(appE, null);
         params.setChannel(channel);
-        return (testStub.createSuite(params).getTests().get(0));
+        return (testStub.createSuite().getTests().get(0));
     }
     
     private int getIncludedMethodsCount(List<XmlClass> listXmlClasses) {

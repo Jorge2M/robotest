@@ -24,27 +24,50 @@ import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
+import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
 
-public class FilterTNGxmlTRun {
+public class FilterTestsSuiteXML {
+	
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    
+    private final DataFilterTCases dFilter;
 
+    public FilterTestsSuiteXML(ParamsBean params) {
+    	this.dFilter = getDataFilterFromParams(params);
+    }
+    
+    private DataFilterTCases getDataFilterFromParams(ParamsBean params) {
+    	DataFilterTCases dFilter = new DataFilterTCases();
+        dFilter.setAppE(params.getAppE());
+        dFilter.setChannel(params.getChannel());
+        dFilter.setGroupsFilter(params.getGroupsList());
+        dFilter.setTestCasesFilter(params.getTestCasesList());
+        return dFilter;
+    }
+    
+    public DataFilterTCases dFilter() {
+    	return this.dFilter;
+    }
+    
     /**
      * Filter of a XmlTest of TestNG with the list of testCases. 
      * @param testCaseList contains the names of the methods to exec
      * 
      */
-    public static void filterTestCasesToExec(XmlTest testRun, DataFilterTCases dFilter) {
+    public void filterTestCasesToExec(XmlTest testRun) {
         try {
-        	List<TestMethod> testCaseListToExec = getTestCasesToExecute(testRun, dFilter);
+        	List<TestMethod> testCaseListToExec = getTestCasesToExecute(testRun);
     		includeTestCasesInTestRun(testCaseListToExec, testRun);
-    		removeDependenciesWithGroupsNotExecuted((XmlTestP80)testRun, dFilter);
+    		removeDependenciesWithGroupsNotExecuted((XmlTestP80)testRun);
         }
         catch (ClassNotFoundException e) {
             pLogger.fatal("Problem filtering TestCases", e);
         }
     }
     
-    public static List<TestMethod> getInitialTestCaseCandidatesToExecute(XmlTest testRun, Channel channel, AppTest app) {
+    public List<TestMethod> getInitialTestCaseCandidatesToExecute(XmlTest testRun) {
+    	Channel channel = dFilter.getChannel();
+    	AppTest app = dFilter.getAppE();
         List<TestMethod> listTestToReturn = new ArrayList<>();
         List<TestMethod> listTestsInXMLClasses = getTestsCasesInXMLClasses(testRun);
         List<String> groupsFromTestRun = testRun.getIncludedGroups();
@@ -60,7 +83,7 @@ public class FilterTNGxmlTRun {
         return listTestToReturn;
     }
     
-    public static boolean methodInTestCaseList(String methodName, List<String> listTestCases) {
+    public boolean methodInTestCaseList(String methodName, List<String> listTestCases) {
         for (String testCase : listTestCases) {
             if (testCase.compareTo(methodName)==0 ||  
                 methodName.indexOf(getCodeFromTestCase(testCase))==0) {
@@ -71,20 +94,20 @@ public class FilterTNGxmlTRun {
         return false;
     }
         
-    static List<TestMethod> getTestCasesToExecute(XmlTest testRun, DataFilterTCases dFilter) {
-    	List<TestMethod> testsCaseCandidates = getInitialTestCaseCandidatesToExecute(testRun, dFilter.getChannel(), dFilter.getAppE());
-    	return getTestCasesFilteredWithParams(testsCaseCandidates, dFilter);
+    public List<TestMethod> getTestCasesToExecute(XmlTest testRun) {
+    	List<TestMethod> testsCaseCandidates = getInitialTestCaseCandidatesToExecute(testRun);
+    	return getTestCasesFilteredWithParams(testsCaseCandidates);
     }
     
-    private static List<TestMethod> getTestCasesFilteredWithParams(List<TestMethod> listToFilter, DataFilterTCases dFilter) {
+    private List<TestMethod> getTestCasesFilteredWithParams(List<TestMethod> listToFilter) {
     	if (!dFilter.isSomeFilterActive()) {
     		return listToFilter;
     	}
-    	List<TestMethod> listTestsFilreredByGroups = getListTestsFilteredByGroups(listToFilter, dFilter);
-    	return (getListTestsFilteredByTestCases(listTestsFilreredByGroups, dFilter));
+    	List<TestMethod> listTestsFilreredByGroups = getListTestsFilteredByGroups(listToFilter);
+    	return (getListTestsFilteredByTestCases(listTestsFilreredByGroups));
     }
     
-    private static List<TestMethod> getListTestsFilteredByGroups(List<TestMethod> listToFilter, DataFilterTCases dFilter) {
+    private List<TestMethod> getListTestsFilteredByGroups(List<TestMethod> listToFilter) {
     	if (!dFilter.isActiveFilterByGroups()) {
     		return listToFilter;
     	}
@@ -100,7 +123,7 @@ public class FilterTNGxmlTRun {
     	return listTestsFiltered;
     }
     
-    private static List<TestMethod> getListTestsFilteredByTestCases(List<TestMethod> listToFilter, DataFilterTCases dFilter) {
+    private List<TestMethod> getListTestsFilteredByTestCases(List<TestMethod> listToFilter) {
     	if (!dFilter.isActiveFilterByTestCases()) {
     		return listToFilter;
     	}
@@ -116,7 +139,7 @@ public class FilterTNGxmlTRun {
     	return listTestsFiltered;
     }
      
-    private static boolean groupsContainsAnyGroup(String[] groupsTest, List<String> possibleGroups) {
+    private boolean groupsContainsAnyGroup(String[] groupsTest, List<String> possibleGroups) {
     	if (possibleGroups==null) {
     		return true;
     	}
@@ -133,7 +156,7 @@ public class FilterTNGxmlTRun {
      * @return obtendremos una lista de TestCases teniendo en cuenta el filtro que suponen: 
      *   - Los includes de métodos específicos existentes en la XML programática asociados a clases
      */
-    static List<TestMethod> getTestsCasesInXMLClasses(XmlTest testRun) {
+    protected List<TestMethod> getTestsCasesInXMLClasses(XmlTest testRun) {
         ArrayList<TestMethod> listOfAnnotationsOfTestCases = new ArrayList<>();
         try {
             for (XmlClass xmlClass : testRun.getClasses()) {
@@ -155,7 +178,7 @@ public class FilterTNGxmlTRun {
         return listOfAnnotationsOfTestCases;
     }    
     
-    private static void includeTestCasesInTestRun(List<TestMethod> testCasesToInclude, XmlTest testRun) 
+    private void includeTestCasesInTestRun(List<TestMethod> testCasesToInclude, XmlTest testRun) 
     throws ClassNotFoundException {
         for (Iterator<XmlClass> iterator = testRun.getClasses().iterator(); iterator.hasNext(); ) {
             XmlClass xmlClass = iterator.next();
@@ -169,8 +192,8 @@ public class FilterTNGxmlTRun {
     /**
      * Remove of the dependencies with source or destination group without any test for execution
      */
-    public static void removeDependenciesWithGroupsNotExecuted(XmlTestP80 testRun, DataFilterTCases dFilter) {
-        HashSet<String> groupsWithTestsToExec = getListOfGroupsWithTestCasesToExecute(testRun, dFilter);
+    private void removeDependenciesWithGroupsNotExecuted(XmlTestP80 testRun) {
+        HashSet<String> groupsWithTestsToExec = getListOfGroupsWithTestCasesToExecute(testRun);
         XmlGroups xmlGroups = testRun.getGroups();
         if (xmlGroups!=null) {
             List<XmlDependencies> listXmlDep  = xmlGroups.getDependencies();
@@ -187,7 +210,7 @@ public class FilterTNGxmlTRun {
         testRun.setGroups(xmlGroups);
     }
     
-    private static void includeOnlyTestCasesInXmlClass(XmlClass xmlClass, List<TestMethod> testCasesToInclude) 
+    private void includeOnlyTestCasesInXmlClass(XmlClass xmlClass, List<TestMethod> testCasesToInclude) 
     throws ClassNotFoundException {
         xmlClass.getIncludedMethods().clear();
         List<XmlInclude> includeMethods = new ArrayList<>();
@@ -204,16 +227,16 @@ public class FilterTNGxmlTRun {
         xmlClass.setIncludedMethods(includeMethods);
     }
     
-    private static HashSet<String> getListOfGroupsWithTestCasesToExecute(XmlTest testRun, DataFilterTCases dFilter) {
+    private HashSet<String> getListOfGroupsWithTestCasesToExecute(XmlTest testRun) {
         HashSet<String> listOfGropusWithTestCases = new HashSet<>();
-        List<TestMethod> listOfTestAnnotations = getTestCasesToExecute(testRun, dFilter);
+        List<TestMethod> listOfTestAnnotations = getTestCasesToExecute(testRun);
         for (TestMethod testMethod : listOfTestAnnotations) {
             listOfGropusWithTestCases.addAll(Arrays.asList(testMethod.getAnnotationTest().groups()));                        
         }
         return listOfGropusWithTestCases;
     }
     
-    static ArrayList<Method> getAllMethodsFilteredByInclude(XmlClass xmlClass) throws ClassNotFoundException {
+    private ArrayList<Method> getAllMethodsFilteredByInclude(XmlClass xmlClass) throws ClassNotFoundException {
         ArrayList<Method> methodListOfClass = new ArrayList<>(Arrays.asList(Class.forName(xmlClass.getName()).getMethods()));
         List<XmlInclude> includedMethods = xmlClass.getIncludedMethods();
         if (xmlClass.getIncludedMethods().isEmpty()) {
@@ -231,7 +254,7 @@ public class FilterTNGxmlTRun {
         return methodListFiltered;
     }
     
-    private static boolean listOfIncludesContains(List<XmlInclude> listOfIncludes, Method method) {
+    private boolean listOfIncludesContains(List<XmlInclude> listOfIncludes, Method method) {
         for (XmlInclude include : listOfIncludes) {
             if (include.getName().compareTo(method.getName())==0) {
                 return true;
@@ -241,7 +264,7 @@ public class FilterTNGxmlTRun {
         return false;
     }
     
-    private static boolean someGroupInList(List<String> groupsMethod, List<String> listGroups) {
+    private boolean someGroupInList(List<String> groupsMethod, List<String> listGroups) {
     	for (String groupMethod : groupsMethod) {
     		if (listGroups.contains(groupMethod)) {
     			return true;
@@ -252,7 +275,7 @@ public class FilterTNGxmlTRun {
     }
 
     
-    public static boolean testMethodsContainsMethod(List<TestMethod> testCasesToInclude, String methodName) {
+    private boolean testMethodsContainsMethod(List<TestMethod> testCasesToInclude, String methodName) {
         for (TestMethod testMethod : testCasesToInclude) {
             if (testMethod.getMethod().getName().compareTo(methodName)==0 ||  
                 methodName.indexOf(getCodeFromTestCase(testMethod.getMethod().getName()))==0) {
@@ -263,7 +286,7 @@ public class FilterTNGxmlTRun {
         return false;
     }
     
-    private static String getCodeFromTestCase(String testCase) {
+    private String getCodeFromTestCase(String testCase) {
         int posUnderscore = testCase.indexOf("_");
         if (posUnderscore<0) {
             return testCase;

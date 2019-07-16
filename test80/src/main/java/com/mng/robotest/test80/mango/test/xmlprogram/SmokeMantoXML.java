@@ -14,7 +14,7 @@ import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.arq.utils.filter.DataFilterTCases;
-import com.mng.robotest.test80.arq.utils.filter.FilterTNGxmlTRun;
+import com.mng.robotest.test80.arq.utils.filter.FilterTestsSuiteXML;
 import com.mng.robotest.test80.arq.utils.filter.TestMethod;
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
 import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
@@ -49,7 +49,7 @@ public class SmokeMantoXML {
         XmlSuite xmlSuite = createSuite(this.params);
         XmlTest testRun = xmlSuite.getTests().get(0);
         return (
-        	FilterTNGxmlTRun.getInitialTestCaseCandidatesToExecute(testRun, dFilter.getChannel(), dFilter.getAppE())
+        	FilterTestsSuiteXML.getInitialTestCaseCandidatesToExecute(testRun, dFilter.getChannel(), dFilter.getAppE())
         );
     }
     
@@ -95,7 +95,7 @@ public class SmokeMantoXML {
         XmlTest testRun = CommonsXML.createTestRun(suite, testRunName, testCaseList);
         testRun.setGroups(createGroups());
         testRun.setXmlClasses(createClasses());
-        FilterTNGxmlTRun.filterTestCasesToExec(testRun, dFilter);
+        FilterTestsSuiteXML.filterTestCasesToExec(testRun, dFilter);
         return testRun;
     }    
     
