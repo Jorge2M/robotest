@@ -69,6 +69,34 @@ public enum TestABid {
 	    	"V1-MVP Checkout Desktop"),
 	    Arrays.asList(Channel.desktop),
 	    Arrays.asList(AppEcom.shop)
+	),
+	
+	SHOP191_BuscadorDesktop (
+		TypeTestAB.GoogleOptimize,
+		"GTM-5T8R33",
+		"SHOP-191 - Buscador - Desktop - últimas búsquedas",
+	    "UWOU5vObVAZJ7ylnbAK2vQ",
+	    "GTM-KWJ6XJ_OPT-MSZD5$",
+	    "QUICK_PREVIEW",
+	    Arrays.asList(
+	    	"V0-Original", 
+	    	"V1-Last Searches Visible"),
+	    Arrays.asList(Channel.desktop),
+	    Arrays.asList(AppEcom.shop)
+	),
+	
+	SHOP126_HeaderNuevosIconosDesktop (
+		TypeTestAB.GoogleOptimize,
+		"GTM-5T8R33",
+		"100% - SHOP-126 - Header - Desktop - Nuevos Iconos",
+	    "UWOU5vObVAZJ7ylnbAK2vQ",
+	    "GTM-KWJ6XJ_OPT-KVTBH$",
+	    "QUICK_PREVIEW",
+	    Arrays.asList(
+	    	"V0-Original", 
+	    	"V1-Nuevos iconos"),
+	    Arrays.asList(Channel.desktop),
+	    Arrays.asList(AppEcom.shop)
 	);
 	
 	//Code TestAB GoogleExperiments
@@ -110,15 +138,15 @@ public enum TestABid {
 	}
 	
 	//Code TestAB GoogleOptimize
-	public String id;
+	public String group;
 	public String auth;
 	String experiment;
 	public String preview;
 	private TestABid(
-			TypeTestAB typeTestAB, String id, String descripcion, String auth, String experiment, String preview, List<String> variantes,
+			TypeTestAB typeTestAB, String group, String descripcion, String auth, String experiment, String preview, List<String> variantes,
 			List<Channel> channels, List<AppEcom> apps) {
 		this.typeTestAB = typeTestAB;
-		this.id = id;
+		this.group = group;
 		this.auth = auth;
 		this.experiment = experiment;
 		this.preview = preview;
