@@ -1,8 +1,6 @@
 package com.mng.robotest.test80.mango.test.utils.testab;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
@@ -45,13 +43,6 @@ public class TestABGoogleExperiments implements TestAB {
 	    this.driver = driver;
 	}
 	
-	public static void activateTestsAB(List<ActivationData> testsABtoActive, Channel channel, AppEcom app, WebDriver driver) throws Exception {
-		for (ActivationData testABtoActive : testsABtoActive) {
-			TestABGoogleExperiments testAB = new TestABGoogleExperiments(testABtoActive.getTestAB(), testABtoActive.getvToActive(), channel, app, driver);
-			testAB.activateTestAB();
-		}
-	}
-	
 	@Override
 	public void activateTestAB(int variante) throws Exception {
         this.varianteActivada = variante;
@@ -73,18 +64,11 @@ public class TestABGoogleExperiments implements TestAB {
 		}
 	}
 	
-	private Cookie getClonedWithNewValue(Cookie actualCookie, String newValue) {
-        Map<String,Object> jsonCookie = actualCookie.toJson();
-        Cookie newCookie = 
-        	new Cookie(
-        		(String)jsonCookie.get("name"), 
-        		newValue, 
-        		(String)jsonCookie.get("domain"), 
-        		(String)jsonCookie.get("path"), 
-        		(Date)jsonCookie.get("expiry"), 
-        		(boolean)jsonCookie.get("secure"), 
-        		(boolean)jsonCookie.get("httpOnly"));
-        return newCookie;
+	public static void activateTestsAB(List<ActivationData> testsABtoActive, Channel channel, AppEcom app, WebDriver driver) throws Exception {
+		for (ActivationData testABtoActive : testsABtoActive) {
+			TestABGoogleExperiments testAB = new TestABGoogleExperiments(testABtoActive.getTestAB(), testABtoActive.getvToActive(), channel, app, driver);
+			testAB.activateTestAB();
+		}
 	}
 	
 	@Override
@@ -140,7 +124,6 @@ public class TestABGoogleExperiments implements TestAB {
 		return (testAB.getValueCookie(appTest) + "%3A" + variante + "%2C");
 	}
 
-	
 	String getValueCookieGoogleExperiments(WebDriver driver) {
 		Cookie cookieGoogleExperiments = driver.manage().getCookieNamed(nameCookieGoogleExperiments);
 		if (cookieGoogleExperiments!=null) {
@@ -167,5 +150,4 @@ public class TestABGoogleExperiments implements TestAB {
 			testAB.channels.contains(channelTest) &&
 			testAB.apps.contains(appTest));
 	}
-
 }

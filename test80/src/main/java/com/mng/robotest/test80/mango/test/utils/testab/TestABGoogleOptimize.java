@@ -13,6 +13,11 @@ import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
+/**
+ *
+ * @deprecated use TestABOptimize instead
+ */
+@Deprecated
 public class TestABGoogleOptimize implements TestAB {
 	
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
@@ -75,7 +80,7 @@ public class TestABGoogleOptimize implements TestAB {
 	@Override
 	public void activateTestAB() throws Exception {
 		String windowHandlerToReturn = driver.getWindowHandle();
-		String titleTab = testAB.id;
+		String titleTab = testAB.group;
 		boolean activated = activateTestABwithoutCloseTab(titleTab);
 		if (activated) {
 			WebdrvWrapp.closeTabByTitleAndReturnToWidow(titleTab, windowHandlerToReturn, driver);
@@ -91,7 +96,7 @@ public class TestABGoogleOptimize implements TestAB {
 				return true;
 			}
 			catch (WebDriverException e) {
-				pLogger.warn("Problem activating TestAB " + this.testAB.id, e);
+				pLogger.warn("Problem activating TestAB " + this.testAB.group, e);
 			}
 		}
 		return false;
@@ -116,7 +121,7 @@ public class TestABGoogleOptimize implements TestAB {
 	private String getUrlOptimizeToSetTestAB(int variante) {
 		StringBuilder urlResult = new StringBuilder();
 		urlResult.append("https://www.google-analytics.com/start_preview/opt?uiv2&");
-		urlResult.append("id=" + testAB.id + "&");
+		urlResult.append("id=" + testAB.group + "&");
 		urlResult.append("gtm_auth=" + testAB.auth + "&");
 		urlResult.append("gtm_experiment=" + testAB.getExperimentWithVariant(variante) + "&");
 		urlResult.append("gtm_preview=" + testAB.preview + "&");
