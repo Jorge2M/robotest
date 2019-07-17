@@ -556,12 +556,20 @@ public class WebdrvWrapp extends ElementPageFunctions {
         };
     }    
     
-    /**
-     * Carga una URL en una pestaña aparte
-     */
     public static void loadUrlInAnotherTabTitle(String urlToLoad, String titlePant, WebDriver driver) throws Exception {
+    	loadUrlInAnotherTabTitle(urlToLoad, titlePant, "", driver);
+    }
+    
+    public static void loadUrlInAnotherMinimumTab(String urlToLoad, String titlePant, WebDriver driver) throws Exception {
+    	loadUrlInAnotherTabTitle(urlToLoad, titlePant, "height=100,width=100", driver);
+    }
+    
+    /**
+     * @param specs A comma-separated list of items, no whitespaces 
+     */
+    public static void loadUrlInAnotherTabTitle(String urlToLoad, String titlePant, String specs, WebDriver driver) throws Exception {
         JavascriptExecutor js = (JavascriptExecutor)driver;
-        js.executeScript("window.open('" + urlToLoad + "', '" + titlePant + "');");
+        js.executeScript("window.open('" + urlToLoad + "', '" + titlePant + "', '" + specs + "');");
         driver.switchTo().window(titlePant);
         try {
         	waitForPageLoaded(driver);

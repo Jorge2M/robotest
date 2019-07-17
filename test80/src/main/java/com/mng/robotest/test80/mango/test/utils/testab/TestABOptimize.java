@@ -1,6 +1,5 @@
 package com.mng.robotest.test80.mango.test.utils.testab;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Random;
 import org.apache.logging.log4j.LogManager;
@@ -143,7 +142,7 @@ public class TestABOptimize implements TestAB {
 		String windowHandlerToReturn = driver.getWindowHandle();
 		try {
 			String titleTab = "SetCookie " + cookie.getName() + "_" + cookie.getValue();
-			WebdrvWrapp.loadUrlInAnotherTabTitle("https://" + cookie.getDomain() + cookie.getPath(), titleTab, driver);
+			WebdrvWrapp.loadUrlInAnotherMinimumTab("https://" + cookie.getDomain() + cookie.getPath(), titleTab, driver);
 			driver.manage().addCookie(cookie);
 			WebdrvWrapp.closeTabByTitleAndReturnToWidow(titleTab, windowHandlerToReturn, driver);
 		}
