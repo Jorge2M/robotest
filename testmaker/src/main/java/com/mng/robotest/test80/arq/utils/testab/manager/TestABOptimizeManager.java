@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.utils.testab;
+package com.mng.robotest.test80.arq.utils.testab.manager;
 
 import java.util.List;
 import java.util.Random;
@@ -8,45 +8,36 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.InvalidCookieDomainException;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.utils.testab.TestABactData;
+import com.mng.robotest.test80.arq.utils.testab.TestABOptimize;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
-import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
-public class TestABOptimize implements TestAB {
+public class TestABOptimizeManager implements TestABmanager {
 	
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 	
-	final public TestABid testAB;
+	final public TestABOptimize testAB;
 	final Channel channelTest;
-	final AppEcom appTest;
+	final AppTest appTest;
 	final WebDriver driver;
 	public int varianteActivada = 0;
 	
-	public TestABOptimize(TestABid testAB, Channel channel, AppEcom app, WebDriver driver) {
+	public TestABOptimizeManager(TestABOptimize testAB, Channel channel, AppTest app, WebDriver driver) {
 		this.testAB = testAB;
 		this.channelTest = channel;
 		this.appTest = app;
 		this.driver = driver;
 	}
 	
-	public TestABOptimize(TestABid testAB, int variante, Channel channel, AppEcom app, WebDriver driver) {
+	public TestABOptimizeManager(TestABOptimize testAB, int variante, Channel channel, AppTest app, WebDriver driver) {
 		this.testAB = testAB;
 		this.varianteActivada = variante;
 		this.channelTest = channel;
 		this.appTest = app;
 		this.driver = driver;
-	}
-	
-	public TestABOptimize(String paramWithPointSeparator, Channel channel, AppEcom app, WebDriver driver) {
-		int posPoint = paramWithPointSeparator.indexOf(".");
-	    String idTestAB = paramWithPointSeparator.substring(0, posPoint);
-	    int variante = Integer.valueOf(paramWithPointSeparator.substring(posPoint + 1));
-	    this.testAB = TestABid.valueOf(idTestAB);
-	    this.varianteActivada = variante;
-		this.channelTest = channel;
-		this.appTest = app;
-	    this.driver = driver;
 	}
 	
 	@Override
@@ -64,10 +55,11 @@ public class TestABOptimize implements TestAB {
 		}
 	}
 	
-	public static void activateTestsAB(List<ActivationData> testsABtoActive, Channel channel, AppEcom app, WebDriver driver) throws Exception {
+	public static void activateTestsAB(List<TestABactData> testsABtoActive, Channel channel, AppTest app, WebDriver driver) 
+	throws Exception {
 		String valueCookie = "";
-		for (ActivationData testABtoActive : testsABtoActive) {
-			TestABid testAB = testABtoActive.getTestAB();
+		for (TestABactData testABtoActive : testsABtoActive) {
+			TestABOptimize testAB = (TestABOptimize)testABtoActive.getTestAB();
 			int vTestAB = testABtoActive.getvToActive();
 			if (isActiveForChannelAndApp(testAB, channel, app)) {
 				if ("".compareTo(valueCookie)==0) {
@@ -75,7 +67,7 @@ public class TestABOptimize implements TestAB {
 					setCookieGtm_preview(testAB, driver);
 					valueCookie+=getVariantInGtm_experiment(testAB, vTestAB);
 				} else {
-					valueCookie=valueCookie+"&"+testABtoActive.getTestAB().getExperimentWithVariant(vTestAB);
+					valueCookie=valueCookie+"&"+testAB.getIdExperiment() + vTestAB;
 				}
 			}
 		}
@@ -83,15 +75,15 @@ public class TestABOptimize implements TestAB {
 		setCookieGtm_experiment(valueCookie, driver);
 	}
 	
-	private static String getVariantInGtm_experiment(TestABid testAB, int variante) {
-		return (testAB.group + "=" + testAB.getExperimentWithVariant(variante));
+	private static String getVariantInGtm_experiment(TestABOptimize testAB, int variante) {
+		return (testAB.getGroup() + "=" + testAB.getIdExperiment() + variante);
 	}
 	
-	private static void setCookieGtm_auth(TestABid testAB, WebDriver driver) {
+	private static void setCookieGtm_auth(TestABOptimize testAB, WebDriver driver) {
 		String gtm_auth = "gtm_auth";
 		Cookie cookieGtm_auth = new Cookie(
 			gtm_auth, 
-    		testAB.group + "=" + testAB.auth, 
+    		testAB.getGroup() + "=" + testAB.getAuth(), 
     		"www.google-analytics.com", 
     		"/gtm/",
     		null, 
@@ -101,11 +93,11 @@ public class TestABOptimize implements TestAB {
 		setCookie(cookieGtm_auth, driver);
 	}
 	
-	private static void setCookieGtm_preview(TestABid testAB, WebDriver driver) {
+	private static void setCookieGtm_preview(TestABOptimize testAB, WebDriver driver) {
 		String gtm_preview = "gtm_preview";
 		Cookie cookieGtm_preview = new Cookie(
 			gtm_preview, 
-    		testAB.group + "=" + testAB.preview, 
+    		testAB.getGroup() + "=" + testAB.getPreview(), 
     		"www.google-analytics.com",
     		"/gtm/",
     		null, 
@@ -153,7 +145,7 @@ public class TestABOptimize implements TestAB {
 
 	@Override
 	public void activateRandomTestABInBrowser() throws Exception {
-		int numVariantes = testAB.variantes.size();
+		int numVariantes = testAB.getVariantes().size();
 		int variante = RandomNumber(0, numVariantes-1);
 		activateTestAB(variante);
 	}
@@ -172,9 +164,9 @@ public class TestABOptimize implements TestAB {
 		return (random.nextInt(maximo - minimo + 1) + minimo);
 	}
 	
-	private static boolean isActiveForChannelAndApp(TestABid testAB, Channel channel, AppEcom app) {
+	private static boolean isActiveForChannelAndApp(TestABOptimize testAB, Channel channel, AppTest app) {
 		return (
-			testAB.channels.contains(channel) &&
-			testAB.apps.contains(app));
+			testAB.getChannels().contains(channel) &&
+			testAB.getApps().contains(app));
 	}
 }
