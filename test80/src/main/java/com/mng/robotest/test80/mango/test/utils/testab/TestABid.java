@@ -18,7 +18,7 @@ public enum TestABid {
 			"V0-Galería sin React", //Este es el único caso posible en Outlet
 			"V1-Galería con React"),
 	    Arrays.asList(Channel.desktop),
-	    Arrays.asList(AppEcom.shop)
+	    Arrays.asList(AppEcom.shop, AppEcom.votf)
 	),
 	
 	//TODO es posible eliminarlo en cuanto se ejecute el planchado
@@ -31,7 +31,7 @@ public enum TestABid {
 			"V0-Galería sin React", //Este es el único caso posible en Outlet
 			"V1-Galería con React"),
 	    Arrays.asList(Channel.desktop),
-	    Arrays.asList(AppEcom.shop)
+	    Arrays.asList(AppEcom.shop, AppEcom.votf)
 	),
 		
 	//Optimize
@@ -82,7 +82,7 @@ public enum TestABid {
 	    	"V0-Original", 
 	    	"V1-Last Searches Visible"),
 	    Arrays.asList(Channel.desktop),
-	    Arrays.asList(AppEcom.shop)
+	    Arrays.asList(AppEcom.shop, AppEcom.votf)
 	),
 	
 	SHOP126_HeaderNuevosIconosDesktop (
@@ -96,7 +96,7 @@ public enum TestABid {
 	    	"V0-Original", 
 	    	"V1-Nuevos iconos"),
 	    Arrays.asList(Channel.desktop),
-	    Arrays.asList(AppEcom.shop)
+	    Arrays.asList(AppEcom.shop, AppEcom.votf)
 	);
 	
 	//Code TestAB GoogleExperiments
