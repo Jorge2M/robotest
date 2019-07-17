@@ -89,7 +89,8 @@ public abstract class PageGaleria extends WebdrvWrapp {
 		"//*[" +
 			"@id[contains(.,'__item')] or " + 
 			"@class[contains(.,'list-item')] or " + 
-			"@class='product'" + 
+			"@class='product'" +
+			//"@id[contains(.,'product-key-id')]"
 		"]";
 	
 	final static String XPathArticuloNoDoble =
@@ -186,8 +187,10 @@ public abstract class PageGaleria extends WebdrvWrapp {
     
     public boolean isFirstArticleOfType(LineaType lineaType) {
 	    List<WebElement> listaArticulos = driver.findElements(By.xpath(XPathArticulo));
-	    return (listaArticulos.size() > 0 &&
-	    		isElementPresent(listaArticulos.get(0), By.xpath("//a[@href[contains(.,'" + lineaType + "')]]")));
+	    return (
+	    	listaArticulos.size() > 0 &&
+	    	isElementPresent(listaArticulos.get(0), By.xpath("//a[@href[contains(.,'" + lineaType + "')]]"))
+	    );
     }
     
     public void moveToArticleAndGetObject(int posArticulo) {

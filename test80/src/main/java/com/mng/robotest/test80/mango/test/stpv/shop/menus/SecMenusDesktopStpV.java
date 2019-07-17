@@ -116,18 +116,17 @@ public class SecMenusDesktopStpV {
 		pageGaleriaStpV.validateGaleriaAfeterSelectMenu(dCtxSh);
         validationsSelecMenuEspecificDesktop(menu);
        
-        //Validaciones estándar. 
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
         flagsVal.validaSEO = true;
         flagsVal.validaJS = true;
         flagsVal.validaImgBroken = false;
         AllPagesStpV.validacionesEstandar(flagsVal, driver);
         
-        //Por defecto aplicaremos todas las avalidaciones (Google Analytics, Criteo, NetTraffic y DataLayer)
-        EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(Constantes.AnalyticsVal.GoogleAnalytics,
-                                                                  Constantes.AnalyticsVal.NetTraffic, 
-                                                                  Constantes.AnalyticsVal.Criteo,
-                                                                  Constantes.AnalyticsVal.DataLayer);
+        EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
+        	Constantes.AnalyticsVal.GoogleAnalytics,
+            Constantes.AnalyticsVal.NetTraffic, 
+            Constantes.AnalyticsVal.Criteo,
+            Constantes.AnalyticsVal.DataLayer);
         
         PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, menu.getLinea(), analyticSet, driver);
     }

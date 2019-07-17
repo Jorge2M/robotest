@@ -894,7 +894,7 @@ public class PageGaleriaStpV {
 		int maxSecondsToWaitIcon = 2;
 		validations.add (
 			"Como mínimo se obtiene un artículo (lo esperamos hasta " + maxSecondsToWaitArticle + " segundos)",
-			pageGaleria.isVisibleArticleUntil(1/*numArticulo*/, maxSecondsToWaitArticle), State.Warn);
+			pageGaleria.isVisibleArticleUntil(1, maxSecondsToWaitArticle), State.Warn);
 		if (dCtxSh.appE==AppEcom.shop) {
 			validations.add (
 				"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + maxSecondsToWaitIcon + " segundos)",
