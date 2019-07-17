@@ -16,7 +16,7 @@ public class Constantes {
     public static final int RUTAFRAME = 2;
 	
     public static final String pass_standard = "sirjorge74";
-    public static final String mail_standard = "listablanca003@mango.com";
+    public static final String mail_standard = "jorge.munoz@mango.com";
 	
     public static final String CSS = "CSS";
     public static final String IMAGE = "IMAGE";
