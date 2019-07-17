@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.utils.testab;
+package com.mng.robotest.test80.arq.utils.testab.manager;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,49 +7,43 @@ import java.util.Map;
 
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
-public interface TestAB {
+import com.mng.robotest.test80.arq.utils.conf.AppTest;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.utils.testab.ActivationData;
+import com.mng.robotest.test80.arq.utils.testab.TestAB;
+import com.mng.robotest.test80.arq.utils.testab.TestAB.TypeTestAB;
+import com.mng.robotest.test80.arq.utils.testab.TestABGoogleExp;
+import com.mng.robotest.test80.arq.utils.testab.TestABOptimize;
+
+public interface TestABmanager {
 	
 	public void activateTestAB(int variante) throws Exception;
 	public void activateTestAB() throws Exception;
 	public void activateRandomTestABInBrowser() throws Exception;
 	public int getVariant() throws UnsupportedOperationException;
+
 	
-	public enum TypeTestAB {
-		GoogleExperiments,
-		GoogleOptimize;
-	}
-	
-	public static TestAB getInstance(TestABid idTestAB, Channel channel, AppEcom app, WebDriver driver) {
-		switch (idTestAB.getType()) {
+	public static TestABmanager getInstance(TestAB testAB, Channel channel, AppTest app, WebDriver driver) {
+		switch (testAB.getType()) {
 		case GoogleExperiments:
-			return (new TestABGoogleExperiments(idTestAB, channel, app, driver));
-		case GoogleOptimize:
+			return (new TestABGoogleExpManager((TestABGoogleExp)testAB, channel, app, driver));
+		case Optimize:
 		default:
-			return (new TestABOptimize(idTestAB, channel, app, driver));
+			return (new TestABOptimizeManager((TestABOptimize)testAB, channel, app, driver));
 		}
 	}
-	
-    public static void currentTestABsToActivate(Channel channel, AppEcom app, WebDriver driver) throws Exception {
-    	List<ActivationData> listTestABsToActivate = new ArrayList<>();
-    	listTestABsToActivate.add(ActivationData.getNew(TestABid.GaleriaDesktopReact, 0));
-    	//listTestABsToActivate.add(ActivationData.getNew(TestABid.SHOP191_BuscadorDesktop, 1));
-    	listTestABsToActivate.add(ActivationData.getNew(TestABid.MVPCheckoutDesktop, 0));
-    	listTestABsToActivate.add(ActivationData.getNew(TestABid.SHOP126_HeaderNuevosIconosDesktop, 1));
-    	activateTestsAB(listTestABsToActivate, channel, app, driver);
-    }
-    
-	public static void activateTestsAB(List<ActivationData> testsABtoActive, Channel channel, AppEcom app, WebDriver driver) throws Exception {
-		List<ActivationData> listOptimize = filterByTestABtype(testsABtoActive, TypeTestAB.GoogleOptimize);
+
+	public static void activateTestsAB(List<ActivationData> testsABtoActive, Channel channel, AppTest app, WebDriver driver) 
+	throws Exception {
+		List<ActivationData> listOptimize = filterByTestABtype(testsABtoActive, TypeTestAB.Optimize);
 		if (listOptimize.size() > 0) {
-			TestABOptimize.activateTestsAB(listOptimize, channel, app, driver);
+			TestABOptimizeManager.activateTestsAB(listOptimize, channel, app, driver);
 		}
 		
 		List<ActivationData> listExperiments = filterByTestABtype(testsABtoActive, TypeTestAB.GoogleExperiments);
 		if (listExperiments.size() > 0) {
-			TestABGoogleExperiments.activateTestsAB(listExperiments, channel, app, driver);
+			TestABGoogleExpManager.activateTestsAB(listExperiments, channel, app, driver);
 		}
 	}
 

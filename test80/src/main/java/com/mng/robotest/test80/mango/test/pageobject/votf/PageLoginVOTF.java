@@ -8,7 +8,7 @@ import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
-import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
+import com.mng.robotest.test80.mango.test.utils.testab.TestABGoogleExpImpl;
 
 public class PageLoginVOTF extends WebdrvWrapp {
 
@@ -23,7 +23,7 @@ public class PageLoginVOTF extends WebdrvWrapp {
     }
     
     private static void activateTestsABs(Channel channel, AppEcom app, WebDriver driver) throws Exception {
-    	TestAB.currentTestABsToActivate(channel, app, driver);
+    	TestABGoogleExpImpl.currentTestABsToActivate(channel, app, driver);
     	driver.navigate().refresh();
     }
     

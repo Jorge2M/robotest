@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.utils.testab.manager.TestABGoogleExpManager;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public class TestABGoogleExperimentsTest {
@@ -13,9 +14,9 @@ public class TestABGoogleExperimentsTest {
 	@Test
 	public void testGetVariantExistent() throws Exception {
 		//Mock
-		TestABGoogleExperiments testAB = Mockito.spy(new TestABGoogleExperiments(TestABid.GaleriaDesktopReact, Channel.desktop, AppEcom.shop, null));
+		TestABGoogleExpManager testAB = Mockito.spy(new TestABGoogleExpManager(TestABGoogleExpImpl.GaleriaDesktopReact, Channel.desktop, AppEcom.shop, null));
 		int variantExpected = 1;
-		String valueInCookie = testAB.getValueExpectedInCookie(TestABid.GaleriaDesktopReact, variantExpected);
+		String valueInCookie = testAB.getValueExpectedInCookie(TestABGoogleExpImpl.GaleriaDesktopReact, variantExpected);
 		Mockito.doReturn(valueInCookie).when(testAB).getValueCookieGoogleExperiments(Mockito.any());
 		
 		//Code to Test
@@ -28,8 +29,8 @@ public class TestABGoogleExperimentsTest {
 	@Test
 	public void testGetVariantNotExistent() {
 		//Mock
-		TestABGoogleExperiments testAB = Mockito.spy(new TestABGoogleExperiments(TestABid.GaleriaDesktopReact, Channel.desktop, AppEcom.shop, null));
-		String valueInCookie = testAB.getValueExpectedInCookie(TestABid.GaleriaDesktopReactPRESemanal, 1);
+		TestABGoogleExpManager testAB = Mockito.spy(new TestABGoogleExpManager(TestABGoogleExpImpl.GaleriaDesktopReact, Channel.desktop, AppEcom.shop, null));
+		String valueInCookie = testAB.getValueExpectedInCookie(TestABGoogleExpImpl.GaleriaDesktopReactPRESemanal, 1);
 		Mockito.doReturn(valueInCookie).when(testAB).getValueCookieGoogleExperiments(Mockito.any());
 		
 		//Code to Test
@@ -43,8 +44,8 @@ public class TestABGoogleExperimentsTest {
 	public void testGetValueCookieResetingAllVariants() {
 		//Mock
 		String remainderCookie = "Remainder";
-		TestABid testABtoInsert = TestABid.GaleriaDesktopReact;
-		TestABGoogleExperiments testAB = Mockito.spy(new TestABGoogleExperiments(testABtoInsert, Channel.desktop, AppEcom.shop, null));
+		TestABGoogleExpImpl testABtoInsert = TestABGoogleExpImpl.GaleriaDesktopReact;
+		TestABGoogleExpManager testAB = Mockito.spy(new TestABGoogleExpManager(testABtoInsert, Channel.desktop, AppEcom.shop, null));
 		String valueInCookie = testAB.getValueExpectedInCookie(testABtoInsert, 1) + remainderCookie;
 		Mockito.doReturn(valueInCookie).when(testAB).getValueCookieGoogleExperiments(Mockito.any());
 		

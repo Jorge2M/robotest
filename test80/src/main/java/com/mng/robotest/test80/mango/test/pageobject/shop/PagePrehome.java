@@ -22,7 +22,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOu
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.test80.mango.test.pageobject.utils.LocalStorage;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
-import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
+import com.mng.robotest.test80.mango.test.utils.testab.TestABGoogleExpImpl;
 
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la página de "GALERÍA DE PRODUCTOS"
@@ -229,7 +229,7 @@ public class PagePrehome extends WebdrvWrapp {
      */
     public static void accesoShopViaPrehome(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         goToPagePrehome(dCtxSh.urlAcceso, driver);
-        TestAB.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
+        TestABGoogleExpImpl.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
         PagePrehome.selecPaisIdiomaYAccede(dCtxSh, driver);
         ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
         if (dCtxSh.channel==Channel.movil_web) {
