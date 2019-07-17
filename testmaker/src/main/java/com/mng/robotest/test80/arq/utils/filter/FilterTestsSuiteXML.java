@@ -24,7 +24,7 @@ import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
-import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.arq.xmlprogram.DataFilter;
 
 public class FilterTestsSuiteXML {
 	
@@ -32,16 +32,20 @@ public class FilterTestsSuiteXML {
     
     private final DataFilterTCases dFilter;
 
-    public FilterTestsSuiteXML(ParamsBean params) {
-    	this.dFilter = getDataFilterFromParams(params);
+    private FilterTestsSuiteXML(DataFilter dFilter) {
+    	this.dFilter = getDataFilterFromParams(dFilter);
     }
     
-    private DataFilterTCases getDataFilterFromParams(ParamsBean params) {
+    public static FilterTestsSuiteXML getNew(DataFilter dFilter) {
+    	return (new FilterTestsSuiteXML(dFilter));
+    }
+    
+    private DataFilterTCases getDataFilterFromParams(DataFilter dataFilter) {
     	DataFilterTCases dFilter = new DataFilterTCases();
-        dFilter.setAppE(params.getAppE());
-        dFilter.setChannel(params.getChannel());
-        dFilter.setGroupsFilter(params.getGroupsList());
-        dFilter.setTestCasesFilter(params.getTestCasesList());
+        dFilter.setAppE(dataFilter.getAppE());
+        dFilter.setChannel(dataFilter.getChannel());
+        dFilter.setGroupsFilter(dataFilter.getGroupsList());
+        dFilter.setTestCasesFilter(dataFilter.getTestCasesList());
         return dFilter;
     }
     

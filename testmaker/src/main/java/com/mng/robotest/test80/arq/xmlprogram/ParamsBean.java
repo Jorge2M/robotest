@@ -37,6 +37,36 @@ public class ParamsBean {
     	this.suite = suite;
     }
     
+    public DataFilter getDataFilter() {
+    	DataFilter dataFilter = new DataFilter();
+    	dataFilter
+        @Override
+        public AppTest getAppE() {
+            return this.app;
+        }
+        
+        @Override
+        public Channel getChannel() {
+            return this.channel;
+        }
+        
+        @Override
+        public List<String> getGroupsList() {
+        	if (null!=getGroups()) {
+        		return Arrays.asList(getGroups());
+        	}
+        	return null;
+        }
+        
+        @Override
+        public List<String> getTestCasesList() {
+        	if (null!=getTestCases()) {
+        		return Arrays.asList(getTestCases());
+        	}
+        	return null;
+        }
+    }
+    
     public String getSuiteName() {
         return this.suite.toString();
     }
@@ -81,12 +111,30 @@ public class ParamsBean {
         }
     }    
     
+    @Override
     public AppTest getAppE() {
         return this.app;
     }
     
+    @Override
     public Channel getChannel() {
         return this.channel;
+    }
+    
+    @Override
+    public List<String> getGroupsList() {
+    	if (null!=getGroups()) {
+    		return Arrays.asList(getGroups());
+    	}
+    	return null;
+    }
+    
+    @Override
+    public List<String> getTestCasesList() {
+    	if (null!=getTestCases()) {
+    		return Arrays.asList(getTestCases());
+    	}
+    	return null;
     }
     
     public void setChannel(Channel channel) {
@@ -99,13 +147,6 @@ public class ParamsBean {
     
     public String[] getGroups() {
         return this.groups;
-    }
-    
-    public List<String> getGroupsList() {
-    	if (null!=getGroups()) {
-    		return Arrays.asList(getGroups());
-    	}
-    	return null;
     }
     
     public String getGroupsStr() {
@@ -179,14 +220,7 @@ public class ParamsBean {
     public String[] getTestCases() {
         return this.ListaTestCases;
     }    
-    
-    public List<String> getTestCasesList() {
-    	if (null!=getTestCases()) {
-    		return Arrays.asList(getTestCases());
-    	}
-    	return null;
-    }
-    
+
     public String getListaTestCasesStr() {
         if (getTestCases()!=null && getTestCases().length>0) {
             return String.join(",", getTestCases());

@@ -37,14 +37,6 @@ public class CommonsXML {
         return listOfGroups;
     }
     
-    public static List<String> createStandardListeners() {
-        List<String> listeners = new ArrayList<>();
-        listeners.add("com.mng.robotest.test80.arq.listeners.MyTransformer");
-        listeners.add("com.mng.robotest.test80.arq.listeners.InvokeListener");
-        listeners.add("com.mng.robotest.test80.arq.listeners.Reporter");
-        return listeners;
-    }
-    
     /**
      * Establecemos los parámetros genéricos a nivel de la Suite (válidos para todos los casos de prueba)
      * @param parametersSuite
