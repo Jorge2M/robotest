@@ -11,8 +11,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.utils.testab.ActivationData;
-import com.mng.robotest.test80.arq.utils.testab.TestABGoogleExp;
+import com.mng.robotest.test80.arq.utils.testab.TestABactData;
 import com.mng.robotest.test80.arq.utils.testab.TestABOptimize;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
@@ -56,10 +55,10 @@ public class TestABOptimizeManager implements TestABmanager {
 		}
 	}
 	
-	public static void activateTestsAB(List<ActivationData> testsABtoActive, Channel channel, AppTest app, WebDriver driver) 
+	public static void activateTestsAB(List<TestABactData> testsABtoActive, Channel channel, AppTest app, WebDriver driver) 
 	throws Exception {
 		String valueCookie = "";
-		for (ActivationData testABtoActive : testsABtoActive) {
+		for (TestABactData testABtoActive : testsABtoActive) {
 			TestABOptimize testAB = (TestABOptimize)testABtoActive.getTestAB();
 			int vTestAB = testABtoActive.getvToActive();
 			if (isActiveForChannelAndApp(testAB, channel, app)) {
@@ -68,7 +67,7 @@ public class TestABOptimizeManager implements TestABmanager {
 					setCookieGtm_preview(testAB, driver);
 					valueCookie+=getVariantInGtm_experiment(testAB, vTestAB);
 				} else {
-					valueCookie=valueCookie+"&"+testAB.getExperimentWithVariant(vTestAB);
+					valueCookie=valueCookie+"&"+testAB.getIdExperiment() + vTestAB;
 				}
 			}
 		}
@@ -77,14 +76,14 @@ public class TestABOptimizeManager implements TestABmanager {
 	}
 	
 	private static String getVariantInGtm_experiment(TestABOptimize testAB, int variante) {
-		return (testAB.group + "=" + testAB.getExperimentWithVariant(variante));
+		return (testAB.getGroup() + "=" + testAB.getIdExperiment() + variante);
 	}
 	
 	private static void setCookieGtm_auth(TestABOptimize testAB, WebDriver driver) {
 		String gtm_auth = "gtm_auth";
 		Cookie cookieGtm_auth = new Cookie(
 			gtm_auth, 
-    		testAB.group + "=" + testAB.auth, 
+    		testAB.getGroup() + "=" + testAB.getAuth(), 
     		"www.google-analytics.com", 
     		"/gtm/",
     		null, 
@@ -98,7 +97,7 @@ public class TestABOptimizeManager implements TestABmanager {
 		String gtm_preview = "gtm_preview";
 		Cookie cookieGtm_preview = new Cookie(
 			gtm_preview, 
-    		testAB.group + "=" + testAB.preview, 
+    		testAB.getGroup() + "=" + testAB.getPreview(), 
     		"www.google-analytics.com",
     		"/gtm/",
     		null, 
@@ -146,7 +145,7 @@ public class TestABOptimizeManager implements TestABmanager {
 
 	@Override
 	public void activateRandomTestABInBrowser() throws Exception {
-		int numVariantes = testAB.variantes.size();
+		int numVariantes = testAB.getVariantes().size();
 		int variante = RandomNumber(0, numVariantes-1);
 		activateTestAB(variante);
 	}

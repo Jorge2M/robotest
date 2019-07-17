@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.utils.testab.ActivationData;
+import com.mng.robotest.test80.arq.utils.testab.TestABactData;
 import com.mng.robotest.test80.arq.utils.testab.TestABGoogleExp;
 
 public class TestABGoogleExpManager implements TestABmanager {
@@ -56,8 +56,8 @@ public class TestABGoogleExpManager implements TestABmanager {
 		}
 	}
 	
-	public static void activateTestsAB(List<ActivationData> testsABtoActive, Channel channel, AppTest app, WebDriver driver) throws Exception {
-		for (ActivationData testABtoActive : testsABtoActive) {
+	public static void activateTestsAB(List<TestABactData> testsABtoActive, Channel channel, AppTest app, WebDriver driver) throws Exception {
+		for (TestABactData testABtoActive : testsABtoActive) {
 			TestABGoogleExp testABact = (TestABGoogleExp)testABtoActive.getTestAB();
 			int varianteAct = testABtoActive.getvToActive();
 			TestABGoogleExpManager testAB = new TestABGoogleExpManager(testABact, varianteAct, channel, app, driver);

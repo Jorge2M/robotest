@@ -4,13 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.utils.testab.ActivationData;
-import com.mng.robotest.test80.arq.utils.testab.manager.TestABmanager;
-import com.mng.robotest.test80.arq.utils.testab.manager.TestABmanager.TypeTestAB;
+import com.mng.robotest.test80.arq.utils.testab.TestABOptimize;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public enum TestABOptimizeImpl implements TestABOptimize {
@@ -82,24 +78,52 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 	
 	private String group;
 	private String auth;
-	private String experiment;
+	private String idExperiment;
 	private String preview;
-	private List<String> variantes;
+	private List<Integer> variantesInt;
 	private List<Channel> channels;
 	private List<AppEcom> apps;
 	private TestABOptimizeImpl(
-			String group, String descripcion, String auth, String experiment, String preview, List<Integer> variantesInt, List<String> variantes,
-			List<Channel> channels, List<AppEcom> apps) {
+			String group, String descripcion, String auth, String idExperiment, String preview, List<Integer> variantesInt, 
+			List<String> variantes, List<Channel> channels, List<AppEcom> apps) {
 		this.group = group;
 		this.auth = auth;
-		this.experiment = experiment;
+		this.idExperiment = idExperiment;
 		this.preview = preview;
-		this.variantes = variantes;
 		this.channels = channels;
 		this.apps = apps;
 	}
 	
-	public String getExperimentWithVariant(int variante) {
-		return (experiment + variante);
+	@Override
+	public List<Integer> getVariantes() {
+		return this.variantesInt;
+	}
+	@Override
+	public List<Channel> getChannels() {
+		return this.channels;
+	}
+	@Override
+	public List<AppTest> getApps() {
+		List<AppTest> listReturn = new ArrayList<>();
+		for (AppTest app : this.apps) {
+			listReturn.add(app);
+		}
+		return listReturn;
+	}
+	@Override
+	public String getAuth() {
+		return this.auth;
+	}
+	@Override
+	public String getIdExperiment() {
+		return idExperiment;
+	}
+	@Override
+	public String getGroup() {
+		return this.group;
+	}
+	@Override
+	public String getPreview() {
+		return this.preview;
 	}
 }

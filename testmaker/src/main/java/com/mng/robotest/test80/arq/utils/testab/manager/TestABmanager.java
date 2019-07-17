@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.utils.testab.ActivationData;
+import com.mng.robotest.test80.arq.utils.testab.TestABactData;
 import com.mng.robotest.test80.arq.utils.testab.TestAB;
 import com.mng.robotest.test80.arq.utils.testab.TestAB.TypeTestAB;
 import com.mng.robotest.test80.arq.utils.testab.TestABGoogleExp;
@@ -34,22 +34,22 @@ public interface TestABmanager {
 		}
 	}
 
-	public static void activateTestsAB(List<ActivationData> testsABtoActive, Channel channel, AppTest app, WebDriver driver) 
+	public static void activateTestsAB(List<TestABactData> testsABtoActive, Channel channel, AppTest app, WebDriver driver) 
 	throws Exception {
-		List<ActivationData> listOptimize = filterByTestABtype(testsABtoActive, TypeTestAB.Optimize);
+		List<TestABactData> listOptimize = filterByTestABtype(testsABtoActive, TypeTestAB.Optimize);
 		if (listOptimize.size() > 0) {
 			TestABOptimizeManager.activateTestsAB(listOptimize, channel, app, driver);
 		}
 		
-		List<ActivationData> listExperiments = filterByTestABtype(testsABtoActive, TypeTestAB.GoogleExperiments);
+		List<TestABactData> listExperiments = filterByTestABtype(testsABtoActive, TypeTestAB.GoogleExperiments);
 		if (listExperiments.size() > 0) {
 			TestABGoogleExpManager.activateTestsAB(listExperiments, channel, app, driver);
 		}
 	}
 
-	static List<ActivationData> filterByTestABtype(List<ActivationData> listTestABs, TypeTestAB typeTestAB) {
-		List<ActivationData> listToReturn = new ArrayList<>();
-		for (ActivationData testAB : listTestABs) {
+	static List<TestABactData> filterByTestABtype(List<TestABactData> listTestABs, TypeTestAB typeTestAB) {
+		List<TestABactData> listToReturn = new ArrayList<>();
+		for (TestABactData testAB : listTestABs) {
 			if (testAB.getTestAB().getType()==typeTestAB) {
 				listToReturn.add(testAB);
 			}

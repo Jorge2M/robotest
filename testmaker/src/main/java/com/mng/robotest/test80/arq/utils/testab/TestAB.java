@@ -16,7 +16,6 @@ public interface TestAB {
 	public List<Integer> getVariantes();
 	public List<Channel> getChannels();
 	public List<AppTest> getApps();
-	
 }
 
 

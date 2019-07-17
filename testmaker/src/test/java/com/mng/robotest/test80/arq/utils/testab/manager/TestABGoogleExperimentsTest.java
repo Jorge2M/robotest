@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.utils.testab;
+package com.mng.robotest.test80.arq.utils.testab.manager;
 
 import static org.junit.Assert.*;
 
@@ -7,7 +7,6 @@ import org.mockito.Mockito;
 
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.testab.manager.TestABGoogleExpManager;
-import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public class TestABGoogleExperimentsTest {
 	
