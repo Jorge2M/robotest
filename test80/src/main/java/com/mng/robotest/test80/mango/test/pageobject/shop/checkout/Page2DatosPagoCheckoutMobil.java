@@ -63,7 +63,10 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     }
     
     static String getXPathRadioPago(String nombrePago) {
-    	//return (getXPathPagoLayoutLinea(nombrePago) + "//div[@class[contains(.,'custom-radio')]]/div");
+    	if (nombrePago.contains("mercadopago")) {
+        	String methodRadioName = PageCheckoutWrapper.getMethodInputValue(nombrePago, Channel.movil_web);
+        	return ("//div[@data-custom-radio-id='" + methodRadioName + "']"); 
+    	}
     	return (getXPathPago(nombrePago) + "//div[@data-custom-radio-id]");
     }
     
@@ -242,7 +245,7 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     }
 
     private static void clickMetodoPago(String nombrePago, WebDriver driver) throws Exception {
-        String xpathClickMetodoPago = getXPathPago(nombrePago);
+        String xpathClickMetodoPago = getXPathRadioPago(nombrePago);
         moveToElement(By.xpath(xpathClickMetodoPago), driver);
         
         //El icono queda debajo del header "Checkout" y es posible scrollar un poco más porque no funciona el moveByOffset así que falla el click

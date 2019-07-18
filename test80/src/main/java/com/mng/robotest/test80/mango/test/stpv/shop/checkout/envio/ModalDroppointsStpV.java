@@ -44,7 +44,7 @@ public class ModalDroppointsStpV {
         Pago pago = dCtxPago.getDataPedido().getPago();
     	DataSearchDeliveryPoint dataSearchDp = DataSearchDeliveryPoint.getInstance(pago, dCtxSh.appE, dCtxSh.pais);
         secSelectDPoint.searchPoblacion(dataSearchDp, driver);
-        DataDeliveryPoint dataDp = ModalDroppointsStpV.secSelectDPoint.clickDeliveryPointAndGetData(2/*position*/, driver);
+        DataDeliveryPoint dataDp = ModalDroppointsStpV.secSelectDPoint.clickDeliveryPointAndGetData(2, driver);
         dCtxPago.getDataPedido().setTypeEnvio(pago.getTipoEnvioType(dCtxSh.appE));
         dCtxPago.getDataPedido().setDataDeliveryPoint(dataDp);
         secSelectDPoint.clickSelectButton(dCtxSh.channel, driver);
