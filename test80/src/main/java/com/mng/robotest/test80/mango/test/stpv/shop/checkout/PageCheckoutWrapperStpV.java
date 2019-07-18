@@ -95,7 +95,7 @@ public class PageCheckoutWrapperStpV {
     private static ChecksResult checkAvailablePagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país (" + pais.getListPagosEnOrdenPantalla(app, isEmpl).size() + ")",
+			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país (" + pais.getListPagosTest(app, isEmpl).size() + ")",
 			PageCheckoutWrapper.isNumMetodosPagoOK(pais, app, channel, isEmpl, driver), State.Defect);    	
     	return validations;
     }
@@ -103,12 +103,13 @@ public class PageCheckoutWrapperStpV {
     @Validation
     private static ChecksResult checkLogosPagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) { 
     	ChecksResult validations = ChecksResult.getNew();
-        List<Pago> listaPagosEnOrden = pais.getListPagosEnOrdenPantalla(app, isEmpl);
-        for (int i=0; i<listaPagosEnOrden.size(); i++) {
-            if (listaPagosEnOrden.get(i).getTypePago()!=TypePago.TpvVotf) {
+        List<Pago> listPagos = pais.getListPagosTest(app, isEmpl);
+        for (int i=0; i<listPagos.size(); i++) {
+            if (listPagos.get(i).getTypePago()!=TypePago.TpvVotf) {
+            	String pagoNameExpected = listPagos.get(i).getNombre(channel);
         	 	validations.add(
-        			"Aparece el logo/pestaña asociado al pago <b>" + listaPagosEnOrden.get(i).getNombre(channel) + "</b>",
-        			PageCheckoutWrapper.isMetodoPagoPresent(listaPagosEnOrden.get(i).getNombre(channel), listaPagosEnOrden.get(i).getIndexpant(), channel, driver),
+        			"Aparece el logo/pestaña asociado al pago <b>" + pagoNameExpected + "</b>",
+        			PageCheckoutWrapper.isMetodoPagoPresent(pagoNameExpected, channel, driver),
         			State.Defect);    
             }
         }   
@@ -253,7 +254,7 @@ public class PageCheckoutWrapperStpV {
         }
 
         try {
-            PageCheckoutWrapper.forceClickMetodoPagoAndWait(pago.getNombre(channel), pago.getIndexpant(), pais, channel, driver);
+            PageCheckoutWrapper.forceClickMetodoPagoAndWait(pago.getNombre(channel), pais, channel, driver);
         }
         catch (Exception e) {
             pLogger.warn("Problem clicking icono pago for payment {} in country {}", pago.getNombre(), pais.getNombre_pais(), e);
@@ -280,9 +281,7 @@ public class PageCheckoutWrapperStpV {
         if (channel==Channel.desktop) {
             validateIsPresentButtonCompraDesktop(driver);
         }
-
-        int maxSecondsWait = 2;
-        checkIsVisibleTextUnderPayment(pago.getNombre(channel), pago, maxSecondsWait, channel, driver);
+        checkIsVisibleTextUnderPayment(pago.getNombreInCheckout(channel), pago, 2, channel, driver);
     }
     
     @Validation (

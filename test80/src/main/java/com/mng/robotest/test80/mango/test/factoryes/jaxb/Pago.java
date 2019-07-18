@@ -2,17 +2,13 @@ package com.mng.robotest.test80.mango.test.factoryes.jaxb;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import javax.xml.bind.annotation.*;
-
 import org.testng.ITestContext;
 
-import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
-
 
 public class Pago {
     public static enum TypePago {
@@ -57,8 +53,6 @@ public class Pago {
     String outlet;
     String votf;
     String empleado;
-    String ordenpantalla;
-    String indexpant = "1";
     String testpasarela;
     String testpolyvore;
     String almacenmontcada;
@@ -194,10 +188,6 @@ public class Pago {
         this.outlet = outlet;
     }
 	
-    public String getOrdenpantalla() {
-        return this.ordenpantalla;
-    }
-
     public String getVotf() {
         return this.votf;
     }
@@ -215,11 +205,6 @@ public class Pago {
     public void setEmpleado(String empleado) {
         this.empleado = empleado;
     }	
-	
-    @XmlAttribute(name="ordenpantalla")
-    public void setOrdenpantalla(String ordenpantalla) {
-        this.ordenpantalla = ordenpantalla;
-    }
 
     public String getNombre() {
         return this.nombre;
@@ -250,15 +235,6 @@ public class Pago {
     public void setNameFilter(String namefilter) {
         this.namefilter = namefilter;
     }    
-	
-    @XmlAttribute(name="indexpant")
-    public void setIndexpant(String indexpant) {
-        this.indexpant = indexpant;
-    }
-	
-    public String getIndexpant() {
-        return this.indexpant;
-    }
 	
     public String getTestpasarela() {
         return this.testpasarela;
@@ -687,6 +663,14 @@ public class Pago {
             return getNombremovil();
         }
         return getNombre();
+    }
+    
+    public String getNombreInCheckout(Channel channel) {
+    	String nombre = getNombre(channel);
+    	if (nombre.contains("mercadopago")) {
+    		return "mercadopago";
+    	}
+    	return nombre;
     }
     
 //    private boolean isAdyen() {

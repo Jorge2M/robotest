@@ -495,28 +495,6 @@ public class Pais {
     }
     
     /**
-     * Genera un string ordenada (según el atributo "orden") con la concatenación de los pagos disponibles para el país
-     */
-    public List<Pago> getListPagosEnOrdenPantalla(AppEcom app, boolean testEmpleado) {
-        List<Pago> listaTmpEnOrden = Arrays.asList(new Pago[MAX_PAGOS]); 
-        List<Pago> listPagosApp = getListPagosTest(app, testEmpleado);
-        List<Pago> listaEnOrdenRet = new ArrayList<>(listPagosApp.size());
-
-        //Ordenamos la lista
-        for (int i=0; i<listPagosApp.size(); i++)
-            listaTmpEnOrden.set((Integer.valueOf(listPagosApp.get(i).getOrdenpantalla()).intValue() - 1), listPagosApp.get(i));
-    	
-        //Comprimimos la lista
-        for (int i=0; i<listaTmpEnOrden.size(); i++) {
-            if (listaTmpEnOrden.get(i)!=null) {
-                listaEnOrdenRet.add(listaTmpEnOrden.get(i));
-            }
-        }
-    	
-        return listaEnOrdenRet;
-    }
-    
-    /**
      * Genera un string con la concatenación de los pagos disponibles para el país en el orden en que se testearán
      * (como se encuentran en el XML pero dando prioridad a los que no tienen tienen testpago='s')
      */
@@ -529,18 +507,6 @@ public class Pais {
                 metodosPago = metodosPago + ",<br> " + listPagosApp.get(i).getNombre();
             }
         }
-    	
-        return metodosPago;
-    }
-    
-    /**
-     * Genera un string con la concatenación en orden de los pagos disponibles para el país
-     */
-    public String getStringPagosEnOrdenPantalla(AppEcom app, boolean testEmpleado) {
-        String metodosPago = "";
-        List<Pago> listPagosApp = getListPagosEnOrdenPantalla(app, testEmpleado); 
-        for (int i=0; i<listPagosApp.size(); i++) 
-            metodosPago = metodosPago + ",<br> " + listPagosApp.get(i).getNombre();
     	
         return metodosPago;
     }

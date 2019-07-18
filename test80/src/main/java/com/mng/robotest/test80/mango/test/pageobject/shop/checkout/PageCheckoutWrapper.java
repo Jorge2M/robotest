@@ -220,11 +220,11 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
         return page1DktopCheckout.isPresentMetodosPago(driver);
     }    
     
-    public static boolean isMetodoPagoPresent(String metodoPago, String indexpant, Channel channel, WebDriver driver) {
+    public static boolean isMetodoPagoPresent(String metodoPago, Channel channel, WebDriver driver) {
         if (channel==Channel.movil_web) {
             return page2MobilCheckout.isMetodoPagoPresent(metodoPago, driver);
         }
-        return page1DktopCheckout.isMetodoPagoPresent(metodoPago, indexpant, driver);
+        return page1DktopCheckout.isMetodoPagoPresent(metodoPago, driver);
     }
     
     public static void despliegaMetodosPago(Channel channel, WebDriver driver) throws Exception {
@@ -279,7 +279,7 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
         }
         if (channel==Channel.desktop) {
             if (metodoPago.contains("ОПЛАТА ПРИ ПОЛУЧЕНИИ")) {
-                return ("ContraReembolso");
+                return ("ContraReembolsoSTD");
             }
         }
 
@@ -287,7 +287,11 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
             metodoPago.contains("PLATBA NA DOBÍRKU") ||
             metodoPago.contains("UTÁNVÉTELES FIZETÉS") ||
             metodoPago.contains("PLATA PRIN RAMBURS")) {
-            return ("ContraReembolso");
+            return ("ContraReembolsoSTD");
+        }
+        
+        if (metodoPago.contains("mercadopago_transferencia")) {
+        	return ("mercadopago");
         }
         
         return metodoPago;
@@ -296,11 +300,12 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
     /**
      * Realizamos las acciones necesarias para forzar el click sobre un método de pago y esperamos a que desaparezcan las capas de loading
      */
-    public static void forceClickMetodoPagoAndWait(String metodoPago, String indexpant, Pais pais, Channel channel, WebDriver driver) throws Exception {
+    public static void forceClickMetodoPagoAndWait(String metodoPago, Pais pais, Channel channel, WebDriver driver) 
+    throws Exception {
         if (channel==Channel.movil_web) {
             page2MobilCheckout.forceClickMetodoPagoAndWait(metodoPago, pais, driver);
         } else {
-            page1DktopCheckout.forceClickMetodoPagoAndWait(metodoPago, indexpant, pais, driver);
+            page1DktopCheckout.forceClickMetodoPagoAndWait(metodoPago, pais, driver);
         }
     }
     
