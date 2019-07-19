@@ -10,10 +10,11 @@ import com.mng.robotest.test80.arq.utils.controlTest.GestorWebDrv;
 import com.mng.robotest.test80.arq.utils.controlTest.StoredWebDrv;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker.ManagementWebdriver;
+import com.mng.robotest.test80.data.TestMakerContext;
 
 import java.lang.reflect.Method;
 import java.text.Normalizer;
@@ -54,7 +55,8 @@ public class GestorWebDriver extends fmwkTest {
             String moreDataWdrv = getMoreDataWdrv(canalWebDriver, context);
                     
             //Buscamos un webdriver libre del tipo que necesitamos (y automáticamente se marca como 'busy')
-            boolean netAnalysis = isParamNetTrafficActive(context);
+            TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+            boolean netAnalysis = testMakerCtx.getInputData().isNetAnalysis();
             driver = gestorWd.getWebDrvFree(canalWebDriver, moreDataWdrv);
             if (driver == null) {
         		driver = 
@@ -72,16 +74,13 @@ public class GestorWebDriver extends fmwkTest {
         }
 
         return driver;
-    }
-    
-    private boolean isParamNetTrafficActive(ITestContext ctx) {
-        String netAnalysis = ctx.getCurrentXmlTest().getParameter(Constantes.paramNetAnalysis);
-        return ("true".compareTo(netAnalysis)==0);
-    }    
+    }   
 	
     public void quitWebDriver(WebDriver driver, ITestContext contextTng) {
     	//Borramos el proxy para la gestión del NetTraffic asociado a nivel de Thread de TestNG
-    	if (isParamNetTrafficActive(contextTng)) {
+        TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(contextTng);
+        boolean netAnalysis = testMakerCtx.getInputData().isNetAnalysis();
+    	if (netAnalysis) {
         	NetTrafficMng.stopNetTrafficThread();
     	}
     	
@@ -89,18 +88,14 @@ public class GestorWebDriver extends fmwkTest {
         GestorWebDrv gestorWd = GestorWebDrv.getGestorFromCtx(contextTng);
         
         //Obtenemos el valor del parámetro 'recycleWD' almacenado en el contexto de ejecución de TestNG
-        boolean recycleWD = this.getRecycleWD(contextTng);
-        if (recycleWD) {
-            //Los WebDriver no se destruyen al finalizar el método (se destruyen al finalizar la suite), sólo se marcan como 'free' y se reaprovechan por los siguientes
+        ManagementWebdriver managementWdrv = testMakerCtx.getInputData().getTypeManageWebdriver();
+        switch (managementWdrv) {
+        case recycle:
             driver.manage().deleteAllCookies();
-	        
-            //Lo buscamos en el gestor y marcamos nuestro webdriver a estado 'free'
             gestorWd.setWebDriverToFree(driver);
-        } else {
-            //Lo buscamos en el gestor de WebDrivers y lo eliminamos
+            break;
+        case discard:
             gestorWd.deleteStrWebDriver(driver);
-            
-            //Los WebDriver se crean al comenzar un método y se destruyen al finalizar
             try {
                 if (driver!=null) {
                     driver.quit();
@@ -151,19 +146,5 @@ public class GestorWebDriver extends fmwkTest {
         }
 	    
         return moreDataWdrv;
-    }
-	
-    /**
-     * Función que obtiene el valor del parámetro 'recycleWD' almacenado en el contexto de ejecución de TestNG
-     */
-    private boolean getRecycleWD(ITestContext contextTng) {
-        if (contextTng.getCurrentXmlTest().getParameter(Constantes.paramRecycleWD)!=null) {
-            String recycleWDStr = contextTng.getCurrentXmlTest().getParameter(Constantes.paramRecycleWD);
-            if ("true".compareTo(recycleWDStr)==0) {
-                return true;
-            }
-        }
-            
-        return false;
     }
 }

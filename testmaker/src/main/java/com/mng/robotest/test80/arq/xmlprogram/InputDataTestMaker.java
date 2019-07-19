@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.mng.robotest.test80.arq.listeners.CallBack;
 import com.mng.robotest.test80.arq.utils.conf.AppTest;
+import com.mng.robotest.test80.arq.utils.filter.DataFilterTCases;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
@@ -24,8 +25,11 @@ public class InputDataTestMaker {
     private boolean netAnalysis = false;  
     private List<String> testCasesFilter;
     private List<String> groupsFilter;
+    private String webAppDNS;
     private String envioCorreo = null;
     private CallBack callBack = null;
+    private String userBrowserStack;
+    private String passBrowserStack;
 	
     public InputDataTestMaker(String nameSuite, Channel channel, AppTest app, TypeWebDriver typeWebDriver) {
     	this.nameSuite = nameSuite;
@@ -110,6 +114,14 @@ public class InputDataTestMaker {
 	public void setGroupsFilter(List<String> groupsFilter) {
 		this.groupsFilter = groupsFilter;
 	}
+	
+	public String getWebAppDNS() {
+		return this.webAppDNS;
+	}
+	
+	public void setWebAppDNS(String webAppDNS) {
+		this.webAppDNS = webAppDNS;
+	}
 
 	public String getEnvioCorreo() {
 		return envioCorreo;
@@ -130,22 +142,28 @@ public class InputDataTestMaker {
 	public void setCallBack(CallBack callBack) {
 		this.callBack = callBack;
 	}
+	
 
-    public DataFilter getDataFilter() {
-    	return(
-    		new DataFilter() {
-		        public AppTest getAppE() {
-		            return getApp();
-		        }
-		        public Channel getChannel() {
-		            return getChannel();
-		        }
-		        public List<String> getGroupsFilter() {
-		        	return (getGroupsFilter());
-		        }
-		        public List<String> getTestCasesFilter() {
-		        	return (getTestCasesFilter());
-		        }
-	    	});
+	public String getUserBrowserStack() {
+		return userBrowserStack;
+	}
+
+	public void setUserBrowserStack(String userBrowserStack) {
+		this.userBrowserStack = userBrowserStack;
+	}
+
+	public String getPassBrowserStack() {
+		return passBrowserStack;
+	}
+
+	public void setPassBrowserStack(String passBrowserStack) {
+		this.passBrowserStack = passBrowserStack;
+	}
+
+    public DataFilterTCases getDataFilter() {
+    	DataFilterTCases dFilter = new DataFilterTCases(getChannel(), getApp());
+    	dFilter.setGroupsFilter(groupsFilter);
+    	dFilter.setTestCasesFilter(testCasesFilter);
+    	return dFilter;
     }
 }

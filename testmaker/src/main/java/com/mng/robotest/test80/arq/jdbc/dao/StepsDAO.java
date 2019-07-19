@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Vector;
-
 import org.testng.ITestContext;
 
 import com.mng.robotest.test80.arq.jdbc.Connector;
@@ -17,7 +16,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.data.TestMakerContext;
 
 
 public class StepsDAO {
@@ -43,26 +42,15 @@ public class StepsDAO {
         "WHERE INICIO < ?;";    
     
     public static int grabStep(DatosStep datosStep, Method method, ITestContext ctx) {
-//    	if (datosStep.getStepNumber()==0) {
-//	        int stepNumber = StepsDAO.getNextMethodStep(method, ctx);
-//	        datosStep.setStepNumber(stepNumber);
-//    	}
-    	
         String methodWithFactory = fmwkTest.getMethodWithFactory(method, ctx);
         if (datosStep.getHoraFin()==null) {
             datosStep.setHoraFin(new Date(System.currentTimeMillis()));
         }
-    
-//        System.out.println("Inicio insert en STEP");
-//        System.out.println("IDEXECSUITE: " + ctx.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx));
-//        System.out.println("SUITE: " + ctx.getSuite().getName());
-//        System.out.println("TEST: " + ctx.getName());
-//        System.out.println("METHOD: " + methodWithFactory);
-//        System.out.println("NUMBER: " + datosStep.getStepNumber());
-        
+
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(ctx);
         try (Connection conn = Connector.getConnection();
             PreparedStatement insert = conn.prepareStatement(SQLInsertStep)) {
-            insert.setString(1, ctx.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx));
+            insert.setString(1, testMakerCtx.getIdSuiteExecution());
             insert.setString(2, ctx.getSuite().getName());
             insert.setString(3, ctx.getName());
             insert.setString(4, methodWithFactory);
@@ -109,9 +97,10 @@ public class StepsDAO {
      */
     public static int getNextMethodStep(Method method, ITestContext context) {
         int stepNumber = 0;
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
         try (Connection conn = Connector.getConnection(true/*forReadOnly*/);
             PreparedStatement select = conn.prepareStatement(SQLSelectLastStepMethod)) {
-            select.setString(1, context.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx));
+            select.setString(1, testMakerCtx.getIdSuiteExecution());
             select.setString(2, context.getSuite().getName());
             select.setString(3, context.getName());
             select.setString(4, fmwkTest.getMethodWithFactory(method, context));

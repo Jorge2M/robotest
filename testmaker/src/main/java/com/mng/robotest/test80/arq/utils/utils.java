@@ -1,11 +1,9 @@
 package com.mng.robotest.test80.arq.utils;
 
 import java.util.regex.Pattern;
-import org.testng.ITestContext;
 
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
-import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.otras.myUtils;
+import com.mng.robotest.test80.data.ConstantesTestMaker;
 
 public class utils {
 
@@ -47,7 +45,7 @@ public class utils {
     public static String obtainDNSFromFile(final String filePath, String applicationDNS) {
         String pathReport = "";
         if (applicationDNS!=null && "".compareTo(applicationDNS)!=0) {
-            pathReport = filePath.substring(filePath.indexOf(Constantes.directoryOutputTests));
+            pathReport = filePath.substring(filePath.indexOf(ConstantesTestMaker.directoryOutputTests));
             pathReport = applicationDNS + "\\" + pathReport;
         } else {
             Pattern patternDrive = Pattern.compile("^[a-zA-Z]:");
@@ -55,10 +53,5 @@ public class utils {
         }
 
         return pathReport;
-    }
-
-    public static TypeAccessFmwk getTypeAccessFmwk(ITestContext context) {
-        String typeAccessStr = context.getCurrentXmlTest().getParameter(Constantes.paramTypeAccessFmwk);
-        return TypeAccessFmwk.valueOf(typeAccessStr);
     }
 }

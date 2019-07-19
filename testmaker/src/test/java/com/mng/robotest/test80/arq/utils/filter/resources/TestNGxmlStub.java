@@ -14,13 +14,12 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
-import com.mng.robotest.test80.arq.xmlprogram.TestMakerSuiteXML;
+import com.mng.robotest.test80.arq.xmlprogram.TestMakerSuite;
 import com.mng.robotest.test80.TestMaker;
-import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
 
 import org.testng.xml.XmlTest;
 
-public class TestNGxmlStub extends TestMakerSuiteXML {
+public class TestNGxmlStub extends TestMakerSuite {
 
     public enum TypeStubTest {
     	WithoutMethodsIncludedInClass,

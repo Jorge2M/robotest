@@ -44,10 +44,9 @@ public class TestFilterTNGxmlTRun {
         XmlTest testRun = getTestRun(testStub, channel, appE);
         
         //Code to test
-        DataFilterTCases dFilter = new DataFilterTCases();
-        dFilter.setAppE(appE);
-        dFilter.setChannel(channel);
-        List<TestMethod> testMethods = FilterTestsSuiteXML.getTestCasesToExecute(testRun, dFilter);
+        DataFilterTCases dFilter = new DataFilterTCases(channel, appE);
+        FilterTestsSuiteXML filter = FilterTestsSuiteXML.getNew(dFilter);
+        List<TestMethod> testMethods = filter.getTestCasesToExecute(testRun);
         
         assertEquals("The number of tests is 3", 3, testMethods.size());
         ArrayList<String> testMethodsNames = new ArrayList<>();
@@ -62,7 +61,6 @@ public class TestFilterTNGxmlTRun {
         assertTrue("The method " + method3 + " is present", testMethodsNames.contains(method3));
     }
 
-    
     @Test
     public void getListOfTestMethodsFilteredByIncludes() {
         Channel channel = Channel.desktop;
@@ -71,7 +69,9 @@ public class TestFilterTNGxmlTRun {
         XmlTest xmlTest = getTestRun(testStub, channel, appE);
         
         //Code to test
-        List<TestMethod> testMethods = FilterTestsSuiteXML.getTestsCasesInXMLClasses(xmlTest);
+        DataFilterTCases dFilter = new DataFilterTCases(channel, appE);
+        FilterTestsSuiteXML filter = FilterTestsSuiteXML.getNew(dFilter);
+        List<TestMethod> testMethods = filter.getTestsCasesInXMLClasses(xmlTest);
         
         String descriptionExpected = "[Usuario registrado] Acceder a galería camisas. Filtros y ordenación. Seleccionar producto y color";
         assertEquals("The number of tests is 1", 1, testMethods.size());
@@ -90,7 +90,9 @@ public class TestFilterTNGxmlTRun {
         XmlTest testRun = getTestRun(testStub, channel, appE);
         
         //Code to test
-        List<TestMethod> testMethods = FilterTestsSuiteXML.getTestsCasesInXMLClasses(testRun);
+        DataFilterTCases dFilter = new DataFilterTCases(channel, appE);
+        FilterTestsSuiteXML filter = FilterTestsSuiteXML.getNew(dFilter);
+        List<TestMethod> testMethods = filter.getTestsCasesInXMLClasses(testRun);
         
         assertEquals("The number of tests is 4", 4, testMethods.size());
     }
@@ -107,10 +109,9 @@ public class TestFilterTNGxmlTRun {
         int initNumberIncludeMethods = getIncludedMethodsCount(xmlTest.getXmlClasses());
 
         //Code to test
-        DataFilterTCases dFilter = new DataFilterTCases();
-        dFilter.setAppE(appE);
-        dFilter.setChannel(channel);
-        FilterTestsSuiteXML.filterTestCasesToExec(xmlTest, dFilter);
+        DataFilterTCases dFilter = new DataFilterTCases(channel, appE);
+        FilterTestsSuiteXML filter = FilterTestsSuiteXML.getNew(dFilter);
+        filter.filterTestCasesToExec(xmlTest);
         
         //The xmlTest is not changed 
         assertEquals("The number of classes remais equal", initNumberXmlClasses, xmlTest.getXmlClasses().size());
@@ -127,10 +128,9 @@ public class TestFilterTNGxmlTRun {
         int initNumberXmlClasses = testRun.getXmlClasses().size();
 
         //Code to test
-        DataFilterTCases dFilter = new DataFilterTCases();
-        dFilter.setAppE(appE);
-        dFilter.setChannel(channel);
-        FilterTestsSuiteXML.filterTestCasesToExec(testRun, dFilter);
+        DataFilterTCases dFilter = new DataFilterTCases(channel, appE);
+        FilterTestsSuiteXML filter = FilterTestsSuiteXML.getNew(dFilter);
+        filter.filterTestCasesToExec(testRun);
         
         assertEquals("The number of classes remais equal", initNumberXmlClasses, testRun.getXmlClasses().size());
         assertEquals("The number of dependencies-group is " + 1, 1, testRun.getXmlDependencyGroups().size());
@@ -147,11 +147,10 @@ public class TestFilterTNGxmlTRun {
         List<String> testCaseList = Arrays.asList(testExpectedToBeIncluded);
         
         //Code to test
-        DataFilterTCases dFilter = new DataFilterTCases();
-        dFilter.setAppE(appE);
-        dFilter.setChannel(channel);
+        DataFilterTCases dFilter = new DataFilterTCases(channel, appE);
         dFilter.setTestCasesFilter(testCaseList);
-        FilterTestsSuiteXML.filterTestCasesToExec(testRun, dFilter);
+        FilterTestsSuiteXML filter = FilterTestsSuiteXML.getNew(dFilter);
+        filter.filterTestCasesToExec(testRun);
         
         String textExpectedToNotBeIncluded = testStub.methodGroupMiCuentaToInclude;
         assertTrue("The new method " + testExpectedToBeIncluded + " is included", classIncludesMethod(testRun.getXmlClasses().get(0), testExpectedToBeIncluded));
@@ -190,11 +189,10 @@ public class TestFilterTNGxmlTRun {
         XmlTest testRun = getTestRun(testStub, channel, app);
         
         //Code to test
-        DataFilterTCases dFilter = new DataFilterTCases();
-        dFilter.setAppE(app);
-        dFilter.setChannel(channel);
+        DataFilterTCases dFilter = new DataFilterTCases(channel, app);
         dFilter.setTestCasesFilter(testCaseList);
-        FilterTestsSuiteXML.filterTestCasesToExec(testRun, dFilter);
+        FilterTestsSuiteXML filter = FilterTestsSuiteXML.getNew(dFilter);
+        filter.filterTestCasesToExec(testRun);
         
         assertEquals("Remains only 1 dependency-group ", 1, testRun.getXmlDependencyGroups().size());
         assertTrue("Is present the group \"GaleriaProducto\"", isGroupInDependencies(testRun, "GaleriaProducto", GroupDep.to));
@@ -212,11 +210,10 @@ public class TestFilterTNGxmlTRun {
         List<String> testCaseList = Arrays.asList(testStub.methodThatDoesNotExistsInClass);
         
         //Code to test
-        DataFilterTCases dFilter = new DataFilterTCases();
-        dFilter.setAppE(appE);
-        dFilter.setChannel(channel);
+        DataFilterTCases dFilter = new DataFilterTCases(channel, appE);
         dFilter.setTestCasesFilter(testCaseList);
-        FilterTestsSuiteXML.filterTestCasesToExec(testRun, dFilter);
+        FilterTestsSuiteXML filter = FilterTestsSuiteXML.getNew(dFilter);
+        filter.filterTestCasesToExec(testRun);
         
         assertEquals("No classes remains ", 0, testRun.getClasses().size());
     }

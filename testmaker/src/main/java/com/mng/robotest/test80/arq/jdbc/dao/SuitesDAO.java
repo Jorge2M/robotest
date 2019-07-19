@@ -17,7 +17,8 @@ import com.mng.robotest.test80.arq.utils.StateSuite;
 import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 
 
 public class SuitesDAO {
@@ -247,22 +248,24 @@ public class SuitesDAO {
     }
     
     public static void insertSuiteInit(ISuite suite) {
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(suite);
+    	InputDataTestMaker inputDataTmaker = testMakerCtx.getInputData();
         try (Connection conn = Connector.getConnection()) {
             try (PreparedStatement insert = conn.prepareStatement(SQLInsertSuiteInit)) {
-                insert.setString(1, suite.getXmlSuite().getParameter(Constantes.paramSuiteExecInCtx)) ;
-                insert.setString(2, suite.getName());
-                insert.setString(3, suite.getXmlSuite().getParameter(Constantes.paramVersionSuite));
-                insert.setString(4, suite.getXmlSuite().getParameter(Constantes.paramChannelSuite));
-                insert.setString(5, suite.getXmlSuite().getParameter(Constantes.paramAppEcomSuite));
-                insert.setString(6, suite.getXmlSuite().getParameter(Constantes.paramBrowser));
+                insert.setString(1, testMakerCtx.getIdSuiteExecution()) ;
+                insert.setString(2, inputDataTmaker.getNameSuite());
+                insert.setString(3, inputDataTmaker.getVersionSuite());
+                insert.setString(4, inputDataTmaker.getChannel().toString());
+                insert.setString(5, inputDataTmaker.getApp().toString());
+                insert.setString(6, inputDataTmaker.getTypeWebDriver().toString());
                 insert.setDate(7, new java.sql.Date(System.currentTimeMillis()));
                 insert.setInt(8, 0);
-                insert.setString(9, suite.getXmlSuite().getParameter(Constantes.paramUrlBase));
-                insert.setString(10, suite.getXmlSuite().getParameter(Constantes.paramCountrys));
+                insert.setString(9, inputDataTmaker.getUrlBase());
+                insert.setString(10, "Pending Data From test80"); //TODO
                 insert.setString(11, fmwkTest.getPathReportHTML(fmwkTest.getOutputDirectorySuite(suite)));
 
                 String pathToReport = fmwkTest.getPathReportHTML(fmwkTest.getOutputDirectorySuite(suite));
-                String reportTSuiteURL = utils.obtainDNSFromFile(pathToReport, suite.getXmlSuite().getParameter(Constantes.paramApplicationDNS)).replace("\\", "/");
+                String reportTSuiteURL = utils.obtainDNSFromFile(pathToReport, inputDataTmaker.getWebAppDNS()).replace("\\", "/");
                 insert.setString(12, reportTSuiteURL);
                 insert.setString(13,  StateSuite.STARTED.toString());
                 
@@ -280,8 +283,9 @@ public class SuitesDAO {
     }
     
     public static void updateEndSuiteFromCtx(ResultTestRun resultTestRun, ITestContext context) {
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
         try (Connection conn = Connector.getConnection()) {
-            String idExecSuite = context.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx);
+            String idExecSuite = testMakerCtx.getIdSuiteExecution();
             StateSuite stateSuite = SuitesDAO.getStateSuite(idExecSuite);
             StateSuite newStateSuite;
             switch (stateSuite) {

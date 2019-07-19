@@ -16,8 +16,8 @@ import com.mng.robotest.test80.arq.jdbc.Connector;
 import com.mng.robotest.test80.arq.jdbc.to.ResultTestRun;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
+import com.mng.robotest.test80.data.TestMakerContext;
 
 
 public class TestRunsDAO {
@@ -78,8 +78,9 @@ public class TestRunsDAO {
     }    
 
     public static void insertFromCtx(ResultTestRun resultStep, ITestContext ctx) {
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(ctx);
         try (Connection conn = Connector.getConnection()) {
-            String idExecSuite = ctx.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx);
+            String idExecSuite = testMakerCtx.getIdSuiteExecution();
             try (PreparedStatement insert = conn.prepareStatement (SQLInsertTestRun)) {
                 insert.setString(1, idExecSuite) ;
                 insert.setString(2, ctx.getSuite().getName());

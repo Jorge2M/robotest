@@ -23,8 +23,6 @@ import com.mng.robotest.test80.arq.utils.XmlTestP80;
 import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
-import com.mng.robotest.test80.arq.xmlprogram.DataFilter;
 
 public class FilterTestsSuiteXML {
 	
@@ -32,21 +30,12 @@ public class FilterTestsSuiteXML {
     
     private final DataFilterTCases dFilter;
 
-    private FilterTestsSuiteXML(DataFilter dFilter) {
-    	this.dFilter = getDataFilterFromParams(dFilter);
+    private FilterTestsSuiteXML(DataFilterTCases dFilter) {
+    	this.dFilter = dFilter;
     }
     
-    public static FilterTestsSuiteXML getNew(DataFilter dFilter) {
+    public static FilterTestsSuiteXML getNew(DataFilterTCases dFilter) {
     	return (new FilterTestsSuiteXML(dFilter));
-    }
-    
-    private DataFilterTCases getDataFilterFromParams(DataFilter dataFilter) {
-    	DataFilterTCases dFilter = new DataFilterTCases();
-        dFilter.setAppE(dataFilter.getAppE());
-        dFilter.setChannel(dataFilter.getChannel());
-        dFilter.setGroupsFilter(dataFilter.getGroupsList());
-        dFilter.setTestCasesFilter(dataFilter.getTestCasesList());
-        return dFilter;
     }
     
     public DataFilterTCases dFilter() {
@@ -70,12 +59,10 @@ public class FilterTestsSuiteXML {
     }
     
     public List<TestMethod> getInitialTestCaseCandidatesToExecute(XmlTest testRun) {
-    	Channel channel = dFilter.getChannel();
-    	AppTest app = dFilter.getAppE();
         List<TestMethod> listTestToReturn = new ArrayList<>();
         List<TestMethod> listTestsInXMLClasses = getTestsCasesInXMLClasses(testRun);
         List<String> groupsFromTestRun = testRun.getIncludedGroups();
-        List<String> groupsAccordingChannelAndApp = CommonsXML.getListOfPossibleGroups(channel, app);
+        List<String> groupsAccordingChannelAndApp = getListChanelAndAppGroups();
         for (TestMethod tmethod : listTestsInXMLClasses) {
         	if (groupsContainsAnyGroup(tmethod.getAnnotationTest().groups(), groupsAccordingChannelAndApp)) {
         		if (groupsContainsAnyGroup(tmethod.getAnnotationTest().groups(), groupsFromTestRun)) {
@@ -85,6 +72,17 @@ public class FilterTestsSuiteXML {
         }
         
         return listTestToReturn;
+    }
+    
+    public List<String> getListChanelAndAppGroups() {
+        ArrayList<String> listOfGroups = new ArrayList<>();
+        Channel channel = dFilter.getChannel();
+        AppTest app = dFilter.getAppE();
+        listOfGroups.add("Canal:all_App:all");
+        listOfGroups.add("Canal:all_App:" + app);
+        listOfGroups.add("Canal:" + channel + "_App:all");
+        listOfGroups.add("Canal:" + channel + "_App:" + app);
+        return listOfGroups;
     }
     
     public boolean methodInTestCaseList(String methodName, List<String> listTestCases) {

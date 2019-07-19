@@ -2,9 +2,10 @@ package com.mng.robotest.test80.arq.utils.webdriver.maker;
 
 
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.webdriver.BStackDataDesktop;
 import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 
 import java.net.URL;
 import org.openqa.selenium.WebDriver;
@@ -25,12 +26,15 @@ public class BrowserStackDriverMaker implements WebdriverMaker {
 	
 	private BrowserStackDriverMaker(ITestContext tContext) {
 		this.tContext = tContext;
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(tContext);
+    	InputDataTestMaker inputData = testMakerCtx.getInputData();
+		
         buildProject = 
             tContext.getSuite().getName() + 
-            " (" + tContext.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx) + ")";
+            " (" + testMakerCtx.getIdSuiteExecution() + ")";
         sessionName = tContext.getCurrentXmlTest().getName();
-        userBStack = tContext.getCurrentXmlTest().getParameter(Constantes.UserBStack);
-        passBStack = tContext.getCurrentXmlTest().getParameter(Constantes.PassBStack);
+        userBStack = inputData.getUserBrowserStack();
+        passBStack = inputData.getPassBrowserStack();
 	}
 	
 	public static BrowserStackDriverMaker getNew(ITestContext tContext) {

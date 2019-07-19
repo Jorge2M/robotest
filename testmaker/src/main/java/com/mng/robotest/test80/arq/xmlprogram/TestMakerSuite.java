@@ -15,13 +15,11 @@ import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.arq.utils.XmlTestP80;
-import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.filter.FilterTestsSuiteXML;
 import com.mng.robotest.test80.arq.utils.filter.TestMethod;
-import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.data.TestMakerContext;
 
-public abstract class TestMakerSuiteXML {
+public abstract class TestMakerSuite {
 
 	private final TestMakerContext testMakerContext;
     private final FilterTestsSuiteXML filterSuiteXML;
@@ -29,9 +27,9 @@ public abstract class TestMakerSuiteXML {
     private List<XmlClass> listXMLclasses;
     private XmlDependencies depGroupsXML;
     private Map<String,String> parameters;
-	private XmlSuite xmlSuite;
+	private SuiteTestMaker xmlSuite;
 	
-	protected TestMakerSuiteXML(InputDataTestMaker inputData) {
+	protected TestMakerSuite(InputDataTestMaker inputData) {
 		this.testMakerContext = TestMakerContext.getNew(inputData);
 		this.filterSuiteXML = FilterTestsSuiteXML.getNew(inputData.getDataFilter());
 	}
@@ -79,17 +77,7 @@ public abstract class TestMakerSuiteXML {
         listeners.add("com.mng.robotest.test80.arq.listeners.Reporter");
         return listeners;
     }
-    
-    private ArrayList<String> getListOfPossibleGroups() {
-        ArrayList<String> listOfGroups = new ArrayList<>();
-        Channel channel = testMakerContext.getInputData().getChannel();
-        AppTest app = testMakerContext.getInputData().getApp();
-        listOfGroups.add("Canal:all_App:all");
-        listOfGroups.add("Canal:all_App:" + app);
-        listOfGroups.add("Canal:" + channel + "_App:all");
-        listOfGroups.add("Canal:" + channel + "_App:" + app);
-        return listOfGroups;
-    }
+
     
     private void generateXmlSuiteIfNotAvailable() {
     	if (xmlSuite==null) {
@@ -97,8 +85,8 @@ public abstract class TestMakerSuiteXML {
     	}
     }
     
-    private XmlSuite createSuite() {
-        XmlSuite suite = new XmlSuite();
+    private SuiteTestMaker createSuite() {
+    	SuiteTestMaker suite = SuiteTestMaker.getNew(testMakerContext);
         suite.setFileName("");
         suite.setName(testMakerContext.getInputData().getNameSuite());
         suite.setListeners(createStandardListeners());
@@ -128,7 +116,7 @@ public abstract class TestMakerSuiteXML {
     
     private XmlRun createRun() {
         XmlRun run = new XmlRun();
-        for (String group : getListOfPossibleGroups()) {
+        for (String group : filterSuiteXML.getListChanelAndAppGroups()) {
             run.onInclude(group);
         }
         return run;

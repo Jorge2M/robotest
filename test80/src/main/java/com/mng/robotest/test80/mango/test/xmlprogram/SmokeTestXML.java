@@ -26,11 +26,11 @@ import com.mng.robotest.test80.arq.utils.webdriver.BStackDataDesktop;
 import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
-import com.mng.robotest.test80.arq.xmlprogram.TestMakerSuiteXML;
+import com.mng.robotest.test80.arq.xmlprogram.TestMakerSuite;
 import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
 import com.mng.robotest.test80.mango.test.xmlprogram.CommonMangoData;
 
-public class SmokeTestXML extends TestMakerSuiteXML {
+public class SmokeTestXML extends TestMakerSuite {
 
     public SmokeTestXML(ParamsBean params) {
     	super(params.getDataFilter());

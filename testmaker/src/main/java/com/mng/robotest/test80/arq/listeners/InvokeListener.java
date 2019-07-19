@@ -6,7 +6,6 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import org.testng.*;
 
 import com.mng.robotest.test80.arq.jdbc.dao.MethodsDAO;
@@ -23,7 +22,9 @@ import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.GestorWebDrv;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.ConstantesTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,16 +38,12 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
   
     @Override //Start Suite 
     public void onStart(ISuite suite) {
-        //Creamos un outputdirectory específico para la Suite
-        String outdySuite = fmwkTest.getOutputDirectory(System.getProperty("user.dir"), suite.getName(), suite.getXmlSuite().getParameter(Constantes.paramSuiteExecInCtx));
-        suite.getXmlSuite().getParameters().put(Constantes.paramOutputDirectorySuite, outdySuite);
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(suite);
+        String outdySuite = fmwkTest.getOutputDirectory(System.getProperty("user.dir"), suite.getName(), testMakerCtx.getIdSuiteExecution());
+        suite.getXmlSuite().getParameters().put(ConstantesTestMaker.paramOutputDirectorySuite, outdySuite);
         File path = new File(outdySuite);
         path.mkdir();
-
-        //Configuramos el log4java
         fmwkTest.configLog4java(outdySuite);
-        
-        //Insertamos en BD
         SuitesDAO.insertSuiteInit(suite);
     }
     
@@ -79,7 +76,7 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
         
         //Establecemos el test-output directory (lo unificamos con el de la Suite)
         TestRunner runner = (TestRunner) testContext;
-        runner.setOutputDirectory(testContext.getCurrentXmlTest().getParameter(Constantes.paramOutputDirectorySuite));
+        runner.setOutputDirectory(testContext.getCurrentXmlTest().getParameter(ConstantesTestMaker.paramOutputDirectorySuite));
     }
   
     @Override //End TestRun
@@ -169,24 +166,20 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
      * Se realiza la grabaci�n de la suite en BD.
      */
     private void updateSuiteData(ITestContext context) {
-        indexSuite suiteId = new indexSuite(context.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx), context.getSuite().getName());
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+        indexSuite suiteId = new indexSuite(testMakerCtx.getIdSuiteExecution(), testMakerCtx.getInputData().getNameSuite());
         ResultTestRun resultTestRun = MethodsDAO.getResultTestRunAccordingMethods(suiteId, context.getName());
         SuitesDAO.updateEndSuiteFromCtx(resultTestRun, context);
     }
     
     protected HttpURLConnection callBackIfNeeded(ISuite suite) {
-        String callBackResource = suite.getParameter(Constantes.paramCallBackResource);
-        if (callBackResource!=null) {
-            CallBack callBack = new CallBack();
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(suite);
+    	InputDataTestMaker inputData = testMakerCtx.getInputData();
+    	CallBack callBack = inputData.getCallBack();
+        if (callBack!=null) {
             String pathFileReport = fmwkTest.getPathReportHTML(fmwkTest.getOutputDirectorySuite(suite));
-            String reportTSuiteURL = utils.obtainDNSFromFile(pathFileReport, suite.getParameter(Constantes.paramApplicationDNS)).replace("\\", "/");
+            String reportTSuiteURL = utils.obtainDNSFromFile(pathFileReport, inputData.getWebAppDNS()).replace("\\", "/");
             callBack.setReportTSuiteURL(reportTSuiteURL);
-            callBack.setCallBackResource(callBackResource);
-            callBack.setCallBackMethod(suite.getParameter(Constantes.paramCallBackMethod));
-            callBack.setCallBackSchema(suite.getParameter(Constantes.paramCallBackSchema));
-            callBack.setCallBackParams(suite.getParameter(Constantes.paramCallBackParams));
-            callBack.setCallBackUser(suite.getParameter(Constantes.paramCallBackUser));
-            callBack.setCallBackPassword(suite.getParameter(Constantes.paramCallBackPassword));
             try {
                 return callBack.callURL();
             }
@@ -203,15 +196,13 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
      * En caso de que lo indique el parámetro "envioCorreo" enviaremos un correo con el resultado de la suite
      */
     protected void sendEmailIfNeeded(ISuite suite) {
-        String envioCorreo = suite.getParameter(Constantes.paramEnvioCorreo);
-        if (envioCorreo!=null && "".compareTo(envioCorreo)!=0) {
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(suite);
+        if (testMakerCtx.isSendEmail()) {
             EmailEndSuite emailEndSuite = new EmailEndSuite();
-            emailEndSuite.setSiempreMail(suite.getParameter(Constantes.paramSiempreMail));
-            emailEndSuite.setEnvioCorreo(suite.getParameter(Constantes.paramEnvioCorreo));
-            emailEndSuite.setToList(suite.getParameter(Constantes.paramToListMail));
-            emailEndSuite.setCcList(suite.getParameter(Constantes.paramCcListMail));
-            emailEndSuite.setAsunto(suite.getParameter(Constantes.paramAsuntoMail));
-            emailEndSuite.sendMail(10/*maxCorreos*/, 60/*minutos*/, this.httpUrlCallBack, this.ctx1erTestRun);
+            emailEndSuite.setToList(String.join(",", testMakerCtx.getToMail()));
+            emailEndSuite.setCcList(String.join(",", testMakerCtx.getCcMail()));
+            emailEndSuite.setAsunto(testMakerCtx.getSubjectMail());
+            emailEndSuite.sendMail(this.httpUrlCallBack, this.ctx1erTestRun);
         }        
     }
     
@@ -219,18 +210,22 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
      * Se realiza la grabación de un TestRun en la tabla TESTRUNS
      */
     private void grabarTestRun(ITestContext context) {
-        indexSuite suiteId = new indexSuite(context.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx), context.getSuite().getName());
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+    	InputDataTestMaker inputData = testMakerCtx.getInputData();
+        indexSuite suiteId = new indexSuite(testMakerCtx.getIdSuiteExecution(), inputData.getNameSuite());
         ResultTestRun resultStep = MethodsDAO.getResultTestRunAccordingMethods(suiteId, context.getName()); 
         TestRunsDAO.insertFromCtx(resultStep, context);
     }
   
     private void tratamientoFinMetodo(ITestResult tr) {
     	TestCaseData.clearStackDatosStep();
-        String idExecSuite = tr.getTestContext().getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx);
+        ITestContext context = tr.getTestContext();
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+    	InputDataTestMaker inputData = testMakerCtx.getInputData();
+        String idExecSuite = testMakerCtx.getIdSuiteExecution();
         StateSuite stateSuite = SuitesDAO.getStateSuite(idExecSuite);
         if (stateSuite!=StateSuite.STOPPING) {
-            ITestContext context = tr.getTestContext();
-            indexSuite suiteId = new indexSuite(context.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx), context.getSuite().getName());
+            indexSuite suiteId = new indexSuite(idExecSuite, inputData.getNameSuite());
             String methodWithFactory = fmwkTest.getMethodWithFactory(tr.getMethod().getMethod(), context);
             ResultMethod resultMethod = StepsDAO.getResultMethodAccordingSteps(suiteId, context.getName(), methodWithFactory);
             MethodsDAO.inserMethod(resultMethod, tr);

@@ -32,11 +32,14 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.ConstantesTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest.TypeEvidencia;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
 
 
 public class GenerateReports extends EmailableReporter {
+	
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 
     @Override
@@ -50,7 +53,8 @@ public class GenerateReports extends EmailableReporter {
             context = r2.getTestContext();
 
         if (context!=null) {
-            indexSuite suite = new indexSuite(context.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx), context.getSuite().getName());
+        	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+            indexSuite suite = new indexSuite(testMakerCtx.getIdSuiteExecution(), testMakerCtx.getInputData().getNameSuite());
             try {
                 //this.generateReportHTML(suite, utils.getOutDirectoryFin(context), context);
                 this.generateReportHTML(suite, outputDirectory, context);
@@ -63,7 +67,8 @@ public class GenerateReports extends EmailableReporter {
 
     private void generateReportHTML(indexSuite suite, String outputDirectory, ITestContext context) throws Exception {
         BuildingReport buildReport = new BuildingReport(outputDirectory);
-        buildReport.serverDNS = context.getCurrentXmlTest().getParameter(Constantes.paramApplicationDNS);
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+        buildReport.serverDNS = testMakerCtx.getInputData().getWebAppDNS();
 
         Suite suiteBD = SuitesDAO.getSuite(suite);
         pintaCabeceraHTML(buildReport);
@@ -82,13 +87,16 @@ public class GenerateReports extends EmailableReporter {
      * @param context contexto de ejecución del test a nivel de TestNG
      */
     public void pintaHeadersTableMain(BuildingReport buildReport, Suite suiteBD, ITestContext context) {
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+    	InputDataTestMaker inputData = testMakerCtx.getInputData();
+    	
         buildReport.addToReport(
         	"<table id=\"tableMain\" class=\"tablemain\">" + 
             "<thead>\n" + 
             "  <tr id=\"header1\">\n" + 
             "    <th colspan=\"13\" class=\"head\">" + 
             "      <div id=\"titleReport\">" + suiteBD.getSuiteName() + " - " + context.getName() + " (Suite Date: " + suiteBD.getIdExecution() + ")" +
-            "        <span id=\"descrVersion\">" + context.getSuite().getXmlSuite().getParameter(Constantes.paramVersionSuite) + "</span>" +
+            "        <span id=\"descrVersion\">" + inputData.getVersionSuite() + "</span>" +
             "        <span id=\"browser\">" + (String) context.getAttribute("bpath") + "</span>" + 
             "        <span id=\"url\"><a id=\"urlLink\" href=\"" + (String) context.getAttribute("appPath") + "\">" + (String) context.getAttribute("appPath") + "</a></span>" + 
             "      </div>" + 
@@ -354,7 +362,7 @@ public class GenerateReports extends EmailableReporter {
             typePagNew = (String) stepHash.get("TYPE_PAGE");
             testNewLit = (String) stepHash.get("TEST");
 
-            if (Integer.parseInt(typePagNew) == Constantes.CONST_HTML) {
+            if (Integer.parseInt(typePagNew) == ConstantesTestMaker.CONST_HTML) {
                 // Comprobación existencia hardcopy página
                 String methodName = (String)stepHash.get("METHOD");
                 String ImageFileStep = fmwkTest.getPathFileEvidenciaStep(outputDir, testNewLit, methodName, Integer.parseInt(stepNumber), TypeEvidencia.imagen);
@@ -382,7 +390,7 @@ public class GenerateReports extends EmailableReporter {
                 indexFile = new File(HARPFileStep);
                 if (indexFile.exists()) {
                     String pathHARP = utils.obtainDNSFromFile(indexFile.getAbsolutePath(), buildReport.serverDNS).replace('\\', '/');
-                    linkHarpNew = " \\ <a href=\"" + Constantes.URL_SOFTWAREISHARD + pathHARP + "\" target=\"_blank\">NetTraffic</a>";
+                    linkHarpNew = " \\ <a href=\"" + ConstantesTestMaker.URL_SOFTWAREISHARD + pathHARP + "\" target=\"_blank\">NetTraffic</a>";
                 }
                 
                 // Comprobación existencia de archivo .HAR

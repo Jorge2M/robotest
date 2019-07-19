@@ -6,12 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-
 import org.testng.ITestContext;
 
 import com.mng.robotest.test80.arq.jdbc.Connector;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
-
+import com.mng.robotest.test80.data.TestMakerContext;
 
 public class CorreosDAO {
     
@@ -24,9 +22,10 @@ public class CorreosDAO {
         " WHERE SUITE = ? AND TEST = ? AND DATE_ENVIO > ? ";
     
     public static void grabarCorreoEnviado (ITestContext context) {
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
         try (Connection conn = Connector.getConnection();
             PreparedStatement insert = conn.prepareStatement(SQLInsertCorreoEnviado)) {
-            insert.setString(1,context.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx)) ;
+            insert.setString(1, testMakerCtx.getIdSuiteExecution()) ;
             insert.setString(2,context.getSuite().getName());
             insert.setString(3,context.getName());
             insert.setString(4,"");

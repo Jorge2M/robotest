@@ -28,7 +28,6 @@ import org.testng.ISuite;
 import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.xml.XmlSuite;
-import org.testng.xml.XmlTest;
 
 import com.mng.robotest.test80.arq.jdbc.dao.StepsDAO;
 import com.mng.robotest.test80.arq.jdbc.dao.SuitesDAO;
@@ -40,9 +39,9 @@ import com.mng.robotest.test80.arq.utils.StateSuite;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.WebDriverArqUtils;
-//import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
+import com.mng.robotest.test80.data.ConstantesTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 
 public class fmwkTest {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
@@ -182,8 +181,8 @@ public class fmwkTest {
      */
     public static void sendSkipTestExceptionIfSuiteStopping(ITestContext context) {
     	if (context!=null) {
-    		String executionId = context.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx);
-	        StateSuite stateSuite = SuitesDAO.getStateSuite(executionId);
+    		TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+	        StateSuite stateSuite = SuitesDAO.getStateSuite(testMakerCtx.getIdSuiteExecution());
 	        if (stateSuite==StateSuite.STOPPING) {
 	            throw new SkipException("Received Signal for stop TestSuite");
 	        }
@@ -311,11 +310,11 @@ public class fmwkTest {
     }
 
     public static String getPathOutputDirectoryFromUserDir(String suiteName, String idExecutedSuite) {
-        return (Constantes.directoryOutputTests + File.separator + suiteName + File.separator + idExecutedSuite);
+        return (ConstantesTestMaker.directoryOutputTests + File.separator + suiteName + File.separator + idExecutedSuite);
     }
 
     public static String getPathReportHTML(String outputDirectory) {
-        return outputDirectory + File.separator + Constantes.nameReportHTMLTSuite;
+        return outputDirectory + File.separator + ConstantesTestMaker.nameReportHTMLTSuite;
     }
 
     /**
@@ -330,7 +329,7 @@ public class fmwkTest {
     }
 
     public static String getOutputDirectorySuite(XmlSuite suiteXml) {
-        return (suiteXml.getParameter(Constantes.paramOutputDirectorySuite));
+        return (suiteXml.getParameter(ConstantesTestMaker.paramOutputDirectorySuite));
     }
 
     /**
@@ -374,7 +373,7 @@ public class fmwkTest {
 
     public static String getLinkNetTraffic(int stepNumber, Method method, ITestContext context) {
         String methodWithFactory = getMethodWithFactory(method, context);
-        return (Constantes.URL_SOFTWAREISHARD + getPathFileEvidenciaStep(context, methodWithFactory, stepNumber, TypeEvidencia.harp));
+        return (ConstantesTestMaker.URL_SOFTWAREISHARD + getPathFileEvidenciaStep(context, methodWithFactory, stepNumber, TypeEvidencia.harp));
     }
 
     public static String getMethodWithFactory(Method method, ITestContext context) {
@@ -395,7 +394,9 @@ public class fmwkTest {
         String methodWithFactory = getMethodWithFactory(method, context);
         String pathImageInit = getPathFileEvidenciaStep(context, methodWithFactory, datosStep.getStepNumber(), TypeEvidencia.imagen);
         File fileImage = new File(pathImageInit);
-        String applicationDNS = context.getCurrentXmlTest().getParameter(Constantes.paramApplicationDNS);
+        
+        TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+        String applicationDNS = testMakerCtx.getInputData().getWebAppDNS();
         String urlImage = utils.obtainDNSFromFile(fileImage.getAbsolutePath(), applicationDNS).replace('\\', '/');
         return (urlImage);
     }

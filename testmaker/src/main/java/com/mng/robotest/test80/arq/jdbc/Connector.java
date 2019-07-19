@@ -4,11 +4,10 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
 import org.sqlite.SQLiteConfig;
 import org.sqlite.SQLiteConfig.LockingMode;
 
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.data.ConstantesTestMaker;
 
 
 public class Connector {
@@ -26,8 +25,13 @@ public class Connector {
         config.setBusyTimeout("30000");
         config.setLockingMode(LockingMode.NORMAL);
         
-        // Nos conectamos a la ubicación propia de la BD en instalaciones de la aplicación
-        conn = DriverManager.getConnection("jdbc:sqlite:" + System.getProperty("user.dir") + File.separator + Constantes.directoryOutputTests + File.separator + "sqlite" + File.separator + "AUTOMATIC_TESTING.sqlite", config.toProperties());
+        conn = DriverManager.getConnection(
+        	"jdbc:sqlite:" + 
+        	System.getProperty("user.dir") + File.separator + 
+        	ConstantesTestMaker.directoryOutputTests + File.separator + 
+        	"sqlite" + File.separator + 
+        	ConstantesTestMaker.squemaSQLite, 
+        	config.toProperties());
         return conn;
     }
 }

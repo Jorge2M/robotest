@@ -1,16 +1,10 @@
-package com.mng.robotest.test80.arq.utils.otras;
+package com.mng.robotest.test80.mango.test.data;
 
 import java.util.regex.Pattern;
 
 public class Constantes {
 
     public static final String XMLPaises = "/inicio_paises_v3.xml";
-    
-    public static final String directoryOutputTests = "output-library";
-    public static final String nameReportHTMLTSuite = "ReportTSuite.html";
-    
-    public static final int CONST_HTML = 0;
-	
     public static final int IDFRAME = 0;
     public static final int SRCFRAME = 1;
     public static final int RUTAFRAME = 2;
@@ -67,20 +61,12 @@ public class Constantes {
     public static final String paramUsrmanto = "usrmanto";
     public static final String paramPasmanto = "pasmanto";
     
-    public static final String paramCallBackMethod = "CallBackMethod";
-    public static final String paramCallBackResource = "CallBackResource";
-    public static final String paramCallBackSchema = "CallBackSchema";
-    public static final String paramCallBackParams = "CallBackParams";
-    public static final String paramCallBackUser = "CallBackUser";
-    public static final String paramCallBackPassword = "CallBackPassword";
-    
-    public static final String paramOutputDirectorySuite = "outputDirectorySuite";
+
 
     public static final String paramCountrys = "countrys";
     public static final String paramLineas = "lineas";
     public static final String paramPayments = "payments";
-	
-    public static final String URL_SOFTWAREISHARD = "http://www.softwareishard.com/har/viewer/?inputUrl=";
+
     
 	public final static String PrefixRebajas = "<b style=\"color:blue\">Rebajas</b></br>";
 	
