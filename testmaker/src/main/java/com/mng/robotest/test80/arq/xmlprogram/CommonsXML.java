@@ -37,56 +37,6 @@ public class CommonsXML {
         return listOfGroups;
     }
     
-    /**
-     * Establecemos los parámetros genéricos a nivel de la Suite (válidos para todos los casos de prueba)
-     * @param parametersSuite
-     * @param params
-     */
-    public static void setCommonsParamsSuite(Map<String, String> parametersSuite, ParamsBean params) {
-        parametersSuite.put(Constantes.paramUrlBase, params.getURLBase());
-        parametersSuite.put(Constantes.paramSuiteExecInCtx, params.getIdSuiteExecution());
-        parametersSuite.put(Constantes.paramVersionSuite, params.getVersion());
-        parametersSuite.put(Constantes.paramApplicationDNS, params.getApplicationDNS());
-        parametersSuite.put(Constantes.paramTypeAccessFmwk, params.getTypeAccess().toString());
-        parametersSuite.put(Constantes.paramChannelSuite, params.getChannel().toString());
-        parametersSuite.put(Constantes.paramAppEcomSuite, params.getAppE().toString());
-        parametersSuite.put(Constantes.paramBrowser, params.getBrowser());
-        parametersSuite.put(Constantes.paramBrwsPath, params.getBrowser());
-        parametersSuite.put(Constantes.paramNetAnalysis, params.getNetAnalysis());
-        if (params.getEnvioCorreo()!=null && "".compareTo(params.getEnvioCorreo())!=0) {
-            parametersSuite.put(Constantes.paramEnvioCorreo, params.getEnvioCorreo());
-            parametersSuite.put(Constantes.paramSiempreMail, "true");
-            ArrayList<String> correosGroup = CorreosGroupDAO.getCorreosGroup(params.getEnvioCorreo());
-            if (correosGroup!=null) {
-                parametersSuite.put(Constantes.paramToListMail, toCommaSeparated(correosGroup));
-            } else {
-                parametersSuite.put(Constantes.paramToListMail, "eqp.ecommerce.qamango@mango.com");
-            }
-            
-            parametersSuite.put(Constantes.paramCcListMail, "jorge.munoz.sge@mango.com");
-            parametersSuite.put(Constantes.paramAsuntoMail,  "Result TestSuite " + params.getSuiteName() + " (" + params.getAppE() + " / " + params.getURLBase() + ")");
-        }
-        
-        CallBack callBack = params.getCallBack();
-        if (params.getCallBack()!=null) {
-            parametersSuite.put(Constantes.paramCallBackMethod, callBack.getCallBackMethod());
-            parametersSuite.put(Constantes.paramCallBackResource, callBack.getCallBackResource());
-            parametersSuite.put(Constantes.paramCallBackSchema, callBack.getCallBackSchema());  
-            parametersSuite.put(Constantes.paramCallBackParams, callBack.getCallBackParams());
-            parametersSuite.put(Constantes.paramCallBackUser, callBack.getCallBackUser());
-            parametersSuite.put(Constantes.paramCallBackPassword, callBack.getCallBackPassword());
-        }
-
-        //RecicleWD: Indica el modo de gestión de los webdriver/browsers
-        //    true:  reutiliza el webdriver para futuros casos de prueba
-        //    false: cuando acaba un caso de prueba cierra el webdriver
-        if (params.getRecicleWD()!=null && params.getRecicleWD().compareTo("true")==0) {
-            parametersSuite.put(Constantes.paramRecycleWD, "true");
-        } else {
-            parametersSuite.put(Constantes.paramRecycleWD, "false");
-        }
-    }
-    
     public static XmlTest joinSuiteWithTestRunMobilBStack(TypeWebDriver webdriverType, XmlSuite suite, BStackDataMovil bsMovil) {
         XmlTest testRun = new XmlTestP80(suite);
         testRun.setName(suite.getName() + "_" + bsMovil.device);

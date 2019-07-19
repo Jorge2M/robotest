@@ -62,17 +62,6 @@ public class Constantes {
     //ID parámetros contexto relacionados con BrowserStack
     public static final String UserBStack = "UserBStack";
     public static final String PassBStack = "PassBStack";
-	
-    public static final String paramSuiteExecInCtx = "idSuiteExecution";
-    public static final String paramVersionSuite = "Version";
-    public static final String paramApplicationDNS = "applicationDNS";
-    public static final String paramTypeAccessFmwk = "typeAccessFmwk";
-    public static final String paramChannelSuite = "Channel";
-    public static final String paramAppEcomSuite = "AppEcom";
-    public static final String paramBrowser = "Browser";
-    public static final String paramBrwsPath = "brwsr-path";
-    public static final String paramRecycleWD = "recycleWD";
-    public static final String paramNetAnalysis = "netAnalysis";
 
     public static final String paramUrlmanto = "urlmanto";
     public static final String paramUsrmanto = "usrmanto";
@@ -80,24 +69,10 @@ public class Constantes {
 
     
     public static final String paramOutputDirectorySuite = "outputDirectorySuite";
-    
-    public static final String paramEnvioCorreo = "envioCorreo";
-    public static final String paramSiempreMail = "siempreMail";
-    public static final String paramToListMail = "toListMail";
-    public static final String paramCcListMail = "CcListMail";
-    public static final String paramAsuntoMail = "asuntoMail";
-    
-    public static final String paramCallBackMethod = "CallBackMethod";
-    public static final String paramCallBackResource = "CallBackResource";
-    public static final String paramCallBackSchema = "CallBackSchema";
-    public static final String paramCallBackParams = "CallBackParams";
-    public static final String paramCallBackUser = "CallBackUser";
-    public static final String paramCallBackPassword = "CallBackPassword";
-    
+
     public static final String paramCountrys = "countrys";
     public static final String paramLineas = "lineas";
     public static final String paramPayments = "payments";
-    public static final String paramUrlBase = "urlBase";
 	
     public static final String URL_SOFTWAREISHARD = "http://www.softwareishard.com/har/viewer/?inputUrl=";
     

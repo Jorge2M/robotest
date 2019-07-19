@@ -88,7 +88,7 @@ public class SmokeMantoXML {
     
     //Creación de los parámetros comunes a nivel de la Suite
     private void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean paramsI) {
-    	CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, paramsI);
+    	CommonMangoData.setCommonsParamsSuite(parametersSuite, paramsI);
     }
     
     public XmlTest createTestRunFilteredWithTestCases(XmlSuite suite, String testRunName, String groups[], String[] testCaseList) {

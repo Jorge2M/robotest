@@ -70,7 +70,7 @@ public class LoyaltyMasivosXML {
     
     //Creación de los parámetros comunes a nivel de la Suite
     private void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean params) {
-    	CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, params);
+    	CommonMangoData.setCommonsParamsSuite(parametersSuite, params);
         parametersSuite.put("register", "true");
         parametersSuite.put("loginAfterRegister", "false");
 

@@ -70,7 +70,7 @@ public class NodosFactoryXML {
      * Creación de los parámetros comunes a nivel de la Suite
      */
     private void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean params) throws Exception {
-    	CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, params);
+    	CommonMangoData.setCommonsParamsSuite(parametersSuite, params);
         
         //URL (en un futuro esto quizás podría llegar en el args)
         parametersSuite.put("url-status", createURLfromBase(params.getURLBase(), "/controles/status"));

@@ -71,7 +71,7 @@ public class RegistrosFactoryXML {
     //Creación de los parámetros comunes a nivel de la Suite
     private void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean params) {
         String version = params.getVersion();
-        CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, params);
+        CommonMangoData.setCommonsParamsSuite(parametersSuite, params);
         switch (version) {
         case "V1":
         	parametersSuite.put("register", "false");

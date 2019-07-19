@@ -68,7 +68,7 @@ public class ConsolaVotfXML {
     private void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean paramsI) {
         
         //Establecemos los parámetros genéricos (válidos para todos los casos de prueba)
-    	CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, paramsI);
+    	CommonMangoData.setCommonsParamsSuite(parametersSuite, paramsI);
         
         //Código artículo (referencia + código talla + código color) en stock y que no esté en rebajas
         parametersSuite.put("prodDisponible1", "3300049936TN");

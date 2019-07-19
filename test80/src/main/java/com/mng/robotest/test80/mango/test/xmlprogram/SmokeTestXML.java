@@ -15,6 +15,8 @@ import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.TestMaker;
+import com.mng.robotest.test80.arq.jdbc.dao.CorreosGroupDAO;
+import com.mng.robotest.test80.arq.listeners.CallBack;
 import com.mng.robotest.test80.arq.utils.filter.DataFilterTCases;
 import com.mng.robotest.test80.arq.utils.filter.FilterTestsSuiteXML;
 import com.mng.robotest.test80.arq.utils.filter.TestMethod;
@@ -26,18 +28,16 @@ import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.T
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
 import com.mng.robotest.test80.arq.xmlprogram.TestMakerSuiteXML;
 import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
+import com.mng.robotest.test80.mango.test.xmlprogram.CommonMangoData;
 
 public class SmokeTestXML extends TestMakerSuiteXML {
 
     public SmokeTestXML(ParamsBean params, TestMaker testMaker) {
-    	super(testMaker);
+    	super(params.getDataFilter(), testMaker);
     	Channel channel = params.getChannel();
     	setClassesWithTests(getClasses(channel));
     	setDependencyGroups(getDependencyGroups());
-    }
-    
-    private static void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean paramsI) {
-    	CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, paramsI);
+    	setParameters(CommonMangoData.getParametersSuiteShop(params));
     }
     
     private static XmlTest joinSuiteWithTestRunMobilBStack(TypeWebDriver webdriverType, ParamsBean params, XmlSuite suite, BStackDataMovil bsMovil) {

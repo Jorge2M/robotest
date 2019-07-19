@@ -77,8 +77,8 @@ public class PagosPaisesXML {
             suite.setThreadCount(Constantes.BSTACK_PARALLEL);
             
             //Asociamos a la suite X testruns (de momento pasamos datos hardcodeados pero deberán llegarnos vía parámetro)
-            joinSuiteWithTestRunBStack(TypeWebDriver.browserstack, suite, CommonMangoDataForXML.bsMovilAndroid);
-            joinSuiteWithTestRunBStack(TypeWebDriver.browserstack, suite, CommonMangoDataForXML.bsMovilIOS);
+            joinSuiteWithTestRunBStack(TypeWebDriver.browserstack, suite, CommonMangoData.bsMovilAndroid);
+            joinSuiteWithTestRunBStack(TypeWebDriver.browserstack, suite, CommonMangoData.bsMovilIOS);
         } else {
             //En caso <> browserstack paralelizaremos a nivel de los métodos (casos de prueba)
             suite.setParallel(ParallelMode.METHODS);
@@ -98,7 +98,7 @@ public class PagosPaisesXML {
         String version = this.params.getVersion();
         
         //Establecemos los parámetros genéricos (válidos para todos los casos de prueba)
-        CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, this.params);
+        CommonMangoData.setCommonsParamsSuite(parametersSuite, this.params);
 
         //Indica si hemoos de validar los pagos marcados en el XML para testear (Más adelante esto dependerá del parámetro 'versión')
         switch (version) {

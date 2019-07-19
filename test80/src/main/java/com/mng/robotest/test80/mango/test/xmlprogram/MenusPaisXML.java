@@ -72,8 +72,8 @@ public class MenusPaisXML {
             suite.setThreadCount(Constantes.BSTACK_PARALLEL);
             
             //Asociamos a la suite X testruns (de momento pasamos datos hardcodeados pero deberán llegarnos vía parámetro)
-            joinSuiteWithTestRunBStack(TypeWebDriver.browserstack, suite, CommonMangoDataForXML.bsMovilAndroid);
-            joinSuiteWithTestRunBStack(TypeWebDriver.browserstack, suite, CommonMangoDataForXML.bsMovilIOS);
+            joinSuiteWithTestRunBStack(TypeWebDriver.browserstack, suite, CommonMangoData.bsMovilAndroid);
+            joinSuiteWithTestRunBStack(TypeWebDriver.browserstack, suite, CommonMangoData.bsMovilIOS);
         } else {
             //En caso <> browserstack paralelizaremos a nivel de los métodos (casos de prueba)
             suite.setParallel(ParallelMode.METHODS);
@@ -91,7 +91,7 @@ public class MenusPaisXML {
      */
     private void createCommonParamsSuite(Map<String, String> parametersSuite) {
         //Establecemos los parámetros genéricos (válidos para todos los casos de prueba)
-    	CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, this.params);
+    	CommonMangoData.setCommonsParamsSuite(parametersSuite, this.params);
         
         //Indicamos que no se han de testear todos los menús
         parametersSuite.put("recorreMenus", "false");

@@ -22,17 +22,20 @@ import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.T
 
 public abstract class TestMakerSuiteXML {
 
+	private final InputDataTestMaker inputData;
 	private final TestMaker testMaker;
     private final FilterTestsSuiteXML filterSuiteXML;
     
-    private ParamsBean params;
     private List<XmlClass> listXMLclasses;
     private XmlDependencies depGroupsXML;
+    private Map<String,String> parameters;
 	private XmlSuite xmlSuite;
 	
-	protected TestMakerSuiteXML(DataFilter dataFilter, TestMaker testMaker) {
+	protected TestMakerSuiteXML(InputDataTestMaker inputData, TestMaker testMaker) {
 		this.testMaker = testMaker;
-		this.filterSuiteXML = FilterTestsSuiteXML.getNew(dataFilter);
+		this.inputData = inputData;
+		this.parameters = 
+		this.filterSuiteXML = FilterTestsSuiteXML.getNew(inputData.getDataFilter());
 	}
 	
 	protected TestMaker getTestMaker() {
@@ -54,6 +57,11 @@ public abstract class TestMakerSuiteXML {
     	for (Map.Entry<String,String> dependency : dependencies.entrySet()) {
     		depGroupsXML.onGroup(dependency.getKey(), dependency.getValue());
     	}
+    }
+    
+    protected void addParameters(Map<String,String> parameters) {
+    	for (in)
+    	this.parameters = parameters;
     }
     
     private static List<String> createStandardListeners() {
@@ -78,24 +86,24 @@ public abstract class TestMakerSuiteXML {
     	generateXmlSuiteIfNotAvailable();
         XmlTest testRun = xmlSuite.getTests().get(0);
         return (
-        	getInitialTestCaseCandidatesToExecute(testRun, dFilter.getChannel(), dFilter.getAppE())
+        	filterSuiteXML.getInitialTestCaseCandidatesToExecute(testRun)
         );
     }
     
     private void generateXmlSuiteIfNotAvailable() {
     	if (xmlSuite==null) {
-    		,,,
+    		xmlSuite = createSuite();
     	}
     }
     
-    private static XmlSuite createSuite(ParamsBean params) {
+    private XmlSuite createSuite() {
         XmlSuite suite = new XmlSuite();
         suite.setFileName("");
-        suite.setName(params.getSuiteName());
+        suite.setName(inputData.getNameSuite());
         suite.setListeners(createStandardListeners());
 
         Map<String, String> parametersSuite = new HashMap<>();
-        createCommonParamsSuite(parametersSuite, params);
+        CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, paramsI);
         suite.setParameters(parametersSuite);
         
         //En caso <> BrowserStack paralelizaremos a nivel de los Métodos (casos de prueba)

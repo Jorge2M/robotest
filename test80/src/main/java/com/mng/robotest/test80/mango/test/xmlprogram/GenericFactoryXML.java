@@ -76,7 +76,7 @@ public class GenericFactoryXML {
     //Creación de los parámetros comunes a nivel de la Suite
     private void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean params) {
         //Establecemos los parámetros genéricos (válidos para todos los casos de prueba)
-    	CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, params);
+    	CommonMangoData.setCommonsParamsSuite(parametersSuite, params);
 
         //Parámetros que especifican el tipo de canal
         if (params.getChannel()==Channel.movil_web) {

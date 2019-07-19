@@ -70,7 +70,7 @@ public class MenusMantoFactoryXML {
     }
     
     private void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean params) {
-    	CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, params);
+    	CommonMangoData.setCommonsParamsSuite(parametersSuite, params);
         if (params.getChannel()==Channel.movil_web) {
             parametersSuite.put("isMobil", "true");
         } else {

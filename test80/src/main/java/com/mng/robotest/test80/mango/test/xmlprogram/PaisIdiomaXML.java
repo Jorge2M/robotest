@@ -66,8 +66,8 @@ public class PaisIdiomaXML {
             suite.setThreadCount(Constantes.BSTACK_PARALLEL);
             
             //Asociamos a la suite X testruns (de momento pasamos datos hardcodeados pero deberán llegarnos vía parámetro)
-            joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, CommonMangoDataForXML.bsMovilAndroid);
-            joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, CommonMangoDataForXML.bsMovilIOS);
+            joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, CommonMangoData.bsMovilAndroid);
+            joinSuiteWithTestRunMobilBStack(TypeWebDriver.browserstack, suite, CommonMangoData.bsMovilIOS);
         } else {
             //En caso <> browserstack paralelizaremos a nivel de los métodos (casos de prueba)
             suite.setParallel(ParallelMode.METHODS);
@@ -87,7 +87,7 @@ public class PaisIdiomaXML {
         String version = params.getVersion();
         
         //Establecemos los parámetros genéricos (válidos para todos los casos de prueba)
-        CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, params);
+        CommonMangoData.setCommonsParamsSuite(parametersSuite, params);
         
         //Flags en función de la versión a testear
         switch (version) {

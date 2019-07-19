@@ -77,7 +77,7 @@ public class ValesPaisesXML {
      */
     private void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean params) {
         String version = params.getVersion();
-        CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, params);
+        CommonMangoData.setCommonsParamsSuite(parametersSuite, params);
 
         //Indica si hemoos de validar los pagos marcados en el XML para testear (Más adelante esto dependerá del parámetro 'versión')
         switch (version) {

@@ -1,8 +1,5 @@
 package com.mng.robotest.test80.arq.xmlprogram;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.mng.robotest.test80.arq.listeners.CallBack;
 import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.conf.SuiteTest;
@@ -36,35 +33,13 @@ public class ParamsBean {
     	this.app = app;
     	this.suite = suite;
     }
+
+    public AppTest getApp() {
+    	return this.app;
+    }
     
-    public DataFilter getDataFilter() {
-    	DataFilter dataFilter = new DataFilter();
-    	dataFilter
-        @Override
-        public AppTest getAppE() {
-            return this.app;
-        }
-        
-        @Override
-        public Channel getChannel() {
-            return this.channel;
-        }
-        
-        @Override
-        public List<String> getGroupsList() {
-        	if (null!=getGroups()) {
-        		return Arrays.asList(getGroups());
-        	}
-        	return null;
-        }
-        
-        @Override
-        public List<String> getTestCasesList() {
-        	if (null!=getTestCases()) {
-        		return Arrays.asList(getTestCases());
-        	}
-        	return null;
-        }
+    public Channel getChannel() {
+    	return this.channel;
     }
     
     public String getSuiteName() {
@@ -110,33 +85,7 @@ public class ParamsBean {
             setTypeAccess(typeAccess);
         }
     }    
-    
-    @Override
-    public AppTest getAppE() {
-        return this.app;
-    }
-    
-    @Override
-    public Channel getChannel() {
-        return this.channel;
-    }
-    
-    @Override
-    public List<String> getGroupsList() {
-    	if (null!=getGroups()) {
-    		return Arrays.asList(getGroups());
-    	}
-    	return null;
-    }
-    
-    @Override
-    public List<String> getTestCasesList() {
-    	if (null!=getTestCases()) {
-    		return Arrays.asList(getTestCases());
-    	}
-    	return null;
-    }
-    
+
     public void setChannel(Channel channel) {
         this.channel = channel;
     }

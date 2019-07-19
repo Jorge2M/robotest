@@ -69,7 +69,7 @@ public class CampanasXML {
      * Creación de los parámetros comunes a nivel de la Suite
      */
     private void createCommonParamsSuite(Map<String, String> parametersSuite, ParamsBean params) {
-    	CommonMangoDataForXML.setCommonsParamsSuite(parametersSuite, params);
+    	CommonMangoData.setCommonsParamsSuite(parametersSuite, params);
     }
     
     public XmlTest joinSuiteWithTestRunLocal(XmlSuite suite, String testRunName) {
