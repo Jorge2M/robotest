@@ -66,7 +66,13 @@ public class Constantes {
     public static final String paramUrlmanto = "urlmanto";
     public static final String paramUsrmanto = "usrmanto";
     public static final String paramPasmanto = "pasmanto";
-
+    
+    public static final String paramCallBackMethod = "CallBackMethod";
+    public static final String paramCallBackResource = "CallBackResource";
+    public static final String paramCallBackSchema = "CallBackSchema";
+    public static final String paramCallBackParams = "CallBackParams";
+    public static final String paramCallBackUser = "CallBackUser";
+    public static final String paramCallBackPassword = "CallBackPassword";
     
     public static final String paramOutputDirectorySuite = "outputDirectorySuite";
 

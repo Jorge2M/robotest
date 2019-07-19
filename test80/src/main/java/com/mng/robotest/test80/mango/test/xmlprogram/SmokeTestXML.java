@@ -32,57 +32,19 @@ import com.mng.robotest.test80.mango.test.xmlprogram.CommonMangoData;
 
 public class SmokeTestXML extends TestMakerSuiteXML {
 
-    public SmokeTestXML(ParamsBean params, TestMaker testMaker) {
-    	super(params.getDataFilter(), testMaker);
+    public SmokeTestXML(ParamsBean params) {
+    	super(params.getDataFilter());
     	Channel channel = params.getChannel();
     	setClassesWithTests(getClasses(channel));
     	setDependencyGroups(getDependencyGroups());
     	setParameters(CommonMangoData.getParametersSuiteShop(params));
     }
-    
-    private static XmlTest joinSuiteWithTestRunMobilBStack(TypeWebDriver webdriverType, ParamsBean params, XmlSuite suite, BStackDataMovil bsMovil) {
-        XmlTest testRun = CommonsXML.joinSuiteWithTestRunMobilBStack(webdriverType, suite, bsMovil);
-        testRun.setGroups(createGroups(params));
-        testRun.setXmlClasses(createClasses(params));
-        //filterTestCasesToExec(testRun);
-        return testRun;
-    }
-    
-    private static XmlTest joinSuiteWithTestRunDesktopBStack(TypeWebDriver webdriverType, ParamsBean params, XmlSuite suite, BStackDataDesktop bsDesktop) {
-        XmlTest testRun = CommonsXML.joinSuiteWithTestRunDesktopBStack(webdriverType, suite, bsDesktop);
-        testRun.setGroups(createGroups(params));
-        testRun.setXmlClasses(createClasses(params));
-        //filterTestCasesToExec(testRun);
-        return testRun;
-    }    
-    
 
-    
-    private static XmlGroups createGroups(ParamsBean params) {
-        XmlGroups groups = new XmlGroups();
-        groups.setRun(createRun(params));
-        groups.setXmlDependencies(createDependencies(params));
-        return groups;
-    }    
-    
-    private static XmlRun createRun(ParamsBean params) {
-        XmlRun run = new XmlRun();
-        for (String group : CommonsXML.getListOfPossibleGroups(params.getChannel(), params.getAppE()))
-            run.onInclude(group);
-        
-        return run;
-    }
-    
-    /**
-     * @return Map with pair: group <- group
-     */
-    //ok
     private Map<String,String> getDependencyGroups() {
     	Map<String,String> dependencyGroups = new HashMap<>();
     	return dependencyGroups;
     }
     
-    //ok
     private static List<String> getClasses(Channel channel) {
         List<String> listClasses = new ArrayList<>();
         if (channel==Channel.desktop) {
@@ -105,9 +67,5 @@ public class SmokeTestXML extends TestMakerSuiteXML {
         listClasses.add("com.mng.robotest.test80.mango.test.appshop.Reembolsos");
         listClasses.add("com.mng.robotest.test80.mango.test.appshop.Loyalty");
         return listClasses;
-    }
-    
-    public ParamsBean getParams() {
-        return this.params;
     }
 }

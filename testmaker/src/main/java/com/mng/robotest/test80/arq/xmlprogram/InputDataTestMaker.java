@@ -16,8 +16,8 @@ public class InputDataTestMaker {
     private final String versionSuite;
 	private final Channel channel;
     private final AppTest app;
+    private final TypeWebDriver typeWebDriver;
     
-    private TypeWebDriver typeWebDriver = TypeWebDriver.chrome;
     private ManagementWebdriver typeManageWebdriver = ManagementWebdriver.discard;
     private TypeAccessFmwk typeAccess = TypeAccessFmwk.CommandLine;
     private String urlBase;
@@ -27,18 +27,20 @@ public class InputDataTestMaker {
     private String envioCorreo = null;
     private CallBack callBack = null;
 	
-    public InputDataTestMaker(String nameSuite, Channel channel, AppTest app) {
+    public InputDataTestMaker(String nameSuite, Channel channel, AppTest app, TypeWebDriver typeWebDriver) {
     	this.nameSuite = nameSuite;
     	this.versionSuite = "V1";
     	this.channel = channel;
     	this.app = app;
+    	this.typeWebDriver = typeWebDriver;
     }
     
-    public InputDataTestMaker(String nameSuite, String versionSuite, Channel channel, AppTest app) {
+    public InputDataTestMaker(String nameSuite, String versionSuite, Channel channel, AppTest app, TypeWebDriver typeWebDriver) {
     	this.nameSuite = nameSuite;
     	this.versionSuite = versionSuite;
     	this.channel = channel;
     	this.app = app;
+    	this.typeWebDriver = typeWebDriver;
     }
 
 	public String getNameSuite() {
@@ -60,11 +62,7 @@ public class InputDataTestMaker {
 	public TypeWebDriver getTypeWebDriver() {
 		return typeWebDriver;
 	}
-
-	public void setTypeWebDriver(TypeWebDriver typeWebDriver) {
-		this.typeWebDriver = typeWebDriver;
-	}
-
+	
 	public ManagementWebdriver getTypeManageWebdriver() {
 		return typeManageWebdriver;
 	}

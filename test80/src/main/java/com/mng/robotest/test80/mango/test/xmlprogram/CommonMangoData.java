@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.xmlprogram;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mng.robotest.test80.arq.listeners.CallBack;
 import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.webdriver.BStackDataDesktop;
 import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
@@ -67,6 +68,16 @@ public class CommonMangoData {
         //Credenciales para la identificación en el servicio de BrowserStack
         parametersReturn.put(Constantes.UserBStack, "equipoqa1");
         parametersReturn.put(Constantes.PassBStack, "qp3dr5VJbFMAxPsT4k1b");
+        
+        CallBack callBack = params.getCallBack();
+        if (params.getCallBack()!=null) {
+        	parametersReturn.put(Constantes.paramCallBackMethod, callBack.getCallBackMethod());
+        	parametersReturn.put(Constantes.paramCallBackResource, callBack.getCallBackResource());
+        	parametersReturn.put(Constantes.paramCallBackSchema, callBack.getCallBackSchema());  
+        	parametersReturn.put(Constantes.paramCallBackParams, callBack.getCallBackParams());
+        	parametersReturn.put(Constantes.paramCallBackUser, callBack.getCallBackUser());
+        	parametersReturn.put(Constantes.paramCallBackPassword, callBack.getCallBackPassword());
+        }
         
         return parametersReturn;
     }
