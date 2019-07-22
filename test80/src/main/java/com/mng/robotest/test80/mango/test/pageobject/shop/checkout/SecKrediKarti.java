@@ -10,9 +10,9 @@ public class SecKrediKarti extends SecTarjetaPciInIframe {
 
 	private final Channel channel;
 	
-    final static String XPathCapaPagoPlazoMobil = "//table[@class[contains(.,'installment-msu')]]";
-    final static String XPathRadioPagoPlazoMobil = XPathCapaPagoPlazoMobil + "//div[@class[contains(.,'custom-radio')] and @data-custom-radio-id]";
-    final static String XPathCapaPagoPlazoDesktop = "//div[@class[contains(.,'installmentsTable')]]"; 
+    final static String XPathCapaPagoPlazoMobil = "//table[@class[contains(.,'installment')]]";
+    final static String XPathRadioPagoPlazoMobil = XPathCapaPagoPlazoMobil + "//div[@class[contains(.,'installment-checkbox')]]";
+    final static String XPathCapaPagoPlazoDesktop = "//div[@class[contains(.,'installments-content')]]"; 
     final static String XPathRadioPagoPlazoDesktop = XPathCapaPagoPlazoDesktop + "//input[@type='radio' and @name='installment']";
     
     private SecKrediKarti(Channel channel, WebDriver driver) {
@@ -30,7 +30,7 @@ public class SecKrediKarti extends SecTarjetaPciInIframe {
     		return XPathCapaPagoPlazoDesktop;
     	default:
     	case movil_web:
-    		return XPathCapaPagoPlazoDesktop;
+    		return XPathCapaPagoPlazoMobil;
     	}
     }
     
@@ -40,7 +40,7 @@ public class SecKrediKarti extends SecTarjetaPciInIframe {
     		return XPathRadioPagoPlazoDesktop;
     	default:
     	case movil_web:
-    		return XPathRadioPagoPlazoDesktop;
+    		return XPathRadioPagoPlazoMobil;
     	}
     }
     
@@ -49,12 +49,18 @@ public class SecKrediKarti extends SecTarjetaPciInIframe {
     }
 
     public boolean isVisiblePagoAPlazoUntil(int maxSecondsWait) {
+    	goToIframe();
         String xpathCapaPlazo = getXPathCapaPagoPlazo();
-        return (isElementVisibleUntil(driver, By.xpath(xpathCapaPlazo), maxSecondsWait));
+        boolean result = (isElementVisibleUntil(driver, By.xpath(xpathCapaPlazo), maxSecondsWait));
+        leaveIframe();
+        return result;
     }
     
     public void clickRadioPagoAPlazo(int numRadio) throws Exception {
+    	goToIframe();
     	By radioBy = By.xpath(getXPathRadioPagoAPlazo(numRadio));
     	WebdrvWrapp.clickAndWaitLoad(driver, radioBy);
+    	WebdrvWrapp.clickAndWaitLoad(driver, radioBy);
+        leaveIframe();
     }
 }
