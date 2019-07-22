@@ -1,5 +1,7 @@
 package com.mng.robotest.test80.arq.xmlprogram;
 
+import java.util.Arrays;
+
 import com.mng.robotest.test80.arq.listeners.CallBack;
 import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.conf.SuiteTest;
@@ -10,7 +12,6 @@ import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.T
 public class ParamsBean {
 
     Channel channel = Channel.desktop;
-    String[] groups = {};
     String Browser = "";
     String recicleWD = null;
     String netAnalysis = "false";
@@ -18,7 +19,8 @@ public class ParamsBean {
     String URLBase = "";
     String[] ListaPaises = {};
     String[] ListaLineas = {};
-    String[] ListaPayments = {};    
+    String[] ListaPayments = {};   
+    String[] groups = {};
     String[] ListaTestCases = {};
     String applicationDNS = "";
     String idSuiteExecution = "";
@@ -68,6 +70,13 @@ public class ParamsBean {
 	    		getApp(), 
 	    		getURLBase(),
 	    		TypeWebDriver.valueOf(getBrowser()));
+    	
+    	if (getTestCases()!=null) {
+    		inputData.setTestCasesFilter(Arrays.asList(getTestCases()));
+    	}
+    	if (getGroups()!=null) {
+    		inputData.setGroupsFilter(Arrays.asList(getGroups()));
+    	}
     	if (getTypeAccess()!=null) {
     		inputData.setTypeAccess(typeAccess);
     	}

@@ -56,7 +56,7 @@ public class AccesoStpV {
         }
        
         if (clearArticulos) {
-            registro+= "Borrar la Bolsa<br>";        
+            registro+= "Borrar la Bolsa<br>";         
         }
         
         DatosStep datosStep = TestCaseData.getDatosCurrentStep();
