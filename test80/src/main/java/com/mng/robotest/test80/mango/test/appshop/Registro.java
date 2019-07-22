@@ -20,6 +20,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
 import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
@@ -78,14 +79,14 @@ public class Registro extends GestorWebDriver {
     }
     
     @BeforeMethod(groups={"Registro", "Canal:all_App:all", "SupportsFactoryCountrys"})
-    @Parameters({"brwsr-path", "urlBase", "AppEcom", "Channel"})
-    public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) 
-    throws Exception {
+    public void login(ITestContext context, Method method) throws Exception {
         //Recopilación de parámetros
+        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
+        InputDataTestMaker inputData = tMakerCtx.getInputData();
         dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom(appEcom);
-        dCtxSh.setChannel(channel);
-        dCtxSh.urlAcceso = urlAcceso;
+        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
+        dCtxSh.setChannel(inputData.getChannel());
+        dCtxSh.urlAcceso = inputData.getUrlBase();
 
         //Si el acceso es normal (no es desde una @Factory) utilizaremos el España/Castellano
         if (this.paisFactory==null) {
@@ -103,7 +104,7 @@ public class Registro extends GestorWebDriver {
             dCtxSh.idioma = this.idiomaFactory;
         }        
         
-        Utils.storeDataShopForTestMaker(bpath, this.index_fact, dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), index_fact, dCtxSh, context, method);
     }
 
     @SuppressWarnings("unused")

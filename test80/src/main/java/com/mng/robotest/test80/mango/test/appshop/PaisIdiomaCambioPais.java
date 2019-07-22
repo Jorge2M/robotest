@@ -6,6 +6,8 @@ import org.testng.annotations.*;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
@@ -37,10 +39,11 @@ public class PaisIdiomaCambioPais extends GestorWebDriver /*Funcionalidades gen√
     }
 	  
     @BeforeMethod
-    @Parameters({"brwsr-path","urlBase"})
-    public void login(String bpath, String urlAcceso, ITestContext context, Method method) throws Exception {
-    	this.dCtxSh.urlAcceso = urlAcceso;
-    	Utils.storeDataShopForTestMaker(bpath, this.index_fact, this.dCtxSh, context, method);
+    public void login(ITestContext context, Method method) throws Exception {
+        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
+        InputDataTestMaker inputData = tMakerCtx.getInputData();
+    	this.dCtxSh.urlAcceso = inputData.getUrlBase();
+    	Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), index_fact, dCtxSh, context, method);
     }
 	
     @SuppressWarnings("unused")

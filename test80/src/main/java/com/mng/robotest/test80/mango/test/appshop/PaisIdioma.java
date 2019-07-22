@@ -11,6 +11,8 @@ import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.appshop.campanas.CampanasData;
@@ -86,8 +88,9 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
     }
 	  
     @BeforeMethod(groups={"Lineas", "Canal:all_App:all"}, alwaysRun = true)
-    @Parameters({"brwsr-path", "urlBase", "AppEcom", "Channel"})
-    public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) throws Exception {
+    public void login(ITestContext context, Method method) throws Exception {
+        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
+        InputDataTestMaker inputData = tMakerCtx.getInputData();
         if (this.dCtxSh==null) {
             //Si el acceso es normal (no es desde una @Factory) definiremos los siguientes datos específicos
             this.dCtxSh = new DataCtxShop();
@@ -97,15 +100,15 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
             IdiomaPais castellano = españa.getListIdiomas().get(0);
             this.dCtxSh.pais = españa;
             this.dCtxSh.idioma = castellano;
-            this.dCtxSh.setAppEcom(appEcom);
-            this.dCtxSh.setChannel(channel);
-            this.dCtxSh.urlAcceso = urlAcceso;
+            this.dCtxSh.setAppEcom((AppEcom)inputData.getApp());
+            this.dCtxSh.setChannel(inputData.getChannel());
+            this.dCtxSh.urlAcceso = inputData.getUrlBase();
             this.lineasAprobar = this.dCtxSh.pais.getShoponline().getLineasToTest(this.dCtxSh.appE);
             this.recorreMenus = false;
             this.recorreBanners = false;
         }
 
-        Utils.storeDataShopForTestMaker(bpath, index_fact, dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), index_fact, dCtxSh, context, method);
     }
 	
     @SuppressWarnings("unused")

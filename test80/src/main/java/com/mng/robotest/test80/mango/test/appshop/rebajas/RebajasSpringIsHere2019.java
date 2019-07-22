@@ -12,7 +12,10 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
@@ -192,17 +195,18 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
     }
 	  
     @BeforeMethod (groups={"RebajasSpringIsHere2019", "Canal:desktop_App:shop", "SupportsFactoryCountrys"})
-    @Parameters({"brwsr-path", "urlBase", "AppEcom", "Channel"})
-    public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) throws Exception {
+    public void login(ITestContext context, Method method) throws Exception {
         //Recopilación de parámetros
+        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
+        InputDataTestMaker inputData = tMakerCtx.getInputData();
         DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom(appEcom);
-        dCtxSh.setChannel(channel);
+        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
+        dCtxSh.setChannel(inputData.getChannel());
         dCtxSh.pais = this.paisFactory;
         dCtxSh.idioma = this.idiomaFactory;
-        dCtxSh.urlAcceso = urlAcceso;
+        dCtxSh.urlAcceso = inputData.getUrlBase();
 
-        Utils.storeDataShopForTestMaker(bpath, this.index_fact, dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), index_fact, dCtxSh, context, method);
     }
 	
     @SuppressWarnings("unused")

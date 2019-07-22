@@ -23,15 +23,14 @@ public class ConsolaVotf extends GestorWebDriver {
     String prodDisponible1 = "";
     
     @BeforeMethod
-    @Parameters({ "brwsr-path", "urlBase", "prodDisponible1" })
-    public void login( String bpath, String urlAcceso, ITestContext context, Method method, String prodDisponible1I) 
-    throws Exception {
+    @Parameters({"prodDisponible1" })
+    public void login(String prodDisponible1I, ITestContext context, Method method) throws Exception {
         TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
         InputDataTestMaker inputData = tMakerCtx.getInputData();
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom(AppEcom.votf);
         dCtxSh.setChannel(Channel.desktop);
-        dCtxSh.urlAcceso = urlAcceso;
+        dCtxSh.urlAcceso = inputData.getUrlBase();
         
         Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), "", dCtxSh, context, method);
         this.prodDisponible1 = prodDisponible1I;

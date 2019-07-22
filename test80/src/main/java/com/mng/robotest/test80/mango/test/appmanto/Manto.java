@@ -50,8 +50,7 @@ public class Manto extends GestorWebDriver {
 	String tpv;
 
 	@BeforeMethod(groups={"Manto", "Canal:desktop_App:all", "SupportsFactoryCountrys"})
-	@Parameters({"brwsr-path", "urlBase"})
-	public void login(String bpath, String urlBase, ITestContext ctx, Method method) throws Exception {
+	public void login(ITestContext ctx, Method method) throws Exception {
 		TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(ctx);
         InputDataTestMaker inputData = tMakerCtx.getInputData();
 		this.dMantoAcc = new DataMantoAccess();

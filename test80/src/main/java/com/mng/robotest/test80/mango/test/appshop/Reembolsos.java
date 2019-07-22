@@ -9,6 +9,9 @@ import org.testng.annotations.*;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -57,13 +60,14 @@ public class Reembolsos extends GestorWebDriver {
      * @throws Exception
      */
     @BeforeMethod (groups={"Otras", "Canal:all_App:all"})
-    @Parameters({"brwsr-path","urlBase", "AppEcom", "Channel"})
-    public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) throws Exception {
+    public void login(ITestContext context, Method method) throws Exception {
         //Recopilación de parámetros
+        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
+        InputDataTestMaker inputData = tMakerCtx.getInputData();
         dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom(appEcom);
-        dCtxSh.setChannel(channel);
-        dCtxSh.urlAcceso = urlAcceso;
+        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
+        dCtxSh.setChannel(inputData.getChannel());
+        dCtxSh.urlAcceso = inputData.getUrlBase();
         
         //Si no existe, obtenemos el país España
         if (this.arabia==null) {
@@ -81,7 +85,7 @@ public class Reembolsos extends GestorWebDriver {
         dCtxSh.pais = this.arabia;
         dCtxSh.idioma = this.arabia_arabe;
         
-        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), "", dCtxSh, context, method);
     }
 
     /**

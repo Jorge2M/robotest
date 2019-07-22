@@ -10,7 +10,10 @@ import org.testng.annotations.*;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
@@ -43,16 +46,16 @@ public class Otras extends GestorWebDriver {
     IdiomaPais japones = null;
 	
     @BeforeMethod (groups={"Otras", "Canal:all_App:all"})
-    @Parameters({"brwsr-path","urlBase", "AppEcom", "Channel"})
-    public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) 
-    throws Exception {
-
+    public void login(ITestContext context, Method method) throws Exception {
+    	
+        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
+        InputDataTestMaker inputData = tMakerCtx.getInputData();
         DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom(appEcom);
-        dCtxSh.setChannel(channel);
-        dCtxSh.urlAcceso = urlAcceso;
+        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
+        dCtxSh.setChannel(inputData.getChannel());
+        dCtxSh.urlAcceso = inputData.getUrlBase();
         
-        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), "", dCtxSh, context, method);
         
         if (this.españa==null) {
             Integer codEspanya = Integer.valueOf(1);

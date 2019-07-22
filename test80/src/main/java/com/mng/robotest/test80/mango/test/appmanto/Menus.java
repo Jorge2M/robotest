@@ -41,8 +41,7 @@ public class Menus  extends GestorWebDriver {
 	}
 
 	@BeforeMethod(groups={"Menus", "Canal:desktop_App:all"}, alwaysRun = true)
-	@Parameters({"brwsr-path"})
-	public void login(String bpath, ITestContext ctx, Method method) throws Exception {
+	public void login(ITestContext ctx, Method method) throws Exception {
 		TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(ctx);
         InputDataTestMaker inputData = tMakerCtx.getInputData();
 		this.dMantoAcc = new DataMantoAccess();

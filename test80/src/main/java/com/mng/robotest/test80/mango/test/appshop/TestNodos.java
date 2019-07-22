@@ -11,6 +11,8 @@ import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -71,13 +73,14 @@ public class TestNodos extends GestorWebDriver {
     }	  
 	  
     @BeforeMethod
-    @Parameters({"brwsr-path", "urlBase", "Channel"})
-    public void login(String bpath, String urlAcceso, String channel, ITestContext context, Method method) throws Exception {
+    public void login(ITestContext context, Method method) throws Exception {
         //Recopilación de parámetros
+        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
+        InputDataTestMaker inputData = tMakerCtx.getInputData();
         dCtxSh = new DataCtxShop();
-        dCtxSh.setChannel(channel);
+        dCtxSh.setChannel(inputData.getChannel());
         dCtxSh.setAppEcom(this.nodo.getAppEcom());
-        dCtxSh.urlAcceso = urlAcceso;
+        dCtxSh.urlAcceso = inputData.getUrlBase();
 
         //Si no existe, obtenemos el país España
         if (this.españa==null) {
@@ -90,7 +93,7 @@ public class TestNodos extends GestorWebDriver {
         dCtxSh.pais = this.españa;
         dCtxSh.idioma = this.castellano;
         
-        Utils.storeDataShopForTestMaker(bpath, this.index_fact, dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), index_fact, dCtxSh, context, method);
     }
 	
     @SuppressWarnings("unused")

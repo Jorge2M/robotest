@@ -30,7 +30,7 @@ public class ListPagosEspana {
     @Test (
         groups={"Compra", "Canal:all_App:all"}, alwaysRun=true, priority=1, 
         description="Factoría que incluye varios tests por cada uno de los pagos de España variando los flags de usuario registrado, empleado y métodos de envío")
-    @Parameters({"AppEcom", "Channel"}) 
+    @Parameters({"AppEcom", "Channel"}) <- Seguir x aquí!!!
     public Object[] COM010_PagoFactory(String appStr, String channelStr, ITestContext ctx) throws Exception {
     	this.ctx = ctx;
         ArrayList<Object> listTests = new ArrayList<>();
