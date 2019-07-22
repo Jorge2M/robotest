@@ -79,12 +79,6 @@ public class ParamsBean {
         this.idSuiteExecution = idSuiteExecution;
     }
     
-    public void setIdExecutedSuiteIfNotSetted(String idSuiteExecution) {
-        if (this.idSuiteExecution==null || "".compareTo(this.idSuiteExecution)==0) {
-            setIdExecutedSuite(idSuiteExecution);
-        }
-    }
-    
     public void setTypeAccess(TypeAccessFmwk typeAccess) {
         if (typeAccess!=null) {
             this.typeAccess = typeAccess;

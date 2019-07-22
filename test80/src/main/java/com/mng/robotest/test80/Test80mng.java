@@ -305,7 +305,6 @@ public class Test80mng {
      */
     public static void execSuiteByProgramaticXML(ParamsBean params) throws Exception {
         //idExecSuite setted in direct access from Online, not setted in indirect access from Command Line
-        params.setIdExecutedSuiteIfNotSetted(getIdForSuiteToExecute());
         params.setTypeAccessIfNotSetted(TypeAccessFmwk.Online);
         try {
             switch ((Suites)params.getSuite()) {
@@ -374,12 +373,7 @@ public class Test80mng {
             System.out.println("Suite Name not valid. Posible values: " + Arrays.toString(getNames(Suites.class)));
         }
     }
-    
-    public static String getIdForSuiteToExecute() {
-        Calendar c1 = Calendar.getInstance();
-        String timestamp = new SimpleDateFormat("yyMMdd_HHmmssSS").format(c1.getTime());
-        return (timestamp);
-    }
+
     
     public static String getOutputDirectory(String userDir, String suiteName, String idExecutedSuite) {
         return fmwkTest.getOutputDirectory(userDir, suiteName, idExecutedSuite);

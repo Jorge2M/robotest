@@ -5,7 +5,10 @@ import java.util.*;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.CompraFact;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
@@ -30,12 +33,13 @@ public class ListPagosEspana {
     @Test (
         groups={"Compra", "Canal:all_App:all"}, alwaysRun=true, priority=1, 
         description="Factoría que incluye varios tests por cada uno de los pagos de España variando los flags de usuario registrado, empleado y métodos de envío")
-    @Parameters({"AppEcom", "Channel"}) <- Seguir x aquí!!!
-    public Object[] COM010_PagoFactory(String appStr, String channelStr, ITestContext ctx) throws Exception {
+    public Object[] COM010_PagoFactory(ITestContext ctx) throws Exception {
     	this.ctx = ctx;
         ArrayList<Object> listTests = new ArrayList<>();
-        AppEcom appE = AppEcom.valueOf(appStr);
-        Channel channel = Channel.valueOf(channelStr);
+        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(ctx);
+        InputDataTestMaker inputData = tMakerCtx.getInputData();
+        AppEcom appE = (AppEcom)inputData.getApp();
+        Channel channel = inputData.getChannel();
         try {
         	getDataCountrys();
         	if (appE!=AppEcom.votf) {

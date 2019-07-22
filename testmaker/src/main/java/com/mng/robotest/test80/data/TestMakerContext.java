@@ -1,7 +1,9 @@
 package com.mng.robotest.test80.data;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import org.testng.ISuite;
@@ -13,13 +15,14 @@ import com.mng.robotest.test80.arq.xmlprogram.SuiteTestMaker;
 
 public class TestMakerContext {
 
+	private final String idSuiteExecution;
 	private final InputDataTestMaker inputData;
 	private final List<String> toMail;
 	private final List<String> ccMail;
 	private final String subjectMail;
-	private String idSuiteExecution;
-	
+
 	private TestMakerContext(InputDataTestMaker inputData) {
+		this.idSuiteExecution = getIdForSuiteToExecute();
 		this.inputData = inputData;
 		toMail = createToMail();
 		ccMail = new ArrayList<>();
@@ -63,12 +66,22 @@ public class TestMakerContext {
 		}
 	}
 	
+	public static SuiteTestMaker getTestMakerSuite(ISuite suite) {
+		return (SuiteTestMaker)suite.getXmlSuite();
+	}
+	
 	public static TestMakerContext getTestMakerContext(ITestContext ctxTng) {
 		return (getTestMakerContext(ctxTng.getSuite()));
 	}
 	
 	public static TestMakerContext getTestMakerContext(ISuite suite) {
-    	SuiteTestMaker suiteXML = (SuiteTestMaker)suite.getXmlSuite();
+    	SuiteTestMaker suiteXML = getTestMakerSuite(suite);
     	return (suiteXML.getTestMakerContext());
 	}
+	
+    private static String getIdForSuiteToExecute() {
+        Calendar c1 = Calendar.getInstance();
+        String timestamp = new SimpleDateFormat("yyMMdd_HHmmssSS").format(c1.getTime());
+        return (timestamp);
+    }
 }
