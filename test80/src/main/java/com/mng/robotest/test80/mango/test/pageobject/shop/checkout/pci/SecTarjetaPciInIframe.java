@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
@@ -28,11 +29,11 @@ public class SecTarjetaPciInIframe extends WebdrvWrapp implements SecTarjetaPci 
     	return (new SecTarjetaPciInIframe(driver));
     }
     
-    private void goToIframe() {
+    protected void goToIframe() {
     	driver.switchTo().frame(driver.findElement(By.xpath(XPathIframe)));
     }
     
-    private void leaveIframe() {
+    protected void leaveIframe() {
     	driver.switchTo().defaultContent();
     }
     
@@ -92,8 +93,11 @@ public class SecTarjetaPciInIframe extends WebdrvWrapp implements SecTarjetaPci 
     @Override
     public void inputNumber(String number) {
     	goToIframe();
-        driver.findElement(By.xpath(XPathInputNumber)).clear();
-        driver.findElement(By.xpath(XPathInputNumber)).sendKeys(number);
+    	WebElement input = driver.findElement(By.xpath(XPathInputNumber));
+    	if (number.compareTo(input.getAttribute("value").replace(" ", ""))!=0) {
+	        driver.findElement(By.xpath(XPathInputNumber)).clear();
+	        driver.findElement(By.xpath(XPathInputNumber)).sendKeys(number);
+    	}
         leaveIframe();
     }
     

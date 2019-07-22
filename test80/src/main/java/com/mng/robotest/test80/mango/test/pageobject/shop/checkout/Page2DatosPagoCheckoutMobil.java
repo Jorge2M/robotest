@@ -29,7 +29,8 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     public static SecBillpay secBillpay;
     
     static String XPathLink2DatosPago = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step2']";
-    static String XPathButtonFinalizarCompra = "//button[@id[contains(.,'complete-step2')]]";
+    static String XPathButtonFinalizarCompra = 
+    	"//button[(@id[contains(.,'complete-step2')] or @id[contains(.,'complete-iframe-step2')]) and not(@class[contains(.,' hidden')])]";
     static String XPathRedError = "//div[@class[contains(.,'step-error')]]/p";
     
     static String tagMetodoPago = "@TagMetodoPago";

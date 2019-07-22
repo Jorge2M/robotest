@@ -104,6 +104,9 @@ public class PageCheckoutWrapperStpV {
     private static ChecksResult checkLogosPagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) { 
     	ChecksResult validations = ChecksResult.getNew();
         List<Pago> listPagos = pais.getListPagosTest(app, isEmpl);
+        if (listPagos.size()==1 && channel==Channel.movil_web) {
+        	return validations;
+        }
         for (int i=0; i<listPagos.size(); i++) {
             if (listPagos.get(i).getTypePago()!=TypePago.TpvVotf) {
             	String pagoNameExpected = listPagos.get(i).getNombre(channel);
