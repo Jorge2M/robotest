@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -54,8 +54,7 @@ public class GaleriaYcompra extends GestorWebDriver {
     }
 	    
     @BeforeMethod (groups={"Loyalty", "Canal:all_App:all", "SupportsFactoryCountrys"})
-    @Parameters({"brwsr-path", "urlBase", "AppEcom", "Channel"})
-    public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) 
+    public void login(ITestContext context, Method method) 
     throws Exception {
         //Recopilación de parámetros
         DataCtxShop dCtxSh = new DataCtxShop();

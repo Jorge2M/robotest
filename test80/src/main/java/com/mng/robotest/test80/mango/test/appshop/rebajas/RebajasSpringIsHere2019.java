@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;

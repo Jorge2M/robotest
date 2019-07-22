@@ -310,62 +310,62 @@ public class Test80mng {
         try {
             switch ((Suites)params.getSuite()) {
             case SmokeTest:
-                SmokeTestXML smokeTest = new SmokeTestXML();
-                smokeTest.testRunner(params);            
+                SmokeTestXML smokeTest = new SmokeTestXML(params);
+                smokeTest.run();         
                 break;
             case SmokeManto:
-                SmokeMantoXML smokeManto = new SmokeMantoXML();
-                smokeManto.testRunner(params);            
+//                SmokeMantoXML smokeManto = new SmokeMantoXML();
+//                smokeManto.testRunner(params);            
                 break;                
             case PagosPaises:
-                PagosPaisesXML pagosPaises = new PagosPaisesXML();
-                pagosPaises.testRunner(params);            
+//                PagosPaisesXML pagosPaises = new PagosPaisesXML();
+//                pagosPaises.testRunner(params);            
                 break;              
             case ValesPaises:
-                ValesPaisesXML valesPaises = new ValesPaisesXML();
-                valesPaises.testRunner(params);            
+//                ValesPaisesXML valesPaises = new ValesPaisesXML();
+//                valesPaises.testRunner(params);            
                 break;                
             case PaisIdiomaBanner:
-                PaisIdiomaXML paisIdiomaBanner = new PaisIdiomaXML();
-                paisIdiomaBanner.testRunner(params);
+//                PaisIdiomaXML paisIdiomaBanner = new PaisIdiomaXML();
+//                paisIdiomaBanner.testRunner(params);
                 break;                
             case Campanas:
-                CampanasXML campanas = new CampanasXML();
-                campanas.testRunner(params);
+//                CampanasXML campanas = new CampanasXML();
+//                campanas.testRunner(params);
                 break;                
             case MenusPais:
-                MenusPaisXML menusPais = new MenusPaisXML();
-                menusPais.testRunner(params);            
+//                MenusPaisXML menusPais = new MenusPaisXML();
+//                menusPais.testRunner(params);            
                 break;
             case MenusManto:
-                MenusMantoFactoryXML menusManto = new MenusMantoFactoryXML();
-                menusManto.testRunner(params);            
+//                MenusMantoFactoryXML menusManto = new MenusMantoFactoryXML();
+//                menusManto.testRunner(params);            
                 break;                 
             case Nodos:
-                NodosFactoryXML nodosFactory = new NodosFactoryXML();
-                nodosFactory.testRunner(params);            
+//                NodosFactoryXML nodosFactory = new NodosFactoryXML();
+//                nodosFactory.testRunner(params);            
                 break;                
             case ConsolaVotf:
-                ConsolaVotfXML consolaVotf = new ConsolaVotfXML();
-                consolaVotf.testRunner(params);
+//                ConsolaVotfXML consolaVotf = new ConsolaVotfXML();
+//                consolaVotf.testRunner(params);
                 break;                
             case ListFavoritos:
             case ListMiCuenta:
-                GenericFactoryXML genericFactory = new GenericFactoryXML();
-                genericFactory.testRunner(params);
+//                GenericFactoryXML genericFactory = new GenericFactoryXML();
+//                genericFactory.testRunner(params);
                 break;                
             case RegistrosPaises:
-                RegistrosFactoryXML listRegistros = new RegistrosFactoryXML();
-                listRegistros.testRunner(params);
+//                RegistrosFactoryXML listRegistros = new RegistrosFactoryXML();
+//                listRegistros.testRunner(params);
                 break;     
             //TODO temporal para pruebas de Loyalty
             case LoyaltyMasivos:
-            	LoyaltyMasivosXML listLoyaltyTcases = new LoyaltyMasivosXML();
-            	listLoyaltyTcases.testRunner(params);
+//            	LoyaltyMasivosXML listLoyaltyTcases = new LoyaltyMasivosXML();
+//            	listLoyaltyTcases.testRunner(params);
                 break;       
             case RebajasPaises:
-                RebajasFactoryXML listRebajas = new RebajasFactoryXML();
-                listRebajas.testRunner(params);
+//                RebajasFactoryXML listRebajas = new RebajasFactoryXML();
+//                listRebajas.testRunner(params);
                 break;                
             default:
             }
@@ -520,11 +520,11 @@ public class Test80mng {
         Suites suiteValue = Suites.valueOf(params.getSuiteName());
         switch (suiteValue) {
         case SmokeTest:
-            SmokeTestXML smokeTest = new SmokeTestXML();
-            return smokeTest.getDataTestAnnotationsToExec(params);
+            SmokeTestXML smokeTest = new SmokeTestXML(params);
+            return smokeTest.getListTests();
         case SmokeManto:
-            SmokeMantoXML smokeManto = new SmokeMantoXML();
-            return smokeManto.getDataTestAnnotationsToExec(params);            
+//            SmokeMantoXML smokeManto = new SmokeMantoXML();
+//            return smokeManto.getDataTestAnnotationsToExec(params);            
         default:
             return null;
         }

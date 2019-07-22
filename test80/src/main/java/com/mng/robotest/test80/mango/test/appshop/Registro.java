@@ -16,11 +16,11 @@ import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
-import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
+import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
 import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
+import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -181,7 +181,8 @@ public class Registro extends GestorWebDriver {
         dCtxSh.userRegistered = false;
             
         //En caso de ejecución desde .bat no ejecutaremos el Registro 
-        if (utils.getTypeAccessFmwk(dFTest.ctx)==TypeAccessFmwk.Bat) {
+        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(dFTest.ctx);
+        if (tMakerCtx.getInputData().getTypeAccess()==TypeAccessFmwk.Bat) {
             return;
         }
             
@@ -254,7 +255,8 @@ public class Registro extends GestorWebDriver {
         dCtxSh.userRegistered = false;
             
         //En caso de ejecución desde .bat no ejecutaremos el Registro 
-        if (utils.getTypeAccessFmwk(dFTest.ctx)==TypeAccessFmwk.Bat) {
+        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(dFTest.ctx);
+        if (tMakerCtx.getInputData().getTypeAccess()==TypeAccessFmwk.Bat) {
             return;
         }
         

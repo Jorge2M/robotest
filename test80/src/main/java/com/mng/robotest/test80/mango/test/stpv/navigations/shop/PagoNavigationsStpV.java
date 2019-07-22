@@ -14,12 +14,12 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
+import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -415,11 +415,13 @@ public class PagoNavigationsStpV {
         boolean validaPagos = pagoStpV.dCtxPago.getFTCkout().validaPagos;
         Pago pago = pagoStpV.dCtxPago.getDataPedido().getPago();
         ITestContext ctx = TestCaseData.getdFTest().ctx;
+        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(ctx);
+        TypeAccessFmwk typeAccess = tMakerCtx.getInputData().getTypeAccess();
         return (
             //No estamos en el entorno productivo
             !UtilsMangoTest.isEntornoPRO(appE, driver) &&
             //No estamos en modo BATCH
-            utils.getTypeAccessFmwk(ctx)!=TypeAccessFmwk.Bat &&
+            typeAccess!=TypeAccessFmwk.Bat &&
             //Está activado el flag de pago en el fichero XML de configuración del test (testNG)
             validaPagos &&  
             //Está activado el test en el pago concreto que figura en el XML de países

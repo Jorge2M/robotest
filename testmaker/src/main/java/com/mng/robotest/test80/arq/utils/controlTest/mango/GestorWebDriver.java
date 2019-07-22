@@ -33,7 +33,7 @@ public class GestorWebDriver extends fmwkTest {
      * @param datosFactoria identificador de los casos de prueba creados desde factorías
      * @param isMobil       indicador de si las pruebas son de móvil o desktop
      */
-    public WebDriver getWebDriver(String bpath, String appPath, String datosFactoria, Channel channel, ITestContext context, Method method) 
+    public WebDriver getWebDriver(TypeWebDriver typeWebDriver, String appPath, String datosFactoria, Channel channel, ITestContext context, Method method) 
     throws Exception {
         WebDriver driver = null;
         if (!"ROBOTEST2".equals(System.getProperty("ROBOTEST2"))) {
@@ -43,33 +43,29 @@ public class GestorWebDriver extends fmwkTest {
 	    
             //Guardamos los datos enviados por la factoria indexados por nombre de Thread (soporte para la paralelización)
             context.setAttribute("factory-"+String.valueOf(Thread.currentThread().getId()), deAccent(datosFactoria));
-            String browser = bpath;
-
-            //Obtenemos navegador/canal de ejecución de las pruebas en base al bpath del testng.xml
-            TypeWebDriver canalWebDriver = getTypeWebdriver(browser);
         	    	
             //Obtenemos el gestor de WebDrivers (lo busca en el contexto y si no existe lo crea/almacena en dicho contexto)
             GestorWebDrv gestorWd = GestorWebDrv.getInstance(context);
     	    
             //Obtenemos información adicional del WebDriver que necesitamos (básicamente el modelo del dispositivo en el caso de BrowserStack)
-            String moreDataWdrv = getMoreDataWdrv(canalWebDriver, context);
+            String moreDataWdrv = getMoreDataWdrv(typeWebDriver, context);
                     
             //Buscamos un webdriver libre del tipo que necesitamos (y automáticamente se marca como 'busy')
             TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
             boolean netAnalysis = testMakerCtx.getInputData().isNetAnalysis();
-            driver = gestorWd.getWebDrvFree(canalWebDriver, moreDataWdrv);
+            driver = gestorWd.getWebDrvFree(typeWebDriver, moreDataWdrv);
             if (driver == null) {
         		driver = 
-        			FactoryWebdriverMaker.make(canalWebDriver, context)
+        			FactoryWebdriverMaker.make(typeWebDriver, context)
         				.setChannel(channel)
         				.setNettraffic(netAnalysis)
         				.build();
                 
-                gestorWd.storeWebDriver(driver, StoredWebDrv.stateWd.busy, canalWebDriver, moreDataWdrv);
+                gestorWd.storeWebDriver(driver, StoredWebDrv.stateWd.busy, typeWebDriver, moreDataWdrv);
             }
                     
             //Almacenamiento en el contexto de algunos datos útiles
-            context.setAttribute("bpath", bpath);
+            context.setAttribute("bpath", typeWebDriver.name());
             context.setAttribute("appPath", appPath);
         }
 

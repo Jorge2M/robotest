@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
-import static com.mng.robotest.test80.arq.utils.otras.Constantes.PrefixRebajas;
+import static com.mng.robotest.test80.mango.test.data.Constantes.PrefixRebajas;
 
 public class PageHomeMarcasStpV {
 	

@@ -9,6 +9,7 @@ import org.testng.TestNG;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlDependencies;
 import org.testng.xml.XmlGroups;
+import org.testng.xml.XmlInclude;
 import org.testng.xml.XmlRun;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
@@ -23,10 +24,12 @@ public abstract class TestMakerSuite {
 
 	private final TestMakerContext testMakerContext;
     private final FilterTestsSuiteXML filterSuiteXML;
-    
+
     private List<XmlClass> listXMLclasses;
     private XmlDependencies depGroupsXML;
     private Map<String,String> parameters;
+    private ParallelMode parallelMode = ParallelMode.METHODS;
+    private int threadCount = 3;
 	private SuiteTestMaker xmlSuite;
 	
 	protected TestMakerSuite(InputDataTestMaker inputData) {
@@ -34,15 +37,19 @@ public abstract class TestMakerSuite {
 		this.filterSuiteXML = FilterTestsSuiteXML.getNew(inputData.getDataFilter());
 	}
 	
-    protected List<TestMethod> getListTests() {
-    	generateXmlSuiteIfNotAvailable();
-        XmlTest testRun = xmlSuite.getTests().get(0);
+    public List<TestMethod> getListTests() {
+        XmlTest testRun = getTestRun();
         return (
         	filterSuiteXML.getInitialTestCaseCandidatesToExecute(testRun)
         );
     }
     
-    protected void run() { 
+    public XmlTest getTestRun() {
+    	generateXmlSuiteIfNotAvailable();
+        return (xmlSuite.getTests().get(0));
+    }
+    
+    public void run() { 
     	generateXmlSuiteIfNotAvailable();
         List<XmlSuite> suites = new ArrayList<>();
         suites.add(xmlSuite);    
@@ -57,6 +64,30 @@ public abstract class TestMakerSuite {
     	for (String classe : listClases) {
     		listXMLclasses.add(new XmlClass(classe));
     	}
+    }
+    
+    protected void includeMethodsInClass(String pathClass, List<String> methodsToInclude) {
+    	XmlClass xmlClass = getXmlClass(pathClass);
+    	includeMethodsInClass(xmlClass, methodsToInclude);
+    }
+    
+    private XmlClass getXmlClass(String pathClass) {
+    	for (XmlClass xmlClass : listXMLclasses) {
+    		if (xmlClass.getName().compareTo(pathClass)==0) {
+    			return xmlClass;
+    		}
+    	}
+    	return null;
+    }
+    
+    private void includeMethodsInClass(XmlClass xmlClass, List<String> methodsToInclude) {
+        List<XmlInclude> includeMethods = new ArrayList<>();
+        if (methodsToInclude!=null) {
+        	for (String method : methodsToInclude) {
+        		includeMethods.add(new XmlInclude(method));
+        	}
+        }
+        xmlClass.setIncludedMethods(includeMethods);
     }
     
     protected void setDependencyGroups(Map<String,String> dependencies) {
@@ -79,7 +110,15 @@ public abstract class TestMakerSuite {
     }
 
     
-    private void generateXmlSuiteIfNotAvailable() {
+    public void setParallelMode(ParallelMode parallelMode) {
+		this.parallelMode = parallelMode;
+	}
+
+	public void setThreadCount(int threadCount) {
+		this.threadCount = threadCount;
+	}
+
+	private void generateXmlSuiteIfNotAvailable() {
     	if (xmlSuite==null) {
     		xmlSuite = createSuite();
     	}
@@ -87,12 +126,13 @@ public abstract class TestMakerSuite {
     
     private SuiteTestMaker createSuite() {
     	SuiteTestMaker suite = SuiteTestMaker.getNew(testMakerContext);
-        suite.setFileName("");
-        suite.setName(testMakerContext.getInputData().getNameSuite());
+    	String suiteName = testMakerContext.getInputData().getNameSuite();
+        suite.setFileName(suiteName + ".xml");
+        suite.setName(suiteName);
         suite.setListeners(createStandardListeners());
         suite.setParameters(parameters);
-        suite.setParallel(ParallelMode.METHODS);
-        suite.setThreadCount(3);
+        suite.setParallel(parallelMode);
+        suite.setThreadCount(threadCount);
         createTestRun(suite);
         return suite;
     }

@@ -4,7 +4,7 @@ import java.util.*;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;

@@ -11,6 +11,8 @@ import org.testng.annotations.Test;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -24,12 +26,14 @@ public class ConsolaVotf extends GestorWebDriver {
     @Parameters({ "brwsr-path", "urlBase", "prodDisponible1" })
     public void login( String bpath, String urlAcceso, ITestContext context, Method method, String prodDisponible1I) 
     throws Exception {
+        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
+        InputDataTestMaker inputData = tMakerCtx.getInputData();
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom(AppEcom.votf);
         dCtxSh.setChannel(Channel.desktop);
         dCtxSh.urlAcceso = urlAcceso;
         
-        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), "", dCtxSh, context, method);
         this.prodDisponible1 = prodDisponible1I;
     }
 

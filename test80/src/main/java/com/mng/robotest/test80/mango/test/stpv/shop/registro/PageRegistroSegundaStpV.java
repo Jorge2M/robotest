@@ -11,7 +11,7 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
+import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;

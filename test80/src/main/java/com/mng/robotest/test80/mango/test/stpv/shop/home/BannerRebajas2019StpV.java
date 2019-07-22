@@ -10,7 +10,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.DataBanner;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBannersScreen;
 import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV.TypeHome;
-import static com.mng.robotest.test80.arq.utils.otras.Constantes.PrefixRebajas;
+import static com.mng.robotest.test80.mango.test.data.Constantes.PrefixRebajas;
 
 public class BannerRebajas2019StpV {
 	

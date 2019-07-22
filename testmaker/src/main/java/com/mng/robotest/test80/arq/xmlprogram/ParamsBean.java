@@ -5,6 +5,7 @@ import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.conf.SuiteTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 
 public class ParamsBean {
 
@@ -56,6 +57,22 @@ public class ParamsBean {
     
     public TypeAccessFmwk getTypeAccess() {
         return this.typeAccess;
+    }
+    
+    public InputDataTestMaker getInputDataTestMaker() {
+    	InputDataTestMaker inputData = 
+    		InputDataTestMaker.getNew(
+	    		getSuiteName(), 
+	    		getVersion(), 
+	    		getChannel(), 
+	    		getApp(), 
+	    		getURLBase(),
+	    		TypeWebDriver.valueOf(getBrowser()));
+    	if (getTypeAccess()!=null) {
+    		inputData.setTypeAccess(typeAccess);
+    	}
+    	
+    	return inputData;
     }
     
     public void setIdExecutedSuite(String idSuiteExecution) {

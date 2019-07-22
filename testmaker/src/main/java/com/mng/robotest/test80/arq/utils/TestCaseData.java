@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Queue;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.ISuite;
 import org.testng.ITestContext;
 
 import com.mng.robotest.test80.arq.utils.conf.StorerErrorDataStepValidation;
@@ -15,6 +16,8 @@ import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.robotest.test80.arq.xmlprogram.SuiteTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 
 public class TestCaseData {
     static ThreadLocal<Map<String, Object>> dataInThread = new ThreadLocal<>();
@@ -90,13 +93,23 @@ public class TestCaseData {
     	maxDatosStep.set(datosStep);
     }
     
-    public static void getAndStoreDataFmwk(String bpath, String appPath, String datosFactoria, Channel channel, 
+    public static void getAndStoreDataFmwk(TypeWebDriver typeWebDriver, String appPath, String datosFactoria, Channel channel, 
     									   StorerErrorDataStepValidation storerDataError, ITestContext context, Method method) 
     throws Exception {
     	GestorWebDriver gestorWdrv = new GestorWebDriver();
-		WebDriver driver = gestorWdrv.getWebDriver(bpath, appPath, datosFactoria, channel, context, method);
-		DataFmwkTest dFTest = new DataFmwkTest(driver, TypeWebDriver.valueOf(bpath), method, context);
+		WebDriver driver = gestorWdrv.getWebDriver(typeWebDriver, appPath, datosFactoria, channel, context, method);
+		DataFmwkTest dFTest = new DataFmwkTest(driver, typeWebDriver, method, context);
 		dFTest.setStorerDataError(storerDataError);
 		storeInThread(dFTest);
     }
+    
+    //TODO reubicar cuando se refactorice
+	public static TestMakerContext getTestMakerContext(ISuite suite) {
+    	SuiteTestMaker suiteXML = (SuiteTestMaker)suite.getXmlSuite();
+    	return (suiteXML.getTestMakerContext());
+	}
+	
+	public static TestMakerContext getTestMakerContext(ITestContext ctxTng) {
+		return (getTestMakerContext(ctxTng.getSuite()));
+	}
 }

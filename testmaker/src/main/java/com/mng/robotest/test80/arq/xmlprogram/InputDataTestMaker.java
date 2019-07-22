@@ -18,10 +18,10 @@ public class InputDataTestMaker {
 	private final Channel channel;
     private final AppTest app;
     private final TypeWebDriver typeWebDriver;
+    private final String urlBase;
     
-    private ManagementWebdriver typeManageWebdriver = ManagementWebdriver.discard;
     private TypeAccessFmwk typeAccess = TypeAccessFmwk.CommandLine;
-    private String urlBase;
+    private ManagementWebdriver typeManageWebdriver = ManagementWebdriver.discard;
     private boolean netAnalysis = false;  
     private List<String> testCasesFilter;
     private List<String> groupsFilter;
@@ -31,20 +31,30 @@ public class InputDataTestMaker {
     private String userBrowserStack;
     private String passBrowserStack;
 	
-    public InputDataTestMaker(String nameSuite, Channel channel, AppTest app, TypeWebDriver typeWebDriver) {
+    private InputDataTestMaker(String nameSuite, Channel channel, AppTest app, String urlBase, TypeWebDriver typeWebDriver) {
     	this.nameSuite = nameSuite;
     	this.versionSuite = "V1";
     	this.channel = channel;
     	this.app = app;
+    	this.urlBase = urlBase;
     	this.typeWebDriver = typeWebDriver;
     }
     
-    public InputDataTestMaker(String nameSuite, String versionSuite, Channel channel, AppTest app, TypeWebDriver typeWebDriver) {
+    private InputDataTestMaker(String nameSuite, String versionSuite, Channel channel, AppTest app, String urlBase, TypeWebDriver typeWebDriver) {
     	this.nameSuite = nameSuite;
     	this.versionSuite = versionSuite;
     	this.channel = channel;
     	this.app = app;
+    	this.urlBase = urlBase;
     	this.typeWebDriver = typeWebDriver;
+    }
+    
+    public static InputDataTestMaker getNew(String nameSuite, Channel channel, AppTest app, String urlBase, TypeWebDriver typeWebDriver) {
+    	return (new InputDataTestMaker(nameSuite, channel, app, urlBase, typeWebDriver));
+    }
+    
+    public static InputDataTestMaker getNew(String nameSuite, String versionSuite, Channel channel, AppTest app, String urlBase, TypeWebDriver typeWebDriver) {
+    	return (new InputDataTestMaker(nameSuite, versionSuite, channel, app, urlBase, typeWebDriver));
     }
 
 	public String getNameSuite() {
@@ -87,10 +97,6 @@ public class InputDataTestMaker {
 		return this.urlBase;
 	}
 	
-	public void setUrlBase(String urlBase) {
-		this.urlBase = urlBase;
-	}
-
 	public boolean isNetAnalysis() {
 		return netAnalysis;
 	}

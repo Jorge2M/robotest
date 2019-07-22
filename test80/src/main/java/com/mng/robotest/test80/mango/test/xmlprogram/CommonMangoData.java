@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.mng.robotest.test80.arq.listeners.CallBack;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.utils.webdriver.BStackDataDesktop;
 import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
 import com.mng.robotest.test80.arq.utils.webdriver.EnumsBrowserStack.PlatformDesktopBS;
@@ -71,12 +71,12 @@ public class CommonMangoData {
         
         CallBack callBack = params.getCallBack();
         if (params.getCallBack()!=null) {
-        	parametersReturn.put(Constantes.paramCallBackMethod, callBack.getCallBackMethod());
-        	parametersReturn.put(Constantes.paramCallBackResource, callBack.getCallBackResource());
-        	parametersReturn.put(Constantes.paramCallBackSchema, callBack.getCallBackSchema());  
-        	parametersReturn.put(Constantes.paramCallBackParams, callBack.getCallBackParams());
-        	parametersReturn.put(Constantes.paramCallBackUser, callBack.getCallBackUser());
-        	parametersReturn.put(Constantes.paramCallBackPassword, callBack.getCallBackPassword());
+//        	parametersReturn.put(Constantes.paramCallBackMethod, callBack.getCallBackMethod());
+//        	parametersReturn.put(Constantes.paramCallBackResource, callBack.getCallBackResource());
+//        	parametersReturn.put(Constantes.paramCallBackSchema, callBack.getCallBackSchema());  
+//        	parametersReturn.put(Constantes.paramCallBackParams, callBack.getCallBackParams());
+//        	parametersReturn.put(Constantes.paramCallBackUser, callBack.getCallBackUser());
+//        	parametersReturn.put(Constantes.paramCallBackPassword, callBack.getCallBackPassword());
         }
         
         return parametersReturn;

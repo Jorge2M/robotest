@@ -6,11 +6,13 @@ import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.*;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
@@ -68,8 +70,7 @@ public class Compra extends GestorWebDriver {
     public Compra() {}	  
 	  
     @BeforeMethod (groups={"Compra", "Canal:all_App:all", "shop-movil-web"})
-    @Parameters({"brwsr-path","urlBase", "AppEcom", "Channel"})
-    public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) 
+    public void login(ITestContext context, Method method) 
     throws Exception {
         //Obtenemos la lista de países del contexto y recuperamos los que necesitamos para los tests
         if (this.españa==null) {
@@ -92,14 +93,16 @@ public class Compra extends GestorWebDriver {
         
         //Recopilación de parámetros comunes
         //DataCtxShop dCtxSh = new DataCtxShop();
+        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
+        InputDataTestMaker inputData = tMakerCtx.getInputData();
         DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom(appEcom);
-        dCtxSh.setChannel(channel);
+        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
+        dCtxSh.setChannel(inputData.getChannel());
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
-        dCtxSh.urlAcceso = urlAcceso;
+        dCtxSh.urlAcceso = inputData.getUrlBase();
         
-        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), "", dCtxSh, context, method);
     }
 	
     @SuppressWarnings("unused")
@@ -260,8 +263,10 @@ public class Compra extends GestorWebDriver {
         DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
 	    
-        //No permitiremos la ejecución diaria de este tipo de checkout porque implica la ejecución de un registro de usuario con el nuevo email introducido 
-        if (utils.getTypeAccessFmwk(dFTest.ctx)!=TypeAccessFmwk.Bat) {
+        //No permitiremos la ejecución diaria de este tipo de checkout porque implica la ejecución 
+        //de un registro de usuario con el nuevo email introducido 
+        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(dFTest.ctx);
+        if (tMakerCtx.getInputData().getTypeAccess()!=TypeAccessFmwk.Bat) {
             //Hasta página de Checkout
             FlagsTestCkout FTCkout = new FlagsTestCkout();
             FTCkout.validaPasarelas = false;  

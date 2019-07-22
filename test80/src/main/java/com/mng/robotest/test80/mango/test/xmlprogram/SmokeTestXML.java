@@ -5,39 +5,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.testng.TestNG;
-import org.testng.xml.XmlClass;
-import org.testng.xml.XmlDependencies;
-import org.testng.xml.XmlGroups;
-import org.testng.xml.XmlRun;
-import org.testng.xml.XmlSuite;
-import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.TestMaker;
-import com.mng.robotest.test80.arq.jdbc.dao.CorreosGroupDAO;
-import com.mng.robotest.test80.arq.listeners.CallBack;
-import com.mng.robotest.test80.arq.utils.filter.DataFilterTCases;
-import com.mng.robotest.test80.arq.utils.filter.FilterTestsSuiteXML;
-import com.mng.robotest.test80.arq.utils.filter.TestMethod;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.utils.webdriver.BStackDataDesktop;
-import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
-import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
 import com.mng.robotest.test80.arq.xmlprogram.TestMakerSuite;
-import com.mng.robotest.test80.arq.xmlprogram.CommonsXML;
 import com.mng.robotest.test80.mango.test.xmlprogram.CommonMangoData;
 
 public class SmokeTestXML extends TestMakerSuite {
 
     public SmokeTestXML(ParamsBean params) {
-    	super(params.getDataFilter());
+    	super(params.getInputDataTestMaker());
     	Channel channel = params.getChannel();
     	setClassesWithTests(getClasses(channel));
     	setDependencyGroups(getDependencyGroups());
     	setParameters(CommonMangoData.getParametersSuiteShop(params));
+    	setParallelMode(ParallelMode.METHODS);
+    	setThreadCount(3);
     }
 
     private Map<String,String> getDependencyGroups() {
