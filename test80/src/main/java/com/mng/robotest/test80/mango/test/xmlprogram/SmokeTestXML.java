@@ -16,19 +16,19 @@ public class SmokeTestXML extends TestMakerSuite {
 
     public SmokeTestXML(ParamsBean params) {
     	super(params.getInputDataTestMaker());
-    	Channel channel = params.getChannel();
-    	setClassesWithTests(getClasses(channel));
+    	setClassesWithTests(getClasses(params.getChannel()));
     	setDependencyGroups(getDependencyGroups());
     	setParameters(CommonMangoData.getParametersSuiteShop(params));
     	setParallelMode(ParallelMode.METHODS);
     	setThreadCount(3);
     }
-
-    private Map<String,String> getDependencyGroups() {
-    	Map<String,String> dependencyGroups = new HashMap<>();
-    	return dependencyGroups;
-    }
     
+    private void setParallelism() {
+    	if ()
+    	setParallelMode(ParallelMode.METHODS);
+    	setThreadCount(3);
+    }
+
     private static List<String> getClasses(Channel channel) {
         List<String> listClasses = new ArrayList<>();
         if (channel==Channel.desktop) {
@@ -51,5 +51,10 @@ public class SmokeTestXML extends TestMakerSuite {
         listClasses.add("com.mng.robotest.test80.mango.test.appshop.Reembolsos");
         listClasses.add("com.mng.robotest.test80.mango.test.appshop.Loyalty");
         return listClasses;
+    }
+    
+    private Map<String,String> getDependencyGroups() {
+    	Map<String,String> dependencyGroups = new HashMap<>();
+    	return dependencyGroups;
     }
 }
