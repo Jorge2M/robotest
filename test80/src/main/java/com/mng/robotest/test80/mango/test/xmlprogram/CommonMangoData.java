@@ -5,20 +5,9 @@ import java.util.Map;
 
 import com.mng.robotest.test80.arq.listeners.CallBack;
 import com.mng.robotest.test80.mango.test.data.Constantes;
-import com.mng.robotest.test80.arq.utils.webdriver.BStackDataDesktop;
-import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
-import com.mng.robotest.test80.arq.utils.webdriver.EnumsBrowserStack.PlatformDesktopBS;
-import com.mng.robotest.test80.arq.utils.webdriver.EnumsBrowserStack.PlatformMobilBS;
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
 
 public class CommonMangoData {
-    
-    public static BStackDataMovil bsMovilAndroid = new BStackDataMovil(PlatformMobilBS.Android.getValueaAPI(), "7.0", "Samsung Galaxy S8", "true", "chrome");
-    public static BStackDataMovil bsMovilIOS = new BStackDataMovil(PlatformMobilBS.iOS.getValueaAPI(), "11.0", "iPhone 8", "true", "safari"); 
-    
-    public static BStackDataDesktop bsDktopWin10Explorer = new BStackDataDesktop(PlatformDesktopBS.Windows.getValueaAPI(), "10", "Edge", "16.0", "1920x1080");
-    public static BStackDataDesktop bsDktopWin8Firefox = new BStackDataDesktop(PlatformDesktopBS.Windows.getValueaAPI(), "10", "Firefox", "62.0", "1920x1080");
-    public static BStackDataDesktop bsDktopOSXSafari = new BStackDataDesktop(PlatformDesktopBS.OSX.getValueaAPI(), "High Sierra", "Safari", "11.0", "1920x1080");
     
     public static Map<String,String> getParametersSuiteShop(ParamsBean params) {
     	Map<String,String> parametersReturn = new HashMap<>();
@@ -64,10 +53,6 @@ public class CommonMangoData {
         //Parámetro para el caso de prueba REG002 que indica si posteriormente al registro es preciso loginarse + validar datos + logoff
         parametersReturn.put("loginAfterRegister" ,"true");
         parametersReturn.put("register", "true");
-        
-        //Credenciales para la identificación en el servicio de BrowserStack
-        parametersReturn.put(Constantes.UserBStack, "equipoqa1");
-        parametersReturn.put(Constantes.PassBStack, "qp3dr5VJbFMAxPsT4k1b");
         
         CallBack callBack = params.getCallBack();
         if (params.getCallBack()!=null) {

@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.arq.utils.webdriver;
 
 
-public class EnumsBrowserStack {
+public class BrowserStackSO {
     
     public enum PlatformMobilBS {
         Android("android"), iOS("iPhone");

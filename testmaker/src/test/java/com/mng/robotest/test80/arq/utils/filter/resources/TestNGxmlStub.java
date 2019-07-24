@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
-import com.mng.robotest.test80.arq.xmlprogram.TestMakerSuite;
+import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
+import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
 
-public class TestNGxmlStub extends TestMakerSuite {
+public class TestNGxmlStub extends SuiteMaker {
 
     public enum TypeStubTest {
     	WithoutMethodsIncludedInClass,
@@ -30,9 +31,12 @@ public class TestNGxmlStub extends TestMakerSuite {
     private TestNGxmlStub(TypeStubTest typeTest, InputDataTestMaker inputData) {
     	super(inputData);
     	this.typeTest = typeTest;
-    	setClassesWithTests(Arrays.asList(classWithTestAnnotations));
-    	includeMethodsInClass(classWithTestAnnotations, getMethodsIncludedInClass());
-    	setDependencyGroups(getDependencyGroups());
+    	TestRunMaker testRun = TestRunMaker.getNew(
+    		"TestRun Test",
+    		Arrays.asList(classWithTestAnnotations),
+    		getDependencyGroups());
+    	testRun.includeMethodsInClass(classWithTestAnnotations, getMethodsIncludedInClass());
+    	addTestRun(testRun);
     }
     
     public static TestNGxmlStub getNew(TypeStubTest typeTest, InputDataTestMaker inputData) {

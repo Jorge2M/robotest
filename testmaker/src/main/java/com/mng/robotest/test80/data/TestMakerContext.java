@@ -1,33 +1,24 @@
 package com.mng.robotest.test80.data;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
-
 import org.testng.ISuite;
 import org.testng.ITestContext;
 
-import com.mng.robotest.test80.arq.jdbc.dao.CorreosGroupDAO;
 import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.arq.xmlprogram.SuiteTestMaker;
+import com.mng.robotest.test80.arq.xmlprogram.TestRunTestMaker;
 
 public class TestMakerContext {
 
 	private final String idSuiteExecution;
 	private final InputDataTestMaker inputData;
-	private final List<String> toMail;
-	private final List<String> ccMail;
-	private final String subjectMail;
+	private final MailEndSuite sendMailData;
 
 	private TestMakerContext(InputDataTestMaker inputData) {
 		this.idSuiteExecution = getIdForSuiteToExecute();
 		this.inputData = inputData;
-		toMail = createToMail();
-		ccMail = new ArrayList<>();
-		ccMail.add("jorge.munoz.sge@mango.com");
-		subjectMail = "Result TestSuite " + inputData.getNameSuite() + " (" + inputData.getApp() + " / " + inputData.getUrlBase() + ")";
+		this.sendMailData = MailEndSuite.getNew(inputData);
 	}
 	
 	public static TestMakerContext getNew(InputDataTestMaker inputData) {
@@ -42,30 +33,14 @@ public class TestMakerContext {
 		return this.inputData;
 	}
 	
-	public List<String> getToMail() {
-		return this.toMail;
+	public boolean isSendMailInEndSuite() {
+		return (sendMailData!=null);
 	}
 	
-	public List<String> getCcMail() {
-		return this.ccMail;
+	public MailEndSuite getSendMailData() {
+		return this.sendMailData;
 	}
-	
-	public String getSubjectMail() {
-		return this.subjectMail;
-	}
-	
-	public boolean isSendEmail() {
-		return (toMail!=null && toMail.size()>0); 
-	}
-	
-	private List<String> createToMail() {
-		if (inputData.isEnvioCorreoGroup()) {
-			return (CorreosGroupDAO.getCorreosGroup(inputData.getEnvioCorreo()));
-		} else {
-			return (Arrays.asList("eqp.ecommerce.qamango@mango.com"));
-		}
-	}
-	
+
 	public static SuiteTestMaker getTestMakerSuite(ISuite suite) {
 		return (SuiteTestMaker)suite.getXmlSuite();
 	}
@@ -77,6 +52,10 @@ public class TestMakerContext {
 	public static TestMakerContext getTestMakerContext(ISuite suite) {
     	SuiteTestMaker suiteXML = getTestMakerSuite(suite);
     	return (suiteXML.getTestMakerContext());
+	}
+	
+	public static TestRunTestMaker getTestRun(ITestContext ctxTng) {
+		return ((TestRunTestMaker)ctxTng.getCurrentXmlTest());
 	}
 	
     private static String getIdForSuiteToExecute() {

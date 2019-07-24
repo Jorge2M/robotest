@@ -26,10 +26,8 @@ public class InputDataTestMaker {
     private List<String> testCasesFilter;
     private List<String> groupsFilter;
     private String webAppDNS;
-    private String envioCorreo = null;
+    private String groupToSendMail = null;
     private CallBack callBack = null;
-    private String userBrowserStack;
-    private String passBrowserStack;
 	
     private InputDataTestMaker(String nameSuite, Channel channel, AppTest app, String urlBase, TypeWebDriver typeWebDriver) {
     	this.nameSuite = nameSuite;
@@ -129,16 +127,16 @@ public class InputDataTestMaker {
 		this.webAppDNS = webAppDNS;
 	}
 
-	public String getEnvioCorreo() {
-		return envioCorreo;
+	public String getGroupToSendMail() {
+		return groupToSendMail;
 	}
 
-	public void setEnvioCorreo(String envioCorreo) {
-		this.envioCorreo = envioCorreo;
+	public void setGroupToSendMail(String groupToSendMail) {
+		this.groupToSendMail = groupToSendMail;
 	}
 	
-	public boolean isEnvioCorreoGroup() {
-		return getEnvioCorreo()!=null && "".compareTo(getEnvioCorreo())!=0;
+	public boolean isSendMailInEndSuite() {
+		return getGroupToSendMail()!=null && "".compareTo(getGroupToSendMail())!=0;
 	}
 
 	public CallBack getCallBack() {
@@ -147,23 +145,6 @@ public class InputDataTestMaker {
 
 	public void setCallBack(CallBack callBack) {
 		this.callBack = callBack;
-	}
-	
-
-	public String getUserBrowserStack() {
-		return userBrowserStack;
-	}
-
-	public void setUserBrowserStack(String userBrowserStack) {
-		this.userBrowserStack = userBrowserStack;
-	}
-
-	public String getPassBrowserStack() {
-		return passBrowserStack;
-	}
-
-	public void setPassBrowserStack(String passBrowserStack) {
-		this.passBrowserStack = passBrowserStack;
 	}
 
     public DataFilterTCases getDataFilter() {

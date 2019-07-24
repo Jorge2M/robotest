@@ -54,8 +54,8 @@ public class Constantes {
     public enum AnalyticsVal {GoogleAnalytics, Criteo, Bing, Polyvore, NetTraffic, DataLayer} 
 
     //ID parámetros contexto relacionados con BrowserStack
-    public static final String UserBStack = "UserBStack";
-    public static final String PassBStack = "PassBStack";
+    public static final String UserBrowserStack = "equipoqa1";
+    public static final String PassBrowserStack = "qp3dr5VJbFMAxPsT4k1b";
 
     public static final String paramUrlmanto = "urlmanto";
     public static final String paramUsrmanto = "usrmanto";

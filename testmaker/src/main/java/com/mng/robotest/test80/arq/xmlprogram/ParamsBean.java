@@ -80,6 +80,9 @@ public class ParamsBean {
     	if (getTypeAccess()!=null) {
     		inputData.setTypeAccess(typeAccess);
     	}
+    	if (getEnvioCorreo()!=null) {
+    		inputData.setGroupToSendMail(getEnvioCorreo());
+    	}
     	
     	return inputData;
     }

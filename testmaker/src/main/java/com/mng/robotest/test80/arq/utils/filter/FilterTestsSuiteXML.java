@@ -19,10 +19,10 @@ import org.testng.xml.XmlGroups;
 import org.testng.xml.XmlInclude;
 import org.testng.xml.XmlTest;
 
-import com.mng.robotest.test80.arq.utils.XmlTestP80;
 import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.xmlprogram.TestRunTestMaker;
 
 public class FilterTestsSuiteXML {
 	
@@ -47,11 +47,11 @@ public class FilterTestsSuiteXML {
      * @param testCaseList contains the names of the methods to exec
      * 
      */
-    public void filterTestCasesToExec(XmlTest testRun) {
+    public void filterTestCasesToExec(TestRunTestMaker testRun) {
         try {
         	List<TestMethod> testCaseListToExec = getTestCasesToExecute(testRun);
     		includeTestCasesInTestRun(testCaseListToExec, testRun);
-    		removeDependenciesWithGroupsNotExecuted((XmlTestP80)testRun);
+    		removeDependenciesWithGroupsNotExecuted(testRun);
         }
         catch (ClassNotFoundException e) {
             pLogger.fatal("Problem filtering TestCases", e);
@@ -194,13 +194,14 @@ public class FilterTestsSuiteXML {
     /**
      * Remove of the dependencies with source or destination group without any test for execution
      */
-    private void removeDependenciesWithGroupsNotExecuted(XmlTestP80 testRun) {
+    private void removeDependenciesWithGroupsNotExecuted(TestRunTestMaker testRun) {
         HashSet<String> groupsWithTestsToExec = getListOfGroupsWithTestCasesToExecute(testRun);
         XmlGroups xmlGroups = testRun.getGroups();
         if (xmlGroups!=null) {
             List<XmlDependencies> listXmlDep  = xmlGroups.getDependencies();
             if (listXmlDep.size() > 0) {
-                for (Iterator<Entry<String,String>> itDependencyGroups = listXmlDep.get(0).getDependencies().entrySet().iterator(); itDependencyGroups.hasNext(); ) {
+            	Iterator<Entry<String,String>> itDependencyGroups = listXmlDep.get(0).getDependencies().entrySet().iterator();
+                while (itDependencyGroups.hasNext()) {
                     HashMap.Entry<String, String> entryDependency = itDependencyGroups.next();
                     if (!groupsWithTestsToExec.contains(entryDependency.getKey()) ||
                         !groupsWithTestsToExec.contains(entryDependency.getValue()))

@@ -1,10 +1,8 @@
 package com.mng.robotest.test80.arq.utils.webdriver.maker;
 
-
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.utils.webdriver.BStackDataDesktop;
-import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.arq.utils.webdriver.BrowserStackDesktop;
+import com.mng.robotest.test80.arq.utils.webdriver.BrowserStackMobil;
 import com.mng.robotest.test80.data.TestMakerContext;
 
 import java.net.URL;
@@ -19,22 +17,17 @@ public class BrowserStackDriverMaker implements WebdriverMaker {
 	String sessionName;
 	String userBStack;
 	String passBStack;
-	ITestContext tContext;
-	DesiredCapabilities capabilities = new DesiredCapabilities();
+	ITestContext ctx;
 	Channel channel = Channel.desktop;
 	boolean nettraffic = false;
 	
-	private BrowserStackDriverMaker(ITestContext tContext) {
-		this.tContext = tContext;
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(tContext);
-    	InputDataTestMaker inputData = testMakerCtx.getInputData();
-		
+	private BrowserStackDriverMaker(ITestContext ctx) {
+		this.ctx = ctx;
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(ctx);
         buildProject = 
-            tContext.getSuite().getName() + 
+            ctx.getSuite().getName() + 
             " (" + testMakerCtx.getIdSuiteExecution() + ")";
-        sessionName = tContext.getCurrentXmlTest().getName();
-        userBStack = inputData.getUserBrowserStack();
-        passBStack = inputData.getPassBrowserStack();
+        sessionName = ctx.getCurrentXmlTest().getName();
 	}
 	
 	public static BrowserStackDriverMaker getNew(ITestContext tContext) {
@@ -70,23 +63,42 @@ public class BrowserStackDriverMaker implements WebdriverMaker {
 	}
     
     private WebDriver createBStackDriverMobil() throws Exception {
-        BStackDataMovil bsDataMovil = new BStackDataMovil(tContext);
-        bsDataMovil.setCapabilities(capabilities);
-        return (runBrowserStack());
+        BrowserStackMobil bsStackMobil = TestMakerContext.getTestRun(ctx).getBrowserStackMobil();
+        if (bsStackMobil==null) {
+        	throw new RuntimeException("The data for connect with BrowserStack is not in the context");
+        }
+        
+    	DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("os", bsStackMobil.getSo());
+        capabilities.setCapability("os_version", bsStackMobil.getSoVersion());
+        capabilities.setCapability("device", bsStackMobil.getDevice());
+        capabilities.setCapability("realMobile", bsStackMobil.getRealMobil());
+        capabilities.setCapability("browserName", bsStackMobil.getBrowser());
+        return (runBrowserStack(bsStackMobil.getUser(), bsStackMobil.getPassword(), capabilities));
     }
     
     private WebDriver createBStackDriverDesktop() throws Exception {
-        BStackDataDesktop bsDataDesktop = new BStackDataDesktop(tContext);
-        bsDataDesktop.setCapabilities(capabilities);
-        return (runBrowserStack());
+    	BrowserStackDesktop bsStackDesktop = TestMakerContext.getTestRun(ctx).getBrowserStackDesktop();
+        if (bsStackDesktop==null) {
+        	throw new RuntimeException("The data for connect with BrowserStack is not in the context");
+        }
+        
+    	DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("os", bsStackDesktop.getSo());
+        capabilities.setCapability("os_version", bsStackDesktop.getSoVersion());
+        capabilities.setCapability("browser", bsStackDesktop.getBrowser());
+        capabilities.setCapability("browser_version", bsStackDesktop.getBrowserVersion());
+        capabilities.setCapability("resolution", bsStackDesktop.getResolution());
+        capabilities.setCapability("browserstack.use_w3c", true);
+        return (runBrowserStack(bsStackDesktop.getUser(), bsStackDesktop.getPassword(), capabilities));
     }    
     
-    private WebDriver runBrowserStack() 
+    private WebDriver runBrowserStack(String user, String password, DesiredCapabilities capabilities) 
     throws Exception {
         capabilities.setCapability("build", buildProject);
         capabilities.setCapability("name", sessionName);
         capabilities.setCapability("browserstack.debug", "false");
         capabilities.setCapability("browserstack.local", "false");
-        return (new RemoteWebDriver(new URL("http://"+userBStack+":"+passBStack+"@hub-cloud.browserstack.com/wd/hub"), capabilities));
+        return (new RemoteWebDriver(new URL("http://"+user+":"+password+"@hub-cloud.browserstack.com/wd/hub"), capabilities));
     }    
 }

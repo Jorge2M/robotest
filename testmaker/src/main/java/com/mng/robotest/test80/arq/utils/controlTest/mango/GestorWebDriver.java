@@ -10,7 +10,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.GestorWebDrv;
 import com.mng.robotest.test80.arq.utils.controlTest.StoredWebDrv;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
+import com.mng.robotest.test80.arq.utils.webdriver.BrowserStackMobil;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker.ManagementWebdriver;
@@ -126,8 +126,9 @@ public class GestorWebDriver extends fmwkTest {
         switch (canalWebDriver) {
         //En el caso de BrowserStack como información específica del WebDriver incluiremos el modelo de dispositivo móvil asociado
         case browserstack:
-            if (contextTng.getCurrentXmlTest().getParameter(BStackDataMovil.device_paramname)!=null) {
-                moreDataWdrv = contextTng.getCurrentXmlTest().getParameter(BStackDataMovil.device_paramname);
+            BrowserStackMobil bsStackMobil = TestMakerContext.getTestRun(contextTng).getBrowserStackMobil();
+            if (bsStackMobil!=null) {
+                moreDataWdrv = bsStackMobil.getDevice();
             }
             break;
 	        

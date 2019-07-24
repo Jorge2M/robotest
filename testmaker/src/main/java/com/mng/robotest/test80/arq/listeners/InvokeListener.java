@@ -49,19 +49,13 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
     
     @Override //End Suite
     public void onFinish(ISuite suite) {
-        //Grabamos la suite en la tabla Suites
         updateSuiteData(this.ctx1erTestRun);
-      
-        //Borramos todos los WebDriver si quedara alguno
         GestorWebDrv gestorDrv = GestorWebDrv.getGestorFromCtx(this.ctx1erTestRun);
         if (gestorDrv!=null) {
             gestorDrv.removeAllStrWd();
         }
         
-        //Ejecutamos la llamada al CallBack en caso que sea necesario
         this.httpUrlCallBack = callBackIfNeeded(suite);
-        
-        //Enviamos correo en caso que sea necesario
         sendEmailIfNeeded(suite);
     }
     
@@ -192,17 +186,10 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
         return null;
     }
     
-    /**
-     * En caso de que lo indique el parámetro "envioCorreo" enviaremos un correo con el resultado de la suite
-     */
     protected void sendEmailIfNeeded(ISuite suite) {
     	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(suite);
-        if (testMakerCtx.isSendEmail()) {
-            EmailEndSuite emailEndSuite = new EmailEndSuite();
-            emailEndSuite.setToList(String.join(",", testMakerCtx.getToMail()));
-            emailEndSuite.setCcList(String.join(",", testMakerCtx.getCcMail()));
-            emailEndSuite.setAsunto(testMakerCtx.getSubjectMail());
-            emailEndSuite.sendMail(this.httpUrlCallBack, this.ctx1erTestRun);
+        if (testMakerCtx.isSendMailInEndSuite()) {
+        	testMakerCtx.getSendMailData().sendMail(this.httpUrlCallBack, this.ctx1erTestRun);
         }        
     }
     
