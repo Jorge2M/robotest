@@ -5,9 +5,9 @@ import com.mng.robotest.test80.arq.utils.webdriver.BrowserStackSO.PlatformDeskto
 
 public enum BrowserStackCtxDesktop implements BrowserStackDesktop {
 
-    Win10Explorer (PlatformDesktopBS.Windows, "10", "Edge", "16.0", "1920x1080"),
-    Win8Firefox (PlatformDesktopBS.Windows, "10", "Firefox", "62.0", "1920x1080"),
-    OSXSafari (PlatformDesktopBS.OSX, "High Sierra", "Safari", "11.0", "1920x1080");
+    Win10_Edge16 (PlatformDesktopBS.Windows, "10", "Edge", "16.0", "1920x1080"),
+    Win8_Firefox62 (PlatformDesktopBS.Windows, "10", "Firefox", "62.0", "1920x1080"),
+    OSX_Safari11 (PlatformDesktopBS.OSX, "High Sierra", "Safari", "11.0", "1920x1080");
 	
 	PlatformDesktopBS so;
 	String soVersion;

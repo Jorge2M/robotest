@@ -307,7 +307,7 @@ public class Test80mng {
         try {
             switch ((Suites)params.getSuite()) {
             case SmokeTest:
-                SmokeTestXML smokeTest = new SmokeTestXML(params);
+                SmokeTestSuite smokeTest = new SmokeTestSuite(params);
                 smokeTest.run();         
                 break;
             case SmokeManto:
@@ -512,7 +512,7 @@ public class Test80mng {
         Suites suiteValue = Suites.valueOf(params.getSuiteName());
         switch (suiteValue) {
         case SmokeTest:
-            SmokeTestXML smokeTest = new SmokeTestXML(params);
+            SmokeTestSuite smokeTest = new SmokeTestSuite(params);
             return smokeTest.getListTests();
         case SmokeManto:
 //            SmokeMantoXML smokeManto = new SmokeMantoXML();
