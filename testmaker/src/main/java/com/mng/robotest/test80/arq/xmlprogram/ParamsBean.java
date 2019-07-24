@@ -25,7 +25,7 @@ public class ParamsBean {
     String applicationDNS = "";
     String idSuiteExecution = "";
     String urlManto = null;
-    String envioCorreo = null;
+    String[] mails = {};
     TypeAccessFmwk typeAccess = null;
     CallBack callBack = null;
 
@@ -80,8 +80,8 @@ public class ParamsBean {
     	if (getTypeAccess()!=null) {
     		inputData.setTypeAccess(typeAccess);
     	}
-    	if (getEnvioCorreo()!=null) {
-    		inputData.setGroupToSendMail(getEnvioCorreo());
+    	if (getMails()!=null) {
+    		inputData.setMails(Arrays.asList(getMails()));
     	}
     	
     	return inputData;
@@ -231,6 +231,10 @@ public class ParamsBean {
     public void setListaTestCases(String[] ListaTestCases) {
         this.ListaTestCases = ListaTestCases;
     }    
+    
+    public void setMails(String[] mails) {
+    	this.mails = mails;
+    }
         
     public void setApplicationDNS(String applicationDNS) {
         this.applicationDNS = applicationDNS;
@@ -262,12 +266,8 @@ public class ParamsBean {
         }
     }    
     
-    public String getEnvioCorreo() {
-        return this.envioCorreo;
-    }
-    
-    public void setEnvioCorreo(String envioCorreo) {
-        this.envioCorreo = envioCorreo;
+    public String[] getMails() {
+        return this.mails;
     }
     
     public CallBack getCallBack() {

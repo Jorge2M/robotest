@@ -25,8 +25,8 @@ public class InputDataTestMaker {
     private boolean netAnalysis = false;  
     private List<String> testCasesFilter;
     private List<String> groupsFilter;
+    private List<String> mails;
     private String webAppDNS;
-    private String groupToSendMail = null;
     private CallBack callBack = null;
 	
     private InputDataTestMaker(String nameSuite, Channel channel, AppTest app, String urlBase, TypeWebDriver typeWebDriver) {
@@ -127,16 +127,16 @@ public class InputDataTestMaker {
 		this.webAppDNS = webAppDNS;
 	}
 
-	public String getGroupToSendMail() {
-		return groupToSendMail;
+	public List<String> getMails() {
+		return this.mails;
 	}
-
-	public void setGroupToSendMail(String groupToSendMail) {
-		this.groupToSendMail = groupToSendMail;
+	
+	public void setMails(List<String> mails) {
+		this.mails = mails;
 	}
 	
 	public boolean isSendMailInEndSuite() {
-		return getGroupToSendMail()!=null && "".compareTo(getGroupToSendMail())!=0;
+		return (getMails()!=null && getMails().size()>0);
 	}
 
 	public CallBack getCallBack() {

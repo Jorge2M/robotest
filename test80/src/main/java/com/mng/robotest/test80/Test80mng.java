@@ -44,7 +44,7 @@ public class Test80mng {
     public static String UrlManto = "urlmanto";
     public static String RecicleWD = "reciclewd";
     public static String NetAnalysis = "net";
-    public static String EnvioCorreo = "enviocorreo";
+    public static String Mails = "mails";
     public static String TypeAccessParam = "typeAccess";    
     public static String CallBackResource = "callbackresource";
     public static String CallBackMethod = "callbackmethod";
@@ -183,11 +183,11 @@ public class Test80mng {
             .desc("Net Analysis (true, false)")
             .build();        
         
-        Option envioCorreo = Option.builder(EnvioCorreo)
+        Option mails = Option.builder(Mails)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
-            .desc("Send email to group indicated after TestSuite execution")
+            .desc("List of mail adresses comma separated")
             .build();        
         
         Option bat = Option.builder(TypeAccessParam)
@@ -257,7 +257,7 @@ public class Test80mng {
         options.addOption(urlManto);
         options.addOption(recicleWD);
         options.addOption(netAnalysis);
-        options.addOption(envioCorreo);
+        options.addOption(mails);
         options.addOption(bat);
         options.addOption(callbackResource);
         options.addOption(callbackMethod);
@@ -407,7 +407,7 @@ public class Test80mng {
         params.setUrlManto(cmdLine.getOptionValue(UrlManto));
         params.setRecicleWD(cmdLine.getOptionValue(RecicleWD));
         params.setNetAnalysis(cmdLine.getOptionValue(NetAnalysis));
-        params.setEnvioCorreo(cmdLine.getOptionValue(EnvioCorreo));
+        params.setMails(cmdLine.getOptionValues(Mails));
         params.setApplicationDNS(cmdLine.getOptionValue(ServerDNSNameParam));
         params.setTypeAccessFromStr(cmdLine.getOptionValue(TypeAccessParam));
         if (cmdLine.getOptionValue(CallBackResource)!=null) {

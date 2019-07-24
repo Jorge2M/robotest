@@ -61,6 +61,10 @@ public abstract class SuiteMaker {
     	listTestRuns.add(testRun);
     }
     
+    protected void addTestRuns(List<TestRunMaker> testRuns) {
+    	listTestRuns.addAll(testRuns);
+    }
+    
     protected void setParallelMode(ParallelMode parallelMode) {
 		this.parallelMode = parallelMode;
 	}

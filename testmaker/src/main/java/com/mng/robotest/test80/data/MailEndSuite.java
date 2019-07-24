@@ -10,8 +10,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 
-import com.mng.robotest.test80.arq.jdbc.dao.CorreosDAO;
-import com.mng.robotest.test80.arq.jdbc.dao.CorreosGroupDAO;
 import com.mng.robotest.test80.arq.jdbc.dao.SuitesDAO;
 import com.mng.robotest.test80.arq.jdbc.to.Suite;
 import com.mng.robotest.test80.arq.listeners.CorreoReport;
@@ -31,7 +29,7 @@ public class MailEndSuite {
 	private final String subjectMail;
 
 	private MailEndSuite(InputDataTestMaker inputData) {
-		toMail = createToMail(inputData.getGroupToSendMail());
+		toMail = inputData.getMails();
 		ccMail = new ArrayList<>();
 		ccMail.add("jorge.munoz.sge@mango.com");
 		subjectMail = "Result TestSuite " + inputData.getNameSuite() + " (" + inputData.getApp() + " / " + inputData.getUrlBase() + ")";
@@ -58,10 +56,6 @@ public class MailEndSuite {
         } else {
             return (subjectMail + " (With Problems)");
         }
-	}
-	
-	private List<String> createToMail(String groupToSendMail) {
-		return (CorreosGroupDAO.getCorreosGroup(groupToSendMail));
 	}
 	
     public void sendMail(ITestContext context) {
@@ -104,7 +98,6 @@ public class MailEndSuite {
                 pLogger.info(". Procedemos a enviar correo!");
                 new MailClient().mail(this.from, myToList, myCcList, getSubjectDependingResult(suiteOK), mensajeHTML, listaAttachImages);
                 pLogger.info("Correo enviado!");
-                CorreosDAO.grabarCorreoEnviado(context);
             }
         }
         catch (Exception e) {

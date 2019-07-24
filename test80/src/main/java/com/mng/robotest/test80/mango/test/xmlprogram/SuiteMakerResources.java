@@ -1,13 +1,22 @@
 package com.mng.robotest.test80.mango.test.xmlprogram;
 
+import static com.mng.robotest.test80.mango.test.data.BrowserStackCtxDesktop.macOSMojave_Safari;
+import static com.mng.robotest.test80.mango.test.data.BrowserStackCtxDesktop.Win8_Firefox68;
+import static com.mng.robotest.test80.mango.test.data.BrowserStackCtxMobil.IPhoneXS_iOS12;
+import static com.mng.robotest.test80.mango.test.data.BrowserStackCtxMobil.SamsungGalaxyS9plus_Android9;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.mng.robotest.test80.arq.listeners.CallBack;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
 
-public class CommonMangoData {
+public class SuiteMakerResources {
     
     public static Map<String,String> getParametersSuiteShop(ParamsBean params) {
     	Map<String,String> parametersReturn = new HashMap<>();
@@ -65,5 +74,28 @@ public class CommonMangoData {
         }
         
         return parametersReturn;
+    }
+    
+    public static List<TestRunMaker> getTestRunsForBrowserStack(String suiteName, Channel channel, List<String> listClasses) {
+    	List<TestRunMaker> listTestsRun = new ArrayList<>();
+    	switch (channel) {
+    	case desktop:
+			TestRunMaker testRunOSX = TestRunMaker.getNew(suiteName + "_" + macOSMojave_Safari, listClasses);
+			testRunOSX.setBrowserStackDesktop(macOSMojave_Safari);
+			listTestsRun.add(testRunOSX);
+			TestRunMaker testRunWin8 = TestRunMaker.getNew(suiteName + Win8_Firefox68, listClasses);
+			testRunWin8.setBrowserStackDesktop(Win8_Firefox68);
+			listTestsRun.add(testRunWin8);
+			break;
+	    case movil_web:
+			TestRunMaker testRunAndroid = TestRunMaker.getNew(suiteName + SamsungGalaxyS9plus_Android9, listClasses);
+			testRunAndroid.setBrowserStackMobil(SamsungGalaxyS9plus_Android9);
+			listTestsRun.add(testRunAndroid);
+			TestRunMaker testRuniOS = TestRunMaker.getNew(suiteName + IPhoneXS_iOS12, listClasses);
+			testRuniOS.setBrowserStackMobil(IPhoneXS_iOS12);
+			listTestsRun.add(testRuniOS);
+    	}
+    	
+    	return listTestsRun;
     }
 }

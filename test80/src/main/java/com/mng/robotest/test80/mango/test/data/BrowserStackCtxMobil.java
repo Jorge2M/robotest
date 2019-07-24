@@ -5,8 +5,10 @@ import com.mng.robotest.test80.arq.utils.webdriver.BrowserStackSO.PlatformMobilB
 
 public enum BrowserStackCtxMobil implements BrowserStackMobil {
 
-    SamsungGalaxyS8_Android7 (PlatformMobilBS.Android, "7.0", "Samsung Galaxy S8", "true", "chrome"),
-    IPhone8_iOS11 (PlatformMobilBS.iOS, "11.0", "iPhone 8", "true", "safari");
+    //SamsungGalaxyS8_Android7 (PlatformMobilBS.Android, "7.0", "Samsung Galaxy S8", "true", "chrome"),
+    //IPhone8_iOS11 (PlatformMobilBS.iOS, "11.0", "iPhone 8", "true", "safari");
+    SamsungGalaxyS9plus_Android9 (PlatformMobilBS.Android, "9.0", "Samsung Galaxy S9 Plus", "true", "chrome"),
+    IPhoneXS_iOS12 (PlatformMobilBS.iOS, "12.0", "iPhone XS", "true", "safari");	
 	
 	PlatformMobilBS so; 
 	String soVersion;

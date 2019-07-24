@@ -52,6 +52,7 @@ public class BrowserStackDriverMaker implements WebdriverMaker {
         switch (channel) {
         case movil_web: 
         	driver = createBStackDriverMobil();
+        	break;
         case desktop:
         default:
         	driver = createBStackDriverDesktop();
