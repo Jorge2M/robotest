@@ -113,7 +113,7 @@ public class SecMenusUserStpV {
 		if (channel==Channel.desktop && app==AppEcom.shop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
-	    return (userMenus.isMenuInState(UserMenu.cerrarSesion, StateElem.Present));
+	    return (userMenus.isMenuInStateUntil(UserMenu.cerrarSesion, StateElem.Present, 1));
 	}
 
     @Step (
