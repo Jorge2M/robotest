@@ -81,7 +81,6 @@ public class MenusUserWrapper {
 	}
 	
 	public boolean isMenuInStateUntil(UserMenu menu, StateElem state, int maxSecondsWait) throws Exception {
-		//checkAppSupported(app, menu);
 		if (menu==UserMenu.bolsa) {
 			return (secCabecera.isInStateIconoBolsa(state));
 		} else {
