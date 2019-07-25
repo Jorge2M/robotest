@@ -114,9 +114,6 @@ public class Compra extends GestorWebDriver {
     public void COM001_Compra_TrjSaved_Empl() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
-//        UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-//        dCtxSh.userConnected = userShop.user;
-//        dCtxSh.passwordUser = userShop.password;
         dCtxSh.userConnected = "jorge.munoz@mango.com";
         dCtxSh.passwordUser = "sirjorge74";
         dCtxSh.userRegistered = true;

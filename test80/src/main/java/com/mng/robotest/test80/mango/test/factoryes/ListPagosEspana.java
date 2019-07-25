@@ -57,7 +57,6 @@ public class ListPagosEspana {
     }
     
     private void getDataCountrys() throws Exception {
-        //Obtenemos la lista de países como lista de enteros
         Integer codEspanya = Integer.valueOf(1);
         Integer codFrancia = Integer.valueOf(11);
         List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(Arrays.asList(codEspanya, codFrancia))); 

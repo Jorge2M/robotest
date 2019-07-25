@@ -53,7 +53,7 @@ public class PaisAplicaVale extends GestorWebDriver {
         }
     }
 	  
-    @BeforeMethod (groups={"shop-movil-web"})
+    @BeforeMethod (groups={"shop-movil-web", "Canal:all_App:all"})
     public void login(ITestContext context, Method method) throws Exception {
         InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
     	this.dCtxSh.urlAcceso = inputData.getUrlBase();
@@ -61,13 +61,15 @@ public class PaisAplicaVale extends GestorWebDriver {
     }
 	
     @SuppressWarnings("unused")
-    @AfterMethod (alwaysRun = true)
+    @AfterMethod (groups={"shop-movil-web", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
         WebDriver driver = TestCaseData.getWebDriver();
         super.quitWebDriver(driver, context);
     }	
 	
-    @Test (groups={"Pagos", "shop-movil-web"}, alwaysRun=true, description="Compra usuario no registrado")
+    @Test (
+    	groups={"Pagos", "shop-movil-web", "Canal:all_App:all"}, alwaysRun=true, 
+    	description="Compra usuario no registrado")
     public void CHK001_Compra() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
     	InputDataTestMaker inputData = TestMakerContext.getTestMakerContext(dFTest.ctx).getInputData();

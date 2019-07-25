@@ -31,22 +31,22 @@ public class SmokeTestSuite extends SuiteMaker {
 
     private static List<String> getClasses() {
     	return Arrays.asList(
-	        "com.mng.robotest.test80.mango.test.appshop.Otras",
-	        "com.mng.robotest.test80.mango.test.appshop.SEO",
-	        "com.mng.robotest.test80.mango.test.appshop.IniciarSesion",
-	        "com.mng.robotest.test80.mango.test.appshop.Bolsa",
-	        "com.mng.robotest.test80.mango.test.appshop.FichaProducto",
-	        "com.mng.robotest.test80.mango.test.appshop.Ayuda",
-	        "com.mng.robotest.test80.mango.test.appshop.Buscador",
-	        "com.mng.robotest.test80.mango.test.appshop.Footer",
-	        "com.mng.robotest.test80.mango.test.appshop.Registro",
-	        "com.mng.robotest.test80.mango.test.appshop.PaisIdioma",
-	        "com.mng.robotest.test80.mango.test.appshop.GaleriaProducto",
-	        "com.mng.robotest.test80.mango.test.appshop.Compra",
-	        "com.mng.robotest.test80.mango.test.factoryes.ListPagosEspana",
-	        "com.mng.robotest.test80.mango.test.appshop.MiCuenta",
-	        "com.mng.robotest.test80.mango.test.appshop.Favoritos",
-	        "com.mng.robotest.test80.mango.test.appshop.Reembolsos",
-	        "com.mng.robotest.test80.mango.test.appshop.Loyalty");
+//	        "com.mng.robotest.test80.mango.test.appshop.Otras",
+//	        "com.mng.robotest.test80.mango.test.appshop.SEO",
+//	        "com.mng.robotest.test80.mango.test.appshop.IniciarSesion",
+//	        "com.mng.robotest.test80.mango.test.appshop.Bolsa",
+//	        "com.mng.robotest.test80.mango.test.appshop.FichaProducto",
+//	        "com.mng.robotest.test80.mango.test.appshop.Ayuda",
+//	        "com.mng.robotest.test80.mango.test.appshop.Buscador",
+//	        "com.mng.robotest.test80.mango.test.appshop.Footer",
+//	        "com.mng.robotest.test80.mango.test.appshop.Registro",
+//	        "com.mng.robotest.test80.mango.test.appshop.PaisIdioma",
+//	        "com.mng.robotest.test80.mango.test.appshop.GaleriaProducto",
+//	        "com.mng.robotest.test80.mango.test.appshop.Compra",
+	        "com.mng.robotest.test80.mango.test.factoryes.ListPagosEspana");
+//	        "com.mng.robotest.test80.mango.test.appshop.MiCuenta",
+//	        "com.mng.robotest.test80.mango.test.appshop.Favoritos",
+//	        "com.mng.robotest.test80.mango.test.appshop.Reembolsos",
+//	        "com.mng.robotest.test80.mango.test.appshop.Loyalty");
     }
 }

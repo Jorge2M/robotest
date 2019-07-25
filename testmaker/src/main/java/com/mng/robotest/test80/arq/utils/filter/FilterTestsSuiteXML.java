@@ -166,7 +166,8 @@ public class FilterTestsSuiteXML {
                 for (Method method : methodListToRun) {
                     ArrayList<Annotation> annotationsList = new ArrayList<>(Arrays.asList(method.getDeclaredAnnotations()));
                     for (Annotation annotation : annotationsList) {
-                        if (annotation.annotationType()==org.testng.annotations.Test.class) {
+                        if (annotation.annotationType()==org.testng.annotations.Test.class &&
+                        	((Test)annotation).enabled()) {
                             listOfAnnotationsOfTestCases.add(new TestMethod((Test)annotation, method));
                         }
                     }
@@ -184,11 +185,37 @@ public class FilterTestsSuiteXML {
     throws ClassNotFoundException {
         for (Iterator<XmlClass> iterator = testRun.getClasses().iterator(); iterator.hasNext(); ) {
             XmlClass xmlClass = iterator.next();
-            includeOnlyTestCasesInXmlClass(xmlClass, testCasesToInclude);
-            if (xmlClass.getIncludedMethods().size()==0) {
-                iterator.remove();
+            if (!isFactoryWithoutTestsClass(xmlClass)) {
+	            includeOnlyTestCasesInXmlClass(xmlClass, testCasesToInclude);
+	            if (xmlClass.getIncludedMethods().size()==0) {
+	                iterator.remove();
+	            }
             }
         }
+    }
+    
+    private boolean isFactoryWithoutTestsClass(XmlClass xmlClass) throws ClassNotFoundException {
+    	if (isAnnotationInClass(org.testng.annotations.Test.class, xmlClass)) {
+    		return false;
+    	}
+    	if (isAnnotationInClass(org.testng.annotations.Factory.class, xmlClass)) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+    private boolean isAnnotationInClass(Class<? extends Annotation> annotationExpected, XmlClass xmlClass) 
+    throws ClassNotFoundException {
+        List<Method> listMethods = Arrays.asList(Class.forName(xmlClass.getName()).getMethods());
+        for (Method method : listMethods) {
+        	List<Annotation> listAnnotations = Arrays.asList(method.getAnnotations());
+	        for (Annotation annotation : listAnnotations) {
+	        	if (annotation.annotationType()==annotationExpected) {
+	        		return true;
+	        	}
+	        }
+        }
+        return false;
     }
     
     /**
@@ -222,6 +249,7 @@ public class FilterTestsSuiteXML {
             ArrayList<Annotation> annotationsList = new ArrayList<>(Arrays.asList(method.getDeclaredAnnotations()));
             for (Annotation annotation : annotationsList) {
                 if (annotation.annotationType()==org.testng.annotations.Test.class &&
+                	((Test)annotation).enabled() &&
                 	testMethodsContainsMethod(testCasesToInclude, method.getName()))
                     includeMethods.add(new XmlInclude(method.getName()));
             }

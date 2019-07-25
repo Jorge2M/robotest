@@ -22,14 +22,14 @@ public class ListPrecompraPaises {
 	Collection<Integer> Pais5SHOPDAY = new ArrayList<>();
 	
 	@SuppressWarnings("unused")
-    @Factory
 	@Parameters({"countrys"})
-	public Object[] createInstances(String countrysStr, ITestContext ctx) throws Exception {
+    @Factory
+	public Object[] createInstances(String countrys, ITestContext ctx) throws Exception {
 	    ArrayList<Object> listTests = new ArrayList<>();
 	    try {
 	    	InputDataTestMaker inputData = TestMakerContext.getInputData(ctx);
 	    	
-	        List<Integer> listaPaisesInt = UtilsMangoTest.getListaPaisesInt(countrysStr);
+	        List<Integer> listaPaisesInt = UtilsMangoTest.getListaPaisesInt(countrys);
 	        Response response = Utilidades.filtradoListaPaises(false, listaPaisesInt);	
 	        Iterator<Continente> itContinentes = response.getResponse().iterator();
     	        

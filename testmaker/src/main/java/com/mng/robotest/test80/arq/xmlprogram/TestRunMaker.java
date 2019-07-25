@@ -58,7 +58,7 @@ public class TestRunMaker {
         testRun.setXmlClasses(listXMLclasses);
         testRun.setBrowserStackDesktop(browserStackDesktop);
         testRun.setBrowserStackMobil(browserStackMobil);
-        filterSuiteXML.filterTestCasesToExec(testRun);
+        filterSuiteXML.filterTestCasesToExec(testRun); 
         return testRun;
     }
     

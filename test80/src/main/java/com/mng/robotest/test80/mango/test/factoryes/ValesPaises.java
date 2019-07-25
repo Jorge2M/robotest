@@ -52,7 +52,7 @@ public class ValesPaises {
                 List<ValePais> listaValesPais = listValesPais(pais.getCodigo_pais());
                 for (ValePais valePais : listaValesPais) {
                     DataCtxShop dCtxSh = new DataCtxShop(app, Channel.desktop, pais, idioma, valePais, urlAcceso);
-                    listTests.add(new PaisAplicaVale(dCtxSh, continente, null, false, prioridad));
+                    //listTests.add(new PaisAplicaVale(dCtxSh, continente, null, false, prioridad));
                     prioridad+=1;
                                     
                     System.out.println(
