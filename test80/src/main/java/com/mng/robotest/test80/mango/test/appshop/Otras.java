@@ -136,9 +136,10 @@ public class Otras extends GestorWebDriver {
     /**
      * Caso de prueba que realiza el flujo de accesos vía URL/confirmaciones de país para certificar el correcto funcionamiento del modal de confirmación de país.
      */
-    @Test (
-        groups={"Otras", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, 
-        description="Verificar el cambio de país a través de url")
+//    @Test (
+//    	enabled=false, //Desactivado hasta que se corrija la incidencia https://jira.mangodev.net/jira/browse/GPS-975
+//        groups={"Otras", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, 
+//        description="Verificar el cambio de país a través de url")
     public void OTR004_cambioPaisURL(ITestContext context) throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
