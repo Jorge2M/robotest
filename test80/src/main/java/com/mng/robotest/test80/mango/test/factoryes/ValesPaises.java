@@ -1,9 +1,13 @@
 package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
+
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.PaisAplicaVale;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -13,46 +17,41 @@ import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
+import com.mng.robotest.test80.mango.test.xmlprogram.ValesPaisesSuite.VersionValesSuite;
 
 public class ValesPaises {
 
     List<ValePais> listaPaisesVales = new ArrayList<>();
     
     @Factory
-    @Parameters({"urlBase", "countrys", "AppEcom", "filtroCalendar"})
-    public Object[] createInstances(String urlAcceso, String countrys, String appStr, String filtroCalendarStr) 
-    throws Exception {
-    	AppEcom app = AppEcom.valueOf(appStr);
+    @Parameters({"countrys"})
+    public Object[] createInstances(String countrys, ITestContext ctx) throws Exception {
+    	InputDataTestMaker inputData = TestMakerContext.getInputData(ctx);
+    	VersionValesSuite version = VersionValesSuite.valueOf(inputData.getVersionSuite());
+    	
         Calendar currDtCal = Calendar.getInstance();
-        boolean filterCal = false;
-        if ("true".compareTo(filtroCalendarStr)==0) {
-            filterCal = true;
-        }
-        
         for (Campanya campanya : Campanya.values()) {
-        	if (!filterCal || currDtCal.getTimeInMillis() > Campanya.MNGVIP.getFechaInit().getTimeInMillis()) {
-        		List<ValePais> listaVales = ValesData.getListVales(campanya, filterCal);
+        	if (!version.filtroCalendario() || 
+        		currDtCal.getTimeInMillis() > Campanya.MNGVIP.getFechaInit().getTimeInMillis()) {
+        		List<ValePais> listaVales = ValesData.getListVales(campanya, version.filtroCalendario());
         		if (listaVales!=null) {
-        			this.listaPaisesVales.addAll(ValesData.getListVales(campanya, filterCal));
+        			this.listaPaisesVales.addAll(ValesData.getListVales(campanya, version.filtroCalendario()));
         		}
         	}
         }
 
         ArrayList<PaisAplicaVale> listTests = new ArrayList<>();
-                
-        //Obtenemos la lista de países como lista de enteros y la utilizamos para filtrar el XML
         List<Integer> listaPaisesInt = UtilsMangoTest.getListaPaisesInt(countrys);
         Response response = Utilidades.filtradoListaPaises(false/*todosPaises*/, listaPaisesInt);    
         
-        //Iteramos a nivel de Continentes -> Países -> Idioma (sólo el 1o) -> Vales
         int prioridad=0;
         for (Continente continente : response.getResponse()) {
             for (Pais pais : continente.getPaises()) {
                 IdiomaPais idioma = pais.getListIdiomas().get(0);
                 List<ValePais> listaValesPais = listValesPais(pais.getCodigo_pais());
                 for (ValePais valePais : listaValesPais) {
-                    DataCtxShop dCtxSh = new DataCtxShop(app, Channel.desktop, pais, idioma, valePais, urlAcceso);
-                    //listTests.add(new PaisAplicaVale(dCtxSh, continente, null, false, prioridad));
+                    DataCtxShop dCtxSh = new DataCtxShop((AppEcom)inputData.getApp(), Channel.desktop, pais, idioma, valePais, inputData.getUrlBase());
+                    listTests.add(new PaisAplicaVale(version, dCtxSh, prioridad));
                     prioridad+=1;
                                     
                     System.out.println(

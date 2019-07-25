@@ -28,7 +28,7 @@ public class ListPrecompraPaises {
 	    ArrayList<Object> listTests = new ArrayList<>();
 	    try {
 	    	InputDataTestMaker inputData = TestMakerContext.getInputData(ctx);
-	    	
+	    	VersionPagosSuite version = VersionPagosSuite.valueOf(inputData.getVersionSuite());
 	        List<Integer> listaPaisesInt = UtilsMangoTest.getListaPaisesInt(countrys);
 	        Response response = Utilidades.filtradoListaPaises(false, listaPaisesInt);	
 	        Iterator<Continente> itContinentes = response.getResponse().iterator();
@@ -45,12 +45,11 @@ public class ListPrecompraPaises {
         	            	
 	                AppEcom app = (AppEcom)inputData.getApp();
 	                Channel channel = inputData.getChannel();
-	                VersionPagosSuite version = VersionPagosSuite.valueOf(inputData.getVersionSuite());
 	                if (UtilsTestMango.paisConCompra(pais, app)) {
 	                    if (!(version.isEmpl() && pais.getAccesoEmpl().getTarjeta()==null)) {
 	                        if (!(app==AppEcom.votf && pais.getAccesoVOTF().getUsuario()==null)) {
 	                            DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, pais.getListIdiomas().get(0), inputData.getUrlBase());
-	                            listTests.add(new PaisAplicaVale(version, dCtxSh, continente, pais, prioridad));
+	                            listTests.add(new PaisAplicaVale(version, dCtxSh, prioridad));
 	                            prioridad+=1;
 	                            System.out.println(
 	                                "Creado Test con datos: Continente=" + continente.getNombre_continente() +

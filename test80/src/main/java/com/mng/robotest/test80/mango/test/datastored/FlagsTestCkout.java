@@ -1,8 +1,9 @@
 package com.mng.robotest.test80.mango.test.datastored;
 
 import com.mng.robotest.test80.mango.test.xmlprogram.PagosPaisesSuite.VersionPagosSuite;
+import com.mng.robotest.test80.mango.test.xmlprogram.ValesPaisesSuite.VersionValesSuite;
 
-public class FlagsTestCkout {
+public class FlagsTestCkout implements Cloneable {
     public boolean validaPasarelas = false;
     public boolean validaPagos = false;
     public boolean validaPedidosEnManto = false;
@@ -25,5 +26,23 @@ public class FlagsTestCkout {
 		flags.isEmpl = version.isEmpl();
 		flags.forceTestMisCompras = version.forceTestMisCompras();
 		return flags;
+    }
+    
+    public static FlagsTestCkout getNew(VersionValesSuite version) {
+    	FlagsTestCkout flags = new FlagsTestCkout();
+		flags.validaPasarelas = version.validaPasarelas();
+		flags.validaPagos = version.validaPagos();
+		return flags;
+    }
+    
+    public Object clone() {
+        Object obj=null;
+        try{
+            obj=super.clone();
+        } 
+        catch(CloneNotSupportedException ex){
+            System.out.println(" no se puede duplicar");
+        }
+        return obj;
     }
 }

@@ -11,17 +11,16 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
-import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.xmlprogram.PagosPaisesSuite.VersionPagosSuite;
+import com.mng.robotest.test80.mango.test.xmlprogram.ValesPaisesSuite.VersionValesSuite;
 
 public class PaisAplicaVale extends GestorWebDriver {
 
@@ -29,28 +28,34 @@ public class PaisAplicaVale extends GestorWebDriver {
     boolean acceptNextAlert = true;
     StringBuffer verificationErrors = new StringBuffer();
 	
-    public String index_fact;
-    public Continente continente;
-    public Pais paisChange;
-    public VersionPagosSuite version;
+    private String index_fact;
     public int prioridad;
+    private FlagsTestCkout fTCkoutIni;
     String masProductos = "";
     DataCtxShop dCtxSh;
     
-    public PaisAplicaVale(VersionPagosSuite version, DataCtxShop dCtxSh, Continente continente, Pais paisChange, int prioridad) {
-        this.version = version;
-        this.dCtxSh = dCtxSh;
-        this.continente = continente;
-        this.paisChange = paisChange;
-        this.prioridad = prioridad;
-        this.index_fact = 
-        	dCtxSh.pais.getNombre_pais() + " (" + dCtxSh.pais.getCodigo_pais() + ") " + " - " + 
-        	dCtxSh.idioma.getCodigo().getLiteral();
-        if (dCtxSh.vale!=null) {
-        	this.index_fact+= 
-        		" - " + dCtxSh.vale.getCodigoVale() + 
-        		"(" + dCtxSh.vale.isValid() + "_" + dCtxSh.vale.getPorcDescuento() + "perc)";
-        }
+    public PaisAplicaVale(VersionPagosSuite version, DataCtxShop dCtxSh, int prioridad) {
+    	this.prioridad = prioridad;
+        this.fTCkoutIni = FlagsTestCkout.getNew(version);
+        setDataFromConstruct(dCtxSh);
+    }
+    
+    public PaisAplicaVale(VersionValesSuite version, DataCtxShop dCtxSh, int prioridad) {
+    	this.prioridad = prioridad;
+        this.fTCkoutIni = FlagsTestCkout.getNew(version);
+        setDataFromConstruct(dCtxSh);
+    }
+    
+    private void setDataFromConstruct(DataCtxShop dCtxSh) {
+	    this.dCtxSh = dCtxSh;
+	    this.index_fact = 
+	    	dCtxSh.pais.getNombre_pais() + " (" + dCtxSh.pais.getCodigo_pais() + ") " + " - " + 
+	    	dCtxSh.idioma.getCodigo().getLiteral();
+	    if (dCtxSh.vale!=null) {
+	    	this.index_fact+= 
+	    		" - " + dCtxSh.vale.getCodigoVale() + 
+	    		"(" + dCtxSh.vale.isValid() + "_" + dCtxSh.vale.getPorcDescuento() + "perc)";
+	    }
     }
 	  
     @BeforeMethod (groups={"shop-movil-web", "Canal:all_App:all"})
@@ -72,12 +77,9 @@ public class PaisAplicaVale extends GestorWebDriver {
     	description="Compra usuario no registrado")
     public void CHK001_Compra() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-    	InputDataTestMaker inputData = TestMakerContext.getTestMakerContext(dFTest.ctx).getInputData();
-    	VersionPagosSuite version = VersionPagosSuite.valueOf(inputData.getVersionSuite());
-
         dCtxSh.userRegistered = false;
         DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);
-        FlagsTestCkout fTCkout = FlagsTestCkout.getNew(version);
+        FlagsTestCkout fTCkout = (FlagsTestCkout)fTCkoutIni.clone();
         fTCkout.emailExist = true; 
         fTCkout.trjGuardada = false;
         dCtxPago.setFTCkout(fTCkout);

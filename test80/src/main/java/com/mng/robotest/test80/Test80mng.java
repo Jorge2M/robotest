@@ -319,12 +319,12 @@ public class Test80mng {
                 pagosPaises.run();            
                 break;              
             case ValesPaises:
-//                ValesPaisesXML valesPaises = new ValesPaisesXML();
-//                valesPaises.testRunner(params);            
+                ValesPaisesSuite valesPaises = new ValesPaisesSuite(params);
+                valesPaises.run();            
                 break;                
             case PaisIdiomaBanner:
-//                PaisIdiomaXML paisIdiomaBanner = new PaisIdiomaXML();
-//                paisIdiomaBanner.testRunner(params);
+                PaisIdiomaSuite paisIdiomaBanner = new PaisIdiomaSuite(params);
+                paisIdiomaBanner.run();
                 break;                
             case Campanas:
 //                CampanasXML campanas = new CampanasXML();

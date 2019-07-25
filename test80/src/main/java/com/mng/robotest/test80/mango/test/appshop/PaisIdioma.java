@@ -12,7 +12,6 @@ import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
-import com.mng.robotest.test80.mango.test.appshop.campanas.CampanasData;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
@@ -32,6 +31,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusDesktopStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.utils.LevelPais;
+import com.mng.robotest.test80.mango.test.xmlprogram.PaisIdiomaSuite.VersionPaisSuite;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,7 +42,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 
-public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas propias de MANGO*/ {
+public class PaisIdioma extends GestorWebDriver {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 
     String baseUrl;
@@ -50,37 +50,26 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
     StringBuffer verificationErrors = new StringBuffer();
 	
     private String index_fact = "";
-    private List<Linea> lineasAprobar;
-    private boolean recorreMenus;
-    private boolean recorreBanners;
+    private List<Linea> linesToTest;
     public int prioridad;
-    CampanasData dataCamp;
+    VersionPaisSuite version;
     DataCtxShop dCtxSh;
     
     //Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
     public PaisIdioma() {}
-
-    /**
-     * Invocación desde @Factory de campañas
-     */
-    public PaisIdioma(CampanasData dataCamp, DataCtxShop dCtxSh, List<Linea> lineasAprobar, boolean recorreMenus, boolean recorreBanners, int prioridad) {
-    	this(dCtxSh, lineasAprobar, recorreMenus, recorreBanners, prioridad);
-    	this.dataCamp = dataCamp;
-    }
     
     /**
      * Constructor para invocación desde @Factory
      */
-    public PaisIdioma(DataCtxShop dCtxSh, List<Linea> lineasAprobar, boolean recorreMenus, boolean recorreBanners, int prioridad) {
+    public PaisIdioma(VersionPaisSuite version, DataCtxShop dCtxSh, List<Linea> linesToTest, int prioridad) {
+    	this.version = version;
         this.dCtxSh = dCtxSh;
         String lineaStr = "";
-        if (lineasAprobar.size()==1) {
-            lineaStr = "-" + lineasAprobar.get(0).getType();
+        if (linesToTest.size()==1) {
+            lineaStr = "-" + linesToTest.get(0).getType();
         }   
         this.index_fact = dCtxSh.pais.getNombre_pais() + " (" + dCtxSh.pais.getCodigo_pais() + ") " + "-" + dCtxSh.idioma.getCodigo().getLiteral() + lineaStr;
-        this.lineasAprobar = lineasAprobar;
-        this.recorreMenus = recorreMenus;
-        this.recorreBanners = recorreBanners;
+        this.linesToTest = linesToTest;
         this.prioridad = prioridad;
     }
 	  
@@ -99,9 +88,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
             this.dCtxSh.setAppEcom((AppEcom)inputData.getApp());
             this.dCtxSh.setChannel(inputData.getChannel());
             this.dCtxSh.urlAcceso = inputData.getUrlBase();
-            this.lineasAprobar = this.dCtxSh.pais.getShoponline().getLineasToTest(this.dCtxSh.appE);
-            this.recorreMenus = false;
-            this.recorreBanners = false;
+            this.linesToTest = this.dCtxSh.pais.getShoponline().getLineasToTest(this.dCtxSh.appE);
         }
 
         Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), index_fact, dCtxSh, context, method);
@@ -128,9 +115,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
             
         PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxShI, dFTest.driver);
         PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxShI.pais, dCtxShI.channel, dCtxShI.appE, dFTest.driver);
-
-        //Aplicamos el test a las líneas/sublíneas
-        for (Linea linea : this.lineasAprobar) {
+        for (Linea linea : linesToTest) {
             if (UtilsMangoTest.validarLinea(dCtxShI.pais, linea, dCtxShI.appE)) {
                 validaLinea(linea, null/*sublinea*/, dCtxShI, dFTest);
                 for (Sublinea sublinea : linea.getListSublineas())
@@ -166,7 +151,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
             if (secMenus.canClickMenuArticles(dCtxShI.pais, linea, sublinea)) {
             	Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "pantalones"));
             	secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxShI);
-                if (this.recorreBanners) {
+                if (version.testMenus()) {
                     PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
 					boolean bannerIsLincable = PageGaleriaDesktop.secBannerHead.isLinkable(dFTest.driver);
                     if (bannerIsLincable) {
@@ -187,11 +172,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
         if (testBanners(linea)) {
         	int maxBannersToTest = getMaxBannersToTest(dCtxShI.pais, dCtxShI.appE);
         	SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToTest, dFTest.driver);
-        	if (this.dataCamp==null) {
-        		secBannersStpV.testPageBanners(dCtxShI, maxBannersToTest);
-        	} else {
-        		secBannersStpV.testCampanas(dataCamp, dCtxShI, lineaType);
-        	}
+        	secBannersStpV.testPageBanners(dCtxShI, maxBannersToTest);
         }
         
         if (linea.getCarrusels()!=null) {
@@ -201,12 +182,12 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
     }
     
     private boolean testBanners(Linea linea) {
-        return (this.recorreBanners && 
+        return (version.testBanners() && 
                 linea.getContentDeskType()==TypeContentDesk.banners);
     }
     
     private boolean testMenus(Linea linea, Sublinea sublinea) {
-        if (this.recorreMenus) {
+        if (version.testMenus()) {
             if (sublinea==null) {
                 return linea.getMenus().compareTo("s")==0;
             }

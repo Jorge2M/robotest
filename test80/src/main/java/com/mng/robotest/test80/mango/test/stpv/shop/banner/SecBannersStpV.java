@@ -1,7 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.banner;
 
 import java.net.URI;
-import java.util.ArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -12,11 +11,7 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.appshop.campanas.CampanasData;
-import com.mng.robotest.test80.mango.test.appshop.campanas.DataCampana;
-import com.mng.robotest.test80.mango.test.appshop.campanas.DataCampana.AtributoCampana;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.DataBanner;
@@ -52,31 +47,6 @@ public class SecBannersStpV {
             managerBannersScreen.reloadBanners(driver); //For avoid StaleElement Exception
             sizeListBanners = managerBannersScreen.getListDataBanners().size();
         }
-    }
-    
-    public void testCampanas(CampanasData listCampanas, DataCtxShop dCtxSh, LineaType lineaType) throws Exception {
-    	ArrayList<DataCampana> listCampanasToTest = 
-    		listCampanas.getListCampanas(
-    			dCtxSh.pais.getCodigo_pais(), 
-    			dCtxSh.idioma.getCodigo().name(), 
-    			lineaType.toString());
-    	
-    	for (DataCampana dataCampToTest : listCampanasToTest) {
-    		int posBanner = Integer.valueOf(dataCampToTest.posicion);
-    		boolean makeValidations = true;
-    		seleccionarBanner(posBanner, makeValidations, dCtxSh.appE, dCtxSh.channel);
-    		DataBanner dataBanner = managerBannersScreen.getBanner(posBanner);
-    		validateCamapanaWithBannerInScreen(dataCampToTest, dataBanner);
-    	}
-    }
-    
-    @Validation
-    private ChecksResult validateCamapanaWithBannerInScreen(DataCampana dataCampana, DataBanner dataBanner) {
-    	ChecksResult validations = ChecksResult.getNew();
-	 	validations.add(
-			"Los datos de la campaña son correctos<br>\" +\n" + getReportCompareDataInCuteHtml(dataCampana, dataBanner),
-			true, State.Defect);    	
-	 	return validations;
     }
     
     public void seleccionarBanner(int posBanner, boolean validaciones, AppEcom app, Channel channel) 
@@ -168,57 +138,5 @@ public class SecBannersStpV {
         boolean existsMaps = PageLanding.hayMaps(driver);
         boolean existsEditItems = PageLanding.hayItemsEdits(driver);
         return (existBanners || existsMaps || existsEditItems);
-    }
-    
-    private static String getReportCompareDataInCuteHtml(DataCampana dataCampana, DataBanner dataBanner) {
-    	StringBuilder stringBuilder = new StringBuilder();
-    	stringBuilder.append("<iframe width=\"800px;\" style=\"border:none;\" srcdoc=\"");
-    	stringBuilder.append("<head><style>");
-    	stringBuilder.append("table, th, td {");
-    	stringBuilder.append("  border: 1px solid black;");
-    	stringBuilder.append("  font: normal 8pt Arial;");
-    	stringBuilder.append("  border-collapse: collapse;");
-    	stringBuilder.append("  table-layout: fixed;");
-    	stringBuilder.append("}");
-    	stringBuilder.append("th {");
-    	stringBuilder.append("  font-weight: bold;");
-    	stringBuilder.append("  background-color: PaleGreen;");
-    	stringBuilder.append("}");    	
-    	stringBuilder.append("td {");
-    	stringBuilder.append("  word-wrap:break-word;");
-    	stringBuilder.append("}");    	
-    	stringBuilder.append("</style></head>");
-    	stringBuilder.append("<table>");
-    	stringBuilder.append("<tbody>");
-    	stringBuilder.append("<tr>");
-    	stringBuilder.append("  <th></th>");
-    	stringBuilder.append("  <th>Campaña</th>");
-    	stringBuilder.append("  <th>Screen Banner</th>");
-    	stringBuilder.append("</tr>");
-    	stringBuilder.append(getCompareDataCampanaHTML(AtributoCampana.URL, dataCampana, dataBanner));	
-    	stringBuilder.append(getCompareDataCampanaHTML(AtributoCampana.SRC, dataCampana, dataBanner));
-    	stringBuilder.append(getCompareDataCampanaHTML(AtributoCampana.Destino, dataCampana, dataBanner));
-    	stringBuilder.append(getCompareDataCampanaHTML(AtributoCampana.All_Text, dataCampana, dataBanner));
-    	stringBuilder.append("</tbody>");
-    	stringBuilder.append("</table>");
-    	stringBuilder.append("\"></iframe>");
-    	return (stringBuilder.toString()); 
-    }
-    
-    private static String getCompareDataCampanaHTML(AtributoCampana atributo, DataCampana dataCampana, DataBanner dataBanner) {
-    	String attCampana = dataCampana.getAtributo(atributo);
-    	String attBanner = dataBanner.getEquivalentCampanaAtributo(atributo);
-    	String color = "blue";
-    	if ((attCampana!=null && attBanner==null) ||
-    		attCampana.compareTo(attBanner)!=0)
-    		color = "darkOrange";
-    	
-    	StringBuilder stringBuilder = new StringBuilder();
-    	stringBuilder.append("<tr>");
-    	stringBuilder.append("  <th>" + atributo + "</th>");
-    	stringBuilder.append("	<td style='color:" + color + "'>" + attCampana + "</td>");
-    	stringBuilder.append("	<td style='color:" + color + "'>" + attBanner + "</td>");
-    	stringBuilder.append("</tr>");
-    	return (stringBuilder.toString());
     }
 }
