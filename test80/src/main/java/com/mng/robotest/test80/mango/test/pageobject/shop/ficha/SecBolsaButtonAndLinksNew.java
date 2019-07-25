@@ -63,7 +63,7 @@ public class SecBolsaButtonAndLinksNew extends WebdrvWrapp {
     
     public static boolean isVisibleButtonFavoritos(ActionFavButton actionButton, WebDriver driver) {
         String xpathButtonFav = getXPathButtonFavoritos(actionButton);
-        return isElementVisible(driver, By.xpath(xpathButtonFav));
+        return isElementVisibleUntil(driver, By.xpath(xpathButtonFav), 1);
     }
     
     public static void selectFavoritosButton(ActionFavButton actionButton, WebDriver driver) throws Exception {
