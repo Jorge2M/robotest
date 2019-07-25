@@ -252,7 +252,7 @@ public class PagePrehome extends WebdrvWrapp {
      */
     public static void goToPagePrehome(String urlPreHome, WebDriver driver) throws Exception {
     	//Temporal para test Canary!!!
-    	//AccesoNavigations.goToInitURL(urlPreHome + "?canary=true", dCtxSh, dFTest);
+    	//AccesoNavigations.goToInitURL(urlPreHome + "?canary=true", driver);
     	AccesoNavigations.goToInitURL(urlPreHome, driver);
         waitForPageLoaded(driver);
         if (PageJCAS.thisPageIsShown(driver)) {
