@@ -4,8 +4,8 @@ import org.testng.ITestContext;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
-
 import org.testng.annotations.*;
+import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
@@ -22,9 +22,6 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.xmlprogram.PagosPaisesSuite.VersionPagosSuite;
-
-import org.openqa.selenium.WebDriver;
-
 
 public class PaisAplicaVale extends GestorWebDriver {
 
@@ -75,36 +72,21 @@ public class PaisAplicaVale extends GestorWebDriver {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
     	InputDataTestMaker inputData = TestMakerContext.getTestMakerContext(dFTest.ctx).getInputData();
     	VersionPagosSuite version = VersionPagosSuite.valueOf(inputData.getVersionSuite());
-    	,,,Pendiente parsear el FTCheckout con los datos del version (cuidado con el isEmpl!!!)
 
-        this.dCtxSh.userRegistered = false;
-        FlagsTestCkout fTCkout = new FlagsTestCkout();
-        if (validaPasarelasStr.compareTo("true")==0) {
-            fTCkout.validaPasarelas = true;
-        }
-        if (validaPagosStr.compareTo("true")==0) {
-            fTCkout.validaPagos = true;
-        }
-        
-    	String forceTestMisComprasStr = dFTest.ctx.getCurrentXmlTest().getParameter("forceTestMisCompras");
-        if (forceTestMisComprasStr!=null && "true".compareTo(forceTestMisComprasStr)==0) {
-        	fTCkout.forceTestMisCompras = true;
-        }
-        if (validaPedidosEnMantoStr.compareTo("true")==0) {
-            fTCkout.validaPedidosEnManto = true;        
-        }
+        dCtxSh.userRegistered = false;
+        DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);
+        FlagsTestCkout fTCkout = FlagsTestCkout.getNew(version);
         fTCkout.emailExist = true; 
         fTCkout.trjGuardada = false;
-        fTCkout.isEmpl = this.isEmpl;
-        DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);
         dCtxPago.setFTCkout(fTCkout);
+
         PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(this.dCtxSh, dCtxPago, dFTest);
         if (fTCkout.validaPedidosEnManto) {
         	List<CheckPedido> listChecks = Arrays.asList(
         		CheckPedido.consultarBolsa, 
         		CheckPedido.consultarPedido);
             DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
-            PedidoNavigations.testPedidosEnManto(checksPedidos, this.dCtxSh.appE, dFTest);
+            PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, dFTest);
         }
     }
 }
