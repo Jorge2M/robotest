@@ -80,9 +80,7 @@ public class Registro extends GestorWebDriver {
     
     @BeforeMethod(groups={"Registro", "Canal:all_App:all", "SupportsFactoryCountrys"})
     public void login(ITestContext context, Method method) throws Exception {
-        //Recopilación de parámetros
-        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
-        InputDataTestMaker inputData = tMakerCtx.getInputData();
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());
@@ -182,8 +180,8 @@ public class Registro extends GestorWebDriver {
         dCtxSh.userRegistered = false;
             
         //En caso de ejecución desde .bat no ejecutaremos el Registro 
-        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(dFTest.ctx);
-        if (tMakerCtx.getInputData().getTypeAccess()==TypeAccessFmwk.Bat) {
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(dFTest.ctx);
+        if (inputData.getTypeAccess()==TypeAccessFmwk.Bat) {
             return;
         }
             
@@ -255,9 +253,8 @@ public class Registro extends GestorWebDriver {
         DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
             
-        //En caso de ejecución desde .bat no ejecutaremos el Registro 
-        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(dFTest.ctx);
-        if (tMakerCtx.getInputData().getTypeAccess()==TypeAccessFmwk.Bat) {
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(dFTest.ctx);
+        if (inputData.getTypeAccess()==TypeAccessFmwk.Bat) {
             return;
         }
         

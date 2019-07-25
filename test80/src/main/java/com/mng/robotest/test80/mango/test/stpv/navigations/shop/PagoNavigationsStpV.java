@@ -19,7 +19,6 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
-import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -415,8 +414,7 @@ public class PagoNavigationsStpV {
         boolean validaPagos = pagoStpV.dCtxPago.getFTCkout().validaPagos;
         Pago pago = pagoStpV.dCtxPago.getDataPedido().getPago();
         ITestContext ctx = TestCaseData.getdFTest().ctx;
-        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(ctx);
-        TypeAccessFmwk typeAccess = tMakerCtx.getInputData().getTypeAccess();
+        TypeAccessFmwk typeAccess = TestCaseData.getInputDataTestMaker(ctx).getTypeAccess();
         return (
             //No estamos en el entorno productivo
             !UtilsMangoTest.isEntornoPRO(appE, driver) &&

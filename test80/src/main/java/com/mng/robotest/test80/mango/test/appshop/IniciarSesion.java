@@ -36,9 +36,7 @@ public class IniciarSesion extends GestorWebDriver {
     @BeforeMethod(groups={"IniciarSesion", "Canal:all_App:all"})
     public void login(ITestContext context, Method method) 
     throws Exception {
-        //Recopilación de parámetros
-        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
-        InputDataTestMaker inputData = tMakerCtx.getInputData();
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());

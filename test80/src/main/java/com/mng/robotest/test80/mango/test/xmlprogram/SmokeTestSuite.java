@@ -1,21 +1,22 @@
 package com.mng.robotest.test80.mango.test.xmlprogram;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
 import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
 import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import static com.mng.robotest.test80.mango.test.xmlprogram.SuiteMakerResources.getTestRunsForBrowserStack;
+import static com.mng.robotest.test80.mango.test.xmlprogram.SuiteMakerResources.getParametersSuiteShop;
+import static com.mng.robotest.test80.mango.test.xmlprogram.SuiteMakerResources.isBrowserStack;
 
 public class SmokeTestSuite extends SuiteMaker {
 
     public SmokeTestSuite(ParamsBean params) {
     	super(params.getInputDataTestMaker());
-    	setParameters(SuiteMakerResources.getParametersSuiteShop(params));
+    	setParameters(getParametersSuiteShop(params));
     	if (!isBrowserStack(params.getBrowser())) {
 	    	TestRunMaker testRun = TestRunMaker.getNew(params.getSuiteName(), getClasses());
 	    	addTestRun(testRun);
@@ -29,28 +30,23 @@ public class SmokeTestSuite extends SuiteMaker {
     }
 
     private static List<String> getClasses() {
-        List<String> listClasses = new ArrayList<>();
-        listClasses.add("com.mng.robotest.test80.mango.test.appshop.Otras");
-        listClasses.add("com.mng.robotest.test80.mango.test.appshop.SEO");
-        listClasses.add("com.mng.robotest.test80.mango.test.appshop.IniciarSesion");
-        listClasses.add("com.mng.robotest.test80.mango.test.appshop.Bolsa");
-        listClasses.add("com.mng.robotest.test80.mango.test.appshop.FichaProducto");
-        listClasses.add("com.mng.robotest.test80.mango.test.appshop.Ayuda");
-        listClasses.add("com.mng.robotest.test80.mango.test.appshop.Buscador");
-        listClasses.add("com.mng.robotest.test80.mango.test.appshop.Footer");
-        listClasses.add("com.mng.robotest.test80.mango.test.appshop.Registro");
-        listClasses.add("com.mng.robotest.test80.mango.test.appshop.PaisIdioma");
-        listClasses.add("com.mng.robotest.test80.mango.test.appshop.GaleriaProducto");
-        listClasses.add("com.mng.robotest.test80.mango.test.appshop.Compra");
-        listClasses.add("com.mng.robotest.test80.mango.test.factoryes.ListPagosEspana");
-        listClasses.add("com.mng.robotest.test80.mango.test.appshop.MiCuenta");
-        listClasses.add("com.mng.robotest.test80.mango.test.appshop.Favoritos");
-        listClasses.add("com.mng.robotest.test80.mango.test.appshop.Reembolsos");
-        listClasses.add("com.mng.robotest.test80.mango.test.appshop.Loyalty");
-        return listClasses;
-    }
-    
-    private boolean isBrowserStack(String browser) {
-    	return (TypeWebDriver.valueOf(browser)==TypeWebDriver.browserstack);
+    	return Arrays.asList(
+	        "com.mng.robotest.test80.mango.test.appshop.Otras",
+	        "com.mng.robotest.test80.mango.test.appshop.SEO",
+	        "com.mng.robotest.test80.mango.test.appshop.IniciarSesion",
+	        "com.mng.robotest.test80.mango.test.appshop.Bolsa",
+	        "com.mng.robotest.test80.mango.test.appshop.FichaProducto",
+	        "com.mng.robotest.test80.mango.test.appshop.Ayuda",
+	        "com.mng.robotest.test80.mango.test.appshop.Buscador",
+	        "com.mng.robotest.test80.mango.test.appshop.Footer",
+	        "com.mng.robotest.test80.mango.test.appshop.Registro",
+	        "com.mng.robotest.test80.mango.test.appshop.PaisIdioma",
+	        "com.mng.robotest.test80.mango.test.appshop.GaleriaProducto",
+	        "com.mng.robotest.test80.mango.test.appshop.Compra",
+	        "com.mng.robotest.test80.mango.test.factoryes.ListPagosEspana",
+	        "com.mng.robotest.test80.mango.test.appshop.MiCuenta",
+	        "com.mng.robotest.test80.mango.test.appshop.Favoritos",
+	        "com.mng.robotest.test80.mango.test.appshop.Reembolsos",
+	        "com.mng.robotest.test80.mango.test.appshop.Loyalty");
     }
 }

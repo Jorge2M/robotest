@@ -54,6 +54,11 @@ public class TestMakerContext {
     	return (suiteXML.getTestMakerContext());
 	}
 	
+	public static InputDataTestMaker getInputData(ITestContext ctxTng) {
+		TestMakerContext tmContext = getTestMakerContext(ctxTng);
+		return tmContext.getInputData();
+	}
+	
 	public static TestRunTestMaker getTestRun(ITestContext ctxTng) {
 		return ((TestRunTestMaker)ctxTng.getCurrentXmlTest());
 	}

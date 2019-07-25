@@ -311,12 +311,12 @@ public class Test80mng {
                 smokeTest.run();         
                 break;
             case SmokeManto:
-//                SmokeMantoXML smokeManto = new SmokeMantoXML();
-//                smokeManto.testRunner(params);            
+                SmokeMantoSuite smokeManto = new SmokeMantoSuite(params);
+                smokeManto.run();        
                 break;                
             case PagosPaises:
-//                PagosPaisesXML pagosPaises = new PagosPaisesXML();
-//                pagosPaises.testRunner(params);            
+                PagosPaisesSuite pagosPaises = new PagosPaisesSuite(params);
+                pagosPaises.run();            
                 break;              
             case ValesPaises:
 //                ValesPaisesXML valesPaises = new ValesPaisesXML();

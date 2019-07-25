@@ -11,7 +11,6 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
-import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
@@ -47,16 +46,13 @@ public class Otras extends GestorWebDriver {
 	
     @BeforeMethod (groups={"Otras", "Canal:all_App:all"})
     public void login(ITestContext context, Method method) throws Exception {
-    	
-        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
-        InputDataTestMaker inputData = tMakerCtx.getInputData();
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());
         dCtxSh.urlAcceso = inputData.getUrlBase();
         
         Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), "", dCtxSh, context, method);
-        
         if (this.españa==null) {
             Integer codEspanya = Integer.valueOf(1);
             Integer codFrancia = Integer.valueOf(11);

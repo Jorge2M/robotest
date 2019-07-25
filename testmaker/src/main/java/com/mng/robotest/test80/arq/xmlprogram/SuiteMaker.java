@@ -57,6 +57,14 @@ public abstract class SuiteMaker {
     	this.parameters = parameters;
     }
     
+    protected void addParameters(Map<String,String> parameters) {
+    	if (parameters==null) {
+    		setParameters(parameters);
+    	} else {
+    		parameters.putAll(parameters);
+    	}
+    }
+    
     protected void addTestRun(TestRunMaker testRun) {
     	listTestRuns.add(testRun);
     }

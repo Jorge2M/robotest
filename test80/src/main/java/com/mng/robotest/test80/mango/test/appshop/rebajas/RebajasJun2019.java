@@ -62,9 +62,7 @@ public class RebajasJun2019 extends GestorWebDriver /*Funcionalidades genéricas
 	  
     @BeforeMethod (groups={"RebajasDic2019", "Canal:desktop_App:shop", "SupportsFactoryCountrys"})
     public void login(ITestContext context, Method method) throws Exception {
-        //Recopilación de parámetros
-        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
-        InputDataTestMaker inputData = tMakerCtx.getInputData();
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());

@@ -7,14 +7,12 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
-import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
@@ -51,10 +49,9 @@ public class Manto extends GestorWebDriver {
 
 	@BeforeMethod(groups={"Manto", "Canal:desktop_App:all", "SupportsFactoryCountrys"})
 	public void login(ITestContext ctx, Method method) throws Exception {
-		TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(ctx);
-        InputDataTestMaker inputData = tMakerCtx.getInputData();
+		InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(ctx);
 		this.dMantoAcc = new DataMantoAccess();
-		this.dMantoAcc.urlManto = tMakerCtx.getInputData().getUrlBase();
+		this.dMantoAcc.urlManto = inputData.getUrlBase();
 		this.dMantoAcc.userManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramUsrmanto);
 		this.dMantoAcc.passManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramPasmanto);
 		this.dMantoAcc.appE = AppEcom.shop;

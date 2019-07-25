@@ -62,9 +62,7 @@ public class MiCuenta extends GestorWebDriver {
       
     @BeforeMethod(groups={"Micuenta", "Canal:all_App:all", "SupportsFactoryCountrys"})
     public void login(ITestContext context, Method method) throws Exception {
-        //Recopilación de parámetros comunes
-        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
-        InputDataTestMaker inputData = tMakerCtx.getInputData();
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());

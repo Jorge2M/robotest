@@ -21,6 +21,7 @@ import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedid
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
+import com.mng.robotest.test80.mango.test.xmlprogram.PagosPaisesSuite.VersionPagosSuite;
 
 import org.openqa.selenium.WebDriver;
 
@@ -34,16 +35,17 @@ public class PaisAplicaVale extends GestorWebDriver {
     public String index_fact;
     public Continente continente;
     public Pais paisChange;
-    public boolean isEmpl;
+    public VersionPagosSuite version;
     public int prioridad;
     String masProductos = "";
     DataCtxShop dCtxSh;
     
-    public PaisAplicaVale(DataCtxShop dCtxSh, Continente continente, Pais paisChange, boolean isEmpl, int prioridad) {
-        //Recopilación de parámetros
+    public PaisAplicaVale(VersionPagosSuite version, DataCtxShop dCtxSh, Continente continente, Pais paisChange, int prioridad) {
+        this.version = version;
         this.dCtxSh = dCtxSh;
         this.continente = continente;
         this.paisChange = paisChange;
+        this.prioridad = prioridad;
         this.index_fact = 
         	dCtxSh.pais.getNombre_pais() + " (" + dCtxSh.pais.getCodigo_pais() + ") " + " - " + 
         	dCtxSh.idioma.getCodigo().getLiteral();
@@ -52,14 +54,11 @@ public class PaisAplicaVale extends GestorWebDriver {
         		" - " + dCtxSh.vale.getCodigoVale() + 
         		"(" + dCtxSh.vale.isValid() + "_" + dCtxSh.vale.getPorcDescuento() + "perc)";
         }
-        this.isEmpl = isEmpl;
-        this.prioridad = prioridad;
     }
 	  
     @BeforeMethod (groups={"shop-movil-web"})
     public void login(ITestContext context, Method method) throws Exception {
-        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
-        InputDataTestMaker inputData = tMakerCtx.getInputData();
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
     	this.dCtxSh.urlAcceso = inputData.getUrlBase();
     	Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), this.index_fact, this.dCtxSh, context, method);    
     }
@@ -72,15 +71,12 @@ public class PaisAplicaVale extends GestorWebDriver {
     }	
 	
     @Test (groups={"Pagos", "shop-movil-web"}, alwaysRun=true, description="Compra usuario no registrado")
-    @Parameters({"validaPasarelas", "validaPagos", "validaPedidosEnManto"})
-    public void CHK001_Compra_noReg(String validaPasarelasStr, String validaPagosStr, String validaPedidosEnMantoStr) 
-    throws Exception {
+    public void CHK001_Compra() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        CHK001_Compra_noReg_Impl(validaPasarelasStr, validaPagosStr, validaPedidosEnMantoStr, dFTest);
-    }
-	
-    public void CHK001_Compra_noReg_Impl(String validaPasarelasStr, String validaPagosStr, String validaPedidosEnMantoStr, 
-    									 DataFmwkTest dFTest) throws Exception {
+    	InputDataTestMaker inputData = TestMakerContext.getTestMakerContext(dFTest.ctx).getInputData();
+    	VersionPagosSuite version = VersionPagosSuite.valueOf(inputData.getVersionSuite());
+    	,,,Pendiente parsear el FTCheckout con los datos del version (cuidado con el isEmpl!!!)
+
         this.dCtxSh.userRegistered = false;
         FlagsTestCkout fTCkout = new FlagsTestCkout();
         if (validaPasarelasStr.compareTo("true")==0) {

@@ -25,8 +25,7 @@ public class ConsolaVotf extends GestorWebDriver {
     @BeforeMethod
     @Parameters({"prodDisponible1" })
     public void login(String prodDisponible1I, ITestContext context, Method method) throws Exception {
-        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
-        InputDataTestMaker inputData = tMakerCtx.getInputData();
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom(AppEcom.votf);
         dCtxSh.setChannel(Channel.desktop);

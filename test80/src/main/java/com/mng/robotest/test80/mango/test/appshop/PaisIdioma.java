@@ -1,9 +1,7 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
 import org.testng.ITestContext;
-
 import java.lang.reflect.Method;
-
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
@@ -12,7 +10,6 @@ import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
-import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.appshop.campanas.CampanasData;
@@ -89,8 +86,7 @@ public class PaisIdioma extends GestorWebDriver /*Funcionalidades genéricas pro
 	  
     @BeforeMethod(groups={"Lineas", "Canal:all_App:all"}, alwaysRun = true)
     public void login(ITestContext context, Method method) throws Exception {
-        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
-        InputDataTestMaker inputData = tMakerCtx.getInputData();
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         if (this.dCtxSh==null) {
             //Si el acceso es normal (no es desde una @Factory) definiremos los siguientes datos específicos
             this.dCtxSh = new DataCtxShop();

@@ -2,23 +2,19 @@ package com.mng.robotest.test80.mango.test.appshop;
 
 import org.testng.ITestContext;
 import org.testng.annotations.*;
+import org.openqa.selenium.*;
+import java.lang.reflect.Method;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
-import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 
-import org.openqa.selenium.*;
-
-import java.lang.reflect.Method;
-
-
-public class PaisIdiomaCambioPais extends GestorWebDriver /*Funcionalidades gen√©ricas propias de MANGO*/ {
+public class PaisIdiomaCambioPais extends GestorWebDriver {
 
     String baseUrl;
     boolean acceptNextAlert = true;
@@ -40,8 +36,7 @@ public class PaisIdiomaCambioPais extends GestorWebDriver /*Funcionalidades gen√
 	  
     @BeforeMethod
     public void login(ITestContext context, Method method) throws Exception {
-        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
-        InputDataTestMaker inputData = tMakerCtx.getInputData();
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
     	this.dCtxSh.urlAcceso = inputData.getUrlBase();
     	Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), index_fact, dCtxSh, context, method);
     }

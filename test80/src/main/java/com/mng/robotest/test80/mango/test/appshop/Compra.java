@@ -9,7 +9,6 @@ import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.*;
 import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
-import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.Constantes;
@@ -91,10 +90,7 @@ public class Compra extends GestorWebDriver {
             this.frances = this.francia.getListIdiomas().get(0);
         }
         
-        //Recopilación de parámetros comunes
-        //DataCtxShop dCtxSh = new DataCtxShop();
-        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
-        InputDataTestMaker inputData = tMakerCtx.getInputData();
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());
@@ -265,8 +261,8 @@ public class Compra extends GestorWebDriver {
 	    
         //No permitiremos la ejecución diaria de este tipo de checkout porque implica la ejecución 
         //de un registro de usuario con el nuevo email introducido 
-        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(dFTest.ctx);
-        if (tMakerCtx.getInputData().getTypeAccess()!=TypeAccessFmwk.Bat) {
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(dFTest.ctx);
+        if (inputData.getTypeAccess()!=TypeAccessFmwk.Bat) {
             //Hasta página de Checkout
             FlagsTestCkout FTCkout = new FlagsTestCkout();
             FTCkout.validaPasarelas = false;  

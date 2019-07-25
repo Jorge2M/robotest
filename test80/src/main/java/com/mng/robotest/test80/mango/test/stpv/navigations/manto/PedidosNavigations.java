@@ -10,6 +10,7 @@ import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -42,9 +43,8 @@ public class PedidosNavigations {
     
     private static void testPedidosEnManto(DataMantoAccess dMantoAcc, CopyOnWriteArrayList<DataPedido> listPedidos, DataFmwkTest dFTest) 
     throws Exception {
-        //En caso de ejecución desde .bat no accederemos a Manto 
-    	TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(dFTest.ctx);
-        TypeAccessFmwk typeAccess = tMakerCtx.getInputData().getTypeAccess();
+    	InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(dFTest.ctx);
+        TypeAccessFmwk typeAccess = inputData.getTypeAccess();
         if (typeAccess==TypeAccessFmwk.Bat) {
             return;
         }

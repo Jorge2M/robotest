@@ -45,15 +45,12 @@ public class Buscador extends GestorWebDriver {
     @BeforeMethod(groups={"Buscador", "Canal:all_App:all"})
     public void login(ITestContext context, Method method) 
     throws Exception {
-        //Recopilación de parámetros
-        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(context);
-        InputDataTestMaker inputData = tMakerCtx.getInputData();
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());
         dCtxSh.urlAcceso = inputData.getUrlBase();
 
-        //Si no existe, obtenemos el país España
         if (this.españa==null) {
             Integer codEspanya = Integer.valueOf(1);
             List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(Arrays.asList(codEspanya)));

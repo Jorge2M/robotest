@@ -36,8 +36,7 @@ public class ListPagosEspana {
     public Object[] COM010_PagoFactory(ITestContext ctx) throws Exception {
     	this.ctx = ctx;
         ArrayList<Object> listTests = new ArrayList<>();
-        TestMakerContext tMakerCtx = TestCaseData.getTestMakerContext(ctx);
-        InputDataTestMaker inputData = tMakerCtx.getInputData();
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(ctx);
         AppEcom appE = (AppEcom)inputData.getApp();
         Channel channel = inputData.getChannel();
         try {

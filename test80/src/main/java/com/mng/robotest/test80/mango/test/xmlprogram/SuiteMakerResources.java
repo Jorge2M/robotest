@@ -12,6 +12,7 @@ import java.util.Map;
 
 import com.mng.robotest.test80.arq.listeners.CallBack;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
 import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
@@ -74,6 +75,10 @@ public class SuiteMakerResources {
         }
         
         return parametersReturn;
+    }
+    
+    public static boolean isBrowserStack(String browser) {
+    	return (TypeWebDriver.valueOf(browser)==TypeWebDriver.browserstack);
     }
     
     public static List<TestRunMaker> getTestRunsForBrowserStack(String suiteName, Channel channel, List<String> listClasses) {
