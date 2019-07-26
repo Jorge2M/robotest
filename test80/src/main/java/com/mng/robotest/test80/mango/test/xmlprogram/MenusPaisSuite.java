@@ -9,28 +9,9 @@ import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
 import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
 import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
 
-public class PaisIdiomaSuite extends SuiteMaker {
+public class MenusPaisSuite extends SuiteMaker {
 
-	public enum VersionPaisSuite {
-		V1(true, false, false),
-		V2(true, true, false),
-		V3(true, false, true);
-		
-		boolean testLineas;
-		boolean testBanners;
-		boolean testMenus;
-		private VersionPaisSuite(boolean testLineas, boolean testBanners, boolean testMenus) {
-			this.testLineas = testLineas;
-			this.testBanners = testBanners;
-			this.testMenus = testMenus;
-		}
-		
-		public boolean testLineas() {return testLineas;}
-		public boolean testBanners() {return testBanners;}
-		public boolean testMenus() {return testMenus;}
-    }
-	
-    public PaisIdiomaSuite(ParamsBean params) {
+    public MenusPaisSuite(ParamsBean params) {
     	super(params.getInputDataTestMaker());
     	setParameters(getParametersSuiteShop(params));
     	TestRunMaker testRun = TestRunMaker.getNew(params.getSuiteName(), getClasses());
@@ -40,6 +21,6 @@ public class PaisIdiomaSuite extends SuiteMaker {
     }
     
     private static List<String> getClasses() {
-    	return Arrays.asList("com.mng.robotest.test80.mango.test.factoryes.LineasBannersFactory");
+    	return Arrays.asList("com.mng.robotest.test80.mango.test.factoryes.MenusFactory");
     }
 }

@@ -12,6 +12,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Continente;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Response;
+import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 
 
 public class Utilidades {
@@ -97,6 +98,32 @@ public class Utilidades {
         return s.substring(i);
     }		
     
+    /**
+     * @param countrysToMaintain: lista de países en formato "001,030..." (puedes ser "*")
+     */
+    public static List<Pais> getListCountrysFiltered(String countrysToMaintain) throws Exception {
+        List<Integer> listCountrysToMaintain = UtilsMangoTest.getListaPaisesInt(countrysToMaintain);
+        return (getListCountrysFiltered(listCountrysToMaintain));
+    }
+    
+    public static List<Pais> getListCountrysFiltered(List<Integer> listaCodPais) throws Exception {
+    	List<Pais> listToReturn = new ArrayList<>();
+    	boolean applyFilter = true;
+    	if (listaCodPais==null || listaCodPais.size()==0) {
+    		applyFilter = false;
+    	}
+    	Response response = filtradoListaPaises(!applyFilter, listaCodPais);
+    	Iterator<Continente> itContinentes = response.getResponse().iterator();
+        while (itContinentes.hasNext()) {
+            Continente continente = itContinentes.next();
+            Iterator<Pais> itPaises = continente.getPaises().iterator();
+            while (itPaises.hasNext()) {
+            	listToReturn.add(itPaises.next());
+            }
+        }
+        
+        return listToReturn;
+    }
     
     /**
      * Función que retorna la lista de países obtenidos de un XML filtrada
@@ -106,7 +133,7 @@ public class Utilidades {
      * @return lista de países filtrada
      * @throws Exception
      */
-    public static Response filtradoListaPaises(boolean todosPaises, List<Integer> listaCodPais) throws Exception {
+    private static Response filtradoListaPaises(boolean todosPaises, List<Integer> listaCodPais) throws Exception {
         JAXBContext jaxbContext = JAXBContext.newInstance(Response.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 	
@@ -130,10 +157,7 @@ public class Utilidades {
 	
         return response;
     }
-    
-    public static Response filtradoListaPaises(List<Integer> listaCodPais) throws Exception {
-    	return (filtradoListaPaises(false, listaCodPais));
-    }
+
     
     //Obtenemos la lista de países
     public static List<Pais> getListaPaises(Iterator<Continente> itContinentes) {

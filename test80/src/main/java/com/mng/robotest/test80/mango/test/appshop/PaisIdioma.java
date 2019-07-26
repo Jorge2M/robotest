@@ -118,8 +118,9 @@ public class PaisIdioma extends GestorWebDriver {
         for (Linea linea : linesToTest) {
             if (UtilsMangoTest.validarLinea(dCtxShI.pais, linea, dCtxShI.appE)) {
                 validaLinea(linea, null/*sublinea*/, dCtxShI, dFTest);
-                for (Sublinea sublinea : linea.getListSublineas())
+                for (Sublinea sublinea : linea.getListSublineas()) {
                     validaLinea(linea, sublinea, dCtxShI, dFTest);
+                }
             }
         }
     }

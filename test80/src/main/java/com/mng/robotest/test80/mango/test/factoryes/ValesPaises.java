@@ -15,7 +15,6 @@ import com.mng.robotest.test80.mango.test.data.ValesData;
 import com.mng.robotest.test80.mango.test.data.ValesData.Campanya;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
-import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
 import com.mng.robotest.test80.mango.test.xmlprogram.ValesPaisesSuite.VersionValesSuite;
 
@@ -26,6 +25,7 @@ public class ValesPaises {
     @Factory
     @Parameters({"countrys"})
     public Object[] createInstances(String countrys, ITestContext ctx) throws Exception {
+    	List<Object> listTests = new ArrayList<>();
     	InputDataTestMaker inputData = TestMakerContext.getInputData(ctx);
     	VersionValesSuite version = VersionValesSuite.valueOf(inputData.getVersionSuite());
     	
@@ -38,32 +38,26 @@ public class ValesPaises {
         			this.listaPaisesVales.addAll(ValesData.getListVales(campanya, version.filtroCalendario()));
         		}
         	}
-        }
-
-        ArrayList<PaisAplicaVale> listTests = new ArrayList<>();
-        List<Integer> listaPaisesInt = UtilsMangoTest.getListaPaisesInt(countrys);
-        Response response = Utilidades.filtradoListaPaises(false/*todosPaises*/, listaPaisesInt);    
+        } 
         
+    	List<Pais> listCountrys = Utilidades.getListCountrysFiltered(countrys);
         int prioridad=0;
-        for (Continente continente : response.getResponse()) {
-            for (Pais pais : continente.getPaises()) {
-                IdiomaPais idioma = pais.getListIdiomas().get(0);
-                List<ValePais> listaValesPais = listValesPais(pais.getCodigo_pais());
-                for (ValePais valePais : listaValesPais) {
-                    DataCtxShop dCtxSh = new DataCtxShop((AppEcom)inputData.getApp(), Channel.desktop, pais, idioma, valePais, inputData.getUrlBase());
-                    listTests.add(new PaisAplicaVale(version, dCtxSh, prioridad));
-                    prioridad+=1;
-                                    
-                    System.out.println(
-                        "Creado Test con datos: " +
-                        "Continente=" + continente.getNombre_continente() +
-                        ",Pais=" + pais.getNombre_pais() +
-                        ",Idioma=" + idioma.getCodigo().getLiteral() +
-                        ",Vale=" + valePais.getCodigoVale() +
-                        ",Valido? " + valePais.isValid() + 
-                        ",Porcentaje Descuento=" + valePais.getPorcDescuento()
-                    );
-                }
+        for (Pais pais : listCountrys) {
+            IdiomaPais idioma = pais.getListIdiomas().get(0);
+            List<ValePais> listaValesPais = listValesPais(pais.getCodigo_pais());
+            for (ValePais valePais : listaValesPais) {
+                DataCtxShop dCtxSh = new DataCtxShop((AppEcom)inputData.getApp(), Channel.desktop, pais, idioma, valePais, inputData.getUrlBase());
+                listTests.add(new PaisAplicaVale(version, dCtxSh, prioridad));
+                prioridad+=1;
+                                
+                System.out.println(
+                    "Creado Test con datos: " +
+                    ",Pais=" + pais.getNombre_pais() +
+                    ",Idioma=" + idioma.getCodigo().getLiteral() +
+                    ",Vale=" + valePais.getCodigoVale() +
+                    ",Valido? " + valePais.isValid() + 
+                    ",Porcentaje Descuento=" + valePais.getPorcDescuento()
+                );
             }
         }
                         

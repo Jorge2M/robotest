@@ -325,14 +325,10 @@ public class Test80mng {
             case PaisIdiomaBanner:
                 PaisIdiomaSuite paisIdiomaBanner = new PaisIdiomaSuite(params);
                 paisIdiomaBanner.run();
-                break;                
-            case Campanas:
-//                CampanasXML campanas = new CampanasXML();
-//                campanas.testRunner(params);
-                break;                
+                break;                       
             case MenusPais:
-//                MenusPaisXML menusPais = new MenusPaisXML();
-//                menusPais.testRunner(params);            
+                MenusPaisSuite menusPais = new MenusPaisSuite(params);
+                menusPais.run();      
                 break;
             case MenusManto:
 //                MenusMantoFactoryXML menusManto = new MenusMantoFactoryXML();
