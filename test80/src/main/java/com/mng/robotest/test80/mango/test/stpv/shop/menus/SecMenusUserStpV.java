@@ -124,14 +124,14 @@ public class SecMenusUserStpV {
         PageMiCuentaStpV.validateIsPage(2, driver);
 	}
     
-    @Step (
-    	description="Se selecciona el menú para el cambio de país", 
-        expected="Aparece el modal para el cambio de país")
-    public void cambioPaisMobil(DataCtxShop dCtxSh) throws Exception {
-        userMenus.clickMenuAndWait(UserMenu.cambioPais);
-        ModalCambioPaisStpV.validateIsVisible(5, driver);
-        ModalCambioPaisStpV.cambioPais(dCtxSh, driver);
-    }
+//    @Step (
+//    	description="Se selecciona el menú para el cambio de país", 
+//        expected="Aparece el modal para el cambio de país")
+//    public void cambioPaisMobil(DataCtxShop dCtxSh) throws Exception {
+//        userMenus.clickMenuAndWait(UserMenu.cambioPais);
+//        ModalCambioPaisStpV.validateIsVisible(5, driver); 
+//        ModalCambioPaisStpV.cambioPais(dCtxSh, driver);
+//    }
     
     @Step (
     	description="Seleccionar el link \"Mango Likes You\"", 

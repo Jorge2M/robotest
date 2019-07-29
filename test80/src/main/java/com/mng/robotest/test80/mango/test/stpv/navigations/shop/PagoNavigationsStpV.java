@@ -39,6 +39,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1EnvioChe
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion.DataDirType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
+import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
@@ -273,7 +274,7 @@ public class PagoNavigationsStpV {
         UtilsMangoTest.goToPaginaInicio(dCtxSh.channel, dCtxSh.appE, driver);
         
         //(en Chrome, cuando existe paralelización en ocasiones se pierden las cookies cuando se completa un pago con pasarela externa)
-        AccesoNavigations.cambioPaisFromHomeIfNeeded(dCtxSh, driver);
+        actionsWhenSessionLoss(dCtxSh, driver);
         
         SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, driver);
         dCtxPago.getFTCkout().testCodPromocional = false;
@@ -282,6 +283,11 @@ public class PagoNavigationsStpV {
         	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, driver);
         }
     }    
+    
+    private static void actionsWhenSessionLoss(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    	ModalCambioPais.closeModalIfVisible(driver);
+        AccesoNavigations.cambioPaisFromHomeIfNeeded(dCtxSh, driver);
+    }
     
     public static void testInputCodPromoEmpl(DataCtxShop dCtxSh, DataBag dataBag, WebDriver driver) throws Exception {
         PageCheckoutWrapperStpV.inputTarjetaEmplEnCodPromo(dCtxSh.pais, dCtxSh.channel, driver);

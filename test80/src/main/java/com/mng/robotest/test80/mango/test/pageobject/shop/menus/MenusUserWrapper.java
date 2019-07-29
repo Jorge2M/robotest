@@ -51,8 +51,7 @@ public class MenusUserWrapper {
 		misCompras(Arrays.asList(shop)),
 		pedidos(Arrays.asList(outlet)),
 		mangoLikesYou(Arrays.asList(shop)),
-		ayuda(Arrays.asList(shop, outlet, votf)),
-		cambioPais(Arrays.asList(shop, outlet, votf));
+		ayuda(Arrays.asList(shop, outlet, votf));
 
 		List<AppEcom> apps;
 		private UserMenu(List<AppEcom> apps) {
