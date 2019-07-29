@@ -21,7 +21,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.favoritos.PageFavoritosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.loyalty.PageHomeLikesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMiCuentaStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalCambioPaisStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV;
 
 /**
