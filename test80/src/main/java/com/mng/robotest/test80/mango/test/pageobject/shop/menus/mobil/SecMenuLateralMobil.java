@@ -231,7 +231,7 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
         String xpath2oLevelMenuLink = getXPathLinksMenus(menu1rstLevel.getSublinea());
         switch (typeLocator) {
         case dataGaLabelPortion:
-            return xpath2oLevelMenuLink.replace("@href", "@data-label[contains(.,\"" + menu1rstLevel.getDataGaLabelMenuSuperiorDesktop().toLowerCase() + "\")]");            
+            return xpath2oLevelMenuLink.replace("@href", "@data-label[contains(.,'" + menu1rstLevel.getDataGaLabelMenuSuperiorDesktop().toLowerCase() + "')]");            
         case hrefPortion:
         default:
             return xpath2oLevelMenuLink.replace("@href", "@href[contains(.,'" + menu1rstLevel.getDataGaLabelMenuSuperiorDesktop().toLowerCase() + "')]");
@@ -375,8 +375,9 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
         clickAndWaitLoad(driver, By.xpath(xpathMenu), TypeOfClick.javascript);
     }
     
-    public String getLiteralMenuVisible(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel) {
+    public String getLiteralMenuVisible(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel) throws Exception {
         By byMenu = By.xpath(getXPathMenuByTypeLocator(typeLocator, menu1rstLevel));
+    	isElementVisibleUntil(driver, byMenu, 1);
         moveToElement(byMenu, driver);
         if (isElementVisible(driver, byMenu)) {
             return driver.findElement(byMenu).getAttribute("innerHTML");
