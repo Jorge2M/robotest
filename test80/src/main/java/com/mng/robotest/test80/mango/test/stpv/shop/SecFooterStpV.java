@@ -216,12 +216,7 @@ public class SecFooterStpV {
         expected="Aparece el modal para el cambio de país")
      public static void cambioPais(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
          SecFooter.clickLinkCambioPais(driver, dCtxSh.appE);
-         
-         //Validaciones. 
-         int maxSecondsWait = 5;
-         ModalCambioPaisStpV.validateIsVisible(maxSecondsWait, driver);
-         
-         //Step.
+         ModalCambioPaisStpV.validateIsVisible(5, driver);
          ModalCambioPaisStpV.cambioPais(dCtxSh, driver);
      }
      

@@ -22,7 +22,7 @@ import com.mng.robotest.test80.arq.utils.webdriver.plugins.chrome.PluginChrome.t
 public class ChromedriverMaker implements WebdriverMaker {
 	
     //Nota: si se modifica la versión sería conveniente regenerar la AMI correspondiente al Robotest en Cloud
-	final static String ChromeDriverVersion = "74.0.3729.6";
+	final static String ChromeDriverVersion = "75.0.3770.140";
 	final TypeWebDriver typeWebDriver;
 	boolean isHeadless;
 	ChromeOptions options = new ChromeOptions();

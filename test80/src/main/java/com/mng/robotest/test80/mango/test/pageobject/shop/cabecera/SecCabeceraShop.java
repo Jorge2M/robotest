@@ -102,12 +102,18 @@ public class SecCabeceraShop extends SecCabecera {
     }
     
 	public void hoverIconForShowUserMenuDesktop() throws Exception {
-		if (!modalUserSesionShopDesktop.isVisible()) { 
+		int i=0;
+		while (!modalUserSesionShopDesktop.isVisible() && i<3) {
 			if (isIconoInState(IconoCabeceraShop.iniciarsesion, StateElem.Visible)) {
 				hoverIcono(IconoCabeceraShop.iniciarsesion); 
 			} else {
 				hoverIcono(IconoCabeceraShop.micuenta);
 			}
+			if (modalUserSesionShopDesktop.isVisible()) {
+				break;
+			}
+			Thread.sleep(1000);
+			i+=1;
 		}
 	}
 }
