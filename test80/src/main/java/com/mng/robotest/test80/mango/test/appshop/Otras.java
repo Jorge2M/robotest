@@ -15,6 +15,7 @@ import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
@@ -60,7 +61,8 @@ public class Otras extends GestorWebDriver {
             Integer codIrlanda = Integer.valueOf(7);
             Integer codUSA = Integer.valueOf(400);
             Integer codJapon = Integer.valueOf(732);
-            List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(Arrays.asList(codEspanya, codFrancia, codSuecia, codIrlanda, codUSA, codJapon)));
+            List<Pais> listaPaises = Utilidades.getListCountrysFiltered(
+            	new ArrayList<>(Arrays.asList(codEspanya, codFrancia, codSuecia, codIrlanda, codUSA, codJapon)));
             this.españa  = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
             this.francia = UtilsMangoTest.getPaisFromCodigo("011", listaPaises);
             this.suecia  = UtilsMangoTest.getPaisFromCodigo("030", listaPaises);

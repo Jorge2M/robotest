@@ -14,6 +14,7 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.TypeContentDesk;
@@ -30,8 +31,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusDesktopStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
+import com.mng.robotest.test80.mango.test.suites.PaisIdiomaSuite.VersionPaisSuite;
 import com.mng.robotest.test80.mango.test.utils.LevelPais;
-import com.mng.robotest.test80.mango.test.xmlprogram.PaisIdiomaSuite.VersionPaisSuite;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,7 +81,7 @@ public class PaisIdioma extends GestorWebDriver {
             //Si el acceso es normal (no es desde una @Factory) definiremos los siguientes datos específicos
             this.dCtxSh = new DataCtxShop();
             Integer codEspanya = Integer.valueOf(1);
-            List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(Arrays.asList(codEspanya)));
+            List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
             Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
             IdiomaPais castellano = españa.getListIdiomas().get(0);
             this.dCtxSh.pais = españa;

@@ -1,8 +1,8 @@
-package com.mng.robotest.test80.mango.test.xmlprogram;
+package com.mng.robotest.test80.mango.test.suites;
 
-import static com.mng.robotest.test80.mango.test.xmlprogram.SuiteMakerResources.getParametersSuiteShop;
-import static com.mng.robotest.test80.mango.test.xmlprogram.SuiteMakerResources.getTestRunsForBrowserStack;
-import static com.mng.robotest.test80.mango.test.xmlprogram.SuiteMakerResources.isBrowserStack;
+import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getParametersSuiteShop;
+import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getTestRunsForBrowserStack;
+import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.isBrowserStack;
 
 import java.util.Arrays;
 import java.util.List;

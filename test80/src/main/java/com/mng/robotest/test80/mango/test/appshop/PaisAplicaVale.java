@@ -19,8 +19,8 @@ import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
-import com.mng.robotest.test80.mango.test.xmlprogram.PagosPaisesSuite.VersionPagosSuite;
-import com.mng.robotest.test80.mango.test.xmlprogram.ValesPaisesSuite.VersionValesSuite;
+import com.mng.robotest.test80.mango.test.suites.PagosPaisesSuite.VersionPagosSuite;
+import com.mng.robotest.test80.mango.test.suites.ValesPaisesSuite.VersionValesSuite;
 
 public class PaisAplicaVale extends GestorWebDriver {
 

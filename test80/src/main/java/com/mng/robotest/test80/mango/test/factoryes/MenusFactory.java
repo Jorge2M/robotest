@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.appshop.PaisIdioma;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
-import com.mng.robotest.test80.mango.test.xmlprogram.PaisIdiomaSuite.VersionPaisSuite;
+import com.mng.robotest.test80.mango.test.suites.PaisIdiomaSuite.VersionPaisSuite;
 
 public class MenusFactory {
 	

@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.data.ValesData.Campanya;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
-import com.mng.robotest.test80.mango.test.xmlprogram.ValesPaisesSuite.VersionValesSuite;
+import com.mng.robotest.test80.mango.test.suites.ValesPaisesSuite.VersionValesSuite;
 
 public class ValesPaises {
 

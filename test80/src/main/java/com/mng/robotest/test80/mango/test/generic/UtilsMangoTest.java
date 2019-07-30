@@ -224,13 +224,6 @@ public class UtilsMangoTest {
 
         return randomNum;
     }
-
-    /**
-     * Obtener la lista de países necesarias para las pruebas
-     */
-    public static List<Pais> listaPaisesXML(final List<Integer> listaPaisesFilter) throws Exception {
-        return (listaPaisesXML(listaPaisesFilter));
-    }
     
     public static TreeSet<String> getListPagoFilterNames(List<Integer> listCountrysFilter, Channel channel, AppEcom appE, boolean isEmpl) 
     throws Exception {

@@ -8,6 +8,8 @@ import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appmanto.Menus;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageMenusManto;
@@ -20,25 +22,22 @@ public class ListMenusManto {
 	
     @SuppressWarnings("unused")
     @Factory
-    @Parameters({"urlBase", "AppEcom"})
-    public Object[] createInstances(String urlBaseManto, String appEcomI, ITestContext context)
+    public Object[] createInstances(ITestContext ctx)
     throws Exception {
-    	int prioridad=0;
+    	InputDataTestMaker inputData = TestMakerContext.getInputData(ctx);
         ArrayList<Menus> listTests = new ArrayList<Menus>();
-        AppEcom appEcom = AppEcom.valueOf(appEcomI);
+        AppEcom appEcom = (AppEcom)inputData.getApp();
         try {
-            //Obtenemos la lista de Menús
-            ArrayList<String> listCabeceraMenus = getListCabecerasMenus(urlBaseManto, context);
+            ArrayList<String> listCabeceraMenus = getListCabecerasMenus(inputData.getUrlBase(), ctx);
+        	int prioridad=0;
             for (int i=0; i<listCabeceraMenus.size(); i++) {
-            	System.out.println("Creado Test con datos: URL=" + urlBaseManto + ", cabeceraMenuName=" + listCabeceraMenus.get(i));
-            	//if (listCabeceraMenus.get(i).compareTo("Atencion al Cliente")==0) {
+            	System.out.println("Creado Test con datos: URL=" + inputData.getUrlBase() + ", cabeceraMenuName=" + listCabeceraMenus.get(i));
             	if (i < listCabeceraMenus.size()-1) {
             		listTests.add(new Menus(listCabeceraMenus.get(i), listCabeceraMenus.get(i+1), prioridad));
             	} else {
             		listTests.add(new Menus(listCabeceraMenus.get(i), null, prioridad));
             	}
                 prioridad+=1;
-            	//}
             }
 	}
 	catch (Exception e) {

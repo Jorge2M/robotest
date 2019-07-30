@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.arq.xmlprogram;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,27 +20,33 @@ public class TestRunMaker {
 
 	private final String id;
     private final List<XmlClass> listXMLclasses;
-    private final XmlDependencies depGroupsXML;
+    //private final XmlDependencies depGroupsXML;
+    
+    private List<String> groups = new ArrayList<>();
+    private Map<String,String> dependencyGroups = new HashMap<>();
 	private BrowserStackDesktop browserStackDesktop = null;
 	private BrowserStackMobil browserStackMobil = null;
     
-    private TestRunMaker(String id, List<String> listClases, Map<String,String> dependencies) {
+    private TestRunMaker(String id, List<String> listClases) {
     	this.id = id;
     	this.listXMLclasses = getClassesWithTests(listClases);
-    	this.depGroupsXML = getDependencyGroups(dependencies);
-    }
-    
-    public static TestRunMaker getNew(String id, List<String> listClases, Map<String,String> dependencies) {
-    	return (new TestRunMaker(id, listClases, dependencies));
     }
     
     public static TestRunMaker getNew(String id, List<String> listClases) {
-    	return (new TestRunMaker(id, listClases, null));
+    	return (new TestRunMaker(id, listClases));
     }
 
     public void includeMethodsInClass(String pathClass, List<String> methodsToInclude) {
     	XmlClass xmlClass = getXmlClass(pathClass);
     	includeMethodsInClass(xmlClass, methodsToInclude);
+    }
+    
+    public void addGroups(List<String> groups) {
+    	this.groups.addAll(groups);
+    }
+    
+    public void addDependencyGroups(Map<String,String> dependencyGroups) {
+    	this.dependencyGroups.putAll(dependencyGroups);
     }
     
 	public void setBrowserStackDesktop(BrowserStackDesktop browserStackDesktop) {
@@ -65,14 +72,17 @@ public class TestRunMaker {
     private XmlGroups createGroups(FilterTestsSuiteXML filterSuiteXML) {
         XmlGroups groups = new XmlGroups();
         groups.setRun(createRun(filterSuiteXML));
-        groups.setXmlDependencies(depGroupsXML);
+        groups.setXmlDependencies(getDependencyGroups());
         return groups;
     }   
     
     private XmlRun createRun(FilterTestsSuiteXML filterSuiteXML) {
         XmlRun run = new XmlRun();
-        for (String group : filterSuiteXML.getListChanelAndAppGroups()) {
-            run.onInclude(group);
+        for (String group : filterSuiteXML.getGroupsToExclude()) {
+            run.onExclude(group);
+        }
+        for (String group : groups) {
+        	run.onInclude(group);
         }
         return run;
     }
@@ -85,10 +95,10 @@ public class TestRunMaker {
     	return listXMLclasses;
     }
     
-    private XmlDependencies getDependencyGroups(Map<String,String> dependencies) {
+    private XmlDependencies getDependencyGroups() {
     	XmlDependencies depGroupsXML = new XmlDependencies();
-    	if (dependencies!=null) {
-	    	for (Map.Entry<String,String> dependency : dependencies.entrySet()) {
+    	if (dependencyGroups!=null) {
+	    	for (Map.Entry<String,String> dependency : dependencyGroups.entrySet()) {
 	    		depGroupsXML.onGroup(dependency.getKey(), dependency.getValue());
 	    	}
     	}

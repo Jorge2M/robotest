@@ -16,7 +16,6 @@ public enum Suites implements SuiteTest {
     ListFavoritos(10),
     ListMiCuenta(10),
     RegistrosPaises(10),
-    LoyaltyMasivos(10),
     RebajasPaises(10);
     
     private final int maxSecondsToWaitStart;
@@ -32,6 +31,6 @@ public enum Suites implements SuiteTest {
     
     @Override
     public Suites getValueOf(String suiteName) {
-    	return this.valueOf(suiteName);
+    	return valueOf(suiteName);
     }
 }

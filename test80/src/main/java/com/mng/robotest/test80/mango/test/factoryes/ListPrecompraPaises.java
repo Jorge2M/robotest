@@ -12,8 +12,8 @@ import com.mng.robotest.test80.mango.test.appshop.PaisAplicaVale;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
+import com.mng.robotest.test80.mango.test.suites.PagosPaisesSuite.VersionPagosSuite;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
-import com.mng.robotest.test80.mango.test.xmlprogram.PagosPaisesSuite.VersionPagosSuite;
 
 public class ListPrecompraPaises {
 	

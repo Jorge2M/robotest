@@ -23,7 +23,7 @@ import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Suites;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import com.mng.robotest.test80.mango.test.xmlprogram.*;
+import com.mng.robotest.test80.mango.test.suites.*;
 
 public class Test80mng { 
 
@@ -331,31 +331,26 @@ public class Test80mng {
                 menusPais.run();      
                 break;
             case MenusManto:
-//                MenusMantoFactoryXML menusManto = new MenusMantoFactoryXML();
-//                menusManto.testRunner(params);            
+                MenusMantoSuite menusManto = new MenusMantoSuite(params);
+                menusManto.run();            
                 break;                 
             case Nodos:
-//                NodosFactoryXML nodosFactory = new NodosFactoryXML();
-//                nodosFactory.testRunner(params);            
+                NodosSuite nodosFactory = new NodosSuite(params);
+                nodosFactory.run();            
                 break;                
             case ConsolaVotf:
-//                ConsolaVotfXML consolaVotf = new ConsolaVotfXML();
-//                consolaVotf.testRunner(params);
+                ConsolaVotfSuite consolaVotf = new ConsolaVotfSuite(params);
+                consolaVotf.run();
                 break;                
             case ListFavoritos:
             case ListMiCuenta:
-//                GenericFactoryXML genericFactory = new GenericFactoryXML();
-//                genericFactory.testRunner(params);
+                GenericFactorySuite genericFactory = new GenericFactorySuite(params);
+                genericFactory.run();
                 break;                
             case RegistrosPaises:
-//                RegistrosFactoryXML listRegistros = new RegistrosFactoryXML();
-//                listRegistros.testRunner(params);
-                break;     
-            //TODO temporal para pruebas de Loyalty
-            case LoyaltyMasivos:
-//            	LoyaltyMasivosXML listLoyaltyTcases = new LoyaltyMasivosXML();
-//            	listLoyaltyTcases.testRunner(params);
-                break;       
+                RegistrosSuite listRegistros = new RegistrosSuite(params);
+                listRegistros.run();
+                break;         
             case RebajasPaises:
 //                RebajasFactoryXML listRebajas = new RebajasFactoryXML();
 //                listRebajas.testRunner(params);

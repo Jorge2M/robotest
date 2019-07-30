@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.datastored;
 
-import com.mng.robotest.test80.mango.test.xmlprogram.PagosPaisesSuite.VersionPagosSuite;
-import com.mng.robotest.test80.mango.test.xmlprogram.ValesPaisesSuite.VersionValesSuite;
+import com.mng.robotest.test80.mango.test.suites.PagosPaisesSuite.VersionPagosSuite;
+import com.mng.robotest.test80.mango.test.suites.ValesPaisesSuite.VersionValesSuite;
 
 public class FlagsTestCkout implements Cloneable {
     public boolean validaPasarelas = false;

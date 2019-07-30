@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
-import com.mng.robotest.test80.mango.test.xmlprogram.PaisIdiomaSuite.VersionPaisSuite;
+import com.mng.robotest.test80.mango.test.suites.PaisIdiomaSuite.VersionPaisSuite;
 
 public class LineasBannersFactory {
 	

@@ -6,18 +6,18 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
-import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
@@ -26,7 +26,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.identificacion.PageIdentificacionStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.identificacion.PageRecuperaPasswdStpV;
 
-import org.openqa.selenium.WebDriver;
 
 
 public class IniciarSesion extends GestorWebDriver {
@@ -43,7 +42,7 @@ public class IniciarSesion extends GestorWebDriver {
         dCtxSh.urlAcceso = inputData.getUrlBase();
         
         Integer codEspanya = Integer.valueOf(1);
-        List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(Arrays.asList(codEspanya)));
+        List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
         dCtxSh.pais = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
         

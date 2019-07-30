@@ -16,6 +16,7 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.NodoStatus;
+import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -71,7 +72,7 @@ public class TestNodos extends GestorWebDriver {
 		this.testLinksPie = testLinksPie;
     }	  
 	  
-    @BeforeMethod
+    @BeforeMethod(groups={"Canal:desktop_App:all"})
     public void login(ITestContext context, Method method) throws Exception {
         InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         dCtxSh = new DataCtxShop();
@@ -81,7 +82,7 @@ public class TestNodos extends GestorWebDriver {
 
         if (this.españa==null) {
             Integer codEspanya = Integer.valueOf(1);
-            List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(Arrays.asList(codEspanya)));
+            List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
             this.españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
             this.castellano = this.españa.getListIdiomas().get(0);
         }
@@ -93,63 +94,44 @@ public class TestNodos extends GestorWebDriver {
     }
 	
     @SuppressWarnings("unused")
-    @AfterMethod (alwaysRun = true)
+    @AfterMethod (groups={"Canal:desktop_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
         WebDriver driver = TestCaseData.getWebDriver();
         super.quitWebDriver(driver, context);
     }	
 	
-    @Test (description="Verificar funcionamiento general en un nodo. Validar status, acceso, click banner, navegación por las líneas...")
+    @Test (
+    	groups={"Canal:desktop_App:all"},
+    	description="Verificar funcionamiento general en un nodo. Validar status, acceso, click banner, navegación por las líneas...")
     public void NOD001_TestNodo() throws Throwable {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         AppEcom appE = this.nodo.getAppEcom();
-        
-        //Step+Validation. Acceso y testeo del estado del nodo (+ almacenamiento de datos en el gestor JSON)
         AccesoStpV.testNodoState(this.nodo, dFTest.driver);
-		
-        //Sólo validamos el nodo si se encuentra en estado ok
         if (this.nodo.getStatusJSON().isStatusOk()) {
-
-            //Buscamos un nodo anterior similar al actual con el que comparar el resultado del Status
             NodoStatus nodoAnt = this.findNodoForCompareStatus(this.listaNodos, this.nodo);
-            
-            //Si hemos encontrado un nodo con el que comparar, pues eso, comparamos
-            //Validaciones comparativa del status de los 2 nodos (actual y anteior) concretos
             if (nodoAnt!=null) {
                 AccesoStpV.validaCompareStatusNodos(this.nodo, nodoAnt);
             }
            
-            //Step+Validacs. Accedemos a España con idioma Español
             PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, true/*execValidacs*/, dFTest.driver);
-            
             SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
             if (appE==AppEcom.shop) {
             	secMenusStpV.seleccionLinea(LineaType.nuevo, null, dCtxSh);
-
-                //Obtenemos y almacenamos los artículos de la galería Nuevo
                 PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, dCtxSh.appE, dFTest.driver);
                 NombreYRefList listArticlesNuevoAct = pageGaleria.getListaNombreYRefArticulos();
                 this.nodo.setArticlesNuevo(listArticlesNuevoAct);
-                
-                //Validamos que los artículos de la galería son los mismos (y están igualmente ordenados) que en el nodo anterior
                 PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
                 if (nodoAnt!=null && nodoAnt.getArticlesNuevo()!=null) {
                     pageGaleriaStpV.validaNombresYRefEnOrden(nodoAnt, this.nodo);
                 }
                 
-                //Validaciones. En shop validamos que exista un porcentaje mínimo de panorámicas
                 pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
             }
 			
-            //Step. Seleccionar la línea She
             SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, dFTest.driver);
             secMenusDesktopStpV.seleccionLinea(LineaType.she);
-			
-            //Step. Contamos / Validamos / almacenamos los menús de She (comprobamos que son iguales que en anteriores nodos)
             secMenusDesktopStpV.countSaveMenusEntorno(LineaType.she, null, nodo.getIp(), autAddr);
-			
-            //Step. Seleccionamos / Validamos el 1er Banner
             int maxBannersToLoad = 1;
             SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, dFTest.driver);
             secBannersStpV.testPageBanners(dCtxSh, 1);

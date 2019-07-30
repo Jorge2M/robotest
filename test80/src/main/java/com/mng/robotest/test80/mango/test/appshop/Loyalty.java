@@ -28,6 +28,7 @@ import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
+import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -64,7 +65,7 @@ public class Loyalty extends GestorWebDriver {
         dCtxSh.urlAcceso = inputData.getUrlBase();
        
         Integer codEspanya = Integer.valueOf(1);
-        List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(Arrays.asList(codEspanya)));
+        List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
         dCtxSh.pais = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
         

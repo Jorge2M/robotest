@@ -19,9 +19,7 @@ import org.testng.xml.XmlGroups;
 import org.testng.xml.XmlInclude;
 import org.testng.xml.XmlTest;
 
-import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.xmlprogram.TestRunTestMaker;
 
 public class FilterTestsSuiteXML {
@@ -29,9 +27,12 @@ public class FilterTestsSuiteXML {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
     
     private final DataFilterTCases dFilter;
+    private final List<String> groupsToExclude;
 
     private FilterTestsSuiteXML(DataFilterTCases dFilter) {
     	this.dFilter = dFilter;
+        GroupsChannelApps groupChannel = GroupsChannelApps.getNew(dFilter.getChannel(), dFilter.getAppE());
+        this.groupsToExclude = groupChannel.getGroupsExcluded();
     }
     
     public static FilterTestsSuiteXML getNew(DataFilterTCases dFilter) {
@@ -40,6 +41,10 @@ public class FilterTestsSuiteXML {
     
     public DataFilterTCases dFilter() {
     	return this.dFilter;
+    }
+    
+    public List<String> getGroupsToExclude() {
+    	return this.groupsToExclude;
     }
     
     /**
@@ -62,9 +67,8 @@ public class FilterTestsSuiteXML {
         List<TestMethod> listTestToReturn = new ArrayList<>();
         List<TestMethod> listTestsInXMLClasses = getTestsCasesInXMLClasses(testRun);
         List<String> groupsFromTestRun = testRun.getIncludedGroups();
-        List<String> groupsAccordingChannelAndApp = getListChanelAndAppGroups();
         for (TestMethod tmethod : listTestsInXMLClasses) {
-        	if (groupsContainsAnyGroup(tmethod.getAnnotationTest().groups(), groupsAccordingChannelAndApp)) {
+        	if (!groupsContainsAnyGroup(tmethod.getAnnotationTest().groups(), groupsToExclude)) {
         		if (groupsContainsAnyGroup(tmethod.getAnnotationTest().groups(), groupsFromTestRun)) {
         			listTestToReturn.add(tmethod);
         		}
@@ -74,16 +78,16 @@ public class FilterTestsSuiteXML {
         return listTestToReturn;
     }
     
-    public List<String> getListChanelAndAppGroups() {
-        ArrayList<String> listOfGroups = new ArrayList<>();
-        Channel channel = dFilter.getChannel();
-        AppTest app = dFilter.getAppE();
-        listOfGroups.add("Canal:all_App:all");
-        listOfGroups.add("Canal:all_App:" + app);
-        listOfGroups.add("Canal:" + channel + "_App:all");
-        listOfGroups.add("Canal:" + channel + "_App:" + app);
-        return listOfGroups;
-    }
+//    public List<String> getListGroupsToInclude() {
+//        ArrayList<String> listOfGroups = new ArrayList<>();
+//        Channel channel = dFilter.getChannel();
+//        AppTest app = dFilter.getAppE();
+//        listOfGroups.add("Canal:all_App:all");
+//        listOfGroups.add("Canal:all_App:" + app);
+//        listOfGroups.add("Canal:" + channel + "_App:all");
+//        listOfGroups.add("Canal:" + channel + "_App:" + app);
+//        return listOfGroups;
+//    }
     
     public boolean methodInTestCaseList(String methodName, List<String> listTestCases) {
         for (String testCase : listTestCases) {

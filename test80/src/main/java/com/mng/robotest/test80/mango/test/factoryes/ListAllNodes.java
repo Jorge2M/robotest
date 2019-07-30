@@ -11,19 +11,21 @@ import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.T
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.TestNodos;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorPage;
 
 public class ListAllNodes {
 	
     @SuppressWarnings("unused")
     @Factory
-    @Parameters({"urlBase", "url-status", "url-errorpage", "AppEcom", "testLinksPie"})
-    public Object[] createInstances(String urlBase, String urlStatus, String urlErrorpage, String appEcomI, String testLinksPie, ITestContext context) 
+    @Parameters({"url-status", "url-errorpage", "testLinksPie"})
+    public Object[] createInstances(String urlStatus, String urlErrorpage, String testLinksPie, ITestContext ctx) 
     throws Exception {
         ArrayList<TestNodos> listTests = new ArrayList<TestNodos>();
-        AppEcom appEcom = AppEcom.valueOf(appEcomI);
+    	InputDataTestMaker inputData = TestMakerContext.getInputData(ctx);
+        AppEcom appEcom = (AppEcom)inputData.getApp();
         try {
-            //Calculamos el número de accesos según el canal para obtener los nodos existentes
             int accesos = 0;
             switch (appEcom) {
             case shop:
@@ -35,9 +37,8 @@ public class ListAllNodes {
                 break;
             }
 
-            //Obtenemos la lista de nodos (ip+cookie)
             LinkedHashMap<String, NodoStatus> mapNodosTotal = new LinkedHashMap<>();
-            this.addNodosToMap(mapNodosTotal, accesos, urlErrorpage, appEcom, context);
+            this.addNodosToMap(mapNodosTotal, accesos, urlErrorpage, appEcom, ctx);
 	        
             boolean testLinksPieFlag = false;
             if (testLinksPie.compareTo("true")==0) {
@@ -53,20 +54,22 @@ public class ListAllNodes {
             //Creamos un test para cada uno de los nodos de Mango Shop
             for (Object nodoObject : mapNodosTotal.values()) {
                 NodoStatus nodo = (NodoStatus)nodoObject;
-                urlBaseTest = urlBase;
+                urlBaseTest = inputData.getUrlBase();
                 urlStatusTest = urlStatus;
                 urlErrorpageTest = urlErrorpage;
-                listTests.add(new TestNodos(mapNodosTotal, nodo, prioridad, urlBaseTest, urlStatusTest, urlErrorpageTest, testLinksPieFlag));
+                listTests.add(
+                	new TestNodos(mapNodosTotal, nodo, prioridad, urlBaseTest, urlStatusTest, urlErrorpageTest, testLinksPieFlag));
                 prioridad+=1;
-			            		
-                System.out.println("Creado Test con datos: URL=" + urlBase + ", URLStauts=" + urlStatus + ", URLError=" + urlErrorpage + ", testLinksPieFlag=" + testLinksPieFlag);
+                System.out.println(
+                	"Creado Test con datos: URL=" + inputData.getUrlBase() + 
+                	", URLStauts=" + urlStatus + ", URLError=" + urlErrorpage + ", testLinksPieFlag=" + testLinksPieFlag);
                 ii+=1;
             }
-	}
-	catch (Exception e) {
-	    e.printStackTrace();
-	    throw e;
-	}
+		}
+		catch (Exception e) {
+		    e.printStackTrace();
+		    throw e;
+		}
         		
         return listTests.toArray(new Object[listTests.size()]);
     }

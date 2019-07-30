@@ -34,6 +34,11 @@ public class TestFilterTNGxmlTRun {
     	public AppTest getValueOf(String application) {
     	    return (AppEcom.valueOf(application));
     	}
+    	
+    	@Override 
+    	public List<AppTest> getValues() {
+    		return Arrays.asList(values());
+    	}
     }
     
     @Test

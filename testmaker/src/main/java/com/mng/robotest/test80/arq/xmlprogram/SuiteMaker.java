@@ -57,10 +57,10 @@ public abstract class SuiteMaker {
     }
     
     protected void addParameters(Map<String,String> parameters) {
-    	if (parameters==null) {
+    	if (this.parameters==null) {
     		setParameters(parameters);
     	} else {
-    		parameters.putAll(parameters);
+    		this.parameters.putAll(parameters);
     	}
     }
     

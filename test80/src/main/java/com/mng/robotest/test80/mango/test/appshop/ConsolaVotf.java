@@ -12,7 +12,6 @@ import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
-import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -22,7 +21,7 @@ public class ConsolaVotf extends GestorWebDriver {
 
     String prodDisponible1 = "";
     
-    @BeforeMethod
+    @BeforeMethod(groups={"Canal:desktop_App:votf"})
     @Parameters({"prodDisponible1" })
     public void login(String prodDisponible1I, ITestContext context, Method method) throws Exception {
         InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
@@ -36,13 +35,15 @@ public class ConsolaVotf extends GestorWebDriver {
     }
 
     @SuppressWarnings("unused")
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod(groups={"Canal:desktop_App:votf"}, alwaysRun = true)
     public void logout(final ITestContext context, final Method method) throws Exception {
         WebDriver driver = TestCaseData.getWebDriver();
         super.quitWebDriver(driver, context);
     }
 
-    @Test (description="[PRE] Generar pedido mediante la consola de VOTF")
+    @Test (
+    	groups={"Canal:desktop_App:votf"},
+    	description="[PRE] Generar pedido mediante la consola de VOTF")
     public void VOFT001_GenerarPedido(final ITestContext context) throws Exception {
 		WebDriver driver = TestCaseData.getWebDriver();
     	

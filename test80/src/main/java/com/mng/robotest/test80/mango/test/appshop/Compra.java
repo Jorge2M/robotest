@@ -19,6 +19,7 @@ import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
+import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -79,7 +80,7 @@ public class Compra extends GestorWebDriver {
             Integer codFrancia = Integer.valueOf(11);
             Integer codColombia = Integer.valueOf(480);
             List<Integer> lisCodCountrys = Arrays.asList(codEspanya, codAndorra, codSuecia, codFrancia, codColombia);
-            List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(lisCodCountrys));
+            List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(lisCodCountrys));
             this.españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
             this.andorra = UtilsMangoTest.getPaisFromCodigo("043", listaPaises);
             this.suecia =  UtilsMangoTest.getPaisFromCodigo("030", listaPaises);

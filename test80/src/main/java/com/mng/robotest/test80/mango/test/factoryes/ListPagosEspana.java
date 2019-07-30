@@ -8,7 +8,6 @@ import org.testng.annotations.*;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
-import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.CompraFact;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
@@ -59,7 +58,7 @@ public class ListPagosEspana {
     private void getDataCountrys() throws Exception {
         Integer codEspanya = Integer.valueOf(1);
         Integer codFrancia = Integer.valueOf(11);
-        List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(Arrays.asList(codEspanya, codFrancia))); 
+        List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya, codFrancia))); 
         this.espana = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
         this.francia = UtilsMangoTest.getPaisFromCodigo("011", listaPaises);
         this.castellano = espana.getListIdiomas().get(0);

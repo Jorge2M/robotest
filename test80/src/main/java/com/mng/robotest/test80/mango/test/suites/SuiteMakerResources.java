@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.xmlprogram;
+package com.mng.robotest.test80.mango.test.suites;
 
 import static com.mng.robotest.test80.mango.test.data.BrowserStackCtxDesktop.macOSMojave_Safari;
 import static com.mng.robotest.test80.mango.test.data.BrowserStackCtxDesktop.Win8_Firefox68;
@@ -59,10 +59,6 @@ public class SuiteMakerResources {
         
         parametersReturn.put("userConDevolucionPeroSoloEnPRO" ,"robot.test@mango.com");
         parametersReturn.put("passwordUserConDevolucion" ,"sirjorge74");
-        
-        //Parámetro para el caso de prueba REG002 que indica si posteriormente al registro es preciso loginarse + validar datos + logoff
-        parametersReturn.put("loginAfterRegister" ,"true");
-        parametersReturn.put("register", "true");
         
         CallBack callBack = params.getCallBack();
         if (params.getCallBack()!=null) {
