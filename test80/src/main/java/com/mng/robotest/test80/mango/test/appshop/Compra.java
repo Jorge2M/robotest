@@ -110,7 +110,7 @@ public class Compra extends GestorWebDriver {
     }		
 	
     @Test (
-        groups={"Compra", "Canal:all_App:shop", "Canal:all_App:outlet"}, alwaysRun=true, priority=2, 
+        groups={"Compra", "Canal:all_App:shop,outlet"}, alwaysRun=true, priority=2, 
         description="[Usuario registrado][Tarjeta guardada] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
     public void COM001_Compra_TrjSaved_Empl() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
@@ -217,7 +217,7 @@ public class Compra extends GestorWebDriver {
      }    
     
     @Test (
-        groups={"Compra", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true,
+        groups={"Compra", "Canal:desktop_App:shop,outlet"}, alwaysRun=true,
         description="[Usuario no registrado] Compra con cambio datos en dirección de envío en checkout")
     public void COM003_Compra_y_CambioPais_Noreg_emailExist() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();

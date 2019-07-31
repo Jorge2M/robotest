@@ -97,7 +97,7 @@ public class MiCuenta extends GestorWebDriver {
     }       
 
     @Test (
-        groups={"Canal:desktop_App:shop", "Canal:desktop_App:outlet", "Micuenta", "CI"}, alwaysRun=true, 
+        groups={"Canal:desktop_App:shop,outlet", "Micuenta", "CI"}, alwaysRun=true, 
         description="Verificar opciones de 'mi cuenta'")
     @Parameters({"userConDevolucionPeroSoloEnPRO", "passwordUserConDevolucion"})
     public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion) 

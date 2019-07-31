@@ -28,11 +28,13 @@ public class FilterTestsSuiteXML {
     
     private final DataFilterTCases dFilter;
     private final List<String> groupsToExclude;
+    private final List<String> groupsToInclude;
 
     private FilterTestsSuiteXML(DataFilterTCases dFilter) {
     	this.dFilter = dFilter;
         GroupsChannelApps groupChannel = GroupsChannelApps.getNew(dFilter.getChannel(), dFilter.getAppE());
         this.groupsToExclude = groupChannel.getGroupsExcluded();
+        this.groupsToInclude = groupChannel.getGroupsIncluded();
     }
     
     public static FilterTestsSuiteXML getNew(DataFilterTCases dFilter) {
@@ -45,6 +47,10 @@ public class FilterTestsSuiteXML {
     
     public List<String> getGroupsToExclude() {
     	return this.groupsToExclude;
+    }
+    
+    public List<String> getGroupsToInclude() {
+    	return this.groupsToInclude;
     }
     
     /**
@@ -66,11 +72,17 @@ public class FilterTestsSuiteXML {
     public List<TestMethod> getInitialTestCaseCandidatesToExecute(XmlTest testRun) {
         List<TestMethod> listTestToReturn = new ArrayList<>();
         List<TestMethod> listTestsInXMLClasses = getTestsCasesInXMLClasses(testRun);
-        List<String> groupsFromTestRun = testRun.getIncludedGroups();
+        //List<String> groupsFromTestRun = testRun.getIncludedGroups();
         for (TestMethod tmethod : listTestsInXMLClasses) {
-        	if (!groupsContainsAnyGroup(tmethod.getAnnotationTest().groups(), groupsToExclude)) {
-        		if (groupsContainsAnyGroup(tmethod.getAnnotationTest().groups(), groupsFromTestRun)) {
-        			listTestToReturn.add(tmethod);
+        	if (testRun.getExcludedGroups()!=null && testRun.getExcludedGroups().size()>0) {
+	        	if (!groupsContainsAnyGroup(tmethod.getAnnotationTest().groups(), testRun.getExcludedGroups())) {
+	        		listTestToReturn.add(tmethod);
+	        	}
+        	} else {
+        		if (testRun.getIncludedGroups()!=null && testRun.getIncludedGroups().size()>0) {
+		        	if (groupsContainsAnyGroup(tmethod.getAnnotationTest().groups(), testRun.getIncludedGroups())) {
+		        		listTestToReturn.add(tmethod);
+		        	}
         		}
         	}
         }

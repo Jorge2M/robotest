@@ -48,7 +48,7 @@ public class SEO extends GestorWebDriver {
     }
 
     @Test(
-        groups = { "Otras", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, 
+        groups = { "Otras", "Canal:desktop_App:shop,outlet"}, 
         description="Comprobar existencia y contenido del fichero robots.txt")
     public void SEO001_check_RobotsSitemap() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();

@@ -78,12 +78,19 @@ public class TestRunMaker {
     
     private XmlRun createRun(FilterTestsSuiteXML filterSuiteXML) {
         XmlRun run = new XmlRun();
-        for (String group : filterSuiteXML.getGroupsToExclude()) {
-            run.onExclude(group);
+        if (groups!=null && groups.size()>0) {
+            for (String group : groups) {
+            	run.onInclude(group);
+            }
+	        for (String group : filterSuiteXML.getGroupsToExclude()) {
+	            run.onExclude(group);
+	        }        
+	    } else {
+	        for (String group : filterSuiteXML.getGroupsToInclude()) {
+	            run.onInclude(group);
+	        }
         }
-        for (String group : groups) {
-        	run.onInclude(group);
-        }
+
         return run;
     }
     

@@ -157,7 +157,7 @@ public class Registro extends GestorWebDriver {
 
     @SuppressWarnings("static-access")
     @Test (
-        groups={"Registro", "Canal:all_App:shop", "Canal:all_App:outlet", "SupportsFactoryCountrys"}, alwaysRun=true, 
+        groups={"Registro", "Canal:all_App:shop,outlet", "SupportsFactoryCountrys"}, alwaysRun=true, 
         description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
     public void REG002_RegistroOK_publi() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
@@ -217,7 +217,7 @@ public class Registro extends GestorWebDriver {
     
     @SuppressWarnings("static-access")
     @Test (
-        groups={"Registro", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true, 
+        groups={"Registro", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
         description="Alta/Registro de un usuario (sin seleccionar el link de publicidad)")
     public void REG003_RegistroOK_NoPubli() throws Exception {
     	boolean clickPubli = false;

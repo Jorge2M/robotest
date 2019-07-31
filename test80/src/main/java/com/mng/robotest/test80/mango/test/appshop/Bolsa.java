@@ -75,7 +75,7 @@ public class Bolsa extends GestorWebDriver {
     }       
 
     @Test (
-        groups={"Bolsa", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true, 
+        groups={"Bolsa", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
         description="[Usuario no registrado] Añadir artículo a la bolsa")
     public void BOR001_AddBolsaFromGaleria_NoReg() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
@@ -114,7 +114,7 @@ public class Bolsa extends GestorWebDriver {
     }
 
     @Test (
-        groups={"Bolsa", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true, 
+        groups={"Bolsa", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
         description="[Usuario registrado] Añadir artículo a la bolsa")
     public void BOR002_AnyadirBolsa_yCompra_SiReg() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
@@ -147,7 +147,7 @@ public class Bolsa extends GestorWebDriver {
     }
 
     @Test (
-        groups={"Bolsa", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true, 
+        groups={"Bolsa", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
         description="[Usuario registrado] Añadir y eliminar artículos de la bolsa")
     public void BOR006_Gest_Prod_Bolsa_Sireg() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();

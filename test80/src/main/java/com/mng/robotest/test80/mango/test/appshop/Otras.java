@@ -85,7 +85,7 @@ public class Otras extends GestorWebDriver {
     }		
 	
     @Test (
-        groups={"Otras", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, 
+        groups={"Otras", "Canal:desktop_App:shop,outlet"}, 
         description="Comprobar acceso url desde email")
     public void OTR001_check_Redirects() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
@@ -139,7 +139,7 @@ public class Otras extends GestorWebDriver {
      */
     @Test (
     	enabled=false, //Desactivado hasta que se corrija la incidencia https://jira.mangodev.net/jira/browse/GPS-975
-        groups={"Otras", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, 
+        groups={"Otras", "Canal:desktop_App:shop,outlet"}, 
         description="Verificar el cambio de país a través de url")
     public void OTR004_cambioPaisURL(ITestContext context) throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();

@@ -41,7 +41,6 @@ public abstract class SuiteMaker {
         return (xmlSuite.getTests().get(0));
     }
 
-    
     public void run() { 
     	generateXmlSuiteIfNotAvailable();
         List<XmlSuite> suites = new ArrayList<>();

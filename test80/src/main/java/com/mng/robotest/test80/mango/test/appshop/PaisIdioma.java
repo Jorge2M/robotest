@@ -108,7 +108,7 @@ public class PaisIdioma extends GestorWebDriver {
     }	
 	
     @Test (
-        groups={"Lineas", "Canal:all_App:shop", "Canal:all_App:outlet"}, 
+        groups={"Lineas", "Canal:all_App:shop,outlet"}, 
         description="Acceso desde prehome y navegación por todas las líneas/sublíneas/carrusels del país + selección menú/s")
     public void PAR001_Lineas() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();

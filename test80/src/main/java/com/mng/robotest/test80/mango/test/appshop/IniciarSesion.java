@@ -57,7 +57,7 @@ public class IniciarSesion extends GestorWebDriver {
     }       
 
     @Test (
-        groups={"IniciarSesion", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, /*dependsOnMethods = {"SES002_Registro_OK"},*/ alwaysRun=true, 
+        groups={"IniciarSesion", "Canal:desktop_App:shop,outlet"}, /*dependsOnMethods = {"SES002_Registro_OK"},*/ alwaysRun=true, 
         description="Verificar inicio sesión con usuario incorrecto")
     public void SES001_IniciarSesion_NOK() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
@@ -73,7 +73,7 @@ public class IniciarSesion extends GestorWebDriver {
     }
 
     @Test (
-        groups={"IniciarSesion", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, /*dependsOnMethods = {"SES003_IniciarSesion_NOK"},*/ alwaysRun=true, 
+        groups={"IniciarSesion", "Canal:desktop_App:shop,outlet"}, /*dependsOnMethods = {"SES003_IniciarSesion_NOK"},*/ alwaysRun=true, 
         description="[Usuario registrado] Verificar inicio sesión")
     public void SES002_IniciarSesion_OK() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();

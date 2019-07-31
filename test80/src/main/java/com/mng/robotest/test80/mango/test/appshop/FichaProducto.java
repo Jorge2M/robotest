@@ -219,7 +219,7 @@ public class FichaProducto extends GestorWebDriver {
     }
     
     @Test (
-        groups={"FichaProducto", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, 
+        groups={"FichaProducto", "Canal:desktop_App:shop,outlet"}, 
         alwaysRun=true, description="[Usario no registrado] Testeo ficha con artículo con color y tallas no disponibles")
     public void FIC004_Articulo_NoStock_Noreg() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
