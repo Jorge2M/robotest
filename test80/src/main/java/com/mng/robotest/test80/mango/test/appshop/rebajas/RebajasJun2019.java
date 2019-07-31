@@ -11,7 +11,6 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
-import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
@@ -122,7 +121,7 @@ public class RebajasJun2019 extends GestorWebDriver /*Funcionalidades genéricas
         for (Linea linea : this.lineasAprobar) {
             if (UtilsMangoTest.validarLinea(dCtxSh.pais, linea, dCtxSh.appE) &&
                 linea.getType()!=LineaType.edits) {
-                validaLinea(salesOnInCountry, linea, null/*sublinea*/, ("banners".compareTo(linea.getContentDesk())==0), dCtxSh, dFTest);
+                validaLinea(salesOnInCountry, linea, null, ("banners".compareTo(linea.getContentDesk())==0), dCtxSh, dFTest);
                 for (Sublinea sublinea : linea.getListSublineas()) {
                     validaLinea(salesOnInCountry, linea, sublinea, ("banners".compareTo(sublinea.getContentDesk())==0), dCtxSh, dFTest);
                 }

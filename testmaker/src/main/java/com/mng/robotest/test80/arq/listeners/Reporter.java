@@ -15,7 +15,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
  * @author Jorge Muñoz
  */
 
-public class Reporter /*extends TestHTMLReporter*/ implements IReporter {
+public class Reporter implements IReporter {
 	
     public static final String TESTNG_FAILED_XML = "testng-failed.xml";
     

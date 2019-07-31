@@ -352,8 +352,8 @@ public class Test80mng {
                 listRegistros.run();
                 break;         
             case RebajasPaises:
-//                RebajasFactoryXML listRebajas = new RebajasFactoryXML();
-//                listRebajas.testRunner(params);
+                RebajasSuite rebajasSuite = new RebajasSuite(params);
+                rebajasSuite.run();
                 break;                
             default:
             }
