@@ -101,9 +101,11 @@ public class PagoNavigationsStpV {
     throws Exception {
         DatosStep datosStep = TestCaseData.getDatosCurrentStep();    	
         if (dCtxSh.userRegistered) {
-            datosStep.replaceInDescription(tagLoginOrLogoff, "e Identificarse");
+            datosStep.replaceInDescription(
+            	tagLoginOrLogoff, "e Identificarse con el usuario <b>" + dCtxSh.userConnected + "</b>");
         } else {
-        	datosStep.replaceInDescription(tagLoginOrLogoff, "(si estamos logados cerramos sesión)");
+        	datosStep.replaceInDescription(
+        		tagLoginOrLogoff, "(si estamos logados cerramos sesión)");
         }
         
         AccesoNavigations.accesoHomeAppWeb(dCtxSh, driver);
