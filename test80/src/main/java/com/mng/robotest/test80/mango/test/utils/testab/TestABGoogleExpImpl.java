@@ -32,6 +32,17 @@ public enum TestABGoogleExpImpl implements TestABGoogleExp {
 			"V1-Galería con React"),
 	    Arrays.asList(Channel.desktop),
 	    Arrays.asList(AppEcom.shop, AppEcom.votf)
+	),
+	
+	MVPCheckoutDesktop(
+		"t8C28DR0Sb2tRepMbNXt4A",
+		"sub_8rhk5o_wc6i3wg92ap",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original",
+			"V1-MVP Checkout"),
+	    Arrays.asList(Channel.desktop),
+	    Arrays.asList(AppEcom.shop, AppEcom.votf)
 	);
 		
 	private String valueCookieShop;

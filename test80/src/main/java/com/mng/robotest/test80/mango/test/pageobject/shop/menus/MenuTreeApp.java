@@ -49,7 +49,7 @@ public class MenuTreeApp {
     	}
         
     	//Si no existe lo creamos y almacenamos en caché
-    	Menu1rstLevel newMenu = Menu1rstLevel.from(this.app, key, "-" + key.nombreMenu, false, "*".split(","));
+    	Menu1rstLevel newMenu = Menu1rstLevel.from(this.app, key, key.dataMenu, false, "*".split(","));
     	menus1rstLevel.add(newMenu);
     	return newMenu;
     }

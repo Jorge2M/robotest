@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.data;
 
 
-public enum CodigoIdioma {
+public enum CodIdioma {
     AL("Deutsch"),
     CA("Català"),
     CS("Čeština"),
@@ -28,7 +28,7 @@ public enum CodigoIdioma {
     
     private final String literalIdioma;
     
-    CodigoIdioma(String literalIdioma) {
+    CodIdioma(String literalIdioma) {
         this.literalIdioma = literalIdioma;
     }
     

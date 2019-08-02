@@ -15,6 +15,7 @@ import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.bloqueMenu;
+import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
 
 public class SecBloquesMenuDesktop extends WebdrvWrapp {
 	
@@ -135,17 +136,20 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
         return (driver.findElements(By.xpath(XPathMenusVisibles)));
     }
 
-    public List<String> getListDataLabelsMenus(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+    public List<DataScreenMenu> getListDataScreenMenus(LineaType lineaType, SublineaNinosType sublineaType) 
+    throws Exception {
+        List<DataScreenMenu> listDataMenus = new ArrayList<>();
         List<WebElement> listMenus = getListMenusLinea(lineaType, sublineaType);
-        List<String> listMenusLabel = new ArrayList<>();
         for (int i=0; i<listMenus.size(); i++) {
-            String data_ga_label = listMenus.get(i).getAttribute("data-label");
-            if (data_ga_label!=null && data_ga_label.compareTo("")!=0) {
-                listMenusLabel.add(data_ga_label);
+        	DataScreenMenu dataMenu = DataScreenMenu.getNew();
+        	dataMenu.setDataGaLabel(listMenus.get(i).getAttribute("data-label"));
+        	if (dataMenu.isDataGaLabelValid()) {
+        		dataMenu.setLabel(listMenus.get(i).getText().replace("New!", "").trim());
+        		listDataMenus.add(dataMenu);
             }
         }
         
-        return listMenusLabel;
+        return listDataMenus;
     }
     
     /**

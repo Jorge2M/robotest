@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.robotest.test80.mango.test.data.CodigoIdioma;
+import com.mng.robotest.test80.mango.test.data.CodIdioma;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 
@@ -13,7 +13,7 @@ public class PageSelectIdiomaVOTF extends WebdrvWrapp {
     private static final String XPathSelectIdioma = "//select[@name[contains(.,'country')]]";
     private static final String XPathButtonAceptar = "//span[@class[contains(.,'button submit')]]";
     
-    public static void selectIdioma(CodigoIdioma codigoIdioma, WebDriver driver) {
+    public static void selectIdioma(CodIdioma codigoIdioma, WebDriver driver) {
         new Select(driver.findElement(By.xpath(XPathSelectIdioma))).selectByValue(codigoIdioma.toString());
     }
 

@@ -4,13 +4,13 @@ import java.net.URI;
 
 import javax.xml.bind.annotation.*;
 
-import com.mng.robotest.test80.mango.test.data.CodigoIdioma;
+import com.mng.robotest.test80.mango.test.data.CodIdioma;
 
 
 public class IdiomaPais {
 
     String acceso;
-    CodigoIdioma codigo;
+    CodIdioma codigo;
 	
     public String getAcceso() {
         return this.acceso;
@@ -21,13 +21,13 @@ public class IdiomaPais {
         this.acceso = acceso;
     }
 	
-    public CodigoIdioma getCodigo() {
+    public CodIdioma getCodigo() {
         return this.codigo;
     }
     
     @XmlValue
     public void setCodigoIdioma(String codigo) {
-        this.codigo = CodigoIdioma.valueOf(codigo);
+        this.codigo = CodIdioma.valueOf(codigo);
     }
         
     //Función que obtiene la URL de acceso al país/idioma

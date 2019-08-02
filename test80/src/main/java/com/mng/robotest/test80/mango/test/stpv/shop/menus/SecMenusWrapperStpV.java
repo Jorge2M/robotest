@@ -34,6 +34,9 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
+import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
+import com.mng.robotest.test80.mango.test.utils.checkmenus.MenuI;
+import com.mng.robotest.test80.mango.test.utils.checkmenus.MenuTraduc;
 
 public class SecMenusWrapperStpV {
 	
@@ -102,6 +105,12 @@ public class SecMenusWrapperStpV {
         return validations;
     }
     
+    public void checkOrderAndTranslationMenus(Linea linea) throws Exception {
+    	List<MenuI> menuInOrderTraduc = MenuTraduc.getListMenus(linea.getType());
+    	List<DataScreenMenu> listMenusScreen = secMenusWrap.getListDataScreenMenus(linea, null);
+    	//,,,
+    }
+    
     @Validation
     public ChecksResult checkLineaRebajas(boolean salesOnInCountry, DataCtxShop dCtxSh) {
         ChecksResult validations = ChecksResult.getNew();
@@ -125,16 +134,11 @@ public class SecMenusWrapperStpV {
      */
     public void stepsMenusLinea(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
         String paginaLinea = driver.getCurrentUrl();
-        
-        //Obtenemos la lista de menús de la línea
         Linea linea = pais.getShoponline().getLinea(lineaType);
-        List<String> listMenusLabel = secMenusWrap.getListDataLabelsMenus(linea, sublineaType);
-        //for (int i=0; i<5; i++) {
+        List<DataScreenMenu> listMenusLabel = secMenusWrap.getListDataScreenMenus(linea, sublineaType);
         for (int i=0; i<listMenusLabel.size(); i++) {
             try {
-            	//Creamos un menú con el nombre=dataGaLabel (pues todavía no lo conocemos)
             	Menu1rstLevel menu1rstLevel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(lineaType, sublineaType, listMenusLabel.get(i)));
-            	menu1rstLevel.setDataGaLabel(listMenusLabel.get(i));
                 if (channel==Channel.movil_web) {
                     secMenuLateralMobilStpV.stepClickMenu1rstLevel(menu1rstLevel, pais);
                 } else {
@@ -142,7 +146,6 @@ public class SecMenusWrapperStpV {
                 }
             }
             catch (Exception e) {
-                //En caso de excepción no queremos que el caso de prueba pare
             	pLogger.warn("Problem in selection of menu " + lineaType + " / " + sublineaType + " / " + listMenusLabel.get(i), e);
             }        
         }

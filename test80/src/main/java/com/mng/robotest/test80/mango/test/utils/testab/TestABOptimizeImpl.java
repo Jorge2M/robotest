@@ -34,19 +34,19 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 	    Arrays.asList(AppEcom.shop)
 	),
 	
-	MVPCheckoutDesktop (
-		"GTM-5T8R33",
-		"MVP Checkout - desktopr",
-	    "UWOU5vObVAZJ7ylnbAK2vQ",
-	    "GTM-KWJ6XJ_OPT-TXX7V$",
-	    "QUICK_PREVIEW",
-	    Arrays.asList(0,1),
-	    Arrays.asList(
-	    	"V0-Original", 
-	    	"V1-MVP Checkout Desktop"),
-	    Arrays.asList(Channel.desktop),
-	    Arrays.asList(AppEcom.shop)
-	),
+//	MVPCheckoutDesktop (
+//		"GTM-5T8R33",
+//		"MVP Checkout - desktopr",
+//	    "UWOU5vObVAZJ7ylnbAK2vQ",
+//	    "GTM-KWJ6XJ_OPT-TXX7V$",
+//	    "QUICK_PREVIEW",
+//	    Arrays.asList(0,1),
+//	    Arrays.asList(
+//	    	"V0-Original", 
+//	    	"V1-MVP Checkout Desktop"),
+//	    Arrays.asList(Channel.desktop),
+//	    Arrays.asList(AppEcom.shop)
+//	),
 	
 	SHOP191_BuscadorDesktop (
 		"GTM-5T8R33",

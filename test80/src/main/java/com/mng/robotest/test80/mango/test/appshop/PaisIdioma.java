@@ -141,6 +141,10 @@ public class PaisIdioma extends GestorWebDriver {
             testSpecificFeaturesForLinea(linea, dCtxShI, dFTest);
         }
             
+        if (version.testOrderAndTranslationMenus()) {
+        	secMenusStpV.checkOrderAndTranslationMenus(linea);
+        }
+        
         //Validamos si hemos de ejecutar los pasos correspondientes al recorrido de los menús
         if (testMenus(linea, sublinea)) {
         	secMenusStpV.stepsMenusLinea(lineaType, sublineaType);

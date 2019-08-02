@@ -16,7 +16,7 @@ public class TestABactive {
     	List<TestABactData> listTestABsToActivate = new ArrayList<>();
     	listTestABsToActivate.add(TestABactData.getNew(TestABGoogleExpImpl.GaleriaDesktopReact, 0));
     	//listTestABsToActivate.add(ActivationData.getNew(TestABid.SHOP191_BuscadorDesktop, 1));
-    	listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.MVPCheckoutDesktop, 0));
+    	listTestABsToActivate.add(TestABactData.getNew(TestABGoogleExpImpl.MVPCheckoutDesktop, 0));
     	listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.SHOP126_HeaderNuevosIconosDesktop, 1));
     	TestABmanager.activateTestsAB(listTestABsToActivate, channel, app, driver);
     }

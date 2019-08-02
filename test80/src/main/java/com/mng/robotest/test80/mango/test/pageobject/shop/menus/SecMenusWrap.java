@@ -18,6 +18,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil.SecMenuLateralMobil.TypeLocator;
+import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
 
 @SuppressWarnings({"static-access"}) 
 /**
@@ -92,12 +93,12 @@ public class SecMenusWrap {
 		secMenusUser.clickMenuIfInState(UserMenu.cerrarSesion, StateElem.Clickable);
     }
     
-    public List<String> getListDataLabelsMenus(Linea linea, SublineaNinosType sublineaType) throws Exception {
+    public List<DataScreenMenu> getListDataScreenMenus(Linea linea, SublineaNinosType sublineaType) throws Exception {
         if (channel==Channel.movil_web) {
-            return secMenuLateralMobil.getListDataLabelsMenus(linea, sublineaType);
+            return secMenuLateralMobil.getListDataScreenMenus(linea, sublineaType);
         }
         return 
-        	secMenusDesktop.secMenuSuperior.secBlockMenus.getListDataLabelsMenus(linea.getType(), sublineaType);        
+        	secMenusDesktop.secMenuSuperior.secBlockMenus.getListDataScreenMenus(linea.getType(), sublineaType);        
     }
     
     /**

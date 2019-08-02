@@ -38,11 +38,12 @@ public class MenusFactory {
            	            DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, idioma, inputData.getUrlBase()); 
                         listTests.add(new PaisIdioma(VersionPaisSuite.V3, dCtxSh, lineasAprobar, prioridad));
                         prioridad+=1;            		
-                        System.out.println("Creado Test \"PaisIdioma\" con datos: " +
-                                           ",Pais=" + pais.getNombre_pais() +
-                                           ",Idioma=" + idioma.getCodigo().getLiteral() +
-                                           ",Linea=" + linea.getType() + 
-                                           ",Num Idiomas=" + pais.getListIdiomas().size());
+                        System.out.println(
+                        	"Creado Test \"PaisIdioma\" con datos: " +
+                            ",Pais=" + pais.getNombre_pais() +
+                            ",Idioma=" + idioma.getCodigo().getLiteral() +
+                            ",Linea=" + linea.getType() + 
+                            ",Num Idiomas=" + pais.getListIdiomas().size());
                     }
                 }
             }
