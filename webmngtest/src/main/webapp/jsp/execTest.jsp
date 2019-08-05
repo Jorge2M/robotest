@@ -116,8 +116,9 @@ response.setDateHeader ("Expires", -1);%>
 	    //Esperamos a que se arranque el test
 		int maxSecondsToWait = Suites.valueOf(paramsTSuite.getSuiteName()).getMaxSecondsToWaitStart();
 		boolean testExists = waitToTestSuiteExists(maxSecondsToWait, idExecSuite);
-		if (!testExists)
-			out.print("<div class=\"errorMessage\"><b>Problema en el inicio la TestSuite!</b>. Superado Timeout " + maxSecondsToWait + " segundos</div>");			
+		if (!testExists) {
+			out.print("<div class=\"errorMessage\"><b>Problema en el inicio la TestSuite!</b>. Superado Timeout " + maxSecondsToWait + " segundos</div>");
+		}
 		else {
 		  	//Constru�mos la ruta del report HTML
 		  	suite = SuitesDAO.getSuite(idExecSuite, paramsTSuite.getSuiteName());
@@ -156,7 +157,9 @@ response.setDateHeader ("Expires", -1);%>
 	    //Parameters that don't come from index.jsp (for exemple, the call from Jenkin's CI Task)
 	    paramsTSuite.setUrlManto(request.getParameter(Test80mng.UrlManto));
 	    paramsTSuite.setRecicleWD(request.getParameter(Test80mng.RecicleWD));
+	    paramsTSuite.setNetAnalysis(request.getParameter(Test80mng.NetAnalysis));
 	    paramsTSuite.setMails(request.getParameterValues(Test80mng.Mails));
+	    paramsTSuite.setApplicationDNS(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()); 
 	    if (request.getParameter(Test80mng.CallBackResource)!=null) {
 			CallBack callBack = new CallBack();
 	        callBack.setCallBackResource(request.getParameter(Test80mng.CallBackResource));
@@ -167,9 +170,6 @@ response.setDateHeader ("Expires", -1);%>
 	        callBack.setCallBackParams(request.getParameter(Test80mng.CallBackParams));
 	        paramsTSuite.setCallBack(callBack);
 	    }
-	    
-	    //Other
-	    paramsTSuite.setApplicationDNS(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()); 
 	    
 	    return paramsTSuite;
 	}

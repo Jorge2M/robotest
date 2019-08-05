@@ -82,6 +82,9 @@ public class ParamsBean {
     	if (getCallBack()!=null) {
     		inputData.setCallBack(callBack);
     	}
+    	if (getApplicationDNS()!=null) {
+    		inputData.setWebAppDNS(getApplicationDNS());
+    	}
     	
     	//TODO desacoplar
     	if (getListaPaises()!=null) {
