@@ -7,7 +7,7 @@ response.setDateHeader ("Expires", -1);
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page session="false"%>
-<%@ page import="org.pruebasws.utils.TSuiteThreadsManager"%>
+<%@ page import="org.pruebasws.thread.TSuiteThreadsManager"%>
 <%@ page import="org.pruebasws.jdbc.dao.TestsDAO"%>
 <%@ page import="org.pruebasws.jdbc.to.SuiteTestData"%>
 <%@ page import="org.pruebasws.jdbc.to.BrowserSuite"%>
@@ -193,12 +193,13 @@ for (SuiteTestData suiteTest : listTestSuites) {
 					<select id="version-select-<%=i%>" name="<%=Test80mng.VersionNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							String actualVersion = suiteTest.getVersionActual();
-										for (VersionSuite versionSuite : suiteTest.getVersionChannelList()) {
-											String selected = "";
-											if (versionSuite.getVersion().compareTo(actualVersion)==0)
-											    selected = "selected";
+							for (VersionSuite versionSuite : suiteTest.getVersionChannelList()) {
+								String selected = "";
+								if (versionSuite.getVersion().compareTo(actualVersion)==0) {
+									selected = "selected";
+								}
 						%>
-						<option value="<%=versionSuite.getVersion()%>" <%=selected%>><%=versionSuite.getDescription()%></option>
+								<option value="<%=versionSuite.getVersion()%>" <%=selected%>><%=versionSuite.getDescription()%></option>
 						<%
 							}
 						%>
@@ -214,13 +215,13 @@ for (SuiteTestData suiteTest : listTestSuites) {
 					<select multiple size=10 id="tcases-<%=i%>" name="<%=Test80mng.TCaseNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							for (TestMethod testMethod : Test80mng.getDataTestAnnotationsToExec(getParamsFromSuiteToGetTCases(suiteTest))) {
-										    String selected = "";
-										    if (FilterTestsSuiteXML.methodInTestCaseList(testMethod.getMethod().getName(), suiteTest.getListTCasesArray())) {
-										        selected = "selected";
-										    }
+								String selected = "";
+								if (FilterTestsSuiteXML.methodInTestCaseList(testMethod.getMethod().getName(), suiteTest.getListTCasesArray())) {
+									selected = "selected";
+								}
 						%>
-							<option value="<%=testMethod.getMethod().getName()%>" <%=selected%> title="<%=testMethod.getAnnotationTest().description()%>"><%=testMethod.getMethod().getName()%></option>
-						<%}%>
+								<option value="<%=testMethod.getMethod().getName()%>" <%=selected%> title="<%=testMethod.getAnnotationTest().description()%>"><%=testMethod.getMethod().getName()%></option>
+						<%	}%>
  					<%}%>						
 					</select>
 				</td>				

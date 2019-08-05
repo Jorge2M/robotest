@@ -90,18 +90,7 @@ public class FilterTestsSuiteXML {
         return listTestToReturn;
     }
     
-//    public List<String> getListGroupsToInclude() {
-//        ArrayList<String> listOfGroups = new ArrayList<>();
-//        Channel channel = dFilter.getChannel();
-//        AppTest app = dFilter.getAppE();
-//        listOfGroups.add("Canal:all_App:all");
-//        listOfGroups.add("Canal:all_App:" + app);
-//        listOfGroups.add("Canal:" + channel + "_App:all");
-//        listOfGroups.add("Canal:" + channel + "_App:" + app);
-//        return listOfGroups;
-//    }
-    
-    public boolean methodInTestCaseList(String methodName, List<String> listTestCases) {
+    public static boolean methodInTestCaseList(String methodName, List<String> listTestCases) {
         for (String testCase : listTestCases) {
             if (testCase.compareTo(methodName)==0 ||  
                 methodName.indexOf(getCodeFromTestCase(testCase))==0) {
@@ -333,7 +322,7 @@ public class FilterTestsSuiteXML {
         return false;
     }
     
-    private String getCodeFromTestCase(String testCase) {
+    private static String getCodeFromTestCase(String testCase) {
         int posUnderscore = testCase.indexOf("_");
         if (posUnderscore<0) {
             return testCase;

@@ -26,6 +26,7 @@ public class InputDataTestMaker {
     private List<String> testCasesFilter;
     private List<String> groupsFilter;
     private List<String> mails;
+    private List<String> countrys;
     private String webAppDNS;
     private CallBack callBack = null;
 	
@@ -137,6 +138,14 @@ public class InputDataTestMaker {
 	
 	public boolean isSendMailInEndSuite() {
 		return (getMails()!=null && getMails().size()>0);
+	}
+	
+	public List<String> getCountrys() {
+		return this.countrys;
+	}
+	
+	public void setCountrys(List<String> countrys) {
+		this.countrys = countrys;
 	}
 
 	public CallBack getCallBack() {

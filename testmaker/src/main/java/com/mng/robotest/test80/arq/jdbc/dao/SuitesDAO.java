@@ -261,7 +261,10 @@ public class SuitesDAO {
                 insert.setDate(7, new java.sql.Date(System.currentTimeMillis()));
                 insert.setInt(8, 0);
                 insert.setString(9, inputDataTmaker.getUrlBase());
-                insert.setString(10, "Pending Data From test80"); //TODO
+                
+                //TODO desacoplar
+                insert.setString(10, inputDataTmaker.getCountrys().toString());
+                
                 insert.setString(11, fmwkTest.getPathReportHTML(fmwkTest.getOutputDirectorySuite(suite)));
 
                 String pathToReport = fmwkTest.getPathReportHTML(fmwkTest.getOutputDirectorySuite(suite));

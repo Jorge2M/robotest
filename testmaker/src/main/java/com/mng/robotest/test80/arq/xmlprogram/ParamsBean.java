@@ -23,7 +23,6 @@ public class ParamsBean {
     String[] groups = {};
     String[] ListaTestCases = {};
     String applicationDNS = "";
-    String idSuiteExecution = "";
     String urlManto = null;
     String[] mails = {};
     TypeAccessFmwk typeAccess = null;
@@ -53,10 +52,6 @@ public class ParamsBean {
     	return (suite);
     }
     
-    public String getIdSuiteExecution() {
-        return this.idSuiteExecution;
-    }
-    
     public TypeAccessFmwk getTypeAccess() {
         return this.typeAccess;
     }
@@ -71,6 +66,7 @@ public class ParamsBean {
 	    		getURLBase(),
 	    		TypeWebDriver.valueOf(getBrowser()));
     	
+		inputData.setNetAnalysis(getNetAnalysis());
     	if (getTestCases()!=null) {
     		inputData.setTestCasesFilter(Arrays.asList(getTestCases()));
     	}
@@ -83,12 +79,16 @@ public class ParamsBean {
     	if (getMails()!=null) {
     		inputData.setMails(Arrays.asList(getMails()));
     	}
+    	if (getCallBack()!=null) {
+    		inputData.setCallBack(callBack);
+    	}
+    	
+    	//TODO desacoplar
+    	if (getListaPaises()!=null) {
+    		inputData.setCountrys(Arrays.asList(getListaPaises()));
+    	}
     	
     	return inputData;
-    }
-    
-    public void setIdExecutedSuite(String idSuiteExecution) {
-        this.idSuiteExecution = idSuiteExecution;
     }
     
     public void setTypeAccess(TypeAccessFmwk typeAccess) {
@@ -256,8 +256,8 @@ public class ParamsBean {
         this.recicleWD = recicleWD;
     }
     
-    public String getNetAnalysis() {
-        return this.netAnalysis;
+    public boolean getNetAnalysis() {
+        return this.netAnalysis.compareTo("true")==0;
     }
     
     public void setNetAnalysis(String netAnalysis) {
@@ -280,7 +280,11 @@ public class ParamsBean {
 
     @Override
     public String toString() {
-        return "ParamsBean [SuiteName="+ getSuiteName() + ", Browser=" + this.Browser + ", Version=" + this.Version + ", URLBase=" + this.URLBase + ", ListaPaises=" + this.ListaPaises +
+        return "ParamsBean [SuiteName="+ getSuiteName() + 
+        		", Browser=" + this.Browser + 
+        		", Version=" + this.Version + 
+        		", URLBase=" + this.URLBase + 
+        		", ListaPaises=" + this.ListaPaises +
                 ", toString()=" + super.toString() + "]";
     }        
 }

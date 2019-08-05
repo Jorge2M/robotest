@@ -141,9 +141,9 @@ public class SuiteTestData {
     }
     
     public ArrayList<String> getListTCasesArray() {
-        if (getListTCases()==null || "".compareTo(getListTCases())==0)
+        if (getListTCases()==null || "".compareTo(getListTCases())==0) {
             return new ArrayList<>();
-            
+        }
         return new ArrayList<>(Arrays.asList(getListTCases().split(",")));
     }
     

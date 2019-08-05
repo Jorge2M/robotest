@@ -1,8 +1,10 @@
-package org.pruebasws.utils;
+package org.pruebasws.thread;
 
 import java.util.Set;
 
+import com.mng.robotest.test80.Test80mng;
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
 
 import java.util.ArrayList;
 
@@ -19,8 +21,39 @@ public class TSuiteThreadsManager {
         );        
     }
     
-    public static String getLocatorThreadTestSuite(ParamsBean paramsTSuite) {
-        return (getLocatorThreadTestSuite(paramsTSuite.getSuiteName(), paramsTSuite.getAppE().toString(), paramsTSuite.getChannel().toString(), paramsTSuite.getBrowser(), paramsTSuite.getVersion(), paramsTSuite.getIdSuiteExecution()));   
+	public static String startSuiteInThread(ParamsBean paramsTSuite) throws Exception { 
+		SuiteMaker suite = Test80mng.makeSuite(paramsTSuite);
+		String idExecSuite = suite.getIdSuiteExecution();
+		
+	  	Thread.UncaughtExceptionHandler h = new Thread.UncaughtExceptionHandler() {
+		    public void uncaughtException(Thread th, Throwable ex) {
+			System.out.println("Uncaught exception: " + ex);
+			}
+		};
+	  	
+	  	ThreadGroup tg1 = new ThreadGroup(TSuiteThreadsManager.getLocatorThreadTestSuite(paramsTSuite, idExecSuite));
+	    Thread test = new Thread(tg1, new Runnable() {
+	        public void run(){
+	          	try {
+	        	    suite.run();
+	          	}
+	          	catch (Throwable e) {
+	          		e.printStackTrace();
+	          	}
+	        }
+	    });
+	  	
+	  	test.start();
+	  	
+	  	//Nombramos el Thread con los datos de la TSuite
+		test.setName(TSuiteThreadsManager.getLocatorThreadTestSuite(paramsTSuite, idExecSuite));
+	  	//return test.getId();
+		
+	  	return (idExecSuite);
+	}
+    
+    public static String getLocatorThreadTestSuite(ParamsBean paramsTSuite, String idExecSuite) {
+        return (getLocatorThreadTestSuite(paramsTSuite.getSuiteName(), paramsTSuite.getApp().toString(), paramsTSuite.getChannel().toString(), paramsTSuite.getBrowser(), paramsTSuite.getVersion(), idExecSuite));   
     }
     
     public static String getLocatorThreadTestSuite(String suiteName, String application, String channel, String browser, String version, String idSuiteExecution) {

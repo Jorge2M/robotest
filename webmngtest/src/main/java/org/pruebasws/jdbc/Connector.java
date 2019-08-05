@@ -5,9 +5,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
 import org.sqlite.SQLiteConfig;
 import org.sqlite.SQLiteConfig.LockingMode;
+
+import com.mng.robotest.test80.data.ConstantesTestMaker;
 
 @SuppressWarnings("javadoc")
 public class Connector {
@@ -26,7 +27,11 @@ public class Connector {
         config.setLockingMode(LockingMode.NORMAL);
         
         // Nos conectamos a la ubicación propia de la BD en instalaciones de la aplicación
-        conn = DriverManager.getConnection("jdbc:sqlite:" + System.getProperty("user.dir") + File.separator + Constantes.directoryOutputTests + File.separator + "sqlite" + File.separator + "TESTSUITES_WS.sqlite", config.toProperties());
+        conn = DriverManager.getConnection(
+        	"jdbc:sqlite:" + System.getProperty("user.dir") + File.separator + 
+        	ConstantesTestMaker.directoryOutputTests + File.separator + 
+        	"sqlite" + File.separator + 
+        	"TESTSUITES_WS.sqlite", config.toProperties());
         return conn;
     }
 }

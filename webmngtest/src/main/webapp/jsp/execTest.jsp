@@ -13,12 +13,13 @@ response.setDateHeader ("Expires", -1);%>
 	<%@ page import="java.io.BufferedReader" %>
 	<%@ page import="javax.servlet.ServletContext" %>
 	<%@ page import="java.io.InputStreamReader" %>
-	<%@ page import="org.pruebasws.utils.TSuiteThreadsManager" %>
+	<%@ page import="org.pruebasws.thread.TSuiteThreadsManager" %>
 	<%@ page import="com.mng.robotest.test80.arq.jdbc.to.Suite" %>
 	<%@ page import="com.mng.robotest.test80.arq.jdbc.dao.SuitesDAO" %>
 	<%@ page import="com.mng.robotest.test80.arq.listeners.CallBack" %>
 	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.Suites" %>
 	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
+	<%@ page import="com.mng.robotest.test80.arq.xmlprogram.SuiteMaker" %>
 
 	<style>
 	body {
@@ -108,18 +109,18 @@ response.setDateHeader ("Expires", -1);%>
 	}
 	else {
 	    //Obtenemos el id de la ejecuci�n + el output directory correspondiente a dicha ejecuci�n y ejecutamos la TestSuite
-	    String idExecutedSuite = Test80mng.getIdForSuiteToExecute();
-		paramsTSuite.setIdExecutedSuite(idExecutedSuite);
-	    launchTestSuiteInThread(paramsTSuite, ctx);
+	    //String idExecutedSuite = Test80mng.getIdForSuiteToExecute();
+		//paramsTSuite.setIdExecutedSuite(idExecutedSuite);
+	    String idExecSuite = TSuiteThreadsManager.startSuiteInThread(paramsTSuite);
 
 	    //Esperamos a que se arranque el test
 		int maxSecondsToWait = Suites.valueOf(paramsTSuite.getSuiteName()).getMaxSecondsToWaitStart();
-		boolean testExists = waitToTestSuiteExists(maxSecondsToWait, idExecutedSuite);
+		boolean testExists = waitToTestSuiteExists(maxSecondsToWait, idExecSuite);
 		if (!testExists)
 			out.print("<div class=\"errorMessage\"><b>Problema en el inicio la TestSuite!</b>. Superado Timeout " + maxSecondsToWait + " segundos</div>");			
 		else {
 		  	//Constru�mos la ruta del report HTML
-		  	suite = SuitesDAO.getSuite(idExecutedSuite, paramsTSuite.getSuiteName());
+		  	suite = SuitesDAO.getSuite(idExecSuite, paramsTSuite.getSuiteName());
 		  	
 		  	//Escribimos la funci�n JavaScript que iterar� la llamada Ajax que espera la finalizaci�n de los tests (existencia del fichero)
 			out.println("<script>");
@@ -137,35 +138,6 @@ response.setDateHeader ("Expires", -1);%>
 	%>
 	
 	<%!
-	public static long launchTestSuiteInThread(final ParamsBean paramsTSuite, final ServletContext ctx) {  	
-	  	//Definimos el manejador de excepciones
-	  	Thread.UncaughtExceptionHandler h = new Thread.UncaughtExceptionHandler() {
-		    public void uncaughtException(Thread th, Throwable ex) {
-			System.out.println("Uncaught exception: " + ex);
-			}
-		};
-	  	
-		//Nombreamos el group con los datos de la TSuite
-	  	ThreadGroup tg1 = new ThreadGroup(TSuiteThreadsManager.getLocatorThreadTestSuite(paramsTSuite));
-	    Thread test = new Thread(tg1, new Runnable() {
-	        public void run(){
-	          	try {
-	        	    Test80mng.execSuiteByProgramaticXML(paramsTSuite);
-	          	}
-	          	catch (Throwable e) {
-	          		e.printStackTrace();
-	          	}
-	        }
-	    });
-	  	
-	  	test.start();
-	  	
-	  	//Nombramos el Thread con los datos de la TSuite
-		test.setName(TSuiteThreadsManager.getLocatorThreadTestSuite(paramsTSuite));
-	  	return test.getId();
-	}
-  	
-	
 	public static ParamsBean storeParamsFromHttpRequest(HttpServletRequest request) {
 		//Parameters that come from index.jsp
 		String app = request.getParameter(Test80mng.AppNameParam);
@@ -184,7 +156,7 @@ response.setDateHeader ("Expires", -1);%>
 	    //Parameters that don't come from index.jsp (for exemple, the call from Jenkin's CI Task)
 	    paramsTSuite.setUrlManto(request.getParameter(Test80mng.UrlManto));
 	    paramsTSuite.setRecicleWD(request.getParameter(Test80mng.RecicleWD));
-	    paramsTSuite.setEnvioCorreo(request.getParameter(Test80mng.EnvioCorreo));
+	    paramsTSuite.setMails(request.getParameterValues(Test80mng.Mails));
 	    if (request.getParameter(Test80mng.CallBackResource)!=null) {
 			CallBack callBack = new CallBack();
 	        callBack.setCallBackResource(request.getParameter(Test80mng.CallBackResource));

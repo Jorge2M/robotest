@@ -29,6 +29,10 @@ public abstract class SuiteMaker {
 		this.filterSuiteXML = FilterTestsSuiteXML.getNew(inputData.getDataFilter());
 	}
 	
+	public String getIdSuiteExecution() {
+		return testMakerContext.getIdSuiteExecution();
+	}
+	
     public List<TestMethod> getListTests() {
         XmlTest testRun = getTestRun();
         return (
