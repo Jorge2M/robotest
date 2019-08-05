@@ -32,6 +32,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusDesktopStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.suites.FlagsNaviationLineas;
+import com.mng.robotest.test80.mango.test.suites.PaisIdiomaSuite.VersionPaisSuite;
 import com.mng.robotest.test80.mango.test.utils.LevelPais;
 
 import java.util.ArrayList;
@@ -79,6 +80,7 @@ public class PaisIdioma extends GestorWebDriver {
         InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         if (this.dCtxSh==null) {
             //Si el acceso es normal (no es desde una @Factory) definiremos los siguientes datos específicos
+        	this.flagsNavigation = VersionPaisSuite.V1;
             this.dCtxSh = new DataCtxShop();
             Integer codEspanya = Integer.valueOf(1);
             List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
