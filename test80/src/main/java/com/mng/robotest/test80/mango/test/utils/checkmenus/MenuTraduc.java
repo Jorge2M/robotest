@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.utils.checkmenus;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
 import com.mng.robotest.test80.mango.test.data.CodIdioma;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -44,10 +45,6 @@ public class MenuTraduc {
 	    promocionado_nueva_temporada_she(Arrays.asList(
 	    	Translation.getNew(CodIdioma.ES, "Promoción especial"),
 	    	Translation.getNew(CodIdioma.FR, "Promotion spéciale"))),
-	    
-	    prendas_she(Arrays.asList(
-	    	Translation.getNew(CodIdioma.ES, "Prendas"),
-	    	Translation.getNew(CodIdioma.FR, "Vêtements"))),
 	    
 	    vestidos_she(Arrays.asList(
 	    	Translation.getNew(CodIdioma.ES, "Vestidos"),
@@ -104,10 +101,6 @@ public class MenuTraduc {
 	    bodies_she(Arrays.asList(
 	    	Translation.getNew(CodIdioma.ES, "Bodys y bralettes"),
 	    	Translation.getNew(CodIdioma.FR, "Body et brassiere"))),
-	    
-	    accesorios_she(Arrays.asList(
-	    	Translation.getNew(CodIdioma.ES, "Accesorios"),
-	    	Translation.getNew(CodIdioma.FR, "Accessoires"))),
 	    
 	    zapatos_she(Arrays.asList(
 	    	Translation.getNew(CodIdioma.ES, "Zapatos"),
@@ -218,10 +211,6 @@ public class MenuTraduc {
         promocionado_nueva_temporada_he(Arrays.asList(
         	Translation.getNew(CodIdioma.ES, "Promoción especial"),
         	Translation.getNew(CodIdioma.FR, "Promotion spéciale"))),
-
-        prendas_he(Arrays.asList(
-        	Translation.getNew(CodIdioma.ES, "Prendas"),
-        	Translation.getNew(CodIdioma.FR, "Vêtements"))),
         
         camisas_he(Arrays.asList(
         	Translation.getNew(CodIdioma.ES, "Camisas"),
@@ -282,10 +271,6 @@ public class MenuTraduc {
         underwear_he(Arrays.asList(
         	Translation.getNew(CodIdioma.ES, "Ropa interior"),
         	Translation.getNew(CodIdioma.FR, "Sous-vêtements"))),
-
-        sastreria_he(Arrays.asList(
-        	Translation.getNew(CodIdioma.ES, "Sastreria"),
-        	Translation.getNew(CodIdioma.FR, "Couture"))),
         
         sastreria_trajes(Arrays.asList(
         	Translation.getNew(CodIdioma.ES, "Trajes"),
@@ -304,7 +289,7 @@ public class MenuTraduc {
         	Translation.getNew(CodIdioma.FR, "Gilets"))),
 
         sastreria_camisas(Arrays.asList(
-        	Translation.getNew(CodIdioma.ES, "Camisas vestir"),
+        	Translation.getNew(CodIdioma.ES, "Cammmmmmmmmmmmmisas vestir"),
         	Translation.getNew(CodIdioma.FR, "Chemises sans"))),
 
         sastreria_camisasnoniron(Arrays.asList(
@@ -328,16 +313,12 @@ public class MenuTraduc {
         	Translation.getNew(CodIdioma.FR, "Ceintures et bretelles"))),
 
         sastreria_complementos(Arrays.asList(
-        	Translation.getNew(CodIdioma.ES, "Complementos  traje"),
+        	Translation.getNew(CodIdioma.ES, "Complementos traje"),
         	Translation.getNew(CodIdioma.FR, "Accessoires de costume"))),
 
         CATHESUITGUIDE092018(Arrays.asList(
         	Translation.getNew(CodIdioma.ES, "Suit Guide"),
         	Translation.getNew(CodIdioma.FR, "Suit guide"))),
-
-        accesorios_he(Arrays.asList(
-        	Translation.getNew(CodIdioma.ES, "Accesorios"),
-        	Translation.getNew(CodIdioma.FR, "Accessoires"))),
         	
         zapatos_he(Arrays.asList(
         	Translation.getNew(CodIdioma.ES, "Zapatos"),
@@ -414,7 +395,22 @@ public class MenuTraduc {
 		}
 	}
 	
-	public static List<MenuI> getListMenus(LineaType linea) {
+	public static List<Label> getLabels(LineaType linea, CodIdioma codIdioma) {
+		List<Label> listLabels = new ArrayList<>();
+		List<MenuI> listMenus = getListMenus(linea);
+		for (MenuI menu : listMenus) {
+			List<Translation> translations = menu.getTranslations();
+			for (Translation translation : translations) {
+				if (translation.getCodIdioma() == codIdioma) {
+					listLabels.add(translation);
+					break;
+				}
+			}
+		}
+		return listLabels;
+	}
+	
+	private static List<MenuI> getListMenus(LineaType linea) {
 		switch (linea) {
 		case she:
 			return Arrays.asList(MenuShe.values());

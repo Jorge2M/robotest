@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.appshop.PaisIdioma;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
-import com.mng.robotest.test80.mango.test.suites.PaisIdiomaSuite.VersionPaisSuite;
+import com.mng.robotest.test80.mango.test.suites.MenusPaisSuite.VersionMenusPais;
 
 public class MenusFactory {
 	
@@ -23,6 +23,7 @@ public class MenusFactory {
         InputDataTestMaker inputData = TestMakerContext.getInputData(ctx);
         AppEcom app = (AppEcom)inputData.getApp();
         Channel channel = inputData.getChannel();
+        VersionMenusPais version = VersionMenusPais.valueOf(inputData.getVersionSuite());
         List<Pais> listCountrys = Utilidades.getListCountrysFiltered(countrysStr);
         int prioridad=0;
         for (Pais pais : listCountrys) {
@@ -36,7 +37,7 @@ public class MenusFactory {
                         List<Linea> lineasAprobar = new ArrayList<>();
                         lineasAprobar.add(linea);
            	            DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, idioma, inputData.getUrlBase()); 
-                        listTests.add(new PaisIdioma(VersionPaisSuite.V3, dCtxSh, lineasAprobar, prioridad));
+                        listTests.add(new PaisIdioma(version, dCtxSh, lineasAprobar, prioridad));
                         prioridad+=1;            		
                         System.out.println(
                         	"Creado Test \"PaisIdioma\" con datos: " +

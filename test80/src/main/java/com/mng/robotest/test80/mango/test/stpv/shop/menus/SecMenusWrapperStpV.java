@@ -15,6 +15,7 @@ import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import static com.mng.robotest.test80.mango.test.data.Constantes.PrefixRebajas;
 
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.test.data.CodIdioma;
 import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -34,8 +35,9 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
+import com.mng.robotest.test80.mango.test.utils.ListComparator;
 import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
-import com.mng.robotest.test80.mango.test.utils.checkmenus.MenuI;
+import com.mng.robotest.test80.mango.test.utils.checkmenus.Label;
 import com.mng.robotest.test80.mango.test.utils.checkmenus.MenuTraduc;
 
 public class SecMenusWrapperStpV {
@@ -105,10 +107,22 @@ public class SecMenusWrapperStpV {
         return validations;
     }
     
-    public void checkOrderAndTranslationMenus(Linea linea) throws Exception {
-    	List<MenuI> menuInOrderTraduc = MenuTraduc.getListMenus(linea.getType());
+    @Validation
+    public ChecksResult checkOrderAndTranslationMenus(Linea linea, CodIdioma codIdioma) throws Exception {
+    	ChecksResult validations = ChecksResult.getNew();
+    	List<Label> menuInOrderTraduc = MenuTraduc.getLabels(linea.getType(), codIdioma);
     	List<DataScreenMenu> listMenusScreen = secMenusWrap.getListDataScreenMenus(linea, null);
-    	//,,,
+    	ListComparator comparator = ListComparator.getNew(menuInOrderTraduc, listMenusScreen);
+    	boolean menusMatch = comparator.listsMatch();
+    	String html = "";
+    	if (!menusMatch) {
+        	html = "<br>" + comparator.getHtml();
+    	}
+    	validations.add(
+        	"Los menús tienen la label y el orden esperado" + html,
+        	menusMatch, State.Warn);
+
+    	return validations;
     }
     
     @Validation

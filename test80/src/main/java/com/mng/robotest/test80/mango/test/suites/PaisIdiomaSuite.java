@@ -12,7 +12,7 @@ import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
 
 public class PaisIdiomaSuite extends SuiteMaker {
 
-	public enum VersionPaisSuite {
+	public enum VersionPaisSuite implements FlagsNaviationLineas {
 		V1(true, false, false, false),
 		V2(true, true, false, false),
 		V3(true, false, true, false),

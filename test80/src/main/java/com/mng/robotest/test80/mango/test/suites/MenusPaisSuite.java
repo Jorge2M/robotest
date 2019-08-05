@@ -12,6 +12,29 @@ import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
 
 public class MenusPaisSuite extends SuiteMaker {
 
+	public enum VersionMenusPais implements FlagsNaviationLineas {
+		V1(true, false, true, false),
+		V2(true, false, false, true),
+		V3(true, false, true, true);
+		
+		boolean testLineas;
+		boolean testBanners;
+		boolean testMenus;
+		boolean testOrderAndTranslationMenus;
+		private VersionMenusPais(
+				boolean testLineas, boolean testBanners, boolean testMenus, boolean testOrderAndTranslationMenus) {
+			this.testLineas = testLineas;
+			this.testBanners = testBanners;
+			this.testMenus = testMenus;
+			this.testOrderAndTranslationMenus = testOrderAndTranslationMenus;
+		}
+		
+		public boolean testLineas() {return testLineas;}
+		public boolean testBanners() {return testBanners;}
+		public boolean testMenus() {return testMenus;}
+		public boolean testOrderAndTranslationMenus() {return testOrderAndTranslationMenus;}
+	}
+	
     public MenusPaisSuite(ParamsBean params) {
     	super(params.getInputDataTestMaker());
     	setParameters(getParametersSuiteShop(params));

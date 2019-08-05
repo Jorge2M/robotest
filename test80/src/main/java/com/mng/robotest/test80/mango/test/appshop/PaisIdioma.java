@@ -31,7 +31,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusDesktopStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
-import com.mng.robotest.test80.mango.test.suites.PaisIdiomaSuite.VersionPaisSuite;
+import com.mng.robotest.test80.mango.test.suites.FlagsNaviationLineas;
 import com.mng.robotest.test80.mango.test.utils.LevelPais;
 
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class PaisIdioma extends GestorWebDriver {
     private String index_fact = "";
     private List<Linea> linesToTest;
     public int prioridad;
-    VersionPaisSuite version;
+    FlagsNaviationLineas flagsNavigation;
     DataCtxShop dCtxSh;
     
     //Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
@@ -62,8 +62,8 @@ public class PaisIdioma extends GestorWebDriver {
     /**
      * Constructor para invocación desde @Factory
      */
-    public PaisIdioma(VersionPaisSuite version, DataCtxShop dCtxSh, List<Linea> linesToTest, int prioridad) {
-    	this.version = version;
+    public PaisIdioma(FlagsNaviationLineas flagsNavigation, DataCtxShop dCtxSh, List<Linea> linesToTest, int prioridad) {
+    	this.flagsNavigation = flagsNavigation;
         this.dCtxSh = dCtxSh;
         String lineaStr = "";
         if (linesToTest.size()==1) {
@@ -141,8 +141,8 @@ public class PaisIdioma extends GestorWebDriver {
             testSpecificFeaturesForLinea(linea, dCtxShI, dFTest);
         }
             
-        if (version.testOrderAndTranslationMenus()) {
-        	secMenusStpV.checkOrderAndTranslationMenus(linea);
+        if (flagsNavigation.testOrderAndTranslationMenus()) {
+        	secMenusStpV.checkOrderAndTranslationMenus(linea, dCtxSh.idioma.getCodigo());
         }
         
         //Validamos si hemos de ejecutar los pasos correspondientes al recorrido de los menús
@@ -157,7 +157,7 @@ public class PaisIdioma extends GestorWebDriver {
             if (secMenus.canClickMenuArticles(dCtxShI.pais, linea, sublinea)) {
             	Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "pantalones"));
             	secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxShI);
-                if (version.testMenus()) {
+                if (flagsNavigation.testMenus()) {
                     PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
 					boolean bannerIsLincable = PageGaleriaDesktop.secBannerHead.isLinkable(dFTest.driver);
                     if (bannerIsLincable) {
@@ -188,12 +188,13 @@ public class PaisIdioma extends GestorWebDriver {
     }
     
     private boolean testBanners(Linea linea) {
-        return (version.testBanners() && 
-                linea.getContentDeskType()==TypeContentDesk.banners);
+        return (
+        	flagsNavigation.testBanners() && 
+            linea.getContentDeskType()==TypeContentDesk.banners);
     }
     
     private boolean testMenus(Linea linea, Sublinea sublinea) {
-        if (version.testMenus()) {
+        if (flagsNavigation.testMenus()) {
             if (sublinea==null) {
                 return linea.getMenus().compareTo("s")==0;
             }
