@@ -263,7 +263,11 @@ public class SuitesDAO {
                 insert.setString(9, inputDataTmaker.getUrlBase());
                 
                 //TODO desacoplar
-                insert.setString(10, inputDataTmaker.getCountrys().toString());
+                String countrys = "";
+                if (inputDataTmaker.getCountrys()!=null) {
+                	countrys = inputDataTmaker.getCountrys().toString();
+                }
+                insert.setString(10, countrys);
                 
                 insert.setString(11, fmwkTest.getPathReportHTML(fmwkTest.getOutputDirectorySuite(suite)));
 

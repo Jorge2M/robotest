@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.arq.xmlprogram;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.robotest.test80.arq.listeners.CallBack;
@@ -26,7 +27,7 @@ public class InputDataTestMaker {
     private List<String> testCasesFilter;
     private List<String> groupsFilter;
     private List<String> mails;
-    private List<String> countrys;
+    private List<String> countrys = new ArrayList<>();
     private String webAppDNS;
     private CallBack callBack = null;
 	
