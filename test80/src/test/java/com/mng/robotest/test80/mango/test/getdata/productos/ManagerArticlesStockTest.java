@@ -51,15 +51,20 @@ public class ManagerArticlesStockTest extends TestCase {
 		ArrayList<ArticleStock> listArticlesObtained = managerArticles.getArticles(codeEspanya, typeArticlesToManage);
 		
 		//Validations
-		assertTrue("Three articles are obtained", listArticlesObtained.size()==3);
-		assertTrue("All articles obtained have the Source " + SourceArticles.ServiceMango, 
-				   allArticlesHaveTheSource(listArticlesObtained, SourceArticles.ServiceMango));
-		assertTrue("All articles obtained have the type" + typeArticlesToManage, 
-				   allArticlesHaveTheType(listArticlesObtained, typeArticlesToManage));
-		assertTrue("All articles obtained are now stored in memory", 
-				   allArticlesAreInMemory(listArticlesObtained, managerArticles));
-		assertTrue("All articles obtained are now stored in caché", 
-				   allArticlesAreInCache(listArticlesObtained));
+		assertTrue(
+			"Three articles are obtained", listArticlesObtained.size()==3);
+		assertTrue(
+			"All articles obtained have the Source " + SourceArticles.ServiceMango, 
+			allArticlesHaveTheSource(listArticlesObtained, SourceArticles.ServiceMango));
+		assertTrue(
+			"All articles obtained have the type" + typeArticlesToManage, 
+			allArticlesHaveTheType(listArticlesObtained, typeArticlesToManage));
+		assertTrue(
+			"All articles obtained are now stored in memory", 
+			allArticlesAreInMemory(listArticlesObtained, managerArticles));
+		assertTrue(
+			"All articles obtained are now stored in caché", 
+			allArticlesAreInCache(listArticlesObtained));
 	}
 	
 	@Test
@@ -74,13 +79,17 @@ public class ManagerArticlesStockTest extends TestCase {
 		ArrayList<ArticleStock> listArticlesObtained = managerArticles.getArticles(codeEspanya, typeArticlesToManage);
 		
 		//Validations
-		assertTrue("Three articles are obtained", listArticlesObtained.size()==3);
-		assertTrue("All articles obtained have the Source " + SourceArticles.CacheBd_NotRelaxFilters, 
-				   allArticlesHaveTheSource(listArticlesObtained, SourceArticles.CacheBd_NotRelaxFilters));
-		assertTrue("All articles obtained have the type" + typeArticlesToManage, 
-				   allArticlesHaveTheType(listArticlesObtained, typeArticlesToManage));
-		assertTrue("All articles obtained are now stored in memory", 
-				   allArticlesAreInMemory(listArticlesObtained, managerArticles));
+		assertTrue(
+			"Three articles are obtained", listArticlesObtained.size()==3);
+		assertTrue(
+			"All articles obtained have the Source " + SourceArticles.CacheBd_NotRelaxFilters, 
+			allArticlesHaveTheSource(listArticlesObtained, SourceArticles.CacheBd_NotRelaxFilters));
+		assertTrue(
+			"All articles obtained have the type" + typeArticlesToManage, 
+			allArticlesHaveTheType(listArticlesObtained, typeArticlesToManage));
+		assertTrue(
+			"All articles obtained are now stored in memory", 
+			allArticlesAreInMemory(listArticlesObtained, managerArticles));
 	}
 
 	private boolean allArticlesHaveTheSource(ArrayList<ArticleStock> listArticles, SourceArticles sourceArticles) {
