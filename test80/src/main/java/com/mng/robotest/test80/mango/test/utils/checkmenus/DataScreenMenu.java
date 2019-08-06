@@ -39,7 +39,8 @@ public class DataScreenMenu implements Label {
 	public void setLabel(String label) {
 		this.label = label;
 		if (!isDataGaLabelValid()) {
-			setDataGaLabel("-" + label);
+			//setDataGaLabel("-" + label);
+			setDataGaLabel(label);
 		}
 	}
 	
@@ -58,6 +59,6 @@ public class DataScreenMenu implements Label {
         DataScreenMenu c = (DataScreenMenu) o; 
         return (
         	c.dataGaLabel.compareTo(this.dataGaLabel)==0 &&
-        	c.getLabel().compareTo(this.getLabel())==0);
+        	c.getLabel().toLowerCase().compareTo(this.getLabel().toLowerCase())==0);
     } 
 }
