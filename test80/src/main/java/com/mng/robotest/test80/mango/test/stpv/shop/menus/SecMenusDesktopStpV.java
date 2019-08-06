@@ -599,7 +599,8 @@ public class SecMenusDesktopStpV {
 	    stackTrace exception = WebDriverMngUtils.stackTaceException(driver, ctx);
 	    String excepcionDuplicada = "";
 	    if (exception.getRepetida()) {
-	    	excepcionDuplicada+="<br><b>Warning!</b>Se ha detectado una excepción detectada previamente (" + exception.getNumExcepciones() + ")";
+	    	excepcionDuplicada+=
+	    		"<br><b>Warning!</b>Se ha detectado una excepción detectada previamente (" + exception.getNumExcepciones() + ")";
 	    }
 	 	validations.add(
 			"El errorPage.faces no devuelve una excepción" + excepcionDuplicada,

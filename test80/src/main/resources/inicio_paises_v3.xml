@@ -4004,7 +4004,7 @@
 <linea id="nuevo"     shop="?" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="bloquesnuevo" panoramicas="s"/>
 <linea id="rebajas"   shop="n" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="menus2"/>
 <linea id="she"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
-<linea id="he"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea id="he"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nina"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="nino"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="violeta"   shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>

@@ -51,7 +51,8 @@ public class MenusUserWrapper {
 		misCompras(Arrays.asList(shop)),
 		pedidos(Arrays.asList(outlet)),
 		mangoLikesYou(Arrays.asList(shop)),
-		ayuda(Arrays.asList(shop, outlet, votf));
+		ayuda(Arrays.asList(shop, outlet, votf)),
+		cambioPais(Arrays.asList(outlet));
 
 		List<AppEcom> apps;
 		private UserMenu(List<AppEcom> apps) {
@@ -156,6 +157,8 @@ public class MenusUserWrapper {
 				return getMenuMangoLikesYou();
 			case ayuda:
 				return getMenuAyuda();
+			case cambioPais:
+				return getMenuCambioPais();
 			default:
 				return null;
 		}
@@ -328,6 +331,13 @@ public class MenusUserWrapper {
 		}
 		if (channel==Channel.movil_web) {
 			return MenuUserMobil.ayuda;
+		}
+		return null;
+	}
+	
+	private ElementPage getMenuCambioPais() {
+		if (channel==Channel.movil_web) {
+			return MenuUserMobil.cambiopais;
 		}
 		return null;
 	}

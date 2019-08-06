@@ -277,11 +277,11 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
         if (metodoPago.contains("наличными через терминал")) {
             return ("YANDEX OFFLINE");
         }
-        if (channel==Channel.desktop) {
-            if (metodoPago.contains("ОПЛАТА ПРИ ПОЛУЧЕНИИ")) {
-                return ("ContraReembolsoSTD");
-            }
-        }
+//        if (channel==Channel.desktop) {
+//            if (metodoPago.contains("ОПЛАТА ПРИ ПОЛУЧЕНИИ")) {
+//                return ("ContraReembolsoSTD");
+//            }
+//        }
 
         if (metodoPago.contains("PŁATNOŚĆ PRZY ODBIORZE") ||
             metodoPago.contains("PLATBA NA DOBÍRKU") ||
