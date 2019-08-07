@@ -375,7 +375,7 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     
     public void clickMenuYetDisplayed(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel) throws Exception {
         String xpathMenu = getXPathMenuByTypeLocator(typeLocator, menu1rstLevel);
-        clickAndWaitLoad(driver, By.xpath(xpathMenu), TypeOfClick.javascript);
+        clickElementVisibleAndWaitLoad(driver, By.xpath(xpathMenu), 0, TypeOfClick.javascript);
     }
     
     public String getLiteralMenuVisible(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel) throws Exception {

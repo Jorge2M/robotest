@@ -31,7 +31,9 @@ public class ListPagosEspana {
     @Factory
     @Test (
         groups={"Compra", "Canal:all_App:all"}, alwaysRun=true, priority=1, 
-        description="Factoría que incluye varios tests por cada uno de los pagos de España variando los flags de usuario registrado, empleado y métodos de envío")
+        description=
+    		"Factoría que incluye varios tests por cada uno de los pagos de España " + 
+    		"variando los flags de usuario registrado, empleado y métodos de envío")
     public Object[] COM010_PagoFactory(ITestContext ctx) throws Exception {
     	this.ctx = ctx;
         ArrayList<Object> listTests = new ArrayList<>();
@@ -115,9 +117,9 @@ public class ListPagosEspana {
         }    	
     }
 
-    private void createTestPago(ArrayList<Object> listTests, Pais pais, IdiomaPais idioma, Pago pago, AppEcom appE, Channel channel, 
-    							boolean usrRegistrado, boolean empleado, boolean testVale, boolean manyArticles, boolean anulPedido, 
-    							int prioridad) {
+    private void createTestPago(
+    		ArrayList<Object> listTests, Pais pais, IdiomaPais idioma, Pago pago, AppEcom appE, Channel channel, boolean usrRegistrado, 
+    		boolean empleado, boolean testVale, boolean manyArticles, boolean anulPedido, int prioridad) {
     	listTests.add(new CompraFact(pais, idioma, pago, appE, channel, usrRegistrado, empleado, testVale, manyArticles, anulPedido, prioridad));
     	System.out.println(
     	    "Creado Test COM010: " +

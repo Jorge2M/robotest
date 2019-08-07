@@ -113,7 +113,7 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
         return (page1DktopCheckout.isPresentDiaNaciPromoEmpl(driver));
     }    
     
-    public static void inputDNIPromoEmpl(String dni, Channel channel, WebDriver driver) {
+    public static void inputDNIPromoEmpl(String dni, Channel channel, WebDriver driver) throws Exception {
         if (channel==Channel.movil_web) {
             page1MobilCheckout.inputDNIPromoEmpl(dni, driver);
         } else {
