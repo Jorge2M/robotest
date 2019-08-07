@@ -36,7 +36,7 @@ public class ListPagosEspana {
     		"variando los flags de usuario registrado, empleado y métodos de envío")
     public Object[] COM010_PagoFactory(ITestContext ctx) throws Exception {
     	this.ctx = ctx;
-        ArrayList<Object> listTests = new ArrayList<>();
+        ArrayList<Object> listTests = new ArrayList<>(); 
         InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(ctx);
         AppEcom appE = (AppEcom)inputData.getApp();
         Channel channel = inputData.getChannel();
