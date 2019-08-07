@@ -503,7 +503,7 @@ public class PageGaleriaStpV {
     private ChecksResult checkIsFichaArticle(String nombre1erArt, String precio1erArt, int maxSecondsWait) {
     	ChecksResult validations = ChecksResult.getNew();
     	
-    	PageFicha pageFicha = PageFicha.newInstance(app, channel, driver);
+    	PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
       	validations.add(
     		"Aparece la página de ficha (la esperamos hasta " + maxSecondsWait + " segundos)",
     		pageFicha.isPageUntil(maxSecondsWait), State.Warn);
@@ -667,7 +667,8 @@ public class PageGaleriaStpV {
      		"El banner de cabecera contiene el porcentaje de descuento<b>" + maxPercDiscount + "</b>",
      		UtilsTestMango.textContainsSetenta(textBanner, idioma), State.Warn);
      	
-     	int menusDescVisibles = SecMenusDesktop.secMenusFiltroDiscount.getNumberOfVisibleMenus(driver);
+     	SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
+     	int menusDescVisibles = secMenus.secMenusFiltroDiscount.getNumberOfVisibleMenus();
      	validations.add(
      		"No aparece ningún filtro de descuento",
      		menusDescVisibles==0, State.Warn);
@@ -884,5 +885,29 @@ public class PageGaleriaStpV {
     		"Aparece el link de <b>Menos info</b>",
     		PageGaleriaDesktop.secBannerHead.isVisibleLinkTextInfoRebajas(TypeLinkInfo.less, driver), State.Warn);
     	return validations;
+    }
+    
+	@Validation
+    public ChecksResult validateGaleriaAfeterSelectMenu(DataCtxShop dCtxSh) throws Exception {
+		ChecksResult validations = ChecksResult.getNew();
+		int maxSecondsToWaitArticle = 3;
+		int maxSecondsToWaitIcon = 2;
+		validations.add (
+			"Como mínimo se obtiene un artículo (lo esperamos hasta " + maxSecondsToWaitArticle + " segundos)",
+			pageGaleria.isVisibleArticleUntil(1, maxSecondsToWaitArticle), State.Warn);
+		if (dCtxSh.appE==AppEcom.shop) {
+			validations.add (
+				"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + maxSecondsToWaitIcon + " segundos)",
+				pageGaleria.isArticleWithHearthIconPresentUntil(1, maxSecondsToWaitIcon), State.Defect);
+			validations.add (
+				"Cada artículo tiene 1 icono de favoritos asociado",
+				pageGaleria.eachArticlesHasOneFavoriteIcon(), State.Info, true);
+		} else {
+			validations.add (
+				"No aparece ningún icono de favoritos asociado a ningún artículo",
+				pageGaleria.getNumFavoritoIcons() == 0, State.Defect);
+		}
+		
+		return validations;
     }
 }

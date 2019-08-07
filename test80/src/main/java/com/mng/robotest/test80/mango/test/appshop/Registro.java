@@ -11,20 +11,21 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
-import com.mng.robotest.test80.arq.utils.otras.Constantes.ThreeState;
+import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
 import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.DataMango;
+import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -38,7 +39,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegis
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMiCuentaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalSuscripcionStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroDirecStpV;
@@ -46,6 +46,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroFinStpV
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroNinosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroSegundaStpV;
+import com.mng.robotest.test80.mango.test.suites.RegistrosSuite.VersionRegistroSuite;
 
 public class Registro extends GestorWebDriver {
     Pais españa = null;
@@ -71,28 +72,21 @@ public class Registro extends GestorWebDriver {
         this.index_fact = pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + "-" + idioma.getCodigo().getLiteral();
         this.prioridad = prioridad;
     }
-    
-    //TODO temporal para Loyalty
-    public Registro(int iteration) {
-        this.index_fact = String.valueOf(iteration);
-        loyaltyTest = true;
-    }
+
     
     @BeforeMethod(groups={"Registro", "Canal:all_App:all", "SupportsFactoryCountrys"})
-    @Parameters({"brwsr-path", "urlBase", "AppEcom", "Channel"})
-    public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) 
-    throws Exception {
-        //Recopilación de parámetros
+    public void login(ITestContext context, Method method) throws Exception {
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom(appEcom);
-        dCtxSh.setChannel(channel);
-        dCtxSh.urlAcceso = urlAcceso;
+        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
+        dCtxSh.setChannel(inputData.getChannel());
+        dCtxSh.urlAcceso = inputData.getUrlBase();
 
         //Si el acceso es normal (no es desde una @Factory) utilizaremos el España/Castellano
         if (this.paisFactory==null) {
             if (this.españa==null) {
                 Integer codEspanya = Integer.valueOf(1);
-                List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(Arrays.asList(codEspanya)));
+                List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
                 this.españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
                 this.castellano = this.españa.getListIdiomas().get(0);
             }
@@ -104,7 +98,7 @@ public class Registro extends GestorWebDriver {
             dCtxSh.idioma = this.idiomaFactory;
         }        
         
-        Utils.storeDataShopForTestMaker(bpath, this.index_fact, dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), index_fact, dCtxSh, context, method);
     }
 
     @SuppressWarnings("unused")
@@ -119,6 +113,7 @@ public class Registro extends GestorWebDriver {
         groups={"Registro", "Canal:desktop_App:all"},
         description="Registro con errores en la introducción de los datos")
     public void REG001_RegistroNOK() throws Exception {
+   
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
@@ -127,7 +122,8 @@ public class Registro extends GestorWebDriver {
         }
             
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
-        SecMenusWrapperStpV.secMenuUser.selectRegistrate(dCtxSh.channel, dCtxSh, dFTest.driver);
+        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        userMenusStpV.selectRegistrate(dCtxSh);
         
         //Step. Click inicial a Registrate (sin haber introducido ningún dato) -> Aparecerán los correspondientes mensajes de error
         HashMap<String,String> dataRegister = new HashMap<>();        
@@ -161,37 +157,31 @@ public class Registro extends GestorWebDriver {
 
     @SuppressWarnings("static-access")
     @Test (
-        groups={"Registro", "Canal:all_App:shop", "Canal:all_App:outlet", "SupportsFactoryCountrys"}, alwaysRun=true, 
+        groups={"Registro", "Canal:all_App:shop,outlet", "SupportsFactoryCountrys"}, alwaysRun=true, 
         description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
-    @Parameters({"loginAfterRegister", "register"})    
-    public void REG002_RegistroOK_publi(String loginAfterRegister, String register) throws Exception {
-        boolean loginAfter = true;
-        boolean clickPubli = true;
-        boolean clickRegister = true;
-        if ("false".compareTo(loginAfterRegister)==0) {
-            loginAfter = false;
-        }
-        if ("false".compareTo(register)==0) {
-        	clickRegister = false;
-        }
-        
+    public void REG002_RegistroOK_publi() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
-        dCtxSh.userRegistered = false;
-            
-        //En caso de ejecución desde .bat no ejecutaremos el Registro 
-        if (utils.getTypeAccessFmwk(dFTest.ctx)==TypeAccessFmwk.Bat) {
+    	InputDataTestMaker inputData = TestMakerContext.getInputData(dFTest.ctx);
+        if (inputData.getTypeAccess()==TypeAccessFmwk.Bat) {
             return;
         }
-            
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
-        //Validación modal suscripcion RGPD
+        
+        boolean clickPubli = true;
+    	VersionRegistroSuite version = VersionRegistroSuite.V3;
+    	if (isAccesFromFactory()) {
+    		version = VersionRegistroSuite.valueOf(inputData.getVersionSuite());
+    	}
+    	
+        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
+        dCtxSh.userRegistered = false;
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
         if (!dCtxSh.userRegistered) {
         	ModalSuscripcionStpV.validaRGPDModal(dCtxSh, dFTest.driver);
         }
         
-        SecMenusWrapperStpV.secMenuUser.selectRegistrate(dCtxSh.channel, dCtxSh, dFTest.driver);
-        if(clickRegister) {
+        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        userMenusStpV.selectRegistrate(dCtxSh);
+        if(version.register()) {
 	        String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
 	        HashMap<String,String> dataRegistro = 
 	        	PageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dCtxSh.channel, dFTest);
@@ -199,7 +189,6 @@ public class Registro extends GestorWebDriver {
 	        boolean paisConNinos = dCtxSh.pais.getShoponline().stateLinea(LineaType.nina, dCtxSh.appE)==ThreeState.TRUE;
 	        PageRegistroSegundaStpV.setDataAndLineasRandom("23/4/1974", paisConNinos, 2/*numNinos*/, dCtxSh.pais, dataRegistro, dFTest);
 	        if (paisConNinos) {
-	            //Step. Introducir datos correctos de los niños y pulsar "Continuar"
 	            ListDataNinos listaNinos = new ListDataNinos();
 	            listaNinos.add(new DataNino(sexoType.nina, "Martina Muñoz Rancaño", "11/10/2010"));
 	            listaNinos.add(new DataNino(sexoType.nina, "Irene Muñoz Rancaño", "29/8/2016"));
@@ -210,40 +199,25 @@ public class Registro extends GestorWebDriver {
 	        PageRegistroDirecStpV.clickFinalizarButton(dFTest);
 	        PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, dFTest);
 
-	        //Seleccionar el logo de la cabecera
-            SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh, dFTest.driver);
+            SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
             secCabeceraStpV.selecLogo();
 
-	        //Validacion footer RGPD
-	        SecFooterStpV.validaRGPDFooter(clickRegister, dCtxSh, dFTest.driver);
-	        
-	        if (loginAfter) {
-	            //Step. Cerramos sesión y nos volvemos a identificar con los datos del registro
+	        SecFooterStpV.validaRGPDFooter(version.register(), dCtxSh, dFTest.driver);
+	        if (version.loginAfterRegister()) {
 	            String emailUsr = dataRegistro.get("cfEmail");
 	            String password = dataRegistro.get("cfPass");
-	            SecMenusWrapperStpV.secMenuUser.logoffLogin(emailUsr, password, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-	                
-	            //Step. Ejecutamos la consulta de Mis datos comprobando que son coherentes con los utilizados en el registro
+	            userMenusStpV.logoffLogin(emailUsr, password);
 	            PageMiCuentaStpV.goToMisDatosAndValidateData(dataRegistro, dCtxSh.pais.getCodigo_pais(), dCtxSh.appE, dCtxSh.channel, dFTest.driver);
-	                
-	            //Step. Ejecutamos la consulta de suscripciones comprobando que los datos son coherentes con los utilizados en el registro
 	            PageMiCuentaStpV.goToSuscripcionesAndValidateData(dataRegistro, dCtxSh.appE, dCtxSh.channel, dFTest.driver);        
 	        }
-	        
-	        //TODO Checkout temporal para Loyalty
-	        if (loyaltyTest) {
-//	        	navegaGaleria(dFTest);
-//	        	testPago(dataRegistro, dFTest);
-	        }
-
         } else {
-        	SecFooterStpV.validaRGPDFooter(clickRegister, dCtxSh, dFTest.driver);
+        	SecFooterStpV.validaRGPDFooter(version.register(), dCtxSh, dFTest.driver);
         }
     }
     
     @SuppressWarnings("static-access")
     @Test (
-        groups={"Registro", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true, 
+        groups={"Registro", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
         description="Alta/Registro de un usuario (sin seleccionar el link de publicidad)")
     public void REG003_RegistroOK_NoPubli() throws Exception {
     	boolean clickPubli = false;
@@ -251,13 +225,15 @@ public class Registro extends GestorWebDriver {
         DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
             
-        //En caso de ejecución desde .bat no ejecutaremos el Registro 
-        if (utils.getTypeAccessFmwk(dFTest.ctx)==TypeAccessFmwk.Bat) {
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(dFTest.ctx);
+        if (inputData.getTypeAccess()==TypeAccessFmwk.Bat) {
             return;
         }
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
-        SecMenusWrapperStpV.secMenuUser.selectRegistrate(dCtxSh.channel, dCtxSh, dFTest.driver);
+        
+        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        userMenusStpV.selectRegistrate(dCtxSh);
         String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
         HashMap<String,String> dataRegistro = 
         	PageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dCtxSh.channel, dFTest);
@@ -265,6 +241,10 @@ public class Registro extends GestorWebDriver {
         PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dCtxSh.channel, dFTest);
         PageRegistroDirecStpV.clickFinalizarButton(dFTest);
         PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, dFTest);
-        SecMenusUserStpV.checkVisibilityLinkMangoLikesYou(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        userMenusStpV.checkVisibilityLinkMangoLikesYou();
     }    
+    
+    private boolean isAccesFromFactory() {
+    	return (this.paisFactory!=null);
+    }
 }

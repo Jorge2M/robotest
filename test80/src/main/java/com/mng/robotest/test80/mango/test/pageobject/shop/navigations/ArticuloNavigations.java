@@ -7,9 +7,11 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock;
-import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecBuscadorWrapper;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecDataProduct.ColorType;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.UserMenu;
 
 @SuppressWarnings({"static-access"})
 public class ArticuloNavigations {
@@ -20,10 +22,10 @@ public class ArticuloNavigations {
     public static ArticuloScreen selectArticuloTallaColorByRef(ArticleStock articleStock, AppEcom app, Channel channel, WebDriver driver) throws Exception {
         ArticuloScreen articulo = new ArticuloScreen();
         articulo.setReferencia(articleStock.getReference());
-        SecBuscadorWrapper.buscarArticulo(articleStock, channel, app, driver);
+        buscarArticulo(articleStock, channel, app, driver);
 
         //Esperamos un máximo de 10 segundos a que aparezca la ficha del artículo
-        PageFicha pageFicha = PageFicha.newInstance(app, channel, driver);
+        PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
         int maxSecondsToWait = 10;
         pageFicha.isFichaArticuloUntil(articulo.getReferencia(), maxSecondsToWait);
 
@@ -80,5 +82,24 @@ public class ArticuloNavigations {
         articulo.setNombre(pageFicha.secDataProduct.getTituloArt(channel, driver));
 
         return articulo;
+    }
+    
+	public static void buscarArticulo(ArticleStock articulo, Channel channel, AppEcom app, WebDriver driver) 
+    throws Exception {
+		SecCabecera.buscarTexto(articulo.getReference(), channel, app, driver);
+    	selectColorIfExists(articulo.getColourCode(), app, driver);
+    }
+    
+    @SuppressWarnings("static-access")
+    private static void selectColorIfExists(String colourCode, AppEcom app, WebDriver driver) throws Exception {
+    	if (colourCode!=null && "".compareTo(colourCode)!=0) {
+    		PageFicha pageFicha = PageFicha.newInstance(Channel.desktop, app, driver);
+		    if (pageFicha.secDataProduct.isClickableColor(colourCode, driver)) {
+		        int maxSecondsToWait = 5;
+		        if (pageFicha.isPageUntil(maxSecondsToWait)) {
+		        	pageFicha.secDataProduct.selectColorWaitingForAvailability(colourCode, driver);
+		        }
+	        }
+    	}
     }
 }

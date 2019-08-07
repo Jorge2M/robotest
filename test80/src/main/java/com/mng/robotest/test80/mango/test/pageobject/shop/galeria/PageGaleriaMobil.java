@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
@@ -29,13 +29,7 @@ public class PageGaleriaMobil extends PageGaleria {
     	"@class='product-list-info-name' or " +
     	"@class='product-name'";
     final static String XPathNombreRelativeToArticle = "//*[" + classProductItem + "]";
-    final static String XPathColoresArticulo = 
-    	"//div[@class[contains(.,'product-list-color--stock')] or " + 
-    		  "@class[contains(.,'product-colors')]]";
-    final static String XPathArticuloConColores = XPathColoresArticulo + "//" + getXPathAncestorArticulo();
-    final static String XPathImgColorRelativeArticleWithTagSelected = 
-    	XPathColoresArticulo + 
-    	"//self::*[@class[contains(.,'" + TagFlagSelected + "')]]//img";
+
     final static String XPathImgRelativeArticle = 
         "//img[@src and " + 
         	 "(@class[contains(.,'productListImg')] or " + 
@@ -54,9 +48,6 @@ public class PageGaleriaMobil extends PageGaleria {
         	"@class[contains(.,'product-list-info-price')] or " + 
         	"@class[contains(.,'product-list-price')] or " +
         	"@class[contains(.,'product-price')]]";
-    final static String XPathHearthIconRelativeArticle = 
-    	"//span[@class[contains(.,'product-list-fav')] or " + 
-    		   "@class[contains(.,'product-favorite')]]";
     final static String XPathButtonAnyadirRelativeArticle = "//div[@class[contains(.,'product-add')]]/button";
     final static String XPathCapaTallasRelativeArticle = "//div[@class[contains(.,'product-sizes-container')]]";
     final static String XPpathIconoUpGalery = "//div[@id='scrollTop']";
@@ -70,6 +61,36 @@ public class PageGaleriaMobil extends PageGaleria {
         	 "@class[contains(.,'product-list-name')] or " + 
         	 "@class='product-list-info-name' or " +
         	 "@class='product-name')";
+    
+    final static String XPathColoresArticuloOutlet = "//div[@class[contains(.,'product-list-color--stock')]]";
+    final static String XPathColoresArticuloShop = "//div[@class[contains(.,'product-colors')]]";
+    final static String XPathArticleWithColorsOutlet = "//div[@class[contains(.,'product-list-info-color')]]/ancestor::li";	
+    
+    String getXPathColoresArticle() {
+    	switch (app) {
+    	case outlet:
+    		return XPathColoresArticuloOutlet;
+    	case shop:
+    	default:
+    		return XPathColoresArticuloShop;
+    	}
+    }
+
+    String getXPathArticuloConColores() {
+    	switch (app) {
+    	case outlet:
+    		return XPathArticleWithColorsOutlet;
+    	case shop:	
+    	default:
+    		return getXPathColoresArticle() + "//" + getXPathAncestorArticulo();
+    	}
+    }
+    
+    String getXPathImgColorRelativeArticleWithTagSelected() {
+    	return (
+    		getXPathColoresArticle() + 
+    		"//self::*[@class[contains(.,'" + TagFlagSelected + "')]]//img");
+    }
     
     @Override
     public String getXPathLinkRelativeToArticle() {
@@ -92,28 +113,23 @@ public class PageGaleriaMobil extends PageGaleria {
     	return (new PageGaleriaMobil(app, driver)); 
     }
     
-    static String getXPathArticuloConVariedadColores(int numArticulo) {
-        return ("(" + XPathArticuloConColores + ")" + "[" + numArticulo + "]");
+    String getXPathArticuloConVariedadColores(int numArticulo) {
+        return ("(" + getXPathArticuloConColores() + ")" + "[" + numArticulo + "]");
     }
     
-    static String getXPathImgCodigoColor(String codigoColor) {
+    String getXPathImgCodigoColor(String codigoColor) {
     	return XPathImgCodColorWithTagColor.replace(TagIdColor, codigoColor);
     }
     
-    static String getXPathImgColorRelativeArticle(boolean selected) {
+    String getXPathImgColorRelativeArticle(boolean selected) {
         String selectedStr = "";
         if (selected) {
             selectedStr = "selected";
         }
-        return (XPathImgColorRelativeArticleWithTagSelected.replace(TagFlagSelected, selectedStr));
+        return (getXPathImgColorRelativeArticleWithTagSelected().replace(TagFlagSelected, selectedStr));
     }
     
-    static String getXPathArticleHearthIcon(int posArticulo) {
-        String xpathArticulo = "(" + XPathArticulo + ")[" + posArticulo + "]";
-        return (xpathArticulo + XPathHearthIconRelativeArticle);
-    }
-    
-    static String getXPathButtonAnyadirArticle(int posArticulo) {
+    String getXPathButtonAnyadirArticle(int posArticulo) {
     	String xpathArticulo = "(" + XPathArticulo + ")[" + posArticulo + "]";
     	return (xpathArticulo + XPathButtonAnyadirRelativeArticle);
     }

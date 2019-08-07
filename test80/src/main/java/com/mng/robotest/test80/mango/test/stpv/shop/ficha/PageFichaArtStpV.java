@@ -50,7 +50,7 @@ public class PageFichaArtStpV {
         this.driver = TestCaseData.getdFTest().driver;
         this.channel = channel;
         this.app = appE;
-        this.pageFicha = PageFicha.newInstance(appE, channel, driver);
+        this.pageFicha = PageFicha.newInstance(channel, appE, driver);
     }
     
     public PageFicha getFicha() {
@@ -389,8 +389,6 @@ public class PageFichaArtStpV {
     public void selectBuscarEnTiendaButton() throws Exception {
     	TestCaseData.getDatosCurrentStep().replaceInDescription(tagNameLink, pageFicha.getNameLinkBuscarEnTienda());
         pageFicha.selectBuscarEnTiendaLink();             
-
-        //Validaciones
         ModalBuscadorTiendasStpV.validaBusquedaConResultados(driver);
     }
     
@@ -407,7 +405,7 @@ public class PageFichaArtStpV {
     public void validateSliderIfExists(Slider typeSlider) {
     	boolean isVisibleSlider = checkSliderVisible(typeSlider);
         if (isVisibleSlider) {
-        	checkNumArticlesSlider(1, typeSlider);
+        	checkNumArticlesSlider(0, typeSlider);
         }
     }
     

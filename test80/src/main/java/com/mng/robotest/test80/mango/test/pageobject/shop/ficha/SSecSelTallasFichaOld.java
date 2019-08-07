@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 
 public class SSecSelTallasFichaOld extends WebdrvWrapp {
@@ -80,7 +82,7 @@ public class SSecSelTallasFichaOld extends WebdrvWrapp {
     /**
      * @return el literal visible de la talla seleccionada en el desplegable
      */
-    public static String getTallaAlfSelected(WebDriver driver) {
+    public static String getTallaAlfSelected(AppEcom app, WebDriver driver) {
         Select select = despliegaSelectTallas(driver);
         String tallaVisible = select.getFirstSelectedOption().getText(); 
         
@@ -90,7 +92,8 @@ public class SSecSelTallasFichaOld extends WebdrvWrapp {
         }
         
         //Tratamos el caso de talla única donde unificamos el valor a "U"
-        if (getTallaNumSelected(driver).compareTo("99")==0) {
+        String codTallaUnica = UtilsTestMango.getCodigoTallaUnica(app);
+        if (getTallaNumSelected(driver).compareTo(codTallaUnica)==0) {
             tallaVisible = "U";
         }
         

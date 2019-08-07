@@ -1,49 +1,34 @@
 package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
-
 import org.testng.annotations.*;
+import org.testng.ITestContext;
 
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.Suites;
 import com.mng.robotest.test80.mango.test.appshop.Favoritos;
 import com.mng.robotest.test80.mango.test.appshop.MiCuenta;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
-import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-
-import org.testng.ITestContext;
 
 
 public class GenericFactory {
+	
     @Factory
     @Parameters({"countrys"})
-    public Object[] createInstances(String listaPaisesStr, ITestContext context) throws Exception {
+    public Object[] createInstances(String listaPaisesStr, ITestContext ctx) throws Exception {
         ArrayList<Object> listTests = new ArrayList<>();
         try {
-            Suites suite = Suites.valueOf(context.getSuite().getName());
-            List<Integer> listaPaisesInt = UtilsMangoTest.getListaPaisesInt(listaPaisesStr);
-    			
-            //Realizamos el filtrado de los países
-            Response response = Utilidades.filtradoListaPaises(false/*todosPaises*/, listaPaisesInt);	
-            Iterator<Continente> itContinentes = response.getResponse().iterator();
-    	        
-            //Iteramos a nivel de Continentes -> Países -> Idiomas
+        	InputDataTestMaker inputData = TestMakerContext.getInputData(ctx);
+        	Suites suite = Suites.valueOf(inputData.getNameSuite());
+            List<Pais> listCountrys = Utilidades.getListCountrysFiltered(listaPaisesStr);
             int prioridad=0;
-            while (itContinentes.hasNext()) {
-                Continente continente = itContinentes.next();
-                Iterator<Pais> itPaises = continente.getPaises().iterator();
-                while (itPaises.hasNext()) {
-                    Pais pais = itPaises.next();
-        	            	
-                    //Sólo creamos test para el 1er idioma
-                    Iterator<IdiomaPais> itIdiomas = pais.getListIdiomas().iterator();
-                    IdiomaPais primerIdioma = itIdiomas.next();
-	                
-                    //Sólo creamos el test para países con compra
-                    if (paisToTest(pais, false/*isOutlet*/)) {
-                    	addTestToList(listTests, suite, pais, primerIdioma, prioridad);
-                    	prioridad+=1;
-                    }
+            for (Pais pais : listCountrys) {
+                IdiomaPais primerIdioma = pais.getListIdiomas().get(0);
+                if (paisToTest(pais, false)) {
+                	addTestToList(listTests, suite, pais, primerIdioma, prioridad);
+                	prioridad+=1;
                 }
             }
         }
@@ -73,11 +58,6 @@ public class GenericFactory {
         );
     }
 	
-    /**
-     * @param pais
-     * @param isOutlet
-     * @return si se ha de crear un test para un país concreto
-     */	
     protected boolean paisToTest(Pais pais, boolean isOutlet) {
         return (
             "n".compareTo(pais.getExists())!=0 &&

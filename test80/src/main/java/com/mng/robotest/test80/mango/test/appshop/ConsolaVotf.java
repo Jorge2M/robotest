@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -20,27 +21,29 @@ public class ConsolaVotf extends GestorWebDriver {
 
     String prodDisponible1 = "";
     
-    @BeforeMethod
-    @Parameters({ "brwsr-path", "urlBase", "prodDisponible1" })
-    public void login( String bpath, String urlAcceso, ITestContext context, Method method, String prodDisponible1I) 
-    throws Exception {
+    @BeforeMethod(groups={"Canal:desktop_App:votf"})
+    @Parameters({"prodDisponible1" })
+    public void login(String prodDisponible1I, ITestContext context, Method method) throws Exception {
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom(AppEcom.votf);
         dCtxSh.setChannel(Channel.desktop);
-        dCtxSh.urlAcceso = urlAcceso;
+        dCtxSh.urlAcceso = inputData.getUrlBase();
         
-        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), "", dCtxSh, context, method);
         this.prodDisponible1 = prodDisponible1I;
     }
 
     @SuppressWarnings("unused")
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod(groups={"Canal:desktop_App:votf"}, alwaysRun = true)
     public void logout(final ITestContext context, final Method method) throws Exception {
         WebDriver driver = TestCaseData.getWebDriver();
         super.quitWebDriver(driver, context);
     }
 
-    @Test (description="[PRE] Generar pedido mediante la consola de VOTF")
+    @Test (
+    	groups={"Canal:desktop_App:votf"},
+    	description="[PRE] Generar pedido mediante la consola de VOTF")
     public void VOFT001_GenerarPedido(final ITestContext context) throws Exception {
 		WebDriver driver = TestCaseData.getWebDriver();
     	

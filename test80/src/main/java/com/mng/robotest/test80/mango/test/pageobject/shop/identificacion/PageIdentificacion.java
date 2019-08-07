@@ -9,12 +9,11 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.UserMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalActPoliticaPrivacidad;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAfterLogin;
-
 
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la página de autentificación de 
@@ -51,7 +50,8 @@ public class PageIdentificacion extends WebdrvWrapp {
         if (dCtxSh.userRegistered) {
             iniciarSesion(dCtxSh, driver);
         } else {
-            SecMenusWrap.closeSessionIfUserLogged(dCtxSh.channel, dCtxSh.appE, driver);
+        	SecMenusWrap secMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+        	secMenus.closeSessionIfUserLogged();
         }
     }
     
@@ -94,21 +94,23 @@ public class PageIdentificacion extends WebdrvWrapp {
     public static void clickIniciarSesionAndWait(Channel channel, AppEcom app, WebDriver driver) throws Exception {
         if (channel==Channel.movil_web) {
             //En el caso de mobile nos tenemos que asegurar que están desplegados los menús
-        	SecCabeceraMobil secCabeceraMobil = (SecCabeceraMobil)SecCabecera.getNew(Channel.movil_web, app, driver);
+        	SecCabecera secCabeceraMobil = SecCabecera.getNew(Channel.movil_web, app, driver);
         	boolean toOpen = true;
-        	secCabeceraMobil.clickIconoMenuHamburguer(toOpen);
+        	secCabeceraMobil.clickIconoMenuHamburguerMobil(toOpen);
             
             // Si existe, nos posicionamos y seleccionamos el link \"CERRAR SESIÓN\" 
             // En el caso de iPhone parece que mantiene la sesión abierta después de un caso de prueba 
-            boolean menuClicado = SecMenusWrap.secMenusUser.clickCerrarSessionIfLinkExists(channel, driver);
+        	SecMenusWrap secMenus = SecMenusWrap.getNew(channel, app, driver);
+        	boolean menuClicado = secMenus.getMenusUser().clickMenuIfInState(UserMenu.cerrarSesion, StateElem.Clickable);
             
             //Si hemos clicado el menú 'Cerrar Sesión' volvemos a abrir los menús
             if (menuClicado) {
-            	secCabeceraMobil.clickIconoMenuHamburguer(toOpen);
+            	secCabeceraMobil.clickIconoMenuHamburguerMobil(toOpen);
             }
         }
         
-        SecMenusWrap.secMenusUser.MoveAndclickIniciarSesion(channel, driver);
+        SecMenusWrap secMenus = SecMenusWrap.getNew(channel, app, driver);
+        secMenus.getMenusUser().moveAndClick(UserMenu.iniciarSesion);
     }
     
     public static boolean isErrorEmailoPasswordKO(WebDriver driver) {

@@ -10,25 +10,39 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecKrediKarti
 
 public class SecKrediKartiStpV {
 
+	final private WebDriver driver;
+	final private Channel channel;
+	final private SecKrediKarti secKrediKarti;
+	
+	private SecKrediKartiStpV(Channel channel, WebDriver driver) {
+		this.driver = driver;
+		this.channel = channel;
+		this.secKrediKarti = SecKrediKarti.getNew(channel, driver);
+	}
+	
+	public static SecKrediKartiStpV getNew(Channel channel, WebDriver driver) {
+		return (new SecKrediKartiStpV(channel, driver));
+	}
+	
 	@Step (
 		description="Introducimos el número de cuenta #{numTarjeta}",
         expected="Aparece la capa correspondiente a las opciones a plazo")
-    public static void inputNumTarjeta(String numTarjeta, Channel channel, WebDriver driver) {
-        SecKrediKarti.inputCardNumberAndTab(driver, numTarjeta);
+    public void inputNumTarjeta(String numTarjeta) {
+        secKrediKarti.inputCardNumberAndTab(numTarjeta);
         isVisibleCapaPagoAplazo(channel, 5, driver);
     }
 	
 	@Validation (
 		description="Se carga la capa correspondiente al pago a plazos (en menos de #{maxSecondsWait} segundos)",
 		level=State.Defect)
-	private static boolean isVisibleCapaPagoAplazo(Channel channel, int maxSecondsWait, WebDriver driver) {
-	    return (SecKrediKarti.isVisiblePagoAPlazoUntil(driver, channel, maxSecondsWait));
+	private boolean isVisibleCapaPagoAplazo(Channel channel, int maxSecondsWait, WebDriver driver) {
+	    return (secKrediKarti.isVisiblePagoAPlazoUntil(maxSecondsWait));
 	}
     
 	@Step (
 		description="Seleccionamos la #{numOpcion}a de las opciones de pago a plazo", 
         expected="La opción se selecciona correctamente")
-    public static void clickOpcionPagoAPlazo(int numOpcion, Channel channel, WebDriver driver) {
-		SecKrediKarti.clickRadioPlazo(numOpcion, driver, channel);
+    public void clickOpcionPagoAPlazo(int numOpcion) throws Exception {
+		secKrediKarti.clickRadioPagoAPlazo(numOpcion);
     }
 }

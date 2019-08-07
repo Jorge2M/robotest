@@ -19,6 +19,7 @@ import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.UserMenu;
 
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la sección de "Wishlist"
@@ -139,7 +140,8 @@ public class PageFavoritos extends WebdrvWrapp {
     public static void clearAllArticulos(Channel channel, AppEcom appE, WebDriver driver) throws Exception {
         //Si la sección no es visible clickamos en favoritos
         if (!isSectionVisible(driver)) {
-            SecMenusWrap.secMenusUser.clickFavoritosAndWait(channel, appE, driver);
+        	SecMenusWrap secMenus = SecMenusWrap.getNew(channel, appE, driver);
+            secMenus.getMenusUser().clickMenuAndWait(UserMenu.favoritos);
         }
         int i=0; //Para evitar posibles bucles infinitos
         while (hayArticulos(driver) && i<50) {

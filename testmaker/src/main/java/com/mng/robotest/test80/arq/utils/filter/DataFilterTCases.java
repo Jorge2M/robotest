@@ -7,10 +7,15 @@ import com.mng.robotest.test80.arq.utils.otras.Channel;
 
 public class DataFilterTCases {
 
+	private final Channel channel; 
+	private final AppTest appE;
 	private List<String> groupsFilter;
 	private List<String> testCasesFilter;
-	private Channel channel; 
-	private AppTest appE;
+	
+	public DataFilterTCases(Channel channel, AppTest appE) {
+		this.channel = channel;
+		this.appE = appE;
+	}
 	
 	public List<String> getGroupsFilter() {
 		return groupsFilter;
@@ -27,14 +32,8 @@ public class DataFilterTCases {
 	public Channel getChannel() {
 		return channel;
 	}
-	public void setChannel(Channel channel) {
-		this.channel = channel;
-	}
 	public AppTest getAppE() {
 		return appE;
-	}
-	public void setAppE(AppTest appE) {
-		this.appE = appE;
 	}
 	
 	public boolean isSomeFilterActive() {

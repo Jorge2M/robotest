@@ -14,7 +14,7 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
@@ -797,7 +797,8 @@ public class PageGaleriaDesktop extends PageGaleria {
         moveToElement(hearthIcon, driver);
         
         //Hacemos el menú superior transparente porque en ocasiones tapa el icono de favoritos
-        SecMenusDesktop.secMenuSuperior.secLineas.bringMenuBackground(app, driver);
+        SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
+        secMenus.secMenuSuperior.secLineas.bringMenuBackground();
         
         //Clicamos y esperamos a que el icono cambie de estado
         StateFavorito estadoInicial = getStateHearthIcon(hearthIcon);

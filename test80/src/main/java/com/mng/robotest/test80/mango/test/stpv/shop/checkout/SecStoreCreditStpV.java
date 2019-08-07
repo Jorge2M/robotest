@@ -64,7 +64,7 @@ public class SecStoreCreditStpV {
     	level=State.Warn)
     private static boolean checkAfterMarkSaldoEnCuenta(Channel channel, Pais pais, WebDriver driver) {
 	    int numPagosExpected = 0;
-	    return (PageCheckoutWrapper.isNumpagos(numPagosExpected, channel, pais, driver));
+	    return (PageCheckoutWrapper.isNumpagos(numPagosExpected, channel, driver));
     }
    
     @Validation

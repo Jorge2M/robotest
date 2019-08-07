@@ -1,13 +1,13 @@
 
 <%
-response.setHeader("Cache-Control","no-cache");
+	response.setHeader("Cache-Control","no-cache");
 response.setHeader("Pragma","no-cache");
 response.setDateHeader ("Expires", -1);
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page session="false"%>
-<%@ page import="org.pruebasws.utils.TSuiteThreadsManager"%>
+<%@ page import="org.pruebasws.thread.TSuiteThreadsManager"%>
 <%@ page import="org.pruebasws.jdbc.dao.TestsDAO"%>
 <%@ page import="org.pruebasws.jdbc.to.SuiteTestData"%>
 <%@ page import="org.pruebasws.jdbc.to.BrowserSuite"%>
@@ -18,7 +18,7 @@ response.setDateHeader ("Expires", -1);
 <%@ page import="com.mng.robotest.test80.Test80mng"%>
 <%@ page import="com.mng.robotest.test80.arq.xmlprogram.ParamsBean" %>
 <%@ page import="com.mng.robotest.test80.arq.utils.filter.TestMethod"%>
-<%@ page import="com.mng.robotest.test80.arq.utils.filter.FilterTNGxmlTRun"%>
+<%@ page import="com.mng.robotest.test80.arq.utils.filter.FilterTestsSuiteXML"%>
 <%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
 <%@ page import="com.mng.robotest.test80.mango.conftestmaker.Suites" %>
 
@@ -56,7 +56,7 @@ response.setDateHeader ("Expires", -1);
 }
 </style>
 <%
-ServletContext ctx = getServletContext();
+	ServletContext ctx = getServletContext();
 System.setProperty("user.dir", getServletContext().getRealPath(""));
 
 //Obtenemos la información de todos los scripts definidos para la aplicación
@@ -131,7 +131,7 @@ thead#theadScripts {
 		<tbody>
 
 <%
-int i=0;
+	int i=0;
 for (SuiteTestData suiteTest : listTestSuites) {
 %>
 		<form id="testform_<%=i%>" action="./jsp/execTest.jsp" method="post">
@@ -149,42 +149,42 @@ for (SuiteTestData suiteTest : listTestSuites) {
 				<td id="browser-<%=i%>">
 					<select id="browser-select-<%=i%>" name="<%=Test80mng.BrowserNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
-					    String actualBrowser = suiteTest.getIdBrowser();
-						for (BrowserSuite browserSuite : suiteTest.getListBrowsersChannel()) {
-						    String selected = "";
-						    if (browserSuite.getBrowser().compareTo(actualBrowser)==0)
-						        selected = "selected";
+							String actualBrowser = suiteTest.getIdBrowser();
+										for (BrowserSuite browserSuite : suiteTest.getListBrowsersChannel()) {
+										    String selected = "";
+										    if (browserSuite.getBrowser().compareTo(actualBrowser)==0)
+										        selected = "selected";
 						%>
 						<option value="<%=browserSuite.getBrowser()%>" <%=selected%>><%=browserSuite.getBrowser()%></option>
 						<%
-					    }
+							}
 						%>
 					</select>
 				</td>
 				<td id="application">
 					<select id="application-select-<%=i%>" name="<%=Test80mng.AppNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
-					    String actualApplication = suiteTest.getApplicationActual();
-						for (ApplicationSuite applicationSuite : suiteTest.getListApplicationsChannel()) {
-							String selected = "";
-						    if (applicationSuite.getApplication().compareTo(actualApplication)==0)
-						        selected = "selected";
-							%>
+							String actualApplication = suiteTest.getApplicationActual();
+										for (ApplicationSuite applicationSuite : suiteTest.getListApplicationsChannel()) {
+											String selected = "";
+										    if (applicationSuite.getApplication().compareTo(actualApplication)==0)
+										        selected = "selected";
+						%>
 							<option value="<%=applicationSuite.getApplication()%>" <%=selected%>><%=applicationSuite.getApplication()%></option>
 						<%
-					    }
+							}
 						%>
 					</select></td>
 				<td id="nettrafic">
 					<select id="nettrafic-select-<%=i%>" name="<%=Test80mng.NetAnalysis%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
-					    String actualNettrafic = suiteTest.getNettrafic();
-						String selectedFalse = "selected";
-						String selectedTrue = "";
-						if ("true".compareTo(actualNettrafic)==0) {
-							selectedFalse = "";
-							selectedTrue = "selected";   
-						}	
+							String actualNettrafic = suiteTest.getNettrafic();
+										String selectedFalse = "selected";
+										String selectedTrue = "";
+										if ("true".compareTo(actualNettrafic)==0) {
+											selectedFalse = "";
+											selectedTrue = "selected";   
+										}
 						%>
 						<option value="false" <%=selectedFalse%>>false</option>
 						<option value="true" <%=selectedTrue%>>true</option>
@@ -192,14 +192,17 @@ for (SuiteTestData suiteTest : listTestSuites) {
 				<td id="version">
 					<select id="version-select-<%=i%>" name="<%=Test80mng.VersionNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
-					    String actualVersion = suiteTest.getVersionActual();
-						for (VersionSuite versionSuite : suiteTest.getVersionChannelList()) {
-							String selected = "";
-							if (versionSuite.getVersion().compareTo(actualVersion)==0)
-							    selected = "selected";
+							String actualVersion = suiteTest.getVersionActual();
+							for (VersionSuite versionSuite : suiteTest.getVersionChannelList()) {
+								String selected = "";
+								if (versionSuite.getVersion().compareTo(actualVersion)==0) {
+									selected = "selected";
+								}
 						%>
-						<option value="<%=versionSuite.getVersion()%>" <%=selected%>><%=versionSuite.getDescription()%></option>
-						<%}%>
+								<option value="<%=versionSuite.getVersion()%>" <%=selected%>><%=versionSuite.getDescription()%></option>
+						<%
+							}
+						%>
 					</select>
 				</td>
 				<td id="urlbase-<%=i%>" class="input">
@@ -207,18 +210,18 @@ for (SuiteTestData suiteTest : listTestSuites) {
 				</td>
 				<td id="tcasesselect-<%=i%>">
 					<%
-					if (suiteTest.getFiltroTCases()==1) {
+						if (suiteTest.getFiltroTCases()==1) {
 					%>					
 					<select multiple size=10 id="tcases-<%=i%>" name="<%=Test80mng.TCaseNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
-						for (TestMethod testMethod : Test80mng.getDataTestAnnotationsToExec(getParamsFromSuiteToGetTCases(suiteTest))) {
-						    String selected = "";
-						    if (FilterTNGxmlTRun.methodInTestCaseList(testMethod.getMethod().getName(), suiteTest.getListTCasesArray())) {
-						        selected = "selected";
-						    }
+							for (TestMethod testMethod : Test80mng.getDataTestAnnotationsToExec(getParamsFromSuiteToGetTCases(suiteTest))) {
+								String selected = "";
+								if (FilterTestsSuiteXML.methodInTestCaseList(testMethod.getMethod().getName(), suiteTest.getListTCasesArray())) {
+									selected = "selected";
+								}
 						%>
-							<option value="<%=testMethod.getMethod().getName()%>" <%=selected%> title="<%=testMethod.getAnnotationTest().description()%>"><%=testMethod.getMethod().getName()%></option>
-						<%}%>
+								<option value="<%=testMethod.getMethod().getName()%>" <%=selected%> title="<%=testMethod.getAnnotationTest().description()%>"><%=testMethod.getMethod().getName()%></option>
+						<%	}%>
  					<%}%>						
 					</select>
 				</td>				
@@ -353,8 +356,7 @@ function updateData(suite, channel, dataToChange, newBrowser) {
 </body>
 </html>
 	
-<%!
-public static ParamsBean getParamsFromSuiteToGetTCases(SuiteTestData suiteTest) {
+<%!public static ParamsBean getParamsFromSuiteToGetTCases(SuiteTestData suiteTest) {
 	String app = suiteTest.getApplicationActual();
 	String suite = suiteTest.getSuite();
     ParamsBean paramsTSuite = new ParamsBean(AppEcom.valueOf(app), Suites.valueOf(suite));
@@ -363,5 +365,4 @@ public static ParamsBean getParamsFromSuiteToGetTCases(SuiteTestData suiteTest) 
     paramsTSuite.setVersion(suiteTest.getVersionActual());
 
     return paramsTSuite;
-}
-%>
+}%>

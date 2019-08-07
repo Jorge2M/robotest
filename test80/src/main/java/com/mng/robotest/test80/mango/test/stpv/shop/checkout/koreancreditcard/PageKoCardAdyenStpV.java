@@ -27,7 +27,7 @@ public class PageKoCardAdyenStpV {
     	}
       	validations.add(
     		"No se trata de la página de precompra (no aparece los logos de formas de pago",
-    		!PageCheckoutWrapper.isPresentMetodosPago(pais, channel, driver), State.Defect);
+    		!PageCheckoutWrapper.isPresentMetodosPago(channel, driver), State.Defect);
       	validations.add(
     		"Aparece la página de Adyen / Korean Kredit Cards",
     		PageKoCardAdyen.isPage(driver), State.Defect);

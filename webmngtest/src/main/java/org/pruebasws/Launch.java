@@ -12,7 +12,8 @@ package org.pruebasws;
 
 import com.mng.robotest.test80.arq.jdbc.dao.SuitesDAO;
 import com.mng.robotest.test80.arq.utils.StateSuite;
-import org.pruebasws.utils.TSuiteThreadsManager;
+
+import org.pruebasws.thread.TSuiteThreadsManager;
 import org.testng.TestNG;
 
 /**

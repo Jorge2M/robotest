@@ -18,7 +18,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.data.TestMakerContext;
 
 
 public class MethodsDAO {
@@ -82,10 +82,11 @@ public class MethodsDAO {
     
     public static void inserMethod(ResultMethod resultMethod, ITestResult tr) {
         ITestContext context = tr.getTestContext();
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
         try (Connection conn = Connector.getConnection();
             PreparedStatement insert = conn.prepareStatement (SQLInsertMethod )) {
-            insert.setString(1, context.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx));
-            insert.setString(2, context.getSuite().getName());
+            insert.setString(1, testMakerCtx.getIdSuiteExecution());
+            insert.setString(2, testMakerCtx.getInputData().getNameSuite());
             insert.setString(3, context.getName());
             insert.setString(4, fmwkTest.getMethodWithFactory(tr.getMethod().getMethod(), context));
             insert.setString(5, tr.getMethod().getDescription());

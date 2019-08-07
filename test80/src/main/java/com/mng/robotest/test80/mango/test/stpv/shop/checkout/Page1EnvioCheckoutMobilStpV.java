@@ -91,17 +91,17 @@ public class Page1EnvioCheckoutMobilStpV {
     }
     
     @Validation (
-    	description="Aparee la página asociada al Paso-2",
+    	description="Aparece la página asociada al Paso-2",
     	level=State.Defect)
     private static boolean checkAppearsStep2(WebDriver driver) {
-    	return (Page2DatosPagoCheckoutMobil.isPageUntil(0, driver));
+    	return (Page2DatosPagoCheckoutMobil.isPageUntil(1, driver));
     }
     
     @Validation (
     	description="Están presentes los métodos de pago",
     	level=State.Defect)
     private static boolean checkAppearsPageWithPaymentMethods(Pais pais, Channel channel, WebDriver driver) {
-        return (PageCheckoutWrapper.isPresentMetodosPago(pais, channel, driver));
+        return (PageCheckoutWrapper.isPresentMetodosPago(channel, driver));
     }
     
     @Validation
@@ -119,8 +119,7 @@ public class Page1EnvioCheckoutMobilStpV {
     
     @Step (
     	description="Seleccionamos la <b>#{posicion}a<b> franja horaria del envío \"Urgente - Horario personalizado\"</b>", 
-        expected="La franja horaria se selecciona correctamente"
-    		)
+        expected="La franja horaria se selecciona correctamente")
     public static void selectFranjaHorariaUrgente(int posicion, WebDriver driver) {
     	Page1EnvioCheckoutMobil.selectFranjaHorariaUrgente(posicion, driver);
     }

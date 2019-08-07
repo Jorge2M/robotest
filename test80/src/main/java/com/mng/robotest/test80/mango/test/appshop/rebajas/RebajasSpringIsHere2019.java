@@ -12,7 +12,9 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
@@ -192,17 +194,16 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
     }
 	  
     @BeforeMethod (groups={"RebajasSpringIsHere2019", "Canal:desktop_App:shop", "SupportsFactoryCountrys"})
-    @Parameters({"brwsr-path", "urlBase", "AppEcom", "Channel"})
-    public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) throws Exception {
-        //Recopilación de parámetros
+    public void login(ITestContext context, Method method) throws Exception {
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom(appEcom);
-        dCtxSh.setChannel(channel);
+        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
+        dCtxSh.setChannel(inputData.getChannel());
         dCtxSh.pais = this.paisFactory;
         dCtxSh.idioma = this.idiomaFactory;
-        dCtxSh.urlAcceso = urlAcceso;
+        dCtxSh.urlAcceso = inputData.getUrlBase();
 
-        Utils.storeDataShopForTestMaker(bpath, this.index_fact, dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), index_fact, dCtxSh, context, method);
     }
 	
     @SuppressWarnings("unused")
@@ -260,7 +261,8 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
             sublineaType = sublinea.getTypeSublinea();
         }
         
-        SecMenusWrapperStpV.seleccionLinea(lineaType, sublineaType, dCtxSh, driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+        secMenusStpV.seleccionLinea(lineaType, sublineaType, dCtxSh);
         List<String> textoPromotion = getPossibleTextPromotion(dCtxSh.pais.getCodigo_pais());
         BannerSpringIsHere2019StpV bannerSpringIsHere2019 = new BannerSpringIsHere2019StpV(textoPromotion, dCtxSh, driver);
         if (bannerMustBeInPortada(dCtxSh.pais.getCodigo_pais(), linea, sublinea)) {
@@ -280,14 +282,16 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
     throws Exception {
         Menu1rstLevel menuSpringPromotion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "Spring Promotion"));
         menuSpringPromotion.setDataGaLabel("promos-spring_promotion");
-        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuSpringPromotion, dCtxSh, driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuSpringPromotion, dCtxSh);
         checkGaleryOfArticlesInPromotion(dCtxSh, driver);
     }
     
     private void checkMenuSuperiorPantalones(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
     	Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "pantalones"));
-    	SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh, driver);
+    	SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+    	secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
     	PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
     	pageGaleriaStpV.bannerHead.checkBannerSalesHead(TypeGalery.NoSales, dCtxSh.pais, dCtxSh.idioma);
     	if (dCtxSh.pais.isVentaOnline()) {

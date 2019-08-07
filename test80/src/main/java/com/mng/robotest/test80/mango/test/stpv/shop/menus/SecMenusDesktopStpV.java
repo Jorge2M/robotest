@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
@@ -15,6 +16,7 @@ import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
@@ -44,7 +46,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDeskt
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop.GroupMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecBloquesMenuDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test80.mango.test.pageobject.utils.DataFichaArt;
@@ -60,8 +61,22 @@ import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
 public class SecMenusDesktopStpV {
 
     private final static String prefixSale = "<b style=\"color:blue\">Rebajas</b></br>";
-	
-    public static SecMenusUserStpV secMenusUser;
+    
+    private final Pais pais;
+    private final AppEcom app;
+    private final WebDriver driver;
+    private final SecMenusDesktop secMenus;
+    
+    private SecMenusDesktopStpV(Pais pais, AppEcom app, WebDriver driver) {
+    	this.pais = pais;
+    	this.app = app;
+    	this.driver = driver;
+    	this.secMenus = SecMenusDesktop.getNew(app, driver);
+    }
+    
+    public static SecMenusDesktopStpV getNew(Pais pais, AppEcom app, WebDriver driver) {
+    	return (new SecMenusDesktopStpV(pais, app, driver));
+    }
     
     /**
      * Selección de un menú superior (lateral en el caso de móvil) con un catálogo de artículos asociado (p.e. vestidos, camisas, etc.)
@@ -70,33 +85,50 @@ public class SecMenusDesktopStpV {
     	description="Seleccionar el menú superior <b>#{menu1rstLevel}</b>", 
         expected="Aparece la galería asociada al menú",
         saveNettraffic=SaveWhen.Always)
-    public static void selectMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
-        SecMenusDesktop
-        	.secMenuSuperior
-        	.secBlockMenus.clickMenuAndGetName(menu1rstLevel, dCtxSh.appE, driver);
-        
-        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, driver);
+    public void selectMenuSuperiorTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
+    	secMenus.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel);
+    	validaSelecMenu(menu1rstLevel, dCtxSh);
     }
     
     @Step (
     	description="Seleccionar el menú lateral de 1er nivel <b>#{menu1rstLevel}</b>", 
         expected="Aparecen artículos de tipo Camiseta",
         saveNettraffic=SaveWhen.Always)
-    public static void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
-        SecMenusDesktop.secMenuLateral.clickMenu(menu1rstLevel, driver);         
-        SecMenusWrapperStpV.validaSelecMenu(menu1rstLevel, dCtxSh, driver);
+    public void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
+    	secMenus.secMenuLateral.clickMenu(menu1rstLevel);         
+    	validaSelecMenu(menu1rstLevel, dCtxSh);
     }
     
     @Step (
     	description="Seleccionar el menú lateral de 2o nivel <b>#{menu2onLevel}</b>", 
         expected="Aparecen artículos asociados al menú",
         saveNettraffic=SaveWhen.Always)
-    public static void selectMenuLateral2oLevel(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
-        SecMenusDesktop.secMenuLateral.clickMenu(menu2onLevel, driver);        
-        SecMenusWrapperStpV.validaSelecMenu(menu2onLevel, dCtxSh, driver);
+    public void selectMenuLateral2oLevel(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh) throws Exception {
+    	secMenus.secMenuLateral.clickMenu(menu2onLevel);       
+    	validaSelecMenu(menu2onLevel, dCtxSh);
+    }
+    
+    /**
+     * Validación de la selección de un menú lateral de 1er o 2o nivel 
+     */
+	public void validaSelecMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh) throws Exception {
+		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		pageGaleriaStpV.validateGaleriaAfeterSelectMenu(dCtxSh);
+        validationsSelecMenuEspecificDesktop(menu);
+       
+        StdValidationFlags flagsVal = StdValidationFlags.newOne();
+        flagsVal.validaSEO = true;
+        flagsVal.validaJS = true;
+        flagsVal.validaImgBroken = false;
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
+        
+        EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
+        	Constantes.AnalyticsVal.GoogleAnalytics,
+            Constantes.AnalyticsVal.NetTraffic, 
+            Constantes.AnalyticsVal.Criteo,
+            Constantes.AnalyticsVal.DataLayer);
+        
+        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, menu.getLinea(), analyticSet, driver);
     }
     
     @Validation (
@@ -104,62 +136,60 @@ public class SecMenusDesktopStpV {
     	//TODO provisionalmente lo ponemos a Info, cuando pasen las rebajas o cuando se resuelva 
     	//el tícket https://jira.mangodev.net/jira/browse/GPS-621
     	level=State.Info)
-    public static boolean validateIsLineaSelected(LineaType lineaType, AppEcom app, WebDriver driver) {
-    	return (SecMenusDesktop.secMenuSuperior.secLineas.isLineaSelected(lineaType, app, driver));
+    public boolean validateIsLineaSelected(LineaType lineaType) {
+    	return (secMenus.secMenuSuperior.secLineas.isLineaSelected(lineaType));
     }
     
     /**
      * Validaciones de selección de un menú de 1er nivel (superior o lateral) (las específicas de Desktop)
      */
-    public static void validationsSelecMenuEspecificDesktop(MenuLateralDesktop menu, Channel channel, AppEcom app, 
-    														WebDriver driver) throws Exception {
-        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(channel, app, driver);
+    public void validationsSelecMenuEspecificDesktop(MenuLateralDesktop menu) throws Exception {
+        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.desktop, app, driver);
     	pageGaleriaStpV.bannerHead.validateBannerSuperiorIfExistsDesktop();
     	if (menu.isMenuLateral()) {
     		int maxSecondsWait = 2;
-    		checkIsSelectedLateralMenu(menu, maxSecondsWait, driver);
+    		checkIsSelectedLateralMenu(menu, maxSecondsWait);
     	}
     	
         if (menu instanceof Menu1rstLevel) {
         	Menu1rstLevel menu1rstLevel = (Menu1rstLevel) menu;
         	List<Menu2onLevel> menus2onLevel = menu1rstLevel.getListMenus2onLevel();
 	        if (menus2onLevel!=null && menus2onLevel.size()>0) {
-	        	checkVisibility2onLevelMenus(menus2onLevel, driver);
+	        	checkVisibility2onLevelMenus(menus2onLevel);
 	        }
     	}
         
         if (menu.isDataForValidateArticleNames()) {
         	String[] textsArticlesGalery = menu.getTextsArticlesGalery();
-        	checkArticlesContainsLiterals(textsArticlesGalery, app, driver);
+        	checkArticlesContainsLiterals(textsArticlesGalery);
         }
         
         PageGaleriaStpV.secSelectorPrecios.validaIsSelector(driver);
-        LineaType lineaResult = SecMenusWrap.getLineaResultAfterClickMenu(menu.getLinea(), menu.getNombre());
-        validateIsLineaSelected(lineaResult, app, driver);    
+        SecMenusWrap secMenus = SecMenusWrap.getNew(Channel.desktop, app, driver);
+        LineaType lineaResult = secMenus.getLineaResultAfterClickMenu(menu.getLinea(), menu.getNombre());
+        validateIsLineaSelected(lineaResult);    
     }
     
     @Validation (
     	description="Aparece seleccionado el menú lateral <b>#{menu.getNombre()}</b> (lo esperamos hasta #{maxSecondsWait} segundos)",
     	level=State.Warn)
-    private static boolean checkIsSelectedLateralMenu(MenuLateralDesktop menu, int maxSecondsWait, WebDriver driver) {
-        return (SecMenusDesktop.secMenuLateral.isSelectedMenu(menu, maxSecondsWait, driver));
+    private boolean checkIsSelectedLateralMenu(MenuLateralDesktop menu, int maxSecondsWait) {
+        return (secMenus.secMenuLateral.isSelectedMenu(menu, maxSecondsWait));
     }
       
     @Validation
-    private static ChecksResult checkVisibility2onLevelMenus(List<Menu2onLevel> menus2onLevel, WebDriver driver) 
-    throws Exception {
+    private ChecksResult checkVisibility2onLevelMenus(List<Menu2onLevel> menus2onLevel) throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
         for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
 	    	validations.add(
 	    		"Aparecen el menú de 2o nivel <b>" + menu2oNivelTmp.getNombre() + "</b>",
-	    		SecMenusDesktop.secMenuLateral.isVisibleMenu(driver, menu2oNivelTmp), State.Warn);
+	    		secMenus.secMenuLateral.isVisibleMenu(menu2oNivelTmp), State.Warn);
         }
         return validations;
     }
     
     @Validation
-    private static ChecksResult checkArticlesContainsLiterals(String[] textsArticlesGalery, AppEcom app, WebDriver driver) 
-    throws Exception {
+    private ChecksResult checkArticlesContainsLiterals(String[] textsArticlesGalery) throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
     	
     	String litsToContain = "";
@@ -194,78 +224,77 @@ public class SecMenusDesktopStpV {
     	description="Selección del menú <b>" + tagMenu + "</b> (data-ga-label=#{menu1rstLevel.getDataGaLabelMenuSuperiorDesktop()})", 
         expected="El menú se ejecuta correctamente",
         saveNettraffic=SaveWhen.Always)
-    public static void stepEntradaMenuDesktop(Menu1rstLevel menu1rstLevel, String paginaLinea, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
+    public void stepEntradaMenuDesktop(Menu1rstLevel menu1rstLevel, String paginaLinea) throws Exception {
         //Si en la pantalla no existen los menús volvemos a la página inicial de la línea
         LineaType lineaMenu = menu1rstLevel.getLinea();
-    	if (!SecMenusDesktop.secMenuSuperior.secLineas.isLineaVisible(lineaMenu, dCtxSh.appE, driver)) {
+    	if (!secMenus.secMenuSuperior.secLineas.isLineaVisible(lineaMenu)) {
             driver.get(paginaLinea);
     	}
-        SecMenusDesktop.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel, dCtxSh.appE, driver);
+    	secMenus.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel);
         TestCaseData.getDatosCurrentStep().replaceInDescription(tagMenu, menu1rstLevel.getNombre());
         ModalCambioPais.closeModalIfVisible(driver);
         
-        validaPaginaResultMenu(menu1rstLevel, dCtxSh, driver);
-        LineaType lineaResult = SecMenusWrap.getLineaResultAfterClickMenu(lineaMenu, menu1rstLevel.getNombre());
-        SecMenusDesktopStpV.validateIsLineaSelected(lineaResult, dCtxSh.appE, driver);
-        PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, lineaMenu, driver);
+        validaPaginaResultMenu(menu1rstLevel);
+        
+        SecMenusWrap secMenus = SecMenusWrap.getNew(Channel.desktop, app, driver);
+        LineaType lineaResult = secMenus.getLineaResultAfterClickMenu(lineaMenu, menu1rstLevel.getNombre());
+        validateIsLineaSelected(lineaResult);
+        PasosGenAnalitica.validaHTTPAnalytics(app, lineaMenu, driver);
     }
     
     final static String tagCarruselsLinea = "@TagCarrusels";
     @Step (
     	description="Realizar \"hover\" sobre la línea #{lineaType}",
         expected="Aparecen los carrusels correspondientes a la línea " + tagCarruselsLinea)
-    public static void stepValidaCarrusels(Pais pais, LineaType lineaType, AppEcom app, WebDriver driver) throws Exception {
+    public void stepValidaCarrusels(LineaType lineaType) throws Exception {
         Linea linea = pais.getShoponline().getLinea(lineaType);
         TestCaseData.getDatosCurrentStep().replaceInDescription(tagCarruselsLinea, linea.getCarrusels());
         
-        SecMenusDesktop.secMenuSuperior.secLineas.hoverLinea(lineaType, null, app, driver);
+        secMenus.secMenuSuperior.secLineas.hoverLinea(lineaType, null);
         //if (linea.getType()!=LineaType.rebajas) {
-        	checkCarruselsAfterHoverLinea(linea, app, driver);
+        	checkCarruselsAfterHoverLinea(linea);
         	
     	    //Steps - Selección de cada uno de los carrusels asociados a la línea
     	    String[] listCarrusels = linea.getListCarrusels();
     	    for (int i=0; i<listCarrusels.length; i++) {
     	        //Pare evitar KOs, sólo seleccionaremos el carrusel si realmente existe (si no existe previamente ya habremos dado un Warning)
-    	        if (SecMenusDesktop.secMenuSuperior.secCarrusel.isPresentCarrusel(linea, listCarrusels[i], app, driver)) {
-    	            stepSeleccionaCarrusel(pais, lineaType, listCarrusels[i], app, driver);
+    	        if (secMenus.secMenuSuperior.secCarrusel.isPresentCarrusel(linea, listCarrusels[i])) {
+    	            stepSeleccionaCarrusel(lineaType, listCarrusels[i]);
     	        }
     	    }
         //}
     }
     
     @Validation
-    private static ChecksResult checkCarruselsAfterHoverLinea(Linea linea, AppEcom app, WebDriver driver) {
+    private ChecksResult checkCarruselsAfterHoverLinea(Linea linea) {
     	ChecksResult validations = ChecksResult.getNew();
 	    int maxSecondsWait = 1;
       	validations.add(
     		"Aparece el bloque de menús de la línea " + linea.getType() + " (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		SecMenusDesktop.secMenuSuperior.secBlockMenus.isCapaMenusLineaVisibleUntil(linea.getType(), maxSecondsWait, app, driver), 
+    		secMenus.secMenuSuperior.secBlockMenus.isCapaMenusLineaVisibleUntil(linea.getType(), maxSecondsWait), 
     		State.Warn);
       	validations.add(
     		"El número de carrusels es de " + linea.getListCarrusels().length,
-    		linea.getListCarrusels().length==SecMenusDesktop.secMenuSuperior.secCarrusel.getNumCarrousels(linea.getType(), app, driver), 
+    		linea.getListCarrusels().length==secMenus.secMenuSuperior.secCarrusel.getNumCarrousels(linea.getType()), 
     		State.Warn);
       	validations.add(
     		"Aparecen los carrusels: " + linea.getCarrusels().toString(),
-    		SecMenusDesktop.secMenuSuperior.secCarrusel.isVisibleCarrusels(linea, app, driver), State.Warn);
+    		secMenus.secMenuSuperior.secCarrusel.isVisibleCarrusels(linea), State.Warn);
     	return validations;
     }
     
     @Step (
     	description="Seleccionar el carrusel de la línea #{lineaType} correspondiente a <b>#{idCarrusel}</b>",
         expected="Aparece la página asociada al carrusel #{lineaType} / #{idCarrusel}")
-    public static void stepSeleccionaCarrusel(Pais pais, LineaType lineaType, String idCarrusel, AppEcom app, WebDriver driver) 
-    throws Exception {
+    public void stepSeleccionaCarrusel(LineaType lineaType, String idCarrusel) throws Exception {
         Linea linea = pais.getShoponline().getLinea(lineaType);
-        SecMenusDesktop.secMenuSuperior.secLineas.hoverLinea(lineaType, null, app, driver);
-        SecMenusDesktop.secMenuSuperior.secCarrusel.clickCarrousel(pais, lineaType, idCarrusel, app, driver);
-        checkAfterSelectCarrusel(linea, idCarrusel, app, driver);
+        secMenus.secMenuSuperior.secLineas.hoverLinea(lineaType, null);
+        secMenus.secMenuSuperior.secCarrusel.clickCarrousel(pais, lineaType, idCarrusel);
+        checkAfterSelectCarrusel(linea, idCarrusel);
     }
     
     @Validation
-    private static ChecksResult checkAfterSelectCarrusel(Linea linea, String idCarrusel, AppEcom app, WebDriver driver) 
-    throws Exception {
+    private ChecksResult checkAfterSelectCarrusel(Linea linea, String idCarrusel) throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
     	LineaType lineaType = linea.getType();
 	    PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, driver);
@@ -298,10 +327,9 @@ public class SecMenusDesktopStpV {
     		"<b style=\"color:brown;\">\"#{lineaType.getNameUpper()}</b>",
         expected=
     		"Aparece la página correcta asociada a la línea #{lineaType.getNameUpper()}")
-    public static void seleccionLinea(LineaType lineaType, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
-        SecMenusDesktop.secMenuSuperior.secLineas.selecLinea(dCtxSh.pais, lineaType, dCtxSh.appE, driver);       
-        validaSelecLinea(lineaType, null, dCtxSh, driver);
+    public void seleccionLinea(LineaType lineaType) throws Exception {
+    	secMenus.secMenuSuperior.secLineas.selecLinea(pais, lineaType);       
+        validaSelecLinea(lineaType, null);
     }
     
     @Step (
@@ -310,29 +338,27 @@ public class SecMenusDesktopStpV {
     		"<b style=\"color:brown;\">\"#{lineaType.name()} / #{sublineaType.getNameUpper()}</b>",
         expected=
     		"Aparece la página correcta asociada a la línea/sublínea")
-    public static void seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, 
-    									 DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-        validaSelecLinea(lineaType, sublineaType, dCtxSh, driver);
+    public void seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+        validaSelecLinea(lineaType, sublineaType);
     }    
     
-    public static void validaSelecLinea(LineaType lineaType, SublineaNinosType sublineaType, 
-    									DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh, driver);
+    public void validaSelecLinea(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+    	SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(pais, Channel.desktop, app, driver);
         if (sublineaType==null) {
-            validateIsLineaSelected(lineaType, dCtxSh.appE, driver);
+            validateIsLineaSelected(lineaType);
         }
 
         secCabeceraStpV.validateIconoBolsa();
 
         //Validaciones en función del tipo de página que debería aparecer al seleccionar la línea
-        Linea linea = dCtxSh.pais.getShoponline().getLinea(lineaType);
+        Linea linea = pais.getShoponline().getLinea(lineaType);
         if (sublineaType!=null) {
             linea = linea.getSublineaNinos(sublineaType);
         }
             
         switch (linea.getContentDeskType()) {
         case articulos:
-        	PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.desktop, dCtxSh.appE, driver);
+        	PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.desktop, app, driver);
         	int maxSecondsWait = 3;
             pageGaleriaStpV.validaArtEnContenido(maxSecondsWait);
             break;
@@ -361,16 +387,16 @@ public class SecMenusDesktopStpV {
     @Step (
     	description="Contamos el número de pestañas y menús de #{lineaType} / #{sublineaType}",
         expected="El número de pestañas/menús coincide con el del nodo anterior")
-    public static void countSaveMenusEntorno(LineaType lineaType, SublineaNinosType sublineaType, String inodo, String urlBase, AppEcom app, WebDriver driver) 
+    public void countSaveMenusEntorno(LineaType lineaType, SublineaNinosType sublineaType, String inodo, String urlBase) 
     throws Exception {
-    	int numPestanyas = SecMenusDesktop.secMenuSuperior.secLineas.getListaLineas(driver).size();
-        int numMenus = SecMenusDesktop.secMenuSuperior.secBlockMenus.getListMenusLinea(lineaType, sublineaType, app, driver).size();
+    	int numPestanyas = secMenus.secMenuSuperior.secLineas.getListaLineas().size();
+        int numMenus = secMenus.secMenuSuperior.secBlockMenus.getListMenusLinea(lineaType, sublineaType).size();
         checkNumPestanyasYmenusEqualsInBothNodes(numPestanyas, numMenus, lineaType, sublineaType, inodo, urlBase);
     }    
     
     @Validation
-    private static ChecksResult checkNumPestanyasYmenusEqualsInBothNodes(int numPestanyas, int numMenus, LineaType lineaType, SublineaNinosType sublineaType, 
-    																	 String inodo, String urlBase) {
+    private ChecksResult checkNumPestanyasYmenusEqualsInBothNodes(
+    		int numPestanyas, int numMenus, LineaType lineaType, SublineaNinosType sublineaType, String inodo, String urlBase) {
     	ChecksResult validations = ChecksResult.getNew();
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
     	
@@ -407,16 +433,15 @@ public class SecMenusDesktopStpV {
     @Step (
     	description="Seleccionar el banner existente a la derecha de los menús", 
         expected="Aparece una página con banners o artículos")
-    public static void clickRightBanner(LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, WebDriver driver) 
-    throws Exception {
-        SecMenusDesktop.secMenuSuperior.secBlockMenus.clickRightBanner(lineaType, sublineaType, app, driver);
-        checkAreValidMangoObjectsInPage(app, driver);
+    public void clickRightBanner(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+    	secMenus.secMenuSuperior.secBlockMenus.clickRightBanner(lineaType, sublineaType);
+        checkAreValidMangoObjectsInPage();
     }
     
     @Validation (
     	description="Aparece una página con banners, artículos, iframes, maps o sliders",
     	level=State.Warn)
-    private static boolean checkAreValidMangoObjectsInPage(AppEcom app, WebDriver driver) throws Exception {
+    private boolean checkAreValidMangoObjectsInPage() throws Exception {
         PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
         if (!pageGaleria.isVisibleArticleUntil(1, 3) &&
             !PageLanding.hayIframes(driver) &&
@@ -433,8 +458,7 @@ public class SecMenusDesktopStpV {
     @Step (
     	description="Cargar la siguiente URL de redirect a <b>España / HE / Zapatos</b>:<br>" + tagUrlAcceso,
         expected="Aparece desplegada la página de Zapatos (HE)")
-    public static void checkURLRedirectZapatosHeEspanya(Channel channel, AppEcom app, WebDriver driver) 
-    throws Exception {
+    public void checkURLRedirectZapatosHeEspanya() throws Exception {
         URI uri = new URI(driver.getCurrentUrl());
         String tiendaId = "he";
         if (app==AppEcom.outlet) {
@@ -450,7 +474,7 @@ public class SecMenusDesktopStpV {
 
         driver.navigate().to(urlAccesoCorreo);
     	Menu1rstLevel menu1erNivel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.he, null, "zapatos"));
-        validationsSelecMenuEspecificDesktop(menu1erNivel, channel, app, driver);
+        validationsSelecMenuEspecificDesktop(menu1erNivel);
     }
     
     final static String tagRefArticle = "@TagRefArticle";
@@ -460,8 +484,7 @@ public class SecMenusDesktopStpV {
     		" (#{pais.getNombre_pais()})</b>:<br>" + tagUrlAcceso,
         expected=
         	"Aparece la ficha del producto " + tagRefArticle)
-    public static void checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
+    public static void checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
     	ArticleStock articulo = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithMoreOneColour, dCtxSh);
     	TestCaseData.getDatosCurrentStep().replaceInDescription(tagRefArticle, articulo.getReference());
     	TestCaseData.getDatosCurrentStep().replaceInExpected(tagRefArticle, articulo.getReference());
@@ -483,23 +506,22 @@ public class SecMenusDesktopStpV {
         pageFichaStpV.validaDetallesProducto(datosArticulo);
     }
     
-    public static void validaPaginaResultMenu(MenuLateralDesktop menu, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
-    	checkResultDependingMenuGroup(menu, dCtxSh.appE, driver);
-    	checkErrorPageWithoutException(driver);
+    public void validaPaginaResultMenu(MenuLateralDesktop menu) throws Exception {
+    	checkResultDependingMenuGroup(menu);
+    	checkErrorPageWithoutException();
     	GroupMenu groupMenu = menu.getGroup();
     	if (groupMenu.canContainElement(Element.article)) {
-    		if (dCtxSh.pais.isEspanya()) {
-    			checkSizeDivImages(dCtxSh, driver);
+    		if (pais.isEspanya()) {
+    			checkSizeDivImages();
     		}
-            Menu1rstLevel menuPromocion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(menu.getLinea(), menu.getSublinea(), "promocion"));
+            Menu1rstLevel menuPromocion = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(menu.getLinea(), menu.getSublinea(), "promocion"));
             menuPromocion.setDataGaLabel("promocion");
 
             //TODO activar en época de rebajas
 //            if (dCtxSh.pais.getCodigo_pais().compareTo("720")==0) {
 //            	validationsSpecificEndRebajasChina(dCtxSh, driver);
 //            }
-            validationsRebajas(dCtxSh.channel, dCtxSh.appE, driver);
+            validationsRebajas();
     	}
     	
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
@@ -510,9 +532,9 @@ public class SecMenusDesktopStpV {
     }
     
     @Validation
-    private static ChecksResult checkSizeDivImages(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    private ChecksResult checkSizeDivImages() throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, driver);
 		int numPage = 1; 
 		double marginPercError = 2;
 	  	ListSizesArticle listArtWrong1rstPage = pageGaleriaDesktop.getArticlesWithWrongSize(numPage, marginPercError);
@@ -525,7 +547,7 @@ public class SecMenusDesktopStpV {
 	 	return validations;
     }
     
-    private static String getLiteralWarningArticlesSizesWrong(ListSizesArticle listArtWrong) {
+    private String getLiteralWarningArticlesSizesWrong(ListSizesArticle listArtWrong) {
 	  	String warningMessage = "";
 	    if (listArtWrong.size() > 0) {
 	    	warningMessage+=(
@@ -539,8 +561,7 @@ public class SecMenusDesktopStpV {
     }
     
     @Validation
-    private static ChecksResult checkResultDependingMenuGroup(MenuLateralDesktop menu, AppEcom app, WebDriver driver) 
-    throws Exception {
+    private ChecksResult checkResultDependingMenuGroup(MenuLateralDesktop menu) throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
     	GroupMenu groupMenu = menu.getGroup();
     	List<Element> elemsCanBeContained = groupMenu.getElementsCanBeContained();
@@ -572,13 +593,14 @@ public class SecMenusDesktopStpV {
 	 	return validations;
     }    
 
-    public static ChecksResult checkErrorPageWithoutException(WebDriver driver) throws Exception {
+    public ChecksResult checkErrorPageWithoutException() throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
 		ITestContext ctx = TestCaseData.getdFTest().ctx;
 	    stackTrace exception = WebDriverMngUtils.stackTaceException(driver, ctx);
 	    String excepcionDuplicada = "";
 	    if (exception.getRepetida()) {
-	    	excepcionDuplicada+="<br><b>Warning!</b>Se ha detectado una excepción detectada previamente (" + exception.getNumExcepciones() + ")";
+	    	excepcionDuplicada+=
+	    		"<br><b>Warning!</b>Se ha detectado una excepción detectada previamente (" + exception.getNumExcepciones() + ")";
 	    }
 	 	validations.add(
 			"El errorPage.faces no devuelve una excepción" + excepcionDuplicada,
@@ -588,9 +610,9 @@ public class SecMenusDesktopStpV {
     
 	//Temporal para prueba fin rebajas en China
     @Validation
-    public static ChecksResult validationsSpecificEndRebajasChina(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    public ChecksResult validationsSpecificEndRebajasChina() throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
-    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, driver);
       	List<Integer> tempSale = FilterCollection.sale.getListTempArticles();
       	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFrom, tempSale);
       	String warningMessage = "";
@@ -612,17 +634,16 @@ public class SecMenusDesktopStpV {
       	return validations;
     }
     
-    public static void validationsRebajas(Channel channel, AppEcom app, WebDriver driver) throws Exception {
-    	checkNoArticlesRebajadosWithLabelIncorrect(channel, app, driver);
-    	checkNoArticlesTemporadaOldWithLabelsWrong(channel, app, driver);
-    	checkNoArticlesTemporadaNewWithLabelsWrong(channel, app, driver);
+    public void validationsRebajas() throws Exception {
+    	checkNoArticlesRebajadosWithLabelIncorrect();
+    	checkNoArticlesTemporadaOldWithLabelsWrong();
+    	checkNoArticlesTemporadaNewWithLabelsWrong();
     }
     
     @Validation
-    private static ChecksResult checkNoArticlesRebajadosWithLabelIncorrect(Channel channel, AppEcom app, WebDriver driver) 
-    throws Exception {
+    private ChecksResult checkNoArticlesRebajadosWithLabelIncorrect() throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
-    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(channel, app, driver);
+    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, driver);
     	List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
     	List<Integer> tempSales = FilterCollection.sale.getListTempArticles();
     	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaxRebajadosWithLiteralInLabel(tempSales, listLabelsWrong);
@@ -648,14 +669,13 @@ public class SecMenusDesktopStpV {
     }
     
     @Validation
-    private static ChecksResult checkNoArticlesTemporadaOldWithLabelsWrong(Channel channel, AppEcom app, WebDriver driver) 
-    throws Exception {
+    private ChecksResult checkNoArticlesTemporadaOldWithLabelsWrong() throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
     	
     	Integer temporadaOldOld = FilterCollection.sale.getListTempArticles().get(0);
         ArrayList<Integer> temporadaOldOldList = new ArrayList<Integer>(Arrays.asList(temporadaOldOld));  
        	List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
-    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(channel, app, driver);
+    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, driver);
        	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaOldOldList, listLabelsWrong);
     	String warningMessage = "";
         if (listArtWrong.size() > 0) {
@@ -677,12 +697,11 @@ public class SecMenusDesktopStpV {
     }
     	
     @Validation
-    private static ChecksResult checkNoArticlesTemporadaNewWithLabelsWrong(Channel channel, AppEcom app, WebDriver driver) 
-    throws Exception {
+    private ChecksResult checkNoArticlesTemporadaNewWithLabelsWrong() throws Exception {
 		ChecksResult validations = ChecksResult.getNew();
 		
         List<Integer> temporadaNew = FilterCollection.nextSeason.getListTempArticles();
-        PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(channel, app, driver);
+        PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, driver);
         List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaNew, LabelArticle.NewNow, LabelArticle.NewCollection);
         String warningMessage = "";
         if (listArtWrong.size() > 0) {
@@ -706,16 +725,14 @@ public class SecMenusDesktopStpV {
     @Validation (
     	description=prefixSale + "1) No es visible el menú superior <b>#{menu1rstLevel.getNombre()}</b>",
     	level=State.Warn)
-    public static boolean isNotPresentMenuSuperior(Menu1rstLevel menu1rstLevel, AppEcom app, WebDriver driver) 
-    throws Exception {
-    	return (!SecBloquesMenuDesktop.isPresentMenuFirstLevel(menu1rstLevel, driver));
+    public boolean isNotPresentMenuSuperior(Menu1rstLevel menu1rstLevel) throws Exception {
+    	return (!secMenus.secBloquesMenu.isPresentMenuFirstLevel(menu1rstLevel));
     }
     
     @Validation (
     	description=prefixSale + "1) Sí es visible el menú superior <b>#{menu1rstLevel.getNombre()}</b>",
     	level=State.Warn)
-    public static boolean isPresentMenuSuperior(Menu1rstLevel menu1rstLevel, AppEcom app, WebDriver driver) 
-    throws Exception {
-    	return (SecBloquesMenuDesktop.isPresentMenuFirstLevel(menu1rstLevel, driver));
+    public boolean isPresentMenuSuperior(Menu1rstLevel menu1rstLevel) throws Exception {
+    	return (secMenus.secBloquesMenu.isPresentMenuFirstLevel(menu1rstLevel));
     }
 }

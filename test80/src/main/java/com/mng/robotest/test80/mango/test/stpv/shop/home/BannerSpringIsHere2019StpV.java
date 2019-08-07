@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.home;
 
-import static com.mng.robotest.test80.arq.utils.otras.Constantes.PrefixRebajas;
+import static com.mng.robotest.test80.mango.test.data.Constantes.PrefixRebajas;
 import java.util.List;
 
 import org.openqa.selenium.By;

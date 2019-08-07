@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -87,8 +87,9 @@ public class AccesoNavigations {
     
     public static void cambioPais(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        if (dCtxSh.channel==Channel.movil_web) {
-            SecMenusWrapperStpV.secMenuUser.cambioPaisMobil(dCtxSh, driver);
+        if (dCtxSh.channel==Channel.movil_web && dCtxSh.appE==AppEcom.outlet) {
+        	SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+        	secMenusStpV.getMenusUser().cambioPaisMobil(dCtxSh);
         } else {
             SecFooterStpV.cambioPais(dCtxSh, driver);
         }

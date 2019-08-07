@@ -15,8 +15,13 @@ import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.bloqueMenu;
+import com.mng.robotest.test80.mango.test.utils.checkmenus.DataScreenMenu;
 
 public class SecBloquesMenuDesktop extends WebdrvWrapp {
+	
+	private final WebDriver driver;
+	private final AppEcom app;
+	private final SecLineasMenuDesktop secLineasMenu;
 	
 	public enum TypeMenuDesktop {Link, Banner}
 	
@@ -31,8 +36,18 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
     	"/li[@class[contains(.,'menu-item')] and not(@class[contains(.,'desktop-label-hidden')])]/a"; 
     static String XPathEntradaMenuBloqueRelativeWithTag = "//ul/li/a[@data-label[contains(.,'" + TagIdBloque + "-')]]";
     
-    public static String getXPathCapaMenusLinea(LineaType lineaId, AppEcom app) {
-    	String idLineaDom = SecMenusWrap.getIdLineaEnDOM(lineaId, app, Channel.desktop);
+    private SecBloquesMenuDesktop(AppEcom app, WebDriver driver) {
+    	this.driver = driver;
+    	this.app = app;
+    	this.secLineasMenu = SecLineasMenuDesktop.getNew(app, driver);
+    }
+    
+    public static SecBloquesMenuDesktop getNew(AppEcom app, WebDriver driver) {
+    	return (new SecBloquesMenuDesktop(app, driver));
+    }
+    
+    public String getXPathCapaMenusLinea(LineaType lineaId) {
+    	String idLineaDom = SecMenusWrap.getIdLineaEnDOM(Channel.desktop, app, lineaId);
     	if (lineaId==LineaType.nuevo) {
     		idLineaDom = "sections_nuevo";
     	}
@@ -43,12 +58,12 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
         return XPathCapaMenusLineaWithTag.replace(TagIdLinea, idLineaDom);
     }
 
-    static String getXPathCapaMenusSublinea(SublineaNinosType sublineaType, AppEcom app) {
+    String getXPathCapaMenusSublinea(SublineaNinosType sublineaType) {
     	LineaType parentLine = sublineaType.getParentLine();
-    	return (getXPathCapaMenusLinea(parentLine, app));
+    	return (getXPathCapaMenusLinea(parentLine));
     }
     
-    static String getXPathLinkMenuSuperiorRelativeToCapa(TypeMenuDesktop typeMenu) {
+    String getXPathLinkMenuSuperiorRelativeToCapa(TypeMenuDesktop typeMenu) {
     	switch (typeMenu) {
     	case Link:
     		return (XPathEntradaMenuLineaRelativeToCapaWithTag.replace(TagIdTypeMenu, "section-detail"));
@@ -58,33 +73,33 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
     	}
     }
     
-    static String getXPathMenusSuperiorLinkVisibles(LineaType lineaType, SublineaNinosType sublineaType, TypeMenuDesktop typeMenu, AppEcom app) {
+    String getXPathMenusSuperiorLinkVisibles(LineaType lineaType, SublineaNinosType sublineaType, TypeMenuDesktop typeMenu) {
         String xpathCapaMenuLinea = "";
         if (sublineaType==null) {
-            xpathCapaMenuLinea = getXPathCapaMenusLinea(lineaType, app);
+            xpathCapaMenuLinea = getXPathCapaMenusLinea(lineaType);
         } else {
-        	xpathCapaMenuLinea = getXPathCapaMenusSublinea(sublineaType, app);
+        	xpathCapaMenuLinea = getXPathCapaMenusSublinea(sublineaType);
         }
         
         String xpathMenu = getXPathLinkMenuSuperiorRelativeToCapa(typeMenu);
         return (xpathCapaMenuLinea + xpathMenu);
     }    
     
-    static String getXPathMenuVisibleByDataInHref(Menu1rstLevel menu1rstLevel, AppEcom app) {
+    String getXPathMenuVisibleByDataInHref(Menu1rstLevel menu1rstLevel) {
     	LineaType lineaMenu = menu1rstLevel.getLinea();
     	SublineaNinosType sublineaMenu = menu1rstLevel.getSublinea();
     	String nombreMenuInLower = menu1rstLevel.getNombre().toLowerCase();
         return (
-        	getXPathMenusSuperiorLinkVisibles(lineaMenu, sublineaMenu, TypeMenuDesktop.Link, app) + 
+        	getXPathMenusSuperiorLinkVisibles(lineaMenu, sublineaMenu, TypeMenuDesktop.Link) + 
         	"[@href[contains(.,'/" + nombreMenuInLower + 
         	"')] and @href[not(contains(.,'/" + nombreMenuInLower + "/'))]]");
     }
     
-    static String getXPathMenuSuperiorLinkVisible(Menu1rstLevel menu1rstLevel) {
+    String getXPathMenuSuperiorLinkVisible(Menu1rstLevel menu1rstLevel) {
     	LineaType lineaMenu = menu1rstLevel.getLinea();
     	SublineaNinosType sublineaMenu = menu1rstLevel.getSublinea();
     	String dataGaLabelMenu = menu1rstLevel.getDataGaLabelMenuSuperiorDesktop();
-        String xpathMenuVisible = getXPathMenusSuperiorLinkVisibles(lineaMenu, sublineaMenu, TypeMenuDesktop.Link, menu1rstLevel.getApp());
+        String xpathMenuVisible = getXPathMenusSuperiorLinkVisibles(lineaMenu, sublineaMenu, TypeMenuDesktop.Link);
         if (dataGaLabelMenu.contains("'")) {
             //En el caso de que el data_ga_label contenga ' 
             //no parece existir carácter de escape, así que hemos de desglosar en 2 bloques y aplicar el 'contains' en cada uno
@@ -103,38 +118,38 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
         	dataGaLabelMenu.toLowerCase() + "')]]");
     }
     
-    public static boolean isCapaMenusLineaVisibleUntil(LineaType lineaId, int maxSecondsToWait, AppEcom app, WebDriver driver) {
-    	String xpathCapa = getXPathCapaMenusLinea(lineaId, app);
+    public boolean isCapaMenusLineaVisibleUntil(LineaType lineaId, int maxSecondsToWait) {
+    	String xpathCapa = getXPathCapaMenusLinea(lineaId);
     	return (isElementVisibleUntil(driver, By.xpath(xpathCapa), maxSecondsToWait));
     }
     
-    public static void clickMenuInHrefAndGetName(Menu1rstLevel menu1rstLevel, AppEcom app, WebDriver driver) 
-    throws Exception {
-        String xpathLinkMenu = getXPathMenuVisibleByDataInHref(menu1rstLevel, app);
+    public void clickMenuInHrefAndGetName(Menu1rstLevel menu1rstLevel) throws Exception {
+        String xpathLinkMenu = getXPathMenuVisibleByDataInHref(menu1rstLevel);
         menu1rstLevel.setNombre(driver.findElement(By.xpath(xpathLinkMenu)).getText());
         driver.findElement(By.xpath(xpathLinkMenu)).click();
         waitForPageLoaded(driver);
     }
 
-    public static List<WebElement> getListMenusLinea(LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, WebDriver driver) 
-    throws Exception {
-        SecLineasMenuDesktop.hoverLineaAndWaitForMenus(lineaType, sublineaType, app, driver);
-        String XPathMenusVisibles = getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Link, app);
+    public List<WebElement> getListMenusLinea(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+    	secLineasMenu.hoverLineaAndWaitForMenus(lineaType, sublineaType);
+        String XPathMenusVisibles = getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Link);
         return (driver.findElements(By.xpath(XPathMenusVisibles)));
     }
 
-    public static List<String> getListDataLabelsMenus(LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, WebDriver driver) 
+    public List<DataScreenMenu> getListDataScreenMenus(LineaType lineaType, SublineaNinosType sublineaType) 
     throws Exception {
-        List<WebElement> listMenus = getListMenusLinea(lineaType, sublineaType, app, driver);
-        List<String> listMenusLabel = new ArrayList<>();
+        List<DataScreenMenu> listDataMenus = new ArrayList<>();
+        List<WebElement> listMenus = getListMenusLinea(lineaType, sublineaType);
         for (int i=0; i<listMenus.size(); i++) {
-            String data_ga_label = listMenus.get(i).getAttribute("data-label");
-            if (data_ga_label!=null && data_ga_label.compareTo("")!=0) {
-                listMenusLabel.add(data_ga_label);
+        	DataScreenMenu dataMenu = DataScreenMenu.getNew();
+        	dataMenu.setDataGaLabel(listMenus.get(i).getAttribute("data-label"));
+        	if (dataMenu.isDataGaLabelValid()) {
+        		dataMenu.setLabel(listMenus.get(i).getText().replace("New!", "").trim());
+        		listDataMenus.add(dataMenu);
             }
         }
         
-        return listMenusLabel;
+        return listDataMenus;
     }
     
     /**
@@ -142,19 +157,17 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
      * @param bloque prendas, accesorios, colecciones...
      * @return los menús asociados a una línea/bloque concretos (por bloque entendemos prendas, accesorios, colecciones...)
      */
-    public static List<WebElement> getListMenusLineaBloque(LineaType lineaType, bloqueMenu bloque, AppEcom app, WebDriver driver) 
-    throws Exception {
-    	SecLineasMenuDesktop.hoverLineaAndWaitForMenus(lineaType, null, app, driver);
-        String xpathMenuLinea = getXPathCapaMenusLinea(lineaType, app);
+    public List<WebElement> getListMenusLineaBloque(LineaType lineaType, bloqueMenu bloque) throws Exception {
+    	secLineasMenu.hoverLineaAndWaitForMenus(lineaType, null);
+        String xpathMenuLinea = getXPathCapaMenusLinea(lineaType);
         String xpathEntradaMenu = XPathEntradaMenuBloqueRelativeWithTag.replace(TagIdBloque, bloque.toString());
         return (driver.findElements(By.xpath(xpathMenuLinea + xpathEntradaMenu)));
     }
 
-    public static void clickMenuAndGetName(Menu1rstLevel menu1rstLevel, AppEcom app, WebDriver driver) 
-    throws Exception {
+    public void clickMenuAndGetName(Menu1rstLevel menu1rstLevel) throws Exception {
     	LineaType lineaMenu = menu1rstLevel.getLinea();
     	SublineaNinosType sublineaMenu = menu1rstLevel.getSublinea();
-        SecLineasMenuDesktop.hoverLineaAndWaitForMenus(lineaMenu, sublineaMenu, app, driver);
+    	secLineasMenu.hoverLineaAndWaitForMenus(lineaMenu, sublineaMenu);
         String xpathMenu = getXPathMenuSuperiorLinkVisible(menu1rstLevel);
         isElementVisibleUntil(driver, By.xpath(xpathMenu), 1);
         menu1rstLevel.setNombre(driver.findElement(By.xpath(xpathMenu)).getText().replace("New!", "").trim());
@@ -162,31 +175,28 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
         clickAndWaitLoad(driver, By.xpath(xpathMenu));
     }    
     
-    public static boolean isPresentMenuFirstLevel(Menu1rstLevel menu1rstLevel, WebDriver driver) 
-    throws Exception {
+    public boolean isPresentMenuFirstLevel(Menu1rstLevel menu1rstLevel) throws Exception {
     	LineaType lineaMenu = menu1rstLevel.getLinea();
     	SublineaNinosType sublineaMenu = menu1rstLevel.getSublinea();
-        SecLineasMenuDesktop.hoverLineaAndWaitForMenus(lineaMenu, sublineaMenu, menu1rstLevel.getApp(), driver);
+    	secLineasMenu.hoverLineaAndWaitForMenus(lineaMenu, sublineaMenu);
         String xpathMenu = getXPathMenuSuperiorLinkVisible(menu1rstLevel);
         return (isElementVisibleUntil(driver, By.xpath(xpathMenu), 2));
     }
     
-    public static void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel, WebDriver driver) 
-    throws Exception {
-        SecLineasMenuDesktop.hoverLineaAndWaitForMenus(menu1rstLevel.getLinea(), menu1rstLevel.getSublinea(), menu1rstLevel.getApp(), driver);
-        clickMenuInHrefAndGetName(menu1rstLevel, menu1rstLevel.getApp(), driver);
+    public void seleccionarMenuXHref(Menu1rstLevel menu1rstLevel) throws Exception {
+    	secLineasMenu.hoverLineaAndWaitForMenus(menu1rstLevel.getLinea(), menu1rstLevel.getSublinea());
+        clickMenuInHrefAndGetName(menu1rstLevel);
     }
     
-    public static boolean isPresentRightBanner(LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, WebDriver driver) 
-    throws Exception {
-    	SecLineasMenuDesktop.hoverLineaAndWaitForMenus(lineaType, null/*sublineaType*/, app, driver); 
-    	String xpathMenuLinea = getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Banner, app);
+    public boolean isPresentRightBanner(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+    	secLineasMenu.hoverLineaAndWaitForMenus(lineaType, null); 
+    	String xpathMenuLinea = getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Banner);
         return (isElementPresent(driver, By.xpath(xpathMenuLinea)));    	
     }
     
-    public static void clickRightBanner(LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, WebDriver driver) throws Exception {
-        SecLineasMenuDesktop.hoverLineaAndWaitForMenus(lineaType, sublineaType, app, driver);
-        String xpathMenuLinea = getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Banner, app);
+    public void clickRightBanner(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+    	secLineasMenu.hoverLineaAndWaitForMenus(lineaType, sublineaType);
+        String xpathMenuLinea = getXPathMenusSuperiorLinkVisibles(lineaType, sublineaType, TypeMenuDesktop.Banner);
         clickAndWaitLoad(driver, By.xpath(xpathMenuLinea));
     }
 }

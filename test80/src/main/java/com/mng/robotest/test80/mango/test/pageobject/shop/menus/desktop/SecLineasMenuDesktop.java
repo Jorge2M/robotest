@@ -21,6 +21,10 @@ import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 
 public class SecLineasMenuDesktop extends WebdrvWrapp {
+	
+	private final AppEcom app;
+	private final WebDriver driver;
+	
 	static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 	
     static String TagIdLinea = "@LineaId";
@@ -40,47 +44,56 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
 		"]";
 	static String XPathSublineaLinkWithTag = "//div[@class[contains(.,'nav-item')] and @data-brand='" + TagIdSublinea + "']";
 
-    public static String getXPathLinea(LineaType lineaType, AppEcom app) {
-        String lineaIddom = SecMenusWrap.getIdLineaEnDOM(lineaType, app, Channel.desktop);
+	private SecLineasMenuDesktop(AppEcom app, WebDriver driver) {
+		this.app = app;
+		this.driver = driver;
+	}
+	
+	public static SecLineasMenuDesktop getNew(AppEcom app, WebDriver driver) {
+		return (new SecLineasMenuDesktop(app, driver));
+	}
+	
+    public String getXPathLinea(LineaType lineaType) {
+        String lineaIddom = SecMenusWrap.getIdLineaEnDOM(Channel.desktop, app, lineaType);
         return (XPathLineaSpecificWithTag.replace(TagIdLinea, lineaIddom));
     }
     
-    public static String getXPathLineaSelected(LineaType lineaType, AppEcom app) {
-    	String xpathLinea = getXPathLinea(lineaType, app);
+    public String getXPathLineaSelected(LineaType lineaType) {
+    	String xpathLinea = getXPathLinea(lineaType);
         return (xpathLinea + "//self::*[@class[contains(.,'selected')]]");    	
     }
     
-    public static String getXPathLineaLink(LineaType lineaType, AppEcom app) {
-    	String xpathLinea = getXPathLinea(lineaType, app);
+    public String getXPathLineaLink(LineaType lineaType) {
+    	String xpathLinea = getXPathLinea(lineaType);
         return (xpathLinea + "/a");
     }
 
-    public static String getXPathImgSublinea(LineaType lineaId, SublineaNinosType sublineaType) {
+    public String getXPathImgSublinea(LineaType lineaId, SublineaNinosType sublineaType) {
     	return XPathImagesSublineaWithTags.replace(TagIdLinea, lineaId.name()).replace(TagIdSublinea, sublineaType.toString());
     }
     
-    public static String getXPathSublineaLink(SublineaNinosType sublineaType, AppEcom app) {
+    public String getXPathSublineaLink(SublineaNinosType sublineaType) {
         String idSublineaEnDom = sublineaType.getId(app);
     	return (XPathSublineaLinkWithTag.replace(TagIdSublinea, idSublineaEnDom));
     }
 
-    public static boolean isPresentLineasMenuWrapp(WebDriver driver) {
+    public boolean isPresentLineasMenuWrapp() {
         return (isElementPresent(driver, By.xpath(XPathLineasMenuWrapper)));
     }
     
-    public static boolean isVisibleMenuSup(WebDriver driver) {
+    public boolean isVisibleMenuSup() {
         return (isElementVisible(driver, By.xpath(XPathLineasMenuWrapper)));
     }
     
-    public static boolean isVisibleMenuSupUntil(int maxSecondsToWait, WebDriver driver) {
+    public boolean isVisibleMenuSupUntil(int maxSecondsToWait) {
         return (isElementVisibleUntil(driver, By.xpath(XPathLineasMenuWrapper), maxSecondsToWait));
     }    
     
-    public static boolean isInvisibleMenuSupUntil(int maxSecondsToWait, WebDriver driver) {
+    public boolean isInvisibleMenuSupUntil(int maxSecondsToWait) {
         return (isElementInvisibleUntil(driver, By.xpath(XPathLineasMenuWrapper), maxSecondsToWait));
     }
     
-    public static void bringMenuBackground(AppEcom app, WebDriver driver) throws Exception {
+    public void bringMenuBackground() throws Exception {
     	String xpathToBringBack = "";
     	switch (app) {
     	case outlet:
@@ -97,39 +110,39 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
     	isElementInvisibleUntil(driver, By.xpath(xpathToBringBack), 1);
     }    
     
-    public static List<WebElement> getListaLineas(WebDriver driver) {
+    public List<WebElement> getListaLineas() {
         return (driver.findElements(By.xpath(XPathLinea)));
     }
     
-    public static boolean isLineaPresent(LineaType lineaType, AppEcom app, WebDriver driver) {
-        String xpathLinea = getXPathLineaLink(lineaType, app);
+    public boolean isLineaPresent(LineaType lineaType) {
+        String xpathLinea = getXPathLineaLink(lineaType);
         return (isElementPresent(driver, By.xpath(xpathLinea)));
     }
     
-    public static boolean isLineaPresentUntil(LineaType lineaType, AppEcom app, int maxSecondsToWait, WebDriver driver) {
-        String xpathLinea = getXPathLineaLink(lineaType, app);
+    public boolean isLineaPresentUntil(LineaType lineaType, int maxSecondsToWait) {
+        String xpathLinea = getXPathLineaLink(lineaType);
         return (isElementPresentUntil(driver, By.xpath(xpathLinea), maxSecondsToWait));
     }    
     
-    public static boolean isLineaVisible(LineaType lineaType, AppEcom app, WebDriver driver) {
-    	String xpathLinea = getXPathLineaLink(lineaType, app);
+    public boolean isLineaVisible(LineaType lineaType) {
+    	String xpathLinea = getXPathLineaLink(lineaType);
     	return (isElementPresent(driver, By.xpath(xpathLinea)));
     }
     
-    public static boolean isLineaSelected(LineaType lineaType, AppEcom app, WebDriver driver) {
-        String xpathLinea = getXPathLineaSelected(lineaType, app);
+    public boolean isLineaSelected(LineaType lineaType) {
+        String xpathLinea = getXPathLineaSelected(lineaType);
         return (isElementPresent(driver, By.xpath(xpathLinea))); 
     }
     
-    public static void selecLinea(Pais pais, LineaType lineaType, AppEcom app, WebDriver driver) throws Exception {
+    public void selecLinea(Pais pais, LineaType lineaType) throws Exception {
         Linea linea = pais.getShoponline().getLinea(lineaType);
-        if (isLineActiveToSelect(pais, linea, app)) {
-           String XPathLinkLinea = getXPathLineaLink(lineaType, app);
+        if (isLineActiveToSelect(pais, linea)) {
+           String XPathLinkLinea = getXPathLineaLink(lineaType);
      	   clickAndWaitLoad(driver, By.xpath(XPathLinkLinea), TypeOfClick.javascript);
         }
     }
      
-    private static boolean isLineActiveToSelect(Pais pais, Linea linea, AppEcom app) {
+    private boolean isLineActiveToSelect(Pais pais, Linea linea) {
     	//En el caso concreto de los países con únicamente la línea She -> Aparecen otras pestañas
     	return (
     		(app==AppEcom.outlet || 
@@ -138,32 +151,30 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
     	);
     }
 
-    public static boolean isVisibleImgSublineaUntil(LineaType lineaType, SublineaNinosType sublineaType, 
-    												int maxSecondsToWait, WebDriver driver) {
+    public boolean isVisibleImgSublineaUntil(LineaType lineaType, SublineaNinosType sublineaType, int maxSecondsWait) {
     	String xpathImg = getXPathImgSublinea(lineaType, sublineaType);
-    	return (isElementVisibleUntil(driver, By.xpath(xpathImg), maxSecondsToWait));
+    	return (isElementVisibleUntil(driver, By.xpath(xpathImg), maxSecondsWait));
     }
     
-    public static void clickImgSublineaIfVisible(LineaType lineaType, SublineaNinosType sublineaType, WebDriver driver) 
-    throws Exception {
+    public void clickImgSublineaIfVisible(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
     	int maxSecondsToWait = 1;
-        if (isVisibleImgSublineaUntil(lineaType, sublineaType, maxSecondsToWait, driver)) {
+        if (isVisibleImgSublineaUntil(lineaType, sublineaType, maxSecondsToWait)) {
         	String xpathImg = getXPathImgSublinea(lineaType, sublineaType);
         	clickAndWaitLoad(driver, By.xpath(xpathImg));
         	isElementInvisibleUntil(driver, By.xpath(xpathImg), 1/*seconds*/);
         }
     }
 
-    public static void hoverLineaAndWaitForMenus(LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, WebDriver driver) 
-    throws Exception {
+    public void hoverLineaAndWaitForMenus(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
     	//Existe un problema aleatorio en Firefox que provoca que el Hover sobre la línea (mientras se está cargando la galería) 
     	//ejecute realmente un hover contra la línea de la izquerda
     	boolean isCapaMenusVisible = false;
     	int i=0;
     	do {
-	    	hoverLinea(lineaType, sublineaType, app, driver);
+	    	hoverLinea(lineaType, sublineaType);
 	    	int maxSecondsToWait = 2;
-	    	isCapaMenusVisible = SecBloquesMenuDesktop.isCapaMenusLineaVisibleUntil(lineaType, maxSecondsToWait, app, driver);
+	    	SecBloquesMenuDesktop secBloques = SecBloquesMenuDesktop.getNew(app, driver);
+	    	isCapaMenusVisible = secBloques.isCapaMenusLineaVisibleUntil(lineaType, maxSecondsToWait);
 	    	if (!isCapaMenusVisible) {
 	    		pLogger.warn("No se hacen visibles los menús después de Hover sobre línea " + lineaType);
 	    	}
@@ -172,25 +183,25 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
     	while (!isCapaMenusVisible && i<2);
     }
     
-    public static void hoverLinea(LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, WebDriver driver) throws Exception {
+    public void hoverLinea(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
     	if (sublineaType==null) {
-    		hoverLinea(lineaType, app, driver);
+    		hoverLinea(lineaType);
     	} else {
-    		selectSublinea(lineaType, sublineaType, app, driver);
+    		selectSublinea(lineaType, sublineaType);
     	}
     }
     
-    public static void hoverLinea(LineaType lineaType, AppEcom app, WebDriver driver) throws Exception {
+    public void hoverLinea(LineaType lineaType) throws Exception {
         //Hover sobre la pestaña -> Hacemos visibles los menús/subimágenes
-        String xpathLinkLinea = getXPathLineaLink(lineaType, app);
+        String xpathLinkLinea = getXPathLineaLink(lineaType);
         isElementVisibleUntil(driver, By.xpath(xpathLinkLinea), 1);
         moveToElement(By.xpath(xpathLinkLinea), driver);
     }
 
-    public static void selectSublinea(LineaType lineaType, SublineaNinosType sublineaType, AppEcom app, WebDriver driver) throws Exception {
-    	hoverLinea(lineaType, app, driver);
-       	clickImgSublineaIfVisible(lineaType, sublineaType, driver);
-        String xpathLinkSublinea = getXPathSublineaLink(sublineaType, app);
+    public void selectSublinea(LineaType lineaType, SublineaNinosType sublineaType) throws Exception {
+    	hoverLinea(lineaType);
+       	clickImgSublineaIfVisible(lineaType, sublineaType);
+        String xpathLinkSublinea = getXPathSublineaLink(sublineaType);
         
         //Esperamos que esté visible la sublínea y realizamos un Hover
         isElementVisibleUntil(driver, By.xpath(xpathLinkSublinea), 2);

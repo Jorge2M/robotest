@@ -11,7 +11,7 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -80,10 +80,7 @@ public class SecBolsaStpV {
     public static void forceStateBolsaTo(StateBolsa stateBolsaExpected, AppEcom app, Channel channel, WebDriver driver) 
     throws Exception {
     	SecBolsa.setBolsaToStateIfNotYet(stateBolsaExpected, channel, app, driver);
-    
-        //Validaciones
-    	int maxSecondsWait = 1;
-        validateBolsaInState(stateBolsaExpected, maxSecondsWait, channel, driver);
+        validateBolsaInState(stateBolsaExpected, 1, channel, driver);
     }
     
     @Validation (
@@ -127,13 +124,9 @@ public class SecBolsaStpV {
     public static void altaBolsaArticulos(List<ArticleStock> listParaAlta, DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
     	includeListaArtInTestCaseDescription(listParaAlta);
-        
-    	//Damos de alta la lista de productos en la bolsa
         for (int i=0; i<listParaAlta.size(); i++) {
             ArticleStock artTmp = listParaAlta.get(i);
             ArticuloScreen articulo = UtilsMangoTest.addArticuloBolsa(artTmp, dCtxSh.appE, dCtxSh.channel, driver);
-            
-            //En caso de tener vale asociado lo añadimos también
             if (artTmp.isVale()) {
                 articulo.setVale(artTmp.getValePais());
             }
@@ -177,10 +170,7 @@ public class SecBolsaStpV {
         	checkIsBolsaVisibleInDesktop(driver);
         }
         
-        //Validaciones. Cuadran los artículos en la volsa
         validaCuadranArticulosBolsa(dataBag, app, channel, driver);
-        
-        //Validaciones para analytics (sólo para firefox y NetAnalysis)
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(Constantes.AnalyticsVal.GoogleAnalytics,
                                                                   Constantes.AnalyticsVal.Criteo,
                                                                   Constantes.AnalyticsVal.NetTraffic, 
@@ -294,8 +284,7 @@ public class SecBolsaStpV {
     	expected="Se muestra la página de identificación",
     	saveNettraffic=SaveWhen.Always)
 	public static void selectButtonComprar(DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	int maxSecondsWait = 10;
-    	SecBolsa.clickBotonComprar(driver, dCtxSh.channel, maxSecondsWait);
+    	SecBolsa.clickBotonComprar(driver, dCtxSh.channel, 10);
         validaSelectButtonComprar(dataBag, dCtxSh, driver);
         if(!dCtxSh.userRegistered) {
         	Page1IdentCheckoutStpV.secSoyNuevo.validaRGPDText(dCtxSh, driver);

@@ -33,9 +33,7 @@ public class PageAccesoMisComprasStpV {
         expected="Se hace visible el bloque de #{typeBlock}")
     public static void clickBlock(TypeBlock typeBlock, WebDriver driver) {
         PageAccesoMisCompras.clickBlock(typeBlock, driver);
-        int maxSecondsWait = 1;
-        checkIsVisibleBlock(typeBlock, maxSecondsWait, driver);
-     
+        checkIsVisibleBlock(typeBlock, 1, driver);
     }
 	
 	@Validation (

@@ -126,8 +126,12 @@ public class ElementPageFunctions {
     	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(element.getXPath(channel)));
     }
 
-    public static void moveToAndSelectElement(ElementPage element, WebDriver driver) throws Exception {
+    public static void moveToElement(ElementPage element, WebDriver driver) {
     	WebdrvWrapp.moveToElement(By.xpath(element.getXPath()), driver);
+    }
+    
+    public static void moveToAndSelectElement(ElementPage element, WebDriver driver) throws Exception {
+    	moveToElement(element, driver);
         selectElement(element, driver);
     }
 
@@ -147,5 +151,11 @@ public class ElementPageFunctions {
     public static void selectByValue(ElementPage select, String value, OptionSelect typeSelect, WebDriver driver) {
     	By selectBy = By.xpath(select.getXPath());
     	WebdrvWrapp.selectOption(selectBy, value, typeSelect, driver);
+    }
+    
+    public static void moveToElementPage(ElementPage element, WebDriver driver) {
+    	By byElement = By.xpath(element.getXPath());
+        WebElement webElem = driver.findElement(byElement);
+        WebdrvWrapp.moveToElement(webElem, driver);
     }
 }

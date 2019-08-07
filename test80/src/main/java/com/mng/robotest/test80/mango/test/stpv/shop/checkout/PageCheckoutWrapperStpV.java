@@ -38,10 +38,10 @@ public class PageCheckoutWrapperStpV {
 
     public static SecMetodoEnvioDesktopStpV secMetodoEnvio;
     public static SecStoreCreditStpV secStoreCredit;
-    public static SecTarjetaPciStpV secTarjetaPci;
+    //public static SecTarjetaPciStpV secTarjetaPci;
     public static SecIdealStpV secIdeal;
     public static SecTMangoStpV secTMango;
-    public static SecKrediKartiStpV secKrediKarti;
+    private static SecKrediKartiStpV secKrediKarti;
     public static SecBillpayStpV secBillpay;
     public static SecKlarnaStpV secKlarna;
     public static SecKlarnaDeutschStpV secKlarnaDeutsch;
@@ -50,6 +50,14 @@ public class PageCheckoutWrapperStpV {
     public static ModalAvisoCambioPaisStpV modalAvisoCambioPais;
     public static Page1DktopCheckoutStpV page1DktopCheck;
     public static Page1EnvioCheckoutMobilStpV page1MobilCheck;
+    
+    public static SecTarjetaPciStpV getSecTarjetaPciStpV(Channel channel, WebDriver driver) {
+    	return (SecTarjetaPciStpV.getNew(channel, driver));
+    }
+    
+    public static SecKrediKartiStpV getSecKrediKartiStpV(Channel channel, WebDriver driver) {
+    	return SecKrediKartiStpV.getNew(channel, driver);
+    }
     
     public static void validateIsFirstPage(boolean userLogged, DataBag dataBag, Channel channel, WebDriver driver) 
     throws Exception {
@@ -87,7 +95,7 @@ public class PageCheckoutWrapperStpV {
     private static ChecksResult checkAvailablePagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país (" + pais.getListPagosEnOrdenPantalla(app, isEmpl).size() + ")",
+			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país (" + pais.getListPagosTest(app, isEmpl).size() + ")",
 			PageCheckoutWrapper.isNumMetodosPagoOK(pais, app, channel, isEmpl, driver), State.Defect);    	
     	return validations;
     }
@@ -95,12 +103,16 @@ public class PageCheckoutWrapperStpV {
     @Validation
     private static ChecksResult checkLogosPagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) { 
     	ChecksResult validations = ChecksResult.getNew();
-        List<Pago> listaPagosEnOrden = pais.getListPagosEnOrdenPantalla(app, isEmpl);
-        for (int i=0; i<listaPagosEnOrden.size(); i++) {
-            if (listaPagosEnOrden.get(i).getTypePago()!=TypePago.TpvVotf) {
+        List<Pago> listPagos = pais.getListPagosTest(app, isEmpl);
+        if (listPagos.size()==1 && channel==Channel.movil_web) {
+        	return validations;
+        }
+        for (int i=0; i<listPagos.size(); i++) {
+            if (listPagos.get(i).getTypePago()!=TypePago.TpvVotf) {
+            	String pagoNameExpected = listPagos.get(i).getNombre(channel);
         	 	validations.add(
-        			"Aparece el logo/pestaña asociado al pago <b>" + listaPagosEnOrden.get(i).getNombre(channel) + "</b>",
-        			PageCheckoutWrapper.isMetodoPagoPresent(listaPagosEnOrden.get(i).getNombre(channel), listaPagosEnOrden.get(i).getIndexpant(), channel, pais.getLayoutPago(), driver),
+        			"Aparece el logo/pestaña asociado al pago <b>" + pagoNameExpected + "</b>",
+        			PageCheckoutWrapper.isMetodoPagoPresent(pagoNameExpected, channel, driver),
         			State.Defect);    
             }
         }   
@@ -245,7 +257,7 @@ public class PageCheckoutWrapperStpV {
         }
 
         try {
-            PageCheckoutWrapper.forceClickMetodoPagoAndWait(pago.getNombre(channel), pago.getIndexpant(), pais, channel, driver);
+            PageCheckoutWrapper.forceClickMetodoPagoAndWait(pago.getNombre(channel), pais, channel, driver);
         }
         catch (Exception e) {
             pLogger.warn("Problem clicking icono pago for payment {} in country {}", pago.getNombre(), pais.getNombre_pais(), e);
@@ -265,16 +277,14 @@ public class PageCheckoutWrapperStpV {
             validateIsPresentButtonCompraDesktop(driver);
         }
         
-        PageCheckoutWrapperStpV.secTarjetaPci.validateIsSectionOk(pago, pais, channel, driver);
+        PageCheckoutWrapperStpV.getSecTarjetaPciStpV(channel, driver).validateIsSectionOk(pago, pais);
     }
     
     public static void validateSelectPagoNoTRJintegrada(Pago pago, Channel channel, WebDriver driver) {
         if (channel==Channel.desktop) {
             validateIsPresentButtonCompraDesktop(driver);
         }
-
-        int maxSecondsWait = 2;
-        checkIsVisibleTextUnderPayment(pago.getNombre(channel), pago, maxSecondsWait, channel, driver);
+        checkIsVisibleTextUnderPayment(pago.getNombreInCheckout(channel), pago, 2, channel, driver);
     }
     
     @Validation (

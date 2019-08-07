@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
@@ -340,7 +340,7 @@ public class Page2IdentCheckout extends WebdrvWrapp {
      */
     final static String firstProvinciaUkranie = "Ananivskyi";
     final static String XPathOptionFirstProvUkranie = "//div[@class[contains(.,'choices')] and text()[contains(.,'" + firstProvinciaUkranie + "')]]";
-    public static String setSelectProvPaisIfVisible(int posInSelect, String codCountry, Channel channel, WebDriver driver) {
+    public static String setSelectProv1PaisIfVisible(String codCountry, Channel channel, WebDriver driver) {
         String datoSeteado = "";
         WebElement provinciaPais = UtilsMangoTest.findElementPriorizingDisplayed(driver, By.xpath(XPathSelectProvPais));
         if (provinciaPais!=null) {
@@ -350,7 +350,7 @@ public class Page2IdentCheckout extends WebdrvWrapp {
             	driver.findElement(By.xpath(XPathOptionFirstProvUkranie)).click();
             	return firstProvinciaUkranie;
         	} else {
-        		new Select(provinciaPais).selectByIndex(posInSelect);
+        		new Select(provinciaPais).selectByIndex(1);
                 datoSeteado = provinciaPais.getAttribute("value");
                 return datoSeteado;
         	}
@@ -359,14 +359,14 @@ public class Page2IdentCheckout extends WebdrvWrapp {
         return "";
     }
     
-    public static void setSelectProvPaisIfVisible(int posInSelect, HashMap<String,String> datosRegistro, String codPais, Channel channel, WebDriver driver) {
-        String datoSeteado = setSelectProvPaisIfVisible(posInSelect, codPais, channel, driver);
+    public static void setSelectProvPaisIfVisible(HashMap<String,String> datosRegistro, String codPais, Channel channel, WebDriver driver) {
+        String datoSeteado = setSelectProv1PaisIfVisible(codPais, channel, driver);
         if ("".compareTo(datoSeteado)!=0) {
             datosRegistro.put("provinciaPais", datoSeteado);
         }
-    }    
+    }   
     
-    public static String setSelectEstadosPaisIfVisible(int posInSelect, WebDriver driver) throws Exception {
+    public static String setSelectEstados1PaisIfVisible(WebDriver driver) throws Exception {
         String datoSeteado = "";
         
         //Tenemos problemas aleatorios de StaleElementReferenceException con este elemento
@@ -378,7 +378,7 @@ public class Page2IdentCheckout extends WebdrvWrapp {
             if (estadosPaisList.size() > 0) {
                 try {
                     Select select = new Select(estadosPaisList.get(0));
-                    select.selectByIndex(posInSelect);
+                    select.selectByIndex(1);
                     datoSeteado = select.getFirstSelectedOption().getText();
                     //datoSeteado = estadosPaisList.get(0).getAttribute("value");
                     staleElement = false;
@@ -394,12 +394,29 @@ public class Page2IdentCheckout extends WebdrvWrapp {
         return datoSeteado;
     }
     
-    public static void setSelectEstadosPaisIfVisible(int posInSelect, HashMap<String,String> datosRegistro, WebDriver driver) throws Exception {
-        String datoSeteado = setSelectEstadosPaisIfVisible(posInSelect, driver);
+    public static void setSelectEstadosPaisIfVisible(HashMap<String,String> datosRegistro, String codPais, WebDriver driver) throws Exception {
+       	String datoSeteado = "";
+    	if ("001".compareTo(codPais)==0) {
+    		datoSeteado = setSeletEstadoEspanya("Barcelona", driver);
+    	} else {
+    		datoSeteado = setSelectEstados1PaisIfVisible(driver);
+    	}
         if ("".compareTo(datoSeteado)!=0) {
             datosRegistro.put("estadosPais", datoSeteado);
         }
     }    
+    
+    public static String setSeletEstadoEspanya(String provincia, WebDriver driver) {
+        WebElement provinciaPais = UtilsMangoTest.findElementPriorizingDisplayed(driver, By.xpath(XPathSelectEstadosPais));
+        if (provinciaPais!=null) {
+        	String selected = new Select(provinciaPais).getFirstSelectedOption().getText();
+        	if (selected.compareTo(provincia)!=0) {
+        		new Select(provinciaPais).selectByVisibleText(provincia);
+        	}
+            return provincia;
+        }      
+        return "";
+    }
     
     /**
      * @param posInSelect: elemento del desplegable que queremos desplegar (comenzando desde el 1)
@@ -514,15 +531,12 @@ public class Page2IdentCheckout extends WebdrvWrapp {
             setCodPostalIfExistsAndWait(codPostalPais, datosSeteados, driver);
             setInputPoblacionIfVisible(cfCity, datosSeteados, driver);
             setSelectLocalidadesIfVisible(driver, 1, datosSeteados);
-            setSelectProvPaisIfVisible(1, datosSeteados, pais.getCodigo_pais(), channel, driver); // Desplegable provincia país (p.e. Turquía)
+            setSelectProvPaisIfVisible(datosSeteados, pais.getCodigo_pais(), channel, driver); // Desplegable provincia país (p.e. Turquía)
             setCheckCondicionesIfVisible(datosSeteados, driver); // Selección aceptación de condiciones (actualmente sólo en Turquía)
             setSelectLocalidadesProvCity(1/*posInSelect*/, datosSeteados, driver); // Desplegable específico de Turquía
             setInputProvEstadoIfVisible(cfState, datosSeteados, driver);
             setInputDniIfVisible(dni, datosSeteados, driver);
-            
-            //if (pais.getCodigo_pais().compareTo(codPaisEspanya)!=0) 
-                setSelectEstadosPaisIfVisible(1/*posInSelect*/, datosSeteados, driver);
-            
+            setSelectEstadosPaisIfVisible(datosSeteados, codigoPais, driver);
             if (i==0 && clickPubli) {
                 clickPublicidadIfVisible(datosSeteados, driver);
                 setCheckHombreIfVisible(datosSeteados, driver);

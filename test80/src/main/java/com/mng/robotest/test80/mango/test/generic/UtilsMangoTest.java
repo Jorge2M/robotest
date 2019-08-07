@@ -21,16 +21,14 @@ import org.testng.ITestContext;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataMango;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Continente;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Response;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
@@ -92,7 +90,7 @@ public class UtilsMangoTest {
     public static ArticuloScreen addArticuloBolsa(ArticleStock selArticulo, AppEcom app, Channel channel, WebDriver driver)
     throws Exception {
         ArticuloScreen articulo = ArticuloNavigations.selectArticuloTallaColorByRef(selArticulo, app, channel, driver);
-        PageFicha pageFicha = PageFicha.newInstance(app, channel, driver);
+        PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
         pageFicha.clickAnadirBolsaButtonAndWait(); 
         return articulo;
     }    
@@ -132,14 +130,16 @@ public class UtilsMangoTest {
      * @param paisesStr: lista de países en formato "001,030..." (puedes ser "*")
      */
     public static List<Integer> getListaPaisesInt(String paisesStr) {
-        List<Integer> listaPaises = new ArrayList<>();
-        if ("*".compareTo(paisesStr) != 0 && "X".compareTo(paisesStr) != 0) {
+        if ("*".compareTo(paisesStr)!=0 && "X".compareTo(paisesStr)!=0) {
+            List<Integer> listaPaises = new ArrayList<>();
             String[] listaPaisesStr = paisesStr.substring(0, paisesStr.length()).split(",");
-            for (String element : listaPaisesStr)
+            for (String element : listaPaisesStr) {
                 listaPaises.add(Integer.valueOf(element));
+            }
+            return listaPaises;
         } 
         
-        return listaPaises;
+        return null;
     }
 
     public static WebElement findDisplayedElement(WebDriver driver, By locator) {
@@ -224,32 +224,17 @@ public class UtilsMangoTest {
 
         return randomNum;
     }
-
-    /**
-     * Obtener la lista de países necesarias para las pruebas
-     */
-    public static List<Pais> listaPaisesXML(final List<Integer> listaPaisesFilter) throws Exception {
-        return (listaPaisesXML(false/*todosPaises*/, listaPaisesFilter));
-    }
-    
-    public static List<Pais> listaPaisesXML(boolean todosPaises, final List<Integer> listaPaisesFilter) throws Exception {
-        // Realizamos el filtrado de los países para obtener sólo los indicados
-        Response response = Utilidades.filtradoListaPaises(todosPaises, listaPaisesFilter);
-        Iterator<Continente> itContinentes = response.getResponse().iterator();
-
-        // Normalizamos la lista de países obtenidos
-        return Utilidades.getListaPaises(itContinentes);
-    }
     
     public static TreeSet<String> getListPagoFilterNames(List<Integer> listCountrysFilter, Channel channel, AppEcom appE, boolean isEmpl) 
     throws Exception {
-        List<Pais> listPaises = UtilsMangoTest.listaPaisesXML(false, listCountrysFilter);
+        List<Pais> listPaises = Utilidades.getListCountrysFiltered(listCountrysFilter);
         return (getListNameFilterPagos(listPaises, channel, appE, isEmpl));
     }
     
     public static TreeSet<String> getListPagoFilterNames(Channel channel, AppEcom appE, boolean isEmpl) 
     throws Exception {
-        List<Pais> listPaises = UtilsMangoTest.listaPaisesXML(true, null);
+    	List<Integer> listaCodPais = null;
+    	List<Pais> listPaises = Utilidades.getListCountrysFiltered(listaCodPais);
         return (getListNameFilterPagos(listPaises, channel, appE, isEmpl));
     }    
     

@@ -9,8 +9,8 @@ import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroFin;
+import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 
 @SuppressWarnings({"static-access"})
 public class PageRegistroFinStpV {
@@ -32,15 +32,18 @@ public class PageRegistroFinStpV {
         validateWeAreLogged(dCtxSh, dFTest.driver);
     }
 	
+	public static void validateWeAreLogged(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+		validateLogoGoesToPaisIdioma(dCtxSh, driver);
+    	SecMenusUserStpV secMenusUserStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+    	secMenusUserStpV.checkIsVisibleLinkCerrarSesion();
+	}
+	
 	@Validation
-	public static ChecksResult validateWeAreLogged(DataCtxShop dCtxSh, WebDriver driver) {
+	public static ChecksResult validateLogoGoesToPaisIdioma(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		ChecksResult validations = ChecksResult.getNew();
     	validations.add(
     		"El logo de Mango redirige al país/idioma origen: " + dCtxSh.idioma.getAcceso(),
     		SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, driver).validaLogoMangoGoesToIdioma(dCtxSh.idioma), State.Warn);
-    	validations.add(
-    		"Aparece el link superior de <b>Cerrar Sesión</b> (estamos loginados)",
-    		SecMenusWrap.secMenusUser.isPresentCerrarSesion(dCtxSh.channel, driver), State.Defect);
     	return validations;		
 	}
 }

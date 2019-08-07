@@ -22,9 +22,10 @@ public class SecCrossSellingStpV {
     public static ChecksResult validaIsCorrect(LineaType lineaType, AppEcom app, WebDriver driver) 
     throws Exception {
         //Obtenemos la lista de menús de Mujer-Prendas
+		SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
         List<WebElement> listaMenusBloque = 
-        	SecMenusDesktop.
-        		secMenuSuperior.secBlockMenus.getListMenusLineaBloque(lineaType, bloqueMenu.prendas, app, driver);
+        	secMenus.secMenuSuperior.secBlockMenus.getListMenusLineaBloque(lineaType, bloqueMenu.prendas);
+        
         String litMenu1 = listaMenusBloque.get(0).getAttribute("innerHTML");
         String litMenu2 = listaMenusBloque.get(1).getAttribute("innerHTML");
         String litMenu3 = listaMenusBloque.get(2).getAttribute("innerHTML");

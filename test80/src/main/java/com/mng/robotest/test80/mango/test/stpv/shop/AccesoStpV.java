@@ -14,7 +14,7 @@ import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -24,15 +24,15 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
-import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavoritos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusUserWrap;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap;
+import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.UserMenu;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenusDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
-import com.mng.robotest.test80.mango.test.stpv.shop.favoritos.PageFavoritosStpV;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageLoginVOTFStpV;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageSelectIdiomaVOTFStpV;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageSelectLineaVOTFStpV;
@@ -56,7 +56,7 @@ public class AccesoStpV {
         }
        
         if (clearArticulos) {
-            registro+= "Borrar la Bolsa<br>";        
+            registro+= "Borrar la Bolsa<br>";         
         }
         
         DatosStep datosStep = TestCaseData.getDatosCurrentStep();
@@ -96,49 +96,55 @@ public class AccesoStpV {
     }
 	
 	@Validation
-	private static ChecksResult checkLinksAfterLogin(DataCtxShop dCtxSh, WebDriver driver) {
+	private static ChecksResult checkLinksAfterLogin(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		ChecksResult validations = ChecksResult.getNew();
         int maxSecondsWait = 5;
+        MenusUserWrapper userMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver).getMenusUser();
     	validations.add(
     		"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		SecMenusWrap.secMenusUser.isPresentMiCuentaUntil(dCtxSh.channel, maxSecondsWait, driver), State.Defect);
+    		userMenus.isMenuInStateUntil(UserMenu.miCuenta, StateElem.Present, maxSecondsWait), State.Defect);
 		
-		boolean isVisibleLinkFavoritos = SecMenusWrap.secMenusUser.isPresentFavoritos(dCtxSh.channel, driver);
+		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(UserMenu.favoritos, StateElem.Present, 0);
 		if (dCtxSh.appE==AppEcom.outlet) { 
 	    	validations.add(
 	    		"NO aparece el link \"Favoritos\"",
-	    		!isVisibleLinkFavoritos, State.Defect);
+	    		!isVisibleMenuFav, State.Defect);
 	    	validations.add(
 	    		"Aparece el link \"Mis Pedidos\"",
-	    		SecMenusWrap.secMenusUser.isPresentPedidos(dCtxSh.channel, driver), State.Defect);
+	    		userMenus.isMenuInState(UserMenu.pedidos, StateElem.Present), State.Defect);
 		} else {
 	    	validations.add(
 	    		"Aparece el link \"Favoritos\"",
-	    		isVisibleLinkFavoritos, State.Defect);
+	    		isVisibleMenuFav, State.Defect);
 	    	
-	    	boolean isPresentLinkMisCompras = SecMenusWrap.secMenusUser.isPresentMisCompras(dCtxSh.channel, driver);
-	    	if (dCtxSh.pais.isMisCompras()) {
-		    	validations.add(
-		    		"Aparece el link \"Mis Compras\"",
-		    		isPresentLinkMisCompras, State.Defect);
-	    	} else {
-		    	validations.add(
-		    		"No aparece el link \"Mis Compras\"",
-		    		!isPresentLinkMisCompras, State.Defect);
+	    	if (dCtxSh.channel!=Channel.desktop) {
+		    	boolean isPresentLinkMisCompras = userMenus.isMenuInState(UserMenu.misCompras, StateElem.Present);
+		    	if (dCtxSh.pais.isMisCompras()) {
+			    	validations.add(
+			    		"Aparece el link \"Mis Compras\"",
+			    		isPresentLinkMisCompras, State.Defect);
+		    	} else {
+			    	validations.add(
+			    		"No aparece el link \"Mis Compras\"",
+			    		!isPresentLinkMisCompras, State.Defect);
+		    	}
 	    	}
 		}
 		
-    	validations.add(
-    		"Aparece el link \"Ayuda\"",
-    		SecMenusWrap.secMenusUser.isPresentAyuda(dCtxSh.channel, driver), State.Defect);
-    	validations.add(
-    		"Aparece el link \"Cerrar sesión\"",
-    		SecMenusWrap.secMenusUser.isPresentCerrarSesion(dCtxSh.channel, driver), State.Defect);
+		if (dCtxSh.channel!=Channel.desktop || dCtxSh.appE!=AppEcom.shop) {
+	    	validations.add(
+	    		"Aparece el link \"Ayuda\"",
+	    		userMenus.isMenuInState(UserMenu.ayuda, StateElem.Visible), State.Defect);
+	    	validations.add(
+	    		"Aparece el link \"Cerrar sesión\"",
+	    		userMenus.isMenuInState(UserMenu.cerrarSesion, StateElem.Present), State.Defect);
+		}
     	
         if (dCtxSh.channel==Channel.desktop) {
+        	SecMenusDesktop secMenus = SecMenusDesktop.getNew(dCtxSh.appE, driver);
         	validations.add(
         		"Aparece una página con menús de MANGO",
-        		SecMenusDesktop.secMenuSuperior.secLineas.isPresentLineasMenuWrapp(driver), State.Warn);
+        		secMenus.secMenuSuperior.secLineas.isPresentLineasMenuWrapp(), State.Warn);
         }
         
         return validations;
@@ -164,7 +170,8 @@ public class AccesoStpV {
     }    
     
     public static void identificacionEnMango(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-        if (!SecMenusUserWrap.isPresentCerrarSesion(dCtxSh.channel, driver)) {
+    	MenusUserWrapper userMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver).getMenusUser();
+        if (!userMenus.isMenuInState(UserMenu.cerrarSesion, StateElem.Present)) {
         	iniciarSesion(dCtxSh, driver);
         }
     }

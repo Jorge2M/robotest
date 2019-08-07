@@ -2,18 +2,18 @@ package com.mng.robotest.test80.mango.test.appshop;
 
 import java.lang.reflect.Method;
 import java.net.URI;
-
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
@@ -30,16 +30,14 @@ public class SEO extends GestorWebDriver {
     }
 
     @BeforeMethod(groups = { "Otras", "Canal:all_App:all" })
-    @Parameters({ "brwsr-path", "urlBase", "AppEcom", "Channel" })
-    public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) 
-    throws Exception {
-        //Recopilación de parámetros comunes
+    public void login(ITestContext context, Method method) throws Exception {
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom(appEcom);
-        dCtxSh.setChannel(channel);
-        dCtxSh.urlAcceso = urlAcceso;
+        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
+        dCtxSh.setChannel(inputData.getChannel());
+        dCtxSh.urlAcceso = inputData.getUrlBase();
 
-        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), "", dCtxSh, context, method);
     }
 
     @SuppressWarnings("unused")
@@ -50,7 +48,7 @@ public class SEO extends GestorWebDriver {
     }
 
     @Test(
-        groups = { "Otras", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, 
+        groups = { "Otras", "Canal:desktop_App:shop,outlet"}, 
         description="Comprobar existencia y contenido del fichero robots.txt")
     public void SEO001_check_RobotsSitemap() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();

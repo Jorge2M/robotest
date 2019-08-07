@@ -28,7 +28,7 @@ public class ClassWithTCasesStub {
     }       
 
     @Test (
-        groups={"Micuenta", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true, 
+        groups={"Micuenta", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
         description="Verificar opciones de 'mi cuenta'")
     @Parameters({"userConDevolucionPeroSoloEnPRO", "passwordUserConDevolucion"})
     public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion, ITestContext context, Method method) throws Exception {

@@ -5,7 +5,9 @@ import java.util.*;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.CompraFact;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
@@ -29,13 +31,15 @@ public class ListPagosEspana {
     @Factory
     @Test (
         groups={"Compra", "Canal:all_App:all"}, alwaysRun=true, priority=1, 
-        description="Factoría que incluye varios tests por cada uno de los pagos de España variando los flags de usuario registrado, empleado y métodos de envío")
-    @Parameters({"AppEcom", "Channel"}) 
-    public Object[] COM010_PagoFactory(String appStr, String channelStr, ITestContext ctx) throws Exception {
+        description=
+    		"Factoría que incluye varios tests por cada uno de los pagos de España " + 
+    		"variando los flags de usuario registrado, empleado y métodos de envío")
+    public Object[] COM010_PagoFactory(ITestContext ctx) throws Exception {
     	this.ctx = ctx;
-        ArrayList<Object> listTests = new ArrayList<>();
-        AppEcom appE = AppEcom.valueOf(appStr);
-        Channel channel = Channel.valueOf(channelStr);
+        ArrayList<Object> listTests = new ArrayList<>(); 
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(ctx);
+        AppEcom appE = (AppEcom)inputData.getApp();
+        Channel channel = inputData.getChannel();
         try {
         	getDataCountrys();
         	if (appE!=AppEcom.votf) {
@@ -54,10 +58,9 @@ public class ListPagosEspana {
     }
     
     private void getDataCountrys() throws Exception {
-        //Obtenemos la lista de países como lista de enteros
         Integer codEspanya = Integer.valueOf(1);
         Integer codFrancia = Integer.valueOf(11);
-        List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(Arrays.asList(codEspanya, codFrancia))); 
+        List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya, codFrancia))); 
         this.espana = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
         this.francia = UtilsMangoTest.getPaisFromCodigo("011", listaPaises);
         this.castellano = espana.getListIdiomas().get(0);
@@ -114,9 +117,9 @@ public class ListPagosEspana {
         }    	
     }
 
-    private void createTestPago(ArrayList<Object> listTests, Pais pais, IdiomaPais idioma, Pago pago, AppEcom appE, Channel channel, 
-    							boolean usrRegistrado, boolean empleado, boolean testVale, boolean manyArticles, boolean anulPedido, 
-    							int prioridad) {
+    private void createTestPago(
+    		ArrayList<Object> listTests, Pais pais, IdiomaPais idioma, Pago pago, AppEcom appE, Channel channel, boolean usrRegistrado, 
+    		boolean empleado, boolean testVale, boolean manyArticles, boolean anulPedido, int prioridad) {
     	listTests.add(new CompraFact(pais, idioma, pago, appE, channel, usrRegistrado, empleado, testVale, manyArticles, anulPedido, prioridad));
     	System.out.println(
     	    "Creado Test COM010: " +

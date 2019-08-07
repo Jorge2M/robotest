@@ -10,10 +10,11 @@ import com.mng.robotest.test80.arq.utils.controlTest.GestorWebDrv;
 import com.mng.robotest.test80.arq.utils.controlTest.StoredWebDrv;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
-import com.mng.robotest.test80.arq.utils.webdriver.BStackDataMovil;
+import com.mng.robotest.test80.arq.utils.webdriver.BrowserStackMobil;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker.ManagementWebdriver;
+import com.mng.robotest.test80.data.TestMakerContext;
 
 import java.lang.reflect.Method;
 import java.text.Normalizer;
@@ -32,7 +33,7 @@ public class GestorWebDriver extends fmwkTest {
      * @param datosFactoria identificador de los casos de prueba creados desde factorías
      * @param isMobil       indicador de si las pruebas son de móvil o desktop
      */
-    public WebDriver getWebDriver(String bpath, String appPath, String datosFactoria, Channel channel, ITestContext context, Method method) 
+    public WebDriver getWebDriver(TypeWebDriver typeWebDriver, String appPath, String datosFactoria, Channel channel, ITestContext context, Method method) 
     throws Exception {
         WebDriver driver = null;
         if (!"ROBOTEST2".equals(System.getProperty("ROBOTEST2"))) {
@@ -42,46 +43,40 @@ public class GestorWebDriver extends fmwkTest {
 	    
             //Guardamos los datos enviados por la factoria indexados por nombre de Thread (soporte para la paralelización)
             context.setAttribute("factory-"+String.valueOf(Thread.currentThread().getId()), deAccent(datosFactoria));
-            String browser = bpath;
-
-            //Obtenemos navegador/canal de ejecución de las pruebas en base al bpath del testng.xml
-            TypeWebDriver canalWebDriver = getTypeWebdriver(browser);
         	    	
             //Obtenemos el gestor de WebDrivers (lo busca en el contexto y si no existe lo crea/almacena en dicho contexto)
             GestorWebDrv gestorWd = GestorWebDrv.getInstance(context);
     	    
             //Obtenemos información adicional del WebDriver que necesitamos (básicamente el modelo del dispositivo en el caso de BrowserStack)
-            String moreDataWdrv = getMoreDataWdrv(canalWebDriver, context);
+            String moreDataWdrv = getMoreDataWdrv(typeWebDriver, context);
                     
             //Buscamos un webdriver libre del tipo que necesitamos (y automáticamente se marca como 'busy')
-            boolean netAnalysis = isParamNetTrafficActive(context);
-            driver = gestorWd.getWebDrvFree(canalWebDriver, moreDataWdrv);
+            TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+            boolean netAnalysis = testMakerCtx.getInputData().isNetAnalysis();
+            driver = gestorWd.getWebDrvFree(typeWebDriver, moreDataWdrv);
             if (driver == null) {
         		driver = 
-        			FactoryWebdriverMaker.make(canalWebDriver, context)
+        			FactoryWebdriverMaker.make(typeWebDriver, context)
         				.setChannel(channel)
         				.setNettraffic(netAnalysis)
         				.build();
                 
-                gestorWd.storeWebDriver(driver, StoredWebDrv.stateWd.busy, canalWebDriver, moreDataWdrv);
+                gestorWd.storeWebDriver(driver, StoredWebDrv.stateWd.busy, typeWebDriver, moreDataWdrv);
             }
                     
             //Almacenamiento en el contexto de algunos datos útiles
-            context.setAttribute("bpath", bpath);
+            context.setAttribute("bpath", typeWebDriver.name());
             context.setAttribute("appPath", appPath);
         }
 
         return driver;
-    }
-    
-    private boolean isParamNetTrafficActive(ITestContext ctx) {
-        String netAnalysis = ctx.getCurrentXmlTest().getParameter(Constantes.paramNetAnalysis);
-        return ("true".compareTo(netAnalysis)==0);
-    }    
+    }   
 	
     public void quitWebDriver(WebDriver driver, ITestContext contextTng) {
     	//Borramos el proxy para la gestión del NetTraffic asociado a nivel de Thread de TestNG
-    	if (isParamNetTrafficActive(contextTng)) {
+        TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(contextTng);
+        boolean netAnalysis = testMakerCtx.getInputData().isNetAnalysis();
+    	if (netAnalysis) {
         	NetTrafficMng.stopNetTrafficThread();
     	}
     	
@@ -89,18 +84,14 @@ public class GestorWebDriver extends fmwkTest {
         GestorWebDrv gestorWd = GestorWebDrv.getGestorFromCtx(contextTng);
         
         //Obtenemos el valor del parámetro 'recycleWD' almacenado en el contexto de ejecución de TestNG
-        boolean recycleWD = this.getRecycleWD(contextTng);
-        if (recycleWD) {
-            //Los WebDriver no se destruyen al finalizar el método (se destruyen al finalizar la suite), sólo se marcan como 'free' y se reaprovechan por los siguientes
+        ManagementWebdriver managementWdrv = testMakerCtx.getInputData().getTypeManageWebdriver();
+        switch (managementWdrv) {
+        case recycle:
             driver.manage().deleteAllCookies();
-	        
-            //Lo buscamos en el gestor y marcamos nuestro webdriver a estado 'free'
             gestorWd.setWebDriverToFree(driver);
-        } else {
-            //Lo buscamos en el gestor de WebDrivers y lo eliminamos
+            break;
+        case discard:
             gestorWd.deleteStrWebDriver(driver);
-            
-            //Los WebDriver se crean al comenzar un método y se destruyen al finalizar
             try {
                 if (driver!=null) {
                     driver.quit();
@@ -135,8 +126,9 @@ public class GestorWebDriver extends fmwkTest {
         switch (canalWebDriver) {
         //En el caso de BrowserStack como información específica del WebDriver incluiremos el modelo de dispositivo móvil asociado
         case browserstack:
-            if (contextTng.getCurrentXmlTest().getParameter(BStackDataMovil.device_paramname)!=null) {
-                moreDataWdrv = contextTng.getCurrentXmlTest().getParameter(BStackDataMovil.device_paramname);
+            BrowserStackMobil bsStackMobil = TestMakerContext.getTestRun(contextTng).getBrowserStackMobil();
+            if (bsStackMobil!=null) {
+                moreDataWdrv = bsStackMobil.getDevice();
             }
             break;
 	        
@@ -151,19 +143,5 @@ public class GestorWebDriver extends fmwkTest {
         }
 	    
         return moreDataWdrv;
-    }
-	
-    /**
-     * Función que obtiene el valor del parámetro 'recycleWD' almacenado en el contexto de ejecución de TestNG
-     */
-    private boolean getRecycleWD(ITestContext contextTng) {
-        if (contextTng.getCurrentXmlTest().getParameter(Constantes.paramRecycleWD)!=null) {
-            String recycleWDStr = contextTng.getCurrentXmlTest().getParameter(Constantes.paramRecycleWD);
-            if ("true".compareTo(recycleWDStr)==0) {
-                return true;
-            }
-        }
-            
-        return false;
     }
 }

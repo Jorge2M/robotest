@@ -14,11 +14,10 @@ import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -39,6 +38,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1EnvioChe
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion.DataDirType;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
+import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
@@ -51,9 +51,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageResultPagoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageResultPagoTpvStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory.FactoryPagos;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory.PagoStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.favoritos.PageFavoritosStpV;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
-import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
 
 public class PagoNavigationsStpV {
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
@@ -102,13 +100,15 @@ public class PagoNavigationsStpV {
     throws Exception {
         DatosStep datosStep = TestCaseData.getDatosCurrentStep();    	
         if (dCtxSh.userRegistered) {
-            datosStep.replaceInDescription(tagLoginOrLogoff, "e Identificarse");
+            datosStep.replaceInDescription(
+            	tagLoginOrLogoff, "e Identificarse con el usuario <b>" + dCtxSh.userConnected + "</b>");
         } else {
-        	datosStep.replaceInDescription(tagLoginOrLogoff, "(si estamos logados cerramos sesión)");
+        	datosStep.replaceInDescription(
+        		tagLoginOrLogoff, "(si estamos logados cerramos sesión)");
         }
         
         AccesoNavigations.accesoHomeAppWeb(dCtxSh, driver);
-        TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, driver);
+        //TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, driver);
         PageIdentificacion.loginOrLogoff(dCtxSh, driver);
 
         //Validaciones analítica (sólo para firefox y NetAnalysis)
@@ -275,7 +275,7 @@ public class PagoNavigationsStpV {
         UtilsMangoTest.goToPaginaInicio(dCtxSh.channel, dCtxSh.appE, driver);
         
         //(en Chrome, cuando existe paralelización en ocasiones se pierden las cookies cuando se completa un pago con pasarela externa)
-        AccesoNavigations.cambioPaisFromHomeIfNeeded(dCtxSh, driver);
+        actionsWhenSessionLoss(dCtxSh, driver);
         
         SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, driver);
         dCtxPago.getFTCkout().testCodPromocional = false;
@@ -284,6 +284,11 @@ public class PagoNavigationsStpV {
         	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, driver);
         }
     }    
+    
+    private static void actionsWhenSessionLoss(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    	ModalCambioPais.closeModalIfVisible(driver);
+        AccesoNavigations.cambioPaisFromHomeIfNeeded(dCtxSh, driver);
+    }
     
     public static void testInputCodPromoEmpl(DataCtxShop dCtxSh, DataBag dataBag, WebDriver driver) throws Exception {
         PageCheckoutWrapperStpV.inputTarjetaEmplEnCodPromo(dCtxSh.pais, dCtxSh.channel, driver);
@@ -417,11 +422,12 @@ public class PagoNavigationsStpV {
         boolean validaPagos = pagoStpV.dCtxPago.getFTCkout().validaPagos;
         Pago pago = pagoStpV.dCtxPago.getDataPedido().getPago();
         ITestContext ctx = TestCaseData.getdFTest().ctx;
+        TypeAccessFmwk typeAccess = TestCaseData.getInputDataTestMaker(ctx).getTypeAccess();
         return (
             //No estamos en el entorno productivo
             !UtilsMangoTest.isEntornoPRO(appE, driver) &&
             //No estamos en modo BATCH
-            utils.getTypeAccessFmwk(ctx)!=TypeAccessFmwk.Bat &&
+            typeAccess!=TypeAccessFmwk.Bat &&
             //Está activado el flag de pago en el fichero XML de configuración del test (testNG)
             validaPagos &&  
             //Está activado el test en el pago concreto que figura en el XML de países

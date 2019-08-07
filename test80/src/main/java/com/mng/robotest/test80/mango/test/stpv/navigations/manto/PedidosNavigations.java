@@ -6,10 +6,12 @@ import org.apache.logging.log4j.Logger;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.utils;
+import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageDetallePedido;
@@ -41,13 +43,13 @@ public class PedidosNavigations {
     
     private static void testPedidosEnManto(DataMantoAccess dMantoAcc, CopyOnWriteArrayList<DataPedido> listPedidos, DataFmwkTest dFTest) 
     throws Exception {
-        //En caso de ejecución desde .bat no accederemos a Manto 
-        if (utils.getTypeAccessFmwk(dFTest.ctx)==TypeAccessFmwk.Bat) {
+    	InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(dFTest.ctx);
+        TypeAccessFmwk typeAccess = inputData.getTypeAccess();
+        if (typeAccess==TypeAccessFmwk.Bat) {
             return;
         }
 
         //Si existen pedidos que validar y no se trata de un acceso desde la línea de comandos (típicamente .bat)
-        TypeAccessFmwk typeAccess = utils.getTypeAccessFmwk(dFTest.ctx);
         if (listPedidos!=null && listPedidos.size()>0 && typeAccess!=TypeAccessFmwk.Bat) {
             PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, dFTest.driver);
             PedidosNavigations.validacionListaPagosStpVs(listPedidos, dMantoAcc.appE, dFTest);

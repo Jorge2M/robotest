@@ -2,25 +2,27 @@ package com.mng.robotest.test80.mango.test.stpv.shop;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil;
 
 public class SecCabeceraStpV {
 
 	private final SecCabecera secCabecera;
-	private final DataCtxShop dCtxSh;
+	private final Pais pais;
 	
-	private SecCabeceraStpV(DataCtxShop dCtxSh, WebDriver driver) {
-		this.dCtxSh = dCtxSh;
-		this.secCabecera = SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+	private SecCabeceraStpV(Pais pais, Channel channel, AppEcom app, WebDriver driver) {
+		this.pais = pais;
+		this.secCabecera = SecCabecera.getNew(channel, app, driver);
 	}
 	
-	public static SecCabeceraStpV getNew(DataCtxShop dCtxSh, WebDriver driver) {
-		return (new SecCabeceraStpV(dCtxSh, driver));
+	public static SecCabeceraStpV getNew(Pais pais, Channel channel, AppEcom app, WebDriver driver) {
+		return (new SecCabeceraStpV(pais, channel, app, driver));
 	}
     
 	@Step (
@@ -33,8 +35,8 @@ public class SecCabeceraStpV {
 	@Validation
     public ChecksResult validateIconoBolsa() {
 		ChecksResult validations = ChecksResult.getNew();
-		boolean isVisibleIconoBolsa = secCabecera.isVisibleIconoBolsa();
-		if ("true".compareTo(dCtxSh.pais.getShop_online())==0) {
+		boolean isVisibleIconoBolsa = secCabecera.isInStateIconoBolsa(StateElem.Visible);
+		if ("true".compareTo(pais.getShop_online())==0) {
 	    	validations.add(
     			"<b>Sí</b> es posible comprar (aparece la capa relacionada con la bolsa)",
     			isVisibleIconoBolsa, State.Warn);
@@ -50,6 +52,6 @@ public class SecCabeceraStpV {
 		description="Establecer con visibilidad #{setVisible} el menú izquierdo de móvil",
 		expected="El menú lateral se establece con visibilidad #{setVisible}")
 	public void setVisibilityLeftMenuMobil(boolean setVisible) throws Exception {
-		((SecCabeceraMobil)secCabecera).clickIconoMenuHamburguer(setVisible);
+		secCabecera.clickIconoMenuHamburguerMobil(setVisible);
 	}
 }

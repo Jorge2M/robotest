@@ -3,10 +3,12 @@ package com.mng.robotest.test80.mango.test.pageobject.votf;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
-import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
+import com.mng.robotest.test80.mango.test.utils.testab.TestABactive;
 
 public class PageLoginVOTF extends WebdrvWrapp {
 
@@ -17,11 +19,11 @@ public class PageLoginVOTF extends WebdrvWrapp {
     public static void goToFromUrlAndSetTestABs(String urlLogin, DataCtxShop dCtxSh, WebDriver driver) throws Exception {    
     	AccesoNavigations.goToInitURL(urlLogin, driver);
         waitForPageLoaded(driver);
-        activateTestsABs(dCtxSh, driver);
+        activateTestsABs(dCtxSh.channel, dCtxSh.appE, driver);
     }
     
-    private static void activateTestsABs(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	TestAB.currentTestABsToActivate(dCtxSh, driver);
+    private static void activateTestsABs(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+    	TestABactive.currentTestABsToActivate(channel, app, driver);
     	driver.navigate().refresh();
     }
     

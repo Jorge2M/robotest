@@ -18,11 +18,11 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
-import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraMobil;
+import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.test80.mango.test.pageobject.utils.LocalStorage;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
-import com.mng.robotest.test80.mango.test.utils.testab.TestAB;
+import com.mng.robotest.test80.mango.test.utils.testab.TestABactive;
 
 /**
  * Clase que define la automatización de las diferentes funcionalidades de la página de "GALERÍA DE PRODUCTOS"
@@ -229,12 +229,12 @@ public class PagePrehome extends WebdrvWrapp {
      */
     public static void accesoShopViaPrehome(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         goToPagePrehome(dCtxSh.urlAcceso, driver);
-        TestAB.currentTestABsToActivate(dCtxSh, driver);
+        TestABactive.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
         PagePrehome.selecPaisIdiomaYAccede(dCtxSh, driver);
         ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
         if (dCtxSh.channel==Channel.movil_web) {
-        	SecCabeceraMobil secCabecera = (SecCabeceraMobil)SecCabeceraMobil.getNew(Channel.movil_web, dCtxSh.appE, driver);
-        	secCabecera.closeSmartBannerIfExists();
+        	SecCabeceraOutletMobil secCabecera = (SecCabeceraOutletMobil)SecCabeceraOutletMobil.getNew(Channel.movil_web, dCtxSh.appE, driver);
+        	secCabecera.closeSmartBannerIfExistsMobil();
         }
     }
     

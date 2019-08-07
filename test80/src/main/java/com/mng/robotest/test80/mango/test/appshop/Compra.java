@@ -6,11 +6,12 @@ import org.testng.annotations.*;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.*;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
@@ -18,6 +19,7 @@ import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
+import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -68,8 +70,7 @@ public class Compra extends GestorWebDriver {
     public Compra() {}	  
 	  
     @BeforeMethod (groups={"Compra", "Canal:all_App:all", "shop-movil-web"})
-    @Parameters({"brwsr-path","urlBase", "AppEcom", "Channel"})
-    public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) 
+    public void login(ITestContext context, Method method) 
     throws Exception {
         //Obtenemos la lista de países del contexto y recuperamos los que necesitamos para los tests
         if (this.españa==null) {
@@ -79,7 +80,7 @@ public class Compra extends GestorWebDriver {
             Integer codFrancia = Integer.valueOf(11);
             Integer codColombia = Integer.valueOf(480);
             List<Integer> lisCodCountrys = Arrays.asList(codEspanya, codAndorra, codSuecia, codFrancia, codColombia);
-            List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(lisCodCountrys));
+            List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(lisCodCountrys));
             this.españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
             this.andorra = UtilsMangoTest.getPaisFromCodigo("043", listaPaises);
             this.suecia =  UtilsMangoTest.getPaisFromCodigo("030", listaPaises);
@@ -90,16 +91,15 @@ public class Compra extends GestorWebDriver {
             this.frances = this.francia.getListIdiomas().get(0);
         }
         
-        //Recopilación de parámetros comunes
-        //DataCtxShop dCtxSh = new DataCtxShop();
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom(appEcom);
-        dCtxSh.setChannel(channel);
+        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
+        dCtxSh.setChannel(inputData.getChannel());
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
-        dCtxSh.urlAcceso = urlAcceso;
+        dCtxSh.urlAcceso = inputData.getUrlBase();
         
-        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), "", dCtxSh, context, method);
     }
 	
     @SuppressWarnings("unused")
@@ -110,14 +110,11 @@ public class Compra extends GestorWebDriver {
     }		
 	
     @Test (
-        groups={"Compra", "Canal:all_App:shop", "Canal:all_App:outlet"}, alwaysRun=true, priority=2, 
+        groups={"Compra", "Canal:all_App:shop,outlet"}, alwaysRun=true, priority=2, 
         description="[Usuario registrado][Tarjeta guardada] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
     public void COM001_Compra_TrjSaved_Empl() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
-//        UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-//        dCtxSh.userConnected = userShop.user;
-//        dCtxSh.passwordUser = userShop.password;
         dCtxSh.userConnected = "jorge.munoz@mango.com";
         dCtxSh.passwordUser = "sirjorge74";
         dCtxSh.userRegistered = true;
@@ -170,7 +167,8 @@ public class Compra extends GestorWebDriver {
         String nTarjeta;
         String cvvTarjeta = "";
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
-        SecMenusWrapperStpV.seleccionLinea(LineaType.she, null/*sublineaType*/, dCtxSh, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
+        secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
         SecFooterStpV.clickLinkFooter(FooterLink.cheque_regalo, false, dCtxSh.channel, dFTest.driver);
         if(dCtxSh.channel != Channel.movil_web){
             nTarjeta = "100000040043";
@@ -219,7 +217,7 @@ public class Compra extends GestorWebDriver {
      }    
     
     @Test (
-        groups={"Compra", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, alwaysRun=true,
+        groups={"Compra", "Canal:desktop_App:shop,outlet"}, alwaysRun=true,
         description="[Usuario no registrado] Compra con cambio datos en dirección de envío en checkout")
     public void COM003_Compra_y_CambioPais_Noreg_emailExist() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
@@ -259,8 +257,10 @@ public class Compra extends GestorWebDriver {
         DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
 	    
-        //No permitiremos la ejecución diaria de este tipo de checkout porque implica la ejecución de un registro de usuario con el nuevo email introducido 
-        if (utils.getTypeAccessFmwk(dFTest.ctx)!=TypeAccessFmwk.Bat) {
+        //No permitiremos la ejecución diaria de este tipo de checkout porque implica la ejecución 
+        //de un registro de usuario con el nuevo email introducido 
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(dFTest.ctx);
+        if (inputData.getTypeAccess()!=TypeAccessFmwk.Bat) {
             //Hasta página de Checkout
             FlagsTestCkout FTCkout = new FlagsTestCkout();
             FTCkout.validaPasarelas = false;  
@@ -274,13 +274,14 @@ public class Compra extends GestorWebDriver {
             PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(dCtxSh, dCtxPago, dFTest);
                     
             //Seleccionamos el logo de Mango (necesitamos acceder a una página con los links del menú superior)
-            SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh, dFTest.driver);
+            SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
             secCabeceraStpV.selecLogo();
             if (dCtxSh.appE!=AppEcom.votf) {
                 //Cerramos sesión y nos volvemos a identificar con los datos del registro
                 String usrEmail = dCtxPago.getDatosRegistro().get("cfEmail");
                 String password = dCtxPago.getDatosRegistro().get("cfPass");
-                SecMenusWrapperStpV.secMenuUser.logoffLogin(usrEmail, password, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+                SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
+                secMenusStpV.getMenusUser().logoffLogin(usrEmail, password);
                     
                 //Ejecutamos la consulta de Mis datos comprobando que son coherentes con los utilizados en el registro
                 //ListDataRegistro dataRegistroOK = new ListDataRegistro();

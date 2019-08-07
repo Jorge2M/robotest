@@ -18,7 +18,7 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.data.TestMakerContext;
 
 
 public class ValidationsDAO {
@@ -91,9 +91,10 @@ public class ValidationsDAO {
     public static int selectNextValidation(Method method, int stepNumber, ITestContext ctx) {
         int nextValidation = 0;
         String methodWithFactory = fmwkTest.getMethodWithFactory(method, ctx);
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(ctx);
         try (Connection conn = Connector.getConnection(true/*forReadOnly*/)) {
             try (PreparedStatement select = conn.prepareStatement(SQLSelectMaxValidation)) {
-                select.setString(1, ctx.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx));
+                select.setString(1, testMakerCtx.getIdSuiteExecution());
                 select.setString(2, ctx.getSuite().getName());
                 select.setString(3, ctx.getName());
                 select.setString(4, methodWithFactory);
@@ -117,9 +118,10 @@ public class ValidationsDAO {
     public static void insertValidationInStep(String descripValidac, DatosStep datosStep, Method method, ITestContext ctx) {
         String methodWithFactory = fmwkTest.getMethodWithFactory(method, ctx);
         int validationNumber = ValidationsDAO.selectNextValidation(method, datosStep.getStepNumber(), ctx);
+        TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(ctx);
         try (Connection conn = Connector.getConnection()) {
             try (PreparedStatement insert = conn.prepareStatement(SQLInsertValidation)) {
-                insert.setString(1, ctx.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx));
+                insert.setString(1, testMakerCtx.getIdSuiteExecution());
                 insert.setString(2, ctx.getSuite().getName());
                 insert.setString(3, ctx.getName());
                 insert.setString(4, methodWithFactory);
@@ -147,7 +149,7 @@ public class ValidationsDAO {
                 } else {
                     updateStep.setInt(1, datosStep.getResultSteps().getIdNumerid());
                 }
-                updateStep.setString(2, ctx.getCurrentXmlTest().getParameter(Constantes.paramSuiteExecInCtx));
+                updateStep.setString(2, testMakerCtx.getIdSuiteExecution());
                 updateStep.setString(3, ctx.getSuite().getName());
                 updateStep.setString(4, ctx.getName());
                 updateStep.setString(5, methodWithFactory);

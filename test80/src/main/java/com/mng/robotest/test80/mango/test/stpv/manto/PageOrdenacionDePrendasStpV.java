@@ -53,7 +53,7 @@ public class PageOrdenacionDePrendasStpV {
 		expected="Aparecen los diferentes indicadores de secciones",
 		saveErrorData = SaveWhen.Never)
 	private static void selectPreProduccion(DataFmwkTest dFTest) throws Exception {
-		PageOrdenacionDePrendas.selectInDropDown(Orden.desplegableTiendas, "shop.pre.mango.com", dFTest.driver);
+		PageOrdenacionDePrendas.selectInDropDown(Orden.desplegableTiendas, "shop.org.pre.mango.com", dFTest.driver);
 		PageOrdenacionDePrendas.clickAndWait(Orden.verTiendas, dFTest.driver);
 		validatePreProductionElements(dFTest.driver);
 	}

@@ -4,24 +4,23 @@ import org.testng.ITestContext;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
-
 import org.testng.annotations.*;
+import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
-
-import org.openqa.selenium.WebDriver;
-
+import com.mng.robotest.test80.mango.test.suites.PagosPaisesSuite.VersionPagosSuite;
+import com.mng.robotest.test80.mango.test.suites.ValesPaisesSuite.VersionValesSuite;
 
 public class PaisAplicaVale extends GestorWebDriver {
 
@@ -29,83 +28,69 @@ public class PaisAplicaVale extends GestorWebDriver {
     boolean acceptNextAlert = true;
     StringBuffer verificationErrors = new StringBuffer();
 	
-    public String index_fact;
-    public Continente continente;
-    public Pais paisChange;
-    public boolean isEmpl;
+    private String index_fact;
     public int prioridad;
+    private FlagsTestCkout fTCkoutIni;
     String masProductos = "";
     DataCtxShop dCtxSh;
     
-    public PaisAplicaVale(DataCtxShop dCtxSh, Continente continente, Pais paisChange, boolean isEmpl, int prioridad) {
-        //Recopilación de parámetros
-        this.dCtxSh = dCtxSh;
-        this.continente = continente;
-        this.paisChange = paisChange;
-        this.index_fact = 
-        	dCtxSh.pais.getNombre_pais() + " (" + dCtxSh.pais.getCodigo_pais() + ") " + " - " + 
-        	dCtxSh.idioma.getCodigo().getLiteral();
-        if (dCtxSh.vale!=null) {
-        	this.index_fact+= 
-        		" - " + dCtxSh.vale.getCodigoVale() + 
-        		"(" + dCtxSh.vale.isValid() + "_" + dCtxSh.vale.getPorcDescuento() + "perc)";
-        }
-        this.isEmpl = isEmpl;
-        this.prioridad = prioridad;
+    public PaisAplicaVale(VersionPagosSuite version, DataCtxShop dCtxSh, int prioridad) {
+    	this.prioridad = prioridad;
+        this.fTCkoutIni = FlagsTestCkout.getNew(version);
+        setDataFromConstruct(dCtxSh);
+    }
+    
+    public PaisAplicaVale(VersionValesSuite version, DataCtxShop dCtxSh, int prioridad) {
+    	this.prioridad = prioridad;
+        this.fTCkoutIni = FlagsTestCkout.getNew(version);
+        setDataFromConstruct(dCtxSh);
+    }
+    
+    private void setDataFromConstruct(DataCtxShop dCtxSh) {
+	    this.dCtxSh = dCtxSh;
+	    this.index_fact = 
+	    	dCtxSh.pais.getNombre_pais() + " (" + dCtxSh.pais.getCodigo_pais() + ") " + " - " + 
+	    	dCtxSh.idioma.getCodigo().getLiteral();
+	    if (dCtxSh.vale!=null) {
+	    	this.index_fact+= 
+	    		" - " + dCtxSh.vale.getCodigoVale() + 
+	    		"(" + dCtxSh.vale.isValid() + "_" + dCtxSh.vale.getPorcDescuento() + "perc)";
+	    }
     }
 	  
-    @BeforeMethod (groups={"shop-movil-web"})
-    @Parameters({"brwsr-path", "urlBase", "masProductos"})
-    public void login(String bpath, String urlAcceso, String masProductosI, ITestContext context, Method method) throws Exception {
-    	this.dCtxSh.urlAcceso = urlAcceso;
-    	Utils.storeDataShopForTestMaker(bpath, this.index_fact, this.dCtxSh, context, method);    
+    @BeforeMethod (groups={"shop-movil-web", "Canal:all_App:all"})
+    public void login(ITestContext context, Method method) throws Exception {
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
+    	this.dCtxSh.urlAcceso = inputData.getUrlBase();
+    	Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), this.index_fact, this.dCtxSh, context, method);    
     }
 	
     @SuppressWarnings("unused")
-    @AfterMethod (alwaysRun = true)
+    @AfterMethod (groups={"shop-movil-web", "Canal:all_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
         WebDriver driver = TestCaseData.getWebDriver();
         super.quitWebDriver(driver, context);
     }	
 	
-    @Test (groups={"Pagos", "shop-movil-web"}, alwaysRun=true, description="Compra usuario no registrado")
-    @Parameters({"validaPasarelas", "validaPagos", "validaPedidosEnManto"})
-    public void CHK001_Compra_noReg(String validaPasarelasStr, String validaPagosStr, String validaPedidosEnMantoStr) 
-    throws Exception {
+    @Test (
+    	groups={"Pagos", "shop-movil-web", "Canal:all_App:all"}, alwaysRun=true, 
+    	description="Compra usuario no registrado")
+    public void CHK001_Compra() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        CHK001_Compra_noReg_Impl(validaPasarelasStr, validaPagosStr, validaPedidosEnMantoStr, dFTest);
-    }
-	
-    public void CHK001_Compra_noReg_Impl(String validaPasarelasStr, String validaPagosStr, String validaPedidosEnMantoStr, 
-    									 DataFmwkTest dFTest) throws Exception {
-        this.dCtxSh.userRegistered = false;
-        FlagsTestCkout fTCkout = new FlagsTestCkout();
-        if (validaPasarelasStr.compareTo("true")==0) {
-            fTCkout.validaPasarelas = true;
-        }
-        if (validaPagosStr.compareTo("true")==0) {
-            fTCkout.validaPagos = true;
-        }
-        
-    	String forceTestMisComprasStr = dFTest.ctx.getCurrentXmlTest().getParameter("forceTestMisCompras");
-        if (forceTestMisComprasStr!=null && "true".compareTo(forceTestMisComprasStr)==0) {
-        	fTCkout.forceTestMisCompras = true;
-        }
-        if (validaPedidosEnMantoStr.compareTo("true")==0) {
-            fTCkout.validaPedidosEnManto = true;        
-        }
+        dCtxSh.userRegistered = false;
+        DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);
+        FlagsTestCkout fTCkout = (FlagsTestCkout)fTCkoutIni.clone();
         fTCkout.emailExist = true; 
         fTCkout.trjGuardada = false;
-        fTCkout.isEmpl = this.isEmpl;
-        DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);
         dCtxPago.setFTCkout(fTCkout);
+
         PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(this.dCtxSh, dCtxPago, dFTest);
         if (fTCkout.validaPedidosEnManto) {
         	List<CheckPedido> listChecks = Arrays.asList(
         		CheckPedido.consultarBolsa, 
         		CheckPedido.consultarPedido);
             DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
-            PedidoNavigations.testPedidosEnManto(checksPedidos, this.dCtxSh.appE, dFTest);
+            PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, dFTest);
         }
     }
 }

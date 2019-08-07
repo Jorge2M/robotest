@@ -6,7 +6,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.test80.mango.test.appshop.campanas.DataCampana.AtributoCampana;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 
 public class DataBanner {
@@ -117,27 +116,13 @@ public class DataBanner {
         return (DestinoType.Otros);
     }
     
-    public String getEquivalentCampanaAtributo(AtributoCampana atributo) {
-    	switch (atributo) {
-    	case URL:
-    		return getUrlBanner();
-    	case SRC:
-    		return getSrcImage();
-    	case Destino:
-    		return getUrlDestino();
-    	case All_Text:
-    		return getText();
-    	default:
-    		return "";
-    	}
-    }
-    
     public boolean isOverlayedWith(DataBanner dataBanner2) {
-    	return (dataBanner2!=null &&
-    			getLocation().x==dataBanner2.getLocation().x && 
-    			getLocation().y==dataBanner2.getLocation().y &&
-    			getSize().width==dataBanner2.getSize().width &&
-    			getSize().height==dataBanner2.getSize().height);
+    	return (
+    		dataBanner2!=null &&
+    		getLocation().x==dataBanner2.getLocation().x && 
+    		getLocation().y==dataBanner2.getLocation().y &&
+    		getSize().width==dataBanner2.getSize().width &&
+    		getSize().height==dataBanner2.getSize().height);
     }
     
 	private final static String TagLinea = "@TagLinea";

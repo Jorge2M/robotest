@@ -13,10 +13,12 @@ import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -57,24 +59,22 @@ public class FichaProducto extends GestorWebDriver {
     StringBuffer verificationErrors = new StringBuffer();
 	    
     @BeforeMethod (groups={"FichaProducto", "Canal:all_App:all"})
-    @Parameters({"brwsr-path", "urlBase", "AppEcom", "Channel"})
-    public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) 
+    public void login(ITestContext context, Method method) 
     throws Exception {
-        //Recopilación de parámetros
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom(appEcom);
-        dCtxSh.setChannel(channel);
-        dCtxSh.urlAcceso = urlAcceso;
+        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
+        dCtxSh.setChannel(inputData.getChannel());
+        dCtxSh.urlAcceso = inputData.getUrlBase();
         
-        //Si no existe, obtenemos el país España
         if (this.españa==null) {
             Integer codEspanya = Integer.valueOf(1);
-            List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(Arrays.asList(codEspanya)));
+            List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
             this.españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
             this.castellano = this.españa.getListIdiomas().get(0);
         }
         
-        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), "", dCtxSh, context, method);
     }
 	
     @SuppressWarnings("unused")
@@ -97,8 +97,7 @@ public class FichaProducto extends GestorWebDriver {
         dCtxSh.passwordUser = userShop.password;
         dCtxSh.userRegistered=true;
         
-        //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true/*clearArticulos*/, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, dFTest.driver);
         ArticleStock articleWithColors = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithMoreOneColour, dCtxSh);
         SecBuscadorStpV.searchArticuloAndValidateBasic(articleWithColors, dCtxSh, dFTest.driver);
         
@@ -138,14 +137,14 @@ public class FichaProducto extends GestorWebDriver {
         dCtxSh.pais=this.españa;
         dCtxSh.idioma=this.castellano;
 
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
         SecBuscadorStpV.searchArticuloAndValidateBasic(TypeArticleStock.articlesWithTotalLook, dCtxSh, dFTest.driver);
         
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
             pageFichaStpV.validaExistsImgsCarruselIzqFichaOld();
             pageFichaStpV.secProductDescOld.validateAreInStateInitial(dCtxSh.appE, dFTest.driver);
-            PageFicha pageFicha = PageFicha.newInstance(dCtxSh.appE, dCtxSh.channel, dFTest.driver);
+            PageFicha pageFicha = PageFicha.newInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
             if (((PageFichaArtOld)pageFicha).getNumImgsCarruselIzq() > 2) {
                 pageFichaStpV.selectImgCarruselIzqFichaOld(2);
             }
@@ -190,14 +189,15 @@ public class FichaProducto extends GestorWebDriver {
         DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
         Integer codCorea = Integer.valueOf(728);
-        List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(Arrays.asList(codCorea)));
+        List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codCorea)));
         this.castellano = this.españa.getListIdiomas().get(0);
         dCtxSh.pais = UtilsMangoTest.getPaisFromCodigo("728", listaPaises); //Corea
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0); //Coreano
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.nina, null, "pantalones"));
-        SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
+        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
 
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         LocationArticle location1rstArticle = LocationArticle.getInstanceInCatalog(1);
@@ -219,7 +219,7 @@ public class FichaProducto extends GestorWebDriver {
     }
     
     @Test (
-        groups={"FichaProducto", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, 
+        groups={"FichaProducto", "Canal:desktop_App:shop,outlet"}, 
         alwaysRun=true, description="[Usario no registrado] Testeo ficha con artículo con color y tallas no disponibles")
     public void FIC004_Articulo_NoStock_Noreg() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
@@ -248,8 +248,9 @@ public class FichaProducto extends GestorWebDriver {
         
 		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
 		Menu1rstLevel menuPersonalizacion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.he, null, "personalizacion"));
-		SecMenusWrapperStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh, dFTest.driver);
-		SecMenusWrapperStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
+        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
+        secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
 		LocationArticle articleNum = LocationArticle.getInstanceInCatalog(1);
 		pageGaleriaStpV.selectArticulo(articleNum, dCtxSh);
         SecModalPersonalizacionStpV modalPersonalizacionStpV = SecModalPersonalizacionStpV.getNewOne(dCtxSh, dFTest.driver); 
@@ -269,8 +270,7 @@ public class FichaProducto extends GestorWebDriver {
 	        modalPersonalizacionStpV.selectConfirmarButton();
         	modalPersonalizacionStpV.validateCabeceraStep(3);
         	modalPersonalizacionStpV.validateSelectionColor();
-        }
-        else {
+        } else {
         	modalPersonalizacionStpV.selectFirstLugarBordado();
         	modalPersonalizacionStpV.validateCabeceraStep(3);
         	modalPersonalizacionStpV.validateColorsMvl(2, ModalElement.ColorsContainer);

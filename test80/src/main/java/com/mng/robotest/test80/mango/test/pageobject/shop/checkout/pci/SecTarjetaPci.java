@@ -6,34 +6,34 @@ import com.mng.robotest.test80.arq.utils.otras.Channel;
 
 
 public interface SecTarjetaPci {
-    public boolean isVisiblePanelPagoUntil(String nombrePago, int maxSeconds, WebDriver driver);
-    public boolean isPresentInputNumberUntil(int maxSecondsToWait, WebDriver driver);
-    public boolean isPresentInputTitular(WebDriver driver);
-    public boolean isPresentSelectMes(WebDriver driver);
-    public boolean isPresentSelectAny(WebDriver driver);
-    public boolean isPresentInputCvc(WebDriver driver);
-    public boolean isPresentInputDni(WebDriver driver); //Specific for Codensa (Colombia)
-    public void inputNumber(String number, WebDriver driver);
-    public void inputTitular(String titular, WebDriver driver);
-    public void inputCvc(String cvc, WebDriver driver);
-    public void inputDni(String dni, WebDriver driver);  //Specific for Codensa (Colombia)
-    public void selectMesByVisibleText(String mes, WebDriver driver);
-    public void selectAnyByVisibleText(String any, WebDriver driver);
+    public boolean isVisiblePanelPagoUntil(String nombrePago, int maxSeconds);
+    public boolean isPresentInputNumberUntil(int maxSecondsToWait);
+    public boolean isPresentInputTitular();
+    public boolean isPresentSelectMes();
+    public boolean isPresentSelectAny();
+    public boolean isPresentInputCvc();
+    public boolean isPresentInputDni(); //Specific for Codensa (Colombia)
+    public void inputNumber(String number);
+    public void inputTitular(String titular);
+    public void inputCvc(String cvc);
+    public void inputDni(String dni);  //Specific for Codensa (Colombia)
+    public void selectMesByVisibleText(String mes);
+    public void selectAnyByVisibleText(String any);
     
     public static SecTarjetaPci makeSecTarjetaPci(Channel channel, WebDriver driver) {
 		//TODO cuando suba a PRO pci en iframe se podrá eliminar SecTarjetaPciNotInIframeMobil y SecTarjetaPciNotInIframeDesktop
 		if (channel==Channel.desktop) {
-			SecTarjetaPci secTarjetaPci = SecTarjetaPciNotInIframeDesktop.make();
-			if (secTarjetaPci.isPresentInputNumberUntil(1, driver)) {
+			SecTarjetaPci secTarjetaPci = SecTarjetaPciNotInIframeDesktop.getNew(driver);
+			if (secTarjetaPci.isPresentInputNumberUntil(1)) {
 				return secTarjetaPci;
 			}
-			return (SecTarjetaPciInIframe.make());    
+			return (SecTarjetaPciInIframe.getNew(driver));    
 		}
 		
-		SecTarjetaPci secTarjetaPci = SecTarjetaPciNotInIframeMobil.make();
-		if (secTarjetaPci.isPresentInputNumberUntil(1, driver)) {
+		SecTarjetaPci secTarjetaPci = SecTarjetaPciNotInIframeMobil.getNew(driver);
+		if (secTarjetaPci.isPresentInputNumberUntil(1)) {
 			return secTarjetaPci;
 		}
-		return (SecTarjetaPciInIframe.make());    
+		return (SecTarjetaPciInIframe.getNew(driver));    
     }
 }

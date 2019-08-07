@@ -13,7 +13,6 @@ import com.mng.robotest.test80.mango.test.data.Descuento;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais.LayoutPago;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.SecMetodoEnvioDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
@@ -53,28 +52,28 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
     }
     
     public void inputNumberPci(String numtarj, Channel channel, WebDriver driver) {
-    	getSecTarjetaPci(channel, driver).inputNumber(numtarj, driver);
+    	getSecTarjetaPci(channel, driver).inputNumber(numtarj);
     }
     
     public void inputTitularPci(String titular, Channel channel, WebDriver driver) {
-    	getSecTarjetaPci(channel, driver).inputTitular(titular, driver);
+    	getSecTarjetaPci(channel, driver).inputTitular(titular);
     }
     
     public void selectMesByVisibleTextPci(String mesCaducidad, Channel channel, WebDriver driver) {
-    	getSecTarjetaPci(channel, driver).selectMesByVisibleText(mesCaducidad, driver);
+    	getSecTarjetaPci(channel, driver).selectMesByVisibleText(mesCaducidad);
     }
     
     public void selectAnyByVisibleTextPci(String anyCaducidad, Channel channel, WebDriver driver) {
-    	getSecTarjetaPci(channel, driver).selectAnyByVisibleText(anyCaducidad, driver);
+    	getSecTarjetaPci(channel, driver).selectAnyByVisibleText(anyCaducidad);
     }    
     
     public void inputCvcPci(String cvc, Channel channel, WebDriver driver) {
-    	getSecTarjetaPci(channel, driver).inputCvc(cvc, driver);
+    	getSecTarjetaPci(channel, driver).inputCvc(cvc);
     }
     
     //Específico para método de Pago Codensa (Colombia)
     public void inputDniPci(String dni, Channel channel, WebDriver driver) {
-    	getSecTarjetaPci(channel, driver).inputDni(dni, driver);
+    	getSecTarjetaPci(channel, driver).inputDni(dni);
     }
     
     public static void inputCodigoPromoAndAccept(String codigoPromo, Channel channel, WebDriver driver) throws Exception {
@@ -114,7 +113,7 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
         return (page1DktopCheckout.isPresentDiaNaciPromoEmpl(driver));
     }    
     
-    public static void inputDNIPromoEmpl(String dni, Channel channel, WebDriver driver) {
+    public static void inputDNIPromoEmpl(String dni, Channel channel, WebDriver driver) throws Exception {
         if (channel==Channel.movil_web) {
             page1MobilCheckout.inputDNIPromoEmpl(dni, driver);
         } else {
@@ -140,7 +139,7 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
     	WebElement buttonLoyalty = WebdrvWrapp.getElementsVisible(driver, byApplyButton).get(0);
     	String textButtonApply = buttonLoyalty.getAttribute("innerHTML");
     	String importeButton = ImporteScreen.normalizeImportFromScreen(textButtonApply);
-    	WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(XpathButtonForApplyLoyaltyPoints));
+    	clickAndWaitLoad(driver, By.xpath(XpathButtonForApplyLoyaltyPoints));
 		PageCheckoutWrapper.isNoDivLoadingUntil(1, driver);
 		return (ImporteScreen.getFloatFromImporteMangoScreen(importeButton));
     }
@@ -207,25 +206,25 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
         return page1DktopCheckout.isNumMetodosPagoOK(driver, pais, app, isEmpl);
     }
     
-    public static boolean isNumpagos(int numPagosExpected, Channel channel, Pais pais, WebDriver driver) {
+    public static boolean isNumpagos(int numPagosExpected, Channel channel, WebDriver driver) {
         if (channel==Channel.movil_web) {
-            page2MobilCheckout.isNumpagos(numPagosExpected, pais.getLayoutPago(), driver);
+            page2MobilCheckout.isNumpagos(numPagosExpected, driver);
         }
-        return page1DktopCheckout.isNumpagos(numPagosExpected, pais, driver);
+        return page1DktopCheckout.isNumpagos(numPagosExpected, driver);
     }
     
-    public static boolean isPresentMetodosPago(Pais pais, Channel channel, WebDriver driver) {
+    public static boolean isPresentMetodosPago(Channel channel, WebDriver driver) {
         if (channel==Channel.movil_web) {
-            return page2MobilCheckout.isPresentMetodosPago(pais.getLayoutPago(), driver);
+            return page2MobilCheckout.isPresentMetodosPago(driver);
         }
-        return page1DktopCheckout.isPresentMetodosPago(pais, driver);
+        return page1DktopCheckout.isPresentMetodosPago(driver);
     }    
     
-    public static boolean isMetodoPagoPresent(String metodoPago, String indexpant, Channel channel, LayoutPago layoutPago, WebDriver driver) {
+    public static boolean isMetodoPagoPresent(String metodoPago, Channel channel, WebDriver driver) {
         if (channel==Channel.movil_web) {
-            return page2MobilCheckout.isMetodoPagoPresent(metodoPago, layoutPago, driver);
+            return page2MobilCheckout.isMetodoPagoPresent(metodoPago, driver);
         }
-        return page1DktopCheckout.isMetodoPagoPresent(metodoPago, indexpant, layoutPago, driver);
+        return page1DktopCheckout.isMetodoPagoPresent(metodoPago, driver);
     }
     
     public static void despliegaMetodosPago(Channel channel, WebDriver driver) throws Exception {
@@ -278,17 +277,21 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
         if (metodoPago.contains("наличными через терминал")) {
             return ("YANDEX OFFLINE");
         }
-        if (channel==Channel.desktop) {
-            if (metodoPago.contains("ОПЛАТА ПРИ ПОЛУЧЕНИИ")) {
-                return ("ContraReembolso");
-            }
-        }
+//        if (channel==Channel.desktop) {
+//            if (metodoPago.contains("ОПЛАТА ПРИ ПОЛУЧЕНИИ")) {
+//                return ("ContraReembolsoSTD");
+//            }
+//        }
 
         if (metodoPago.contains("PŁATNOŚĆ PRZY ODBIORZE") ||
             metodoPago.contains("PLATBA NA DOBÍRKU") ||
             metodoPago.contains("UTÁNVÉTELES FIZETÉS") ||
             metodoPago.contains("PLATA PRIN RAMBURS")) {
-            return ("ContraReembolso");
+            return ("ContraReembolsoSTD");
+        }
+        
+        if (metodoPago.contains("mercadopago_transferencia")) {
+        	return ("mercadopago");
         }
         
         return metodoPago;
@@ -297,11 +300,12 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
     /**
      * Realizamos las acciones necesarias para forzar el click sobre un método de pago y esperamos a que desaparezcan las capas de loading
      */
-    public static void forceClickMetodoPagoAndWait(String metodoPago, String indexpant, Pais pais, Channel channel, WebDriver driver) throws Exception {
+    public static void forceClickMetodoPagoAndWait(String metodoPago, Pais pais, Channel channel, WebDriver driver) 
+    throws Exception {
         if (channel==Channel.movil_web) {
             page2MobilCheckout.forceClickMetodoPagoAndWait(metodoPago, pais, driver);
         } else {
-            page1DktopCheckout.forceClickMetodoPagoAndWait(metodoPago, indexpant, pais, driver);
+            page1DktopCheckout.forceClickMetodoPagoAndWait(metodoPago, pais, driver);
         }
     }
     

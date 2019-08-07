@@ -89,7 +89,8 @@ public abstract class PageGaleria extends WebdrvWrapp {
 		"//*[" +
 			"@id[contains(.,'__item')] or " + 
 			"@class[contains(.,'list-item')] or " + 
-			"@class='product'" + 
+			"@class='product'" +
+			//"@id[contains(.,'product-key-id')]"
 		"]";
 	
 	final static String XPathArticuloNoDoble =
@@ -186,8 +187,10 @@ public abstract class PageGaleria extends WebdrvWrapp {
     
     public boolean isFirstArticleOfType(LineaType lineaType) {
 	    List<WebElement> listaArticulos = driver.findElements(By.xpath(XPathArticulo));
-	    return (listaArticulos.size() > 0 &&
-	    		isElementPresent(listaArticulos.get(0), By.xpath("//a[@href[contains(.,'" + lineaType + "')]]")));
+	    return (
+	    	listaArticulos.size() > 0 &&
+	    	isElementPresent(listaArticulos.get(0), By.xpath("//a[@href[contains(.,'" + lineaType + "')]]"))
+	    );
     }
     
     public void moveToArticleAndGetObject(int posArticulo) {
@@ -642,7 +645,8 @@ public abstract class PageGaleria extends WebdrvWrapp {
         
         //En el caso de Firefox-Geckodriver el moveToElement (que se acaba realizando mediante el workarround basado en JavaScript) 
         //nos posiciona en la esquina superior izquierda que queda debajo del menú superior... así que tenemos que enviar dicho menú al fondo
-        SecMenusDesktop.secMenuSuperior.secLineas.bringMenuBackground(app, driver);
+        SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
+        secMenus.secMenuSuperior.secLineas.bringMenuBackground();
         
         WebElement articleName = article.findElement(By.xpath("." + getXPathLinkRelativeToArticle()));
         UtilsMangoTest.openLinkInNewTab(driver, articleName);
@@ -650,7 +654,7 @@ public abstract class PageGaleria extends WebdrvWrapp {
         //Cambiamos el foco de driver a la nueva pestaña que hemos creado y esperamos hasta que está disponible
         String detailWindowHandle = switchToAnotherWindow(driver, galeryWindowHandle);
         
-        PageFicha pageFicha = PageFicha.newInstance(app, Channel.desktop, driver);
+        PageFicha pageFicha = PageFicha.newInstance(Channel.desktop, app, driver);
         pageFicha.isPageUntil(10/*maxSecondsWait*/);
         
         return detailWindowHandle;

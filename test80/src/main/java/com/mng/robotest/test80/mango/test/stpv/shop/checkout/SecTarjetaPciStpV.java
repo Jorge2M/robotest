@@ -9,38 +9,54 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
+import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci.SecTarjetaPci;
 
 public class SecTarjetaPciStpV {
+	
+	final WebDriver driver;
+	final Channel channel;
+	final private SecTarjetaPci secTarjetaPci;
+	
+	private SecTarjetaPciStpV(Channel channel, WebDriver driver) {
+		this.driver = driver;
+		this.channel = channel;
+		PageCheckoutWrapper pageCheckoutStpV = new PageCheckoutWrapper();
+		this.secTarjetaPci = pageCheckoutStpV.getSecTarjetaPci(channel, driver);
+	}
+	
+	public static SecTarjetaPciStpV getNew(Channel channel, WebDriver driver) {
+		return (new SecTarjetaPciStpV(channel, driver));
+	}
     
 	@Validation
-    public static ChecksResult validateIsSectionOk(Pago pago, Pais pais, Channel channel, WebDriver driver) {
+    public ChecksResult validateIsSectionOk(Pago pago, Pais pais) {
     	ChecksResult validations = ChecksResult.getNew();
-    	PageCheckoutWrapper pageCheckoutStpV = new PageCheckoutWrapper();
-    	if (channel==Channel.desktop && !pais.isPagoPSP()) {
+    	
+    	if (channel==Channel.desktop && pago.getTypePago()!=TypePago.KrediKarti) {
             int maxSecondsWait = 5;
 		 	validations.add(
 				"Aparece el bloque correspondiente a la introducción de los datos del método de pago " + pago.getNombre(channel) + 
 				" (lo esperamos hasta " + maxSecondsWait + " segundo)",
-				pageCheckoutStpV.getSecTarjetaPci(channel, driver).isVisiblePanelPagoUntil(pago.getNombre(channel), maxSecondsWait, driver), 
+				secTarjetaPci.isVisiblePanelPagoUntil(pago.getNombre(channel), maxSecondsWait), 
 				State.Warn);    
     	}
     	
 	 	validations.add(
 			"Aparecen los 4 campos <b>Número, Titular, Mes, Año</b> para la introducción de los datos de la tarjeta",
-			pageCheckoutStpV.getSecTarjetaPci(channel, driver).isPresentInputNumberUntil(1, driver) &&
-			pageCheckoutStpV.getSecTarjetaPci(channel, driver).isPresentInputTitular(driver) &&
-			pageCheckoutStpV.getSecTarjetaPci(channel, driver).isPresentSelectMes(driver) &&
-			pageCheckoutStpV.getSecTarjetaPci(channel, driver).isPresentSelectAny(driver), State.Defect);  
+			secTarjetaPci.isPresentInputNumberUntil(1) &&
+			secTarjetaPci.isPresentInputTitular() &&
+			secTarjetaPci.isPresentSelectMes() &&
+			secTarjetaPci.isPresentSelectAny(), State.Defect);  
 	 	
 	 	if (pago.getTypePago()!=TypePago.Bancontact) {
 		 	validations.add(
 				"Aparece también el campo <b>CVC</b>",
-				pageCheckoutStpV.getSecTarjetaPci(channel, driver).isPresentInputCvc(driver), State.Defect); 
+				secTarjetaPci.isPresentInputCvc(), State.Defect); 
 	 	}
         if (pago.getDni()!=null && "".compareTo(pago.getDni())!=0) {
 		 	validations.add(
 				"Aparece también el campo <b>DNI(C.C)</b>",
-				pageCheckoutStpV.getSecTarjetaPci(channel, driver).isPresentInputDni(driver), State.Defect); 
+				secTarjetaPci.isPresentInputDni(), State.Defect); 
         }
         return validations;
     }

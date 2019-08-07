@@ -100,7 +100,8 @@ public class Page1EnvioCheckoutMobil extends WebdrvWrapp {
 		new Select(driver.findElement(By.xpath(XPathAnyNaciPromoEmpl))).selectByValue(value);
 	}
 
-	public static void inputDNIPromoEmpl(String dni, WebDriver driver) {
+	public static void inputDNIPromoEmpl(String dni, WebDriver driver) throws Exception {
+		waitForPageLoaded(driver);
 		driver.findElement(By.xpath(XPathInputDNIPromoEmpl)).sendKeys(dni);
 	}
 
@@ -109,6 +110,7 @@ public class Page1EnvioCheckoutMobil extends WebdrvWrapp {
 	}
 
 	public static void clickButtonAceptarPromoEmpl(WebDriver driver) throws Exception {
+		waitForPageLoaded(driver); //For avoid StaleElement exception
 		clickAndWaitLoad(driver, By.xpath(XPathAceptarPromoEmpl));
 
 		// Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no
@@ -136,11 +138,11 @@ public class Page1EnvioCheckoutMobil extends WebdrvWrapp {
 	public static void clickAceptarPromo(WebDriver driver) throws Exception {
 		clickAndWaitLoad(driver, By.xpath(XPathButtonAplicarPromo));
 		
-		// Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no
-		// funciona así que ejecutamos un 2o
-		if (WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(XPathButtonAplicarPromo), 2)) {
-			clickAndWaitLoad(driver, By.xpath(XPathButtonAplicarPromo), TypeOfClick.javascript);
-		}
+//		// Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no
+//		// funciona así que ejecutamos un 2o
+//		if (WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(XPathButtonAplicarPromo), 2)) {
+//			clickAndWaitLoad(driver, By.xpath(XPathButtonAplicarPromo), TypeOfClick.javascript);
+//		}
 	}
 	
     public static void clickEliminarValeIfExists(WebDriver driver) throws Exception {

@@ -23,8 +23,10 @@ public class PageReembolsosStpV {
      * Step (+validación) correspondiente a la selección del menú superior "Mi cuenta" + "Reembolsos"
      * @param paisConSaldoCta indica si el país tiene configurado el saldo en cuenta
      */
-    public static void gotoRefundsFromMenu(boolean paisConSaldoCta, AppEcom app, Channel channel, WebDriver driver) throws Exception {
-    	SecMenusUserStpV.clickMenuMiCuenta(channel, app, driver);
+    public static void gotoRefundsFromMenu(boolean paisConSaldoCta, AppEcom app, Channel channel, WebDriver driver) 
+    throws Exception {
+    	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
+    	userMenusStpV.clickMenuMiCuenta();
     	selectReembolsos(paisConSaldoCta, driver);
     }
     

@@ -1,18 +1,17 @@
 package com.mng.robotest.test80.arq.xmlprogram;
 
 import java.util.Arrays;
-import java.util.List;
 
 import com.mng.robotest.test80.arq.listeners.CallBack;
 import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.conf.SuiteTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
+import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 
 public class ParamsBean {
 
     Channel channel = Channel.desktop;
-    String[] groups = {};
     String Browser = "";
     String recicleWD = null;
     String netAnalysis = "false";
@@ -20,12 +19,12 @@ public class ParamsBean {
     String URLBase = "";
     String[] ListaPaises = {};
     String[] ListaLineas = {};
-    String[] ListaPayments = {};    
+    String[] ListaPayments = {};   
+    String[] groups = {};
     String[] ListaTestCases = {};
     String applicationDNS = "";
-    String idSuiteExecution = "";
     String urlManto = null;
-    String envioCorreo = null;
+    String[] mails = {};
     TypeAccessFmwk typeAccess = null;
     CallBack callBack = null;
 
@@ -36,6 +35,14 @@ public class ParamsBean {
     	this.app = app;
     	this.suite = suite;
     }
+
+    public AppTest getApp() {
+    	return this.app;
+    }
+    
+    public Channel getChannel() {
+    	return this.channel;
+    }
     
     public String getSuiteName() {
         return this.suite.toString();
@@ -45,22 +52,46 @@ public class ParamsBean {
     	return (suite);
     }
     
-    public String getIdSuiteExecution() {
-        return this.idSuiteExecution;
-    }
-    
     public TypeAccessFmwk getTypeAccess() {
         return this.typeAccess;
     }
     
-    public void setIdExecutedSuite(String idSuiteExecution) {
-        this.idSuiteExecution = idSuiteExecution;
-    }
-    
-    public void setIdExecutedSuiteIfNotSetted(String idSuiteExecution) {
-        if (this.idSuiteExecution==null || "".compareTo(this.idSuiteExecution)==0) {
-            setIdExecutedSuite(idSuiteExecution);
-        }
+    public InputDataTestMaker getInputDataTestMaker() {
+    	InputDataTestMaker inputData = 
+    		InputDataTestMaker.getNew(
+	    		getSuiteName(), 
+	    		getVersion(), 
+	    		getChannel(), 
+	    		getApp(), 
+	    		getURLBase(),
+	    		TypeWebDriver.valueOf(getBrowser()));
+    	
+		inputData.setNetAnalysis(getNetAnalysis());
+    	if (getTestCases()!=null) {
+    		inputData.setTestCasesFilter(Arrays.asList(getTestCases()));
+    	}
+    	if (getGroups()!=null) {
+    		inputData.setGroupsFilter(Arrays.asList(getGroups()));
+    	}
+    	if (getTypeAccess()!=null) {
+    		inputData.setTypeAccess(typeAccess);
+    	}
+    	if (getMails()!=null) {
+    		inputData.setMails(Arrays.asList(getMails()));
+    	}
+    	if (getCallBack()!=null) {
+    		inputData.setCallBack(callBack);
+    	}
+    	if (getApplicationDNS()!=null) {
+    		inputData.setWebAppDNS(getApplicationDNS());
+    	}
+    	
+    	//TODO desacoplar
+    	if (getListaPaises()!=null) {
+    		inputData.setCountrys(Arrays.asList(getListaPaises()));
+    	}
+    	
+    	return inputData;
     }
     
     public void setTypeAccess(TypeAccessFmwk typeAccess) {
@@ -80,15 +111,7 @@ public class ParamsBean {
             setTypeAccess(typeAccess);
         }
     }    
-    
-    public AppTest getAppE() {
-        return this.app;
-    }
-    
-    public Channel getChannel() {
-        return this.channel;
-    }
-    
+
     public void setChannel(Channel channel) {
         this.channel = channel;
     }
@@ -99,13 +122,6 @@ public class ParamsBean {
     
     public String[] getGroups() {
         return this.groups;
-    }
-    
-    public List<String> getGroupsList() {
-    	if (null!=getGroups()) {
-    		return Arrays.asList(getGroups());
-    	}
-    	return null;
     }
     
     public String getGroupsStr() {
@@ -179,14 +195,7 @@ public class ParamsBean {
     public String[] getTestCases() {
         return this.ListaTestCases;
     }    
-    
-    public List<String> getTestCasesList() {
-    	if (null!=getTestCases()) {
-    		return Arrays.asList(getTestCases());
-    	}
-    	return null;
-    }
-    
+
     public String getListaTestCasesStr() {
         if (getTestCases()!=null && getTestCases().length>0) {
             return String.join(",", getTestCases());
@@ -225,6 +234,10 @@ public class ParamsBean {
     public void setListaTestCases(String[] ListaTestCases) {
         this.ListaTestCases = ListaTestCases;
     }    
+    
+    public void setMails(String[] mails) {
+    	this.mails = mails;
+    }
         
     public void setApplicationDNS(String applicationDNS) {
         this.applicationDNS = applicationDNS;
@@ -246,8 +259,8 @@ public class ParamsBean {
         this.recicleWD = recicleWD;
     }
     
-    public String getNetAnalysis() {
-        return this.netAnalysis;
+    public boolean getNetAnalysis() {
+        return this.netAnalysis.compareTo("true")==0;
     }
     
     public void setNetAnalysis(String netAnalysis) {
@@ -256,12 +269,8 @@ public class ParamsBean {
         }
     }    
     
-    public String getEnvioCorreo() {
-        return this.envioCorreo;
-    }
-    
-    public void setEnvioCorreo(String envioCorreo) {
-        this.envioCorreo = envioCorreo;
+    public String[] getMails() {
+        return this.mails;
     }
     
     public CallBack getCallBack() {
@@ -274,7 +283,11 @@ public class ParamsBean {
 
     @Override
     public String toString() {
-        return "ParamsBean [SuiteName="+ getSuiteName() + ", Browser=" + this.Browser + ", Version=" + this.Version + ", URLBase=" + this.URLBase + ", ListaPaises=" + this.ListaPaises +
+        return "ParamsBean [SuiteName="+ getSuiteName() + 
+        		", Browser=" + this.Browser + 
+        		", Version=" + this.Version + 
+        		", URLBase=" + this.URLBase + 
+        		", ListaPaises=" + this.ListaPaises +
                 ", toString()=" + super.toString() + "]";
     }        
 }

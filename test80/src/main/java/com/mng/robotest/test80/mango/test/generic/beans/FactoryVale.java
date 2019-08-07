@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.data.ValesData.Campanya;
+import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais.EffectToArticle;
@@ -30,7 +31,8 @@ public class FactoryVale {
     
     private static List<Pais> getListaPaisesSingleton() throws Exception {
     	if (listPaises==null) {
-    		listPaises = UtilsMangoTest.listaPaisesXML(true, null);
+    		List<Integer> listCountrys = null;
+    		listPaises = Utilidades.getListCountrysFiltered(listCountrys);
     	}
     	return listPaises;
     }

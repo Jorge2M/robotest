@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.manto.pedido;
 
 import com.mng.robotest.test80.arq.utils.State;
+import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
@@ -20,7 +21,8 @@ public class PageGenerarPedidoStpV {
 	
 	@Step (
 		description="Seleccionamos el estado <b>#{newState}</b> y pulsamos el botón <b>Generar Fichero</b>", 
-        expected="Aparece una página de la pasarela de resultado OK")
+        expected="Aparece una página de la pasarela de resultado OK",
+    	saveErrorData=SaveWhen.Never)
 	public static void changePedidoToEstado(EstadoPedido newState, WebDriver driver) throws Exception {
         PageGenerarPedido.selectEstado(newState, driver);
         PageGenerarPedido.clickAndWait(GenerarFicheroButton, driver);

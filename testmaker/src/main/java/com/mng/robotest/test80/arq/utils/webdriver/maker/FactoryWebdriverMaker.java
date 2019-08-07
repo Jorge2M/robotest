@@ -10,6 +10,7 @@ public class FactoryWebdriverMaker {
     	chrome(false), 
     	chromehless(true),
     	edge(false),
+    	safari(false),
     	browserstack(false);
     	
     	boolean headless;

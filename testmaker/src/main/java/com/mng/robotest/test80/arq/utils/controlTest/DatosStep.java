@@ -1,4 +1,5 @@
 package com.mng.robotest.test80.arq.utils.controlTest;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.utils.NetTrafficMng;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.data.TestMakerContext;
 
 
 public class DatosStep {
@@ -113,8 +114,9 @@ public class DatosStep {
     }
     
     public void setSaveNettrafic(SaveWhen saveNettraffic, ITestContext context) {
-        String netTrafficStr = context.getSuite().getXmlSuite().getParameter(Constantes.paramNetAnalysis);
-        if ("true".compareTo(netTrafficStr)==0) {
+    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+        boolean isNettraffic = testMakerCtx.getInputData().isNetAnalysis();
+        if (isNettraffic) {
         	this.saveNettraffic = saveNettraffic;
         	NetTrafficMng netTraffic = new NetTrafficMng();
         	netTraffic.resetAndStartNetTraffic();

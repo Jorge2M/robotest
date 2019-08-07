@@ -23,7 +23,7 @@ public class SecModalPersonalizacionStpV {
 	private SecModalPersonalizacionStpV(DataCtxShop dCtxSh, WebDriver driver) {
 		this.driver = driver;
 		this.dCtxSh = dCtxSh;
-		this.pageFichaWrap = PageFicha.newInstance(dCtxSh.appE, dCtxSh.channel, driver);
+		this.pageFichaWrap = PageFicha.newInstance(dCtxSh.channel, dCtxSh.appE, driver);
 	}
 	
 	public static SecModalPersonalizacionStpV getNewOne(DataCtxShop dCtxSh, WebDriver driver) {

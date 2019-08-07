@@ -2,8 +2,10 @@ package com.mng.robotest.test80.mango.test.generic.beans;
 
 import java.util.ArrayList;
 
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
+import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 
 public class ArticuloScreen {
@@ -25,7 +27,11 @@ public class ArticuloScreen {
     public ArticuloScreen(ArticleStock articleStock) {
         this.referencia = articleStock.getReference();
         this.codigoColor = articleStock.getColourCode();
-        this.tallaNum = articleStock.getSize();
+        if ("99".compareTo(articleStock.getSize())==0) {
+        	this.tallaNum = UtilsTestMango.getCodigoTallaUnica(articleStock.getApp());
+        } else {
+        	this.tallaNum = articleStock.getSize();
+        }
         this.valePais = articleStock.getValePais();
     }
     

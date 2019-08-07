@@ -14,7 +14,6 @@ import com.mng.robotest.test80.mango.test.data.Descuento;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais.LayoutPago;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
@@ -23,6 +22,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMa
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class Page1DktopCheckout extends WebdrvWrapp {
+	
     public static SecStoreCredit secStoreCredit;
     public static SecTMango secTMango;
     public static SecBillpay secBillpay;
@@ -30,41 +30,41 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     public static SecEps secEps;
     public static ModalAvisoCambioPais modalAvisoCambioPais;
     
-    static String XPathConfPagoButtonDesktop = "//*[@id[contains(.,'btnCheckout')]]";
-    static String XPathAlmacenInNoProEntorns = "//span[@class='labelTestShowAlmacenStrong']";
-    static String XPathBlockCodigoPromo = "//div[@class[contains(.,'contenidoPromoCode')]]";
-    static String XPathErrorPromo = "//*[@class='labelIntroduceError']";
-    static String XPathLinkToViewBlockPromo = "SVBody:SVResumenPromociones:FExpandirVales";
-    static String xpathInputPromo = "//input[@class[contains(.,'inputVale')]]";
-    static String XPathButtonAplicarPromo = "//input[@id[contains(.,'PromocionesVales')] and @type='submit']";
-    static String XPathLinkEliminarPromo = "//span[@class[contains(.,'promoCodeConfirmar')]]";
-    static String XPathBotoneraEmplPromo = "//div[@class='botoneraEmpleado']";
-    static String XPathButtonCancelarPromo = XPathBotoneraEmplPromo + "//span[@class='botonNew claro']";
-    static String XPathButtonGuardarPromo = XPathBotoneraEmplPromo + "//span[@class='botonNew']";
-    static String XPathInputApellidoPromoEmpl = "//input[@id[contains(.,'primerApellido')]]";
-    static String XPathInputDNIPromoEmpl = "//input[@id[contains(.,'dniEmpleado')]]";
-    static String XPathDiaNaciPromoEmpl = "//select[@id[contains(.,'naciDia')]]";
-    static String XPathMesNaciPromoEmpl = "//select[@id[contains(.,'naciMes')]]";
-    static String XPathAnyNaciPromoEmpl = "//select[@id[contains(.,'naciAny')]]";
-    static String XPathAceptarPromoEmpl = "//div[@class[contains(.,'botoneraEmpleado')]]/span[@class='botonNew']";
-    static String XPathDescuentoEmpleado = "//p[@class[contains(.,'descuento-aplicado')]]//span[@class='price-format']";
+    final static String XPathConfPagoButtonDesktop = "//*[@id[contains(.,'btnCheckout')]]";
+    final static String XPathAlmacenInNoProEntorns = "//span[@class='labelTestShowAlmacenStrong']";
+    final static String XPathBlockCodigoPromo = "//div[@class[contains(.,'contenidoPromoCode')]]";
+    final static String XPathErrorPromo = "//*[@class='labelIntroduceError']";
+    final static String XPathLinkToViewBlockPromo = "SVBody:SVResumenPromociones:FExpandirVales";
+    final static String xpathInputPromo = "//input[@class[contains(.,'inputVale')]]";
+    final static String XPathButtonAplicarPromo = "//input[@id[contains(.,'PromocionesVales')] and @type='submit']";
+    final static String XPathLinkEliminarPromo = "//span[@class[contains(.,'promoCodeConfirmar')]]";
+    final static String XPathBotoneraEmplPromo = "//div[@class='botoneraEmpleado']";
+    final static String XPathButtonCancelarPromo = XPathBotoneraEmplPromo + "//span[@class='botonNew claro']";
+    final static String XPathButtonGuardarPromo = XPathBotoneraEmplPromo + "//span[@class='botonNew']";
+    final static String XPathInputApellidoPromoEmpl = "//input[@id[contains(.,'primerApellido')]]";
+    final static String XPathInputDNIPromoEmpl = "//input[@id[contains(.,'dniEmpleado')]]";
+    final static String XPathDiaNaciPromoEmpl = "//select[@id[contains(.,'naciDia')]]";
+    final static String XPathMesNaciPromoEmpl = "//select[@id[contains(.,'naciMes')]]";
+    final static String XPathAnyNaciPromoEmpl = "//select[@id[contains(.,'naciAny')]]";
+    final static String XPathAceptarPromoEmpl = "//div[@class[contains(.,'botoneraEmpleado')]]/span[@class='botonNew']";
+    final static String XPathDescuentoEmpleado = "//p[@class[contains(.,'descuento-aplicado')]]//span[@class='price-format']";
 
-    static String XPathPrecioRelArticle = "//div[@class[contains(.,'precioNormal')]]";
-	static String XPathPrecioNoTachadoRelArticle = XPathPrecioRelArticle + "//self::div[not(@class[contains(.,'tachado')])]";
-	static String XPathPrecioSiTachadoRelArticle = XPathPrecioRelArticle + "//self::div[@class[contains(.,'tachado')]]";
+    final static String XPathPrecioRelArticle = "//div[@class[contains(.,'precioNormal')]]";
+	final static String XPathPrecioNoTachadoRelArticle = XPathPrecioRelArticle + "//self::div[not(@class[contains(.,'tachado')])]";
+	final static String XPathPrecioSiTachadoRelArticle = XPathPrecioRelArticle + "//self::div[@class[contains(.,'tachado')]]";
     
-    static String XPathImporteTotal = "//*[@id='SVBody:SVResumenDesgloseImporteTotal:importeTotal']";
-    static String XPathClickDespliegaPagos = "//p[@class[contains(.,'anadirPago')]]";
-    static String XPathImporteTotalCompra = "//*[@id[contains(.,'importeTotalComprar')]]";
-    static String XPathOtrasFormasPago = "//div[@class[contains(.,'formasPago')]]";
-    static String XPathRedError = "//div[@class[contains(.,'errorbocatapago')]]";
-    static String XPathNombreEnvio = "//div[@class[contains(.,'nombreEnvio')]]"; 
-    static String XPathDirecionEnvio = "//div[@class[contains(.,'direccionEnvio')]]";
-    static String XPathPoblacionEnvio = "//div[@class[contains(.,'poblacionEnvio')]]";
-    static String XPathProvinciaEnvio = "//div[@class[contains(.,'provinciaEnvio')]]";
-    static String XPathPrecioSubTotal = "//div[@class='subTotal']/div/div[2]/span[@class='precioNormal']";
-    static String XPathPrecioTotal = "//span[@class[contains(.,'precioTotal')]]";
-    static String XPathBloquesPagoPosibles = 
+    final static String XPathImporteTotal = "//*[@id='SVBody:SVResumenDesgloseImporteTotal:importeTotal']";
+    final static String XPathClickDespliegaPagos = "//p[@class[contains(.,'anadirPago')]]";
+    final static String XPathImporteTotalCompra = "//*[@id[contains(.,'importeTotalComprar')]]";
+    final static String XPathOtrasFormasPago = "//div[@class[contains(.,'formasPago')]]";
+    final static String XPathRedError = "//div[@class[contains(.,'errorbocatapago')]]";
+    final static String XPathNombreEnvio = "//div[@class[contains(.,'nombreEnvio')]]"; 
+    final static String XPathDirecionEnvio = "//div[@class[contains(.,'direccionEnvio')]]";
+    final static String XPathPoblacionEnvio = "//div[@class[contains(.,'poblacionEnvio')]]";
+    final static String XPathProvinciaEnvio = "//div[@class[contains(.,'provinciaEnvio')]]";
+    final static String XPathPrecioSubTotal = "//div[@class='subTotal']/div/div[2]/span[@class='precioNormal']";
+    final static String XPathPrecioTotal = "//span[@class[contains(.,'precioTotal')]]";
+    final static String XPathBloquesPagoPosibles = 
     	"//div[@id='textoCondicionesTarjeta']//*[@id='CardName'] | " + 
         "//div[@id='textoCondicionesTarjeta' and @class='paypalInfo'] | " +
         "//div[@id='textoCondicionesTarjeta']//*[@id[contains(.,'yandex')]] | " +
@@ -74,24 +74,38 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         "//div[@class[contains(.,'cardContainerNotIntegrated')]] | " +
         "//div[@class[contains(.,'falconFormularioTarjeta')]]"; 
     
-    static String tagMetodoPago = "@TagMetodoPago";
-    static String XPathBlockTarjetaGuardadaPagoWithTag = "//div[@class[contains(.,'tarjetaGuardada')] and @data-analytics-value='" + tagMetodoPago + "']";
-    static String XPathRadioTrjGuardada = "//input[@class[contains(.,'guardadaInput')]]";
+    final static String tagMetodoPago = "@TagMetodoPago";
+    final static String XPathBlockTarjetaGuardadaPagoWithTag = "//div[@class[contains(.,'tarjetaGuardada')] and @data-analytics-value='" + tagMetodoPago + "']";
+    final static String XPathRadioTrjGuardada = "//input[@class[contains(.,'guardadaInput')]]";
     
-    static String XPathLinkSolicitarFactura = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
-    static String XPathLinkEditDirecEnvio = "//span[@class[contains(.,'cambiarDatosEnvio')]]";
-    static String XPathFirstArticulo = "//div[@class[contains(.,'firstArticulo')]]";
-    static String XPathInputVendedorVOTF = "//input[@class[contains(.,'codiDependenta')]]";
-    static String XPathButtonAcceptVendedorVOTF = "//span[@id[contains(.,'CodigoDependienta')]]";
+    final static String XPathLinkSolicitarFactura = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
+    final static String XPathLinkEditDirecEnvio = "//span[@class[contains(.,'cambiarDatosEnvio')]]";
+    final static String XPathFirstArticulo = "//div[@class[contains(.,'firstArticulo')]]";
+    final static String XPathInputVendedorVOTF = "//input[@class[contains(.,'codiDependenta')]]";
+    final static String XPathButtonAcceptVendedorVOTF = "//span[@id[contains(.,'CodigoDependienta')]]";
     
-    static String XPathContentChequeRegalo = "//div[@class[contains(.,'contentsChequeRegalo')]]";
-    static String XPathNombreChequeRegalo = "(" + XPathContentChequeRegalo + "//div[@class='span3'])[1]";
-    static String XPathEmailChequeRegalo = "(" + XPathContentChequeRegalo + "//div[@class='span3'])[2]";
-    static String XPathPrecioChequeRegalo = XPathContentChequeRegalo + "//div[@class='span2']";
-    static String XPathMensajeChequeRegalo = XPathContentChequeRegalo + "//div[@class='span4']";
+    final static String XPathContentChequeRegalo = "//div[@class[contains(.,'contentsChequeRegalo')]]";
+    final static String XPathNombreChequeRegalo = "(" + XPathContentChequeRegalo + "//div[@class='span3'])[1]";
+    final static String XPathEmailChequeRegalo = "(" + XPathContentChequeRegalo + "//div[@class='span3'])[2]";
+    final static String XPathPrecioChequeRegalo = XPathContentChequeRegalo + "//div[@class='span2']";
+    final static String XPathMensajeChequeRegalo = XPathContentChequeRegalo + "//div[@class='span4']";
+    
+    final static String TagMetodoPago = "@TagMetodoPago";
+    final static String XPathRadioPagoWithTag = "//div[@class[contains(.,'cuadroPago')]]/input[@value='" + TagMetodoPago + "']/../input[@type='radio']";
+    final static String TextKrediKarti = "KREDİ KARTI";
+    final static String XPathPestanyaKrediKarti = "//div[@class[contains(.,'pmGroupTitle')]]/span[text()='" + TextKrediKarti + "']";
+    
+    final static String XPathMetodoPago = "//*[@class[contains(.,'cardBox')]]/div";
+    
+    final static String tagReferencia = "@TagRef";
+    final static String XPathLineaArticuloWithTag = 
+    	"//div[@class[contains(.,'ref')] and text()[contains(.,'" + tagReferencia + "')]]/ancestor::div[@class[contains(.,'articuloResBody')]]";
+    
+    final static String tagCodVendedor = "@TagCodVendedor";
+    final static String XPathCodVendedorVotfWithTag = "//form[@id[contains(.,'Dependienta')]]//span[text()[contains(.,'" + tagCodVendedor + "')]]";
     
     static String getXPathLinArticle(String referencia) {
-        return ("//div[@class[contains(.,'ref')] and text()[contains(.,'" + referencia + "')]]/ancestor::div[@class[contains(.,'articuloResBody')]]");
+    	return (XPathLineaArticuloWithTag.replace(tagReferencia, referencia));
     }
     
     static String getXPathBlockTarjetaGuardada(String metodoPago) {
@@ -115,58 +129,24 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         case KlarnaDeutsch:
             return (SecKlarnaDeutsch.isVisibleUntil(Channel.desktop, maxSecondsToWait, driver));
         default:
+        	String nameExpected = pago.getNombreInCheckout(Channel.desktop).toLowerCase();
             return (
                 isElementVisibleUntil(driver, By.xpath(XPathBloquesPagoPosibles), maxSecondsToWait) &&
-                driver.findElement(By.xpath(XPathBloquesPagoPosibles)).getAttribute("innerHTML").toLowerCase().contains(pago.getNombre().toLowerCase())
+                driver.findElement(By.xpath(XPathBloquesPagoPosibles)).getAttribute("innerHTML").toLowerCase().contains(nameExpected)
             );
         }
     }
     
-    public static String getXPathClickMetodoPago(String metodoPago, LayoutPago layoutPago, String indexpant) {
-    	switch (layoutPago) {
-    	case Linea:
-    		return (getXPathClickPagoLayoutLinea(metodoPago, indexpant));
-    	case Pestaña:
-    	default:
-    		return (getXPathClickPagoLayoutPestanya(metodoPago));
-    	}
+    private static String getXPathClickMetodoPago(String metodoPago) {
+        if (TextKrediKarti.compareTo(metodoPago)==0) {
+        	return XPathPestanyaKrediKarti;
+        }
+        String metodoPagoClick = PageCheckoutWrapper.getMethodInputValue(metodoPago, Channel.desktop);
+        return (XPathRadioPagoWithTag.replace(TagMetodoPago, metodoPagoClick));
     }
 
-    private static String getXPathClickPagoLayoutPestanya(String metodoPagoClick) {
-        return ("//div[@id='tabs']/div[@class[contains(.,'groupTitle')]]/span[text()[contains(.,'" + metodoPagoClick + "')]]");
-    }
-    
-    private static String getXPathClickPagoLayoutLinea(String metodoPago, String indexpant) {
-        String xpathReturn = "";
-        String metodoPagoClick = PageCheckoutWrapper.getMethodInputValue(metodoPago, Channel.desktop);
-        if (metodoPagoClick.toUpperCase().compareTo("VISA")==0) {
-            xpathReturn = "//div[@class[contains(.,'cuadroPago')]]/input[@value='" + metodoPagoClick + "']/../input[@type='radio']";
-        } else {
-            xpathReturn = "//div[@class[contains(.,'cuadroPago')]]/input[@value[contains(.,'" + metodoPagoClick + "')]]/../input[@type='radio']";
-        }
-            
-        //Esto lo hacemos para el caso concreto de Mercadopago (México) pues hay 2 métodos idénticos e indistingibles
-        if (Integer.valueOf(indexpant).intValue() > 1) {
-            xpathReturn = "(" + xpathReturn + ")[" + indexpant + "]";
-        }
-        return xpathReturn;
-    }
-    
-    /**
-     * @return el XPATH necesario para localizar los bloques correspondientes a los métodos de pago
-     */
-    public static String getXPath_MetodoPago(Pais pais) {
-    	switch (pais.getLayoutPago()) {
-    	case Linea:
-            return ("//*[@class[contains(.,'cardBox')]]/div");
-    	case Pestaña:
-    	default:
-    		return ("//div[@id='tabs']/div[@class[contains(.,'groupTitle')]]");
-    	}
-    }
-    
-    public static String getXPathCodigoVendedorVOTF(String codigoVendedor) {
-        return ("//form[@id[contains(.,'Dependienta')]]//span[text()[contains(.,'" + codigoVendedor + "')]]");
+    private static String getXPathCodigoVendedorVOTF(String codigoVendedor) {
+        return (XPathCodVendedorVotfWithTag.replace(tagCodVendedor, codigoVendedor));
     }
     
     public static boolean isPageUntil(int secondsWait, WebDriver driver) {
@@ -294,19 +274,16 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         return (isElementVisibleUntil(driver, By.xpath(XPathDescuentoEmpleado), secondsToWait)); 
     }
     
-    public static boolean isMetodoPagoPresent(String metodoPagoClick, String indexpant, LayoutPago layoutPago, WebDriver driver) {
-        String xpathClickPago = getXPathClickMetodoPago(metodoPagoClick, layoutPago, indexpant);
-        if (isElementPresent(driver, By.xpath(xpathClickPago))) {
-            return true;
-        }
-        return false;
+    public static boolean isMetodoPagoPresent(String metodoPagoClick, WebDriver driver) {
+        String xpathClickPago = getXPathClickMetodoPago(metodoPagoClick);
+        return (isElementPresent(driver, By.xpath(xpathClickPago)));
     }
     
     /**
      * @return si el número de métodos de pago visualizados en pantalla es el correcto
      */
     public static boolean isNumMetodosPagoOK(WebDriver driver, Pais pais, AppEcom app, boolean isEmpl) {
-        int numPagosPant = driver.findElements(By.xpath(getXPath_MetodoPago(pais))).size();
+        int numPagosPant = driver.findElements(By.xpath(XPathMetodoPago)).size();
         if (app!=AppEcom.votf) {
             //Se comprueba que el número de métodos de pago en pantalla coincida con los asociados al país
             int numPagosPais = pais.getListPagosTest(app, isEmpl).size();
@@ -317,24 +294,24 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         return (numPagosPant == 0);
     }
     
-    public static boolean isNumpagos(int numPagosExpected, Pais pais, WebDriver driver) {
-        int numPagosPant = driver.findElements(By.xpath(getXPath_MetodoPago(pais))).size();
+    public static boolean isNumpagos(int numPagosExpected, WebDriver driver) {
+        int numPagosPant = driver.findElements(By.xpath(XPathMetodoPago)).size();
         return (numPagosPant == numPagosExpected);
     }
     
-    public static boolean isPresentMetodosPago(Pais pais, WebDriver driver) {
-        return (isElementPresent(driver, By.xpath(getXPath_MetodoPago(pais))));
+    public static boolean isPresentMetodosPago(WebDriver driver) {
+        return (isElementPresent(driver, By.xpath(XPathMetodoPago)));
     }
 
     /**
      * Realizamos las acciones necesarias para forzar el click sobre un método de pago y esperamos a que desaparezcan las capas de loading
      */
-    public static void forceClickMetodoPagoAndWait(String metodoPago, String indexpant, Pais pais, WebDriver driver) throws Exception {
+    public static void forceClickMetodoPagoAndWait(String metodoPago, Pais pais, WebDriver driver) throws Exception {
         despliegaMetodosPago(driver);
-        PageCheckoutWrapper.waitUntilNoDivLoading(driver, 2/*seconds*/);
+        PageCheckoutWrapper.waitUntilNoDivLoading(driver, 2);
         moveToMetodosPago(driver);
-        clickMetodoPago(pais, metodoPago, indexpant, driver);
-        PageCheckoutWrapper.waitUntilNoDivLoading(driver, 10/*seconds*/);
+        clickMetodoPago(pais, metodoPago, driver);
+        PageCheckoutWrapper.waitUntilNoDivLoading(driver, 10);
     }
 
     
@@ -381,25 +358,9 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         while (!inStateOk && i<seconds);
     }    
     
-    public static void clickMetodoPago(Pais pais, String metodoPago, String indexpant, WebDriver driver) throws Exception {
-    	switch (pais.getLayoutPago()) {
-    	case Pestaña:
-            clickPagoLayoutPestanya(metodoPago, indexpant, driver);
-            break;
-    	case Linea:
-    	default:
-            clickPagoLayoutLinea(metodoPago, indexpant, driver);
-    	}
-    }
-
-    private static void clickPagoLayoutPestanya(String metodoPago, String indexpant, WebDriver driver) {
-        String xpathClickMetodoPago = getXPathClickMetodoPago(metodoPago, LayoutPago.Pestaña, indexpant);
-        driver.findElement(By.xpath(xpathClickMetodoPago)).click();
-    }
-    
-    private static void clickPagoLayoutLinea(String metodoPago, String indexpant, WebDriver driver) throws Exception {
-        String xpathClickMetodoPago = getXPathClickMetodoPago(metodoPago, LayoutPago.Linea, indexpant);
-        waitClickAndWaitLoad(driver, 2/*waitForLinkToClick*/, By.xpath(xpathClickMetodoPago), 1/*waitSeconds*/, TypeOfClick.webdriver);
+    public static void clickMetodoPago(Pais pais, String metodoPago, WebDriver driver) throws Exception {
+        String xpathClickMetodoPago = getXPathClickMetodoPago(metodoPago);
+        waitClickAndWaitLoad(driver, 2, By.xpath(xpathClickMetodoPago), 1, TypeOfClick.webdriver);
     }
     
     public static boolean isRedErrorVisible(WebDriver driver) {

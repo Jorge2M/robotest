@@ -21,10 +21,12 @@ public class SecFotosNewStpV {
 		DataFoto dataFoto = SecFotosNew.getDataFoto(1, 1, driver);
 	 	validations.add(
 			"La 1a foto es de tipo <b>" + TipoImagenProducto.DETALLES + " o " + 
+										  TipoImagenProducto.DETALLES_9 + " o " +
 										  TipoImagenProducto.OUTFIT + " o " + 
 										  TipoImagenProducto.BODEGON + "</b>",
 			dataFoto!=null && (
 			dataFoto.typeImage==TipoImagenProducto.DETALLES || 
+			dataFoto.typeImage==TipoImagenProducto.DETALLES_9 || 
 			dataFoto.typeImage==TipoImagenProducto.OUTFIT || 
 			dataFoto.typeImage==TipoImagenProducto.BODEGON), State.Defect);
 	 	

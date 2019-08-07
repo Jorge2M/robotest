@@ -1,9 +1,7 @@
 package com.mng.robotest.test80;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -22,10 +20,11 @@ import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Suites;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import com.mng.robotest.test80.mango.test.xmlprogram.*;
+import com.mng.robotest.test80.mango.test.suites.*;
 
 public class Test80mng { 
 
@@ -46,7 +45,7 @@ public class Test80mng {
     public static String UrlManto = "urlmanto";
     public static String RecicleWD = "reciclewd";
     public static String NetAnalysis = "net";
-    public static String EnvioCorreo = "enviocorreo";
+    public static String Mails = "mails";
     public static String TypeAccessParam = "typeAccess";    
     public static String CallBackResource = "callbackresource";
     public static String CallBackMethod = "callbackmethod";
@@ -60,14 +59,14 @@ public class Test80mng {
     
     /**
      * Direct access from Command Line
-     * Parseamos la línea de comandos y ejecutamos la TestSuite correspondiente mediante la XML programática
+     * Parseamos la línea de comandos y ejecutamos la TestSuite correspondiente mediante la XML programática 
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception { 
         if (!checkHelpParameterCase(args)) {
             Options options = setOptionsRelatedCommandLine();
             ParamsBean params = null;
             try {
-                params = parseCheckAndStoreParams(options, args);    
+                params = parseCheckAndStoreParams(options, args);     
             }
             catch (ParseException e) {
                 System.out.println(e.getLocalizedMessage());
@@ -77,7 +76,7 @@ public class Test80mng {
             
             if (params!=null) {
                 params.setTypeAccessIfNotSetted(TypeAccessFmwk.CommandLine);
-                execSuiteByProgramaticXML(params);
+                execSuite(params);
             }
         }
     }
@@ -185,11 +184,11 @@ public class Test80mng {
             .desc("Net Analysis (true, false)")
             .build();        
         
-        Option envioCorreo = Option.builder(EnvioCorreo)
+        Option mails = Option.builder(Mails)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
-            .desc("Send email to group indicated after TestSuite execution")
+            .desc("List of mail adresses comma separated")
             .build();        
         
         Option bat = Option.builder(TypeAccessParam)
@@ -259,7 +258,7 @@ public class Test80mng {
         options.addOption(urlManto);
         options.addOption(recicleWD);
         options.addOption(netAnalysis);
-        options.addOption(envioCorreo);
+        options.addOption(mails);
         options.addOption(bat);
         options.addOption(callbackResource);
         options.addOption(callbackMethod);
@@ -303,84 +302,50 @@ public class Test80mng {
     /**
      * Indirect access from Command Line, direct access from Online
      */
-    public static void execSuiteByProgramaticXML(ParamsBean params) throws Exception {
-        //idExecSuite setted in direct access from Online, not setted in indirect access from Command Line
-        params.setIdExecutedSuiteIfNotSetted(getIdForSuiteToExecute());
+    public static void execSuite(ParamsBean params) throws Exception {
+    	SuiteMaker suite = makeSuite(params);
+    	suite.run();
+    }
+    
+    public static SuiteMaker makeSuite(ParamsBean params) throws Exception {
         params.setTypeAccessIfNotSetted(TypeAccessFmwk.Online);
         try {
             switch ((Suites)params.getSuite()) {
             case SmokeTest:
-                SmokeTestXML smokeTest = new SmokeTestXML();
-                smokeTest.testRunner(params);            
-                break;
+                return (new SmokeTestSuite(params));
             case SmokeManto:
-                SmokeMantoXML smokeManto = new SmokeMantoXML();
-                smokeManto.testRunner(params);            
-                break;                
+                return (new SmokeMantoSuite(params));             
             case PagosPaises:
-                PagosPaisesXML pagosPaises = new PagosPaisesXML();
-                pagosPaises.testRunner(params);            
-                break;              
+                return (new PagosPaisesSuite(params));           
             case ValesPaises:
-                ValesPaisesXML valesPaises = new ValesPaisesXML();
-                valesPaises.testRunner(params);            
-                break;                
+                return (new ValesPaisesSuite(params));          
             case PaisIdiomaBanner:
-                PaisIdiomaXML paisIdiomaBanner = new PaisIdiomaXML();
-                paisIdiomaBanner.testRunner(params);
-                break;                
-            case Campanas:
-                CampanasXML campanas = new CampanasXML();
-                campanas.testRunner(params);
-                break;                
+                return (new PaisIdiomaSuite(params));                    
             case MenusPais:
-                MenusPaisXML menusPais = new MenusPaisXML();
-                menusPais.testRunner(params);            
-                break;
+                return (new MenusPaisSuite(params));
             case MenusManto:
-                MenusMantoFactoryXML menusManto = new MenusMantoFactoryXML();
-                menusManto.testRunner(params);            
-                break;                 
+                return (new MenusMantoSuite(params));            
             case Nodos:
-                NodosFactoryXML nodosFactory = new NodosFactoryXML();
-                nodosFactory.testRunner(params);            
-                break;                
+                return (new NodosSuite(params));           
             case ConsolaVotf:
-                ConsolaVotfXML consolaVotf = new ConsolaVotfXML();
-                consolaVotf.testRunner(params);
-                break;                
+                return (new ConsolaVotfSuite(params));              
             case ListFavoritos:
             case ListMiCuenta:
-                GenericFactoryXML genericFactory = new GenericFactoryXML();
-                genericFactory.testRunner(params);
-                break;                
+                return (new GenericFactorySuite(params));               
             case RegistrosPaises:
-                RegistrosFactoryXML listRegistros = new RegistrosFactoryXML();
-                listRegistros.testRunner(params);
-                break;     
-            //TODO temporal para pruebas de Loyalty
-            case LoyaltyMasivos:
-            	LoyaltyMasivosXML listLoyaltyTcases = new LoyaltyMasivosXML();
-            	listLoyaltyTcases.testRunner(params);
-                break;       
+                return (new RegistrosSuite(params));       
             case RebajasPaises:
-                RebajasFactoryXML listRebajas = new RebajasFactoryXML();
-                listRebajas.testRunner(params);
-                break;                
+                return (new RebajasSuite(params));             
             default:
             }
         }
         catch (IllegalArgumentException e) {
             System.out.println("Suite Name not valid. Posible values: " + Arrays.toString(getNames(Suites.class)));
         }
+        
+        return null;
     }
-    
-    public static String getIdForSuiteToExecute() {
-        Calendar c1 = Calendar.getInstance();
-        String timestamp = new SimpleDateFormat("yyMMdd_HHmmssSS").format(c1.getTime());
-        return (timestamp);
-    }
-    
+
     public static String getOutputDirectory(String userDir, String suiteName, String idExecutedSuite) {
         return fmwkTest.getOutputDirectory(userDir, suiteName, idExecutedSuite);
     }
@@ -415,7 +380,7 @@ public class Test80mng {
         params.setUrlManto(cmdLine.getOptionValue(UrlManto));
         params.setRecicleWD(cmdLine.getOptionValue(RecicleWD));
         params.setNetAnalysis(cmdLine.getOptionValue(NetAnalysis));
-        params.setEnvioCorreo(cmdLine.getOptionValue(EnvioCorreo));
+        params.setMails(cmdLine.getOptionValues(Mails));
         params.setApplicationDNS(cmdLine.getOptionValue(ServerDNSNameParam));
         params.setTypeAccessFromStr(cmdLine.getOptionValue(TypeAccessParam));
         if (cmdLine.getOptionValue(CallBackResource)!=null) {
@@ -520,11 +485,11 @@ public class Test80mng {
         Suites suiteValue = Suites.valueOf(params.getSuiteName());
         switch (suiteValue) {
         case SmokeTest:
-            SmokeTestXML smokeTest = new SmokeTestXML();
-            return smokeTest.getDataTestAnnotationsToExec(params);
+            SmokeTestSuite smokeTest = new SmokeTestSuite(params);
+            return smokeTest.getListTests();
         case SmokeManto:
-            SmokeMantoXML smokeManto = new SmokeMantoXML();
-            return smokeManto.getDataTestAnnotationsToExec(params);            
+            SmokeMantoSuite smokeManto = new SmokeMantoSuite(params);
+            return smokeManto.getListTests();            
         default:
             return null;
         }

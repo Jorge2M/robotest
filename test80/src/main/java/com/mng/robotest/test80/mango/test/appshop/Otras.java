@@ -10,9 +10,12 @@ import org.testng.annotations.*;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
-import com.mng.robotest.test80.arq.utils.otras.Constantes;
+import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
@@ -43,17 +46,14 @@ public class Otras extends GestorWebDriver {
     IdiomaPais japones = null;
 	
     @BeforeMethod (groups={"Otras", "Canal:all_App:all"})
-    @Parameters({"brwsr-path","urlBase", "AppEcom", "Channel"})
-    public void login(String bpath, String urlAcceso, String appEcom, String channel, ITestContext context, Method method) 
-    throws Exception {
-
+    public void login(ITestContext context, Method method) throws Exception {
+        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom(appEcom);
-        dCtxSh.setChannel(channel);
-        dCtxSh.urlAcceso = urlAcceso;
+        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
+        dCtxSh.setChannel(inputData.getChannel());
+        dCtxSh.urlAcceso = inputData.getUrlBase();
         
-        Utils.storeDataShopForTestMaker(bpath, "", dCtxSh, context, method);
-        
+        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), "", dCtxSh, context, method);
         if (this.españa==null) {
             Integer codEspanya = Integer.valueOf(1);
             Integer codFrancia = Integer.valueOf(11);
@@ -61,7 +61,8 @@ public class Otras extends GestorWebDriver {
             Integer codIrlanda = Integer.valueOf(7);
             Integer codUSA = Integer.valueOf(400);
             Integer codJapon = Integer.valueOf(732);
-            List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(Arrays.asList(codEspanya, codFrancia, codSuecia, codIrlanda, codUSA, codJapon)));
+            List<Pais> listaPaises = Utilidades.getListCountrysFiltered(
+            	new ArrayList<>(Arrays.asList(codEspanya, codFrancia, codSuecia, codIrlanda, codUSA, codJapon)));
             this.españa  = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
             this.francia = UtilsMangoTest.getPaisFromCodigo("011", listaPaises);
             this.suecia  = UtilsMangoTest.getPaisFromCodigo("030", listaPaises);
@@ -84,7 +85,7 @@ public class Otras extends GestorWebDriver {
     }		
 	
     @Test (
-        groups={"Otras", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, 
+        groups={"Otras", "Canal:desktop_App:shop,outlet"}, 
         description="Comprobar acceso url desde email")
     public void OTR001_check_Redirects() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
@@ -94,10 +95,11 @@ public class Otras extends GestorWebDriver {
         dCtxSh.pais = this.españa;
         dCtxSh.idioma = this.castellano;
         dCtxSh.userRegistered = false;
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
                             
         //Step. Valida que la URL de acceso desde correo a HE es correcta
-        SecMenusDesktopStpV.checkURLRedirectZapatosHeEspanya(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, dFTest.driver);
+        secMenusDesktopStpV.checkURLRedirectZapatosHeEspanya();
         
         //Step. Acceso a la aplicación shop/outlet/VOTF sin registrarse posteriormente
         dCtxSh.pais = this.francia;
@@ -136,7 +138,8 @@ public class Otras extends GestorWebDriver {
      * Caso de prueba que realiza el flujo de accesos vía URL/confirmaciones de país para certificar el correcto funcionamiento del modal de confirmación de país.
      */
     @Test (
-        groups={"Otras", "Canal:desktop_App:shop", "Canal:desktop_App:outlet"}, 
+    	enabled=false, //Desactivado hasta que se corrija la incidencia https://jira.mangodev.net/jira/browse/GPS-975
+        groups={"Otras", "Canal:desktop_App:shop,outlet"}, 
         description="Verificar el cambio de país a través de url")
     public void OTR004_cambioPaisURL(ITestContext context) throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();

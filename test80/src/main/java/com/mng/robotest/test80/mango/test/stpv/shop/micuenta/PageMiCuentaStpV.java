@@ -25,7 +25,8 @@ public class PageMiCuentaStpV {
     }
 
     public static void goToMisDatos(String usuarioReg, AppEcom app, Channel channel, WebDriver driver) throws Exception {
-        SecMenusUserStpV.clickMenuMiCuenta(channel, app, driver);
+    	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
+    	userMenusStpV.clickMenuMiCuenta();
         goToMisDatos(usuarioReg, driver);
     }
 
@@ -37,24 +38,25 @@ public class PageMiCuentaStpV {
         PageMisDatosStpV.validaIsPage(usuarioReg, driver);
     }
 
-    public static void goToMisComprasFromMenu (DataCtxShop dataCtxShop, Channel channel, WebDriver driver) throws Exception {
-        SecMenusUserStpV.clickMenuMiCuenta(channel, dataCtxShop.appE, driver);
-        goToMisComprasFromMenuAndValidate(dataCtxShop, channel, driver);
+    public static void goToMisComprasFromMenu (DataCtxShop dCtxSh, WebDriver driver) 
+    throws Exception {
+    	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+    	userMenusStpV.clickMenuMiCuenta();
+        goToMisComprasFromMenuAndValidate(dCtxSh, driver);
     }
 
     @Step(
         description = "Seleccionar el link \"Mis Compras\"",
         expected = "Aparece la página de \"Mis Compras\"")
-    private static void goToMisComprasFromMenuAndValidate (DataCtxShop dataCtxShop, Channel channel, WebDriver driver) 
-    throws Exception {
+    private static void goToMisComprasFromMenuAndValidate (DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         PageMiCuenta.clickMisCompras(driver);
-        if (channel == Channel.movil_web &&
+        if (dCtxSh.channel == Channel.movil_web &&
         	PageInfoNewMisComprasMovil.isPage(driver)) {
             PageInfoNewMisComprasMovilStpV.validateIsPage(driver);
             PageInfoNewMisComprasMovilStpV.clickButtonToMisComprasAndNoValidate(driver);
         }
 
-        PageMisComprasStpV.validateIsPage(dataCtxShop, driver);
+        PageMisComprasStpV.validateIsPage(dCtxSh, driver);
     }
  
     public static void goToMisDatosAndValidateData(HashMap<String,String> dataRegistro, String codPais, AppEcom app, Channel channel, WebDriver driver)
@@ -64,7 +66,8 @@ public class PageMiCuentaStpV {
     }
 
     public static void goToSuscripciones(AppEcom app, Channel channel, WebDriver driver) throws Exception {
-        SecMenusUserStpV.clickMenuMiCuenta(channel, app, driver);
+    	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
+    	userMenusStpV.clickMenuMiCuenta();
         goToSuscripciones(driver);
     }
 
@@ -88,9 +91,10 @@ public class PageMiCuentaStpV {
         PageSuscripcionesStpV.validaIsDataAssociatedToRegister(datosRegOk, driver);
     }
 
-    public static void goToMisPedidos (String usrRegistrado, AppEcom appE, Channel channel, WebDriver driver) 
+    public static void goToMisPedidos (String usrRegistrado, AppEcom app, Channel channel, WebDriver driver) 
     throws Exception {
-        SecMenusUserStpV.clickMenuMiCuenta(channel, appE, driver);
+    	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
+    	userMenusStpV.clickMenuMiCuenta();
         goToMisPedidos(usrRegistrado, driver);
     }
 
@@ -102,8 +106,9 @@ public class PageMiCuentaStpV {
         PagePedidosStpV.validaIsPageSinPedidos(usrRegistrado, driver);
     }
 
-    public static void goToDevoluciones(AppEcom appE, Channel channel, WebDriver driver) throws Exception {
-        SecMenusUserStpV.clickMenuMiCuenta(channel, appE, driver);
+    public static void goToDevoluciones(AppEcom app, Channel channel, WebDriver driver) throws Exception {
+    	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
+    	userMenusStpV.clickMenuMiCuenta();
         goToDevoluciones(driver);
     }
 
@@ -115,8 +120,9 @@ public class PageMiCuentaStpV {
         PageDevolucionesStpV.validaIsPage(driver);
     }
 
-    public static void goToReembolsos(AppEcom appE, Channel channel, WebDriver driver) throws Exception {
-        SecMenusUserStpV.clickMenuMiCuenta(channel, appE, driver);
+    public static void goToReembolsos(AppEcom app, Channel channel, WebDriver driver) throws Exception {
+    	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
+    	userMenusStpV.clickMenuMiCuenta();
         goToReembolsos(driver);
     }
 
