@@ -198,8 +198,9 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
         waitForPageLoaded(driver); //For avoid StaleElementReferenceException
     }
     
-    public static void clickLinkFormasPagoFor(TypeActionLinkFP typeAction, WebDriver driver) {
-        driver.findElement(By.xpath(getXPathLinkFormasPagoFor(typeAction))).click();
+    public static void clickLinkFormasPagoFor(TypeActionLinkFP typeAction, WebDriver driver) throws Exception {
+    	By formasPagosBy = By.xpath(getXPathLinkFormasPagoFor(typeAction));
+    	WebdrvWrapp.clickAndWaitLoad(driver, formasPagosBy, TypeOfClick.javascript);
     }
     
     public static void moveToFirstMetodoPagoLine(WebDriver driver) {

@@ -115,10 +115,10 @@ public class Page1EnvioCheckoutMobil extends WebdrvWrapp {
 
 		// Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no
 		// funciona así que ejecutamos un 2o
-		Thread.sleep(200);
-		if (isVisibleButtonAceptarPromoEmpl(driver)) {
-			clickAndWaitLoad(driver, By.xpath(XPathAceptarPromoEmpl));
-		}
+//		Thread.sleep(200);
+//		if (isVisibleButtonAceptarPromoEmpl(driver)) {
+//			clickAndWaitLoad(driver, By.xpath(XPathAceptarPromoEmpl));
+//		}
 	}
 
 	public static void inputCodigoPromoAndAccept(String codigoPromo, WebDriver driver) throws Exception {
