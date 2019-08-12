@@ -16,9 +16,8 @@ public class PageRegistroFin extends WebdrvWrapp {
     }
     
     public static void clickIrDeShopping(WebDriver driver) throws Exception {
+    	waitForPageLoaded(driver); //Para evitar StaleElement Exception
         clickAndWaitLoad(driver, By.xpath(xpathButtonIrShopping), TypeOfClick.javascript);
-        
-        //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
         if (isVisibleButtonIrDeShopping(driver)) {
         	clickAndWaitLoad(driver, By.xpath(xpathButtonIrShopping), TypeOfClick.javascript);
         }

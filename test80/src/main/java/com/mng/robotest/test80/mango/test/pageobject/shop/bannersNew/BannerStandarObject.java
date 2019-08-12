@@ -10,11 +10,10 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 public class BannerStandarObject extends BannerObject {
 
 	final static String XPathWrapperBanner = "//div[@class[contains(.,'vsv-box')] and @data-id]";
-	final static String XPathBanner = 
-						    XPathWrapperBanner + 
-						    "//div[@data-cta and not(@data-cta='') and " + 
-						    	  "@data-cta[not(contains(.,'op=ayuda'))] and " + 
-						    	  "not(@class='link')]";
+	final static String XPathBanner = XPathWrapperBanner + 
+	    "//div[@data-cta and not(@data-cta='') and " + 
+	    	  "@data-cta[not(contains(.,'op=ayuda'))] and " + 
+	    	  "not(@class='link')]";
 	final static String XPathImageRelativeBanner = "//img[@class='img-responsive']";
 	final static String XPathMainTextRelativeBanner = "//div[@class[contains(.,'mainText')]]";
 	

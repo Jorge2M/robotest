@@ -9,7 +9,7 @@ import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 public class BannerCabeceraObject extends BannerObject {
 
-	final static String XPathWrapperBanner = "//div[@class='vsv-box' and @data-id]";
+	final static String XPathWrapperBanner = "//div[@class='vsv-binteriorwrap']//div[@class='vsv-box' and @data-id]";
 	final static String XPathBanner = XPathWrapperBanner + "//div[@class[contains(.,'vsv-content-web')]]";
 	final static String XPathAncorRelativeBanner = "../a[@href]";
 	
@@ -39,7 +39,13 @@ public class BannerCabeceraObject extends BannerObject {
 	@Override
 	public void clickBannerAndWaitLoad(DataBanner dataBanner, WebDriver driver) throws Exception {
 		WebElement bannerWeb = dataBanner.getBannerWeb();
-		WebElement bannerLink = bannerWeb.findElement(By.xpath(XPathAncorRelativeBanner));
+		By byLink = By.xpath(XPathAncorRelativeBanner);
+		WebElement bannerLink;
+		if (WebdrvWrapp.isElementPresent(bannerWeb, byLink)) {
+			bannerLink = bannerWeb.findElement(byLink);
+		} else {
+			bannerLink = bannerWeb;
+		}
     	WebdrvWrapp.clickAndWaitLoad(driver, bannerLink, 10, TypeOfClick.javascript);
 	}
 }
