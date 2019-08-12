@@ -284,13 +284,13 @@ public class Compra extends GestorWebDriver {
                 secMenusStpV.getMenusUser().logoffLogin(usrEmail, password);
                     
                 //Ejecutamos la consulta de Mis datos comprobando que son coherentes con los utilizados en el registro
-                //ListDataRegistro dataRegistroOK = new ListDataRegistro();
+                PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
                 HashMap<String,String> datosRegistro = dCtxPago.getDatosRegistro();
                 datosRegistro.put("cfEmail", usrEmail);
                 datosRegistro.put("cfPass", password);
                 datosRegistro.put("", "Barcelona");
                 datosRegistro.put("provinciaPais", "Barcelona");
-                PageMiCuentaStpV.goToMisDatosAndValidateData(datosRegistro, dCtxSh.pais.getCodigo_pais(), dCtxSh.appE, dCtxSh.channel, dFTest.driver);
+                pageMiCuentaStpV.goToMisDatosAndValidateData(datosRegistro, dCtxSh.pais.getCodigo_pais());
             }            
             
             //Validación en Manto de los Pedidos (si existen)

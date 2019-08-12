@@ -33,8 +33,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMiCuentaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMisComprasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMisDatosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageSuscripcionesStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.SecDetalleCompraTiendaStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalDetalleMisComprasStpV;
 
 public class MiCuenta extends GestorWebDriver {
     Pais españa = null;
@@ -88,7 +86,6 @@ public class MiCuenta extends GestorWebDriver {
         Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), this.index_fact, dCtxSh, context, method);
     }
 
-
     @SuppressWarnings("unused")
     @AfterMethod (groups={"Micuenta", "Canal:all_App:all", "SupportsFactoryCountrys"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
@@ -112,25 +109,27 @@ public class MiCuenta extends GestorWebDriver {
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
         secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
         dCtxSh.userRegistered = true;
-        AccesoStpV.identificacionEnMango(dCtxSh, dFTest.driver);                                           
-        PageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected, dCtxSh.appE, dCtxSh.channel, dFTest.driver);                
+        AccesoStpV.identificacionEnMango(dCtxSh, dFTest.driver);     
+        
+        PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        pageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected);                
         String nombreActual = PageMisDatosStpV.modificaNombreYGuarda(dFTest);
-        PageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
+        pageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected);
         PageMisDatosStpV.validaContenidoNombre(nombreActual, dFTest.driver);
         if (dCtxSh.appE==AppEcom.shop) {
-            PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dFTest.driver);
+        	pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);
         } else {
-            PageMiCuentaStpV.goToMisPedidos(dCtxSh.userConnected, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
+        	pageMiCuentaStpV.goToMisPedidos(dCtxSh.userConnected);
         }
             
-        PageMiCuentaStpV.goToSuscripciones(dCtxSh.appE, dCtxSh.channel, dFTest.driver);
+        pageMiCuentaStpV.goToSuscripciones();
         ArrayList<idNewsletters> listNewsletters = new ArrayList<>();
         listNewsletters.add(idNewsletters.she);
         PageSuscripcionesStpV.selectNewslettersAndGuarda(listNewsletters, dFTest);
         if (dCtxSh.appE!=AppEcom.outlet) {
-            PageMiCuentaStpV.goToDevoluciones(dCtxSh.appE, dCtxSh.channel, dFTest.driver);
+        	pageMiCuentaStpV.goToDevoluciones();
             PageDevolucionesStpV.solicitarRegogidaGratuitaADomicilio(dFTest);
-            PageMiCuentaStpV.goToReembolsos(dCtxSh.appE, dCtxSh.channel, dFTest.driver);
+            pageMiCuentaStpV.goToReembolsos();
         }
     }
     
@@ -153,14 +152,19 @@ public class MiCuenta extends GestorWebDriver {
         dCtxSh.userRegistered = true;
         PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest.driver);
         AccesoStpV.identificacionEnMango(dCtxSh, dFTest.driver);
-        PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dFTest.driver);
-        PageMisComprasStpV.selectBlock(TypeCompra.Online, true, dFTest.driver);
-        PageMisComprasStpV.selectCompraOnline(1, dCtxSh.pais.getCodigo_pais(), dCtxSh.channel, dFTest.driver);
+        
+        PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);
+        
+        PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(dCtxSh.channel, dFTest.driver);
+        pageMisComprasStpV.selectBlock(TypeCompra.Online, true);
+        pageMisComprasStpV.selectCompraOnline(1, dCtxSh.pais.getCodigo_pais());
         if (dCtxSh.channel == Channel.desktop) {
-	        PageMisComprasStpV.clickMoreInfo(dFTest.driver);
-	        ModalDetalleMisComprasStpV.clickBuscarTiendaButton(dFTest.driver);
-	        ModalDetalleMisComprasStpV.clickCloseModalBuscadorTiendas(dFTest.driver);
+        	pageMisComprasStpV.clickMoreInfo();
+        	pageMisComprasStpV.getModalDetalleMisCompras().clickBuscarTiendaButton();
+	        pageMisComprasStpV.getModalDetalleMisCompras().clickCloseModalBuscadorTiendas();
         }
+        pageMisComprasStpV.getModalDetalleMisCompras().gotoListaMisCompras();
         
         //Test Compras en Tienda
         dCtxSh.userConnected = userWithStorePurchases;
@@ -169,9 +173,9 @@ public class MiCuenta extends GestorWebDriver {
         SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         userMenusStpV.logoff();
         AccesoStpV.identificacionEnMango(dCtxSh, dFTest.driver);
-        PageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh, dFTest.driver);
-        PageMisComprasStpV.selectBlock(TypeCompra.Tienda, true, dFTest.driver);
-        PageMisComprasStpV.selectCompraTienda(1, dCtxSh.channel, dFTest.driver);
-        SecDetalleCompraTiendaStpV.selectArticulo(1, dFTest.driver);
+        pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);
+        pageMisComprasStpV.selectBlock(TypeCompra.Tienda, true);
+        pageMisComprasStpV.selectCompraTienda(1);
+        pageMisComprasStpV.getSecDetalleCompraTienda().selectArticulo(1, pageMisComprasStpV);
     }
 }

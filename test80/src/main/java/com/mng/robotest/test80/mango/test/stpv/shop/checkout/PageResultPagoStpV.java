@@ -128,12 +128,11 @@ public class PageResultPagoStpV {
     @Step (
     	description="Seleccionar el link \"Mis Compras\"",
     	expected="Aparece la página de \"Mis compras\" o la de \"Acceso a Mis compras\" según si el usuario está o no loginado")
-    public static void selectMisCompras(boolean userRegistered, WebDriver driver) throws Exception {
+    public static void selectMisCompras(boolean userRegistered, Channel channel, WebDriver driver) throws Exception {
         PageResultPago.clickMisCompras(driver);     
-                                
-        //Validations
         if (userRegistered) {
-            PageMisComprasStpV.validateIsPage(driver);
+        	PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(channel, driver);
+        	pageMisComprasStpV.validateIsPage();
             
             StdValidationFlags flagsVal = StdValidationFlags.newOne();
             flagsVal.validaSEO = true;
@@ -171,12 +170,13 @@ public class PageResultPagoStpV {
     }
     
     public static void selectLinkMisComprasAndValidateCompra(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
-        PageResultPagoStpV.selectMisCompras(dCtxSh.userRegistered, driver);
+    throws Exception {    	
+        PageResultPagoStpV.selectMisCompras(dCtxSh.userRegistered, dCtxSh.channel, driver);
         DataPedido dataPedido = dCtxPago.getDataPedido();
         if (dCtxSh.userRegistered) {
-            PageMisComprasStpV.selectBlock(TypeCompra.Online, true/*ordersExpected*/, driver);
-            PageMisComprasStpV.validateIsCompraOnlineVisible(dataPedido.getCodpedido(), dCtxPago.getFTCkout().isChequeRegalo, driver);
+        	PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(dCtxSh.channel, driver);
+        	pageMisComprasStpV.selectBlock(TypeCompra.Online, true);
+        	pageMisComprasStpV.validateIsCompraOnlineVisible(dataPedido.getCodpedido(), dCtxPago.getFTCkout().isChequeRegalo);
         } else {
             PageAccesoMisComprasStpV.clickBlock(TypeBlock.NoRegistrado, driver);
             PageAccesoMisComprasStpV.buscarPedidoForNoRegistrado(dCtxPago.getDataPedido(), driver);

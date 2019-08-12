@@ -7,7 +7,7 @@ import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageInfoNewMisComprasMovil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMiCuenta;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
@@ -16,66 +16,80 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 import org.openqa.selenium.WebDriver;
 
 public class PageMiCuentaStpV {
-
+	
+	private final PageMiCuenta pageMiCuenta;
+	private final WebDriver driver;
+	private final Channel channel;
+	private final AppEcom app;
+	
+	private PageMiCuentaStpV(Channel channel, AppEcom app, WebDriver driver) {
+		pageMiCuenta = PageMiCuenta.getNew(driver);
+		this.driver = driver;
+		this.channel = channel;
+		this.app = app;
+	}
+	public static PageMiCuentaStpV getNew(Channel channel, AppEcom app, WebDriver driver) {
+		return new PageMiCuentaStpV(channel, app, driver);
+	}
+	
     @Validation(
         description="1) Aparece una pantalla de resultado OK (la esperamos hasta #{maxSecondsToWait} segundos)",
         level=State.Defect)
-    public static boolean validateIsPage (int maxSecondsToWait, WebDriver driver) {
-        return (PageMiCuenta.isPageUntil(maxSecondsToWait, driver));
+    public boolean validateIsPage (int maxSecondsToWait) {
+        return (pageMiCuenta.isPageUntil(maxSecondsToWait));
     }
 
-    public static void goToMisDatos(String usuarioReg, AppEcom app, Channel channel, WebDriver driver) throws Exception {
+    public void goToMisDatos(String usuarioReg) throws Exception {
     	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
     	userMenusStpV.clickMenuMiCuenta();
-        goToMisDatos(usuarioReg, driver);
+    	clickLinkMisDatos(usuarioReg);
     }
 
     @Step(
         description = "Seleccionar el link \"Mis datos\"",
         expected = "Aparece la página de \"Mis datos\"")
-    private static void goToMisDatos (String usuarioReg, WebDriver driver) throws Exception {
-        PageMiCuenta.clickMisDatos(driver);
+    private void clickLinkMisDatos (String usuarioReg) throws Exception {
+        pageMiCuenta.clickMisDatos();
         PageMisDatosStpV.validaIsPage(usuarioReg, driver);
     }
 
-    public static void goToMisComprasFromMenu (DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
-    	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+    public void goToMisComprasFromMenu(Pais pais) throws Exception {
+    	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
     	userMenusStpV.clickMenuMiCuenta();
-        goToMisComprasFromMenuAndValidate(dCtxSh, driver);
+        goToMisComprasFromMenuAndValidate(pais);
     }
 
     @Step(
         description = "Seleccionar el link \"Mis Compras\"",
         expected = "Aparece la página de \"Mis Compras\"")
-    private static void goToMisComprasFromMenuAndValidate (DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-        PageMiCuenta.clickMisCompras(driver);
-        if (dCtxSh.channel == Channel.movil_web &&
+    private void goToMisComprasFromMenuAndValidate(Pais pais) throws Exception {
+        pageMiCuenta.clickMisCompras();
+        if (channel == Channel.movil_web &&
         	PageInfoNewMisComprasMovil.isPage(driver)) {
             PageInfoNewMisComprasMovilStpV.validateIsPage(driver);
             PageInfoNewMisComprasMovilStpV.clickButtonToMisComprasAndNoValidate(driver);
         }
 
-        PageMisComprasStpV.validateIsPage(dCtxSh, driver);
+        PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(channel, driver);
+        pageMisComprasStpV.validateIsPage(pais);
     }
  
-    public static void goToMisDatosAndValidateData(HashMap<String,String> dataRegistro, String codPais, AppEcom app, Channel channel, WebDriver driver)
-    throws Exception {
-        goToMisDatos(dataRegistro.get("cfEmail"), app, channel, driver);
+    public void goToMisDatosAndValidateData(HashMap<String,String> dataRegistro, String codPais) throws Exception {
+        goToMisDatos(dataRegistro.get("cfEmail"));
         PageMisDatosStpV.validaIsDataAssociatedToRegister(dataRegistro, codPais, driver);
     }
 
-    public static void goToSuscripciones(AppEcom app, Channel channel, WebDriver driver) throws Exception {
+    public void goToSuscripciones() throws Exception {
     	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
     	userMenusStpV.clickMenuMiCuenta();
-        goToSuscripciones(driver);
+    	clickLinkSuscripciones();
     }
 
     @Step(
         description = "Seleccionar el link \"Suscripciones\"",
         expected = "Aparece la página de \"Suscripciones\"")
-    private static void goToSuscripciones(WebDriver driver) throws Exception {
-        PageMiCuenta.clickSuscripciones(driver);
+    private void clickLinkSuscripciones() throws Exception {
+        pageMiCuenta.clickSuscripciones();
         PageSuscripcionesStpV.validaIsPage(driver);
         
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
@@ -85,52 +99,50 @@ public class PageMiCuentaStpV {
         AllPagesStpV.validacionesEstandar(flagsVal, driver);
     }
     
-    public static void goToSuscripcionesAndValidateData(HashMap<String,String> datosRegOk, AppEcom app, Channel channel, WebDriver driver) 
-    throws Exception {
-        goToSuscripciones(app, channel, driver);
+    public void goToSuscripcionesAndValidateData(HashMap<String,String> datosRegOk) throws Exception {
+        goToSuscripciones();
         PageSuscripcionesStpV.validaIsDataAssociatedToRegister(datosRegOk, driver);
     }
 
-    public static void goToMisPedidos (String usrRegistrado, AppEcom app, Channel channel, WebDriver driver) 
-    throws Exception {
+    public void goToMisPedidos (String usrRegistrado) throws Exception {
     	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
     	userMenusStpV.clickMenuMiCuenta();
-        goToMisPedidos(usrRegistrado, driver);
+    	clickLinkMisPedidos(usrRegistrado);
     }
 
     @Step(
         description = "Seleccionar el link \"Mis pedidos\"",
         expected = "Aparece la página de \"Mis pedidos\" sin pedidos")
-    private static void goToMisPedidos(String usrRegistrado, WebDriver driver) throws Exception {
-        PageMiCuenta.clickMisPedidos(driver);
+    private void clickLinkMisPedidos(String usrRegistrado) throws Exception {
+        pageMiCuenta.clickMisPedidos();
         PagePedidosStpV.validaIsPageSinPedidos(usrRegistrado, driver);
     }
 
-    public static void goToDevoluciones(AppEcom app, Channel channel, WebDriver driver) throws Exception {
+    public void goToDevoluciones() throws Exception {
     	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
     	userMenusStpV.clickMenuMiCuenta();
-        goToDevoluciones(driver);
+    	clickLinkDevoluciones();
     }
 
     @Step(
         description = "Seleccionar el link \"Devoluciones\"",
         expected = "Aparece la página de \"Devoluciones\"")
-    private static void goToDevoluciones(WebDriver driver) throws Exception {
-        PageMiCuenta.clickDevoluciones(driver);
+    private void clickLinkDevoluciones() throws Exception {
+        pageMiCuenta.clickDevoluciones();
         PageDevolucionesStpV.validaIsPage(driver);
     }
 
-    public static void goToReembolsos(AppEcom app, Channel channel, WebDriver driver) throws Exception {
+    public void goToReembolsos() throws Exception {
     	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(channel, app, driver);
     	userMenusStpV.clickMenuMiCuenta();
-        goToReembolsos(driver);
+    	clickLinkReembolsos();
     }
 
     @Step(
         description = "Seleccionar el link \"Reembolsos\"",
         expected = "Aparece la página de \"Reembolsos\"")
-	private static void goToReembolsos(WebDriver driver) throws Exception {
-        PageMiCuenta.clickReembolsos(driver);
+	private void clickLinkReembolsos() throws Exception {
+        pageMiCuenta.clickReembolsos();
         PageReembolsosStpV.validateIsPage(driver);
     }
 }

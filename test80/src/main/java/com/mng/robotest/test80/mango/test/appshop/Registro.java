@@ -207,8 +207,9 @@ public class Registro extends GestorWebDriver {
 	            String emailUsr = dataRegistro.get("cfEmail");
 	            String password = dataRegistro.get("cfPass");
 	            userMenusStpV.logoffLogin(emailUsr, password);
-	            PageMiCuentaStpV.goToMisDatosAndValidateData(dataRegistro, dCtxSh.pais.getCodigo_pais(), dCtxSh.appE, dCtxSh.channel, dFTest.driver);
-	            PageMiCuentaStpV.goToSuscripcionesAndValidateData(dataRegistro, dCtxSh.appE, dCtxSh.channel, dFTest.driver);        
+	            PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+	            pageMiCuentaStpV.goToMisDatosAndValidateData(dataRegistro, dCtxSh.pais.getCodigo_pais());
+	            pageMiCuentaStpV.goToSuscripcionesAndValidateData(dataRegistro);        
 	        }
         } else {
         	SecFooterStpV.validaRGPDFooter(version.register(), dCtxSh, dFTest.driver);

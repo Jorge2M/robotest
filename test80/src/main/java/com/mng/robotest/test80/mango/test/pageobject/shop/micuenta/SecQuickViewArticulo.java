@@ -8,25 +8,34 @@ import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 public class SecQuickViewArticulo extends WebdrvWrapp {
     
-    static String XPathContainerItem = "//div[@class='container-item']";
-    static String XPathContainerDescription = XPathContainerItem + "//div[@class[contains(.,'container-description-title')]]";
-    static String XPathReferencia = XPathContainerDescription + "//li[@class='reference']";
-    static String XPathNombre = XPathContainerDescription + "//li[1]";
-    static String XPathPrecio = XPathContainerDescription + "//ul/li[2]";
+	private final WebDriver driver;
+	
+    private static String XPathContainerItem = "//div[@class='container-item']";
+    private static String XPathContainerDescription = XPathContainerItem + "//div[@class[contains(.,'container-description-title')]]";
+    private static String XPathReferencia = XPathContainerDescription + "//li[@class='reference']";
+    private static String XPathNombre = XPathContainerDescription + "//li[1]";
+    private static String XPathPrecio = XPathContainerDescription + "//ul/li[2]";
     
-    public static boolean isVisibleUntil(int maxSecondsToWait, WebDriver driver) {
+	private SecQuickViewArticulo(WebDriver driver) {
+		this.driver = driver;
+	}
+	public static SecQuickViewArticulo getNew(WebDriver driver) {
+		return new SecQuickViewArticulo(driver);
+	}
+    
+    public boolean isVisibleUntil(int maxSecondsToWait) {
         return (isElementVisibleUntil(driver, By.xpath(XPathContainerItem), maxSecondsToWait));
     }
     
-    public static String getReferencia(WebDriver driver) {
+    public String getReferencia() {
         return (driver.findElement(By.xpath(XPathReferencia)).getText().replaceAll("\\D+",""));
     }
     
-    public static String getNombre(WebDriver driver) {
+    public String getNombre() {
         return (driver.findElement(By.xpath(XPathNombre)).getText());
     }
     
-    public static String getPrecio(WebDriver driver) {
+    public String getPrecio() {
         return (driver.findElement(By.xpath(XPathPrecio)).getText());
     }
 }

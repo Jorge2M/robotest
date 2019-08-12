@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
+import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.arq.annotations.validation.Validation;
@@ -46,10 +47,11 @@ public class PageAccesoMisComprasStpV {
 	@Step (
 		description="En el bloque de \"Si Registrado\", introducir el usuario/password (#{usuario}/#{password}) y pulsar \"Entrar\"", 
         expected="Aparece la página de \"Mis compras\"")
-    public static void enterForSiRegistrado(String usuario, String password, WebDriver driver) throws Exception {
+    public static void enterForSiRegistrado(String usuario, String password, Channel channel, WebDriver driver) throws Exception {
         PageAccesoMisCompras.inputUserPasswordBlockSi(usuario, password, driver); 
         PageAccesoMisCompras.clickEntrarBlockSi(driver);   
-        PageMisComprasStpV.validateIsPage(driver);
+        PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(channel, driver);
+        pageMisComprasStpV.validateIsPage();
     }
     
 	final static String tagUsuario = "@TagUsuario";

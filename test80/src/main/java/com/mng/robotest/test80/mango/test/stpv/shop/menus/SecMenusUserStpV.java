@@ -121,7 +121,8 @@ public class SecMenusUserStpV {
         expected="Aparece la página de \"Mi cuenta\"")
 	public void clickMenuMiCuenta() throws Exception {
         userMenus.clickMenuAndWait(UserMenu.miCuenta);	
-        PageMiCuentaStpV.validateIsPage(2, driver);
+        PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(channel, app, driver);
+        pageMiCuentaStpV.validateIsPage(2);
 	}
     
     @Step (

@@ -8,59 +8,68 @@ import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 public class SecDetalleCompraTienda extends WebdrvWrapp {
 
-    static String XPathDataTicket = "//div[@class[contains(.,'ticket-container')]]";
-    static String XPathNumTicket = XPathDataTicket + "//div[@class='info']/p[1]";  
-    static String XPathImporte = XPathDataTicket + "//div[@class='box-price' or @class='price' or @class[contains(.,'price-shop')]]";
-    static String XPathDireccion = XPathDataTicket + "//div[@class='info']/p[3]"; 
-    static String XPathCodigoBarrasImg = XPathDataTicket + "//div[@class='code']/img";
-    static String XPathArticulo = "//div[@onclick[contains(.,'openProductDetails')]]";
-
-    public static String getXPathArticulo(int posArticulo) {
+	private final WebDriver driver;
+	
+    private static String XPathDataTicket = "//div[@class[contains(.,'ticket-container')]]";
+    private static String XPathNumTicket = XPathDataTicket + "//div[@class='info']/p[1]";  
+    private static String XPathImporte = XPathDataTicket + "//div[@class='box-price' or @class='price' or @class[contains(.,'price-shop')]]";
+    private static String XPathDireccion = XPathDataTicket + "//div[@class='info']/p[3]"; 
+    private static String XPathCodigoBarrasImg = XPathDataTicket + "//div[@class='code']/img";
+    private static String XPathArticulo = "//div[@onclick[contains(.,'openProductDetails')]]";
+    
+    private SecDetalleCompraTienda(WebDriver driver) {
+    	this.driver = driver;
+    }
+    public static SecDetalleCompraTienda getNew(WebDriver driver) {
+    	return new SecDetalleCompraTienda(driver);
+    }
+    
+    private String getXPathArticulo(int posArticulo) {
         return ("(" + XPathArticulo + ")[" + posArticulo + "]");
     }
     
-    public static String getXPathReferenciaArticulo(int posArticulo) {
+    private String getXPathReferenciaArticulo(int posArticulo) {
         String xpathArticulo = getXPathArticulo(posArticulo);
         return (xpathArticulo + "//div[@class='reference']");
     }
     
-    public static String getXPathNombreArticulo(int posArticulo) {
+    private String getXPathNombreArticulo(int posArticulo) {
         String xpathArticulo = getXPathArticulo(posArticulo);
         return (xpathArticulo + "//div[@class='date']/span");
     }    
     
-    public static String getXPathPrecioArticulo(int posArticulo) {
+    private String getXPathPrecioArticulo(int posArticulo) {
         String xpathArticulo = getXPathArticulo(posArticulo);        
         return (xpathArticulo + "//div[@class='price' or @class[contains(.,'box-price')]]");
     }
     
-    public static boolean isVisibleSectionUntil(int maxSecondsToWait, WebDriver driver) {
+    public boolean isVisibleSectionUntil(int maxSecondsToWait) {
         return (isElementVisibleUntil(driver, By.xpath(XPathDataTicket), maxSecondsToWait));
     }
     
-    public static String getNumTicket(WebDriver driver) {
+    public String getNumTicket() {
         String dataNumTicket = driver.findElement(By.xpath(XPathNumTicket)).getText();
         return (getDataRightFrom(": ", dataNumTicket));
     }
     
-    public static String getImporte(WebDriver driver) {
+    public String getImporte() {
         return (driver.findElement(By.xpath(XPathImporte)).getText());
     }
     
-    public static String getDireccion(WebDriver driver) {
+    public String getDireccion() {
         return (driver.findElement(By.xpath(XPathDireccion)).getText());
     }
     
-    public static int getNumPrendas(WebDriver driver) {
+    public int getNumPrendas() {
         return (driver.findElements(By.xpath(XPathArticulo)).size());
     }
     
-    private static String getDataRightFrom(String stringFrom, String data) {
+    private String getDataRightFrom(String stringFrom, String data) {
         int beginIndex = data.indexOf(stringFrom) + stringFrom.length();
         return (data.substring(beginIndex));
     }
     
-    public static boolean isVisibleCodigoBarrasImg(WebDriver driver) {
+    public boolean isVisibleCodigoBarrasImg() {
         if (isElementVisible(driver, By.xpath(XPathCodigoBarrasImg))) {
             //Consideramos que la imagen ha de tener unas dimensiones mínimas de 30x50 para ser visible
             int width=driver.findElement(By.xpath(XPathCodigoBarrasImg)).getSize().getWidth();
@@ -71,32 +80,32 @@ public class SecDetalleCompraTienda extends WebdrvWrapp {
         return false;
     }
     
-    public static String getReferenciaArticulo(int posArticulo, WebDriver driver) {
+    public String getReferenciaArticulo(int posArticulo) {
         String xpathReferencia = getXPathReferenciaArticulo(posArticulo);
         return (driver.findElement(By.xpath(xpathReferencia)).getText().replaceAll("\\D+",""));
     }
     
-    public static String getNombreArticulo(int posArticulo, WebDriver driver) {
+    public String getNombreArticulo(int posArticulo) {
         String xpathNombre = getXPathNombreArticulo(posArticulo);
         return (driver.findElement(By.xpath(xpathNombre)).getText());
     }
     
-    public static String getPrecioArticulo(int posArticulo, WebDriver driver) {
+    public String getPrecioArticulo(int posArticulo) {
         String xpathPrecio = getXPathPrecioArticulo(posArticulo);
         return (driver.findElement(By.xpath(xpathPrecio)).getText());
     }
     
-    public static ArticuloScreen getDataArticulo(int posArticulo, WebDriver driver) {
+    public ArticuloScreen getDataArticulo(int posArticulo) {
         //Sólo informamos algunos datos relevantes del artículo
         ArticuloScreen articulo = new ArticuloScreen();
-        articulo.setReferencia(getReferenciaArticulo(posArticulo, driver));
-        articulo.setNombre(getNombreArticulo(posArticulo, driver));
-        articulo.setPrecio(getPrecioArticulo(posArticulo, driver));
+        articulo.setReferencia(getReferenciaArticulo(posArticulo));
+        articulo.setNombre(getNombreArticulo(posArticulo));
+        articulo.setPrecio(getPrecioArticulo(posArticulo));
         
         return articulo;
     }
     
-    public static void selectArticulo(int posArticulo, WebDriver driver) {
+    public void selectArticulo(int posArticulo) {
         String xpathArticulo = getXPathArticulo(posArticulo);
         driver.findElement(By.xpath(xpathArticulo)).click();
     }
