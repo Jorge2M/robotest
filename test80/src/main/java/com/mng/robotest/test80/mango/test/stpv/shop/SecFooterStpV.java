@@ -215,9 +215,18 @@ public class SecFooterStpV {
     	description="Se selecciona el link para el cambio de país", 
         expected="Aparece el modal para el cambio de país")
      public static void cambioPais(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-         SecFooter.clickLinkCambioPais(driver, dCtxSh.appE);
+    	 SecFooter.clickLinkCambioPais(driver, dCtxSh.appE);
+    	 if (!ModalCambioPaisStpV.validateIsVisible(3, driver)) {
+    		 //Hay un problema según el cuál en ocasiones no funciona el click así que lo repetimos
+    		 SecFooter.clickLinkCambioPais(driver, dCtxSh.appE); 
+    	 }
          ModalCambioPaisStpV.validateIsVisible(5, driver);
-         ModalCambioPaisStpV.cambioPais(dCtxSh, driver);
+         try {
+        	 ModalCambioPaisStpV.cambioPais(dCtxSh, driver); 
+         }
+         catch (Exception e) {
+        	 System.out.println(e);
+         }
      }
      
      @Step (

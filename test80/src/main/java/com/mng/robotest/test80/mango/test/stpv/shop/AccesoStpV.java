@@ -215,19 +215,20 @@ public class AccesoStpV {
     @Step (
     	description=
     		"Datos del cambio de país <br>" + 
-    	    "<b>" + tagNombrePaisOrigen + "</b> (" + tagCodigoPaisOrigen + "), <b>idioma " + tagNombreIdiomaOrigen + "</b>. Nodo: <b style=\"color:blue\">" + tagNodoOrigen + "</b><br>" +  
-    	    "<b>#{paisDestino.getNombre_pais()}</b> (#{paisDestino.getCodigo_pais()}), <b>idioma #{idiomaDestino.getLiteral()}</b>. Nodo: <b style=\"color:blue\">" + tagNodoDestino +  "</b>",
+    	    "<b>" + tagNombrePaisOrigen + "</b> (" + tagCodigoPaisOrigen + "), <b>idioma " + tagNombreIdiomaOrigen + "</b><br>" +  
+    	    "<b>#{paisDestino.getNombre_pais()}</b> (#{paisDestino.getCodigo_pais()}), <b>idioma #{idiomaDestino.getLiteral()}</b>",
     	expected=
-    		"Se accede a la shop de #{paisDestino.getNombre_pais()} en #{idiomaDestino.getLiteral()}")
+    		"Se accede a la shop de #{paisDestino.getNombre_pais()} en #{idiomaDestino.getLiteral()}",
+    	saveHtmlPage=SaveWhen.Always)
     public static void accesoPRYCambioPais(DataCtxShop dCtxSh, Pais paisDestino, IdiomaPais idiomaDestino, WebDriver driver) 
     throws Exception {
+        DatosStep datosStep = TestCaseData.getDatosCurrentStep();
+        datosStep.replaceInDescription(tagNombrePaisOrigen, dCtxSh.pais.getNombre_pais());
+        datosStep.replaceInDescription(tagCodigoPaisOrigen, dCtxSh.pais.getCodigo_pais());
+        datosStep.replaceInDescription(tagNombreIdiomaOrigen, dCtxSh.idioma.getLiteral());
+    	
         AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, driver);
-
-        //TODO esto es temporal
-        // Se realiza una captura de ./errorPage.faces pues allí se pueden encontrar los datos de la instancia
-        String nodoOrigen = WebDriverMngUtils.getNodeFromErrorPage(driver);
         
-        // STEPs REALIZAMOS EL PROCESO DE CAMBIO DE PAÍS
         Pais paisOriginal = dCtxSh.pais;
         IdiomaPais idiomaOriginal = dCtxSh.idioma;
         dCtxSh.pais = paisDestino;
@@ -236,16 +237,6 @@ public class AccesoStpV {
         dCtxSh.pais = paisOriginal;
         dCtxSh.idioma = idiomaOriginal;
         
-        //TODO esto es temporal
-        String nodoDestino = WebDriverMngUtils.getNodeFromErrorPage(driver);
-        
-        DatosStep datosStep = TestCaseData.getDatosCurrentStep();
-        datosStep.replaceInDescription(tagNombrePaisOrigen, dCtxSh.pais.getNombre_pais());
-        datosStep.replaceInDescription(tagCodigoPaisOrigen, dCtxSh.pais.getCodigo_pais());
-        datosStep.replaceInDescription(tagNombreIdiomaOrigen, dCtxSh.idioma.getLiteral());
-        datosStep.replaceInDescription(tagNodoOrigen, nodoOrigen);
-        datosStep.replaceInDescription(tagNodoDestino, nodoDestino);        
-
         //No hacemos nada, simplemente es un paso informativo
     }
     

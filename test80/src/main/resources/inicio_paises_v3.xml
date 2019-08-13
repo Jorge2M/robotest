@@ -5467,7 +5467,7 @@
 <!-- Hay un pequeño problema y es que en Shop aparece "KREDİ KARTI"  y en Outlet "KREDI KARTI". Mientras que siga así tendremos que definir las siguientes 2 líneas-->
 <pago 
 	type="KrediKarti" shop="s" outlet="n" votf="n"
-	nombre="KREDİ KARTI" namefilter="KREDI KARTI" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5311570000000005" mescad="12" anycad="2020" cvc="000">&TPV-041;</pago>
+	nombre="KREDİ KARTI" namefilter="KREDI KARTI" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4543590000000006" mescad="10" anycad="2020" cvc="737">&TPV-041;</pago>
 <pago 
 	type="KrediKarti" shop="n" outlet="s" votf="n"
 	nombre="KREDI KARTI" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5311570000000005" mescad="12" anycad="2020" cvc="000">&TPV-041;</pago>
