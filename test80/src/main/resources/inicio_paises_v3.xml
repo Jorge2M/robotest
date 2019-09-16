@@ -8,7 +8,7 @@
 <!ENTITY TPV-007 "<tpv id='007' clase='TarjetaMango'       estado=''    notificaciones='n'/>">
 <!ENTITY TPV-008 "<tpv id='008' clase='TarjetaMango'       estado=''    notificaciones='n'/>">
 <!ENTITY TPV-016 "<tpv id='016' clase='Falcon'             estado='0;4' notificaciones='s'/>">
-<!ENTITY TPV-018 "<tpv id='018' clase='Falcon'             estado='3' 	notificaciones='s'/>">
+<!ENTITY TPV-018 "<tpv id='018' clase='Falcon'             estado='0' 	notificaciones='s'/>">
 <!ENTITY TPV-022 "<tpv id='022' clase='Yapi'               estado='0'   notificaciones='n'/>">
 <!ENTITY TPV-023 "<tpv id='023' clase='Is'                 estado='0'   notificaciones='n'/>">
 <!ENTITY TPV-024 "<tpv id='024' clase='Ak'                 estado='0'   notificaciones='n'/>">
@@ -5467,10 +5467,10 @@
 <!-- Hay un pequeño problema y es que en Shop aparece "KREDİ KARTI"  y en Outlet "KREDI KARTI". Mientras que siga así tendremos que definir las siguientes 2 líneas-->
 <pago 
 	type="KrediKarti" shop="s" outlet="n" votf="n"
-	nombre="KREDİ KARTI" namefilter="KREDI KARTI" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4543590000000006" mescad="10" anycad="2020" cvc="737">&TPV-041;</pago>
+	nombre="KREDİ KARTI" namefilter="KREDI KARTI" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4543590000000006" mescad="10" anycad="2020" cvc="737">&TPV-042;</pago>
 <pago 
 	type="KrediKarti" shop="n" outlet="s" votf="n"
-	nombre="KREDI KARTI" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5311570000000005" mescad="12" anycad="2020" cvc="000">&TPV-041;</pago>
+	nombre="KREDI KARTI" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5311570000000005" mescad="12" anycad="2020" cvc="000">&TPV-042;</pago>
 <pago 
 	type="tpvvotf" shop="n" outlet="n" votf="s"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-198;</pago>

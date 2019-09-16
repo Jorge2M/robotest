@@ -10,8 +10,6 @@ import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecDataProduct.ColorType;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper;
-import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper.UserMenu;
 
 @SuppressWarnings({"static-access"})
 public class ArticuloNavigations {
@@ -43,7 +41,7 @@ public class ArticuloNavigations {
         }
         
         // Si existe, almacenamos el color para posteriores validaciones
-        articulo.setColor(pageFicha.secDataProduct.getNombreColorSelected(channel, driver));
+        articulo.setColorName(pageFicha.secDataProduct.getNombreColorSelected(channel, driver));
 
         //Selección de la TALLA
         if (articleStock.getSize()!=null && "".compareTo(articleStock.getSize())!=0) {

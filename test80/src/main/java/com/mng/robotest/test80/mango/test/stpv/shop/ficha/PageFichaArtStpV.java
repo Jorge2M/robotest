@@ -156,7 +156,7 @@ public class PageFichaArtStpV {
 
     public void selectColorAndSaveData(ArticuloScreen articulo) throws Exception {
         selectColor(articulo.getCodigoColor());
-        articulo.setColor(pageFicha.secDataProduct.getNombreColorSelected(channel, driver));
+        articulo.setColorName(pageFicha.secDataProduct.getNombreColorSelected(channel, driver));
     }
     
     @Step (

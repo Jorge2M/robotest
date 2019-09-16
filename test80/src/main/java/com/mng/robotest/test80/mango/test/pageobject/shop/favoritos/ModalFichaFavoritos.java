@@ -11,88 +11,115 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen.Color;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 
 
 public class ModalFichaFavoritos extends WebdrvWrapp {
     
-    static String XPathFichaProducto = "//div[@class='favorites-quickview']";
-    static String XPathImgColorSelectedFicha = XPathFichaProducto + "//div[@class[contains(.,'color-item')] and @class[contains(.,'active')]]/img";
+	private final WebDriver driver;
+	
+    private final static String XPathFichaProducto = "//div[@class='favorites-quickview']";
+    private final static String XPathColorSelectedFicha = 
+    								XPathFichaProducto + 
+    								"//div[@class[contains(.,'color-item')] and @class[contains(.,'active')]]";
+    private final static String XPathImgColorSelectedFicha = XPathColorSelectedFicha + "/img";
     
-    public static String getXPathFichaProducto(String refProducto) {
+    private ModalFichaFavoritos(WebDriver driver) {
+    	this.driver = driver;
+    }
+    
+    public static ModalFichaFavoritos getNew(WebDriver driver) {
+    	return new ModalFichaFavoritos(driver);
+    }
+    
+    public WebDriver getWebDriver() {
+    	return this.driver;
+    }
+    
+    private String getXPathFichaProducto(String refProducto) {
         return (XPathFichaProducto + "//img[@src[contains(.,'" + refProducto + "')]]/ancestor::div[@class='favorites-quickview']");
     }
     
-    public static String getXPathButtonAddBolsa(String refProducto) {
+    private String getXPathButtonAddBolsa(String refProducto) {
         return (getXPathFichaProducto(refProducto) + "//div[@class[contains(.,'add-product')]]");
     }
     
-    public static String getXPathCapaTallas(String refProducto) {
+    private String getXPathCapaTallas(String refProducto) {
         return (getXPathFichaProducto(refProducto) + "//div[@id[contains(.,'modalSelectSize')]]");
     }
     
-    public static String getXPathSelectorTalla(String refProducto) {
+    private String getXPathSelectorTalla(String refProducto) {
         return (getXPathFichaProducto(refProducto) + "//div[@id[contains(.,'sizeSelector')]]");
     }
     
-    public static String getXPathTalla(String refProducto) {
+    private String getXPathTalla(String refProducto) {
         return (getXPathCapaTallas(refProducto) + "//li[@onclick[contains(.,'changeSize')]]");
     }
     
-    public static String getXPathAspaFichaToClose(String refProducto) {
+    private String getXPathAspaFichaToClose(String refProducto) {
         return (getXPathFichaProducto(refProducto) + "//span[@id='closeQuickviewModal']");
     }
     
-    public static String getNombreColorSelectedFicha(WebDriver driver) {
+    public String getNombreColorSelectedFicha() {
         if (isElementVisible(driver, By.xpath(XPathImgColorSelectedFicha))) {
             return (driver.findElement(By.xpath(XPathImgColorSelectedFicha)).getAttribute("title"));
         }
         return "";
     }
     
-    public static boolean isVisibleFichaUntil(String refProducto, int maxSecondsToWait, WebDriver driver) {
+    public String getCodigoColorSelectedFicha() {
+        if (isElementVisible(driver, By.xpath(XPathColorSelectedFicha))) {
+        	String id = driver.findElement(By.xpath(XPathColorSelectedFicha)).getAttribute("id");
+        	if (!id.isEmpty()) {
+        		return (id.replace("color_", ""));
+        	}
+        }
+        return "";
+    }
+    
+    public boolean isVisibleFichaUntil(String refProducto, int maxSecondsToWait) {
         String xpathFicha = getXPathFichaProducto(refProducto);
         return (isElementVisibleUntil(driver, By.xpath(xpathFicha), maxSecondsToWait));
     }
     
-    public static boolean isInvisibleFichaUntil(String refProducto, int maxSecondsToWait, WebDriver driver) {
+    public boolean isInvisibleFichaUntil(String refProducto, int maxSecondsToWait) {
         String xpathFicha = getXPathFichaProducto(refProducto);
         return (isElementInvisibleUntil(driver, By.xpath(xpathFicha), maxSecondsToWait));
     }
     
-    public static boolean isColorSelectedInFicha(String nombreColor, WebDriver driver) {
-        String colorSelected = getNombreColorSelectedFicha(driver);
-        return (colorSelected.contains(nombreColor));
+    public boolean isColorSelectedInFicha(Color color) {
+        if (!color.getCodigoColor().isEmpty()) {
+        	return (color.getCodigoColor().compareTo(getCodigoColorSelectedFicha())==0);
+        }
+        return (getNombreColorSelectedFicha().compareTo(color.getColorName())==0);
     }
     
-    /**
-     * @return el literal de la talla seleccionada
-     */
-    public static String addArticleToBag(String refProducto, int posicionTalla, Channel channel, WebDriver driver) throws Exception {
-        String tallaSelected = selectTallaAvailable(refProducto, posicionTalla, driver);
-        clickButtonAddToBagAndWait(refProducto, channel, driver);
+    public String addArticleToBag(String refProducto, int posicionTalla, Channel channel) throws Exception {
+        String tallaSelected = selectTallaAvailable(refProducto, posicionTalla);
+        clickButtonAddToBagAndWait(refProducto, channel);
         return tallaSelected;
     }
     
-    public static void clickButtonAddToBagAndWait(String refProducto, Channel channel, WebDriver driver) throws Exception {
+    public void clickButtonAddToBagAndWait(String refProducto, Channel channel) throws Exception {
         String xpathAdd = getXPathButtonAddBolsa(refProducto);
         driver.findElement(By.xpath(xpathAdd)).click();
         int maxSecondsToWait = 2;
         SecBolsa.isInStateUntil(StateBolsa.Open, channel, maxSecondsToWait, driver);
     }
     
-    public static String selectTalla(String refProducto, int posicionTalla, WebDriver driver) {
-        despliegaTallasAndWait(refProducto, driver);
-        WebElement talla = getListaTallas(refProducto, driver).get(posicionTalla);
+    public String selectTalla(String refProducto, int posicionTalla) {
+        despliegaTallasAndWait(refProducto);
+        WebElement talla = getListaTallas(refProducto).get(posicionTalla);
         String litTalla = talla.getText();
         talla.click();
         return litTalla;
     }
     
-    public static String selectTallaAvailable(String refProducto, int posicionTalla, WebDriver driver) {
-        despliegaTallasAndWait(refProducto, driver);
-        List<WebElement> listTallas = getListaTallas(refProducto, driver);
+    public String selectTallaAvailable(String refProducto, int posicionTalla) {
+        despliegaTallasAndWait(refProducto);
+        List<WebElement> listTallas = getListaTallas(refProducto);
         
         //Filtramos y nos quedamos sólo con las tallas disponibles
         List<WebElement> listTallasAvailable = new ArrayList<>();
@@ -108,19 +135,19 @@ public class ModalFichaFavoritos extends WebdrvWrapp {
         return litTalla;
     }    
     
-    public static List<WebElement> getListaTallas(String refProducto, WebDriver driver) {
+    public List<WebElement> getListaTallas(String refProducto) {
         String xpathTalla = getXPathTalla(refProducto);
         return (driver.findElements(By.xpath(xpathTalla)));
     }
     
-    public static void despliegaTallasAndWait(String refProducto, WebDriver driver) {
+    public void despliegaTallasAndWait(String refProducto) {
         String xpathSelector = getXPathSelectorTalla(refProducto);
         driver.findElement(By.xpath(xpathSelector)).click();
         String xpathCapaTallas = getXPathCapaTallas(refProducto);
         new WebDriverWait(driver, 1).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathCapaTallas)));
     }
     
-    public static void closeFicha(String refProducto, WebDriver driver) {
+    public void closeFicha(String refProducto) {
         String xpathAspa = getXPathAspaFichaToClose(refProducto);
         driver.findElement(By.xpath(xpathAspa)).click();
     }

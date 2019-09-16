@@ -12,7 +12,7 @@ public class PageGoogle extends WebdrvWrapp {
     private static final String URLacceso = "http://www.google.es";
     static final String XPath_inputText = "//input[@type='text']";
     static final String XPath_linkNoPubli = "//div[@class='rc']//a";
-    static final String XPath_LinkNoPubliText = XPath_linkNoPubli + "/h3";
+    static final String XPath_LinkNoPubliText = XPath_linkNoPubli + "//div[@class='ellip']";
     
     public static void accessViaURL(WebDriver driver) {
         driver.get(URLacceso);

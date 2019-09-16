@@ -23,7 +23,6 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
-import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavoritos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.Menu1rstLevel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuTreeApp;
@@ -117,7 +116,9 @@ public class Favoritos extends GestorWebDriver {
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         SecBolsaStpV.clear(dCtxSh, dFTest.driver);
-        PageFavoritosStpV.clearAll(dataFavoritos, dCtxSh, dFTest.driver);
+        
+        PageFavoritosStpV pageFavoritosStpV = PageFavoritosStpV.getNew(dFTest.driver);
+        pageFavoritosStpV.clearAll(dataFavoritos, dCtxSh);
         
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
@@ -132,14 +133,14 @@ public class Favoritos extends GestorWebDriver {
         
         secMenusStpV.getMenusUser().selectFavoritos(dataFavoritos);
         ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);
-        PageFavoritosStpV.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dFTest);
+        pageFavoritosStpV.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel);
         if (dCtxSh.channel==Channel.movil_web) {
             SecBolsaStpV.clickAspaForCloseMobil(dFTest.driver);
-            PageFavoritosStpV.validaIsPageOK(dataFavoritos, dFTest.driver);
+            pageFavoritosStpV.validaIsPageOK(dataFavoritos);
         }
         
-        PageFavoritosStpV.clear(artToPlay, dataFavoritos, dFTest);
-        PageFavoritosStpV.clearAll(dataFavoritos, dCtxSh, dFTest.driver);
+        pageFavoritosStpV.clear(artToPlay, dataFavoritos);
+        pageFavoritosStpV.clearAll(dataFavoritos, dCtxSh);
     }
     
     @Test(
@@ -158,7 +159,9 @@ public class Favoritos extends GestorWebDriver {
         //TestAB.activateTestABfiltrosMobil(1, dCtxSh, getDriver().driver); //!!!!!
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
         SecBolsaStpV.clear(dCtxSh, dFTest.driver);
-        PageFavoritosStpV.clearAll(dataFavoritos, dCtxSh, dFTest.driver);
+        
+        PageFavoritosStpV pageFavoritosStpV = PageFavoritosStpV.getNew(dFTest.driver);
+        pageFavoritosStpV.clearAll(dataFavoritos, dCtxSh);
         
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
@@ -179,23 +182,22 @@ public class Favoritos extends GestorWebDriver {
         SecBolsaStpV.clear(dCtxSh, dFTest.driver);
         secMenusStpV.getMenusUser().selectFavoritos(dataFavoritos);
         
-        // TODO
         // Cuando la funcionalidad de "Share Favorites" suba a producción, este if debería eliminarse
-        if (PageFavoritos.isShareFavoritesVisible(dFTest.driver)) {
+        //if (pageFavoritosStpV.getPageFavoritos().isShareFavoritesVisible()) {
         	// Codigo que se ejecutará solamente si el elemento de compartir favoritos existe
-        	PageFavoritosStpV.clickShareIsOk(dFTest);
-            PageFavoritosStpV.closeShareModal(dFTest);
-        }
+        	pageFavoritosStpV.clickShareIsOk();
+            pageFavoritosStpV.closeShareModal();
+        //}
         
         ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);
-        PageFavoritosStpV.clickArticuloImg(artToPlay, dFTest);
-        PageFavoritosStpV.modalFichaFavoritos.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dCtxSh.appE, dFTest);       
+        pageFavoritosStpV.clickArticuloImg(artToPlay);
+        pageFavoritosStpV.getModalFichaFavoritosStpV().addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dCtxSh.appE);       
         if (dCtxSh.channel==Channel.movil_web) {
-            PageFavoritosStpV.validaIsPageOK(dataFavoritos, dFTest.driver);
+            pageFavoritosStpV.validaIsPageOK(dataFavoritos);
         } else {
-            PageFavoritosStpV.modalFichaFavoritos.closeFicha(artToPlay, dFTest);
+            pageFavoritosStpV.getModalFichaFavoritosStpV().closeFicha(artToPlay);
         }
         
-        PageFavoritosStpV.clear(artToPlay, dataFavoritos, dFTest);
+        pageFavoritosStpV.clear(artToPlay, dataFavoritos);
     }
 }

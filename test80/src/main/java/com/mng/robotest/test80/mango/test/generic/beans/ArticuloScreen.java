@@ -2,7 +2,6 @@ package com.mng.robotest.test80.mango.test.generic.beans;
 
 import java.util.ArrayList;
 
-import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
@@ -12,7 +11,7 @@ public class ArticuloScreen {
 	
     String referencia = "";
     String nombre = "";
-    String color = "";
+    String colorName = "";
     String codigoColor = "";
     String tallaAlf = "";
     String tallaNum = "";
@@ -55,21 +54,22 @@ public class ArticuloScreen {
         this.nombre = nombre;
     }
 	
-    public String getColor() {
-        return this.color;
+    public String getColorName() {
+        return this.colorName;
     }
 	
     public String getCodigoColor() {
         return this.codigoColor;
     }
 	
-    public void setColor(String color) {
-        this.color = color;
+    public void setColorName(String colorName) {
+        this.colorName = colorName;
     }
 	
     public void setCodigoColor(String codigoColor) {
         this.codigoColor = codigoColor;
     }
+
 	
     public String getTallaNum() {
         return this.tallaNum;
@@ -145,24 +145,11 @@ public class ArticuloScreen {
         this.numero+=incremento;
     }
 	
-    public void clone(ArticuloScreen articulo) {
-        this.referencia = articulo.referencia;
-        this.nombre = articulo.nombre;
-        this.color = articulo.color;
-        this.codigoColor = articulo.codigoColor;
-        this.tallaAlf = articulo.tallaAlf;
-        this.tallaNum = articulo.tallaNum;
-        this.precio = articulo.precio;
-        this.precioSinDesc = articulo.precioSinDesc;
-        this.numero = articulo.numero;
-        this.valePais = articulo.valePais;
-    }
-	
     public boolean compare(ArticuloScreen articulo) {
         boolean iguales = false;
         if (this.referencia.trim().compareTo(articulo.getReferencia().trim())==0 &&
             this.nombre.compareTo(articulo.getNombre())==0 &&
-            this.color.compareTo(articulo.getColor())==0 &&
+            this.colorName.compareTo(articulo.getColorName())==0 &&
             this.tallaAlf.compareTo(articulo.getTallaAlf())==0) {
             iguales = true;
         }
@@ -183,6 +170,33 @@ public class ArticuloScreen {
        	return
        	    (getReferencia().compareTo(articulo.getReferencia())==0 &&
        	    (getTallaNum().compareTo(articulo.getTallaNum())==0 || getTallaAlf().compareTo(articulo.getTallaAlf())==0) &&
-            (getColor().compareTo(articulo.getColor())==0 || getCodigoColor().compareTo(articulo.getCodigoColor())==0));
+            (getColorName().compareTo(articulo.getColorName())==0 || getCodigoColor().compareTo(articulo.getCodigoColor())==0));
+    }
+    
+    public Color getColor() {
+    	return new Color();
+    }
+    
+    public class Color {
+    	public String getCodigoColor() {
+    		return codigoColor;
+    	}
+    	public String getColorName() {
+    		return colorName;
+    	}
+    	@Override
+    	public String toString() {
+    		StringBuilder retorno = new StringBuilder();
+    		if (!colorName.isEmpty()) {
+    			retorno.append(colorName + " (");
+    		}
+    		if (!codigoColor.isEmpty()) {
+    			retorno.append(codigoColor);
+    		}
+    		if (!colorName.isEmpty()) {
+    			retorno.append(")");
+    		}
+    		return retorno.toString();
+    	}
     }
 }

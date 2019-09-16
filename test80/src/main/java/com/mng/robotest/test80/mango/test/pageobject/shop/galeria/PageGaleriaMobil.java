@@ -187,7 +187,7 @@ public class PageGaleriaMobil extends PageGaleria {
         articulo.setNombre(getNombreArticulo(artWElem));
         articulo.setPrecio(getPrecioArticulo(artWElem));
         articulo.setCodigoColor(getCodColorArticulo(numArticulo));
-        articulo.setColor(getNameColorFromCodigo(articulo.getCodigoColor()));
+        articulo.setColorName(getNameColorFromCodigo(articulo.getCodigoColor()));
         articulo.setNumero(1);
         
         return articulo;

@@ -1,6 +1,5 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.favoritos;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 
@@ -12,7 +11,7 @@ import com.mng.robotest.test80.arq.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.PageFavoritos;
+import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.ModalFichaFavoritos;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 
 /**
@@ -23,38 +22,50 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 @SuppressWarnings({"static-access"})
 public class ModalFichaFavoritosStpV {
     
+	private final WebDriver driver;
+	private final ModalFichaFavoritos modalFichaFavoritos;
+	
+	private ModalFichaFavoritosStpV(ModalFichaFavoritos modalFichaFavoritos) {
+		this.modalFichaFavoritos = modalFichaFavoritos;
+		this.driver = modalFichaFavoritos.getWebDriver();
+	}
+	
+	public static ModalFichaFavoritosStpV getNew(ModalFichaFavoritos modalFichaFavoritos) {
+		return new ModalFichaFavoritosStpV(modalFichaFavoritos);
+	}
+	
     @Validation
-    public static ChecksResult validaIsVisibleFicha(ArticuloScreen articulo, WebDriver driver) { 
+    public ChecksResult validaIsVisibleFicha(ArticuloScreen articulo) { 
     	ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 2;
     	validations.add(
     		"En Favoritos es visible el modal de la ficha del producto " + articulo.getRefProducto() + " (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		PageFavoritos.modalFichaFavoritos.isVisibleFichaUntil(articulo.getRefProducto(), maxSecondsWait, driver), State.Warn);
+    		modalFichaFavoritos.isVisibleFichaUntil(articulo.getRefProducto(), maxSecondsWait), State.Warn);
     	validations.add(
-            "Aparece seleccionado el color " + articulo.getColor(),
-            PageFavoritos.modalFichaFavoritos.isColorSelectedInFicha(articulo.getColor(), driver), State.Warn);
+            "Aparece seleccionado el color <b>" + articulo.getColor() + "</b>",
+            modalFichaFavoritos.isColorSelectedInFicha(articulo.getColor()), State.Warn);
         return validations;
     }  
     
     @Step(
     	description="Desde Favoritos añadimos el artículo <b>#{artToAddBolsa.getRefProducto()}</b> (1a talla disponible) a la bolsa",
     	expected="El artículo aparece en la bolsa")
-    public static void addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Channel channel, 
-    									AppEcom app, DataFmwkTest dFTest) throws Exception {
+    public void addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Channel channel, AppEcom app) 
+    throws Exception {
         String refProductoToAdd = artToAddBolsa.getRefProducto();
-        String tallaSelected = PageFavoritos.modalFichaFavoritos.addArticleToBag(refProductoToAdd, 1/*posicionTalla*/, channel, dFTest.driver);
+        String tallaSelected = modalFichaFavoritos.addArticleToBag(refProductoToAdd, 1/*posicionTalla*/, channel);
         artToAddBolsa.setTallaAlf(tallaSelected);
         dataBolsa.addArticulo(artToAddBolsa);
 
         //Validaciones
         switch (channel) {
         case desktop:
-            SecBolsaStpV.validaAltaArtBolsa(dataBolsa, channel, AppEcom.shop, dFTest.driver);
+            SecBolsaStpV.validaAltaArtBolsa(dataBolsa, channel, AppEcom.shop, driver);
             break;
         default:
         case movil_web:
             //En este caso no se hace visible la bolsa después de añadir a Favoritos con lo que sólo validamos el número
-            SecBolsaStpV.validaNumArtEnBolsa(dataBolsa, channel, app, dFTest.driver);
+            SecBolsaStpV.validaNumArtEnBolsa(dataBolsa, channel, app, driver);
             break;
         }
     }
@@ -62,19 +73,19 @@ public class ModalFichaFavoritosStpV {
     @Step (
     	description="En Favoritos cerramos la ficha del producto <b>#{articulo.getRefProducto()}</b>",
         expected="Desaparece la ficha")
-    public static void closeFicha(ArticuloScreen articulo, DataFmwkTest dFTest) {
+    public void closeFicha(ArticuloScreen articulo) {
         String refProductoToClose = articulo.getRefProducto();
-        PageFavoritos.modalFichaFavoritos.closeFicha(refProductoToClose, dFTest.driver);
+        modalFichaFavoritos.closeFicha(refProductoToClose);
         
         //Validaciones
         int maxSecondsWait = 2;
-        checkFichaDisappearsFromFavorites(articulo.getRefProducto(), maxSecondsWait, dFTest.driver);
+        checkFichaDisappearsFromFavorites(articulo.getRefProducto(), maxSecondsWait);
     }
     
     @Validation (
         description="Desaparece de Favoritos la ficha del producto #{refProducto} (lo esperamos hasta #{maxSecondsWait} segundos)",
         level=State.Warn)
-    public static boolean checkFichaDisappearsFromFavorites(String refProducto, int maxSecondsWait, WebDriver driver) {
-    	return (PageFavoritos.modalFichaFavoritos.isInvisibleFichaUntil(refProducto, maxSecondsWait, driver));
+    public boolean checkFichaDisappearsFromFavorites(String refProducto, int maxSecondsWait) {
+    	return (modalFichaFavoritos.isInvisibleFichaUntil(refProducto, maxSecondsWait));
     }
 }

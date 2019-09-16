@@ -58,7 +58,8 @@ public class SecMenusUserStpV {
         expected="Aparece la página de gestión de favoritos con los artículos correctos")
     public void selectFavoritos(DataFavoritos dataFavoritos) throws Exception {
 		userMenus.clickMenuAndWait(UserMenu.favoritos);
-        PageFavoritosStpV.validaIsPageOK(dataFavoritos, driver);
+		PageFavoritosStpV pageFavoritosStpV = PageFavoritosStpV.getNew(driver);
+		pageFavoritosStpV.validaIsPageOK(dataFavoritos);
     }
     
 	@Step (

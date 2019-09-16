@@ -90,8 +90,8 @@ public class ValidatorContentBolsa {
 			}
 			break;
 		case Color:
-			if (articleExpected.getColor().toLowerCase().compareTo(articuloScreen.color.toLowerCase())!=0 &&
-				articleExpected.getColor().compareTo(Constantes.colorDesconocido)!=0) {
+			if (articleExpected.getColorName().toLowerCase().compareTo(articuloScreen.color.toLowerCase())!=0 &&
+				articleExpected.getColorName().compareTo(Constantes.colorDesconocido)!=0) {
 				return false;
 			}
 			break;
