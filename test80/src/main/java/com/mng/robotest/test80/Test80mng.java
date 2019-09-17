@@ -10,9 +10,11 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
+import org.apache.commons.cli.OptionGroup;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+import com.mng.robotest.test80.arq.access.CommandLineAccess;
 import com.mng.robotest.test80.arq.listeners.CallBack;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.filter.TestMethod;
@@ -28,24 +30,11 @@ import com.mng.robotest.test80.mango.test.suites.*;
 
 public class Test80mng { 
 
-    public static String HelpNameParam = "help";
-    public static String SuiteNameParam = "suite";
-    public static String GroupsNameParam = "groups";
-    public static String BrowserNameParam = "browser";
-    public static String ChannelNameParam = "channel";
-    public static String AppNameParam = "application";
-    public static String VersionNameParam = "version";
-    public static String URLNameParam = "url";
     public static String CountrysNameParam = "countrys";
     public static String LineasNameParam = "lineas";
     public static String PaymentsNameParam = "payments";
-    public static String TCaseNameParam = "tcases";
     
-    public static String ServerDNSNameParam = "serverDNS";
     public static String UrlManto = "urlmanto";
-    public static String RecicleWD = "reciclewd";
-    public static String NetAnalysis = "net";
-    public static String Mails = "mails";
     public static String TypeAccessParam = "typeAccess";    
     public static String CallBackResource = "callbackresource";
     public static String CallBackMethod = "callbackmethod";
@@ -62,11 +51,14 @@ public class Test80mng {
      * Parseamos la línea de comandos y ejecutamos la TestSuite correspondiente mediante la XML programática 
      */
     public static void main(String[] args) throws Exception { 
+    	OptionGroup optionsTest80 = defineMoreOptions();
+    	CommandLineAccess cmdLineAccess = CommandLineAccess.getNew(optionsTest80);
+    	
         if (!checkHelpParameterCase(args)) {
             Options options = setOptionsRelatedCommandLine();
             ParamsBean params = null;
             try {
-                params = parseCheckAndStoreParams(options, args);     
+                params = checkAndGetParams(options, args);     
             }
             catch (ParseException e) {
                 System.out.println(e.getLocalizedMessage());
@@ -81,53 +73,9 @@ public class Test80mng {
         }
     }
     
-    private static Options setOptionsRelatedCommandLine() {
-        Options options = new Options();
-        
-        //Required
-        Option suite = Option.builder(SuiteNameParam)
-            .required(true)
-            .hasArg()
-            .desc("TestSuite Name")
-            .build();
-        
-        Option groups = Option.builder(GroupsNameParam)
-            .required(false)
-            .hasArg()
-            .desc("Groups of tests to include")
-            .build();
-                 
-        Option browser = Option.builder(BrowserNameParam)
-            .required(true)
-            .hasArg()
-            .desc("Browser to launch the Suite of Tests")
-            .build();
-
-        Option channel = Option.builder(ChannelNameParam)
-            .required(true)
-            .hasArg()
-            .desc("Channel in that browser is executed")
-            .build();
-                
-        Option application = Option.builder(AppNameParam)
-            .required(true)
-            .hasArg()
-            .desc("Application Web to test")
-            .build();
-
-        Option version = Option.builder(VersionNameParam)
-            .required(false)
-            .hasArg()
-            .desc("Version of te TestSuite")
-            .build();
-
-        Option url = Option.builder(URLNameParam)
-            .required(true)
-            .hasArg()
-            .desc("URL initial of the application Web to test")
-            .build();
-                
-        //Optional
+    private static OptionGroup defineMoreOptions() {
+    	OptionGroup options = new OptionGroup();
+             
         Option countrys = Option.builder(CountrysNameParam)
             .required(false)
             .hasArgs()
@@ -149,47 +97,12 @@ public class Test80mng {
             .desc("List of payments comma separated (p.e. VISA,TARJETA MANGO,...)")
             .build();
         
-        Option tests = Option.builder(TCaseNameParam)
-            .required(false)
-            .hasArgs()
-            .valueSeparator(',')
-            .desc("List of testcases comma separated (p.e. OTR001,BOR001...)")
-            .build();        
-        
-        Option serverDNS = Option.builder(ServerDNSNameParam)
-            .required(false)
-            .hasArgs()
-            .valueSeparator(',')
-            .desc("Server DNS where are ubicated the HTML reports (p.e. http://robottest.mangodev.net)")
-            .build();
-        
         Option urlManto = Option.builder(UrlManto)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .desc("URL of the Backoffice of mangoshop (Manto application)")
-            .build();
-        
-        Option recicleWD = Option.builder(RecicleWD)
-            .required(false)
-            .hasArgs()
-            .valueSeparator(',')
-            .desc("Gestion mode of webdriver (true: reuse across testcases, false: don't reuse)")
-            .build();        
-        
-        Option netAnalysis = Option.builder(NetAnalysis)
-            .required(false)
-            .hasArgs()
-            .valueSeparator(',')
-            .desc("Net Analysis (true, false)")
-            .build();        
-        
-        Option mails = Option.builder(Mails)
-            .required(false)
-            .hasArgs()
-            .valueSeparator(',')
-            .desc("List of mail adresses comma separated")
-            .build();        
+            .build();    
         
         Option bat = Option.builder(TypeAccessParam)
             .required(false)
@@ -240,25 +153,11 @@ public class Test80mng {
             .desc("Password credential needed to invoke the CallBack URL")
             .build();        
                 
-        //Required
-        options.addOption(suite);
-        options.addOption(browser);
-        options.addOption(channel);
-        options.addOption(application);
-        options.addOption(version);
-        options.addOption(url);
-        
         //Optional
-        options.addOption(groups);
         options.addOption(countrys);
         options.addOption(lineas);
         options.addOption(payments);        
-        options.addOption(tests);
-        options.addOption(serverDNS);
-        options.addOption(urlManto);
-        options.addOption(recicleWD);
-        options.addOption(netAnalysis);
-        options.addOption(mails);
+        options.addOption(urlManto);;
         options.addOption(bat);
         options.addOption(callbackResource);
         options.addOption(callbackMethod);
@@ -270,34 +169,7 @@ public class Test80mng {
         return options;
     }
     
-    /**
-     * Parseo para contemplar el caso concreto del parámetro Help
-     */
-    private static boolean checkHelpParameterCase(String[] args) {
-        Options options = new Options();
-        Option helpOption = Option.builder(HelpNameParam)
-            .required(false)
-            .desc("shows this message")
-            .build();
-        
-        try {
-            options.addOption(helpOption);
-            CommandLineParser parser = new DefaultParser();
-            CommandLine cmdLineHelp = parser.parse(options, args);
-            if (cmdLineHelp.hasOption(HelpNameParam)) {
-                //Necesitamos informar todos los parámetros para que el mensaje con la sintaxis que se muestre sea el correto
-                options = setOptionsRelatedCommandLine();
-                printHelpSyntaxis(options);
-                return true;
-            }
-        }
-        catch (ParseException e) {
-            //En caso de cualquier otro parámetro <> a Help saltará el ParseException
-            //Es correcto, el parseo definitivo se realiza más adelante
-        }
-        
-        return false;
-    }
+
     
     /**
      * Indirect access from Command Line, direct access from Online
@@ -346,135 +218,6 @@ public class Test80mng {
         return null;
     }
 
-    public static String getOutputDirectory(String userDir, String suiteName, String idExecutedSuite) {
-        return fmwkTest.getOutputDirectory(userDir, suiteName, idExecutedSuite);
-    }
-    
-    public static String getPathOutputDirectoryFromUserDir(String suiteName, String idExecutedSuite) {
-        return (fmwkTest.getPathOutputDirectoryFromUserDir(suiteName, idExecutedSuite));
-    }
-    
-    private static ParamsBean parseCheckAndStoreParams(Options options, String[] args) throws ParseException {
-        ParamsBean params = null;
-        CommandLineParser parser = new DefaultParser();
-        CommandLine cmdLine = parser.parse(options, args);
-        if (checkParamValues(cmdLine)) {
-            params = storeParamsFromCommandLine(cmdLine);
-        }
-        return params;
-    }
-    
-    public static ParamsBean storeParamsFromCommandLine(CommandLine cmdLine) {
-    	String app = cmdLine.getOptionValue(AppNameParam);
-    	String suite = cmdLine.getOptionValue(SuiteNameParam);
-        ParamsBean params = new ParamsBean(AppEcom.valueOf(app), Suites.valueOf(suite));
-        params.setChannel(cmdLine.getOptionValue(ChannelNameParam));
-        params.setGroups(cmdLine.getOptionValues(GroupsNameParam));
-        params.setBrowser(cmdLine.getOptionValue(BrowserNameParam));
-        params.setVersion(cmdLine.getOptionValue(VersionNameParam));
-        params.setURLBase(cmdLine.getOptionValue(URLNameParam));        
-        params.setListaPaises(cmdLine.getOptionValues(CountrysNameParam));
-        params.setListaLineas(cmdLine.getOptionValues(LineasNameParam));
-        params.setListaPayments(cmdLine.getOptionValues(PaymentsNameParam));        
-        params.setListaTestCases(cmdLine.getOptionValues(TCaseNameParam));
-        params.setUrlManto(cmdLine.getOptionValue(UrlManto));
-        params.setRecicleWD(cmdLine.getOptionValue(RecicleWD));
-        params.setNetAnalysis(cmdLine.getOptionValue(NetAnalysis));
-        params.setMails(cmdLine.getOptionValues(Mails));
-        params.setApplicationDNS(cmdLine.getOptionValue(ServerDNSNameParam));
-        params.setTypeAccessFromStr(cmdLine.getOptionValue(TypeAccessParam));
-        if (cmdLine.getOptionValue(CallBackResource)!=null) {
-            CallBack callBack = new CallBack();
-            callBack.setCallBackResource(cmdLine.getOptionValue(CallBackResource));
-            callBack.setCallBackMethod(cmdLine.getOptionValue(CallBackMethod));
-            callBack.setCallBackUser(cmdLine.getOptionValue(CallBackUser));
-            callBack.setCallBackPassword(cmdLine.getOptionValue(CallBackPassword));
-            callBack.setCallBackSchema(cmdLine.getOptionValue(CallBackSchema));
-            callBack.setCallBackParams(cmdLine.getOptionValue(CallBackParams));
-            params.setCallBack(callBack);
-        }        
-        
-        return params;
-    }
-    
-    private static boolean checkParamValues(CommandLine cmdLine) {
-        boolean check=true;
-        
-        //Mandatory Params
-        try {
-            Suites.valueOf(cmdLine.getOptionValue(SuiteNameParam));
-        }
-        catch (IllegalArgumentException e) {
-            check=false;
-            System.out.println("Suite Name not valid. Posible values: " + Arrays.toString(getNames(Suites.class)));
-        } 
-        
-        try {
-            AppEcom.valueOf(cmdLine.getOptionValue(AppNameParam));
-        }
-        catch (IllegalArgumentException e) {
-            check=false;
-            System.out.println("App Name not valid. Posible values: " + Arrays.toString(getNames(AppEcom.class)));
-        }
-        
-        try {
-            Channel.valueOf(cmdLine.getOptionValue(ChannelNameParam));
-        }
-        catch (IllegalArgumentException e) {
-            check=false;
-            System.out.println("Channel Name not valid. Posible values: " + Arrays.toString(getNames(Channel.class)));
-        }
-        
-        try {
-            TypeWebDriver.valueOf(cmdLine.getOptionValue(BrowserNameParam));
-        }
-        catch (IllegalArgumentException e) {
-            check=false;
-            System.out.println("Browser Name not valid. Posible values: " + Arrays.toString(getNames(TypeWebDriver.class)));
-        }
-        
-        //Not Mandatory Params
-        if (cmdLine.getOptionValue(RecicleWD)!=null) {
-            String recicleWDvalue = cmdLine.getOptionValue(RecicleWD);
-            if (!recicleWDvalue.contains("true") && !recicleWDvalue.contains("false")) {
-                check=false;
-                System.out.println("param " + RecicleWD + " not valid. Posible values: true, false");
-            }        
-        }
-        
-        if (cmdLine.getOptionValue(NetAnalysis)!=null) {
-            String netAnalysisValue = cmdLine.getOptionValue(NetAnalysis);
-            if (!netAnalysisValue.contains("true") && !netAnalysisValue.contains("false")) {
-                check=false;
-                System.out.println("param " + NetAnalysis + " not valid. Posible values: true, false");
-            }        
-        }        
-        
-        if (cmdLine.getOptionValue(CallBackSchema)!=null) {
-            try {
-                TypeCallbackSchema.valueOf(cmdLine.getOptionValue(CallBackSchema));
-            }
-            catch (IllegalArgumentException e) {
-                check=false;
-                System.out.println("CallBack Schema not valid. Posible values: " + Arrays.toString(getNames(TypeCallbackSchema.class)));
-            }
-            
-            try {
-                TypeCallBackMethod.valueOf(cmdLine.getOptionValue(CallBackMethod));
-            }
-            catch (IllegalArgumentException e) {
-                check=false;
-                System.out.println("CallBack Schema not valid. Posible values: " + Arrays.toString(getNames(TypeCallBackMethod.class)));
-            }
-        }
-        
-        return check;
-    }
-    
-    private static void printHelpSyntaxis(Options options) {
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp(Test80mng.class.getSimpleName(), options);
-    }
     
     private static String[] getNames(Class<? extends Enum<?>> e) {
         return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
@@ -517,4 +260,11 @@ public class Test80mng {
         return (UtilsMangoTest.getListPagoFilterNames(listCodCountrys, channel, appE, isEmpl));
     }
 
+    public static String getOutputDirectory(String userDir, String suiteName, String idExecutedSuite) {
+        return fmwkTest.getOutputDirectory(userDir, suiteName, idExecutedSuite);
+    }
+    
+    public static String getPathOutputDirectoryFromUserDir(String suiteName, String idExecutedSuite) {
+        return (fmwkTest.getPathOutputDirectoryFromUserDir(suiteName, idExecutedSuite));
+    }
 }
