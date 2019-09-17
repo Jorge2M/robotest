@@ -11,7 +11,6 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
-import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
@@ -116,7 +115,8 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
         if (salesOnInCountry) {
         	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         	userMenusStpV.selectRegistrate(dCtxSh);
-	        PageRegistroIniStpV.validaRebajasJun2018(dCtxSh.idioma, dFTest);
+        	PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(dFTest.driver);
+        	pageRegistroIniStpV.validaRebajasJun2018(dCtxSh.idioma);
         }
         
         //Aplicamos el test a las líneas/sublíneas

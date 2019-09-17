@@ -121,13 +121,14 @@ public class Registro extends GestorWebDriver {
             return;
         }
             
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
         SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         userMenusStpV.selectRegistrate(dCtxSh);
         
         //Step. Click inicial a Registrate (sin haber introducido ningún dato) -> Aparecerán los correspondientes mensajes de error
         HashMap<String,String> dataRegister = new HashMap<>();        
-        PageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false/*usrExists*/, dCtxSh.appE, dataRegister, dFTest);
+        PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(dFTest.driver);
+        pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false, dCtxSh.appE, dataRegister);
                     
         //Step. Introducir datos incorrectos y validar mensajes de error
         ListDataRegistro dataKOToSend = new ListDataRegistro();
@@ -138,7 +139,7 @@ public class Registro extends GestorWebDriver {
         dataKOToSend.add(DataRegType.telefono, "66501512A", false);
         dataKOToSend.add(DataRegType.codpostal, "0872A", false);
         String dataToSendInHtmlFormat = dataKOToSend.getFormattedHTMLData(PageData.pageInicial);
-        PageRegistroIniStpV.sendFixedDataToInputs(dataKOToSend, dataToSendInHtmlFormat, dFTest);
+        pageRegistroIniStpV.sendFixedDataToInputs(dataKOToSend, dataToSendInHtmlFormat);
 
         //Step. Introducir datos correctos pero usuario ya existente
         ListDataRegistro dataToSend = new ListDataRegistro(); 
@@ -149,10 +150,8 @@ public class Registro extends GestorWebDriver {
         dataToSend.add(DataRegType.telefono, "665015122", true);
         dataToSend.add(DataRegType.codpostal, "08720", true);
         dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.pageInicial);
-        PageRegistroIniStpV.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat, dFTest);
-        
-        //Step. Seleccionamos el botón "Regístrate" y validar que aparece el mensaje de error de usuario ya existente
-        PageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, true/*usrExists*/, dCtxSh.appE, dataRegister, dFTest);
+        pageRegistroIniStpV.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat);
+        pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, true, dCtxSh.appE, dataRegister);
     }
 
     @SuppressWarnings("static-access")
@@ -183,9 +182,10 @@ public class Registro extends GestorWebDriver {
         userMenusStpV.selectRegistrate(dCtxSh);
         if(version.register()) {
 	        String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
+	        PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(dFTest.driver);
 	        HashMap<String,String> dataRegistro = 
-	        	PageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dCtxSh.channel, dFTest);
-	        PageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false/*usrExists*/, dCtxSh.appE, dataRegistro, dFTest);
+	        	pageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dCtxSh.channel);
+	        pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false/*usrExists*/, dCtxSh.appE, dataRegistro);
 	        boolean paisConNinos = dCtxSh.pais.getShoponline().stateLinea(LineaType.nina, dCtxSh.appE)==ThreeState.TRUE;
 	        PageRegistroSegundaStpV.setDataAndLineasRandom("23/4/1974", paisConNinos, 2/*numNinos*/, dCtxSh.pais, dataRegistro, dFTest);
 	        if (paisConNinos) {
@@ -232,13 +232,13 @@ public class Registro extends GestorWebDriver {
         }
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
-        
         SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         userMenusStpV.selectRegistrate(dCtxSh);
         String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
+        PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(dFTest.driver);
         HashMap<String,String> dataRegistro = 
-        	PageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dCtxSh.channel, dFTest);
-        PageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false, dCtxSh.appE, dataRegistro, dFTest);
+        	pageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dCtxSh.channel);
+        pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false, dCtxSh.appE, dataRegistro);
         PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dCtxSh.channel, dFTest);
         PageRegistroDirecStpV.clickFinalizarButton(dFTest);
         PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, dFTest);

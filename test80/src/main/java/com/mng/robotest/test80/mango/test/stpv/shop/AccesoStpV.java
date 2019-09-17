@@ -36,7 +36,6 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigation
 import com.mng.robotest.test80.mango.test.stpv.votf.PageLoginVOTFStpV;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageSelectIdiomaVOTFStpV;
 import com.mng.robotest.test80.mango.test.stpv.votf.PageSelectLineaVOTFStpV;
-import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
 
 @SuppressWarnings({"static-access"})
 public class AccesoStpV {

@@ -69,8 +69,9 @@ public class SecMenusUserStpV {
     public void selectRegistrate(DataCtxShop dCtxSh) throws Exception {
 		userMenus.clickMenuAndWait(UserMenu.registrate);    
         int maxSecondsWait = 5;
-        PageRegistroIniStpV.validaIsPageUntil(maxSecondsWait, driver);
-        PageRegistroIniStpV.validaIsRGPDVisible(dCtxSh, driver);
+        PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
+        pageRegistroIniStpV.validaIsPageUntil(maxSecondsWait);
+        pageRegistroIniStpV.validaIsRGPDVisible(dCtxSh);
     }
     
 	@Step (

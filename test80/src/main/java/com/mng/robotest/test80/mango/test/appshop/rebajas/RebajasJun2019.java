@@ -105,7 +105,7 @@ public class RebajasJun2019 extends GestorWebDriver /*Funcionalidades genéricas
         	SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, dFTest.driver);
 	        secBannersStpV.seleccionarBanner(posBannerToTest, applyValidations, dCtxSh.appE, dCtxSh.channel);
 	        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-	        pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, true/*isGaleriaSale*/, dCtxSh.pais, dCtxSh.idioma, LineaType.she, bloqueMenu.prendas);
+	        pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, true, dCtxSh.pais, dCtxSh.idioma, LineaType.she, bloqueMenu.prendas);
 	        PageGaleriaStpV.clickMoreInfoBannerRebajasJun2018(dFTest.driver);
 	        
 	        SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, dFTest.driver);
@@ -115,7 +115,8 @@ public class RebajasJun2019 extends GestorWebDriver /*Funcionalidades genéricas
         if (salesOnInCountry) {
         	SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
         	userMenusStpV.selectRegistrate(dCtxSh);
-	        PageRegistroIniStpV.validaRebajasJun2018(dCtxSh.idioma, dFTest);
+        	PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(dFTest.driver);
+        	pageRegistroIniStpV.validaRebajasJun2018(dCtxSh.idioma);
         }
         
         for (Linea linea : this.lineasAprobar) {

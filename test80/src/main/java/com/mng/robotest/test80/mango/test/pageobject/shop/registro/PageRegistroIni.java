@@ -20,6 +20,9 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegis
 
 
 public class PageRegistroIni extends WebdrvWrapp {
+	
+	private final WebDriver driver;
+	
 	static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 	
 	private static String XPathPestanyaRegistro = "//div[@class[contains(.,'registerTab')]]";
@@ -45,11 +48,14 @@ public class PageRegistroIni extends WebdrvWrapp {
     
     private static String XPathCapaLoading = "//div[@class[contains(.,'container-full-centered-loading')]]";
     
-    private static String XPathCheckBoxPubli = "//div[@id='STEP1_cfPubli']";
+    private static String XPathCheckBoxPubli = "//input[@id[contains(.,'STEP1_cfPubli')]]";
     private static String XPathTextRGPD = "//p[@class='gdpr-text gdpr-profiling']";
     private static String XPathLegalRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
     private static String XPathTextRGPDloyalty = "//p[@class='gdpr-text-loyalty gdpr-profiling']";
     private static String XPathLegalRGPDloyalty = "//p[@class='gdpr-text-loyalty gdpr-data-protection']";
+    
+    public static String XPathInputObligatorioNoInformado = "//input[@placeholder[contains(.,'*')] and @value='']";
+    public static String XPathselectPais = "//select[@id[contains(.,'pais')]]";
     
     private static String msgNameInvalid = "nombre. Este campo solo acepta letras";
     private static String msgApellidosInvalid = "apellidos. Este campo solo acepta letras";
@@ -61,37 +67,19 @@ public class PageRegistroIni extends WebdrvWrapp {
     private static String msgCampoObligatorio = "Este campo es obligatorio";
     private static String msgUsrDuplicadoPostClick = "Email ya registrado";
     
-    public static void clickRegisterTab(WebDriver driver) {
-    	driver.findElement(By.xpath(XPathPestanyaRegistro)).click();
+    private PageRegistroIni(WebDriver driver) {
+    	this.driver = driver;
     }
     
-    public static boolean isPageUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathPestanyaRegistro), maxSecondsToWait));
+    public static PageRegistroIni getNew(WebDriver driver) {
+    	return new PageRegistroIni(driver);
     }
     
-    public static boolean isCapaLoadingInvisibleUntil(int maxSecondsToWait, WebDriver driver) {
-    	return (isElementInvisibleUntil(driver, By.xpath(XPathCapaLoading), maxSecondsToWait));
+    private String getXPath_mensajeErrorFormulario(String mensajeError) {
+        return ("//div[@class='formErrors']//li[text()[contains(.,'" + mensajeError + "')]]");
     }
     
-    public static String getNewsLetterTitleText(WebDriver driver) {
-        try {
-            WebElement titleNws = driver.findElement(By.xpath(XPathNewsletterTitle));
-            if (titleNws!=null) {
-                return driver.findElement(By.xpath(XPathNewsletterTitle)).getText();
-            }
-        }
-        catch (Exception e) {
-            //Retornamos ""
-        }
-        
-        return "";
-    }
-    
-    public static boolean newsLetterTitleContains(String literal, WebDriver driver) {
-        return (getNewsLetterTitleText(driver).contains(literal));
-    }
-            
-    public static InputDataXPath getXPathDataInput(DataRegType inputType) {
+    private InputDataXPath getXPathDataInput(DataRegType inputType) {
         switch (inputType) {
         case name:
             return (new InputDataXPath(XPathInputName, XPathDivErrorName, msgNameInvalid));
@@ -112,25 +100,43 @@ public class PageRegistroIni extends WebdrvWrapp {
         }
     }
     
-    public static String getXPath_mensajeErrorFormulario(String mensajeError) {
-        return ("//div[@class='formErrors']//li[text()[contains(.,'" + mensajeError + "')]]");
+    public void clickRegisterTab(WebDriver driver) {
+    	driver.findElement(By.xpath(XPathPestanyaRegistro)).click();
     }
     
-    public static String getXPath_inputObligatorioNoInformado() {
-        return ("//input[@placeholder[contains(.,'*')] and @value='']");
+    public boolean isPageUntil(int maxSecondsToWait) {
+        return (isElementVisibleUntil(driver, By.xpath(XPathPestanyaRegistro), maxSecondsToWait));
     }
     
-    public static String getXPath_selectPais() {
-        return ("//select[@id[contains(.,'pais')]]");
+    public boolean isCapaLoadingInvisibleUntil(int maxSecondsToWait) {
+    	return (isElementInvisibleUntil(driver, By.xpath(XPathCapaLoading), maxSecondsToWait));
     }
     
-    public static int getNumInputsObligatoriosNoInformados(WebDriver driver) {
-        String xpathInput = getXPath_inputObligatorioNoInformado();
+    public String getNewsLetterTitleText() {
+        try {
+            WebElement titleNws = driver.findElement(By.xpath(XPathNewsletterTitle));
+            if (titleNws!=null) {
+                return driver.findElement(By.xpath(XPathNewsletterTitle)).getText();
+            }
+        }
+        catch (Exception e) {
+            //Retornamos ""
+        }
+        
+        return "";
+    }
+    
+    public boolean newsLetterTitleContains(String literal) {
+        return (getNewsLetterTitleText().contains(literal));
+    }
+            
+    public int getNumInputsObligatoriosNoInformados() {
+        String xpathInput = XPathInputObligatorioNoInformado;
         List<WebElement> inputsObligatorios = driver.findElements(By.xpath(xpathInput));
         return (inputsObligatorios.size());
     }
     
-    public static void sendKeysToInput(DataRegType inputType, String dataToSend, WebDriver driver) {
+    private void sendKeysToInput(DataRegType inputType, String dataToSend) {
         String xpathInput = getXPathDataInput(inputType).getXPah();
         moveToElement(By.xpath(xpathInput), driver);
         //Hay un problema en Chrome que provoca que aleatoriamente se corten los strings enviados mediante SendKeys. Así que debemos reintentarlo si no ha funcionado correctamente
@@ -139,39 +145,33 @@ public class PageRegistroIni extends WebdrvWrapp {
         sendKeysWithRetry(3, dataToSend, By.xpath(xpathInput), driver);
     }
     
-    public static HashMap<String,String> sendDataAccordingCountryToInputs(
-    		Pais pais, String emailNonExistent, boolean clickPubli, Channel channel, WebDriver driver) throws Exception {
+    public HashMap<String,String> sendDataAccordingCountryToInputs(
+    		Pais pais, String emailNonExistent, boolean clickPubli, Channel channel) throws Exception {
         return (Page2IdentCheckout.inputDataPorDefectoSegunPais(pais, emailNonExistent, false, clickPubli, channel, driver));
     }
     
-    public static void sendDataToInputs(ListDataRegistro dataToSend, WebDriver driver) {
+    public void sendDataToInputs(ListDataRegistro dataToSend) {
     	clickRegisterTab(driver);
         for (DataRegistro dataInput : dataToSend.getDataPageInicial()) {
             if (dataInput.dataRegType!=DataRegType.codpais) {
-                sendKeysToInput(dataInput.dataRegType, dataInput.data, driver);
+                sendKeysToInput(dataInput.dataRegType, dataInput.data);
             } else {
-                selectPais(dataInput.data, driver);
+                selectPais(dataInput.data);
             }
         }
         
         driver.findElement(By.xpath("//body")).sendKeys(Keys.TAB);
     }
     
-    public static void selectPais(String codPais, WebDriver driver) {
+    public void selectPais(String codPais) {
         new Select(driver.findElement(By.xpath(XPathSelectPais))).selectByValue(codPais);
     }
     
-    /**
-     * @return si es visible o no el mensaje concreto de error asociado al campo de input
-     */
-    public static boolean isVisibleMsgInputInvalid(DataRegType inputType, WebDriver driver) {
+    public boolean isVisibleMsgInputInvalid(DataRegType inputType) {
         return (isElementPresent(driver, By.xpath(getXPathDataInput(inputType).getXPathDivError())));
     }
     
-    /**
-     * @return número de mensajes de error asociados al campo de input
-     */
-    public static int getNumberMsgInputInvalid(DataRegType inputType, WebDriver driver) {
+    public int getNumberMsgInputInvalid(DataRegType inputType) {
         String xpathError = getXPathDataInput(inputType).getXPathDivError() + "//span";
         if (isElementPresent(driver, By.xpath(xpathError))) {
             return (getNumElementsVisible(driver, By.xpath(xpathError)));
@@ -179,19 +179,19 @@ public class PageRegistroIni extends WebdrvWrapp {
         return 0;
     }
     
-    public static boolean isVisibleAnyInputErrorMessage(WebDriver driver) {
+    public boolean isVisibleAnyInputErrorMessage() {
         return (isElementVisible(driver, By.xpath(XPathDivErrorName)));
     }
 
-    public static boolean isButtonRegistrateVisible(WebDriver driver) {
+    public boolean isButtonRegistrateVisible() {
     	return (isElementVisible(driver, By.xpath(XPathButtonRegistrate)));
     }
     
-    public static void clickButtonRegistrate(WebDriver driver) throws Exception {
+    public void clickButtonRegistrate() throws Exception {
         clickAndWaitLoad(driver, By.xpath(XPathButtonRegistrate));
         
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-        if (isButtonRegistrateVisible(driver)) {
+        if (isButtonRegistrateVisible()) {
         	try {
         		clickAndWaitLoad(driver, By.xpath(XPathButtonRegistrate));
         	}
@@ -201,30 +201,30 @@ public class PageRegistroIni extends WebdrvWrapp {
         }
     }
     
-    public static boolean isVisibleErrorUsrDuplicadoUntil(WebDriver driver, int maxSecondsToWait) {
+    public boolean isVisibleErrorUsrDuplicadoUntil(int maxSecondsToWait) {
         String xpathError = getXPath_mensajeErrorFormulario(msgUsrDuplicadoPostClick);
         return (isElementPresentUntil(driver, By.xpath(xpathError), maxSecondsToWait));
     }    
     
-    public static int getNumberMsgCampoObligatorio(WebDriver driver) {
+    public int getNumberMsgCampoObligatorio() {
         String xpathError = "//div[@class='errorValidation']/span[text()[contains(.,'" + msgCampoObligatorio + "')]]";
         return (getNumElementsVisible(driver, By.xpath(xpathError)));
     }    
     
-    public static int getNumberInputsTypePassword(WebDriver driver) {
+    public int getNumberInputsTypePassword() {
         return (getNumElementsVisible(driver, By.xpath("//input[@type='password']")));
     }
     
-    public static boolean isVisibleSelectPais(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(getXPath_selectPais())));
+    public boolean isVisibleSelectPais() {
+        return (isElementVisible(driver, By.xpath(XPathSelectPais)));
     }
     
-    public static boolean isSelectedOptionPais(WebDriver driver, String codigoPais) {
-        String xpathOption = getXPath_selectPais() + "/option[@selected='selected' and @value='" + codigoPais + "']"; 
+    public boolean isSelectedOptionPais(String codigoPais) {
+        String xpathOption = XPathSelectPais + "/option[@selected='selected' and @value='" + codigoPais + "']"; 
         return (isElementPresent(driver, By.xpath(xpathOption)));
     }
 
-	public static boolean isTextoRGPDVisible(WebDriver driver) {
+	public boolean isTextoRGPDVisible() {
 		//TODO dejar sólo la versión de Loyalty cuando esta operativa suba a producción
 		WebElement textoElem = getElementWithSizeNot0(driver, By.xpath(XPathTextRGPD));
 		if (textoElem==null) {
@@ -234,7 +234,7 @@ public class PageRegistroIni extends WebdrvWrapp {
 		return (textoElem!=null);
 	}
 
-	public static boolean isTextoLegalRGPDVisible(WebDriver driver) {
+	public boolean isTextoLegalRGPDVisible() {
 		//TODO dejar sólo la versión de Loyalty cuando esta operativa suba a producción
 		WebElement textoElem = getElementWithSizeNot0(driver, By.xpath(XPathLegalRGPD));
 		if (textoElem==null) {
@@ -244,7 +244,7 @@ public class PageRegistroIni extends WebdrvWrapp {
 		return (textoElem!=null);
 	}
 
-	public static boolean isCheckboxRecibirInfoPresentUntil(int maxSecondsToWait, WebDriver driver) {
+	public boolean isCheckboxRecibirInfoPresentUntil(int maxSecondsToWait) {
 		return isElementPresentUntil(driver, By.xpath(XPathCheckBoxPubli), maxSecondsToWait);
 	}
 }
