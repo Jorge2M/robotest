@@ -4,29 +4,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 
 public class GroupsChannelApps {
 	
 	private final Channel channelTest;
-	private final AppTest appTest;
+	private final Enum<?> app;
 	private final List<List<Channel>> permutationsChannels;
-	private final List<List<AppTest>> permutationsApps;
+	private final List<List<Enum<?>>> permutationsApps;
 	private final List<ChannelsAppsDupla> excludedCombinations = new ArrayList<>();
 	private final List<ChannelsAppsDupla> includedCombinations = new ArrayList<>();
 	
-	private GroupsChannelApps(Channel channel, AppTest app) {
+	private GroupsChannelApps(Channel channel, Enum<?> app) {
 		this.channelTest = channel;
-		this.appTest = app;
+		this.app = app;
 		List<Channel> listChannels = Arrays.asList(Channel.values());
-		List<AppTest> listApps = appTest.getValues();
+		List<Enum<?>> listApps = Arrays.asList(app.getDeclaringClass().getEnumConstants());
 		permutationsChannels = PermutationsUtil.getPermutations(listChannels.size(), listChannels);
 		permutationsApps = PermutationsUtil.getPermutations(listApps.size(), listApps);
 		setCombinationsIncludedExcluded();
 	}
 	
-	public static GroupsChannelApps getNew(Channel channel, AppTest app) {
+	public static GroupsChannelApps getNew(Channel channel, Enum<?> app) {
 		return (new GroupsChannelApps(channel, app));
 	}
 	
@@ -47,11 +46,11 @@ public class GroupsChannelApps {
 			if (combination.getChannels().size()==Channel.values().length) {
 				groupsReturn.add("Canal:all_App:" + listAppsStr);
 			}
-			if (combination.getApps().size()==appTest.getValues().size()) {
+			if (combination.getApps().size()==app.getDeclaringClass().getEnumConstants().length) {
 				groupsReturn.add("Canal:" + listChannelsStr + "_App:all");
 			}
 			if (combination.getChannels().size()==Channel.values().length &&
-				combination.getApps().size()==appTest.getValues().size()) {
+				combination.getApps().size()==app.getDeclaringClass().getEnumConstants().length) {
 				groupsReturn.add("Canal:all_App:all");
 			}
 		}
@@ -60,10 +59,10 @@ public class GroupsChannelApps {
 	
 	private void setCombinationsIncludedExcluded() {
 		for (List<Channel> permutationChannels : permutationsChannels) {
-			for (List<AppTest> permutationApps : permutationsApps) {
+			for (List<Enum<?>> permutationApps : permutationsApps) {
 				ChannelsAppsDupla dupla = new ChannelsAppsDupla(permutationChannels, permutationApps);
 				if (!permutationChannels.contains(channelTest) ||
-					!permutationApps.contains(appTest)) {
+					!permutationApps.contains(app)) {
 					excludedCombinations.add(dupla);
 				} else {
 					includedCombinations.add(dupla);
@@ -86,9 +85,9 @@ public class GroupsChannelApps {
 	
 	private class ChannelsAppsDupla {
 		private final List<Channel> channels;
-		private final List<AppTest> apps;
+		private final List<Enum<?>> apps;
 		
-		public ChannelsAppsDupla(List<Channel> channels, List<AppTest> apps) {
+		public ChannelsAppsDupla(List<Channel> channels, List<Enum<?>> apps) {
 			this.channels = channels;
 			this.apps = apps;
 		}
@@ -97,7 +96,7 @@ public class GroupsChannelApps {
 			return this.channels;
 		}
 		
-		public List<AppTest> getApps() {
+		public List<Enum<?>> getApps() {
 			return this.apps;
 		}
 	}

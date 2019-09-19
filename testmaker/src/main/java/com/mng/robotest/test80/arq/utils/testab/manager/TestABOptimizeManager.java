@@ -8,7 +8,6 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.InvalidCookieDomainException;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.testab.TestABactData;
@@ -21,22 +20,22 @@ public class TestABOptimizeManager implements TestABmanager {
 	
 	final public TestABOptimize testAB;
 	final Channel channelTest;
-	final AppTest appTest;
+	final Enum<?> app;
 	final WebDriver driver;
 	public int varianteActivada = 0;
 	
-	public TestABOptimizeManager(TestABOptimize testAB, Channel channel, AppTest app, WebDriver driver) {
+	public TestABOptimizeManager(TestABOptimize testAB, Channel channel, Enum<?> app, WebDriver driver) {
 		this.testAB = testAB;
 		this.channelTest = channel;
-		this.appTest = app;
+		this.app = app;
 		this.driver = driver;
 	}
 	
-	public TestABOptimizeManager(TestABOptimize testAB, int variante, Channel channel, AppTest app, WebDriver driver) {
+	public TestABOptimizeManager(TestABOptimize testAB, int variante, Channel channel, Enum<?> app, WebDriver driver) {
 		this.testAB = testAB;
 		this.varianteActivada = variante;
 		this.channelTest = channel;
-		this.appTest = app;
+		this.app = app;
 		this.driver = driver;
 	}
 	
@@ -48,14 +47,14 @@ public class TestABOptimizeManager implements TestABmanager {
 
 	@Override
 	public void activateTestAB() throws Exception {
-		if (isActiveForChannelAndApp(testAB, channelTest, appTest)) {
+		if (isActiveForChannelAndApp(testAB, channelTest, app)) {
 			setCookieGtm_auth(testAB, driver);
 			setCookieGtm_preview(testAB, driver);
 			setCookieGtm_experiment(getVariantInGtm_experiment(testAB, varianteActivada), driver);
 		}
 	}
 	
-	public static void activateTestsAB(List<TestABactData> testsABtoActive, Channel channel, AppTest app, WebDriver driver) 
+	public static void activateTestsAB(List<TestABactData> testsABtoActive, Channel channel, Enum<?> app, WebDriver driver) 
 	throws Exception {
 		String valueCookie = "";
 		for (TestABactData testABtoActive : testsABtoActive) {
@@ -164,7 +163,7 @@ public class TestABOptimizeManager implements TestABmanager {
 		return (random.nextInt(maximo - minimo + 1) + minimo);
 	}
 	
-	private static boolean isActiveForChannelAndApp(TestABOptimize testAB, Channel channel, AppTest app) {
+	private static boolean isActiveForChannelAndApp(TestABOptimize testAB, Channel channel, Enum<?> app) {
 		return (
 			testAB.getChannels().contains(channel) &&
 			testAB.getApps().contains(app));

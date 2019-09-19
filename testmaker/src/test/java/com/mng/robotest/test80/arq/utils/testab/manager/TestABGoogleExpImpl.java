@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.testab.TestABGoogleExp;
 
@@ -57,15 +56,15 @@ public enum TestABGoogleExpImpl implements TestABGoogleExp {
 		return this.channels;
 	}
 	@Override
-	public List<AppTest> getApps() {
-		List<AppTest> listReturn = new ArrayList<>();
-		for (AppTest app : this.apps) {
+	public List<Enum<?>> getApps() {
+		List<Enum<?>> listReturn = new ArrayList<>();
+		for (Enum<?> app : this.apps) {
 			listReturn.add(app);
 		}
 		return listReturn;
 	}
 	@Override
-	public String getValueCookie(AppTest app) {
+	public String getValueCookie(Enum<?> app) {
 		AppEcom appE = (AppEcom)app;
 		switch (appE) {
 		case outlet:

@@ -9,12 +9,8 @@ public class SuiteTestMaker extends XmlSuite {
 	private static final long serialVersionUID = 1L;
 	private final TestMakerContext testMakerContext;
 	
-	private SuiteTestMaker(TestMakerContext testMakerContext) {
+	public SuiteTestMaker(TestMakerContext testMakerContext) {
 		this.testMakerContext = testMakerContext;
-	}
-	
-	public static SuiteTestMaker getNew(TestMakerContext testMakerContext) {
-		return (new SuiteTestMaker(testMakerContext));
 	}
 	
 	public TestMakerContext getTestMakerContext() {

@@ -9,6 +9,7 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.utils.filter.FilterTestsSuiteXML;
 import com.mng.robotest.test80.arq.utils.filter.TestMethod;
 import com.mng.robotest.test80.data.TestMakerContext;
@@ -24,8 +25,8 @@ public abstract class SuiteMaker {
     private int threadCount = 3;
 	private SuiteTestMaker xmlSuite;
 	
-	protected SuiteMaker(InputDataTestMaker inputData) {
-		this.testMakerContext = TestMakerContext.getNew(inputData);
+	protected SuiteMaker(InputParamsTestMaker inputData) {
+		this.testMakerContext = new TestMakerContext(inputData);
 		this.filterSuiteXML = FilterTestsSuiteXML.getNew(inputData.getDataFilter());
 	}
 	
@@ -38,6 +39,10 @@ public abstract class SuiteMaker {
         return (
         	filterSuiteXML.getInitialTestCaseCandidatesToExecute(testRun)
         );
+    }
+    
+    public SuiteTestMaker getSuiteTestMaker() {
+    	return this.xmlSuite;
     }
     
     public XmlTest getTestRun() {
@@ -98,8 +103,8 @@ public abstract class SuiteMaker {
     }
     
     private SuiteTestMaker createSuite() {
-    	SuiteTestMaker suite = SuiteTestMaker.getNew(testMakerContext);
-    	String suiteName = testMakerContext.getInputData().getNameSuite();
+    	SuiteTestMaker suite = new SuiteTestMaker(testMakerContext);
+    	String suiteName = testMakerContext.getInputData().getSuiteName();
         suite.setFileName(suiteName + ".xml");
         suite.setName(suiteName);
         suite.setListeners(createStandardListeners());

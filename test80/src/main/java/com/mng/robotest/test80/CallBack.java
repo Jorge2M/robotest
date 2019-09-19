@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.arq.listeners;
+package com.mng.robotest.test80;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -7,10 +7,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
-
 import com.google.common.base.Splitter;
 import com.mng.robotest.test80.arq.utils.ManageConnectionHTTP;
-
 
 public class CallBack {
     String reportTSuiteURL = "";
@@ -20,6 +18,7 @@ public class CallBack {
     String callBackParams = null;
     String callBackUser = null;
     String callBackPassword = null;
+
     
     public String getReportTSuiteURL() {
         return this.reportTSuiteURL;

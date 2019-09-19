@@ -4,14 +4,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
-import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageDetallePedido;
@@ -43,7 +42,7 @@ public class PedidosNavigations {
     
     private static void testPedidosEnManto(DataMantoAccess dMantoAcc, CopyOnWriteArrayList<DataPedido> listPedidos, DataFmwkTest dFTest) 
     throws Exception {
-    	InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(dFTest.ctx);
+    	InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(dFTest.ctx);
         TypeAccessFmwk typeAccess = inputData.getTypeAccess();
         if (typeAccess==TypeAccessFmwk.Bat) {
             return;

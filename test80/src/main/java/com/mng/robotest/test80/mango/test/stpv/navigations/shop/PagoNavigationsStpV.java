@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.arq.annotations.step.Step;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
@@ -422,7 +423,8 @@ public class PagoNavigationsStpV {
         boolean validaPagos = pagoStpV.dCtxPago.getFTCkout().validaPagos;
         Pago pago = pagoStpV.dCtxPago.getDataPedido().getPago();
         ITestContext ctx = TestCaseData.getdFTest().ctx;
-        TypeAccessFmwk typeAccess = TestCaseData.getInputDataTestMaker(ctx).getTypeAccess();
+        InputParams inputParams = (InputParams)TestCaseData.getInputDataTestMaker(ctx);
+        TypeAccessFmwk typeAccess = inputParams.getTypeAccess();
         return (
             //No estamos en el entorno productivo
             !UtilsMangoTest.isEntornoPRO(appE, driver) &&

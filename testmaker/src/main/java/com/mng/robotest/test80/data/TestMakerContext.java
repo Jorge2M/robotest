@@ -5,31 +5,27 @@ import java.util.Calendar;
 import org.testng.ISuite;
 import org.testng.ITestContext;
 
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.xmlprogram.SuiteTestMaker;
 import com.mng.robotest.test80.arq.xmlprogram.TestRunTestMaker;
 
 public class TestMakerContext {
 
 	private final String idSuiteExecution;
-	private final InputDataTestMaker inputData;
+	private final InputParamsTestMaker inputData;
 	private final MailEndSuite sendMailData;
 
-	private TestMakerContext(InputDataTestMaker inputData) {
+	public TestMakerContext(InputParamsTestMaker inputData) {
 		this.idSuiteExecution = getIdForSuiteToExecute();
 		this.inputData = inputData;
 		this.sendMailData = MailEndSuite.getNew(inputData);
-	}
-	
-	public static TestMakerContext getNew(InputDataTestMaker inputData) {
-		return (new TestMakerContext(inputData));
 	}
 	
 	public String getIdSuiteExecution() {
 		return this.idSuiteExecution;
 	}
 	
-	public InputDataTestMaker getInputData() {
+	public InputParamsTestMaker getInputData() {
 		return this.inputData;
 	}
 	
@@ -54,7 +50,7 @@ public class TestMakerContext {
     	return (suiteXML.getTestMakerContext());
 	}
 	
-	public static InputDataTestMaker getInputData(ITestContext ctxTng) {
+	public static InputParamsTestMaker getInputData(ITestContext ctxTng) {
 		TestMakerContext tmContext = getTestMakerContext(ctxTng);
 		return tmContext.getInputData();
 	}

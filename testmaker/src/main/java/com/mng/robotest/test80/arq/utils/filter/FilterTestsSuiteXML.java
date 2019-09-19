@@ -32,7 +32,7 @@ public class FilterTestsSuiteXML {
 
     private FilterTestsSuiteXML(DataFilterTCases dFilter) {
     	this.dFilter = dFilter;
-        GroupsChannelApps groupChannel = GroupsChannelApps.getNew(dFilter.getChannel(), dFilter.getAppE());
+        GroupsChannelApps groupChannel = GroupsChannelApps.getNew(dFilter.getChannel(), dFilter.getApp());
         this.groupsToExclude = groupChannel.getGroupsExcluded();
         this.groupsToInclude = groupChannel.getGroupsIncluded();
     }

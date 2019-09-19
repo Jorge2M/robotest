@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.jdbc.dao.SuitesDAO;
 import com.mng.robotest.test80.arq.jdbc.to.Suite;
 import com.mng.robotest.test80.arq.listeners.CorreoReport;
@@ -17,7 +18,6 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.mail.MailClient;
 import com.mng.robotest.test80.arq.utils.mail.beans.AttachMail;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 
 public class MailEndSuite {
 	
@@ -28,14 +28,14 @@ public class MailEndSuite {
 	private final List<String> ccMail;
 	private final String subjectMail;
 
-	private MailEndSuite(InputDataTestMaker inputData) {
+	private MailEndSuite(InputParamsTestMaker inputData) {
 		toMail = inputData.getMails();
 		ccMail = new ArrayList<>();
 		ccMail.add("jorge.munoz.sge@mango.com");
-		subjectMail = "Result TestSuite " + inputData.getNameSuite() + " (" + inputData.getApp() + " / " + inputData.getUrlBase() + ")";
+		subjectMail = "Result TestSuite " + inputData.getSuiteName() + " (" + inputData.getApp() + " / " + inputData.getUrlBase() + ")";
 	}
 	
-	public static MailEndSuite getNew(InputDataTestMaker inputData) {
+	public static MailEndSuite getNew(InputParamsTestMaker inputData) {
 		if (inputData.isSendMailInEndSuite()) {
 			return (new MailEndSuite(inputData));
 		}
@@ -69,7 +69,7 @@ public class MailEndSuite {
             ArrayList<AttachMail> listaAttachImages = new ArrayList<>();
             
         	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
-        	InputDataTestMaker inputData = testMakerCtx.getInputData();
+        	InputParamsTestMaker inputData = testMakerCtx.getInputData();
             Suite suiteObj = SuitesDAO.getSuite(testMakerCtx.getIdSuiteExecution(), context.getSuite().getName());
             if (suiteObj!=null) {
                 //Revisamos si alguna de las suites no es OK

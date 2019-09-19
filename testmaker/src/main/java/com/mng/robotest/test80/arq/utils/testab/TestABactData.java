@@ -2,7 +2,6 @@ package com.mng.robotest.test80.arq.utils.testab;
 
 import java.util.List;
 
-import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 
 public class TestABactData {
@@ -10,7 +9,7 @@ public class TestABactData {
 	private final TestAB testAB;
 	private final int vToActive;
 	
-	private TestABactData(TestAB testAB, int vToActive, List<Channel> supportedChannels, List<AppTest> supportedApps) {
+	private TestABactData(TestAB testAB, int vToActive, List<Channel> supportedChannels, List<Enum<?>> supportedApps) {
 		this.testAB = testAB;
 		this.vToActive = vToActive;
 	}

@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker.ManagementWebdriver;
 import com.mng.robotest.test80.arq.utils.NetTrafficMng;
 import com.mng.robotest.test80.arq.utils.controlTest.GestorWebDrv;
 import com.mng.robotest.test80.arq.utils.controlTest.StoredWebDrv;
@@ -13,7 +14,6 @@ import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.BrowserStackMobil;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker.ManagementWebdriver;
 import com.mng.robotest.test80.data.TestMakerContext;
 
 import java.lang.reflect.Method;

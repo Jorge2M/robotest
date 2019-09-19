@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
 import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
 
@@ -28,7 +28,7 @@ public class TestNGxmlStub extends SuiteMaker {
     
     TypeStubTest typeTest;
 
-    private TestNGxmlStub(TypeStubTest typeTest, InputDataTestMaker inputData) {
+    private TestNGxmlStub(TypeStubTest typeTest, InputParamsTestMaker inputData) {
     	super(inputData);
     	this.typeTest = typeTest;
     	TestRunMaker testRun = TestRunMaker.getNew(
@@ -39,7 +39,7 @@ public class TestNGxmlStub extends SuiteMaker {
     	addTestRun(testRun);
     }
     
-    public static TestNGxmlStub getNew(TypeStubTest typeTest, InputDataTestMaker inputData) {
+    public static TestNGxmlStub getNew(TypeStubTest typeTest, InputParamsTestMaker inputData) {
     	TestNGxmlStub test = new TestNGxmlStub(typeTest, inputData); 
     	return test;
     }

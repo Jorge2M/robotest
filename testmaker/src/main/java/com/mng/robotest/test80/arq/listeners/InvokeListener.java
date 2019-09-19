@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import org.testng.*;
 
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.jdbc.dao.MethodsDAO;
 import com.mng.robotest.test80.arq.jdbc.dao.ParamsDAO;
 import com.mng.robotest.test80.arq.jdbc.dao.StepsDAO;
@@ -18,11 +19,9 @@ import com.mng.robotest.test80.arq.jdbc.to.ResultMethod;
 import com.mng.robotest.test80.arq.jdbc.to.ResultTestRun;
 import com.mng.robotest.test80.arq.utils.StateSuite;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.GestorWebDrv;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.data.ConstantesTestMaker;
 import com.mng.robotest.test80.data.TestMakerContext;
 
@@ -30,7 +29,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
-public class InvokeListener extends TestListenerAdapter implements ISuiteListener {
+public class InvokeListener<T extends Enum<T>, Y extends Enum<Y>, Z extends Enum<Z>> 
+		extends TestListenerAdapter implements ISuiteListener {
+	
     static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 
     ITestContext ctx1erTestRun = null;
@@ -55,7 +56,6 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
             gestorDrv.removeAllStrWd();
         }
         
-        this.httpUrlCallBack = callBackIfNeeded(suite);
         sendEmailIfNeeded(suite);
     }
     
@@ -161,30 +161,11 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
      */
     private void updateSuiteData(ITestContext context) {
     	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
-        indexSuite suiteId = new indexSuite(testMakerCtx.getIdSuiteExecution(), testMakerCtx.getInputData().getNameSuite());
+        indexSuite suiteId = new indexSuite(testMakerCtx.getIdSuiteExecution(), testMakerCtx.getInputData().getSuiteName());
         ResultTestRun resultTestRun = MethodsDAO.getResultTestRunAccordingMethods(suiteId, context.getName());
         SuitesDAO.updateEndSuiteFromCtx(resultTestRun, context);
     }
-    
-    protected HttpURLConnection callBackIfNeeded(ISuite suite) {
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(suite);
-    	InputDataTestMaker inputData = testMakerCtx.getInputData();
-    	CallBack callBack = inputData.getCallBack();
-        if (callBack!=null) {
-            String pathFileReport = fmwkTest.getPathReportHTML(fmwkTest.getOutputDirectorySuite(suite));
-            String reportTSuiteURL = utils.obtainDNSFromFile(pathFileReport, inputData.getWebAppDNS()).replace("\\", "/");
-            callBack.setReportTSuiteURL(reportTSuiteURL);
-            try {
-                return callBack.callURL();
-            }
-            catch (Exception e) {
-                pLogger.error("Problem procesing CallBack", e);
-                return null;
-            }
-        }
 
-        return null;
-    }
     
     protected void sendEmailIfNeeded(ISuite suite) {
     	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(suite);
@@ -198,8 +179,8 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
      */
     private void grabarTestRun(ITestContext context) {
     	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
-    	InputDataTestMaker inputData = testMakerCtx.getInputData();
-        indexSuite suiteId = new indexSuite(testMakerCtx.getIdSuiteExecution(), inputData.getNameSuite());
+    	InputParamsTestMaker inputData = testMakerCtx.getInputData();
+        indexSuite suiteId = new indexSuite(testMakerCtx.getIdSuiteExecution(), inputData.getSuiteName());
         ResultTestRun resultStep = MethodsDAO.getResultTestRunAccordingMethods(suiteId, context.getName()); 
         TestRunsDAO.insertFromCtx(resultStep, context);
     }
@@ -208,11 +189,11 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
     	TestCaseData.clearStackDatosStep();
         ITestContext context = tr.getTestContext();
     	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
-    	InputDataTestMaker inputData = testMakerCtx.getInputData();
+    	InputParamsTestMaker inputData = testMakerCtx.getInputData();
         String idExecSuite = testMakerCtx.getIdSuiteExecution();
         StateSuite stateSuite = SuitesDAO.getStateSuite(idExecSuite);
         if (stateSuite!=StateSuite.STOPPING) {
-            indexSuite suiteId = new indexSuite(idExecSuite, inputData.getNameSuite());
+            indexSuite suiteId = new indexSuite(idExecSuite, inputData.getSuiteName());
             String methodWithFactory = fmwkTest.getMethodWithFactory(tr.getMethod().getMethod(), context);
             ResultMethod resultMethod = StepsDAO.getResultMethodAccordingSteps(suiteId, context.getName(), methodWithFactory);
             MethodsDAO.inserMethod(resultMethod, tr);

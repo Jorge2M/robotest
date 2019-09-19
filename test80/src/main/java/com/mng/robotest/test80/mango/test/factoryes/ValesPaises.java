@@ -5,8 +5,8 @@ import java.util.*;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.PaisAplicaVale;
@@ -26,7 +26,7 @@ public class ValesPaises {
     @Parameters({"countrys"})
     public Object[] createInstances(String countrys, ITestContext ctx) throws Exception {
     	List<Object> listTests = new ArrayList<>();
-    	InputDataTestMaker inputData = TestMakerContext.getInputData(ctx);
+    	InputParamsTestMaker inputData = TestMakerContext.getInputData(ctx);
     	VersionValesSuite version = VersionValesSuite.valueOf(inputData.getVersionSuite());
     	
         Calendar currDtCal = Calendar.getInstance();

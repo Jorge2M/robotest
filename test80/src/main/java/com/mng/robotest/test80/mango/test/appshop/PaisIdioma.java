@@ -4,12 +4,12 @@ import org.testng.ITestContext;
 import java.lang.reflect.Method;
 import org.testng.annotations.*;
 
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.*;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.Constantes;
@@ -77,7 +77,7 @@ public class PaisIdioma extends GestorWebDriver {
 	  
     @BeforeMethod(groups={"Lineas", "Canal:all_App:all"}, alwaysRun = true)
     public void login(ITestContext context, Method method) throws Exception {
-        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
+        InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         if (this.dCtxSh==null) {
             //Si el acceso es normal (no es desde una @Factory) definiremos los siguientes datos específicos
         	this.flagsNavigation = VersionPaisSuite.V1;

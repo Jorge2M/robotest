@@ -12,6 +12,7 @@ import org.testng.xml.XmlInclude;
 import org.testng.xml.XmlRun;
 import org.testng.xml.XmlSuite;
 
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.utils.filter.FilterTestsSuiteXML;
 import com.mng.robotest.test80.arq.utils.webdriver.BrowserStackDesktop;
 import com.mng.robotest.test80.arq.utils.webdriver.BrowserStackMobil;
@@ -57,7 +58,8 @@ public class TestRunMaker {
 		this.browserStackMobil = browserStackMobil;
 	}
     
-    public TestRunTestMaker createTestRun(XmlSuite suite, FilterTestsSuiteXML filterSuiteXML, InputDataTestMaker inputData) {
+    public <T extends Enum<T>, Y extends Enum<Y>, Z extends Enum<Z>> 
+    		TestRunTestMaker createTestRun(XmlSuite suite, FilterTestsSuiteXML filterSuiteXML, InputParamsTestMaker inputData) {
     	TestRunTestMaker testRun = new TestRunTestMaker(suite);
         testRun.setName(getTestRunName(inputData));
         testRun.setPreserveOrder(Boolean.valueOf(true));
@@ -132,7 +134,7 @@ public class TestRunMaker {
         xmlClass.setIncludedMethods(includeMethods);
     }
     
-    private String getTestRunName(InputDataTestMaker inputData) {
+    private String getTestRunName(InputParamsTestMaker inputData) {
         return (
         	id + "-" + 
         	inputData.getVersionSuite() + "-" + 

@@ -8,17 +8,17 @@ import java.util.List;
 import java.util.Map;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
 import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
 
 public class ConsolaVotfSuite extends SuiteMaker {
 
-    public ConsolaVotfSuite(ParamsBean params) {
-    	super(params.getInputDataTestMaker());
-    	setParameters(getParametersSuiteShop(params));
+    public ConsolaVotfSuite(InputParams inputParams) {
+    	super(inputParams);
+    	setParameters(getParametersSuiteShop(inputParams));
     	addParameters(getSpecificParameters());
-    	TestRunMaker testRun = TestRunMaker.getNew(params.getSuiteName(), getClasses());
+    	TestRunMaker testRun = TestRunMaker.getNew(inputParams.getSuiteName(), getClasses());
     	addTestRun(testRun);
     	setParallelMode(ParallelMode.METHODS);
     	setThreadCount(1);

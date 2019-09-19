@@ -6,7 +6,6 @@ public interface ElementPage {
 
 	String getXPath();
 	
-	@SuppressWarnings("unused")
 	default String getXPath(Channel channel) {
 		return getXPath();
 	}

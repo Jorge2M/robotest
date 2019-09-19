@@ -16,7 +16,7 @@ response.setDateHeader ("Expires", -1);
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.TreeSet"%>
 <%@ page import="com.mng.robotest.test80.Test80mng"%>
-<%@ page import="com.mng.robotest.test80.arq.xmlprogram.ParamsBean" %>
+<%@ page import="com.mng.robotest.test80.arq.access.InputParamsTestMaker" %>
 <%@ page import="com.mng.robotest.test80.arq.utils.filter.TestMethod"%>
 <%@ page import="com.mng.robotest.test80.arq.utils.filter.FilterTestsSuiteXML"%>
 <%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
@@ -356,10 +356,10 @@ function updateData(suite, channel, dataToChange, newBrowser) {
 </body>
 </html>
 	
-<%!public static ParamsBean getParamsFromSuiteToGetTCases(SuiteTestData suiteTest) {
+<%!public static InputParamsTestMaker getParamsFromSuiteToGetTCases(SuiteTestData suiteTest) {
 	String app = suiteTest.getApplicationActual();
 	String suite = suiteTest.getSuite();
-    ParamsBean paramsTSuite = new ParamsBean(AppEcom.valueOf(app), Suites.valueOf(suite));
+    InputParamsTestMaker paramsTSuite = new InputParamsTestMaker(AppEcom.valueOf(app), Suites.valueOf(suite));
     paramsTSuite.setChannel(suiteTest.getChannel());
     paramsTSuite.setBrowser(suiteTest.getIdBrowser());
     paramsTSuite.setVersion(suiteTest.getVersionActual());

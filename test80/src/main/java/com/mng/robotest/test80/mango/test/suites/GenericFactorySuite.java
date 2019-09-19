@@ -6,20 +6,20 @@ import java.util.Arrays;
 import java.util.List;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
 import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
 import com.mng.robotest.test80.mango.conftestmaker.Suites;
 
 public class GenericFactorySuite extends SuiteMaker {
 
-    public GenericFactorySuite(ParamsBean params) {
-    	super(params.getInputDataTestMaker());
-    	setParameters(getParametersSuiteShop(params));
-    	TestRunMaker testRun = TestRunMaker.getNew(params.getSuiteName(), getClasses());
+    public GenericFactorySuite(InputParams inputParams) {
+    	super(inputParams);
+    	setParameters(getParametersSuiteShop(inputParams));
+    	TestRunMaker testRun = TestRunMaker.getNew(inputParams.getSuiteName(), getClasses());
     	addTestRun(testRun);
     	setParallelMode(ParallelMode.METHODS);
-        switch ((Suites)params.getSuite()) {
+        switch ((Suites)inputParams.getSuite()) {
         case ListFavoritos: 
         	setThreadCount(1);
         	break;

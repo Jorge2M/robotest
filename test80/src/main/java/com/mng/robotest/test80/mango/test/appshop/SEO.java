@@ -8,10 +8,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
@@ -31,7 +31,7 @@ public class SEO extends GestorWebDriver {
 
     @BeforeMethod(groups = { "Otras", "Canal:all_App:all" })
     public void login(ITestContext context, Method method) throws Exception {
-        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
+        InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());

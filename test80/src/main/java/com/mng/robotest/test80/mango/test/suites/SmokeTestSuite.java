@@ -8,23 +8,23 @@ import java.util.Arrays;
 import java.util.List;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
 import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 
 public class SmokeTestSuite extends SuiteMaker {
 
-    public SmokeTestSuite(ParamsBean params) {
-    	super(params.getInputDataTestMaker());
-    	setParameters(getParametersSuiteShop(params));
-    	if (!isBrowserStack(params.getBrowser())) {
-	    	TestRunMaker testRun = TestRunMaker.getNew(params.getSuiteName(), getClasses());
+    public SmokeTestSuite(InputParams inputParams) {
+    	super(inputParams);
+    	setParameters(getParametersSuiteShop(inputParams));
+    	if (!isBrowserStack(inputParams.getTypeWebDriver())) {
+	    	TestRunMaker testRun = TestRunMaker.getNew(inputParams.getSuiteName(), getClasses());
 	    	addTestRun(testRun);
 	    	setParallelMode(ParallelMode.METHODS);
 	    	setThreadCount(3);
     	} else {
-    		addTestRuns(getTestRunsForBrowserStack(params.getSuiteName(), params.getChannel(), getClasses()));
+    		addTestRuns(getTestRunsForBrowserStack(inputParams.getSuiteName(), inputParams.getChannel(), getClasses()));
 	    	setParallelMode(ParallelMode.TESTS);
 	    	setThreadCount(Constantes.BSTACK_PARALLEL);
     	}

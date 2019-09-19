@@ -2,19 +2,18 @@ package com.mng.robotest.test80.arq.utils.filter;
 
 import java.util.List;
 
-import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 
 public class DataFilterTCases {
 
 	private final Channel channel; 
-	private final AppTest appE;
+	private final Enum<?> app;
 	private List<String> groupsFilter;
 	private List<String> testCasesFilter;
 	
-	public DataFilterTCases(Channel channel, AppTest appE) {
+	public DataFilterTCases(Channel channel, Enum<?> app) {
 		this.channel = channel;
-		this.appE = appE;
+		this.app = app;
 	}
 	
 	public List<String> getGroupsFilter() {
@@ -32,8 +31,8 @@ public class DataFilterTCases {
 	public Channel getChannel() {
 		return channel;
 	}
-	public AppTest getAppE() {
-		return appE;
+	public Enum<?> getApp() {
+		return app;
 	}
 	
 	public boolean isSomeFilterActive() {

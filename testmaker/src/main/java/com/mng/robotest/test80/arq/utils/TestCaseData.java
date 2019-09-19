@@ -11,12 +11,12 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ISuite;
 import org.testng.ITestContext;
 
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.utils.conf.StorerErrorDataStepValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.arq.xmlprogram.SuiteTestMaker;
 import com.mng.robotest.test80.data.TestMakerContext;
 
@@ -114,7 +114,7 @@ public class TestCaseData {
 		return (getTestMakerContext(ctxTng.getSuite()));
 	}
 	
-	public static InputDataTestMaker getInputDataTestMaker(ITestContext ctxTng) {
+	public static InputParamsTestMaker getInputDataTestMaker(ITestContext ctxTng) {
 		TestMakerContext tmContext = getTestMakerContext(ctxTng);
 		return tmContext.getInputData();
 	}

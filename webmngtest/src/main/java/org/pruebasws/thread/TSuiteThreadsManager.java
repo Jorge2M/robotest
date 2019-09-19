@@ -3,7 +3,7 @@ package org.pruebasws.thread;
 import java.util.Set;
 
 import com.mng.robotest.test80.Test80mng;
-import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class TSuiteThreadsManager {
         );        
     }
     
-	public static String startSuiteInThread(ParamsBean paramsTSuite) throws Exception { 
+	public static String startSuiteInThread(InputParamsTestMaker paramsTSuite) throws Exception { 
 		SuiteMaker suite = Test80mng.makeSuite(paramsTSuite);
 		String idExecSuite = suite.getIdSuiteExecution();
 		
@@ -52,7 +52,7 @@ public class TSuiteThreadsManager {
 	  	return (idExecSuite);
 	}
     
-    public static String getLocatorThreadTestSuite(ParamsBean paramsTSuite, String idExecSuite) {
+    public static String getLocatorThreadTestSuite(InputParamsTestMaker paramsTSuite, String idExecSuite) {
         return (getLocatorThreadTestSuite(paramsTSuite.getSuiteName(), paramsTSuite.getApp().toString(), paramsTSuite.getChannel().toString(), paramsTSuite.getBrowser(), paramsTSuite.getVersion(), idExecSuite));   
     }
     

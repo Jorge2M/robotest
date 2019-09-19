@@ -9,7 +9,7 @@ response.setDateHeader ("Expires", -1);%>
 </head>
 <body>
 	<%@ page import="com.mng.robotest.test80.Test80mng" %>
-	<%@ page import="com.mng.robotest.test80.arq.xmlprogram.ParamsBean" %>
+	<%@ page import="com.mng.robotest.test80.arq.access.InputParamsTestMaker" %>
 	<%@ page import="java.io.BufferedReader" %>
 	<%@ page import="javax.servlet.ServletContext" %>
 	<%@ page import="java.io.InputStreamReader" %>
@@ -54,22 +54,22 @@ response.setDateHeader ("Expires", -1);%>
 	</style>
 
   	<%
-  	ServletContext ctx = getServletContext();
-  	System.setProperty("user.dir", getServletContext().getRealPath(""));
-  	
-  	//Store the request params
-  	ParamsBean paramsTSuite = storeParamsFromHttpRequest(request);
-	
-	//Specific parameter from index.jsp
-  	String forceStart = "off"; 
-  	if (request.getParameter("forceStart")!=null)
-  		forceStart = request.getParameter("forceStart");
-  	
-  	Suite suite = null;
+  		ServletContext ctx = getServletContext();
+  	  	  	System.setProperty("user.dir", getServletContext().getRealPath(""));
+  	  	  	
+  	  	  	//Store the request params
+  	  	  	InputParamsTestMaker paramsTSuite = storeParamsFromHttpRequest(request);
+  	  		
+  	  		//Specific parameter from index.jsp
+  	  	  	String forceStart = "off"; 
+  	  	  	if (request.getParameter("forceStart")!=null)
+  	  	  		forceStart = request.getParameter("forceStart");
+  	  	  	
+  	  	  	Suite suite = null;
   	%>
 
 	<div id="dataTestSuite"">
-		<p id="testSuiteName">TestSuite: <b><%=paramsTSuite.getSuiteName()%></b></p>
+		<p id="testSuiteName">TestSuite: <b><%=paramsTSuite.getNameSuite()%></b></p>
 		<p class="testSuiteAttribute">Channel: <b><%=paramsTSuite.getChannel()%></b></p>
 		<p class="testSuiteAttribute">Browser: <b><%=paramsTSuite.getBrowser()%></b></p>
 		<%
@@ -138,12 +138,11 @@ response.setDateHeader ("Expires", -1);%>
 	}
 	%>
 	
-	<%!
-	public static ParamsBean storeParamsFromHttpRequest(HttpServletRequest request) {
+	<%!public static InputParamsTestMaker storeParamsFromHttpRequest(HttpServletRequest request) {
 		//Parameters that come from index.jsp
 		String app = request.getParameter(Test80mng.AppNameParam);
     	String suite = request.getParameter(Test80mng.SuiteNameParam);
-        ParamsBean paramsTSuite = new ParamsBean(AppEcom.valueOf(app), Suites.valueOf(suite));
+        InputParamsTestMaker paramsTSuite = new InputParamsTestMaker(AppEcom.valueOf(app), Suites.valueOf(suite));
 	    paramsTSuite.setChannel(request.getParameter(Test80mng.ChannelNameParam));
 	    paramsTSuite.setBrowser(request.getParameter(Test80mng.BrowserNameParam));
 	    paramsTSuite.setVersion(request.getParameter(Test80mng.VersionNameParam));

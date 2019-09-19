@@ -6,11 +6,11 @@ import org.testng.annotations.*;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
@@ -60,7 +60,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
     @BeforeMethod (groups={"RebajasDic2018", "Canal:desktop_App:shop", "SupportsFactoryCountrys"})
     public void login(ITestContext context, Method method) throws Exception {
         //Recopilación de parámetros
-        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
+        InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());

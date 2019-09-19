@@ -9,10 +9,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
@@ -49,7 +49,7 @@ public class Manto extends GestorWebDriver {
 
 	@BeforeMethod(groups={"Manto", "Canal:desktop_App:all", "SupportsFactoryCountrys"})
 	public void login(ITestContext ctx, Method method) throws Exception {
-		InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(ctx);
+		InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(ctx);
 		this.dMantoAcc = new DataMantoAccess();
 		this.dMantoAcc.urlManto = inputData.getUrlBase();
 		this.dMantoAcc.userManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramUsrmanto);

@@ -86,7 +86,7 @@ public class MethodsDAO {
         try (Connection conn = Connector.getConnection();
             PreparedStatement insert = conn.prepareStatement (SQLInsertMethod )) {
             insert.setString(1, testMakerCtx.getIdSuiteExecution());
-            insert.setString(2, testMakerCtx.getInputData().getNameSuite());
+            insert.setString(2, testMakerCtx.getInputData().getSuiteName());
             insert.setString(3, context.getName());
             insert.setString(4, fmwkTest.getMethodWithFactory(tr.getMethod().getMethod(), context));
             insert.setString(5, tr.getMethod().getDescription());

@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
 import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
 
@@ -29,10 +29,10 @@ public class RegistrosSuite extends SuiteMaker {
 		public boolean loginAfterRegister() {return loginAfterRegister;}
     }
 	
-    public RegistrosSuite(ParamsBean params) {
-    	super(params.getInputDataTestMaker());
-    	setParameters(getParametersSuiteShop(params));
-    	TestRunMaker testRun = TestRunMaker.getNew(params.getSuiteName(), getClasses());
+    public RegistrosSuite(InputParams inputParams) {
+    	super(inputParams);
+    	setParameters(getParametersSuiteShop(inputParams));
+    	TestRunMaker testRun = TestRunMaker.getNew(inputParams.getSuiteName(), getClasses());
     	testRun.addGroups(getSpecificGroups());
     	addTestRun(testRun);
     	setParallelMode(ParallelMode.METHODS);

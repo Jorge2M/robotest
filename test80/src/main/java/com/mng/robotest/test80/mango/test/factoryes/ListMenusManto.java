@@ -5,10 +5,10 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appmanto.Menus;
@@ -24,7 +24,7 @@ public class ListMenusManto {
     @Factory
     public Object[] createInstances(ITestContext ctx)
     throws Exception {
-    	InputDataTestMaker inputData = TestMakerContext.getInputData(ctx);
+    	InputParamsTestMaker inputData = TestMakerContext.getInputData(ctx);
         ArrayList<Menus> listTests = new ArrayList<Menus>();
         AppEcom appEcom = (AppEcom)inputData.getApp();
         try {

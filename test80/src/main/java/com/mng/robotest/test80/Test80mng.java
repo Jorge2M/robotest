@@ -1,34 +1,35 @@
 package com.mng.robotest.test80;
 
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.OptionGroup;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.mng.robotest.test80.arq.access.CommandLineAccess;
-import com.mng.robotest.test80.arq.listeners.CallBack;
+import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.filter.TestMethod;
 import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
-import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
 import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
+import com.mng.robotest.test80.arq.xmlprogram.SuiteTestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Suites;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.suites.*;
 
 public class Test80mng { 
+	
+	static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
 
     public static String CountrysNameParam = "countrys";
     public static String LineasNameParam = "lineas";
@@ -51,29 +52,51 @@ public class Test80mng {
      * Parseamos la línea de comandos y ejecutamos la TestSuite correspondiente mediante la XML programática 
      */
     public static void main(String[] args) throws Exception { 
-    	OptionGroup optionsTest80 = defineMoreOptions();
-    	CommandLineAccess cmdLineAccess = CommandLineAccess.getNew(optionsTest80);
-    	
-        if (!checkHelpParameterCase(args)) {
-            Options options = setOptionsRelatedCommandLine();
-            ParamsBean params = null;
-            try {
-                params = checkAndGetParams(options, args);     
-            }
-            catch (ParseException e) {
-                System.out.println(e.getLocalizedMessage());
-                printHelpSyntaxis(options);
-                return;
-            }
-            
-            if (params!=null) {
-                params.setTypeAccessIfNotSetted(TypeAccessFmwk.CommandLine);
-                execSuite(params);
-            }
-        }
+    	OptionGroup optionsTest80 = specificMangoOptions();
+    	CommandLineAccess cmdLineAccess = new CommandLineAccess(args, optionsTest80, Suites.class, AppEcom.class);
+    	boolean optionsTestMakerOk = cmdLineAccess.checkTestMakerOptionValues();
+    	boolean optionsMangoOk = checkMangoOptionsValues(cmdLineAccess.getComandLineData()); //TODO añadir Pattern en la Option para así ahorrarnos este paso
+    	if (optionsTestMakerOk && optionsMangoOk) {
+    		InputParams inputParams = getInputParamsData(cmdLineAccess);
+            inputParams.setTypeAccessIfNotSetted(TypeAccessFmwk.CommandLine);
+            execSuite(inputParams);
+    	}
     }
     
-    private static OptionGroup defineMoreOptions() {
+    private static boolean checkMangoOptionsValues(CommandLine cmdLineData) {
+    	boolean check = true;
+    	String countrysValue = cmdLineData.getOptionValue(CountrysNameParam);
+    	if (countrysValue!=null) {
+    		Pattern pattern = Pattern.compile("[0-9]+(,[0-9]+)*");
+            Matcher matcher = pattern.matcher(countrysValue);
+            if (!matcher.find()) {
+            	check = false;
+            	System.out.println(CountrysNameParam + "not valid. Is not a list of digit codes separated by commas");
+            }
+    	}
+    	
+        if (cmdLineData.getOptionValue(CallBackSchema)!=null) {
+            try {
+                TypeCallbackSchema.valueOf(cmdLineData.getOptionValue(CallBackSchema));
+            }
+            catch (IllegalArgumentException e) {
+                check=false;
+                System.out.println("CallBack Schema not valid. Posible values: " + Arrays.asList(TypeCallbackSchema.values()));
+            }
+            
+            try {
+                TypeCallBackMethod.valueOf(cmdLineData.getOptionValue(CallBackMethod));
+            }
+            catch (IllegalArgumentException e) {
+                check=false;
+                System.out.println("CallBack Schema not valid. Posible values: " + Arrays.asList(TypeCallBackMethod.values()));
+            }
+        }
+    	
+    	return check;
+    }
+    
+    private static OptionGroup specificMangoOptions() {
     	OptionGroup options = new OptionGroup();
              
         Option countrys = Option.builder(CountrysNameParam)
@@ -108,7 +131,7 @@ public class Test80mng {
             .required(false)
             .hasArgs()
             .valueSeparator(',')
-            .desc("Type of access. Posible values: " + Arrays.toString(getNames(TypeAccessFmwk.class)))
+            .desc("Type of access. Posible values: " + Arrays.asList(TypeAccessFmwk.values()))
             .build();               
         
         Option callbackResource = Option.builder(CallBackResource)
@@ -169,69 +192,104 @@ public class Test80mng {
         return options;
     }
     
-
-    
-    /**
-     * Indirect access from Command Line, direct access from Online
-     */
-    public static void execSuite(ParamsBean params) throws Exception {
-    	SuiteMaker suite = makeSuite(params);
-    	suite.run();
+    private static InputParams getInputParamsData(CommandLineAccess cmdLineAccess) {
+    	InputParams inputParams = new InputParams();
+    	CommandLine cmdLineData = cmdLineAccess.getComandLineData();
+		cmdLineAccess.storeDataOptionsTestMaker(inputParams);
+		
+		inputParams.setListaPaises(cmdLineData.getOptionValues(CountrysNameParam));
+		inputParams.setListaLineas(cmdLineData.getOptionValues(LineasNameParam));
+		inputParams.setListaPayments(cmdLineData.getOptionValues(PaymentsNameParam));        
+		inputParams.setUrlManto(cmdLineData.getOptionValue(UrlManto));
+		inputParams.setTypeAccessFromStr(cmdLineData.getOptionValue(TypeAccessParam));
+        if (cmdLineData.getOptionValue(CallBackResource)!=null) {
+            CallBack callBack = new CallBack();
+            callBack.setCallBackResource(cmdLineData.getOptionValue(CallBackResource));
+            callBack.setCallBackMethod(cmdLineData.getOptionValue(CallBackMethod));
+            callBack.setCallBackUser(cmdLineData.getOptionValue(CallBackUser));
+            callBack.setCallBackPassword(cmdLineData.getOptionValue(CallBackPassword));
+            callBack.setCallBackSchema(cmdLineData.getOptionValue(CallBackSchema));
+            callBack.setCallBackParams(cmdLineData.getOptionValue(CallBackParams));
+            inputParams.setCallBack(callBack);
+        }    
+        
+        return inputParams;
     }
     
-    public static SuiteMaker makeSuite(ParamsBean params) throws Exception {
-        params.setTypeAccessIfNotSetted(TypeAccessFmwk.Online);
+    public static SuiteMaker makeSuite(InputParams inputParams) throws Exception {
+        inputParams.setTypeAccessIfNotSetted(TypeAccessFmwk.Online);
         try {
-            switch ((Suites)params.getSuite()) {
+            switch ((Suites)inputParams.getSuite()) {
             case SmokeTest:
-                return (new SmokeTestSuite(params));
+                return (new SmokeTestSuite(inputParams));
             case SmokeManto:
-                return (new SmokeMantoSuite(params));             
+                return (new SmokeMantoSuite(inputParams));
             case PagosPaises:
-                return (new PagosPaisesSuite(params));           
+                return (new PagosPaisesSuite(inputParams));           
             case ValesPaises:
-                return (new ValesPaisesSuite(params));          
+                return (new ValesPaisesSuite(inputParams));          
             case PaisIdiomaBanner:
-                return (new PaisIdiomaSuite(params));                    
+                return (new PaisIdiomaSuite(inputParams));                    
             case MenusPais:
-                return (new MenusPaisSuite(params));
+                return (new MenusPaisSuite(inputParams));
             case MenusManto:
-                return (new MenusMantoSuite(params));            
+                return (new MenusMantoSuite(inputParams));            
             case Nodos:
-                return (new NodosSuite(params));           
+                return (new NodosSuite(inputParams));           
             case ConsolaVotf:
-                return (new ConsolaVotfSuite(params));              
+                return (new ConsolaVotfSuite(inputParams));              
             case ListFavoritos:
             case ListMiCuenta:
-                return (new GenericFactorySuite(params));               
+                return (new GenericFactorySuite(inputParams));               
             case RegistrosPaises:
-                return (new RegistrosSuite(params));       
+                return (new RegistrosSuite(inputParams));       
             case RebajasPaises:
-                return (new RebajasSuite(params));             
+                return (new RebajasSuite(inputParams));             
             default:
             }
         }
         catch (IllegalArgumentException e) {
-            System.out.println("Suite Name not valid. Posible values: " + Arrays.toString(getNames(Suites.class)));
+            System.out.println("Suite Name not valid. Posible values: " + Arrays.asList(Suites.values()));
         }
         
         return null;
     }
-
     
-    private static String[] getNames(Class<? extends Enum<?>> e) {
-        return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
+    /**
+     * Indirect access from Command Line, direct access from Online
+     */
+    public static void execSuite(InputParams inputParams) throws Exception {
+    	SuiteMaker suite = makeSuite(inputParams);
+    	suite.run();
+    	callBackIfNeeded(suite.getSuiteTestMaker(), inputParams);
+    }
+    
+    private static void callBackIfNeeded(SuiteTestMaker suite, InputParams inputParams) {
+    	CallBack callBack = inputParams.getCallBack();
+        if (callBack!=null) {
+            String pathFileReport = fmwkTest.getPathReportHTML(fmwkTest.getOutputDirectorySuite(suite));
+            String reportTSuiteURL = utils.obtainDNSFromFile(pathFileReport, inputParams.getWebAppDNS()).replace("\\", "/");
+            callBack.setReportTSuiteURL(reportTSuiteURL);
+            try {
+            	HttpURLConnection urlConnection = callBack.callURL();
+            	pLogger.error("Called CallbackURL" + urlConnection);
+            }
+            catch (Exception e) {
+                pLogger.error("Problem procesing CallBack", e);
+            }
+        }
     }
 
-    public static List<TestMethod> getDataTestAnnotationsToExec(ParamsBean params) throws Exception {
-        params.setTypeAccessIfNotSetted(TypeAccessFmwk.Online);
-        Suites suiteValue = Suites.valueOf(params.getSuiteName());
+    
+    public static List<TestMethod> getDataTestAnnotationsToExec(InputParams inputParams) throws Exception {
+        inputParams.setTypeAccessIfNotSetted(TypeAccessFmwk.Online);
+        Suites suiteValue = (Suites)inputParams.getSuite();
         switch (suiteValue) {
         case SmokeTest:
-            SmokeTestSuite smokeTest = new SmokeTestSuite(params);
+            SmokeTestSuite smokeTest = new SmokeTestSuite(inputParams);
             return smokeTest.getListTests();
         case SmokeManto:
-            SmokeMantoSuite smokeManto = new SmokeMantoSuite(params);
+            SmokeMantoSuite smokeManto = new SmokeMantoSuite(inputParams);
             return smokeManto.getListTests();            
         default:
             return null;

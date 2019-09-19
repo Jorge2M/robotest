@@ -10,16 +10,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.mng.robotest.test80.arq.listeners.CallBack;
+import com.mng.robotest.test80.InputParams;
+//import com.mng.robotest.test80.arq.listeners.CallBack;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.test.data.Constantes;
-import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
 import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
 
 public class SuiteMakerResources {
     
-    public static Map<String,String> getParametersSuiteShop(ParamsBean params) {
+    public static Map<String,String> getParametersSuiteShop(InputParams params) {
     	Map<String,String> parametersReturn = new HashMap<>();
     	
     	parametersReturn.put(Constantes.paramCountrys, params.getListaPaisesStr());
@@ -60,21 +60,21 @@ public class SuiteMakerResources {
         parametersReturn.put("userConDevolucionPeroSoloEnPRO" ,"robot.test@mango.com");
         parametersReturn.put("passwordUserConDevolucion" ,"sirjorge74");
         
-        CallBack callBack = params.getCallBack();
-        if (params.getCallBack()!=null) {
+//        CallBack callBack = params.getCallBack();
+//        if (params.getCallBack()!=null) {
 //        	parametersReturn.put(Constantes.paramCallBackMethod, callBack.getCallBackMethod());
 //        	parametersReturn.put(Constantes.paramCallBackResource, callBack.getCallBackResource());
 //        	parametersReturn.put(Constantes.paramCallBackSchema, callBack.getCallBackSchema());  
 //        	parametersReturn.put(Constantes.paramCallBackParams, callBack.getCallBackParams());
 //        	parametersReturn.put(Constantes.paramCallBackUser, callBack.getCallBackUser());
 //        	parametersReturn.put(Constantes.paramCallBackPassword, callBack.getCallBackPassword());
-        }
+//        }
         
         return parametersReturn;
     }
     
-    public static boolean isBrowserStack(String browser) {
-    	return (TypeWebDriver.valueOf(browser)==TypeWebDriver.browserstack);
+    public static boolean isBrowserStack(TypeWebDriver typeWebDriver) {
+    	return (typeWebDriver==TypeWebDriver.browserstack);
     }
     
     public static List<TestRunMaker> getTestRunsForBrowserStack(String suiteName, Channel channel, List<String> listClasses) {

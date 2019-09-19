@@ -13,13 +13,14 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.mng.robotest.test80.InputParams;
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
 import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
@@ -76,7 +77,7 @@ public class Registro extends GestorWebDriver {
     
     @BeforeMethod(groups={"Registro", "Canal:all_App:all", "SupportsFactoryCountrys"})
     public void login(ITestContext context, Method method) throws Exception {
-        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
+        InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
         dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());
@@ -160,7 +161,7 @@ public class Registro extends GestorWebDriver {
         description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
     public void REG002_RegistroOK_publi() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-    	InputDataTestMaker inputData = TestMakerContext.getInputData(dFTest.ctx);
+    	InputParams inputData = (InputParams)TestMakerContext.getInputData(dFTest.ctx);
         if (inputData.getTypeAccess()==TypeAccessFmwk.Bat) {
             return;
         }
@@ -226,7 +227,7 @@ public class Registro extends GestorWebDriver {
         DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
             
-        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(dFTest.ctx);
+        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(dFTest.ctx);
         if (inputData.getTypeAccess()==TypeAccessFmwk.Bat) {
             return;
         }

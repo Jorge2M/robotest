@@ -22,6 +22,7 @@ import org.testng.ITestContext;
 import org.testng.reporters.EmailableReporter;
 import org.testng.xml.XmlSuite;
 
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.jdbc.dao.MethodsDAO;
 import com.mng.robotest.test80.arq.jdbc.dao.StepsDAO;
 import com.mng.robotest.test80.arq.jdbc.dao.SuitesDAO;
@@ -32,7 +33,6 @@ import com.mng.robotest.test80.arq.utils.State;
 import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.data.ConstantesTestMaker;
 import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest.TypeEvidencia;
@@ -54,7 +54,7 @@ public class GenerateReports extends EmailableReporter {
 
         if (context!=null) {
         	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
-            indexSuite suite = new indexSuite(testMakerCtx.getIdSuiteExecution(), testMakerCtx.getInputData().getNameSuite());
+            indexSuite suite = new indexSuite(testMakerCtx.getIdSuiteExecution(), testMakerCtx.getInputData().getSuiteName());
             try {
                 //this.generateReportHTML(suite, utils.getOutDirectoryFin(context), context);
                 this.generateReportHTML(suite, outputDirectory, context);
@@ -88,7 +88,7 @@ public class GenerateReports extends EmailableReporter {
      */
     public void pintaHeadersTableMain(BuildingReport buildReport, Suite suiteBD, ITestContext context) {
     	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
-    	InputDataTestMaker inputData = testMakerCtx.getInputData();
+    	InputParamsTestMaker inputData = testMakerCtx.getInputData();
     	
         buildReport.addToReport(
         	"<table id=\"tableMain\" class=\"tablemain\">" + 

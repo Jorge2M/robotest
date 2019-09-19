@@ -1,7 +1,5 @@
 package com.mng.robotest.test80.arq.utils.testab;
 
-import com.mng.robotest.test80.arq.utils.conf.AppTest;
-
 public interface TestABGoogleExp extends TestAB {
 
 	@Override
@@ -9,6 +7,5 @@ public interface TestABGoogleExp extends TestAB {
 		return TypeTestAB.GoogleExperiments;
 	}
 	
-	public String getValueCookie(AppTest app);
-	
+	public String getValueCookie(Enum<?> app);
 }

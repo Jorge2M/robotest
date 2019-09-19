@@ -8,7 +8,6 @@ import java.util.Map;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.testab.TestABactData;
 import com.mng.robotest.test80.arq.utils.testab.TestAB;
@@ -24,7 +23,7 @@ public interface TestABmanager {
 	public int getVariant() throws UnsupportedOperationException;
 
 	
-	public static TestABmanager getInstance(TestAB testAB, Channel channel, AppTest app, WebDriver driver) {
+	public static TestABmanager getInstance(TestAB testAB, Channel channel, Enum<?> app, WebDriver driver) {
 		switch (testAB.getType()) {
 		case GoogleExperiments:
 			return (new TestABGoogleExpManager((TestABGoogleExp)testAB, channel, app, driver));
@@ -34,7 +33,7 @@ public interface TestABmanager {
 		}
 	}
 
-	public static void activateTestsAB(List<TestABactData> testsABtoActive, Channel channel, AppTest app, WebDriver driver) 
+	public static void activateTestsAB(List<TestABactData> testsABtoActive, Channel channel, Enum<?> app, WebDriver driver) 
 	throws Exception {
 		List<TestABactData> listOptimize = filterByTestABtype(testsABtoActive, TypeTestAB.Optimize);
 		if (listOptimize.size() > 0) {

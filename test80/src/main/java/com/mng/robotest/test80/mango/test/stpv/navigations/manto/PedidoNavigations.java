@@ -5,12 +5,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.arq.utils.DataFmwkTest;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -46,7 +46,7 @@ public class PedidoNavigations {
     
     private static void testPedidosEnManto(DataMantoAccess dMantoAcc, DataCheckPedidos dataCheckPedidos, DataFmwkTest dFTest) 
     throws Exception {
-        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(dFTest.ctx);
+        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(dFTest.ctx);
         TypeAccessFmwk typeAccess = inputData.getTypeAccess();
         if (dataCheckPedidos.areChecksToExecute() && typeAccess!=TypeAccessFmwk.Bat) {
             PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, dFTest.driver);

@@ -5,13 +5,13 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.TestNodos;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorPage;
 
@@ -23,7 +23,7 @@ public class ListAllNodes {
     public Object[] createInstances(String urlStatus, String urlErrorpage, String testLinksPie, ITestContext ctx) 
     throws Exception {
         ArrayList<TestNodos> listTests = new ArrayList<TestNodos>();
-    	InputDataTestMaker inputData = TestMakerContext.getInputData(ctx);
+    	InputParamsTestMaker inputData = TestMakerContext.getInputData(ctx);
         AppEcom appEcom = (AppEcom)inputData.getApp();
         try {
             int accesos = 0;

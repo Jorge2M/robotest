@@ -69,7 +69,6 @@ public class SecBannersStpV {
         int elementosPagPrincipal = driver.findElements(By.xpath("//*")).size();
         
         this.managerBannersScreen.clickBannerAndWaitLoad(dataBanner, driver);
-        
         dataBanner.setUrlDestino(driver.getCurrentUrl());
         if (validaciones) {
             //Validaciones

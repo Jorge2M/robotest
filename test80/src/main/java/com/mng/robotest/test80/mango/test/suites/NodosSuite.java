@@ -9,19 +9,17 @@ import org.testng.xml.XmlSuite.ParallelMode;
 
 import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getParametersSuiteShop;
 
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
-import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
 import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
 
 public class NodosSuite extends SuiteMaker {
 
-    public NodosSuite(ParamsBean params) throws Exception {
-    	super(params.getInputDataTestMaker());
-    	setParameters(getParametersSuiteShop(params));
-    	InputDataTestMaker inputData = params.getInputDataTestMaker();
-    	addParameters(getSpecificParameters(inputData.getUrlBase()));
-    	TestRunMaker testRun = TestRunMaker.getNew(params.getSuiteName(), getClasses());
+    public NodosSuite(InputParams inputParams) throws Exception {
+    	super(inputParams);
+    	setParameters(getParametersSuiteShop(inputParams));
+    	addParameters(getSpecificParameters(inputParams.getUrlBase()));
+    	TestRunMaker testRun = TestRunMaker.getNew(inputParams.getSuiteName(), getClasses());
     	addTestRun(testRun);
     	setParallelMode(ParallelMode.METHODS);
     	setThreadCount(3);

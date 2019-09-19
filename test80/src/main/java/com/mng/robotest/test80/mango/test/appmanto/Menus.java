@@ -9,11 +9,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
@@ -42,7 +42,7 @@ public class Menus  extends GestorWebDriver {
 
 	@BeforeMethod(groups={"Menus", "Canal:desktop_App:all"}, alwaysRun = true)
 	public void login(ITestContext ctx, Method method) throws Exception {
-        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(ctx);
+        InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(ctx);
 		this.dMantoAcc = new DataMantoAccess();
 		this.dMantoAcc.urlManto = inputData.getUrlBase();
 		this.dMantoAcc.userManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramUsrmanto);

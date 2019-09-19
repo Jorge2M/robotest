@@ -13,37 +13,30 @@ import org.testng.xml.XmlClass;
 import org.testng.xml.XmlInclude;
 import org.testng.xml.XmlTest;
 
-import com.mng.robotest.test80.arq.utils.conf.AppTest;
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.utils.filter.resources.TestNGxmlStub;
 import com.mng.robotest.test80.arq.utils.filter.resources.TestNGxmlStub.TypeStubTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 
 public class TestFilterTNGxmlTRun {
 
 	List<String> groupsVoid = null;
     public enum GroupDep {from, to}
     
-    public enum AppEcom implements AppTest {
+    public enum AppEcom {
     	shop,
         outlet,
         votf;
-
-    	@Override
-    	public AppTest getValueOf(String application) {
-    	    return (AppEcom.valueOf(application));
-    	}
-    	
-    	@Override 
-    	public List<AppTest> getValues() {
-    		return Arrays.asList(values());
-    	}
+    }
+    
+    public enum Suite {
+    	SuiteForUnitTest;
     }
     
     @Test
     public void getListOfTestMethodsFilteredByIncludesAndDesktopShop() {
-        InputDataTestMaker inputData = getInputDataBasic();
+        InputParamsTestMaker inputData = getInputDataBasic();
         TestNGxmlStub testStub = TestNGxmlStub.getNew(TypeStubTest.WithoutMethodsIncludedInClass, inputData);
         
         //Code to test
@@ -64,7 +57,7 @@ public class TestFilterTNGxmlTRun {
 
     @Test
     public void getListOfTestMethodsFilteredByIncludes() {
-        InputDataTestMaker inputData = getInputDataBasic();
+        InputParamsTestMaker inputData = getInputDataBasic();
         TestNGxmlStub testStub = TestNGxmlStub.getNew(TypeStubTest.OnlyMethodGpo001includedInClass, inputData);
         
         //Code to test
@@ -81,7 +74,7 @@ public class TestFilterTNGxmlTRun {
     
     @Test
     public void getListOfTestMethodsNotFilteredByIncludes() {
-        InputDataTestMaker inputData = getInputDataBasic();
+        InputParamsTestMaker inputData = getInputDataBasic();
         TestNGxmlStub testStub = TestNGxmlStub.getNew(TypeStubTest.WithoutMethodsIncludedInClass, inputData);
         
         //Code to test
@@ -92,7 +85,7 @@ public class TestFilterTNGxmlTRun {
     
     @Test
     public void filterListOfTestCasesVoidWithInclude() {
-        InputDataTestMaker inputData = getInputDataBasic();
+        InputParamsTestMaker inputData = getInputDataBasic();
         TestNGxmlStub testStub = TestNGxmlStub.getNew(TypeStubTest.OnlyMethodMic001includedInClass, inputData);
         
         //Code to test
@@ -106,7 +99,7 @@ public class TestFilterTNGxmlTRun {
     
     @Test
     public void filterListOfTestCasesVoidWithoutInclude() {
-        InputDataTestMaker inputData = getInputDataBasic();
+        InputParamsTestMaker inputData = getInputDataBasic();
         TestNGxmlStub testStub = TestNGxmlStub.getNew(TypeStubTest.WithoutMethodsIncludedInClass, inputData);
         
         //Code to test
@@ -118,7 +111,7 @@ public class TestFilterTNGxmlTRun {
     
     @Test
     public void filterIncludeNewTestCase() {
-        InputDataTestMaker inputData = getInputDataBasic();
+        InputParamsTestMaker inputData = getInputDataBasic();
         String testExpectedToBeIncluded = TestNGxmlStub.methodGroupGaleriaProductoToInclude;
         inputData.setTestCasesFilter(Arrays.asList(testExpectedToBeIncluded));
         TestNGxmlStub testStub = TestNGxmlStub.getNew(TypeStubTest.WithoutMethodsIncludedInClass, inputData);
@@ -134,7 +127,7 @@ public class TestFilterTNGxmlTRun {
     
     @Test
     public void filterIncludeTwoTestCaseByName_1groupRemains() {
-        InputDataTestMaker inputData = getInputDataBasic();
+        InputParamsTestMaker inputData = getInputDataBasic();
         inputData.setTestCasesFilter(
         	Arrays.asList(
         		TestNGxmlStub.methodGroupGaleriaProductoToInclude, 
@@ -147,7 +140,7 @@ public class TestFilterTNGxmlTRun {
     
     @Test
     public void filterIncludeTwoTestCasesByCode_1groupRemains() {
-        InputDataTestMaker inputData = getInputDataBasic();
+        InputParamsTestMaker inputData = getInputDataBasic();
         inputData.setTestCasesFilter(
         	Arrays.asList(
         		TestNGxmlStub.methodGroupGaleriaProductoToInclude.substring(0,6), 
@@ -171,7 +164,7 @@ public class TestFilterTNGxmlTRun {
     
     @Test
     public void includeTestCaseThatDoesnotExists() {
-        InputDataTestMaker inputData = getInputDataBasic();
+        InputParamsTestMaker inputData = getInputDataBasic();
         inputData.setTestCasesFilter(Arrays.asList(TestNGxmlStub.methodThatDoesNotExistsInClass));
         
         TestNGxmlStub testStub = TestNGxmlStub.getNew(TypeStubTest.OnlyMethodThatDoesntExistInClass, inputData);
@@ -182,10 +175,10 @@ public class TestFilterTNGxmlTRun {
         assertEquals("No classes remains ", 0, testRun.getClasses().size());
     }
     
-    private InputDataTestMaker getInputDataBasic() {
-	    return InputDataTestMaker.getNew(
-			"Suite for Unit Tests", 
-			Channel.desktop, 
+    private InputParamsTestMaker getInputDataBasic() {
+	    return new InputParamsTestMaker (
+	    	Channel.desktop, 
+	    	Suite.SuiteForUnitTest, 
 			AppEcom.shop, 
 			"https://shop.mango.com/preHome.faces",
 			TypeWebDriver.chrome);

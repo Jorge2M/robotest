@@ -5,7 +5,6 @@ import java.util.Random;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.testab.TestABactData;
 import com.mng.robotest.test80.arq.utils.testab.TestABGoogleExp;
@@ -15,23 +14,23 @@ public class TestABGoogleExpManager implements TestABmanager {
 	public final static String nameCookieGoogleExperiments = "googleexperiments";
     final public TestABGoogleExp testAB;
 	final Channel channelTest;
-	final AppTest appTest;
+	final Enum<?> app;
 	final WebDriver driver;
 	
 	public int varianteActivada = 0;
 	
-	public TestABGoogleExpManager(TestABGoogleExp testAB, Channel channel, AppTest app, WebDriver driver) {
+	public TestABGoogleExpManager(TestABGoogleExp testAB, Channel channel, Enum<?> app, WebDriver driver) {
 		this.testAB = testAB;
 		this.channelTest = channel;
-		this.appTest = app;
+		this.app = app;
 		this.driver = driver;
 	}
 	
-	public TestABGoogleExpManager(TestABGoogleExp testAB, int variante, Channel channel, AppTest app, WebDriver driver) {
+	public TestABGoogleExpManager(TestABGoogleExp testAB, int variante, Channel channel, Enum<?> app, WebDriver driver) {
 		this.testAB = testAB;
 		this.varianteActivada = variante;
 		this.channelTest = channel;
-		this.appTest = app;
+		this.app = app;
 		this.driver = driver;
 	}
 	
@@ -46,7 +45,7 @@ public class TestABGoogleExpManager implements TestABmanager {
 		if (isActiveForChannelAndApp()) {
 			String valueCookieRemovingTestAB = getValueCookieResetingAllTestABvariants(driver);
 			if (valueCookieRemovingTestAB!=null) { 
-		        String testABvalueForVariant = testAB.getValueCookie(appTest) + "%3A" + varianteActivada + "%2C";
+		        String testABvalueForVariant = testAB.getValueCookie(app) + "%3A" + varianteActivada + "%2C";
 		        String newValueCookie = valueCookieRemovingTestAB + testABvalueForVariant;
 		        Cookie actualCookie = driver.manage().getCookieNamed(nameCookieGoogleExperiments);
 		        Cookie newCookie = getClonedWithNewValue(actualCookie, newValueCookie);
@@ -56,7 +55,7 @@ public class TestABGoogleExpManager implements TestABmanager {
 		}
 	}
 	
-	public static void activateTestsAB(List<TestABactData> testsABtoActive, Channel channel, AppTest app, WebDriver driver) throws Exception {
+	public static void activateTestsAB(List<TestABactData> testsABtoActive, Channel channel, Enum<?> app, WebDriver driver) throws Exception {
 		for (TestABactData testABtoActive : testsABtoActive) {
 			TestABGoogleExp testABact = (TestABGoogleExp)testABtoActive.getTestAB();
 			int varianteAct = testABtoActive.getvToActive();
@@ -115,7 +114,7 @@ public class TestABGoogleExpManager implements TestABmanager {
 	}
 	
 	String getValueExpectedInCookie(TestABGoogleExp testAB, int variante) {
-		return (testAB.getValueCookie(appTest) + "%3A" + variante + "%2C");
+		return (testAB.getValueCookie(app) + "%3A" + variante + "%2C");
 	}
 
 	String getValueCookieGoogleExperiments(WebDriver driver) {
@@ -142,6 +141,6 @@ public class TestABGoogleExpManager implements TestABmanager {
 	private boolean isActiveForChannelAndApp() {
 		return (
 			testAB.getChannels().contains(channelTest) &&
-			testAB.getApps().contains(appTest));
+			testAB.getApps().contains(app));
 	}
 }

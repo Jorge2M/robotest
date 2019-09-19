@@ -1,7 +1,6 @@
 package com.mng.robotest.test80.arq.access;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -12,19 +11,19 @@ import org.apache.commons.cli.OptionGroup;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import com.mng.robotest.test80.arq.listeners.CallBack;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
-import com.mng.robotest.test80.arq.xmlprogram.ParamsBean;
 
-public class CommandLineAccess { -> CheckerCommandLineAccess
+public class CommandLineAccess {
 
+	private final Class<? extends Enum<?>> suiteEnum;
+	private final Class<? extends Enum<?>> appEnum;
+	
 	private final Options options = new Options();
 	private final CommandLineParser parser = new DefaultParser();
 	private final OptionGroup moreOptions;
 	private final CommandLine cmdLine;
-
+	
     private static String HelpNameParam = "help";
     private static String SuiteNameParam = "suite";
     private static String GroupsNameParam = "groups";
@@ -40,22 +39,28 @@ public class CommandLineAccess { -> CheckerCommandLineAccess
     private static String NetAnalysis = "net";
     private static String Mails = "mails";
 	
-	private CommandLineAccess(String args[], OptionGroup moreOptions) throws ParseException {
+	public CommandLineAccess(String args[], OptionGroup moreOptions, Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) 
+	throws ParseException {
 		this.moreOptions = moreOptions;
+		this.suiteEnum = suiteEnum;
+		this.appEnum = appEnum;
 		if (!checkHelpParameterCase(args)) {
 			initOptions();
-	        cmdLine = parser.parse(options, args);
+			try {
+				cmdLine = parser.parse(options, args);
+			}
+			catch (ParseException e) {
+	            System.out.println(e.getLocalizedMessage());
+	            printHelpSyntaxis(options);
+	            throw e;
+			}
 		} else {
 			cmdLine = null;
 		}
 	}
 	
-	public static CommandLineAccess getNew(String args[], OptionGroup moreOptions) throws ParseException {
-		return new CommandLineAccess(args, moreOptions);
-	}
-	
-	public static CommandLineAccess getNew(String[] args) {
-		return getNew(null);
+	public CommandLine getComandLineData() {
+		return this.cmdLine;
 	}
 	
 	private void initOptions() {
@@ -155,7 +160,9 @@ public class CommandLineAccess { -> CheckerCommandLineAccess
         options.addOption(mails);
         
 		if (moreOptions!=null) {
-			options.addOptionGroup(moreOptions);
+			for (Option option : moreOptions.getOptions()) {
+				options.addOption(option);
+			}
 		}
 	}
 	
@@ -192,50 +199,40 @@ public class CommandLineAccess { -> CheckerCommandLineAccess
         formatter.printHelp(CommandLineAccess.class.getSimpleName(), options);
     }
     
-    ...se ha de ejecutar el checkparams desde el constructor pero tengo que ver qué hago en caso de KO -> 
-    creo que lo mejor es establecer una variable result a false.
-    private ParamsBean checkParams(String[] args) {
-        ParamsBean params = null;
-        if (checkParamValues(cmdLine)) {
-            params = storeParamsFromCommandLine(cmdLine);
-        }
-        return params;
-    }
-    
-    private static boolean checkParamValues(CommandLine cmdLine) {
+    public boolean checkTestMakerOptionValues() {
         boolean check=true;
         
         //Mandatory Params
         try {
-            Suites.valueOf(cmdLine.getOptionValue(SuiteNameParam));
+        	valueOf(suiteEnum.getEnumConstants(), cmdLine.getOptionValue(SuiteNameParam));
         }
         catch (IllegalArgumentException e) {
             check=false;
-            System.out.println("Suite Name not valid. Posible values: " + Arrays.toString(getNames(Suites.class)));
+            System.out.println("Suite Name not valid. Posible values: " + Arrays.toString(getNames(suiteEnum.getEnumConstants())));
         } 
         
         try {
-            AppEcom.valueOf(cmdLine.getOptionValue(AppNameParam));
+        	Channel.valueOf(cmdLine.getOptionValue(ChannelNameParam));
         }
         catch (IllegalArgumentException e) {
             check=false;
-            System.out.println("App Name not valid. Posible values: " + Arrays.toString(getNames(AppEcom.class)));
+            System.out.println("Channel not valid. Posible values: " + Arrays.toString(Channel.values()));
         }
         
         try {
-            Channel.valueOf(cmdLine.getOptionValue(ChannelNameParam));
+        	valueOf(appEnum.getEnumConstants(), cmdLine.getOptionValue(AppNameParam));
         }
         catch (IllegalArgumentException e) {
             check=false;
-            System.out.println("Channel Name not valid. Posible values: " + Arrays.toString(getNames(Channel.class)));
+            System.out.println("App not valid. Posible values: " + Arrays.toString(getNames(appEnum.getEnumConstants())));
         }
-        
+
         try {
             TypeWebDriver.valueOf(cmdLine.getOptionValue(BrowserNameParam));
         }
         catch (IllegalArgumentException e) {
             check=false;
-            System.out.println("Browser Name not valid. Posible values: " + Arrays.toString(getNames(TypeWebDriver.class)));
+            System.out.println("Browser Name not valid. Posible values: " + Arrays.toString(getNames(TypeWebDriver.class.getEnumConstants())));
         }
         
         //Not Mandatory Params
@@ -255,58 +252,57 @@ public class CommandLineAccess { -> CheckerCommandLineAccess
             }        
         }        
         
-        if (cmdLine.getOptionValue(CallBackSchema)!=null) {
-            try {
-                TypeCallbackSchema.valueOf(cmdLine.getOptionValue(CallBackSchema));
-            }
-            catch (IllegalArgumentException e) {
-                check=false;
-                System.out.println("CallBack Schema not valid. Posible values: " + Arrays.toString(getNames(TypeCallbackSchema.class)));
-            }
-            
-            try {
-                TypeCallBackMethod.valueOf(cmdLine.getOptionValue(CallBackMethod));
-            }
-            catch (IllegalArgumentException e) {
-                check=false;
-                System.out.println("CallBack Schema not valid. Posible values: " + Arrays.toString(getNames(TypeCallBackMethod.class)));
-            }
-        }
-        
         return check;
     }
     
-    public static ParamsBean storeParamsFromCommandLine(CommandLine cmdLine) {
-    	String app = cmdLine.getOptionValue(AppNameParam);
-    	String suite = cmdLine.getOptionValue(SuiteNameParam);
-        ParamsBean params = new ParamsBean(AppEcom.valueOf(app), Suites.valueOf(suite));
-        params.setChannel(cmdLine.getOptionValue(ChannelNameParam));
-        params.setGroups(cmdLine.getOptionValues(GroupsNameParam));
-        params.setBrowser(cmdLine.getOptionValue(BrowserNameParam));
-        params.setVersion(cmdLine.getOptionValue(VersionNameParam));
-        params.setURLBase(cmdLine.getOptionValue(URLNameParam));        
-        params.setListaPaises(cmdLine.getOptionValues(CountrysNameParam));
-        params.setListaLineas(cmdLine.getOptionValues(LineasNameParam));
-        params.setListaPayments(cmdLine.getOptionValues(PaymentsNameParam));        
-        params.setListaTestCases(cmdLine.getOptionValues(TCaseNameParam));
-        params.setUrlManto(cmdLine.getOptionValue(UrlManto));
-        params.setRecicleWD(cmdLine.getOptionValue(RecicleWD));
-        params.setNetAnalysis(cmdLine.getOptionValue(NetAnalysis));
-        params.setMails(cmdLine.getOptionValues(Mails));
-        params.setApplicationDNS(cmdLine.getOptionValue(ServerDNSNameParam));
-        params.setTypeAccessFromStr(cmdLine.getOptionValue(TypeAccessParam));
-        if (cmdLine.getOptionValue(CallBackResource)!=null) {
-            CallBack callBack = new CallBack();
-            callBack.setCallBackResource(cmdLine.getOptionValue(CallBackResource));
-            callBack.setCallBackMethod(cmdLine.getOptionValue(CallBackMethod));
-            callBack.setCallBackUser(cmdLine.getOptionValue(CallBackUser));
-            callBack.setCallBackPassword(cmdLine.getOptionValue(CallBackPassword));
-            callBack.setCallBackSchema(cmdLine.getOptionValue(CallBackSchema));
-            callBack.setCallBackParams(cmdLine.getOptionValue(CallBackParams));
-            params.setCallBack(callBack);
-        }        
-        
-        return params;
+    private static String[] getNames(Enum<?>[] enumConstants) {
+        return Arrays.stream(enumConstants).map(Enum::name).toArray(String[]::new);
     }
-	
+    
+    private static Enum<?> valueOf(Enum<?>[] enumConstants, String value) throws IllegalArgumentException {
+    	for (Enum<?> enumCandidate : enumConstants) {
+    		if (enumCandidate.name().equals(value)) {
+    			return enumCandidate;
+    		}
+    	}
+    	
+    	throw new IllegalArgumentException();
+    }
+    
+    public void storeDataOptionsTestMaker(InputParamsTestMaker inputParams) {
+    	String version = cmdLine.getOptionValue(VersionNameParam);
+    	if (version==null) {
+    		version = "V1";
+    	}
+        		
+    	inputParams.setChannel(Channel.valueOf(cmdLine.getOptionValue(ChannelNameParam)));
+    	inputParams.setSuite(valueOf(suiteEnum.getEnumConstants(), cmdLine.getOptionValue(SuiteNameParam)));
+    	inputParams.setApp(valueOf(appEnum.getEnumConstants(), cmdLine.getOptionValue(AppNameParam)));
+    	inputParams.setVersionSuite(version);
+    	inputParams.setUrlBase(cmdLine.getOptionValue(URLNameParam));
+    	inputParams.setTypeWebDriver(TypeWebDriver.valueOf(cmdLine.getOptionValue(BrowserNameParam)));
+    	inputParams.setWebAppDNS(cmdLine.getOptionValue(ServerDNSNameParam));
+
+    	String[] listGroups = cmdLine.getOptionValues(GroupsNameParam);
+    	if (listGroups!=null) {
+    		inputParams.setGroupsFilter(Arrays.asList());
+    	}
+    	String[] listTestCases = cmdLine.getOptionValues(TCaseNameParam);
+    	if (listTestCases!=null) {
+    		inputParams.setTestCasesFilter(Arrays.asList(listTestCases));
+    	}
+    	String[] listMails = cmdLine.getOptionValues(Mails);
+    	if (listMails!=null) {
+    		inputParams.setMails(Arrays.asList());
+    	}
+    	
+    	String recicleWD = cmdLine.getOptionValue(RecicleWD);
+    	if (recicleWD!=null) {
+        	inputParams.setRecicleWD(recicleWD);
+    	}
+    	String netAnalysis = cmdLine.getOptionValue(NetAnalysis);
+    	if (netAnalysis!=null) {
+    		inputParams.setNetAnalysis(netAnalysis);
+    	} 
+    }
 }

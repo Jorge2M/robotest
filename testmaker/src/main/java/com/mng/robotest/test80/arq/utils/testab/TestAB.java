@@ -2,7 +2,6 @@ package com.mng.robotest.test80.arq.utils.testab;
 
 import java.util.List;
 
-import com.mng.robotest.test80.arq.utils.conf.AppTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 
 public interface TestAB {
@@ -15,7 +14,7 @@ public interface TestAB {
 	public TypeTestAB getType();
 	public List<Integer> getVariantes();
 	public List<Channel> getChannels();
-	public List<AppTest> getApps();
+	public List<Enum<?>> getApps();
 }
 
 

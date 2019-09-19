@@ -17,7 +17,7 @@ public class Suite {
     public String fin;
     public String timeMs;
     public String numberMethods;
-    public String countrys;
+    public String moreInfo;
     public String urlBase;
     public String pathReport;
     public String urlReport;
@@ -75,8 +75,8 @@ public class Suite {
         return this.numberMethods;
     }
     
-    public String getCountrys() {
-        return this.countrys;
+    public String getMoreInfo() {
+        return this.moreInfo;
     }
     
     public String getUrlBase() {
@@ -147,8 +147,8 @@ public class Suite {
         this.numberMethods = numberMethods;
     }
     
-    public void setCountrys(String countrys) {
-        this.countrys = countrys;
+    public void setMoreInfo(String moreInfo) {
+        this.moreInfo = moreInfo;
     }
     
     public void setUrlBase(String urlBase) {

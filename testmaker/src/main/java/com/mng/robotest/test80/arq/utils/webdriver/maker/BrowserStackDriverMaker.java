@@ -18,7 +18,7 @@ public class BrowserStackDriverMaker implements WebdriverMaker {
 	String userBStack;
 	String passBStack;
 	ITestContext ctx;
-	Channel channel = Channel.desktop;
+	Channel channel;
 	boolean nettraffic = false;
 	
 	private BrowserStackDriverMaker(ITestContext ctx) {

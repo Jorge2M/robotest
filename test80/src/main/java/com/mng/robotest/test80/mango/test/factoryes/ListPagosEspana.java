@@ -5,9 +5,9 @@ import java.util.*;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.CompraFact;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
@@ -37,7 +37,7 @@ public class ListPagosEspana {
     public Object[] COM010_PagoFactory(ITestContext ctx) throws Exception {
     	this.ctx = ctx;
         ArrayList<Object> listTests = new ArrayList<>(); 
-        InputDataTestMaker inputData = TestCaseData.getInputDataTestMaker(ctx);
+        InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(ctx);
         AppEcom appE = (AppEcom)inputData.getApp();
         Channel channel = inputData.getChannel();
         try {

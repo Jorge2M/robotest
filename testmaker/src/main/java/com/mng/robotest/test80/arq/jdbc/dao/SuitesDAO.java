@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import org.testng.ISuite;
 import org.testng.ITestContext;
 
+import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.jdbc.Connector;
 import com.mng.robotest.test80.arq.jdbc.to.ResultTestRun;
 import com.mng.robotest.test80.arq.jdbc.to.Suite;
@@ -17,7 +18,6 @@ import com.mng.robotest.test80.arq.utils.StateSuite;
 import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.indexSuite;
-import com.mng.robotest.test80.arq.xmlprogram.InputDataTestMaker;
 import com.mng.robotest.test80.data.TestMakerContext;
 
 
@@ -28,25 +28,25 @@ public class SuitesDAO {
         " WHERE IDEXECSUITE = ? ";    
     
     public static String SQLSelectSuiteByKey = 
-        "SELECT IDEXECSUITE, SUITE, VERSION, BROWSER, CHANNEL, APP, RESULT_SCRIPT, RESULT_TNG, ERROR_SUITE_TNG, INICIO, FIN, TIME_MS, NUMBER_METHODS, COUNTRYS, URLBASE, PATH_REPORT, URL_REPORT, STATE " + 
+        "SELECT IDEXECSUITE, SUITE, VERSION, BROWSER, CHANNEL, APP, RESULT_SCRIPT, RESULT_TNG, ERROR_SUITE_TNG, INICIO, FIN, TIME_MS, NUMBER_METHODS, MORE_INFO, URLBASE, PATH_REPORT, URL_REPORT, STATE " + 
         "  FROM SUITES  " + 
         " WHERE IDEXECSUITE = ? AND SUITE = ? " + 
         " ORDER BY INICIO";
     
     public static String SQLSelectSuitesByChannel =
-        "SELECT IDEXECSUITE, SUITE, VERSION, BROWSER, CHANNEL, APP, RESULT_SCRIPT, RESULT_TNG, ERROR_SUITE_TNG, INICIO, FIN, TIME_MS, NUMBER_METHODS, COUNTRYS, URLBASE, PATH_REPORT, URL_REPORT, STATE " + 
+        "SELECT IDEXECSUITE, SUITE, VERSION, BROWSER, CHANNEL, APP, RESULT_SCRIPT, RESULT_TNG, ERROR_SUITE_TNG, INICIO, FIN, TIME_MS, NUMBER_METHODS, MORE_INFO, URLBASE, PATH_REPORT, URL_REPORT, STATE " + 
         "  FROM SUITES  " + 
         " WHERE SUITE = ? AND CHANNEL = ? " + 
         " ORDER BY INICIO DESC";
     
     public static String SQLSelectSuitesDesdeFecha = 
-        "SELECT IDEXECSUITE, SUITE, VERSION, BROWSER, CHANNEL, APP, RESULT_SCRIPT, RESULT_TNG, ERROR_SUITE_TNG, INICIO, FIN, TIME_MS, NUMBER_METHODS, COUNTRYS, URLBASE, PATH_REPORT, URL_REPORT, STATE " + 
+        "SELECT IDEXECSUITE, SUITE, VERSION, BROWSER, CHANNEL, APP, RESULT_SCRIPT, RESULT_TNG, ERROR_SUITE_TNG, INICIO, FIN, TIME_MS, NUMBER_METHODS, MORE_INFO, URLBASE, PATH_REPORT, URL_REPORT, STATE " + 
         "  FROM SUITES  " + 
         " WHERE INICIO >= ? " +
         "ORDER BY INICIO";
     
     public static String SQLSelectSuitesDesdeFechaInState = 
-        "SELECT IDEXECSUITE, SUITE, VERSION, BROWSER, CHANNEL, APP, RESULT_SCRIPT, RESULT_TNG, ERROR_SUITE_TNG, INICIO, FIN, TIME_MS, NUMBER_METHODS, COUNTRYS, URLBASE, PATH_REPORT, URL_REPORT, STATE " + 
+        "SELECT IDEXECSUITE, SUITE, VERSION, BROWSER, CHANNEL, APP, RESULT_SCRIPT, RESULT_TNG, ERROR_SUITE_TNG, INICIO, FIN, TIME_MS, NUMBER_METHODS, MORE_INFO, URLBASE, PATH_REPORT, URL_REPORT, STATE " + 
         "  FROM SUITES  " + 
         " WHERE INICIO >= ? AND STATE = ? " +
         "ORDER BY INICIO";
@@ -56,7 +56,7 @@ public class SuitesDAO {
     
     public static String SQLInsertSuiteInit = 
         "INSERT INTO SUITES " + 
-        "(IDEXECSUITE, SUITE, VERSION, CHANNEL, APP, BROWSER, INICIO, NUMBER_METHODS, URLBASE, COUNTRYS, PATH_REPORT, URL_REPORT, STATE) " + 
+        "(IDEXECSUITE, SUITE, VERSION, CHANNEL, APP, BROWSER, INICIO, NUMBER_METHODS, URLBASE, MORE_INFO, PATH_REPORT, URL_REPORT, STATE) " + 
         "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             
     public static String SQLUpdateEndSuite = 
@@ -239,7 +239,7 @@ public class SuitesDAO {
         suiteObj.setFin(rowSuite.getString("FIN"));
         suiteObj.setTimeMs(rowSuite.getString("TIME_MS"));
         suiteObj.setNumberMethods(rowSuite.getString("NUMBER_METHODS"));
-        suiteObj.setCountrys(rowSuite.getString("COUNTRYS"));
+        suiteObj.setMoreInfo(rowSuite.getString("MORE_INFO"));
         suiteObj.setUrlBase(rowSuite.getString("URLBASE"));
         suiteObj.setPathReport(rowSuite.getString("PATH_REPORT"));
         suiteObj.setUrlReport(rowSuite.getString("URL_REPORT"));
@@ -249,11 +249,11 @@ public class SuitesDAO {
     
     public static void insertSuiteInit(ISuite suite) {
     	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(suite);
-    	InputDataTestMaker inputDataTmaker = testMakerCtx.getInputData();
+    	InputParamsTestMaker inputDataTmaker = testMakerCtx.getInputData();
         try (Connection conn = Connector.getConnection()) {
             try (PreparedStatement insert = conn.prepareStatement(SQLInsertSuiteInit)) {
                 insert.setString(1, testMakerCtx.getIdSuiteExecution()) ;
-                insert.setString(2, inputDataTmaker.getNameSuite());
+                insert.setString(2, inputDataTmaker.getSuiteName());
                 insert.setString(3, inputDataTmaker.getVersionSuite());
                 insert.setString(4, inputDataTmaker.getChannel().toString());
                 insert.setString(5, inputDataTmaker.getApp().toString());
@@ -264,8 +264,8 @@ public class SuitesDAO {
                 
                 //TODO desacoplar
                 String countrys = "";
-                if (inputDataTmaker.getCountrys()!=null) {
-                	countrys = inputDataTmaker.getCountrys().toString();
+                if (inputDataTmaker.getMoreInfo()!=null) {
+                	countrys = inputDataTmaker.getMoreInfo().toString();
                 }
                 insert.setString(10, countrys);
                 
