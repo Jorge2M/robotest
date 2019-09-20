@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.Select;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
+import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2IdentCheckout;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro.DataRegType;
@@ -193,7 +194,7 @@ public class PageRegistroIni extends WebdrvWrapp {
         //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
         if (isButtonRegistrateVisible()) {
         	try {
-        		clickAndWaitLoad(driver, By.xpath(XPathButtonRegistrate));
+        		clickAndWaitLoad(driver, By.xpath(XPathButtonRegistrate), TypeOfClick.javascript);
         	}
         	catch (Exception e) {
         		pLogger.info("Problem in second click to Registrate Button", e);

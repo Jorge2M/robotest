@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.arq.access;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.cli.Option;
@@ -49,6 +50,14 @@ public class OptionTMaker {
 		public Builder possibleValues(List<String> possibleValues) {
 			this.possibleValues = possibleValues;
 			return this;
+		}
+		
+		public Builder possibleValuesEnum(List<Enum<?>> possibleValues) {
+			List<String> valuesString = new ArrayList<>();
+			for (Enum<?> value : possibleValues) {
+				valuesString.add(value.toString());
+			}
+			return possibleValues(valuesString);
 		}
 		
         /**

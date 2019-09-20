@@ -34,7 +34,7 @@ public class Page2IdentCheckout extends WebdrvWrapp {
     final static String XPathInputTelefono = "//input[@id[contains(.,':cfTelf')]]";
     final static String XPathInputDireccion1 = "//input[@id[contains(.,':cfDir1')]]";
     final static String XPathInputDireccion2 = "//input[@id[contains(.,':cfDir2')]]";
-    final static String XPathCheckPublicidad = "//div[@id[contains(.,':cfPubli')] or @id[contains(.,'_cfPubli')]]";
+    final static String XPathCheckPublicidad = "//input[@id[contains(.,':cfPubli')] or @id[contains(.,'_cfPubli')]]/..";
     final static String XPathInputEmail = "//input[@id[contains(.,':cfEmail')]]";
     final static String XPathInputDNI = "//input[@id[contains(.,':cfDni')]]";
     final static String XPathInputCodPost = "//input[@id[contains(.,':cfCp')]]";

@@ -255,28 +255,82 @@ public class CommandLineAccess {
             }        
         }        
         
-        //Specific client Parmas
-        ,,,
+        //Specific client Params
+        StringBuffer storedErrors = new StringBuffer();
+        if (!checkSpecificClientValues(storedErrors)) {
+        	check=false;
+        	System.out.println(storedErrors);
+        }
         
-        return check;
+        return (check);
     }
     
-    private boolean checkSpecificClientValues() {
+    boolean checkSpecificClientValues(StringBuffer storedErrors) {
     	boolean check = true;
     	for (OptionTMaker optionTMaker : specificClientOptions) {
-    		,,, seguir por aquí
-    		if (optionTMaker.getOption().hasValueSeparator()) {
-    			String stringPattern = optionTMaker.getPattern();
-	    		if (stringPattern!=null) {
-	    			Pattern pattern = Pattern.compile(stringPattern);
-	    			Matcher matcher = pattern.matcher(countrysValue);
+    		String nameParam = optionTMaker.getOption().getOpt();
+    		String valueOption = cmdLine.getOptionValue(nameParam);
+    		if (optionTMaker.getOption().isRequired()) {
+    			if (valueOption==null) {
+    		    	String saltoLinea = System.getProperty("line.separator");
+    				storedErrors.append("Mandatory param " + nameParam + " doesn't exists" + saltoLinea);
+    				check = false;
+    			}
+    		}
+    		if (valueOption!=null) {
+	    		if (!optionTMaker.getOption().hasValueSeparator()) {
+	    			if (!checkOptionValue(optionTMaker, valueOption, storedErrors)) {
+	    				check = false;
+	    			}
+	    		} else {
+	    			String[] valuesOption = cmdLine.getOptionValues(nameParam);
+	    			if (!checkOptionValues(optionTMaker, valuesOption, storedErrors)) {
+	    				check = false;
+	    			}
 	    		}
-    		} else {
-    			
     		}
     	}
-    	
     	return check;
+    }
+    
+    private boolean checkOptionValues(OptionTMaker optionTMaker, String[] valuesOption, StringBuffer storedErrors) {
+		for (String valueOption : valuesOption) {
+			if (!checkOptionValue(optionTMaker, valueOption, storedErrors)) {
+				return false;
+			}
+		}
+		return true;
+    }
+    
+    private boolean checkOptionValue(OptionTMaker optionTMaker, String value, StringBuffer storedErrors) {
+		String nameParam = optionTMaker.getOption().getOpt();
+		String stringPattern = optionTMaker.getPattern();
+		String saltoLinea = System.getProperty("line.separator");
+		if (stringPattern!=null && !checkPatternValue(stringPattern, value)) {
+			storedErrors.append("Param " + nameParam + " with value " + value + " that doesn't match pattern " + stringPattern + saltoLinea);
+			return false;
+		}
+		List<String> possibleValues = optionTMaker.possibleValues();
+		if (possibleValues!=null && !checkPossibleValues(possibleValues, value)) {
+			storedErrors.append("Param " + nameParam + " with value " + value + " is not one of the possible values " + possibleValues + saltoLinea);
+			return false;
+		}
+		return true;
+    }
+    
+    private boolean checkPatternValue(String stringPattern, String value) {
+		Pattern pattern = Pattern.compile(stringPattern);
+		Matcher matcher = pattern.matcher(value);
+		return matcher.matches();
+    }
+    
+    private boolean checkPossibleValues(List<String> possibleValues, String value) {
+    	for (String possibleValue : possibleValues) {
+    		if (possibleValue.compareTo(value)==0) {
+    			return true;
+    		}
+    	}
+    	return false;
     }
     
     private static String[] getNames(Enum<?>[] enumConstants) {

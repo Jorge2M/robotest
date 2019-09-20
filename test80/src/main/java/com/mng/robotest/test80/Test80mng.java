@@ -5,13 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TreeSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.OptionGroup;
-import org.apache.commons.cli.Options;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -49,53 +44,14 @@ public class Test80mng {
     public enum TypeCallbackSchema {http, https}
     public enum TypeCallBackMethod {POST, GET}
     
-    /**
-     * Direct access from Command Line
-     * Parseamos la línea de comandos y ejecutamos la TestSuite correspondiente mediante la XML programática 
-     */
     public static void main(String[] args) throws Exception { 
     	List<OptionTMaker> optionsTest80 = specificMangoOptions();
     	CommandLineAccess cmdLineAccess = new CommandLineAccess(args, optionsTest80, Suites.class, AppEcom.class);
-    	//boolean optionsTestMakerOk = cmdLineAccess.checkOptionValues();
-    	//boolean optionsMangoOk = checkMangoOptionsValues(cmdLineAccess.getComandLineData()); //TODO añadir Pattern en la Option para así ahorrarnos este paso
     	if (cmdLineAccess.checkOptionValues()) {
-    		InputParams inputParams = getInputParamsData(cmdLineAccess);
+    		InputParams inputParams = getInputParamsFromCommandLine(cmdLineAccess);
             inputParams.setTypeAccessIfNotSetted(TypeAccessFmwk.CommandLine);
             execSuite(inputParams);
     	}
-    }
-    
-    private static boolean checkMangoOptionsValues(CommandLine cmdLineData) {
-    	boolean check = true;
-//    	String countrysValue = cmdLineData.getOptionValue(CountrysNameParam);
-//    	if (countrysValue!=null) {
-//    		Pattern pattern = Pattern.compile("[0-9]+(,[0-9]+)*");
-//            Matcher matcher = pattern.matcher(countrysValue);
-//            if (!matcher.find()) {
-//            	check = false;
-//            	System.out.println(CountrysNameParam + "not valid. Is not a list of digit codes separated by commas");
-//            }
-//    	}
-    	
-        if (cmdLineData.getOptionValue(CallBackSchema)!=null) {
-            try {
-                TypeCallbackSchema.valueOf(cmdLineData.getOptionValue(CallBackSchema));
-            }
-            catch (IllegalArgumentException e) {
-                check=false;
-                System.out.println(CallBackSchema + " not valid. Posible values: " + Arrays.asList(TypeCallbackSchema.values()));
-            }
-            
-            try {
-                TypeCallBackMethod.valueOf(cmdLineData.getOptionValue(CallBackMethod));
-            }
-            catch (IllegalArgumentException e) {
-                check=false;
-                System.out.println(CallBackMethod + " not valid. Posible values: " + Arrays.asList(TypeCallBackMethod.values()));
-            }
-        }
-    	
-    	return check;
     }
     
     private static List<OptionTMaker> specificMangoOptions() {
@@ -105,8 +61,8 @@ public class Test80mng {
             .required(false)
             .hasArgs()
             .valueSeparator(',')
-            .desc("List of codes of countrys comma separated")
-            .pattern("[0-9]")
+            .desc("List of 3-digit codes of countrys comma separated")
+            .pattern("\\d{3}")
             .build();
         
     	OptionTMaker lineas = OptionTMaker.builder(LineasNameParam)
@@ -130,32 +86,34 @@ public class Test80mng {
             .desc("URL of the Backoffice of mangoshop (Manto application)")
             .build();    
         
+    	List<Enum<?>> listTypeAccessFmwk = Arrays.asList(TypeAccessFmwk.values());
     	OptionTMaker bat = OptionTMaker.builder(TypeAccessParam)
             .required(false)
             .hasArgs()
-            .valueSeparator(',')
-            .desc("Type of access. Posible values: " + Arrays.asList(TypeAccessFmwk.values()))
+            .possibleValuesEnum(listTypeAccessFmwk)
+            .desc("Type of access. Posible values: " + listTypeAccessFmwk)
             .build();               
         
     	OptionTMaker callbackResource = OptionTMaker.builder(CallBackResource)
             .required(false)
             .hasArgs()
-            .valueSeparator(',')
             .desc("CallBack URL (without schema and params) to invoke in the end of the TestSuite")
             .build();
         
+    	List<Enum<?>> listTypeCallBackMethod = Arrays.asList(TypeCallBackMethod.values());
     	OptionTMaker callbackMethod = OptionTMaker.builder(CallBackMethod)
             .required(false)
             .hasArgs()
-            .valueSeparator(',')
-            .desc("Method of the CallBack URL (POST o GET)")
+            .possibleValuesEnum(listTypeCallBackMethod)
+            .desc("Method of the CallBack URL. Possible values: " + listTypeCallBackMethod)
             .build();        
         
+    	List<Enum<?>> listTypeCallbackSchema = Arrays.asList(TypeCallbackSchema.values());
     	OptionTMaker callbackSchema = OptionTMaker.builder(CallBackSchema)
             .required(false)
             .hasArgs()
-            .valueSeparator(',')
-            .desc("Schema of the CallBack URL (http or https)")
+            .possibleValuesEnum(listTypeCallbackSchema)
+            .desc("Schema of the CallBack URL. Possible values: " + listTypeCallbackSchema)
             .build();        
         
     	OptionTMaker callbackParams = OptionTMaker.builder(CallBackParams)
@@ -168,14 +126,12 @@ public class Test80mng {
     	OptionTMaker callbackUser = OptionTMaker.builder(CallBackUser)
             .required(false)
             .hasArgs()
-            .valueSeparator(',')
             .desc("User credential needed to invoke the CallBack URL")
             .build();        
-        
+
     	OptionTMaker callbackPassword = OptionTMaker.builder(CallBackPassword)
             .required(false)
             .hasArgs()
-            .valueSeparator(',')
             .desc("Password credential needed to invoke the CallBack URL")
             .build();        
                 
@@ -194,7 +150,7 @@ public class Test80mng {
         return options;
     }
     
-    private static InputParams getInputParamsData(CommandLineAccess cmdLineAccess) {
+    private static InputParams getInputParamsFromCommandLine(CommandLineAccess cmdLineAccess) {
     	InputParams inputParams = new InputParams();
     	CommandLine cmdLineData = cmdLineAccess.getComandLineData();
 		cmdLineAccess.storeDataOptionsTestMaker(inputParams);
