@@ -1,5 +1,7 @@
 package com.mng.robotest.test80;
 
+import java.util.Arrays;
+
 import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
 
@@ -18,13 +20,13 @@ public class InputParams extends InputParamsTestMaker {
     public String getMoreInfo() {
     	StringBuilder moreInfo = new StringBuilder();
     	if (listaPaises!=null && listaPaises.length > 0) {
-    		moreInfo.append("List Countrys : " + listaPaises + lineSeparator);
+    		moreInfo.append("List Countrys : " + Arrays.asList(listaPaises) + lineSeparator);
     	}
     	if (listaLineas!=null && listaLineas.length > 0) {
-    		moreInfo.append("List Lines: " + listaLineas + lineSeparator);
+    		moreInfo.append("List Lines: " + Arrays.asList(listaLineas) + lineSeparator);
     	}
     	if (listaPayments!=null && listaPayments.length > 0) {
-    		moreInfo.append("List Payments: " + listaPayments);
+    		moreInfo.append("List Payments: " + Arrays.asList(listaPayments));
     	}
     	
     	return moreInfo.toString();

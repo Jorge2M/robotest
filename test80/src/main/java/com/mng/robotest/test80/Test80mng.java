@@ -11,10 +11,12 @@ import java.util.regex.Pattern;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.OptionGroup;
+import org.apache.commons.cli.Options;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mng.robotest.test80.arq.access.CommandLineAccess;
+import com.mng.robotest.test80.arq.access.OptionTMaker;
 import com.mng.robotest.test80.arq.utils.utils;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.filter.TestMethod;
@@ -52,11 +54,11 @@ public class Test80mng {
      * Parseamos la línea de comandos y ejecutamos la TestSuite correspondiente mediante la XML programática 
      */
     public static void main(String[] args) throws Exception { 
-    	OptionGroup optionsTest80 = specificMangoOptions();
+    	List<OptionTMaker> optionsTest80 = specificMangoOptions();
     	CommandLineAccess cmdLineAccess = new CommandLineAccess(args, optionsTest80, Suites.class, AppEcom.class);
-    	boolean optionsTestMakerOk = cmdLineAccess.checkTestMakerOptionValues();
-    	boolean optionsMangoOk = checkMangoOptionsValues(cmdLineAccess.getComandLineData()); //TODO añadir Pattern en la Option para así ahorrarnos este paso
-    	if (optionsTestMakerOk && optionsMangoOk) {
+    	//boolean optionsTestMakerOk = cmdLineAccess.checkOptionValues();
+    	//boolean optionsMangoOk = checkMangoOptionsValues(cmdLineAccess.getComandLineData()); //TODO añadir Pattern en la Option para así ahorrarnos este paso
+    	if (cmdLineAccess.checkOptionValues()) {
     		InputParams inputParams = getInputParamsData(cmdLineAccess);
             inputParams.setTypeAccessIfNotSetted(TypeAccessFmwk.CommandLine);
             execSuite(inputParams);
@@ -65,15 +67,15 @@ public class Test80mng {
     
     private static boolean checkMangoOptionsValues(CommandLine cmdLineData) {
     	boolean check = true;
-    	String countrysValue = cmdLineData.getOptionValue(CountrysNameParam);
-    	if (countrysValue!=null) {
-    		Pattern pattern = Pattern.compile("[0-9]+(,[0-9]+)*");
-            Matcher matcher = pattern.matcher(countrysValue);
-            if (!matcher.find()) {
-            	check = false;
-            	System.out.println(CountrysNameParam + "not valid. Is not a list of digit codes separated by commas");
-            }
-    	}
+//    	String countrysValue = cmdLineData.getOptionValue(CountrysNameParam);
+//    	if (countrysValue!=null) {
+//    		Pattern pattern = Pattern.compile("[0-9]+(,[0-9]+)*");
+//            Matcher matcher = pattern.matcher(countrysValue);
+//            if (!matcher.find()) {
+//            	check = false;
+//            	System.out.println(CountrysNameParam + "not valid. Is not a list of digit codes separated by commas");
+//            }
+//    	}
     	
         if (cmdLineData.getOptionValue(CallBackSchema)!=null) {
             try {
@@ -81,7 +83,7 @@ public class Test80mng {
             }
             catch (IllegalArgumentException e) {
                 check=false;
-                System.out.println("CallBack Schema not valid. Posible values: " + Arrays.asList(TypeCallbackSchema.values()));
+                System.out.println(CallBackSchema + " not valid. Posible values: " + Arrays.asList(TypeCallbackSchema.values()));
             }
             
             try {
@@ -89,105 +91,105 @@ public class Test80mng {
             }
             catch (IllegalArgumentException e) {
                 check=false;
-                System.out.println("CallBack Schema not valid. Posible values: " + Arrays.asList(TypeCallBackMethod.values()));
+                System.out.println(CallBackMethod + " not valid. Posible values: " + Arrays.asList(TypeCallBackMethod.values()));
             }
         }
     	
     	return check;
     }
     
-    private static OptionGroup specificMangoOptions() {
-    	OptionGroup options = new OptionGroup();
+    private static List<OptionTMaker> specificMangoOptions() {
+    	List<OptionTMaker> options = new ArrayList<>();
              
-        Option countrys = Option.builder(CountrysNameParam)
+    	OptionTMaker countrys = OptionTMaker.builder(CountrysNameParam)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .desc("List of codes of countrys comma separated")
+            .pattern("[0-9]")
             .build();
         
-        Option lineas = Option.builder(LineasNameParam)
+    	OptionTMaker lineas = OptionTMaker.builder(LineasNameParam)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .desc("List of lines comma separated (p.e. she,he,...)")
             .build();        
 
-        Option payments = Option.builder(PaymentsNameParam)
+    	OptionTMaker payments = OptionTMaker.builder(PaymentsNameParam)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .desc("List of payments comma separated (p.e. VISA,TARJETA MANGO,...)")
             .build();
         
-        Option urlManto = Option.builder(UrlManto)
+    	OptionTMaker urlManto = OptionTMaker.builder(UrlManto)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .desc("URL of the Backoffice of mangoshop (Manto application)")
             .build();    
         
-        Option bat = Option.builder(TypeAccessParam)
+    	OptionTMaker bat = OptionTMaker.builder(TypeAccessParam)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .desc("Type of access. Posible values: " + Arrays.asList(TypeAccessFmwk.values()))
             .build();               
         
-        Option callbackResource = Option.builder(CallBackResource)
+    	OptionTMaker callbackResource = OptionTMaker.builder(CallBackResource)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .desc("CallBack URL (without schema and params) to invoke in the end of the TestSuite")
             .build();
         
-        Option callbackMethod = Option.builder(CallBackMethod)
+    	OptionTMaker callbackMethod = OptionTMaker.builder(CallBackMethod)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .desc("Method of the CallBack URL (POST o GET)")
             .build();        
         
-        Option callbackSchema = Option.builder(CallBackSchema)
+    	OptionTMaker callbackSchema = OptionTMaker.builder(CallBackSchema)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .desc("Schema of the CallBack URL (http or https)")
             .build();        
         
-        Option callbackParams = Option.builder(CallBackParams)
+    	OptionTMaker callbackParams = OptionTMaker.builder(CallBackParams)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .desc("Params of the CallBack URL (in format param1:value1,param2:value2...)")
             .build();        
         
-        Option callbackUser = Option.builder(CallBackUser)
+    	OptionTMaker callbackUser = OptionTMaker.builder(CallBackUser)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .desc("User credential needed to invoke the CallBack URL")
             .build();        
         
-        Option callbackPassword = Option.builder(CallBackPassword)
+    	OptionTMaker callbackPassword = OptionTMaker.builder(CallBackPassword)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .desc("Password credential needed to invoke the CallBack URL")
             .build();        
                 
-        //Optional
-        options.addOption(countrys);
-        options.addOption(lineas);
-        options.addOption(payments);        
-        options.addOption(urlManto);;
-        options.addOption(bat);
-        options.addOption(callbackResource);
-        options.addOption(callbackMethod);
-        options.addOption(callbackSchema);
-        options.addOption(callbackParams);
-        options.addOption(callbackUser);
-        options.addOption(callbackPassword);
+        options.add(countrys);
+        options.add(lineas);
+        options.add(payments);        
+        options.add(urlManto);;
+        options.add(bat);
+        options.add(callbackResource);
+        options.add(callbackMethod);
+        options.add(callbackSchema);
+        options.add(callbackParams);
+        options.add(callbackUser);
+        options.add(callbackPassword);
         
         return options;
     }

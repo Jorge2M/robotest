@@ -1,13 +1,15 @@
 package com.mng.robotest.test80.arq.access;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
-import org.apache.commons.cli.OptionGroup;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
@@ -21,7 +23,7 @@ public class CommandLineAccess {
 	
 	private final Options options = new Options();
 	private final CommandLineParser parser = new DefaultParser();
-	private final OptionGroup moreOptions;
+	private final List<OptionTMaker> specificClientOptions;
 	private final CommandLine cmdLine;
 	
     private static String HelpNameParam = "help";
@@ -39,9 +41,10 @@ public class CommandLineAccess {
     private static String NetAnalysis = "net";
     private static String Mails = "mails";
 	
-	public CommandLineAccess(String args[], OptionGroup moreOptions, Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) 
+	public CommandLineAccess(
+			String args[], List<OptionTMaker> specificClientOptions, Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) 
 	throws ParseException {
-		this.moreOptions = moreOptions;
+		this.specificClientOptions = specificClientOptions;
 		this.suiteEnum = suiteEnum;
 		this.appEnum = appEnum;
 		if (!checkHelpParameterCase(args)) {
@@ -159,9 +162,9 @@ public class CommandLineAccess {
         options.addOption(netAnalysis);
         options.addOption(mails);
         
-		if (moreOptions!=null) {
-			for (Option option : moreOptions.getOptions()) {
-				options.addOption(option);
+		if (specificClientOptions!=null) {
+			for (OptionTMaker optionTMaker : specificClientOptions) {
+				options.addOption(optionTMaker.getOption());
 			}
 		}
 	}
@@ -199,10 +202,10 @@ public class CommandLineAccess {
         formatter.printHelp(CommandLineAccess.class.getSimpleName(), options);
     }
     
-    public boolean checkTestMakerOptionValues() {
+    public boolean checkOptionValues() {
         boolean check=true;
         
-        //Mandatory Params
+        //Mandatory TMaker Params
         try {
         	valueOf(suiteEnum.getEnumConstants(), cmdLine.getOptionValue(SuiteNameParam));
         }
@@ -235,7 +238,7 @@ public class CommandLineAccess {
             System.out.println("Browser Name not valid. Posible values: " + Arrays.toString(getNames(TypeWebDriver.class.getEnumConstants())));
         }
         
-        //Not Mandatory Params
+        //Not Mandatory TMaker Params
         if (cmdLine.getOptionValue(RecicleWD)!=null) {
             String recicleWDvalue = cmdLine.getOptionValue(RecicleWD);
             if (!recicleWDvalue.contains("true") && !recicleWDvalue.contains("false")) {
@@ -252,7 +255,28 @@ public class CommandLineAccess {
             }        
         }        
         
+        //Specific client Parmas
+        ,,,
+        
         return check;
+    }
+    
+    private boolean checkSpecificClientValues() {
+    	boolean check = true;
+    	for (OptionTMaker optionTMaker : specificClientOptions) {
+    		,,, seguir por aquí
+    		if (optionTMaker.getOption().hasValueSeparator()) {
+    			String stringPattern = optionTMaker.getPattern();
+	    		if (stringPattern!=null) {
+	    			Pattern pattern = Pattern.compile(stringPattern);
+	    			Matcher matcher = pattern.matcher(countrysValue);
+	    		}
+    		} else {
+    			
+    		}
+    	}
+    	
+    	return check;
     }
     
     private static String[] getNames(Enum<?>[] enumConstants) {
