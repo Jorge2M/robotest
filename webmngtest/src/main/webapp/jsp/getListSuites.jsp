@@ -61,7 +61,7 @@ for (Suite suite : listSuites) {
 		<td id="application"><%=suite.getApplication()%></td>
 		<td id="browser"><%=suite.getBrowser()%></td>
 		<td id="numTCases"><%=suite.getNumberMethods()%></td>
-		<td id="countrys"><%=suite.getCountrys()%></td>
+		<td id="countrys"><%=suite.getMoreInfo()%></td>
 		<td id="urlBase">
 			<a href="<%=suite.getUrlBase()%>"><%=suite.getUrlBase()%></a>
 		</td>		

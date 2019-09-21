@@ -9,14 +9,16 @@ response.setDateHeader ("Expires", -1);%>
 </head>
 <body>
 	<%@ page import="com.mng.robotest.test80.Test80mng" %>
-	<%@ page import="com.mng.robotest.test80.arq.access.InputParamsTestMaker" %>
+	<%@ page import="com.mng.robotest.test80.InputParams" %>
+	<%@ page import="com.mng.robotest.test80.arq.access.CommandLineAccess"%>
 	<%@ page import="java.io.BufferedReader" %>
 	<%@ page import="javax.servlet.ServletContext" %>
 	<%@ page import="java.io.InputStreamReader" %>
+	<%@ page import="java.util.Arrays" %>
 	<%@ page import="org.pruebasws.thread.TSuiteThreadsManager" %>
 	<%@ page import="com.mng.robotest.test80.arq.jdbc.to.Suite" %>
 	<%@ page import="com.mng.robotest.test80.arq.jdbc.dao.SuitesDAO" %>
-	<%@ page import="com.mng.robotest.test80.arq.listeners.CallBack" %>
+	<%@ page import="com.mng.robotest.test80.CallBack" %>
 	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.Suites" %>
 	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
 	<%@ page import="com.mng.robotest.test80.arq.xmlprogram.SuiteMaker" %>
@@ -58,7 +60,7 @@ response.setDateHeader ("Expires", -1);%>
   	  	  	System.setProperty("user.dir", getServletContext().getRealPath(""));
   	  	  	
   	  	  	//Store the request params
-  	  	  	InputParamsTestMaker paramsTSuite = storeParamsFromHttpRequest(request);
+  	  	  	InputParams paramsTSuite = storeParamsFromHttpRequest(request);
   	  		
   	  		//Specific parameter from index.jsp
   	  	  	String forceStart = "off"; 
@@ -69,18 +71,18 @@ response.setDateHeader ("Expires", -1);%>
   	%>
 
 	<div id="dataTestSuite"">
-		<p id="testSuiteName">TestSuite: <b><%=paramsTSuite.getNameSuite()%></b></p>
+		<p id="testSuiteName">TestSuite: <b><%=paramsTSuite.getSuiteName()%></b></p>
 		<p class="testSuiteAttribute">Channel: <b><%=paramsTSuite.getChannel()%></b></p>
-		<p class="testSuiteAttribute">Browser: <b><%=paramsTSuite.getBrowser()%></b></p>
+		<p class="testSuiteAttribute">Browser: <b><%=paramsTSuite.getTypeWebDriver()%></b></p>
 		<%
-		if (paramsTSuite.getVersion()!=null && "".compareTo(paramsTSuite.getVersion())!=0) {
+		if (paramsTSuite.getVersionSuite()!=null && "".compareTo(paramsTSuite.getVersionSuite())!=0) {
 		%>
-		<p class="testSuiteAttribute">Version: <b><%=paramsTSuite.getVersion()%></b></p>
+		<p class="testSuiteAttribute">Version: <b><%=paramsTSuite.getVersionSuite()%></b></p>
 		<%
 		}
-		if (paramsTSuite.getURLBase()!=null && "".compareTo(paramsTSuite.getURLBase())!=0) {
+		if (paramsTSuite.getUrlBase()!=null && "".compareTo(paramsTSuite.getUrlBase())!=0) {
 		%>
-		<p class="testSuiteAttribute">URL Base: <b><%=paramsTSuite.getURLBase()%></b></p>
+		<p class="testSuiteAttribute">URL Base: <b><%=paramsTSuite.getUrlBase()%></b></p>
 		<%
 	    }
 	    if (paramsTSuite.getListaPaises()!=null) {
@@ -94,15 +96,15 @@ response.setDateHeader ("Expires", -1);%>
 	<%
 	boolean browserTasksRunning;
 	if(System.getProperty("os.name").contains("Windows")){
-		browserTasksRunning = browserTasksRunning(paramsTSuite.getBrowser(), "tasklist");
+		browserTasksRunning = browserTasksRunning(paramsTSuite.getTypeWebDriver().toString(), "tasklist");
 	} else {
-		browserTasksRunning = browserTasksRunning(paramsTSuite.getBrowser(), "ps");
+		browserTasksRunning = browserTasksRunning(paramsTSuite.getTypeWebDriver().toString(), "ps");
 	}
 	if (forceStart.toLowerCase().compareTo("on")!=0 && browserTasksRunning) {
 	%>
 		<div id="contenidoAjax"><p style="color:red;">Test no iniciado! </p>
 			<ul>
-				<li><b>Existe un <%=paramsTSuite.getBrowser().toUpperCase()%> arrancado en la m�quina de Test.</b> Puede tratarse de un test activo. Espere a que finalice el test en la m�quina remota o cierre las pantallas de <%=paramsTSuite.getBrowser().toUpperCase()%>.</li>
+				<li><b>Existe un <%=paramsTSuite.getTypeWebDriver().toString().toUpperCase()%> arrancado en la m�quina de Test.</b> Puede tratarse de un test activo. Espere a que finalice el test en la m�quina remota o cierre las pantallas de <%=paramsTSuite.getTypeWebDriver().toString().toUpperCase()%>.</li>
 			</ul>
 		</div>
 		<%
@@ -138,27 +140,35 @@ response.setDateHeader ("Expires", -1);%>
 	}
 	%>
 	
-	<%!public static InputParamsTestMaker storeParamsFromHttpRequest(HttpServletRequest request) {
+	<%!public static InputParams storeParamsFromHttpRequest(HttpServletRequest request) {
 		//Parameters that come from index.jsp
-		String app = request.getParameter(Test80mng.AppNameParam);
-    	String suite = request.getParameter(Test80mng.SuiteNameParam);
-        InputParamsTestMaker paramsTSuite = new InputParamsTestMaker(AppEcom.valueOf(app), Suites.valueOf(suite));
-	    paramsTSuite.setChannel(request.getParameter(Test80mng.ChannelNameParam));
-	    paramsTSuite.setBrowser(request.getParameter(Test80mng.BrowserNameParam));
-	    paramsTSuite.setVersion(request.getParameter(Test80mng.VersionNameParam));
-	    paramsTSuite.setURLBase(request.getParameter(Test80mng.URLNameParam));
-	    paramsTSuite.setNetAnalysis(request.getParameter(Test80mng.NetAnalysis));
+		String app = request.getParameter(CommandLineAccess.AppNameParam);
+    	String suite = request.getParameter(CommandLineAccess.SuiteNameParam);
+    	InputParams paramsTSuite = InputParams.getNew();
+    	paramsTSuite.setApp(AppEcom.valueOf(app));
+    	paramsTSuite.setSuite(Suites.valueOf(suite));
+	    paramsTSuite.setChannel(request.getParameter(CommandLineAccess.ChannelNameParam));
+	    paramsTSuite.setBrowser(request.getParameter(CommandLineAccess.BrowserNameParam));
+	    paramsTSuite.setVersionSuite(request.getParameter(CommandLineAccess.VersionNameParam));
+	    paramsTSuite.setUrlBase(request.getParameter(CommandLineAccess.URLNameParam));
+	    paramsTSuite.setNetAnalysis(request.getParameter(CommandLineAccess.NetAnalysis));
 	    paramsTSuite.setListaPaises(request.getParameter(Test80mng.CountrysNameParam));
 	    paramsTSuite.setListaLineas(request.getParameterValues(Test80mng.LineasNameParam));
 	    paramsTSuite.setListaPayments(request.getParameterValues(Test80mng.PaymentsNameParam));
-	    paramsTSuite.setListaTestCases(request.getParameterValues(Test80mng.TCaseNameParam));
+	    String[] listTCases = request.getParameterValues(CommandLineAccess.TCaseNameParam);
+	    if (listTCases!=null) {
+	    	paramsTSuite.setTestCasesFilter(Arrays.asList(listTCases));
+	    }
 
 	    //Parameters that don't come from index.jsp (for exemple, the call from Jenkin's CI Task)
 	    paramsTSuite.setUrlManto(request.getParameter(Test80mng.UrlManto));
-	    paramsTSuite.setRecicleWD(request.getParameter(Test80mng.RecicleWD));
-	    paramsTSuite.setNetAnalysis(request.getParameter(Test80mng.NetAnalysis));
-	    paramsTSuite.setMails(request.getParameterValues(Test80mng.Mails));
-	    paramsTSuite.setApplicationDNS(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()); 
+	    paramsTSuite.setRecicleWD(request.getParameter(CommandLineAccess.RecicleWD));
+	    paramsTSuite.setNetAnalysis(request.getParameter(CommandLineAccess.NetAnalysis));
+	    String[] listMails = request.getParameterValues(CommandLineAccess.Mails);
+	    if (listMails!=null) {
+	    	paramsTSuite.setMails(Arrays.asList(listMails));
+	    }
+	    paramsTSuite.setWebAppDNS(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()); 
 	    if (request.getParameter(Test80mng.CallBackResource)!=null) {
 			CallBack callBack = new CallBack();
 	        callBack.setCallBackResource(request.getParameter(Test80mng.CallBackResource));

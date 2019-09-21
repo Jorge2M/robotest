@@ -91,19 +91,19 @@ public class InputParams extends InputParamsTestMaker {
         return "";
     }    
     
-    void setListaLineas(String[] ListaLineas) {
+    public void setListaLineas(String[] ListaLineas) {
         this.listaLineas = ListaLineas;
     }
     
-    void setListaPayments(String[] ListaPayments) {
+    public void setListaPayments(String[] ListaPayments) {
         this.listaPayments = ListaPayments;
     }    
     
-    void setListaPaises(String[] ListaPaises) {
+    public void setListaPaises(String[] ListaPaises) {
         this.listaPaises = ListaPaises;
     }
     
-    void setListaPaises(String ListaPaises) {
+    public void setListaPaises(String ListaPaises) {
         if (ListaPaises!=null) {
             this.listaPaises = ListaPaises.split("\\s*,\\s*");
         }
@@ -113,7 +113,7 @@ public class InputParams extends InputParamsTestMaker {
         return this.urlManto;
     }
     
-    void setUrlManto(String urlManto) {
+    public void setUrlManto(String urlManto) {
         this.urlManto = urlManto;
     }
     
@@ -121,7 +121,7 @@ public class InputParams extends InputParamsTestMaker {
         return this.callBack;
     }
     
-    void setCallBack(CallBack callBack) {
+    public void setCallBack(CallBack callBack) {
         this.callBack = callBack;
     }
     

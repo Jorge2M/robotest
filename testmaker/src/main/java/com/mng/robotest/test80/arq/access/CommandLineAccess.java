@@ -26,20 +26,20 @@ public class CommandLineAccess {
 	private final List<OptionTMaker> specificClientOptions;
 	private final CommandLine cmdLine;
 	
-    private static String HelpNameParam = "help";
-    private static String SuiteNameParam = "suite";
-    private static String GroupsNameParam = "groups";
-    private static String BrowserNameParam = "browser";
-    private static String ChannelNameParam = "channel";
-    private static String AppNameParam = "application";
-    private static String VersionNameParam = "version";
-    private static String URLNameParam = "url";
-    private static String TCaseNameParam = "tcases";
+    public static String HelpNameParam = "help";
+    public static String SuiteNameParam = "suite";
+    public static String GroupsNameParam = "groups";
+    public static String BrowserNameParam = "browser";
+    public static String ChannelNameParam = "channel";
+    public static String AppNameParam = "application";
+    public static String VersionNameParam = "version";
+    public static String URLNameParam = "url";
+    public static String TCaseNameParam = "tcases";
     
-    private static String ServerDNSNameParam = "serverDNS";
-    private static String RecicleWD = "reciclewd";
-    private static String NetAnalysis = "net";
-    private static String Mails = "mails";
+    public static String ServerDNSNameParam = "serverDNS";
+    public static String RecicleWD = "reciclewd";
+    public static String NetAnalysis = "net";
+    public static String Mails = "mails";
 	
 	public CommandLineAccess(
 			String args[], List<OptionTMaker> specificClientOptions, Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) 

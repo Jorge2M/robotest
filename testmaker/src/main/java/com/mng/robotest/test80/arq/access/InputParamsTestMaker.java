@@ -56,6 +56,10 @@ public class InputParamsTestMaker {
 	public void setChannel(Channel channel) {
 		this.channel = channel;
 	}
+	
+	public void setChannel(String channel) {
+		setChannel(Channel.valueOf(channel));
+	}
     
 	public Enum<?> getSuite() {
 		return suite;
@@ -101,6 +105,10 @@ public class InputParamsTestMaker {
 		this.typeManageWebdriver = typeManageWebdriver;
 	}
 	
+	public void setBrowser(String browser) {
+		setTypeWebDriver(TypeWebDriver.valueOf(browser));
+	}
+	
 	public String getUrlBase() {
 		return this.urlBase;
 	}
@@ -138,7 +146,9 @@ public class InputParamsTestMaker {
 	}
 	
 	public void setRecicleWD(String recicleWD) {
-		this.recicleWD = "true".compareTo(recicleWD) == 0;
+		if (recicleWD!=null) {
+			this.recicleWD = "true".compareTo(recicleWD) == 0;
+		}
 	}
 
 	public List<String> getTestCasesFilter() {
@@ -148,7 +158,7 @@ public class InputParamsTestMaker {
 	public void setTestCasesFilter(List<String> testCasesFilter) {
 		this.testCasesFilter = testCasesFilter;
 	}
-	
+
 	public List<String> getGroupsFilter() {
 		return groupsFilter;
 	}
