@@ -35,15 +35,6 @@ public class InputParamsTestMaker {
     	this.urlBase = urlBase;
     	this.typeWebDriver = typeWebDriver;
     }
-//    
-//    public InputParamsTestMaker(Channel channel, Enum<?> suite, Enum<?> app, String versionSuite, String urlBase, TypeWebDriver typeWebDriver) {
-//    	this.channel = channel;
-//    	this.suite = suite;
-//    	this.app = app;
-//    	this.versionSuite = versionSuite;
-//    	this.urlBase = urlBase;
-//    	this.typeWebDriver = typeWebDriver;
-//    }
 
     public String getMoreInfo() {
     	return "";

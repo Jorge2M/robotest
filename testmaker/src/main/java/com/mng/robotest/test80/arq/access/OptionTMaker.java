@@ -52,10 +52,10 @@ public class OptionTMaker {
 			return this;
 		}
 		
-		public Builder possibleValuesEnum(List<Enum<?>> possibleValues) {
+		public Builder possibleValues(Class<? extends Enum<?>> enumVar) {
 			List<String> valuesString = new ArrayList<>();
-			for (Enum<?> value : possibleValues) {
-				valuesString.add(value.toString());
+			for (Enum<?> enumValue : enumVar.getEnumConstants()) {
+				valuesString.add(enumValue.toString());
 			}
 			return possibleValues(valuesString);
 		}

@@ -46,10 +46,10 @@ public class Test80mng {
     
     public static void main(String[] args) throws Exception { 
     	List<OptionTMaker> optionsTest80 = specificMangoOptions();
-    	CommandLineAccess cmdLineAccess = new CommandLineAccess(args, optionsTest80, Suites.class, AppEcom.class);
-    	if (cmdLineAccess.checkOptionValues()) {
-    		InputParams inputParams = getInputParamsFromCommandLine(cmdLineAccess);
-            inputParams.setTypeAccessIfNotSetted(TypeAccessFmwk.CommandLine);
+    	CommandLineAccess cmdLineAccess = CommandLineAccess.from(args, optionsTest80, Suites.class, AppEcom.class);
+    	if (cmdLineAccess.checkOptionsValue()) {
+        	InputParams inputParams = getInputParamsMango(cmdLineAccess);
+    		cmdLineAccess.storeDataOptionsTestMaker(inputParams);
             execSuite(inputParams);
     	}
     }
@@ -61,8 +61,8 @@ public class Test80mng {
             .required(false)
             .hasArgs()
             .valueSeparator(',')
-            .desc("List of 3-digit codes of countrys comma separated")
-            .pattern("\\d{3}")
+            .desc("List of 3-digit codes of countrys comma separated or \'X\' for indicate all countrys")
+            .pattern("\\d{3}|X")
             .build();
         
     	OptionTMaker lineas = OptionTMaker.builder(LineasNameParam)
@@ -79,19 +79,19 @@ public class Test80mng {
             .desc("List of payments comma separated (p.e. VISA,TARJETA MANGO,...)")
             .build();
         
+    	String patternUrl = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
     	OptionTMaker urlManto = OptionTMaker.builder(UrlManto)
             .required(false)
             .hasArgs()
-            .valueSeparator(',')
+            .pattern(patternUrl)
             .desc("URL of the Backoffice of mangoshop (Manto application)")
             .build();    
         
-    	List<Enum<?>> listTypeAccessFmwk = Arrays.asList(TypeAccessFmwk.values());
     	OptionTMaker bat = OptionTMaker.builder(TypeAccessParam)
             .required(false)
             .hasArgs()
-            .possibleValuesEnum(listTypeAccessFmwk)
-            .desc("Type of access. Posible values: " + listTypeAccessFmwk)
+            .possibleValues(TypeAccessFmwk.class)
+            .desc("Type of access. Posible values: " + Arrays.asList(TypeAccessFmwk.values()))
             .build();               
         
     	OptionTMaker callbackResource = OptionTMaker.builder(CallBackResource)
@@ -100,20 +100,18 @@ public class Test80mng {
             .desc("CallBack URL (without schema and params) to invoke in the end of the TestSuite")
             .build();
         
-    	List<Enum<?>> listTypeCallBackMethod = Arrays.asList(TypeCallBackMethod.values());
     	OptionTMaker callbackMethod = OptionTMaker.builder(CallBackMethod)
             .required(false)
             .hasArgs()
-            .possibleValuesEnum(listTypeCallBackMethod)
-            .desc("Method of the CallBack URL. Possible values: " + listTypeCallBackMethod)
+            .possibleValues(TypeCallBackMethod.class)
+            .desc("Method of the CallBack URL. Possible values: " + Arrays.asList(TypeCallBackMethod.values()))
             .build();        
         
-    	List<Enum<?>> listTypeCallbackSchema = Arrays.asList(TypeCallbackSchema.values());
     	OptionTMaker callbackSchema = OptionTMaker.builder(CallBackSchema)
             .required(false)
             .hasArgs()
-            .possibleValuesEnum(listTypeCallbackSchema)
-            .desc("Schema of the CallBack URL. Possible values: " + listTypeCallbackSchema)
+            .possibleValues(TypeCallbackSchema.class)
+            .desc("Schema of the CallBack URL. Possible values: " + Arrays.asList(TypeCallbackSchema.values()))
             .build();        
         
     	OptionTMaker callbackParams = OptionTMaker.builder(CallBackParams)
@@ -150,11 +148,9 @@ public class Test80mng {
         return options;
     }
     
-    private static InputParams getInputParamsFromCommandLine(CommandLineAccess cmdLineAccess) {
+    private static InputParams getInputParamsMango(CommandLineAccess cmdLineAccess) {
     	InputParams inputParams = new InputParams();
     	CommandLine cmdLineData = cmdLineAccess.getComandLineData();
-		cmdLineAccess.storeDataOptionsTestMaker(inputParams);
-		
 		inputParams.setListaPaises(cmdLineData.getOptionValues(CountrysNameParam));
 		inputParams.setListaLineas(cmdLineData.getOptionValues(LineasNameParam));
 		inputParams.setListaPayments(cmdLineData.getOptionValues(PaymentsNameParam));        
@@ -169,9 +165,18 @@ public class Test80mng {
             callBack.setCallBackSchema(cmdLineData.getOptionValue(CallBackSchema));
             callBack.setCallBackParams(cmdLineData.getOptionValue(CallBackParams));
             inputParams.setCallBack(callBack);
-        }    
+        }   
         
         return inputParams;
+    }
+    
+    /**
+     * Indirect access from Command Line, direct access from Online
+     */
+    public static void execSuite(InputParams inputParams) throws Exception {
+    	SuiteMaker suite = makeSuite(inputParams);
+    	suite.run();
+    	callBackIfNeeded(suite.getSuiteTestMaker(), inputParams);
     }
     
     public static SuiteMaker makeSuite(InputParams inputParams) throws Exception {
@@ -212,15 +217,7 @@ public class Test80mng {
         
         return null;
     }
-    
-    /**
-     * Indirect access from Command Line, direct access from Online
-     */
-    public static void execSuite(InputParams inputParams) throws Exception {
-    	SuiteMaker suite = makeSuite(inputParams);
-    	suite.run();
-    	callBackIfNeeded(suite.getSuiteTestMaker(), inputParams);
-    }
+
     
     private static void callBackIfNeeded(SuiteTestMaker suite, InputParams inputParams) {
     	CallBack callBack = inputParams.getCallBack();

@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.arq.access;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -18,12 +19,12 @@ import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.T
 
 public class CommandLineAccess {
 
+	private final String[] args;
+	private final List<OptionTMaker> listOptions;
 	private final Class<? extends Enum<?>> suiteEnum;
 	private final Class<? extends Enum<?>> appEnum;
 	
-	private final Options options = new Options();
 	private final CommandLineParser parser = new DefaultParser();
-	private final List<OptionTMaker> specificClientOptions;
 	private final CommandLine cmdLine;
 	
     public static String HelpNameParam = "help";
@@ -41,16 +42,40 @@ public class CommandLineAccess {
     public static String NetAnalysis = "net";
     public static String Mails = "mails";
 	
-	public CommandLineAccess(
-			String args[], List<OptionTMaker> specificClientOptions, Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) 
-	throws ParseException {
-		this.specificClientOptions = specificClientOptions;
+	private CommandLineAccess(
+			String args[], 
+			List<OptionTMaker> clientOptions, 
+			Class<? extends Enum<?>> suiteEnum, 
+			Class<? extends Enum<?>> appEnum) throws ParseException {
+		this.args = args;
 		this.suiteEnum = suiteEnum;
 		this.appEnum = appEnum;
-		if (!checkHelpParameterCase(args)) {
-			initOptions();
+		this.listOptions = getListAllOptions(clientOptions);
+		this.cmdLine = getParsedOptions();
+	}
+	
+	public static CommandLineAccess from(			
+		String args[], 
+		List<OptionTMaker> clientOptions, 
+		Class<? extends Enum<?>> suiteEnum, 
+		Class<? extends Enum<?>> appEnum) throws ParseException {
+		return new CommandLineAccess(args, clientOptions, suiteEnum, appEnum);
+	}
+	
+	public static CommandLineAccess from(
+		String args[], 
+		Class<? extends Enum<?>> suiteEnum, 
+		Class<? extends Enum<?>> appEnum) throws ParseException {
+		return new CommandLineAccess(args, null, suiteEnum, appEnum);
+	}	
+	
+	public CommandLine getParsedOptions() throws ParseException {
+		CommandLine cmdLineToReturn;
+		CommandLine cmdLineHelp = checkHelpParameterCase(args);
+		if (cmdLineHelp==null) {
+			Options options = getOptions();
 			try {
-				cmdLine = parser.parse(options, args);
+				cmdLineToReturn = parser.parse(options, args);
 			}
 			catch (ParseException e) {
 	            System.out.println(e.getLocalizedMessage());
@@ -58,121 +83,185 @@ public class CommandLineAccess {
 	            throw e;
 			}
 		} else {
-			cmdLine = null;
+			return cmdLineHelp;
 		}
+		return cmdLineToReturn;
 	}
+	
+    public boolean checkOptionsValue() {
+        boolean check=true;
+        StringBuffer storedErrors = new StringBuffer();
+        if (!checkOptionsValue(storedErrors)) {
+        	check=false;
+        	System.out.println(storedErrors);
+        }
+        return (check);
+    }
 	
 	public CommandLine getComandLineData() {
 		return this.cmdLine;
 	}
 	
-	private void initOptions() {
-        //Required
-        Option suite = Option.builder(SuiteNameParam)
+    public void storeDataOptionsTestMaker(InputParamsTestMaker inputParams) {
+    	String version = cmdLine.getOptionValue(VersionNameParam);
+    	if (version==null) {
+    		version = "V1";
+    	}
+        		
+    	inputParams.setChannel(Channel.valueOf(cmdLine.getOptionValue(ChannelNameParam)));
+    	inputParams.setSuite(valueOf(suiteEnum.getEnumConstants(), cmdLine.getOptionValue(SuiteNameParam)));
+    	inputParams.setApp(valueOf(appEnum.getEnumConstants(), cmdLine.getOptionValue(AppNameParam)));
+    	inputParams.setVersionSuite(version);
+    	inputParams.setUrlBase(cmdLine.getOptionValue(URLNameParam));
+    	inputParams.setTypeWebDriver(TypeWebDriver.valueOf(cmdLine.getOptionValue(BrowserNameParam)));
+    	inputParams.setWebAppDNS(cmdLine.getOptionValue(ServerDNSNameParam));
+
+    	String[] listGroups = cmdLine.getOptionValues(GroupsNameParam);
+    	if (listGroups!=null) {
+    		inputParams.setGroupsFilter(Arrays.asList());
+    	}
+    	String[] listTestCases = cmdLine.getOptionValues(TCaseNameParam);
+    	if (listTestCases!=null) {
+    		inputParams.setTestCasesFilter(Arrays.asList(listTestCases));
+    	}
+    	String[] listMails = cmdLine.getOptionValues(Mails);
+    	if (listMails!=null) {
+    		inputParams.setMails(Arrays.asList());
+    	}
+    	
+    	String recicleWD = cmdLine.getOptionValue(RecicleWD);
+    	if (recicleWD!=null) {
+        	inputParams.setRecicleWD(recicleWD);
+    	}
+    	String netAnalysis = cmdLine.getOptionValue(NetAnalysis);
+    	if (netAnalysis!=null) {
+    		inputParams.setNetAnalysis(netAnalysis);
+    	} 
+    }
+	
+	private Options getOptions() {
+		Options optionsReturn = new Options();
+		for (OptionTMaker optionTMaker : listOptions) {
+			optionsReturn.addOption(optionTMaker.getOption());
+		}
+		return optionsReturn;
+	}
+	
+	private List<OptionTMaker> getListAllOptions(List<OptionTMaker> clientOptions) {
+		List<OptionTMaker> listAllOptions = new ArrayList<>();
+		listAllOptions.addAll(getTestMakerOptions());
+		if (clientOptions!=null) {
+			listAllOptions.addAll(clientOptions);
+		}
+		return listAllOptions; 
+	}
+	
+	private List<OptionTMaker> getTestMakerOptions() {
+		List<OptionTMaker> listOptionsTMaker = new ArrayList<>();
+        OptionTMaker suite = OptionTMaker.builder(SuiteNameParam)
             .required(true)
             .hasArg()
-            .desc("TestSuite Name")
+            .possibleValues(suiteEnum)
+            .desc("Test Suite to execute. Possible values: " + Arrays.asList(suiteEnum.getEnumConstants()))
             .build();
         
-        Option groups = Option.builder(GroupsNameParam)
+        OptionTMaker groups = OptionTMaker.builder(GroupsNameParam)
             .required(false)
             .hasArg()
+            .valueSeparator(',')
             .desc("Groups of tests to include")
             .build();
                  
-        Option browser = Option.builder(BrowserNameParam)
+        OptionTMaker browser = OptionTMaker.builder(BrowserNameParam)
             .required(true)
             .hasArg()
-            .desc("Browser to launch the Suite of Tests")
+            .possibleValues(TypeWebDriver.class)
+            .desc("Browser to launch the Suite of Tests. Possible values: " + Arrays.asList(TypeWebDriver.values()))
             .build();
 
-        Option channel = Option.builder(ChannelNameParam)
+        OptionTMaker channel = OptionTMaker.builder(ChannelNameParam)
             .required(true)
             .hasArg()
-            .desc("Channel in that browser is executed")
+            .possibleValues(Channel.class)
+            .desc("Channel on which to run the browser. Possible values: " + Arrays.toString(Channel.values()))
             .build();
-                
-        Option application = Option.builder(AppNameParam)
+           
+        OptionTMaker application = OptionTMaker.builder(AppNameParam)
             .required(true)
             .hasArg()
-            .desc("Application Web to test")
+            .possibleValues(appEnum)
+            .desc("Application Web to test. Possible values: " + Arrays.toString(getNames(appEnum.getEnumConstants())))
             .build();
 
-        Option url = Option.builder(URLNameParam)
+        String patternUrl = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+        OptionTMaker url = OptionTMaker.builder(URLNameParam)
             .required(true)
             .hasArg()
-            .desc("URL initial of the application Web to test")
+            .pattern(patternUrl)
+            .desc("Initial URL of the application Web to test")
             .build();
-                
-        //Optional      
-        Option tests = Option.builder(TCaseNameParam)
+                    
+        OptionTMaker tests = OptionTMaker.builder(TCaseNameParam)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .desc("List of testcases comma separated (p.e. OTR001,BOR001...)")
             .build();    
         
-        Option version = Option.builder(VersionNameParam)
+        OptionTMaker version = OptionTMaker.builder(VersionNameParam)
             .required(false)
             .hasArg()
-            .desc("Version of te TestSuite")
+            .desc("Version of the TestSuite")
             .build();
         
-        Option serverDNS = Option.builder(ServerDNSNameParam)
+        OptionTMaker serverDNS = OptionTMaker.builder(ServerDNSNameParam)
             .required(false)
             .hasArgs()
-            .valueSeparator(',')
             .desc("Server DNS where are ubicated the HTML reports (p.e. http://robottest.mangodev.net)")
             .build();
         
-        Option recicleWD = Option.builder(RecicleWD)
+        OptionTMaker recicleWD = OptionTMaker.builder(RecicleWD)
             .required(false)
             .hasArgs()
-            .valueSeparator(',')
-            .desc("Gestion mode of webdriver (true: reuse across testcases, false: don't reuse)")
+            .possibleValues(Arrays.asList("true", "false"))
+            .desc("Gestion mode of webdriver. Possible values: true->reuse across testcases, false->don't reuse)")
+            .build();    
+        
+        OptionTMaker netAnalysis = OptionTMaker.builder(NetAnalysis)
+            .required(false)
+            .hasArgs()
+            .possibleValues(Arrays.asList("true", "false"))
+            .desc("Net Analysis. Possible values: true, false")
             .build();        
         
-        Option netAnalysis = Option.builder(NetAnalysis)
+        OptionTMaker mails = OptionTMaker.builder(Mails)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
-            .desc("Net Analysis (true, false)")
-            .build();        
-        
-        Option mails = Option.builder(Mails)
-            .required(false)
-            .hasArgs()
-            .valueSeparator(',')
+            .pattern("^(.+)@(.+)$")
             .desc("List of mail adresses comma separated")
             .build();                       
                 
-        //Required
-        options.addOption(suite);
-        options.addOption(browser);
-        options.addOption(channel);
-        options.addOption(application);
-        options.addOption(version);
-        options.addOption(url);
+        listOptionsTMaker.add(suite);
+        listOptionsTMaker.add(browser);
+        listOptionsTMaker.add(channel);
+        listOptionsTMaker.add(application);
+        listOptionsTMaker.add(version);
+        listOptionsTMaker.add(url);
+        listOptionsTMaker.add(groups);     
+        listOptionsTMaker.add(tests);
+        listOptionsTMaker.add(serverDNS);
+        listOptionsTMaker.add(recicleWD);
+        listOptionsTMaker.add(netAnalysis);
+        listOptionsTMaker.add(mails);
         
-        //Optional
-        options.addOption(groups);     
-        options.addOption(tests);
-        options.addOption(serverDNS);
-        options.addOption(recicleWD);
-        options.addOption(netAnalysis);
-        options.addOption(mails);
-        
-		if (specificClientOptions!=null) {
-			for (OptionTMaker optionTMaker : specificClientOptions) {
-				options.addOption(optionTMaker.getOption());
-			}
-		}
+        return listOptionsTMaker;
 	}
 	
     /**
      * Parseo para contemplar el caso concreto del parámetro Help
      */
-    private boolean checkHelpParameterCase(String[] args) {
+    private CommandLine checkHelpParameterCase(String[] args) {
         Options options = new Options();
         Option helpOption = Option.builder(HelpNameParam)
             .required(false)
@@ -183,10 +272,8 @@ public class CommandLineAccess {
             options.addOption(helpOption);
             CommandLine cmdLineHelp = parser.parse(options, args);
             if (cmdLineHelp.hasOption(HelpNameParam)) {
-                //Necesitamos informar todos los parámetros para que el mensaje con la sintaxis que se muestre sea el correto
-                initOptions();
                 printHelpSyntaxis(options);
-                return true;
+                return cmdLineHelp;
             }
         }
         catch (ParseException e) {
@@ -194,80 +281,22 @@ public class CommandLineAccess {
             //Es correcto, el parseo definitivo se realiza más adelante
         }
         
-        return false;
+        return null;
     }
     
     private void printHelpSyntaxis(Options options) {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp(CommandLineAccess.class.getSimpleName(), options);
+        formatter.printHelp("TestMaker", getOptions());
     }
-    
-    public boolean checkOptionValues() {
-        boolean check=true;
-        
-        //Mandatory TMaker Params
-        try {
-        	valueOf(suiteEnum.getEnumConstants(), cmdLine.getOptionValue(SuiteNameParam));
-        }
-        catch (IllegalArgumentException e) {
-            check=false;
-            System.out.println("Suite Name not valid. Posible values: " + Arrays.toString(getNames(suiteEnum.getEnumConstants())));
-        } 
-        
-        try {
-        	Channel.valueOf(cmdLine.getOptionValue(ChannelNameParam));
-        }
-        catch (IllegalArgumentException e) {
-            check=false;
-            System.out.println("Channel not valid. Posible values: " + Arrays.toString(Channel.values()));
-        }
-        
-        try {
-        	valueOf(appEnum.getEnumConstants(), cmdLine.getOptionValue(AppNameParam));
-        }
-        catch (IllegalArgumentException e) {
-            check=false;
-            System.out.println("App not valid. Posible values: " + Arrays.toString(getNames(appEnum.getEnumConstants())));
-        }
 
-        try {
-            TypeWebDriver.valueOf(cmdLine.getOptionValue(BrowserNameParam));
-        }
-        catch (IllegalArgumentException e) {
-            check=false;
-            System.out.println("Browser Name not valid. Posible values: " + Arrays.toString(getNames(TypeWebDriver.class.getEnumConstants())));
-        }
-        
-        //Not Mandatory TMaker Params
-        if (cmdLine.getOptionValue(RecicleWD)!=null) {
-            String recicleWDvalue = cmdLine.getOptionValue(RecicleWD);
-            if (!recicleWDvalue.contains("true") && !recicleWDvalue.contains("false")) {
-                check=false;
-                System.out.println("param " + RecicleWD + " not valid. Posible values: true, false");
-            }        
-        }
-        
-        if (cmdLine.getOptionValue(NetAnalysis)!=null) {
-            String netAnalysisValue = cmdLine.getOptionValue(NetAnalysis);
-            if (!netAnalysisValue.contains("true") && !netAnalysisValue.contains("false")) {
-                check=false;
-                System.out.println("param " + NetAnalysis + " not valid. Posible values: true, false");
-            }        
-        }        
-        
-        //Specific client Params
-        StringBuffer storedErrors = new StringBuffer();
-        if (!checkSpecificClientValues(storedErrors)) {
-        	check=false;
-        	System.out.println(storedErrors);
-        }
-        
-        return (check);
-    }
     
-    boolean checkSpecificClientValues(StringBuffer storedErrors) {
+    boolean checkOptionsValue(StringBuffer storedErrors) {
+    	if (HelpNameParam.compareTo(cmdLine.getOptions()[0].getOpt())==0) {
+    		return false;
+    	}
+    	
     	boolean check = true;
-    	for (OptionTMaker optionTMaker : specificClientOptions) {
+    	for (OptionTMaker optionTMaker : listOptions) {
     		String nameParam = optionTMaker.getOption().getOpt();
     		String valueOption = cmdLine.getOptionValue(nameParam);
     		if (optionTMaker.getOption().isRequired()) {
@@ -345,42 +374,5 @@ public class CommandLineAccess {
     	}
     	
     	throw new IllegalArgumentException();
-    }
-    
-    public void storeDataOptionsTestMaker(InputParamsTestMaker inputParams) {
-    	String version = cmdLine.getOptionValue(VersionNameParam);
-    	if (version==null) {
-    		version = "V1";
-    	}
-        		
-    	inputParams.setChannel(Channel.valueOf(cmdLine.getOptionValue(ChannelNameParam)));
-    	inputParams.setSuite(valueOf(suiteEnum.getEnumConstants(), cmdLine.getOptionValue(SuiteNameParam)));
-    	inputParams.setApp(valueOf(appEnum.getEnumConstants(), cmdLine.getOptionValue(AppNameParam)));
-    	inputParams.setVersionSuite(version);
-    	inputParams.setUrlBase(cmdLine.getOptionValue(URLNameParam));
-    	inputParams.setTypeWebDriver(TypeWebDriver.valueOf(cmdLine.getOptionValue(BrowserNameParam)));
-    	inputParams.setWebAppDNS(cmdLine.getOptionValue(ServerDNSNameParam));
-
-    	String[] listGroups = cmdLine.getOptionValues(GroupsNameParam);
-    	if (listGroups!=null) {
-    		inputParams.setGroupsFilter(Arrays.asList());
-    	}
-    	String[] listTestCases = cmdLine.getOptionValues(TCaseNameParam);
-    	if (listTestCases!=null) {
-    		inputParams.setTestCasesFilter(Arrays.asList(listTestCases));
-    	}
-    	String[] listMails = cmdLine.getOptionValues(Mails);
-    	if (listMails!=null) {
-    		inputParams.setMails(Arrays.asList());
-    	}
-    	
-    	String recicleWD = cmdLine.getOptionValue(RecicleWD);
-    	if (recicleWD!=null) {
-        	inputParams.setRecicleWD(recicleWD);
-    	}
-    	String netAnalysis = cmdLine.getOptionValue(NetAnalysis);
-    	if (netAnalysis!=null) {
-    		inputParams.setNetAnalysis(netAnalysis);
-    	} 
     }
 }

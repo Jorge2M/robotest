@@ -10,7 +10,7 @@ import org.apache.commons.cli.ParseException;
 public class CommandLineAccessTest {
 	
 	private enum Suites {SmokeTest, PagosPaises}
-	private enum AppEcom {desktop, movil_web}
+	private enum AppEcom {shop, outlet, votf}
 
 	@Test
 	public void testOptionMandatory() throws ParseException {
@@ -29,9 +29,9 @@ public class CommandLineAccessTest {
     	String args[] = getArray(listaArgs);
 
     	//When
-    	CommandLineAccess cmdLineAccess = new CommandLineAccess(args, options, Suites.class, AppEcom.class);
+    	CommandLineAccess cmdLineAccess = CommandLineAccess.from(args, options, Suites.class, AppEcom.class);
     	StringBuffer storedErrors = new StringBuffer();
-    	boolean check = cmdLineAccess.checkSpecificClientValues(storedErrors);	
+    	boolean check = cmdLineAccess.checkOptionsValue(storedErrors);	
     	
     	//Then
     	assertTrue(check);
@@ -58,9 +58,9 @@ public class CommandLineAccessTest {
     	String args[] = getArray(listaArgs);
 
     	//When
-    	CommandLineAccess cmdLineAccess = new CommandLineAccess(args, options, Suites.class, AppEcom.class);
+    	CommandLineAccess cmdLineAccess = CommandLineAccess.from(args, options, Suites.class, AppEcom.class);
     	StringBuffer storedErrors = new StringBuffer();
-    	boolean check = cmdLineAccess.checkSpecificClientValues(storedErrors);	
+    	boolean check = cmdLineAccess.checkOptionsValue(storedErrors);	
     	
     	//Then
     	assertTrue(check);
@@ -79,7 +79,7 @@ public class CommandLineAccessTest {
 	            .required(false)
 	            .hasArgs()
 	            .valueSeparator(',')
-	            .possibleValuesEnum(Arrays.asList(TestEnum.values()))
+	            .possibleValues(TestEnum.class)
 	            .desc("Param with list values that are in enum values")
 	            .build()
     	);
@@ -89,9 +89,9 @@ public class CommandLineAccessTest {
     	String args[] = getArray(listaArgs);
 
     	//When
-    	CommandLineAccess cmdLineAccess = new CommandLineAccess(args, options, Suites.class, AppEcom.class);
+    	CommandLineAccess cmdLineAccess = CommandLineAccess.from(args, options, Suites.class, AppEcom.class);
     	StringBuffer storedErrors = new StringBuffer();
-    	boolean check = cmdLineAccess.checkSpecificClientValues(storedErrors);	
+    	boolean check = cmdLineAccess.checkOptionsValue(storedErrors);	
     	
     	//Then
     	assertTrue(check);
@@ -118,27 +118,27 @@ public class CommandLineAccessTest {
 	            .required(false)
 	            .hasArgs()
 	            .valueSeparator(',')
-	            .possibleValuesEnum(Arrays.asList(TestEnum.values()))
+	            .possibleValues(TestEnum.class)
 	            .desc("Param with list values that not are in enum values")
 	            .build()
     	);
 
     	List<String> listaArgs = getBaseArgs();
     	listaArgs.add("-" + paramPatternKO); listaArgs.add("001,652,45");
-    	listaArgs.add("-" + paramValueKO); listaArgs.add(AppEcom.desktop.toString());
+    	listaArgs.add("-" + paramValueKO); listaArgs.add(AppEcom.shop.toString());
     	String args[] = getArray(listaArgs);
 
     	//When
-    	CommandLineAccess cmdLineAccess = new CommandLineAccess(args, options, Suites.class, AppEcom.class);
+    	CommandLineAccess cmdLineAccess = CommandLineAccess.from(args, options, Suites.class, AppEcom.class);
     	StringBuffer storedErrors = new StringBuffer();
-    	boolean check = cmdLineAccess.checkSpecificClientValues(storedErrors);	
+    	boolean check = cmdLineAccess.checkOptionsValue(storedErrors);	
     	
     	//Then
     	assertTrue(!check);
     	assertTrue(storedErrors.toString().contains(
     		"Param " + paramPatternKO + " with value 45 that doesn't match pattern"));
     	assertTrue(storedErrors.toString().contains(
-    		"Param " + paramValueKO + " with value desktop is not one of the possible values " + Arrays.asList(TestEnum.values())));
+    		"Param " + paramValueKO + " with value " + AppEcom.shop.toString() + " is not one of the possible values " + Arrays.asList(TestEnum.values())));
 	}
 	
 	private List<String> getBaseArgs() {
