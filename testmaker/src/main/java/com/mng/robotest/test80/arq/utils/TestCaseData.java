@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ISuite;
 import org.testng.ITestContext;
@@ -14,6 +16,7 @@ import org.testng.ITestContext;
 import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
 import com.mng.robotest.test80.arq.utils.conf.StorerErrorDataStepValidation;
 import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
+import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
@@ -21,6 +24,8 @@ import com.mng.robotest.test80.arq.xmlprogram.SuiteTestMaker;
 import com.mng.robotest.test80.data.TestMakerContext;
 
 public class TestCaseData {
+    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+	
     static ThreadLocal<Map<String, Object>> dataInThread = new ThreadLocal<>();
     static ThreadLocal<DataFmwkTest> dFTestInThread = new ThreadLocal<>();
     static ThreadLocal<Queue<DatosStep>> datosStepStack = new ThreadLocal<>();
@@ -67,7 +72,11 @@ public class TestCaseData {
     
     public static void clearStackDatosStep() {
     	Queue<DatosStep> datosStepStackTmp = datosStepStack.get();
-    	datosStepStackTmp.clear();
+    	if (datosStepStackTmp!=null) {
+	    	datosStepStackTmp.clear();
+    	} else {
+	    	pLogger.warn("Not found any Step in clear stack");
+    	}
     	maxDatosStep.remove();
     }
     

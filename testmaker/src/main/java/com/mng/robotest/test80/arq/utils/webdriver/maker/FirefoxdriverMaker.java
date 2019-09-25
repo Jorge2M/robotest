@@ -19,7 +19,7 @@ import org.openqa.selenium.remote.CapabilityType;
 public class FirefoxdriverMaker implements WebdriverMaker {
 	
     //Nota: si se modifica la versión sería conveniente regenerar la AMI correspondiente al Robotest en Cloud
-	final static String GeckoDriverVersion = "0.24.0";
+	final static String GeckoDriverVersion = "0.25.0";
 	TypeWebDriver typeWebDriver;
 	FirefoxProfile fp = new FirefoxProfile();
 	FirefoxOptions options;
