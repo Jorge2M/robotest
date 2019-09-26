@@ -73,6 +73,20 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 	    	"V1-Nuevos iconos"),
 	    Arrays.asList(Channel.desktop),
 	    Arrays.asList(AppEcom.shop, AppEcom.votf)
+	),
+	
+	SHOP219_PLPMobileSinFavoritos (
+		"GTM-5T8R33",
+		"SHOP-219 - PLP - Mobile - Sin favoritos",
+	    "UWOU5vObVAZJ7ylnbAK2vQ",
+	    "GTM-KWJ6XJ_OPT-KTLLM$",
+	    "QUICK_PREVIEW",
+	    Arrays.asList(0,1),
+	    Arrays.asList(
+	    	"V0-Original", 
+	    	"V1-Sin favoritos"),
+	    Arrays.asList(Channel.movil_web),
+	    Arrays.asList(AppEcom.shop)
 	);
 	
 	private String group;

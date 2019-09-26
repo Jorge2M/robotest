@@ -9,6 +9,8 @@ import java.util.Set;
 import java.util.concurrent.TimeoutException;
 import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions;
+import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

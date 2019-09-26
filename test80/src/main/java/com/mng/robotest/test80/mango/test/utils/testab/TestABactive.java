@@ -18,6 +18,7 @@ public class TestABactive {
     	//listTestABsToActivate.add(ActivationData.getNew(TestABid.SHOP191_BuscadorDesktop, 1));
     	listTestABsToActivate.add(TestABactData.getNew(TestABGoogleExpImpl.MVPCheckoutDesktop, 0));
     	listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.SHOP126_HeaderNuevosIconosDesktop, 1));
+    	listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.SHOP219_PLPMobileSinFavoritos, 0));
     	TestABmanager.activateTestsAB(listTestABsToActivate, channel, app, driver);
     }
 }

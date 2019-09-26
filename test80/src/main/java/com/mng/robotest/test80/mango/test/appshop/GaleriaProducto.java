@@ -201,7 +201,7 @@ public class GaleriaProducto extends GestorWebDriver {
         dCtxSh.passwordUser = userShop.password;
         dCtxSh.userRegistered = true;
     
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
         Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);

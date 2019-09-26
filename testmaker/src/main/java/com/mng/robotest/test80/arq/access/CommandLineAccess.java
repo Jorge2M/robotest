@@ -102,6 +102,12 @@ public class CommandLineAccess {
 		return this.cmdLine;
 	}
 	
+	public InputParamsTestMaker getInputParamsTestMaker() {
+		InputParamsTestMaker inputParams = new InputParamsTestMaker();
+		storeDataOptionsTestMaker(inputParams);
+		return inputParams;
+	}
+	
     public void storeDataOptionsTestMaker(InputParamsTestMaker inputParams) {
     	String version = cmdLine.getOptionValue(VersionNameParam);
     	if (version==null) {
