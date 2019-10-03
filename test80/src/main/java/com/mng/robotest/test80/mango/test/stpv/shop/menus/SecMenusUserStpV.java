@@ -210,11 +210,9 @@ public class SecMenusUserStpV {
     	public static ChecksResultWithNumberPoints getNew() {
     		return (new ChecksResultWithNumberPoints());
     	}
-    	
     	public int getNumberPoints() {
     		return this.numberPoints;
     	}
-    	
     	public void setNumberPoints(int numberPoints) {
     		this.numberPoints = numberPoints;
     	}
