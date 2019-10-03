@@ -13,11 +13,11 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  *
  */
 
-public class DataBag {
+public class DataBag { 
 
     ArrayList<ArticuloScreen> listArticulos = new ArrayList<>();
     String importeTotal = "";
-    String importeTransp = "";
+    String importeTransp = "" ;
     
     public ArrayList<ArticuloScreen> getListArticulos() {
         return this.listArticulos;

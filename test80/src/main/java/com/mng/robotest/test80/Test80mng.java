@@ -75,7 +75,7 @@ public class Test80mng {
     	OptionTMaker payments = OptionTMaker.builder(PaymentsNameParam)
             .required(false)
             .hasArgs()
-            .valueSeparator(',')
+            .valueSeparator(',') 
             .desc("List of payments comma separated (p.e. VISA,TARJETA MANGO,...)")
             .build();
         

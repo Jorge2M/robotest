@@ -46,6 +46,10 @@ public class Piloto extends GestorWebDriver {
     public void PIL001_Login() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
         dFTest.driver.get(inputDataTMaker.getUrlBase());
+        dFTest.driver.get(inputDataTMaker.getUrlBase());
+        dFTest.driver.get(inputDataTMaker.getUrlBase());
+        dFTest.driver.get(inputDataTMaker.getUrlBase());
+        dFTest.driver.get(inputDataTMaker.getUrlBase());
     	
     	//Ejecutar el Login
     	PageLoginStpV pageLogin = PageLoginStpV.getNew(dFTest.driver);

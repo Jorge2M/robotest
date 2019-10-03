@@ -22,7 +22,7 @@ public class PageKoCardAdyenStpV {
     	ChecksResult validations = ChecksResult.getNew();
     	if (channel==Channel.desktop) {
 	      	validations.add(
-	    		"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
+	    		"En  la página resultante figura el importe total de la compra (" + importeTotal + ")",
 	    		ImporteScreen.isPresentImporteInScreen(importeTotal, pais.getCodigo_pais(), driver), State.Warn);
     	}
       	validations.add(

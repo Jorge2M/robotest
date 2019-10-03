@@ -229,7 +229,7 @@ public class Registro extends GestorWebDriver {
             
         InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(dFTest.ctx);
         if (inputData.getTypeAccess()==TypeAccessFmwk.Bat) {
-            return;
+            return; 
         }
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
