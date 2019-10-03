@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.arq.xmlprogram;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +34,19 @@ public class TestRunMaker {
     	this.listXMLclasses = getClassesWithTests(listClases);
     }
     
-    public static TestRunMaker getNew(String id, List<String> listClases) {
+    public static TestRunMaker ofClass(String id, Class<?> classTest) {
+    	return (ofClasses(id, Arrays.asList(classTest)));
+    }
+    
+    public static TestRunMaker ofClasses(String id, List<Class<?>> listClasses) {
+    	List<String> listClassesStr = new ArrayList<>();
+    	for (Class<?> classItem : listClasses) {
+    		listClassesStr.add(classItem.getCanonicalName());
+    	}
+    	return (new TestRunMaker(id, listClassesStr));
+    }    
+    
+    public static TestRunMaker getFromStrings(String id, List<String> listClases) {
     	return (new TestRunMaker(id, listClases));
     }
 

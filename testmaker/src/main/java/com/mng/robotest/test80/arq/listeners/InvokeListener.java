@@ -9,6 +9,7 @@ import java.util.Calendar;
 import org.testng.*;
 
 import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
+import com.mng.robotest.test80.arq.jdbc.Connector;
 import com.mng.robotest.test80.arq.jdbc.dao.MethodsDAO;
 import com.mng.robotest.test80.arq.jdbc.dao.ParamsDAO;
 import com.mng.robotest.test80.arq.jdbc.dao.StepsDAO;
@@ -17,6 +18,7 @@ import com.mng.robotest.test80.arq.jdbc.dao.TestRunsDAO;
 import com.mng.robotest.test80.arq.jdbc.dao.ValidationsDAO;
 import com.mng.robotest.test80.arq.jdbc.to.ResultMethod;
 import com.mng.robotest.test80.arq.jdbc.to.ResultTestRun;
+import com.mng.robotest.test80.arq.listeners.utils.ResourcesExtractor;
 import com.mng.robotest.test80.arq.utils.StateSuite;
 import com.mng.robotest.test80.arq.utils.TestCaseData;
 import com.mng.robotest.test80.arq.utils.controlTest.GestorWebDrv;
@@ -45,7 +47,18 @@ public class InvokeListener<T extends Enum<T>, Y extends Enum<Y>, Z extends Enum
         File path = new File(outdySuite);
         path.mkdir();
         fmwkTest.configLog4java(outdySuite);
+        grabSqliteBDifNotExists();
         SuitesDAO.insertSuiteInit(suite);
+    }
+    
+    private void grabSqliteBDifNotExists() {
+        ResourcesExtractor resExtractor = ResourcesExtractor.getNew();
+        File fileSqliteBD = new File(Connector.getSQLiteFilePathAutomaticTestingSchema());
+        if (!fileSqliteBD.exists()) {
+	        resExtractor.copyDirectoryResources(
+	        	"sqlite/", 
+	            Connector.getSQLitePathDirectory());
+        }
     }
     
     @Override //End Suite

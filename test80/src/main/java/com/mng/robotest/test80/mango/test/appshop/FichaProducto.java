@@ -168,7 +168,7 @@ public class FichaProducto extends GestorWebDriver {
             pageFichaStpV.secBolsaButtonAndLinksNew.selectLinkCompartir(dCtxSh.pais.getCodigo_pais(), dFTest.driver);
         }
             
-        pageFichaStpV.selectGuiaDeTallas();
+        pageFichaStpV.selectGuiaDeTallas(dCtxSh.appE);
         if (dCtxSh.appE==AppEcom.shop) {
             pageFichaStpV.validateSliderIfExists(Slider.ElegidoParaTi);
         }

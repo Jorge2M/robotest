@@ -2,6 +2,8 @@ package com.mng.sapfiori.test.testcase.pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+
 import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
 
 public class PageLogin extends WebdrvWrapp {
@@ -11,6 +13,7 @@ public class PageLogin extends WebdrvWrapp {
 	private final static String IdInputUser = "USERNAME_FIELD-inner"; 
 	private final static String IdInputPassword = "PASSWORD_FIELD-inner"; 
 	private final static String IdButtonAccessSystem = "LOGIN_LINK";
+	private final static String IdSelectIdioma = "LANGUAGE_SELECT";
 	
 	private PageLogin(WebDriver driver) {
 		this.driver = driver;
@@ -24,9 +27,16 @@ public class PageLogin extends WebdrvWrapp {
 		driver.get(url);
 	}
 
-	public void inputCredentials(String login, String password) throws Exception {
+	public void selectIdioma(String codeIdioma) {
+		new Select(driver.findElement(By.id(IdSelectIdioma))).selectByValue(codeIdioma);
+	}
+	
+	public void inputCredentials(String login, String password) {
 		driver.findElement(By.id(IdInputUser)).sendKeys(login);
-		driver.findElement(By.id(IdInputPassword)).sendKeys(login);
-		WebdrvWrapp.clickAndWaitLoad(driver, By.id(IdButtonAccessSystem));
+		driver.findElement(By.id(IdInputPassword)).sendKeys(password);
+	}
+	
+	public void clickAccederAlSistema() throws Exception {
+		clickAndWaitLoad(driver, By.id(IdButtonAccessSystem));
 	}
 }

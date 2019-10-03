@@ -49,6 +49,6 @@ public class Piloto extends GestorWebDriver {
     	
     	//Ejecutar el Login
     	PageLoginStpV pageLogin = PageLoginStpV.getNew(dFTest.driver);
-    	pageLogin.inputCredentialsAndEnter("00556106", "Martina_2010");
+    	pageLogin.inputCredentialsAndEnter("00556106", "Irene_2016");
     }
 }

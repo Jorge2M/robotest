@@ -6,5 +6,3 @@ target/
 .idea
 *.iml
 /output-library
-!/output-library/static
-!/output-library/sqlite

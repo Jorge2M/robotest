@@ -12,6 +12,7 @@ import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
 import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.mango.test.factoryes.ListPrecompraPaises;
 
 public class PagosPaisesSuite extends SuiteMaker {
     
@@ -51,19 +52,16 @@ public class PagosPaisesSuite extends SuiteMaker {
     public PagosPaisesSuite(InputParams inputParams) {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
+    	List<Class<?>> listTestClasses = Arrays.asList(ListPrecompraPaises.class);
     	if (!isBrowserStack(inputParams.getTypeWebDriver())) {
-	    	TestRunMaker testRun = TestRunMaker.getNew(inputParams.getSuiteName(), getClasses());
+	    	TestRunMaker testRun = TestRunMaker.ofClasses(inputParams.getSuiteName(), listTestClasses);
 	    	addTestRun(testRun);
 	    	setParallelMode(ParallelMode.METHODS);
 	    	setThreadCount(4);
     	} else {
-    		addTestRuns(getTestRunsForBrowserStack(inputParams.getSuiteName(), inputParams.getChannel(), getClasses()));
+    		addTestRuns(getTestRunsForBrowserStack(inputParams.getSuiteName(), inputParams.getChannel(), listTestClasses));
 	    	setParallelMode(ParallelMode.TESTS);
 	    	setThreadCount(Constantes.BSTACK_PARALLEL);
     	}
-    }
-    
-    private static List<String> getClasses() {
-    	return Arrays.asList("com.mng.robotest.test80.mango.test.factoryes.ListPrecompraPaises");
     }
 }

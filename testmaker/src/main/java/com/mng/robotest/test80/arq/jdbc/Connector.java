@@ -13,7 +13,7 @@ import com.mng.robotest.test80.data.ConstantesTestMaker;
 public class Connector {
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
-        return getConnection(false/*forReadOnly*/);
+        return getConnection(false);
     }
     
     public static Connection getConnection(boolean forReadOnly) throws ClassNotFoundException, SQLException {
@@ -27,11 +27,22 @@ public class Connector {
         
         conn = DriverManager.getConnection(
         	"jdbc:sqlite:" + 
-        	System.getProperty("user.dir") + File.separator + 
-        	ConstantesTestMaker.directoryOutputTests + File.separator + 
-        	"sqlite" + File.separator + 
-        	ConstantesTestMaker.squemaSQLite, 
+        	getSQLiteFilePathAutomaticTestingSchema(), 
         	config.toProperties());
         return conn;
+    }
+    
+    public static String getSQLitePathDirectory() {
+    	String path = 
+    		System.getProperty("user.dir") + File.separator + 
+    		ConstantesTestMaker.directoryOutputTests + File.separator + 
+    		"sqlite" + File.separator;
+    	return path;
+    }
+    
+    public static String getSQLiteFilePathAutomaticTestingSchema() {
+    	return (
+    		getSQLitePathDirectory() + 
+    		ConstantesTestMaker.SQLiteFileAutomaticTestingSchema);
     }
 }

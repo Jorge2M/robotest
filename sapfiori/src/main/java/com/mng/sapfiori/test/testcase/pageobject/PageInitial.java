@@ -9,7 +9,7 @@ public class PageInitial {
 
 	private final WebDriver driver;
 	
-	private final static String XPathLabelInitialPage = "//h1[text()='Página inicial']";
+	private final static String XPathLabelInitialPageSpanish = "//h1[text()='Página inicial']";
 	
 	private PageInitial(WebDriver driver) {
 		this.driver = driver;
@@ -19,8 +19,8 @@ public class PageInitial {
 		return new PageInitial(driver);
 	}
 	
-	public boolean checkIsInitialPage() {
-		return WebdrvWrapp.isElementVisible(driver, By.xpath(XPathLabelInitialPage));
+	public boolean checkIsInitialPageSpanish() {
+		return WebdrvWrapp.isElementVisible(driver, By.xpath(XPathLabelInitialPageSpanish));
 	}
 	
 }

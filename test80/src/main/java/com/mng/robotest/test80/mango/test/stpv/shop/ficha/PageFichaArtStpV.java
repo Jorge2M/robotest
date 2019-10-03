@@ -394,12 +394,20 @@ public class PageFichaArtStpV {
     
     @Step (
     	description="Si está visible, Seleccionar el link \"<b>Guía de tallas</b>\"", 
-        expected="Aparece el Fit Finder")
-    public void selectGuiaDeTallas() throws Exception {
-    	boolean isVisible = pageFicha.secDataProduct.selectGuiaDeTallasIfVisible(driver);              
-        if (isVisible) {
-            secFitFinder.validateIsOkAndClose(driver);
-        }
+        expected="Aparece la página asociada a la guía de tallas")
+    public void selectGuiaDeTallas(AppEcom app) throws Exception {
+    	boolean isVisibleLink = pageFicha.secDataProduct.selectGuiaDeTallasIfVisible(driver);           
+    	if (isVisibleLink) {
+	    	switch (app) {
+	    	case outlet:
+	    		PageComoMedirmeStpV pageComoMedirmeStpV = PageComoMedirmeStpV.getNew(driver);
+	    		pageComoMedirmeStpV.isPageInNewTab();
+	    		break;
+	    	case shop:
+	    	default:
+	        	secFitFinder.validateIsOkAndClose(driver);
+	    	}
+    	}
     }
     
     public void validateSliderIfExists(Slider typeSlider) {

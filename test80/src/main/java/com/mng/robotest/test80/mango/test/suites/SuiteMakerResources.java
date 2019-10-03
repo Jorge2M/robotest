@@ -77,22 +77,22 @@ public class SuiteMakerResources {
     	return (typeWebDriver==TypeWebDriver.browserstack);
     }
     
-    public static List<TestRunMaker> getTestRunsForBrowserStack(String suiteName, Channel channel, List<String> listClasses) {
+    public static List<TestRunMaker> getTestRunsForBrowserStack(String suiteName, Channel channel, List<Class<?>> listClasses) {
     	List<TestRunMaker> listTestsRun = new ArrayList<>();
     	switch (channel) {
     	case desktop:
-			TestRunMaker testRunOSX = TestRunMaker.getNew(suiteName + "_" + macOSMojave_Safari, listClasses);
+			TestRunMaker testRunOSX = TestRunMaker.ofClasses(suiteName + "_" + macOSMojave_Safari, listClasses);
 			testRunOSX.setBrowserStackDesktop(macOSMojave_Safari);
 			listTestsRun.add(testRunOSX);
-			TestRunMaker testRunWin8 = TestRunMaker.getNew(suiteName + Win8_Firefox68, listClasses);
+			TestRunMaker testRunWin8 = TestRunMaker.ofClasses(suiteName + Win8_Firefox68, listClasses);
 			testRunWin8.setBrowserStackDesktop(Win8_Firefox68);
 			listTestsRun.add(testRunWin8);
 			break;
 	    case movil_web:
-			TestRunMaker testRunAndroid = TestRunMaker.getNew(suiteName + SamsungGalaxyS9plus_Android9, listClasses);
+			TestRunMaker testRunAndroid = TestRunMaker.ofClasses(suiteName + SamsungGalaxyS9plus_Android9, listClasses);
 			testRunAndroid.setBrowserStackMobil(SamsungGalaxyS9plus_Android9);
 			listTestsRun.add(testRunAndroid);
-			TestRunMaker testRuniOS = TestRunMaker.getNew(suiteName + IPhoneXS_iOS12, listClasses);
+			TestRunMaker testRuniOS = TestRunMaker.ofClasses(suiteName + IPhoneXS_iOS12, listClasses);
 			testRuniOS.setBrowserStackMobil(IPhoneXS_iOS12);
 			listTestsRun.add(testRuniOS);
     	}

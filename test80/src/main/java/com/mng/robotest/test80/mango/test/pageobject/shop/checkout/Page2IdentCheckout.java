@@ -406,7 +406,8 @@ public class Page2IdentCheckout extends WebdrvWrapp {
         }
     }    
     
-    public static String setSeletEstadoEspanya(String provincia, WebDriver driver) {
+    public static String setSeletEstadoEspanya(String provincia, WebDriver driver) throws Exception {
+    	waitForPageLoaded(driver);
         WebElement provinciaPais = UtilsMangoTest.findElementPriorizingDisplayed(driver, By.xpath(XPathSelectEstadosPais));
         if (provinciaPais!=null) {
         	String selected = new Select(provinciaPais).getFirstSelectedOption().getText();

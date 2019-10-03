@@ -49,20 +49,28 @@ public class GenerateReports extends EmailableReporter {
         
         ITestContext context = null;
         Map<String, ISuiteResult> r = suites.get(0).getResults();
-        for (ISuiteResult r2 : r.values())
+        for (ISuiteResult r2 : r.values()) {
             context = r2.getTestContext();
-
+        }
         if (context!=null) {
         	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
             indexSuite suite = new indexSuite(testMakerCtx.getIdSuiteExecution(), testMakerCtx.getInputData().getSuiteName());
             try {
-                //this.generateReportHTML(suite, utils.getOutDirectoryFin(context), context);
-                this.generateReportHTML(suite, outputDirectory, context);
+            	deployStaticsIfNotExist(outputDirectory);
+                generateReportHTML(suite, outputDirectory, context);
             } 
             catch (Exception e) {
                 pLogger.fatal("Problem generating ReportHTML", e);
             }
         }
+    }
+    
+    private void deployStaticsIfNotExist(String outputDirectory) throws Exception {
+    	ResourcesExtractor resExtractor = ResourcesExtractor.getNew();
+    	String pathDirectoryInFromResources =  ConstantesTestMaker.nameDirectoryStatics;
+    	resExtractor.copyDirectoryResources(
+    		pathDirectoryInFromResources, 
+    		outputDirectory + "/../../" + pathDirectoryInFromResources);
     }
 
     private void generateReportHTML(indexSuite suite, String outputDirectory, ITestContext context) throws Exception {

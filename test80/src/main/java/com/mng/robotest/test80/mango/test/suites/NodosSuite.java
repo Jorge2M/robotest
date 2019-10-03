@@ -1,17 +1,15 @@
 package com.mng.robotest.test80.mango.test.suites;
 
 import java.net.URI;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import org.testng.xml.XmlSuite.ParallelMode;
-
 import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getParametersSuiteShop;
 
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
 import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
+import com.mng.robotest.test80.mango.test.factoryes.ListAllNodes;
 
 public class NodosSuite extends SuiteMaker {
 
@@ -19,14 +17,10 @@ public class NodosSuite extends SuiteMaker {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
     	addParameters(getSpecificParameters(inputParams.getUrlBase()));
-    	TestRunMaker testRun = TestRunMaker.getNew(inputParams.getSuiteName(), getClasses());
+    	TestRunMaker testRun = TestRunMaker.ofClass(inputParams.getSuiteName(), ListAllNodes.class);
     	addTestRun(testRun);
     	setParallelMode(ParallelMode.METHODS);
     	setThreadCount(3);
-    }
-    
-    private static List<String> getClasses() {
-    	return Arrays.asList("com.mng.robotest.test80.mango.test.factoryes.ListAllNodes");
     }
 	
     private Map<String,String> getSpecificParameters(String urlBase) throws Exception {

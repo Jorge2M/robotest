@@ -20,10 +20,17 @@ public class PageLoginStpV {
 	}
 	
     @Step (
-    	description="Introducir el usuario / password y pulsar el botón <b>Acceder al sistema</b>", 
-        expected="Se accede a la aplicación SAP")
+    	description=
+    		"Introducir el usuario / password<br>" + 
+    		"seleccionar el idioma <b>Español</b><br>" + 
+    		"Pulsar el botón <b>Acceder al sistema</b>", 
+        expected=
+    		"Se accede a la aplicación SAP")
     public void inputCredentialsAndEnter(String login, String password) throws Exception {
     	pageLogin.inputCredentials(login, password);
-    	PageInitialStpV.getNew(driver).checkIsInitialPage();
+    	String codeSpanish = "ES";
+    	pageLogin.selectIdioma(codeSpanish);
+    	pageLogin.clickAccederAlSistema();
+    	PageInitialStpV.getNew(driver).checkIsInitialPageSpanish();
     }
 }

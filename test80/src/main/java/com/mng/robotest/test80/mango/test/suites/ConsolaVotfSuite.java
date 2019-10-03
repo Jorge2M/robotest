@@ -2,15 +2,14 @@ package com.mng.robotest.test80.mango.test.suites;
 
 import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getParametersSuiteShop;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
 import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
+import com.mng.robotest.test80.mango.test.appshop.ConsolaVotf;
 
 public class ConsolaVotfSuite extends SuiteMaker {
 
@@ -18,14 +17,10 @@ public class ConsolaVotfSuite extends SuiteMaker {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
     	addParameters(getSpecificParameters());
-    	TestRunMaker testRun = TestRunMaker.getNew(inputParams.getSuiteName(), getClasses());
+    	TestRunMaker testRun = TestRunMaker.ofClass(inputParams.getSuiteName(), ConsolaVotf.class);
     	addTestRun(testRun);
     	setParallelMode(ParallelMode.METHODS);
     	setThreadCount(1);
-    }
-    
-    private static List<String> getClasses() {
-    	return Arrays.asList("com.mng.robotest.test80.mango.test.appshop.ConsolaVotf");
     }
     
     private Map<String,String> getSpecificParameters() {

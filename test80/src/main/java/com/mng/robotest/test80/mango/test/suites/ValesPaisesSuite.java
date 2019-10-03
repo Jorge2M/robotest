@@ -1,14 +1,12 @@
 package com.mng.robotest.test80.mango.test.suites;
 
 import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getParametersSuiteShop;
-
-import java.util.Arrays;
-import java.util.List;
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
 import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
+import com.mng.robotest.test80.mango.test.factoryes.ValesPaises;
 
 public class ValesPaisesSuite extends SuiteMaker {         
 	
@@ -39,13 +37,9 @@ public class ValesPaisesSuite extends SuiteMaker {
     public ValesPaisesSuite(InputParams inputParams) {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
-    	TestRunMaker testRun = TestRunMaker.getNew(inputParams.getSuiteName(), getClasses());
+    	TestRunMaker testRun = TestRunMaker.ofClass(inputParams.getSuiteName(), ValesPaises.class);
     	addTestRun(testRun);
     	setParallelMode(ParallelMode.METHODS);
     	setThreadCount(4);
-    }
-    
-    private static List<String> getClasses() {
-    	return Arrays.asList("com.mng.robotest.test80.mango.test.factoryes.ValesPaises");
     }
 }

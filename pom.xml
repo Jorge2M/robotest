@@ -8,7 +8,6 @@
   <modules>
     <module>testmaker</module>
   	<module>test80</module>
-  	<module>testsapfiori</module>
   	<module>webmngtest</module>
   	<module>sapfiori</module>
   </modules>

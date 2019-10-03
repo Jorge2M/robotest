@@ -223,7 +223,7 @@
 <codigo_pais>070</codigo_pais>
 <idioma acceso="al">IN</idioma>
 <tarifa>AL</tarifa>
-<codpos>08720</codpos>
+<codpos>1506</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
@@ -1191,7 +1191,7 @@
 <codigo_pais>024</codigo_pais> 
 <idioma acceso="is">IN</idioma> 
 <rgpd>S</rgpd>
-<codpos>08720</codpos>
+<codpos>220</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <shop_online>true</shop_online> 
@@ -1430,7 +1430,7 @@
 <idioma acceso="li">AL</idioma>
 <rgpd>S</rgpd>
 <tarifa>FS</tarifa>
-<codpos>08720</codpos>
+<codpos>9490</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
@@ -1612,7 +1612,7 @@
 <idioma acceso="mt">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>LM</tarifa>
-<codpos>08720</codpos>
+<codpos>ZTN 1073</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
@@ -2934,7 +2934,7 @@
 <idioma acceso="ca" idioma_descripcion="IN">IN</idioma>
 <idioma acceso="ca-fr" idioma_descripcion="FR">FR</idioma>
 <tarifa>CD</tarifa>
-<codpos>08720</codpos>
+<codpos>M5H 2N2</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
@@ -3079,7 +3079,7 @@
 <codigo_pais>428</codigo_pais>
 <idioma acceso="sv">ES</idioma>
 <tarifa>SC</tarifa>
-<codpos>08720</codpos>
+<codpos>1120</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
@@ -3948,7 +3948,7 @@
 <codigo_pais>800</codigo_pais>
 <idioma acceso="au">IN</idioma>
 <tarifa>AD</tarifa>
-<codpos>08720</codpos>
+<codpos>2060</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
@@ -4167,7 +4167,7 @@
 <idioma acceso="cn-en" idioma_descripcion="IN">IN</idioma>
 <paistop>S</paistop>
 <tarifa>CR</tarifa>
-<codpos>08720</codpos>
+<codpos>266033</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
@@ -4655,7 +4655,7 @@
 <codigo_pais>079</codigo_pais>
 <idioma acceso="kz">RU</idioma>
 <tarifa>KZ</tarifa>
-<codpos>08720</codpos>
+<codpos>040900</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
@@ -4775,7 +4775,7 @@
 <idioma acceso="lb">AR</idioma>
 <idioma acceso="lb-en">IN</idioma>
 <tarifa>LL</tarifa>
-<codpos>112</codpos>
+<codpos>2038 3054</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
@@ -5070,7 +5070,7 @@
 <codigo_pais>708</codigo_pais>
 <idioma acceso="ph">IN</idioma>
 <tarifa>FI</tarifa>
-<codpos>08720</codpos>
+<codpos>1008</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
@@ -5224,7 +5224,7 @@
 <codigo_pais>706</codigo_pais>
 <idioma acceso="sg">IN</idioma>
 <tarifa>SD</tarifa>
-<codpos>08720</codpos>
+<codpos>546080</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
@@ -5535,7 +5535,7 @@
 <codigo_pais>081</codigo_pais>
 <idioma acceso="uz">IN</idioma>
 <tarifa>UZ</tarifa>
-<codpos>08720</codpos>
+<codpos>100123</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <shop_online>true</shop_online>

@@ -19,9 +19,9 @@ public class PageInitialStpV {
 	}
     
     @Validation (
-    	description="Aparece la página inicial de la aplicación",
+    	description="Aparece la página inicial de la aplicación cuando el acceso en Español",
     	level=State.Defect)
-    public boolean checkIsInitialPage() {
-    	return (pageInitial.checkIsInitialPage());
+    public boolean checkIsInitialPageSpanish() {
+    	return (pageInitial.checkIsInitialPageSpanish());
     }
 }

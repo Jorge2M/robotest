@@ -31,7 +31,7 @@ public class TestNGxmlStub extends SuiteMaker {
     private TestNGxmlStub(TypeStubTest typeTest, InputParamsTestMaker inputData) {
     	super(inputData);
     	this.typeTest = typeTest;
-    	TestRunMaker testRun = TestRunMaker.getNew(
+    	TestRunMaker testRun = TestRunMaker.getFromStrings(
     		"TestRun Test",
     		Arrays.asList(classWithTestAnnotations));
     	testRun.addDependencyGroups(getDependencyGroups());
