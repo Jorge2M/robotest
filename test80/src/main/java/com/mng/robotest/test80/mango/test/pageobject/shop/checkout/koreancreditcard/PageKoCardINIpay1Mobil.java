@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancredit
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.webdriverwrapper.ElementPage;
-import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions;
-import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.webdriverwrapper.ElementPage;
+import com.mng.testmaker.webdriverwrapper.ElementPageFunctions;
+import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
 
 public class PageKoCardINIpay1Mobil extends ElementPageFunctions {
 	private final static String tagTitleButtonTypeCard = "@TagLitTypeCard";

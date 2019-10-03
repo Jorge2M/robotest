@@ -2,8 +2,8 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.webdriverwrapper.ElementPage;
-import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.webdriverwrapper.ElementPage;
+import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
 
 public class ModalUserSesionShopDesktop extends WebdrvWrapp { 
 

@@ -3,9 +3,9 @@ package com.mng.sapfiori.test.suite;
 import java.util.HashMap;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
-import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
-import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
+import com.mng.testmaker.access.InputParamsTestMaker;
+import com.mng.testmaker.xmlprogram.SuiteMaker;
+import com.mng.testmaker.xmlprogram.TestRunMaker;
 import com.mng.sapfiori.test.testcase.script.Piloto;
 
 public class SmokeTestSuite extends SuiteMaker {

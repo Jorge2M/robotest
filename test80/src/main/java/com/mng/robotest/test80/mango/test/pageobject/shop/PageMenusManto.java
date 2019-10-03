@@ -8,8 +8,8 @@ import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
-import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.webdriverwrapper.TypeOfClick;
+import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
 
 public class PageMenusManto extends WebdrvWrapp {
 

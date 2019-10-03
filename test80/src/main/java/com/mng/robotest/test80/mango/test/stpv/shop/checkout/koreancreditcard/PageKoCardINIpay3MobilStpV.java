@@ -1,10 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard;
 
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions;
+import com.mng.testmaker.utils.State;
+import com.mng.testmaker.annotations.step.Step;
+import com.mng.testmaker.annotations.validation.Validation;
+import com.mng.testmaker.webdriverwrapper.ElementPageFunctions;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay3Mobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay3Mobil.BodyPageKoCardINIpay3;
 

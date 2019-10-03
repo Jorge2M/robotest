@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
 
 /**
  * Modal que aparece al seleccionar el link "Envío y devoluciones" existente en la nueva Ficha

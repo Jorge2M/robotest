@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
-import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
+import com.mng.testmaker.annotations.validation.ChecksResult;
 
 public class ChecksResultWithFlagLinkCodPed extends ChecksResult {
 	boolean existsLinkCodPed;

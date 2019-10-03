@@ -9,10 +9,10 @@ import java.util.Arrays;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
-import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.mango.*;
+import com.mng.testmaker.access.InputParamsTestMaker;
+import com.mng.testmaker.utils.State;
+import com.mng.testmaker.utils.TestCaseData;
+import com.mng.testmaker.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;

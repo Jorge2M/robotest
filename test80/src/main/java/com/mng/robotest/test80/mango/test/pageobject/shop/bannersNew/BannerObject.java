@@ -9,8 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
-import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.webdriverwrapper.TypeOfClick;
+import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
 
 public abstract class BannerObject {
 

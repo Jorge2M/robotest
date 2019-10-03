@@ -7,8 +7,8 @@ import org.testng.xml.XmlSuite.ParallelMode;
 import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getParametersSuiteShop;
 
 import com.mng.robotest.test80.InputParams;
-import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
-import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
+import com.mng.testmaker.xmlprogram.SuiteMaker;
+import com.mng.testmaker.xmlprogram.TestRunMaker;
 import com.mng.robotest.test80.mango.test.factoryes.ListAllNodes;
 
 public class NodosSuite extends SuiteMaker {

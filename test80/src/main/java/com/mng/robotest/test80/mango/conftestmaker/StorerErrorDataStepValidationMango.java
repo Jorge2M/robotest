@@ -10,12 +10,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.conf.StorerErrorDataStepValidation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest.TypeEvidencia;
-import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.testmaker.utils.DataFmwkTest;
+import com.mng.testmaker.utils.conf.StorerErrorDataStepValidation;
+import com.mng.testmaker.utils.controlTest.DatosStep;
+import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.fmwkTest.TypeEvidencia;
+import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 
 public class StorerErrorDataStepValidationMango implements StorerErrorDataStepValidation {
 

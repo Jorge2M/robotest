@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
 
 
 public class PagePaypalLogin extends WebdrvWrapp {

@@ -11,10 +11,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.mango.GestorWebDriver;
+import com.mng.testmaker.access.InputParamsTestMaker;
+import com.mng.testmaker.utils.DataFmwkTest;
+import com.mng.testmaker.utils.TestCaseData;
+import com.mng.testmaker.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;

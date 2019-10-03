@@ -5,8 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
-import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
-import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.webdriverwrapper.TypeOfClick;
+import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 

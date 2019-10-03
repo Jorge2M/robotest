@@ -10,11 +10,11 @@ package org.pruebasws;
     	- No se lincan correctamente las imágenes
  */
 
-import com.mng.robotest.test80.arq.jdbc.dao.SuitesDAO;
-import com.mng.robotest.test80.arq.utils.StateSuite;
-
 import org.pruebasws.thread.TSuiteThreadsManager;
 import org.testng.TestNG;
+
+import com.mng.testmaker.jdbc.dao.SuitesDAO;
+import com.mng.testmaker.utils.StateSuite;
 
 /**
  * @param args

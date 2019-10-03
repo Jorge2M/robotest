@@ -2,10 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.modales;
 
 
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
-import com.mng.robotest.test80.arq.annotations.validation.Validation;
+import com.mng.testmaker.utils.State;
+import com.mng.testmaker.annotations.step.Step;
+import com.mng.testmaker.annotations.validation.ChecksResult;
+import com.mng.testmaker.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalBuscadorTiendasMisCompras;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalDetalleMisCompras;
 

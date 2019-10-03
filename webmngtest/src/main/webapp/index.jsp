@@ -16,10 +16,10 @@ response.setDateHeader ("Expires", -1);
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.TreeSet"%>
 <%@ page import="com.mng.robotest.test80.Test80mng"%>
-<%@ page import="com.mng.robotest.test80.arq.access.CommandLineAccess"%>
+<%@ page import="com.mng.testmaker.access.CommandLineAccess"%>
 <%@ page import="com.mng.robotest.test80.InputParams" %>
-<%@ page import="com.mng.robotest.test80.arq.utils.filter.TestMethod"%>
-<%@ page import="com.mng.robotest.test80.arq.utils.filter.FilterTestsSuiteXML"%>
+<%@ page import="com.mng.testmaker.utils.filter.TestMethod"%>
+<%@ page import="com.mng.testmaker.utils.filter.FilterTestsSuiteXML"%>
 <%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
 <%@ page import="com.mng.robotest.test80.mango.conftestmaker.Suites" %>
 

@@ -2,7 +2,7 @@ package com.mng.sapfiori.test.testcase.stpv;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.testmaker.annotations.step.Step;
 import com.mng.sapfiori.test.testcase.pageobject.PageLogin;
 
 public class PageLoginStpV {

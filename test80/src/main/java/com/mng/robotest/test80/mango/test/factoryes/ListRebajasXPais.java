@@ -3,8 +3,8 @@ package com.mng.robotest.test80.mango.test.factoryes;
 import java.util.*;
 import org.testng.annotations.*;
 
-import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
-import com.mng.robotest.test80.data.TestMakerContext;
+import com.mng.testmaker.access.InputParamsTestMaker;
+import com.mng.testmaker.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.rebajas.RebajasJun2019;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;

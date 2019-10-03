@@ -5,7 +5,7 @@ import java.util.*;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
-import com.mng.robotest.test80.arq.jdbc.dao.ParamsDAO;
+import com.mng.testmaker.jdbc.dao.ParamsDAO;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Continente;

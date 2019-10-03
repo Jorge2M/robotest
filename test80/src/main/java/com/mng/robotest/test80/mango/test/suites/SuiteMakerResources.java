@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.mng.robotest.test80.InputParams;
-//import com.mng.robotest.test80.arq.listeners.CallBack;
-import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+//import com.mng.testmaker.listeners.CallBack;
+import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.test.data.Constantes;
-import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
+import com.mng.testmaker.xmlprogram.TestRunMaker;
 
 public class SuiteMakerResources {
     

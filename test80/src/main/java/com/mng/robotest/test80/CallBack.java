@@ -8,7 +8,7 @@ import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 import com.google.common.base.Splitter;
-import com.mng.robotest.test80.arq.utils.ManageConnectionHTTP;
+import com.mng.testmaker.utils.ManageConnectionHTTP;
 
 public class CallBack {
     String reportTSuiteURL = "";

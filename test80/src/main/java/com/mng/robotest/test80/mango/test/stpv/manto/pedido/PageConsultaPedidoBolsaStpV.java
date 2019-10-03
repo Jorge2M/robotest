@@ -1,15 +1,15 @@
 package com.mng.robotest.test80.mango.test.stpv.manto.pedido;
 
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
-import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
+import com.mng.testmaker.utils.State;
+import com.mng.testmaker.annotations.step.Step;
+import com.mng.testmaker.annotations.validation.ChecksResult;
+import com.mng.testmaker.annotations.validation.Validation;
+import com.mng.testmaker.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
-import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions;
+import com.mng.testmaker.webdriverwrapper.ElementPageFunctions;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageDetallePedido;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PagePedidos;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageDetallePedido.RightButtons;

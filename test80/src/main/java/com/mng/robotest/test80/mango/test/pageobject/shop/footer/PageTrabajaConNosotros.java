@@ -5,8 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
 
 public class PageTrabajaConNosotros extends WebdrvWrapp implements PageFromFooter {
 	

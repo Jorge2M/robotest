@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.paypal;
 
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.testmaker.annotations.step.Step;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.paypal.PagePaypalCreacionCuenta;
 
 public class PagePaypalCreacionCuentaStpV {

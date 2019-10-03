@@ -2,8 +2,8 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci.SecTarjetaPciInIframe;
 
 public class SecKrediKarti extends SecTarjetaPciInIframe {

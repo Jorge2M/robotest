@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import org.sqlite.SQLiteConfig;
 import org.sqlite.SQLiteConfig.LockingMode;
 
-import com.mng.robotest.test80.data.ConstantesTestMaker;
+import com.mng.testmaker.data.ConstantesTestMaker;
 
 @SuppressWarnings("javadoc")
 public class Connector {
@@ -23,7 +23,7 @@ public class Connector {
         System.getProperty("user.dir");
         SQLiteConfig config = new SQLiteConfig();
         config.setReadOnly(forReadOnly); 
-        config.setBusyTimeout("30000");
+        config.setBusyTimeout(30000);
         config.setLockingMode(LockingMode.NORMAL);
         
         // Nos conectamos a la ubicación propia de la BD en instalaciones de la aplicación

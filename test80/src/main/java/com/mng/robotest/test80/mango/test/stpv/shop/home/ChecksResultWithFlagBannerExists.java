@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.home;
 
-import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
+import com.mng.testmaker.annotations.validation.ChecksResult;
 
 public class ChecksResultWithFlagBannerExists extends ChecksResult {
 	boolean existBanner;

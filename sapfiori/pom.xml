@@ -31,6 +31,26 @@
   
   <build>
   	<plugins>
+  		<plugin>
+  		  <groupId>org.apache.maven.plugins</groupId>
+	      <artifactId>maven-assembly-plugin</artifactId>
+		  <configuration>
+			 	<appendAssemblyId>false</appendAssemblyId>
+				<descriptors>
+					<descriptor>src/assembly/distribution.xml</descriptor>
+				</descriptors>
+		  </configuration>
+     	  <executions>
+			  <execution>
+				<id>make-assembly</id>
+				<phase>package</phase> 
+				<goals>
+					<goal>single</goal>
+				</goals>
+			  </execution>
+		   </executions>
+	    </plugin>	
+	    
  		<plugin>
 			<!-- Define Aspectj Nature -->
 			<groupId>org.apache.maven.plugins</groupId>
@@ -45,6 +65,7 @@
 			</configuration>
 		</plugin>
 		
+		<!-- Seguramente si lo ejecuto sin testmaker se quejará de que no encuentra el aspectj en .m2 -->
        	<plugin>
 			<groupId>org.codehaus.mojo</groupId>
 		    <artifactId>aspectj-maven-plugin</artifactId>
@@ -72,6 +93,7 @@
 		        </execution>
 		    </executions>
 		</plugin> 	
+	
 	</plugins>	
   </build>	
 </project>

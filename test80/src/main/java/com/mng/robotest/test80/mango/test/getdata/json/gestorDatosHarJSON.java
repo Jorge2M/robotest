@@ -9,8 +9,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.testng.ITestContext;
 
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest.TypeEvidencia;
+import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.fmwkTest.TypeEvidencia;
 
 
 public class gestorDatosHarJSON {

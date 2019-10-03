@@ -34,24 +34,13 @@
 </includes>
 </fileSet>-->
 
-<!-- copiar la carpeta de componentes estáticas en el directorio base -->
-<fileSet>
-<directory>output-library/static</directory>
-<outputDirectory>output-library/static</outputDirectory>
-</fileSet>
-
-<!-- copiar la carpeta con la librería de scripts + SQLITE -->
-<fileSet>
-<directory>output-library/sqlite</directory>
-<outputDirectory>output-library/sqlite</outputDirectory>
-<includes></includes>
-</fileSet>
-
 <!-- copiar la carpeta con los resources -->
+<!-- 
 <fileSet>
 <directory>resources</directory>
 <outputDirectory>resources</outputDirectory>
 </fileSet>
+-->
 
 </fileSets>
 </assembly>

@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
-import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public class DataMantoAccess {

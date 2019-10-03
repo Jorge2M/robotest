@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.conftestmaker;
 import java.lang.reflect.Method;
 import org.testng.ITestContext;
 
-import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.conf.StorerErrorDataStepValidation;
-import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.testmaker.utils.TestCaseData;
+import com.mng.testmaker.utils.conf.StorerErrorDataStepValidation;
+import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.stpv.manto.DataMantoAccess;

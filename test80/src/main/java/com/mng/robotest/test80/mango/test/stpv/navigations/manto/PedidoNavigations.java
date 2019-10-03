@@ -6,11 +6,11 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.InputParams;
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.DataFmwkTest;
+import com.mng.testmaker.utils.TestCaseData;
+import com.mng.testmaker.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.Constantes;
-import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
+import com.mng.testmaker.utils.otras.TypeAccessFmwk;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;

@@ -62,6 +62,7 @@
 			</configuration>
 		</plugin>  	
   	
+  		<!-- Seguramente si lo ejecuto sin testmaker se quejará de que no encuentra el aspectj en .m2 -->
        	<plugin>
 			<groupId>org.codehaus.mojo</groupId>
 		    <artifactId>aspectj-maven-plugin</artifactId>

@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.data;
 
-import com.mng.robotest.test80.arq.utils.webdriver.BrowserStackMobil;
-import com.mng.robotest.test80.arq.utils.webdriver.BrowserStackSO.PlatformMobilBS;
+import com.mng.testmaker.utils.webdriver.BrowserStackMobil;
+import com.mng.testmaker.utils.webdriver.BrowserStackSO.PlatformMobilBS;
 
 public enum BrowserStackCtxMobil implements BrowserStackMobil {
 

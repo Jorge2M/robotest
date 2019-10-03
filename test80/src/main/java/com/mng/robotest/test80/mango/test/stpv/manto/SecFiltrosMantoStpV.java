@@ -2,10 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep;
-import com.mng.robotest.test80.arq.utils.controlTest.DatosStep.SaveWhen;
+import com.mng.testmaker.annotations.step.Step;
+import com.mng.testmaker.utils.TestCaseData;
+import com.mng.testmaker.utils.controlTest.DatosStep;
+import com.mng.testmaker.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.manto.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.manto.SecFiltros;

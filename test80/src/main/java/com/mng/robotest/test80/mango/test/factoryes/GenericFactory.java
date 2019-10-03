@@ -5,7 +5,7 @@ import org.testng.annotations.*;
 import org.testng.ITestContext;
 
 import com.mng.robotest.test80.InputParams;
-import com.mng.robotest.test80.data.TestMakerContext;
+import com.mng.testmaker.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.Suites;
 import com.mng.robotest.test80.mango.test.appshop.Favoritos;
 import com.mng.robotest.test80.mango.test.appshop.MiCuenta;

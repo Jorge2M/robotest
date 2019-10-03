@@ -5,11 +5,11 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
-import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
-import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker;
-import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
-import com.mng.robotest.test80.data.TestMakerContext;
+import com.mng.testmaker.access.InputParamsTestMaker;
+import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker;
+import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.testmaker.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appmanto.Menus;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageMenusManto;

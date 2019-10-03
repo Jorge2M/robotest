@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mng.robotest.test80.arq.utils.ManageConnectionHTTP;
+import com.mng.testmaker.utils.ManageConnectionHTTP;
 
 public class GetStoresServiceMng {
 

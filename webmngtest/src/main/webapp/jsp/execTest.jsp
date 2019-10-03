@@ -10,18 +10,18 @@ response.setDateHeader ("Expires", -1);%>
 <body>
 	<%@ page import="com.mng.robotest.test80.Test80mng" %>
 	<%@ page import="com.mng.robotest.test80.InputParams" %>
-	<%@ page import="com.mng.robotest.test80.arq.access.CommandLineAccess"%>
+	<%@ page import="com.mng.testmaker.access.CommandLineAccess"%>
 	<%@ page import="java.io.BufferedReader" %>
 	<%@ page import="javax.servlet.ServletContext" %>
 	<%@ page import="java.io.InputStreamReader" %>
 	<%@ page import="java.util.Arrays" %>
 	<%@ page import="org.pruebasws.thread.TSuiteThreadsManager" %>
-	<%@ page import="com.mng.robotest.test80.arq.jdbc.to.Suite" %>
-	<%@ page import="com.mng.robotest.test80.arq.jdbc.dao.SuitesDAO" %>
+	<%@ page import="com.mng.testmaker.jdbc.to.Suite" %>
+	<%@ page import="com.mng.testmaker.jdbc.dao.SuitesDAO" %>
 	<%@ page import="com.mng.robotest.test80.CallBack" %>
 	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.Suites" %>
 	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
-	<%@ page import="com.mng.robotest.test80.arq.xmlprogram.SuiteMaker" %>
+	<%@ page import="com.mng.testmaker.xmlprogram.SuiteMaker" %>
 
 	<style>
 	body {

@@ -1,11 +1,11 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checqueregalo;
 
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions.StateElem;
-import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
-import com.mng.robotest.test80.arq.annotations.validation.Validation;
+import com.mng.testmaker.utils.State;
+import com.mng.testmaker.webdriverwrapper.ElementPageFunctions.StateElem;
+import com.mng.testmaker.annotations.step.Step;
+import com.mng.testmaker.annotations.validation.ChecksResult;
+import com.mng.testmaker.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputData;
 import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputData.*;

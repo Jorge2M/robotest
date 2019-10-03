@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancredit
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
 
 public class PageKoreanConfDesktop extends WebdrvWrapp {
     private static String XPathSubmitButton = "//input[@id='pay_btn']";

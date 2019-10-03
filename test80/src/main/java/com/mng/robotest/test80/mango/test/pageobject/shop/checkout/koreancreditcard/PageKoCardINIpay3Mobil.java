@@ -2,8 +2,8 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancredit
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.webdriverwrapper.ElementPage;
-import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions;
+import com.mng.testmaker.webdriverwrapper.ElementPage;
+import com.mng.testmaker.webdriverwrapper.ElementPageFunctions;
 
 public class PageKoCardINIpay3Mobil extends ElementPageFunctions {
     public enum BodyPageKoCardINIpay3 implements ElementPage {

@@ -6,8 +6,8 @@ response.setDateHeader ("Expires", -1);
 <%@ page language="java" contentType="text/html"%>
 <%@page session="false"%>
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="com.mng.robotest.test80.arq.jdbc.dao.SuitesDAO"%>
-<%@ page import="com.mng.robotest.test80.arq.jdbc.to.Suite"%>
+<%@ page import="com.mng.testmaker.jdbc.dao.SuitesDAO"%>
+<%@ page import="com.mng.testmaker.jdbc.to.Suite"%>
 <%
 String suiteName = request.getParameter("suite");
 String channel = request.getParameter("channel");

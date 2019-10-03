@@ -2,9 +2,9 @@ package com.mng.sapfiori;
 
 import java.util.Arrays;
 
-import com.mng.robotest.test80.arq.access.CommandLineAccess;
-import com.mng.robotest.test80.arq.access.InputParamsTestMaker;
-import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
+import com.mng.testmaker.access.CommandLineAccess;
+import com.mng.testmaker.access.InputParamsTestMaker;
+import com.mng.testmaker.xmlprogram.SuiteMaker;
 import com.mng.sapfiori.datatmaker.Apps;
 import com.mng.sapfiori.datatmaker.Suites;
 import com.mng.sapfiori.test.suite.SmokeTestSuite;

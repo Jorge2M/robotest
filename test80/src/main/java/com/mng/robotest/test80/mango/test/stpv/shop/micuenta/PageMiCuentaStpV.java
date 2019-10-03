@@ -2,10 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import java.util.HashMap;
 
-import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.Validation;
-import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.testmaker.annotations.step.Step;
+import com.mng.testmaker.annotations.validation.Validation;
+import com.mng.testmaker.utils.State;
+import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageInfoNewMisComprasMovil;

@@ -1,17 +1,17 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.buscador;
 
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.annotations.step.Step;
-import com.mng.robotest.test80.arq.annotations.validation.ChecksResult;
-import com.mng.robotest.test80.arq.annotations.validation.Validation;
+import com.mng.testmaker.utils.State;
+import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.annotations.step.Step;
+import com.mng.testmaker.annotations.validation.ChecksResult;
+import com.mng.testmaker.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock;
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
-import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorBusqueda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;

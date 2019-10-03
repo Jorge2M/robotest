@@ -1,6 +1,6 @@
 package com.mng.robotest.test80;
 
-import com.mng.robotest.test80.arq.listeners.InvokeListener;
+import com.mng.testmaker.listeners.InvokeListener;
 import com.mng.robotest.test80.mango.test.jdbc.dao.ProductCacheDAO;
 
 public class PurgeHistoricalDataBD {

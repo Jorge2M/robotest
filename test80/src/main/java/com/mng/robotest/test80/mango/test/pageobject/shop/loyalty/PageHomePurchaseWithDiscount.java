@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.loyalty;
 
-import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

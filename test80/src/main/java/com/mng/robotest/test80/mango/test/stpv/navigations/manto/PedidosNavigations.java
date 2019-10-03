@@ -5,12 +5,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mng.robotest.test80.InputParams;
-import com.mng.robotest.test80.arq.utils.DataFmwkTest;
-import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.utils.TestCaseData;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.DataFmwkTest;
+import com.mng.testmaker.utils.State;
+import com.mng.testmaker.utils.TestCaseData;
+import com.mng.testmaker.utils.controlTest.fmwkTest;
 import com.mng.robotest.test80.mango.test.data.Constantes;
-import com.mng.robotest.test80.arq.utils.otras.TypeAccessFmwk;
+import com.mng.testmaker.utils.otras.TypeAccessFmwk;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageDetallePedido;

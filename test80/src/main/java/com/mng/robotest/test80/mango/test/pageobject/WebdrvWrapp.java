@@ -7,10 +7,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeoutException;
-import com.mng.robotest.test80.arq.utils.controlTest.fmwkTest;
-import com.mng.robotest.test80.arq.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
-import com.mng.robotest.test80.arq.webdriverwrapper.ElementPageFunctions;
-import com.mng.robotest.test80.arq.webdriverwrapper.TypeOfClick;
+import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.testmaker.webdriverwrapper.ElementPageFunctions;
+import com.mng.testmaker.webdriverwrapper.TypeOfClick;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

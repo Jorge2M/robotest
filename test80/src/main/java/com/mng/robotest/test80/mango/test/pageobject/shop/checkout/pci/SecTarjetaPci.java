@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.pci;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.otras.Channel;
+import com.mng.testmaker.utils.otras.Channel;
 
 
 public interface SecTarjetaPci {

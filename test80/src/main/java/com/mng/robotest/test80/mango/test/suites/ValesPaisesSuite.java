@@ -4,8 +4,8 @@ import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getP
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.InputParams;
-import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
-import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
+import com.mng.testmaker.xmlprogram.SuiteMaker;
+import com.mng.testmaker.xmlprogram.TestRunMaker;
 import com.mng.robotest.test80.mango.test.factoryes.ValesPaises;
 
 public class ValesPaisesSuite extends SuiteMaker {         

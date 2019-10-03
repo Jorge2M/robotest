@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.menus.mobil;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.webdriverwrapper.ElementPage;
-import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.webdriverwrapper.ElementPage;
+import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 

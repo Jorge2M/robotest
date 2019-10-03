@@ -1,8 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
 import org.openqa.selenium.WebDriver;
-import com.mng.robotest.test80.arq.utils.State;
-import com.mng.robotest.test80.arq.annotations.validation.Validation;
+import com.mng.testmaker.utils.State;
+import com.mng.testmaker.annotations.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageRedirectPasarelaLoading;
 
 public class PageRedirectPasarelaLoadingStpV {

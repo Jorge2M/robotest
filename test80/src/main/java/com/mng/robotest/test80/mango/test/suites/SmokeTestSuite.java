@@ -9,8 +9,8 @@ import java.util.List;
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.InputParams;
-import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
-import com.mng.robotest.test80.arq.xmlprogram.TestRunMaker;
+import com.mng.testmaker.xmlprogram.SuiteMaker;
+import com.mng.testmaker.xmlprogram.TestRunMaker;
 import com.mng.robotest.test80.mango.test.appshop.Ayuda;
 import com.mng.robotest.test80.mango.test.appshop.Bolsa;
 import com.mng.robotest.test80.mango.test.appshop.Buscador;

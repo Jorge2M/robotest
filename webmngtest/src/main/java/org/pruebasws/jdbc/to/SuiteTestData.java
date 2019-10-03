@@ -3,8 +3,8 @@ package org.pruebasws.jdbc.to;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.mng.robotest.test80.arq.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.testmaker.utils.otras.Channel;
 
 /**
  * Bean associated to TESTS_SUITES

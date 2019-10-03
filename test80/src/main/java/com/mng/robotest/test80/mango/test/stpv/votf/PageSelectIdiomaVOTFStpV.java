@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.votf;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.annotations.step.Step;
+import com.mng.testmaker.annotations.step.Step;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.pageobject.votf.PageAlertaVOTF;
 import com.mng.robotest.test80.mango.test.pageobject.votf.PageSelectIdiomaVOTF;

@@ -4,8 +4,8 @@ import java.util.Set;
 
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.Test80mng;
+import com.mng.testmaker.xmlprogram.SuiteMaker;
 import com.mng.robotest.test80.InputParams;
-import com.mng.robotest.test80.arq.xmlprogram.SuiteMaker;
 
 import java.util.ArrayList;
 

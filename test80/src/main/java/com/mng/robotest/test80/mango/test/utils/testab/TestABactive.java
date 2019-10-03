@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.utils.testab.TestABactData;
-import com.mng.robotest.test80.arq.utils.testab.manager.TestABmanager;
+import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.utils.testab.TestABactData;
+import com.mng.testmaker.utils.testab.manager.TestABmanager;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public class TestABactive {

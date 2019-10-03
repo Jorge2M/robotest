@@ -1,8 +1,8 @@
 package com.mng.robotest.test80.mango.test.pageobject.manto;
 
-import com.mng.robotest.test80.arq.utils.otras.Channel;
-import com.mng.robotest.test80.arq.webdriverwrapper.ElementPage;
-import com.mng.robotest.test80.arq.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.webdriverwrapper.ElementPage;
+import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
 
 public class PageOrdenacionDePrendas extends WebdrvWrapp {
 	
