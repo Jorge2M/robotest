@@ -8,7 +8,7 @@ public class ListSuites {
 	private static final List<SuiteTestMaker> listSuites = new ArrayList<>();
 	
 	void addSuite(SuiteTestMaker suite) {
-		listSuites.add(suite);
+		listSuites.add(suite); 
 	}
 	
 	void removeSuite(SuiteTestMaker suite) {
