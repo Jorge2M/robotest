@@ -6,9 +6,8 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.webdriverwrapper.TypeOfClick;
-import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 @SuppressWarnings({"static-access"})
 /**

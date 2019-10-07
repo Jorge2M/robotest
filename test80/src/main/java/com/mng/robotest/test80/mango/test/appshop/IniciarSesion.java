@@ -9,11 +9,11 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -27,7 +27,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.identificacion.PageIdentific
 import com.mng.robotest.test80.mango.test.stpv.shop.identificacion.PageRecuperaPasswdStpV;
 
 
-
 public class IniciarSesion extends GestorWebDriver {
 
     public IniciarSesion() {}
@@ -35,7 +34,7 @@ public class IniciarSesion extends GestorWebDriver {
     @BeforeMethod(groups={"IniciarSesion", "Canal:all_App:all"})
     public void login(ITestContext context, Method method) 
     throws Exception {
-        InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
+        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());
@@ -46,7 +45,7 @@ public class IniciarSesion extends GestorWebDriver {
         dCtxSh.pais = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
         
-        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), "", dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), "", dCtxSh, context, method);
     }
 
     @SuppressWarnings("unused")

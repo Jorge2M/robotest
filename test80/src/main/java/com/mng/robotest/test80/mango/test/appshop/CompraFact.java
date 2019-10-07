@@ -11,12 +11,12 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod; 
 import org.testng.annotations.Test;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.controlTest.mango.GestorWebDriver;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -105,7 +105,7 @@ public class CompraFact extends GestorWebDriver {
     @BeforeMethod(groups={"CompraFact", "Canal:all_App:all", "SupportsFactoryCountrys"})
     public void login(ITestContext context, Method method) 
     throws Exception {
-        InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
+        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());
@@ -113,7 +113,7 @@ public class CompraFact extends GestorWebDriver {
         dCtxSh.pais = this.paisFactory;
         dCtxSh.idioma = this.idiomaFactory;
         
-        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), this.index_fact, dCtxSh, context, method);     
+        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), this.index_fact, dCtxSh, context, method);     
     }    
     
     @SuppressWarnings("unused")

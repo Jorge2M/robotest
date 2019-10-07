@@ -3,8 +3,8 @@ package com.mng.robotest.test80.mango.test.pageobject.manto.pedido;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.webdriverwrapper.ElementPage;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 public class PageGenerarPedido extends WebdrvWrapp {
 

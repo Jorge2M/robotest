@@ -2,14 +2,14 @@ package com.mng.testmaker.utils;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
 public class DataWebdriver {
     public WebDriver driver;
-    public TypeWebDriver typeDriver;
+    public WebDriverType webDriverType;
     
-    public DataWebdriver(WebDriver driver, TypeWebDriver typeDriver) {
+    public DataWebdriver(WebDriver driver, WebDriverType webDriverType) {
         this.driver = driver;
-        this.typeDriver = typeDriver;
+        this.webDriverType = webDriverType;
     }
 }

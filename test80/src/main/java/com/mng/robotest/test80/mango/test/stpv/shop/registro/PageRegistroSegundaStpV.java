@@ -10,7 +10,7 @@ import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.annotations.validation.ChecksResult;
 import com.mng.testmaker.annotations.validation.Validation;
-import com.mng.testmaker.utils.controlTest.DatosStep;
+import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -92,12 +92,12 @@ public class PageRegistroSegundaStpV {
         }
         
         //Rewrite description step
-        DatosStep datosStep = TestCaseData.getDatosCurrentStep();
-        datosStep.setDescripcion(stepDescription);
+        StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
+        StepTestMaker.setDescripcion(stepDescription);
 
         PageRegistroSegunda.setFechaNacimiento(dFTest.driver, fechaNacimiento);
         String lineasDesmarcadas = PageRegistroSegunda.desmarcarLineasRandom(dFTest.driver, dataRegistroOK.get("lineascomaseparated"));
-        datosStep.setDescripcion(datosStep.getDescripcion().replace(tagListaRandom, lineasDesmarcadas));
+        StepTestMaker.setDescripcion(StepTestMaker.getDescripcion().replace(tagListaRandom, lineasDesmarcadas));
         dataRegistroOK.put("clicklineas", lineasDesmarcadas);
         if (paisConNinos) {
             PageRegistroSegunda.setNumeroNinos(numNinos, dFTest.driver);

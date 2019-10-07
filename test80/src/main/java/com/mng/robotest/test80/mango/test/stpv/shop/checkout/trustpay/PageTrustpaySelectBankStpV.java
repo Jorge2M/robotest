@@ -57,7 +57,7 @@ public class PageTrustpaySelectBankStpV {
         PageTrustpaySelectBank.clickButtonToContinuePay(channel, driver);
         
         //Validation
-        //PageTrustpayTestConfirmStpV.validateIsPage(datosStep, dFTest);
+        //PageTrustpayTestConfirmStpV.validateIsPage(StepTestMaker, dFTest);
         PageTrustPayResultStpV.validateIsPage(importeTotal, codPais, driver);
     }
 }

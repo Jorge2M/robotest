@@ -6,13 +6,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.testmaker.utils.controlTest.fmwkTest;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 
 
 public class SecMetodoEnvioDesktop extends WebdrvWrapp {
-	static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+	static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 	
     public static ModalDroppoints modalDroppoints;
     static String XPathRadioInput = "//input[@id[contains(.,'Transportes')]]";

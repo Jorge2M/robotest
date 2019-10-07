@@ -1,4 +1,4 @@
-package com.mng.testmaker.utils.webdriver.plugins.firefox;
+package com.mng.testmaker.service.webdriver.maker.plugins.firefox;
 
 import java.io.File;
 import java.io.InputStream;

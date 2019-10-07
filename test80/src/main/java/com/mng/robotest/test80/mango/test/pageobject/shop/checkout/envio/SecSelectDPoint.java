@@ -9,8 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.testmaker.utils.controlTest.fmwkTest;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.DataDeliveryPoint;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.DataSearchDeliveryPoint;
 
@@ -142,7 +142,7 @@ public class SecSelectDPoint extends WebdrvWrapp {
             	}
             }
             catch (Exception e) {
-                LogManager.getLogger(fmwkTest.log4jLogger).warn("Exception selecting Provincia in droppoints", e);
+                LogManager.getLogger(FmwkTest.log4jLogger).warn("Exception selecting Provincia in droppoints", e);
             }
             
             Thread.sleep(1000);

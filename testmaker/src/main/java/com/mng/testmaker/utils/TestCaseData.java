@@ -13,23 +13,23 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ISuite;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
-import com.mng.testmaker.data.TestMakerContext;
+import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.domain.SuiteTestMaker;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.testmaker.utils.conf.StorerErrorDataStepValidation;
-import com.mng.testmaker.utils.controlTest.DatosStep;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.controlTest.mango.GestorWebDriver;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
-import com.mng.testmaker.xmlprogram.SuiteTestMaker;
 
 public class TestCaseData {
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 	
     static ThreadLocal<Map<String, Object>> dataInThread = new ThreadLocal<>();
     static ThreadLocal<DataFmwkTest> dFTestInThread = new ThreadLocal<>();
-    static ThreadLocal<Queue<DatosStep>> datosStepStack = new ThreadLocal<>();
-    static ThreadLocal<DatosStep> maxDatosStep = new ThreadLocal<>();
+    static ThreadLocal<Queue<StepTestMaker>> datosStepStack = new ThreadLocal<>();
+    static ThreadLocal<StepTestMaker> maxDatosStep = new ThreadLocal<>();
 
     public static Object getData(String idData) throws Exception {
     	Map<String, Object> data = dataInThread.get();
@@ -56,13 +56,13 @@ public class TestCaseData {
     	return (getdFTest().driver);
     }
     
-    public static DatosStep pollDatosStepForStep() {
-    	Queue<DatosStep> datosStepStackTmp = datosStepStack.get();
+    public static StepTestMaker pollDatosStepForStep() {
+    	Queue<StepTestMaker> datosStepStackTmp = datosStepStack.get();
     	return (datosStepStackTmp.poll());
     }
     
-    public static DatosStep peekDatosStepForStep() {
-    	Queue<DatosStep> datosStepStackTmp = datosStepStack.get();
+    public static StepTestMaker peekDatosStepForStep() {
+    	Queue<StepTestMaker> datosStepStackTmp = datosStepStack.get();
     	if (datosStepStackTmp!=null && !datosStepStackTmp.isEmpty()) {
     		return (datosStepStackTmp.peek());
     	}
@@ -71,7 +71,7 @@ public class TestCaseData {
     }
     
     public static void clearStackDatosStep() {
-    	Queue<DatosStep> datosStepStackTmp = datosStepStack.get();
+    	Queue<StepTestMaker> datosStepStackTmp = datosStepStack.get();
     	if (datosStepStackTmp!=null) {
 	    	datosStepStackTmp.clear();
     	} else {
@@ -80,11 +80,11 @@ public class TestCaseData {
     	maxDatosStep.remove();
     }
     
-    public static DatosStep getDatosLastStep() {
+    public static StepTestMaker getDatosLastStep() {
     	return (maxDatosStep.get());
     }
     
-    public static DatosStep getDatosCurrentStep() {
+    public static StepTestMaker getDatosCurrentStep() {
     	return (peekDatosStepForStep());
     }
     
@@ -92,10 +92,10 @@ public class TestCaseData {
     	dFTestInThread.set(dFTest);
     }
     
-    public static void storeInThread(DatosStep datosStep) {
-    	Queue<DatosStep> datosStepStackTmp = datosStepStack.get();
+    public static void storeInThread(StepTestMaker datosStep) {
+    	Queue<StepTestMaker> datosStepStackTmp = datosStepStack.get();
     	if (datosStepStackTmp==null) {
-    		datosStepStackTmp = Collections.asLifoQueue(new ArrayDeque<DatosStep>());
+    		datosStepStackTmp = Collections.asLifoQueue(new ArrayDeque<StepTestMaker>());
     	}
     	
     	datosStepStackTmp.add(datosStep);
@@ -103,28 +103,28 @@ public class TestCaseData {
     	maxDatosStep.set(datosStep);
     }
     
-    public static void getAndStoreDataFmwk(TypeWebDriver typeWebDriver, String appPath, String datosFactoria, Channel channel, 
+    public static void getAndStoreDataFmwk(WebDriverType WebDriverType, String appPath, String datosFactoria, Channel channel, 
     									   StorerErrorDataStepValidation storerDataError, ITestContext context, Method method) 
     throws Exception {
     	GestorWebDriver gestorWdrv = new GestorWebDriver();
-		WebDriver driver = gestorWdrv.getWebDriver(typeWebDriver, appPath, datosFactoria, channel, context, method);
-		DataFmwkTest dFTest = new DataFmwkTest(driver, typeWebDriver, method, context);
+		WebDriver driver = gestorWdrv.getWebDriver(WebDriverType, appPath, datosFactoria, channel, context, method);
+		DataFmwkTest dFTest = new DataFmwkTest(driver, WebDriverType, method, context);
 		dFTest.setStorerDataError(storerDataError);
 		storeInThread(dFTest);
     }
     
     //TODO reubicar cuando se refactorice
-	public static TestMakerContext getTestMakerContext(ISuite suite) {
+	public static SuiteContextTestMaker getTestMakerContext(ISuite suite) {
     	SuiteTestMaker suiteXML = (SuiteTestMaker)suite.getXmlSuite();
     	return (suiteXML.getTestMakerContext());
 	}
 	
-	public static TestMakerContext getTestMakerContext(ITestContext ctxTng) {
+	public static SuiteContextTestMaker getTestMakerContext(ITestContext ctxTng) {
 		return (getTestMakerContext(ctxTng.getSuite()));
 	}
 	
 	public static InputParamsTestMaker getInputDataTestMaker(ITestContext ctxTng) {
-		TestMakerContext tmContext = getTestMakerContext(ctxTng);
+		SuiteContextTestMaker tmContext = getTestMakerContext(ctxTng);
 		return tmContext.getInputData();
 	}
 }

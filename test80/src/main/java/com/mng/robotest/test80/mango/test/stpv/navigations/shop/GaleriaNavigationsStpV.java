@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.ModalArticleNotAvailableStpV;
@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 
 public class GaleriaNavigationsStpV {
 
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 	
 	public static DataBag selectArticleAvailableFromGaleria(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 	    DataBag dataBag = new DataBag();

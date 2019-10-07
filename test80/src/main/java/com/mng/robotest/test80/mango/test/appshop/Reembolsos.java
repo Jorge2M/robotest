@@ -4,10 +4,10 @@ import org.testng.ITestContext;
 import java.lang.reflect.Method;
 import org.testng.annotations.*;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.controlTest.mango.*;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.Constantes;
@@ -59,7 +59,7 @@ public class Reembolsos extends GestorWebDriver {
      */
     @BeforeMethod (groups={"Otras", "Canal:all_App:all"})
     public void login(ITestContext context, Method method) throws Exception {
-        InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
+        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
         dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());
@@ -81,7 +81,7 @@ public class Reembolsos extends GestorWebDriver {
         dCtxSh.pais = this.arabia;
         dCtxSh.idioma = this.arabia_arabe;
         
-        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), "", dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), "", dCtxSh, context, method);
     }
 
     /**

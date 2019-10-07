@@ -9,8 +9,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.utils.controlTest.fmwkTest;
-import com.mng.testmaker.utils.controlTest.fmwkTest.TypeEvidencia;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest.TypeEvidencia;
 
 
 public class gestorDatosHarJSON {
@@ -23,8 +23,8 @@ public class gestorDatosHarJSON {
     }
 	
     public gestorDatosHarJSON(int step, ITestContext context, Method method) throws Exception {
-        String methodWithFactory = fmwkTest.getMethodWithFactory(method, context);
-        String ficheroHAR = fmwkTest.getPathFileEvidenciaStep(context, methodWithFactory, step, TypeEvidencia.har);
+        String methodWithFactory = FmwkTest.getMethodWithFactory(method, context);
+        String ficheroHAR = FmwkTest.getPathFileEvidenciaStep(context, methodWithFactory, step, TypeEvidencia.har);
         parseHAR(ficheroHAR);
     }
 	

@@ -2,12 +2,13 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 
 import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.annotations.validation.Validation;
+import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
+
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.annotations.validation.ChecksResult;
-import com.mng.testmaker.utils.controlTest.DatosStep.SaveWhen;
-import com.mng.testmaker.webdriverwrapper.ElementPageFunctions.StateElem;
+import com.mng.testmaker.annotations.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques.ButtonsCheque;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques.TablaCheque;

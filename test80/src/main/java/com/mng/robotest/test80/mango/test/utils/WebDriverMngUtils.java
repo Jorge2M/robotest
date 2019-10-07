@@ -18,7 +18,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestContext;
 
 import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.otras.ResultadoErrores;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
@@ -26,7 +26,7 @@ import com.mng.robotest.test80.mango.test.generic.stackTrace;
 
 public class WebDriverMngUtils {
 	
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
     
     /**
      * Cargamos el errorPage y de allí extraemos el nodo

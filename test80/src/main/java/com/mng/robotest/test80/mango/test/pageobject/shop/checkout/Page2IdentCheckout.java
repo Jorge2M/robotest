@@ -13,18 +13,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import com.mng.testmaker.webdriverwrapper.TypeOfClick;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
-import com.mng.robotest.test80.mango.test.pageobject.shop.popupFindAddress;
+import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.robotest.test80.mango.test.pageobject.shop.PopupFindAddress;
 
 public class Page2IdentCheckout extends WebdrvWrapp {
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
     
     final static String XPathMainForm = "//form[@action[contains(.,'/expressregister')]]";
     final static String XPathInputPassword = "//input[@id[contains(.,'cfPass')]]";
@@ -259,13 +259,13 @@ public class Page2IdentCheckout extends WebdrvWrapp {
             clickBotonFindAddress(driver);
             String mainWindowHandle = driver.getWindowHandle();
             try {
-                String popupBuscador = popupFindAddress.goToPopupAndWait(mainWindowHandle, 5/*maxSecondsToWait*/, driver);
-                if ("".compareTo(popupBuscador)!=0 && popupFindAddress.isIFrameUntil(0, driver)) {
-                    popupFindAddress.switchToIFrame(driver);
-                    if (popupFindAddress.isBuscadorClickableUntil(2/*maxSecondsToWait*/, driver)) {
-                        popupFindAddress.setDataBuscador(driver, codPostalPais);
-                        popupFindAddress.clickButtonLupa(driver);
-                        popupFindAddress.clickFirstDirecc(driver);
+                String popupBuscador = PopupFindAddress.goToPopupAndWait(mainWindowHandle, 5/*maxSecondsToWait*/, driver);
+                if ("".compareTo(popupBuscador)!=0 && PopupFindAddress.isIFrameUntil(0, driver)) {
+                    PopupFindAddress.switchToIFrame(driver);
+                    if (PopupFindAddress.isBuscadorClickableUntil(2/*maxSecondsToWait*/, driver)) {
+                        PopupFindAddress.setDataBuscador(driver, codPostalPais);
+                        PopupFindAddress.clickButtonLupa(driver);
+                        PopupFindAddress.clickFirstDirecc(driver);
                     }
                 }
             }

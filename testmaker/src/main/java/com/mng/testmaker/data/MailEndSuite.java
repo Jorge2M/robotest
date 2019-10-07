@@ -10,18 +10,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
+import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
 import com.mng.testmaker.jdbc.dao.SuitesDAO;
 import com.mng.testmaker.jdbc.to.Suite;
 import com.mng.testmaker.listeners.CorreoReport;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.mail.MailClient;
 import com.mng.testmaker.utils.mail.beans.AttachMail;
 
 public class MailEndSuite {
 	
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 	
     private final String from = "Robotest QA<jorge.munoz.sge@mango.com>";
 	private final List<String> toMail;
@@ -68,7 +69,7 @@ public class MailEndSuite {
             InternetAddress[] myCcList = InternetAddress.parse(getCcMailCommaSeparated());
             ArrayList<AttachMail> listaAttachImages = new ArrayList<>();
             
-        	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+        	SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
         	InputParamsTestMaker inputData = testMakerCtx.getInputData();
             Suite suiteObj = SuitesDAO.getSuite(testMakerCtx.getIdSuiteExecution(), context.getSuite().getName());
             if (suiteObj!=null) {

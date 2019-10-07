@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import org.testng.ISuite;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
-import com.mng.testmaker.data.TestMakerContext;
+import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
 import com.mng.testmaker.jdbc.Connector;
 import com.mng.testmaker.jdbc.to.ResultTestRun;
 import com.mng.testmaker.jdbc.to.Suite;
 import com.mng.testmaker.utils.StateSuite;
 import com.mng.testmaker.utils.utils;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.controlTest.indexSuite;
 
 
@@ -248,7 +248,7 @@ public class SuitesDAO {
     }
     
     public static void insertSuiteInit(ISuite suite) {
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(suite);
+    	SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(suite);
     	InputParamsTestMaker inputDataTmaker = testMakerCtx.getInputData();
         try (Connection conn = Connector.getConnection()) {
             try (PreparedStatement insert = conn.prepareStatement(SQLInsertSuiteInit)) {
@@ -257,7 +257,7 @@ public class SuitesDAO {
                 insert.setString(3, inputDataTmaker.getVersionSuite());
                 insert.setString(4, inputDataTmaker.getChannel().toString());
                 insert.setString(5, inputDataTmaker.getApp().toString());
-                insert.setString(6, inputDataTmaker.getTypeWebDriver().toString());
+                insert.setString(6, inputDataTmaker.getWebDriverType().toString());
                 insert.setDate(7, new java.sql.Date(System.currentTimeMillis()));
                 insert.setInt(8, 0);
                 insert.setString(9, inputDataTmaker.getUrlBase());
@@ -269,9 +269,9 @@ public class SuitesDAO {
                 }
                 insert.setString(10, countrys);
                 
-                insert.setString(11, fmwkTest.getPathReportHTML(fmwkTest.getOutputDirectorySuite(suite)));
+                insert.setString(11, FmwkTest.getPathReportHTML(FmwkTest.getOutputDirectorySuite(suite)));
 
-                String pathToReport = fmwkTest.getPathReportHTML(fmwkTest.getOutputDirectorySuite(suite));
+                String pathToReport = FmwkTest.getPathReportHTML(FmwkTest.getOutputDirectorySuite(suite));
                 String reportTSuiteURL = utils.obtainDNSFromFile(pathToReport, inputDataTmaker.getWebAppDNS()).replace("\\", "/");
                 insert.setString(12, reportTSuiteURL);
                 insert.setString(13,  StateSuite.STARTED.toString());
@@ -290,7 +290,7 @@ public class SuitesDAO {
     }
     
     public static void updateEndSuiteFromCtx(ResultTestRun resultTestRun, ITestContext context) {
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+    	SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
         try (Connection conn = Connector.getConnection()) {
             String idExecSuite = testMakerCtx.getIdSuiteExecution();
             StateSuite stateSuite = SuitesDAO.getStateSuite(idExecSuite);

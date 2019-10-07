@@ -4,11 +4,11 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.ModalArticleNotAvail
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.controlTest.mango.GestorWebDriver;
 import com.mng.testmaker.utils.otras.Channel;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.Color;
@@ -62,7 +62,7 @@ public class GaleriaProducto extends GestorWebDriver {
     @BeforeMethod (groups={"GaleriaProducto", "Canal:all_App:all"})
     public void login(ITestContext context, Method method)
     throws Exception {
-        InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
+        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());
@@ -76,7 +76,7 @@ public class GaleriaProducto extends GestorWebDriver {
         
         dCtxSh.pais = this.españa;
         dCtxSh.idioma = this.castellano;
-        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), "", dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), "", dCtxSh, context, method);
     }
     
     @SuppressWarnings("unused")

@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.buscador;
 
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;

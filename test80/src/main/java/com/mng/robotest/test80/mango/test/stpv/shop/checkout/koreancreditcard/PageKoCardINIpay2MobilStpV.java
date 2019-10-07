@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.annotations.validation.Validation;
-import com.mng.testmaker.webdriverwrapper.ElementPageFunctions;
+import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay2Mobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay2Mobil.BodyPageKoCardINIpay2;
 

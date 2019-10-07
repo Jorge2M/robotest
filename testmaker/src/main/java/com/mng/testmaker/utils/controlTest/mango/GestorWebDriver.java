@@ -5,23 +5,23 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.access.InputParamsTestMaker.ManagementWebdriver;
-import com.mng.testmaker.data.TestMakerContext;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
+import com.mng.testmaker.domain.InputParamsTestMaker.ManagementWebdriver;
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker;
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.testmaker.utils.NetTrafficMng;
 import com.mng.testmaker.utils.controlTest.GestorWebDrv;
 import com.mng.testmaker.utils.controlTest.StoredWebDrv;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.utils.webdriver.BrowserStackMobil;
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker;
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 
 import java.lang.reflect.Method;
 import java.text.Normalizer;
 import java.util.regex.Pattern;
 
-public class GestorWebDriver extends fmwkTest {
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+public class GestorWebDriver extends FmwkTest {
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
     static Object startupSync = new Object();
 
     
@@ -33,13 +33,13 @@ public class GestorWebDriver extends fmwkTest {
      * @param datosFactoria identificador de los casos de prueba creados desde factorías
      * @param isMobil       indicador de si las pruebas son de móvil o desktop
      */
-    public WebDriver getWebDriver(TypeWebDriver typeWebDriver, String appPath, String datosFactoria, Channel channel, ITestContext context, Method method) 
+    public WebDriver getWebDriver(WebDriverType webDriverType, String appPath, String datosFactoria, Channel channel, ITestContext context, Method method) 
     throws Exception {
         WebDriver driver = null;
         if (!"ROBOTEST2".equals(System.getProperty("ROBOTEST2"))) {
             // Lo ideal sería ejecutar este método desde el InvokeListener.onTestStart, pero desde allí no tiene efecto
             // la SkipException
-            fmwkTest.sendSkipTestExceptionIfSuiteStopping(context);
+            FmwkTest.sendSkipTestExceptionIfSuiteStopping(context);
 	    
             //Guardamos los datos enviados por la factoria indexados por nombre de Thread (soporte para la paralelización)
             context.setAttribute("factory-"+String.valueOf(Thread.currentThread().getId()), deAccent(datosFactoria));
@@ -48,24 +48,24 @@ public class GestorWebDriver extends fmwkTest {
             GestorWebDrv gestorWd = GestorWebDrv.getInstance(context);
     	    
             //Obtenemos información adicional del WebDriver que necesitamos (básicamente el modelo del dispositivo en el caso de BrowserStack)
-            String moreDataWdrv = getMoreDataWdrv(typeWebDriver, context);
+            String moreDataWdrv = getMoreDataWdrv(webDriverType, context);
                     
             //Buscamos un webdriver libre del tipo que necesitamos (y automáticamente se marca como 'busy')
-            TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+            SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
             boolean netAnalysis = testMakerCtx.getInputData().isNetAnalysis();
-            driver = gestorWd.getWebDrvFree(typeWebDriver, moreDataWdrv);
+            driver = gestorWd.getWebDrvFree(webDriverType, moreDataWdrv);
             if (driver == null) {
         		driver = 
-        			FactoryWebdriverMaker.make(typeWebDriver, context)
+        			FactoryWebdriverMaker.make(webDriverType, context)
         				.setChannel(channel)
         				.setNettraffic(netAnalysis)
         				.build();
                 
-                gestorWd.storeWebDriver(driver, StoredWebDrv.stateWd.busy, typeWebDriver, moreDataWdrv);
+                gestorWd.storeWebDriver(driver, StoredWebDrv.stateWd.busy, webDriverType, moreDataWdrv);
             }
                     
             //Almacenamiento en el contexto de algunos datos útiles
-            context.setAttribute("bpath", typeWebDriver.name());
+            context.setAttribute("bpath", webDriverType.name());
             context.setAttribute("appPath", appPath);
         }
 
@@ -74,7 +74,7 @@ public class GestorWebDriver extends fmwkTest {
 	
     public void quitWebDriver(WebDriver driver, ITestContext contextTng) {
     	//Borramos el proxy para la gestión del NetTraffic asociado a nivel de Thread de TestNG
-        TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(contextTng);
+        SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(contextTng);
         boolean netAnalysis = testMakerCtx.getInputData().isNetAnalysis();
     	if (netAnalysis) {
         	NetTrafficMng.stopNetTrafficThread();
@@ -112,8 +112,8 @@ public class GestorWebDriver extends fmwkTest {
     /**
      * Transforma el valor del bpath en un canal de ejecución de pruebas controlado
      */
-    public static TypeWebDriver getTypeWebdriver(String bpath) {
-        return TypeWebDriver.valueOf(bpath);
+    public static WebDriverType getWebDriverType(String bpath) {
+        return WebDriverType.valueOf(bpath);
     }
 	
     /**
@@ -121,12 +121,12 @@ public class GestorWebDriver extends fmwkTest {
      * actualmente sólo lo informaremos para el caso de 'BrowserStack' (devolvemos el modelo de de dispositivo móvil especificado en BrowserStack)
      * en el resto de casos devolveremos ""
      */
-    public String getMoreDataWdrv(TypeWebDriver canalWebDriver, ITestContext contextTng) {
+    public String getMoreDataWdrv(WebDriverType canalWebDriver, ITestContext contextTng) {
         String moreDataWdrv = "";
         switch (canalWebDriver) {
         //En el caso de BrowserStack como información específica del WebDriver incluiremos el modelo de dispositivo móvil asociado
         case browserstack:
-            BrowserStackMobil bsStackMobil = TestMakerContext.getTestRun(contextTng).getBrowserStackMobil();
+            BrowserStackMobil bsStackMobil = SuiteContextTestMaker.getTestRun(contextTng).getBrowserStackMobil();
             if (bsStackMobil!=null) {
                 moreDataWdrv = bsStackMobil.getDevice();
             }

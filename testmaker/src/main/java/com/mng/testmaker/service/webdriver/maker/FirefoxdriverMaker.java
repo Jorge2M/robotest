@@ -13,27 +13,27 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
 
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 
-public class FirefoxdriverMaker implements WebdriverMaker {
+class FirefoxdriverMaker implements WebdriverMaker {
 	
     //Nota: si se modifica la versión sería conveniente regenerar la AMI correspondiente al Robotest en Cloud
 	final static String GeckoDriverVersion = "0.25.0";
-	TypeWebDriver typeWebDriver;
+	WebDriverType webDriverType;
 	FirefoxProfile fp = new FirefoxProfile();
 	FirefoxOptions options;
 	Channel channel = Channel.desktop;
 	boolean nettraffic = false;
 	
-	private FirefoxdriverMaker(TypeWebDriver typeWebDriver) {
-		this.typeWebDriver = typeWebDriver;
+	private FirefoxdriverMaker(WebDriverType webDriverType) {
+		this.webDriverType = webDriverType;
 		initialConfig();
         setDriverFirefox();
 	}
 	
-	public static FirefoxdriverMaker getNew(TypeWebDriver typeWebDriver) {
-		return (new FirefoxdriverMaker(typeWebDriver));
+	static FirefoxdriverMaker getNew(WebDriverType WebDriverType) {
+		return (new FirefoxdriverMaker(WebDriverType));
 	}
 	
     @Override
@@ -116,7 +116,7 @@ public class FirefoxdriverMaker implements WebdriverMaker {
         options.setProfile(fp);
         options.setCapability("marionette", true);
         System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, String.valueOf(true));
-        options.setHeadless(typeWebDriver.isHeadless());
+        options.setHeadless(webDriverType.isHeadless());
     }
     
     private void activeLogs() {

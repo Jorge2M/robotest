@@ -16,13 +16,13 @@ import com.mng.testmaker.jdbc.dao.SuitesDAO;
 import com.mng.testmaker.jdbc.to.Suite;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.utils;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.mail.MailClient;
 import com.mng.testmaker.utils.mail.beans.AttachMail;
 
 
 public class CorreoReport {
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger); 
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger); 
     
     /**
      * @param args[0] - del tipo http://robottest.mangodev.net (+:port si fuera preciso)

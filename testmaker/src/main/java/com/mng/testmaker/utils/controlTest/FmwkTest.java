@@ -29,8 +29,10 @@ import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.xml.XmlSuite;
 
+import com.mng.testmaker.annotations.step.SaveWhen;
 import com.mng.testmaker.data.ConstantesTestMaker;
-import com.mng.testmaker.data.TestMakerContext;
+import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
 import com.mng.testmaker.jdbc.dao.StepsDAO;
 import com.mng.testmaker.jdbc.dao.SuitesDAO;
 import com.mng.testmaker.jdbc.dao.ValidationsDAO;
@@ -40,11 +42,10 @@ import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.StateSuite;
 import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.utils;
-import com.mng.testmaker.utils.controlTest.DatosStep.SaveWhen;
 import com.mng.testmaker.utils.otras.WebDriverArqUtils;
 
-public class fmwkTest {
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+public class FmwkTest {
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 
     public enum TypeStore {step, validation}
     public enum TypeEvidencia {imagen, html, errorpage, har, harp}
@@ -57,7 +58,7 @@ public class fmwkTest {
      * Función que realiza la grabación de un Step. Básicamente graba los datos en BD y genera los ficheros asociados
      */
     @SuppressWarnings({ "unchecked"})    
-    public static void grabStep(DatosStep datosStep, DataFmwkTest dFTest) {
+    public static void grabStep(StepTestMaker datosStep, DataFmwkTest dFTest) {
     	if (dFTest==null || dFTest.ctx==null || dFTest.meth==null) {
     		return;
     	}
@@ -69,13 +70,13 @@ public class fmwkTest {
     	
         if ("ROBOTEST2".equals(System.getProperty("ROBOTEST2"))) {
             // No queremos crear una dependencia ciclica robotest2 report, por lo que es licito realizar este workaround intercambiando datos atraves de listas y hashes
-            Map<DatosStep, List<String>> stepMap = (Map<DatosStep, List<String>>) dFTest.ctx.getSuite()
+            Map<StepTestMaker, List<String>> stepMap = (Map<StepTestMaker, List<String>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_STEP_VALIDATIONS");
-            Map<DatosStep, List<State>> stepMapStatus = (Map<DatosStep, List<State>>) dFTest.ctx.getSuite()
+            Map<StepTestMaker, List<State>> stepMapStatus = (Map<StepTestMaker, List<State>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_VALIDATION_STATUS_LIST");              
-            Map<DatosStep, List<byte[]>> screnshootsMap = (Map<DatosStep, List<byte[]>>) dFTest.ctx.getSuite()
+            Map<StepTestMaker, List<byte[]>> screnshootsMap = (Map<StepTestMaker, List<byte[]>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_SCRENSHOT_LIST");
-            Map<DatosStep, List<byte[]>> htmlsourcesMap = (Map<DatosStep, List<byte[]>>) dFTest.ctx.getSuite()
+            Map<StepTestMaker, List<byte[]>> htmlsourcesMap = (Map<StepTestMaker, List<byte[]>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_SOURCES_LIST");
             if (!stepMap.containsKey(datosStep)) {
                 stepMap.put(datosStep, new ArrayList<String>());
@@ -99,19 +100,19 @@ public class fmwkTest {
      */
     //TODO refactor
     @SuppressWarnings({ "unchecked"})
-    public static void grabStepValidation(DatosStep datosStep, String descripValidac, DataFmwkTest dFTest) {
+    public static void grabStepValidation(StepTestMaker datosStep, String descripValidac, DataFmwkTest dFTest) {
     	if (dFTest==null || dFTest.ctx==null || dFTest.meth==null) {
     		return;
     	}
     	
         if ("ROBOTEST2".equals(System.getProperty("ROBOTEST2"))) {
-            Map<DatosStep, List<String>> stepMap = (Map<DatosStep, List<String>>) dFTest.ctx.getSuite()
+            Map<StepTestMaker, List<String>> stepMap = (Map<StepTestMaker, List<String>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_STEP_VALIDATIONS");
-            Map<DatosStep, List<State>> stepMapStatus = (Map<DatosStep, List<State>>) dFTest.ctx.getSuite()
+            Map<StepTestMaker, List<State>> stepMapStatus = (Map<StepTestMaker, List<State>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_VALIDATION_STATUS_LIST");              
-            Map<DatosStep, List<byte[]>> screnshootsMap = (Map<DatosStep, List<byte[]>>) dFTest.ctx.getSuite()
+            Map<StepTestMaker, List<byte[]>> screnshootsMap = (Map<StepTestMaker, List<byte[]>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_SCRENSHOT_LIST");
-            Map<DatosStep, List<byte[]>> htmlsourcesMap = (Map<DatosStep, List<byte[]>>) dFTest.ctx.getSuite()
+            Map<StepTestMaker, List<byte[]>> htmlsourcesMap = (Map<StepTestMaker, List<byte[]>>) dFTest.ctx.getSuite()
                     .getAttribute("ROBOTEST2_SOURCES_LIST");     
             if (!stepMap.containsKey(datosStep)) {
                 stepMap.put(datosStep, new ArrayList<String>());
@@ -181,7 +182,7 @@ public class fmwkTest {
      */
     public static void sendSkipTestExceptionIfSuiteStopping(ITestContext context) {
     	if (context!=null) {
-    		TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+    		SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
 	        StateSuite stateSuite = SuitesDAO.getStateSuite(testMakerCtx.getIdSuiteExecution());
 	        if (stateSuite==StateSuite.STOPPING) {
 	            throw new SkipException("Received Signal for stop TestSuite");
@@ -189,8 +190,8 @@ public class fmwkTest {
     	}
     }
 
-    private static void storeFileEvidencesIfNeeded(DatosStep datosStep, TypeStore typeStore, DataFmwkTest dFTest) {
-        String nameMethodWithFactory = fmwkTest.getMethodWithFactory(dFTest.meth, dFTest.ctx);
+    private static void storeFileEvidencesIfNeeded(StepTestMaker datosStep, TypeStore typeStore, DataFmwkTest dFTest) {
+        String nameMethodWithFactory = FmwkTest.getMethodWithFactory(dFTest.meth, dFTest.ctx);
         datosStep.setNameMethodWithFactory(nameMethodWithFactory);
         if (typeStore==TypeStore.step) {
         	createPathForEvidencesStore(nameMethodWithFactory, dFTest.ctx);
@@ -215,7 +216,7 @@ public class fmwkTest {
         directorio.mkdirs();
     }
     
-    private static void storeHardcopyIfNeeded(boolean storeImage, DatosStep datosStep, DataFmwkTest dFTest) {
+    private static void storeHardcopyIfNeeded(boolean storeImage, StepTestMaker datosStep, DataFmwkTest dFTest) {
         try {
             if (isStoreImage(storeImage, datosStep, dFTest)) {
                 String nombreImagen = getPathFileEvidenciaStep(dFTest.ctx, datosStep.getNameMethodWithFactory(), datosStep.getStepNumber(), TypeEvidencia.imagen);
@@ -227,7 +228,7 @@ public class fmwkTest {
         }
     }
     
-    private static void storeErrorPageIfNeeded(boolean browserGUI, DatosStep datosStep, DataFmwkTest dFTest) {
+    private static void storeErrorPageIfNeeded(boolean browserGUI, StepTestMaker datosStep, DataFmwkTest dFTest) {
     	try {
 		    if (isStoreError(browserGUI, datosStep, dFTest) &&
 		    	dFTest.storerDataError!=null) {
@@ -239,7 +240,7 @@ public class fmwkTest {
         }
     }
     
-    private static void storeHTMLIfNeeded(DatosStep datosStep, DataFmwkTest dFTest) {
+    private static void storeHTMLIfNeeded(StepTestMaker datosStep, DataFmwkTest dFTest) {
         try {
             if (datosStep.getSaveHtmlPage()==SaveWhen.Always && 
             	datosStep.getTypePage() == 0/* HTML */) {
@@ -251,7 +252,7 @@ public class fmwkTest {
         }
     }
     
-    private static boolean isStoreImage(boolean browserGUI, DatosStep datosStep, DataFmwkTest dFTest) {
+    private static boolean isStoreImage(boolean browserGUI, StepTestMaker datosStep, DataFmwkTest dFTest) {
         int forceGrabInAllSteps = 0;
         Object grabImgObj = dFTest.ctx.getAttribute("grabImg");
         if (grabImgObj!=null) {
@@ -268,7 +269,7 @@ public class fmwkTest {
         );
     }
     
-    private static boolean isStoreError(boolean browserGUI, DatosStep datosStep, DataFmwkTest dFTest) throws Exception {
+    private static boolean isStoreError(boolean browserGUI, StepTestMaker datosStep, DataFmwkTest dFTest) throws Exception {
 	    String currentURL = dFTest.driver.getCurrentUrl();
 	    URI uri = new URI(currentURL);
     	SaveWhen saveErrorWhen = datosStep.getSaveErrorPage();
@@ -284,11 +285,11 @@ public class fmwkTest {
 	    );
     }
 
-    private static void storeNetTrafficIfNeeded(DatosStep datosStep, ITestContext ctx) {
+    private static void storeNetTrafficIfNeeded(StepTestMaker datosStep, ITestContext ctx) {
 	    try {
 	    	String methodWithFactory = datosStep.getNameMethodWithFactory();
 	        if (datosStep.getSaveNettrafic()==SaveWhen.Always) {
-	            String nameFileHar = fmwkTest.getPathFileEvidenciaStep(ctx, methodWithFactory, datosStep.getStepNumber(), TypeEvidencia.har);
+	            String nameFileHar = FmwkTest.getPathFileEvidenciaStep(ctx, methodWithFactory, datosStep.getStepNumber(), TypeEvidencia.har);
 	        	NetTrafficMng netTraffic = new NetTrafficMng();
 	            netTraffic.storeHarInFile(nameFileHar);
 	            netTraffic.copyHarToHarp(nameFileHar);
@@ -390,12 +391,12 @@ public class fmwkTest {
      *          false: devuelve la URL de la imagen correspondiente al 'output directory' temporal durante la ejecución de los tests
      * @return URL de la hardcopy asociada a un step concreto
      */
-    public static String getURLImgStep(DatosStep datosStep, boolean finDirectory, Method method, ITestContext context) {
+    public static String getURLImgStep(StepTestMaker datosStep, boolean finDirectory, Method method, ITestContext context) {
         String methodWithFactory = getMethodWithFactory(method, context);
         String pathImageInit = getPathFileEvidenciaStep(context, methodWithFactory, datosStep.getStepNumber(), TypeEvidencia.imagen);
         File fileImage = new File(pathImageInit);
         
-        TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+        SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
         String applicationDNS = testMakerCtx.getInputData().getWebAppDNS();
         String urlImage = utils.obtainDNSFromFile(fileImage.getAbsolutePath(), applicationDNS).replace('\\', '/');
         return (urlImage);

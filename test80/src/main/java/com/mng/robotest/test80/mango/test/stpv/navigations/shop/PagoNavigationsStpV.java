@@ -15,9 +15,9 @@ import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.DatosStep;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
-import com.mng.testmaker.utils.controlTest.DatosStep.SaveWhen;
+import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.annotations.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.utils.otras.TypeAccessFmwk;
 import com.mng.testmaker.utils.otras.Channel;
@@ -55,7 +55,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory.PagoSt
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 public class PagoNavigationsStpV {
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
     
     public static void testFromLoginToExecPaymetIfNeeded(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) 
     throws Exception {
@@ -99,12 +99,12 @@ public class PagoNavigationsStpV {
     	saveNettraffic=SaveWhen.Always)
     public static void accessShopAndLoginOrLogoff(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        DatosStep datosStep = TestCaseData.getDatosCurrentStep();    	
+        StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();    	
         if (dCtxSh.userRegistered) {
-            datosStep.replaceInDescription(
+            StepTestMaker.replaceInDescription(
             	tagLoginOrLogoff, "e Identificarse con el usuario <b>" + dCtxSh.userConnected + "</b>");
         } else {
-        	datosStep.replaceInDescription(
+        	StepTestMaker.replaceInDescription(
         		tagLoginOrLogoff, "(si estamos logados cerramos sesión)");
         }
         
@@ -403,7 +403,7 @@ public class PagoNavigationsStpV {
      *     Desktop: simplemente se selecciona el botón "Confirmar Compra"
      *     Movil  : se selecciona los botones "Ver resumen" y "Confirmación del pago)
      */
-    public static DatosStep aceptarCompraDesdeMetodosPago(DataCtxPago dCtxPago, Channel channel, WebDriver driver)
+    public static StepTestMaker aceptarCompraDesdeMetodosPago(DataCtxPago dCtxPago, Channel channel, WebDriver driver)
     throws Exception {
         DataPedido dataPedido = dCtxPago.getDataPedido();
         dataPedido.setCodtipopago("R");

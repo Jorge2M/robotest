@@ -1,29 +1,19 @@
-package com.mng.testmaker.utils.controlTest;
+package com.mng.testmaker.domain;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.testng.ITestContext;
 
+import com.mng.testmaker.annotations.step.SaveWhen;
 import com.mng.testmaker.annotations.validation.ChecksResult;
-import com.mng.testmaker.data.TestMakerContext;
 import com.mng.testmaker.utils.NetTrafficMng;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.TestCaseData;
 
 
-public class DatosStep {
+public class StepTestMaker {
 	
-	public enum SaveWhen {
-		Always, 
-		Never, 
-		IfProblem;
-		
-		boolean IfProblemSave() {
-			return (this==Always || this==IfProblem);
-		}
-	}
-
 	private boolean isStateUpdated = false;
 	private int step_number = 0;
 	private int numValidations = 0;
@@ -43,16 +33,16 @@ public class DatosStep {
 	private ChecksResult listResultValidations;
 	private String nameMethodWithFactory = "";
 
-    public DatosStep() {
+    public StepTestMaker() {
         this.step_number = 0;
     }
 
     //TODO llamada desde el mecanismo antiguo. Eliminar cuando esté todo migrado a AspectJ
-    public DatosStep(String c_descripcion, String c_res_expected) {
+    public StepTestMaker(String c_descripcion, String c_res_expected) {
         this.descripcion = c_descripcion;
         this.res_expected = c_res_expected;
         this.hora_inicio = new Date(System.currentTimeMillis());
-    	DatosStep maxDatosStep = TestCaseData.getDatosLastStep();
+    	StepTestMaker maxDatosStep = TestCaseData.getDatosLastStep();
     	if (maxDatosStep!=null) {
     		setStepNumber(maxDatosStep.getStepNumber() + 1);
     	} else {
@@ -114,7 +104,7 @@ public class DatosStep {
     }
     
     public void setSaveNettrafic(SaveWhen saveNettraffic, ITestContext context) {
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+    	SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
         boolean isNettraffic = testMakerCtx.getInputData().isNetAnalysis();
         if (isNettraffic) {
         	this.saveNettraffic = saveNettraffic;

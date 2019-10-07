@@ -12,16 +12,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.data.TestMakerContext;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
 import com.mng.testmaker.jdbc.Connector;
 import com.mng.testmaker.jdbc.to.ResultTestRun;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.controlTest.indexSuite;
 import com.mng.testmaker.utils.webdriver.BrowserStackMobil;
 
 
 public class TestRunsDAO {
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
     
     public static String SQLSelectTestRunsSuite = 
         "SELECT IDEXECSUITE, SUITE, TEST, DEVICE, RESULT_SCRIPT, RESULT_TNG, INICIO, FIN, TIME_MS, NUMBER_METHODS, BROWSER " + 
@@ -78,7 +78,7 @@ public class TestRunsDAO {
     }    
 
     public static void insertFromCtx(ResultTestRun resultStep, ITestContext ctx) {
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(ctx);
+    	SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(ctx);
         try (Connection conn = Connector.getConnection()) {
             String idExecSuite = testMakerCtx.getIdSuiteExecution();
             try (PreparedStatement insert = conn.prepareStatement (SQLInsertTestRun)) {
@@ -88,7 +88,7 @@ public class TestRunsDAO {
                 
                 //De momento en DEVICE introducimos el dispositivo de BrowserStack
                 String device = "";
-                BrowserStackMobil bsStackMobil = TestMakerContext.getTestRun(ctx).getBrowserStackMobil();
+                BrowserStackMobil bsStackMobil = SuiteContextTestMaker.getTestRun(ctx).getBrowserStackMobil();
                 if (bsStackMobil!=null) {
                 	device = bsStackMobil.getDevice();
                 }

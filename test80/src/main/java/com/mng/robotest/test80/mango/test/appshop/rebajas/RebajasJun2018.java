@@ -6,12 +6,12 @@ import org.testng.annotations.*;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -59,8 +59,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
 	  
     @BeforeMethod (groups={"RebajasDic2018", "Canal:desktop_App:shop", "SupportsFactoryCountrys"})
     public void login(ITestContext context, Method method) throws Exception {
-        //Recopilación de parámetros
-        InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
+        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());
@@ -68,7 +67,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
         dCtxSh.idioma = this.idiomaFactory;
         dCtxSh.urlAcceso = inputData.getUrlBase();
         
-        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), index_fact, dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), index_fact, dCtxSh, context, method);
     }
 	
     @SuppressWarnings("unused")
@@ -174,7 +173,7 @@ public class RebajasJun2018 extends GestorWebDriver /*Funcionalidades genéricas
 	            menuNuevaTemp.setDataGaLabel(dataGaMenuNuevaTemporada);
 	            secMenusDesktopStpV.stepEntradaMenuDesktop(menuNuevaTemp, "");
 	            pageGaleriaStpV.validaNotArticlesOfTypeDesktop(TypeArticle.rebajado, State.Defect, false);
-	            //PageGaleriaStpV.validaArticlesOfTemporadas(tempArticlesNextSeason, validaNotNewArticles, datosStep, dFTest);
+	            //PageGaleriaStpV.validaArticlesOfTemporadas(tempArticlesNextSeason, validaNotNewArticles, StepTestMaker, dFTest);
             
 	            secMenusStpV.selectMenu1rstLevelTypeCatalog(menuRebajas, dCtxSh);
 	            pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, true, dCtxSh.pais, dCtxSh.idioma, linea.getType(), bloqueMenu.prendas);

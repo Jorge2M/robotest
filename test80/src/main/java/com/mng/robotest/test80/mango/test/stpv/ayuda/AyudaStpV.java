@@ -5,10 +5,9 @@ import com.mng.testmaker.annotations.validation.Validation;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.webdriverwrapper.ElementPageFunctions;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.ayuda.PageAyuda;
 import com.mng.robotest.test80.mango.test.pageobject.ayuda.PageAyuda.StateApartado;
+import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions;
 
 import org.json.simple.JSONArray;
 import org.openqa.selenium.WebDriver;

@@ -1,4 +1,4 @@
-package com.mng.testmaker.xmlprogram;
+package com.mng.testmaker.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,6 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
-import com.mng.testmaker.data.TestMakerContext;
 import com.mng.testmaker.listeners.InvokeListener;
 import com.mng.testmaker.listeners.MyTransformer;
 import com.mng.testmaker.listeners.Reporter;
@@ -19,7 +17,7 @@ import com.mng.testmaker.utils.filter.TestMethod;
 
 public abstract class SuiteMaker {
 
-	private final TestMakerContext testMakerContext;
+	private final SuiteContextTestMaker testMakerContext;
     private final FilterTestsSuiteXML filterSuiteXML;
 
     private Map<String,String> parameters;
@@ -29,7 +27,7 @@ public abstract class SuiteMaker {
 	private SuiteTestMaker xmlSuite;
 	
 	protected SuiteMaker(InputParamsTestMaker inputData) {
-		this.testMakerContext = new TestMakerContext(inputData);
+		this.testMakerContext = new SuiteContextTestMaker(inputData);
 		this.filterSuiteXML = FilterTestsSuiteXML.getNew(inputData.getDataFilter());
 	}
 	

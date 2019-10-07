@@ -8,15 +8,15 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.InvalidCookieDomainException;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.utils.testab.TestABOptimize;
 import com.mng.testmaker.utils.testab.TestABactData;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
 
 public class TestABOptimizeManager implements TestABmanager {
 	
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 	
 	final public TestABOptimize testAB;
 	final Channel channelTest;

@@ -1,21 +1,19 @@
-package com.mng.testmaker.data;
+package com.mng.testmaker.domain;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import org.testng.ISuite;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
-import com.mng.testmaker.xmlprogram.SuiteTestMaker;
-import com.mng.testmaker.xmlprogram.TestRunTestMaker;
+import com.mng.testmaker.data.MailEndSuite;
 
-public class TestMakerContext {
+public class SuiteContextTestMaker {
 
 	private final String idSuiteExecution;
 	private final InputParamsTestMaker inputData;
 	private final MailEndSuite sendMailData;
 
-	public TestMakerContext(InputParamsTestMaker inputData) {
+	public SuiteContextTestMaker(InputParamsTestMaker inputData) {
 		this.idSuiteExecution = getIdForSuiteToExecute();
 		this.inputData = inputData;
 		this.sendMailData = MailEndSuite.getNew(inputData);
@@ -41,17 +39,17 @@ public class TestMakerContext {
 		return (SuiteTestMaker)suite.getXmlSuite();
 	}
 	
-	public static TestMakerContext getTestMakerContext(ITestContext ctxTng) {
+	public static SuiteContextTestMaker getTestMakerContext(ITestContext ctxTng) {
 		return (getTestMakerContext(ctxTng.getSuite()));
 	}
 	
-	public static TestMakerContext getTestMakerContext(ISuite suite) {
+	public static SuiteContextTestMaker getTestMakerContext(ISuite suite) {
     	SuiteTestMaker suiteXML = getTestMakerSuite(suite);
     	return (suiteXML.getTestMakerContext());
 	}
 	
 	public static InputParamsTestMaker getInputData(ITestContext ctxTng) {
-		TestMakerContext tmContext = getTestMakerContext(ctxTng);
+		SuiteContextTestMaker tmContext = getTestMakerContext(ctxTng);
 		return tmContext.getInputData();
 	}
 	

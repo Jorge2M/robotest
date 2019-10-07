@@ -7,9 +7,9 @@ import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.annotations.validation.ChecksResult;
 import com.mng.testmaker.annotations.validation.Validation;
-import com.mng.testmaker.utils.controlTest.DatosStep;
+import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDroppoints;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.SecSelectDPoint.TypeDeliveryPoint;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.DataSearchDeliveryPoint.DataSearchDp;
@@ -23,9 +23,9 @@ public class SecSelectDPointStpV {
         expected="Aparecen puntos de recogida de " + tagSearchDp)
     public static void searchPoblacion(DataSearchDeliveryPoint dataSearchDp, WebDriver driver) 
     throws Exception {
-		DatosStep datosStep = TestCaseData.getDatosCurrentStep();
-		datosStep.replaceInDescription(tagSearchDp, dataSearchDp.data);
-		datosStep.replaceInExpected(tagSearchDp, dataSearchDp.data);
+		StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
+		StepTestMaker.replaceInDescription(tagSearchDp, dataSearchDp.data);
+		StepTestMaker.replaceInExpected(tagSearchDp, dataSearchDp.data);
 		
     	TypeDeliveryPoint typeDp = dataSearchDp.tipoTransporte.getTypeDeliveryPoint();
         ModalDroppoints.secSelectDPoint.sendProvincia(dataSearchDp.data, driver);

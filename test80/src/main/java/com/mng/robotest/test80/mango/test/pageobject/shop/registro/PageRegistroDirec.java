@@ -9,8 +9,8 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.webdriverwrapper.TypeOfClick;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2IdentCheckout;
 
 

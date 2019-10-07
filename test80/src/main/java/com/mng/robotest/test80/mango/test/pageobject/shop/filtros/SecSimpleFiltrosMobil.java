@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Color;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 
 

@@ -1,10 +1,10 @@
 package com.mng.testmaker.utils.webdriver.plugins; 
 
-import com.mng.testmaker.utils.webdriver.plugins.chrome.PluginChrome;
-import com.mng.testmaker.utils.webdriver.plugins.chrome.PluginHTML5Autoplay;
-import com.mng.testmaker.utils.webdriver.plugins.chrome.PluginChrome.typePluginChrome;
-import com.mng.testmaker.utils.webdriver.plugins.firefox.PluginFirefox;
-import com.mng.testmaker.utils.webdriver.plugins.firefox.PluginFirefox.typePluginFirefox;
+import com.mng.testmaker.service.webdriver.maker.plugins.chrome.PluginChrome;
+import com.mng.testmaker.service.webdriver.maker.plugins.chrome.PluginHTML5Autoplay;
+import com.mng.testmaker.service.webdriver.maker.plugins.chrome.PluginChrome.typePluginChrome;
+import com.mng.testmaker.service.webdriver.maker.plugins.firefox.PluginFirefox;
+import com.mng.testmaker.service.webdriver.maker.plugins.firefox.PluginFirefox.typePluginFirefox;
 
 
 public class PluginBrowserFactory {

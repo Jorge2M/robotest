@@ -5,9 +5,9 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import com.mng.testmaker.annotations.MatcherWithMethodParams;
+import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.DatosStep;
 
 public class InfoValidation {
 
@@ -42,11 +42,11 @@ public class InfoValidation {
 		return listResultValidations;
 	}
 	
-    private DatosStep getDatosStepParam() {
+    private StepTestMaker getDatosStepParam() {
     	Object[] signatureArgs = joinPoint.getArgs();
     	for (Object signatureArg: signatureArgs) {
-    		if (signatureArg!=null && signatureArg instanceof DatosStep) {
-    			return ((DatosStep)signatureArg);
+    		if (signatureArg!=null && signatureArg instanceof StepTestMaker) {
+    			return ((StepTestMaker)signatureArg);
     		}
     	}
     	
@@ -71,7 +71,7 @@ public class InfoValidation {
 	}
 	
     private ChecksResult getValidationResultFromObjectMethodReturn() {
-    	DatosStep datosStep = getDatosStepParam();
+    	StepTestMaker datosStep = getDatosStepParam();
     	ChecksResult valResult = ChecksResult.getNew(datosStep);
     	if (resultMethod!=null) {
 	        if (resultMethod instanceof Boolean) {

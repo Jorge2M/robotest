@@ -5,11 +5,11 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
-import com.mng.testmaker.access.InputParamsTestMaker;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker;
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
-import com.mng.testmaker.data.TestMakerContext;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker;
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appmanto.Menus;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageMenusManto;
@@ -24,7 +24,7 @@ public class ListMenusManto {
     @Factory
     public Object[] createInstances(ITestContext ctx)
     throws Exception {
-    	InputParamsTestMaker inputData = TestMakerContext.getInputData(ctx);
+    	InputParams inputData = (InputParams)SuiteContextTestMaker.getInputData(ctx);
         ArrayList<Menus> listTests = new ArrayList<Menus>();
         AppEcom appEcom = (AppEcom)inputData.getApp();
         try {
@@ -53,7 +53,7 @@ public class ListMenusManto {
      */
     private ArrayList<String> getListCabecerasMenus(String urlBaseManto, ITestContext context) throws Exception { 
     	WebDriver driver = 
-    		FactoryWebdriverMaker.make(TypeWebDriver.firefox, context)
+    		FactoryWebdriverMaker.make(WebDriverType.firefox, context)
 				.setChannel(Channel.desktop)
 				.build(); 
         PageLoginMantoStpV.login(urlBaseManto, Constantes.userManto, Constantes.passwordManto, driver);

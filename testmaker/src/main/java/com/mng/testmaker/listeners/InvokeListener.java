@@ -8,9 +8,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import org.testng.*;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
 import com.mng.testmaker.data.ConstantesTestMaker;
-import com.mng.testmaker.data.TestMakerContext;
+import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
 import com.mng.testmaker.jdbc.Connector;
 import com.mng.testmaker.jdbc.dao.MethodsDAO;
 import com.mng.testmaker.jdbc.dao.ParamsDAO;
@@ -24,7 +24,7 @@ import com.mng.testmaker.listeners.utils.ResourcesExtractor;
 import com.mng.testmaker.utils.StateSuite;
 import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.controlTest.GestorWebDrv;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.controlTest.indexSuite;
 
 import org.apache.logging.log4j.LogManager;
@@ -34,19 +34,19 @@ import org.apache.logging.log4j.Logger;
 public class InvokeListener<T extends Enum<T>, Y extends Enum<Y>, Z extends Enum<Z>> 
 		extends TestListenerAdapter implements ISuiteListener {
 	
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 
     ITestContext ctx1erTestRun = null;
     HttpURLConnection httpUrlCallBack = null;
   
     @Override //Start Suite 
     public void onStart(ISuite suite) {
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(suite);
-        String outdySuite = fmwkTest.getOutputDirectory(System.getProperty("user.dir"), suite.getName(), testMakerCtx.getIdSuiteExecution());
+    	SuiteContextTestMaker testRunContext = SuiteContextTestMaker.getTestMakerContext(suite);
+        String outdySuite = FmwkTest.getOutputDirectory(System.getProperty("user.dir"), suite.getName(), testRunContext.getIdSuiteExecution());
         suite.getXmlSuite().getParameters().put(ConstantesTestMaker.paramOutputDirectorySuite, outdySuite);
         File path = new File(outdySuite);
         path.mkdir();
-        fmwkTest.configLog4java(outdySuite);
+        FmwkTest.configLog4java(outdySuite);
         grabSqliteBDifNotExists();
         SuitesDAO.insertSuiteInit(suite);
     }
@@ -149,6 +149,8 @@ public class InvokeListener<T extends Enum<T>, Y extends Enum<Y>, Z extends Enum
 
     @Override //Start Method
     public void onTestStart(ITestResult result) {
+    	//TODO
+    	//result.set
         //No funciona. La SkipException no tiene efecto cuando se lanza desde aquí
         //fmwkTest.sendSkipTestExceptionIfSuiteStopping(result.getTestContext());
     }
@@ -173,17 +175,17 @@ public class InvokeListener<T extends Enum<T>, Y extends Enum<Y>, Z extends Enum
      * Se realiza la grabaci�n de la suite en BD.
      */
     private void updateSuiteData(ITestContext context) {
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
-        indexSuite suiteId = new indexSuite(testMakerCtx.getIdSuiteExecution(), testMakerCtx.getInputData().getSuiteName());
+    	SuiteContextTestMaker testRunContext = SuiteContextTestMaker.getTestMakerContext(context);
+        indexSuite suiteId = new indexSuite(testRunContext.getIdSuiteExecution(), testRunContext.getInputData().getSuiteName());
         ResultTestRun resultTestRun = MethodsDAO.getResultTestRunAccordingMethods(suiteId, context.getName());
         SuitesDAO.updateEndSuiteFromCtx(resultTestRun, context);
     }
 
     
     protected void sendEmailIfNeeded(ISuite suite) {
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(suite);
-        if (testMakerCtx.isSendMailInEndSuite()) {
-        	testMakerCtx.getSendMailData().sendMail(this.httpUrlCallBack, this.ctx1erTestRun);
+    	SuiteContextTestMaker testRunContext = SuiteContextTestMaker.getTestMakerContext(suite);
+        if (testRunContext.isSendMailInEndSuite()) {
+        	testRunContext.getSendMailData().sendMail(this.httpUrlCallBack, this.ctx1erTestRun);
         }        
     }
     
@@ -191,9 +193,9 @@ public class InvokeListener<T extends Enum<T>, Y extends Enum<Y>, Z extends Enum
      * Se realiza la grabación de un TestRun en la tabla TESTRUNS
      */
     private void grabarTestRun(ITestContext context) {
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
-    	InputParamsTestMaker inputData = testMakerCtx.getInputData();
-        indexSuite suiteId = new indexSuite(testMakerCtx.getIdSuiteExecution(), inputData.getSuiteName());
+    	SuiteContextTestMaker testRunContext = SuiteContextTestMaker.getTestMakerContext(context);
+    	InputParamsTestMaker inputData = testRunContext.getInputData();
+        indexSuite suiteId = new indexSuite(testRunContext.getIdSuiteExecution(), inputData.getSuiteName());
         ResultTestRun resultStep = MethodsDAO.getResultTestRunAccordingMethods(suiteId, context.getName()); 
         TestRunsDAO.insertFromCtx(resultStep, context);
     }
@@ -201,13 +203,13 @@ public class InvokeListener<T extends Enum<T>, Y extends Enum<Y>, Z extends Enum
     private void tratamientoFinMetodo(ITestResult tr) {
     	TestCaseData.clearStackDatosStep();
         ITestContext context = tr.getTestContext();
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
-    	InputParamsTestMaker inputData = testMakerCtx.getInputData();
-        String idExecSuite = testMakerCtx.getIdSuiteExecution();
+        SuiteContextTestMaker testRunContext = SuiteContextTestMaker.getTestMakerContext(context);
+    	InputParamsTestMaker inputData = testRunContext.getInputData();
+        String idExecSuite = testRunContext.getIdSuiteExecution();
         StateSuite stateSuite = SuitesDAO.getStateSuite(idExecSuite);
         if (stateSuite!=StateSuite.STOPPING) {
             indexSuite suiteId = new indexSuite(idExecSuite, inputData.getSuiteName());
-            String methodWithFactory = fmwkTest.getMethodWithFactory(tr.getMethod().getMethod(), context);
+            String methodWithFactory = FmwkTest.getMethodWithFactory(tr.getMethod().getMethod(), context);
             ResultMethod resultMethod = StepsDAO.getResultMethodAccordingSteps(suiteId, context.getName(), methodWithFactory);
             MethodsDAO.inserMethod(resultMethod, tr);
         }

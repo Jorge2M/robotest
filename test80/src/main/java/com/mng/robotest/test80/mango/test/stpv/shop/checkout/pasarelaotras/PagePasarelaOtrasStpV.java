@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.annotations.validation.ChecksResult;
 import com.mng.testmaker.annotations.validation.Validation;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 
 public class PagePasarelaOtrasStpV {
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
     
     @Validation
     public static ChecksResult validateIsPage(String importeTotal, Pais pais, Channel channel, WebDriver driver) {

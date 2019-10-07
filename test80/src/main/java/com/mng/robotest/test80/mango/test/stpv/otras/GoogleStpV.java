@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.otras;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.controlTest.DatosStep.SaveWhen;
+import com.mng.testmaker.annotations.step.SaveWhen;
 import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.annotations.validation.ChecksResult;
 import com.mng.testmaker.annotations.validation.Validation;

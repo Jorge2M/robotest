@@ -22,9 +22,9 @@ import org.testng.ITestContext;
 import org.testng.reporters.EmailableReporter;
 import org.testng.xml.XmlSuite;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
 import com.mng.testmaker.data.ConstantesTestMaker;
-import com.mng.testmaker.data.TestMakerContext;
+import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
 import com.mng.testmaker.jdbc.dao.MethodsDAO;
 import com.mng.testmaker.jdbc.dao.StepsDAO;
 import com.mng.testmaker.jdbc.dao.SuitesDAO;
@@ -33,14 +33,14 @@ import com.mng.testmaker.jdbc.dao.ValidationsDAO;
 import com.mng.testmaker.jdbc.to.Suite;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.utils;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.controlTest.indexSuite;
-import com.mng.testmaker.utils.controlTest.fmwkTest.TypeEvidencia;
+import com.mng.testmaker.utils.controlTest.FmwkTest.TypeEvidencia;
 
 
 public class GenerateReports extends EmailableReporter {
 	
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 
     @Override
     public void generateReport(final List<XmlSuite> xmlSuites, final List<ISuite> suites, final String outputDirectory) {
@@ -53,7 +53,7 @@ public class GenerateReports extends EmailableReporter {
             context = r2.getTestContext();
         }
         if (context!=null) {
-        	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+        	SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
             indexSuite suite = new indexSuite(testMakerCtx.getIdSuiteExecution(), testMakerCtx.getInputData().getSuiteName());
             try {
             	deployStaticsIfNotExist(outputDirectory);
@@ -75,7 +75,7 @@ public class GenerateReports extends EmailableReporter {
 
     private void generateReportHTML(indexSuite suite, String outputDirectory, ITestContext context) throws Exception {
         BuildingReport buildReport = new BuildingReport(outputDirectory);
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+    	SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
         buildReport.serverDNS = testMakerCtx.getInputData().getWebAppDNS();
 
         Suite suiteBD = SuitesDAO.getSuite(suite);
@@ -95,7 +95,7 @@ public class GenerateReports extends EmailableReporter {
      * @param context contexto de ejecución del test a nivel de TestNG
      */
     public void pintaHeadersTableMain(BuildingReport buildReport, Suite suiteBD, ITestContext context) {
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+    	SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
     	InputParamsTestMaker inputData = testMakerCtx.getInputData();
     	
         buildReport.addToReport(
@@ -183,7 +183,7 @@ public class GenerateReports extends EmailableReporter {
         buildReport.addToReport("  <a href=\"emailable-report.html\" target=\"_blank\" class=\"linkTestNG\">Emailable Report</a>");
         buildReport.addToReport("</div>\n");
         buildReport.addToReport("<div class=\"divTestNG\">");
-        buildReport.addToReport("  <a href=\"" + fmwkTest.log4jFileName + "\" target=\"_blank\" class=\"linkTestNG\">" + fmwkTest.log4jFileName + "</a>");
+        buildReport.addToReport("  <a href=\"" + FmwkTest.log4jFileName + "\" target=\"_blank\" class=\"linkTestNG\">" + FmwkTest.log4jFileName + "</a>");
         buildReport.addToReport("</div>");        
         buildReport.addToReport("<br>\n");
         buildReport.addToReport("<br>\n");
@@ -373,11 +373,11 @@ public class GenerateReports extends EmailableReporter {
             if (Integer.parseInt(typePagNew) == ConstantesTestMaker.CONST_HTML) {
                 // Comprobación existencia hardcopy página
                 String methodName = (String)stepHash.get("METHOD");
-                String ImageFileStep = fmwkTest.getPathFileEvidenciaStep(outputDir, testNewLit, methodName, Integer.parseInt(stepNumber), TypeEvidencia.imagen);
-                String HtmlFileStep = fmwkTest.getPathFileEvidenciaStep(outputDir, testNewLit, methodName, Integer.parseInt(stepNumber), TypeEvidencia.html);
-                String ErrorFileStep = fmwkTest.getPathFileEvidenciaStep(outputDir, testNewLit, methodName, Integer.parseInt(stepNumber), TypeEvidencia.errorpage);
-                String HARPFileStep = fmwkTest.getPathFileEvidenciaStep(outputDir, testNewLit, methodName, Integer.parseInt(stepNumber), TypeEvidencia.harp);
-                String HARFileStep = fmwkTest.getPathFileEvidenciaStep(outputDir, testNewLit, methodName, Integer.parseInt(stepNumber), TypeEvidencia.har);
+                String ImageFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, testNewLit, methodName, Integer.parseInt(stepNumber), TypeEvidencia.imagen);
+                String HtmlFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, testNewLit, methodName, Integer.parseInt(stepNumber), TypeEvidencia.html);
+                String ErrorFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, testNewLit, methodName, Integer.parseInt(stepNumber), TypeEvidencia.errorpage);
+                String HARPFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, testNewLit, methodName, Integer.parseInt(stepNumber), TypeEvidencia.harp);
+                String HARFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, testNewLit, methodName, Integer.parseInt(stepNumber), TypeEvidencia.har);
                 
                 File indexFile = new File(ImageFileStep);
                 if (indexFile.exists()) {
@@ -455,7 +455,7 @@ public class GenerateReports extends EmailableReporter {
     }
 
     private String getRelativePathEvidencia(String testRunName, String methodNameWithFactory, int stepNumber, TypeEvidencia typeEvidencia) {
-        String fileName = fmwkTest.getNameFileEvidenciaStep(stepNumber, typeEvidencia);
+        String fileName = FmwkTest.getNameFileEvidenciaStep(stepNumber, typeEvidencia);
         return ("./" + testRunName + "/" + methodNameWithFactory + "/" + fileName);
     }
     
@@ -522,7 +522,7 @@ public class GenerateReports extends EmailableReporter {
     }    
     
     public void createFileReportHTML(BuildingReport buildReport) {
-        String file = fmwkTest.getPathReportHTML(buildReport.getOutputDirectory());
+        String file = FmwkTest.getPathReportHTML(buildReport.getOutputDirectory());
         try (Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF8"))) {
             out.write(buildReport.getReportHTML());
             out.close();

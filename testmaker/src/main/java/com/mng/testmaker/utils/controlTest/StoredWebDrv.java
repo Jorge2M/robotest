@@ -2,25 +2,25 @@ package com.mng.testmaker.utils.controlTest;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
 public class StoredWebDrv {
 
     public enum stateWd {busy, free}
     
-    private TypeWebDriver typeWdrv = TypeWebDriver.firefox;
+    private WebDriverType typeWdrv = WebDriverType.firefox;
     private String moreDataWdrv = "";
     private WebDriver webdriver;
     private stateWd state = stateWd.free;
 
-    public StoredWebDrv(WebDriver webdriver, stateWd state, TypeWebDriver typeWdrv, String moreDataWdrv) {
+    public StoredWebDrv(WebDriver webdriver, stateWd state, WebDriverType typeWdrv, String moreDataWdrv) {
         this.webdriver   = webdriver;
         this.state       = state;
         this.typeWdrv    = typeWdrv;
         this.moreDataWdrv = moreDataWdrv;
     }
     
-    public TypeWebDriver getTypeWdrv() {
+    public WebDriverType getTypeWdrv() {
         return this.typeWdrv;
     }
     

@@ -9,11 +9,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -49,13 +49,13 @@ public class Manto extends GestorWebDriver {
 
 	@BeforeMethod(groups={"Manto", "Canal:desktop_App:all", "SupportsFactoryCountrys"})
 	public void login(ITestContext ctx, Method method) throws Exception {
-		InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(ctx);
+		InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(ctx);
 		this.dMantoAcc = new DataMantoAccess();
 		this.dMantoAcc.urlManto = inputData.getUrlBase();
 		this.dMantoAcc.userManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramUsrmanto);
 		this.dMantoAcc.passManto = ctx.getCurrentXmlTest().getParameter(Constantes.paramPasmanto);
 		this.dMantoAcc.appE = AppEcom.shop;
-        Utils.storeDataMantoForTestMaker(inputData.getTypeWebDriver(), "", dMantoAcc, ctx, method);
+        Utils.storeDataMantoForTestMaker(inputData.getWebDriverType(), "", dMantoAcc, ctx, method);
 	}
 
 	@SuppressWarnings("unused")

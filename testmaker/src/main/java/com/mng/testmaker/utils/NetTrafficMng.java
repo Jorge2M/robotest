@@ -11,8 +11,8 @@ import org.apache.commons.compress.utils.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.mng.testmaker.utils.controlTest.fmwkTest;
-import com.mng.testmaker.utils.controlTest.fmwkTest.TypeEvidencia;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest.TypeEvidencia;
 
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.BrowserMobProxyServer;
@@ -26,7 +26,7 @@ import net.lightbody.bmp.proxy.CaptureType;
  *
  */
 public class NetTrafficMng {
-	static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+	static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 	static ThreadLocal<BrowserMobProxy> proxyInThread;
 	static int initPort = 1000;
 	static int maxSizeListPorts = 20;
@@ -153,7 +153,7 @@ public class NetTrafficMng {
 	
 	public void copyHarToHarp(String nameFileHar) throws Exception {
 		File fileHar = new File(nameFileHar);
-        File fileHarp = new File(nameFileHar.replace(fmwkTest.getSufijoEvidencia(TypeEvidencia.har), fmwkTest.getSufijoEvidencia(TypeEvidencia.harp)));
+        File fileHarp = new File(nameFileHar.replace(FmwkTest.getSufijoEvidencia(TypeEvidencia.har), FmwkTest.getSufijoEvidencia(TypeEvidencia.harp)));
         InputStream inHar = new FileInputStream(fileHar);
         OutputStream outHarp = new FileOutputStream(fileHarp);
         outHarp.write("onInputData(".getBytes());

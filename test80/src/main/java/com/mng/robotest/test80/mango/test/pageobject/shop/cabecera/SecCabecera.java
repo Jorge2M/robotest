@@ -4,10 +4,10 @@ import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.webdriverwrapper.TypeOfClick;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.buscador.SecSearch;
@@ -144,7 +144,7 @@ public abstract class SecCabecera extends WebdrvWrapp {
                 menuVisible = secMenuLateral.isMenuInStateUntil(toOpenMenus, 2);
             }
             catch (Exception e) {
-                LogManager.getLogger(fmwkTest.log4jLogger).warn("Exception in click icono Hamburguer", e);
+                LogManager.getLogger(FmwkTest.log4jLogger).warn("Exception in click icono Hamburguer", e);
             }
             
             i+=1;

@@ -1,8 +1,9 @@
 package com.mng.robotest.test80.mango.test.pageobject.utils;
 
+import com.mng.testmaker.domain.StepTestMaker;
 
 public class DataScroll {
-    public com.mng.testmaker.utils.controlTest.DatosStep datosStep;
+    public StepTestMaker step;
     public int paginaFinal;
     public int articulosMostrados;
     public boolean finalAlcanzado;

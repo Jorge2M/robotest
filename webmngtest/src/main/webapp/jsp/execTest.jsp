@@ -21,7 +21,7 @@ response.setDateHeader ("Expires", -1);%>
 	<%@ page import="com.mng.robotest.test80.CallBack" %>
 	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.Suites" %>
 	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
-	<%@ page import="com.mng.testmaker.xmlprogram.SuiteMaker" %>
+	<%@ page import="com.mng.testmaker.domain.SuiteMaker" %>
 
 	<style>
 	body {
@@ -73,7 +73,7 @@ response.setDateHeader ("Expires", -1);%>
 	<div id="dataTestSuite"">
 		<p id="testSuiteName">TestSuite: <b><%=paramsTSuite.getSuiteName()%></b></p>
 		<p class="testSuiteAttribute">Channel: <b><%=paramsTSuite.getChannel()%></b></p>
-		<p class="testSuiteAttribute">Browser: <b><%=paramsTSuite.getTypeWebDriver()%></b></p>
+		<p class="testSuiteAttribute">Browser: <b><%=paramsTSuite.getWebDriverType()%></b></p>
 		<%
 		if (paramsTSuite.getVersionSuite()!=null && "".compareTo(paramsTSuite.getVersionSuite())!=0) {
 		%>
@@ -96,15 +96,15 @@ response.setDateHeader ("Expires", -1);%>
 	<%
 	boolean browserTasksRunning;
 	if(System.getProperty("os.name").contains("Windows")){
-		browserTasksRunning = browserTasksRunning(paramsTSuite.getTypeWebDriver().toString(), "tasklist");
+		browserTasksRunning = browserTasksRunning(paramsTSuite.getWebDriverType().toString(), "tasklist");
 	} else {
-		browserTasksRunning = browserTasksRunning(paramsTSuite.getTypeWebDriver().toString(), "ps");
+		browserTasksRunning = browserTasksRunning(paramsTSuite.getWebDriverType().toString(), "ps");
 	}
 	if (forceStart.toLowerCase().compareTo("on")!=0 && browserTasksRunning) {
 	%>
 		<div id="contenidoAjax"><p style="color:red;">Test no iniciado! </p>
 			<ul>
-				<li><b>Existe un <%=paramsTSuite.getTypeWebDriver().toString().toUpperCase()%> arrancado en la m�quina de Test.</b> Puede tratarse de un test activo. Espere a que finalice el test en la m�quina remota o cierre las pantallas de <%=paramsTSuite.getTypeWebDriver().toString().toUpperCase()%>.</li>
+				<li><b>Existe un <%=paramsTSuite.getWebDriverType().toString().toUpperCase()%> arrancado en la m�quina de Test.</b> Puede tratarse de un test activo. Espere a que finalice el test en la m�quina remota o cierre las pantallas de <%=paramsTSuite.getWebDriverType().toString().toUpperCase()%>.</li>
 			</ul>
 		</div>
 		<%

@@ -3,9 +3,9 @@ package com.mng.sapfiori.test.testcase.pageobject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
-public class PageInitial {
+public class PageInitial extends WebdrvWrapp {
 
 	private final WebDriver driver;
 	
@@ -20,7 +20,7 @@ public class PageInitial {
 	}
 	
 	public boolean checkIsInitialPageSpanish() {
-		return WebdrvWrapp.isElementVisible(driver, By.xpath(XPathLabelInitialPageSpanish));
+		return isElementVisible(driver, By.xpath(XPathLabelInitialPageSpanish));
 	}
 	
 }

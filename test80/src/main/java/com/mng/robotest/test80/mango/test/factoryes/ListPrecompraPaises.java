@@ -4,9 +4,9 @@ import java.util.*;
 import org.testng.annotations.*;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.data.TestMakerContext;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.PaisAplicaVale;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -25,7 +25,7 @@ public class ListPrecompraPaises {
 	public Object[] createInstances(String countrys, ITestContext ctx) throws Exception {
 	    List<Object> listTests = new ArrayList<>();
 	    try {
-	    	InputParamsTestMaker inputData = TestMakerContext.getInputData(ctx);
+	    	InputParams inputData = (InputParams)SuiteContextTestMaker.getInputData(ctx);
 	    	VersionPagosSuite version = VersionPagosSuite.valueOf(inputData.getVersionSuite());
 	    	List<Pais> listCountrys = Utilidades.getListCountrysFiltered(countrys);
 	        int prioridad=0;

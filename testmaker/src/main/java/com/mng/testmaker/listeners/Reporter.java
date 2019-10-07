@@ -11,14 +11,14 @@ import org.testng.ITestContext;
 import org.testng.xml.XmlSuite;
 
 import com.mng.testmaker.listeners.utils.GenerateReports;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 
 /**
  * @author Jorge Muñoz
  */
 
 public class Reporter implements IReporter {
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
     public static final String TESTNG_FAILED_XML = "testng-failed.xml";
     
     @SuppressWarnings("unused")
@@ -40,7 +40,7 @@ public class Reporter implements IReporter {
         	context = r2.getTestContext();
         }
         if (context!=null) {
-            String outputDirectorySuite = fmwkTest.getOutputDirectorySuite(context);
+            String outputDirectorySuite = FmwkTest.getOutputDirectorySuite(context);
             GenerateReports report = new GenerateReports();
             report.generateReport(xmlSuites, suites, outputDirectorySuite);
         } else {

@@ -7,10 +7,10 @@ import java.util.List;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.controlTest.mango.*;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
@@ -60,9 +60,9 @@ public class PaisAplicaVale extends GestorWebDriver {
 	  
     @BeforeMethod (groups={"shop-movil-web", "Canal:all_App:all"})
     public void login(ITestContext context, Method method) throws Exception {
-        InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
+        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
     	this.dCtxSh.urlAcceso = inputData.getUrlBase();
-    	Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), this.index_fact, this.dCtxSh, context, method);    
+    	Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), this.index_fact, this.dCtxSh, context, method);    
     }
 	
     @SuppressWarnings("unused")

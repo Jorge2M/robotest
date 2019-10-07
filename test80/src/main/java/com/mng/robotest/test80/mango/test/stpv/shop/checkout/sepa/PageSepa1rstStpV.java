@@ -6,7 +6,7 @@ import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.annotations.validation.ChecksResult;
 import com.mng.testmaker.annotations.validation.Validation;
-import com.mng.testmaker.utils.controlTest.DatosStep;
+import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sepa.PageSepa1rst;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -58,8 +58,8 @@ public class PageSepa1rstStpV {
     public static void inputDataAndclickPay(String iban, String titular, String importeTotal, String codPais, Channel channel, WebDriver driver) 
     throws Exception {
         if (channel==Channel.movil_web) {
-        	DatosStep datosStep = TestCaseData.getDatosCurrentStep();
-        	datosStep.setDescripcion("Seleccionamos el icono de SEPA. " + datosStep.getDescripcion());
+        	StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
+        	StepTestMaker.setDescripcion("Seleccionamos el icono de SEPA. " + StepTestMaker.getDescripcion());
         	PageSepa1rst.clickIconoSepa(channel, driver);
         }
  

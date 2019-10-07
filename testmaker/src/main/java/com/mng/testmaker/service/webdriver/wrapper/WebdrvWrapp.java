@@ -1,4 +1,4 @@
-package com.mng.testmaker.webdriverwrapper;
+package com.mng.testmaker.service.webdriver.wrapper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,11 +28,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.testmaker.utils.controlTest.fmwkTest;
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 
 public class WebdrvWrapp extends ElementPageFunctions { 
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 
     public static boolean titleContainsUntil(final WebDriver driver, final String title, int seconds) {
         try {
@@ -648,10 +648,10 @@ public class WebdrvWrapp extends ElementPageFunctions {
         }
     }
     
-    public static TypeWebDriver getTypeDriver(WebDriver driver) {
+    public static WebDriverType getTypeDriver(WebDriver driver) {
     	Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
     	String browserName = caps.getBrowserName();
-    	return TypeWebDriver.valueOf(browserName);
+    	return WebDriverType.valueOf(browserName);
     }    
     
     public enum HtmlLocator {TagName, Id, ClassName};

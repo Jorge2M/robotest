@@ -11,8 +11,8 @@ import javax.net.ssl.*;
 import org.testng.*;
 
 import com.mng.testmaker.utils.DataFmwkTest;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
-import com.mng.testmaker.utils.controlTest.fmwkTest.TypeEvidencia;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest.TypeEvidencia;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntries;
@@ -34,7 +34,7 @@ import org.apache.logging.log4j.Logger;
  */
 
 public class WebDriverArqUtils {
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
     
     public static void captureEntirePageMultipleBrowsers (WebDriver driver, ITestContext contextTNG, String filename) 
     throws RuntimeException {
@@ -143,8 +143,8 @@ public class WebDriverArqUtils {
      */
     public static void capturaHTMLPage(DataFmwkTest dFTest, int stepNumber) throws Exception {
         try {
-            String methodWithFactory = fmwkTest.getMethodWithFactory(dFTest.meth, dFTest.ctx);
-            String nombreHTMLfile = fmwkTest.getPathFileEvidenciaStep(dFTest.ctx, methodWithFactory, stepNumber, TypeEvidencia.html);
+            String methodWithFactory = FmwkTest.getMethodWithFactory(dFTest.meth, dFTest.ctx);
+            String nombreHTMLfile = FmwkTest.getPathFileEvidenciaStep(dFTest.ctx, methodWithFactory, stepNumber, TypeEvidencia.html);
             File htmlFile = new File(nombreHTMLfile);
             try (FileWriter fw = new FileWriter(htmlFile)) {
                 fw.write(dFTest.driver.getPageSource());

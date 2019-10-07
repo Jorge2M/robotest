@@ -4,8 +4,7 @@ import java.util.Set;
 
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.Test80mng;
-import com.mng.testmaker.xmlprogram.SuiteMaker;
-import com.mng.robotest.test80.InputParams;
+import com.mng.testmaker.domain.SuiteMaker;
 
 import java.util.ArrayList;
 
@@ -57,7 +56,7 @@ public class TSuiteThreadsManager {
         return (
         	getLocatorThreadTestSuite(
         		paramsTSuite.getSuiteName(), paramsTSuite.getApp().toString(), paramsTSuite.getChannel().toString(), 
-        		paramsTSuite.getTypeWebDriver().toString(), paramsTSuite.getVersionSuite(), idExecSuite));   
+        		paramsTSuite.getWebDriverType().toString(), paramsTSuite.getVersionSuite(), idExecSuite));   
     }
     
     public static String getLocatorThreadTestSuite(String suiteName, String application, String channel, String browser, String version, String idSuiteExecution) {

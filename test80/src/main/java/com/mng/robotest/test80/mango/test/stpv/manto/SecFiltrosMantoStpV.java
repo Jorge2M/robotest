@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.DatosStep;
-import com.mng.testmaker.utils.controlTest.DatosStep.SaveWhen;
+import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.annotations.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.manto.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.manto.SecFiltros;
@@ -32,9 +32,9 @@ public class SecFiltrosMantoStpV {
     	saveErrorData=SaveWhen.Never)
     public static void setFiltrosHoyYbuscar(DataPedido dataPedido, @SuppressWarnings("unused") TypeSearch typeSearch, WebDriver driver) 
     throws Exception {
-    	DatosStep datosStep = TestCaseData.getDatosCurrentStep();
-    	datosStep.replaceInDescription(tagNombrePago, dataPedido.getPago().getNombre());
-    	datosStep.replaceInDescription(tagLitTienda, SecCabecera.getLitTienda(driver));
+    	StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
+    	StepTestMaker.replaceInDescription(tagNombrePago, dataPedido.getPago().getNombre());
+    	StepTestMaker.replaceInDescription(tagLitTienda, SecCabecera.getLitTienda(driver));
     	
     	if (dataPedido.getCodigoPedidoManto()!=null) {
             SecFiltros.setFiltroCodPedido(dataPedido.getCodigoPedidoManto(), driver);

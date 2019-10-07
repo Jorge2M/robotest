@@ -4,8 +4,8 @@ import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getP
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.InputParams;
-import com.mng.testmaker.xmlprogram.SuiteMaker;
-import com.mng.testmaker.xmlprogram.TestRunMaker;
+import com.mng.testmaker.domain.SuiteMaker;
+import com.mng.testmaker.domain.TestRunMaker;
 import com.mng.robotest.test80.mango.test.factoryes.ListMenusManto;
 
 public class MenusMantoSuite extends SuiteMaker {

@@ -9,10 +9,10 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
 import com.mng.testmaker.annotations.MatcherWithMethodParams;
+import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.DatosStep;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 
 
 @Aspect
@@ -27,13 +27,13 @@ public class StepAspect {
     @Before("annotationStepPointcut() && atExecution()")
     public void before(JoinPoint joinPoint) {
     	InfoStep infoStep = InfoStep.from(joinPoint);
-    	DatosStep datosStep = getFromJoinPointAndStoreDatosStep(joinPoint, infoStep);
+    	StepTestMaker datosStep = getFromJoinPointAndStoreDatosStep(joinPoint, infoStep);
     	setInitDataStep(infoStep, joinPoint, datosStep);
     }
     
-    private DatosStep getFromJoinPointAndStoreDatosStep(JoinPoint joinPoint, InfoStep infoStep) {
-    	DatosStep datosStep = infoStep.getDatosStep();
-    	DatosStep maxDatosStep = TestCaseData.getDatosLastStep();
+    private StepTestMaker getFromJoinPointAndStoreDatosStep(JoinPoint joinPoint, InfoStep infoStep) {
+    	StepTestMaker datosStep = infoStep.getDatosStep();
+    	StepTestMaker maxDatosStep = TestCaseData.getDatosLastStep();
     	if (maxDatosStep!=null) {
     		datosStep.setStepNumber(maxDatosStep.getStepNumber()+1);
     	}
@@ -42,7 +42,7 @@ public class StepAspect {
     	return datosStep;
     }
     
-    private void setInitDataStep(InfoStep infoStep, JoinPoint joinPoint, DatosStep datosStep) {
+    private void setInitDataStep(InfoStep infoStep, JoinPoint joinPoint, StepTestMaker datosStep) {
         MatcherWithMethodParams matcher = MatcherWithMethodParams.from(joinPoint);
         String stepDescription = infoStep.getStepAnnotation().description();
         String stepResExpected = infoStep.getStepAnnotation().expected();
@@ -55,7 +55,7 @@ public class StepAspect {
     	pointcut="annotationStepPointcut() && atExecution()", 
     	throwing="ex")
     public void doRecoveryActions(JoinPoint joinPoint, Throwable ex) {
-    	DatosStep datosStep = TestCaseData.pollDatosStepForStep();
+    	StepTestMaker datosStep = TestCaseData.pollDatosStepForStep();
     	setEndDataStep(datosStep);
     	storeStep(State.Nok, true, datosStep);
     }
@@ -63,29 +63,29 @@ public class StepAspect {
     @AfterReturning(
     	pointcut="annotationStepPointcut() && atExecution()")
     public void grabValidationAfter(JoinPoint joinPoint) throws Throwable {
-    	DatosStep datosStep = TestCaseData.pollDatosStepForStep();
+    	StepTestMaker datosStep = TestCaseData.pollDatosStepForStep();
     	datosStep.setExcepExists(false);
     	storeDataAfterStep(datosStep);
     }
     
-    public static void storeDataAfterStep(DatosStep datosStep) {
+    public static void storeDataAfterStep(StepTestMaker datosStep) {
     	if (!datosStep.isStateUpdated() && !datosStep.getExcepExists()) {
     		storeStep(State.Ok, false, datosStep);
     	} else {
-    		fmwkTest.grabStep(datosStep, TestCaseData.getdFTest());
+    		FmwkTest.grabStep(datosStep, TestCaseData.getdFTest());
     	}
     }
 
-    private void setEndDataStep(DatosStep datosStep) {
+    private void setEndDataStep(StepTestMaker datosStep) {
     	datosStep.setHoraFin(new Date(System.currentTimeMillis()));
     }
     
-    private static void storeStep(State stateResult, boolean isException, DatosStep datosStep) {
+    private static void storeStep(State stateResult, boolean isException, StepTestMaker datosStep) {
     	updateDatosStep(datosStep, stateResult, isException);
-        fmwkTest.grabStep(datosStep, TestCaseData.getdFTest());
+        FmwkTest.grabStep(datosStep, TestCaseData.getdFTest());
     }
     
-    private static void updateDatosStep(DatosStep datosStep, State stateResult, boolean isException) {
+    private static void updateDatosStep(StepTestMaker datosStep, State stateResult, boolean isException) {
         datosStep.setExcepExists(isException); 
         datosStep.setResultSteps(stateResult);
     }

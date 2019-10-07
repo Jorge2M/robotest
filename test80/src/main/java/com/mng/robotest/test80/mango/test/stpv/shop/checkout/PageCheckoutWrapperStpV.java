@@ -12,9 +12,9 @@ import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.annotations.validation.ChecksResult;
 import com.mng.testmaker.annotations.validation.Validation;
-import com.mng.testmaker.utils.controlTest.DatosStep;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
-import com.mng.testmaker.utils.controlTest.DatosStep.SaveWhen;
+import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.annotations.step.SaveWhen;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -34,7 +34,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango.SecTMangoStp
 
 @SuppressWarnings({"static-access"})
 public class PageCheckoutWrapperStpV {
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 
     public static SecMetodoEnvioDesktopStpV secMetodoEnvio;
     public static SecStoreCreditStpV secStoreCredit;
@@ -309,9 +309,9 @@ public class PageCheckoutWrapperStpV {
     public static void inputDataTrjAndConfirmPago(DataCtxPago dCtxPago, Channel channel, WebDriver driver) 
     throws Exception {
         Pago pago = dCtxPago.getDataPedido().getPago();
-        DatosStep datosStep = TestCaseData.getDatosCurrentStep();
-        datosStep.replaceInDescription(tagTipoTarj, pago.getTipotarj());
-        datosStep.replaceInDescription(tagNumTarj, pago.getNumtarj());
+        StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
+        StepTestMaker.replaceInDescription(tagTipoTarj, pago.getTipotarj());
+        StepTestMaker.replaceInDescription(tagNumTarj, pago.getNumtarj());
        
     	PageCheckoutWrapper pageCheckout = new PageCheckoutWrapper();
         if (pago.getNumtarj()!=null && "".compareTo(pago.getNumtarj())!=0) {
@@ -457,17 +457,17 @@ public class PageCheckoutWrapperStpV {
         expected="Se aplican los descuentos correctamente")
     public static void inputDataEmplEnPromoAndAccept(DataBag dataBag, Pais pais, Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-    	DatosStep datosStep = TestCaseData.getDatosCurrentStep();
+    	StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
     	String primerApellido = (new StringTokenizer(pais.getAccesoEmpl().getNombre(), " ")).nextToken();
-    	datosStep.replaceInDescription(tag1erApellido, primerApellido);
+    	StepTestMaker.replaceInDescription(tag1erApellido, primerApellido);
     	
         if (pais.getAccesoEmpl().getNif()!=null) {
-        	datosStep.addRightDescriptionText("Introducir el NIF del usuario " + pais.getAccesoEmpl().getNif() + ". ");
+        	StepTestMaker.addRightDescriptionText("Introducir el NIF del usuario " + pais.getAccesoEmpl().getNif() + ". ");
         	PageCheckoutWrapper.inputDNIPromoEmpl(pais.getAccesoEmpl().getNif(), channel, driver);
         }
         PageCheckoutWrapper.inputApellidoPromoEmpl(primerApellido, channel, driver);
         if (pais.getAccesoEmpl().getFecnac()!=null) {
-        	datosStep.addRightDescriptionText("Introducir la fecha de nacimiento " + pais.getAccesoEmpl().getFecnac() + ". ");
+        	StepTestMaker.addRightDescriptionText("Introducir la fecha de nacimiento " + pais.getAccesoEmpl().getFecnac() + ". ");
         	PageCheckoutWrapper.selectFechaNacPromoEmpl(pais.getAccesoEmpl().getFecnac(), channel, driver); 
         }
         PageCheckoutWrapper.clickButtonAceptarPromoEmpl(channel, driver);

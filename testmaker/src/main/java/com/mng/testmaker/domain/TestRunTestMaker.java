@@ -1,4 +1,7 @@
-package com.mng.testmaker.xmlprogram;
+package com.mng.testmaker.domain;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.testng.xml.XmlGroups;
 import org.testng.xml.XmlSuite;
@@ -11,6 +14,7 @@ public class TestRunTestMaker extends XmlTest {
 
 	private static final long serialVersionUID = -4002416107477209626L;
     public XmlGroups x_xmlGroupsVisible;
+    private List<TestCaseTestMaker> listTestCases = new ArrayList<>();
 	private BrowserStackDesktop browserStackDesktop = null;
 	private BrowserStackMobil browserStackMobil = null;
 	
@@ -32,6 +36,14 @@ public class TestRunTestMaker extends XmlTest {
         this.x_xmlGroupsVisible = xmlGroups;
     }
 	
+	public List<TestCaseTestMaker> getListTestCases() {
+		return listTestCases;
+	}
+
+	public void setListTestCases(List<TestCaseTestMaker> listTestCases) {
+		this.listTestCases = listTestCases;
+	}
+    
 	public void setBrowserStackDesktop(BrowserStackDesktop browserStackDesktop) {
 		this.browserStackDesktop = browserStackDesktop;
 	}

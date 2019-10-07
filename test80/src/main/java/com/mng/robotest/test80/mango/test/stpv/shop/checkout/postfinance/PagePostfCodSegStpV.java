@@ -9,15 +9,15 @@ import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.annotations.validation.ChecksResult;
 import com.mng.testmaker.annotations.validation.Validation;
-import com.mng.testmaker.utils.controlTest.DatosStep;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance.PagePostfCodSeg;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 
 public class PagePostfCodSegStpV {
 
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);    
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);    
     
     /**
      * Validación a nivel de la pasarela
@@ -88,8 +88,8 @@ public class PagePostfCodSegStpV {
     	try {
 	        if (isPostfinanceEcard(nombreMetodo)) {
 	            //El código de seguridad sólo lo pide en el caso de "PostFinance Card" no en el de "PostFinance e-finance"
-	        	DatosStep datosStep = TestCaseData.getDatosLastStep();
-	        	datosStep.setDescripcion("Introducir el código de seguridad " + codSeguridad + ". " + datosStep.getDescripcion());
+	        	StepTestMaker StepTestMaker = TestCaseData.getDatosLastStep();
+	        	StepTestMaker.setDescripcion("Introducir el código de seguridad " + codSeguridad + ". " + StepTestMaker.getDescripcion());
 	        	PagePostfCodSeg.inputCodigoSeguridad(driver, codSeguridad);
 	        }
 	              

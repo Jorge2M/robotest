@@ -5,14 +5,14 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker;
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker;
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.TestNodos;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
-import com.mng.testmaker.data.TestMakerContext;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorPage;
 
 public class ListAllNodes {
@@ -23,7 +23,7 @@ public class ListAllNodes {
     public Object[] createInstances(String urlStatus, String urlErrorpage, String testLinksPie, ITestContext ctx) 
     throws Exception {
         ArrayList<TestNodos> listTests = new ArrayList<TestNodos>();
-    	InputParamsTestMaker inputData = TestMakerContext.getInputData(ctx);
+    	InputParams inputData = (InputParams)SuiteContextTestMaker.getInputData(ctx);
         AppEcom appEcom = (AppEcom)inputData.getApp();
         try {
             int accesos = 0;
@@ -81,7 +81,7 @@ public class ListAllNodes {
     private void addNodosToMap (HashMap<String, NodoStatus> mapNodos, int iteraciones, String urlErrorpage, AppEcom appE, ITestContext context) 
     throws Exception { 
     	WebDriver driver = 
-    		FactoryWebdriverMaker.make(TypeWebDriver.chrome, context)
+    		FactoryWebdriverMaker.make(WebDriverType.chrome, context)
     			.setChannel(Channel.desktop)
     			.build();    	
 	    

@@ -7,11 +7,11 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.annotations.validation.Validation;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoreanConfDesktop;
 
 public class PageKoreanConfDesktopStpV {
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
     
     @Validation (
     	description="Aparece la página para la confirmación de la compra",

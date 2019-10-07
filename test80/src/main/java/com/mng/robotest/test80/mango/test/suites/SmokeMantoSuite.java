@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.suites;
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.InputParams;
-import com.mng.testmaker.xmlprogram.SuiteMaker;
-import com.mng.testmaker.xmlprogram.TestRunMaker;
 import com.mng.robotest.test80.mango.test.appmanto.Manto;
+import com.mng.testmaker.domain.SuiteMaker;
+import com.mng.testmaker.domain.TestRunMaker;
 
 public class SmokeMantoSuite extends SuiteMaker {
     

@@ -13,16 +13,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.data.TestMakerContext;
+import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
 import com.mng.testmaker.jdbc.Connector;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.controlTest.DatosStep;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.controlTest.indexSuite;
 
 
 public class ValidationsDAO {
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
     
     public static String SQLSelectValidationsStep = 
         "SELECT IDEXECSUITE, SUITE, TEST, METHOD, STEP_NUMBER, VALIDATION_NUMBER, DESCRIPTION, RESULTADO, LIST_RESULTS " + 
@@ -90,8 +90,8 @@ public class ValidationsDAO {
 
     public static int selectNextValidation(Method method, int stepNumber, ITestContext ctx) {
         int nextValidation = 0;
-        String methodWithFactory = fmwkTest.getMethodWithFactory(method, ctx);
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(ctx);
+        String methodWithFactory = FmwkTest.getMethodWithFactory(method, ctx);
+    	SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(ctx);
         try (Connection conn = Connector.getConnection(true/*forReadOnly*/)) {
             try (PreparedStatement select = conn.prepareStatement(SQLSelectMaxValidation)) {
                 select.setString(1, testMakerCtx.getIdSuiteExecution());
@@ -115,10 +115,10 @@ public class ValidationsDAO {
         return nextValidation;
     }
     
-    public static void insertValidationInStep(String descripValidac, DatosStep datosStep, Method method, ITestContext ctx) {
-        String methodWithFactory = fmwkTest.getMethodWithFactory(method, ctx);
+    public static void insertValidationInStep(String descripValidac, StepTestMaker datosStep, Method method, ITestContext ctx) {
+        String methodWithFactory = FmwkTest.getMethodWithFactory(method, ctx);
         int validationNumber = ValidationsDAO.selectNextValidation(method, datosStep.getStepNumber(), ctx);
-        TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(ctx);
+        SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(ctx);
         try (Connection conn = Connector.getConnection()) {
             try (PreparedStatement insert = conn.prepareStatement(SQLInsertValidation)) {
                 insert.setString(1, testMakerCtx.getIdSuiteExecution());

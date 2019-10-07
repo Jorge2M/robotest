@@ -12,8 +12,8 @@ import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.annotations.validation.ChecksResult;
 import com.mng.testmaker.annotations.validation.Validation;
-import com.mng.testmaker.utils.controlTest.DatosStep;
-import com.mng.testmaker.utils.controlTest.DatosStep.SaveWhen;
+import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.annotations.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -23,8 +23,8 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
-import com.mng.testmaker.webdriverwrapper.ElementPageFunctions.StateElem;
+import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageIdentificacion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenusUserWrapper;
@@ -58,10 +58,10 @@ public class AccesoStpV {
             registro+= "Borrar la Bolsa<br>";         
         }
         
-        DatosStep datosStep = TestCaseData.getDatosCurrentStep();
-        datosStep.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
-        datosStep.replaceInDescription(tagLiteralIdioma, dCtxSh.idioma.getCodigo().getLiteral());
-        datosStep.replaceInDescription(tagRegistro, registro);
+        StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
+        StepTestMaker.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
+        StepTestMaker.replaceInDescription(tagLiteralIdioma, dCtxSh.idioma.getCodigo().getLiteral());
+        StepTestMaker.replaceInDescription(tagRegistro, registro);
         
         AccesoNavigations.accesoHomeAppWeb(dCtxSh, driver);
         if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) {
@@ -221,10 +221,10 @@ public class AccesoStpV {
     	saveHtmlPage=SaveWhen.Always)
     public static void accesoPRYCambioPais(DataCtxShop dCtxSh, Pais paisDestino, IdiomaPais idiomaDestino, WebDriver driver) 
     throws Exception {
-        DatosStep datosStep = TestCaseData.getDatosCurrentStep();
-        datosStep.replaceInDescription(tagNombrePaisOrigen, dCtxSh.pais.getNombre_pais());
-        datosStep.replaceInDescription(tagCodigoPaisOrigen, dCtxSh.pais.getCodigo_pais());
-        datosStep.replaceInDescription(tagNombreIdiomaOrigen, dCtxSh.idioma.getLiteral());
+        StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
+        StepTestMaker.replaceInDescription(tagNombrePaisOrigen, dCtxSh.pais.getNombre_pais());
+        StepTestMaker.replaceInDescription(tagCodigoPaisOrigen, dCtxSh.pais.getCodigo_pais());
+        StepTestMaker.replaceInDescription(tagNombreIdiomaOrigen, dCtxSh.idioma.getLiteral());
     	
         AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, driver);
         

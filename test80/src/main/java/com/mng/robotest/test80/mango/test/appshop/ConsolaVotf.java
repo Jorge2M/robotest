@@ -8,10 +8,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
 import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.controlTest.mango.GestorWebDriver;
 import com.mng.testmaker.utils.otras.Channel;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -24,13 +24,13 @@ public class ConsolaVotf extends GestorWebDriver {
     @BeforeMethod(groups={"Canal:desktop_App:votf"})
     @Parameters({"prodDisponible1" })
     public void login(String prodDisponible1I, ITestContext context, Method method) throws Exception {
-        InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
+        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom(AppEcom.votf);
         dCtxSh.setChannel(Channel.desktop);
         dCtxSh.urlAcceso = inputData.getUrlBase();
         
-        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), "", dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), "", dCtxSh, context, method);
         this.prodDisponible1 = prodDisponible1I;
     }
 

@@ -4,9 +4,9 @@ import java.util.*;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.data.TestMakerContext;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.PaisIdioma;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -24,7 +24,7 @@ public class LineasBannersFactory {
         ArrayList<PaisIdioma> listTests = new ArrayList<>();
         ArrayList<String> listaPaises = new ArrayList<>();
         try {
-        	InputParamsTestMaker inputData = TestMakerContext.getInputData(ctx);
+        	InputParams inputData = (InputParams)SuiteContextTestMaker.getInputData(ctx);
         	AppEcom app = (AppEcom)inputData.getApp();
         	Channel channel = inputData.getChannel();
         	VersionPaisSuite version = VersionPaisSuite.valueOf(inputData.getVersionSuite());

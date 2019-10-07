@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.DatosStep.SaveWhen;
+import com.mng.testmaker.annotations.step.SaveWhen;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.annotations.validation.ChecksResult;

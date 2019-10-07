@@ -1,4 +1,4 @@
-package com.mng.testmaker.webdriverwrapper;
+package com.mng.testmaker.service.webdriver.wrapper;
 
 public enum TypeOfClick {
     webdriver, 

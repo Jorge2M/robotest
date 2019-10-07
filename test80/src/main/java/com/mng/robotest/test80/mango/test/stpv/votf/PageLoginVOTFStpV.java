@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.DatosStep;
+import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.votf.PageLoginVOTF;
 
@@ -20,16 +20,16 @@ public class PageLoginVOTFStpV {
     public static void goToAndLogin(String urlAcceso, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         String usuarioVOTF = dCtxSh.pais.getAccesoVOTF().getUsuario();
         String passwordVOTF = dCtxSh.pais.getAccesoVOTF().getPassword();
-        DatosStep datosStep = TestCaseData.getDatosCurrentStep();
-        datosStep.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
-        datosStep.replaceInDescription(tagUsuarioVotf, usuarioVOTF);
-        datosStep.replaceInDescription(tagPasswordVotf, tagPasswordVotf);
+        StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
+        StepTestMaker.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
+        StepTestMaker.replaceInDescription(tagUsuarioVotf, usuarioVOTF);
+        StepTestMaker.replaceInDescription(tagPasswordVotf, tagPasswordVotf);
 
         int numIdiomas = dCtxSh.pais.getListIdiomas().size();
         if (numIdiomas > 1) {
-            datosStep.setResExpected("Aparece la página de selección del idioma");
+            StepTestMaker.setResExpected("Aparece la página de selección del idioma");
         } else {
-        	datosStep.setResExpected("Aparece la página de selección de la línea");
+        	StepTestMaker.setResExpected("Aparece la página de selección de la línea");
         }
         
         PageLoginVOTF.goToFromUrlAndSetTestABs(urlAcceso, dCtxSh, driver);

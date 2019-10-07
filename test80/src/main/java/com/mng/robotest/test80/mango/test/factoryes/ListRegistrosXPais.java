@@ -3,12 +3,12 @@ package com.mng.robotest.test80.mango.test.factoryes;
 import java.util.*;
 import org.testng.annotations.*;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
-import com.mng.testmaker.data.TestMakerContext;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.Registro;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
 
 import org.testng.ITestContext;
 
@@ -18,7 +18,7 @@ public class ListRegistrosXPais {
     @Parameters({"countrys", "lineas"})
     public Object[] createInstances(String listaPaisesStr, String lineas, ITestContext ctx) throws Exception {
         ArrayList<Object> listTests = new ArrayList<>();
-        InputParamsTestMaker inputData = TestMakerContext.getInputData(ctx);
+        InputParams inputData = (InputParams)SuiteContextTestMaker.getInputData(ctx);
         AppEcom appE = (AppEcom)inputData.getApp();
         try {
 	    	List<Pais> listCountrys = Utilidades.getListCountrysFiltered(listaPaisesStr);

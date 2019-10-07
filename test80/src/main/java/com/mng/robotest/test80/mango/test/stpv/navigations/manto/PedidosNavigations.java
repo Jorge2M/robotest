@@ -8,7 +8,7 @@ import com.mng.robotest.test80.InputParams;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.utils.otras.TypeAccessFmwk;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -26,7 +26,7 @@ import com.mng.robotest.test80.mango.test.stpv.manto.SecFiltrosMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.SecFiltrosMantoStpV.TypeSearch;
 
 public class PedidosNavigations {
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 
     public static void testPedidosEnManto(CopyOnWriteArrayList<DataPedido> listPedidos, AppEcom appE, DataFmwkTest dFTest) throws Exception {
     	//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto

@@ -1,10 +1,10 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -37,7 +37,7 @@ public class Ayuda extends GestorWebDriver {
 
     @BeforeMethod(groups = { "Ayuda", "Canal:all_App:shop", "Canal:desktop_App:outlet" })
     public void login(ITestContext context, Method method) throws Exception {
-        InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
+        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());
@@ -52,7 +52,7 @@ public class Ayuda extends GestorWebDriver {
 
         dCtxSh.pais = this.españa;
         dCtxSh.idioma = this.castellano;
-        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), "", dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), "", dCtxSh, context, method);
     }
 
 //    @Test(

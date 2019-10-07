@@ -10,12 +10,12 @@ import java.util.HashMap;
 import java.util.Vector;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.data.TestMakerContext;
+import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
 import com.mng.testmaker.jdbc.Connector;
 import com.mng.testmaker.jdbc.to.ResultMethod;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.controlTest.DatosStep;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.controlTest.indexSuite;
 
 
@@ -41,13 +41,13 @@ public class StepsDAO {
         "DELETE FROM STEPS " +
         "WHERE INICIO < ?;";    
     
-    public static int grabStep(DatosStep datosStep, Method method, ITestContext ctx) {
-        String methodWithFactory = fmwkTest.getMethodWithFactory(method, ctx);
+    public static int grabStep(StepTestMaker datosStep, Method method, ITestContext ctx) {
+        String methodWithFactory = FmwkTest.getMethodWithFactory(method, ctx);
         if (datosStep.getHoraFin()==null) {
             datosStep.setHoraFin(new Date(System.currentTimeMillis()));
         }
 
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(ctx);
+    	SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(ctx);
         try (Connection conn = Connector.getConnection();
             PreparedStatement insert = conn.prepareStatement(SQLInsertStep)) {
             insert.setString(1, testMakerCtx.getIdSuiteExecution());
@@ -97,13 +97,13 @@ public class StepsDAO {
      */
     public static int getNextMethodStep(Method method, ITestContext context) {
         int stepNumber = 0;
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+    	SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
         try (Connection conn = Connector.getConnection(true/*forReadOnly*/);
             PreparedStatement select = conn.prepareStatement(SQLSelectLastStepMethod)) {
             select.setString(1, testMakerCtx.getIdSuiteExecution());
             select.setString(2, context.getSuite().getName());
             select.setString(3, context.getName());
-            select.setString(4, fmwkTest.getMethodWithFactory(method, context));
+            select.setString(4, FmwkTest.getMethodWithFactory(method, context));
             try (ResultSet resultado = select.executeQuery()) {
                 stepNumber = resultado.getInt("MAX(STEP_NUMBER)") + 1;
             }

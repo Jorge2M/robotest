@@ -13,12 +13,12 @@ import org.testng.xml.XmlClass;
 import org.testng.xml.XmlInclude;
 import org.testng.xml.XmlTest;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
+import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.testmaker.utils.filter.TestMethod;
 import com.mng.testmaker.utils.filter.resources.TestNGxmlStub;
 import com.mng.testmaker.utils.filter.resources.TestNGxmlStub.TypeStubTest;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 
 public class TestFilterTNGxmlTRun {
 
@@ -182,7 +182,7 @@ public class TestFilterTNGxmlTRun {
 	    	Suite.SuiteForUnitTest, 
 			AppEcom.shop, 
 			"https://shop.mango.com/preHome.faces",
-			TypeWebDriver.chrome);
+			WebDriverType.chrome);
     }
     
     private int getIncludedMethodsCount(List<XmlClass> listXmlClasses) {

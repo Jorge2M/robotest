@@ -4,7 +4,7 @@ import org.testng.ITestContext;
 
 public class FactoryWebdriverMaker {
 
-    public enum TypeWebDriver { 
+    public enum WebDriverType { 
     	firefox(false), 
     	firefoxhless(true), 
     	chrome(false), 
@@ -14,7 +14,7 @@ public class FactoryWebdriverMaker {
     	browserstack(false);
     	
     	boolean headless;
-    	private TypeWebDriver(boolean headless) {
+    	private WebDriverType(boolean headless) {
     		this.headless = headless;
     	}
     	
@@ -23,17 +23,17 @@ public class FactoryWebdriverMaker {
     	}
     }	
 
-    public static WebdriverMaker make(TypeWebDriver typeWebDriver, ITestContext context) {
-    	switch (typeWebDriver) {
+    public static WebdriverMaker make(WebDriverType webDriverType, ITestContext context) {
+    	switch (webDriverType) {
     	case firefox:
-    		return (FirefoxdriverMaker.getNew(typeWebDriver));
+    		return (FirefoxdriverMaker.getNew(webDriverType));
     	case browserstack:
     		return (BrowserStackDriverMaker.getNew(context));
     	case edge:
     		return (EdgedriverMaker.getNew());
     	case chrome:
     	default:
-    		return (ChromedriverMaker.getNew(typeWebDriver));
+    		return (ChromedriverMaker.getNew(webDriverType));
     	}
     }
 }

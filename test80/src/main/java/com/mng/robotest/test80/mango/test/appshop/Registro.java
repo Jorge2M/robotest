@@ -14,14 +14,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.InputParams;
-import com.mng.testmaker.access.InputParamsTestMaker;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
 import com.mng.testmaker.utils.otras.TypeAccessFmwk;
-import com.mng.testmaker.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -77,7 +76,7 @@ public class Registro extends GestorWebDriver {
     
     @BeforeMethod(groups={"Registro", "Canal:all_App:all", "SupportsFactoryCountrys"})
     public void login(ITestContext context, Method method) throws Exception {
-        InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
+        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
         dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());
@@ -99,7 +98,7 @@ public class Registro extends GestorWebDriver {
             dCtxSh.idioma = this.idiomaFactory;
         }        
         
-        Utils.storeDataShopForTestMaker(inputData.getTypeWebDriver(), index_fact, dCtxSh, context, method);
+        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), index_fact, dCtxSh, context, method);
     }
 
     @SuppressWarnings("unused")
@@ -161,7 +160,7 @@ public class Registro extends GestorWebDriver {
         description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
     public void REG002_RegistroOK_publi() throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-    	InputParams inputData = (InputParams)TestMakerContext.getInputData(dFTest.ctx);
+    	InputParams inputData = (InputParams)SuiteContextTestMaker.getInputData(dFTest.ctx);
         if (inputData.getTypeAccess()==TypeAccessFmwk.Bat) {
             return;
         }

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 @SuppressWarnings({"static-access"})
 public abstract class PageFicha extends WebdrvWrapp {

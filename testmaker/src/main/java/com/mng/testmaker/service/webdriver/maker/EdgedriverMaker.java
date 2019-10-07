@@ -8,7 +8,7 @@ import com.mng.testmaker.utils.otras.Channel;
 
 import io.github.bonigarcia.wdm.EdgeDriverManager;
 
-public class EdgedriverMaker implements WebdriverMaker {
+class EdgedriverMaker implements WebdriverMaker {
 	
 	//Nota: si se modifica la versión sería conveniente regenerar la AMI correspondiente al Robotest en Cloud
 	final static String EdgeDriverVersion = "75.0.137.0";
@@ -21,7 +21,7 @@ public class EdgedriverMaker implements WebdriverMaker {
 		setDriverEdge();
 	}
 	
-	public static EdgedriverMaker getNew() {
+	static EdgedriverMaker getNew() {
 		return (new EdgedriverMaker());
 	}
 	

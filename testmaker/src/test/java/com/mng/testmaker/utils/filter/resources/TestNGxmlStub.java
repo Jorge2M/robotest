@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
-import com.mng.testmaker.xmlprogram.SuiteMaker;
-import com.mng.testmaker.xmlprogram.TestRunMaker;
+import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.domain.SuiteMaker;
+import com.mng.testmaker.domain.TestRunMaker;
 
 public class TestNGxmlStub extends SuiteMaker {
 

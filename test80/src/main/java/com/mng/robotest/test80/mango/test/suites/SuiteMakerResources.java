@@ -13,9 +13,9 @@ import java.util.Map;
 import com.mng.robotest.test80.InputParams;
 //import com.mng.testmaker.listeners.CallBack;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.robotest.test80.mango.test.data.Constantes;
-import com.mng.testmaker.xmlprogram.TestRunMaker;
+import com.mng.testmaker.domain.TestRunMaker;
 
 public class SuiteMakerResources {
     
@@ -73,8 +73,8 @@ public class SuiteMakerResources {
         return parametersReturn;
     }
     
-    public static boolean isBrowserStack(TypeWebDriver typeWebDriver) {
-    	return (typeWebDriver==TypeWebDriver.browserstack);
+    public static boolean isBrowserStack(WebDriverType WebDriverType) {
+    	return (WebDriverType==WebDriverType.browserstack);
     }
     
     public static List<TestRunMaker> getTestRunsForBrowserStack(String suiteName, Channel channel, List<Class<?>> listClasses) {

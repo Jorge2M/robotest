@@ -5,12 +5,12 @@ import org.testng.annotations.*;
 import org.testng.ITestContext;
 
 import com.mng.robotest.test80.InputParams;
-import com.mng.testmaker.data.TestMakerContext;
 import com.mng.robotest.test80.mango.conftestmaker.Suites;
 import com.mng.robotest.test80.mango.test.appshop.Favoritos;
 import com.mng.robotest.test80.mango.test.appshop.MiCuenta;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
 
 
 public class GenericFactory {
@@ -20,7 +20,7 @@ public class GenericFactory {
     public Object[] createInstances(String listaPaisesStr, ITestContext ctx) throws Exception {
         ArrayList<Object> listTests = new ArrayList<>();
         try {
-        	InputParams inputData = (InputParams)TestMakerContext.getInputData(ctx);
+        	InputParams inputData = (InputParams)SuiteContextTestMaker.getInputData(ctx);
         	Suites suite = (Suites)inputData.getSuite();
             List<Pais> listCountrys = Utilidades.getListCountrysFiltered(listaPaisesStr);
             int prioridad=0;

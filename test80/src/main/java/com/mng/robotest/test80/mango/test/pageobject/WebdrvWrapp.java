@@ -7,10 +7,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeoutException;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
-import com.mng.testmaker.webdriverwrapper.ElementPageFunctions;
-import com.mng.testmaker.webdriverwrapper.TypeOfClick;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
+import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions;
+import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,7 +33,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WebdrvWrapp extends ElementPageFunctions { 
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 
     public static boolean titleContainsUntil(final WebDriver driver, final String title, int seconds) {
         try {
@@ -636,10 +636,10 @@ public class WebdrvWrapp extends ElementPageFunctions {
         }
     }
     
-    public static TypeWebDriver getTypeDriver(WebDriver driver) {
+    public static WebDriverType getTypeDriver(WebDriver driver) {
     	Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
     	String browserName = caps.getBrowserName();
-    	return TypeWebDriver.valueOf(browserName);
+    	return WebDriverType.valueOf(browserName);
     }    
     
     public enum HtmlLocator {TagName, Id, ClassName};

@@ -10,8 +10,8 @@ import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.annotations.validation.ChecksResult;
 import com.mng.testmaker.annotations.validation.Validation;
-import com.mng.testmaker.utils.controlTest.DatosStep;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import static com.mng.robotest.test80.mango.test.data.Constantes.PrefixRebajas;
 
 import com.mng.testmaker.utils.otras.Channel;
@@ -42,7 +42,7 @@ import com.mng.robotest.test80.mango.test.utils.checkmenus.MenuTraduc;
 
 public class SecMenusWrapperStpV {
 	
-	static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+	static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 	
 	private final Channel channel;
 	private final AppEcom app;
@@ -212,7 +212,7 @@ public class SecMenusWrapperStpV {
         }
     }
     
-    public DatosStep seleccionLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh) throws Exception {
+    public StepTestMaker seleccionLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh) throws Exception {
         if (sublineaType==null) {
             return seleccionLinea(lineaType);
         }
@@ -220,7 +220,7 @@ public class SecMenusWrapperStpV {
         return seleccionSublinea(lineaType, sublineaType, dCtxSh);
     }
     
-    public DatosStep seleccionLinea(LineaType lineaType) throws Exception {
+    public StepTestMaker seleccionLinea(LineaType lineaType) throws Exception {
         if (channel==Channel.movil_web) {
             secMenuLateralMobilStpV.seleccionLinea(lineaType, pais);
             return TestCaseData.getDatosLastStep();
@@ -230,7 +230,7 @@ public class SecMenusWrapperStpV {
         return TestCaseData.getDatosLastStep();
     }
     
-    public DatosStep seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh)
+    public StepTestMaker seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh)
     throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
             secMenuLateralMobilStpV.seleccionSublineaNinos(lineaType, sublineaType, pais);

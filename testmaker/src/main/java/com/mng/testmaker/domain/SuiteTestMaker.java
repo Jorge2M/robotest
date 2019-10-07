@@ -1,22 +1,21 @@
-package com.mng.testmaker.xmlprogram;
+package com.mng.testmaker.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.testng.xml.XmlSuite;
 
-import com.mng.testmaker.data.TestMakerContext;
-
 public class SuiteTestMaker extends XmlSuite {
 	
 	private static final long serialVersionUID = 1L;
-	private final TestMakerContext testMakerContext;
+	private final SuiteContextTestMaker testMakerContext;
+	private List<TestRunMaker> listTestRuns = new ArrayList<>();
 	
-	public SuiteTestMaker(TestMakerContext testMakerContext) {
+	public SuiteTestMaker(SuiteContextTestMaker testMakerContext) {
 		this.testMakerContext = testMakerContext;
 	}
 	
-	public TestMakerContext getTestMakerContext() {
+	public SuiteContextTestMaker getTestMakerContext() {
 		return this.testMakerContext;
 	}
 	

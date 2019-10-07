@@ -12,13 +12,13 @@ import org.apache.logging.log4j.Logger;
 
 import com.mng.testmaker.access.CommandLineAccess;
 import com.mng.testmaker.access.OptionTMaker;
+import com.mng.testmaker.domain.SuiteMaker;
+import com.mng.testmaker.domain.SuiteTestMaker;
 import com.mng.testmaker.utils.utils;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.filter.TestMethod;
 import com.mng.testmaker.utils.otras.TypeAccessFmwk;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.xmlprogram.SuiteMaker;
-import com.mng.testmaker.xmlprogram.SuiteTestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Suites;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
@@ -26,7 +26,7 @@ import com.mng.robotest.test80.mango.test.suites.*;
 
 public class Test80mng { 
 	
-	static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+	static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 
     public static String CountrysNameParam = "countrys";
     public static String LineasNameParam = "lineas";
@@ -222,7 +222,7 @@ public class Test80mng {
     private static void callBackIfNeeded(SuiteTestMaker suite, InputParams inputParams) {
     	CallBack callBack = inputParams.getCallBack();
         if (callBack!=null) {
-            String pathFileReport = fmwkTest.getPathReportHTML(fmwkTest.getOutputDirectorySuite(suite));
+            String pathFileReport = FmwkTest.getPathReportHTML(FmwkTest.getOutputDirectorySuite(suite));
             String reportTSuiteURL = utils.obtainDNSFromFile(pathFileReport, inputParams.getWebAppDNS()).replace("\\", "/");
             callBack.setReportTSuiteURL(reportTSuiteURL);
             try {
@@ -274,10 +274,10 @@ public class Test80mng {
     }
 
     public static String getOutputDirectory(String userDir, String suiteName, String idExecutedSuite) {
-        return fmwkTest.getOutputDirectory(userDir, suiteName, idExecutedSuite);
+        return FmwkTest.getOutputDirectory(userDir, suiteName, idExecutedSuite);
     }
     
     public static String getPathOutputDirectoryFromUserDir(String suiteName, String idExecutedSuite) {
-        return (fmwkTest.getPathOutputDirectoryFromUserDir(suiteName, idExecutedSuite));
+        return (FmwkTest.getPathOutputDirectoryFromUserDir(suiteName, idExecutedSuite));
     }
 }

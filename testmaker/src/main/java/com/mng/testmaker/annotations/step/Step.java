@@ -3,8 +3,6 @@ package com.mng.testmaker.annotations.step;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import com.mng.testmaker.utils.controlTest.DatosStep.SaveWhen;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.RetentionPolicy;
 

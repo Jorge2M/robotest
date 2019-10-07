@@ -19,12 +19,12 @@ import org.testng.xml.XmlGroups;
 import org.testng.xml.XmlInclude;
 import org.testng.xml.XmlTest;
 
-import com.mng.testmaker.utils.controlTest.fmwkTest;
-import com.mng.testmaker.xmlprogram.TestRunTestMaker;
+import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 
 public class FilterTestsSuiteXML {
 	
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
     
     private final DataFilterTCases dFilter;
     private final List<String> groupsToExclude;

@@ -1,4 +1,4 @@
-package com.mng.testmaker.xmlprogram;
+package com.mng.testmaker.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +13,6 @@ import org.testng.xml.XmlInclude;
 import org.testng.xml.XmlRun;
 import org.testng.xml.XmlSuite;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
 import com.mng.testmaker.utils.filter.FilterTestsSuiteXML;
 import com.mng.testmaker.utils.webdriver.BrowserStackDesktop;
 import com.mng.testmaker.utils.webdriver.BrowserStackMobil;
@@ -71,8 +70,7 @@ public class TestRunMaker {
 		this.browserStackMobil = browserStackMobil;
 	}
     
-    public <T extends Enum<T>, Y extends Enum<Y>, Z extends Enum<Z>> 
-    		TestRunTestMaker createTestRun(XmlSuite suite, FilterTestsSuiteXML filterSuiteXML, InputParamsTestMaker inputData) {
+    public TestRunTestMaker createTestRun(XmlSuite suite, FilterTestsSuiteXML filterSuiteXML, InputParamsTestMaker inputData) {
     	TestRunTestMaker testRun = new TestRunTestMaker(suite);
         testRun.setName(getTestRunName(inputData));
         testRun.setPreserveOrder(Boolean.valueOf(true));
@@ -153,6 +151,6 @@ public class TestRunMaker {
         	inputData.getVersionSuite() + "-" + 
         	inputData.getApp() + "-" + 
         	inputData.getChannel() + "-" + 
-        	inputData.getTypeWebDriver());
+        	inputData.getWebDriverType());
     } 
 }

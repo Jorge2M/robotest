@@ -4,13 +4,13 @@ import java.lang.reflect.Method;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
+import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.DatosStep;
 
 public class InfoStep {
 
 	private final Step stepAnnotation;
-	private final DatosStep datosStep;
+	private final StepTestMaker datosStep;
 	
 	private InfoStep(JoinPoint joinPoint) {
 		this.stepAnnotation = getStepAnnotation(joinPoint);
@@ -25,7 +25,7 @@ public class InfoStep {
 		return stepAnnotation;
 	}
 	
-	public DatosStep getDatosStep() {
+	public StepTestMaker getDatosStep() {
 		return datosStep;
 	}
 	
@@ -36,8 +36,8 @@ public class InfoStep {
         return (StepAnnotation);
     }
     
-    private DatosStep getDatosStepFromStepAnnotation() {
-    	DatosStep datosStep = new DatosStep();
+    private StepTestMaker getDatosStepFromStepAnnotation() {
+    	StepTestMaker datosStep = new StepTestMaker();
     	datosStep.setDescripcion(stepAnnotation.description());
     	datosStep.setResExpected(stepAnnotation.expected());
     	datosStep.setSaveImagePage(stepAnnotation.saveImagePage());

@@ -11,13 +11,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.testmaker.webdriverwrapper.TypeOfClick;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.test80.mango.test.pageobject.utils.LocalStorage;
@@ -29,7 +29,7 @@ import com.mng.robotest.test80.mango.test.utils.testab.TestABactive;
  * @author jorge.munoz
  */
 public class PagePrehome extends WebdrvWrapp {
-	static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+	static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
     enum ButtonEnter {Enter, Continuar};
 	
     static String XPathSelectPaises = "//select[@id='countrySelect']";

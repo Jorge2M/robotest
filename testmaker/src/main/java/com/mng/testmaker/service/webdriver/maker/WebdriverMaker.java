@@ -19,13 +19,13 @@ public interface WebdriverMaker {
 	abstract public WebdriverMaker setNettraffic(boolean nettraffic);
 	abstract public WebDriver build() throws Exception;
 	
-	public default Proxy getProxyForNettraffic() {
+	default Proxy getProxyForNettraffic() {
 		new NetTrafficMng();
 	    Proxy seleniumProxy = ClientUtil.createSeleniumProxy(NetTrafficMng.getProxy());
 	    return seleniumProxy;
 	}
 
-    public default LoggingPreferences getLogsWebDriverEnabled() {
+    default LoggingPreferences getLogsWebDriverEnabled() {
         //Configuramos la recopilación de logs a nivel de WebDriver
         LoggingPreferences logs = new LoggingPreferences();
         logs.enable(LogType.BROWSER, Level.SEVERE);
@@ -37,7 +37,7 @@ public interface WebdriverMaker {
         return logs;
     }
     
-    public static void deleteCookiesAndSetTimeouts(WebDriver driver) {
+    static void deleteCookiesAndSetTimeouts(WebDriver driver) {
     	if (driver!=null) {
 		    driver.manage().deleteAllCookies();
 		    driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);

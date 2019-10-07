@@ -6,7 +6,7 @@ import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.annotations.validation.ChecksResult;
 import com.mng.testmaker.annotations.validation.Validation;
-import com.mng.testmaker.utils.controlTest.DatosStep;
+import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld.TypePanel;
@@ -36,9 +36,9 @@ public class SecProductDescrOldStpV {
     public static void selectPanel(TypePanel typePanel, WebDriver driver) throws Exception {
         TypeStatePanel statePanelIni = SecProductDescrOld.getStatePanel(typePanel, driver);
         TypeStatePanel stateExpectedAfterClick = SecProductDescrOld.getStatePanelAfterClick(statePanelIni);
-        DatosStep datosStep = TestCaseData.getDatosCurrentStep();
-        datosStep.replaceInDescription(tagInitStatePanel, statePanelIni.toString());
-        datosStep.replaceInExpected(tagFinalStateExpected, stateExpectedAfterClick.toString());
+        StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
+        StepTestMaker.replaceInDescription(tagInitStatePanel, statePanelIni.toString());
+        StepTestMaker.replaceInExpected(tagFinalStateExpected, stateExpectedAfterClick.toString());
         
         SecProductDescrOld.clickPanel(typePanel, driver);
         int maxSecondsWait = 1;

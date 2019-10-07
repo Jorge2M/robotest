@@ -2,13 +2,12 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
 import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.annotations.validation.Validation;
-
+import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
+import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.annotations.validation.ChecksResult;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.testmaker.webdriverwrapper.ElementPageFunctions.StateElem;
-import com.mng.testmaker.webdriverwrapper.TypeOfClick;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion.ModalElement;

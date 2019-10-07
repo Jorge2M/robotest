@@ -12,33 +12,33 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
 
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
+import com.mng.testmaker.service.webdriver.maker.plugins.chrome.PluginChrome;
+import com.mng.testmaker.service.webdriver.maker.plugins.chrome.PluginChrome.typePluginChrome;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 import com.mng.testmaker.utils.webdriver.plugins.PluginBrowserFactory;
-import com.mng.testmaker.utils.webdriver.plugins.chrome.PluginChrome;
-import com.mng.testmaker.utils.webdriver.plugins.chrome.PluginChrome.typePluginChrome;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 
-public class ChromedriverMaker implements WebdriverMaker {
+class ChromedriverMaker implements WebdriverMaker {
 	
     //Nota: si se modifica la versión sería conveniente regenerar la AMI correspondiente al Robotest en Cloud
 	final static String ChromeDriverVersion = "77.0.3865.40";
-	final TypeWebDriver typeWebDriver;
+	final WebDriverType webDriverType;
 	boolean isHeadless;
 	ChromeOptions options = new ChromeOptions();
 	Channel channel = Channel.desktop;
 	boolean nettraffic = false;
 	
-	private ChromedriverMaker(TypeWebDriver typeWebDriver) {
-		this.typeWebDriver = typeWebDriver;
-		isHeadless = typeWebDriver.isHeadless();
+	private ChromedriverMaker(WebDriverType webDriverType) {
+		this.webDriverType = webDriverType;
+		isHeadless = webDriverType.isHeadless();
 		initialConfig();
         setDriverChrome();
 	}
 	
-	public static ChromedriverMaker getNew(TypeWebDriver typeWebDriver) {
-		return (new ChromedriverMaker(typeWebDriver));
+	static ChromedriverMaker getNew(WebDriverType WebDriverType) {
+		return (new ChromedriverMaker(WebDriverType));
 	}
 	
     @Override

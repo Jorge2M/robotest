@@ -12,29 +12,29 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.conf.StorerErrorDataStepValidation;
-import com.mng.testmaker.utils.controlTest.DatosStep;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
-import com.mng.testmaker.utils.controlTest.fmwkTest.TypeEvidencia;
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest.TypeEvidencia;
 
 public class StorerErrorDataStepValidationMango implements StorerErrorDataStepValidation {
 
 	@Override
-	public void store(DataFmwkTest dFTest, DatosStep datosStep) throws Exception {
-		capturaErrorPage(dFTest, datosStep.getStepNumber());
+	public void store(DataFmwkTest dFTest, StepTestMaker step) throws Exception {
+		capturaErrorPage(dFTest, step.getStepNumber());
 	}
 	
     /**
      * Se realiza una captura de ./errorPage.faces pues allí se pueden encontrar los datos de la instancia
      */
     public static void capturaErrorPage(DataFmwkTest dFTest, int stepNumber) throws Exception {
-        if (dFTest.typeDriver!=TypeWebDriver.browserstack) {
+        if (dFTest.webDriverType!=WebDriverType.browserstack) {
             //Cargamos la página errorPage en una pestaña aparte y nos posicionamos en ella
             //BrowserStack parece que no soporta abrir ventanas aparte
             String windowHandle = loadErrorPage(dFTest.driver);
             try {
-                String methodWithFactory = fmwkTest.getMethodWithFactory(dFTest.meth, dFTest.ctx);
-                String nombreErrorFile = fmwkTest.getPathFileEvidenciaStep(dFTest.ctx, methodWithFactory, stepNumber, TypeEvidencia.errorpage);
+                String methodWithFactory = FmwkTest.getMethodWithFactory(dFTest.meth, dFTest.ctx);
+                String nombreErrorFile = FmwkTest.getPathFileEvidenciaStep(dFTest.ctx, methodWithFactory, stepNumber, TypeEvidencia.errorpage);
                 File errorImage = new File(nombreErrorFile);
                 try (FileWriter fw = new FileWriter(errorImage)) {
                     fw.write(dFTest.driver.getPageSource());

@@ -3,8 +3,8 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.registro;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.webdriverwrapper.TypeOfClick;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 
 public class PageRegistroFin extends WebdrvWrapp {

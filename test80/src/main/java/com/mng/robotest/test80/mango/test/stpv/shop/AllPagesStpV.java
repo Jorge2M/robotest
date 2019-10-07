@@ -13,10 +13,10 @@ import com.mng.testmaker.annotations.validation.Validation;
 import com.mng.testmaker.utils.otras.ResultadoErrores;
 import com.mng.testmaker.utils.otras.WebDriverArqUtils;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter;
 import com.mng.robotest.test80.mango.test.utils.WebDriverMngUtils;
@@ -49,8 +49,8 @@ public class AllPagesStpV {
     	
     	if (flagsVal.validaJS) {
         	//Nota: No funciona con GeckoDriver porque no están implementados los servicios al no formar parte del protocolo W3C https://github.com/w3c/webdriver/issues/406
-        	if (WebdrvWrapp.getTypeDriver(driver)!=TypeWebDriver.firefox &&
-        		WebdrvWrapp.getTypeDriver(driver)!=TypeWebDriver.firefoxhless) {
+        	if (WebdrvWrapp.getTypeDriver(driver)!=WebDriverType.firefox &&
+        		WebdrvWrapp.getTypeDriver(driver)!=WebDriverType.firefoxhless) {
         		int maxErrors = 1;
         		ResultadoErrores resultadoLogs = WebDriverArqUtils.getLogErrors(Level.WARNING, driver, maxErrors, ctx);
         		String descripValidac = "No hay errores JavaScript";

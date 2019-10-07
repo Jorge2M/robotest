@@ -6,7 +6,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.data.TestMakerContext;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.utils.webdriver.BrowserStackDesktop;
 import com.mng.testmaker.utils.webdriver.BrowserStackMobil;
@@ -23,7 +23,7 @@ public class BrowserStackDriverMaker implements WebdriverMaker {
 	
 	private BrowserStackDriverMaker(ITestContext ctx) {
 		this.ctx = ctx;
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(ctx);
+    	SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(ctx);
         buildProject = 
             ctx.getSuite().getName() + 
             " (" + testMakerCtx.getIdSuiteExecution() + ")";
@@ -64,7 +64,7 @@ public class BrowserStackDriverMaker implements WebdriverMaker {
 	}
     
     private WebDriver createBStackDriverMobil() throws Exception {
-        BrowserStackMobil bsStackMobil = TestMakerContext.getTestRun(ctx).getBrowserStackMobil();
+        BrowserStackMobil bsStackMobil = SuiteContextTestMaker.getTestRun(ctx).getBrowserStackMobil();
         if (bsStackMobil==null) {
         	throw new RuntimeException("The data for connect with BrowserStack is not in the context");
         }
@@ -79,7 +79,7 @@ public class BrowserStackDriverMaker implements WebdriverMaker {
     }
     
     private WebDriver createBStackDriverDesktop() throws Exception {
-    	BrowserStackDesktop bsStackDesktop = TestMakerContext.getTestRun(ctx).getBrowserStackDesktop();
+    	BrowserStackDesktop bsStackDesktop = SuiteContextTestMaker.getTestRun(ctx).getBrowserStackDesktop();
         if (bsStackDesktop==null) {
         	throw new RuntimeException("The data for connect with BrowserStack is not in the context");
         }

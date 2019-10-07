@@ -8,13 +8,13 @@ import com.mng.testmaker.utils.State;
 import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.annotations.validation.ChecksResult;
 import com.mng.testmaker.annotations.validation.Validation;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance.PagePostfSelectPago;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class PagePosftSelectPagoStpV {
 
-	static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+	static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 	
 	@Validation
 	public static ChecksResult validateIsPage(String nombrePago, String importeTotal, String codPais, WebDriver driver) {

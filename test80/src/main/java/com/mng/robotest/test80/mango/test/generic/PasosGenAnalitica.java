@@ -14,9 +14,9 @@ import com.mng.testmaker.annotations.validation.Validation;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.DatosStep;
-import com.mng.testmaker.utils.controlTest.DatosStep.SaveWhen;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.annotations.step.SaveWhen;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -26,7 +26,7 @@ import com.mng.robotest.test80.mango.test.getdata.json.gestorDatosHarJSON;
 
 
 public class PasosGenAnalitica {
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
     
     /**
      * Aplica las validaciones estándar a nivel de Analítica
@@ -50,19 +50,19 @@ public class PasosGenAnalitica {
     public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DataPedido dataPedido, EnumSet<Constantes.AnalyticsVal> analyticSet, WebDriver driver) 
     throws Exception {
     	DataFmwkTest dFTest = TestCaseData.getdFTest();
-    	DatosStep datosStep = TestCaseData.getDatosLastStep();
-        SaveWhen whenSaveNettraffic = datosStep.getSaveNettrafic();
+    	StepTestMaker StepTestMaker = TestCaseData.getDatosLastStep();
+        SaveWhen whenSaveNettraffic = StepTestMaker.getSaveNettrafic();
         if (whenSaveNettraffic == SaveWhen.Always &&
             driver.toString().toLowerCase().contains("firefox")) {
 
             //Instanciamos el gestor de los datos HAR
             gestorDatosHarJSON gestorHAR = null;
             try {
-                gestorHAR = new gestorDatosHarJSON(datosStep.getStepNumber(), dFTest.ctx, dFTest.meth);
+                gestorHAR = new gestorDatosHarJSON(StepTestMaker.getStepNumber(), dFTest.ctx, dFTest.meth);
             }
             catch (FileNotFoundException e) {
                 //Capturamos la excepción para que no se produzca error (las posteriores validaciones generarán un warning para este caso)
-                pLogger.warn(". Not located file HAR associated to method {}, step {}", dFTest.meth.getName(), Integer.valueOf(datosStep.getStepNumber()), e);
+                pLogger.warn(". Not located file HAR associated to method {}, step {}", dFTest.meth.getName(), Integer.valueOf(StepTestMaker.getStepNumber()), e);
             }
             
             if (gestorHAR!=null) {

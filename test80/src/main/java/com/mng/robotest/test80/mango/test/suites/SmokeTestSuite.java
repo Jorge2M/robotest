@@ -9,8 +9,6 @@ import java.util.List;
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.InputParams;
-import com.mng.testmaker.xmlprogram.SuiteMaker;
-import com.mng.testmaker.xmlprogram.TestRunMaker;
 import com.mng.robotest.test80.mango.test.appshop.Ayuda;
 import com.mng.robotest.test80.mango.test.appshop.Bolsa;
 import com.mng.robotest.test80.mango.test.appshop.Buscador;
@@ -29,13 +27,15 @@ import com.mng.robotest.test80.mango.test.appshop.Registro;
 import com.mng.robotest.test80.mango.test.appshop.SEO;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.factoryes.ListPagosEspana;
+import com.mng.testmaker.domain.SuiteMaker;
+import com.mng.testmaker.domain.TestRunMaker;
 
 public class SmokeTestSuite extends SuiteMaker {
 
     public SmokeTestSuite(InputParams inputParams) {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
-    	if (!isBrowserStack(inputParams.getTypeWebDriver())) {
+    	if (!isBrowserStack(inputParams.getWebDriverType())) {
 	    	TestRunMaker testRun = TestRunMaker.ofClasses(inputParams.getSuiteName(), getClasses());
 	    	addTestRun(testRun);
 	    	setParallelMode(ParallelMode.METHODS);

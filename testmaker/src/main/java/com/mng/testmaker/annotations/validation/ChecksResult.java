@@ -8,30 +8,30 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.SourceDataLine;
 
+import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.DatosStep;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 
 public class ChecksResult {
 	private final List<ResultValidation> listResultValidations;
 	private State stateValidation = State.Nok;
 	private boolean avoidEvidences;
-	private final DatosStep datosStep; //TODO Creo que se puede llegar eliminar
+	private final StepTestMaker datosStep; //TODO Creo que se puede llegar eliminar
     private String descripcionValidations;
 	
     public ChecksResult() {
-    	DatosStep datosStep = TestCaseData.getDatosLastStep();
+    	StepTestMaker datosStep = TestCaseData.getDatosLastStep();
     	listResultValidations = new ArrayList<>();
     	this.datosStep = datosStep;
     }
     
-	private ChecksResult(DatosStep datosStep) {
+	private ChecksResult(StepTestMaker datosStep) {
 		listResultValidations = new ArrayList<>();
 		this.datosStep = datosStep;
 	}
 	
-	public static ChecksResult getNew(DatosStep datosStep) {
+	public static ChecksResult getNew(StepTestMaker datosStep) {
 		return (new ChecksResult(datosStep));
 	}
 	
@@ -39,7 +39,7 @@ public class ChecksResult {
 		return (new ChecksResult());
 	}
 	
-	public static ChecksResult of(ResultValidation resultValidation, DatosStep datosStep) {
+	public static ChecksResult of(ResultValidation resultValidation, StepTestMaker datosStep) {
 		ChecksResult listValidations = new ChecksResult(datosStep);
 		listValidations.add(resultValidation);
 		return listValidations;
@@ -54,7 +54,7 @@ public class ChecksResult {
 		return (listResultValidations.get(index));
 	}
 	
-	public DatosStep getDatosStep() {
+	public StepTestMaker getDatosStep() {
 		return this.datosStep;
 	}
 	
@@ -208,7 +208,7 @@ public class ChecksResult {
     
     public void storeGroupValidations(String descripcionValidations) {
     	if ("".compareTo(descripcionValidations)!=0) {
-    		fmwkTest.grabStepValidation(datosStep, descripcionValidations, TestCaseData.getdFTest());
+    		FmwkTest.grabStepValidation(datosStep, descripcionValidations, TestCaseData.getdFTest());
     	}
     }
 }

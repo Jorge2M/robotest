@@ -9,11 +9,11 @@ import org.testng.IMethodInstance;
 import org.testng.IMethodInterceptor;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 
 
 public class PriorityInterceptor implements IMethodInterceptor {
-    static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 
     //Reorganizamos el orden de los métodos en base a la prioridad definida desde la factoría (parámetro del test)
     @Override

@@ -1,4 +1,4 @@
-package com.mng.testmaker.utils.webdriver.plugins.chrome;
+package com.mng.testmaker.service.webdriver.maker.plugins.chrome;
 
 import java.io.File;
 import java.io.InputStream;

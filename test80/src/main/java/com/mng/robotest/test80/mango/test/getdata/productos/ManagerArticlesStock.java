@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mng.testmaker.utils.ManageConnectionHTTP;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticlesStockFactory.SourceArticles;
@@ -17,7 +17,7 @@ import com.mng.robotest.test80.mango.test.getdata.productos.ArticlesStockFactory
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ManagerArticlesStock {
-	static Logger pLogger = LogManager.getLogger(fmwkTest.log4jLogger);
+	static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 	public enum TypeArticleStock {
 		articlesWithMoreOneColour, 
 		articlesWithTotalLook, 

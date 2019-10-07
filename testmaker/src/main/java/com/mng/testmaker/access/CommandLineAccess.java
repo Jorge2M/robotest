@@ -14,8 +14,9 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 
 public class CommandLineAccess {
 
@@ -119,7 +120,7 @@ public class CommandLineAccess {
     	inputParams.setApp(valueOf(appEnum.getEnumConstants(), cmdLine.getOptionValue(AppNameParam)));
     	inputParams.setVersionSuite(version);
     	inputParams.setUrlBase(cmdLine.getOptionValue(URLNameParam));
-    	inputParams.setTypeWebDriver(TypeWebDriver.valueOf(cmdLine.getOptionValue(BrowserNameParam)));
+    	inputParams.setWebDriverType(WebDriverType.valueOf(cmdLine.getOptionValue(BrowserNameParam)));
     	inputParams.setWebAppDNS(cmdLine.getOptionValue(ServerDNSNameParam));
 
     	String[] listGroups = cmdLine.getOptionValues(GroupsNameParam);
@@ -181,8 +182,8 @@ public class CommandLineAccess {
         OptionTMaker browser = OptionTMaker.builder(BrowserNameParam)
             .required(true)
             .hasArg()
-            .possibleValues(TypeWebDriver.class)
-            .desc("Browser to launch the Suite of Tests. Possible values: " + Arrays.asList(TypeWebDriver.values()))
+            .possibleValues(WebDriverType.class)
+            .desc("Browser to launch the Suite of Tests. Possible values: " + Arrays.asList(WebDriverType.values()))
             .build();
 
         OptionTMaker channel = OptionTMaker.builder(ChannelNameParam)

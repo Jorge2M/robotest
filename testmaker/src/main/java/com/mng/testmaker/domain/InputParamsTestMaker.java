@@ -1,10 +1,10 @@
-package com.mng.testmaker.access;
+package com.mng.testmaker.domain;
 
 import java.util.List;
 
+import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.testmaker.utils.filter.DataFilterTCases;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.utils.webdriver.maker.FactoryWebdriverMaker.TypeWebDriver;
 
 public class InputParamsTestMaker {
 	
@@ -14,7 +14,7 @@ public class InputParamsTestMaker {
 	private Enum<?> suite;
 	private Enum<?> app;
     private String versionSuite;
-    private TypeWebDriver typeWebDriver;
+    private WebDriverType webDriverType;
     private String urlBase;
     
     private ManagementWebdriver typeManageWebdriver = ManagementWebdriver.discard;
@@ -27,13 +27,13 @@ public class InputParamsTestMaker {
     
     public InputParamsTestMaker() {}
     
-    public InputParamsTestMaker(Channel channel, Enum<?> suite, Enum<?> app, String urlBase, TypeWebDriver typeWebDriver) {
+    public InputParamsTestMaker(Channel channel, Enum<?> suite, Enum<?> app, String urlBase, WebDriverType webDriverType) {
     	this.channel = channel;
     	this.suite = suite;
     	this.app = app;
     	this.versionSuite = "V1";
     	this.urlBase = urlBase;
-    	this.typeWebDriver = typeWebDriver;
+    	this.webDriverType = webDriverType;
     }
 
     public String getMoreInfo() {
@@ -80,12 +80,12 @@ public class InputParamsTestMaker {
 		this.versionSuite = versionSuite;
 	}
 	
-	public TypeWebDriver getTypeWebDriver() {
-		return typeWebDriver;
+	public WebDriverType getWebDriverType() {
+		return webDriverType;
 	}
 	
-	public void setTypeWebDriver(TypeWebDriver typeWebDriver) {
-		this.typeWebDriver = typeWebDriver;
+	public void setWebDriverType(WebDriverType webDriverType) {
+		this.webDriverType = webDriverType;
 	}
 	
 	public ManagementWebdriver getTypeManageWebdriver() {
@@ -97,7 +97,7 @@ public class InputParamsTestMaker {
 	}
 	
 	public void setBrowser(String browser) {
-		setTypeWebDriver(TypeWebDriver.valueOf(browser));
+		setWebDriverType(WebDriverType.valueOf(browser));
 	}
 	
 	public String getUrlBase() {

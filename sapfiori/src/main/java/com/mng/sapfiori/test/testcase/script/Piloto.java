@@ -7,7 +7,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
+import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.controlTest.mango.GestorWebDriver;
@@ -27,7 +27,7 @@ public class Piloto extends GestorWebDriver {
         
         //TODO refactorizar TestMaker para que no sea necesaria esta llamada
 		TestCaseData.getAndStoreDataFmwk(
-			inputDataTMaker.getTypeWebDriver(), 
+			inputDataTMaker.getWebDriverType(), 
 			inputDataTMaker.getUrlBase(),
 			"", 
 			inputDataTMaker.getChannel(), 

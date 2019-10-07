@@ -7,8 +7,8 @@ import com.mng.testmaker.annotations.step.Step;
 import com.mng.testmaker.annotations.step.StepAspect;
 import com.mng.testmaker.annotations.validation.ChecksResult;
 import com.mng.testmaker.annotations.validation.Validation;
-import com.mng.testmaker.utils.controlTest.DatosStep;
-import com.mng.testmaker.utils.controlTest.DatosStep.SaveWhen;
+import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.annotations.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorEstadisticasPedido;
 
 public class PageGestorEstadisticasPedidoStpV {

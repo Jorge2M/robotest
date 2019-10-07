@@ -11,13 +11,13 @@ import java.util.Vector;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 
-import com.mng.testmaker.data.TestMakerContext;
+import com.mng.testmaker.domain.SuiteContextTestMaker;
 import com.mng.testmaker.jdbc.Connector;
 import com.mng.testmaker.jdbc.to.ResultMethod;
 import com.mng.testmaker.jdbc.to.ResultTestRun;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.utils;
-import com.mng.testmaker.utils.controlTest.fmwkTest;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.controlTest.indexSuite;
 
 
@@ -82,13 +82,13 @@ public class MethodsDAO {
     
     public static void inserMethod(ResultMethod resultMethod, ITestResult tr) {
         ITestContext context = tr.getTestContext();
-    	TestMakerContext testMakerCtx = TestMakerContext.getTestMakerContext(context);
+    	SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
         try (Connection conn = Connector.getConnection();
             PreparedStatement insert = conn.prepareStatement (SQLInsertMethod )) {
             insert.setString(1, testMakerCtx.getIdSuiteExecution());
             insert.setString(2, testMakerCtx.getInputData().getSuiteName());
             insert.setString(3, context.getName());
-            insert.setString(4, fmwkTest.getMethodWithFactory(tr.getMethod().getMethod(), context));
+            insert.setString(4, FmwkTest.getMethodWithFactory(tr.getMethod().getMethod(), context));
             insert.setString(5, tr.getMethod().getDescription());
             insert.setInt(6, utils.getEstadoMethod(resultMethod.maxResultadoStep.getIdNumerid(), tr.getStatus()).getIdNumerid());
             insert.setInt(7, tr.getStatus());

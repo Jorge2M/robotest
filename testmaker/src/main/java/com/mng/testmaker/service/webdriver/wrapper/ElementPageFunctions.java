@@ -1,4 +1,4 @@
-package com.mng.testmaker.webdriverwrapper;
+package com.mng.testmaker.service.webdriver.wrapper;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -6,8 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp.OptionSelect;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp.OptionSelect;
 
 public class ElementPageFunctions {
 

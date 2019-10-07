@@ -2,7 +2,7 @@ package com.mng.robotest.test80;
 
 import java.util.Arrays;
 
-import com.mng.testmaker.access.InputParamsTestMaker;
+import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.utils.otras.TypeAccessFmwk;
 
 public class InputParams extends InputParamsTestMaker {
