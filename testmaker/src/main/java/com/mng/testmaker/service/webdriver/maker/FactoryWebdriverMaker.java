@@ -18,7 +18,7 @@ public class FactoryWebdriverMaker {
     		this.headless = headless;
     	}
     	
-    	public boolean isHeadless() {
+    	public boolean isHeadless() { 
     		return headless;
     	}
     }	
