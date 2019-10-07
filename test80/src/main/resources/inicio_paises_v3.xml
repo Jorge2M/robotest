@@ -3289,9 +3289,11 @@
 <linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <!-- Mercadopago x Débito -->
+<!-- 
 <pago 
 	type="Mercadopago" shop="s" outlet="s" 
 	nombre="mercadopago_debit" testpasarela='s' testpago='s' numtarj="4189141221267633" mescad="12" anycad="20" useremail='test_user_722183@testuser.com' passwordemail='qatest4406' usrcaptcha="Genjuro" passcaptcha="sirgenjuro">&TPV-222;</pago>
+-->
 <pago 
 	type="TRJintegrada" shop="s" outlet="s" 
 	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="10" anycad="2020" cvc="737">&TPV-561;</pago>
@@ -3308,9 +3310,11 @@
 	type="Paypal" shop="s" outlet="s" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-610;</pago>
 <!-- Mercadopago x Transferencia -->
+<!-- 
 <pago 
 	type="Mercadopago" shop="s" outlet="s" 
 	nombre="mercadopago_transferencia" testpasarela='n' testpago='n'>&TPV-222;</pago>
+-->
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
