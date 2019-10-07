@@ -50,7 +50,7 @@ public class Bolsa extends GestorWebDriver {
     @BeforeMethod (groups={"Bolsa", "Canal:desktop_App:all"})
     public void login(ITestContext context, Method method) 
     throws Exception {
-        InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(context);
+        InputParamsTestMaker inputData = TestCaseData.getInputDataTestMaker(context); 
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputData.getApp());
         dCtxSh.setChannel(inputData.getChannel());
