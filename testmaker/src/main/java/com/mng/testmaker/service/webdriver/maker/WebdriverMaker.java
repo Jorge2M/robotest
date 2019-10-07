@@ -1,4 +1,4 @@
-package com.mng.testmaker.utils.webdriver.maker;
+package com.mng.testmaker.service.webdriver.maker;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;

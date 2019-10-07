@@ -1,4 +1,4 @@
-package com.mng.testmaker.utils.webdriver.maker;
+package com.mng.testmaker.service.webdriver.maker;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
