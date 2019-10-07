@@ -15,8 +15,8 @@ public class ListSuites {
 		listSuites.remove(suite);
 	}
 	
-	SuiteTestMaker getSuite(String idSuite) {
-		listSuites.get(1).
-	}
+//	SuiteTestMaker getSuite(String idSuite) {
+//		listSuites.get(1).
+//	}
 	
 }
