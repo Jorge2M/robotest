@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.testng.ITestContext;
+import org.testng.SkipException;
 import org.testng.TestNG;
 import org.testng.xml.XmlSuite;
 
@@ -16,6 +18,7 @@ import com.mng.testmaker.domain.TestRunTestMaker;
 import com.mng.testmaker.jdbc.Connector;
 import com.mng.testmaker.listeners.utils.ResourcesExtractor;
 import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.controlTest.SuiteContextTestMaker;
 
 public class TestMaker {
 
@@ -36,6 +39,12 @@ public class TestMaker {
 	public static SuiteTestMaker getSuite(String idExecution) {
 		return SuitesExecuted.getSuite(idExecution);
 	}
+	
+    public static void skipTestsIfSuiteStopped(SuiteTestMaker suite) {
+        if (suite.getState()==StateRun.Stopping) {
+            throw new SkipException("Received Signal for stop TestSuite" + suite.getName());
+        }
+    }
 	
     private static void runInTestMaker(SuiteTestMaker suite) {
         File path = new File(suite.getDirectory());
@@ -63,6 +72,8 @@ public class TestMaker {
 	            Connector.getSQLitePathDirectory());
         }
     }
+    
+    
     
 
 }

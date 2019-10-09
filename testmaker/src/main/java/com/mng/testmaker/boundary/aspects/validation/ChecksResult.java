@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.domain.SuiteTestMaker;
+import com.mng.testmaker.domain.TestCaseTestMaker;
+import com.mng.testmaker.domain.TestRunTestMaker;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.controlTest.FmwkTest;
 
@@ -12,22 +15,30 @@ public class ChecksResult {
 	private final List<ResultValidation> listResultValidations;
 	private State stateValidation = State.Nok;
 	private boolean avoidEvidences;
-	private final StepTestMaker datosStep; //TODO Creo que se puede llegar eliminar
+	private final SuiteTestMaker suiteParent;
+	private final TestRunTestMaker testRunParent;
+	private final TestCaseTestMaker testCaseParent;
+	private final StepTestMaker stepParent; 
     private String descripcionValidations;
 	
     public ChecksResult() {
-    	StepTestMaker datosStep = TestCaseData.getDatosLastStep();
-    	listResultValidations = new ArrayList<>();
-    	this.datosStep = datosStep;
+    	this.listResultValidations = new ArrayList<>();
+    	this.testCaseParent = TestCaseTestMaker.getTestCaseInThread();
+    	this.stepParent = testCaseParent.getLastStepFinished();
+    	this.testRunParent = testCaseParent.getTestRunParent();
+    	this.suiteParent = testCaseParent.getSuiteParent();
     }
     
-	private ChecksResult(StepTestMaker datosStep) {
+	private ChecksResult(StepTestMaker stepParent) {
 		listResultValidations = new ArrayList<>();
-		this.datosStep = datosStep;
+		this.stepParent = stepParent;
+		this.testCaseParent = stepParent.getTestCaseParent();
+		this.testRunParent = stepParent.getTestRunParent();
+		this.suiteParent = stepParent.getSuiteParent();
 	}
 	
-	public static ChecksResult getNew(StepTestMaker datosStep) {
-		return (new ChecksResult(datosStep));
+	public static ChecksResult getNew(StepTestMaker stepParent) {
+		return (new ChecksResult(stepParent));
 	}
 	
 	public static ChecksResult getNew() {
@@ -40,6 +51,18 @@ public class ChecksResult {
 		return listValidations;
 	}
 
+	public SuiteTestMaker getSuiteParent() {
+		return this.suiteParent;
+	}
+	public TestRunTestMaker getTestRunParent() {
+		return this.testRunParent;
+	}
+	public TestCaseTestMaker getTestCaseParent() {
+		return this.testCaseParent;
+	}
+	public StepTestMaker getStepParent() {
+		return this.stepParent;
+	}
 	
 	public int size() {
 		return listResultValidations.size();
@@ -47,10 +70,6 @@ public class ChecksResult {
 	
 	public ResultValidation get(int index) {
 		return (listResultValidations.get(index));
-	}
-	
-	public StepTestMaker getDatosStep() {
-		return this.datosStep;
 	}
 	
     public boolean isAvoidEvidences() {
@@ -82,7 +101,9 @@ public class ChecksResult {
 	
     public void checkAndStoreValidations() {
     	checkValidations();
-    	storeGroupValidations(descripcionValidations);
+    	if ("".compareTo(descripcionValidations)!=0) {
+    		FmwkTest.grabStepValidation(stepParent, descripcionValidations, TestCaseData.getdFTest());
+    	}
     }
     
     public State calculateStateValidation() {
@@ -138,16 +159,15 @@ public class ChecksResult {
     }
     
     private void setDatosStepAfterCheckValidation() {
-    	datosStep.setResultLastValidation(stateValidation);
-    	datosStep.setAvoidEvidences(avoidEvidences);
-    	if (stateValidation.isMoreCriticThan(datosStep.getResultSteps()) || !datosStep.isStateUpdated()) {
-    		datosStep.setResultSteps(stateValidation);
+    	stepParent.setAvoidEvidences(avoidEvidences);
+    	if (stateValidation.isMoreCriticThan(stepParent.getResultSteps()) || !stepParent.isStateUpdated()) {
+    		stepParent.setResultSteps(stateValidation);
     	}
-    	datosStep.setListResultValidations(this);
+    	stepParent.setListResultValidations(this);
     }
     
     private boolean isStepFinishedWithException() {
-    	return (datosStep.getHoraFin()!=null && datosStep.getExcepExists());
+    	return (stepParent.getHoraFin()!=null && stepParent.getExcepExists());
     }
     
     /**

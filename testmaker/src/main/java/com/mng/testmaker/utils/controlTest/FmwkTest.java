@@ -30,12 +30,14 @@ import org.testng.SkipException;
 import org.testng.xml.XmlSuite;
 
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
+import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.data.ConstantesTestMaker;
 import com.mng.testmaker.domain.StateRun;
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.jdbc.dao.StepsDAO;
 import com.mng.testmaker.jdbc.dao.SuitesDAO;
 import com.mng.testmaker.jdbc.dao.ValidationsDAO;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.NetTrafficMng;
 import com.mng.testmaker.utils.State;
@@ -89,104 +91,69 @@ public class FmwkTest {
             
             System.out.println("ROBOTEST2: LAZY REPORT STEP REDIRECT");
         }
-        sendSkipTestExceptionIfSuiteStopping(dFTest.ctx);                
+        skipTestsIfSuiteStopped(dFTest.ctx);                
         StepsDAO.grabStep(datosStep, dFTest.meth, dFTest.ctx);
         storeFileEvidencesIfNeeded(datosStep, TypeStore.step, dFTest);
     }
 
-    /**
-     * Realiza la grabación de una validación
-     */
-    //TODO refactor
     @SuppressWarnings({ "unchecked"})
-    public static void grabStepValidation(StepTestMaker datosStep, String descripValidac, DataFmwkTest dFTest) {
-    	if (dFTest==null || dFTest.ctx==null || dFTest.meth==null) {
-    		return;
-    	}
+    public static void grabStepValidations(ChecksResult validations, String descripValidac) {
+    	TestMaker.skipTestsIfSuiteStopped();
     	
-        if ("ROBOTEST2".equals(System.getProperty("ROBOTEST2"))) {
-            Map<StepTestMaker, List<String>> stepMap = (Map<StepTestMaker, List<String>>) dFTest.ctx.getSuite()
-                    .getAttribute("ROBOTEST2_STEP_VALIDATIONS");
-            Map<StepTestMaker, List<State>> stepMapStatus = (Map<StepTestMaker, List<State>>) dFTest.ctx.getSuite()
-                    .getAttribute("ROBOTEST2_VALIDATION_STATUS_LIST");              
-            Map<StepTestMaker, List<byte[]>> screnshootsMap = (Map<StepTestMaker, List<byte[]>>) dFTest.ctx.getSuite()
-                    .getAttribute("ROBOTEST2_SCRENSHOT_LIST");
-            Map<StepTestMaker, List<byte[]>> htmlsourcesMap = (Map<StepTestMaker, List<byte[]>>) dFTest.ctx.getSuite()
-                    .getAttribute("ROBOTEST2_SOURCES_LIST");     
-            if (!stepMap.containsKey(datosStep)) {
-                stepMap.put(datosStep, new ArrayList<String>());
-                stepMapStatus.put(datosStep, new ArrayList<State>());
-                screnshootsMap.put(datosStep, new ArrayList<byte[]>());
-                htmlsourcesMap.put(datosStep, new ArrayList<byte[]>());
-            }            
+        if (!stepMap.containsKey(datosStep)) {
+            stepMap.put(datosStep, new ArrayList<String>());
+            stepMapStatus.put(datosStep, new ArrayList<State>());
+            screnshootsMap.put(datosStep, new ArrayList<byte[]>());
+            htmlsourcesMap.put(datosStep, new ArrayList<byte[]>());
+        }            
 
-            if (datosStep.getExcepExists()) {
-                datosStep.setResultSteps(State.Nok);
-                stepMapStatus.get(datosStep).add(State.Nok);
-            } else {
-                stepMapStatus.get(datosStep).add(datosStep.getResultSteps());
+        if (datosStep.getExcepExists()) {
+            datosStep.setResultSteps(State.Nok);
+            stepMapStatus.get(datosStep).add(State.Nok);
+        } else {
+            stepMapStatus.get(datosStep).add(datosStep.getResultSteps());
+        }
+        if (!datosStep.isAvoidEvidences()) {
+            boolean browserGUI = true;
+            int grabImg = 0;
+            if (dFTest.ctx.getAttribute("grabImg") != null) {
+                grabImg = ((Integer)dFTest.ctx.getAttribute("grabImg")).intValue();
             }
-            System.out.println("ROBOTEST2: LAZY REPORT VALIDATION REDIRECT");
-            if (!datosStep.isAvoidEvidences()) {
-                boolean browserGUI = true;
-                int grabImg = 0;
-                if (dFTest.ctx.getAttribute("grabImg") != null) {
-                    grabImg = ((Integer)dFTest.ctx.getAttribute("grabImg")).intValue();
+            if (dFTest.ctx.getAttribute("browserGUI") != null) {
+                browserGUI = ((Boolean)dFTest.ctx.getAttribute("browserGUI")).booleanValue();
+            }
+
+            if ((datosStep.getSaveImagePage()==SaveWhen.Always || 
+                 grabImg == 1 || /* Está activada la grabación de imagen a nivel general o */
+                 datosStep.getResultSteps()!=State.Ok) &&
+                 datosStep.getTypePage() == 0/*HTML*/&&
+                 browserGUI) {
+                try {
+                    //Capture hardcopy
+                    WebDriver captureDriver = dFTest.driver;
+                    if (captureDriver instanceof RemoteWebDriver) {
+                        captureDriver = new Augmenter().augment(captureDriver);
+                    }
+                    byte[] screenshot = ((TakesScreenshot)captureDriver).getScreenshotAs(OutputType.BYTES);
+                    screnshootsMap.get(datosStep).add(screenshot);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                if (dFTest.ctx.getAttribute("browserGUI") != null) {
-                    browserGUI = ((Boolean)dFTest.ctx.getAttribute("browserGUI")).booleanValue();
-                }
-    
-                if ((datosStep.getSaveImagePage()==SaveWhen.Always || 
-                     grabImg == 1 || /* Está activada la grabación de imagen a nivel general o */
-                     datosStep.getResultSteps()!=State.Ok) &&
-                     datosStep.getTypePage() == 0/*HTML*/&&
-                     browserGUI) {
+                if (datosStep.getSaveHtmlPage()==SaveWhen.Always && datosStep.getTypePage() == 0/* HTML */) {
                     try {
-                        //Capture hardcopy
-                        WebDriver captureDriver = dFTest.driver;
-                        if (captureDriver instanceof RemoteWebDriver) {
-                            captureDriver = new Augmenter().augment(captureDriver);
-                        }
-                        byte[] screenshot = ((TakesScreenshot)captureDriver).getScreenshotAs(OutputType.BYTES);
-                        screnshootsMap.get(datosStep).add(screenshot);
-                        System.out.println("ROBOTEST2: LAZY REPORT SCREENSHOT REDIRECT");  
-                        System.out.println("ROBOTEST2: LAZY REPORT ERROR.FACES REDIRECT");
+                        //Capture sources
+                        htmlsourcesMap.get(datosStep).add(dFTest.driver.getPageSource().getBytes());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    if (datosStep.getSaveHtmlPage()==SaveWhen.Always && datosStep.getTypePage() == 0/* HTML */) {
-                        try {
-                            //Capture sources
-                            htmlsourcesMap.get(datosStep).add(dFTest.driver.getPageSource().getBytes());
-                            System.out.println("ROBOTEST2: LAZY REPORT HTML.SRC REDIRECT");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }    
-                    
-                }
+                }    
+                
             }
-            return;
         }
-        sendSkipTestExceptionIfSuiteStopping(dFTest.ctx);
-        ValidationsDAO.insertValidationInStep(descripValidac, datosStep, dFTest.meth, dFTest.ctx);
+        skipTestsIfSuiteStopped(dFTest.ctx);
         if (!datosStep.isAvoidEvidences()) {
             storeFileEvidencesIfNeeded(datosStep, TypeStore.validation, dFTest);
         }
-    }
-
-    /**
-     * Si se ha marcado la Suite como STOPPED en BD skipeamos el Test
-     */
-    public static void sendSkipTestExceptionIfSuiteStopping(ITestContext context) {
-    	if (context!=null) {
-    		SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
-	        StateRun stateSuite = SuitesDAO.getStateSuite(testMakerCtx.getIdSuiteExecution());
-	        if (stateSuite==StateRun.Stopping) {
-	            throw new SkipException("Received Signal for stop TestSuite");
-	        }
-    	}
     }
 
     private static void storeFileEvidencesIfNeeded(StepTestMaker datosStep, TypeStore typeStore, DataFmwkTest dFTest) {

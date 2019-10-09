@@ -21,7 +21,9 @@ public class ValidationAspect {
     public void atExecution(){}
     
     @Before("annotationValidationPointcut()")
-    public void before(JoinPoint joinPoint) {}
+    public void before(JoinPoint joinPoint) {
+    	skipTestsIfSuiteStopped(dFTest.ctx);
+    }
     
     @AfterThrowing(
     	pointcut="annotationValidationPointcut() && atExecution()", 
@@ -32,7 +34,7 @@ public class ValidationAspect {
     	InfoValidation infoValidation = InfoValidation.from(joinPoint);
     	ChecksResult listResultValidations = infoValidation.getListResultValidation();
     	step.setListResultValidations(listResultValidations);
-    	listResultValidations.getDatosStep().setNOKstateByDefault();
+    	listResultValidations.getStepParent().setNOKstateByDefault();
     	listResultValidations.checkAndStoreValidations();
     }
     
@@ -40,12 +42,11 @@ public class ValidationAspect {
     	pointcut="annotationValidationPointcut() && atExecution()", 
     	returning="resultMethod")
     public void grabValidationAfter(JoinPoint joinPoint, Object resultMethod) throws Throwable {
-    	getDataFromReturning(joinPoint, resultMethod);
-    	listResultValidations.checkAndStoreValidations();
-    }
-    
-    private void getDataFromReturning(JoinPoint joinPoint, Object resultMethod) {
+    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInThread();
+    	StepTestMaker step = testCase.getLastStepFinished();
     	InfoValidation infoValidation = InfoValidation.from(joinPoint, resultMethod);
-    	listResultValidations = infoValidation.getListResultValidation();
+    	ChecksResult listResultValidations = infoValidation.getListResultValidation();
+    	step.setListResultValidations(listResultValidations);
+    	listResultValidations.checkAndStoreValidations();
     }
 }

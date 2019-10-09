@@ -13,6 +13,10 @@ import com.mng.testmaker.utils.State;
 
 public class StepTestMaker {
 	
+	private final SuiteTestMaker suiteParent;
+	private final TestRunTestMaker testRunParent;
+	private final TestCaseTestMaker testCaseParent;
+
 	private ChecksResult listResultValidations;
 			
 	private StateRun state = StateRun.Started;
@@ -31,6 +35,22 @@ public class StepTestMaker {
 	private boolean excep_exists = true;
 	private String nameMethodWithFactory = "";
     
+	public StepTestMaker() {
+		testCaseParent = TestCaseTestMaker.getTestCaseInThread();
+		testRunParent = testCaseParent.getTestRunParent();
+		suiteParent = testRunParent.getSuiteParent();
+	}
+	
+	public SuiteTestMaker getSuiteParent() {
+		return suiteParent;
+	}
+	public TestRunTestMaker getTestRunParent() {
+		return testRunParent;
+	}
+	public TestCaseTestMaker getTestCaseParent() {
+		return testCaseParent;
+	}
+	
     public void setState(StateRun state) {
     	this.state = state;
     }
