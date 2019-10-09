@@ -13,8 +13,8 @@ package org.pruebasws;
 import org.pruebasws.thread.TSuiteThreadsManager;
 import org.testng.TestNG;
 
+import com.mng.testmaker.domain.StateRun;
 import com.mng.testmaker.jdbc.dao.SuitesDAO;
-import com.mng.testmaker.utils.StateSuite;
 
 /**
  * @param args
@@ -40,17 +40,17 @@ public class Launch {
     
     public static boolean stopTSuiteViaMarkInTableSuite(String idExecSuite) throws Exception {
         int timeoutSeconds = 40;
-        SuitesDAO.updateStateSuite(StateSuite.STOPPING, idExecSuite);
-        StateSuite stateSuiteNew = StateSuite.STOPPING;
+        SuitesDAO.updateStateSuite(StateRun.Stopping, idExecSuite);
+        StateRun stateSuiteNew = StateRun.Stopping;
         int i=0;
         do {
             Thread.sleep(3000);
             i+=3;
             stateSuiteNew = SuitesDAO.getStateSuite(idExecSuite);
         }
-        while(stateSuiteNew==StateSuite.STOPPING && i<timeoutSeconds);
+        while(stateSuiteNew==StateRun.Stopping && i<timeoutSeconds);
         
-        return (stateSuiteNew!=StateSuite.STOPPING); 
+        return (stateSuiteNew!=StateRun.Stopping); 
     }
     
     public static void stopTSuiteViaKillThread(String idThreadGroupTestSuite) throws Exception {

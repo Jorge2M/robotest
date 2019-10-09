@@ -11,13 +11,13 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
 import com.mng.robotest.test80.InputParams;
-import com.mng.testmaker.annotations.step.Step;
+import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.utils.controlTest.FmwkTest;
-import com.mng.testmaker.annotations.step.SaveWhen;
+import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.utils.otras.TypeAccessFmwk;
 import com.mng.testmaker.utils.otras.Channel;

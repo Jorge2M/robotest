@@ -38,7 +38,7 @@ class EdgedriverMaker implements WebdriverMaker {
     }
 
     @Override
-	public WebDriver build() throws Exception {
+	public WebDriver build() {
     	return (new EdgeDriver(options));
 	}
     

@@ -1,26 +1,39 @@
 package com.mng.testmaker.service.webdriver.maker.plugins.chrome;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.mng.testmaker.utils.controlTest.FmwkTest;
+
 
 public abstract class PluginChrome { 
+	
+	static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+	
     public String folderInResources = "pluginsBrowser"; 
     public static enum typePluginChrome { HTML5Autoplay }
     
-    public void addPluginToChrome(ChromeOptions options, String fileNamePlugin) throws Exception {
-        try (InputStream inputStream = getClass().getResourceAsStream("/" + this.folderInResources + "/" + fileNamePlugin)) {
+    public void addPluginToChrome(ChromeOptions options, String fileNamePlugin) {
+    	String pathPlugin = "/" + this.folderInResources + "/" + fileNamePlugin;
+        try (InputStream inputStream = getClass().getResourceAsStream(pathPlugin)) {
             File tmpFile = File.createTempFile("pluginChrome", "temp.crx");
             tmpFile.deleteOnExit();
             FileUtils.copyInputStreamToFile(inputStream, tmpFile);
             options.addExtensions(tmpFile);
+        }
+        catch (IOException e) {
+        	pLogger.warn("Problem creating chrome plugin with path " + pathPlugin , e);
+
         }
     }
     
@@ -53,5 +66,5 @@ public abstract class PluginChrome {
         //driver.switchTo().window(windowHandle);
     }
     
-    public abstract void addPluginToChrome(ChromeOptions options) throws Exception;
+    public abstract void addPluginToChrome(ChromeOptions options);
 }

@@ -1,9 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard;
 
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.annotations.step.Step;
-import com.mng.testmaker.annotations.validation.ChecksResult;
-import com.mng.testmaker.annotations.validation.Validation;
+import com.mng.testmaker.boundary.aspects.step.Step;
+import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;

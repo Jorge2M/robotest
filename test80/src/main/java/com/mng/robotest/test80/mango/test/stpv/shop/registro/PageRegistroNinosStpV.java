@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.registro;
 
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.annotations.step.Step;
-import com.mng.testmaker.annotations.validation.ChecksResult;
-import com.mng.testmaker.annotations.validation.Validation;
+import com.mng.testmaker.boundary.aspects.step.Step;
+import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataNinos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroNinos;

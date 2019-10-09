@@ -17,7 +17,7 @@ public interface WebdriverMaker {
 
 	abstract public WebdriverMaker setChannel(Channel channel);
 	abstract public WebdriverMaker setNettraffic(boolean nettraffic);
-	abstract public WebDriver build() throws Exception;
+	abstract public WebDriver build();
 	
 	default Proxy getProxyForNettraffic() {
 		new NetTrafficMng();

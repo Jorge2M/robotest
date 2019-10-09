@@ -5,10 +5,10 @@ import java.util.HashMap;
 
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.annotations.step.Step;
-import com.mng.testmaker.annotations.validation.ChecksResult;
-import com.mng.testmaker.annotations.validation.Validation;
-import com.mng.testmaker.annotations.step.SaveWhen;
+import com.mng.testmaker.boundary.aspects.step.Step;
+import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;

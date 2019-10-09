@@ -1,9 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.manto.pedido;
 
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.annotations.step.SaveWhen;
-import com.mng.testmaker.annotations.step.Step;
-import com.mng.testmaker.annotations.validation.Validation;
+import com.mng.testmaker.boundary.aspects.step.SaveWhen;
+import com.mng.testmaker.boundary.aspects.step.Step;
+import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageGenerarPedido;
 import com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageGenerarPedido.EstadoPedido;

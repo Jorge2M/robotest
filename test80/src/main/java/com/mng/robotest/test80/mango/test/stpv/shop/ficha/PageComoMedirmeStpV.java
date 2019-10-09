@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.annotations.validation.Validation;
+import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageComoMedirme;

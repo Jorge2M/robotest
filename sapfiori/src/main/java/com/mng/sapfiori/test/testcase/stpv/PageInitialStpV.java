@@ -2,7 +2,7 @@ package com.mng.sapfiori.test.testcase.stpv;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.annotations.validation.Validation;
+import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.utils.State;
 import com.mng.sapfiori.test.testcase.pageobject.PageInitial;
 

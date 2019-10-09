@@ -1,4 +1,4 @@
-package com.mng.testmaker.annotations.step;
+package com.mng.testmaker.boundary.aspects.step;
 
 public enum SaveWhen {
 	Always, 

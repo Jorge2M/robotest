@@ -1,4 +1,4 @@
-package com.mng.testmaker.listeners;
+package com.mng.testmaker.boundary.listeners;
 
 import org.testng.*;
 import org.testng.annotations.*;

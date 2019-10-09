@@ -29,17 +29,16 @@ import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.xml.XmlSuite;
 
-import com.mng.testmaker.annotations.step.SaveWhen;
+import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.data.ConstantesTestMaker;
+import com.mng.testmaker.domain.StateRun;
 import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.domain.SuiteContextTestMaker;
 import com.mng.testmaker.jdbc.dao.StepsDAO;
 import com.mng.testmaker.jdbc.dao.SuitesDAO;
 import com.mng.testmaker.jdbc.dao.ValidationsDAO;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.NetTrafficMng;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.StateSuite;
 import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.utils;
 import com.mng.testmaker.utils.otras.WebDriverArqUtils;
@@ -183,8 +182,8 @@ public class FmwkTest {
     public static void sendSkipTestExceptionIfSuiteStopping(ITestContext context) {
     	if (context!=null) {
     		SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
-	        StateSuite stateSuite = SuitesDAO.getStateSuite(testMakerCtx.getIdSuiteExecution());
-	        if (stateSuite==StateSuite.STOPPING) {
+	        StateRun stateSuite = SuitesDAO.getStateSuite(testMakerCtx.getIdSuiteExecution());
+	        if (stateSuite==StateRun.Stopping) {
 	            throw new SkipException("Received Signal for stop TestSuite");
 	        }
     	}

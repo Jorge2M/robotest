@@ -2,8 +2,8 @@ package com.mng.sapfiori.test.testcase.stpv;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.annotations.step.Step;
 import com.mng.sapfiori.test.testcase.pageobject.PageLogin;
+import com.mng.testmaker.boundary.aspects.step.Step;
 
 public class PageLoginStpV {
 

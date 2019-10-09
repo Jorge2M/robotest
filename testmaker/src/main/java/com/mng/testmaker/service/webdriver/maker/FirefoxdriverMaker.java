@@ -49,7 +49,7 @@ class FirefoxdriverMaker implements WebdriverMaker {
     }
 
     @Override
-	public WebDriver build() throws Exception {
+	public WebDriver build() {
     	preBuildConfig();
     	FirefoxDriver driver = new FirefoxDriver(options);
     	resizeBrowserIfNeeded(driver);
@@ -92,7 +92,7 @@ class FirefoxdriverMaker implements WebdriverMaker {
         options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
 	}
 	
-    private void preBuildConfig() throws Exception {
+    private void preBuildConfig() {
     	if (channel==Channel.movil_web) {
     		configMobilSimulator();
     	}

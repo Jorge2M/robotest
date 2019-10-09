@@ -4,7 +4,8 @@ import java.util.Arrays;
 
 import com.mng.testmaker.access.CommandLineAccess;
 import com.mng.testmaker.domain.InputParamsTestMaker;
-import com.mng.testmaker.domain.SuiteMaker;
+import com.mng.testmaker.domain.SuiteTestMaker;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.sapfiori.datatmaker.Apps;
 import com.mng.sapfiori.datatmaker.Suites;
 import com.mng.sapfiori.test.suite.SmokeTestSuite;
@@ -19,15 +20,15 @@ public class TestSapFiori {
     }
     
     private static void execTestSuite(InputParamsTestMaker inputParams) throws Exception {
-    	SuiteMaker suite = makeSuite(inputParams);
-    	suite.run();
+    	SuiteTestMaker suite = makeSuite(inputParams);
+    	TestMaker.run(suite);
     }
     
-    private static SuiteMaker makeSuite(InputParamsTestMaker inputParams) throws Exception {
+    private static SuiteTestMaker makeSuite(InputParamsTestMaker inputParams) throws Exception {
         try {
             switch ((Suites)inputParams.getSuite()) {
             case SmokeTest:
-                return (new SmokeTestSuite(inputParams));
+                return (new SmokeTestSuite(inputParams)).getSuite();
             case OtherSuite:  
             default:
             }

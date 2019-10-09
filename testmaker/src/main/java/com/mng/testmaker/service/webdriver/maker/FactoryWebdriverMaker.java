@@ -1,6 +1,6 @@
 package com.mng.testmaker.service.webdriver.maker;
 
-import org.testng.ITestContext;
+import com.mng.testmaker.domain.TestRunTestMaker;
 
 public class FactoryWebdriverMaker {
 
@@ -23,12 +23,12 @@ public class FactoryWebdriverMaker {
     	}
     }	
 
-    public static WebdriverMaker make(WebDriverType webDriverType, ITestContext context) {
+    public static WebdriverMaker make(WebDriverType webDriverType, TestRunTestMaker testRun) {
     	switch (webDriverType) {
     	case firefox:
     		return (FirefoxdriverMaker.getNew(webDriverType));
     	case browserstack:
-    		return (BrowserStackDriverMaker.getNew(context));
+    		return (BrowserStackDriverMaker.getNew(testRun));
     	case edge:
     		return (EdgedriverMaker.getNew());
     	case chrome:

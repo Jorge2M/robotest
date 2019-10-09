@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.votf;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.annotations.step.Step;
+import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;

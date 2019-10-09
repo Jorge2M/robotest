@@ -1,6 +1,5 @@
 package com.mng.testmaker.listeners.utils;
 
-import java.io.File;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;

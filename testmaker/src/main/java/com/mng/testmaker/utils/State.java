@@ -4,26 +4,20 @@ public enum State  {
     Undefined(LevelState.Reservado, 0, "black"),
     Ok(LevelState.OK, 1, "green"),
     Info(LevelState.INFO, 2, "blue"), 
-    //Info_NoHardcopy(LevelState.INFO, 3, "blue"), 
     Warn(LevelState.Warn, 4, "#8000ff"),
-    //Warn_NoHardcopy(LevelState.Warn, 5, "#8000ff"), 
     Defect(LevelState.Defect, 6, "crimson"),
     Skip(LevelState.SKIP, 8, "darkGrey"),
     Nok(LevelState.NOK, 11, "red"),
     Stopped(LevelState.Stopped, 11, "red");
     
     private final LevelState levelState;
-    private final int idNumeric;
+    private final int criticity;
     private final String colorCss;
  
-    State(LevelState levelState, int idNumeric, String colorCss) {
+    State(LevelState levelState, int criticity, String colorCss) {
         this.levelState = levelState;
-        this.idNumeric = idNumeric;
+        this.criticity = criticity;
         this.colorCss = colorCss;
-    }
-    
-    public int getIdNumerid() {
-        return this.idNumeric;
     }
     
     public LevelState getLevel() {
@@ -31,11 +25,11 @@ public enum State  {
     }
     
     public int getCriticity() {
-        return this.idNumeric;
+        return this.criticity;
     }
     
     public boolean isMoreCriticThan(State state) {
-    	return (idNumeric > state.getIdNumerid());
+    	return (criticity > state.getCriticity());
     }
     
     public static State getMoreCritic(State state1, State state2) {
@@ -50,9 +44,9 @@ public enum State  {
         return this.colorCss;
     }
     
-    public static State getState(int idNumericI) {
+    public static State getState(int criticity) {
         for (State estado : State.values()) {
-            if (estado.getIdNumerid() == idNumericI) {
+            if (estado.getCriticity() == criticity) {
                 return estado;
             }
         }

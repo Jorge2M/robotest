@@ -2,10 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.otras;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.annotations.step.SaveWhen;
-import com.mng.testmaker.annotations.step.Step;
-import com.mng.testmaker.annotations.validation.ChecksResult;
-import com.mng.testmaker.annotations.validation.Validation;
+import com.mng.testmaker.boundary.aspects.step.SaveWhen;
+import com.mng.testmaker.boundary.aspects.step.Step;
+import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.otras.PageGoogle;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;

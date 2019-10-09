@@ -1,6 +1,9 @@
 package com.mng.testmaker.domain;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -9,31 +12,38 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.testmaker.listeners.InvokeListener;
-import com.mng.testmaker.listeners.MyTransformer;
-import com.mng.testmaker.listeners.Reporter;
+import com.mng.testmaker.boundary.listeners.InvokeListener;
+import com.mng.testmaker.boundary.listeners.MyTransformer;
+import com.mng.testmaker.jdbc.Connector;
+import com.mng.testmaker.listeners.utils.ResourcesExtractor;
+import com.mng.testmaker.service.testreports.Reporter;
+import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.filter.FilterTestsSuiteXML;
 import com.mng.testmaker.utils.filter.TestMethod;
 
 public abstract class SuiteMaker {
 
-	private final SuiteContextTestMaker testMakerContext;
+	private final String idSuiteExecution;
+	private final InputParamsTestMaker inputData;
     private final FilterTestsSuiteXML filterSuiteXML;
 
     private Map<String,String> parameters;
     private List<TestRunMaker> listTestRuns = new ArrayList<>();
     private ParallelMode parallelMode = ParallelMode.METHODS;
     private int threadCount = 3;
-	private SuiteTestMaker xmlSuite;
+	private SuiteTestMaker suite;
 	
 	protected SuiteMaker(InputParamsTestMaker inputData) {
-		this.testMakerContext = new SuiteContextTestMaker(inputData);
+		this.idSuiteExecution = makeIdSuiteExecution();
+		this.inputData = inputData;
 		this.filterSuiteXML = FilterTestsSuiteXML.getNew(inputData.getDataFilter());
 	}
 	
-	public String getIdSuiteExecution() {
-		return testMakerContext.getIdSuiteExecution();
-	}
+    private static String makeIdSuiteExecution() {
+        Calendar c1 = Calendar.getInstance();
+        String timestamp = new SimpleDateFormat("yyMMdd_HHmmssSS").format(c1.getTime());
+        return (timestamp);
+    }
 	
     public List<TestMethod> getListTests() {
         XmlTest testRun = getTestRun();
@@ -42,24 +52,17 @@ public abstract class SuiteMaker {
         );
     }
     
-    public SuiteTestMaker getSuiteTestMaker() {
-    	return this.xmlSuite;
+    public SuiteTestMaker getSuite() {
+    	generateXmlSuiteIfNotAvailable();
+    	return this.suite;
     }
     
     public XmlTest getTestRun() {
     	generateXmlSuiteIfNotAvailable();
-        return (xmlSuite.getTests().get(0));
+        return (suite.getTests().get(0));
     }
 
-    public void run() { 
-    	generateXmlSuiteIfNotAvailable();
-        List<XmlSuite> suites = new ArrayList<>();
-        suites.add(xmlSuite);    
-        TestNG tng = new TestNG();
-        tng.setXmlSuites(suites);
-        tng.setUseDefaultListeners(false);
-        tng.run();
-    }
+
 
     protected void setParameters(Map<String,String> parameters) {
     	this.parameters = parameters;
@@ -98,14 +101,14 @@ public abstract class SuiteMaker {
     }
 
 	private void generateXmlSuiteIfNotAvailable() {
-    	if (xmlSuite==null) {
-    		xmlSuite = createSuite();
+    	if (suite==null) {
+    		suite = createSuite();
     	}
     }
     
     private SuiteTestMaker createSuite() {
-    	SuiteTestMaker suite = new SuiteTestMaker(testMakerContext);
-    	String suiteName = testMakerContext.getInputData().getSuiteName();
+    	SuiteTestMaker suite = new SuiteTestMaker(idSuiteExecution, inputData);
+    	String suiteName = inputData.getSuiteName();
         suite.setFileName(suiteName + ".xml");
         suite.setName(suiteName);
         suite.setListenersClass(createStandardListeners());
@@ -118,7 +121,7 @@ public abstract class SuiteMaker {
     
     private void createTestRuns(SuiteTestMaker suite) {
     	for (TestRunMaker testRun : listTestRuns) {
-    		testRun.createTestRun(suite, filterSuiteXML, testMakerContext.getInputData());
+    		testRun.createTestRun(suite, filterSuiteXML, inputData);
     	}
     }
 }

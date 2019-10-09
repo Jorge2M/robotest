@@ -1,4 +1,4 @@
-package com.mng.testmaker.annotations.step;
+package com.mng.testmaker.boundary.aspects.step;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

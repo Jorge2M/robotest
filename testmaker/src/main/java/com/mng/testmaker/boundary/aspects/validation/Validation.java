@@ -1,4 +1,4 @@
-package com.mng.testmaker.annotations.validation;
+package com.mng.testmaker.boundary.aspects.validation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

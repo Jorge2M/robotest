@@ -13,7 +13,7 @@ public class PluginHTML5Autoplay extends PluginChrome {
     private static final String XPathSelect = "//select[@id='default-mode']";
     
     @Override
-    public void addPluginToChrome(ChromeOptions options) throws Exception {
+    public void addPluginToChrome(ChromeOptions options) {
         super.addPluginToChrome(options, this.fileName);
     }
     

@@ -1,11 +1,10 @@
-package com.mng.testmaker.annotations.step;
+package com.mng.testmaker.boundary.aspects.step;
 
 import java.lang.reflect.Method;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.utils.TestCaseData;
 
 public class InfoStep {
 
@@ -43,10 +42,7 @@ public class InfoStep {
     	datosStep.setSaveImagePage(stepAnnotation.saveImagePage());
     	datosStep.setSaveErrorPage(stepAnnotation.saveErrorData());
     	datosStep.setSaveHtmlPage(stepAnnotation.saveHtmlPage());
-    	if (TestCaseData.getdFTest()!=null) {
-    		datosStep.setSaveNettrafic(stepAnnotation.saveNettraffic(), TestCaseData.getdFTest().ctx);
-    	}
-
+    	datosStep.setSaveNettrafic(stepAnnotation.saveNettraffic());
     	return datosStep;
     }
 }

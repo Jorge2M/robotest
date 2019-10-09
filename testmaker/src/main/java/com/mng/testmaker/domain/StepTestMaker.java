@@ -3,20 +3,20 @@ package com.mng.testmaker.domain;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.testng.ITestContext;
 
-import com.mng.testmaker.annotations.step.SaveWhen;
-import com.mng.testmaker.annotations.validation.ChecksResult;
+import com.mng.testmaker.boundary.aspects.step.SaveWhen;
+import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.NetTrafficMng;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 
 
 public class StepTestMaker {
 	
+	private ChecksResult listResultValidations;
+			
+	private StateRun state = StateRun.Started;
 	private boolean isStateUpdated = false;
-	private int step_number = 0;
-	private int numValidations = 0;
 	private String descripcion; 
 	private String res_expected; 
 	private SaveWhen saveImagePage = SaveWhen.IfProblem;
@@ -27,40 +27,16 @@ public class StepTestMaker {
 	private Date hora_inicio; 
 	private Date hora_fin;
 	private State result_steps = State.Nok;
-	private State resultLastValidation = State.Ok;
 	private boolean avoidEvidences;
 	private boolean excep_exists = true;
-	private ChecksResult listResultValidations;
 	private String nameMethodWithFactory = "";
-
-    public StepTestMaker() {
-        this.step_number = 0;
-    }
-
-    //TODO llamada desde el mecanismo antiguo. Eliminar cuando esté todo migrado a AspectJ
-    public StepTestMaker(String c_descripcion, String c_res_expected) {
-        this.descripcion = c_descripcion;
-        this.res_expected = c_res_expected;
-        this.hora_inicio = new Date(System.currentTimeMillis());
-    	StepTestMaker maxDatosStep = TestCaseData.getDatosLastStep();
-    	if (maxDatosStep!=null) {
-    		setStepNumber(maxDatosStep.getStepNumber() + 1);
-    	} else {
-    		setStepNumber(1);
-    	}
-        TestCaseData.storeInThread(this);
-    }
-
-    public void setStepNumber (int c_step_number) { 
-        this.step_number = c_step_number; 
+    
+    public void setState(StateRun state) {
+    	this.state = state;
     }
     
-    public void setNumValidations(int numValidations) {
-    	this.numValidations = numValidations;
-    }
-    
-    public int getNumValidations() {
-    	return this.numValidations;
+    public StateRun getState() {
+    	return this.state;
     }
 
     public void setDescripcion(String c_descripcion) { 
@@ -103,10 +79,9 @@ public class StepTestMaker {
         this.saveHtmlPage = saveHtmlPage; 
     }
     
-    public void setSaveNettrafic(SaveWhen saveNettraffic, ITestContext context) {
-    	SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
-        boolean isNettraffic = testMakerCtx.getInputData().isNetAnalysis();
-        if (isNettraffic) {
+    public void setSaveNettrafic(SaveWhen saveNettraffic) {
+    	SuiteTestMaker suite = TestMaker.getSuiteInThread();
+        if (suite.getInputData().isNetAnalysis()) {
         	this.saveNettraffic = saveNettraffic;
         	NetTrafficMng netTraffic = new NetTrafficMng();
         	netTraffic.resetAndStartNetTraffic();
@@ -130,24 +105,12 @@ public class StepTestMaker {
         this.isStateUpdated = true;
     }
     
-    public void setResultLastValidation(State resultLastValidation) {
-    	this.resultLastValidation = resultLastValidation;
-    }
-    
-    public State getResultLastValidation() {
-    	return this.resultLastValidation;
-    }
-    
     public boolean isStateUpdated() {
     	return this.isStateUpdated;
     }
 
     public void setExcepExists(boolean c_excep_exists) {
         this.excep_exists = c_excep_exists; 
-    }
-    
-    public int getStepNumber() { 
-        return this.step_number; 
     }
     
     public String getDescripcion() { 
@@ -220,12 +183,15 @@ public class StepTestMaker {
     	this.listResultValidations = listResultValidations;
     }
     
-    public List<Integer> getListCodeNumStateValidations() {
-    	List<Integer> result = new ArrayList<>();
+    public ChecksResult getListResultValidations() {
+    	return this.listResultValidations;
+    }
+    
+    public List<State> getListStateValidations() {
+    	List<State> result = new ArrayList<>();
     	if (this.listResultValidations!=null) {
-    		result = this.listResultValidations.getListCodeNumStateValidations();
+    		result = this.listResultValidations.getListStateValidations();
     	}
-    	
     	return result;
     }
 }

@@ -1,4 +1,4 @@
-package com.mng.testmaker.utils.controlTest;
+package com.mng.testmaker.service.webdriver.pool;
 
 import org.openqa.selenium.WebDriver;
 

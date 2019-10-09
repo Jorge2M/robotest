@@ -1,16 +1,11 @@
-package com.mng.testmaker.annotations.validation;
+package com.mng.testmaker.boundary.aspects.validation;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.SourceDataLine;
-
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.controlTest.FmwkTest;
 
 public class ChecksResult {
@@ -109,26 +104,6 @@ public class ChecksResult {
     	
     	return stateToReturn;
     }
-//    
-//    private void sound() {
-//    	try {
-//	        byte[] buf = new byte[ 1 ];;
-//	        AudioFormat af = new AudioFormat( (float )44100, 8, 1, true, false );
-//	        SourceDataLine sdl = AudioSystem.getSourceDataLine( af );
-//	        sdl.open();
-//	        sdl.start();
-//	        for( int i = 0; i < 1000 * (float )44100 / 1000; i++ ) {
-//	            double angle = i / ( (float )44100 / 440 ) * 2.0 * Math.PI;
-//	            buf[ 0 ] = (byte )( Math.sin( angle ) * 100 );
-//	            sdl.write( buf, 0, 1 );
-//	        }
-//	        sdl.drain();
-//	        sdl.stop();
-//    	}
-//    	catch (Exception e) {
-//    		//
-//    	}
-//    }
     
     public boolean calculateAvoidEvidences() {
     	for (ResultValidation resultValidation : listResultValidations) {
@@ -169,7 +144,6 @@ public class ChecksResult {
     		datosStep.setResultSteps(stateValidation);
     	}
     	datosStep.setListResultValidations(this);
-    	datosStep.setNumValidations(datosStep.getNumValidations() + 1);
     }
     
     private boolean isStepFinishedWithException() {
@@ -179,16 +153,15 @@ public class ChecksResult {
     /**
      * @return la lista ordenada de resultado de las validaciones que se pueda almacenar en BD
      */
-    public List<Integer> getListCodeNumStateValidations() {
-    	//List initialized with OKs
-    	List<Integer> listCodes = new ArrayList<>();
+    public List<State> getListStateValidations() {
+    	List<State> listCodes = new ArrayList<>();
     	int lastValidation = getIndexLastValidation();
     	for (int i=0; i<lastValidation; i++) {
-    		listCodes.add(State.Ok.getIdNumerid());
+    		listCodes.add(State.Ok);
     	}
     	for (ResultValidation resultValidation : listResultValidations) {
     		if (!resultValidation.isOvercomed()) {
-    			listCodes.set(resultValidation.getId()-1, resultValidation.getLevelResult().getIdNumerid());
+    			listCodes.set(resultValidation.getId()-1, resultValidation.getLevelResult());
     		}
     	}
     	
@@ -205,10 +178,4 @@ public class ChecksResult {
 		
 		return maxIndexValidation;
 	}
-    
-    public void storeGroupValidations(String descripcionValidations) {
-    	if ("".compareTo(descripcionValidations)!=0) {
-    		FmwkTest.grabStepValidation(datosStep, descripcionValidations, TestCaseData.getdFTest());
-    	}
-    }
 }

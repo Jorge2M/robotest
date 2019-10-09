@@ -54,7 +54,7 @@ class ChromedriverMaker implements WebdriverMaker {
     }
 
     @Override
-	public WebDriver build() throws Exception {
+	public WebDriver build() {
     	preBuildConfig();
         ChromeDriver driver = new ChromeDriver(options);
         if (channel==Channel.desktop) {
@@ -92,7 +92,7 @@ class ChromedriverMaker implements WebdriverMaker {
 		return false;
 	}
 	
-    private void preBuildConfig() throws Exception {
+    private void preBuildConfig() {
 		if (isDesktopInVirtualMachine()) {
             //Esta ñapa es la única que se ha encontrado para solventar el problema del Chrome (no-headless) 
 			//cuando se ejecuta contra una máquina virtual con un Tomcat as a Service. En ese contexto se abre un Chrome 
@@ -116,7 +116,7 @@ class ChromedriverMaker implements WebdriverMaker {
     /**
      * Da de alta/asocia en chrome una lista de plugins
      */
-    private void addPlugins() throws Exception {
+    private void addPlugins() {
     	if (!isHeadless) {
             //TODO Desde Chrome61 ya es posible desactivar el autoplay directamente desde el navegador (chrome://flags/#autoplay-policy)
             //options.addArguments("--autoplay-policy", "--document-user-activation-required");        

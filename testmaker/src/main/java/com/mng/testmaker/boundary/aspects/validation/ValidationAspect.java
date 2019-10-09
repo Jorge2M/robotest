@@ -1,4 +1,4 @@
-package com.mng.testmaker.annotations.validation;
+package com.mng.testmaker.boundary.aspects.validation;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -7,11 +7,12 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
+import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.domain.TestCaseTestMaker;
+
 
 @Aspect
 public class ValidationAspect {
-	
-	ChecksResult listResultValidations;
 	
     @Pointcut("@annotation(Validation)")
     public void annotationValidationPointcut() {}
@@ -26,8 +27,11 @@ public class ValidationAspect {
     	pointcut="annotationValidationPointcut() && atExecution()", 
     	throwing="ex")
     public void doRecoveryActions(JoinPoint joinPoint, Throwable ex) {
+    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInThread();
+    	StepTestMaker step = testCase.getLastStepFinished();
     	InfoValidation infoValidation = InfoValidation.from(joinPoint);
-    	listResultValidations = infoValidation.getListResultValidation();
+    	ChecksResult listResultValidations = infoValidation.getListResultValidation();
+    	step.setListResultValidations(listResultValidations);
     	listResultValidations.getDatosStep().setNOKstateByDefault();
     	listResultValidations.checkAndStoreValidations();
     }
@@ -44,7 +48,4 @@ public class ValidationAspect {
     	InfoValidation infoValidation = InfoValidation.from(joinPoint, resultMethod);
     	listResultValidations = infoValidation.getListResultValidation();
     }
-    
-	//TODO el datosStep se puede acabar eliminando pero de momento lo forzaremos como parámetro obligatorio sólo para probar
-	//TODO al dFTest habría que ubicarlo en una clase de arquitectura en lugar del GestorWebDriver
 }

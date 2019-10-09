@@ -1,6 +1,6 @@
 package com.mng.testmaker.jdbc.to;
 
-import com.mng.testmaker.utils.StateSuite;
+import com.mng.testmaker.domain.StateRun;
 
 
 public class Suite {
@@ -21,7 +21,7 @@ public class Suite {
     public String urlBase;
     public String pathReport;
     public String urlReport;
-    public StateSuite stateSuite;
+    public StateRun stateSuite;
 
     public String getIdExecution() {
         return this.idExecution;
@@ -91,7 +91,7 @@ public class Suite {
         return this.urlReport;
     }
     
-    public StateSuite getStateSuite() {
+    public StateRun getStateSuite() {
         return this.stateSuite;
     }
     
@@ -163,7 +163,7 @@ public class Suite {
         this.urlReport = urlReport;
     }
     
-    public void setStateSuite(StateSuite stateSuite) {
+    public void setStateSuite(StateRun stateSuite) {
         this.stateSuite = stateSuite;
     }
 }

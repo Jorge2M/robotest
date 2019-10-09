@@ -2,8 +2,8 @@ package com.mng.robotest.test80.mango.test.stpv.shop.home;
 
 import java.util.List;
 import org.openqa.selenium.WebDriver;
-import com.mng.testmaker.annotations.validation.ChecksResult;
-import com.mng.testmaker.annotations.validation.Validation;
+import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.utils.State;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;

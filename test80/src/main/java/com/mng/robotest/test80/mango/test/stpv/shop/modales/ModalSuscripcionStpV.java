@@ -2,10 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.modales;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.annotations.step.Step;
-import com.mng.testmaker.annotations.validation.ChecksResult;
-import com.mng.testmaker.annotations.validation.Validation;
-import com.mng.testmaker.annotations.step.SaveWhen;
+import com.mng.testmaker.boundary.aspects.step.Step;
+import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalSuscripcion;
 
