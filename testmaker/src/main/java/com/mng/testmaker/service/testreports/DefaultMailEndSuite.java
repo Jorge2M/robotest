@@ -12,8 +12,6 @@ import org.testng.ITestContext;
 
 import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.domain.SuiteTestMaker;
-import com.mng.testmaker.jdbc.dao.SuitesDAO;
-import com.mng.testmaker.jdbc.to.Suite;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.mail.MailClient;

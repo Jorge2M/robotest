@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
-
 import javax.net.ssl.*;
-
 import org.testng.*;
 
-import com.mng.testmaker.utils.DataFmwkTest;
+import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.controlTest.FmwkTest.TypeEvidencia;
 
@@ -38,11 +36,7 @@ public class WebDriverArqUtils {
     
     public static void captureEntirePageMultipleBrowsers (WebDriver driver, ITestContext contextTNG, String filename) 
     throws RuntimeException {
-        boolean browserGUI = true;
-        if (contextTNG.getAttribute("browserGUI")!=null) {
-            browserGUI = ((Boolean)contextTNG.getAttribute("browserGUI")).booleanValue();
-        }
-        if (driver != null && browserGUI) {
+        if (driver != null) {
             try {
                 //Este código sólo se ejecuta si no se ha producido una excepción (x timeout) en waitForPageLoaded;
                 WebDriver newWebDriver = null;
@@ -141,13 +135,13 @@ public class WebDriverArqUtils {
     /**
      * Se realiza una captura del HTML de la página
      */
-    public static void capturaHTMLPage(DataFmwkTest dFTest, int stepNumber) throws Exception {
+    public static void capturaHTMLPage(StepTestMaker step) throws Exception {
         try {
-            String methodWithFactory = FmwkTest.getMethodWithFactory(dFTest.meth, dFTest.ctx);
-            String nombreHTMLfile = FmwkTest.getPathFileEvidenciaStep(dFTest.ctx, methodWithFactory, stepNumber, TypeEvidencia.html);
+            String nombreHTMLfile = FmwkTest.getPathFileEvidenciaStep(step, TypeEvidencia.html);
             File htmlFile = new File(nombreHTMLfile);
             try (FileWriter fw = new FileWriter(htmlFile)) {
-                fw.write(dFTest.driver.getPageSource());
+            	WebDriver driver = step.getTestCaseParent().getDriver();
+                fw.write(driver.getPageSource());
             }
         } 
         catch (Exception e) {

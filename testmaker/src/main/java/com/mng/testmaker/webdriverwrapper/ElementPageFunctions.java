@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
+import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.webdriverwrapper.WebdrvWrapp.OptionSelect;
 

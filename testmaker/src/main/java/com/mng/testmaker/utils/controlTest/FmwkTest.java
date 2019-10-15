@@ -35,7 +35,6 @@ import com.mng.testmaker.data.ConstantesTestMaker;
 import com.mng.testmaker.domain.StateRun;
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.NetTrafficMng;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.utils;
@@ -45,7 +44,20 @@ public class FmwkTest {
     static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 
     public enum TypeStore {step, validation}
-    public enum TypeEvidencia {imagen, html, errorpage, har, harp}
+    
+    public enum TypeEvidencia {
+    	imagen("png"), 
+    	html("html"), 
+    	errorpage("-error.html"), 
+    	har("har"), 
+    	harp("harp");
+    	
+    	public String fileExtension;
+    	private TypeEvidencia(String fileExtension) {
+    		this.fileExtension = fileExtension;
+    	}
+    }
+
     public static String prefixEvidenciaStep = "Step-";
     final public static String log4jFileAppender = "robotestFileAppender";
     final public static String log4jLogger = "robotestLogger";
@@ -55,12 +67,12 @@ public class FmwkTest {
      * Función que realiza la grabación de un Step. Básicamente graba los datos en BD y genera los ficheros asociados
      */
     @SuppressWarnings({ "unchecked"})    
-    public static void grabStep(StepTestMaker datosStep, DataFmwkTest dFTest) {
-        storeFileEvidencesIfNeeded(datosStep, TypeStore.step, dFTest);
+    public static void grabStep(StepTestMaker step) {
+        storeFileEvidencesIfNeeded(step, TypeStore.step);
     }
 
     @SuppressWarnings({ "unchecked"})
-    public static void grabStepValidations(ChecksResult validations, String descripValidac) {
+    public static void grabStepValidations(ChecksResult validations) {
     	
         if (!stepMap.containsKey(datosStep)) {
             stepMap.put(datosStep, new ArrayList<String>());
@@ -76,20 +88,10 @@ public class FmwkTest {
             stepMapStatus.get(datosStep).add(datosStep.getResultSteps());
         }
         if (!datosStep.isAvoidEvidences()) {
-            boolean browserGUI = true;
-            int grabImg = 0;
-            if (dFTest.ctx.getAttribute("grabImg") != null) {
-                grabImg = ((Integer)dFTest.ctx.getAttribute("grabImg")).intValue();
-            }
-            if (dFTest.ctx.getAttribute("browserGUI") != null) {
-                browserGUI = ((Boolean)dFTest.ctx.getAttribute("browserGUI")).booleanValue();
-            }
-
             if ((datosStep.getSaveImagePage()==SaveWhen.Always || 
                  grabImg == 1 || /* Está activada la grabación de imagen a nivel general o */
                  datosStep.getResultSteps()!=State.Ok) &&
-                 datosStep.getTypePage() == 0/*HTML*/&&
-                 browserGUI) {
+                 datosStep.getTypePage() == 0/*HTML*/) {
                 try {
                     //Capture hardcopy
                     WebDriver captureDriver = dFTest.driver;
@@ -118,27 +120,20 @@ public class FmwkTest {
         }
     }
 
-    private static void storeFileEvidencesIfNeeded(StepTestMaker datosStep, TypeStore typeStore, DataFmwkTest dFTest) {
-        String nameMethodWithFactory = FmwkTest.getMethodWithFactory(dFTest.meth, dFTest.ctx);
-        datosStep.setNameMethodWithFactory(nameMethodWithFactory);
+    private static void storeFileEvidencesIfNeeded(StepTestMaker step, TypeStore typeStore) {
         if (typeStore==TypeStore.step) {
-        	createPathForEvidencesStore(nameMethodWithFactory, dFTest.ctx);
-        	storeNetTrafficIfNeeded(datosStep, dFTest.ctx);
+        	createPathForEvidencesStore(step);
+        	storeNetTrafficIfNeeded(step);
         }
         
-    	boolean browserGUI = true;
-        Object browserGUIObj = dFTest.ctx.getAttribute("browserGUI");
-        if (browserGUIObj!=null) {
-            browserGUI = ((Boolean)browserGUIObj).booleanValue();
-        }
-        boolean storeEvidences = (!datosStep.isAvoidEvidences() && browserGUI);
+        boolean storeEvidences = (!step.isAvoidEvidences());
         		
-        storeHardcopyIfNeeded(storeEvidences, datosStep, dFTest);
-        storeErrorPageIfNeeded(storeEvidences, datosStep, dFTest);
-        storeHTMLIfNeeded(datosStep, dFTest);
+        storeHardcopyIfNeeded(storeEvidences, step);
+        storeErrorPageIfNeeded(storeEvidences, step);
+        storeHTMLIfNeeded(step);
     }
     
-    private static void createPathForEvidencesStore(String nameMethodWithFactory, ITestContext ctx) {
+    private static void createPathForEvidencesStore(StepTestMaker step) {
         String pathEvidencias = getPathFolderEvidenciasStep(ctx.getOutputDirectory(), ctx.getName(), nameMethodWithFactory);
         File directorio = new File(pathEvidencias);
         directorio.mkdirs();
@@ -156,9 +151,9 @@ public class FmwkTest {
         }
     }
     
-    private static void storeErrorPageIfNeeded(boolean browserGUI, StepTestMaker datosStep, DataFmwkTest dFTest) {
+    private static void storeErrorPageIfNeeded(StepTestMaker step) {
     	try {
-		    if (isStoreError(browserGUI, datosStep, dFTest) &&
+		    if (isStoreError(step) &&
 		    	dFTest.storerDataError!=null) {
 		        dFTest.storerDataError.store(dFTest, datosStep);
 	        } 
@@ -168,11 +163,11 @@ public class FmwkTest {
         }
     }
     
-    private static void storeHTMLIfNeeded(StepTestMaker datosStep, DataFmwkTest dFTest) {
+    private static void storeHTMLIfNeeded(StepTestMaker step) {
         try {
-            if (datosStep.getSaveHtmlPage()==SaveWhen.Always && 
-            	datosStep.getTypePage() == 0/* HTML */) {
-                WebDriverArqUtils.capturaHTMLPage(dFTest, datosStep.getStepNumber());
+            if (step.getSaveHtmlPage()==SaveWhen.Always && 
+            	step.getTypePage() == 0/* HTML */) {
+                WebDriverArqUtils.capturaHTMLPage(step);
             }
         }
         catch (Exception e) {
@@ -180,16 +175,11 @@ public class FmwkTest {
         }
     }
     
-    private static boolean isStoreImage(boolean browserGUI, StepTestMaker datosStep, DataFmwkTest dFTest) {
-        int forceGrabInAllSteps = 0;
-        Object grabImgObj = dFTest.ctx.getAttribute("grabImg");
-        if (grabImgObj!=null) {
-        	forceGrabInAllSteps = ((Integer)grabImgObj).intValue();
-        }
+    private static boolean isStoreImage(StepTestMaker datosStep) {
         SaveWhen saveImageWhen = datosStep.getSaveImagePage();
-        boolean saveAlways = (saveImageWhen==SaveWhen.Always || forceGrabInAllSteps==1);
+        boolean saveAlways = (saveImageWhen==SaveWhen.Always);
         boolean isErrorAndWeWantHardcopy = (datosStep.getResultSteps()!=State.Ok && saveImageWhen==SaveWhen.IfProblem);
-        boolean isPageHardcopyPossible = (datosStep.getTypePage() == 0/*HTML*/ && browserGUI);
+        boolean isPageHardcopyPossible = (datosStep.getTypePage() == 0/*HTML*/);
         
     	return (
 	    	(saveAlways || isErrorAndWeWantHardcopy) &&
@@ -197,14 +187,14 @@ public class FmwkTest {
         );
     }
     
-    private static boolean isStoreError(boolean browserGUI, StepTestMaker datosStep, DataFmwkTest dFTest) throws Exception {
+    private static boolean isStoreError(StepTestMaker step) throws Exception {
 	    String currentURL = dFTest.driver.getCurrentUrl();
 	    URI uri = new URI(currentURL);
-    	SaveWhen saveErrorWhen = datosStep.getSaveErrorPage();
+    	SaveWhen saveErrorWhen = step.getSaveErrorPage();
         boolean saveAlways = saveErrorWhen==SaveWhen.Always;
-        boolean isErrorAndWeWantError = (datosStep.getResultSteps()!=State.Ok && saveErrorWhen==SaveWhen.IfProblem);
-        boolean isUrlMango = (((String)dFTest.ctx.getAttribute("appPath")).contains(uri.getHost()) || uri.getHost().contains("mango.com"));
-        boolean isGetErrorPossible = (datosStep.getTypePage() == 0/*HTML*/ && browserGUI );
+        boolean isErrorAndWeWantError = (step.getResultSteps()!=State.Ok && saveErrorWhen==SaveWhen.IfProblem);
+        boolean isUrlMango = (((String)step.ctx.getAttribute("appPath")).contains(uri.getHost()) || uri.getHost().contains("mango.com"));
+        boolean isGetErrorPossible = (step.getTypePage() == 0/*HTML*/);
     	
 	    return (
 		    (saveAlways || isErrorAndWeWantError) &&
@@ -270,10 +260,15 @@ public class FmwkTest {
     }
 
     public static String getNameFileEvidenciaStep(int stepNumber, TypeEvidencia typeEvidencia) {
-        String extension = "." + getSufijoEvidencia(typeEvidencia);
+        String extension = "." + typeEvidencia.fileExtension;
         return (prefixEvidenciaStep + Integer.toString(stepNumber) + extension);
     }
 
+    public static String getPathFileEvidenciaStep(StepTestMaker step, TypeEvidencia typeEvidencia) {
+    	String outputDirectory = step.getTestRunParent().getTestNgContext().getOutputDirectory();
+    	return (getPathFileEvidenciaStep(outputDirectory, step, typeEvidencia));
+    }
+    
     public static String getPathFileEvidenciaStep(String outputDirectory, StepTestMaker step, TypeEvidencia typeEvidencia) {
         int stepNumber = step.getPositionInTestCase();
         String testCaseNameUnique = step.getTestCaseParent().getNameUnique();
@@ -281,10 +276,6 @@ public class FmwkTest {
         
         String fileName = getNameFileEvidenciaStep(stepNumber, typeEvidencia);
         return (getPathFolderEvidenciasStep(outputDirectory, testRunName, testCaseNameUnique) + File.separator + fileName);
-    }
-
-    public static String getPathFileEvidenciaStep(ITestContext context, String methodWithFactory, int stepNumber, TypeEvidencia typeEvidencia) {
-        return (getPathFileEvidenciaStep(context.getOutputDirectory(), context.getName(), methodWithFactory, stepNumber, typeEvidencia));
     }
 
     public static String getSufijoEvidencia(TypeEvidencia typeEvidencia) {
@@ -304,11 +295,6 @@ public class FmwkTest {
         }
     }
 
-    public static String getLinkNetTraffic(int stepNumber, Method method, ITestContext context) {
-        String methodWithFactory = getMethodWithFactory(method, context);
-        return (ConstantesTestMaker.URL_SOFTWAREISHARD + getPathFileEvidenciaStep(context, methodWithFactory, stepNumber, TypeEvidencia.harp));
-    }
-
     public static String getMethodWithFactory(Method method, ITestContext context) {
         String factory = (String)context.getAttribute("factory-" + String.valueOf(Thread.currentThread().getId()));
         if (factory!=null) {
@@ -317,19 +303,10 @@ public class FmwkTest {
         return method.getName();
     }
 
-    /**
-     * @param finDirectory
-     *          true:  devuelve la URL de la imagen correspondiente al 'directorio final' donde estarán ubicados los datos de los tests
-     *          false: devuelve la URL de la imagen correspondiente al 'output directory' temporal durante la ejecución de los tests
-     * @return URL de la hardcopy asociada a un step concreto
-     */
-    public static String getURLImgStep(StepTestMaker datosStep, boolean finDirectory, Method method, ITestContext context) {
-        String methodWithFactory = getMethodWithFactory(method, context);
-        String pathImageInit = getPathFileEvidenciaStep(context, methodWithFactory, datosStep.getStepNumber(), TypeEvidencia.imagen);
+    public static String getURLImgStep(StepTestMaker step, boolean finDirectory) {
+        String pathImageInit = getPathFileEvidenciaStep(step, TypeEvidencia.imagen);
         File fileImage = new File(pathImageInit);
-        
-        SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
-        String applicationDNS = testMakerCtx.getInputData().getWebAppDNS();
+        String applicationDNS = step.getSuiteParent().getInputData().getWebAppDNS();
         String urlImage = utils.obtainDNSFromFile(fileImage.getAbsolutePath(), applicationDNS).replace('\\', '/');
         return (urlImage);
     }

@@ -44,6 +44,10 @@ public class TestCaseTestMaker  {
     	this.state = state;
 	}
 	
+	public WebDriver getWebDriver() {
+		return this.driver;
+	}
+	
 	public void end() {
     	setStateRun(StateRun.Finished);
     	this.state = getStateFromSteps();

@@ -1,7 +1,6 @@
 package com.mng.testmaker.domain;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
@@ -16,7 +15,7 @@ public class StepTestMaker {
 	private final TestRunTestMaker testRunParent;
 	private final TestCaseTestMaker testCaseParent;
 
-	private ChecksResult listResultValidations;
+	private List<ChecksResult> listChecksResult;
 			
 	private StateRun state = StateRun.Started;
 	private boolean isStateUpdated = false;
@@ -206,24 +205,16 @@ public class StepTestMaker {
     	return this.nameMethodWithFactory;
     }
     
-    public void setListResultValidations(ChecksResult listResultValidations) {
+    public void addChecksResult(ChecksResult checksResult) {
     	setExcepExists(false);
-    	this.listResultValidations = listResultValidations;
+    	this.listChecksResult.add(checksResult);
     }
     
-    public int getNumValidations() {
-    	return getListResultValidations().size();
+    public int getNumChecksResult() {
+    	return getListChecksResult().size();
     }
     
-    public ChecksResult getListResultValidations() {
-    	return this.listResultValidations;
-    }
-    
-    public List<State> getListStateValidations() {
-    	List<State> result = new ArrayList<>();
-    	if (this.listResultValidations!=null) {
-    		result = this.listResultValidations.getListStateValidations();
-    	}
-    	return result;
+    public List<ChecksResult> getListChecksResult() {
+    	return listChecksResult;
     }
 }

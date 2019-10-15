@@ -6,8 +6,8 @@ import org.aspectj.lang.reflect.MethodSignature;
 
 import com.mng.testmaker.annotations.MatcherWithMethodParams;
 import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.domain.TestCaseTestMaker;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 
 public class InfoValidation {
 
@@ -42,21 +42,6 @@ public class InfoValidation {
 		return listResultValidations;
 	}
 	
-    private StepTestMaker getDatosStepParam() {
-    	Object[] signatureArgs = joinPoint.getArgs();
-    	for (Object signatureArg: signatureArgs) {
-    		if (signatureArg!=null && signatureArg instanceof StepTestMaker) {
-    			return ((StepTestMaker)signatureArg);
-    		}
-    	}
-    	
-    	if (TestCaseData.getDatosLastStep()!=null) {
-    		return (TestCaseData.getDatosLastStep());
-    	}
-    	
-    	throw (new RuntimeException("A parameter of Type DatosStep is mandatory in method with @Validation annotation"));
-    }
-	
     private Validation getValidationAnnotation(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
@@ -71,8 +56,9 @@ public class InfoValidation {
 	}
 	
     private ChecksResult getValidationResultFromObjectMethodReturn() {
-    	StepTestMaker datosStep = getDatosStepParam();
-    	ChecksResult valResult = ChecksResult.getNew(datosStep);
+    	TestCaseTestMaker testCaseInThread = TestCaseTestMaker.getTestCaseInThread();
+    	StepTestMaker step = testCaseInThread.getLastStepFinished();
+    	ChecksResult valResult = ChecksResult.getNew(step);
     	if (resultMethod!=null) {
 	        if (resultMethod instanceof Boolean) {
 	        	ResultValidation validation = new ResultValidation(1);

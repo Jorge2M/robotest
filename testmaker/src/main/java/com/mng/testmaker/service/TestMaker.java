@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.SkipException;
 import org.testng.TestNG;
 import org.testng.xml.XmlSuite;
@@ -11,6 +12,7 @@ import org.testng.xml.XmlSuite;
 import com.mng.testmaker.domain.StateRun;
 import com.mng.testmaker.domain.SuiteTestMaker;
 import com.mng.testmaker.domain.SuitesExecuted;
+import com.mng.testmaker.domain.TestCaseTestMaker;
 import com.mng.testmaker.jdbc.Connector;
 import com.mng.testmaker.listeners.utils.ResourcesExtractor;
 import com.mng.testmaker.utils.controlTest.FmwkTest;
@@ -35,10 +37,21 @@ public class TestMaker {
 		return SuitesExecuted.getSuite(idExecution);
 	}
 	
+    public static void skipTestsIfSuiteStopped() {
+    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInThread();
+    	if (testCase!=null) {
+    		skipTestsIfSuiteStopped(testCase.getSuiteParent());
+        }
+    }
+	
     public static void skipTestsIfSuiteStopped(SuiteTestMaker suite) {
         if (suite.getState()==StateRun.Stopping) {
             throw new SkipException("Received Signal for stop TestSuite" + suite.getName());
         }
+    }
+    
+    public WebDriver getDriverTestCase() {
+    	return (TestCaseTestMaker.getTestCaseInThread().getWebDriver());
     }
 	
     private static void runInTestMaker(SuiteTestMaker suite) {
@@ -67,8 +80,4 @@ public class TestMaker {
 	            Connector.getSQLitePathDirectory());
         }
     }
-    
-    
-    
-
 }

@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Pointcut;
 
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.TestCaseTestMaker;
+import com.mng.testmaker.service.TestMaker;
 
 
 @Aspect
@@ -22,7 +23,7 @@ public class ValidationAspect {
     
     @Before("annotationValidationPointcut()")
     public void before(JoinPoint joinPoint) {
-    	skipTestsIfSuiteStopped(dFTest.ctx);
+    	TestMaker.skipTestsIfSuiteStopped();
     }
     
     @AfterThrowing(
@@ -32,10 +33,10 @@ public class ValidationAspect {
     	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInThread();
     	StepTestMaker step = testCase.getLastStepFinished();
     	InfoValidation infoValidation = InfoValidation.from(joinPoint);
-    	ChecksResult listResultValidations = infoValidation.getListResultValidation();
-    	step.setListResultValidations(listResultValidations);
-    	listResultValidations.getStepParent().setNOKstateByDefault();
-    	listResultValidations.checkAndStoreValidations();
+    	ChecksResult checksResult = infoValidation.getListResultValidation();
+    	step.addChecksResult(checksResult);
+    	checksResult.getStepParent().setNOKstateByDefault();
+    	checksResult.checkAndStoreValidations();
     }
     
     @AfterReturning(
@@ -45,8 +46,8 @@ public class ValidationAspect {
     	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInThread();
     	StepTestMaker step = testCase.getLastStepFinished();
     	InfoValidation infoValidation = InfoValidation.from(joinPoint, resultMethod);
-    	ChecksResult listResultValidations = infoValidation.getListResultValidation();
-    	step.setListResultValidations(listResultValidations);
-    	listResultValidations.checkAndStoreValidations();
+    	ChecksResult checksResult = infoValidation.getListResultValidation();
+    	step.addChecksResult(checksResult);
+    	checksResult.checkAndStoreValidations();
     }
 }

@@ -31,7 +31,7 @@ public class PageReclassifProducts extends WebdrvWrapp {
 	
 	public PageSelProdsToReclassify clickGrabarButton() throws Exception {
 		clickAndWaitLoad(driver, By.xpath(XPathGrabarButton));
-		clickAndWaitLoad(driver, By.xpath(XPathGrabarButton));
+		clickAndWaitLoad(driver, By.xpath(XPathGrabarButton + "/span"));
 		return PageSelProdsToReclassify.getNew(driver);
 	}
 }

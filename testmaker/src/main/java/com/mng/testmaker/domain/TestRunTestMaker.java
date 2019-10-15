@@ -33,16 +33,19 @@ public class TestRunTestMaker extends XmlTest {
     }
     
 	public void end() {
-		setState();
+		state = getStateFromTestCases();
 		stateRun = StateRun.Stopped;
 	}
 	
-	private State setState() {
+	private State getStateFromTestCases() {
 		State stateReturn = State.Ok;
 		for (TestCaseTestMaker testCase : getListTestCases()) {
-			if (testCase.getState())
+			State stateTestCase = testCase.getStateResult();
+			if (stateTestCase.isMoreCriticThan(stateReturn)) {
+				stateReturn = stateTestCase;
+			}
 		}
-		return state;
+		return stateReturn;
 	}
     
 	public StateRun getStateRun() {

@@ -19,7 +19,6 @@ public class ChecksResult {
 	private final TestRunTestMaker testRunParent;
 	private final TestCaseTestMaker testCaseParent;
 	private final StepTestMaker stepParent; 
-    private String descripcionValidations;
 	
     public ChecksResult() {
     	this.listResultValidations = new ArrayList<>();
@@ -51,6 +50,14 @@ public class ChecksResult {
 		return listValidations;
 	}
 
+	public List<ResultValidation> getListResultValidations() {
+		return listResultValidations;
+	}
+	
+	public State getStateValidation() {
+		return stateValidation;
+	}
+	
 	public SuiteTestMaker getSuiteParent() {
 		return this.suiteParent;
 	}
@@ -70,6 +77,17 @@ public class ChecksResult {
 	
 	public ResultValidation get(int index) {
 		return (listResultValidations.get(index));
+	}
+	
+	public int getPositionInStep() {
+		List<ChecksResult> listChecksResultInStep = stepParent.getListChecksResult();
+		for (int i=0; i<listChecksResultInStep.size(); i++) {
+			ChecksResult checksResult = listChecksResultInStep.get(i);
+			if (checksResult==this) {
+				return i;
+			}
+		}
+		return -1;
 	}
 	
     public boolean isAvoidEvidences() {
@@ -101,9 +119,7 @@ public class ChecksResult {
 	
     public void checkAndStoreValidations() {
     	checkValidations();
-    	if ("".compareTo(descripcionValidations)!=0) {
-    		FmwkTest.grabStepValidation(stepParent, descripcionValidations, TestCaseData.getdFTest());
-    	}
+    	FmwkTest.grabStepValidations(this);
     }
     
     public State calculateStateValidation() {
@@ -145,14 +161,26 @@ public class ChecksResult {
     
     private void checkAndSetStateValidation() {
     	stateValidation = calculateStateValidation();
-    	descripcionValidations=calculateDescriptionValidation();
     	avoidEvidences=calculateAvoidEvidences();
     }
     
-    private String calculateDescriptionValidation() {
+    public String getTextValidationsBrSeparated() {
     	List<String> textValidations = new ArrayList<>();
     	for (ResultValidation resultValidation : listResultValidations) {
     		textValidations.add(resultValidation.getDescription());
+    	}
+
+    	return (textValidations.stream().collect(Collectors.joining("<br>")));
+    }
+    
+    public String getHtmlValidationsBrSeparated() {
+    	List<String> textValidations = new ArrayList<>();
+    	for (ResultValidation resultValidation : listResultValidations) {
+    		String htmlValidation = 
+    			"<validac style=\"color:" + resultValidation.getLevelResult().getColorCss() + "\">" + 
+    			resultValidation.getDescription() + 
+    			"</validac>";
+    		textValidations.add(htmlValidation);
     	}
 
     	return (textValidations.stream().collect(Collectors.joining("<br>")));
@@ -163,7 +191,7 @@ public class ChecksResult {
     	if (stateValidation.isMoreCriticThan(stepParent.getResultSteps()) || !stepParent.isStateUpdated()) {
     		stepParent.setResultSteps(stateValidation);
     	}
-    	stepParent.setListResultValidations(this);
+    	//stepParent.setChecksResult(this);
     }
     
     private boolean isStepFinishedWithException() {

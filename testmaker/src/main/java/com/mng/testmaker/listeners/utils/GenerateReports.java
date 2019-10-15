@@ -7,12 +7,8 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.sql.Date;
 import java.text.DateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,13 +19,13 @@ import org.testng.reporters.EmailableReporter;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
+import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.data.ConstantesTestMaker;
 import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.SuiteTestMaker;
 import com.mng.testmaker.domain.TestCaseTestMaker;
 import com.mng.testmaker.domain.TestRunTestMaker;
-import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.utils;
 import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.controlTest.FmwkTest.TypeEvidencia;
@@ -323,7 +319,7 @@ public class GenerateReports extends EmailableReporter {
                 "     <td style=\"display:none;\"></td>\n" +
                 "     <td class=\"nowrap\">Step " + stepNumber + "</td>" + 
                 "     <td></td>" + 
-                "     <td>" + step.getNumValidations() + "</td>" + 
+                "     <td>" + step.getNumChecksResult() + "</td>" + 
                 "     <td><div class=\"result" + step.getResultSteps() + "\">" + step.getResultSteps() + "</div></td>" + 
                 "     <td>" + diffInMillies + "</td>" + 
                 "     <td><a href=\"" + PNGNewStep + "\" target=\"_blank\">" + litPNGNewStep + "</a>" + linkErrorNew + linkHarpNew + linkHarNew + "</td>" + 
@@ -347,30 +343,19 @@ public class GenerateReports extends EmailableReporter {
     }
     
     private void pintaValidacionesStep(BuildingReport buildReport, StepTestMaker step) {
-    	
-        for (int iValid = 0; iValid < listValidations.size(); iValid++) {
-            HashMap<String, Object> validationH = listValidations.get(iValid);
+    	List<ChecksResult> listChecksResult = step.getListChecksResult();
+        for (ChecksResult checksResult : listChecksResult) {
             buildReport.increaseCountRows();
             buildReport.addValueToTree(buildReport.getLastStep());
-            String validationNumber = "";
-            String descriptValid = "";
-            String listResultVals = "";
-
-            validationNumber = (String) validationH.get("VALIDATION_NUMBER");
-            String result = utils.getLitEstado((String) validationH.get("RESULTADO"));
-            descriptValid = (String) validationH.get("DESCRIPTION");
-            listResultVals = (String)validationH.get("LIST_RESULTS");
             
-            //Formateamos el string con las validaciones según el resultado obtenido para cada una de ellas
-            descriptValid = this.formatDescripValidations(descriptValid, listResultVals);
-
+            String descriptValid = checksResult.getHtmlValidationsBrSeparated();
             buildReport.addToReport( 
             	"<tr class=\"validation collapsed\"" + " met=\"" + buildReport.getIMethod() + "\">" +
             	"    <td style=\"display:none;\"></td>\n" + 
-            	"    <td class=\"nowrap\">Validation " + validationNumber + "</td>" + 
+            	"    <td class=\"nowrap\">Validation " + checksResult.getPositionInStep() + "</td>" + 
             	"    <td></td>" + 
             	"    <td></td>" + 
-            	"    <td><div class=\"result" + result + "\">" + result + "</div></td>" + 
+            	"    <td><div class=\"result" + checksResult.getStateValidation() + "\">" + checksResult.getStateValidation() + "</div></td>" + 
             	"    <td></td>" + 
             	"    <td></td>" + 
             	"    <td></td>" + 
@@ -405,60 +390,6 @@ public class GenerateReports extends EmailableReporter {
             pLogger.fatal("Problem creating file ReportHTML", e);
         } 
     }
-    
-    /**
-     * Formateamos el string con las validaciones según el resultado obtenido para cada una de ellas
-     */
-    //TODO refactor en una clase aparte que genere un CheckResults
-    private String formatDescripValidations(String descripValidOrig, String listResultVals) {
-        String descripValidReturn = descripValidOrig;
-        if (listResultVals.compareTo("")!=0) {
-            List<String> listResValidacs = Arrays.asList(listResultVals.split("\\s*,\\s*"));
-            int iValidac = 1;
-            if (listResValidacs.size()>1) {
-	            for (String resValidac : listResValidacs) {
-	                int resValidacInt = Integer.valueOf(resValidac).intValue();
-	                
-	                //Formatear el texto de la validación en el color correspondiente
-	                if (resValidacInt!=State.Ok.getIdNumerid()) {
-	                    String color = State.getState(resValidacInt).getColorCss();
-	                    
-	                    //Incrustamos el estilo con el color en la validación del descripion
-	                    int iniValidac = descripValidOrig.indexOf(iValidac + ")"); 
-	                    if (iniValidac > -1) {
-	                        //Obtenemos el literal correspondiente a la validación
-	                        String restoDescripValid = descripValidOrig.substring(iniValidac);
-	                        int finValidac = restoDescripValid.indexOf(iValidac + 1 + ")");
-	                        if (finValidac < 0) {
-	                            finValidac = restoDescripValid.indexOf("<br>");
-	                        }
-	                        if (finValidac < 0) {
-	                            finValidac = restoDescripValid.length();
-	                        }
-	                        if (finValidac > 0) {
-	                            //Finalmente sustituímos el literal con la validación por el mismo literal con el tag de estilo/color correspondiente
-	                            String validacStr = restoDescripValid.substring(0, finValidac);
-	                            String validacStrNew = "<validac style=\"color:" + color + "\">" + validacStr + "</validac>";
-	                            descripValidReturn = descripValidReturn.replace(validacStr, validacStrNew);
-	                        }
-	                    }
-	                }
-	                
-	                iValidac+=1;
-	            }
-            } else {
-            	//1 sola validación
-            	int intValidac = Integer.valueOf(listResValidacs.get(0));
-            	State stateValidac = State.getState(intValidac);
-            	if (stateValidac!=State.Ok) {
-                    String color = stateValidac.getColorCss();
-                    descripValidReturn = "<validac style=\"color:" + color + "\">" + descripValidOrig + "</validac>";
-            	}
-            }
-        }
-        
-        return descripValidReturn;
-    }
 
     /**
      * Objecto utilizado para ir construyendo el reportHTML
@@ -475,26 +406,12 @@ public class GenerateReports extends EmailableReporter {
         //- Si un valor es superior al anterior entonces la fila es hija de la anterior
         //- Si un valor es igual o superior al anterior entonces la fila es hermana de la anterior fila con el mismo valor
         String valuesTree = "";
-        
-        //Directorio dónde se grabará el report
         String outputDirectory = "";
-        
-        //Contador de filas
         int countRows = 0;
-        
-        //Contador del método en curso (se utiliza para el atributo "met" de cada una de las filas de la tabla)
         int iMethod = 0;
-        
-        //Valor correspondiente a la posición en la tabla del último testrun (empezando desde el 1)
         int iLastTestRun = 0;
-        
-        //Valor correspondiente a la posición en la tabla del último método (empezando desde el 1)
         int iLastMethod = 0;
-        
-        //Valor correspondiente a la posición en la tabla del último step (empezando desde el 1)
         int iLastStep = 0;
-        
-        //Indicador que indica si se ha producido un timeout en alguno de los pasos asociados al método en curso
         boolean timeoutStep = false;
         
         String serverDNS = "";

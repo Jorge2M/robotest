@@ -16,7 +16,7 @@ import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
 public class PageSelProdsToReclassify extends FilterHeaderSection {
 	
 	private final WebDriver driver;
-	public static Option option = Option.ClasificarProductos;
+	public static Option option = Option.ReclasificaciónProductos;
 	
 	private final static String XPathTitle = "//h1[starts-with(text(), '" + option.getTitlePage() + "')]";
 	private final static String XPathIrButton = "//button[@id[contains(.,'btnGo')]]";

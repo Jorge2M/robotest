@@ -153,7 +153,7 @@ public class NetTrafficMng {
 	
 	public void copyHarToHarp(String nameFileHar) throws Exception {
 		File fileHar = new File(nameFileHar);
-        File fileHarp = new File(nameFileHar.replace(FmwkTest.getSufijoEvidencia(TypeEvidencia.har), FmwkTest.getSufijoEvidencia(TypeEvidencia.harp)));
+        File fileHarp = new File(nameFileHar.replace(TypeEvidencia.har.fileExtension, TypeEvidencia.harp.fileExtension));
         InputStream inHar = new FileInputStream(fileHar);
         OutputStream outHarp = new FileOutputStream(fileHarp);
         outHarp.write("onInputData(".getBytes());
