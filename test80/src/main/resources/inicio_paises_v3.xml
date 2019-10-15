@@ -228,7 +228,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>ALL %@</moneda>
 <maximo_bolsa>999999999999</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -482,7 +482,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ BAM</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -527,7 +527,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ BGL</moneda>
 <maximo_bolsa>3000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s"/>
@@ -576,7 +576,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ HRK</moneda>
 <maximo_bolsa>8500</maximo_bolsa>
@@ -625,7 +625,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
@@ -799,7 +799,7 @@
 <outlet_online>true</outlet_online>
 <miscompras>false</miscompras>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -1081,7 +1081,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
@@ -1141,7 +1141,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ HUF</moneda>
 <maximo_bolsa>375000</maximo_bolsa>
@@ -1196,7 +1196,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online> 
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ ISK</moneda> 
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda> 
@@ -1298,7 +1298,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -1382,7 +1382,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -1435,7 +1435,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>2300</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -1480,7 +1480,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ LTL</moneda>
 <maximo_bolsa>5200</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -1617,7 +1617,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -1696,7 +1696,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -2041,7 +2041,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ RON</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -2151,7 +2151,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ DIN</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -2252,7 +2252,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -2578,7 +2578,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>true</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <ticketStore_enabled>false</ticketStore_enabled>
 <moneda>%@ SEK</moneda>
 <maximo_bolsa>14000</maximo_bolsa>
@@ -2867,7 +2867,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ AWG</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -2985,7 +2985,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ CRC</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -3084,7 +3084,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ USD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -3180,7 +3180,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -3332,7 +3332,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -3724,7 +3724,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -3957,7 +3957,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ AUD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="n" nino="s" baby="n" violeta="s" edits="s"></tienda>
@@ -4340,7 +4340,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ INR</moneda>
 <maximo_bolsa>17000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -4387,7 +4387,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ IDR</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -4873,7 +4873,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ MYR</moneda>
 <maximo_bolsa>4500</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -4919,7 +4919,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>EUR %@</moneda> 
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda> 
@@ -5079,7 +5079,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ PHP</moneda>
 <maximo_bolsa>21000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -5233,7 +5233,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ SGD</moneda>
 <maximo_bolsa>400</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -5544,7 +5544,7 @@
 <dni>34763592N</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>%@ UZS</moneda>
 <maximo_bolsa>999999999999</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="s" touch="n" nina="s" nino="s" baby="s" violeta="s" edits="s"></tienda>
@@ -6062,7 +6062,7 @@
 <dni>9007263637083</dni>
 <shop_online>true</shop_online>
 <outlet_online>false</outlet_online>
-<miscompras>false</miscompras>
+<miscompras>true</miscompras>
 <moneda>ZAR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda nuevo="s" rebajas="n" she="s" he="n" touch="n" nina="n" nino="n" baby="n" violeta="s" edits="s"></tienda>
