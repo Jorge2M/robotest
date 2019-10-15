@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
-import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.NetTrafficMng;
 import com.mng.testmaker.utils.State;
 
@@ -100,8 +99,7 @@ public class StepTestMaker {
     }
     
     public void setSaveNettrafic(SaveWhen saveNettraffic) {
-    	SuiteTestMaker suite = TestMaker.getSuiteInThread();
-        if (suite.getInputData().isNetAnalysis()) {
+        if (suiteParent.getInputData().isNetAnalysis()) {
         	this.saveNettraffic = saveNettraffic;
         	NetTrafficMng netTraffic = new NetTrafficMng();
         	netTraffic.resetAndStartNetTraffic();

@@ -4,10 +4,9 @@ import java.util.List;
 
 import com.mng.sapfiori.test.testcase.generic.webobject.sections.filterheader.ModalSetFieldFromListI;
 import com.mng.sapfiori.test.testcase.generic.webobject.sections.filterheader.ModalSetMultiFieldFromList;
-import com.mng.testmaker.annotations.step.Step;
-import com.mng.testmaker.annotations.validation.Validation;
+import com.mng.testmaker.boundary.aspects.step.Step;
+import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.controlTest.DatosStep.SaveWhen;
 
 public class ModalSetFilterFromListStpV {
 

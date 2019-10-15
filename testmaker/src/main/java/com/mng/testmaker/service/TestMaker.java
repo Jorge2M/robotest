@@ -4,21 +4,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.TestNG;
 import org.testng.xml.XmlSuite;
 
 import com.mng.testmaker.domain.StateRun;
-import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.SuiteTestMaker;
 import com.mng.testmaker.domain.SuitesExecuted;
-import com.mng.testmaker.domain.TestCaseTestMaker;
-import com.mng.testmaker.domain.TestRunTestMaker;
 import com.mng.testmaker.jdbc.Connector;
 import com.mng.testmaker.listeners.utils.ResourcesExtractor;
 import com.mng.testmaker.utils.controlTest.FmwkTest;
-import com.mng.testmaker.utils.controlTest.SuiteContextTestMaker;
 
 public class TestMaker {
 

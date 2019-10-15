@@ -21,20 +21,15 @@ import org.testng.ISuiteResult;
 import org.testng.ITestContext;
 import org.testng.reporters.EmailableReporter;
 import org.testng.xml.XmlSuite;
+import org.testng.xml.XmlTest;
 
 import com.mng.testmaker.data.ConstantesTestMaker;
 import com.mng.testmaker.domain.InputParamsTestMaker;
-import com.mng.testmaker.domain.SuiteContextTestMaker;
-import com.mng.testmaker.jdbc.dao.MethodsDAO;
-import com.mng.testmaker.jdbc.dao.StepsDAO;
-import com.mng.testmaker.jdbc.dao.SuitesDAO;
-import com.mng.testmaker.jdbc.dao.TestRunsDAO;
-import com.mng.testmaker.jdbc.dao.ValidationsDAO;
-import com.mng.testmaker.jdbc.to.Suite;
+import com.mng.testmaker.domain.SuiteTestMaker;
+import com.mng.testmaker.domain.TestRunTestMaker;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.utils;
 import com.mng.testmaker.utils.controlTest.FmwkTest;
-import com.mng.testmaker.utils.controlTest.indexSuite;
 import com.mng.testmaker.utils.controlTest.FmwkTest.TypeEvidencia;
 
 
@@ -44,7 +39,6 @@ public class GenerateReports extends EmailableReporter {
 
     @Override
     public void generateReport(final List<XmlSuite> xmlSuites, final List<ISuite> suites, final String outputDirectory) {
-        // Esto nos generará el emailable-report.html junto con todos sus componentes
         super.generateReport(xmlSuites, suites, outputDirectory);
         
         ITestContext context = null;
@@ -53,11 +47,10 @@ public class GenerateReports extends EmailableReporter {
             context = r2.getTestContext();
         }
         if (context!=null) {
-        	SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
-            indexSuite suite = new indexSuite(testMakerCtx.getIdSuiteExecution(), testMakerCtx.getInputData().getSuiteName());
+        	SuiteTestMaker suiteTestMaker = (SuiteTestMaker)suites.get(0).getXmlSuite();
             try {
             	deployStaticsIfNotExist(outputDirectory);
-                generateReportHTML(suite, outputDirectory, context);
+                generateReportHTML(suiteTestMaker, outputDirectory);
             } 
             catch (Exception e) {
                 pLogger.fatal("Problem generating ReportHTML", e);
@@ -73,17 +66,13 @@ public class GenerateReports extends EmailableReporter {
     		outputDirectory + "/../../" + pathDirectoryInFromResources);
     }
 
-    private void generateReportHTML(indexSuite suite, String outputDirectory, ITestContext context) throws Exception {
+    private void generateReportHTML(SuiteTestMaker suite, String outputDirectory) throws Exception {
         BuildingReport buildReport = new BuildingReport(outputDirectory);
-    	SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
-        buildReport.serverDNS = testMakerCtx.getInputData().getWebAppDNS();
-
-        Suite suiteBD = SuitesDAO.getSuite(suite);
+        buildReport.serverDNS = suite.getInputData().getWebAppDNS();
         pintaCabeceraHTML(buildReport);
-        pintaHeadersTableMain(buildReport, suiteBD, context);        
+        pintaHeadersTableMain(buildReport, suite);        
         pintaTestRunsSuite(buildReport, suite);
         pintaCierreHTML(buildReport);
-        
         buildReport.replaceTagWithTree("@VALUES_TREE");
         createFileReportHTML(buildReport);
     }
@@ -94,19 +83,18 @@ public class GenerateReports extends EmailableReporter {
      * @param suiteBDHash datos a nivel de BD de la suite (tabla SUITE)
      * @param context contexto de ejecución del test a nivel de TestNG
      */
-    public void pintaHeadersTableMain(BuildingReport buildReport, Suite suiteBD, ITestContext context) {
-    	SuiteContextTestMaker testMakerCtx = SuiteContextTestMaker.getTestMakerContext(context);
-    	InputParamsTestMaker inputData = testMakerCtx.getInputData();
-    	
+    public void pintaHeadersTableMain(BuildingReport buildReport, SuiteTestMaker suite) {
+    	InputParamsTestMaker inputData = suite.getInputData();
+
         buildReport.addToReport(
         	"<table id=\"tableMain\" class=\"tablemain\">" + 
             "<thead>\n" + 
             "  <tr id=\"header1\">\n" + 
             "    <th colspan=\"13\" class=\"head\">" + 
-            "      <div id=\"titleReport\">" + suiteBD.getSuiteName() + " - " + context.getName() + " (Suite Date: " + suiteBD.getIdExecution() + ")" +
+            "      <div id=\"titleReport\">" + suite.getName() + " - " + inputData.getApp() + ", " + inputData.getChannel() + " (Id: " + suite.getIdExecution() + ")" +
             "        <span id=\"descrVersion\">" + inputData.getVersionSuite() + "</span>" +
-            "        <span id=\"browser\">" + (String) context.getAttribute("bpath") + "</span>" + 
-            "        <span id=\"url\"><a id=\"urlLink\" href=\"" + (String) context.getAttribute("appPath") + "\">" + (String) context.getAttribute("appPath") + "</a></span>" + 
+            "        <span id=\"browser\">" + inputData.getWebDriverType() + "</span>" + 
+            "        <span id=\"url\"><a id=\"urlLink\" href=\"" + inputData.getUrlBase() + "\">" + inputData.getUrlBase() + "</a></span>" + 
             "      </div>" + 
             "    </th>\n" + 
             "  </tr>\n" +
@@ -194,32 +182,18 @@ public class GenerateReports extends EmailableReporter {
      * @param buildReport objeto en el que vamos construyendo el report
      * @param suite identificador de la suite
      */    
-    private void pintaTestRunsSuite(BuildingReport buildReport, indexSuite suiteId) {
-        Vector<HashMap<String, Object>> listTestRuns = TestRunsDAO.listTestRunsSuite(suiteId);
+    private void pintaTestRunsSuite(BuildingReport buildReport, SuiteTestMaker suite) {
         buildReport.addToReport("<tbody id=\"treet2\">\n");
-        for (int iTestRun = 0; iTestRun < listTestRuns.size(); iTestRun++) {
-            
-            //Obtenemos los datos de la tabla
-            HashMap<String, Object> testRunHash = listTestRuns.get(iTestRun);
-
-            //Aumentamos el contador de filas
+        for (XmlTest xmlTestRun : suite.getTests()) {
+        	TestRunTestMaker testRun = (TestRunTestMaker)xmlTestRun;
             buildReport.increaseCountRows();
-            
-            //Todos loa valores de tipo método tendrán un valor 0 (son siempre padres de steps y hermanos entre ellos)
             buildReport.addValueToTree(0);
-
-            //Marcamos como último testrun el correspondiente al contador de filas
             buildReport.setLastTestRun(buildReport.getCountRows());
 
-            //Variables registros m�todo
             Date dateInitTestRun = null;
             Date dateFinTestRun = null;
             String timeTestRun = "";
- 
-            String testMeth = (String) testRunHash.get("TEST");
-            String deviceMeth = (String) testRunHash.get("DEVICE");
-            String numberMethods = (String) testRunHash.get("NUMBER_METHODS");
-            
+            testRun.get
             String resultTestRun = utils.getLitEstadoMethod((String) testRunHash.get("RESULT_SCRIPT"), (String)testRunHash.get("RESULT_TNG"));
             dateInitTestRun = new Date(Long.parseLong((String) testRunHash.get("INICIO")));
             dateFinTestRun = new Date(Long.parseLong((String) testRunHash.get("FIN")));

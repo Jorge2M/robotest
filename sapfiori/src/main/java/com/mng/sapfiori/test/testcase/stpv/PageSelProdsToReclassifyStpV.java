@@ -9,8 +9,8 @@ import com.mng.sapfiori.test.testcase.generic.webobject.sections.filterheader.Fi
 import com.mng.sapfiori.test.testcase.webobject.PageReclassifProducts;
 import com.mng.sapfiori.test.testcase.webobject.PageSelProdsToReclassify;
 import com.mng.sapfiori.test.testcase.webobject.PageSelProdsToReclassify.ProductData;
-import com.mng.testmaker.annotations.step.Step;
-import com.mng.testmaker.annotations.validation.Validation;
+import com.mng.testmaker.boundary.aspects.step.Step;
+import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.utils.State;
 
 public class PageSelProdsToReclassifyStpV {
