@@ -1,4 +1,4 @@
-package com.mng.sapfiori.test.testcase.pageobject;
+package com.mng.sapfiori.test.testcase.webobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -36,7 +36,8 @@ public class PageLogin extends WebdrvWrapp {
 		driver.findElement(By.id(IdInputPassword)).sendKeys(password);
 	}
 	
-	public void clickAccederAlSistema() throws Exception {
+	public PageInitial clickAccederAlSistema() throws Exception {
 		clickAndWaitLoad(driver, By.id(IdButtonAccessSystem));
+		return PageInitial.getNew(driver);
 	}
 }

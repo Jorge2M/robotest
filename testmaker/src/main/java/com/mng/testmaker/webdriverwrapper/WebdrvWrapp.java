@@ -219,6 +219,15 @@ public class WebdrvWrapp extends ElementPageFunctions {
         }
     }    
     
+    public static void wait(int seconds) {
+    	try {
+    		Thread.sleep(seconds * 1000);
+    	}
+    	catch (Exception e) {
+    		//
+    	}
+    }
+    
     public static boolean currentURLContains(final String literal, int seconds, WebDriver driver) {
         ExpectedCondition<Boolean> currentURLContains = new ExpectedCondition<Boolean>() {
             @Override

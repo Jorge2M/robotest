@@ -158,4 +158,9 @@ public class ElementPageFunctions {
         WebElement webElem = driver.findElement(byElement);
         WebdrvWrapp.moveToElement(webElem, driver);
     }
+    
+    public static String getText(ElementPage element, WebDriver driver) {
+    	By byElement = By.xpath(element.getXPath());
+    	return driver.findElement(byElement).getText();
+    }
 }
