@@ -23,13 +23,6 @@ public class utils {
         return State.getState(resultSCRint);
     }
     
-    /**
-     * Devuelve el literal correspondiente al resultado de un método
-     */
-    public static String getLitEstadoMethod(final String result_script, final String result_tng) {
-        return getLitEstado(getEstadoMethod(result_script, result_tng).getIdNumerid());
-    }
-    
     public static String getLitEstado(final int result_script) {
         return (State.getState(result_script).getLevel().toString());
     }

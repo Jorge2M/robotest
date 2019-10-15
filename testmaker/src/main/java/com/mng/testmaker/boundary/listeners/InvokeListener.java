@@ -7,6 +7,7 @@ import com.mng.testmaker.domain.StateRun;
 import com.mng.testmaker.domain.SuiteTestMaker;
 import com.mng.testmaker.domain.TestCaseTestMaker;
 import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.controlTest.FmwkTest;
 
 import org.apache.logging.log4j.LogManager;
@@ -50,18 +51,21 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
   
     @Override //End Method Success
     public void onTestSuccess(ITestResult result) {
-    	getTestRun(result).setState(StateRun.Finished);
+    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCase(result);
+    	testCase.end();
     }
   
     @Override //End Method Skipped
     public void onTestSkipped(ITestResult result) {
-    	getTestRun(result).setState(StateRun.Finished);
+    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCase(result);
+    	testCase.end(State.Skip);
     }
   
     @Override //End Method Failure
     public void onTestFailure(ITestResult result) {
         pLogger.error("Exception for TestNG", result.getThrowable());
-    	getTestRun(result).setState(StateRun.Finished);
+    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCase(result);
+    	testCase.end(State.Nok);
     }
     
     private TestRunTestMaker getTestRun(ITestResult result) {

@@ -50,6 +50,16 @@ public class StepTestMaker {
 		return testCaseParent;
 	}
 	
+	public int getPositionInTestCase() {
+		List<StepTestMaker> listSteps = testCaseParent.getStepsList();
+		for (int i=0; i<listSteps.size(); i++) {
+			if (listSteps.get(i)==this) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
     public void setState(StateRun state) {
     	this.state = state;
     }
@@ -199,6 +209,10 @@ public class StepTestMaker {
     public void setListResultValidations(ChecksResult listResultValidations) {
     	setExcepExists(false);
     	this.listResultValidations = listResultValidations;
+    }
+    
+    public int getNumValidations() {
+    	return getListResultValidations().size();
     }
     
     public ChecksResult getListResultValidations() {

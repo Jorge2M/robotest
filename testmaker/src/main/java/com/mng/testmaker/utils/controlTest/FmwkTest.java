@@ -34,14 +34,10 @@ import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.data.ConstantesTestMaker;
 import com.mng.testmaker.domain.StateRun;
 import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.jdbc.dao.StepsDAO;
-import com.mng.testmaker.jdbc.dao.SuitesDAO;
-import com.mng.testmaker.jdbc.dao.ValidationsDAO;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.NetTrafficMng;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.utils;
 import com.mng.testmaker.utils.otras.WebDriverArqUtils;
 
@@ -60,45 +56,11 @@ public class FmwkTest {
      */
     @SuppressWarnings({ "unchecked"})    
     public static void grabStep(StepTestMaker datosStep, DataFmwkTest dFTest) {
-    	if (dFTest==null || dFTest.ctx==null || dFTest.meth==null) {
-    		return;
-    	}
-    	
-    	//TODO eliminar este If cuando hayamos migrado todo a AspectJ
-    	if (TestCaseData.peekDatosStepForStep()==datosStep) {
-    		TestCaseData.pollDatosStepForStep();
-    	}
-    	
-        if ("ROBOTEST2".equals(System.getProperty("ROBOTEST2"))) {
-            // No queremos crear una dependencia ciclica robotest2 report, por lo que es licito realizar este workaround intercambiando datos atraves de listas y hashes
-            Map<StepTestMaker, List<String>> stepMap = (Map<StepTestMaker, List<String>>) dFTest.ctx.getSuite()
-                    .getAttribute("ROBOTEST2_STEP_VALIDATIONS");
-            Map<StepTestMaker, List<State>> stepMapStatus = (Map<StepTestMaker, List<State>>) dFTest.ctx.getSuite()
-                    .getAttribute("ROBOTEST2_VALIDATION_STATUS_LIST");              
-            Map<StepTestMaker, List<byte[]>> screnshootsMap = (Map<StepTestMaker, List<byte[]>>) dFTest.ctx.getSuite()
-                    .getAttribute("ROBOTEST2_SCRENSHOT_LIST");
-            Map<StepTestMaker, List<byte[]>> htmlsourcesMap = (Map<StepTestMaker, List<byte[]>>) dFTest.ctx.getSuite()
-                    .getAttribute("ROBOTEST2_SOURCES_LIST");
-            if (!stepMap.containsKey(datosStep)) {
-                stepMap.put(datosStep, new ArrayList<String>());
-                stepMapStatus.put(datosStep, new ArrayList<State>());
-                screnshootsMap.put(datosStep, new ArrayList<byte[]>());
-                htmlsourcesMap.put(datosStep, new ArrayList<byte[]>());
-            }
-            if (datosStep.getHoraFin()==null) {
-                datosStep.setHoraFin(new Date(System.currentTimeMillis()));
-            }
-            
-            System.out.println("ROBOTEST2: LAZY REPORT STEP REDIRECT");
-        }
-        skipTestsIfSuiteStopped(dFTest.ctx);                
-        StepsDAO.grabStep(datosStep, dFTest.meth, dFTest.ctx);
         storeFileEvidencesIfNeeded(datosStep, TypeStore.step, dFTest);
     }
 
     @SuppressWarnings({ "unchecked"})
     public static void grabStepValidations(ChecksResult validations, String descripValidac) {
-    	TestMaker.skipTestsIfSuiteStopped();
     	
         if (!stepMap.containsKey(datosStep)) {
             stepMap.put(datosStep, new ArrayList<String>());
@@ -312,9 +274,13 @@ public class FmwkTest {
         return (prefixEvidenciaStep + Integer.toString(stepNumber) + extension);
     }
 
-    public static String getPathFileEvidenciaStep(String outputDirectory, String testRunName, String methodWithFactory, int stepNumber, TypeEvidencia typeEvidencia) {
+    public static String getPathFileEvidenciaStep(String outputDirectory, StepTestMaker step, TypeEvidencia typeEvidencia) {
+        int stepNumber = step.getPositionInTestCase();
+        String testCaseNameUnique = step.getTestCaseParent().getNameUnique();
+        String testRunName = step.getTestCaseParent().getTestRunParent().getName();
+        
         String fileName = getNameFileEvidenciaStep(stepNumber, typeEvidencia);
-        return (getPathFolderEvidenciasStep(outputDirectory, testRunName, methodWithFactory) + File.separator + fileName);
+        return (getPathFolderEvidenciasStep(outputDirectory, testRunName, testCaseNameUnique) + File.separator + fileName);
     }
 
     public static String getPathFileEvidenciaStep(ITestContext context, String methodWithFactory, int stepNumber, TypeEvidencia typeEvidencia) {

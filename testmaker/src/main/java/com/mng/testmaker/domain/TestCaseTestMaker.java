@@ -8,17 +8,20 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.SkipException;
 
+import com.mng.testmaker.utils.State;
+
 public class TestCaseTestMaker  {
 
 	private final List<StepTestMaker> listSteps = new ArrayList<>();
 	
-	private StateRun state = StateRun.Started;
+	private StateRun stateRun = StateRun.Started;
+	private State state = State.Ok;
 	private final SuiteTestMaker suiteParent;
 	private final TestRunTestMaker testRunParent;
 	private final WebDriver driver;
 	private final ITestResult result;
 	private final String threadName;
-	private String specificDataFactory;
+	private String refineDataName;
 
 	public TestCaseTestMaker(ITestResult result) {
 		this.testRunParent = (TestRunTestMaker)result.getTestContext().getCurrentXmlTest();
@@ -30,6 +33,37 @@ public class TestCaseTestMaker  {
 		this.result = result;
 		this.driver = getWebDriverForTestCase();
 		this.threadName = Thread.currentThread().getName();
+	}
+	
+	public String getNameUnique() {
+		return result.getName() + getRefineDataName();
+	}
+	
+	public void end(State state) {
+    	setStateRun(StateRun.Finished);
+    	this.state = state;
+	}
+	
+	public void end() {
+    	setStateRun(StateRun.Finished);
+    	this.state = getStateFromSteps();
+	}
+
+	public State getStateResult() {
+		return this.state;
+	}
+	
+	public static TestCaseTestMaker getTestCase(ITestResult result) {
+		for (SuiteTestMaker suite : SuitesExecuted.getSuitesExecuted()) {
+			for (TestRunTestMaker testRun : suite.getListTestRuns()) {
+				for (TestCaseTestMaker testCase : testRun.getListTestCases()) {
+					if (testCase.getResult()==result) {
+						return testCase;
+					}
+				}
+			}
+		}
+		return null;
 	}
 	
 	public static TestCaseTestMaker getTestCaseInThread() {
@@ -46,12 +80,26 @@ public class TestCaseTestMaker  {
 		return null;
 	}
 	
+	public ITestResult getResult() {
+		return this.result;
+	}
+	
 	public void addStep(StepTestMaker step) {
 		listSteps.add(step);
 	}
 	
-	public List<StepTestMaker> getListaSteps() {
+	public List<StepTestMaker> getStepsList() {
 		return this.listSteps;
+	}
+
+	private State getStateFromSteps() {
+		State stateReturn = State.Ok;
+		for (StepTestMaker step : getStepsList()) {
+			if (step.getResultSteps().isMoreCriticThan(stateReturn)) {
+				stateReturn = step.getResultSteps();
+			}
+		}
+		return stateReturn;
 	}
 	
 	public StepTestMaker getCurrentStep() {
@@ -71,12 +119,12 @@ public class TestCaseTestMaker  {
 		return stepReturn;
 	}
 	
-	public StateRun getState() {
-		return this.state;
+	public StateRun getStateRun() {
+		return this.stateRun;
 	}
 	
-	public void setState(StateRun state) {
-		this.state = state;
+	public void setStateRun(StateRun stateRun) {
+		this.stateRun = stateRun;
 	}
 	
 	private WebDriver getWebDriverForTestCase() {
@@ -104,11 +152,11 @@ public class TestCaseTestMaker  {
 		return testRunParent;
 	}
 	
-	public String getSpecificDataFactory() {
-		return this.specificDataFactory;
+	public String getRefineDataName() {
+		return this.refineDataName;
 	}
 	
-	public void setSpecificDataFactory(String specificDataFactory) {
-		this.specificDataFactory = specificDataFactory;
+	public void setRefineDataName(String refineDataName) {
+		this.refineDataName = refineDataName;
 	}
 }

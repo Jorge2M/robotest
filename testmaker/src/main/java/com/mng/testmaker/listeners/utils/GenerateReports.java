@@ -25,7 +25,9 @@ import org.testng.xml.XmlTest;
 
 import com.mng.testmaker.data.ConstantesTestMaker;
 import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.SuiteTestMaker;
+import com.mng.testmaker.domain.TestCaseTestMaker;
 import com.mng.testmaker.domain.TestRunTestMaker;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.utils;
@@ -190,100 +192,68 @@ public class GenerateReports extends EmailableReporter {
             buildReport.addValueToTree(0);
             buildReport.setLastTestRun(buildReport.getCountRows());
 
-            Date dateInitTestRun = null;
-            Date dateFinTestRun = null;
-            String timeTestRun = "";
-            testRun.get
-            String resultTestRun = utils.getLitEstadoMethod((String) testRunHash.get("RESULT_SCRIPT"), (String)testRunHash.get("RESULT_TNG"));
-            dateInitTestRun = new Date(Long.parseLong((String) testRunHash.get("INICIO")));
-            dateFinTestRun = new Date(Long.parseLong((String) testRunHash.get("FIN")));
-            timeTestRun = (String) testRunHash.get("TIME_MS");
+        	ITestContext ctxTng = testRun.getTestNgContext();
+        	java.util.Date startDate = ctxTng.getStartDate();
+        	java.util.Date endDate = ctxTng.getEndDate();
+        	long timeMillis = endDate.getTime() - startDate.getTime();
+        	
+        	String deviceBSmovil = "";
+        	if (testRun.getBrowserStackMobil()!=null) {
+        		deviceBSmovil = testRun.getBrowserStackMobil().getDevice();
+        	}
 
             DateFormat format = DateFormat.getDateTimeInstance();
             buildReport.addToReport( 
             	"<tr class=\"testrun\">" +
             	"  <td style=\"display:none;\"></td>\n" + 
-            	"  <td class=\"nowrap\">" + testMeth + "</td>" + 
-            	"  <td class=\"nowrap\"><div id=\"device\">" + deviceMeth + "</div></td>" + 
-            	"  <td>" + numberMethods + "</td>" + 
-            	"  <td><div class=\"result" + resultTestRun + "\">" + resultTestRun + "</div></td>" + 
-            	"  <td>" + timeTestRun + "</td>" + "               <td></td>" + 
+            	"  <td class=\"nowrap\">" + testRun.getName() + "</td>" + 
+            	"  <td class=\"nowrap\"><div id=\"device\">" + deviceBSmovil + "</div></td>" + 
+            	"  <td>" + testRun.getNumTestCases() + "</td>" + 
+            	"  <td><div class=\"result" + testRun.getState() + "\">" + testRun.getState() + "</div></td>" + 
+            	"  <td>" + timeMillis + "</td>" + "               <td></td>" + 
             	"  <td><br><br></td>" + 
             	"  <td></td>" + 
             	"  <td></td>" +
-            	"  <td>" + format.format(dateInitTestRun) + "</td>" + 
-            	"  <td>" + format.format(dateFinTestRun) + "</td>" +
+            	"  <td>" + format.format(startDate) + "</td>" + 
+            	"  <td>" + format.format(endDate) + "</td>" +
             	"  <td></td>" + 
             	"</tr>\n");
             
-            //Pintamos los METHODS / STEPS / VALIDATIONS asociados al Method
-            pintaMethodsTestRun(buildReport, suiteId, testMeth);
+            pintaMethodsTestRun(buildReport, testRun);
         }
     }    
     
-    /**
-     * Añadimos al report los métodos asociados a un determinado testrun
-     * @param buildReport objeto en el que vamos construyendo el report
-     * @param suite identificador de la suite
-     */    
-    private void pintaMethodsTestRun(BuildingReport buildReport, indexSuite suiteId, String testRun) {
-        Vector<HashMap<String, Object>> listMethods = MethodsDAO.listMethodsTestRun(suiteId, testRun);
-        for (int iMethod = 0; iMethod < listMethods.size(); iMethod++) {
-            //Actualizamos el iMethod que indica el contador correspondiente último método tratado 
-            buildReport.setIMethod(iMethod);
-            
-            //Inicialmente el indicador de steps con timeout
+    private void pintaMethodsTestRun(BuildingReport buildReport, TestRunTestMaker testRun) {
+    	List<TestCaseTestMaker> listTestCases = testRun.getListTestCases();
+    	for (int i=0; i<listTestCases.size(); i++) {
+    		TestCaseTestMaker testCase = listTestCases.get(i);
+            buildReport.setIMethod(i);
             buildReport.setTimeoutStep(false);
-
-            //Obtenemos los datos de la tabla
-            HashMap<String, Object> methodHash = listMethods.get(buildReport.getIMethod());
-
-            //Aumentamos el contador de filas
             buildReport.increaseCountRows();
-            
-            //Todos los methods serán hermanos (mismo 'valueTree') e hijos del último testrun (posición en la tabla del último testrun, que equivale al valor+1 del valor asignado al último testrun)
             buildReport.addValueToTree(buildReport.getLastTestRun());
-            
-            //Marcamos como último método el correspondiente al contador de filas
             buildReport.setLastMethod(buildReport.getCountRows());
 
-            // Variables registros m�todo
-            Date dateInitMeth = null;
-            Date dateFinMeth = null;
-            String timeNewMeth = "";
-            String classMeth = "";
- 
-            String testMeth = (String) methodHash.get("TEST");
-            String metodoMeth = (String) methodHash.get("METHOD");
-            String descrMeth = (String) methodHash.get("DESCRIPTION");
-            String instanceMeth = (String) methodHash.get("INSTANCIA");
-            String numberSteps = (String) methodHash.get("NUMBER_STEPS");
-            
-            String resultNewMeth = utils.getLitEstadoMethod((String) methodHash.get("RESULT_SCRIPT"), (String) methodHash.get("RESULT_TNG"));
-            dateInitMeth = new Date(Long.parseLong((String) methodHash.get("INICIO")));
-            dateFinMeth = new Date(Long.parseLong((String) methodHash.get("FIN")));
-            timeNewMeth = (String) methodHash.get("TIME_MS");
-            classMeth = (String) methodHash.get("CLASS_SIGNATURE");
-
+            long startMillis = testCase.getResult().getStartMillis();
+            long endMillis = testCase.getResult().getEndMillis();
+            long duration = endMillis - startMillis;
             DateFormat format = DateFormat.getDateTimeInstance();
             buildReport.addToReport( 
                 "<tr class=\"method\"" + " met=\"" + buildReport.getIMethod() + "\">" +
                 "  <td style=\"display:none;\"></td>\n" + 
-                "  <td class=\"nowrap\">" + metodoMeth + "</td>" + 
-                "  <td class=\"nowrap\">" + instanceMeth + "</td>" + 
-                "  <td>" + numberSteps + "</td>" + 
-                "  <td><div class=\"result" + resultNewMeth + "\">" + resultNewMeth + "</div></td>" + 
-                "  <td>" + timeNewMeth + "</td>" + 
+                "  <td class=\"nowrap\">" + testCase.getNameUnique() + "</td>" + 
+                "  <td class=\"nowrap\">" + testCase.getResult().getInstanceName() + "</td>" + 
+                "  <td>" + testCase.getStepsList().size() + "</td>" + 
+                "  <td><div class=\"result" + testCase.getStateResult() + "\">" + testCase.getStateResult() + "</div></td>" + 
+                "  <td>" + duration + "</td>" + 
                 "  <td></td>" + 
                 "  <td><br><br></td>" + 
-                "  <td colspan=2>" + descrMeth + "</td>" + 
-                "  <td>" + "@TIMEOUTSTEP" + format.format(dateInitMeth) + "</td>" + 
-                "  <td>" + "@TIMEOUTSTEP" + format.format(dateFinMeth) + "</td>" +                        
-                "  <td>" + classMeth + "</td>" + 
+                "  <td colspan=2>" + testCase.getResult().getMethod().getDescription() + "</td>" + 
+                "  <td>" + "@TIMEOUTSTEP" + format.format(new Date(startMillis)) + "</td>" + 
+                "  <td>" + "@TIMEOUTSTEP" + format.format(new Date(endMillis)) + "</td>" +
+                "  <td>" + testCase.getResult().getMethod().getClass() + "</td>" + 
                 "</tr>\n");
             
-            //Pintamos los STEPS / VALIDATIONS asociados al Method
-            pintaStepsMethod(buildReport, suiteId, testMeth, metodoMeth);
+            pintaStepsMethod(buildReport, testCase);
 
             //A posteriori, si en alguno de los Steps se ha detectado un timeout, se marca el método con un estilo determinado que resalte este hecho
             String fontTimeout = "<font>";
@@ -294,111 +264,53 @@ public class GenerateReports extends EmailableReporter {
         }
     }    
     
-    /**
-     * Añadimos al report los steps asociados a un determinado method (suite - testrun - method)
-     * @param buildReport objeto en el que vamos construyendo el report
-     * @param suite identificador de la suite
-     * @param metodo identificador del method
-     */
-    private void pintaStepsMethod(BuildingReport buildReport, indexSuite suiteId1, String testRun, String metodo) {
-        //Obtenemos la lista de pasos de un method
-        Vector<HashMap<String, Object>> listSteps = StepsDAO.listStepsMethod(suiteId1, testRun, metodo);
-        
+    private void pintaStepsMethod(BuildingReport buildReport, TestCaseTestMaker testCase) {
         String outputDir = buildReport.outputDirectory;
-        for (int iStep = 0; iStep < listSteps.size(); iStep++) {
-            HashMap<String, Object> stepHash = listSteps.get(iStep);
-
-            //Aumentamos el contador de filas
+        for (StepTestMaker step : testCase.getStepsList()) {
             buildReport.increaseCountRows();
-            
-            //Almacenamos la posición asociada al último step tratado
             buildReport.setLastStep(buildReport.getCountRows());
-            
-            //Todas los steps serán hermanos (mismo 'valueTree') e hijos del último method (posición en la tabla del último method, que equivale al valor+1 del valor asignado al último method)
             buildReport.addValueToTree(buildReport.getLastMethod());
-            
-            // Variables registros step
-            Date dateInitSt = null;
-            Date dateFinSt = null;
-            String stepNumber = "";
-            String stepValidations = "";
-            String resuNewStep = "";
-            String timeNewStep = "";
-            String PNGNewStep = "";
+
+            int stepNumber = step.getPositionInTestCase();
+            String ImageFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, step, TypeEvidencia.imagen);
+            File indexFile = new File(ImageFileStep);
             String litPNGNewStep = "";
-            String linkErrorNew = "";
-            String linkHtmlNew = "";
-            String linkHarpNew = "";
-            String linkHarNew = "";
-            String description = "";
-            String resExpected = "";
-            String typePagNew = "";
-            String testNewLit = "";
-
-            stepValidations = (String) stepHash.get("NUM_VALIDATIONS");
-            stepNumber = (String) stepHash.get("STEP_NUMBER");
-            dateInitSt = new Date(Long.parseLong((String) stepHash.get("INICIO")));
-            dateFinSt = new Date(Long.parseLong((String) stepHash.get("FIN")));
-            resuNewStep = utils.getLitEstado((String) stepHash.get("RESULTADO"));
-            timeNewStep = (String) stepHash.get("TIME_MS");
-            typePagNew = (String) stepHash.get("TYPE_PAGE");
-            testNewLit = (String) stepHash.get("TEST");
-
-            if (Integer.parseInt(typePagNew) == ConstantesTestMaker.CONST_HTML) {
-                // Comprobación existencia hardcopy página
-                String methodName = (String)stepHash.get("METHOD");
-                String ImageFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, testNewLit, methodName, Integer.parseInt(stepNumber), TypeEvidencia.imagen);
-                String HtmlFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, testNewLit, methodName, Integer.parseInt(stepNumber), TypeEvidencia.html);
-                String ErrorFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, testNewLit, methodName, Integer.parseInt(stepNumber), TypeEvidencia.errorpage);
-                String HARPFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, testNewLit, methodName, Integer.parseInt(stepNumber), TypeEvidencia.harp);
-                String HARFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, testNewLit, methodName, Integer.parseInt(stepNumber), TypeEvidencia.har);
-                
-                File indexFile = new File(ImageFileStep);
-                if (indexFile.exists()) {
-                    litPNGNewStep = "HardCopy";
-                    PNGNewStep = getRelativePathEvidencia(testRun, methodName, Integer.parseInt(stepNumber), TypeEvidencia.imagen);
-                } else {
-                    litPNGNewStep = "";
-                    PNGNewStep = "#";
-                }
-
-                // Comprobación existencia página error errorPagefaces
-                indexFile = new File(ErrorFileStep);
-                if (indexFile.exists()) {
-                    linkErrorNew = " \\ <a href=\"" + getRelativePathEvidencia(testRun, methodName, Integer.parseInt(stepNumber), TypeEvidencia.errorpage) + "\" target=\"_blank\">ErrorPage</a>";
-                }
-                
-                // Comprobación existencia de archivo .HARP
-                indexFile = new File(HARPFileStep);
-                if (indexFile.exists()) {
-                    String pathHARP = utils.obtainDNSFromFile(indexFile.getAbsolutePath(), buildReport.serverDNS).replace('\\', '/');
-                    linkHarpNew = " \\ <a href=\"" + ConstantesTestMaker.URL_SOFTWAREISHARD + pathHARP + "\" target=\"_blank\">NetTraffic</a>";
-                }
-                
-                // Comprobación existencia de archivo .HAR
-                indexFile = new File(HARFileStep);
-                if (indexFile.exists()) {
-                    linkHarNew = " \\ <a href=\"" + getRelativePathEvidencia(testRun, methodName, Integer.parseInt(stepNumber), TypeEvidencia.har) + "\" target=\"_blank\">NetJSON</a>";
-                }
-                
-                // Comprobación de la existencia del archivo .HTML
-                indexFile = new File(HtmlFileStep);
-                if (indexFile.exists()) {
-                    linkHtmlNew = "<a href=\"" + getRelativePathEvidencia(testRun, methodName, Integer.parseInt(stepNumber), TypeEvidencia.html) + "\">HTML Page</a>";
-                }
+            String PNGNewStep = "#";
+            if (indexFile.exists()) {
+                litPNGNewStep = "HardCopy";
+                PNGNewStep = getRelativePathEvidencia(step, TypeEvidencia.imagen);
             }
 
-            description = (String) stepHash.get("DESCRIPTION");
-            resExpected = (String) stepHash.get("RES_EXPECTED");
+            String ErrorFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, step, TypeEvidencia.errorpage);
+            indexFile = new File(ErrorFileStep);
+            String linkErrorNew = "";
+            if (indexFile.exists()) {
+                linkErrorNew = " \\ <a href=\"" + getRelativePathEvidencia(step, TypeEvidencia.errorpage) + "\" target=\"_blank\">ErrorPage</a>";
+            }
 
-            Calendar fechaInitSt = Calendar.getInstance();
-            fechaInitSt.setTime(dateInitSt);
+            String HARPFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, step, TypeEvidencia.harp);
+            indexFile = new File(HARPFileStep);
+            String linkHarpNew = "";
+            if (indexFile.exists()) {
+                String pathHARP = utils.obtainDNSFromFile(indexFile.getAbsolutePath(), buildReport.serverDNS).replace('\\', '/');
+                linkHarpNew = " \\ <a href=\"" + ConstantesTestMaker.URL_SOFTWAREISHARD + pathHARP + "\" target=\"_blank\">NetTraffic</a>";
+            }
+            
+            String HARFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, step, TypeEvidencia.har);
+            String linkHarNew = "";
+            indexFile = new File(HARFileStep);
+            if (indexFile.exists()) {
+                linkHarNew = " \\ <a href=\"" + getRelativePathEvidencia(step, TypeEvidencia.har) + "\" target=\"_blank\">NetJSON</a>";
+            }
 
-            Calendar fechaFinSt = Calendar.getInstance();
-            fechaFinSt.setTime(dateFinSt);
+            String HtmlFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, step, TypeEvidencia.html);
+            indexFile = new File(HtmlFileStep);
+            String linkHtmlNew = "";
+            if (indexFile.exists()) {
+                linkHtmlNew = "<a href=\"" + getRelativePathEvidencia(step, TypeEvidencia.html) + "\">HTML Page</a>";
+            }
 
-            //Si observamos que se ha producido un tiempo > 30 segundos en algún step lo marcamos
-            long diffInMillies = dateFinSt.getTime() - dateInitSt.getTime();
+            long diffInMillies = step.getHoraFin().getTime() - step.getHoraInicio().getTime();
             String tdClassDate = "<td>";
             if (diffInMillies > 30000) {
                 tdClassDate = "<td><font class=\"timeout\">";
@@ -411,47 +323,35 @@ public class GenerateReports extends EmailableReporter {
                 "     <td style=\"display:none;\"></td>\n" +
                 "     <td class=\"nowrap\">Step " + stepNumber + "</td>" + 
                 "     <td></td>" + 
-                "     <td>" + stepValidations + "</td>" + 
-                "     <td><div class=\"result" + resuNewStep + "\">" + resuNewStep + "</div></td>" + 
-                "     <td>" + timeNewStep + "</td>" + 
+                "     <td>" + step.getNumValidations() + "</td>" + 
+                "     <td><div class=\"result" + step.getResultSteps() + "\">" + step.getResultSteps() + "</div></td>" + 
+                "     <td>" + diffInMillies + "</td>" + 
                 "     <td><a href=\"" + PNGNewStep + "\" target=\"_blank\">" + litPNGNewStep + "</a>" + linkErrorNew + linkHarpNew + linkHarNew + "</td>" + 
                 "     <td>" + linkHtmlNew + "</td>" +
-                "     <td>" + description + "</td>" + 
-                "     <td>" + resExpected + "</td>" +
-                tdClassDate + /* litFechaInitSt */format.format(dateInitSt) + "</td>" + 
-                tdClassDate + /* litFechaFinSt */format.format(dateFinSt) + "</td>" +                        
+                "     <td>" + step.getDescripcion() + "</td>" + 
+                "     <td>" + step.getResExpected() + "</td>" +
+                tdClassDate + format.format(step.getHoraInicio()) + "</td>" + 
+                tdClassDate + format.format(step.getHoraFin()) + "</td>" +
                 "     <td></td>" +
                 "</tr>\n");
 
-            pintaValidacionesStep(buildReport, suiteId1, testRun, metodo, stepNumber);
+            pintaValidacionesStep(buildReport, step);
         }        
-        
     }
 
-    private String getRelativePathEvidencia(String testRunName, String methodNameWithFactory, int stepNumber, TypeEvidencia typeEvidencia) {
-        String fileName = FmwkTest.getNameFileEvidenciaStep(stepNumber, typeEvidencia);
-        return ("./" + testRunName + "/" + methodNameWithFactory + "/" + fileName);
+    private String getRelativePathEvidencia(StepTestMaker step, TypeEvidencia typeEvidencia) {
+        String fileName = FmwkTest.getNameFileEvidenciaStep(step.getPositionInTestCase(), typeEvidencia);
+        String testRunName = step.getTestRunParent().getName();
+        String testCaseNameUnique = step.getTestCaseParent().getNameUnique();
+        return ("./" + testRunName + "/" + testCaseNameUnique + "/" + fileName);
     }
     
-    /**
-     * Añadimos al report las validaciones asociadas a un determinado step (suite - testrun - method - step)
-     * @param buildReport objeto en el que vamos construyendo el report
-     * @param suite identificador de la suite
-     * @param metodo identificador del method
-     * @param stepNumber identifocador del step
-     */
-    private void pintaValidacionesStep(BuildingReport buildReport, indexSuite suiteId, String testRun, String metodo, String stepNumber) {
-        Vector<HashMap<String, Object>> listValidations = ValidationsDAO.listValidationsStep(suiteId, testRun, metodo, stepNumber);
+    private void pintaValidacionesStep(BuildingReport buildReport, StepTestMaker step) {
+    	
         for (int iValid = 0; iValid < listValidations.size(); iValid++) {
             HashMap<String, Object> validationH = listValidations.get(iValid);
-            
-            //Aumentamos el contador de filas
             buildReport.increaseCountRows();
-            
-            //Todas las validaciones serán hermanas (mismo 'valueTree') e hijas del último paso (posición en la tabla del último step, que equivale al valor+1 del valor asignado al último step)
             buildReport.addValueToTree(buildReport.getLastStep());
-
-            // Variables registros validation
             String validationNumber = "";
             String descriptValid = "";
             String listResultVals = "";

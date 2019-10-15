@@ -9,13 +9,15 @@ import org.testng.xml.XmlGroups;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
+import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.webdriver.BrowserStackDesktop;
 import com.mng.testmaker.utils.webdriver.BrowserStackMobil;
 
 public class TestRunTestMaker extends XmlTest {
 
 	private static final long serialVersionUID = -4002416107477209626L;
-	private StateRun state = StateRun.Started;
+	private StateRun stateRun = StateRun.Started;
+	private State state = State.Ok;
     public XmlGroups x_xmlGroupsVisible;
     private ITestContext testNgContext;
     private List<TestCaseTestMaker> listTestCases = new ArrayList<>();
@@ -31,15 +33,24 @@ public class TestRunTestMaker extends XmlTest {
     }
     
 	public void end() {
-		state = StateRun.Stopped;
-	}
-    
-	public StateRun getState() {
-		return state;
+		setState();
+		stateRun = StateRun.Stopped;
 	}
 	
-	public void setState(StateRun state) {
-		this.state = state;
+	private State setState() {
+		State stateReturn = State.Ok;
+		for (TestCaseTestMaker testCase : getListTestCases()) {
+			if (testCase.getState())
+		}
+		return state;
+	}
+    
+	public StateRun getStateRun() {
+		return stateRun;
+	}
+	
+	public void setState(StateRun stateRun) {
+		this.stateRun = stateRun;
 	}
     
     public SuiteTestMaker getSuiteParent() {
@@ -74,6 +85,14 @@ public class TestRunTestMaker extends XmlTest {
 	
 	public List<TestCaseTestMaker> getListTestCases() {
 		return listTestCases;
+	}
+	
+	public int getNumTestCases() {
+		return getListTestCases().size();
+	}
+	
+	public State getState() {
+		return state;
 	}
 	
 	public void addTestCase(TestCaseTestMaker testCase) {

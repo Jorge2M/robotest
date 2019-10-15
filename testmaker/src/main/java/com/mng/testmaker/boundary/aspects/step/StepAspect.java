@@ -11,6 +11,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import com.mng.testmaker.annotations.MatcherWithMethodParams;
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.TestCaseTestMaker;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.State;
 
 
@@ -27,6 +28,7 @@ public class StepAspect {
     public void before(JoinPoint joinPoint) {
     	InfoStep infoStep = InfoStep.from(joinPoint);
     	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInThread();
+    	TestMaker.skipTestsIfSuiteStopped(testCase.getSuiteParent());
     	StepTestMaker step = infoStep.getDatosStep();
     	testCase.addStep(step);
     	setInitDataStep(infoStep, joinPoint, step);
@@ -46,6 +48,7 @@ public class StepAspect {
     	throwing="ex")
     public void doRecoveryActions(JoinPoint joinPoint, Throwable ex) {
     	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInThread();
+    	TestMaker.skipTestsIfSuiteStopped(testCase.getSuiteParent());
     	StepTestMaker currentStep = testCase.getCurrentStep();
     	currentStep.setResultSteps(State.Nok);
     	currentStep.setExcepExists(true); 
@@ -56,6 +59,7 @@ public class StepAspect {
     	pointcut="annotationStepPointcut() && atExecution()")
     public void grabValidationAfter(JoinPoint joinPoint) throws Throwable {
     	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInThread();
+    	TestMaker.skipTestsIfSuiteStopped(testCase.getSuiteParent());
     	StepTestMaker currentStep = testCase.getCurrentStep();
     	currentStep.setExcepExists(false); 
     	currentStep.setHoraFin(new Date(System.currentTimeMillis()));
