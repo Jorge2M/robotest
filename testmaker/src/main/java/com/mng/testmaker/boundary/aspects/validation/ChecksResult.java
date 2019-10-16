@@ -9,7 +9,6 @@ import com.mng.testmaker.domain.SuiteTestMaker;
 import com.mng.testmaker.domain.TestCaseTestMaker;
 import com.mng.testmaker.domain.TestRunTestMaker;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
 
 public class ChecksResult {
 	private final List<ResultValidation> listResultValidations;
@@ -22,7 +21,7 @@ public class ChecksResult {
 	
     public ChecksResult() {
     	this.listResultValidations = new ArrayList<>();
-    	this.testCaseParent = TestCaseTestMaker.getTestCaseInThread();
+    	this.testCaseParent = TestCaseTestMaker.getTestCaseInExecution();
     	this.stepParent = testCaseParent.getLastStepFinished();
     	this.testRunParent = testCaseParent.getTestRunParent();
     	this.suiteParent = testCaseParent.getSuiteParent();
@@ -116,11 +115,6 @@ public class ChecksResult {
 		ResultValidation resultValidation = ResultValidation.of(id, levelResult);
 		add(resultValidation);
 	}
-	
-    public void checkAndStoreValidations() {
-    	checkValidations();
-    	FmwkTest.grabStepValidations(this);
-    }
     
     public State calculateStateValidation() {
     	State stateToReturn;
@@ -154,7 +148,7 @@ public class ChecksResult {
     	return true;
     }
     
-    private void checkValidations() {
+    public void checkValidations() {
     	checkAndSetStateValidation();
     	setDatosStepAfterCheckValidation();
     }
@@ -187,7 +181,6 @@ public class ChecksResult {
     }
     
     private void setDatosStepAfterCheckValidation() {
-    	stepParent.setAvoidEvidences(avoidEvidences);
     	if (stateValidation.isMoreCriticThan(stepParent.getResultSteps()) || !stepParent.isStateUpdated()) {
     		stepParent.setResultSteps(stateValidation);
     	}

@@ -8,7 +8,6 @@ import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.utils.NetTrafficMng;
 import com.mng.testmaker.utils.State;
 
-
 public class StepTestMaker {
 	
 	private final SuiteTestMaker suiteParent;
@@ -29,12 +28,24 @@ public class StepTestMaker {
 	private Date hora_inicio; 
 	private Date hora_fin;
 	private State result_steps = State.Nok;
-	private boolean avoidEvidences;
 	private boolean excep_exists = true;
 	private String nameMethodWithFactory = "";
+	
+    public enum StepEvidence {
+    	imagen("png"), 
+    	html("html"), 
+    	errorpage("-error.html"), 
+    	har("har"), 
+    	harp("harp");
+    	
+    	public String fileExtension;
+    	private StepEvidence(String fileExtension) {
+    		this.fileExtension = fileExtension;
+    	}
+    }
     
 	public StepTestMaker() {
-		testCaseParent = TestCaseTestMaker.getTestCaseInThread();
+		testCaseParent = TestCaseTestMaker.getTestCaseInExecution();
 		testRunParent = testCaseParent.getTestRunParent();
 		suiteParent = testRunParent.getSuiteParent();
 	}
@@ -148,21 +159,29 @@ public class StepTestMaker {
         return this.res_expected; 
     }
     
-    public SaveWhen getSaveImagePage() { 
-        return this.saveImagePage; 
-    }
+    public SaveWhen getWhenSave(StepEvidence evidencia) {
+    	switch (evidencia) {
+    	case html:
+    		return saveHtmlPage;
+    	case errorpage:
+    		return saveErrorPage;
+    	case har:
+    	case harp:
+    		return saveNettraffic;
+    	case imagen:
+    	default:
+    		return saveImagePage;
+    	}
+    } 
     
-    public SaveWhen getSaveHtmlPage() { 
-        return this.saveHtmlPage; 
+    public boolean isAvoidEvidenciesInAllValidations() {
+    	for (ChecksResult validation : listChecksResult) {
+    		if (!validation.isAvoidEvidences()) {
+    			return false;
+    		}
+    	}
+    	return true;
     }
-    
-    public SaveWhen getSaveErrorPage() { 
-        return this.saveErrorPage; 
-    }
-    
-    public SaveWhen getSaveNettrafic() { 
-        return this.saveNettraffic; 
-    }    
     
     public int getTypePage() { 
         return this.type_page; 
@@ -183,14 +202,6 @@ public class StepTestMaker {
     public boolean getExcepExists() { 
         return this.excep_exists; 
     }
-    
-	public boolean isAvoidEvidences() {
-		return avoidEvidences;
-	}
-
-	public void setAvoidEvidences(boolean avoidEvidences) {
-		this.avoidEvidences = avoidEvidences;
-	}
     
     public void setNOKstateByDefault() {
     	setExcepExists(true); 

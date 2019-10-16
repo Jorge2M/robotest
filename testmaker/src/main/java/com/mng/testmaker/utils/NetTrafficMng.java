@@ -8,11 +8,9 @@ import java.io.OutputStream;
 import java.util.LinkedList;
 
 import org.apache.commons.compress.utils.IOUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-import com.mng.testmaker.utils.controlTest.FmwkTest;
-import com.mng.testmaker.utils.controlTest.FmwkTest.TypeEvidencia;
+import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.BrowserMobProxyServer;
@@ -26,7 +24,7 @@ import net.lightbody.bmp.proxy.CaptureType;
  *
  */
 public class NetTrafficMng {
-	static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+
 	static ThreadLocal<BrowserMobProxy> proxyInThread;
 	static int initPort = 1000;
 	static int maxSizeListPorts = 20;
@@ -52,7 +50,7 @@ public class NetTrafficMng {
 	        
 			proxy.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.REQUEST_HEADERS);
 	        proxyInThread.set(proxy);
-			pLogger.info("Created Proxy NetTraffic with port " + proxy.getPort());
+	        Log4jConfig.pLogger.info("Created Proxy NetTraffic with port " + proxy.getPort());
 		}
 	}
 	
@@ -71,7 +69,7 @@ public class NetTrafficMng {
 			catch (RuntimeException e) {
 				//NOTA: No debería (miramos de rotar los puertos), pero si en algún momento se produce el RuntimeException por un "java.net.BindException: Address already in use: bind"
 				//entonces se produce un problema según el cuál todo funciona OK pero el Java no acaba. Como si se quedara algún Thread enganchado 
-				pLogger.info(e.getClass() + " in start of proxy in port " + port + ". " + e.getMessage());
+				Log4jConfig.pLogger.info(e.getClass() + " in start of proxy in port " + port + ". " + e.getMessage());
 				port = checkoutPort();
 				i+=1;
 			}
@@ -140,7 +138,7 @@ public class NetTrafficMng {
 				int port = proxy.getPort();
 				proxy.stop();
 				destroyProxy();
-				pLogger.info("Stop Proxy NetTraffic with port " + port);
+				Log4jConfig.pLogger.info("Stop Proxy NetTraffic with port " + port);
 			}
 		}
 	}
@@ -153,7 +151,7 @@ public class NetTrafficMng {
 	
 	public void copyHarToHarp(String nameFileHar) throws Exception {
 		File fileHar = new File(nameFileHar);
-        File fileHarp = new File(nameFileHar.replace(TypeEvidencia.har.fileExtension, TypeEvidencia.harp.fileExtension));
+        File fileHarp = new File(nameFileHar.replace(StepEvidence.har.fileExtension, StepEvidence.harp.fileExtension));
         InputStream inHar = new FileInputStream(fileHar);
         OutputStream outHarp = new FileOutputStream(fileHarp);
         outHarp.write("onInputData(".getBytes());

@@ -10,8 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlDependencies;
@@ -20,11 +18,9 @@ import org.testng.xml.XmlInclude;
 import org.testng.xml.XmlTest;
 
 import com.mng.testmaker.domain.TestRunTestMaker;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 
 public class FilterTestsSuiteXML {
-	
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
     
     private final DataFilterTCases dFilter;
     private final List<String> groupsToExclude;
@@ -65,7 +61,7 @@ public class FilterTestsSuiteXML {
     		removeDependenciesWithGroupsNotExecuted(testRun);
         }
         catch (ClassNotFoundException e) {
-            pLogger.fatal("Problem filtering TestCases", e);
+        	Log4jConfig.pLogger.fatal("Problem filtering TestCases", e);
         }
     }
     
@@ -180,7 +176,7 @@ public class FilterTestsSuiteXML {
             }
         }
         catch (ClassNotFoundException e) {
-            pLogger.fatal("Problem getting list of annotations of TestCases methods",  e);
+        	Log4jConfig.pLogger.fatal("Problem getting list of annotations of TestCases methods",  e);
         }
         
         return listOfAnnotationsOfTestCases;

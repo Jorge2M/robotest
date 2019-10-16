@@ -10,6 +10,7 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
 import com.mng.testmaker.utils.State;
+import com.mng.testmaker.utils.conf.StorerErrorStep;
 import com.mng.testmaker.utils.webdriver.BrowserStackDesktop;
 import com.mng.testmaker.utils.webdriver.BrowserStackMobil;
 
@@ -20,6 +21,7 @@ public class TestRunTestMaker extends XmlTest {
 	private State state = State.Ok;
     public XmlGroups x_xmlGroupsVisible;
     private ITestContext testNgContext;
+    private StorerErrorStep storerErrorStep = null;
     private List<TestCaseTestMaker> listTestCases = new ArrayList<>();
 	private BrowserStackDesktop browserStackDesktop = null;
 	private BrowserStackMobil browserStackMobil = null;
@@ -69,6 +71,10 @@ public class TestRunTestMaker extends XmlTest {
         String suiteDirectory = ((SuiteTestMaker)getSuite()).getDirectory();
         setTestRunOutputDirectory(suiteDirectory);
   	
+    }
+    
+    public StorerErrorStep getStorerErrorStep() {
+    	return storerErrorStep;
     }
     
     private void setTestRunOutputDirectory(String outputDirectory) {

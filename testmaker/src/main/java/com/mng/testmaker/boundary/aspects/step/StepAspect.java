@@ -27,7 +27,7 @@ public class StepAspect {
     @Before("annotationStepPointcut() && atExecution()")
     public void before(JoinPoint joinPoint) {
     	InfoStep infoStep = InfoStep.from(joinPoint);
-    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInThread();
+    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
     	TestMaker.skipTestsIfSuiteStopped(testCase.getSuiteParent());
     	StepTestMaker step = infoStep.getDatosStep();
     	testCase.addStep(step);
@@ -47,7 +47,7 @@ public class StepAspect {
     	pointcut="annotationStepPointcut() && atExecution()", 
     	throwing="ex")
     public void doRecoveryActions(JoinPoint joinPoint, Throwable ex) {
-    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInThread();
+    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
     	TestMaker.skipTestsIfSuiteStopped(testCase.getSuiteParent());
     	StepTestMaker currentStep = testCase.getCurrentStep();
     	currentStep.setResultSteps(State.Nok);
@@ -58,7 +58,7 @@ public class StepAspect {
     @AfterReturning(
     	pointcut="annotationStepPointcut() && atExecution()")
     public void grabValidationAfter(JoinPoint joinPoint) throws Throwable {
-    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInThread();
+    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
     	TestMaker.skipTestsIfSuiteStopped(testCase.getSuiteParent());
     	StepTestMaker currentStep = testCase.getCurrentStep();
     	currentStep.setExcepExists(false); 

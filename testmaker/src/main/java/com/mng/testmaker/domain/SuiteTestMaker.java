@@ -1,15 +1,16 @@
 package com.mng.testmaker.domain;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
-import com.mng.testmaker.service.testreports.DefaultMailEndSuite;
+import com.mng.testmaker.data.ConstantesTestMaker;
+//import com.mng.testmaker.service.testreports.DefaultMailEndSuite;
 import com.mng.testmaker.service.testreports.SenderMailEndSuite;
 import com.mng.testmaker.service.webdriver.pool.PoolWebDrivers;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
 
 public class SuiteTestMaker extends XmlSuite {
 	
@@ -24,8 +25,9 @@ public class SuiteTestMaker extends XmlSuite {
 	public SuiteTestMaker(String idSuiteExecution, InputParamsTestMaker inputParams) {
 		this.idSuiteExecution = idSuiteExecution;
 		this.inputData = inputParams;
-		this.directory = getDirectorySuiteAssociated();
-		this.senderMail = new DefaultMailEndSuite();
+		this.directory = getPathDirectory();
+		//TODO desasteriscar
+		//this.senderMail = new DefaultMailEndSuite();
 	}
 	
 	public String getIdExecution() {
@@ -84,7 +86,16 @@ public class SuiteTestMaker extends XmlSuite {
 		setListeners(listListenersStr);
 	}
 	
-	private String getDirectorySuiteAssociated() {
-		return FmwkTest.getOutputDirectory(System.getProperty("user.dir"), inputData.getSuiteName(), idSuiteExecution);
+	private String getPathDirectory() {
+        String userDir = System.getProperty("user.dir");
+        String lastCharUserDir = userDir.substring(userDir.length() - 1);
+        if (File.separator.compareTo(lastCharUserDir)!=0) {
+            userDir+=File.separator;
+        }
+        return (
+        	userDir +
+        	ConstantesTestMaker.directoryOutputTests + File.separator + 
+        	getName() + File.separator + 
+        	getIdExecution());
 	}
 }

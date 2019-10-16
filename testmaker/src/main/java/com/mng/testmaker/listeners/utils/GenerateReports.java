@@ -8,12 +8,10 @@ import java.io.Writer;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ISuite;
-import org.testng.ISuiteResult;
 import org.testng.ITestContext;
 import org.testng.reporters.EmailableReporter;
 import org.testng.xml.XmlSuite;
@@ -23,36 +21,30 @@ import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.data.ConstantesTestMaker;
 import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
 import com.mng.testmaker.domain.SuiteTestMaker;
 import com.mng.testmaker.domain.TestCaseTestMaker;
 import com.mng.testmaker.domain.TestRunTestMaker;
 import com.mng.testmaker.utils.utils;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
-import com.mng.testmaker.utils.controlTest.FmwkTest.TypeEvidencia;
+import com.mng.testmaker.utils.conf.Log4jConfig;
+import com.mng.testmaker.utils.controlTest.StoreStepEvidencies;
 
 
 public class GenerateReports extends EmailableReporter {
 	
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 
     @Override
-    public void generateReport(final List<XmlSuite> xmlSuites, final List<ISuite> suites, final String outputDirectory) {
+    public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
         super.generateReport(xmlSuites, suites, outputDirectory);
         
-        ITestContext context = null;
-        Map<String, ISuiteResult> r = suites.get(0).getResults();
-        for (ISuiteResult r2 : r.values()) {
-            context = r2.getTestContext();
-        }
-        if (context!=null) {
-        	SuiteTestMaker suiteTestMaker = (SuiteTestMaker)suites.get(0).getXmlSuite();
-            try {
-            	deployStaticsIfNotExist(outputDirectory);
-                generateReportHTML(suiteTestMaker, outputDirectory);
-            } 
-            catch (Exception e) {
-                pLogger.fatal("Problem generating ReportHTML", e);
-            }
+    	SuiteTestMaker suite = (SuiteTestMaker)xmlSuites.get(0);
+        try {
+        	deployStaticsIfNotExist(outputDirectory);
+            generateReportHTML(suite, outputDirectory);
+        } 
+        catch (Exception e) {
+            pLogger.fatal("Problem generating ReportHTML", e);
         }
     }
     
@@ -169,7 +161,7 @@ public class GenerateReports extends EmailableReporter {
         buildReport.addToReport("  <a href=\"emailable-report.html\" target=\"_blank\" class=\"linkTestNG\">Emailable Report</a>");
         buildReport.addToReport("</div>\n");
         buildReport.addToReport("<div class=\"divTestNG\">");
-        buildReport.addToReport("  <a href=\"" + FmwkTest.log4jFileName + "\" target=\"_blank\" class=\"linkTestNG\">" + FmwkTest.log4jFileName + "</a>");
+        buildReport.addToReport("  <a href=\"" + Log4jConfig.log4jFileName + "\" target=\"_blank\" class=\"linkTestNG\">" + Log4jConfig.log4jFileName + "</a>");
         buildReport.addToReport("</div>");        
         buildReport.addToReport("<br>\n");
         buildReport.addToReport("<br>\n");
@@ -268,23 +260,23 @@ public class GenerateReports extends EmailableReporter {
             buildReport.addValueToTree(buildReport.getLastMethod());
 
             int stepNumber = step.getPositionInTestCase();
-            String ImageFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, step, TypeEvidencia.imagen);
+            String ImageFileStep = StoreStepEvidencies.getPathFileEvidenciaStep(outputDir, step, StepEvidence.imagen);
             File indexFile = new File(ImageFileStep);
             String litPNGNewStep = "";
             String PNGNewStep = "#";
             if (indexFile.exists()) {
                 litPNGNewStep = "HardCopy";
-                PNGNewStep = getRelativePathEvidencia(step, TypeEvidencia.imagen);
+                PNGNewStep = getRelativePathEvidencia(step, StepEvidence.imagen);
             }
 
-            String ErrorFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, step, TypeEvidencia.errorpage);
+            String ErrorFileStep = StoreStepEvidencies.getPathFileEvidenciaStep(outputDir, step, StepEvidence.errorpage);
             indexFile = new File(ErrorFileStep);
             String linkErrorNew = "";
             if (indexFile.exists()) {
-                linkErrorNew = " \\ <a href=\"" + getRelativePathEvidencia(step, TypeEvidencia.errorpage) + "\" target=\"_blank\">ErrorPage</a>";
+                linkErrorNew = " \\ <a href=\"" + getRelativePathEvidencia(step, StepEvidence.errorpage) + "\" target=\"_blank\">ErrorPage</a>";
             }
 
-            String HARPFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, step, TypeEvidencia.harp);
+            String HARPFileStep = StoreStepEvidencies.getPathFileEvidenciaStep(outputDir, step, StepEvidence.harp);
             indexFile = new File(HARPFileStep);
             String linkHarpNew = "";
             if (indexFile.exists()) {
@@ -292,18 +284,18 @@ public class GenerateReports extends EmailableReporter {
                 linkHarpNew = " \\ <a href=\"" + ConstantesTestMaker.URL_SOFTWAREISHARD + pathHARP + "\" target=\"_blank\">NetTraffic</a>";
             }
             
-            String HARFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, step, TypeEvidencia.har);
+            String HARFileStep = StoreStepEvidencies.getPathFileEvidenciaStep(outputDir, step, StepEvidence.har);
             String linkHarNew = "";
             indexFile = new File(HARFileStep);
             if (indexFile.exists()) {
-                linkHarNew = " \\ <a href=\"" + getRelativePathEvidencia(step, TypeEvidencia.har) + "\" target=\"_blank\">NetJSON</a>";
+                linkHarNew = " \\ <a href=\"" + getRelativePathEvidencia(step, StepEvidence.har) + "\" target=\"_blank\">NetJSON</a>";
             }
 
-            String HtmlFileStep = FmwkTest.getPathFileEvidenciaStep(outputDir, step, TypeEvidencia.html);
+            String HtmlFileStep = StoreStepEvidencies.getPathFileEvidenciaStep(outputDir, step, StepEvidence.html);
             indexFile = new File(HtmlFileStep);
             String linkHtmlNew = "";
             if (indexFile.exists()) {
-                linkHtmlNew = "<a href=\"" + getRelativePathEvidencia(step, TypeEvidencia.html) + "\">HTML Page</a>";
+                linkHtmlNew = "<a href=\"" + getRelativePathEvidencia(step, StepEvidence.html) + "\">HTML Page</a>";
             }
 
             long diffInMillies = step.getHoraFin().getTime() - step.getHoraInicio().getTime();
@@ -335,8 +327,8 @@ public class GenerateReports extends EmailableReporter {
         }        
     }
 
-    private String getRelativePathEvidencia(StepTestMaker step, TypeEvidencia typeEvidencia) {
-        String fileName = FmwkTest.getNameFileEvidenciaStep(step.getPositionInTestCase(), typeEvidencia);
+    private String getRelativePathEvidencia(StepTestMaker step, StepEvidence evidence) {
+        String fileName = StoreStepEvidencies.getNameFileEvidenciaStep(step.getPositionInTestCase(), evidence);
         String testRunName = step.getTestRunParent().getName();
         String testCaseNameUnique = step.getTestCaseParent().getNameUnique();
         return ("./" + testRunName + "/" + testCaseNameUnique + "/" + fileName);
@@ -381,7 +373,8 @@ public class GenerateReports extends EmailableReporter {
     }    
     
     public void createFileReportHTML(BuildingReport buildReport) {
-        String file = FmwkTest.getPathReportHTML(buildReport.getOutputDirectory());
+        String file = 
+        	buildReport.getOutputDirectory() + File.separator + ConstantesTestMaker.nameReportHTMLTSuite;
         try (Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF8"))) {
             out.write(buildReport.getReportHTML());
             out.close();

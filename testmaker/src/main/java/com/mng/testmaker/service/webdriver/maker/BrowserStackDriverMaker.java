@@ -3,21 +3,17 @@ package com.mng.testmaker.service.webdriver.maker;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.mng.testmaker.domain.TestRunTestMaker;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.utils.webdriver.BrowserStackDesktop;
 import com.mng.testmaker.utils.webdriver.BrowserStackMobil;
 
 public class BrowserStackDriverMaker implements WebdriverMaker {
-	
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 	
 	private final TestRunTestMaker testRun;
 	String buildProject;
@@ -110,7 +106,7 @@ public class BrowserStackDriverMaker implements WebdriverMaker {
         	urlBrowserStack = new URL(urlBString);
         }
         catch (MalformedURLException e) {
-        	pLogger.error("Incorrect URL for BrowserStack " + urlBString, e);
+        	Log4jConfig.pLogger.error("Incorrect URL for BrowserStack " + urlBString, e);
         	return null;
         }
         	

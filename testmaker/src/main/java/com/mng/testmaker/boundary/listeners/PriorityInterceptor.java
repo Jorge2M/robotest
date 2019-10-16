@@ -3,17 +3,14 @@ package com.mng.testmaker.boundary.listeners;
 import java.util.*;
 import java.lang.reflect.Field;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.testng.IMethodInstance;
 import org.testng.IMethodInterceptor;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 
 
 public class PriorityInterceptor implements IMethodInterceptor {
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 
     //Reorganizamos el orden de los métodos en base a la prioridad definida desde la factoría (parámetro del test)
     @Override
@@ -43,7 +40,7 @@ public class PriorityInterceptor implements IMethodInterceptor {
                 }
             } 
             catch (Exception e) {
-                pLogger.error("Problem managing Priority", e);
+                Log4jConfig.pLogger.error("Problem managing Priority", e);
             }           
 
             result.set(array_index, m);           

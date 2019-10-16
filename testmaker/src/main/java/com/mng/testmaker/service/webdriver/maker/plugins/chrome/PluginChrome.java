@@ -5,21 +5,17 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 
 
 public abstract class PluginChrome { 
-	
-	static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
-	
+
     public String folderInResources = "pluginsBrowser"; 
     public static enum typePluginChrome { HTML5Autoplay }
     
@@ -32,8 +28,7 @@ public abstract class PluginChrome {
             options.addExtensions(tmpFile);
         }
         catch (IOException e) {
-        	pLogger.warn("Problem creating chrome plugin with path " + pathPlugin , e);
-
+        	Log4jConfig.pLogger.warn("Problem creating chrome plugin with path " + pathPlugin , e);
         }
     }
     

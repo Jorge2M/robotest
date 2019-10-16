@@ -17,7 +17,7 @@ import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriver
 import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.controlTest.FmwkTest.TypeEvidencia;
 
-public class StorerErrorDataStepValidationMango implements StorerErrorDataStepValidation {
+public class StorerErrorDataStepValidationMango implements StoreStepEvidencies {
 
 	@Override
 	public void store(DataFmwkTest dFTest, StepTestMaker step) throws Exception {

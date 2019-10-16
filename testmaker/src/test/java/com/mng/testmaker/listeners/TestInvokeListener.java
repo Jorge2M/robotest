@@ -21,7 +21,7 @@ public class TestInvokeListener {
     public void testNeededPurgeHistoricalData() {
         PowerMockito.mockStatic(ParamsDAO.class);
         PowerMockito.when(ParamsDAO.getParam("PURGED_DATA_FROM")).thenReturn("2018-01-01");
-        boolean isNeededPurge = InvokeListener.isNeededPurgeHistoricalData(40/*numDiasToMaintain*/); //Code to test
+        boolean isNeededPurge = ParamsDAO.isNeededPurgeHistoricalData(40/*numDiasToMaintain*/); //Code to test
         assertTrue(isNeededPurge);
     }
     
@@ -29,7 +29,7 @@ public class TestInvokeListener {
     public void testNoNeededPurgeHistoricalData() {
         PowerMockito.mockStatic(ParamsDAO.class);
         PowerMockito.when(ParamsDAO.getParam("PURGED_DATA_FROM")).thenReturn("2018-01-01");
-        boolean isNeededPurge = InvokeListener.isNeededPurgeHistoricalData(9999/*numDiasToMaintain*/); //Code to test
+        boolean isNeededPurge = ParamsDAO.isNeededPurgeHistoricalData(9999/*numDiasToMaintain*/); //Code to test
         assertTrue(!isNeededPurge);        
     }
     
@@ -37,7 +37,7 @@ public class TestInvokeListener {
     public void testNoNeededPurgeWhenNoParam() {
         PowerMockito.mockStatic(ParamsDAO.class);
         PowerMockito.when(ParamsDAO.getParam("PURGED_DATA_FROM")).thenReturn(null);
-        boolean isNeededPurge = InvokeListener.isNeededPurgeHistoricalData(60/*numDiasToMaintain*/); //Code to test
+        boolean isNeededPurge = ParamsDAO.isNeededPurgeHistoricalData(60/*numDiasToMaintain*/); //Code to test
         assertTrue(!isNeededPurge);        
     }    
     
@@ -45,7 +45,7 @@ public class TestInvokeListener {
     public void testNoNeededPurgeWhenParamNotFormatDate() {
         PowerMockito.mockStatic(ParamsDAO.class);
         PowerMockito.when(ParamsDAO.getParam("PURGED_DATA_FROM")).thenReturn("291122");
-        boolean isNeededPurge = InvokeListener.isNeededPurgeHistoricalData(60/*numDiasToMaintain*/); //Code to test
+        boolean isNeededPurge = ParamsDAO.isNeededPurgeHistoricalData(60/*numDiasToMaintain*/); //Code to test
         assertTrue(!isNeededPurge);        
     }
 }

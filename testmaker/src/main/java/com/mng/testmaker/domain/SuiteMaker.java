@@ -1,23 +1,17 @@
 package com.mng.testmaker.domain;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
-import org.testng.TestNG;
-import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.testmaker.boundary.listeners.InvokeListener;
 import com.mng.testmaker.boundary.listeners.MyTransformer;
-import com.mng.testmaker.jdbc.Connector;
-import com.mng.testmaker.listeners.utils.ResourcesExtractor;
 import com.mng.testmaker.service.testreports.Reporter;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.filter.FilterTestsSuiteXML;
 import com.mng.testmaker.utils.filter.TestMethod;
 

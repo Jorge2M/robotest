@@ -1,18 +1,14 @@
 package com.mng.sapfiori.test.testcase.stpv;
 
 import org.openqa.selenium.WebDriver;
-
-import com.mng.sapfiori.test.testcase.pageobject.PageLogin;
-import com.mng.testmaker.boundary.aspects.step.Step;
+import com.mng.sapfiori.test.testcase.webobject.PageLogin;
 
 public class PageLoginStpV {
 
 	private final PageLogin pageLogin;
-	private final WebDriver driver;
 	
 	private PageLoginStpV(WebDriver driver) {
 		this.pageLogin = PageLogin.getNew(driver);
-		this.driver = driver;
 	}
 	
 	public static PageLoginStpV getNew(WebDriver driver) {
@@ -26,11 +22,15 @@ public class PageLoginStpV {
     		"Pulsar el botón <b>Acceder al sistema</b>", 
         expected=
     		"Se accede a la aplicación SAP")
-    public void inputCredentialsAndEnter(String login, String password) throws Exception {
+    public PageInitialStpV inputCredentialsAndEnter(String login, String password) throws Exception {
     	pageLogin.inputCredentials(login, password);
     	String codeSpanish = "ES";
     	pageLogin.selectIdioma(codeSpanish);
-    	pageLogin.clickAccederAlSistema();
-    	PageInitialStpV.getNew(driver).checkIsInitialPageSpanish();
+    	PageInitialStpV pageInitialStpV = PageInitialStpV.getNew(
+    		pageLogin.clickAccederAlSistema());
+    	
+    	int maxSeconds = 2;
+    	pageInitialStpV.checkIsInitialPageSpanish(maxSeconds);
+    	return pageInitialStpV;
     }
 }

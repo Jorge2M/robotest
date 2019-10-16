@@ -8,8 +8,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.mng.testmaker.utils.DataFmwkTest;
-
 @Test
 @SuppressWarnings({"unused"})
 public class ClassWithTCasesStub {

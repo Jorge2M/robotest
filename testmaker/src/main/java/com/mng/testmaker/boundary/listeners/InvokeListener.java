@@ -3,21 +3,15 @@ package com.mng.testmaker.boundary.listeners;
 import java.net.HttpURLConnection;
 import org.testng.*;
 
-import com.mng.testmaker.domain.StateRun;
 import com.mng.testmaker.domain.SuiteTestMaker;
 import com.mng.testmaker.domain.TestCaseTestMaker;
 import com.mng.testmaker.domain.TestRunTestMaker;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 
 
 public class InvokeListener extends TestListenerAdapter implements ISuiteListener {
 	
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
-
     HttpURLConnection httpUrlCallBack = null;
   
     @Override //Start Suite 
@@ -63,7 +57,7 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
   
     @Override //End Method Failure
     public void onTestFailure(ITestResult result) {
-        pLogger.error("Exception for TestNG", result.getThrowable());
+        Log4jConfig.pLogger.error("Exception for TestNG", result.getThrowable());
     	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCase(result);
     	testCase.end(State.Nok);
     }

@@ -9,8 +9,9 @@ import javax.net.ssl.*;
 import org.testng.*;
 
 import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
-import com.mng.testmaker.utils.controlTest.FmwkTest.TypeEvidencia;
+import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
+import com.mng.testmaker.utils.conf.Log4jConfig;
+import com.mng.testmaker.utils.controlTest.StoreStepEvidencies;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntries;
@@ -21,24 +22,12 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-/**
- * Clase que recopila la apliaci�n de funcionalidades para Selenium. En un futuro se podr�a estudiar c�mo a�adir directamente a la libreria de Selenium
- * para poder ejecutarla normamente desde el driverSelenium como cualquier funcionalidad nativa.
- * @author jorge.munoz
- *
- */
 
 public class WebDriverArqUtils {
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
     
-    public static void captureEntirePageMultipleBrowsers (WebDriver driver, ITestContext contextTNG, String filename) 
-    throws RuntimeException {
+    public static void captureEntirePageMultipleBrowsers(WebDriver driver, String filename) throws RuntimeException {
         if (driver != null) {
             try {
-                //Este código sólo se ejecuta si no se ha producido una excepción (x timeout) en waitForPageLoaded;
                 WebDriver newWebDriver = null;
                 if (driver.getClass() == RemoteWebDriver.class) {
                     newWebDriver = new Augmenter().augment(driver);
@@ -50,9 +39,7 @@ public class WebDriverArqUtils {
                 FileUtils.copyFile(screenshot, new File(filename));
             }
             catch(Exception e) {
-                //No lanzaremos excepción (para no enmascarar una posible excepción previa)
-                //throw new RuntimeException(e);
-                pLogger.error("Problem capturing Page and store in file {}", filename, e);
+            	Log4jConfig.pLogger.error("Problem capturing Page and store in file {}", filename, e);
             }
         }
     }
@@ -137,7 +124,7 @@ public class WebDriverArqUtils {
      */
     public static void capturaHTMLPage(StepTestMaker step) throws Exception {
         try {
-            String nombreHTMLfile = FmwkTest.getPathFileEvidenciaStep(step, TypeEvidencia.html);
+            String nombreHTMLfile = StoreStepEvidencies.getPathFileEvidenciaStep(step, StepEvidence.html);
             File htmlFile = new File(nombreHTMLfile);
             try (FileWriter fw = new FileWriter(htmlFile)) {
             	WebDriver driver = step.getTestCaseParent().getDriver();
@@ -194,7 +181,7 @@ public class WebDriverArqUtils {
         }
         catch (Exception e) {
             //Parece que en el caso de Safari se produce una excepción al cargar algunos logs como el de 'performance'
-            pLogger.warn("Problem to load the WebDriver error Log", e);
+        	Log4jConfig.pLogger.warn("Problem to load the WebDriver error Log", e);
         }
 
         // Retornamos la lista de errores y el estado

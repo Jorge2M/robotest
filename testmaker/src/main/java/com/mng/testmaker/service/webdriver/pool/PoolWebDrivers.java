@@ -5,8 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.domain.TestRunTestMaker;
@@ -16,7 +14,7 @@ import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.testmaker.service.webdriver.pool.StoredWebDrv.stateWd;
 import com.mng.testmaker.utils.NetTrafficMng;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.utils.webdriver.BrowserStackMobil;
 
@@ -27,7 +25,6 @@ import com.mng.testmaker.utils.webdriver.BrowserStackMobil;
  */
 
 public class PoolWebDrivers {
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
     
     private final List<StoredWebDrv> poolWebDrivers = new CopyOnWriteArrayList<>();
     
@@ -61,7 +58,7 @@ public class PoolWebDrivers {
                 }
             }
             catch (Exception e) {
-                pLogger.error("Problem deleging WebDriver",  e);
+            	Log4jConfig.pLogger.error("Problem deleging WebDriver",  e);
             }
         }
     }
@@ -89,7 +86,7 @@ public class PoolWebDrivers {
     private synchronized WebDriver getFreeWebDriverFromPool(WebDriverType typeWdrv, String moreDataWdrv) {
         WebDriver webdriverFree = null;
         Iterator<StoredWebDrv> itStrWd = poolWebDrivers.iterator();
-        pLogger.debug(": Buscando WebDriver free. Type {}, moreDataWrdrv {}", typeWdrv, moreDataWdrv);
+        Log4jConfig.pLogger.debug(": Buscando WebDriver free. Type {}, moreDataWrdrv {}", typeWdrv, moreDataWdrv);
         boolean encontrado = false;
         while (itStrWd.hasNext() && !encontrado) {
             StoredWebDrv strWd = itStrWd.next();
@@ -103,14 +100,14 @@ public class PoolWebDrivers {
                 
                 //Le cambiamos el estado a 'busy' en el gestor
                 strWd.markAsBusy();
-                pLogger.debug(
+                Log4jConfig.pLogger.debug(
                 	"Encontrado -> Mark as Busy WebDriver: {} (state: {}, type: {}, moreDataWdrv: {})", 
                 	strWd.getWebDriver(), strWd.getState(), strWd.getTypeWdrv(), strWd.getMoreDataWdrv());
             }
         }
         
         if (!encontrado) {
-            pLogger.debug("No encontrado Webdriver free. Type: {}, moreDataWrdrv: {}", typeWdrv, moreDataWdrv);
+        	Log4jConfig.pLogger.debug("No encontrado Webdriver free. Type: {}, moreDataWrdrv: {}", typeWdrv, moreDataWdrv);
         }
         return webdriverFree;
     }
@@ -119,7 +116,7 @@ public class PoolWebDrivers {
         StoredWebDrv strWd = searchWebDriver(driver);
         if (strWd != null) {
             strWd.markAsFree();
-            pLogger.debug(
+            Log4jConfig.pLogger.debug(
             	"Mark as Free WebDriver: {} (state: {}, type: {}, moreDataWdrv: {})", 
             	strWd.getWebDriver(), strWd.getState(), strWd.getTypeWdrv(), strWd.getMoreDataWdrv());
         }
@@ -134,7 +131,7 @@ public class PoolWebDrivers {
     
     private void deleteStrWedDriver(StoredWebDrv strWd) {
     	poolWebDrivers.remove(strWd);
-        pLogger.debug(
+    	Log4jConfig.pLogger.debug(
         	"Removed Stored WebDriver: {} (state: {}, type: {}, moreDataWdrv: {})", 
         	strWd.getWebDriver(), strWd.getState(), strWd.getTypeWdrv(), strWd.getMoreDataWdrv());
     }
@@ -150,7 +147,7 @@ public class PoolWebDrivers {
     private void storeWebDriver(WebDriver driver, stateWd state, WebDriverType type, String moreDataWdrv) {
         StoredWebDrv strWd = new StoredWebDrv(driver, state, type, moreDataWdrv);
         poolWebDrivers.add(strWd);
-        pLogger.debug("Alta Stored WebDriver: {} (state: {}, type: {}, moreDataWdrv: {})", driver, state, type, moreDataWdrv);
+        Log4jConfig.pLogger.debug("Alta Stored WebDriver: {} (state: {}, type: {}, moreDataWdrv: {})", driver, state, type, moreDataWdrv);
     }
     
     private StoredWebDrv searchWebDriver(WebDriver driver) {
@@ -175,12 +172,12 @@ public class PoolWebDrivers {
                 strWd.getWebDriver().quit();
             }
             catch (Exception e) {
-                pLogger.error("Problem removing all WebDrivers", e);
+            	Log4jConfig.pLogger.error("Problem removing all WebDrivers", e);
             }
         }
         
         poolWebDrivers.removeAll(strWdToDelete);
-        pLogger.info("Removed all WebDriver");
+        Log4jConfig.pLogger.info("Removed all WebDriver");
     }
     
     /**

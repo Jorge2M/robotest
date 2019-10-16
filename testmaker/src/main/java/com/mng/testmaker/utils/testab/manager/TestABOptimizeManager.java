@@ -2,21 +2,17 @@ package com.mng.testmaker.utils.testab.manager;
 
 import java.util.List;
 import java.util.Random;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.InvalidCookieDomainException;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.utils.testab.TestABOptimize;
 import com.mng.testmaker.utils.testab.TestABactData;
 
 public class TestABOptimizeManager implements TestABmanager {
-	
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 	
 	final public TestABOptimize testAB;
 	final Channel channelTest;
@@ -138,7 +134,7 @@ public class TestABOptimizeManager implements TestABmanager {
 			WebdrvWrapp.closeTabByTitleAndReturnToWidow(titleTab, windowHandlerToReturn, driver);
 		}
 		catch (Exception e) {
-			pLogger.warn("Problem activating TestAB via add of Cookie " + cookie.getName(), e);
+			Log4jConfig.pLogger.warn("Problem activating TestAB via add of Cookie " + cookie.getName(), e);
 		}
 	}
 

@@ -70,7 +70,7 @@ public class TestCaseTestMaker  {
 		return null;
 	}
 	
-	public static TestCaseTestMaker getTestCaseInThread() {
+	public static TestCaseTestMaker getTestCaseInExecution() {
 		String threadName = Thread.currentThread().getName();
 		for (SuiteTestMaker suite : SuitesExecuted.getSuitesExecuted()) {
 			for (TestRunTestMaker testRun : suite.getListTestRuns()) {

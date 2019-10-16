@@ -5,15 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.mng.testmaker.listeners.utils.GetterResources.Directory;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 
 public class ResourcesExtractor {
-
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 	
 	private ResourcesExtractor() {}
 	
@@ -28,11 +23,11 @@ public class ResourcesExtractor {
 			if (directoryData!=null) {
 				copyDirectoryResources(directoryData, dirDestination);
 			} else {
-				pLogger.warn("Not found data from path in resources " + dirOriginFromResources);
+				Log4jConfig.pLogger.warn("Not found data from path in resources " + dirOriginFromResources);
 			}
 		} 
 		catch (Exception e) {
-			pLogger.error("Problem in copy of static directory for HTML Report", e);
+			Log4jConfig.pLogger.error("Problem in copy of static directory for HTML Report", e);
 		}
 	}
 

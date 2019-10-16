@@ -11,7 +11,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.mng.testmaker.domain.InputParamsTestMaker;
-import com.mng.testmaker.utils.DataFmwkTest;
+import com.mng.testmaker.domain.SuiteTestMaker;
+import com.mng.testmaker.domain.TestCaseTestMaker;
+import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.sapfiori.test.testcase.generic.stpv.sections.filterheader.ModalSetFilterFromListStpV;
 import com.mng.sapfiori.test.testcase.stpv.PageSelProdsToReclassifyStpV;
 import com.mng.sapfiori.test.testcase.stpv.PageInitialStpV;
@@ -20,41 +23,31 @@ import com.mng.sapfiori.test.testcase.stpv.PageReclassifProductsStpV;
 import com.mng.sapfiori.test.testcase.webobject.FiltersPageClassifProductos.FilterFromList;
 import com.mng.sapfiori.test.testcase.webobject.PageSelProdsToReclassify.ProductData;
 
-public class Piloto extends GestorWebDriver {
+public class Piloto {
 
-	InputParamsTestMaker inputDataTMaker;
-    String baseUrl;
+	private final SuiteTestMaker suite = TestMaker.getSuiteInExecution();
         
     public Piloto() {}         
       
     @BeforeMethod (groups={"Piloto", "Canal:desktop_App:all"})
-    synchronized public void login(ITestContext context, Method method) 
+    synchronized public void login() 
     throws Exception {
-        inputDataTMaker = TestCaseData.getInputDataTestMaker(context);
-        
-        //TODO refactorizar TestMaker para que no sea necesaria esta llamada
-		TestCaseData.getAndStoreDataFmwk(
-			inputDataTMaker.getWebDriverType(), 
-			inputDataTMaker.getUrlBase(),
-			"", 
-			inputDataTMaker.getChannel(), 
-			null, context, method);
     }
     
     @AfterMethod (groups={"Piloto", "Canal:desktop_App:all"}, alwaysRun = true)
     public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = TestCaseData.getWebDriver();
-        super.quitWebDriver(driver, context);
     }       
 
     @Test (
         groups={"Piloto", "Canal:desktop_App:all"}, alwaysRun=true, 
         description="Se realiza un login de usuario")
     public void PIL001_Login() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        dFTest.driver.get(inputDataTMaker.getUrlBase());
     	
-    	PageLoginStpV pageLoginStpV = PageLoginStpV.getNew(dFTest.driver);
+    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
+    	WebDriver driver = testCase.getDriver();
+        driver.get(suite.getInputData().getUrlBase());
+    	
+    	PageLoginStpV pageLoginStpV = PageLoginStpV.getNew(driver);
     	PageInitialStpV pageInitialStpV = 
     		pageLoginStpV.inputCredentialsAndEnter("00556106", "Irene_2016");
  

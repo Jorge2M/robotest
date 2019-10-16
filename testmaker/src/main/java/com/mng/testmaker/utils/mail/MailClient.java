@@ -6,17 +6,14 @@ import javax.activation.*;
 import javax.mail.util.ByteArrayDataSource;
 
 import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.utils.mail.beans.AttachMail;
 
 import java.util.*;
 
 
 public class MailClient {
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
         
     private class SMTPAuthenticator extends Authenticator {
         
@@ -74,7 +71,7 @@ public class MailClient {
             Transport.send(message);
         }
         catch (MessagingException ex) {
-            pLogger.log(Level.FATAL, ex);
+        	Log4jConfig.pLogger.log(Level.FATAL, ex);
         }
     }
 }

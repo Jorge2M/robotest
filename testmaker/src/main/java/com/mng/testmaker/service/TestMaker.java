@@ -15,7 +15,7 @@ import com.mng.testmaker.domain.SuitesExecuted;
 import com.mng.testmaker.domain.TestCaseTestMaker;
 import com.mng.testmaker.jdbc.Connector;
 import com.mng.testmaker.listeners.utils.ResourcesExtractor;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 
 public class TestMaker {
 
@@ -37,8 +37,13 @@ public class TestMaker {
 		return SuitesExecuted.getSuite(idExecution);
 	}
 	
+	public static SuiteTestMaker getSuiteInExecution() {
+		TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
+		return testCase.getSuiteParent();
+	}
+	
     public static void skipTestsIfSuiteStopped() {
-    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInThread();
+    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
     	if (testCase!=null) {
     		skipTestsIfSuiteStopped(testCase.getSuiteParent());
         }
@@ -51,13 +56,13 @@ public class TestMaker {
     }
     
     public WebDriver getDriverTestCase() {
-    	return (TestCaseTestMaker.getTestCaseInThread().getWebDriver());
+    	return (TestCaseTestMaker.getTestCaseInExecution().getWebDriver());
     }
 	
     private static void runInTestMaker(SuiteTestMaker suite) {
         File path = new File(suite.getDirectory());
         path.mkdir();
-        FmwkTest.configLog4java(suite.getDirectory());
+        Log4jConfig.configLog4java(suite.getDirectory());
         grabSqliteBDifNotExists();
     	SuitesExecuted.add(suite);
     }

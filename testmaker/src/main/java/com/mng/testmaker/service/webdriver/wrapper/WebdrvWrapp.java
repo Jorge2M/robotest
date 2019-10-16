@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeoutException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
@@ -29,10 +27,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 
 public class WebdrvWrapp extends ElementPageFunctions { 
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
 
     public static boolean titleContainsUntil(final WebDriver driver, final String title, int seconds) {
         try {
@@ -303,7 +300,7 @@ public class WebdrvWrapp extends ElementPageFunctions {
         } 
         catch (TimeoutException e) {
             timeout = true;
-            pLogger.warn("Problem waiting for page Loaded", e);
+            Log4jConfig.pLogger.warn("Problem waiting for page Loaded", e);
         }
 
         return timeout;
@@ -429,7 +426,7 @@ public class WebdrvWrapp extends ElementPageFunctions {
             domContentLoaded = ((JavascriptExecutor) driver).executeScript("return window.performance.timing.domContentLoadedEventEnd");
         }
         catch (JavascriptException e) {
-            pLogger.warn("Problem obtaining window.performance.timing.domContentLoadedEventEnd", e);
+        	Log4jConfig.pLogger.warn("Problem obtaining window.performance.timing.domContentLoadedEventEnd", e);
         }
         
         //Este evento no funciona en Safari (siempre retorna "complete"). Indica que el DOM está cargado (incluye la carga de imágenes, estilos...)
@@ -468,12 +465,12 @@ public class WebdrvWrapp extends ElementPageFunctions {
                     }
                     Thread.sleep(1000);
                 }
-            } 
-            else
-                pLogger.debug("Web driver: {} cannot execute javascript", driver);
+            } else {
+            	Log4jConfig.pLogger.debug("Web driver: {} cannot execute javascript", driver);
+            }
         } 
         catch (Exception e) {
-            pLogger.debug("Problem waiting for jQuery.active. " + e.getClass().getName() + ". " + e.getMessage());
+        	Log4jConfig.pLogger.debug("Problem waiting for jQuery.active. " + e.getClass().getName() + ". " + e.getMessage());
         }
     }
 
@@ -581,7 +578,7 @@ public class WebdrvWrapp extends ElementPageFunctions {
         	waitForPageLoaded(driver);
         }
         catch (WebDriverException e) {
-            pLogger.warn("Problem waiting for page loading in another tab", e);        	
+        	Log4jConfig.pLogger.warn("Problem waiting for page loading in another tab", e);        	
         }
     }
     
