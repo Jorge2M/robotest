@@ -26,7 +26,7 @@ public class ParamsDAO {
         "SELECT PARAM, VALOR FROM PARAMS";
     
     public static String getParam(String param) {
-        try (Connection conn = Connector.getConnection(true/*forReadOnly*/);
+        try (Connection conn = Connector.getConnection(true);
             PreparedStatement select = conn.prepareStatement(SQLSelectParam)) {
             select.setString(1, param);
             try (ResultSet resultado = select.executeQuery()) {

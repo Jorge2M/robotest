@@ -28,6 +28,6 @@ public class Reporter implements IReporter {
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
     	SuiteTestMaker suite = (SuiteTestMaker)xmlSuites.get(0);
         GenerateReports report = new GenerateReports();
-        report.generateReport(xmlSuites, suites, suite.getDirectory());
+        report.generateReport(xmlSuites, suites, suite.getPathDirectory());
     }
 }

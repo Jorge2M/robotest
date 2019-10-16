@@ -49,7 +49,7 @@ public class StoreStepEvidencies {
     }
     
     private static void createPathForEvidencesStore(StepTestMaker step) {
-    	String suitePath = step.getSuiteParent().getDirectory();
+    	String suitePath = step.getSuiteParent().getPathDirectory();
         String pathEvidencias = 
         	suitePath + File.separator + 
         	step.getTestRunParent().getName() + File.separator +

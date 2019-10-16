@@ -60,9 +60,9 @@ public class TestMaker {
     }
 	
     private static void runInTestMaker(SuiteTestMaker suite) {
-        File path = new File(suite.getDirectory());
+        File path = new File(suite.getPathDirectory());
         path.mkdir();
-        Log4jConfig.configLog4java(suite.getDirectory());
+        Log4jConfig.configLog4java(suite.getPathDirectory());
         grabSqliteBDifNotExists();
     	SuitesExecuted.add(suite);
     }

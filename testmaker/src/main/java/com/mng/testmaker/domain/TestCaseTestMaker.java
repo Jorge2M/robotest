@@ -108,20 +108,20 @@ public class TestCaseTestMaker  {
 	
 	public StepTestMaker getCurrentStep() {
 		if (listSteps.size() > 0) {
-			listSteps.get(listSteps.size() - 1);
+			return (listSteps.get(listSteps.size() - 1));
 		}
 		return null;
 	}
 	
-	public StepTestMaker getLastStepFinished() {
-		StepTestMaker stepReturn = null;
-		for (StepTestMaker step : listSteps) {
-			if (step.getState()==StateRun.Finished) {
-				stepReturn = step;
-			}
-		}
-		return stepReturn;
-	}
+//	public StepTestMaker getLastStepFinished() {
+//		StepTestMaker stepReturn = null;
+//		for (StepTestMaker step : listSteps) {
+//			if (step.getState()==StateRun.Finished) {
+//				stepReturn = step;
+//			}
+//		}
+//		return stepReturn;
+//	}
 	
 	public StateRun getStateRun() {
 		return this.stateRun;

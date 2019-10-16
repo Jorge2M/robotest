@@ -50,7 +50,7 @@ public class StepAspect {
     	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
     	TestMaker.skipTestsIfSuiteStopped(testCase.getSuiteParent());
     	StepTestMaker currentStep = testCase.getCurrentStep();
-    	currentStep.setResultSteps(State.Nok);
+    	currentStep.setResultSteps(State.Ok);
     	currentStep.setExcepExists(true); 
     	currentStep.setHoraFin(new Date(System.currentTimeMillis()));
     }

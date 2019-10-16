@@ -10,11 +10,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.mng.testmaker.domain.InputParamsTestMaker;
-import com.mng.testmaker.domain.SuiteTestMaker;
 import com.mng.testmaker.domain.TestCaseTestMaker;
-import com.mng.testmaker.domain.TestRunTestMaker;
-import com.mng.testmaker.service.TestMaker;
 import com.mng.sapfiori.test.testcase.generic.stpv.sections.filterheader.ModalSetFilterFromListStpV;
 import com.mng.sapfiori.test.testcase.stpv.PageSelProdsToReclassifyStpV;
 import com.mng.sapfiori.test.testcase.stpv.PageInitialStpV;
@@ -25,8 +21,6 @@ import com.mng.sapfiori.test.testcase.webobject.PageSelProdsToReclassify.Product
 
 public class Piloto {
 
-	private final SuiteTestMaker suite = TestMaker.getSuiteInExecution();
-        
     public Piloto() {}         
       
     @BeforeMethod (groups={"Piloto", "Canal:desktop_App:all"})
@@ -45,7 +39,7 @@ public class Piloto {
     	
     	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
     	WebDriver driver = testCase.getDriver();
-        driver.get(suite.getInputData().getUrlBase());
+        driver.get(testCase.getSuiteParent().getInputData().getUrlBase());
     	
     	PageLoginStpV pageLoginStpV = PageLoginStpV.getNew(driver);
     	PageInitialStpV pageInitialStpV = 

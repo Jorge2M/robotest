@@ -68,7 +68,7 @@ public class TestRunTestMaker extends XmlTest {
     
     public void setTestNgContext(ITestContext testNgContext) {
         this.testNgContext = testNgContext;
-        String suiteDirectory = ((SuiteTestMaker)getSuite()).getDirectory();
+        String suiteDirectory = ((SuiteTestMaker)getSuite()).getPathDirectory();
         setTestRunOutputDirectory(suiteDirectory);
   	
     }

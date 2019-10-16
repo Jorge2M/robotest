@@ -20,7 +20,7 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
     
     @Override //End Suite
     public void onFinish(ISuite suite) {
-    	((SuiteTestMaker)suite).end();
+    	((SuiteTestMaker)suite.getXmlSuite()).end();
     }
     
     @Override //Start TestRun

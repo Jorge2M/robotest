@@ -2,9 +2,10 @@ package com.mng.sapfiori.test.testcase.stpv;
 
 import org.openqa.selenium.WebDriver;
 
+import com.mng.sapfiori.test.testcase.webobject.PageInitial;
+import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.utils.State;
-import com.mng.sapfiori.test.testcase.pageobject.PageInitial;
 
 public class PageInitialStpV {
 
@@ -13,15 +14,35 @@ public class PageInitialStpV {
 	private PageInitialStpV(WebDriver driver) {
 		this.pageInitial = PageInitial.getNew(driver);
 	}
+	private PageInitialStpV(PageInitial pageInitial) {
+		this.pageInitial = pageInitial;
+	}
 	
 	public static PageInitialStpV getNew(WebDriver driver) {
 		return new PageInitialStpV(driver);
 	}
+	public static PageInitialStpV getNew(PageInitial pageInitial) {
+		return new PageInitialStpV(pageInitial);
+	}
     
     @Validation (
-    	description="Aparece la página inicial de la aplicación cuando el acceso en Español",
+    	description=
+    		"Aparece la página inicial de la aplicación cuando el acceso en Español " +
+    		"(la esperamos hasta #{maxseconds} segundos)",
     	level=State.Defect)
-    public boolean checkIsInitialPageSpanish() {
-    	return (pageInitial.checkIsInitialPageSpanish());
+    public boolean checkIsInitialPageSpanish(int maxSeconds) {
+    	return (pageInitial.checkIsInitialPageSpanish(maxSeconds));
     }
+    
+	@Step (
+		description="Seleccionar el option <b>Clasificar Productos</b>",
+		expected="Aparece la página para clasificar los productos")
+	public PageSelProdsToReclassifyStpV clickClasificarProductos() throws Exception {
+		PageSelProdsToReclassifyStpV pageClassifProductosStpV = PageSelProdsToReclassifyStpV.getNew(
+			pageInitial.clickClasificarProductos());
+		
+		int maxSeconds = 3;
+		pageClassifProductosStpV.checkIsVisiblePage(maxSeconds);
+		return pageClassifProductosStpV;
+	}
 }

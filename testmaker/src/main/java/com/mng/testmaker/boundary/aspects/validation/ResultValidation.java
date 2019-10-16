@@ -44,6 +44,12 @@ public class ResultValidation {
 	public State getLevelResult() {
 		return levelResult;
 	}
+	public State getStateResult() {
+		if (isOvercomed()) {
+			return State.Ok;
+		}
+		return getLevelResult();
+	}
 	public void setLevelResult(State levelError) {
 		this.levelResult = levelError;
 	}

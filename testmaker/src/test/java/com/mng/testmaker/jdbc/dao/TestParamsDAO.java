@@ -1,4 +1,4 @@
-package com.mng.testmaker.listeners;
+package com.mng.testmaker.jdbc.dao;
 
 import static org.junit.Assert.assertTrue;
 
@@ -9,13 +9,12 @@ import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.mng.testmaker.boundary.listeners.InvokeListener;
 import com.mng.testmaker.jdbc.dao.ParamsDAO;
 
 @RunWith(PowerMockRunner.class)
 @PowerMockIgnore("javax.management.*")
 @PrepareForTest(ParamsDAO.class)
-public class TestInvokeListener {
+public class TestParamsDAO {
 
     @Test
     public void testNeededPurgeHistoricalData() {

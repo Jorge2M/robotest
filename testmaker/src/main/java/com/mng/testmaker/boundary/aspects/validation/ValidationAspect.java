@@ -31,7 +31,7 @@ public class ValidationAspect {
     	throwing="ex")
     public void doRecoveryActions(JoinPoint joinPoint, Throwable ex) {
     	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
-    	StepTestMaker step = testCase.getLastStepFinished();
+    	StepTestMaker step = testCase.getCurrentStep();
     	InfoValidation infoValidation = InfoValidation.from(joinPoint);
     	ChecksResult checksResult = infoValidation.getListResultValidation();
     	step.addChecksResult(checksResult);
@@ -44,7 +44,7 @@ public class ValidationAspect {
     	returning="resultMethod")
     public void grabValidationAfter(JoinPoint joinPoint, Object resultMethod) throws Throwable {
     	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
-    	StepTestMaker step = testCase.getLastStepFinished();
+    	StepTestMaker step = testCase.getCurrentStep();
     	InfoValidation infoValidation = InfoValidation.from(joinPoint, resultMethod);
     	ChecksResult checksResult = infoValidation.getListResultValidation();
     	step.addChecksResult(checksResult);

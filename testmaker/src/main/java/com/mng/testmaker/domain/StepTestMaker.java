@@ -1,6 +1,7 @@
 package com.mng.testmaker.domain;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
@@ -13,8 +14,7 @@ public class StepTestMaker {
 	private final SuiteTestMaker suiteParent;
 	private final TestRunTestMaker testRunParent;
 	private final TestCaseTestMaker testCaseParent;
-
-	private List<ChecksResult> listChecksResult;
+	private final List<ChecksResult> listChecksResult = new ArrayList<>();
 			
 	private StateRun state = StateRun.Started;
 	private boolean isStateUpdated = false;
@@ -27,7 +27,7 @@ public class StepTestMaker {
 	private int type_page = 0; 
 	private Date hora_inicio; 
 	private Date hora_fin;
-	private State result_steps = State.Nok;
+	private State result_steps = State.Ok;
 	private boolean excep_exists = true;
 	private String nameMethodWithFactory = "";
 	
@@ -64,7 +64,7 @@ public class StepTestMaker {
 		List<StepTestMaker> listSteps = testCaseParent.getStepsList();
 		for (int i=0; i<listSteps.size(); i++) {
 			if (listSteps.get(i)==this) {
-				return i;
+				return i+1;
 			}
 		}
 		return -1;

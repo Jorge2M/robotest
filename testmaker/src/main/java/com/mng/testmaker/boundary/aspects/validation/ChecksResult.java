@@ -12,7 +12,7 @@ import com.mng.testmaker.utils.State;
 
 public class ChecksResult {
 	private final List<ResultValidation> listResultValidations;
-	private State stateValidation = State.Nok;
+	private State stateValidation = State.Ok;
 	private boolean avoidEvidences;
 	private final SuiteTestMaker suiteParent;
 	private final TestRunTestMaker testRunParent;
@@ -22,7 +22,7 @@ public class ChecksResult {
     public ChecksResult() {
     	this.listResultValidations = new ArrayList<>();
     	this.testCaseParent = TestCaseTestMaker.getTestCaseInExecution();
-    	this.stepParent = testCaseParent.getLastStepFinished();
+    	this.stepParent = testCaseParent.getCurrentStep();
     	this.testRunParent = testCaseParent.getTestRunParent();
     	this.suiteParent = testCaseParent.getSuiteParent();
     }
@@ -83,7 +83,7 @@ public class ChecksResult {
 		for (int i=0; i<listChecksResultInStep.size(); i++) {
 			ChecksResult checksResult = listChecksResultInStep.get(i);
 			if (checksResult==this) {
-				return i;
+				return i+1;
 			}
 		}
 		return -1;
@@ -171,7 +171,7 @@ public class ChecksResult {
     	List<String> textValidations = new ArrayList<>();
     	for (ResultValidation resultValidation : listResultValidations) {
     		String htmlValidation = 
-    			"<validac style=\"color:" + resultValidation.getLevelResult().getColorCss() + "\">" + 
+    			"<validac style=\"color:" + resultValidation.getStateResult().getColorCss() + "\">" + 
     			resultValidation.getDescription() + 
     			"</validac>";
     		textValidations.add(htmlValidation);
