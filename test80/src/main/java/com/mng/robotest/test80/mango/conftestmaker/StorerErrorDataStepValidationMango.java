@@ -10,44 +10,44 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.testmaker.utils.DataFmwkTest;
-import com.mng.testmaker.utils.conf.StorerErrorDataStepValidation;
 import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
+import com.mng.testmaker.service.TestMaker;
+import com.mng.testmaker.service.testreports.StorerErrorStep;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
-import com.mng.testmaker.utils.controlTest.FmwkTest.TypeEvidencia;
+import com.mng.testmaker.utils.controlTest.StoreStepEvidencies;
 
-public class StorerErrorDataStepValidationMango implements StoreStepEvidencies {
+public class StorerErrorDataStepValidationMango implements StorerErrorStep {
 
 	@Override
-	public void store(DataFmwkTest dFTest, StepTestMaker step) throws Exception {
-		capturaErrorPage(dFTest, step.getStepNumber());
+	public void store(StepTestMaker step) throws Exception {
+		capturaErrorPage(step);
 	}
 	
     /**
      * Se realiza una captura de ./errorPage.faces pues allí se pueden encontrar los datos de la instancia
      */
-    public static void capturaErrorPage(DataFmwkTest dFTest, int stepNumber) throws Exception {
-        if (dFTest.webDriverType!=WebDriverType.browserstack) {
+    public static void capturaErrorPage(StepTestMaker step) throws Exception {
+    	WebDriverType webDriverType = TestMaker.getInputParamsSuite().getWebDriverType();
+        if (webDriverType!=WebDriverType.browserstack) {
             //Cargamos la página errorPage en una pestaña aparte y nos posicionamos en ella
             //BrowserStack parece que no soporta abrir ventanas aparte
-            String windowHandle = loadErrorPage(dFTest.driver);
+        	WebDriver driver = TestMaker.getDriverTestCase();
+            String windowHandle = loadErrorPage(driver);
             try {
-                String methodWithFactory = FmwkTest.getMethodWithFactory(dFTest.meth, dFTest.ctx);
-                String nombreErrorFile = FmwkTest.getPathFileEvidenciaStep(dFTest.ctx, methodWithFactory, stepNumber, TypeEvidencia.errorpage);
+                String nombreErrorFile = StoreStepEvidencies.getPathFileEvidenciaStep(step, StepEvidence.errorpage);
                 File errorImage = new File(nombreErrorFile);
                 try (FileWriter fw = new FileWriter(errorImage)) {
-                    fw.write(dFTest.driver.getPageSource());
+                    fw.write(driver.getPageSource());
                 }
             } 
             catch (Exception e) {
                 throw e;
             } 
             finally {
-                // Cerramos la pestaña
-                JavascriptExecutor js = (JavascriptExecutor) dFTest.driver;
+                JavascriptExecutor js = (JavascriptExecutor) driver;
                 js.executeScript("window.close('" + Thread.currentThread().getName() + "');");
-                dFTest.driver.switchTo().window(windowHandle);
+                driver.switchTo().window(windowHandle);
             }
         }
     }

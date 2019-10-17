@@ -11,10 +11,10 @@ import javax.xml.bind.Unmarshaller;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.sitemap.Sitemapindex;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.sitemap.Sitemapindex.Sitemap;
@@ -34,7 +34,7 @@ public class BrowserStpV {
     public static void inputRobotsURLandValidate(String urlBaseTest, AppEcom app, WebDriver driver) throws Exception {
         URI uriBase = new URI(urlBaseTest);
         String urlRobots = urlBaseTest.replace(uriBase.getPath(), "") + "/" + "robots.txt";
-        TestCaseData.getDatosCurrentStep().replaceInDescription(tagUrlRobots, urlRobots);
+        TestMaker.getCurrentStep().replaceInDescription(tagUrlRobots, urlRobots);
         String urlSitemap = urlBaseTest.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
         
         driver.get(urlRobots);

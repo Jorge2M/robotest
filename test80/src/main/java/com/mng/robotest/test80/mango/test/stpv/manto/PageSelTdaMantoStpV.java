@@ -2,9 +2,9 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.TiendaMantoEnum.TiendaManto;
@@ -28,7 +28,7 @@ public class PageSelTdaMantoStpV {
     public static void selectTienda(String codigoAlmacen, String codigoPais, AppEcom appE, WebDriver driver) 
     throws Exception {
         TiendaManto tienda = TiendaManto.getTienda(codigoAlmacen, codigoPais, appE);
-        TestCaseData.getDatosCurrentStep().replaceInDescription(TagTienda, tienda.name());
+        TestMaker.getCurrentStep().replaceInDescription(TagTienda, tienda.name());
         
         if (!PageSelTda.isPage(driver)) {
             SecCabecera.clickButtonSelTienda(driver);

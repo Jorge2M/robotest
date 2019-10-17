@@ -2,7 +2,8 @@ package com.mng.robotest.test80.mango.test.stpv.shop.registro;
 
 import java.util.HashMap;
 
-import com.mng.testmaker.utils.DataFmwkTest;
+import org.openqa.selenium.WebDriver;
+
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.boundary.aspects.step.Step;
@@ -15,42 +16,42 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroD
 public class PageRegistroDirecStpV {
     
 	@Validation
-    public static ChecksResult isPageFromPais(Pais pais, DataFmwkTest dFTest) {
+    public static ChecksResult isPageFromPais(Pais pais, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
     	int maxSecondsWait = 3;
     	validations.add(
     		"Aparece la página de introducción de datos de la dirección (la esperamos un máximo de " + maxSecondsWait + " segundos)",
-    		PageRegistroAddressData.isPageUntil(dFTest.driver, maxSecondsWait), State.Warn);
+    		PageRegistroAddressData.isPageUntil(driver, maxSecondsWait), State.Warn);
     	validations.add(
     		"Si existe el desplebagle de países, en él aparece el país con código " + pais.getCodigo_pais() + " (" + pais.getNombre_pais() + ")",
-    		!PageRegistroAddressData.existsDesplegablePaises(dFTest.driver) || 
-    		PageRegistroAddressData.isOptionPaisSelected(dFTest.driver, pais.getCodigo_pais()), State.Warn);
+    		!PageRegistroAddressData.existsDesplegablePaises(driver) || 
+    		PageRegistroAddressData.isOptionPaisSelected(driver, pais.getCodigo_pais()), State.Warn);
     	return validations;
     }
     
 	@Step (            
 		description="Introducir los datos correctos para el país #{pais.getNombre_pais()}", 
         expected="No aparece ningún mensaje de error")
-    public static void sendDataAccordingCountryToInputs(HashMap<String,String> dataRegistro, Pais pais, Channel channel, DataFmwkTest dFTest) 
+    public static void sendDataAccordingCountryToInputs(HashMap<String,String> dataRegistro, Pais pais, Channel channel, WebDriver driver) 
     throws Exception {
-        PageRegistroDirec.sendDataAccordingCountryToInputs(dataRegistro, pais, channel, dFTest.driver);
-        validateInputDataOk(dFTest);
+        PageRegistroDirec.sendDataAccordingCountryToInputs(dataRegistro, pais, channel, driver);
+        validateInputDataOk(driver);
     }
     
     @Validation(
     	description="No aparece ningún mensaje de error asociado a los campos de entrada",
     	level=State.Defect)
-    public static boolean validateInputDataOk(DataFmwkTest dFTest) {
-    	return (PageRegistroDirec.getNumberMsgInputInvalid(dFTest.driver) <= 0);
+    public static boolean validateInputDataOk(WebDriver driver) {
+    	return (PageRegistroDirec.getNumberMsgInputInvalid(driver) <= 0);
     }
     
     @Step (
     	description= "Seleccionar el botón \"<b>Finalizar</b>\"", 
         expected="Aparece la página final del proceso de registro")
-    public static void clickFinalizarButton(DataFmwkTest dFTest) 
+    public static void clickFinalizarButton(WebDriver driver) 
     throws Exception {
-        PageRegistroDirec.clickFinalizarButton(dFTest.driver);
+        PageRegistroDirec.clickFinalizarButton(driver);
         int maxSecondsWait = 5;
-        PageRegistroFinStpV.isPageUntil(maxSecondsWait, dFTest);
+        PageRegistroFinStpV.isPageUntil(maxSecondsWait, driver);
     }
 }

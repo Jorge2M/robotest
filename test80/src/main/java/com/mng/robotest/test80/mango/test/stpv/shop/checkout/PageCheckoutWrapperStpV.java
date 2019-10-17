@@ -6,14 +6,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -34,7 +33,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango.SecTMangoStp
 
 @SuppressWarnings({"static-access"})
 public class PageCheckoutWrapperStpV {
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 
     public static SecMetodoEnvioDesktopStpV secMetodoEnvio;
     public static SecStoreCreditStpV secStoreCredit;
@@ -81,7 +80,7 @@ public class PageCheckoutWrapperStpV {
         expected="Aparecen los métodos de pagos asociados al país")
     public static void despliegaYValidaMetodosPago(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) 
     throws Exception {
-    	TestCaseData.getDatosCurrentStep().addExpectedText(": " + pais.getStringPagosTest(app, isEmpl));
+    	TestMaker.getCurrentStep().addExpectedText(": " + pais.getStringPagosTest(app, isEmpl));
         PageCheckoutWrapper.despliegaMetodosPago(channel, driver);
         validaMetodosPagoDisponibles(pais, isEmpl, app, channel, driver);
     }
@@ -134,54 +133,53 @@ public class PageCheckoutWrapperStpV {
     throws Exception {
         boolean pagoPintado = false;
         if (!dCtxPago.getFTCkout().isChequeRegalo) {
-            pagoPintado = fluxSelectEnvio(dCtxPago, dCtxSh);
+            pagoPintado = fluxSelectEnvio(dCtxPago, dCtxSh, driver);
         }
         
         PageCheckoutWrapperStpV.forceClickIconoPagoAndWait(dCtxSh.pais, dCtxPago.getDataPedido().getPago(), dCtxSh.channel, !pagoPintado, driver);
     }
     
-    public static boolean fluxSelectEnvio(DataCtxPago dCtxPago, DataCtxShop dCtxSh) 
+    public static boolean fluxSelectEnvio(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
         boolean pagoPintado = false;
         Pago pago = dCtxPago.getDataPedido().getPago();
-        DataFmwkTest dFTest = TestCaseData.getdFTest();
         if (pago.getTipoEnvio(dCtxSh.appE)!=null) {
             String nombrePago = dCtxPago.getDataPedido().getPago().getNombre(dCtxSh.channel);
-            selectMetodoEnvio(dCtxPago, nombrePago, dCtxSh.appE, dCtxSh.channel, dFTest);
+            selectMetodoEnvio(dCtxPago, nombrePago, dCtxSh.appE, dCtxSh.channel, driver);
             pagoPintado = true;
             TipoTransporte tipoEnvio = pago.getTipoEnvioType(dCtxSh.appE);
             if (tipoEnvio.isDroppoint()) {
-            	ModalDroppointsStpV.fluxSelectDroppoint(dCtxPago, dCtxSh, dFTest.driver);
+            	ModalDroppointsStpV.fluxSelectDroppoint(dCtxPago, dCtxSh, driver);
             }
             if (tipoEnvio.isFranjaHoraria()) {
-            	selectFranjaHorariaUrgente(dCtxSh.channel, dFTest);
+            	selectFranjaHorariaUrgente(dCtxSh.channel, driver);
             }
         }        
         
         return pagoPintado;
     }
     
-    public static void selectFranjaHorariaUrgente(Channel channel, DataFmwkTest dFTest) {
+    public static void selectFranjaHorariaUrgente(Channel channel, WebDriver driver) {
         switch (channel) {
         case desktop:
-            SecMetodoEnvioDesktopStpV.selectFranjaHorariaUrgente(1, dFTest.driver);
+            SecMetodoEnvioDesktopStpV.selectFranjaHorariaUrgente(1, driver);
             break;
         case movil_web:
-            Page1EnvioCheckoutMobilStpV.selectFranjaHorariaUrgente(1, dFTest.driver);
+            Page1EnvioCheckoutMobilStpV.selectFranjaHorariaUrgente(1, driver);
         }    
     }
 
-    public static void selectMetodoEnvio(DataCtxPago dCtxPago, String nombrePago, AppEcom appE, Channel channel, DataFmwkTest dFTest) 
+    public static void selectMetodoEnvio(DataCtxPago dCtxPago, String nombrePago, AppEcom appE, Channel channel, WebDriver driver) 
     throws Exception {
-        alterTypeEnviosAccordingContext(dCtxPago, appE, channel, dFTest.driver);
+        alterTypeEnviosAccordingContext(dCtxPago, appE, channel, driver);
         Pago pago = dCtxPago.getDataPedido().getPago();
         TipoTransporte tipoTransporte = pago.getTipoEnvioType(appE);
         switch (channel) {
         case desktop:
-            SecMetodoEnvioDesktopStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, dFTest.driver);
+            SecMetodoEnvioDesktopStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, driver);
             break;
         case movil_web:
-            Page1EnvioCheckoutMobilStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, dFTest.driver);
+            Page1EnvioCheckoutMobilStpV.selectMetodoEnvio(tipoTransporte, nombrePago, dCtxPago, driver);
             break;
         }
     }
@@ -252,8 +250,9 @@ public class PageCheckoutWrapperStpV {
     public static void forceClickIconoPagoAndWait(Pais pais, Pago pago, Channel channel, boolean pintaNombrePago, WebDriver driver) throws Exception {
         if (pintaNombrePago) {
             String pintaPago = "<b style=\"color:blue;\">" + pago.getNombre(channel) + "</b>:"; 
-            String newDescription = pintaPago + TestCaseData.getDatosCurrentStep().getDescripcion();
-            TestCaseData.getDatosCurrentStep().setDescripcion(newDescription);
+            StepTestMaker step = TestMaker.getCurrentStep();
+            String newDescription = pintaPago + step.getDescripcion();
+            step.setDescripcion(newDescription);
         }
 
         try {
@@ -309,9 +308,9 @@ public class PageCheckoutWrapperStpV {
     public static void inputDataTrjAndConfirmPago(DataCtxPago dCtxPago, Channel channel, WebDriver driver) 
     throws Exception {
         Pago pago = dCtxPago.getDataPedido().getPago();
-        StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
-        StepTestMaker.replaceInDescription(tagTipoTarj, pago.getTipotarj());
-        StepTestMaker.replaceInDescription(tagNumTarj, pago.getNumtarj());
+        StepTestMaker step = TestMaker.getCurrentStep();
+        step.replaceInDescription(tagTipoTarj, pago.getTipotarj());
+        step.replaceInDescription(tagNumTarj, pago.getNumtarj());
        
     	PageCheckoutWrapper pageCheckout = new PageCheckoutWrapper();
         if (pago.getNumtarj()!=null && "".compareTo(pago.getNumtarj())!=0) {
@@ -413,7 +412,7 @@ public class PageCheckoutWrapperStpV {
     	description="Introducir la tarjeta de empleado " + tagTarjeta + " y pulsar el botón \"Aplicar\"", 
         expected="Aparecen los datos para la introducción del 1er apellido y el nif")
     public static void inputTarjetaEmplEnCodPromo(Pais pais, Channel channel, WebDriver driver) throws Exception {
-    	TestCaseData.getDatosCurrentStep().replaceInDescription(tagTarjeta, pais.getAccesoEmpl().getTarjeta());
+    	TestMaker.getCurrentStep().replaceInDescription(tagTarjeta, pais.getAccesoEmpl().getTarjeta());
         PageCheckoutWrapper.inputCodigoPromoAndAccept(pais.getAccesoEmpl().getTarjeta(), channel, driver);
         checkAfterInputTarjetaEmpleado(pais, channel, driver);
     }
@@ -457,17 +456,17 @@ public class PageCheckoutWrapperStpV {
         expected="Se aplican los descuentos correctamente")
     public static void inputDataEmplEnPromoAndAccept(DataBag dataBag, Pais pais, Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-    	StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
+    	StepTestMaker step = TestMaker.getCurrentStep();
     	String primerApellido = (new StringTokenizer(pais.getAccesoEmpl().getNombre(), " ")).nextToken();
-    	StepTestMaker.replaceInDescription(tag1erApellido, primerApellido);
+    	step.replaceInDescription(tag1erApellido, primerApellido);
     	
         if (pais.getAccesoEmpl().getNif()!=null) {
-        	StepTestMaker.addRightDescriptionText("Introducir el NIF del usuario " + pais.getAccesoEmpl().getNif() + ". ");
+        	step.addRightDescriptionText("Introducir el NIF del usuario " + pais.getAccesoEmpl().getNif() + ". ");
         	PageCheckoutWrapper.inputDNIPromoEmpl(pais.getAccesoEmpl().getNif(), channel, driver);
         }
         PageCheckoutWrapper.inputApellidoPromoEmpl(primerApellido, channel, driver);
         if (pais.getAccesoEmpl().getFecnac()!=null) {
-        	StepTestMaker.addRightDescriptionText("Introducir la fecha de nacimiento " + pais.getAccesoEmpl().getFecnac() + ". ");
+        	step.addRightDescriptionText("Introducir la fecha de nacimiento " + pais.getAccesoEmpl().getFecnac() + ". ");
         	PageCheckoutWrapper.selectFechaNacPromoEmpl(pais.getAccesoEmpl().getFecnac(), channel, driver); 
         }
         PageCheckoutWrapper.clickButtonAceptarPromoEmpl(channel, driver);
@@ -497,7 +496,7 @@ public class PageCheckoutWrapperStpV {
 		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
 			nombreBanco = "Test Issuer";
 		}
-		TestCaseData.getDatosCurrentStep().replaceInDescription(tagNombreBanco, nombreBanco);
+		TestMaker.getCurrentStep().replaceInDescription(tagNombreBanco, nombreBanco);
             
 		PageCheckoutWrapper.selectBancoEPS(nombreBanco, driver);
 		checkIsVisibleBank(nombreBanco, driver);

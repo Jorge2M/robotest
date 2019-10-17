@@ -1,6 +1,5 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.registro;
 
-import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
 import org.openqa.selenium.WebDriver;
 
@@ -18,18 +17,18 @@ public class PageRegistroFinStpV {
 	@Validation(
 		description="Aparece la página final del proceso de registro (la esperamos hasta #{maxSecondsWait} segundos)",
 		level=State.Warn)
-    public static boolean isPageUntil(int maxSecondsWait, DataFmwkTest dFTest) {
-		return (PageRegistroFin.isPageUntil(maxSecondsWait, dFTest.driver));
+    public static boolean isPageUntil(int maxSecondsWait, WebDriver driver) {
+		return (PageRegistroFin.isPageUntil(maxSecondsWait, driver));
     }
     
 	@Step (
 		description="Seleccionar el botón \"Ir de shopping\" y finalmente el icono de Mango", 
         expected="Se accede a la shop correctamente")
-    public static void clickIrDeShoppingButton(DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static void clickIrDeShoppingButton(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        PageRegistroFin.clickIrDeShopping(dFTest.driver);
-        SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver).clickLogoMango();
-        validateWeAreLogged(dCtxSh, dFTest.driver);
+        PageRegistroFin.clickIrDeShopping(driver);
+        SecCabecera.getNew(dCtxSh.channel, dCtxSh.appE, driver).clickLogoMango();
+        validateWeAreLogged(dCtxSh, driver);
     }
 	
 	public static void validateWeAreLogged(DataCtxShop dCtxSh, WebDriver driver) throws Exception {

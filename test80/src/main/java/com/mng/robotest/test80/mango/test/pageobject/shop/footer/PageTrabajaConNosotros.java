@@ -5,12 +5,12 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 
 public class PageTrabajaConNosotros extends WebdrvWrapp implements PageFromFooter {
 	
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
 	final String XPathIdFrame = "//iframe[@id='bodyFrame']";
 	final String XPathForIdPage = "//section[@id='all-jobs-link-section']";

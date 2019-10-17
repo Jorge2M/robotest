@@ -5,11 +5,11 @@ import java.util.Arrays;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.trustpay.PageTrustpaySelectBank;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -51,7 +51,7 @@ public class PageTrustpaySelectBankStpV {
     public static void selectTestBankAndPay(String importeTotal, String codPais, Channel channel, WebDriver driver) throws Exception {
         ArrayList<String> listOfPosibleValues = new ArrayList<>();
         listOfPosibleValues.addAll(Arrays.asList("TestPay", "Fio banka"));
-        TestCaseData.getDatosCurrentStep().replaceInDescription(tagPosibleBanks, String.join(",", listOfPosibleValues));
+        TestMaker.getCurrentStep().replaceInDescription(tagPosibleBanks, String.join(",", listOfPosibleValues));
 
         PageTrustpaySelectBank.selectBankThatContains(listOfPosibleValues, channel, driver);
         PageTrustpaySelectBank.clickButtonToContinuePay(channel, driver);

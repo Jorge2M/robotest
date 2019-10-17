@@ -2,7 +2,6 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageDevoluciones;
@@ -32,11 +31,11 @@ public class PageDevolucionesStpV {
     @Step(
     	description = "Pulsar \"Recogida gratuíta a domicilio\" + \"Solicitar Recogida\"",
         expected = "Aparece la tabla devoluciones sin ningún pedido")
-    public static void solicitarRegogidaGratuitaADomicilio(DataFmwkTest dFTest) throws Exception {
+    public static void solicitarRegogidaGratuitaADomicilio(WebDriver driver) throws Exception {
         boolean desplegada = true;
-        Devolucion.EnDomicilio.click(dFTest.driver);
-        Devolucion.EnDomicilio.waitForInState(desplegada, 2, dFTest.driver);
-        PageDevoluciones.clickSolicitarRecogida(dFTest.driver);
-        PageRecogidaDomicStpV.vaidaIsPageSinDevoluciones(dFTest.driver);
+        Devolucion.EnDomicilio.click(driver);
+        Devolucion.EnDomicilio.waitForInState(desplegada, 2, driver);
+        PageDevoluciones.clickSolicitarRecogida(driver);
+        PageRecogidaDomicStpV.vaidaIsPageSinDevoluciones(driver);
     }
 }

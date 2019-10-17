@@ -5,19 +5,19 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance.PagePostfCodSeg;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 
 public class PagePostfCodSegStpV {
 
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);    
+    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);    
     
     /**
      * Validación a nivel de la pasarela
@@ -88,8 +88,8 @@ public class PagePostfCodSegStpV {
     	try {
 	        if (isPostfinanceEcard(nombreMetodo)) {
 	            //El código de seguridad sólo lo pide en el caso de "PostFinance Card" no en el de "PostFinance e-finance"
-	        	StepTestMaker StepTestMaker = TestCaseData.getDatosLastStep();
-	        	StepTestMaker.setDescripcion("Introducir el código de seguridad " + codSeguridad + ". " + StepTestMaker.getDescripcion());
+	        	StepTestMaker step = TestMaker.getCurrentStep();
+	        	step.setDescripcion("Introducir el código de seguridad " + codSeguridad + ". " + step.getDescripcion());
 	        	PagePostfCodSeg.inputCodigoSeguridad(driver, codSeguridad);
 	        }
 	              

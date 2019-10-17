@@ -5,10 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestContext;
 
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
@@ -23,6 +21,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
@@ -58,7 +57,7 @@ public class AccesoStpV {
             registro+= "Borrar la Bolsa<br>";         
         }
         
-        StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
+        StepTestMaker StepTestMaker = TestMaker.getCurrentStep();
         StepTestMaker.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
         StepTestMaker.replaceInDescription(tagLiteralIdioma, dCtxSh.idioma.getCodigo().getLiteral());
         StepTestMaker.replaceInDescription(tagRegistro, registro);
@@ -187,8 +186,7 @@ public class AccesoStpV {
     
     //Acceso a VOTF (identificación + selección idioma + HOME she)
     public static void accesoVOTFtoHOME(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	ITestContext ctx = TestCaseData.getdFTest().ctx;
-        String urlAcceso = (String)ctx.getAttribute("appPath");
+        String urlAcceso = TestMaker.getInputParamsSuite().getUrlBase();
         int numIdiomas = dCtxSh.pais.getListIdiomas().size();
         PageLoginVOTFStpV.goToAndLogin(urlAcceso, dCtxSh, driver);
         if (numIdiomas > 1) {
@@ -221,7 +219,7 @@ public class AccesoStpV {
     	saveHtmlPage=SaveWhen.Always)
     public static void accesoPRYCambioPais(DataCtxShop dCtxSh, Pais paisDestino, IdiomaPais idiomaDestino, WebDriver driver) 
     throws Exception {
-        StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
+        StepTestMaker StepTestMaker = TestMaker.getCurrentStep();
         StepTestMaker.replaceInDescription(tagNombrePaisOrigen, dCtxSh.pais.getNombre_pais());
         StepTestMaker.replaceInDescription(tagCodigoPaisOrigen, dCtxSh.pais.getCodigo_pais());
         StepTestMaker.replaceInDescription(tagNombreIdiomaOrigen, dCtxSh.idioma.getLiteral());
@@ -259,8 +257,8 @@ public class AccesoStpV {
         Pais paisAsocIP = null;
         String urlAccesoPaisNoIp = paisAccesoNoIP.getUrlPaisEstandar(urlBaseTest);
         IdiomaPais idiomaOrigen = paisAccesoNoIP.getListIdiomas().get(0);
-        TestCaseData.getDatosCurrentStep().replaceInDescription(tagUrlAccesoPaisNoIp, urlAccesoPaisNoIp);
-        TestCaseData.getDatosCurrentStep().replaceInDescription(tagLiteralIdiomaOrigen, idiomaOrigen.getLiteral());
+        TestMaker.getCurrentStep().replaceInDescription(tagUrlAccesoPaisNoIp, urlAccesoPaisNoIp);
+        TestMaker.getCurrentStep().replaceInDescription(tagLiteralIdiomaOrigen, idiomaOrigen.getLiteral());
         
         driver.get(urlAccesoPaisNoIp);
         WebdrvWrapp.waitForPageLoaded(driver);
@@ -349,8 +347,8 @@ public class AccesoStpV {
     public static void selectConfirmPaisModal(WebDriver driver) throws Exception {
         String paisBotonCambio = ModalCambioPais.getTextPaisButtonChagePais(driver);
         String hrefBotonCambioPais = ModalCambioPais.getHRefPaisButtonChagePais(driver);
-        TestCaseData.getDatosCurrentStep().replaceInDescription(tagPaisBotonCambio, paisBotonCambio);
-        TestCaseData.getDatosCurrentStep().replaceInExpected(tagHrefBotonCambio, hrefBotonCambioPais);
+        TestMaker.getCurrentStep().replaceInDescription(tagPaisBotonCambio, paisBotonCambio);
+        TestMaker.getCurrentStep().replaceInExpected(tagHrefBotonCambio, hrefBotonCambioPais);
         
         ModalCambioPais.clickButtonChangePais(driver);       
         checkIsDoneRedirectToCountry(paisBotonCambio, hrefBotonCambioPais, driver);
@@ -374,7 +372,7 @@ public class AccesoStpV {
         expected="El nodo se encuentra en un estado correcto",
         saveHtmlPage=SaveWhen.Always)
     public static void testNodoState(NodoStatus nodo, WebDriver driver) throws Exception {
-    	TestCaseData.getDatosCurrentStep().replaceInDescription(tagPathStatus, nodo.getStatusJSON().pathStatus);
+    	TestMaker.getCurrentStep().replaceInDescription(tagPathStatus, nodo.getStatusJSON().pathStatus);
         nodo.setDataStateNodeFromBrowser(driver);
         checkStatusUp(nodo);
     }

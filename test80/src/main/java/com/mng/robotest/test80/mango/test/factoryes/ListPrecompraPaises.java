@@ -2,11 +2,10 @@ package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
 import org.testng.annotations.*;
-import org.testng.ITestContext;
 
-import com.mng.testmaker.domain.SuiteContextTestMaker;
+import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.PaisAplicaVale;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -22,10 +21,10 @@ public class ListPrecompraPaises {
 	@SuppressWarnings("unused")
 	@Parameters({"countrys"})
     @Factory
-	public Object[] createInstances(String countrys, ITestContext ctx) throws Exception {
+	public Object[] createInstances(String countrys) throws Exception {
 	    List<Object> listTests = new ArrayList<>();
 	    try {
-	    	InputParams inputData = (InputParams)SuiteContextTestMaker.getInputData(ctx);
+	    	InputParamsTestMaker inputData = TestMaker.getInputParamsSuite();
 	    	VersionPagosSuite version = VersionPagosSuite.valueOf(inputData.getVersionSuite());
 	    	List<Pais> listCountrys = Utilidades.getListCountrysFiltered(countrys);
 	        int prioridad=0;

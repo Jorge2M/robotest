@@ -1,10 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.navigations.shop;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestContext;
 
-import com.mng.testmaker.utils.TestCaseData;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -45,9 +42,6 @@ public class AccesoNavigations {
         } else {
             PagePrehome.accesoShopViaPrehome(dCtxSh, driver);
         }
-        
-        ITestContext ctx = TestCaseData.getdFTest().ctx;
-        ctx.setAttribute(Constantes.attrUrlPagPostAcceso, driver.getCurrentUrl());
     }
     
     public static void goFromLineasToMultimarcaVOTF(DataCtxShop dCtxSh, WebDriver driver) throws Exception {

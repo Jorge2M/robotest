@@ -2,7 +2,6 @@ package com.mng.robotest.test80.mango.test.stpv.shop.pedidos;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.boundary.aspects.step.Step;
@@ -79,7 +78,7 @@ public class PageDetallePedidoStpV {
     @Step (
     	description="Seleccionar el link necesario para volver a la página inicial de \"Mis Compras\"",
     	expected="Se vuelve a la página inicial de \"Mis Compras\"")
-    public void clickBackButton(Channel channel, DataFmwkTest dFTest) throws Exception {
-        pageDetalle.clickBackButton(channel, dFTest.driver);
+    public void clickBackButton(Channel channel, WebDriver driver) throws Exception {
+        pageDetalle.clickBackButton(channel, driver);
     }
 }

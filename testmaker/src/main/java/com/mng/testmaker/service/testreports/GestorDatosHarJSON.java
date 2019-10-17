@@ -1,30 +1,28 @@
-package com.mng.robotest.test80.mango.test.getdata.json;
+package com.mng.testmaker.service.testreports;
 
 import java.io.FileReader;
-import java.lang.reflect.Method;
 import java.util.Iterator;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
-import org.testng.ITestContext;
 
-import com.mng.testmaker.utils.controlTest.FmwkTest;
-import com.mng.testmaker.utils.controlTest.FmwkTest.TypeEvidencia;
+import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
+import com.mng.testmaker.utils.controlTest.StoreStepEvidencies;
 
 
-public class gestorDatosHarJSON {
+public class GestorDatosHarJSON {
 
     private JSONParser parser = new JSONParser();
     private JSONObject fileHAR = null;   
 
-    public gestorDatosHarJSON(String fileHAR) throws Exception {
+    public GestorDatosHarJSON(String fileHAR) throws Exception {
         parseHAR(fileHAR);
     }
 	
-    public gestorDatosHarJSON(int step, ITestContext context, Method method) throws Exception {
-        String methodWithFactory = FmwkTest.getMethodWithFactory(method, context);
-        String ficheroHAR = FmwkTest.getPathFileEvidenciaStep(context, methodWithFactory, step, TypeEvidencia.har);
+    public GestorDatosHarJSON(StepTestMaker step) throws Exception {
+        String ficheroHAR = StoreStepEvidencies.getPathFileEvidenciaStep(step, StepEvidence.har);
         parseHAR(ficheroHAR);
     }
 	

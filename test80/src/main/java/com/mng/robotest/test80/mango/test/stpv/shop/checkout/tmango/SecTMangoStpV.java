@@ -2,11 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango.TipoPago;
 
@@ -32,7 +32,7 @@ public class SecTMangoStpV {
 		description="Seleccionar la forma de pago \"" + tagDescrPago + "\"", 
         expected="El resultado es correcto")
     public static void clickTipoPago(TipoPago tipoPago, Channel channel, WebDriver driver) {
-		TestCaseData.getDatosCurrentStep().replaceInDescription(tagDescrPago, SecTMango.getDescripcionTipoPago(tipoPago));
+		TestMaker.getCurrentStep().replaceInDescription(tagDescrPago, SecTMango.getDescripcionTipoPago(tipoPago));
         SecTMango.clickModalidad(driver, tipoPago, channel);
     }
 }

@@ -9,12 +9,15 @@ import org.testng.SkipException;
 import org.testng.TestNG;
 import org.testng.xml.XmlSuite;
 
+import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.domain.StateRun;
+import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.SuiteTestMaker;
 import com.mng.testmaker.domain.SuitesExecuted;
 import com.mng.testmaker.domain.TestCaseTestMaker;
+import com.mng.testmaker.domain.TestRunTestMaker;
 import com.mng.testmaker.jdbc.Connector;
-import com.mng.testmaker.listeners.utils.ResourcesExtractor;
+import com.mng.testmaker.service.testreports.ResourcesExtractor;
 import com.mng.testmaker.utils.conf.Log4jConfig;
 
 public class TestMaker {
@@ -38,14 +41,37 @@ public class TestMaker {
 	}
 	
 	public static SuiteTestMaker getSuiteInExecution() {
-		TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
-		return testCase.getSuiteParent();
+		return getTestCase().getSuiteParent();
 	}
 	
+	public static InputParamsTestMaker getInputParamsSuite() {
+		return getSuiteInExecution().getInputData();
+	}
+	
+	public static TestCaseTestMaker getTestCase() {
+		return TestCaseTestMaker.getTestCaseInExecution();
+	}
+	
+    public static WebDriver getDriverTestCase() {
+    	return (getTestCase().getWebDriver());
+    }
+    
+    public static StepTestMaker getCurrentStep() {
+    	return getTestCase().getCurrentStep();
+    }
+    
+    public static TestRunTestMaker getTestRun() {
+    	return getTestCase().getTestRunParent();
+    }
+    
+    public static String getParamTestRun(String id) {
+    	return (getTestCase().getTestRunParent().getParameter(id));
+    	//ctx.getCurrentXmlTest().getParameter(Constantes.paramUsrmanto)
+    }
+	
     public static void skipTestsIfSuiteStopped() {
-    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
-    	if (testCase!=null) {
-    		skipTestsIfSuiteStopped(testCase.getSuiteParent());
+    	if (getTestCase()!=null) {
+    		skipTestsIfSuiteStopped(getTestCase().getSuiteParent());
         }
     }
 	
@@ -54,11 +80,7 @@ public class TestMaker {
             throw new SkipException("Received Signal for stop TestSuite" + suite.getName());
         }
     }
-    
-    public WebDriver getDriverTestCase() {
-    	return (TestCaseTestMaker.getTestCaseInExecution().getWebDriver());
-    }
-	
+
     private static void runInTestMaker(SuiteTestMaker suite) {
         File path = new File(suite.getPathDirectory());
         path.mkdir();

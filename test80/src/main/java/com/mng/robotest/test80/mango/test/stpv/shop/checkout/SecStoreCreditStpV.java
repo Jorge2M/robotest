@@ -5,11 +5,11 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -20,7 +20,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 @SuppressWarnings({"static-access"})
 public class SecStoreCreditStpV { 
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
     final static String tagNombrePago = "@TagNombrePago";
     @Step (
@@ -29,7 +29,7 @@ public class SecStoreCreditStpV {
     public static void validateInitialStateOk(Channel channel, DataCtxPago dCtxPago, WebDriver driver) 
     throws Exception {
         String nombrePago = dCtxPago.getDataPedido().getPago().getNombre(channel);
-        TestCaseData.getDatosCurrentStep().replaceInExpected(tagNombrePago, nombrePago);
+        TestMaker.getCurrentStep().replaceInExpected(tagNombrePago, nombrePago);
         
         dCtxPago.getDataPedido().setImporteTotal(PageCheckoutWrapper.getPrecioTotalFromResumen(channel, driver));
         validaBloqueSaldoEnCuenta(true, channel, dCtxPago, driver);

@@ -17,16 +17,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.utils.otras.ResultadoErrores;
+import com.mng.testmaker.service.TestMaker;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
 import com.mng.robotest.test80.mango.test.generic.stackTrace;
 
 public class WebDriverMngUtils {
 	
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
     /**
      * Cargamos el errorPage y de allí extraemos el nodo
@@ -108,8 +108,8 @@ public class WebDriverMngUtils {
      */
     public static ResultadoErrores imagesBroken(WebDriver driver, Channel channel, int maxErrors) throws Exception {
         int maxImages = 5000;
-        ITestContext ctx = TestCaseData.getdFTest().ctx;
-
+        ITestContext ctx = TestMaker.getTestRun().getTestNgContext();
+        		
         //En el caso de móvil sólo procesaremos 200 imágenes para paliar el caso en el que el script se ejecuta contra un dispositivo físico y el rendimiento es limitado
         if (channel==Channel.movil_web) {
             imagesBroken(driver,  200, maxErrors, ctx);

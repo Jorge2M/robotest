@@ -8,12 +8,11 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.data.Constantes;
@@ -231,7 +230,7 @@ public class SecMenusDesktopStpV {
             driver.get(paginaLinea);
     	}
     	secMenus.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel);
-        TestCaseData.getDatosCurrentStep().replaceInDescription(tagMenu, menu1rstLevel.getNombre());
+        TestMaker.getCurrentStep().replaceInDescription(tagMenu, menu1rstLevel.getNombre());
         ModalCambioPais.closeModalIfVisible(driver);
         
         validaPaginaResultMenu(menu1rstLevel);
@@ -248,7 +247,7 @@ public class SecMenusDesktopStpV {
         expected="Aparecen los carrusels correspondientes a la línea " + tagCarruselsLinea)
     public void stepValidaCarrusels(LineaType lineaType) throws Exception {
         Linea linea = pais.getShoponline().getLinea(lineaType);
-        TestCaseData.getDatosCurrentStep().replaceInDescription(tagCarruselsLinea, linea.getCarrusels());
+        TestMaker.getCurrentStep().replaceInDescription(tagCarruselsLinea, linea.getCarrusels());
         
         secMenus.secMenuSuperior.secLineas.hoverLinea(lineaType, null);
         //if (linea.getType()!=LineaType.rebajas) {
@@ -397,9 +396,8 @@ public class SecMenusDesktopStpV {
     @Validation
     private ChecksResult checkNumPestanyasYmenusEqualsInBothNodes(
     		int numPestanyas, int numMenus, LineaType lineaType, SublineaNinosType sublineaType, String inodo, String urlBase) {
-    	ChecksResult validations = ChecksResult.getNew();
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
     	
+    	ChecksResult validations = ChecksResult.getNew();
         String clave = lineaType.name();
         if (sublineaType!=null) {
             clave+=sublineaType.name();
@@ -407,25 +405,26 @@ public class SecMenusDesktopStpV {
         clave+=urlBase;    
         
         //Si están registrados en el contexto el número de pestañas y menús...
-        if (dFTest.ctx.getAttribute("numPestanyas" + clave) != null && 
-            dFTest.ctx.getAttribute("numMenus" + clave) != null) {
+        ITestContext ctx = TestMaker.getTestRun().getTestNgContext();
+        if (ctx.getAttribute("numPestanyas" + clave) != null && 
+            ctx.getAttribute("numMenus" + clave) != null) {
         	
             //Obtenemos el número de pestañas y menús almacenados en el contexto
-            int numPestanyas_C = ((Integer)dFTest.ctx.getAttribute("numPestanyas" + clave)).intValue();
-            int numMenus_C = ((Integer)dFTest.ctx.getAttribute("numMenus" + clave)).intValue();
+            int numPestanyas_C = ((Integer)ctx.getAttribute("numPestanyas" + clave)).intValue();
+            int numMenus_C = ((Integer)ctx.getAttribute("numMenus" + clave)).intValue();
         	
 	      	validations.add(
-	    		"El número de pestañas (" + numPestanyas + ") coincide con el del nodo " + dFTest.ctx.getAttribute("NodoMenus" + clave) + " (" + numPestanyas_C + ")",
+	    		"El número de pestañas (" + numPestanyas + ") coincide con el del nodo " + ctx.getAttribute("NodoMenus" + clave) + " (" + numPestanyas_C + ")",
 	    		(numPestanyas==numPestanyas_C), State.Warn);
 	      	validations.add(
-	    		"El número de menús (" + numMenus + ") coincide con el del nodo " + dFTest.ctx.getAttribute("NodoMenus" + clave) + " (" + numMenus_C + ")",
+	    		"El número de menús (" + numMenus + ") coincide con el del nodo " + ctx.getAttribute("NodoMenus" + clave) + " (" + numMenus_C + ")",
 	    		(numMenus==numMenus_C), State.Warn);
         }
 
         //Almacenamos los nuevos datos en el contexto
-        dFTest.ctx.setAttribute("numPestanyas" + clave, Integer.valueOf(numPestanyas));
-        dFTest.ctx.setAttribute("numMenus" + clave, Integer.valueOf(numMenus));
-        dFTest.ctx.setAttribute("NodoMenus" + clave, inodo);
+        ctx.setAttribute("numPestanyas" + clave, Integer.valueOf(numPestanyas));
+        ctx.setAttribute("numMenus" + clave, Integer.valueOf(numMenus));
+        ctx.setAttribute("NodoMenus" + clave, inodo);
         
         return validations;
     }
@@ -470,7 +469,7 @@ public class SecMenusDesktopStpV {
         	"/redirect.faces?op=conta&seccion=accesorios_he&tiendaid=" + 
         	tiendaId + 
         	"&menu_temporada=2&menu_accesorio=140";
-        TestCaseData.getDatosCurrentStep().replaceInDescription(tagUrlAcceso, urlAccesoCorreo);
+        TestMaker.getCurrentStep().replaceInDescription(tagUrlAcceso, urlAccesoCorreo);
 
         driver.navigate().to(urlAccesoCorreo);
     	Menu1rstLevel menu1erNivel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.he, null, "zapatos"));
@@ -486,8 +485,8 @@ public class SecMenusDesktopStpV {
         	"Aparece la ficha del producto " + tagRefArticle)
     public static void checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
     	ArticleStock articulo = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithMoreOneColour, dCtxSh);
-    	TestCaseData.getDatosCurrentStep().replaceInDescription(tagRefArticle, articulo.getReference());
-    	TestCaseData.getDatosCurrentStep().replaceInExpected(tagRefArticle, articulo.getReference());
+    	TestMaker.getCurrentStep().replaceInDescription(tagRefArticle, articulo.getReference());
+    	TestMaker.getCurrentStep().replaceInExpected(tagRefArticle, articulo.getReference());
     	
         URI uri = new URI(driver.getCurrentUrl());
         String tiendaId = "she";
@@ -498,7 +497,7 @@ public class SecMenusDesktopStpV {
         String urlAccesoCorreo = 
         	uri.getScheme() + "://" + uri.getHost() + "/redirect.faces?op=conta&tiendaid=" + tiendaId + "&pais=" + pais.getCodigo_pais() + 
         	"&producto=" + articulo.getReference() + "&color=" + articulo.getColourCode() ;
-        TestCaseData.getDatosCurrentStep().replaceInDescription(tagUrlAcceso, urlAccesoCorreo);
+        TestMaker.getCurrentStep().replaceInDescription(tagUrlAcceso, urlAccesoCorreo);
         driver.navigate().to(urlAccesoCorreo);
 
         DataFichaArt datosArticulo = new DataFichaArt(articulo.getReference(), "");
@@ -595,7 +594,7 @@ public class SecMenusDesktopStpV {
 
     public ChecksResult checkErrorPageWithoutException() throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
-		ITestContext ctx = TestCaseData.getdFTest().ctx;
+    	ITestContext ctx = TestMaker.getTestRun().getTestNgContext();
 	    stackTrace exception = WebDriverMngUtils.stackTaceException(driver, ctx);
 	    String excepcionDuplicada = "";
 	    if (exception.getRepetida()) {

@@ -3,10 +3,8 @@ package com.mng.robotest.test80.mango.test.stpv.shop;
 import java.util.logging.Level;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestContext;
 
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
@@ -25,15 +23,14 @@ public class AllPagesStpV {
     
     public static void validacionesEstandar(StdValidationFlags flagsVal, WebDriver driver) 
     throws Exception {
-    	ITestContext ctx = TestCaseData.getdFTest().ctx;
     	flagsVal.stateValidaSEO = State.Info;
     	flagsVal.stateValidaJS = State.Info;
     	flagsVal.stateValidaImgBroken = State.Warn;
-        validacionesEstandar(flagsVal, driver, ctx);
+    	checksStandar(flagsVal, driver);
     }
     
     @Validation
-    public static ChecksResult validacionesEstandar(StdValidationFlags flagsVal, WebDriver driver, ITestContext ctx) 
+    public static ChecksResult checksStandar(StdValidationFlags flagsVal, WebDriver driver) 
     throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
     	if (flagsVal.validaSEO) {
@@ -52,7 +49,7 @@ public class AllPagesStpV {
         	if (WebdrvWrapp.getTypeDriver(driver)!=WebDriverType.firefox &&
         		WebdrvWrapp.getTypeDriver(driver)!=WebDriverType.firefoxhless) {
         		int maxErrors = 1;
-        		ResultadoErrores resultadoLogs = WebDriverArqUtils.getLogErrors(Level.WARNING, driver, maxErrors, ctx);
+        		ResultadoErrores resultadoLogs = WebDriverArqUtils.getLogErrors(Level.WARNING, driver, maxErrors);
         		String descripValidac = "No hay errores JavaScript";
         		boolean resultadoOK = resultadoLogs.getResultado() == ResultadoErrores.Resultado.OK;
                 if (!resultadoOK) { 

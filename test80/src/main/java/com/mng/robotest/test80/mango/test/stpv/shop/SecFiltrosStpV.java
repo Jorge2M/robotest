@@ -5,10 +5,10 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.utils.otras.Channel;
@@ -27,7 +27,7 @@ public class SecFiltrosStpV {
         saveNettraffic=SaveWhen.Always)
     public static int selectFiltroColoresStep (AppEcom app, Channel channel, boolean validaciones, String litMenu, 
     										   List<Color> colorsToSelect, WebDriver driver) throws Exception {
-        TestCaseData.getDatosCurrentStep().replaceInDescription(tagLitColorsToSelect, Color.getListNamesFiltros(colorsToSelect).toString());
+        TestMaker.getCurrentStep().replaceInDescription(tagLitColorsToSelect, Color.getListNamesFiltros(colorsToSelect).toString());
         SecFiltros secFiltros = SecFiltros.newInstance(channel, app, driver);
         int numArticulos1page = secFiltros.selecFiltroColoresAndReturnNumArticles(colorsToSelect);            
                 

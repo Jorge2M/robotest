@@ -12,7 +12,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
@@ -32,7 +32,7 @@ import static com.mng.robotest.test80.mango.conftestmaker.AppEcom.votf;
 
 public class MenusUserWrapper {
 
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
 	final Channel channel;
 	final AppEcom app;

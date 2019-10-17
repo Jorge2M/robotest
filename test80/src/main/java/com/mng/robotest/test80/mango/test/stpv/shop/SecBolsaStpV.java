@@ -6,10 +6,10 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.utils.otras.Channel;
@@ -156,7 +156,7 @@ public class SecBolsaStpV {
             }
         }
         
-        TestCaseData.getDatosCurrentStep().replaceInDescription(tagListaArt, listaArtStr);
+        TestMaker.getCurrentStep().replaceInDescription(tagListaArt, listaArtStr);
     }
     
     /**

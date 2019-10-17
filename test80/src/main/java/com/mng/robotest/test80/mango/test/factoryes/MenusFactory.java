@@ -4,9 +4,9 @@ import java.util.*;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
-import com.mng.testmaker.domain.SuiteContextTestMaker;
+import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.PaisIdioma;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -20,7 +20,7 @@ public class MenusFactory {
     @Parameters({"countrys", "lineas"})
     public Object[] createInstances(String countrysStr, String lineas, ITestContext ctx) throws Exception {
         ArrayList<PaisIdioma> listTests = new ArrayList<>();
-        InputParams inputData = (InputParams)SuiteContextTestMaker.getInputData(ctx);
+        InputParamsTestMaker inputData = TestMaker.getInputParamsSuite();
         AppEcom app = (AppEcom)inputData.getApp();
         Channel channel = inputData.getChannel();
         VersionMenusPais version = VersionMenusPais.valueOf(inputData.getVersionSuite());

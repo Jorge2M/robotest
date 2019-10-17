@@ -4,10 +4,10 @@ import org.openqa.selenium.WebDriver;
 import java.util.HashMap;
 
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -37,7 +37,7 @@ public class Page2IdentCheckoutStpV {
     		Pais pais, String emailUsr, boolean inputDireccCharNoLatinos, Channel channel, WebDriver driver) throws Exception {
         HashMap<String, String> datosRegistro = 
             Page2IdentCheckout.inputDataPorDefectoSegunPais(pais, emailUsr, inputDireccCharNoLatinos, false, channel, driver);
-        TestCaseData.getDatosCurrentStep().addDescriptionText(". Utilizando los datos: "+ UtilsMangoTest.listaCamposHTML(datosRegistro)); 
+        TestMaker.getCurrentStep().addDescriptionText(". Utilizando los datos: "+ UtilsMangoTest.listaCamposHTML(datosRegistro)); 
         checkIsVisibleContiueButton(5, driver);
         return datosRegistro;
     }

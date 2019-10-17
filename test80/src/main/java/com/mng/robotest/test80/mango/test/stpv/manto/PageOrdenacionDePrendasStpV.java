@@ -5,7 +5,6 @@ import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageOrdenacionDePrendas;
-import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
@@ -16,9 +15,9 @@ public class PageOrdenacionDePrendasStpV {
 
 	static String refPrenda = "";
 
-	public static void mantoOrdenacionInicio(DataFmwkTest dFTest) throws Exception {
-		selectPreProduccion(dFTest);
-		selectShe(dFTest);
+	public static void mantoOrdenacionInicio(WebDriver driver) throws Exception {
+		selectPreProduccion(driver);
+		selectShe(driver);
 	}
 
 	public static void mantoSeccionPrendas(WebDriver driver) throws Exception {
@@ -27,9 +26,9 @@ public class PageOrdenacionDePrendasStpV {
 		bajarPrenda(driver);
 	}
 
-	public static void ordenacionModal(DataFmwkTest dFTest) throws Exception {
-		aplicarOrden(dFTest);
-		aceptarOrdenPais(dFTest);
+	public static void ordenacionModal(WebDriver driver) throws Exception {
+		aplicarOrden(driver);
+		aceptarOrdenPais(driver);
 	}
 
     @Validation
@@ -52,10 +51,10 @@ public class PageOrdenacionDePrendasStpV {
 		description="Seleccionamos en el desplegable la opción <b>PreProduccion</b>",
 		expected="Aparecen los diferentes indicadores de secciones",
 		saveErrorData = SaveWhen.Never)
-	private static void selectPreProduccion(DataFmwkTest dFTest) throws Exception {
-		PageOrdenacionDePrendas.selectInDropDown(Orden.desplegableTiendas, "shop.org.pre.mango.com", dFTest.driver);
-		PageOrdenacionDePrendas.clickAndWait(Orden.verTiendas, dFTest.driver);
-		validatePreProductionElements(dFTest.driver);
+	private static void selectPreProduccion(WebDriver driver) throws Exception {
+		PageOrdenacionDePrendas.selectInDropDown(Orden.desplegableTiendas, "shop.org.pre.mango.com", driver);
+		PageOrdenacionDePrendas.clickAndWait(Orden.verTiendas, driver);
+		validatePreProductionElements(driver);
 	}
 
     @Validation
@@ -84,9 +83,9 @@ public class PageOrdenacionDePrendasStpV {
 		description="Seleccionamos la seccion de <b>She</b>",
 		expected="Podemos seleccionar que queremos realizar",
 		saveErrorData = SaveWhen.Never)
-	private static void selectShe(DataFmwkTest dFTest) throws Exception {
-		SecModalPersonalizacion.selectElement(Section.She, dFTest.driver);
-		validateSectionShe(13, dFTest.driver);
+	private static void selectShe(WebDriver driver) throws Exception {
+		SecModalPersonalizacion.selectElement(Section.She, driver);
+		validateSectionShe(13, driver);
 	}
 
 	@Validation(
@@ -168,9 +167,9 @@ public class PageOrdenacionDePrendasStpV {
 		description="Aplicamos el nuevo orden a las prendas",
 		expected="Se despliega el modal de la ordenacion de predas",
 		saveErrorData = SaveWhen.Never)
-	private static void aplicarOrden (DataFmwkTest dFTest) throws Exception {
-		PageOrdenacionDePrendas.selectElement(Orden.aplicarOrden, dFTest.driver);
-		validateAplicarOrden(dFTest.driver);
+	private static void aplicarOrden(WebDriver driver) throws Exception {
+		PageOrdenacionDePrendas.selectElement(Orden.aplicarOrden, driver);
+		validateAplicarOrden(driver);
 	}
 
     @Validation
@@ -196,8 +195,8 @@ public class PageOrdenacionDePrendasStpV {
 		description="Aplicamos el nuevo orden a las prendas",
 		expected="Se despliega el modal de la ordenacion de predas",
 		saveErrorData = SaveWhen.Never)
-	private static void aceptarOrdenPais (DataFmwkTest dFTest) throws Exception {
-		SecModalPersonalizacion.selectElement(Modal.applyCountry, dFTest.driver);
-		validateBajarPrenda(dFTest.driver, 10);
+	private static void aceptarOrdenPais(WebDriver driver) throws Exception {
+		SecModalPersonalizacion.selectElement(Modal.applyCountry, driver);
+		validateBajarPrenda(driver, 10);
 	}
 }

@@ -2,11 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.sepa;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sepa.PageSepa1rst;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -58,8 +58,8 @@ public class PageSepa1rstStpV {
     public static void inputDataAndclickPay(String iban, String titular, String importeTotal, String codPais, Channel channel, WebDriver driver) 
     throws Exception {
         if (channel==Channel.movil_web) {
-        	StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
-        	StepTestMaker.setDescripcion("Seleccionamos el icono de SEPA. " + StepTestMaker.getDescripcion());
+        	StepTestMaker step = TestMaker.getCurrentStep();
+        	step.setDescripcion("Seleccionamos el icono de SEPA. " + step.getDescripcion());
         	PageSepa1rst.clickIconoSepa(channel, driver);
         }
  

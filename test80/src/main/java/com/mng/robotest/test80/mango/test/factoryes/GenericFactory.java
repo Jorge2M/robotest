@@ -2,26 +2,23 @@ package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
 import org.testng.annotations.*;
-import org.testng.ITestContext;
 
-import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.Suites;
 import com.mng.robotest.test80.mango.test.appshop.Favoritos;
 import com.mng.robotest.test80.mango.test.appshop.MiCuenta;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
-import com.mng.testmaker.domain.SuiteContextTestMaker;
+import com.mng.testmaker.service.TestMaker;
 
 
 public class GenericFactory {
 	
     @Factory
     @Parameters({"countrys"})
-    public Object[] createInstances(String listaPaisesStr, ITestContext ctx) throws Exception {
+    public Object[] createInstances(String listaPaisesStr) throws Exception {
         ArrayList<Object> listTests = new ArrayList<>();
         try {
-        	InputParams inputData = (InputParams)SuiteContextTestMaker.getInputData(ctx);
-        	Suites suite = (Suites)inputData.getSuite();
+        	Suites suite = (Suites)TestMaker.getInputParamsSuite().getSuite();
             List<Pais> listCountrys = Utilidades.getListCountrysFiltered(listaPaisesStr);
             int prioridad=0;
             for (Pais pais : listCountrys) {

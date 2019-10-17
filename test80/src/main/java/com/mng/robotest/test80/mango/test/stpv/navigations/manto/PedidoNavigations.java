@@ -6,10 +6,9 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.InputParams;
-import com.mng.testmaker.utils.DataFmwkTest;
-import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.testmaker.service.TestMaker;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.utils.otras.TypeAccessFmwk;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
@@ -30,27 +29,26 @@ import com.mng.robotest.test80.mango.test.stpv.manto.pedido.PagePedidosMantoStpV
 import static com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageGenerarPedido.EstadoPedido.*;
 
 public class PedidoNavigations {
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 
-    public static void testPedidosEnManto(DataCheckPedidos dataCheckPedidos, AppEcom appE, DataFmwkTest dFTest) throws Exception {
+    public static void testPedidosEnManto(DataCheckPedidos dataCheckPedidos, AppEcom appE, WebDriver driver) throws Exception {
     	//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
     	if (appE!=AppEcom.votf) {  
 	        DataMantoAccess dMantoAcc = new DataMantoAccess();
-	        dMantoAcc.urlManto = dFTest.ctx.getCurrentXmlTest().getParameter(Constantes.paramUrlmanto);
-	        dMantoAcc.userManto = dFTest.ctx.getCurrentXmlTest().getParameter(Constantes.paramUsrmanto);
-	        dMantoAcc.passManto = dFTest.ctx.getCurrentXmlTest().getParameter(Constantes.paramPasmanto);
+	        dMantoAcc.urlManto = TestMaker.getParamTestRun(Constantes.paramUrlmanto);
+	        dMantoAcc.userManto = TestMaker.getParamTestRun(Constantes.paramUsrmanto);
+	        dMantoAcc.passManto = TestMaker.getParamTestRun(Constantes.paramPasmanto);
 	        dMantoAcc.appE = appE;
-	        testPedidosEnManto(dMantoAcc, dataCheckPedidos, dFTest);
+	        testPedidosEnManto(dMantoAcc, dataCheckPedidos, driver);
     	}
     }
     
-    private static void testPedidosEnManto(DataMantoAccess dMantoAcc, DataCheckPedidos dataCheckPedidos, DataFmwkTest dFTest) 
+    private static void testPedidosEnManto(DataMantoAccess dMantoAcc, DataCheckPedidos dataCheckPedidos, WebDriver driver) 
     throws Exception {
-        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(dFTest.ctx);
-        TypeAccessFmwk typeAccess = inputData.getTypeAccess();
+        TypeAccessFmwk typeAccess = ((InputParams)TestMaker.getInputParamsSuite()).getTypeAccess();
         if (dataCheckPedidos.areChecksToExecute() && typeAccess!=TypeAccessFmwk.Bat) {
-            PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, dFTest.driver);
-            PedidoNavigations.validacionListPedidosStpVs(dataCheckPedidos, dMantoAcc.appE, dFTest.driver);
+            PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
+            PedidoNavigations.validacionListPedidosStpVs(dataCheckPedidos, dMantoAcc.appE, driver);
         }
     }
     

@@ -8,15 +8,13 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestContext;
 
 import com.mng.robotest.test80.InputParams;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.utils.otras.TypeAccessFmwk;
@@ -55,18 +53,14 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.pagosfactory.PagoSt
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 public class PagoNavigationsStpV {
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
-    
-    public static void testFromLoginToExecPaymetIfNeeded(DataCtxShop dCtxSh, DataCtxPago dCtxPago, DataFmwkTest dFTest) 
-    throws Exception {
-        testFromLoginToExecPaymetIfNeeded(null, dCtxSh, dCtxPago, dFTest.driver, dFTest.ctx);        
-    }
+    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
     /**
      * Implementa el caso de prueba completo hasta la validación de un vale (válido o inválido)
      */
-    public static void testFromLoginToExecPaymetIfNeeded(List<Pais> paisesDestino, DataCtxShop dCtxSh, 
-    													 DataCtxPago dCtxPago, WebDriver driver, ITestContext ctx) throws Exception {
+    public static void testFromLoginToExecPaymetIfNeeded(List<Pais> paisesDestino, DataCtxShop dCtxSh, DataCtxPago dCtxPago) 
+    throws Exception {
+    	WebDriver driver = TestMaker.getDriverTestCase();
     	accessShopAndLoginOrLogoff(dCtxSh, driver);
         if (dCtxSh.userRegistered) {
             SecBolsaStpV.clear(dCtxSh, driver);
@@ -88,7 +82,7 @@ public class PagoNavigationsStpV {
         dCtxPago.getFTCkout().testCodPromocional = true;
         testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver);
         if (dCtxSh.pais.getListPagosTest(dCtxSh.appE, dCtxPago.getFTCkout().isEmpl).size() > 0) {
-            checkMetodosPagos(dCtxSh, dCtxPago, paisesDestino, driver, ctx);
+            checkMetodosPagos(dCtxSh, dCtxPago, paisesDestino, driver);
         }
     }
     	
@@ -99,7 +93,7 @@ public class PagoNavigationsStpV {
     	saveNettraffic=SaveWhen.Always)
     public static void accessShopAndLoginOrLogoff(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();    	
+        StepTestMaker StepTestMaker = TestMaker.getCurrentStep();    	
         if (dCtxSh.userRegistered) {
             StepTestMaker.replaceInDescription(
             	tagLoginOrLogoff, "e Identificarse con el usuario <b>" + dCtxSh.userConnected + "</b>");
@@ -300,7 +294,7 @@ public class PagoNavigationsStpV {
      * Función que parte de la página de "Resumen de artículos" y que valida todos los métodos de pago del país
      */
     @SuppressWarnings("static-access")
-    public static void checkMetodosPagos(DataCtxShop dCtxSh, DataCtxPago dCtxPago, List<Pais> paisesDestino, WebDriver driver, ITestContext ctx) 
+    public static void checkMetodosPagos(DataCtxShop dCtxSh, DataCtxPago dCtxPago, List<Pais> paisesDestino, WebDriver driver) 
     throws Exception {
         try {
             DataPedido dataPedido = dCtxPago.getDataPedido();
@@ -310,7 +304,7 @@ public class PagoNavigationsStpV {
                 
             PageCheckoutWrapperStpV.despliegaYValidaMetodosPago(dCtxSh.pais, dCtxPago.getFTCkout().isEmpl, dCtxSh.appE, dCtxSh.channel, driver);
             if (dCtxPago.getFTCkout().validaPasarelas) {
-                validaPasarelasPagoPais(dCtxSh, dCtxPago, driver, ctx);
+                validaPasarelasPagoPais(dCtxSh, dCtxPago, driver);
             }
                 
             //En el caso de españa, después de validar todos los países probamos el botón "CHANGE DETAILS" sobre los países indicados en la lista
@@ -361,12 +355,12 @@ public class PagoNavigationsStpV {
     /**
      * Validación de todas las pasarelas de pago asociadas al país
      */
-    public static void validaPasarelasPagoPais(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver, ITestContext ctx) 
+    public static void validaPasarelasPagoPais(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) 
     throws Exception {
         List<Pago> listPagos = dCtxSh.pais.getListPagosTest(dCtxSh.appE, dCtxPago.getFTCkout().isEmpl);
         for (int i=0; i<listPagos.size(); i++) {
             Pago pago = listPagos.get(i);
-            if (pago.isNeededTestPasarelaDependingFilter(dCtxSh.channel, ctx)) {
+            if (pago.isNeededTestPasarelaDependingFilter(dCtxSh.channel)) {
                 dCtxPago.getDataPedido().setPago(pago);
                 String urlPagChekoutToReturn = driver.getCurrentUrl();
                 if (dCtxPago.getFTCkout().validaPagos) {
@@ -403,7 +397,7 @@ public class PagoNavigationsStpV {
      *     Desktop: simplemente se selecciona el botón "Confirmar Compra"
      *     Movil  : se selecciona los botones "Ver resumen" y "Confirmación del pago)
      */
-    public static StepTestMaker aceptarCompraDesdeMetodosPago(DataCtxPago dCtxPago, Channel channel, WebDriver driver)
+    public static void aceptarCompraDesdeMetodosPago(DataCtxPago dCtxPago, Channel channel, WebDriver driver)
     throws Exception {
         DataPedido dataPedido = dCtxPago.getDataPedido();
         dataPedido.setCodtipopago("R");
@@ -415,16 +409,12 @@ public class PagoNavigationsStpV {
         	PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, channel, driver);
             PageCheckoutWrapperStpV.pasoBotonConfirmarPagoCheckout3Mobil(driver);
         }       
-                    
-        return (TestCaseData.getDatosLastStep());
     }
     
     public static boolean iCanExecPago(PagoStpV pagoStpV, AppEcom appE, WebDriver driver) {
         boolean validaPagos = pagoStpV.dCtxPago.getFTCkout().validaPagos;
         Pago pago = pagoStpV.dCtxPago.getDataPedido().getPago();
-        ITestContext ctx = TestCaseData.getdFTest().ctx;
-        InputParams inputParams = (InputParams)TestCaseData.getInputDataTestMaker(ctx);
-        TypeAccessFmwk typeAccess = inputParams.getTypeAccess();
+        TypeAccessFmwk typeAccess = ((InputParams)TestMaker.getInputParamsSuite()).getTypeAccess();
         return (
             //No estamos en el entorno productivo
             !UtilsMangoTest.isEntornoPRO(appE, driver) &&

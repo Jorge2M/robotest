@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
@@ -29,7 +29,7 @@ import com.mng.robotest.test80.mango.test.utils.testab.TestABactive;
  * @author jorge.munoz
  */
 public class PagePrehome extends WebdrvWrapp {
-	static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     enum ButtonEnter {Enter, Continuar};
 	
     static String XPathSelectPaises = "//select[@id='countrySelect']";

@@ -5,8 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 
 
 /**
@@ -15,7 +15,7 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
  *
  */
 public class PopupFindAddress extends WebdrvWrapp {
-    private final static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+    private final static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     private final static String XPathInputBuscador = "//input[@id='region_name']";
     private final static String XPathButtonLupa = "//button[@class='btn_search']";
     private final static String XPathLinkDirecc = "//button[@class='link_post']";

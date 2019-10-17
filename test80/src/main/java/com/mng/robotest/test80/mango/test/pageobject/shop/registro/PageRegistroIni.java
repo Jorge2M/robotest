@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
@@ -24,7 +24,7 @@ public class PageRegistroIni extends WebdrvWrapp {
 	
 	private final WebDriver driver;
 	
-	static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
 	private static String XPathPestanyaRegistro = "//div[@class[contains(.,'registerTab')]]";
 	private static String XPathHeaderNews = "//div[@class[contains(.,'registerModal')]]//div[@class='info']";

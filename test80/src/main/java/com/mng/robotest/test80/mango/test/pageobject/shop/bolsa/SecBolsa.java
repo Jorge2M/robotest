@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -27,7 +27,7 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
  */
 public class SecBolsa extends WebdrvWrapp {
 	public enum StateBolsa {Open, Closed}
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     public static LineasArticuloBolsa lineasArticuloBolsa;
     
     //TODO cuando suba a PRO la operativa eliminar el 1er XPath

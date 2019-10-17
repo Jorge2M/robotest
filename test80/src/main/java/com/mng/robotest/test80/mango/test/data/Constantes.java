@@ -69,6 +69,4 @@ public class Constantes {
 
     
 	public final static String PrefixRebajas = "<b style=\"color:blue\">Rebajas</b></br>";
-	
-	public final static String idCtxSh = "idCtxSh";
 }

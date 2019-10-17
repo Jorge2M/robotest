@@ -6,12 +6,10 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
 import static com.mng.robotest.test80.mango.test.data.Constantes.PrefixRebajas;
 
 import com.mng.testmaker.utils.otras.Channel;
@@ -42,7 +40,7 @@ import com.mng.robotest.test80.mango.test.utils.checkmenus.MenuTraduc;
 
 public class SecMenusWrapperStpV {
 	
-	static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
 	private final Channel channel;
 	private final AppEcom app;
@@ -212,33 +210,28 @@ public class SecMenusWrapperStpV {
         }
     }
     
-    public StepTestMaker seleccionLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh) throws Exception {
+    public void seleccionLinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh) throws Exception {
         if (sublineaType==null) {
-            return seleccionLinea(lineaType);
+            seleccionLinea(lineaType);
+        } else {
+        	seleccionSublinea(lineaType, sublineaType, dCtxSh);
         }
-        
-        return seleccionSublinea(lineaType, sublineaType, dCtxSh);
     }
     
-    public StepTestMaker seleccionLinea(LineaType lineaType) throws Exception {
+    public void seleccionLinea(LineaType lineaType) throws Exception {
         if (channel==Channel.movil_web) {
             secMenuLateralMobilStpV.seleccionLinea(lineaType, pais);
-            return TestCaseData.getDatosLastStep();
+        } else {
+	        secMenusDesktopStpV.seleccionLinea(lineaType);
         }
-        
-        secMenusDesktopStpV.seleccionLinea(lineaType);
-        return TestCaseData.getDatosLastStep();
     }
     
-    public StepTestMaker seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh)
+    public void seleccionSublinea(LineaType lineaType, SublineaNinosType sublineaType, DataCtxShop dCtxSh)
     throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
             secMenuLateralMobilStpV.seleccionSublineaNinos(lineaType, sublineaType, pais);
-            return TestCaseData.getDatosLastStep();
         }
-        
         secMenusDesktopStpV.seleccionSublinea(lineaType, sublineaType);
-        return TestCaseData.getDatosLastStep();
     }
     
     public void selectFiltroCollectionIfExists(FilterCollection typeMenu) throws Exception {

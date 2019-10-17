@@ -4,7 +4,6 @@ import java.util.HashMap;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
@@ -93,17 +92,17 @@ public class PageMisDatosStpV {
     @Step(
         description = "Modificar el nombre (cambio de mayúsculas<->minúsculas) + Botón \"Modificar Datos\"",
         expected = "Aparece la confirmación que los datos se han modificados")
-    public static String modificaNombreYGuarda (DataFmwkTest dFTest) throws Exception {
-        String nombreActual = PageMisDatos.getValueNombreInput(dFTest.driver);
+    public static String modificaNombreYGuarda (WebDriver driver) throws Exception {
+        String nombreActual = PageMisDatos.getValueNombreInput(driver);
         if (nombreActual.compareTo(nombreActual.toUpperCase()) == 0) {
             nombreActual = nombreActual.toLowerCase();
         } else {
             nombreActual = nombreActual.toUpperCase();
         }
 
-        PageMisDatos.setNombreInput(dFTest.driver, nombreActual);
-        PageMisDatos.clickGuardarCambios(dFTest.driver);
-        validateModificationOfData(dFTest.driver);
+        PageMisDatos.setNombreInput(driver, nombreActual);
+        PageMisDatos.clickGuardarCambios(driver);
+        validateModificationOfData(driver);
 
         return nombreActual;
     }

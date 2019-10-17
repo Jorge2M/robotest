@@ -9,8 +9,8 @@ import org.testng.xml.XmlGroups;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
+import com.mng.testmaker.service.testreports.StorerErrorStep;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.conf.StorerErrorStep;
 import com.mng.testmaker.utils.webdriver.BrowserStackDesktop;
 import com.mng.testmaker.utils.webdriver.BrowserStackMobil;
 

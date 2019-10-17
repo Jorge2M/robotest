@@ -11,22 +11,22 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
+import com.mng.testmaker.service.TestMaker;
+import com.mng.testmaker.service.testreports.GestorDatosHarJSON;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test80.mango.test.getdata.json.gestorDatosHarJSON;
 
 
 public class PasosGenAnalitica {
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
     /**
      * Aplica las validaciones estándar a nivel de Analítica
@@ -49,20 +49,21 @@ public class PasosGenAnalitica {
     
     public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DataPedido dataPedido, EnumSet<Constantes.AnalyticsVal> analyticSet, WebDriver driver) 
     throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-    	StepTestMaker StepTestMaker = TestCaseData.getDatosLastStep();
-        SaveWhen whenSaveNettraffic = StepTestMaker.getSaveNettrafic();
+    	StepTestMaker step = TestMaker.getCurrentStep();
+        SaveWhen whenSaveNettraffic = step.getWhenSave(StepEvidence.har);
         if (whenSaveNettraffic == SaveWhen.Always &&
             driver.toString().toLowerCase().contains("firefox")) {
 
             //Instanciamos el gestor de los datos HAR
-            gestorDatosHarJSON gestorHAR = null;
+            GestorDatosHarJSON gestorHAR = null;
             try {
-                gestorHAR = new gestorDatosHarJSON(StepTestMaker.getStepNumber(), dFTest.ctx, dFTest.meth);
+                gestorHAR = new GestorDatosHarJSON(step);
             }
             catch (FileNotFoundException e) {
                 //Capturamos la excepción para que no se produzca error (las posteriores validaciones generarán un warning para este caso)
-                pLogger.warn(". Not located file HAR associated to method {}, step {}", dFTest.meth.getName(), Integer.valueOf(StepTestMaker.getStepNumber()), e);
+                pLogger.warn(
+                	". Not located file HAR associated to method {}, step {}", 
+                	step.getTestCaseParent().getNameUnique(), Integer.valueOf(step.getPositionInTestCase()), e);
             }
             
             if (gestorHAR!=null) {
@@ -77,7 +78,7 @@ public class PasosGenAnalitica {
 	                        validaCriteo(gestorHAR, lineaId);
 	                        break;
 	                    case Bing:
-	                        validaBing(gestorHAR, app, dFTest.driver);
+	                        validaBing(gestorHAR, app, driver);
 	                        break;
 	                    case Polyvore:
 	                        if (dataPedido!=null && dataPedido.getCodigoPais().compareTo("400")==0) {
@@ -88,7 +89,7 @@ public class PasosGenAnalitica {
 	                        validaNetTraffic(gestorHAR);                            
 	                        break;
 	                    case DataLayer:
-	                        validaDatalayer(dFTest.driver);                            
+	                        validaDatalayer(driver);                            
 	                        break;
 	                    default:
 	                        break;
@@ -99,7 +100,7 @@ public class PasosGenAnalitica {
     }
 
     @Validation
-    public static ChecksResult validaPolyvore(gestorDatosHarJSON gestorHAR, DataPedido dataPedido) throws Exception {
+    public static ChecksResult validaPolyvore(GestorDatosHarJSON gestorHAR, DataPedido dataPedido) throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
     	
         String urlPolyvore = "://www.polyvore.com/conversion/beacon.gif?";
@@ -160,7 +161,7 @@ public class PasosGenAnalitica {
     
     @SuppressWarnings("rawtypes")
     @Validation
-    public static ChecksResult validaCriteo(gestorDatosHarJSON gestorHAR, LineaType lineaId) throws Exception {
+    public static ChecksResult validaCriteo(GestorDatosHarJSON gestorHAR, LineaType lineaId) throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
         if (lineaId!=LineaType.violeta) {
             String urlCriteo = ".criteo.com/dis/dis.aspx?";
@@ -193,7 +194,7 @@ public class PasosGenAnalitica {
         return validations;
     }
 
-	private static String getReferer1rstRequestWithState2xx(gestorDatosHarJSON gestorHAR) throws Exception {
+	private static String getReferer1rstRequestWithState2xx(GestorDatosHarJSON gestorHAR) throws Exception {
         JSONArray petsTextHtml = gestorHAR.getListEntriesOfMimeType("text/html");
         JSONObject primeraRequest = null;
         boolean requestEncontrada = false;
@@ -226,7 +227,7 @@ public class PasosGenAnalitica {
 	}
         
     @Validation
-    public static ChecksResult validaBing(gestorDatosHarJSON gestorHAR, AppEcom app, WebDriver driver) throws Exception {
+    public static ChecksResult validaBing(GestorDatosHarJSON gestorHAR, AppEcom app, WebDriver driver) throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
         if (UtilsMangoTest.isEntornoPRO(app, driver)) { //El tracking de Bing sólo se encuentra activo en PRO
             String urlBing = "://bat.bing.com/action/0?";
@@ -261,7 +262,7 @@ public class PasosGenAnalitica {
     }
     
     @Validation
-    public static ChecksResult validaGoogleAnalytics(gestorDatosHarJSON gestorHAR, AppEcom app) throws Exception {
+    public static ChecksResult validaGoogleAnalytics(GestorDatosHarJSON gestorHAR, AppEcom app) throws Exception {
         //TODO esta validación es temporal. Actualmente hay activados 2 formas de lanzar Google Analytics con lo que es normal que en algún
         //caso se ejecuten 2 peticiones. Cuando dejen sólo una forma habrá que restaurar la validación original
     	ChecksResult validations = ChecksResult.getNew();
@@ -316,7 +317,7 @@ public class PasosGenAnalitica {
     
     @SuppressWarnings({ "rawtypes" })
     @Validation
-    public static ChecksResult validaNetTraffic(gestorDatosHarJSON gestorHAR) throws Exception {
+    public static ChecksResult validaNetTraffic(GestorDatosHarJSON gestorHAR) throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
     	boolean peticionesOk = true;
     	String infoWarnings = "";
@@ -349,7 +350,7 @@ public class PasosGenAnalitica {
      * Método que extrae el tiempo correspondiente a la primera petición de tipo 'text/html'.
      * @param type: en nuestro caso le pasaremos en el type 'text/html'
      */
-    public static float getTime1rstPet(gestorDatosHarJSON gestorHAR, String type) {
+    public static float getTime1rstPet(GestorDatosHarJSON gestorHAR, String type) {
         String tiempo = "";
         try {                
             //Obtenemos la 1a URL con type="text/html"

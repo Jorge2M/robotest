@@ -1,11 +1,12 @@
-package com.mng.testmaker.listeners.utils;
+package com.mng.testmaker.service.testreports;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.FileUtils;
-import com.mng.testmaker.listeners.utils.GetterResources.Directory;
+
+import com.mng.testmaker.service.testreports.GetterResources.Directory;
 import com.mng.testmaker.utils.conf.Log4jConfig;
 
 public class ResourcesExtractor {

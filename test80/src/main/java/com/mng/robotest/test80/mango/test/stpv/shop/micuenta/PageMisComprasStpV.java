@@ -2,12 +2,12 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraOnline;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraTienda;
@@ -191,7 +191,7 @@ public class PageMisComprasStpV {
         expected="Aparece el modal con información del artículo")
 	public void clickMoreInfo() {
     	String infoArticle = pageMisCompras.getReferenciaPrimerArticulo();
-    	TestCaseData.getDatosCurrentStep().replaceInDescription(tagReferencia, infoArticle);
+    	TestMaker.getCurrentStep().replaceInDescription(tagReferencia, infoArticle);
     	pageMisCompras.clickMasInfoArticulo();           
     	modalDetalleMisComprasStpV.checkModalArticle(infoArticle);
 	}    

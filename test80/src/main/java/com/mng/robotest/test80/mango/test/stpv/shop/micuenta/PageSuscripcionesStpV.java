@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageSuscripciones;
@@ -48,13 +47,13 @@ public class PageSuscripcionesStpV {
     @Step(
         description = "Seleccionar los checkbox de las Newsletter <b>#{listNewsletters.toString()}</b> + Botón \"Guardar Cambios\"",
         expected = "parece la confirmación que los datos se han modificado")
-    public static void selectNewslettersAndGuarda(ArrayList<idNewsletters> listNewsletters, DataFmwkTest dFTest) throws Exception {
+    public static void selectNewslettersAndGuarda(ArrayList<idNewsletters> listNewsletters, WebDriver driver) throws Exception {
         for (idNewsletters idNewsletter : listNewsletters) {
-            PageSuscripciones.clickRadioNewsletter(dFTest.driver, idNewsletter);
+            PageSuscripciones.clickRadioNewsletter(driver, idNewsletter);
         }
 
-        PageSuscripciones.clickGuardarCambios(dFTest.driver);
-        validateIsPageResult(5, dFTest.driver);
+        PageSuscripciones.clickGuardarCambios(driver);
+        validateIsPageResult(5, driver);
     }
 
     @Validation(

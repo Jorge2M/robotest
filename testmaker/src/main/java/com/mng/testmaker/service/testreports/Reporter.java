@@ -7,7 +7,6 @@ import org.testng.ISuite;
 import org.testng.xml.XmlSuite;
 
 import com.mng.testmaker.domain.SuiteTestMaker;
-import com.mng.testmaker.listeners.utils.GenerateReports;
 
 public class Reporter implements IReporter {
 

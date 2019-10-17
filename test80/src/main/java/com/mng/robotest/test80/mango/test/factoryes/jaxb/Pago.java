@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.factoryes.jaxb;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.xml.bind.annotation.*;
-import org.testng.ITestContext;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
@@ -240,9 +240,9 @@ public class Pago {
         return this.testpasarela;
     }
     
-    public boolean isNeededTestPasarelaDependingFilter(Channel channel, ITestContext ctx) {
+    public boolean isNeededTestPasarelaDependingFilter(Channel channel) {
         if (getTestpasarela().compareTo("s")==0) {
-            String listPayments = ctx.getCurrentXmlTest().getParameter(Constantes.paramPayments);
+            String listPayments = TestMaker.getParamTestRun(Constantes.paramPayments);
             if (listPayments==null || "".compareTo(listPayments)==0) {
                 return true;
             }

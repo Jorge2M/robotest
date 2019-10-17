@@ -2,10 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.modales;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalCambioPais;
@@ -28,12 +28,12 @@ public class ModalCambioPaisStpV {
         expected="Se accede a la shop de " + tagNombrePais + " en " + tagLiteralIdioma)
     public static void cambioPais(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
-        StepTestMaker.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
-        StepTestMaker.replaceInExpected(tagNombrePais, dCtxSh.pais.getNombre_pais());
-        StepTestMaker.replaceInDescription(tagCodigoPais, dCtxSh.pais.getCodigo_pais());
-        StepTestMaker.replaceInDescription(tagLiteralIdioma, dCtxSh.idioma.getCodigo().getLiteral());
-        StepTestMaker.replaceInExpected(tagLiteralIdioma, dCtxSh.idioma.getCodigo().getLiteral());
+        StepTestMaker step = TestMaker.getCurrentStep();
+        step.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
+        step.replaceInExpected(tagNombrePais, dCtxSh.pais.getNombre_pais());
+        step.replaceInDescription(tagCodigoPais, dCtxSh.pais.getCodigo_pais());
+        step.replaceInDescription(tagLiteralIdioma, dCtxSh.idioma.getCodigo().getLiteral());
+        step.replaceInExpected(tagLiteralIdioma, dCtxSh.idioma.getCodigo().getLiteral());
         
         PagePrehome.selecPaisIdiomaYAccede(dCtxSh, driver);
 

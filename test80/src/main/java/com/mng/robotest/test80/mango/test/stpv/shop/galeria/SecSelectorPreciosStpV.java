@@ -2,11 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.galeria;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
@@ -43,8 +43,8 @@ public class SecSelectorPreciosStpV {
         dataFilter.minimoFinal = PageGaleriaDesktop.secSelectorPrecios.getImporteMinimo(driver);
         dataFilter.maximoFinal = PageGaleriaDesktop.secSelectorPrecios.getImporteMaximo(driver);
                 
-        TestCaseData.getDatosCurrentStep().replaceInDescription(tagMinimo, String.valueOf(dataFilter.minimoFinal));
-        TestCaseData.getDatosCurrentStep().replaceInDescription(tagMaximo, String.valueOf(dataFilter.maximoFinal));    
+        TestMaker.getCurrentStep().replaceInDescription(tagMinimo, String.valueOf(dataFilter.minimoFinal));
+        TestMaker.getCurrentStep().replaceInDescription(tagMaximo, String.valueOf(dataFilter.maximoFinal));    
         checkResultSelectFiltro(dataFilter, app, driver);
         
         StdValidationFlags flagsVal = StdValidationFlags.newOne();

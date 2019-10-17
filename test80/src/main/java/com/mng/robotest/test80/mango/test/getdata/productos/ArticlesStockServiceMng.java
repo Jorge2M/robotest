@@ -10,13 +10,13 @@ import org.apache.logging.log4j.Logger;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticlesStockFactory.SourceArticles;
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 
 public class ArticlesStockServiceMng implements ArticlesStockGetter {
-	static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
 	AppEcom app;
 	String urlTestAppMango;
@@ -63,8 +63,9 @@ public class ArticlesStockServiceMng implements ArticlesStockGetter {
     	ArrayList<LinkedHashMap<String,Object>> listStores = (ArrayList<LinkedHashMap<String,Object>>)dataJsonArticles.get("stock");
     	if (listStores!=null) {
 	    	for (LinkedHashMap<String,Object> store : listStores) {
-	    		for (TypeArticleStock typeArticle : TypeArticleStock.values())
+	    		for (TypeArticleStock typeArticle : TypeArticleStock.values()) {
 	    			listArticlesToReturn.addAll(getArticlesStockFromStore(store, countryId, typeArticle));
+	    		}
 	    	}
     	}
     	

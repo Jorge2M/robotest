@@ -6,10 +6,10 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
+import com.mng.testmaker.service.testreports.StorerErrorStep;
 import com.mng.testmaker.utils.NetTrafficMng;
 import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.conf.Log4jConfig;
-import com.mng.testmaker.utils.conf.StorerErrorStep;
 import com.mng.testmaker.utils.otras.WebDriverArqUtils;
 
 public class StoreStepEvidencies {

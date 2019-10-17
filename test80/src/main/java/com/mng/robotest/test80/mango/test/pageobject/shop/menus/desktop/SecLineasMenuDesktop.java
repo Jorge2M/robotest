@@ -9,7 +9,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
@@ -25,7 +25,7 @@ public class SecLineasMenuDesktop extends WebdrvWrapp {
 	private final AppEcom app;
 	private final WebDriver driver;
 	
-	static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
     static String TagIdLinea = "@LineaId";
     static String TagIdSublinea = "@SublineaId";

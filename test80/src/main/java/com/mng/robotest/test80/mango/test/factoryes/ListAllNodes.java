@@ -1,15 +1,15 @@
 package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
-import org.testng.ITestContext;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.domain.SuiteContextTestMaker;
 import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
-import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.TestNodos;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
@@ -20,10 +20,9 @@ public class ListAllNodes {
     @SuppressWarnings("unused")
     @Factory
     @Parameters({"url-status", "url-errorpage", "testLinksPie"})
-    public Object[] createInstances(String urlStatus, String urlErrorpage, String testLinksPie, ITestContext ctx) 
-    throws Exception {
+    public Object[] createInstances(String urlStatus, String urlErrorpage, String testLinksPie) throws Exception {
         ArrayList<TestNodos> listTests = new ArrayList<TestNodos>();
-    	InputParams inputData = (InputParams)SuiteContextTestMaker.getInputData(ctx);
+    	InputParamsTestMaker inputData = TestMaker.getInputParamsSuite();
         AppEcom appEcom = (AppEcom)inputData.getApp();
         try {
             int accesos = 0;
@@ -38,7 +37,7 @@ public class ListAllNodes {
             }
 
             LinkedHashMap<String, NodoStatus> mapNodosTotal = new LinkedHashMap<>();
-            this.addNodosToMap(mapNodosTotal, accesos, urlErrorpage, appEcom, ctx);
+            addNodosToMap(mapNodosTotal, accesos, urlErrorpage, appEcom);
 	        
             boolean testLinksPieFlag = false;
             if (testLinksPie.compareTo("true")==0) {
@@ -78,10 +77,11 @@ public class ListAllNodes {
      * Obtiene la lista de nodos (ip+cookies) iterando contra la página de errorPage.faces
      * @param iteraciones número de iteraciones en busca de nuevos nodos
      */
-    private void addNodosToMap (HashMap<String, NodoStatus> mapNodos, int iteraciones, String urlErrorpage, AppEcom appE, ITestContext context) 
+    private void addNodosToMap (HashMap<String, NodoStatus> mapNodos, int iteraciones, String urlErrorpage, AppEcom appE) 
     throws Exception { 
+    	TestRunTestMaker testRun = TestMaker.getTestRun();
     	WebDriver driver = 
-    		FactoryWebdriverMaker.make(WebDriverType.chrome, context)
+    		FactoryWebdriverMaker.make(WebDriverType.chrome, testRun)
     			.setChannel(Channel.desktop)
     			.build();    	
 	    

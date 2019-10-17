@@ -2,11 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -159,7 +159,7 @@ public class PageResultPagoStpV {
     public static void selectLinkPedidoAndValidatePedido(DataPedido dataPedido, WebDriver driver) 
     throws Exception {
         PageResultPagoStpV.selectMisPedidos(dataPedido, driver);
-        StepTestMaker StepTestMaker = TestCaseData.getDatosLastStep();
+        StepTestMaker StepTestMaker = TestMaker.getCurrentStep();
         if (StepTestMaker.getResultSteps()==State.Ok) {
             if (PageListPedidos.isPage(driver)) {
                 PageListPedidosStpV.selectPedido(dataPedido.getCodpedido(), driver);

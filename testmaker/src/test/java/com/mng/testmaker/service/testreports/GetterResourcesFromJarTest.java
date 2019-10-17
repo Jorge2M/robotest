@@ -1,4 +1,4 @@
-package com.mng.testmaker.listeners.utils;
+package com.mng.testmaker.service.testreports;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -10,8 +10,8 @@ import java.util.jar.JarEntry;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import com.mng.testmaker.listeners.utils.GetterResourcesFromJar;
-import com.mng.testmaker.listeners.utils.GetterResources.Directory;
+import com.mng.testmaker.service.testreports.GetterResourcesFromJar;
+import com.mng.testmaker.service.testreports.GetterResources.Directory;
 
 public class GetterResourcesFromJarTest {
 

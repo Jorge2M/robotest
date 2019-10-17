@@ -1,15 +1,14 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 
 import java.util.EnumSet;
-
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -277,7 +276,7 @@ public class SecMenuLateralMobilStpV {
         expected="El menú se ejecuta correctamente")
     public void stepClickMenu1rstLevel(Menu1rstLevel menu1rstLevel, Pais pais) throws Exception {
     	secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais);
-        TestCaseData.getDatosCurrentStep().replaceInDescription(tagTextMenu, menu1rstLevel.getNombre());
+        TestMaker.getCurrentStep().replaceInDescription(tagTextMenu, menu1rstLevel.getNombre());
         ModalCambioPais.closeModalIfVisible(driver);
         validaPaginaResultMenu2onLevel();
     }    

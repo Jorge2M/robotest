@@ -3,11 +3,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.*;
 import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -47,7 +47,7 @@ public class PageFichaArtStpV {
     public static SecFitFinderStpV secFitFinder;
     
     public PageFichaArtStpV(AppEcom appE, Channel channel) {
-        this.driver = TestCaseData.getdFTest().driver;
+        this.driver = TestMaker.getDriverTestCase();
         this.channel = channel;
         this.app = appE;
         this.pageFicha = PageFicha.newInstance(channel, appE, driver);
@@ -387,7 +387,7 @@ public class PageFichaArtStpV {
     	description="Seleccionar <b>" + tagNameLink + "</b>", 
         expected="Aparece un resultado de la búsqueda correcta")
     public void selectBuscarEnTiendaButton() throws Exception {
-    	TestCaseData.getDatosCurrentStep().replaceInDescription(tagNameLink, pageFicha.getNameLinkBuscarEnTienda());
+    	TestMaker.getCurrentStep().replaceInDescription(tagNameLink, pageFicha.getNameLinkBuscarEnTienda());
         pageFicha.selectBuscarEnTiendaLink();             
         ModalBuscadorTiendasStpV.validaBusquedaConResultados(driver);
     }

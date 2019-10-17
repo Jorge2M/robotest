@@ -19,8 +19,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.utils.DataFmwkTest;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -33,6 +31,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
@@ -71,7 +70,7 @@ public class UtilsMangoTest {
         // Seleccionamos el logo de MANGO
     	boolean existeLogo = SecCabecera.getNew(channel, app, driver).clickLogoMango();
         if (!existeLogo) {
-        	ITestContext ctx = TestCaseData.getdFTest().ctx;
+        	ITestContext ctx = TestMaker.getTestRun().getTestNgContext();
             String urlPaginaPostAcceso = (String)ctx.getAttribute(Constantes.attrUrlPagPostAcceso); 
             if (urlPaginaPostAcceso!=null) {
                 driver.get(urlPaginaPostAcceso);
@@ -291,8 +290,7 @@ public class UtilsMangoTest {
         boolean isEntornoPRO = false;
         List<String> URLsProShop   = Arrays.asList("shop.mango.com", "shoptest.pro.mango.com");
         List<String> URLsProOutlet = Arrays.asList("www.mangooutlet.com", "outlettest.pro.mango.com");
-        ITestContext ctx = TestCaseData.getdFTest().ctx;
-        String xmlURL = ((String)ctx.getAttribute("appPath"));
+        String xmlURL = TestMaker.getInputParamsSuite().getUrlBase();
         String browserURL = driver.getCurrentUrl();
         Iterator<String> itURLsPRO = null;
         if (app==AppEcom.outlet) {
@@ -311,9 +309,9 @@ public class UtilsMangoTest {
         return isEntornoPRO;
     }
     
-    public static boolean isEntornoCI(AppEcom app, DataFmwkTest dFTest) {
+    public static boolean isEntornoCI(AppEcom app) {
     	if (app==AppEcom.shop) { //De momento sólo tenemos CI para Shop
-    		String xmlURL = ((String)dFTest.ctx.getAttribute("appPath"));
+    		String xmlURL = TestMaker.getInputParamsSuite().getUrlBase();
     		if (xmlURL.contains("shop-ci.")) {
     			return true;
     		}

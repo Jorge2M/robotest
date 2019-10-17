@@ -1,16 +1,14 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.registro;
 
 import java.util.HashMap;
-
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.DataFmwkTest;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -78,7 +76,7 @@ public class PageRegistroSegundaStpV {
 	@Step (
 		description="@rewritable",
 		expected="Aparece la página de introducción de datos del niño o la de datos de la dirección (según se podían o no seleccionar niños)")
-    public static void setDataAndLineasRandom(String fechaNacimiento, boolean paisConNinos, int numNinos, Pais pais, HashMap<String,String> dataRegistroOK, DataFmwkTest dFTest) 
+    public static void setDataAndLineasRandom(String fechaNacimiento, boolean paisConNinos, int numNinos, Pais pais, HashMap<String,String> dataRegistroOK, WebDriver driver) 
     throws Exception {
         String tagListaRandom = "@lineasRandom";
         String stepDescription = 
@@ -92,30 +90,30 @@ public class PageRegistroSegundaStpV {
         }
         
         //Rewrite description step
-        StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
-        StepTestMaker.setDescripcion(stepDescription);
+        StepTestMaker step = TestMaker.getCurrentStep();
+        step.setDescripcion(stepDescription);
 
-        PageRegistroSegunda.setFechaNacimiento(dFTest.driver, fechaNacimiento);
-        String lineasDesmarcadas = PageRegistroSegunda.desmarcarLineasRandom(dFTest.driver, dataRegistroOK.get("lineascomaseparated"));
-        StepTestMaker.setDescripcion(StepTestMaker.getDescripcion().replace(tagListaRandom, lineasDesmarcadas));
+        PageRegistroSegunda.setFechaNacimiento(driver, fechaNacimiento);
+        String lineasDesmarcadas = PageRegistroSegunda.desmarcarLineasRandom(driver, dataRegistroOK.get("lineascomaseparated"));
+        step.setDescripcion(step.getDescripcion().replace(tagListaRandom, lineasDesmarcadas));
         dataRegistroOK.put("clicklineas", lineasDesmarcadas);
         if (paisConNinos) {
-            PageRegistroSegunda.setNumeroNinos(numNinos, dFTest.driver);
+            PageRegistroSegunda.setNumeroNinos(numNinos, driver);
         } else {
-            PageRegistroSegunda.clickButtonContinuar(dFTest.driver);
+            PageRegistroSegunda.clickButtonContinuar(driver);
         }                
 
         //Validaciones.
         if (paisConNinos) {
-            PageRegistroNinosStpV.validaIsPageWithNinos(numNinos, dFTest);
+            PageRegistroNinosStpV.validaIsPageWithNinos(numNinos, driver);
         } else {
-            PageRegistroDirecStpV.isPageFromPais(pais, dFTest);
+            PageRegistroDirecStpV.isPageFromPais(pais, driver);
         }
         
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
         flagsVal.validaSEO = true;
         flagsVal.validaJS = false;
         flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, dFTest.driver);
+        AllPagesStpV.validacionesEstandar(flagsVal, driver);
     }
 }

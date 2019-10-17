@@ -2,11 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageAccesoMisCompras.TypeBlock;
@@ -60,7 +60,7 @@ public class PageAccesoMisComprasStpV {
         expected="Aparece la página de detalle del pedido")
     public static void buscarPedidoForNoRegistrado(DataPedido dataPedido, WebDriver driver) throws Exception {
         String usuario = dataPedido.getEmailCheckout();
-        TestCaseData.getDatosCurrentStep().replaceInDescription(tagUsuario, usuario);
+        TestMaker.getCurrentStep().replaceInDescription(tagUsuario, usuario);
         
         PageAccesoMisCompras.inputUserAndNumPedidoBlockNo(usuario, dataPedido.getCodpedido(), driver); 
         PageAccesoMisCompras.clickBuscarPedidoBlockNo(driver); 

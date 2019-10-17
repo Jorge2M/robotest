@@ -2,13 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.yandex;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.step.StepAspect;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandexMoney;
 
 public class PageYandexMoneyStpV {
@@ -18,7 +16,7 @@ public class PageYandexMoneyStpV {
 		description="Accedemos a la URL de <b>YandexMoney</b>: " + tagUrlYandex, 
         expected="Aparece la página de YandexMoney")
     public static void accessInNewTab(String tabTitle, WebDriver driver) throws Exception {
-		TestCaseData.getDatosCurrentStep().replaceInDescription(tagUrlYandex, PageYandexMoney.urlAccess);
+		TestMaker.getCurrentStep().replaceInDescription(tagUrlYandex, PageYandexMoney.urlAccess);
         PageYandexMoney.goToPageInNewTab(tabTitle, driver);
         checkIsPage(driver);
     }

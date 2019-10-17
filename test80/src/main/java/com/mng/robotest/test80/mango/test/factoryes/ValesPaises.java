@@ -5,9 +5,9 @@ import java.util.*;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
-import com.mng.testmaker.domain.SuiteContextTestMaker;
+import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.PaisAplicaVale;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -26,9 +26,8 @@ public class ValesPaises {
     @Parameters({"countrys"})
     public Object[] createInstances(String countrys, ITestContext ctx) throws Exception {
     	List<Object> listTests = new ArrayList<>();
-    	InputParams inputData = (InputParams)SuiteContextTestMaker.getInputData(ctx);
+    	InputParamsTestMaker inputData = TestMaker.getInputParamsSuite();
     	VersionValesSuite version = VersionValesSuite.valueOf(inputData.getVersionSuite());
-    	
         Calendar currDtCal = Calendar.getInstance();
         for (Campanya campanya : Campanya.values()) {
         	if (!version.filtroCalendario() || 

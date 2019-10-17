@@ -19,8 +19,8 @@ public class Utils {
 	    TestCaseData.getAndStoreDataFmwk(WebDriverType, dCtxSh.urlAcceso, datosFactoria, dCtxSh.channel, storerDataError, context, method);
     }
     
-    public static void storeDataMantoForTestMaker(WebDriverType WebDriverType, String datosFactoria, DataMantoAccess dMantoAcc, 
-    											  ITestContext context, Method method) throws Exception {
+    public static void storeDataMantoForTestMaker(WebDriverType WebDriverType, String datosFactoria, DataMantoAccess dMantoAcc) 
+    throws Exception {
 	    StorerErrorDataStepValidation storerDataError = new StorerErrorDataStepValidationMango();
 	    TestCaseData.getAndStoreDataFmwk(WebDriverType, dMantoAcc.urlManto, datosFactoria, dMantoAcc.channel, storerDataError, context, method);
     }

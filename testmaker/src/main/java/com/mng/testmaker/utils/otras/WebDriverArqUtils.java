@@ -10,6 +10,7 @@ import org.testng.*;
 
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.utils.controlTest.StoreStepEvidencies;
 
@@ -142,10 +143,11 @@ public class WebDriverArqUtils {
      * Detecta el caso en que no se había superado el máximo de errores en todos los errores detectados -> No mostraremos warning
      * Nota: No funciona con GeckoDriver porque no están implementados los servicios al no formar parte del protocolo W3C https://github.com/w3c/webdriver/issues/406
      */
-    public static ResultadoErrores getLogErrors(Level levelFrom, WebDriver webdriver, int maxErrors, ITestContext context) 
+    public static ResultadoErrores getLogErrors(Level levelFrom, WebDriver webdriver, int maxErrors) 
     throws Exception {
         ResultadoErrores resultado = new ResultadoErrores();
         resultado.setResultado(ResultadoErrores.Resultado.OK);
+        ITestContext ctx = TestMaker.getTestRun().getTestNgContext();
         ArrayList<String> listaLogError = new ArrayList<>();
         List<Boolean> supMaximosList = new ArrayList<>();
         try {
@@ -162,8 +164,8 @@ public class WebDriverArqUtils {
                         listaLogError.add("<br>" + descError);
             
                         int numErrors = 0;
-                        if (context.getAttribute(descError) != null) {
-                            numErrors = ((Integer)context.getAttribute(descError)).intValue();
+                        if (ctx.getAttribute(descError) != null) {
+                            numErrors = ((Integer)ctx.getAttribute(descError)).intValue();
                         }
             
                         // Comprobamos si ya se había superado el máximo de errores
@@ -173,7 +175,7 @@ public class WebDriverArqUtils {
                         }
             
                         numErrors += 1;
-                        context.setAttribute(descError, Integer.valueOf(numErrors));
+                        ctx.setAttribute(descError, Integer.valueOf(numErrors));
                         j += 1;
                     }
                 }

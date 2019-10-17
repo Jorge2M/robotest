@@ -2,11 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 
 import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld.TypePanel;
@@ -36,9 +36,9 @@ public class SecProductDescrOldStpV {
     public static void selectPanel(TypePanel typePanel, WebDriver driver) throws Exception {
         TypeStatePanel statePanelIni = SecProductDescrOld.getStatePanel(typePanel, driver);
         TypeStatePanel stateExpectedAfterClick = SecProductDescrOld.getStatePanelAfterClick(statePanelIni);
-        StepTestMaker StepTestMaker = TestCaseData.getDatosCurrentStep();
-        StepTestMaker.replaceInDescription(tagInitStatePanel, statePanelIni.toString());
-        StepTestMaker.replaceInExpected(tagFinalStateExpected, stateExpectedAfterClick.toString());
+        StepTestMaker step = TestMaker.getCurrentStep();
+        step.replaceInDescription(tagInitStatePanel, statePanelIni.toString());
+        step.replaceInExpected(tagFinalStateExpected, stateExpectedAfterClick.toString());
         
         SecProductDescrOld.clickPanel(typePanel, driver);
         int maxSecondsWait = 1;
