@@ -6,14 +6,11 @@ import java.util.*;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.DataFmwkTest;
-import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.mango.*;
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.NodoStatus;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
@@ -35,12 +32,14 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusDesktopStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 
-public class TestNodos extends GestorWebDriver {
-    Pais españa = null;
-    IdiomaPais castellano = null;
-    String baseUrl;
-    boolean acceptNextAlert = true;
-    StringBuffer verificationErrors = new StringBuffer();
+public class TestNodos {
+	
+	private InputParams inputParamsSuite = null;
+    
+    private final static Integer codEspanya = Integer.valueOf(1);
+    private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
+    private final static Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
+    private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
 	  
     private String index_fact;
     
@@ -51,7 +50,6 @@ public class TestNodos extends GestorWebDriver {
     public String urlStatus;
     public String urlErrorpage;
     public boolean testLinksPie;
-    private DataCtxShop dCtxSh;
     
     /**
      * @param listaNodos lista de todos los nodos que está previsto testear
@@ -74,54 +72,44 @@ public class TestNodos extends GestorWebDriver {
 	  
     @BeforeMethod(groups={"Canal:desktop_App:all"})
     public void login(ITestContext context, Method method) throws Exception {
-        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
-        dCtxSh = new DataCtxShop();
-        dCtxSh.setChannel(inputData.getChannel());
-        dCtxSh.setAppEcom(this.nodo.getAppEcom());
-        dCtxSh.urlAcceso = inputData.getUrlBase();
-
-        if (this.españa==null) {
-            Integer codEspanya = Integer.valueOf(1);
-            List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
-            this.españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
-            this.castellano = this.españa.getListIdiomas().get(0);
-        }
-        
-        dCtxSh.pais = this.españa;
-        dCtxSh.idioma = this.castellano;
-        
-        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), index_fact, dCtxSh, context, method);
+    	if (inputParamsSuite==null) {
+    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
+    	}
     }
-	
-    @SuppressWarnings("unused")
-    @AfterMethod (groups={"Canal:desktop_App:all"}, alwaysRun = true)
-    public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = TestCaseData.getWebDriver();
-        super.quitWebDriver(driver, context);
-    }	
-	
+    
+    private DataCtxShop getCtxShForTest() throws Exception {
+        DataCtxShop dCtxSh = new DataCtxShop();
+        dCtxSh.setChannel(inputParamsSuite.getChannel());
+        dCtxSh.setAppEcom(this.nodo.getAppEcom());
+        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+        dCtxSh.pais = españa;
+        dCtxSh.idioma = castellano;
+        return dCtxSh;
+    }
+
     @Test (
     	groups={"Canal:desktop_App:all"},
     	description="Verificar funcionamiento general en un nodo. Validar status, acceso, click banner, navegación por las líneas...")
     public void NOD001_TestNodo() throws Throwable {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
-        AppEcom appE = this.nodo.getAppEcom();
-        AccesoStpV.testNodoState(this.nodo, dFTest.driver);
+    	DataCtxShop dCtxSh = getCtxShForTest();
+    	WebDriver driver = TestMaker.getDriverTestCase();
+    	TestMaker.getTestCase().setRefineDataName(index_fact);
+        AppEcom appE = nodo.getAppEcom();
+        AccesoStpV.testNodoState(nodo, driver);
         if (this.nodo.getStatusJSON().isStatusOk()) {
-            NodoStatus nodoAnt = this.findNodoForCompareStatus(this.listaNodos, this.nodo);
+            NodoStatus nodoAnt = findNodoForCompareStatus(listaNodos, nodo);
             if (nodoAnt!=null) {
                 AccesoStpV.validaCompareStatusNodos(this.nodo, nodoAnt);
             }
            
-            PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, true/*execValidacs*/, dFTest.driver);
-            SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
+            PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, true, driver);
+            SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
             if (appE==AppEcom.shop) {
             	secMenusStpV.seleccionLinea(LineaType.nuevo, null, dCtxSh);
-                PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, dCtxSh.appE, dFTest.driver);
+                PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, dCtxSh.appE, driver);
                 NombreYRefList listArticlesNuevoAct = pageGaleria.getListaNombreYRefArticulos();
                 this.nodo.setArticlesNuevo(listArticlesNuevoAct);
-                PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+                PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
                 if (nodoAnt!=null && nodoAnt.getArticlesNuevo()!=null) {
                     pageGaleriaStpV.validaNombresYRefEnOrden(nodoAnt, this.nodo);
                 }
@@ -129,11 +117,11 @@ public class TestNodos extends GestorWebDriver {
                 pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
             }
 			
-            SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, dFTest.driver);
+            SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
             secMenusDesktopStpV.seleccionLinea(LineaType.she);
             secMenusDesktopStpV.countSaveMenusEntorno(LineaType.she, null, nodo.getIp(), autAddr);
             int maxBannersToLoad = 1;
-            SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, dFTest.driver);
+            SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToLoad, driver);
             secBannersStpV.testPageBanners(dCtxSh, 1);
             if (appE==AppEcom.outlet) {
                 Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));

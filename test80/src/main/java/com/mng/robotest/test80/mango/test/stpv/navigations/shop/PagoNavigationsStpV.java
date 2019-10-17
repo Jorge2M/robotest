@@ -55,12 +55,16 @@ import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 public class PagoNavigationsStpV {
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
+    public static void testFromLoginToExecPaymetIfNeeded(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) 
+    throws Exception {
+        testFromLoginToExecPaymetIfNeeded(null, dCtxSh, dCtxPago, driver);
+    }
+    
     /**
      * Implementa el caso de prueba completo hasta la validación de un vale (válido o inválido)
      */
-    public static void testFromLoginToExecPaymetIfNeeded(List<Pais> paisesDestino, DataCtxShop dCtxSh, DataCtxPago dCtxPago) 
+    public static void testFromLoginToExecPaymetIfNeeded(List<Pais> paisesDestino, DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) 
     throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
     	accessShopAndLoginOrLogoff(dCtxSh, driver);
         if (dCtxSh.userRegistered) {
             SecBolsaStpV.clear(dCtxSh, driver);

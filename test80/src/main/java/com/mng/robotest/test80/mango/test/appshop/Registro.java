@@ -1,6 +1,5 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,21 +7,15 @@ import java.util.List;
 
 import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestContext;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.InputParams;
-import com.mng.testmaker.domain.SuiteContextTestMaker;
-import com.mng.testmaker.utils.DataFmwkTest;
-import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.mango.GestorWebDriver;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.otras.TypeAccessFmwk;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.DataMango;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
@@ -48,19 +41,18 @@ import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroNinosSt
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroSegundaStpV;
 import com.mng.robotest.test80.mango.test.suites.RegistrosSuite.VersionRegistroSuite;
 
-public class Registro extends GestorWebDriver {
-    Pais españa = null;
-    IdiomaPais castellano = null;
-    String baseUrl;
-    boolean acceptNextAlert = true;
-    StringBuffer verificationErrors = new StringBuffer();
-    boolean loyaltyTest = false;
+public class Registro {
     
+    private final static Integer codEspanya = Integer.valueOf(1);
+    private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
+    private final static Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
+    private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+    
+	private InputParams inputParamsSuite = null;
     private String index_fact = "";
     public int prioridad;
-    Pais paisFactory = null;
-    IdiomaPais idiomaFactory = null;
-    private DataCtxShop dCtxSh;
+    private Pais paisFactory = null;
+    private IdiomaPais idiomaFactory = null;
     
     //Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
     public Registro() {}
@@ -73,61 +65,50 @@ public class Registro extends GestorWebDriver {
         this.prioridad = prioridad;
     }
 
-    
     @BeforeMethod(groups={"Registro", "Canal:all_App:all", "SupportsFactoryCountrys"})
-    public void login(ITestContext context, Method method) throws Exception {
-        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
-        dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
-        dCtxSh.setChannel(inputData.getChannel());
-        dCtxSh.urlAcceso = inputData.getUrlBase();
+    public void login() throws Exception {
+    	if (inputParamsSuite==null) {
+    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
+    	}
+    }
+    
+    private DataCtxShop getCtxShForTest() throws Exception {
+        DataCtxShop dCtxSh = new DataCtxShop();
+        dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+        dCtxSh.setChannel(inputParamsSuite.getChannel());
+        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 
         //Si el acceso es normal (no es desde una @Factory) utilizaremos el España/Castellano
         if (this.paisFactory==null) {
-            if (this.españa==null) {
-                Integer codEspanya = Integer.valueOf(1);
-                List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
-                this.españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
-                this.castellano = this.españa.getListIdiomas().get(0);
-            }
-            
-            dCtxSh.pais = this.españa;
-            dCtxSh.idioma = this.castellano;
+            dCtxSh.pais = españa;
+            dCtxSh.idioma = castellano;
         } else {
-            dCtxSh.pais = this.paisFactory;
-            dCtxSh.idioma = this.idiomaFactory;
-        }        
-        
-        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), index_fact, dCtxSh, context, method);
+            dCtxSh.pais = paisFactory;
+            dCtxSh.idioma = idiomaFactory;
+        }
+        return dCtxSh;
     }
-
-    @SuppressWarnings("unused")
-    @AfterMethod (groups={"Registro", "Canal:all_App:all", "SupportsFactoryCountrys"}, alwaysRun = true)
-    public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = TestCaseData.getWebDriver();
-        super.quitWebDriver(driver, context);
-    }       
 
     @SuppressWarnings("static-access")
     @Test (
         groups={"Registro", "Canal:desktop_App:all"},
         description="Registro con errores en la introducción de los datos")
     public void REG001_RegistroNOK() throws Exception {
-   
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
+    	DataCtxShop dCtxSh = getCtxShForTest();
+    	WebDriver driver = TestMaker.getDriverTestCase();
+    	TestMaker.getTestCase().setRefineDataName(index_fact);
         dCtxSh.userRegistered = false;
         if (dCtxSh.appE==AppEcom.votf) {
             return;
         }
             
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
-        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
         userMenusStpV.selectRegistrate(dCtxSh);
         
         //Step. Click inicial a Registrate (sin haber introducido ningún dato) -> Aparecerán los correspondientes mensajes de error
         HashMap<String,String> dataRegister = new HashMap<>();        
-        PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(dFTest.driver);
+        PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
         pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false, dCtxSh.appE, dataRegister);
                     
         //Step. Introducir datos incorrectos y validar mensajes de error
@@ -159,60 +140,60 @@ public class Registro extends GestorWebDriver {
         groups={"Registro", "Canal:all_App:shop,outlet", "SupportsFactoryCountrys"}, alwaysRun=true, 
         description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
     public void REG002_RegistroOK_publi() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-    	InputParams inputData = (InputParams)SuiteContextTestMaker.getInputData(dFTest.ctx);
-        if (inputData.getTypeAccess()==TypeAccessFmwk.Bat) {
+    	DataCtxShop dCtxSh = getCtxShForTest();
+    	WebDriver driver = TestMaker.getDriverTestCase();
+    	TestMaker.getTestCase().setRefineDataName(index_fact);
+        if (inputParamsSuite.getTypeAccess()==TypeAccessFmwk.Bat) {
             return;
         }
         
         boolean clickPubli = true;
     	VersionRegistroSuite version = VersionRegistroSuite.V3;
     	if (isAccesFromFactory()) {
-    		version = VersionRegistroSuite.valueOf(inputData.getVersionSuite());
+    		version = VersionRegistroSuite.valueOf(inputParamsSuite.getVersionSuite());
     	}
     	
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
         dCtxSh.userRegistered = false;
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
         if (!dCtxSh.userRegistered) {
-        	ModalSuscripcionStpV.validaRGPDModal(dCtxSh, dFTest.driver);
+        	ModalSuscripcionStpV.validaRGPDModal(dCtxSh, driver);
         }
         
-        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
         userMenusStpV.selectRegistrate(dCtxSh);
         if(version.register()) {
 	        String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
-	        PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(dFTest.driver);
+	        PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
 	        HashMap<String,String> dataRegistro = 
 	        	pageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dCtxSh.channel);
 	        pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false/*usrExists*/, dCtxSh.appE, dataRegistro);
 	        boolean paisConNinos = dCtxSh.pais.getShoponline().stateLinea(LineaType.nina, dCtxSh.appE)==ThreeState.TRUE;
-	        PageRegistroSegundaStpV.setDataAndLineasRandom("23/4/1974", paisConNinos, 2/*numNinos*/, dCtxSh.pais, dataRegistro, dFTest);
+	        PageRegistroSegundaStpV.setDataAndLineasRandom("23/4/1974", paisConNinos, 2, dCtxSh.pais, dataRegistro, driver);
 	        if (paisConNinos) {
 	            ListDataNinos listaNinos = new ListDataNinos();
 	            listaNinos.add(new DataNino(sexoType.nina, "Martina Muñoz Rancaño", "11/10/2010"));
 	            listaNinos.add(new DataNino(sexoType.nina, "Irene Muñoz Rancaño", "29/8/2016"));
-	            PageRegistroNinosStpV.sendNinoDataAndContinue(listaNinos, dCtxSh.pais, dFTest);
+	            PageRegistroNinosStpV.sendNinoDataAndContinue(listaNinos, dCtxSh.pais, driver);
 	        }
 	            
-	        PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dCtxSh.channel, dFTest);
-	        PageRegistroDirecStpV.clickFinalizarButton(dFTest);
-	        PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, dFTest);
+	        PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dCtxSh.channel, driver);
+	        PageRegistroDirecStpV.clickFinalizarButton(driver);
+	        PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, driver);
 
-            SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+            SecCabeceraStpV secCabeceraStpV = SecCabeceraStpV.getNew(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);
             secCabeceraStpV.selecLogo();
 
-	        SecFooterStpV.validaRGPDFooter(version.register(), dCtxSh, dFTest.driver);
+	        SecFooterStpV.validaRGPDFooter(version.register(), dCtxSh, driver);
 	        if (version.loginAfterRegister()) {
 	            String emailUsr = dataRegistro.get("cfEmail");
 	            String password = dataRegistro.get("cfPass");
 	            userMenusStpV.logoffLogin(emailUsr, password);
-	            PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+	            PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
 	            pageMiCuentaStpV.goToMisDatosAndValidateData(dataRegistro, dCtxSh.pais.getCodigo_pais());
 	            pageMiCuentaStpV.goToSuscripcionesAndValidateData(dataRegistro);        
 	        }
         } else {
-        	SecFooterStpV.validaRGPDFooter(version.register(), dCtxSh, dFTest.driver);
+        	SecFooterStpV.validaRGPDFooter(version.register(), dCtxSh, driver);
         }
     }
     
@@ -221,27 +202,27 @@ public class Registro extends GestorWebDriver {
         groups={"Registro", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
         description="Alta/Registro de un usuario (sin seleccionar el link de publicidad)")
     public void REG003_RegistroOK_NoPubli() throws Exception {
-    	boolean clickPubli = false;
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
+    	WebDriver driver = TestMaker.getDriverTestCase();
+    	TestMaker.getTestCase().setRefineDataName(index_fact);
+    	DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userRegistered = false;
+    	boolean clickPubli = false;
             
-        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(dFTest.ctx);
-        if (inputData.getTypeAccess()==TypeAccessFmwk.Bat) {
+        if (inputParamsSuite.getTypeAccess()==TypeAccessFmwk.Bat) {
             return; 
         }
         
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, dFTest.driver);
-        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
         userMenusStpV.selectRegistrate(dCtxSh);
         String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
-        PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(dFTest.driver);
+        PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
         HashMap<String,String> dataRegistro = 
         	pageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dCtxSh.channel);
         pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false, dCtxSh.appE, dataRegistro);
-        PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dCtxSh.channel, dFTest);
-        PageRegistroDirecStpV.clickFinalizarButton(dFTest);
-        PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, dFTest);
+        PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dCtxSh.channel, driver);
+        PageRegistroDirecStpV.clickFinalizarButton(driver);
+        PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, driver);
         userMenusStpV.checkVisibilityLinkMangoLikesYou();
     }    
     

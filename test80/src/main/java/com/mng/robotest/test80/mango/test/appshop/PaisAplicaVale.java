@@ -1,17 +1,11 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import org.testng.ITestContext;
-import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.DataFmwkTest;
-import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.mango.*;
 import com.mng.robotest.test80.InputParams;
-import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -21,18 +15,15 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigatio
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.suites.PagosPaisesSuite.VersionPagosSuite;
 import com.mng.robotest.test80.mango.test.suites.ValesPaisesSuite.VersionValesSuite;
+import com.mng.testmaker.service.TestMaker;
 
-public class PaisAplicaVale extends GestorWebDriver {
+public class PaisAplicaVale {
 
-    String baseUrl;
-    boolean acceptNextAlert = true;
-    StringBuffer verificationErrors = new StringBuffer();
-	
+	private InputParams inputParamsSuite = null; 
     private String index_fact;
     public int prioridad;
     private FlagsTestCkout fTCkoutIni;
-    String masProductos = "";
-    DataCtxShop dCtxSh;
+    private DataCtxShop dCtxSh;
     
     public PaisAplicaVale(VersionPagosSuite version, DataCtxShop dCtxSh, int prioridad) {
     	this.prioridad = prioridad;
@@ -59,24 +50,19 @@ public class PaisAplicaVale extends GestorWebDriver {
     }
 	  
     @BeforeMethod (groups={"shop-movil-web", "Canal:all_App:all"})
-    public void login(ITestContext context, Method method) throws Exception {
-        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
-    	this.dCtxSh.urlAcceso = inputData.getUrlBase();
-    	Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), this.index_fact, this.dCtxSh, context, method);    
+    public void login() throws Exception {
+    	if (inputParamsSuite==null) {
+    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
+    	}
+    	this.dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
     }
-	
-    @SuppressWarnings("unused")
-    @AfterMethod (groups={"shop-movil-web", "Canal:all_App:all"}, alwaysRun = true)
-    public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = TestCaseData.getWebDriver();
-        super.quitWebDriver(driver, context);
-    }	
 	
     @Test (
     	groups={"Pagos", "shop-movil-web", "Canal:all_App:all"}, alwaysRun=true, 
     	description="Compra usuario no registrado")
     public void CHK001_Compra() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
+    	WebDriver driver = TestMaker.getDriverTestCase();
+    	TestMaker.getTestCase().setRefineDataName(index_fact);
         dCtxSh.userRegistered = false;
         DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);
         FlagsTestCkout fTCkout = (FlagsTestCkout)fTCkoutIni.clone();
@@ -84,13 +70,13 @@ public class PaisAplicaVale extends GestorWebDriver {
         fTCkout.trjGuardada = false;
         dCtxPago.setFTCkout(fTCkout);
 
-        PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(this.dCtxSh, dCtxPago, dFTest);
+        PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(this.dCtxSh, dCtxPago, driver);
         if (fTCkout.validaPedidosEnManto) {
         	List<CheckPedido> listChecks = Arrays.asList(
         		CheckPedido.consultarBolsa, 
         		CheckPedido.consultarPedido);
             DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
-            PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, dFTest);
+            PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
         }
     }
 }

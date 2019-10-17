@@ -1,66 +1,53 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import java.lang.reflect.Method;
 import java.net.URI;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestContext;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.mng.testmaker.utils.DataFmwkTest;
-import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.mango.GestorWebDriver;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.stpv.otras.BrowserStpV;
+import com.mng.testmaker.service.TestMaker;
 
 
-public class SEO extends GestorWebDriver {
+public class SEO {
 
-    boolean isMobile;
-    boolean isOutlet;
-    private DataCtxShop dCtxSh;
+	private InputParams inputParamsSuite = null;
 
-    public SEO() {
-    }
+    public SEO() {}
 
     @BeforeMethod(groups = { "Otras", "Canal:all_App:all" })
-    public void login(ITestContext context, Method method) throws Exception {
-        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
-        dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
-        dCtxSh.setChannel(inputData.getChannel());
-        dCtxSh.urlAcceso = inputData.getUrlBase();
-
-        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), "", dCtxSh, context, method);
+    public void login() throws Exception {
+    	if (inputParamsSuite==null) {
+    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
+    	}
     }
-
-    @SuppressWarnings("unused")
-    @AfterMethod(groups = { "Otras", "Canal:all_App:all" }, alwaysRun = true)
-    public void logout(final ITestContext context, final Method method) throws Exception {
-        WebDriver driver = TestCaseData.getWebDriver();
-        super.quitWebDriver(driver, context);
+    
+    private DataCtxShop getCtxShForTest() throws Exception {
+        DataCtxShop dCtxSh = new DataCtxShop();
+        dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+        dCtxSh.setChannel(inputParamsSuite.getChannel());
+        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+        return dCtxSh;
     }
 
     @Test(
         groups = { "Otras", "Canal:desktop_App:shop,outlet"}, 
         description="Comprobar existencia y contenido del fichero robots.txt")
     public void SEO001_check_RobotsSitemap() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
-        if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest.driver)) {
+    	DataCtxShop dCtxSh = getCtxShForTest();
+    	WebDriver driver = TestMaker.getDriverTestCase();
+        if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
             return;
         }
-        String urlBaseTest = (String)dFTest.ctx.getAttribute("appPath");
-        BrowserStpV.inputRobotsURLandValidate(urlBaseTest, dCtxSh.appE, dFTest.driver);
+        String urlBaseTest = inputParamsSuite.getUrlBase();
+        BrowserStpV.inputRobotsURLandValidate(urlBaseTest, dCtxSh.appE, driver);
         
         URI uriBase = new URI(urlBaseTest);
         String urlSitemap = urlBaseTest.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
-        BrowserStpV.inputSitemapURLandValidate(urlSitemap, dFTest.driver);
+        BrowserStpV.inputSitemapURLandValidate(urlSitemap, driver);
     }
 }

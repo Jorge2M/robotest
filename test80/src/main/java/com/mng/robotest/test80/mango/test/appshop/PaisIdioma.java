@@ -1,18 +1,12 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import org.testng.ITestContext;
-import java.lang.reflect.Method;
 import org.testng.annotations.*;
 
-import com.mng.testmaker.utils.DataFmwkTest;
-import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.*;
-import com.mng.testmaker.utils.controlTest.mango.*;
+import com.mng.testmaker.service.TestMaker;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.conftestmaker.Utils;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
@@ -44,18 +38,19 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 
-public class PaisIdioma extends GestorWebDriver {
-    static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
-
-    String baseUrl;
-    boolean acceptNextAlert = true;
-    StringBuffer verificationErrors = new StringBuffer();
+public class PaisIdioma {
+    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
+	private InputParams inputParamsSuite = null; 
     private String index_fact = "";
-    private List<Linea> linesToTest;
+    private List<Linea> linesToTest = null;
     public int prioridad;
-    FlagsNaviationLineas flagsNavigation;
-    DataCtxShop dCtxSh;
+    private FlagsNaviationLineas flagsNavigation;
+    private DataCtxShop dCtxSh;
+    private final static Integer codEspanya = Integer.valueOf(1);
+    private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
+    private final static Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
+    private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
     
     //Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
     public PaisIdioma() {}
@@ -76,36 +71,22 @@ public class PaisIdioma extends GestorWebDriver {
     }
 	  
     @BeforeMethod(groups={"Lineas", "Canal:all_App:all"}, alwaysRun = true)
-    public void login(ITestContext context, Method method) throws Exception {
-        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
-        if (this.dCtxSh==null) {
-            //Si el acceso es normal (no es desde una @Factory) definiremos los siguientes datos específicos
-        	this.flagsNavigation = VersionPaisSuite.V1;
-            this.dCtxSh = new DataCtxShop();
-            Integer codEspanya = Integer.valueOf(1);
-            List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
-            Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
-            IdiomaPais castellano = españa.getListIdiomas().get(0);
-            this.dCtxSh.pais = españa;
-            this.dCtxSh.idioma = castellano;
-            this.dCtxSh.setAppEcom((AppEcom)inputData.getApp());
-            this.dCtxSh.setChannel(inputData.getChannel());
-            this.dCtxSh.urlAcceso = inputData.getUrlBase();
+    public void login() throws Exception {
+    	if (inputParamsSuite==null) {
+    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
+    	}
+        if (this.linesToTest==null) {
             this.linesToTest = this.dCtxSh.pais.getShoponline().getLineasToTest(this.dCtxSh.appE);
         }
-
-        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), index_fact, dCtxSh, context, method);
-    }
-	
-    @SuppressWarnings("unused")
-    @AfterMethod (groups={"Lineas", "Canal:all_App:all"}, alwaysRun = true)
-    public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = TestCaseData.getWebDriver();
-        try {
-            super.quitWebDriver(driver, context);
+        if (this.flagsNavigation==null) {
+        	this.flagsNavigation = VersionPaisSuite.V1;
         }
-        catch (Exception e) {
-            pLogger.warn("Problem closing WebDriver", e);
+        if (dCtxSh==null) {
+            this.dCtxSh.pais = españa;
+            this.dCtxSh.idioma = castellano;
+            this.dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+            this.dCtxSh.setChannel(inputParamsSuite.getChannel());
+            this.dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
         }
     }	
 	
@@ -113,34 +94,33 @@ public class PaisIdioma extends GestorWebDriver {
         groups={"Lineas", "Canal:all_App:shop,outlet"}, 
         description="Acceso desde prehome y navegación por todas las líneas/sublíneas/carrusels del país + selección menú/s")
     public void PAR001_Lineas() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxShI = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
-            
-        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxShI, dFTest.driver);
-        PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxShI.pais, dCtxShI.channel, dCtxShI.appE, dFTest.driver);
+    	WebDriver driver = TestMaker.getDriverTestCase();
+    	TestMaker.getTestCase().setRefineDataName(index_fact);
+    	
+        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
+        PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);
         for (Linea linea : linesToTest) {
-            if (UtilsMangoTest.validarLinea(dCtxShI.pais, linea, dCtxShI.appE)) {
-                validaLinea(linea, null/*sublinea*/, dCtxShI, dFTest);
+            if (UtilsMangoTest.validarLinea(dCtxSh.pais, linea, dCtxSh.appE)) {
+                validaLinea(linea, null, driver);
                 for (Sublinea sublinea : linea.getListSublineas()) {
-                    validaLinea(linea, sublinea, dCtxShI, dFTest);
+                    validaLinea(linea, sublinea, driver);
                 }
             }
         }
     }
     
 	@SuppressWarnings("static-access")
-	private void validaLinea(Linea linea, Sublinea sublinea, DataCtxShop dCtxShI, DataFmwkTest dFTest) throws Exception {
-        //Obtenemos el tipo de línea/sublínea
+	private void validaLinea(Linea linea, Sublinea sublinea, WebDriver driver) throws Exception {
         LineaType lineaType = linea.getType();
         SublineaNinosType sublineaType = null;
         if (sublinea!=null) {
             sublineaType = sublinea.getTypeSublinea();
         }
         
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
-        secMenusStpV.seleccionLinea(lineaType, sublineaType, dCtxShI);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+        secMenusStpV.seleccionLinea(lineaType, sublineaType, dCtxSh);
         if (sublinea==null) {
-            testSpecificFeaturesForLinea(linea, dCtxShI, dFTest);
+            testSpecificFeaturesForLinea(linea, driver);
         }
             
         if (flagsNavigation.testOrderAndTranslationMenus()) {
@@ -150,18 +130,18 @@ public class PaisIdioma extends GestorWebDriver {
         //Validamos si hemos de ejecutar los pasos correspondientes al recorrido de los menús
         if (testMenus(linea, sublinea)) {
         	secMenusStpV.stepsMenusLinea(lineaType, sublineaType);
-        	if (existsRightBannerMenu(linea, sublinea, dCtxShI.channel)) {
-        		SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxShI.pais, dCtxShI.appE, dFTest.driver);
+        	if (existsRightBannerMenu(linea, sublinea, dCtxSh.channel)) {
+        		SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
         		secMenusDesktopStpV.clickRightBanner(lineaType, sublineaType);
         	}
         } else {
-        	SecMenusWrap secMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-            if (secMenus.canClickMenuArticles(dCtxShI.pais, linea, sublinea)) {
+        	SecMenusWrap secMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+            if (secMenus.canClickMenuArticles(dCtxSh.pais, linea, sublinea)) {
             	Menu1rstLevel menuPantalones = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(lineaType, sublineaType, "pantalones"));
-            	secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxShI);
+            	secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPantalones, dCtxSh);
                 if (flagsNavigation.testMenus()) {
-                    PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
-					boolean bannerIsLincable = PageGaleriaDesktop.secBannerHead.isLinkable(dFTest.driver);
+                    PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+					boolean bannerIsLincable = PageGaleriaDesktop.secBannerHead.isLinkable(driver);
                     if (bannerIsLincable) {
                     	pageGaleriaStpV.bannerHead.clickBannerSuperiorIfLinkableDesktop();
                     }
@@ -175,17 +155,17 @@ public class PaisIdioma extends GestorWebDriver {
      *  Testea todos los banners de la página resultante si los hubiera
      *  Testea todos los carrusels asociados si los hubiera
      */
-    public void testSpecificFeaturesForLinea(Linea linea, DataCtxShop dCtxShI, DataFmwkTest dFTest) throws Exception {
+    public void testSpecificFeaturesForLinea(Linea linea, WebDriver driver) throws Exception {
         LineaType lineaType = linea.getType();
         if (testBanners(linea)) {
-        	int maxBannersToTest = getMaxBannersToTest(dCtxShI.pais, dCtxShI.appE);
-        	SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToTest, dFTest.driver);
-        	secBannersStpV.testPageBanners(dCtxShI, maxBannersToTest);
+        	int maxBannersToTest = getMaxBannersToTest(dCtxSh.pais, dCtxSh.appE);
+        	SecBannersStpV secBannersStpV = new SecBannersStpV(maxBannersToTest, driver);
+        	secBannersStpV.testPageBanners(dCtxSh, maxBannersToTest);
         }
         
         if (linea.getCarrusels()!=null) {
-        	SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
-        	secMenusStpV.navSeleccionaCarruselsLinea(dCtxShI.pais, lineaType);
+        	SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+        	secMenusStpV.navSeleccionaCarruselsLinea(dCtxSh.pais, lineaType);
         }
     }
     

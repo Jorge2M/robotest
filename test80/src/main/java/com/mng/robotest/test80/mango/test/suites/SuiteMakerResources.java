@@ -81,18 +81,18 @@ public class SuiteMakerResources {
     	List<TestRunMaker> listTestsRun = new ArrayList<>();
     	switch (channel) {
     	case desktop:
-			TestRunMaker testRunOSX = TestRunMaker.ofClasses(suiteName + "_" + macOSMojave_Safari, listClasses);
+			TestRunMaker testRunOSX = TestRunMaker.from(suiteName + "_" + macOSMojave_Safari, listClasses);
 			testRunOSX.setBrowserStackDesktop(macOSMojave_Safari);
 			listTestsRun.add(testRunOSX);
-			TestRunMaker testRunWin8 = TestRunMaker.ofClasses(suiteName + Win8_Firefox68, listClasses);
+			TestRunMaker testRunWin8 = TestRunMaker.from(suiteName + Win8_Firefox68, listClasses);
 			testRunWin8.setBrowserStackDesktop(Win8_Firefox68);
 			listTestsRun.add(testRunWin8);
 			break;
 	    case movil_web:
-			TestRunMaker testRunAndroid = TestRunMaker.ofClasses(suiteName + SamsungGalaxyS9plus_Android9, listClasses);
+			TestRunMaker testRunAndroid = TestRunMaker.from(suiteName + SamsungGalaxyS9plus_Android9, listClasses);
 			testRunAndroid.setBrowserStackMobil(SamsungGalaxyS9plus_Android9);
 			listTestsRun.add(testRunAndroid);
-			TestRunMaker testRuniOS = TestRunMaker.ofClasses(suiteName + IPhoneXS_iOS12, listClasses);
+			TestRunMaker testRuniOS = TestRunMaker.from(suiteName + IPhoneXS_iOS12, listClasses);
 			testRuniOS.setBrowserStackMobil(IPhoneXS_iOS12);
 			listTestsRun.add(testRuniOS);
     	}

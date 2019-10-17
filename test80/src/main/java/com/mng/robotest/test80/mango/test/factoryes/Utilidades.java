@@ -3,9 +3,14 @@ package com.mng.robotest.test80.mango.test.factoryes;
 import java.util.*;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.mng.testmaker.jdbc.dao.ParamsDAO;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Continente;
@@ -16,6 +21,8 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 
 
 public class Utilidades {
+	
+    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 
     /**
      * Get the lines to test
@@ -106,13 +113,22 @@ public class Utilidades {
         return (getListCountrysFiltered(listCountrysToMaintain));
     }
     
-    public static List<Pais> getListCountrysFiltered(List<Integer> listaCodPais) throws Exception {
+    public static List<Pais> getListCountrysFiltered(List<Integer> listaCodPais) {
     	List<Pais> listToReturn = new ArrayList<>();
     	boolean applyFilter = true;
     	if (listaCodPais==null || listaCodPais.size()==0) {
     		applyFilter = false;
     	}
-    	Response response = filtradoListaPaises(!applyFilter, listaCodPais);
+    	
+    	Response response;
+    	try {
+    		response = filtradoListaPaises(!applyFilter, listaCodPais);
+    	}
+    	catch (JAXBException e) {
+    		pLogger.error("Problem filtering Countrys List", e);
+    		return null;
+    	}
+    	
     	Iterator<Continente> itContinentes = response.getResponse().iterator();
         while (itContinentes.hasNext()) {
             Continente continente = itContinentes.next();
@@ -133,7 +149,7 @@ public class Utilidades {
      * @return lista de países filtrada
      * @throws Exception
      */
-    private static Response filtradoListaPaises(boolean todosPaises, List<Integer> listaCodPais) throws Exception {
+    private static Response filtradoListaPaises(boolean todosPaises, List<Integer> listaCodPais) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(Response.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 	

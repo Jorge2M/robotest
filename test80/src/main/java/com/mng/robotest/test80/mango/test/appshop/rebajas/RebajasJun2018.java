@@ -1,18 +1,13 @@
 package com.mng.robotest.test80.mango.test.appshop.rebajas;
 
-import org.testng.ITestContext;
-import java.lang.reflect.Method;
 import org.testng.annotations.*;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.State;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -36,14 +31,12 @@ import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV
 
 public class RebajasJun2018 {
 
-	InputParams inputParamsSuite = null;
-    String baseUrl;
-    boolean acceptNextAlert = true;
-    private String index_fact;
     public int prioridad;
-    Pais paisFactory = null;
-    IdiomaPais idiomaFactory = null;
-    List<Linea> lineasAprobar = null;
+	private InputParams inputParamsSuite = null;
+    private Pais paisFactory = null;
+    private IdiomaPais idiomaFactory = null;
+    private List<Linea> lineasAprobar = null;
+    private String index_fact;
     
     //Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
     public RebajasJun2018() {}
@@ -58,12 +51,11 @@ public class RebajasJun2018 {
     }
 	  
     @BeforeMethod (groups={"RebajasDic2018", "Canal:desktop_App:shop", "SupportsFactoryCountrys"})
-    public void login(ITestContext context, Method method) throws Exception {
+    public void login() throws Exception {
+    	TestMaker.getTestCase().setRefineDataName(index_fact);
     	if (inputParamsSuite==null) {
     		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
     	}
-
-        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), index_fact, dCtxSh, context, method);
     }
     
     private DataCtxShop getCtxShForTest() {

@@ -13,6 +13,7 @@ import org.testng.xml.XmlInclude;
 import org.testng.xml.XmlRun;
 import org.testng.xml.XmlSuite;
 
+import com.mng.testmaker.service.testreports.StorerErrorStep;
 import com.mng.testmaker.utils.filter.FilterTestsSuiteXML;
 import com.mng.testmaker.utils.webdriver.BrowserStackDesktop;
 import com.mng.testmaker.utils.webdriver.BrowserStackMobil;
@@ -25,6 +26,7 @@ public class TestRunMaker {
     
     private List<String> groups = new ArrayList<>();
     private Map<String,String> dependencyGroups = new HashMap<>();
+    private StorerErrorStep storerErrorStep = null;
 	private BrowserStackDesktop browserStackDesktop = null;
 	private BrowserStackMobil browserStackMobil = null;
     
@@ -33,11 +35,11 @@ public class TestRunMaker {
     	this.listXMLclasses = getClassesWithTests(listClases);
     }
     
-    public static TestRunMaker ofClass(String id, Class<?> classTest) {
-    	return (ofClasses(id, Arrays.asList(classTest)));
+    public static TestRunMaker from(String id, Class<?> classTest) {
+    	return (from(id, Arrays.asList(classTest)));
     }
     
-    public static TestRunMaker ofClasses(String id, List<Class<?>> listClasses) {
+    public static TestRunMaker from(String id, List<Class<?>> listClasses) {
     	List<String> listClassesStr = new ArrayList<>();
     	for (Class<?> classItem : listClasses) {
     		listClassesStr.add(classItem.getCanonicalName());
@@ -45,7 +47,7 @@ public class TestRunMaker {
     	return (new TestRunMaker(id, listClassesStr));
     }    
     
-    public static TestRunMaker getFromStrings(String id, List<String> listClases) {
+    public static TestRunMaker fromObjects(String id, List<String> listClases) {
     	return (new TestRunMaker(id, listClases));
     }
 
@@ -62,6 +64,10 @@ public class TestRunMaker {
     	this.dependencyGroups.putAll(dependencyGroups);
     }
     
+    public void setStorerErrorStep(StorerErrorStep storerErrorStep) {
+    	this.storerErrorStep = storerErrorStep;
+    }
+    
 	public void setBrowserStackDesktop(BrowserStackDesktop browserStackDesktop) {
 		this.browserStackDesktop = browserStackDesktop;
 	}
@@ -76,6 +82,7 @@ public class TestRunMaker {
         testRun.setPreserveOrder(Boolean.valueOf(true));
         testRun.setGroups(createGroups(filterSuiteXML));
         testRun.setXmlClasses(listXMLclasses);
+        testRun.setStorerErrorStep(storerErrorStep);
         testRun.setBrowserStackDesktop(browserStackDesktop);
         testRun.setBrowserStackMobil(browserStackMobil);
         filterSuiteXML.filterTestCasesToExec(testRun); 

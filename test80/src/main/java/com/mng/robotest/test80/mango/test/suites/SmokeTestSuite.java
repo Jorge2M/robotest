@@ -9,6 +9,7 @@ import java.util.List;
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.InputParams;
+import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
 import com.mng.robotest.test80.mango.test.appshop.Ayuda;
 import com.mng.robotest.test80.mango.test.appshop.Bolsa;
 import com.mng.robotest.test80.mango.test.appshop.Buscador;
@@ -36,7 +37,8 @@ public class SmokeTestSuite extends SuiteMaker {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
     	if (!isBrowserStack(inputParams.getWebDriverType())) {
-	    	TestRunMaker testRun = TestRunMaker.ofClasses(inputParams.getSuiteName(), getClasses());
+	    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), getClasses());
+	    	testRun.setStorerErrorStep(new StorerErrorDataStepValidationMango());
 	    	addTestRun(testRun);
 	    	setParallelMode(ParallelMode.METHODS);
 	    	setThreadCount(3);

@@ -1,7 +1,5 @@
 package com.mng.robotest.test80.mango.test.appshop.rebajas;
 
-import org.testng.ITestContext;
-import java.lang.reflect.Method;
 import org.testng.annotations.*;
 
 import java.util.ArrayList;
@@ -9,13 +7,10 @@ import java.util.Arrays;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.mango.*;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -32,17 +27,14 @@ import com.mng.robotest.test80.mango.test.stpv.shop.home.BannerSpringIsHere2019S
 import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV.TypeHome;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 
-public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades genéricas propias de MANGO*/ {
+public class RebajasSpringIsHere2019 {
 
-    String baseUrl;
-    boolean acceptNextAlert = true;
-    private String index_fact;
     public int prioridad;
-    Pais paisFactory = null;
-    IdiomaPais idiomaFactory = null;
-    List<Linea> lineasAprobar = null;
-    
-
+	private InputParams inputParamsSuite = null;
+    private String index_fact;
+    private Pais paisFactory = null;
+    private IdiomaPais idiomaFactory = null;
+    private List<Linea> lineasAprobar = null;
     
     final static List<String> countrysWithoutCampaignInHE;
     final static List<String> countrysWithCampaignInNINOS;
@@ -194,31 +186,29 @@ public class RebajasSpringIsHere2019 extends GestorWebDriver /*Funcionalidades g
     }
 	  
     @BeforeMethod (groups={"RebajasSpringIsHere2019", "Canal:desktop_App:shop", "SupportsFactoryCountrys"})
-    public void login(ITestContext context, Method method) throws Exception {
-        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
+    public void login() throws Exception {
+    	TestMaker.getTestCase().setRefineDataName(index_fact);
+    	if (inputParamsSuite==null) {
+    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
+    	}
+    }
+    
+    private DataCtxShop getCtxShForTest() {
         DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
-        dCtxSh.setChannel(inputData.getChannel());
+        dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+        dCtxSh.setChannel(inputParamsSuite.getChannel());
         dCtxSh.pais = this.paisFactory;
         dCtxSh.idioma = this.idiomaFactory;
-        dCtxSh.urlAcceso = inputData.getUrlBase();
-
-        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), index_fact, dCtxSh, context, method);
+        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+        return dCtxSh;
     }
-	
-    @SuppressWarnings("unused")
-    @AfterMethod (groups={"RebajasSpringIsHere2019", "Canal:desktop_App:shop", "SupportsFactoryCountrys"}, alwaysRun = true)
-    public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = TestCaseData.getWebDriver();
-        super.quitWebDriver(driver, context);
-    }	
 	
     @SuppressWarnings("static-access")
     @Test (groups={"RebajasSpringIsHere2019", "Canal:desktop_App:shop", "SupportsFactoryCountrys"}, 
     	   description="Validaciones específicas correspondientes a la promoción <b>Spring Is Here 2019</b>")
     public void REB001_RebajasSpringIsHere2019() throws Exception {
-    	WebDriver  driver = TestCaseData.getdFTest().driver;
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
+    	WebDriver driver = TestMaker.getDriverTestCase();
+        DataCtxShop dCtxSh = getCtxShForTest();
         int numLineasPais = dCtxSh.pais.getShoponline().getNumLineasTiendas(dCtxSh.appE);
             
         PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);

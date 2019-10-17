@@ -6,6 +6,7 @@ import org.testng.xml.XmlSuite.ParallelMode;
 import com.mng.robotest.test80.InputParams;
 import com.mng.testmaker.domain.SuiteMaker;
 import com.mng.testmaker.domain.TestRunMaker;
+import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
 import com.mng.robotest.test80.mango.test.factoryes.MenusFactory;
 
 public class MenusPaisSuite extends SuiteMaker {
@@ -36,7 +37,8 @@ public class MenusPaisSuite extends SuiteMaker {
     public MenusPaisSuite(InputParams inputParams) {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
-    	TestRunMaker testRun = TestRunMaker.ofClass(inputParams.getSuiteName(), MenusFactory.class);
+    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), MenusFactory.class);
+    	testRun.setStorerErrorStep(new StorerErrorDataStepValidationMango());
     	addTestRun(testRun);
     	setParallelMode(ParallelMode.METHODS);
     	setThreadCount(3);

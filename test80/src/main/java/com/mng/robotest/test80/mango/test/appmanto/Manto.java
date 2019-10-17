@@ -1,11 +1,8 @@
 package com.mng.robotest.test80.mango.test.appmanto;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestContext;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -13,7 +10,6 @@ import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -46,19 +42,13 @@ public class Manto {
 	String tpv;
 
 	@BeforeMethod(groups={"Manto", "Canal:desktop_App:all", "SupportsFactoryCountrys"})
-	public void login(ITestContext ctx, Method method) throws Exception {
+	public void login() throws Exception {
 		InputParamsTestMaker inputParams = TestMaker.getInputParamsSuite();
 		this.dMantoAcc = new DataMantoAccess();
 		this.dMantoAcc.urlManto = inputParams.getUrlBase();
 		this.dMantoAcc.userManto = TestMaker.getParamTestRun(Constantes.paramUsrmanto);
 		this.dMantoAcc.passManto = TestMaker.getParamTestRun(Constantes.paramPasmanto);
 		this.dMantoAcc.appE = AppEcom.shop;
-        Utils.storeDataMantoForTestMaker(inputParams.getWebDriverType(), "", dMantoAcc, ctx, method);
-	}
-
-	@SuppressWarnings("unused")
-	@AfterMethod (groups={"Manto", "Canal:desktop_App:all", "SupportsFactoryCountrys"}, alwaysRun = true)
-	public void logout(ITestContext context, Method method) throws Exception {
 	}
 	
     @Test(

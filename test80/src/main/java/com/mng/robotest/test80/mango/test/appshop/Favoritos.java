@@ -1,17 +1,11 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import org.testng.ITestContext;
-import java.lang.reflect.Method;
 import org.testng.annotations.*;
 
-import com.mng.testmaker.utils.DataFmwkTest;
-import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.mango.*;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
@@ -42,16 +36,16 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 @SuppressWarnings({ "static-access" })
-public class Favoritos extends GestorWebDriver {
-    Pais españa = null;
-    IdiomaPais castellano = null;
-    String baseUrl;
-    boolean acceptNextAlert = true;
-    StringBuffer verificationErrors = new StringBuffer();
-    private String index_fact = "";
+public class Favoritos {
+
+	private InputParams inputParamsSuite = null;
     public int prioridad;
-    Pais paisFactory = null;
-    IdiomaPais idiomaFactory = null;
+    private String index_fact = "";
+    private Pais paisFactory = null;
+    private IdiomaPais idiomaFactory = null;
+    private final static Integer codEspanya = Integer.valueOf(1);
+    private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
+    private final static Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
     
     //Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
     public Favoritos() {}
@@ -67,46 +61,38 @@ public class Favoritos extends GestorWebDriver {
     }
       
     @BeforeMethod(groups={"Favoritos", "Canal:all_App:shop", "SupportsFactoryCountrys"})
-    public void login(ITestContext context, Method method) 
+    public void login() 
     throws Exception {
-        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
+    	if (inputParamsSuite==null) {
+    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
+    	}
+    }   
+    
+    private DataCtxShop getCtxShForTest() throws Exception {
         DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
-        dCtxSh.setChannel(inputData.getChannel());
-        dCtxSh.urlAcceso = inputData.getUrlBase();
+        dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+        dCtxSh.setChannel(inputParamsSuite.getChannel());
+        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 
         //Si el acceso es normal (no es desde una @Factory) utilizaremos el España/Castellano
         if (this.paisFactory==null) {
-            if (this.españa==null) {
-                Integer codEspanya = Integer.valueOf(1);
-                List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
-                this.españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
-                this.castellano = this.españa.getListIdiomas().get(0);
-            }
-            
-            dCtxSh.pais = this.españa;
-            dCtxSh.idioma = this.castellano;
+            dCtxSh.pais = españa;
+            dCtxSh.idioma = españa.getListIdiomas().get(0);
         } else {
-            dCtxSh.pais = this.paisFactory;
-            dCtxSh.idioma = this.idiomaFactory;
+            dCtxSh.pais = paisFactory;
+            dCtxSh.idioma = idiomaFactory;
         }
-        
-        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), this.index_fact, dCtxSh, context, method);
+        return dCtxSh;
     }
-
-    @SuppressWarnings("unused")
-    @AfterMethod (groups={"Favoritos", "Canal:all_App:shop", "SupportsFactoryCountrys"}, alwaysRun = true)
-    public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = TestCaseData.getWebDriver();
-        super.quitWebDriver(driver, context);
-    }       
 
     @Test(
         groups={"Favoritos", "Canal:all_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
         description="[Usuario registrado] Alta favoritos desde la galería")
     public void FAV001_AltaFavoritosDesdeGaleria() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
+    	TestMaker.getTestCase().setRefineDataName(this.index_fact);
+    	WebDriver driver = TestMaker.getDriverTestCase();
+        DataCtxShop dCtxSh = getCtxShForTest();
+        
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;
@@ -114,17 +100,17 @@ public class Favoritos extends GestorWebDriver {
         DataFavoritos dataFavoritos = new DataFavoritos();
         DataBag dataBolsa = new DataBag();
         
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
-        SecBolsaStpV.clear(dCtxSh, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+        SecBolsaStpV.clear(dCtxSh, driver);
         
-        PageFavoritosStpV pageFavoritosStpV = PageFavoritosStpV.getNew(dFTest.driver);
+        PageFavoritosStpV pageFavoritosStpV = PageFavoritosStpV.getNew(driver);
         pageFavoritosStpV.clearAll(dataFavoritos, dCtxSh);
         
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         secMenusStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh);
 
-        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
         List<Integer> iconsToMark = Arrays.asList(1, 3, 4);  
         pageGaleriaStpV.clickArticlesHearthIcons(iconsToMark, TypeActionFav.Marcar, dataFavoritos);
         
@@ -135,7 +121,7 @@ public class Favoritos extends GestorWebDriver {
         ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);
         pageFavoritosStpV.addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel);
         if (dCtxSh.channel==Channel.movil_web) {
-            SecBolsaStpV.clickAspaForCloseMobil(dFTest.driver);
+            SecBolsaStpV.clickAspaForCloseMobil(driver);
             pageFavoritosStpV.validaIsPageOK(dataFavoritos);
         }
         
@@ -148,27 +134,29 @@ public class Favoritos extends GestorWebDriver {
         /*dependsOnMethods = {"FAV001_AltaFavoritosDesdeGaleria"},*/ 
         description="[Usuario no registrado] Alta favoritos desde la galería y posterior identificación")
     public void FAV002_AltaFavoritosDesdeFicha() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
+    	TestMaker.getTestCase().setRefineDataName(this.index_fact);
+    	WebDriver driver = TestMaker.getDriverTestCase();
+        DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userRegistered=false;
+        
         DataFavoritos dataFavoritos = new DataFavoritos();
         DataBag dataBolsa = new DataBag();
         
         //Script
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
         //TestAB.activateTestABfiltrosMobil(1, dCtxSh, getDriver().driver); //!!!!!
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
-        SecBolsaStpV.clear(dCtxSh, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, driver);
+        SecBolsaStpV.clear(dCtxSh, driver);
         
-        PageFavoritosStpV pageFavoritosStpV = PageFavoritosStpV.getNew(dFTest.driver);
+        PageFavoritosStpV pageFavoritosStpV = PageFavoritosStpV.getNew(driver);
         pageFavoritosStpV.clearAll(dataFavoritos, dCtxSh);
         
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "Vestidos"));
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         secMenusStpV.selectMenu1rstLevelTypeCatalog(menuVestidos, dCtxSh);
         LocationArticle article1 = LocationArticle.getInstanceInCatalog(1);
         
-        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
         pageGaleriaStpV.selectArticulo(article1, dCtxSh);
         
         PageFichaArtStpV pageFichaArtStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
@@ -177,9 +165,9 @@ public class Favoritos extends GestorWebDriver {
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;
-        AccesoStpV.identificacionEnMango(dCtxSh, dFTest.driver);
+        AccesoStpV.identificacionEnMango(dCtxSh, driver);
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-        SecBolsaStpV.clear(dCtxSh, dFTest.driver);
+        SecBolsaStpV.clear(dCtxSh, driver);
         secMenusStpV.getMenusUser().selectFavoritos(dataFavoritos);
         
         // Cuando la funcionalidad de "Share Favorites" suba a producción, este if debería eliminarse
@@ -191,7 +179,7 @@ public class Favoritos extends GestorWebDriver {
         
         ArticuloScreen artToPlay = dataFavoritos.getArticulo(0);
         pageFavoritosStpV.clickArticuloImg(artToPlay);
-        pageFavoritosStpV.getModalFichaFavoritosStpV().addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dCtxSh.appE);       
+        pageFavoritosStpV.getModalFichaFavoritosStpV().addArticuloToBag(artToPlay, dataBolsa, dCtxSh.channel, dCtxSh.appE);
         if (dCtxSh.channel==Channel.movil_web) {
             pageFavoritosStpV.validaIsPageOK(dataFavoritos);
         } else {

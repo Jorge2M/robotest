@@ -13,7 +13,7 @@ public class MenusMantoSuite extends SuiteMaker {
     public MenusMantoSuite(InputParams inputParams) {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
-    	TestRunMaker testRun = TestRunMaker.ofClass(inputParams.getSuiteName(), ListMenusManto.class);
+    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), ListMenusManto.class);
     	addTestRun(testRun);
     	setParallelMode(ParallelMode.METHODS);
     	setThreadCount(4);

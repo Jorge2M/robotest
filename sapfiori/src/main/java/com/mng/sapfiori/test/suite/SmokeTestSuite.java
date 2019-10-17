@@ -13,7 +13,7 @@ public class SmokeTestSuite extends SuiteMaker {
     public SmokeTestSuite(InputParamsTestMaker iParams) {
     	super(iParams);
     	setParameters(new HashMap<>());
-    	TestRunMaker testRun = TestRunMaker.ofClass(iParams.getSuiteName(), Piloto.class);
+    	TestRunMaker testRun = TestRunMaker.from(iParams.getSuiteName(), Piloto.class);
     	addTestRun(testRun);
     	setParallelMode(ParallelMode.METHODS);
     	setThreadCount(3);

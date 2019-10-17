@@ -17,7 +17,7 @@ public class ConsolaVotfSuite extends SuiteMaker {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
     	addParameters(getSpecificParameters());
-    	TestRunMaker testRun = TestRunMaker.ofClass(inputParams.getSuiteName(), ConsolaVotf.class);
+    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), ConsolaVotf.class);
     	addTestRun(testRun);
     	setParallelMode(ParallelMode.METHODS);
     	setThreadCount(1);

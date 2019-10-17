@@ -1,24 +1,17 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestContext;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod; 
 import org.testng.annotations.Test;
 
-import com.mng.testmaker.utils.DataFmwkTest;
-import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.mango.GestorWebDriver;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
@@ -38,23 +31,19 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
-public class CompraFact extends GestorWebDriver {
+public class CompraFact {
 
-    Pais españa = null;
-    IdiomaPais castellano = null;
-    String baseUrl;
-    boolean acceptNextAlert = true;
-    StringBuffer verificationErrors = new StringBuffer();
-    private String index_fact = "";
     public int prioridad;
-    Pais paisFactory = null;
-    IdiomaPais idiomaFactory = null;
-    Pago pago = null;
-    boolean usrRegistrado = false;
-    boolean empleado = false;
-    boolean testVale = false;
-    boolean manyArticles = false;
-    boolean checkAnulaPedido = false;
+	private InputParams inputParamsSuite = null;
+    private String index_fact = "";
+    private Pais paisFactory = null;
+    private IdiomaPais idiomaFactory = null;
+    private Pago pago = null;
+    private boolean usrRegistrado = false;
+    private boolean empleado = false;
+    private boolean testVale = false;
+    private boolean manyArticles = false;
+    private boolean checkAnulaPedido = false;
     
     //Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
     public CompraFact() {}
@@ -62,9 +51,9 @@ public class CompraFact extends GestorWebDriver {
     /**
      * Constructor para invocación desde @Factory
      */
-    public CompraFact(Pais pais, IdiomaPais idioma, Pago pago, AppEcom appE, Channel channel, 
-    				  boolean usrRegistrado, boolean empleado, boolean testVale, boolean manyArticles, 
-    				  boolean checkAnulaPedido, int prioridad) {
+    public CompraFact(
+    		Pais pais, IdiomaPais idioma, Pago pago, AppEcom appE, Channel channel, boolean usrRegistrado, 
+    		boolean empleado, boolean testVale, boolean manyArticles, boolean checkAnulaPedido, int prioridad) {
         this.paisFactory = pais;
         this.idiomaFactory = idioma;
         this.pago = pago;
@@ -102,45 +91,42 @@ public class CompraFact extends GestorWebDriver {
     	return index;
     }
     
+
+    
     @BeforeMethod(groups={"CompraFact", "Canal:all_App:all", "SupportsFactoryCountrys"})
-    public void login(ITestContext context, Method method) 
-    throws Exception {
-        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
-        DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
-        dCtxSh.setChannel(inputData.getChannel());
-        dCtxSh.urlAcceso = inputData.getUrlBase();
-        dCtxSh.pais = this.paisFactory;
-        dCtxSh.idioma = this.idiomaFactory;
-        
-        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), this.index_fact, dCtxSh, context, method);     
+    public void login() throws Exception {
+    	if (inputParamsSuite==null) {
+    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
+    	}
     }    
     
-    @SuppressWarnings("unused")
-    @AfterMethod (groups={"CompraFact", "Canal:all_App:all"}, alwaysRun = true)
-    public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = TestCaseData.getWebDriver();
-        super.quitWebDriver(driver, context);
-    }    
+    private DataCtxShop getCtxShForTest() throws Exception {
+        DataCtxShop dCtxSh = new DataCtxShop();
+        dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+        dCtxSh.setChannel(inputParamsSuite.getChannel());
+        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+        dCtxSh.pais = this.paisFactory;
+        dCtxSh.idioma = this.idiomaFactory;
+        return dCtxSh;
+    }
       
     @Test (
         groups={"Compra", "Canal:all_App:all"}, alwaysRun=true, priority=1, 
         description="Test de compra (creado desde Factoría) con valores específicos a nivel de Pago, Tipo de Envío, Usuario Conectado y Empleado")
     public void COM010_Pago() throws Exception {
-        DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
+    	TestMaker.getTestCase().setRefineDataName(this.index_fact);
+    	WebDriver driver = TestMaker.getDriverTestCase();
+        DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userRegistered = this.usrRegistrado;
-        this.testVale = includeValeValidation(dCtxSh.appE, dFTest);
+        this.testVale = includeValeValidation(dCtxSh.appE, driver);
         if (dCtxSh.userRegistered) {
 	        UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
 	        dCtxSh.userConnected = userShop.user;
-	        dCtxSh.passwordUser = userShop.password;
-//	        dCtxSh.userConnected = "test.performance27@mango.com";
-//	        dCtxSh.passwordUser = "Mango123";
+	        dCtxSh.passwordUser = userShop.password;;
         }
         
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, this.usrRegistrado/*clearArticulos*/, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, this.usrRegistrado, driver);
         //TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, dFTest.driver);
         
         int maxArticlesAwayVale = 3;
@@ -150,7 +136,7 @@ public class CompraFact extends GestorWebDriver {
         }
         
         DataBag dataBag = new DataBag(); 
-        SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, dFTest.driver);
+        SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, driver);
         
         //Hasta página Checkout
         FlagsTestCkout fTCkout = new FlagsTestCkout();
@@ -164,12 +150,12 @@ public class CompraFact extends GestorWebDriver {
         dCtxPago.setFTCkout(fTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
         dCtxPago.getFTCkout().testCodPromocional = this.testVale || this.empleado;
-        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, dFTest.driver);
+        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver);
         
         //Pago
         dCtxPago.getFTCkout().validaPagos = true;
         dCtxPago.getDataPedido().setPago(this.pago);
-        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, dFTest.driver);
+        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, driver);
         
         //Validación en Manto de los Pedidos (si existen)
         if (fTCkout.validaPedidosEnManto) {
@@ -180,13 +166,13 @@ public class CompraFact extends GestorWebDriver {
         		listChecks.add(CheckPedido.anular);
         	}
             DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
-            PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, dFTest);
+            PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
         }
     }
     
-    private boolean includeValeValidation(AppEcom app, DataFmwkTest dFTest) {
+    private boolean includeValeValidation(AppEcom app, WebDriver driver) {
     	return (
     		this.testVale && 
-    		!UtilsMangoTest.isEntornoPRO(app, dFTest.driver));
+    		!UtilsMangoTest.isEntornoPRO(app, driver));
     }
 }

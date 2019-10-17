@@ -1,25 +1,17 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import org.testng.ITestContext;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.testng.annotations.*;
 
-import com.mng.testmaker.utils.DataFmwkTest;
-import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.mango.*;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
@@ -34,59 +26,48 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsS
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
+import com.mng.testmaker.service.TestMaker;
 
 import org.openqa.selenium.WebDriver;
 
-public class Bolsa extends GestorWebDriver {
+public class Bolsa {
 
-    Pais españa = null;
-    IdiomaPais castellano = null;
-    String baseUrl;
-    boolean acceptNextAlert = true;
-    StringBuffer verificationErrors = new StringBuffer();
+	private InputParams inputParamsSuite = null;
         
     public Bolsa() {}         
       
     @BeforeMethod (groups={"Bolsa", "Canal:desktop_App:all"})
-    public void login(ITestContext context, Method method) 
-    throws Exception {
-        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
-        DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
-        dCtxSh.setChannel(inputData.getChannel());
-        dCtxSh.urlAcceso = inputData.getUrlBase();
-        if (this.españa==null) {
-            Integer codEspanya = Integer.valueOf(1);
-            List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
-            this.españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
-            this.castellano = this.españa.getListIdiomas().get(0);
-        }
-        
-        dCtxSh.pais = this.españa;
-        dCtxSh.idioma = this.castellano;
-        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), "", dCtxSh, context, method);
+    public void login() throws Exception {
+    	if (inputParamsSuite==null) {
+    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
+    	}
     }
     
-    @SuppressWarnings("unused")
-    @AfterMethod (groups={"Bolsa", "Canal:desktop_App:all"}, alwaysRun = true)
-    public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = TestCaseData.getWebDriver();
-        super.quitWebDriver(driver, context);
-    }       
+    private DataCtxShop getCtxShForTest() throws Exception {
+        DataCtxShop dCtxSh = new DataCtxShop();
+        dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+        dCtxSh.setChannel(inputParamsSuite.getChannel());
+        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+        Integer codEspanya = Integer.valueOf(1);
+        List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
+        dCtxSh.pais = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
+        dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
+        return dCtxSh;
+    }
 
     @Test (
         groups={"Bolsa", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
         description="[Usuario no registrado] Añadir artículo a la bolsa")
     public void BOR001_AddBolsaFromGaleria_NoReg() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
+    	WebDriver driver = TestMaker.getDriverTestCase();
+        DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userRegistered = false;
         
-        AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest.driver);
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
         secMenusStpV.accesoMenuXRef(menuVestidos, dCtxSh);
-        DataBag dataBag = GaleriaNavigationsStpV.selectArticleAvailableFromGaleria(dCtxSh, dFTest.driver);
+        DataBag dataBag = GaleriaNavigationsStpV.selectArticleAvailableFromGaleria(dCtxSh, driver);
                 
         //Hasta página de Checkout
         FlagsTestCkout FTCkout = new FlagsTestCkout();
@@ -100,25 +81,25 @@ public class Bolsa extends GestorWebDriver {
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
-        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, dFTest.driver);
+        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver);
     }
 
     @Test (
         groups={"Bolsa", "Canal:desktop_App:all"}, alwaysRun=true, 
         description="[Usuario no registrado] Añadir y eliminar artículos de la bolsa")
     public void BOR005_Gest_Prod_Bolsa_Noreg() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
+    	WebDriver driver = TestMaker.getDriverTestCase();
+        DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userRegistered = false;
-        BOR005_6_Gest_Prod_Bolsa(dCtxSh, dFTest);
+        BOR005_6_Gest_Prod_Bolsa(dCtxSh, driver);
     }
 
     @Test (
         groups={"Bolsa", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
         description="[Usuario registrado] Añadir artículo a la bolsa")
     public void BOR002_AnyadirBolsa_yCompra_SiReg() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
+    	WebDriver driver = TestMaker.getDriverTestCase();
+        DataCtxShop dCtxSh = getCtxShForTest();
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;
@@ -126,11 +107,11 @@ public class Bolsa extends GestorWebDriver {
         DataBag dataBag = new DataBag();
         
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-        AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, dFTest.driver);
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
         secMenusStpV.accesoMenuXRef(menuVestidos, dCtxSh);
-        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest.driver);
+        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, driver);
         
         //Hasta página de Checkout
         FlagsTestCkout FTCkout = new FlagsTestCkout();
@@ -143,32 +124,32 @@ public class Bolsa extends GestorWebDriver {
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
-        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, dFTest.driver);
+        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver);
     }
 
     @Test (
         groups={"Bolsa", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
         description="[Usuario registrado] Añadir y eliminar artículos de la bolsa")
     public void BOR006_Gest_Prod_Bolsa_Sireg() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
+    	WebDriver driver = TestMaker.getDriverTestCase();
+        DataCtxShop dCtxSh = getCtxShForTest();
         UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
         dCtxSh.userConnected = userShop.user;
         dCtxSh.passwordUser = userShop.password;
         dCtxSh.userRegistered = true;
-        BOR005_6_Gest_Prod_Bolsa(dCtxSh, dFTest);
+        BOR005_6_Gest_Prod_Bolsa(dCtxSh, driver);
     }
 
-    public static void BOR005_6_Gest_Prod_Bolsa(DataCtxShop dCtxSh, DataFmwkTest dFTest) 
+    public static void BOR005_6_Gest_Prod_Bolsa(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
     	//TestAB.activateTestABiconoBolsaDesktop(2, dCtxSh, dFTest.driver);
         DataBag dataBag = new DataBag();
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, dCtxSh.userRegistered, dFTest.driver);
-        SecBolsaStpV.altaArticlosConColores(2, dataBag, dCtxSh, dFTest.driver);
-        SecBolsaStpV.forceStateBolsaTo(StateBolsa.Closed, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
-        SecBolsaStpV.forceStateBolsaTo(StateBolsa.Open, dCtxSh.appE, dCtxSh.channel, dFTest.driver); 
-        SecBolsaStpV.clear1erArticuloBolsa(dataBag, dCtxSh.appE, dCtxSh.channel, dFTest.driver);                                
-        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest.driver);
-        SecBolsaStpV.click1erArticuloBolsa(dataBag, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, dCtxSh.userRegistered, driver);
+        SecBolsaStpV.altaArticlosConColores(2, dataBag, dCtxSh, driver);
+        SecBolsaStpV.forceStateBolsaTo(StateBolsa.Closed, dCtxSh.appE, dCtxSh.channel, driver);
+        SecBolsaStpV.forceStateBolsaTo(StateBolsa.Open, dCtxSh.appE, dCtxSh.channel, driver); 
+        SecBolsaStpV.clear1erArticuloBolsa(dataBag, dCtxSh.appE, dCtxSh.channel, driver);                                
+        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, driver);
+        SecBolsaStpV.click1erArticuloBolsa(dataBag, dCtxSh.appE, dCtxSh.channel, driver);
     }
 }

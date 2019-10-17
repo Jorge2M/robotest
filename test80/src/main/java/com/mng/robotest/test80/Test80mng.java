@@ -12,10 +12,10 @@ import org.apache.logging.log4j.Logger;
 
 import com.mng.testmaker.access.CommandLineAccess;
 import com.mng.testmaker.access.OptionTMaker;
-import com.mng.testmaker.domain.SuiteMaker;
 import com.mng.testmaker.domain.SuiteTestMaker;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.utils;
-import com.mng.testmaker.utils.controlTest.FmwkTest;
+import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.utils.filter.TestMethod;
 import com.mng.testmaker.utils.otras.TypeAccessFmwk;
 import com.mng.testmaker.utils.otras.Channel;
@@ -26,7 +26,7 @@ import com.mng.robotest.test80.mango.test.suites.*;
 
 public class Test80mng { 
 	
-	static Logger pLogger = LogManager.getLogger(FmwkTest.log4jLogger);
+	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 
     public static String CountrysNameParam = "countrys";
     public static String LineasNameParam = "lineas";
@@ -174,40 +174,40 @@ public class Test80mng {
      * Indirect access from Command Line, direct access from Online
      */
     public static void execSuite(InputParams inputParams) throws Exception {
-    	SuiteMaker suite = makeSuite(inputParams);
-    	suite.run();
-    	callBackIfNeeded(suite.getSuiteTestMaker(), inputParams);
+    	SuiteTestMaker suite = makeSuite(inputParams);
+    	TestMaker.run(suite);
+    	callBackIfNeeded(suite, inputParams);
     }
     
-    public static SuiteMaker makeSuite(InputParams inputParams) throws Exception {
+    public static SuiteTestMaker makeSuite(InputParams inputParams) throws Exception {
         inputParams.setTypeAccessIfNotSetted(TypeAccessFmwk.Online);
         try {
             switch ((Suites)inputParams.getSuite()) {
             case SmokeTest:
-                return (new SmokeTestSuite(inputParams));
+                return (new SmokeTestSuite(inputParams)).getSuite();
             case SmokeManto:
-                return (new SmokeMantoSuite(inputParams));
+                return (new SmokeMantoSuite(inputParams)).getSuite();
             case PagosPaises:
-                return (new PagosPaisesSuite(inputParams));           
+                return (new PagosPaisesSuite(inputParams)).getSuite();           
             case ValesPaises:
-                return (new ValesPaisesSuite(inputParams));          
+                return (new ValesPaisesSuite(inputParams)).getSuite();          
             case PaisIdiomaBanner:
-                return (new PaisIdiomaSuite(inputParams));                    
+                return (new PaisIdiomaSuite(inputParams)).getSuite();                    
             case MenusPais:
-                return (new MenusPaisSuite(inputParams));
+                return (new MenusPaisSuite(inputParams)).getSuite();
             case MenusManto:
-                return (new MenusMantoSuite(inputParams));            
+                return (new MenusMantoSuite(inputParams)).getSuite();            
             case Nodos:
-                return (new NodosSuite(inputParams));           
+                return (new NodosSuite(inputParams)).getSuite();           
             case ConsolaVotf:
-                return (new ConsolaVotfSuite(inputParams));              
+                return (new ConsolaVotfSuite(inputParams)).getSuite();              
             case ListFavoritos:
             case ListMiCuenta:
-                return (new GenericFactorySuite(inputParams));               
+                return (new GenericFactorySuite(inputParams)).getSuite();               
             case RegistrosPaises:
-                return (new RegistrosSuite(inputParams));       
+                return (new RegistrosSuite(inputParams)).getSuite();       
             case RebajasPaises:
-                return (new RebajasSuite(inputParams));             
+                return (new RebajasSuite(inputParams)).getSuite();             
             default:
             }
         }
@@ -222,7 +222,7 @@ public class Test80mng {
     private static void callBackIfNeeded(SuiteTestMaker suite, InputParams inputParams) {
     	CallBack callBack = inputParams.getCallBack();
         if (callBack!=null) {
-            String pathFileReport = FmwkTest.getPathReportHTML(FmwkTest.getOutputDirectorySuite(suite));
+            String pathFileReport = suite.getPathReportHtml();
             String reportTSuiteURL = utils.obtainDNSFromFile(pathFileReport, inputParams.getWebAppDNS()).replace("\\", "/");
             callBack.setReportTSuiteURL(reportTSuiteURL);
             try {
@@ -271,13 +271,5 @@ public class Test80mng {
         }
         
         return (UtilsMangoTest.getListPagoFilterNames(listCodCountrys, channel, appE, isEmpl));
-    }
-
-    public static String getOutputDirectory(String userDir, String suiteName, String idExecutedSuite) {
-        return FmwkTest.getOutputDirectory(userDir, suiteName, idExecutedSuite);
-    }
-    
-    public static String getPathOutputDirectoryFromUserDir(String suiteName, String idExecutedSuite) {
-        return (FmwkTest.getPathOutputDirectoryFromUserDir(suiteName, idExecutedSuite));
     }
 }

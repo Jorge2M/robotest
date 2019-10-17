@@ -10,6 +10,7 @@ import org.testng.xml.XmlSuite.ParallelMode;
 import com.mng.robotest.test80.InputParams;
 import com.mng.testmaker.domain.SuiteMaker;
 import com.mng.testmaker.domain.TestRunMaker;
+import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
 import com.mng.robotest.test80.mango.test.factoryes.ListRebajasXPais;
 
 public class RebajasSuite extends SuiteMaker {
@@ -17,7 +18,8 @@ public class RebajasSuite extends SuiteMaker {
     public RebajasSuite(InputParams inputParams) {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
-    	TestRunMaker testRun = TestRunMaker.ofClass(inputParams.getSuiteName(), ListRebajasXPais.class);
+    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), ListRebajasXPais.class);
+    	testRun.setStorerErrorStep(new StorerErrorDataStepValidationMango());
     	testRun.addGroups(getSpecificGroups());
     	addTestRun(testRun);
     	setParallelMode(ParallelMode.METHODS);

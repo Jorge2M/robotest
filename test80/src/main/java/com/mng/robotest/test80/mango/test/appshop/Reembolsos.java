@@ -1,15 +1,9 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import org.testng.ITestContext;
-import java.lang.reflect.Method;
 import org.testng.annotations.*;
 
-import com.mng.testmaker.utils.DataFmwkTest;
-import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.mango.*;
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -32,6 +26,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.PageReembolsosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageResultPagoStpV;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
+import com.mng.testmaker.service.TestMaker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,55 +40,34 @@ import org.openqa.selenium.WebDriver;
  *
  */
 
-public class Reembolsos extends GestorWebDriver {
-    Pais arabia = null;
-    IdiomaPais arabia_arabe = null;    
-    String baseUrl;
-    boolean acceptNextAlert = true;
-    StringBuffer verificationErrors = new StringBuffer();
-    DataCtxShop dCtxSh;
+public class Reembolsos {
     
-    /**
-     * Acciones previas a cualquier @Test
-     * @throws Exception
-     */
+	private InputParams inputParamsSuite = null; 
+	
+    //TODO mientras que tengamos problemas con el buscador en Arabia probaremos contra España
+    private final static Integer espanaCod = Integer.valueOf(1);
+    private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(espanaCod)));
+    private final static Pais arabia = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
+    private final static IdiomaPais arabia_arabe = arabia.getListIdiomas().get(0);
+    
+    private DataCtxShop dCtxSh;
+    
     @BeforeMethod (groups={"Otras", "Canal:all_App:all"})
-    public void login(ITestContext context, Method method) throws Exception {
-        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
+    public void login() throws Exception {
+    	if (inputParamsSuite==null) {
+    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
+    	}
+    }	
+    
+    private DataCtxShop getCtxShForTest() throws Exception {
         dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
-        dCtxSh.setChannel(inputData.getChannel());
-        dCtxSh.urlAcceso = inputData.getUrlBase();
-        
-        //Si no existe, obtenemos el país España
-        if (this.arabia==null) {
-            //Integer codArabia = Integer.valueOf(632);
-            //List<Pais> listaPaises = UtilsMangoTest.listaPaisesXML(new ArrayList<>(Arrays.asList(codArabia)));
-            //this.arabia = UtilsMangoTest.getPaisFromCodigo("632", listaPaises);
-            //this.arabia_arabe = this.arabia.getListIdiomas().get(0);
-            //TODO mientras que tengamos problemas con el buscador en Arabia probaremos contra España
-            Integer espanaCod = Integer.valueOf(1);
-            List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(espanaCod)));
-            this.arabia = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
-            this.arabia_arabe = this.arabia.getListIdiomas().get(0);
-        }
-        
-        dCtxSh.pais = this.arabia;
-        dCtxSh.idioma = this.arabia_arabe;
-        
-        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), "", dCtxSh, context, method);
+        dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+        dCtxSh.setChannel(inputParamsSuite.getChannel());
+        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+        dCtxSh.pais = arabia;
+        dCtxSh.idioma = arabia_arabe;
+        return dCtxSh;
     }
-
-    /**
-     * Acciones posteriores a cualquier @Test
-     * @throws Exception
-     */    
-    @SuppressWarnings("unused")
-    @AfterMethod (groups={"Otras", "Canal:all_App:all"}, alwaysRun = true)
-    public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = TestCaseData.getWebDriver();
-        super.quitWebDriver(driver, context);
-    }		
 	
     /**
      * Script correspondiente al caso de prueba que configura el reembolso vía transferencia y saldo en cuenta en arabia/inglés 
@@ -102,17 +76,13 @@ public class Reembolsos extends GestorWebDriver {
         groups={"Reembolso", "Canal:all_App:shop"}, 
         description="Configura el reembolso vía transferencia y saldo en cuenta para un país/idioma determinado")
     public void REE001_configureReembolso() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
-	    
-        //Este test sólo aplica al entornos no productivos
-        if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest.driver)) {
+    	DataCtxShop dCtxSh = getCtxShForTest();
+    	WebDriver driver = TestMaker.getDriverTestCase();
+        if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
             return;        
         }
-        //Revisamos si el país tiene configurado el saldo en cuenta
+
         boolean paisConSaldoCta = dCtxSh.pais.existsPagoStoreCredit();
-        
-        //Obtenemos el usuario/password de acceso
         dCtxSh.userConnected = Constantes.mail_standard;
         dCtxSh.passwordUser = Constantes.pass_standard;
         dCtxSh.userRegistered = true;
@@ -121,19 +91,15 @@ public class Reembolsos extends GestorWebDriver {
             dCtxSh.passwordUser = dCtxSh.pais.getPassuser();
         }
             
-        //Step. Accedemos a Arabia Saudi/Árabe. Nos registramos con un usuario asociado a ese país. Se vacía la bolsa/favorites
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, dFTest.driver);
-
-        //Step (+validaciones) selección menú "Mi cuenta" + "Reembolsos"
-        PageReembolsosStpV.gotoRefundsFromMenu(paisConSaldoCta, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
-        
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+        PageReembolsosStpV.gotoRefundsFromMenu(paisConSaldoCta, dCtxSh.appE, dCtxSh.channel, driver);
         if (paisConSaldoCta) {
-            if (PageReembolsos.isCheckedRadio(TypeReembolso.StoreCredit, dFTest.driver)) {
-                PageReembolsosStpV.testConfTransferencia(dFTest.driver);
-                PageReembolsosStpV.selectRadioSalCtaAndRefresh(dFTest.driver);
+            if (PageReembolsos.isCheckedRadio(TypeReembolso.StoreCredit, driver)) {
+                PageReembolsosStpV.testConfTransferencia(driver);
+                PageReembolsosStpV.selectRadioSalCtaAndRefresh(driver);
             } else {
-                PageReembolsosStpV.selectRadioSalCtaAndRefresh(dFTest.driver);
-                PageReembolsosStpV.testConfTransferencia(dFTest.driver);
+                PageReembolsosStpV.selectRadioSalCtaAndRefresh(driver);
+                PageReembolsosStpV.testConfTransferencia(driver);
             }
         }        
     }
@@ -145,14 +111,13 @@ public class Reembolsos extends GestorWebDriver {
         groups={"Reembolso", "Canal:all_App:shop"},
         description="Se realiza un Checkout utilizando Saldo en Cuenta. Se accede a la configuración al inicio y al final para comprobar que el saldo en cuenta se resta correctamente")
     public void REE002_checkoutWithSaldoCta() throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
+    	DataCtxShop dCtxSh = getCtxShForTest();
+    	WebDriver driver = TestMaker.getDriverTestCase();
         
-        //Este test sólo aplica al entornos no productivos
-        if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, dFTest.driver)) {
+        if (UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
             return;
         }
-        //Obtenemos el usuario/password de acceso
+
         dCtxSh.userConnected = Constantes.mail_standard;
         dCtxSh.passwordUser = Constantes.pass_standard;
         dCtxSh.userRegistered = true;
@@ -161,18 +126,17 @@ public class Reembolsos extends GestorWebDriver {
             dCtxSh.passwordUser = dCtxSh.pais.getPassuser();
         }
         
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true/*clearArticulos*/, dFTest.driver);
-        //TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, dFTest.driver);
-        PageReembolsosStpV.gotoRefundsFromMenu(dCtxSh.pais.existsPagoStoreCredit(), dCtxSh.appE, dCtxSh.channel, dFTest.driver);
-        PageReembolsosStpV.selectRadioSalCtaAndRefresh(dFTest.driver);
-        if (PageReembolsos.isVisibleSaveButtonStoreCredit(dFTest.driver)) {
-        	PageReembolsosStpV.clickSaveButtonStoreCredit(dFTest.driver);
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, driver);
+        PageReembolsosStpV.gotoRefundsFromMenu(dCtxSh.pais.existsPagoStoreCredit(), dCtxSh.appE, dCtxSh.channel, driver);
+        PageReembolsosStpV.selectRadioSalCtaAndRefresh(driver);
+        if (PageReembolsos.isVisibleSaveButtonStoreCredit(driver)) {
+        	PageReembolsosStpV.clickSaveButtonStoreCredit(driver);
         }
-        float saldoCtaIni = PageReembolsos.getImporteStoreCredit(dFTest.driver);
+        float saldoCtaIni = PageReembolsos.getImporteStoreCredit(driver);
         
         //Damos de alta 2 artículos en la bolsa
         DataBag dataBag = new DataBag(); 
-        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, dFTest.driver);
+        SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, driver);
         
         //Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
         FlagsTestCkout FTCkout = new FlagsTestCkout();
@@ -186,7 +150,7 @@ public class Reembolsos extends GestorWebDriver {
         DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
         dCtxPago.setFTCkout(FTCkout);
         dCtxPago.getDataPedido().setDataBag(dataBag);
-        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, dFTest.driver); 
+        PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver); 
         
         //Informamos datos varios necesarios para el proceso de pagos de modo que se pruebe el pago StoreCredit
         dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
@@ -195,10 +159,10 @@ public class Reembolsos extends GestorWebDriver {
         dCtxPago.getFTCkout().validaPagos = true;
         Pago pagoStoreCredit = dCtxSh.pais.getPago("STORECREDIT");
         dCtxPago.getDataPedido().setPago(pagoStoreCredit);
-        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, dFTest.driver);
+        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, driver);
         
         //Volvemos a la portada (Seleccionamos el link "Seguir de shopping" o el icono de Mango)
-        PageResultPagoStpV.selectSeguirDeShopping(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        PageResultPagoStpV.selectSeguirDeShopping(dCtxSh.channel, dCtxSh.appE, driver);
         
         //Calculamos el saldo en cuenta que debería quedar (según si se ha realizado o no el pago);
         float saldoCtaEsperado;
@@ -212,13 +176,13 @@ public class Reembolsos extends GestorWebDriver {
         }
         
         //Step (+validaciones) selección menú "Mi cuenta" + "Reembolsos"
-        PageReembolsosStpV.gotoRefundsFromMenuAndValidaSalCta(dCtxSh.pais.existsPagoStoreCredit(), saldoCtaEsperado, dCtxSh.appE, dCtxSh.channel, dFTest.driver);
+        PageReembolsosStpV.gotoRefundsFromMenuAndValidaSalCta(dCtxSh.pais.existsPagoStoreCredit(), saldoCtaEsperado, dCtxSh.appE, dCtxSh.channel, driver);
         
         //Validación en Manto de los Pedidos (si existen)
     	List<CheckPedido> listChecks = Arrays.asList(
     		CheckPedido.consultarBolsa, 
     		CheckPedido.consultarPedido);
         DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
-        PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, dFTest);
+        PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
     }
 }

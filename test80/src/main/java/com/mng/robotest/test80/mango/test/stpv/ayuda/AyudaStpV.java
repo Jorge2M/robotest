@@ -6,7 +6,6 @@ import com.mng.testmaker.utils.State;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.test.pageobject.ayuda.PageAyuda;
 import com.mng.robotest.test80.mango.test.pageobject.ayuda.PageAyuda.StateApartado;
-import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions;
 
 import org.json.simple.JSONArray;
@@ -16,9 +15,8 @@ import java.util.ArrayList;
 
 public class AyudaStpV {
 	
-    public static void selectTypeValidaciones (Channel channel) throws Exception {
+    public static void selectTypeValidaciones (Channel channel, WebDriver driver) throws Exception {
         ArrayList<String> sections = PageAyuda.getKeysFromJSON(PageAyuda.getFileJSON());
-        WebDriver driver = TestMaker.getDriverTestCase();
         for(String section : sections){
              if (section.equals("Buscar una tienda") && channel!=Channel.movil_web) {
                 helpToBuscarTienda(section, driver);

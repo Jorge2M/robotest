@@ -3,19 +3,13 @@ package com.mng.robotest.test80.mango.test.appshop;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.lang.reflect.Method;
-import org.testng.ITestContext;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.DataFmwkTest;
-import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.mango.*;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.otras.Channel;
-import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.conftestmaker.Utils;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
@@ -34,19 +28,20 @@ import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMisComprasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMisDatosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageSuscripcionesStpV;
 
-public class MiCuenta extends GestorWebDriver {
-    Pais españa = null;
-    IdiomaPais castellano = null;
-    String baseUrl;
-    boolean acceptNextAlert = true;
-    StringBuffer verificationErrors = new StringBuffer();
-    private String index_fact = "";
+public class MiCuenta {
+	
     public int prioridad;
-    Pais paisFactory = null;
-    IdiomaPais idiomaFactory = null;
+	private InputParams inputParamsSuite = null; 
+    private String index_fact = "";
+    private Pais paisFactory = null;
+    private IdiomaPais idiomaFactory = null;
+    
+    private final static Integer codEspanya = Integer.valueOf(1);
+    private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
+    private final static Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
+    private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
             
-    public MiCuenta() {
-    }         
+    public MiCuenta() {}        
     
     /**
      * Constructor para invocación desde @Factory
@@ -59,39 +54,28 @@ public class MiCuenta extends GestorWebDriver {
     }
       
     @BeforeMethod(groups={"Micuenta", "Canal:all_App:all", "SupportsFactoryCountrys"})
-    public void login(ITestContext context, Method method) throws Exception {
-        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
+    public void login() throws Exception {
+    	if (inputParamsSuite==null) {
+    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
+    	}
+    }     
+    
+    private DataCtxShop getCtxShForTest() throws Exception {
         DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom((AppEcom)inputData.getApp());
-        dCtxSh.setChannel(inputData.getChannel());
-        dCtxSh.urlAcceso = inputData.getUrlBase();
+        dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+        dCtxSh.setChannel(inputParamsSuite.getChannel());
+        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 
         //Si el acceso es normal (no es desde una @Factory) utilizaremos el España/Castellano
         if (this.paisFactory==null) {
-	        //Si no existe, obtenemos el país España
-	        if (this.españa==null) {
-	            Integer codEspanya = Integer.valueOf(1);
-	            List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
-	            this.españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
-	            this.castellano = this.españa.getListIdiomas().get(0);
-	        }
-	        
-	        dCtxSh.pais = this.españa;
-	        dCtxSh.idioma = this.castellano;
+	        dCtxSh.pais = españa;
+	        dCtxSh.idioma = castellano;
 	    } else {
             dCtxSh.pais = this.paisFactory;
-            dCtxSh.idioma = this.idiomaFactory;        	
+            dCtxSh.idioma = this.idiomaFactory;
         }
-        
-        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), this.index_fact, dCtxSh, context, method);
+        return dCtxSh;
     }
-
-    @SuppressWarnings("unused")
-    @AfterMethod (groups={"Micuenta", "Canal:all_App:all", "SupportsFactoryCountrys"}, alwaysRun = true)
-    public void logout(ITestContext context, Method method) throws Exception {
-        WebDriver driver = TestCaseData.getWebDriver();
-        super.quitWebDriver(driver, context);
-    }       
 
     @Test (
         groups={"Canal:desktop_App:shop,outlet", "Micuenta", "CI"}, alwaysRun=true, 
@@ -99,23 +83,24 @@ public class MiCuenta extends GestorWebDriver {
     @Parameters({"userConDevolucionPeroSoloEnPRO", "passwordUserConDevolucion"})
     public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion) 
     throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
+    	WebDriver driver = TestMaker.getDriverTestCase();
+    	TestMaker.getTestCase().setRefineDataName(index_fact);
+        DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userConnected = userConDevolucionPeroNoEnPRO;
         dCtxSh.passwordUser = passwordUserConDevolucion;
             
-        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest.driver);
+        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
         dCtxSh.userRegistered = false;
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, dFTest.driver);
+        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
         dCtxSh.userRegistered = true;
-        AccesoStpV.identificacionEnMango(dCtxSh, dFTest.driver);     
+        AccesoStpV.identificacionEnMango(dCtxSh, driver);
         
-        PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
         pageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected);                
-        String nombreActual = PageMisDatosStpV.modificaNombreYGuarda(dFTest);
+        String nombreActual = PageMisDatosStpV.modificaNombreYGuarda(driver);
         pageMiCuentaStpV.goToMisDatos(dCtxSh.userConnected);
-        PageMisDatosStpV.validaContenidoNombre(nombreActual, dFTest.driver);
+        PageMisDatosStpV.validaContenidoNombre(nombreActual, driver);
         if (dCtxSh.appE==AppEcom.shop) {
         	pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);
         } else {
@@ -125,10 +110,10 @@ public class MiCuenta extends GestorWebDriver {
         pageMiCuentaStpV.goToSuscripciones();
         ArrayList<idNewsletters> listNewsletters = new ArrayList<>();
         listNewsletters.add(idNewsletters.she);
-        PageSuscripcionesStpV.selectNewslettersAndGuarda(listNewsletters, dFTest);
+        PageSuscripcionesStpV.selectNewslettersAndGuarda(listNewsletters, driver);
         if (dCtxSh.appE!=AppEcom.outlet) {
         	pageMiCuentaStpV.goToDevoluciones();
-            PageDevolucionesStpV.solicitarRegogidaGratuitaADomicilio(dFTest);
+            PageDevolucionesStpV.solicitarRegogidaGratuitaADomicilio(driver);
             pageMiCuentaStpV.goToReembolsos();
         }
     }
@@ -143,20 +128,21 @@ public class MiCuenta extends GestorWebDriver {
     public void MIC002_CheckConsultaMisCompras(
     		String userWithOnlinePurchases, String userWithStorePurchases, 
     		String passUserWithOnlinePurchases, String passUserWithStorePurchases) throws Exception {
-    	DataFmwkTest dFTest = TestCaseData.getdFTest();
-        DataCtxShop dCtxSh = (DataCtxShop)TestCaseData.getData(Constantes.idCtxSh);
+    	TestMaker.getTestCase().setRefineDataName(this.index_fact);
+    	WebDriver driver = TestMaker.getDriverTestCase();
+        DataCtxShop dCtxSh = getCtxShForTest();
         
         //Test Compras Online
         dCtxSh.userConnected = userWithOnlinePurchases;
         dCtxSh.passwordUser = passUserWithOnlinePurchases;
         dCtxSh.userRegistered = true;
-        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, dFTest.driver);
-        AccesoStpV.identificacionEnMango(dCtxSh, dFTest.driver);
+        PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
+        AccesoStpV.identificacionEnMango(dCtxSh, driver);
         
-        PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        PageMiCuentaStpV pageMiCuentaStpV = PageMiCuentaStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
         pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);
         
-        PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(dCtxSh.channel, dFTest.driver);
+        PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(dCtxSh.channel, driver);
         pageMisComprasStpV.selectBlock(TypeCompra.Online, true);
         pageMisComprasStpV.selectCompraOnline(1, dCtxSh.pais.getCodigo_pais());
         if (dCtxSh.channel == Channel.desktop) {
@@ -170,9 +156,9 @@ public class MiCuenta extends GestorWebDriver {
         dCtxSh.userConnected = userWithStorePurchases;
         dCtxSh.passwordUser = passUserWithStorePurchases;
         
-        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, dFTest.driver);
+        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
         userMenusStpV.logoff();
-        AccesoStpV.identificacionEnMango(dCtxSh, dFTest.driver);
+        AccesoStpV.identificacionEnMango(dCtxSh, driver);
         pageMiCuentaStpV.goToMisComprasFromMenu(dCtxSh.pais);
         pageMisComprasStpV.selectBlock(TypeCompra.Tienda, true);
         pageMisComprasStpV.selectCompraTienda(1);

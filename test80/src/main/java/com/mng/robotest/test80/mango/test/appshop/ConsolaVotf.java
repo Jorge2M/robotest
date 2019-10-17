@@ -1,53 +1,35 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import java.lang.reflect.Method;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestContext;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.mng.testmaker.utils.TestCaseData;
-import com.mng.testmaker.utils.controlTest.mango.GestorWebDriver;
-import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.InputParams;
-import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.conftestmaker.Utils;
-import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.stpv.votfcons.ConsolaVotfStpV;
 
-public class ConsolaVotf extends GestorWebDriver {
+public class ConsolaVotf {
 
-    String prodDisponible1 = "";
+	private InputParams inputParamsSuite = null;
+    private String prodDisponible1 = "";
     
     @BeforeMethod(groups={"Canal:desktop_App:votf"})
     @Parameters({"prodDisponible1" })
-    public void login(String prodDisponible1I, ITestContext context, Method method) throws Exception {
-        InputParams inputData = (InputParams)TestCaseData.getInputDataTestMaker(context);
-        DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom(AppEcom.votf);
-        dCtxSh.setChannel(Channel.desktop);
-        dCtxSh.urlAcceso = inputData.getUrlBase();
-        
-        Utils.storeDataShopForTestMaker(inputData.getWebDriverType(), "", dCtxSh, context, method);
+    public void login(String prodDisponible1I) throws Exception {
+    	if (inputParamsSuite==null) {
+    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
+    	}
         this.prodDisponible1 = prodDisponible1I;
-    }
-
-    @SuppressWarnings("unused")
-    @AfterMethod(groups={"Canal:desktop_App:votf"}, alwaysRun = true)
-    public void logout(final ITestContext context, final Method method) throws Exception {
-        WebDriver driver = TestCaseData.getWebDriver();
-        super.quitWebDriver(driver, context);
     }
 
     @Test (
     	groups={"Canal:desktop_App:votf"},
     	description="[PRE] Generar pedido mediante la consola de VOTF")
-    public void VOFT001_GenerarPedido(final ITestContext context) throws Exception {
-		WebDriver driver = TestCaseData.getWebDriver();
+    public void VOFT001_GenerarPedido() throws Exception {
+    	WebDriver driver = TestMaker.getDriverTestCase();
     	
-		String paginaIniVOTF = (String) context.getAttribute("appPath");
+		String paginaIniVOTF = inputParamsSuite.getUrlBase();
 		ConsolaVotfStpV.accesoPagInicial(paginaIniVOTF, driver);
 		ConsolaVotfStpV.selectEntornoTestAndCons("Preproducción", driver);
 		ConsolaVotfStpV.inputArticleAndTiendaDisp(this.prodDisponible1, "00011459", driver);

@@ -92,4 +92,8 @@ public class SuiteTestMaker extends XmlSuite {
         	getName() + File.separator + 
         	getIdExecution());
 	}
+	
+	public String getPathReportHtml() {
+		return (getPathDirectory() + File.separator + ConstantesTestMaker.nameReportHTMLTSuite);
+	}
 }

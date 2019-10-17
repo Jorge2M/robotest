@@ -64,7 +64,7 @@ public class GenerateReports extends EmailableReporter {
         pintaTestRunsSuite(buildReport, suite);
         pintaCierreHTML(buildReport);
         buildReport.replaceTagWithTree("@VALUES_TREE");
-        createFileReportHTML(buildReport);
+        createFileReportHTML(suite, buildReport);
     }
 
     /**
@@ -372,10 +372,9 @@ public class GenerateReports extends EmailableReporter {
             "</html>\n");
     }    
     
-    public void createFileReportHTML(BuildingReport buildReport) {
-        String file = 
-        	buildReport.getOutputDirectory() + File.separator + ConstantesTestMaker.nameReportHTMLTSuite;
-        try (Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF8"))) {
+    public void createFileReportHTML(SuiteTestMaker suite, BuildingReport buildReport) {
+        String fileReport = suite.getPathReportHtml();;
+        try (Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileReport), "UTF8"))) {
             out.write(buildReport.getReportHTML());
             out.close();
         } 
@@ -432,10 +431,6 @@ public class GenerateReports extends EmailableReporter {
             } else {
                 this.valuesTree = this.valuesTree + "," + value;
             }
-        }
-        
-        public String getOutputDirectory () {
-            return this.outputDirectory;
         }
 
         public int getCountRows() {

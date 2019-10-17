@@ -77,6 +77,10 @@ public class TestRunTestMaker extends XmlTest {
     	return storerErrorStep;
     }
     
+    public void setStorerErrorStep(StorerErrorStep storerErrorStep) {
+    	this.storerErrorStep = storerErrorStep;
+    }
+    
     private void setTestRunOutputDirectory(String outputDirectory) {
         TestRunner runner = (TestRunner)testNgContext;
         runner.setOutputDirectory(outputDirectory);  

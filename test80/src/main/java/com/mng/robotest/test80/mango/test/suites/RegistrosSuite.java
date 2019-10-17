@@ -9,6 +9,7 @@ import org.testng.xml.XmlSuite.ParallelMode;
 import com.mng.robotest.test80.InputParams;
 import com.mng.testmaker.domain.SuiteMaker;
 import com.mng.testmaker.domain.TestRunMaker;
+import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
 import com.mng.robotest.test80.mango.test.factoryes.ListRegistrosXPais;
 
 public class RegistrosSuite extends SuiteMaker {
@@ -32,7 +33,8 @@ public class RegistrosSuite extends SuiteMaker {
     public RegistrosSuite(InputParams inputParams) {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
-    	TestRunMaker testRun = TestRunMaker.ofClass(inputParams.getSuiteName(), ListRegistrosXPais.class);
+    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), ListRegistrosXPais.class);
+    	testRun.setStorerErrorStep(new StorerErrorDataStepValidationMango());
     	testRun.addGroups(getSpecificGroups());
     	addTestRun(testRun);
     	setParallelMode(ParallelMode.METHODS);
