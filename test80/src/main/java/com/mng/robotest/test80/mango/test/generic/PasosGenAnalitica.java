@@ -44,7 +44,7 @@ public class PasosGenAnalitica {
     
     public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, EnumSet<Constantes.AnalyticsVal> analyticSet, WebDriver driver) 
     throws Exception {
-        validaHTTPAnalytics(app, lineaId, null/*DataProcessPago*/, analyticSet, driver);
+        validaHTTPAnalytics(app, lineaId, null, analyticSet, driver);
     }
     
     public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DataPedido dataPedido, EnumSet<Constantes.AnalyticsVal> analyticSet, WebDriver driver) 

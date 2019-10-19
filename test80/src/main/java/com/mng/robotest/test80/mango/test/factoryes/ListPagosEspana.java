@@ -2,7 +2,9 @@ package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
 
+import org.testng.ITestContext;
 import org.testng.annotations.*;
+import com.mng.testmaker.domain.SuiteTestMaker;
 
 import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.service.TestMaker;
@@ -32,18 +34,18 @@ public class ListPagosEspana {
         description=
     		"Factoría que incluye varios tests por cada uno de los pagos de España " + 
     		"variando los flags de usuario registrado, empleado y métodos de envío")
-    public Object[] COM010_PagoFactory() throws Exception {
+    public Object[] COM010_PagoFactory(ITestContext ctx) throws Exception {
         ArrayList<Object> listTests = new ArrayList<>(); 
-        InputParamsTestMaker inputData = TestMaker.getInputParamsSuite();
+        InputParamsTestMaker inputData = TestMaker.getInputParamsSuite(ctx);
         AppEcom appE = (AppEcom)inputData.getApp();
         Channel channel = inputData.getChannel();
         try {
         	getDataCountrys();
         	if (appE!=AppEcom.votf) {
-        		createTestPagosEspana(listTests, appE, channel);
-        		createTestPagosFrancia(listTests, appE, channel);
+        		createTestPagosEspana(listTests, appE, channel, ctx);
+        		createTestPagosFrancia(listTests, appE, channel, ctx);
         	} else {
-        		createTestPagosVotf(listTests, appE, channel);
+        		createTestPagosVotf(listTests, appE, channel, ctx);
         	}
         }
         catch (Throwable e) {
@@ -64,13 +66,13 @@ public class ListPagosEspana {
         this.frances = francia.getListIdiomas().get(0);
     }
     
-    private void createTestPagosEspana(ArrayList<Object> listTests, AppEcom appE, Channel channel) {
+    private void createTestPagosEspana(ArrayList<Object> listTests, AppEcom appE, Channel channel, ITestContext ctx) {
         //Crearemos 3 tests para el pago VISA y 1 para los restantes 
         int prioridad = 1;
         List<Pago> listPagosToTest = espana.getListPagosTest(appE, false/*isEmpl*/);
         boolean usrRegIntermitente = true;
         for (Pago pago : listPagosToTest) {
-        	if (pago.isNeededTestPasarelaDependingFilter(channel)) {
+        	if (pago.isNeededTestPasarelaDependingFilter(channel, ctx)) {
 	        	if (pago.getTestpago()!=null && "s".compareTo(pago.getTestpago())==0) {
 		        	if ("VISA".compareTo(pago.getNombre())==0) {
 		        		createTestPago(listTests, espana, castellano, pago, appE, channel, !usrReg, !empleado, testVale, manyArticles, !anulPedido, prioridad);
@@ -87,11 +89,11 @@ public class ListPagosEspana {
         }    	
     }
     
-    private void createTestPagosFrancia(ArrayList<Object> listTests, AppEcom appE, Channel channel) {
+    private void createTestPagosFrancia(ArrayList<Object> listTests, AppEcom appE, Channel channel, ITestContext ctx) {
         //Creamos sólo 1 test para el pago VISA-Francia
-        List<Pago> listPagosToTest = francia.getListPagosTest(appE, false/*isEmpl*/);
+        List<Pago> listPagosToTest = francia.getListPagosTest(appE, false);
         for (Pago pago : listPagosToTest) {
-        	if (pago.isNeededTestPasarelaDependingFilter(channel)) {
+        	if (pago.isNeededTestPasarelaDependingFilter(channel, ctx)) {
 	        	if (pago.getTestpago()!=null && "s".compareTo(pago.getTestpago())==0) {
 	        		if ("VISA".compareTo(pago.getNombre())==0) {
 	        			createTestPago(listTests, francia, frances, pago, appE, channel, !usrReg, !empleado, !testVale, !twoArticles, anulPedido, 1);
@@ -102,10 +104,10 @@ public class ListPagosEspana {
         }    	
     }
     
-    private void createTestPagosVotf(ArrayList<Object> listTests, AppEcom appE, Channel channel) {
+    private void createTestPagosVotf(ArrayList<Object> listTests, AppEcom appE, Channel channel, ITestContext ctx) {
         List<Pago> listPagosToTest = espana.getListPagosTest(appE, false/*isEmpl*/);
         for (Pago pago : listPagosToTest) {
-        	if (pago.isNeededTestPasarelaDependingFilter(channel)) {
+        	if (pago.isNeededTestPasarelaDependingFilter(channel, ctx)) {
 	        	if (pago.getTestpago()!=null && "s".compareTo(pago.getTestpago())==0) {
         			createTestPago(listTests, espana, castellano, pago, appE, channel, !usrReg, !empleado, !testVale, twoArticles, !anulPedido, 1);
         			break;

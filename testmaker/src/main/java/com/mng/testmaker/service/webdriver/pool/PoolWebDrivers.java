@@ -38,7 +38,7 @@ public class PoolWebDrivers {
     }   
     
     public void quitWebDriver(WebDriver driver, TestRunTestMaker testRun) {
-    	InputParamsTestMaker inputData = testRun.getSuiteParent().getInputData();
+    	InputParamsTestMaker inputData = testRun.getSuiteParent().getInputParams();
         boolean netAnalysis = inputData.isNetAnalysis();
     	if (netAnalysis) {
         	NetTrafficMng.stopNetTrafficThread();
@@ -65,7 +65,7 @@ public class PoolWebDrivers {
     
     private WebDriver createAndStoreNewWebDriver (
     		WebDriverType webDriverType, Channel channel, TestRunTestMaker testRun, String moreDataWdrv) {
-        boolean netAnalysis = testRun.getSuiteParent().getInputData().isNetAnalysis();
+        boolean netAnalysis = testRun.getSuiteParent().getInputParams().isNetAnalysis();
 		WebDriver driver = 
 			FactoryWebdriverMaker.make(webDriverType, testRun)
 				.setChannel(channel)

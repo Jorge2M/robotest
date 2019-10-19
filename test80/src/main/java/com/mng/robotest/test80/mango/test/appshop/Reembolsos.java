@@ -41,8 +41,6 @@ import org.openqa.selenium.WebDriver;
  */
 
 public class Reembolsos {
-    
-	private InputParams inputParamsSuite = null; 
 	
     //TODO mientras que tengamos problemas con el buscador en Arabia probaremos contra España
     private final static Integer espanaCod = Integer.valueOf(1);
@@ -50,17 +48,9 @@ public class Reembolsos {
     private final static Pais arabia = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
     private final static IdiomaPais arabia_arabe = arabia.getListIdiomas().get(0);
     
-    private DataCtxShop dCtxSh;
-    
-    @BeforeMethod (groups={"Otras", "Canal:all_App:all"})
-    public void login() throws Exception {
-    	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
-    	}
-    }	
-    
     private DataCtxShop getCtxShForTest() throws Exception {
-        dCtxSh = new DataCtxShop();
+    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
+        DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());
         dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();

@@ -108,7 +108,7 @@ public class WebDriverMngUtils {
      */
     public static ResultadoErrores imagesBroken(WebDriver driver, Channel channel, int maxErrors) throws Exception {
         int maxImages = 5000;
-        ITestContext ctx = TestMaker.getTestRun().getTestNgContext();
+        ITestContext ctx = TestMaker.getTestCase().getTestRunParent().getTestNgContext();
         		
         //En el caso de móvil sólo procesaremos 200 imágenes para paliar el caso en el que el script se ejecuta contra un dispositivo físico y el rendimiento es limitado
         if (channel==Channel.movil_web) {

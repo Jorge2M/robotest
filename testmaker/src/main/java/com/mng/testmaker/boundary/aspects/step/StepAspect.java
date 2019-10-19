@@ -13,6 +13,7 @@ import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.TestCaseTestMaker;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.State;
+import com.mng.testmaker.utils.controlTest.StoreStepEvidencies;
 
 
 @Aspect
@@ -50,9 +51,10 @@ public class StepAspect {
     	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
     	TestMaker.skipTestsIfSuiteStopped(testCase.getSuiteParent());
     	StepTestMaker currentStep = testCase.getCurrentStep();
-    	currentStep.setResultSteps(State.Ok);
+    	currentStep.setResultSteps(State.Nok);
     	currentStep.setExcepExists(true); 
     	currentStep.setHoraFin(new Date(System.currentTimeMillis()));
+    	StoreStepEvidencies.storeStepEvidencies(currentStep);
     }
     
     @AfterReturning(
@@ -63,5 +65,6 @@ public class StepAspect {
     	StepTestMaker currentStep = testCase.getCurrentStep();
     	currentStep.setExcepExists(false); 
     	currentStep.setHoraFin(new Date(System.currentTimeMillis()));
+    	StoreStepEvidencies.storeStepEvidencies(currentStep);
     }
 }

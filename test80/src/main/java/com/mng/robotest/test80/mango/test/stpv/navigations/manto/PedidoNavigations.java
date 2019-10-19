@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.testmaker.domain.TestCaseTestMaker;
+import com.mng.testmaker.domain.TestRunTestMaker;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.testmaker.utils.otras.TypeAccessFmwk;
@@ -34,10 +36,12 @@ public class PedidoNavigations {
     public static void testPedidosEnManto(DataCheckPedidos dataCheckPedidos, AppEcom appE, WebDriver driver) throws Exception {
     	//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
     	if (appE!=AppEcom.votf) {  
+			TestCaseTestMaker testCase = TestMaker.getTestCase();
+			TestRunTestMaker testRun = testCase.getTestRunParent();
 	        DataMantoAccess dMantoAcc = new DataMantoAccess();
-	        dMantoAcc.urlManto = TestMaker.getParamTestRun(Constantes.paramUrlmanto);
-	        dMantoAcc.userManto = TestMaker.getParamTestRun(Constantes.paramUsrmanto);
-	        dMantoAcc.passManto = TestMaker.getParamTestRun(Constantes.paramPasmanto);
+	        dMantoAcc.urlManto = testRun.getParameter(Constantes.paramUrlmanto);
+	        dMantoAcc.userManto = testRun.getParameter(Constantes.paramUsrmanto);
+	        dMantoAcc.passManto = testRun.getParameter(Constantes.paramPasmanto);
 	        dMantoAcc.appE = appE;
 	        testPedidosEnManto(dMantoAcc, dataCheckPedidos, driver);
     	}
@@ -45,7 +49,7 @@ public class PedidoNavigations {
     
     private static void testPedidosEnManto(DataMantoAccess dMantoAcc, DataCheckPedidos dataCheckPedidos, WebDriver driver) 
     throws Exception {
-        TypeAccessFmwk typeAccess = ((InputParams)TestMaker.getInputParamsSuite()).getTypeAccess();
+        TypeAccessFmwk typeAccess = ((InputParams)TestMaker.getTestCase().getInputParamsSuite()).getTypeAccess();
         if (dataCheckPedidos.areChecksToExecute() && typeAccess!=TypeAccessFmwk.Bat) {
             PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
             PedidoNavigations.validacionListPedidosStpVs(dataCheckPedidos, dMantoAcc.appE, driver);

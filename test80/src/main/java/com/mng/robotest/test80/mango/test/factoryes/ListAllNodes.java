@@ -1,6 +1,8 @@
 package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
+
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
@@ -20,9 +22,10 @@ public class ListAllNodes {
     @SuppressWarnings("unused")
     @Factory
     @Parameters({"url-status", "url-errorpage", "testLinksPie"})
-    public Object[] createInstances(String urlStatus, String urlErrorpage, String testLinksPie) throws Exception {
+    public Object[] createInstances(String urlStatus, String urlErrorpage, String testLinksPie, ITestContext ctxTestRun) 
+    throws Exception {
         ArrayList<TestNodos> listTests = new ArrayList<TestNodos>();
-    	InputParamsTestMaker inputData = TestMaker.getInputParamsSuite();
+    	InputParamsTestMaker inputData = TestMaker.getInputParamsSuite(ctxTestRun);
         AppEcom appEcom = (AppEcom)inputData.getApp();
         try {
             int accesos = 0;
@@ -37,7 +40,7 @@ public class ListAllNodes {
             }
 
             LinkedHashMap<String, NodoStatus> mapNodosTotal = new LinkedHashMap<>();
-            addNodosToMap(mapNodosTotal, accesos, urlErrorpage, appEcom);
+            addNodosToMap(mapNodosTotal, accesos, urlErrorpage, appEcom, ctxTestRun);
 	        
             boolean testLinksPieFlag = false;
             if (testLinksPie.compareTo("true")==0) {
@@ -77,9 +80,10 @@ public class ListAllNodes {
      * Obtiene la lista de nodos (ip+cookies) iterando contra la página de errorPage.faces
      * @param iteraciones número de iteraciones en busca de nuevos nodos
      */
-    private void addNodosToMap (HashMap<String, NodoStatus> mapNodos, int iteraciones, String urlErrorpage, AppEcom appE) 
-    throws Exception { 
-    	TestRunTestMaker testRun = TestMaker.getTestRun();
+    private void addNodosToMap (
+    		HashMap<String, NodoStatus> mapNodos, int iteraciones, String urlErrorpage, 
+    		AppEcom appE, ITestContext ctxTestRun) throws Exception { 
+    	TestRunTestMaker testRun = TestMaker.getTestRun(ctxTestRun);
     	WebDriver driver = 
     		FactoryWebdriverMaker.make(WebDriverType.chrome, testRun)
     			.setChannel(Channel.desktop)

@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
 
 import com.mng.robotest.test80.InputParams;
 import com.mng.testmaker.boundary.aspects.step.Step;
@@ -364,7 +365,8 @@ public class PagoNavigationsStpV {
         List<Pago> listPagos = dCtxSh.pais.getListPagosTest(dCtxSh.appE, dCtxPago.getFTCkout().isEmpl);
         for (int i=0; i<listPagos.size(); i++) {
             Pago pago = listPagos.get(i);
-            if (pago.isNeededTestPasarelaDependingFilter(dCtxSh.channel)) {
+            ITestContext ctx = TestMaker.getTestCase().getTestRunContext();
+            if (pago.isNeededTestPasarelaDependingFilter(dCtxSh.channel, ctx)) {
                 dCtxPago.getDataPedido().setPago(pago);
                 String urlPagChekoutToReturn = driver.getCurrentUrl();
                 if (dCtxPago.getFTCkout().validaPagos) {
@@ -418,7 +420,7 @@ public class PagoNavigationsStpV {
     public static boolean iCanExecPago(PagoStpV pagoStpV, AppEcom appE, WebDriver driver) {
         boolean validaPagos = pagoStpV.dCtxPago.getFTCkout().validaPagos;
         Pago pago = pagoStpV.dCtxPago.getDataPedido().getPago();
-        TypeAccessFmwk typeAccess = ((InputParams)TestMaker.getInputParamsSuite()).getTypeAccess();
+        TypeAccessFmwk typeAccess = ((InputParams)TestMaker.getTestCase().getInputParamsSuite()).getTypeAccess();
         return (
             //No estamos en el entorno productivo
             !UtilsMangoTest.isEntornoPRO(appE, driver) &&

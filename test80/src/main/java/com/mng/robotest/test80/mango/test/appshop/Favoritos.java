@@ -38,7 +38,6 @@ import org.openqa.selenium.WebDriver;
 @SuppressWarnings({ "static-access" })
 public class Favoritos {
 
-	private InputParams inputParamsSuite = null;
     public int prioridad;
     private String index_fact = "";
     private Pais paisFactory = null;
@@ -58,17 +57,10 @@ public class Favoritos {
         this.idiomaFactory = idioma;
         this.index_fact = pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + "-" + idioma.getCodigo().getLiteral();
         this.prioridad = prioridad;
-    }
-      
-    @BeforeMethod(groups={"Favoritos", "Canal:all_App:shop", "SupportsFactoryCountrys"})
-    public void login() 
-    throws Exception {
-    	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
-    	}
-    }   
+    } 
     
     private DataCtxShop getCtxShForTest() throws Exception {
+    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());

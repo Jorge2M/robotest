@@ -17,9 +17,9 @@ public class ListRebajasXPais {
     @SuppressWarnings("unused")
     @Factory
     @Parameters({"countrys", "lineas"})
-    public Object[] createInstances(String listaPaisesStr, String lineas, ITestContext ctx) throws Exception {
+    public Object[] createInstances(String listaPaisesStr, String lineas, ITestContext ctxTestRun) throws Exception {
         ArrayList<Object> listTests = new ArrayList<>();
-        InputParamsTestMaker inputData = TestMaker.getInputParamsSuite();
+        InputParamsTestMaker inputData = TestMaker.getInputParamsSuite(ctxTestRun);
         AppEcom appE = (AppEcom)inputData.getApp();
         try {
             List<Pais> listCountrys = Utilidades.getListCountrysFiltered(listaPaisesStr);

@@ -48,8 +48,6 @@ import org.openqa.selenium.WebDriver;
 
 public class Compra {
 
-	private InputParams inputParamsSuite = null;
-	
     private final static Integer codEspanya = Integer.valueOf(1);
     private final static Integer codAndorra = Integer.valueOf(43);
     private final static Integer codSuecia = Integer.valueOf(30);
@@ -65,15 +63,9 @@ public class Compra {
     private final static IdiomaPais frances = francia.getListIdiomas().get(0);
 	
     public Compra() {}	  
-	  
-    @BeforeMethod (groups={"Compra", "Canal:all_App:all", "shop-movil-web"})
-    public void login() throws Exception {
-    	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
-    	}
-    }	
     
     private DataCtxShop getCtxShForTest() throws Exception {
+    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());
@@ -233,6 +225,7 @@ public class Compra {
 	    
         //No permitiremos la ejecución diaria de este tipo de checkout porque implica la ejecución 
         //de un registro de usuario con el nuevo email introducido 
+        InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
         if (inputParamsSuite.getTypeAccess()!=TypeAccessFmwk.Bat) {
             //Hasta página de Checkout
             FlagsTestCkout FTCkout = new FlagsTestCkout();

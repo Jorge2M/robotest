@@ -25,7 +25,7 @@ public class StoreStepEvidencies {
         	return false;
         case IfProblem:
         	if (step.getResultSteps()!=State.Ok &&
-        	    !step.isAvoidEvidenciesInAllValidations()) {
+        	    !step.isAllValidationsWithAvoidEvidences()) {
         		return true;
         	}
         }

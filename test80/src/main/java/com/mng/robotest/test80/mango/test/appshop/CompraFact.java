@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeMethod; 
 import org.testng.annotations.Test;
 
 import com.mng.testmaker.service.TestMaker;
@@ -34,7 +33,6 @@ import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 public class CompraFact {
 
     public int prioridad;
-	private InputParams inputParamsSuite = null;
     private String index_fact = "";
     private Pais paisFactory = null;
     private IdiomaPais idiomaFactory = null;
@@ -89,18 +87,10 @@ public class CompraFact {
 			index+="-anulPedido";
 		}
     	return index;
-    }
-    
-
-    
-    @BeforeMethod(groups={"CompraFact", "Canal:all_App:all", "SupportsFactoryCountrys"})
-    public void login() throws Exception {
-    	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
-    	}
-    }    
+    }   
     
     private DataCtxShop getCtxShForTest() throws Exception {
+    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());
@@ -128,6 +118,7 @@ public class CompraFact {
         //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, this.usrRegistrado, driver);
         //TestAB.activateTestABcheckoutMovilEnNPasos(0, dCtxSh, dFTest.driver);
+
         
         int maxArticlesAwayVale = 3;
         List<ArticleStock> listArticles = UtilsTestMango.getArticlesForTest(dCtxSh, maxArticlesAwayVale, this.testVale);

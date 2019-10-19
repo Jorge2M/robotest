@@ -5,7 +5,6 @@ import java.util.List;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -19,7 +18,6 @@ import com.mng.testmaker.service.TestMaker;
 
 public class PaisAplicaVale {
 
-	private InputParams inputParamsSuite = null; 
     private String index_fact;
     public int prioridad;
     private FlagsTestCkout fTCkoutIni;
@@ -48,14 +46,6 @@ public class PaisAplicaVale {
 	    		"(" + dCtxSh.vale.isValid() + "_" + dCtxSh.vale.getPorcDescuento() + "perc)";
 	    }
     }
-	  
-    @BeforeMethod (groups={"shop-movil-web", "Canal:all_App:all"})
-    public void login() throws Exception {
-    	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
-    	}
-    	this.dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
-    }
 	
     @Test (
     	groups={"Pagos", "shop-movil-web", "Canal:all_App:all"}, alwaysRun=true, 
@@ -64,6 +54,7 @@ public class PaisAplicaVale {
     	WebDriver driver = TestMaker.getDriverTestCase();
     	TestMaker.getTestCase().setRefineDataName(index_fact);
         dCtxSh.userRegistered = false;
+        dCtxSh.urlAcceso = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
         DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);
         FlagsTestCkout fTCkout = (FlagsTestCkout)fTCkoutIni.clone();
         fTCkout.emailExist = true; 

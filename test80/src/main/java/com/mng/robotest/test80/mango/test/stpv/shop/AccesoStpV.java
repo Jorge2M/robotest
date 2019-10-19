@@ -186,7 +186,7 @@ public class AccesoStpV {
     
     //Acceso a VOTF (identificación + selección idioma + HOME she)
     public static void accesoVOTFtoHOME(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-        String urlAcceso = TestMaker.getInputParamsSuite().getUrlBase();
+        String urlAcceso = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
         int numIdiomas = dCtxSh.pais.getListIdiomas().size();
         PageLoginVOTFStpV.goToAndLogin(urlAcceso, dCtxSh, driver);
         if (numIdiomas > 1) {

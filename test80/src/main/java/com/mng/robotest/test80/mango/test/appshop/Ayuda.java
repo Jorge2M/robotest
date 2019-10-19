@@ -13,26 +13,17 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.testmaker.service.TestMaker;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeMethod;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Ayuda {
-
-	private InputParams inputParamsSuite = null;
 	
     public Ayuda() {}
 
-    @BeforeMethod(groups = { "Ayuda", "Canal:all_App:shop", "Canal:desktop_App:outlet" })
-    public void login() throws Exception {
-    	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
-    	}
-    }
-
     private DataCtxShop getCtxShForTest() throws Exception {
+    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());

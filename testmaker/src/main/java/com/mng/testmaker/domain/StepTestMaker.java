@@ -119,7 +119,7 @@ public class StepTestMaker {
     }
     
     public void setSaveNettrafic(SaveWhen saveNettraffic) {
-        if (suiteParent.getInputData().isNetAnalysis()) {
+        if (suiteParent.getInputParams().isNetAnalysis()) {
         	this.saveNettraffic = saveNettraffic;
         	NetTrafficMng netTraffic = new NetTrafficMng();
         	netTraffic.resetAndStartNetTraffic();
@@ -174,7 +174,10 @@ public class StepTestMaker {
     	}
     } 
     
-    public boolean isAvoidEvidenciesInAllValidations() {
+    public boolean isAllValidationsWithAvoidEvidences() {
+    	if (listChecksResult==null || listChecksResult.isEmpty()) {
+    		return false;
+    	}
     	for (ChecksResult validation : listChecksResult) {
     		if (!validation.isAvoidEvidences()) {
     			return false;

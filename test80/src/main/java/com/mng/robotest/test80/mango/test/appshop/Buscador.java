@@ -19,20 +19,11 @@ import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV;
 import com.mng.testmaker.service.TestMaker;
 
 public class Buscador {
-
-	private InputParams inputParamsSuite = null;
-                    
+         
     public Buscador() {}      
-      
-    @BeforeMethod(groups={"Buscador", "Canal:all_App:all"})
-    public void login() 
-    throws Exception {
-    	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
-    	}
-    }  
     
     private DataCtxShop getCtxShForTest() throws Exception {
+    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());

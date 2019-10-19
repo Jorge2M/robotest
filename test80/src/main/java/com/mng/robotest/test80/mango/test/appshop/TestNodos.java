@@ -1,7 +1,5 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import org.testng.ITestContext;
-import java.lang.reflect.Method;
 import java.util.*;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
@@ -33,8 +31,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusDesktopStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 
 public class TestNodos {
-	
-	private InputParams inputParamsSuite = null;
     
     private final static Integer codEspanya = Integer.valueOf(1);
     private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
@@ -69,15 +65,9 @@ public class TestNodos {
 		this.urlErrorpage = urlErrorpage;
 		this.testLinksPie = testLinksPie;
     }	  
-	  
-    @BeforeMethod(groups={"Canal:desktop_App:all"})
-    public void login(ITestContext context, Method method) throws Exception {
-    	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
-    	}
-    }
     
     private DataCtxShop getCtxShForTest() throws Exception {
+    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite(); 
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setChannel(inputParamsSuite.getChannel());
         dCtxSh.setAppEcom(this.nodo.getAppEcom());

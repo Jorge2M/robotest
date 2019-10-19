@@ -24,8 +24,6 @@ import org.openqa.selenium.WebDriver;
 
 public class Otras {
 
-	private InputParams inputParamsSuite = null; 
-
     private final static Integer codEspanya = Integer.valueOf(1);
     private final static Integer codFrancia = Integer.valueOf(11);
     private final static Integer codSuecia = Integer.valueOf(30);
@@ -44,15 +42,9 @@ public class Otras {
     private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
     private final static IdiomaPais francia_frances = francia.getListIdiomas().get(0);
     private final static IdiomaPais japones = japon.getListIdiomas().get(0);
-	
-    @BeforeMethod (groups={"Otras", "Canal:all_App:all"})
-    public void login() throws Exception {
-    	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
-    	}
-    }	
     
     private DataCtxShop getCtxShForTest() throws Exception {
+    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());
@@ -112,7 +104,7 @@ public class Otras {
     public void OTR004_cambioPaisURL() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
-        String urlBaseTest = inputParamsSuite.getUrlBase();
+        String urlBaseTest = dCtxSh.urlAcceso;
 
         //Definimos la lista de los 3 países que pueden estar asociados a la IP del usuario
         List<Pais> listPaisAsocIP = new ArrayList<>();
@@ -168,11 +160,10 @@ public class Otras {
     public void OTR005_accesoJapon() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
-        String urlBaseTest = inputParamsSuite.getUrlBase();
 
         dCtxSh.pais = japon;
         dCtxSh.idioma = japones;
-        PagePrehomeStpV.seleccionPaisIdioma(urlBaseTest, dCtxSh, driver);
+        PagePrehomeStpV.seleccionPaisIdioma(dCtxSh, driver);
         PagePrehomeStpV.entradaShopGivenPaisSeleccionado(japon, japones, dCtxSh.channel, driver);
         PageIniShopJaponStpV.validaPageIniJapon(2, driver);
     }	

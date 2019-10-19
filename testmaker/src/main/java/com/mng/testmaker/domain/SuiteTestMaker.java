@@ -32,7 +32,7 @@ public class SuiteTestMaker extends XmlSuite {
 		return idSuiteExecution;
 	}
 	
-	public InputParamsTestMaker getInputData() {
+	public InputParamsTestMaker getInputParams() {
 		return inputData;
 	}
 	

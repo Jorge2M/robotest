@@ -1,6 +1,8 @@
 package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
+
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -14,9 +16,9 @@ public class ListRegistrosXPais {
     @SuppressWarnings("unused")
     @Factory
     @Parameters({"countrys", "lineas"})
-    public Object[] createInstances(String listaPaisesStr, String lineas) throws Exception {
+    public Object[] createInstances(String listaPaisesStr, String lineas, ITestContext ctxTestRun) throws Exception {
         ArrayList<Object> listTests = new ArrayList<>();
-        AppEcom appE = (AppEcom)TestMaker.getInputParamsSuite().getApp();
+        AppEcom appE = (AppEcom)TestMaker.getInputParamsSuite(ctxTestRun).getApp();
         try {
 	    	List<Pais> listCountrys = Utilidades.getListCountrysFiltered(listaPaisesStr);
             int prioridad=0;

@@ -46,22 +46,15 @@ import java.util.List;
 @SuppressWarnings({"static-access"})
 public class GaleriaProducto {
 	
-	private InputParams inputParamsSuite = null; 
     private final static Integer codEspanya = Integer.valueOf(1);
     private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
     private final static Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
     private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
         
     public GaleriaProducto() {}
-      
-    @BeforeMethod (groups={"GaleriaProducto", "Canal:all_App:all"})
-    public void login() throws Exception {
-    	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
-    	}
-    }  
     
     private DataCtxShop getCtxShForTest() throws Exception {
+    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());

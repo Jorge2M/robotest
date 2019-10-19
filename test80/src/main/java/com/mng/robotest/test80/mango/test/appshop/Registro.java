@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.InputParams;
@@ -48,7 +47,6 @@ public class Registro {
     private final static Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
     private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
     
-	private InputParams inputParamsSuite = null;
     private String index_fact = "";
     public int prioridad;
     private Pais paisFactory = null;
@@ -64,15 +62,9 @@ public class Registro {
         this.index_fact = pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + "-" + idioma.getCodigo().getLiteral();
         this.prioridad = prioridad;
     }
-
-    @BeforeMethod(groups={"Registro", "Canal:all_App:all", "SupportsFactoryCountrys"})
-    public void login() throws Exception {
-    	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
-    	}
-    }
     
     private DataCtxShop getCtxShForTest() throws Exception {
+    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());
@@ -143,6 +135,7 @@ public class Registro {
     	DataCtxShop dCtxSh = getCtxShForTest();
     	WebDriver driver = TestMaker.getDriverTestCase();
     	TestMaker.getTestCase().setRefineDataName(index_fact);
+    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
         if (inputParamsSuite.getTypeAccess()==TypeAccessFmwk.Bat) {
             return;
         }
@@ -207,7 +200,7 @@ public class Registro {
     	DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userRegistered = false;
     	boolean clickPubli = false;
-            
+    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
         if (inputParamsSuite.getTypeAccess()==TypeAccessFmwk.Bat) {
             return; 
         }

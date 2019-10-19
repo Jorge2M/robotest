@@ -1,11 +1,12 @@
 package com.mng.robotest.test80.mango.test.appmanto;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.domain.TestCaseTestMaker;
+import com.mng.testmaker.domain.TestRunTestMaker;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -16,7 +17,7 @@ import com.mng.robotest.test80.mango.test.stpv.manto.PageSelTdaMantoStpV;
 
 public class Menus {
 
-	DataMantoAccess dMantoAcc;
+	DataMantoAccess dMantoAcc = null;
 	String cabeceraName = "";
 	String cabeceraNameNext = "";
 	int prioridad = 1;
@@ -32,15 +33,18 @@ public class Menus {
 	    this.prioridad = prioridad;
 	}
 
-	@BeforeMethod(groups={"Menus", "Canal:desktop_App:all"}, alwaysRun = true)
-	public void login() throws Exception {
-        InputParamsTestMaker inputParams = TestMaker.getInputParamsSuite();
-		this.dMantoAcc = new DataMantoAccess();
-		this.dMantoAcc.urlManto = inputParams.getUrlBase();
-		this.dMantoAcc.userManto = TestMaker.getParamTestRun(Constantes.paramUsrmanto);
-		this.dMantoAcc.passManto = TestMaker.getParamTestRun(Constantes.paramPasmanto);
-		this.dMantoAcc.channel = Channel.desktop;
-		this.dMantoAcc.appE = AppEcom.shop;
+	public void setDataMantoAccess() {
+		if (dMantoAcc == null) {
+			dMantoAcc = new DataMantoAccess();
+			TestCaseTestMaker testCase = TestMaker.getTestCase();
+			TestRunTestMaker testRun = testCase.getTestRunParent();
+	        InputParamsTestMaker inputParams = testCase.getInputParamsSuite();
+			dMantoAcc.urlManto = inputParams.getUrlBase();
+			dMantoAcc.userManto = testRun.getParameter(Constantes.paramUsrmanto);
+			dMantoAcc.passManto = testRun.getParameter(Constantes.paramPasmanto);
+			dMantoAcc.channel = Channel.desktop;
+			dMantoAcc.appE = AppEcom.shop;
+		}
 	}
 
 	@Test(

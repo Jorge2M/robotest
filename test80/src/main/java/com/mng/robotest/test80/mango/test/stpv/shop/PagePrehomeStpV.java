@@ -22,9 +22,9 @@ public class PagePrehomeStpV {
 	@Step (
 		description="Acceder a la página de inicio y seleccionar el país <b>#{dCtxSh.getNombrePais()}</b>",
         expected="Se selecciona el país/idioma correctamente")
-    public static void seleccionPaisIdioma(String urlAcceso, DataCtxShop dCtxSh, WebDriver driver) 
+    public static void seleccionPaisIdioma(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        PagePrehome.goToPagePrehome(urlAcceso, driver);
+        PagePrehome.goToPagePrehome(dCtxSh.urlAcceso, driver);
         PagePrehome.selecionPais(dCtxSh, driver);
         checkPaisSelected(dCtxSh, driver);
     }
@@ -70,8 +70,7 @@ public class PagePrehomeStpV {
         saveNettraffic=SaveWhen.Always)
     public static void seleccionPaisIdiomaAndEnter(DataCtxShop dCtxSh, boolean execValidacs, WebDriver driver) throws Exception {
     	PagePrehome.accesoShopViaPrehome(dCtxSh, driver);
-
-        //VALIDACIONES - PARA ANALYTICS (sólo para firefox y NetAnalysis)
+    	
         EnumSet<Constantes.AnalyticsVal> analyticSet = EnumSet.of(
             Constantes.AnalyticsVal.GoogleAnalytics,
             Constantes.AnalyticsVal.NetTraffic, 

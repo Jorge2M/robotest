@@ -52,11 +52,9 @@ public class RebajasJun2019 {
         this.lineasAprobar = lineasAprobar;
     }
 	  
-    @BeforeMethod (groups={"RebajasDic2019", "Canal:desktop_App:shop", "SupportsFactoryCountrys"})
-    public void login() throws Exception {
-    	TestMaker.getTestCase().setRefineDataName(index_fact);
+    public void setInputParamsSuite() {
     	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
+    		inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
     	}
     }
     
@@ -74,6 +72,8 @@ public class RebajasJun2019 {
     @Test (groups={"RebajasDic2019", "Canal:desktop_App:shop", "SupportsFactoryCountrys"}, 
     	   description="Validaciones específicas correspondientes a las Rebajas de Diciembre-2017")
     public void REB001_RebajasDic2019() throws Exception {
+    	setInputParamsSuite();
+    	TestMaker.getTestCase().setRefineDataName(index_fact);
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
         int numLineasPais = dCtxSh.pais.getShoponline().getNumLineasTiendas(dCtxSh.appE);

@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
 import com.mng.testmaker.service.TestMaker;
@@ -28,7 +29,8 @@ public class StorerErrorDataStepValidationMango implements StorerErrorStep {
      * Se realiza una captura de ./errorPage.faces pues allí se pueden encontrar los datos de la instancia
      */
     public static void capturaErrorPage(StepTestMaker step) throws Exception {
-    	WebDriverType webDriverType = TestMaker.getInputParamsSuite().getWebDriverType();
+    	InputParamsTestMaker inputParams = TestMaker.getTestCase().getInputParamsSuite();
+    	WebDriverType webDriverType = inputParams.getWebDriverType();
         if (webDriverType!=WebDriverType.browserstack) {
             //Cargamos la página errorPage en una pestaña aparte y nos posicionamos en ella
             //BrowserStack parece que no soporta abrir ventanas aparte

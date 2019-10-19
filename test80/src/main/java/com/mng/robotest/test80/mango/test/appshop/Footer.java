@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.InputParams;
@@ -26,22 +25,15 @@ import com.mng.testmaker.service.TestMaker;
  */
 public class Footer {
 
-	private InputParams inputParamsSuite = null;
     private final static Integer codEspanya = Integer.valueOf(1);
     private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
     private final static Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
     private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
 
     public Footer() {}
-
-    @BeforeMethod(groups = { "Footer", "Canal:all_App:shop", "Canal:desktop_App:outlet" })
-    public void login() throws Exception {
-    	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
-    	}
-    }
     
     private DataCtxShop getCtxShForTest() throws Exception {
+    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());

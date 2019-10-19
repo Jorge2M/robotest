@@ -1,6 +1,8 @@
 package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
+
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.testmaker.domain.InputParamsTestMaker;
@@ -19,11 +21,11 @@ public class LineasBannersFactory {
 	
     @Factory
     @Parameters({"countrys", "lineas"})
-    public Object[] createInstances(String countrysStr, String lineas) throws Exception {
+    public Object[] createInstances(String countrysStr, String lineas, ITestContext ctxTestRun) throws Exception {
         ArrayList<PaisIdioma> listTests = new ArrayList<>();
         ArrayList<String> listaPaises = new ArrayList<>();
         try {
-        	InputParamsTestMaker inputData = TestMaker.getInputParamsSuite();
+        	InputParamsTestMaker inputData = TestMaker.getInputParamsSuite(ctxTestRun);
         	AppEcom app = (AppEcom)inputData.getApp();
         	Channel channel = inputData.getChannel();
         	VersionPaisSuite version = VersionPaisSuite.valueOf(inputData.getVersionSuite());

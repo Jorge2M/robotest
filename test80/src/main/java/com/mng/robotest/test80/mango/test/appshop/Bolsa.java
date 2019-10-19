@@ -31,19 +31,11 @@ import com.mng.testmaker.service.TestMaker;
 import org.openqa.selenium.WebDriver;
 
 public class Bolsa {
-
-	private InputParams inputParamsSuite = null;
         
-    public Bolsa() {}         
-      
-    @BeforeMethod (groups={"Bolsa", "Canal:desktop_App:all"})
-    public void login() throws Exception {
-    	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
-    	}
-    }
-    
+    public Bolsa() {}
+
     private DataCtxShop getCtxShForTest() throws Exception {
+    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());
@@ -68,8 +60,7 @@ public class Bolsa {
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
         secMenusStpV.accesoMenuXRef(menuVestidos, dCtxSh);
         DataBag dataBag = GaleriaNavigationsStpV.selectArticleAvailableFromGaleria(dCtxSh, driver);
-                
-        //Hasta página de Checkout
+
         FlagsTestCkout FTCkout = new FlagsTestCkout();
         FTCkout.validaPasarelas = false;  
         FTCkout.validaPagos = false;
@@ -106,7 +97,6 @@ public class Bolsa {
         dCtxSh.userRegistered = true;
         DataBag dataBag = new DataBag();
         
-        //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
         AccesoStpV.accesoAplicacionEnVariosPasos(dCtxSh, driver);
         SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
         Menu1rstLevel menuVestidos = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));

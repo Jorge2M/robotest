@@ -24,9 +24,9 @@ public class ValesPaises {
     
     @Factory
     @Parameters({"countrys"})
-    public Object[] createInstances(String countrys, ITestContext ctx) throws Exception {
+    public Object[] createInstances(String countrys, ITestContext ctxTestRun) throws Exception {
     	List<Object> listTests = new ArrayList<>();
-    	InputParamsTestMaker inputData = TestMaker.getInputParamsSuite();
+    	InputParamsTestMaker inputData = TestMaker.getInputParamsSuite(ctxTestRun);
     	VersionValesSuite version = VersionValesSuite.valueOf(inputData.getVersionSuite());
         Calendar currDtCal = Calendar.getInstance();
         for (Campanya campanya : Campanya.values()) {

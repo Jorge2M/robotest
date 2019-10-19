@@ -1,6 +1,8 @@
 package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
+
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.testmaker.domain.InputParamsTestMaker;
@@ -21,10 +23,10 @@ public class ListPrecompraPaises {
 	@SuppressWarnings("unused")
 	@Parameters({"countrys"})
     @Factory
-	public Object[] createInstances(String countrys) throws Exception {
+	public Object[] createInstances(String countrys, ITestContext ctxTestRun) throws Exception {
 	    List<Object> listTests = new ArrayList<>();
 	    try {
-	    	InputParamsTestMaker inputData = TestMaker.getInputParamsSuite();
+	    	InputParamsTestMaker inputData = TestMaker.getInputParamsSuite(ctxTestRun);
 	    	VersionPagosSuite version = VersionPagosSuite.valueOf(inputData.getVersionSuite());
 	    	List<Pais> listCountrys = Utilidades.getListCountrysFiltered(countrys);
 	        int prioridad=0;

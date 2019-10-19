@@ -2,7 +2,6 @@ package com.mng.robotest.test80.mango.test.appshop;
 
 import java.net.URI;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.InputParams;
@@ -15,18 +14,10 @@ import com.mng.testmaker.service.TestMaker;
 
 public class SEO {
 
-	private InputParams inputParamsSuite = null;
-
     public SEO() {}
-
-    @BeforeMethod(groups = { "Otras", "Canal:all_App:all" })
-    public void login() throws Exception {
-    	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
-    	}
-    }
     
     private DataCtxShop getCtxShForTest() throws Exception {
+    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());
@@ -43,11 +34,10 @@ public class SEO {
         if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
             return;
         }
-        String urlBaseTest = inputParamsSuite.getUrlBase();
-        BrowserStpV.inputRobotsURLandValidate(urlBaseTest, dCtxSh.appE, driver);
+        BrowserStpV.inputRobotsURLandValidate(dCtxSh.urlAcceso, dCtxSh.appE, driver);
         
-        URI uriBase = new URI(urlBaseTest);
-        String urlSitemap = urlBaseTest.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
+        URI uriBase = new URI(dCtxSh.urlAcceso);
+        String urlSitemap = dCtxSh.urlAcceso.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
         BrowserStpV.inputSitemapURLandValidate(urlSitemap, driver);
     }
 }

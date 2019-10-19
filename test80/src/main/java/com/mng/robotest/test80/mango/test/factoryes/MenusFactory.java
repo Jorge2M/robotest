@@ -18,9 +18,9 @@ public class MenusFactory {
 	
     @Factory
     @Parameters({"countrys", "lineas"})
-    public Object[] createInstances(String countrysStr, String lineas, ITestContext ctx) throws Exception {
+    public Object[] createInstances(String countrysStr, String lineas, ITestContext ctxTestRun) throws Exception {
         ArrayList<PaisIdioma> listTests = new ArrayList<>();
-        InputParamsTestMaker inputData = TestMaker.getInputParamsSuite();
+        InputParamsTestMaker inputData = TestMaker.getInputParamsSuite(ctxTestRun);
         AppEcom app = (AppEcom)inputData.getApp();
         Channel channel = inputData.getChannel();
         VersionMenusPais version = VersionMenusPais.valueOf(inputData.getVersionSuite());

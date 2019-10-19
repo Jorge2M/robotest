@@ -41,7 +41,6 @@ import org.openqa.selenium.WebDriver;
 public class PaisIdioma {
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
-	private InputParams inputParamsSuite = null; 
     private String index_fact = "";
     private List<Linea> linesToTest = null;
     public int prioridad;
@@ -70,11 +69,7 @@ public class PaisIdioma {
         this.prioridad = prioridad;
     }
 	  
-    @BeforeMethod(groups={"Lineas", "Canal:all_App:all"}, alwaysRun = true)
-    public void login() throws Exception {
-    	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
-    	}
+    public void beforeMethod() throws Exception {
         if (this.linesToTest==null) {
             this.linesToTest = this.dCtxSh.pais.getShoponline().getLineasToTest(this.dCtxSh.appE);
         }
@@ -82,6 +77,7 @@ public class PaisIdioma {
         	this.flagsNavigation = VersionPaisSuite.V1;
         }
         if (dCtxSh==null) {
+        	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
             this.dCtxSh.pais = españa;
             this.dCtxSh.idioma = castellano;
             this.dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
@@ -94,6 +90,7 @@ public class PaisIdioma {
         groups={"Lineas", "Canal:all_App:shop,outlet"}, 
         description="Acceso desde prehome y navegación por todas las líneas/sublíneas/carrusels del país + selección menú/s")
     public void PAR001_Lineas() throws Exception {
+    	beforeMethod();
     	WebDriver driver = TestMaker.getDriverTestCase();
     	TestMaker.getTestCase().setRefineDataName(index_fact);
     	

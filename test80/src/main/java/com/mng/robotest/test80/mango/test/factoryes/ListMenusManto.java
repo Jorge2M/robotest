@@ -1,6 +1,8 @@
 package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
+
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
@@ -22,12 +24,12 @@ public class ListMenusManto {
 	
     @SuppressWarnings("unused")
     @Factory
-    public Object[] createInstances() throws Exception {
-    	InputParamsTestMaker inputData = TestMaker.getInputParamsSuite();
+    public Object[] createInstances(ITestContext ctxTestRun) throws Exception {
+    	InputParamsTestMaker inputData = TestMaker.getInputParamsSuite(ctxTestRun);
         ArrayList<Menus> listTests = new ArrayList<Menus>();
         AppEcom appEcom = (AppEcom)inputData.getApp();
         try {
-            ArrayList<String> listCabeceraMenus = getListCabecerasMenus(inputData.getUrlBase());
+            ArrayList<String> listCabeceraMenus = getListCabecerasMenus(inputData.getUrlBase(), ctxTestRun);
         	int prioridad=0;
             for (int i=0; i<listCabeceraMenus.size(); i++) {
             	System.out.println("Creado Test con datos: URL=" + inputData.getUrlBase() + ", cabeceraMenuName=" + listCabeceraMenus.get(i));
@@ -50,8 +52,8 @@ public class ListMenusManto {
     /**
      * Obtiene la lista con los nombres de las cabeceras de los grupos de menús de Manto
      */
-    private ArrayList<String> getListCabecerasMenus(String urlBaseManto) throws Exception { 
-    	TestRunTestMaker testRun = TestMaker.getTestRun();
+    private ArrayList<String> getListCabecerasMenus(String urlBaseManto, ITestContext ctxTestRun) throws Exception { 
+    	TestRunTestMaker testRun = TestMaker.getTestRun(ctxTestRun);
     	WebDriver driver = 
     		FactoryWebdriverMaker.make(WebDriverType.firefox, testRun)
 				.setChannel(Channel.desktop)

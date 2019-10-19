@@ -8,7 +8,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.loyalty.PageHomeConseguirPor
 import com.mng.robotest.test80.mango.test.stpv.shop.loyalty.PageHomeDonateLikesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.loyalty.PageHomeLikesStpV;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.mng.testmaker.service.TestMaker;
@@ -42,7 +41,6 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 
 public class Loyalty {
 	
-	private InputParams inputParamsSuite = null; 
     private final static Integer codEspanya = Integer.valueOf(1);
     private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
     private final static Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
@@ -54,17 +52,9 @@ public class Loyalty {
 	final static String userWithLPointsOnlyInTest = "test.performance10@mango.com";
 	final static String passwUserWithLPointsOnlyInTest = "Mango123";
 
-    DataCtxShop dCtxSh;
-	
-    @BeforeMethod (groups={"Otras", "Canal:all_App:shop"})
-    public void login() throws Exception {
-    	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
-    	}
-    }	
-    
     private DataCtxShop getCtxShForTest() throws Exception {
-        dCtxSh = new DataCtxShop();
+    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
+        DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());
         dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
@@ -85,10 +75,10 @@ public class Loyalty {
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, driver);
         SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-        actionsLoyaltyPostLogin(userMenusStpV, driver);
+        actionsLoyaltyPostLogin(userMenusStpV, dCtxSh, driver);
         
         //Queremos asegurarnos que obtenemos artículos no-rebajados para poder aplicarle el descuento por Loyalty Points
-        DataBag dataBag = addBagArticleNoRebajado(driver);
+        DataBag dataBag = addBagArticleNoRebajado(dCtxSh, driver);
         
         //Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
         FlagsTestCkout FTCkout = new FlagsTestCkout();
@@ -116,7 +106,7 @@ public class Loyalty {
         PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
     }
     
-    private DataBag addBagArticleNoRebajado(WebDriver driver) throws Exception {
+    private DataBag addBagArticleNoRebajado(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
 		Menu1rstLevel menuPersonalizacion = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "vestidos"));
 		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
 		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
@@ -137,7 +127,7 @@ public class Loyalty {
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
         SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-        int loyaltyPointsIni = actionsLoyaltyPostLogin(userMenusStpV, driver);
+        int loyaltyPointsIni = actionsLoyaltyPostLogin(userMenusStpV, dCtxSh, driver);
         userMenusStpV.clickMenuMangoLikesYou();
 
         PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(driver);
@@ -149,7 +139,7 @@ public class Loyalty {
             PageHomeDonateLikesStpV pageHomeDonateLikesStpV = PageHomeDonateLikesStpV.getNew(driver);
             ButtonLikes donateButton = ButtonLikes.Button50likes;
             pageHomeDonateLikesStpV.selectDonateButton(donateButton);
-            int loyaltyPointsFin = checkAndGetLoyaltyPoints(userMenusStpV, driver);
+            int loyaltyPointsFin = checkAndGetLoyaltyPoints(userMenusStpV, dCtxSh, driver);
             userMenusStpV.checkLoyaltyPoints(loyaltyPointsIni, donateButton.getNumLikes(), loyaltyPointsFin);
         }
     }
@@ -174,7 +164,7 @@ public class Loyalty {
 
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
         SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-        int loyaltyPointsIni = actionsLoyaltyPostLogin(userMenusStpV, driver);
+        int loyaltyPointsIni = actionsLoyaltyPostLogin(userMenusStpV, dCtxSh, driver);
         userMenusStpV.clickMenuMangoLikesYou();
 
         PageHomeLikesStpV.getNewInstance(driver).clickButtonConseguirPor1200Likes();
@@ -182,17 +172,19 @@ public class Loyalty {
             PageHomeConseguirPor1200LikesStpV pageHomeConseguirPor1200LikesStpV = PageHomeConseguirPor1200LikesStpV.getNew(driver);
             pageHomeConseguirPor1200LikesStpV.selectConseguirButton();
             
-            int loyaltyPointsFin = checkAndGetLoyaltyPoints(userMenusStpV, driver);
+            int loyaltyPointsFin = checkAndGetLoyaltyPoints(userMenusStpV, dCtxSh, driver);
             userMenusStpV.checkLoyaltyPoints(loyaltyPointsIni, 1200, loyaltyPointsFin);
         }
     }
     
-    private int actionsLoyaltyPostLogin(SecMenusUserStpV secMenusUserStpV, WebDriver driver) throws Exception {
+    private int actionsLoyaltyPostLogin(SecMenusUserStpV secMenusUserStpV, DataCtxShop dCtxSh, WebDriver driver) 
+    throws Exception {
     	secMenusUserStpV.checkVisibilityLinkMangoLikesYou();
-	    return (checkAndGetLoyaltyPoints(secMenusUserStpV, driver));
+	    return (checkAndGetLoyaltyPoints(secMenusUserStpV, dCtxSh, driver));
     }
     
-    private int checkAndGetLoyaltyPoints(SecMenusUserStpV secMenusUserStpV, WebDriver driver) throws Exception {
+    private int checkAndGetLoyaltyPoints(SecMenusUserStpV secMenusUserStpV, DataCtxShop dCtxSh, WebDriver driver) 
+    throws Exception {
 	    makeLoyaltyPointsVisible(dCtxSh, secMenusUserStpV, driver);
 		int loyaltyPoints = secMenusUserStpV.checkAngGetLoyaltyPoints(7).getNumberPoints();
 		return loyaltyPoints;

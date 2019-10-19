@@ -28,10 +28,11 @@ public class PageInitialStpV {
     @Validation (
     	description=
     		"Aparece la página inicial de la aplicación cuando el acceso en Español " +
-    		"(la esperamos hasta #{maxseconds} segundos)",
+    		"(la esperamos hasta #{maxSeconds} segundos)",
     	level=State.Defect)
     public boolean checkIsInitialPageSpanish(int maxSeconds) {
-    	return (pageInitial.checkIsInitialPageSpanish(maxSeconds));
+    	//return (pageInitial.checkIsInitialPageSpanish(maxSeconds));
+    	return false;
     }
     
 	@Step (

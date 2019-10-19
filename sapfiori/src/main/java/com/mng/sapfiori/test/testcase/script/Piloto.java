@@ -39,7 +39,7 @@ public class Piloto {
     	
     	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
     	WebDriver driver = testCase.getDriver();
-        driver.get(testCase.getSuiteParent().getInputData().getUrlBase());
+        driver.get(testCase.getInputParamsSuite().getUrlBase());
     	
     	PageLoginStpV pageLoginStpV = PageLoginStpV.getNew(driver);
     	PageInitialStpV pageInitialStpV = 

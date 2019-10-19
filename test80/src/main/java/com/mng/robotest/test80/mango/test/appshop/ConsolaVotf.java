@@ -11,15 +11,11 @@ import com.mng.robotest.test80.mango.test.stpv.votfcons.ConsolaVotfStpV;
 
 public class ConsolaVotf {
 
-	private InputParams inputParamsSuite = null;
     private String prodDisponible1 = "";
     
     @BeforeMethod(groups={"Canal:desktop_App:votf"})
     @Parameters({"prodDisponible1" })
     public void login(String prodDisponible1I) throws Exception {
-    	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getInputParamsSuite();
-    	}
         this.prodDisponible1 = prodDisponible1I;
     }
 
@@ -29,6 +25,7 @@ public class ConsolaVotf {
     public void VOFT001_GenerarPedido() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
     	
+    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
 		String paginaIniVOTF = inputParamsSuite.getUrlBase();
 		ConsolaVotfStpV.accesoPagInicial(paginaIniVOTF, driver);
 		ConsolaVotfStpV.selectEntornoTestAndCons("Preproducción", driver);

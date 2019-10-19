@@ -147,7 +147,7 @@ public class WebDriverArqUtils {
     throws Exception {
         ResultadoErrores resultado = new ResultadoErrores();
         resultado.setResultado(ResultadoErrores.Resultado.OK);
-        ITestContext ctx = TestMaker.getTestRun().getTestNgContext();
+        ITestContext ctx = TestMaker.getTestCase().getTestRunContext();
         ArrayList<String> listaLogError = new ArrayList<>();
         List<Boolean> supMaximosList = new ArrayList<>();
         try {

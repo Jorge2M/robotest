@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.SkipException;
 
@@ -21,7 +22,7 @@ public class TestCaseTestMaker  {
 	private final WebDriver driver;
 	private final ITestResult result;
 	private final String threadName;
-	private String refineDataName;
+	private String refineDataName = "";
 
 	public TestCaseTestMaker(ITestResult result) {
 		this.testRunParent = (TestRunTestMaker)result.getTestContext().getCurrentXmlTest();
@@ -75,7 +76,8 @@ public class TestCaseTestMaker  {
 		for (SuiteTestMaker suite : SuitesExecuted.getSuitesExecuted()) {
 			for (TestRunTestMaker testRun : suite.getListTestRuns()) {
 				for (TestCaseTestMaker testCase : testRun.getListTestCases()) {
-					if (testCase.getThreadName().compareTo(threadName)==0) {
+					if (testCase.getThreadName().compareTo(threadName)==0 &&
+						testCase.getStateRun()==StateRun.Started) {
 						return testCase;
 					}
 				}
@@ -132,7 +134,7 @@ public class TestCaseTestMaker  {
 	}
 	
 	private WebDriver getWebDriverForTestCase() {
-		InputParamsTestMaker inputData = suiteParent.getInputData();
+		InputParamsTestMaker inputData = suiteParent.getInputParams();
 		return (
 			suiteParent.getPoolWebDrivers().getWebDriver(
 				inputData.getWebDriverType(), 
@@ -152,8 +154,16 @@ public class TestCaseTestMaker  {
 		return suiteParent;
 	}
 	
+	public InputParamsTestMaker getInputParamsSuite() {
+		return getSuiteParent().getInputParams();
+	}
+	
 	public TestRunTestMaker getTestRunParent() {
 		return testRunParent;
+	}
+	
+	public ITestContext getTestRunContext() {
+		return testRunParent.getTestNgContext();
 	}
 	
 	public String getRefineDataName() {

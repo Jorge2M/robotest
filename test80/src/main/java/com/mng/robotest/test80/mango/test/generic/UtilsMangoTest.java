@@ -70,7 +70,7 @@ public class UtilsMangoTest {
         // Seleccionamos el logo de MANGO
     	boolean existeLogo = SecCabecera.getNew(channel, app, driver).clickLogoMango();
         if (!existeLogo) {
-        	ITestContext ctx = TestMaker.getTestRun().getTestNgContext();
+        	ITestContext ctx = TestMaker.getTestCase().getTestRunParent().getTestNgContext();
             String urlPaginaPostAcceso = (String)ctx.getAttribute(Constantes.attrUrlPagPostAcceso); 
             if (urlPaginaPostAcceso!=null) {
                 driver.get(urlPaginaPostAcceso);
@@ -290,7 +290,7 @@ public class UtilsMangoTest {
         boolean isEntornoPRO = false;
         List<String> URLsProShop   = Arrays.asList("shop.mango.com", "shoptest.pro.mango.com");
         List<String> URLsProOutlet = Arrays.asList("www.mangooutlet.com", "outlettest.pro.mango.com");
-        String xmlURL = TestMaker.getInputParamsSuite().getUrlBase();
+        String xmlURL = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
         String browserURL = driver.getCurrentUrl();
         Iterator<String> itURLsPRO = null;
         if (app==AppEcom.outlet) {
@@ -311,7 +311,7 @@ public class UtilsMangoTest {
     
     public static boolean isEntornoCI(AppEcom app) {
     	if (app==AppEcom.shop) { //De momento sólo tenemos CI para Shop
-    		String xmlURL = TestMaker.getInputParamsSuite().getUrlBase();
+    		String xmlURL = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
     		if (xmlURL.contains("shop-ci.")) {
     			return true;
     		}

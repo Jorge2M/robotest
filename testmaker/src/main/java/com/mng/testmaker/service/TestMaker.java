@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.TestNG;
 import org.testng.xml.XmlSuite;
@@ -40,12 +41,16 @@ public class TestMaker {
 		return SuitesExecuted.getSuite(idExecution);
 	}
 	
-	public static SuiteTestMaker getSuiteInExecution() {
-		return getTestCase().getSuiteParent();
+	public static SuiteTestMaker getSuite(ITestContext ctx) {
+		return (SuiteTestMaker)ctx.getSuite().getXmlSuite();
 	}
 	
-	public static InputParamsTestMaker getInputParamsSuite() {
-		return getSuiteInExecution().getInputData();
+	public static InputParamsTestMaker getInputParamsSuite(ITestContext ctx) {
+		return (InputParamsTestMaker)getSuite(ctx).getInputParams();
+	}
+	
+	public static TestRunTestMaker getTestRun(ITestContext ctx) {
+		return (TestRunTestMaker)ctx.getCurrentXmlTest();
 	}
 	
 	public static TestCaseTestMaker getTestCase() {
@@ -60,13 +65,8 @@ public class TestMaker {
     	return getTestCase().getCurrentStep();
     }
     
-    public static TestRunTestMaker getTestRun() {
-    	return getTestCase().getTestRunParent();
-    }
-    
-    public static String getParamTestRun(String id) {
-    	return (getTestCase().getTestRunParent().getParameter(id));
-    	//ctx.getCurrentXmlTest().getParameter(Constantes.paramUsrmanto)
+    public static String getParamTestRun(String idParam, ITestContext ctx) {
+    	return ctx.getCurrentXmlTest().getParameter(idParam);
     }
 	
     public static void skipTestsIfSuiteStopped() {

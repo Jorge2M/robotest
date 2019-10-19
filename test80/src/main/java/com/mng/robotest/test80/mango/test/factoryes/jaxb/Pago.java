@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import javax.xml.bind.annotation.*;
 
+import org.testng.ITestContext;
+
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.utils.otras.Channel;
@@ -240,9 +242,9 @@ public class Pago {
         return this.testpasarela;
     }
     
-    public boolean isNeededTestPasarelaDependingFilter(Channel channel) {
+    public boolean isNeededTestPasarelaDependingFilter(Channel channel, ITestContext ctx) {
         if (getTestpasarela().compareTo("s")==0) {
-            String listPayments = TestMaker.getParamTestRun(Constantes.paramPayments);
+            String listPayments = TestMaker.getParamTestRun(Constantes.paramPayments, ctx);
             if (listPayments==null || "".compareTo(listPayments)==0) {
                 return true;
             }

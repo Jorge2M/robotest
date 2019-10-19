@@ -1,6 +1,8 @@
 package com.mng.robotest.test80.mango.test.factoryes;
 
 import java.util.*;
+
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.mango.conftestmaker.Suites;
@@ -15,10 +17,10 @@ public class GenericFactory {
 	
     @Factory
     @Parameters({"countrys"})
-    public Object[] createInstances(String listaPaisesStr) throws Exception {
+    public Object[] createInstances(String listaPaisesStr, ITestContext ctxTestRun) throws Exception {
         ArrayList<Object> listTests = new ArrayList<>();
         try {
-        	Suites suite = (Suites)TestMaker.getInputParamsSuite().getSuite();
+        	Suites suite = (Suites)TestMaker.getInputParamsSuite(ctxTestRun).getSuite();
             List<Pais> listCountrys = Utilidades.getListCountrysFiltered(listaPaisesStr);
             int prioridad=0;
             for (Pais pais : listCountrys) {

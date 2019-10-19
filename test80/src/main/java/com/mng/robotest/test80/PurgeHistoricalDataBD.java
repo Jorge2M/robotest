@@ -7,7 +7,7 @@ public class PurgeHistoricalDataBD {
 
     public static void main(String[] args) throws Exception {
     	int numDiasToMaintain = Integer.valueOf(args[0]);
-    	InvokeListener.purgeHistoricalDataRobotest(numDiasToMaintain);
+    	//InvokeListener.purgeHistoricalDataRobotest(numDiasToMaintain);
         ProductCacheDAO.deleteProductsCaducados();
     }
 }

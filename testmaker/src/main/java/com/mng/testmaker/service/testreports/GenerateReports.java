@@ -58,7 +58,7 @@ public class GenerateReports extends EmailableReporter {
 
     private void generateReportHTML(SuiteTestMaker suite, String outputDirectory) throws Exception {
         BuildingReport buildReport = new BuildingReport(outputDirectory);
-        buildReport.serverDNS = suite.getInputData().getWebAppDNS();
+        buildReport.serverDNS = suite.getInputParams().getWebAppDNS();
         pintaCabeceraHTML(buildReport);
         pintaHeadersTableMain(buildReport, suite);        
         pintaTestRunsSuite(buildReport, suite);
@@ -74,7 +74,7 @@ public class GenerateReports extends EmailableReporter {
      * @param context contexto de ejecución del test a nivel de TestNG
      */
     public void pintaHeadersTableMain(BuildingReport buildReport, SuiteTestMaker suite) {
-    	InputParamsTestMaker inputData = suite.getInputData();
+    	InputParamsTestMaker inputData = suite.getInputParams();
 
         buildReport.addToReport(
         	"<table id=\"tableMain\" class=\"tablemain\">" + 

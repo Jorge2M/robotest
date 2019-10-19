@@ -3,10 +3,11 @@ package com.mng.robotest.test80.mango.test.appmanto;
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.domain.TestCaseTestMaker;
+import com.mng.testmaker.domain.TestRunTestMaker;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -31,24 +32,26 @@ import com.mng.robotest.test80.mango.test.stpv.manto.pedido.PagePedidosMantoStpV
 
 public class Manto {
 
-	DataMantoAccess dMantoAcc;
-	DataPedido dPedidoPrueba;
-	Pais espanya = new Pais();
-	Pago dPagoPrueba = new Pago();
+	private DataMantoAccess dMantoAcc = null;
+	private DataPedido dPedidoPrueba;
+	private Pais espanya = new Pais();
+	private Pago dPagoPrueba = new Pago();
 	
-	String codigoEspanya = "001";
-	String almacenEspanya = "001";
-	int posicionPedidoActual = 7;
-	String tpv;
+	private String codigoEspanya = "001";
+	private String almacenEspanya = "001";
+	private String tpv;
 
-	@BeforeMethod(groups={"Manto", "Canal:desktop_App:all", "SupportsFactoryCountrys"})
-	public void login() throws Exception {
-		InputParamsTestMaker inputParams = TestMaker.getInputParamsSuite();
-		this.dMantoAcc = new DataMantoAccess();
-		this.dMantoAcc.urlManto = inputParams.getUrlBase();
-		this.dMantoAcc.userManto = TestMaker.getParamTestRun(Constantes.paramUsrmanto);
-		this.dMantoAcc.passManto = TestMaker.getParamTestRun(Constantes.paramPasmanto);
-		this.dMantoAcc.appE = AppEcom.shop;
+	public void setDataMantoAccess() throws Exception {
+		if (dMantoAcc==null) {
+			dMantoAcc = new DataMantoAccess();
+			TestCaseTestMaker testCase = TestMaker.getTestCase();
+			TestRunTestMaker testRun = testCase.getTestRunParent();
+			InputParamsTestMaker inputParams = testCase.getInputParamsSuite();
+			dMantoAcc.urlManto = inputParams.getUrlBase();
+			dMantoAcc.userManto = testRun.getParameter(Constantes.paramUsrmanto);
+			dMantoAcc.passManto = testRun.getParameter(Constantes.paramPasmanto);
+			dMantoAcc.appE = AppEcom.shop;
+		}
 	}
 	
     @Test(
@@ -56,22 +59,22 @@ public class Manto {
         description="Compra en España")
     public void MAN000_GenerarPedidoFicticioMANTO() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-    	PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
+    	PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
     	
-    	this.espanya.setCodigo_pais(this.codigoEspanya);
+    	this.espanya.setCodigo_pais(codigoEspanya);
     	this.espanya.setNombre_pais("España");
-    	this.dPedidoPrueba = new DataPedido(this.espanya);
-		this.dPedidoPrueba.setCodigopais(this.codigoEspanya);
+    	this.dPedidoPrueba = new DataPedido(espanya);
+		this.dPedidoPrueba.setCodigopais(codigoEspanya);
 		this.dPagoPrueba.setNombre("");
-		this.dPedidoPrueba.setPago(this.dPagoPrueba);
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
+		this.dPedidoPrueba.setPago(dPagoPrueba);
+		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
     	PageMenusMantoStpV.goToPedidos(driver);
     	
-    	SecFiltrosMantoStpV.setFiltrosHoyWithoutChequeRegaloYbuscar(this.dPedidoPrueba, TypeSearch.PEDIDO, driver);
-    	this.dPedidoPrueba = PagePedidosMantoStpV.getPedidoUsuarioRegistrado(this.dPedidoPrueba, driver);
-    	this.dPedidoPrueba = PagePedidosMantoStpV.getDataPedido(this.dPedidoPrueba, driver);
-    	this.dPedidoPrueba = PagePedidosMantoStpV.getDataCliente(this.dPedidoPrueba, driver);
-    	this.dPedidoPrueba = PagePedidosMantoStpV.getTiendaFisicaListaPedidos(this.dPedidoPrueba, driver);
+    	SecFiltrosMantoStpV.setFiltrosHoyWithoutChequeRegaloYbuscar(dPedidoPrueba, TypeSearch.PEDIDO, driver);
+    	this.dPedidoPrueba = PagePedidosMantoStpV.getPedidoUsuarioRegistrado(dPedidoPrueba, driver);
+    	this.dPedidoPrueba = PagePedidosMantoStpV.getDataPedido(dPedidoPrueba, driver);
+    	this.dPedidoPrueba = PagePedidosMantoStpV.getDataCliente(dPedidoPrueba, driver);
+    	this.dPedidoPrueba = PagePedidosMantoStpV.getTiendaFisicaListaPedidos(dPedidoPrueba, driver);
     }
 
 	@Test(
@@ -80,13 +83,13 @@ public class Manto {
 		description="Consulta de varios una tienda existente y otra no existente")
 	public void MAN001_ConsultaTiendas() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
+		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
+		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
 		PageMenusMantoStpV.goToConsultarTiendas(driver);
 
 		String tiendaNoExistente = "423";
 		PageConsultaTiendaStpV.consultaTiendaInexistente(tiendaNoExistente, driver);
-		String tiendaExistente = this.dPedidoPrueba.getDataDeliveryPoint().getCodigo();
+		String tiendaExistente = dPedidoPrueba.getDataDeliveryPoint().getCodigo();
 		if (this.dPedidoPrueba.getDataDeliveryPoint().getCodigo() == null) {
 			tiendaExistente = "7543";
 		}
@@ -101,15 +104,15 @@ public class Manto {
 		description="Consulta de la información referente a varios pedidos")
 	public void MAN002_Consulta_ID_EAN() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
+		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
+		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
 		PageMenusMantoStpV.goToIdEans(driver);
 
 		List<String> pedidosPrueba = new ArrayList<>();
 		pedidosPrueba.add(this.dPedidoPrueba.getCodigoPedidoManto());
 		List<String> articulosPrueba = new ArrayList<>();
-		for (int i = 0; i < this.dPedidoPrueba.getDataBag().getListArticulos().size(); i++) {
-			articulosPrueba.add(this.dPedidoPrueba.getDataBag().getListArticulos().get(i).getReferencia().toString());
+		for (int i = 0; i < dPedidoPrueba.getDataBag().getListArticulos().size(); i++) {
+			articulosPrueba.add(dPedidoPrueba.getDataBag().getListArticulos().get(i).getReferencia().toString());
 		}
 		
 		PageConsultaIdEansStpV.consultaDatosContacto(pedidosPrueba, driver);
@@ -125,11 +128,11 @@ public class Manto {
 		description="Consulta y gestión de clientes")
 	public void MAN003_GestionarClientes() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
+		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
+		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
 		PageMenusMantoStpV.goToGestionarClientes(driver);
 
-		String dni = this.dPedidoPrueba.getPago().getDni();
+		String dni = dPedidoPrueba.getPago().getDni();
 		PageGestionarClientesStpV.inputDniAndClickBuscar(dni, driver);
 		PageGestionarClientesStpV.clickThirdButton(driver);
 		PageGestionarClientesStpV.clickThirdButton(driver);
@@ -142,8 +145,8 @@ public class Manto {
 		description="Consulta de cheques")
 	public void MAN004_GestorCheques() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
+		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
+		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
 		PageMenusMantoStpV.goToGestorCheques(driver);
 
 		String mail = "esther.esteve@mango.com";
@@ -162,8 +165,8 @@ public class Manto {
 		description="Consulta de estadísticas de pedidos")
 	public void MAN005_GestorEstadisticasPedidos() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
+		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
+		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
 		PageMenusMantoStpV.goToGestorEstadisticasPedido(driver);
 		PageGestorEstadisticasPedidoStpV.searchZalandoOrdersInformation(driver);
 		PageGestorEstadisticasPedidoStpV.compareLastDayInformation(driver);
@@ -174,8 +177,8 @@ public class Manto {
 		description="Gestor de saldos de TPV")
 	public void MAN006_GestorSaldosTPV() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
+		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
+		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
 		PageMenusMantoStpV.goToGestorSaldosTPV(driver);
 	
 		this.tpv = "600";
@@ -190,8 +193,8 @@ public class Manto {
 		description="Gestor de consulta y cambio de familia")
 	public void MAN007_GestorConsultaCambioFamilia() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
+		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
+		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
 		PageMenusMantoStpV.goToGestorConsultaCambioFamilia(driver);
 		PageGestorConsultaCambioFamiliaStpV.selectAccesoriosAndClickConsultaPorFamiliaButton(driver);
 		PageGestorConsultaCambioFamiliaStpV.clickCambioFamiliaButton(driver);
@@ -202,8 +205,8 @@ public class Manto {
 		description="Comprueba el correcto funcionamiento del ordenador de prendas")
 	public void MAN008_Ordenador_de_Prendas() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		PageLoginMantoStpV.login(this.dMantoAcc.urlManto, this.dMantoAcc.userManto, this.dMantoAcc.passManto, driver);
-		PageSelTdaMantoStpV.selectTienda(this.almacenEspanya, this.codigoEspanya, this.dMantoAcc.appE, driver);
+		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
+		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
 		PageMenusMantoStpV.goToOrdenadorDePrendas(driver);
 		PageOrdenacionDePrendasStpV.mantoOrdenacionInicio(driver);
 		PageOrdenacionDePrendasStpV.mantoSeccionPrendas(driver);
