@@ -22,7 +22,7 @@ public class ChecksResult {
     public ChecksResult() {
     	this.listResultValidations = new ArrayList<>();
     	this.testCaseParent = TestCaseTestMaker.getTestCaseInExecution();
-    	this.stepParent = testCaseParent.getCurrentStep();
+    	this.stepParent = testCaseParent.getLastStep();
     	this.testRunParent = testCaseParent.getTestRunParent();
     	this.suiteParent = testCaseParent.getSuiteParent();
     }

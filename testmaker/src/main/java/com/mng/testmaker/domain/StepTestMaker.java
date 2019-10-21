@@ -8,6 +8,7 @@ import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.utils.NetTrafficMng;
 import com.mng.testmaker.utils.State;
+import com.mng.testmaker.utils.controlTest.StoreStepEvidencies;
 
 public class StepTestMaker {
 	
@@ -29,7 +30,6 @@ public class StepTestMaker {
 	private Date hora_fin;
 	private State result_steps = State.Ok;
 	private boolean excep_exists = true;
-	private String nameMethodWithFactory = "";
 	
     public enum StepEvidence {
     	imagen("png"), 
@@ -68,6 +68,20 @@ public class StepTestMaker {
 			}
 		}
 		return -1;
+	}
+	
+	public void end(boolean exceptionReceived) {
+		setExcepExists(exceptionReceived); 
+		if (exceptionReceived) {
+			setResultSteps(State.Nok);
+	    	storeEvidencies();
+		}
+    	setHoraFin(new Date(System.currentTimeMillis()));
+    	setState(StateRun.Finished);
+	}
+	
+	public void storeEvidencies() {
+		StoreStepEvidencies.storeStepEvidencies(this);
 	}
 	
     public void setState(StateRun state) {
@@ -209,14 +223,6 @@ public class StepTestMaker {
     public void setNOKstateByDefault() {
     	setExcepExists(true); 
     	//setResultSteps(State.Nok);
-    }
-    
-    public void setNameMethodWithFactory(String nameMethodWithFactory) {
-    	this.nameMethodWithFactory = nameMethodWithFactory;
-    }
-    
-    public String getNameMethodWithFactory() {
-    	return this.nameMethodWithFactory;
     }
     
     public void addChecksResult(ChecksResult checksResult) {

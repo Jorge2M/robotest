@@ -49,7 +49,7 @@ public class PasosGenAnalitica {
     
     public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DataPedido dataPedido, EnumSet<Constantes.AnalyticsVal> analyticSet, WebDriver driver) 
     throws Exception {
-    	StepTestMaker step = TestMaker.getCurrentStep();
+    	StepTestMaker step = TestMaker.getLastStep();
         SaveWhen whenSaveNettraffic = step.getWhenSave(StepEvidence.har);
         if (whenSaveNettraffic == SaveWhen.Always &&
             driver.toString().toLowerCase().contains("firefox")) {

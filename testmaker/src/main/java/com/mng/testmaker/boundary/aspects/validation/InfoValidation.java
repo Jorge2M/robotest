@@ -57,7 +57,7 @@ public class InfoValidation {
 	
     private ChecksResult getValidationResultFromObjectMethodReturn() {
     	TestCaseTestMaker testCaseInThread = TestCaseTestMaker.getTestCaseInExecution();
-    	StepTestMaker step = testCaseInThread.getCurrentStep();
+    	StepTestMaker step = testCaseInThread.getLastStep();
     	ChecksResult valResult = ChecksResult.getNew(step);
     	if (resultMethod!=null) {
 	        if (resultMethod instanceof Boolean) {

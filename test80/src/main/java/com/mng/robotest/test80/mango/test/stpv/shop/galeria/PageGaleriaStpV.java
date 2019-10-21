@@ -202,7 +202,7 @@ public class PageGaleriaStpV {
         if (pageToScroll>=PageGaleriaDesktop.maxPageToScroll) {
             idPage = "última";
         }
-        TestMaker.getCurrentStep().replaceInDescription(tagIdPage, idPage);
+        TestMaker.getCurrentStepInExecution().replaceInDescription(tagIdPage, idPage);
         int numArticulosInicio = pageGaleria.getNumArticulos();
         datosScroll = pageGaleria.scrollToPageFromFirst(pageToScroll, dCtxSh.appE);
         
@@ -226,7 +226,7 @@ public class PageGaleriaStpV {
         
         PasosGenAnalitica.validaHTTPAnalytics(dCtxSh.appE, LineaType.she, driver);
         
-        datosScroll.step = TestMaker.getCurrentStep();
+        datosScroll.step = TestMaker.getCurrentStepInExecution();
         return datosScroll;
     }
     
@@ -375,7 +375,7 @@ public class PageGaleriaStpV {
         //En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax. En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
         WebdrvWrapp.waitForPageLoaded(driver, 2);
        
-        StepTestMaker step = TestMaker.getCurrentStep();
+        StepTestMaker step = TestMaker.getCurrentStepInExecution();
         WebElement articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
         step.replaceInDescription(tagNombre1erArtic, pageGaleria.getNombreArticulo(articuloColores));
        
@@ -426,7 +426,7 @@ public class PageGaleriaStpV {
        }
        
        String slidersListStr = getStringSliderList(typeSliderList);
-       StepTestMaker StepTestMaker = TestMaker.getCurrentStep();
+       StepTestMaker StepTestMaker = TestMaker.getCurrentStepInExecution();
        StepTestMaker.replaceInDescription(tagSliderList, slidersListStr);
        
        //En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax. 
@@ -480,7 +480,7 @@ public class PageGaleriaStpV {
 	    WebElement articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
 	    String nombre1erArt = pageGaleria.getNombreArticulo(articuloColores);
 	    String precio1erArt = pageGaleria.getPrecioArticulo(articuloColores);
-	    StepTestMaker step = TestMaker.getCurrentStep();
+	    StepTestMaker step = TestMaker.getCurrentStepInExecution();
 	    step.replaceInDescription(tagNumArtConColores, String.valueOf(numArtConColores));
 	    step.replaceInDescription(tagNombre1erArt, nombre1erArt);
 	    step.replaceInDescription(tagPrecio1erArt, precio1erArt);
@@ -574,7 +574,7 @@ public class PageGaleriaStpV {
         default:
             break;
         }
-        TestMaker.getCurrentStep().replaceInDescription(tagEstadoFinal, estadoFinal); 
+        TestMaker.getCurrentStepInExecution().replaceInDescription(tagEstadoFinal, estadoFinal); 
         checkIconosInCorrectState(actionFav, estadoFinal, posIconsToClick);
     }
     

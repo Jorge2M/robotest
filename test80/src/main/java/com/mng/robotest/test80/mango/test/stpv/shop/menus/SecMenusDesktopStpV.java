@@ -230,7 +230,7 @@ public class SecMenusDesktopStpV {
             driver.get(paginaLinea);
     	}
     	secMenus.secMenuSuperior.secBlockMenus.clickMenuAndGetName(menu1rstLevel);
-        TestMaker.getCurrentStep().replaceInDescription(tagMenu, menu1rstLevel.getNombre());
+        TestMaker.getCurrentStepInExecution().replaceInDescription(tagMenu, menu1rstLevel.getNombre());
         ModalCambioPais.closeModalIfVisible(driver);
         
         validaPaginaResultMenu(menu1rstLevel);
@@ -247,7 +247,7 @@ public class SecMenusDesktopStpV {
         expected="Aparecen los carrusels correspondientes a la línea " + tagCarruselsLinea)
     public void stepValidaCarrusels(LineaType lineaType) throws Exception {
         Linea linea = pais.getShoponline().getLinea(lineaType);
-        TestMaker.getCurrentStep().replaceInDescription(tagCarruselsLinea, linea.getCarrusels());
+        TestMaker.getCurrentStepInExecution().replaceInDescription(tagCarruselsLinea, linea.getCarrusels());
         
         secMenus.secMenuSuperior.secLineas.hoverLinea(lineaType, null);
         //if (linea.getType()!=LineaType.rebajas) {
@@ -469,7 +469,7 @@ public class SecMenusDesktopStpV {
         	"/redirect.faces?op=conta&seccion=accesorios_he&tiendaid=" + 
         	tiendaId + 
         	"&menu_temporada=2&menu_accesorio=140";
-        TestMaker.getCurrentStep().replaceInDescription(tagUrlAcceso, urlAccesoCorreo);
+        TestMaker.getCurrentStepInExecution().replaceInDescription(tagUrlAcceso, urlAccesoCorreo);
 
         driver.navigate().to(urlAccesoCorreo);
     	Menu1rstLevel menu1erNivel = MenuTreeApp.getMenuLevel1From(app, KeyMenu1rstLevel.from(LineaType.he, null, "zapatos"));
@@ -485,8 +485,8 @@ public class SecMenusDesktopStpV {
         	"Aparece la ficha del producto " + tagRefArticle)
     public static void checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
     	ArticleStock articulo = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithMoreOneColour, dCtxSh);
-    	TestMaker.getCurrentStep().replaceInDescription(tagRefArticle, articulo.getReference());
-    	TestMaker.getCurrentStep().replaceInExpected(tagRefArticle, articulo.getReference());
+    	TestMaker.getCurrentStepInExecution().replaceInDescription(tagRefArticle, articulo.getReference());
+    	TestMaker.getCurrentStepInExecution().replaceInExpected(tagRefArticle, articulo.getReference());
     	
         URI uri = new URI(driver.getCurrentUrl());
         String tiendaId = "she";
@@ -497,7 +497,7 @@ public class SecMenusDesktopStpV {
         String urlAccesoCorreo = 
         	uri.getScheme() + "://" + uri.getHost() + "/redirect.faces?op=conta&tiendaid=" + tiendaId + "&pais=" + pais.getCodigo_pais() + 
         	"&producto=" + articulo.getReference() + "&color=" + articulo.getColourCode() ;
-        TestMaker.getCurrentStep().replaceInDescription(tagUrlAcceso, urlAccesoCorreo);
+        TestMaker.getCurrentStepInExecution().replaceInDescription(tagUrlAcceso, urlAccesoCorreo);
         driver.navigate().to(urlAccesoCorreo);
 
         DataFichaArt datosArticulo = new DataFichaArt(articulo.getReference(), "");

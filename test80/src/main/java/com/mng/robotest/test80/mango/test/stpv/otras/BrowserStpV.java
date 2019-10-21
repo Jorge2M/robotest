@@ -34,7 +34,7 @@ public class BrowserStpV {
     public static void inputRobotsURLandValidate(String urlBaseTest, AppEcom app, WebDriver driver) throws Exception {
         URI uriBase = new URI(urlBaseTest);
         String urlRobots = urlBaseTest.replace(uriBase.getPath(), "") + "/" + "robots.txt";
-        TestMaker.getCurrentStep().replaceInDescription(tagUrlRobots, urlRobots);
+        TestMaker.getCurrentStepInExecution().replaceInDescription(tagUrlRobots, urlRobots);
         String urlSitemap = urlBaseTest.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
         
         driver.get(urlRobots);

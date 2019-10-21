@@ -33,6 +33,10 @@ public class TestMaker {
     	runInTestNG(suite);
     }
     
+    public static void finishSuite(String idExecution) {
+    	finish(getSuite(idExecution));
+    }
+    
 	public static void finish(SuiteTestMaker suite) {
 		suite.end();
 	}
@@ -61,8 +65,12 @@ public class TestMaker {
     	return (getTestCase().getWebDriver());
     }
     
-    public static StepTestMaker getCurrentStep() {
-    	return getTestCase().getCurrentStep();
+    public static StepTestMaker getCurrentStepInExecution() {
+    	return getTestCase().getCurrentStepInExecution();
+    }
+    
+    public static StepTestMaker getLastStep() {
+    	return getTestCase().getLastStep();
     }
     
     public static String getParamTestRun(String idParam, ITestContext ctx) {

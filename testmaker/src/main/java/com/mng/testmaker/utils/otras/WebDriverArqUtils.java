@@ -183,7 +183,7 @@ public class WebDriverArqUtils {
         }
         catch (Exception e) {
             //Parece que en el caso de Safari se produce una excepción al cargar algunos logs como el de 'performance'
-        	Log4jConfig.pLogger.warn("Problem to load the WebDriver error Log", e);
+        	Log4jConfig.pLogger.info("Problem to load the WebDriver error Log", e);
         }
 
         // Retornamos la lista de errores y el estado

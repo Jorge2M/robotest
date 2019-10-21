@@ -28,7 +28,7 @@ public class PageSelTdaMantoStpV {
     public static void selectTienda(String codigoAlmacen, String codigoPais, AppEcom appE, WebDriver driver) 
     throws Exception {
         TiendaManto tienda = TiendaManto.getTienda(codigoAlmacen, codigoPais, appE);
-        TestMaker.getCurrentStep().replaceInDescription(TagTienda, tienda.name());
+        TestMaker.getCurrentStepInExecution().replaceInDescription(TagTienda, tienda.name());
         
         if (!PageSelTda.isPage(driver)) {
             SecCabecera.clickButtonSelTienda(driver);

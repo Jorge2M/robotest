@@ -37,7 +37,7 @@ public class Page2IdentCheckoutStpV {
     		Pais pais, String emailUsr, boolean inputDireccCharNoLatinos, Channel channel, WebDriver driver) throws Exception {
         HashMap<String, String> datosRegistro = 
             Page2IdentCheckout.inputDataPorDefectoSegunPais(pais, emailUsr, inputDireccCharNoLatinos, false, channel, driver);
-        TestMaker.getCurrentStep().addDescriptionText(". Utilizando los datos: "+ UtilsMangoTest.listaCamposHTML(datosRegistro)); 
+        TestMaker.getCurrentStepInExecution().addDescriptionText(". Utilizando los datos: "+ UtilsMangoTest.listaCamposHTML(datosRegistro)); 
         checkIsVisibleContiueButton(5, driver);
         return datosRegistro;
     }

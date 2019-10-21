@@ -32,7 +32,7 @@ public class SecFiltrosMantoStpV {
     	saveErrorData=SaveWhen.Never)
     public static void setFiltrosHoyYbuscar(DataPedido dataPedido, @SuppressWarnings("unused") TypeSearch typeSearch, WebDriver driver) 
     throws Exception {
-    	StepTestMaker step = TestMaker.getCurrentStep();
+    	StepTestMaker step = TestMaker.getCurrentStepInExecution();
     	step.replaceInDescription(tagNombrePago, dataPedido.getPago().getNombre());
     	step.replaceInDescription(tagLitTienda, SecCabecera.getLitTienda(driver));
     	

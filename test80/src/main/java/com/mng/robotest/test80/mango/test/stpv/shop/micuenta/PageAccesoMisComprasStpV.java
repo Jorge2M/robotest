@@ -60,7 +60,7 @@ public class PageAccesoMisComprasStpV {
         expected="Aparece la página de detalle del pedido")
     public static void buscarPedidoForNoRegistrado(DataPedido dataPedido, WebDriver driver) throws Exception {
         String usuario = dataPedido.getEmailCheckout();
-        TestMaker.getCurrentStep().replaceInDescription(tagUsuario, usuario);
+        TestMaker.getCurrentStepInExecution().replaceInDescription(tagUsuario, usuario);
         
         PageAccesoMisCompras.inputUserAndNumPedidoBlockNo(usuario, dataPedido.getCodpedido(), driver); 
         PageAccesoMisCompras.clickBuscarPedidoBlockNo(driver); 

@@ -6,6 +6,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.mango.test.data.TiendaMantoEnum.TiendaManto;
 import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.domain.TestRunTestMaker;
@@ -14,9 +15,10 @@ import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appmanto.Menus;
+import com.mng.robotest.test80.mango.test.pageobject.manto.PageSelTda;
+import com.mng.robotest.test80.mango.test.pageobject.manto.SecCabecera;
+import com.mng.robotest.test80.mango.test.pageobject.shop.PageJCAS;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageMenusManto;
-import com.mng.robotest.test80.mango.test.stpv.manto.PageLoginMantoStpV;
-import com.mng.robotest.test80.mango.test.stpv.manto.PageSelTdaMantoStpV;
 
 import org.openqa.selenium.WebDriver;
 
@@ -58,12 +60,27 @@ public class ListMenusManto {
     		FactoryWebdriverMaker.make(WebDriverType.firefox, testRun)
 				.setChannel(Channel.desktop)
 				.build(); 
-        PageLoginMantoStpV.login(urlBaseManto, Constantes.userManto, Constantes.passwordManto, driver);
-        String codigoEspanya = "001";
-        String almacenEspanya = "001";
-        PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, AppEcom.shop, driver);
+
+    	goToMantoLoginAndSelectTienda(urlBaseManto, Constantes.userManto, Constantes.passwordManto, driver);
         ArrayList<String> listMenuNames = PageMenusManto.getListCabecerasMenusName(driver);
         driver.quit();
         return listMenuNames;
+    }
+    
+    private void goToMantoLoginAndSelectTienda(String urlManto, String usrManto, String passManto, WebDriver driver) 
+    throws Exception {
+        String codigoEspanya = "001";
+        String almacenEspanya = "001";
+    	driver.manage().deleteAllCookies();
+        driver.get(urlManto);
+        PageJCAS.identication(driver, usrManto, passManto);
+        TiendaManto tienda = TiendaManto.getTienda(almacenEspanya, codigoEspanya, AppEcom.shop);
+        if (!PageSelTda.isPage(driver)) {
+        	SecCabecera.clickButtonSelTienda(driver);
+        }
+        if (!PageSelTda.isPage(driver)) {
+            SecCabecera.clickButtonSelTienda(driver);
+        }
+        PageSelTda.selectTienda(tienda, driver);
     }
 }

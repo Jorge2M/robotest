@@ -30,24 +30,32 @@ public class ValidationAspect {
     	pointcut="annotationValidationPointcut() && atExecution()", 
     	throwing="ex")
     public void doRecoveryActions(JoinPoint joinPoint, Throwable ex) {
-    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
-    	StepTestMaker step = testCase.getCurrentStep();
+    	StepTestMaker step = getLastStep();
     	InfoValidation infoValidation = InfoValidation.from(joinPoint);
-    	ChecksResult checksResult = infoValidation.getListResultValidation();
-    	step.addChecksResult(checksResult);
-    	checksResult.getStepParent().setNOKstateByDefault();
-    	checksResult.checkValidations();
+    	finishValidation(infoValidation, step, true);
     }
     
     @AfterReturning(
     	pointcut="annotationValidationPointcut() && atExecution()", 
     	returning="resultMethod")
     public void grabValidationAfter(JoinPoint joinPoint, Object resultMethod) throws Throwable {
-    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
-    	StepTestMaker step = testCase.getCurrentStep();
+    	StepTestMaker step = getLastStep();
     	InfoValidation infoValidation = InfoValidation.from(joinPoint, resultMethod);
+    	finishValidation(infoValidation, step, false);
+    }
+    
+    private StepTestMaker getLastStep() {
+    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
+    	return (testCase.getLastStep());
+    }
+    
+    private void finishValidation(InfoValidation infoValidation, StepTestMaker step, boolean exceptionThrown) {
     	ChecksResult checksResult = infoValidation.getListResultValidation();
     	step.addChecksResult(checksResult);
+    	if (exceptionThrown) {
+    		checksResult.getStepParent().setNOKstateByDefault();
+    	}
     	checksResult.checkValidations();
+    	step.storeEvidencies();
     }
 }

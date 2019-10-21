@@ -98,7 +98,7 @@ public class PagoNavigationsStpV {
     	saveNettraffic=SaveWhen.Always)
     public static void accessShopAndLoginOrLogoff(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        StepTestMaker StepTestMaker = TestMaker.getCurrentStep();    	
+        StepTestMaker StepTestMaker = TestMaker.getCurrentStepInExecution();    	
         if (dCtxSh.userRegistered) {
             StepTestMaker.replaceInDescription(
             	tagLoginOrLogoff, "e Identificarse con el usuario <b>" + dCtxSh.userConnected + "</b>");

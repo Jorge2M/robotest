@@ -12,8 +12,6 @@ import com.mng.testmaker.annotations.MatcherWithMethodParams;
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.TestCaseTestMaker;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.controlTest.StoreStepEvidencies;
 
 
 @Aspect
@@ -49,22 +47,21 @@ public class StepAspect {
     	throwing="ex")
     public void doRecoveryActions(JoinPoint joinPoint, Throwable ex) {
     	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
-    	TestMaker.skipTestsIfSuiteStopped(testCase.getSuiteParent());
-    	StepTestMaker currentStep = testCase.getCurrentStep();
-    	currentStep.setResultSteps(State.Nok);
-    	currentStep.setExcepExists(true); 
-    	currentStep.setHoraFin(new Date(System.currentTimeMillis()));
-    	StoreStepEvidencies.storeStepEvidencies(currentStep);
+    	StepTestMaker currentStep = testCase.getCurrentStepInExecution();
+    	if (!testCase.isLastStep(currentStep)) {
+        	//In the case of anidated Steps...
+        	//If isn't the last step then the exception is generated in other deeper step
+    		currentStep.end(false);
+    	} else {
+    		currentStep.end(true);
+    	}
     }
     
     @AfterReturning(
     	pointcut="annotationStepPointcut() && atExecution()")
     public void grabValidationAfter(JoinPoint joinPoint) throws Throwable {
     	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
-    	TestMaker.skipTestsIfSuiteStopped(testCase.getSuiteParent());
-    	StepTestMaker currentStep = testCase.getCurrentStep();
-    	currentStep.setExcepExists(false); 
-    	currentStep.setHoraFin(new Date(System.currentTimeMillis()));
-    	StoreStepEvidencies.storeStepEvidencies(currentStep);
+    	StepTestMaker currentStep = testCase.getCurrentStepInExecution();
+    	currentStep.end(false);
     }
 }

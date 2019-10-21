@@ -36,7 +36,7 @@ public class SecProductDescrOldStpV {
     public static void selectPanel(TypePanel typePanel, WebDriver driver) throws Exception {
         TypeStatePanel statePanelIni = SecProductDescrOld.getStatePanel(typePanel, driver);
         TypeStatePanel stateExpectedAfterClick = SecProductDescrOld.getStatePanelAfterClick(statePanelIni);
-        StepTestMaker step = TestMaker.getCurrentStep();
+        StepTestMaker step = TestMaker.getCurrentStepInExecution();
         step.replaceInDescription(tagInitStatePanel, statePanelIni.toString());
         step.replaceInExpected(tagFinalStateExpected, stateExpectedAfterClick.toString());
         

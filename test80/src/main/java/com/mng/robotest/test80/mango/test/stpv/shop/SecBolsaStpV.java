@@ -158,7 +158,7 @@ public class SecBolsaStpV {
             }
         }
         
-        TestMaker.getCurrentStep().replaceInDescription(tagListaArt, listaArtStr);
+        TestMaker.getCurrentStepInExecution().replaceInDescription(tagListaArt, listaArtStr);
     }
     
     /**

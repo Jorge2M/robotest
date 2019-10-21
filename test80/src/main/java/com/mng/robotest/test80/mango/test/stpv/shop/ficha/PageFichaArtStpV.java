@@ -387,7 +387,7 @@ public class PageFichaArtStpV {
     	description="Seleccionar <b>" + tagNameLink + "</b>", 
         expected="Aparece un resultado de la búsqueda correcta")
     public void selectBuscarEnTiendaButton() throws Exception {
-    	TestMaker.getCurrentStep().replaceInDescription(tagNameLink, pageFicha.getNameLinkBuscarEnTienda());
+    	TestMaker.getCurrentStepInExecution().replaceInDescription(tagNameLink, pageFicha.getNameLinkBuscarEnTienda());
         pageFicha.selectBuscarEnTiendaLink();             
         ModalBuscadorTiendasStpV.validaBusquedaConResultados(driver);
     }

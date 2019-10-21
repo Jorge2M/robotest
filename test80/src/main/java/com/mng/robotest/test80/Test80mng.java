@@ -188,26 +188,26 @@ public class Test80mng {
             case SmokeManto:
                 return (new SmokeMantoSuite(inputParams)).getSuite();
             case PagosPaises:
-                return (new PagosPaisesSuite(inputParams)).getSuite();           
+                return (new PagosPaisesSuite(inputParams)).getSuite();
             case ValesPaises:
-                return (new ValesPaisesSuite(inputParams)).getSuite();          
+                return (new ValesPaisesSuite(inputParams)).getSuite();
             case PaisIdiomaBanner:
-                return (new PaisIdiomaSuite(inputParams)).getSuite();                    
+                return (new PaisIdiomaSuite(inputParams)).getSuite();
             case MenusPais:
                 return (new MenusPaisSuite(inputParams)).getSuite();
             case MenusManto:
-                return (new MenusMantoSuite(inputParams)).getSuite();            
+                return (new MenusMantoSuite(inputParams)).getSuite();
             case Nodos:
-                return (new NodosSuite(inputParams)).getSuite();           
+                return (new NodosSuite(inputParams)).getSuite();
             case ConsolaVotf:
-                return (new ConsolaVotfSuite(inputParams)).getSuite();              
+                return (new ConsolaVotfSuite(inputParams)).getSuite();
             case ListFavoritos:
             case ListMiCuenta:
-                return (new GenericFactorySuite(inputParams)).getSuite();               
+                return (new GenericFactorySuite(inputParams)).getSuite();
             case RegistrosPaises:
-                return (new RegistrosSuite(inputParams)).getSuite();       
+                return (new RegistrosSuite(inputParams)).getSuite();
             case RebajasPaises:
-                return (new RebajasSuite(inputParams)).getSuite();             
+                return (new RebajasSuite(inputParams)).getSuite();
             default:
             }
         }
@@ -218,7 +218,6 @@ public class Test80mng {
         return null;
     }
 
-    
     private static void callBackIfNeeded(SuiteTestMaker suite, InputParams inputParams) {
     	CallBack callBack = inputParams.getCallBack();
         if (callBack!=null) {

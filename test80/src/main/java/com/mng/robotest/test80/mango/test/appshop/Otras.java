@@ -61,6 +61,7 @@ public class Otras {
         dCtxSh.pais = españa;
         dCtxSh.idioma = castellano;
         dCtxSh.userRegistered = false;
+        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
         
         SecMenusDesktopStpV secMenusDesktopStpV = SecMenusDesktopStpV.getNew(dCtxSh.pais, dCtxSh.appE, driver);
         secMenusDesktopStpV.checkURLRedirectZapatosHeEspanya();

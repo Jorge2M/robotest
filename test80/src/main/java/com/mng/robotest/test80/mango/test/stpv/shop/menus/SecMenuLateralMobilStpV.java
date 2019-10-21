@@ -276,7 +276,7 @@ public class SecMenuLateralMobilStpV {
         expected="El menú se ejecuta correctamente")
     public void stepClickMenu1rstLevel(Menu1rstLevel menu1rstLevel, Pais pais) throws Exception {
     	secMenuLateral.clickMenuLateral1rstLevel(TypeLocator.dataGaLabelPortion, menu1rstLevel, pais);
-        TestMaker.getCurrentStep().replaceInDescription(tagTextMenu, menu1rstLevel.getNombre());
+        TestMaker.getCurrentStepInExecution().replaceInDescription(tagTextMenu, menu1rstLevel.getNombre());
         ModalCambioPais.closeModalIfVisible(driver);
         validaPaginaResultMenu2onLevel();
     }    

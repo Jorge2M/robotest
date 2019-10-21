@@ -23,7 +23,7 @@ public class SecSelectDPointStpV {
         expected="Aparecen puntos de recogida de " + tagSearchDp)
     public static void searchPoblacion(DataSearchDeliveryPoint dataSearchDp, WebDriver driver) 
     throws Exception {
-		StepTestMaker step = TestMaker.getCurrentStep();
+		StepTestMaker step = TestMaker.getCurrentStepInExecution();
 		step.replaceInDescription(tagSearchDp, dataSearchDp.data);
 		step.replaceInExpected(tagSearchDp, dataSearchDp.data);
 		

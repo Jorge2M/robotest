@@ -57,7 +57,7 @@ public class AccesoStpV {
             registro+= "Borrar la Bolsa<br>";         
         }
         
-        StepTestMaker StepTestMaker = TestMaker.getCurrentStep();
+        StepTestMaker StepTestMaker = TestMaker.getCurrentStepInExecution();
         StepTestMaker.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
         StepTestMaker.replaceInDescription(tagLiteralIdioma, dCtxSh.idioma.getCodigo().getLiteral());
         StepTestMaker.replaceInDescription(tagRegistro, registro);
@@ -219,7 +219,7 @@ public class AccesoStpV {
     	saveHtmlPage=SaveWhen.Always)
     public static void accesoPRYCambioPais(DataCtxShop dCtxSh, Pais paisDestino, IdiomaPais idiomaDestino, WebDriver driver) 
     throws Exception {
-        StepTestMaker StepTestMaker = TestMaker.getCurrentStep();
+        StepTestMaker StepTestMaker = TestMaker.getCurrentStepInExecution();
         StepTestMaker.replaceInDescription(tagNombrePaisOrigen, dCtxSh.pais.getNombre_pais());
         StepTestMaker.replaceInDescription(tagCodigoPaisOrigen, dCtxSh.pais.getCodigo_pais());
         StepTestMaker.replaceInDescription(tagNombreIdiomaOrigen, dCtxSh.idioma.getLiteral());
@@ -257,8 +257,8 @@ public class AccesoStpV {
         Pais paisAsocIP = null;
         String urlAccesoPaisNoIp = paisAccesoNoIP.getUrlPaisEstandar(urlBaseTest);
         IdiomaPais idiomaOrigen = paisAccesoNoIP.getListIdiomas().get(0);
-        TestMaker.getCurrentStep().replaceInDescription(tagUrlAccesoPaisNoIp, urlAccesoPaisNoIp);
-        TestMaker.getCurrentStep().replaceInDescription(tagLiteralIdiomaOrigen, idiomaOrigen.getLiteral());
+        TestMaker.getCurrentStepInExecution().replaceInDescription(tagUrlAccesoPaisNoIp, urlAccesoPaisNoIp);
+        TestMaker.getCurrentStepInExecution().replaceInDescription(tagLiteralIdiomaOrigen, idiomaOrigen.getLiteral());
         
         driver.get(urlAccesoPaisNoIp);
         WebdrvWrapp.waitForPageLoaded(driver);
@@ -347,8 +347,8 @@ public class AccesoStpV {
     public static void selectConfirmPaisModal(WebDriver driver) throws Exception {
         String paisBotonCambio = ModalCambioPais.getTextPaisButtonChagePais(driver);
         String hrefBotonCambioPais = ModalCambioPais.getHRefPaisButtonChagePais(driver);
-        TestMaker.getCurrentStep().replaceInDescription(tagPaisBotonCambio, paisBotonCambio);
-        TestMaker.getCurrentStep().replaceInExpected(tagHrefBotonCambio, hrefBotonCambioPais);
+        TestMaker.getCurrentStepInExecution().replaceInDescription(tagPaisBotonCambio, paisBotonCambio);
+        TestMaker.getCurrentStepInExecution().replaceInExpected(tagHrefBotonCambio, hrefBotonCambioPais);
         
         ModalCambioPais.clickButtonChangePais(driver);       
         checkIsDoneRedirectToCountry(paisBotonCambio, hrefBotonCambioPais, driver);
@@ -372,7 +372,7 @@ public class AccesoStpV {
         expected="El nodo se encuentra en un estado correcto",
         saveHtmlPage=SaveWhen.Always)
     public static void testNodoState(NodoStatus nodo, WebDriver driver) throws Exception {
-    	TestMaker.getCurrentStep().replaceInDescription(tagPathStatus, nodo.getStatusJSON().pathStatus);
+    	TestMaker.getCurrentStepInExecution().replaceInDescription(tagPathStatus, nodo.getStatusJSON().pathStatus);
         nodo.setDataStateNodeFromBrowser(driver);
         checkStatusUp(nodo);
     }

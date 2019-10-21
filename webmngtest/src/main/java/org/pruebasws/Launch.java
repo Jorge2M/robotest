@@ -14,7 +14,6 @@ import org.pruebasws.thread.TSuiteThreadsManager;
 import org.testng.TestNG;
 
 import com.mng.testmaker.domain.StateRun;
-import com.mng.testmaker.jdbc.dao.SuitesDAO;
 
 /**
  * @param args

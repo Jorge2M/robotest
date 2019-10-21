@@ -41,17 +41,22 @@ public class TestCaseTestMaker  {
 	}
 	
 	public void end(State state) {
-    	setStateRun(StateRun.Finished);
+    	stopTest();
     	this.state = state;
+	}
+	
+	public void end() {
+		stopTest();
+    	this.state = getStateFromSteps();
+	}
+	
+	private void stopTest() {
+    	setStateRun(StateRun.Finished);
+    	suiteParent.getPoolWebDrivers().quitWebDriver(driver, testRunParent);
 	}
 	
 	public WebDriver getWebDriver() {
 		return this.driver;
-	}
-	
-	public void end() {
-    	setStateRun(StateRun.Finished);
-    	this.state = getStateFromSteps();
 	}
 
 	public State getStateResult() {
@@ -108,11 +113,25 @@ public class TestCaseTestMaker  {
 		return stateReturn;
 	}
 	
-	public StepTestMaker getCurrentStep() {
+	public StepTestMaker getCurrentStepInExecution() {
+		StepTestMaker stepReturn = null;
+		for (StepTestMaker step : listSteps) {
+			if (step.getState()==StateRun.Started) {
+				stepReturn = step;
+			}
+		}
+		return stepReturn;
+	}
+	
+	public StepTestMaker getLastStep() {
 		if (listSteps.size() > 0) {
 			return (listSteps.get(listSteps.size() - 1));
 		}
 		return null;
+	}
+	
+	public boolean isLastStep(StepTestMaker step) {
+		return (step==getLastStep());
 	}
 	
 //	public StepTestMaker getLastStepFinished() {

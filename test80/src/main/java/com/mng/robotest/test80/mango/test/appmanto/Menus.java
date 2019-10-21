@@ -17,7 +17,6 @@ import com.mng.robotest.test80.mango.test.stpv.manto.PageSelTdaMantoStpV;
 
 public class Menus {
 
-	DataMantoAccess dMantoAcc = null;
 	String cabeceraName = "";
 	String cabeceraNameNext = "";
 	int prioridad = 1;
@@ -33,24 +32,24 @@ public class Menus {
 	    this.prioridad = prioridad;
 	}
 
-	public void setDataMantoAccess() {
-		if (dMantoAcc == null) {
-			dMantoAcc = new DataMantoAccess();
-			TestCaseTestMaker testCase = TestMaker.getTestCase();
-			TestRunTestMaker testRun = testCase.getTestRunParent();
-	        InputParamsTestMaker inputParams = testCase.getInputParamsSuite();
-			dMantoAcc.urlManto = inputParams.getUrlBase();
-			dMantoAcc.userManto = testRun.getParameter(Constantes.paramUsrmanto);
-			dMantoAcc.passManto = testRun.getParameter(Constantes.paramPasmanto);
-			dMantoAcc.channel = Channel.desktop;
-			dMantoAcc.appE = AppEcom.shop;
-		}
+	public DataMantoAccess getDataMantoAccess() {
+		DataMantoAccess dMantoAcc = new DataMantoAccess();
+		TestCaseTestMaker testCase = TestMaker.getTestCase();
+		TestRunTestMaker testRun = testCase.getTestRunParent();
+        InputParamsTestMaker inputParams = testCase.getInputParamsSuite();
+		dMantoAcc.urlManto = inputParams.getUrlBase();
+		dMantoAcc.userManto = testRun.getParameter(Constantes.paramUsrmanto);
+		dMantoAcc.passManto = testRun.getParameter(Constantes.paramPasmanto);
+		dMantoAcc.channel = Channel.desktop;
+		dMantoAcc.appE = AppEcom.shop;
+		return dMantoAcc;
 	}
 
 	@Test(
 		groups={"Menus", "Canal:desktop_App:all"},
 		description="Consulta de menús")
 	public void MAN005_ConsultaMenus() throws Exception {
+		DataMantoAccess dMantoAcc = getDataMantoAccess();
     	WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		String codigoEspanya = "001";

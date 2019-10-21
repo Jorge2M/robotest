@@ -37,7 +37,7 @@ public class GenerateReports extends EmailableReporter {
     @Override
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
         super.generateReport(xmlSuites, suites, outputDirectory);
-        
+
     	SuiteTestMaker suite = (SuiteTestMaker)xmlSuites.get(0);
         try {
         	deployStaticsIfNotExist(outputDirectory);

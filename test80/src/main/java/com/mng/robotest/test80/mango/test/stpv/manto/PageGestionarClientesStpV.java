@@ -64,7 +64,7 @@ public class PageGestionarClientesStpV {
 		saveErrorData=SaveWhen.Never)
 	public static void clickThirdButton(WebDriver driver) throws Exception {
 		TypeThirdButton typeButton = PageGestionarClientes.getTypeThirdButton(driver);	
-		TestMaker.getCurrentStep().replaceInDescription(TagTypeButton, typeButton.toString());
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TagTypeButton, typeButton.toString());
 		
 		int waitSeconds = 3;
 		PageGestionarClientes.clickThirdButtonAndWaitSeconds(typeButton, waitSeconds, driver);   

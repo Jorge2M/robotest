@@ -29,7 +29,7 @@ public class SecStoreCreditStpV {
     public static void validateInitialStateOk(Channel channel, DataCtxPago dCtxPago, WebDriver driver) 
     throws Exception {
         String nombrePago = dCtxPago.getDataPedido().getPago().getNombre(channel);
-        TestMaker.getCurrentStep().replaceInExpected(tagNombrePago, nombrePago);
+        TestMaker.getCurrentStepInExecution().replaceInExpected(tagNombrePago, nombrePago);
         
         dCtxPago.getDataPedido().setImporteTotal(PageCheckoutWrapper.getPrecioTotalFromResumen(channel, driver));
         validaBloqueSaldoEnCuenta(true, channel, dCtxPago, driver);

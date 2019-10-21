@@ -20,7 +20,7 @@ public class PageLoginVOTFStpV {
     public static void goToAndLogin(String urlAcceso, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         String usuarioVOTF = dCtxSh.pais.getAccesoVOTF().getUsuario();
         String passwordVOTF = dCtxSh.pais.getAccesoVOTF().getPassword();
-        StepTestMaker step = TestMaker.getCurrentStep();
+        StepTestMaker step = TestMaker.getCurrentStepInExecution();
         step.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
         step.replaceInDescription(tagUsuarioVotf, usuarioVOTF);
         step.replaceInDescription(tagPasswordVotf, tagPasswordVotf);

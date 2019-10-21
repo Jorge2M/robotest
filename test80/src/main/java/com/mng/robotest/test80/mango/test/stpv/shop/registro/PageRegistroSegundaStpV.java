@@ -90,7 +90,7 @@ public class PageRegistroSegundaStpV {
         }
         
         //Rewrite description step
-        StepTestMaker step = TestMaker.getCurrentStep();
+        StepTestMaker step = TestMaker.getCurrentStepInExecution();
         step.setDescripcion(stepDescription);
 
         PageRegistroSegunda.setFechaNacimiento(driver, fechaNacimiento);

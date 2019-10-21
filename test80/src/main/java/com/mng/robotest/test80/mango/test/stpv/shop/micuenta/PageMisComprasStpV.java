@@ -191,7 +191,7 @@ public class PageMisComprasStpV {
         expected="Aparece el modal con información del artículo")
 	public void clickMoreInfo() {
     	String infoArticle = pageMisCompras.getReferenciaPrimerArticulo();
-    	TestMaker.getCurrentStep().replaceInDescription(tagReferencia, infoArticle);
+    	TestMaker.getCurrentStepInExecution().replaceInDescription(tagReferencia, infoArticle);
     	pageMisCompras.clickMasInfoArticulo();           
     	modalDetalleMisComprasStpV.checkModalArticle(infoArticle);
 	}    

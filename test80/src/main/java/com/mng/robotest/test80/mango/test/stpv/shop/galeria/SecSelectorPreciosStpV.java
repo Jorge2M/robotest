@@ -43,8 +43,8 @@ public class SecSelectorPreciosStpV {
         dataFilter.minimoFinal = PageGaleriaDesktop.secSelectorPrecios.getImporteMinimo(driver);
         dataFilter.maximoFinal = PageGaleriaDesktop.secSelectorPrecios.getImporteMaximo(driver);
                 
-        TestMaker.getCurrentStep().replaceInDescription(tagMinimo, String.valueOf(dataFilter.minimoFinal));
-        TestMaker.getCurrentStep().replaceInDescription(tagMaximo, String.valueOf(dataFilter.maximoFinal));    
+        TestMaker.getCurrentStepInExecution().replaceInDescription(tagMinimo, String.valueOf(dataFilter.minimoFinal));
+        TestMaker.getCurrentStepInExecution().replaceInDescription(tagMaximo, String.valueOf(dataFilter.maximoFinal));    
         checkResultSelectFiltro(dataFilter, app, driver);
         
         StdValidationFlags flagsVal = StdValidationFlags.newOne();

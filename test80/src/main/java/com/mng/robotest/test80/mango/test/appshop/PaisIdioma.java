@@ -70,19 +70,20 @@ public class PaisIdioma {
     }
 	  
     public void beforeMethod() throws Exception {
-        if (this.linesToTest==null) {
-            this.linesToTest = this.dCtxSh.pais.getShoponline().getLineasToTest(this.dCtxSh.appE);
-        }
-        if (this.flagsNavigation==null) {
-        	this.flagsNavigation = VersionPaisSuite.V1;
-        }
         if (dCtxSh==null) {
         	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
-            this.dCtxSh.pais = españa;
-            this.dCtxSh.idioma = castellano;
-            this.dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
-            this.dCtxSh.setChannel(inputParamsSuite.getChannel());
-            this.dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+        	dCtxSh = new DataCtxShop();
+            dCtxSh.pais = españa;
+            dCtxSh.idioma = castellano;
+            dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+            dCtxSh.setChannel(inputParamsSuite.getChannel());
+            dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+        }
+        if (linesToTest==null) {
+            linesToTest = dCtxSh.pais.getShoponline().getLineasToTest(dCtxSh.appE);
+        }
+        if (flagsNavigation==null) {
+        	flagsNavigation = VersionPaisSuite.V1;
         }
     }	
 	

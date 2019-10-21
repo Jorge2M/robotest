@@ -28,7 +28,7 @@ public class ModalCambioPaisStpV {
         expected="Se accede a la shop de " + tagNombrePais + " en " + tagLiteralIdioma)
     public static void cambioPais(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        StepTestMaker step = TestMaker.getCurrentStep();
+        StepTestMaker step = TestMaker.getCurrentStepInExecution();
         step.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
         step.replaceInExpected(tagNombrePais, dCtxSh.pais.getNombre_pais());
         step.replaceInDescription(tagCodigoPais, dCtxSh.pais.getCodigo_pais());

@@ -13,14 +13,16 @@ public class ModalPreloaderSppinerStpV {
 	
 	@Validation (
 		description="Aparece el icono del candado de \"Cargando\" (lo esperamos un máximo de #{maxSecondsWait})",
-		level=State.Info)
+		level=State.Info,
+		avoidEvidences=true)
     public static boolean validateIsVisible(int maxSecondsWait, WebDriver driver) {
         return (ModalPreloaderSpinner.isVisibleUntil(maxSecondsWait, driver));
     }
 	
 	@Validation (
 		description="Desaparece el icono del candado de \"Cargando\" (lo esperamos un máximo de #{maxSecondsWait})",
-		level=State.Info)
+		level=State.Info,
+		avoidEvidences=true)
     public static boolean validateIsVanished(int maxSecondsWait, WebDriver driver) {
         return (ModalPreloaderSpinner.isNotVisibleUntil(maxSecondsWait, driver));
     }

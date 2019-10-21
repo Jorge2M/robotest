@@ -32,7 +32,7 @@ public class SecTMangoStpV {
 		description="Seleccionar la forma de pago \"" + tagDescrPago + "\"", 
         expected="El resultado es correcto")
     public static void clickTipoPago(TipoPago tipoPago, Channel channel, WebDriver driver) {
-		TestMaker.getCurrentStep().replaceInDescription(tagDescrPago, SecTMango.getDescripcionTipoPago(tipoPago));
+		TestMaker.getCurrentStepInExecution().replaceInDescription(tagDescrPago, SecTMango.getDescripcionTipoPago(tipoPago));
         SecTMango.clickModalidad(driver, tipoPago, channel);
     }
 }

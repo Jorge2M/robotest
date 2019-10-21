@@ -16,7 +16,7 @@ public class PageYandexMoneyStpV {
 		description="Accedemos a la URL de <b>YandexMoney</b>: " + tagUrlYandex, 
         expected="Aparece la página de YandexMoney")
     public static void accessInNewTab(String tabTitle, WebDriver driver) throws Exception {
-		TestMaker.getCurrentStep().replaceInDescription(tagUrlYandex, PageYandexMoney.urlAccess);
+		TestMaker.getCurrentStepInExecution().replaceInDescription(tagUrlYandex, PageYandexMoney.urlAccess);
         PageYandexMoney.goToPageInNewTab(tabTitle, driver);
         checkIsPage(driver);
     }

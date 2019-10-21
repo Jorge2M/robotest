@@ -51,7 +51,7 @@ public class PageTrustpaySelectBankStpV {
     public static void selectTestBankAndPay(String importeTotal, String codPais, Channel channel, WebDriver driver) throws Exception {
         ArrayList<String> listOfPosibleValues = new ArrayList<>();
         listOfPosibleValues.addAll(Arrays.asList("TestPay", "Fio banka"));
-        TestMaker.getCurrentStep().replaceInDescription(tagPosibleBanks, String.join(",", listOfPosibleValues));
+        TestMaker.getCurrentStepInExecution().replaceInDescription(tagPosibleBanks, String.join(",", listOfPosibleValues));
 
         PageTrustpaySelectBank.selectBankThatContains(listOfPosibleValues, channel, driver);
         PageTrustpaySelectBank.clickButtonToContinuePay(channel, driver);

@@ -80,7 +80,7 @@ public class PageCheckoutWrapperStpV {
         expected="Aparecen los métodos de pagos asociados al país")
     public static void despliegaYValidaMetodosPago(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) 
     throws Exception {
-    	TestMaker.getCurrentStep().addExpectedText(": " + pais.getStringPagosTest(app, isEmpl));
+    	TestMaker.getCurrentStepInExecution().addExpectedText(": " + pais.getStringPagosTest(app, isEmpl));
         PageCheckoutWrapper.despliegaMetodosPago(channel, driver);
         validaMetodosPagoDisponibles(pais, isEmpl, app, channel, driver);
     }
@@ -250,7 +250,7 @@ public class PageCheckoutWrapperStpV {
     public static void forceClickIconoPagoAndWait(Pais pais, Pago pago, Channel channel, boolean pintaNombrePago, WebDriver driver) throws Exception {
         if (pintaNombrePago) {
             String pintaPago = "<b style=\"color:blue;\">" + pago.getNombre(channel) + "</b>:"; 
-            StepTestMaker step = TestMaker.getCurrentStep();
+            StepTestMaker step = TestMaker.getCurrentStepInExecution();
             String newDescription = pintaPago + step.getDescripcion();
             step.setDescripcion(newDescription);
         }
@@ -308,7 +308,7 @@ public class PageCheckoutWrapperStpV {
     public static void inputDataTrjAndConfirmPago(DataCtxPago dCtxPago, Channel channel, WebDriver driver) 
     throws Exception {
         Pago pago = dCtxPago.getDataPedido().getPago();
-        StepTestMaker step = TestMaker.getCurrentStep();
+        StepTestMaker step = TestMaker.getCurrentStepInExecution();
         step.replaceInDescription(tagTipoTarj, pago.getTipotarj());
         step.replaceInDescription(tagNumTarj, pago.getNumtarj());
        
@@ -412,7 +412,7 @@ public class PageCheckoutWrapperStpV {
     	description="Introducir la tarjeta de empleado " + tagTarjeta + " y pulsar el botón \"Aplicar\"", 
         expected="Aparecen los datos para la introducción del 1er apellido y el nif")
     public static void inputTarjetaEmplEnCodPromo(Pais pais, Channel channel, WebDriver driver) throws Exception {
-    	TestMaker.getCurrentStep().replaceInDescription(tagTarjeta, pais.getAccesoEmpl().getTarjeta());
+    	TestMaker.getCurrentStepInExecution().replaceInDescription(tagTarjeta, pais.getAccesoEmpl().getTarjeta());
         PageCheckoutWrapper.inputCodigoPromoAndAccept(pais.getAccesoEmpl().getTarjeta(), channel, driver);
         checkAfterInputTarjetaEmpleado(pais, channel, driver);
     }
@@ -456,7 +456,7 @@ public class PageCheckoutWrapperStpV {
         expected="Se aplican los descuentos correctamente")
     public static void inputDataEmplEnPromoAndAccept(DataBag dataBag, Pais pais, Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-    	StepTestMaker step = TestMaker.getCurrentStep();
+    	StepTestMaker step = TestMaker.getCurrentStepInExecution();
     	String primerApellido = (new StringTokenizer(pais.getAccesoEmpl().getNombre(), " ")).nextToken();
     	step.replaceInDescription(tag1erApellido, primerApellido);
     	
@@ -496,7 +496,7 @@ public class PageCheckoutWrapperStpV {
 		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
 			nombreBanco = "Test Issuer";
 		}
-		TestMaker.getCurrentStep().replaceInDescription(tagNombreBanco, nombreBanco);
+		TestMaker.getCurrentStepInExecution().replaceInDescription(tagNombreBanco, nombreBanco);
             
 		PageCheckoutWrapper.selectBancoEPS(nombreBanco, driver);
 		checkIsVisibleBank(nombreBanco, driver);
