@@ -3,7 +3,7 @@ package com.mng.testmaker.boundary.aspects.validation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import com.mng.testmaker.utils.State;
+import com.mng.testmaker.conf.State;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.RetentionPolicy;

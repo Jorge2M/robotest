@@ -5,8 +5,9 @@ import java.util.Arrays;
 import java.util.TreeSet;
 import org.junit.Test;
 
-import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.testmaker.conf.Channel;
+
 import static com.mng.robotest.test80.mango.test.data.PaisShop.*;
 
 public class TestTest80mng {

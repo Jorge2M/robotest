@@ -7,11 +7,11 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.testmaker.conf.Log4jConfig;
+import com.mng.testmaker.conf.TypeAccessFmwk;
 import com.mng.testmaker.domain.TestCaseTestMaker;
 import com.mng.testmaker.domain.TestRunTestMaker;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.utils.conf.Log4jConfig;
-import com.mng.testmaker.utils.otras.TypeAccessFmwk;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;

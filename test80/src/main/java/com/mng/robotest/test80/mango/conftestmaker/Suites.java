@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.conftestmaker;
 
-import com.mng.testmaker.utils.conf.SuiteTest;
+import com.mng.testmaker.conf.SuiteTest;
 
 public enum Suites implements SuiteTest {
     SmokeTest(8),

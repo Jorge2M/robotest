@@ -7,7 +7,7 @@ import org.testng.IMethodInstance;
 import org.testng.IMethodInterceptor;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.utils.conf.Log4jConfig;
+import com.mng.testmaker.conf.Log4jConfig;
 
 
 public class PriorityInterceptor implements IMethodInterceptor {

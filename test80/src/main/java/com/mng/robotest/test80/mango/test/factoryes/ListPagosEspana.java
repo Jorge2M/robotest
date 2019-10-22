@@ -8,7 +8,7 @@ import com.mng.testmaker.domain.SuiteTestMaker;
 
 import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.CompraFact;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;

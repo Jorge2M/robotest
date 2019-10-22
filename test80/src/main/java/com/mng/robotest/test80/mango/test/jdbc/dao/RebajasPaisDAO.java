@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import com.mng.testmaker.jdbc.Connector;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.bloqueMenu;
+import com.mng.testmaker.repository.jdbc.Connector;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

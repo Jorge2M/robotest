@@ -4,8 +4,8 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.conf.State;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;

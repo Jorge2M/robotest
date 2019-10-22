@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.sapfiori.test.testcase.webobject.PageInitial;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.utils.State;
+import com.mng.testmaker.conf.State;
 
 public class PageInitialStpV {
 

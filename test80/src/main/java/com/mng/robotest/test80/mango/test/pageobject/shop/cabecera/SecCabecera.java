@@ -4,8 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.conf.Log4jConfig;
-import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;

@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.navigations.shop;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;

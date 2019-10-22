@@ -7,11 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.domain.TestRunTestMaker;
-import com.mng.testmaker.utils.conf.Log4jConfig;
-import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.utils.webdriver.BrowserStackDesktop;
-import com.mng.testmaker.utils.webdriver.BrowserStackMobil;
+import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackDesktop;
+import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackMobil;
 
 public class BrowserStackDriverMaker implements WebdriverMaker {
 	

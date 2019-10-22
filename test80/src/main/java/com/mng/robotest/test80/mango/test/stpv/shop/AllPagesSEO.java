@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.otras.ResultadoErrores;
-import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.conf.State;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.testmaker.testreports.html.ResultadoErrores;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;

@@ -13,8 +13,8 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
 
+import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
-import com.mng.testmaker.utils.otras.Channel;
 
 class FirefoxdriverMaker implements WebdriverMaker {
 	

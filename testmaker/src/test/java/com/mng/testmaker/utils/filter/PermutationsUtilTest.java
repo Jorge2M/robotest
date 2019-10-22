@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.mng.testmaker.utils.filter.PermutationsUtil;
-import com.mng.testmaker.utils.testab.manager.AppEcom;
+import com.mng.testmaker.domain.testfilter.PermutationsUtil;
+import com.mng.testmaker.service.testab.manager.AppEcom;
 
 public class PermutationsUtilTest {
 

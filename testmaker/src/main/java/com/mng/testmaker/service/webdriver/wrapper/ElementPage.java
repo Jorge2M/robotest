@@ -1,6 +1,6 @@
 package com.mng.testmaker.service.webdriver.wrapper;
 
-import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.conf.Channel;
 
 public interface ElementPage {
 

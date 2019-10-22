@@ -13,12 +13,12 @@ import org.testng.xml.XmlClass;
 import org.testng.xml.XmlInclude;
 import org.testng.xml.XmlTest;
 
+import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.domain.testfilter.TestMethod;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
-import com.mng.testmaker.utils.filter.TestMethod;
 import com.mng.testmaker.utils.filter.resources.TestNGxmlStub;
 import com.mng.testmaker.utils.filter.resources.TestNGxmlStub.TypeStubTest;
-import com.mng.testmaker.utils.otras.Channel;
 
 public class TestFilterTNGxmlTRun {
 

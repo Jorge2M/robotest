@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard;
 
-import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

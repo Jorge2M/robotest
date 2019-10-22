@@ -1,9 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.yandex;
 
 import org.openqa.selenium.WebDriver;
-import com.mng.testmaker.utils.State;
+
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.testmaker.conf.State;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandexMoneyResult;
 
 public class PageYandexMoneyResultStpV {

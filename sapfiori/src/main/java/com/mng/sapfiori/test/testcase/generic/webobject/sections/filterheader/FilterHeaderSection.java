@@ -2,7 +2,7 @@ package com.mng.sapfiori.test.testcase.generic.webobject.sections.filterheader;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 public class FilterHeaderSection extends WebdrvWrapp {
 

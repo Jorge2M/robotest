@@ -1,5 +1,5 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.ficha;
-import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPage;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 

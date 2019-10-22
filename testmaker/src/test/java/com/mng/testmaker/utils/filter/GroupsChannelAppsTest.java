@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 import java.util.List;
 import org.junit.Test;
 
-import com.mng.testmaker.utils.filter.GroupsChannelApps;
-import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.utils.testab.manager.AppEcom;
+import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.domain.testfilter.GroupsChannelApps;
+import com.mng.testmaker.service.testab.manager.AppEcom;
 
 public class GroupsChannelAppsTest {
 

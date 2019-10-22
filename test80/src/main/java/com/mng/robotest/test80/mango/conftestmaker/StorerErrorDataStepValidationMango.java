@@ -14,9 +14,9 @@ import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.service.testreports.StorerErrorStep;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
-import com.mng.testmaker.utils.controlTest.StoreStepEvidencies;
+import com.mng.testmaker.testreports.html.StoreStepEvidencies;
+import com.mng.testmaker.testreports.html.StorerErrorStep;
 
 public class StorerErrorDataStepValidationMango implements StorerErrorStep {
 

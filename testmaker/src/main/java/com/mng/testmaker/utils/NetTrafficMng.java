@@ -9,8 +9,8 @@ import java.util.LinkedList;
 
 import org.apache.commons.compress.utils.IOUtils;
 
+import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
-import com.mng.testmaker.utils.conf.Log4jConfig;
 
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.BrowserMobProxyServer;

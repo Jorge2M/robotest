@@ -11,9 +11,9 @@ import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.testmaker.boundary.listeners.InvokeListener;
 import com.mng.testmaker.boundary.listeners.MyTransformer;
-import com.mng.testmaker.service.testreports.Reporter;
-import com.mng.testmaker.utils.filter.FilterTestsSuiteXML;
-import com.mng.testmaker.utils.filter.TestMethod;
+import com.mng.testmaker.domain.testfilter.FilterTestsSuiteXML;
+import com.mng.testmaker.domain.testfilter.TestMethod;
+import com.mng.testmaker.testreports.html.Reporter;
 
 public abstract class SuiteMaker {
 

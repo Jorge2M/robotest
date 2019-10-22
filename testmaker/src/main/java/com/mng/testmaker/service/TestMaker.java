@@ -10,6 +10,8 @@ import org.testng.SkipException;
 import org.testng.TestNG;
 import org.testng.xml.XmlSuite;
 
+import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.domain.StateRun;
 import com.mng.testmaker.domain.StepTestMaker;
@@ -17,9 +19,8 @@ import com.mng.testmaker.domain.SuiteTestMaker;
 import com.mng.testmaker.domain.SuitesExecuted;
 import com.mng.testmaker.domain.TestCaseTestMaker;
 import com.mng.testmaker.domain.TestRunTestMaker;
-import com.mng.testmaker.jdbc.Connector;
-import com.mng.testmaker.service.testreports.ResourcesExtractor;
-import com.mng.testmaker.utils.conf.Log4jConfig;
+import com.mng.testmaker.repository.jdbc.Connector;
+import com.mng.testmaker.testreports.html.ResourcesExtractor;
 
 public class TestMaker {
 
@@ -47,6 +48,17 @@ public class TestMaker {
 	
 	public static SuiteTestMaker getSuite(ITestContext ctx) {
 		return (SuiteTestMaker)ctx.getSuite().getXmlSuite();
+	}
+	
+	public static List<SuiteTestMaker> getListSuites(String suiteName, Channel channel) {
+		List<SuiteTestMaker> listSuites = new ArrayList<>();
+		for (SuiteTestMaker suite : SuitesExecuted.getSuitesExecuted()) {
+			if (suite.getName().compareTo(suiteName)==0 &&
+				suite.getInputParams().getChannel()==channel) {
+				listSuites.add(suite);
+			}
+		}
+		return listSuites;
 	}
 	
 	public static InputParamsTestMaker getInputParamsSuite(ITestContext ctx) {

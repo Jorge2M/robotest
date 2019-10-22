@@ -2,8 +2,8 @@ package com.mng.robotest.test80.mango.test.stpv.ayuda;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.conf.State;
 import com.mng.robotest.test80.mango.test.pageobject.ayuda.PageAyuda;
 import com.mng.robotest.test80.mango.test.pageobject.ayuda.PageAyuda.StateApartado;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions;

@@ -6,7 +6,7 @@ import com.mng.sapfiori.test.testcase.generic.webobject.sections.filterheader.Mo
 import com.mng.sapfiori.test.testcase.generic.webobject.sections.filterheader.ModalSetMultiFieldFromList;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.utils.State;
+import com.mng.testmaker.conf.State;
 
 public class ModalSetFilterFromListStpV {
 

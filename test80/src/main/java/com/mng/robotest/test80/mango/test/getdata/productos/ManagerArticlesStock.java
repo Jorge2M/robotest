@@ -8,8 +8,8 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.utils.ManageConnectionHTTP;
-import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticlesStockFactory.SourceArticles;

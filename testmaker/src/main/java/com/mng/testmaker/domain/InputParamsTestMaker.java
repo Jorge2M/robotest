@@ -2,9 +2,9 @@ package com.mng.testmaker.domain;
 
 import java.util.List;
 
+import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.domain.testfilter.DataFilterTCases;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
-import com.mng.testmaker.utils.filter.DataFilterTCases;
-import com.mng.testmaker.utils.otras.Channel;
 
 public class InputParamsTestMaker {
 	
@@ -157,7 +157,6 @@ public class InputParamsTestMaker {
 	public void setGroupsFilter(List<String> groupsFilter) {
 		this.groupsFilter = groupsFilter;
 	}
-
 
 	public List<String> getMails() {
 		return this.mails;

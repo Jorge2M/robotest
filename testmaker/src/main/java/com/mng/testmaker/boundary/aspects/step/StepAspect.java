@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
-import com.mng.testmaker.annotations.MatcherWithMethodParams;
+import com.mng.testmaker.boundary.aspects.MatcherWithMethodParams;
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.TestCaseTestMaker;
 import com.mng.testmaker.service.TestMaker;

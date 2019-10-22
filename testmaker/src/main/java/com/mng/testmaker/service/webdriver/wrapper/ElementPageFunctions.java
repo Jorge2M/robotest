@@ -6,8 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp.OptionSelect;
-import com.mng.testmaker.utils.otras.Channel;
 
 public class ElementPageFunctions {
 
@@ -157,5 +157,10 @@ public class ElementPageFunctions {
     	By byElement = By.xpath(element.getXPath());
         WebElement webElem = driver.findElement(byElement);
         WebdrvWrapp.moveToElement(webElem, driver);
+    }
+    
+    public static String getText(ElementPage element, WebDriver driver) {
+    	By byElement = By.xpath(element.getXPath());
+    	return driver.findElement(byElement).getText();
     }
 }

@@ -7,8 +7,8 @@ import javax.xml.bind.annotation.*;
 import org.testng.ITestContext;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.utils.otras.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.TipoTransporteEnum.TipoTransporte;
 

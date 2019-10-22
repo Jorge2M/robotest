@@ -4,7 +4,8 @@ import java.util.Set;
 
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.Test80mng;
-import com.mng.testmaker.domain.SuiteMaker;
+import com.mng.testmaker.domain.SuiteTestMaker;
+import com.mng.testmaker.service.TestMaker;
 
 import java.util.ArrayList;
 
@@ -22,8 +23,8 @@ public class TSuiteThreadsManager {
     }
     
 	public static String startSuiteInThread(InputParams paramsTSuite) throws Exception { 
-		SuiteMaker suite = Test80mng.makeSuite(paramsTSuite);
-		String idExecSuite = suite.getIdSuiteExecution();
+		SuiteTestMaker suite = Test80mng.makeSuite(paramsTSuite);
+		String idExecSuite = suite.getIdExecution();
 		
 	  	Thread.UncaughtExceptionHandler h = new Thread.UncaughtExceptionHandler() {
 		    public void uncaughtException(Thread th, Throwable ex) {
@@ -35,7 +36,7 @@ public class TSuiteThreadsManager {
 	    Thread test = new Thread(tg1, new Runnable() {
 	        public void run(){
 	          	try {
-	        	    suite.run();
+	        	    TestMaker.run(suite);
 	          	}
 	          	catch (Throwable e) {
 	          		e.printStackTrace();

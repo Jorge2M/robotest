@@ -4,10 +4,10 @@ import java.lang.reflect.Method;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
-import com.mng.testmaker.annotations.MatcherWithMethodParams;
+import com.mng.testmaker.boundary.aspects.MatcherWithMethodParams;
+import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.TestCaseTestMaker;
-import com.mng.testmaker.utils.State;
 
 public class InfoValidation {
 

@@ -7,7 +7,7 @@ import org.testng.annotations.*;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.TiendaMantoEnum.TiendaManto;
-import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.domain.TestRunTestMaker;
 import com.mng.testmaker.service.TestMaker;

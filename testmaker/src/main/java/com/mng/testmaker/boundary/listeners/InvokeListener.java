@@ -3,11 +3,11 @@ package com.mng.testmaker.boundary.listeners;
 import java.net.HttpURLConnection;
 import org.testng.*;
 
+import com.mng.testmaker.conf.Log4jConfig;
+import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.SuiteTestMaker;
 import com.mng.testmaker.domain.TestCaseTestMaker;
 import com.mng.testmaker.domain.TestRunTestMaker;
-import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.conf.Log4jConfig;
 
 
 public class InvokeListener extends TestListenerAdapter implements ISuiteListener {

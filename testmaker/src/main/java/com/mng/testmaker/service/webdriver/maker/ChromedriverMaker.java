@@ -12,11 +12,11 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
 
+import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
+import com.mng.testmaker.service.webdriver.maker.plugins.PluginBrowserFactory;
 import com.mng.testmaker.service.webdriver.maker.plugins.chrome.PluginChrome;
 import com.mng.testmaker.service.webdriver.maker.plugins.chrome.PluginChrome.typePluginChrome;
-import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.utils.webdriver.plugins.PluginBrowserFactory;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 

@@ -12,9 +12,9 @@ import java.util.Map;
 
 import com.mng.robotest.test80.InputParams;
 //import com.mng.testmaker.listeners.CallBack;
-import com.mng.testmaker.utils.otras.Channel;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.TestRunMaker;
 
 public class SuiteMakerResources {

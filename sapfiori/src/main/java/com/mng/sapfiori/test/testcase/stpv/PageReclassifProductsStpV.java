@@ -4,7 +4,7 @@ import com.mng.sapfiori.test.testcase.webobject.PageReclassifProducts;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.utils.State;
+import com.mng.testmaker.conf.State;
 
 public class PageReclassifProductsStpV {
 

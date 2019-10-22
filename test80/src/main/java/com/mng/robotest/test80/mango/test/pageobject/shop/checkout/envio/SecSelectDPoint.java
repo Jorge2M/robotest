@@ -9,8 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
-import com.mng.testmaker.utils.conf.Log4jConfig;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.DataDeliveryPoint;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.DataSearchDeliveryPoint;
 

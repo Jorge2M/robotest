@@ -4,8 +4,8 @@ import org.testng.annotations.*;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.testmaker.conf.State;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.utils.State;
 import com.mng.robotest.test80.InputParams;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;

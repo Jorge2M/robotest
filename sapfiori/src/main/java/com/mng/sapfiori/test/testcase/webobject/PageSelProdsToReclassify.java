@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.sapfiori.test.testcase.generic.webobject.sections.filterheader.FieldFilterFromListI;
 import com.mng.sapfiori.test.testcase.generic.webobject.sections.filterheader.FilterHeaderSection;
 import com.mng.sapfiori.test.testcase.generic.webobject.sections.filterheader.ModalSetFieldFromListI;
-import com.mng.testmaker.webdriverwrapper.WebdrvWrapp;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 public class PageSelProdsToReclassify extends FilterHeaderSection {
 	

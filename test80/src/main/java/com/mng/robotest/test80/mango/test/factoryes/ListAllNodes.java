@@ -6,7 +6,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.domain.TestRunTestMaker;
 import com.mng.testmaker.service.TestMaker;
@@ -32,6 +32,7 @@ public class ListAllNodes {
             switch (appEcom) {
             case shop:
                 accesos = 100;
+            	//accesos = 5;
                 break;
             case outlet:
             default:

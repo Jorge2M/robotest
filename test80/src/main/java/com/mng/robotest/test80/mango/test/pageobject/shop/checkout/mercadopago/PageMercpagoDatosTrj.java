@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 public abstract class PageMercpagoDatosTrj extends WebdrvWrapp {

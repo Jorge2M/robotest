@@ -5,8 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
-import com.mng.testmaker.utils.conf.Log4jConfig;
 
 public class PageTrabajaConNosotros extends WebdrvWrapp implements PageFromFooter {
 	

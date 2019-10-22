@@ -17,10 +17,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestContext;
 
-import com.mng.testmaker.utils.otras.ResultadoErrores;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.utils.conf.Log4jConfig;
-import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.testreports.html.ResultadoErrores;
+import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
 import com.mng.robotest.test80.mango.test.generic.stackTrace;
 

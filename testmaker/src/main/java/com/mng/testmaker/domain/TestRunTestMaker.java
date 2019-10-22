@@ -9,10 +9,10 @@ import org.testng.xml.XmlGroups;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
-import com.mng.testmaker.service.testreports.StorerErrorStep;
-import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.webdriver.BrowserStackDesktop;
-import com.mng.testmaker.utils.webdriver.BrowserStackMobil;
+import com.mng.testmaker.conf.State;
+import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackDesktop;
+import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackMobil;
+import com.mng.testmaker.testreports.html.StorerErrorStep;
 
 public class TestRunTestMaker extends XmlTest {
 

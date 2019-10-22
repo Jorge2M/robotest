@@ -8,8 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 
+import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.utils.NetTrafficMng;
-import com.mng.testmaker.utils.otras.Channel;
 
 import net.lightbody.bmp.client.ClientUtil;
 

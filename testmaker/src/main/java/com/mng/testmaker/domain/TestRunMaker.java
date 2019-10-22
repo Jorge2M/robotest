@@ -13,10 +13,10 @@ import org.testng.xml.XmlInclude;
 import org.testng.xml.XmlRun;
 import org.testng.xml.XmlSuite;
 
-import com.mng.testmaker.service.testreports.StorerErrorStep;
-import com.mng.testmaker.utils.filter.FilterTestsSuiteXML;
-import com.mng.testmaker.utils.webdriver.BrowserStackDesktop;
-import com.mng.testmaker.utils.webdriver.BrowserStackMobil;
+import com.mng.testmaker.domain.testfilter.FilterTestsSuiteXML;
+import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackDesktop;
+import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackMobil;
+import com.mng.testmaker.testreports.html.StorerErrorStep;
 
 public class TestRunMaker {
 

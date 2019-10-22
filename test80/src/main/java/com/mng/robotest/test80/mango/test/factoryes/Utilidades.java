@@ -9,8 +9,8 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.mng.testmaker.jdbc.dao.ParamsDAO;
-import com.mng.testmaker.utils.conf.Log4jConfig;
+import com.mng.testmaker.conf.Log4jConfig;
+import com.mng.testmaker.repository.jdbc.dao.ParamsDAO;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Continente;

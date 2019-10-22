@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.sofort;
 
-import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.conf.State;
 
 import org.openqa.selenium.WebDriver;
 

@@ -3,8 +3,9 @@ package com.mng.robotest.test80.mango.test.appshop;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.InputParams;
+import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.conf.TypeAccessFmwk;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.utils.otras.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;

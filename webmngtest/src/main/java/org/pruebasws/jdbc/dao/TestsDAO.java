@@ -9,7 +9,7 @@ import java.util.TreeSet;
 
 import com.mng.robotest.test80.Test80mng;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.testmaker.utils.otras.Channel;
+import com.mng.testmaker.conf.Channel;
 
 import org.pruebasws.jdbc.Connector;
 import org.pruebasws.jdbc.to.ApplicationSuite;

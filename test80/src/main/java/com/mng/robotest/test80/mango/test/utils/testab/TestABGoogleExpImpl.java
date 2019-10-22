@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.utils.testab.TestABGoogleExp;
+import com.mng.testmaker.service.testab.TestABGoogleExp;
+import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public enum TestABGoogleExpImpl implements TestABGoogleExp {

@@ -11,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mng.testmaker.utils.conf.Log4jConfig;
+import com.mng.testmaker.conf.Log4jConfig;
 
 
 public abstract class PluginChrome { 

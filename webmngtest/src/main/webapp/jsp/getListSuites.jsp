@@ -5,18 +5,21 @@ response.setDateHeader ("Expires", -1);
 %>
 <%@ page language="java" contentType="text/html"%>
 <%@page session="false"%>
+<%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="com.mng.testmaker.jdbc.dao.SuitesDAO"%>
-<%@ page import="com.mng.testmaker.jdbc.to.Suite"%>
+<%@ page import="com.mng.testmaker.service.TestMaker"%>
+<%@ page import="com.mng.testmaker.conf.Channel"%>
+<%@ page import="com.mng.testmaker.domain.SuiteTestMaker"%>
+<%@ page import="com.mng.robotest.test80.InputParams"%>
 <%
 String suiteName = request.getParameter("suite");
 String channel = request.getParameter("channel");
 String idExecSuite = request.getParameter("idExecSuite");
-ArrayList<Suite> listSuites = new ArrayList<>(); 
+List<SuiteTestMaker> listSuites = new ArrayList<>(); 
 if (idExecSuite==null)
-    listSuites = SuitesDAO.getSuitesByChannel(suiteName, channel);
+    listSuites = TestMaker.getListSuites(suiteName, Channel.valueOf(channel));
 else
-    listSuites.add(SuitesDAO.getSuite(idExecSuite, suiteName));
+    listSuites.add(TestMaker.getSuite(idExecSuite));
 %>
 
 <html>
@@ -50,23 +53,23 @@ table#tablaScripts td.nombreTestSuite {
 
 <%
 int i=0;
-for (Suite suite : listSuites) {
-%>
+for (SuiteTestMaker suite : listSuites) {
+	InputParams inputParams = (InputParams)suite.getInputParams();%>
 	<tr id="scriptData">
 		<td id="idExecution"><%=suite.getIdExecution()%></td>
-		<td id="state"><%=suite.getStateSuite()%></td>
-		<td id="suiteName"><%=suite.getSuiteName()%></td>
-		<td id="version"><%=suite.getVersion()%></td>
-		<td id="channel"><%=suite.getChannel()%></td>
-		<td id="application"><%=suite.getApplication()%></td>
-		<td id="browser"><%=suite.getBrowser()%></td>
-		<td id="numTCases"><%=suite.getNumberMethods()%></td>
-		<td id="countrys"><%=suite.getMoreInfo()%></td>
+		<td id="state"><%=suite.getState()%></td>
+		<td id="suiteName"><%=suite.getName()%></td>
+		<td id="version"><%=inputParams.getVersionSuite()%></td>
+		<td id="channel"><%=inputParams.getChannel()%></td>
+		<td id="application"><%=inputParams.getApp()%></td>
+		<td id="browser"><%=inputParams.getWebDriverType()%></td>
+		<td id="numTCases"><%=suite.getNumberTestCases()%></td>
+		<td id="countrys"><%=inputParams.getListaPaises()%></td>
 		<td id="urlBase">
-			<a href="<%=suite.getUrlBase()%>"><%=suite.getUrlBase()%></a>
+			<a href="<%=inputParams.getUrlBase()%>"><%=inputParams.getUrlBase()%></a>
 		</td>		
 		<td id="reportHTML">
-			<a href="<%=suite.getUrlReport()%>">Report HTML</a>
+			<a href="<%=suite.getPathReportHtml()%>">Report HTML</a>
 		</td>
 	</tr>
 <%}%>	

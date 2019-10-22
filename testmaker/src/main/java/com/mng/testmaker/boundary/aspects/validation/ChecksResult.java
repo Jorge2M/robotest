@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.SuiteTestMaker;
 import com.mng.testmaker.domain.TestCaseTestMaker;
 import com.mng.testmaker.domain.TestRunTestMaker;
-import com.mng.testmaker.utils.State;
 
 public class ChecksResult {
 	private final List<ResultValidation> listResultValidations;

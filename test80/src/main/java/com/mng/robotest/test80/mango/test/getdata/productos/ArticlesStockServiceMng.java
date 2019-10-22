@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticlesStockFactory.SourceArticles;
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
-import com.mng.testmaker.utils.conf.Log4jConfig;
+import com.mng.testmaker.conf.Log4jConfig;
 
 public class ArticlesStockServiceMng implements ArticlesStockGetter {
 	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);

@@ -11,8 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.testng.ITestContext;
 
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
+import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
-import com.mng.testmaker.utils.conf.Log4jConfig;
 
 public class AllPages extends WebdrvWrapp {
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);

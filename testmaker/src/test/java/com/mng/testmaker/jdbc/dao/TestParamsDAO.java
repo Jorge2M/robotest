@@ -9,7 +9,7 @@ import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.mng.testmaker.jdbc.dao.ParamsDAO;
+import com.mng.testmaker.repository.jdbc.dao.ParamsDAO;
 
 @RunWith(PowerMockRunner.class)
 @PowerMockIgnore("javax.management.*")

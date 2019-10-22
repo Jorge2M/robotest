@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.data;
 
-import com.mng.testmaker.utils.webdriver.BrowserStackDesktop;
-import com.mng.testmaker.utils.webdriver.BrowserStackSO.PlatformDesktopBS;
+import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackDesktop;
+import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackSO.PlatformDesktopBS;
 
 public enum BrowserStackCtxDesktop implements BrowserStackDesktop {
 

@@ -9,7 +9,7 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.SkipException;
 
-import com.mng.testmaker.utils.State;
+import com.mng.testmaker.conf.State;
 
 public class TestCaseTestMaker  {
 

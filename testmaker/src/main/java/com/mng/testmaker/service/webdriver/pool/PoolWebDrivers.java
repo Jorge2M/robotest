@@ -8,15 +8,15 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.domain.InputParamsTestMaker.ManagementWebdriver;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
+import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackMobil;
 import com.mng.testmaker.service.webdriver.pool.StoredWebDrv.stateWd;
 import com.mng.testmaker.utils.NetTrafficMng;
-import com.mng.testmaker.utils.conf.Log4jConfig;
-import com.mng.testmaker.utils.otras.Channel;
-import com.mng.testmaker.utils.webdriver.BrowserStackMobil;
 
 /**
  * Clase encargada de gestionar un pool de objetos WebDriver

@@ -6,9 +6,9 @@ import java.util.List;
 
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.conf.State;
+import com.mng.testmaker.testreports.html.StoreStepEvidencies;
 import com.mng.testmaker.utils.NetTrafficMng;
-import com.mng.testmaker.utils.State;
-import com.mng.testmaker.utils.controlTest.StoreStepEvidencies;
 
 public class StepTestMaker {
 	
