@@ -15,7 +15,7 @@ public class TestCaseTestMaker  {
 
 	private final List<StepTestMaker> listSteps = new ArrayList<>();
 	
-	private StateRun stateRun = StateRun.Started;
+	private StateExecution stateRun = StateExecution.Started;
 	private State state = State.Ok;
 	private final SuiteTestMaker suiteParent;
 	private final TestRunTestMaker testRunParent;
@@ -28,7 +28,7 @@ public class TestCaseTestMaker  {
 		this.testRunParent = (TestRunTestMaker)result.getTestContext().getCurrentXmlTest();
 		this.suiteParent = (SuiteTestMaker)testRunParent.getSuite();
 		//TODO no tengo claro si esta excepción tiene efecto
-        if (suiteParent.getState()==StateRun.Stopping) {
+        if (suiteParent.getStateExecution()==StateExecution.Stopping) {
             throw new SkipException("Received Signal for stop TestSuite");
         }
 		this.result = result;
@@ -51,7 +51,7 @@ public class TestCaseTestMaker  {
 	}
 	
 	private void stopTest() {
-    	setStateRun(StateRun.Finished);
+    	setStateRun(StateExecution.Finished);
     	suiteParent.getPoolWebDrivers().quitWebDriver(driver, testRunParent);
 	}
 	
@@ -82,7 +82,7 @@ public class TestCaseTestMaker  {
 			for (TestRunTestMaker testRun : suite.getListTestRuns()) {
 				for (TestCaseTestMaker testCase : testRun.getListTestCases()) {
 					if (testCase.getThreadName().compareTo(threadName)==0 &&
-						testCase.getStateRun()==StateRun.Started) {
+						testCase.getStateRun()==StateExecution.Started) {
 						return testCase;
 					}
 				}
@@ -116,7 +116,7 @@ public class TestCaseTestMaker  {
 	public StepTestMaker getCurrentStepInExecution() {
 		StepTestMaker stepReturn = null;
 		for (StepTestMaker step : listSteps) {
-			if (step.getState()==StateRun.Started) {
+			if (step.getState()==StateExecution.Started) {
 				stepReturn = step;
 			}
 		}
@@ -144,11 +144,11 @@ public class TestCaseTestMaker  {
 //		return stepReturn;
 //	}
 	
-	public StateRun getStateRun() {
+	public StateExecution getStateRun() {
 		return this.stateRun;
 	}
 	
-	public void setStateRun(StateRun stateRun) {
+	public void setStateRun(StateExecution stateRun) {
 		this.stateRun = stateRun;
 	}
 	

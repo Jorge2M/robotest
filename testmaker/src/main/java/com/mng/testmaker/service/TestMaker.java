@@ -13,7 +13,7 @@ import org.testng.xml.XmlSuite;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.domain.InputParamsTestMaker;
-import com.mng.testmaker.domain.StateRun;
+import com.mng.testmaker.domain.StateExecution;
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.SuiteTestMaker;
 import com.mng.testmaker.domain.SuitesExecuted;
@@ -29,7 +29,7 @@ public class TestMaker {
 	//generateCorreoReport
 	
     public static void run(SuiteTestMaker suite) { 
-    	suite.setState(StateRun.Started);
+    	suite.start();
     	runInTestMaker(suite);
     	runInTestNG(suite);
     }
@@ -96,7 +96,7 @@ public class TestMaker {
     }
 	
     public static void skipTestsIfSuiteStopped(SuiteTestMaker suite) {
-        if (suite.getState()==StateRun.Stopping) {
+        if (suite.getStateExecution()==StateExecution.Stopping) {
             throw new SkipException("Received Signal for stop TestSuite" + suite.getName());
         }
     }

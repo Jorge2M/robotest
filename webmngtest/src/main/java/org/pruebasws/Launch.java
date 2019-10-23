@@ -13,7 +13,7 @@ package org.pruebasws;
 import org.pruebasws.thread.TSuiteThreadsManager;
 import org.testng.TestNG;
 
-import com.mng.testmaker.domain.StateRun;
+import com.mng.testmaker.domain.StateExecution;
 import com.mng.testmaker.service.TestMaker;
 
 /**
@@ -41,16 +41,16 @@ public class Launch {
     public static boolean stopTSuiteViaMarkInTableSuite(String idExecSuite) throws Exception {
         int timeoutSeconds = 40;
         TestMaker.finishSuite(idExecSuite);
-        StateRun stateSuiteNew;
+        StateExecution stateSuiteNew;
         int i=0;
         do {
             Thread.sleep(3000);
             i+=3;
             stateSuiteNew = TestMaker.getSuite(idExecSuite).getState();
         }
-        while(stateSuiteNew==StateRun.Stopping && i<timeoutSeconds);
+        while(stateSuiteNew==StateExecution.Stopping && i<timeoutSeconds);
         
-        return (stateSuiteNew!=StateRun.Stopping); 
+        return (stateSuiteNew!=StateExecution.Stopping); 
     }
     
     public static void stopTSuiteViaKillThread(String idThreadGroupTestSuite) throws Exception {

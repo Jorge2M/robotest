@@ -10,7 +10,7 @@ response.setDateHeader ("Expires", -1);%>
 <body>
 	<%@ page import="com.mng.robotest.test80.Test80mng" %>
 	<%@ page import="com.mng.robotest.test80.InputParams" %>
-	<%@ page import="com.mng.testmaker.boundary.access.CommandLineAccess"%>
+	<%@ page import="com.mng.testmaker.boundary.access.CmdLineMaker"%>
 	<%@ page import="java.io.BufferedReader" %>
 	<%@ page import="javax.servlet.ServletContext" %>
 	<%@ page import="java.io.InputStreamReader" %>
@@ -142,29 +142,29 @@ response.setDateHeader ("Expires", -1);%>
 	
 	<%!public static InputParams storeParamsFromHttpRequest(HttpServletRequest request) {
 		//Parameters that come from index.jsp
-		String app = request.getParameter(CommandLineAccess.AppNameParam);
-    	String suite = request.getParameter(CommandLineAccess.SuiteNameParam);
+		String app = request.getParameter(CmdLineMaker.AppNameParam);
+    	String suite = request.getParameter(CmdLineMaker.SuiteNameParam);
     	InputParams paramsTSuite = InputParams.getNew();
     	paramsTSuite.setApp(AppEcom.valueOf(app));
     	paramsTSuite.setSuite(Suites.valueOf(suite));
-	    paramsTSuite.setChannel(request.getParameter(CommandLineAccess.ChannelNameParam));
-	    paramsTSuite.setBrowser(request.getParameter(CommandLineAccess.BrowserNameParam));
-	    paramsTSuite.setVersionSuite(request.getParameter(CommandLineAccess.VersionNameParam));
-	    paramsTSuite.setUrlBase(request.getParameter(CommandLineAccess.URLNameParam));
-	    paramsTSuite.setNetAnalysis(request.getParameter(CommandLineAccess.NetAnalysis));
+	    paramsTSuite.setChannel(request.getParameter(CmdLineMaker.ChannelNameParam));
+	    paramsTSuite.setBrowser(request.getParameter(CmdLineMaker.BrowserNameParam));
+	    paramsTSuite.setVersionSuite(request.getParameter(CmdLineMaker.VersionNameParam));
+	    paramsTSuite.setUrlBase(request.getParameter(CmdLineMaker.URLNameParam));
+	    paramsTSuite.setNetAnalysis(request.getParameter(CmdLineMaker.NetAnalysis));
 	    paramsTSuite.setListaPaises(request.getParameter(Test80mng.CountrysNameParam));
 	    paramsTSuite.setListaLineas(request.getParameterValues(Test80mng.LineasNameParam));
 	    paramsTSuite.setListaPayments(request.getParameterValues(Test80mng.PaymentsNameParam));
-	    String[] listTCases = request.getParameterValues(CommandLineAccess.TCaseNameParam);
+	    String[] listTCases = request.getParameterValues(CmdLineMaker.TCaseNameParam);
 	    if (listTCases!=null) {
 	    	paramsTSuite.setTestCasesFilter(Arrays.asList(listTCases));
 	    }
 
 	    //Parameters that don't come from index.jsp (for exemple, the call from Jenkin's CI Task)
 	    paramsTSuite.setUrlManto(request.getParameter(Test80mng.UrlManto));
-	    paramsTSuite.setRecicleWD(request.getParameter(CommandLineAccess.RecicleWD));
-	    paramsTSuite.setNetAnalysis(request.getParameter(CommandLineAccess.NetAnalysis));
-	    String[] listMails = request.getParameterValues(CommandLineAccess.Mails);
+	    paramsTSuite.setRecicleWD(request.getParameter(CmdLineMaker.RecicleWD));
+	    paramsTSuite.setNetAnalysis(request.getParameter(CmdLineMaker.NetAnalysis));
+	    String[] listMails = request.getParameterValues(CmdLineMaker.Mails);
 	    if (listMails!=null) {
 	    	paramsTSuite.setMails(Arrays.asList(listMails));
 	    }

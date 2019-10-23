@@ -17,7 +17,7 @@ import com.mng.testmaker.testreports.html.StorerErrorStep;
 public class TestRunTestMaker extends XmlTest {
 
 	private static final long serialVersionUID = -4002416107477209626L;
-	private StateRun stateRun = StateRun.Started;
+	private StateExecution stateExecution = StateExecution.Started;
 	private State state = State.Ok;
     public XmlGroups x_xmlGroupsVisible;
     private ITestContext testNgContext;
@@ -36,7 +36,7 @@ public class TestRunTestMaker extends XmlTest {
     
 	public void end() {
 		state = getStateFromTestCases();
-		stateRun = StateRun.Stopped;
+		stateExecution = StateExecution.Stopped;
 	}
 	
 	private State getStateFromTestCases() {
@@ -50,14 +50,18 @@ public class TestRunTestMaker extends XmlTest {
 		return stateReturn;
 	}
     
-	public StateRun getStateRun() {
-		return stateRun;
+	public StateExecution getStateExecution() {
+		return stateExecution;
 	}
 	
-	public void setState(StateRun stateRun) {
-		this.stateRun = stateRun;
+	public void setStateExecution(StateExecution stateExecution) {
+		this.stateExecution = stateExecution;
 	}
-    
+	
+	public State getResult() {
+		return state;
+	}
+	
     public SuiteTestMaker getSuiteParent() {
     	return (SuiteTestMaker)getSuite();
     }
@@ -103,10 +107,7 @@ public class TestRunTestMaker extends XmlTest {
 	public int getNumTestCases() {
 		return getListTestCases().size();
 	}
-	
-	public State getState() {
-		return state;
-	}
+
 	
 	public void addTestCase(TestCaseTestMaker testCase) {
 		listTestCases.add(testCase);

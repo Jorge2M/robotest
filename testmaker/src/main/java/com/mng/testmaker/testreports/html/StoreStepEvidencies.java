@@ -9,7 +9,6 @@ import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
 import com.mng.testmaker.service.webdriver.utils.WebDriverArqUtils;
-import com.mng.testmaker.utils.NetTrafficMng;
 
 public class StoreStepEvidencies {
 	
@@ -115,7 +114,7 @@ public class StoreStepEvidencies {
     	String nameFileHar = getPathFileEvidenciaStep(step, StepEvidence.har);
     	if (!new File(nameFileHar).exists()) {
 		    try {
-	        	NetTrafficMng netTraffic = new NetTrafficMng();
+	        	NetTrafficSaver netTraffic = new NetTrafficSaver();
 	            netTraffic.storeHarInFile(nameFileHar);
 	            netTraffic.copyHarToHarp(nameFileHar);
 	            Thread.sleep(1000);

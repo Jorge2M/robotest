@@ -1,4 +1,4 @@
-package com.mng.testmaker.utils;
+package com.mng.testmaker.testreports.html;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,7 +23,7 @@ import net.lightbody.bmp.proxy.CaptureType;
  * Project info: https://github.com/lightbody/browsermob-proxy
  *
  */
-public class NetTrafficMng {
+public class NetTrafficSaver {
 
 	static ThreadLocal<BrowserMobProxy> proxyInThread;
 	static int initPort = 1000;
@@ -31,7 +31,7 @@ public class NetTrafficMng {
 	static LinkedList<Integer> listPortsAssigned; 
 	final static String nameProxyInContext = "BrowserMobProxy";
 	
-	public NetTrafficMng() {
+	public NetTrafficSaver() {
 		if (proxyInThread==null) {
 			proxyInThread = new ThreadLocal<>();
 		}
@@ -103,7 +103,7 @@ public class NetTrafficMng {
 	}
 	
 	public int checkoutPort() {
-		synchronized(NetTrafficMng.class) {
+		synchronized(NetTrafficSaver.class) {
 			if (listPortsAssigned==null) {
 				listPortsAssigned = new LinkedList<>();
 			}

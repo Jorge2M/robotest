@@ -5,9 +5,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,7 +29,6 @@ import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
 import com.mng.testmaker.domain.SuiteTestMaker;
 import com.mng.testmaker.domain.TestCaseTestMaker;
 import com.mng.testmaker.domain.TestRunTestMaker;
-import com.mng.testmaker.utils.utils;
 
 
 public class GenerateReports extends EmailableReporter {
@@ -46,6 +48,8 @@ public class GenerateReports extends EmailableReporter {
             pLogger.fatal("Problem generating ReportHTML", e);
         }
     }
+    
+
     
     private void deployStaticsIfNotExist(String outputDirectory) throws Exception {
     	ResourcesExtractor resExtractor = ResourcesExtractor.getNew();
@@ -196,7 +200,7 @@ public class GenerateReports extends EmailableReporter {
             	"  <td class=\"nowrap\">" + testRun.getName() + "</td>" + 
             	"  <td class=\"nowrap\"><div id=\"device\">" + deviceBSmovil + "</div></td>" + 
             	"  <td>" + testRun.getNumTestCases() + "</td>" + 
-            	"  <td><div class=\"result" + testRun.getState() + "\">" + testRun.getState() + "</div></td>" + 
+            	"  <td><div class=\"result" + testRun.getResult() + "\">" + testRun.getResult() + "</div></td>" + 
             	"  <td>" + timeMillis + "</td>" + "               <td></td>" + 
             	"  <td><br><br></td>" + 
             	"  <td></td>" + 
@@ -279,7 +283,7 @@ public class GenerateReports extends EmailableReporter {
             indexFile = new File(HARPFileStep);
             String linkHarpNew = "";
             if (indexFile.exists()) {
-                String pathHARP = utils.obtainDNSFromFile(indexFile.getAbsolutePath(), buildReport.serverDNS).replace('\\', '/');
+                String pathHARP = getDnsOfFileReport(indexFile.getAbsolutePath(), buildReport.serverDNS).replace('\\', '/');
                 linkHarpNew = " \\ <a href=\"" + ConstantesTestMaker.URL_SOFTWAREISHARD + pathHARP + "\" target=\"_blank\">NetTraffic</a>";
             }
             
@@ -485,6 +489,37 @@ public class GenerateReports extends EmailableReporter {
             this.reportHTML = this.reportHTML.replaceAll(tagHTML, this.valuesTree);
         }
     }    
+    
+    /**
+     * Obtiene la DNS de un fichero ubicado dentro del contexto de la aplicación de tests
+     * @param serverDNS: del tipo "http://robottest.mangodev.net + :port si fuera preciso)  
+     */
+    public static String getDnsOfFileReport(String filePath, String applicationDNS) {
+        String pathReport = "";
+        if (applicationDNS!=null && "".compareTo(applicationDNS)!=0) {
+            pathReport = filePath.substring(filePath.indexOf(ConstantesTestMaker.directoryOutputTests));
+            pathReport = applicationDNS + "\\" + pathReport;
+        } else {
+            Pattern patternDrive = Pattern.compile("^[a-zA-Z]:");
+            pathReport = patternDrive.matcher(filePath).replaceFirst("\\\\\\\\" + getNamePC());
+        }
+
+        return pathReport;
+    }
+	
+    private static String getNamePC() {
+        String hostname = "";
+        try {
+            InetAddress addr;
+            addr = InetAddress.getLocalHost();
+            hostname = addr.getHostName();
+        }
+        catch (UnknownHostException ex) {
+            hostname = "Unknown";
+        }
+		
+        return hostname;
+    }
 }
 
 

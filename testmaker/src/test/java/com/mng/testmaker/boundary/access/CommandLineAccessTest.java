@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.Test;
 
-import com.mng.testmaker.boundary.access.CommandLineAccess;
+import com.mng.testmaker.boundary.access.CmdLineMaker;
 import com.mng.testmaker.boundary.access.OptionTMaker;
 
 import org.apache.commons.cli.ParseException;
@@ -33,7 +33,7 @@ public class CommandLineAccessTest {
     	String args[] = getArray(listaArgs);
 
     	//When
-    	CommandLineAccess cmdLineAccess = CommandLineAccess.from(args, options, Suites.class, AppEcom.class);
+    	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, options, Suites.class, AppEcom.class);
     	StringBuffer storedErrors = new StringBuffer();
     	boolean check = cmdLineAccess.checkOptionsValue(storedErrors);	
     	
@@ -62,7 +62,7 @@ public class CommandLineAccessTest {
     	String args[] = getArray(listaArgs);
 
     	//When
-    	CommandLineAccess cmdLineAccess = CommandLineAccess.from(args, options, Suites.class, AppEcom.class);
+    	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, options, Suites.class, AppEcom.class);
     	StringBuffer storedErrors = new StringBuffer();
     	boolean check = cmdLineAccess.checkOptionsValue(storedErrors);	
     	
@@ -93,7 +93,7 @@ public class CommandLineAccessTest {
     	String args[] = getArray(listaArgs);
 
     	//When
-    	CommandLineAccess cmdLineAccess = CommandLineAccess.from(args, options, Suites.class, AppEcom.class);
+    	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, options, Suites.class, AppEcom.class);
     	StringBuffer storedErrors = new StringBuffer();
     	boolean check = cmdLineAccess.checkOptionsValue(storedErrors);	
     	
@@ -133,7 +133,7 @@ public class CommandLineAccessTest {
     	String args[] = getArray(listaArgs);
 
     	//When
-    	CommandLineAccess cmdLineAccess = CommandLineAccess.from(args, options, Suites.class, AppEcom.class);
+    	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, options, Suites.class, AppEcom.class);
     	StringBuffer storedErrors = new StringBuffer();
     	boolean check = cmdLineAccess.checkOptionsValue(storedErrors);	
     	

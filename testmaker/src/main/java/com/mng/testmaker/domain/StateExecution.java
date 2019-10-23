@@ -1,7 +1,7 @@
 package com.mng.testmaker.domain;
 
 
-public enum StateRun {
+public enum StateExecution {
 	NotStarted, 
 	Started, 
 	Finished, 

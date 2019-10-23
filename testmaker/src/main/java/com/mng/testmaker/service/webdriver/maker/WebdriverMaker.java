@@ -9,7 +9,7 @@ import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.utils.NetTrafficMng;
+import com.mng.testmaker.testreports.html.NetTrafficSaver;
 
 import net.lightbody.bmp.client.ClientUtil;
 
@@ -20,8 +20,8 @@ public interface WebdriverMaker {
 	abstract public WebDriver build();
 	
 	default Proxy getProxyForNettraffic() {
-		new NetTrafficMng();
-	    Proxy seleniumProxy = ClientUtil.createSeleniumProxy(NetTrafficMng.getProxy());
+		new NetTrafficSaver();
+	    Proxy seleniumProxy = ClientUtil.createSeleniumProxy(NetTrafficSaver.getProxy());
 	    return seleniumProxy;
 	}
 

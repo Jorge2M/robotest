@@ -7,8 +7,8 @@ import java.util.List;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.testreports.html.NetTrafficSaver;
 import com.mng.testmaker.testreports.html.StoreStepEvidencies;
-import com.mng.testmaker.utils.NetTrafficMng;
 
 public class StepTestMaker {
 	
@@ -17,7 +17,7 @@ public class StepTestMaker {
 	private final TestCaseTestMaker testCaseParent;
 	private final List<ChecksResult> listChecksResult = new ArrayList<>();
 			
-	private StateRun state = StateRun.Started;
+	private StateExecution state = StateExecution.Started;
 	private boolean isStateUpdated = false;
 	private String descripcion; 
 	private String res_expected; 
@@ -77,18 +77,18 @@ public class StepTestMaker {
 	    	storeEvidencies();
 		}
     	setHoraFin(new Date(System.currentTimeMillis()));
-    	setState(StateRun.Finished);
+    	setState(StateExecution.Finished);
 	}
 	
 	public void storeEvidencies() {
 		StoreStepEvidencies.storeStepEvidencies(this);
 	}
 	
-    public void setState(StateRun state) {
+    public void setState(StateExecution state) {
     	this.state = state;
     }
     
-    public StateRun getState() {
+    public StateExecution getState() {
     	return this.state;
     }
 
@@ -135,7 +135,7 @@ public class StepTestMaker {
     public void setSaveNettrafic(SaveWhen saveNettraffic) {
         if (suiteParent.getInputParams().isNetAnalysis()) {
         	this.saveNettraffic = saveNettraffic;
-        	NetTrafficMng netTraffic = new NetTrafficMng();
+        	NetTrafficSaver netTraffic = new NetTrafficSaver();
         	netTraffic.resetAndStartNetTraffic();
         }
     }    

@@ -16,7 +16,7 @@ response.setDateHeader ("Expires", -1);
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.TreeSet"%>
 <%@ page import="com.mng.robotest.test80.Test80mng"%>
-<%@ page import="com.mng.testmaker.boundary.access.CommandLineAccess"%>
+<%@ page import="com.mng.testmaker.boundary.access.CmdLineMaker"%>
 <%@ page import="com.mng.robotest.test80.InputParams" %>
 <%@ page import="com.mng.testmaker.domain.testfilter.TestMethod"%>
 <%@ page import="com.mng.testmaker.domain.testfilter.FilterTestsSuiteXML"%>
@@ -138,9 +138,9 @@ for (SuiteTestData suiteTest : listTestSuites) {
 		<form id="testform_<%=i%>" action="./jsp/execTest.jsp" method="post">
 			<tr id="scriptData-<%=i%>">
 				<td id="test-<%=i%>" class="nombreTestSuite" title="<%=suiteTest.getDescription()%>"><%=suiteTest.getSuite()%></td>
-				<input id="<%=CommandLineAccess.SuiteNameParam%>" name="<%=CommandLineAccess.SuiteNameParam%>" type="hidden" value='<%=suiteTest.getSuite()%>' />
+				<input id="<%=CmdLineMaker.SuiteNameParam%>" name="<%=CmdLineMaker.SuiteNameParam%>" type="hidden" value='<%=suiteTest.getSuite()%>' />
 				<td id="channel-<%=i%>" class="channel"><%=suiteTest.getChannel()%></td>
-				<input id="<%=CommandLineAccess.ChannelNameParam%>" name="<%=CommandLineAccess.ChannelNameParam%>" type="hidden" value='<%=suiteTest.getChannel()%>' />
+				<input id="<%=CmdLineMaker.ChannelNameParam%>" name="<%=CmdLineMaker.ChannelNameParam%>" type="hidden" value='<%=suiteTest.getChannel()%>' />
 				<td id="link-<%=i%>">
 					<input id="Start" type="Submit" value="Start" />
 				</td>
@@ -148,137 +148,153 @@ for (SuiteTestData suiteTest : listTestSuites) {
 					<input id="force-<%=i%>" type="checkbox" name="forceStart" />
 				</td>
 				<td id="browser-<%=i%>">
-					<select id="browser-select-<%=i%>" name="<%=CommandLineAccess.BrowserNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
+					<select id="browser-select-<%=i%>" name="<%=CmdLineMaker.BrowserNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							String actualBrowser = suiteTest.getIdBrowser();
-							for (BrowserSuite browserSuite : suiteTest.getListBrowsersChannel()) {
-								String selected = "";
-								if (browserSuite.getBrowser().compareTo(actualBrowser)==0) {
-									selected = "selected";
-								}
-								%>
+											for (BrowserSuite browserSuite : suiteTest.getListBrowsersChannel()) {
+												String selected = "";
+												if (browserSuite.getBrowser().compareTo(actualBrowser)==0) {
+													selected = "selected";
+												}
+						%>
 								<option value="<%=browserSuite.getBrowser()%>" <%=selected%>><%=browserSuite.getBrowser()%></option>
 								<%
-							}
-							%>
+									}
+								%>
 					</select>
 				</td>
 				<td id="application">
-					<select id="application-select-<%=i%>" name="<%=CommandLineAccess.AppNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
+					<select id="application-select-<%=i%>" name="<%=CmdLineMaker.AppNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							String actualApplication = suiteTest.getApplicationActual();
-							for (ApplicationSuite applicationSuite : suiteTest.getListApplicationsChannel()) {
-								String selected = "";
-								if (applicationSuite.getApplication().compareTo(actualApplication)==0) {
-									selected = "selected";
-								}
-								%>
+											for (ApplicationSuite applicationSuite : suiteTest.getListApplicationsChannel()) {
+												String selected = "";
+												if (applicationSuite.getApplication().compareTo(actualApplication)==0) {
+													selected = "selected";
+												}
+						%>
 								<option value="<%=applicationSuite.getApplication()%>" <%=selected%>><%=applicationSuite.getApplication()%></option>
 								<%
-							}
-							%>
+									}
+								%>
 					</select></td>
 				<td id="nettrafic">
-					<select id="nettrafic-select-<%=i%>" name="<%=CommandLineAccess.NetAnalysis%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
+					<select id="nettrafic-select-<%=i%>" name="<%=CmdLineMaker.NetAnalysis%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							String actualNettrafic = suiteTest.getNettrafic();
-							String selectedFalse = "selected";
-							String selectedTrue = "";
-							if ("true".compareTo(actualNettrafic)==0) {
-								selectedFalse = "";
-								selectedTrue = "selected";   
-							}
+											String selectedFalse = "selected";
+											String selectedTrue = "";
+											if ("true".compareTo(actualNettrafic)==0) {
+												selectedFalse = "";
+												selectedTrue = "selected";   
+											}
 						%>
 						<option value="false" <%=selectedFalse%>>false</option>
 						<option value="true" <%=selectedTrue%>>true</option>
 					</select></td>					
 				<td id="version">
-					<select id="version-select-<%=i%>" name="<%=CommandLineAccess.VersionNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
+					<select id="version-select-<%=i%>" name="<%=CmdLineMaker.VersionNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							String actualVersion = suiteTest.getVersionActual();
-							for (VersionSuite versionSuite : suiteTest.getVersionChannelList()) {
-								String selected = "";
-								if (versionSuite.getVersion().compareTo(actualVersion)==0) {
-									selected = "selected";
-								}
-								%>
+											for (VersionSuite versionSuite : suiteTest.getVersionChannelList()) {
+												String selected = "";
+												if (versionSuite.getVersion().compareTo(actualVersion)==0) {
+													selected = "selected";
+												}
+						%>
 								<option value="<%=versionSuite.getVersion()%>" <%=selected%>><%=versionSuite.getDescription()%></option>
 								<%
-							}
-						%>
+									}
+								%>
 					</select>
 				</td>
 				<td id="urlbase-<%=i%>" class="input">
-					<input id="urlbase-input-<%=i%>" name="<%=CommandLineAccess.URLNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" value='<%=suiteTest.getUrlBase()%>' />
+					<input id="urlbase-input-<%=i%>" name="<%=CmdLineMaker.URLNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" value='<%=suiteTest.getUrlBase()%>' />
 				</td>
 				<td id="tcasesselect-<%=i%>">
 					<%
 						if (suiteTest.getFiltroTCases()==1) {
 					%>					
-					<select multiple size=10 id="tcases-<%=i%>" name="<%=CommandLineAccess.TCaseNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
+					<select multiple size=10 id="tcases-<%=i%>" name="<%=CmdLineMaker.TCaseNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							for (TestMethod testMethod : Test80mng.getDataTestAnnotationsToExec(getParamsFromSuiteToGetTCases(suiteTest))) {
-								String selected = "";
-								if (FilterTestsSuiteXML.methodInTestCaseList(testMethod.getMethod().getName(), suiteTest.getListTCasesArray())) {
-									selected = "selected";
-								}
+												String selected = "";
+												if (FilterTestsSuiteXML.methodInTestCaseList(testMethod.getMethod().getName(), suiteTest.getListTCasesArray())) {
+													selected = "selected";
+												}
 						%>
 								<option value="<%=testMethod.getMethod().getName()%>" <%=selected%> title="<%=testMethod.getAnnotationTest().description()%>"><%=testMethod.getMethod().getName()%></option>
-						<%	}%>
- 					<%}%>						
+						<%
+							}
+						%>
+ 					<%
+ 						}
+ 					%>						
 					</select>
 				</td>				
 				<td id="countrys-<%=i%>" class="input">
 					<%
-					if (suiteTest.getFiltroPaises()==1) {
+						if (suiteTest.getFiltroPaises()==1) {
 					%> 
 					<input id="countrys-input-<%=i%>" name="<%=Test80mng.CountrysNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" value='<%=suiteTest.getListPaises()%>' /> 
- 					<%}%>
+ 					<%
+  						}
+  					%>
 				</td>
 				<td id="pagos-<%=i%>">
 					<%
-					if (suiteTest.getFiltroPagos()==1) {
+						if (suiteTest.getFiltroPagos()==1) {
 					%>					
 					<select multiple size=10 id="pagos-<%=i%>" name="<%=Test80mng.PaymentsNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
-						String listPaisesCommaSeparated = suiteTest.getListPaises();
-						if (suiteTest.getFiltroPaises()==0)
-						    listPaisesCommaSeparated = "001"; //España														
-						
-			            TreeSet<String> listAllPagosCountrys = Test80mng.getListPagoFilterNames(listPaisesCommaSeparated, suiteTest.getChannelType(), suiteTest.getAppType(), false/*isEmpl*/);
-						for (String nombrePago : listAllPagosCountrys) {
-						    String selected = "";
-						    if (suiteTest.getListPagosArray().size()>0 && suiteTest.getListPagosArray().contains(nombrePago))
-						        selected = "selected";
+							String listPaisesCommaSeparated = suiteTest.getListPaises();
+										if (suiteTest.getFiltroPaises()==0)
+										    listPaisesCommaSeparated = "001"; //España														
+										
+							            TreeSet<String> listAllPagosCountrys = Test80mng.getListPagoFilterNames(listPaisesCommaSeparated, suiteTest.getChannelType(), suiteTest.getAppType(), false/*isEmpl*/);
+										for (String nombrePago : listAllPagosCountrys) {
+										    String selected = "";
+										    if (suiteTest.getListPagosArray().size()>0 && suiteTest.getListPagosArray().contains(nombrePago))
+										        selected = "selected";
 						%>
 							<option value="<%=nombrePago%>" <%=selected%>><%=nombrePago%></option>
-						<%}%>
- 					<%}%>						
+						<%
+							}
+						%>
+ 					<%
+ 						}
+ 					%>						
 					</select>
 				</td>				
 				<td id="lineas-<%=i%>">
 					<%
-					if (suiteTest.getFiltroLineas()==1) {
+						if (suiteTest.getFiltroLineas()==1) {
 					%>					
 					<select multiple size=3 id="lineas-select-<%=i%>" name="<%=Test80mng.LineasNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
-						for (String linea : suiteTest.getListLineasArray()) {
+							for (String linea : suiteTest.getListLineasArray()) {
 						%>
 						<option value="<%=linea%>"><%=linea%></option>
-						<%}%>
- 					<%}%>						
+						<%
+							}
+						%>
+ 					<%
+ 						}
+ 					%>						
 					</select>
 				</td>				
 				<td nowrap id="threads-<%=i%>">
 					<%
-				    ArrayList<Thread> threadsTest = TSuiteThreadsManager.getThreadsTestSuiteGroup(suiteTest.getSuite(), suiteTest.getChannel());
-					boolean threadsRun = false;
-					if (threadsTest.size()>0) 
-					    threadsRun = true;
-					
-					for (int j=0; j<threadsTest.size(); j++) {
+						ArrayList<Thread> threadsTest = TSuiteThreadsManager.getThreadsTestSuiteGroup(suiteTest.getSuite(), suiteTest.getChannel());
+								boolean threadsRun = false;
+								if (threadsTest.size()>0) 
+								    threadsRun = true;
+								
+								for (int j=0; j<threadsTest.size(); j++) {
 					%><div style="white-space: nowrap;"><a href="./jsp/stopTestSuite.jsp?idThreadGroupTestSuite=<%=threadsTest.get(j).getName()%>">Stop</a><span> <%=threadsTest.get(j).getName()%></span></div>
-					<%}%>
+					<%
+						}
+					%>
 				</td>
 				<td id="historico-<%=i%>">
 					<a href="./jsp/getListSuites.jsp?suite=<%=suiteTest.getSuite()%>&channel=<%=suiteTest.getChannel()%>">Histórico</a>
@@ -286,8 +302,9 @@ for (SuiteTestData suiteTest : listTestSuites) {
 			</tr>
 		</form>
 <%
-i+=1;
-} %>
+	i+=1;
+}
+%>
 
 		</tbody>
 	</table>
@@ -315,23 +332,23 @@ i+=1;
 		src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script>
 $(document).ready(function () {
-    $('select[name=<%=CommandLineAccess.BrowserNameParam%>]').change(function () {
+    $('select[name=<%=CmdLineMaker.BrowserNameParam%>]').change(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "browser", $(this).val());
     });
     
-    $('select[name=<%=CommandLineAccess.AppNameParam%>]').change(function () {
+    $('select[name=<%=CmdLineMaker.AppNameParam%>]').change(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "application", $(this).val());
     });
     
-    $('select[name=<%=CommandLineAccess.NetAnalysis%>]').change(function () {
+    $('select[name=<%=CmdLineMaker.NetAnalysis%>]').change(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "net", $(this).val());
     });    
     
-    $('select[name=<%=CommandLineAccess.VersionNameParam%>]').change(function () {
+    $('select[name=<%=CmdLineMaker.VersionNameParam%>]').change(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "version", $(this).val());
     });
 
-    $('input[name=<%=CommandLineAccess.URLNameParam%>]').change(function () {
+    $('input[name=<%=CmdLineMaker.URLNameParam%>]').change(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "url", $(this).val());
     });
     
@@ -343,7 +360,7 @@ $(document).ready(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "payments", $(this).val());
     });    
     
-    $('select[name=<%=CommandLineAccess.TCaseNameParam%>]').change(function () {
+    $('select[name=<%=CmdLineMaker.TCaseNameParam%>]').change(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "tcases", $(this).val());
     });
 });

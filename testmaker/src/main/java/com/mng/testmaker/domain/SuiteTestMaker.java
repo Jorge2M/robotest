@@ -1,17 +1,17 @@
 package com.mng.testmaker.domain;
 
 import java.io.File;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
 import com.mng.testmaker.conf.ConstantesTestMaker;
+import com.mng.testmaker.conf.State;
 import com.mng.testmaker.service.webdriver.pool.PoolWebDrivers;
+import com.mng.testmaker.testreports.html.GenerateReports;
 import com.mng.testmaker.testreports.mail.SenderMailEndSuite;
 
 public class SuiteTestMaker extends XmlSuite {
@@ -19,7 +19,10 @@ public class SuiteTestMaker extends XmlSuite {
 	private static final long serialVersionUID = 1L;
 	private final InputParamsTestMaker inputParams;
 	private final String idSuiteExecution;
-	private StateRun state = StateRun.NotStarted;
+	private StateExecution stateExecution = StateExecution.NotStarted;
+	private State result = State.Ok;
+	private Date inicio;
+	private Date fin;
 	private final PoolWebDrivers poolWebDrivers = new PoolWebDrivers();
 	private SenderMailEndSuite senderMail;
 	
@@ -38,12 +41,16 @@ public class SuiteTestMaker extends XmlSuite {
 		return inputParams;
 	}
 	
-	public StateRun getState() {
-		return state;
+	public StateExecution getStateExecution() {
+		return stateExecution;
 	}
 	
-	public void setState(StateRun state) {
-		this.state = state;
+	public void setStateExecution(StateExecution stateExecution) {
+		this.stateExecution = stateExecution;
+	}
+	
+	public State getResult() {
+		return result;
 	}
 	
 	public void setSenderMail(SenderMailEndSuite senderMail) {
@@ -70,12 +77,41 @@ public class SuiteTestMaker extends XmlSuite {
 		return poolWebDrivers;
 	}
 	
+	public void start() {
+		stateExecution = StateExecution.Started;
+		inicio = new Date(); 
+	}
+	
 	public void end() {
-		state = StateRun.Finished;
+		stateExecution = StateExecution.Finished;
+		result = getResultFromTestsRun();
+		fin = new Date(); 
 		poolWebDrivers.removeAllStrWd();
     	if (inputParams.isSendMailInEndSuite()) {
     		senderMail.sendMail(this);
         }   
+	}
+	
+	private State getResultFromTestsRun() {
+		State stateReturn = State.Ok;
+		for (TestRunTestMaker testRun : getListTestRuns()) {
+			if (testRun.getResult().isMoreCriticThan(stateReturn)) {
+				stateReturn = testRun.getResult();
+			}
+		}
+		return stateReturn;
+	}
+	
+	public Date getInicio() {
+		return inicio;
+	}
+	
+	public Date getFin() {
+		return fin;
+	}
+	
+	public long getDurationMillis() {
+		return fin.getTime() - fin.getTime();
 	}
 	
 	public void setListenersClass(List<Class<?>> listListeners) {
@@ -105,37 +141,7 @@ public class SuiteTestMaker extends XmlSuite {
 	
 	public String getDnsReportHtml() {
 		String pathFileReport = getPathReportHtml();
-		return (getDnsOfFileReport(pathFileReport, inputParams.getWebAppDNS()));
+		return (GenerateReports.getDnsOfFileReport(pathFileReport, inputParams.getWebAppDNS()));
 	}
-	
-    /**
-     * Obtiene la DNS de un fichero ubicado dentro del contexto de la aplicación de tests
-     * @param serverDNS: del tipo "http://robottest.mangodev.net + :port si fuera preciso)  
-     */
-    public String getDnsOfFileReport(String filePath, String applicationDNS) {
-        String pathReport = "";
-        if (applicationDNS!=null && "".compareTo(applicationDNS)!=0) {
-            pathReport = filePath.substring(filePath.indexOf(ConstantesTestMaker.directoryOutputTests));
-            pathReport = applicationDNS + "\\" + pathReport;
-        } else {
-            Pattern patternDrive = Pattern.compile("^[a-zA-Z]:");
-            pathReport = patternDrive.matcher(filePath).replaceFirst("\\\\\\\\" + getNamePC());
-        }
 
-        return pathReport;
-    }
-	
-    public static String getNamePC() {
-        String hostname = "";
-        try {
-            InetAddress addr;
-            addr = InetAddress.getLocalHost();
-            hostname = addr.getHostName();
-        }
-        catch (UnknownHostException ex) {
-            hostname = "Unknown";
-        }
-		
-        return hostname;
-    }
 }

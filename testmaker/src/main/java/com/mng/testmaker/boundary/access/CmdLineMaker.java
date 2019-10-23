@@ -18,7 +18,7 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
-public class CommandLineAccess {
+public class CmdLineMaker {
 
 	private final String[] args;
 	private final List<OptionTMaker> listOptions;
@@ -43,7 +43,7 @@ public class CommandLineAccess {
     public static String NetAnalysis = "net";
     public static String Mails = "mails";
 	
-	private CommandLineAccess(
+	private CmdLineMaker(
 			String args[], 
 			List<OptionTMaker> clientOptions, 
 			Class<? extends Enum<?>> suiteEnum, 
@@ -55,19 +55,19 @@ public class CommandLineAccess {
 		this.cmdLine = getParsedOptions();
 	}
 	
-	public static CommandLineAccess from(			
+	public static CmdLineMaker from(			
 		String args[], 
 		List<OptionTMaker> clientOptions, 
 		Class<? extends Enum<?>> suiteEnum, 
 		Class<? extends Enum<?>> appEnum) throws ParseException {
-		return new CommandLineAccess(args, clientOptions, suiteEnum, appEnum);
+		return new CmdLineMaker(args, clientOptions, suiteEnum, appEnum);
 	}
 	
-	public static CommandLineAccess from(
+	public static CmdLineMaker from(
 		String args[], 
 		Class<? extends Enum<?>> suiteEnum, 
 		Class<? extends Enum<?>> appEnum) throws ParseException {
-		return new CommandLineAccess(args, null, suiteEnum, appEnum);
+		return new CmdLineMaker(args, null, suiteEnum, appEnum);
 	}	
 	
 	public CommandLine getParsedOptions() throws ParseException {

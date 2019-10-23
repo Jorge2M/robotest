@@ -2,7 +2,7 @@ package com.mng.sapfiori;
 
 import java.util.Arrays;
 
-import com.mng.testmaker.access.CommandLineAccess;
+import com.mng.testmaker.boundary.access.CmdLineMaker;
 import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.domain.SuiteTestMaker;
 import com.mng.testmaker.service.TestMaker;
@@ -13,7 +13,7 @@ import com.mng.sapfiori.test.suite.SmokeTestSuite;
 public class TestSapFiori { 
 
     public static void main(String[] args) throws Exception { 
-    	CommandLineAccess cmdLineAccess = CommandLineAccess.from(args, Suites.class, Apps.class);
+    	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, Suites.class, Apps.class);
     	if (cmdLineAccess.checkOptionsValue()) {
             execTestSuite(cmdLineAccess.getInputParamsTestMaker());
     	}
