@@ -19,10 +19,12 @@ public class PageReclassifProductsStpV {
 	}
 	
 	@Validation (
-		description = "Estamos en la página de <b>Reclasificación de productos</b>",
+		description = 
+			"Estamos en la página de <b>Reclasificación de productos</b> " +
+			"(la esperamos hasta #{maxSeconds} segundos)",
 		level = State.Defect)
-	public boolean checkIsPage() {
-		return pageReclassifProducts.checkIsPage();
+	public boolean checkIsPageUntil(int maxSeconds) {
+		return pageReclassifProducts.checkIsPageUntil(3);
 	}
 	
 	@Step (
