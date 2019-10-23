@@ -21,8 +21,8 @@ public class PageReclassifProducts extends WebdrvWrapp {
 		return new PageReclassifProducts(driver);
 	}
 	
-	public boolean checkIsPage() {
-		return (isElementVisible(driver, By.xpath(XPathPageHeader)));
+	public boolean checkIsPageUntil(int maxSeconds) {
+		return (isElementVisibleUntil(driver, By.xpath(XPathPageHeader), maxSeconds));
 	}
 	
 	public void writeInputCodEstadMerc(String newCodEstadMerc) {

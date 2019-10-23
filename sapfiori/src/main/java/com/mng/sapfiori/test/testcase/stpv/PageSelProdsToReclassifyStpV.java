@@ -74,7 +74,7 @@ public class PageSelProdsToReclassifyStpV {
 		
 		PageReclassifProductsStpV pageReclassifProductsStpV = 
 			PageReclassifProductsStpV.getNew(pageReclassifProducts);
-		pageReclassifProductsStpV.checkIsPage();
+		pageReclassifProductsStpV.checkIsPageUntil(3);
 		
 		return pageReclassifProductsStpV;
 	}

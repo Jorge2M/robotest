@@ -2,7 +2,7 @@ package com.mng.sapfiori.test.testcase.webobject;
 
 public enum Option {
 
-	ClasificarProductos ("Reclasificar productos", "Reclasificación de productos");
+	ClasificarProductos ("Reclasificar productos", "Reclasificación de productos - Números estadísticos de mercancías");
 	
 	private final String titleIcon;
 	private final String titlePage;
