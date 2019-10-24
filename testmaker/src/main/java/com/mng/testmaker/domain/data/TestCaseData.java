@@ -12,7 +12,9 @@ public class TestCaseData {
 	private String suiteName;
     private String testRunName;
     private String name;
+    private String nameUnique;
     private String description;
+    private int indexInTestRun;
     private State result;
     private Date inicioDate;
     private Date finDate; 
@@ -44,6 +46,18 @@ public class TestCaseData {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getNameUnique() {
+		return nameUnique;
+	}
+	public void setNameUnique(String nameUnique) {
+		this.nameUnique = nameUnique;
+	}
+	public int getIndexInTestRun() {
+		return indexInTestRun;
+	}
+	public void setIndexInTestRun(int indexInTestRun) {
+		this.indexInTestRun = indexInTestRun;
 	}
 	public String getDescription() {
 		return description;
@@ -102,7 +116,9 @@ public class TestCaseData {
 		testCaseData.setSuiteName(suite.getName());
 		testCaseData.setTestRunName(testCase.getTestRunParent().getName());
 		testCaseData.setName(testCase.getNameUnique());
+		testCaseData.setNameUnique(testCase.getNameUnique());
 		testCaseData.setDescription(testCase.getResult().getMethod().getDescription());
+		testCaseData.setIndexInTestRun(testCase.getIndexInTestRun());
 		testCaseData.setResult(testCase.getStateResult());
 		
         Date inicio = new Date(testCase.getResult().getStartMillis());

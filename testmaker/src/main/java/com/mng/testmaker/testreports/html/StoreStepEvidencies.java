@@ -8,7 +8,7 @@ import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
-import com.mng.testmaker.service.webdriver.utils.WebDriverArqUtils;
+import com.mng.testmaker.service.webdriver.utils.WebUtils;
 
 public class StoreStepEvidencies {
 	
@@ -75,7 +75,7 @@ public class StoreStepEvidencies {
     	//if (!new File(nombreImagen).exists()) {
 	        try {
 	            WebDriver driver = step.getTestCaseParent().getDriver();
-	            WebDriverArqUtils.captureEntirePageMultipleBrowsers(driver, nombreImagen);
+	            WebUtils.captureEntirePageMultipleBrowsers(driver, nombreImagen);
 	        } 
 	        catch (Exception e) {
 	        	Log4jConfig.pLogger.warn("Problema grabando imagen", e);
@@ -102,7 +102,7 @@ public class StoreStepEvidencies {
         String nombreImagen = getPathFileEvidenciaStep(step, StepEvidence.html);
 	        if (!new File(nombreImagen).exists()) {
 	        try {
-	        	WebDriverArqUtils.capturaHTMLPage(step);
+	        	WebUtils.capturaHTMLPage(step);
 	        }
 	        catch (Exception e) {
 	            Log4jConfig.pLogger.warn("Problema grabando HTML", e);

@@ -8,7 +8,7 @@ import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 import com.google.common.base.Splitter;
-import com.mng.testmaker.utils.ManageConnectionHTTP;
+import com.mng.testmaker.service.webdriver.utils.WebUtils;
 
 public class CallBack {
     String reportTSuiteURL = "";
@@ -96,7 +96,7 @@ public class CallBack {
     }
     
     private HttpURLConnection callHTTPS() throws Exception {
-        ManageConnectionHTTP.disableSslVerification();
+        WebUtils.acceptAllCertificates();
         URL httpsURL = getComposedURL("https");
         HttpsURLConnection connHttps = (HttpsURLConnection) httpsURL.openConnection();
         connHttps.setRequestMethod(getCallBackMethod());

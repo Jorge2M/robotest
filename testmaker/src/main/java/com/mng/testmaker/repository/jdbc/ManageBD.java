@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.arq.jdbc;
+package com.mng.testmaker.repository.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

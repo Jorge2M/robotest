@@ -46,7 +46,7 @@ public class Launch {
         do {
             Thread.sleep(3000);
             i+=3;
-            stateSuiteNew = TestMaker.getSuite(idExecSuite).getState();
+            stateSuiteNew = TestMaker.getSuite(idExecSuite).getStateExecution();
         }
         while(stateSuiteNew==StateExecution.Stopping && i<timeoutSeconds);
         

@@ -26,7 +26,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.apache.commons.io.FileUtils;
 
-public class WebDriverArqUtils {
+public class WebUtils {
     
     public static void captureEntirePageMultipleBrowsers(WebDriver driver, String filename) throws RuntimeException {
         if (driver != null) {

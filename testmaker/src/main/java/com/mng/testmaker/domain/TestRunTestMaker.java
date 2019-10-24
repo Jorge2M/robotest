@@ -49,7 +49,7 @@ public class TestRunTestMaker extends XmlTest {
 		}
 		return stateReturn;
 	}
-    
+	
 	public StateExecution getStateExecution() {
 		return stateExecution;
 	}

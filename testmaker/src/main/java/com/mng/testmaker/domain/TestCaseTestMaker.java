@@ -55,6 +55,16 @@ public class TestCaseTestMaker  {
     	suiteParent.getPoolWebDrivers().quitWebDriver(driver, testRunParent);
 	}
 	
+	public int getIndexInTestRun() {
+		List<TestCaseTestMaker> listTestCases = testRunParent.getListTestCases();
+		for (int i=0; i<listTestCases.size(); i++) {
+			if (this==listTestCases.get(i)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
 	public WebDriver getWebDriver() {
 		return this.driver;
 	}
@@ -133,16 +143,6 @@ public class TestCaseTestMaker  {
 	public boolean isLastStep(StepTestMaker step) {
 		return (step==getLastStep());
 	}
-	
-//	public StepTestMaker getLastStepFinished() {
-//		StepTestMaker stepReturn = null;
-//		for (StepTestMaker step : listSteps) {
-//			if (step.getState()==StateRun.Finished) {
-//				stepReturn = step;
-//			}
-//		}
-//		return stepReturn;
-//	}
 	
 	public StateExecution getStateRun() {
 		return this.stateRun;

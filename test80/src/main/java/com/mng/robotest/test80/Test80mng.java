@@ -10,7 +10,7 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.mng.testmaker.boundary.access.CommandLineAccess;
+import com.mng.testmaker.boundary.access.CmdLineMaker;
 import com.mng.testmaker.boundary.access.OptionTMaker;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
@@ -18,7 +18,6 @@ import com.mng.testmaker.conf.TypeAccessFmwk;
 import com.mng.testmaker.domain.SuiteTestMaker;
 import com.mng.testmaker.domain.testfilter.TestMethod;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.utils.utils;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Suites;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
@@ -46,7 +45,7 @@ public class Test80mng {
     
     public static void main(String[] args) throws Exception { 
     	List<OptionTMaker> optionsTest80 = specificMangoOptions();
-    	CommandLineAccess cmdLineAccess = CommandLineAccess.from(args, optionsTest80, Suites.class, AppEcom.class);
+    	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, optionsTest80, Suites.class, AppEcom.class);
     	if (cmdLineAccess.checkOptionsValue()) {
         	InputParams inputParams = getInputParamsMango(cmdLineAccess);
     		cmdLineAccess.storeDataOptionsTestMaker(inputParams);
@@ -148,7 +147,7 @@ public class Test80mng {
         return options;
     }
     
-    private static InputParams getInputParamsMango(CommandLineAccess cmdLineAccess) {
+    private static InputParams getInputParamsMango(CmdLineMaker cmdLineAccess) {
     	InputParams inputParams = new InputParams();
     	CommandLine cmdLineData = cmdLineAccess.getComandLineData();
 		inputParams.setListaPaises(cmdLineData.getOptionValues(CountrysNameParam));
@@ -221,8 +220,7 @@ public class Test80mng {
     private static void callBackIfNeeded(SuiteTestMaker suite, InputParams inputParams) {
     	CallBack callBack = inputParams.getCallBack();
         if (callBack!=null) {
-            String pathFileReport = suite.getPathReportHtml();
-            String reportTSuiteURL = utils.obtainDNSFromFile(pathFileReport, inputParams.getWebAppDNS()).replace("\\", "/");
+            String reportTSuiteURL = suite.getDnsReportHtml();
             callBack.setReportTSuiteURL(reportTSuiteURL);
             try {
             	HttpURLConnection urlConnection = callBack.callURL();

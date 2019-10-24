@@ -7,14 +7,14 @@ import java.util.LinkedHashMap;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mng.testmaker.utils.ManageConnectionHTTP;
+import com.mng.testmaker.service.webdriver.utils.WebUtils;
 
 public class GetStoresServiceMng {
 
 	String urlTestAppMango;
 	
 	public GetStoresServiceMng(String urlTestAppMango) throws Exception {
-		ManageConnectionHTTP.disableSslVerification();
+        WebUtils.acceptAllCertificates();
 		this.urlTestAppMango = urlTestAppMango;
 	}
 	

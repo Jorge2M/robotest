@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.utils.ManageConnectionHTTP;
+import com.mng.testmaker.service.webdriver.utils.WebUtils;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticlesStockFactory.SourceArticles;
@@ -45,7 +45,7 @@ public class ManagerArticlesStock {
 	}
 	
 	public ManagerArticlesStock(AppEcom app, String urlApp, int minArticlesDesired) {
-		ManageConnectionHTTP.disableSslVerification();
+        WebUtils.acceptAllCertificates();
 		this.app = app;
 		this.urlApp = urlApp;
 		this.minArticlesDesired = minArticlesDesired;
