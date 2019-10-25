@@ -4,9 +4,9 @@ import java.util.Date;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.StateExecution;
-import com.mng.testmaker.domain.SuiteTestMaker;
+import com.mng.testmaker.domain.SuiteTM;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
 public class SuiteData {
@@ -29,9 +29,9 @@ public class SuiteData {
 	private String urlReportHtml;
 
 	
-	public static SuiteData from(SuiteTestMaker suite) {
+	public static SuiteData from(SuiteTM suite) {
 		SuiteData suiteData = new SuiteData();
-		InputParamsTestMaker inputParams = suite.getInputParams();
+		InputParamsTM inputParams = suite.getInputParams();
 		
 		suiteData.setIdExecSuite(suite.getIdExecution());
 		suiteData.setName(suite.getName());

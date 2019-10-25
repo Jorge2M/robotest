@@ -76,8 +76,8 @@ public class TestRunMaker {
 		this.browserStackMobil = browserStackMobil;
 	}
     
-    public TestRunTestMaker createTestRun(XmlSuite suite, FilterTestsSuiteXML filterSuiteXML, InputParamsTestMaker inputData) {
-    	TestRunTestMaker testRun = new TestRunTestMaker(suite);
+    public TestRunTM createTestRun(XmlSuite suite, FilterTestsSuiteXML filterSuiteXML, InputParamsTM inputData) {
+    	TestRunTM testRun = new TestRunTM(suite);
         testRun.setName(getTestRunName(inputData));
         testRun.setPreserveOrder(Boolean.valueOf(true));
         testRun.setGroups(createGroups(filterSuiteXML));
@@ -152,7 +152,7 @@ public class TestRunMaker {
         xmlClass.setIncludedMethods(includeMethods);
     }
     
-    private String getTestRunName(InputParamsTestMaker inputData) {
+    private String getTestRunName(InputParamsTM inputData) {
         return (
         	id + "-" + 
         	inputData.getVersionSuite() + "-" + 

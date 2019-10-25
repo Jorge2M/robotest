@@ -11,22 +11,22 @@ import org.testng.SkipException;
 
 import com.mng.testmaker.conf.State;
 
-public class TestCaseTestMaker  {
+public class TestCaseTM  {
 
-	private final List<StepTestMaker> listSteps = new ArrayList<>();
+	private final List<StepTM> listSteps = new ArrayList<>();
 	
 	private StateExecution stateRun = StateExecution.Started;
 	private State state = State.Ok;
-	private final SuiteTestMaker suiteParent;
-	private final TestRunTestMaker testRunParent;
+	private final SuiteTM suiteParent;
+	private final TestRunTM testRunParent;
 	private final WebDriver driver;
 	private final ITestResult result;
 	private final String threadName;
 	private String refineDataName = "";
 
-	public TestCaseTestMaker(ITestResult result) {
-		this.testRunParent = (TestRunTestMaker)result.getTestContext().getCurrentXmlTest();
-		this.suiteParent = (SuiteTestMaker)testRunParent.getSuite();
+	public TestCaseTM(ITestResult result) {
+		this.testRunParent = (TestRunTM)result.getTestContext().getCurrentXmlTest();
+		this.suiteParent = (SuiteTM)testRunParent.getSuite();
 		//TODO no tengo claro si esta excepción tiene efecto
         if (suiteParent.getStateExecution()==StateExecution.Stopping) {
             throw new SkipException("Received Signal for stop TestSuite");
@@ -56,7 +56,7 @@ public class TestCaseTestMaker  {
 	}
 	
 	public int getIndexInTestRun() {
-		List<TestCaseTestMaker> listTestCases = testRunParent.getListTestCases();
+		List<TestCaseTM> listTestCases = testRunParent.getListTestCases();
 		for (int i=0; i<listTestCases.size(); i++) {
 			if (this==listTestCases.get(i)) {
 				return i;
@@ -73,10 +73,10 @@ public class TestCaseTestMaker  {
 		return this.state;
 	}
 	
-	public static TestCaseTestMaker getTestCase(ITestResult result) {
-		for (SuiteTestMaker suite : SuitesExecuted.getSuitesExecuted()) {
-			for (TestRunTestMaker testRun : suite.getListTestRuns()) {
-				for (TestCaseTestMaker testCase : testRun.getListTestCases()) {
+	public static TestCaseTM getTestCase(ITestResult result) {
+		for (SuiteTM suite : SuitesExecuted.getSuitesExecuted()) {
+			for (TestRunTM testRun : suite.getListTestRuns()) {
+				for (TestCaseTM testCase : testRun.getListTestCases()) {
 					if (testCase.getResult()==result) {
 						return testCase;
 					}
@@ -86,11 +86,11 @@ public class TestCaseTestMaker  {
 		return null;
 	}
 	
-	public static TestCaseTestMaker getTestCaseInExecution() {
+	public static TestCaseTM getTestCaseInExecution() {
 		String threadName = Thread.currentThread().getName();
-		for (SuiteTestMaker suite : SuitesExecuted.getSuitesExecuted()) {
-			for (TestRunTestMaker testRun : suite.getListTestRuns()) {
-				for (TestCaseTestMaker testCase : testRun.getListTestCases()) {
+		for (SuiteTM suite : SuitesExecuted.getSuitesExecuted()) {
+			for (TestRunTM testRun : suite.getListTestRuns()) {
+				for (TestCaseTM testCase : testRun.getListTestCases()) {
 					if (testCase.getThreadName().compareTo(threadName)==0 &&
 						testCase.getStateRun()==StateExecution.Started) {
 						return testCase;
@@ -105,17 +105,17 @@ public class TestCaseTestMaker  {
 		return this.result;
 	}
 	
-	public void addStep(StepTestMaker step) {
+	public void addStep(StepTM step) {
 		listSteps.add(step);
 	}
 	
-	public List<StepTestMaker> getStepsList() {
+	public List<StepTM> getStepsList() {
 		return this.listSteps;
 	}
 
 	private State getStateFromSteps() {
 		State stateReturn = State.Ok;
-		for (StepTestMaker step : getStepsList()) {
+		for (StepTM step : getStepsList()) {
 			if (step.getResultSteps().isMoreCriticThan(stateReturn)) {
 				stateReturn = step.getResultSteps();
 			}
@@ -123,9 +123,9 @@ public class TestCaseTestMaker  {
 		return stateReturn;
 	}
 	
-	public StepTestMaker getCurrentStepInExecution() {
-		StepTestMaker stepReturn = null;
-		for (StepTestMaker step : listSteps) {
+	public StepTM getCurrentStepInExecution() {
+		StepTM stepReturn = null;
+		for (StepTM step : listSteps) {
 			if (step.getState()==StateExecution.Started) {
 				stepReturn = step;
 			}
@@ -133,14 +133,14 @@ public class TestCaseTestMaker  {
 		return stepReturn;
 	}
 	
-	public StepTestMaker getLastStep() {
+	public StepTM getLastStep() {
 		if (listSteps.size() > 0) {
 			return (listSteps.get(listSteps.size() - 1));
 		}
 		return null;
 	}
 	
-	public boolean isLastStep(StepTestMaker step) {
+	public boolean isLastStep(StepTM step) {
 		return (step==getLastStep());
 	}
 	
@@ -153,7 +153,7 @@ public class TestCaseTestMaker  {
 	}
 	
 	private WebDriver getWebDriverForTestCase() {
-		InputParamsTestMaker inputData = suiteParent.getInputParams();
+		InputParamsTM inputData = suiteParent.getInputParams();
 		return (
 			suiteParent.getPoolWebDrivers().getWebDriver(
 				inputData.getWebDriverType(), 
@@ -169,15 +169,15 @@ public class TestCaseTestMaker  {
 		return this.threadName;
 	}
 	
-	public SuiteTestMaker getSuiteParent() {
+	public SuiteTM getSuiteParent() {
 		return suiteParent;
 	}
 	
-	public InputParamsTestMaker getInputParamsSuite() {
+	public InputParamsTM getInputParamsSuite() {
 		return getSuiteParent().getInputParams();
 	}
 	
-	public TestRunTestMaker getTestRunParent() {
+	public TestRunTM getTestRunParent() {
 		return testRunParent;
 	}
 	

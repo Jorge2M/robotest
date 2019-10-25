@@ -7,8 +7,8 @@ import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.domain.InputParamsTestMaker;
-import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.domain.InputParamsTM;
+import com.mng.testmaker.domain.TestRunTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
@@ -25,7 +25,7 @@ public class ListAllNodes {
     public Object[] createInstances(String urlStatus, String urlErrorpage, String testLinksPie, ITestContext ctxTestRun) 
     throws Exception {
         ArrayList<TestNodos> listTests = new ArrayList<TestNodos>();
-    	InputParamsTestMaker inputData = TestMaker.getInputParamsSuite(ctxTestRun);
+    	InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
         AppEcom appEcom = (AppEcom)inputData.getApp();
         try {
             int accesos = 0;
@@ -84,7 +84,7 @@ public class ListAllNodes {
     private void addNodosToMap (
     		HashMap<String, NodoStatus> mapNodos, int iteraciones, String urlErrorpage, 
     		AppEcom appE, ITestContext ctxTestRun) throws Exception { 
-    	TestRunTestMaker testRun = TestMaker.getTestRun(ctxTestRun);
+    	TestRunTM testRun = TestMaker.getTestRun(ctxTestRun);
     	WebDriver driver = 
     		FactoryWebdriverMaker.make(WebDriverType.chrome, testRun)
     			.setChannel(Channel.desktop)

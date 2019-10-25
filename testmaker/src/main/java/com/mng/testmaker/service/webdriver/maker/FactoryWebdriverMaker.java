@@ -1,6 +1,6 @@
 package com.mng.testmaker.service.webdriver.maker;
 
-import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.domain.TestRunTM;
 
 public class FactoryWebdriverMaker {
 
@@ -23,7 +23,7 @@ public class FactoryWebdriverMaker {
     	}
     }	
 
-    public static WebdriverMaker make(WebDriverType webDriverType, TestRunTestMaker testRun) {
+    public static WebdriverMaker make(WebDriverType webDriverType, TestRunTM testRun) {
     	switch (webDriverType) {
     	case firefox:
     		return (FirefoxdriverMaker.getNew(webDriverType));

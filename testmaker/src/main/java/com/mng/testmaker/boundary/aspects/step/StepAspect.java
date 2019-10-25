@@ -9,8 +9,8 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
 import com.mng.testmaker.boundary.aspects.MatcherWithMethodParams;
-import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.domain.TestCaseTestMaker;
+import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.TestCaseTM;
 import com.mng.testmaker.service.TestMaker;
 
 
@@ -26,14 +26,14 @@ public class StepAspect {
     @Before("annotationStepPointcut() && atExecution()")
     public void before(JoinPoint joinPoint) {
     	InfoStep infoStep = InfoStep.from(joinPoint);
-    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
+    	TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
     	TestMaker.skipTestsIfSuiteStopped(testCase.getSuiteParent());
-    	StepTestMaker step = infoStep.getDatosStep();
+    	StepTM step = infoStep.getDatosStep();
     	testCase.addStep(step);
     	setInitDataStep(infoStep, joinPoint, step);
     }
     
-    private void setInitDataStep(InfoStep infoStep, JoinPoint joinPoint, StepTestMaker datosStep) {
+    private void setInitDataStep(InfoStep infoStep, JoinPoint joinPoint, StepTM datosStep) {
         MatcherWithMethodParams matcher = MatcherWithMethodParams.from(joinPoint);
         String stepDescription = infoStep.getStepAnnotation().description();
         String stepResExpected = infoStep.getStepAnnotation().expected();
@@ -46,8 +46,8 @@ public class StepAspect {
     	pointcut="annotationStepPointcut() && atExecution()", 
     	throwing="ex")
     public void doRecoveryActions(JoinPoint joinPoint, Throwable ex) {
-    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
-    	StepTestMaker currentStep = testCase.getCurrentStepInExecution();
+    	TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
+    	StepTM currentStep = testCase.getCurrentStepInExecution();
     	if (!testCase.isLastStep(currentStep)) {
         	//In the case of anidated Steps...
         	//If isn't the last step then the exception is generated in other deeper step
@@ -60,8 +60,8 @@ public class StepAspect {
     @AfterReturning(
     	pointcut="annotationStepPointcut() && atExecution()")
     public void grabValidationAfter(JoinPoint joinPoint) throws Throwable {
-    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
-    	StepTestMaker currentStep = testCase.getCurrentStepInExecution();
+    	TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
+    	StepTM currentStep = testCase.getCurrentStepInExecution();
     	currentStep.end(false);
     }
 }

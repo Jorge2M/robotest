@@ -3,8 +3,8 @@ package com.mng.sapfiori;
 import java.util.Arrays;
 
 import com.mng.testmaker.boundary.access.CmdLineMaker;
-import com.mng.testmaker.domain.InputParamsTestMaker;
-import com.mng.testmaker.domain.SuiteTestMaker;
+import com.mng.testmaker.domain.InputParamsTM;
+import com.mng.testmaker.domain.SuiteTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.sapfiori.datatmaker.Apps;
 import com.mng.sapfiori.datatmaker.Suites;
@@ -15,16 +15,16 @@ public class TestSapFiori {
     public static void main(String[] args) throws Exception { 
     	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, Suites.class, Apps.class);
     	if (cmdLineAccess.checkOptionsValue()) {
-            execTestSuite(cmdLineAccess.getInputParamsTestMaker());
+            execTestSuite(cmdLineAccess.getInputParamsTM());
     	}
     }
     
-    private static void execTestSuite(InputParamsTestMaker inputParams) throws Exception {
-    	SuiteTestMaker suite = makeSuite(inputParams);
+    private static void execTestSuite(InputParamsTM inputParams) throws Exception {
+    	SuiteTM suite = makeSuite(inputParams);
     	TestMaker.run(suite);
     }
     
-    private static SuiteTestMaker makeSuite(InputParamsTestMaker inputParams) throws Exception {
+    private static SuiteTM makeSuite(InputParamsTM inputParams) throws Exception {
         try {
             switch ((Suites)inputParams.getSuite()) {
             case SmokeTest:

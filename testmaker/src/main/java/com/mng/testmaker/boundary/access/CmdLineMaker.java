@@ -15,7 +15,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
 public class CmdLineMaker {
@@ -103,13 +103,13 @@ public class CmdLineMaker {
 		return this.cmdLine;
 	}
 	
-	public InputParamsTestMaker getInputParamsTestMaker() {
-		InputParamsTestMaker inputParams = new InputParamsTestMaker();
-		storeDataOptionsTestMaker(inputParams);
+	public InputParamsTM getInputParamsTM() {
+		InputParamsTM inputParams = new InputParamsTM();
+		storeDataOptionsTM(inputParams);
 		return inputParams;
 	}
 	
-    public void storeDataOptionsTestMaker(InputParamsTestMaker inputParams) {
+    public void storeDataOptionsTM(InputParamsTM inputParams) {
     	String version = cmdLine.getOptionValue(VersionNameParam);
     	if (version==null) {
     		version = "V1";

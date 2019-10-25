@@ -103,6 +103,7 @@ public class PageSelProdsToReclassify extends FilterHeaderSection {
 	}
 	
 	public void clickIrButton() throws Exception {
+		WebdrvWrapp.waitForPageLoaded(driver);
 		clickAndWaitLoad(driver, By.xpath(XPathIrButton));
 	}
 	

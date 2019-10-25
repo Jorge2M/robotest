@@ -5,9 +5,9 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.StepTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDroppoints;
@@ -23,7 +23,7 @@ public class SecSelectDPointStpV {
         expected="Aparecen puntos de recogida de " + tagSearchDp)
     public static void searchPoblacion(DataSearchDeliveryPoint dataSearchDp, WebDriver driver) 
     throws Exception {
-		StepTestMaker step = TestMaker.getCurrentStepInExecution();
+		StepTM step = TestMaker.getCurrentStepInExecution();
 		step.replaceInDescription(tagSearchDp, dataSearchDp.data);
 		step.replaceInExpected(tagSearchDp, dataSearchDp.data);
 		

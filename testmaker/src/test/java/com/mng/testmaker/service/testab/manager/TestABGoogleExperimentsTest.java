@@ -7,6 +7,7 @@ import org.mockito.Mockito;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.testab.manager.TestABGoogleExpManager;
+import com.mng.testmaker.utils.filter.TestFilterTNGxmlTRun.AppEcom;
 
 public class TestABGoogleExperimentsTest {
 	

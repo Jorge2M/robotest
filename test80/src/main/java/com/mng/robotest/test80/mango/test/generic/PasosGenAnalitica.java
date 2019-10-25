@@ -13,8 +13,8 @@ import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
+import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.StepTM.StepEvidence;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.testreports.html.GestorDatosHarJSON;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
@@ -49,7 +49,7 @@ public class PasosGenAnalitica {
     
     public static void validaHTTPAnalytics(AppEcom app, LineaType lineaId, DataPedido dataPedido, EnumSet<Constantes.AnalyticsVal> analyticSet, WebDriver driver) 
     throws Exception {
-    	StepTestMaker step = TestMaker.getLastStep();
+    	StepTM step = TestMaker.getLastStep();
         SaveWhen whenSaveNettraffic = step.getWhenSave(StepEvidence.har);
         if (whenSaveNettraffic == SaveWhen.Always &&
             driver.toString().toLowerCase().contains("firefox")) {
@@ -159,7 +159,6 @@ public class PasosGenAnalitica {
         return validations;
     }    
     
-    @SuppressWarnings("rawtypes")
     @Validation
     public static ChecksResult validaCriteo(GestorDatosHarJSON gestorHAR, LineaType lineaId) throws Exception {
     	ChecksResult validations = ChecksResult.getNew();

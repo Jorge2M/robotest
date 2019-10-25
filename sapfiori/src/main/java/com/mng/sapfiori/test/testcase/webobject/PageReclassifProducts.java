@@ -11,7 +11,7 @@ public class PageReclassifProducts extends WebdrvWrapp {
 	
 	private final static String XPathPageHeader = "//h1[text()[contains(.,'Reclasificación de productos')]]";
 	private final static String XPathInputCodEstadMerc = "//input[@id[contains(.,'inputCommodityCode')]]";
-	private final static String XPathGrabarButton = "//button[@id[contains(.,'btnMassSave')]]";
+	private final static String XPathGrabarButton = "//button[@id[contains(.,'btnMassSave')]]//bdi";
 	
 	private PageReclassifProducts(WebDriver driver) {
 		this.driver = driver;
@@ -30,8 +30,11 @@ public class PageReclassifProducts extends WebdrvWrapp {
 	}
 	
 	public PageSelProdsToReclassify clickGrabarButton() throws Exception {
+		//Hay problemas con el click sobre este botón, en ocasiones no tiene efecto
 		clickAndWaitLoad(driver, By.xpath(XPathGrabarButton));
-		clickAndWaitLoad(driver, By.xpath(XPathGrabarButton));
+		if (!WebdrvWrapp.isElementInvisibleUntil(driver, By.xpath(XPathGrabarButton), 1)) {
+			clickAndWaitLoad(driver, By.xpath(XPathGrabarButton));
+		}
 		return PageSelProdsToReclassify.getNew(driver);
 	}
 }

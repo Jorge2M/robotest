@@ -7,8 +7,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
-import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.domain.TestCaseTestMaker;
+import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.TestCaseTM;
 import com.mng.testmaker.service.TestMaker;
 
 
@@ -30,7 +30,7 @@ public class ValidationAspect {
     	pointcut="annotationValidationPointcut() && atExecution()", 
     	throwing="ex")
     public void doRecoveryActions(JoinPoint joinPoint, Throwable ex) {
-    	StepTestMaker step = getLastStep();
+    	StepTM step = getLastStep();
     	InfoValidation infoValidation = InfoValidation.from(joinPoint);
     	finishValidation(infoValidation, step, true);
     }
@@ -39,17 +39,17 @@ public class ValidationAspect {
     	pointcut="annotationValidationPointcut() && atExecution()", 
     	returning="resultMethod")
     public void grabValidationAfter(JoinPoint joinPoint, Object resultMethod) throws Throwable {
-    	StepTestMaker step = getLastStep();
+    	StepTM step = getLastStep();
     	InfoValidation infoValidation = InfoValidation.from(joinPoint, resultMethod);
     	finishValidation(infoValidation, step, false);
     }
     
-    private StepTestMaker getLastStep() {
-    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
+    private StepTM getLastStep() {
+    	TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
     	return (testCase.getLastStep());
     }
     
-    private void finishValidation(InfoValidation infoValidation, StepTestMaker step, boolean exceptionThrown) {
+    private void finishValidation(InfoValidation infoValidation, StepTM step, boolean exceptionThrown) {
     	ChecksResult checksResult = infoValidation.getListResultValidation();
     	step.addChecksResult(checksResult);
     	if (exceptionThrown) {

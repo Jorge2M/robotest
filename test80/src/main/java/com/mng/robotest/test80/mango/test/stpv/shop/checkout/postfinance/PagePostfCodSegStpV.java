@@ -9,7 +9,7 @@ import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.domain.StepTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance.PagePostfCodSeg;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -88,7 +88,7 @@ public class PagePostfCodSegStpV {
     	try {
 	        if (isPostfinanceEcard(nombreMetodo)) {
 	            //El código de seguridad sólo lo pide en el caso de "PostFinance Card" no en el de "PostFinance e-finance"
-	        	StepTestMaker step = TestMaker.getCurrentStepInExecution();
+	        	StepTM step = TestMaker.getCurrentStepInExecution();
 	        	step.setDescripcion("Introducir el código de seguridad " + codSeguridad + ". " + step.getDescripcion());
 	        	PagePostfCodSeg.inputCodigoSeguridad(driver, codSeguridad);
 	        }

@@ -20,7 +20,7 @@ response.setDateHeader ("Expires", -1);%>
 	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.Suites" %>
 	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
 	<%@ page import="com.mng.testmaker.service.TestMaker" %>
-	<%@ page import="com.mng.testmaker.domain.SuiteTestMaker" %>
+	<%@ page import="com.mng.testmaker.domain.SuiteTM" %>
 
 	<style>
 	body {
@@ -56,17 +56,17 @@ response.setDateHeader ("Expires", -1);%>
 
   	<%
   		ServletContext ctx = getServletContext();
-  	  	System.setProperty("user.dir", getServletContext().getRealPath(""));
-  	  	
-  	  	//Store the request params
-  	  	InputParams paramsTSuite = storeParamsFromHttpRequest(request);
-  		
-  		//Specific parameter from index.jsp
-  	  	String forceStart = "off"; 
-  	  	if (request.getParameter("forceStart")!=null) {
-  	  		forceStart = request.getParameter("forceStart");
-  	  	}
-  	  	SuiteTestMaker suite = null;
+  	  	  	System.setProperty("user.dir", getServletContext().getRealPath(""));
+  	  	  	
+  	  	  	//Store the request params
+  	  	  	InputParams paramsTSuite = storeParamsFromHttpRequest(request);
+  	  		
+  	  		//Specific parameter from index.jsp
+  	  	  	String forceStart = "off"; 
+  	  	  	if (request.getParameter("forceStart")!=null) {
+  	  	  		forceStart = request.getParameter("forceStart");
+  	  	  	}
+  	  	  	SuiteTM suite = null;
   	%>
 
 	<div id="dataTestSuite"">

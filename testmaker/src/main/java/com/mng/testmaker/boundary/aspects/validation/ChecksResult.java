@@ -5,29 +5,31 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.domain.SuiteTestMaker;
-import com.mng.testmaker.domain.TestCaseTestMaker;
-import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.SuiteTM;
+import com.mng.testmaker.domain.TestCaseTM;
+import com.mng.testmaker.domain.TestRunTM;
+import com.mng.testmaker.domain.util.ParsePathClass;
 
 public class ChecksResult {
 	private final List<ResultValidation> listResultValidations;
 	private State stateValidation = State.Ok;
 	private boolean avoidEvidences;
-	private final SuiteTestMaker suiteParent;
-	private final TestRunTestMaker testRunParent;
-	private final TestCaseTestMaker testCaseParent;
-	private final StepTestMaker stepParent; 
+	private final SuiteTM suiteParent;
+	private final TestRunTM testRunParent;
+	private final TestCaseTM testCaseParent;
+	private final StepTM stepParent; 
+	private String pathMethod;
 	
     public ChecksResult() {
     	this.listResultValidations = new ArrayList<>();
-    	this.testCaseParent = TestCaseTestMaker.getTestCaseInExecution();
+    	this.testCaseParent = TestCaseTM.getTestCaseInExecution();
     	this.stepParent = testCaseParent.getLastStep();
     	this.testRunParent = testCaseParent.getTestRunParent();
     	this.suiteParent = testCaseParent.getSuiteParent();
     }
     
-	private ChecksResult(StepTestMaker stepParent) {
+	private ChecksResult(StepTM stepParent) {
 		listResultValidations = new ArrayList<>();
 		this.stepParent = stepParent;
 		this.testCaseParent = stepParent.getTestCaseParent();
@@ -35,7 +37,7 @@ public class ChecksResult {
 		this.suiteParent = stepParent.getSuiteParent();
 	}
 	
-	public static ChecksResult getNew(StepTestMaker stepParent) {
+	public static ChecksResult getNew(StepTM stepParent) {
 		return (new ChecksResult(stepParent));
 	}
 	
@@ -43,7 +45,7 @@ public class ChecksResult {
 		return (new ChecksResult());
 	}
 	
-	public static ChecksResult of(ResultValidation resultValidation, StepTestMaker datosStep) {
+	public static ChecksResult of(ResultValidation resultValidation, StepTM datosStep) {
 		ChecksResult listValidations = new ChecksResult(datosStep);
 		listValidations.add(resultValidation);
 		return listValidations;
@@ -57,18 +59,33 @@ public class ChecksResult {
 		return stateValidation;
 	}
 	
-	public SuiteTestMaker getSuiteParent() {
+	public SuiteTM getSuiteParent() {
 		return this.suiteParent;
 	}
-	public TestRunTestMaker getTestRunParent() {
+	public TestRunTM getTestRunParent() {
 		return this.testRunParent;
 	}
-	public TestCaseTestMaker getTestCaseParent() {
+	public TestCaseTM getTestCaseParent() {
 		return this.testCaseParent;
 	}
-	public StepTestMaker getStepParent() {
+	public StepTM getStepParent() {
 		return this.stepParent;
 	}
+	public String getPathMethod() {
+		return pathMethod;
+	}
+	public void setPathMethod(String pathMethod) {
+		this.pathMethod = pathMethod;
+	}
+    public String getPathClass() {
+    	return ParsePathClass.getPathClass(getPathMethod());
+    }
+    public String getNameClass() {
+    	return ParsePathClass.getNameClass(getPathClass());
+    }
+    public String getNameMethod() {
+    	return ParsePathClass.getNameMethod(getPathMethod());
+    }
 	
 	public int size() {
 		return listResultValidations.size();

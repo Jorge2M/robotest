@@ -19,14 +19,14 @@ import org.testng.reporters.EmailableReporter;
 import org.testng.xml.XmlSuite;
 
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
-import com.mng.testmaker.conf.ConstantesTestMaker;
+import com.mng.testmaker.conf.ConstantesTM;
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.domain.InputParamsTestMaker;
-import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
-import com.mng.testmaker.domain.SuiteTestMaker;
-import com.mng.testmaker.domain.TestCaseTestMaker;
-import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.domain.InputParamsTM;
+import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.StepTM.StepEvidence;
+import com.mng.testmaker.domain.SuiteTM;
+import com.mng.testmaker.domain.TestCaseTM;
+import com.mng.testmaker.domain.TestRunTM;
 import com.mng.testmaker.domain.data.SuiteData;
 import com.mng.testmaker.domain.data.TestCaseData;
 import com.mng.testmaker.domain.data.TestRunData;
@@ -36,7 +36,7 @@ public class GenerateReports extends EmailableReporter {
 	
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
-    private SuiteTestMaker suite;
+    private SuiteTM suite;
     private List<Integer> treeTable;
     private String outputDirectory = "";
     private String reportHtml = "";
@@ -44,7 +44,7 @@ public class GenerateReports extends EmailableReporter {
     @Override
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
         super.generateReport(xmlSuites, suites, outputDirectory);
-    	this.suite = (SuiteTestMaker)xmlSuites.get(0);
+    	this.suite = (SuiteTM)xmlSuites.get(0);
     	this.treeTable = getMapTree(suite);
     	this.outputDirectory = outputDirectory;
         try {
@@ -58,7 +58,7 @@ public class GenerateReports extends EmailableReporter {
     
     private void deployStaticsIfNotExist() throws Exception {
     	ResourcesExtractor resExtractor = ResourcesExtractor.getNew();
-    	String pathDirectoryInFromResources =  ConstantesTestMaker.nameDirectoryStatics;
+    	String pathDirectoryInFromResources =  ConstantesTM.nameDirectoryStatics;
     	resExtractor.copyDirectoryResources(
     		pathDirectoryInFromResources, 
     		outputDirectory + "/../../" + pathDirectoryInFromResources);
@@ -99,15 +99,13 @@ public class GenerateReports extends EmailableReporter {
             "    <th class=\"size15\" rowspan=\"2\">Result expected</th>" +
             "    <th rowspan=\"2\">Init</th>" + 
             "    <th rowspan=\"2\">End</th>" +                                
-            "    <th rowspan=\"2\">Class</th>" + 
+            "    <th rowspan=\"2\">Class / Method</th>" + 
             "  </tr>\n" + 
             "  <tr></tr>\n" +
         	"   </thead>\n";
     }
     
     public void pintaCabeceraHTML() {
-        
-        //String outputReports = "../../../..";
         String output_library = "../..";
         String pathStatics = output_library + "/static";
 
@@ -161,7 +159,7 @@ public class GenerateReports extends EmailableReporter {
     
     private void pintaTestRunsOfSuite() {
     	reportHtml+="<tbody id=\"treet2\">\n";
-        for (TestRunTestMaker testRun : suite.getListTestRuns()) {
+        for (TestRunTM testRun : suite.getListTestRuns()) {
         	TestRunData testRunD = TestRunData.from(testRun);
             DateFormat format = DateFormat.getDateTimeInstance();
             reportHtml+= 
@@ -184,8 +182,8 @@ public class GenerateReports extends EmailableReporter {
         }
     }    
     
-    private void pintaTestCasesOfTestRun(TestRunTestMaker testRun) {
-    	List<TestCaseTestMaker> listTestCases = testRun.getListTestCases();
+    private void pintaTestCasesOfTestRun(TestRunTM testRun) {
+    	List<TestCaseTM> listTestCases = testRun.getListTestCases();
     	String TagTimeout = "@TIMEOUTSTEP";
     	for (int i=0; i<listTestCases.size(); i++) {
     		TestCaseData testCaseD = TestCaseData.from(listTestCases.get(i));
@@ -194,7 +192,7 @@ public class GenerateReports extends EmailableReporter {
                 "<tr class=\"method\"" + " met=\"" + testCaseD.getIndexInTestRun() + "\">" +
                 "  <td style=\"display:none;\"></td>\n" + 
                 "  <td class=\"nowrap\">" + testCaseD.getNameUnique() + "</td>" + 
-                "  <td class=\"nowrap\">" + testCaseD.getInstance() + "</td>" + 
+                "  <td class=\"nowrap\"></td>" + 
                 "  <td>" + testCaseD.getNumberSteps() + "</td>" + 
                 "  <td><div class=\"result" + testCaseD.getResult() + "\">" + testCaseD.getResult() + "</div></td>" + 
                 "  <td>" + testCaseD.getDurationMillis() + "</td>" + 
@@ -211,16 +209,16 @@ public class GenerateReports extends EmailableReporter {
             if (timeoutStep) {
                 font = "<font class=\"timeout\">";
             }
-            reportHtml.replaceAll(TagTimeout, font);
+            reportHtml = reportHtml.replaceAll(TagTimeout, font);
         }
     }    
     
     /**
      * @return if Timeout
      */
-    private boolean pintaStepsOfTestCase(TestCaseTestMaker testCase) {
+    private boolean pintaStepsOfTestCase(TestCaseTM testCase) {
     	boolean timeout = false;
-        for (StepTestMaker step : testCase.getStepsList()) {
+        for (StepTM step : testCase.getStepsList()) {
             int stepNumber = step.getPositionInTestCase();
             String ImageFileStep = StoreStepEvidencies.getPathFileEvidenciaStep(outputDirectory, step, StepEvidence.imagen);
             File indexFile = new File(ImageFileStep);
@@ -242,9 +240,9 @@ public class GenerateReports extends EmailableReporter {
             indexFile = new File(HARPFileStep);
             String linkHarpNew = "";
             if (indexFile.exists()) {
-            	InputParamsTestMaker inputParams = testCase.getSuiteParent().getInputParams();
+            	InputParamsTM inputParams = testCase.getSuiteParent().getInputParams();
                 String pathHARP = getDnsOfFileReport(indexFile.getAbsolutePath(), inputParams.getWebAppDNS()).replace('\\', '/');
-                linkHarpNew = " \\ <a href=\"" + ConstantesTestMaker.URL_SOFTWAREISHARD + pathHARP + "\" target=\"_blank\">NetTraffic</a>";
+                linkHarpNew = " \\ <a href=\"" + ConstantesTM.URL_SOFTWAREISHARD + pathHARP + "\" target=\"_blank\">NetTraffic</a>";
             }
             
             String HARFileStep = StoreStepEvidencies.getPathFileEvidenciaStep(outputDirectory, step, StepEvidence.har);
@@ -283,7 +281,7 @@ public class GenerateReports extends EmailableReporter {
                 "     <td>" + step.getResExpected() + "</td>" +
                 tdClassDate + format.format(step.getHoraInicio()) + "</td>" + 
                 tdClassDate + format.format(step.getHoraFin()) + "</td>" +
-                "     <td></td>" +
+                "     <td>" + step.getNameClass() + " / " + step.getNameMethod() + "</td>" +
                 "</tr>\n";
 
             pintaValidacionesStep(step);
@@ -292,14 +290,14 @@ public class GenerateReports extends EmailableReporter {
         return timeout;
     }
 
-    private String getRelativePathEvidencia(StepTestMaker step, StepEvidence evidence) {
+    private String getRelativePathEvidencia(StepTM step, StepEvidence evidence) {
         String fileName = StoreStepEvidencies.getNameFileEvidenciaStep(step.getPositionInTestCase(), evidence);
         String testRunName = step.getTestRunParent().getName();
         String testCaseNameUnique = step.getTestCaseParent().getNameUnique();
         return ("./" + testRunName + "/" + testCaseNameUnique + "/" + fileName);
     }
     
-    private void pintaValidacionesStep(StepTestMaker step) {
+    private void pintaValidacionesStep(StepTM step) {
     	List<ChecksResult> listChecksResult = step.getListChecksResult();
         for (ChecksResult checksResult : listChecksResult) {
             String descriptValid = checksResult.getHtmlValidationsBrSeparated();
@@ -317,7 +315,7 @@ public class GenerateReports extends EmailableReporter {
             	"    <td></td>" +
             	"    <td></td>" + 
                 "    <td></td>" +                        
-                "    <td></td>" + 
+                "    <td>" + checksResult.getNameClass() + " / " + checksResult.getNameMethod() + "</td>" + 
                 "</tr>\n";
         }
     }
@@ -341,15 +339,15 @@ public class GenerateReports extends EmailableReporter {
         } 
     }
 
-    static List<Integer> getMapTree(SuiteTestMaker suite) {
+    static List<Integer> getMapTree(SuiteTM suite) {
     	List<Integer> listMapReturn = new ArrayList<>();
-    	for (TestRunTestMaker testRun : suite.getListTestRuns()) {
+    	for (TestRunTM testRun : suite.getListTestRuns()) {
     		listMapReturn.add(0);
     		int posLastTestRun = listMapReturn.size();
-    		for (TestCaseTestMaker testCase : testRun.getListTestCases()) {
+    		for (TestCaseTM testCase : testRun.getListTestCases()) {
     			listMapReturn.add(posLastTestRun);
         		int posLastTest = listMapReturn.size();
-    			for (StepTestMaker step : testCase.getStepsList()) {
+    			for (StepTM step : testCase.getStepsList()) {
     				listMapReturn.add(posLastTest);
             		int posLastStep = listMapReturn.size();
             		for (int i=0; i<step.getListChecksResult().size(); i++) {
@@ -368,7 +366,7 @@ public class GenerateReports extends EmailableReporter {
     public static String getDnsOfFileReport(String filePath, String applicationDNS) {
         String pathReport = "";
         if (applicationDNS!=null && "".compareTo(applicationDNS)!=0) {
-            pathReport = filePath.substring(filePath.indexOf(ConstantesTestMaker.directoryOutputTests));
+            pathReport = filePath.substring(filePath.indexOf(ConstantesTM.directoryOutputTests));
             pathReport = applicationDNS + "\\" + pathReport;
         } else {
             Pattern patternDrive = Pattern.compile("^[a-zA-Z]:");

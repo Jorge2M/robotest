@@ -1,21 +1,19 @@
-<%
-response.setHeader("Cache-Control","no-cache");
+<%response.setHeader("Cache-Control","no-cache");
 response.setHeader("Pragma","no-cache");
-response.setDateHeader ("Expires", -1);
-%>
+response.setDateHeader ("Expires", -1);%>
 <%@ page language="java" contentType="text/html"%>
 <%@page session="false"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="com.mng.testmaker.service.TestMaker"%>
 <%@ page import="com.mng.testmaker.conf.Channel"%>
-<%@ page import="com.mng.testmaker.domain.SuiteTestMaker"%>
+<%@ page import="com.mng.testmaker.domain.SuiteTM"%>
 <%@ page import="com.mng.robotest.test80.InputParams"%>
 <%
-String suiteName = request.getParameter("suite");
+	String suiteName = request.getParameter("suite");
 String channel = request.getParameter("channel");
 String idExecSuite = request.getParameter("idExecSuite");
-List<SuiteTestMaker> listSuites = new ArrayList<>(); 
+List<SuiteTM> listSuites = new ArrayList<>(); 
 if (idExecSuite==null)
     listSuites = TestMaker.getListSuites(suiteName, Channel.valueOf(channel));
 else
@@ -52,12 +50,13 @@ table#tablaScripts td.nombreTestSuite {
 <tbody>
 
 <%
-int i=0;
-for (SuiteTestMaker suite : listSuites) {
-	InputParams inputParams = (InputParams)suite.getInputParams();%>
+	int i=0;
+for (SuiteTM suite : listSuites) {
+	InputParams inputParams = (InputParams)suite.getInputParams();
+%>
 	<tr id="scriptData">
 		<td id="idExecution"><%=suite.getIdExecution()%></td>
-		<td id="state"><%=suite.getState()%></td>
+		<td id="state"><%=suite.getStateExecution()%></td>
 		<td id="suiteName"><%=suite.getName()%></td>
 		<td id="version"><%=inputParams.getVersionSuite()%></td>
 		<td id="channel"><%=inputParams.getChannel()%></td>

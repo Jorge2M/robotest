@@ -8,16 +8,16 @@ import java.util.List;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
-import com.mng.testmaker.conf.ConstantesTestMaker;
+import com.mng.testmaker.conf.ConstantesTM;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.service.webdriver.pool.PoolWebDrivers;
 import com.mng.testmaker.testreports.html.GenerateReports;
 import com.mng.testmaker.testreports.mail.SenderMailEndSuite;
 
-public class SuiteTestMaker extends XmlSuite {
+public class SuiteTM extends XmlSuite {
 	
 	private static final long serialVersionUID = 1L;
-	private final InputParamsTestMaker inputParams;
+	private final InputParamsTM inputParams;
 	private final String idSuiteExecution;
 	private StateExecution stateExecution = StateExecution.NotStarted;
 	private State result = State.Ok;
@@ -26,7 +26,7 @@ public class SuiteTestMaker extends XmlSuite {
 	private final PoolWebDrivers poolWebDrivers = new PoolWebDrivers();
 	private SenderMailEndSuite senderMail;
 	
-	public SuiteTestMaker(String idSuiteExecution, InputParamsTestMaker inputParams) {
+	public SuiteTM(String idSuiteExecution, InputParamsTM inputParams) {
 		this.idSuiteExecution = idSuiteExecution;
 		this.inputParams = inputParams;
 		//TODO desasteriscar
@@ -37,7 +37,7 @@ public class SuiteTestMaker extends XmlSuite {
 		return idSuiteExecution;
 	}
 	
-	public InputParamsTestMaker getInputParams() {
+	public InputParamsTM getInputParams() {
 		return inputParams;
 	}
 	
@@ -57,17 +57,17 @@ public class SuiteTestMaker extends XmlSuite {
 		this.senderMail = senderMail;
 	}
 	
-	public List<TestRunTestMaker> getListTestRuns() {
-		List<TestRunTestMaker> listTestRuns = new ArrayList<>();
+	public List<TestRunTM> getListTestRuns() {
+		List<TestRunTM> listTestRuns = new ArrayList<>();
 		for (XmlTest xmlTest : getTests()) {
-			listTestRuns.add((TestRunTestMaker)xmlTest);
+			listTestRuns.add((TestRunTM)xmlTest);
 		}
 		return listTestRuns;
 	}
 	
 	public int getNumberTestCases() {
 		int numTestCases = 0;
-		for (TestRunTestMaker testRun : getListTestRuns()) {
+		for (TestRunTM testRun : getListTestRuns()) {
 			numTestCases+=testRun.getNumTestCases();
 		}
 		return numTestCases;
@@ -94,7 +94,7 @@ public class SuiteTestMaker extends XmlSuite {
 	
 	private State getResultFromTestsRun() {
 		State stateReturn = State.Ok;
-		for (TestRunTestMaker testRun : getListTestRuns()) {
+		for (TestRunTM testRun : getListTestRuns()) {
 			if (testRun.getResult().isMoreCriticThan(stateReturn)) {
 				stateReturn = testRun.getResult();
 			}
@@ -130,13 +130,13 @@ public class SuiteTestMaker extends XmlSuite {
         }
         return (
         	userDir +
-        	ConstantesTestMaker.directoryOutputTests + File.separator + 
+        	ConstantesTM.directoryOutputTests + File.separator + 
         	getName() + File.separator + 
         	getIdExecution());
 	}
 	
 	public String getPathReportHtml() {
-		return (getPathDirectory() + File.separator + ConstantesTestMaker.nameReportHTMLTSuite);
+		return (getPathDirectory() + File.separator + ConstantesTM.nameReportHTMLTSuite);
 	}
 	
 	public String getDnsReportHtml() {

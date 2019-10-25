@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.testab.TestABGoogleExp;
+import com.mng.testmaker.utils.filter.TestFilterTNGxmlTRun.AppEcom;
 
 public enum TestABGoogleExpImpl implements TestABGoogleExp {
 

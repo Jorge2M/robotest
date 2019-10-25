@@ -27,8 +27,7 @@ public class TestCasesDAO {
         	"FIN, " + 
         	"TIME_MS, " + 
         	"NUMBER_STEPS, " + 
-        	"CLASS_SIGNATURE, " + 
-        	"INSTANCIA " + 
+        	"CLASS_SIGNATURE " + 
         "FROM TESTCASES " + 
         "WHERE IDEXECSUITE = ?";
     
@@ -44,9 +43,8 @@ public class TestCasesDAO {
 	        "FIN, " + 
 	        "TIME_MS, " + 
 	        "NUMBER_STEPS, " + 
-	        "CLASS_SIGNATURE, " + 
-	        "INSTANCIA) " + 
-        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+	        "CLASS_SIGNATURE) " + 
+        "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
     
     public static String SQLDeleteHistorical = 
         "DELETE FROM METHODS " +
@@ -90,7 +88,6 @@ public class TestCasesDAO {
     	
     	testCaseData.setNumberSteps(rowTestRun.getInt("NUMBER_STEPS"));  
     	testCaseData.setClassSignature(rowTestRun.getString("CLASS_SIGNATURE"));  
-    	testCaseData.setInstance(rowTestRun.getString("INSTANCIA"));  
 
     	return testCaseData;
     }
@@ -110,7 +107,6 @@ public class TestCasesDAO {
     	        insert.setFloat(9, testCase.getDurationMillis());
     	        insert.setInt(10,  testCase.getNumberSteps());
     	        insert.setString(11,  testCase.getClassSignature());
-    	        insert.setString(12,  testCase.getInstance());
                 insert.executeUpdate();
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.SuiteMaker;
 import com.mng.testmaker.domain.TestRunMaker;
 
@@ -28,7 +28,7 @@ public class TestNGxmlStub extends SuiteMaker {
     
     TypeStubTest typeTest;
 
-    private TestNGxmlStub(TypeStubTest typeTest, InputParamsTestMaker inputData) {
+    private TestNGxmlStub(TypeStubTest typeTest, InputParamsTM inputData) {
     	super(inputData);
     	this.typeTest = typeTest;
     	TestRunMaker testRun = TestRunMaker.from("TestRun Test",	classWithTestAnnotations);
@@ -37,7 +37,7 @@ public class TestNGxmlStub extends SuiteMaker {
     	addTestRun(testRun);
     }
     
-    public static TestNGxmlStub getNew(TypeStubTest typeTest, InputParamsTestMaker inputData) {
+    public static TestNGxmlStub getNew(TypeStubTest typeTest, InputParamsTM inputData) {
     	TestNGxmlStub test = new TestNGxmlStub(typeTest, inputData); 
     	return test;
     }

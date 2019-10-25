@@ -6,7 +6,7 @@ import org.testng.IReporter;
 import org.testng.ISuite;
 import org.testng.xml.XmlSuite;
 
-import com.mng.testmaker.domain.SuiteTestMaker;
+import com.mng.testmaker.domain.SuiteTM;
 
 public class Reporter implements IReporter {
 
@@ -25,7 +25,7 @@ public class Reporter implements IReporter {
 
     @Override
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
-    	SuiteTestMaker suite = (SuiteTestMaker)xmlSuites.get(0);
+    	SuiteTM suite = (SuiteTM)xmlSuites.get(0);
         GenerateReports report = new GenerateReports();
         report.generateReport(xmlSuites, suites, suite.getPathDirectory());
     }

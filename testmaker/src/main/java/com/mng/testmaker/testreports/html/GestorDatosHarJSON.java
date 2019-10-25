@@ -7,8 +7,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 
-import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
+import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.StepTM.StepEvidence;
 
 
 public class GestorDatosHarJSON {
@@ -20,7 +20,7 @@ public class GestorDatosHarJSON {
         parseHAR(fileHAR);
     }
 	
-    public GestorDatosHarJSON(StepTestMaker step) throws Exception {
+    public GestorDatosHarJSON(StepTM step) throws Exception {
         String ficheroHAR = StoreStepEvidencies.getPathFileEvidenciaStep(step, StepEvidence.har);
         parseHAR(ficheroHAR);
     }

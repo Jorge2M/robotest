@@ -10,7 +10,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.mng.testmaker.domain.TestCaseTestMaker;
+import com.mng.testmaker.domain.TestCaseTM;
 import com.mng.sapfiori.test.testcase.generic.stpv.sections.filterheader.ModalSetFilterFromListStpV;
 import com.mng.sapfiori.test.testcase.stpv.PageSelProdsToReclassifyStpV;
 import com.mng.sapfiori.test.testcase.stpv.PageInitialStpV;
@@ -37,7 +37,7 @@ public class Piloto {
         description="Se realiza un login de usuario")
     public void PIL001_Login() throws Exception {
     	
-    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCaseInExecution();
+    	TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
     	WebDriver driver = testCase.getDriver();
         driver.get(testCase.getInputParamsSuite().getUrlBase());
     	
@@ -70,7 +70,7 @@ public class Piloto {
     	
     	String newCodEstadMerc = getNewCodEstadMerc(productsDataOriginal);
     	pageReclassifProdsStpV.writeInputCodEstadMercAndSave(newCodEstadMerc);
-    	pageSelProductsStpV.checkIsVisiblePage(3);
+    	pageSelProductsStpV.checkIsVisiblePage(5);
     	pageSelProductsStpV.checkCodMercModified(newCodEstadMerc, productsToReclassify);
     }
     

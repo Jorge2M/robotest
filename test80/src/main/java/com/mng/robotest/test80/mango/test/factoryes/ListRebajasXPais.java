@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.appshop.rebajas.RebajasJun2019;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
-import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.service.TestMaker;
 
 import org.testng.ITestContext;
@@ -19,7 +19,7 @@ public class ListRebajasXPais {
     @Parameters({"countrys", "lineas"})
     public Object[] createInstances(String listaPaisesStr, String lineas, ITestContext ctxTestRun) throws Exception {
         ArrayList<Object> listTests = new ArrayList<>();
-        InputParamsTestMaker inputData = TestMaker.getInputParamsSuite(ctxTestRun);
+        InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
         AppEcom appE = (AppEcom)inputData.getApp();
         try {
             List<Pais> listCountrys = Utilidades.getListCountrysFiltered(listaPaisesStr);

@@ -3,8 +3,8 @@ package com.mng.testmaker.domain.data;
 import java.util.Date;
 
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.SuiteTestMaker;
-import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.domain.SuiteTM;
+import com.mng.testmaker.domain.TestRunTM;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
 public class TestRunData {
@@ -81,23 +81,24 @@ public class TestRunData {
 		this.webDriverType = webDriverType;
 	}
 	
-	public static TestRunData from(TestRunTestMaker testRun) {
+	public static TestRunData from(TestRunTM testRun) {
 		TestRunData testRunData = new TestRunData();
-		SuiteTestMaker suite = testRun.getSuiteParent();
+		SuiteTM suite = testRun.getSuiteParent();
 		
-		testRunData.setDevice(suite.getIdExecution());
 		testRunData.setSuiteName(suite.getName());
 		testRunData.setName(testRun.getName());
 		testRunData.setResult(testRun.getResult());
 		if (testRun.getBrowserStackMobil()!=null) {
 			testRunData.setDevice(testRun.getBrowserStackMobil().getDevice());
+		} else {
+			testRunData.setDevice("");
 		}
 		
 		Date inicio = testRun.getTestNgContext().getStartDate();
 		Date fin = testRun.getTestNgContext().getEndDate();
 		testRunData.setInicioDate(inicio);
 		testRunData.setFinDate(fin);
-		testRunData.setDurationMillis(inicio.getTime() - fin.getTime());
+		testRunData.setDurationMillis(fin.getTime() - inicio.getTime());
 		testRunData.setNumberTestCases(testRun.getNumTestCases());
 		testRunData.setWebDriverType(suite.getInputParams().getWebDriverType());
 		

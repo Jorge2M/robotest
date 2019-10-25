@@ -12,7 +12,6 @@ import org.testng.ITestContext;
 
 import com.mng.robotest.test80.InputParams;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.Constantes;
@@ -20,6 +19,7 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.conf.TypeAccessFmwk;
+import com.mng.testmaker.domain.StepTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -98,7 +98,7 @@ public class PagoNavigationsStpV {
     	saveNettraffic=SaveWhen.Always)
     public static void accessShopAndLoginOrLogoff(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        StepTestMaker StepTestMaker = TestMaker.getCurrentStepInExecution();    	
+        StepTM StepTestMaker = TestMaker.getCurrentStepInExecution();    	
         if (dCtxSh.userRegistered) {
             StepTestMaker.replaceInDescription(
             	tagLoginOrLogoff, "e Identificarse con el usuario <b>" + dCtxSh.userConnected + "</b>");

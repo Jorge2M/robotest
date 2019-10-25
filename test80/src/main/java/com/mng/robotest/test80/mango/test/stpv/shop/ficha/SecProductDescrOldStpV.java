@@ -6,7 +6,7 @@ import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.domain.StepTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld;
@@ -37,7 +37,7 @@ public class SecProductDescrOldStpV {
     public static void selectPanel(TypePanel typePanel, WebDriver driver) throws Exception {
         TypeStatePanel statePanelIni = SecProductDescrOld.getStatePanel(typePanel, driver);
         TypeStatePanel stateExpectedAfterClick = SecProductDescrOld.getStatePanelAfterClick(statePanelIni);
-        StepTestMaker step = TestMaker.getCurrentStepInExecution();
+        StepTM step = TestMaker.getCurrentStepInExecution();
         step.replaceInDescription(tagInitStatePanel, statePanelIni.toString());
         step.replaceInExpected(tagFinalStateExpected, stateExpectedAfterClick.toString());
         

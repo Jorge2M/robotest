@@ -18,16 +18,16 @@ import com.mng.testmaker.testreports.html.Reporter;
 public abstract class SuiteMaker {
 
 	private final String idSuiteExecution;
-	private final InputParamsTestMaker inputData;
+	private final InputParamsTM inputData;
     private final FilterTestsSuiteXML filterSuiteXML;
 
     private Map<String,String> parameters;
     private List<TestRunMaker> listTestRuns = new ArrayList<>();
     private ParallelMode parallelMode = ParallelMode.METHODS;
     private int threadCount = 3;
-	private SuiteTestMaker suite;
+	private SuiteTM suite;
 	
-	protected SuiteMaker(InputParamsTestMaker inputData) {
+	protected SuiteMaker(InputParamsTM inputData) {
 		this.idSuiteExecution = makeIdSuiteExecution();
 		this.inputData = inputData;
 		this.filterSuiteXML = FilterTestsSuiteXML.getNew(inputData.getDataFilter());
@@ -46,7 +46,7 @@ public abstract class SuiteMaker {
         );
     }
     
-    public SuiteTestMaker getSuite() {
+    public SuiteTM getSuite() {
     	generateXmlSuiteIfNotAvailable();
     	return this.suite;
     }
@@ -100,8 +100,8 @@ public abstract class SuiteMaker {
     	}
     }
     
-    private SuiteTestMaker createSuite() {
-    	SuiteTestMaker suite = new SuiteTestMaker(idSuiteExecution, inputData);
+    private SuiteTM createSuite() {
+    	SuiteTM suite = new SuiteTM(idSuiteExecution, inputData);
     	String suiteName = inputData.getSuiteName();
         suite.setFileName(suiteName + ".xml");
         suite.setName(suiteName);
@@ -113,7 +113,7 @@ public abstract class SuiteMaker {
         return suite;
     }
     
-    private void createTestRuns(SuiteTestMaker suite) {
+    private void createTestRuns(SuiteTM suite) {
     	for (TestRunMaker testRun : listTestRuns) {
     		testRun.createTestRun(suite, filterSuiteXML, inputData);
     	}

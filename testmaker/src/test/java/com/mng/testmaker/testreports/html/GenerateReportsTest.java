@@ -10,25 +10,25 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
-import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.domain.SuiteTestMaker;
-import com.mng.testmaker.domain.TestCaseTestMaker;
-import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.SuiteTM;
+import com.mng.testmaker.domain.TestCaseTM;
+import com.mng.testmaker.domain.TestRunTM;
 
 public class GenerateReportsTest {
 
 	@Test
 	public void testGetMapTree() {
 		//Given
-		SuiteTestMaker suite = Mockito.mock(SuiteTestMaker.class);
-		TestRunTestMaker testRun1 = Mockito.mock(TestRunTestMaker.class);
-		TestCaseTestMaker testCase1 = Mockito.mock(TestCaseTestMaker.class);
-		StepTestMaker step1 = Mockito.mock(StepTestMaker.class);
-		StepTestMaker step2 = Mockito.mock(StepTestMaker.class);
+		SuiteTM suite = Mockito.mock(SuiteTM.class);
+		TestRunTM testRun1 = Mockito.mock(TestRunTM.class);
+		TestCaseTM testCase1 = Mockito.mock(TestCaseTM.class);
+		StepTM step1 = Mockito.mock(StepTM.class);
+		StepTM step2 = Mockito.mock(StepTM.class);
 		ChecksResult val1 = Mockito.mock(ChecksResult.class);
 		ChecksResult val2 = Mockito.mock(ChecksResult.class);
-		TestCaseTestMaker testCase2 = Mockito.mock(TestCaseTestMaker.class);
-		StepTestMaker step3 = Mockito.mock(StepTestMaker.class);
+		TestCaseTM testCase2 = Mockito.mock(TestCaseTM.class);
+		StepTM step3 = Mockito.mock(StepTM.class);
 		ChecksResult val3 = Mockito.mock(ChecksResult.class);
 		
 		when(suite.getListTestRuns()).thenReturn(Arrays.asList(testRun1));

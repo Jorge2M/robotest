@@ -9,13 +9,13 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.domain.TestRunTM;
 import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackDesktop;
 import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackMobil;
 
 public class BrowserStackDriverMaker implements WebdriverMaker {
 	
-	private final TestRunTestMaker testRun;
+	private final TestRunTM testRun;
 	String buildProject;
 	String sessionName;
 	String userBStack;
@@ -23,7 +23,7 @@ public class BrowserStackDriverMaker implements WebdriverMaker {
 	Channel channel;
 	boolean nettraffic = false;
 	
-	private BrowserStackDriverMaker(TestRunTestMaker testRun) {
+	private BrowserStackDriverMaker(TestRunTM testRun) {
 		this.testRun = testRun;
         buildProject = 
             testRun.getSuite().getName() + 
@@ -31,7 +31,7 @@ public class BrowserStackDriverMaker implements WebdriverMaker {
         sessionName = testRun.getName();
 	}
 	
-	public static BrowserStackDriverMaker getNew(TestRunTestMaker testRun) {
+	public static BrowserStackDriverMaker getNew(TestRunTM testRun) {
 		return (new BrowserStackDriverMaker(testRun));
 	}
 	

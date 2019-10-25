@@ -6,15 +6,15 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.domain.StepTestMaker.StepEvidence;
+import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.StepTM.StepEvidence;
 import com.mng.testmaker.service.webdriver.utils.WebUtils;
 
 public class StoreStepEvidencies {
 	
     public static String prefixEvidenciaStep = "Step-";
 
-    private static boolean isNecessariStorage(StepTestMaker step) {
+    private static boolean isNecessariStorage(StepTM step) {
     	for (StepEvidence evidence : StepEvidence.values()) {
     		if (isNecessaryStorage(evidence, step)) {
     			return true;
@@ -23,7 +23,7 @@ public class StoreStepEvidencies {
     	return false;
     }
     
-    private static boolean isNecessaryStorage(StepEvidence evidencia, StepTestMaker step) {
+    private static boolean isNecessaryStorage(StepEvidence evidencia, StepTM step) {
         SaveWhen saveEvidenceWhen = step.getWhenSave(evidencia);
         switch (saveEvidenceWhen) {
         case Always:
@@ -39,7 +39,7 @@ public class StoreStepEvidencies {
         return false;
     }
      
-    public static void storeStepEvidencies(StepTestMaker step) {
+    public static void storeStepEvidencies(StepTM step) {
     	if (isNecessariStorage(step)) {
 	        createPathForEvidencesStore(step);
 	        if (isNecessaryStorage(StepEvidence.har, step)) {
@@ -57,7 +57,7 @@ public class StoreStepEvidencies {
     	}
     }
     
-    private static void createPathForEvidencesStore(StepTestMaker step) {
+    private static void createPathForEvidencesStore(StepTM step) {
     	String suitePath = step.getSuiteParent().getPathDirectory();
         String pathEvidencias = 
         	suitePath + File.separator + 
@@ -70,7 +70,7 @@ public class StoreStepEvidencies {
         }
     }
     
-    private static void storeHardcopy(StepTestMaker step) {
+    private static void storeHardcopy(StepTM step) {
         String nombreImagen = getPathFileEvidenciaStep(step, StepEvidence.imagen);
     	//if (!new File(nombreImagen).exists()) {
 	        try {
@@ -83,7 +83,7 @@ public class StoreStepEvidencies {
     	//}
     }
     
-    private static void storeErrorPage(StepTestMaker step) {
+    private static void storeErrorPage(StepTM step) {
         String fileError = getPathFileEvidenciaStep(step, StepEvidence.errorpage);
         if (!new File(fileError).exists()) {
 	    	StorerErrorStep storerError = step.getTestRunParent().getStorerErrorStep();
@@ -98,7 +98,7 @@ public class StoreStepEvidencies {
         }
     }
     
-    private static void storeHTML(StepTestMaker step) {
+    private static void storeHTML(StepTM step) {
         String nombreImagen = getPathFileEvidenciaStep(step, StepEvidence.html);
 	        if (!new File(nombreImagen).exists()) {
 	        try {
@@ -110,7 +110,7 @@ public class StoreStepEvidencies {
         }
     }
     
-    private static void storeNetTraffic(StepTestMaker step) {
+    private static void storeNetTraffic(StepTM step) {
     	String nameFileHar = getPathFileEvidenciaStep(step, StepEvidence.har);
     	if (!new File(nameFileHar).exists()) {
 		    try {
@@ -135,12 +135,12 @@ public class StoreStepEvidencies {
         return (prefixEvidenciaStep + Integer.toString(stepNumber) + extension);
     }
 
-    public static String getPathFileEvidenciaStep(StepTestMaker step, StepEvidence evidence) {
+    public static String getPathFileEvidenciaStep(StepTM step, StepEvidence evidence) {
     	String outputDirectory = step.getTestRunParent().getTestNgContext().getOutputDirectory();
     	return (getPathFileEvidenciaStep(outputDirectory, step, evidence));
     }
     
-    public static String getPathFileEvidenciaStep(String outputDirectory, StepTestMaker step, StepEvidence evidence) {
+    public static String getPathFileEvidenciaStep(String outputDirectory, StepTM step, StepEvidence evidence) {
         int stepNumber = step.getPositionInTestCase();
         String testCaseNameUnique = step.getTestCaseParent().getNameUnique();
         String testRunName = step.getTestCaseParent().getTestRunParent().getName();

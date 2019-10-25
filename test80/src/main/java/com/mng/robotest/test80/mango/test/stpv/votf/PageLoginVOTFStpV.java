@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.stpv.votf;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.domain.StepTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.votf.PageLoginVOTF;
@@ -20,7 +20,7 @@ public class PageLoginVOTFStpV {
     public static void goToAndLogin(String urlAcceso, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
         String usuarioVOTF = dCtxSh.pais.getAccesoVOTF().getUsuario();
         String passwordVOTF = dCtxSh.pais.getAccesoVOTF().getPassword();
-        StepTestMaker step = TestMaker.getCurrentStepInExecution();
+        StepTM step = TestMaker.getCurrentStepInExecution();
         step.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
         step.replaceInDescription(tagUsuarioVotf, usuarioVOTF);
         step.replaceInDescription(tagPasswordVotf, tagPasswordVotf);

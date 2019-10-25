@@ -31,8 +31,7 @@ public class PageInitialStpV {
     		"(la esperamos hasta #{maxSeconds} segundos)",
     	level=State.Defect)
     public boolean checkIsInitialPageSpanish(int maxSeconds) {
-    	//return (pageInitial.checkIsInitialPageSpanish(maxSeconds));
-    	return false;
+    	return (pageInitial.checkIsInitialPageSpanish(maxSeconds));
     }
     
 	@Step (
@@ -42,8 +41,7 @@ public class PageInitialStpV {
 		PageSelProdsToReclassifyStpV pageClassifProductosStpV = PageSelProdsToReclassifyStpV.getNew(
 			pageInitial.clickClasificarProductos());
 		
-		int maxSeconds = 3;
-		pageClassifProductosStpV.checkIsVisiblePage(maxSeconds);
+		pageClassifProductosStpV.checkIsVisiblePage(5);
 		return pageClassifProductosStpV;
 	}
 }

@@ -14,7 +14,7 @@ import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackDesktop;
 import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackMobil;
 import com.mng.testmaker.testreports.html.StorerErrorStep;
 
-public class TestRunTestMaker extends XmlTest {
+public class TestRunTM extends XmlTest {
 
 	private static final long serialVersionUID = -4002416107477209626L;
 	private StateExecution stateExecution = StateExecution.Started;
@@ -22,15 +22,15 @@ public class TestRunTestMaker extends XmlTest {
     public XmlGroups x_xmlGroupsVisible;
     private ITestContext testNgContext;
     private StorerErrorStep storerErrorStep = null;
-    private List<TestCaseTestMaker> listTestCases = new ArrayList<>();
+    private List<TestCaseTM> listTestCases = new ArrayList<>();
 	private BrowserStackDesktop browserStackDesktop = null;
 	private BrowserStackMobil browserStackMobil = null;
 	
-    public TestRunTestMaker(XmlSuite suite, int index) {
+    public TestRunTM(XmlSuite suite, int index) {
         super(suite, index);
     }
 
-    public TestRunTestMaker(XmlSuite suite) {
+    public TestRunTM(XmlSuite suite) {
         super(suite);
     }
     
@@ -41,7 +41,7 @@ public class TestRunTestMaker extends XmlTest {
 	
 	private State getStateFromTestCases() {
 		State stateReturn = State.Ok;
-		for (TestCaseTestMaker testCase : getListTestCases()) {
+		for (TestCaseTM testCase : getListTestCases()) {
 			State stateTestCase = testCase.getStateResult();
 			if (stateTestCase.isMoreCriticThan(stateReturn)) {
 				stateReturn = stateTestCase;
@@ -62,8 +62,8 @@ public class TestRunTestMaker extends XmlTest {
 		return state;
 	}
 	
-    public SuiteTestMaker getSuiteParent() {
-    	return (SuiteTestMaker)getSuite();
+    public SuiteTM getSuiteParent() {
+    	return (SuiteTM)getSuite();
     }
     
     public ITestContext getTestNgContext() {
@@ -72,7 +72,7 @@ public class TestRunTestMaker extends XmlTest {
     
     public void setTestNgContext(ITestContext testNgContext) {
         this.testNgContext = testNgContext;
-        String suiteDirectory = ((SuiteTestMaker)getSuite()).getPathDirectory();
+        String suiteDirectory = ((SuiteTM)getSuite()).getPathDirectory();
         setTestRunOutputDirectory(suiteDirectory);
   	
     }
@@ -100,7 +100,7 @@ public class TestRunTestMaker extends XmlTest {
         this.x_xmlGroupsVisible = xmlGroups;
     }
 	
-	public List<TestCaseTestMaker> getListTestCases() {
+	public List<TestCaseTM> getListTestCases() {
 		return listTestCases;
 	}
 	
@@ -109,7 +109,7 @@ public class TestRunTestMaker extends XmlTest {
 	}
 
 	
-	public void addTestCase(TestCaseTestMaker testCase) {
+	public void addTestCase(TestCaseTM testCase) {
 		listTestCases.add(testCase);
 	}
     

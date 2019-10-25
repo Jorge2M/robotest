@@ -3,8 +3,8 @@ package com.mng.testmaker.domain.data;
 import java.util.Date;
 
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.SuiteTestMaker;
-import com.mng.testmaker.domain.TestCaseTestMaker;
+import com.mng.testmaker.domain.SuiteTM;
+import com.mng.testmaker.domain.TestCaseTM;
 
 public class TestCaseData {
 
@@ -21,7 +21,6 @@ public class TestCaseData {
     private float durationMillis;
     private int numberSteps;
     private String classSignature;
-    private String instance;
     
 	public String getIdExecSuite() {
 		return idExecSuite;
@@ -101,16 +100,10 @@ public class TestCaseData {
 	public void setClassSignature(String classSignature) {
 		this.classSignature = classSignature;
 	}
-	public String getInstance() {
-		return instance;
-	}
-	public void setInstance(String instance) {
-		this.instance = instance;
-	}
     
-	public static TestCaseData from(TestCaseTestMaker testCase) {
+	public static TestCaseData from(TestCaseTM testCase) {
 		TestCaseData testCaseData = new TestCaseData();
-		SuiteTestMaker suite = testCase.getSuiteParent();
+		SuiteTM suite = testCase.getSuiteParent();
 		
 		testCaseData.setIdExecSuite(suite.getIdExecution());
 		testCaseData.setSuiteName(suite.getName());
@@ -128,8 +121,7 @@ public class TestCaseData {
 		testCaseData.setDurationMillis(fin.getTime() - inicio.getTime());
 		
 		testCaseData.setNumberSteps(testCase.getStepsList().size());
-		testCaseData.setClassSignature(testCase.getResult().getMethod().getClass().getName());
-		testCaseData.setInstance(testCase.getResult().getInstanceName());
+		testCaseData.setClassSignature(testCase.getResult().getInstanceName());
 		
 		return testCaseData;
 	}

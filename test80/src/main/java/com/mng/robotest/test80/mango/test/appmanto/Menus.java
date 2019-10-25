@@ -5,9 +5,9 @@ import org.testng.annotations.Test;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.domain.InputParamsTestMaker;
-import com.mng.testmaker.domain.TestCaseTestMaker;
-import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.domain.InputParamsTM;
+import com.mng.testmaker.domain.TestCaseTM;
+import com.mng.testmaker.domain.TestRunTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.stpv.manto.DataMantoAccess;
@@ -34,9 +34,9 @@ public class Menus {
 
 	public DataMantoAccess getDataMantoAccess() {
 		DataMantoAccess dMantoAcc = new DataMantoAccess();
-		TestCaseTestMaker testCase = TestMaker.getTestCase();
-		TestRunTestMaker testRun = testCase.getTestRunParent();
-        InputParamsTestMaker inputParams = testCase.getInputParamsSuite();
+		TestCaseTM testCase = TestMaker.getTestCase();
+		TestRunTM testRun = testCase.getTestRunParent();
+        InputParamsTM inputParams = testCase.getInputParamsSuite();
 		dMantoAcc.urlManto = inputParams.getUrlBase();
 		dMantoAcc.userManto = testRun.getParameter(Constantes.paramUsrmanto);
 		dMantoAcc.passManto = testRun.getParameter(Constantes.paramPasmanto);

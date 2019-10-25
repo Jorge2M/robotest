@@ -15,7 +15,7 @@ import com.mng.testmaker.boundary.access.OptionTMaker;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.TypeAccessFmwk;
-import com.mng.testmaker.domain.SuiteTestMaker;
+import com.mng.testmaker.domain.SuiteTM;
 import com.mng.testmaker.domain.testfilter.TestMethod;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -48,7 +48,7 @@ public class Test80mng {
     	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, optionsTest80, Suites.class, AppEcom.class);
     	if (cmdLineAccess.checkOptionsValue()) {
         	InputParams inputParams = getInputParamsMango(cmdLineAccess);
-    		cmdLineAccess.storeDataOptionsTestMaker(inputParams);
+    		cmdLineAccess.storeDataOptionsTM(inputParams);
             execSuite(inputParams);
     	}
     }
@@ -173,12 +173,12 @@ public class Test80mng {
      * Indirect access from Command Line, direct access from Online
      */
     public static void execSuite(InputParams inputParams) throws Exception {
-    	SuiteTestMaker suite = makeSuite(inputParams);
+    	SuiteTM suite = makeSuite(inputParams);
     	TestMaker.run(suite);
     	callBackIfNeeded(suite, inputParams);
     }
     
-    public static SuiteTestMaker makeSuite(InputParams inputParams) throws Exception {
+    public static SuiteTM makeSuite(InputParams inputParams) throws Exception {
         inputParams.setTypeAccessIfNotSetted(TypeAccessFmwk.Online);
         try {
             switch ((Suites)inputParams.getSuite()) {
@@ -217,7 +217,7 @@ public class Test80mng {
         return null;
     }
 
-    private static void callBackIfNeeded(SuiteTestMaker suite, InputParams inputParams) {
+    private static void callBackIfNeeded(SuiteTM suite, InputParams inputParams) {
     	CallBack callBack = inputParams.getCallBack();
         if (callBack!=null) {
             String reportTSuiteURL = suite.getDnsReportHtml();

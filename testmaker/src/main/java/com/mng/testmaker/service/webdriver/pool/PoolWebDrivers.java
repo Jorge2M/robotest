@@ -7,11 +7,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.domain.TestRunTM;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.domain.InputParamsTestMaker;
-import com.mng.testmaker.domain.InputParamsTestMaker.ManagementWebdriver;
+import com.mng.testmaker.domain.InputParamsTM;
+import com.mng.testmaker.domain.InputParamsTM.ManagementWebdriver;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackMobil;
@@ -28,7 +28,7 @@ public class PoolWebDrivers {
     
     private final List<StoredWebDrv> poolWebDrivers = new CopyOnWriteArrayList<>();
     
-    public WebDriver getWebDriver(WebDriverType webDriverType, Channel channel, TestRunTestMaker testRun) {
+    public WebDriver getWebDriver(WebDriverType webDriverType, Channel channel, TestRunTM testRun) {
         String moreDataWdrv = getMoreDataWdrv(webDriverType, testRun);
         WebDriver driver = getFreeWebDriverFromPool(webDriverType, moreDataWdrv);
         if (driver != null) {
@@ -37,8 +37,8 @@ public class PoolWebDrivers {
         return createAndStoreNewWebDriver(webDriverType, channel, testRun, moreDataWdrv);
     }   
     
-    public void quitWebDriver(WebDriver driver, TestRunTestMaker testRun) {
-    	InputParamsTestMaker inputData = testRun.getSuiteParent().getInputParams();
+    public void quitWebDriver(WebDriver driver, TestRunTM testRun) {
+    	InputParamsTM inputData = testRun.getSuiteParent().getInputParams();
         boolean netAnalysis = inputData.isNetAnalysis();
     	if (netAnalysis) {
         	NetTrafficSaver.stopNetTrafficThread();
@@ -64,7 +64,7 @@ public class PoolWebDrivers {
     }
     
     private WebDriver createAndStoreNewWebDriver (
-    		WebDriverType webDriverType, Channel channel, TestRunTestMaker testRun, String moreDataWdrv) {
+    		WebDriverType webDriverType, Channel channel, TestRunTM testRun, String moreDataWdrv) {
         boolean netAnalysis = testRun.getSuiteParent().getInputParams().isNetAnalysis();
 		WebDriver driver = 
 			FactoryWebdriverMaker.make(webDriverType, testRun)
@@ -185,7 +185,7 @@ public class PoolWebDrivers {
      * actualmente sólo lo informaremos para el caso de 'BrowserStack' (devolvemos el modelo de de dispositivo móvil especificado en BrowserStack)
      * en el resto de casos devolveremos ""
      */
-    private String getMoreDataWdrv(WebDriverType canalWebDriver, TestRunTestMaker testRun) {
+    private String getMoreDataWdrv(WebDriverType canalWebDriver, TestRunTM testRun) {
         String moreDataWdrv = "";
         switch (canalWebDriver) {
         //En el caso de BrowserStack como información específica del WebDriver incluiremos el modelo de dispositivo móvil asociado

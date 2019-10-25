@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.domain.StepTM;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.conf.Channel;
@@ -57,7 +57,7 @@ public class AccesoStpV {
             registro+= "Borrar la Bolsa<br>";         
         }
         
-        StepTestMaker StepTestMaker = TestMaker.getCurrentStepInExecution();
+        StepTM StepTestMaker = TestMaker.getCurrentStepInExecution();
         StepTestMaker.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
         StepTestMaker.replaceInDescription(tagLiteralIdioma, dCtxSh.idioma.getCodigo().getLiteral());
         StepTestMaker.replaceInDescription(tagRegistro, registro);
@@ -219,7 +219,7 @@ public class AccesoStpV {
     	saveHtmlPage=SaveWhen.Always)
     public static void accesoPRYCambioPais(DataCtxShop dCtxSh, Pais paisDestino, IdiomaPais idiomaDestino, WebDriver driver) 
     throws Exception {
-        StepTestMaker StepTestMaker = TestMaker.getCurrentStepInExecution();
+        StepTM StepTestMaker = TestMaker.getCurrentStepInExecution();
         StepTestMaker.replaceInDescription(tagNombrePaisOrigen, dCtxSh.pais.getNombre_pais());
         StepTestMaker.replaceInDescription(tagCodigoPaisOrigen, dCtxSh.pais.getCodigo_pais());
         StepTestMaker.replaceInDescription(tagNombreIdiomaOrigen, dCtxSh.idioma.getLiteral());

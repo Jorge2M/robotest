@@ -5,9 +5,9 @@ import org.testng.*;
 
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.SuiteTestMaker;
-import com.mng.testmaker.domain.TestCaseTestMaker;
-import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.domain.SuiteTM;
+import com.mng.testmaker.domain.TestCaseTM;
+import com.mng.testmaker.domain.TestRunTM;
 
 
 public class InvokeListener extends TestListenerAdapter implements ISuiteListener {
@@ -20,49 +20,49 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
     
     @Override //End Suite
     public void onFinish(ISuite suite) {
-    	((SuiteTestMaker)suite.getXmlSuite()).end();
+    	((SuiteTM)suite.getXmlSuite()).end();
     }
     
     @Override //Start TestRun
     public synchronized void onStart(ITestContext testNgContext) {
     	//Inyectamos el ITestContext en el TestRun
-    	TestRunTestMaker testRun = (TestRunTestMaker)testNgContext.getCurrentXmlTest();
+    	TestRunTM testRun = (TestRunTM)testNgContext.getCurrentXmlTest();
     	testRun.setTestNgContext(testNgContext);
     }
   
     @Override //End TestRun
     public void onFinish(ITestContext testContext) {
-    	TestRunTestMaker testRun = (TestRunTestMaker)testContext.getCurrentXmlTest();
+    	TestRunTM testRun = (TestRunTM)testContext.getCurrentXmlTest();
     	testRun.end();
     }
 
     @Override //Start Method
     public void onTestStart(ITestResult result) {
-    	TestRunTestMaker testRun = getTestRun(result);
-    	TestCaseTestMaker testCase = new TestCaseTestMaker(result);
+    	TestRunTM testRun = getTestRun(result);
+    	TestCaseTM testCase = new TestCaseTM(result);
     	testRun.addTestCase(testCase);
     }
   
     @Override //End Method Success
     public void onTestSuccess(ITestResult result) {
-    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCase(result);
+    	TestCaseTM testCase = TestCaseTM.getTestCase(result);
     	testCase.end();
     }
   
     @Override //End Method Skipped
     public void onTestSkipped(ITestResult result) {
-    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCase(result);
+    	TestCaseTM testCase = TestCaseTM.getTestCase(result);
     	testCase.end(State.Skip);
     }
   
     @Override //End Method Failure
     public void onTestFailure(ITestResult result) {
         Log4jConfig.pLogger.error("Exception for TestNG", result.getThrowable());
-    	TestCaseTestMaker testCase = TestCaseTestMaker.getTestCase(result);
+    	TestCaseTM testCase = TestCaseTM.getTestCase(result);
     	testCase.end(State.Nok);
     }
     
-    private TestRunTestMaker getTestRun(ITestResult result) {
-    	return ((TestRunTestMaker)result.getTestContext().getCurrentXmlTest());
+    private TestRunTM getTestRun(ITestResult result) {
+    	return ((TestRunTM)result.getTestContext().getCurrentXmlTest());
     }
 }

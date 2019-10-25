@@ -3,9 +3,9 @@ package com.mng.robotest.test80;
 import java.util.Arrays;
 
 import com.mng.testmaker.conf.TypeAccessFmwk;
-import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.domain.InputParamsTM;
 
-public class InputParams extends InputParamsTestMaker {
+public class InputParams extends InputParamsTM {
 
     private String[] listaPaises = {};
     private String[] listaLineas = {};

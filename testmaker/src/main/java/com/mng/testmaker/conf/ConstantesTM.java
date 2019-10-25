@@ -2,7 +2,7 @@ package com.mng.testmaker.conf;
 
 import java.io.File;
 
-public class ConstantesTestMaker {
+public class ConstantesTM {
 
     public static final String directoryOutputTests = "output-library";
     public static final String nameDirectoryStatics = "static";

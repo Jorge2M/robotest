@@ -9,12 +9,12 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.domain.StepTestMaker;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.StepTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -250,7 +250,7 @@ public class PageCheckoutWrapperStpV {
     public static void forceClickIconoPagoAndWait(Pais pais, Pago pago, Channel channel, boolean pintaNombrePago, WebDriver driver) throws Exception {
         if (pintaNombrePago) {
             String pintaPago = "<b style=\"color:blue;\">" + pago.getNombre(channel) + "</b>:"; 
-            StepTestMaker step = TestMaker.getCurrentStepInExecution();
+            StepTM step = TestMaker.getCurrentStepInExecution();
             String newDescription = pintaPago + step.getDescripcion();
             step.setDescripcion(newDescription);
         }
@@ -308,7 +308,7 @@ public class PageCheckoutWrapperStpV {
     public static void inputDataTrjAndConfirmPago(DataCtxPago dCtxPago, Channel channel, WebDriver driver) 
     throws Exception {
         Pago pago = dCtxPago.getDataPedido().getPago();
-        StepTestMaker step = TestMaker.getCurrentStepInExecution();
+        StepTM step = TestMaker.getCurrentStepInExecution();
         step.replaceInDescription(tagTipoTarj, pago.getTipotarj());
         step.replaceInDescription(tagNumTarj, pago.getNumtarj());
        
@@ -456,7 +456,7 @@ public class PageCheckoutWrapperStpV {
         expected="Se aplican los descuentos correctamente")
     public static void inputDataEmplEnPromoAndAccept(DataBag dataBag, Pais pais, Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-    	StepTestMaker step = TestMaker.getCurrentStepInExecution();
+    	StepTM step = TestMaker.getCurrentStepInExecution();
     	String primerApellido = (new StringTokenizer(pais.getAccesoEmpl().getNombre(), " ")).nextToken();
     	step.replaceInDescription(tag1erApellido, primerApellido);
     	

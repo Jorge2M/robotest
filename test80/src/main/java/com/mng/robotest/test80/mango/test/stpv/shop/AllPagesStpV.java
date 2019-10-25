@@ -10,7 +10,7 @@ import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
-import com.mng.testmaker.service.webdriver.utils.WebDriverArqUtils;
+import com.mng.testmaker.service.webdriver.utils.WebUtils;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
@@ -49,7 +49,7 @@ public class AllPagesStpV {
         	if (WebdrvWrapp.getTypeDriver(driver)!=WebDriverType.firefox &&
         		WebdrvWrapp.getTypeDriver(driver)!=WebDriverType.firefoxhless) {
         		int maxErrors = 1;
-        		ResultadoErrores resultadoLogs = WebDriverArqUtils.getLogErrors(Level.WARNING, driver, maxErrors);
+        		ResultadoErrores resultadoLogs = WebUtils.getLogErrors(Level.WARNING, driver, maxErrors);
         		String descripValidac = "No hay errores JavaScript";
         		boolean resultadoOK = resultadoLogs.getResultado() == ResultadoErrores.Resultado.OK;
                 if (!resultadoOK) { 

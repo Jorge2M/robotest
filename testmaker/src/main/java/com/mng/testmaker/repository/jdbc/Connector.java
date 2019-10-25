@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import org.sqlite.SQLiteConfig;
 import org.sqlite.SQLiteConfig.LockingMode;
 
-import com.mng.testmaker.conf.ConstantesTestMaker;
+import com.mng.testmaker.conf.ConstantesTM;
 
 
 public class Connector {
@@ -35,7 +35,7 @@ public class Connector {
     public static String getSQLitePathDirectory() {
     	String path = 
     		System.getProperty("user.dir") + File.separator + 
-    		ConstantesTestMaker.directoryOutputTests + File.separator + 
+    		ConstantesTM.directoryOutputTests + File.separator + 
     		"sqlite" + File.separator;
     	return path;
     }
@@ -43,6 +43,6 @@ public class Connector {
     public static String getSQLiteFilePathAutomaticTestingSchema() {
     	return (
     		getSQLitePathDirectory() + 
-    		ConstantesTestMaker.SQLiteFileAutomaticTestingSchema);
+    		ConstantesTM.SQLiteFileAutomaticTestingSchema);
     }
 }

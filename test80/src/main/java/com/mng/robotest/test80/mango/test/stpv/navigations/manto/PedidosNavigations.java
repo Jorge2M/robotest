@@ -9,8 +9,8 @@ import com.mng.robotest.test80.InputParams;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.conf.TypeAccessFmwk;
-import com.mng.testmaker.domain.TestCaseTestMaker;
-import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.domain.TestCaseTM;
+import com.mng.testmaker.domain.TestRunTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -34,8 +34,8 @@ public class PedidosNavigations {
     throws Exception {
     	//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
     	if (appE!=AppEcom.votf) {  
-			TestCaseTestMaker testCase = TestMaker.getTestCase();
-			TestRunTestMaker testRun = testCase.getTestRunParent();
+			TestCaseTM testCase = TestMaker.getTestCase();
+			TestRunTM testRun = testCase.getTestRunParent();
 	        DataMantoAccess dMantoAcc = new DataMantoAccess();
 	        dMantoAcc.urlManto = testRun.getParameter(Constantes.paramUrlmanto);
 	        dMantoAcc.userManto = testRun.getParameter(Constantes.paramUsrmanto);

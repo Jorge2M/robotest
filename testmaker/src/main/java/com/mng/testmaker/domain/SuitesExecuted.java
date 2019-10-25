@@ -5,22 +5,22 @@ import java.util.List;
 
 public class SuitesExecuted {
 
-	private static final List<SuiteTestMaker> suitesExecuted = new ArrayList<>();
+	private static final List<SuiteTM> suitesExecuted = new ArrayList<>();
 	
-	public static void add(SuiteTestMaker suite) {
+	public static void add(SuiteTM suite) {
 		suitesExecuted.add(suite); 
 	}
 	
-	public static void remove(SuiteTestMaker suite) {
+	public static void remove(SuiteTM suite) {
 		suitesExecuted.remove(suite);
 	}
 	
-	public static List<SuiteTestMaker> getSuitesExecuted() {
+	public static List<SuiteTM> getSuitesExecuted() {
 		return suitesExecuted;
 	}
 	
-	public static SuiteTestMaker getSuite(String idExecution) {
-		for (SuiteTestMaker suite : suitesExecuted) {
+	public static SuiteTM getSuite(String idExecution) {
+		for (SuiteTM suite : suitesExecuted) {
 			if (idExecution.compareTo(suite.getIdExecution())==0) {
 				return suite;
 			}

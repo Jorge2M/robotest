@@ -4,11 +4,10 @@ import java.util.*;
 
 import org.testng.ITestContext;
 import org.testng.annotations.*;
-import com.mng.testmaker.domain.SuiteTestMaker;
 
-import com.mng.testmaker.domain.InputParamsTestMaker;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.CompraFact;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
@@ -36,7 +35,7 @@ public class ListPagosEspana {
     		"variando los flags de usuario registrado, empleado y métodos de envío")
     public Object[] COM010_PagoFactory(ITestContext ctx) throws Exception {
         ArrayList<Object> listTests = new ArrayList<>(); 
-        InputParamsTestMaker inputData = TestMaker.getInputParamsSuite(ctx);
+        InputParamsTM inputData = TestMaker.getInputParamsSuite(ctx);
         AppEcom appE = (AppEcom)inputData.getApp();
         Channel channel = inputData.getChannel();
         try {

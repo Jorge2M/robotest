@@ -6,7 +6,7 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.testfilter.DataFilterTCases;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
-public class InputParamsTestMaker {
+public class InputParamsTM {
 	
 	public enum ManagementWebdriver {recycle, discard}
 	
@@ -25,9 +25,9 @@ public class InputParamsTestMaker {
     private List<String> groupsFilter;
     private List<String> mails;
     
-    public InputParamsTestMaker() {}
+    public InputParamsTM() {}
     
-    public InputParamsTestMaker(Channel channel, Enum<?> suite, Enum<?> app, String urlBase, WebDriverType webDriverType) {
+    public InputParamsTM(Channel channel, Enum<?> suite, Enum<?> app, String urlBase, WebDriverType webDriverType) {
     	this.channel = channel;
     	this.suite = suite;
     	this.app = app;

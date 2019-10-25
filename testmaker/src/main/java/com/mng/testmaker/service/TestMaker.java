@@ -12,13 +12,13 @@ import org.testng.xml.XmlSuite;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.domain.InputParamsTestMaker;
+import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.StateExecution;
-import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.domain.SuiteTestMaker;
+import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.SuiteTM;
 import com.mng.testmaker.domain.SuitesExecuted;
-import com.mng.testmaker.domain.TestCaseTestMaker;
-import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.domain.TestCaseTM;
+import com.mng.testmaker.domain.TestRunTM;
 import com.mng.testmaker.repository.jdbc.Connector;
 import com.mng.testmaker.testreports.html.ResourcesExtractor;
 
@@ -28,7 +28,7 @@ public class TestMaker {
 	//generateReport <- Esta debe estar disponible coo función de la Suite
 	//generateCorreoReport
 	
-    public static void run(SuiteTestMaker suite) { 
+    public static void run(SuiteTM suite) { 
     	suite.start();
     	runInTestMaker(suite);
     	runInTestNG(suite);
@@ -38,21 +38,21 @@ public class TestMaker {
     	finish(getSuite(idExecution));
     }
     
-	public static void finish(SuiteTestMaker suite) {
+	public static void finish(SuiteTM suite) {
 		suite.end();
 	}
 	
-	public static SuiteTestMaker getSuite(String idExecution) {
+	public static SuiteTM getSuite(String idExecution) {
 		return SuitesExecuted.getSuite(idExecution);
 	}
 	
-	public static SuiteTestMaker getSuite(ITestContext ctx) {
-		return (SuiteTestMaker)ctx.getSuite().getXmlSuite();
+	public static SuiteTM getSuite(ITestContext ctx) {
+		return (SuiteTM)ctx.getSuite().getXmlSuite();
 	}
 	
-	public static List<SuiteTestMaker> getListSuites(String suiteName, Channel channel) {
-		List<SuiteTestMaker> listSuites = new ArrayList<>();
-		for (SuiteTestMaker suite : SuitesExecuted.getSuitesExecuted()) {
+	public static List<SuiteTM> getListSuites(String suiteName, Channel channel) {
+		List<SuiteTM> listSuites = new ArrayList<>();
+		for (SuiteTM suite : SuitesExecuted.getSuitesExecuted()) {
 			if (suite.getName().compareTo(suiteName)==0 &&
 				suite.getInputParams().getChannel()==channel) {
 				listSuites.add(suite);
@@ -61,27 +61,27 @@ public class TestMaker {
 		return listSuites;
 	}
 	
-	public static InputParamsTestMaker getInputParamsSuite(ITestContext ctx) {
-		return (InputParamsTestMaker)getSuite(ctx).getInputParams();
+	public static InputParamsTM getInputParamsSuite(ITestContext ctx) {
+		return (InputParamsTM)getSuite(ctx).getInputParams();
 	}
 	
-	public static TestRunTestMaker getTestRun(ITestContext ctx) {
-		return (TestRunTestMaker)ctx.getCurrentXmlTest();
+	public static TestRunTM getTestRun(ITestContext ctx) {
+		return (TestRunTM)ctx.getCurrentXmlTest();
 	}
 	
-	public static TestCaseTestMaker getTestCase() {
-		return TestCaseTestMaker.getTestCaseInExecution();
+	public static TestCaseTM getTestCase() {
+		return TestCaseTM.getTestCaseInExecution();
 	}
 	
     public static WebDriver getDriverTestCase() {
     	return (getTestCase().getWebDriver());
     }
     
-    public static StepTestMaker getCurrentStepInExecution() {
+    public static StepTM getCurrentStepInExecution() {
     	return getTestCase().getCurrentStepInExecution();
     }
     
-    public static StepTestMaker getLastStep() {
+    public static StepTM getLastStep() {
     	return getTestCase().getLastStep();
     }
     
@@ -95,13 +95,13 @@ public class TestMaker {
         }
     }
 	
-    public static void skipTestsIfSuiteStopped(SuiteTestMaker suite) {
+    public static void skipTestsIfSuiteStopped(SuiteTM suite) {
         if (suite.getStateExecution()==StateExecution.Stopping) {
             throw new SkipException("Received Signal for stop TestSuite" + suite.getName());
         }
     }
 
-    private static void runInTestMaker(SuiteTestMaker suite) {
+    private static void runInTestMaker(SuiteTM suite) {
         File path = new File(suite.getPathDirectory());
         path.mkdir();
         Log4jConfig.configLog4java(suite.getPathDirectory());
@@ -109,7 +109,7 @@ public class TestMaker {
     	SuitesExecuted.add(suite);
     }
     
-    private static void runInTestNG(SuiteTestMaker suite) {
+    private static void runInTestNG(SuiteTM suite) {
         List<XmlSuite> suites = new ArrayList<>();
         suites.add(suite);    
         TestNG tng = new TestNG();

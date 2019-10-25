@@ -7,14 +7,15 @@ import java.util.List;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.util.ParsePathClass;
 import com.mng.testmaker.testreports.html.NetTrafficSaver;
 import com.mng.testmaker.testreports.html.StoreStepEvidencies;
 
-public class StepTestMaker {
+public class StepTM {
 	
-	private final SuiteTestMaker suiteParent;
-	private final TestRunTestMaker testRunParent;
-	private final TestCaseTestMaker testCaseParent;
+	private final SuiteTM suiteParent;
+	private final TestRunTM testRunParent;
+	private final TestCaseTM testCaseParent;
 	private final List<ChecksResult> listChecksResult = new ArrayList<>();
 			
 	private StateExecution state = StateExecution.Started;
@@ -25,6 +26,7 @@ public class StepTestMaker {
 	private SaveWhen saveErrorPage = SaveWhen.IfProblem;
 	private SaveWhen saveHtmlPage = SaveWhen.Never;
 	private SaveWhen saveNettraffic = SaveWhen.Never;
+	private String pathMethod;
 	private int type_page = 0; 
 	private Date hora_inicio; 
 	private Date hora_fin;
@@ -44,24 +46,24 @@ public class StepTestMaker {
     	}
     }
     
-	public StepTestMaker() {
-		testCaseParent = TestCaseTestMaker.getTestCaseInExecution();
+	public StepTM() {
+		testCaseParent = TestCaseTM.getTestCaseInExecution();
 		testRunParent = testCaseParent.getTestRunParent();
 		suiteParent = testRunParent.getSuiteParent();
 	}
 	
-	public SuiteTestMaker getSuiteParent() {
+	public SuiteTM getSuiteParent() {
 		return suiteParent;
 	}
-	public TestRunTestMaker getTestRunParent() {
+	public TestRunTM getTestRunParent() {
 		return testRunParent;
 	}
-	public TestCaseTestMaker getTestCaseParent() {
+	public TestCaseTM getTestCaseParent() {
 		return testCaseParent;
 	}
 	
 	public int getPositionInTestCase() {
-		List<StepTestMaker> listSteps = testCaseParent.getStepsList();
+		List<StepTM> listSteps = testCaseParent.getStepsList();
 		for (int i=0; i<listSteps.size(); i++) {
 			if (listSteps.get(i)==this) {
 				return i+1;
@@ -139,6 +141,23 @@ public class StepTestMaker {
         	netTraffic.resetAndStartNetTraffic();
         }
     }    
+    
+    public String getPathMethod() {
+    	return this.pathMethod;
+    }
+    public String getPathClass() {
+    	return ParsePathClass.getPathClass(getPathMethod());
+    }
+    public String getNameClass() {
+    	return ParsePathClass.getNameClass(getPathClass());
+    }
+    public String getNameMethod() {
+    	return ParsePathClass.getNameMethod(getPathMethod());
+    }
+    
+    public void setPathMethod(String pathMethod) {
+    	this.pathMethod = pathMethod;
+    }
     
     public void setTypePage(int c_type_page) { 
         this.type_page = c_type_page; 

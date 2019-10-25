@@ -18,7 +18,7 @@ import org.testng.xml.XmlInclude;
 import org.testng.xml.XmlTest;
 
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.domain.TestRunTM;
 
 public class FilterTestsSuiteXML {
     
@@ -54,7 +54,7 @@ public class FilterTestsSuiteXML {
      * @param testCaseList contains the names of the methods to exec
      * 
      */
-    public void filterTestCasesToExec(TestRunTestMaker testRun) {
+    public void filterTestCasesToExec(TestRunTM testRun) {
         try {
         	List<TestMethod> testCaseListToExec = getTestCasesToExecute(testRun);
     		includeTestCasesInTestRun(testCaseListToExec, testRun);
@@ -222,7 +222,7 @@ public class FilterTestsSuiteXML {
     /**
      * Remove of the dependencies with source or destination group without any test for execution
      */
-    private void removeDependenciesWithGroupsNotExecuted(TestRunTestMaker testRun) {
+    private void removeDependenciesWithGroupsNotExecuted(TestRunTM testRun) {
         HashSet<String> groupsWithTestsToExec = getListOfGroupsWithTestCasesToExecute(testRun);
         XmlGroups xmlGroups = testRun.getGroups();
         if (xmlGroups!=null) {

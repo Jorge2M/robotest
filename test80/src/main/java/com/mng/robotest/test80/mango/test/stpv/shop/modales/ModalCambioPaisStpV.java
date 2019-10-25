@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.domain.StepTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
@@ -29,7 +29,7 @@ public class ModalCambioPaisStpV {
         expected="Se accede a la shop de " + tagNombrePais + " en " + tagLiteralIdioma)
     public static void cambioPais(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        StepTestMaker step = TestMaker.getCurrentStepInExecution();
+        StepTM step = TestMaker.getCurrentStepInExecution();
         step.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());
         step.replaceInExpected(tagNombrePais, dCtxSh.pais.getNombre_pais());
         step.replaceInDescription(tagCodigoPais, dCtxSh.pais.getCodigo_pais());

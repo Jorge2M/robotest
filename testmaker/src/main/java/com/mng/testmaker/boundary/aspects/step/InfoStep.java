@@ -1,19 +1,20 @@
 package com.mng.testmaker.boundary.aspects.step;
 
-import java.lang.reflect.Method;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
-import com.mng.testmaker.domain.StepTestMaker;
+import com.mng.testmaker.domain.StepTM;
 
 public class InfoStep {
 
+	private final MethodSignature methodSignature;
 	private final Step stepAnnotation;
-	private final StepTestMaker datosStep;
+	private final StepTM step;
 	
 	private InfoStep(JoinPoint joinPoint) {
-		this.stepAnnotation = getStepAnnotation(joinPoint);
-		this.datosStep = getDatosStepFromStepAnnotation();
+		this.methodSignature = (MethodSignature)joinPoint.getSignature();
+		this.stepAnnotation = methodSignature.getMethod().getAnnotation(Step.class);
+		this.step = getDatosStepFromStepAnnotation();
 	}
 	
 	public static InfoStep from(JoinPoint joinPoint) {
@@ -24,25 +25,19 @@ public class InfoStep {
 		return stepAnnotation;
 	}
 	
-	public StepTestMaker getDatosStep() {
-		return datosStep;
+	public StepTM getDatosStep() {
+		return step;
 	}
-	
-    private Step getStepAnnotation(JoinPoint joinPoint) {
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        Method method = signature.getMethod();
-        Step StepAnnotation = method.getAnnotation(Step.class);
-        return (StepAnnotation);
-    }
     
-    private StepTestMaker getDatosStepFromStepAnnotation() {
-    	StepTestMaker datosStep = new StepTestMaker();
-    	datosStep.setDescripcion(stepAnnotation.description());
-    	datosStep.setResExpected(stepAnnotation.expected());
-    	datosStep.setSaveImagePage(stepAnnotation.saveImagePage());
-    	datosStep.setSaveErrorPage(stepAnnotation.saveErrorData());
-    	datosStep.setSaveHtmlPage(stepAnnotation.saveHtmlPage());
-    	datosStep.setSaveNettrafic(stepAnnotation.saveNettraffic());
-    	return datosStep;
+    private StepTM getDatosStepFromStepAnnotation() {
+    	StepTM step = new StepTM();
+    	step.setDescripcion(stepAnnotation.description());
+    	step.setResExpected(stepAnnotation.expected());
+    	step.setSaveImagePage(stepAnnotation.saveImagePage());
+    	step.setSaveErrorPage(stepAnnotation.saveErrorData());
+    	step.setSaveHtmlPage(stepAnnotation.saveHtmlPage());
+    	step.setSaveNettrafic(stepAnnotation.saveNettraffic());
+    	step.setPathMethod(methodSignature.getDeclaringTypeName() + "." + methodSignature.getName());
+    	return step;
     }
 }

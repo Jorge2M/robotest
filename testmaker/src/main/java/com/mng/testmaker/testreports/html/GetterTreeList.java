@@ -6,32 +6,32 @@ import java.util.List;
 import java.util.Map;
 
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
-import com.mng.testmaker.domain.StepTestMaker;
-import com.mng.testmaker.domain.SuiteTestMaker;
-import com.mng.testmaker.domain.TestCaseTestMaker;
-import com.mng.testmaker.domain.TestRunTestMaker;
+import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.SuiteTM;
+import com.mng.testmaker.domain.TestCaseTM;
+import com.mng.testmaker.domain.TestRunTM;
 
 public class GetterTreeList {
 
     enum TypeLine {TestRun, TestCase, Step, Validation}
     
-    private final SuiteTestMaker suite;
+    private final SuiteTM suite;
     private final List<Integer> mapTree;
     
-    public GetterTreeList(SuiteTestMaker suite) {
+    public GetterTreeList(SuiteTM suite) {
     	this.suite = suite;
     	this.mapTree = getMapTree();
     }
     
     private List<Integer> getMapTree() {
     	List<Integer> listMapReturn = new ArrayList<>();
-    	for (TestRunTestMaker testRun : suite.getListTestRuns()) {
+    	for (TestRunTM testRun : suite.getListTestRuns()) {
     		listMapReturn.add(0);
     		int posLastTestRun = listMapReturn.size();
-    		for (TestCaseTestMaker testCase : testRun.getListTestCases()) {
+    		for (TestCaseTM testCase : testRun.getListTestCases()) {
     			listMapReturn.add(posLastTestRun);
         		int posLastTest = listMapReturn.size();
-    			for (StepTestMaker step : testCase.getStepsList()) {
+    			for (StepTM step : testCase.getStepsList()) {
     				listMapReturn.add(posLastTest);
             		int posLastStep = listMapReturn.size();
             		for (ChecksResult validation : step.getListChecksResult()) {
