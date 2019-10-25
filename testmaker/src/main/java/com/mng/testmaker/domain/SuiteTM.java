@@ -12,7 +12,6 @@ import com.mng.testmaker.conf.ConstantesTM;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.service.webdriver.pool.PoolWebDrivers;
 import com.mng.testmaker.testreports.html.GenerateReports;
-import com.mng.testmaker.testreports.mail.SenderMailEndSuite;
 
 public class SuiteTM extends XmlSuite {
 	
@@ -24,7 +23,8 @@ public class SuiteTM extends XmlSuite {
 	private Date inicio;
 	private Date fin;
 	private final PoolWebDrivers poolWebDrivers = new PoolWebDrivers();
-	private SenderMailEndSuite senderMail;
+	private SenderMailEndSuiteI senderMail;
+	private StorerResultI storerResult;
 	
 	public SuiteTM(String idSuiteExecution, InputParamsTM inputParams) {
 		this.idSuiteExecution = idSuiteExecution;
@@ -53,7 +53,7 @@ public class SuiteTM extends XmlSuite {
 		return result;
 	}
 	
-	public void setSenderMail(SenderMailEndSuite senderMail) {
+	public void setSenderMail(SenderMailEndSuiteI senderMail) {
 		this.senderMail = senderMail;
 	}
 	
@@ -89,7 +89,10 @@ public class SuiteTM extends XmlSuite {
 		poolWebDrivers.removeAllStrWd();
     	if (inputParams.isSendMailInEndSuite()) {
     		senderMail.sendMail(this);
-        }   
+        }
+    	if (inputParams.isStoreResult()) {
+    		storerResult.store(this);
+    	}
 	}
 	
 	private State getResultFromTestsRun() {
@@ -112,6 +115,14 @@ public class SuiteTM extends XmlSuite {
 	
 	public long getDurationMillis() {
 		return fin.getTime() - fin.getTime();
+	}
+	
+	public StorerResultI getStorerResult() {
+		return storerResult;
+	}
+	
+	public void setStorerResult(StorerResultI storerResult) {
+		this.storerResult = storerResult;
 	}
 	
 	public void setListenersClass(List<Class<?>> listListeners) {

@@ -19,8 +19,6 @@ import com.mng.testmaker.domain.SuiteTM;
 import com.mng.testmaker.domain.SuitesExecuted;
 import com.mng.testmaker.domain.TestCaseTM;
 import com.mng.testmaker.domain.TestRunTM;
-import com.mng.testmaker.repository.jdbc.Connector;
-import com.mng.testmaker.testreports.html.ResourcesExtractor;
 
 public class TestMaker {
 
@@ -28,7 +26,7 @@ public class TestMaker {
 	//generateReport <- Esta debe estar disponible coo función de la Suite
 	//generateCorreoReport
 	
-    public static void run(SuiteTM suite) { 
+    public static void run(SuiteTM suite) {
     	suite.start();
     	runInTestMaker(suite);
     	runInTestNG(suite);
@@ -105,7 +103,6 @@ public class TestMaker {
         File path = new File(suite.getPathDirectory());
         path.mkdir();
         Log4jConfig.configLog4java(suite.getPathDirectory());
-        grabSqliteBDifNotExists();
     	SuitesExecuted.add(suite);
     }
     
@@ -117,14 +114,5 @@ public class TestMaker {
         tng.setUseDefaultListeners(false);
         tng.run();
     }
-    
-    private static void grabSqliteBDifNotExists() {
-        ResourcesExtractor resExtractor = ResourcesExtractor.getNew();
-        File fileSqliteBD = new File(Connector.getSQLiteFilePathAutomaticTestingSchema());
-        if (!fileSqliteBD.exists()) {
-	        resExtractor.copyDirectoryResources(
-	        	"sqlite/", 
-	            Connector.getSQLitePathDirectory());
-        }
-    }
+
 }

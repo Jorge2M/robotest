@@ -41,6 +41,7 @@ public class CmdLineMaker {
     public static String ServerDNSNameParam = "serverDNS";
     public static String RecicleWD = "reciclewd";
     public static String NetAnalysis = "net";
+    public static String Store = "store";
     public static String Mails = "mails";
 	
 	private CmdLineMaker(
@@ -144,6 +145,11 @@ public class CmdLineMaker {
     	if (netAnalysis!=null) {
     		inputParams.setNetAnalysis(netAnalysis);
     	} 
+    	
+    	String store = cmdLine.getOptionValue(Store);
+    	if (store!=null) {
+    		inputParams.setStoreResult(true);
+    	} 
     }
 	
 	private Options getOptions() {
@@ -232,14 +238,21 @@ public class CmdLineMaker {
             .hasArgs()
             .possibleValues(Arrays.asList("true", "false"))
             .desc("Gestion mode of webdriver. Possible values: true->reuse across testcases, false->don't reuse)")
-            .build();    
+            .build();
         
         OptionTMaker netAnalysis = OptionTMaker.builder(NetAnalysis)
             .required(false)
             .hasArgs()
             .possibleValues(Arrays.asList("true", "false"))
             .desc("Net Analysis. Possible values: true, false")
-            .build();        
+            .build();
+        
+        OptionTMaker store = OptionTMaker.builder(Store)
+            .required(false)
+            .hasArgs()
+            .possibleValues(Arrays.asList("true", "false"))
+            .desc("Store result persistentely. Possible values: true, false")
+            .build();
         
         OptionTMaker mails = OptionTMaker.builder(Mails)
             .required(false)
@@ -260,6 +273,7 @@ public class CmdLineMaker {
         listOptionsTMaker.add(serverDNS);
         listOptionsTMaker.add(recicleWD);
         listOptionsTMaker.add(netAnalysis);
+        listOptionsTMaker.add(store);
         listOptionsTMaker.add(mails);
         
         return listOptionsTMaker;

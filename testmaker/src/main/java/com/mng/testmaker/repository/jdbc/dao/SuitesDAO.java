@@ -137,7 +137,6 @@ public class SuitesDAO {
     public static void insertSuite(SuiteData suiteData) {
         try (Connection conn = Connector.getConnection()) {
             try (PreparedStatement insert = conn.prepareStatement(SQLInsertSuiteInit)) {
-            	
     	        insert.setString(1, suiteData.getIdExecSuite());
     	        insert.setString(2, suiteData.getName()); 
     	        insert.setString(3, suiteData.getVersion()); 

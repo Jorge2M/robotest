@@ -84,7 +84,7 @@ public class TestRunData {
 	public static TestRunData from(TestRunTM testRun) {
 		TestRunData testRunData = new TestRunData();
 		SuiteTM suite = testRun.getSuiteParent();
-		
+		testRunData.setIdExecSuite(suite.getIdExecution());
 		testRunData.setSuiteName(suite.getName());
 		testRunData.setName(testRun.getName());
 		testRunData.setResult(testRun.getResult());

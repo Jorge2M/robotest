@@ -11,6 +11,7 @@ import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.testmaker.boundary.listeners.InvokeListener;
 import com.mng.testmaker.boundary.listeners.MyTransformer;
+import com.mng.testmaker.conf.utilities.StorerResultSQLite;
 import com.mng.testmaker.domain.testfilter.FilterTestsSuiteXML;
 import com.mng.testmaker.domain.testfilter.TestMethod;
 import com.mng.testmaker.testreports.html.Reporter;
@@ -48,15 +49,14 @@ public abstract class SuiteMaker {
     
     public SuiteTM getSuite() {
     	generateXmlSuiteIfNotAvailable();
-    	return this.suite;
+    	suite.setStorerResult(new StorerResultSQLite());
+    	return suite;
     }
     
     public XmlTest getTestRun() {
     	generateXmlSuiteIfNotAvailable();
         return (suite.getTests().get(0));
     }
-
-
 
     protected void setParameters(Map<String,String> parameters) {
     	this.parameters = parameters;

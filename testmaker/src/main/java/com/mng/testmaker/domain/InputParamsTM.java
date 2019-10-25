@@ -24,6 +24,7 @@ public class InputParamsTM {
     private List<String> testCasesFilter;
     private List<String> groupsFilter;
     private List<String> mails;
+    private boolean storeResult = false;
     
     public InputParamsTM() {}
     
@@ -168,6 +169,14 @@ public class InputParamsTM {
 	
 	public boolean isSendMailInEndSuite() {
 		return (getMails()!=null && getMails().size()>0);
+	}
+	
+	public boolean isStoreResult() {
+		return storeResult;
+	}
+	
+	public void setStoreResult(boolean storeResult) {
+		this.storeResult = storeResult;
 	}
 	
     public DataFilterTCases getDataFilter() {
