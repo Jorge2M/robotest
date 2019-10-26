@@ -1,4 +1,4 @@
-package com.mng.testmaker.testreports.mail;
+package com.mng.testmaker.conf.defaultmail;
 
 import java.util.ArrayList;
 import java.util.List;

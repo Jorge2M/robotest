@@ -74,7 +74,7 @@
 		        <complianceLevel>1.8</complianceLevel>
 		        <source>1.8</source>
 		        <target>1.8</target>
-		        <showWeaveInfo>false</showWeaveInfo>
+		        <showWeaveInfo>true</showWeaveInfo>
 		        <verbose>true</verbose>
 		        <Xlint>ignore</Xlint>
 		        <encoding>UTF-8 </encoding>

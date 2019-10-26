@@ -1,4 +1,4 @@
-package com.mng.testmaker.conf.utilities;
+package com.mng.testmaker.conf.defaultstorer;
 
 import java.io.File;
 

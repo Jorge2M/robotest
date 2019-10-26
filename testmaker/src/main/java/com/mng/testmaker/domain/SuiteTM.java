@@ -56,6 +56,9 @@ public class SuiteTM extends XmlSuite {
 	public void setSenderMail(SenderMailEndSuiteI senderMail) {
 		this.senderMail = senderMail;
 	}
+	public void setStorerResult(StorerResultI storerResult) {
+		this.storerResult = storerResult;
+	}
 	
 	public List<TestRunTM> getListTestRuns() {
 		List<TestRunTM> listTestRuns = new ArrayList<>();
@@ -115,14 +118,6 @@ public class SuiteTM extends XmlSuite {
 	
 	public long getDurationMillis() {
 		return fin.getTime() - fin.getTime();
-	}
-	
-	public StorerResultI getStorerResult() {
-		return storerResult;
-	}
-	
-	public void setStorerResult(StorerResultI storerResult) {
-		this.storerResult = storerResult;
 	}
 	
 	public void setListenersClass(List<Class<?>> listListeners) {

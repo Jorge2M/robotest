@@ -143,7 +143,7 @@ public class CmdLineMaker {
     	}
     	String netAnalysis = cmdLine.getOptionValue(NetAnalysis);
     	if (netAnalysis!=null) {
-    		inputParams.setNetAnalysis(netAnalysis);
+    		inputParams.setNetAnalysis(true);
     	} 
     	
     	String store = cmdLine.getOptionValue(Store);
@@ -242,16 +242,14 @@ public class CmdLineMaker {
         
         OptionTMaker netAnalysis = OptionTMaker.builder(NetAnalysis)
             .required(false)
-            .hasArgs()
-            .possibleValues(Arrays.asList("true", "false"))
-            .desc("Net Analysis. Possible values: true, false")
+            .hasArg(false)
+            .desc("Net Analysis")
             .build();
         
         OptionTMaker store = OptionTMaker.builder(Store)
             .required(false)
-            .hasArgs()
-            .possibleValues(Arrays.asList("true", "false"))
-            .desc("Store result persistentely. Possible values: true, false")
+            .hasArg(false)
+            .desc("Store result persistentely")
             .build();
         
         OptionTMaker mails = OptionTMaker.builder(Mails)

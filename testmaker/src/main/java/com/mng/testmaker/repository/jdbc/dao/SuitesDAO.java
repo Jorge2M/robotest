@@ -19,54 +19,44 @@ import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriver
 
 public class SuitesDAO {
 	
-    private static String SQLInsertSuiteInit = 
-        "INSERT INTO SUITES (" +
-	        "IDEXECSUITE, " +
-	        "SUITE, " + 
-	        "VERSION, " + 
-	        "BROWSER, " + 
-	        "CHANNEL, " + 
-	        "APP, " + 
-	        "RESULT, " + 
-	        "INICIO, " + 
-	        "FIN, " + 
-	        "TIME_MS, " + 
-	        "NUMBER_METHODS, " + 
-	        "PATH_REPORT, " + 
-	        "URL_REPORT, " + 
-	        "MORE_INFO, " + 
-	        "URLBASE, " + 
-	        "STATE_EXECUTION)" +
+	private static final String ListFieldsSuiteTable = 
+		"IDEXECSUITE, " +
+        "SUITE, " + 
+        "VERSION, " + 
+        "BROWSER, " + 
+        "CHANNEL, " + 
+        "APP, " + 
+        "RESULT, " + 
+        "INICIO, " + 
+        "FIN, " + 
+        "TIME_MS, " + 
+        "NUMBER_METHODS, " + 
+        "PATH_REPORT, " + 
+        "URL_REPORT, " + 
+        "MORE_INFO, " + 
+        "URLBASE, " + 
+        "STATE_EXECUTION ";
+	
+    private static final String SQLInsertSuiteInit = 
+        "INSERT INTO SUITES (" + ListFieldsSuiteTable + ")" +
         "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     
-    private static String SQLSelectSuite = 
+    private static final String SQLSelectSuite = 
         "SELECT IDEXECSUITE, SUITE, STATE "  +
         "  FROM SUITES " +
         "WHERE IDEXECSUITE = ? " +
         "ORDER BY IDEXECSUITE DESC";    
     
-    private static String SQLDeleteSuitesBeforeId = 
+    private static final String SQLSelectSuitesHigherId = 
+    	"SELECT " + ListFieldsSuiteTable + 
+    	"WHERE IDEXECSUITE > ?";
+    
+    private static final String SQLDeleteSuitesBeforeId = 
         "DELETE FROM SUITES " +
         "WHERE IDEXECSUITE <= ? ";
     
-    private static String SQLSelectSuitesIdDesc = 
-    	"SELECT " + 
-    		"IDEXECSUITE, " + 
-    		"SUITE, " + 
-    		"VERSION, " + 
-    		"BROWSER, " + 
-    		"CHANNEL, " + 
-    		"APP, " + 
-    		"RESULT, " + 
-    		"INICIO, " + 
-    		"FIN, " + 
-    		"TIME_MS, " + 
-    		"NUMBER_METHODS, " + 
-    		"PATH_REPORT, " + 
-    		"URL_REPORT, " + 
-    		"MORE_INFO, " + 
-    		"URLBASE, " + 
-    		"STATE_EXECUTION " + 
+    private static final String SQLSelectSuitesIdDesc = 
+    	"SELECT " + ListFieldsSuiteTable + 
     	"FROM SUITES  " + 
     	"ORDER BY INICIO DESC";
 
@@ -174,6 +164,36 @@ public class SuitesDAO {
     	}
     	return null;
     }    
+    
+    public static SuiteData getSuiteAfter(Date fechaDesde) throws Exception {
+    	for (SuiteData suite : getListSuitesIdDesc()) {
+    		if (suite.getInicioDate().after(fechaDesde)) {
+    			return suite;
+    		}
+    	}
+    	return null;
+    } 
+    
+    public static List<SuiteData> getListSuitesAfter(Date fechaDesde) throws Exception {
+        List<SuiteData> listSuites = new ArrayList<>();
+    	SuiteData suite = getSuiteAfter(fechaDesde);
+        try (Connection conn = Connector.getConnection(true);
+            PreparedStatement select = conn.prepareStatement(SQLSelectSuitesHigherId)) {
+        	select.setString(1, suite.getIdExecSuite());
+            try (ResultSet resultado = select.executeQuery()) {
+                while (resultado.next()) {
+                	listSuites.add(getSuite(resultado));
+                }
+            }
+            return listSuites;
+        } 
+        catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        } 
+        catch (ClassNotFoundException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
     
     public static void deleteSuitesBefore(String idSuite) {
         try (Connection conn = Connector.getConnection();

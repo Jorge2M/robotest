@@ -1,4 +1,4 @@
-package com.mng.testmaker.testreports.mail;
+package com.mng.testmaker.conf.defaultmail;
 
 import javax.mail.*;
 import javax.mail.internet.*;
