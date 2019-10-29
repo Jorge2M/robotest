@@ -48,8 +48,10 @@
        
   <build>
   	<plugins> 	
+  				<!-- Define Aspectj Nature -->
+  				<!-- 
  		<plugin>
-			<!-- Define Aspectj Nature -->
+
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-eclipse-plugin</artifactId>
 			<configuration>
@@ -61,7 +63,7 @@
 				</additionalBuildcommands>
 			</configuration>
 		</plugin>  	
-  	
+  	-->
   		<!-- Seguramente si lo ejecuto sin testmaker se quejará de que no encuentra el aspectj en .m2 -->
        	<plugin>
 			<groupId>org.codehaus.mojo</groupId>
