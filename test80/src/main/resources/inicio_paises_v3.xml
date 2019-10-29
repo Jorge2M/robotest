@@ -3599,7 +3599,7 @@
 <linea 		  id="nuevo"     shop="s" outlet="n" menus="n" menusart="n" contentDesk="articulos" contentMovil="articulos" panoramicas="s"/>
 <linea 		  id="rebajas"   shop="s" outlet="n" menus="s" menusart="n" contentDesk="articulos" contentMovil="articulos"/>
 <linea 		  id="she"       shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="he"        shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="he"        shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="nina" 	 shop="n" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="nina" 	 shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="bebe_nina" shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>

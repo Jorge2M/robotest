@@ -1,5 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
+import java.time.LocalDate;
+
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
@@ -22,15 +24,22 @@ public class SecFiltrosMantoStpV {
     
     final static String tagNombrePago = "@TagNombrePago";
     final static String tagLitTienda = "@TagLitTienda";
+    
+    public static void setFiltrosHoyYbuscar(DataPedido dataPedido, TypeSearch typeSearch, WebDriver driver) throws Exception {
+        LocalDate fechaHoy = SecFiltros.getFechaHastaValue(driver);
+        setFiltrosYbuscar(dataPedido, typeSearch, fechaHoy, driver);
+    }
+    
     @Step (
     	description=
     		"Buscamos a nivel de #{typeSearch} el pedido <b style=\"color:blue;\">#{dataPedido.getCodigoPedidoManto()}</b> con filtros: <br>" +
     	    "- Método pago: <b>" + tagNombrePago + "</b><br>" +
     	    "- Tienda: <b>" + tagLitTienda + "</b><br>" +
-    	    "- País: <b>#{dataPedido.getNombrePais()}</b> (#{dataPedido.getCodigoPais()})",
+    	    "- País: <b>#{dataPedido.getNombrePais()}</b> (#{dataPedido.getCodigoPais()})<br>" +
+    	    "- Fecha desde: #{fechaDesde.toString()}",
     	expected="La búsqueda es correcta",
     	saveErrorData=SaveWhen.Never)
-    public static void setFiltrosHoyYbuscar(DataPedido dataPedido, @SuppressWarnings("unused") TypeSearch typeSearch, WebDriver driver) 
+    public static void setFiltrosYbuscar(DataPedido dataPedido, @SuppressWarnings("unused") TypeSearch typeSearch, LocalDate fechaDesde, WebDriver driver) 
     throws Exception {
     	StepTM step = TestMaker.getCurrentStepInExecution();
     	step.replaceInDescription(tagNombrePago, dataPedido.getPago().getNombre());
@@ -40,15 +49,14 @@ public class SecFiltrosMantoStpV {
             SecFiltros.setFiltroCodPedido(dataPedido.getCodigoPedidoManto(), driver);
     	}
     	SecFiltros.setFiltroCodPaisIfExists(driver, dataPedido.getCodigoPais());
-        String fechaHoy = SecFiltros.getFechaHastaValue(driver);
-        SecFiltros.setFiltroFDesde(fechaHoy, driver);
+        SecFiltros.setFiltroFDesde(fechaDesde, driver);
         SecFiltros.clickButtonBuscar(driver);
     }
     
-    public static void setFiltrosHoyWithoutChequeRegaloYbuscar(DataPedido dataPedido, TypeSearch typeSearch, WebDriver driver) 
+    public static void setFiltrosWithoutChequeRegaloYbuscar(DataPedido dataPedido, TypeSearch typeSearch, LocalDate fechaDesde, WebDriver driver) 
     throws Exception {
     	setFiltroForAvoidChequeRegalo(driver);
-    	setFiltrosHoyYbuscar(dataPedido, typeSearch, driver);
+    	setFiltrosYbuscar(dataPedido, typeSearch, fechaDesde, driver);
     }
     
     @Step (

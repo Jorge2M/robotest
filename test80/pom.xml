@@ -43,8 +43,13 @@
        
   <build>
   	<plugins> 	
+<<<<<<< HEAD
  		<!-- Define Aspectj Nature -->
 		<!-- 
+=======
+  				<!-- Define Aspectj Nature -->
+  				<!-- 
+>>>>>>> refs/remotes/origin/develop
  		<plugin>
 
 			<groupId>org.apache.maven.plugins</groupId>
@@ -58,8 +63,12 @@
 				</additionalBuildcommands>
 			</configuration>
 		</plugin>  	
+<<<<<<< HEAD
 		-->
   	
+=======
+  	-->
+>>>>>>> refs/remotes/origin/develop
   		<!-- Seguramente si lo ejecuto sin testmaker se quejará de que no encuentra el aspectj en .m2 -->
        	<plugin>
 			<groupId>org.codehaus.mojo</groupId>

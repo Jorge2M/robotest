@@ -1,6 +1,8 @@
 package com.mng.robotest.test80.mango.test.appmanto;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
@@ -70,7 +72,8 @@ public class Manto {
 		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
     	PageMenusMantoStpV.goToPedidos(driver);
     	
-    	SecFiltrosMantoStpV.setFiltrosHoyWithoutChequeRegaloYbuscar(dPedidoPrueba, TypeSearch.PEDIDO, driver);
+    	LocalDate dateSevenDaysAgo = LocalDate.now().minusDays(7);
+    	SecFiltrosMantoStpV.setFiltrosHoyWithoutChequeRegaloYbuscar(dPedidoPrueba, TypeSearch.PEDIDO, dateSevenDaysAgo, driver);
     	this.dPedidoPrueba = PagePedidosMantoStpV.getPedidoUsuarioRegistrado(dPedidoPrueba, driver);
     	this.dPedidoPrueba = PagePedidosMantoStpV.getDataPedido(dPedidoPrueba, driver);
     	this.dPedidoPrueba = PagePedidosMantoStpV.getDataCliente(dPedidoPrueba, driver);
