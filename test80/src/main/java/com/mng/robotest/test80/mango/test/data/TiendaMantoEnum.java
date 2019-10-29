@@ -14,7 +14,8 @@ public class TiendaMantoEnum {
 		TurquiaShop ("Turquía Estambul", "052", AppEcom.shop),
 		TurquiaOutlet ("Outlet Turquia", "052", AppEcom.outlet),
 		ChinaShop ("China Shangai", "720", AppEcom.shop),
-		ColombiaShop ("Colombia", "480", AppEcom.shop);
+		ColombiaShop ("Colombia", "480", AppEcom.shop),
+		MexicoShop("Mexico", "412", AppEcom.shop);
 		
 		public String litPantManto = "";
 		public String codAlmacen = "";
