@@ -10,7 +10,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.repository.jdbc.dao.ParamsDAO;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Continente;
@@ -198,18 +197,6 @@ public class Utilidades {
     	String resultado = nombreXML.substring(0,nombreXML.indexOf(".xml")) + ".xml";
     	return (resultado);
     }
-    
-    /**
-     * @return nos indica si está activo el flag que indica que se ha de validar la pestaña de rebajas
-     */
-    public static boolean validarRebajasFromBD() {
-        boolean rebajas = false;
-        HashMap<String, String> listParams = ParamsDAO.listParams();
-        if (listParams.get("REBAJAS_VALIDAR")!=null) {
-            rebajas = ((listParams.get("REBAJAS_VALIDAR")).compareTo("1")==0);
-        }
-        return rebajas;
-    }    
     
     public static boolean lineaToTest(Linea linea, AppEcom appE) {
         if (appE==AppEcom.outlet && linea.getOutlet().compareTo("s")!=0) {

@@ -13,15 +13,17 @@ import com.mng.robotest.test80.mango.test.jdbc.to.ProductCache;
 
 public class ArticlesStockCacheBD implements ArticlesStockGetter {
 
-	AppEcom app;
-	String urlTestAppMango;
-	SourceArticles sourceArticles;
+	private final AppEcom app;
+	private final String urlTestAppMango;
+	private final SourceArticles sourceArticles;
+	private final ProductCacheDAO productCacheDAO;
 	
 	public ArticlesStockCacheBD(AppEcom app, String urlTestAppMango, SourceArticles sourceArticles) 
 	throws Exception {
 		this.app = app;
 		this.urlTestAppMango = urlTestAppMango;
 		this.sourceArticles = sourceArticles;
+		productCacheDAO = new ProductCacheDAO();
 	}
 	
 	public ArticlesStockCacheBD(AppEcom app, String urlTestAppMango) throws Exception {
@@ -41,7 +43,6 @@ public class ArticlesStockCacheBD implements ArticlesStockGetter {
 	}
 	
 	private List<ProductCache> getListProductsDependingTypeFilter(String storeId, String countryId) {
-        ProductCacheDAO productCacheDAO = new ProductCacheDAO();
         switch (sourceArticles) {
         case CacheBd_NotRelaxFilters:
         	return (productCacheDAO.findProductsNoCaducados(app.name(), this.urlTestAppMango, countryId, storeId, 99));
@@ -54,20 +55,17 @@ public class ArticlesStockCacheBD implements ArticlesStockGetter {
 	
 	@Override
 	public void deleteProduct(String producto) {
-		ProductCacheDAO productCacheDAO = new ProductCacheDAO();
 	    productCacheDAO.deleteProducts(producto, app.name());  
 	}
 	
 	/**
 	 * Used for Unit Testing purposes
 	 */
-	public static void deleteProducs(TypeArticleStock typeArticle) {
-		ProductCacheDAO productCacheDAO = new ProductCacheDAO();
+	public void deleteProducs(TypeArticleStock typeArticle) {
 		productCacheDAO.deleteProducts(typeArticle);
 	}
 	
-	public static void storeNewArticles(ArrayList<ArticleStock> listNewArticles) {
-		ProductCacheDAO productCacheDAO = new ProductCacheDAO();
+	public void storeNewArticles(ArrayList<ArticleStock> listNewArticles) {
 		for (ArticleStock articleStock : listNewArticles) {
 			ProductCache productCache = getProductCacheFromArticleStock(articleStock);
 	        productCacheDAO.insertOrReplaceProduct(productCache);

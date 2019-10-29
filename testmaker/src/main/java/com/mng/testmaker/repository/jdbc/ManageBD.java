@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import com.mng.testmaker.conf.defaultstorer.StorerResultSQLite;
+
 
 public class ManageBD {
 
     public static void vacuum() {
-        try (Connection conn = Connector.getConnection();
+        try (Connection conn = StorerResultSQLite.getConnectionNew();
              PreparedStatement stmt = conn.prepareStatement("VACUUM")) {
             stmt.executeUpdate();
         }

@@ -24,7 +24,7 @@ public abstract class SuiteMaker {
     private final FilterTestsSuiteXML filterSuiteXML;
 
     private Map<String,String> parameters;
-    private StorerResultI storerResult = new StorerResultSQLite();
+    private PersistorDataI storerResult = new StorerResultSQLite();
     private SenderMailEndSuiteI senderMail = new DefaultMailEndSuite();
     
     private List<TestRunMaker> listTestRuns = new ArrayList<>();
@@ -63,10 +63,10 @@ public abstract class SuiteMaker {
         return (suite.getTests().get(0));
     }
 
-    public StorerResultI getStorerResult() {
+    public PersistorDataI getStorerResult() {
 		return storerResult;
 	}
-	public void setStorerResult(StorerResultI storerResult) {
+	public void setStorerResult(PersistorDataI storerResult) {
 		this.storerResult = storerResult;
 	}
 	public SenderMailEndSuiteI getSenderMail() {

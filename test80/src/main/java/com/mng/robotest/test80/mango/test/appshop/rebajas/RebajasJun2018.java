@@ -75,7 +75,8 @@ public class RebajasJun2018 {
         DataCtxShop dCtxSh = getCtxShForTest();
     	WebDriver driver = TestMaker.getDriverTestCase();
         int numLineasPais = dCtxSh.pais.getShoponline().getNumLineasTiendas(dCtxSh.appE);
-    	boolean salesOnInCountry = RebajasPaisDAO.isRebajasEnabledPais(dCtxSh.pais.getCodigo_pais());
+        RebajasPaisDAO rebajasDAO = new RebajasPaisDAO();
+    	boolean salesOnInCountry = rebajasDAO.isRebajasEnabledPais(dCtxSh.pais.getCodigo_pais());
 
         PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
         if (numLineasPais==1) {
@@ -170,7 +171,8 @@ public class RebajasJun2018 {
 	            pageGaleriaStpV.validaRebajasJun2018Desktop(salesOnInCountry, true, dCtxSh.pais, dCtxSh.idioma, linea.getType(), bloqueMenu.prendas);
 	            PageGaleriaStpV.clickMoreInfoBannerRebajasJun2018(driver);
 	            
-	            int maxRebajas = RebajasPaisDAO.getMaxRebajas(dCtxSh.pais.getCodigo_pais());
+	            RebajasPaisDAO rebajasDAO = new RebajasPaisDAO();
+	            int maxRebajas = rebajasDAO.getMaxRebajas(dCtxSh.pais.getCodigo_pais());
 	            if (maxRebajas==70) {
 	            	pageGaleriaStpV.validaRebajasHasta70Jun2018(dCtxSh.idioma);
 	            }

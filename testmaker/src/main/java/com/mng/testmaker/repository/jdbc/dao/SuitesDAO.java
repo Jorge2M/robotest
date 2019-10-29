@@ -11,13 +11,15 @@ import java.util.List;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.PersistorDataI;
 import com.mng.testmaker.domain.StateExecution;
 import com.mng.testmaker.domain.data.SuiteData;
-import com.mng.testmaker.repository.jdbc.Connector;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
 
 public class SuitesDAO {
+	
+	private final PersistorDataI persistor;
 	
 	private static final String ListFieldsSuiteTable = 
 		"IDEXECSUITE, " +
@@ -60,9 +62,13 @@ public class SuitesDAO {
     	"FROM SUITES  " + 
     	"ORDER BY INICIO DESC";
 
-    public static List<SuiteData> getListSuitesIdDesc() throws Exception {
+    public SuitesDAO(PersistorDataI persistor) {
+    	this.persistor = persistor;
+    }
+    
+    public List<SuiteData> getListSuitesIdDesc() throws Exception {
         List<SuiteData> listSuites = new ArrayList<>();
-        try (Connection conn = Connector.getConnection(true);
+        try (Connection conn = persistor.getConnection();
             PreparedStatement select = conn.prepareStatement(SQLSelectSuitesIdDesc)) {
             try (ResultSet resultado = select.executeQuery()) {
                 while (resultado.next()) {
@@ -79,9 +85,9 @@ public class SuitesDAO {
         }
     }
 
-    public static SuiteData getSuite(String suiteExecId) throws Exception {
+    public SuiteData getSuite(String suiteExecId) throws Exception {
         SuiteData suiteData = new SuiteData();
-        try (Connection conn = Connector.getConnection(true)) {
+        try (Connection conn = persistor.getConnection()) {
             try (PreparedStatement select = conn.prepareStatement(SQLSelectSuite)) {
                 select.setString(1, suiteExecId);
                 try (ResultSet resultado = select.executeQuery()) {
@@ -99,7 +105,7 @@ public class SuitesDAO {
         return suiteData;
     }    
     
-    private static SuiteData getSuite(ResultSet rowSuite) throws Exception {
+    private SuiteData getSuite(ResultSet rowSuite) throws Exception {
         SuiteData suiteData = new SuiteData();
         suiteData.setIdExecSuite(rowSuite.getString("IDEXECSUITE"));
         suiteData.setName(rowSuite.getString("SUITE"));
@@ -124,8 +130,8 @@ public class SuitesDAO {
         return suiteData;
     }
     
-    public static void insertSuite(SuiteData suiteData) {
-        try (Connection conn = Connector.getConnection()) {
+    public void insertSuite(SuiteData suiteData) {
+        try (Connection conn = persistor.getConnection()) {
             try (PreparedStatement insert = conn.prepareStatement(SQLInsertSuiteInit)) {
     	        insert.setString(1, suiteData.getIdExecSuite());
     	        insert.setString(2, suiteData.getName()); 
@@ -156,7 +162,7 @@ public class SuitesDAO {
         }
     }
 
-    public static SuiteData getSuiteBefore(Date fechaHasta) throws Exception {
+    public SuiteData getSuiteBefore(Date fechaHasta) throws Exception {
     	for (SuiteData suite : getListSuitesIdDesc()) {
     		if (suite.getInicioDate().before(fechaHasta)) {
     			return suite;
@@ -165,7 +171,7 @@ public class SuitesDAO {
     	return null;
     }    
     
-    public static SuiteData getSuiteAfter(Date fechaDesde) throws Exception {
+    public SuiteData getSuiteAfter(Date fechaDesde) throws Exception {
     	for (SuiteData suite : getListSuitesIdDesc()) {
     		if (suite.getInicioDate().after(fechaDesde)) {
     			return suite;
@@ -174,10 +180,10 @@ public class SuitesDAO {
     	return null;
     } 
     
-    public static List<SuiteData> getListSuitesAfter(Date fechaDesde) throws Exception {
+    public List<SuiteData> getListSuitesAfter(Date fechaDesde) throws Exception {
         List<SuiteData> listSuites = new ArrayList<>();
     	SuiteData suite = getSuiteAfter(fechaDesde);
-        try (Connection conn = Connector.getConnection(true);
+        try (Connection conn = persistor.getConnection();
             PreparedStatement select = conn.prepareStatement(SQLSelectSuitesHigherId)) {
         	select.setString(1, suite.getIdExecSuite());
             try (ResultSet resultado = select.executeQuery()) {
@@ -195,8 +201,8 @@ public class SuitesDAO {
         }
     }
     
-    public static void deleteSuitesBefore(String idSuite) {
-        try (Connection conn = Connector.getConnection();
+    public void deleteSuitesBefore(String idSuite) {
+        try (Connection conn = persistor.getConnection();
             PreparedStatement delete = conn.prepareStatement(SQLDeleteSuitesBeforeId)) {
             delete.setString(1, idSuite);
             delete.executeUpdate();

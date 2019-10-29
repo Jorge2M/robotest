@@ -12,10 +12,12 @@ import java.util.List;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
 import com.mng.robotest.test80.mango.test.jdbc.to.ProductCache;
-import com.mng.testmaker.repository.jdbc.Connector;
+import com.mng.testmaker.conf.defaultstorer.StorerResultSQLite;
 
 
 public class ProductCacheDAO {
+	
+	private final StorerResultSQLite storerSQLite = new StorerResultSQLite();
     
     public static String SQLSelectProductCacheAlmacen = 
         "SELECT APP, PAIS, URL_ENTORNO, PRODUCTO, COLOR, TALLA, TIPO, ALMACEN, OBTENIDO, CADUCIDAD " + 
@@ -52,33 +54,31 @@ public class ProductCacheDAO {
     public static String SQLDeleteCaducados = 
         "DELETE FROM PRODUCT_CACHE " + 
         " WHERE CADUCIDAD < ? ";
-            
-    public ProductCacheDAO() {}
     
     public List<ProductCache> findProductsNoCaducados(String app, String urlEntorno, String codigoPais, String almacen, int max) {
     	Date caducidad = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-        try (Connection conn = Connector.getConnection(true/*forReadOnly*/);
-                PreparedStatement select = conn.prepareStatement(SQLSelectProductCacheAlmacen)) {      
-                select.setString(1, app);
-                select.setString(2, urlEntorno);
-                select.setString(3, codigoPais);
-                select.setString(4, almacen);
-                select.setDate(5, caducidad);
-                try (ResultSet rs = select.executeQuery()) {
-                    return readListProducts(rs, max);
-                }
+        try (Connection conn = storerSQLite.getConnection();
+            PreparedStatement select = conn.prepareStatement(SQLSelectProductCacheAlmacen)) {      
+            select.setString(1, app);
+            select.setString(2, urlEntorno);
+            select.setString(3, codigoPais);
+            select.setString(4, almacen);
+            select.setDate(5, caducidad);
+            try (ResultSet rs = select.executeQuery()) {
+                return readListProducts(rs, max);
             }
-            catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }        
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }        
     }
     
     public List<ProductCache> findProductsNoCaducadosRelaxingFilters(String app, String almacen, int max) {
     	Date caducidad = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-        try (Connection conn = Connector.getConnection(true/*forReadOnly*/);
+        try (Connection conn = storerSQLite.getConnection();
             PreparedStatement select = conn.prepareStatement(SQLSelectProductCacheAlmacenRelaxingFilters)) {      
             select.setString(1, app);
             select.setString(2, almacen);
@@ -99,7 +99,7 @@ public class ProductCacheDAO {
      * Inserta un producto en la tabla PRODUCTS_CACHE
      */
     public void insertOrReplaceProduct(ProductCache product) {
-        try (Connection conn = Connector.getConnection();
+        try (Connection conn = storerSQLite.getConnection();
             PreparedStatement insert = conn.prepareStatement(SQLInsertProductCache)) {
             setProduct(insert, product);            
             insert.execute();
@@ -170,7 +170,7 @@ public class ProductCacheDAO {
      * @return una lista de productos limitada por el parámetro max
      */
     public void deleteProducts(String producto, String app) {
-        try (Connection conn = Connector.getConnection();
+        try (Connection conn = storerSQLite.getConnection();
             PreparedStatement delete = conn.prepareStatement(SQLDeleteProductCache)) {      
         	delete.setString(1, producto);
             delete.setString(2, app);
@@ -187,7 +187,7 @@ public class ProductCacheDAO {
     }
     
     public void deleteProducts(TypeArticleStock typeArticle) {
-        try (Connection conn = Connector.getConnection();
+        try (Connection conn = storerSQLite.getConnection();
             PreparedStatement delete = conn.prepareStatement(SQLDeleteProductsByTypeArticle)) {      
         	delete.setString(1, typeArticle.name());
             delete.execute();
@@ -200,9 +200,9 @@ public class ProductCacheDAO {
         }        
     }
     
-    public static void deleteProductsCaducados() {
+    public void deleteProductsCaducados() {
     	Date caducidad = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-        try (Connection conn = Connector.getConnection();
+        try (Connection conn = storerSQLite.getConnection();
             PreparedStatement delete = conn.prepareStatement(SQLDeleteCaducados)) {      
         	delete.setDate(1, caducidad);
             delete.execute();

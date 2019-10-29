@@ -354,10 +354,13 @@ public class UtilsMangoTest {
      */
     public static boolean validarLineaRebajas(Pais pais) throws Exception {
         //Obtenemos el indicador de si se han de validar las rebajas
-        boolean validarPestRebajas = Utilidades.validarRebajasFromBD();
+        //boolean validarPestRebajas = Utilidades.validarRebajasFromBD();
+    	//TODO mejor sacar las rebajas de fichero de configuración
+    	boolean validarPestRebajas = false;
         if (validarPestRebajas) {
             //Obtenemos el indicador de si las rebajas están activas para ese país concreto
-            return RebajasPaisDAO.isRebajasEnabledPais(pais.getCodigo_pais());
+        	RebajasPaisDAO rebajasDAO = new RebajasPaisDAO();
+            return rebajasDAO.isRebajasEnabledPais(pais.getCodigo_pais());
         }
         
         return false;

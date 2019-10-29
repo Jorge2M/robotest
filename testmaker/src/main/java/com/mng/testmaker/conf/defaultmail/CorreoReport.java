@@ -11,6 +11,8 @@ import javax.mail.internet.*;
 
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.conf.defaultstorer.StorerResultSQLite;
+import com.mng.testmaker.domain.PersistorDataI;
 import com.mng.testmaker.domain.data.SuiteData;
 import com.mng.testmaker.domain.data.TestCaseData;
 import com.mng.testmaker.repository.jdbc.dao.SuitesDAO;
@@ -25,19 +27,21 @@ public class CorreoReport {
      */
     public static void main(String[] args) throws Exception { 
         String serverDNS = args[0];
-        String html = construirHTMLmail(serverDNS);
+        PersistorDataI persistor = new StorerResultSQLite();
+        String html = construirHTMLmail(serverDNS, persistor);
         sendMailResult(html);
     }
 	
     //Construye el HTML del correo con la lista de tests ejecutados
-    private static String construirHTMLmail(String serverDNS) throws Exception {
+    private static String construirHTMLmail(String serverDNS, PersistorDataI persistor) throws Exception {
         //Fecha actual - 13 horas
         //Date fechaDesde = new Date(System.currentTimeMillis() - 3600000 /*1 horas*/);
         Date fechaDesde = new Date(System.currentTimeMillis() - 50400000 /*14 horas*/);	    
         //Date fechaDesde = new Date(System.currentTimeMillis() - 46800000 /*13 horas*/);
         Date fechaHasta = new Date(System.currentTimeMillis());
 		
-        List<SuiteData> listSuites = SuitesDAO.getListSuitesAfter(fechaDesde);
+        SuitesDAO suitesDAO = new SuitesDAO(persistor);
+        List<SuiteData> listSuites = suitesDAO.getListSuitesAfter(fechaDesde);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
 
         String html =
@@ -46,11 +50,12 @@ public class CorreoReport {
     	    "en las últimas 13 horas [" + sdf.format(fechaDesde) + " - " + sdf.format(fechaHasta) + "] se han ejecutado los siguientes scripts automáticos contra PRO:" +
     	    "</p>";
 
-        html+=constuctTableMail(listSuites, serverDNS);
+        html+=constuctTableMail(listSuites, serverDNS, persistor);
         return html;
     }
 	
-    public static String constuctTableMail(List<SuiteData> listSuites, String serverDNS) throws Exception {
+    public static String constuctTableMail(List<SuiteData> listSuites, String serverDNS, PersistorDataI persistor) 
+    throws Exception {
 
         String html = 	
             "<table border=\"0\" style=\"font:12pt Arial; margin:-8px 0 0; border-collapse:collapse; text-align:left;\"><thead>" +
@@ -83,7 +88,8 @@ public class CorreoReport {
         for (SuiteData suite : listSuites) {
         	String nameSuite = suite.getName();
         	String idSuite = suite.getIdExecSuite();
-        	List<TestCaseData> listTestCases = TestCasesDAO.getListTestCases(idSuite);
+        	TestCasesDAO testCasesDAO = new TestCasesDAO(persistor);
+        	List<TestCaseData> listTestCases = testCasesDAO.getListTestCases(idSuite);
         	Map<State,Integer> testCasesState = mapNumberTestCasesInState(listTestCases);
             Integer numDisps = 
             	testCasesState.get(State.Ok) + 

@@ -145,8 +145,9 @@ public class ManagerArticlesStockTest extends TestCase {
 		return false;
 	}
 
-	private void resetArticlesForUnitTestInCacheBD() {
-		ArticlesStockCacheBD.deleteProducs(TypeArticleStock.articlesForUnitTesting);
+	private void resetArticlesForUnitTestInCacheBD() throws Exception {
+		ArticlesStockCacheBD articlesStock = new ArticlesStockCacheBD(appForTest, urlForTest);
+		articlesStock.deleteProducs(TypeArticleStock.articlesForUnitTesting);
 	}
 	
 	private void mockServiceGetStoresOfCountry(String nameFileStoresJson) throws Exception {

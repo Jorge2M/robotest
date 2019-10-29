@@ -119,7 +119,8 @@ public class PageSelProdsToReclassify extends FilterHeaderSection {
 		return (PageReclassifProducts.getNew(driver));
 	}
 	
-	public List<ProductData> getData(List<String> productsId) {
+	public List<ProductData> getData(List<String> productsId) throws Exception {
+		waitForPageLoaded(driver);
 		List<ProductData> listProductData = new ArrayList<>();
 		for (String productId : productsId) {
 			int posInTheTable = getNumRowWithIdProduct(productId);

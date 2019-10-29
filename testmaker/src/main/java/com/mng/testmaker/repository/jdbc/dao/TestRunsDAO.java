@@ -13,13 +13,15 @@ import org.apache.logging.log4j.Logger;
 
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.PersistorDataI;
 import com.mng.testmaker.domain.data.TestRunData;
-import com.mng.testmaker.repository.jdbc.Connector;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
 
 public class TestRunsDAO {
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
+    
+	private final PersistorDataI persistor;
     
     private static String SQLSelectTestRunsSuite = 
     	"SELECT " +
@@ -55,9 +57,13 @@ public class TestRunsDAO {
         "DELETE FROM TESTRUNS " +
         "WHERE 	IDEXECSUITE < ?;";    
     
-    public static List<TestRunData> getListTestRuns(String idSuite) throws Exception {
+    public TestRunsDAO(PersistorDataI persistor) {
+    	this.persistor = persistor;
+    }
+    
+    public List<TestRunData> getListTestRuns(String idSuite) throws Exception {
     	List<TestRunData> listTestRuns = new ArrayList<>();
-        try (Connection conn = Connector.getConnection(true);
+        try (Connection conn = persistor.getConnection();
             PreparedStatement select = conn.prepareStatement(SQLSelectTestRunsSuite)) {
             select.setString(1, idSuite);
             try (ResultSet resultado = select.executeQuery()) {
@@ -75,7 +81,7 @@ public class TestRunsDAO {
         }
     }   
     
-    private static TestRunData getTestRun(ResultSet rowTestRun) throws Exception {
+    private TestRunData getTestRun(ResultSet rowTestRun) throws Exception {
     	TestRunData testRunData = new TestRunData();
     	testRunData.setIdExecSuite(rowTestRun.getString("IDEXECSUITE"));
     	testRunData.setSuiteName(rowTestRun.getString("SUITE"));
@@ -94,8 +100,8 @@ public class TestRunsDAO {
     	return testRunData;
     }
     
-    public static void insertTestRun(TestRunData testRun) {
-        try (Connection conn = Connector.getConnection()) {
+    public void insertTestRun(TestRunData testRun) {
+        try (Connection conn = persistor.getConnection()) {
             try (PreparedStatement insert = conn.prepareStatement(SQLInsertTestRun)) {
     	        insert.setString(1, testRun.getIdExecSuite());
     	        insert.setString(2, testRun.getSuiteName()); 
@@ -119,13 +125,9 @@ public class TestRunsDAO {
             throw new RuntimeException(ex);
         }
     }
-    
-    private static SimpleDateFormat getDateFormat() {
-    	return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    }
-    
-    public static void deleteTestRunsBefore(String idSuite) {
-        try (Connection conn = Connector.getConnection();
+
+    public void deleteTestRunsBefore(String idSuite) {
+        try (Connection conn = persistor.getConnection();
             PreparedStatement delete = conn.prepareStatement(SQLDeleteHistorical)) {
             delete.setString(1, idSuite);
             delete.executeUpdate();
@@ -137,4 +139,8 @@ public class TestRunsDAO {
              throw new RuntimeException(ex);
          }    
     }    
+    
+    private static SimpleDateFormat getDateFormat() {
+    	return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    }
 }

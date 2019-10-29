@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.PersistorDataI;
 import com.mng.testmaker.domain.data.TestCaseData;
-import com.mng.testmaker.repository.jdbc.Connector;
 
 
 public class TestCasesDAO {
+	
+	private final PersistorDataI persistor;
 	
     public static String SQLSelectTestCasesSuite =
         "SELECT " +
@@ -50,9 +52,13 @@ public class TestCasesDAO {
         "DELETE FROM METHODS " +
         "WHERE INICIO < ?;";
     
-    public static List<TestCaseData> getListTestCases(String idSuite) throws Exception {
+    public TestCasesDAO(PersistorDataI persistor) {
+    	this.persistor = persistor;
+    }
+    
+    public List<TestCaseData> getListTestCases(String idSuite) throws Exception {
     	List<TestCaseData> listTestCases = new ArrayList<>();
-        try (Connection conn = Connector.getConnection(true);
+        try (Connection conn = persistor.getConnection();
             PreparedStatement select = conn.prepareStatement(SQLSelectTestCasesSuite)) {
             select.setString(1, idSuite);
             try (ResultSet resultado = select.executeQuery()) {
@@ -70,7 +76,7 @@ public class TestCasesDAO {
         }
     }    
     
-    private static TestCaseData getTestCase(ResultSet rowTestRun) throws Exception {
+    private TestCaseData getTestCase(ResultSet rowTestRun) throws Exception {
     	TestCaseData testCaseData = new TestCaseData();
     	
     	testCaseData.setIdExecSuite(rowTestRun.getString("IDEXECSUITE"));
@@ -93,8 +99,8 @@ public class TestCasesDAO {
     }
 
     
-    public static void insertTestCase(TestCaseData testCase) {
-        try (Connection conn = Connector.getConnection()) {
+    public void insertTestCase(TestCaseData testCase) {
+        try (Connection conn = persistor.getConnection()) {
             try (PreparedStatement insert = conn.prepareStatement(SQLInsertMethod)) {
             	insert.setString(1, testCase.getIdExecSuite());
             	insert.setString(2, testCase.getSuiteName()); 
@@ -120,8 +126,8 @@ public class TestCasesDAO {
         }
     }
     
-    public static void deleteTestCasesBefore(String idSuite) {
-        try (Connection conn = Connector.getConnection();
+    public void deleteTestCasesBefore(String idSuite) {
+        try (Connection conn = persistor.getConnection();
             PreparedStatement delete = conn.prepareStatement(SQLDeleteHistorical)) {
             delete.setString(1, idSuite);
             delete.executeUpdate();

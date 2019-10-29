@@ -24,7 +24,7 @@ public class SuiteTM extends XmlSuite {
 	private Date fin;
 	private final PoolWebDrivers poolWebDrivers = new PoolWebDrivers();
 	private SenderMailEndSuiteI senderMail;
-	private StorerResultI storerResult;
+	private PersistorDataI storerResult;
 	
 	public SuiteTM(String idSuiteExecution, InputParamsTM inputParams) {
 		this.idSuiteExecution = idSuiteExecution;
@@ -56,7 +56,7 @@ public class SuiteTM extends XmlSuite {
 	public void setSenderMail(SenderMailEndSuiteI senderMail) {
 		this.senderMail = senderMail;
 	}
-	public void setStorerResult(StorerResultI storerResult) {
+	public void setStorerResult(PersistorDataI storerResult) {
 		this.storerResult = storerResult;
 	}
 	

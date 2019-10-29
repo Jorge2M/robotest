@@ -82,7 +82,7 @@ public class PageSelProdsToReclassifyStpV {
 	@Validation (
 		description = "Todos los productos #{productsToReclassify} tienen el nuevo código <b>#{newCodEstadMerc}</b>",
 		level=State.Defect)
-	public boolean checkCodMercModified(String newCodEstadMerc, List<String> productsToReclassify) {
+	public boolean checkCodMercModified(String newCodEstadMerc, List<String> productsToReclassify) throws Exception {
     	List<ProductData> productsDataNew = pageSelProductsToReclassify.getData(productsToReclassify);
 		for (ProductData product : productsDataNew) {
 			if (newCodEstadMerc.compareTo(product.codEstadMerc)!=0) {

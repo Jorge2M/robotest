@@ -132,7 +132,8 @@ public class ManagerArticlesStock {
 	
 	private void getArticlesFromServiceMangoAndStoreInCache() throws Exception {
 		ArrayList<ArticleStock> listNewArticles = getAndStoreNewArticlesInMemory(filterIdAlmacen, filterIdCountry, SourceArticles.ServiceMango);
-		ArticlesStockCacheBD.storeNewArticles(listNewArticles);	
+		ArticlesStockCacheBD articlesStockCache = new ArticlesStockCacheBD(app, urlApp);
+		articlesStockCache.storeNewArticles(listNewArticles);	
 	}
 	
 	private void getArticlesFromCacheAndStoreInMemory(SourceArticles source) throws Exception {

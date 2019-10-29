@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.bloqueMenu;
-import com.mng.testmaker.repository.jdbc.Connector;
+import com.mng.testmaker.conf.defaultstorer.StorerResultSQLite;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +17,9 @@ import java.util.Calendar;
 
 
 public class RebajasPaisDAO {
+	
+	private final StorerResultSQLite storerSQLite = new StorerResultSQLite();
+	
     public static String SQLSelectRebajasPais = 
         "SELECT REBAJAS, INICIO, FIN " +
         "  FROM REBAJAS_PAISCOMPRA " +
@@ -47,16 +50,16 @@ public class RebajasPaisDAO {
         "  REBAJAS = 1 AND " +
         "  INICIO is not null AND " +
         "  FIN is not null";
-        
+    
     /**
      * @param codigoPais en formato XXX
      * @return si están activadas o no las rebajas en dicho país
      */
-    public static ArrayList<String> listCountryCodesInRebajas() throws Exception {
+    public ArrayList<String> listCountryCodesInRebajas() throws Exception {
         ArrayList<String> listCountryCodes = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date fechaHoyDate = new Date(Calendar.getInstance().getTime().getTime());
-        try (Connection conn = Connector.getConnection(true/*forReadOnly*/);
+        try (Connection conn = storerSQLite.getConnection();
             PreparedStatement select = conn.prepareStatement(SQLSelectCountrysInRebajas)) {
             try (ResultSet resultado = select.executeQuery()) {
                 while (resultado.next()) {
@@ -83,11 +86,11 @@ public class RebajasPaisDAO {
      * @param codigoPais en formato XXX
      * @return si están activadas o no las rebajas en dicho país
      */
-    public static boolean isRebajasEnabledPais(String codigoPais) throws Exception {
+    public boolean isRebajasEnabledPais(String codigoPais) throws Exception {
         boolean rebajas = false;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date fechaHoyDate = new Date(Calendar.getInstance().getTime().getTime());
-        try (Connection conn = Connector.getConnection(true/*forReadOnly*/);
+        try (Connection conn = StorerResultSQLite.getConnectionNew();
             PreparedStatement select = conn.prepareStatement(SQLSelectRebajasPais)) {
             select.setString(1, codigoPais);
             try (ResultSet resultado = select.executeQuery()) {
@@ -118,9 +121,9 @@ public class RebajasPaisDAO {
      * @param codigoPais en formato XXX
      * @return el máximo de % de rebajas
      */
-    public static int getMaxRebajas(String codigoPais) {
+    public int getMaxRebajas(String codigoPais) {
         int maxrebajas = 0;
-        try (Connection conn = Connector.getConnection(true/*forReadOnly*/);
+        try (Connection conn = storerSQLite.getConnection();
             PreparedStatement select = conn.prepareStatement(SQLSelectMaxRebajasPais)) {
             select.setString(1, codigoPais);
             try (ResultSet resultado = select.executeQuery()) {
@@ -143,7 +146,7 @@ public class RebajasPaisDAO {
      * @param codigoPais en formato XXX
      * @return el máximo de % de rebajas
      */
-    public static List<String> getLineasInvertidas(String codigoPais, bloqueMenu menuType) {
+    public List<String> getLineasInvertidas(String codigoPais, bloqueMenu menuType) {
     	String sql;
     	switch (menuType) {
     	case prendas:
@@ -154,7 +157,7 @@ public class RebajasPaisDAO {
     		sql = SQLSelectLineasInvertidasAccesorios;
     	}
     	
-        try (Connection conn = Connector.getConnection(true/*forReadOnly*/);
+        try (Connection conn = storerSQLite.getConnection();
             PreparedStatement select = conn.prepareStatement(sql)) {
             select.setString(1, codigoPais);
             try (ResultSet resultado = select.executeQuery()) {

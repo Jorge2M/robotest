@@ -23,7 +23,8 @@ public class ListRebajasXPais {
         AppEcom appE = (AppEcom)inputData.getApp();
         try {
             List<Pais> listCountrys = Utilidades.getListCountrysFiltered(listaPaisesStr);
-            List<String> listCountryCodesInSalePeriod = RebajasPaisDAO.listCountryCodesInRebajas();
+            RebajasPaisDAO rebajasDAO = new RebajasPaisDAO();
+            List<String> listCountryCodesInSalePeriod = rebajasDAO.listCountryCodesInRebajas();
     	        
             int prioridad=0;
             for (Pais pais : listCountrys) {
