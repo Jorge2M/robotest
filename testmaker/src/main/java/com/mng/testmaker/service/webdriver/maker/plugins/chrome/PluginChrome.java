@@ -17,7 +17,7 @@ import com.mng.testmaker.conf.Log4jConfig;
 public abstract class PluginChrome { 
 
     public String folderInResources = "pluginsBrowser"; 
-    public static enum typePluginChrome { HTML5Autoplay }
+    public static enum typePluginChrome { HTML5AutoplayBlocker }
     
     public void addPluginToChrome(ChromeOptions options, String fileNamePlugin) {
     	String pathPlugin = "/" + this.folderInResources + "/" + fileNamePlugin;

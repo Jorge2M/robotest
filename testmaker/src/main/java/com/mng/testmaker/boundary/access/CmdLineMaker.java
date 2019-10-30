@@ -142,12 +142,12 @@ public class CmdLineMaker {
         	inputParams.setRecicleWD(recicleWD);
     	}
     	String netAnalysis = cmdLine.getOptionValue(NetAnalysis);
-    	if (netAnalysis!=null) {
+    	if (netAnalysis!=null && "true".compareTo(netAnalysis)==0) {
     		inputParams.setNetAnalysis(true);
     	} 
     	
     	String store = cmdLine.getOptionValue(Store);
-    	if (store!=null) {
+    	if (store!=null && "true".compareTo(store)==0) {
     		inputParams.setStoreResult(true);
     	} 
     }
@@ -242,14 +242,16 @@ public class CmdLineMaker {
         
         OptionTMaker netAnalysis = OptionTMaker.builder(NetAnalysis)
             .required(false)
-            .hasArg(false)
-            .desc("Net Analysis")
+            .hasArgs()
+            .possibleValues(Arrays.asList("true", "false"))
+            .desc("Net Analysis (true, false)")
             .build();
         
         OptionTMaker store = OptionTMaker.builder(Store)
             .required(false)
-            .hasArg(false)
-            .desc("Store result persistentely")
+            .hasArgs()
+            .possibleValues(Arrays.asList("true", "false"))
+            .desc("Store result persistentely (true, false)")
             .build();
         
         OptionTMaker mails = OptionTMaker.builder(Mails)

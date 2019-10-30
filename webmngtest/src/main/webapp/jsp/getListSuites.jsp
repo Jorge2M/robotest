@@ -63,12 +63,12 @@ for (SuiteTM suite : listSuites) {
 		<td id="application"><%=inputParams.getApp()%></td>
 		<td id="browser"><%=inputParams.getWebDriverType()%></td>
 		<td id="numTCases"><%=suite.getNumberTestCases()%></td>
-		<td id="countrys"><%=inputParams.getListaPaises()%></td>
+		<td id="countrys"><%=inputParams.getListaPaisesStr()%></td>
 		<td id="urlBase">
 			<a href="<%=inputParams.getUrlBase()%>"><%=inputParams.getUrlBase()%></a>
 		</td>		
 		<td id="reportHTML">
-			<a href="<%=suite.getPathReportHtml()%>">Report HTML</a>
+			<a href="<%=suite.getDnsReportHtml()%>">Report HTML</a>
 		</td>
 	</tr>
 <%}%>	

@@ -9,6 +9,7 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
 import com.mng.testmaker.conf.ConstantesTM;
+import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.service.webdriver.pool.PoolWebDrivers;
 import com.mng.testmaker.testreports.html.GenerateReports;
@@ -87,14 +88,23 @@ public class SuiteTM extends XmlSuite {
 	
 	public void end() {
 		stateExecution = StateExecution.Finished;
+    	Log4jConfig.pLogger.info("End Suite 1");
 		result = getResultFromTestsRun();
+    	Log4jConfig.pLogger.info("End Suite 2");
 		fin = new Date(); 
+    	Log4jConfig.pLogger.info("End Suite 3");
 		poolWebDrivers.removeAllStrWd();
+    	Log4jConfig.pLogger.info("End Suite 4");
     	if (inputParams.isSendMailInEndSuite()) {
+        	Log4jConfig.pLogger.info("End Suite 5");
     		senderMail.sendMail(this);
+        	Log4jConfig.pLogger.info("End Suite 6");
         }
+    	Log4jConfig.pLogger.info("End Suite 7");
     	if (inputParams.isStoreResult()) {
+        	Log4jConfig.pLogger.info("End Suite 8");
     		storerResult.store(this);
+        	Log4jConfig.pLogger.info("End Suite 9");
     	}
 	}
 	

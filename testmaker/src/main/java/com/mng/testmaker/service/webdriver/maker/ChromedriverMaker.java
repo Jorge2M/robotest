@@ -3,6 +3,7 @@ package com.mng.testmaker.service.webdriver.maker;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.Proxy;
@@ -23,7 +24,7 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 class ChromedriverMaker implements WebdriverMaker {
 	
     //Nota: si se modifica la versión sería conveniente regenerar la AMI correspondiente al Robotest en Cloud
-	final static String ChromeDriverVersion = "77.0.3865.40";
+	final static String ChromeDriverVersion = "78.0.3904.70";
 	final WebDriverType webDriverType;
 	boolean isHeadless;
 	ChromeOptions options = new ChromeOptions();
@@ -121,8 +122,8 @@ class ChromedriverMaker implements WebdriverMaker {
             //TODO Desde Chrome61 ya es posible desactivar el autoplay directamente desde el navegador (chrome://flags/#autoplay-policy)
             //options.addArguments("--autoplay-policy", "--document-user-activation-required");        
             //Arrancamos Chrome con la extensión HTML5Autoplay para que no se ejecute el autoplay de los vídeos y sea posible paralelizar varios Chromes en una misma máquina
-            ArrayList<PluginChrome.typePluginChrome> listPlugins = new ArrayList<>();
-            listPlugins.add(typePluginChrome.HTML5Autoplay);
+            List<PluginChrome.typePluginChrome> listPlugins = new ArrayList<>();
+            listPlugins.add(typePluginChrome.HTML5AutoplayBlocker);
 	        for (typePluginChrome typePlugin : listPlugins) {
 	            PluginChrome pluginChrome = PluginBrowserFactory.makePluginChrome(typePlugin);
 	            pluginChrome.addPluginToChrome(options);

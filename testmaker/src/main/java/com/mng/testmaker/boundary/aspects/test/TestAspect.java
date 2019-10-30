@@ -21,6 +21,8 @@ public class TestAspect {
     @Before("annotationTestPointcut() && atExecution()")
     public void before(JoinPoint joinPoint) {
     	TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
-    	TestMaker.skipTestsIfSuiteStopped(testCase.getSuiteParent());
+    	if (testCase!=null) {
+    		TestMaker.skipTestsIfSuiteStopped(testCase.getSuiteParent());
+    	}
     }
 }
