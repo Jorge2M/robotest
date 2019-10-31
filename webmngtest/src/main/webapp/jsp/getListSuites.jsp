@@ -5,19 +5,19 @@ response.setDateHeader ("Expires", -1);%>
 <%@page session="false"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.Arrays"%>
 <%@ page import="com.mng.testmaker.service.TestMaker"%>
 <%@ page import="com.mng.testmaker.conf.Channel"%>
-<%@ page import="com.mng.testmaker.domain.SuiteTM"%>
-<%@ page import="com.mng.robotest.test80.InputParams"%>
+<%@ page import="com.mng.testmaker.domain.PersistorDataI"%>
+<%@ page import="com.mng.testmaker.conf.defaultstorer.StorerResultSQLite"%>
+<%@ page import="com.mng.testmaker.repository.jdbc.dao.SuitesDAO"%>
+<%@ page import="com.mng.testmaker.domain.data.SuiteData"%>
+
 <%
-	String suiteName = request.getParameter("suite");
-String channel = request.getParameter("channel");
 String idExecSuite = request.getParameter("idExecSuite");
-List<SuiteTM> listSuites = new ArrayList<>(); 
-if (idExecSuite==null)
-    listSuites = TestMaker.getListSuites(suiteName, Channel.valueOf(channel));
-else
-    listSuites.add(TestMaker.getSuite(idExecSuite));
+String suiteName = request.getParameter("suite");
+String channel = request.getParameter("channel");
+
 %>
 
 <html>
@@ -44,34 +44,48 @@ table#tablaScripts td.nombreTestSuite {
 <table id="tablaScripts" border="1">
 <thead id="theadScripts">
 	<tr>
-		<th>Id Execution</th><th>State</th><th>Suite Name</th><th>Versión</th><th>Channel</th><th>Application</th><th>Browser</th><th>#Test Cases</th><th>Countries</th><th>URL Base</th><th>Report HTML</th>
+		<th>Id Execution</th>
+		<th>State</th>
+		<th>Suite Name</th>
+		<th>Versión</th>
+		<th>Channel</th>
+		<th>Application</th>
+		<th>Browser</th>
+		<th>#Test Cases</th>
+		<th>Aditional Data</th>
+		<th>URL Base</th>
+		<th>Report HTML</th>
 	</tr>
 </thead>
 <tbody>
 
 <%
-	int i=0;
-for (SuiteTM suite : listSuites) {
-	InputParams inputParams = (InputParams)suite.getInputParams();
+List<SuiteData> listSuitesToDisplay = getSuitesToDisplay(idExecSuite, suiteName, channel);
+int displayedSuites = 0;
+for (SuiteData suite : listSuitesToDisplay) {
 %>
 	<tr id="scriptData">
-		<td id="idExecution"><%=suite.getIdExecution()%></td>
+		<td id="idExecution"><%=suite.getIdExecSuite()%></td>
 		<td id="state"><%=suite.getStateExecution()%></td>
 		<td id="suiteName"><%=suite.getName()%></td>
-		<td id="version"><%=inputParams.getVersionSuite()%></td>
-		<td id="channel"><%=inputParams.getChannel()%></td>
-		<td id="application"><%=inputParams.getApp()%></td>
-		<td id="browser"><%=inputParams.getWebDriverType()%></td>
+		<td id="version"><%=suite.getVersion()%></td>
+		<td id="channel"><%=suite.getChannel()%></td>
+		<td id="application"><%=suite.getApp()%></td>
+		<td id="browser"><%=suite.getWebDriverType()%></td>
 		<td id="numTCases"><%=suite.getNumberTestCases()%></td>
-		<td id="countrys"><%=inputParams.getListaPaisesStr()%></td>
+		<td id="countrys"><%=suite.getMoreInfo()%></td>
 		<td id="urlBase">
-			<a href="<%=inputParams.getUrlBase()%>"><%=inputParams.getUrlBase()%></a>
+			<a href="<%=suite.getUrlBase()%>"><%=suite.getUrlBase()%></a>
 		</td>		
 		<td id="reportHTML">
-			<a href="<%=suite.getDnsReportHtml()%>">Report HTML</a>
+			<a href="<%=suite.getUrlReportHtml()%>">Report HTML</a>
 		</td>
 	</tr>
-<%}%>	
+<%	displayedSuites+=1;
+	if (displayedSuites >=100) {
+		break;
+	}
+}%>	
 </table>
 <br>
 <form action="../index.jsp">
@@ -79,3 +93,23 @@ for (SuiteTM suite : listSuites) {
 </form>
 </body>
 </html>
+
+<%!
+private List<SuiteData> getSuitesToDisplay(String idExecSuite, String suiteName, String channel) throws Exception {
+	PersistorDataI persistor = new StorerResultSQLite();			
+	SuitesDAO suitesDAO = new SuitesDAO(persistor);
+	if (idExecSuite!=null) {
+		SuiteData suite = suitesDAO.getSuite(idExecSuite);
+		return Arrays.asList(suite);
+	} else {
+		List<SuiteData> listSuites = suitesDAO.getListSuitesIdDesc();
+		List<SuiteData> listSuitesToReturn = new ArrayList<>();
+		for (SuiteData suite : listSuites) {
+			if (suite.getChannel().toString().compareTo(channel)==0) {
+				listSuitesToReturn.add(suite);
+			}
+		}
+		return listSuitesToReturn;
+	}
+}
+%>

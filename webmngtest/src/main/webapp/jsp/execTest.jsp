@@ -161,6 +161,7 @@ response.setDateHeader ("Expires", -1);%>
 	    }
 
 	    //Parameters that don't come from index.jsp (for exemple, the call from Jenkin's CI Task)
+	    paramsTSuite.setStoreResult(true);
 	    paramsTSuite.setUrlManto(request.getParameter(Test80mng.UrlManto));
 	    paramsTSuite.setRecicleWD(request.getParameter(CmdLineMaker.RecicleWD));
 	    paramsTSuite.setNetAnalysis(request.getParameter(CmdLineMaker.NetAnalysis));
@@ -229,7 +230,7 @@ response.setDateHeader ("Expires", -1);%>
 					}
 					else {
 						window.clearInterval(interval);
-						window.location.href="./getListSuites.jsp?idExecSuite=<%=suite.getIdExecution()%>&suite=<%=suite.getName()%>";
+						window.location.href="./getListSuites.jsp?idExecSuite=<%=suite.getIdExecution()%>";
 					}
 				},
 			error:

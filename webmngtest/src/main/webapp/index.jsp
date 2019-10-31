@@ -14,6 +14,7 @@ response.setDateHeader ("Expires", -1);
 <%@ page import="org.pruebasws.jdbc.to.ApplicationSuite"%>
 <%@ page import="org.pruebasws.jdbc.to.VersionSuite"%>
 <%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
 <%@ page import="java.util.TreeSet"%>
 <%@ page import="com.mng.robotest.test80.Test80mng"%>
 <%@ page import="com.mng.testmaker.boundary.access.CmdLineMaker"%>
@@ -61,7 +62,7 @@ response.setDateHeader ("Expires", -1);
 System.setProperty("user.dir", getServletContext().getRealPath(""));
 
 //Obtenemos la información de todos los scripts definidos para la aplicación
-ArrayList<SuiteTestData> listTestSuites = TestsDAO.getListaTestSuites();
+List<SuiteTestData> listTestSuites = TestsDAO.getListaTestSuites();
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

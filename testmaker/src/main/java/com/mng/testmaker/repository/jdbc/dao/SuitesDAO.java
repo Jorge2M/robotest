@@ -44,7 +44,7 @@ public class SuitesDAO {
         "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     
     private static final String SQLSelectSuite = 
-        "SELECT IDEXECSUITE, SUITE, STATE "  +
+        "SELECT " + ListFieldsSuiteTable  +
         "  FROM SUITES " +
         "WHERE IDEXECSUITE = ? " +
         "ORDER BY IDEXECSUITE DESC";    
@@ -60,7 +60,7 @@ public class SuitesDAO {
     private static final String SQLSelectSuitesIdDesc = 
     	"SELECT " + ListFieldsSuiteTable + 
     	"FROM SUITES  " + 
-    	"ORDER BY INICIO DESC";
+    	"ORDER BY IDEXECSUITE DESC";
 
     public SuitesDAO(PersistorDataI persistor) {
     	this.persistor = persistor;
