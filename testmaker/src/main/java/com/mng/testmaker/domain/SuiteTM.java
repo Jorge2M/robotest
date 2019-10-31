@@ -84,6 +84,7 @@ public class SuiteTM extends XmlSuite {
 	public void start() {
 		stateExecution = StateExecution.Started;
 		inicio = new Date(); 
+    	SuitesExecuted.add(this);
 	}
 	
 	public void end() {
@@ -106,6 +107,7 @@ public class SuiteTM extends XmlSuite {
     		storerResult.store(this);
         	Log4jConfig.pLogger.info("End Suite 9");
     	}
+    	SuitesExecuted.remove(this);
 	}
 	
 	private State getResultFromTestsRun() {

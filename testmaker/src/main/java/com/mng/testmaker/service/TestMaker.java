@@ -28,7 +28,9 @@ public class TestMaker {
 	
     public static void run(SuiteTM suite) {
     	suite.start();
-    	runInTestMaker(suite);
+        Log4jConfig.configLog4java(suite.getPathDirectory());
+        File path = new File(suite.getPathDirectory());
+        path.mkdir();
     	runInTestNG(suite);
     }
     
@@ -38,6 +40,11 @@ public class TestMaker {
     
 	public static void finish(SuiteTM suite) {
 		suite.end();
+	}
+	
+	public static void sendStopOrder(String idExecution) {
+		SuiteTM suite = getSuite(idExecution);
+		suite.setStateExecution(StateExecution.Stopping);
 	}
 	
 	public static SuiteTM getSuite(String idExecution) {
@@ -97,13 +104,6 @@ public class TestMaker {
         if (suite.getStateExecution()==StateExecution.Stopping) {
             throw new SkipException("Received Signal for stop TestSuite" + suite.getName());
         }
-    }
-
-    private static void runInTestMaker(SuiteTM suite) {
-        File path = new File(suite.getPathDirectory());
-        path.mkdir();
-        Log4jConfig.configLog4java(suite.getPathDirectory());
-    	SuitesExecuted.add(suite);
     }
     
     private static void runInTestNG(SuiteTM suite) {

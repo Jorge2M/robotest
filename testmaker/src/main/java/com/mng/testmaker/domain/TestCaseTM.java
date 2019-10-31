@@ -7,7 +7,6 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
-import org.testng.SkipException;
 
 import com.mng.testmaker.conf.State;
 
@@ -27,13 +26,13 @@ public class TestCaseTM  {
 	public TestCaseTM(ITestResult result) {
 		this.testRunParent = (TestRunTM)result.getTestContext().getCurrentXmlTest();
 		this.suiteParent = (SuiteTM)testRunParent.getSuite();
-		//TODO no tengo claro si esta excepción tiene efecto
-        if (suiteParent.getStateExecution()==StateExecution.Stopping) {
-            throw new SkipException("Received Signal for stop TestSuite");
-        }
 		this.result = result;
-		this.driver = getWebDriverForTestCase();
 		this.threadName = Thread.currentThread().getName();
+        if (suiteParent.getStateExecution()!=StateExecution.Stopping) {
+        	this.driver = getWebDriverForTestCase();
+        } else {
+        	this.driver = null;
+        }
 	}
 	
 	public String getNameUnique() {
@@ -77,8 +76,10 @@ public class TestCaseTM  {
 		for (SuiteTM suite : SuitesExecuted.getSuitesExecuted()) {
 			for (TestRunTM testRun : suite.getListTestRuns()) {
 				for (TestCaseTM testCase : testRun.getListTestCases()) {
-					if (testCase.getResult()==result) {
-						return testCase;
+					if (testCase!=null) {
+						if (testCase.getResult()==result) {
+							return testCase;
+						}
 					}
 				}
 			}

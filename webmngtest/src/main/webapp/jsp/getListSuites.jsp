@@ -105,7 +105,8 @@ private List<SuiteData> getSuitesToDisplay(String idExecSuite, String suiteName,
 		List<SuiteData> listSuites = suitesDAO.getListSuitesIdDesc();
 		List<SuiteData> listSuitesToReturn = new ArrayList<>();
 		for (SuiteData suite : listSuites) {
-			if (suite.getChannel().toString().compareTo(channel)==0) {
+			if (suite.getName().compareTo(suiteName)==0 &&
+				suite.getChannel().toString().compareTo(channel)==0) {
 				listSuitesToReturn.add(suite);
 			}
 		}

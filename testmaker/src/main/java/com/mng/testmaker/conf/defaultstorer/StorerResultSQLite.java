@@ -23,6 +23,8 @@ import com.mng.testmaker.testreports.html.ResourcesExtractor;
 
 public class StorerResultSQLite implements PersistorDataI {
 	
+	private boolean sqliteBdGrabed = false;
+	
 	@Override
 	public void store(SuiteTM suite) {
 		storeSuite(suite);
@@ -54,13 +56,17 @@ public class StorerResultSQLite implements PersistorDataI {
     }
     
     private void grabSqliteBDifNotExists() {
-        ResourcesExtractor resExtractor = ResourcesExtractor.getNew();
-        File fileSqliteBD = new File(getSQLiteFilePathAutomaticTestingSchema());
-        if (!fileSqliteBD.exists()) {
-	        resExtractor.copyDirectoryResources(
-	        	"sqlite/", 
-	            getSQLitePathDirectory());
-        }
+    	if (!sqliteBdGrabed) {
+	        File fileSqliteBD = new File(getSQLiteFilePathAutomaticTestingSchema());
+	        if (!fileSqliteBD.exists()) {
+	            ResourcesExtractor resExtractor = ResourcesExtractor.getNew();
+		        resExtractor.copyDirectoryResources(
+		        	"sqlite/", 
+		            getSQLitePathDirectory());
+		        
+		        sqliteBdGrabed = true;
+	        }
+    	}
     }
     
     private Connection getConnection(boolean forReadOnly) throws ClassNotFoundException, SQLException {

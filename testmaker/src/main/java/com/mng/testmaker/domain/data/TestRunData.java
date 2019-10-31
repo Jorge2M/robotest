@@ -96,9 +96,14 @@ public class TestRunData {
 		
 		Date inicio = testRun.getTestNgContext().getStartDate();
 		Date fin = testRun.getTestNgContext().getEndDate();
+		if (fin==null) {
+			fin = new Date();
+		}
 		testRunData.setInicioDate(inicio);
 		testRunData.setFinDate(fin);
-		testRunData.setDurationMillis(fin.getTime() - inicio.getTime());
+		if (fin!=null && inicio!=null) {
+			testRunData.setDurationMillis(fin.getTime() - inicio.getTime());
+		}
 		testRunData.setNumberTestCases(testRun.getNumTestCases());
 		testRunData.setWebDriverType(suite.getInputParams().getWebDriverType());
 		

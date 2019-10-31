@@ -16,6 +16,7 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
   
     @Override //Start Suite 
     public void onStart(ISuite suite) {
+    	((SuiteTM)suite.getXmlSuite()).start();
     }
     
     @Override //End Suite
@@ -54,14 +55,18 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
     @Override //End TestCase Skipped
     public void onTestSkipped(ITestResult result) {
     	TestCaseTM testCase = TestCaseTM.getTestCase(result);
-    	testCase.end(State.Skip);
+    	if (testCase!=null) {
+    		testCase.end(State.Skip);
+    	}
     }
   
     @Override //End TestCase Failure
     public void onTestFailure(ITestResult result) {
         Log4jConfig.pLogger.error("Exception for TestNG", result.getThrowable());
     	TestCaseTM testCase = TestCaseTM.getTestCase(result);
-    	testCase.end(State.Nok);
+    	if (testCase!=null) {
+    		testCase.end(State.Nok);
+    	}
     }
     
     private TestRunTM getTestRun(ITestResult result) {

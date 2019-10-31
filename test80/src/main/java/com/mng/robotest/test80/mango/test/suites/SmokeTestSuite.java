@@ -41,7 +41,7 @@ public class SmokeTestSuite extends SuiteMaker {
 	    	testRun.setStorerErrorStep(new StorerErrorDataStepValidationMango());
 	    	addTestRun(testRun);
 	    	setParallelMode(ParallelMode.METHODS);
-	    	setThreadCount(3);
+	    	setThreadCount(1); //TODO back to 3
     	} else {
     		addTestRuns(getTestRunsForBrowserStack(inputParams.getSuiteName(), inputParams.getChannel(), getClasses()));
 	    	setParallelMode(ParallelMode.TESTS);

@@ -108,8 +108,8 @@ public class TestRunsDAO {
     	        insert.setString(3, testRun.getName()); 
     	        insert.setString(4, testRun.getDevice()); 
     	        insert.setString(5, testRun.getResult().name()); 
-    	        insert.setString(6, getDateFormat().format(testRun.getInicioDate()));
-    	        insert.setString(7, getDateFormat().format(testRun.getFinDate()));
+	        	insert.setString(6, getDateFormat().format(testRun.getInicioDate()));
+	        	insert.setString(7, getDateFormat().format(testRun.getFinDate()));
     	        insert.setFloat(8, testRun.getDurationMillis());
     	        insert.setInt(9, testRun.getNumberTestCases());
     	        insert.setString(10, testRun.getWebDriverType().name());

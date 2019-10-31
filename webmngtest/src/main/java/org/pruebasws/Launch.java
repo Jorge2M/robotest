@@ -40,7 +40,7 @@ public class Launch {
     
     public static boolean stopTSuiteViaMarkInTableSuite(String idExecSuite) throws Exception {
         int timeoutSeconds = 40;
-        TestMaker.finishSuite(idExecSuite);
+        TestMaker.sendStopOrder(idExecSuite);
         StateExecution stateSuiteNew;
         int i=0;
         do {

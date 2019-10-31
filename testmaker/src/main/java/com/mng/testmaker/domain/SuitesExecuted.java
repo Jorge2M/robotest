@@ -1,11 +1,11 @@
 package com.mng.testmaker.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SuitesExecuted {
 
-	private static final List<SuiteTM> suitesExecuted = new ArrayList<>();
+	private static final List<SuiteTM> suitesExecuted = new CopyOnWriteArrayList<>();
 	
 	public static void add(SuiteTM suite) {
 		suitesExecuted.add(suite); 

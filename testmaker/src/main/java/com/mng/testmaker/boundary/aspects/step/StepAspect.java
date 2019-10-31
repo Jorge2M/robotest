@@ -48,12 +48,14 @@ public class StepAspect {
     public void doRecoveryActions(JoinPoint joinPoint, Throwable ex) {
     	TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
     	StepTM currentStep = testCase.getCurrentStepInExecution();
-    	if (!testCase.isLastStep(currentStep)) {
-        	//In the case of anidated Steps...
-        	//If isn't the last step then the exception is generated in other deeper step
-    		currentStep.end(false);
-    	} else {
-    		currentStep.end(true);
+    	if (currentStep!=null) {
+	    	if (!testCase.isLastStep(currentStep)) {
+	        	//In the case of anidated Steps...
+	        	//If isn't the last step then the exception is generated in other deeper step
+	    		currentStep.end(false);
+	    	} else {
+	    		currentStep.end(true);
+	    	}
     	}
     }
     
