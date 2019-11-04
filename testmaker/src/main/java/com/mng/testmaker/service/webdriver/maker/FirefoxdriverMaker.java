@@ -19,7 +19,7 @@ import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriver
 class FirefoxdriverMaker implements WebdriverMaker {
 	
     //Nota: si se modifica la versión sería conveniente regenerar la AMI correspondiente al Robotest en Cloud
-	final static String GeckoDriverVersion = "0.25.0";
+	final static String GeckoDriverVersion = "0.26.0";
 	WebDriverType webDriverType;
 	FirefoxProfile fp = new FirefoxProfile();
 	FirefoxOptions options;
