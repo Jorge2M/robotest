@@ -24,7 +24,7 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 class ChromedriverMaker implements WebdriverMaker {
 	
     //Nota: si se modifica la versión sería conveniente regenerar la AMI correspondiente al Robotest en Cloud
-	final static String ChromeDriverVersion = "79.0.3945.16";
+	final static String ChromeDriverVersion = "78.0.3904.70";
 	final WebDriverType webDriverType;
 	boolean isHeadless;
 	ChromeOptions options = new ChromeOptions();

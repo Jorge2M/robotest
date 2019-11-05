@@ -651,6 +651,15 @@ public class WebdrvWrapp extends ElementPageFunctions {
     	return WebDriverType.valueOf(browserName);
     }    
     
+    public static void waitMillis(int milliseconds) {
+    	try {
+    		Thread.sleep(milliseconds);
+    	}
+    	catch (Exception e) {
+    		Log4jConfig.pLogger.warn("Problem in wait", e);
+    	}
+    }
+    
     public enum HtmlLocator {TagName, Id, ClassName};
     public static void hideHtmlComponent(HtmlLocator htmlLocator, String idLocator, WebDriver driver) {
     	try {

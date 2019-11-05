@@ -76,8 +76,8 @@ public class StepTM {
 		setExcepExists(exceptionReceived); 
 		if (exceptionReceived) {
 			setResultSteps(State.Nok);
-	    	storeEvidencies();
 		}
+    	storeEvidencies();
     	setHoraFin(new Date(System.currentTimeMillis()));
     	setState(StateExecution.Finished);
 	}

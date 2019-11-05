@@ -1,37 +1,23 @@
 package com.mng.sapfiori.test.testcase.script;
 
-import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestContext;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.mng.testmaker.domain.TestCaseTM;
-import com.mng.sapfiori.test.testcase.generic.stpv.sections.filterheader.ModalSetFilterFromListStpV;
-import com.mng.sapfiori.test.testcase.stpv.PageSelProdsToReclassifyStpV;
-import com.mng.sapfiori.test.testcase.stpv.PageInitialStpV;
-import com.mng.sapfiori.test.testcase.stpv.PageLoginStpV;
-import com.mng.sapfiori.test.testcase.stpv.PageReclassifProductsStpV;
-import com.mng.sapfiori.test.testcase.webobject.FiltersPageClassifProductos.FilterFromList;
-import com.mng.sapfiori.test.testcase.webobject.PageSelProdsToReclassify.ProductData;
+import com.mng.sapfiori.test.testcase.generic.stpv.modals.ModalSetFilterFromListStpV;
+import com.mng.sapfiori.test.testcase.stpv.iconsmenu.PageIconsMenuStpV;
+import com.mng.sapfiori.test.testcase.stpv.login.PageLoginStpV;
+import com.mng.sapfiori.test.testcase.stpv.reclassifprods.PageReclassifProductsStpV;
+import com.mng.sapfiori.test.testcase.stpv.reclassifprods.PageSelProdsToReclassifyStpV;
+import com.mng.sapfiori.test.testcase.webobject.reclassifprods.PageSelProdsToReclassify.ProductData;
 
 public class Piloto {
 
     public Piloto() {}         
-      
-    @BeforeMethod (groups={"Piloto", "Canal:desktop_App:all"})
-    synchronized public void login() 
-    throws Exception {
-    }
-    
-    @AfterMethod (groups={"Piloto", "Canal:desktop_App:all"}, alwaysRun = true)
-    public void logout(ITestContext context, Method method) throws Exception {
-    }       
-
+  
     @Test (
         groups={"Piloto", "Canal:desktop_App:all"}, alwaysRun=true, 
         description="Se realiza un login de usuario")
@@ -42,7 +28,7 @@ public class Piloto {
         driver.get(testCase.getInputParamsSuite().getUrlBase());
     	
     	PageLoginStpV pageLoginStpV = PageLoginStpV.getNew(driver);
-    	PageInitialStpV pageInitialStpV = 
+    	PageIconsMenuStpV pageInitialStpV = 
     		pageLoginStpV.inputCredentialsAndEnter("00556106", "Irene_2016");
  
     	PageSelProdsToReclassifyStpV pageSelProductsStpV = 
@@ -50,12 +36,13 @@ public class Piloto {
     	
     	//Define Filters
     	ModalSetFilterFromListStpV modalSetFilterStpV = 
-    		pageSelProductsStpV.clickIconSetFilter(FilterFromList.EsquemaNumeracion);
+    		pageSelProductsStpV.clickIconEsquemaNumeracion();
+    	
     	modalSetFilterStpV.selectElementByValue("EU01");
     	
-    	List<String> productsToReclassify = Arrays.asList("1830950HPM001470", "1830950HPM002445");
+    	List<String> productsToReclassify = Arrays.asList("1810101GKC01003", "1830950HPM002445");
     	modalSetFilterStpV = 
-    		pageSelProductsStpV.clickIconSetFilter(FilterFromList.Producto);
+    		pageSelProductsStpV.clickIconProducto();
     	modalSetFilterStpV.selectElementsByValue(productsToReclassify);
     	modalSetFilterStpV.clickOkButton();
     	
