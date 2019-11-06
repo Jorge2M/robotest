@@ -1,10 +1,14 @@
 package com.mng.testmaker.boundary.aspects.test;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.testng.SkipException;
+import org.testng.annotations.Factory;
 
 import com.mng.testmaker.domain.TestCaseTM;
 import com.mng.testmaker.service.TestMaker;
@@ -25,7 +29,25 @@ public class TestAspect {
     	if (testCase!=null) {
     		TestMaker.skipTestsIfSuiteStopped(testCase.getSuiteParent());
     	} else {
-    		throw new SkipException("TestCase removed");
+    		if (!isFactoryMethod(joinPoint)) {
+    			throw new SkipException("TestCase removed");
+    		}
     	}
+    }
+    
+    private boolean isFactoryMethod(JoinPoint joinPoint) {
+    	String testMethod = joinPoint.getSignature().getName();
+    	Method[] listMethodsOfClass = joinPoint.getSignature().getDeclaringType().getDeclaredMethods();
+    	for (Method methodOfClass : listMethodsOfClass) {
+    		if (methodOfClass.getName().compareTo(testMethod)==0) {
+    			for (Annotation annotationMethod : methodOfClass.getAnnotations()) {
+    				if (annotationMethod.annotationType()==Factory.class) {
+    					return true;
+    				}
+    			}
+    			
+    		}
+    	}
+    	return false;
     }
 }

@@ -26,14 +26,13 @@ public class CorreoReport {
      * 
      */
     public static void main(String[] args) throws Exception { 
-        String serverDNS = args[0];
         PersistorDataI persistor = new StorerResultSQLite();
-        String html = construirHTMLmail(serverDNS, persistor);
+        String html = construirHTMLmail(persistor);
         sendMailResult(html);
     }
 	
     //Construye el HTML del correo con la lista de tests ejecutados
-    private static String construirHTMLmail(String serverDNS, PersistorDataI persistor) throws Exception {
+    private static String construirHTMLmail(PersistorDataI persistor) throws Exception {
         //Fecha actual - 13 horas
         //Date fechaDesde = new Date(System.currentTimeMillis() - 3600000 /*1 horas*/);
         Date fechaDesde = new Date(System.currentTimeMillis() - 50400000 /*14 horas*/);	    
@@ -50,11 +49,11 @@ public class CorreoReport {
     	    "en las últimas 13 horas [" + sdf.format(fechaDesde) + " - " + sdf.format(fechaHasta) + "] se han ejecutado los siguientes scripts automáticos contra PRO:" +
     	    "</p>";
 
-        html+=constuctTableMail(listSuites, serverDNS, persistor);
+        html+=constuctTableMail(listSuites, persistor);
         return html;
     }
 	
-    public static String constuctTableMail(List<SuiteData> listSuites, String serverDNS, PersistorDataI persistor) 
+    public static String constuctTableMail(List<SuiteData> listSuites, PersistorDataI persistor) 
     throws Exception {
 
         String html = 	
@@ -85,42 +84,45 @@ public class CorreoReport {
         Map<State,Integer> testCasesStateAcc = getInitZeroValues();
         float totalDisp = 0;
         double totalMINs = 0;
-        for (SuiteData suite : listSuites) {
-        	String nameSuite = suite.getName();
-        	String idSuite = suite.getIdExecSuite();
-        	TestCasesDAO testCasesDAO = new TestCasesDAO(persistor);
-        	List<TestCaseData> listTestCases = testCasesDAO.getListTestCases(idSuite);
-        	Map<State,Integer> testCasesState = mapNumberTestCasesInState(listTestCases);
-            Integer numDisps = 
-            	testCasesState.get(State.Ok) + 
-            	testCasesState.get(State.Info) + 
-            	testCasesState.get(State.Warn) + 
-            	testCasesState.get(State.Defect);
-            
-            String tiempoSegs = df1.format(Double.valueOf(suite.getDurationMillis()).doubleValue() / 1000 / 60);
-            accumulateData(testCasesStateAcc, testCasesState);
-            totalDisp+=Integer.valueOf(numDisps);
-            totalMINs += Double.valueOf(suite.getDurationMillis()) / 1000 / 60;
-    		
-            html+= 
-    		"<tr>" + 
-    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">" + idSuite + "</td>" + 
-    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">" + nameSuite + "</td>" +
-    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">" + suite.getApp() + "</td>" +
-    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">" + suite.getChannel() + "</td>" +
-    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">" + suite.getWebDriverType() + "</td>" +
-    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">" + suite.getVersion() + "</td>" +
-    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + "darkGreen" + ";\">" + numDisps + "</td>" +
-    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Ok.getColorCss() + ";\">" + getNumTestCasesStr(testCasesState.get(State.Ok)) + "</td>" +
-    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Nok.getColorCss() + ";\">" + getNumTestCasesStr(testCasesState.get(State.Nok)) + "</td>" +
-            "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Defect.getColorCss() + ";\">" + getNumTestCasesStr(testCasesState.get(State.Defect)) + "</td>" +    		
-    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Warn.getColorCss() + ";\">" + getNumTestCasesStr(testCasesState.get(State.Warn)) + "</td>" +
-            "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Info.getColorCss() + ";\">" + getNumTestCasesStr(testCasesState.get(State.Info)) + "</td>" +    		
-    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Skip.getColorCss() + ";\">" + getNumTestCasesStr(testCasesState.get(State.Skip)) + "</td>" +
-    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:right;\">" + tiempoSegs + "</td>" +
-    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">" + suite.getStateExecution() + "</td>" +
-    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\"><a href='" + suite.getUrlReportHtml().replace("\\", "/") + "'>Report HTML</a></td>" +
-    		"</tr>";
+        
+        if (listSuites!=null && listSuites.size()>0) {
+	        for (SuiteData suite : listSuites) {
+	        	String nameSuite = suite.getName();
+	        	String idSuite = suite.getIdExecSuite();
+	        	TestCasesDAO testCasesDAO = new TestCasesDAO(persistor);
+	        	List<TestCaseData> listTestCases = testCasesDAO.getListTestCases(idSuite);
+	        	Map<State,Integer> testCasesState = mapNumberTestCasesInState(listTestCases);
+	            Integer numDisps = 
+	            	testCasesState.get(State.Ok) + 
+	            	testCasesState.get(State.Info) + 
+	            	testCasesState.get(State.Warn) + 
+	            	testCasesState.get(State.Defect);
+	            
+	            String tiempoSegs = df1.format(Double.valueOf(suite.getDurationMillis()).doubleValue() / 1000 / 60);
+	            accumulateData(testCasesStateAcc, testCasesState);
+	            totalDisp+=Integer.valueOf(numDisps);
+	            totalMINs += Double.valueOf(suite.getDurationMillis()) / 1000 / 60;
+	    		
+	            html+= 
+	    		"<tr>" + 
+	    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">" + idSuite + "</td>" + 
+	    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">" + nameSuite + "</td>" +
+	    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">" + suite.getApp() + "</td>" +
+	    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">" + suite.getChannel() + "</td>" +
+	    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">" + suite.getWebDriverType() + "</td>" +
+	    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">" + suite.getVersion() + "</td>" +
+	    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + "darkGreen" + ";\">" + numDisps + "</td>" +
+	    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Ok.getColorCss() + ";\">" + getNumTestCasesStr(testCasesState.get(State.Ok)) + "</td>" +
+	    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Nok.getColorCss() + ";\">" + getNumTestCasesStr(testCasesState.get(State.Nok)) + "</td>" +
+	            "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Defect.getColorCss() + ";\">" + getNumTestCasesStr(testCasesState.get(State.Defect)) + "</td>" +    		
+	    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Warn.getColorCss() + ";\">" + getNumTestCasesStr(testCasesState.get(State.Warn)) + "</td>" +
+	            "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Info.getColorCss() + ";\">" + getNumTestCasesStr(testCasesState.get(State.Info)) + "</td>" +    		
+	    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Skip.getColorCss() + ";\">" + getNumTestCasesStr(testCasesState.get(State.Skip)) + "</td>" +
+	    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:right;\">" + tiempoSegs + "</td>" +
+	    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\">" + suite.getStateExecution() + "</td>" +
+	    		"<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px;\"><a href='" + suite.getUrlReportHtml().replace("\\", "/") + "'>Report HTML</a></td>" +
+	    		"</tr>";
+	        }
         }
     
         html+="</tbody>";
@@ -145,21 +147,24 @@ public class CorreoReport {
     	    "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Skip.getColorCss() + ";\">" + getNumTestCasesStr(testCasesStateAcc.get(State.Skip)) + "</td>" +
     	    "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:right;\">" + df1.format(totalMINs) + "</td>" +
     	    "<td colspan=\"2\"></td>" +
-    	    "</tr>" +
-    		
-   	    "<tr style=\"border:none;\">" +
-   	    "<td colspan=\"6\"></td>" +
-   	    "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + "darkGreen" + ";\">" + df1.format(((totalDisp / totalCasos) * 100)) + "%</td>" +
-   	    "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Ok.getColorCss() + ";\">" + df1.format(((testCasesStateAcc.get(State.Ok) / totalCasos) * 100)) + "%</td>" +
-   	    "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Nok.getColorCss() + ";\">" + df1.format(((testCasesStateAcc.get(State.Nok) / totalCasos) * 100)) + "%</td>" +
-   	    "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Defect.getColorCss() + ";\">" + df1.format(((testCasesStateAcc.get(State.Defect) / totalCasos) * 100)) + "%</td>" +    	    
-   	    "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Warn.getColorCss() + ";\">" + df1.format(((testCasesStateAcc.get(State.Warn) / totalCasos) * 100)) + "%</td>" +
-   	    "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Info.getColorCss() + ";\">" + df1.format(((testCasesStateAcc.get(State.Info) / totalCasos) * 100)) + "%</td>" +    	    
-   	    "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Skip.getColorCss() + ";\">" + df1.format(((testCasesStateAcc.get(State.Skip) / totalCasos) * 100)) + "%</td>" +
-   	    "<td colspan=\"3\"></td>" +
-   	    "</tr>" +
-   	    "</tfoot>";				
-    			
+    	    "</tr>";
+    	
+        if (listSuites!=null && listSuites.size()>0) {
+	        html+=
+		   	    "<tr style=\"border:none;\">" +
+		   	    "<td colspan=\"6\"></td>" +
+		   	    "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + "darkGreen" + ";\">" + df1.format(((totalDisp / totalCasos) * 100)) + "%</td>" +
+		   	    "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Ok.getColorCss() + ";\">" + df1.format(((testCasesStateAcc.get(State.Ok) / totalCasos) * 100)) + "%</td>" +
+		   	    "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Nok.getColorCss() + ";\">" + df1.format(((testCasesStateAcc.get(State.Nok) / totalCasos) * 100)) + "%</td>" +
+		   	    "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Defect.getColorCss() + ";\">" + df1.format(((testCasesStateAcc.get(State.Defect) / totalCasos) * 100)) + "%</td>" +    	    
+		   	    "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Warn.getColorCss() + ";\">" + df1.format(((testCasesStateAcc.get(State.Warn) / totalCasos) * 100)) + "%</td>" +
+		   	    "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Info.getColorCss() + ";\">" + df1.format(((testCasesStateAcc.get(State.Info) / totalCasos) * 100)) + "%</td>" +    	    
+		   	    "<td style=\"border:1px solid #000000;padding-left: 10px; padding-right: 10px; text-align:center; color:" + State.Skip.getColorCss() + ";\">" + df1.format(((testCasesStateAcc.get(State.Skip) / totalCasos) * 100)) + "%</td>" +
+		   	    "<td colspan=\"3\"></td>" +
+		   	    "</tr>";
+        }
+        
+   	    html+="</tfoot>";				
         html+="</table>";
         html+="<br>";		
         html+="<p style=\"font:12pt Arial;\">";
@@ -211,14 +216,13 @@ public class CorreoReport {
         //String from = "Robotest QA<jorge.munoz@mango.com>";
         //String from = "jorge.munoz@mango.com";
 
-        InternetAddress[] myToList = InternetAddress.parse("eqp.ecommerce.qamango@mango.com,");
-        InternetAddress[] myCcList = InternetAddress.parse(
-        	"jordi.pereta@mango.com," + 
-        	"antonio.hernandez@mango.com," +
-        	"eqp.ecommerce.payments@mango.com," +
-        	"eqp.ebusiness.test@mango.com");
-        //InternetAddress[] myToList = InternetAddress.parse("jorge.munoz@mango.com");
-        //InternetAddress[] myCcList = InternetAddress.parse("jorge.munoz@mango.com");
+//        InternetAddress[] myToList = InternetAddress.parse("eqp.ecommerce.qamango@mango.com,");
+//        InternetAddress[] myCcList = InternetAddress.parse(
+//        	"jordi.pereta@mango.com," + 
+//        	"eqp.ecommerce.payments@mango.com," +
+//        	"eqp.ebusiness.test@mango.com");
+        InternetAddress[] myToList = InternetAddress.parse("jorge.munoz.sge@mango.com");
+        InternetAddress[] myCcList = InternetAddress.parse("jorge.munoz.sge@mango.com");
 	      
         String subject="Resultado tests últimas 12 horas";  
 		  

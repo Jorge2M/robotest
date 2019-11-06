@@ -49,9 +49,10 @@ public class SuitesDAO {
         "WHERE IDEXECSUITE = ? " +
         "ORDER BY IDEXECSUITE DESC";    
     
-    private static final String SQLSelectSuitesHigherId = 
+    private static final String SQLSelectSuitesFromId = 
     	"SELECT " + ListFieldsSuiteTable + 
-    	"WHERE IDEXECSUITE > ?";
+    	"  FROM SUITES " +
+    	"WHERE IDEXECSUITE >= ?";
     
     private static final String SQLDeleteSuitesBeforeId = 
         "DELETE FROM SUITES " +
@@ -162,7 +163,7 @@ public class SuitesDAO {
         }
     }
 
-    public SuiteData getSuiteBefore(Date fechaHasta) throws Exception {
+    public SuiteData get1rstSuiteBefore(Date fechaHasta) throws Exception {
     	for (SuiteData suite : getListSuitesIdDesc()) {
     		if (suite.getInicioDate().before(fechaHasta)) {
     			return suite;
@@ -171,34 +172,41 @@ public class SuitesDAO {
     	return null;
     }    
     
-    public SuiteData getSuiteAfter(Date fechaDesde) throws Exception {
+    public SuiteData get1rstSuiteAfter(Date fechaDesde) throws Exception {
+    	SuiteData suiteToReturn = null;
     	for (SuiteData suite : getListSuitesIdDesc()) {
     		if (suite.getInicioDate().after(fechaDesde)) {
-    			return suite;
+    			suiteToReturn = suite;
+    		} else {
+    			break;
     		}
     	}
-    	return null;
+    	return suiteToReturn;
     } 
     
     public List<SuiteData> getListSuitesAfter(Date fechaDesde) throws Exception {
         List<SuiteData> listSuites = new ArrayList<>();
-    	SuiteData suite = getSuiteAfter(fechaDesde);
-        try (Connection conn = persistor.getConnection();
-            PreparedStatement select = conn.prepareStatement(SQLSelectSuitesHigherId)) {
-        	select.setString(1, suite.getIdExecSuite());
-            try (ResultSet resultado = select.executeQuery()) {
-                while (resultado.next()) {
-                	listSuites.add(getSuite(resultado));
-                }
-            }
-            return listSuites;
-        } 
-        catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        } 
-        catch (ClassNotFoundException ex) {
-            throw new RuntimeException(ex);
-        }
+    	SuiteData suite = get1rstSuiteAfter(fechaDesde);
+    	if (suite!=null) {
+	        try (Connection conn = persistor.getConnection();
+	            PreparedStatement select = conn.prepareStatement(SQLSelectSuitesFromId)) {
+	        	select.setString(1, suite.getIdExecSuite());
+	            try (ResultSet resultado = select.executeQuery()) {
+	                while (resultado.next()) {
+	                	listSuites.add(getSuite(resultado));
+	                }
+	            }
+	            
+	            return listSuites;
+	        } 
+	        catch (SQLException ex) {
+	            throw new RuntimeException(ex);
+	        } 
+	        catch (ClassNotFoundException ex) {
+	            throw new RuntimeException(ex);
+	        }
+    	}
+    	return null;
     }
     
     public void deleteSuitesBefore(String idSuite) {

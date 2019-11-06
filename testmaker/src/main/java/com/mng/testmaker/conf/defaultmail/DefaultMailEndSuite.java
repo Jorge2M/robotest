@@ -38,7 +38,7 @@ public class DefaultMailEndSuite implements SenderMailEndSuiteI {
             List<SuiteData>list1Suite = new ArrayList<>();
             list1Suite.add(SuiteData.from(suite));
             PersistorDataI persistor = new StorerResultSQLite();
-            mensajeHTML+=CorreoReport.constuctTableMail(list1Suite, suite.getInputParams().getWebAppDNS(), persistor);
+            mensajeHTML+=CorreoReport.constuctTableMail(list1Suite, persistor);
             
             Log4jConfig.pLogger.info(". Procedemos a enviar correo!");
             new MailClient().mail(this.from, myToList, myCcList, getSubjectMail(suite), mensajeHTML, listaAttachImages);
