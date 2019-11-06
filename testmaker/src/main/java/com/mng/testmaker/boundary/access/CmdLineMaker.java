@@ -18,7 +18,7 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
-public class CmdLineMaker {
+public class CmdLineMaker { 
 
 	private final String[] args;
 	private final List<OptionTMaker> listOptions;
