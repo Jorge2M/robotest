@@ -71,22 +71,31 @@ public class PageMenusManto extends WebdrvWrapp {
     }
     
     /**
-     * @param subMenu
      * @return valida si la página seleccionada corresponde con el menú seleccionado
      */
-    public static boolean validateIsPage(String subMenu, WebDriver driver) {
-    	String menuHeaderText = getTextMenuTitulo(driver);
-    	String subMenuText = subMenu.replace("· ", "");
-    	if (menuHeaderText.contains(subMenuText) || menuHeaderText.contains(subMenuText.toUpperCase()) || menuHeaderText.toUpperCase().contains(subMenuText.toUpperCase())){
-    		return true;
-    	} else {
-    		if(isMenuHeaderVisible(driver)) {
+    public static boolean validateIsPage(String subMenu, int maxSeconds, WebDriver driver) {
+    	for (int i=0; i<maxSeconds; i++) {
+    		if (vaidateIsPage(subMenu, driver)) {
     			return true;
     		}
+    		waitMillis(1000);
     	}
-    	
     	return false;
 	} 
+    
+    private static boolean vaidateIsPage(String subMenu, WebDriver driver) {
+		String menuHeaderText = getTextMenuTitulo(driver);
+		String subMenuText = subMenu.replace("· ", "");
+		if (menuHeaderText.contains(subMenuText) || menuHeaderText.contains(subMenuText.toUpperCase()) || menuHeaderText.toUpperCase().contains(subMenuText.toUpperCase())){
+			return true;
+		} else {
+			if(isMenuHeaderVisible(driver)) {
+				return true;
+			}
+		}
+		
+		return false;
+    }
 
     /**
      * @return nos dice si existe el elemento de la cabecera

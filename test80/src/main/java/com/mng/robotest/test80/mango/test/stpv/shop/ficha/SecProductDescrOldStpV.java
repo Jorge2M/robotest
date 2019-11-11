@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrO
 public class SecProductDescrOldStpV {
     
 	@Validation
-    public static void validateAreInStateInitial(AppEcom appE, WebDriver driver) throws Exception {
+    public static ChecksResult validateAreInStateInitial(AppEcom appE, WebDriver driver) throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
     	for (TypePanel typePanel : TypePanel.values()) {
     		TypeStatePanel stateExpected = TypeStatePanel.missing;
@@ -27,6 +27,7 @@ public class SecProductDescrOldStpV {
 	    		"El panel <b>" + typePanel + "</b> está en estado <b>" + stateExpected + "</b>",
 	    		SecProductDescrOld.getStatePanel(typePanel, driver)==stateExpected, State.Defect);
     	}
+    	return validations;
     }
     
 	final static String tagInitStatePanel = "@TagInitState";

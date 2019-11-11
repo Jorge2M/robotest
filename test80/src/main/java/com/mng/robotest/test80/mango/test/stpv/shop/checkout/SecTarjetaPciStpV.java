@@ -32,7 +32,6 @@ public class SecTarjetaPciStpV {
 	@Validation
     public ChecksResult validateIsSectionOk(Pago pago, Pais pais) {
     	ChecksResult validations = ChecksResult.getNew();
-    	
     	if (channel==Channel.desktop && pago.getTypePago()!=TypePago.KrediKarti) {
             int maxSecondsWait = 5;
 		 	validations.add(

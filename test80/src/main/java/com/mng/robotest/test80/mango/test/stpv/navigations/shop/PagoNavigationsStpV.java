@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.navigations.shop;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -362,26 +363,32 @@ public class PagoNavigationsStpV {
      */
     public static void validaPasarelasPagoPais(DataCtxShop dCtxSh, DataCtxPago dCtxPago, WebDriver driver) 
     throws Exception {
-        List<Pago> listPagos = dCtxSh.pais.getListPagosTest(dCtxSh.appE, dCtxPago.getFTCkout().isEmpl);
-        for (int i=0; i<listPagos.size(); i++) {
-            Pago pago = listPagos.get(i);
-            ITestContext ctx = TestMaker.getTestCase().getTestRunContext();
-            if (pago.isNeededTestPasarelaDependingFilter(dCtxSh.channel, ctx)) {
-                dCtxPago.getDataPedido().setPago(pago);
-                String urlPagChekoutToReturn = driver.getCurrentUrl();
-                if (dCtxPago.getFTCkout().validaPagos) {
-                    //Si el pago está marcado para testearlo (fichero XML de países)
-                    //Y en caso que nos hayamos quedado sin productos (porque previamente se ha efectuado un pago) -> Volvemos a seleccionar un producto
-                    if (pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0 &&
-                        !PageCheckoutWrapper.isArticulos(dCtxSh.channel, driver))
-                        //Proceso que vuelve a la página de inicio y realiza un proceso mínimo hasta la página de resumen-checkout
-                        fluxQuickInitToCheckout(dCtxSh, dCtxPago, driver);
-                }
-                                        
-                checkPasarelaPago(dCtxPago, dCtxSh, driver);
-                PageCheckoutWrapper.backPageMetodosPagos(urlPagChekoutToReturn, dCtxSh.channel, driver);
+        List<Pago> listPagosToTest = getListPagosToTest(dCtxSh, dCtxPago.getFTCkout().isEmpl);
+        for (Iterator<Pago> it = listPagosToTest.iterator(); it.hasNext(); ) {
+        	Pago pagoToTest = it.next();
+            dCtxPago.getDataPedido().setPago(pagoToTest);
+            String urlPagChekoutToReturn = driver.getCurrentUrl();
+            checkPasarelaPago(dCtxPago, dCtxSh, driver);
+            if (it.hasNext()) {
+	            if (!dCtxPago.isPaymentExecuted(pagoToTest)) {
+	            	PageCheckoutWrapper.backPageMetodosPagos(urlPagChekoutToReturn, dCtxSh.channel, driver);
+	            } else {
+	            	fluxQuickInitToCheckout(dCtxSh, dCtxPago, driver);
+	            }
             }
         }
+    }
+    
+    private static List<Pago> getListPagosToTest(DataCtxShop dCtxSh, boolean isEmpl) {
+    	List<Pago> listPagosToTest = new ArrayList<>();
+    	ITestContext ctx = TestMaker.getTestCase().getTestRunContext();
+    	List<Pago> listPagosPais = dCtxSh.pais.getListPagosTest(dCtxSh.appE, isEmpl);
+    	for (Pago pago : listPagosPais) {
+    		if (pago.isNeededTestPasarelaDependingFilter(dCtxSh.channel, ctx)) {
+    			listPagosToTest.add(pago);
+    		}
+    	}
+    	return listPagosToTest;
     }
 
     public static void checkPasarelaPago(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) throws Exception {

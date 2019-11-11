@@ -75,8 +75,11 @@ public class SecSelectDPoint extends WebdrvWrapp {
     
     public static TypeDeliveryPoint getTypeDeliveryPoint(int position, WebDriver driver) {
         List<WebElement> listDp = getListDeliveryPoints(driver);
-        WebElement dpElem = listDp.get(position-1);
-        return getTypeDeliveryPoint(dpElem);
+        if (listDp!=null && listDp.size()>=position) {
+        	WebElement dpElem = listDp.get(position-1);
+        	return getTypeDeliveryPoint(dpElem);
+        }
+        return null;
     }
     
     public static TypeDeliveryPoint getTypeDeliveryPoint(WebElement dpElement) {
@@ -84,7 +87,7 @@ public class SecSelectDPoint extends WebdrvWrapp {
     	if (dpTitle!=null && !dpTitle.getText().toLowerCase().contains("mango")) {
             return TypeDeliveryPoint.droppoint;
     	}
-        return TypeDeliveryPoint.tienda;        
+        return TypeDeliveryPoint.tienda;
     }
     
     public static DataDeliveryPoint clickDeliveryPointAndGetData(int position, WebDriver driver) throws Exception {

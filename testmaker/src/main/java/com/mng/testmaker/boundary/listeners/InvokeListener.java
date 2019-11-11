@@ -21,9 +21,7 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
     
     @Override //End Suite
     public void onFinish(ISuite suite) {
-    	Log4jConfig.pLogger.info("End Suite - INI");
     	((SuiteTM)suite.getXmlSuite()).end();
-    	Log4jConfig.pLogger.info("End Suite - FIN");
     }
     
     @Override //Start TestRun

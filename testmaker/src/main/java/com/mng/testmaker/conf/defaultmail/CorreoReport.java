@@ -216,13 +216,13 @@ public class CorreoReport {
         //String from = "Robotest QA<jorge.munoz@mango.com>";
         //String from = "jorge.munoz@mango.com";
 
-//        InternetAddress[] myToList = InternetAddress.parse("eqp.ecommerce.qamango@mango.com,");
-//        InternetAddress[] myCcList = InternetAddress.parse(
-//        	"jordi.pereta@mango.com," + 
-//        	"eqp.ecommerce.payments@mango.com," +
-//        	"eqp.ebusiness.test@mango.com");
-        InternetAddress[] myToList = InternetAddress.parse("jorge.munoz.sge@mango.com");
-        InternetAddress[] myCcList = InternetAddress.parse("jorge.munoz.sge@mango.com");
+        InternetAddress[] myToList = InternetAddress.parse("eqp.ecommerce.qamango@mango.com,");
+        InternetAddress[] myCcList = InternetAddress.parse(
+        	"jordi.pereta@mango.com," + 
+        	"eqp.ecommerce.payments@mango.com," +
+        	"eqp.ebusiness.test@mango.com");
+//        InternetAddress[] myToList = InternetAddress.parse("jorge.munoz.sge@mango.com");
+//        InternetAddress[] myCcList = InternetAddress.parse("jorge.munoz.sge@mango.com");
 	      
         String subject="Resultado tests últimas 12 horas";  
 		  

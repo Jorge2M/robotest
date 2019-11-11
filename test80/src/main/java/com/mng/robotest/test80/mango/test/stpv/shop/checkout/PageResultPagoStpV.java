@@ -160,7 +160,7 @@ public class PageResultPagoStpV {
     public static void selectLinkPedidoAndValidatePedido(DataPedido dataPedido, WebDriver driver) 
     throws Exception {
         PageResultPagoStpV.selectMisPedidos(dataPedido, driver);
-        StepTM StepTestMaker = TestMaker.getCurrentStepInExecution();
+        StepTM StepTestMaker = TestMaker.getLastStep();
         if (StepTestMaker.getResultSteps()==State.Ok) {
             if (PageListPedidos.isPage(driver)) {
                 PageListPedidosStpV.selectPedido(dataPedido.getCodpedido(), driver);

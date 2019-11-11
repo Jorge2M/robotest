@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 
 
 public class DataCtxPago {
@@ -79,5 +80,16 @@ public class DataCtxPago {
     
     public void storePedidoForManto() {
         this.listPedidos.add(getDataPedido());
+    }
+    
+    public boolean isPaymentExecuted(Pago pago) {
+    	for (DataPedido dataPedido : listPedidos) {
+    		if (dataPedido.getPago()==pago) {
+    			if ("".compareTo(dataPedido.getCodpedido())!=0) {
+    				return true;
+    			}
+    		}
+    	}
+    	return false;
     }
 }

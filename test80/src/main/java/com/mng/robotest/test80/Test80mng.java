@@ -47,7 +47,7 @@ public class Test80mng {
     	List<OptionTMaker> optionsTest80 = specificMangoOptions();
     	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, optionsTest80, Suites.class, AppEcom.class);
     	if (cmdLineAccess.checkOptionsValue()) {
-        	InputParams inputParams = getInputParamsMango(cmdLineAccess);
+        	InputParams inputParams = getInputParamsMango(cmdLineAccess);	
     		cmdLineAccess.storeDataOptionsTM(inputParams);
             execSuite(inputParams);
     	}

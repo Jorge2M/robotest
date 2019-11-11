@@ -37,9 +37,10 @@ public class PageMenusMantoStpV {
 	@Validation
 	private static ChecksResult checkIsPageOfSubmenu(String subMenu, String textAlertObtained, WebDriver driver) {
 		ChecksResult validations = ChecksResult.getNew();
+		int maxSeconds = 2;
 	 	validations.add(
-			"Aparece la página asociada al menú <b>" + subMenu + "</b>",
-			PageMenusManto.validateIsPage(subMenu, driver), State.Defect);
+			"Aparece la página asociada al menú <b>" + subMenu + "</b> (la esperamos hasta " + maxSeconds + " segundos)",
+			PageMenusManto.validateIsPage(subMenu, maxSeconds, driver), State.Defect);
 	 	validations.add(
 			"No aparece ninguna ventana de alerta",
 			"".compareTo(textAlertObtained)==0, State.Warn);

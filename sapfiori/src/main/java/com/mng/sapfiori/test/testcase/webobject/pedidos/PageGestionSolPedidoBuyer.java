@@ -1,4 +1,4 @@
-package com.mng.sapfiori.test.testcase.webobject.purchasereqs;
+package com.mng.sapfiori.test.testcase.webobject.pedidos;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +11,7 @@ import com.mng.sapfiori.test.testcase.generic.webobject.makers.FieldFilterHeadMa
 import com.mng.sapfiori.test.testcase.generic.webobject.pages.PageFilter;
 import com.mng.sapfiori.test.testcase.webobject.iconsmenu.OptionMenu;
 
-public class PageManagePRsByBuyer extends PageFilter {
+public class PageGestionSolPedidoBuyer extends PageFilter {
 
 	public static OptionMenu option = OptionMenu.ManagePRsBuyer;
 	
@@ -22,8 +22,10 @@ public class PageManagePRsByBuyer extends PageFilter {
 	public final SelectMultiValue filterSelClaseDocumento;
 	
 	private final static String XPathLineaPedido = "//tr[@id[contains(.,'ColumnListItem')]]";
+	private final static String XPathIconSolPedido = "//button[@id[contains(.,'-addEntry')]]";
+
 	
-	private PageManagePRsByBuyer(WebDriver driver) {
+	private PageGestionSolPedidoBuyer(WebDriver driver) {
 		super(option, driver);
 		FieldFilterHeadMaker filterHeader = new FieldFilterHeadMaker(driver);
 		filterBuscar = filterHeader.getInputBuscador();
@@ -32,8 +34,13 @@ public class PageManagePRsByBuyer extends PageFilter {
 		filterSelClaseDocumento = filterHeader.getSelectMultiValue("Clase documento");
 	}
 	
-	public static PageManagePRsByBuyer getNew(WebDriver driver) {
-		return new PageManagePRsByBuyer(driver);
+	public static PageGestionSolPedidoBuyer getNew(WebDriver driver) {
+		return new PageGestionSolPedidoBuyer(driver);
+	}
+
+	public PageSolicitudPedido clickIconAñadirPedido() throws Exception {
+		clickAndWaitLoad(driver, By.xpath(XPathIconSolPedido));
+		return PageSolicitudPedido.getNew(driver);
 	}
 	
 	public boolean checkSolicitudesVisible(int maxSeconds) {

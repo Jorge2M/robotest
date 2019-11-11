@@ -1,19 +1,22 @@
 package com.mng.sapfiori.test.testcase.webobject.iconsmenu;
 
+import java.util.List;
+import java.util.Arrays;
+
 public enum OptionMenu {
 
-	ClasificarProductos ("Reclasificar productos", "Reclasificación de productos - Números estadísticos de mercancías"),
-	ManagePRsBuyer ("Manage Purchase Requisitions", "Gestión de solicitudes de pedido: profesional");
+	ClasificarProductos (Arrays.asList("Reclasificar productos"), "Reclasificación de productos - Números estadísticos de mercancías"),
+	ManagePRsBuyer (Arrays.asList("Manage Purchase Requisitions", "Buyer"), "Gestión de solicitudes de pedido: profesional");
 	
-	private final String titleIcon;
+	private final List<String> textsInIcon;
 	private final String titlePage;
-	private OptionMenu(String titleIcon, String titlePage) {
-		this.titleIcon = titleIcon;
+	private OptionMenu(List<String> textsInIcon, String titlePage) {
+		this.textsInIcon = textsInIcon;
 		this.titlePage = titlePage;
 	}
 	
-	public String getTitleIcon() {
-		return titleIcon;
+	public List<String> getTextsInIcon() {
+		return textsInIcon;
 	}
 	public String getTitlePage() {
 		return titlePage;

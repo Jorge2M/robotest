@@ -2,7 +2,7 @@ package com.mng.sapfiori.test.testcase.stpv.iconsmenu;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.sapfiori.test.testcase.stpv.purchasereqs.PageManagePRsByBuyerStpV;
+import com.mng.sapfiori.test.testcase.stpv.pedidos.PageGestionSolPedidoBuyerStpV;
 import com.mng.sapfiori.test.testcase.stpv.reclassifprods.PageSelProdsToReclassifyStpV;
 import com.mng.sapfiori.test.testcase.webobject.iconsmenu.PageIconsMenu;
 import com.mng.testmaker.boundary.aspects.step.Step;
@@ -50,11 +50,11 @@ public class PageIconsMenuStpV {
 	@Step (
 		description="Seleccionar el option <b>Manage Purchase Requisitions (Buyer)</b>",
 		expected="Aparece la página correcta")
-	public PageManagePRsByBuyerStpV clickManagePurchaseRequisitionsBuyer() throws Exception {
-		PageManagePRsByBuyerStpV pageManagePRsStpV = PageManagePRsByBuyerStpV.getNew(
+	public PageGestionSolPedidoBuyerStpV clickManagePurchaseRequisitionsBuyer() throws Exception {
+		PageGestionSolPedidoBuyerStpV pageGestionPedidoStpV = PageGestionSolPedidoBuyerStpV.getNew(
 			pageIconsMenu.clickManagePurchaseRequisitionsBuyer());
 		
-		pageManagePRsStpV.checkIsVisiblePage(5);
-		return pageManagePRsStpV;
+		pageGestionPedidoStpV.checkIsVisiblePage(5);
+		return pageGestionPedidoStpV;
 	}
 }

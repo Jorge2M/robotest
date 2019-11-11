@@ -1,34 +1,33 @@
-package com.mng.sapfiori.test.testcase.stpv.purchasereqs;
+package com.mng.sapfiori.test.testcase.stpv.pedidos;
 
 import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 
 import com.mng.sapfiori.test.testcase.generic.stpv.modals.ModalSelectConditionsStpV;
 import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.ModalSelectConditions;
-import com.mng.sapfiori.test.testcase.webobject.purchasereqs.PageManagePRsByBuyer;
+import com.mng.sapfiori.test.testcase.webobject.pedidos.PageGestionSolPedidoBuyer;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
 
-public class PageManagePRsByBuyerStpV {
+public class PageGestionSolPedidoBuyerStpV {
 
-	private final PageManagePRsByBuyer pageObject;
+	private final PageGestionSolPedidoBuyer pageObject;
 	
-	private PageManagePRsByBuyerStpV(WebDriver driver) {
-		pageObject = PageManagePRsByBuyer.getNew(driver);
+	private PageGestionSolPedidoBuyerStpV(WebDriver driver) {
+		pageObject = PageGestionSolPedidoBuyer.getNew(driver);
 	}
-	private PageManagePRsByBuyerStpV(PageManagePRsByBuyer pageObject) {
+	private PageGestionSolPedidoBuyerStpV(PageGestionSolPedidoBuyer pageObject) {
 		this.pageObject = pageObject;
 	}
 	
-	public static PageManagePRsByBuyerStpV getNew(WebDriver driver) {
-		return new PageManagePRsByBuyerStpV(driver);
+	public static PageGestionSolPedidoBuyerStpV getNew(WebDriver driver) {
+		return new PageGestionSolPedidoBuyerStpV(driver);
 	}
 	
-	public static PageManagePRsByBuyerStpV getNew(PageManagePRsByBuyer pageObject) {
-		return new PageManagePRsByBuyerStpV(pageObject);
+	public static PageGestionSolPedidoBuyerStpV getNew(PageGestionSolPedidoBuyer pageObject) {
+		return new PageGestionSolPedidoBuyerStpV(pageObject);
 	}
 	
 	@Validation (
@@ -86,11 +85,22 @@ public class PageManagePRsByBuyerStpV {
 	}
 	
 	@Step (
-		description = "Clickar Botón <b>Ir</b>",
-		expected = "Aparece una lista de Productos",
+		description="Clickar Botón <b>Ir</b>",
+		expected="Aparece una lista de Productos",
 		saveImagePage=SaveWhen.Always)
 	public void clickIrButton() throws Exception {
 		pageObject.clickIrButton();
 	}
 	
+	@Step (
+		description="Seleccionar el icono + para añadir un pedido",
+		expected="Aparece la página de \"Solicitud de Pedido\"")
+	public PageSolicitudPedidoStpV clickIconAñadirPedido() throws Exception {
+		PageSolicitudPedidoStpV pageSolPedidosStpV = 
+			PageSolicitudPedidoStpV.getNew(
+				pageObject.clickIconAñadirPedido());
+		
+		pageSolPedidosStpV.checkIsPage(5);
+		return pageSolPedidosStpV;
+	}
 }
