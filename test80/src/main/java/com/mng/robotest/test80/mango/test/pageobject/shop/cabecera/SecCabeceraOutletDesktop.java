@@ -55,7 +55,6 @@ public class SecCabeceraOutletDesktop extends SecCabeceraOutlet {
     	return (isElementInState(LinkCabeceraOutletDesktop.bolsa, state));
     }
 
-    
     @Override
     public void clickIconoBolsa() throws Exception {
     	clickElement(LinkCabeceraOutletDesktop.bolsa);

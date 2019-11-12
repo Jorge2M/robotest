@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.data;
 
 public enum CodIdioma {
     AL("Deutsch"),
+    BG("български"),
     CA("Català"),
     CS("Čeština"),
     ES("Castellano"), 

@@ -230,8 +230,9 @@ public class SecMenusWrapperStpV {
     throws Exception {
         if (dCtxSh.channel==Channel.movil_web) {
             secMenuLateralMobilStpV.seleccionSublineaNinos(lineaType, sublineaType, pais);
+        } else {
+        	secMenusDesktopStpV.seleccionSublinea(lineaType, sublineaType);
         }
-        secMenusDesktopStpV.seleccionSublinea(lineaType, sublineaType);
     }
     
     public void selectFiltroCollectionIfExists(FilterCollection typeMenu) throws Exception {

@@ -518,7 +518,8 @@
 
 <pais nombre_pais="Bulgaria" codigo="068">
 <codigo_pais>068</codigo_pais>
-<idioma acceso="bg">IN</idioma>
+<idioma acceso="bg">BG</idioma>
+<idioma acceso="bg-en">IN</idioma>
 <direccharnolatinos check='s' text='check пдреѿ доказателѿтво, 3'/>
 <rgpd>S</rgpd>
 <tarifa>BL</tarifa>
