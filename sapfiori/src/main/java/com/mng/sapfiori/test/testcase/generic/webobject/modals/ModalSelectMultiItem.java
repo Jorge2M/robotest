@@ -20,9 +20,9 @@ public class ModalSelectMultiItem extends ModalSelectFromListBase {
 		}
 	}
 	
-	public void selectElementsByValue(List<String> listValueElementsToSelect) throws Exception {
+	public void searchAndSelectElementsByValue(List<String> listValueElementsToSelect) throws Exception {
 		for (String valueElement : listValueElementsToSelect) {
-			selectElementByValue(valueElement);
+			findByBuscarAndSelectElement(valueElement, valueElement);
 		}
 	}
 }

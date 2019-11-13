@@ -8,24 +8,31 @@ import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
 
-public class ModalSetFilterFromListStpV {
+public class ModalSelectItemStpV {
 
 	private final ModalSelectFromListBase modalSetFilter;
 	
-	private ModalSetFilterFromListStpV(ModalSelectFromListBase modalSetFilter) {
+	public ModalSelectItemStpV(ModalSelectFromListBase modalSetFilter) {
 		this.modalSetFilter = modalSetFilter;
 	}	
 	
-	public static ModalSetFilterFromListStpV getNew(ModalSelectFromListBase modalSetFilter) {
-		return new ModalSetFilterFromListStpV(modalSetFilter);
+	public static ModalSelectItemStpV getNew(ModalSelectFromListBase modalSetFilter) {
+		return new ModalSelectItemStpV(modalSetFilter);
 	}
 	
 	@Step (
 		description = "Clickamos ENTER",
 		expected = "Aparece una lista inicial de elementos")
-	public void clickEnterToShowInitialElements() throws Exception {
+	public ModalSelectItemStpV clickEnterToShowInitialElements() throws Exception {
 		modalSetFilter.clickEnterToShowInitialElements();
 		checkIsElementListVisible(1);
+		return this;
+	}
+	
+	@Step (
+		description = "Seleccionamos el elemento de la tabla que contiene el valor <b>#{valueToSelect}</b>")
+	public void selectElementInTable(String valueToSelect) throws Exception {
+		modalSetFilter.selectElementInTable(valueToSelect);
 	}
 	
 	@Validation (
@@ -36,11 +43,10 @@ public class ModalSetFilterFromListStpV {
 	}
 	
 	@Step (
-		description = "Seleccionar el elemento con el valor <b>#{elementValue}</b>",
-		expected = "Queda seleccionado el elemento"
-		/*saveHtmlPage=SaveWhen.Always*/)
-	public void selectElementByValue(String elementValue) throws Exception {
-		modalSetFilter.selectElementByValue(elementValue);
+		description = "Buscar <b>#{valueToSearch}</b> y seleccionar el elemento con el valor <b>#{valueToSelect}</b>",
+		expected = "Queda seleccionado el elemento")
+	public void searchAndSelectElement(String valueToSearch, String valueToSelect) throws Exception {
+		modalSetFilter.findByBuscarAndSelectElement(valueToSearch, valueToSelect);
 	}
 	
 	@Step (
@@ -62,7 +68,7 @@ public class ModalSetFilterFromListStpV {
 			throw new ClassCastException(
 				modalSetFilter.getClass() + " is not instance of " + ModalSelectMultiItem.class.getName());
 		}
-		((ModalSelectMultiItem)modalSetFilter).selectElementsByValue(listValueElementsToSelect);
+		((ModalSelectMultiItem)modalSetFilter).searchAndSelectElementsByValue(listValueElementsToSelect);
 	}
 	
 	@Step (

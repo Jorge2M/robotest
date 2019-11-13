@@ -40,8 +40,32 @@ public abstract class SelectBase extends WebdrvWrapp {
 	
 	private WebElement unfoldSelectAndGetOption(String valueToSelect) {
 		clickArrowToUnfold();
+		return (getOption(valueToSelect));
+	}
+	
+	private WebElement getOption(String valueToSelect) {
+		WebElement option = getOptionV1(valueToSelect);
+		if (option!=null) {
+			return option;
+		} else {
+			return (getOptionV2(valueToSelect));
+		}
+	}
+	
+	private WebElement getOptionV1(String valueToSelect) {
 		By byOption = By.xpath(getXPathOption() + "//self::*[text()='" + valueToSelect + "']");
 		return (getElementVisible(driver, byOption));
+	}
+	
+	private WebElement getOptionV2(String valueToSelect) {
+		By byOption = By.xpath(getXPathOption());
+		for (WebElement option : driver.findElements(byOption)) {
+			if (valueToSelect.compareTo(option.getText())==0 &&
+				option.isDisplayed()) {
+				return option;
+			}
+		}
+		return null;
 	}
 	
 	public void selectByPosition(int positionToSelect) {

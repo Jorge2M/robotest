@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputFilterFromSelectItem;
-import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputFilterFromSelectMultiItem;
-import com.mng.sapfiori.test.testcase.generic.webobject.makers.FieldFilterHeadMaker;
+import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForSelectItem;
+import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForSelectMultiItem;
+import com.mng.sapfiori.test.testcase.generic.webobject.makers.StandarElementsMaker;
 import com.mng.sapfiori.test.testcase.generic.webobject.pages.PageFilter;
 import com.mng.sapfiori.test.testcase.webobject.iconsmenu.OptionMenu;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
@@ -20,8 +20,8 @@ public class PageSelProdsToReclassify extends PageFilter {
 	public static OptionMenu option = OptionMenu.ClasificarProductos;
 	
 	//Filters
-	public final InputFilterFromSelectItem filterEsquemaNumeracion;
-	public final InputFilterFromSelectMultiItem filterProducto;
+	public final InputWithIconForSelectItem filterEsquemaNumeracion;
+	public final InputWithIconForSelectMultiItem filterProducto;
 	
 	private final static String XPathVolverClasificarButton = "//button[@id[contains(.,'btnReclassify')]]";
 	private final static String XPathTableDataProducs = "//table[@id[contains(.,'Table-table')]]";
@@ -30,9 +30,9 @@ public class PageSelProdsToReclassify extends PageFilter {
 	
 	private PageSelProdsToReclassify(WebDriver driver) {
 		super(option, driver);
-		FieldFilterHeadMaker filterHeader = new FieldFilterHeadMaker(driver);
-		filterEsquemaNumeracion = filterHeader.getInputModalWithSelectItem("Esquema numeración");
-		filterProducto = filterHeader.getInputModalWithSelectMultiItem("Producto");
+		StandarElementsMaker standarMaker = StandarElementsMaker.getNew(driver);
+		filterEsquemaNumeracion = standarMaker.getInputWithIconForSelectItem("Esquema numeración");
+		filterProducto = standarMaker.getInputWithIconForSelectMultiItem("Producto");
 	}
 	public static PageSelProdsToReclassify getNew(WebDriver driver) {
 		return new PageSelProdsToReclassify(driver);
@@ -109,7 +109,7 @@ public class PageSelProdsToReclassify extends PageFilter {
 	}
 	
 	public List<ProductData> getData(List<String> productsId) throws Exception {
-		waitForPageLoaded(driver);
+		waitForPageFinished(driver);
 		List<ProductData> listProductData = new ArrayList<>();
 		for (String productId : productsId) {
 			int posInTheTable = getNumRowWithIdProduct(productId);

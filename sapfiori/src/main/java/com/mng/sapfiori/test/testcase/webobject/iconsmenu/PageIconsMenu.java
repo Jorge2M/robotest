@@ -6,6 +6,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.sapfiori.test.testcase.generic.webobject.makers.StandarElementsMaker;
+import com.mng.sapfiori.test.testcase.generic.webobject.modals.ModalLoading;
 import com.mng.sapfiori.test.testcase.webobject.pedidos.PageGestionSolPedidoBuyer;
 import com.mng.sapfiori.test.testcase.webobject.reclassifprods.PageSelProdsToReclassify;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
@@ -13,12 +15,14 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 public class PageIconsMenu extends WebdrvWrapp {
 	
 	private final WebDriver driver;
+	private final StandarElementsMaker standarMaker;
 	
 	private final static String XPathLabelInitialPageSpanish = "//h1[text()='Página inicial']";
 
 	
 	private PageIconsMenu(WebDriver driver) {
 		this.driver = driver;
+		this.standarMaker = StandarElementsMaker.getNew(driver);
 	}
 	
 	public static PageIconsMenu getNew(WebDriver driver) {
@@ -55,12 +59,11 @@ public class PageIconsMenu extends WebdrvWrapp {
 		return PageGestionSolPedidoBuyer.getNew(driver);
 	}
 
-	private final static String XPathDivLoading = "//div[@class[contains(.,'sapUiLocalBusy')]]";
-	
 	private void clickOption(List<String> textsInIcon) throws Exception {
 		String xpath = getXPathOption(textsInIcon);
 		clickAndWaitLoad(driver, By.xpath(xpath));
-		isElementVisibleUntil(driver, By.xpath(XPathDivLoading), 3);
-		isElementInvisibleUntil(driver, By.xpath(XPathDivLoading), 10);
+		ModalLoading modalLoading = standarMaker.getModalLoading(driver);
+		modalLoading.isVisibleUntil(3);
+		modalLoading.isInvisibleUntil(10);
 	}
 }

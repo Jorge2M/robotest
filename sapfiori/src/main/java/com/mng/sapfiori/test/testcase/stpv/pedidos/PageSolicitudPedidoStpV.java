@@ -1,5 +1,6 @@
 package com.mng.sapfiori.test.testcase.stpv.pedidos;
 
+import com.mng.sapfiori.test.testcase.webobject.pedidos.InfoGeneralSolPedido;
 import com.mng.sapfiori.test.testcase.webobject.pedidos.PageSolicitudPedido;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
@@ -27,6 +28,12 @@ public class PageSolicitudPedidoStpV {
 	}
 	
 	@Step (
+		description="Introducimos la información general del pedido:<br>#{infoGeneral}")
+	public void inputInfoGeneral(InfoGeneralSolPedido infoGeneral) {
+		pageObject.inputInfoGeneral(infoGeneral);
+	}
+	
+	@Step (
 		description="Selecciona el icono de + para añadir articulos y seleccionar <b>#{concepto}</b>",
 		expected="Aparece la página de \"Posición de solicitud de pedido\"")
 	public PagePosSolicitudPedidoStpV añadirArticulo(String concepto) throws Exception {
@@ -37,5 +44,4 @@ public class PageSolicitudPedidoStpV {
 		pagePosSolPedidoStpV.checkIsPage(5);
 		return pagePosSolPedidoStpV;
 	}
-	
 }

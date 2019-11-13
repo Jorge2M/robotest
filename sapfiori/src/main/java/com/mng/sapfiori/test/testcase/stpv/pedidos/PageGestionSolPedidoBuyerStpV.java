@@ -4,7 +4,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.sapfiori.test.testcase.generic.stpv.modals.ModalSelectConditionsStpV;
-import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.ModalSelectConditions;
+import com.mng.sapfiori.test.testcase.generic.webobject.modals.ModalSelectConditions;
 import com.mng.sapfiori.test.testcase.webobject.pedidos.PageGestionSolPedidoBuyer;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.boundary.aspects.step.Step;

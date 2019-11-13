@@ -1,20 +1,29 @@
 package com.mng.sapfiori.test.testcase.generic.webobject.modals;
 
+import java.util.Map;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.buscar.InputBuscador;
+import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconBase;
+import com.mng.sapfiori.test.testcase.generic.webobject.makers.StandarElementsMaker;
+import com.mng.sapfiori.test.testcase.generic.webobject.utils.SeleniumUtils;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
-public abstract class ModalSelectFromListBase {
+public abstract class ModalSelectFromListBase extends SeleniumUtils {
 
 	final String label;
 	final WebDriver driver;
 	
+	final StandarElementsMaker standarMaker;
+	final InputBuscador inputBuscador;
+	
 	private final static String XPathHeaderBar = "//div[@class[contains(.,'sapMBarPH')]]";
 	private final static String TagLabel = "@TabLabel";
 	private final static String XPathTitleModalWithTag = XPathHeaderBar + "/span[@title='Seleccionar: " + TagLabel + "']";
-	//private final static String XPathInputField = "//div[@id[contains(.,'NmbrSchm') and not(@id[contains(.,'NmbrSchm')])]]//input";
+	
 	private final static String XPathInputField = "//input[@id[contains(.,'-inner')]]";
 	private final static String XPathOkButton = "//button[@id[contains(.,'-ok')]]";
 	
@@ -25,6 +34,8 @@ public abstract class ModalSelectFromListBase {
 	ModalSelectFromListBase(String label, WebDriver driver) {
 		this.label = label;
 		this.driver = driver;
+		this.standarMaker = StandarElementsMaker.getNew(driver);
+		this.inputBuscador = standarMaker.getInputBuscador();
 	}
 	
 	private String getXPathTitleModal() {
@@ -45,11 +56,11 @@ public abstract class ModalSelectFromListBase {
 	}
 
 	public void clickEnterToShowInitialElements() throws Exception {
-		WebdrvWrapp.waitForPageLoaded(driver);
+		waitForPageFinished(driver);
 		By byInputField = By.xpath(XPathInputField);
 		driver.findElement(byInputField).click();
 		driver.findElement(byInputField).sendKeys(Keys.RETURN);
-		WebdrvWrapp.waitForPageLoaded(driver);
+		waitForPageFinished(driver);
 	}
 
 	public boolean isElementListPresent(int maxSeconds) {
@@ -61,21 +72,28 @@ public abstract class ModalSelectFromListBase {
 		WebdrvWrapp.clickAndWaitLoad(driver, byElem);
 	}
 	
-	public void selectElementByValue(String valueElement) throws Exception {
-		//1o hemos de buscar para que aparezca una lista con 1 sólo elemento (los elementos no visibles no se pueden seleccionar)
-		searchElementByValue(valueElement); 
-		String xpath = getXPathForSelectElementByValue(valueElement);
-		WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(xpath), 3);
-		WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xpath));
+	public void findByBuscarAndSelectElement(String valueToSearch, String valueToSelectInTable) throws Exception {
+		waitForPageFinished(driver);
+		inputBuscador.sendText(valueToSearch);
+		inputBuscador.clickLupaForSearch();
+		selectElementInTable(valueToSelectInTable);
 	}
 	
-	private void searchElementByValue(String valueElement) throws Exception {
-		//WebElement inputElement = driver.findElement(By.xpath(XPathInputField));
-		//WebdrvWrapp.sendKeysWithRetry(2, inputElement, valueElement);
-		WebdrvWrapp.waitForPageLoaded(driver);
-		By byInputField = By.xpath(XPathInputField);
-		driver.findElement(byInputField).sendKeys(valueElement);
+	public void findByFiltersAndSelectElement(Map<String,String> inputLabelAndValues, String valueToSelectInTable) 
+	throws Exception {
+		waitForPageFinished(driver);
+		for (Map.Entry<String,String> labelAndValue : inputLabelAndValues.entrySet()) {
+			InputWithIconBase inputWeb = standarMaker.getInputWithIconForSelectItem(labelAndValue.getKey());
+			inputWeb.sendKeys(labelAndValue.getValue());
+		}
 		clickEnterToShowInitialElements();
+		selectElementInTable(valueToSelectInTable);
+	}
+	
+	public void selectElementInTable(String valueToSelect) throws Exception {
+		String xpath = getXPathForSelectElementByValue(valueToSelect);
+		WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(xpath), 3);
+		WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xpath));
 	}
 	
 	public void clickOkButton() throws Exception {

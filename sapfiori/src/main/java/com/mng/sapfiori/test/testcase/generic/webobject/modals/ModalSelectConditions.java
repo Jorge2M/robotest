@@ -1,4 +1,4 @@
-package com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal;
+package com.mng.sapfiori.test.testcase.generic.webobject.modals;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -66,7 +66,7 @@ public class ModalSelectConditions extends WebdrvWrapp {
 		selectExcluir = maker.getSelectEstandardWithoutLabel(idSelectExclude);
 	}
 	
-	static ModalSelectConditions getNew(WebDriver driver) {
+	public static ModalSelectConditions getNew(WebDriver driver) {
 		return new ModalSelectConditions(driver);
 	}
 	

@@ -4,18 +4,18 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.sapfiori.test.testcase.generic.webobject.modals.ModalSelectMultiItem;
 
-public class InputFilterFromSelectItem extends InputFilterWithModalBase {
+public class InputWithIconForSelectItem extends InputWithIconBase {
 
-	private InputFilterFromSelectItem(String label, WebDriver driver) {
+	private InputWithIconForSelectItem(String label, WebDriver driver) {
 		super(label, driver);
 	}
 	
-	public static InputFilterFromSelectItem getNew(String label, WebDriver driver) {
-		return new InputFilterFromSelectItem(label, driver);
+	public static InputWithIconForSelectItem getNew(String label, WebDriver driver) {
+		return new InputWithIconForSelectItem(label, driver);
 	}
 	
 	public ModalSelectMultiItem clickIconSetFilter() throws Exception {
 		super.clickIconBase();
-		return ModalSelectMultiItem.getNew(label, driver);
+		return standarElements.getModalSelectMultiItem(label, driver);
 	}
 }

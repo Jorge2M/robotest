@@ -3,9 +3,10 @@ package com.mng.sapfiori.test.testcase.webobject.reclassifprods;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.sapfiori.test.testcase.generic.webobject.utils.SeleniumUtils;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
-public class PageReclassifProducts extends WebdrvWrapp {
+public class PageReclassifProducts extends SeleniumUtils {
 
 	private final WebDriver driver;
 	
@@ -26,7 +27,7 @@ public class PageReclassifProducts extends WebdrvWrapp {
 	}
 	
 	public void writeInputCodEstadMerc(String newCodEstadMerc) throws Exception {
-		waitForPageLoaded(driver);
+		waitForPageFinished(driver);
 		driver.findElement(By.xpath(XPathInputCodEstadMerc)).sendKeys(newCodEstadMerc);
 	}
 	

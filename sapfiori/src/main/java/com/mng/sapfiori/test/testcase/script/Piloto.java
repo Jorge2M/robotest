@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import com.mng.testmaker.domain.TestCaseTM;
-import com.mng.sapfiori.test.testcase.generic.stpv.modals.ModalSetFilterFromListStpV;
+import com.mng.sapfiori.test.testcase.generic.stpv.modals.ModalSelectItemStpV;
 import com.mng.sapfiori.test.testcase.stpv.iconsmenu.PageIconsMenuStpV;
 import com.mng.sapfiori.test.testcase.stpv.login.PageLoginStpV;
 import com.mng.sapfiori.test.testcase.stpv.reclassifprods.PageReclassifProductsStpV;
@@ -35,10 +35,10 @@ public class Piloto {
     		pageInitialStpV.clickClasificarProductos();
     	
     	//Define Filters
-    	ModalSetFilterFromListStpV modalSetFilterStpV = 
+    	ModalSelectItemStpV modalSetFilterStpV = 
     		pageSelProductsStpV.clickIconEsquemaNumeracion();
     	
-    	modalSetFilterStpV.selectElementByValue("EU01");
+    	modalSetFilterStpV.searchAndSelectElement("EU01", "EU01");
     	
     	List<String> productsToReclassify = Arrays.asList("1810101GKC01003", "1830950HPM002445");
     	modalSetFilterStpV = 

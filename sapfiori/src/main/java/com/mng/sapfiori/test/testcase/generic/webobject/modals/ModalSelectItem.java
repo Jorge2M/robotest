@@ -9,7 +9,7 @@ public class ModalSelectItem extends ModalSelectFromListBase {
 		super(label, driver);
 	}
 	
-	static ModalSelectItem getNew(String label, WebDriver driver) {
+	public static ModalSelectItem getNew(String label, WebDriver driver) {
 		return new ModalSelectItem(label, driver);
 	}
 }

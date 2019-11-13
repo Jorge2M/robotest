@@ -6,8 +6,8 @@ import org.openqa.selenium.WebDriver;
 import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.buscar.InputBuscador;
 import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.select.SelectEstandard;
 import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.select.SelectMultiValue;
-import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputFilterWithConditions;
-import com.mng.sapfiori.test.testcase.generic.webobject.makers.FieldFilterHeadMaker;
+import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForDefineConditions;
+import com.mng.sapfiori.test.testcase.generic.webobject.makers.StandarElementsMaker;
 import com.mng.sapfiori.test.testcase.generic.webobject.pages.PageFilter;
 import com.mng.sapfiori.test.testcase.webobject.iconsmenu.OptionMenu;
 
@@ -18,7 +18,7 @@ public class PageGestionSolPedidoBuyer extends PageFilter {
 	//Filters
 	public final InputBuscador filterBuscar;
 	public final SelectEstandard filterSelEstadoEdicion;
-	public final InputFilterWithConditions filterPurchaseRequisition;
+	public final InputWithIconForDefineConditions filterPurchaseRequisition;
 	public final SelectMultiValue filterSelClaseDocumento;
 	
 	private final static String XPathLineaPedido = "//tr[@id[contains(.,'ColumnListItem')]]";
@@ -27,11 +27,11 @@ public class PageGestionSolPedidoBuyer extends PageFilter {
 	
 	private PageGestionSolPedidoBuyer(WebDriver driver) {
 		super(option, driver);
-		FieldFilterHeadMaker filterHeader = new FieldFilterHeadMaker(driver);
-		filterBuscar = filterHeader.getInputBuscador();
-		filterSelEstadoEdicion = filterHeader.getSelectEstandard("Estado de edición");
-		filterPurchaseRequisition = filterHeader.getInputModalWithSelectConditions("Purchase Requisition");
-		filterSelClaseDocumento = filterHeader.getSelectMultiValue("Clase documento");
+		StandarElementsMaker elementsMaker = StandarElementsMaker.getNew(driver);
+		filterBuscar = elementsMaker.getInputBuscador();
+		filterSelEstadoEdicion = elementsMaker.getSelectEstandard("Estado de edición");
+		filterPurchaseRequisition = elementsMaker.getInputWithIconForDefineConditions("Purchase Requisition");
+		filterSelClaseDocumento = elementsMaker.getSelectMultiValue("Clase documento");
 	}
 	
 	public static PageGestionSolPedidoBuyer getNew(WebDriver driver) {
@@ -39,6 +39,7 @@ public class PageGestionSolPedidoBuyer extends PageFilter {
 	}
 
 	public PageSolicitudPedido clickIconAñadirPedido() throws Exception {
+		waitForPageFinished(driver);
 		clickAndWaitLoad(driver, By.xpath(XPathIconSolPedido));
 		return PageSolicitudPedido.getNew(driver);
 	}

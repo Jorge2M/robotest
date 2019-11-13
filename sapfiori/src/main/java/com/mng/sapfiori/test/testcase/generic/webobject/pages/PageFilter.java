@@ -3,10 +3,11 @@ package com.mng.sapfiori.test.testcase.generic.webobject.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.sapfiori.test.testcase.generic.webobject.utils.SeleniumUtils;
 import com.mng.sapfiori.test.testcase.webobject.iconsmenu.OptionMenu;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
-public abstract class PageFilter extends WebdrvWrapp {
+public abstract class PageFilter extends SeleniumUtils {
 
 	public final WebDriver driver;
 	public final OptionMenu option;
@@ -28,7 +29,7 @@ public abstract class PageFilter extends WebdrvWrapp {
 	}
 	
 	public void clickIrButton() throws Exception {
-		WebdrvWrapp.waitForPageLoaded(driver);
+		waitForPageFinished(driver);
 		clickAndWaitLoad(driver, By.xpath(XPathIrButton));
 	}
 }

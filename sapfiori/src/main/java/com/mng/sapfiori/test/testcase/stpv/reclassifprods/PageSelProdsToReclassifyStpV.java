@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.sapfiori.test.testcase.generic.stpv.modals.ModalSetFilterFromListStpV;
+import com.mng.sapfiori.test.testcase.generic.stpv.modals.ModalSelectItemStpV;
 import com.mng.sapfiori.test.testcase.webobject.reclassifprods.PageReclassifProducts;
 import com.mng.sapfiori.test.testcase.webobject.reclassifprods.PageSelProdsToReclassify;
 import com.mng.sapfiori.test.testcase.webobject.reclassifprods.PageSelProdsToReclassify.ProductData;
@@ -44,18 +44,18 @@ public class PageSelProdsToReclassifyStpV {
 	@Step (
 		description = "Clickar el icono del filtro <b>Esquema numeración</b>",
 		expected = "Aparece el modal para definir los datos del filtro")
-	public ModalSetFilterFromListStpV clickIconEsquemaNumeracion() throws Exception {
+	public ModalSelectItemStpV clickIconEsquemaNumeracion() throws Exception {
 		return (
-			ModalSetFilterFromListStpV.getNew(
+			ModalSelectItemStpV.getNew(
 				pageSelProductsToReclassify.filterEsquemaNumeracion.clickIconSetFilter()));
 	}
 	
 	@Step (
 		description = "Clickar el icono del filtro <b>Producto</b>",
 		expected = "Aparece el modal para definir los datos del filtro")
-	public ModalSetFilterFromListStpV clickIconProducto() throws Exception {
+	public ModalSelectItemStpV clickIconProducto() throws Exception {
 		return (
-			ModalSetFilterFromListStpV.getNew(
+			ModalSelectItemStpV.getNew(
 				pageSelProductsToReclassify.filterProducto.clickIconSetFilter()));
 	}
 	

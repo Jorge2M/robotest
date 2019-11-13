@@ -2,7 +2,20 @@ package com.mng.sapfiori.test.testcase.generic.webobject.makers;
 
 import org.openqa.selenium.WebDriver;
 
+import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.buscar.InputBuscador;
+import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.select.SelectEstandard;
 import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.select.SelectEstandardWithoutLabel;
+import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.select.SelectFilterEstandard;
+import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.select.SelectFilterMultiValue;
+import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.select.SelectMultiValue;
+import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputBase;
+import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForDefineConditions;
+import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForSelectItem;
+import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForSelectMultiItem;
+import com.mng.sapfiori.test.testcase.generic.webobject.modals.ModalLoading;
+import com.mng.sapfiori.test.testcase.generic.webobject.modals.ModalSelectConditions;
+import com.mng.sapfiori.test.testcase.generic.webobject.modals.ModalSelectItem;
+import com.mng.sapfiori.test.testcase.generic.webobject.modals.ModalSelectMultiItem;
 
 public class StandarElementsMaker {
 
@@ -16,7 +29,52 @@ public class StandarElementsMaker {
 		return new StandarElementsMaker(driver);
 	}
 	
+	//Selects
+	public SelectEstandard getSelectEstandard(String label) {
+		return SelectFilterEstandard.getNew(label, driver);
+	}
+	
 	public SelectEstandardWithoutLabel getSelectEstandardWithoutLabel(int id) {
 		return SelectEstandardWithoutLabel.getNew(id, driver);
 	}
+	
+	public SelectMultiValue getSelectMultiValue(String label) {
+		return SelectFilterMultiValue.getNew(label, driver);
+	}
+	
+	//Inputs
+	public InputBuscador getInputBuscador() {
+		return InputBuscador.getNew(driver);
+	}
+	
+	public InputBase getInputWithoutIcon(String label) {
+		return new InputBase(label, driver);
+	}
+	
+	public InputWithIconForSelectItem getInputWithIconForSelectItem(String label) {
+		return InputWithIconForSelectItem.getNew(label, driver);
+	}
+	
+	public InputWithIconForSelectMultiItem getInputWithIconForSelectMultiItem(String label) {
+		return InputWithIconForSelectMultiItem.getNew(label, driver);
+	}
+	
+	public InputWithIconForDefineConditions getInputWithIconForDefineConditions(String label) {
+		return InputWithIconForDefineConditions.getNew(label, driver);
+	}
+	
+	//Modales
+	public ModalSelectConditions getModalSelectConditions() {
+		return ModalSelectConditions.getNew(driver);
+	}
+	public ModalSelectItem getModalSelectItem(String label, WebDriver driver) {
+		return ModalSelectItem.getNew(label, driver);
+	}
+	public ModalSelectMultiItem getModalSelectMultiItem(String label, WebDriver driver) {
+		return ModalSelectMultiItem.getNew(label, driver);
+	}
+	public ModalLoading getModalLoading(WebDriver driver) {
+		return ModalLoading.getNew(driver);
+	}
+	
 }
