@@ -1,6 +1,8 @@
 package com.mng.sapfiori.test.testcase.stpv.pedidos;
 
+import com.mng.sapfiori.test.testcase.generic.webobject.modals.ModalMessages;
 import com.mng.sapfiori.test.testcase.webobject.pedidos.InfoGeneralSolPedido;
+import com.mng.sapfiori.test.testcase.webobject.pedidos.InputFieldPedido;
 import com.mng.sapfiori.test.testcase.webobject.pedidos.PageSolicitudPedido;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
@@ -43,5 +45,35 @@ public class PageSolicitudPedidoStpV {
 				
 		pagePosSolPedidoStpV.checkIsPage(5);
 		return pagePosSolPedidoStpV;
+	}
+	
+	@Validation (
+		description="En el 1er pedido aparece el input #{inputData.getInputPage()} con valor #{inputData.getTextToInput()}",
+		level=State.Defect)
+	public boolean checkFieldIn1rstLineaPedidos(InputDataSolPedido inputData) throws Exception {
+		return (
+			pageObject.checkFieldIn1rstLineaPedidos(inputData.getInputPage(), inputData.getTextToInput()));
+	}
+	
+	@Step (
+		description="Introducimos el valor #{value} en el input #{inputField}")
+	public void inputFielValuedIn1rstLinePedidos(InputFieldPedido inputField, String value) throws Exception {
+		pageObject.inputFielValuedIn1rstLinePedidos(inputField, value);
+	}
+	
+	@Step (
+		description="Seleccionamos el botón <b>Guardar</b>",
+		expected="No aparece el modal de errores")
+	public void clickButtonGuardar() throws Exception {
+		pageObject.clickButtonGuardar();
+		checkModalErroresNotAppears();
+	}
+	
+	@Validation (
+		description="No es visible el modal de mensajes",
+		level=State.Defect)
+	public boolean checkModalErroresNotAppears() {
+		ModalMessages modalErrores = pageObject.getElementsMaker().getModalErrores();
+		return (!modalErrores.isVisible());
 	}
 }

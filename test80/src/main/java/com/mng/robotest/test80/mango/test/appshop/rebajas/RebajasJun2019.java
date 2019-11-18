@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.robotest.test80.InputParams;
+import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
@@ -34,7 +34,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV
 public class RebajasJun2019 {
 
     public int prioridad;
-	private InputParams inputParamsSuite = null;
+	private InputParamsMango inputParamsSuite = null;
     private String index_fact;
     private Pais paisFactory = null;
     private IdiomaPais idiomaFactory = null;
@@ -54,7 +54,7 @@ public class RebajasJun2019 {
 	  
     public void setInputParamsSuite() {
     	if (inputParamsSuite==null) {
-    		inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
+    		inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
     	}
     }
     

@@ -6,7 +6,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.mng.testmaker.service.TestMaker;
-import com.mng.robotest.test80.InputParams;
+import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.test.stpv.votfcons.ConsolaVotfStpV;
 
 public class ConsolaVotf {
@@ -25,7 +25,7 @@ public class ConsolaVotf {
     public void VOFT001_GenerarPedido() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
     	
-    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
+    	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
 		String paginaIniVOTF = inputParamsSuite.getUrlBase();
 		ConsolaVotfStpV.accesoPagInicial(paginaIniVOTF, driver);
 		ConsolaVotfStpV.selectEntornoTestAndCons("Preproducción", driver);

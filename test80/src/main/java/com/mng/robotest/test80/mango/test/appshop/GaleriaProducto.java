@@ -5,7 +5,7 @@ import org.testng.annotations.*;
 
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.conf.Channel;
-import com.mng.robotest.test80.InputParams;
+import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Color;
 import com.mng.robotest.test80.mango.test.data.Constantes;
@@ -54,7 +54,7 @@ public class GaleriaProducto {
     public GaleriaProducto() {}
     
     private DataCtxShop getCtxShForTest() throws Exception {
-    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
+    	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());

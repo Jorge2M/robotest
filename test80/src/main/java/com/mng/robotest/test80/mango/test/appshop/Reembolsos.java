@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.appshop;
 
 import org.testng.annotations.*;
 
-import com.mng.robotest.test80.InputParams;
+import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -49,7 +49,7 @@ public class Reembolsos {
     private final static IdiomaPais arabia_arabe = arabia.getListIdiomas().get(0);
     
     private DataCtxShop getCtxShForTest() throws Exception {
-    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
+    	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());

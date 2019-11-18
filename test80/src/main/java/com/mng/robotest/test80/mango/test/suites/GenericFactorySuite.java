@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.suites;
 import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getParametersSuiteShop;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.InputParams;
+import com.mng.robotest.test80.InputParamsMango;
 import com.mng.testmaker.domain.SuiteMaker;
 import com.mng.testmaker.domain.TestRunMaker;
 import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.test.factoryes.GenericFactory;
 
 public class GenericFactorySuite extends SuiteMaker {
 
-    public GenericFactorySuite(InputParams inputParams) {
+    public GenericFactorySuite(InputParamsMango inputParams) {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
     	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), GenericFactory.class);

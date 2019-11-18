@@ -16,6 +16,6 @@ public class InputWithIconForDefineConditions extends InputWithIconBase {
 	
 	public ModalSelectConditions clickIconSetFilter() throws Exception {
 		super.clickIconBase();
-		return standarElements.getModalSelectConditions();
+		return elementsMaker.getModalSelectConditions();
 	}
 }

@@ -5,7 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.InputParams;
+import com.mng.robotest.test80.InputParamsMango;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.conf.TypeAccessFmwk;
@@ -47,7 +47,7 @@ public class PedidosNavigations {
     
     private static void testPedidosEnManto(DataMantoAccess dMantoAcc, CopyOnWriteArrayList<DataPedido> listPedidos, WebDriver driver) 
     throws Exception {
-        TypeAccessFmwk typeAccess = ((InputParams)TestMaker.getTestCase().getInputParamsSuite()).getTypeAccess();
+        TypeAccessFmwk typeAccess = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getTypeAccess();
         if (typeAccess==TypeAccessFmwk.Bat) {
             return;
         }

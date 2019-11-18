@@ -21,28 +21,13 @@ import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriver
 public class CmdLineMaker { 
 
 	private final String[] args;
+    private static final String HelpNameParam = "help";
 	private final List<OptionTMaker> listOptions;
 	private final Class<? extends Enum<?>> suiteEnum;
 	private final Class<? extends Enum<?>> appEnum;
 	
 	private final CommandLineParser parser = new DefaultParser();
 	private final CommandLine cmdLine;
-	
-    public static String HelpNameParam = "help";
-    public static String SuiteNameParam = "suite";
-    public static String GroupsNameParam = "groups";
-    public static String BrowserNameParam = "browser";
-    public static String ChannelNameParam = "channel";
-    public static String AppNameParam = "application";
-    public static String VersionNameParam = "version";
-    public static String URLNameParam = "url";
-    public static String TCaseNameParam = "tcases";
-    
-    public static String ServerDNSNameParam = "serverDNS";
-    public static String RecicleWD = "reciclewd";
-    public static String NetAnalysis = "net";
-    public static String Store = "store";
-    public static String Mails = "mails";
 	
 	private CmdLineMaker(
 			String args[], 
@@ -70,6 +55,13 @@ public class CmdLineMaker {
 		Class<? extends Enum<?>> appEnum) throws ParseException {
 		return new CmdLineMaker(args, null, suiteEnum, appEnum);
 	}	
+	
+	public Class<? extends Enum<?>> getSuiteEnum() {
+		return suiteEnum;
+	}
+	public Class<? extends Enum<?>> getAppEnum() {
+		return appEnum;
+	}
 	
 	public CommandLine getParsedOptions() throws ParseException {
 		CommandLine cmdLineToReturn;
@@ -105,52 +97,8 @@ public class CmdLineMaker {
 	}
 	
 	public InputParamsTM getInputParamsTM() {
-		InputParamsTM inputParams = new InputParamsTM();
-		storeDataOptionsTM(inputParams);
-		return inputParams;
+		return new InputParamsTM(cmdLine, suiteEnum, appEnum);
 	}
-	
-    public void storeDataOptionsTM(InputParamsTM inputParams) {
-    	String version = cmdLine.getOptionValue(VersionNameParam);
-    	if (version==null) {
-    		version = "V1";
-    	}
-        		
-    	inputParams.setChannel(Channel.valueOf(cmdLine.getOptionValue(ChannelNameParam)));
-    	inputParams.setSuite(valueOf(suiteEnum.getEnumConstants(), cmdLine.getOptionValue(SuiteNameParam)));
-    	inputParams.setApp(valueOf(appEnum.getEnumConstants(), cmdLine.getOptionValue(AppNameParam)));
-    	inputParams.setVersionSuite(version);
-    	inputParams.setUrlBase(cmdLine.getOptionValue(URLNameParam));
-    	inputParams.setWebDriverType(WebDriverType.valueOf(cmdLine.getOptionValue(BrowserNameParam)));
-    	inputParams.setWebAppDNS(cmdLine.getOptionValue(ServerDNSNameParam));
-
-    	String[] listGroups = cmdLine.getOptionValues(GroupsNameParam);
-    	if (listGroups!=null) {
-    		inputParams.setGroupsFilter(Arrays.asList());
-    	}
-    	String[] listTestCases = cmdLine.getOptionValues(TCaseNameParam);
-    	if (listTestCases!=null) {
-    		inputParams.setTestCasesFilter(Arrays.asList(listTestCases));
-    	}
-    	String[] listMails = cmdLine.getOptionValues(Mails);
-    	if (listMails!=null) {
-    		inputParams.setMails(Arrays.asList());
-    	}
-    	
-    	String recicleWD = cmdLine.getOptionValue(RecicleWD);
-    	if (recicleWD!=null) {
-        	inputParams.setRecicleWD(recicleWD);
-    	}
-    	String netAnalysis = cmdLine.getOptionValue(NetAnalysis);
-    	if (netAnalysis!=null && "true".compareTo(netAnalysis)==0) {
-    		inputParams.setNetAnalysis(true);
-    	} 
-    	
-    	String store = cmdLine.getOptionValue(Store);
-    	if (store!=null && "true".compareTo(store)==0) {
-    		inputParams.setStoreResult(true);
-    	} 
-    }
 	
 	private Options getOptions() {
 		Options optionsReturn = new Options();
@@ -171,35 +119,35 @@ public class CmdLineMaker {
 	
 	private List<OptionTMaker> getTestMakerOptions() {
 		List<OptionTMaker> listOptionsTMaker = new ArrayList<>();
-        OptionTMaker suite = OptionTMaker.builder(SuiteNameParam)
+        OptionTMaker suite = OptionTMaker.builder(InputParamsTM.SuiteNameParam)
             .required(true)
             .hasArg()
             .possibleValues(suiteEnum)
             .desc("Test Suite to execute. Possible values: " + Arrays.asList(suiteEnum.getEnumConstants()))
             .build();
         
-        OptionTMaker groups = OptionTMaker.builder(GroupsNameParam)
+        OptionTMaker groups = OptionTMaker.builder(InputParamsTM.GroupsNameParam)
             .required(false)
             .hasArg()
             .valueSeparator(',')
             .desc("Groups of tests to include")
             .build();
                  
-        OptionTMaker browser = OptionTMaker.builder(BrowserNameParam)
+        OptionTMaker browser = OptionTMaker.builder(InputParamsTM.BrowserNameParam)
             .required(true)
             .hasArg()
             .possibleValues(WebDriverType.class)
             .desc("Browser to launch the Suite of Tests. Possible values: " + Arrays.asList(WebDriverType.values()))
             .build();
 
-        OptionTMaker channel = OptionTMaker.builder(ChannelNameParam)
+        OptionTMaker channel = OptionTMaker.builder(InputParamsTM.ChannelNameParam)
             .required(true)
             .hasArg()
             .possibleValues(Channel.class)
             .desc("Channel on which to run the browser. Possible values: " + Arrays.toString(Channel.values()))
             .build();
            
-        OptionTMaker application = OptionTMaker.builder(AppNameParam)
+        OptionTMaker application = OptionTMaker.builder(InputParamsTM.AppNameParam)
             .required(true)
             .hasArg()
             .possibleValues(appEnum)
@@ -207,54 +155,54 @@ public class CmdLineMaker {
             .build();
 
         String patternUrl = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-        OptionTMaker url = OptionTMaker.builder(URLNameParam)
+        OptionTMaker url = OptionTMaker.builder(InputParamsTM.URLNameParam)
             .required(true)
             .hasArg()
             .pattern(patternUrl)
             .desc("Initial URL of the application Web to test")
             .build();
                     
-        OptionTMaker tests = OptionTMaker.builder(TCaseNameParam)
+        OptionTMaker tests = OptionTMaker.builder(InputParamsTM.TCaseNameParam)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .desc("List of testcases comma separated (p.e. OTR001,BOR001...)")
             .build();    
         
-        OptionTMaker version = OptionTMaker.builder(VersionNameParam)
+        OptionTMaker version = OptionTMaker.builder(InputParamsTM.VersionNameParam)
             .required(false)
             .hasArg()
             .desc("Version of the TestSuite")
             .build();
         
-        OptionTMaker serverDNS = OptionTMaker.builder(ServerDNSNameParam)
+        OptionTMaker serverDNS = OptionTMaker.builder(InputParamsTM.ServerDNSNameParam)
             .required(false)
             .hasArgs()
             .desc("Server DNS where are ubicated the HTML reports (p.e. http://robottest.mangodev.net)")
             .build();
         
-        OptionTMaker recicleWD = OptionTMaker.builder(RecicleWD)
+        OptionTMaker recicleWD = OptionTMaker.builder(InputParamsTM.RecicleWD)
             .required(false)
             .hasArgs()
             .possibleValues(Arrays.asList("true", "false"))
             .desc("Gestion mode of webdriver. Possible values: true->reuse across testcases, false->don't reuse)")
             .build();
         
-        OptionTMaker netAnalysis = OptionTMaker.builder(NetAnalysis)
+        OptionTMaker netAnalysis = OptionTMaker.builder(InputParamsTM.NetAnalysis)
             .required(false)
             .hasArgs()
             .possibleValues(Arrays.asList("true", "false"))
             .desc("Net Analysis (true, false)")
             .build();
         
-        OptionTMaker store = OptionTMaker.builder(Store)
+        OptionTMaker store = OptionTMaker.builder(InputParamsTM.Store)
             .required(false)
             .hasArgs()
             .possibleValues(Arrays.asList("true", "false"))
             .desc("Store result persistentely (true, false)")
             .build();
         
-        OptionTMaker mails = OptionTMaker.builder(Mails)
+        OptionTMaker mails = OptionTMaker.builder(InputParamsTM.Mails)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
@@ -385,15 +333,5 @@ public class CmdLineMaker {
     
     private static String[] getNames(Enum<?>[] enumConstants) {
         return Arrays.stream(enumConstants).map(Enum::name).toArray(String[]::new);
-    }
-    
-    private static Enum<?> valueOf(Enum<?>[] enumConstants, String value) throws IllegalArgumentException {
-    	for (Enum<?> enumCandidate : enumConstants) {
-    		if (enumCandidate.name().equals(value)) {
-    			return enumCandidate;
-    		}
-    	}
-    	
-    	throw new IllegalArgumentException();
     }
 }

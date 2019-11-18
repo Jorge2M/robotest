@@ -5,7 +5,7 @@ import org.testng.annotations.*;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.robotest.test80.InputParams;
+import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
@@ -71,7 +71,7 @@ public class PaisIdioma {
 	  
     public void beforeMethod() throws Exception {
         if (dCtxSh==null) {
-        	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
+        	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
         	dCtxSh = new DataCtxShop();
             dCtxSh.pais = españa;
             dCtxSh.idioma = castellano;

@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.appshop;
 
 import org.testng.annotations.*;
 
-import com.mng.robotest.test80.InputParams;
+import com.mng.robotest.test80.InputParamsMango;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.TypeAccessFmwk;
 import com.mng.testmaker.service.TestMaker;
@@ -66,7 +66,7 @@ public class Compra {
     public Compra() {}	  
     
     private DataCtxShop getCtxShForTest() throws Exception {
-    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
+    	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());
@@ -226,7 +226,7 @@ public class Compra {
 	    
         //No permitiremos la ejecución diaria de este tipo de checkout porque implica la ejecución 
         //de un registro de usuario con el nuevo email introducido 
-        InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
+        InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
         if (inputParamsSuite.getTypeAccess()!=TypeAccessFmwk.Bat) {
             //Hasta página de Checkout
             FlagsTestCkout FTCkout = new FlagsTestCkout();

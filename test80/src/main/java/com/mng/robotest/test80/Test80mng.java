@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.TreeSet;
 
-import org.apache.commons.cli.CommandLine;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,19 +26,6 @@ public class Test80mng {
 	
 	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 
-    public static String CountrysNameParam = "countrys";
-    public static String LineasNameParam = "lineas";
-    public static String PaymentsNameParam = "payments";
-    
-    public static String UrlManto = "urlmanto";
-    public static String TypeAccessParam = "typeAccess";    
-    public static String CallBackResource = "callbackresource";
-    public static String CallBackMethod = "callbackmethod";
-    public static String CallBackSchema = "callbackschema";
-    public static String CallBackParams = "callbackparams";
-    public static String CallBackUser = "callbackuser";
-    public static String CallBackPassword = "callbackpassword";
-    
     public enum TypeCallbackSchema {http, https}
     public enum TypeCallBackMethod {POST, GET}
     
@@ -47,16 +33,14 @@ public class Test80mng {
     	List<OptionTMaker> optionsTest80 = specificMangoOptions();
     	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, optionsTest80, Suites.class, AppEcom.class);
     	if (cmdLineAccess.checkOptionsValue()) {
-        	InputParams inputParams = getInputParamsMango(cmdLineAccess);	
-    		cmdLineAccess.storeDataOptionsTM(inputParams);
-            execSuite(inputParams);
+            execSuite(InputParamsMango.from(cmdLineAccess));
     	}
     }
     
     private static List<OptionTMaker> specificMangoOptions() {
     	List<OptionTMaker> options = new ArrayList<>();
              
-    	OptionTMaker countrys = OptionTMaker.builder(CountrysNameParam)
+    	OptionTMaker countrys = OptionTMaker.builder(InputParamsMango.CountrysNameParam)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
@@ -64,14 +48,14 @@ public class Test80mng {
             .pattern("\\d{3}|X")
             .build();
         
-    	OptionTMaker lineas = OptionTMaker.builder(LineasNameParam)
+    	OptionTMaker lineas = OptionTMaker.builder(InputParamsMango.LineasNameParam)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .desc("List of lines comma separated (p.e. she,he,...)")
             .build();        
 
-    	OptionTMaker payments = OptionTMaker.builder(PaymentsNameParam)
+    	OptionTMaker payments = OptionTMaker.builder(InputParamsMango.PaymentsNameParam)
             .required(false)
             .hasArgs()
             .valueSeparator(',') 
@@ -79,54 +63,54 @@ public class Test80mng {
             .build();
         
     	String patternUrl = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-    	OptionTMaker urlManto = OptionTMaker.builder(UrlManto)
+    	OptionTMaker urlManto = OptionTMaker.builder(InputParamsMango.UrlManto)
             .required(false)
             .hasArgs()
             .pattern(patternUrl)
             .desc("URL of the Backoffice of mangoshop (Manto application)")
             .build();    
         
-    	OptionTMaker bat = OptionTMaker.builder(TypeAccessParam)
+    	OptionTMaker bat = OptionTMaker.builder(InputParamsMango.TypeAccessParam)
             .required(false)
             .hasArgs()
             .possibleValues(TypeAccessFmwk.class)
             .desc("Type of access. Posible values: " + Arrays.asList(TypeAccessFmwk.values()))
             .build();               
         
-    	OptionTMaker callbackResource = OptionTMaker.builder(CallBackResource)
+    	OptionTMaker callbackResource = OptionTMaker.builder(InputParamsMango.CallBackResource)
             .required(false)
             .hasArgs()
             .desc("CallBack URL (without schema and params) to invoke in the end of the TestSuite")
             .build();
         
-    	OptionTMaker callbackMethod = OptionTMaker.builder(CallBackMethod)
+    	OptionTMaker callbackMethod = OptionTMaker.builder(InputParamsMango.CallBackMethod)
             .required(false)
             .hasArgs()
             .possibleValues(TypeCallBackMethod.class)
             .desc("Method of the CallBack URL. Possible values: " + Arrays.asList(TypeCallBackMethod.values()))
             .build();        
         
-    	OptionTMaker callbackSchema = OptionTMaker.builder(CallBackSchema)
+    	OptionTMaker callbackSchema = OptionTMaker.builder(InputParamsMango.CallBackSchema)
             .required(false)
             .hasArgs()
             .possibleValues(TypeCallbackSchema.class)
             .desc("Schema of the CallBack URL. Possible values: " + Arrays.asList(TypeCallbackSchema.values()))
             .build();        
         
-    	OptionTMaker callbackParams = OptionTMaker.builder(CallBackParams)
+    	OptionTMaker callbackParams = OptionTMaker.builder(InputParamsMango.CallBackParams)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .desc("Params of the CallBack URL (in format param1:value1,param2:value2...)")
             .build();        
         
-    	OptionTMaker callbackUser = OptionTMaker.builder(CallBackUser)
+    	OptionTMaker callbackUser = OptionTMaker.builder(InputParamsMango.CallBackUser)
             .required(false)
             .hasArgs()
             .desc("User credential needed to invoke the CallBack URL")
             .build();        
 
-    	OptionTMaker callbackPassword = OptionTMaker.builder(CallBackPassword)
+    	OptionTMaker callbackPassword = OptionTMaker.builder(InputParamsMango.CallBackPassword)
             .required(false)
             .hasArgs()
             .desc("Password credential needed to invoke the CallBack URL")
@@ -147,38 +131,16 @@ public class Test80mng {
         return options;
     }
     
-    private static InputParams getInputParamsMango(CmdLineMaker cmdLineAccess) {
-    	InputParams inputParams = new InputParams();
-    	CommandLine cmdLineData = cmdLineAccess.getComandLineData();
-		inputParams.setListaPaises(cmdLineData.getOptionValues(CountrysNameParam));
-		inputParams.setListaLineas(cmdLineData.getOptionValues(LineasNameParam));
-		inputParams.setListaPayments(cmdLineData.getOptionValues(PaymentsNameParam));        
-		inputParams.setUrlManto(cmdLineData.getOptionValue(UrlManto));
-		inputParams.setTypeAccessFromStr(cmdLineData.getOptionValue(TypeAccessParam));
-        if (cmdLineData.getOptionValue(CallBackResource)!=null) {
-            CallBack callBack = new CallBack();
-            callBack.setCallBackResource(cmdLineData.getOptionValue(CallBackResource));
-            callBack.setCallBackMethod(cmdLineData.getOptionValue(CallBackMethod));
-            callBack.setCallBackUser(cmdLineData.getOptionValue(CallBackUser));
-            callBack.setCallBackPassword(cmdLineData.getOptionValue(CallBackPassword));
-            callBack.setCallBackSchema(cmdLineData.getOptionValue(CallBackSchema));
-            callBack.setCallBackParams(cmdLineData.getOptionValue(CallBackParams));
-            inputParams.setCallBack(callBack);
-        }   
-        
-        return inputParams;
-    }
-    
     /**
      * Indirect access from Command Line, direct access from Online
      */
-    public static void execSuite(InputParams inputParams) throws Exception {
+    public static void execSuite(InputParamsMango inputParams) throws Exception {
     	SuiteTM suite = makeSuite(inputParams);
     	TestMaker.run(suite);
     	callBackIfNeeded(suite, inputParams);
     }
     
-    public static SuiteTM makeSuite(InputParams inputParams) throws Exception {
+    public static SuiteTM makeSuite(InputParamsMango inputParams) throws Exception {
         inputParams.setTypeAccessIfNotSetted(TypeAccessFmwk.Online);
         try {
             switch ((Suites)inputParams.getSuite()) {
@@ -217,7 +179,7 @@ public class Test80mng {
         return null;
     }
 
-    private static void callBackIfNeeded(SuiteTM suite, InputParams inputParams) {
+    private static void callBackIfNeeded(SuiteTM suite, InputParamsMango inputParams) {
     	CallBack callBack = inputParams.getCallBack();
         if (callBack!=null) {
             String reportTSuiteURL = suite.getDnsReportHtml();
@@ -232,8 +194,7 @@ public class Test80mng {
         }
     }
 
-    
-    public static List<TestMethod> getDataTestAnnotationsToExec(InputParams inputParams) throws Exception {
+    public static List<TestMethod> getDataTestAnnotationsToExec(InputParamsMango inputParams) throws Exception {
         inputParams.setTypeAccessIfNotSetted(TypeAccessFmwk.Online);
         Suites suiteValue = (Suites)inputParams.getSuite();
         switch (suiteValue) {

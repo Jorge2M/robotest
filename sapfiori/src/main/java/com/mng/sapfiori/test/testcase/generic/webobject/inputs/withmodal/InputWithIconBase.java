@@ -1,10 +1,17 @@
 package com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 
-public class InputWithIconBase extends InputBase {
+import com.mng.sapfiori.test.testcase.generic.webobject.utils.PageObject;
+import com.mng.testmaker.conf.Log4jConfig;
 
+public class InputWithIconBase extends InputBase {
+	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
+	
 	private final static String XPathIconSetFilterRelativeLabel = "/following::div[@class='sapMInputBaseIconContainer']";
 
 	public InputWithIconBase(String label, WebDriver driver) {
@@ -12,9 +19,18 @@ public class InputWithIconBase extends InputBase {
 	}
 	
 	void clickIconBase() throws Exception {
-		waitForPageFinished(driver);
-		String xpathIcon = getXPathLabel() + XPathIconSetFilterRelativeLabel;
-		driver.findElement(By.xpath(xpathIcon)).click();
+		for (int i=0; i<3; i++) {
+			try {
+				waitForPageFinished();
+				String xpathIcon = getXPathLabel() + XPathIconSetFilterRelativeLabel;
+				driver.findElement(By.xpath(xpathIcon)).click();
+				break;
+			}
+			catch (StaleElementReferenceException e) {
+				PageObject.waitMillis(100);
+				pLogger.info(e);
+			}
+		}
 	}
 	
 }

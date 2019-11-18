@@ -27,7 +27,7 @@ public class ValesPaises {
     public Object[] createInstances(String countrys, ITestContext ctxTestRun) throws Exception {
     	List<Object> listTests = new ArrayList<>();
     	InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
-    	VersionValesSuite version = VersionValesSuite.valueOf(inputData.getVersionSuite());
+    	VersionValesSuite version = VersionValesSuite.valueOf(inputData.getVersion());
         Calendar currDtCal = Calendar.getInstance();
         for (Campanya campanya : Campanya.values()) {
         	if (!version.filtroCalendario() || 

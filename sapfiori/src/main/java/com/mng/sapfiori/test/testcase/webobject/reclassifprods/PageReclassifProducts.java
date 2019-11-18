@@ -3,19 +3,17 @@ package com.mng.sapfiori.test.testcase.webobject.reclassifprods;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.sapfiori.test.testcase.generic.webobject.utils.SeleniumUtils;
+import com.mng.sapfiori.test.testcase.generic.webobject.utils.PageObject;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
-public class PageReclassifProducts extends SeleniumUtils {
-
-	private final WebDriver driver;
+public class PageReclassifProducts extends PageObject {
 	
 	private final static String XPathPageHeader = "//h1[text()[contains(.,'Reclasificación de productos')]]";
 	private final static String XPathInputCodEstadMerc = "//input[@id[contains(.,'inputCommodityCode')]]";
 	private final static String XPathGrabarButton = "//button[@id[contains(.,'btnMassSave')]]//bdi";
 	
 	private PageReclassifProducts(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 	}
 	
 	public static PageReclassifProducts getNew(WebDriver driver) {
@@ -27,7 +25,7 @@ public class PageReclassifProducts extends SeleniumUtils {
 	}
 	
 	public void writeInputCodEstadMerc(String newCodEstadMerc) throws Exception {
-		waitForPageFinished(driver);
+		waitForPageFinished();
 		driver.findElement(By.xpath(XPathInputCodEstadMerc)).sendKeys(newCodEstadMerc);
 	}
 	

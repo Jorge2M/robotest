@@ -23,7 +23,7 @@ public class MenusFactory {
         InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
         AppEcom app = (AppEcom)inputData.getApp();
         Channel channel = inputData.getChannel();
-        VersionMenusPais version = VersionMenusPais.valueOf(inputData.getVersionSuite());
+        VersionMenusPais version = VersionMenusPais.valueOf(inputData.getVersion());
         List<Pais> listCountrys = Utilidades.getListCountrysFiltered(countrysStr);
         int prioridad=0;
         for (Pais pais : listCountrys) {

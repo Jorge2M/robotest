@@ -3,15 +3,14 @@ package com.mng.sapfiori.test.testcase.generic.webobject.modals;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.sapfiori.test.testcase.generic.webobject.utils.SeleniumUtils;
+import com.mng.sapfiori.test.testcase.generic.webobject.utils.PageObject;
 
-public class ModalLoading extends SeleniumUtils {
+public class ModalLoading extends PageObject {
 
-	private final WebDriver driver;
 	private final static String XPathDivLoading = "//div[@class[contains(.,'sapUiLocalBusy')]]";
 	
 	private ModalLoading(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 	}
 	public static ModalLoading getNew(WebDriver driver) {
 		return new ModalLoading(driver);

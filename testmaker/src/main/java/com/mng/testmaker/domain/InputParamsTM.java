@@ -1,188 +1,241 @@
 package com.mng.testmaker.domain;
 
+import java.util.Arrays;
 import java.util.List;
+import javax.ws.rs.FormParam;
+import org.apache.commons.cli.CommandLine;
 
+import com.mng.testmaker.boundary.access.CmdLineMaker;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.testfilter.DataFilterTCases;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
 public class InputParamsTM {
-	
-	public enum ManagementWebdriver {recycle, discard}
-	
-	private Channel channel;
-	private Enum<?> suite;
-	private Enum<?> app;
-    private String versionSuite;
-    private WebDriverType webDriverType;
-    private String urlBase;
+
+    public static final String SuiteNameParam = "suite";
+    public static final String GroupsNameParam = "groups";
+    public static final String BrowserNameParam = "browser";
+    public static final String ChannelNameParam = "channel";
+    public static final String AppNameParam = "application";
+    public static final String VersionNameParam = "version";
+    public static final String URLNameParam = "url";
+    public static final String TCaseNameParam = "tcases";
     
-    private ManagementWebdriver typeManageWebdriver = ManagementWebdriver.discard;
-    private boolean netAnalysis = false;  
-    private boolean recicleWD = false;
-    private String webAppDNS;
-    private List<String> testCasesFilter;
-    private List<String> groupsFilter;
-    private List<String> mails;
-    private boolean storeResult = false;
+    public static final String ServerDNSNameParam = "serverDNS";
+    public static final String RecicleWD = "reciclewd";
+    public static final String NetAnalysis = "net";
+    public static final String Store = "store";
+    public static final String Mails = "mails";
+    
+	public enum ManagementWebdriver {recycle, discard}
+	private Class<? extends Enum<?>> suiteEnum;
+	private Class<? extends Enum<?>> appEnum;
+    
+    @FormParam(SuiteNameParam)
+    String suite;
+    
+    @FormParam(GroupsNameParam)
+    String[] groups;
+    
+    @FormParam(BrowserNameParam)
+    String browser;
+    
+    @FormParam(ChannelNameParam)
+    String channel;
+    
+    @FormParam(AppNameParam)
+    String application;
+    
+    @FormParam(VersionNameParam)
+    String version;
+    
+    @FormParam(URLNameParam)
+    String url;
+    
+    @FormParam(TCaseNameParam)
+    String[] tcases;
+    
+    @FormParam(ServerDNSNameParam)
+    String serverDNS;
+    
+    @FormParam(RecicleWD)
+    String reciclewd;
+    
+    @FormParam(NetAnalysis)
+    String net;
+    
+    @FormParam(Store)
+    String store;
+    
+    @FormParam(Mails)
+    String[] mails;
     
     public InputParamsTM() {}
     
-    public InputParamsTM(Channel channel, Enum<?> suite, Enum<?> app, String urlBase, WebDriverType webDriverType) {
-    	this.channel = channel;
-    	this.suite = suite;
-    	this.app = app;
-    	this.versionSuite = "V1";
-    	this.urlBase = urlBase;
-    	this.webDriverType = webDriverType;
+    public InputParamsTM(CmdLineMaker cmdLineMaker) {
+    	this(cmdLineMaker.getComandLineData(), cmdLineMaker.getSuiteEnum(), cmdLineMaker.getAppEnum());
+    }
+    
+	public InputParamsTM(CommandLine cmdLine, Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) {
+		this(suiteEnum, appEnum);
+        channel = cmdLine.getOptionValue(ChannelNameParam);
+        suite = cmdLine.getOptionValue(SuiteNameParam);
+        application = cmdLine.getOptionValue(AppNameParam);
+    	version = cmdLine.getOptionValue(VersionNameParam);
+    	url = cmdLine.getOptionValue(URLNameParam);
+    	browser = cmdLine.getOptionValue(BrowserNameParam);
+    	serverDNS = cmdLine.getOptionValue(ServerDNSNameParam);
+    	groups = cmdLine.getOptionValues(GroupsNameParam);
+    	tcases = cmdLine.getOptionValues(TCaseNameParam);
+    	mails = cmdLine.getOptionValues(Mails);
+    	reciclewd = cmdLine.getOptionValue(RecicleWD);
+    	net = cmdLine.getOptionValue(NetAnalysis);
+    	store = cmdLine.getOptionValue(Store);
+	}
+	
+    public InputParamsTM(Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) {
+		this.suiteEnum = suiteEnum;
+		this.appEnum = appEnum;
     }
 
-    public String getMoreInfo() {
-    	return "";
+    public Channel getChannel() {
+    	return Channel.valueOf(channel);
     }
-    
-	public Channel getChannel() {
-		return channel;
-	}
-	
-	public void setChannel(Channel channel) {
-		this.channel = channel;
-	}
-	
-	public void setChannel(String channel) {
-		setChannel(Channel.valueOf(channel));
-	}
-    
-	public Enum<?> getSuite() {
+    public void setChannel(String channel) {
+    	this.channel = channel;
+    }
+    public void setChannel(Channel channel) {
+    	this.channel = channel.name();
+    }
+    public Enum<?> getSuite() {
+    	return (valueOf(suiteEnum.getEnumConstants(), suite));
+    }
+	public String getSuiteName() {
 		return suite;
 	}
-	
-	public void setSuite(Enum<?> suite) {
+	public void setSuite(String suite) {
 		this.suite = suite;
 	}
-	
-	public String getSuiteName() {
-		return suite.name();
+	public void setSuite(Enum<?> suite) {
+		this.suite = suite.name();
 	}
-
-	public Enum<?> getApp() {
-		return app;
-	}
-	
-	public void setApp(Enum<?> app) {
-		this.app = app;
-	}
-    
-	public String getVersionSuite() {
-		return versionSuite;
-	}
-	
-	public void setVersionSuite(String versionSuite) {
-		this.versionSuite = versionSuite;
-	}
-	
-	public WebDriverType getWebDriverType() {
-		return webDriverType;
-	}
-	
-	public void setWebDriverType(WebDriverType webDriverType) {
-		this.webDriverType = webDriverType;
-	}
-	
-	public ManagementWebdriver getTypeManageWebdriver() {
-		return typeManageWebdriver;
-	}
-
-	public void setTypeManageWebdriver(ManagementWebdriver typeManageWebdriver) {
-		this.typeManageWebdriver = typeManageWebdriver;
-	}
-	
-	public void setBrowser(String browser) {
-		setWebDriverType(WebDriverType.valueOf(browser));
-	}
-	
-	public String getUrlBase() {
-		return this.urlBase;
-	}
-	
-	public void setUrlBase(String urlBase) {
-		this.urlBase = urlBase;
-	}
-	
-	public boolean isNetAnalysis() {
-		return netAnalysis;
-	}
-
-	public void setNetAnalysis(boolean netAnalysis) {
-		this.netAnalysis = netAnalysis;
-	}
-	
-	public void setNetAnalysis(String netAnalysis) {
-		this.netAnalysis = "true".compareTo(netAnalysis) == 0;
-	}
-	
-	public boolean getRecicleWD() {
-		return this.recicleWD;
-	}
-	
-	public void setRecicleWD(boolean recicleWD) {
-		this.recicleWD = recicleWD;
-	}
-	
-	public String getWebAppDNS() {
-		return this.webAppDNS;
-	}
-	
-	public void setWebAppDNS(String webAppDNS) {
-		this.webAppDNS = webAppDNS;
-	}
-	
-	public void setRecicleWD(String recicleWD) {
-		if (recicleWD!=null) {
-			this.recicleWD = "true".compareTo(recicleWD) == 0;
+    public Enum<?> getApp() {
+    	return (valueOf(appEnum.getEnumConstants(), application));
+    }
+    public void setApp(String app) {
+    	this.application = app;
+    }
+    public void setApp(Enum<?> app) {
+    	this.application = app.name();
+    }
+    public String getVersion() {
+		if (version==null) {
+			version = "V1";
 		}
-	}
-
+		return version;
+    }
+    public void setVersion(String version) {
+    	this.version = version;
+    }
+    public String getUrlBase() {
+    	return url;
+    }
+    public void setUrlBase(String urlBase) {
+    	this.url = urlBase;
+    }
+    public WebDriverType getWebDriverType() {
+    	return (WebDriverType.valueOf(browser));
+    }
+    public void setWebDriverType(WebDriverType webDriverType) {
+    	this.browser = webDriverType.name();
+    }
+    public void setBrowser(String browser) {
+    	this.browser = browser;
+    }
+    public String getWebAppDNS() {
+    	return serverDNS;
+    }
+    public void setWebAppDNS(String serverDNS) {
+    	this.serverDNS = serverDNS;
+    }
+    public List<String> getGroupsFilter() {
+    	if (groups!=null) {
+    		return Arrays.asList(groups);
+    	}
+    	return Arrays.asList();
+    }
 	public List<String> getTestCasesFilter() {
-		return testCasesFilter;
+		if (tcases!=null) {
+			return Arrays.asList(tcases);
+		}
+		return Arrays.asList();
 	}
-
-	public void setTestCasesFilter(List<String> testCasesFilter) {
-		this.testCasesFilter = testCasesFilter;
+	public void setTestCasesFilter(List<String> listTestCases) {
+		tcases = listTestCases.toArray(new String[listTestCases.size()]);
 	}
-
-	public List<String> getGroupsFilter() {
-		return groupsFilter;
-	}
-
-	public void setGroupsFilter(List<String> groupsFilter) {
-		this.groupsFilter = groupsFilter;
-	}
-
 	public List<String> getMails() {
-		return this.mails;
+		if (mails!=null) {
+			return Arrays.asList(mails);
+		}
+		return Arrays.asList();
 	}
-	
 	public void setMails(List<String> mails) {
-		this.mails = mails;
+		this.mails = mails.toArray(new String[mails.size()]);
 	}
-	
 	public boolean isSendMailInEndSuite() {
 		return (getMails()!=null && getMails().size()>0);
 	}
-	
+	public boolean getRecicleWD() {
+		if (reciclewd!=null) {
+	    	return ("true".compareTo(reciclewd)==0);
+		}
+		return false;
+	}
+	public void setRecicleWD(String reciclewd) {
+		this.reciclewd = reciclewd;
+	}
+	public ManagementWebdriver getTypeManageWebdriver() {
+		if (getRecicleWD()) {
+			return ManagementWebdriver.recycle;
+		}
+		return ManagementWebdriver.discard;
+	}
+	public void setNetAnalysis(String net) {
+		this.net = net;
+	}
+	public boolean isNetAnalysis() {
+		if (net!=null) {
+			return ("true".compareTo(net)==0);
+		}
+		return false;
+	} 
+	public void setStoreResult(boolean store) {
+		this.store = String.valueOf(store);
+	}
 	public boolean isStoreResult() {
-		return storeResult;
+		if (store!=null) {
+			return ("true".compareTo(store)==0);
+		}
+		return false;
 	}
+    public String getMoreInfo() {
+    	return "";
+    }
 	
-	public void setStoreResult(boolean storeResult) {
-		this.storeResult = storeResult;
-	}
-	
+    private static Enum<?> valueOf(Enum<?>[] enumConstants, String value) throws IllegalArgumentException {
+    	for (Enum<?> enumCandidate : enumConstants) {
+    		if (enumCandidate.name().equals(value)) {
+    			return enumCandidate;
+    		}
+    	}
+    	throw new IllegalArgumentException();
+    }
+    
     public DataFilterTCases getDataFilter() {
     	DataFilterTCases dFilter = new DataFilterTCases(getChannel(), getApp());
-    	dFilter.setGroupsFilter(groupsFilter);
-    	dFilter.setTestCasesFilter(testCasesFilter);
+    	dFilter.setGroupsFilter(getGroupsFilter());
+    	dFilter.setTestCasesFilter(getTestCasesFilter());
     	return dFilter;
     }
+
 }

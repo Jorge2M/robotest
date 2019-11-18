@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.InputParams;
+import com.mng.robotest.test80.InputParamsMango;
 import com.mng.testmaker.domain.SuiteMaker;
 import com.mng.testmaker.domain.TestRunMaker;
 import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
@@ -50,7 +50,7 @@ public class PagosPaisesSuite extends SuiteMaker {
 		public boolean forceTestMisCompras() {return forceTestMisCompras;}
     }
 	
-    public PagosPaisesSuite(InputParams inputParams) {
+    public PagosPaisesSuite(InputParamsMango inputParams) {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
     	List<Class<?>> listTestClasses = Arrays.asList(ListPrecompraPaises.class);

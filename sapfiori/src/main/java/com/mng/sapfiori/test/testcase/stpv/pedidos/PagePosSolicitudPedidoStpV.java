@@ -4,9 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.mng.sapfiori.test.testcase.generic.stpv.modals.ModalSelectItemStpV;
+import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputBase;
 import com.mng.sapfiori.test.testcase.generic.webobject.modals.ModalSelectMultiItem;
+import com.mng.sapfiori.test.testcase.webobject.pedidos.InputFieldPedido;
 import com.mng.sapfiori.test.testcase.webobject.pedidos.PagePosSolicitudPedido;
-import com.mng.sapfiori.test.testcase.webobject.pedidos.PagePosSolicitudPedido.InputPage;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
@@ -34,15 +35,16 @@ public class PagePosSolicitudPedidoStpV {
 	@Step (
 		description = "Seleccionar el icono asociado al input de <b>#{inputType}</b>",
 		expected = "Aparece el modal para seleccionar el dato")
-	public ModalSelectItemStpV clickIconInput(InputPage inputType) throws Exception {
+	public ModalSelectItemStpV clickIconInput(InputFieldPedido inputType) throws Exception {
 		ModalSelectMultiItem modal = pageObject.getInputWithIcon(inputType).clickIconSetFilter();
 		return (ModalSelectItemStpV.getNew(modal));
 	}
 	
 	@Step (
 		description = "Introducir el valor <b>#{valueToInput}</b> en el input <b>#{inputType}</b>")
-	public void inputText(InputPage inputType, String valueToInput) {
-		pageObject.getInput(inputType).sendKeys(valueToInput);
+	public void inputText(InputFieldPedido inputType, String valueToInput) throws Exception {
+		InputBase input = pageObject.getInput(inputType);
+		input.clearAndSendText(valueToInput);
 	}
 	
 	@Step (
@@ -57,69 +59,28 @@ public class PagePosSolicitudPedidoStpV {
 	
 	public void inputData(List<InputDataSolPedido> listInputData) throws Exception {
 		for (InputDataSolPedido inputData : listInputData) {
-			pageObject.selectSection(inputData.inputPage.section);
+			pageObject.selectSection(inputData.getInputPage().section);
 			
-			switch (inputData.typeDataInput) {
+			switch (inputData.getTypeDataInput()) {
 			case SendText:
-				inputText(inputData.inputPage, inputData.textToInput);
+				inputText(inputData.getInputPage(), inputData.getTextToInput());
 				break;
 			case SelectByValue:
-				clickIconInput(inputData.inputPage)
+				clickIconInput(inputData.getInputPage())
 					.clickEnterToShowInitialElements()
-					.selectElementInTable(inputData.valueToSelectInTable);
+					.selectElementInTable(inputData.getValueToSelectInTable());
 				break;
 			case SearchAndSelectValue:
-        		clickIconInput(inputData.inputPage)
-        			.searchAndSelectElement(inputData.valueToSearch, inputData.valueToSelectInTable);
+        		clickIconInput(inputData.getInputPage())
+        			.searchAndSelectElement(inputData.getValueToSearch(), inputData.getValueToSelectInTable());
 				break;
 			case SelectByPosition:
-				clickIconInput(inputData.inputPage)
+				clickIconInput(inputData.getInputPage())
 					.clickEnterToShowInitialElements()
-					.selectElementsByPosition(Arrays.asList(inputData.posElementToSelectInTable));
+					.selectElementsByPosition(Arrays.asList(inputData.getPosElementToSelectInTable()));
 				break;
 			}
 
-		}
-	}
-	
-	public static class InputDataSolPedido {
-		public enum TypeOfDataInput {
-			SendText,
-			SelectByValue,
-			SearchAndSelectValue, 
-			SelectByPosition}
-		
-		public final InputPage inputPage;
-		public final TypeOfDataInput typeDataInput;
-		public String textToInput = null;
-		public String valueToSearch = null;
-		public String valueToSelectInTable = null;
-		public Integer posElementToSelectInTable = null;
-		
-		private InputDataSolPedido(InputPage inputPage, TypeOfDataInput typeDataInput) {
-			this.typeDataInput = typeDataInput;
-			this.inputPage = inputPage;
-		}
-		public static InputDataSolPedido getForSendText(InputPage inputPage, String textToInput) {
-			InputDataSolPedido inputData = new InputDataSolPedido(inputPage, TypeOfDataInput.SendText);
-			inputData.textToInput = textToInput;
-			return inputData;
-		}
-		public static InputDataSolPedido getForSelectValue(InputPage inputPage, String valueToSelectInTable) {
-			InputDataSolPedido inputData = new InputDataSolPedido(inputPage, TypeOfDataInput.SelectByValue);
-			inputData.valueToSelectInTable = valueToSelectInTable;
-			return inputData;
-		}
-		public static InputDataSolPedido getForSearchAndSelect(InputPage inputPage, String valueToSearch, String valueToSelect) {
-			InputDataSolPedido inputData = new InputDataSolPedido(inputPage, TypeOfDataInput.SearchAndSelectValue);
-			inputData.valueToSearch = valueToSearch;
-			inputData.valueToSelectInTable = valueToSelect;
-			return inputData;
-		}
-		public static InputDataSolPedido getForSearchAndSelect(InputPage inputPage, int posElementToSelectInTable) {
-			InputDataSolPedido inputData = new InputDataSolPedido(inputPage, TypeOfDataInput.SelectByPosition);
-			inputData.posElementToSelectInTable = posElementToSelectInTable;
-			return inputData;
 		}
 	}
 }

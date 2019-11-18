@@ -28,7 +28,7 @@ public class LineasBannersFactory {
         	InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
         	AppEcom app = (AppEcom)inputData.getApp();
         	Channel channel = inputData.getChannel();
-        	VersionPaisSuite version = VersionPaisSuite.valueOf(inputData.getVersionSuite());
+        	VersionPaisSuite version = VersionPaisSuite.valueOf(inputData.getVersion());
             List<Pais> listCountrys = Utilidades.getListCountrysFiltered(countrysStr);
             int prioridad=0;
             for (Pais pais : listCountrys) {

@@ -2,11 +2,27 @@ package com.mng.robotest.test80;
 
 import java.util.Arrays;
 
+import org.apache.commons.cli.CommandLine;
+
+import com.mng.testmaker.boundary.access.CmdLineMaker;
 import com.mng.testmaker.conf.TypeAccessFmwk;
 import com.mng.testmaker.domain.InputParamsTM;
 
-public class InputParams extends InputParamsTM {
+public class InputParamsMango extends InputParamsTM {
 
+    public static String CountrysNameParam = "countrys";
+    public static String LineasNameParam = "lineas";
+    public static String PaymentsNameParam = "payments";
+    
+    public static String UrlManto = "urlmanto";
+    public static String TypeAccessParam = "typeAccess";    
+    public static String CallBackResource = "callbackresource";
+    public static String CallBackMethod = "callbackmethod";
+    public static String CallBackSchema = "callbackschema";
+    public static String CallBackParams = "callbackparams";
+    public static String CallBackUser = "callbackuser";
+    public static String CallBackPassword = "callbackpassword";
+	
     private String[] listaPaises = {};
     private String[] listaLineas = {};
     private String[] listaPayments = {};   
@@ -15,6 +31,38 @@ public class InputParams extends InputParamsTM {
     private CallBack callBack = null;
     
     private static String lineSeparator = System.getProperty("line.separator");
+    
+    public InputParamsMango(Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) {
+    	super(suiteEnum, appEnum);
+    }
+    
+    public InputParamsMango(CmdLineMaker cmdLineAccess) {
+    	super(cmdLineAccess);
+    	CommandLine cmdLineData = cmdLineAccess.getComandLineData();
+		setListaPaises(cmdLineData.getOptionValues(CountrysNameParam));
+		setListaLineas(cmdLineData.getOptionValues(LineasNameParam));
+		setListaPayments(cmdLineData.getOptionValues(PaymentsNameParam));        
+		setUrlManto(cmdLineData.getOptionValue(UrlManto));
+		setTypeAccessFromStr(cmdLineData.getOptionValue(TypeAccessParam));
+        if (cmdLineData.getOptionValue(CallBackResource)!=null) {
+            CallBack callBack = new CallBack();
+            callBack.setCallBackResource(cmdLineData.getOptionValue(CallBackResource));
+            callBack.setCallBackMethod(cmdLineData.getOptionValue(CallBackMethod));
+            callBack.setCallBackUser(cmdLineData.getOptionValue(CallBackUser));
+            callBack.setCallBackPassword(cmdLineData.getOptionValue(CallBackPassword));
+            callBack.setCallBackSchema(cmdLineData.getOptionValue(CallBackSchema));
+            callBack.setCallBackParams(cmdLineData.getOptionValue(CallBackParams));
+            setCallBack(callBack);
+        }   
+    }
+    
+    public static InputParamsMango from(CmdLineMaker cmdLineAccess) {
+    	return new InputParamsMango(cmdLineAccess);
+    }
+
+    public static InputParamsMango getNew(Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) {
+    	return new InputParamsMango(suiteEnum, appEnum);
+    }
     
     @Override
     public String getMoreInfo() {
@@ -31,10 +79,7 @@ public class InputParams extends InputParamsTM {
     	
     	return moreInfo.toString();
     }
-    
-    public static InputParams getNew() {
-    	return new InputParams();
-    }
+
 
     public TypeAccessFmwk getTypeAccess() {
         return this.typeAccess;

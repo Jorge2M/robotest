@@ -17,8 +17,10 @@ response.setDateHeader ("Expires", -1);
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.TreeSet"%>
 <%@ page import="com.mng.robotest.test80.Test80mng"%>
+<%@ page import="com.mng.robotest.test80.InputParamsMango"%>
 <%@ page import="com.mng.testmaker.boundary.access.CmdLineMaker"%>
-<%@ page import="com.mng.robotest.test80.InputParams" %>
+<%@ page import="com.mng.testmaker.domain.InputParamsTM"%>
+<%@ page import="com.mng.robotest.test80.InputParamsMango" %>
 <%@ page import="com.mng.testmaker.domain.testfilter.TestMethod"%>
 <%@ page import="com.mng.testmaker.domain.testfilter.FilterTestsSuiteXML"%>
 <%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
@@ -139,9 +141,9 @@ for (SuiteTestData suiteTest : listTestSuites) {
 		<form id="testform_<%=i%>" action="./jsp/execTest.jsp" method="post">
 			<tr id="scriptData-<%=i%>">
 				<td id="test-<%=i%>" class="nombreTestSuite" title="<%=suiteTest.getDescription()%>"><%=suiteTest.getSuite()%></td>
-				<input id="<%=CmdLineMaker.SuiteNameParam%>" name="<%=CmdLineMaker.SuiteNameParam%>" type="hidden" value='<%=suiteTest.getSuite()%>' />
+				<input id="<%=InputParamsTM.SuiteNameParam%>" name="<%=InputParamsTM.SuiteNameParam%>" type="hidden" value='<%=suiteTest.getSuite()%>' />
 				<td id="channel-<%=i%>" class="channel"><%=suiteTest.getChannel()%></td>
-				<input id="<%=CmdLineMaker.ChannelNameParam%>" name="<%=CmdLineMaker.ChannelNameParam%>" type="hidden" value='<%=suiteTest.getChannel()%>' />
+				<input id="<%=InputParamsTM.ChannelNameParam%>" name="<%=InputParamsTM.ChannelNameParam%>" type="hidden" value='<%=suiteTest.getChannel()%>' />
 				<td id="link-<%=i%>">
 					<input id="Start" type="Submit" value="Start" />
 				</td>
@@ -149,7 +151,7 @@ for (SuiteTestData suiteTest : listTestSuites) {
 					<input id="force-<%=i%>" type="checkbox" name="forceStart" />
 				</td>
 				<td id="browser-<%=i%>">
-					<select id="browser-select-<%=i%>" name="<%=CmdLineMaker.BrowserNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
+					<select id="browser-select-<%=i%>" name="<%=InputParamsTM.BrowserNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							String actualBrowser = suiteTest.getIdBrowser();
 											for (BrowserSuite browserSuite : suiteTest.getListBrowsersChannel()) {
@@ -165,7 +167,7 @@ for (SuiteTestData suiteTest : listTestSuites) {
 					</select>
 				</td>
 				<td id="application">
-					<select id="application-select-<%=i%>" name="<%=CmdLineMaker.AppNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
+					<select id="application-select-<%=i%>" name="<%=InputParamsTM.AppNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							String actualApplication = suiteTest.getApplicationActual();
 											for (ApplicationSuite applicationSuite : suiteTest.getListApplicationsChannel()) {
@@ -180,7 +182,7 @@ for (SuiteTestData suiteTest : listTestSuites) {
 								%>
 					</select></td>
 				<td id="nettrafic">
-					<select id="nettrafic-select-<%=i%>" name="<%=CmdLineMaker.NetAnalysis%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
+					<select id="nettrafic-select-<%=i%>" name="<%=InputParamsTM.NetAnalysis%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							String actualNettrafic = suiteTest.getNettrafic();
 											String selectedFalse = "selected";
@@ -194,7 +196,7 @@ for (SuiteTestData suiteTest : listTestSuites) {
 						<option value="true" <%=selectedTrue%>>true</option>
 					</select></td>					
 				<td id="version">
-					<select id="version-select-<%=i%>" name="<%=CmdLineMaker.VersionNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
+					<select id="version-select-<%=i%>" name="<%=InputParamsTM.VersionNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							String actualVersion = suiteTest.getVersionActual();
 											for (VersionSuite versionSuite : suiteTest.getVersionChannelList()) {
@@ -210,13 +212,13 @@ for (SuiteTestData suiteTest : listTestSuites) {
 					</select>
 				</td>
 				<td id="urlbase-<%=i%>" class="input">
-					<input id="urlbase-input-<%=i%>" name="<%=CmdLineMaker.URLNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" value='<%=suiteTest.getUrlBase()%>' />
+					<input id="urlbase-input-<%=i%>" name="<%=InputParamsTM.URLNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" value='<%=suiteTest.getUrlBase()%>' />
 				</td>
 				<td id="tcasesselect-<%=i%>">
 					<%
 						if (suiteTest.getFiltroTCases()==1) {
 					%>					
-					<select multiple size=10 id="tcases-<%=i%>" name="<%=CmdLineMaker.TCaseNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
+					<select multiple size=10 id="tcases-<%=i%>" name="<%=InputParamsTM.TCaseNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							for (TestMethod testMethod : Test80mng.getDataTestAnnotationsToExec(getParamsFromSuiteToGetTCases(suiteTest))) {
 												String selected = "";
@@ -237,7 +239,7 @@ for (SuiteTestData suiteTest : listTestSuites) {
 					<%
 						if (suiteTest.getFiltroPaises()==1) {
 					%> 
-					<input id="countrys-input-<%=i%>" name="<%=Test80mng.CountrysNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" value='<%=suiteTest.getListPaises()%>' /> 
+					<input id="countrys-input-<%=i%>" name="<%=InputParamsMango.CountrysNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" value='<%=suiteTest.getListPaises()%>' /> 
  					<%
   						}
   					%>
@@ -246,7 +248,7 @@ for (SuiteTestData suiteTest : listTestSuites) {
 					<%
 						if (suiteTest.getFiltroPagos()==1) {
 					%>					
-					<select multiple size=10 id="pagos-<%=i%>" name="<%=Test80mng.PaymentsNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
+					<select multiple size=10 id="pagos-<%=i%>" name="<%=InputParamsMango.PaymentsNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							String listPaisesCommaSeparated = suiteTest.getListPaises();
 										if (suiteTest.getFiltroPaises()==0)
@@ -271,7 +273,7 @@ for (SuiteTestData suiteTest : listTestSuites) {
 					<%
 						if (suiteTest.getFiltroLineas()==1) {
 					%>					
-					<select multiple size=3 id="lineas-select-<%=i%>" name="<%=Test80mng.LineasNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
+					<select multiple size=3 id="lineas-select-<%=i%>" name="<%=InputParamsMango.LineasNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							for (String linea : suiteTest.getListLineasArray()) {
 						%>
@@ -333,35 +335,35 @@ for (SuiteTestData suiteTest : listTestSuites) {
 		src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script>
 $(document).ready(function () {
-    $('select[name=<%=CmdLineMaker.BrowserNameParam%>]').change(function () {
+    $('select[name=<%=InputParamsTM.BrowserNameParam%>]').change(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "browser", $(this).val());
     });
     
-    $('select[name=<%=CmdLineMaker.AppNameParam%>]').change(function () {
+    $('select[name=<%=InputParamsTM.AppNameParam%>]').change(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "application", $(this).val());
     });
     
-    $('select[name=<%=CmdLineMaker.NetAnalysis%>]').change(function () {
+    $('select[name=<%=InputParamsTM.NetAnalysis%>]').change(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "net", $(this).val());
     });    
     
-    $('select[name=<%=CmdLineMaker.VersionNameParam%>]').change(function () {
+    $('select[name=<%=InputParamsTM.VersionNameParam%>]').change(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "version", $(this).val());
     });
 
-    $('input[name=<%=CmdLineMaker.URLNameParam%>]').change(function () {
+    $('input[name=<%=InputParamsTM.URLNameParam%>]').change(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "url", $(this).val());
     });
     
-    $('input[name=<%=Test80mng.CountrysNameParam%>]').change(function () {
+    $('input[name=<%=InputParamsMango.CountrysNameParam%>]').change(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "countrys", $(this).val());
     });
     
-    $('select[name=<%=Test80mng.PaymentsNameParam%>]').change(function () {
+    $('select[name=<%=InputParamsMango.PaymentsNameParam%>]').change(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "payments", $(this).val());
     });    
     
-    $('select[name=<%=CmdLineMaker.TCaseNameParam%>]').change(function () {
+    $('select[name=<%=InputParamsTM.TCaseNameParam%>]').change(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "tcases", $(this).val());
     });
 });
@@ -377,15 +379,15 @@ function updateData(suite, channel, dataToChange, newBrowser) {
 </body>
 </html>
 	
-<%!public static InputParams getParamsFromSuiteToGetTCases(SuiteTestData suiteTest) {
+<%!public static InputParamsMango getParamsFromSuiteToGetTCases(SuiteTestData suiteTest) {
 	String app = suiteTest.getApplicationActual();
 	String suite = suiteTest.getSuite();
-	InputParams paramsTSuite = InputParams.getNew();
+	InputParamsMango paramsTSuite = InputParamsMango.getNew(Suites.class, AppEcom.class);
 	paramsTSuite.setApp(AppEcom.valueOf(app));
 	paramsTSuite.setSuite(Suites.valueOf(suite));
     paramsTSuite.setChannel(suiteTest.getChannel());
     paramsTSuite.setBrowser(suiteTest.getIdBrowser());
-    paramsTSuite.setVersionSuite(suiteTest.getVersionActual());
+    paramsTSuite.setVersion(suiteTest.getVersionActual());
 
     return paramsTSuite;
 }%>

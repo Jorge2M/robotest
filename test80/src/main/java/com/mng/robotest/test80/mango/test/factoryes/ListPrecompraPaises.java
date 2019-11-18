@@ -27,7 +27,7 @@ public class ListPrecompraPaises {
 	    List<Object> listTests = new ArrayList<>();
 	    try {
 	    	InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
-	    	VersionPagosSuite version = VersionPagosSuite.valueOf(inputData.getVersionSuite());
+	    	VersionPagosSuite version = VersionPagosSuite.valueOf(inputData.getVersion());
 	    	List<Pais> listCountrys = Utilidades.getListCountrysFiltered(countrys);
 	        int prioridad=0;
 	        for (Pais pais : listCountrys) {

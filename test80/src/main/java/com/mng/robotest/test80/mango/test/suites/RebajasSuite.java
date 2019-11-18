@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.InputParams;
+import com.mng.robotest.test80.InputParamsMango;
 import com.mng.testmaker.domain.SuiteMaker;
 import com.mng.testmaker.domain.TestRunMaker;
 import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
@@ -15,7 +15,7 @@ import com.mng.robotest.test80.mango.test.factoryes.ListRebajasXPais;
 
 public class RebajasSuite extends SuiteMaker {
 
-    public RebajasSuite(InputParams inputParams) {
+    public RebajasSuite(InputParamsMango inputParams) {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
     	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), ListRebajasXPais.class);

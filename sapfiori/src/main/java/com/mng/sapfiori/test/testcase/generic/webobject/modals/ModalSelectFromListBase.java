@@ -9,13 +9,12 @@ import org.openqa.selenium.WebDriver;
 import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.buscar.InputBuscador;
 import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconBase;
 import com.mng.sapfiori.test.testcase.generic.webobject.makers.StandarElementsMaker;
-import com.mng.sapfiori.test.testcase.generic.webobject.utils.SeleniumUtils;
+import com.mng.sapfiori.test.testcase.generic.webobject.utils.PageObject;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
-public abstract class ModalSelectFromListBase extends SeleniumUtils {
+public abstract class ModalSelectFromListBase extends PageObject {
 
 	final String label;
-	final WebDriver driver;
 	
 	final StandarElementsMaker standarMaker;
 	final InputBuscador inputBuscador;
@@ -32,8 +31,8 @@ public abstract class ModalSelectFromListBase extends SeleniumUtils {
 
 	
 	ModalSelectFromListBase(String label, WebDriver driver) {
+		super(driver);
 		this.label = label;
-		this.driver = driver;
 		this.standarMaker = StandarElementsMaker.getNew(driver);
 		this.inputBuscador = standarMaker.getInputBuscador();
 	}
@@ -56,11 +55,11 @@ public abstract class ModalSelectFromListBase extends SeleniumUtils {
 	}
 
 	public void clickEnterToShowInitialElements() throws Exception {
-		waitForPageFinished(driver);
+		waitForPageFinished();
 		By byInputField = By.xpath(XPathInputField);
 		driver.findElement(byInputField).click();
 		driver.findElement(byInputField).sendKeys(Keys.RETURN);
-		waitForPageFinished(driver);
+		waitForPageFinished();
 	}
 
 	public boolean isElementListPresent(int maxSeconds) {
@@ -73,7 +72,7 @@ public abstract class ModalSelectFromListBase extends SeleniumUtils {
 	}
 	
 	public void findByBuscarAndSelectElement(String valueToSearch, String valueToSelectInTable) throws Exception {
-		waitForPageFinished(driver);
+		waitForPageFinished();
 		inputBuscador.sendText(valueToSearch);
 		inputBuscador.clickLupaForSearch();
 		selectElementInTable(valueToSelectInTable);
@@ -81,10 +80,10 @@ public abstract class ModalSelectFromListBase extends SeleniumUtils {
 	
 	public void findByFiltersAndSelectElement(Map<String,String> inputLabelAndValues, String valueToSelectInTable) 
 	throws Exception {
-		waitForPageFinished(driver);
+		waitForPageFinished();
 		for (Map.Entry<String,String> labelAndValue : inputLabelAndValues.entrySet()) {
 			InputWithIconBase inputWeb = standarMaker.getInputWithIconForSelectItem(labelAndValue.getKey());
-			inputWeb.sendKeys(labelAndValue.getValue());
+			inputWeb.sendText(labelAndValue.getValue());
 		}
 		clickEnterToShowInitialElements();
 		selectElementInTable(valueToSelectInTable);

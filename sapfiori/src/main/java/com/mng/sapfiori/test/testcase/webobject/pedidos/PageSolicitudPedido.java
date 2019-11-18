@@ -1,18 +1,15 @@
 package com.mng.sapfiori.test.testcase.webobject.pedidos;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.select.SelectEstandard;
-import com.mng.sapfiori.test.testcase.generic.webobject.makers.StandarElementsMaker;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.sapfiori.test.testcase.generic.webobject.utils.PageObject;
 
-public class PageSolicitudPedido extends WebdrvWrapp {
+public class PageSolicitudPedido extends PageObject {
 
-	private final WebDriver driver;
-
-	
 	public final static String TitlePage = "Solicitud de pedido";
 	private final static String XPathTitle = "//h1[text()[contains(.,'" + TitlePage + "')]]";
 	
@@ -27,9 +24,8 @@ public class PageSolicitudPedido extends WebdrvWrapp {
 	private final static String XPathOptionModalAddArticulo = XPathModalIconAddArticulo + "//button";
 	
 	private PageSolicitudPedido(WebDriver driver) {
-		this.driver = driver;
-		StandarElementsMaker standarMaker = StandarElementsMaker.getNew(driver);
-		this.selectClaseDocumento = standarMaker.getSelectEstandard("Clase de documento de la solicitud de pedido");
+		super(driver);
+		this.selectClaseDocumento = elementsMaker.getSelectEstandard("Clase de documento de la solicitud de pedido");
 	}
 	public static PageSolicitudPedido getNew(WebDriver driver) {
 		return new PageSolicitudPedido(driver);
@@ -66,4 +62,36 @@ public class PageSolicitudPedido extends WebdrvWrapp {
 		return PagePosSolicitudPedido.getNew(driver);
 	}
 	
+	
+	private final static String XPath1rstLinePedido = "//table//tr[@id[contains(.,'PurchaseReqnItem')]]";
+	private final static String XPathInput1rstPedido = XPath1rstLinePedido + "//input";
+	private String getXPathInput1rstPedido(InputFieldPedido inputPage) {
+		return 
+			XPathInput1rstPedido + 
+			"//self::*[@aria-labelledby[contains(.,'Table-" + inputPage.idInTable + "')]]";
+	}
+	
+	private String getXPathInput1rstPedidoWithValue(InputFieldPedido inputPage, String value) {
+		return 
+			getXPathInput1rstPedido(inputPage) + 
+			"//self::*[@value='" + value + "']";
+	}
+	
+	public boolean checkFieldIn1rstLineaPedidos(InputFieldPedido inputPage, String value) throws Exception {
+		waitForPageFinished();
+		String xpathInput = getXPathInput1rstPedidoWithValue(inputPage, value);
+		return PageObject.isElementPresent(driver, By.xpath(xpathInput));
+	}
+	
+	public void inputFielValuedIn1rstLinePedidos(InputFieldPedido inputPage, String value) throws Exception {
+		String xpathInput = getXPathInput1rstPedido(inputPage);
+		WebElement inputElem = driver.findElement(By.xpath(xpathInput));
+		inputElem.sendKeys(Keys.HOME, Keys.chord(Keys.SHIFT, Keys.END), value);
+		//SeleniumUtils.sendKeysWithRetry(2, inputElem, value);
+	}
+	
+	private final static String XPathButtonGuardar = "//button[@id[contains(.,'-activate')]]";
+	public void clickButtonGuardar() throws Exception {
+		clickAndWaitLoad(By.xpath(XPathButtonGuardar));
+	}
 }

@@ -155,7 +155,7 @@ public class TestRunMaker {
     private String getTestRunName(InputParamsTM inputData) {
         return (
         	id + "-" + 
-        	inputData.getVersionSuite() + "-" + 
+        	inputData.getVersion() + "-" + 
         	inputData.getApp() + "-" + 
         	inputData.getChannel() + "-" + 
         	inputData.getWebDriverType());

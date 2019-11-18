@@ -2,7 +2,7 @@ package org.pruebasws.thread;
 
 import java.util.Set;
 
-import com.mng.robotest.test80.InputParams;
+import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.Test80mng;
 import com.mng.testmaker.domain.SuiteTM;
 import com.mng.testmaker.service.TestMaker;
@@ -22,7 +22,7 @@ public class TSuiteThreadsManager {
         );        
     }
     
-	public static String startSuiteInThread(InputParams paramsTSuite) throws Exception { 
+	public static String startSuiteInThread(InputParamsMango paramsTSuite) throws Exception { 
 		SuiteTM suite = Test80mng.makeSuite(paramsTSuite);
 		String idExecSuite = suite.getIdExecution();
 		
@@ -53,11 +53,11 @@ public class TSuiteThreadsManager {
 	  	return (idExecSuite);
 	}
     
-    public static String getLocatorThreadTestSuite(InputParams paramsTSuite, String idExecSuite) {
+    public static String getLocatorThreadTestSuite(InputParamsMango paramsTSuite, String idExecSuite) {
         return (
         	getLocatorThreadTestSuite(
         		paramsTSuite.getSuiteName(), paramsTSuite.getApp().toString(), paramsTSuite.getChannel().toString(), 
-        		paramsTSuite.getWebDriverType().toString(), paramsTSuite.getVersionSuite(), idExecSuite));   
+        		paramsTSuite.getWebDriverType().toString(), paramsTSuite.getVersion(), idExecSuite));   
     }
     
     public static String getLocatorThreadTestSuite(String suiteName, String application, String channel, String browser, String version, String idSuiteExecution) {

@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
-import com.mng.robotest.test80.InputParams;
+import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
 import com.mng.testmaker.conf.TypeAccessFmwk;
@@ -64,7 +64,7 @@ public class Registro {
     }
     
     private DataCtxShop getCtxShForTest() throws Exception {
-    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
+    	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());
@@ -135,7 +135,7 @@ public class Registro {
     	DataCtxShop dCtxSh = getCtxShForTest();
     	WebDriver driver = TestMaker.getDriverTestCase();
     	TestMaker.getTestCase().setRefineDataName(index_fact);
-    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
+    	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
         if (inputParamsSuite.getTypeAccess()==TypeAccessFmwk.Bat) {
             return;
         }
@@ -143,7 +143,7 @@ public class Registro {
         boolean clickPubli = true;
     	VersionRegistroSuite version = VersionRegistroSuite.V3;
     	if (isAccesFromFactory()) {
-    		version = VersionRegistroSuite.valueOf(inputParamsSuite.getVersionSuite());
+    		version = VersionRegistroSuite.valueOf(inputParamsSuite.getVersion());
     	}
     	
         dCtxSh.userRegistered = false;
@@ -200,7 +200,7 @@ public class Registro {
     	DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userRegistered = false;
     	boolean clickPubli = false;
-    	InputParams inputParamsSuite = (InputParams)TestMaker.getTestCase().getInputParamsSuite();
+    	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
         if (inputParamsSuite.getTypeAccess()==TypeAccessFmwk.Bat) {
             return; 
         }

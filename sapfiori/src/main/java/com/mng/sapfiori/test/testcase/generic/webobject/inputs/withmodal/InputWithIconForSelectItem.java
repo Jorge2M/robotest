@@ -16,6 +16,6 @@ public class InputWithIconForSelectItem extends InputWithIconBase {
 	
 	public ModalSelectMultiItem clickIconSetFilter() throws Exception {
 		super.clickIconBase();
-		return standarElements.getModalSelectMultiItem(label, driver);
+		return elementsMaker.getModalSelectMultiItem(label);
 	}
 }

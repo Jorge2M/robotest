@@ -9,7 +9,6 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
 import com.mng.testmaker.conf.ConstantesTM;
-import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.service.webdriver.pool.PoolWebDrivers;
 import com.mng.testmaker.testreports.html.GenerateReports;

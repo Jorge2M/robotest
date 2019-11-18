@@ -29,8 +29,7 @@ public class GoogleStpV {
         int maxSecondsWait = 3;
     	validations.add(
     		"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + maxSecondsWait + " segundos)",
-    		PageGoogle.validaFirstLinkContainsUntil("MANGO", maxSecondsWait, driver) ||
-    		PageGoogle.validaFirstLinkContains("Mango", driver), State.Defect);		
+    		PageGoogle.validaFirstLinkContainsUntil("Mango", maxSecondsWait, driver), State.Defect);		
     	validations.add(
     		"El 1er link no-anuncion no contiene \"robots.txt\"",
     		!PageGoogle.validaFirstLinkContainsUntil("robots.txt", 0, driver), State.Warn);

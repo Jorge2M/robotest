@@ -177,12 +177,13 @@ public class TestFilterTNGxmlTRun {
     }
     
     private InputParamsTM getInputDataBasic() {
-	    return new InputParamsTM (
-	    	Channel.desktop, 
-	    	Suite.SuiteForUnitTest, 
-			AppEcom.shop, 
-			"https://shop.mango.com/preHome.faces",
-			WebDriverType.chrome);
+    	InputParamsTM inputParams = new InputParamsTM(Suite.class, AppEcom.class);
+    	inputParams.setChannel(Channel.desktop);
+    	inputParams.setSuite(Suite.SuiteForUnitTest);
+    	inputParams.setApp(AppEcom.shop);
+    	inputParams.setUrlBase("https://shop.mango.com/preHome.faces");
+    	inputParams.setWebDriverType(WebDriverType.chrome);
+    	return inputParams;
     }
     
     private int getIncludedMethodsCount(List<XmlClass> listXmlClasses) {

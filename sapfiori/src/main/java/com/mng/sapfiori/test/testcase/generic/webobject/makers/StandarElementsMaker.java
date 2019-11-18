@@ -12,6 +12,7 @@ import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputBa
 import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForDefineConditions;
 import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForSelectItem;
 import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForSelectMultiItem;
+import com.mng.sapfiori.test.testcase.generic.webobject.modals.ModalMessages;
 import com.mng.sapfiori.test.testcase.generic.webobject.modals.ModalLoading;
 import com.mng.sapfiori.test.testcase.generic.webobject.modals.ModalSelectConditions;
 import com.mng.sapfiori.test.testcase.generic.webobject.modals.ModalSelectItem;
@@ -67,14 +68,17 @@ public class StandarElementsMaker {
 	public ModalSelectConditions getModalSelectConditions() {
 		return ModalSelectConditions.getNew(driver);
 	}
-	public ModalSelectItem getModalSelectItem(String label, WebDriver driver) {
+	public ModalSelectItem getModalSelectItem(String label) {
 		return ModalSelectItem.getNew(label, driver);
 	}
-	public ModalSelectMultiItem getModalSelectMultiItem(String label, WebDriver driver) {
+	public ModalSelectMultiItem getModalSelectMultiItem(String label) {
 		return ModalSelectMultiItem.getNew(label, driver);
 	}
-	public ModalLoading getModalLoading(WebDriver driver) {
+	public ModalLoading getModalLoading() {
 		return ModalLoading.getNew(driver);
+	}
+	public ModalMessages getModalErrores() {
+		return ModalMessages.getNew(driver);
 	}
 	
 }

@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.mng.robotest.test80.InputParams;
+import com.mng.robotest.test80.InputParamsMango;
 //import com.mng.testmaker.listeners.CallBack;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.robotest.test80.mango.test.data.Constantes;
@@ -19,7 +19,7 @@ import com.mng.testmaker.domain.TestRunMaker;
 
 public class SuiteMakerResources {
     
-    public static Map<String,String> getParametersSuiteShop(InputParams params) {
+    public static Map<String,String> getParametersSuiteShop(InputParamsMango params) {
     	Map<String,String> parametersReturn = new HashMap<>();
     	
     	parametersReturn.put(Constantes.paramCountrys, params.getListaPaisesStr());

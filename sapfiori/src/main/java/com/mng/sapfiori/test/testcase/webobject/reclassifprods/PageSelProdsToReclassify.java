@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForSelectItem;
 import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForSelectMultiItem;
-import com.mng.sapfiori.test.testcase.generic.webobject.makers.StandarElementsMaker;
 import com.mng.sapfiori.test.testcase.generic.webobject.pages.PageFilter;
 import com.mng.sapfiori.test.testcase.webobject.iconsmenu.OptionMenu;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
@@ -30,9 +29,8 @@ public class PageSelProdsToReclassify extends PageFilter {
 	
 	private PageSelProdsToReclassify(WebDriver driver) {
 		super(option, driver);
-		StandarElementsMaker standarMaker = StandarElementsMaker.getNew(driver);
-		filterEsquemaNumeracion = standarMaker.getInputWithIconForSelectItem("Esquema numeración");
-		filterProducto = standarMaker.getInputWithIconForSelectMultiItem("Producto");
+		filterEsquemaNumeracion = elementsMaker.getInputWithIconForSelectItem("Esquema numeración");
+		filterProducto = elementsMaker.getInputWithIconForSelectMultiItem("Producto");
 	}
 	public static PageSelProdsToReclassify getNew(WebDriver driver) {
 		return new PageSelProdsToReclassify(driver);
@@ -109,7 +107,7 @@ public class PageSelProdsToReclassify extends PageFilter {
 	}
 	
 	public List<ProductData> getData(List<String> productsId) throws Exception {
-		waitForPageFinished(driver);
+		waitForPageFinished();
 		List<ProductData> listProductData = new ArrayList<>();
 		for (String productId : productsId) {
 			int posInTheTable = getNumRowWithIdProduct(productId);

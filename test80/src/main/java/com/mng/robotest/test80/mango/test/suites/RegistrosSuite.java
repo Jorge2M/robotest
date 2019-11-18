@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.InputParams;
+import com.mng.robotest.test80.InputParamsMango;
 import com.mng.testmaker.domain.SuiteMaker;
 import com.mng.testmaker.domain.TestRunMaker;
 import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
@@ -30,7 +30,7 @@ public class RegistrosSuite extends SuiteMaker {
 		public boolean loginAfterRegister() {return loginAfterRegister;}
     }
 	
-    public RegistrosSuite(InputParams inputParams) {
+    public RegistrosSuite(InputParamsMango inputParams) {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
     	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), ListRegistrosXPais.class);

@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.otras;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
@@ -34,12 +35,26 @@ public class PageGoogle extends WebdrvWrapp {
     }
     
     public static boolean validaFirstLinkContains(String textToBeContained, WebDriver driver) {
-    	return (validaFirstLinkContainsUntil(textToBeContained, 0, driver));
+    	WebElement headerText = driver.findElement(By.xpath(XPath_LinkNoPubliText));
+    	if (headerText!=null) {
+    		String textHeader = headerText.getText();
+    		if (textHeader.contains(textToBeContained) || 
+    			textHeader.contains(textToBeContained.toLowerCase()) ||
+    			textHeader.contains(textToBeContained.toUpperCase())) {
+    			return true;
+    		}
+    	}
+    	return false;
     }
     
     public static boolean validaFirstLinkContainsUntil(String textToBeContained, int maxSecondsToWait, WebDriver driver) {
-        String xpathLink = getXPath_linkWithText(textToBeContained);
-        return (isElementPresentUntil(driver, By.xpath(xpathLink), maxSecondsToWait));
+    	for (int i=0; i<maxSecondsToWait; i++) {
+    		if (validaFirstLinkContains(textToBeContained, driver)) {
+    			return true;
+    		}
+    		waitMillis(1000);
+    	}
+    	return false;
     }
     
     public static void clickFirstLinkNoPubli(WebDriver driver) throws Exception {

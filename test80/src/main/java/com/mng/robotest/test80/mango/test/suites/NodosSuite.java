@@ -6,7 +6,7 @@ import java.util.Map;
 import org.testng.xml.XmlSuite.ParallelMode;
 import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getParametersSuiteShop;
 
-import com.mng.robotest.test80.InputParams;
+import com.mng.robotest.test80.InputParamsMango;
 import com.mng.testmaker.domain.SuiteMaker;
 import com.mng.testmaker.domain.TestRunMaker;
 import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
@@ -14,7 +14,7 @@ import com.mng.robotest.test80.mango.test.factoryes.ListAllNodes;
 
 public class NodosSuite extends SuiteMaker {
 
-    public NodosSuite(InputParams inputParams) throws Exception {
+    public NodosSuite(InputParamsMango inputParams) throws Exception {
     	super(inputParams);
     	setParameters(getParametersSuiteShop(inputParams));
     	addParameters(getSpecificParameters(inputParams.getUrlBase()));

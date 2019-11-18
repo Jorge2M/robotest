@@ -9,7 +9,8 @@ response.setDateHeader ("Expires", -1);%>
 </head>
 <body>
 	<%@ page import="com.mng.robotest.test80.Test80mng" %>
-	<%@ page import="com.mng.robotest.test80.InputParams" %>
+	<%@ page import="com.mng.robotest.test80.InputParamsMango" %>
+	<%@ page import="com.mng.testmaker.domain.InputParamsTM" %>
 	<%@ page import="com.mng.testmaker.boundary.access.CmdLineMaker"%>
 	<%@ page import="java.io.BufferedReader" %>
 	<%@ page import="javax.servlet.ServletContext" %>
@@ -56,17 +57,17 @@ response.setDateHeader ("Expires", -1);%>
 
   	<%
   		ServletContext ctx = getServletContext();
-  	  	  	System.setProperty("user.dir", getServletContext().getRealPath(""));
-  	  	  	
-  	  	  	//Store the request params
-  	  	  	InputParams paramsTSuite = storeParamsFromHttpRequest(request);
-  	  		
-  	  		//Specific parameter from index.jsp
-  	  	  	String forceStart = "off"; 
-  	  	  	if (request.getParameter("forceStart")!=null) {
-  	  	  		forceStart = request.getParameter("forceStart");
-  	  	  	}
-  	  	  	SuiteTM suite = null;
+  	  	  	  	System.setProperty("user.dir", getServletContext().getRealPath(""));
+  	  	  	  	
+  	  	  	  	//Store the request params
+  	  	  	  	InputParamsMango paramsTSuite = storeParamsFromHttpRequest(request);
+  	  	  		
+  	  	  		//Specific parameter from index.jsp
+  	  	  	  	String forceStart = "off"; 
+  	  	  	  	if (request.getParameter("forceStart")!=null) {
+  	  	  	  		forceStart = request.getParameter("forceStart");
+  	  	  	  	}
+  	  	  	  	SuiteTM suite = null;
   	%>
 
 	<div id="dataTestSuite"">
@@ -74,9 +75,9 @@ response.setDateHeader ("Expires", -1);%>
 		<p class="testSuiteAttribute">Channel: <b><%=paramsTSuite.getChannel()%></b></p>
 		<p class="testSuiteAttribute">Browser: <b><%=paramsTSuite.getWebDriverType()%></b></p>
 		<%
-		if (paramsTSuite.getVersionSuite()!=null && "".compareTo(paramsTSuite.getVersionSuite())!=0) {
+		if (paramsTSuite.getVersion()!=null && "".compareTo(paramsTSuite.getVersion())!=0) {
 		%>
-		<p class="testSuiteAttribute">Version: <b><%=paramsTSuite.getVersionSuite()%></b></p>
+		<p class="testSuiteAttribute">Version: <b><%=paramsTSuite.getVersion()%></b></p>
 		<%
 		}
 		if (paramsTSuite.getUrlBase()!=null && "".compareTo(paramsTSuite.getUrlBase())!=0) {
@@ -140,44 +141,44 @@ response.setDateHeader ("Expires", -1);%>
 	}
 	%>
 	
-	<%!public static InputParams storeParamsFromHttpRequest(HttpServletRequest request) {
+	<%!public static InputParamsMango storeParamsFromHttpRequest(HttpServletRequest request) {
 		//Parameters that come from index.jsp
-		String app = request.getParameter(CmdLineMaker.AppNameParam);
-    	String suite = request.getParameter(CmdLineMaker.SuiteNameParam);
-    	InputParams paramsTSuite = InputParams.getNew();
+		String app = request.getParameter(InputParamsTM.AppNameParam);
+    	String suite = request.getParameter(InputParamsTM.SuiteNameParam);
+    	InputParamsMango paramsTSuite = InputParamsMango.getNew(Suites.class, AppEcom.class);
     	paramsTSuite.setApp(AppEcom.valueOf(app));
     	paramsTSuite.setSuite(Suites.valueOf(suite));
-	    paramsTSuite.setChannel(request.getParameter(CmdLineMaker.ChannelNameParam));
-	    paramsTSuite.setBrowser(request.getParameter(CmdLineMaker.BrowserNameParam));
-	    paramsTSuite.setVersionSuite(request.getParameter(CmdLineMaker.VersionNameParam));
-	    paramsTSuite.setUrlBase(request.getParameter(CmdLineMaker.URLNameParam));
-	    paramsTSuite.setNetAnalysis(request.getParameter(CmdLineMaker.NetAnalysis));
-	    paramsTSuite.setListaPaises(request.getParameter(Test80mng.CountrysNameParam));
-	    paramsTSuite.setListaLineas(request.getParameterValues(Test80mng.LineasNameParam));
-	    paramsTSuite.setListaPayments(request.getParameterValues(Test80mng.PaymentsNameParam));
-	    String[] listTCases = request.getParameterValues(CmdLineMaker.TCaseNameParam);
+	    paramsTSuite.setChannel(request.getParameter(InputParamsTM.ChannelNameParam));
+	    paramsTSuite.setBrowser(request.getParameter(InputParamsTM.BrowserNameParam));
+	    paramsTSuite.setVersion(request.getParameter(InputParamsTM.VersionNameParam));
+	    paramsTSuite.setUrlBase(request.getParameter(InputParamsTM.URLNameParam));
+	    paramsTSuite.setNetAnalysis(request.getParameter(InputParamsTM.NetAnalysis));
+	    paramsTSuite.setListaPaises(request.getParameter(InputParamsMango.CountrysNameParam));
+	    paramsTSuite.setListaLineas(request.getParameterValues(InputParamsMango.LineasNameParam));
+	    paramsTSuite.setListaPayments(request.getParameterValues(InputParamsMango.PaymentsNameParam));
+	    String[] listTCases = request.getParameterValues(InputParamsTM.TCaseNameParam);
 	    if (listTCases!=null) {
 	    	paramsTSuite.setTestCasesFilter(Arrays.asList(listTCases));
 	    }
 
 	    //Parameters that don't come from index.jsp (for exemple, the call from Jenkin's CI Task)
-	    paramsTSuite.setStoreResult(true);
-	    paramsTSuite.setUrlManto(request.getParameter(Test80mng.UrlManto));
-	    paramsTSuite.setRecicleWD(request.getParameter(CmdLineMaker.RecicleWD));
-	    paramsTSuite.setNetAnalysis(request.getParameter(CmdLineMaker.NetAnalysis));
-	    String[] listMails = request.getParameterValues(CmdLineMaker.Mails);
+	    paramsTSuite.setStoreResult(true); 
+	    paramsTSuite.setUrlManto(request.getParameter(InputParamsMango.UrlManto)); 
+	    paramsTSuite.setRecicleWD(request.getParameter(InputParamsTM.RecicleWD)); 
+	    paramsTSuite.setNetAnalysis(request.getParameter(InputParamsTM.NetAnalysis));
+	    String[] listMails = request.getParameterValues(InputParamsTM.Mails);
 	    if (listMails!=null) {
-	    	paramsTSuite.setMails(Arrays.asList(listMails));
+	    	paramsTSuite.setMails(Arrays.asList(listMails)); 
 	    }
 	    paramsTSuite.setWebAppDNS(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()); 
-	    if (request.getParameter(Test80mng.CallBackResource)!=null) {
+	    if (request.getParameter(InputParamsMango.CallBackResource)!=null) {
 			CallBack callBack = new CallBack();
-	        callBack.setCallBackResource(request.getParameter(Test80mng.CallBackResource));
-	        callBack.setCallBackMethod(request.getParameter(Test80mng.CallBackMethod));
-	        callBack.setCallBackUser(request.getParameter(Test80mng.CallBackUser));
-	        callBack.setCallBackPassword(request.getParameter(Test80mng.CallBackPassword));
-	        callBack.setCallBackSchema(request.getParameter(Test80mng.CallBackSchema));
-	        callBack.setCallBackParams(request.getParameter(Test80mng.CallBackParams));
+	        callBack.setCallBackResource(request.getParameter(InputParamsMango.CallBackResource));
+	        callBack.setCallBackMethod(request.getParameter(InputParamsMango.CallBackMethod));
+	        callBack.setCallBackUser(request.getParameter(InputParamsMango.CallBackUser));
+	        callBack.setCallBackPassword(request.getParameter(InputParamsMango.CallBackPassword));
+	        callBack.setCallBackSchema(request.getParameter(InputParamsMango.CallBackSchema));
+	        callBack.setCallBackParams(request.getParameter(InputParamsMango.CallBackParams));
 	        paramsTSuite.setCallBack(callBack);
 	    }
 	    

@@ -8,21 +8,18 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.sapfiori.test.testcase.generic.webobject.makers.StandarElementsMaker;
 import com.mng.sapfiori.test.testcase.generic.webobject.modals.ModalLoading;
+import com.mng.sapfiori.test.testcase.generic.webobject.utils.PageObject;
 import com.mng.sapfiori.test.testcase.webobject.pedidos.PageGestionSolPedidoBuyer;
 import com.mng.sapfiori.test.testcase.webobject.reclassifprods.PageSelProdsToReclassify;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
-public class PageIconsMenu extends WebdrvWrapp {
-	
-	private final WebDriver driver;
-	private final StandarElementsMaker standarMaker;
+public class PageIconsMenu extends PageObject {
 	
 	private final static String XPathLabelInitialPageSpanish = "//h1[text()='Página inicial']";
 
 	
 	private PageIconsMenu(WebDriver driver) {
-		this.driver = driver;
-		this.standarMaker = StandarElementsMaker.getNew(driver);
+		super(driver);
 	}
 	
 	public static PageIconsMenu getNew(WebDriver driver) {
@@ -62,7 +59,7 @@ public class PageIconsMenu extends WebdrvWrapp {
 	private void clickOption(List<String> textsInIcon) throws Exception {
 		String xpath = getXPathOption(textsInIcon);
 		clickAndWaitLoad(driver, By.xpath(xpath));
-		ModalLoading modalLoading = standarMaker.getModalLoading(driver);
+		ModalLoading modalLoading = elementsMaker.getModalLoading();
 		modalLoading.isVisibleUntil(3);
 		modalLoading.isInvisibleUntil(10);
 	}

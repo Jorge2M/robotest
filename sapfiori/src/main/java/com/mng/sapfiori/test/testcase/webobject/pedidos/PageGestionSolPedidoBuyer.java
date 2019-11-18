@@ -7,7 +7,6 @@ import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.buscar.I
 import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.select.SelectEstandard;
 import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.select.SelectMultiValue;
 import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForDefineConditions;
-import com.mng.sapfiori.test.testcase.generic.webobject.makers.StandarElementsMaker;
 import com.mng.sapfiori.test.testcase.generic.webobject.pages.PageFilter;
 import com.mng.sapfiori.test.testcase.webobject.iconsmenu.OptionMenu;
 
@@ -27,7 +26,6 @@ public class PageGestionSolPedidoBuyer extends PageFilter {
 	
 	private PageGestionSolPedidoBuyer(WebDriver driver) {
 		super(option, driver);
-		StandarElementsMaker elementsMaker = StandarElementsMaker.getNew(driver);
 		filterBuscar = elementsMaker.getInputBuscador();
 		filterSelEstadoEdicion = elementsMaker.getSelectEstandard("Estado de edición");
 		filterPurchaseRequisition = elementsMaker.getInputWithIconForDefineConditions("Purchase Requisition");
@@ -39,7 +37,7 @@ public class PageGestionSolPedidoBuyer extends PageFilter {
 	}
 
 	public PageSolicitudPedido clickIconAñadirPedido() throws Exception {
-		waitForPageFinished(driver);
+		waitForPageFinished();
 		clickAndWaitLoad(driver, By.xpath(XPathIconSolPedido));
 		return PageSolicitudPedido.getNew(driver);
 	}

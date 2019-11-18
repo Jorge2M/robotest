@@ -35,7 +35,7 @@ public class SuiteData {
 		
 		suiteData.setIdExecSuite(suite.getIdExecution());
 		suiteData.setName(suite.getName());
-		suiteData.setVersion(inputParams.getVersionSuite());
+		suiteData.setVersion(inputParams.getVersion());
 		suiteData.setChannel(inputParams.getChannel());
 		suiteData.setApp(inputParams.getApp().toString());
 		suiteData.setWebDriverType(inputParams.getWebDriverType());
