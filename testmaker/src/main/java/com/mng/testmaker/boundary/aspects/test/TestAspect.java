@@ -27,7 +27,7 @@ public class TestAspect {
     public void before(JoinPoint joinPoint) {
     	TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
     	if (testCase!=null) {
-    		TestMaker.skipTestsIfSuiteStopped(testCase.getSuiteParent());
+    		TestMaker.skipTestsIfSuiteEnded(testCase.getSuiteParent());
     	} else {
     		if (!isFactoryMethod(joinPoint)) {
     			throw new SkipException("TestCase removed");

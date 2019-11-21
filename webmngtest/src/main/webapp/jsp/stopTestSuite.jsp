@@ -9,16 +9,9 @@ response.setDateHeader ("Expires", -1);
 <%@ page import="org.pruebasws.Launch"%>
 <%
 String idThreadGroupTestSuite = request.getParameter("idThreadGroupTestSuite");
-boolean stoppedNormally = Launch.stopTSuite(idThreadGroupTestSuite);
-if (stoppedNormally) {
+Launch.stopTSuite(idThreadGroupTestSuite);
 %>
-<p>TestSuite Stopped Correctamente!<p>
-<%
-}
-else {
-%>
-<p>Problemas en el Stop de la TestSuite, se ha procedido al stop vía KillThread.<p>
-<%}%>
+<p>TestSuite Stopped!<p>
 <br>
 <form action="../index.jsp">
 	<input type="submit" value="Volver">

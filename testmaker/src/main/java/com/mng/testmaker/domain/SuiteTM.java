@@ -91,13 +91,13 @@ public class SuiteTM extends XmlSuite {
 		result = getResultFromTestsRun();
 		fin = new Date(); 
 		poolWebDrivers.removeAllStrWd();
-    	if (inputParams.isSendMailInEndSuite()) {
-    		senderMail.sendMail(this);
-        }
-    	if (inputParams.isStoreResult()) {
-    		storerResult.store(this);
-    	}
-    	SuitesExecuted.remove(this);
+		if (inputParams.isSendMailInEndSuite()) {
+			senderMail.sendMail(this);
+		}
+		if (inputParams.isStoreResult()) {
+			storerResult.store(this);
+		}
+		SuitesExecuted.remove(this);
 	}
 	
 	private State getResultFromTestsRun() {
@@ -119,7 +119,10 @@ public class SuiteTM extends XmlSuite {
 	}
 	
 	public long getDurationMillis() {
-		return fin.getTime() - fin.getTime();
+		if (fin!=null && inicio!=null) {
+			return fin.getTime() - inicio.getTime();
+		}
+		return 0;
 	}
 	
 	public void setListenersClass(List<Class<?>> listListeners) {
@@ -149,7 +152,7 @@ public class SuiteTM extends XmlSuite {
 	
 	public String getDnsReportHtml() {
 		String pathFileReport = getPathReportHtml();
-		return (GenerateReports.getDnsOfFileReport(pathFileReport, inputParams.getWebAppDNS()));
+		return (GenerateReports.getDnsOfFileReport(pathFileReport, inputParams.getWebAppDNS(), inputParams.getTypeAccess()));
 	}
 
 }

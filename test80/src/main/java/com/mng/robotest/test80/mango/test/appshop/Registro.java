@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
-import com.mng.testmaker.conf.TypeAccessFmwk;
+import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -136,7 +136,7 @@ public class Registro {
     	WebDriver driver = TestMaker.getDriverTestCase();
     	TestMaker.getTestCase().setRefineDataName(index_fact);
     	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
-        if (inputParamsSuite.getTypeAccess()==TypeAccessFmwk.Bat) {
+        if (inputParamsSuite.getTypeAccess()==TypeAccess.Bat) {
             return;
         }
         
@@ -201,7 +201,7 @@ public class Registro {
         dCtxSh.userRegistered = false;
     	boolean clickPubli = false;
     	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
-        if (inputParamsSuite.getTypeAccess()==TypeAccessFmwk.Bat) {
+        if (inputParamsSuite.getTypeAccess()==TypeAccess.Bat) {
             return; 
         }
         

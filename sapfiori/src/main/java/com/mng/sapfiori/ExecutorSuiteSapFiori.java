@@ -4,23 +4,21 @@ import java.util.Arrays;
 
 import com.mng.sapfiori.datatmaker.Suites;
 import com.mng.sapfiori.test.suite.SmokeTestSuite;
+import com.mng.testmaker.domain.ExecutorSuite;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.SuiteTM;
-import com.mng.testmaker.service.TestMaker;
 
-public class ExecutorSuite {
+public class ExecutorSuiteSapFiori extends ExecutorSuite {
 
-	private ExecutorSuite() {}
-	public static ExecutorSuite getNew() {
-		return new ExecutorSuite();
+	private ExecutorSuiteSapFiori(InputParamsTM inputParams) throws Exception {
+		super(inputParams);
+	}
+	public static ExecutorSuiteSapFiori getNew(InputParamsTM inputParams) throws Exception {
+		return new ExecutorSuiteSapFiori(inputParams);
 	}
 	
-    public void execTestSuite(InputParamsTM inputParams) throws Exception {
-    	SuiteTM suite = makeSuite(inputParams);
-    	TestMaker.run(suite);
-    }
-    
-    private SuiteTM makeSuite(InputParamsTM inputParams) throws Exception {
+    @Override
+    public SuiteTM makeSuite() throws Exception {
         try {
             switch ((Suites)inputParams.getSuite()) {
             case SmokeTest:

@@ -19,7 +19,7 @@ import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.conf.TypeAccessFmwk;
+import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
 import com.mng.testmaker.domain.StepTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -427,12 +427,12 @@ public class PagoNavigationsStpV {
     public static boolean iCanExecPago(PagoStpV pagoStpV, AppEcom appE, WebDriver driver) {
         boolean validaPagos = pagoStpV.dCtxPago.getFTCkout().validaPagos;
         Pago pago = pagoStpV.dCtxPago.getDataPedido().getPago();
-        TypeAccessFmwk typeAccess = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getTypeAccess();
+        TypeAccess typeAccess = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getTypeAccess();
         return (
             //No estamos en el entorno productivo
             !UtilsMangoTest.isEntornoPRO(appE, driver) &&
             //No estamos en modo BATCH
-            typeAccess!=TypeAccessFmwk.Bat &&
+            typeAccess!=TypeAccess.Bat &&
             //Está activado el flag de pago en el fichero XML de configuración del test (testNG)
             validaPagos &&  
             //Está activado el test en el pago concreto que figura en el XML de países

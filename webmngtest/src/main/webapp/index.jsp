@@ -182,7 +182,7 @@ for (SuiteTestData suiteTest : listTestSuites) {
 								%>
 					</select></td>
 				<td id="nettrafic">
-					<select id="nettrafic-select-<%=i%>" name="<%=InputParamsTM.NetAnalysis%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
+					<select id="nettrafic-select-<%=i%>" name="<%=InputParamsTM.NetAnalysisParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							String actualNettrafic = suiteTest.getNettrafic();
 											String selectedFalse = "selected";
@@ -343,7 +343,7 @@ $(document).ready(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "application", $(this).val());
     });
     
-    $('select[name=<%=InputParamsTM.NetAnalysis%>]').change(function () {
+    $('select[name=<%=InputParamsTM.NetAnalysisParam%>]').change(function () {
     	updateData($(this).attr("suite"), $(this).attr("channel"), "net", $(this).val());
     });    
     

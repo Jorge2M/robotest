@@ -13,7 +13,7 @@ import com.mng.testmaker.boundary.access.CmdLineMaker;
 import com.mng.testmaker.boundary.access.OptionTMaker;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.conf.TypeAccessFmwk;
+import com.mng.testmaker.domain.ExecutorSuite;
 import com.mng.testmaker.domain.SuiteTM;
 import com.mng.testmaker.domain.testfilter.TestMethod;
 import com.mng.testmaker.service.TestMaker;
@@ -32,7 +32,7 @@ public class Test80mng {
     public static void main(String[] args) throws Exception { 
     	List<OptionTMaker> optionsTest80 = specificMangoOptions();
     	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, optionsTest80, Suites.class, AppEcom.class);
-    	if (cmdLineAccess.checkOptionsValue()) {
+    	if (cmdLineAccess.checkOptionsValue().isOk()) {
             execSuite(InputParamsMango.from(cmdLineAccess));
     	}
     }
@@ -69,14 +69,7 @@ public class Test80mng {
             .pattern(patternUrl)
             .desc("URL of the Backoffice of mangoshop (Manto application)")
             .build();    
-        
-    	OptionTMaker bat = OptionTMaker.builder(InputParamsMango.TypeAccessParam)
-            .required(false)
-            .hasArgs()
-            .possibleValues(TypeAccessFmwk.class)
-            .desc("Type of access. Posible values: " + Arrays.asList(TypeAccessFmwk.values()))
-            .build();               
-        
+             
     	OptionTMaker callbackResource = OptionTMaker.builder(InputParamsMango.CallBackResource)
             .required(false)
             .hasArgs()
@@ -119,8 +112,7 @@ public class Test80mng {
         options.add(countrys);
         options.add(lineas);
         options.add(payments);        
-        options.add(urlManto);;
-        options.add(bat);
+        options.add(urlManto);
         options.add(callbackResource);
         options.add(callbackMethod);
         options.add(callbackSchema);
@@ -135,51 +127,16 @@ public class Test80mng {
      * Indirect access from Command Line, direct access from Online
      */
     public static void execSuite(InputParamsMango inputParams) throws Exception {
-    	SuiteTM suite = makeSuite(inputParams);
-    	TestMaker.run(suite);
-    	callBackIfNeeded(suite, inputParams);
+		ExecutorSuite executor = ExecutorSuiteMango.getNew(inputParams);
+		execSuite(executor);
+    }
+    public static void execSuite(ExecutorSuite executor) throws Exception {
+		SuiteTM suite = TestMaker.execSuite(executor);
+    	callBackIfNeeded(suite);
     }
     
-    public static SuiteTM makeSuite(InputParamsMango inputParams) throws Exception {
-        inputParams.setTypeAccessIfNotSetted(TypeAccessFmwk.Online);
-        try {
-            switch ((Suites)inputParams.getSuite()) {
-            case SmokeTest:
-                return (new SmokeTestSuite(inputParams)).getSuite();
-            case SmokeManto:
-                return (new SmokeMantoSuite(inputParams)).getSuite();
-            case PagosPaises:
-                return (new PagosPaisesSuite(inputParams)).getSuite();
-            case ValesPaises:
-                return (new ValesPaisesSuite(inputParams)).getSuite();
-            case PaisIdiomaBanner:
-                return (new PaisIdiomaSuite(inputParams)).getSuite();
-            case MenusPais:
-                return (new MenusPaisSuite(inputParams)).getSuite();
-            case MenusManto:
-                return (new MenusMantoSuite(inputParams)).getSuite();
-            case Nodos:
-                return (new NodosSuite(inputParams)).getSuite();
-            case ConsolaVotf:
-                return (new ConsolaVotfSuite(inputParams)).getSuite();
-            case ListFavoritos:
-            case ListMiCuenta:
-                return (new GenericFactorySuite(inputParams)).getSuite();
-            case RegistrosPaises:
-                return (new RegistrosSuite(inputParams)).getSuite();
-            case RebajasPaises:
-                return (new RebajasSuite(inputParams)).getSuite();
-            default:
-            }
-        }
-        catch (IllegalArgumentException e) {
-            System.out.println("Suite Name not valid. Posible values: " + Arrays.asList(Suites.values()));
-        }
-        
-        return null;
-    }
-
-    private static void callBackIfNeeded(SuiteTM suite, InputParamsMango inputParams) {
+    private static void callBackIfNeeded(SuiteTM suite) {
+    	InputParamsMango inputParams = (InputParamsMango)suite.getInputParams();
     	CallBack callBack = inputParams.getCallBack();
         if (callBack!=null) {
             String reportTSuiteURL = suite.getDnsReportHtml();
@@ -195,7 +152,6 @@ public class Test80mng {
     }
 
     public static List<TestMethod> getDataTestAnnotationsToExec(InputParamsMango inputParams) throws Exception {
-        inputParams.setTypeAccessIfNotSetted(TypeAccessFmwk.Online);
         Suites suiteValue = (Suites)inputParams.getSuite();
         switch (suiteValue) {
         case SmokeTest:

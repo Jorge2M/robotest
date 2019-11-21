@@ -22,6 +22,7 @@ import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.conf.ConstantesTM;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.domain.InputParamsTM;
+import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
 import com.mng.testmaker.domain.StepTM;
 import com.mng.testmaker.domain.StepTM.StepEvidence;
 import com.mng.testmaker.domain.SuiteTM;
@@ -241,7 +242,10 @@ public class GenerateReports extends EmailableReporter {
             String linkHarpNew = "";
             if (indexFile.exists()) {
             	InputParamsTM inputParams = testCase.getSuiteParent().getInputParams();
-                String pathHARP = getDnsOfFileReport(indexFile.getAbsolutePath(), inputParams.getWebAppDNS()).replace('\\', '/');
+                String pathHARP = getDnsOfFileReport(
+                		indexFile.getAbsolutePath(), 
+                		inputParams.getWebAppDNS(), 
+                		inputParams.getTypeAccess()).replace('\\', '/');
                 linkHarpNew = " \\ <a href=\"" + ConstantesTM.URL_SOFTWAREISHARD + pathHARP + "\" target=\"_blank\">NetTraffic</a>";
             }
             
@@ -363,17 +367,21 @@ public class GenerateReports extends EmailableReporter {
      * Obtiene la DNS de un fichero ubicado dentro del contexto de la aplicación de tests
      * @param serverDNS: del tipo "http://robottest.mangodev.net + :port si fuera preciso)  
      */
-    public static String getDnsOfFileReport(String filePath, String applicationDNS) {
-        String pathReport = "";
+    public static String getDnsOfFileReport(String filePath, String applicationDNS, TypeAccess typeAccess) {
+        String pathReport = filePath.substring(filePath.indexOf(ConstantesTM.directoryOutputTests));
         if (applicationDNS!=null && "".compareTo(applicationDNS)!=0) {
-            pathReport = filePath.substring(filePath.indexOf(ConstantesTM.directoryOutputTests));
-            pathReport = applicationDNS + "\\" + pathReport;
+            return (applicationDNS + "\\" + pathReport);
         } else {
-            Pattern patternDrive = Pattern.compile("^[a-zA-Z]:");
-            pathReport = patternDrive.matcher(filePath).replaceFirst("\\\\\\\\" + getNamePC());
+        	switch (typeAccess) {
+        	case CmdLine:
+        	case Bat:
+        		Pattern patternDrive = Pattern.compile("^[a-zA-Z]:");
+        		return (patternDrive.matcher(filePath).replaceFirst("\\\\\\\\" + getNamePC()));
+        	case Rest:
+        	default:
+        		return (pathReport.replace("\\", "/"));
+        	}
         }
-
-        return pathReport;
     }
 	
     private static String getNamePC() {

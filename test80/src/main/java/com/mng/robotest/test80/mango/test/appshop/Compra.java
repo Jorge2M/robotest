@@ -4,7 +4,7 @@ import org.testng.annotations.*;
 
 import com.mng.robotest.test80.InputParamsMango;
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.conf.TypeAccessFmwk;
+import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Constantes;
@@ -227,7 +227,7 @@ public class Compra {
         //No permitiremos la ejecución diaria de este tipo de checkout porque implica la ejecución 
         //de un registro de usuario con el nuevo email introducido 
         InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
-        if (inputParamsSuite.getTypeAccess()!=TypeAccessFmwk.Bat) {
+        if (inputParamsSuite.getTypeAccess()!=TypeAccess.Bat) {
             //Hasta página de Checkout
             FlagsTestCkout FTCkout = new FlagsTestCkout();
             FTCkout.validaPasarelas = false;  

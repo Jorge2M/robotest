@@ -16,6 +16,8 @@ import org.apache.commons.cli.ParseException;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.InputParamsTM;
+import com.mng.testmaker.domain.InputParamsTM.ParamTM;
+import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
 public class CmdLineMaker { 
@@ -55,6 +57,10 @@ public class CmdLineMaker {
 		Class<? extends Enum<?>> appEnum) throws ParseException {
 		return new CmdLineMaker(args, null, suiteEnum, appEnum);
 	}	
+	public static CmdLineMaker from(InputParamsTM inputParams) throws Exception {
+		String [] args = getArgs(inputParams);
+		return new CmdLineMaker(args, null, inputParams.getSuiteEnum(), inputParams.getAppEnum());
+	}	
 	
 	public Class<? extends Enum<?>> getSuiteEnum() {
 		return suiteEnum;
@@ -82,14 +88,14 @@ public class CmdLineMaker {
 		return cmdLineToReturn;
 	}
 	
-    public boolean checkOptionsValue() {
+    public ResultCheckOptions checkOptionsValue() {
         boolean check=true;
-        StringBuffer storedErrors = new StringBuffer();
+        List<MessageError> storedErrors = new ArrayList<>();
         if (!checkOptionsValue(storedErrors)) {
         	check=false;
         	System.out.println(storedErrors);
         }
-        return (check);
+        return (ResultCheckOptions.from(check, storedErrors));
     }
 	
 	public CommandLine getComandLineData() {
@@ -181,34 +187,41 @@ public class CmdLineMaker {
             .desc("Server DNS where are ubicated the HTML reports (p.e. http://robottest.mangodev.net)")
             .build();
         
-        OptionTMaker recicleWD = OptionTMaker.builder(InputParamsTM.RecicleWD)
+        OptionTMaker recicleWD = OptionTMaker.builder(InputParamsTM.RecicleWDParam)
             .required(false)
             .hasArgs()
             .possibleValues(Arrays.asList("true", "false"))
             .desc("Gestion mode of webdriver. Possible values: true->reuse across testcases, false->don't reuse)")
             .build();
         
-        OptionTMaker netAnalysis = OptionTMaker.builder(InputParamsTM.NetAnalysis)
+        OptionTMaker netAnalysis = OptionTMaker.builder(InputParamsTM.NetAnalysisParam)
             .required(false)
             .hasArgs()
             .possibleValues(Arrays.asList("true", "false"))
             .desc("Net Analysis (true, false)")
             .build();
         
-        OptionTMaker store = OptionTMaker.builder(InputParamsTM.Store)
+        OptionTMaker store = OptionTMaker.builder(InputParamsTM.StoreParam)
             .required(false)
             .hasArgs()
             .possibleValues(Arrays.asList("true", "false"))
             .desc("Store result persistentely (true, false)")
             .build();
         
-        OptionTMaker mails = OptionTMaker.builder(InputParamsTM.Mails)
+        OptionTMaker mails = OptionTMaker.builder(InputParamsTM.MailsParam)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .pattern("^(.+)@(.+)$")
             .desc("List of mail adresses comma separated")
-            .build();                       
+            .build();
+        
+    	OptionTMaker typeAccess = OptionTMaker.builder(InputParamsTM.TypeAccessParam)
+            .required(false)
+            .hasArgs()
+            .possibleValues(TypeAccess.class)
+            .desc("Type of access. Posible values: " + Arrays.asList(TypeAccess.values()))
+            .build();  
                 
         listOptionsTMaker.add(suite);
         listOptionsTMaker.add(browser);
@@ -223,6 +236,7 @@ public class CmdLineMaker {
         listOptionsTMaker.add(netAnalysis);
         listOptionsTMaker.add(store);
         listOptionsTMaker.add(mails);
+        listOptionsTMaker.add(typeAccess);
         
         return listOptionsTMaker;
 	}
@@ -259,7 +273,7 @@ public class CmdLineMaker {
     }
 
     
-    boolean checkOptionsValue(StringBuffer storedErrors) {
+    boolean checkOptionsValue(List<MessageError> storedErrors) {
     	if (HelpNameParam.compareTo(cmdLine.getOptions()[0].getOpt())==0) {
     		return false;
     	}
@@ -271,7 +285,7 @@ public class CmdLineMaker {
     		if (optionTMaker.getOption().isRequired()) {
     			if (valueOption==null) {
     		    	String saltoLinea = System.getProperty("line.separator");
-    				storedErrors.append("Mandatory param " + nameParam + " doesn't exists" + saltoLinea);
+    				storedErrors.add(new MessageError("Mandatory param " + nameParam + " doesn't exists" + saltoLinea));
     				check = false;
     			}
     		}
@@ -291,7 +305,7 @@ public class CmdLineMaker {
     	return check;
     }
     
-    private boolean checkOptionValues(OptionTMaker optionTMaker, String[] valuesOption, StringBuffer storedErrors) {
+    private boolean checkOptionValues(OptionTMaker optionTMaker, String[] valuesOption, List<MessageError> storedErrors) {
 		for (String valueOption : valuesOption) {
 			if (!checkOptionValue(optionTMaker, valueOption, storedErrors)) {
 				return false;
@@ -300,17 +314,19 @@ public class CmdLineMaker {
 		return true;
     }
     
-    private boolean checkOptionValue(OptionTMaker optionTMaker, String value, StringBuffer storedErrors) {
+    private boolean checkOptionValue(OptionTMaker optionTMaker, String value, List<MessageError> storedErrors) {
 		String nameParam = optionTMaker.getOption().getOpt();
 		String stringPattern = optionTMaker.getPattern();
 		String saltoLinea = System.getProperty("line.separator");
 		if (stringPattern!=null && !checkPatternValue(stringPattern, value)) {
-			storedErrors.append("Param " + nameParam + " with value " + value + " that doesn't match pattern " + stringPattern + saltoLinea);
+			storedErrors.add(
+				new MessageError("Param " + nameParam + " with value " + value + " that doesn't match pattern " + stringPattern + saltoLinea));
 			return false;
 		}
 		List<String> possibleValues = optionTMaker.possibleValues();
 		if (possibleValues!=null && !checkPossibleValues(possibleValues, value)) {
-			storedErrors.append("Param " + nameParam + " with value " + value + " is not one of the possible values " + possibleValues + saltoLinea);
+			storedErrors.add(
+				new MessageError("Param " + nameParam + " with value " + value + " is not one of the possible values " + possibleValues + saltoLinea));
 			return false;
 		}
 		return true;
@@ -334,4 +350,16 @@ public class CmdLineMaker {
     private static String[] getNames(Enum<?>[] enumConstants) {
         return Arrays.stream(enumConstants).map(Enum::name).toArray(String[]::new);
     }
+    
+	public static String[] getArgs(InputParamsTM inputParams) {
+		List<String> listArgs = new ArrayList<>();
+		for (ParamTM paramTM : ParamTM.values()) {
+			String valueParam = inputParams.getParamValue(paramTM);
+			if (valueParam!=null && "".compareTo(valueParam)!=0) {
+				listArgs.add("-" + paramTM.nameParam);
+				listArgs.add(valueParam);
+			}
+		}
+		return listArgs.stream().toArray(String[]::new);
+	}
 }

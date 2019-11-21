@@ -2,8 +2,10 @@ package org.pruebasws.thread;
 
 import java.util.Set;
 
+import com.mng.robotest.test80.ExecutorSuiteMango;
 import com.mng.robotest.test80.InputParamsMango;
-import com.mng.robotest.test80.Test80mng;
+import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
+import com.mng.testmaker.domain.ExecutorSuite;
 import com.mng.testmaker.domain.SuiteTM;
 import com.mng.testmaker.service.TestMaker;
 
@@ -22,8 +24,11 @@ public class TSuiteThreadsManager {
         );        
     }
     
+    //TODO esto desaparecerá con la versión REST
 	public static String startSuiteInThread(InputParamsMango paramsTSuite) throws Exception { 
-		SuiteTM suite = Test80mng.makeSuite(paramsTSuite);
+		paramsTSuite.setTypeAccess(TypeAccess.Rest);
+		ExecutorSuite executor = ExecutorSuiteMango.getNew(paramsTSuite);
+		SuiteTM suite = executor.getSuite();
 		String idExecSuite = suite.getIdExecution();
 		
 	  	Thread.UncaughtExceptionHandler h = new Thread.UncaughtExceptionHandler() {
@@ -36,7 +41,7 @@ public class TSuiteThreadsManager {
 	    Thread test = new Thread(tg1, new Runnable() {
 	        public void run(){
 	          	try {
-	        	    TestMaker.run(suite);
+	        	    TestMaker.execSuite(executor);
 	          	}
 	          	catch (Throwable e) {
 	          		e.printStackTrace();

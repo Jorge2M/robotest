@@ -34,12 +34,12 @@ public class CommandLineAccessTest {
 
     	//When
     	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, options, Suites.class, AppEcom.class);
-    	StringBuffer storedErrors = new StringBuffer();
+    	List<MessageError> storedErrors = new ArrayList<>();
     	boolean check = cmdLineAccess.checkOptionsValue(storedErrors);	
     	
     	//Then
     	assertTrue(check);
-    	assertTrue(storedErrors.length()==0);
+    	assertTrue(storedErrors.size()==0);
 	}
 	
 	@Test
@@ -63,12 +63,12 @@ public class CommandLineAccessTest {
 
     	//When
     	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, options, Suites.class, AppEcom.class);
-    	StringBuffer storedErrors = new StringBuffer();
+    	List<MessageError> storedErrors = new ArrayList<>();
     	boolean check = cmdLineAccess.checkOptionsValue(storedErrors);	
     	
     	//Then
     	assertTrue(check);
-    	assertTrue(storedErrors.length()==0);
+    	assertTrue(storedErrors.size()==0);
 	}
 	
 	private enum TestEnum {unitario, integrado, endtoend} 
@@ -94,12 +94,12 @@ public class CommandLineAccessTest {
 
     	//When
     	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, options, Suites.class, AppEcom.class);
-    	StringBuffer storedErrors = new StringBuffer();
+    	List<MessageError> storedErrors = new ArrayList<>();
     	boolean check = cmdLineAccess.checkOptionsValue(storedErrors);	
     	
     	//Then
     	assertTrue(check);
-    	assertTrue(storedErrors.length()==0);
+    	assertTrue(storedErrors.size()==0);
 	}
 	
 	@Test
@@ -134,15 +134,24 @@ public class CommandLineAccessTest {
 
     	//When
     	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, options, Suites.class, AppEcom.class);
-    	StringBuffer storedErrors = new StringBuffer();
+    	List<MessageError> storedErrors = new ArrayList<>();
     	boolean check = cmdLineAccess.checkOptionsValue(storedErrors);	
     	
     	//Then
     	assertTrue(!check);
-    	assertTrue(storedErrors.toString().contains(
+    	assertTrue(contains(storedErrors, 
     		"Param " + paramPatternKO + " with value 45 that doesn't match pattern"));
-    	assertTrue(storedErrors.toString().contains(
+    	assertTrue(contains(storedErrors, 
     		"Param " + paramValueKO + " with value " + AppEcom.shop.toString() + " is not one of the possible values " + Arrays.asList(TestEnum.values())));
+	}
+	
+	private boolean contains(List<MessageError> listErrors, String message) {
+		for (MessageError messageError : listErrors) {
+			if (messageError.getMessage().contains(message)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	private List<String> getBaseArgs() {

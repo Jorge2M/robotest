@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.InputParamsMango;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.conf.TypeAccessFmwk;
+import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
 import com.mng.testmaker.domain.TestCaseTM;
 import com.mng.testmaker.domain.TestRunTM;
 import com.mng.testmaker.service.TestMaker;
@@ -47,13 +47,13 @@ public class PedidosNavigations {
     
     private static void testPedidosEnManto(DataMantoAccess dMantoAcc, CopyOnWriteArrayList<DataPedido> listPedidos, WebDriver driver) 
     throws Exception {
-        TypeAccessFmwk typeAccess = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getTypeAccess();
-        if (typeAccess==TypeAccessFmwk.Bat) {
+        TypeAccess typeAccess = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getTypeAccess();
+        if (typeAccess==TypeAccess.Bat) {
             return;
         }
 
         //Si existen pedidos que validar y no se trata de un acceso desde la línea de comandos (típicamente .bat)
-        if (listPedidos!=null && listPedidos.size()>0 && typeAccess!=TypeAccessFmwk.Bat) {
+        if (listPedidos!=null && listPedidos.size()>0 && typeAccess!=TypeAccess.Bat) {
             PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
             PedidosNavigations.validacionListaPagosStpVs(listPedidos, dMantoAcc.appE, driver);
         }

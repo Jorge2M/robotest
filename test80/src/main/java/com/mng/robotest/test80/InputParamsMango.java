@@ -5,7 +5,6 @@ import java.util.Arrays;
 import org.apache.commons.cli.CommandLine;
 
 import com.mng.testmaker.boundary.access.CmdLineMaker;
-import com.mng.testmaker.conf.TypeAccessFmwk;
 import com.mng.testmaker.domain.InputParamsTM;
 
 public class InputParamsMango extends InputParamsTM {
@@ -27,7 +26,6 @@ public class InputParamsMango extends InputParamsTM {
     private String[] listaLineas = {};
     private String[] listaPayments = {};   
     private String urlManto = null;
-    private TypeAccessFmwk typeAccess = TypeAccessFmwk.CommandLine;
     private CallBack callBack = null;
     
     private static String lineSeparator = System.getProperty("line.separator");
@@ -41,9 +39,8 @@ public class InputParamsMango extends InputParamsTM {
     	CommandLine cmdLineData = cmdLineAccess.getComandLineData();
 		setListaPaises(cmdLineData.getOptionValues(CountrysNameParam));
 		setListaLineas(cmdLineData.getOptionValues(LineasNameParam));
-		setListaPayments(cmdLineData.getOptionValues(PaymentsNameParam));        
+		setListaPayments(cmdLineData.getOptionValues(PaymentsNameParam));
 		setUrlManto(cmdLineData.getOptionValue(UrlManto));
-		setTypeAccessFromStr(cmdLineData.getOptionValue(TypeAccessParam));
         if (cmdLineData.getOptionValue(CallBackResource)!=null) {
             CallBack callBack = new CallBack();
             callBack.setCallBackResource(cmdLineData.getOptionValue(CallBackResource));
@@ -78,30 +75,7 @@ public class InputParamsMango extends InputParamsTM {
     	}
     	
     	return moreInfo.toString();
-    }
-
-
-    public TypeAccessFmwk getTypeAccess() {
-        return this.typeAccess;
-    }
-    
-    void setTypeAccess(TypeAccessFmwk typeAccess) {
-        if (typeAccess!=null) {
-            this.typeAccess = typeAccess;
-        }
-    }
-    
-    void setTypeAccessFromStr(String typeAccess) {
-        if (typeAccess!=null) {
-            this.typeAccess = TypeAccessFmwk.valueOf(typeAccess);
-        }
-    }
-    
-    void setTypeAccessIfNotSetted(TypeAccessFmwk typeAccess) {
-        if (this.typeAccess==null) {
-            setTypeAccess(typeAccess);
-        }
-    }    
+    }  
 
     public String[] getListaPaises() {
         return this.listaPaises;

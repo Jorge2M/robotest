@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.conf.TypeAccessFmwk;
+import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
 import com.mng.testmaker.domain.TestCaseTM;
 import com.mng.testmaker.domain.TestRunTM;
 import com.mng.testmaker.service.TestMaker;
@@ -49,8 +49,8 @@ public class PedidoNavigations {
     
     private static void testPedidosEnManto(DataMantoAccess dMantoAcc, DataCheckPedidos dataCheckPedidos, WebDriver driver) 
     throws Exception {
-        TypeAccessFmwk typeAccess = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getTypeAccess();
-        if (dataCheckPedidos.areChecksToExecute() && typeAccess!=TypeAccessFmwk.Bat) {
+        TypeAccess typeAccess = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getTypeAccess();
+        if (dataCheckPedidos.areChecksToExecute() && typeAccess!=TypeAccess.Bat) {
             PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
             PedidoNavigations.validacionListPedidosStpVs(dataCheckPedidos, dMantoAcc.appE, driver);
         }

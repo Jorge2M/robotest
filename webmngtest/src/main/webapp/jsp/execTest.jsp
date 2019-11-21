@@ -152,7 +152,7 @@ response.setDateHeader ("Expires", -1);%>
 	    paramsTSuite.setBrowser(request.getParameter(InputParamsTM.BrowserNameParam));
 	    paramsTSuite.setVersion(request.getParameter(InputParamsTM.VersionNameParam));
 	    paramsTSuite.setUrlBase(request.getParameter(InputParamsTM.URLNameParam));
-	    paramsTSuite.setNetAnalysis(request.getParameter(InputParamsTM.NetAnalysis));
+	    paramsTSuite.setNetAnalysis(request.getParameter(InputParamsTM.NetAnalysisParam));
 	    paramsTSuite.setListaPaises(request.getParameter(InputParamsMango.CountrysNameParam));
 	    paramsTSuite.setListaLineas(request.getParameterValues(InputParamsMango.LineasNameParam));
 	    paramsTSuite.setListaPayments(request.getParameterValues(InputParamsMango.PaymentsNameParam));
@@ -164,9 +164,9 @@ response.setDateHeader ("Expires", -1);%>
 	    //Parameters that don't come from index.jsp (for exemple, the call from Jenkin's CI Task)
 	    paramsTSuite.setStoreResult(true); 
 	    paramsTSuite.setUrlManto(request.getParameter(InputParamsMango.UrlManto)); 
-	    paramsTSuite.setRecicleWD(request.getParameter(InputParamsTM.RecicleWD)); 
-	    paramsTSuite.setNetAnalysis(request.getParameter(InputParamsTM.NetAnalysis));
-	    String[] listMails = request.getParameterValues(InputParamsTM.Mails);
+	    paramsTSuite.setRecicleWD(request.getParameter(InputParamsTM.RecicleWDParam)); 
+	    paramsTSuite.setNetAnalysis(request.getParameter(InputParamsTM.NetAnalysisParam));
+	    String[] listMails = request.getParameterValues(InputParamsTM.MailsParam);
 	    if (listMails!=null) {
 	    	paramsTSuite.setMails(Arrays.asList(listMails)); 
 	    }

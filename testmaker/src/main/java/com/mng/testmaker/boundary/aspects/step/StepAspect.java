@@ -27,7 +27,7 @@ public class StepAspect {
     public void before(JoinPoint joinPoint) {
     	InfoStep infoStep = InfoStep.from(joinPoint);
     	TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
-    	TestMaker.skipTestsIfSuiteStopped(testCase.getSuiteParent());
+    	TestMaker.skipTestsIfSuiteEnded(testCase.getSuiteParent());
     	StepTM step = infoStep.getDatosStep();
     	testCase.addStep(step);
     	setInitDataStep(infoStep, joinPoint, step);

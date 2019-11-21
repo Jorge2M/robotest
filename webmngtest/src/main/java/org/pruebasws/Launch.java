@@ -13,8 +13,8 @@ package org.pruebasws;
 import org.pruebasws.thread.TSuiteThreadsManager;
 import org.testng.TestNG;
 
-import com.mng.testmaker.domain.StateExecution;
 import com.mng.testmaker.service.TestMaker;
+
 
 /**
  * @param args
@@ -27,33 +27,33 @@ public class Launch {
         TestNG.privateMain(args, null);
     }
     
-    public static boolean stopTSuite(String idThreadGroupTestSuite) throws Exception {
-        boolean stopped = false;
+    public static void stopTSuite(String idThreadGroupTestSuite) throws Exception {
         String idExecSuite = TSuiteThreadsManager.getIdExecSuiteFromLocator(idThreadGroupTestSuite);
-        stopped = stopTSuiteViaMarkInTableSuite(idExecSuite);
-        if (!stopped)
-            //Solución más expeditiva y menos controlada. Problema: Los navegadores Chrome no desaparecen.
-            stopTSuiteViaKillThread(idThreadGroupTestSuite);
-        
-        return stopped;
+        TestMaker.stopSuite(idExecSuite);
+//        stopped = stopTSuiteViaMarkInTableSuite(idExecSuite);
+//        if (!stopped) {
+//            //Solución más expeditiva y menos controlada. Problema: Los navegadores Chrome no desaparecen.
+//            stopTSuiteViaKillThread(idThreadGroupTestSuite);
+//        }
+//        return stopped;
     }
     
-    public static boolean stopTSuiteViaMarkInTableSuite(String idExecSuite) throws Exception {
-        int timeoutSeconds = 40;
-        TestMaker.sendStopOrder(idExecSuite);
-        StateExecution stateSuiteNew;
-        int i=0;
-        do {
-            Thread.sleep(3000);
-            i+=3;
-            stateSuiteNew = TestMaker.getSuite(idExecSuite).getStateExecution();
-        }
-        while(stateSuiteNew==StateExecution.Stopping && i<timeoutSeconds);
-        
-        return (stateSuiteNew!=StateExecution.Stopping); 
-    }
+//    public static boolean stopTSuiteViaMarkInTableSuite(String idExecSuite) throws Exception {
+//        int timeoutSeconds = 40;
+//        TestMaker.sendStopOrder(idExecSuite);
+//        StateExecution stateSuiteNew;
+//        int i=0;
+//        do {
+//            Thread.sleep(3000);
+//            i+=3;
+//            stateSuiteNew = TestMaker.getSuite(idExecSuite).getStateExecution();
+//        }
+//        while(stateSuiteNew==StateExecution.Stopping && i<timeoutSeconds);
+//        
+//        return (stateSuiteNew!=StateExecution.Stopping); 
+//    }
     
-    public static void stopTSuiteViaKillThread(String idThreadGroupTestSuite) throws Exception {
-        TSuiteThreadsManager.stopThreadsTestSuite(idThreadGroupTestSuite);
-    }
+//    public static void stopTSuiteViaKillThread(String idThreadGroupTestSuite) throws Exception {
+//        TSuiteThreadsManager.stopThreadsTestSuite(idThreadGroupTestSuite);
+//    }
 }
