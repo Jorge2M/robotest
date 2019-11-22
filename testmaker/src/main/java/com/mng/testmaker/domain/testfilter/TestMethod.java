@@ -1,7 +1,6 @@
 package com.mng.testmaker.domain.testfilter;
 
 import java.lang.reflect.Method;
-
 import org.testng.annotations.Test;
 
 
@@ -21,4 +20,11 @@ public class TestMethod {
     public Method getMethod() {
         return this.method;
     }
+    
+    public TestMethodData getData() {
+    	TestMethodData testData = new TestMethodData();
+    	testData.setTestCaseName(getMethod().getName());
+    	testData.setTestCaseDescription(getAnnotationTest().description());
+    	return testData;
+    }  
 }

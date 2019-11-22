@@ -14,7 +14,7 @@ import org.testng.xml.XmlSuite;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.domain.ExecutorSuite;
+import com.mng.testmaker.domain.CreatorSuiteRun;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.StateExecution;
 import com.mng.testmaker.domain.StepTM;
@@ -60,11 +60,11 @@ public class TestMaker {
 		return (SuiteTM)ctx.getSuite().getXmlSuite();
 	}
 	
-	public static SuiteTM execSuite(ExecutorSuite executorSuite) throws Exception {
+	public static SuiteTM execSuite(CreatorSuiteRun executorSuite) throws Exception {
 		return (executorSuite.execTestSuite());
 	}
 	
-	public static SuiteTM execSuiteAsync(ExecutorSuite executorSuite) throws Exception {
+	public static SuiteTM execSuiteAsync(CreatorSuiteRun executorSuite) throws Exception {
 		return executorSuite.execTestSuiteAsync();
 	}
 	

@@ -13,7 +13,7 @@ import com.mng.testmaker.boundary.access.CmdLineMaker;
 import com.mng.testmaker.boundary.access.OptionTMaker;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.domain.ExecutorSuite;
+import com.mng.testmaker.domain.CreatorSuiteRun;
 import com.mng.testmaker.domain.SuiteTM;
 import com.mng.testmaker.domain.testfilter.TestMethod;
 import com.mng.testmaker.service.TestMaker;
@@ -127,10 +127,10 @@ public class Test80mng {
      * Indirect access from Command Line, direct access from Online
      */
     public static void execSuite(InputParamsMango inputParams) throws Exception {
-		ExecutorSuite executor = ExecutorSuiteMango.getNew(inputParams);
+		CreatorSuiteRun executor = CreatorSuiteRunMango.getNew(inputParams);
 		execSuite(executor);
     }
-    public static void execSuite(ExecutorSuite executor) throws Exception {
+    public static void execSuite(CreatorSuiteRun executor) throws Exception {
 		SuiteTM suite = TestMaker.execSuite(executor);
     	callBackIfNeeded(suite);
     }

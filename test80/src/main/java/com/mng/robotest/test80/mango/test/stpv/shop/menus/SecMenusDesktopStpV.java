@@ -205,7 +205,7 @@ public class SecMenusDesktopStpV {
 	        }
         }
         State stateVal = State.Defect;
-        if (listTxtArtNoValidos.size()<2) {
+        if (listTxtArtNoValidos.size()<5) {
         	stateVal = State.Warn;
         }
 	 	validations.add(

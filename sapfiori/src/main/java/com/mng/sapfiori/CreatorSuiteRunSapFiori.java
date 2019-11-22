@@ -4,25 +4,25 @@ import java.util.Arrays;
 
 import com.mng.sapfiori.datatmaker.Suites;
 import com.mng.sapfiori.test.suite.SmokeTestSuite;
-import com.mng.testmaker.domain.ExecutorSuite;
+import com.mng.testmaker.domain.CreatorSuiteRun;
 import com.mng.testmaker.domain.InputParamsTM;
-import com.mng.testmaker.domain.SuiteTM;
+import com.mng.testmaker.domain.SuiteMaker;
 
-public class ExecutorSuiteSapFiori extends ExecutorSuite {
+public class CreatorSuiteRunSapFiori extends CreatorSuiteRun {
 
-	private ExecutorSuiteSapFiori(InputParamsTM inputParams) throws Exception {
+	private CreatorSuiteRunSapFiori(InputParamsTM inputParams) throws Exception {
 		super(inputParams);
 	}
-	public static ExecutorSuiteSapFiori getNew(InputParamsTM inputParams) throws Exception {
-		return new ExecutorSuiteSapFiori(inputParams);
+	public static CreatorSuiteRunSapFiori getNew(InputParamsTM inputParams) throws Exception {
+		return new CreatorSuiteRunSapFiori(inputParams);
 	}
 	
     @Override
-    public SuiteTM makeSuite() throws Exception {
+    public SuiteMaker getSuiteMaker() throws Exception {
         try {
             switch ((Suites)inputParams.getSuite()) {
             case SmokeTest:
-                return (new SmokeTestSuite(inputParams)).getSuite();
+                return (new SmokeTestSuite(inputParams));
             case OtherSuite:  
             default:
             }

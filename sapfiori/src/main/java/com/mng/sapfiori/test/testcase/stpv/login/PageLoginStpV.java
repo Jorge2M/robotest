@@ -32,8 +32,7 @@ public class PageLoginStpV {
     	PageIconsMenuStpV pageInitialStpV = PageIconsMenuStpV.getNew(
     		pageLogin.clickAccederAlSistema());
     	
-    	int maxSeconds = 2;
-    	pageInitialStpV.checkIsInitialPageSpanish(maxSeconds);
+    	pageInitialStpV.checkIsInitialPageSpanish(2);
     	return pageInitialStpV;
     }
 }

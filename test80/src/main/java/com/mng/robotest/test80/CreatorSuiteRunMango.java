@@ -15,48 +15,49 @@ import com.mng.robotest.test80.mango.test.suites.RegistrosSuite;
 import com.mng.robotest.test80.mango.test.suites.SmokeMantoSuite;
 import com.mng.robotest.test80.mango.test.suites.SmokeTestSuite;
 import com.mng.robotest.test80.mango.test.suites.ValesPaisesSuite;
-import com.mng.testmaker.domain.ExecutorSuite;
-import com.mng.testmaker.domain.SuiteTM;
+import com.mng.testmaker.domain.CreatorSuiteRun;
+import com.mng.testmaker.domain.SuiteMaker;
 
-public class ExecutorSuiteMango extends ExecutorSuite {
+
+public class CreatorSuiteRunMango extends CreatorSuiteRun {
 	
-	private ExecutorSuiteMango(InputParamsMango inputParams) throws Exception {
+	private CreatorSuiteRunMango(InputParamsMango inputParams) throws Exception {
 		super(inputParams);
 	}
-	public static ExecutorSuiteMango getNew(InputParamsMango inputParams) throws Exception {
-		return new ExecutorSuiteMango(inputParams);
+	public static CreatorSuiteRunMango getNew(InputParamsMango inputParams) throws Exception {
+		return new CreatorSuiteRunMango(inputParams);
 	}
 	
     @Override
-    public SuiteTM makeSuite() throws Exception {
+    public SuiteMaker getSuiteMaker() throws Exception {
     	InputParamsMango inputParamsMango = (InputParamsMango)inputParams;
         try {
             switch ((Suites)inputParams.getSuite()) {
             case SmokeTest:
-                return (new SmokeTestSuite(inputParamsMango)).getSuite();
+                return (new SmokeTestSuite(inputParamsMango));
             case SmokeManto:
-                return (new SmokeMantoSuite(inputParamsMango)).getSuite();
+                return (new SmokeMantoSuite(inputParamsMango));
             case PagosPaises:
-                return (new PagosPaisesSuite(inputParamsMango)).getSuite();
+                return (new PagosPaisesSuite(inputParamsMango));
             case ValesPaises:
-                return (new ValesPaisesSuite(inputParamsMango)).getSuite();
+                return (new ValesPaisesSuite(inputParamsMango));
             case PaisIdiomaBanner:
-                return (new PaisIdiomaSuite(inputParamsMango)).getSuite();
+                return (new PaisIdiomaSuite(inputParamsMango));
             case MenusPais:
-                return (new MenusPaisSuite(inputParamsMango)).getSuite();
+                return (new MenusPaisSuite(inputParamsMango));
             case MenusManto:
-                return (new MenusMantoSuite(inputParamsMango)).getSuite();
+                return (new MenusMantoSuite(inputParamsMango));
             case Nodos:
-                return (new NodosSuite(inputParamsMango)).getSuite();
+                return (new NodosSuite(inputParamsMango));
             case ConsolaVotf:
-                return (new ConsolaVotfSuite(inputParamsMango)).getSuite();
+                return (new ConsolaVotfSuite(inputParamsMango));
             case ListFavoritos:
             case ListMiCuenta:
-                return (new GenericFactorySuite(inputParamsMango)).getSuite();
+                return (new GenericFactorySuite(inputParamsMango));
             case RegistrosPaises:
-                return (new RegistrosSuite(inputParamsMango)).getSuite();
+                return (new RegistrosSuite(inputParamsMango));
             case RebajasPaises:
-                return (new RebajasSuite(inputParamsMango)).getSuite();
+                return (new RebajasSuite(inputParamsMango));
             default:
             }
         }
