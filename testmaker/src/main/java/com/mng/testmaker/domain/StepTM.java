@@ -79,7 +79,7 @@ public class StepTM {
 		}
     	storeEvidencies();
     	setHoraFin(new Date(System.currentTimeMillis()));
-    	setState(StateExecution.Finished);
+    	setState(StateExecution.Finished_Normally);
 	}
 	
 	public void storeEvidencies() {

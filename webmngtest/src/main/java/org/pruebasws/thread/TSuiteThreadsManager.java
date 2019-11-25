@@ -26,7 +26,7 @@ public class TSuiteThreadsManager {
     
     //TODO esto desaparecerá con la versión REST
 	public static String startSuiteInThread(InputParamsMango paramsTSuite) throws Exception { 
-		paramsTSuite.setTypeAccess(TypeAccess.Rest);
+		paramsTSuite.setTypeAccess(TypeAccess.Rest); 
 		CreatorSuiteRun executor = CreatorSuiteRunMango.getNew(paramsTSuite);
 		SuiteTM suite = executor.getSuite();
 		String idExecSuite = suite.getIdExecution();

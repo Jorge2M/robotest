@@ -10,6 +10,7 @@ import org.testng.xml.XmlTest;
 
 import com.mng.testmaker.conf.ConstantesTM;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.pool.PoolWebDrivers;
 import com.mng.testmaker.testreports.html.GenerateReports;
 
@@ -24,7 +25,6 @@ public class SuiteTM extends XmlSuite {
 	private Date fin;
 	private final PoolWebDrivers poolWebDrivers = new PoolWebDrivers();
 	private SenderMailEndSuiteI senderMail;
-	private PersistorDataI storerResult;
 	
 	public SuiteTM(String idSuiteExecution, InputParamsTM inputParams) {
 		this.idSuiteExecution = idSuiteExecution;
@@ -56,9 +56,6 @@ public class SuiteTM extends XmlSuite {
 	public void setSenderMail(SenderMailEndSuiteI senderMail) {
 		this.senderMail = senderMail;
 	}
-	public void setStorerResult(PersistorDataI storerResult) {
-		this.storerResult = storerResult;
-	}
 	
 	public List<TestRunTM> getListTestRuns() {
 		List<TestRunTM> listTestRuns = new ArrayList<>();
@@ -87,7 +84,7 @@ public class SuiteTM extends XmlSuite {
 	}
 	
 	public void end() {
-		stateExecution = StateExecution.Finished;
+		stateExecution = StateExecution.Finished_Normally;
 		result = getResultFromTestsRun();
 		fin = new Date(); 
 		poolWebDrivers.removeAllStrWd();
@@ -95,7 +92,7 @@ public class SuiteTM extends XmlSuite {
 			senderMail.sendMail(this);
 		}
 		if (inputParams.isStoreResult()) {
-			storerResult.store(this);
+			TestMaker.getRepository().store(this);
 		}
 		SuitesExecuted.remove(this);
 	}

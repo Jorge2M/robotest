@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.SecMenusWrap.bloqueMenu;
-import com.mng.testmaker.conf.defaultstorer.StorerResultSQLite;
+import com.mng.testmaker.domain.RepositoryI;
+import com.mng.testmaker.service.TestMaker;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ import java.util.Calendar;
 
 public class RebajasPaisDAO {
 	
-	private final StorerResultSQLite storerSQLite = new StorerResultSQLite();
+	private final RepositoryI repository = TestMaker.getRepository();
 	
     public static String SQLSelectRebajasPais = 
         "SELECT REBAJAS, INICIO, FIN " +
@@ -59,7 +60,7 @@ public class RebajasPaisDAO {
         ArrayList<String> listCountryCodes = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date fechaHoyDate = new Date(Calendar.getInstance().getTime().getTime());
-        try (Connection conn = storerSQLite.getConnection();
+        try (Connection conn = repository.getConnection();
             PreparedStatement select = conn.prepareStatement(SQLSelectCountrysInRebajas)) {
             try (ResultSet resultado = select.executeQuery()) {
                 while (resultado.next()) {
@@ -90,7 +91,7 @@ public class RebajasPaisDAO {
         boolean rebajas = false;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date fechaHoyDate = new Date(Calendar.getInstance().getTime().getTime());
-        try (Connection conn = StorerResultSQLite.getConnectionNew();
+        try (Connection conn = repository.getConnection();
             PreparedStatement select = conn.prepareStatement(SQLSelectRebajasPais)) {
             select.setString(1, codigoPais);
             try (ResultSet resultado = select.executeQuery()) {
@@ -123,7 +124,7 @@ public class RebajasPaisDAO {
      */
     public int getMaxRebajas(String codigoPais) {
         int maxrebajas = 0;
-        try (Connection conn = storerSQLite.getConnection();
+        try (Connection conn = repository.getConnection();
             PreparedStatement select = conn.prepareStatement(SQLSelectMaxRebajasPais)) {
             select.setString(1, codigoPais);
             try (ResultSet resultado = select.executeQuery()) {
@@ -157,7 +158,7 @@ public class RebajasPaisDAO {
     		sql = SQLSelectLineasInvertidasAccesorios;
     	}
     	
-        try (Connection conn = storerSQLite.getConnection();
+        try (Connection conn = repository.getConnection();
             PreparedStatement select = conn.prepareStatement(sql)) {
             select.setString(1, codigoPais);
             try (ResultSet resultado = select.executeQuery()) {

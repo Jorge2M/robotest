@@ -3,14 +3,13 @@ package com.mng.testmaker.repository.jdbc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
-import com.mng.testmaker.conf.defaultstorer.StorerResultSQLite;
+import com.mng.testmaker.service.TestMaker;
 
 
 public class ManageBD {
 
     public static void vacuum() {
-        try (Connection conn = StorerResultSQLite.getConnectionNew();
+        try (Connection conn = TestMaker.getRepository().getConnection();
              PreparedStatement stmt = conn.prepareStatement("VACUUM")) {
             stmt.executeUpdate();
         }

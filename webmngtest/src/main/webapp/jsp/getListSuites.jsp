@@ -8,8 +8,8 @@ response.setDateHeader ("Expires", -1);%>
 <%@ page import="java.util.Arrays"%>
 <%@ page import="com.mng.testmaker.service.TestMaker"%>
 <%@ page import="com.mng.testmaker.conf.Channel"%>
-<%@ page import="com.mng.testmaker.domain.PersistorDataI"%>
-<%@ page import="com.mng.testmaker.conf.defaultstorer.StorerResultSQLite"%>
+<%@ page import="com.mng.testmaker.domain.RepositoryI"%>
+<%@ page import="com.mng.testmaker.conf.defaultstorer.RepositorySQLite"%>
 <%@ page import="com.mng.testmaker.repository.jdbc.dao.SuitesDAO"%>
 <%@ page import="com.mng.testmaker.domain.data.SuiteData"%>
 
@@ -94,15 +94,12 @@ for (SuiteData suite : listSuitesToDisplay) {
 </body>
 </html>
 
-<%!
-private List<SuiteData> getSuitesToDisplay(String idExecSuite, String suiteName, String channel) throws Exception {
-	PersistorDataI persistor = new StorerResultSQLite();			
-	SuitesDAO suitesDAO = new SuitesDAO(persistor);
+<%!private List<SuiteData> getSuitesToDisplay(String idExecSuite, String suiteName, String channel) throws Exception {
 	if (idExecSuite!=null) {
-		SuiteData suite = suitesDAO.getSuite(idExecSuite);
-		return Arrays.asList(suite);
+		return Arrays.asList(
+				TestMaker.getSuite(idExecSuite));
 	} else {
-		List<SuiteData> listSuites = suitesDAO.getListSuitesIdDesc();
+		List<SuiteData> listSuites = TestMaker.getListSuites();
 		List<SuiteData> listSuitesToReturn = new ArrayList<>();
 		for (SuiteData suite : listSuites) {
 			if (suite.getName().compareTo(suiteName)==0 &&
@@ -112,5 +109,4 @@ private List<SuiteData> getSuitesToDisplay(String idExecSuite, String suiteName,
 		}
 		return listSuitesToReturn;
 	}
-}
-%>
+}%>

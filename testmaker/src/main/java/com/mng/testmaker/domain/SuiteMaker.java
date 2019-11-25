@@ -12,7 +12,6 @@ import org.testng.xml.XmlSuite.ParallelMode;
 import com.mng.testmaker.boundary.listeners.InvokeListener;
 import com.mng.testmaker.boundary.listeners.MyTransformer;
 import com.mng.testmaker.conf.defaultmail.DefaultMailEndSuite;
-import com.mng.testmaker.conf.defaultstorer.StorerResultSQLite;
 import com.mng.testmaker.domain.testfilter.FilterTestsSuiteXML;
 import com.mng.testmaker.domain.testfilter.TestMethod;
 import com.mng.testmaker.testreports.html.Reporter;
@@ -24,7 +23,6 @@ public abstract class SuiteMaker {
     private final FilterTestsSuiteXML filterSuiteXML;
 
     private Map<String,String> parameters;
-    private PersistorDataI storerResult = new StorerResultSQLite();
     private SenderMailEndSuiteI senderMail = new DefaultMailEndSuite();
     
     private List<TestRunMaker> listTestRuns = new ArrayList<>();
@@ -53,7 +51,6 @@ public abstract class SuiteMaker {
     
     public SuiteTM getSuite() {
     	generateXmlSuiteIfNotAvailable();
-    	suite.setStorerResult(storerResult);
     	suite.setSenderMail(senderMail);
     	return suite;
     }
@@ -63,12 +60,6 @@ public abstract class SuiteMaker {
         return (suite.getTests().get(0));
     }
 
-    public PersistorDataI getStorerResult() {
-		return storerResult;
-	}
-	public void setStorerResult(PersistorDataI storerResult) {
-		this.storerResult = storerResult;
-	}
 	public SenderMailEndSuiteI getSenderMail() {
 		return senderMail;
 	}

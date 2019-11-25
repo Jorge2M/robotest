@@ -9,13 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.PersistorDataI;
 import com.mng.testmaker.domain.data.TestCaseData;
 
 
 public class TestCasesDAO {
 	
-	private final PersistorDataI persistor;
+	private final ConnectorBD connector;
 	
     public static String SQLSelectTestCasesSuite =
         "SELECT " +
@@ -52,13 +51,13 @@ public class TestCasesDAO {
         "DELETE FROM METHODS " +
         "WHERE INICIO < ?;";
     
-    public TestCasesDAO(PersistorDataI persistor) {
-    	this.persistor = persistor;
+    public TestCasesDAO(ConnectorBD connector) {
+    	this.connector = connector;
     }
     
     public List<TestCaseData> getListTestCases(String idSuite) throws Exception {
     	List<TestCaseData> listTestCases = new ArrayList<>();
-        try (Connection conn = persistor.getConnection();
+        try (Connection conn = connector.getConnection();
             PreparedStatement select = conn.prepareStatement(SQLSelectTestCasesSuite)) {
             select.setString(1, idSuite);
             try (ResultSet resultado = select.executeQuery()) {
@@ -100,7 +99,7 @@ public class TestCasesDAO {
 
     
     public void insertTestCase(TestCaseData testCase) {
-        try (Connection conn = persistor.getConnection()) {
+        try (Connection conn = connector.getConnection()) {
             try (PreparedStatement insert = conn.prepareStatement(SQLInsertMethod)) {
             	insert.setString(1, testCase.getIdExecSuite());
             	insert.setString(2, testCase.getSuiteName()); 
@@ -127,7 +126,7 @@ public class TestCasesDAO {
     }
     
     public void deleteTestCasesBefore(String idSuite) {
-        try (Connection conn = persistor.getConnection();
+        try (Connection conn = connector.getConnection();
             PreparedStatement delete = conn.prepareStatement(SQLDeleteHistorical)) {
             delete.setString(1, idSuite);
             delete.executeUpdate();

@@ -3,6 +3,7 @@ package com.mng.testmaker.service;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -14,16 +15,22 @@ import org.testng.xml.XmlSuite;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
+import com.mng.testmaker.conf.defaultstorer.RepositorySQLite;
 import com.mng.testmaker.domain.CreatorSuiteRun;
 import com.mng.testmaker.domain.InputParamsTM;
+import com.mng.testmaker.domain.RepositoryI;
 import com.mng.testmaker.domain.StateExecution;
 import com.mng.testmaker.domain.StepTM;
 import com.mng.testmaker.domain.SuiteTM;
 import com.mng.testmaker.domain.SuitesExecuted;
 import com.mng.testmaker.domain.TestCaseTM;
 import com.mng.testmaker.domain.TestRunTM;
+import com.mng.testmaker.domain.data.SuiteData;
+import com.mng.testmaker.service.FilterSuites.SetSuiteRun;
 
 public class TestMaker {
+	
+	private static RepositoryI repository = new RepositorySQLite(); 
 	
 	public static void run(SuiteTM suite) {
 		run(suite, false);
@@ -44,20 +51,49 @@ public class TestMaker {
     }
     
     public static void finishSuite(String idExecution) {
-    	finish(getSuite(idExecution));
+    	finish(getSuiteExecuted(idExecution));
     }
     
 	public static void finish(SuiteTM suite) {
 		suite.end();
 	}
 
+	public static SuiteData getSuite(String idExecution) throws Exception {
+		SuiteTM suite = getSuiteExecuted(idExecution);
+		if (suite!=null) {
+			return SuiteData.from(suite);
+		}
+		return getSuiteStored(idExecution);
+	}
 	
-	public static SuiteTM getSuite(String idExecution) {
+	public static List<SuiteData> getListSuites() throws Exception {
+		FilterSuites filterSuites = FilterSuites.getNew();
+		return filterSuites.getListSuites();
+	}
+	
+	public static List<SuiteData> getListSuites(String suite, String channel, String application, String setSuite, Date fechaDesde) 
+	throws Exception {
+		Channel channelEnum = channel!=null ? Channel.valueOf(channel) : null;
+		SetSuiteRun setSuiteEnum = setSuite!=null ? SetSuiteRun.valueOf(setSuite) : null;
+		return getListSuites(suite, channelEnum, application, setSuiteEnum, fechaDesde);
+	}
+	
+	public static List<SuiteData> getListSuites(String suite, Channel channel, String application, SetSuiteRun setSuite, Date fechaDesde) 
+	throws Exception {
+		FilterSuites filterSuites = FilterSuites.getNew(suite, channel, application, setSuite, fechaDesde);
+		return filterSuites.getListSuites();
+	}
+	
+	public static SuiteTM getSuiteExecuted(String idExecution) {
 		return SuitesExecuted.getSuite(idExecution);
 	}
 	
-	public static SuiteTM getSuite(ITestContext ctx) {
+	public static SuiteTM getSuiteExecuted(ITestContext ctx) {
 		return (SuiteTM)ctx.getSuite().getXmlSuite();
+	}
+	
+	private static SuiteData getSuiteStored(String idExecution) throws Exception {
+		return (repository.getSuite(idExecution));
 	}
 	
 	public static SuiteTM execSuite(CreatorSuiteRun executorSuite) throws Exception {
@@ -69,7 +105,7 @@ public class TestMaker {
 	}
 	
 	public static void stopSuite(String idExecSuite) {
-		SuiteTM suite = getSuite(idExecSuite);
+		SuiteTM suite = getSuiteExecuted(idExecSuite);
 		stopSuite(suite);
 	}
 	public static void stopSuite(SuiteTM suite) {
@@ -80,7 +116,7 @@ public class TestMaker {
 	}
 	private static boolean neatStop(SuiteTM suite) {
 		suite.setStateExecution(StateExecution.Stopping);
-        List<StateExecution> validStates = Arrays.asList(StateExecution.Stopped, StateExecution.Finished);
+        List<StateExecution> validStates = Arrays.asList(StateExecution.Stopped, StateExecution.Finished_Normally);
         return (waitForSuiteInState(suite, validStates, 15));
 	}
 	private static boolean waitForSuiteInState(SuiteTM suite, List<StateExecution> validStates, int maxSeconds) {
@@ -93,20 +129,9 @@ public class TestMaker {
 		}
 		return false;
 	}
-
-	public static List<SuiteTM> getListSuites(String suiteName, Channel channel) {
-		List<SuiteTM> listSuites = new ArrayList<>();
-		for (SuiteTM suite : SuitesExecuted.getSuitesExecuted()) {
-			if (suite.getName().compareTo(suiteName)==0 &&
-				suite.getInputParams().getChannel()==channel) {
-				listSuites.add(suite);
-			}
-		}
-		return listSuites;
-	}
 	
 	public static InputParamsTM getInputParamsSuite(ITestContext ctx) {
-		return (InputParamsTM)getSuite(ctx).getInputParams();
+		return (InputParamsTM)getSuiteExecuted(ctx).getInputParams();
 	}
 	
 	public static TestRunTM getTestRun(ITestContext ctx) {
@@ -133,6 +158,13 @@ public class TestMaker {
     	return ctx.getCurrentXmlTest().getParameter(idParam);
     }
 	
+    public static RepositoryI getRepository() {
+    	return TestMaker.repository;
+    }
+	public static void setRepository(RepositoryI repository) {
+		TestMaker.repository = repository;
+	}
+    
     public static void skipTestsIfSuiteStopped() {
     	if (getTestCase()!=null) {
     		skipTestsIfSuiteEnded(getTestCase().getSuiteParent());
@@ -143,7 +175,7 @@ public class TestMaker {
     	List<StateExecution> statesSuiteEnded = Arrays.asList(
     			StateExecution.Stopping, 
     			StateExecution.Stopped, 
-    			StateExecution.Finished);
+    			StateExecution.Finished_Normally);
         if (statesSuiteEnded.contains(suite.getStateExecution())) {
             throw new SkipException("Suite " + suite.getName() + " in state " + suite.getStateExecution());
         }

@@ -7,9 +7,9 @@ import javax.mail.internet.InternetAddress;
 
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.conf.defaultstorer.StorerResultSQLite;
+import com.mng.testmaker.conf.defaultstorer.RepositorySQLite;
 import com.mng.testmaker.domain.InputParamsTM;
-import com.mng.testmaker.domain.PersistorDataI;
+import com.mng.testmaker.domain.RepositoryI;
 import com.mng.testmaker.domain.SenderMailEndSuiteI;
 import com.mng.testmaker.domain.SuiteTM;
 import com.mng.testmaker.domain.data.SuiteData;
@@ -37,7 +37,7 @@ public class DefaultMailEndSuite implements SenderMailEndSuiteI {
               
             List<SuiteData>list1Suite = new ArrayList<>();
             list1Suite.add(SuiteData.from(suite));
-            PersistorDataI persistor = new StorerResultSQLite();
+            RepositoryI persistor = new RepositorySQLite();
             mensajeHTML+=CorreoReport.constuctTableMail(list1Suite, persistor);
             
             Log4jConfig.pLogger.info(". Procedemos a enviar correo!");

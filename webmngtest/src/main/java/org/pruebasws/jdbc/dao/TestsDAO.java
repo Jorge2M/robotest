@@ -255,7 +255,7 @@ public class TestsDAO {
             return (Test80mng.getListPagoFilterNames(channel, appE, false/*isEmpl*/));
         }
             
-        return (Test80mng.getListPagoFilterNames(codCountrysCommaSeparated, channel, appE, false/*isEmpl*/));        
+        return (Test80mng.getListPagoFilterNames(codCountrysCommaSeparated, channel, appE, false));
     }
     
     /**

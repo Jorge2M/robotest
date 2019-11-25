@@ -50,7 +50,7 @@ public class TestCaseTM  {
 	}
 	
 	private void stopTest() {
-    	setStateRun(StateExecution.Finished);
+    	setStateRun(StateExecution.Finished_Normally);
     	suiteParent.getPoolWebDrivers().quitWebDriver(driver, testRunParent);
 	}
 	

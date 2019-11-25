@@ -13,7 +13,6 @@ import org.apache.logging.log4j.Logger;
 
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.PersistorDataI;
 import com.mng.testmaker.domain.data.TestRunData;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
@@ -21,7 +20,7 @@ import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriver
 public class TestRunsDAO {
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
-	private final PersistorDataI persistor;
+	private final ConnectorBD connector;
     
     private static String SQLSelectTestRunsSuite = 
     	"SELECT " +
@@ -57,13 +56,13 @@ public class TestRunsDAO {
         "DELETE FROM TESTRUNS " +
         "WHERE 	IDEXECSUITE < ?;";    
     
-    public TestRunsDAO(PersistorDataI persistor) {
-    	this.persistor = persistor;
+    public TestRunsDAO(ConnectorBD connector) {
+    	this.connector = connector;
     }
     
     public List<TestRunData> getListTestRuns(String idSuite) throws Exception {
     	List<TestRunData> listTestRuns = new ArrayList<>();
-        try (Connection conn = persistor.getConnection();
+        try (Connection conn = connector.getConnection();
             PreparedStatement select = conn.prepareStatement(SQLSelectTestRunsSuite)) {
             select.setString(1, idSuite);
             try (ResultSet resultado = select.executeQuery()) {
@@ -101,7 +100,7 @@ public class TestRunsDAO {
     }
     
     public void insertTestRun(TestRunData testRun) {
-        try (Connection conn = persistor.getConnection()) {
+        try (Connection conn = connector.getConnection()) {
             try (PreparedStatement insert = conn.prepareStatement(SQLInsertTestRun)) {
     	        insert.setString(1, testRun.getIdExecSuite());
     	        insert.setString(2, testRun.getSuiteName()); 
@@ -127,7 +126,7 @@ public class TestRunsDAO {
     }
 
     public void deleteTestRunsBefore(String idSuite) {
-        try (Connection conn = persistor.getConnection();
+        try (Connection conn = connector.getConnection();
             PreparedStatement delete = conn.prepareStatement(SQLDeleteHistorical)) {
             delete.setString(1, idSuite);
             delete.executeUpdate();

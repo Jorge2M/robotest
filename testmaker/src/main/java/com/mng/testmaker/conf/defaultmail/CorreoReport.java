@@ -11,12 +11,11 @@ import javax.mail.internet.*;
 
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.conf.defaultstorer.StorerResultSQLite;
-import com.mng.testmaker.domain.PersistorDataI;
+import com.mng.testmaker.conf.defaultstorer.RepositorySQLite;
+import com.mng.testmaker.domain.RepositoryI;
 import com.mng.testmaker.domain.data.SuiteData;
 import com.mng.testmaker.domain.data.TestCaseData;
-import com.mng.testmaker.repository.jdbc.dao.SuitesDAO;
-import com.mng.testmaker.repository.jdbc.dao.TestCasesDAO;
+import com.mng.testmaker.service.TestMaker;
 
 
 public class CorreoReport {
@@ -26,21 +25,21 @@ public class CorreoReport {
      * 
      */
     public static void main(String[] args) throws Exception { 
-        PersistorDataI persistor = new StorerResultSQLite();
+        RepositoryI persistor = new RepositorySQLite();
         String html = construirHTMLmail(persistor);
         sendMailResult(html);
     }
 	
     //Construye el HTML del correo con la lista de tests ejecutados
-    private static String construirHTMLmail(PersistorDataI persistor) throws Exception {
+    private static String construirHTMLmail(RepositoryI persistor) throws Exception {
         //Fecha actual - 13 horas
         //Date fechaDesde = new Date(System.currentTimeMillis() - 3600000 /*1 horas*/);
         Date fechaDesde = new Date(System.currentTimeMillis() - 50400000 /*14 horas*/);	    
         //Date fechaDesde = new Date(System.currentTimeMillis() - 46800000 /*13 horas*/);
         Date fechaHasta = new Date(System.currentTimeMillis());
 		
-        SuitesDAO suitesDAO = new SuitesDAO(persistor);
-        List<SuiteData> listSuites = suitesDAO.getListSuitesAfter(fechaDesde);
+        RepositoryI repository = TestMaker.getRepository();
+        List<SuiteData> listSuites = repository.getListSuitesAfter(fechaDesde);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
 
         String html =
@@ -53,7 +52,7 @@ public class CorreoReport {
         return html;
     }
 	
-    public static String constuctTableMail(List<SuiteData> listSuites, PersistorDataI persistor) 
+    public static String constuctTableMail(List<SuiteData> listSuites, RepositoryI persistor) 
     throws Exception {
 
         String html = 	
@@ -89,8 +88,7 @@ public class CorreoReport {
 	        for (SuiteData suite : listSuites) {
 	        	String nameSuite = suite.getName();
 	        	String idSuite = suite.getIdExecSuite();
-	        	TestCasesDAO testCasesDAO = new TestCasesDAO(persistor);
-	        	List<TestCaseData> listTestCases = testCasesDAO.getListTestCases(idSuite);
+	        	List<TestCaseData> listTestCases = TestMaker.getRepository().getListTestCases(idSuite);
 	        	Map<State,Integer> testCasesState = mapNumberTestCasesInState(listTestCases);
 	            Integer numDisps = 
 	            	testCasesState.get(State.Ok) + 

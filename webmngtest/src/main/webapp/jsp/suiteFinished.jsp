@@ -7,5 +7,5 @@ response.setDateHeader ("Expires", -1);%>
 <%@page session="false"%>
 <%
 	String idExecSuite = request.getParameter("idExecSuite");
-out.print(TestMaker.getSuite(idExecSuite).getStateExecution()==StateExecution.Finished);
+out.print(TestMaker.getSuiteExecuted(idExecSuite).getStateExecution()==StateExecution.Finished_Normally);
 %>

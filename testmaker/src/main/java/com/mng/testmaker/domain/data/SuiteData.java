@@ -150,4 +150,17 @@ public class SuiteData {
 		this.stateExecution = stateExecution;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) { 
+			return true; 
+		} 
+		if (!(o instanceof SuiteData)) { 
+			return false; 
+		} 
+		
+		SuiteData c = (SuiteData) o; 
+		return (c.getIdExecSuite().compareTo(getIdExecSuite())==0); 
+	}
+	
 }

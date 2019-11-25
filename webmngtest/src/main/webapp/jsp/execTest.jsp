@@ -57,17 +57,17 @@ response.setDateHeader ("Expires", -1);%>
 
   	<%
   		ServletContext ctx = getServletContext();
-  	  	  	  	System.setProperty("user.dir", getServletContext().getRealPath(""));
-  	  	  	  	
-  	  	  	  	//Store the request params
-  	  	  	  	InputParamsMango paramsTSuite = storeParamsFromHttpRequest(request);
-  	  	  		
-  	  	  		//Specific parameter from index.jsp
-  	  	  	  	String forceStart = "off"; 
-  	  	  	  	if (request.getParameter("forceStart")!=null) {
-  	  	  	  		forceStart = request.getParameter("forceStart");
-  	  	  	  	}
-  	  	  	  	SuiteTM suite = null;
+  	  	  	  	  	System.setProperty("user.dir", getServletContext().getRealPath(""));
+  	  	  	  	  	
+  	  	  	  	  	//Store the request params
+  	  	  	  	  	InputParamsMango paramsTSuite = storeParamsFromHttpRequest(request);
+  	  	  	  		
+  	  	  	  		//Specific parameter from index.jsp
+  	  	  	  	  	String forceStart = "off"; 
+  	  	  	  	  	if (request.getParameter("forceStart")!=null) {
+  	  	  	  	  		forceStart = request.getParameter("forceStart");
+  	  	  	  	  	}
+  	  	  	  	  	SuiteTM suite = null;
   	%>
 
 	<div id="dataTestSuite"">
@@ -75,32 +75,32 @@ response.setDateHeader ("Expires", -1);%>
 		<p class="testSuiteAttribute">Channel: <b><%=paramsTSuite.getChannel()%></b></p>
 		<p class="testSuiteAttribute">Browser: <b><%=paramsTSuite.getWebDriverType()%></b></p>
 		<%
-		if (paramsTSuite.getVersion()!=null && "".compareTo(paramsTSuite.getVersion())!=0) {
+			if (paramsTSuite.getVersion()!=null && "".compareTo(paramsTSuite.getVersion())!=0) {
 		%>
 		<p class="testSuiteAttribute">Version: <b><%=paramsTSuite.getVersion()%></b></p>
 		<%
-		}
-		if (paramsTSuite.getUrlBase()!=null && "".compareTo(paramsTSuite.getUrlBase())!=0) {
+			}
+				if (paramsTSuite.getUrlBase()!=null && "".compareTo(paramsTSuite.getUrlBase())!=0) {
 		%>
 		<p class="testSuiteAttribute">URL Base: <b><%=paramsTSuite.getUrlBase()%></b></p>
 		<%
-	    }
-	    if (paramsTSuite.getListaPaises()!=null) {
+			}
+			    if (paramsTSuite.getListaPaises()!=null) {
 		%>
 		<p class="testSuiteAttribute">Countries: <b><%=paramsTSuite.getListaPaisesStr()%></b></p>
 		<%
-	    }
+			}
 		%>
 	</div>
 
 	<%
-	boolean browserTasksRunning;
-	if(System.getProperty("os.name").contains("Windows")){
-		browserTasksRunning = browserTasksRunning(paramsTSuite.getWebDriverType().toString(), "tasklist");
-	} else {
-		browserTasksRunning = browserTasksRunning(paramsTSuite.getWebDriverType().toString(), "ps");
-	}
-	if (forceStart.toLowerCase().compareTo("on")!=0 && browserTasksRunning) {
+		boolean browserTasksRunning;
+		if(System.getProperty("os.name").contains("Windows")){
+			browserTasksRunning = browserTasksRunning(paramsTSuite.getWebDriverType().toString(), "tasklist");
+		} else {
+			browserTasksRunning = browserTasksRunning(paramsTSuite.getWebDriverType().toString(), "ps");
+		}
+		if (forceStart.toLowerCase().compareTo("on")!=0 && browserTasksRunning) {
 	%>
 		<div id="contenidoAjax"><p style="color:red;">Test no iniciado! </p>
 			<ul>
@@ -108,25 +108,25 @@ response.setDateHeader ("Expires", -1);%>
 			</ul>
 		</div>
 		<%
-	}
-	else {
-	    //Obtenemos el id de la ejecuciï¿½n + el output directory correspondiente a dicha ejecuciï¿½n y ejecutamos la TestSuite
-	    //String idExecutedSuite = Test80mng.getIdForSuiteToExecute();
-		//paramsTSuite.setIdExecutedSuite(idExecutedSuite);
-	    String idExecSuite = TSuiteThreadsManager.startSuiteInThread(paramsTSuite);
+			}
+			else {
+			    //Obtenemos el id de la ejecuciï¿½n + el output directory correspondiente a dicha ejecuciï¿½n y ejecutamos la TestSuite
+			    //String idExecutedSuite = Test80mng.getIdForSuiteToExecute();
+				//paramsTSuite.setIdExecutedSuite(idExecutedSuite);
+			    String idExecSuite = TSuiteThreadsManager.startSuiteInThread(paramsTSuite);
 
-	    //Esperamos a que se arranque el test
-		int maxSecondsToWait = Suites.valueOf(paramsTSuite.getSuiteName()).getMaxSecondsToWaitStart();
-		boolean testExists = waitToTestSuiteExists(maxSecondsToWait, idExecSuite);
-		if (!testExists) {
+			    //Esperamos a que se arranque el test
+				int maxSecondsToWait = Suites.valueOf(paramsTSuite.getSuiteName()).getMaxSecondsToWaitStart();
+				boolean testExists = waitToTestSuiteExists(maxSecondsToWait, idExecSuite);
+				if (!testExists) {
 			out.print("<div class=\"errorMessage\"><b>Problema en el inicio la TestSuite!</b>. Superado Timeout " + maxSecondsToWait + " segundos</div>");
-		}
-		else {
-		  	//Construímos la ruta del report HTML
-		  	//suite = SuitesDAO.getSuite(idExecSuite, paramsTSuite.getSuiteName());
-		  	suite = TestMaker.getSuite(idExecSuite);
-		  	
-		  	//Escribimos la funciï¿½n JavaScript que iterarï¿½ la llamada Ajax que espera la finalizaciï¿½n de los tests (existencia del fichero)
+				}
+				else {
+				  	//Construímos la ruta del report HTML
+				  	//suite = SuitesDAO.getSuite(idExecSuite, paramsTSuite.getSuiteName());
+				  	suite = TestMaker.getSuiteExecuted(idExecSuite);
+				  	
+				  	//Escribimos la funciï¿½n JavaScript que iterarï¿½ la llamada Ajax que espera la finalizaciï¿½n de los tests (existencia del fichero)
 			out.println("<script>");
 			out.println("var interval = null;");
 			out.println("$(document).ready(function() {");
@@ -137,9 +137,9 @@ response.setDateHeader ("Expires", -1);%>
 			
 			//Forzamos un stop
 			//testNG.setThreadCount(0);
-		}
-	}
-	%>
+				}
+			}
+		%>
 	
 	<%!public static InputParamsMango storeParamsFromHttpRequest(HttpServletRequest request) {
 		//Parameters that come from index.jsp
@@ -188,11 +188,11 @@ response.setDateHeader ("Expires", -1);%>
 	public boolean waitToTestSuiteExists(int maxSecondsToWait, String idExecSuite) throws Exception {
 		int i=0;
 		//boolean existsTSuite = SuitesDAO.existsSuite(idExecSuite);
-		boolean existsTSuite = (TestMaker.getSuite(idExecSuite)!=null);
+		boolean existsTSuite = (TestMaker.getSuiteExecuted(idExecSuite)!=null);
 		while (!existsTSuite && i<=maxSecondsToWait) {
 			i+=1;
 			Thread.sleep(1000);
-			existsTSuite = (TestMaker.getSuite(idExecSuite)!=null);
+			existsTSuite = (TestMaker.getSuiteExecuted(idExecSuite)!=null);
 		}
 		
 		return (existsTSuite); 
