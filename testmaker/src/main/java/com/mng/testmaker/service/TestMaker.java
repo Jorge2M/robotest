@@ -116,7 +116,7 @@ public class TestMaker {
 	}
 	private static boolean neatStop(SuiteTM suite) {
 		suite.setStateExecution(StateExecution.Stopping);
-        List<StateExecution> validStates = Arrays.asList(StateExecution.Stopped, StateExecution.Finished_Normally);
+        List<StateExecution> validStates = Arrays.asList(StateExecution.Stopped, StateExecution.Finished);
         return (waitForSuiteInState(suite, validStates, 15));
 	}
 	private static boolean waitForSuiteInState(SuiteTM suite, List<StateExecution> validStates, int maxSeconds) {
@@ -175,7 +175,7 @@ public class TestMaker {
     	List<StateExecution> statesSuiteEnded = Arrays.asList(
     			StateExecution.Stopping, 
     			StateExecution.Stopped, 
-    			StateExecution.Finished_Normally);
+    			StateExecution.Finished);
         if (statesSuiteEnded.contains(suite.getStateExecution())) {
             throw new SkipException("Suite " + suite.getName() + " in state " + suite.getStateExecution());
         }

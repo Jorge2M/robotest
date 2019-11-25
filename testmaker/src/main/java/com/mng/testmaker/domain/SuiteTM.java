@@ -84,7 +84,7 @@ public class SuiteTM extends XmlSuite {
 	}
 	
 	public void end() {
-		stateExecution = StateExecution.Finished_Normally;
+		stateExecution = StateExecution.Finished;
 		result = getResultFromTestsRun();
 		fin = new Date(); 
 		poolWebDrivers.removeAllStrWd();

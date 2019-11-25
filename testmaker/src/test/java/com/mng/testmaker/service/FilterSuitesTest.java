@@ -24,16 +24,16 @@ import com.mng.testmaker.service.FilterSuites.SetSuiteRun;
 
 public class FilterSuitesTest {
 
-	LocalDate fechaHoy = LocalDate.now();
-	SuiteData suite1 = getNew("Suite1", Finished_Normally, "SmokeTest", desktop, "shop", fechaHoy);
-	SuiteData suite2 = getNew("Suite2", Started, "SmokeTest", movil_web, "shop", fechaHoy);
-	SuiteData suite3 = getNew("Suite3", Stopping, "MenusPais", desktop, "outlet", fechaHoy.minusDays(3));
-	SuiteData suite4 = getNew("Suite4", Stopped, "MenusPais", movil_web, "shop", fechaHoy.minusDays(1));
-	SuiteData suite5 = getNew("Suite5", Finished_Normally, "SmokeTest", desktop, "outlet", fechaHoy.minusDays(5));
+	private LocalDate fechaHoy = LocalDate.now();
+	private SuiteData suite1 = getNew("Suite1", Finished, "SmokeTest", desktop, "shop", fechaHoy);
+	private SuiteData suite2 = getNew("Suite2", Started, "SmokeTest", movil_web, "shop", fechaHoy);
+	private SuiteData suite3 = getNew("Suite3", Stopping, "MenusPais", desktop, "outlet", fechaHoy.minusDays(3));
+	private SuiteData suite4 = getNew("Suite4", Stopped, "MenusPais", movil_web, "shop", fechaHoy.minusDays(1));
+	private SuiteData suite5 = getNew("Suite5", Finished, "SmokeTest", desktop, "outlet", fechaHoy.minusDays(5));
 	
-	List<SuiteData> listSuitesInMemory = Arrays.asList(suite1, suite2, suite3);
-	List<SuiteData> listSuitesInRepository = Arrays.asList(suite3, suite4, suite5);
-	List<SuiteData> listSuitesInRepositoryDesde = Arrays.asList(suite4);
+	private List<SuiteData> listSuitesInMemory = Arrays.asList(suite1, suite2, suite3);
+	private List<SuiteData> listSuitesInRepository = Arrays.asList(suite3, suite4, suite5);
+	private List<SuiteData> listSuitesInRepositoryDesde = Arrays.asList(suite4);
 	
 	
 	@Test

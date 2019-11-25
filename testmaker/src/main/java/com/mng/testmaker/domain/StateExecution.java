@@ -4,7 +4,7 @@ package com.mng.testmaker.domain;
 public enum StateExecution {
 	NotStarted(false), 
 	Started(false), 
-	Finished_Normally(true), 
+	Finished(true), 
 	Stopping(false), 
 	Stopped(true);
 	
