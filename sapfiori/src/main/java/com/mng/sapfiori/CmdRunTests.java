@@ -5,7 +5,7 @@ import com.mng.testmaker.domain.CreatorSuiteRun;
 import com.mng.sapfiori.datatmaker.Apps;
 import com.mng.sapfiori.datatmaker.Suites;
 
-public class CmdRunTests { 
+public class CmdRunTests {  
 
     public static void main(String[] args) throws Exception { 
     	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, Suites.class, Apps.class);
