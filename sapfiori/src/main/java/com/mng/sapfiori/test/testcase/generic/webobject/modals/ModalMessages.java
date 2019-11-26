@@ -18,6 +18,10 @@ public class ModalMessages extends PageObject {
 	}
 	
 	public boolean isVisible() {
-		return isElementVisible(driver, By.xpath(XPathModal));
+		return isVisibleUntil(0);
+	}
+	
+	public boolean isVisibleUntil(int maxSeconds) {
+		return isElementVisibleUntil(driver, By.xpath(XPathModal), maxSeconds);
 	}
 }

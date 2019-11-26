@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.mng.sapfiori.test.testcase.generic.stpv.modals.ModalSelectItemStpV;
-import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputBase;
+import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputLabel;
 import com.mng.sapfiori.test.testcase.generic.webobject.modals.ModalSelectMultiItem;
 import com.mng.sapfiori.test.testcase.webobject.pedidos.InputFieldPedido;
 import com.mng.sapfiori.test.testcase.webobject.pedidos.PagePosSolicitudPedido;
@@ -43,7 +43,7 @@ public class PagePosSolicitudPedidoStpV {
 	@Step (
 		description = "Introducir el valor <b>#{valueToInput}</b> en el input <b>#{inputType}</b>")
 	public void inputText(InputFieldPedido inputType, String valueToInput) throws Exception {
-		InputBase input = pageObject.getInput(inputType);
+		InputLabel input = pageObject.getInput(inputType);
 		input.clearAndSendText(valueToInput);
 	}
 	

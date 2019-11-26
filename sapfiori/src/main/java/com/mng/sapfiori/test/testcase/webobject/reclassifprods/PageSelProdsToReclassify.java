@@ -84,12 +84,14 @@ public class PageSelProdsToReclassify extends PageFilter {
 	 */
 	private int getNumRowWithIdProduct(String idProduct) {
 		By byTd = By.xpath(getXPathCellWithIdProduct(idProduct));
-		WebdrvWrapp.isElementVisibleUntil(driver, byTd, 5);
-		String idTd = driver.findElement(byTd).getAttribute("id");
-		Pattern rowNumberPattern = Pattern.compile(".*row(\\d*).*");
-		Matcher matcher = rowNumberPattern.matcher(idTd);
-		if (matcher.matches()) {
-			return Integer.valueOf(matcher.group(1));
+		boolean isVisibleRow = isElementVisibleUntil(driver, byTd, 5);
+		if (isVisibleRow) {
+			String idTd = driver.findElement(byTd).getAttribute("id");
+			Pattern rowNumberPattern = Pattern.compile(".*row(\\d*).*");
+			Matcher matcher = rowNumberPattern.matcher(idTd);
+			if (matcher.matches()) {
+				return Integer.valueOf(matcher.group(1));
+			}
 		}
 		return -1;
 	}

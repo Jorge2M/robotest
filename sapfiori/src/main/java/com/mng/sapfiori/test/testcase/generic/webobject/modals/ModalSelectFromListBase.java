@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.buscar.InputBuscador;
 import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconBase;
+import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForDefineConditions;
 import com.mng.sapfiori.test.testcase.generic.webobject.makers.StandarElementsMaker;
 import com.mng.sapfiori.test.testcase.generic.webobject.utils.PageObject;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
@@ -18,6 +19,7 @@ public abstract class ModalSelectFromListBase extends PageObject {
 	
 	final StandarElementsMaker standarMaker;
 	final InputBuscador inputBuscador;
+	final InputWithIconForDefineConditions inputDataLabel;
 	
 	private final static String XPathHeaderBar = "//div[@class[contains(.,'sapMBarPH')]]";
 	private final static String TagLabel = "@TabLabel";
@@ -35,6 +37,7 @@ public abstract class ModalSelectFromListBase extends PageObject {
 		this.label = label;
 		this.standarMaker = StandarElementsMaker.getNew(driver);
 		this.inputBuscador = standarMaker.getInputBuscador();
+		this.inputDataLabel = standarMaker.getInputWithIconForDefineConditions(label);
 	}
 	
 	private String getXPathTitleModal() {
@@ -71,10 +74,25 @@ public abstract class ModalSelectFromListBase extends PageObject {
 		WebdrvWrapp.clickAndWaitLoad(driver, byElem);
 	}
 	
-	public void findByBuscarAndSelectElement(String valueToSearch, String valueToSelectInTable) throws Exception {
+	public void findAndSelectElement(String valueToSearch, String valueToSelectInTable) throws Exception {
+		if (inputBuscador.isVisible()) {
+			findByBuscarAndSelectElement(valueToSearch, valueToSelectInTable);
+		} else {
+			findByInputLabelAndSelectElement(valueToSearch, valueToSelectInTable);
+		}
+	}
+	
+	private void findByBuscarAndSelectElement(String valueToSearch, String valueToSelectInTable) throws Exception {
 		waitForPageFinished();
-		inputBuscador.sendText(valueToSearch);
+		inputBuscador.clearAndSendText(valueToSearch);
 		inputBuscador.clickLupaForSearch();
+		selectElementInTable(valueToSelectInTable);
+	}
+	
+	private void findByInputLabelAndSelectElement(String valueToSearch, String valueToSelectInTable) throws Exception {
+		waitForPageFinished();
+		inputDataLabel.clearAndSendText(valueToSearch);
+		inputDataLabel.sendText(Keys.RETURN);
 		selectElementInTable(valueToSelectInTable);
 	}
 	

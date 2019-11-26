@@ -46,7 +46,7 @@ public class ModalSelectItemStpV {
 		description = "Buscar <b>#{valueToSearch}</b> y seleccionar el elemento con el valor <b>#{valueToSelect}</b>",
 		expected = "Queda seleccionado el elemento")
 	public void searchAndSelectElement(String valueToSearch, String valueToSelect) throws Exception {
-		modalSetFilter.findByBuscarAndSelectElement(valueToSearch, valueToSelect);
+		modalSetFilter.findAndSelectElement(valueToSearch, valueToSelect);
 	}
 	
 	@Step (

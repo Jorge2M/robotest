@@ -3,7 +3,7 @@ package com.mng.sapfiori.test.testcase.webobject.pedidos;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputBase;
+import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputLabel;
 import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForSelectItem;
 import com.mng.sapfiori.test.testcase.generic.webobject.utils.PageObject;
 
@@ -63,14 +63,14 @@ public class PagePosSolicitudPedido extends PageObject {
 		return elementsMaker.getInputWithIconForSelectItem(inputType.label);
 	}
 	
-	public InputBase getInputWithoutIcon(InputFieldPedido inputType) throws IllegalArgumentException {
+	public InputLabel getInputWithoutIcon(InputFieldPedido inputType) throws IllegalArgumentException {
 		if (inputType.isIcon) {
 			throw new IllegalArgumentException("Argument " + inputType + " has flag isIcon = true");
 		}
 		return elementsMaker.getInputWithoutIcon(inputType.label);
 	}
 	
-	public InputBase getInput(InputFieldPedido inputType) {
+	public InputLabel getInput(InputFieldPedido inputType) {
 		if (inputType.isIcon) {
 			return getInputWithIcon(inputType);
 		}

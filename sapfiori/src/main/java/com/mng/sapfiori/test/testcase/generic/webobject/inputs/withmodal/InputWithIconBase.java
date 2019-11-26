@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.sapfiori.test.testcase.generic.webobject.utils.PageObject;
 import com.mng.testmaker.conf.Log4jConfig;
 
-public class InputWithIconBase extends InputBase {
+public class InputWithIconBase extends InputLabel {
 	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
 	private final static String XPathIconSetFilterRelativeLabel = "/following::div[@class='sapMInputBaseIconContainer']";

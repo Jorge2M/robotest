@@ -77,10 +77,11 @@ public class PageSolicitudPedido extends PageObject {
 			"//self::*[@value='" + value + "']";
 	}
 	
-	public boolean checkFieldIn1rstLineaPedidos(InputFieldPedido inputPage, String value) throws Exception {
+	public boolean checkFieldIn1rstLineaPedidos(InputFieldPedido inputPage, String value, int maxSeconds) 
+	throws Exception {
 		waitForPageFinished();
 		String xpathInput = getXPathInput1rstPedidoWithValue(inputPage, value);
-		return PageObject.isElementPresent(driver, By.xpath(xpathInput));
+		return PageObject.isElementPresentUntil(driver, By.xpath(xpathInput), maxSeconds);
 	}
 	
 	public void inputFielValuedIn1rstLinePedidos(InputFieldPedido inputPage, String value) throws Exception {

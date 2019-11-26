@@ -12,5 +12,4 @@ public class RestApiRunTests {
 		ServerRestTM serverRest = ServerRestTM.getInstance(8888, creatorSuiteRun, Suites.class, Apps.class);
 		serverRest.start();
 	}
-	
 }

@@ -40,7 +40,7 @@ public class Piloto {
     	
     	modalSetFilterStpV.searchAndSelectElement("EU01", "EU01");
     	
-    	List<String> productsToReclassify = Arrays.asList("1810101GKC01003", "1830950HPM002445");
+    	List<String> productsToReclassify = Arrays.asList("1810101GKC01003", "1810101GKC01002");
     	modalSetFilterStpV = 
     		pageSelProductsStpV.clickIconProducto();
     	modalSetFilterStpV.selectElementsByValue(productsToReclassify);

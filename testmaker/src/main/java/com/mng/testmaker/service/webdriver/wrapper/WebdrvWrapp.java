@@ -376,14 +376,14 @@ public class WebdrvWrapp extends ElementPageFunctions {
     	}
     }   
     
-    public static void sendKeysWithRetry(int numRetry, WebElement input, String keys) {
+    public static void sendKeysWithRetry(int numRetry, WebElement input, CharSequence... keys) {
         int i = 0;
         do {
             input.clear();
             input.sendKeys(keys);
             i += 1;
         } 
-        while (input.getAttribute("value").compareTo(keys) != 0 && i < numRetry);
+        while (input.getAttribute("value").compareTo(keys.toString()) != 0 && i < numRetry);
     }    
 
     public static void waitForPageLoaded(WebDriver driver) throws Exception {

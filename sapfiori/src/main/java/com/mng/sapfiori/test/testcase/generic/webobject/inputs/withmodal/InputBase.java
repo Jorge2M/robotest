@@ -7,32 +7,31 @@ import org.openqa.selenium.WebElement;
 import com.mng.sapfiori.test.testcase.generic.webobject.utils.PageObject;
 
 public class InputBase extends PageObject {
-
-	final String label;
 	
-	private final static String TagLabel = "@TagLabel";
-	private final static String XPathLabelWithTag = "//bdi[text()='" + TagLabel + "']/..";
-	private final static String XPathInputRelativeLabel = "/following::input";
-
+	private final String xpathInput;
 	
-	public InputBase(String label, WebDriver driver) {
+	public InputBase(String xpathInput, WebDriver driver) {
 		super(driver);
-		this.label = label;
+		this.xpathInput = xpathInput;
 	}
-	
-	String getXPathLabel() {
-		return XPathLabelWithTag.replace(TagLabel, label);
-	}
-	
-	public void clearAndSendText(String message) throws Exception {
-		WebElement inputElem = driver.findElement(By.xpath(getXPathLabel() + XPathInputRelativeLabel));
+
+	public void clearAndSendText(CharSequence... message) throws Exception {
+		WebElement inputElem = getInputElement();
 		PageObject.waitMillis(500);
 		inputElem.clear();
-		PageObject.sendKeysWithRetry(2, inputElem, message);
+		sendText(message);
+		//PageObject.sendKeysWithRetry(2, inputElem, message);
 	}
 	
-	public void sendText(String message) {
-		String xpathInput = getXPathLabel() + XPathInputRelativeLabel;
-		driver.findElement(By.xpath(xpathInput)).sendKeys(message);
+	public void sendText(CharSequence... message) {
+		getInputElement().sendKeys(message);
+	}
+	
+	public WebElement getInputElement() {
+		return driver.findElement(By.xpath(xpathInput));
+	}
+	
+	public boolean isVisible() {
+		return PageObject.isElementVisible(driver, By.xpath(xpathInput));
 	}
 }

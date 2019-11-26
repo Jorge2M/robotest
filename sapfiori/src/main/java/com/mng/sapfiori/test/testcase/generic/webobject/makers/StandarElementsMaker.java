@@ -8,7 +8,7 @@ import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.select.S
 import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.select.SelectFilterEstandard;
 import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.select.SelectFilterMultiValue;
 import com.mng.sapfiori.test.testcase.generic.webobject.elements.inputs.select.SelectMultiValue;
-import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputBase;
+import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputLabel;
 import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForDefineConditions;
 import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForSelectItem;
 import com.mng.sapfiori.test.testcase.generic.webobject.inputs.withmodal.InputWithIconForSelectMultiItem;
@@ -48,8 +48,8 @@ public class StandarElementsMaker {
 		return InputBuscador.getNew(driver);
 	}
 	
-	public InputBase getInputWithoutIcon(String label) {
-		return new InputBase(label, driver);
+	public InputLabel getInputWithoutIcon(String label) {
+		return new InputLabel(label, driver);
 	}
 	
 	public InputWithIconForSelectItem getInputWithIconForSelectItem(String label) {

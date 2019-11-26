@@ -48,11 +48,13 @@ public class PageSolicitudPedidoStpV {
 	}
 	
 	@Validation (
-		description="En el 1er pedido aparece el input #{inputData.getInputPage()} con valor #{inputData.getTextToInput()}",
+		description=
+			"En el 1er pedido aparece el input #{inputData.getInputPage()} con valor #{inputData.getTextToInput()} " + 
+			"(lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-	public boolean checkFieldIn1rstLineaPedidos(InputDataSolPedido inputData) throws Exception {
+	public boolean checkFieldIn1rstLineaPedidos(InputDataSolPedido inputData, int maxSeconds) throws Exception {
 		return (
-			pageObject.checkFieldIn1rstLineaPedidos(inputData.getInputPage(), inputData.getTextToInput()));
+			pageObject.checkFieldIn1rstLineaPedidos(inputData.getInputPage(), inputData.getTextToInput(), maxSeconds));
 	}
 	
 	@Step (
@@ -66,14 +68,14 @@ public class PageSolicitudPedidoStpV {
 		expected="No aparece el modal de errores")
 	public void clickButtonGuardar() throws Exception {
 		pageObject.clickButtonGuardar();
-		checkModalErroresNotAppears();
+		checkModalErroresNotAppears(2);
 	}
 	
 	@Validation (
-		description="No es visible el modal de mensajes",
+		description="No es visible el modal de mensajes (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-	public boolean checkModalErroresNotAppears() {
+	public boolean checkModalErroresNotAppears(int maxSeconds) {
 		ModalMessages modalErrores = pageObject.getElementsMaker().getModalErrores();
-		return (!modalErrores.isVisible());
+		return (!modalErrores.isVisibleUntil(maxSeconds));
 	}
 }

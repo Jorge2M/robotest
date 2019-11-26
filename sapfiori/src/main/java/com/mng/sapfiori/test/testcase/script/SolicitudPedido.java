@@ -86,7 +86,7 @@ public class SolicitudPedido {
     	PageSolicitudPedidoStpV pageSolicitudPedidoStpV = 
     		pagePosSolicitudPedidoStpV.clickAplicar();
     	
-    	pageSolicitudPedidoStpV.checkFieldIn1rstLineaPedidos(inputDataQuantity);
+    	pageSolicitudPedidoStpV.checkFieldIn1rstLineaPedidos(inputDataQuantity, 2);
     }
     
     public void modifyPrizeLineaPedidoAndSave(PageSolicitudPedidoStpV pageSolPedidoStpV) throws Exception {

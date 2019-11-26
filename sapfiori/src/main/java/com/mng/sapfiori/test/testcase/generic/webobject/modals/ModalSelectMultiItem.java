@@ -22,7 +22,7 @@ public class ModalSelectMultiItem extends ModalSelectFromListBase {
 	
 	public void searchAndSelectElementsByValue(List<String> listValueElementsToSelect) throws Exception {
 		for (String valueElement : listValueElementsToSelect) {
-			findByBuscarAndSelectElement(valueElement, valueElement);
+			findAndSelectElement(valueElement, valueElement);
 		}
 	}
 }
