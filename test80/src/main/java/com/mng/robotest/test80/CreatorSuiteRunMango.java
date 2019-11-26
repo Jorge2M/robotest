@@ -21,8 +21,14 @@ import com.mng.testmaker.domain.SuiteMaker;
 
 public class CreatorSuiteRunMango extends CreatorSuiteRun {
 	
+	private CreatorSuiteRunMango() throws Exception {
+		super();
+	}
 	private CreatorSuiteRunMango(InputParamsMango inputParams) throws Exception {
 		super(inputParams);
+	}
+	public static CreatorSuiteRunMango getNew() throws Exception {
+		return new CreatorSuiteRunMango();
 	}
 	public static CreatorSuiteRunMango getNew(InputParamsMango inputParams) throws Exception {
 		return new CreatorSuiteRunMango(inputParams);

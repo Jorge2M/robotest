@@ -12,15 +12,14 @@ public class InputParamsMango extends InputParamsTM {
     public static String CountrysNameParam = "countrys";
     public static String LineasNameParam = "lineas";
     public static String PaymentsNameParam = "payments";
-    
-    public static String UrlManto = "urlmanto";
+    public static String UrlMantoParam = "urlmanto";
     public static String TypeAccessParam = "typeAccess";    
-    public static String CallBackResource = "callbackresource";
-    public static String CallBackMethod = "callbackmethod";
-    public static String CallBackSchema = "callbackschema";
-    public static String CallBackParams = "callbackparams";
-    public static String CallBackUser = "callbackuser";
-    public static String CallBackPassword = "callbackpassword";
+    public static String CallBackResourceParam = "callbackresource";
+    public static String CallBackMethodParam = "callbackmethod";
+    public static String CallBackSchemaParam = "callbackschema";
+    public static String CallBackParamsParam = "callbackparams";
+    public static String CallBackUserParam = "callbackuser";
+    public static String CallBackPasswordParam = "callbackpassword";
 	
     private String[] listaPaises = {};
     private String[] listaLineas = {};
@@ -29,6 +28,10 @@ public class InputParamsMango extends InputParamsTM {
     private CallBack callBack = null;
     
     private static String lineSeparator = System.getProperty("line.separator");
+    
+    public InputParamsMango() {
+    	super();
+    }
     
     public InputParamsMango(Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) {
     	super(suiteEnum, appEnum);
@@ -40,15 +43,15 @@ public class InputParamsMango extends InputParamsTM {
 		setListaPaises(cmdLineData.getOptionValues(CountrysNameParam));
 		setListaLineas(cmdLineData.getOptionValues(LineasNameParam));
 		setListaPayments(cmdLineData.getOptionValues(PaymentsNameParam));
-		setUrlManto(cmdLineData.getOptionValue(UrlManto));
-        if (cmdLineData.getOptionValue(CallBackResource)!=null) {
+		setUrlManto(cmdLineData.getOptionValue(UrlMantoParam));
+        if (cmdLineData.getOptionValue(CallBackResourceParam)!=null) {
             CallBack callBack = new CallBack();
-            callBack.setCallBackResource(cmdLineData.getOptionValue(CallBackResource));
-            callBack.setCallBackMethod(cmdLineData.getOptionValue(CallBackMethod));
-            callBack.setCallBackUser(cmdLineData.getOptionValue(CallBackUser));
-            callBack.setCallBackPassword(cmdLineData.getOptionValue(CallBackPassword));
-            callBack.setCallBackSchema(cmdLineData.getOptionValue(CallBackSchema));
-            callBack.setCallBackParams(cmdLineData.getOptionValue(CallBackParams));
+            callBack.setCallBackResource(cmdLineData.getOptionValue(CallBackResourceParam));
+            callBack.setCallBackMethod(cmdLineData.getOptionValue(CallBackMethodParam));
+            callBack.setCallBackUser(cmdLineData.getOptionValue(CallBackUserParam));
+            callBack.setCallBackPassword(cmdLineData.getOptionValue(CallBackPasswordParam));
+            callBack.setCallBackSchema(cmdLineData.getOptionValue(CallBackSchemaParam));
+            callBack.setCallBackParams(cmdLineData.getOptionValue(CallBackParamsParam));
             setCallBack(callBack);
         }   
     }

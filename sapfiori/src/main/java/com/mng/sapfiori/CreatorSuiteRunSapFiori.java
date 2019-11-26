@@ -10,8 +10,14 @@ import com.mng.testmaker.domain.SuiteMaker;
 
 public class CreatorSuiteRunSapFiori extends CreatorSuiteRun {
 
+	private CreatorSuiteRunSapFiori() throws Exception {
+		super();
+	}
 	private CreatorSuiteRunSapFiori(InputParamsTM inputParams) throws Exception {
 		super(inputParams);
+	}
+	public static CreatorSuiteRunSapFiori getNew() throws Exception {
+		return new CreatorSuiteRunSapFiori();
 	}
 	public static CreatorSuiteRunSapFiori getNew(InputParamsTM inputParams) throws Exception {
 		return new CreatorSuiteRunSapFiori(inputParams);

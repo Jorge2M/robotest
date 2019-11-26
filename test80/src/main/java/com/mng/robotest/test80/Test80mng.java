@@ -63,47 +63,47 @@ public class Test80mng {
             .build();
         
     	String patternUrl = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-    	OptionTMaker urlManto = OptionTMaker.builder(InputParamsMango.UrlManto)
+    	OptionTMaker urlManto = OptionTMaker.builder(InputParamsMango.UrlMantoParam)
             .required(false)
             .hasArgs()
             .pattern(patternUrl)
             .desc("URL of the Backoffice of mangoshop (Manto application)")
             .build();    
              
-    	OptionTMaker callbackResource = OptionTMaker.builder(InputParamsMango.CallBackResource)
+    	OptionTMaker callbackResource = OptionTMaker.builder(InputParamsMango.CallBackResourceParam)
             .required(false)
             .hasArgs()
             .desc("CallBack URL (without schema and params) to invoke in the end of the TestSuite")
             .build();
         
-    	OptionTMaker callbackMethod = OptionTMaker.builder(InputParamsMango.CallBackMethod)
+    	OptionTMaker callbackMethod = OptionTMaker.builder(InputParamsMango.CallBackMethodParam)
             .required(false)
             .hasArgs()
             .possibleValues(TypeCallBackMethod.class)
             .desc("Method of the CallBack URL. Possible values: " + Arrays.asList(TypeCallBackMethod.values()))
             .build();        
         
-    	OptionTMaker callbackSchema = OptionTMaker.builder(InputParamsMango.CallBackSchema)
+    	OptionTMaker callbackSchema = OptionTMaker.builder(InputParamsMango.CallBackSchemaParam)
             .required(false)
             .hasArgs()
             .possibleValues(TypeCallbackSchema.class)
             .desc("Schema of the CallBack URL. Possible values: " + Arrays.asList(TypeCallbackSchema.values()))
             .build();        
         
-    	OptionTMaker callbackParams = OptionTMaker.builder(InputParamsMango.CallBackParams)
+    	OptionTMaker callbackParams = OptionTMaker.builder(InputParamsMango.CallBackParamsParam)
             .required(false)
             .hasArgs()
             .valueSeparator(',')
             .desc("Params of the CallBack URL (in format param1:value1,param2:value2...)")
             .build();        
         
-    	OptionTMaker callbackUser = OptionTMaker.builder(InputParamsMango.CallBackUser)
+    	OptionTMaker callbackUser = OptionTMaker.builder(InputParamsMango.CallBackUserParam)
             .required(false)
             .hasArgs()
             .desc("User credential needed to invoke the CallBack URL")
             .build();        
 
-    	OptionTMaker callbackPassword = OptionTMaker.builder(InputParamsMango.CallBackPassword)
+    	OptionTMaker callbackPassword = OptionTMaker.builder(InputParamsMango.CallBackPasswordParam)
             .required(false)
             .hasArgs()
             .desc("Password credential needed to invoke the CallBack URL")

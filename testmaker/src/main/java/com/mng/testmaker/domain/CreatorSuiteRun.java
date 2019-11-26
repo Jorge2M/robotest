@@ -9,12 +9,19 @@ import com.mng.testmaker.service.TestMaker;
 
 public abstract class CreatorSuiteRun {
 	
-	protected final InputParamsTM inputParams;
-	protected final SuiteMaker suiteMaker;
+	protected InputParamsTM inputParams;
+	protected SuiteMaker suiteMaker;
 	
 	public abstract SuiteMaker getSuiteMaker() throws Exception;
 	
+	public CreatorSuiteRun() throws Exception { }
+	
 	public CreatorSuiteRun(InputParamsTM inputParams) throws Exception {
+		this.inputParams = inputParams;
+		this.suiteMaker = getSuiteMaker();
+	}
+	
+	public void setInputParams(InputParamsTM inputParams) throws Exception {
 		this.inputParams = inputParams;
 		this.suiteMaker = getSuiteMaker();
 	}

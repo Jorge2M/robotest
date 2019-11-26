@@ -1,4 +1,4 @@
-package com.mng.sapfiori.rest;
+package com.mng.testmaker.restcontroller;
 
 import java.net.URI;
 import java.text.ParseException;
@@ -20,9 +20,6 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
-import com.mng.sapfiori.CreatorSuiteRunSapFiori;
-import com.mng.sapfiori.datatmaker.Apps;
-import com.mng.sapfiori.datatmaker.Suites;
 import com.mng.testmaker.boundary.access.CmdLineMaker;
 import com.mng.testmaker.boundary.access.MessageError;
 import com.mng.testmaker.boundary.access.ResultCheckOptions;
@@ -37,22 +34,27 @@ import com.mng.testmaker.service.FilterSuites.SetSuiteRun;
 import com.mng.testmaker.service.TestMaker;
 
 @Path("/")
-public class RestTestMaker {
+public class RestApiTM {
+	
+	private final static CreatorSuiteRun creatorSuiteRun = ServerRestTM.getServerRestTM().getCreatorSuiteRun();
+	private final static Class<? extends Enum<?>> suiteEnum = ServerRestTM.getServerRestTM().getSuiteEnum();
+	private final static Class<? extends Enum<?>> appEnum = ServerRestTM.getServerRestTM().getAppEnum();
 	
 	List<String> listFormatsFecha = Arrays.asList("yyyy-MM-dd HH:mm:ss", "HH:mm:ss", "yyyy-MM-dd");
+
 
 	@POST
 	@Path("/suiterun")
 	@Produces("application/json")
 	public Response newSuiteRun(@BeanParam InputParamsTM inputParams) {
-		inputParams.setSuiteEnum(Suites.class);
-		inputParams.setAppEnum(Apps.class);
+		inputParams.setSuiteEnum(suiteEnum);
+		inputParams.setAppEnum(appEnum);
 		inputParams.setTypeAccess(TypeAccess.Rest);
 		try {
 			CmdLineMaker cmdLineAccess = CmdLineMaker.from(inputParams);
 			ResultCheckOptions resultCheck = cmdLineAccess.checkOptionsValue();
 			if (resultCheck.isOk()) {
-				CreatorSuiteRun creatorSuiteRun = CreatorSuiteRunSapFiori.getNew(inputParams);
+				creatorSuiteRun.setInputParams(inputParams);
 				SuiteTM suite = TestMaker.execSuiteAsync(creatorSuiteRun);
 				return Response
 						.status(Response.Status.OK) 
@@ -133,11 +135,11 @@ public class RestTestMaker {
 	@Path("/suite/testcases")
 	@Produces("application/json")
 	public List<TestMethodData> getTestCasesFromSuite(@BeanParam InputParamsTM inputParams) throws Exception {
-		inputParams.setSuiteEnum(Suites.class);
-		inputParams.setAppEnum(Apps.class);
+		inputParams.setSuiteEnum(suiteEnum);
+		inputParams.setAppEnum(appEnum);
 		inputParams.setTypeAccess(TypeAccess.Rest);
-		CreatorSuiteRun creatorSuite = CreatorSuiteRunSapFiori.getNew(inputParams);
-		return (creatorSuite.getListAllTestCasesData());
+		creatorSuiteRun.setInputParams(inputParams);
+		return (creatorSuiteRun.getListAllTestCasesData());
 	}
 	
 	@GET
