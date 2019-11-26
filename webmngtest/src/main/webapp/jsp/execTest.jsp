@@ -163,7 +163,7 @@ response.setDateHeader ("Expires", -1);%>
 
 	    //Parameters that don't come from index.jsp (for exemple, the call from Jenkin's CI Task)
 	    paramsTSuite.setStoreResult(true); 
-	    paramsTSuite.setUrlManto(request.getParameter(InputParamsMango.UrlManto)); 
+	    paramsTSuite.setUrlManto(request.getParameter(InputParamsMango.UrlMantoParam)); 
 	    paramsTSuite.setRecicleWD(request.getParameter(InputParamsTM.RecicleWDParam)); 
 	    paramsTSuite.setNetAnalysis(request.getParameter(InputParamsTM.NetAnalysisParam));
 	    String[] listMails = request.getParameterValues(InputParamsTM.MailsParam);
@@ -171,14 +171,14 @@ response.setDateHeader ("Expires", -1);%>
 	    	paramsTSuite.setMails(Arrays.asList(listMails)); 
 	    }
 	    paramsTSuite.setWebAppDNS(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()); 
-	    if (request.getParameter(InputParamsMango.CallBackResource)!=null) {
+	    if (request.getParameter(InputParamsMango.CallBackResourceParam)!=null) {
 			CallBack callBack = new CallBack();
-	        callBack.setCallBackResource(request.getParameter(InputParamsMango.CallBackResource));
-	        callBack.setCallBackMethod(request.getParameter(InputParamsMango.CallBackMethod));
-	        callBack.setCallBackUser(request.getParameter(InputParamsMango.CallBackUser));
-	        callBack.setCallBackPassword(request.getParameter(InputParamsMango.CallBackPassword));
-	        callBack.setCallBackSchema(request.getParameter(InputParamsMango.CallBackSchema));
-	        callBack.setCallBackParams(request.getParameter(InputParamsMango.CallBackParams));
+	        callBack.setCallBackResource(request.getParameter(InputParamsMango.CallBackResourceParam));
+	        callBack.setCallBackMethod(request.getParameter(InputParamsMango.CallBackMethodParam));
+	        callBack.setCallBackUser(request.getParameter(InputParamsMango.CallBackUserParam));
+	        callBack.setCallBackPassword(request.getParameter(InputParamsMango.CallBackPasswordParam));
+	        callBack.setCallBackSchema(request.getParameter(InputParamsMango.CallBackSchemaParam));
+	        callBack.setCallBackParams(request.getParameter(InputParamsMango.CallBackParamsParam));
 	        paramsTSuite.setCallBack(callBack);
 	    }
 	    
