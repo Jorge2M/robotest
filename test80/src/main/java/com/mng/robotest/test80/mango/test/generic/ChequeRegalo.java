@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.generic;
 import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputData.Importe;
 
 
-public class ChequeRegalo {
+public class ChequeRegalo { 
 
     Importe importe;
     String nombre;
