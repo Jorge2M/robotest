@@ -14,6 +14,7 @@ import org.testng.xml.XmlInclude;
 import org.testng.xml.XmlTest;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.domain.InputParamsBasic;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.testfilter.TestMethod;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
@@ -177,7 +178,7 @@ public class TestFilterTNGxmlTRun {
     }
     
     private InputParamsTM getInputDataBasic() {
-    	InputParamsTM inputParams = new InputParamsTM(Suite.class, AppEcom.class);
+    	InputParamsTM inputParams = new InputParamsBasic(Suite.class, AppEcom.class);
     	inputParams.setChannel(Channel.desktop);
     	inputParams.setSuite(Suite.SuiteForUnitTest);
     	inputParams.setApp(AppEcom.shop);

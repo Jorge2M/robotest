@@ -1,17 +1,26 @@
 package com.mng.testmaker.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.ws.rs.FormParam;
+
 import org.apache.commons.cli.CommandLine;
 
-import com.mng.testmaker.boundary.access.CmdLineMaker;
+import com.mng.testmaker.boundary.access.OptionTMaker;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.testfilter.DataFilterTCases;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
-public class InputParamsTM {
+public abstract class InputParamsTM {
 
+	abstract public List<OptionTMaker> getSpecificParameters();
+	abstract public void setSpecificDataFromCommandLine(CommandLine cmdLine);
+	abstract public Map<String,String> getSpecificParamsValues();
+	
 	public static final String SuiteNameParam = "suite";
 	public static final String GroupsNameParam = "groups";
 	public static final String BrowserNameParam = "browser";
@@ -27,28 +36,6 @@ public class InputParamsTM {
 	public static final String MailsParam = "mails";
 	public static final String TypeAccessParam = "typeAccess";
 	
-	public enum ParamTM {
-		Suite(SuiteNameParam),
-		Groups(GroupsNameParam),
-		Browser(BrowserNameParam),
-		Channel(ChannelNameParam),
-		Application(AppNameParam),
-		Version(VersionNameParam),
-		Url(URLNameParam),
-		Tcases(TCaseNameParam),
-		ServerDNS(ServerDNSNameParam),
-		RecicleWD(RecicleWDParam),
-		NetAnalysis(NetAnalysisParam),
-		Store(StoreParam),
-		Mails(MailsParam),
-		TypeAccess(TypeAccessParam);
-		
-		public String nameParam;
-		private ParamTM(String nameParam) {
-			this.nameParam = nameParam;
-		}
-	}
-
 	public enum ManagementWebdriver {recycle, discard}
 	private Class<? extends Enum<?>> suiteEnum;
 	private Class<? extends Enum<?>> appEnum;
@@ -99,12 +86,153 @@ public class InputParamsTM {
 
 	public InputParamsTM() {}
 
-	public InputParamsTM(CmdLineMaker cmdLineMaker) {
-		this(cmdLineMaker.getComandLineData(), cmdLineMaker.getSuiteEnum(), cmdLineMaker.getAppEnum());
-	}
 
-	public InputParamsTM(CommandLine cmdLine, Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) {
-		this(suiteEnum, appEnum);
+	public InputParamsTM(Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) {
+		this.suiteEnum = suiteEnum;
+		this.appEnum = appEnum;
+	}
+	
+	public List<OptionTMaker> getListAllOptions() {
+		List<OptionTMaker> listAllOptions = new ArrayList<>();
+		listAllOptions.addAll(getTmParameters());
+		List<OptionTMaker> listSpecificParams = getSpecificParameters();
+		if (listSpecificParams!=null) {
+			listAllOptions.addAll(listSpecificParams);
+		}
+		return listAllOptions; 
+	}
+	
+	public void setAllDataFromCommandLine(CommandLine cmdLine) {
+		setTmDataFromCommandLine(cmdLine);
+		setSpecificDataFromCommandLine(cmdLine);
+	}
+	
+	public Map<String, String> getAllParamsValues() {
+		Map<String, String> paramsValuesTM = getTmParamsValues();
+		paramsValuesTM.putAll(getSpecificParamsValues());
+		return paramsValuesTM;
+	}
+	
+	private List<OptionTMaker> getTmParameters() {
+		List<OptionTMaker> listOptionsTMaker = new ArrayList<>();
+        OptionTMaker suite = OptionTMaker.builder(InputParamsTM.SuiteNameParam)
+            .required(true)
+            .hasArg()
+            .possibleValues(suiteEnum)
+            .desc("Test Suite to execute. Possible values: " + Arrays.asList(suiteEnum.getEnumConstants()))
+            .build();
+        
+        OptionTMaker groups = OptionTMaker.builder(InputParamsTM.GroupsNameParam)
+            .required(false)
+            .hasArg()
+            .valueSeparator(',')
+            .desc("Groups of tests to include")
+            .build();
+                 
+        OptionTMaker browser = OptionTMaker.builder(InputParamsTM.BrowserNameParam)
+            .required(true)
+            .hasArg()
+            .possibleValues(WebDriverType.class)
+            .desc("Browser to launch the Suite of Tests. Possible values: " + Arrays.asList(WebDriverType.values()))
+            .build();
+
+        OptionTMaker channel = OptionTMaker.builder(InputParamsTM.ChannelNameParam)
+            .required(true)
+            .hasArg()
+            .possibleValues(Channel.class)
+            .desc("Channel on which to run the browser. Possible values: " + Arrays.toString(Channel.values()))
+            .build();
+           
+        OptionTMaker application = OptionTMaker.builder(InputParamsTM.AppNameParam)
+            .required(true)
+            .hasArg()
+            .possibleValues(appEnum)
+            .desc("Application Web to test. Possible values: " + Arrays.toString(getNames(appEnum.getEnumConstants())))
+            .build();
+
+        String patternUrl = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+        OptionTMaker url = OptionTMaker.builder(InputParamsTM.URLNameParam)
+            .required(true)
+            .hasArg()
+            .pattern(patternUrl)
+            .desc("Initial URL of the application Web to test")
+            .build();
+                    
+        OptionTMaker tests = OptionTMaker.builder(InputParamsTM.TCaseNameParam)
+            .required(false)
+            .hasArgs()
+            .valueSeparator(',')
+            .desc("List of testcases comma separated (p.e. OTR001,BOR001...)")
+            .build();    
+        
+        OptionTMaker version = OptionTMaker.builder(InputParamsTM.VersionNameParam)
+            .required(false)
+            .hasArg()
+            .desc("Version of the TestSuite")
+            .build();
+        
+        OptionTMaker serverDNS = OptionTMaker.builder(InputParamsTM.ServerDNSNameParam)
+            .required(false)
+            .hasArgs()
+            .desc("Server DNS where are ubicated the HTML reports (p.e. http://robottest.mangodev.net)")
+            .build();
+        
+        OptionTMaker recicleWD = OptionTMaker.builder(InputParamsTM.RecicleWDParam)
+            .required(false)
+            .hasArgs()
+            .possibleValues(Arrays.asList("true", "false"))
+            .desc("Gestion mode of webdriver. Possible values: true->reuse across testcases, false->don't reuse)")
+            .build();
+        
+        OptionTMaker netAnalysis = OptionTMaker.builder(InputParamsTM.NetAnalysisParam)
+            .required(false)
+            .hasArgs()
+            .possibleValues(Arrays.asList("true", "false"))
+            .desc("Net Analysis (true, false)")
+            .build();
+        
+        OptionTMaker store = OptionTMaker.builder(InputParamsTM.StoreParam)
+            .required(false)
+            .hasArgs()
+            .possibleValues(Arrays.asList("true", "false"))
+            .desc("Store result persistentely (true, false)")
+            .build();
+        
+        OptionTMaker mails = OptionTMaker.builder(InputParamsTM.MailsParam)
+            .required(false)
+            .hasArgs()
+            .valueSeparator(',')
+            .pattern("^(.+)@(.+)$")
+            .desc("List of mail adresses comma separated")
+            .build();
+        
+    	OptionTMaker typeAccess = OptionTMaker.builder(InputParamsTM.TypeAccessParam)
+            .required(false)
+            .hasArgs()
+            .possibleValues(TypeAccess.class)
+            .desc("Type of access. Posible values: " + Arrays.asList(TypeAccess.values()))
+            .build();  
+                
+        listOptionsTMaker.add(suite);
+        listOptionsTMaker.add(browser);
+        listOptionsTMaker.add(channel);
+        listOptionsTMaker.add(application);
+        listOptionsTMaker.add(version);
+        listOptionsTMaker.add(url);
+        listOptionsTMaker.add(groups);     
+        listOptionsTMaker.add(tests);
+        listOptionsTMaker.add(serverDNS);
+        listOptionsTMaker.add(recicleWD);
+        listOptionsTMaker.add(netAnalysis);
+        listOptionsTMaker.add(store);
+        listOptionsTMaker.add(mails);
+        listOptionsTMaker.add(typeAccess);
+        
+        return listOptionsTMaker;
+	}
+	
+	
+	private void setTmDataFromCommandLine(CommandLine cmdLine) {
 		channel = cmdLine.getOptionValue(ChannelNameParam);
 		suite = cmdLine.getOptionValue(SuiteNameParam);
 		application = cmdLine.getOptionValue(AppNameParam);
@@ -129,10 +257,72 @@ public class InputParamsTM {
 		store = cmdLine.getOptionValue(StoreParam);
 		typeAccess = cmdLine.getOptionValue(TypeAccessParam);
 	}
+
+	private enum ParamTM {
+		Suite(SuiteNameParam),
+		Groups(GroupsNameParam),
+		Browser(BrowserNameParam),
+		Channel(ChannelNameParam),
+		Application(AppNameParam),
+		Version(VersionNameParam),
+		Url(URLNameParam),
+		Tcases(TCaseNameParam),
+		ServerDNS(ServerDNSNameParam),
+		RecicleWD(RecicleWDParam),
+		NetAnalysis(NetAnalysisParam),
+		Store(StoreParam),
+		Mails(MailsParam),
+		TypeAccess(TypeAccessParam);
+		
+		public String nameParam;
+		private ParamTM(String nameParam) {
+			this.nameParam = nameParam;
+		}
+	}
 	
-	public InputParamsTM(Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) {
-		this.suiteEnum = suiteEnum;
-		this.appEnum = appEnum;
+	private Map<String,String> getTmParamsValues() {
+		Map<String,String> pairsParamValue = new HashMap<>(); 
+		for (ParamTM paramTM : ParamTM.values()) {
+			String valueParam = getValueParam(paramTM);
+			if (valueParam!=null && "".compareTo(valueParam)!=0) {
+				pairsParamValue.put(paramTM.nameParam, valueParam);
+			}
+		}
+		return pairsParamValue;
+	}
+	
+	private String getValueParam(ParamTM paramId) {
+		switch (paramId) {
+		case Suite:
+			return this.suite;
+		case Groups:
+			return this.groupsCommaSeparated;
+		case Browser:
+			return this.browser;
+		case Channel:
+			return this.channel;
+		case Application:
+			return this.application;
+		case Version:
+			return this.version;
+		case Url:
+			return this.url;
+		case Tcases:
+			return this.tcasesCommaSeparated;
+		case ServerDNS:
+			return this.serverDNS;
+		case RecicleWD:
+			return this.reciclewd;
+		case NetAnalysis:
+			return this.net;
+		case Store:
+			return this.store;
+		case Mails:
+			return this.mailsCommaSeparated;
+		case TypeAccess:
+			return this.typeAccess;
+		}
+		return "";
 	}
 
 	public Class<? extends Enum<?>> getSuiteEnum() {
@@ -302,38 +492,10 @@ public class InputParamsTM {
 		return dFilter;
 	}
 
-	public String getParamValue(ParamTM paramTM) {
-		switch (paramTM) {
-			case Suite:
-				return suite;
-			case Groups:
-				return groupsCommaSeparated;
-			case Browser:
-				return browser;
-			case Channel:
-				return channel;
-			case Application:
-				return application;
-			case Version:
-				return version;
-			case Url:
-				return url;
-			case Tcases:
-				return tcasesCommaSeparated;
-			case ServerDNS:
-				return serverDNS;
-			case RecicleWD:
-				return reciclewd;
-			case NetAnalysis:
-				return net;
-			case Store:
-				return store;
-			case Mails:
-				return mailsCommaSeparated;
-			case TypeAccess:
-				return typeAccess;
-		}
-		return "";
-	}
+
+	
+    private static String[] getNames(Enum<?>[] enumConstants) {
+        return Arrays.stream(enumConstants).map(Enum::name).toArray(String[]::new);
+    }
 
 }

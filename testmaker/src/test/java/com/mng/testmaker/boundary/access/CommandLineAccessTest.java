@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.mng.testmaker.boundary.access.CmdLineMaker;
 import com.mng.testmaker.boundary.access.OptionTMaker;
+import com.mng.testmaker.domain.InputParamsBasic;
 
 import org.apache.commons.cli.ParseException;
 
@@ -33,7 +34,8 @@ public class CommandLineAccessTest {
     	String args[] = getArray(listaArgs);
 
     	//When
-    	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, options, Suites.class, AppEcom.class);
+    	InputParamsBasic inputParams = new InputParamsBasic(Suites.class, AppEcom.class);
+    	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, inputParams);
     	List<MessageError> storedErrors = new ArrayList<>();
     	boolean check = cmdLineAccess.checkOptionsValue(storedErrors);	
     	
@@ -62,7 +64,8 @@ public class CommandLineAccessTest {
     	String args[] = getArray(listaArgs);
 
     	//When
-    	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, options, Suites.class, AppEcom.class);
+    	InputParamsBasic inputParams = new InputParamsBasic(options, Suites.class, AppEcom.class);
+    	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, inputParams);
     	List<MessageError> storedErrors = new ArrayList<>();
     	boolean check = cmdLineAccess.checkOptionsValue(storedErrors);	
     	
@@ -93,7 +96,8 @@ public class CommandLineAccessTest {
     	String args[] = getArray(listaArgs);
 
     	//When
-    	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, options, Suites.class, AppEcom.class);
+    	InputParamsBasic inputParams = new InputParamsBasic(options, Suites.class, AppEcom.class);
+    	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, inputParams);
     	List<MessageError> storedErrors = new ArrayList<>();
     	boolean check = cmdLineAccess.checkOptionsValue(storedErrors);	
     	
@@ -133,7 +137,8 @@ public class CommandLineAccessTest {
     	String args[] = getArray(listaArgs);
 
     	//When
-    	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, options, Suites.class, AppEcom.class);
+    	InputParamsBasic inputParams = new InputParamsBasic(options, Suites.class, AppEcom.class);
+    	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, inputParams);
     	List<MessageError> storedErrors = new ArrayList<>();
     	boolean check = cmdLineAccess.checkOptionsValue(storedErrors);	
     	

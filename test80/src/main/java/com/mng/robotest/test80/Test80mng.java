@@ -2,7 +2,6 @@ package com.mng.robotest.test80;
 
 import java.net.HttpURLConnection;       
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -10,7 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mng.testmaker.boundary.access.CmdLineMaker;
-import com.mng.testmaker.boundary.access.OptionTMaker;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.domain.CreatorSuiteRun;
@@ -30,97 +28,11 @@ public class Test80mng {
     public enum TypeCallBackMethod {POST, GET}
     
     public static void main(String[] args) throws Exception { 
-    	List<OptionTMaker> optionsTest80 = specificMangoOptions();
-    	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, optionsTest80, Suites.class, AppEcom.class);
+    	InputParamsMango inputParamsMango = new InputParamsMango(Suites.class, AppEcom.class);
+    	CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, inputParamsMango);
     	if (cmdLineAccess.checkOptionsValue().isOk()) {
-            execSuite(InputParamsMango.from(cmdLineAccess));
+            execSuite(inputParamsMango);
     	}
-    }
-    
-    private static List<OptionTMaker> specificMangoOptions() {
-    	List<OptionTMaker> options = new ArrayList<>();
-             
-    	OptionTMaker countrys = OptionTMaker.builder(InputParamsMango.CountrysNameParam)
-            .required(false)
-            .hasArgs()
-            .valueSeparator(',')
-            .desc("List of 3-digit codes of countrys comma separated or \'X\' for indicate all countrys")
-            .pattern("\\d{3}|X")
-            .build();
-        
-    	OptionTMaker lineas = OptionTMaker.builder(InputParamsMango.LineasNameParam)
-            .required(false)
-            .hasArgs()
-            .valueSeparator(',')
-            .desc("List of lines comma separated (p.e. she,he,...)")
-            .build();        
-
-    	OptionTMaker payments = OptionTMaker.builder(InputParamsMango.PaymentsNameParam)
-            .required(false)
-            .hasArgs()
-            .valueSeparator(',') 
-            .desc("List of payments comma separated (p.e. VISA,TARJETA MANGO,...)")
-            .build();
-        
-    	String patternUrl = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-    	OptionTMaker urlManto = OptionTMaker.builder(InputParamsMango.UrlMantoParam)
-            .required(false)
-            .hasArgs()
-            .pattern(patternUrl)
-            .desc("URL of the Backoffice of mangoshop (Manto application)")
-            .build();    
-             
-    	OptionTMaker callbackResource = OptionTMaker.builder(InputParamsMango.CallBackResourceParam)
-            .required(false)
-            .hasArgs()
-            .desc("CallBack URL (without schema and params) to invoke in the end of the TestSuite")
-            .build();
-        
-    	OptionTMaker callbackMethod = OptionTMaker.builder(InputParamsMango.CallBackMethodParam)
-            .required(false)
-            .hasArgs()
-            .possibleValues(TypeCallBackMethod.class)
-            .desc("Method of the CallBack URL. Possible values: " + Arrays.asList(TypeCallBackMethod.values()))
-            .build();        
-        
-    	OptionTMaker callbackSchema = OptionTMaker.builder(InputParamsMango.CallBackSchemaParam)
-            .required(false)
-            .hasArgs()
-            .possibleValues(TypeCallbackSchema.class)
-            .desc("Schema of the CallBack URL. Possible values: " + Arrays.asList(TypeCallbackSchema.values()))
-            .build();        
-        
-    	OptionTMaker callbackParams = OptionTMaker.builder(InputParamsMango.CallBackParamsParam)
-            .required(false)
-            .hasArgs()
-            .valueSeparator(',')
-            .desc("Params of the CallBack URL (in format param1:value1,param2:value2...)")
-            .build();        
-        
-    	OptionTMaker callbackUser = OptionTMaker.builder(InputParamsMango.CallBackUserParam)
-            .required(false)
-            .hasArgs()
-            .desc("User credential needed to invoke the CallBack URL")
-            .build();        
-
-    	OptionTMaker callbackPassword = OptionTMaker.builder(InputParamsMango.CallBackPasswordParam)
-            .required(false)
-            .hasArgs()
-            .desc("Password credential needed to invoke the CallBack URL")
-            .build();        
-                
-        options.add(countrys);
-        options.add(lineas);
-        options.add(payments);        
-        options.add(urlManto);
-        options.add(callbackResource);
-        options.add(callbackMethod);
-        options.add(callbackSchema);
-        options.add(callbackParams);
-        options.add(callbackUser);
-        options.add(callbackPassword);
-        
-        return options;
     }
     
     /**
