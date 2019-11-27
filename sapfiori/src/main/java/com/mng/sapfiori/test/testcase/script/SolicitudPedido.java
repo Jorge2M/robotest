@@ -17,6 +17,7 @@ import com.mng.sapfiori.test.testcase.stpv.pedidos.PagePosSolicitudPedidoStpV;
 import com.mng.sapfiori.test.testcase.stpv.pedidos.PageSolicitudPedidoStpV;
 import com.mng.sapfiori.test.testcase.webobject.pedidos.InfoGeneralSolPedido;
 import com.mng.sapfiori.test.testcase.webobject.pedidos.InputFieldPedido;
+import static com.mng.sapfiori.test.testcase.webobject.pedidos.InputFieldPedido.*;
 
 public class SolicitudPedido {
 
@@ -66,22 +67,22 @@ public class SolicitudPedido {
         	hoyMas7dias.get(Calendar.DAY_OF_MONTH) + "." +
         	hoyMas7dias.get(Calendar.MONTH) + "." +
     		hoyMas7dias.get(Calendar.YEAR);
-    	dataPedido.add(InputDataSolPedido.getForSearchAndSelect(InputFieldPedido.Material, "*AMERICANA*", "183103702092"));
-    	dataPedido.add(InputDataSolPedido.getForSelectValue(InputFieldPedido.Centro, "LLIÇÀ"));
-    	dataPedido.add(InputDataSolPedido.getForSearchAndSelect(InputFieldPedido.Temporada, 1));
+    	dataPedido.add(InputDataSolPedido.getForSearchAndSelect(Material, "*AMERICANA*", "183103702092"));
+    	dataPedido.add(InputDataSolPedido.getForSelectValue(Centro, "LLIÇÀ"));
+    	dataPedido.add(InputDataSolPedido.getForSearchAndSelect(Temporada, 1));
     	String currentYear = String.valueOf(hoyMas7dias.get(Calendar.YEAR));
-    	dataPedido.add(InputDataSolPedido.getForSelectValue(InputFieldPedido.AñoTemporada, currentYear));
-    	dataPedido.add(InputDataSolPedido.getForSelectValue(InputFieldPedido.OrgCompras, "P000"));
-    	dataPedido.add(InputDataSolPedido.getForSelectValue(InputFieldPedido.GrupoCompras, "Man"));
-    	dataPedido.add(InputDataSolPedido.getForSendText(InputFieldPedido.Customer, "RET"));
+    	dataPedido.add(InputDataSolPedido.getForSelectValue(AñoTemporada, currentYear));
+    	dataPedido.add(InputDataSolPedido.getForSelectValue(OrgCompras, "P000"));
+    	dataPedido.add(InputDataSolPedido.getForSelectValue(GrupoCompras, "Man"));
+    	dataPedido.add(InputDataSolPedido.getForSendText(Customer, "RET"));
     	
     	Random r = new Random();
     	Integer quantity = r.ints(100, 500).findFirst().getAsInt();
-    	InputDataSolPedido inputDataQuantity = InputDataSolPedido.getForSendText(InputFieldPedido.Quantity, String.valueOf(quantity));
+    	InputDataSolPedido inputDataQuantity = InputDataSolPedido.getForSendText(Quantity, String.valueOf(quantity));
     	dataPedido.add(inputDataQuantity);
     	
-    	dataPedido.add(InputDataSolPedido.getForSendText(InputFieldPedido.FechaEntrega, fechaEntrega));
-    	dataPedido.add(InputDataSolPedido.getForSearchAndSelect(InputFieldPedido.IdCurvaDistrib, "1940003HPM", "1940003HPM"));
+    	dataPedido.add(InputDataSolPedido.getForSendText(FechaEntrega, fechaEntrega));
+    	dataPedido.add(InputDataSolPedido.getForSearchAndSelect(IdCurvaDistrib, "1940003HPM", "1940003HPM"));
     	pagePosSolicitudPedidoStpV.inputData(dataPedido);
     	PageSolicitudPedidoStpV pageSolicitudPedidoStpV = 
     		pagePosSolicitudPedidoStpV.clickAplicar();

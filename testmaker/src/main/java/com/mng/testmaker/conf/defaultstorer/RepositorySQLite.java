@@ -33,8 +33,13 @@ public class RepositorySQLite implements RepositoryI {
 	private final TestCasesDAO testCasesDAO = new TestCasesDAO(connector);
 	
 	@Override
-	public void store(SuiteTM suite) {
-		storeSuite(suite);
+	public void storeAll(SuiteTM suite) {
+		storeSuiteAndChildren(suite);
+	}
+	
+	@Override
+	public void storeSuite(SuiteTM suite) {
+		storeOnlySuite(suite);
 	}
 	
 	@Override
@@ -81,8 +86,12 @@ public class RepositorySQLite implements RepositoryI {
 		);
 	}
 	
-	private synchronized void storeSuite(SuiteTM suite) {
-		suitesDAO.insertSuite(SuiteData.from(suite));
+	private synchronized void storeOnlySuite(SuiteTM suite) {
+		suitesDAO.insertOrReplaceSuite(SuiteData.from(suite));
+	}
+	
+	private synchronized void storeSuiteAndChildren(SuiteTM suite) {
+		suitesDAO.insertOrReplaceSuite(SuiteData.from(suite));
 		for (TestRunTM testRun : suite.getListTestRuns()) {
 			testRunsDAO.insertTestRun(TestRunData.from(testRun));
 			for (TestCaseTM testCase : testRun.getListTestCases()) {

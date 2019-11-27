@@ -38,9 +38,9 @@ public class SuitesDAO {
 		"URLBASE, " + 
 		"STATE_EXECUTION ";
 
-	private static final String SQLInsertSuiteInit = 
-		"INSERT INTO SUITES (" + ListFieldsSuiteTable + ")" +
-				"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String SQLInsertOrReplaceSuite = 
+		"INSERT OR REPLACE INTO SUITES (" + ListFieldsSuiteTable + ")" +
+		"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 	private static final String SQLSelectSuite = 
 		"SELECT " + ListFieldsSuiteTable  +
@@ -130,9 +130,9 @@ public class SuitesDAO {
 		return suiteData;
 	}
 
-	public void insertSuite(SuiteData suiteData) {
+	public void insertOrReplaceSuite(SuiteData suiteData) {
 		try (Connection conn = connector.getConnection()) {
-			try (PreparedStatement insert = conn.prepareStatement(SQLInsertSuiteInit)) {
+			try (PreparedStatement insert = conn.prepareStatement(SQLInsertOrReplaceSuite)) {
 				insert.setString(1, suiteData.getIdExecSuite());
 				insert.setString(2, suiteData.getName()); 
 				insert.setString(3, suiteData.getVersion()); 
@@ -141,7 +141,11 @@ public class SuitesDAO {
 				insert.setString(6, suiteData.getApp());
 				insert.setString(7, suiteData.getResult().name());
 				insert.setString(8, getDateFormat().format(suiteData.getInicioDate()));
-				insert.setString(9, getDateFormat().format(suiteData.getFinDate()));
+				if (suiteData.getFinDate()!=null) {
+					insert.setString(9, getDateFormat().format(suiteData.getFinDate()));
+				} else {
+					insert.setString(9, null);
+				}
 				insert.setFloat(10, suiteData.getDurationMillis());
 				insert.setInt(11, suiteData.getNumberTestCases());
 				insert.setString(12, suiteData.getPathReportHtml());
