@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.galeria;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -32,7 +33,13 @@ public class SecBannerHeadGallery extends WebdrvWrapp {
     }
     
     public static boolean isVisible(WebDriver driver) {
-        return (isElementVisible(driver, By.xpath(XPathBanner)));
+    	if (isElementVisible(driver, By.xpath(XPathBanner))) {
+    		Dimension bannerSize = driver.findElement(By.xpath(XPathBanner)).getSize(); 
+    		if (bannerSize.height>0 && bannerSize.width>0) {
+    			return true;
+    		}
+    	}
+    	return false;
     }
     
     public static boolean isSalesBanner(IdiomaPais idioma, WebDriver driver) {

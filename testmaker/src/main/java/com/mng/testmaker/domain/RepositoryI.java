@@ -10,7 +10,8 @@ import com.mng.testmaker.domain.data.TestCaseData;
 
 public interface RepositoryI {
 	public Connection getConnection() throws ClassNotFoundException, SQLException;
-	public void store(SuiteTM suite);
+	public void storeAll(SuiteTM suite);
+	public void storeSuite(SuiteTM suite);
 	public SuiteData getSuite(String idExecution) throws Exception;
 	public List<SuiteData> getListSuitesAfter(Date fechaDesde) throws Exception;
 	public List<SuiteData> getListSuites() throws Exception;

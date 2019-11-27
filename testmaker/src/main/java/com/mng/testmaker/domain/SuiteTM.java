@@ -81,6 +81,9 @@ public class SuiteTM extends XmlSuite {
 		stateExecution = StateExecution.Started;
 		inicio = new Date(); 
     	SuitesExecuted.add(this);
+		if (inputParams.isStoreResult()) {
+			TestMaker.getRepository().storeSuite(this);
+		}
 	}
 	
 	public void end() {
@@ -92,7 +95,7 @@ public class SuiteTM extends XmlSuite {
 			senderMail.sendMail(this);
 		}
 		if (inputParams.isStoreResult()) {
-			TestMaker.getRepository().store(this);
+			TestMaker.getRepository().storeAll(this);
 		}
 		SuitesExecuted.remove(this);
 	}

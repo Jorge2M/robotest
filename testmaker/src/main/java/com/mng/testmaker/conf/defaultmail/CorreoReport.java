@@ -34,8 +34,8 @@ public class CorreoReport {
     private static String construirHTMLmail(RepositoryI persistor) throws Exception {
         //Fecha actual - 13 horas
         //Date fechaDesde = new Date(System.currentTimeMillis() - 3600000 /*1 horas*/);
-        Date fechaDesde = new Date(System.currentTimeMillis() - 50400000 /*14 horas*/);	    
-        //Date fechaDesde = new Date(System.currentTimeMillis() - 46800000 /*13 horas*/);
+        //Date fechaDesde = new Date(System.currentTimeMillis() - 50400000 /*14 horas*/);	    
+        Date fechaDesde = new Date(System.currentTimeMillis() - 46800000 /*13 horas*/);
         Date fechaHasta = new Date(System.currentTimeMillis());
 		
         RepositoryI repository = TestMaker.getRepository();

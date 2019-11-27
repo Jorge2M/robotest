@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.sapfiori.test.testcase.generic.webobject.utils.PageObject;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 public class PageReclassifProducts extends PageObject {
 	
@@ -30,9 +29,9 @@ public class PageReclassifProducts extends PageObject {
 	}
 	
 	public PageSelProdsToReclassify clickGrabarButton() throws Exception {
-		//Hay problemas con el click sobre este botón, en ocasiones no tiene efecto
 		clickAndWaitLoad(driver, By.xpath(XPathGrabarButton));
-		if (!WebdrvWrapp.isElementInvisibleUntil(driver, By.xpath(XPathGrabarButton), 1)) {
+		if (!isElementInvisibleUntil(driver, By.xpath(XPathGrabarButton), 3)) {
+			waitForPageFinished();
 			clickAndWaitLoad(driver, By.xpath(XPathGrabarButton));
 		}
 		return PageSelProdsToReclassify.getNew(driver);

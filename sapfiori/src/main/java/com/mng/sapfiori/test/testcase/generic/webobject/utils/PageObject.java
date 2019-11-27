@@ -31,7 +31,7 @@ public class PageObject extends WebdrvWrapp {
 	}
 	
 	public boolean clickAndWaitLoad(By byElem) throws Exception {
-		boolean ok = WebdrvWrapp.clickAndWaitLoad(driver, byElem);
+		boolean ok = clickAndWaitLoad(driver, byElem);
 		waitForPageFinished();
 		return ok;
 	}
