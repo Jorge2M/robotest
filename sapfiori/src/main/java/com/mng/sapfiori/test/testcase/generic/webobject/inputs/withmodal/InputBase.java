@@ -16,14 +16,16 @@ public class InputBase extends PageObject {
 	}
 
 	public void clearAndSendText(CharSequence... message) throws Exception {
+		waitForPageFinished();
 		WebElement inputElem = getInputElement();
-		PageObject.waitMillis(500);
 		inputElem.clear();
-		sendText(message);
-		//PageObject.sendKeysWithRetry(2, inputElem, message);
+		//PageObject.waitMillis(200);
+		inputElem.sendKeys(message);
+		//PageObject.waitMillis(200);
 	}
 	
-	public void sendText(CharSequence... message) {
+	public void sendText(CharSequence... message) throws Exception {
+		waitForPageFinished();
 		getInputElement().sendKeys(message);
 	}
 	
