@@ -87,7 +87,7 @@ response.setDateHeader ("Expires", -1);%>
 			}
 			    if (paramsTSuite.getListaPaises()!=null) {
 		%>
-		<p class="testSuiteAttribute">Countries: <b><%=paramsTSuite.getListaPaisesStr()%></b></p>
+		<p class="testSuiteAttribute">Countries: <b><%=paramsTSuite.getListaPaisesCommaSeparated()%></b></p>
 		<%
 			}
 		%>
@@ -153,7 +153,7 @@ response.setDateHeader ("Expires", -1);%>
 	    paramsTSuite.setVersion(request.getParameter(InputParamsTM.VersionNameParam));
 	    paramsTSuite.setUrlBase(request.getParameter(InputParamsTM.URLNameParam));
 	    paramsTSuite.setNetAnalysis(request.getParameter(InputParamsTM.NetAnalysisParam));
-	    paramsTSuite.setListaPaises(request.getParameter(InputParamsMango.CountrysNameParam));
+	    paramsTSuite.setListaPaisesCommaSeparated(request.getParameter(InputParamsMango.CountrysNameParam));
 	    paramsTSuite.setListaLineas(request.getParameterValues(InputParamsMango.LineasNameParam));
 	    paramsTSuite.setListaPayments(request.getParameterValues(InputParamsMango.PaymentsNameParam));
 	    String[] listTCases = request.getParameterValues(InputParamsTM.TCaseNameParam);
@@ -172,14 +172,12 @@ response.setDateHeader ("Expires", -1);%>
 	    }
 	    paramsTSuite.setWebAppDNS(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()); 
 	    if (request.getParameter(InputParamsMango.CallBackResourceParam)!=null) {
-			CallBack callBack = new CallBack();
-	        callBack.setCallBackResource(request.getParameter(InputParamsMango.CallBackResourceParam));
-	        callBack.setCallBackMethod(request.getParameter(InputParamsMango.CallBackMethodParam));
-	        callBack.setCallBackUser(request.getParameter(InputParamsMango.CallBackUserParam));
-	        callBack.setCallBackPassword(request.getParameter(InputParamsMango.CallBackPasswordParam));
-	        callBack.setCallBackSchema(request.getParameter(InputParamsMango.CallBackSchemaParam));
-	        callBack.setCallBackParams(request.getParameter(InputParamsMango.CallBackParamsParam));
-	        paramsTSuite.setCallBack(callBack);
+	    	paramsTSuite.setCallBackResource(request.getParameter(InputParamsMango.CallBackResourceParam));
+	    	paramsTSuite.setCallBackMethod(request.getParameter(InputParamsMango.CallBackMethodParam));
+	    	paramsTSuite.setCallBackUser(request.getParameter(InputParamsMango.CallBackUserParam));
+	    	paramsTSuite.setCallBackPassword(request.getParameter(InputParamsMango.CallBackPasswordParam));
+	    	paramsTSuite.setCallBackSchema(request.getParameter(InputParamsMango.CallBackSchemaParam));
+	    	paramsTSuite.setCallBackParams(request.getParameter(InputParamsMango.CallBackParamsParam));
 	    }
 	    
 	    return paramsTSuite;

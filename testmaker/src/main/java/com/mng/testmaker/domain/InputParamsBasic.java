@@ -1,7 +1,9 @@
 package com.mng.testmaker.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.cli.CommandLine;
 
@@ -28,5 +30,10 @@ public class InputParamsBasic extends InputParamsTM {
 	
 	@Override
 	public void setSpecificDataFromCommandLine(CommandLine cmdLine) {}
+	
+	@Override
+	public Map<String,String> getSpecificParamsValues() {
+		return new HashMap<String, String>();
+	}
 	
 }

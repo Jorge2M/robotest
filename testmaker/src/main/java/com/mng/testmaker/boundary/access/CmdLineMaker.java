@@ -2,6 +2,7 @@ package com.mng.testmaker.boundary.access;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +15,6 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import com.mng.testmaker.domain.InputParamsTM;
-import com.mng.testmaker.domain.InputParamsTM.ParamTM;
 
 public class CmdLineMaker { 
 
@@ -60,9 +60,9 @@ public class CmdLineMaker {
 				cmdLineToReturn = parser.parse(options, args);
 			}
 			catch (ParseException e) {
-	            System.out.println(e.getLocalizedMessage());
-	            printHelpSyntaxis(options);
-	            throw e;
+				System.out.println(e.getLocalizedMessage());
+				printHelpSyntaxis(options);
+				throw e;
 			}
 		} else {
 			return cmdLineHelp;
@@ -70,15 +70,17 @@ public class CmdLineMaker {
 		return cmdLineToReturn;
 	}
 	
-    public ResultCheckOptions checkOptionsValue() {
-        boolean check=true;
-        List<MessageError> storedErrors = new ArrayList<>();
-        if (!checkOptionsValue(storedErrors)) {
-        	check=false;
-        	System.out.println(storedErrors);
-        }
-        return (ResultCheckOptions.from(check, storedErrors));
-    }
+	public ResultCheckOptions checkOptionsValue() {
+		boolean check=true;
+		List<MessageError> storedErrors = new ArrayList<>();
+		if (!checkOptionsValue(storedErrors)) {
+			check=false;
+			for (MessageError error : storedErrors) {
+				System.out.print(error);
+			}
+		}
+		return (ResultCheckOptions.from(check, storedErrors));
+	}
 	
 	public CommandLine getComandLineData() {
 		return this.cmdLine;
@@ -96,70 +98,70 @@ public class CmdLineMaker {
 		return optionsReturn;
 	}
 	
-    /**
-     * Parseo para contemplar el caso concreto del parámetro Help
-     */
-    private CommandLine checkHelpParameterCase(String[] args) {
-        Options options = new Options();
-        Option helpOption = Option.builder(HelpNameParam)
-            .required(false)
-            .desc("shows this message")
-            .build();
-        
-        try {
-            options.addOption(helpOption);
-            CommandLine cmdLineHelp = parser.parse(options, args);
-            if (cmdLineHelp.hasOption(HelpNameParam)) {
-                printHelpSyntaxis(options);
-                return cmdLineHelp;
-            }
-        }
-        catch (ParseException e) {
-            //En caso de cualquier otro parámetro <> a Help saltará el ParseException
-            //Es correcto, el parseo definitivo se realiza más adelante
-        }
-        
-        return null;
-    }
-    
-    private void printHelpSyntaxis(Options options) {
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("TestMaker", getOptions());
-    }
+	/**
+	 * Parseo para contemplar el caso concreto del parámetro Help
+	 */
+	private CommandLine checkHelpParameterCase(String[] args) {
+		Options options = new Options();
+		Option helpOption = Option.builder(HelpNameParam)
+			.required(false)
+			.desc("shows this message")
+			.build();
 
-    
-    boolean checkOptionsValue(List<MessageError> storedErrors) {
-    	if (HelpNameParam.compareTo(cmdLine.getOptions()[0].getOpt())==0) {
-    		return false;
-    	}
-    	
-    	boolean check = true;
-    	for (OptionTMaker optionTMaker : inputParams.getListAllOptions()) {
-    		String nameParam = optionTMaker.getOption().getOpt();
-    		String valueOption = cmdLine.getOptionValue(nameParam);
-    		if (optionTMaker.getOption().isRequired()) {
-    			if (valueOption==null) {
-    		    	String saltoLinea = System.getProperty("line.separator");
-    				storedErrors.add(new MessageError("Mandatory param " + nameParam + " doesn't exists" + saltoLinea));
-    				check = false;
-    			}
-    		}
-    		if (valueOption!=null) {
-	    		if (!optionTMaker.getOption().hasValueSeparator()) {
-	    			if (!checkOptionValue(optionTMaker, valueOption, storedErrors)) {
-	    				check = false;
-	    			}
-	    		} else {
-	    			String[] valuesOption = cmdLine.getOptionValues(nameParam);
-	    			if (!checkOptionValues(optionTMaker, valuesOption, storedErrors)) {
-	    				check = false;
-	    			}
-	    		}
-    		}
-    	}
-    	return check;
-    }
-    
+		try {
+			options.addOption(helpOption);
+			CommandLine cmdLineHelp = parser.parse(options, args);
+			if (cmdLineHelp.hasOption(HelpNameParam)) {
+				printHelpSyntaxis(options);
+				return cmdLineHelp;
+			}
+		}
+		catch (ParseException e) {
+			//En caso de cualquier otro parámetro <> a Help saltará el ParseException
+			//Es correcto, el parseo definitivo se realiza más adelante
+		}
+
+		return null;
+	}
+
+	private void printHelpSyntaxis(Options options) {
+		HelpFormatter formatter = new HelpFormatter();
+		formatter.printHelp("TestMaker", getOptions());
+	}
+
+
+	boolean checkOptionsValue(List<MessageError> storedErrors) {
+		if (HelpNameParam.compareTo(cmdLine.getOptions()[0].getOpt())==0) {
+			return false;
+		}
+		
+		boolean check = true;
+		for (OptionTMaker optionTMaker : inputParams.getListAllOptions()) {
+			String nameParam = optionTMaker.getOption().getOpt();
+			String valueOption = cmdLine.getOptionValue(nameParam);
+			if (optionTMaker.getOption().isRequired()) {
+				if (valueOption==null) {
+			    	String saltoLinea = System.getProperty("line.separator");
+					storedErrors.add(new MessageError("Mandatory param " + nameParam + " doesn't exists" + saltoLinea));
+					check = false;
+				}
+			}
+			if (valueOption!=null) {
+				if (!optionTMaker.getOption().hasValueSeparator()) {
+					if (!checkOptionValue(optionTMaker, valueOption, storedErrors)) {
+						check = false;
+					}
+				} else {
+					String[] valuesOption = cmdLine.getOptionValues(nameParam);
+					if (!checkOptionValues(optionTMaker, valuesOption, storedErrors)) {
+						check = false;
+					}
+				}
+			}
+		}
+		return check;
+	}
+
     private boolean checkOptionValues(OptionTMaker optionTMaker, String[] valuesOption, List<MessageError> storedErrors) {
 		for (String valueOption : valuesOption) {
 			if (!checkOptionValue(optionTMaker, valueOption, storedErrors)) {
@@ -167,9 +169,9 @@ public class CmdLineMaker {
 			}
 		}
 		return true;
-    }
-    
-    private boolean checkOptionValue(OptionTMaker optionTMaker, String value, List<MessageError> storedErrors) {
+	}
+
+	private boolean checkOptionValue(OptionTMaker optionTMaker, String value, List<MessageError> storedErrors) {
 		String nameParam = optionTMaker.getOption().getOpt();
 		String stringPattern = optionTMaker.getPattern();
 		String saltoLinea = System.getProperty("line.separator");
@@ -185,29 +187,29 @@ public class CmdLineMaker {
 			return false;
 		}
 		return true;
-    }
-    
-    private boolean checkPatternValue(String stringPattern, String value) {
+	}
+
+	private boolean checkPatternValue(String stringPattern, String value) {
 		Pattern pattern = Pattern.compile(stringPattern);
 		Matcher matcher = pattern.matcher(value);
 		return matcher.matches();
-    }
-    
-    private boolean checkPossibleValues(List<String> possibleValues, String value) {
-    	for (String possibleValue : possibleValues) {
-    		if (possibleValue.compareTo(value)==0) {
-    			return true;
-    		}
-    	}
-    	return false;
-    }
+	}
+
+	private boolean checkPossibleValues(List<String> possibleValues, String value) {
+		for (String possibleValue : possibleValues) {
+			if (possibleValue.compareTo(value)==0) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public static String[] getArgs(InputParamsTM inputParams) {
 		List<String> listArgs = new ArrayList<>();
-		for (ParamTM paramTM : ParamTM.values()) {
-			String valueParam = inputParams.getParamValue(paramTM);
+		for (Map.Entry<String,String> entryParam : inputParams.getAllParamsValues().entrySet()) {
+			String valueParam = entryParam.getValue();
 			if (valueParam!=null && "".compareTo(valueParam)!=0) {
-				listArgs.add("-" + paramTM.nameParam);
+				listArgs.add("-" + entryParam.getKey());
 				listArgs.add(valueParam);
 			}
 		}

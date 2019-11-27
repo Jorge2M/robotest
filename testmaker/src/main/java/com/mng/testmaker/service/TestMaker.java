@@ -38,22 +38,22 @@ public class TestMaker {
 	public static void runAsync(SuiteTM suite) {
 		run(suite, true);
 	}
-    private static void run(SuiteTM suite, boolean async) {
-    	suite.start();
-        Log4jConfig.configLog4java(suite.getPathDirectory());
-        File path = new File(suite.getPathDirectory());
-        path.mkdir();
-        if (async) {
-        	runInTestNgAsync(suite);
-        } else {
-        	runInTestNgSync(suite);
-        }
-    }
-    
-    public static void finishSuite(String idExecution) {
-    	finish(getSuiteExecuted(idExecution));
-    }
-    
+	private static void run(SuiteTM suite, boolean async) {
+		suite.start();
+		Log4jConfig.configLog4java(suite.getPathDirectory());
+		File path = new File(suite.getPathDirectory());
+		path.mkdir();
+		if (async) {
+			runInTestNgAsync(suite);
+		} else {
+			runInTestNgSync(suite);
+		}
+	}
+
+	public static void finishSuite(String idExecution) {
+		finish(getSuiteExecuted(idExecution));
+	}
+
 	public static void finish(SuiteTM suite) {
 		suite.end();
 	}
@@ -116,8 +116,8 @@ public class TestMaker {
 	}
 	private static boolean neatStop(SuiteTM suite) {
 		suite.setStateExecution(StateExecution.Stopping);
-        List<StateExecution> validStates = Arrays.asList(StateExecution.Stopped, StateExecution.Finished);
-        return (waitForSuiteInState(suite, validStates, 15));
+		List<StateExecution> validStates = Arrays.asList(StateExecution.Stopped, StateExecution.Finished);
+		return (waitForSuiteInState(suite, validStates, 15));
 	}
 	private static boolean waitForSuiteInState(SuiteTM suite, List<StateExecution> validStates, int maxSeconds) {
 		for (int i=0; i<maxSeconds; i++) {
@@ -142,66 +142,66 @@ public class TestMaker {
 		return TestCaseTM.getTestCaseInExecution();
 	}
 	
-    public static WebDriver getDriverTestCase() {
-    	return (getTestCase().getWebDriver());
-    }
-    
-    public static StepTM getCurrentStepInExecution() {
-    	return getTestCase().getCurrentStepInExecution();
-    }
-    
-    public static StepTM getLastStep() {
-    	return getTestCase().getLastStep();
-    }
-    
-    public static String getParamTestRun(String idParam, ITestContext ctx) {
-    	return ctx.getCurrentXmlTest().getParameter(idParam);
-    }
+	public static WebDriver getDriverTestCase() {
+		return (getTestCase().getWebDriver());
+	}
+
+	public static StepTM getCurrentStepInExecution() {
+		return getTestCase().getCurrentStepInExecution();
+	}
+
+	public static StepTM getLastStep() {
+		return getTestCase().getLastStep();
+	}
+
+	public static String getParamTestRun(String idParam, ITestContext ctx) {
+		return ctx.getCurrentXmlTest().getParameter(idParam);
+	}
 	
-    public static RepositoryI getRepository() {
-    	return TestMaker.repository;
-    }
+	public static RepositoryI getRepository() {
+		return TestMaker.repository;
+	}
 	public static void setRepository(RepositoryI repository) {
 		TestMaker.repository = repository;
 	}
-    
-    public static void skipTestsIfSuiteStopped() {
-    	if (getTestCase()!=null) {
-    		skipTestsIfSuiteEnded(getTestCase().getSuiteParent());
-        }
-    }
-	
-    public static void skipTestsIfSuiteEnded(SuiteTM suite) {
-    	List<StateExecution> statesSuiteEnded = Arrays.asList(
-    			StateExecution.Stopping, 
-    			StateExecution.Stopped, 
-    			StateExecution.Finished);
-        if (statesSuiteEnded.contains(suite.getStateExecution())) {
-            throw new SkipException("Suite " + suite.getName() + " in state " + suite.getStateExecution());
-        }
-    }
-    
-    private static void runInTestNgSync(SuiteTM suite) {
-    	TestNG tng = makeTestNG(suite);
-        tng.run();
-    }
-    
-    private static void runInTestNgAsync(SuiteTM suite) {
-    	TestNG tng = makeTestNG(suite);
-    	CompletableFuture.runAsync(() -> {
-    		tng.run();
-    	});
-    }
-    
-    private static TestNG makeTestNG(SuiteTM suite) {
-        List<XmlSuite> suites = new ArrayList<>();
-        suites.add(suite);    
-        TestNG tng = new TestNG();
-        tng.setXmlSuites(suites);
-        tng.setUseDefaultListeners(false);
-        return tng;
-    }
-    
+
+	public static void skipTestsIfSuiteStopped() {
+		if (getTestCase()!=null) {
+			skipTestsIfSuiteEnded(getTestCase().getSuiteParent());
+	}
+	}
+
+	public static void skipTestsIfSuiteEnded(SuiteTM suite) {
+		List<StateExecution> statesSuiteEnded = Arrays.asList(
+				StateExecution.Stopping, 
+				StateExecution.Stopped, 
+				StateExecution.Finished);
+		if (statesSuiteEnded.contains(suite.getStateExecution())) {
+			throw new SkipException("Suite " + suite.getName() + " in state " + suite.getStateExecution());
+		}
+	}
+
+	private static void runInTestNgSync(SuiteTM suite) {
+		TestNG tng = makeTestNG(suite);
+		tng.run();
+	}
+
+	private static void runInTestNgAsync(SuiteTM suite) {
+		TestNG tng = makeTestNG(suite);
+		CompletableFuture.runAsync(() -> {
+			tng.run();
+		});
+	}
+
+	private static TestNG makeTestNG(SuiteTM suite) {
+		List<XmlSuite> suites = new ArrayList<>();
+		suites.add(suite);    
+		TestNG tng = new TestNG();
+		tng.setXmlSuites(suites);
+		tng.setUseDefaultListeners(false);
+		return tng;
+	}
+
 	private static void sleep(int millis) {
 		try {
 			Thread.sleep(millis);

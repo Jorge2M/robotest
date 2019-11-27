@@ -22,9 +22,9 @@ public class SuiteMakerResources {
     public static Map<String,String> getParametersSuiteShop(InputParamsMango params) {
     	Map<String,String> parametersReturn = new HashMap<>();
     	
-    	parametersReturn.put(Constantes.paramCountrys, params.getListaPaisesStr());
-    	parametersReturn.put(Constantes.paramLineas, params.getListaLineasStr());
-    	parametersReturn.put(Constantes.paramPayments, params.getListaPaymentsStr());        
+    	parametersReturn.put(Constantes.paramCountrys, params.getListaPaisesCommaSeparated());
+    	parametersReturn.put(Constantes.paramLineas, params.getListaLineasCommaSeparated());
+    	parametersReturn.put(Constantes.paramPayments, params.getListaPaymentsCommaSeparated());
 
         //Credenciales acceso a Manto
     	parametersReturn.put(Constantes.paramUsrmanto, Constantes.userManto);

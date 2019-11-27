@@ -114,124 +114,108 @@ public abstract class InputParamsTM {
 	}
 	
 	private List<OptionTMaker> getTmParameters() {
-		List<OptionTMaker> listOptionsTMaker = new ArrayList<>();
-        OptionTMaker suite = OptionTMaker.builder(InputParamsTM.SuiteNameParam)
-            .required(true)
-            .hasArg()
-            .possibleValues(suiteEnum)
-            .desc("Test Suite to execute. Possible values: " + Arrays.asList(suiteEnum.getEnumConstants()))
-            .build();
-        
-        OptionTMaker groups = OptionTMaker.builder(InputParamsTM.GroupsNameParam)
-            .required(false)
-            .hasArg()
-            .valueSeparator(',')
-            .desc("Groups of tests to include")
-            .build();
-                 
-        OptionTMaker browser = OptionTMaker.builder(InputParamsTM.BrowserNameParam)
-            .required(true)
-            .hasArg()
-            .possibleValues(WebDriverType.class)
-            .desc("Browser to launch the Suite of Tests. Possible values: " + Arrays.asList(WebDriverType.values()))
-            .build();
+		List<OptionTMaker> optionsTM = new ArrayList<>();
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.SuiteNameParam)
+			.required(true)
+			.hasArg()
+			.possibleValues(suiteEnum)
+			.desc("Test Suite to execute. Possible values: " + Arrays.asList(suiteEnum.getEnumConstants()))
+			.build());
 
-        OptionTMaker channel = OptionTMaker.builder(InputParamsTM.ChannelNameParam)
-            .required(true)
-            .hasArg()
-            .possibleValues(Channel.class)
-            .desc("Channel on which to run the browser. Possible values: " + Arrays.toString(Channel.values()))
-            .build();
-           
-        OptionTMaker application = OptionTMaker.builder(InputParamsTM.AppNameParam)
-            .required(true)
-            .hasArg()
-            .possibleValues(appEnum)
-            .desc("Application Web to test. Possible values: " + Arrays.toString(getNames(appEnum.getEnumConstants())))
-            .build();
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.GroupsNameParam)
+			.required(false)
+			.hasArg()
+			.valueSeparator(',')
+			.desc("Groups of tests to include")
+			.build());
 
-        String patternUrl = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-        OptionTMaker url = OptionTMaker.builder(InputParamsTM.URLNameParam)
-            .required(true)
-            .hasArg()
-            .pattern(patternUrl)
-            .desc("Initial URL of the application Web to test")
-            .build();
-                    
-        OptionTMaker tests = OptionTMaker.builder(InputParamsTM.TCaseNameParam)
-            .required(false)
-            .hasArgs()
-            .valueSeparator(',')
-            .desc("List of testcases comma separated (p.e. OTR001,BOR001...)")
-            .build();    
-        
-        OptionTMaker version = OptionTMaker.builder(InputParamsTM.VersionNameParam)
-            .required(false)
-            .hasArg()
-            .desc("Version of the TestSuite")
-            .build();
-        
-        OptionTMaker serverDNS = OptionTMaker.builder(InputParamsTM.ServerDNSNameParam)
-            .required(false)
-            .hasArgs()
-            .desc("Server DNS where are ubicated the HTML reports (p.e. http://robottest.mangodev.net)")
-            .build();
-        
-        OptionTMaker recicleWD = OptionTMaker.builder(InputParamsTM.RecicleWDParam)
-            .required(false)
-            .hasArgs()
-            .possibleValues(Arrays.asList("true", "false"))
-            .desc("Gestion mode of webdriver. Possible values: true->reuse across testcases, false->don't reuse)")
-            .build();
-        
-        OptionTMaker netAnalysis = OptionTMaker.builder(InputParamsTM.NetAnalysisParam)
-            .required(false)
-            .hasArgs()
-            .possibleValues(Arrays.asList("true", "false"))
-            .desc("Net Analysis (true, false)")
-            .build();
-        
-        OptionTMaker store = OptionTMaker.builder(InputParamsTM.StoreParam)
-            .required(false)
-            .hasArgs()
-            .possibleValues(Arrays.asList("true", "false"))
-            .desc("Store result persistentely (true, false)")
-            .build();
-        
-        OptionTMaker mails = OptionTMaker.builder(InputParamsTM.MailsParam)
-            .required(false)
-            .hasArgs()
-            .valueSeparator(',')
-            .pattern("^(.+)@(.+)$")
-            .desc("List of mail adresses comma separated")
-            .build();
-        
-    	OptionTMaker typeAccess = OptionTMaker.builder(InputParamsTM.TypeAccessParam)
-            .required(false)
-            .hasArgs()
-            .possibleValues(TypeAccess.class)
-            .desc("Type of access. Posible values: " + Arrays.asList(TypeAccess.values()))
-            .build();  
-                
-        listOptionsTMaker.add(suite);
-        listOptionsTMaker.add(browser);
-        listOptionsTMaker.add(channel);
-        listOptionsTMaker.add(application);
-        listOptionsTMaker.add(version);
-        listOptionsTMaker.add(url);
-        listOptionsTMaker.add(groups);     
-        listOptionsTMaker.add(tests);
-        listOptionsTMaker.add(serverDNS);
-        listOptionsTMaker.add(recicleWD);
-        listOptionsTMaker.add(netAnalysis);
-        listOptionsTMaker.add(store);
-        listOptionsTMaker.add(mails);
-        listOptionsTMaker.add(typeAccess);
-        
-        return listOptionsTMaker;
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.BrowserNameParam)
+			.required(true)
+			.hasArg()
+			.possibleValues(WebDriverType.class)
+			.desc("Browser to launch the Suite of Tests. Possible values: " + Arrays.asList(WebDriverType.values()))
+			.build());
+
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.ChannelNameParam)
+			.required(true)
+			.hasArg()
+			.possibleValues(Channel.class)
+			.desc("Channel on which to run the browser. Possible values: " + Arrays.toString(Channel.values()))
+			.build());
+
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.AppNameParam)
+			.required(true)
+			.hasArg()
+			.possibleValues(appEnum)
+			.desc("Application Web to test. Possible values: " + Arrays.toString(getNames(appEnum.getEnumConstants())))
+			.build());
+
+		String patternUrl = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.URLNameParam)
+			.required(true)
+			.hasArg()
+			.pattern(patternUrl)
+			.desc("Initial URL of the application Web to test")
+			.build());
+
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.TCaseNameParam)
+			.required(false)
+			.hasArgs()
+			.valueSeparator(',')
+			.desc("List of testcases comma separated (p.e. OTR001,BOR001...)")
+			.build());
+
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.VersionNameParam)
+			.required(false)
+			.hasArg()
+			.desc("Version of the TestSuite")
+			.build());
+
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.ServerDNSNameParam)
+			.required(false)
+			.hasArgs()
+			.desc("Server DNS where are ubicated the HTML reports (p.e. http://robottest.mangodev.net)")
+			.build());
+
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.RecicleWDParam)
+			.required(false)
+			.hasArgs()
+			.possibleValues(Arrays.asList("true", "false"))
+			.desc("Gestion mode of webdriver. Possible values: true->reuse across testcases, false->don't reuse)")
+			.build());
+
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.NetAnalysisParam)
+			.required(false)
+			.hasArgs()
+			.possibleValues(Arrays.asList("true", "false"))
+			.desc("Net Analysis (true, false)")
+			.build());
+
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.StoreParam)
+			.required(false)
+			.hasArgs()
+			.possibleValues(Arrays.asList("true", "false"))
+			.desc("Store result persistentely (true, false)")
+			.build());
+
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.MailsParam)
+			.required(false)
+			.hasArgs()
+			.valueSeparator(',')
+			.pattern("^(.+)@(.+)$")
+			.desc("List of mail adresses comma separated")
+			.build());
+
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.TypeAccessParam)
+			.required(false)
+			.hasArgs()
+			.possibleValues(TypeAccess.class)
+			.desc("Type of access. Posible values: " + Arrays.asList(TypeAccess.values()))
+			.build());
+
+		return optionsTM;
 	}
-	
-	
+
 	private void setTmDataFromCommandLine(CommandLine cmdLine) {
 		channel = cmdLine.getOptionValue(ChannelNameParam);
 		suite = cmdLine.getOptionValue(SuiteNameParam);
@@ -358,52 +342,52 @@ public abstract class InputParamsTM {
 	public void setSuite(Enum<?> suite) {
 		this.suite = suite.name();
 	}
-    public Enum<?> getApp() {
-    	return (valueOf(appEnum.getEnumConstants(), application));
-    }
-    public void setApp(String app) {
-    	this.application = app;
-    }
-    public void setApp(Enum<?> app) {
-    	this.application = app.name();
-    }
-    public String getVersion() {
+	public Enum<?> getApp() {
+		return (valueOf(appEnum.getEnumConstants(), application));
+	}
+	public void setApp(String app) {
+		this.application = app;
+	}
+	public void setApp(Enum<?> app) {
+		this.application = app.name();
+	}
+	public String getVersion() {
 		if (version==null) {
 			version = "V1";
 		}
 		return version;
-    }
-    public void setVersion(String version) {
-    	this.version = version;
-    }
-    public String getUrlBase() {
-    	return url;
-    }
-    public void setUrlBase(String urlBase) {
-    	this.url = urlBase;
-    }
-    public WebDriverType getWebDriverType() {
-    	return (WebDriverType.valueOf(browser));
-    }
-    public void setWebDriverType(WebDriverType webDriverType) {
-    	this.browser = webDriverType.name();
-    }
-    public void setBrowser(String browser) {
-    	this.browser = browser;
-    }
-    public String getWebAppDNS() {
-    	return serverDNS;
-    }
-    public void setWebAppDNS(String serverDNS) {
-    	this.serverDNS = serverDNS;
-    }
-    public List<String> getGroupsFilter() {
-    	if (groupsCommaSeparated!=null) {
-    		String[] groups = groupsCommaSeparated.split(",");
-    		return Arrays.asList(groups);
-    	}
-    	return Arrays.asList();
-    }
+	}
+	public void setVersion(String version) {
+		this.version = version;
+	}
+	public String getUrlBase() {
+		return url;
+	}
+	public void setUrlBase(String urlBase) {
+		this.url = urlBase;
+	}
+	public WebDriverType getWebDriverType() {
+		return (WebDriverType.valueOf(browser));
+	}
+	public void setWebDriverType(WebDriverType webDriverType) {
+		this.browser = webDriverType.name();
+	}
+	public void setBrowser(String browser) {
+		this.browser = browser;
+	}
+	public String getWebAppDNS() {
+		return serverDNS;
+	}
+	public void setWebAppDNS(String serverDNS) {
+		this.serverDNS = serverDNS;
+	}
+	public List<String> getGroupsFilter() {
+		if (groupsCommaSeparated!=null) {
+			String[] groups = groupsCommaSeparated.split(",");
+			return Arrays.asList(groups);
+		}
+		return Arrays.asList();
+	}
 	public List<String> getTestCasesFilter() {
 		if (tcasesCommaSeparated!=null) {
 			String[] tcases = tcasesCommaSeparated.split(",");
@@ -492,10 +476,7 @@ public abstract class InputParamsTM {
 		return dFilter;
 	}
 
-
-	
-    private static String[] getNames(Enum<?>[] enumConstants) {
-        return Arrays.stream(enumConstants).map(Enum::name).toArray(String[]::new);
-    }
-
+	private static String[] getNames(Enum<?>[] enumConstants) {
+		return Arrays.stream(enumConstants).map(Enum::name).toArray(String[]::new);
+	}
 }

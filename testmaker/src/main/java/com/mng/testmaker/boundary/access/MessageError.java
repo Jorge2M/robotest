@@ -21,6 +21,11 @@ public class MessageError {
 	}
 	
 	@Override
+	public String toString() {
+		return message;
+	}
+	
+	@Override
 	public boolean equals(Object o) {
 		if (o == this) { 
 			return true; 
