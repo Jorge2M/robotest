@@ -41,7 +41,7 @@ public class CmdLineMaker {
 	}	
 	public static CmdLineMaker from(InputParamsTM inputParams) throws Exception {
 		String [] args = getArgs(inputParams);
-		return new CmdLineMaker(args, null);
+		return new CmdLineMaker(args, inputParams);
 	}	
 	
 	public Class<? extends Enum<?>> getSuiteEnum() {

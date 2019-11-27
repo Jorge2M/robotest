@@ -62,6 +62,9 @@ public class InputParamsMango extends InputParamsTM {
 
 	private static String lineSeparator = System.getProperty("line.separator");
 
+	public InputParamsMango() {
+		super();
+	}
 	public InputParamsMango(Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) {
 		super(suiteEnum, appEnum);
 	}
