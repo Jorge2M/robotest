@@ -7,15 +7,11 @@ import java.util.List;
 
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.data.ValesData.Campanya;
-import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais.EffectToArticle;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
+import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
 
 public class FactoryVale {
-	
-	private static List<Pais> listPaises = null;
 	
 	private FactoryVale() {}
 	
@@ -25,16 +21,8 @@ public class FactoryVale {
     	vale.codigoVale = codigoVale;
     	vale.porcDescuento = porcDescuento;
     	vale.filterCal = false;
-    	vale.pais = UtilsMangoTest.getPaisFromCodigo(codigoPais, getListaPaisesSingleton());
+    	vale.pais = PaisExtractor.get(codigoPais);
     	return vale;
-    }
-    
-    private static List<Pais> getListaPaisesSingleton() throws Exception {
-    	if (listPaises==null) {
-    		List<Integer> listCountrys = null;
-    		listPaises = Utilidades.getListCountrysFiltered(listCountrys);
-    	}
-    	return listPaises;
     }
     
     /**

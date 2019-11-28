@@ -1,20 +1,15 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
-import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
@@ -26,12 +21,13 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsS
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
+import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
 import com.mng.testmaker.service.TestMaker;
 
 import org.openqa.selenium.WebDriver;
 
 public class Bolsa {
-        
+	
     public Bolsa() {}
 
     private DataCtxShop getCtxShForTest() throws Exception {
@@ -40,9 +36,7 @@ public class Bolsa {
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());
         dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
-        Integer codEspanya = Integer.valueOf(1);
-        List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
-        dCtxSh.pais = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
+		dCtxSh.pais = PaisExtractor.get(PaisShop.España);
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
         return dCtxSh;
     }

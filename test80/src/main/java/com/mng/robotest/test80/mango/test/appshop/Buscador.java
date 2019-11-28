@@ -1,39 +1,33 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
+import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.buscador.SecBuscadorStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV;
+import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
 import com.mng.testmaker.service.TestMaker;
 
 public class Buscador {
-         
-    public Buscador() {}      
-    
-    private DataCtxShop getCtxShForTest() throws Exception {
-    	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
-        DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
-        dCtxSh.setChannel(inputParamsSuite.getChannel());
-        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
-        Integer codEspanya = Integer.valueOf(1);
-        List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
-        dCtxSh.pais =  UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
-        dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
-        return dCtxSh;
-    }
+
+	public Buscador() {}
+
+	private DataCtxShop getCtxShForTest() throws Exception {
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		DataCtxShop dCtxSh = new DataCtxShop();
+		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+		dCtxSh.setChannel(inputParamsSuite.getChannel());
+		dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+		dCtxSh.pais = PaisExtractor.get(PaisShop.España);
+		dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
+		return dCtxSh;
+	}
 
     @Test (
         groups={"Buscador", "Canal:all_App:all"}, alwaysRun=true, 

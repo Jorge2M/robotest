@@ -10,8 +10,9 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.CompraFact;
+import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
-import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
+import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
 
 public class ListPagosEspana {
 	
@@ -20,12 +21,12 @@ public class ListPagosEspana {
 	Pais francia = null;
 	IdiomaPais frances = null;
 	
-    final boolean usrReg = true;
-    final boolean empleado = true;
-    final boolean testVale = true;
-    final boolean manyArticles = true;
-    final boolean twoArticles = true;
-    final boolean anulPedido = true;
+	final boolean usrReg = true;
+	final boolean empleado = true;
+	final boolean testVale = true;
+	final boolean manyArticles = true;
+	final boolean twoArticles = true;
+	final boolean anulPedido = true;
 	
     @Factory
     @Test (
@@ -56,11 +57,8 @@ public class ListPagosEspana {
     }
     
     private void getDataCountrys() throws Exception {
-        Integer codEspanya = Integer.valueOf(1);
-        Integer codFrancia = Integer.valueOf(11);
-        List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya, codFrancia))); 
-        this.espana = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
-        this.francia = UtilsMangoTest.getPaisFromCodigo("011", listaPaises);
+        this.espana = PaisExtractor.get(PaisShop.España);
+        this.francia = PaisExtractor.get(PaisShop.France);
         this.castellano = espana.getListIdiomas().get(0);
         this.frances = francia.getListIdiomas().get(0);
     }

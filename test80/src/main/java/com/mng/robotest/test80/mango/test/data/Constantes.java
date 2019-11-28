@@ -4,7 +4,6 @@ import java.util.regex.Pattern;
 
 public class Constantes {
 
-    public static final String XMLPaises = "/inicio_paises_v3.xml";
     public static final int IDFRAME = 0;
     public static final int SRCFRAME = 1;
     public static final int RUTAFRAME = 2;

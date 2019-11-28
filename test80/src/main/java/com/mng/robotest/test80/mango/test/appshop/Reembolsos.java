@@ -6,13 +6,13 @@ import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
-import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -26,9 +26,9 @@ import com.mng.robotest.test80.mango.test.stpv.shop.PageReembolsosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageResultPagoStpV;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
+import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
 import com.mng.testmaker.service.TestMaker;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,9 +43,7 @@ import org.openqa.selenium.WebDriver;
 public class Reembolsos {
 	
     //TODO mientras que tengamos problemas con el buscador en Arabia probaremos contra España
-    private final static Integer espanaCod = Integer.valueOf(1);
-    private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(espanaCod)));
-    private final static Pais arabia = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
+    private final static Pais arabia = PaisExtractor.get(PaisShop.España);
     private final static IdiomaPais arabia_arabe = arabia.getListIdiomas().get(0);
     
     private DataCtxShop getCtxShForTest() throws Exception {

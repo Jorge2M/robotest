@@ -1,9 +1,6 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
 import org.openqa.selenium.WebDriver;
@@ -17,11 +14,10 @@ import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.DataMango;
-import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
+import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.DataNino;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataNinos;
 import com.mng.robotest.test80.mango.test.pageobject.shop.registro.ListDataRegistro;
@@ -39,12 +35,11 @@ import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroNinosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroSegundaStpV;
 import com.mng.robotest.test80.mango.test.suites.RegistrosSuite.VersionRegistroSuite;
+import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
 
 public class Registro {
     
-    private final static Integer codEspanya = Integer.valueOf(1);
-    private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
-    private final static Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
+    private final static Pais españa = PaisExtractor.get(PaisShop.España);
     private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
     
     private String index_fact = "";

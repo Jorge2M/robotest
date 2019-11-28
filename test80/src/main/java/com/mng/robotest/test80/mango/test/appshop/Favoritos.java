@@ -7,13 +7,12 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
-import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
@@ -28,8 +27,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV.TypeActionFav;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
+import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,17 +37,15 @@ import org.openqa.selenium.WebDriver;
 @SuppressWarnings({ "static-access" })
 public class Favoritos {
 
-    public int prioridad;
-    private String index_fact = "";
-    private Pais paisFactory = null;
-    private IdiomaPais idiomaFactory = null;
-    private final static Integer codEspanya = Integer.valueOf(1);
-    private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
-    private final static Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
-    
-    //Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
-    public Favoritos() {}
-    
+	public int prioridad;
+	private String index_fact = "";
+	private Pais paisFactory = null;
+	private IdiomaPais idiomaFactory = null;
+	private final static Pais españa = PaisExtractor.get(PaisShop.España);
+
+	//Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
+	public Favoritos() {}
+
     /**
      * Constructor para invocación desde @Factory
      */

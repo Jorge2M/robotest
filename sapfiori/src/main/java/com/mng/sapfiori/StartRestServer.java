@@ -5,7 +5,7 @@ import com.mng.sapfiori.datatmaker.Suites;
 import com.mng.testmaker.domain.CreatorSuiteRun;
 import com.mng.testmaker.restcontroller.ServerRestTM;
 
-public class RestApiRunTests {
+public class StartRestServer {
 
 	public static void main(String[] args) throws Exception {
 		CreatorSuiteRun creatorSuiteRun = CreatorSuiteRunSapFiori.getNew();

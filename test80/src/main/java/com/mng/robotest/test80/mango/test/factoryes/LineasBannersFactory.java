@@ -16,6 +16,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test80.mango.test.suites.PaisIdiomaSuite.VersionPaisSuite;
+import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
 
 public class LineasBannersFactory {
 	
@@ -29,7 +30,7 @@ public class LineasBannersFactory {
         	AppEcom app = (AppEcom)inputData.getApp();
         	Channel channel = inputData.getChannel();
         	VersionPaisSuite version = VersionPaisSuite.valueOf(inputData.getVersion());
-            List<Pais> listCountrys = Utilidades.getListCountrysFiltered(countrysStr);
+            List<Pais> listCountrys = PaisExtractor.getFromCommaSeparatedCountries(countrysStr);
             int prioridad=0;
             for (Pais pais : listCountrys) {
                 Iterator<IdiomaPais> itIdiomas = pais.getListIdiomas().iterator();

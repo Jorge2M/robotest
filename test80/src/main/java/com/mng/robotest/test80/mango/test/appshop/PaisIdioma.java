@@ -8,7 +8,7 @@ import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
+import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.TypeContentDesk;
@@ -28,9 +28,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.suites.FlagsNaviationLineas;
 import com.mng.robotest.test80.mango.test.suites.PaisIdiomaSuite.VersionPaisSuite;
 import com.mng.robotest.test80.mango.test.utils.LevelPais;
+import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -39,35 +38,33 @@ import org.openqa.selenium.WebDriver;
 
 
 public class PaisIdioma {
-    static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
+	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
-    private String index_fact = "";
-    private List<Linea> linesToTest = null;
-    public int prioridad;
-    private FlagsNaviationLineas flagsNavigation;
-    private DataCtxShop dCtxSh;
-    private final static Integer codEspanya = Integer.valueOf(1);
-    private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
-    private final static Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
-    private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
-    
-    //Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
-    public PaisIdioma() {}
-    
-    /**
-     * Constructor para invocación desde @Factory
-     */
-    public PaisIdioma(FlagsNaviationLineas flagsNavigation, DataCtxShop dCtxSh, List<Linea> linesToTest, int prioridad) {
-    	this.flagsNavigation = flagsNavigation;
-        this.dCtxSh = dCtxSh;
-        String lineaStr = "";
-        if (linesToTest.size()==1) {
-            lineaStr = "-" + linesToTest.get(0).getType();
-        }   
-        this.index_fact = dCtxSh.pais.getNombre_pais() + " (" + dCtxSh.pais.getCodigo_pais() + ") " + "-" + dCtxSh.idioma.getCodigo().getLiteral() + lineaStr;
-        this.linesToTest = linesToTest;
-        this.prioridad = prioridad;
-    }
+	private String index_fact = "";
+	private List<Linea> linesToTest = null;
+	public int prioridad;
+	private FlagsNaviationLineas flagsNavigation;
+	private DataCtxShop dCtxSh;
+	private final static Pais españa = PaisExtractor.get(PaisShop.España);
+	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+
+	//Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
+	public PaisIdioma() {}
+
+	/**
+	 * Constructor para invocación desde @Factory
+	 */
+	public PaisIdioma(FlagsNaviationLineas flagsNavigation, DataCtxShop dCtxSh, List<Linea> linesToTest, int prioridad) {
+		this.flagsNavigation = flagsNavigation;
+		this.dCtxSh = dCtxSh;
+		String lineaStr = "";
+		if (linesToTest.size()==1) {
+			lineaStr = "-" + linesToTest.get(0).getType();
+		}
+		this.index_fact = dCtxSh.pais.getNombre_pais() + " (" + dCtxSh.pais.getCodigo_pais() + ") " + "-" + dCtxSh.idioma.getCodigo().getLiteral() + lineaStr;
+		this.linesToTest = linesToTest;
+		this.prioridad = prioridad;
+	}
 	  
     public void beforeMethod() throws Exception {
         if (dCtxSh==null) {

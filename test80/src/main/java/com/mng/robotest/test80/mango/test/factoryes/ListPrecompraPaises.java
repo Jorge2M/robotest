@@ -11,9 +11,9 @@ import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.PaisAplicaVale;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.suites.PagosPaisesSuite.VersionPagosSuite;
+import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 public class ListPrecompraPaises {
@@ -28,7 +28,7 @@ public class ListPrecompraPaises {
 	    try {
 	    	InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
 	    	VersionPagosSuite version = VersionPagosSuite.valueOf(inputData.getVersion());
-	    	List<Pais> listCountrys = Utilidades.getListCountrysFiltered(countrys);
+	    	List<Pais> listCountrys = PaisExtractor.getFromCommaSeparatedCountries(countrys);
 	        int prioridad=0;
 	        for (Pais pais : listCountrys) {
                 IdiomaPais primerIdioma = pais.getListIdiomas().get(0);

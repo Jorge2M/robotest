@@ -9,19 +9,18 @@ import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
-import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
-import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock;
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
@@ -39,6 +38,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checqueregalo.PageChequeRegaloInputDataStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMiCuentaStpV;
+import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,33 +49,26 @@ import org.openqa.selenium.WebDriver;
 
 public class Compra {
 
-    private final static Integer codEspanya = Integer.valueOf(1);
-    private final static Integer codAndorra = Integer.valueOf(43);
-    private final static Integer codSuecia = Integer.valueOf(30);
-    private final static Integer codFrancia = Integer.valueOf(11);
-    private final static Integer codColombia = Integer.valueOf(480);
-    private final static List<Integer> lisCodCountrys = Arrays.asList(codEspanya, codAndorra, codSuecia, codFrancia, codColombia);
-    private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(lisCodCountrys));
-    private final static Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
-    private final static Pais francia = UtilsMangoTest.getPaisFromCodigo("011", listaPaises);
-    private final static Pais colombia = UtilsMangoTest.getPaisFromCodigo("480", listaPaises);
-    private final static IdiomaPais castellanoColomb = colombia.getListIdiomas().get(0);
-    private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
-    private final static IdiomaPais frances = francia.getListIdiomas().get(0);
-	
-    public Compra() {}	  
-    
-    private DataCtxShop getCtxShForTest() throws Exception {
-    	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
-        DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
-        dCtxSh.setChannel(inputParamsSuite.getChannel());
-        dCtxSh.pais=españa;
-        dCtxSh.idioma=castellano;
-        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
-        return dCtxSh;
-    }
-	
+	private final static Pais españa = PaisExtractor.get(PaisShop.España);
+	private final static Pais francia = PaisExtractor.get(PaisShop.France);
+	private final static Pais colombia = PaisExtractor.get(PaisShop.Colombia);
+	private final static IdiomaPais castellanoColomb = colombia.getListIdiomas().get(0);
+	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+	private final static IdiomaPais frances = francia.getListIdiomas().get(0);
+
+	public Compra() {}
+
+	private DataCtxShop getCtxShForTest() throws Exception {
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		DataCtxShop dCtxSh = new DataCtxShop();
+		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+		dCtxSh.setChannel(inputParamsSuite.getChannel());
+		dCtxSh.pais=españa;
+		dCtxSh.idioma=castellano;
+		dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+		return dCtxSh;
+	}
+
     @Test (
         groups={"Compra", "Canal:all_App:shop,outlet"}, alwaysRun=true, priority=2, 
         description="[Usuario registrado][Tarjeta guardada] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 

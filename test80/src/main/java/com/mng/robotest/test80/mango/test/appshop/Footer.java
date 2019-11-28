@@ -1,7 +1,5 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -10,38 +8,32 @@ import org.testng.annotations.Test;
 import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
+import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter.FooterLink;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
+import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
 import com.mng.testmaker.service.TestMaker;
 
-/**
- * Test que comprueba los footers
- *
- */
 public class Footer {
 
-    private final static Integer codEspanya = Integer.valueOf(1);
-    private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
-    private final static Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
-    private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+	private final static Pais españa = PaisExtractor.get(PaisShop.España);
+	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
 
-    public Footer() {}
-    
-    private DataCtxShop getCtxShForTest() throws Exception {
-    	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
-        DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
-        dCtxSh.setChannel(inputParamsSuite.getChannel());
-        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
-        dCtxSh.pais = españa;
-        dCtxSh.idioma = castellano;
-        return dCtxSh;
-    }
+	public Footer() {}
+
+	private DataCtxShop getCtxShForTest() throws Exception {
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		DataCtxShop dCtxSh = new DataCtxShop();
+		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+		dCtxSh.setChannel(inputParamsSuite.getChannel());
+		dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+		dCtxSh.pais = españa;
+		dCtxSh.idioma = castellano;
+		return dCtxSh;
+	}
 
     @Test(
         groups = { "Footer", "Canal:all_App:shop", "Canal:desktop_App:outlet" }, alwaysRun = true, 

@@ -1,20 +1,15 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
+import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock;
@@ -41,23 +36,22 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalBuscadorTiendasStpV;
+import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
 import com.mng.testmaker.service.TestMaker;
 
 public class FichaProducto {
 	
-    private final static Integer codEspanya = Integer.valueOf(1);
-    private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
-    private final static Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
-    private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
-    
-    private DataCtxShop getCtxShForTest() throws Exception {
-    	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
-        DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
-        dCtxSh.setChannel(inputParamsSuite.getChannel());
-        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
-        return dCtxSh;
-    }
+	private final static Pais españa = PaisExtractor.get(PaisShop.España);
+	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+
+	private DataCtxShop getCtxShForTest() throws Exception {
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		DataCtxShop dCtxSh = new DataCtxShop();
+		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+		dCtxSh.setChannel(inputParamsSuite.getChannel());
+		dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+		return dCtxSh;
+	}
 	
     @Test (
         groups={"FichaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
@@ -163,9 +157,7 @@ public class FichaProducto {
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userRegistered = false;
-        Integer codCorea = Integer.valueOf(728);
-        List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codCorea)));
-        dCtxSh.pais = UtilsMangoTest.getPaisFromCodigo("728", listaPaises); //Corea
+        dCtxSh.pais = PaisExtractor.get(PaisShop.CoreaDelSur);
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0); //Coreano
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);

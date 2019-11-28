@@ -136,7 +136,8 @@ public enum PaisShop {
 	Russia("075", "Россия (Российская Федерация)"),
 	China("720", "中国"),
 	Japón("732", "日本"),
-	CoreaDelSur("728", "대한민국");
+	CoreaDelSur("728", "대한민국"),
+	FakeCountry("999", "Country Inexistent");
 	
 	String codigoPais;
 	String nameInPrehome;

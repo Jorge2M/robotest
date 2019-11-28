@@ -1,6 +1,5 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,12 +14,12 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.datastored.FlagsTestCkout;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos.CheckPedido;
-import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
@@ -38,13 +37,12 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
+import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
 
 public class Loyalty {
 	
-    private final static Integer codEspanya = Integer.valueOf(1);
-    private final static List<Pais> listaPaises = Utilidades.getListCountrysFiltered(new ArrayList<>(Arrays.asList(codEspanya)));
-    private final static Pais españa = UtilsMangoTest.getPaisFromCodigo("001", listaPaises);
-    private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+	private final static Pais españa = PaisExtractor.get(PaisShop.España);
+	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
 	
 	final static String userWithLPoints = "ticket_digital_es@mango.com";
 	final static String passwUserWithLPoints = "mango123";
@@ -52,16 +50,16 @@ public class Loyalty {
 	final static String userWithLPointsOnlyInTest = "test.performance10@mango.com";
 	final static String passwUserWithLPointsOnlyInTest = "Mango123";
 
-    private DataCtxShop getCtxShForTest() throws Exception {
-    	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
-        DataCtxShop dCtxSh = new DataCtxShop();
-        dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
-        dCtxSh.setChannel(inputParamsSuite.getChannel());
-        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
-        dCtxSh.pais = españa;
-        dCtxSh.idioma = castellano;
-        return dCtxSh;
-    }
+	private DataCtxShop getCtxShForTest() throws Exception {
+		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		DataCtxShop dCtxSh = new DataCtxShop();
+		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
+		dCtxSh.setChannel(inputParamsSuite.getChannel());
+		dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+		dCtxSh.pais = españa;
+		dCtxSh.idioma = castellano;
+		return dCtxSh;
+	}
 	
     @Test (
         groups={"Loyalty", "Canal:all_App:shop"},

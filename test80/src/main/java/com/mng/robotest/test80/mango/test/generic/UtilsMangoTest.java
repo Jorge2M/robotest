@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.TreeSet;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -22,9 +21,7 @@ import org.testng.ITestContext;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataMango;
-import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
-import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
@@ -124,22 +121,6 @@ public class UtilsMangoTest {
         return enIntervalo;
     }
 
-    /**
-     * Obtenemos la lista de países en formato List<Integer>
-     * @param paisesStr: lista de países en formato "001,030..." (puedes ser "*")
-     */
-    public static List<Integer> getListaPaisesInt(String paisesStr) {
-        if ("*".compareTo(paisesStr)!=0 && "X".compareTo(paisesStr)!=0) {
-            List<Integer> listaPaises = new ArrayList<>();
-            String[] listaPaisesStr = paisesStr.substring(0, paisesStr.length()).split(",");
-            for (String element : listaPaisesStr) {
-                listaPaises.add(Integer.valueOf(element));
-            }
-            return listaPaises;
-        } 
-        
-        return null;
-    }
 
     public static WebElement findDisplayedElement(WebDriver driver, By locator) {
         List<WebElement> listElements = findDisplayedElements(driver, locator);
@@ -222,47 +203,6 @@ public class UtilsMangoTest {
         int randomNum = rand.nextInt(max - min + 1) + min;
 
         return randomNum;
-    }
-    
-    public static TreeSet<String> getListPagoFilterNames(List<Integer> listCountrysFilter, Channel channel, AppEcom appE, boolean isEmpl) 
-    throws Exception {
-        List<Pais> listPaises = Utilidades.getListCountrysFiltered(listCountrysFilter);
-        return (getListNameFilterPagos(listPaises, channel, appE, isEmpl));
-    }
-    
-    public static TreeSet<String> getListPagoFilterNames(Channel channel, AppEcom appE, boolean isEmpl) 
-    throws Exception {
-    	List<Integer> listaCodPais = null;
-    	List<Pais> listPaises = Utilidades.getListCountrysFiltered(listaCodPais);
-        return (getListNameFilterPagos(listPaises, channel, appE, isEmpl));
-    }    
-    
-    private static TreeSet<String> getListNameFilterPagos(List<Pais> listPaises, Channel channel, AppEcom appE, boolean isEmpl) {
-        TreeSet<String> listPagoFilterNames = new TreeSet<>();
-        for (Pais pais : listPaises) {
-            for (Pago pago : pais.getListPagosTest(appE, isEmpl)) {
-                listPagoFilterNames.add(pago.getNameFilter(channel));
-            }
-        }
-        
-        return listPagoFilterNames;        
-    }
-
-    /**
-     * Retorna un país determinado a partir del código
-     */
-    public static Pais getPaisFromCodigo(final String codigoPais, final List<Pais> listaPaises) {
-        Pais pais = null;
-        boolean encontrado = false;
-        Iterator<Pais> itPaises = listaPaises.iterator();
-        while (!encontrado && itPaises.hasNext()) {
-            pais = itPaises.next();
-            if (codigoPais.compareTo(pais.getCodigo_pais()) == 0) {
-                encontrado = true;
-            }
-        }
-
-        return pais;
     }
     
     /**
