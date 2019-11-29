@@ -16,7 +16,7 @@ import com.mng.robotest.test80.mango.test.data.ValesData.Campanya;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
 import com.mng.robotest.test80.mango.test.suites.ValesPaisesSuite.VersionValesSuite;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
 public class ValesPaises {
 
@@ -39,7 +39,7 @@ public class ValesPaises {
         	}
         } 
         
-    	List<Pais> listCountrys = PaisExtractor.getFromCommaSeparatedCountries(countrys);
+    	List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(countrys);
         int prioridad=0;
         for (Pais pais : listCountrys) {
             IdiomaPais idioma = pais.getListIdiomas().get(0);

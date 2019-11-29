@@ -16,7 +16,7 @@ public class PaisExtractorTest {
 	@Test
 	public void testGetPais() throws Exception {
 		//When
-		Pais pais = PaisExtractor.get(PaisShop.España);
+		Pais pais = PaisGetter.get(PaisShop.España);
 		
 		//Then
 		assertTrue(pais.getCodigo_pais().compareTo(PaisShop.España.getCodigoPais())==0);
@@ -26,7 +26,7 @@ public class PaisExtractorTest {
 	public void testException_WhenGetPaisThatNotExists() throws Exception {
 		//Then <- When
 		assertThrows(NoSuchElementException.class, () -> {
-			PaisExtractor.get(PaisShop.FakeCountry);
+			PaisGetter.get(PaisShop.FakeCountry);
 		});
 	}
 	
@@ -36,7 +36,7 @@ public class PaisExtractorTest {
 		String countries = "001,011";
 		
 		//When
-		List<Pais> listCountries = PaisExtractor.getFromCommaSeparatedCountries(countries);
+		List<Pais> listCountries = PaisGetter.getFromCommaSeparatedCountries(countries);
 		
 		//Then
 		assertTrue(checkListContainsCodPais(listCountries, "001"));
@@ -50,7 +50,7 @@ public class PaisExtractorTest {
 		String countries = "X"; //All countries
 		
 		//When
-		List<Pais> listCountries = PaisExtractor.getFromCommaSeparatedCountries(countries);
+		List<Pais> listCountries = PaisGetter.getFromCommaSeparatedCountries(countries);
 		
 		//Then
 		assertTrue(checkListContainsCodPais(listCountries, "032"));

@@ -36,12 +36,12 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalBuscadorTiendasStpV;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.mng.testmaker.service.TestMaker;
 
 public class FichaProducto {
 	
-	private final static Pais españa = PaisExtractor.get(PaisShop.España);
+	private final static Pais españa = PaisGetter.get(PaisShop.España);
 	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
 
 	private DataCtxShop getCtxShForTest() throws Exception {
@@ -157,7 +157,7 @@ public class FichaProducto {
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userRegistered = false;
-        dCtxSh.pais = PaisExtractor.get(PaisShop.CoreaDelSur);
+        dCtxSh.pais = PaisGetter.get(PaisShop.CoreaDelSur);
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0); //Coreano
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);

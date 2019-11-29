@@ -24,7 +24,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMiCuentaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMisComprasStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMisDatosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageSuscripcionesStpV;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
 public class MiCuenta {
 	
@@ -32,7 +32,7 @@ public class MiCuenta {
 	private String index_fact = "";
 	private Pais paisFactory = null;
 	private IdiomaPais idiomaFactory = null;
-	private final static Pais españa = PaisExtractor.get(PaisShop.España);
+	private final static Pais españa = PaisGetter.get(PaisShop.España);
 	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
 
 	public MiCuenta() {}

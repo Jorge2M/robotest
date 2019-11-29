@@ -11,7 +11,7 @@ import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.buscador.SecBuscadorStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.home.PageHomeMarcasStpV;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.mng.testmaker.service.TestMaker;
 
 public class Buscador {
@@ -24,7 +24,7 @@ public class Buscador {
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
 		dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
-		dCtxSh.pais = PaisExtractor.get(PaisShop.España);
+		dCtxSh.pais = PaisGetter.get(PaisShop.España);
 		dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
 		return dCtxSh;
 	}

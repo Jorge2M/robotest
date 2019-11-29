@@ -14,12 +14,12 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter.FooterLink;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.mng.testmaker.service.TestMaker;
 
 public class Footer {
 
-	private final static Pais españa = PaisExtractor.get(PaisShop.España);
+	private final static Pais españa = PaisGetter.get(PaisShop.España);
 	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
 
 	public Footer() {}

@@ -16,19 +16,19 @@ import com.mng.robotest.test80.mango.test.stpv.shop.PageIniShopJaponStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.PagePrehomeStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusDesktopStpV;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.mng.testmaker.service.TestMaker;
 
 import org.openqa.selenium.WebDriver;
 
 public class Otras {
 	
-	private final static Pais españa = PaisExtractor.get(PaisShop.España);
-	private final static Pais francia = PaisExtractor.get(PaisShop.France);
-	private final static Pais suecia = PaisExtractor.get(PaisShop.Sweden);
-	private final static Pais irlanda = PaisExtractor.get(PaisShop.Ireland);
-	private final static Pais USA = PaisExtractor.get(PaisShop.USA);
-	private final static Pais japon = PaisExtractor.get(PaisShop.Japón);
+	private final static Pais españa = PaisGetter.get(PaisShop.España);
+	private final static Pais francia = PaisGetter.get(PaisShop.France);
+	private final static Pais suecia = PaisGetter.get(PaisShop.Sweden);
+	private final static Pais irlanda = PaisGetter.get(PaisShop.Ireland);
+	private final static Pais USA = PaisGetter.get(PaisShop.USA);
+	private final static Pais japon = PaisGetter.get(PaisShop.Japón);
 	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
 	private final static IdiomaPais francia_frances = francia.getListIdiomas().get(0);
 	private final static IdiomaPais japones = japon.getListIdiomas().get(0);

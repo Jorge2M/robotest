@@ -35,7 +35,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusDesktopStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
 import org.openqa.selenium.WebDriver;
 
@@ -45,7 +45,7 @@ import java.util.List;
 @SuppressWarnings({"static-access"})
 public class GaleriaProducto {
 	
-    private final static Pais españa = PaisExtractor.get(PaisShop.España);
+    private final static Pais españa = PaisGetter.get(PaisShop.España);
     private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
         
     public GaleriaProducto() {}

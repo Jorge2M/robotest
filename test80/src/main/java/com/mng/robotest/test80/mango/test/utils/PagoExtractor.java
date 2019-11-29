@@ -10,24 +10,34 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.testmaker.conf.Channel;
 
-public class PagosExtractor {
+public class PagoExtractor {
 	
-	private final List<Pais> listCountrysFilter;
+	private static final List<PaymentCountry> ListPaymentCountries = getAllPayments();
 	
-	private PagosExtractor() {
-		this.listCountrysFilter = null;
+	private static List<PaymentCountry> getAllPayments() {
+		List<PaymentCountry> listPaymentsToReturn = new ArrayList<>();
+		List<Pais> listAllCountries = PaisGetter.getAllCountries();
+		for (Pais pais : listAllCountries) {
+			String codPais = pais.getCodigo_pais();
+			for (Pago pago : pais.getListPagos()) {
+				listPaymentsToReturn.add(new PaymentCountry(codPais, pago));
+			}
+		}
+		return listPaymentsToReturn;
 	}
-	private PagosExtractor(List<String> listCodCountrysFilter) {
-		this.listCountrysFilter = listCountrysFilter;
-	}
-	public static PagosExtractor fromAllCountrys() {
-		return new PagosExtractor();
-	}
-	public static PagosExtractor fromCountrys(List<Pais> listCountrysFilter) {
-		return new PagosExtractor(listCountrysFilter);
+	
+	public static List<PaymentCountry> getListPayments(List<String> listCountries, Channel channel, AppEcom app) {
+		//Se ha de controlar que el país tenga shop/outlet porque en los pagos siempre está shop,outlet
+		List<PaymentCountry> listPaymentsToReturn;
+		for (PaymentCountry payment : ListPaymentCountries) {
+			if (listCountries.contains(payment.codCountry)) {
+				listPaymentsToReturn.add(payment);
+			}
+		}
+		return listPaymentsToReturn;
 	}
 
-    public List<String> getListPaymentNames(Channel channel, AppEcom appE) throws Exception {
+    public List<String> getPaymentsAllCountries(Channel channel, AppEcom appE) throws Exception {
     	TreeSet<String> countrysTree = getListPagoFilterNames(codCountrysCommaSeparated, channel, appE, false);
     	List<String> listCountrys = new ArrayList<>();
     	for (String country : countrysTree) {
@@ -81,6 +91,13 @@ public class PagosExtractor {
         return (getListNameFilterPagos(listPaises, channel, appE, isEmpl));
     }
   
-    
+    static class PaymentCountry {
+    	public String codCountry;
+    	public Pago pago;
+    	public PaymentCountry(String codCountry, Pago pago) {
+    		this.codCountry = codCountry;
+    		this.pago = pago;
+    	}
+    }
 
 }

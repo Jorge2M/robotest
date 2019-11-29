@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.appshop.rebajas.RebajasJun2019;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.service.TestMaker;
 
@@ -23,7 +23,7 @@ public class ListRebajasXPais {
         InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
         AppEcom appE = (AppEcom)inputData.getApp();
         try {
-            List<Pais> listCountrys = PaisExtractor.getFromCommaSeparatedCountries(listaPaisesStr);
+            List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(listaPaisesStr);
             RebajasPaisDAO rebajasDAO = new RebajasPaisDAO();
             List<String> listCountryCodesInSalePeriod = rebajasDAO.listCountryCodesInRebajas();
     	        

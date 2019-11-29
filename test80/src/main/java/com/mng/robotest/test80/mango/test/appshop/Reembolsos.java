@@ -26,7 +26,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.PageReembolsosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checkout.PageResultPagoStpV;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.mng.testmaker.service.TestMaker;
 
 import java.util.Arrays;
@@ -43,7 +43,7 @@ import org.openqa.selenium.WebDriver;
 public class Reembolsos {
 	
     //TODO mientras que tengamos problemas con el buscador en Arabia probaremos contra España
-    private final static Pais arabia = PaisExtractor.get(PaisShop.España);
+    private final static Pais arabia = PaisGetter.get(PaisShop.España);
     private final static IdiomaPais arabia_arabe = arabia.getListIdiomas().get(0);
     
     private DataCtxShop getCtxShForTest() throws Exception {

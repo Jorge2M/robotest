@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter;
 import com.mng.robotest.test80.mango.test.stpv.ayuda.AyudaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.mng.testmaker.service.TestMaker;
 
 import org.openqa.selenium.WebDriver;
@@ -24,7 +24,7 @@ public class Ayuda {
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
 		dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 
-		dCtxSh.pais = PaisExtractor.get(PaisShop.España);
+		dCtxSh.pais = PaisGetter.get(PaisShop.España);
 		dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
 		return dCtxSh;
 	}

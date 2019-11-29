@@ -8,7 +8,7 @@ import org.testng.annotations.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.Registro;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.mng.testmaker.service.TestMaker;
 
 
@@ -20,7 +20,7 @@ public class ListRegistrosXPais {
         ArrayList<Object> listTests = new ArrayList<>();
         AppEcom appE = (AppEcom)TestMaker.getInputParamsSuite(ctxTestRun).getApp();
         try {
-	    	List<Pais> listCountrys = PaisExtractor.getFromCommaSeparatedCountries(listaPaisesStr);
+	    	List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(listaPaisesStr);
             int prioridad=0;
             for (Pais pais : listCountrys) {
                 Iterator<IdiomaPais> itIdiomas = pais.getListIdiomas().iterator();

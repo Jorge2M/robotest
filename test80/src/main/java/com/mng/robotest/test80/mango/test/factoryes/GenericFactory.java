@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.conftestmaker.Suites;
 import com.mng.robotest.test80.mango.test.appshop.Favoritos;
 import com.mng.robotest.test80.mango.test.appshop.MiCuenta;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.mng.testmaker.service.TestMaker;
 
 
@@ -21,7 +21,7 @@ public class GenericFactory {
         ArrayList<Object> listTests = new ArrayList<>();
         try {
         	Suites suite = (Suites)TestMaker.getInputParamsSuite(ctxTestRun).getSuite();
-            List<Pais> listCountrys = PaisExtractor.getFromCommaSeparatedCountries(listaPaisesStr);
+            List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(listaPaisesStr);
             int prioridad=0;
             for (Pais pais : listCountrys) {
                 IdiomaPais primerIdioma = pais.getListIdiomas().get(0);

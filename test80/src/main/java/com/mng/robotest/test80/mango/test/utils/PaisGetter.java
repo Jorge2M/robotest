@@ -20,7 +20,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Response;
 import com.mng.testmaker.conf.Log4jConfig;
 
-public class PaisExtractor {
+public class PaisGetter {
 
 	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	
@@ -93,7 +93,7 @@ public class PaisExtractor {
 		Response response;
 		JAXBContext jaxbContext = JAXBContext.newInstance(Response.class);
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		InputStream countriesXmlStream = PaisExtractor.class.getResourceAsStream("/" + NameFileCountiesXml);
+		InputStream countriesXmlStream = PaisGetter.class.getResourceAsStream("/" + NameFileCountiesXml);
 		response = (Response)jaxbUnmarshaller.unmarshal(countriesXmlStream);
 		return response;
 	}

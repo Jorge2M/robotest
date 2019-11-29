@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.data.ValesData.Campanya;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais.EffectToArticle;
 import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
 public class FactoryVale {
 	
@@ -21,7 +21,7 @@ public class FactoryVale {
     	vale.codigoVale = codigoVale;
     	vale.porcDescuento = porcDescuento;
     	vale.filterCal = false;
-    	vale.pais = PaisExtractor.get(codigoPais);
+    	vale.pais = PaisGetter.get(codigoPais);
     	return vale;
     }
     

@@ -13,7 +13,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.Utilidades;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
 import com.mng.robotest.test80.mango.test.suites.MenusPaisSuite.VersionMenusPais;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
 public class MenusFactory {
 	
@@ -25,7 +25,7 @@ public class MenusFactory {
         AppEcom app = (AppEcom)inputData.getApp();
         Channel channel = inputData.getChannel();
         VersionMenusPais version = VersionMenusPais.valueOf(inputData.getVersion());
-        List<Pais> listCountrys = PaisExtractor.getFromCommaSeparatedCountries(countrysStr);
+        List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(countrysStr);
         int prioridad=0;
         for (Pais pais : listCountrys) {
             Iterator<IdiomaPais> itIdiomas = pais.getListIdiomas().iterator();

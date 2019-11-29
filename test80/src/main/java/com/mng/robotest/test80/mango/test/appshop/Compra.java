@@ -38,7 +38,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecFooterStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.checqueregalo.PageChequeRegaloInputDataStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMiCuentaStpV;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,9 +49,9 @@ import org.openqa.selenium.WebDriver;
 
 public class Compra {
 
-	private final static Pais españa = PaisExtractor.get(PaisShop.España);
-	private final static Pais francia = PaisExtractor.get(PaisShop.France);
-	private final static Pais colombia = PaisExtractor.get(PaisShop.Colombia);
+	private final static Pais españa = PaisGetter.get(PaisShop.España);
+	private final static Pais francia = PaisGetter.get(PaisShop.France);
+	private final static Pais colombia = PaisGetter.get(PaisShop.Colombia);
 	private final static IdiomaPais castellanoColomb = colombia.getListIdiomas().get(0);
 	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
 	private final static IdiomaPais frances = francia.getListIdiomas().get(0);

@@ -35,11 +35,11 @@ import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroNinosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroSegundaStpV;
 import com.mng.robotest.test80.mango.test.suites.RegistrosSuite.VersionRegistroSuite;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
 public class Registro {
     
-    private final static Pais españa = PaisExtractor.get(PaisShop.España);
+    private final static Pais españa = PaisGetter.get(PaisShop.España);
     private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
     
     private String index_fact = "";

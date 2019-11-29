@@ -28,7 +28,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.suites.FlagsNaviationLineas;
 import com.mng.robotest.test80.mango.test.suites.PaisIdiomaSuite.VersionPaisSuite;
 import com.mng.robotest.test80.mango.test.utils.LevelPais;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class PaisIdioma {
 	public int prioridad;
 	private FlagsNaviationLineas flagsNavigation;
 	private DataCtxShop dCtxSh;
-	private final static Pais españa = PaisExtractor.get(PaisShop.España);
+	private final static Pais españa = PaisGetter.get(PaisShop.España);
 	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
 
 	//Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest

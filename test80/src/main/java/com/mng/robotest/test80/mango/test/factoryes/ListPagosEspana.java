@@ -12,7 +12,7 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.appshop.CompraFact;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.*;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
 public class ListPagosEspana {
 	
@@ -57,8 +57,8 @@ public class ListPagosEspana {
     }
     
     private void getDataCountrys() throws Exception {
-        this.espana = PaisExtractor.get(PaisShop.España);
-        this.francia = PaisExtractor.get(PaisShop.France);
+        this.espana = PaisGetter.get(PaisShop.España);
+        this.francia = PaisGetter.get(PaisShop.France);
         this.castellano = espana.getListIdiomas().get(0);
         this.frances = francia.getListIdiomas().get(0);
     }

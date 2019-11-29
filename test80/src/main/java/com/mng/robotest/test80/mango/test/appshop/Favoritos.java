@@ -27,7 +27,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.LocationArticle;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV.TypeActionFav;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +41,7 @@ public class Favoritos {
 	private String index_fact = "";
 	private Pais paisFactory = null;
 	private IdiomaPais idiomaFactory = null;
-	private final static Pais españa = PaisExtractor.get(PaisShop.España);
+	private final static Pais españa = PaisGetter.get(PaisShop.España);
 
 	//Si añadimos un constructor para el @Factory hemos de añadir este constructor para la invocación desde SmokeTest
 	public Favoritos() {}

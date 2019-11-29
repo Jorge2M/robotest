@@ -21,7 +21,7 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsS
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
-import com.mng.robotest.test80.mango.test.utils.PaisExtractor;
+import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 import com.mng.testmaker.service.TestMaker;
 
 import org.openqa.selenium.WebDriver;
@@ -36,7 +36,7 @@ public class Bolsa {
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());
         dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
-		dCtxSh.pais = PaisExtractor.get(PaisShop.España);
+		dCtxSh.pais = PaisGetter.get(PaisShop.España);
         dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
         return dCtxSh;
     }
