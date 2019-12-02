@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.mng.robotest.test80.InputParamsMango;
 //import com.mng.testmaker.listeners.CallBack;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
+import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.TestRunMaker;

@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.conf.Channel;
-import com.mng.robotest.test80.InputParamsMango;
+import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.PaisShop;

@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.suites;
 import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getParametersSuiteShop;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.InputParamsMango;
 import com.mng.testmaker.domain.SuiteMaker;
 import com.mng.testmaker.domain.TestRunMaker;
+import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
 import com.mng.robotest.test80.mango.test.factoryes.ValesPaises;
 

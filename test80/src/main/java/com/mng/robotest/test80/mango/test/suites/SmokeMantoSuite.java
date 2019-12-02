@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.suites;
 
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.InputParamsMango;
+import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
 import com.mng.robotest.test80.mango.test.appmanto.Manto;
 import com.mng.testmaker.domain.SuiteMaker;

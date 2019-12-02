@@ -11,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
-import com.mng.robotest.test80.InputParamsMango;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
@@ -21,6 +20,7 @@ import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
 import com.mng.testmaker.domain.StepTM;
+import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;

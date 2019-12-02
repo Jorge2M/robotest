@@ -8,8 +8,8 @@ response.setDateHeader ("Expires", -1);%>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
-	<%@ page import="com.mng.robotest.test80.Test80mng" %>
-	<%@ page import="com.mng.robotest.test80.InputParamsMango" %>
+	<%@ page import="com.mng.robotest.test80.access.cmd.CmdRunTests" %>
+	<%@ page import="com.mng.robotest.test80.access.InputParamsMango" %>
 	<%@ page import="com.mng.testmaker.domain.InputParamsTM" %>
 	<%@ page import="com.mng.testmaker.boundary.access.CmdLineMaker"%>
 	<%@ page import="java.io.BufferedReader" %>
@@ -17,7 +17,7 @@ response.setDateHeader ("Expires", -1);%>
 	<%@ page import="java.io.InputStreamReader" %>
 	<%@ page import="java.util.Arrays" %>
 	<%@ page import="org.pruebasws.thread.TSuiteThreadsManager" %>
-	<%@ page import="com.mng.robotest.test80.CallBack" %>
+	<%@ page import="com.mng.robotest.test80.access.CallBack" %>
 	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.Suites" %>
 	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
 	<%@ page import="com.mng.testmaker.service.TestMaker" %>

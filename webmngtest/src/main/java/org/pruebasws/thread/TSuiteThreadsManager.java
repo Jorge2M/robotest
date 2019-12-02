@@ -2,9 +2,9 @@ package org.pruebasws.thread;
 
 import java.util.Set;
 
-import com.mng.robotest.test80.CreatorSuiteRunMango;
-import com.mng.robotest.test80.InputParamsMango;
 import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
+import com.mng.robotest.test80.access.CreatorSuiteRunMango;
+import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.testmaker.domain.CreatorSuiteRun;
 import com.mng.testmaker.domain.SuiteTM;
 import com.mng.testmaker.service.TestMaker;

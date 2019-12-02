@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.mng.robotest.test80.InputParamsMango;
 import com.mng.testmaker.domain.SuiteMaker;
 import com.mng.testmaker.domain.TestRunMaker;
+import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.test.appshop.ConsolaVotf;
 
 public class ConsolaVotfSuite extends SuiteMaker {

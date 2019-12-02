@@ -5,13 +5,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
 import com.mng.testmaker.domain.TestCaseTM;
 import com.mng.testmaker.domain.TestRunTM;
 import com.mng.testmaker.service.TestMaker;
+import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;

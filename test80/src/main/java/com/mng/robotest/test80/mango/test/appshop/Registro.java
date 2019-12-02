@@ -6,11 +6,11 @@ import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
-import com.mng.robotest.test80.InputParamsMango;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
 import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
 import com.mng.testmaker.service.TestMaker;
+import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.DataMango;
