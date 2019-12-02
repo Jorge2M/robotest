@@ -2,6 +2,8 @@ package com.mng.robotest.test80.mango.test.factoryes.jaxb;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import javax.xml.bind.annotation.*;
 
 import org.testng.ITestContext;
@@ -51,9 +53,7 @@ public class Pago {
     }
     
     String type;
-    String shop;
-    String outlet;
-    String votf;
+    List<AppEcom> apps;
     String empleado;
     String testpasarela;
     String testpolyvore;
@@ -171,32 +171,21 @@ public class Pago {
     public String getType() {
         return this.type;
     }
-	
-    public String getShop() {
-        return this.shop;
+    
+    @XmlAttribute(name="apps")
+    public void setApp(String apps) {
+    	List<AppEcom> listApps = new ArrayList<>();
+    	if (apps!=null) {
+    		List<String> listAppsStr = Arrays.asList(apps.split(","));
+    		for (String app : listAppsStr) {
+    			listApps.add(AppEcom.valueOf(app));
+    		}
+    	}
+    	this.apps = listApps;
     }
-	
-    @XmlAttribute(name="shop")
-    public void setShop(String shop) {
-        this.shop = shop;
-    }
-	
-    public String getOutlet() {
-        return this.outlet;
-    }
-	
-    @XmlAttribute(name="outlet")
-    public void setOutlet(String outlet) {
-        this.outlet = outlet;
-    }
-	
-    public String getVotf() {
-        return this.votf;
-    }
-	
-    @XmlAttribute(name="votf")
-    public void setVotf(String votf) {
-        this.votf = votf;
+    
+    public List<AppEcom> getApps() {
+    	return apps;
     }
 	
     public String getEmpleado() {
@@ -682,7 +671,7 @@ public class Pago {
     
     @Override
     public String toString() {
-        return "Pago [type="+ this.type + ", outlet=" + this.outlet + ", outlet=" + this.outlet + ", nombre=" + this.nombre + 
+        return "Pago [type="+ this.type + ", nombre=" + this.nombre + 
                 ", toString()=" + super.toString() + "]";
     }
 }

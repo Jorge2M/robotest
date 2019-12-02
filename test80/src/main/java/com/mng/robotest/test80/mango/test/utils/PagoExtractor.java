@@ -26,7 +26,7 @@ public class PagoExtractor {
 		return listPaymentsToReturn;
 	}
 	
-	public static List<PaymentCountry> getListPayments(List<String> listCountries, Channel channel, AppEcom app) {
+	public static List<Pago> getListPayments(List<String> listCountries, AppEcom app) {
 		//Se ha de controlar que el país tenga shop/outlet porque en los pagos siempre está shop,outlet
 		List<PaymentCountry> listPaymentsToReturn;
 		for (PaymentCountry payment : ListPaymentCountries) {

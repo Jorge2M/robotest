@@ -383,49 +383,24 @@ public class Pais {
         Iterator<Pago> itPagos = this.listPagos.iterator();
         while (itPagos.hasNext()) {
             Pago pago = itPagos.next();
-    		
-            //En caso de empleado filtramos los pagos manteniendo sólo los marcados con empleado="s"
             if (!testEmpleado || (testEmpleado && pago.getEmpleado().compareTo("s")==0)) {
-                
                 //El storecredito lo mantenemos al margen de la lista pues no aparece como un icono
                 if (pago.getTypePago()!=TypePago.StoreCredit) {
-                    switch (app) {
-                    case votf:
-                        if (pago.getVotf()!=null && pago.getVotf().compareTo("n")!=0) {
-                            if (pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0) {
-                                listPagosTest.add(pago);
-                            } else {
-                                listPagosApp.add(pago);
-                            }
-                        }
-                        break;
-                    case shop:
-                        if (pago.getShop().compareTo("n")!=0) {
-                            if (pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0) {
-                                listPagosTest.add(pago);
-                            } else {
-                                listPagosApp.add(pago);
-                            }
-                        }
-                        break;
-                    case outlet:
-                    default:
-                        if (pago.getOutlet().compareTo("n")!=0) {
-                            if (pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0) {
-                                listPagosTest.add(pago);
-                            } else {
-                                listPagosApp.add(pago);
-                            }
-                        }                        
-                        break;
-                    }
+                	if (pago.getApps().contains(app)) {
+                		if (pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0) {
+                			listPagosTest.add(pago);
+                		} else {
+                			listPagosApp.add(pago);
+                		}
+                		
+                	}
                 }
             }
         }
     	
-        //Concatenamos las listas de pago situando al final los pagos a testear
-        for (Pago pago: listPagosTest)
+        for (Pago pago: listPagosTest) {
             listPagosApp.add(pago);
+        }
     				
         return listPagosApp;
     }
