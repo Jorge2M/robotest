@@ -1,6 +1,7 @@
 package com.mng.robotest.test80;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -12,13 +13,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.utils.PagoGetter;
-import com.mng.testmaker.boundary.access.MessageError;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.restcontroller.RestApiTM;
@@ -44,15 +43,13 @@ public class RestApiMango extends RestApiTM {
 	@GET
 	@Path("/payments")
 	@Produces("application/json")
-	public List<Prueba> getPayments(
+	public List<PagoLabelJson> getPayments(
 					@QueryParam("countrys") String countrysCommaSeparated,
 					@NotNull
 					@QueryParam("channel") String channelInput,
 					@NotNull
 					@QueryParam("app") String appInput) throws Exception {
-		String countrys = "*";
 		if (countrysCommaSeparated!=null) {
-			countrys = countrysCommaSeparated;
 			if (!Pattern.matches("(\\d{3},)*\\d{3}", countrysCommaSeparated)) {
 				throw new WebApplicationException("Parameter 'countrys' incorrect", Response.Status.BAD_REQUEST);
 			}
@@ -66,14 +63,27 @@ public class RestApiMango extends RestApiTM {
 		
 		Channel channel = Channel.valueOf(channelInput);
 		AppEcom app = AppEcom.valueOf(appInput);
-		//List<String> listLabelsPagos = PagoGetter.getLabelsPaymentsAlphabetically(listCodCountries, channel, app, false);
+		List<String> listLabelsPagos = null;
+		if (countrysCommaSeparated!=null) {
+			List<String> countrysList = Arrays.asList(countrysCommaSeparated.split(","));
+			listLabelsPagos = PagoGetter.getLabelsPaymentsAlphabetically(countrysList, channel, app, false);
+		} else {
+			listLabelsPagos = PagoGetter.getLabelsPaymentsAlphabetically(channel, app, false);
+		}
 		
-		//return listLabelsPagos;
-		return null;
+		return getPagoLabelsJson(listLabelsPagos);
 //		return Response
 //				.status(Response.Status.OK) 
 //				.entity(listPruebas)
 //				.build();
+	}
+	
+	private List<PagoLabelJson> getPagoLabelsJson(List<String> listLabelsPagos) {
+		List<PagoLabelJson> listLabelsJson = new ArrayList<>();
+		for (String pagoLabel : listLabelsPagos) {
+			listLabelsJson.add(new PagoLabelJson(pagoLabel));
+		}
+		return listLabelsJson;
 	}
 	
 	private boolean enumContains(Class<? extends Enum<?>> enumClass, String value) {
@@ -84,6 +94,4 @@ public class RestApiMango extends RestApiTM {
 		}
 		return false;
 	}
-	
-
 }
