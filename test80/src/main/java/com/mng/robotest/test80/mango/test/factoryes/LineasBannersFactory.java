@@ -36,7 +36,7 @@ public class LineasBannersFactory {
                 Iterator<IdiomaPais> itIdiomas = pais.getListIdiomas().iterator();
                 while (itIdiomas.hasNext()) {
                     IdiomaPais idioma = itIdiomas.next();
-                    if (paisToTest(pais, app==AppEcom.outlet)) {
+                    if (paisToTest(pais, app)) {
                         listaPaises.add(pais.getNombre_pais().trim());
                         List<Linea> lineasAprobar = Utilidades.getLinesToTest(pais, app, lineas);
                         DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, idioma, inputData.getUrlBase());
@@ -66,10 +66,10 @@ public class LineasBannersFactory {
     /**
      * @return si se ha de crear un test para un país concreto
      */
-    protected boolean paisToTest(Pais pais, boolean isOutlet) {
-        return (
-            pais.getExists().compareTo("n")!=0 &&
-            (!isOutlet || (isOutlet && pais.getOutlet_online().compareTo("true")==0))
-        );
+    protected boolean paisToTest(Pais pais, AppEcom app) {
+		return (
+			"n".compareTo(pais.getExists())!=0 &&
+			pais.isVentaOnline() &&
+			pais.getTiendasOnlineList().contains(app));
     }
 }

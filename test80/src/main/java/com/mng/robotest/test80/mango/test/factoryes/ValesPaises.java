@@ -62,17 +62,16 @@ public class ValesPaises {
                         
         return listTests.toArray(new Object[listTests.size()]);
     }   
-    
-    /**
-     * @return si se ha de crear un test para un país concreto
-     */
-    protected boolean paisToTest(Pais pais) {
-        return (
-            pais.getExists().compareTo("n")!=0 &&
-            pais.getShop_online().compareTo("true")==0
-        );
-    }
-    
+
+	/**
+	 * @return si se ha de crear un test para un país concreto
+	 */
+	protected boolean paisToTest(Pais pais) {
+		return (
+			pais.getExists().compareTo("n")!=0 &&
+			pais.isVentaOnline());
+	}
+
     public List<ValePais> listValesPais(String codigo_pais) {      
         List<ValePais> listaValesPais = new ArrayList<>();
         for (ValePais valePais : listaPaisesVales) {

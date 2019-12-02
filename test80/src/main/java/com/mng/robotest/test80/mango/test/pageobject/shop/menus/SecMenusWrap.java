@@ -168,7 +168,7 @@ public class SecMenusWrap {
     }
     
     public boolean canClickMenuArticles(Pais paisI, Linea linea, Sublinea sublinea) {
-        if (paisI.getShop_online().compareTo("true")==0) {
+        if (paisI.isVentaOnline()) {
             if (sublinea==null) {
                 return (linea.getMenusart().compareTo("s")==0);
             }

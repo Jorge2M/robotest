@@ -18,16 +18,15 @@ import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock
 
 
 public class UtilsTestMango {
-    /**
-     * @return si se ha de crear un test para un país concreto
-     */     
-    public static boolean paisConCompra(Pais pais, AppEcom appE) {
-        return (
-            "n".compareTo(pais.getExists())!=0 &&
-            pais.getShop_online().compareTo("true")==0 &&
-            (appE!=AppEcom.outlet || (appE==AppEcom.outlet && pais.getOutlet_online().compareTo("true")==0))
-        );
-    }
+	
+	/**
+	 * @return si se ha de crear un test para un país concreto
+	 */
+	public static boolean paisConCompra(Pais pais, AppEcom appE) {
+		return (
+			"n".compareTo(pais.getExists())!=0 &&
+			pais.getTiendasOnlineList().contains(appE));
+	}
 
     public static String getSaleTraduction(IdiomaPais idioma) {
         switch (idioma.getCodigo().name()) {

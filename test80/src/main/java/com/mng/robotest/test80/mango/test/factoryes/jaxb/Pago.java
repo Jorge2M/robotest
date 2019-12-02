@@ -53,7 +53,7 @@ public class Pago {
     }
     
     String type;
-    List<AppEcom> apps;
+    String tiendas;
     String empleado;
     String testpasarela;
     String testpolyvore;
@@ -172,24 +172,34 @@ public class Pago {
         return this.type;
     }
     
-    @XmlAttribute(name="apps")
-    public void setApp(String apps) {
+    @XmlAttribute
+    public void setTiendas(String tiendas) {
+    	this.tiendas = tiendas;
+    }
+    
+    public String getTiendas() {
+    	return tiendas;
+    }
+    
+    public List<AppEcom> getTiendasList() {
     	List<AppEcom> listApps = new ArrayList<>();
-    	if (apps!=null) {
-    		List<String> listAppsStr = Arrays.asList(apps.split(","));
+    	if (getTiendas()!=null) {
+    		List<String> listAppsStr = Arrays.asList(getTiendas().split(","));
     		for (String app : listAppsStr) {
     			listApps.add(AppEcom.valueOf(app));
     		}
     	}
-    	this.apps = listApps;
-    }
-    
-    public List<AppEcom> getApps() {
-    	return apps;
+    	return listApps;
     }
 	
     public String getEmpleado() {
         return this.empleado;
+    }
+    
+    public boolean isForEmpleado() {
+    	return 
+    		getEmpleado()!=null && 
+    		"s".compareTo(getEmpleado())==0;
     }
 	
     @XmlAttribute(name="empleado")

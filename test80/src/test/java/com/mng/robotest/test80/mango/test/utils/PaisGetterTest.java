@@ -11,7 +11,7 @@ import org.junit.Test;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 
-public class PaisExtractorTest {
+public class PaisGetterTest {
 
 	@Test
 	public void testGetPais() throws Exception {

@@ -5,6 +5,7 @@ import java.util.*;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Suites;
 import com.mng.robotest.test80.mango.test.appshop.Favoritos;
 import com.mng.robotest.test80.mango.test.appshop.MiCuenta;
@@ -25,7 +26,7 @@ public class GenericFactory {
             int prioridad=0;
             for (Pais pais : listCountrys) {
                 IdiomaPais primerIdioma = pais.getListIdiomas().get(0);
-                if (paisToTest(pais, false)) {
+                if (paisToTest(pais, AppEcom.shop)) {
                 	addTestToList(listTests, suite, pais, primerIdioma, prioridad);
                 	prioridad+=1;
                 }
@@ -57,11 +58,10 @@ public class GenericFactory {
         );
     }
 	
-    protected boolean paisToTest(Pais pais, boolean isOutlet) {
-        return (
-            "n".compareTo(pais.getExists())!=0 &&
-            pais.getShop_online().compareTo("true")==0 &&
-            (!isOutlet || (isOutlet && pais.getOutlet_online().compareTo("true")==0))
-        );
-    }
+	protected boolean paisToTest(Pais pais, AppEcom app) {
+		return (
+			"n".compareTo(pais.getExists())!=0 &&
+			pais.isVentaOnline() &&
+			pais.getTiendasOnlineList().contains(app));
+	}
 }

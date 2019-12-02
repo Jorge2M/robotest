@@ -30,7 +30,7 @@ public class MenusFactory {
         for (Pais pais : listCountrys) {
             Iterator<IdiomaPais> itIdiomas = pais.getListIdiomas().iterator();
             IdiomaPais idioma = itIdiomas.next();
-            if (app!=AppEcom.outlet || (app==AppEcom.outlet && pais.getOutlet_online().compareTo("true")==0)) {
+            if (pais.getTiendasOnlineList().contains(app)) {
                 Iterator<Linea> itLineas = Utilidades.getLinesToTest(pais, app, lineas).iterator();
                 while (itLineas.hasNext()) {
                     Linea linea = itLineas.next();

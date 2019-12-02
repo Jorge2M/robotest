@@ -31,8 +31,7 @@ public class Pais {
     String codpos;
     String telefono;
     String dni;
-    String shop_online;
-    String outlet_online;
+    String tiendas_online;
     String miscompras;
     String moneda;
     String maximo_bolsa;
@@ -97,6 +96,7 @@ public class Pais {
         return this.listIdiomas;
     }
 
+
     public String getTarifa() {
         return this.tarifa;
     }
@@ -151,27 +151,24 @@ public class Pais {
         this.dni = dni;
     }
     
-    public String getShop_online() {
-        return this.shop_online;
-    }
-    
     @XmlElement
-    public void setShop_online(String shop_online) {
-        this.shop_online = shop_online;
+    public void setTiendas_online(String tiendas_online) {
+    	this.tiendas_online = tiendas_online;
     }
     
-    public String getOutlet_online() {
-        return this.outlet_online;
-    }	
-    
-    public boolean isOnlineAvailable(AppEcom appE) {
-    	return (appE!=AppEcom.outlet || 
-    		   (appE==AppEcom.outlet && getOutlet_online().compareTo("true")==0));
+    public String getTiendas_online() {
+    	return this.tiendas_online;
     }
-
-    @XmlElement
-    public void setOutlet_online(String outlet_online) {
-        this.outlet_online = outlet_online;
+    
+    public List<AppEcom> getTiendasOnlineList() {
+    	List<AppEcom> listApps = new ArrayList<>();
+    	if (getTiendas_online()!=null) {
+    		List<String> listAppsStr = Arrays.asList(getTiendas_online().split(","));
+    		for (String app : listAppsStr) {
+    			listApps.add(AppEcom.valueOf(app));
+    		}
+    	}
+    	return listApps;
     }
     
     public String getMiscompras() {
@@ -345,66 +342,57 @@ public class Pais {
     public boolean isPaisTop() {
         return ("s".compareTo(this.paistop.toLowerCase())==0);
     }
-    
-    public boolean isPaisWithMisCompras() {
-        return ("true".compareTo(getMiscompras())==0);
-    }
-    
 
-    
-    /**
-     * @return si el país tiene asociado el pago de "Store Credit"
-     */
-    public boolean existsPagoStoreCredit() {
-        return (getPagoType(TypePago.StoreCredit)!=null);
-    }
-    
-    /**
-     * @return si el país tiene o no venta online
-     */
-    public boolean isVentaOnline() {
-        if (this.shop_online.compareTo("true")==0) {
-            return true;
-        }
-        return false;
-    }
-    
-    public boolean isEspanya() {
-    	return ("001".compareTo(getCodigo_pais())==0);
-    }
-        
-    /**
-     * Obtiene la lista de pagos correspondientes al Shop, Outlet o votf en el orden en el que se testearán 
-     * (como se encuentran en el XML pero dando prioridad a los que tienen no tienen testpago='s')
-     */
-    public List<Pago> getListPagosTest(AppEcom app, boolean testEmpleado) {
-        List<Pago> listPagosApp =  new ArrayList<>();
-        List<Pago> listPagosTest = new ArrayList<>();
-        Iterator<Pago> itPagos = this.listPagos.iterator();
-        while (itPagos.hasNext()) {
-            Pago pago = itPagos.next();
-            if (!testEmpleado || (testEmpleado && pago.getEmpleado().compareTo("s")==0)) {
-                //El storecredito lo mantenemos al margen de la lista pues no aparece como un icono
-                if (pago.getTypePago()!=TypePago.StoreCredit) {
-                	if (pago.getApps().contains(app)) {
-                		if (pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0) {
-                			listPagosTest.add(pago);
-                		} else {
-                			listPagosApp.add(pago);
-                		}
-                		
-                	}
-                }
-            }
-        }
-    	
-        for (Pago pago: listPagosTest) {
-            listPagosApp.add(pago);
-        }
-    				
-        return listPagosApp;
-    }
-    
+	public boolean isPaisWithMisCompras() {
+		return ("true".compareTo(getMiscompras())==0);
+	}
+
+	public boolean isVentaOnline() {
+		return getTiendasOnlineList().size()>0;
+	}
+
+	/**
+	 * @return si el país tiene asociado el pago de "Store Credit"
+	 */
+	public boolean existsPagoStoreCredit() {
+		return (getPagoType(TypePago.StoreCredit)!=null);
+	}
+
+	public boolean isEspanya() {
+		return ("001".compareTo(getCodigo_pais())==0);
+	}
+
+	/**
+	 * Obtiene la lista de pagos correspondientes al Shop, Outlet o votf en el orden en el que se testearán 
+	 * (como se encuentran en el XML pero dando prioridad a los que tienen no tienen testpago='s')
+	 */
+	public List<Pago> getListPagosTest(AppEcom app, boolean testEmpleado) {
+		List<Pago> listPagosFirst =  new ArrayList<>();
+		List<Pago> listPagosLast = new ArrayList<>();
+		Iterator<Pago> itPagos = this.listPagos.iterator();
+		while (itPagos.hasNext()) {
+			Pago pago = itPagos.next();
+			if (checkTestPago(pago, app, testEmpleado)) {
+				if (pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0) {
+					listPagosFirst.add(pago);
+				} else {
+					listPagosLast.add(pago);
+				}
+			}
+		}
+		
+		listPagosFirst.addAll(listPagosLast);		
+		return listPagosFirst;
+	}
+
+	private boolean checkTestPago(Pago pago, AppEcom app, boolean testEmpleado) {
+		return (
+			(!testEmpleado || (testEmpleado && pago.getEmpleado().compareTo("s")==0)) &&
+			//El storecredito lo mantenemos al margen de la lista pues no aparece como un icono
+			(pago.getTypePago()!=TypePago.StoreCredit) && 
+			(pago.getTiendasList().contains(app)));
+	}
+
     /**Retorna el pago con el nombre especificado en el parámetro
      * @return pago correspondiente al nombre especificado
      */
@@ -500,22 +488,22 @@ public class Pais {
         
         return urlRes;
     }
-    
-    public LevelPais getLevelPais() {
-        if (isPaisTop()) {
-            return LevelPais.top;
-        }
-        if (getShop_online().compareTo("true")==0) {
-            return LevelPais.conCompraNoTop;
-        }
-        return LevelPais.sinCompra;
-    }
-    
-    @Override
-    public String toString() {
-        return "Pais [nombre_pais="+ this.nombre_pais + ", codigo_pais=" + this.codigo_pais + ", listIdiomas=" + this.listIdiomas + ", tarifa=" + this.tarifa + ", codpos=" + this.codpos + ", telefono=" + this.telefono + ", dni=" + this.dni +
-                ", shop_online=" + this.shop_online + ", outlet_online=" + this.outlet_online + ", moneda=" + this.moneda + ", maximo_bolsa=" + this.maximo_bolsa + 
-                ", " + this.tienda + ", " + this.shoponline + ", invertida=" + this.invertida + ", marmamng=" + this.marcamng + ", micuenta=" + this.micuenta + 
-                ", toString()=" + super.toString() + "]";
-    }
+
+	public LevelPais getLevelPais() {
+		if (isPaisTop()) {
+			return LevelPais.top;
+		}
+		if (getTiendasOnlineList().size() > 0) {
+			return LevelPais.conCompraNoTop;
+		}
+		return LevelPais.sinCompra;
+	}
+
+	@Override
+	public String toString() {
+		return "Pais [nombre_pais="+ this.nombre_pais + ", codigo_pais=" + this.codigo_pais + ", listIdiomas=" + this.listIdiomas + ", tarifa=" + this.tarifa + ", codpos=" + this.codpos + ", telefono=" + this.telefono + ", dni=" + this.dni +
+				", shop_online=" + ", moneda=" + this.moneda + ", maximo_bolsa=" + this.maximo_bolsa + 
+				", " + this.tienda + ", " + this.shoponline + ", invertida=" + this.invertida + ", marmamng=" + this.marcamng + ", micuenta=" + this.micuenta + 
+				", toString()=" + super.toString() + "]";
+	}
 }

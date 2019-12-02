@@ -25,29 +25,29 @@ public class SecCabeceraStpV {
 	public static SecCabeceraStpV getNew(Pais pais, Channel channel, AppEcom app, WebDriver driver) {
 		return (new SecCabeceraStpV(pais, channel, app, driver));
 	}
-    
+
 	@Step (
 		description="Seleccionar el logo de Mango", 
-        expected="Se accede a la página principal de la línea")
-    public void selecLogo() throws Exception {
-		secCabecera.clickLogoMango();            
-    }    
-    
+		expected="Se accede a la página principal de la línea")
+	public void selecLogo() throws Exception {
+		secCabecera.clickLogoMango();
+	}
+
 	@Validation
-    public ChecksResult validateIconoBolsa() {
+	public ChecksResult validateIconoBolsa() {
 		ChecksResult validations = ChecksResult.getNew();
 		boolean isVisibleIconoBolsa = secCabecera.isInStateIconoBolsa(StateElem.Visible);
-		if ("true".compareTo(pais.getShop_online())==0) {
-	    	validations.add(
-    			"<b>Sí</b> es posible comprar (aparece la capa relacionada con la bolsa)",
-    			isVisibleIconoBolsa, State.Warn);
+		if (pais.isVentaOnline()) {
+			validations.add(
+				"<b>Sí</b> es posible comprar (aparece la capa relacionada con la bolsa)",
+				isVisibleIconoBolsa, State.Warn);
 		} else {
-	    	validations.add(
-    			"<b>No</b> es posible comprar (aparece la capa relacionada con la bolsa)",
-    			!isVisibleIconoBolsa, State.Warn);
+			validations.add(
+				"<b>No</b> es posible comprar (aparece la capa relacionada con la bolsa)",
+				!isVisibleIconoBolsa, State.Warn);
 		}
 		return validations;
-    }
+	}
 	
 	@Step (
 		description="Establecer con visibilidad #{setVisible} el menú izquierdo de móvil",

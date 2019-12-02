@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.utils.PagoGetter;
 import com.mng.testmaker.boundary.access.MessageError;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.InputParamsTM;
@@ -65,12 +66,10 @@ public class RestApiMango extends RestApiTM {
 		
 		Channel channel = Channel.valueOf(channelInput);
 		AppEcom app = AppEcom.valueOf(appInput);
-		ArrayList<String> listCountrys = (ArrayList<String>)Test80mng.getListPayments(countrys, channel, app);
-		GenericEntity<ArrayList<String>> entity = new GenericEntity<ArrayList<String>>(listCountrys){};
+		//List<String> listLabelsPagos = PagoGetter.getLabelsPaymentsAlphabetically(listCodCountries, channel, app, false);
 		
-		List<Prueba> listPruebas = new ArrayList<>();
-		listPruebas.add(new Prueba("1"));
-		return listPruebas;
+		//return listLabelsPagos;
+		return null;
 //		return Response
 //				.status(Response.Status.OK) 
 //				.entity(listPruebas)
