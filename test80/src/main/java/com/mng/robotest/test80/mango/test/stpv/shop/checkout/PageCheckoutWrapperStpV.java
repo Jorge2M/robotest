@@ -94,7 +94,7 @@ public class PageCheckoutWrapperStpV {
     private static ChecksResult checkAvailablePagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
-			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país (" + pais.getListPagosTest(app, isEmpl).size() + ")",
+			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país (" + pais.getListPagosForTest(app, isEmpl).size() + ")",
 			PageCheckoutWrapper.isNumMetodosPagoOK(pais, app, channel, isEmpl, driver), State.Defect);    	
     	return validations;
     }
@@ -102,7 +102,7 @@ public class PageCheckoutWrapperStpV {
     @Validation
     private static ChecksResult checkLogosPagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) { 
     	ChecksResult validations = ChecksResult.getNew();
-        List<Pago> listPagos = pais.getListPagosTest(app, isEmpl);
+        List<Pago> listPagos = pais.getListPagosForTest(app, isEmpl);
         if (listPagos.size()==1 && channel==Channel.movil_web) {
         	return validations;
         }

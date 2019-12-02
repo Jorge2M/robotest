@@ -87,7 +87,7 @@ public class PagoNavigationsStpV {
         SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, driver);
         dCtxPago.getFTCkout().testCodPromocional = true;
         testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver);
-        if (dCtxSh.pais.getListPagosTest(dCtxSh.appE, dCtxPago.getFTCkout().isEmpl).size() > 0) {
+        if (dCtxSh.pais.getListPagosForTest(dCtxSh.appE, dCtxPago.getFTCkout().isEmpl).size() > 0) {
             checkMetodosPagos(dCtxSh, dCtxPago, paisesDestino, driver);
         }
     }
@@ -382,7 +382,7 @@ public class PagoNavigationsStpV {
     private static List<Pago> getListPagosToTest(DataCtxShop dCtxSh, boolean isEmpl) {
     	List<Pago> listPagosToTest = new ArrayList<>();
     	ITestContext ctx = TestMaker.getTestCase().getTestRunContext();
-    	List<Pago> listPagosPais = dCtxSh.pais.getListPagosTest(dCtxSh.appE, isEmpl);
+    	List<Pago> listPagosPais = dCtxSh.pais.getListPagosForTest(dCtxSh.appE, isEmpl);
     	for (Pago pago : listPagosPais) {
     		if (pago.isNeededTestPasarelaDependingFilter(dCtxSh.channel, ctx)) {
     			listPagosToTest.add(pago);

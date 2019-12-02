@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.*;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
 import com.mng.robotest.test80.mango.test.utils.LevelPais;
+import com.mng.robotest.test80.mango.test.utils.PagoGetter;
+import com.mng.robotest.test80.mango.test.utils.PagoGetter.PaymentCountry;
 
 @XmlRootElement
 public class Pais {
@@ -366,31 +368,21 @@ public class Pais {
 	 * Obtiene la lista de pagos correspondientes al Shop, Outlet o votf en el orden en el que se testearán 
 	 * (como se encuentran en el XML pero dando prioridad a los que tienen no tienen testpago='s')
 	 */
-	public List<Pago> getListPagosTest(AppEcom app, boolean testEmpleado) {
+	public List<Pago> getListPagosForTest(AppEcom app, boolean isEmpleado) {
+		List<PaymentCountry> listPagos = PagoGetter.getListPayments(this.getCodigo_pais(), app, isEmpleado);
 		List<Pago> listPagosFirst =  new ArrayList<>();
 		List<Pago> listPagosLast = new ArrayList<>();
-		Iterator<Pago> itPagos = this.listPagos.iterator();
-		while (itPagos.hasNext()) {
-			Pago pago = itPagos.next();
-			if (checkTestPago(pago, app, testEmpleado)) {
-				if (pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0) {
-					listPagosFirst.add(pago);
-				} else {
-					listPagosLast.add(pago);
-				}
+		for (PaymentCountry payment : listPagos) {
+			Pago pago = payment.pago;
+			if (pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0) {
+				listPagosFirst.add(pago);
+			} else {
+				listPagosLast.add(pago);
 			}
 		}
 		
-		listPagosFirst.addAll(listPagosLast);		
+		listPagosFirst.addAll(listPagosLast);
 		return listPagosFirst;
-	}
-
-	private boolean checkTestPago(Pago pago, AppEcom app, boolean testEmpleado) {
-		return (
-			(!testEmpleado || (testEmpleado && pago.getEmpleado().compareTo("s")==0)) &&
-			//El storecredito lo mantenemos al margen de la lista pues no aparece como un icono
-			(pago.getTypePago()!=TypePago.StoreCredit) && 
-			(pago.getTiendasList().contains(app)));
 	}
 
     /**Retorna el pago con el nombre especificado en el parámetro
@@ -432,7 +424,7 @@ public class Pais {
      */
     public List<Pago> getListPagosValidosMontcada(AppEcom app, boolean testEmpleado) {
         List<Pago> listaPagosReturn = new ArrayList<>();
-        List<Pago> listaPagos = this.getListPagosTest(app, testEmpleado);
+        List<Pago> listaPagos = this.getListPagosForTest(app, testEmpleado);
         Iterator<Pago> itPagos = listaPagos.iterator();
         while (itPagos.hasNext()) {
             Pago pago = itPagos.next();
@@ -463,7 +455,7 @@ public class Pais {
      */
     public String getStringPagosTest(AppEcom app, boolean testEmpleado) {
         String metodosPago = "";
-        List<Pago> listPagosApp = getListPagosTest(app, testEmpleado); 
+        List<Pago> listPagosApp = getListPagosForTest(app, testEmpleado); 
         for (int i=0; i<listPagosApp.size(); i++) {
             //Filtramos el pago "storecredit"
             if (listPagosApp.get(i).getTypePago()!=TypePago.StoreCredit) {

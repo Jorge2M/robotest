@@ -160,7 +160,7 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
      */
     public static boolean isNumMetodosPagoOK(Pais pais, AppEcom app, boolean isEmpl, WebDriver driver) {
         int numPagosPant = driver.findElements(By.xpath(XPathLineaPagoLayoutLinea)).size();
-        int numPagosPais = pais.getListPagosTest(app, isEmpl).size();
+        int numPagosPais = pais.getListPagosForTest(app, isEmpl).size();
         return (numPagosPais == numPagosPant);
     }
     

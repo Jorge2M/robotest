@@ -286,7 +286,7 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         int numPagosPant = driver.findElements(By.xpath(XPathMetodoPago)).size();
         if (app!=AppEcom.votf) {
             //Se comprueba que el número de métodos de pago en pantalla coincida con los asociados al país
-            int numPagosPais = pais.getListPagosTest(app, isEmpl).size();
+            int numPagosPais = pais.getListPagosForTest(app, isEmpl).size();
             return (numPagosPais == numPagosPant);
         }
         

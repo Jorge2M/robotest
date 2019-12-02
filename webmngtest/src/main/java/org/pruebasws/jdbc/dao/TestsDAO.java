@@ -5,10 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.TreeSet;
+import java.util.Arrays;
+import java.util.List;
 
-import com.mng.robotest.test80.Test80mng;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.utils.PagoGetter;
 import com.mng.testmaker.conf.Channel;
 
 import org.pruebasws.jdbc.Connector;
@@ -247,15 +248,15 @@ public class TestsDAO {
         return listLinesShop;
     }    
     
-    public static TreeSet<String> getListPagos(String codCountrysCommaSeparated, Channel channel, AppEcom appE) 
+    public static List<String> getListPagos(String codCountrysCommaSeparated, Channel channel, AppEcom appE, boolean isEmpleado) 
     throws Exception {
         if ("".compareTo(codCountrysCommaSeparated)==0 || 
         	"*".compareTo(codCountrysCommaSeparated)==0 || 
         	"X".compareTo(codCountrysCommaSeparated)==0) {
-            return (Test80mng.getListPagoFilterNames(channel, appE, false/*isEmpl*/));
+            return (PagoGetter.getLabelsPaymentsAlphabetically(channel, appE, isEmpleado));
         }
-            
-        return (Test80mng.getListPagoFilterNames(codCountrysCommaSeparated, channel, appE, false));
+        List<String> listCountries = Arrays.asList(codCountrysCommaSeparated.split(","));
+        return (PagoGetter.getLabelsPaymentsAlphabetically(listCountries, channel, appE, isEmpleado));
     }
     
     /**

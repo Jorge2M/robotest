@@ -66,7 +66,7 @@ public class ListPagosEspana {
     private void createTestPagosEspana(ArrayList<Object> listTests, AppEcom appE, Channel channel, ITestContext ctx) {
         //Crearemos 3 tests para el pago VISA y 1 para los restantes 
         int prioridad = 1;
-        List<Pago> listPagosToTest = espana.getListPagosTest(appE, false/*isEmpl*/);
+        List<Pago> listPagosToTest = espana.getListPagosForTest(appE, false);
         boolean usrRegIntermitente = true;
         for (Pago pago : listPagosToTest) {
         	if (pago.isNeededTestPasarelaDependingFilter(channel, ctx)) {
@@ -88,7 +88,7 @@ public class ListPagosEspana {
     
     private void createTestPagosFrancia(ArrayList<Object> listTests, AppEcom appE, Channel channel, ITestContext ctx) {
         //Creamos sólo 1 test para el pago VISA-Francia
-        List<Pago> listPagosToTest = francia.getListPagosTest(appE, false);
+        List<Pago> listPagosToTest = francia.getListPagosForTest(appE, false);
         for (Pago pago : listPagosToTest) {
         	if (pago.isNeededTestPasarelaDependingFilter(channel, ctx)) {
 	        	if (pago.getTestpago()!=null && "s".compareTo(pago.getTestpago())==0) {
@@ -102,7 +102,7 @@ public class ListPagosEspana {
     }
     
     private void createTestPagosVotf(ArrayList<Object> listTests, AppEcom appE, Channel channel, ITestContext ctx) {
-        List<Pago> listPagosToTest = espana.getListPagosTest(appE, false/*isEmpl*/);
+        List<Pago> listPagosToTest = espana.getListPagosForTest(appE, false/*isEmpl*/);
         for (Pago pago : listPagosToTest) {
         	if (pago.isNeededTestPasarelaDependingFilter(channel, ctx)) {
 	        	if (pago.getTestpago()!=null && "s".compareTo(pago.getTestpago())==0) {

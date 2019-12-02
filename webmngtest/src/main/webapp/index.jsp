@@ -251,10 +251,10 @@ for (SuiteTestData suiteTest : listTestSuites) {
 					<select multiple size=10 id="pagos-<%=i%>" name="<%=InputParamsMango.PaymentsNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							String listPaisesCommaSeparated = suiteTest.getListPaises();
-										if (suiteTest.getFiltroPaises()==0)
+										if (suiteTest.getFiltroPaises()==0) {
 										    listPaisesCommaSeparated = "001"; //España														
-										
-							            TreeSet<String> listAllPagosCountrys = Test80mng.getListPagoFilterNames(listPaisesCommaSeparated, suiteTest.getChannelType(), suiteTest.getAppType(), false/*isEmpl*/);
+										} 
+							            List<String> listAllPagosCountrys = TestsDAO.getListPagos(listPaisesCommaSeparated, suiteTest.getChannelType(), suiteTest.getAppType(), false);
 										for (String nombrePago : listAllPagosCountrys) {
 										    String selected = "";
 										    if (suiteTest.getListPagosArray().size()>0 && suiteTest.getListPagosArray().contains(nombrePago))
