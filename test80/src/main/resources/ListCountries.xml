@@ -459,7 +459,7 @@
 	type="Ideal" tiendas="shop,outlet" empleado="s"
 	nombre="IDEAL" testpasarela='s' testpago='s'>&TPV-534;</pago>
 <pago 
-	type="tpvvotf" tiendas="shop,outlet" empleado="n"
+	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -654,7 +654,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
 <pago 
-	type="tpvvotf" tiendas="shop,outlet"
+	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
@@ -2442,7 +2442,7 @@
 	type="Paypal" tiendas="shop,outlet" empleado="s" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-605;</pago>
 <pago 
-	type="ContraReembolso" tiendas="shop,outlet" empleado="n" 
+	type="ContraReembolso" tiendas="outlet" empleado="n" 
 	nombre="TRANSFERENCIA BANCARIA" nombremovil="transferencia" testpasarela='s' testpago='s'>&TPV-102;</pago>
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n" 
@@ -2567,7 +2567,7 @@
 	type="Paypal" tiendas="shop,outlet" empleado="n" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-608;</pago>
 <pago 
-	type="tpvvotf" votf="s" empleado="n" 
+	type="tpvvotf" tiendas="votf" empleado="n" 
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
 <invertida>N</invertida>
 <micuenta>N</micuenta>

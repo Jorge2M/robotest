@@ -42,7 +42,7 @@ public class PagoGetter {
 	private static List<String> getLabelsPaymentsFromCountries(List<PaymentCountry> listPayments, Channel channel) {
 		List<String> listLabels = new ArrayList<>();
 		for (PaymentCountry payment : listPayments) {
-			listLabels.add(payment.pago.getNombre(channel));
+			listLabels.add(payment.pago.getNameFilter(channel));
 		}
 		List<String> listSortedAndWithoutDuplicates = listLabels.stream()
 			.distinct()
@@ -54,7 +54,7 @@ public class PagoGetter {
 	private static List<PaymentCountry> getListPaymentsFromCountries(List<Pais> listCountries, AppEcom app, boolean isEmpleado) {
 		List<PaymentCountry> listPaymentsToReturn = new ArrayList<>();
 		for (Pais pais : listCountries) {
-			if (pais.getTiendasOnlineList().contains(app)) {
+			if (pais.getTiendasOnlineList().size()>0 && pais.getTiendasOnlineList().contains(app)) {
 				for (Pago pago : pais.getListPagos()) {
 					if ((!isEmpleado || (isEmpleado && pago.isForEmpleado())) &&
 						//El storecredito lo mantenemos al margen de la lista pues no aparece como un icono

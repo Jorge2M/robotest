@@ -14,7 +14,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.utils.PagoGetter;
@@ -44,7 +43,7 @@ public class RestApiMango extends RestApiTM {
 	@Path("/payments")
 	@Produces("application/json")
 	public List<PagoLabelJson> getPayments(
-					@QueryParam("countrys") String countrysCommaSeparated,
+					@QueryParam("countries") String countrysCommaSeparated,
 					@NotNull
 					@QueryParam("channel") String channelInput,
 					@NotNull
@@ -72,10 +71,6 @@ public class RestApiMango extends RestApiTM {
 		}
 		
 		return getPagoLabelsJson(listLabelsPagos);
-//		return Response
-//				.status(Response.Status.OK) 
-//				.entity(listPruebas)
-//				.build();
 	}
 	
 	private List<PagoLabelJson> getPagoLabelsJson(List<String> listLabelsPagos) {

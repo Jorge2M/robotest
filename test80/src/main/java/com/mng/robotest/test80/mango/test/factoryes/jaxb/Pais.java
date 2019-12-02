@@ -164,7 +164,7 @@ public class Pais {
     
     public List<AppEcom> getTiendasOnlineList() {
     	List<AppEcom> listApps = new ArrayList<>();
-    	if (getTiendas_online()!=null) {
+    	if (getTiendas_online()!=null && getTiendas_online().length()>0) {
     		List<String> listAppsStr = Arrays.asList(getTiendas_online().split(","));
     		for (String app : listAppsStr) {
     			listApps.add(AppEcom.valueOf(app));
