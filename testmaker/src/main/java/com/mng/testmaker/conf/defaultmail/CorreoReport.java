@@ -35,6 +35,7 @@ public class CorreoReport {
         //Fecha actual - 13 horas
         //Date fechaDesde = new Date(System.currentTimeMillis() - 3600000 /*1 horas*/);
         //Date fechaDesde = new Date(System.currentTimeMillis() - 50400000 /*14 horas*/);	    
+        //Date fechaDesde = new Date(System.currentTimeMillis() - 54000000 /*15 horas*/);
         Date fechaDesde = new Date(System.currentTimeMillis() - 46800000 /*13 horas*/);
         Date fechaHasta = new Date(System.currentTimeMillis());
 		
@@ -222,7 +223,7 @@ public class CorreoReport {
 //        InternetAddress[] myToList = InternetAddress.parse("jorge.munoz.sge@mango.com");
 //        InternetAddress[] myCcList = InternetAddress.parse("jorge.munoz.sge@mango.com");
 	      
-        String subject="Resultado tests últimas 12 horas";  
+        String subject="Resultado tests últimas 13 horas";  
 		  
         //Envío del correo
         Log4jConfig.pLogger.info("Fin Test... procedemos a envío del correo!");

@@ -118,7 +118,9 @@ public class SuitesDAO {
 		String inicioDate = rowSuite.getString("INICIO");
 		suiteData.setInicioDate(getDateFormat().parse(inicioDate));
 		String finDate = rowSuite.getString("FIN");
-		suiteData.setInicioDate(getDateFormat().parse(finDate));
+		if (finDate!=null && "".compareTo(finDate)!=0) {
+			suiteData.setInicioDate(getDateFormat().parse(finDate));
+		}
 
 		suiteData.setDurationMillis(rowSuite.getFloat("TIME_MS"));
 		suiteData.setNumberTestCases(rowSuite.getInt("NUMBER_METHODS"));
