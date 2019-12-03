@@ -27,7 +27,8 @@ public class SecSearchMobilShop extends WebdrvWrapp implements SecSearch {
     	isElementVisibleUntil(driver, By.xpath(XPathInputBuscador), 2);
         WebElement input = driver.findElement(By.xpath(XPathInputBuscador));
         input.clear();
-        sendKeysWithRetry(5, input, text);
+        input.sendKeys(text);
+        //sendKeysWithRetry(5, input, text);
         input.sendKeys(Keys.RETURN);
 	}
 	

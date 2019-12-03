@@ -26,7 +26,8 @@ public class SecSearchMobilOutlet extends WebdrvWrapp implements SecSearch {
 	public void search(String text) {
         WebElement input = getElementVisible(driver, By.xpath(XPathInputBuscador));
         input.clear();
-        sendKeysWithRetry(5, input, text);
+        input.sendKeys(text);
+        //sendKeysWithRetry(5, input, text);
         input.sendKeys(Keys.RETURN);
 	}
 	

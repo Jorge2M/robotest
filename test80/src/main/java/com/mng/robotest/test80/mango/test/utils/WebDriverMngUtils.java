@@ -107,7 +107,7 @@ public class WebDriverMngUtils {
      * @return recopilación de todos los problemas detectados
      */
     public static ResultadoErrores imagesBroken(WebDriver driver, Channel channel, int maxErrors) throws Exception {
-        int maxImages = 5000;
+        int maxImages = 500;
         ITestContext ctx = TestMaker.getTestCase().getTestRunParent().getTestNgContext();
         		
         //En el caso de móvil sólo procesaremos 200 imágenes para paliar el caso en el que el script se ejecuta contra un dispositivo físico y el rendimiento es limitado
@@ -247,32 +247,38 @@ public class WebDriverMngUtils {
      */
     private static boolean revisionBrokenHttp(final WebElement tagHttp) {
         boolean broken = true;
-        String src = getImageSrc(tagHttp);
-        String id = tagHttp.getAttribute("id");
+        try {
+        	String src = getImageSrc(tagHttp);
+        	String id = tagHttp.getAttribute("id");
 
-        // Hay un caso concreto de imágenes que se utilizan en Reino Unido y Nederlands que implementan redirecciones pero que son válidas
-        ArrayList<String> dominiosOK = new ArrayList<>();
-        dominiosOK.add("ib.adnxs.com");
-        dominiosOK.add("ad.yieldlab.net");
-        dominiosOK.add("pixel.prfct.co");
-        dominiosOK.add("doubleclick.net");
-        dominiosOK.add("adnxs.com");
-        dominiosOK.add("bat.r.msn.com");
-        dominiosOK.add("bat.bing.com");
-        dominiosOK.add("trc.taboola.com");
-        dominiosOK.add("ads.admized.com");
-        dominiosOK.add("sync.rhythmxchange.com");
-        dominiosOK.add("pixel-geo.prfct.co");
-        for (int i = 0; i < dominiosOK.size(); i++) {
-            if (src.contains(dominiosOK.get(i))) {
-                broken = false;
-                break;
-            }
+	        // Hay un caso concreto de imágenes que se utilizan en Reino Unido y Nederlands que implementan redirecciones pero que son válidas
+	        ArrayList<String> dominiosOK = new ArrayList<>();
+	        dominiosOK.add("ib.adnxs.com");
+	        dominiosOK.add("ad.yieldlab.net");
+	        dominiosOK.add("pixel.prfct.co");
+	        dominiosOK.add("doubleclick.net");
+	        dominiosOK.add("adnxs.com");
+	        dominiosOK.add("bat.r.msn.com");
+	        dominiosOK.add("bat.bing.com");
+	        dominiosOK.add("trc.taboola.com");
+	        dominiosOK.add("ads.admized.com");
+	        dominiosOK.add("sync.rhythmxchange.com");
+	        dominiosOK.add("pixel-geo.prfct.co");
+	        for (int i = 0; i < dominiosOK.size(); i++) {
+	            if (src.contains(dominiosOK.get(i))) {
+	                broken = false;
+	                break;
+	            }
+	        }
+	
+	        if (id.contains("sonar-tracking")) {
+	            broken = false;
+	        }
+	        return broken;
         }
-
-        if (id.contains("sonar-tracking")) {
-            broken = false;
+        catch (Exception e) {
+        	pLogger.warn(e);
+        	return false;
         }
-        return broken;
     }
 }
