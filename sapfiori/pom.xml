@@ -1,100 +1,99 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.mng</groupId>
-    <artifactId>robotest</artifactId>
-    <version>1.0</version>
-  </parent>
-  <artifactId>sapfiori</artifactId>
-  <name>sapfiori</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  <dependencies>
-  
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-    
-    <dependency>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
 		<groupId>com.mng</groupId>
-		<artifactId>testmaker</artifactId>
+		<artifactId>robotest</artifactId>
 		<version>1.0</version>
-  	</dependency>
-  	
-  </dependencies>
-  
-  <build>
-  	<plugins>
-  		<plugin>
-  		  <groupId>org.apache.maven.plugins</groupId>
-	      <artifactId>maven-assembly-plugin</artifactId>
-		  <configuration>
-			 	<appendAssemblyId>false</appendAssemblyId>
-				<descriptors>
-					<descriptor>src/assembly/distribution.xml</descriptor>
-				</descriptors>
-		  </configuration>
-     	  <executions>
-			  <execution>
-				<id>make-assembly</id>
-				<phase>package</phase> 
-				<goals>
-					<goal>single</goal>
-				</goals>
-			  </execution>
-		   </executions>
-	    </plugin>	
-	    
- 		<plugin>
+	</parent>
+	<artifactId>sapfiori</artifactId>
+	<name>sapfiori</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		</properties>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.mng</groupId>
+			<artifactId>testmaker</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<appendAssemblyId>false</appendAssemblyId>
+					<descriptors>
+						<descriptor>src/assembly/distribution.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase> 
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>	
 			<!-- Define Aspectj Nature -->
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-eclipse-plugin</artifactId>
-			<configuration>
-				<additionalProjectnatures>
-					<projectnature>org.eclipse.ajdt.ui.ajnature</projectnature>
-				</additionalProjectnatures>
-				<additionalBuildcommands>
-					<buildcommand>org.eclipse.ajdt.core.ajbuilder</buildcommand>
-				</additionalBuildcommands>
-			</configuration>
-		</plugin>
-		
-		<!-- Seguramente si lo ejecuto sin testmaker se quejará de que no encuentra el aspectj en .m2 -->
-       	<plugin>
-			<groupId>org.codehaus.mojo</groupId>
-		    <artifactId>aspectj-maven-plugin</artifactId>
-		    <version>1.11</version>
-		    <configuration>
-		        <complianceLevel>1.8</complianceLevel>
-		        <source>1.8</source>
-		        <target>1.8</target>
-		        <showWeaveInfo>true</showWeaveInfo>
-		        <verbose>true</verbose>
-		        <Xlint>ignore</Xlint>
-		        <encoding>UTF-8 </encoding>
-				<weaveDependencies>
-		            <weaveDependency> 
-						<groupId>com.mng</groupId>
-		                <artifactId>testmaker</artifactId>
-		            </weaveDependency>
-		          </weaveDependencies>
-		    </configuration>
-		    <executions>
-		        <execution>
-		            <goals>
-		                <goal>compile</goal>
-		            </goals>
-		        </execution>
-		    </executions>
-		</plugin> 	
-	
-	</plugins>	
+			<!-- 
+ 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<additionalProjectnatures>
+						<projectnature>org.eclipse.ajdt.ui.ajnature</projectnature>
+					</additionalProjectnatures>
+					<additionalBuildcommands>
+						<buildcommand>org.eclipse.ajdt.core.ajbuilder</buildcommand>
+					</additionalBuildcommands>
+				</configuration>
+			</plugin>
+			-->
+
+			<!-- Seguramente si lo ejecuto sin testmaker se quejará de que no encuentra el aspectj en .m2 -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<version>1.11</version>
+				<configuration>
+					<complianceLevel>1.8</complianceLevel>
+					<source>1.8</source>
+					<target>1.8</target>
+					<showWeaveInfo>true</showWeaveInfo>
+					<verbose>true</verbose>
+					<Xlint>ignore</Xlint>
+					<encoding>UTF-8 </encoding>
+					<weaveDependencies>
+						<weaveDependency> 
+							<groupId>com.mng</groupId>
+							<artifactId>testmaker</artifactId>
+						</weaveDependency>
+					</weaveDependencies>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin> 	
+		</plugins>	
+	</pluginManagement>
   </build>	
 </project>

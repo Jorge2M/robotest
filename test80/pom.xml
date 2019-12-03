@@ -1,142 +1,141 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.mng</groupId>
-    <artifactId>robotest</artifactId>
-    <version>1.0</version>
-  </parent>
-  <artifactId>test80</artifactId>
-  <packaging>jar</packaging>
-  <dependencies>
-  	  	<dependency>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+	<groupId>com.mng</groupId>
+	<artifactId>robotest</artifactId>
+	<version>1.0</version>
+	</parent>
+	<artifactId>test80</artifactId>
+	<packaging>jar</packaging>
+	<dependencies>
+		<dependency>
 			<groupId>com.mng</groupId>
 			<artifactId>testmaker</artifactId>
 			<version>1.0</version>
-	  	</dependency>		
-        <dependency> <!-- Necesario para Selenium 2.46 -->
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-exec</artifactId>
-            <version>1.3</version>
-        </dependency>
-		<dependency>
-   			<groupId>org.apache.commons</groupId>
-   			<artifactId>commons-email</artifactId>
-   			<version>1.3</version>
+		</dependency>		
+		<dependency> <!-- Necesario para Selenium 2.46 -->
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-exec</artifactId>
+			<version>1.3</version>
 		</dependency>
 		<dependency>
-  			<groupId>commons-io</groupId>
-  			<artifactId>commons-io</artifactId>
-  			<version>2.5</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.3</version>
 		</dependency>
-        <dependency>
-           	<groupId>commons-lang</groupId>
-           	<artifactId>commons-lang</artifactId>
-           	<version>2.6</version>
-        </dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-  </dependencies>
-    
-       
-  <build>
-  	<plugins> 	
-  		<!-- Define Aspectj Nature -->
-		<!-- 
- 		<plugin>
+	</dependencies>
 
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-eclipse-plugin</artifactId>
-			<configuration>
-				<additionalProjectnatures>
-					<projectnature>org.eclipse.ajdt.ui.ajnature</projectnature>
-				</additionalProjectnatures>
-				<additionalBuildcommands>
-					<buildcommand>org.eclipse.ajdt.core.ajbuilder</buildcommand>
-				</additionalBuildcommands>
-			</configuration>
-		</plugin>  	
-		-->
-  		<!-- Seguramente si lo ejecuto sin testmaker se quejará de que no encuentra el aspectj en .m2 -->
-       	<plugin>
-			<groupId>org.codehaus.mojo</groupId>
-		    <artifactId>aspectj-maven-plugin</artifactId>
-		    <version>1.11</version>
-		    <configuration>
-		        <complianceLevel>1.8</complianceLevel>
-		        <source>1.8</source>
-		        <target>1.8</target>
-		        <showWeaveInfo>false</showWeaveInfo>
-		        <verbose>true</verbose>
-		        <Xlint>ignore</Xlint>
-		        <encoding>UTF-8 </encoding>
-				<weaveDependencies>
-		            <weaveDependency>
-						<groupId>com.mng</groupId>
-		                <artifactId>testmaker</artifactId>
-		            </weaveDependency>
-		          </weaveDependencies>
-		    </configuration>
-		    <executions>
-		        <execution>
-		            <goals>
-		                <goal>compile</goal>
-		            </goals>
-		        </execution>
-		    </executions>
-		</plugin> 		
-  	  	
-		<plugin>
-		    <!-- Configuración extraída de: http://emystein.blogspot.com.es/2010/12/empaquetar-una-aplicacion-de-consola.html -->
-            <!-- Configuramos el plugin de JAR en el POM para que agregue el directorio src/main/config al classpath definido en el Manifest de la aplicación -->	
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-jar-plugin</artifactId>
-			<configuration>
-				<!-- esto hace que al crear el jar se nombre test80.jar en vez de test80-1.0.0.jar si la versión del artifact es 1.0.0 -->
-				<finalName>${project.artifactId}</finalName>
-				<archive>
-					<manifest>
-						<!-- agregar todos los .jar de las dependencias en el classpath del Manifest -->
-						<addClasspath>true</addClasspath>
-						<!-- vamos a agregar antes del nombre de cada .jar en el classpath del Manifest el prefijo lib/ -->
-						<!-- porque luego al construir el assembly copiaremos los .jar de las dependencias al directorio lib/-->
-						<classpathPrefix>lib/</classpathPrefix>
-						<!-- la clase que se ejecuta cuando se ejecute "java -jar test80.jar" -->
-						<mainClass>com.mng.robotest.test80.access.CmdRunTests</mainClass>
-					</manifest>
-					<manifestEntries>
-						<!-- además de los nombres de las dependencias, agregar el directorio config al classpath del Manifest -->
-						<Class-Path>config/</Class-Path>>
-					</manifestEntries>
-				</archive>
-			</configuration>
-		</plugin>
-		
-		<!-- Configuramos el plugin de Assembly para usar un descriptor llamado distribution.xml que el plugin tomará del directorio src/main/assembly -->	
-		<plugin>
-			<artifactId>maven-assembly-plugin</artifactId>
-			<version>3.0.0</version>
-			<configuration>
-			 	<appendAssemblyId>false</appendAssemblyId>
-				<descriptors>
-					<!-- el descriptor contiene la información para armar el assembly -->
-					<descriptor>src/main/assembly/distribution.xml</descriptor>
-				</descriptors>
-			</configuration>
-			<executions>
-				<!-- ejecutar el goal 'single' del plugin de assembly al ejecutar mvn package -->
-				<execution>
-					<id>make-assembly</id>
-					<phase>package</phase>
-					<goals>
-						<goal>single</goal>
-					</goals>
-				</execution>
-			</executions>    
-		</plugin>		
-		
-	</plugins>  
-  </build>
+	<build>
+		<pluginManagement>
+			<plugins> 	
+				<!-- Define Aspectj Nature -->
+				<!-- 
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<configuration>
+						<additionalProjectnatures>
+							<projectnature>org.eclipse.ajdt.ui.ajnature</projectnature>
+						</additionalProjectnatures>
+						<additionalBuildcommands>
+							<buildcommand>org.eclipse.ajdt.core.ajbuilder</buildcommand>
+						</additionalBuildcommands>
+					</configuration>
+				</plugin>  	
+				-->
+				<!-- Seguramente si lo ejecuto sin testmaker se quejará de que no encuentra el aspectj en .m2 -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>aspectj-maven-plugin</artifactId>
+					<version>1.11</version>
+					<configuration>
+						<complianceLevel>1.8</complianceLevel>
+						<source>1.8</source>
+						<target>1.8</target>
+						<showWeaveInfo>false</showWeaveInfo>
+						<verbose>true</verbose>
+						<Xlint>ignore</Xlint>
+						<encoding>UTF-8 </encoding>
+						<weaveDependencies>
+							<weaveDependency>
+								<groupId>com.mng</groupId>
+								<artifactId>testmaker</artifactId>
+							</weaveDependency>
+						</weaveDependencies>
+					</configuration>
+					<executions>
+						<execution>
+							<goals>
+								<goal>compile</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin> 		
+				
+				<plugin>
+					<!-- Configuración extraída de: http://emystein.blogspot.com.es/2010/12/empaquetar-una-aplicacion-de-consola.html -->
+					<!-- Configuramos el plugin de JAR en el POM para que agregue el directorio src/main/config al classpath definido en el Manifest de la aplicación -->	
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<configuration>
+						<!-- esto hace que al crear el jar se nombre test80.jar en vez de test80-1.0.0.jar si la versión del artifact es 1.0.0 -->
+						<finalName>${project.artifactId}</finalName>
+						<archive>
+							<manifest>
+								<!-- agregar todos los .jar de las dependencias en el classpath del Manifest -->
+								<addClasspath>true</addClasspath>
+								<!-- vamos a agregar antes del nombre de cada .jar en el classpath del Manifest el prefijo lib/ -->
+								<!-- porque luego al construir el assembly copiaremos los .jar de las dependencias al directorio lib/-->
+								<classpathPrefix>lib/</classpathPrefix>
+								<!-- la clase que se ejecuta cuando se ejecute "java -jar test80.jar" -->
+								<mainClass>com.mng.robotest.test80.access.CmdRunTests</mainClass>
+							</manifest>
+							<manifestEntries>
+								<!-- además de los nombres de las dependencias, agregar el directorio config al classpath del Manifest -->
+								<Class-Path>config/</Class-Path>>
+							</manifestEntries>
+						</archive>
+					</configuration>
+				</plugin>
+	
+				<!-- Configuramos el plugin de Assembly para usar un descriptor llamado distribution.xml que el plugin tomará del directorio src/main/assembly -->	
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>3.0.0</version>
+					<configuration>
+				 		<appendAssemblyId>false</appendAssemblyId>
+						<descriptors>
+							<!-- el descriptor contiene la información para armar el assembly -->
+							<descriptor>src/main/assembly/distribution.xml</descriptor>
+						</descriptors>
+					</configuration>
+					<executions>
+						<!-- ejecutar el goal 'single' del plugin de assembly al ejecutar mvn package -->
+						<execution>
+							<id>make-assembly</id>
+							<phase>package</phase>
+							<goals>
+								<goal>single</goal>
+							</goals>
+						</execution>
+					</executions>    
+				</plugin>		
+			</plugins>  
+		</pluginManagement>
+	</build>
 </project>

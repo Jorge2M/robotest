@@ -34,44 +34,43 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 		return new CreatorSuiteRunMango(inputParams);
 	}
 	
-    @Override
-    public SuiteMaker getSuiteMaker() throws Exception {
-    	InputParamsMango inputParamsMango = (InputParamsMango)inputParams;
-        try {
-            switch ((Suites)inputParams.getSuite()) {
-            case SmokeTest:
-                return (new SmokeTestSuite(inputParamsMango));
-            case SmokeManto:
-                return (new SmokeMantoSuite(inputParamsMango));
-            case PagosPaises:
-                return (new PagosPaisesSuite(inputParamsMango));
-            case ValesPaises:
-                return (new ValesPaisesSuite(inputParamsMango));
-            case PaisIdiomaBanner:
-                return (new PaisIdiomaSuite(inputParamsMango));
-            case MenusPais:
-                return (new MenusPaisSuite(inputParamsMango));
-            case MenusManto:
-                return (new MenusMantoSuite(inputParamsMango));
-            case Nodos:
-                return (new NodosSuite(inputParamsMango));
-            case ConsolaVotf:
-                return (new ConsolaVotfSuite(inputParamsMango));
-            case ListFavoritos:
-            case ListMiCuenta:
-                return (new GenericFactorySuite(inputParamsMango));
-            case RegistrosPaises:
-                return (new RegistrosSuite(inputParamsMango));
-            case RebajasPaises:
-                return (new RebajasSuite(inputParamsMango));
-            default:
-            }
-        }
-        catch (IllegalArgumentException e) {
-            System.out.println("Suite Name not valid. Posible values: " + Arrays.asList(Suites.values()));
-        }
-        
-        return null;
-    }
-	
+	@Override
+	public SuiteMaker getSuiteMaker() throws Exception {
+		InputParamsMango inputParamsMango = (InputParamsMango)inputParams;
+		try {
+			switch ((Suites)inputParams.getSuite()) {
+			case SmokeTest:
+				return (new SmokeTestSuite(inputParamsMango));
+			case SmokeManto:
+				return (new SmokeMantoSuite(inputParamsMango));
+			case PagosPaises:
+				return (new PagosPaisesSuite(inputParamsMango));
+			case ValesPaises:
+				return (new ValesPaisesSuite(inputParamsMango));
+			case PaisIdiomaBanner:
+				return (new PaisIdiomaSuite(inputParamsMango));
+			case MenusPais:
+				return (new MenusPaisSuite(inputParamsMango));
+			case MenusManto:
+				return (new MenusMantoSuite(inputParamsMango));
+			case Nodos:
+				return (new NodosSuite(inputParamsMango));
+			case ConsolaVotf:
+				return (new ConsolaVotfSuite(inputParamsMango));
+			case ListFavoritos:
+			case ListMiCuenta:
+				return (new GenericFactorySuite(inputParamsMango));
+			case RegistrosPaises:
+				return (new RegistrosSuite(inputParamsMango));
+			case RebajasPaises:
+				return (new RebajasSuite(inputParamsMango));
+			default:
+			}
+		}
+		catch (IllegalArgumentException e) {
+			System.out.println("Suite Name not valid. Posible values: " + Arrays.asList(Suites.values()));
+		}
+
+		return null;
+	}
 }

@@ -28,16 +28,16 @@ public class InfoStep {
 	public StepTM getDatosStep() {
 		return step;
 	}
-    
-    private StepTM getDatosStepFromStepAnnotation() {
-    	StepTM step = new StepTM();
-    	step.setDescripcion(stepAnnotation.description());
-    	step.setResExpected(stepAnnotation.expected());
-    	step.setSaveImagePage(stepAnnotation.saveImagePage());
-    	step.setSaveErrorPage(stepAnnotation.saveErrorData());
-    	step.setSaveHtmlPage(stepAnnotation.saveHtmlPage());
-    	step.setSaveNettrafic(stepAnnotation.saveNettraffic());
-    	step.setPathMethod(methodSignature.getDeclaringTypeName() + "." + methodSignature.getName());
-    	return step;
-    }
+
+	private StepTM getDatosStepFromStepAnnotation() {
+		StepTM step = new StepTM();
+		step.setDescripcion(stepAnnotation.description());
+		step.setResExpected(stepAnnotation.expected());
+		step.setSaveImagePage(stepAnnotation.saveImagePage());
+		step.setSaveErrorPage(stepAnnotation.saveErrorData());
+		step.setSaveHtmlPage(stepAnnotation.saveHtmlPage());
+		step.setSaveNettrafic(stepAnnotation.saveNettraffic());
+		step.setPathMethod(methodSignature.getDeclaringTypeName() + "." + methodSignature.getName());
+		return step;
+	}
 }

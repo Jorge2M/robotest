@@ -17,21 +17,21 @@ public class OptionTMaker {
 		this.option = option;
 	}
 	
-    public static Builder builder(final String opt) {
-        return new Builder(opt);
-    }
-    
-    public Option getOption() {
-    	return this.option;
-    }
-    
-    public String getPattern() {
-    	return this.pattern;
-    }
-    
-    public List<String> possibleValues() {
-    	return this.possibleValues;
-    }
+	public static Builder builder(final String opt) {
+		return new Builder(opt);
+	}
+
+	public Option getOption() {
+		return this.option;
+	}
+
+	public String getPattern() {
+		return this.pattern;
+	}
+
+	public List<String> possibleValues() {
+		return this.possibleValues;
+	}
 	
 	public static final class Builder {
 		private String pattern;
