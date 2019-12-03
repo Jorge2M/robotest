@@ -8,7 +8,7 @@ response.setDateHeader ("Expires", -1);%>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
-	<%@ page import="com.mng.robotest.test80.access.cmd.CmdRunTests" %>
+	<%@ page import="com.mng.robotest.test80.access.CmdRunTests" %>
 	<%@ page import="com.mng.robotest.test80.access.InputParamsMango" %>
 	<%@ page import="com.mng.testmaker.domain.InputParamsTM" %>
 	<%@ page import="com.mng.testmaker.boundary.access.CmdLineMaker"%>

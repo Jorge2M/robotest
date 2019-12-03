@@ -1,7 +1,6 @@
-package com.mng.robotest.test80.access.cmd;
+package com.mng.robotest.test80.access.rest;
 
 import com.mng.robotest.test80.access.CreatorSuiteRunMango;
-import com.mng.robotest.test80.access.rest.RestApiMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.conftestmaker.Suites;
 import com.mng.testmaker.domain.CreatorSuiteRun;

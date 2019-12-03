@@ -16,7 +16,7 @@ response.setDateHeader ("Expires", -1);
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.TreeSet"%>
-<%@ page import="com.mng.robotest.test80.access.cmd.CmdRunTests"%>
+<%@ page import="com.mng.robotest.test80.access.CmdRunTests"%>
 <%@ page import="com.mng.robotest.test80.access.InputParamsMango"%>
 <%@ page import="com.mng.testmaker.boundary.access.CmdLineMaker"%>
 <%@ page import="com.mng.testmaker.domain.InputParamsTM"%>

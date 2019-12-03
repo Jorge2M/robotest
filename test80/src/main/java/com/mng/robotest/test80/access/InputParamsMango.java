@@ -10,8 +10,8 @@ import javax.ws.rs.FormParam;
 
 import org.apache.commons.cli.CommandLine;
 
-import com.mng.robotest.test80.access.cmd.CmdRunTests.TypeCallBackMethod;
-import com.mng.robotest.test80.access.cmd.CmdRunTests.TypeCallbackSchema;
+import com.mng.robotest.test80.access.CmdRunTests.TypeCallBackMethod;
+import com.mng.robotest.test80.access.CmdRunTests.TypeCallbackSchema;
 import com.mng.testmaker.boundary.access.OptionTMaker;
 import com.mng.testmaker.domain.InputParamsTM;
 
