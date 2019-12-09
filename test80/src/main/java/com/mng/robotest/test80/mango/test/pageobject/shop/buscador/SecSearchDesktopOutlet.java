@@ -53,7 +53,9 @@ public class SecSearchDesktopOutlet extends WebdrvWrapp implements SecSearch {
      */
     private void setTextAndReturn(String referencia) throws Exception {
         WebElement input = getElementVisible(driver, By.xpath(XPathInputBuscador));
-        sendKeysWithRetry(5, input, referencia);
+        //sendKeysWithRetry(5, input, referencia);
+        input.clear();
+        input.sendKeys(referencia);
         input.sendKeys(Keys.RETURN);
         waitForPageLoaded(driver);
     }

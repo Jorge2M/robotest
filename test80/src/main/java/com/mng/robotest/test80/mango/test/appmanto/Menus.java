@@ -26,17 +26,18 @@ public class Menus {
 	 * Constructor para invocación desde @Factory
 	 */
 	public Menus(String cabeceraName, String cabeceraNameNext, int prioridad) {
-	    this.cabeceraName = cabeceraName;
-	    this.cabeceraNameNext = cabeceraNameNext;
-	    this.index_fact = cabeceraName;
-	    this.prioridad = prioridad;
+		this.cabeceraName = cabeceraName;
+		this.cabeceraNameNext = cabeceraNameNext;
+		this.index_fact = cabeceraName;
+		this.prioridad = prioridad;
+		this.index_fact = " (" + cabeceraName + ")";
 	}
 
 	public DataMantoAccess getDataMantoAccess() {
 		DataMantoAccess dMantoAcc = new DataMantoAccess();
 		TestCaseTM testCase = TestMaker.getTestCase();
 		TestRunTM testRun = testCase.getTestRunParent();
-        InputParamsTM inputParams = testCase.getInputParamsSuite();
+		InputParamsTM inputParams = testCase.getInputParamsSuite();
 		dMantoAcc.urlManto = inputParams.getUrlBase();
 		dMantoAcc.userManto = testRun.getParameter(Constantes.paramUsrmanto);
 		dMantoAcc.passManto = testRun.getParameter(Constantes.paramPasmanto);
@@ -49,8 +50,9 @@ public class Menus {
 		groups={"Menus", "Canal:desktop_App:all"},
 		description="Consulta de menús")
 	public void MAN005_ConsultaMenus() throws Exception {
+		TestMaker.getTestCase().setRefineDataName(this.index_fact);
 		DataMantoAccess dMantoAcc = getDataMantoAccess();
-    	WebDriver driver = TestMaker.getDriverTestCase();
+		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		String codigoEspanya = "001";
 		String codigoAlmacenEspanya = "001";

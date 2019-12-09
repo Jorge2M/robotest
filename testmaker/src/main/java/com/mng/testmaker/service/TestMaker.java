@@ -63,7 +63,13 @@ public class TestMaker {
 		if (suite!=null) {
 			return SuiteData.from(suite);
 		}
-		return getSuiteStored(idExecution);
+		SuiteData suiteData = getSuiteStored(idExecution);
+		if (suiteData!=null) {
+			if (!suiteData.getStateExecution().isFinished()) {
+				suiteData.setStateExecution(StateExecution.Aborted);
+			}
+		}
+		return suiteData;
 	}
 	
 	public static List<SuiteData> getListSuites() throws Exception {

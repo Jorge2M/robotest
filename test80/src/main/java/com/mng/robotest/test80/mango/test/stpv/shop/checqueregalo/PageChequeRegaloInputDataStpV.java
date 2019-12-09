@@ -1,6 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checqueregalo;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
@@ -75,15 +77,14 @@ public class PageChequeRegaloInputDataStpV{
 		backToInitPageChequeRegalo(driver);
 	}
 	
-    /*TODO A la espera del cvv para completar esta parte*/
+	/*TODO A la espera del cvv para completar esta parte*/
 	@Step (
 		description="Introducimos el CVV <b>#{cvvNumber}</b> de la tarjeta",
-        expected="Se vuelve a la página inicial del cheque regalo"/*Temporal*/)
-    private static void consultarSaldoTarjeta(String cvvNumber, WebDriver driver) throws Exception {
-        PageChequeRegaloInputData.inputDataInElement(ConsultaSaldo.cvvTarjeta, cvvNumber/*Temporal*/, driver);
-        PageChequeRegaloInputData.clickAndWait(ConsultaSaldo.validar, 3, driver);
-        checkConsultaSaldoTarjeta(driver);
-    }
+		expected="Se vuelve a la página inicial del cheque regalo"/*Temporal*/)
+	private static void consultarSaldoTarjeta(String cvvNumber, WebDriver driver) throws Exception {
+		PageChequeRegaloInputData.introducirCvc(cvvNumber, driver);
+		checkConsultaSaldoTarjeta(driver);
+	}
 	
 	@Validation
 	private static ChecksResult checkConsultaSaldoTarjeta(WebDriver driver) {

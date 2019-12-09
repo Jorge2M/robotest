@@ -87,8 +87,6 @@ public class Pago {
     String iban;
     String bic;
     String bankidgiropay;
-    String scgiropay;
-    String extscgiropay;
     String useremail;
     String passwordemail;
     String usrcashu;
@@ -615,24 +613,6 @@ public class Pago {
     public void setBankidgiropay(String bankidgiropay) {
         this.bankidgiropay = bankidgiropay;
     }        
-    
-    public String getScgiropay() {
-        return this.scgiropay;
-    }
-    
-    @XmlAttribute(name="scgiropay")
-    public void setScgiropay(String scgiropay) {
-        this.scgiropay = scgiropay;
-    }        
-    
-    public String getExtscgiropay() {
-        return this.extscgiropay;
-    }
-    
-    @XmlAttribute(name="extscgiropay")
-    public void setExtscgiropay(String extscgiropay) {
-        this.extscgiropay = extscgiropay;
-    }
 
     public Tpv getTpv() {
         return this.tpv;

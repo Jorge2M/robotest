@@ -2,6 +2,8 @@ package com.mng.robotest.test80.mango.test.stpv.shop.loyalty;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.robotest.test80.mango.test.pageobject.shop.loyalty.PageHomePurchaseWithDiscount;
+import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV.ChecksResultWithNumberPoints;
+
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
@@ -22,17 +24,22 @@ public class PageHomeLikesStpV {
 	}
 	
 	@Validation
-	public ChecksResult checkIsPageOk() {
-    	ChecksResult validations = ChecksResult.getNew();
-    	PageHomeLikes pageLikes = PageHomeLikes.getNew(driver);
-    	int maxSecondsWait = 5;
-    	validations.add(
-    		"Aparece la página de <b>Mango likes you</b> (la esperamos hasta " + maxSecondsWait + " segundos)",
-    		pageLikes.checkIsPageUntil(4), State.Defect);
-    	validations.add(
-    		"Aparecen bloques para el canjeo de Likes",
-    		pageLikes.areVisibleBlocksExchangeLikes(), State.Defect);
-    	return validations;
+	public ChecksResultWithNumberPoints checkIsPageOk() {
+		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
+		PageHomeLikes pageLikes = PageHomeLikes.getNew(driver);
+		int maxSecondsWait = 5;
+		checks.add(
+			"Aparece la página de <b>Mango likes you</b> (la esperamos hasta " + maxSecondsWait + " segundos)",
+			pageLikes.checkIsPageUntil(4), State.Defect);
+		checks.add(
+			"Aparecen bloques para el canjeo de Likes",
+			pageLikes.areVisibleBlocksExchangeLikes(), State.Defect);
+		
+		checks.setNumberPoints(pageLikes.getPoints());
+		checks.add(
+			"El número de puntos Loyalty es > 0",
+			checks.getNumberPoints() > 0, State.Warn);
+		return checks;
 	}
 
 	@Step(

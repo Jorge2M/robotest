@@ -77,6 +77,7 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     final static String tagMetodoPago = "@TagMetodoPago";
     final static String XPathBlockTarjetaGuardadaPagoWithTag = "//div[@class[contains(.,'tarjetaGuardada')] and @data-analytics-value='" + tagMetodoPago + "']";
     final static String XPathRadioTrjGuardada = "//input[@class[contains(.,'guardadaInput')]]";
+	final static String XPathCvcTrjGuardada = "//div[@class='storedCardForm']//input[@id='cvc']";
     
     final static String XPathLinkSolicitarFactura = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
     final static String XPathLinkEditDirecEnvio = "//span[@class[contains(.,'cambiarDatosEnvio')]]";
@@ -520,10 +521,18 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     	String xpathRadioTrjGuardada = getXPathRadioTarjetaGuardada(metodoPago);
     	return (WebdrvWrapp.isElementVisible(driver, By.xpath(xpathRadioTrjGuardada)));
     }
-    
-    public static void clickRadioTrjGuardada(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathRadioTrjGuardada));
-    }
+
+	public static void clickRadioTrjGuardada(WebDriver driver) throws Exception {
+		clickAndWaitLoad(driver, By.xpath(XPathRadioTrjGuardada));
+	}
+
+	public static void inputCvcTrjGuardadaIfVisible(String cvc, WebDriver driver) {
+		if (WebdrvWrapp.isElementVisible(driver, By.xpath(XPathCvcTrjGuardada))) {
+			WebElement input = driver.findElement(By.xpath(XPathCvcTrjGuardada));
+			input.clear();
+			input.sendKeys(cvc);
+		}
+	}
 
     public static void clickSolicitarFactura(WebDriver driver) {
         driver.findElement(By.xpath(XPathLinkSolicitarFactura)).click();

@@ -1005,7 +1005,7 @@
 	nombre="SOFORTÜBERWEISUNG" namefilter="SOFORT" testpasarela='s' testpago='s' paissofort='DE' bankcode='88888888' usrsofort='88888888' passsofort='88888888' tansofort='12345'>&TPV-016;</pago>
 <pago 
 	type="Giropay" tiendas="shop,outlet" empleado="n"
-	nombre="GIROPAY" testpasarela='s' testpago='s' bankidgiropay="Test DE Bank" scgiropay="10" extscgiropay="4000" iban="DE36444488881234567890">&TPV-055;</pago>
+	nombre="GIROPAY" testpasarela='s' testpago='s' bankidgiropay="Oberbank AG 15000 OBKLAT2LXXX">&TPV-055;</pago>
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>

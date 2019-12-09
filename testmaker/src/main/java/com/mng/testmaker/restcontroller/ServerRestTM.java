@@ -78,6 +78,7 @@ public class ServerRestTM {
 		jettyServer.setHandler(getJerseyHandler());
 		try {
 			jettyServer.start();
+			System.out.println("Started Jetty Server at port " + port);
 			jettyServer.join();
 		} finally {
 			jettyServer.destroy();

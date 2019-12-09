@@ -24,24 +24,24 @@ import org.openqa.selenium.WebDriver;
 
 public class ListMenusManto {
 	
-    @SuppressWarnings("unused")
-    @Factory
-    public Object[] createInstances(ITestContext ctxTestRun) throws Exception {
-    	InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
-        ArrayList<Menus> listTests = new ArrayList<Menus>();
-        AppEcom appEcom = (AppEcom)inputData.getApp();
-        try {
-            ArrayList<String> listCabeceraMenus = getListCabecerasMenus(inputData.getUrlBase(), ctxTestRun);
-        	int prioridad=0;
-            for (int i=0; i<listCabeceraMenus.size(); i++) {
-            	System.out.println("Creado Test con datos: URL=" + inputData.getUrlBase() + ", cabeceraMenuName=" + listCabeceraMenus.get(i));
-            	if (i < listCabeceraMenus.size()-1) {
-            		listTests.add(new Menus(listCabeceraMenus.get(i), listCabeceraMenus.get(i+1), prioridad));
-            	} else {
-            		listTests.add(new Menus(listCabeceraMenus.get(i), null, prioridad));
-            	}
-                prioridad+=1;
-            }
+	@SuppressWarnings("unused")
+	@Factory
+	public Object[] createInstances(ITestContext ctxTestRun) throws Exception {
+		InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
+		ArrayList<Menus> listTests = new ArrayList<Menus>();
+		AppEcom appEcom = (AppEcom)inputData.getApp();
+		try {
+			ArrayList<String> listCabeceraMenus = getListCabecerasMenus(inputData.getUrlBase(), ctxTestRun);
+			int prioridad=0;
+			for (int i=0; i<listCabeceraMenus.size(); i++) {
+				System.out.println("Creado Test con datos: URL=" + inputData.getUrlBase() + ", cabeceraMenuName=" + listCabeceraMenus.get(i));
+				if (i < listCabeceraMenus.size()-1) {
+					listTests.add(new Menus(listCabeceraMenus.get(i), listCabeceraMenus.get(i+1), prioridad));
+				} else {
+					listTests.add(new Menus(listCabeceraMenus.get(i), null, prioridad));
+				}
+				prioridad+=1;
+			}
 	}
 	catch (Exception e) {
 	    e.printStackTrace();

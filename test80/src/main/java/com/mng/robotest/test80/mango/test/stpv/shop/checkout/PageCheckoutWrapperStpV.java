@@ -333,40 +333,41 @@ public class PageCheckoutWrapperStpV {
         PageCheckoutWrapper.confirmarPagoFromMetodos(channel, dCtxPago.getDataPedido(), driver);
         PageRedirectPasarelaLoadingStpV.validateDisappeared(5, driver);
     }
-    
-    @Validation (
-    	description="Está disponible una tarjeta guardada de tipo #{tipoTarjeta}",
-    	level=State.Warn)
-    public static boolean isTarjetaGuardadaAvailable(String tipoTarjeta, Channel channel, WebDriver driver) {
-    	return (PageCheckoutWrapper.isAvailableTrjGuardada(tipoTarjeta, channel, driver));
-    }
-    
-    @Step (
-    	description="Seleccionamos la tarjeta guardada y pulsamos el botón \"Confirmar pago\"",
-    	expected="Aparece la página de resultado OK")
-    public static void selectTrjGuardadaAndConfirmPago(DataCtxPago dCtxPago, Channel channel, WebDriver driver) 
-    throws Exception {
-        PageCheckoutWrapper.clickRadioTrjGuardada(channel, driver);
-        PageCheckoutWrapper.confirmarPagoFromMetodos(channel, dCtxPago.getDataPedido(), driver);
-        PageRedirectPasarelaLoadingStpV.validateDisappeared(5, driver);
-    }
-    
-    @Step (
-    	description="Seleccionar el radiobutton \"Quiero recibir una factura\"", 
-        expected="Aparece el modal para la introducción de la dirección de facturación")
-    public static void clickSolicitarFactura(Channel channel, WebDriver driver) {
-        PageCheckoutWrapper.clickSolicitarFactura(channel, driver);
-        modalDirecFactura.validateIsOk(driver);
-    }
-    
-    @Step (
-    	description="Seleccionar el botón \"Editar\" asociado a la Dirección de Envío", 
-        expected="Aparece el modal para la introducción de la dirección de envío")
-    public static void clickEditarDirecEnvio(WebDriver driver) throws Exception {
-        PageCheckoutWrapper.clickEditDirecEnvio(Channel.desktop, driver);
-        modalDirecEnvio.validateIsOk(driver);
-    }
-    
+
+	@Validation (
+		description="Está disponible una tarjeta guardada de tipo #{tipoTarjeta}",
+		level=State.Warn)
+	public static boolean isTarjetaGuardadaAvailable(String tipoTarjeta, Channel channel, WebDriver driver) {
+		return (PageCheckoutWrapper.isAvailableTrjGuardada(tipoTarjeta, channel, driver));
+	}
+
+	@Step (
+		description="Seleccionamos la tarjeta guardada, si nos lo pide introducimos el cvc #{cvc} y pulsamos el botón \"Confirmar pago\"",
+		expected="Aparece la página de resultado OK")
+	public static void selectTrjGuardadaAndConfirmPago(DataCtxPago dCtxPago, String cvc, Channel channel, WebDriver driver) 
+	throws Exception {
+		PageCheckoutWrapper.clickRadioTrjGuardada(channel, driver);
+		PageCheckoutWrapper.inputCvcTrjGuardadaIfVisible(cvc, channel, driver);
+		PageCheckoutWrapper.confirmarPagoFromMetodos(channel, dCtxPago.getDataPedido(), driver);
+		PageRedirectPasarelaLoadingStpV.validateDisappeared(5, driver);
+	}
+
+	@Step (
+		description="Seleccionar el radiobutton \"Quiero recibir una factura\"", 
+		expected="Aparece el modal para la introducción de la dirección de facturación")
+	public static void clickSolicitarFactura(Channel channel, WebDriver driver) {
+		PageCheckoutWrapper.clickSolicitarFactura(channel, driver);
+		modalDirecFactura.validateIsOk(driver);
+	}
+
+	@Step (
+		description="Seleccionar el botón \"Editar\" asociado a la Dirección de Envío", 
+		expected="Aparece el modal para la introducción de la dirección de envío")
+	public static void clickEditarDirecEnvio(WebDriver driver) throws Exception {
+		PageCheckoutWrapper.clickEditDirecEnvio(Channel.desktop, driver);
+		modalDirecEnvio.validateIsOk(driver);
+	}
+
     @Step (
     	description="Seleccionamos el botón \"Confirmar Pago\"", 
         expected="Aparece una pasarela de pago",

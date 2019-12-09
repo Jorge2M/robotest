@@ -224,11 +224,11 @@ public class InputParamsMango extends InputParamsTM {
 		StringBuilder moreInfo = new StringBuilder();
 		List<String> listCountrys = getListaPaises();
 		if (listCountrys.size() > 0) {
-			moreInfo.append("List Countrys : " + listCountrys + lineSeparator);
+			moreInfo.append("List Countrys : " + "<br>");
 		}
 		List<String> listLineas = getListaLineas();
 		if (listLineas.size() > 0) {
-			moreInfo.append("List Lines: " + listLineas + lineSeparator);
+			moreInfo.append("List Lines: " + "<br>");
 		}
 		List<String> listPayments = getListaPayments();
 		if (listPayments.size() > 0) {

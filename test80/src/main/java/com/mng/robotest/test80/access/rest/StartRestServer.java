@@ -10,7 +10,7 @@ public class StartRestServer {
 
 	public static void main(String[] args) throws Exception {
 		CreatorSuiteRun creatorSuiteRun = CreatorSuiteRunMango.getNew();
-		ServerRestTM serverRest = ServerRestTM.getInstance(8887, creatorSuiteRun, RestApiMango.class, Suites.class, AppEcom.class);
+		ServerRestTM serverRest = ServerRestTM.getInstance(80, creatorSuiteRun, RestApiMango.class, Suites.class, AppEcom.class);
 		serverRest.start();
 	}
 }

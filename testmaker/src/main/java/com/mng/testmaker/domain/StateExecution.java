@@ -6,7 +6,8 @@ public enum StateExecution {
 	Started(false), 
 	Finished(true), 
 	Stopping(false), 
-	Stopped(true);
+	Stopped(true),
+	Aborted(true);
 	
 	boolean finished;
 	private StateExecution(boolean finished) {

@@ -40,6 +40,9 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     	"@data-analytics-value='" + tagMetodoPagoLowerCase + "']";
     static String XPathRadioTrjGuardada = "//div[@data-custom-radio-id[contains(.,'-saved')]]";
     
+    //Desconozco este XPath, de momento he puesto el de Desktop
+    static String XPathCvcTrjGuardada = "//div[@class='storedCardForm']//input[@id='cvc']"; 
+    
     static String XPathLinkSolicitarFactura = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
     static String XPathLinkFormasPago = "//div[@class[contains(.,'payment-method')]]//span[@class[contains(.,'others-title')]]"; 
     static String XPathLineaPagoLayoutLinea = "//div[@class[contains(.,'payment-method')] and @data-id]";
@@ -312,10 +315,18 @@ public class Page2DatosPagoCheckoutMobil extends WebdrvWrapp {
     	String xpathRadioTrjGuardada = getXPathRadioTarjetaGuardada(metodoPago);
     	return (WebdrvWrapp.isElementVisible(driver, By.xpath(xpathRadioTrjGuardada)));
     }
-    
-    public static void clickRadioTrjGuardada(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathRadioTrjGuardada));
-    }    
+
+	public static void clickRadioTrjGuardada(WebDriver driver) throws Exception {
+		clickAndWaitLoad(driver, By.xpath(XPathRadioTrjGuardada));
+	}
+
+	public static void inputCvcTrjGuardadaIfVisible(String cvc, WebDriver driver) {
+		if (WebdrvWrapp.isElementVisible(driver, By.xpath(XPathCvcTrjGuardada))) {
+			WebElement input = driver.findElement(By.xpath(XPathCvcTrjGuardada));
+			input.clear();
+			input.sendKeys(cvc);
+		}
+	}
 
     public static void clickSolicitarFactura(WebDriver driver) {
         driver.findElement(By.xpath(XPathLinkSolicitarFactura)).click();

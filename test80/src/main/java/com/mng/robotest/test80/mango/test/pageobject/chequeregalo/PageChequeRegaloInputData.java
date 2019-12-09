@@ -2,6 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.chequeregalo;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
@@ -116,9 +117,19 @@ public class PageChequeRegaloInputData extends WebdrvWrapp implements PageFromFo
     }
 
     public static void introducirTarjetaConsultaSaldo(WebDriver driver, String numTarjeta) throws Exception {
-        inputDataInElement(ConsultaSaldo.numeroTarjeta, numTarjeta, driver);
+    	WebElement inputNumTarjeta = driver.findElement(By.xpath(ConsultaSaldo.numeroTarjeta.getXPath()));
+    	inputNumTarjeta.clear();
+    	inputNumTarjeta.sendKeys(numTarjeta);
+        //inputDataInElement(ConsultaSaldo.numeroTarjeta, numTarjeta, driver);
         clickAndWait(ConsultaSaldo.validar, driver);
     }
+    
+	public static void introducirCvc(String cvvNumber, WebDriver driver) throws Exception {
+		WebElement cvvTarjeta = driver.findElement(By.xpath(ConsultaSaldo.cvvTarjeta.getXPath()));
+		cvvTarjeta.clear();
+		cvvTarjeta.sendKeys(cvvNumber);
+		PageChequeRegaloInputData.clickAndWait(ConsultaSaldo.validar, 3, driver);
+	}
 
     public static void clickButtonComprar(ChequeRegalo chequeRegalo, WebDriver driver) throws Exception {
         clickAndWait(ElementCheque.compraAhora, driver);

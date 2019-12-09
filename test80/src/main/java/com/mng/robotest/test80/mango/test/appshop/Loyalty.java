@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -34,7 +33,6 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigatio
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.GaleriaNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
@@ -72,8 +70,6 @@ public class Loyalty {
         dCtxSh.userRegistered = true;
         
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, driver);
-        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-        actionsLoyaltyPostLogin(userMenusStpV, dCtxSh, driver);
         
         //Queremos asegurarnos que obtenemos artículos no-rebajados para poder aplicarle el descuento por Loyalty Points
         DataBag dataBag = addBagArticleNoRebajado(dCtxSh, driver);
@@ -109,38 +105,33 @@ public class Loyalty {
 		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
 		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuPersonalizacion, dCtxSh);
 		secMenusStpV.selectFiltroCollectionIfExists(FilterCollection.nextSeason);
-        DataBag dataBag = GaleriaNavigationsStpV.selectArticleAvailableFromGaleria(dCtxSh, driver);
-        return dataBag;
+		DataBag dataBag = GaleriaNavigationsStpV.selectArticleAvailableFromGaleria(dCtxSh, driver);
+		return dataBag;
     }
     
-    @Test (
-        groups={"Loyalty", "Canal:all_App:shop"},
-        description="Exchange mediante donación de Likes")
-    public void LOY002_Exhange_Donacion_Likes() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        dCtxSh.userConnected = userWithLPoints;
-        dCtxSh.passwordUser = passwUserWithLPoints;
-        dCtxSh.userRegistered = true;
-        
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
-        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-        int loyaltyPointsIni = actionsLoyaltyPostLogin(userMenusStpV, dCtxSh, driver);
-        userMenusStpV.clickMenuMangoLikesYou();
+	@Test (
+			groups={"Loyalty", "Canal:all_App:shop"},
+			description="Exchange mediante donación de Likes")
+	public void LOY002_Exhange_Donacion_Likes() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest();
+		dCtxSh.userConnected = userWithLPoints;
+		dCtxSh.passwordUser = passwUserWithLPoints;
+		dCtxSh.userRegistered = true;
 
-        PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(driver);
-        pageHomeLikesStpV.clickOpcionCompraUnDescuento();
-
-        userMenusStpV.clickMenuMangoLikesYou();
-        pageHomeLikesStpV.clickButtonDonarLikes();
-        if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
-            PageHomeDonateLikesStpV pageHomeDonateLikesStpV = PageHomeDonateLikesStpV.getNew(driver);
-            ButtonLikes donateButton = ButtonLikes.Button50likes;
-            pageHomeDonateLikesStpV.selectDonateButton(donateButton);
-            int loyaltyPointsFin = checkAndGetLoyaltyPoints(userMenusStpV, dCtxSh, driver);
-            userMenusStpV.checkLoyaltyPoints(loyaltyPointsIni, donateButton.getNumLikes(), loyaltyPointsFin);
-        }
-    }
+		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+		SecMenusUserStpV secMenusUserStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		int loyaltyPointsIni = secMenusUserStpV.clickMenuMangoLikesYou();
+		PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(driver);
+		pageHomeLikesStpV.clickButtonDonarLikes();
+		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
+			PageHomeDonateLikesStpV pageHomeDonateLikesStpV = PageHomeDonateLikesStpV.getNew(driver);
+			ButtonLikes donateButton = ButtonLikes.Button50likes;
+			pageHomeDonateLikesStpV.selectDonateButton(donateButton);
+			int loyaltyPointsFin = secMenusUserStpV.clickMenuMangoLikesYou();
+			secMenusUserStpV.checkLoyaltyPoints(loyaltyPointsIni, donateButton.getNumLikes(), loyaltyPointsFin);
+		}
+	}
     
     @Test (
         groups={"Loyalty", "Canal:all_App:shop"},
@@ -161,40 +152,14 @@ public class Loyalty {
         }
 
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
-        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-        int loyaltyPointsIni = actionsLoyaltyPostLogin(userMenusStpV, dCtxSh, driver);
-        userMenusStpV.clickMenuMangoLikesYou();
-
+        SecMenusUserStpV secMenusUserStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		int loyaltyPointsIni = secMenusUserStpV.clickMenuMangoLikesYou();
         PageHomeLikesStpV.getNewInstance(driver).clickButtonConseguirPor1200Likes();
         if (!isEntornoPro) {
             PageHomeConseguirPor1200LikesStpV pageHomeConseguirPor1200LikesStpV = PageHomeConseguirPor1200LikesStpV.getNew(driver);
             pageHomeConseguirPor1200LikesStpV.selectConseguirButton();
-            
-            int loyaltyPointsFin = checkAndGetLoyaltyPoints(userMenusStpV, dCtxSh, driver);
-            userMenusStpV.checkLoyaltyPoints(loyaltyPointsIni, 1200, loyaltyPointsFin);
+    		int loyaltyPointsFin = secMenusUserStpV.clickMenuMangoLikesYou();
+    		secMenusUserStpV.checkLoyaltyPoints(loyaltyPointsIni, 1200, loyaltyPointsFin);
         }
-    }
-    
-    private int actionsLoyaltyPostLogin(SecMenusUserStpV secMenusUserStpV, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
-    	secMenusUserStpV.checkVisibilityLinkMangoLikesYou();
-	    return (checkAndGetLoyaltyPoints(secMenusUserStpV, dCtxSh, driver));
-    }
-    
-    private int checkAndGetLoyaltyPoints(SecMenusUserStpV secMenusUserStpV, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
-	    makeLoyaltyPointsVisible(dCtxSh, secMenusUserStpV, driver);
-		int loyaltyPoints = secMenusUserStpV.checkAngGetLoyaltyPoints(7).getNumberPoints();
-		return loyaltyPoints;
-    }
-    
-    private void makeLoyaltyPointsVisible(DataCtxShop dCtxSh, SecMenusUserStpV secMenusUserStpV, WebDriver driver) 
-    throws Exception {
-	    if (dCtxSh.channel==Channel.desktop && dCtxSh.appE==AppEcom.shop) {
-	    	secMenusUserStpV.hoverLinkForShowUserMenuDesktop();
-	    } else {
-	    	boolean setVisible = true;
-	    	SecCabeceraStpV.getNew(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver).setVisibilityLeftMenuMobil(setVisible);
-	    }
     }
 }

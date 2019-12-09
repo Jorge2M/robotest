@@ -78,7 +78,7 @@
 					</weaveDependencies>
 				</configuration>
 				<executions>
-					<execution>
+					<execution> 
 						<goals>
 							<goal>compile</goal>
 						</goals>

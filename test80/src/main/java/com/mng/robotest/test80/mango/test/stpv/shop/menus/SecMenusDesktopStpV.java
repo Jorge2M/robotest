@@ -94,7 +94,7 @@ public class SecMenusDesktopStpV {
         expected="Aparecen artículos de tipo Camiseta",
         saveNettraffic=SaveWhen.Always)
     public void selectMenuLateral1rstLevelTypeCatalog(Menu1rstLevel menu1rstLevel, DataCtxShop dCtxSh) throws Exception {
-    	secMenus.secMenuLateral.clickMenu(menu1rstLevel);         
+    	secMenus.secMenuLateral.clickMenu(menu1rstLevel);
     	validaSelecMenu(menu1rstLevel, dCtxSh);
     }
     

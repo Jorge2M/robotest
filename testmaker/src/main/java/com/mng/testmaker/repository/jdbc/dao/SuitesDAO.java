@@ -86,7 +86,7 @@ public class SuitesDAO {
 	}
 
 	public SuiteData getSuite(String suiteExecId) throws Exception {
-		SuiteData suiteData = new SuiteData();
+		SuiteData suiteData = null;
 		try (Connection conn = connector.getConnection()) {
 			try (PreparedStatement select = conn.prepareStatement(SQLSelectSuite)) {
 				select.setString(1, suiteExecId);

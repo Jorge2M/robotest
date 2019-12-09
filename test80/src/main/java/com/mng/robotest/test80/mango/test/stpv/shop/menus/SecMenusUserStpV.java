@@ -136,16 +136,16 @@ public class SecMenusUserStpV {
         ModalCambioPaisStpV.validateIsVisible(5, driver); 
         ModalCambioPaisStpV.cambioPais(dCtxSh, driver);
     }
-    
-    @Step (
-    	description="Seleccionar el link \"Mango Likes You\"", 
-        expected="Aparece la página de \"Mi cuenta\"")
-	public void clickMenuMangoLikesYou() throws Exception {
-    	userMenus.clickMenuAndWait(UserMenu.mangoLikesYou);
-    	PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(driver);
-    	pageHomeLikesStpV.checkIsPageOk();
+
+	@Step (
+		description="Seleccionar el link \"Mango Likes You\"", 
+		expected="Aparece la página de \"Mi cuenta\"")
+	public int clickMenuMangoLikesYou() throws Exception {
+		userMenus.clickMenuAndWait(UserMenu.mangoLikesYou);
+		PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(driver);
+		return (pageHomeLikesStpV.checkIsPageOk().getNumberPoints());
 	}
-    
+
 	@Validation
 	public ChecksResult checkVisibilityLinkMangoLikesYou() throws Exception {	
 		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();

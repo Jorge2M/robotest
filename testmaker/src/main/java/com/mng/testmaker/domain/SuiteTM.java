@@ -134,16 +134,16 @@ public class SuiteTM extends XmlSuite {
 	}
 	
 	public String getPathDirectory() {
-        String userDir = System.getProperty("user.dir");
-        String lastCharUserDir = userDir.substring(userDir.length() - 1);
-        if (File.separator.compareTo(lastCharUserDir)!=0) {
-            userDir+=File.separator;
-        }
-        return (
-        	userDir +
-        	ConstantesTM.directoryOutputTests + File.separator + 
-        	getName() + File.separator + 
-        	getIdExecution());
+		String userDir = System.getProperty("user.dir");
+		String lastCharUserDir = userDir.substring(userDir.length() - 1);
+		if (File.separator.compareTo(lastCharUserDir)!=0) {
+			userDir+=File.separator;
+		}
+		return (
+			userDir +
+			ConstantesTM.directoryOutputTests + File.separator + 
+			getName() + File.separator + 
+			getIdExecution());
 	}
 	
 	public String getPathReportHtml() {

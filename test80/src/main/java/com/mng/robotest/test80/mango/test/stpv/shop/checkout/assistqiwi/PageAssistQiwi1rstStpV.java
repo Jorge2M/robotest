@@ -12,10 +12,10 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi.Pa
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class PageAssistQiwi1rstStpV {
-    
+
 	@Validation
-    public static ChecksResult validateIsPage(String importeTotal, String codPais, Channel channel, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+	public static ChecksResult validateIsPage(String importeTotal, String codPais, Channel channel, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
 	 	validations.add(
 			"Aparece el icono de Assist",
 			PageAssistQiwi1rst.isPresentIconoAssist(driver, channel), State.Warn);
@@ -30,9 +30,9 @@ public class PageAssistQiwi1rstStpV {
     
 	@Step (
 		description="Seleccionar la opción de Qiwi Kошелек", 
-        expected="Aparece la página de introducción del número de teléfono")
-    public static void clickIconPasarelaQiwi(Channel channel, WebDriver driver) throws Exception {
-        PageAssistQiwi1rst.clickIconPasarela(driver, channel, pasarelasAssist.qiwikошелек);
-        PageQiwiInputTlfnStpV.validateIsPage(driver);
-    }
+		expected="Aparece la página de introducción del número de teléfono")
+	public static void clickIconPasarelaQiwi(Channel channel, WebDriver driver) throws Exception {
+		PageAssistQiwi1rst.clickIconPasarela(driver, channel, pasarelasAssist.qiwikошелек);
+		PageQiwiInputTlfnStpV.validateIsPage(driver);
+	}
 }

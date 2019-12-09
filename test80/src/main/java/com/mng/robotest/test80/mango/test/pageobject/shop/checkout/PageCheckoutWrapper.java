@@ -316,14 +316,22 @@ public class PageCheckoutWrapper extends WebdrvWrapp {
     		return (page1DktopCheckout.isVisibleRadioTrjGuardada(metodoPago, driver));
     	}
     }
-    
-    public static void clickRadioTrjGuardada(Channel channel, WebDriver driver) throws Exception {
-        if (channel==Channel.movil_web) {
-            page2MobilCheckout.clickRadioTrjGuardada(driver);
-        } else {
-            page1DktopCheckout.clickRadioTrjGuardada(driver);
-        }
-    }    
+
+	public static void clickRadioTrjGuardada(Channel channel, WebDriver driver) throws Exception {
+		if (channel==Channel.movil_web) {
+			page2MobilCheckout.clickRadioTrjGuardada(driver);
+		} else {
+			page1DktopCheckout.clickRadioTrjGuardada(driver);
+		}
+	}
+
+	public static void inputCvcTrjGuardadaIfVisible(String cvc, Channel channel, WebDriver driver) { 
+		if (channel==Channel.movil_web) {
+			page2MobilCheckout.inputCvcTrjGuardadaIfVisible(cvc, driver);
+		} else {
+			page1DktopCheckout.inputCvcTrjGuardadaIfVisible(cvc, driver);
+		}
+	}
     
     public static void clickSolicitarFactura(Channel channel, WebDriver driver) {
         if (channel==Channel.movil_web) {
