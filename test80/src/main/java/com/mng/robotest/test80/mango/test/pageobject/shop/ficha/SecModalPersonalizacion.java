@@ -7,8 +7,7 @@ public class SecModalPersonalizacion extends WebdrvWrapp {
 
 	public enum ModalElement implements ElementPage {
 		Seccion("//div[@class='customization-form']"),
-		StartProcces("//button[@class[contains(.,'customization-add')]]"),
-		BotonIniciar("//button[@class='customization-btn']", "//button[@id='productFormPersonalize']"),
+		AñadirBordadoLink("//button[@class='customization-btn']", "//button[@id='productFormPersonalize']"),
 		PantallaPrevia("div[@class='customization-action']"),
 		StepProof("//li[@class[contains(.,'breadcrumb--active')]]"),
 		Step1Proof("//*[text()[contains(.,'1. ')]]"),

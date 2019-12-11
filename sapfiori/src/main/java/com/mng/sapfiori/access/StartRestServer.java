@@ -9,7 +9,7 @@ public class StartRestServer {
 
 	public static void main(String[] args) throws Exception {
 		CreatorSuiteRun creatorSuiteRun = CreatorSuiteRunSapFiori.getNew();
-		ServerRestTM serverRest = ServerRestTM.getInstance(8888, creatorSuiteRun, Suites.class, Apps.class);
+		ServerRestTM serverRest = ServerRestTM.getInstance(8888, 443, creatorSuiteRun, Suites.class, Apps.class);
 		serverRest.start();
 	}
 }

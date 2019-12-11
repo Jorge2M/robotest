@@ -114,7 +114,7 @@ public class GenerateReports extends EmailableReporter {
         reportHtml+="<head>\n";
         reportHtml+="<meta charset=\"utf-8\">\n";
         reportHtml+="       <title>JQTreeTable</title>\n";
-        reportHtml+="       <script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\" type=\"text/javascript\"></script>";
+        reportHtml+="       <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\" type=\"text/javascript\"></script>";
         reportHtml+="       <script type=\"text/javascript\" src=\"" + pathStatics + "/js/ReportLibrary.js\"></script>\n";
 
         reportHtml+="<script type=\"text/javascript\">\n";

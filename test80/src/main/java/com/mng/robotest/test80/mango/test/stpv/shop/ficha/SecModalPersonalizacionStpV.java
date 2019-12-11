@@ -31,38 +31,38 @@ public class SecModalPersonalizacionStpV {
 	
 	@SuppressWarnings("unused")
 	@Validation (
-		description="El artículo es personalizable",
+		description="El artículo es personalizable (aparece el link \"Añadir bordado\")",
 		level=State.Defect)
 	public boolean checkAreArticleCustomizable() {
-		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.BotonIniciar, StateElem.Present, 1, dCtxSh.channel, driver));
+		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.AñadirBordadoLink, StateElem.Present, 1, dCtxSh.channel, driver));
 	}
 
 	@Step(
-		description="Seleccionamos el link <b>Añadir personalización</b>",
+		description="Seleccionamos el link <b>Añadir bordado</b>",
 		expected="Aparece el modal para la personalización de la prenda")
 	public void selectLinkPersonalizacion () throws Exception {
-		SecModalPersonalizacion.selectElement(ModalElement.BotonIniciar, dCtxSh.channel, driver, TypeOfClick.javascript);
+		SecModalPersonalizacion.selectElement(ModalElement.AñadirBordadoLink, dCtxSh.channel, driver, TypeOfClick.javascript);
 		validateModal(3);
 	}
 
 	@Validation(
-		description="Aparece el modal de personalización con el botón <b>Empezar</b> (lo esperamos hasta #{maxSecondsWait} segundos)",
+		description="Aparece el modal de personalización con el botón <b>Siguiente</b> (lo esperamos hasta #{maxSecondsWait} segundos)",
 		level=State.Warn)
 	private boolean validateModal(int maxSecondsWait) {
-		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.StartProcces, StateElem.Visible, maxSecondsWait, driver));
+		return (SecModalPersonalizacion.isElementInStateUntil(ModalElement.Siguiente, StateElem.Visible, maxSecondsWait, driver));
 	}
 
-	@Step(
-		description="Seleccionamos el botón <b>Empezar</b>",
-		expected="Aparecen las primeras opciones de personalizacion del artículo")
-	public void startCustomization () throws Exception {
-		SecModalPersonalizacion.selectElement(ModalElement.StartProcces, dCtxSh.channel, driver, TypeOfClick.javascript);
-		if (dCtxSh.channel==Channel.desktop) {
-			validateCabeceraStep(1);
-		} else {
-			validationInitMblCustomization(2, ModalElement.HeaderProof);
-		}
-	}
+//	@Step(
+//		description="Seleccionamos el botón <b>Siguiente</b>",
+//		expected="Aparecen las primeras opciones de personalizacion del artículo")
+//	public void startCustomization () throws Exception {
+//		SecModalPersonalizacion.selectElement(ModalElement.BotonSiguiente, dCtxSh.channel, driver, TypeOfClick.javascript);
+//		if (dCtxSh.channel==Channel.desktop) {
+//			validateCabeceraStep(1);
+//		} else {
+//			validationInitMblCustomization(2, ModalElement.HeaderProof);
+//		}
+//	}
 
 	@Validation(
 		description="1) Aparece la cabecera correspondiente a la personalizacion de la prenda",

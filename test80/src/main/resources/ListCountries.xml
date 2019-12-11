@@ -4115,9 +4115,11 @@
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
 	nombre="中国建设银行" namefilter="zChina_Construction Bk" testpasarela='s' testpago='n'>&TPV-039;</pago>
+<!-- 
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
 	nombre="平安银行" namefilter="zChina_Ping An Bk" testpasarela='s' testpago='n'>&TPV-039;</pago>
+-->
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
 	nombre="交通银行" namefilter="zChina_Bk of Communications" testpasarela='s' testpago='n'>&TPV-039;</pago>

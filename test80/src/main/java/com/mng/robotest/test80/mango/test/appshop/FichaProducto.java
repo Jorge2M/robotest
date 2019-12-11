@@ -225,10 +225,9 @@ public class FichaProducto {
         PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         pageFichaStpv.selectFirstTallaAvailable();
         modalPersonalizacionStpV.selectLinkPersonalizacion();
-        modalPersonalizacionStpV.startCustomization();
+        //modalPersonalizacionStpV.startCustomization();
         modalPersonalizacionStpV.selectIconCustomization();
         modalPersonalizacionStpV.selectFirstIcon();
-
     	modalPersonalizacionStpV.validateIconSelectedDesktop();
         modalPersonalizacionStpV.selectConfirmarButton();
         modalPersonalizacionStpV.validateCabeceraStep(2);
