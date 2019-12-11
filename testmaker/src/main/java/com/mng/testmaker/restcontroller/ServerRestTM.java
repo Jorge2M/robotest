@@ -17,26 +17,14 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 import com.mng.testmaker.domain.CreatorSuiteRun;
 
-//For renewal robotest.pro.mango.com certificate manually:
-//	-> Execute Powershell with Administrator Privileges
-//	-> Path C:\\users\jorge.muñoz\Programas\win-acme
-//	-> Exec .\wacs.exe --force
-//  -> Option "S Renew specific"
-//	-> Certificate in C:\ProgramData\win-acme\acme-v02.api.letsencrypt.org\Certificates
-//[INFO] Adding renewal for [Manual] robotest.pro.mango.com
-//[INFO] Next renewal scheduled at 02/04/2020 10:21:39
-
-//Probably the automation of the renewal is not possible because is utilized --manual method with TXT autentication (dns01)
-//(https://community.letsencrypt.org/t/automate-renewal-for-lets-encrypt-certificate/73972/10)
-//Also, the client wacs.exe is not instaled in the windows machine because a lack of .dll
-//If we want to automate the certificate renewal perhaps I must install .\wacs.exe in the Windows machine and choose the http01 autentication
-
 public class ServerRestTM {
 	
 	private static ServerRestTM serverRestTM = null; 
 	
-	private final int httpPort;
-	private final int httpsPort;
+	private final Integer httpPort;
+	private final Integer httpsPort;
+	private final String pathCertificate;
+	private final String passwordCertificate;
 	private final Server jettyServer;
 	private final HttpConfiguration httpConfiguration;
 	private final CreatorSuiteRun creatorSuiteRun;
@@ -44,37 +32,19 @@ public class ServerRestTM {
 	private final Class<? extends Enum<?>> suiteEnum;
 	private final Class<? extends Enum<?>> appEnum;
 
-	private ServerRestTM(int httpPort, int httpsPort, CreatorSuiteRun creatorSuiteRun, 
-						 Class<? extends RestApiTM> restApiTM, 
+	private ServerRestTM(Integer httpPort, Integer httpsPort, String pathCertificate, String passwordCertificate,
+						 CreatorSuiteRun creatorSuiteRun, Class<? extends RestApiTM> restApiTM, 
 						 Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) throws Exception {
 		this.httpPort = httpPort;
 		this.httpsPort = httpsPort;
+		this.pathCertificate = pathCertificate;
+		this.passwordCertificate = passwordCertificate;
 		this.creatorSuiteRun = creatorSuiteRun;
 		this.restApiTM = restApiTM;
 		this.suiteEnum = suiteEnum;
 		this.appEnum = appEnum;
 		jettyServer = new Server();
 		httpConfiguration = new HttpConfiguration();
-	}
-	
-	public static ServerRestTM getInstance(int httpPort, int httpsPort, CreatorSuiteRun creatorSuiteRun, 
-			   							   Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) throws Exception {
-		return getInstance(httpPort, httpsPort, creatorSuiteRun, RestApiTM.class, suiteEnum, appEnum);
-	}
-	
-	public static ServerRestTM getInstance(int httpPort, int httpsPort, CreatorSuiteRun creatorSuiteRun, 
-										   Class<? extends RestApiTM> restApiTM, 
-										   Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) 
-	throws Exception {
-		if (serverRestTM==null) {
-			serverRestTM = new ServerRestTM(httpPort, httpsPort, creatorSuiteRun, restApiTM, suiteEnum, appEnum);
-		}
-		if (serverRestTM.getHttpPort()!=httpPort || serverRestTM.getHttpsPort()!=httpsPort) {
-			serverRestTM.getJettyServer().stop();
-			serverRestTM.getJettyServer().destroy();
-			serverRestTM = new ServerRestTM(httpPort, httpsPort, creatorSuiteRun, restApiTM, suiteEnum, appEnum);
-		}
-		return serverRestTM;
 	}
 	
 	public static ServerRestTM getServerRestTM() {
@@ -103,10 +73,16 @@ public class ServerRestTM {
 	public void start() throws Exception {
 		setServerHttpConnector();
 		setServerJerseyHandler();
-		setServerHttpsConnector();
+		if (httpsPort!=null) {
+			setServerHttpsConnector();
+		}
 		try {
 			jettyServer.start();
-			System.out.println("Started Jetty Server at http/https ports: " + httpPort + "/" + httpsPort);
+			System.out.println("Started Jetty Server!");
+			System.out.println("HttpPort: " + httpPort);
+			if (httpsPort!=null) {
+				System.out.println("HttpsPort: " + httpsPort);
+			}
 			jettyServer.join();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -115,16 +91,29 @@ public class ServerRestTM {
 		}
 	}
 	
+	public static void stop() throws Exception {
+		if (serverRestTM!=null) {
+			try {
+				serverRestTM.getJettyServer().stop();
+				serverRestTM.getJettyServer().destroy();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	private void setServerHttpConnector() {
-		httpConfiguration.setSecureScheme("https");
-		httpConfiguration.setSecurePort(httpsPort);
+		if (httpsPort!=null) {
+			httpConfiguration.setSecureScheme("https");
+			httpConfiguration.setSecurePort(httpsPort);
+		}
 		ServerConnector http = new ServerConnector(jettyServer, new HttpConnectionFactory(httpConfiguration));
 		http.setPort(httpPort);
 		jettyServer.addConnector(http);
 	}
 	private void setServerHttpsConnector() {
-		SslContextFactory sslContextFactory = new SslContextFactory(ServerRestTM.class.getResource("/EiLuNHJWNEmFjcsNj3YRig-cache.pfx").toExternalForm());
-		sslContextFactory.setKeyStorePassword("yvuF62JiD6HsGVS9lqY9CsZZC/unbW1MMR3dLotF48Q=");
+		SslContextFactory sslContextFactory = new SslContextFactory(pathCertificate);
+		sslContextFactory.setKeyStorePassword(passwordCertificate);
 		HttpConfiguration httpsConfiguration = new HttpConfiguration(httpConfiguration);
 		httpsConfiguration.addCustomizer(new SecureRequestCustomizer());
 		ServerConnector httpsConnector = new ServerConnector(jettyServer,
@@ -151,5 +140,60 @@ public class ServerRestTM {
 		resource_handler.setWelcomeFiles(new String[]{ "index.html" });
 		resource_handler.setResourceBase(".");
 		return resource_handler;
+	}
+	
+	public static class Builder {
+		private final CreatorSuiteRun creatorSuiteRun; 
+		private final Class<? extends Enum<?>> suiteEnum;
+		private final Class<? extends Enum<?>> appEnum;
+		private Class<? extends RestApiTM> restApiTM = RestApiTM.class;
+		private Integer httpPort = 80;
+		private Integer httpsPort = null; 
+		private String pathCertificate = ServerRestTM.class.getResource("/testkey.jks").toExternalForm();
+		private String passwordCertificate = "robotest";
+
+		public Builder(CreatorSuiteRun creatorSuiteRun, Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) {
+			this.creatorSuiteRun = creatorSuiteRun;
+			this.suiteEnum = suiteEnum;
+			this.appEnum = appEnum;
+		}
+
+		public Builder portHttp(int httpPort) {
+			this.httpPort = httpPort;
+			return this;
+		}
+		public Builder portHttps(int httpsPort) {
+			this.httpsPort = httpsPort;
+			return this;
+		}
+		public Builder certificate(String path, String password) {
+			this.pathCertificate = path;
+			this.passwordCertificate = password;
+			return this;
+		}
+		public Builder restApi(Class<? extends RestApiTM> restApi) {
+			this.restApiTM = restApi;
+			return this;
+		}
+
+		public ServerRestTM build() throws Exception {
+			boolean isRestartRequired = isRestartRequired(httpPort, httpsPort);
+			if (isRestartRequired) {
+				stop();
+			}
+			if (serverRestTM==null || isRestartRequired) {
+				serverRestTM = new ServerRestTM(
+						httpPort, httpsPort, 
+						pathCertificate, passwordCertificate, 
+						creatorSuiteRun, restApiTM, 
+						suiteEnum, appEnum);
+			}
+			return serverRestTM;
+		}
+		private boolean isRestartRequired(Integer httpPort, Integer httpsPort) {
+			return (
+				serverRestTM!=null &&
+				(serverRestTM.getHttpPort()!=httpPort || serverRestTM.getHttpsPort()!=httpsPort));
+		}
 	}
 }
