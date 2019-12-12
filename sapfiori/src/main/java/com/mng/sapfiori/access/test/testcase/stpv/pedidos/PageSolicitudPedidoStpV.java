@@ -24,7 +24,7 @@ public class PageSolicitudPedidoStpV {
 		description=
 			"Aparece la página con título <b>" + PageSolicitudPedido.TitlePage + "</b> " + 
 			"(la esperamos hasta #{maxSeconds} segundos)",
-		level=State.Defect)
+		level=State.Warn)
 	public boolean checkIsPage(int maxSeconds) {
 		return pageObject.checkIsPage(maxSeconds);
 	}
