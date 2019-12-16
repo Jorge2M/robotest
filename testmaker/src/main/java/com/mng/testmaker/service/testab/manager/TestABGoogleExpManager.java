@@ -45,12 +45,12 @@ public class TestABGoogleExpManager implements TestABmanager {
 		if (isActiveForChannelAndApp()) {
 			String valueCookieRemovingTestAB = getValueCookieResetingAllTestABvariants(driver);
 			if (valueCookieRemovingTestAB!=null) { 
-		        String testABvalueForVariant = testAB.getValueCookie(app) + "%3A" + varianteActivada + "%2C";
-		        String newValueCookie = valueCookieRemovingTestAB + testABvalueForVariant;
-		        Cookie actualCookie = driver.manage().getCookieNamed(nameCookieGoogleExperiments);
-		        Cookie newCookie = getClonedWithNewValue(actualCookie, newValueCookie);
-		        driver.manage().deleteCookieNamed(nameCookieGoogleExperiments);
-		        driver.manage().addCookie(newCookie);
+				String testABvalueForVariant = testAB.getValueCookie(app) + "%3A" + varianteActivada + "%2C";
+				String newValueCookie = valueCookieRemovingTestAB + testABvalueForVariant;
+				Cookie actualCookie = driver.manage().getCookieNamed(nameCookieGoogleExperiments);
+				Cookie newCookie = getClonedWithNewValue(actualCookie, newValueCookie);
+				driver.manage().deleteCookieNamed(nameCookieGoogleExperiments);
+				driver.manage().addCookie(newCookie);
 			}
 		}
 	}

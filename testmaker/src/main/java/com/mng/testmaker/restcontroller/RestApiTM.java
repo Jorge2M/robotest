@@ -90,6 +90,18 @@ public class RestApiTM {
 	}
 	
 	@GET
+	@Path("/suiterun/{idexecution}/report")
+	public Response getSuiteReportHtml(@PathParam("idexecution") String idExecSuite) throws Exception {
+		SuiteData suite = TestMaker.getSuite(idExecSuite);
+		if (suite!=null) {
+			URI uriReport = UriBuilder.fromUri(suite.getUrlReportHtml()).build();
+			return Response.temporaryRedirect(uriReport).build();
+		} else {
+			throw new WebApplicationException(Response.Status.NOT_FOUND);
+		}
+	}
+	
+	@GET
 	@Path("/suiteruns")
 	@Produces("application/json")
 	public List<SuiteData> getListSuitesRunData(
@@ -141,25 +153,13 @@ public class RestApiTM {
 		creatorSuiteRun.setInputParams(inputParams);
 		return (creatorSuiteRun.getListAllTestCasesData());
 	}
-	
-	@GET
-	@Path("/suiterun/{idexecution}/report")
-	public Response getSuiteReportHtml(@PathParam("idexecution") String idExecSuite) {
-		SuiteTM suite = TestMaker.getSuiteExecuted(idExecSuite);
-		if (suite!=null) {
-			URI uriReport = UriBuilder.fromUri(suite.getDnsReportHtml()).build();
-			return Response.temporaryRedirect(uriReport).build();
-		} else {
-			throw new WebApplicationException(Response.Status.NOT_FOUND);
-		}
-	}
+
 	
 	@GET
 	@Path("/testserver")
 	public String test() {
 		return "Jetty Server Started Ok";
 	}
-	
 	
 	private Date getDateFromParam(String fecha) throws ParseException {
 		for (String fechaFormat : listFormatsFecha) {

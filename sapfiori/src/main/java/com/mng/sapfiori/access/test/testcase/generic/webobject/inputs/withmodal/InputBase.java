@@ -22,6 +22,7 @@ public class InputBase extends PageObject {
 		//PageObject.waitMillis(200);
 		inputElem.sendKeys(message);
 		//PageObject.waitMillis(200);
+		waitForPageFinished();
 	}
 	
 	public void sendText(CharSequence... message) throws Exception {
@@ -34,6 +35,6 @@ public class InputBase extends PageObject {
 	}
 	
 	public boolean isVisible() {
-		return PageObject.isElementVisible(driver, By.xpath(xpathInput));
+		return isElementVisible(driver, By.xpath(xpathInput));
 	}
 }

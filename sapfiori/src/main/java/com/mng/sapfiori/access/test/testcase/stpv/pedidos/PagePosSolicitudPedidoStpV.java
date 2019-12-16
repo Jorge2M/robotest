@@ -33,7 +33,7 @@ public class PagePosSolicitudPedidoStpV {
 	}
 	
 	@Step (
-		description = "Seleccionar el icono asociado al input de <b>#{inputType}</b>",
+		description = "Seleccionar el icono asociado al input de <b>#{inputType.getLabel()}</b>",
 		expected = "Aparece el modal para seleccionar el dato")
 	public ModalSelectItemStpV clickIconInput(InputFieldPedido inputType) throws Exception {
 		ModalSelectMultiItem modal = pageObject.getInputWithIcon(inputType).clickIconSetFilter();
@@ -41,7 +41,7 @@ public class PagePosSolicitudPedidoStpV {
 	}
 	
 	@Step (
-		description = "Introducir el valor <b>#{valueToInput}</b> en el input <b>#{inputType}</b>")
+		description = "Introducir el valor <b>#{valueToInput}</b> en el input <b>#{inputType.getLabel()}</b>")
 	public void inputText(InputFieldPedido inputType, String valueToInput) throws Exception {
 		InputLabel input = pageObject.getInput(inputType);
 		input.clearAndSendText(valueToInput);

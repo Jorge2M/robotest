@@ -20,19 +20,19 @@ public class TestCaseTM  {
 	private final TestRunTM testRunParent;
 	private final WebDriver driver;
 	private final ITestResult result;
-	private final String threadName;
+	private final long threadId;
 	private String refineDataName = "";
 
 	public TestCaseTM(ITestResult result) {
 		this.testRunParent = (TestRunTM)result.getTestContext().getCurrentXmlTest();
 		this.suiteParent = (SuiteTM)testRunParent.getSuite();
 		this.result = result;
-		this.threadName = Thread.currentThread().getName();
-        if (suiteParent.getStateExecution()!=StateExecution.Stopping) {
-        	this.driver = getWebDriverForTestCase();
-        } else {
-        	this.driver = null;
-        }
+		this.threadId = Thread.currentThread().getId();
+		if (suiteParent.getStateExecution()!=StateExecution.Stopping) {
+			this.driver = getWebDriverForTestCase();
+		} else {
+			this.driver = null;
+		}
 	}
 	
 	public String getNameUnique() {
@@ -88,11 +88,11 @@ public class TestCaseTM  {
 	}
 	
 	public static TestCaseTM getTestCaseInExecution() {
-		String threadName = Thread.currentThread().getName();
+		Long threadId = Thread.currentThread().getId();
 		for (SuiteTM suite : SuitesExecuted.getSuitesExecuted()) {
 			for (TestRunTM testRun : suite.getListTestRuns()) {
 				for (TestCaseTM testCase : testRun.getListTestCases()) {
-					if (testCase.getThreadName().compareTo(threadName)==0 &&
+					if (testCase.getThreadId().compareTo(threadId)==0 &&
 						testCase.getStateRun()==StateExecution.Started) {
 						return testCase;
 					}
@@ -166,8 +166,8 @@ public class TestCaseTM  {
 		return driver;
 	}
 	
-	public String getThreadName() {
-		return this.threadName;
+	public Long getThreadId() {
+		return this.threadId;
 	}
 	
 	public SuiteTM getSuiteParent() {

@@ -75,7 +75,7 @@ public class SolicitudPedido {
 		String currentYear = String.valueOf(hoyMas7dias.get(Calendar.YEAR));
 		dataPedido.add(InputDataSolPedido.getForSelectValue(AñoTemporada, currentYear));
 		dataPedido.add(InputDataSolPedido.getForSelectValue(OrgCompras, "P000"));
-		dataPedido.add(InputDataSolPedido.getForSelectValue(GrupoCompras, "Man"));
+		dataPedido.add(InputDataSolPedido.getForSelectValue(GrupoCompras, "101"));
 		dataPedido.add(InputDataSolPedido.getForSendText(Customer, "RET"));
 
 		Random r = new Random();

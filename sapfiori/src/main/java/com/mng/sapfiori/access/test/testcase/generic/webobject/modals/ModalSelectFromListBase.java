@@ -1,6 +1,7 @@
 package com.mng.sapfiori.access.test.testcase.generic.webobject.modals;
 
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -74,26 +75,30 @@ public abstract class ModalSelectFromListBase extends PageObject {
 		WebdrvWrapp.clickAndWaitLoad(driver, byElem);
 	}
 	
-	public void findAndSelectElement(String valueToSearch, String valueToSelectInTable) throws Exception {
+	public boolean findAndSelectElement(String valueToSearch, String valueToSelectInTable) throws Exception {
 		if (inputBuscador.isVisible()) {
-			findByBuscarAndSelectElement(valueToSearch, valueToSelectInTable);
-		} else {
-			findByInputLabelAndSelectElement(valueToSearch, valueToSelectInTable);
+			if (findByBuscarAndSelectElement(valueToSearch, valueToSelectInTable)) {
+				return true;
+			}
 		}
+		if (!findByInputLabelAndSelectElement(valueToSearch, valueToSelectInTable)) {
+			throw new NoSuchElementException("Not found " + valueToSelectInTable + " searching for " + valueToSearch);
+		}
+		return true;
 	}
 	
-	private void findByBuscarAndSelectElement(String valueToSearch, String valueToSelectInTable) throws Exception {
+	private boolean findByBuscarAndSelectElement(String valueToSearch, String valueToSelectInTable) throws Exception {
 		waitForPageFinished();
 		inputBuscador.clearAndSendText(valueToSearch);
 		inputBuscador.clickLupaForSearch();
-		selectElementInTable(valueToSelectInTable);
+		return (selectElementInTable(valueToSelectInTable));
 	}
 	
-	private void findByInputLabelAndSelectElement(String valueToSearch, String valueToSelectInTable) throws Exception {
+	private boolean findByInputLabelAndSelectElement(String valueToSearch, String valueToSelectInTable) throws Exception {
 		waitForPageFinished();
 		inputDataLabel.clearAndSendText(valueToSearch);
 		inputDataLabel.sendText(Keys.RETURN);
-		selectElementInTable(valueToSelectInTable);
+		return (selectElementInTable(valueToSelectInTable));
 	}
 	
 	public void findByFiltersAndSelectElement(Map<String,String> inputLabelAndValues, String valueToSelectInTable) 
@@ -107,10 +112,13 @@ public abstract class ModalSelectFromListBase extends PageObject {
 		selectElementInTable(valueToSelectInTable);
 	}
 	
-	public void selectElementInTable(String valueToSelect) throws Exception {
+	public boolean selectElementInTable(String valueToSelect) throws Exception {
 		String xpath = getXPathForSelectElementByValue(valueToSelect);
-		WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(xpath), 3);
-		WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xpath));
+		if (isElementVisibleUntil(driver, By.xpath(xpath), 3)) {
+			clickAndWaitLoad(driver, By.xpath(xpath));
+			return true;
+		}
+		return false;
 	}
 	
 	public void clickOkButton() throws Exception {
