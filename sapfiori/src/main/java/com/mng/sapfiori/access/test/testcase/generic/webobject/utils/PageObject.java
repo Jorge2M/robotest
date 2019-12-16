@@ -27,7 +27,7 @@ public class PageObject extends WebdrvWrapp {
 	public void waitForPageFinished() throws Exception {
 		waitForPageLoaded(driver);
 		StandarElementsMaker standarMaker = StandarElementsMaker.getNew(driver);
-		standarMaker.getModalLoading().isInvisibleUntil(5);
+		standarMaker.getModalLoading().isInvisibleUntil(20);
 	}
 	
 	public boolean clickAndWaitLoad(By byElem) throws Exception {

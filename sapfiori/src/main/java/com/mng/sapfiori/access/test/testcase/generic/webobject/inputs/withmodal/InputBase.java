@@ -19,9 +19,11 @@ public class InputBase extends PageObject {
 		waitForPageFinished();
 		WebElement inputElem = getInputElement();
 		inputElem.clear();
-		//PageObject.waitMillis(200);
+		waitMillis(200);
+		waitForPageFinished();
+		inputElem = getInputElement(); //For avoid possible StaleElementException
 		inputElem.sendKeys(message);
-		//PageObject.waitMillis(200);
+		waitMillis(200);
 		waitForPageFinished();
 	}
 	

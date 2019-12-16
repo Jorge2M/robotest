@@ -36,9 +36,6 @@ public class PagePosSolicitudPedido extends PageObject {
 	
 	public boolean checkIsPage(int maxSeconds) throws Exception {
 		boolean check = isElementVisibleUntil(driver, By.xpath(XPathTitle), maxSeconds);
-		if (!check) {
-			System.out.println("Error");
-		}
 		return check;
 	}
 	

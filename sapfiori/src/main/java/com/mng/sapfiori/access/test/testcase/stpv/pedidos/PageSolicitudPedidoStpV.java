@@ -43,7 +43,7 @@ public class PageSolicitudPedidoStpV {
 			PagePosSolicitudPedidoStpV.getNew(
 				pageObject.añadirArticulo(concepto));
 				
-		pagePosSolPedidoStpV.checkIsPage(5);
+		pagePosSolPedidoStpV.checkIsPage(10);
 		return pagePosSolPedidoStpV;
 	}
 	

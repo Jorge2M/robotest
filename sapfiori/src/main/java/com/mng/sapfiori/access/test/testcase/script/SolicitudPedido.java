@@ -85,12 +85,12 @@ public class SolicitudPedido {
 
 		dataPedido.add(InputDataSolPedido.getForSendText(FechaEntrega, fechaEntrega));
 		//dataPedido.add(InputDataSolPedido.getForSearchAndSelect(IdCurvaDistrib, "1940003HPM", "1940003HPM"));
-		dataPedido.add(InputDataSolPedido.getForSearchAndSelect(IdCurvaDistrib, "1000000080", "1000000080"));
+		dataPedido.add(InputDataSolPedido.getForSearchAndSelect(IdCurvaDistrib, "1000000008", "1000000008"));
 		pagePosSolicitudPedidoStpV.inputData(dataPedido);
 		PageSolicitudPedidoStpV pageSolicitudPedidoStpV = 
 			pagePosSolicitudPedidoStpV.clickAplicar();
 		
-		pageSolicitudPedidoStpV.checkFieldIn1rstLineaPedidos(inputDataQuantity, 2);
+		pageSolicitudPedidoStpV.checkFieldIn1rstLineaPedidos(inputDataQuantity, 5);
 	}
 
 	public void modifyPrizeLineaPedidoAndSave(PageSolicitudPedidoStpV pageSolPedidoStpV) throws Exception {
