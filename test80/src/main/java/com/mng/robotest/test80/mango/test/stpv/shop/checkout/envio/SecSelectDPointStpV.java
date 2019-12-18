@@ -45,8 +45,10 @@ public class SecSelectDPointStpV {
 	    	stateVal = State.Info;
     	}
 	 	validations.add(
-			"La dirección del droppoint seleccionado contiene <b>" + dataSearchDp.data + "</b> (lo esperamos hasta " + maxSecondsWait + " segundos)",
-			ModalDroppoints.secSelectDPoint.deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, maxSecondsWait, driver), stateVal);
+			"La dirección del droppoint seleccionado contiene <b>" + dataSearchDp.data + 
+			"</b> (lo esperamos hasta " + maxSecondsWait + " segundos)",
+			ModalDroppoints.secSelectDPoint.
+				deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, maxSecondsWait, driver), stateVal);
 		return validations;
 	}
     

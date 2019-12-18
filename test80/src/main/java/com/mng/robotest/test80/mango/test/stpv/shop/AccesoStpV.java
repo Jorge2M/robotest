@@ -44,18 +44,17 @@ public class AccesoStpV {
 	final static String tagRegistro = "@TagRegistro";
 	@Step (
 		description="Acceder a Mango (" + tagNombrePais + "/" + tagLiteralIdioma + ")<br>" + tagRegistro, 
-        expected="Se accede correctamente",
-        saveNettraffic=SaveWhen.Always)
-    public static void accesoAplicacionEnUnPaso(DataCtxShop dCtxSh, boolean clearArticulos, WebDriver driver) 
-    throws Exception {
-        String registro = "";
-        if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) {
-            registro = "Identificarse con el usuario <b>" + dCtxSh.userConnected + "</b><br>"; 
-        }
-       
-        if (clearArticulos) {
-            registro+= "Borrar la Bolsa<br>";         
-        }
+		expected="Se accede correctamente",
+		saveNettraffic=SaveWhen.Always)
+	public static void accesoAplicacionEnUnPaso(DataCtxShop dCtxSh, boolean clearArticulos, WebDriver driver) 
+	throws Exception {
+		String registro = "";
+		if (dCtxSh.userRegistered && dCtxSh.appE!=AppEcom.votf) {
+			registro = "Identificarse con el usuario <b>" + dCtxSh.userConnected + "</b><br>"; 
+		}
+		if (clearArticulos) {
+			registro+= "Borrar la Bolsa<br>";         
+		}
         
         StepTM StepTestMaker = TestMaker.getCurrentStepInExecution();
         StepTestMaker.replaceInDescription(tagNombrePais, dCtxSh.pais.getNombre_pais());

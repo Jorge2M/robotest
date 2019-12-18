@@ -54,15 +54,11 @@ public class PageMenusManto extends WebdrvWrapp {
 		String XPathPosicionInicial = XPathCabeceraMenu + "[text()='" + menuName + "']" + "/../following::td";
 		return XPathPosicionInicial;
 	}
-    
-    /**
-     * @return el text del titulo de la pagina seleccionada
-     */
-    public static String getTextMenuTitulo(WebDriver driver) {
-        
+
+	public static String getTextMenuTitulo(WebDriver driver) {
 		return driver.findElement(By.xpath(XPathTitulo)).getText();
 	}
-    
+
     /**
      * @return si nos encontramos en la página principal
      */
@@ -156,11 +152,9 @@ public class PageMenusManto extends WebdrvWrapp {
     	if (textoMenu.contains("'")) {
     		int positionDelete = textoMenu.indexOf("'");
     		String textoMenuRecortado = textoMenu.substring(positionDelete+1, textoMenu.length());
-    		//clickAndWaitLoad(driver, By.xpath(getXpath_linkMenu(textoMenuRecortado)), 200);
-    		waitClickAndWaitLoad(driver, 60, By.xpath(getXpath_linkMenu(textoMenuRecortado)), 60, TypeOfClick.webdriver);
+    		waitClickAndWaitLoad(driver, 60, By.xpath(getXpath_linkMenu(textoMenuRecortado)), 60, TypeOfClick.javascript);
     	}else {
-    		//clickAndWaitLoad(driver, By.xpath(getXpath_linkMenu(textoMenu)), 200);
-    		waitClickAndWaitLoad(driver, 60,By.xpath(getXpath_linkMenu(textoMenu)), 60, TypeOfClick.webdriver);
+    		waitClickAndWaitLoad(driver, 60,By.xpath(getXpath_linkMenu(textoMenu)), 60, TypeOfClick.javascript);
     	}
     	
     	while (!isElementPresent(driver, By.xpath(XPathTitulo)) && timeWaited != maxTimeToWait) {

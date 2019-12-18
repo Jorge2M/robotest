@@ -92,7 +92,8 @@ public class UtilsTestMango {
 	throws Exception {
 		ValePais valeTest = null;
 		if (withValeTest) {
-			valeTest = FactoryVale.makeValeTest(dCtxSh.pais.getCodigo_alf());
+			//valeTest = FactoryVale.makeValeTest(dCtxSh.pais.getCodigo_alf());
+			valeTest = FactoryVale.makeValeTest(dCtxSh.pais.getCodigo_pais());
 			dCtxSh.vale = valeTest;
 		}
 		

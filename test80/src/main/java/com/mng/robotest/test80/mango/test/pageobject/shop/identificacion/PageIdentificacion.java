@@ -22,27 +22,31 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAf
  *
  */
 public class PageIdentificacion extends WebdrvWrapp {
-    private static String avisoCredencialesKO = "Tu e-mail o contraseña no son correctos";
-    static String XPathErrorCredencialesKO = "//div[@class='formErrors']//li[text()[contains(.,'" + avisoCredencialesKO + "')]]";
-    static String XPathHasOlvidadoContrasenya = "//span[text()[contains(.,'¿Has olvidado tu contraseña?')]]/../../a";
-    static String XPathInputUser = "//input[@id[contains(.,'userMail')]]";
-    static String XPathInputPassword = "//input[@id[contains(.,'chkPwd')]]";
-    static String XPathSubmitButton = "//div[@class='submitContent']/input[@type='submit']";
-    
-    public static boolean isVisibleUserUntil(int maxSecondsToWait, WebDriver driver) {
-        return isElementVisibleUntil(driver, By.xpath(XPathInputUser), maxSecondsToWait);
-    }
-    
-    public static String getLiteralAvisiCredencialesKO() {
-    	return avisoCredencialesKO;
-    }
-    
-    public static void inputUserPassword(String usuario, String password, WebDriver driver) throws Exception {
-        sendKeysWithRetry(2, usuario, By.xpath(XPathInputUser), driver);
-        sendKeysWithRetry(2, password, By.xpath(XPathInputPassword), driver);
-        sendKeysWithRetry(2, usuario, By.xpath(XPathInputUser), driver);
-    }
-    
+	
+	private static String avisoCredencialesKO = "Tu e-mail o contraseña no son correctos";
+	static String XPathErrorCredencialesKO = "//div[@class='formErrors']//li[text()[contains(.,'" + avisoCredencialesKO + "')]]";
+	static String XPathHasOlvidadoContrasenya = "//span[text()[contains(.,'¿Has olvidado tu contraseña?')]]/../../a";
+	static String XPathInputUser = "//input[@id[contains(.,'userMail')]]";
+	static String XPathInputPassword = "//input[@id[contains(.,'chkPwd')]]";
+	static String XPathSubmitButton = "//div[@class='submitContent']/input[@type='submit']";
+
+	public static boolean isVisibleUserUntil(int maxSecondsToWait, WebDriver driver) {
+		return isElementVisibleUntil(driver, By.xpath(XPathInputUser), maxSecondsToWait);
+	}
+
+	public static String getLiteralAvisiCredencialesKO() {
+		return avisoCredencialesKO;
+	}
+
+	public static void inputUserPassword(String usuario, String password, WebDriver driver) throws Exception {
+		driver.findElement(By.xpath(XPathInputUser)).sendKeys(usuario);
+		waitMillis(250);
+		driver.findElement(By.xpath(XPathInputPassword)).sendKeys(password);
+//        sendKeysWithRetry(2, usuario, By.xpath(XPathInputUser), driver);
+//        sendKeysWithRetry(2, password, By.xpath(XPathInputPassword), driver);
+//        sendKeysWithRetry(2, usuario, By.xpath(XPathInputUser), driver);
+	}
+
     /**
      * Realizamos un login/logoff según el parámetro 'accUsrReg' que identifica si es preciso que el usuario esté logado
      */
