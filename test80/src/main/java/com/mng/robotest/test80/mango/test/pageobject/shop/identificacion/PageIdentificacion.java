@@ -47,17 +47,17 @@ public class PageIdentificacion extends WebdrvWrapp {
 //        sendKeysWithRetry(2, usuario, By.xpath(XPathInputUser), driver);
 	}
 
-    /**
-     * Realizamos un login/logoff según el parámetro 'accUsrReg' que identifica si es preciso que el usuario esté logado
-     */
-    public static void loginOrLogoff(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-        if (dCtxSh.userRegistered) {
-            iniciarSesion(dCtxSh, driver);
-        } else {
-        	SecMenusWrap secMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-        	secMenus.closeSessionIfUserLogged();
-        }
-    }
+	/**
+	 * Realizamos un login/logoff según el parámetro 'accUsrReg' que identifica si es preciso que el usuario esté logado
+	 */
+	public static void loginOrLogoff(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+		if (dCtxSh.userRegistered) {
+			iniciarSesion(dCtxSh, driver);
+		} else {
+			SecMenusWrap secMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+			secMenus.closeSessionIfUserLogged();
+		}
+	}
     
     /**
      * Función que ejecuta la identificación del usuario. Introduce las credenciales del usuario y seleccióna el botón de submit
