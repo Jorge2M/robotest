@@ -13,11 +13,14 @@ public class InputParamsBasic extends InputParamsTM {
 	
 	private final List<OptionTMaker> specificOptions;
 	
+	public InputParamsBasic() {
+		super();
+		this.specificOptions = new ArrayList<>();
+	}
 	public InputParamsBasic(Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) {
 		super(suiteEnum, appEnum);
 		this.specificOptions = new ArrayList<>();
 	}
-	
 	public InputParamsBasic(List<OptionTMaker> specificOptions, Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) {
 		super(suiteEnum, appEnum);
 		this.specificOptions = specificOptions;

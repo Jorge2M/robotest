@@ -25,6 +25,7 @@ import com.mng.testmaker.boundary.access.MessageError;
 import com.mng.testmaker.boundary.access.ResultCheckOptions;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.CreatorSuiteRun;
+import com.mng.testmaker.domain.InputParamsBasic;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
 import com.mng.testmaker.domain.SuiteTM;
@@ -46,6 +47,10 @@ public class RestApiTM {
 	@POST
 	@Path("/suiterun")
 	@Produces("application/json")
+	public Response newSuiteRun(@BeanParam InputParamsBasic inputParams) {
+		return newSuiteRun((InputParamsTM)inputParams);
+	}
+	
 	public Response newSuiteRun(@BeanParam InputParamsTM inputParams) {
 		inputParams.setSuiteEnum(suiteEnum);
 		inputParams.setAppEnum(appEnum);

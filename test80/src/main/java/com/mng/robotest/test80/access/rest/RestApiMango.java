@@ -19,7 +19,7 @@ import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.utils.PagoGetter;
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.domain.InputParamsTM;
+import com.mng.testmaker.domain.InputParamsBasic;
 import com.mng.testmaker.restcontroller.RestApiTM;
 
 @Path("/")
@@ -29,7 +29,7 @@ public class RestApiMango extends RestApiTM {
 	@POST
 	@Path("/suiterun_disabled")
 	@Produces("application/json")
-	public Response newSuiteRun(@BeanParam InputParamsTM inputParams) {
+	public Response newSuiteRun(@BeanParam InputParamsBasic inputParams) {
 		return null;
 	}
 	
