@@ -46,7 +46,6 @@ public class ServerRestTM {
 		jettyServer = new Server();
 		httpConfiguration = new HttpConfiguration();
 	}
-	
 	public static ServerRestTM getServerRestTM() {
 		return serverRestTM;
 	}

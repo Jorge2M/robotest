@@ -17,6 +17,7 @@ import com.mng.robotest.test80.mango.test.getdata.productos.ArticlesStockFactory
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ManagerArticlesStock {
+	
 	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 	public enum TypeArticleStock {
 		articlesWithMoreOneColour, 
