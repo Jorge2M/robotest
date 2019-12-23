@@ -57,12 +57,14 @@ public class MatcherWithMethodParams {
 		if ("".compareTo(tagData.methodWithoutParams1)!=0) {
 			for (Method methodFromParam : parameter.getClass().getMethods()) {
 				if (tagData.methodWithoutParams1.compareTo(methodFromParam.getName())==0) {
+					Object resultInvocation1rstLevelFunction = methodFromParam.invoke(parameter);
 					if ("".compareTo(tagData.methodWithoutParams2)==0) {
-						return (methodFromParam.invoke(parameter).toString());
+						return (resultInvocation1rstLevelFunction.toString());
 					}
-					for (Method methodFromClassReturnLevel1 : methodFromParam.getReturnType().getMethods()) {
-						if (tagData.methodWithoutParams2.compareTo(methodFromClassReturnLevel1.getName())==0) {
-							return (methodFromClassReturnLevel1.invoke(methodFromParam).toString());
+					for (Method methodFromObjectReturnLevel1 : resultInvocation1rstLevelFunction.getClass().getMethods()) {
+						if (tagData.methodWithoutParams2.compareTo(methodFromObjectReturnLevel1.getName())==0) {
+							Object resultInvoation2onLevelFunction = methodFromObjectReturnLevel1.invoke(resultInvocation1rstLevelFunction);
+							return (resultInvoation2onLevelFunction.toString());
 						}
 					}
 				}

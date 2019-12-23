@@ -42,16 +42,6 @@ public class FichaProducto {
 	
 	private final static Pais españa = PaisGetter.get(PaisShop.España);
 	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
-	
-	private static GetterProducts getterProductsEspaña;
-	
-	public FichaProducto() throws Exception {
-		if (getterProductsEspaña!=null) {
-			InputParamsMango inputParams = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
-			Pais españa = PaisGetter.get(PaisShop.España);
-			getterProductsEspaña = new GetterProducts.Builder(inputParams.getDnsUrlAcceso(), españa.getCodigo_alf()).build();
-		}
-	}
 
 	private DataCtxShop getCtxShForTest() throws Exception {
 		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
@@ -77,7 +67,8 @@ public class FichaProducto {
 
 		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, driver);
 
-		Garment articleWithColors = getterProductsEspaña.getWithManyColors().get(0);
+		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh).build();
+		Garment articleWithColors = getterProducts.getWithManyColors().get(0);
 		SecBuscadorStpV.searchArticulo(articleWithColors, dCtxSh, driver);
 
 		PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
@@ -117,7 +108,9 @@ public class FichaProducto {
         dCtxSh.idioma=this.castellano;
 
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
-        Garment articleWithTotalLook = getterProductsEspaña.getOneWithTotalLook();
+        
+		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh).build();
+        Garment articleWithTotalLook = getterProducts.getOneWithTotalLook();
         SecBuscadorStpV.searchArticulo(articleWithTotalLook, dCtxSh, driver);
         
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);

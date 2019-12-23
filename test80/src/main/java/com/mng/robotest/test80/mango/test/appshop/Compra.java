@@ -307,7 +307,7 @@ public class Compra {
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
         
         //Alta artículos en la bolsa
-		GetterProducts getterProductsColombia = new GetterProducts.Builder(dCtxSh.getDnsUrlAcceso(), colombia.getCodigo_alf()).build();
+		GetterProducts getterProductsColombia = new GetterProducts.Builder(dCtxSh).build();
         List<Garment> productsToAddBolsa = Arrays.asList(getterProductsColombia.getAll().get(0));
         DataBag dataBag = new DataBag(); 
         SecBolsaStpV.altaListaArticulosEnBolsa(productsToAddBolsa, dataBag, dCtxSh, driver);

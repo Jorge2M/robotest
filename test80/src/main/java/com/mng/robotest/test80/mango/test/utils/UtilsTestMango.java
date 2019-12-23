@@ -111,7 +111,7 @@ public class UtilsTestMango {
     		}
     	}
     	
-    	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.getDnsUrlAcceso(), dCtxSh.pais.getCodigo_alf())
+    	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh)
     			.numProducts(maxArticlesAwayVale)
     			.build();
     	

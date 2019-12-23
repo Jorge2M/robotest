@@ -92,7 +92,7 @@ public class SecBolsaStpV {
     
 	public static void altaArticlosConColores(int numArticulos, DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) 
 	throws Exception {
-		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.getDnsUrlAcceso(), dCtxSh.pais.getCodigo_alf()).build();
+		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh).build();
 		List<Garment> listParaAlta = getterProducts.getWithManyColors().subList(0, numArticulos);
 		altaListaArticulosEnBolsa(listParaAlta, dataBag, dCtxSh, driver);
 	}

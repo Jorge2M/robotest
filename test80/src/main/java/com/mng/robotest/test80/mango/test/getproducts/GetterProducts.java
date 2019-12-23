@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.getproducts.data.Color;
 import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
@@ -122,6 +123,11 @@ public class GetterProducts {
 		private String familia = "15";
 		private Integer numProducts = 10;
 		private Integer pagina = 1;
+
+		public Builder(DataCtxShop dCtxSh) throws Exception {
+			this.url = dCtxSh.getDnsUrlAcceso();
+			this.codigoPaisAlf = dCtxSh.pais.getCodigo_alf();
+		}
 		
 		public Builder(String url, String codigoPaisAlf) {
 			this.url = url;

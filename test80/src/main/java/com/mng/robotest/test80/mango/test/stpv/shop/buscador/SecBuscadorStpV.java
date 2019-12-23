@@ -22,7 +22,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
 public class SecBuscadorStpV {
 
 	@Step (
-		description="Buscar el artículo con id #{product.getGarmentId()}, color:#{product.getDefaultColor()} y talla:#{product.getDefaultColor().getSizeWithMoreStock()})", 
+		description="Buscar el artículo con id #{product.getGarmentId()} y color:#{product.getDefaultColor().getId()})", 
 		expected="Aparece la ficha del producto")
 	public static void searchArticulo(Garment product, DataCtxShop dCtxSh, WebDriver driver) 
 	throws Exception {
