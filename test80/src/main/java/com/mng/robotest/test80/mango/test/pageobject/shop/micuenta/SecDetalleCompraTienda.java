@@ -3,6 +3,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop.micuenta;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
@@ -95,9 +96,9 @@ public class SecDetalleCompraTienda extends WebdrvWrapp {
         return (driver.findElement(By.xpath(xpathPrecio)).getText());
     }
     
-    public ArticuloScreen getDataArticulo(int posArticulo) {
+    public ArticuloScreen getDataArticulo(int posArticulo, AppEcom app) {
         //Sólo informamos algunos datos relevantes del artículo
-        ArticuloScreen articulo = new ArticuloScreen();
+        ArticuloScreen articulo = new ArticuloScreen(app);
         articulo.setReferencia(getReferenciaArticulo(posArticulo));
         articulo.setNombre(getNombreArticulo(posArticulo));
         articulo.setPrecio(getPrecioArticulo(posArticulo));

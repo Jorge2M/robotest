@@ -5,58 +5,36 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
-import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock;
+import com.mng.robotest.test80.mango.test.getproducts.data.Color;
+import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
-import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecDataProduct.ColorType;
 
 @SuppressWarnings({"static-access"})
 public class ArticuloNavigations {
 
-    /**
-     * Selecciona un artículo disponible a partir de su referencia (selecciona una talla/color que esté disponible)
-     */
-    public static ArticuloScreen selectArticuloTallaColorByRef(ArticleStock articleStock, AppEcom app, Channel channel, WebDriver driver) throws Exception {
-        ArticuloScreen articulo = new ArticuloScreen();
-        articulo.setReferencia(articleStock.getReference());
-        buscarArticulo(articleStock, channel, app, driver);
+	/**
+	 * Selecciona un artículo disponible a partir de su referencia (selecciona una talla/color que esté disponible)
+	 */
+	public static ArticuloScreen selectArticuloTallaColorByRef(Garment articleStock, AppEcom app, Channel channel, WebDriver driver) throws Exception {
+		ArticuloScreen articulo = new ArticuloScreen(app);
+		articulo.setReferencia(articleStock.getGarmentId());
+		buscarArticulo(articleStock, channel, app, driver);
 
-        //Esperamos un máximo de 10 segundos a que aparezca la ficha del artículo
-        PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
-        int maxSecondsToWait = 10;
-        pageFicha.isFichaArticuloUntil(articulo.getReferencia(), maxSecondsToWait);
+		//Esperamos un máximo de 10 segundos a que aparezca la ficha del artículo
+		PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
+		int maxSecondsToWait = 10;
+		pageFicha.isFichaArticuloUntil(articulo.getReferencia(), maxSecondsToWait);
 
-        //Selección del COLOR 
-        if (articleStock.getColourCode()!=null && "".compareTo(articleStock.getColourCode())!=0) {
-            //Si existe, seleccionamos la pastilla de color correspondiente al código de color
-            if (pageFicha.secDataProduct.isClickableColor(articleStock.getColourCode(), driver)) {
-                pageFicha.secDataProduct.selectColorWaitingForAvailability(articleStock.getColourCode(), driver);
-            }
-            
-            articulo.setCodigoColor(articleStock.getColourCode());
-        } else {
-        	pageFicha.secDataProduct.clickIfPossibleAndWait(ColorType.Available, driver);
-            articulo.setCodigoColor(pageFicha.secDataProduct.getCodeColor(ColorType.Selected, driver));
-        }
-        
-        // Si existe, almacenamos el color para posteriores validaciones
-        articulo.setColorName(pageFicha.secDataProduct.getNombreColorSelected(channel, driver));
+		Color defaultColor = articleStock.getDefaultColor();
+		String idColor = articleStock.getDefaultColor().getId();
+		if (pageFicha.secDataProduct.isClickableColor(idColor, driver)) {
+			pageFicha.secDataProduct.selectColorWaitingForAvailability(idColor, driver);
+		}
+		articulo.setCodigoColor(idColor);
 
-        //Selección de la TALLA
-        if (articleStock.getSize()!=null && "".compareTo(articleStock.getSize())!=0) {
-            //Seleccionamos la talla que nos llega en selArticulo (en formato número)
-            pageFicha.selectTallaByValue(articleStock.getSize());
-        } else {
-            // Seleccionamos la 1a talla disponible
-            pageFicha.selectFirstTallaAvailable();
-        }
-        
-        //Comprobamos si aparece el modal de stock o no
-        if (pageFicha.isModalNoStockVisible(3/*seconds*/)) {
-        	ManagerArticlesStock manager = new ManagerArticlesStock(app);
-        	manager.deleteArticle(articleStock.getReference());
-        }	
+		articulo.setColorName(pageFicha.secDataProduct.getNombreColorSelected(channel, driver));
+		pageFicha.selectTallaByValue(defaultColor.getSizeWithMoreStock());
 
         //Almacenamos los 2 valores de la talla seleccionada
         articulo.setTallaAlf(pageFicha.getTallaAlfSelected());
@@ -82,10 +60,10 @@ public class ArticuloNavigations {
         return articulo;
     }
     
-	public static void buscarArticulo(ArticleStock articulo, Channel channel, AppEcom app, WebDriver driver) 
+	public static void buscarArticulo(Garment product, Channel channel, AppEcom app, WebDriver driver) 
     throws Exception {
-		SecCabecera.buscarTexto(articulo.getReference(), channel, app, driver);
-    	selectColorIfExists(articulo.getColourCode(), app, driver);
+		SecCabecera.buscarTexto(product.getGarmentId(), channel, app, driver);
+    	selectColorIfExists(product.getDefaultColor().getId(), app, driver);
     }
     
     @SuppressWarnings("static-access")

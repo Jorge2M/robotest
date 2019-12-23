@@ -7,68 +7,68 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.mng.robotest.test80.mango.test.data.ValesData.Campanya;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
-import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
+import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
 
 @XmlRootElement
 public class ValePais {
 	
 	public enum EffectToArticle {aplica, noaplica};
 	
-    boolean activo = true;
-    Pais pais;
-    String codigoVale;
-    String textoCheckout = "";
-    int porcDescuento;
-    boolean filterCal = true;
-    Calendar fechaInicio;
-    Calendar fechaFin;
-    List<ArticleStock> listExamplesArtSiAplica = new ArrayList<>();
-    List<ArticleStock> listExamplesArtNoAplica = new ArrayList<>();
-    Campanya campanya;
+	boolean activo = true;
+	Pais pais;
+	String codigoVale;
+	String textoCheckout = "";
+	int porcDescuento;
+	boolean filterCal = true;
+	Calendar fechaInicio;
+	Calendar fechaFin;
+	List<Garment> listExamplesArtSiAplica = new ArrayList<>();
+	List<Garment> listExamplesArtNoAplica = new ArrayList<>();
+	Campanya campanya;
 
-    public ArrayList<ArticleStock> getArticlesFromVale() {
-    	ArrayList<ArticleStock> listArticlesReturn = new ArrayList<>();
+	public ArrayList<Garment> getArticlesFromVale() {
+		ArrayList<Garment> listArticlesReturn = new ArrayList<>();
 		listArticlesReturn.addAll(getListExamplesArtNoAplica());
-		for (ArticleStock articleStock : getListExamplesArtSiAplica()) {
+		for (Garment articleStock : getListExamplesArtSiAplica()) {
 			articleStock.setValePais(this);
 			listArticlesReturn.add(articleStock);
 		}
 		
 		return listArticlesReturn;
-    }
-    
-    public boolean isActivo() {
-        return this.activo;
-    }
-    
-    public List<ArticleStock> getListExamplesArtSiAplica() {
-        return this.listExamplesArtSiAplica;
-    }
-    
-    public List<ArticleStock> getListExamplesArtNoAplica() {
-        return this.listExamplesArtNoAplica;
-    }    
-    
-    public Pais getPais() {
-        return this.pais;
-    }
-    
-    public Campanya getCampanya() {
-    	return this.campanya;
-    }
-    
-    public void setPais(Pais pais) {
-        this.pais = pais;
-    }
-    
-    public String getCodigoVale() {
-        return this.codigoVale;
-    }
+	}
 
-    public void setCodigoVale(String codigoVale) {
-        this.codigoVale = codigoVale;
-    }       
-    
+	public boolean isActivo() {
+		return this.activo;
+	}
+
+	public List<Garment> getListExamplesArtSiAplica() {
+		return this.listExamplesArtSiAplica;
+	}
+
+	public List<Garment> getListExamplesArtNoAplica() {
+		return this.listExamplesArtNoAplica;
+	}
+
+	public Pais getPais() {
+		return this.pais;
+	}
+
+	public Campanya getCampanya() {
+		return this.campanya;
+	}
+
+	public void setPais(Pais pais) {
+		this.pais = pais;
+	}
+
+	public String getCodigoVale() {
+		return this.codigoVale;
+	}
+
+	public void setCodigoVale(String codigoVale) {
+		this.codigoVale = codigoVale;
+	}	
+
     public String getTextoCheckout() {
         return this.textoCheckout;
     }

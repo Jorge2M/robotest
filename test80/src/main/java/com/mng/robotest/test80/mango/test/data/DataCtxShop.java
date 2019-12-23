@@ -1,6 +1,10 @@
 package com.mng.robotest.test80.mango.test.data;
 
 import com.mng.testmaker.conf.Channel;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -80,6 +84,14 @@ public class DataCtxShop implements Cloneable {
     
     public String getPasswordUser() {
     	return this.passwordUser;
+    }
+    
+    public String getUrlAcceso() {
+    	return this.urlAcceso;
+    }
+    public String getDnsUrlAcceso() throws URISyntaxException {
+        URI uri = new URI(getUrlAcceso());
+        return (uri.getScheme() + "://" + uri.getHost());
     }
 }
 

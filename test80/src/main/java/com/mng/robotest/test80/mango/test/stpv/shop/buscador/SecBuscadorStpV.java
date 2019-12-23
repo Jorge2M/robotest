@@ -9,9 +9,7 @@ import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
-import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock;
-import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
+import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorBusqueda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
@@ -22,32 +20,18 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.ficha.PageFichaArtStpV;
 
 public class SecBuscadorStpV {
-    /**
-     * Utiliza el buscador para localizar una referencia y aplica validaciones específicas según la disponibilidad: disponible, no_disponible, algún_color_no_disponible
-     */
-    public static void searchArticuloAndValidateBasic(TypeArticleStock typeArticle, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
-    	ArticleStock articulo = ManagerArticlesStock.getArticleStock(typeArticle, dCtxSh);
-    	searchArticuloAndValidateBasic(articulo, dCtxSh, driver);
-    }
-    
-    /**
-     * Utiliza el buscador para localizar una referencia y aplica validaciones específicas según la disponibilidad: disponible, no_disponible, algún_color_no_disponible
-     */
-    @Step (
-    	description=
-    		"Buscar un producto de tipo: <b>#{articulo.getType()}</b> " +
-    		"(#{articulo.getReference()} color:#{articulo.getColourCode()}, size:#{articulo.getSize()})", 
-    	expected=
-    		"Aparece una ficha de producto de typo <b>#{articulo.getType()}</b>")
-    public static void searchArticuloAndValidateBasic(ArticleStock articulo, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
-        ArticuloNavigations.buscarArticulo(articulo, dCtxSh.channel, dCtxSh.appE, driver);
-        WebdrvWrapp.waitForPageLoaded(driver);  
-        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
-        pageFichaStpV.validateIsFichaAccordingTypeProduct(articulo);
-    }
-    
+
+	@Step (
+		description="Buscar el artículo con id #{product.getGarmentId()}, color:#{product.getDefaultColor()} y talla:#{product.getDefaultColor().getSizeWithMoreStock()})", 
+		expected="Aparece la ficha del producto")
+	public static void searchArticulo(Garment product, DataCtxShop dCtxSh, WebDriver driver) 
+	throws Exception {
+		ArticuloNavigations.buscarArticulo(product, dCtxSh.channel, dCtxSh.appE, driver);
+		WebdrvWrapp.waitForPageLoaded(driver);  
+		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
+		pageFichaStpV.validateIsFichaAccordingTypeProduct(product);
+	}
+
     @Step (
     	description="Introducir la categoría de producto <b>#{categoriaABuscar} </b>(existe categoría: #{categoriaExiste})</b>", 
         expected="El resultado de la búsqueda es el correcto :-)")

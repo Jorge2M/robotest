@@ -25,7 +25,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
+import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
 import com.mng.robotest.test80.mango.test.jdbc.dao.RebajasPaisDAO;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.TestMaker;
@@ -79,17 +79,14 @@ public class UtilsMangoTest {
             }
         }
     }    
-    
-    /**
-     * Añade un determinado artículo a la bolsa/favoritos
-     */
-    public static ArticuloScreen addArticuloBolsa(ArticleStock selArticulo, AppEcom app, Channel channel, WebDriver driver)
-    throws Exception {
-        ArticuloScreen articulo = ArticuloNavigations.selectArticuloTallaColorByRef(selArticulo, app, channel, driver);
-        PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
-        pageFicha.clickAnadirBolsaButtonAndWait(); 
-        return articulo;
-    }    
+
+	public static ArticuloScreen addArticuloBolsa(Garment selArticulo, AppEcom app, Channel channel, WebDriver driver)
+	throws Exception {
+		ArticuloScreen articulo = ArticuloNavigations.selectArticuloTallaColorByRef(selArticulo, app, channel, driver);
+		PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
+		pageFicha.clickAnadirBolsaButtonAndWait(); 
+		return articulo;
+	}
     
     public static float round(final float d, final int decimalPlace) {
         BigDecimal bd = new BigDecimal(Float.toString(d));

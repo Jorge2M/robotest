@@ -15,8 +15,7 @@ import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
-import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorBusqueda;
+import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha.TypeFicha;
@@ -46,6 +45,7 @@ public class PageFichaArtStpV {
     public static ModEnvioYdevolNewStpV modEnvioYdevol;
     public static SecFotosNewStpV secFotosNew;
     public static SecFitFinderStpV secFitFinder;
+    public static SecTotalLookStpV secTotalLook;
     
     public PageFichaArtStpV(AppEcom appE, Channel channel) {
         this.driver = TestMaker.getDriverTestCase();
@@ -58,22 +58,8 @@ public class PageFichaArtStpV {
         return this.pageFicha;
     }
     
-    public void validateIsFichaAccordingTypeProduct(ArticleStock articulo) throws Exception {
-        switch (articulo.getType()) {
-        case articlesNotExistent:
-            validateIsFichaArtNoDisponible(articulo.getReference());
-            break;
-        case articlesWithoutStock:
-        	validateIsArticleNotAvailable(articulo);
-            break;
-        case articlesWithMoreOneColour:
-        case articlesWithTotalLook: 
-        case articlesOnlyInThisStore:
-        default:            
-            validateIsFichaArtDisponible(articulo.getReference(), 3);
-        }
-        
-        //Validaciones estándar. 
+    public void validateIsFichaAccordingTypeProduct(Garment product) throws Exception {            
+        validateIsFichaArtDisponible(product.getGarmentId(), 3);
         StdValidationFlags flagsVal = StdValidationFlags.newOne();
         flagsVal.validaSEO = true;
         flagsVal.validaJS = true;
@@ -89,31 +75,31 @@ public class PageFichaArtStpV {
     	return (pageFicha.isFichaArticuloUntil(refArticulo, maxSecondsWait));
     }
     
-    @Validation
-    public ChecksResult validateIsFichaArtNoDisponible(String refArticulo) {
-    	ChecksResult validations = ChecksResult.getNew();
-	 	validations.add(
-			"Aparece la página de resultado de una búsqueda KO",
-			PageErrorBusqueda.isPage(driver), State.Warn);    	
-	 	validations.add(
-			"En el texto de resultado de la búsqueda aparece la referencia " + refArticulo,
-			PageErrorBusqueda.isCabeceraResBusqueda(driver, refArticulo), State.Warn);    		 	
-    	return validations;
-    }
-    
-    @Validation
-    public ChecksResult validateIsArticleNotAvailable(ArticleStock article) {
-    	ChecksResult validations = ChecksResult.getNew();
-    	int maxSecondsWait = 2;
-	 	validations.add(
-			"Aparece la página correspondiente a la ficha del artículo " + article.getReference() + 
-			" (la esperamos hasta " + maxSecondsWait + " segundos)",
-			pageFicha.isFichaArticuloUntil(article.getReference(), maxSecondsWait), State.Defect);   
-	 	validations.add(
-			"No está disponible La talla <b>" + article.getSize() + "</b> del color <b>" + article.getColourCode() + "</b>",
-			!pageFicha.secDataProduct.isTallaAvailable(article.getSize(), pageFicha.getTypeFicha(), driver), State.Warn); 
-	 	return validations;
-    }        
+//    @Validation
+//    public ChecksResult validateIsFichaArtNoDisponible(String refArticulo) {
+//    	ChecksResult validations = ChecksResult.getNew();
+//	 	validations.add(
+//			"Aparece la página de resultado de una búsqueda KO",
+//			PageErrorBusqueda.isPage(driver), State.Warn);    	
+//	 	validations.add(
+//			"En el texto de resultado de la búsqueda aparece la referencia " + refArticulo,
+//			PageErrorBusqueda.isCabeceraResBusqueda(driver, refArticulo), State.Warn);    		 	
+//    	return validations;
+////    }
+//    
+//    @Validation
+//    public ChecksResult validateIsArticleNotAvailable(ArticleStock article) {
+//    	ChecksResult validations = ChecksResult.getNew();
+//    	int maxSecondsWait = 2;
+//	 	validations.add(
+//			"Aparece la página correspondiente a la ficha del artículo " + article.getReference() + 
+//			" (la esperamos hasta " + maxSecondsWait + " segundos)",
+//			pageFicha.isFichaArticuloUntil(article.getReference(), maxSecondsWait), State.Defect);   
+//	 	validations.add(
+//			"No está disponible La talla <b>" + article.getSize() + "</b> del color <b>" + article.getColourCode() + "</b>",
+//			!pageFicha.secDataProduct.isTallaAvailable(article.getSize(), pageFicha.getTypeFicha(), driver), State.Warn); 
+//	 	return validations;
+//    }        
     
     @Validation
     public ChecksResult validateIsFichaArtAlgunoColorNoDisponible(String refArticulo) {
@@ -206,29 +192,11 @@ public class PageFichaArtStpV {
         return (tallaSelected.compareTo(tallaCodNum)==0);
     }
     
-    /**
-     * Precondición: estamos en una ficha correspondiente a un artículo con algún color no disponible 
-     * Selección de un color no disponible + posterior selección de una talla (que necesariamente ha de estar no disponible)
-     */
-    public void selectColorAndTallaNoDisponible(ArticleStock artNoDisp) throws Exception {
-    	selectColorWithTallaNoDisp(artNoDisp);
-    	selectTallaNoDisp(artNoDisp);
-    }
-    
     @Step (
-    	description="Seleccionar el color <b>#{artNoDisp.getColourCode()}<b>", 
-	    expected="La talla #{artNoDisp.getSize()} no está disponible")
-    public void selectColorWithTallaNoDisp(ArticleStock artNoDisp) throws Exception {
-    	pageFicha.secDataProduct.selectColorWaitingForAvailability(artNoDisp.getColourCode(), driver);
-    }
-    
-    @Step (
-    	description="Seleccionar la talla <b>#{artNoDisp.getSize()} </b>", 
+    	description="Seleccionar la talla <b>#{codigoTalla} </b>", 
 	    expected="Aparece una capa de introducción email para aviso")
-    public void selectTallaNoDisp(ArticleStock artNoDisp) {
-	    pageFicha.secDataProduct.selectTallaByValue(artNoDisp.getSize(), pageFicha.getTypeFicha(), driver);
-	    
-	    //Validaciones
+    public void selectTallaNoDisp(String codigoTalla) {
+	    pageFicha.secDataProduct.selectTallaByValue(codigoTalla, pageFicha.getTypeFicha(), driver);
 	    checkAppearsCapaAvisame();
     }
     

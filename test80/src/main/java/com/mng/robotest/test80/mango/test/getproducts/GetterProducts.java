@@ -99,7 +99,6 @@ public class GetterProducts {
 		return null;
 	}
 	
-	//https://shop.mango.com/services/garments/67030573/looktotal?color=98
 	private GarmentDetails getTotalLookGarment(Garment garment) {
 		Color color = garment.getDefaultColor();
 		Client client = ClientBuilder.newClient();
@@ -117,12 +116,12 @@ public class GetterProducts {
 	public static class Builder {
 		private final String url;
 		private final String codigoPaisAlf;
-		private LineaType lineaType;
-		private String seccion;
-		private String galeria;
-		private String familia;
-		private Integer numProducts;
-		private Integer pagina;
+		private LineaType lineaType = LineaType.she;
+		private String seccion = "prendas";
+		private String galeria = "abrigos";
+		private String familia = "15";
+		private Integer numProducts = 10;
+		private Integer pagina = 1;
 		
 		public Builder(String url, String codigoPaisAlf) {
 			this.url = url;

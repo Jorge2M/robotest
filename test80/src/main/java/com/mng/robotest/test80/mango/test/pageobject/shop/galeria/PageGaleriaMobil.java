@@ -182,7 +182,7 @@ public class PageGaleriaMobil extends PageGaleria {
     @Override
     public ArticuloScreen getArticuloObject(int numArticulo) {
         WebElement artWElem = driver.findElements(By.xpath(XPathArticulo)).get(numArticulo-1);
-        ArticuloScreen articulo = new ArticuloScreen();
+        ArticuloScreen articulo = new ArticuloScreen(app);
         articulo.setReferencia(getRefArticulo(artWElem));
         articulo.setNombre(getNombreArticulo(artWElem));
         articulo.setPrecio(getPrecioArticulo(artWElem));

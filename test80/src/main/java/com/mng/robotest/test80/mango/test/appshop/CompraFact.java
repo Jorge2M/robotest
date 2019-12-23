@@ -21,9 +21,9 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
+import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
 import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigations;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
@@ -122,7 +122,7 @@ public class CompraFact {
 
         
         int maxArticlesAwayVale = 3;
-        List<ArticleStock> listArticles = UtilsTestMango.getArticlesForTest(dCtxSh, maxArticlesAwayVale, this.testVale);
+        List<Garment> listArticles = UtilsTestMango.getArticlesForTest(dCtxSh, maxArticlesAwayVale, this.testVale);
         if (!manyArticles) {
         	listArticles = Arrays.asList(listArticles.get(0));
         }

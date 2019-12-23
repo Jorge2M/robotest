@@ -11,11 +11,10 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
-import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock;
-import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
+import com.mng.robotest.test80.mango.test.getproducts.GetterProducts;
+import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFichaArtOld;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.Slider;
@@ -43,6 +42,16 @@ public class FichaProducto {
 	
 	private final static Pais españa = PaisGetter.get(PaisShop.España);
 	private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
+	
+	private static GetterProducts getterProductsEspaña;
+	
+	public FichaProducto() throws Exception {
+		if (getterProductsEspaña!=null) {
+			InputParamsMango inputParams = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+			Pais españa = PaisGetter.get(PaisShop.España);
+			getterProductsEspaña = new GetterProducts.Builder(inputParams.getDnsUrlAcceso(), españa.getCodigo_alf()).build();
+		}
+	}
 
 	private DataCtxShop getCtxShForTest() throws Exception {
 		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
@@ -53,30 +62,31 @@ public class FichaProducto {
 		return dCtxSh;
 	}
 	
-    @Test (
-        groups={"FichaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
-        description="[Usuario registrado] Se testean las features principales de una ficha con origen el buscador: añadir a la bolsa, selección color/talla, buscar en tienda, añadir a favoritos")
-    public void FIC001_FichaFromSearch_PrimaryFeatures_Reg() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        dCtxSh.pais=españa;
-        dCtxSh.idioma=castellano;
-        UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-        dCtxSh.userConnected = userShop.user;
-        dCtxSh.passwordUser = userShop.password;
-        dCtxSh.userRegistered=true;
-        
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, driver);
-        ArticleStock articleWithColors = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithMoreOneColour, dCtxSh);
-        SecBuscadorStpV.searchArticuloAndValidateBasic(articleWithColors, dCtxSh, driver);
-        
-        PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
-        boolean isTallaUnica = pageFichaStpv.selectAnadirALaBolsaTallaPrevNoSelected();
-        
-        ArticuloScreen articulo = new ArticuloScreen(articleWithColors);
-        pageFichaStpv.selectColorAndSaveData(articulo);
-        pageFichaStpv.selectTallaAndSaveData(articulo);
-        
+	@Test (
+		groups={"FichaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
+		description="[Usuario registrado] Se testean las features principales de una ficha con origen el buscador: añadir a la bolsa, selección color/talla, buscar en tienda, añadir a favoritos")
+	public void FIC001_FichaFromSearch_PrimaryFeatures_Reg() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest();
+		dCtxSh.pais=españa;
+		dCtxSh.idioma=castellano;
+		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
+		dCtxSh.userConnected = userShop.user;
+		dCtxSh.passwordUser = userShop.password;
+		dCtxSh.userRegistered=true;
+
+		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, true, driver);
+
+		Garment articleWithColors = getterProductsEspaña.getWithManyColors().get(0);
+		SecBuscadorStpV.searchArticulo(articleWithColors, dCtxSh, driver);
+
+		PageFichaArtStpV pageFichaStpv = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
+		boolean isTallaUnica = pageFichaStpv.selectAnadirALaBolsaTallaPrevNoSelected();
+
+		ArticuloScreen articulo = new ArticuloScreen(articleWithColors);
+		pageFichaStpv.selectColorAndSaveData(articulo);
+		pageFichaStpv.selectTallaAndSaveData(articulo);
+
         //Si es talla única -> Significa que lo dimos de alta en la bolsa cuando seleccionamos el click "Añadir a la bolsa"
         //-> Lo damos de baja
         if (isTallaUnica) {
@@ -98,7 +108,7 @@ public class FichaProducto {
     @SuppressWarnings("static-access")
     @Test (
         groups={"FichaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
-        description="[Usuario no registrado] Se testean las features secundarias de una ficha con origen el buscador: guía de tallas, carrusel imágenes, imagen central, panel de opciones")
+        description="[Usuario no registrado] Se testean las features secundarias de una ficha con origen el buscador: guía de tallas, carrusel imágenes, imagen central, panel de opciones, total look")
     public void FIC002_FichaFromSearch_SecondaryFeatures_NoReg() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
@@ -107,7 +117,8 @@ public class FichaProducto {
         dCtxSh.idioma=this.castellano;
 
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
-        SecBuscadorStpV.searchArticuloAndValidateBasic(TypeArticleStock.articlesWithTotalLook, dCtxSh, driver);
+        Garment articleWithTotalLook = getterProductsEspaña.getOneWithTotalLook();
+        SecBuscadorStpV.searchArticulo(articleWithTotalLook, dCtxSh, driver);
         
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         if (pageFichaStpV.getFicha().getTypeFicha()==TypeFicha.Old) {
@@ -133,10 +144,12 @@ public class FichaProducto {
         } else {
             boolean isFichaAccesorio = pageFichaStpV.getFicha().isFichaAccesorio(); 
             pageFichaStpV.secFotosNew.validaLayoutFotosNew(isFichaAccesorio, driver);
+            pageFichaStpV.secTotalLook.checkIsVisible(driver);
             pageFichaStpV.secBolsaButtonAndLinksNew.selectEnvioYDevoluciones(driver);
             pageFichaStpV.modEnvioYdevol.clickAspaForClose(driver);
             pageFichaStpV.secBolsaButtonAndLinksNew.selectDetalleDelProducto(dCtxSh.appE, LineaType.she, driver);
             pageFichaStpV.secBolsaButtonAndLinksNew.selectLinkCompartir(dCtxSh.pais.getCodigo_pais(), driver);
+
         }
             
         pageFichaStpV.selectGuiaDeTallas(dCtxSh.appE);
@@ -182,23 +195,6 @@ public class FichaProducto {
         
         pageFichaStpV.selectLinkNavigation(ProductNav.Next, dCtxSh, dataArtOrigin.getReferencia());
         pageFichaStpV.selectLinkNavigation(ProductNav.Prev, dCtxSh, dataArtOrigin.getReferencia());
-    }
-    
-    @Test (
-        groups={"FichaProducto", "Canal:desktop_App:shop,outlet"}, 
-        alwaysRun=true, description="[Usario no registrado] Testeo ficha con artículo con color y tallas no disponibles")
-    public void FIC004_Articulo_NoStock_Noreg() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        dCtxSh.pais=españa;
-        dCtxSh.idioma=castellano;
-        dCtxSh.userRegistered = false;
-                    
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
-        ArticleStock articulo = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithoutStock, dCtxSh);
-        SecBuscadorStpV.searchArticuloAndValidateBasic(articulo, dCtxSh, driver);
-        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
-        pageFichaStpV.selectColorAndTallaNoDisponible(articulo);
     }
     
     @Test (

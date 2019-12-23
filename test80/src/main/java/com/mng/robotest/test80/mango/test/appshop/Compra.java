@@ -21,11 +21,10 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
-import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
-import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock;
-import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
+import com.mng.robotest.test80.mango.test.getproducts.GetterProducts;
+import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
 import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputData.Importe;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.footer.SecFooter.FooterLink;
@@ -308,11 +307,10 @@ public class Compra {
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
         
         //Alta artículos en la bolsa
-        ArrayList<ArticleStock> listParaAlta = new ArrayList<>();
-        ArticleStock article = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithMoreOneColour, dCtxSh);
-        listParaAlta.add(article);
+		GetterProducts getterProductsColombia = new GetterProducts.Builder(dCtxSh.getDnsUrlAcceso(), colombia.getCodigo_alf()).build();
+        List<Garment> productsToAddBolsa = Arrays.asList(getterProductsColombia.getAll().get(0));
         DataBag dataBag = new DataBag(); 
-        SecBolsaStpV.altaListaArticulosEnBolsa(listParaAlta, dataBag, dCtxSh, driver);
+        SecBolsaStpV.altaListaArticulosEnBolsa(productsToAddBolsa, dataBag, dCtxSh, driver);
         
         //Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
         FlagsTestCkout FTCkout = new FlagsTestCkout();

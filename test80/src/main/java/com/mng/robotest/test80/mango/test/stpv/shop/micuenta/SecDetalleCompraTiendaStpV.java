@@ -5,6 +5,7 @@ import com.mng.testmaker.conf.State;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraTienda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.SecDetalleCompraTienda;
@@ -65,7 +66,7 @@ public class SecDetalleCompraTiendaStpV {
     	description="Seleccionar el #{posArticulo}o artículo de la Compra", 
         expected="Aparece la sección correspondiente al \"QuickView\" del artículo")
     public void selectArticulo(int posArticulo, PageMisComprasStpV pageMisComprasStpV) {
-        ArticuloScreen articulo = secDetalleCompraTienda.getDataArticulo(posArticulo);
+        ArticuloScreen articulo = secDetalleCompraTienda.getDataArticulo(posArticulo, AppEcom.shop);
         secDetalleCompraTienda.selectArticulo(posArticulo);
         pageMisComprasStpV.getSecQuickViewArticulo().validateIsOk(articulo);
     }

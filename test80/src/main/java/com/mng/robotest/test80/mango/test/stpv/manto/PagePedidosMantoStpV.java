@@ -104,11 +104,12 @@ public class PagePedidosMantoStpV {
 		description="Buscamos pedidos con id registro para obtener información del cliente",
 		expected="Debemos obtener la información del cliente",
 		saveErrorData=SaveWhen.Never)
-	public static DataPedido getDataPedido(DataPedido dPedidoPrueba, WebDriver driver) throws Exception {
+	public static DataPedido getDataPedido(DataPedido dPedidoPrueba, AppEcom app, WebDriver driver) 
+	throws Exception {
 		DataBag dBagPrueba = new DataBag();
 		List<String> referencias = PageDetallePedido.getReferenciasArticulosDetallePedido(driver);
 		for (String referencia : referencias) {
-			ArticuloScreen articulo = new ArticuloScreen();
+			ArticuloScreen articulo = new ArticuloScreen(app);
 			articulo.setReferencia(referencia);
 			dBagPrueba.addArticulo(articulo);
 		}

@@ -116,7 +116,7 @@ public class SecDataProduct extends WebdrvWrapp {
     }
     
     public static ArticuloScreen getArticuloObject(Channel channel, AppEcom app, TypeFicha typeFicha, WebDriver driver) {
-        ArticuloScreen articulo = new ArticuloScreen();
+        ArticuloScreen articulo = new ArticuloScreen(app);
         articulo.setReferencia(getReferenciaProducto(driver));
         articulo.setNombre(getTituloArt(channel, driver));
         articulo.setPrecio(getPrecioFinalArticulo(driver));

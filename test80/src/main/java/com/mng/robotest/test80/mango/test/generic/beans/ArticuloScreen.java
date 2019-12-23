@@ -2,45 +2,50 @@ package com.mng.robotest.test80.mango.test.generic.beans;
 
 import java.util.ArrayList;
 
-import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 
 public class ArticuloScreen {
 	
-    String referencia = "";
-    String nombre = "";
-    String colorName = "";
-    String codigoColor = "";
-    String tallaAlf = "";
-    String tallaNum = "";
-    String precio = "";
-    String precioSinDesc = "";
-    ValePais valePais=null;
+	String referencia = "";
+	String nombre = "";
+	String colorName = "";
+	String codigoColor = "";
+	String tallaAlf = "";
+	String tallaNum = "";
+	String precio = "";
+	String precioSinDesc = "";
+	ValePais valePais=null;
+	AppEcom app;
 
-    int numero = 1;
+	int numero = 1;
 	
-    public ArticuloScreen() {}
-    
-    public ArticuloScreen(ArticleStock articleStock) {
-        this.referencia = articleStock.getReference();
-        this.codigoColor = articleStock.getColourCode();
-        if ("99".compareTo(articleStock.getSize())==0) {
-        	this.tallaNum = UtilsTestMango.getCodigoTallaUnica(articleStock.getApp());
-        } else {
-        	this.tallaNum = articleStock.getSize();
-        }
-        this.valePais = articleStock.getValePais();
-    }
-    
-    public String getReferencia() {
-        return this.referencia.trim();
-    }
+	public ArticuloScreen(AppEcom app) {
+		this.app = app;
+	}
+
+	public ArticuloScreen(Garment articleStock) {
+		this.referencia = articleStock.getGarmentId();
+		this.codigoColor = articleStock.getDefaultColor().getId();
+		String talla = articleStock.getDefaultColor().getSizeWithMoreStock();
+		if ("99".compareTo(talla)==0) {
+			this.tallaNum = UtilsTestMango.getCodigoTallaUnica(app);
+		} else {
+			this.tallaNum = talla;
+		}
+		this.valePais = articleStock.getValePais();
+	}
+
+	public String getReferencia() {
+		return this.referencia.trim();
+	}
 	
-    public String getRefProducto() {
-        return (getReferencia().substring(0, 8));
-    }
+	public String getRefProducto() {
+		return (getReferencia().substring(0, 8));
+	}
 	
     public void setReferencia(String referencia) {
         this.referencia = referencia;

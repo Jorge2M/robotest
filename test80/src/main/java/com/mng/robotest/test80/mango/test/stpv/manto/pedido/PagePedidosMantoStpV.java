@@ -114,7 +114,7 @@ public class PagePedidosMantoStpV {
 		ArticuloScreen articulo;
 		referencias = PageDetallePedido.getReferenciasArticulosDetallePedido(driver);
 		for (String referencia : referencias) {
-			articulo = new ArticuloScreen();
+			articulo = new ArticuloScreen(AppEcom.shop);
 			articulo.setReferencia(referencia);
 			dBagPrueba.addArticulo(articulo);
 		}

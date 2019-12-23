@@ -24,9 +24,8 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Sublinea.SublineaNinosType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.generic.stackTrace;
-import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
-import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock;
-import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
+import com.mng.robotest.test80.mango.test.getproducts.GetterProducts;
+import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
 import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBannersScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
@@ -484,9 +483,11 @@ public class SecMenusDesktopStpV {
         expected=
         	"Aparece la ficha del producto " + tagRefArticle)
     public static void checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	ArticleStock articulo = ManagerArticlesStock.getArticleStock(TypeArticleStock.articlesWithMoreOneColour, dCtxSh);
-    	TestMaker.getCurrentStepInExecution().replaceInDescription(tagRefArticle, articulo.getReference());
-    	TestMaker.getCurrentStepInExecution().replaceInExpected(tagRefArticle, articulo.getReference());
+    	
+    	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.getDnsUrlAcceso(), pais.getCodigo_alf()).build();
+    	Garment articulo = getterProducts.getAll().get(0);
+    	TestMaker.getCurrentStepInExecution().replaceInDescription(tagRefArticle, articulo.getGarmentId());
+    	TestMaker.getCurrentStepInExecution().replaceInExpected(tagRefArticle, articulo.getGarmentId());
     	
         URI uri = new URI(driver.getCurrentUrl());
         String tiendaId = "she";
@@ -496,11 +497,11 @@ public class SecMenusDesktopStpV {
         
         String urlAccesoCorreo = 
         	uri.getScheme() + "://" + uri.getHost() + "/redirect.faces?op=conta&tiendaid=" + tiendaId + "&pais=" + pais.getCodigo_pais() + 
-        	"&producto=" + articulo.getReference() + "&color=" + articulo.getColourCode() ;
+        	"&producto=" + articulo.getGarmentId() + "&color=" + articulo.getDefaultColor().getId() ;
         TestMaker.getCurrentStepInExecution().replaceInDescription(tagUrlAcceso, urlAccesoCorreo);
         driver.navigate().to(urlAccesoCorreo);
 
-        DataFichaArt datosArticulo = new DataFichaArt(articulo.getReference(), "");
+        DataFichaArt datosArticulo = new DataFichaArt(articulo.getGarmentId(), "");
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         pageFichaStpV.validaDetallesProducto(datosArticulo);
     }

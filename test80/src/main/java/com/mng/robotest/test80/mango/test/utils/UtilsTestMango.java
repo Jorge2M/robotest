@@ -12,9 +12,8 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.beans.FactoryVale;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais.EffectToArticle;
-import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
-import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock;
-import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
+import com.mng.robotest.test80.mango.test.getproducts.GetterProducts;
+import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
 
 
 public class UtilsTestMango {
@@ -84,15 +83,14 @@ public class UtilsTestMango {
 	}
 	
 	static int maxArticles = 99;
-	public static List<ArticleStock> getArticlesForTest(DataCtxShop dCtxSh) throws Exception {
+	public static List<Garment> getArticlesForTest(DataCtxShop dCtxSh) throws Exception {
 		return (getArticlesForTestDependingVale(dCtxSh, maxArticles));
 	}
 	
-	public static List<ArticleStock> getArticlesForTest(DataCtxShop dCtxSh, int maxArticlesAwayVale, boolean withValeTest) 
+	public static List<Garment> getArticlesForTest(DataCtxShop dCtxSh, int maxArticlesAwayVale, boolean withValeTest) 
 	throws Exception {
 		ValePais valeTest = null;
 		if (withValeTest) {
-			//valeTest = FactoryVale.makeValeTest(dCtxSh.pais.getCodigo_alf());
 			valeTest = FactoryVale.makeValeTest(dCtxSh.pais.getCodigo_pais());
 			dCtxSh.vale = valeTest;
 		}
@@ -100,12 +98,12 @@ public class UtilsTestMango {
 		return (getArticlesForTestDependingVale(dCtxSh, maxArticlesAwayVale));
 	}
 	
-	public static List<ArticleStock> getArticlesForTestDependingVale(DataCtxShop dCtxSh) throws Exception {
+	public static List<Garment> getArticlesForTestDependingVale(DataCtxShop dCtxSh) throws Exception {
 		return (getArticlesForTestDependingVale(dCtxSh, maxArticles));
 	}
 	
-    public static List<ArticleStock> getArticlesForTestDependingVale(DataCtxShop dCtxSh, int maxArticlesAwayVale) throws Exception {
-    	ArrayList<ArticleStock> listArticles;
+    public static List<Garment> getArticlesForTestDependingVale(DataCtxShop dCtxSh, int maxArticlesAwayVale) throws Exception {
+    	List<Garment> listArticles;
     	if (dCtxSh.vale!=null) {
     		listArticles = dCtxSh.vale.getArticlesFromVale();
     		if (listArticles.size()>0) {
@@ -113,8 +111,11 @@ public class UtilsTestMango {
     		}
     	}
     	
-    	ManagerArticlesStock managerArticles = new ManagerArticlesStock(dCtxSh.appE, dCtxSh.urlAcceso, maxArticlesAwayVale);
-    	listArticles = managerArticles.getArticles(dCtxSh.pais.getCodigo_pais(), TypeArticleStock.articlesWithMoreOneColour);
+    	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.getDnsUrlAcceso(), dCtxSh.pais.getCodigo_alf())
+    			.numProducts(maxArticlesAwayVale)
+    			.build();
+    	
+    	listArticles = getterProducts.getAll();
         if (dCtxSh.vale!=null) {
         	List<String> listReferences = getListArticleReferences(listArticles);
         	FactoryVale.setArticlesToVale(dCtxSh.vale, listReferences, EffectToArticle.aplica);
@@ -127,10 +128,10 @@ public class UtilsTestMango {
         return listArticles;
     }
     
-    private static List<String> getListArticleReferences(ArrayList<ArticleStock> listArticles) {
+    private static List<String> getListArticleReferences(List<Garment> listArticles) {
     	List<String> listReferences = new ArrayList<>();
-    	for (ArticleStock article : listArticles)
-    		listReferences.add(article.getReference());
+    	for (Garment article : listArticles)
+    		listReferences.add(article.getGarmentId());
     	
     	return listReferences;
     }

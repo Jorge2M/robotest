@@ -54,10 +54,17 @@ public class MatcherWithMethodParams {
 	}
 
 	private String getStringFromParameter(TagData tagData, Object parameter) throws Exception {
-		if ("".compareTo(tagData.methodWithoutParams)!=0) {
+		if ("".compareTo(tagData.methodWithoutParams1)!=0) {
 			for (Method methodFromParam : parameter.getClass().getMethods()) {
-				if (tagData.methodWithoutParams.compareTo(methodFromParam.getName())==0) {
-					return (methodFromParam.invoke(parameter).toString());
+				if (tagData.methodWithoutParams1.compareTo(methodFromParam.getName())==0) {
+					if ("".compareTo(tagData.methodWithoutParams2)==0) {
+						return (methodFromParam.invoke(parameter).toString());
+					}
+					for (Method methodFromClassReturnLevel1 : methodFromParam.getReturnType().getMethods()) {
+						if (tagData.methodWithoutParams2.compareTo(methodFromClassReturnLevel1.getName())==0) {
+							return (methodFromClassReturnLevel1.invoke(methodFromParam).toString());
+						}
+					}
 				}
 			}
 		}
@@ -69,18 +76,27 @@ public class MatcherWithMethodParams {
 	 * Obtiene los datos de un String del tipo "parametroX.methodY()";
 	 *
 	 */
-	class TagData {
+	public static class TagData {
 		public String nameParameter = "";
-		public String methodWithoutParams = "";
+		public String methodWithoutParams1 = "";
+		public String methodWithoutParams2 = "";
 
-		private TagData(String varAndMethod) {
-			Pattern p = Pattern.compile("(.*)\\.(.*)\\(\\)");
+		public TagData(String varAndMethod) {
+			Pattern p = Pattern.compile("(.*)\\.(.*)\\(\\)\\.(.*)\\(\\)");
 			Matcher m = p.matcher(varAndMethod);
 			if (m.find()) {
 				nameParameter = m.group(1);
-				methodWithoutParams = m.group(2).replace(")","").replace("(","");
+				methodWithoutParams1 = m.group(2).replace(")","").replace("(","");
+				methodWithoutParams2 = m.group(3).replace(")","").replace("(","");
 			} else {
-				nameParameter = varAndMethod;
+				p = Pattern.compile("(.*)\\.(.*)\\(\\)");
+				m = p.matcher(varAndMethod);
+				if (m.find()) {
+					nameParameter = m.group(1);
+					methodWithoutParams1 = m.group(2).replace(")","").replace("(","");
+				} else {
+					nameParameter = varAndMethod;
+				}
 			}
 		}
 	}

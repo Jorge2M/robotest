@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
@@ -22,9 +21,8 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
-import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock;
-import com.mng.robotest.test80.mango.test.getdata.productos.ManagerArticlesStock.TypeArticleStock;
+import com.mng.robotest.test80.mango.test.getproducts.GetterProducts;
+import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.ValidatorContentBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.LineasArticuloBolsa.DataArtBolsa;
@@ -92,20 +90,19 @@ public class SecBolsaStpV {
     	return (SecBolsa.isInStateUntil(stateBolsaExpected, channel, maxSecondsWait, driver));
     }
     
-    public static void altaArticlosConColores(int numArticulos, DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) 
-    throws Exception {
-    	ManagerArticlesStock managerArticles = new ManagerArticlesStock(dCtxSh.appE, dCtxSh.urlAcceso, numArticulos);
-    	List<ArticleStock> listArticles = managerArticles.getArticles(dCtxSh.pais.getCodigo_pais(), TypeArticleStock.articlesWithMoreOneColour);
-        List<ArticleStock> listParaAlta = listArticles.subList(0, numArticulos);
-        altaListaArticulosEnBolsa(listParaAlta, dataBag, dCtxSh, driver);
-    }
+	public static void altaArticlosConColores(int numArticulos, DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) 
+	throws Exception {
+		GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh.getDnsUrlAcceso(), dCtxSh.pais.getCodigo_alf()).build();
+		List<Garment> listParaAlta = getterProducts.getWithManyColors().subList(0, numArticulos);
+		altaListaArticulosEnBolsa(listParaAlta, dataBag, dCtxSh, driver);
+	}
     
     /**
      * Define los pasos/validaciones para dar de alta una lista de artículos en la bolsa
      * @param listParaAlta lista de artículos que hay que dar de alta
      * @param listArtEnBolsa lista total de artículos que hay en la bolsa (y en la que se añadirán los nuevos)
      */
-    public static void altaListaArticulosEnBolsa(List<ArticleStock> listArticlesForAdd, DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) 
+    public static void altaListaArticulosEnBolsa(List<Garment> listArticlesForAdd, DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
         if (listArticlesForAdd!=null && !listArticlesForAdd.isEmpty()) {
             altaBolsaArticulos(listArticlesForAdd, dataBag, dCtxSh, driver);
@@ -123,11 +120,11 @@ public class SecBolsaStpV {
         expected="Los productos se dan de alta en la bolsa correctamente",
         saveHtmlPage=SaveWhen.Always,
         saveNettraffic=SaveWhen.Always)
-    public static void altaBolsaArticulos(List<ArticleStock> listParaAlta, DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) 
+    public static void altaBolsaArticulos(List<Garment> listParaAlta, DataBag dataBag, DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
     	includeListaArtInTestCaseDescription(listParaAlta);
         for (int i=0; i<listParaAlta.size(); i++) {
-            ArticleStock artTmp = listParaAlta.get(i);
+            Garment artTmp = listParaAlta.get(i);
             ArticuloScreen articulo = UtilsMangoTest.addArticuloBolsa(artTmp, dCtxSh.appE, dCtxSh.channel, driver);
             if (artTmp.isVale()) {
                 articulo.setVale(artTmp.getValePais());
@@ -142,12 +139,12 @@ public class SecBolsaStpV {
         }
     }
     
-    private static void includeListaArtInTestCaseDescription(List<ArticleStock> listParaAlta) {
+    private static void includeListaArtInTestCaseDescription(List<Garment> listParaAlta) {
         //Obtener el literal con la lista de artículos a dar de alta en la bolsa
         String listaArtStr = "";
         for (int i=0; i<listParaAlta.size(); i++) {
-            ArticleStock artTmp = listParaAlta.get(i);
-            listaArtStr = listaArtStr + artTmp.getReference();
+            Garment artTmp = listParaAlta.get(i);
+            listaArtStr = listaArtStr + artTmp.getGarmentId();
             if (artTmp.isVale()) {
                 listaArtStr = listaArtStr + " (le aplica el vale " + artTmp.getValePais().getCodigoVale() + ")";
             }

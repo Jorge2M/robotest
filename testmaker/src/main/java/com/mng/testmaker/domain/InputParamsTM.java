@@ -1,5 +1,7 @@
 package com.mng.testmaker.domain;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -366,6 +368,10 @@ public abstract class InputParamsTM {
 	public void setUrlBase(String urlBase) {
 		this.url = urlBase;
 	}
+    public String getDnsUrlAcceso() throws URISyntaxException {
+        URI uri = new URI(getUrlBase());
+        return (uri.getScheme() + "://" + uri.getHost());
+    }
 	public WebDriverType getWebDriverType() {
 		return (WebDriverType.valueOf(browser));
 	}

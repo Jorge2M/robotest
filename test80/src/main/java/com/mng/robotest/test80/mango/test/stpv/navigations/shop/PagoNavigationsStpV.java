@@ -33,7 +33,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago.TypePago;
 import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
-import com.mng.robotest.test80.mango.test.getdata.productos.ArticleStock;
+import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1EnvioCheckoutMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
@@ -82,7 +82,7 @@ public class PagoNavigationsStpV {
         }
         
         int maxArticlesAwayVale = 2;
-        List<ArticleStock> listArticles = UtilsTestMango.getArticlesForTestDependingVale(dCtxSh, maxArticlesAwayVale);
+        List<Garment> listArticles = UtilsTestMango.getArticlesForTestDependingVale(dCtxSh, maxArticlesAwayVale);
         DataBag dataBag = dCtxPago.getDataPedido().getDataBag();
         SecBolsaStpV.altaListaArticulosEnBolsa(listArticles, dataBag, dCtxSh, driver);
         dCtxPago.getFTCkout().testCodPromocional = true;
