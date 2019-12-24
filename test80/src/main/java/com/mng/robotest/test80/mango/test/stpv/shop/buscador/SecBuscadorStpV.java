@@ -32,11 +32,11 @@ public class SecBuscadorStpV {
 		pageFichaStpV.validateIsFichaAccordingTypeProduct(product);
 	}
 
-    @Step (
-    	description="Introducir la categoría de producto <b>#{categoriaABuscar} </b>(existe categoría: #{categoriaExiste})</b>", 
-        expected="El resultado de la búsqueda es el correcto :-)")
-    public static void busquedaCategoriaProducto(String categoriaABuscar, boolean categoriaExiste, AppEcom app, 
-    											 Channel channel, WebDriver driver) throws Exception {
+	@Step (
+		description="Introducir la categoría de producto <b>#{categoriaABuscar} </b>(existe categoría: #{categoriaExiste})</b>", 
+		expected="El resultado de la búsqueda es el correcto :-)")
+	public static void busquedaCategoriaProducto(String categoriaABuscar, boolean categoriaExiste, AppEcom app, 
+												 Channel channel, WebDriver driver) throws Exception {
     	SecCabecera.buscarTexto(categoriaABuscar, channel, app, driver);
     	PageGaleria pageGaleria = (PageGaleria)PageGaleria.getInstance(channel, app, driver); 
         WebdrvWrapp.waitForPageLoaded(driver);    

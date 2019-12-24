@@ -40,7 +40,7 @@ public class PageIdentificacion extends WebdrvWrapp {
 
 	public static void inputUserPassword(String usuario, String password, WebDriver driver) throws Exception {
 		driver.findElement(By.xpath(XPathInputUser)).sendKeys(usuario);
-		waitMillis(250);
+		waitMillis(500);
 		driver.findElement(By.xpath(XPathInputPassword)).sendKeys(password);
 //        sendKeysWithRetry(2, usuario, By.xpath(XPathInputUser), driver);
 //        sendKeysWithRetry(2, password, By.xpath(XPathInputPassword), driver);
