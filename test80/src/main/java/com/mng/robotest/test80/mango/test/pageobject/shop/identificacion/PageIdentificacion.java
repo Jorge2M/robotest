@@ -39,8 +39,11 @@ public class PageIdentificacion extends WebdrvWrapp {
 	}
 
 	public static void inputUserPassword(String usuario, String password, WebDriver driver) throws Exception {
-		driver.findElement(By.xpath(XPathInputUser)).sendKeys(usuario);
-		waitMillis(250);
+		By inputUserBy = By.xpath(XPathInputUser);
+		driver.findElement(inputUserBy).clear();
+		waitMillis(200);
+		driver.findElement(inputUserBy).sendKeys(usuario);
+		waitMillis(200);
 		driver.findElement(By.xpath(XPathInputPassword)).sendKeys(password);
 //        sendKeysWithRetry(2, usuario, By.xpath(XPathInputUser), driver);
 //        sendKeysWithRetry(2, password, By.xpath(XPathInputPassword), driver);
