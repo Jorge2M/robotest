@@ -26,7 +26,7 @@ public class SecBuscadorStpV {
 		expected="Aparece la ficha del producto")
 	public static void searchArticulo(Garment product, DataCtxShop dCtxSh, WebDriver driver) 
 	throws Exception {
-		ArticuloNavigations.buscarArticulo(product, dCtxSh.channel, dCtxSh.appE, driver);
+		ArticuloNavigations.buscarArticulo(product.getOneWithStock(), dCtxSh.channel, dCtxSh.appE, driver);
 		WebdrvWrapp.waitForPageLoaded(driver);  
 		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
 		pageFichaStpV.validateIsFichaAccordingTypeProduct(product);

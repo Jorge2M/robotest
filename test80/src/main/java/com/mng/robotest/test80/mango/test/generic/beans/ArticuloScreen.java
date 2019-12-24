@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
+import com.mng.robotest.test80.mango.test.getproducts.data.Garment.Article;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
@@ -27,16 +28,17 @@ public class ArticuloScreen {
 		this.app = app;
 	}
 
-	public ArticuloScreen(Garment articleStock) {
+	public ArticuloScreen(Garment productStock) {
+		Article articleStock = productStock.getOneWithStock();
 		this.referencia = articleStock.getGarmentId();
-		this.codigoColor = articleStock.getDefaultColor().getId();
-		String talla = articleStock.getDefaultColor().getSizeWithMoreStock();
+		this.codigoColor = articleStock.getColor().getId();
+		String talla = String.valueOf(articleStock.getSize().getId());
 		if ("99".compareTo(talla)==0) {
 			this.tallaNum = UtilsTestMango.getCodigoTallaUnica(app);
 		} else {
 			this.tallaNum = talla;
 		}
-		this.valePais = articleStock.getValePais();
+		this.valePais = productStock.getValePais();
 	}
 
 	public String getReferencia() {

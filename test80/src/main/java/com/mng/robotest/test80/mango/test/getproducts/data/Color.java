@@ -10,7 +10,7 @@ public class Color {
 	private int stock;
 	private List<Size> sizes;
 	
-	public String getSizeWithMoreStock() {
+	public Size getSizeWithMoreStock() {
 		int maxStock = 0;
 		Size sizeCandidate = null;
 		for (Size size : getSizes()) {
@@ -19,7 +19,7 @@ public class Color {
 				maxStock = size.getStock();
 			}
 		}
-		return sizeCandidate.getLabel();
+		return sizeCandidate;
 	}
 	
 	public String getId() {

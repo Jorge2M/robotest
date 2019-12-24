@@ -26,8 +26,8 @@ public class ValePais {
 	List<Garment> listExamplesArtNoAplica = new ArrayList<>();
 	Campanya campanya;
 
-	public ArrayList<Garment> getArticlesFromVale() {
-		ArrayList<Garment> listArticlesReturn = new ArrayList<>();
+	public List<Garment> getArticlesFromVale() {
+		List<Garment> listArticlesReturn = new ArrayList<>();
 		listArticlesReturn.addAll(getListExamplesArtNoAplica());
 		for (Garment articleStock : getListExamplesArtSiAplica()) {
 			articleStock.setValePais(this);

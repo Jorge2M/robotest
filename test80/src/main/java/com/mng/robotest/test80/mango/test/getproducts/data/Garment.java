@@ -17,7 +17,16 @@ public class Garment {
 		this.garmentId = garmentId;
 	}
 	
-	public Color getDefaultColor() {
+	public Article getOneWithStock() {
+		Article articulo = new Article();
+		articulo.setGarmentId(garmentId);
+		Color colorDefault = getDefaultColor();
+		articulo.setColor(colorDefault);
+		articulo.setSize(colorDefault.getSizeWithMoreStock());
+		return articulo;
+	}
+	
+	private Color getDefaultColor() {
 		for (Color color : colors) {
 			if (color.isDefaultColor()) {
 				return color;
@@ -53,5 +62,30 @@ public class Garment {
 	}
 	public boolean isVale() {
 		return valePais!=null;
+	}
+	
+	public static class Article {
+		String garmentId;
+		Color color;
+		Size size;
+		
+		public String getGarmentId() {
+			return garmentId;
+		}
+		public void setGarmentId(String garmentId) {
+			this.garmentId = garmentId;
+		}
+		public Color getColor() {
+			return color;
+		}
+		public void setColor(Color color) {
+			this.color = color;
+		}
+		public Size getSize() {
+			return size;
+		}
+		public void setSize(Size size) {
+			this.size = size;
+		}
 	}
 }

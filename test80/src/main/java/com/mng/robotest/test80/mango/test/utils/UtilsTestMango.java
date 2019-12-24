@@ -1,6 +1,5 @@
 package com.mng.robotest.test80.mango.test.utils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,7 +10,6 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.beans.FactoryVale;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
-import com.mng.robotest.test80.mango.test.generic.beans.ValePais.EffectToArticle;
 import com.mng.robotest.test80.mango.test.getproducts.GetterProducts;
 import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
 
@@ -27,41 +25,41 @@ public class UtilsTestMango {
 			pais.getTiendasOnlineList().contains(appE));
 	}
 
-    public static String getSaleTraduction(IdiomaPais idioma) {
-        switch (idioma.getCodigo().name()) {
-        case "ES":
-            return "REBAJAS";
-        case "AR": 
-            return "تنزيلات";
-        case "HU":
-            return "AKCIÓ";
-        case "HR":
-            return "SEZONSKO";
-        case "RO":
-            return "PROMOȚIE";
-        default:
-            return "SALE";
-        }        
-    }
-    
-    public static String getPercentageSymbol(IdiomaPais idioma) {
-        switch (idioma.getCodigo().name()) {
-        case "ZH": 
-            return "折";
-        default:
-            return "%";
-        }
-    }
-    
-    public static String getSetenta(IdiomaPais idioma) {
-        switch (idioma.getCodigo().name()) {
-        case "AR": 
-            return "٧٠";
-        case "ES":
-        	default:
-            return "70";
-        }
-    }
+	public static String getSaleTraduction(IdiomaPais idioma) {
+		switch (idioma.getCodigo().name()) {
+		case "ES":
+			return "REBAJAS";
+		case "AR": 
+			return "تنزيلات";
+		case "HU":
+			return "AKCIÓ";
+		case "HR":
+			return "SEZONSKO";
+		case "RO":
+			return "PROMOȚIE";
+		default:
+			return "SALE";
+		}
+	}
+
+	public static String getPercentageSymbol(IdiomaPais idioma) {
+		switch (idioma.getCodigo().name()) {
+		case "ZH": 
+			return "折";
+		default:
+			return "%";
+		}
+	}
+
+	public static String getSetenta(IdiomaPais idioma) {
+		switch (idioma.getCodigo().name()) {
+		case "AR": 
+			return "٧٠";
+		case "ES":
+		default:
+			return "70";
+		}
+	}
     
     public static boolean textContainsPercentage(String text, IdiomaPais idioma) {
         String percentageSymbol = getPercentageSymbol(idioma);
@@ -103,11 +101,11 @@ public class UtilsTestMango {
 	}
 	
     public static List<Garment> getArticlesForTestDependingVale(DataCtxShop dCtxSh, int maxArticlesAwayVale) throws Exception {
-    	List<Garment> listArticles;
+    	List<Garment> listProducts;
     	if (dCtxSh.vale!=null) {
-    		listArticles = dCtxSh.vale.getArticlesFromVale();
-    		if (listArticles.size()>0) {
-    			return listArticles;
+    		listProducts = dCtxSh.vale.getArticlesFromVale();
+    		if (listProducts.size()>0) {
+    			return listProducts;
     		}
     	}
     	
@@ -115,33 +113,25 @@ public class UtilsTestMango {
     			.numProducts(maxArticlesAwayVale)
     			.build();
     	
-    	listArticles = getterProducts.getAll();
+    	listProducts = getterProducts.getAll();
         if (dCtxSh.vale!=null) {
-        	List<String> listReferences = getListArticleReferences(listArticles);
-        	FactoryVale.setArticlesToVale(dCtxSh.vale, listReferences, EffectToArticle.aplica);
-        	listArticles = dCtxSh.vale.getArticlesFromVale();
+        	for (Garment product : listProducts) {
+        		product.setValePais(dCtxSh.vale);
+        	}
         }
         
-        if (listArticles.size() > maxArticlesAwayVale) {
-        	return (listArticles.subList(0, maxArticlesAwayVale));
+        if (listProducts.size() > maxArticlesAwayVale) {
+        	return (listProducts.subList(0, maxArticlesAwayVale));
         }
-        return listArticles;
+        return listProducts;
     }
-    
-    private static List<String> getListArticleReferences(List<Garment> listArticles) {
-    	List<String> listReferences = new ArrayList<>();
-    	for (Garment article : listArticles)
-    		listReferences.add(article.getGarmentId());
-    	
-    	return listReferences;
-    }
-    
-    public static String getCodigoTallaUnica(AppEcom app) {
-    	switch (app) {
-    	case outlet:
-    		return "99";
-    	default:
-    		return "0";
-    	}
-    }
+
+	public static String getCodigoTallaUnica(AppEcom app) {
+		switch (app) {
+		case outlet:
+			return "99";
+		default:
+			return "0";
+		}
+	}
 }

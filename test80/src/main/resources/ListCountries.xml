@@ -221,6 +221,7 @@
 
 <pais nombre_pais="Albania" codigo="070">
 <codigo_pais>070</codigo_pais>
+<codigo_alf>AL</codigo_alf>
 <idioma acceso="al">IN</idioma>
 <tarifa>AL</tarifa>
 <codpos>1506</codpos>
@@ -263,6 +264,7 @@
 
 <pais nombre_pais="Andorra" codigo="043">
 <codigo_pais>043</codigo_pais>
+<codigo_alf>AD</codigo_alf>
 <idioma acceso="ad-ca" idioma_descripcion="CA">CA</idioma>
 <idioma acceso="ad" idioma_descripcion="ES">ES</idioma>
 <rgpd>S</rgpd>
@@ -314,6 +316,7 @@
 
 <pais nombre_pais="Österreich" codigo="038">
 <codigo_pais>038</codigo_pais>
+<codigo_alf>AT</codigo_alf>
 <idioma acceso="at">AL</idioma>
 <paistop>S</paistop>
 <rgpd>S</rgpd>
@@ -382,6 +385,7 @@
 
 <pais nombre_pais="Беларусь" codigo="073">
 <codigo_pais>073</codigo_pais>
+<codigo_alf>BY</codigo_alf>
 <idioma acceso="by">RU</idioma>
 <tarifa>BR</tarifa>
 <codpos>08720</codpos>
@@ -407,6 +411,7 @@
 
 <pais nombre_pais="Belgique" codigo="017">
 <codigo_pais>017</codigo_pais>
+<codigo_alf>BE</codigo_alf>
 <idioma acceso="be-fr" idioma_descripcion="FR">FR</idioma>
 <idioma acceso="be-nl" idioma_descripcion="NL">NL</idioma>
 <paistop>S</paistop>
@@ -470,6 +475,7 @@
 
 <pais nombre_pais="Bosnia and Herzegovina " codigo="093">
 <codigo_pais>093</codigo_pais>
+<codigo_alf>BA</codigo_alf>
 <idioma acceso="ba">IN</idioma>
 <tarifa>KM</tarifa>
 <codpos>08720</codpos>
@@ -512,6 +518,7 @@
 
 <pais nombre_pais="Bulgaria" codigo="068">
 <codigo_pais>068</codigo_pais>
+<codigo_alf>BG</codigo_alf>
 <idioma acceso="bg">BG</idioma>
 <idioma acceso="bg-en">IN</idioma>
 <direccharnolatinos check='s' text='check пдреѿ доказателѿтво, 3'/>
@@ -561,6 +568,7 @@
 
 <pais nombre_pais="Croatia" codigo="092">
 <codigo_pais>092</codigo_pais>
+<codigo_alf>HR</codigo_alf>
 <idioma acceso="hr" idioma_descripcion="HR">HR</idioma>
 <idioma acceso="hr-en" idioma_descripcion="IN">IN</idioma>
 <rgpd>S</rgpd>
@@ -610,6 +618,7 @@
 
 <pais nombre_pais="Cyprus (Euros)" codigo="600">
 <codigo_pais>600</codigo_pais>
+<codigo_alf>CY</codigo_alf>
 <idioma acceso="cy">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>CY</tarifa>
@@ -664,6 +673,7 @@
 
 <pais nombre_pais="Czech Republic" codigo="061">
 <codigo_pais>061</codigo_pais>
+<codigo_alf>CZ</codigo_alf>
 <idioma acceso="cz">CS</idioma>
 <idioma acceso="cz-en">IN</idioma>
 <rgpd>S</rgpd>
@@ -720,6 +730,7 @@
 
 <pais nombre_pais="Denmark" codigo="008">
 <codigo_pais>008</codigo_pais>
+<codigo_alf>DK</codigo_alf>
 <idioma acceso="dk">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>DK</tarifa>
@@ -778,6 +789,7 @@
 
 <pais nombre_pais="Estonia" codigo="053">
 <codigo_pais>053</codigo_pais>
+<codigo_alf>EE</codigo_alf>
 <idioma acceso="ee">IN</idioma>
 <rgpd>S</rgpd>
 <direccharnolatinos check='s' text='check адреѿ доказательѿтва, 3'/>
@@ -837,6 +849,7 @@
 
 <pais nombre_pais="Finland" codigo="032">
 <codigo_pais>032</codigo_pais>
+<codigo_alf>FI</codigo_alf>
 <idioma acceso="fi">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>FL</tarifa>
@@ -899,6 +912,7 @@
 
 <pais nombre_pais="France" codigo="011">
 <codigo_pais>011</codigo_pais>
+<codigo_alf>FR</codigo_alf>
 <idioma acceso="fr">FR</idioma>
 <paistop>S</paistop>
 <rgpd>S</rgpd>
@@ -954,6 +968,7 @@
 
 <pais nombre_pais="Deutschland" codigo="004">
 <codigo_pais>004</codigo_pais>
+<codigo_alf>DE</codigo_alf>
 <idioma acceso="de">AL</idioma>
 <paistop>S</paistop>
 <rgpd>S</rgpd>
@@ -1027,6 +1042,7 @@
 
 <pais nombre_pais="Gibraltar" codigo="044">
 <codigo_pais>044</codigo_pais>
+<codigo_alf>GI</codigo_alf>
 <idioma acceso="gi">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>GB</tarifa>
@@ -1055,6 +1071,7 @@
 
 <pais nombre_pais="Greece" codigo="009">
 <codigo_pais>009</codigo_pais>
+<codigo_alf>GR</codigo_alf>
 <idioma acceso="gr-el">EL</idioma>
 <idioma acceso="gr-en">IN</idioma>
 <paistop>S</paistop>
@@ -1116,6 +1133,7 @@
 
 <pais nombre_pais="Hungary" codigo="064">
 <codigo_pais>064</codigo_pais>
+<codigo_alf>HU</codigo_alf>
 <idioma acceso="hu">HU</idioma>
 <idioma acceso="hu-en">IN</idioma>
 <rgpd>S</rgpd>
@@ -1172,6 +1190,7 @@
 
 <pais nombre_pais="Iceland" codigo="024">
 <codigo_pais>024</codigo_pais> 
+<codigo_alf>IS</codigo_alf>
 <idioma acceso="is">IN</idioma> 
 <rgpd>S</rgpd>
 <codpos>220</codpos>
@@ -1220,6 +1239,7 @@
 
 <pais nombre_pais="Ireland" codigo="007">
 <codigo_pais>007</codigo_pais>
+<codigo_alf>ID</codigo_alf>
 <idioma acceso="ie">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>IR</tarifa>
@@ -1270,6 +1290,7 @@
 
 <pais nombre_pais="Italia" codigo="005">
 <codigo_pais>005</codigo_pais>
+<codigo_alf>IT</codigo_alf>
 <idioma acceso="it">IT</idioma>
 <paistop>S</paistop>
 <rgpd>S</rgpd>
@@ -1325,6 +1346,7 @@
 
 <pais nombre_pais="Kosovo" codigo="095">
 <codigo_pais>095</codigo_pais>
+<codigo_alf>BA1</codigo_alf>
 <idioma acceso="ba1">IN</idioma>
 <tarifa>KV</tarifa>
 <codpos>10012</codpos>
@@ -1352,6 +1374,7 @@
 
 <pais nombre_pais="Latvia" codigo="054">
 <codigo_pais>054</codigo_pais>
+<codigo_alf>LV</codigo_alf>
 <idioma acceso="lv">IN</idioma>
 <rgpd>S</rgpd>
 <direccharnolatinos check='s' text='check адреѿ доказательѿтва, 3'/>
@@ -1402,6 +1425,7 @@
 
 <pais nombre_pais="Liechtenstein" codigo="037">
 <codigo_pais>037</codigo_pais>
+<codigo_alf>LI</codigo_alf>
 <idioma acceso="li">AL</idioma>
 <rgpd>S</rgpd>
 <tarifa>FS</tarifa>
@@ -1445,6 +1469,7 @@
 
 <pais nombre_pais="Lithuania" codigo="055">
 <codigo_pais>055</codigo_pais>
+<codigo_alf>LT</codigo_alf>
 <idioma acceso="lt">IN</idioma>
 <direccharnolatinos check='s' text='check адреѿ доказательѿтва, 3'/>
 <rgpd>S</rgpd>
@@ -1498,6 +1523,7 @@
 
 <pais nombre_pais="Luxemburg" codigo="018">
 <codigo_pais>018</codigo_pais>
+<codigo_alf>LU</codigo_alf>
 <idioma acceso="lu" idioma_descripcion="AL">AL</idioma>
 <idioma acceso="lu-fr" idioma_descripcion="FR">FR</idioma>
 <tarifa>LU</tarifa>
@@ -1553,6 +1579,7 @@
 
 <pais nombre_pais="Macedonia " codigo="096">
 <codigo_pais>096</codigo_pais>
+<codigo_alf>MK</codigo_alf>
 <idioma acceso="mk">IN</idioma>
 <tarifa>MD</tarifa>
 <codpos>08720</codpos>
@@ -1580,6 +1607,7 @@
 
 <pais nombre_pais="Malta" codigo="046">
 <codigo_pais>046</codigo_pais>
+<codigo_alf>MT</codigo_alf>
 <idioma acceso="mt">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>LM</tarifa>
@@ -1630,6 +1658,7 @@
 
 <pais nombre_pais="Moldova" codigo="074">
 <codigo_pais>074</codigo_pais>
+<codigo_alf>MD</codigo_alf>
 <idioma acceso="md">IN</idioma>
 <tarifa>ML</tarifa>
 <codpos>08720</codpos>
@@ -1657,6 +1686,7 @@
 
 <pais nombre_pais="Monaco" codigo="015">
 <codigo_pais>015</codigo_pais>
+<codigo_alf>MC</codigo_alf>
 <idioma acceso="mc">FR</idioma>
 <rgpd>S</rgpd>
 <tarifa>FF</tarifa>
@@ -1706,6 +1736,7 @@
 
 <pais nombre_pais="Montenegro" codigo="090">
 <codigo_pais>090</codigo_pais>
+<codigo_alf>ME</codigo_alf>
 <idioma acceso="me">IN</idioma>
 <tarifa>MN</tarifa>
 <codpos>08720</codpos>
@@ -1733,6 +1764,7 @@
 
 <pais nombre_pais="Nederland" codigo="003">
 <codigo_pais>003</codigo_pais>
+<codigo_alf>NL</codigo_alf>
 <idioma acceso="nl" idioma_descripcion="NL">NL</idioma>
 <idioma acceso="nl-en" idioma_descripcion="IN">IN</idioma>
 <paistop>S</paistop>
@@ -1792,6 +1824,7 @@
 
 <pais nombre_pais="Kuzey Kıbrıs (Türk Lirasi)" codigo="602"> <!-- Chipre del norte -->
 <codigo_pais>602</codigo_pais>
+<codigo_alf>CY1</codigo_alf>
 <idioma acceso="cy1">TR</idioma>
 <rgpd>S</rgpd>
 <tarifa>YC</tarifa>
@@ -1820,6 +1853,7 @@
 
 <pais nombre_pais="Norway" codigo="028">
 <codigo_pais>028</codigo_pais>
+<codigo_alf>NO</codigo_alf>
 <idioma acceso="no">NO</idioma>
 <idioma acceso="no-en">IN</idioma>
 <rgpd>S</rgpd>
@@ -1881,6 +1915,7 @@
 
 <pais nombre_pais="Poland" codigo="060">
 <codigo_pais>060</codigo_pais>
+<codigo_alf>PL</codigo_alf>
 <idioma acceso="pl">PL</idioma>
 <paistop>S</paistop>
 <rgpd>S</rgpd>
@@ -1940,6 +1975,7 @@
 
 <pais nombre_pais="Portugal" codigo="010">
 <codigo_pais>010</codigo_pais>
+<codigo_alf>PT</codigo_alf>
 <idioma acceso="pt">PO</idioma>
 <paistop>S</paistop>
 <rgpd>S</rgpd>
@@ -1994,6 +2030,7 @@
 
 <pais nombre_pais="Romania" codigo="066">
 <codigo_pais>066</codigo_pais>
+<codigo_alf>RO</codigo_alf>
 <idioma acceso="ro">RO</idioma>
 <idioma acceso="ro-en">IN</idioma>
 <rgpd>S</rgpd>
@@ -2042,6 +2079,7 @@
 
 <pais nombre_pais="Россия (Российская Федерация)" codigo="075"> <!-- Russia -->
 <codigo_pais>075</codigo_pais>
+<codigo_alf>RU</codigo_alf>
 <idioma acceso="ru">RU</idioma>
 <paistop>S</paistop>
 <tarifa>RU</tarifa>
@@ -2104,6 +2142,7 @@
 
 <pais nombre_pais="Serbia" codigo="094">
 <codigo_pais>094</codigo_pais>
+<codigo_alf>RS</codigo_alf>
 <idioma acceso="rs">IN</idioma>
 <tarifa>YD</tarifa>
 <codpos>08720</codpos>
@@ -2146,6 +2185,7 @@
 
 <pais nombre_pais="Slovakia" codigo="063">
 <codigo_pais>063</codigo_pais>
+<codigo_alf>SK</codigo_alf>
 <idioma acceso="sk">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>SV</tarifa>
@@ -2199,6 +2239,7 @@
 
 <pais nombre_pais="Slovenia" codigo="091">
 <codigo_pais>091</codigo_pais>
+<codigo_alf>SI</codigo_alf>
 <idioma acceso="si">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>LM</tarifa>
@@ -2328,7 +2369,7 @@
 
 <pais nombre_pais="España (Ceuta)" codigo="022">
 <codigo_pais>022</codigo_pais>
-<codigo_alf>ES</codigo_alf>
+<codigo_alf>ES2</codigo_alf>
 <idioma acceso="es2" idioma_descripcion="ES">ES</idioma>
 <paistop>N</paistop>
 <rgpd>S</rgpd>
@@ -2393,7 +2434,7 @@
 
 <pais nombre_pais="España (Islas Canarias)" codigo="021">
 <codigo_pais>021</codigo_pais>
-<codigo_alf>ES</codigo_alf>
+<codigo_alf>ES1</codigo_alf>
 <idioma acceso="es1" idioma_descripcion="ES">ES</idioma>
 <paistop>N</paistop>
 <rgpd>S</rgpd>
@@ -2454,7 +2495,7 @@
 
 <pais nombre_pais="España (Melilla)" codigo="023">
 <codigo_pais>023</codigo_pais>
-<codigo_alf>ES</codigo_alf>
+<codigo_alf>ES3</codigo_alf>
 <idioma acceso="es3" idioma_descripcion="ES">ES</idioma>
 <paistop>N</paistop>
 <rgpd>S</rgpd>
@@ -2519,6 +2560,7 @@
 
 <pais nombre_pais="Sweden" codigo="030">
 <codigo_pais>030</codigo_pais>
+<codigo_alf>SE</codigo_alf>
 <idioma acceso="se">SE</idioma>
 <idioma acceso="se-en">IN</idioma>
 <rgpd>S</rgpd>
@@ -2578,6 +2620,7 @@
 
 <pais nombre_pais="Schweiz" codigo="036">
 <codigo_pais>036</codigo_pais>
+<codigo_alf>CH</codigo_alf>
 <idioma acceso="ch" idioma_descripcion="AL">AL</idioma>
 <idioma acceso="ch-fr" idioma_descripcion="FR">FR</idioma>
 <paistop>S</paistop>
@@ -2651,6 +2694,7 @@
 <!-- CUANDO SE ACTIVE LA COMPRA ONLINE HABRÍA QUE INCLUIR EL MÉTODO DE ENVÍO MEEST -->
 <pais nombre_pais="Ukraine" codigo="072">
 <codigo_pais>072</codigo_pais>
+<codigo_alf>UA</codigo_alf>
 <idioma acceso="ua" idioma_descripcion="IN">IN</idioma>
 <idioma acceso="ua-ru" idioma_descripcion="RU">RU</idioma>
 <tarifa>UA</tarifa>
@@ -2694,6 +2738,7 @@
 
 <pais nombre_pais="United Kingdom" codigo="006">
 <codigo_pais>006</codigo_pais>
+<codigo_alf>GB</codigo_alf>
 <idioma acceso="gb">IN</idioma>
 <paistop>S</paistop>
 <rgpd>S</rgpd>
@@ -2751,6 +2796,7 @@
 
 <pais nombre_pais="United Kingdom (Channel Islands)" codigo="019">
 <codigo_pais>019</codigo_pais>
+<codigo_alf>GB1</codigo_alf>
 <idioma acceso="gb1">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>JY</tarifa>
@@ -2805,6 +2851,7 @@
 <continente nombre_continente="North America">
 <pais nombre_pais="Aruba" codigo="474">
 <codigo_pais>474</codigo_pais>
+<codigo_alf>AW</codigo_alf>
 <idioma acceso="aw" >IN</idioma>
 <tarifa>AF</tarifa>
 <codpos>08720</codpos>
@@ -2847,6 +2894,7 @@
 
 <pais nombre_pais="Bermuda " codigo="413">
 <codigo_pais>413</codigo_pais>
+<codigo_alf>BM</codigo_alf>
 <idioma acceso="bm">IN</idioma>
 <tarifa>UD</tarifa>
 <codpos>08720</codpos>
@@ -2874,6 +2922,7 @@
 
 <pais nombre_pais="Canada" codigo="404">
 <codigo_pais>404</codigo_pais>
+<codigo_alf>CA</codigo_alf>
 <idioma acceso="ca" idioma_descripcion="IN">IN</idioma>
 <idioma acceso="ca-fr" idioma_descripcion="FR">FR</idioma>
 <tarifa>CD</tarifa>
@@ -2920,6 +2969,7 @@
 
 <pais nombre_pais="Costa Rica" codigo="436">
 <codigo_pais>436</codigo_pais>
+<codigo_alf>CR</codigo_alf>
 <idioma acceso="cr">ES</idioma>
 <tarifa>CC</tarifa>
 <codpos>08720</codpos>
@@ -2962,6 +3012,7 @@
 
 <pais nombre_pais="Cuba" codigo="448">
 <codigo_pais>448</codigo_pais>
+<codigo_alf>CU</codigo_alf>
 <idioma acceso="cu">ES</idioma>
 <tarifa>CP</tarifa>
 <codpos>08720</codpos>
@@ -2989,6 +3040,7 @@
 
 <pais nombre_pais="República Dominicana" codigo="456">
 <codigo_pais>456</codigo_pais>
+<codigo_alf>DO</codigo_alf>
 <idioma acceso="do">ES</idioma>
 <tarifa>DP</tarifa>
 <codpos>08720</codpos>
@@ -3016,6 +3068,7 @@
 
 <pais nombre_pais="El Salvador" codigo="428">
 <codigo_pais>428</codigo_pais>
+<codigo_alf>SV</codigo_alf>
 <idioma acceso="sv">ES</idioma>
 <tarifa>SC</tarifa>
 <codpos>1120</codpos>
@@ -3060,7 +3113,7 @@
 </pais>
 
 <pais nombre_pais="France (Guadeloupe)" codigo="458">
-<codigo_pais>458</codigo_pais>
+<codigo_pais>GP</codigo_pais>
 <idioma acceso="gp">FR</idioma>
 <rgpd>S</rgpd>
 <tarifa>FG</tarifa>
@@ -3110,6 +3163,7 @@
 
 <pais nombre_pais="Guatemala" codigo="416">
 <codigo_pais>416</codigo_pais>
+<codigo_alf>GT</codigo_alf>
 <idioma acceso="gt">ES</idioma>
 <tarifa>GQ</tarifa>
 <codpos>08720</codpos>
@@ -3153,6 +3207,7 @@
 <!-- 
 <pais nombre_pais="Honduras" codigo="424">
 <codigo_pais>424</codigo_pais>
+<codigo_alf>HN</codigo_alf>
 <idioma acceso="hn">ES</idioma>
 <tarifa>HL</tarifa>
 <codpos>08720</codpos>
@@ -3196,6 +3251,7 @@
 
 <pais nombre_pais="México" codigo="412">
 <codigo_pais>412</codigo_pais>
+<codigo_alf>MX</codigo_alf>
 <idioma acceso="mx">ES</idioma>
 <!-- <idioma acceso="mx-en">IN</idioma>-->
 <tarifa>PM</tarifa>
@@ -3257,6 +3313,7 @@
 
 <pais nombre_pais="Curaçao" codigo="478">
 <codigo_pais>478</codigo_pais>
+<codigo_alf>CW</codigo_alf>
 <idioma acceso="cw">IN</idioma>
 <rgpd>S</rgpd>
 <!-- <idioma acceso="cw-es">ES</idioma>-->
@@ -3301,6 +3358,7 @@
 
 <pais nombre_pais="Panamá" codigo="442">
 <codigo_pais>442</codigo_pais>
+<codigo_alf>PA</codigo_alf>
 <idioma acceso="pa">ES</idioma>
 <tarifa>PN</tarifa>
 <codpos>08720</codpos>
@@ -3346,6 +3404,7 @@
 
 <pais nombre_pais="USA" codigo="400">
 <codigo_pais>400</codigo_pais>
+<codigo_alf>US</codigo_alf>
 <idioma acceso="us">US</idioma>
 <idioma acceso="us-es">ES</idioma>
 <paistop>S</paistop>
@@ -3404,6 +3463,7 @@
 <continente nombre_continente="South America">
 <pais nombre_pais="Argentina" codigo="528">
 <codigo_pais>528</codigo_pais>
+<codigo_alf>AR</codigo_alf>
 <idioma acceso="ar">ES</idioma>
 <tarifa>AG</tarifa>
 <codpos>08720</codpos>
@@ -3431,6 +3491,7 @@
 
 <pais nombre_pais="Bolivia" codigo="516">
 <codigo_pais>516</codigo_pais>
+<codigo_alf>BO</codigo_alf>
 <idioma acceso="bo">ES</idioma>
 <tarifa>B1</tarifa>
 <codpos>08720</codpos>
@@ -3457,6 +3518,7 @@
 
 <pais nombre_pais="Brazil " codigo="508">
 <codigo_pais>508</codigo_pais>
+<codigo_alf>BR</codigo_alf>
 <idioma acceso="br-en" idioma_descripcion="IN">IN</idioma>
 <idioma acceso="br-es" idioma_descripcion="ES">ES</idioma>
 <tarifa>B1</tarifa>
@@ -3485,6 +3547,7 @@
 
 <pais nombre_pais="Chile" codigo="512">
 <codigo_pais>512</codigo_pais>
+<codigo_alf>CL</codigo_alf>
 <idioma acceso="cl">ES</idioma>
 <tarifa>CH</tarifa>
 <codpos>08720</codpos>
@@ -3511,6 +3574,7 @@
 
 <pais nombre_pais="Colombia" codigo="480">
 <codigo_pais>480</codigo_pais>
+<codigo_alf>CO</codigo_alf>
 <idioma acceso="co">ES</idioma>
 <tarifa>CL</tarifa>
 <codpos>050005</codpos>
@@ -3592,6 +3656,7 @@
 
 <pais nombre_pais="France (Martinique)" codigo="475">
 <codigo_pais>475</codigo_pais>
+<codigo_alf>MQ</codigo_alf>
 <idioma acceso="mq">FR</idioma>
 <rgpd>S</rgpd>
 <tarifa>MF</tarifa>
@@ -3641,6 +3706,7 @@
 
 <pais nombre_pais="France (Guyane Française)" codigo="496">
 <codigo_pais>496</codigo_pais>
+<codigo_alf>GF</codigo_alf>
 <idioma acceso="gf">FR</idioma>
 <rgpd>S</rgpd>
 <codpos>08720</codpos>
@@ -3689,6 +3755,7 @@
 
 <pais nombre_pais="Nicaragua" codigo="432">
 <codigo_pais>432</codigo_pais>
+<codigo_alf>NI</codigo_alf>
 <idioma acceso="ni">IN</idioma>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
@@ -3733,6 +3800,7 @@
 
 <pais nombre_pais="Paraguay" codigo="520">
 <codigo_pais>520</codigo_pais>
+<codigo_alf>PY</codigo_alf>
 <idioma acceso="py">ES</idioma>
 <tarifa>PG</tarifa>
 <codpos>08720</codpos>
@@ -3759,6 +3827,7 @@
 
 <pais nombre_pais="Perú" codigo="504">
 <codigo_pais>504</codigo_pais>
+<codigo_alf>PE</codigo_alf>
 <idioma acceso="pe">ES</idioma>
 <tarifa>PE</tarifa>
 <codpos>08720</codpos>
@@ -3785,6 +3854,7 @@
 
 <pais nombre_pais="Surinam" codigo="492">
 <codigo_pais>492</codigo_pais>
+<codigo_alf>SR</codigo_alf>
 <idioma acceso="sr">NL</idioma>
 <tarifa>??</tarifa>
 <codpos>08720</codpos>
@@ -3811,6 +3881,7 @@
 
 <pais nombre_pais="Uruguay" codigo="524">
 <codigo_pais>524</codigo_pais>
+<codigo_alf>UY</codigo_alf>
 <idioma acceso="uy">ES</idioma>
 <tarifa>??</tarifa>
 <codpos>08720</codpos>
@@ -3838,6 +3909,7 @@
 
 <pais nombre_pais="Venezuela" codigo="484">
 <codigo_pais>484</codigo_pais>
+<codigo_alf>VE</codigo_alf>
 <idioma acceso="ve">ES</idioma>
 <tarifa>MB</tarifa>
 <codpos>08720</codpos>
@@ -3867,6 +3939,7 @@
 <continente nombre_continente="Oceania">
 <pais nombre_pais="Australia" codigo="800">
 <codigo_pais>800</codigo_pais>
+<codigo_alf>AU</codigo_alf>
 <idioma acceso="au">IN</idioma>
 <tarifa>AD</tarifa>
 <codpos>2060</codpos>
@@ -3909,6 +3982,7 @@
 
 <pais nombre_pais="Nouvelle-Calédonie" codigo="809">
 <codigo_pais>809</codigo_pais>
+<codigo_alf>NC</codigo_alf>
 <idioma acceso="nc">FR</idioma>
 <tarifa>FN</tarifa>
 <codpos>08720</codpos>
@@ -3938,6 +4012,7 @@
 <continente nombre_continente="Asia">
 <pais nombre_pais="Armenia" codigo="077">
 <codigo_pais>077</codigo_pais>
+<codigo_alf>AM</codigo_alf>
 <idioma acceso="am" idioma_descripcion="IN">IN</idioma>
 <idioma acceso="am-ru" idioma_descripcion="RU">RU</idioma>
 <tarifa>AM</tarifa>
@@ -3966,6 +4041,7 @@
 
 <pais nombre_pais="Azerbaijan" codigo="078">
 <codigo_pais>078</codigo_pais>
+<codigo_alf>AZ</codigo_alf>
 <idioma acceso="az" idioma_descripcion="IN">IN</idioma>
 <idioma acceso="az-ru" idioma_descripcion="RU">RU</idioma>
 <tarifa>MT</tarifa>
@@ -4000,6 +4076,7 @@
 
 <pais nombre_pais="Bahrain" codigo="640">
 <codigo_pais>640</codigo_pais>
+<codigo_alf>BH</codigo_alf>
 <idioma acceso="bh">AR</idioma>
 <idioma acceso="bh-en">IN</idioma>
 <tarifa>BD</tarifa>
@@ -4051,6 +4128,7 @@
 
 <pais nombre_pais="Cambodia" codigo="696">
 <codigo_pais>696</codigo_pais>
+<codigo_alf>KH</codigo_alf>
 <idioma acceso="kh">IN</idioma>
 <tarifa>RC</tarifa>
 <codpos>08720</codpos>
@@ -4078,6 +4156,7 @@
 
 <pais nombre_pais="中国" codigo="720"> <!-- China -->
 <codigo_pais>720</codigo_pais>
+<codigo_alf>CN</codigo_alf>
 <idioma acceso="cn" idioma_descripcion="ZH">ZH</idioma>
 <idioma acceso="cn-en" idioma_descripcion="IN">IN</idioma>
 <paistop>S</paistop>
@@ -4164,6 +4243,7 @@
 
 <pais nombre_pais="Georgia" codigo="076">
 <codigo_pais>076</codigo_pais>
+<codigo_alf>GE</codigo_alf>
 <idioma acceso="ge">IN</idioma>
 <tarifa>GL</tarifa>
 <codpos>08720</codpos>
@@ -4197,6 +4277,7 @@
 
 <pais nombre_pais="Hong Kong" codigo="740">
 <codigo_pais>740</codigo_pais>
+<codigo_alf>HK</codigo_alf>
 <idioma acceso="hk">IN</idioma>
 <tarifa>HD</tarifa>
 <codpos>08720</codpos>
@@ -4243,6 +4324,7 @@
 
 <pais nombre_pais="India" codigo="664">
 <codigo_pais>664</codigo_pais>
+<codigo_alf>IN</codigo_alf>
 <idioma acceso="in">IN</idioma>
 <tarifa>ID</tarifa>
 <codpos>110006</codpos>
@@ -4289,6 +4371,7 @@
 
 <pais nombre_pais="Indonesia" codigo="700">
 <codigo_pais>700</codigo_pais>
+<codigo_alf>IN</codigo_alf>
 <idioma acceso="id">IN</idioma>
 <tarifa>IN</tarifa>
 <codpos>10350</codpos>
@@ -4331,6 +4414,7 @@
 
 <pais nombre_pais="Iran" codigo="616">
 <codigo_pais>616</codigo_pais>
+<codigo_alf>IR</codigo_alf>
 <idioma acceso="ir">IN</idioma>
 <tarifa>RI</tarifa>
 <codpos>08720</codpos>
@@ -4358,6 +4442,7 @@
 
 <pais nombre_pais="Iraq" codigo="612">
 <codigo_pais>612</codigo_pais>
+<codigo_alf>IQ</codigo_alf>
 <idioma acceso="iq">IN</idioma>
 <tarifa>IQ</tarifa>
 <codpos>08720</codpos>
@@ -4385,6 +4470,7 @@
 
 <pais nombre_pais="Israel" codigo="624">
 <codigo_pais>624</codigo_pais>
+<codigo_alf>IL</codigo_alf>
 <idioma acceso="il">IN</idioma>
 <tarifa>EI</tarifa>
 <codpos>08720</codpos>
@@ -4411,6 +4497,7 @@
 
 <pais nombre_pais="日本" codigo="732" exists="n"> <!-- Japón (sólo existe a nivel de la prehome, al seleccionarlo se dirige a otra shop)-->
 <codigo_pais>732</codigo_pais>
+<codigo_alf>JP</codigo_alf>
 <idioma acceso="jp-ja">JA</idioma>
 <!-- <idioma acceso="jp-en">IN</idioma>-->
 <tarifa>YJ</tarifa>
@@ -4461,6 +4548,7 @@
 
 <pais nombre_pais="Myanmar" codigo="676">
 <codigo_pais>676</codigo_pais>
+<codigo_alf>MM</codigo_alf>
 <idioma acceso="mm">IN</idioma>
 <tarifa>MY</tarifa>
 <codpos>08720</codpos>
@@ -4488,6 +4576,7 @@
 
 <pais nombre_pais="Laos" codigo="684">
 <codigo_pais>684</codigo_pais>
+<codigo_alf>LA</codigo_alf>
 <idioma acceso="la">IN</idioma>
 <tarifa>LK</tarifa>
 <codpos>08720</codpos>
@@ -4515,6 +4604,7 @@
 
 <pais nombre_pais="Jordan" codigo="628">
 <codigo_pais>628</codigo_pais>
+<codigo_alf>JO</codigo_alf>
 <idioma acceso="jo">AR</idioma>
 <idioma acceso="jo-en">IN</idioma>
 <tarifa>JD</tarifa>
@@ -4558,6 +4648,7 @@
 
 <pais nombre_pais="Казахстан" codigo="079"> <!-- Kadjastan -->
 <codigo_pais>079</codigo_pais>
+<codigo_alf>KZ</codigo_alf>
 <idioma acceso="kz">RU</idioma>
 <tarifa>KZ</tarifa>
 <codpos>040900</codpos>
@@ -4597,6 +4688,7 @@
 
 <pais nombre_pais="Kuwait" codigo="636">
 <codigo_pais>636</codigo_pais>
+<codigo_alf>KW</codigo_alf>
 <idioma acceso="kw">AR</idioma>
 <idioma acceso="kw-en">IN</idioma>
 <tarifa>KU</tarifa>
@@ -4647,6 +4739,7 @@
 
 <pais nombre_pais="Киргизия" codigo="083">
 <codigo_pais>083</codigo_pais>
+<codigo_alf>KG</codigo_alf>
 <idioma acceso="kg">RU</idioma>
 <tarifa>KI</tarifa>
 <codpos>08720</codpos>
@@ -4674,6 +4767,7 @@
 
 <pais nombre_pais="Lebanon" codigo="604">
 <codigo_pais>604</codigo_pais>
+<codigo_alf>LB</codigo_alf>
 <idioma acceso="lb">AR</idioma>
 <idioma acceso="lb-en">IN</idioma>
 <tarifa>LL</tarifa>
@@ -4726,6 +4820,7 @@
 
 <pais nombre_pais="Macao" codigo="743">
 <codigo_pais>743</codigo_pais>
+<codigo_alf>MO</codigo_alf>
 <idioma acceso="mo">IN</idioma>
 <tarifa>HD</tarifa>
 <codpos>08720</codpos>
@@ -4762,6 +4857,7 @@
 
 <pais nombre_pais="Malaysia" codigo="701">
 <codigo_pais>701</codigo_pais>
+<codigo_alf>MY</codigo_alf>
 <idioma acceso="my">IN</idioma>
 <tarifa>MA</tarifa>
 <codpos>08720</codpos>
@@ -4807,7 +4903,8 @@
 </pais>
 
 <pais nombre_pais="Maldives" codigo="667">
-<codigo_pais>667</codigo_pais> 
+<codigo_pais>667</codigo_pais>
+<codigo_alf>MV</codigo_alf> 
 <idioma acceso="mv">IN</idioma> 
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
@@ -4853,6 +4950,7 @@
 
 <pais nombre_pais="Mongolia" codigo="716">
 <codigo_pais>716</codigo_pais>
+<codigo_alf>MN</codigo_alf>
 <idioma acceso="mn">IN</idioma>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
@@ -4879,6 +4977,7 @@
 
 <pais nombre_pais="Oman" codigo="649">
 <codigo_pais>649</codigo_pais>
+<codigo_alf>OM</codigo_alf>
 <idioma acceso="om">AR</idioma>
 <idioma acceso="om-en">IN</idioma>
 <tarifa>OR</tarifa>
@@ -4930,6 +5029,7 @@
 
 <pais nombre_pais="Pakistan" codigo="662">
 <codigo_pais>662</codigo_pais>
+<codigo_alf>PK</codigo_alf>
 <idioma acceso="pk">IN</idioma>
 <tarifa>PR</tarifa>
 <codpos>08720</codpos>
@@ -4963,6 +5063,7 @@
 
 <pais nombre_pais="Philippines" codigo="708">
 <codigo_pais>708</codigo_pais>
+<codigo_alf>PH</codigo_alf>
 <idioma acceso="ph">IN</idioma>
 <tarifa>FI</tarifa>
 <codpos>1008</codpos>
@@ -5012,6 +5113,7 @@
 
 <pais nombre_pais="Qatar" codigo="644">
 <codigo_pais>644</codigo_pais>
+<codigo_alf>QA</codigo_alf>
 <idioma acceso="qa">AR</idioma>
 <idioma acceso="qa-en">IN</idioma>
 <tarifa>QR</tarifa>
@@ -5062,6 +5164,7 @@
 
 <pais nombre_pais="Saudi Arabia" codigo="632">
 <codigo_pais>632</codigo_pais>
+<codigo_alf>SA</codigo_alf>
 <idioma acceso="sa">AR</idioma>
 <idioma acceso="sa-en">IN</idioma>
 <tarifa>AR</tarifa>
@@ -5114,6 +5217,7 @@
 
 <pais nombre_pais="Singapore" codigo="706">
 <codigo_pais>706</codigo_pais>
+<codigo_alf>SG</codigo_alf>
 <idioma acceso="sg">IN</idioma>
 <tarifa>SD</tarifa>
 <codpos>546080</codpos>
@@ -5166,6 +5270,7 @@
 
 <pais nombre_pais="대한민국" codigo="728"> <!-- Corea del Sur -->
 <codigo_pais>728</codigo_pais>
+<codigo_alf>KR</codigo_alf>
 <idioma acceso="kr-ko">KR</idioma>
 <idioma acceso="kr-en">IN</idioma>
 <paistop>S</paistop>
@@ -5208,6 +5313,7 @@
 
 <pais nombre_pais="Sri Lanka" codigo="669">
 <codigo_pais>669</codigo_pais>
+<codigo_alf>LK</codigo_alf>
 <idioma acceso="lk">IN</idioma>
 <tarifa>LR</tarifa>
 <codpos>08720</codpos>
@@ -5235,6 +5341,7 @@
 
 <pais nombre_pais="Syria " codigo="608">
 <codigo_pais>608</codigo_pais>
+<codigo_alf>SY</codigo_alf>
 <idioma acceso="sy">IN</idioma>
 <tarifa>SP</tarifa>
 <codpos>08720</codpos>
@@ -5262,6 +5369,7 @@
 
 <pais nombre_pais="Taiwan" codigo="736">
 <codigo_pais>736</codigo_pais>
+<codigo_alf>TW</codigo_alf>
 <idioma acceso="tw">IN</idioma>
 <tarifa>NT</tarifa>
 <codpos>08720</codpos>
@@ -5295,6 +5403,7 @@
 
 <pais nombre_pais="Thailand" codigo="680">
 <codigo_pais>680</codigo_pais>
+<codigo_alf>TH</codigo_alf>
 <idioma acceso="th">IN</idioma>
 <tarifa>TH</tarifa>
 <codpos>08720</codpos>
@@ -5322,6 +5431,7 @@
 
 <pais nombre_pais="Türkiye" codigo="052"> <!-- Turquía -->
 <codigo_pais>052</codigo_pais>
+<codigo_alf>TR</codigo_alf>
 <idioma acceso="tr">TR</idioma>
 <paistop>S</paistop>
 <tarifa>LT</tarifa>
@@ -5367,6 +5477,7 @@
 
 <pais nombre_pais="United Arab Emirates" codigo="647">
 <codigo_pais>647</codigo_pais>
+<codigo_alf>AE</codigo_alf>
 <idioma acceso="ae">AR</idioma>
 <idioma acceso="ae-en">IN</idioma>
 <tarifa>DU</tarifa>
@@ -5417,6 +5528,7 @@
 
 <pais nombre_pais="Uzbekistan" codigo="081">
 <codigo_pais>081</codigo_pais>
+<codigo_alf>UZ</codigo_alf>
 <idioma acceso="uz">IN</idioma>
 <tarifa>UZ</tarifa>
 <codpos>100123</codpos>
@@ -5459,6 +5571,7 @@
 
 <pais nombre_pais="Vietnam " codigo="690">
 <codigo_pais>690</codigo_pais>
+<codigo_alf>VN</codigo_alf>
 <idioma acceso="vn">IN</idioma>
 <tarifa>VN</tarifa>
 <codpos>08720</codpos>
@@ -5489,6 +5602,7 @@
 <!-- 
 <pais nombre_pais="Algérie" codigo="208">
 <codigo_pais>208</codigo_pais>
+<codigo_alf>DZ</codigo_alf>
 <idioma acceso="dz-fr" idioma_descripcion="FR">FR</idioma>
 <tarifa>DA</tarifa>
 <codpos>08720</codpos>
@@ -5517,6 +5631,7 @@
 
 <pais nombre_pais="Angola" codigo="330">
 <codigo_pais>330</codigo_pais>
+<codigo_alf>AO</codigo_alf>
 <idioma acceso="ao" >IN</idioma>
 <tarifa>AK</tarifa>
 <codpos>08720</codpos>
@@ -5544,6 +5659,7 @@
 
 <pais nombre_pais="Bénin" codigo="284">
 <codigo_pais>284</codigo_pais>
+<codigo_alf>BJ</codigo_alf>
 <idioma acceso="bj">FR</idioma>
 <tarifa>BI</tarifa>
 <codpos>08720</codpos>
@@ -5571,6 +5687,7 @@
 
 <pais nombre_pais="Burkina" codigo="236">
 <codigo_pais>236</codigo_pais>
+<codigo_alf>BF</codigo_alf>
 <idioma acceso="bf">FR</idioma>
 <tarifa>BK</tarifa>
 <codpos>08720</codpos>
@@ -5599,6 +5716,7 @@
 <!-- <pais nombre_pais="Cameroon" codigo="302">-->
 <pais nombre_pais="Cameroun" codigo="302">
 <codigo_pais>302</codigo_pais>
+<codigo_alf>CM</codigo_alf>
 <!--<idioma acceso="cm-en" idioma_descripcion="IN">IN</idioma>-->
 <idioma acceso="cm-fr" idioma_descripcion="FR">FR</idioma>
 <tarifa>CN</tarifa>
@@ -5627,6 +5745,7 @@
 
 <pais nombre_pais="Côte d" codigo="272">
 <codigo_pais>272</codigo_pais>
+<codigo_alf>CI</codigo_alf>
 <idioma acceso="ci">FR</idioma>
 <tarifa>CM</tarifa>
 <codpos>08720</codpos>
@@ -5654,6 +5773,7 @@
 
 <pais nombre_pais="Egypt" codigo="220">
 <codigo_pais>220</codigo_pais>
+<codigo_alf>EG</codigo_alf>
 <idioma acceso="eg">AR</idioma>
 <idioma acceso="eg-en">IN</idioma>
 <tarifa>EG</tarifa>
@@ -5698,6 +5818,7 @@
 
 <pais nombre_pais="France (La Réunion)" codigo="372">
 <codigo_pais>372</codigo_pais>
+<codigo_alf>FR</codigo_alf>
 <idioma acceso="re">FR</idioma>
 <rgpd>S</rgpd>
 <tarifa>FR</tarifa>
@@ -5726,6 +5847,7 @@
 
 <pais nombre_pais="Ghana" codigo="276">
 <codigo_pais>276</codigo_pais>
+<codigo_alf>GH</codigo_alf>
 <idioma acceso="gh">IN</idioma>
 <tarifa>GC</tarifa>
 <codpos>08720</codpos>
@@ -5753,6 +5875,7 @@
 
 <pais nombre_pais="Kenya" codigo="346">
 <codigo_pais>346</codigo_pais>
+<codigo_alf>KE</codigo_alf>
 <idioma acceso="ke">IN</idioma>
 <tarifa>GC</tarifa>
 <codpos>08720</codpos>
@@ -5780,6 +5903,7 @@
 
 <pais nombre_pais="Libya" codigo="216">
 <codigo_pais>216</codigo_pais>
+<codigo_alf>LY</codigo_alf>
 <idioma acceso="ly">IN</idioma>
 <tarifa>LD</tarifa>
 <codpos>08720</codpos>
@@ -5807,6 +5931,7 @@
 
 <pais nombre_pais="Maurice" codigo="373">
 <codigo_pais>373</codigo_pais>
+<codigo_alf>MU</codigo_alf>
 <idioma acceso="mu-fr" idioma_descripcion="FR">FR</idioma>
 <idioma acceso="mu-en" idioma_descripcion="IN">IN</idioma>
 <tarifa>MR</tarifa>
@@ -5836,6 +5961,7 @@
 <!-- <pais nombre_pais="Morocco" codigo="204">-->
 <pais nombre_pais="Maroc" codigo="204">
 <codigo_pais>204</codigo_pais>
+<codigo_alf>MA</codigo_alf>
 <idioma acceso="ma-fr" idioma_descripcion="IN">IN</idioma>
 <!-- <idioma acceso="ma" idioma_descripcion="FR">FR</idioma>-->
 <tarifa>MO</tarifa>
@@ -5864,6 +5990,7 @@
 
 <pais nombre_pais="Nigeria" codigo="288">
 <codigo_pais>288</codigo_pais>
+<codigo_alf>NG</codigo_alf>
 <idioma acceso="ng">IN</idioma>
 <tarifa>NN</tarifa>
 <codpos>08720</codpos>
@@ -5891,6 +6018,7 @@
 
 <pais nombre_pais="Sénégal" codigo="248">
 <codigo_pais>248</codigo_pais>
+<codigo_alf>SN</codigo_alf>
 <idioma acceso="sn">FR</idioma>
 <tarifa>SF</tarifa>
 <codpos>08720</codpos>
@@ -5918,6 +6046,7 @@
 
 <pais nombre_pais="South Africa" codigo="388">
 <codigo_pais>388</codigo_pais>
+<codigo_alf>ZA</codigo_alf>
 <idioma acceso="za">IN</idioma>
 <tarifa>SR</tarifa>
 <codpos>0083</codpos>
@@ -5952,6 +6081,7 @@
 <!-- <pais nombre_pais="Tunisia" codigo="212">-->
 <pais nombre_pais="Tunisie" codigo="212">
 <codigo_pais>212</codigo_pais>
+<codigo_alf>TN</codigo_alf>
 <!-- <idioma acceso="tn" idioma_descripcion="IN">IN</idioma>-->
 <idioma acceso="tn-fr" idioma_descripcion="FR">FR</idioma>
 <tarifa>TD</tarifa>

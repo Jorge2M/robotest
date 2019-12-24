@@ -12,8 +12,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.getproducts.data.Color;
 import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
+import com.mng.robotest.test80.mango.test.getproducts.data.Garment.Article;
 import com.mng.robotest.test80.mango.test.getproducts.data.GarmentDetails;
 import com.mng.robotest.test80.mango.test.getproducts.data.ProductList;
 
@@ -100,15 +100,15 @@ public class GetterProducts {
 		return null;
 	}
 	
-	private GarmentDetails getTotalLookGarment(Garment garment) {
-		Color color = garment.getDefaultColor();
+	private GarmentDetails getTotalLookGarment(Garment product) {
+		Article article = product.getOneWithStock();
 		Client client = ClientBuilder.newClient();
 		return ( 
 			client
 				.target(urlDomain + "services/garments")
-				.path(garment.getGarmentId())
+				.path(article.getGarmentId())
 				.path("looktotal")
-				.queryParam("color", color.getId())
+				.queryParam("color", article.getColor().getId())
 				.request(MediaType.APPLICATION_JSON)
 				.header("stock-id", productList.getStockId())
 				.get(GarmentDetails.class));

@@ -26,6 +26,7 @@ import com.mng.robotest.test80.mango.test.generic.PasosGenAnalitica;
 import com.mng.robotest.test80.mango.test.generic.stackTrace;
 import com.mng.robotest.test80.mango.test.getproducts.GetterProducts;
 import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
+import com.mng.robotest.test80.mango.test.getproducts.data.Garment.Article;
 import com.mng.robotest.test80.mango.test.pageobject.shop.AllPages;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.ManagerBannersScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
@@ -485,9 +486,10 @@ public class SecMenusDesktopStpV {
     public static void checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
     	
     	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh).build();
-    	Garment articulo = getterProducts.getAll().get(0);
-    	TestMaker.getCurrentStepInExecution().replaceInDescription(tagRefArticle, articulo.getGarmentId());
-    	TestMaker.getCurrentStepInExecution().replaceInExpected(tagRefArticle, articulo.getGarmentId());
+    	Garment product = getterProducts.getAll().get(0);
+    	Article article = product.getOneWithStock();
+    	TestMaker.getCurrentStepInExecution().replaceInDescription(tagRefArticle, article.getGarmentId());
+    	TestMaker.getCurrentStepInExecution().replaceInExpected(tagRefArticle, article.getGarmentId());
     	
         URI uri = new URI(driver.getCurrentUrl());
         String tiendaId = "she";
@@ -497,11 +499,11 @@ public class SecMenusDesktopStpV {
         
         String urlAccesoCorreo = 
         	uri.getScheme() + "://" + uri.getHost() + "/redirect.faces?op=conta&tiendaid=" + tiendaId + "&pais=" + pais.getCodigo_pais() + 
-        	"&producto=" + articulo.getGarmentId() + "&color=" + articulo.getDefaultColor().getId() ;
+        	"&producto=" + article.getGarmentId() + "&color=" + article.getColor().getId() ;
         TestMaker.getCurrentStepInExecution().replaceInDescription(tagUrlAcceso, urlAccesoCorreo);
         driver.navigate().to(urlAccesoCorreo);
 
-        DataFichaArt datosArticulo = new DataFichaArt(articulo.getGarmentId(), "");
+        DataFichaArt datosArticulo = new DataFichaArt(article.getGarmentId(), "");
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         pageFichaStpV.validaDetallesProducto(datosArticulo);
     }
