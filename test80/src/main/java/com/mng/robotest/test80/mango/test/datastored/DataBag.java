@@ -8,7 +8,7 @@ import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 /**
- * Clase que recopila los datos de la bolsa
+ * Clase que recopila los datos de la bolsa 
  * @author jorge.munoz
  *
  */
