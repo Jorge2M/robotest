@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
@@ -15,16 +16,16 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 public class GetterProductsTest {
 	
 	private static GetterProducts getterProducts;
-	private final int numProducts = 10;
+	private final int numProducts = 20;
 	
 	public GetterProductsTest() throws Exception {
 		if (getterProducts==null) {
 			Pais españa = PaisGetter.get(PaisShop.España);
-			getterProducts = new GetterProducts.Builder("https://shop.mango.com/", españa.getCodigo_alf()).
+			getterProducts = new GetterProducts.Builder("https://shop.mango.com/", españa.getCodigo_alf(), AppEcom.shop).
 					linea(LineaType.she).
 					seccion("prendas").
-					galeria("abrigos").
-					familia("15").
+					galeria("camisas").
+					familia("14").
 					numProducts(numProducts).
 					pagina(1).
 					build();
@@ -59,5 +60,4 @@ public class GetterProductsTest {
 		//Then
 		assertTrue(product!=null);
 	}
-	
 }

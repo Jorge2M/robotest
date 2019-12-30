@@ -20,7 +20,7 @@ public class ArticuloNavigations {
 	throws Exception {
 		ArticuloScreen articulo = new ArticuloScreen(app);
 		
-		Article articleStock = productStock.getOneWithStock();
+		Article articleStock = productStock.getArticleWithMoreStock();
 		articulo.setReferencia(articleStock.getGarmentId());
 		buscarArticulo(articleStock, channel, app, driver);
 

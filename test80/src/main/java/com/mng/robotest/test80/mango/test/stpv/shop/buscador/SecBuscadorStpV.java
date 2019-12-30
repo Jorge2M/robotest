@@ -26,7 +26,7 @@ public class SecBuscadorStpV {
 		expected="Aparece la ficha del producto")
 	public static void searchArticulo(Garment product, DataCtxShop dCtxSh, WebDriver driver) 
 	throws Exception {
-		ArticuloNavigations.buscarArticulo(product.getOneWithStock(), dCtxSh.channel, dCtxSh.appE, driver);
+		ArticuloNavigations.buscarArticulo(product.getArticleWithMoreStock(), dCtxSh.channel, dCtxSh.appE, driver);
 		WebdrvWrapp.waitForPageLoaded(driver);  
 		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
 		pageFichaStpV.validateIsFichaAccordingTypeProduct(product);
@@ -37,43 +37,40 @@ public class SecBuscadorStpV {
 		expected="El resultado de la búsqueda es el correcto :-)")
 	public static void busquedaCategoriaProducto(String categoriaABuscar, boolean categoriaExiste, AppEcom app, 
 												 Channel channel, WebDriver driver) throws Exception {
-    	SecCabecera.buscarTexto(categoriaABuscar, channel, app, driver);
-    	PageGaleria pageGaleria = (PageGaleria)PageGaleria.getInstance(channel, app, driver); 
-        WebdrvWrapp.waitForPageLoaded(driver);    
-        
-        //Validaciones
-        if (categoriaExiste) { 
-        	appearsProductsOfCategoria(categoriaABuscar, pageGaleria);
-        } else {
-        	appearsSearchErrorPage(categoriaABuscar, driver);
-        }
-        
-        //Validaciones estándar. 
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = false;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = true;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
-    }
-    
-    @Validation
-    private static ChecksResult appearsProductsOfCategoria(String categoriaABuscar, PageGaleria pageGaleria) {
-    	ChecksResult validations = ChecksResult.getNew();
-        int maxSecondsWait = 3;
-    	String producSin1erCaracter = categoriaABuscar.substring(1, categoriaABuscar.length()-1).toLowerCase();
-    	validations.add(
-    		"Aparece como mínimo un producto de tipo " + producSin1erCaracter + " (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		"".compareTo(pageGaleria.getArticuloWithText(producSin1erCaracter, maxSecondsWait))!=0, State.Defect);
-//    	validations.add(
-//    		"Aparece la categoría en el resultado de la búsqueda",
-//    		pageGaleria.isCabeceraResBusqueda(producSin1erCaracter), State.Defect);
-    	return validations;
-    }
-    
-    @Validation (
-    	description="Aparece la página de error en la búsqueda con el encabezado <b>#{categoriaABuscar}</b>",
-    	level=State.Warn)
-    private static boolean appearsSearchErrorPage(String categoriaABuscar, WebDriver driver) {
-    	return (PageErrorBusqueda.isCabeceraResBusqueda(driver, categoriaABuscar));
-    }
+		SecCabecera.buscarTexto(categoriaABuscar, channel, app, driver);
+		PageGaleria pageGaleria = (PageGaleria)PageGaleria.getInstance(channel, app, driver); 
+		WebdrvWrapp.waitForPageLoaded(driver);    
+
+		//Validaciones
+		if (categoriaExiste) { 
+			appearsProductsOfCategoria(categoriaABuscar, pageGaleria);
+		} else {
+			appearsSearchErrorPage(categoriaABuscar, driver);
+		}
+
+		//Validaciones estándar. 
+		StdValidationFlags flagsVal = StdValidationFlags.newOne();
+		flagsVal.validaSEO = false;
+		flagsVal.validaJS = true;
+		flagsVal.validaImgBroken = true;
+		AllPagesStpV.validacionesEstandar(flagsVal, driver);
+	}
+
+	@Validation
+	private static ChecksResult appearsProductsOfCategoria(String categoriaABuscar, PageGaleria pageGaleria) {
+		ChecksResult validations = ChecksResult.getNew();
+		int maxSecondsWait = 3;
+		String producSin1erCaracter = categoriaABuscar.substring(1, categoriaABuscar.length()-1).toLowerCase();
+		validations.add(
+			"Aparece como mínimo un producto de tipo " + producSin1erCaracter + " (lo esperamos hasta " + maxSecondsWait + " segundos)",
+			"".compareTo(pageGaleria.getArticuloWithText(producSin1erCaracter, maxSecondsWait))!=0, State.Defect);
+		return validations;
+	}
+
+	@Validation (
+		description="Aparece la página de error en la búsqueda con el encabezado <b>#{categoriaABuscar}</b>",
+		level=State.Warn)
+	private static boolean appearsSearchErrorPage(String categoriaABuscar, WebDriver driver) {
+		return (PageErrorBusqueda.isCabeceraResBusqueda(driver, categoriaABuscar));
+	}
 }

@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
@@ -21,6 +22,7 @@ public class GetterProducts {
 	
 	private final String urlDomain;
 	private final String codigoPaisAlf;
+	private final AppEcom app;
 	private final LineaType lineaType;
 	private final String seccion;
 	private final String galeria;
@@ -29,7 +31,7 @@ public class GetterProducts {
 	private final Integer pagina;
 	private final ProductList productList;
 	
-	private GetterProducts(String urlDomain, String codigoPaisAlf, LineaType lineaType, String seccion, 
+	private GetterProducts(String urlDomain, String codigoPaisAlf, AppEcom app, LineaType lineaType, String seccion, 
 						   String galeria, String familia, Integer numProducts, Integer pagina) throws Exception {
 		if (urlDomain.charAt(urlDomain.length()-1)=='/') {
 			this.urlDomain = urlDomain;
@@ -38,6 +40,7 @@ public class GetterProducts {
 		}
 			
 		this.codigoPaisAlf = codigoPaisAlf;
+		this.app = app;
 		this.lineaType = lineaType;
 		this.seccion = seccion;
 		this.galeria = galeria;
@@ -53,7 +56,7 @@ public class GetterProducts {
 			client
 				.target(urlDomain + "services/productlist/products")
 				.path(codigoPaisAlf)
-				.path(lineaType.name())
+				.path(getLineaPath())
 				.path("sections_" + lineaType.name() + "." + seccion + "_" + lineaType.name())
 				.queryParam("idSubSection", galeria + "_" + lineaType.name())
 				.queryParam("menu", "familia;" + familia)
@@ -67,7 +70,8 @@ public class GetterProducts {
 		String body = response.readEntity(String.class);
 		body = body.replace("\"garments\":{", "\"garments\":[");
 		body = body.replace("}}}]", "}]}]");
-		body = body.replaceAll("\"g[0-9]+\":", "");
+		//body = body.replaceAll("\"g[0-9]{8}\":", "");
+		body = body.replaceAll("\"g[0-9]{8}(..){0,1}\":", "");
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -75,6 +79,7 @@ public class GetterProducts {
 		
 		return productList;
 	}
+
 	
 	public List<Garment> getAll() {
 		return productList.getGroups().get(0).getGarments();
@@ -101,7 +106,7 @@ public class GetterProducts {
 	}
 	
 	private GarmentDetails getTotalLookGarment(Garment product) {
-		Article article = product.getOneWithStock();
+		Article article = product.getArticleWithMoreStock();
 		Client client = ClientBuilder.newClient();
 		return ( 
 			client
@@ -114,24 +119,36 @@ public class GetterProducts {
 				.get(GarmentDetails.class));
 	}
 	
+	private String getLineaPath() {
+		switch (app) {
+		case outlet:
+			return "outlet";
+		default:
+			return lineaType.name();
+		}
+	}
+	
 	public static class Builder {
 		private final String url;
 		private final String codigoPaisAlf;
+		private final AppEcom app;
 		private LineaType lineaType = LineaType.she;
 		private String seccion = "prendas";
-		private String galeria = "abrigos";
-		private String familia = "15";
-		private Integer numProducts = 10;
+		private String galeria = "camisas";
+		private String familia = "14";
+		private Integer numProducts = 40;
 		private Integer pagina = 1;
 
 		public Builder(DataCtxShop dCtxSh) throws Exception {
 			this.url = dCtxSh.getDnsUrlAcceso();
 			this.codigoPaisAlf = dCtxSh.pais.getCodigo_alf();
+			this.app = dCtxSh.appE;
 		}
 		
-		public Builder(String url, String codigoPaisAlf) {
+		public Builder(String url, String codigoPaisAlf, AppEcom app) {
 			this.url = url;
 			this.codigoPaisAlf = codigoPaisAlf;
+			this.app = app;
 		}
 		
 		public Builder linea(LineaType lineaType) {
@@ -160,7 +177,7 @@ public class GetterProducts {
 		}
 		public GetterProducts build() throws Exception {
 			return (
-				new GetterProducts(url, codigoPaisAlf, lineaType, seccion, galeria, familia, numProducts, pagina));
+				new GetterProducts(url, codigoPaisAlf, app, lineaType, seccion, galeria, familia, numProducts, pagina));
 		}
 	}
 }

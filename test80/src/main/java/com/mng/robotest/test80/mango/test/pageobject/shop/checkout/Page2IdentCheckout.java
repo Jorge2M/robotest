@@ -127,17 +127,20 @@ public class Page2IdentCheckout extends WebdrvWrapp {
             datosRegistro.put("cfTelf", movil);
         }
     }    
-    
-    public static void setInputPoblacionIfVisible(String cfCity, HashMap<String,String> datosRegistro, WebDriver driver) {
-        boolean datoSeteado = setInputIfVisible(XPathInputPoblacionActive, cfCity, driver);
-        if (datoSeteado) {
-            datosRegistro.put("cfCity", cfCity);
-        }
-    }
-    
-    public static void setInputDireccion1IfVisible(String direccion1, WebDriver driver) {
-        setInputIfVisible(XPathInputDireccion1, direccion1, driver);
-    }
+
+	public static void setInputPoblacionIfVisible(String cfCity, HashMap<String,String> datosRegistro, WebDriver driver) 
+	throws Exception {
+		waitForPageLoaded(driver);
+		WebdrvWrapp.isElementClickableUntil(driver, By.xpath(XPathInputPoblacionActive), 2);
+		boolean datoSeteado = setInputIfVisible(XPathInputPoblacionActive, cfCity, driver);
+		if (datoSeteado) {
+			datosRegistro.put("cfCity", cfCity);
+		}
+	}
+
+	public static void setInputDireccion1IfVisible(String direccion1, WebDriver driver) {
+		setInputIfVisible(XPathInputDireccion1, direccion1, driver);
+	}
     
     public static void setInputDireccion1IfVisible(String direccion1, HashMap<String,String> datosRegistro, WebDriver driver) {
         boolean datoSeteado = setInputIfVisible(XPathInputDireccion1, direccion1, driver);

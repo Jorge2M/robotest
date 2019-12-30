@@ -487,7 +487,7 @@ public class SecMenusDesktopStpV {
     	
     	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh).build();
     	Garment product = getterProducts.getAll().get(0);
-    	Article article = product.getOneWithStock();
+    	Article article = product.getArticleWithMoreStock();
     	TestMaker.getCurrentStepInExecution().replaceInDescription(tagRefArticle, article.getGarmentId());
     	TestMaker.getCurrentStepInExecution().replaceInExpected(tagRefArticle, article.getGarmentId());
     	
