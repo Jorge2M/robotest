@@ -29,7 +29,7 @@ public class PageGestorEstadisticasPedido extends WebdrvWrapp {
     }
     
     public static String getXPathColumnaCompararRoja(String tabla){
-    	return (tabla + "//tr[1]//td[@class='colum6' and text()[contains(.,'0 %')]][1]");
+    	return (tabla + "//tr[1]//td[@class='colum6' and text()='0 %'][1]");
     }
     
 	public static boolean isPage(WebDriver driver) {
