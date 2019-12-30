@@ -2,6 +2,7 @@ package com.mng.robotest.test80.mango.test.pageobject.shop;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
@@ -24,6 +25,11 @@ public class PageReembolsos extends WebdrvWrapp {
     static String XPathInputTitular = "//input[@id[contains(.,'accountHolder')] and @type='text']";
     static String XPathTitularAfterSave = "//div[@id='btBankDetails']//strong[2]";
     static String XPathInputIBAN = "//input[@id[contains(.,'completeAccount')] and @type='text']";
+    static String XPathInputPassport = "//input[@id[contains(.,'passport')] and @type='text']";
+    static String XPathBirthdayDayBlock = "//div[@class='birthdayDay']";
+    static String XPathSelectDayBirth = "//select[@id[contains(.,'dateOfBirth-day')]]";
+    static String XPathSelectMonthBirth = "//select[@id[contains(.,'dateOfBirth-month')]]";
+    static String XPathSelectYearBirth = "//select[@id[contains(.,'dateOfBirth-year')]]";
     static String XPathTextIBANAfterSave = "//div[@id='btBankDetails']//strong[3]";
     static String XPathButtonSaveTransf = "//button[@id[contains(.,'bankTransferSubmit')]]";
     static String XPathModalConfTransf = "//div[@id[contains(.,'Pedidos:confirmation-modal')]]";
@@ -121,6 +127,21 @@ public class PageReembolsos extends WebdrvWrapp {
         driver.findElement(By.xpath(XPathInputIBAN)).sendKeys(IBAN);
     }    
     
+	public static void typeIdPassportIfInputExists(WebDriver driver, String idPassport) {
+		By byInput = By.xpath(XPathInputPassport);
+		if (isElementVisible(driver, byInput)) {
+			driver.findElement(byInput).clear();
+			driver.findElement(byInput).sendKeys(idPassport);
+		}
+	}
+	public static void typeDateOfBirthIfInputExists(WebDriver driver, int day, int month, int year) {
+		if (isElementVisible(driver, By.xpath(XPathBirthdayDayBlock))) {
+			new Select(driver.findElement(By.xpath(XPathSelectDayBirth))).selectByValue(String.valueOf(day));
+			new Select(driver.findElement(By.xpath(XPathSelectMonthBirth))).selectByValue(String.valueOf(month));
+			new Select(driver.findElement(By.xpath(XPathSelectYearBirth))).selectByValue(String.valueOf(year));
+		}
+	}
+
     /**
      * @return si son visible los 3 inputs para configurar el reembolso por transferencia: banco, titular e iban
      */
@@ -130,16 +151,15 @@ public class PageReembolsos extends WebdrvWrapp {
         	isVisibleInputTitular(driver) && 
         	isVisibleInputIBAN(driver));
     }
-    
-    /**
-     * Informa los inputs de la opción de transferencias
-     */
-    public static void typeInputsTransf(WebDriver driver, String banco, String titular, String IBAN) {
-        typeInputBanco(driver, banco);
-        typeInputTitular(driver, titular);
-        typeInputIBAN(driver, IBAN);
-    }
-    
+
+	public static void typeInputsTransf(WebDriver driver, String banco, String titular, String IBAN, String idPassport) {
+		typeInputBanco(driver, banco);
+		typeInputTitular(driver, titular);
+		typeInputIBAN(driver, IBAN);
+		typeIdPassportIfInputExists(driver, idPassport);
+		typeDateOfBirthIfInputExists(driver, 23, 4, 1974);
+	}
+
     public static boolean isVisibleTransferenciaSectionUntil(int maxSecondsWait, WebDriver driver) {
     	String xpathBlock = getXPathBlock(TypeReembolso.Transferencia);
         return (isElementVisibleUntil(driver, By.xpath(xpathBlock), maxSecondsWait));        

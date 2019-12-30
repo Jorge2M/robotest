@@ -43,8 +43,10 @@ import org.openqa.selenium.WebDriver;
 public class Reembolsos {
 	
     //TODO mientras que tengamos problemas con el buscador en Arabia probaremos contra España
-    private final static Pais arabia = PaisGetter.get(PaisShop.España);
-    private final static IdiomaPais arabia_arabe = arabia.getListIdiomas().get(0);
+//    private final static Pais arabia = PaisGetter.get(PaisShop.España);
+//    private final static IdiomaPais arabia_arabe = arabia.getListIdiomas().get(0);
+	private final static Pais arabia = PaisGetter.get(PaisShop.SaudiArabia);
+	private final static IdiomaPais arabia_arabe = arabia.getListIdiomas().get(0);
     
     private DataCtxShop getCtxShForTest() throws Exception {
     	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
@@ -71,8 +73,9 @@ public class Reembolsos {
         }
 
         boolean paisConSaldoCta = dCtxSh.pais.existsPagoStoreCredit();
-        dCtxSh.userConnected = Constantes.mail_standard;
-        dCtxSh.passwordUser = Constantes.pass_standard;
+        //dCtxSh.userConnected = Constantes.mail_standard;
+        dCtxSh.userConnected = "mng_test_SA_pruebaSaldo@mango.com";
+        dCtxSh.passwordUser = "mango123";
         dCtxSh.userRegistered = true;
         if (dCtxSh.pais.getEmailuser()!=null && dCtxSh.pais.getPassuser()!=null) {
             dCtxSh.userConnected = dCtxSh.pais.getEmailuser();
@@ -106,8 +109,9 @@ public class Reembolsos {
             return;
         }
 
-        dCtxSh.userConnected = Constantes.mail_standard;
-        dCtxSh.passwordUser = Constantes.pass_standard;
+        //dCtxSh.userConnected = Constantes.mail_standard;
+        dCtxSh.userConnected = "mng_test_SA_pruebaSaldo@mango.com";
+        dCtxSh.passwordUser = "mango123";
         dCtxSh.userRegistered = true;
         if (dCtxSh.pais.getEmailuser()!=null && dCtxSh.pais.getPassuser()!=null) {
             dCtxSh.userConnected = dCtxSh.pais.getEmailuser();
@@ -122,7 +126,6 @@ public class Reembolsos {
         }
         float saldoCtaIni = PageReembolsos.getImporteStoreCredit(driver);
         
-        //Damos de alta 2 artículos en la bolsa
         DataBag dataBag = new DataBag(); 
         SecBolsaStpV.altaArticlosConColores(1, dataBag, dCtxSh, driver);
         

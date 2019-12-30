@@ -86,10 +86,7 @@ public class PageReembolsosStpV {
      * Ejecuta los pasos necesarios para validar la configuración de los reembolsos mediante transferencia
      */
     public static void testConfTransferencia(WebDriver driver) throws Exception {
-        //Step (+validaciones) Selección del radiobutton correspondiente a la opción de Transferencias
         PageReembolsosStpV.selectRadioTransferencia(driver);        
-        
-        //Step (+validaciones) Informa los datos de configuración del reembolso por transferencia y selecciona el botón guardar 
         PageReembolsosStpV.informaDatosTransAndSave(driver);
     }
     
@@ -113,18 +110,17 @@ public class PageReembolsosStpV {
     final static String banco = "Banco de crédito Balear";
     final static String titular = "Jorge Muñoz";
     final static String IBAN = "ES8023100001180000012345";
-    
-    @Step (
-    	description="Informar el banco: " + banco + "<br>titular: " + titular + "<br>IBAN: " + IBAN + "<br>y pulsar el botón \"Save\"",
-    	expected="La modificación de datos se realiza correctamente")
-    public static void informaDatosTransAndSave(WebDriver driver) throws Exception {
-        PageReembolsos.typeInputsTransf(driver, banco, titular, IBAN);
-        PageReembolsos.clickButtonSaveTransfForce(driver);
-    
-        //Validaciones
-        checkAfterModifyDataTransferencia(driver);
-    }
-    
+    final static String idPassport = "11111111";
+
+	@Step (
+		description="Informar el banco: " + banco + "<br>titular: " + titular + "<br>IBAN: " + IBAN + "<br>y pulsar el botón \"Save\"",
+		expected="La modificación de datos se realiza correctamente")
+	public static void informaDatosTransAndSave(WebDriver driver) throws Exception {
+		PageReembolsos.typeInputsTransf(driver, banco, titular, IBAN, idPassport);
+		PageReembolsos.clickButtonSaveTransfForce(driver);
+		checkAfterModifyDataTransferencia(driver);
+	}
+
     @Validation
     private static ChecksResult checkAfterModifyDataTransferencia(WebDriver driver) {
     	ChecksResult validations = ChecksResult.getNew();

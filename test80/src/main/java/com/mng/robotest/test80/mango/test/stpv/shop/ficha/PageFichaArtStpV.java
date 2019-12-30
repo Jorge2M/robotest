@@ -288,7 +288,7 @@ public class PageFichaArtStpV {
     }
 
     @Step (
-    	description="Cambiar de color dentro de la misma ficha.",
+    	description="Cambiar de color dentro de la misma ficha volviendo al color/talla originales",
         expected="El articulo es cambiado de color.")
     public void changeColorGarment() throws Exception {
         ArticuloScreen articulo = pageFicha.getArticuloObject();
@@ -296,10 +296,10 @@ public class PageFichaArtStpV {
         String codeColor = colors.get(0);
         SecDataProduct.selectColor(codeColor, driver);
 
-        //Validaciones
         validateNotVisibleButtonFavoritos(ActionFavButton.Add);
 
         SecDataProduct.selectColor(articulo.getCodigoColor(), driver);
+        SecDataProduct.selectTallaByValue(articulo.getTallaNum(), pageFicha.getTypeFicha(), driver);
 
     }
 
@@ -329,15 +329,15 @@ public class PageFichaArtStpV {
 			pageFicha.isInvisibleDivAnadiendoAFavoritosUntil(maxSecondsWait2), State.Warn);
     	return validations;
     }
-    
-    @Step (
-    	description="Seleccionar el botón <b>\"Eliminar de Favoritos\"</b>", 
-        expected="El artículo se elimina de Favoritos")
-    public void selectRemoveFromFavoritos() throws Exception {
-        pageFicha.selectRemoveFromFavoritosButton();             
-        validateVisibleButtonFavoritos(ActionFavButton.Add);
-    }    
-    
+
+	@Step (
+		description="Seleccionar el botón <b>\"Eliminar de Favoritos\"</b>", 
+		expected="El artículo se elimina de Favoritos")
+	public void selectRemoveFromFavoritos() throws Exception {
+		pageFicha.selectRemoveFromFavoritosButton();
+		validateVisibleButtonFavoritos(ActionFavButton.Add);
+	}
+
     @Validation (
     	description="Aparece el botón de #{buttonType} a Favoritos",
     	level=State.Defect)

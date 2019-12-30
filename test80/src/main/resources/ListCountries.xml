@@ -2327,9 +2327,10 @@
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
+<!-- 
 <pago 
 	type="storecredit" tiendas="shop" empleado="s" 
-	nombre="STORECREDIT" testpasarela='s' testpago='s' tipoenvioshop='STANDARD'>&TPV-999;</pago> <!-- Pago Store Credit que aparece cuando el usuario tiene Saldo en Cuenta (y desaparecen el resto de métodos de pago) -->
+	nombre="STORECREDIT" testpasarela='s' testpago='s' tipoenvioshop='STANDARD'>&TPV-999;</pago> --> <!-- Pago Store Credit que aparece cuando el usuario tiene Saldo en Cuenta (y desaparecen el resto de métodos de pago) -->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='STANDARD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="10" anycad="2020" cvc="737">&TPV-515;</pago>
@@ -5192,10 +5193,9 @@
 <linea 		  id="violeta"   shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<!-- 
 <pago 
 	type="storecredit" tiendas="shop"
-	nombre="STORECREDIT" testpasarela='s' testpago='s'>&TPV-803;</pago>--> <!-- Pago Store Credit que aparece cuando el usuario tiene Saldo en Cuenta (y desaparecen el resto de métodos de pago) -->
+	nombre="STORECREDIT" testpasarela='s' testpago='s'>&TPV-803;</pago> <!-- Pago Store Credit que aparece cuando el usuario tiene Saldo en Cuenta (y desaparecen el resto de métodos de pago)-->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="10" anycad="2020" cvc="737">&TPV-500;</pago>
