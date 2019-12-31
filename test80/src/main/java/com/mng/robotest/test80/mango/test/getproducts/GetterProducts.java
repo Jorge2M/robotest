@@ -3,10 +3,18 @@ package com.mng.robotest.test80.mango.test.getproducts;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import javax.net.ssl.X509TrustManager;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -51,7 +59,7 @@ public class GetterProducts {
 	}
 	
 	private ProductList getProductList() throws Exception {
-		Client client = ClientBuilder.newClient();
+		Client client = getClientIgnoreCertificates();
 		Response response = 
 			client
 				.target(urlDomain + "services/productlist/products")
@@ -70,7 +78,6 @@ public class GetterProducts {
 		String body = response.readEntity(String.class);
 		body = body.replace("\"garments\":{", "\"garments\":[");
 		body = body.replace("}}}]", "}]}]");
-		//body = body.replaceAll("\"g[0-9]{8}\":", "");
 		body = body.replaceAll("\"g[0-9]{8}(..){0,1}\":", "");
 		
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -125,6 +132,38 @@ public class GetterProducts {
 			return "outlet";
 		default:
 			return lineaType.name();
+		}
+	}
+	
+	private Client getClientIgnoreCertificates() throws Exception {
+		SSLContext context = SSLContext.getInstance("TLSv1.2");
+		TrustManager[] trustManagerArray = {new NullX509TrustManager()};
+		context.init(null, trustManagerArray, null);
+
+		Client client = ClientBuilder.newBuilder()
+				.hostnameVerifier(new NullHostnameVerifier())
+				.sslContext(context)
+				.build();
+		return client;
+	}
+	
+	private static class NullHostnameVerifier implements HostnameVerifier {
+		public boolean verify(String hostname, SSLSession session) {
+			return true;
+		}
+	}
+	
+	private static class NullX509TrustManager implements X509TrustManager {
+		public void checkClientTrusted(X509Certificate[] chain, String authType)
+		throws CertificateException {
+		}
+
+		public void checkServerTrusted(X509Certificate[] chain, String authType)
+			throws CertificateException {
+		}
+
+		public X509Certificate[] getAcceptedIssuers() {
+			return new X509Certificate[0];
 		}
 	}
 	

@@ -29,14 +29,21 @@ public class ArticuloNavigations {
 		int maxSecondsToWait = 10;
 		pageFicha.isFichaArticuloUntil(articulo.getReferencia(), maxSecondsToWait);
 
-		String idColor = articleStock.getColor().getId();
+		String idColor = null;
+		if (articleStock.getColor()!=null) {
+			idColor = articleStock.getColor().getId();
+		}
 		if (pageFicha.secDataProduct.isClickableColor(idColor, driver)) {
 			pageFicha.secDataProduct.selectColorWaitingForAvailability(idColor, driver);
 		}
 		articulo.setCodigoColor(idColor);
 
 		articulo.setColorName(pageFicha.secDataProduct.getNombreColorSelected(channel, driver));
-		pageFicha.selectTallaByValue(String.valueOf(articleStock.getSize().getId()));
+		if (articleStock.getSize()!=null) {
+			pageFicha.selectTallaByValue(String.valueOf(articleStock.getSize().getId()));
+		} else {
+			pageFicha.selectTallaByIndex(1);
+		}
 
 		//Almacenamos los 2 valores de la talla seleccionada
 		articulo.setTallaAlf(pageFicha.getTallaAlfSelected());
@@ -65,7 +72,9 @@ public class ArticuloNavigations {
 	public static void buscarArticulo(Article article, Channel channel, AppEcom app, WebDriver driver) 
 	throws Exception {
 		SecCabecera.buscarTexto(article.getGarmentId(), channel, app, driver);
-		selectColorIfExists(article.getColor().getId(), app, driver);
+		if (article.getColor()!=null) {
+			selectColorIfExists(article.getColor().getId(), app, driver);
+		}
 	}
 
 	@SuppressWarnings("static-access")

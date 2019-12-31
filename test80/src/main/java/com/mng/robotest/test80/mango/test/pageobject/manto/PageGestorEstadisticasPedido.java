@@ -8,30 +8,30 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 public class PageGestorEstadisticasPedido extends WebdrvWrapp {
 
-    public static String titulo = "ESTADISTICAS PEDIDOS";
-    static String iniXPathTitulo = "//td[@class='txt11B' and text()[contains(.,'";
-    static String XPathStartDate = "//input[@class='dateTimePicker']";
-    static String XPathEndDate = "//input[@class='dateTimePickerFin']";
-    static String XPathSelectOption = "//td[text()[contains(.,'Que informacion deseas?')]]/select";
-    static String XPathTodosLosZalandosOption = "//option[@value='allzalando']";
-    static String XPathMostrarPedidosButton = "//input[@id='form:consultar']";
-    static String XPathLoadPopupImage = "//img[@src='../images/loadingFonsNegre.gif']";
-    static String XPathTablaInformacion = "//td/table[@class='txt8' and @border='2']";
-    static String XPathRadiusButtonDiaAnterior = "//label[text()[contains(.,'Dia Anterior')]]/../input[@type='radio']";
-    static String XPathCompararButton = "//input[@id='form:comparar']";
+	public static String titulo = "ESTADISTICAS PEDIDOS";
+	private final static String iniXPathTitulo = "//td[@class='txt11B' and text()[contains(.,'";
+	private final static String XPathStartDate = "//input[@class='dateTimePicker']";
+	private final static String XPathEndDate = "//input[@class='dateTimePickerFin']";
+	private final static String XPathSelectOption = "//td[text()[contains(.,'Que informacion deseas?')]]/select";
+	private final static String XPathTodosLosZalandosOption = "//option[@value='allzalando']";
+	private final static String XPathMostrarPedidosButton = "//input[@id='form:consultar']";
+	private final static String XPathLoadPopupImage = "//img[@src='../images/loadingFonsNegre.gif']";
+	private final static String XPathTablaInformacion = "//td/table[@class='txt8' and @border='2']";
+	private final static String XPathRadiusButtonDiaAnterior = "//label[text()[contains(.,'Dia Anterior')]]/../input[@type='radio']";
+	private final static String XPathCompararButton = "//input[@id='form:comparar']";
 
-    public static String getXPathTitulo(String title){
-    	return (iniXPathTitulo + title + "')]]");
-    }
-    
-    public static String getXPathColumnaCompararVerde(String tabla){
-    	return (tabla + "//tr[1]//td[@class='colum5' and text()[contains(.,'0 €')]][1]");
-    }
-    
-    public static String getXPathColumnaCompararRoja(String tabla){
-    	return (tabla + "//tr[1]//td[@class='colum6' and text()='0 %'][1]");
-    }
-    
+	public static String getXPathTitulo(String title){
+		return (iniXPathTitulo + title + "')]]");
+	}
+
+	public static String getXPathColumnaCompararVerde(String tabla){
+		return (tabla + "//tr[1]//td[@class='colum5' and text()[contains(.,'0 €')]][1]");
+	}
+
+	public static String getXPathColumnaCompararRoja(String tabla){
+		return (tabla + "//tr[1]//td[@class='colum6' and text()='0 %'][1]");
+	}
+
 	public static boolean isPage(WebDriver driver) {
 		return (isElementPresent(driver, By.xpath(getXPathTitulo(titulo))));
 	}
@@ -86,7 +86,6 @@ public class PageGestorEstadisticasPedido extends WebdrvWrapp {
 		isElementInvisibleUntil(driver, By.xpath(XPathLoadPopupImage), 60);
 	}
 
-
 	public static boolean isColumnaCompararVerdeNoZero(WebDriver driver) {
 		return (!isElementPresent(driver, By.xpath(getXPathColumnaCompararVerde(XPathTablaInformacion))));
 	}
@@ -94,6 +93,4 @@ public class PageGestorEstadisticasPedido extends WebdrvWrapp {
 	public static boolean isColumnaCompararRojaNoZero(WebDriver driver) {
 		return (!isElementPresent(driver, By.xpath(getXPathColumnaCompararRoja(XPathTablaInformacion))));
 	}
-
-	
 }

@@ -31,11 +31,16 @@ public class Garment {
 		articulo.setGarmentId(garmentId);
 		Color colorMoreStock = getColorWithMoreStock();
 		articulo.setColor(colorMoreStock);
-		articulo.setSize(colorMoreStock.getSizeWithMoreStock());
+		if (colorMoreStock!=null) {
+			articulo.setSize(colorMoreStock.getSizeWithMoreStock());
+		}
 		return articulo;
 	}
 	
 	private Color getDefaultColor() {
+		if (colors==null) {
+			return null;
+		}
 		for (Color color : colors) {
 			if (color.isDefaultColor()) {
 				return color;
@@ -45,6 +50,9 @@ public class Garment {
 	}
 	
 	private Color getColorWithMoreStock() {
+		if (colors==null) {
+			return null;
+		}
 		Color colorWithMoreStock = null;
 		for (Color color : colors) {
 			if (colorWithMoreStock == null ||
