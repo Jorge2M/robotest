@@ -1,6 +1,7 @@
 package com.mng.testmaker.service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -106,6 +107,7 @@ public class FilterSuites {
 		for (SuiteTM suite : SuitesExecuted.getSuitesExecuted()) {
 			listSuitesToReturn.add(SuiteData.from(suite));
 		}
+		listSuitesToReturn.sort(Comparator.comparing(SuiteData::getIdExecSuite).reversed());
 		return listSuitesToReturn;
 	}
 	

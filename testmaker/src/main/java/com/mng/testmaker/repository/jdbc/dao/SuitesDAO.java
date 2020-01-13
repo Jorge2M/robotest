@@ -46,7 +46,7 @@ public class SuitesDAO {
 		"SELECT " + ListFieldsSuiteTable  +
 		"  FROM SUITES " +
 		"WHERE IDEXECSUITE = ? " +
-		"ORDER BY IDEXECSUITE DESC";    
+		"ORDER BY IDEXECSUITE DESC";
 
 	private static final String SQLSelectSuitesFromId = 
 		"SELECT " + ListFieldsSuiteTable + 

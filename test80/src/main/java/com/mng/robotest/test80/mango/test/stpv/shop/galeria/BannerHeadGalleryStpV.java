@@ -28,16 +28,16 @@ public class BannerHeadGalleryStpV {
 		return (new BannerHeadGalleryStpV(pageGaleriaParent, driver));
 	}
 	
-    @SuppressWarnings("static-access")
-    public void validateBannerSuperiorIfExistsDesktop() {
-	   boolean bannerIsVisible = PageGaleriaDesktop.secBannerHead.isVisible(driver);
-	   if (bannerIsVisible) {
-		   if (!PageGaleriaDesktop.secBannerHead.isBannerWithoutTextAccesible(driver)) {
-			   checkBannerContainsSomeText();
-		   }
-	   }
-    }
-  
+	@SuppressWarnings("static-access")
+	public void validateBannerSuperiorIfExistsDesktop() {
+		boolean bannerIsVisible = PageGaleriaDesktop.secBannerHead.isVisible(driver);
+		if (bannerIsVisible) {
+			if (!PageGaleriaDesktop.secBannerHead.isBannerWithoutTextAccesible(driver)) {
+				checkBannerContainsSomeText();
+			}
+		}
+	}
+
 	@SuppressWarnings("static-access")
 	@Validation (
 		description="El Banner de Cabecera contiene algún texto",
@@ -47,30 +47,30 @@ public class BannerHeadGalleryStpV {
 		return ("".compareTo(textBanner)!=0);
 	}
 
-    @Validation
-    @SuppressWarnings("static-access")
-    public ChecksResult checkBannerContainsText(List<String> possibleTexts) {
-    	ChecksResult validations = ChecksResult.getNew();
-    	String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
-     	validations.add(
-     		"El banner de cabecera contiene el texto <b>" + possibleTexts.get(0) + "</b>",
-     		textBannersContainsPossibleText(textBanner, possibleTexts), State.Defect);
-     	return validations;
-    }
-    
-    @SuppressWarnings("static-access")
-    @Step (
-        description="Seleccionar el banner superior de la Galería", 
-        expected="Aparece una galería de artículos")
-    public void clickBannerSuperiorIfLinkableDesktop() throws Exception {
-	    PageGaleriaDesktop.secBannerHead.clickBannerIfClickable(driver);     
-	    pageGaleriaParent.validaArtEnContenido(3);
-    }
-   
-    public void checkBannerHeadSalesOn(Pais pais, IdiomaPais idioma) {
-	    checkBannerSalesHead(TypeGalery.Sales, pais, idioma);
-    }
-   
+	@Validation
+	@SuppressWarnings("static-access")
+	public ChecksResult checkBannerContainsText(List<String> possibleTexts) {
+		ChecksResult validations = ChecksResult.getNew();
+		String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
+		validations.add(
+			"El banner de cabecera contiene el texto <b>" + possibleTexts.get(0) + "</b>",
+			textBannersContainsPossibleText(textBanner, possibleTexts), State.Defect);
+		return validations;
+	}
+
+	@SuppressWarnings("static-access")
+	@Step (
+		description="Seleccionar el banner superior de la Galería", 
+		expected="Aparece una galería de artículos")
+	public void clickBannerSuperiorIfLinkableDesktop() throws Exception {
+		PageGaleriaDesktop.secBannerHead.clickBannerIfClickable(driver);     
+		pageGaleriaParent.validaArtEnContenido(3);
+	}
+
+	public void checkBannerHeadSalesOn(Pais pais, IdiomaPais idioma) {
+		checkBannerSalesHead(TypeGalery.Sales, pais, idioma);
+	}
+
     @SuppressWarnings("static-access")
     @Validation
     public ChecksResult checkBannerSalesHead(TypeGalery typeGalery, Pais pais, IdiomaPais idioma) {
