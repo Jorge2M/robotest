@@ -19,21 +19,21 @@ public class TestRunTM extends XmlTest {
 	private static final long serialVersionUID = -4002416107477209626L;
 	private StateExecution stateExecution = StateExecution.Started;
 	private State state = State.Ok;
-    public XmlGroups x_xmlGroupsVisible;
-    private ITestContext testNgContext;
-    private StorerErrorStep storerErrorStep = null;
-    private List<TestCaseTM> listTestCases = new ArrayList<>();
+	public XmlGroups x_xmlGroupsVisible;
+	private ITestContext testNgContext;
+	private StorerErrorStep storerErrorStep = null;
+	private List<TestCaseTM> listTestCases = new ArrayList<>();
 	private BrowserStackDesktop browserStackDesktop = null;
 	private BrowserStackMobil browserStackMobil = null;
 	
-    public TestRunTM(XmlSuite suite, int index) {
-        super(suite, index);
-    }
+	public TestRunTM(XmlSuite suite, int index) {
+		super(suite, index);
+	}
 
-    public TestRunTM(XmlSuite suite) {
-        super(suite);
-    }
-    
+	public TestRunTM(XmlSuite suite) {
+		super(suite);
+	}
+
 	public void end() {
 		state = getStateFromTestCases();
 		stateExecution = StateExecution.Stopped;
@@ -62,14 +62,14 @@ public class TestRunTM extends XmlTest {
 		return state;
 	}
 	
-    public SuiteTM getSuiteParent() {
-    	return (SuiteTM)getSuite();
-    }
-    
-    public ITestContext getTestNgContext() {
-    	return testNgContext;
-    }
-    
+	public SuiteTM getSuiteParent() {
+		return (SuiteTM)getSuite();
+	}
+
+	public ITestContext getTestNgContext() {
+		return testNgContext;
+	}
+
     public void setTestNgContext(ITestContext testNgContext) {
         this.testNgContext = testNgContext;
         String suiteDirectory = ((SuiteTM)getSuite()).getPathDirectory();

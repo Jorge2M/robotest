@@ -17,8 +17,8 @@ public enum TestABGoogleExpImpl implements TestABGoogleExp {
 		Arrays.asList(
 			"V0-Galería sin React", //Este es el único caso posible en Outlet
 			"V1-Galería con React"),
-	    Arrays.asList(Channel.desktop),
-	    Arrays.asList(AppEcom.shop, AppEcom.votf)
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.shop, AppEcom.votf)
 	),
 	
 	//TODO es posible eliminarlo en cuanto se ejecute el planchado
@@ -29,8 +29,8 @@ public enum TestABGoogleExpImpl implements TestABGoogleExp {
 		Arrays.asList(
 			"V0-Galería sin React", //Este es el único caso posible en Outlet
 			"V1-Galería con React"),
-	    Arrays.asList(Channel.desktop),
-	    Arrays.asList(AppEcom.shop, AppEcom.votf)
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.shop, AppEcom.votf)
 	),
 	
 	MVPCheckoutDesktop(

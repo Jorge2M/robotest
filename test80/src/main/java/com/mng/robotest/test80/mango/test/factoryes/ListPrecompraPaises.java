@@ -22,39 +22,39 @@ public class ListPrecompraPaises {
 	
 	@SuppressWarnings("unused")
 	@Parameters({"countrys"})
-    @Factory
+	@Factory
 	public Object[] createInstances(String countrys, ITestContext ctxTestRun) throws Exception {
-	    List<Object> listTests = new ArrayList<>();
-	    try {
-	    	InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
-	    	VersionPagosSuite version = VersionPagosSuite.valueOf(inputData.getVersion());
-	    	List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(countrys);
-	        int prioridad=0;
-	        for (Pais pais : listCountrys) {
-                IdiomaPais primerIdioma = pais.getListIdiomas().get(0);
-                AppEcom app = (AppEcom)inputData.getApp();
-                Channel channel = inputData.getChannel();
-                if (UtilsTestMango.paisConCompra(pais, app)) {
-                    if (!(version.isEmpl() && pais.getAccesoEmpl().getTarjeta()==null)) {
-                        if (!(app==AppEcom.votf && pais.getAccesoVOTF().getUsuario()==null)) {
-                            DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, pais.getListIdiomas().get(0), inputData.getUrlBase());
-                            listTests.add(new PaisAplicaVale(version, dCtxSh, prioridad));
-                            prioridad+=1;
-                            System.out.println(
-                                "Creado Test con datos: " +
-                                ",Pais=" + pais.getNombre_pais() +
-                                ",Idioma=" + primerIdioma.getCodigo().getLiteral() +
-                                ",Num Idiomas=" + pais.getListIdiomas().size());
-                        }
-                    }
-                }
-            }
-	    }
-	    catch (Throwable e) {
-	        e.printStackTrace();
-	        throw e;
-	    }
-    
-	    return (listTests.toArray(new Object[listTests.size()]));
+		List<Object> listTests = new ArrayList<>();
+		try {
+			InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
+			VersionPagosSuite version = VersionPagosSuite.valueOf(inputData.getVersion());
+			List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(countrys);
+			int prioridad=0;
+			for (Pais pais : listCountrys) {
+				IdiomaPais primerIdioma = pais.getListIdiomas().get(0);
+				AppEcom app = (AppEcom)inputData.getApp();
+				Channel channel = inputData.getChannel();
+				if (UtilsTestMango.paisConCompra(pais, app)) {
+					if (!(version.isEmpl() && pais.getAccesoEmpl().getTarjeta()==null)) {
+						if (!(app==AppEcom.votf && pais.getAccesoVOTF().getUsuario()==null)) {
+							DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, pais.getListIdiomas().get(0), inputData.getUrlBase());
+							listTests.add(new PaisAplicaVale(version, dCtxSh, prioridad));
+							prioridad+=1;
+							System.out.println(
+								"Creado Test con datos: " +
+								",Pais=" + pais.getNombre_pais() +
+								",Idioma=" + primerIdioma.getCodigo().getLiteral() +
+								",Num Idiomas=" + pais.getListIdiomas().size());
+						}
+					}
+				}
+			}
+		}
+		catch (Throwable e) {
+			e.printStackTrace();
+			throw e;
+		}
+
+		return (listTests.toArray(new Object[listTests.size()]));
 	}	
 }

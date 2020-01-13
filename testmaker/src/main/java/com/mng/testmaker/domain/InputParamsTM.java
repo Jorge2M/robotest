@@ -37,6 +37,8 @@ public abstract class InputParamsTM {
 	public static final String StoreParam = "store";
 	public static final String MailsParam = "mails";
 	public static final String TypeAccessParam = "typeAccess";
+	public static final String ChromeDriverVersionParam = "chromedriverVersion";
+	public static final String GeckoDriverVersionParam = "geckodriverVersion";
 	
 	public enum ManagementWebdriver {recycle, discard}
 	private Class<? extends Enum<?>> suiteEnum;
@@ -85,6 +87,12 @@ public abstract class InputParamsTM {
 	
 	@FormParam(TypeAccessParam)
 	String typeAccess = TypeAccess.CmdLine.name();
+	
+	@FormParam(ChromeDriverVersionParam)
+	String chromeDriverVersion;
+	
+	@FormParam(GeckoDriverVersionParam)
+	String geckoDriverVersion;	
 
 	public InputParamsTM() {}
 
@@ -214,6 +222,20 @@ public abstract class InputParamsTM {
 			.possibleValues(TypeAccess.class)
 			.desc("Type of access. Posible values: " + Arrays.asList(TypeAccess.values()))
 			.build());
+		
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.ChromeDriverVersionParam)
+			.required(false)
+			.hasArgs()
+			.pattern("\\d+(\\.\\d+)*")
+			.desc("Version of ChromeDriver to use")
+			.build());
+
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.GeckoDriverVersionParam)
+			.required(false)
+			.hasArgs()
+			.pattern("\\d+(\\.\\d+)*")
+			.desc("Version of GeckoDriver (Firefox) to use")
+			.build());
 
 		return optionsTM;
 	}
@@ -242,6 +264,8 @@ public abstract class InputParamsTM {
 		net = cmdLine.getOptionValue(NetAnalysisParam);
 		store = cmdLine.getOptionValue(StoreParam);
 		typeAccess = cmdLine.getOptionValue(TypeAccessParam);
+		chromeDriverVersion = cmdLine.getOptionValue(ChromeDriverVersionParam);
+		geckoDriverVersion = cmdLine.getOptionValue(GeckoDriverVersionParam);
 	}
 
 	private enum ParamTM {
@@ -258,7 +282,9 @@ public abstract class InputParamsTM {
 		NetAnalysis(NetAnalysisParam),
 		Store(StoreParam),
 		Mails(MailsParam),
-		TypeAccess(TypeAccessParam);
+		TypeAccess(TypeAccessParam),
+		ChromeDriverVersion(ChromeDriverVersionParam),
+		GeckoDriverVersion(GeckoDriverVersionParam);
 		
 		public String nameParam;
 		private ParamTM(String nameParam) {
@@ -307,7 +333,12 @@ public abstract class InputParamsTM {
 			return this.mailsCommaSeparated;
 		case TypeAccess:
 			return this.typeAccess;
+		case ChromeDriverVersion:
+			return this.chromeDriverVersion;
+		case GeckoDriverVersion:
+			return this.geckoDriverVersion;
 		}
+
 		return "";
 	}
 
@@ -473,6 +504,20 @@ public abstract class InputParamsTM {
 	}
 	public void setTypeAccess(TypeAccess typeAccess) {
 		this.typeAccess = typeAccess.name();
+	}
+	
+	public String getChromeDriverVersion() {
+		return chromeDriverVersion;
+	}
+	public void setChromeDriverVersion(String chromeDriverVersion) {
+		this.chromeDriverVersion = chromeDriverVersion;
+	}
+	
+	public String getGeckoDriverVersion() {
+		return geckoDriverVersion;
+	}
+	public void setGeckoDriverVersion(String geckoDriverVersion) {
+		this.geckoDriverVersion = geckoDriverVersion;
 	}
 
 	public DataFilterTCases getDataFilter() {

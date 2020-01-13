@@ -26,48 +26,48 @@ import com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio.ModalDroppoin
 
 public class Page1EnvioCheckoutMobilStpV {
 
-    public static ModalDroppointsStpV modalDroppoints;
-    
-    @Validation
-    public static ChecksResult validateIsPage(boolean userLogged, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
-	 	validations.add(
+	public static ModalDroppointsStpV modalDroppoints;
+
+	@Validation
+	public static ChecksResult validateIsPage(boolean userLogged, WebDriver driver) {
+		ChecksResult validations = ChecksResult.getNew();
+			validations.add(
 			"Aparece la página correspondiente al paso-1",
 			WebdrvWrapp.isElementPresent(driver, By.xpath("//h2[@data-toggle='step1']")), State.Warn);
-	 	validations.add(
+			validations.add(
 			"Aparece el botón de introducción del código promocional",
 			Page1EnvioCheckoutMobil.isVisibleInputCodigoPromoUntil(0, driver), State.Defect);
-	 	if (!userLogged) {
-		 	validations.add(
+			if (!userLogged) {
+				validations.add(
 				"Aparece seleccionado el método de envío \"Estándar\"",
 				WebdrvWrapp.isElementPresent(driver, By.xpath("//div[@data-analytics-id='standard' and @class[contains(.,'checked')]]")), 
 				State.Warn);
-	 	}
-	 	
-	 	return validations;
-    }
-    
-    @SuppressWarnings("static-access")
-    @Step (
-    	description="<b style=\"color:blue;\">#{nombrePago}</b>:Seleccionamos el método de envío <b>#{tipoTransporte}</b> (previamente, si no lo estamos, nos posicionamos en el apartado \"1. Envio\")", 
-        expected="Se selecciona el método de envío correctamente")
-    public static void selectMetodoEnvio(TipoTransporte tipoTransporte, @SuppressWarnings("unused") String nombrePago, 
-    									 DataCtxPago dCtxPago, WebDriver driver) throws Exception {
-        Page1EnvioCheckoutMobil.selectMetodoAfterPositioningIn1Envio(tipoTransporte, driver);
-        if (!tipoTransporte.isEntregaDomicilio()) {
-        	if (ModalDroppoints.isErrorMessageVisibleUntil(driver)) {
-        		ModalDroppoints.searchAgainByUserCp(dCtxPago.getDatosRegistro().get("cfCp"), driver);
-        	}
-        }
+			}
+			
+			return validations;
+	}
 
-        //Validaciones
-        validaBlockSelected(tipoTransporte, 3, driver);
-        if (tipoTransporte.isEntregaDomicilio()) {
-            modalDroppoints.validaIsNotVisible(Channel.movil_web, driver);
-        } else {
-            modalDroppoints.validaIsVisible(Channel.movil_web, driver);
-        }
-    }    
+	@SuppressWarnings("static-access")
+	@Step (
+		description="<b style=\"color:blue;\">#{nombrePago}</b>:Seleccionamos el método de envío <b>#{tipoTransporte}</b> (previamente, si no lo estamos, nos posicionamos en el apartado \"1. Envio\")", 
+		expected="Se selecciona el método de envío correctamente")
+	public static void selectMetodoEnvio(TipoTransporte tipoTransporte, @SuppressWarnings("unused") String nombrePago, 
+										 DataCtxPago dCtxPago, WebDriver driver) throws Exception {
+		Page1EnvioCheckoutMobil.selectMetodoAfterPositioningIn1Envio(tipoTransporte, driver);
+		if (!tipoTransporte.isEntregaDomicilio()) {
+			if (ModalDroppoints.isErrorMessageVisibleUntil(driver)) {
+				ModalDroppoints.searchAgainByUserCp(dCtxPago.getDatosRegistro().get("cfCp"), driver);
+			}
+		}
+
+		//Validaciones
+		validaBlockSelected(tipoTransporte, 3, driver);
+		if (tipoTransporte.isEntregaDomicilio()) {
+			modalDroppoints.validaIsNotVisible(Channel.movil_web, driver);
+		} else {
+			modalDroppoints.validaIsVisible(Channel.movil_web, driver);
+		}
+	}
     
     @Validation (
     	description="Queda seleccionado el bloque correspondiete a <b>#{tipoTransporte}</b> (lo esperamos hasta #{maxSecondsWait} segundos)",

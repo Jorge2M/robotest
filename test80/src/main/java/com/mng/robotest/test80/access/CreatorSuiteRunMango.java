@@ -21,6 +21,9 @@ import com.mng.testmaker.domain.SuiteMaker;
 
 public class CreatorSuiteRunMango extends CreatorSuiteRun {
 	
+	private final String ChromeDriverVersionDefault = "78.0.3904.70";
+	private final String GeckoDriverVersionDefault = "0.26.0";
+	
 	private CreatorSuiteRunMango() throws Exception {
 		super();
 	}
@@ -36,6 +39,7 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 	
 	@Override
 	public SuiteMaker getSuiteMaker() throws Exception {
+		setWebDriverVersion();
 		InputParamsMango inputParamsMango = (InputParamsMango)inputParams;
 		try {
 			switch ((Suites)inputParams.getSuite()) {
@@ -72,5 +76,14 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 		}
 
 		return null;
+	}
+	
+	private void setWebDriverVersion() {
+		if (inputParams.getChromeDriverVersion()==null) {
+			inputParams.setChromeDriverVersion(ChromeDriverVersionDefault);
+		}
+		if (inputParams.getGeckoDriverVersion()==null) {
+			inputParams.setGeckoDriverVersion(GeckoDriverVersionDefault);
+		}
 	}
 }

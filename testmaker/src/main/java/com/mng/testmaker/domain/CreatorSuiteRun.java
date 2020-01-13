@@ -30,27 +30,27 @@ public abstract class CreatorSuiteRun {
 		return suiteMaker.getSuite();
 	}
 	
-    public SuiteTM execTestSuite() throws Exception {
-    	SuiteTM suite = suiteMaker.getSuite();
-    	TestMaker.run(suite);
-    	return suite;
-    }
-    
-    public SuiteTM execTestSuiteAsync() throws Exception {
-    	SuiteTM suite = suiteMaker.getSuite();
-    	TestMaker.runAsync(suite);
-    	return suite;
-    }
-    
-    public List<TestMethod> getListAllTestCases() {
-    	return suiteMaker.getListTests();
-    }
-    
-    public List<TestMethodData> getListAllTestCasesData() {
-    	List<TestMethodData> listTestMethods = new ArrayList<>();
-    	for (TestMethod testMethod : getListAllTestCases()) {
-    		listTestMethods.add(testMethod.getData());
-    	}
-    	return listTestMethods;
-    }
+	public SuiteTM execTestSuite() throws Exception {
+		SuiteTM suite = suiteMaker.getSuite();
+		TestMaker.run(suite);
+		return suite;
+	}
+
+	public SuiteTM execTestSuiteAsync() throws Exception {
+		SuiteTM suite = suiteMaker.getSuite();
+		TestMaker.runAsync(suite);
+		return suite;
+	}
+
+	public List<TestMethod> getListAllTestCases() {
+		return suiteMaker.getListTests();
+	}
+
+	public List<TestMethodData> getListAllTestCasesData() {
+		List<TestMethodData> listTestMethods = new ArrayList<>();
+		for (TestMethod testMethod : getListAllTestCases()) {
+			listTestMethods.add(testMethod.getData());
+		}
+		return listTestMethods;
+	}
 }

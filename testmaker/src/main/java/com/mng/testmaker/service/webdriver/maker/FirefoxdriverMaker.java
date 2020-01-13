@@ -1,6 +1,7 @@
 package com.mng.testmaker.service.webdriver.maker;
 
 import java.awt.Toolkit;
+
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 
 import org.openqa.selenium.Dimension;
@@ -18,25 +19,25 @@ import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriver
 
 class FirefoxdriverMaker implements WebdriverMaker {
 	
-    //Nota: si se modifica la versión sería conveniente regenerar la AMI correspondiente al Robotest en Cloud
-	final static String GeckoDriverVersion = "0.26.0";
+	//Nota: si se modifica la versión sería conveniente regenerar la AMI correspondiente al Robotest en Cloud
+	final static String GeckoDriverVersionDefault = "0.26.0";
 	WebDriverType webDriverType;
 	FirefoxProfile fp = new FirefoxProfile();
 	FirefoxOptions options;
 	Channel channel = Channel.desktop;
 	boolean nettraffic = false;
 	
-	private FirefoxdriverMaker(WebDriverType webDriverType) {
+	private FirefoxdriverMaker(WebDriverType webDriverType, String geckoDriverVersion) {
 		this.webDriverType = webDriverType;
 		initialConfig();
-        setDriverFirefox();
+		setDriverFirefox(geckoDriverVersion);
 	}
 	
-	static FirefoxdriverMaker getNew(WebDriverType WebDriverType) {
-		return (new FirefoxdriverMaker(WebDriverType));
+	static FirefoxdriverMaker getNew(WebDriverType WebDriverType, String geckoDriverVersion) {
+		return (new FirefoxdriverMaker(WebDriverType, geckoDriverVersion));
 	}
 	
-    @Override
+	@Override
 	public WebdriverMaker setChannel(Channel channel) {
 		this.channel = channel;
 		return this;
@@ -82,8 +83,12 @@ class FirefoxdriverMaker implements WebdriverMaker {
 	    fp.setPreference("media.windows-media-foundation.enabled", false); 
 	}
 	    
-    private static void setDriverFirefox() {        
-        FirefoxDriverManager.firefoxdriver().version(GeckoDriverVersion).setup();
+    private static void setDriverFirefox(String firefoxDriverVersion) {
+		if (firefoxDriverVersion!=null) {
+			FirefoxDriverManager.firefoxdriver().version(firefoxDriverVersion).setup();
+		} else {
+			FirefoxDriverManager.firefoxdriver().version(GeckoDriverVersionDefault).setup();
+		}
     }
 	
 	private void activateLogs() {

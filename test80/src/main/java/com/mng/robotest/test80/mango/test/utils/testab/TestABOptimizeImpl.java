@@ -20,17 +20,17 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 	MobileSelectorTallaColor (
 		"GTM-5T8R33",
 		"SHOP-176-PLP-Mobile-Selector talla/color",
-	    "UWOU5vObVAZJ7ylnbAK2vQ",
-	    "GTM-KWJ6XJ_OPT-PHJV7$",
-	    "QUICK_PREVIEW",
-	    Arrays.asList(0,1,2,3),
-	    Arrays.asList(
-	    	"V0-Original", 
-	    	"V1-B - Color en link + CTA añadir con selectores como overlay", 
-	    	"V2-C - Color CTA + CTA añadir con selectores en modal",
-	    	"V3-D - Color en link + CTA añadir con selectores en modal"),
-	    Arrays.asList(Channel.movil_web),
-	    Arrays.asList(AppEcom.shop)
+		"UWOU5vObVAZJ7ylnbAK2vQ",
+		"GTM-KWJ6XJ_OPT-PHJV7$",
+		"QUICK_PREVIEW",
+		Arrays.asList(0,1,2,3),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-B - Color en link + CTA añadir con selectores como overlay", 
+			"V2-C - Color CTA + CTA añadir con selectores en modal",
+			"V3-D - Color en link + CTA añadir con selectores en modal"),
+		Arrays.asList(Channel.movil_web),
+		Arrays.asList(AppEcom.shop)
 	),
 	
 //	MVPCheckoutDesktop (
@@ -50,43 +50,57 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 	SHOP191_BuscadorDesktop (
 		"GTM-5T8R33",
 		"SHOP-191 - Buscador - Desktop - últimas búsquedas",
-	    "UWOU5vObVAZJ7ylnbAK2vQ",
-	    "GTM-KWJ6XJ_OPT-MSZD5$",
-	    "QUICK_PREVIEW",
-	    Arrays.asList(0,1),
-	    Arrays.asList(
-	    	"V0-Original", 
-	    	"V1-Last Searches Visible"),
-	    Arrays.asList(Channel.desktop),
-	    Arrays.asList(AppEcom.shop, AppEcom.votf)
+		"UWOU5vObVAZJ7ylnbAK2vQ",
+		"GTM-KWJ6XJ_OPT-MSZD5$",
+		"QUICK_PREVIEW",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-Last Searches Visible"),
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.shop, AppEcom.votf)
 	),
 	
-	SHOP126_HeaderNuevosIconosDesktop (
-		"GTM-5T8R33",
-		"100% - SHOP-126 - Header - Desktop - Nuevos Iconos",
-	    "UWOU5vObVAZJ7ylnbAK2vQ",
-	    "GTM-KWJ6XJ_OPT-KVTBH$",
-	    "QUICK_PREVIEW",
-	    Arrays.asList(0,1),
-	    Arrays.asList(
-	    	"V0-Original", 
-	    	"V1-Nuevos iconos"),
-	    Arrays.asList(Channel.desktop),
-	    Arrays.asList(AppEcom.shop, AppEcom.votf)
-	),
+//	SHOP126_HeaderNuevosIconosDesktop (
+//		"GTM-5T8R33",
+//		"100% - SHOP-126 - Header - Desktop - Nuevos Iconos",
+//		"UWOU5vObVAZJ7ylnbAK2vQ",
+//		"GTM-KWJ6XJ_OPT-KVTBH$",
+//		"QUICK_PREVIEW",
+//		Arrays.asList(0,1),
+//		Arrays.asList(
+//			"V0-Original", 
+//			"V1-Nuevos iconos"),
+//		Arrays.asList(Channel.desktop),
+//		Arrays.asList(AppEcom.shop, AppEcom.votf)
+//	),
 	
-	SHOP219_PLPMobileSinFavoritos (
+//	SHOP219_PLPMobileSinFavoritos (
+//		"GTM-5T8R33",
+//		"SHOP-219 - PLP - Mobile - Sin favoritos",
+//		"UWOU5vObVAZJ7ylnbAK2vQ",
+//		"GTM-KWJ6XJ_OPT-KTLLM$",
+//		"QUICK_PREVIEW",
+//		Arrays.asList(0,1),
+//		Arrays.asList(
+//			"V0-Original", 
+//			"V1-Sin favoritos"),
+//		Arrays.asList(Channel.movil_web),
+//		Arrays.asList(AppEcom.shop)
+//	),
+	
+	PLP_Desktop_NewFilters (
 		"GTM-5T8R33",
-		"SHOP-219 - PLP - Mobile - Sin favoritos",
-	    "UWOU5vObVAZJ7ylnbAK2vQ",
-	    "GTM-KWJ6XJ_OPT-KTLLM$",
-	    "QUICK_PREVIEW",
-	    Arrays.asList(0,1),
-	    Arrays.asList(
-	    	"V0-Original", 
-	    	"V1-Sin favoritos"),
-	    Arrays.asList(Channel.movil_web),
-	    Arrays.asList(AppEcom.shop)
+		"PLP - Desktop - New filters",
+		"UWOU5vObVAZJ7ylnbAK2vQ",
+		"GTM-KWJ6XJ_OPT-P3CVP$",
+		"QUICK_PREVIEW",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-New Filters"),
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.shop, AppEcom.votf)
 	);
 	
 	private String group;

@@ -38,15 +38,15 @@ public class BannerHeadGalleryStpV {
 	   }
     }
   
-    @SuppressWarnings("static-access")
+	@SuppressWarnings("static-access")
 	@Validation (
-    	description="El Banner de Cabecera contiene algún texto",
-    	level=State.Defect)
-    public boolean checkBannerContainsSomeText() {
-        String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
-        return ("".compareTo(textBanner)!=0);
+		description="El Banner de Cabecera contiene algún texto",
+		level=State.Defect)
+	public boolean checkBannerContainsSomeText() {
+		String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
+		return ("".compareTo(textBanner)!=0);
 	}
-    
+
     @Validation
     @SuppressWarnings("static-access")
     public ChecksResult checkBannerContainsText(List<String> possibleTexts) {

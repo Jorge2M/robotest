@@ -67,7 +67,7 @@ public class CmdRunTests {
 			return smokeTest.getListTests();
 		case SmokeManto:
 			SmokeMantoSuite smokeManto = new SmokeMantoSuite(inputParams);
-			return smokeManto.getListTests();            
+			return smokeManto.getListTests();
 		default:
 			return null;
 		}
