@@ -12,12 +12,12 @@ import com.mng.testmaker.domain.TestRunMaker;
 
 public class SmokeTestSuite extends SuiteMaker {
 
-    public SmokeTestSuite(InputParamsTM iParams) {
-    	super(iParams);
-    	setParameters(new HashMap<>());
-    	TestRunMaker testRun = TestRunMaker.from(iParams.getSuiteName(), Arrays.asList(SolicitudPedido.class, Piloto.class));
-    	addTestRun(testRun);
-    	setParallelMode(ParallelMode.METHODS);
-    	setThreadCount(3);
-    }
+	public SmokeTestSuite(InputParamsTM iParams) {
+		super(iParams);
+		setParameters(new HashMap<>());
+		TestRunMaker testRun = TestRunMaker.from(iParams.getSuiteName(), Arrays.asList(SolicitudPedido.class, Piloto.class));
+		addTestRun(testRun);
+		setParallelMode(ParallelMode.METHODS);
+		setThreadCount(3);
+	}
 }

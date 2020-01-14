@@ -1,0 +1,29 @@
+<assembly>
+<id>distribution</id>
+ 
+<!-- el formato de salida es archivo .zip -->
+<formats>
+<format>zip</format>
+</formats>
+ 
+<!-- incluir todas las dependencias runtime en el directorio lib del archivo .zip de salida-->
+<dependencySets>
+<dependencySet>
+<outputDirectory>/lib</outputDirectory>
+<useProjectArtifact>false</useProjectArtifact>
+</dependencySet>
+</dependencySets>
+ 
+<fileSets>
+<!-- incluir el jar de la aplicación en el directorio base del archivo .zip -->
+<fileSet>
+<directory>target</directory>
+<outputDirectory></outputDirectory>
+<includes>
+<include>*.jar</include>
+</includes>
+</fileSet>
+
+</fileSets>
+</assembly>
+

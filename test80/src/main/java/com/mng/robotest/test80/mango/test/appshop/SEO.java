@@ -9,6 +9,7 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.stpv.otras.BrowserStpV;
+import com.mng.testmaker.domain.TestCaseTM;
 import com.mng.testmaker.service.TestMaker;
 
 
@@ -29,12 +30,16 @@ public class SEO {
 		groups = { "Otras", "Canal:desktop_App:shop,outlet"}, 
 		description="Comprobar existencia y contenido del fichero robots.txt")
 	public void SEO001_check_RobotsSitemap() throws Exception {
+		TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
 		DataCtxShop dCtxSh = getCtxShForTest();
-		WebDriver driver = TestMaker.getDriverTestCase();
+		WebDriver driver = testCase.getDriver();
 		if (!UtilsMangoTest.isEntornoPRO(dCtxSh.appE, driver)) {
 			return;
 		}
-		BrowserStpV.inputRobotsURLandValidate(dCtxSh.urlAcceso, dCtxSh.appE, driver);
+		
+		if (testCase.getInputParamsSuite().getApp()==AppEcom.shop) {
+			BrowserStpV.inputRobotsURLandValidate(dCtxSh.urlAcceso, dCtxSh.appE, driver);
+		}
 
 		URI uriBase = new URI(dCtxSh.urlAcceso);
 		String urlSitemap = dCtxSh.urlAcceso.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
