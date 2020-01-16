@@ -1,6 +1,7 @@
 package org.mng.testgoogle.test.testcase.stpv;
 
 import org.mng.testgoogle.test.testcase.pageobject.GoogleMainPage;
+import org.mng.testgoogle.test.testcase.pageobject.ResultsGooglePage;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
@@ -21,9 +22,9 @@ public class GoogleMainPageStpV {
 		expected="")
 	public ResultsGooglePageStpV searchTextWithManyResultPages(String textToSearch, WebDriver driver) throws Exception {
 		googlePage.inputText(textToSearch);
-		googlePage.clickBuscarConGoogleButton();
+		ResultsGooglePage pageResults = googlePage.clickBuscarConGoogleButton();
 		
-		ResultsGooglePageStpV resultsPageStpV = ResultsGooglePageStpV.getNew(driver);
+		ResultsGooglePageStpV resultsPageStpV = ResultsGooglePageStpV.getNew(pageResults);
 		resultsPageStpV.checkAreManyPages(googlePage);
 		return resultsPageStpV;
 	}

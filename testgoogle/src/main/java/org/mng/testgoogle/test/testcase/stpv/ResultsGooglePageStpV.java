@@ -14,8 +14,14 @@ public class ResultsGooglePageStpV {
 	private ResultsGooglePageStpV(WebDriver driver) {
 		resultsPage = ResultsGooglePage.getNew(driver);
 	}
+	private ResultsGooglePageStpV(ResultsGooglePage resultsPage) {
+		this.resultsPage = resultsPage;
+	}
 	public static ResultsGooglePageStpV getNew(WebDriver driver) {
 		return new ResultsGooglePageStpV(driver);
+	}
+	public static ResultsGooglePageStpV getNew(ResultsGooglePage resultsPage) {
+		return new ResultsGooglePageStpV(resultsPage);
 	}
 	
 	@Validation (

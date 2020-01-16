@@ -22,8 +22,8 @@ public class Constantes {
     public static final int BOTON_REGISTRATE = 1;
     public static final int BOTON_CERRAR = 2;
     
-    public static final String userManto = "jorge.munoz";
-    public static final String passwordManto = "2010martina";
+    public static final String userManto = "00556106";
+    public static final String passwordManto = "Enero2020";
     
 	
     public static final String CODIGO_ESPAÑA = "001";

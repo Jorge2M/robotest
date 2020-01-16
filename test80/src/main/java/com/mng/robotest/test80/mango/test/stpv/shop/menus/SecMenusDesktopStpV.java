@@ -103,7 +103,7 @@ public class SecMenusDesktopStpV {
         expected="Aparecen artículos asociados al menú",
         saveNettraffic=SaveWhen.Always)
     public void selectMenuLateral2oLevel(Menu2onLevel menu2onLevel, DataCtxShop dCtxSh) throws Exception {
-    	secMenus.secMenuLateral.clickMenu(menu2onLevel);       
+    	secMenus.secMenuLateral.clickMenu(menu2onLevel);
     	validaSelecMenu(menu2onLevel, dCtxSh);
     }
     

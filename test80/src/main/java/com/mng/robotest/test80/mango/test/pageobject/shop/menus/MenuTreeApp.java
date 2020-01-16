@@ -10,16 +10,16 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 
 
 public class MenuTreeApp {
-	private static final List<MenuTreeApp> cacheMenusForEachApp = new ArrayList<>();
+	private static final List<MenuTreeApp> libraryMenusForEachApp = new ArrayList<>();
+	public final Set<Menu1rstLevel> libraryMenusFirstLevel = new HashSet<>();
 	AppEcom app;
-	Set<Menu1rstLevel> menus1rstLevel = new HashSet<>();
-    
+
     private MenuTreeApp(AppEcom app) {
     	this.app = app;
     }
     
     static synchronized MenuTreeApp of(AppEcom app) {
-    	for (MenuTreeApp menuTree : cacheMenusForEachApp) {
+    	for (MenuTreeApp menuTree : libraryMenusForEachApp) {
     		if (app==menuTree.getApp()) {
     			return menuTree;
     		}
@@ -28,7 +28,7 @@ public class MenuTreeApp {
     	//If doesnt exists -> creation, initialization and store in cache
     	MenuTreeApp menuTree = new MenuTreeApp(app);
     	menuTree.setInitialMenus();
-    	cacheMenusForEachApp.add(menuTree);
+    	libraryMenusForEachApp.add(menuTree);
     	return menuTree;
     }
     
@@ -42,15 +42,14 @@ public class MenuTreeApp {
     }
     
     private Menu1rstLevel getMenuLevel1From(KeyMenu1rstLevel key) {
-    	for (Menu1rstLevel menu1rstLevel : menus1rstLevel) {
+    	for (Menu1rstLevel menu1rstLevel : libraryMenusFirstLevel) {
     		if (key.equals(menu1rstLevel.getKey())) {
     			return menu1rstLevel;
     		}
     	}
         
-    	//Si no existe lo creamos y almacenamos en caché
     	Menu1rstLevel newMenu = Menu1rstLevel.from(this.app, key, key.dataMenu, false, "*".split(","));
-    	menus1rstLevel.add(newMenu); 
+//    	menus1rstLevel.add(newMenu); 
     	return newMenu;
     }
 
@@ -65,7 +64,7 @@ public class MenuTreeApp {
     }
     
     Set<Menu1rstLevel> getMenus1rstLevel() {
-    	return menus1rstLevel;
+    	return libraryMenusFirstLevel;
     }
     
     AppEcom getApp() {
@@ -84,7 +83,7 @@ public class MenuTreeApp {
     private void addMenu1rstLevelMujerNuevo() {
     	KeyMenu1rstLevel keyMujerNuevo = KeyMenu1rstLevel.from(LineaType.she, null/*sublineaType*/, "New Now");
 	    Menu1rstLevel menu1rstLevelNuevo = Menu1rstLevel.from(app, keyMujerNuevo, "nuevo", false, "*".split(","));
-	    menus1rstLevel.add(menu1rstLevelNuevo);
+	    libraryMenusFirstLevel.add(menu1rstLevelNuevo);
     }
     
     private void addMenus2onLevelOfMujerVestidos() {
@@ -104,7 +103,7 @@ public class MenuTreeApp {
 	    	menu1rstLevelVestidos.addMenu2onLevel(Menu2onLevel.from(menu1rstLevelVestidos, "fiesta", "".split(",")));
 	    }
 	
-	    menus1rstLevel.add(menu1rstLevelVestidos);
+	    libraryMenusFirstLevel.add(menu1rstLevelVestidos);
     }
     
     private void addMenus2onLevelOfMujerCamisas() {
@@ -115,14 +114,14 @@ public class MenuTreeApp {
 	    menu1rstLeveCamisas.addMenu2onLevel(Menu2onLevel.from(menu1rstLeveCamisas, "camisas", "".split(",")));
 	    menu1rstLeveCamisas.addMenu2onLevel(Menu2onLevel.from(menu1rstLeveCamisas, "blusas", "".split(",")));
 	    menu1rstLeveCamisas.addMenu2onLevel(Menu2onLevel.from(menu1rstLeveCamisas, "tops", "Camisa,Blusa,Top".split(",")));
-	    menus1rstLevel.add(menu1rstLeveCamisas);
+	    libraryMenusFirstLevel.add(menu1rstLeveCamisas);
     }
     
     private void addMenu1rstLevelHombreZapatos() {
 	    if (app!=AppEcom.votf) {
 	    	KeyMenu1rstLevel keyHombreZapatos = KeyMenu1rstLevel.from(LineaType.he, null, "zapatos");
 	        Menu1rstLevel menu1rstLevelZapatos  = Menu1rstLevel.from(app, keyHombreZapatos, "accesorios-zapatos", true, "*".split(","));
-	        menus1rstLevel.add(menu1rstLevelZapatos);
+	        libraryMenusFirstLevel.add(menu1rstLevelZapatos);
 	    }
     }
 }

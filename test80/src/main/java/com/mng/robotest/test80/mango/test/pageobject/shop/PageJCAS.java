@@ -14,32 +14,50 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
  */
 public class PageJCAS extends WebdrvWrapp {
 
-    static String XPathInputUser = "//input[@id='username']";
-    static String XPathInputPass = "//input[@id='password']";
-    static String XPathButtonLogin = "//input[@value='LOGIN']";
-    
-    /**
-     * Función que nos indica si la página actualmente mostrada es la de autentificación mediante JasigCAS
-     * @return indicador de si es o no la página de Jasig CAS
-     */
-    public static boolean thisPageIsShown(WebDriver driver) {
-        return (driver.getTitle().contains("Central Authentication Service"));
-    }
-    
-    /**
-     * Realiza el proceso de identificación en la página de Jasig CAS
-     */
-    public static void identication(WebDriver driver, String usuario, String password) throws Exception {
-        inputCredenciales(usuario, password, driver);
-        clickButtonLogin(driver);
-    }
-    
-    public static void inputCredenciales(String usuario, String password, WebDriver driver) {
-        driver.findElement(By.xpath(XPathInputUser)).sendKeys(usuario);
-        driver.findElement(By.xpath(XPathInputPass)).sendKeys(password);        
-    }
-    
-    public static void clickButtonLogin(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonLogin));
-    }
+	private static final String XPathInputUser = "//input[@id='username']";
+	private static final String XPathInputPass = "//input[@id='password']";
+	private static final String XPathIframeCaptcha = "//iframe[@src[contains(.,'recaptcha')]]";
+	private static final String XPathRadioCaptchaWithinIframe = "//span[@id='recaptcha-anchor']/div";
+	private static final String XPathRecaptchaCheckedWithinIframe = "//span[@class[contains(.,'recaptcha-checkbox-checked')]]";
+	private static final String XPathButtonLogin = "//input[@value='INICIAR SESIÓN' or @value='LOGIN']";
+
+	/**
+	 * Función que nos indica si la página actualmente mostrada es la de autentificación mediante JasigCAS
+	 * @return indicador de si es o no la página de Jasig CAS
+	 */
+	public static boolean thisPageIsShown(WebDriver driver) {
+		return (driver.getTitle().contains("Central Authentication Service"));
+	}
+
+	/**
+	 * Realiza el proceso de identificación en la página de Jasig CAS
+	 */
+	public static void identication(WebDriver driver, String usuario, String password) throws Exception {
+		inputCredenciales(usuario, password, driver);
+		clickCaptchaIfPresent(driver);
+		clickButtonLogin(driver);
+	}
+
+	public static void inputCredenciales(String usuario, String password, WebDriver driver) {
+		driver.findElement(By.xpath(XPathInputUser)).sendKeys(usuario);
+		driver.findElement(By.xpath(XPathInputPass)).sendKeys(password);
+	}
+	
+	public static void clickCaptchaIfPresent(WebDriver driver) throws Exception {
+		By byIframe = By.xpath(XPathIframeCaptcha);
+		if (WebdrvWrapp.isElementPresent(driver, byIframe)) {
+			try {
+				driver.switchTo().frame(driver.findElement(byIframe));
+				WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(XPathRadioCaptchaWithinIframe));
+				WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(XPathRecaptchaCheckedWithinIframe), 5);
+			}
+			finally {
+				driver.switchTo().defaultContent();
+			}
+		}
+	}
+
+	public static void clickButtonLogin(WebDriver driver) throws Exception {
+		clickAndWaitLoad(driver, By.xpath(XPathButtonLogin));
+	}
 }
