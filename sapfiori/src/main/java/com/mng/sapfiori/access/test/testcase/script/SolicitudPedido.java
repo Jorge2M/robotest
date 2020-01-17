@@ -66,7 +66,7 @@ public class SolicitudPedido {
 		hoyMas7dias.add(Calendar.DATE, 7);
 		String fechaEntrega =
 			hoyMas7dias.get(Calendar.DAY_OF_MONTH) + "." +
-			hoyMas7dias.get(Calendar.MONTH) + "." +
+			(hoyMas7dias.get(Calendar.MONTH) + 1) + "." +
 			hoyMas7dias.get(Calendar.YEAR);
 		//dataPedido.add(InputDataSolPedido.getForSearchAndSelect(Material, "*AMERICANA*", "183103702092"));
 		dataPedido.add(InputDataSolPedido.getForSearchAndSelect(Material, "*BLUSA THMARACU*", "2064284MPV001"));

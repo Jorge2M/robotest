@@ -71,8 +71,8 @@ public class PagePosSolicitudPedidoStpV {
 					.selectElementInTable(inputData.getValueToSelectInTable());
 				break;
 			case SearchAndSelectValue:
-        		clickIconInput(inputData.getInputPage())
-        			.searchAndSelectElement(inputData.getValueToSearch(), inputData.getValueToSelectInTable());
+				clickIconInput(inputData.getInputPage())
+					.searchAndSelectElement(inputData.getValueToSearch(), inputData.getValueToSelectInTable());
 				break;
 			case SelectByPosition:
 				clickIconInput(inputData.getInputPage())

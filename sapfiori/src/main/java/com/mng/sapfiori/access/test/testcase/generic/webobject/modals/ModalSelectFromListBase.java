@@ -81,6 +81,12 @@ public abstract class ModalSelectFromListBase extends PageObject {
 				return true;
 			}
 		}
+		if (inputDataLabel.isVisible()) {
+			inputDataLabel.clear();
+			if (findByBuscarAndSelectElement(valueToSearch, valueToSelectInTable)) {
+				return true;
+			}
+		}
 		if (!findByInputLabelAndSelectElement(valueToSearch, valueToSelectInTable)) {
 			throw new NoSuchElementException("Not found " + valueToSelectInTable + " searching for " + valueToSearch);
 		}
