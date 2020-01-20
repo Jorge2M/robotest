@@ -59,9 +59,9 @@ public final class Menu1rstLevel implements MenuLateralDesktop {
     	return this.key.dataMenu.getLabel();
     }
     
-    public void setNombre(String nombreMenu) {
-    	this.key.dataMenu.setLabel(nombreMenu);
-    }
+//    public void setNombre(String nombreMenu) {
+//    	this.key.dataMenu.setLabel(nombreMenu);
+//    }
     
     @Override
     public String getDataGaLabelMenuLateralDesktop() {

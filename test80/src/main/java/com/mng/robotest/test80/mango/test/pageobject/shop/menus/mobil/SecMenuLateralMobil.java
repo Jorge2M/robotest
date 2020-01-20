@@ -416,7 +416,7 @@ public class SecMenuLateralMobil extends WebdrvWrapp {
     public void clickMenuLateral1rstLevel(TypeLocator typeLocator, Menu1rstLevel menu1rstLevel, Pais pais) throws Exception {
         Linea linea = pais.getShoponline().getLinea(menu1rstLevel.getLinea());
         selectLinea(linea, menu1rstLevel.getSublinea());
-        menu1rstLevel.setNombre(getLiteralMenuVisible(typeLocator, menu1rstLevel));
+        //menu1rstLevel.setNombre(getLiteralMenuVisible(typeLocator, menu1rstLevel));
         clickMenuYetDisplayed(typeLocator, menu1rstLevel);
     }
     

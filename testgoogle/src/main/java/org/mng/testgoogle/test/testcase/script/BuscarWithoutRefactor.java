@@ -27,11 +27,13 @@ public class BuscarWithoutRefactor {
 		description="Introducimos el texto <b>#{textToInput}</b> y clickamos el botón \"Buscar con Google\"",
 		expected="Aparecen resultados de búsqueda")
 	public void inputTextAndClickBuscarConGoogle(String textToInput, WebDriver driver) throws Exception {
-		String xpathInputInicio = "//input[@title='Buscar']";
-		driver.findElement(By.xpath(xpathInputInicio)).sendKeys(textToInput);
+		By byInputInicio = By.xpath("//input[@title='Buscar']");
+		driver
+			.findElement(byInputInicio)
+			.sendKeys(textToInput);
 		
-		String xpathButtonBuscarConGoogle = "//input[@class='gNO89b']";
-		WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xpathButtonBuscarConGoogle));
+		By byButtonBuscarConGoogle = By.xpath("//input[@class='gNO89b']");
+		WebdrvWrapp.clickAndWaitLoad(driver, byButtonBuscarConGoogle);
 		
 		checkAreResults(driver);
 	}
@@ -40,9 +42,9 @@ public class BuscarWithoutRefactor {
 		description="Aparecen resultados de búsqueda",
 		level=State.Defect)
 	public boolean checkAreResults(WebDriver driver) {
-		String xpathEntradaResultado = "//h3[@class='LC20lb']";
+		By byEntradaResultado = By.xpath("//h3[@class='LC20lb']");
 		return (
-			WebdrvWrapp.isElementVisible(driver, By.xpath(xpathEntradaResultado)));
+			WebdrvWrapp.isElementVisible(driver, byEntradaResultado));
 	}
 	
 }

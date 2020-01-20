@@ -125,7 +125,7 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
     
     public void clickMenuInHrefAndGetName(Menu1rstLevel menu1rstLevel) throws Exception {
         String xpathLinkMenu = getXPathMenuVisibleByDataInHref(menu1rstLevel);
-        menu1rstLevel.setNombre(driver.findElement(By.xpath(xpathLinkMenu)).getText());
+        //menu1rstLevel.setNombre(driver.findElement(By.xpath(xpathLinkMenu)).getText());
         driver.findElement(By.xpath(xpathLinkMenu)).click();
         waitForPageLoaded(driver);
     }
@@ -170,7 +170,7 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
     	secLineasMenu.hoverLineaAndWaitForMenus(lineaMenu, sublineaMenu);
         String xpathMenu = getXPathMenuSuperiorLinkVisible(menu1rstLevel);
         isElementVisibleUntil(driver, By.xpath(xpathMenu), 1);
-        menu1rstLevel.setNombre(driver.findElement(By.xpath(xpathMenu)).getText().replace("New!", "").trim());
+        //menu1rstLevel.setNombre(driver.findElement(By.xpath(xpathMenu)).getText().replace("New!", "").trim());
         moveToElement(By.xpath(xpathMenu), driver);
         clickAndWaitLoad(driver, By.xpath(xpathMenu));
     }    
