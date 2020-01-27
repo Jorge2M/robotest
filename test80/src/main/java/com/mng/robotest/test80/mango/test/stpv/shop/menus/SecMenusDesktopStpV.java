@@ -139,12 +139,12 @@ public class SecMenusDesktopStpV {
     	return (secMenus.secMenuSuperior.secLineas.isLineaSelected(lineaType));
     }
     
-    /**
-     * Validaciones de selección de un menú de 1er nivel (superior o lateral) (las específicas de Desktop)
-     */
-    public void validationsSelecMenuEspecificDesktop(MenuLateralDesktop menu) throws Exception {
-        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.desktop, app, driver);
-    	pageGaleriaStpV.bannerHead.validateBannerSuperiorIfExistsDesktop();
+	/**
+	 * Validaciones de selección de un menú de 1er nivel (superior o lateral) (las específicas de Desktop)
+	 */
+	public void validationsSelecMenuEspecificDesktop(MenuLateralDesktop menu) throws Exception {
+		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(Channel.desktop, app, driver);
+		pageGaleriaStpV.bannerHead.validateBannerSuperiorIfExistsDesktop();
     	if (menu.isMenuLateral()) {
     		int maxSecondsWait = 2;
     		checkIsSelectedLateralMenu(menu, maxSecondsWait);
@@ -163,7 +163,7 @@ public class SecMenusDesktopStpV {
         	checkArticlesContainsLiterals(textsArticlesGalery);
         }
         
-        PageGaleriaStpV.secSelectorPrecios.validaIsSelector(driver);
+        pageGaleriaStpV.getSecSelectorPreciosStpV().validaIsSelector();
         SecMenusWrap secMenus = SecMenusWrap.getNew(Channel.desktop, app, driver);
         LineaType lineaResult = secMenus.getLineaResultAfterClickMenu(menu.getLinea(), menu.getNombre());
         validateIsLineaSelected(lineaResult);    
@@ -176,16 +176,16 @@ public class SecMenusDesktopStpV {
         return (secMenus.secMenuLateral.isSelectedMenu(menu, maxSecondsWait));
     }
       
-    @Validation
-    private ChecksResult checkVisibility2onLevelMenus(List<Menu2onLevel> menus2onLevel) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
-        for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
-	    	validations.add(
-	    		"Aparecen el menú de 2o nivel <b>" + menu2oNivelTmp.getNombre() + "</b>",
-	    		secMenus.secMenuLateral.isVisibleMenu(menu2oNivelTmp), State.Warn);
-        }
-        return validations;
-    }
+	@Validation
+	private ChecksResult checkVisibility2onLevelMenus(List<Menu2onLevel> menus2onLevel) throws Exception {
+		ChecksResult validations = ChecksResult.getNew();
+		for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
+			validations.add(
+				"Aparecen el menú de 2o nivel <b>" + menu2oNivelTmp.getNombre() + "</b>",
+				secMenus.secMenuLateral.isVisibleMenu(menu2oNivelTmp), State.Warn);
+		}
+		return validations;
+	}
     
     @Validation
     private ChecksResult checkArticlesContainsLiterals(String[] textsArticlesGalery) throws Exception {
@@ -195,7 +195,7 @@ public class SecMenusDesktopStpV {
         for (int i=0; i<textsArticlesGalery.length; i++) {
         	litsToContain+= "<br>" + textsArticlesGalery[i];
         }
-        PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, driver);
+        PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
         ArrayList<String> listTxtArtNoValidos = pageGaleriaDesktop.nombreArticuloNoValido(textsArticlesGalery);
         String articlesWrongWarning = "";
         if (listTxtArtNoValidos.size() > 0) {
@@ -296,7 +296,7 @@ public class SecMenusDesktopStpV {
     private ChecksResult checkAfterSelectCarrusel(Linea linea, String idCarrusel) throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
     	LineaType lineaType = linea.getType();
-	    PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, driver);
+	    PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
 
 	    int maxSecondsWait = 3;
       	validations.add(
@@ -313,8 +313,8 @@ public class SecMenusDesktopStpV {
 	    boolean panoramEnLinea = (linea.getPanoramicas()!=null && linea.getPanoramicas().compareTo("s")==0);
 	    if (panoramEnLinea) {
 	      	validations.add(
-        		"Aparece algún artículo en panorámica",
-        		pageGaleriaDesktop.getNumArticulos(TypeArticleDesktop.Panoramica)!=0, State.Warn);
+        		"Aparece algún artículo doble",
+        		pageGaleriaDesktop.getNumArticulos(TypeArticleDesktop.Doble)!=0, State.Warn);
 	    }
 	    	
 	    return validations;
@@ -441,7 +441,7 @@ public class SecMenusDesktopStpV {
     	description="Aparece una página con banners, artículos, iframes, maps o sliders",
     	level=State.Warn)
     private boolean checkAreValidMangoObjectsInPage() throws Exception {
-        PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
+        PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
         if (!pageGaleria.isVisibleArticleUntil(1, 3) &&
             !PageLanding.hayIframes(driver) &&
             !PageLanding.hayMaps(driver) &&
@@ -536,7 +536,7 @@ public class SecMenusDesktopStpV {
     @Validation
     private ChecksResult checkSizeDivImages() throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, driver);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
 		int numPage = 1; 
 		double marginPercError = 2;
 	  	ListSizesArticle listArtWrong1rstPage = pageGaleriaDesktop.getArticlesWithWrongSize(numPage, marginPercError);
@@ -572,7 +572,7 @@ public class SecMenusDesktopStpV {
 			"Aparecen alguno de los siguientes elementos: <b>" + elemsCanBeContained + "</b> (es un menú perteneciente al grupo <b>" + groupMenu + ")</b>",
 			contentPageOk, State.Warn);
     	
-		PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
     	if (groupMenu.canContainElement(Element.article)) {
     	 	String guiones = "--";
     	 	validations.add(
@@ -614,7 +614,7 @@ public class SecMenusDesktopStpV {
     @Validation
     public ChecksResult validationsSpecificEndRebajasChina() throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
-    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, driver);
+    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
       	List<Integer> tempSale = FilterCollection.sale.getListTempArticles();
       	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFrom, tempSale);
       	String warningMessage = "";
@@ -645,7 +645,7 @@ public class SecMenusDesktopStpV {
     @Validation
     private ChecksResult checkNoArticlesRebajadosWithLabelIncorrect() throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
-    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, driver);
+    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
     	List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
     	List<Integer> tempSales = FilterCollection.sale.getListTempArticles();
     	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaxRebajadosWithLiteralInLabel(tempSales, listLabelsWrong);
@@ -677,7 +677,7 @@ public class SecMenusDesktopStpV {
     	Integer temporadaOldOld = FilterCollection.sale.getListTempArticles().get(0);
         ArrayList<Integer> temporadaOldOldList = new ArrayList<Integer>(Arrays.asList(temporadaOldOld));  
        	List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
-    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, driver);
+    	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
        	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaOldOldList, listLabelsWrong);
     	String warningMessage = "";
         if (listArtWrong.size() > 0) {
@@ -703,7 +703,7 @@ public class SecMenusDesktopStpV {
 		ChecksResult validations = ChecksResult.getNew();
 		
         List<Integer> temporadaNew = FilterCollection.nextSeason.getListTempArticles();
-        PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, app, driver);
+        PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
         List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadaXWithLiteralInLabel(temporadaNew, LabelArticle.NewNow, LabelArticle.NewCollection);
         String warningMessage = "";
         if (listArtWrong.size() > 0) {

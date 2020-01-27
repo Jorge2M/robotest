@@ -125,7 +125,7 @@ public class SecMenuLateralMobilStpV {
     @Validation
     private ChecksResult checkGaleriaAfterSelectNuevo() throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
-	    PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
+	    PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
 	    int maxSecondsWait = 3;
 	 	validations.add(
 			"Aparece algún artículo (esperamos " + maxSecondsWait + " segundos)",
@@ -294,7 +294,7 @@ public class SecMenuLateralMobilStpV {
     	description="Aparecen artículos, banners, frames, maps o Sliders",
     	level=State.Warn)
     private boolean checkElementsAfterClickMenu2onLevel() throws Exception {
-    	PageGaleria pageGaleria = PageGaleria.getInstance(Channel.movil_web, app, driver);
+    	PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
         return (
         	pageGaleria.isVisibleArticleUntil(1, 3) ||
             PageLanding.hayIframes(driver) ||

@@ -131,7 +131,7 @@ public class PageLanding extends WebdrvWrapp {
      * Función que indica si hay secciones, artículos, artículo o banners en la página
      */
     public static boolean haySecc_Art_Banners(AppEcom app, WebDriver driver) throws Exception {
-    	PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
+    	PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
         return (((PageGaleriaDesktop)pageGaleria).isVisibleAnyArticle() ||
         		isElementPresent(driver, By.xpath("(//section[@id='section1'] | " + 
                                                               "//div[@class[contains(.,'datos_ficha_producto')]] | " +
@@ -144,7 +144,7 @@ public class PageLanding extends WebdrvWrapp {
     		boolean elementContained = false;
     		switch (element) {
     		case article:
-    			PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
+    			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
     			elementContained = pageGaleria.isVisibleArticleUntil(1, 3);
     			break;
     		case campaign:

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
+import com.mng.robotest.test80.mango.test.data.Talla;
 
 
 public class SSecSelTallasFichaOld extends WebdrvWrapp {
@@ -57,8 +57,8 @@ public class SSecSelTallasFichaOld extends WebdrvWrapp {
     /**
      * @param value talla existente en el atributo value (se trata de la talla en formato número)
      */
-    public static void selectTallaByValue(String tallaValue, WebDriver driver) {
-        new Select(driver.findElement(By.xpath(XPathSelectTalla))).selectByValue(tallaValue);
+    public static void selectTallaByValue(int tallaValue, WebDriver driver) {
+        new Select(driver.findElement(By.xpath(XPathSelectTalla))).selectByValue(String.valueOf(tallaValue));
     }
     
     public static void selectTallaByIndex(int posicionEnDesplegable, WebDriver driver) {
@@ -85,6 +85,7 @@ public class SSecSelTallasFichaOld extends WebdrvWrapp {
     public static String getTallaAlfSelected(AppEcom app, WebDriver driver) {
         Select select = despliegaSelectTallas(driver);
         String tallaVisible = select.getFirstSelectedOption().getText(); 
+        tallaVisible = SecDataProduct.removeAlmacenFromTalla(tallaVisible);
         
         //Tratamos el caso relacionado con los entornos de test y eliminamos la parte a partir de " - " para contemplar casos como el de 'S - Delivery in 4-7 business day')
         if (tallaVisible.indexOf(" - ") >= 0) {
@@ -92,21 +93,20 @@ public class SSecSelTallasFichaOld extends WebdrvWrapp {
         }
         
         //Tratamos el caso de talla única donde unificamos el valor a "U"
-        String codTallaUnica = UtilsTestMango.getCodigoTallaUnica(app);
-        if (getTallaNumSelected(driver).compareTo(codTallaUnica)==0) {
-            tallaVisible = "U";
+        if (getTallaNumSelected(driver)==Talla.U.getTallaNum()) {
+            tallaVisible = Talla.U.name();
         }
         
-        return tallaVisible;        
+        return tallaVisible;
     }
     
-    /**
-     * @return el value de la talla seleccionada en el desplegable
-     */
-    public static String getTallaNumSelected(WebDriver driver) {
-        Select select = despliegaSelectTallas(driver);
-        return (select.getFirstSelectedOption().getAttribute("value"));        
-    }
+	/**
+	 * @return el value de la talla seleccionada en el desplegable
+	 */
+	public static int getTallaNumSelected(WebDriver driver) {
+		Select select = despliegaSelectTallas(driver);
+		return (Integer.valueOf(select.getFirstSelectedOption().getAttribute("value")));
+	}
     
     public static String getTallaAlf(int posicion, WebDriver driver) {
     	String xpathTalla = "(" + XPathOptionTalla + ")[" + posicion + "]";

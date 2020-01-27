@@ -9,8 +9,10 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
+import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeArticleDesktop;
 
@@ -19,7 +21,6 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDes
  * @author jorge.munoz
  */
 public class PageGaleriaMobil extends PageGaleria {
-	final AppEcom app;
 	
     final static String TagIdColor = "@TagIdColor";
     final static String TagFlagSelected = "@TagFlagSelected";
@@ -104,13 +105,12 @@ public class PageGaleriaMobil extends PageGaleria {
     //Número de páginas a partir del que consideramos que se requiere un scroll hasta el final de la galería
     public static int scrollToLast = 20; 
     
-    private PageGaleriaMobil(AppEcom app, WebDriver driver) {
-    	this.driver = driver;
-    	this.app = app;
+    private PageGaleriaMobil(From from, AppEcom app, WebDriver driver) {
+    	super(from, Channel.movil_web, app, driver);
     }
     
-    public static PageGaleriaMobil getInstance(AppEcom app, WebDriver driver) {
-    	return (new PageGaleriaMobil(app, driver)); 
+    public static PageGaleriaMobil getNew(From from, AppEcom app, WebDriver driver) {
+    	return (new PageGaleriaMobil(from, app, driver)); 
     }
     
     String getXPathArticuloConVariedadColores(int numArticulo) {
@@ -134,7 +134,7 @@ public class PageGaleriaMobil extends PageGaleria {
     	return (xpathArticulo + XPathButtonAnyadirRelativeArticle);
     }
     
-    static String getXPathArticleCapaTallas(int posArticulo) {
+    String getXPathArticleCapaTallas(int posArticulo) {
     	String xpathArticulo = "(" + XPathArticulo + ")[" + posArticulo + "]";
     	return (xpathArticulo + XPathCapaTallasRelativeArticle);
     }
@@ -161,12 +161,13 @@ public class PageGaleriaMobil extends PageGaleria {
         String xpathImgColorRelArticle = getXPathImgColorRelativeArticle(selected);
         return (articulo.findElements(By.xpath("." + xpathImgColorRelArticle)).get(numColor-1));
     }
-    
-    @Override
-    public int getNumFavoritoIcons() {
-        return (driver.findElements(By.xpath(XPathHearthIconRelativeArticle)).size());
-    }
-    
+
+	@Override
+	public int getNumFavoritoIcons() {
+		By byHearthIcon = By.xpath(getXPathHearthIconRelativeArticle());
+		return (driver.findElements(byHearthIcon).size());
+	}
+		
     @Override
     public boolean eachArticlesHasOneFavoriteIcon() {  
         int numArticles = getNumArticulos(); 
@@ -296,7 +297,7 @@ public class PageGaleriaMobil extends PageGaleria {
     }
     
     @Override
-    public void selectLinkAddArticleToBag(int posArticulo) throws Exception {
+    public void showTallasArticulo(int posArticulo) throws Exception {
         moveToArticleAndGetObject(posArticulo);
         String xpathButtonAnyadir = getXPathButtonAnyadirArticle(posArticulo);
         WebdrvWrapp.clickAndWaitLoad(driver, By.xpath(xpathButtonAnyadir));
@@ -308,7 +309,7 @@ public class PageGaleriaMobil extends PageGaleria {
         return (isElementVisibleUntil(driver, By.xpath(xpathCapa), maxSecondsToWait));
     }
     
-    private static String getXPathTallaAvailableArticle(int posArticulo, int posTalla) {
+    private String getXPathTallaAvailableArticle(int posArticulo, int posTalla) {
         String xpathCapa = getXPathArticleCapaTallas(posArticulo);
         return "(" + xpathCapa + "//button[@class='product-size']" + ")[" + posTalla + "]";
     }
@@ -317,17 +318,24 @@ public class PageGaleriaMobil extends PageGaleria {
     public ArticuloScreen selectTallaArticle(int posArticulo, int posTalla) throws Exception {
         //Si no está visible la capa de tallas ejecutamos los pasos necesarios para hacer la visible 
         if (!isVisibleArticleCapaTallasUntil(posArticulo, 0/*maxSecondsToWait*/)) {
-            selectLinkAddArticleToBag(posArticulo);
+            showTallasArticulo(posArticulo);
         }
         
         String xpathTalla = getXPathTallaAvailableArticle(posArticulo, posTalla);
         WebElement tallaToSelect = driver.findElement(By.xpath(xpathTalla));
         ArticuloScreen articulo = getArticuloObject(posArticulo);
-        articulo.setTallaAlf(tallaToSelect.getText());
-        articulo.setTallaNum(tallaToSelect.getAttribute("data-id"));
+        articulo.setTalla(Talla.from(tallaToSelect.getText()));
         tallaToSelect.click();
         return articulo;
     }
+
+	@Override
+	public StateFavorito getStateHearthIcon(WebElement hearthIcon) {
+		if (hearthIcon.getAttribute("class").contains("favorite--active")) {
+			return StateFavorito.Marcado;
+		}
+		return StateFavorito.Desmarcado;
+	}
     
     private List<WebElement> getListArticulosFromPagina(int numPagina) {
 	    By byArticulo = By.xpath(getXPathArticuloFromPagina(numPagina));

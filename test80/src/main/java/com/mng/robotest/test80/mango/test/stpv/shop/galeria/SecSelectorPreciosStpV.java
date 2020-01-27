@@ -10,65 +10,75 @@ import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
-import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
+import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.SecSelectorPrecios;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 
 @SuppressWarnings({"static-access"})
 public class SecSelectorPreciosStpV {
 
+	private final SecSelectorPrecios selectorPrecios;
+	private final WebDriver driver;
+	private final AppEcom app;
+	
+	public SecSelectorPreciosStpV(AppEcom app, WebDriver driver) {
+		this.selectorPrecios = new SecSelectorPrecios(app, driver);
+		this.driver = driver;
+		this.app = app;
+	}
+	
+	
 	@Validation (
 		description="Es visible el selector de precios",
 		level=State.Warn)
-    public static boolean validaIsSelector(WebDriver driver) {
-        return (PageGaleriaDesktop.secSelectorPrecios.isVisible(driver));
-    }
-    
-    /**
-     * Selecciona un intervalo de precio mínimo/precio máximo. 
-     * No es posible pasar como parámetro el mínimo/máximo pues lo único que podemos hacer es 'click por la derecha' + 'click por la izquierda'
-      */
-    final static String tagMinimo = "[MINIMO]";
-    final static String tagMaximo = "[MAXIMO]";
+	public boolean validaIsSelector() {
+		return (selectorPrecios.isVisible());
+	}
+
+	/**
+	 * Selecciona un intervalo de precio mínimo/precio máximo. 
+	 * No es posible pasar como parámetro el mínimo/máximo pues lo único que podemos hacer es 'click por la derecha' + 'click por la izquierda'
+	 */
+	final static String tagMinimo = "[MINIMO]";
+	final static String tagMaximo = "[MAXIMO]";
 	@Step (
 		description="Utilizar el selector de precio: Mínimo=" + tagMinimo + " Máximo=" + tagMaximo, 
-        expected="Aparecen artículos con precio en el intervalo seleccionado")
-    public static void seleccionaIntervalo(AppEcom app, WebDriver driver) throws Exception {
+		expected="Aparecen artículos con precio en el intervalo seleccionado")
+	public void seleccionaIntervalo() throws Exception {
 		DataFilterPrecios dataFilter = new DataFilterPrecios();
-        
-        //Obtenemos los mínimo/máximo originales
-		dataFilter.minimoOrig = PageGaleriaDesktop.secSelectorPrecios.getImporteMinimo(driver);
-		dataFilter.maximoOrig = PageGaleriaDesktop.secSelectorPrecios.getImporteMaximo(driver);
-                
-        PageGaleriaDesktop.secSelectorPrecios.clickMinAndMax(30/*margenPixelsIzquierda*/, 30/*margenPixelsDerecha*/, driver);
-        dataFilter.minimoFinal = PageGaleriaDesktop.secSelectorPrecios.getImporteMinimo(driver);
-        dataFilter.maximoFinal = PageGaleriaDesktop.secSelectorPrecios.getImporteMaximo(driver);
-                
-        TestMaker.getCurrentStepInExecution().replaceInDescription(tagMinimo, String.valueOf(dataFilter.minimoFinal));
-        TestMaker.getCurrentStepInExecution().replaceInDescription(tagMaximo, String.valueOf(dataFilter.maximoFinal));    
-        checkResultSelectFiltro(dataFilter, app, driver);
-        
-        StdValidationFlags flagsVal = StdValidationFlags.newOne();
-        flagsVal.validaSEO = true;
-        flagsVal.validaJS = true;
-        flagsVal.validaImgBroken = false;
-        AllPagesStpV.validacionesEstandar(flagsVal, driver);
-    }
+
+		dataFilter.minimoOrig = selectorPrecios.getImporteMinimo();
+		dataFilter.maximoOrig = selectorPrecios.getImporteMaximo();
+
+		selectorPrecios.clickMinAndMax(30, 30);
+		dataFilter.minimoFinal = selectorPrecios.getImporteMinimo();
+		dataFilter.maximoFinal = selectorPrecios.getImporteMaximo();
+
+		TestMaker.getCurrentStepInExecution().replaceInDescription(tagMinimo, String.valueOf(dataFilter.minimoFinal));
+		TestMaker.getCurrentStepInExecution().replaceInDescription(tagMaximo, String.valueOf(dataFilter.maximoFinal));    
+		checkResultSelectFiltro(dataFilter);
+
+		StdValidationFlags flagsVal = StdValidationFlags.newOne();
+		flagsVal.validaSEO = true;
+		flagsVal.validaJS = true;
+		flagsVal.validaImgBroken = false;
+		AllPagesStpV.validacionesEstandar(flagsVal, driver);
+	}
 	
 	@Validation
-	private static ChecksResult checkResultSelectFiltro(DataFilterPrecios dataFilter, AppEcom app, WebDriver driver) throws Exception {
+	private ChecksResult checkResultSelectFiltro(DataFilterPrecios dataFilter) throws Exception {
 		ChecksResult validations = ChecksResult.getNew();
-    	validations.add(
-    		"El nuevo mínimo es mayor que el anterior. Era de <b>" + dataFilter.minimoOrig + "</b> y ahora es <b>" + dataFilter.minimoFinal + "</b>",
-    		dataFilter.minimoFinal > dataFilter.minimoOrig, State.Warn);
-    	validations.add(
-    		"El nuevo máximo es menor que el anterior. Era de <b>" + dataFilter.maximoOrig + "</b> y ahora es <b>" + dataFilter.maximoFinal + "</b>",
-    		dataFilter.maximoFinal < dataFilter.maximoOrig, State.Warn);
-    	PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
-    	validations.add(
-    		"Todos los precios están en el intervalo [" + dataFilter.minimoFinal + ", " + dataFilter.maximoFinal + "]",
-    		pageGaleria.preciosInIntervalo(dataFilter.minimoFinal, dataFilter.maximoFinal), State.Warn);
-    	return validations;
+		validations.add(
+			"El nuevo mínimo es mayor que el anterior. Era de <b>" + dataFilter.minimoOrig + "</b> y ahora es <b>" + dataFilter.minimoFinal + "</b>",
+			dataFilter.minimoFinal > dataFilter.minimoOrig, State.Warn);
+		validations.add(
+			"El nuevo máximo es menor que el anterior. Era de <b>" + dataFilter.maximoOrig + "</b> y ahora es <b>" + dataFilter.maximoFinal + "</b>",
+			dataFilter.maximoFinal < dataFilter.maximoOrig, State.Warn);
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
+		validations.add(
+			"Todos los precios están en el intervalo [" + dataFilter.minimoFinal + ", " + dataFilter.maximoFinal + "]",
+			pageGaleria.preciosInIntervalo(dataFilter.minimoFinal, dataFilter.maximoFinal), State.Warn);
+		return validations;
 	}
 }
 

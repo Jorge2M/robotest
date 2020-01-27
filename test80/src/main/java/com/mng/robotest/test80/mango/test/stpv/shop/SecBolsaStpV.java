@@ -229,12 +229,12 @@ public class SecBolsaStpV {
 			"Cuadran los colores de los artículos existentes en la bolsa",
 			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), State.Warn);
 	 	
-        listDataToValidate.clear();
-        listDataToValidate.add(DataArtBolsa.TallaNum);
-        boolean tallaNumOk = validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate);
-        listDataToValidate.clear();
-        listDataToValidate.add(DataArtBolsa.TallaAlf);
-        boolean tallaAlfOk = validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate);
+	 	listDataToValidate.clear();
+	 	listDataToValidate.add(DataArtBolsa.Talla);
+	 	boolean tallaNumOk = validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate);
+	 	listDataToValidate.clear();
+	 	listDataToValidate.add(DataArtBolsa.Talla);
+	 	boolean tallaAlfOk = validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate);
 	 	validations.add(
 			"Cuadran las tallas de los artículos existentes en la bolsa",
 			tallaNumOk || tallaAlfOk, State.Warn);

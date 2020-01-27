@@ -18,6 +18,7 @@ import com.mng.robotest.test80.mango.test.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.test80.mango.test.getdata.usuarios.UserShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterOrdenacion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
+import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria.From;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.NumColumnas;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.TypeSlider;
@@ -89,7 +90,7 @@ public class GaleriaProducto {
         //Pruebas a nivel del cambio de galería de 2<->4 columnas
         PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
         if (dCtxSh.channel==Channel.desktop && dCtxSh.appE!=AppEcom.outlet) {
-        	PageGaleriaDesktop pageGaleria = (PageGaleriaDesktop)PageGaleria.getInstance(Channel.desktop, dCtxSh.appE, driver);
+        	PageGaleriaDesktop pageGaleria = (PageGaleriaDesktop)PageGaleria.getNew(From.menu, Channel.desktop, dCtxSh.appE, driver);
             NombreYRefList listArticlesGaleria2Cols = pageGaleria.getListaNombreYRefArticulos();
             listArticlesGaleria2Cols = pageGaleriaStpV.selectListadoXColumnasDesktop(NumColumnas.cuatro, listArticlesGaleria2Cols);
             pageGaleriaStpV.selectListadoXColumnasDesktop(NumColumnas.dos, listArticlesGaleria2Cols);
@@ -115,22 +116,22 @@ public class GaleriaProducto {
         pageGaleriaStpV.seleccionaOrdenacionGaleria(FilterOrdenacion.PrecioAsc, tipoPrendasGaleria, numArticulosPantalla, dCtxSh);
         pageGaleriaStpV.scrollFromFirstPage(dataScroll, dCtxSh);
         pageGaleriaStpV.selecColorFromArtGaleriaStep(1/*numArtConColores*/, 2/*posColor*/);
-        pageGaleriaStpV.selecArticuloGaleriaStep(1/*numArtConColores*/);        
+        pageGaleriaStpV.selecArticuloGaleriaStep(1/*numArtConColores*/);
     }
     
     @Test (
         groups={"GaleriaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
         description="[Usuario no registrado][Chrome] Acceder a galería camisas. Filtro color. Scroll")
-    public void GPO004_Navega_Galeria() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        dCtxSh.userRegistered = false;
-            
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
-        Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
-                        
+	public void GPO004_Navega_Galeria() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest();
+		dCtxSh.userRegistered = false;
+
+		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
+		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
+
         List<Color> colorsToFilter = new ArrayList<>();
         colorsToFilter.add(Color.Blanco);
         //En outlet/movil_web tenemos el antiguo filtro que sólo permite seleccionar un color
@@ -185,13 +186,13 @@ public class GaleriaProducto {
         } else {
         	Menu1rstLevel menuNuevo = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "New Now"));
         	secMenusStpV.selectMenu1rstLevelTypeCatalog(menuNuevo, dCtxSh);
-            PageGaleriaStpV.secCrossSelling.validaIsCorrect(LineaType.she, dCtxSh.appE, driver);
+            pageGaleriaStpV.secCrossSellingStpV.validaIsCorrect(LineaType.she);
             pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
         }
         
-        PageGaleriaStpV.secSelectorPrecios.seleccionaIntervalo(dCtxSh.appE, driver);
+        pageGaleriaStpV.getSecSelectorPreciosStpV().seleccionaIntervalo();
         if (dCtxSh.appE!=AppEcom.outlet) {
-            PageGaleriaStpV.secCrossSelling.validaIsCorrect(LineaType.she, dCtxSh.appE, driver);
+            pageGaleriaStpV.secCrossSellingStpV.validaIsCorrect(LineaType.she);
             pageGaleriaStpV.hayPanoramicasEnGaleriaDesktop(Constantes.PORC_PANORAMICAS);
         }    
                 
@@ -234,7 +235,7 @@ public class GaleriaProducto {
         pageGaleriaStpV.clicksSliderArticuloConColores(numArtConColores, typeSliderList, src2onImage);
         
         //Seleccionar el 2o color del artículo
-        String srcImgAfterClickColor = pageGaleriaStpV.selecColorFromArtGaleriaStep(numArtConColores, 2/*posColor*/);
+        String srcImgAfterClickColor = pageGaleriaStpV.selecColorFromArtGaleriaStep(numArtConColores, 2);
         
         typeSliderList.clear();
         typeSliderList.add(TypeSlider.next);
@@ -246,28 +247,28 @@ public class GaleriaProducto {
         typeSliderList.add(TypeSlider.prev);
         pageGaleriaStpV.clicksSliderArticuloConColores(numArtConColores, typeSliderList, srcImgAfterClickColor);
     }
-    @Test (
-            groups={"GaleriaProducto", "Canal:desktop_App:shop"}, alwaysRun=true,
-            description="[Usuario registrado] Acceder a galería camisas. Forzar caso avisame en listado")
-    public void GPO007_Galeria_Camisas() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-        dCtxSh.userConnected = userShop.user;
-        dCtxSh.passwordUser = userShop.password;
-        dCtxSh.userRegistered = true;
 
-        // Abrir listado de mujer camisas
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, driver);
-        Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-        secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
+	@Test (
+		groups={"GaleriaProducto", "Canal:desktop_App:shop"}, alwaysRun=true,
+		description="[Usuario registrado] Acceder a galería camisas. Forzar caso avisame en listado")
+	public void GPO007_Galeria_Camisas() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest();
+		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
+		dCtxSh.userConnected = userShop.user;
+		dCtxSh.passwordUser = userShop.password;
+		dCtxSh.userRegistered = true;
 
-        // Abrir avisame desde el listado buscando primera talla sin stock y comprobar que se abierto y que contiene texto RGPD
-        PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-        pageGaleriaStpV.selectTallaNoDisponibleArticulo();
-        ModalArticleNotAvailableStpV modalArticleNotAvailableStpV = ModalArticleNotAvailableStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-        modalArticleNotAvailableStpV.checkVisibleAvisame();
+		// Abrir listado de mujer camisas
+		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false/*clearArticulos*/, driver);
+		Menu1rstLevel menuCamisas = MenuTreeApp.getMenuLevel1From(dCtxSh.appE, KeyMenu1rstLevel.from(LineaType.she, null, "camisas"));
+		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+		secMenusStpV.selectMenu1rstLevelTypeCatalog(menuCamisas, dCtxSh);
 
-    }
+		// Abrir avisame desde el listado buscando primera talla sin stock y comprobar que se abierto y que contiene texto RGPD
+		PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		pageGaleriaStpV.selectTallaNoDisponibleArticulo();
+		ModalArticleNotAvailableStpV modalArticleNotAvailableStpV = ModalArticleNotAvailableStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		modalArticleNotAvailableStpV.checkVisibleAvisame();
+	}
 }

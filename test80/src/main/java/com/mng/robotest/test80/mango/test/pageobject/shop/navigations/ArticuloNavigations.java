@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
 import com.mng.robotest.test80.mango.test.getproducts.data.Garment.Article;
@@ -40,14 +41,13 @@ public class ArticuloNavigations {
 
 		articulo.setColorName(pageFicha.secDataProduct.getNombreColorSelected(channel, driver));
 		if (articleStock.getSize()!=null) {
-			pageFicha.selectTallaByValue(String.valueOf(articleStock.getSize().getId()));
+			pageFicha.selectTallaByValue(Talla.getTalla(articleStock.getSize().getId()));
 		} else {
 			pageFicha.selectTallaByIndex(1);
 		}
 
 		//Almacenamos los 2 valores de la talla seleccionada
-		articulo.setTallaAlf(pageFicha.getTallaAlfSelected());
-		articulo.setTallaNum(pageFicha.getTallaNumSelected());
+		articulo.setTalla(pageFicha.getTallaSelected());
 
 		// Almacenamos el precio para futuras validaciones (hemos de contemplar todos los posibles formatos según el país)
 		String precio = "";

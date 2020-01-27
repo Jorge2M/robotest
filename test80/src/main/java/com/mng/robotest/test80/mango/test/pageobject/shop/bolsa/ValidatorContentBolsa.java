@@ -95,16 +95,11 @@ public class ValidatorContentBolsa {
 				return false;
 			}
 			break;
-		case TallaAlf:
-			if (articleExpected.getTallaAlf().compareTo(articuloScreen.tallaAlf)!=0) {
+		case Talla:
+			if (articleExpected.getTalla()!=articuloScreen.talla) {
 				return false;
 			}
 			break;					
-		case TallaNum:
-			if (articleExpected.getTallaNum().compareTo(articuloScreen.tallaNum)!=0) {
-				return false;
-			}
-			break;
 		case Cantidad:
 			if (articleExpected.getNumero()!=Integer.valueOf(articuloScreen.cantidad)) {
 				return false;

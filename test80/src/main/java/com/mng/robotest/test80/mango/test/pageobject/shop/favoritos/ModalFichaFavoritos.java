@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
+import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen.Color;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bolsa.SecBolsa.StateBolsa;
@@ -96,8 +97,8 @@ public class ModalFichaFavoritos extends WebdrvWrapp {
         return (getNombreColorSelectedFicha().compareTo(color.getColorName())==0);
     }
     
-    public String addArticleToBag(String refProducto, int posicionTalla, Channel channel) throws Exception {
-        String tallaSelected = selectTallaAvailable(refProducto, posicionTalla);
+    public Talla addArticleToBag(String refProducto, int posicionTalla, Channel channel) throws Exception {
+        Talla tallaSelected = selectTallaAvailable(refProducto, posicionTalla);
         clickButtonAddToBagAndWait(refProducto, channel);
         return tallaSelected;
     }
@@ -117,7 +118,7 @@ public class ModalFichaFavoritos extends WebdrvWrapp {
         return litTalla;
     }
     
-    public String selectTallaAvailable(String refProducto, int posicionTalla) {
+    public Talla selectTallaAvailable(String refProducto, int posicionTalla) {
         despliegaTallasAndWait(refProducto);
         List<WebElement> listTallas = getListaTallas(refProducto);
         
@@ -130,9 +131,9 @@ public class ModalFichaFavoritos extends WebdrvWrapp {
         }
         
         WebElement tallaDisponible = listTallasAvailable.get(posicionTalla - 1); 
-        String litTalla = tallaDisponible.getText();
+        Talla talla = Talla.from(tallaDisponible.getText());
         tallaDisponible.click();
-        return litTalla;
+        return talla;
     }    
     
     public List<WebElement> getListaTallas(String refProducto) {

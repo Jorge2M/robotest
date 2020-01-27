@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
@@ -122,8 +123,7 @@ public class SecDataProduct extends WebdrvWrapp {
         articulo.setPrecio(getPrecioFinalArticulo(driver));
         articulo.setCodigoColor(getCodeColor(ColorType.Selected, driver));
         articulo.setColorName(getNombreColorSelected(channel, driver));
-        articulo.setTallaAlf(getTallaAlfSelected(typeFicha, app, driver));
-        articulo.setTallaNum(getTallaNumSelected(typeFicha, app, driver));
+        articulo.setTalla(getTallaSelected(typeFicha, app, driver));
         articulo.setNumero(1);
         return articulo;
     }
@@ -250,19 +250,31 @@ public class SecDataProduct extends WebdrvWrapp {
     	return isVisible;
     }
 
-    public static String getTallaAlfSelected(TypeFicha typeFicha, AppEcom app, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old) {
-            return secSelTallasOld.getTallaAlfSelected(app, driver);
-        }
-        return secSelTallasNew.getTallaAlfSelected(driver);
-    }
+	public static Talla getTallaSelected(TypeFicha typeFicha, AppEcom app, WebDriver driver) {
+		if (typeFicha==TypeFicha.Old) {
+			return Talla.from(secSelTallasOld.getTallaAlfSelected(app, driver));
+		}
+		return Talla.from(secSelTallasNew.getTallaAlfSelected(driver));
+	}
+	
+	/**
+	 * @return talla eliminando el literal del tipo " [Almacen: 001]
+	 */
+	public static String removeAlmacenFromTalla(String talla) {
+	    Pattern tallaWithAlmacen = Pattern.compile("(.*)( \\[Almacen: [0-9]{3}\\])");
+	    Matcher matcher = tallaWithAlmacen.matcher(talla);
+	    if (matcher.find()) {
+	    	return matcher.group(1);
+	    }
+	    return talla;
+	}
     
-    public static String getTallaNumSelected(TypeFicha typeFicha, AppEcom app, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old) {
-            return secSelTallasOld.getTallaNumSelected(driver);
-        }
-        return secSelTallasNew.getTallaNumSelected(app, driver);
-    }    
+//    public static String getTallaNumSelected(TypeFicha typeFicha, AppEcom app, WebDriver driver) {
+//        if (typeFicha==TypeFicha.Old) {
+//            return secSelTallasOld.getTallaNumSelected(driver);
+//        }
+//        return secSelTallasNew.getTallaNumSelected(app, driver);
+//    }    
     
     public static String getTallaAlf(TypeFicha typeFicha, int posicion, WebDriver driver) {
         if (typeFicha==TypeFicha.Old) {
@@ -285,13 +297,13 @@ public class SecDataProduct extends WebdrvWrapp {
         return secSelTallasNew.isTallaUnica(driver);
     }    
     
-    public static void selectTallaByValue(String codigoNumericoTalla, TypeFicha typeFicha, WebDriver driver) {
-        if (typeFicha==TypeFicha.Old) {
-            secSelTallasOld.selectTallaByValue(codigoNumericoTalla, driver);
-        } else {
-            secSelTallasNew.selectTallaByValue(codigoNumericoTalla, driver);
-        }
-    }
+	public static void selectTallaByValue(Talla talla, TypeFicha typeFicha, WebDriver driver) {
+		if (typeFicha==TypeFicha.Old) {
+			secSelTallasOld.selectTallaByValue(talla.getTallaNum(), driver);
+		} else {
+			secSelTallasNew.selectTallaByValue(talla.getTallaNum(), driver);
+		}
+	}
     
     public static void selectTallaByIndex(int posicion, TypeFicha typeFicha, WebDriver driver) {
         if (typeFicha==TypeFicha.Old) {

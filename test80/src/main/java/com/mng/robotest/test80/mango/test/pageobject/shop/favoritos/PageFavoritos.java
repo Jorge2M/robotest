@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
@@ -191,12 +192,12 @@ public class PageFavoritos extends WebdrvWrapp {
             new WebDriverWait(driver, 3).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpathArtWithIdItem)));
         }
     }
-    
-    public String addArticleToBag(String refProducto, String codigoColor, int posicionTalla) throws Exception {
-        clickButtonAddToBagAndWait(refProducto, codigoColor);
-        String tallaSelected = selectTallaAvailableAndWait(refProducto, codigoColor, posicionTalla);
-        return tallaSelected;
-    }
+
+	public Talla addArticleToBag(String refProducto, String codigoColor, int posicionTalla) throws Exception {
+		clickButtonAddToBagAndWait(refProducto, codigoColor);
+		Talla tallaSelected = selectTallaAvailableAndWait(refProducto, codigoColor, posicionTalla);
+		return tallaSelected;
+	}
     
     public void clickButtonAddToBagAndWait(String refProducto, String codigoColor) throws Exception {
         String xpathAdd = getXPathButtonAddBolsa(refProducto, codigoColor);
@@ -227,7 +228,7 @@ public class PageFavoritos extends WebdrvWrapp {
         return litTalla;
     }
     
-    public String selectTallaAvailableAndWait(String refProducto, String codigoColor, int posicionTalla) {
+    public Talla selectTallaAvailableAndWait(String refProducto, String codigoColor, int posicionTalla) {
         //Filtramos y nos quedamos sólo con las tallas disponibles
         List<WebElement> listTallas = getListaTallas(refProducto, codigoColor);
         List<WebElement> listTallasAvailable = new ArrayList<>();
@@ -238,14 +239,14 @@ public class PageFavoritos extends WebdrvWrapp {
         }
        
         WebElement tallaDisponible = listTallasAvailable.get(posicionTalla - 1); 
-        String litTalla = tallaDisponible.getText();
+        Talla talla = Talla.from(tallaDisponible.getText());
         tallaDisponible.click();
         
         //Wait to Div tallas disappears
         String xpathCapaTallas = getXPathCapaTallas(refProducto, codigoColor);
         new WebDriverWait(driver, 1).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpathCapaTallas)));
         
-        return litTalla;
+        return talla;
     }
     
     public boolean isVisibleButtonEmpty() {

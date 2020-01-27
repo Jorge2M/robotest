@@ -12,6 +12,7 @@ import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
@@ -74,32 +75,6 @@ public class PageFichaArtStpV {
     public boolean validateIsFichaArtDisponible(String refArticulo, int maxSecondsWait) { 
     	return (pageFicha.isFichaArticuloUntil(refArticulo, maxSecondsWait));
     }
-    
-//    @Validation
-//    public ChecksResult validateIsFichaArtNoDisponible(String refArticulo) {
-//    	ChecksResult validations = ChecksResult.getNew();
-//	 	validations.add(
-//			"Aparece la página de resultado de una búsqueda KO",
-//			PageErrorBusqueda.isPage(driver), State.Warn);    	
-//	 	validations.add(
-//			"En el texto de resultado de la búsqueda aparece la referencia " + refArticulo,
-//			PageErrorBusqueda.isCabeceraResBusqueda(driver, refArticulo), State.Warn);    		 	
-//    	return validations;
-////    }
-//    
-//    @Validation
-//    public ChecksResult validateIsArticleNotAvailable(ArticleStock article) {
-//    	ChecksResult validations = ChecksResult.getNew();
-//    	int maxSecondsWait = 2;
-//	 	validations.add(
-//			"Aparece la página correspondiente a la ficha del artículo " + article.getReference() + 
-//			" (la esperamos hasta " + maxSecondsWait + " segundos)",
-//			pageFicha.isFichaArticuloUntil(article.getReference(), maxSecondsWait), State.Defect);   
-//	 	validations.add(
-//			"No está disponible La talla <b>" + article.getSize() + "</b> del color <b>" + article.getColourCode() + "</b>",
-//			!pageFicha.secDataProduct.isTallaAvailable(article.getSize(), pageFicha.getTypeFicha(), driver), State.Warn); 
-//	 	return validations;
-//    }        
     
     @Validation
     public ChecksResult validateIsFichaArtAlgunoColorNoDisponible(String refArticulo) {
@@ -166,9 +141,8 @@ public class PageFichaArtStpV {
     }
     
     public void selectTallaAndSaveData(ArticuloScreen articulo) throws Exception {
-        selectTalla(articulo.getTallaNum());
-        articulo.setTallaAlf(pageFicha.getTallaAlfSelected());
-        articulo.setTallaNum(pageFicha.getTallaNumSelected());
+        selectTalla(articulo.getTalla());
+        articulo.setTalla(pageFicha.getTallaSelected());
     }
     
     public void selectFirstTallaAvailable() throws Exception {
@@ -176,27 +150,27 @@ public class PageFichaArtStpV {
 	}
     
     @Step (
-    	description="Seleccionar la talla con código <b>#{tallaCodNum}</b> (previamente, si está abierta, cerramos la capa de la bolsa)", 
+    	description="Seleccionar la talla con código <b>#{talla.name()}</b> (previamente, si está abierta, cerramos la capa de la bolsa)", 
         expected="Se cambia la talla correctamente")
-    public void selectTalla(String tallaCodNum) throws Exception {
+    public void selectTalla(Talla talla) throws Exception {
     	SecBolsa.setBolsaToStateIfNotYet(StateBolsa.Closed, channel, app, driver);
-        pageFicha.selectTallaByValue(tallaCodNum);
-        checkTallaSelected(tallaCodNum);
+        pageFicha.selectTallaByValue(talla);
+        checkTallaSelected(talla);
     }
-    
-    @Validation (
-    	description="Queda seleccionada la talla <b>#{tallaCodNum}<b>",
-    	level=State.Defect)
-    private boolean checkTallaSelected(String tallaCodNum) {
-        String tallaSelected = pageFicha.getTallaNumSelected(); 
-        return (tallaSelected.compareTo(tallaCodNum)==0);
-    }
-    
+
+	@Validation (
+		description="Queda seleccionada la talla <b>#{talla.name()}<b>",
+		level=State.Defect)
+	private boolean checkTallaSelected(Talla talla) {
+		Talla tallaSelected = pageFicha.getTallaSelected(); 
+		return (tallaSelected==talla);
+	}
+
     @Step (
-    	description="Seleccionar la talla <b>#{codigoTalla} </b>", 
+    	description="Seleccionar la talla <b>#{talla.name()} </b>", 
 	    expected="Aparece una capa de introducción email para aviso")
-    public void selectTallaNoDisp(String codigoTalla) {
-	    pageFicha.secDataProduct.selectTallaByValue(codigoTalla, pageFicha.getTypeFicha(), driver);
+    public void selectTallaNoDisp(Talla talla) {
+	    pageFicha.secDataProduct.selectTallaByValue(talla, pageFicha.getTypeFicha(), driver);
 	    checkAppearsCapaAvisame();
     }
     
@@ -276,16 +250,16 @@ public class PageFichaArtStpV {
         selectAnadirAFavoritos(dataFavoritos);
     }
     
-    @Step (
-    	description="Seleccionar el botón <b>\"Añadir a Favoritos\"</b>", 
-        expected="El artículo se añade a Favoritos")
-    public void selectAnadirAFavoritos(DataFavoritos dataFavoritos) throws Exception {
-        pageFicha.selectAnadirAFavoritosButton();
-        ArticuloScreen articulo = pageFicha.getArticuloObject();
-        dataFavoritos.addArticulo(articulo);            
-        checkCapaAltaFavoritos();
-        validateVisibleButtonFavoritos(ActionFavButton.Remove);
-    }
+	@Step (
+		description="Seleccionar el botón <b>\"Añadir a Favoritos\"</b>", 
+		expected="El artículo se añade a Favoritos")
+	public void selectAnadirAFavoritos(DataFavoritos dataFavoritos) throws Exception {
+		pageFicha.selectAnadirAFavoritosButton();
+		ArticuloScreen articulo = pageFicha.getArticuloObject();
+		dataFavoritos.addArticulo(articulo);
+		checkCapaAltaFavoritos();
+		validateVisibleButtonFavoritos(ActionFavButton.Remove);
+	}
 
     @Step (
     	description="Cambiar de color dentro de la misma ficha volviendo al color/talla originales",
@@ -299,7 +273,7 @@ public class PageFichaArtStpV {
         validateNotVisibleButtonFavoritos(ActionFavButton.Add);
 
         SecDataProduct.selectColor(articulo.getCodigoColor(), driver);
-        SecDataProduct.selectTallaByValue(articulo.getTallaNum(), pageFicha.getTypeFicha(), driver);
+        SecDataProduct.selectTallaByValue(articulo.getTalla(), pageFicha.getTypeFicha(), driver);
 
     }
 

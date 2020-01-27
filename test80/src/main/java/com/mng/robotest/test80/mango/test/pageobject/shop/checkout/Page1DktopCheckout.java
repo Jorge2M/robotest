@@ -52,7 +52,8 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     final static String XPathPrecioRelArticle = "//div[@class[contains(.,'precioNormal')]]";
 	final static String XPathPrecioNoTachadoRelArticle = XPathPrecioRelArticle + "//self::div[not(@class[contains(.,'tachado')])]";
 	final static String XPathPrecioSiTachadoRelArticle = XPathPrecioRelArticle + "//self::div[@class[contains(.,'tachado')]]";
-    
+	
+    final static String XPathCantidadArticulos = "//div[@class[contains(.,'cantidadRes')]]";
     final static String XPathImporteTotal = "//*[@id='SVBody:SVResumenDesgloseImporteTotal:importeTotal']";
     final static String XPathClickDespliegaPagos = "//p[@class[contains(.,'anadirPago')]]";
     final static String XPathImporteTotalCompra = "//*[@id[contains(.,'importeTotalComprar')]]";
@@ -474,8 +475,9 @@ public class Page1DktopCheckout extends WebdrvWrapp {
     	PreciosArticulo precios = new PreciosArticulo();
         List<WebElement> preciosNoTachados= articuloWeb.findElements(By.xpath("." + XPathPrecioNoTachadoRelArticle));
         List<WebElement> preciosSiTachados= articuloWeb.findElements(By.xpath("." + XPathPrecioSiTachadoRelArticle));
+        int cantidad = Integer.valueOf(articuloWeb.findElement(By.xpath("." + XPathCantidadArticulos)).getText());
         for (WebElement precioNoTachado : preciosNoTachados) {
-        	precios.definitivo = getFloatFromImporteScreen(precioNoTachado); 
+        	precios.definitivo = getFloatFromImporteScreen(precioNoTachado) / cantidad; 
         	if (precios.definitivo!=0) {
         		precios.original = precios.definitivo;
         		break;
@@ -483,11 +485,11 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         }
         
         for (WebElement precioSiTachado : preciosSiTachados) {
-        	float precio = getFloatFromImporteScreen(precioSiTachado); 
+        	float precio = getFloatFromImporteScreen(precioSiTachado) / cantidad; 
         	if (precio!=0) {
 	        	precios.ultimaRebaja = precio;
 	        	if (precios.original==0 || precios.original==precios.definitivo) {
-	        		precios.original = getFloatFromImporteScreen(precioSiTachado);
+	        		precios.original = getFloatFromImporteScreen(precioSiTachado) / 2;
 	        	}
         	}
         }

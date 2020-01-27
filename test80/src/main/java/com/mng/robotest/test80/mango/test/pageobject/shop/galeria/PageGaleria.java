@@ -9,7 +9,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Locatable;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -32,11 +31,24 @@ import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 public abstract class PageGaleria extends WebdrvWrapp {
 	
-    //Número de páginas a partir del que consideramos que se requiere un scroll hasta el final de la galería
-    public static int maxPageToScroll = 20; 
-    WebDriver driver;
+	public enum From {menu, buscador}
 	
-    abstract public String getXPathLinkRelativeToArticle();
+	public static int maxPageToScroll = 20; 
+	final WebDriver driver;
+	final Channel channel;
+	final AppEcom app;
+	final From from;
+	final String XPathArticulo;
+
+	public PageGaleria(From from, Channel channel, AppEcom app, WebDriver driver) {
+		this.from = from;
+		this.driver = driver;
+		this.channel = channel;
+		this.app = app;
+		this.XPathArticulo = getXPathArticulo();
+	}
+	
+	abstract public String getXPathLinkRelativeToArticle();
 	abstract public int getLayoutNumColumnas();
 	abstract public WebElement getArticuloConVariedadColoresAndHover(int numArticulo);
 	abstract public WebElement getImagenArticulo(WebElement articulo);
@@ -58,9 +70,10 @@ public abstract class PageGaleria extends WebdrvWrapp {
 	abstract int getNumArticulosFromPagina(int pagina, TypeArticleDesktop sizeArticle);
 	abstract public WebElement getArticleFromPagina(int numPagina, int numArticle);
 	abstract public boolean isHeaderArticlesVisible(String textHeader);
-	abstract public void selectLinkAddArticleToBag(int posArticulo) throws Exception;
+	abstract public void showTallasArticulo(int posArticulo) throws Exception;
 	abstract public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSecondsToWait);
 	abstract public ArticuloScreen selectTallaArticle(int posArticulo, int posTalla) throws Exception;
+	abstract public StateFavorito getStateHearthIcon(WebElement hearthIcon);
     
     public static List<LabelArticle> listLabelsNew = Arrays.asList(
     	    LabelArticle.ComingSoon, 
@@ -68,41 +81,81 @@ public abstract class PageGaleria extends WebdrvWrapp {
     	    LabelArticle.NewCollection);
 	
 	final static String XPathLinkRelativeToArticle = ".//a[@class='product-link']";
-	
-    final static String XPathHearthIconRelativeArticle = 
-    	"//span[@class[contains(.,'product-favorite')] or " + 
-    	       "@class[contains(.,'product-list-fav')]]";
-    
-	public static PageGaleria getInstance(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+
+	public static PageGaleria getNew(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+		return PageGaleria.getNew(From.menu, channel, app, driver);
+	}
+	public static PageGaleria getNew(From from, Channel channel, AppEcom app, WebDriver driver) throws Exception {
 		switch (channel) {
 		case desktop:
-			return (PageGaleriaDesktop.getInstance(app, driver));
+			return (PageGaleriaDesktop.getNew(from, app, driver));
 		case movil_web:
 		default:
-			return (PageGaleriaMobil.getInstance(app, driver));
+			return (PageGaleriaMobil.getNew(from, app, driver));
 		}
 	}
 	
-	//Código común a Desktop y Móvil...
-
-	final static String XPathArticulo = 
-		"//*[" +
-			"@id[contains(.,'__item')] or " + 
-			"@class[contains(.,'list-item')] or " + 
-			"@class='product'" +
-			//"@id[contains(.,'product-key-id')]"
-		"]";
+	final static String XPathArticuloDesktopShop = "//li[@id[contains(.,'product-key-id')]]";
+	final static String XPathArticuloDesktopOutlet = "//li[@class[contains(.,'product-list-item')]]";
+	final static String XPathArticuloDesktopBuscador = "//div[@class[contains(.,'product-list-item')]]";
+	final static String XPathArticuloMobilOutlet = XPathArticuloDesktopOutlet;
+	final static String XPathArticuloMobilShop = "//li[@class='product']";
+	private String getXPathArticulo() {
+		switch (app) {
+		case outlet:
+			if (from==From.buscador) {
+				return XPathArticuloDesktopBuscador;
+			}
+			if (channel==Channel.desktop) {
+				return XPathArticuloDesktopOutlet;
+			}
+			return XPathArticuloMobilOutlet;
+		case shop:
+		case votf:
+		default:
+			if (channel==Channel.desktop) {
+				if (from==From.menu) {
+					return XPathArticuloDesktopShop;
+				}
+				return XPathArticuloDesktopBuscador;
+			}
+			return XPathArticuloMobilShop;
+		}
+	}
 	
-	final static String XPathArticuloNoDoble =
-		XPathArticulo +
-			"//self::*[not(@class[contains(.,'layout-2-coumns-A2')])]";
+//	final static String XPathHearthIconRelativeArticle = 
+//		"//span[@class[contains(.,'product-favorite')] or " + 
+//		       "@class[contains(.,'product-list-fav')]]";
 	
-    final static String XPathPrecioDefinitivoRelativeArticle = 
-        "//span[@class[contains(.,'price')] and " + 
-        	   "@class[not(contains(.,'line__through'))] and " + 
-        	   "@class[not(contains(.,'line-through'))]]";
+	String XPathHearthIconRelativeArticleDesktop = "//span[@class[contains(.,'_1lfLH')]]";
+	String XPathHearthIconRelativeArticleMovil = "//span[@class[contains(.,'product-favorite')]]";
+	String getXPathHearthIconRelativeArticle() {
+		switch (channel) {
+		case desktop:
+			return XPathHearthIconRelativeArticleDesktop;
+		case movil_web:
+		default:
+			return XPathHearthIconRelativeArticleMovil;
+		}
+	}
 	
-	public static String getXPathAncestorArticulo() {
+	String getXPathArticleHearthIcon(int posArticulo) {
+		String xpathArticulo = "(" + XPathArticulo + ")[" + posArticulo + "]";
+		return (xpathArticulo + getXPathHearthIconRelativeArticle());
+    }
+	
+	String getXPathArticuloNoDoble() {
+		return (
+			XPathArticulo + 
+			"//self::*[not(@class[contains(.,'layout-2-coumns-A2')])]");
+	}
+	
+	final static String XPathPrecioDefinitivoRelativeArticle = 
+		"//span[@class[contains(.,'price')] and " + 
+			"@class[not(contains(.,'line__through'))] and " + 
+			"@class[not(contains(.,'line-through'))]]";
+	
+	String getXPathAncestorArticulo() {
 		return (XPathArticulo.replaceFirst("//", "ancestor::"));
 	}
 	
@@ -116,11 +169,7 @@ public abstract class PageGaleria extends WebdrvWrapp {
         return ("//*[@id='buscador_cabecera2']");
     }
 	
-    /**
-     * @param numArticulo: posición del artículo en la galería
-     * @return el xpath correspondiente al link de un artículo
-     */
-    static String getXPathLinkArticulo(int numArticulo) {
+    String getXPathLinkArticulo(int numArticulo) {
         return ("(" + XPathArticulo + ")[" + numArticulo + "]//a");
     }  
 
@@ -143,10 +192,7 @@ public abstract class PageGaleria extends WebdrvWrapp {
         return ("".compareTo(getAnyArticleNotInOrder(typeOrden))==0);
     }
 
-    static String getXPathArticleHearthIcon(int posArticulo) {
-        String xpathArticulo = "(" + XPathArticulo + ")[" + posArticulo + "]";
-        return (xpathArticulo + XPathHearthIconRelativeArticle);
-    }
+
     
     public void hoverArticle(WebElement article) {
     	moveToElement(article, driver);
@@ -299,7 +345,8 @@ public abstract class PageGaleria extends WebdrvWrapp {
     /**
      * @return si los precios de los artículos están en un determinado intervalo de mínimo/máximo
      */
-    public boolean preciosInIntervalo(int minimo, int maximo) {
+    public boolean preciosInIntervalo(int minimo, int maximo) throws Exception {
+    	waitForPageLoaded(driver);
         List<WebElement> listaPreciosPrendas = getListaPreciosPrendas();
         for (WebElement prendaPrecio : listaPreciosPrendas) {
             String entero = prendaPrecio.getText();
@@ -353,9 +400,12 @@ public abstract class PageGaleria extends WebdrvWrapp {
         return null;
     }
     
-    public static String getRefArticulo(WebElement articulo) {
+    public String getRefArticulo(WebElement articulo) {
     	int lengthReferencia = 8;
     	String id = articulo.getAttribute("id");
+    	if (app!=AppEcom.outlet) {
+    		id = id.replace("product-key-id-", "");
+    	}
     	if ("".compareTo(id)!=0) {
 	    	if (id.length()>lengthReferencia) {
 	    		return (id.substring(0, lengthReferencia));
@@ -377,15 +427,14 @@ public abstract class PageGaleria extends WebdrvWrapp {
         return (new NombreYRef(nombreArticulo, refArticulo));
     }
     
-    //Equivalent to Mobil
     public boolean waitToHearthIconInState(WebElement hearthIcon, StateFavorito stateIcon, int maxSecondsToWait) {
-        try {
-            new WebDriverWait(driver, maxSecondsToWait).until(attributeContains(hearthIcon, "data-fav", stateIcon.getDataFav()));
-            return true;
-        }
-        catch (Exception e) {
-            return false;
-        }
+    	for (int i=0; i<maxSecondsToWait; i++) {
+    		if (getStateHearthIcon(hearthIcon)==stateIcon) {
+    			return true;
+    		}
+    		waitMillis(1000);
+    	}
+    	return false;
     }
     
     //Equivalent to Mobil
@@ -393,21 +442,6 @@ public abstract class PageGaleria extends WebdrvWrapp {
     	moveToElement(hearthIcon, driver);
     	isElementClickableUntil(driver, hearthIcon, 1/*seconds*/);
         hearthIcon.click();
-    }
-    
-    static StateFavorito getStateHearthIcon(WebElement hearthIcon) {
-    	String dataFav = hearthIcon.getAttribute("data-fav");
-    	if (dataFav!=null) {
-	        if (hearthIcon.getAttribute("data-fav").contains(StateFavorito.Desmarcado.getDataFav())) {
-	            return StateFavorito.Desmarcado;
-	        }
-	        return StateFavorito.Marcado;
-    	}
-    	
-    	if (hearthIcon.getAttribute("class").contains("active")) {
-    		return StateFavorito.Marcado;
-    	}
-    	return StateFavorito.Desmarcado;
     }
     
     /**
@@ -427,9 +461,7 @@ public abstract class PageGaleria extends WebdrvWrapp {
         return listReturn;
     }
 
-    /**
-     * @return si todos los iconos de favorito están marcados
-     */
+    public enum StateFavorito {Marcado, Desmarcado} 
     public boolean iconsInCorrectState(List<Integer> posIconosFav, TypeActionFav typeAction) {
         for (int posIcon : posIconosFav) {
             String XPathIcon = getXPathArticleHearthIcon(posIcon);
@@ -520,10 +552,10 @@ public abstract class PageGaleria extends WebdrvWrapp {
         int lastPage = getNumLastPage();
         List<Integer> numArticlesXpage = new ArrayList<>();
         List<Integer> numArticlesDoubleXpage = new ArrayList<>();
-        initializeDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, pageToScroll);
+        initializeDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, pageToScroll+10);
         updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, lastPage);
         while (!SecFooter.isVisible(app, driver) && lastPage < pageToScroll) {
-        	forceScroll();
+        	goToLastPage();
         	int newLastPage = getNumLastPage();
         	updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, newLastPage);
         	if (newLastPage==lastPage) {
@@ -550,15 +582,23 @@ public abstract class PageGaleria extends WebdrvWrapp {
         }
         return numPage;
     }
-    
-    private void goToInitPageAndWaitForArticle() throws Exception {
-	    Long pagePosition = (Long) ((JavascriptExecutor) driver).executeScript("return window.pageYOffset;");
-	    if (pagePosition != 0) {
-	    	backTo1erArticulo();
-	    }
-	    int maxSecondsWait = 2;
-	    isVisibleArticleUntil(1, maxSecondsWait);
-    }
+
+	public void goToInitPageAndWaitForArticle() throws Exception {
+		Object pagePositionObj = ((JavascriptExecutor) driver).executeScript("return window.pageYOffset;");
+		if (pagePositionObj instanceof Long) {
+			Long pagePosition = (Long)pagePositionObj;
+			if (pagePosition != 0) {
+				backTo1erArticulo();
+			}
+		} else {
+			Double pagePosition = (Double)pagePositionObj;
+			if (pagePosition != 0) {
+				backTo1erArticulo();
+			}
+		}
+		int maxSecondsWait = 2;
+		isVisibleArticleUntil(1, maxSecondsWait);
+	}
     
     private void initializeDataNumArticles(List<Integer> numArticlesXpage, List<Integer> numArticlesDoubleXpage, int maxPages) {
     	for (int i=0; i<=maxPages; i++) {
@@ -596,14 +636,26 @@ public abstract class PageGaleria extends WebdrvWrapp {
     	return numTotalArticles;
     }
     
-    private void forceScroll() throws Exception {
-    	waitAndGotoLastArticle();
-    	
-	    //Scrollamos un poco más para asegurar que forzamos el scroll de artículos
-	    //(En simulador-móvil-chrome esto no acaba de funcionar bien)
-	    ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,+50)", "");
-	    
-	    waitForPageLoaded(driver);
+    private void goToLastPage() throws Exception {
+    	goToPage(99);
+    }
+    
+	private void goToPage(int numPageToGo) throws Exception {
+		boolean lastPageReached = false;
+		int paginaActual = 1;
+		while (!lastPageReached && paginaActual<numPageToGo) {
+			By byPagina = By.xpath(getXPathPagina(paginaActual));
+			if (WebdrvWrapp.isElementVisible(driver, byPagina)) {
+				moveToElement(byPagina, driver);
+				((JavascriptExecutor) driver).executeScript("window.scrollBy(0,+50)", "");
+				paginaActual+=1;
+			} else {
+				lastPageReached = true;
+			}
+		}
+		
+		waitAndGotoLastArticle();
+		waitForPageLoaded(driver);
     }
     
     private void waitAndGotoLastArticle() {
@@ -633,9 +685,8 @@ public abstract class PageGaleria extends WebdrvWrapp {
 
     
     public void clickArticulo(WebElement articulo) throws Exception {
-    	WebElement articleName = articulo.findElement(By.xpath("." + getXPathLinkRelativeToArticle()));
     	moveToElement(articulo, driver);
-        clickAndWaitLoad(driver, articleName, 30, TypeOfClick.javascript);
+    	clickAndWaitLoad(driver, articulo, 30, TypeOfClick.webdriver);
     }
     
     @SuppressWarnings("static-access")
@@ -648,8 +699,8 @@ public abstract class PageGaleria extends WebdrvWrapp {
         SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
         secMenus.secMenuSuperior.secLineas.bringMenuBackground();
         
-        WebElement articleName = article.findElement(By.xpath("." + getXPathLinkRelativeToArticle()));
-        UtilsMangoTest.openLinkInNewTab(driver, articleName);
+        //WebElement articleName = article.findElement(By.xpath("." + getXPathLinkRelativeToArticle()));
+        UtilsMangoTest.openLinkInNewTab(driver, article/*articleName*/);
         
         //Cambiamos el foco de driver a la nueva pestaña que hemos creado y esperamos hasta que está disponible
         String detailWindowHandle = switchToAnotherWindow(driver, galeryWindowHandle);

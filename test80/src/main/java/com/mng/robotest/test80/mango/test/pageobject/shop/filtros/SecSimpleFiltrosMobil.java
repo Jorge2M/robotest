@@ -33,7 +33,7 @@ public class SecSimpleFiltrosMobil implements SecFiltros {
 	}
 	
 	public static SecSimpleFiltrosMobil getInstance(AppEcom app, WebDriver driver) throws Exception {
-		PageGaleria pageGaleria = PageGaleria.getInstance(Channel.movil_web, app, driver);
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
 		return (new SecSimpleFiltrosMobil(driver, pageGaleria));
 	}
 	

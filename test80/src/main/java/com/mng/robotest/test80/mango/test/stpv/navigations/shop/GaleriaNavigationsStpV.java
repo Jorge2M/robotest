@@ -20,7 +20,7 @@ public class GaleriaNavigationsStpV {
 	    boolean articleAvailable = false;
     	PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
 	    while (!articleAvailable && posArticulo<5) {
-	    	pageGaleriaStpV.selectLinkAddArticuloToBag(posArticulo);
+	    	pageGaleriaStpV.shopTallasArticulo(posArticulo);
 	    	int tallaToSelect = 1;
 	    	try {
 	    		articleAvailable = pageGaleriaStpV.selectTallaArticulo(posArticulo, tallaToSelect, dataBag, dCtxSh);

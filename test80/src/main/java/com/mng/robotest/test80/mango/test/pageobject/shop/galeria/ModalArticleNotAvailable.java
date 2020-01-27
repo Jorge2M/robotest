@@ -41,11 +41,11 @@ public class ModalArticleNotAvailable extends WebdrvWrapp {
 //    	return false;
     }
 
-    public static boolean isVisibleRPGD(int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathModal), maxSecondsToWait));
-    }
-    
-    public static void clickAspaForClose(WebDriver driver) {
-        driver.findElement(By.xpath(XPathAspaForClose)).click();
-    }
+	public static boolean isVisibleRPGD(int maxSecondsToWait, WebDriver driver) {
+		return (isElementVisibleUntil(driver, By.xpath(XPathModal), maxSecondsToWait));
+	}
+
+	public static void clickAspaForClose(WebDriver driver) {
+		driver.findElement(By.xpath(XPathAspaForClose)).click();
+	}
 }

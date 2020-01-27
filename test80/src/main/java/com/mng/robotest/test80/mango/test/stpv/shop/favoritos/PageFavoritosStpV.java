@@ -10,6 +10,7 @@ import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
@@ -151,8 +152,8 @@ public class PageFavoritosStpV {
     throws Exception {
         String refProductoToAdd = artToAddBolsa.getRefProducto();
         String codigoColor = artToAddBolsa.getCodigoColor();
-        String tallaSelected = pageFavoritos.addArticleToBag(refProductoToAdd, codigoColor, 1);
-        artToAddBolsa.setTallaAlf(tallaSelected);
+        Talla tallaSelected = pageFavoritos.addArticleToBag(refProductoToAdd, codigoColor, 1);
+        artToAddBolsa.setTalla(tallaSelected);
         dataBolsa.addArticulo(artToAddBolsa);
         SecBolsaStpV.validaAltaArtBolsa(dataBolsa, channel, AppEcom.shop, driver);
     }

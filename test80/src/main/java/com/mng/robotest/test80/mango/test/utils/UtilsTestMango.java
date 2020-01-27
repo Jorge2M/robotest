@@ -125,13 +125,4 @@ public class UtilsTestMango {
         }
         return listProducts;
     }
-
-	public static String getCodigoTallaUnica(AppEcom app) {
-		switch (app) {
-		case outlet:
-			return "99";
-		default:
-			return "0";
-		}
-	}
 }

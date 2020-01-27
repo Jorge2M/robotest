@@ -10,16 +10,16 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 
 public enum TestABGoogleExpImpl implements TestABGoogleExp {
 
-	GaleriaDesktopReact(
-		"KgtNo3S3SWCTsPzuWFIT-Q",
-		"sub_8rhk5o_wc6i3wg92ap",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"V0-Galería sin React", //Este es el único caso posible en Outlet
-			"V1-Galería con React"),
-		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop, AppEcom.votf)
-	),
+//	GaleriaDesktopReact(
+//		"KgtNo3S3SWCTsPzuWFIT-Q",
+//		"sub_8rhk5o_wc6i3wg92ap",
+//		Arrays.asList(0,1),
+//		Arrays.asList(
+//			"V0-Galería sin React", //Este es el único caso posible en Outlet
+//			"V1-Galería con React"),
+//		Arrays.asList(Channel.desktop),
+//		Arrays.asList(AppEcom.shop, AppEcom.votf)
+//	),
 	
 	//TODO es posible eliminarlo en cuanto se ejecute el planchado
 	GaleriaDesktopReactPRESemanal(

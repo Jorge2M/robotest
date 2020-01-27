@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
@@ -19,8 +20,7 @@ public class LineasArticuloBolsa {
 		Referencia(true), 
 		Nombre(true), 
 		Color(true), 
-		TallaAlf(true), 
-		TallaNum(false), 
+		Talla(true), 
 		Cantidad(true), 
 		PrecioEntero(true), 
 		PrecioDecimal(true), 
@@ -61,7 +61,7 @@ public class LineasArticuloBolsa {
 	private final static String XPathColorRelativeArticleDesktop = ".//*[@class='itemColor']";
 	private final static String XPathColorRelativeArticleMobil = ".//p[@class[contains(.,'sbi-color')]]";
 	private final static String XPathTallaAlfRelativeArticleDesktop = ".//p[@class='itemSize']";
-	private final static String XPathTallaNumRelativeArticleDesktop = ".//p[@class='itemSizeID']";
+//	private final static String XPathTallaNumRelativeArticleDesktop = ".//p[@class='itemSizeID']";
 	private final static String XPathTallaAlfRelativeArticleMobil = ".//p[@class[contains(.,'sbi-size')]]";
 	private final static String XPathCantidadRelativeArticleDesktop = ".//p[@class='itemsQt']";
 	private final static String XPathCantidadRelativeArticleMobil = ".//p[@class[contains(.,'sbi-quantity')]]";
@@ -127,10 +127,8 @@ public class LineasArticuloBolsa {
 			return XPathNombreRelativeArticleDesktop;
 		case Color:
 			return XPathColorRelativeArticleDesktop;
-		case TallaAlf:
+		case Talla:
 			return XPathTallaAlfRelativeArticleDesktop;
-		case TallaNum:
-			return XPathTallaNumRelativeArticleDesktop;
 		case Cantidad:
 			return XPathCantidadRelativeArticleDesktop;
 		case PrecioEntero:
@@ -149,7 +147,7 @@ public class LineasArticuloBolsa {
 			return XPathNombreRelativeArticleMobil;
 		case Color:
 			return XPathColorRelativeArticleMobil;
-		case TallaAlf:
+		case Talla:
 			return XPathTallaAlfRelativeArticleMobil;
 		case Cantidad:
 			return XPathCantidadRelativeArticleMobil;
@@ -244,8 +242,7 @@ public class LineasArticuloBolsa {
 		articleData.referencia = getReferenciaArticle(lineaArticleWeb, channel);
 		articleData.nombre = getDataArticle(DataArtBolsa.Nombre, lineaArticleWeb, channel);
 		articleData.color = getDataArticle(DataArtBolsa.Color, lineaArticleWeb, channel);
-		articleData.tallaAlf = getDataArticle(DataArtBolsa.TallaAlf, lineaArticleWeb, channel);
-		articleData.tallaNum = getDataArticle(DataArtBolsa.TallaNum, lineaArticleWeb, channel);
+		articleData.talla = Talla.from(getDataArticle(DataArtBolsa.Talla, lineaArticleWeb, channel));
 		articleData.cantidad = getDataArticle(DataArtBolsa.Cantidad, lineaArticleWeb, channel);
 		articleData.precio = getPrecioArticle(lineaArticleWeb, channel);
 		return articleData;

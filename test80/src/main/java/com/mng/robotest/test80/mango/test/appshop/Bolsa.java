@@ -111,18 +111,18 @@ public class Bolsa {
         PagoNavigationsStpV.testFromBolsaToCheckoutMetPago(dCtxSh, dCtxPago, driver);
     }
 
-    @Test (
-        groups={"Bolsa", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
-        description="[Usuario registrado] Añadir y eliminar artículos de la bolsa")
-    public void BOR006_Gest_Prod_Bolsa_Sireg() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-        dCtxSh.userConnected = userShop.user;
-        dCtxSh.passwordUser = userShop.password;
-        dCtxSh.userRegistered = true;
-        BOR005_6_Gest_Prod_Bolsa(dCtxSh, driver);
-    }
+	@Test (
+		groups={"Bolsa", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
+		description="[Usuario registrado] Añadir y eliminar artículos de la bolsa")
+	public void BOR006_Gest_Prod_Bolsa_Sireg() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest();
+		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
+		dCtxSh.userConnected = userShop.user;
+		dCtxSh.passwordUser = userShop.password;
+		dCtxSh.userRegistered = true;
+		BOR005_6_Gest_Prod_Bolsa(dCtxSh, driver);
+	}
 
     public static void BOR005_6_Gest_Prod_Bolsa(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {

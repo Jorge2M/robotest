@@ -94,7 +94,7 @@ public class TestNodos {
             SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
             if (appE==AppEcom.shop) {
             	secMenusStpV.seleccionLinea(LineaType.nuevo, null, dCtxSh);
-                PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, dCtxSh.appE, driver);
+                PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, dCtxSh.appE, driver);
                 NombreYRefList listArticlesNuevoAct = pageGaleria.getListaNombreYRefArticulos();
                 this.nodo.setArticlesNuevo(listArticlesNuevoAct);
                 PageGaleriaStpV pageGaleriaStpV = PageGaleriaStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);

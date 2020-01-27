@@ -14,6 +14,7 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageErrorBusqueda;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
+import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria.From;
 import com.mng.robotest.test80.mango.test.pageobject.shop.navigations.ArticuloNavigations;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
@@ -38,7 +39,7 @@ public class SecBuscadorStpV {
 	public static void busquedaCategoriaProducto(String categoriaABuscar, boolean categoriaExiste, AppEcom app, 
 												 Channel channel, WebDriver driver) throws Exception {
 		SecCabecera.buscarTexto(categoriaABuscar, channel, app, driver);
-		PageGaleria pageGaleria = (PageGaleria)PageGaleria.getInstance(channel, app, driver); 
+		PageGaleria pageGaleria = (PageGaleria)PageGaleria.getNew(From.buscador, channel, app, driver); 
 		WebdrvWrapp.waitForPageLoaded(driver);    
 
 		//Validaciones

@@ -1,6 +1,5 @@
 package com.mng.testmaker.service.webdriver.maker;
 
-import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -87,24 +86,24 @@ class ChromedriverMaker implements WebdriverMaker {
 		}
 	}
 	
-	private boolean isDesktopInVirtualMachine() {
-		if (channel!=Channel.movil_web) {
-			java.awt.Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-			if (screenSize.height<=1024) {
-				return true;
-			}
-		}
-		
-		return false;
-	}
+//	private boolean isDesktopInVirtualMachine() {
+//		if (channel!=Channel.movil_web) {
+//			java.awt.Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//			if (screenSize.height<=1024) {
+//				return true;
+//			}
+//		}
+//		
+//		return false;
+//	}
 	
 	private void preBuildConfig() {
-		if (isDesktopInVirtualMachine()) {
-			//Esta ñapa es la única que se ha encontrado para solventar el problema del Chrome (no-headless) 
-			//cuando se ejecuta contra una máquina virtual con un Tomcat as a Service. En ese contexto se abre un Chrome 
-			//con resolución de 1024x768 y no hay forma de modificarlo. En cambio con headless funciona correctamente.  
-			isHeadless=true;
-		}
+//		if (isDesktopInVirtualMachine()) {
+//			//Esta ñapa es la única que se ha encontrado para solventar el problema del Chrome (no-headless) 
+//			//cuando se ejecuta contra una máquina virtual con un Tomcat as a Service. En ese contexto se abre un Chrome 
+//			//con resolución de 1024x768 y no hay forma de modificarlo. En cambio con headless funciona correctamente.  
+//			isHeadless=true;
+//		}
 		if (channel!=Channel.movil_web && isHeadless) {
 			options.addArguments("--window-size=1920x1080");
 		}

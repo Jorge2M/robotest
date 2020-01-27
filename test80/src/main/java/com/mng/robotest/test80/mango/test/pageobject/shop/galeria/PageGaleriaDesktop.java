@@ -7,14 +7,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.mango.test.data.Talla;
+import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
@@ -35,37 +35,48 @@ public class PageGaleriaDesktop extends PageGaleria {
     public static SecSelectorPrecios secSelectorPrecios;
     public static SecCrossSelling secCrossSelling;
     
-    final AppEcom app;
+    private final SecColoresArticuloDesktop secColores;
+    private final SecPreciosArticuloDesktop secPrecios;
+    private final SecTallasArticuloDesktop secTallas;
     
     public enum NumColumnas {dos, tres, cuatro}
     public enum TypeSlider {prev, next}
     public enum TypeColor {codigo, nombre}
     public enum TypeArticleDesktop {
-    	Simple("//self::*[@data-imgsize = 'A1']"),
-    	Doble("//self::*[@data-imgsize = 'A2']"),
-    	Panoramica("//self::*[@class[contains(.,'-A2')] or @class[contains(.,'-A3')]]"),
-    	Video("//video");
+    	Simple (
+    		"//self::*[@class[contains(.,'_2zQ2a')]]",
+    		"//self::*[@data-imgsize = 'A1']"), 
+    	Doble (
+    		"//self::*[@class[contains(.,'_3QWF')]]",
+    		"//self::*[@data-imgsize = 'A2']"), 
+    	Video (
+    		"//video",
+    		"//video");
     	
-    	String xpathRelativeArticle;
-    	private TypeArticleDesktop(String xpathRelativeArticle) {
-    		this.xpathRelativeArticle = xpathRelativeArticle;
+    	String xpathRelativeArticleShop;
+    	String xpathRelativeArticleOutlet;
+    	private TypeArticleDesktop(String xpathRelativeArticleShop, String xpathRelativeArticleOutlet) {
+    		this.xpathRelativeArticleShop = xpathRelativeArticleShop;
+    		this.xpathRelativeArticleOutlet = xpathRelativeArticleOutlet;
     	}
     	
-    	public String getXPathRelativeArticle() {
-    		return this.xpathRelativeArticle;
+    	public String getXPathRelativeArticle(AppEcom app) {
+    		if (app==AppEcom.outlet) {
+    			return this.xpathRelativeArticleOutlet;
+    		}
+    		return xpathRelativeArticleShop;
     	}
     }
-    
-    static String classProductName = 
-    	"(@class[contains(.,'productList__name')] or " +
-    	 "@class[contains(.,'product-list-name')] or " + 
-    	 "@class='product-list-info-name' or " +
-    	 "@class='product-name')";
-    
-    private final static String TagFlagSelected = "@TagFlagSelected";
-    private final static String XPathArticuloConColores = "//div[@class[contains(.,'color')]]/" + getXPathAncestorArticulo();
-    private final static String XPathArticuloColoresNoDoble = XPathArticuloConColores + "//self::*[not(@class[contains(.,'layout-2-coumns-A2')])]";
-    private final static String iniXPathPaginaGaleria = "//div[@id='page";
+
+	static String classProductName = 
+		"(@class[contains(.,'productList__name')] or " +
+		 "@class[contains(.,'product-list-name')] or " + 
+		 "@class[contains(.,'_1P8s4')] or " +
+		 "@class='product-list-info-name' or " +
+		 "@class='product-name')";
+
+    //private final String XPathArticuloColoresNoDoble = XPathArticuloConColores + "//self::*[not(@class[contains(.,'layout-2-coumns-A2')])]";
+
     private final static String XPathNombreRelativeToArticle = "//*[" + classProductName + "]";
     private final static String XPathImgRelativeArticle = 
     	"//img[@src and (" + 
@@ -74,186 +85,137 @@ public class PageGaleriaDesktop extends PageGaleria {
     		   "@class[contains(.,'product-list-im')])]";
     private final static String XPathImgSliderActiveRelativeArticleDesktop = 
         "//div[@class[contains(.,'swiper-slide-active')]]" + 
-        "//img[@src and (@class[contains(.,'productListImg')] or @class[contains(.,'product-list-im')])]";
-    private final static String XPathPrecioOriginalRelativeArticle = 
-    	"//*[@class[contains(.,'productList__price')] or " + 
-    		"@class[contains(.,'productList__salePrice')] or " + 
-    		"@class[contains(.,'product-list-info-price')] or " + 
-    		"@class[contains(.,'product-list-price')]]"; 
-    private final static String XPathPrecioRebajadoRelativeArticle = 
-    	"//*[@class[contains(.,'product-list-sale-price')] or " + 
-    		"@class[contains(.,'product-list-info-price-sale')]]";
-    private final static String XPathPrecioNoRebajadoRelativeArticle = 
-        "//span[@class='product-list-price']";
-    private final static String TagIdColor = "@TagIdColor";
-    private final static String XPathImgCodColorWithTagColor = "//img[@class[contains(.,'other-color')] and @data-id='" + TagIdColor + "']";
-    private final static String XPathImgColorRelativeArticleWithTagSelected = "//div[@class[contains(.,'color" + TagFlagSelected + "')]]//img";
-    private final static String XPpathIconoUpGalery = "//div[@id='scroll-top-step']";
-    private final static String XpathTallaNoDisponibleArticulo = "//span[@data-id and (@class[contains(.,'no-stock')])]";
-    private final static String XPathHeaderArticles = "//div[@id[contains(.,'title')]]/h1";
+        "//img[@src and (@class[contains(.,'productListImg')] or @class[contains(.,'product-list-im')] or @class[contains(.,'TaqRk')])]";
     
-    @Override
-    public String getXPathLinkRelativeToArticle() {
-    	return XPathNombreRelativeToArticle;
-    }
- 
-    private PageGaleriaDesktop(AppEcom app, WebDriver driver) {
-    	this.app = app;
-    	this.driver = driver;
-    }
-    
-    public static PageGaleriaDesktop getInstance(AppEcom app, WebDriver driver) throws Exception {
-    	return (new PageGaleriaDesktop(app, driver));
-    }
-    
-    public boolean isPage() {
-        return (isElementPresent(driver, By.xpath("//div[@class[contains(.,'container-fluid catalog')]]")));
-    }
-    
-    private String getXPathImgCodigoColor(String codigoColor) {
-    	return XPathImgCodColorWithTagColor.replace(TagIdColor, codigoColor);
-    }
-    
-    private String getXPathImgColorRelativeArticle(boolean selected) {
-        String selectedStr = "";
-        if (selected) {
-            selectedStr = "--selected";
-        }
-        return (XPathImgColorRelativeArticleWithTagSelected.replace(TagFlagSelected, selectedStr));
-    }
-    
-    public enum TypeArticle {rebajado, norebajado};
-    private String getXPathDataArticuloOfType(TypeArticle typeArticle) {
-    	switch (typeArticle) {
-    	case rebajado:
-    		return (XPathArticulo + XPathPrecioRebajadoRelativeArticle + "//ancestor::div[@class[contains(.,'product-list-info')]]");
-    	case norebajado:
-    	default:
-    		return (XPathArticulo + XPathPrecioNoRebajadoRelativeArticle + "//ancestor::div[@class[contains(.,'product-list-info')]]");
-    	}
-    }
-    
-    private String getXPathLabel(LabelArticle label) {
-    	String xpath = "//span[@class='product-list-label' and (";
-    	for (int i=0; i<label.getListTraducciones().size(); i++) {
-    		String labelTraduction = label.getListTraducciones().get(i);
-    		xpath+="text()[contains(.,'" + labelTraduction + "')]";
-    		if (i<label.getListTraducciones().size()-1) {
-    			xpath+=" or ";
-    		}
-    	}
-    	xpath+=")]";
-    	return xpath;
-    }
-    
-    private String getXPathDataArticuloRebajadoWithLabel(LabelArticle label) {
-    	String xpathLabelWithLit = getXPathLabel(label);
-    	return (getXPathDataArticuloOfType(TypeArticle.rebajado) + xpathLabelWithLit + "/..");
-    }
-    
-    
-    private String getXPathDataArticuloTemporadaXWithLabel(List<Integer> temporadasX, LabelArticle label) {
-    	String xpathLabelWithLit = getXPathLabel(label);
-    	return (getXPathArticuloTemporadasX(ControlTemporada.articlesFrom, temporadasX) + xpathLabelWithLit + "/..");
-    }    
-    
-    String getXPathArticuloFromPagina(int pagina, TypeArticleDesktop sizeArticle) {
-    	String xpathPagina = getXPathPagina(pagina);
-    	return  (xpathPagina + getXPathArticulo(sizeArticle));
-    }
-    
-    public enum ControlTemporada {articlesFrom, articlesFromOther};
-    String getXPathArticuloTemporadasX(ControlTemporada controlTemp, List<Integer> listTemporadas) {
-    	String xpathResult = XPathArticulo + "/self::*[@id and ";
-    	for (int i=0; i<listTemporadas.size(); i++) {
-    		int temporada = listTemporadas.get(i);
-    		switch (controlTemp) {
-    		case articlesFrom:
-    			xpathResult += "starts-with(@id, " + String.valueOf(temporada) + ")";
-    			if (i<(listTemporadas.size()-1)) {
-    				xpathResult+=" or ";
-    			}
-    			break;
-    		case articlesFromOther:
-    			xpathResult += "not(starts-with(@id, " + String.valueOf(temporada) + "))";
-    			if (i<(listTemporadas.size()-1)) {
-    				xpathResult+=" and ";
-    			}
-    			break;
-    		}
-    	}
-	    	
-    	return (xpathResult + "]//div[@class[contains(.,'product-list-info')]]");
-    }
+
+	private PageGaleriaDesktop(From from, AppEcom app, WebDriver driver) {
+		super(from, Channel.desktop, app, driver);
+		secColores = new SecColoresArticuloDesktop(app);
+		secPrecios = new SecPreciosArticuloDesktop(app);
+		secTallas = new SecTallasArticuloDesktop(app, XPathArticulo, driver);
+	}
+	public static PageGaleriaDesktop getNew(From from, AppEcom app, WebDriver driver) throws Exception {
+		return (new PageGaleriaDesktop(from, app, driver));
+	}
+
+	public enum TypeArticle {rebajado, norebajado};
+	private final String XPathAncestorArticle = "//ancestor::div[@class[contains(.,'product-list-info')]]";
+	private String getXPathDataArticuloOfType(TypeArticle typeArticle) {
+		String xpathPrecio = secPrecios.getXPathPrecioArticulo(typeArticle);
+		return (XPathArticulo + xpathPrecio + XPathAncestorArticle);
+	}
+	
+	private String getXPathArticuloConColores() {
+		return (
+			secColores.getXPathColorArticle() + "/" + 
+			getXPathAncestorArticulo());
+	}
+
+	private final static String XPpathIconoUpGalery = "//div[@id='scroll-top-step' or @class[contains(.,'_1VVRv')]]";
+	private final static String XPathHeaderArticles = "//div[@id[contains(.,'title')]]/h1";
+
+	@Override
+	public String getXPathLinkRelativeToArticle() {
+		return XPathNombreRelativeToArticle;
+	}
+
+	public boolean isPage() {
+		return (isElementPresent(driver, By.xpath("//div[@class[contains(.,'container-fluid catalog')]]")));
+	}
+
+	private String getXPathLabel(LabelArticle label) {
+		String xpath = "//span[@class='product-list-label' and (";
+		for (int i=0; i<label.getListTraducciones().size(); i++) {
+			String labelTraduction = label.getListTraducciones().get(i);
+			xpath+="text()[contains(.,'" + labelTraduction + "')]";
+			if (i<label.getListTraducciones().size()-1) {
+				xpath+=" or ";
+			}
+		}
+		xpath+=")]";
+		return xpath;
+	}
+
+	private String getXPathDataArticuloRebajadoWithLabel(LabelArticle label) {
+		String xpathLabelWithLit = getXPathLabel(label);
+		return (getXPathDataArticuloOfType(TypeArticle.rebajado) + xpathLabelWithLit + "/..");
+	}
+
+	private String getXPathDataArticuloTemporadaXWithLabel(List<Integer> temporadasX, LabelArticle label) {
+		String xpathLabelWithLit = getXPathLabel(label);
+		return (getXPathArticuloTemporadasX(ControlTemporada.articlesFrom, temporadasX) + xpathLabelWithLit + "/..");
+	}
+
+	String getXPathArticuloFromPagina(int pagina, TypeArticleDesktop sizeArticle) {
+		String xpathPagina = getXPathPagina(pagina);
+		return  (xpathPagina + getXPathArticulo(sizeArticle));
+	}
+
+	public enum ControlTemporada {articlesFrom, articlesFromOther};
+	String getXPathArticuloTemporadasX(ControlTemporada controlTemp, List<Integer> listTemporadas) {
+		String xpathResult = XPathArticulo + "/self::*[@id and ";
+		for (int i=0; i<listTemporadas.size(); i++) {
+			int temporada = listTemporadas.get(i);
+			switch (controlTemp) {
+			case articlesFrom:
+				xpathResult += "starts-with(@id, " + String.valueOf(temporada) + ")";
+				if (i<(listTemporadas.size()-1)) {
+					xpathResult+=" or ";
+				}
+				break;
+			case articlesFromOther:
+				xpathResult += "not(starts-with(@id, " + String.valueOf(temporada) + "))";
+				if (i<(listTemporadas.size()-1)) {
+					xpathResult+=" and ";
+				}
+				break;
+			}
+		}
+
+		return (xpathResult + "]//div[@class[contains(.,'product-list-info')]]");
+	}
     
     String getXPathArticulo(TypeArticleDesktop sizeArticle) {
-    	return ((XPathArticulo + sizeArticle.getXPathRelativeArticle()));
+    	return ((XPathArticulo + sizeArticle.getXPathRelativeArticle(app)));
     }
     
-    @Override
-    String getXPathPagina(int pagina) {
-    	return (iniXPathPaginaGaleria + pagina + "Height']");
-    }
 
-    private static String getXPathArticleCapaInferiorDesktop(int posArticulo) {
-        String xpathArticulo = "(" + XPathArticulo + ")[" + posArticulo + "]";
-        return (xpathArticulo + "//div[@class[contains(.,'add-cart')] and @data-stock]");
-    }
-    
-    private static String getXPathArticleLinkCapaAddDesktop(int posArticulo, boolean capaVisible) {
-        String xpathCapaAdd = getXPathArticleCapaInferiorDesktop(posArticulo);
-        String classSegunVisible = "not(@class[contains(.,'active')])";
-        if (capaVisible) {
-            classSegunVisible = "@class[contains(.,'active')]";
-        }
-        return (xpathCapaAdd + "//p[@class[contains(.,'first-step')] and " + classSegunVisible + "]");
-    }
-    
-    private static String getXPathArticleCapaTallas(int posArticulo, boolean capaVisible) {
-        String xpathCapaAdd = getXPathArticleCapaInferiorDesktop(posArticulo);
-        String classSegunVisible = "not(@class[contains(.,'active')])";
-        if (capaVisible) {
-            classSegunVisible = "@class[contains(.,'active')]";
-        }
-        return (xpathCapaAdd + "//div[@class[contains(.,'add-cart-sizes-container')] and " + classSegunVisible + "]");
-    }
+	private final static String iniXPathPaginaGaleriaOutlet = "//div[@id='page";
+	private final static String iniXPathPaginaGaleriaShop = "//ul[@id='page";
 
-    private static String getXPathArticleTallaAvailable(int posArticulo, int posTalla) {
-        String xpathCapaTallas = getXPathArticleCapaTallas(posArticulo, true/*capaVisible*/);
-        return "(" + xpathCapaTallas + "//span[@data-id and not(@class[contains(.,'no-stock')])]" + ")[" + posTalla + "]";
-    }
+	@Override
+	String getXPathPagina(int pagina) {
+		switch (app) {
+		case outlet:
+			return (iniXPathPaginaGaleriaOutlet + pagina + "Height']");
+		default:
+			return (iniXPathPaginaGaleriaShop + pagina + "']");
+		}
+	}
 
-    private static String getXPathArticleTallaNotAvailable() {
-        return  XpathTallaNoDisponibleArticulo;
-    }
+	private static String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
+		return ("//*[@class[contains(.,'swiper-button-" + typeSlider + "')] and @role]");
+	}
 
-    private static String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
-    	return ("//span[@class='swiper-button-" + typeSlider + "' and @role]");
-    }
-    
-    private static String getXPathArticuloConVariedadColores(int numArticulo) {
-        return ("(" + XPathArticuloConColores + ")" + "[" + numArticulo + "]");
-    }
-    
-    private static String getXPathArticuloColoresNoDoble(int numArticulo) {
-    	return ("(" + XPathArticuloColoresNoDoble + ")" + "[" + numArticulo + "]");
-    }
-    
-    @Override
-    public WebElement getArticuloConVariedadColoresAndHover(int numArticulo) {
-        String xpathArticulo = getXPathArticuloConVariedadColores(numArticulo);
-        WebElement articulo = driver.findElement(By.xpath(xpathArticulo)); 
-        hoverArticle(articulo);
-        return articulo;
-    }
-    
-    public WebElement getArticuloConVariedadColoresAndHoverNoDoble(int numArticulo) {
-        String xpathArticulo = getXPathArticuloColoresNoDoble(numArticulo);
-        WebElement articulo = driver.findElement(By.xpath(xpathArticulo)); 
-        hoverArticle(articulo);
-        return articulo;
-    }
-    
+	private String getXPathArticuloConVariedadColores(int numArticulo) {
+		return ("(" + getXPathArticuloConColores() + ")" + "[" + numArticulo + "]");
+	}
+
+	@Override
+	public WebElement getArticuloConVariedadColoresAndHover(int numArticulo) {
+		String xpathArticulo = getXPathArticuloConVariedadColores(numArticulo);
+		WebElement articulo = driver.findElement(By.xpath(xpathArticulo)); 
+		hoverArticle(articulo);
+		return articulo;
+	}
+
+	public WebElement getArticuloConVariedadColoresAndHoverNoDoble(int numArticulo) {
+		String xpathArticulo = getXPathArticuloConVariedadColores(numArticulo);
+		WebElement articulo = driver.findElement(By.xpath(xpathArticulo)); 
+		hoverArticle(articulo);
+		return articulo;
+	}
+
     public boolean isArticleFromLinea(int numArticle, LineaType lineaType) {
     	return (isArticleFromLinCarrusel(numArticle, lineaType.toString()));
     }
@@ -304,7 +266,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 
     @Override
     public WebElement getColorArticulo(WebElement articulo, boolean selected, int numColor) {
-    	String xpathImgColorRelArticle = getXPathImgColorRelativeArticle(selected);
+    	String xpathImgColorRelArticle = secColores.getXPathImgColorRelativeArticle(selected);
         return (articulo.findElements(By.xpath("." + xpathImgColorRelArticle)).get(numColor-1));
     }
 
@@ -337,11 +299,12 @@ public class PageGaleriaDesktop extends PageGaleria {
         }
     }
 
-    @Override
-    public int getNumFavoritoIcons() {
-        return (driver.findElements(By.xpath(XPathHearthIconRelativeArticle)).size());
-    }
-    
+	@Override
+	public int getNumFavoritoIcons() {
+		By byHearthIcon = By.xpath(getXPathHearthIconRelativeArticle());
+		return (driver.findElements(byHearthIcon).size());
+	}
+
     @Override
     public boolean eachArticlesHasOneFavoriteIcon() {  
         int numArticles = getNumArticulos(); 
@@ -374,24 +337,21 @@ public class PageGaleriaDesktop extends PageGaleria {
         }
         
         return 2;
-    }                
-    
-    @Override
-    public String getNombreArticulo(WebElement articulo) {
-        return (articulo.findElement(By.xpath("." + XPathNombreRelativeToArticle)).getText());
-    }
+	}	
+
+	@Override
+	public String getNombreArticulo(WebElement articulo) {
+		return (articulo.findElement(By.xpath("." + XPathNombreRelativeToArticle)).getText());
+	}
 
     @Override
     public boolean isArticleRebajado(WebElement articulo) {
-    	return (isElementPresent(articulo, By.xpath("." + XPathPrecioRebajadoRelativeArticle)));
+    	return (secPrecios.isArticleRebajado(articulo));
     }
     
     @Override
     public String getPrecioArticulo(WebElement articulo) {
-    	if (isArticleRebajado(articulo)) {
-            return (articulo.findElement(By.xpath("." + XPathPrecioRebajadoRelativeArticle)).getText());    
-    	}
-        return (articulo.findElement(By.xpath("." + XPathPrecioOriginalRelativeArticle)).getText());
+    	return (secPrecios.getPrecioDefinitivo(articulo));
     }    
     
     /**
@@ -402,6 +362,9 @@ public class PageGaleriaDesktop extends PageGaleria {
     public String getRefColorArticulo(WebElement articulo) {
     	int lengthReferencia = 10;
     	String id = articulo.getAttribute("id");
+    	if (app!=AppEcom.outlet) {
+    		id = id.replace("product-key-id-", "");
+    	}
     	if (id.length()>lengthReferencia) {
     		return (id.substring(0, lengthReferencia));
     	}
@@ -518,13 +481,7 @@ public class PageGaleriaDesktop extends PageGaleria {
     }
     
     public List<String> getArticlesOfType(TypeArticle typeArticle) {
-    	//ArrayList<String> dataTextArticles = new ArrayList<String>();
     	String xpathArtReb = getXPathDataArticuloOfType(typeArticle);
-
-//    	for (WebElement litWebEl : driver.findElements(By.xpath(xpathArtReb))) {
-//    		dataTextArticles.add(litWebEl.getText());
-//    	}
-//    	return dataTextArticles;
     	return (getDataFromArticlesLiteral(xpathArtReb));
     }
     
@@ -583,54 +540,40 @@ public class PageGaleriaDesktop extends PageGaleria {
     public void moveToArticleAndGetObject(int posArticulo) {
         moveToElement(By.xpath(getXPathLinkArticulo(posArticulo) + "/.."), driver);
     }
-    
-    @Override
-    public void selectLinkAddArticleToBag(int posArticulo) throws Exception {
-        //Nos posicionamos en el artículo y clicamos la capa. 
-        //Es un click muy extraño porque cuando lo ejecutas automáticamente posiciona la capa en el top del navegador y queda oculta por el menú
-        moveToArticleAndGetObject(posArticulo);
-        String xpathCapaAlta = getXPathArticleLinkCapaAddDesktop(posArticulo, true/*capaVisible*/);
-        int i=0;
-        while (i<5) {
-            try {
-                driver.findElement(By.xpath(xpathCapaAlta)).click();
-                break;
-            }
-            catch (WebDriverException e) {
-                //Scrollamos un poquito hacia arriba para asegurar
-                ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-100)", "");
-                Thread.sleep(200);
-                i+=1;
-            }
-        }
-    }
-    
-    @Override
-    public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSecondsToWait) {
-        String xpathCapa = getXPathArticleCapaTallas(posArticulo, true/*capaVisible*/);
-        return (isElementVisibleUntil(driver, By.xpath(xpathCapa), maxSecondsToWait));
-    }
+
+	@Override
+	public void showTallasArticulo(int posArticulo) throws Exception {
+		//Nos posicionamos en el artículo y clicamos la capa. 
+		//Es un click muy extraño porque cuando lo ejecutas automáticamente posiciona la capa en el top del navegador y queda oculta por el menú
+		moveToArticleAndGetObject(posArticulo);
+		if (app==AppEcom.outlet) {
+			secTallas.selectLinkAñadirOutlet(posArticulo);
+		}
+	}
+
+	@Override
+	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSecondsToWait) {
+		return secTallas.isVisibleArticleCapaTallasUntil(posArticulo, maxSecondsToWait);
+	}
     
     @Override
     public ArticuloScreen selectTallaArticle(int posArticulo, int posTalla) throws Exception {
         //Si no está visible la capa de tallas ejecutamos los pasos necesarios para hacer la visible 
     	waitForPageLoaded(driver);
         if (!isVisibleArticleCapaTallasUntil(posArticulo, 1)) {
-            selectLinkAddArticleToBag(posArticulo);
+            showTallasArticulo(posArticulo);
         }
         
-        String xpathTalla = getXPathArticleTallaAvailable(posArticulo, posTalla);
+        String xpathTalla = secTallas.getXPathArticleTallaAvailable(posArticulo, posTalla);
         WebElement tallaToSelect = driver.findElement(By.xpath(xpathTalla));
         ArticuloScreen articulo = getArticuloObject(posArticulo);
-        articulo.setTallaAlf(tallaToSelect.getText());
-        articulo.setTallaNum(tallaToSelect.getAttribute("data-id"));
+        articulo.setTalla(Talla.from(tallaToSelect.getText()));
         tallaToSelect.click();
         return articulo;
     }
 
     public void selectTallaArticleNotAvalaible() throws Exception {
-
-        String xpathTallaNoDipo = getXPathArticleTallaNotAvailable();
+        String xpathTallaNoDipo = secTallas.getXPathArticleTallaNotAvailable();
         By byTallaToSelect = By.xpath(xpathTallaNoDipo);
         clickAndWaitLoad(driver, byTallaToSelect);
     }
@@ -698,44 +641,46 @@ public class PageGaleriaDesktop extends PageGaleria {
     }
 
 	/**
-     * Revisa si los nombres de los artículos son válidos (si los nombres contienen alguno de los del conjunto de literales)
-     * @param isMobil
-     * @param nombrePosibles: conjuntos de substrings que han de contener los artículos
-     * @return 
-     *    En caso de que todos los artículso tengan un nombre válido: ""
-     *    En caso de que exista algún artículo no válido: nombre del 1er artículo no válido  
-     */
-    public ArrayList<String> nombreArticuloNoValido(String[] nombrePosibles) {
-        //Obtenemos el xpath de los artículos eliminando el último carácter (]) pues hemos de insertar condiciones en el XPATH
-        String xpathLitArticulos = XPathArticulo + "//*[" + classProductName + "]";
-        xpathLitArticulos = xpathLitArticulos.substring(0, xpathLitArticulos.length() - 1);
-        for (int i=0; i<nombrePosibles.length; i++) {
-            xpathLitArticulos +=  
-                " and text()[not(contains(.,'" + nombrePosibles[i] + "'))]" +
-                " and text()[not(contains(.,'" + nombrePosibles[i].toLowerCase() + "'))]" +
-                " and text()[not(contains(.,'" + nombrePosibles[i].toUpperCase() + "'))]";
-        } 
-        
-        xpathLitArticulos += "]";
+	 * Revisa si los nombres de los artículos son válidos (si los nombres contienen alguno de los del conjunto de literales)
+	 * @param isMobil
+	 * @param nombrePosibles: conjuntos de substrings que han de contener los artículos
+	 * @return 
+	 *    En caso de que todos los artículso tengan un nombre válido: ""
+	 *    En caso de que exista algún artículo no válido: nombre del 1er artículo no válido  
+	 */
+	public ArrayList<String> nombreArticuloNoValido(String[] nombrePosibles) {
+		//Obtenemos el xpath de los artículos eliminando el último carácter (]) pues hemos de insertar condiciones en el XPATH
+		String xpathLitArticulos = XPathArticulo + "//*[" + classProductName + "]";
+		xpathLitArticulos = xpathLitArticulos.substring(0, xpathLitArticulos.length() - 1);
+		for (int i=0; i<nombrePosibles.length; i++) {
+			xpathLitArticulos +=  
+				" and text()[not(contains(.,'" + nombrePosibles[i] + "'))]" +
+				" and text()[not(contains(.,'" + nombrePosibles[i].toLowerCase() + "'))]" +
+				" and text()[not(contains(.,'" + nombrePosibles[i].toUpperCase() + "'))]";
+		} 
+		xpathLitArticulos += "]";
 
-        //Si existe algún elemento que no pertenece al grupo de nombres válidos -> devolvemos el 1ero que no coincide
-        ArrayList<String> listTxtArtNoValidos = new ArrayList<>();
-        if (isElementPresent(driver, By.xpath(xpathLitArticulos))) {
-            List<WebElement> listTextosArticulosNoValidos = driver.findElements(By.xpath(xpathLitArticulos));
-            for (WebElement textoArticuloNoValido : listTextosArticulosNoValidos) {
-                String nombre = textoArticuloNoValido.getText();
-                String referencia = textoArticuloNoValido.findElement(By.xpath("./ancestor::*[@class[contains(.,'product-list-item')]]")).getAttribute("id");
-                listTxtArtNoValidos.add(nombre + " (" + referencia + ")");
-            }
-        }
-        
-        return listTxtArtNoValidos;
-    }
+		//Si existe algún elemento que no pertenece al grupo de nombres válidos -> devolvemos el 1ero que no coincide
+		ArrayList<String> listTxtArtNoValidos = new ArrayList<>();
+		if (isElementPresent(driver, By.xpath(xpathLitArticulos))) {
+			List<WebElement> listTextosArticulosNoValidos = driver.findElements(By.xpath(xpathLitArticulos));
+			for (WebElement textoArticuloNoValido : listTextosArticulosNoValidos) {
+				String nombre = textoArticuloNoValido.getText();
+				String xpathArtWithoutDoubleSlash = this.XPathArticulo.substring(2);
+				//String referencia = textoArticuloNoValido.findElement(By.xpath("./ancestor::*[@class[contains(.,'product-list-item')]]")).getAttribute("id");
+				String referencia = textoArticuloNoValido.findElement(By.xpath("./ancestor::" + xpathArtWithoutDoubleSlash)).getAttribute("id");
+				listTxtArtNoValidos.add(nombre + " (" + referencia + ")");
+			}
+		}
+
+		return listTxtArtNoValidos;
+	}
     
     //Equivalent to Mobil
     @Override
     public ArticuloScreen getArticuloObject(int numArticulo) {
         WebElement artWElem = driver.findElements(By.xpath(XPathArticulo)).get(numArticulo-1);
+        moveToElement(artWElem, driver);
         ArticuloScreen articulo = new ArticuloScreen(app);
         articulo.setReferencia(getRefArticulo(artWElem));
         articulo.setNombre(getNombreArticulo(artWElem));
@@ -758,7 +703,7 @@ public class PageGaleriaDesktop extends PageGaleria {
     //Equivalent to Mobil
     @Override
     public String getNameColorFromCodigo(String codigoColor) {
-    	String xpathImgColor = getXPathImgCodigoColor(codigoColor);
+    	String xpathImgColor = secColores.getXPathImgCodigoColor(codigoColor);
     	if (!isElementPresent(driver, By.xpath(xpathImgColor))) {
     		return Constantes.colorDesconocido;
     	}
@@ -825,6 +770,14 @@ public class PageGaleriaDesktop extends PageGaleria {
     	
     	return false;
     }
+    
+    @Override
+	public StateFavorito getStateHearthIcon(WebElement hearthIcon) {
+		if (hearthIcon.getAttribute("class").contains("_2nHMm")) {
+			return StateFavorito.Marcado;
+		}
+		return StateFavorito.Desmarcado;
+	}
 
     public void clickLinkColumnas(NumColumnas numColumnas) throws Exception {
         String xpathLink = getXPathLinkNumColumnas(numColumnas);
@@ -835,5 +788,4 @@ public class PageGaleriaDesktop extends PageGaleria {
     	String xpathVideo = getXPathArticulo(typeArticle);
     	return (isElementPresent(driver, By.xpath(xpathVideo)));
     }
-
 }

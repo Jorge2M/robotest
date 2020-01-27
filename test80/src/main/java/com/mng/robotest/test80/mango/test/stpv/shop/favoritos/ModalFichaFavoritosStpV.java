@@ -9,6 +9,7 @@ import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.favoritos.ModalFichaFavoritos;
@@ -53,8 +54,8 @@ public class ModalFichaFavoritosStpV {
     public void addArticuloToBag(ArticuloScreen artToAddBolsa, DataBag dataBolsa, Channel channel, AppEcom app) 
     throws Exception {
         String refProductoToAdd = artToAddBolsa.getRefProducto();
-        String tallaSelected = modalFichaFavoritos.addArticleToBag(refProductoToAdd, 1/*posicionTalla*/, channel);
-        artToAddBolsa.setTallaAlf(tallaSelected);
+        Talla tallaSelected = modalFichaFavoritos.addArticleToBag(refProductoToAdd, 1, channel);
+        artToAddBolsa.setTalla(tallaSelected);
         dataBolsa.addArticulo(artToAddBolsa);
 
         //Validaciones

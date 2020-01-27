@@ -10,7 +10,6 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Color;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleria;
-import org.openqa.selenium.WebElement;
 
 
 /**
@@ -23,7 +22,7 @@ public class SecFiltrosDesktop extends WebdrvWrapp implements SecFiltros {
 	final static String TagOrdenacion = "@TagOrden";
 	final static String TagColor = "@TagColor";
 	final static String XPathLinkOrdenWithTag = "//a[text()[contains(.,'" + TagOrdenacion + "')]]";
-	final static String XPathLinkColorWithTag = "//a[text()[contains(.,'" + TagColor + "')]]";
+	final static String XPathLinkColorWithTag = "//a[@aria-label[contains(.,'" + TagColor + "')]]";
 	
 	WebDriver driver;
 	PageGaleria pageGaleria = null;
@@ -34,7 +33,7 @@ public class SecFiltrosDesktop extends WebdrvWrapp implements SecFiltros {
 	}
 	
 	public static SecFiltrosDesktop getInstance(AppEcom app, WebDriver driver) throws Exception {
-		PageGaleria pageGaleria = PageGaleria.getInstance(Channel.desktop, app, driver);
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
 		return (new SecFiltrosDesktop(driver, pageGaleria));
 	}
 	

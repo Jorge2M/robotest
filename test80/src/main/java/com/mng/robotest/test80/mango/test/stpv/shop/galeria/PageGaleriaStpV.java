@@ -56,28 +56,35 @@ import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 public class PageGaleriaStpV {
 
-    public static SecSelectorPreciosStpV secSelectorPrecios;
-    public static SecCrossSellingStpV secCrossSelling;
+
+    public final SecCrossSellingStpV secCrossSellingStpV;
     public final BannerHeadGalleryStpV bannerHead;
     
     public enum TypeGalery {Sales, NoSales}
     public enum TypeActionFav {Marcar, Desmarcar}
     
-    PageGaleria pageGaleria = null;
-    WebDriver driver = null;
-    Channel channel = null;
-    AppEcom app = null;
+    final SecSelectorPreciosStpV secSelectorPreciosStpV;
+    final PageGaleria pageGaleria;
+    final WebDriver driver;
+    final Channel channel;
+    final AppEcom app;
     
     private PageGaleriaStpV(Channel channel, AppEcom app, WebDriver driver) throws Exception {
     	this.driver = driver;
     	this.channel = channel;
     	this.app = app;
-    	bannerHead = BannerHeadGalleryStpV.newInstance(this, driver);
-    	pageGaleria = PageGaleria.getInstance(channel, app, driver);
+    	this.secCrossSellingStpV = new SecCrossSellingStpV(channel, app, driver);
+    	this.secSelectorPreciosStpV = new SecSelectorPreciosStpV(app, driver);
+    	this.bannerHead = BannerHeadGalleryStpV.newInstance(this, driver);
+    	this.pageGaleria = PageGaleria.getNew(channel, app, driver);
     }
     
     public static PageGaleriaStpV getInstance(Channel channel, AppEcom app, WebDriver driver) throws Exception {
         return (new PageGaleriaStpV(channel, app, driver));
+    }
+    
+    public SecSelectorPreciosStpV getSecSelectorPreciosStpV() {
+    	return secSelectorPreciosStpV;
     }
 
     @Step (
@@ -91,12 +98,9 @@ public class PageGaleriaStpV {
         //Almacenamos el nombre del artículo y su referencia
         WebElement articulo = pageGaleria.getArticulo(locationArt);
         datosArticulo.setNombre(pageGaleria.getNombreArticulo(articulo));
-        datosArticulo.setReferencia(PageGaleria.getRefArticulo(articulo));
+        datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
-        //Seleccionamos el artículo y lo cargamos en una pestaña aparte
         String detailWindowHandle = pageGaleria.openArticuloPestanyaAndGo(articulo, app);
-        
-        //Validaciones
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel);
         pageFichaStpV.validaDetallesProducto(datosArticulo);
         
@@ -117,12 +121,9 @@ public class PageGaleriaStpV {
         //Almacenamos el nombre del artículo y su referencia
         WebElement articulo = pageGaleria.getArticulo(locationArt);
         datosArticulo.setNombre(pageGaleria.getNombreArticulo(articulo));
-        datosArticulo.setReferencia(PageGaleriaDesktop.getRefArticulo(articulo));
-                
-        //Seleccionar el artículo
+        datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
+
         pageGaleria.clickArticulo(articulo);
-        
-        //Validaciones
         PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(dCtxSh.appE, dCtxSh.channel);
         pageFichaStpV.validaDetallesProducto(datosArticulo);
         pageFichaStpV.validaPrevNext(locationArt, dCtxSh);
@@ -136,40 +137,54 @@ public class PageGaleriaStpV {
         
         return (datosArticulo);
     }
-    
-    @Step (
-    	description="Posicionarse sobre el artículo en la posición <b>#{posArticulo}</b>, esperar que aparezca el link \"Añadir\" y seleccionarlo", 
-        expected="Aparece la capa con la información de las tallas")
-    public void selectLinkAddArticuloToBag(int posArticulo)
-    throws Exception {
-    	pageGaleria.selectLinkAddArticleToBag(posArticulo);
-        int maxSecondsWait = 1;
-        checkIsVisibleCapaInfoTallas(posArticulo, maxSecondsWait);
-    }   
+
+	public void shopTallasArticulo(int posArticulo) throws Exception {
+		if (channel==Channel.movil_web || app==AppEcom.outlet) {
+			showTallasOutletAndMovil(posArticulo);
+		} else {
+			showTallasShopDesktop(posArticulo);
+		}
+	}
+
+	@Step (
+		description="Posicionarse sobre el artículo en la posición <b>#{posArticulo}</b>, esperar que aparezca el link \"Añadir\" y seleccionarlo", 
+		expected="Aparece la capa con la información de las tallas")
+	private void showTallasOutletAndMovil(int posArticulo) throws Exception {
+		pageGaleria.showTallasArticulo(posArticulo);
+		checkIsVisibleCapaInfoTallas(posArticulo, 1);
+	}
+	
+	@Step (
+		description="Posicionarse sobre el artículo en la posición <b>#{posArticulo}</b>", 
+		expected="Aparece la capa con la información de las tallas")
+	private void showTallasShopDesktop(int posArticulo) throws Exception {
+		pageGaleria.showTallasArticulo(posArticulo);
+		checkIsVisibleCapaInfoTallas(posArticulo, 1);
+	}
     
     @Validation (
-    	description="Aparece la capa con la información de las tallas (la esperamos hasta #{maxSecondsWait}",
+    	description="Aparece la capa con la información de las tallas (la esperamos hasta #{maxSecondsWait} segundos",
     	level=State.Warn)
     private boolean checkIsVisibleCapaInfoTallas(int posArticulo, int maxSecondsWait) {
         return pageGaleria.isVisibleArticleCapaTallasUntil(posArticulo, maxSecondsWait);
     }
-    
-    @Step (
-    	description="Del #{posArticulo}o artículo, seleccionamos la #{posTalla}a talla disponible", 
-        expected="Se da de alta correctamente el artículo en la bolsa",
-        saveHtmlPage=SaveWhen.Always)
-    public boolean selectTallaArticulo(int posArticulo, int posTalla, DataBag dataBag, DataCtxShop dCtxSh) 
-    throws Exception {
-        ArticuloScreen articulo = pageGaleria.selectTallaArticle(posArticulo, posTalla);
-        ModalArticleNotAvailableStpV modalArticleNotAvailableStpV = ModalArticleNotAvailableStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
-        boolean notVisibleAvisame = modalArticleNotAvailableStpV.validateState(1, StateModal.notvisible, driver);
-        if (notVisibleAvisame) {
-            dataBag.addArticulo(articulo);
-            SecBolsaStpV.validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, driver);
-        }
-        
-        return notVisibleAvisame;
-    }
+
+	@Step (
+		description="Del #{posArticulo}o artículo, seleccionamos la #{posTalla}a talla disponible", 
+		expected="Se da de alta correctamente el artículo en la bolsa",
+		saveHtmlPage=SaveWhen.Always)
+	public boolean selectTallaArticulo(int posArticulo, int posTalla, DataBag dataBag, DataCtxShop dCtxSh) 
+	throws Exception {
+		ArticuloScreen articulo = pageGaleria.selectTallaArticle(posArticulo, posTalla);
+		ModalArticleNotAvailableStpV modalArticleNotAvailableStpV = ModalArticleNotAvailableStpV.getInstance(dCtxSh.channel, dCtxSh.appE, driver);
+		boolean notVisibleAvisame = modalArticleNotAvailableStpV.validateState(1, StateModal.notvisible, driver);
+		if (notVisibleAvisame) {
+			dataBag.addArticulo(articulo);
+			SecBolsaStpV.validaAltaArtBolsa(dataBag, dCtxSh.channel, dCtxSh.appE, driver);
+		}
+
+		return notVisibleAvisame;
+	}
 
     @Step (
     	description="Seleccionamos la primera talla no disponible del listado",
@@ -206,7 +221,9 @@ public class PageGaleriaStpV {
         int numArticulosInicio = pageGaleria.getNumArticulos();
         datosScroll = pageGaleria.scrollToPageFromFirst(pageToScroll, dCtxSh.appE);
         
-        checkVisibilityFooter(pageToScroll, dCtxSh.appE);
+        if (pageToScroll>=PageGaleriaDesktop.maxPageToScroll) {
+        	checkVisibilityFooter(pageToScroll, dCtxSh.appE);
+        }
         if (pageToScroll < PageGaleriaDesktop.maxPageToScroll) {
         	checkAreMoreArticlesThatInitially(datosScroll.articulosMostrados, numArticulosInicio);
         }
@@ -229,19 +246,14 @@ public class PageGaleriaStpV {
         datosScroll.step = TestMaker.getCurrentStepInExecution();
         return datosScroll;
     }
-    
-    @Validation
-    private ChecksResult checkVisibilityFooter(int pageToScroll, AppEcom app) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
-        boolean isVisibleFooter = SecFooter.isVisible(app, driver);
-        if (pageToScroll>=PageGaleriaDesktop.maxPageToScroll) {
-          	validations.add(
-        		"Sí aparece el footer",
-        		isVisibleFooter, State.Warn);
-        }
-        return validations;
-    }
-    
+
+	@Validation (
+		description="Sí aparece el footer",
+		level=State.Warn)
+	private boolean checkVisibilityFooter(int pageToScroll, AppEcom app) throws Exception {
+		return SecFooter.isVisible(app, driver);
+	}
+
     @Validation (
     	description=
     		"En pantalla aparecen más artículos (#{numArticlesCurrently}) " + 
@@ -521,17 +533,17 @@ public class PageGaleriaStpV {
       	return validations;
     }
     
-   @Validation(
-	description = "Como mínimo el #{porcentaje} % de los productos son panorámicas",
-	level=State.Info,
-	avoidEvidences=true)
-   public boolean hayPanoramicasEnGaleriaDesktop(float porcentaje) {
-	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-       float numArtTotal = pageGaleria.getNumArticulos();
-       float numArtPanoramicos = pageGaleriaDesktop.getNumArticulos(TypeArticleDesktop.Panoramica);
-       return (!articlesUnderPercentage(numArtTotal, numArtPanoramicos, porcentaje));
-   }
-   
+	@Validation(
+		description = "Como mínimo el #{porcentaje} % de los productos son dobles",
+		level=State.Info,
+		avoidEvidences=true)
+	public boolean hayPanoramicasEnGaleriaDesktop(float porcentaje) {
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
+		float numArtTotal = pageGaleria.getNumArticulos();
+		float numArtDobles = pageGaleriaDesktop.getNumArticulos(TypeArticleDesktop.Doble);
+		return (!articlesUnderPercentage(numArtTotal, numArtDobles, porcentaje));
+	}
+
    private static boolean articlesUnderPercentage(float numArtTotal, float numArtToMesure, float percentage) {
 	   if (numArtTotal==0) {
 		   return true;

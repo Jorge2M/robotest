@@ -216,7 +216,10 @@ public class UtilsMangoTest {
         Thread.sleep(500);
         WebdrvWrapp.moveToElement(element, driver);
         Thread.sleep(500);
-        a.moveToElement(element).keyDown(Keys.CONTROL).click().build().perform();
+        a.moveToElement(element)
+        	.keyDown(Keys.CONTROL)
+        	.click()
+        	.keyUp(Keys.CONTROL).build().perform();
         Thread.sleep(500);
     }
     

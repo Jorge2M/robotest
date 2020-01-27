@@ -4,8 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
-import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 
 public class SSecSelTallasFichaNew extends WebdrvWrapp {
@@ -18,7 +16,7 @@ public class SSecSelTallasFichaNew extends WebdrvWrapp {
     static String XPathTallaSelected = XPathTallaItem + "//self::span[@class[contains(.,'selector-trigger')] or @class='single-size']";
     static String XPathTallaUnica = XPathTallaItem + "//self::span[@class[contains(.,'single-size')]]";
     
-    public static String getXPathTallaByCodigo(String codigoNumericoTalla) {
+    public static String getXPathTallaByCodigo(int codigoNumericoTalla) {
         return (XPathTallaItem + "//self::span[@data-value='" + codigoNumericoTalla + "']"); 
     }
     
@@ -37,24 +35,11 @@ public class SSecSelTallasFichaNew extends WebdrvWrapp {
             }
             
             String textTalla = driver.findElement(By.xpath(XPathTallaSelected)).getText();
-            if (textTalla.contains(" [")) {
-                return (textTalla.substring(0, textTalla.indexOf(" [")));
-            }
+            textTalla = SecDataProduct.removeAlmacenFromTalla(textTalla);
             return textTalla;
         }
         
         return "";
-    }
-    
-    public static String getTallaNumSelected(AppEcom app, WebDriver driver) {
-        if (isElementPresent(driver, By.xpath(XPathTallaSelected))) {
-            if (isElementPresent(driver, By.xpath(XPathTallaUnica))) {
-                return (UtilsTestMango.getCodigoTallaUnica(app));
-            }
-            return (driver.findElement(By.xpath(XPathTallaSelected)).getAttribute("data-value"));
-        }    
-        
-        return "0";
     }
     
     public static String getTallaAlf(int posicion, WebDriver driver) {
@@ -99,7 +84,7 @@ public class SSecSelTallasFichaNew extends WebdrvWrapp {
         return (isElementVisibleUntil(driver, By.xpath(XPathListTallsForSelect), maxSecondsToWait));
     }
     
-    public static void selectTallaByValue(String codigoNumericoTalla, WebDriver driver) {
+    public static void selectTallaByValue(int codigoNumericoTalla, WebDriver driver) {
         unfoldListTallasIfNotYet(driver);
         String xpathTalla = getXPathTallaByCodigo(codigoNumericoTalla);
         if (isElementClickable(driver, By.xpath(xpathTalla))) {

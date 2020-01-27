@@ -3,10 +3,10 @@ package com.mng.robotest.test80.mango.test.generic.beans;
 import java.util.ArrayList;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
 import com.mng.robotest.test80.mango.test.getproducts.data.Garment.Article;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
-import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 
 public class ArticuloScreen {
@@ -15,8 +15,7 @@ public class ArticuloScreen {
 	String nombre = "";
 	String colorName = "";
 	String codigoColor = "";
-	String tallaAlf = "";
-	String tallaNum = "";
+	Talla talla;
 	String precio = "";
 	String precioSinDesc = "";
 	ValePais valePais=null;
@@ -32,12 +31,7 @@ public class ArticuloScreen {
 		Article articleStock = productStock.getArticleWithMoreStock();
 		this.referencia = articleStock.getGarmentId();
 		this.codigoColor = articleStock.getColor().getId();
-		String talla = String.valueOf(articleStock.getSize().getId());
-		if ("99".compareTo(talla)==0) {
-			this.tallaNum = UtilsTestMango.getCodigoTallaUnica(app);
-		} else {
-			this.tallaNum = talla;
-		}
+		this.talla = Talla.getTalla(articleStock.getSize().getId());
 		this.valePais = productStock.getValePais();
 	}
 
@@ -77,22 +71,9 @@ public class ArticuloScreen {
         this.codigoColor = codigoColor;
     }
 
-	
-    public String getTallaNum() {
-        return this.tallaNum;
-    }
-	
-    public void setTallaNum(String tallaNum) {
-        this.tallaNum = tallaNum;
-    }
-	
-    public String getTallaAlf() {
-        return this.tallaAlf;
-    }
-        
-    public void setTallaAlf(String tallaAlf) {
-        this.tallaAlf = tallaAlf;
-    }	
+	public Talla getTalla() {
+		return this.talla;
+	}
 	
     public String getPrecio() {
         return this.precio;
@@ -109,6 +90,10 @@ public class ArticuloScreen {
     public void setPrecioSinDesc(String precioSinDesc) {
         this.precioSinDesc = precioSinDesc;
     }
+    
+    public void setTalla(Talla talla) {
+    	this.talla = talla;
+    }
 	
     public int getNumero() {
         return this.numero;
@@ -124,15 +109,6 @@ public class ArticuloScreen {
 	
     public void setVale(ValePais vale) {
         this.valePais = vale;
-    }
-	
-    public String getTallaSinAlmacen() {
-        String tallaSinAlmacen = this.tallaAlf;
-        int inicioAlm = this.tallaAlf.indexOf(" [");
-        if (inicioAlm>0) {
-            tallaSinAlmacen = this.tallaAlf.substring(0,inicioAlm);
-        }
-        return tallaSinAlmacen;
     }
 	
     public String getDivisaPrecio() {
@@ -157,7 +133,7 @@ public class ArticuloScreen {
         if (this.referencia.trim().compareTo(articulo.getReferencia().trim())==0 &&
             this.nombre.compareTo(articulo.getNombre())==0 &&
             this.colorName.compareTo(articulo.getColorName())==0 &&
-            this.tallaAlf.compareTo(articulo.getTallaAlf())==0) {
+            this.talla==articulo.getTalla()) {
             iguales = true;
         }
         return iguales;
@@ -176,7 +152,7 @@ public class ArticuloScreen {
     public boolean isTheSame(ArticuloScreen articulo) {
        	return
        	    (getReferencia().compareTo(articulo.getReferencia())==0 &&
-       	    (getTallaNum().compareTo(articulo.getTallaNum())==0 || getTallaAlf().compareTo(articulo.getTallaAlf())==0) &&
+       	    (getTalla()==articulo.getTalla()) &&
             (getColorName().compareTo(articulo.getColorName())==0 || getCodigoColor().compareTo(articulo.getCodigoColor())==0));
     }
     

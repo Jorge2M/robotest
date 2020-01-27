@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
@@ -66,16 +67,12 @@ public abstract class PageFicha extends WebdrvWrapp {
         return (secDataProduct.isTallaUnica(typeFicha, driver));
     }
     
-    public String getTallaAlfSelected() {
-        return (SecDataProduct.getTallaAlfSelected(typeFicha, appE, driver));
+    public Talla getTallaSelected() {
+        return (SecDataProduct.getTallaSelected(typeFicha, appE, driver));
     }
     
-    public String getTallaNumSelected() {
-        return (secDataProduct.getTallaNumSelected(typeFicha, appE, driver));
-    }
-    
-    public void selectTallaByValue(String tallaCodNum) {
-        secDataProduct.selectTallaByValue(tallaCodNum, typeFicha, driver);
+    public void selectTallaByValue(Talla talla) {
+        secDataProduct.selectTallaByValue(talla, typeFicha, driver);
     }
     
     public void selectTallaByIndex(int posicion) {
