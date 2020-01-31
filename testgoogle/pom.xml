@@ -52,53 +52,29 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
-				<!-- Configuración extraída de: http://emystein.blogspot.com.es/2010/12/empaquetar-una-aplicacion-de-consola.html -->
-				<!-- Configuramos el plugin de JAR en el POM para que agregue el directorio src/main/config al classpath definido en el Manifest de la aplicación -->	
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<!-- esto hace que al crear el jar se nombre testgoogle.jar en vez de testgoogle-1.0.0.jar si la versión del artifact es 1.0.0 -->
-					<finalName>${project.artifactId}</finalName>
-					<archive>
-						<manifest>
-							<!-- agregar todos los .jar de las dependencias en el classpath del Manifest -->
-							<addClasspath>true</addClasspath>
-							<!-- vamos a agregar antes del nombre de cada .jar en el classpath del Manifest el prefijo lib/ -->
-							<!-- porque luego al construir el assembly copiaremos los .jar de las dependencias al directorio lib/-->
-							<classpathPrefix>lib/</classpathPrefix>
-							<!-- la clase que se ejecuta cuando se ejecute "java -jar test80.jar" -->
-							<mainClass>com.mng.testgoogle.access.CmdRunTests</mainClass>
-						</manifest>
-						<manifestEntries>
-							<!-- además de los nombres de las dependencias, agregar el directorio config al classpath del Manifest -->
-							<Class-Path>config/</Class-Path>>
-						</manifestEntries>
-					</archive>
-				</configuration>
-			</plugin>
-			
-			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.0.0</version>
-				<configuration>
-					<appendAssemblyId>false</appendAssemblyId>
-					<descriptors>
-						<descriptor>src/assembly/distribution.xml</descriptor>
-					</descriptors>
-				</configuration>
 				<executions>
 					<execution>
-						<id>make-assembly</id>
-						<phase>package</phase> 
+						<phase>package</phase>
 						<goals>
 							<goal>single</goal>
 						</goals>
+						<configuration>
+							<archive>
+								<manifest>
+									<mainClass>com.mng.testgoogle.access.CmdRunTests</mainClass>
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+						</configuration>
 					</execution>
 				</executions>
-			</plugin>	
-			
+			</plugin>
 		</plugins>	
   </build>	
 </project>

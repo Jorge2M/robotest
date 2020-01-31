@@ -12,7 +12,10 @@
 		<module>sapfiori</module>
 
 		<module>testgoogle</module>
-	</modules>
+		<module>archetype</module>
+    <module>testarchetype</module>
+    <module>testaubay</module>
+  </modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,9 +23,9 @@
 		<nexusUrl>https://citools.mangodev.net/nexus</nexusUrl>		
 	</properties>
 
-	<!-- Configuración de deployment. Apunta al repositorio Maven sobre el que
-		se deplayará. No se debe definir nunca en ningún otro proyecto. Siempre se
-		heredará de este proyecto. -->
+	<!-- Configuraci?n de deployment. Apunta al repositorio Maven sobre el que
+		se deplayar?. No se debe definir nunca en ning?n otro proyecto. Siempre se
+		heredar? de este proyecto. -->
 	<distributionManagement>
 		<repository>
 			<id>nexus</id>

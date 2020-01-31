@@ -34,9 +34,9 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 
 public class SecMenuLateralMobilStpV {
     
-	private AppEcom app;
-	private WebDriver driver;
-	private SecMenuLateralMobil secMenuLateral;
+	private final AppEcom app;
+	private final WebDriver driver;
+	private final SecMenuLateralMobil secMenuLateral;
 	
 	private SecMenuLateralMobilStpV(AppEcom app, WebDriver driver) {
 		this.app = app;
@@ -125,7 +125,7 @@ public class SecMenuLateralMobilStpV {
     @Validation
     private ChecksResult checkGaleriaAfterSelectNuevo() throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
-	    PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
+	    PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
 	    int maxSecondsWait = 3;
 	 	validations.add(
 			"Aparece algún artículo (esperamos " + maxSecondsWait + " segundos)",

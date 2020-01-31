@@ -81,7 +81,8 @@ public class PageGaleriaDesktop extends PageGaleria {
     private final static String XPathImgRelativeArticle = 
     	"//img[@src and (" + 
     		   "@class[contains(.,'productListImg')] or " + 
-    		   "@class[contains(.,'product-list-image')] or " + 
+    		   "@class[contains(.,'product-list-image')] or " +
+    		   "@class[contains(.,'TaqRk')] or " + 
     		   "@class[contains(.,'product-list-im')])]";
     private final static String XPathImgSliderActiveRelativeArticleDesktop = 
         "//div[@class[contains(.,'swiper-slide-active')]]" + 
@@ -609,6 +610,16 @@ public class PageGaleriaDesktop extends PageGaleria {
         }
     }
 
+    public boolean isPresentSliderInArticleUntil(TypeSlider typeSlider, WebElement article, int maxSeconds) {
+    	for (int i=0; i<maxSeconds; i++) {
+    		if (isPresentSliderInArticle(typeSlider, article)) {
+    			return true;
+    		}
+    		waitMillis(1000);
+    	}
+    	return false;
+    }
+    
     public boolean isPresentSliderInArticle(TypeSlider typeSlider, WebElement article) {
     	String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
     	return (isElementPresent(article, By.xpath("." + xpathSlider)));

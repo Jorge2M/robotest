@@ -915,11 +915,13 @@ public class PageGaleriaStpV {
 			validations.add (
 				"Cada artículo tiene 1 icono de favoritos asociado",
 				pageGaleria.eachArticlesHasOneFavoriteIcon(), State.Info, true);
-		} else {
+		}
+		/*
+		else {
 			validations.add (
 				"No aparece ningún icono de favoritos asociado a ningún artículo",
 				pageGaleria.getNumFavoritoIcons() == 0, State.Defect);
-		}
+		}*/
 		
 		return validations;
     }

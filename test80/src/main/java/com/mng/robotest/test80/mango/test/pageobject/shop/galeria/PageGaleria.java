@@ -51,13 +51,13 @@ public abstract class PageGaleria extends WebdrvWrapp {
 	abstract public String getXPathLinkRelativeToArticle();
 	abstract public int getLayoutNumColumnas();
 	abstract public WebElement getArticuloConVariedadColoresAndHover(int numArticulo);
-	abstract public WebElement getImagenArticulo(WebElement articulo);
+	abstract public WebElement getImagenArticulo(WebElement articulo) throws Exception;
 	abstract public WebElement getColorArticulo(WebElement articulo, boolean selected, int numColor);
-	abstract public ArticuloScreen getArticuloObject(int numArticulo);
+	abstract public ArticuloScreen getArticuloObject(int numArticulo) throws Exception;
 	abstract public String getNombreArticulo(WebElement articulo);
 	abstract public String getPrecioArticulo(WebElement articulo);
 	abstract public boolean isArticleRebajado(WebElement articulo);
-	abstract public String getCodColorArticulo(int numArticulo);
+	abstract public String getCodColorArticulo(int numArticulo) throws Exception;
 	abstract public String getNameColorFromCodigo(String codigoColor);
 	abstract public int getNumFavoritoIcons();
 	abstract public boolean eachArticlesHasOneFavoriteIcon();

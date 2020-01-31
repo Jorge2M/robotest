@@ -152,8 +152,10 @@ public class PageGaleriaMobil extends PageGaleria {
     }
     
     @Override
-    public WebElement getImagenArticulo(WebElement articulo) {
-    	return (articulo.findElement(By.xpath("." + XPathImgRelativeArticle)));
+    public WebElement getImagenArticulo(WebElement articulo) throws Exception {
+    	By byImg = By.xpath("." + XPathImgRelativeArticle);
+    	isElementClickableUntil(driver, byImg, 1);
+    	return (articulo.findElement(byImg));
     }
     
     @Override
@@ -181,7 +183,7 @@ public class PageGaleriaMobil extends PageGaleria {
     }         
     
     @Override
-    public ArticuloScreen getArticuloObject(int numArticulo) {
+    public ArticuloScreen getArticuloObject(int numArticulo) throws Exception {
         WebElement artWElem = driver.findElements(By.xpath(XPathArticulo)).get(numArticulo-1);
         ArticuloScreen articulo = new ArticuloScreen(app);
         articulo.setReferencia(getRefArticulo(artWElem));
@@ -213,7 +215,7 @@ public class PageGaleriaMobil extends PageGaleria {
     }
     
     @Override
-    public String getCodColorArticulo(int numArticulo) {
+    public String getCodColorArticulo(int numArticulo) throws Exception {
         String xpathArticulo = "(" + XPathArticulo + ")[" + numArticulo + "]";
         WebElement imgArticle = getImagenArticulo(driver.findElement(By.xpath(xpathArticulo)));
         return (UtilsPageGaleria.getCodColorFromSrcImg(imgArticle.getAttribute("src")));
