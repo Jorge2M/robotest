@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.testfilter.GroupsChannelApps;
-import com.mng.testmaker.utils.filter.TestFilterTNGxmlTRun.AppEcom;
+import com.mng.testmaker.unittestdata.AppEcom;
 
 public class GroupsChannelAppsTest {
 

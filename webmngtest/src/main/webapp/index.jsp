@@ -23,6 +23,7 @@ response.setDateHeader ("Expires", -1);
 <%@ page import="com.mng.robotest.test80.access.InputParamsMango" %>
 <%@ page import="com.mng.testmaker.domain.testfilter.TestMethod"%>
 <%@ page import="com.mng.testmaker.domain.testfilter.FilterTestsSuiteXML"%>
+<%@ page import="com.mng.testmaker.domain.util.TestNameUtils"%>
 <%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
 <%@ page import="com.mng.robotest.test80.mango.conftestmaker.Suites" %>
 
@@ -221,10 +222,10 @@ for (SuiteTestData suiteTest : listTestSuites) {
 					<select multiple size=10 id="tcases-<%=i%>" name="<%=InputParamsTM.TCaseNameParam%>" suite="<%=suiteTest.getSuite()%>" channel="<%=suiteTest.getChannel()%>" form="testform_<%=i%>">
 						<%
 							for (TestMethod testMethod : CmdRunTests.getDataTestAnnotationsToExec(getParamsFromSuiteToGetTCases(suiteTest))) {
-																String selected = "";
-																if (FilterTestsSuiteXML.methodInTestCaseList(testMethod.getMethod().getName(), suiteTest.getListTCasesArray())) {
-																	selected = "selected";
-																}
+																				String selected = "";
+																				if (TestNameUtils.isMethodNameInTestCaseList(testMethod.getMethod().getName(), suiteTest.getListTCasesArray())) {
+																					selected = "selected";
+																				}
 						%>
 								<option value="<%=testMethod.getMethod().getName()%>" <%=selected%> title="<%=testMethod.getAnnotationTest().description()%>"><%=testMethod.getMethod().getName()%></option>
 						<%

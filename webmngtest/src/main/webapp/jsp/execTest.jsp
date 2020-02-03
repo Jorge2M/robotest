@@ -158,7 +158,7 @@ response.setDateHeader ("Expires", -1);%>
 	    paramsTSuite.setListaPayments(request.getParameterValues(InputParamsMango.PaymentsNameParam));
 	    String[] listTCases = request.getParameterValues(InputParamsTM.TCaseNameParam);
 	    if (listTCases!=null) {
-	    	paramsTSuite.setTestCasesFilter(Arrays.asList(listTCases));
+	    	paramsTSuite.setListTestCaseItems(Arrays.asList(listTCases));
 	    }
 
 	    //Parameters that don't come from index.jsp (for exemple, the call from Jenkin's CI Task)

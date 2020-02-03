@@ -10,11 +10,7 @@
 		<module>test80</module>
 		<module>webmngtest</module>
 		<module>sapfiori</module>
-
-		<module>testgoogle</module>
 		<module>archetype</module>
-    <module>testarchetype</module>
-    <module>testaubay</module>
   </modules>
 
 	<properties>
@@ -25,7 +21,7 @@
 
 	<!-- Configuraci?n de deployment. Apunta al repositorio Maven sobre el que
 		se deplayar?. No se debe definir nunca en ning?n otro proyecto. Siempre se
-		heredar? de este proyecto. -->
+		heredar? de este proyecto.
 	<distributionManagement>
 		<repository>
 			<id>nexus</id>
@@ -39,6 +35,7 @@
 			<url>${nexusUrl}/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
+	-->
 
 	<dependencies>
 		<dependency>

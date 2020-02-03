@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.ws.rs.FormParam;
 
@@ -15,6 +17,7 @@ import org.apache.commons.cli.CommandLine;
 import com.mng.testmaker.boundary.access.OptionTMaker;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.testfilter.DataFilterTCases;
+import com.mng.testmaker.domain.util.TestNameUtils;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
 public abstract class InputParamsTM {
@@ -39,6 +42,8 @@ public abstract class InputParamsTM {
 	public static final String TypeAccessParam = "typeAccess";
 	public static final String ChromeDriverVersionParam = "chromedriverVersion";
 	public static final String GeckoDriverVersionParam = "geckodriverVersion";
+	
+	public static final String patternTestCaseItem = "([^\\{\\}]+)(?:\\{([0-9]+)(?:-([0-9]+)){0,1}\\}){0,1}";
 	
 	public enum ManagementWebdriver {recycle, discard}
 	private Class<? extends Enum<?>> suiteEnum;
@@ -95,7 +100,6 @@ public abstract class InputParamsTM {
 	String geckoDriverVersion;	
 
 	public InputParamsTM() {}
-
 
 	public InputParamsTM(Class<? extends Enum<?>> suiteEnum, Class<? extends Enum<?>> appEnum) {
 		this.suiteEnum = suiteEnum;
@@ -172,7 +176,9 @@ public abstract class InputParamsTM {
 			.required(false)
 			.hasArgs()
 			.valueSeparator(',')
-			.desc("List of testcases comma separated (p.e. OTR001,BOR001...)")
+			//Examples: FIC001, FIC001{1}, FIC001{50-10}
+			.pattern(patternTestCaseItem)
+			.desc("List of testcases comma separated (p.e. OTR001,BOR001,FIC001{6-2})")
 			.build());
 
 		optionsTM.add(OptionTMaker.builder(InputParamsTM.VersionNameParam)
@@ -425,17 +431,56 @@ public abstract class InputParamsTM {
 		}
 		return Arrays.asList();
 	}
-	public List<String> getTestCasesFilter() {
+	public List<String> getListTestCaseItems() {
 		if (tcasesCommaSeparated!=null) {
 			String[] tcases = tcasesCommaSeparated.split(",");
 			return Arrays.asList(tcases);
 		}
 		return Arrays.asList();
 	}
-	public void setTestCasesFilter(List<String> listTestCases) {
+	public void setListTestCaseItems(List<String> listTestCases) {
 		String[] tcases = listTestCases.toArray(new String[listTestCases.size()]);
 		tcasesCommaSeparated = String.join(",", tcases);
 	}
+	public List<String> getListTestCasesName() {
+		List<String> listTestCasesName = new ArrayList<>();
+		List<TestCaseData> listTestCasesData = getListTestCasesData();
+		for (TestCaseData testCaseData : listTestCasesData) {
+			listTestCasesName.add(testCaseData.getName());
+		}
+		return listTestCasesName;
+	}
+	
+	public List<TestCaseData> getListTestCasesData() {
+		List<TestCaseData> listTestCaseData = new ArrayList<>();
+		for (String testCaseItem : getListTestCaseItems()) {
+			TestCaseData testCaseData = new TestCaseData();
+			Pattern pattern = Pattern.compile(patternTestCaseItem);
+			Matcher matcher = pattern.matcher(testCaseItem);
+			if (matcher.find()) {
+				testCaseData.setName(matcher.group(1));
+				if (matcher.group(2)!=null) {
+					testCaseData.setInvocationCount(Integer.valueOf(matcher.group(2)));
+					if (matcher.group(3)!=null) {
+						testCaseData.setThreadPoolSize(Integer.valueOf(matcher.group(3)));
+					}
+				}
+			} else {
+				testCaseData.setName(testCaseItem);
+			}
+			listTestCaseData.add(testCaseData);
+		}
+		return listTestCaseData; 
+	}
+	public TestCaseData getTestCaseData(String nameTestCase) {
+		for (TestCaseData testCaseData : getListTestCasesData()) {
+			if (TestNameUtils.isMethodNameTestCase(nameTestCase, testCaseData.getName())) {
+				return testCaseData;
+			}
+		}
+		return null;
+	}
+	
 	public List<String> getMails() {
 		if (mailsCommaSeparated!=null) {
 			String[] mails = mailsCommaSeparated.split(",");
@@ -523,7 +568,7 @@ public abstract class InputParamsTM {
 	public DataFilterTCases getDataFilter() {
 		DataFilterTCases dFilter = new DataFilterTCases(getChannel(), getApp());
 		dFilter.setGroupsFilter(getGroupsFilter());
-		dFilter.setTestCasesFilter(getTestCasesFilter());
+		dFilter.setTestCasesFilter(getListTestCasesName());
 		return dFilter;
 	}
 

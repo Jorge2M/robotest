@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.testab.TestABGoogleExp;
-import com.mng.testmaker.utils.filter.TestFilterTNGxmlTRun.AppEcom;
+import com.mng.testmaker.unittestdata.AppEcom;
 
 public enum TestABGoogleExpImpl implements TestABGoogleExp {
 
@@ -17,8 +17,8 @@ public enum TestABGoogleExpImpl implements TestABGoogleExp {
 		Arrays.asList(
 			"V0-Galería sin React", //Este es el único caso posible en Outlet
 			"V1-Galería con React"),
-	    Arrays.asList(Channel.desktop),
-	    Arrays.asList(AppEcom.shop, AppEcom.votf)
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.shop, AppEcom.votf)
 	),
 	
 	//TODO es posible eliminarlo en cuanto se ejecute el planchado
@@ -29,8 +29,8 @@ public enum TestABGoogleExpImpl implements TestABGoogleExp {
 		Arrays.asList(
 			"V0-Galería sin React", //Este es el único caso posible en Outlet
 			"V1-Galería con React"),
-	    Arrays.asList(Channel.desktop),
-	    Arrays.asList(AppEcom.shop, AppEcom.votf)
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.shop, AppEcom.votf)
 	);
 		
 	private String valueCookieShop;

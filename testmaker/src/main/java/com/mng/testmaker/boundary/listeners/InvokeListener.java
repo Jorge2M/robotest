@@ -16,12 +16,14 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
 
 	@Override //Start Suite 
 	public void onStart(ISuite suite) {
-		((SuiteTM)suite.getXmlSuite()).start();
+		//Esta llamada ya se hace desde TestMaker.runInTestNgSync(SuiteTM)
+		//((SuiteTM)suite.getXmlSuite()).start();
 	}
 
 	@Override //End Suite
 	public void onFinish(ISuite suite) {
-		((SuiteTM)suite.getXmlSuite()).end();
+		//Esta llamada ya se hace desde TestMaker.runInTestNgSync(SuiteTM)
+		//((SuiteTM)suite.getXmlSuite()).end();
 	}
 
 	@Override //Start TestRun

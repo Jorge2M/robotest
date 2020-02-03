@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.mng.testmaker.domain.testfilter.PermutationsUtil;
-import com.mng.testmaker.utils.filter.TestFilterTNGxmlTRun.AppEcom;
+import com.mng.testmaker.unittestdata.AppEcom;
 
 public class PermutationsUtilTest {
 

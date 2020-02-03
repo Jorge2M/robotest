@@ -39,7 +39,6 @@ public class TestMaker {
 		run(suite, true);
 	}
 	private static void run(SuiteTM suite, boolean async) {
-		suite.start();
 		Log4jConfig.configLog4java(suite.getPathDirectory());
 		File path = new File(suite.getPathDirectory());
 		path.mkdir();
@@ -189,13 +188,14 @@ public class TestMaker {
 
 	private static void runInTestNgSync(SuiteTM suite) {
 		TestNG tng = makeTestNG(suite);
+		suite.start();
 		tng.run();
+		suite.end();
 	}
 
 	private static void runInTestNgAsync(SuiteTM suite) {
-		TestNG tng = makeTestNG(suite);
 		CompletableFuture.runAsync(() -> {
-			tng.run();
+			runInTestNgSync(suite);
 		});
 	}
 

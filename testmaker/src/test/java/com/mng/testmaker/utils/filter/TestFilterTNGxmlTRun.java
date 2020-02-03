@@ -18,6 +18,8 @@ import com.mng.testmaker.domain.InputParamsBasic;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.testfilter.TestMethod;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
+import com.mng.testmaker.unittestdata.AppEcom;
+import com.mng.testmaker.unittestdata.Suites;
 import com.mng.testmaker.utils.filter.resources.TestNGxmlStub;
 import com.mng.testmaker.utils.filter.resources.TestNGxmlStub.TypeStubTest;
 
@@ -25,16 +27,6 @@ public class TestFilterTNGxmlTRun {
 
 	List<String> groupsVoid = null;
     public enum GroupDep {from, to}
-    
-    public enum AppEcom {
-    	shop,
-        outlet,
-        votf;
-    }
-    
-    public enum Suite {
-    	SuiteForUnitTest;
-    }
     
     @Test
     public void getListOfTestMethodsFilteredByIncludesAndDesktopShop() {
@@ -115,7 +107,7 @@ public class TestFilterTNGxmlTRun {
     public void filterIncludeNewTestCase() {
         InputParamsTM inputData = getInputDataBasic();
         String testExpectedToBeIncluded = TestNGxmlStub.methodGroupGaleriaProductoToInclude;
-        inputData.setTestCasesFilter(Arrays.asList(testExpectedToBeIncluded));
+        inputData.setListTestCaseItems(Arrays.asList(testExpectedToBeIncluded));
         TestNGxmlStub testStub = TestNGxmlStub.getNew(TypeStubTest.WithoutMethodsIncludedInClass, inputData);
         
         //Code to test
@@ -130,7 +122,7 @@ public class TestFilterTNGxmlTRun {
     @Test
     public void filterIncludeTwoTestCaseByName_1groupRemains() {
         InputParamsTM inputData = getInputDataBasic();
-        inputData.setTestCasesFilter(
+        inputData.setListTestCaseItems(
         	Arrays.asList(
         		TestNGxmlStub.methodGroupGaleriaProductoToInclude, 
         		TestNGxmlStub.methodGroupMiCuentaToInclude));
@@ -143,7 +135,7 @@ public class TestFilterTNGxmlTRun {
     @Test
     public void filterIncludeTwoTestCasesByCode_1groupRemains() {
         InputParamsTM inputData = getInputDataBasic();
-        inputData.setTestCasesFilter(
+        inputData.setListTestCaseItems(
         	Arrays.asList(
         		TestNGxmlStub.methodGroupGaleriaProductoToInclude.substring(0,6), 
         		TestNGxmlStub.methodGroupMiCuentaToInclude.substring(0,6)));
@@ -167,7 +159,7 @@ public class TestFilterTNGxmlTRun {
     @Test
     public void includeTestCaseThatDoesnotExists() {
         InputParamsTM inputData = getInputDataBasic();
-        inputData.setTestCasesFilter(Arrays.asList(TestNGxmlStub.methodThatDoesNotExistsInClass));
+        inputData.setListTestCaseItems(Arrays.asList(TestNGxmlStub.methodThatDoesNotExistsInClass));
         
         TestNGxmlStub testStub = TestNGxmlStub.getNew(TypeStubTest.OnlyMethodThatDoesntExistInClass, inputData);
         
@@ -178,9 +170,9 @@ public class TestFilterTNGxmlTRun {
     }
     
     private InputParamsTM getInputDataBasic() {
-    	InputParamsTM inputParams = new InputParamsBasic(Suite.class, AppEcom.class);
+    	InputParamsTM inputParams = new InputParamsBasic(Suites.class, AppEcom.class);
     	inputParams.setChannel(Channel.desktop);
-    	inputParams.setSuite(Suite.SuiteForUnitTest);
+    	inputParams.setSuite(Suites.SuiteForUnitTest);
     	inputParams.setApp(AppEcom.shop);
     	inputParams.setUrlBase("https://shop.mango.com/preHome.faces");
     	inputParams.setWebDriverType(WebDriverType.chrome);

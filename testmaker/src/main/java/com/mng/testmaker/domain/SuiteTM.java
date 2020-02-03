@@ -19,6 +19,7 @@ public class SuiteTM extends XmlSuite {
 	private static final long serialVersionUID = 1L;
 	private final InputParamsTM inputParams;
 	private final String idSuiteExecution;
+	private long threadId;
 	private StateExecution stateExecution = StateExecution.NotStarted;
 	private State result = State.Ok;
 	private Date inicio;
@@ -35,6 +36,10 @@ public class SuiteTM extends XmlSuite {
 	
 	public String getIdExecution() {
 		return idSuiteExecution;
+	}
+	
+	public long getThreadId() {
+		return threadId;
 	}
 	
 	public InputParamsTM getInputParams() {
@@ -78,6 +83,7 @@ public class SuiteTM extends XmlSuite {
 	}
 	
 	public void start() {
+		this.threadId = Thread.currentThread().getId();
 		stateExecution = StateExecution.Started;
 		inicio = new Date(); 
     	SuitesExecuted.add(this);

@@ -19,6 +19,7 @@ import org.testng.xml.XmlTest;
 
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.domain.TestRunTM;
+import com.mng.testmaker.domain.util.TestNameUtils;
 
 public class FilterTestsSuiteXML {
     
@@ -86,17 +87,6 @@ public class FilterTestsSuiteXML {
         return listTestToReturn;
     }
     
-    public static boolean methodInTestCaseList(String methodName, List<String> listTestCases) {
-        for (String testCase : listTestCases) {
-            if (testCase.compareTo(methodName)==0 ||  
-                methodName.indexOf(getCodeFromTestCase(testCase))==0) {
-                return true;
-            }
-        }
-        
-        return false;
-    }
-        
     public List<TestMethod> getTestCasesToExecute(XmlTest testRun) {
     	List<TestMethod> testsCaseCandidates = getInitialTestCaseCandidatesToExecute(testRun);
     	return getTestCasesFilteredWithParams(testsCaseCandidates);
@@ -134,7 +124,7 @@ public class FilterTestsSuiteXML {
     	List<TestMethod> listTestsFiltered = new ArrayList<>();
     	for (TestMethod testMethod : listToFilter) {
     		String methodName = testMethod.getMethod().getName();
-    		if (methodInTestCaseList(methodName, dFilter.getTestCasesFilter())) {
+    		if (TestNameUtils.isMethodNameInTestCaseList(methodName, dFilter.getTestCasesFilter())) {
     			listTestsFiltered.add(testMethod);
     		}
     	}
@@ -306,11 +296,10 @@ public class FilterTestsSuiteXML {
     	return false;
     }
 
-    
     private boolean testMethodsContainsMethod(List<TestMethod> testCasesToInclude, String methodName) {
         for (TestMethod testMethod : testCasesToInclude) {
             if (testMethod.getMethod().getName().compareTo(methodName)==0 ||  
-                methodName.indexOf(getCodeFromTestCase(testMethod.getMethod().getName()))==0) {
+                methodName.indexOf(TestNameUtils.getCodeFromTestCase(testMethod.getMethod().getName()))==0) {
                 return true;
             }
         }
@@ -318,11 +307,4 @@ public class FilterTestsSuiteXML {
         return false;
     }
     
-    private static String getCodeFromTestCase(String testCase) {
-        int posUnderscore = testCase.indexOf("_");
-        if (posUnderscore<0) {
-            return testCase;
-        }
-        return testCase.substring(0, posUnderscore);
-    }
 }
