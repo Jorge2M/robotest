@@ -9,6 +9,7 @@ import com.mng.testmaker.conf.State;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.ModalDirecEnvio;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopCheckout;
+import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 
 public class ModalDirecEnvioStpV {
 
@@ -32,8 +33,6 @@ public class ModalDirecEnvioStpV {
     	int nTimes = 3;
         ModalDirecEnvio.sendDataToInputsNTimesAndWait(dataDirFactura, nTimes, driver);
         ModalDirecEnvio.moveToAndDoubleClickActualizar(driver);
-        
-        //Validaciones
         checkAfterUpdateData(driver);
     }
     
@@ -48,6 +47,10 @@ public class ModalDirecEnvioStpV {
 	 	validations.add(
 			"Aparece un modal de alerta alertando de un posible cambio de precios (lo esperamos hasta " + maxSecondsWait + " segundos)",
 			Page1DktopCheckout.modalAvisoCambioPais.isVisibleUntil(maxSecondsWait, driver), State.Warn); 
+	 	int maxSeconds = 2;
+	 	validations.add(
+	 		"Desaparece la capa de Loading (lo esperamos hasta " + maxSeconds + "segundos", 
+	 		PageCheckoutWrapper.waitUntilNoDivLoading(driver, maxSeconds), State.Warn);
     	return validations;
     }
 }

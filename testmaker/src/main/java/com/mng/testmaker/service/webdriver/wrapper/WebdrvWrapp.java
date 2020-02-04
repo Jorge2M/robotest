@@ -347,7 +347,7 @@ public class WebdrvWrapp extends ElementPageFunctions {
         }
         catch (WebDriverException e) {
           JavascriptExecutor executor = (JavascriptExecutor) driver;
-          executor.executeScript("arguments[0].click();", link);           
+          executor.executeScript("arguments[0].click();", link);
         }
     }
     

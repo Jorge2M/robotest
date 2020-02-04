@@ -11,16 +11,16 @@ public class SecPreciosArticuloDesktop extends WebdrvWrapp {
 	
 	public enum TipoPrecio {
 		precio_inicial_tachado (
-			"//span[@class='tAcLx']",
+			"//span[@class[contains(.,'tAcLx')]]",
 			"//span[@class[contains(.,'product-list-price')] and @class[contains(.,'line-through')]]"),
 		precio_2o_tachado (
 			"//span[@class='?']",
 			"//span[@class[contains(.,'product-list-price')] and @class[contains(.,'line-through')]][2]"),
 		precio_rebajado_definitivo (
-			"//div[@class[contains(.,'_2-Zal')]]/span[@class='B16Le']",
+			"//div[@class[contains(.,'_2-Zal')]]//span[@class[contains(.,'B16Le')]]",
 			"//span[@class='product-list-sale-price']"),
 		precio_no_rebajado_definitivo (
-			"//div[@class='_3wfbJ']/span[@class='B16Le']",
+			"//div[@class='_3wfbJ' or not(@class)]/span[@class[contains(.,'B16Le')]]", //El not(@class) es debido al nuevo desarrollo en Cloud (04-febrero-2020)
 			"//span[@class[contains(.,'product-list-price') and not(@class[contains(.,'line-through')])]]");
 		
 		String xpathShop;

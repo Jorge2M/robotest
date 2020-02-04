@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -99,12 +100,14 @@ public abstract class ModalDireccion extends WebdrvWrapp {
             new Select(driver.findElement(By.xpath(XPathFormModal + XPathSelectPais))).selectByValue(codigoPais);
         }
     }    
-    
-    private static void sendKeysToInput(DataDirType inputType, String dataToSend, String XPathFormModal, WebDriver driver) {
-        String xpathInput = XPathFormModal + getXPathInput(inputType);
-        
-        //Hay un problema en Chrome que provoca que aleatoriamente se corten los strings enviados mediante SendKeys. Así que debemos reintentarlo si no ha funcionado correctamente
-        //https://github.com/angular/protractor/issues/2019
-        ifNotValueSetedSendKeysWithRetry(3/*numRetry*/, dataToSend, By.xpath(xpathInput), driver);
-    }
+
+	private static void sendKeysToInput(DataDirType inputType, String dataToSend, String XPathFormModal, WebDriver driver) {
+		String xpathInput = XPathFormModal + getXPathInput(inputType);
+//		WebElement input = driver.findElement(By.xpath(xpathInput));
+//		input.clear();
+//		input.sendKeys(dataToSend);
+		//Hay un problema en Chrome que provoca que aleatoriamente se corten los strings enviados mediante SendKeys. Así que debemos reintentarlo si no ha funcionado correctamente
+		//https://github.com/angular/protractor/issues/2019
+		ifNotValueSetedSendKeysWithRetry(2/*numRetry*/, dataToSend, By.xpath(xpathInput), driver);
+	}
 }

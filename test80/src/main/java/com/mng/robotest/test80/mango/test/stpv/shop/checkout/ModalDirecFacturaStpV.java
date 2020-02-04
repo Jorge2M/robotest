@@ -9,6 +9,7 @@ import com.mng.testmaker.conf.State;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.ModalDirecFactura;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopCheckout;
+import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 
 public class ModalDirecFacturaStpV {
 
@@ -21,7 +22,11 @@ public class ModalDirecFacturaStpV {
 			ModalDirecFactura.isVisibleFormUntil(maxSecondsWait, driver), State.Defect);    
 	 	validations.add(
 			"Es visible el botón \"Actualizar\"",
-	 		ModalDirecFactura.isVisibleButtonActualizar(driver), State.Defect);   
+	 		ModalDirecFactura.isVisibleButtonActualizar(driver), State.Defect);
+	 	int maxSeconds = 2;
+	 	validations.add(
+	 		"Desaparece la capa de Loading (lo esperamos hasta " + maxSeconds + "segundos", 
+	 		PageCheckoutWrapper.waitUntilNoDivLoading(driver, maxSeconds), State.Warn);
     	return validations;
     }
     
@@ -42,7 +47,12 @@ public class ModalDirecFacturaStpV {
 	 		!ModalDirecFactura.isVisibleFormUntil(0, driver), State.Defect);    
 	 	validations.add(
 			"Queda marcado el radiobutton \"Quiero recibir una factura\"",
-			Page1DktopCheckout.isMarkedQuieroFactura(driver), State.Defect); 
+			Page1DktopCheckout.isMarkedQuieroFactura(driver), State.Defect);
+	 	int maxSeconds = 2;
+	 	validations.add(
+	 		"Desaparece la capa de Loading (lo esperamos hasta " + maxSeconds + "segundos", 
+	 		PageCheckoutWrapper.waitUntilNoDivLoading(driver, maxSeconds), State.Warn);
+	 	
 	 	return validations;
 	}
 }

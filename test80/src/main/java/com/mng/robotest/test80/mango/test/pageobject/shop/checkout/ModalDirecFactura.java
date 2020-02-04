@@ -28,13 +28,13 @@ public class ModalDirecFactura extends ModalDireccion {
     public static boolean isVisibleButtonActualizar(WebDriver driver) {
         return isElementVisible(driver, By.xpath(XPathButtonUpdate));
     }
-    
-    public static void clickActualizar(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathButtonUpdate));
-        
-        //Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-        if (isVisibleButtonActualizar(driver)) {
-        	clickAndWaitLoad(driver, By.xpath(XPathButtonUpdate));
-        }
-    }
+
+	public static void clickActualizar(WebDriver driver) throws Exception {
+		clickAndWaitLoad(driver, By.xpath(XPathButtonUpdate));
+
+		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
+		if (isVisibleButtonActualizar(driver)) {
+			clickAndWaitLoad(driver, By.xpath(XPathButtonUpdate));
+		}
+	}
 }

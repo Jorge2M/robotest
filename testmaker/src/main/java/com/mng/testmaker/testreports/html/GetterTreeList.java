@@ -1,9 +1,7 @@
 package com.mng.testmaker.testreports.html;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.domain.StepTM;

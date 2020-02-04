@@ -6,9 +6,12 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.testmaker.conf.Channel;
@@ -136,15 +139,20 @@ public class PageRegistroIni extends WebdrvWrapp {
         List<WebElement> inputsObligatorios = driver.findElements(By.xpath(xpathInput));
         return (inputsObligatorios.size());
     }
-    
-    private void sendKeysToInput(DataRegType inputType, String dataToSend) {
-        String xpathInput = getXPathDataInput(inputType).getXPah();
-        moveToElement(By.xpath(xpathInput), driver);
-        //Hay un problema en Chrome que provoca que aleatoriamente se corten los strings enviados mediante SendKeys. Así que debemos reintentarlo si no ha funcionado correctamente
-        //https://github.com/angular/protractor/issues/2019
-        //moveToElement(By.xpath(xpathInput), driver);
-        sendKeysWithRetry(3, dataToSend, By.xpath(xpathInput), driver);
-    }
+
+	private void sendKeysToInput(DataRegType inputType, String dataToSend) {
+		for (int i=0; i<2; i++) {
+			try {
+				String xpathInput = getXPathDataInput(inputType).getXPah();
+				sendKeysWithRetry(2, dataToSend, By.xpath(xpathInput), driver);
+				break;
+			}
+			catch (ElementNotInteractableException e) {
+				//Vamos al inicio de la página porque la cabecera puede estar tapando el campo
+				new Actions(driver).sendKeys(Keys.PAGE_UP).perform();
+			}
+		}
+	}
     
     public HashMap<String,String> sendDataAccordingCountryToInputs(
     		Pais pais, String emailNonExistent, boolean clickPubli, Channel channel) throws Exception {

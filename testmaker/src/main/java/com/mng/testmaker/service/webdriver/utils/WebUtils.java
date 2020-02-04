@@ -14,7 +14,6 @@ import com.mng.testmaker.domain.StepTM.StepEvidence;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.testreports.html.ResultadoErrores;
 import com.mng.testmaker.testreports.html.StoreStepEvidencies;
-import com.mng.testmaker.testreports.html.ResultadoErrores.Resultado;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntries;
