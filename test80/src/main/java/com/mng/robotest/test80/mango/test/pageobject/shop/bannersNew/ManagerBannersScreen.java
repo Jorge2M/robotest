@@ -7,9 +7,10 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 
 public class ManagerBannersScreen {
 	
@@ -42,6 +43,10 @@ public class ManagerBannersScreen {
 		clearBannersData(listBannerTypes);
 		for (BannerType bannerType : listBannerTypes) {
 			BannerObject bannerObject = BannerObjectFactory.make(bannerType);
+			if (bannerType==BannerType.Standar) {
+				//Para recopilar este tipo de banners hemos de paginar para asegurarnos que se visualizan todos
+				new Actions(driver).sendKeys(Keys.PAGE_DOWN).perform();
+			}
 			List<DataBanner> listBannersOfType = bannerObject.getListBannersDataUntil(maxBannersToLoad, 1, driver);
 			addBanners(listBannersOfType);
 		}

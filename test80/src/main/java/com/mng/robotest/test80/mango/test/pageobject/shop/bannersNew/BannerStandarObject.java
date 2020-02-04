@@ -9,7 +9,8 @@ import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 
 public class BannerStandarObject extends BannerObject {
 
-	final static String XPathWrapperBanner = "//div[@class[contains(.,'vsv-box')] and @data-id]";
+	//final static String XPathWrapperBanner = "//div[@class[contains(.,'vsv-box')] and @data-id]";
+	final static String XPathWrapperBanner = "//div[@class[contains(.,'bannercontainer')] and @data-bannerid]";
 	final static String XPathBanner = XPathWrapperBanner + 
 	    "//div[@data-cta and not(@data-cta='') and " + 
 	    	  "@data-cta[not(contains(.,'op=ayuda'))] and " + 

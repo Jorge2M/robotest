@@ -9,7 +9,7 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 public class BannerCabeceraObject extends BannerObject {
 
-	final static String XPathWrapperBanner = "//div[@class='vsv-binteriorwrap']//div[@class='vsv-box' and @data-id]";
+	final static String XPathWrapperBanner = "//div[@class='vsv-binteriorwrap' or @class='vsv-bannercontainer']//div[@class='vsv-box' and @data-id]";
 	final static String XPathBanner = XPathWrapperBanner + "//div[@class[contains(.,'vsv-content-web')]]";
 	final static String XPathAncorRelativeBanner = "../a[@href]";
 	

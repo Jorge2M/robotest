@@ -35,19 +35,18 @@ public class SecBannersStpV {
 		return managerBannersScreen;
 	}
 	
-    public void testPageBanners(DataCtxShop dCtxSh, int maximoBanners) 
-    throws Exception { 
-        String urlPagPrincipal = driver.getCurrentUrl();
-        int sizeListBanners = managerBannersScreen.getListDataBanners().size();
-        for (int posBanner=1; posBanner<=sizeListBanners && posBanner<=maximoBanners; posBanner++) {
-        	boolean makeValidations = true;
-            seleccionarBanner(posBanner, makeValidations, dCtxSh.appE, dCtxSh.channel);
-            driver.get(urlPagPrincipal);
-            WebdrvWrapp.waitForPageLoaded(driver);
-            managerBannersScreen.reloadBanners(driver); //For avoid StaleElement Exception
-            sizeListBanners = managerBannersScreen.getListDataBanners().size();
-        }
-    }
+	public void testPageBanners(DataCtxShop dCtxSh, int maximoBanners) throws Exception { 
+		String urlPagPrincipal = driver.getCurrentUrl();
+		int sizeListBanners = managerBannersScreen.getListDataBanners().size();
+		for (int posBanner=1; posBanner<=sizeListBanners && posBanner<=maximoBanners; posBanner++) {
+			boolean makeValidations = true;
+			seleccionarBanner(posBanner, makeValidations, dCtxSh.appE, dCtxSh.channel);
+			driver.get(urlPagPrincipal);
+			WebdrvWrapp.waitForPageLoaded(driver);
+			managerBannersScreen.reloadBanners(driver); //For avoid StaleElement Exception
+			sizeListBanners = managerBannersScreen.getListDataBanners().size();
+		}
+	}
     
     public void seleccionarBanner(int posBanner, boolean validaciones, AppEcom app, Channel channel) 
     throws Exception {
