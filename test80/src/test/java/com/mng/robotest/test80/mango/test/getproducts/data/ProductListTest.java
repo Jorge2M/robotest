@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Test;
 
+import com.mng.robotest.test80.mango.test.getdata.products.data.ProductList;
+
 public class ProductListTest {
 
 	@Test

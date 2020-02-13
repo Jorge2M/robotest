@@ -1,6 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.registro;
 
 import java.util.HashMap;
+import java.util.Map;
+
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
@@ -9,6 +11,7 @@ import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -32,27 +35,30 @@ public class PageRegistroIniStpV {
 	public static PageRegistroIniStpV getNew(WebDriver driver) {
 		return new PageRegistroIniStpV(driver);
 	}
-    
+
 	@Validation (
 		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{maxSecondsWait} segundos)",
 		level=State.Defect)
-    public boolean validaIsPageUntil(int maxSecondsWait) {
-        return (pageRegistroIni.isPageUntil(maxSecondsWait));
-    }
-    
+	public boolean validaIsPageUntil(int maxSecondsWait) {
+		return (pageRegistroIni.isPageUntil(maxSecondsWait));
+	}
+
 	@Step (
 		description=
-			"Introducir los datos correctos para el país #{pais.getNombre_pais} " + 
-			"(Si aparece, seleccionar link de publicidad: <b>#{lickPubli}</b>)", 
-        expected=
+			"Introducir:<br>" + 
+			"  - Un email no existente: <b>#{emailNonExistent}</b><br>" +
+			"  - Password usuario: " + Constantes.pass_standard + "<br>" + 
+			"  - Seleccionar el link de publicidad<br>" +
+			"  - El resto de datos específicos para el país \"#{pais.getNombre_pais()}\"", 
+		expected=
 			"No aparece ningún mensaje de dato incorrecto")
-    public HashMap<String,String> sendDataAccordingCountryToInputs(
-    		Pais pais, String emailNonExistent, boolean clickPubli, Channel channel) throws Exception {
-        HashMap<String,String> dataSended = new HashMap<>();
-        dataSended = pageRegistroIni.sendDataAccordingCountryToInputs(pais, emailNonExistent, clickPubli, channel);
-        validateNotAreErrorMessageInCorrectFields();
-        return dataSended;
-    }
+	public HashMap<String,String> sendDataAccordingCountryToInputs(
+			Pais pais, String emailNonExistent, boolean clickPubli, Channel channel) throws Exception {
+		HashMap<String,String> dataSended = new HashMap<>();
+		dataSended = pageRegistroIni.sendDataAccordingCountryToInputs(pais, emailNonExistent, clickPubli, channel);
+		validateNotAreErrorMessageInCorrectFields();
+		return dataSended;
+	}
 	
 	@Validation (
 		description="No aparece mensaje de error en los campos con datos correctos",
@@ -60,38 +66,37 @@ public class PageRegistroIniStpV {
 	public boolean validateNotAreErrorMessageInCorrectFields() {
 		return (!pageRegistroIni.isVisibleAnyInputErrorMessage());
 	}
-    
+
 	@SuppressWarnings("unused")
 	@Step (
 		description="Introducir los datos:<br>#{dataToSendInHtmlFormat}",
-        expected="En los datos incorrectos aparece error y en los correctos no")
-    public void sendFixedDataToInputs(ListDataRegistro dataToSend, String dataToSendInHtmlFormat) {
+		expected="En los datos incorrectos aparece error y en los correctos no")
+	public void sendFixedDataToInputs(ListDataRegistro dataToSend, String dataToSendInHtmlFormat) {
 		pageRegistroIni.sendDataToInputs(dataToSend);       
-        validateMessagesErrorDependingInputs(dataToSend);
-    }
+		validateMessagesErrorDependingInputs(dataToSend);
+	}
 	
 	@Validation
-    public ChecksResult validateMessagesErrorDependingInputs(ListDataRegistro dataToSend) {
+	public ChecksResult validateMessagesErrorDependingInputs(ListDataRegistro dataToSend) {
 		ChecksResult validations = ChecksResult.getNew();
-        for (DataRegistro dataInput : dataToSend.getDataPageInicial()) {
-        	String dataInputString = dataInput.getDataRegType() + " (<b>" + dataInput.getData() + "</b>)";
-            if (dataInput.isValidPrevRegistro()) {
-            	validations.add(
-            		"No aparece mensaje de error el el campo con datos correctos: <b>" + dataInputString + "</b>",
-            		pageRegistroIni.getNumberMsgInputInvalid(dataInput.dataRegType) <= 0, State.Warn);
-            } else {
-            	validations.add(
-            		"Sí aparece mensaje de error el el campo con datos incorrectos: <b>" + dataInputString + "</b>",
-            		pageRegistroIni.getNumberMsgInputInvalid(dataInput.dataRegType) > 0, State.Warn);
-	        }
-        }
-        
-        return validations;
-    }
-    
+		for (DataRegistro dataInput : dataToSend.getDataPageInicial()) {
+			String dataInputString = dataInput.getDataRegType() + " (<b>" + dataInput.getData() + "</b>)";
+			if (dataInput.isValidPrevRegistro()) {
+				validations.add(
+					"No aparece mensaje de error el el campo con datos correctos: <b>" + dataInputString + "</b>",
+					pageRegistroIni.getNumberMsgInputInvalid(dataInput.dataRegType) <= 0, State.Warn);
+			} else {
+				validations.add(
+					"Sí aparece mensaje de error el el campo con datos incorrectos: <b>" + dataInputString + "</b>",
+					pageRegistroIni.getNumberMsgInputInvalid(dataInput.dataRegType) > 0, State.Warn);
+			}
+		}
+		return validations;
+	}
+
 	@Step (
 		description="Seleccionar el botón <b>Regístrate</b>")
-    public void clickRegistrateButton(Pais paisRegistro, boolean usrExists, AppEcom app, HashMap<String,String> dataRegistro) 
+    public void clickRegistrateButton(Pais paisRegistro, boolean usrExists, AppEcom app, Map<String,String> dataRegistro) 
     throws Exception {
 		pageRegistroIni.clickButtonRegistrate();
         Thread.sleep(1000);

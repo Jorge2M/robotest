@@ -6,8 +6,8 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
-import com.mng.robotest.test80.mango.test.getproducts.data.Garment.Article;
+import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
+import com.mng.robotest.test80.mango.test.getdata.products.data.Garment.Article;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 

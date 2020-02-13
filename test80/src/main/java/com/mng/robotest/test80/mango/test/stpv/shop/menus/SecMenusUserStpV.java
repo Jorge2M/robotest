@@ -5,10 +5,12 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
+import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.StepTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
@@ -137,13 +139,20 @@ public class SecMenusUserStpV {
         ModalCambioPaisStpV.cambioPais(dCtxSh, driver);
     }
 
+    private final static String TagPoints = "@TagPoints";
 	@Step (
-		description="Seleccionar el link \"Mango Likes You\"", 
+		description=
+			"Seleccionar el link \"Mango Likes You\"<br>" + 
+			"<b>info</b>: el usuario tiene " + TagPoints + " puntos", 
 		expected="Aparece la página de \"Mi cuenta\"")
 	public int clickMenuMangoLikesYou() throws Exception {
 		userMenus.clickMenuAndWait(UserMenu.mangoLikesYou);
 		PageHomeLikesStpV pageHomeLikesStpV = PageHomeLikesStpV.getNewInstance(driver);
-		return (pageHomeLikesStpV.checkIsPageOk().getNumberPoints());
+		int numberPoints = pageHomeLikesStpV.checkIsPageOk().getNumberPoints();
+		
+		StepTM step = TestMaker.getCurrentStepInExecution();
+		step.replaceInDescription(TagPoints, String.valueOf(numberPoints));
+		return (numberPoints);
 	}
 
 	@Validation

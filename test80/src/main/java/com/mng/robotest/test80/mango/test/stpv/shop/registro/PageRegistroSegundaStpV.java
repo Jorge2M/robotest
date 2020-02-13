@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.registro;
 
-import java.util.HashMap;
+import java.util.Map;
+
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
@@ -20,7 +21,7 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 public class PageRegistroSegundaStpV {
     
 	@Validation
-    public static ChecksResult validaIsPageRegistroOK(Pais paisRegistro, AppEcom app, HashMap<String,String> dataRegistro, WebDriver driver) 
+    public static ChecksResult validaIsPageRegistroOK(Pais paisRegistro, AppEcom app, Map<String,String> dataRegistro, WebDriver driver) 
     throws Exception {
 		ChecksResult validations = ChecksResult.getNew();
         String lineasComaSeparated = "";
@@ -76,7 +77,7 @@ public class PageRegistroSegundaStpV {
 	@Step (
 		description="@rewritable",
 		expected="Aparece la página de introducción de datos del niño o la de datos de la dirección (según se podían o no seleccionar niños)")
-    public static void setDataAndLineasRandom(String fechaNacimiento, boolean paisConNinos, int numNinos, Pais pais, HashMap<String,String> dataRegistroOK, WebDriver driver) 
+    public static void setDataAndLineasRandom(String fechaNacimiento, boolean paisConNinos, int numNinos, Pais pais, Map<String,String> dataRegistroOK, WebDriver driver) 
     throws Exception {
         String tagListaRandom = "@lineasRandom";
         String stepDescription = 

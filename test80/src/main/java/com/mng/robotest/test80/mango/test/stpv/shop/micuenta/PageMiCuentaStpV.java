@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
@@ -74,7 +75,7 @@ public class PageMiCuentaStpV {
         pageMisComprasStpV.validateIsPage(pais);
     }
  
-    public void goToMisDatosAndValidateData(HashMap<String,String> dataRegistro, String codPais) throws Exception {
+    public void goToMisDatosAndValidateData(Map<String,String> dataRegistro, String codPais) throws Exception {
         goToMisDatos(dataRegistro.get("cfEmail"));
         PageMisDatosStpV.validaIsDataAssociatedToRegister(dataRegistro, codPais, driver);
     }
@@ -99,7 +100,7 @@ public class PageMiCuentaStpV {
         AllPagesStpV.validacionesEstandar(flagsVal, driver);
     }
     
-    public void goToSuscripcionesAndValidateData(HashMap<String,String> datosRegOk) throws Exception {
+    public void goToSuscripcionesAndValidateData(Map<String,String> datosRegOk) throws Exception {
         goToSuscripciones();
         PageSuscripcionesStpV.validaIsDataAssociatedToRegister(datosRegOk, driver);
     }

@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.getproducts.data;
+package com.mng.robotest.test80.mango.test.getdata.products.data;
 
 import java.util.List;
 import java.util.regex.Matcher;

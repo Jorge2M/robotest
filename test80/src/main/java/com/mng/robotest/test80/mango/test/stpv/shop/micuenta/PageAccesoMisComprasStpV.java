@@ -54,19 +54,22 @@ public class PageAccesoMisComprasStpV {
         PageMisComprasStpV pageMisComprasStpV = PageMisComprasStpV.getNew(channel, driver);
         pageMisComprasStpV.validateIsPage();
     }
-    
+
 	final static String tagUsuario = "@TagUsuario";
 	@Step (
-		description="En el bloque de \"No Registrado\", introducir el usuario/núm pedido (" + tagUsuario + "/#{dataPedido.getCodpedido()}) y pulsar \"Buscar pedido\"", 
-        expected="Aparece la página de detalle del pedido")
-    public static void buscarPedidoForNoRegistrado(DataPedido dataPedido, WebDriver driver) throws Exception {
-        String usuario = dataPedido.getEmailCheckout();
-        TestMaker.getCurrentStepInExecution().replaceInDescription(tagUsuario, usuario);
-        
-        PageAccesoMisCompras.inputUserAndNumPedidoBlockNo(usuario, dataPedido.getCodpedido(), driver); 
-        PageAccesoMisCompras.clickBuscarPedidoBlockNo(driver); 
-        
-        PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(driver);
-        pageDetPedidoStpV.validateIsPageOk(dataPedido, driver);      
-    }
+		description=
+			"En el bloque de \"No Registrado\", introducir el usuario/núm pedido " + 
+			"(" + tagUsuario + " / <b style=\"color:blue;\">#{dataPedido.getCodpedido()}</b>)" + 
+			" y pulsar \"Buscar pedido\"", 
+		expected="Aparece la página de detalle del pedido")
+	public static void buscarPedidoForNoRegistrado(DataPedido dataPedido, WebDriver driver) throws Exception {
+		String usuario = dataPedido.getEmailCheckout();
+		TestMaker.getCurrentStepInExecution().replaceInDescription(tagUsuario, usuario);
+
+		PageAccesoMisCompras.inputUserAndNumPedidoBlockNo(usuario, dataPedido.getCodpedido(), driver); 
+		PageAccesoMisCompras.clickBuscarPedidoBlockNo(driver); 
+
+		PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(driver);
+		pageDetPedidoStpV.validateIsPageOk(dataPedido, driver);      
+	}
 }

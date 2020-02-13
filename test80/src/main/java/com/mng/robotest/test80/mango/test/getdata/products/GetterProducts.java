@@ -1,32 +1,25 @@
-package com.mng.robotest.test80.mango.test.getproducts;
+package com.mng.robotest.test80.mango.test.getdata.products;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import javax.net.ssl.X509TrustManager;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
-import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
-import com.mng.robotest.test80.mango.test.getproducts.data.Garment.Article;
-import com.mng.robotest.test80.mango.test.getproducts.data.GarmentDetails;
-import com.mng.robotest.test80.mango.test.getproducts.data.ProductList;
+import com.mng.robotest.test80.mango.test.getdata.JaxRsClient;
+import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
+import com.mng.robotest.test80.mango.test.getdata.products.data.GarmentDetails;
+import com.mng.robotest.test80.mango.test.getdata.products.data.ProductList;
+import com.mng.robotest.test80.mango.test.getdata.products.data.Garment.Article;
 
-public class GetterProducts {
+public class GetterProducts extends JaxRsClient {
 	
 	private final String urlDomain;
 	private final String codigoPaisAlf;
@@ -132,38 +125,6 @@ public class GetterProducts {
 			return "outlet";
 		default:
 			return lineaType.name();
-		}
-	}
-	
-	private Client getClientIgnoreCertificates() throws Exception {
-		SSLContext context = SSLContext.getInstance("TLSv1.2");
-		TrustManager[] trustManagerArray = {new NullX509TrustManager()};
-		context.init(null, trustManagerArray, null);
-
-		Client client = ClientBuilder.newBuilder()
-				.hostnameVerifier(new NullHostnameVerifier())
-				.sslContext(context)
-				.build();
-		return client;
-	}
-	
-	private static class NullHostnameVerifier implements HostnameVerifier {
-		public boolean verify(String hostname, SSLSession session) {
-			return true;
-		}
-	}
-	
-	private static class NullX509TrustManager implements X509TrustManager {
-		public void checkClientTrusted(X509Certificate[] chain, String authType)
-		throws CertificateException {
-		}
-
-		public void checkServerTrusted(X509Certificate[] chain, String authType)
-			throws CertificateException {
-		}
-
-		public X509Certificate[] getAcceptedIssuers() {
-			return new X509Certificate[0];
 		}
 	}
 	

@@ -18,21 +18,25 @@ public class TestCaseTM  {
 	private State state = State.Ok;
 	private final SuiteTM suiteParent;
 	private final TestRunTM testRunParent;
-	private final WebDriver driver;
 	private final ITestResult result;
 	private final long threadId;
 	private String refineDataName = "";
+	private WebDriver driver;
 
 	public TestCaseTM(ITestResult result) {
 		this.testRunParent = (TestRunTM)result.getTestContext().getCurrentXmlTest();
 		this.suiteParent = (SuiteTM)testRunParent.getSuite();
 		this.result = result;
 		this.threadId = Thread.currentThread().getId();
-		if (suiteParent.getStateExecution()!=StateExecution.Stopping) {
-			this.driver = getWebDriverForTestCase();
-		} else {
-			this.driver = null;
-		}
+//		if (suiteParent.getStateExecution()!=StateExecution.Stopping) {
+//			this.driver = getWebDriverForTestCase();
+//		} else {
+//			this.driver = null;
+//		}
+	}
+	
+	public void makeWebDriver() {
+		this.driver = getWebDriverForTestCase();
 	}
 	
 	public String getNameUnique() {

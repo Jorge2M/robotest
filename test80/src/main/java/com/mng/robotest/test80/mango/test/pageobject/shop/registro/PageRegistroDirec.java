@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.pageobject.shop.registro;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -32,7 +32,7 @@ public class PageRegistroDirec extends WebdrvWrapp {
     }
     
     public static void sendDataAccordingCountryToInputs(
-    		HashMap<String,String> dataRegistro, Pais pais, Channel channel, WebDriver driver) throws Exception {
+    		Map<String,String> dataRegistro, Pais pais, Channel channel, WebDriver driver) throws Exception {
         dataRegistro.putAll(Page2IdentCheckout.inputDataPorDefectoSegunPais(pais, dataRegistro.get("cfEmail"), false, false, channel, driver));
     }
     

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Talla;
-import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
-import com.mng.robotest.test80.mango.test.getproducts.data.Garment.Article;
+import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
+import com.mng.robotest.test80.mango.test.getdata.products.data.Garment.Article;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 

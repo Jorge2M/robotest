@@ -11,13 +11,25 @@ import org.openqa.selenium.WebDriver;
 public class PageHomeLikes extends WebdrvWrapp {
 
 	WebDriver driver;
-	
+
 	String idLoyaltySpace = "loyaltyLoyaltySpace";
 	String xpathPoints = "//*[@class[contains(.,'user-total-likes')] or @class[contains(.,'enough-likes')]]";
 	String xpathBlockExchange = "//ul[@class='cards-list']/li";
-	String xpathButtonPurchaseWithDiscount = "//span[text()='Compra con descuento']";
-	String xpathButtonDonateLikes = "//span[contains(text(), 'Donar mis Likes')]";
-	String xpathButtonConseguirPor1200Likes = "//span[contains(text(), 'Conseguir')]";
+	
+	public enum ButtonUseLikes {
+		CompraConDescuento("//span[text()='Compra con descuento']"),
+		DonarMisLikes("//span[contains(text(), 'Donar mis Likes')]"),
+		Conseguir("//span[contains(text(), 'Conseguir')]"),
+		RegalarMisLikes("//span[text()[contains(.,'Regalar')]]");
+		
+		private By by;
+		private ButtonUseLikes(String xpath) {
+			this.by = By.xpath(xpath);
+		}
+		public By getBy() {
+			return by;
+		}
+	}
 	
 	private PageHomeLikes(WebDriver driver) {
 		this.driver = driver;
@@ -51,15 +63,7 @@ public class PageHomeLikes extends WebdrvWrapp {
 		return (WebdrvWrapp.isElementVisibleUntil(driver, By.xpath(xpathBlockExchange), 2));
 	}
 
-	public void clickPurchaseWithDiscount() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(xpathButtonPurchaseWithDiscount));
-	}
-
-	public void clickDonateLikes() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(xpathButtonDonateLikes));
-	}
-	
-	public void clickConseguirPor1200Likes() throws Exception {
-		clickAndWaitLoad(driver, By.xpath(xpathButtonConseguirPor1200Likes));
+	public void clickButton(ButtonUseLikes button) throws Exception {
+		clickAndWaitLoad(driver, button.getBy());
 	}
 }

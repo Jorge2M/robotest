@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.registro;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 
@@ -29,15 +29,15 @@ public class PageRegistroDirecStpV {
     	return validations;
     }
     
-	@Step (            
+	@Step (
 		description="Introducir los datos correctos para el país #{pais.getNombre_pais()}", 
-        expected="No aparece ningún mensaje de error")
-    public static void sendDataAccordingCountryToInputs(HashMap<String,String> dataRegistro, Pais pais, Channel channel, WebDriver driver) 
-    throws Exception {
-        PageRegistroDirec.sendDataAccordingCountryToInputs(dataRegistro, pais, channel, driver);
-        validateInputDataOk(driver);
-    }
-    
+		expected="No aparece ningún mensaje de error")
+	public static void sendDataAccordingCountryToInputs(Map<String,String> dataRegistro, Pais pais, Channel channel, WebDriver driver) 
+	throws Exception {
+		PageRegistroDirec.sendDataAccordingCountryToInputs(dataRegistro, pais, channel, driver);
+		validateInputDataOk(driver);
+	}
+
     @Validation(
     	description="No aparece ningún mensaje de error asociado a los campos de entrada",
     	level=State.Defect)

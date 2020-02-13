@@ -70,35 +70,34 @@ public class TestRunTM extends XmlTest {
 		return testNgContext;
 	}
 
-    public void setTestNgContext(ITestContext testNgContext) {
-        this.testNgContext = testNgContext;
-        String suiteDirectory = ((SuiteTM)getSuite()).getPathDirectory();
-        setTestRunOutputDirectory(suiteDirectory);
-  	
-    }
-    
-    public StorerErrorStep getStorerErrorStep() {
-    	return storerErrorStep;
-    }
-    
-    public void setStorerErrorStep(StorerErrorStep storerErrorStep) {
-    	this.storerErrorStep = storerErrorStep;
-    }
-    
-    private void setTestRunOutputDirectory(String outputDirectory) {
-        TestRunner runner = (TestRunner)testNgContext;
-        runner.setOutputDirectory(outputDirectory);  
-    }
-    
-    public XmlGroups getGroups() {
-        return this.x_xmlGroupsVisible;
-    }
-    
-    @Override
-    public void setGroups(XmlGroups xmlGroups) {
-        super.setGroups(xmlGroups);
-        this.x_xmlGroupsVisible = xmlGroups;
-    }
+	public void setTestNgContext(ITestContext testNgContext) {
+		this.testNgContext = testNgContext;
+		String suiteDirectory = ((SuiteTM)getSuite()).getPathDirectory();
+		setTestRunOutputDirectory(suiteDirectory);
+	}
+
+	public StorerErrorStep getStorerErrorStep() {
+		return storerErrorStep;
+	}
+
+	public void setStorerErrorStep(StorerErrorStep storerErrorStep) {
+		this.storerErrorStep = storerErrorStep;
+	}
+
+	private void setTestRunOutputDirectory(String outputDirectory) {
+		TestRunner runner = (TestRunner)testNgContext;
+		runner.setOutputDirectory(outputDirectory);  
+	}
+
+	public XmlGroups getGroups() {
+		return this.x_xmlGroupsVisible;
+	}
+
+	@Override
+	public void setGroups(XmlGroups xmlGroups) {
+		super.setGroups(xmlGroups);
+		this.x_xmlGroupsVisible = xmlGroups;
+	}
 	
 	public List<TestCaseTM> getListTestCases() {
 		return listTestCases;

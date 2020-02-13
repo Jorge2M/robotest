@@ -18,18 +18,19 @@ public class PageInputPedidoStpV {
     }
     
 	@Step (
-		description="Buscar el pedido <b>#{dataPedido.getCodpedido()}</b> introduciendo email + nº pedido</b>", 
-        expected="Apareca la página con los datos correctos del pedido")
-    public static void inputPedidoAndSubmit(DataPedido dataPedido, WebDriver driver) 
-    throws Exception {
-        String usuarioAcceso = dataPedido.getEmailCheckout();
-        String codPedido = dataPedido.getCodpedido();
-        PageInputPedido.inputEmailUsr(usuarioAcceso, driver);
-        PageInputPedido.inputPedido(codPedido, driver);
-        PageInputPedido.clickRecuperarDatos(driver);
-        
-        //Validaciones
-        PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(driver);
-        pageDetPedidoStpV.validateIsPageOk(dataPedido, driver);
-    }
+		description=
+			"Buscar el pedido <b style=\"color:brown;\">#{dataPedido.getCodpedido()}</b> introduciendo email + nº pedido</b>",
+		expected=
+			"Apareca la página con los datos correctos del pedido")
+	public static void inputPedidoAndSubmit(DataPedido dataPedido, WebDriver driver) 
+	throws Exception {
+		String usuarioAcceso = dataPedido.getEmailCheckout();
+		String codPedido = dataPedido.getCodpedido();
+		PageInputPedido.inputEmailUsr(usuarioAcceso, driver);
+		PageInputPedido.inputPedido(codPedido, driver);
+		PageInputPedido.clickRecuperarDatos(driver);
+
+		PageDetallePedidoStpV pageDetPedidoStpV = new PageDetallePedidoStpV(driver);
+		pageDetPedidoStpV.validateIsPageOk(dataPedido, driver);
+	}
 }

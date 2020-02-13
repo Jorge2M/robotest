@@ -42,6 +42,7 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
 	public void onTestStart(ITestResult result) {
 		TestRunTM testRun = getTestRun(result);
 		TestCaseTM testCase = new TestCaseTM(result);
+		testCase.makeWebDriver();
 		testRun.addTestCase(testCase);
 	}
 

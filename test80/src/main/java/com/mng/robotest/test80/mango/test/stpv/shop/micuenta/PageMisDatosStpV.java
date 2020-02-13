@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
-import java.util.HashMap;
+import java.util.Map;
+
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
@@ -36,7 +37,7 @@ public class PageMisDatosStpV {
     }
 
     @Validation
-    public static ChecksResult validaIsDataAssociatedToRegister (HashMap<String,String> datosRegOk, String codpais, WebDriver driver) 
+    public static ChecksResult validaIsDataAssociatedToRegister (Map<String,String> datosRegOk, String codpais, WebDriver driver) 
     throws Exception {
         String nombre = datosRegOk.get("cfName");
         String apellidos = datosRegOk.get("cfSname");

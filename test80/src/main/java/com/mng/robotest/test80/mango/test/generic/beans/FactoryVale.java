@@ -8,7 +8,7 @@ import java.util.List;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.data.ValesData.Campanya;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais.EffectToArticle;
-import com.mng.robotest.test80.mango.test.getproducts.data.Garment;
+import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
 public class FactoryVale {

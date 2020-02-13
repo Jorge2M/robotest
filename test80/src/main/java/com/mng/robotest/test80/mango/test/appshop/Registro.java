@@ -1,6 +1,7 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import com.mng.robotest.test80.mango.test.stpv.shop.SecCabeceraStpV;
 import org.openqa.selenium.WebDriver;
@@ -135,12 +136,51 @@ public class Registro {
             return;
         }
         
-        boolean clickPubli = true;
     	VersionRegistroSuite version = VersionRegistroSuite.V3;
     	if (isAccesFromFactory()) {
     		version = VersionRegistroSuite.valueOf(inputParamsSuite.getVersion());
     	}
     	
+    	registro_e_irdeshopping_sipubli(dCtxSh, version, driver);
+    }
+    
+    @SuppressWarnings("static-access")
+    @Test (
+        groups={"Registro", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
+        description="Alta/Registro de un usuario (sin seleccionar el link de publicidad)")
+    public void REG003_RegistroOK_NoPubli() throws Exception {
+    	TestMaker.getTestCase().setRefineDataName(index_fact);
+    	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+        if (inputParamsSuite.getTypeAccess()==TypeAccess.Bat) {
+            return; 
+        }
+        
+        DataCtxShop dCtxSh = getCtxShForTest();
+		WebDriver driver = TestMaker.getDriverTestCase();
+		registro_e_irdeshopping_nopubli(dCtxSh, driver);
+	}
+
+	public static Map<String,String> registro_e_irdeshopping_nopubli(DataCtxShop dCtxSh, WebDriver driver) 
+	throws Exception {
+		dCtxSh.userRegistered = false;
+		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+		SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
+		userMenusStpV.selectRegistrate(dCtxSh);
+		String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
+		PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
+		HashMap<String,String> dataRegistro = 
+				pageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, false, dCtxSh.channel);
+		pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false, dCtxSh.appE, dataRegistro);
+		PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dCtxSh.channel, driver);
+		PageRegistroDirecStpV.clickFinalizarButton(driver);
+		PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, driver);
+		userMenusStpV.checkVisibilityLinkMangoLikesYou();
+
+		return dataRegistro;
+	}
+	
+	public static Map<String,String> registro_e_irdeshopping_sipubli(DataCtxShop dCtxSh, VersionRegistroSuite version, WebDriver driver) 
+	throws Exception {
         dCtxSh.userRegistered = false;
         AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
         if (!dCtxSh.userRegistered) {
@@ -149,12 +189,13 @@ public class Registro {
         
         SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
         userMenusStpV.selectRegistrate(dCtxSh);
+        Map<String,String> dataRegistro = null;
         if(version.register()) {
 	        String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
 	        PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
-	        HashMap<String,String> dataRegistro = 
-	        	pageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dCtxSh.channel);
-	        pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false/*usrExists*/, dCtxSh.appE, dataRegistro);
+	        dataRegistro = 
+	        	pageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, true, dCtxSh.channel);
+	        pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false, dCtxSh.appE, dataRegistro);
 	        boolean paisConNinos = dCtxSh.pais.getShoponline().stateLinea(LineaType.nina, dCtxSh.appE)==ThreeState.TRUE;
 	        PageRegistroSegundaStpV.setDataAndLineasRandom("23/4/1974", paisConNinos, 2, dCtxSh.pais, dataRegistro, driver);
 	        if (paisConNinos) {
@@ -183,38 +224,11 @@ public class Registro {
         } else {
         	SecFooterStpV.validaRGPDFooter(version.register(), dCtxSh, driver);
         }
-    }
-    
-    @SuppressWarnings("static-access")
-    @Test (
-        groups={"Registro", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
-        description="Alta/Registro de un usuario (sin seleccionar el link de publicidad)")
-    public void REG003_RegistroOK_NoPubli() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-    	TestMaker.getTestCase().setRefineDataName(index_fact);
-    	DataCtxShop dCtxSh = getCtxShForTest();
-        dCtxSh.userRegistered = false;
-    	boolean clickPubli = false;
-    	InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
-        if (inputParamsSuite.getTypeAccess()==TypeAccess.Bat) {
-            return; 
-        }
         
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
-        SecMenusUserStpV userMenusStpV = SecMenusUserStpV.getNew(dCtxSh.channel, dCtxSh.appE, driver);
-        userMenusStpV.selectRegistrate(dCtxSh);
-        String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
-        PageRegistroIniStpV pageRegistroIniStpV = PageRegistroIniStpV.getNew(driver);
-        HashMap<String,String> dataRegistro = 
-        	pageRegistroIniStpV.sendDataAccordingCountryToInputs(dCtxSh.pais, emailNonExistent, clickPubli, dCtxSh.channel);
-        pageRegistroIniStpV.clickRegistrateButton(dCtxSh.pais, false, dCtxSh.appE, dataRegistro);
-        PageRegistroDirecStpV.sendDataAccordingCountryToInputs(dataRegistro, dCtxSh.pais, dCtxSh.channel, driver);
-        PageRegistroDirecStpV.clickFinalizarButton(driver);
-        PageRegistroFinStpV.clickIrDeShoppingButton(dCtxSh, driver);
-        userMenusStpV.checkVisibilityLinkMangoLikesYou();
-    }    
-    
-    private boolean isAccesFromFactory() {
-    	return (this.paisFactory!=null);
-    }
+        return dataRegistro;
+	}
+
+	private boolean isAccesFromFactory() {
+		return (this.paisFactory!=null);
+	}
 }

@@ -1,7 +1,7 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 import org.openqa.selenium.WebDriver;
 
@@ -22,7 +22,7 @@ public class PageSuscripcionesStpV {
     }
 
     @Validation
-    public static ChecksResult validaIsDataAssociatedToRegister (HashMap<String,String> datosRegOk, WebDriver driver) {
+    public static ChecksResult validaIsDataAssociatedToRegister (Map<String,String> datosRegOk, WebDriver driver) {
         int numLineasTotales = Integer.valueOf(datosRegOk.get("numlineas")).intValue();
         String lineasUnchecked = datosRegOk.get("clicklineas");
         StringTokenizer tokensLinDesmarcadas = new StringTokenizer(lineasUnchecked, ",");

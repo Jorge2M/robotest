@@ -17,7 +17,8 @@ public class ValesData {
 		MNGVIP("01/06/2019 00:00"),
 		IMVIP("01/06/2019 00:00"),
 		VIP19("01/06/2019 00:00"),
-		Test("01/01/2000 00:00");
+		Test("01/01/2000 00:00"),
+		MANGOLIKESYOU("01/01/2000 00:00");
 		
 		Calendar fechaInit;
 		private Campanya(String fechaInitStr) {

@@ -131,7 +131,7 @@ public class Page2IdentCheckout extends WebdrvWrapp {
 	public static void setInputPoblacionIfVisible(String cfCity, HashMap<String,String> datosRegistro, WebDriver driver) 
 	throws Exception {
 		waitForPageLoaded(driver);
-		WebdrvWrapp.isElementClickableUntil(driver, By.xpath(XPathInputPoblacionActive), 2);
+		WebdrvWrapp.isElementClickableUntil(driver, By.xpath(XPathInputPoblacionActive), 1);
 		boolean datoSeteado = setInputIfVisible(XPathInputPoblacionActive, cfCity, driver);
 		if (datoSeteado) {
 			datosRegistro.put("cfCity", cfCity);
@@ -311,7 +311,7 @@ public class Page2IdentCheckout extends WebdrvWrapp {
         
         //Tenemos problemas aleatorios de StaleElementReferenceException con este elemento
         //Probamos hasta 3 veces mientras que obtengamos la Excepción
-        while (staleElement && i<3) {
+        while (staleElement && i<3 && "".compareTo(datoSeteado)==0) {
             List<WebElement> localidadesList = UtilsMangoTest.findDisplayedElements(driver, By.xpath(XPathSelectLocalidades));
             if (localidadesList.size() > 0) {
                 try {

@@ -49,9 +49,9 @@ public class DefaultMailEndSuite implements SenderMailEndSuiteI {
 			"Result TestSuite " + inputParams.getSuiteName() + 
 			" (" + inputParams.getApp() + " / " + inputParams.getUrlBase() + ")";
 		if (suite.getResult().isMoreCriticThan(State.Warn)) {
-			return (subjectMail + " (OK)");
-		} else {
 			return (subjectMail + " (With Problems)");
+		} else {
+			return (subjectMail + " (OK)");
 		}
 	}
 }
