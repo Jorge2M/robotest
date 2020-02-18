@@ -41,7 +41,7 @@ public class TSuiteThreadsManager {
 	    Thread test = new Thread(tg1, new Runnable() {
 	        public void run(){
 	          	try {
-	        	    TestMaker.execSuite(executor);
+	        	    TestMaker.execSuite(executor, false);
 	          	}
 	          	catch (Throwable e) {
 	          		e.printStackTrace();

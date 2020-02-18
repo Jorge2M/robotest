@@ -35,6 +35,7 @@ public abstract class InputParamsTM {
 	public static final String URLNameParam = "url";
 	public static final String TCaseNameParam = "tcases";
 	public static final String ServerDNSNameParam = "serverDNS";
+	public static final String AsyncExecParam = "asyncexec";
 	public static final String RecicleWDParam = "reciclewd";
 	public static final String NetAnalysisParam = "net";
 	public static final String StoreParam = "store";
@@ -80,6 +81,9 @@ public abstract class InputParamsTM {
 
 	@FormParam(RecicleWDParam)
 	String reciclewd;
+	
+	@FormParam(AsyncExecParam)
+	String asyncexec;
 
 	@FormParam(NetAnalysisParam)
 	String net;
@@ -199,6 +203,13 @@ public abstract class InputParamsTM {
 			.possibleValues(Arrays.asList("true", "false"))
 			.desc("Gestion mode of webdriver. Possible values: true->reuse across testcases, false->don't reuse)")
 			.build());
+		
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.AsyncExecParam)
+			.required(false)
+			.hasArgs()
+			.possibleValues(Arrays.asList("true", "false"))
+			.desc("Execution Asynchronous (true, false)")
+			.build());
 
 		optionsTM.add(OptionTMaker.builder(InputParamsTM.NetAnalysisParam)
 			.required(false)
@@ -267,6 +278,7 @@ public abstract class InputParamsTM {
 			mailsCommaSeparated = String.join(",", mails);
 		}
 		reciclewd = cmdLine.getOptionValue(RecicleWDParam);
+		asyncexec = cmdLine.getOptionValue(AsyncExecParam);
 		net = cmdLine.getOptionValue(NetAnalysisParam);
 		store = cmdLine.getOptionValue(StoreParam);
 		typeAccess = cmdLine.getOptionValue(TypeAccessParam);
@@ -285,6 +297,7 @@ public abstract class InputParamsTM {
 		Tcases(TCaseNameParam),
 		ServerDNS(ServerDNSNameParam),
 		RecicleWD(RecicleWDParam),
+		AsyncExec(AsyncExecParam),
 		NetAnalysis(NetAnalysisParam),
 		Store(StoreParam),
 		Mails(MailsParam),
@@ -331,6 +344,8 @@ public abstract class InputParamsTM {
 			return this.serverDNS;
 		case RecicleWD:
 			return this.reciclewd;
+		case AsyncExec:
+			return this.asyncexec;
 		case NetAnalysis:
 			return this.net;
 		case Store:
@@ -510,6 +525,15 @@ public abstract class InputParamsTM {
 		}
 		return ManagementWebdriver.discard;
 	}
+	public void setAsyncExec(String asyncexec) {
+		this.asyncexec = asyncexec;
+	}
+	public boolean isAsyncExec() {
+		if (asyncexec!=null) {
+			return ("true".compareTo(asyncexec)==0);
+		}
+		return true;
+	} 
 	public void setNetAnalysis(String net) {
 		this.net = net;
 	}

@@ -5461,9 +5461,14 @@
 <linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <!-- Hay un pequeño problema y es que en Shop aparece "KREDİ KARTI"  y en Outlet "KREDI KARTI". Mientras que siga así tendremos que definir las siguientes 2 líneas-->
+<!-- 
 <pago 
 	type="KrediKarti" tiendas="shop"
 	nombre="KREDİ KARTI" namefilter="KREDI KARTI" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4543590000000006" mescad="10" anycad="2020" cvc="737">&TPV-042;</pago>
+-->
+<pago 
+	type="KrediKarti" tiendas="shop"
+	nombre="KREDİ KARTI" namefilter="KREDI KARTI" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="10" anycad="2020" cvc="737">&TPV-042;</pago>
 <pago 
 	type="KrediKarti" tiendas="outlet"
 	nombre="KREDI KARTI" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5311570000000005" mescad="12" anycad="2020" cvc="000">&TPV-042;</pago>

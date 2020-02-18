@@ -33,21 +33,19 @@ import static com.mng.robotest.test80.mango.test.pageobject.manto.pedido.PageGen
 public class PedidoNavigations {
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 
-    public static void testPedidosEnManto(DataCheckPedidos dataCheckPedidos, AppEcom appE, WebDriver driver) throws Exception {
-    	//TODO en cuanto quiten el captcha de la página de identificación podremos reactivar este código
-    	
-//    	//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
-//    	if (appE!=AppEcom.votf) {  
-//			TestCaseTM testCase = TestMaker.getTestCase();
-//			TestRunTM testRun = testCase.getTestRunParent();
-//	        DataMantoAccess dMantoAcc = new DataMantoAccess();
-//	        dMantoAcc.urlManto = testRun.getParameter(Constantes.paramUrlmanto);
-//	        dMantoAcc.userManto = testRun.getParameter(Constantes.paramUsrmanto);
-//	        dMantoAcc.passManto = testRun.getParameter(Constantes.paramPasmanto);
-//	        dMantoAcc.appE = appE;
-//	        testPedidosEnManto(dMantoAcc, dataCheckPedidos, driver);
-//    	}
-    }
+	public static void testPedidosEnManto(DataCheckPedidos dataCheckPedidos, AppEcom appE, WebDriver driver) throws Exception {
+		//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
+		if (appE!=AppEcom.votf) {  
+			TestCaseTM testCase = TestMaker.getTestCase();
+			TestRunTM testRun = testCase.getTestRunParent();
+			DataMantoAccess dMantoAcc = new DataMantoAccess();
+			dMantoAcc.urlManto = testRun.getParameter(Constantes.paramUrlmanto);
+			dMantoAcc.userManto = testRun.getParameter(Constantes.paramUsrmanto);
+			dMantoAcc.passManto = testRun.getParameter(Constantes.paramPasmanto);
+			dMantoAcc.appE = appE;
+			testPedidosEnManto(dMantoAcc, dataCheckPedidos, driver);
+		}
+	}
     
     private static void testPedidosEnManto(DataMantoAccess dMantoAcc, DataCheckPedidos dataCheckPedidos, WebDriver driver) 
     throws Exception {

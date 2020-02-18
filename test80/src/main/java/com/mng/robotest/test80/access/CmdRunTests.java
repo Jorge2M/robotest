@@ -39,7 +39,7 @@ public class CmdRunTests {
 		execSuite(executor);
 	}
 	public static void execSuite(CreatorSuiteRun executor) throws Exception {
-		SuiteTM suite = TestMaker.execSuite(executor);
+		SuiteTM suite = TestMaker.execSuite(executor, false);
 		callBackIfNeeded(suite);
 	}
 

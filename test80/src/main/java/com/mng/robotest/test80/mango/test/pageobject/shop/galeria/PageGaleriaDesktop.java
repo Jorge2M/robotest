@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -29,70 +30,73 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.menus.desktop.SecMenus
  * @author jorge.munoz
  */
 public class PageGaleriaDesktop extends PageGaleria {
-	//TODO REFACTORIZAR!!!
-    //TODO acabar de modificar orientando a "WebElement articulo"
-    public static SecBannerHeadGallery secBannerHead;
-    public static SecSelectorPrecios secSelectorPrecios;
-    public static SecCrossSelling secCrossSelling;
-    
-    private final SecColoresArticuloDesktop secColores;
-    private final SecPreciosArticuloDesktop secPrecios;
-    private final SecTallasArticuloDesktop secTallas;
-    
-    public enum NumColumnas {dos, tres, cuatro}
-    public enum TypeSlider {prev, next}
-    public enum TypeColor {codigo, nombre}
-    public enum TypeArticleDesktop {
-    	Simple (
-    		"//self::*[@class[contains(.,'_2zQ2a')]]",
-    		"//self::*[@data-imgsize = 'A1']"), 
-    	Doble (
-    		"//self::*[@class[contains(.,'_3QWF')]]",
-    		"//self::*[@data-imgsize = 'A2']"), 
-    	Video (
-    		"//video",
-    		"//video");
-    	
-    	String xpathRelativeArticleShop;
-    	String xpathRelativeArticleOutlet;
-    	private TypeArticleDesktop(String xpathRelativeArticleShop, String xpathRelativeArticleOutlet) {
-    		this.xpathRelativeArticleShop = xpathRelativeArticleShop;
-    		this.xpathRelativeArticleOutlet = xpathRelativeArticleOutlet;
-    	}
-    	
-    	public String getXPathRelativeArticle(AppEcom app) {
-    		if (app==AppEcom.outlet) {
-    			return this.xpathRelativeArticleOutlet;
-    		}
-    		return xpathRelativeArticleShop;
-    	}
-    }
+	public static SecBannerHeadGallery secBannerHead;
+	public static SecSelectorPrecios secSelectorPrecios;
+	public static SecCrossSelling secCrossSelling;
+	
+	private final SecColoresArticuloDesktop secColores;
+	private final SecTallasArticuloDesktop secTallas;
 
-	static String classProductName = 
+	//TODO cuando suba la nueva galería con react habrá que eliminar todo el código antiguo
+	public enum OutletGalery {old, newwithreact}
+	
+	public enum NumColumnas {dos, tres, cuatro}
+	public enum TypeSlider {prev, next}
+	public enum TypeColor {codigo, nombre}
+	public enum TypeArticleDesktop {
+		Simple (
+			"//self::*[@class[contains(.,'_2zQ2a')]]",
+			"//self::*[@data-imgsize = 'A1' or @class[contains(.,'product__A1')]]"), //Nueva versión outlet con react: "@class[contains(.,'product__A1')]"
+		Doble (
+			"//self::*[@class[contains(.,'_3QWF')]]",
+			"//self::*[@data-imgsize = 'A2' or @class[contains(.,'product__A2')]]"), //Nueva versión outlet con React: "@class[contains(.,'product__A1')]"
+		Video (
+			"//video",
+			"//video");
+		
+		String xpathRelativeArticleShop;
+		String xpathRelativeArticleOutlet;
+		private TypeArticleDesktop(String xpathRelativeArticleShop, String xpathRelativeArticleOutlet) {
+			this.xpathRelativeArticleShop = xpathRelativeArticleShop;
+			this.xpathRelativeArticleOutlet = xpathRelativeArticleOutlet;
+		}
+		
+		public String getXPathRelativeArticle(AppEcom app) {
+			if (app==AppEcom.outlet) {
+				return this.xpathRelativeArticleOutlet;
+			}
+			return xpathRelativeArticleShop;
+		}
+	}
+
+	//TODO cuando suba la nueva galería con react habrá que eliminar todo el código antiguo
+	private final static String XPathIsNewGaleriaOutletReact = "//div[@class[contains(.,'catalog__catalog')]]";
+	
+	private final static String classProductName = 
 		"(@class[contains(.,'productList__name')] or " +
 		 "@class[contains(.,'product-list-name')] or " + 
+		 "@class[contains(.,'product-description__name')] or " + //Nueva versión outlet con React
 		 "@class[contains(.,'_1P8s4')] or " +
 		 "@class='product-list-info-name' or " +
 		 "@class='product-name')";
 
-    //private final String XPathArticuloColoresNoDoble = XPathArticuloConColores + "//self::*[not(@class[contains(.,'layout-2-coumns-A2')])]";
+	//private final String XPathArticuloColoresNoDoble = XPathArticuloConColores + "//self::*[not(@class[contains(.,'layout-2-coumns-A2')])]";
 
-    private final static String XPathNombreRelativeToArticle = "//*[" + classProductName + "]";
-    private final static String XPathImgRelativeArticle = 
-    	"//img[@src and (" + 
-    		   "@class[contains(.,'productListImg')] or " + 
-    		   "@class[contains(.,'product-list-image')] or " +
-    		   "@class[contains(.,'TaqRk')] or " + 
-    		   "@class[contains(.,'product-list-im')])]";
-    private final static String XPathImgSliderActiveRelativeArticleDesktop = 
-        "//div[@class[contains(.,'swiper-slide-active')]]" + 
-        "//img[@src and (@class[contains(.,'productListImg')] or @class[contains(.,'product-list-im')] or @class[contains(.,'TaqRk')])]";
-    
+	private final static String XPathNombreRelativeToArticle = "//*[" + classProductName + "]";
+	private final static String XPathImgRelativeArticle = 
+		"//img[@src and (" + 
+			   "@class[contains(.,'productListImg')] or " + 
+			   "@class[contains(.,'product-list-image')] or " +
+			   "@class[contains(.,'list-product-image')] or " + //Nueva versión outlet con React
+			   "@class[contains(.,'TaqRk')] or " + 
+			   "@class[contains(.,'product-list-im')])]";
+	private final static String XPathImgSliderActiveRelativeArticleDesktop = 
+		"//div[@class[contains(.,'swiper-slide-active')]]" + XPathImgRelativeArticle;
+		//"//img[@src and (@class[contains(.,'productListImg')] or @class[contains(.,'product-list-im')] or @class[contains(.,'TaqRk')])]";
 
 	private PageGaleriaDesktop(From from, AppEcom app, WebDriver driver) {
 		super(from, Channel.desktop, app, driver);
 		secColores = new SecColoresArticuloDesktop(app);
-		secPrecios = new SecPreciosArticuloDesktop(app);
 		secTallas = new SecTallasArticuloDesktop(app, XPathArticulo, driver);
 	}
 	public static PageGaleriaDesktop getNew(From from, AppEcom app, WebDriver driver) throws Exception {
@@ -122,6 +126,14 @@ public class PageGaleriaDesktop extends PageGaleria {
 
 	public boolean isPage() {
 		return (isElementPresent(driver, By.xpath("//div[@class[contains(.,'container-fluid catalog')]]")));
+	}
+
+	public static OutletGalery getOutletVersion(WebDriver driver) {
+		By byNewGalery = By.xpath(XPathIsNewGaleriaOutletReact);
+		if (WebdrvWrapp.isElementVisible(driver, byNewGalery)) {
+			return OutletGalery.newwithreact;
+		}
+		return OutletGalery.old;
 	}
 
 	private String getXPathLabel(LabelArticle label) {
@@ -175,23 +187,22 @@ public class PageGaleriaDesktop extends PageGaleria {
 
 		return (xpathResult + "]//div[@class[contains(.,'product-list-info')]]");
 	}
-    
-    String getXPathArticulo(TypeArticleDesktop sizeArticle) {
-    	return ((XPathArticulo + sizeArticle.getXPathRelativeArticle(app)));
-    }
-    
 
-	private final static String iniXPathPaginaGaleriaOutlet = "//div[@id='page";
-	private final static String iniXPathPaginaGaleriaShop = "//ul[@id='page";
+	String getXPathArticulo(TypeArticleDesktop sizeArticle) {
+		return ((XPathArticulo + sizeArticle.getXPathRelativeArticle(app)));
+	}
+
+	//private final static String iniXPathPaginaGaleriaOutlet = "//div[@id='page";
+	private final static String iniXPathPaginaGaleria = "//ul[@id='page";
 
 	@Override
 	String getXPathPagina(int pagina) {
-		switch (app) {
-		case outlet:
-			return (iniXPathPaginaGaleriaOutlet + pagina + "Height']");
-		default:
-			return (iniXPathPaginaGaleriaShop + pagina + "']");
-		}
+//		switch (app) {
+//		case outlet:
+//			return (iniXPathPaginaGaleriaOutlet + pagina + "Height']");
+//		default:
+			return (iniXPathPaginaGaleria + pagina + "']");
+//		}
 	}
 
 	private static String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
@@ -362,10 +373,7 @@ public class PageGaleriaDesktop extends PageGaleria {
     @Override
     public String getRefColorArticulo(WebElement articulo) {
     	int lengthReferencia = 10;
-    	String id = articulo.getAttribute("id");
-    	if (app!=AppEcom.outlet) {
-    		id = id.replace("product-key-id-", "");
-    	}
+    	String id = getRefFromId(articulo);
     	if (id.length()>lengthReferencia) {
     		return (id.substring(0, lengthReferencia));
     	}
@@ -659,7 +667,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	 *    En caso de que todos los artículso tengan un nombre válido: ""
 	 *    En caso de que exista algún artículo no válido: nombre del 1er artículo no válido  
 	 */
-	public ArrayList<String> nombreArticuloNoValido(String[] nombrePosibles) {
+	public ArrayList<String> nombreArticuloNoValido(String[] nombrePosibles) throws Exception {
 		//Obtenemos el xpath de los artículos eliminando el último carácter (]) pues hemos de insertar condiciones en el XPATH
 		String xpathLitArticulos = XPathArticulo + "//*[" + classProductName + "]";
 		xpathLitArticulos = xpathLitArticulos.substring(0, xpathLitArticulos.length() - 1);
@@ -674,13 +682,22 @@ public class PageGaleriaDesktop extends PageGaleria {
 		//Si existe algún elemento que no pertenece al grupo de nombres válidos -> devolvemos el 1ero que no coincide
 		ArrayList<String> listTxtArtNoValidos = new ArrayList<>();
 		if (isElementPresent(driver, By.xpath(xpathLitArticulos))) {
-			List<WebElement> listTextosArticulosNoValidos = driver.findElements(By.xpath(xpathLitArticulos));
-			for (WebElement textoArticuloNoValido : listTextosArticulosNoValidos) {
-				String nombre = textoArticuloNoValido.getText();
-				String xpathArtWithoutDoubleSlash = this.XPathArticulo.substring(2);
-				//String referencia = textoArticuloNoValido.findElement(By.xpath("./ancestor::*[@class[contains(.,'product-list-item')]]")).getAttribute("id");
-				String referencia = textoArticuloNoValido.findElement(By.xpath("./ancestor::" + xpathArtWithoutDoubleSlash)).getAttribute("id");
-				listTxtArtNoValidos.add(nombre + " (" + referencia + ")");
+			for (int i=0; i<3; i++) {
+				try {
+					waitForPageLoaded(driver);
+					List<WebElement> listTextosArticulosNoValidos = driver.findElements(By.xpath(xpathLitArticulos));
+					for (WebElement textoArticuloNoValido : listTextosArticulosNoValidos) {
+						String nombre = textoArticuloNoValido.getText();
+						String xpathArtWithoutDoubleSlash = this.XPathArticulo.substring(2);
+						//String referencia = textoArticuloNoValido.findElement(By.xpath("./ancestor::*[@class[contains(.,'product-list-item')]]")).getAttribute("id");
+						String referencia = textoArticuloNoValido.findElement(By.xpath("./ancestor::" + xpathArtWithoutDoubleSlash)).getAttribute("id");
+						listTxtArtNoValidos.add(nombre + " (" + referencia + ")");
+					}
+					break;
+				}
+				catch (StaleElementReferenceException e) {
+					pLogger.info("StaleElementReferenceException getting listTextos no validos from Galery");
+				}
 			}
 		}
 
@@ -784,7 +801,7 @@ public class PageGaleriaDesktop extends PageGaleria {
     
     @Override
 	public StateFavorito getStateHearthIcon(WebElement hearthIcon) {
-		if (hearthIcon.getAttribute("class").contains("_2nHMm")) {
+		if (hearthIcon.getAttribute("class").contains("icon-fill")) {
 			return StateFavorito.Marcado;
 		}
 		return StateFavorito.Desmarcado;

@@ -63,9 +63,13 @@ public class PageGaleriaMobil extends PageGaleria {
         	 "@class='product-list-info-name' or " +
         	 "@class='product-name')";
     
-    final static String XPathColoresArticuloOutlet = "//div[@class[contains(.,'product-list-color--stock')]]";
+    //TODO cuando suba el Outlet-Desktop-React a PRO podremos igualar este XPath con el XPathColoresArticuloShop (outlet=shop)
+    final static String XPathColoresArticuloOutlet = "//div[@class[contains(.,'product-list-color--stock')] or @class[contains(.,'product-colors')]]";
+    
     final static String XPathColoresArticuloShop = "//div[@class[contains(.,'product-colors')]]";
-    final static String XPathArticleWithColorsOutlet = "//div[@class[contains(.,'product-list-info-color')]]/ancestor::li";	
+    
+    //TODO cuando suba el Outlet-Desktop-React a PRO podremos igualar este XPath con el XPathColoresArticuloShop (outlet=shop)
+    final static String XPathArticleWithColorsOutlet = "//div[@class[contains(.,'product-list-info-color')] or @class[contains(.,'product-colors')]]/ancestor::li";	
     
     String getXPathColoresArticle() {
     	switch (app) {

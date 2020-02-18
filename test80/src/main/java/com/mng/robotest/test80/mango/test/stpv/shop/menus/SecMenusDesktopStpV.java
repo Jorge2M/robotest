@@ -181,7 +181,7 @@ public class SecMenusDesktopStpV {
 		ChecksResult validations = ChecksResult.getNew();
 		for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
 			validations.add(
-				"Aparecen el menú de 2o nivel <b>" + menu2oNivelTmp.getNombre() + "</b>",
+				"Aparece el menú de 2o nivel <b>" + menu2oNivelTmp.getNombre() + "</b>",
 				secMenus.secMenuLateral.isVisibleMenu(menu2oNivelTmp), State.Warn);
 		}
 		return validations;

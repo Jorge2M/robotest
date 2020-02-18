@@ -1,28 +1,37 @@
 package com.mng.testmaker.boundary.aspects.test;
 
+import java.util.Map;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
 import com.google.gson.Gson;
 import com.mng.testmaker.domain.InputParamsBasic;
+import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.data.SuiteData;
 
 public class ClientRestApiTM extends JaxRsClient {
 	
-	public SuiteData suiteRun(InputParamsBasic inputParams) throws Exception {
-		Gson gson = new Gson();
-		String json = gson.toJson(inputParams.getAllParamsValues());
-
+	public SuiteData suiteRun(InputParamsTM inputParams) throws Exception {
+		Form formParams = getFormParams(inputParams.getAllParamsValues());
 		Client client = getClientIgnoreCertificates();
 		SuiteData suiteData = 
 			client
 				.target("http://localhost:80/suiterun")
-				.request(MediaType.APPLICATION_FORM_URLENCODED)
-				.post(Entity.json(json), SuiteData.class);
-
+				.request(MediaType.APPLICATION_JSON)
+				.post(Entity.form(formParams), SuiteData.class);
+		//TODO ha de retornar la Suite + TestRuns + TestCases ... + Steps + Validations
 		return suiteData;
 	}
 	
+	private Form getFormParams(Map<String,String> params) {
+		Form formParams = new Form();
+		for (Map.Entry<String, String> entry : params.entrySet()) {
+			formParams.param(entry.getKey(), entry.getValue());
+		}
+		return formParams;
+	}
 }

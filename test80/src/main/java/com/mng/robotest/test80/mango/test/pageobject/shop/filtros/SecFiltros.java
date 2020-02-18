@@ -29,6 +29,10 @@ public interface SecFiltros {
 		case movil_web:
 		default:
 			if (app==AppEcom.outlet) {
+				//TODO unificar con Shop cuando suba a PRO (eliminar los filtros simples)
+				if (!SecSimpleFiltrosMobil.isPresent(driver)) {
+					return (SecMultiFiltrosMobil.getInstance(app, driver));
+				}
 				return (SecSimpleFiltrosMobil.getInstance(app, driver));
 			}
 			return (SecMultiFiltrosMobil.getInstance(app, driver));

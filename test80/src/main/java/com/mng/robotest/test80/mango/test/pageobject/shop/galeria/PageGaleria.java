@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Locatable;
 
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
@@ -39,6 +43,10 @@ public abstract class PageGaleria extends WebdrvWrapp {
 	final AppEcom app;
 	final From from;
 	final String XPathArticulo;
+    
+	final SecPreciosArticulo secPrecios;
+	
+	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 
 	public PageGaleria(From from, Channel channel, AppEcom app, WebDriver driver) {
 		this.from = from;
@@ -46,6 +54,7 @@ public abstract class PageGaleria extends WebdrvWrapp {
 		this.channel = channel;
 		this.app = app;
 		this.XPathArticulo = getXPathArticulo();
+		this.secPrecios = new SecPreciosArticulo(channel, app, driver);
 	}
 	
 	abstract public String getXPathLinkRelativeToArticle();
@@ -74,7 +83,8 @@ public abstract class PageGaleria extends WebdrvWrapp {
 	abstract public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int maxSecondsToWait);
 	abstract public ArticuloScreen selectTallaArticle(int posArticulo, int posTalla) throws Exception;
 	abstract public StateFavorito getStateHearthIcon(WebElement hearthIcon);
-    
+
+	
     public static List<LabelArticle> listLabelsNew = Arrays.asList(
     	    LabelArticle.ComingSoon, 
     	    LabelArticle.NewNow, 
@@ -95,8 +105,15 @@ public abstract class PageGaleria extends WebdrvWrapp {
 		}
 	}
 	
+	public SecPreciosArticulo getSecPreciosArticulo() {
+		return secPrecios;
+	}
+	
 	final static String XPathArticuloDesktopShop = "//li[@id[contains(.,'product-key-id')]]";
-	final static String XPathArticuloDesktopOutlet = "//li[@class[contains(.,'product-list-item')]]";
+	
+	//"@id[contains(.,'product-key-id')]" paga Galería-Outlet-React -> Cuando suba se podrá unficar con el XPath de Shop
+	final static String XPathArticuloDesktopOutlet = "//li[@class[contains(.,'product-list-item')] or @id[contains(.,'product-key-id')] or @class='product']";
+	
 	final static String XPathArticuloDesktopBuscador = "//div[@class[contains(.,'product-list-item')]]";
 	final static String XPathArticuloMobilOutlet = XPathArticuloDesktopOutlet;
 	final static String XPathArticuloMobilShop = "//li[@class='product']";
@@ -150,10 +167,11 @@ public abstract class PageGaleria extends WebdrvWrapp {
 			"//self::*[not(@class[contains(.,'layout-2-coumns-A2')])]");
 	}
 	
-	final static String XPathPrecioDefinitivoRelativeArticle = 
-		"//span[@class[contains(.,'price')] and " + 
-			"@class[not(contains(.,'line__through'))] and " + 
-			"@class[not(contains(.,'line-through'))]]";
+//	final static String XPathPrecioDefinitivoRelativeArticle = 
+//		"//span[@class[contains(.,'price')] and " + 
+//			"@class[not(contains(.,'line__through'))] and " + 
+//			"@class[not(contains(.,'price-crossed'))] and " +
+//			"@class[not(contains(.,'line-through'))]]"; //Galería Outlet React (cuando suba a PRO se podrá eliminar el line__through?)
 	
 	String getXPathAncestorArticulo() {
 		return (XPathArticulo.replaceFirst("//", "ancestor::"));
@@ -188,12 +206,10 @@ public abstract class PageGaleria extends WebdrvWrapp {
         return listaArticulos;
     }
 	
-    public boolean articlesInOrder(FilterOrdenacion typeOrden) {
+    public boolean articlesInOrder(FilterOrdenacion typeOrden) throws Exception {
         return ("".compareTo(getAnyArticleNotInOrder(typeOrden))==0);
     }
 
-
-    
     public void hoverArticle(WebElement article) {
     	moveToElement(article, driver);
     }
@@ -246,13 +262,13 @@ public abstract class PageGaleria extends WebdrvWrapp {
     /**
      * Indica si los artículos de la galería realmente están ordenados por precio ascendente o descendente
      */
-    public String getAnyArticleNotInOrder(FilterOrdenacion typeOrden) {
+    public String getAnyArticleNotInOrder(FilterOrdenacion typeOrden) throws Exception {
         switch (typeOrden) {
         case NOordenado:
             return "";
         case PrecioAsc:
         case PrecioDesc:
-            return getAnyPrecioNotInOrder(typeOrden);
+            return secPrecios.getAnyPrecioNotInOrder(typeOrden, getListaArticulos());
         case TemporadaDesc:
         case TemporadaAsc:
         case BloqueTemporadas_3y4_despues_la_5:
@@ -262,45 +278,21 @@ public abstract class PageGaleria extends WebdrvWrapp {
             return "";
         }
     }
-    
-    public List<WebElement> getListaPreciosPrendas() {
-    	List<WebElement> listPrecios = new ArrayList<WebElement>();
-    	List<WebElement> listaArticulos = getListaArticulos(); 
-    	for (WebElement articulo : listaArticulos) {
-	        WebElement precio = getElementVisible(articulo, By.xpath("." + XPathPrecioDefinitivoRelativeArticle));
-	        if (precio!=null) {
-	        	listPrecios.add(precio);
-	        }
-    	}
-    	
-    	return listPrecios;
-    }
-    
-    public String getAnyPrecioNotInOrder(FilterOrdenacion typeOrden) {
-        List<WebElement> listaPreciosPrendas = getListaPreciosPrendas();
-        float precioAnt = 0;
-        if (typeOrden==FilterOrdenacion.PrecioDesc) {
-            precioAnt = 9999999;
-        }
 
-        for (WebElement prendaPrecio : listaPreciosPrendas) {
-            String entero = prendaPrecio.getText();
-            float precioActual = Float.valueOf(entero.replace(",",".").replaceAll("[^\\d.]", "")).floatValue();
-            if (typeOrden==FilterOrdenacion.PrecioAsc) {
-                if (precioActual < precioAnt) {
-                    return (precioAnt + "->" + precioActual);
-                }
-            } else {
-                if (precioActual > precioAnt) {
-                    return (precioAnt + "->" + precioActual);
-                }
-            }
+	public boolean preciosInIntervalo(int minimo, int maximo) throws Exception {
+		boolean inInterval = false;
+		for (int i=0; i<3; i++) {
+			try {
+				inInterval = secPrecios.preciosInIntervalo(minimo, maximo, getListaArticulos());
+				break;
+			}
+			catch (StaleElementReferenceException e) {
+				pLogger.info("StaleElementReferenceException checking articles filtered by prize");
+			}
+		}
+		return inInterval;
+}
 
-            precioAnt = precioActual;
-        }
-
-        return "";        
-    }
     
     public String getAnyRefNotInOrderTemporada(FilterOrdenacion typeOrden) {
         ArrayList<String> listaReferencias = getListaReferenciasPrendas();
@@ -339,25 +331,9 @@ public abstract class PageGaleria extends WebdrvWrapp {
             refAnterior = refActual;
         }
 
-        return "";        
-    }    
-    
-    /**
-     * @return si los precios de los artículos están en un determinado intervalo de mínimo/máximo
-     */
-    public boolean preciosInIntervalo(int minimo, int maximo) throws Exception {
-    	waitForPageLoaded(driver);
-        List<WebElement> listaPreciosPrendas = getListaPreciosPrendas();
-        for (WebElement prendaPrecio : listaPreciosPrendas) {
-            String entero = prendaPrecio.getText();
-            float precioActual = Float.valueOf(entero.replace(",",".").replaceAll("[^\\d.]", "")).floatValue();
-            if (precioActual < minimo || precioActual > maximo)
-                return false;
-        }
-        
-        return true;
+        return "";
     }
-    
+
     /**
      * @return la lista de elementos que contienen la referencia del artículo
      */
@@ -391,21 +367,23 @@ public abstract class PageGaleria extends WebdrvWrapp {
     		return (getArticleFromPagina(locationArt.numPage, locationArt.numArticle));
     	}
     }
-    
-    public WebElement getArticulo(int numArticulo) {
-        List<WebElement> listArticulos = getArticulos();
-        if (listArticulos.size()>=numArticulo) {
-        	return (listArticulos.get(numArticulo-1));
-        }
-        return null;
-    }
-    
+
+	public WebElement getArticulo(int numArticulo) {
+		List<WebElement> listArticulos = getArticulos();
+		if (listArticulos.size()>=numArticulo) {
+			return (listArticulos.get(numArticulo-1));
+		}
+		return null;
+	}
+
+	public String getRefFromId(WebElement articulo) {
+		String id = articulo.getAttribute("id");
+		return (id.replace("product-key-id-", ""));
+	}
+
     public String getRefArticulo(WebElement articulo) {
     	int lengthReferencia = 8;
-    	String id = articulo.getAttribute("id");
-    	if (app!=AppEcom.outlet) {
-    		id = id.replace("product-key-id-", "");
-    	}
+    	String id = getRefFromId(articulo);
     	if ("".compareTo(id)!=0) {
 	    	if (id.length()>lengthReferencia) {
 	    		return (id.substring(0, lengthReferencia));
@@ -667,10 +645,16 @@ public abstract class PageGaleria extends WebdrvWrapp {
     public int getNumLastPage() {
     	int maxPagesToReview = 20;
     	int lastPageWatched = 0;
+    	boolean aPageLocatedYet = false;
     	while (lastPageWatched<maxPagesToReview) {
     		int pageToReview = lastPageWatched + 1;
-    		if (!isPresentPagina(pageToReview)) {
-    			return lastPageWatched;
+    		boolean isPresentPage = isPresentPagina(pageToReview);
+    		if (isPresentPage) {
+    			aPageLocatedYet = true;
+    		} else {
+	    		if (aPageLocatedYet) {
+	    			return lastPageWatched;
+	    		}
     		}
     		lastPageWatched=pageToReview;
     	}

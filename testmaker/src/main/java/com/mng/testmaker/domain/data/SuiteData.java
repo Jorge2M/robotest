@@ -1,16 +1,20 @@
 package com.mng.testmaker.domain.data;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.StateExecution;
 import com.mng.testmaker.domain.SuiteTM;
+import com.mng.testmaker.domain.TestRunTM;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
 public class SuiteData {
 
+	private List<TestRunData> listTestRun;
 	private String idExecSuite;
 	private State result;
 	private StateExecution stateExecution;
@@ -27,7 +31,6 @@ public class SuiteData {
 	private String urlBase;
 	private String pathReportHtml;
 	private String urlReportHtml;
-
 	
 	public static SuiteData from(SuiteTM suite) {
 		SuiteData suiteData = new SuiteData();
@@ -49,9 +52,22 @@ public class SuiteData {
 		suiteData.setPathReportHtml(suite.getPathReportHtml());
 		suiteData.setUrlReportHtml(suite.getDnsReportHtml());
 		suiteData.setStateExecution(suite.getStateExecution());
+		
+		List<TestRunData> listTestRun = new ArrayList<>();
+		for (TestRunTM testRun : suite.getListTestRuns()) {
+			listTestRun.add(TestRunData.from(testRun));
+		}
+		suiteData.setListTestRun(listTestRun);
+		
 		return suiteData;
 	}
 	
+	public List<TestRunData> getListTestRun() {
+		return listTestRun;
+	}
+	public void setListTestRun(List<TestRunData> listTestRun) {
+		this.listTestRun = listTestRun;
+	}
 	public String getIdExecSuite() {
 		return idExecSuite;
 	}

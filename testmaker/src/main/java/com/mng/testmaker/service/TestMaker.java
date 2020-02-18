@@ -32,13 +32,7 @@ public class TestMaker {
 	
 	private static RepositoryI repository = new RepositorySQLite(); 
 	
-	public static void run(SuiteTM suite) {
-		run(suite, false);
-	}
-	public static void runAsync(SuiteTM suite) {
-		run(suite, true);
-	}
-	private static void run(SuiteTM suite, boolean async) {
+	public static void run(SuiteTM suite, boolean async) {
 		Log4jConfig.configLog4java(suite.getPathDirectory());
 		File path = new File(suite.getPathDirectory());
 		path.mkdir();
@@ -101,12 +95,8 @@ public class TestMaker {
 		return (repository.getSuite(idExecution));
 	}
 	
-	public static SuiteTM execSuite(CreatorSuiteRun executorSuite) throws Exception {
-		return (executorSuite.execTestSuite());
-	}
-	
-	public static SuiteTM execSuiteAsync(CreatorSuiteRun executorSuite) throws Exception {
-		return executorSuite.execTestSuiteAsync();
+	public static SuiteTM execSuite(CreatorSuiteRun executorSuite, boolean async) throws Exception {
+		return (executorSuite.execTestSuite(async));
 	}
 	
 	public static void stopSuite(String idExecSuite) {

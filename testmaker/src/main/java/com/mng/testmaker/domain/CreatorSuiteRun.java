@@ -30,15 +30,9 @@ public abstract class CreatorSuiteRun {
 		return suiteMaker.getSuite();
 	}
 	
-	public SuiteTM execTestSuite() throws Exception {
+	public SuiteTM execTestSuite(boolean async) throws Exception {
 		SuiteTM suite = suiteMaker.getSuite();
-		TestMaker.run(suite);
-		return suite;
-	}
-
-	public SuiteTM execTestSuiteAsync() throws Exception {
-		SuiteTM suite = suiteMaker.getSuite();
-		TestMaker.runAsync(suite);
+		TestMaker.run(suite, async);
 		return suite;
 	}
 

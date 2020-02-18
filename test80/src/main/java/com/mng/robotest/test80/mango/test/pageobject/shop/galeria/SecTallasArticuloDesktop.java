@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.OutletGalery;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 public class SecTallasArticuloDesktop extends WebdrvWrapp {
@@ -13,6 +14,7 @@ public class SecTallasArticuloDesktop extends WebdrvWrapp {
 	private final AppEcom app;
 	private final WebDriver driver;
 	private final String xpathArticulo;
+	private OutletGalery outputGalery;
 	
 	public SecTallasArticuloDesktop(AppEcom app, String xpathArticulo, WebDriver driver) {
 		this.app = app;
@@ -20,16 +22,31 @@ public class SecTallasArticuloDesktop extends WebdrvWrapp {
 		this.xpathArticulo = xpathArticulo;
 	}
 
-	final String XPathCapaTallasArticuloOutlet = "//div[@class[contains(.,'add-cart')] and @data-stock]";
+	private OutletGalery getOutletGalery() {
+		if (outputGalery==null) {
+			if (app==AppEcom.outlet) {
+				outputGalery = PageGaleriaDesktop.getOutletVersion(driver);
+			} else {
+				outputGalery = OutletGalery.newwithreact;
+			}
+		}
+		return outputGalery;
+	}
+	
+	final String XPathCapaTallasArticuloOutletOld = "//div[@class[contains(.,'add-cart')] and @data-stock]";
+	final String XPathCapaTallasArticuloOutletNew = "//div[@class[contains(.,'sizes__container')]]";
 	final String XPathCapaTallasArticuloShop = "//div[@class[contains(.,'_1BBIV')]]";
 	private String getXPathArticleCapaInferiorDesktop(int posArticulo) {
 		String xpathArticuloX = "(" + xpathArticulo + ")[" + posArticulo + "]";
 		if (app==AppEcom.outlet) {
-			return xpathArticuloX + XPathCapaTallasArticuloOutlet;
+			if (getOutletGalery()==OutletGalery.old) {
+				return xpathArticuloX + XPathCapaTallasArticuloOutletOld;
+			}
+			return xpathArticuloX + XPathCapaTallasArticuloOutletNew;
 		}
 		return xpathArticuloX + XPathCapaTallasArticuloShop;
 	}
-	
+
 	public String getXPathFirstCapaAñadirOutlet(int posArticulo, boolean capaVisible) {
 		String xpathCapaAdd = getXPathArticleCapaInferiorDesktop(posArticulo);
 		String classSegunVisible = "not(@class[contains(.,'active')])";
@@ -57,11 +74,15 @@ public class SecTallasArticuloDesktop extends WebdrvWrapp {
 		return xpathCapaAdd + "//self::div[not(" + classCapaActive + ")]";
 	}
 
-	private final String XPathTallaAvailableOutlet = "//span[@data-id and not(@class[contains(.,'no-stock')])]";
+	private final String XPathTallaAvailableOutletOld = "//span[@data-id and not(@class[contains(.,'no-stock')])]";
+	private final String XPathTallaAvailableOutletNew = "//button[not(@class[contains(.,'no-stock')])]";
 	private final String XPathTallaAvailableShop = "//button[not(@class[contains(.,'mQ11o')])]";
 	private String getXPathTallaAvailable() {
 		if (app==AppEcom.outlet) {
-			return XPathTallaAvailableOutlet;
+			if (getOutletGalery()==OutletGalery.old) {
+				return XPathTallaAvailableOutletOld;
+			}
+			return XPathTallaAvailableOutletNew;
 		}
 		return XPathTallaAvailableShop;
 	}
@@ -70,11 +91,15 @@ public class SecTallasArticuloDesktop extends WebdrvWrapp {
 		return "(" + xpathCapaTallas + getXPathTallaAvailable() + ")[" + posTalla + "]";
 	}
 
-	private final static String XpathTallaNoDisponibleArticuloOutlet = "//span[@data-id and (@class[contains(.,'no-stock')])]";
+	private final static String XpathTallaNoDisponibleArticuloOutletOld = "//span[@data-id and (@class[contains(.,'no-stock')])]";
+	private final static String XpathTallaNoDisponibleArticuloOutletNew = "//button[@class[contains(.,'no-stock')]]";
 	private final static String XpathTallaNoDisponibleArticuloShop = "//button[@class[contains(.,'mQ11o')]]";
 	public String getXPathArticleTallaNotAvailable() {
 		if (app==AppEcom.outlet) {
-			return  XpathTallaNoDisponibleArticuloOutlet;
+			if (getOutletGalery()==OutletGalery.old) {
+				return  XpathTallaNoDisponibleArticuloOutletOld;
+			}
+			return XpathTallaNoDisponibleArticuloOutletNew;
 		}
 		return XpathTallaNoDisponibleArticuloShop;
 	}

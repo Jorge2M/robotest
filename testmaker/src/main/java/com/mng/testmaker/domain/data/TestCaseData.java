@@ -1,6 +1,7 @@
 package com.mng.testmaker.domain.data;
 
 import java.util.Date;
+import java.util.List;
 
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.SuiteTM;
@@ -8,6 +9,7 @@ import com.mng.testmaker.domain.TestCaseTM;
 
 public class TestCaseData {
 
+//	private List<StepData> listStepData;
 	private String idExecSuite;
 	private String suiteName;
     private String testRunName;

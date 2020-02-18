@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.OutletGalery;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 
@@ -18,6 +19,7 @@ public class SecSelectorPrecios extends WebdrvWrapp {
 	
 	private final WebDriver driver;
 	private final AppEcom app;
+	private OutletGalery outputGalery;
 	
 	private static String XPathLineaFiltroOutlet = "//div[@id='priceRange']";
 	private static String XPathImporteMinimoOutlet = XPathLineaFiltroOutlet + "/a/span[@class[contains(.,'amount-value-min')]]";
@@ -38,10 +40,23 @@ public class SecSelectorPrecios extends WebdrvWrapp {
 		this.driver = driver;
 	}
 	
+	private OutletGalery getOutletGalery() {
+		if (outputGalery==null) {
+			if (app==AppEcom.outlet) {
+				outputGalery = PageGaleriaDesktop.getOutletVersion(driver);
+			} else {
+				outputGalery = OutletGalery.newwithreact;
+			}
+		}
+		return outputGalery;
+	}
+	
 	private String getXPathLineaFiltro() {
 		switch (app) {
 		case outlet:
-			return XPathLineaFiltroOutlet;
+			if (getOutletGalery()==OutletGalery.old) {
+				return XPathLineaFiltroOutlet;
+			}
 		default:
 			return XPathLineaFiltroShop;
 		}
@@ -49,7 +64,9 @@ public class SecSelectorPrecios extends WebdrvWrapp {
 	private String getXPathImporteMinimo() {
 		switch (app) {
 		case outlet:
-			return XPathImporteMinimoOutlet;
+			if (getOutletGalery()==OutletGalery.old) {
+				return XPathImporteMinimoOutlet;
+			}
 		default:
 			return XPathImporteMinimoShop;
 		}
@@ -57,7 +74,9 @@ public class SecSelectorPrecios extends WebdrvWrapp {
 	private String getXPathImporteMaximo() {
 		switch (app) {
 		case outlet:
-			return XPathImporteMaximoOutlet;
+			if (getOutletGalery()==OutletGalery.old) {
+				return XPathImporteMaximoOutlet;
+			}
 		default:
 			return XPathImporteMaximoShop;
 		}
@@ -65,7 +84,9 @@ public class SecSelectorPrecios extends WebdrvWrapp {
 	private String getXPathFiltroWrapper() {
 		switch (app) {
 		case outlet:
-			return XPathFiltroWrapperOutlet;
+			if (getOutletGalery()==OutletGalery.old) {
+				return XPathFiltroWrapperOutlet;
+			}
 		default:
 			return XPathFiltroWrapperShop;
 		}
@@ -73,7 +94,9 @@ public class SecSelectorPrecios extends WebdrvWrapp {
 	private String getXPathLeftCorner() {
 		switch (app) {
 		case outlet:
-			return XPathLeftCornerOutlet;
+			if (getOutletGalery()==OutletGalery.old) {
+				return XPathLeftCornerOutlet;
+			}
 		default:
 			return XPathLeftCornerShop;
 		}
@@ -81,7 +104,9 @@ public class SecSelectorPrecios extends WebdrvWrapp {
 	private String getXPathRightCorner() {
 		switch (app) {
 		case outlet:
-			return XPathRightCornerOutlet;
+			if (getOutletGalery()==OutletGalery.old) {
+				return XPathRightCornerOutlet;
+			}
 		default:
 			return XPathRightCornerShop;
 		}
@@ -124,7 +149,8 @@ public class SecSelectorPrecios extends WebdrvWrapp {
 		waitForPageLoaded(driver);
 	}
 
-	public void moveToCornerSelector(TypeClick typeCorner) {
+	public void moveToCornerSelector(TypeClick typeCorner) throws Exception {
+		waitForPageLoaded(driver);
 		moveToElement(By.xpath(getXPathFiltroWrapper()), driver);
 		switch (typeCorner) {
 		case left: 

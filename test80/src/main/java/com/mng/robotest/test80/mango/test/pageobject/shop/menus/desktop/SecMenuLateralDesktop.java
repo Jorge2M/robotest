@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
+import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop;
 
 public class SecMenuLateralDesktop extends WebdrvWrapp {
@@ -14,10 +15,13 @@ public class SecMenuLateralDesktop extends WebdrvWrapp {
 	
 	private static String TagConcatMenus = "[@TAG_CONCAT_MENUS]";
 	
-	private static String XPathLinkMenuWithTagOutlet = 
+	private static String XPathLinkMenuWithTagOutletOld = 
 		"//div[@class[contains(.,'sidebar')]]" + 
 		"//li[@data-ga-label[contains(.,'" + TagConcatMenus + "')]]" +
 		"/a";
+	private static String XPathLinkMenuWithTagOutletNew = 
+		"//li[@class[contains(.,'element')]]" +  
+		"/a[@href[contains(.,'" + TagConcatMenus + "')]]";
 	private static String XPathSelectedRelativeMenuOutlet = 
 		"//self::*[@class[contains(.,'--selected')]]";
 	
@@ -39,12 +43,20 @@ public class SecMenuLateralDesktop extends WebdrvWrapp {
 		String dataGaLabel =  menu.getDataGaLabelMenuLateralDesktop();
 		switch (app) {
 		case outlet:
-			return (XPathLinkMenuWithTagOutlet.replace(TagConcatMenus, dataGaLabel));
+			switch (PageGaleriaDesktop.getOutletVersion(driver)) {
+			case newwithreact:
+				return (XPathLinkMenuWithTagOutletNew
+					.replace(TagConcatMenus, dataGaLabel
+					.replace(":", "-")
+					.replaceFirst("-", "/")));
+			case old:
+				return (XPathLinkMenuWithTagOutletOld.replace(TagConcatMenus, dataGaLabel));
+			}
 		default:
 			return (XPathLinkMenuWithTagShop
 				.replace(TagConcatMenus, dataGaLabel
-							.replace(":", "-")
-							.replaceFirst("-", "/")));
+				.replace(":", "-")
+				.replaceFirst("-", "/")));
 		}
 	}
 	

@@ -29,6 +29,8 @@ public class TipoTransporteEnum {
 		POSTNORD("POSTNORD","O", "Postnord", false, "DRP", false, true, CodigoPostal),
 		/** [Droppoint] Transporte ASM */
 		ASM("ASM","A", "ASM", false, "DRP", false, true, CodigoPostal),
+//		/** [Droppoint] Transporte Chronopost */
+//		CHRONOPOST("CHRONOPOST","C", "CHR", false, "DRP", false, true, CodigoPostal),
 		/** [Droppoint] Transporte Chronopost */
 		CHRONOPOST("CHRONOPOST","C", "CHR", false, "DRP", false, true, CodigoPostal),
 		/** [Droppoint] Transporte Correos */

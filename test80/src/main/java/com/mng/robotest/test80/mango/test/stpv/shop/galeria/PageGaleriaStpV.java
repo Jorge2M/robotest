@@ -266,7 +266,7 @@ public class PageGaleriaStpV {
     @Validation (
     	description="Los artículos aparecen ordenados por #{orderExpected}",
     	level=State.Defect)
-    private boolean checkArticlesOrdered(FilterOrdenacion orderExpected) {
+    private boolean checkArticlesOrdered(FilterOrdenacion orderExpected) throws Exception {
 	    return (pageGaleria.articlesInOrder(orderExpected));
     }
     
@@ -327,7 +327,8 @@ public class PageGaleriaStpV {
     }
     
     @Validation
-    private ChecksResult checkOrderListArticles(FilterOrdenacion typeOrdenacion, int numArticulosPant, int numArticulosValidar) {
+    private ChecksResult checkOrderListArticles(FilterOrdenacion typeOrdenacion, int numArticulosPant, int numArticulosValidar) 
+    throws Exception {
     	ChecksResult validations = ChecksResult.getNew();
       	validations.add(
     		"Aparecen > 1 prendas",
@@ -767,7 +768,8 @@ public class PageGaleriaStpV {
     }
    
 	@Validation
-    private ChecksResult checkArticlesCountryWithSalesOn(Pais pais, LineaType lineaType, bloqueMenu menuType, boolean isGaleriaSale) {
+    private ChecksResult checkArticlesCountryWithSalesOn(Pais pais, LineaType lineaType, bloqueMenu menuType, boolean isGaleriaSale) 
+	throws Exception {
 	   	ChecksResult validations = ChecksResult.getNew();
 	   	
 	    FilterOrdenacion ordenType;

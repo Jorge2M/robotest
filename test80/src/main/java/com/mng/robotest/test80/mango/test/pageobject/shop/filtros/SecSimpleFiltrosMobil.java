@@ -41,9 +41,13 @@ public class SecSimpleFiltrosMobil implements SecFiltros {
 		return (new SecSimpleFiltrosMobil(driver, pageGaleria));
 	}
 	
+	public static boolean isPresent(WebDriver driver) {
+		return WebdrvWrapp.isElementVisible(driver, By.xpath(XPathFiltrarYOrdenarButton));
+	}
+	
     @Override
     public void selectOrdenacion(FilterOrdenacion ordenacion) throws Exception {
-        selectFiltroAndWaitLoad(FiltroMobil.Ordenar, ordenacion.getValueForMobil(), driver);        
+        selectFiltroAndWaitLoad(FiltroMobil.Ordenar, ordenacion.getValueForMobil(), driver);
     }
     
     @Override

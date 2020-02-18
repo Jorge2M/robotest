@@ -60,7 +60,7 @@ public class RestApiTM {
 			ResultCheckOptions resultCheck = cmdLineAccess.checkOptionsValue();
 			if (resultCheck.isOk()) {
 				creatorSuiteRun.setInputParams(inputParams);
-				SuiteTM suite = TestMaker.execSuiteAsync(creatorSuiteRun);
+				SuiteTM suite = TestMaker.execSuite(creatorSuiteRun, inputParams.isAsyncExec());
 				return Response
 						.status(Response.Status.OK) 
 						.entity(SuiteData.from(suite))

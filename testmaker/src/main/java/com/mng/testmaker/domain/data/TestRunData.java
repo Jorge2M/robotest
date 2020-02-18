@@ -1,14 +1,20 @@
 package com.mng.testmaker.domain.data;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import org.testng.ITestContext;
 
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.SuiteTM;
+import com.mng.testmaker.domain.TestCaseTM;
 import com.mng.testmaker.domain.TestRunTM;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
 public class TestRunData {
 
+	private List<TestCaseData> listTestCase;
 	private String idExecSuite;
 	private String suiteName;
 	private String name;
@@ -80,6 +86,12 @@ public class TestRunData {
 	public void setWebDriverType(WebDriverType webDriverType) {
 		this.webDriverType = webDriverType;
 	}
+	public List<TestCaseData> getListTestCase() {
+		return listTestCase;
+	}
+	public void setListTestCase(List<TestCaseData> listTestCase) {
+		this.listTestCase = listTestCase;
+	}
 	
 	public static TestRunData from(TestRunTM testRun) {
 		TestRunData testRunData = new TestRunData();
@@ -94,10 +106,15 @@ public class TestRunData {
 			testRunData.setDevice("");
 		}
 		
-		Date inicio = testRun.getTestNgContext().getStartDate();
-		Date fin = testRun.getTestNgContext().getEndDate();
-		if (fin==null) {
-			fin = new Date();
+		Date inicio = new Date();
+		Date fin = new Date();
+		ITestContext ctxTestRun = testRun.getTestNgContext();
+		if (ctxTestRun!=null) {
+			inicio = testRun.getTestNgContext().getStartDate();
+			Date endDate = testRun.getTestNgContext().getEndDate();
+			if (endDate!=null) {
+				fin = endDate;
+			}
 		}
 		testRunData.setInicioDate(inicio);
 		testRunData.setFinDate(fin);
@@ -106,6 +123,12 @@ public class TestRunData {
 		}
 		testRunData.setNumberTestCases(testRun.getNumTestCases());
 		testRunData.setWebDriverType(suite.getInputParams().getWebDriverType());
+		
+		List<TestCaseData> listTestCase = new ArrayList<>();
+		for (TestCaseTM testCase : testRun.getListTestCases()) {
+			listTestCase.add(TestCaseData.from(testCase));
+		}
+		testRunData.setListTestCase(listTestCase);
 		
 		return testRunData;
 	}

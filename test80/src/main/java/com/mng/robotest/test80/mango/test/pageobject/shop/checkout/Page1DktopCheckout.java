@@ -489,7 +489,7 @@ public class Page1DktopCheckout extends WebdrvWrapp {
         	if (precio!=0) {
 	        	precios.ultimaRebaja = precio;
 	        	if (precios.original==0 || precios.original==precios.definitivo) {
-	        		precios.original = getFloatFromImporteScreen(precioSiTachado) / 2;
+	        		precios.original = getFloatFromImporteScreen(precioSiTachado) / cantidad;
 	        	}
         	}
         }
