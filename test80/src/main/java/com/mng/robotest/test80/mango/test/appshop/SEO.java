@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
 import com.mng.robotest.test80.mango.test.stpv.otras.BrowserStpV;
-import com.mng.testmaker.domain.TestCaseTM;
+import com.mng.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.testmaker.service.TestMaker;
 
 

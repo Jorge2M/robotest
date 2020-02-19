@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
@@ -34,8 +34,8 @@ public class PageHomeMarcasStpV {
     }
     
     @Validation
-    public static ChecksResult validateIsPageOk(Pais pais, AppEcom app, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPageOk(Pais pais, AppEcom app, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
     	if (app!=AppEcom.outlet) {
 			validations.add(
 				"Aparece la home de marcas/multimarcas según el país",
@@ -48,8 +48,8 @@ public class PageHomeMarcasStpV {
     }
         
     @Validation
-    public static ChecksResult checkMsgNewsletterFooter(boolean salesOnInCountry, IdiomaPais idioma, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM checkMsgNewsletterFooter(boolean salesOnInCountry, IdiomaPais idioma, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
     	String percentageSymbol = UtilsTestMango.getPercentageSymbol(idioma);
     	boolean isMsgWithPercentageSimbol = SecFooter.getNewsLetterMsgText(driver).contains(percentageSymbol);
     	if (salesOnInCountry) {

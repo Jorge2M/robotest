@@ -2,15 +2,15 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageMispedidos;
 import org.openqa.selenium.WebDriver;
 
 public class PagePedidosStpV {
 
     @Validation
-    public static ChecksResult validaIsPageSinPedidos (String usrRegistrado, WebDriver driver) {
-        ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validaIsPageSinPedidos (String usrRegistrado, WebDriver driver) {
+        ChecksTM validations = ChecksTM.getNew();
         validations.add(
             "Aparece la página de \"Mis Pedidos\"",
             PageMispedidos.isPage(driver), State.Defect);

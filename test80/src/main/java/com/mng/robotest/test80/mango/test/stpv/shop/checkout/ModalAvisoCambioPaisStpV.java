@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.ModalAvisoCambioPais;
@@ -24,8 +24,8 @@ public class ModalAvisoCambioPaisStpV {
     }
 	
 	@Validation
-	private static ChecksResult checkConfirmacionCambio(Pais paisEnvio, WebDriver driver) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkConfirmacionCambio(Pais paisEnvio, WebDriver driver) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
 	    int maxSecondsWait = 10;
 	 	validations.add(
 			"Desaparece el modal de aviso de cambio de país (lo esperamos hasta " + maxSecondsWait + " segundos)",

@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -58,8 +58,8 @@ public class SecBuscadorStpV {
 	}
 
 	@Validation
-	private static ChecksResult appearsProductsOfCategoria(String categoriaABuscar, PageGaleria pageGaleria) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM appearsProductsOfCategoria(String categoriaABuscar, PageGaleria pageGaleria) {
+		ChecksTM validations = ChecksTM.getNew();
 		int maxSecondsWait = 3;
 		String producSin1erCaracter = categoriaABuscar.substring(1, categoriaABuscar.length()-1).toLowerCase();
 		validations.add(

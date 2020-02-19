@@ -3,11 +3,11 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorCheques.ButtonsCheque;
@@ -37,8 +37,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ChecksResult validateInitData(int numPedidos, String mail, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	public static ChecksTM validateInitData(int numPedidos, String mail, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 		validations.add(
 			"Aparecen más de \"" + numPedidos + "\" pedidos",
 			PageGestorCheques.comprobarNumeroPedidos(numPedidos, driver), State.Defect);
@@ -60,8 +60,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ChecksResult validateDetailsCheques(String pedido, String mail, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	public static ChecksTM validateDetailsCheques(String pedido, String mail, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 		validations.add(
 			"Aparece la página de" + PageGestorCheques.tituloDetalles,
 			PageGestorCheques.isPageDetalles(driver), State.Defect);
@@ -83,8 +83,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ChecksResult validateButtons(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	public static ChecksTM validateButtons(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 			"Existe el botón de <b>Id del pedido</b>",
@@ -105,8 +105,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ChecksResult validateSecondDataCheque(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	public static ChecksTM validateSecondDataCheque(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 			"En la tabla activo existe un apartado para <b>ACTIVO</b>",
@@ -125,8 +125,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ChecksResult validateThirdDataCheque(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	public static ChecksTM validateThirdDataCheque(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 			"En la tabla divisa existe un apartado para <b>DIVISA</b>",
@@ -147,8 +147,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ChecksResult validatePedidosData(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	public static ChecksTM validatePedidosData(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Id</b>",
@@ -169,8 +169,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ChecksResult validateButtonsDataCheque(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	public static ChecksTM validateButtonsDataCheque(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 			"Existe el boton para <b>Modificar</b>",
@@ -233,8 +233,8 @@ public class PageGestorChequesStpV {
 	}
 
 	@Validation
-	public static ChecksResult validateInitDataCheque( WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	public static ChecksTM validateInitDataCheque( WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 			"Existe la tabla que contiene <b>Activo</b>",

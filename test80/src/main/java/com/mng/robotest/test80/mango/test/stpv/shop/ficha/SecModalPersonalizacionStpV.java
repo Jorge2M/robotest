@@ -6,7 +6,7 @@ import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateEle
 import com.mng.testmaker.service.webdriver.wrapper.TypeOfClick;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.PageFicha;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion;
@@ -98,8 +98,8 @@ public class SecModalPersonalizacionStpV {
 	}
 
 	@Validation
-	public ChecksResult validateIconSelectedDesktop() {
-		ChecksResult validations = ChecksResult.getNew();
+	public ChecksTM validateIconSelectedDesktop() {
+		ChecksTM validations = ChecksTM.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 			"Aparece seleccionado el primer icono",
@@ -118,8 +118,8 @@ public class SecModalPersonalizacionStpV {
 	}
 
 	@Validation
-	public ChecksResult validateWhereDesktop() {
-		ChecksResult validations = ChecksResult.getNew();
+	public ChecksTM validateWhereDesktop() {
+		ChecksTM validations = ChecksTM.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 			"Aparecen las opciones correspondientes a la ubicación del bordado",
@@ -131,8 +131,8 @@ public class SecModalPersonalizacionStpV {
 	}
 
 	@Validation
-	public ChecksResult validateSelectionColor() {
-		ChecksResult validations = ChecksResult.getNew();
+	public ChecksTM validateSelectionColor() {
+		ChecksTM validations = ChecksTM.getNew();
 		int maxSecondsWait = 3;
 		validations.add(
 			"Aparecen los botones correspondientes a los colores",

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.data.TestCaseData;
+import com.mng.testmaker.domain.suitetree.TestCaseBean;
 
 
 public class TestCasesDAO {
@@ -55,8 +55,8 @@ public class TestCasesDAO {
     	this.connector = connector;
     }
     
-    public List<TestCaseData> getListTestCases(String idSuite) throws Exception {
-    	List<TestCaseData> listTestCases = new ArrayList<>();
+    public List<TestCaseBean> getListTestCases(String idSuite) throws Exception {
+    	List<TestCaseBean> listTestCases = new ArrayList<>();
         try (Connection conn = connector.getConnection();
             PreparedStatement select = conn.prepareStatement(SQLSelectTestCasesSuite)) {
             select.setString(1, idSuite);
@@ -75,8 +75,8 @@ public class TestCasesDAO {
         }
     }    
     
-    private TestCaseData getTestCase(ResultSet rowTestRun) throws Exception {
-    	TestCaseData testCaseData = new TestCaseData();
+    private TestCaseBean getTestCase(ResultSet rowTestRun) throws Exception {
+    	TestCaseBean testCaseData = new TestCaseBean();
     	
     	testCaseData.setIdExecSuite(rowTestRun.getString("IDEXECSUITE"));
     	testCaseData.setSuiteName(rowTestRun.getString("SUITE")); 
@@ -98,7 +98,7 @@ public class TestCasesDAO {
     }
 
     
-    public void insertTestCase(TestCaseData testCase) {
+    public void insertTestCase(TestCaseBean testCase) {
         try (Connection conn = connector.getConnection()) {
             try (PreparedStatement insert = conn.prepareStatement(SQLInsertMethod)) {
             	insert.setString(1, testCase.getIdExecSuite());

@@ -4,12 +4,12 @@ import java.util.EnumSet;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Descuento;
 import com.mng.robotest.test80.mango.test.data.Descuento.DiscountType;
@@ -24,8 +24,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutW
 public class Page1DktopCheckoutStpV {
     
 	@Validation
-    public static ChecksResult validateIsPageOK(DataBag dataBag, WebDriver driver) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPageOK(DataBag dataBag, WebDriver driver) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 5;
         boolean isPageInitCheckout = Page1DktopCheckout.isPageUntil(maxSecondsWait, driver);
 	 	validations.add(
@@ -44,8 +44,8 @@ public class Page1DktopCheckoutStpV {
     }
     
 	@Validation
-    public static ChecksResult validateIsVersionChequeRegalo(ChequeRegalo chequeRegalo, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsVersionChequeRegalo(ChequeRegalo chequeRegalo, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 5;
     	validations.add(
     		"Aparece la página inicial del Checkout (la esperamos un máximo de " + maxSecondsWait + " segundos)<br>",
@@ -62,9 +62,9 @@ public class Page1DktopCheckoutStpV {
     }
     
 	@Validation
-    public static ChecksResult validaResultImputPromoEmpl(DataBag dataBag, AppEcom app, WebDriver driver) 
+    public static ChecksTM validaResultImputPromoEmpl(DataBag dataBag, AppEcom app, WebDriver driver) 
     throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 5;
 	 	validations.add(
 			"Aparece el descuento total aplicado al empleado (lo experamos hasta " + maxSecondsWait + " segundos)",
@@ -114,8 +114,8 @@ public class Page1DktopCheckoutStpV {
     }
 	
 	@Validation
-	private static ChecksResult checkAfterInputDiscountVale(ValePais valePais, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterInputDiscountVale(ValePais valePais, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 1;
         boolean isVisibleError = Page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(maxSecondsWait, driver);
         if (valePais.isValid()) {
@@ -132,9 +132,9 @@ public class Page1DktopCheckoutStpV {
 	}
 	
 	@Validation
-	private static ChecksResult checkValeDiscountIsCorrect(ValePais valePais, DataBag dataBag, AppEcom app, WebDriver driver) 
+	private static ChecksTM checkValeDiscountIsCorrect(ValePais valePais, DataBag dataBag, AppEcom app, WebDriver driver) 
 	throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    	ChecksTM validations = ChecksTM.getNew();
     	Descuento descuento = new Descuento(valePais.getPorcDescuento(), app);
 	 	validations.add(
 			"En los artículos a los que aplica, el descuento es de " +  
@@ -169,8 +169,8 @@ public class Page1DktopCheckoutStpV {
     }
     
     @Validation
-    private static ChecksResult checkAfterInputCodigoVendedor(String codigoVendedor, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    private static ChecksTM checkAfterInputCodigoVendedor(String codigoVendedor, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Desaparece el campo de Input del código de vendedor",
 			!Page1DktopCheckout.isVisibleInputVendedorVOTF(driver), State.Defect);

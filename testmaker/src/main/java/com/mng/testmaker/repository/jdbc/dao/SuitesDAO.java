@@ -12,7 +12,7 @@ import java.util.List;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.StateExecution;
-import com.mng.testmaker.domain.data.SuiteData;
+import com.mng.testmaker.domain.suitetree.SuiteBean;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
 
@@ -66,8 +66,8 @@ public class SuitesDAO {
 		this.connector = connector;
 	}
 
-	public List<SuiteData> getListSuitesIdDesc() throws Exception {
-		List<SuiteData> listSuites = new ArrayList<>();
+	public List<SuiteBean> getListSuitesIdDesc() throws Exception {
+		List<SuiteBean> listSuites = new ArrayList<>();
 		try (Connection conn = connector.getConnection();
 			PreparedStatement select = conn.prepareStatement(SQLSelectSuitesIdDesc)) {
 			try (ResultSet resultado = select.executeQuery()) {
@@ -85,8 +85,8 @@ public class SuitesDAO {
 		}
 	}
 
-	public SuiteData getSuite(String suiteExecId) throws Exception {
-		SuiteData suiteData = null;
+	public SuiteBean getSuite(String suiteExecId) throws Exception {
+		SuiteBean suiteData = null;
 		try (Connection conn = connector.getConnection()) {
 			try (PreparedStatement select = conn.prepareStatement(SQLSelectSuite)) {
 				select.setString(1, suiteExecId);
@@ -105,8 +105,8 @@ public class SuitesDAO {
 		return suiteData;
 	}
 
-	private SuiteData getSuite(ResultSet rowSuite) throws Exception {
-		SuiteData suiteData = new SuiteData();
+	private SuiteBean getSuite(ResultSet rowSuite) throws Exception {
+		SuiteBean suiteData = new SuiteBean();
 		suiteData.setIdExecSuite(rowSuite.getString("IDEXECSUITE"));
 		suiteData.setName(rowSuite.getString("SUITE"));
 		suiteData.setVersion(rowSuite.getString("VERSION"));
@@ -132,7 +132,7 @@ public class SuitesDAO {
 		return suiteData;
 	}
 
-	public void insertOrReplaceSuite(SuiteData suiteData) {
+	public void insertOrReplaceSuite(SuiteBean suiteData) {
 		try (Connection conn = connector.getConnection()) {
 			try (PreparedStatement insert = conn.prepareStatement(SQLInsertOrReplaceSuite)) {
 				insert.setString(1, suiteData.getIdExecSuite());
@@ -168,8 +168,8 @@ public class SuitesDAO {
 		}
 	}
 
-	public SuiteData get1rstSuiteBefore(Date fechaHasta) throws Exception {
-		for (SuiteData suite : getListSuitesIdDesc()) {
+	public SuiteBean get1rstSuiteBefore(Date fechaHasta) throws Exception {
+		for (SuiteBean suite : getListSuitesIdDesc()) {
 			if (suite.getInicioDate().before(fechaHasta)) {
 				return suite;
 			}
@@ -177,9 +177,9 @@ public class SuitesDAO {
 		return null;
 	}
 
-	public SuiteData get1rstSuiteAfter(Date fechaDesde) throws Exception {
-		SuiteData suiteToReturn = null;
-		for (SuiteData suite : getListSuitesIdDesc()) {
+	public SuiteBean get1rstSuiteAfter(Date fechaDesde) throws Exception {
+		SuiteBean suiteToReturn = null;
+		for (SuiteBean suite : getListSuitesIdDesc()) {
 			if (suite.getInicioDate().after(fechaDesde)) {
 				suiteToReturn = suite;
 			} else {
@@ -189,9 +189,9 @@ public class SuitesDAO {
 		return suiteToReturn;
 	}
 
-	public List<SuiteData> getListSuitesAfter(Date fechaDesde) throws Exception {
-		List<SuiteData> listSuites = new ArrayList<>();
-		SuiteData suite = get1rstSuiteAfter(fechaDesde);
+	public List<SuiteBean> getListSuitesAfter(Date fechaDesde) throws Exception {
+		List<SuiteBean> listSuites = new ArrayList<>();
+		SuiteBean suite = get1rstSuiteAfter(fechaDesde);
 		if (suite!=null) {
 			try (Connection conn = connector.getConnection();
 				PreparedStatement select = conn.prepareStatement(SQLSelectSuitesFromId)) {

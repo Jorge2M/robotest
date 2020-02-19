@@ -3,17 +3,17 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.tmango;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.PageAmexResult;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class PageAmexResultStpV {
 
 	@Validation
-    public static ChecksResult validateIsPageOk(String importeTotal, String codigoPais, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPageOk(String importeTotal, String codigoPais, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
     	int maxSecondsWait = 2;
 	 	validations.add(
 			"Aparece una página con un mensaje de OK (lo esperamos hasta " + maxSecondsWait + " segundos)",

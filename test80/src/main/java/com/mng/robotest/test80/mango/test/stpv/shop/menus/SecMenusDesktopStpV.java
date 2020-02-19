@@ -9,12 +9,12 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -177,8 +177,8 @@ public class SecMenusDesktopStpV {
     }
       
 	@Validation
-	private ChecksResult checkVisibility2onLevelMenus(List<Menu2onLevel> menus2onLevel) throws Exception {
-		ChecksResult validations = ChecksResult.getNew();
+	private ChecksTM checkVisibility2onLevelMenus(List<Menu2onLevel> menus2onLevel) throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
 		for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
 			validations.add(
 				"Aparece el menú de 2o nivel <b>" + menu2oNivelTmp.getNombre() + "</b>",
@@ -188,8 +188,8 @@ public class SecMenusDesktopStpV {
 	}
     
     @Validation
-    private ChecksResult checkArticlesContainsLiterals(String[] textsArticlesGalery) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    private ChecksTM checkArticlesContainsLiterals(String[] textsArticlesGalery) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
     	
     	String litsToContain = "";
         for (int i=0; i<textsArticlesGalery.length; i++) {
@@ -265,8 +265,8 @@ public class SecMenusDesktopStpV {
     }
     
     @Validation
-    private ChecksResult checkCarruselsAfterHoverLinea(Linea linea) {
-    	ChecksResult validations = ChecksResult.getNew();
+    private ChecksTM checkCarruselsAfterHoverLinea(Linea linea) {
+    	ChecksTM validations = ChecksTM.getNew();
 	    int maxSecondsWait = 1;
       	validations.add(
     		"Aparece el bloque de menús de la línea " + linea.getType() + " (lo esperamos hasta " + maxSecondsWait + " segundos)",
@@ -293,8 +293,8 @@ public class SecMenusDesktopStpV {
     }
     
     @Validation
-    private ChecksResult checkAfterSelectCarrusel(Linea linea, String idCarrusel) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    private ChecksTM checkAfterSelectCarrusel(Linea linea, String idCarrusel) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
     	LineaType lineaType = linea.getType();
 	    PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
 
@@ -394,10 +394,10 @@ public class SecMenusDesktopStpV {
     }    
     
     @Validation
-    private ChecksResult checkNumPestanyasYmenusEqualsInBothNodes(
+    private ChecksTM checkNumPestanyasYmenusEqualsInBothNodes(
     		int numPestanyas, int numMenus, LineaType lineaType, SublineaNinosType sublineaType, String inodo, String urlBase) {
     	
-    	ChecksResult validations = ChecksResult.getNew();
+    	ChecksTM validations = ChecksTM.getNew();
         String clave = lineaType.name();
         if (sublineaType!=null) {
             clave+=sublineaType.name();
@@ -534,8 +534,8 @@ public class SecMenusDesktopStpV {
     }
     
     @Validation
-    private ChecksResult checkSizeDivImages() throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    private ChecksTM checkSizeDivImages() throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
 		int numPage = 1; 
 		double marginPercError = 2;
@@ -563,8 +563,8 @@ public class SecMenusDesktopStpV {
     }
     
     @Validation
-    private ChecksResult checkResultDependingMenuGroup(MenuLateralDesktop menu) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    private ChecksTM checkResultDependingMenuGroup(MenuLateralDesktop menu) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
     	GroupMenu groupMenu = menu.getGroup();
     	List<Element> elemsCanBeContained = groupMenu.getElementsCanBeContained();
     	boolean contentPageOk = PageLanding.isSomeElementVisibleInPage(elemsCanBeContained, app, driver);
@@ -595,8 +595,8 @@ public class SecMenusDesktopStpV {
 	 	return validations;
     }    
 
-    public ChecksResult checkErrorPageWithoutException() throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM checkErrorPageWithoutException() throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
     	ITestContext ctx = TestMaker.getTestCase().getTestRunParent().getTestNgContext();
 	    stackTrace exception = WebDriverMngUtils.stackTaceException(driver, ctx);
 	    String excepcionDuplicada = "";
@@ -612,8 +612,8 @@ public class SecMenusDesktopStpV {
     
 	//Temporal para prueba fin rebajas en China
     @Validation
-    public ChecksResult validationsSpecificEndRebajasChina() throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validationsSpecificEndRebajasChina() throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
     	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
       	List<Integer> tempSale = FilterCollection.sale.getListTempArticles();
       	List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFrom, tempSale);
@@ -643,8 +643,8 @@ public class SecMenusDesktopStpV {
     }
     
     @Validation
-    private ChecksResult checkNoArticlesRebajadosWithLabelIncorrect() throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    private ChecksTM checkNoArticlesRebajadosWithLabelIncorrect() throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
     	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
     	List<LabelArticle> listLabelsWrong = PageGaleria.listLabelsNew;
     	List<Integer> tempSales = FilterCollection.sale.getListTempArticles();
@@ -671,8 +671,8 @@ public class SecMenusDesktopStpV {
     }
     
     @Validation
-    private ChecksResult checkNoArticlesTemporadaOldWithLabelsWrong() throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    private ChecksTM checkNoArticlesTemporadaOldWithLabelsWrong() throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
     	
     	Integer temporadaOldOld = FilterCollection.sale.getListTempArticles().get(0);
         ArrayList<Integer> temporadaOldOldList = new ArrayList<Integer>(Arrays.asList(temporadaOldOld));  
@@ -699,8 +699,8 @@ public class SecMenusDesktopStpV {
     }
     	
     @Validation
-    private ChecksResult checkNoArticlesTemporadaNewWithLabelsWrong() throws Exception {
-		ChecksResult validations = ChecksResult.getNew();
+    private ChecksTM checkNoArticlesTemporadaNewWithLabelsWrong() throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
 		
         List<Integer> temporadaNew = FilterCollection.nextSeason.getListTempArticles();
         PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);

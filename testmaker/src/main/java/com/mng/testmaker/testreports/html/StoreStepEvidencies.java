@@ -6,24 +6,43 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.StepTM;
-import com.mng.testmaker.domain.StepTM.StepEvidence;
+import com.mng.testmaker.domain.suitetree.StepTM;
+import com.mng.testmaker.domain.suitetree.StepEvidence;
+import com.mng.testmaker.domain.suitetree.SuiteTM;
+import com.mng.testmaker.domain.suitetree.TestCaseTM;
+import com.mng.testmaker.domain.suitetree.TestRunTM;
 import com.mng.testmaker.service.webdriver.utils.WebUtils;
 
 public class StoreStepEvidencies {
 	
-    public static String prefixEvidenciaStep = "Step-";
+	private final StepTM step;
+	private final TestRunTM testRunParent;
+	private final TestCaseTM testCaseParent;
+	private final String outputDirectorySuite;
+	private final WebDriver driver;
+	private final StorerErrorStep storerError;
+	
+	public static String prefixEvidenciaStep = "Step-";
 
-    private static boolean isNecessariStorage(StepTM step) {
+	public StoreStepEvidencies(StepTM step) {
+		this.step = step;
+		this.testCaseParent = step.getTestCaseParent();
+		this.testRunParent = testCaseParent.getTestRunParent();
+		this.storerError = testRunParent.getStorerErrorStep();
+		this.outputDirectorySuite = testRunParent.getTestNgContext().getOutputDirectory();
+		this.driver = testCaseParent.getDriver();
+	}
+
+    private boolean isNecessariStorage() {
     	for (StepEvidence evidence : StepEvidence.values()) {
-    		if (isNecessaryStorage(evidence, step)) {
+    		if (isNecessaryStorage(evidence)) {
     			return true;
     		}
     	}
     	return false;
     }
     
-    private static boolean isNecessaryStorage(StepEvidence evidencia, StepTM step) {
+    private boolean isNecessaryStorage(StepEvidence evidencia) {
         SaveWhen saveEvidenceWhen = step.getWhenSave(evidencia);
         switch (saveEvidenceWhen) {
         case Always:
@@ -38,80 +57,79 @@ public class StoreStepEvidencies {
         }
         return false;
     }
-     
-    public static void storeStepEvidencies(StepTM step) {
-    	if (isNecessariStorage(step)) {
-	        createPathForEvidencesStore(step);
-	        if (isNecessaryStorage(StepEvidence.har, step)) {
-	        	storeNetTraffic(step);
-	        }
-	        if (isNecessaryStorage(StepEvidence.imagen, step)) {
-	        	storeHardcopy(step);
-	        }
-	        if (isNecessaryStorage(StepEvidence.errorpage, step)) {
-	        	storeErrorPage(step);
-	        }
-	        if (isNecessaryStorage(StepEvidence.html, step)) {
-	        	storeHTML(step);
-	        }
-    	}
-    }
-    
-    private static void createPathForEvidencesStore(StepTM step) {
-    	String suitePath = step.getSuiteParent().getPathDirectory();
-        String pathEvidencias = 
-        	suitePath + File.separator + 
-        	step.getTestRunParent().getName() + File.separator +
-        	step.getTestCaseParent().getNameUnique();
-        
-        File directorio = new File(pathEvidencias);
-        if (!directorio.exists()) {
-        	directorio.mkdirs();
-        }
-    }
-    
-    private static void storeHardcopy(StepTM step) {
-        String nombreImagen = getPathFileEvidenciaStep(step, StepEvidence.imagen);
-    	//if (!new File(nombreImagen).exists()) {
-	        try {
-	            WebDriver driver = step.getTestCaseParent().getDriver();
-	            WebUtils.captureEntirePageMultipleBrowsers(driver, nombreImagen);
-	        } 
-	        catch (Exception e) {
-	        	Log4jConfig.pLogger.warn("Problema grabando imagen", e);
-	        }
-    	//}
-    }
-    
-    private static void storeErrorPage(StepTM step) {
-        String fileError = getPathFileEvidenciaStep(step, StepEvidence.errorpage);
-        if (!new File(fileError).exists()) {
-	    	StorerErrorStep storerError = step.getTestRunParent().getStorerErrorStep();
-	    	if (storerError!=null) {
-		    	try {
-		    		storerError.store(step);
+
+	public void storeStepEvidencies() {
+		if (isNecessariStorage()) {
+			createPathForEvidencesStore();
+			if (isNecessaryStorage(StepEvidence.har)) {
+				storeNetTraffic();
+			}
+			if (isNecessaryStorage(StepEvidence.imagen)) {
+				storeHardcopy();
+			}
+			if (isNecessaryStorage(StepEvidence.errorpage)) {
+				storeErrorPage();
+			}
+			if (isNecessaryStorage(StepEvidence.html)) {
+				storeHTML();
+			}
+		}
+	}
+
+	private void createPathForEvidencesStore() {
+		String suitePath = SuiteTM.getPathDirectory(
+				step.getSuiteParent().getName(), 
+				step.getSuiteParent().getIdExecution());
+		
+		String pathEvidencias = 
+			suitePath + File.separator + 
+			step.getTestRunParent().getName() + File.separator +
+			step.getTestCaseParent().getNameUnique();
+
+		File directorio = new File(pathEvidencias);
+		if (!directorio.exists()) {
+			directorio.mkdirs();
+		}
+	}
+
+	private void storeHardcopy() {
+		String nombreImagen = getPathFileEvidenciaStep(StepEvidence.imagen);
+		try {
+			WebUtils.captureEntirePageMultipleBrowsers(driver, nombreImagen);
+		} 
+		catch (Exception e) {
+			Log4jConfig.pLogger.warn("Problema grabando imagen", e);
+		}
+	}
+
+	private void storeErrorPage() {
+		String fileError = getPathFileEvidenciaStep(StepEvidence.errorpage);
+		if (!new File(fileError).exists()) {
+			if (storerError!=null) {
+				try {
+					storerError.store(step);
 				}
-			    catch (Exception e) {
-		            Log4jConfig.pLogger.warn("Problema grabando ErrorPage", e);
-		        }
-	    	}
-        }
-    }
+				catch (Exception e) {
+					Log4jConfig.pLogger.warn("Problema grabando ErrorPage", e);
+				}
+			}
+		}
+	}
+
+	private void storeHTML() {
+		String nombreImagen = getPathFileEvidenciaStep(StepEvidence.html);
+		if (!new File(nombreImagen).exists()) {
+			try {
+				WebUtils.capturaHTMLPage(step);
+			}
+			catch (Exception e) {
+				Log4jConfig.pLogger.warn("Problema grabando HTML", e);
+			}
+		}
+	}
     
-    private static void storeHTML(StepTM step) {
-        String nombreImagen = getPathFileEvidenciaStep(step, StepEvidence.html);
-	        if (!new File(nombreImagen).exists()) {
-	        try {
-	        	WebUtils.capturaHTMLPage(step);
-	        }
-	        catch (Exception e) {
-	            Log4jConfig.pLogger.warn("Problema grabando HTML", e);
-	        }
-        }
-    }
-    
-    private static void storeNetTraffic(StepTM step) {
-    	String nameFileHar = getPathFileEvidenciaStep(step, StepEvidence.har);
+    private void storeNetTraffic() {
+    	String nameFileHar = getPathFileEvidenciaStep(StepEvidence.har);
     	if (!new File(nameFileHar).exists()) {
 		    try {
 	        	NetTrafficSaver netTraffic = new NetTrafficSaver();
@@ -125,28 +143,25 @@ public class StoreStepEvidencies {
     	}
     }
 
-    
-    public static String getPathFolderEvidenciasStep(String outputDirectorySuite, String testRun, String methodWithFactory) {
-        return (outputDirectorySuite + File.separator + testRun + File.separator + methodWithFactory);
-    }
+	public String getPathFolderEvidenciasStep() {
+		return (
+			outputDirectorySuite + File.separator + 
+			step.getTestRunParent().getName() + File.separator + 
+			testCaseParent.getNameUnique());
+	}
 
-    public static String getNameFileEvidenciaStep(int stepNumber, StepEvidence evidence) {
-        String extension = "." + evidence.fileExtension;
-        return (prefixEvidenciaStep + Integer.toString(stepNumber) + extension);
-    }
+	public String getNameFileEvidenciaStep(StepEvidence evidence) {
+		String extension = "." + evidence.fileExtension;
+		return (prefixEvidenciaStep + Integer.toString(step.getNumber()) + extension);
+	}
 
-    public static String getPathFileEvidenciaStep(StepTM step, StepEvidence evidence) {
-    	String outputDirectory = step.getTestRunParent().getTestNgContext().getOutputDirectory();
-    	return (getPathFileEvidenciaStep(outputDirectory, step, evidence));
-    }
-    
-    public static String getPathFileEvidenciaStep(String outputDirectory, StepTM step, StepEvidence evidence) {
-        int stepNumber = step.getPositionInTestCase();
-        String testCaseNameUnique = step.getTestCaseParent().getNameUnique();
-        String testRunName = step.getTestCaseParent().getTestRunParent().getName();
-        
-        String fileName = getNameFileEvidenciaStep(stepNumber, evidence);
-        return (getPathFolderEvidenciasStep(outputDirectory, testRunName, testCaseNameUnique) + File.separator + fileName);
-    }
+//    public static String getPathFileEvidenciaStep(StepBean step, StepEvidence evidence) {
+//    	String outputDirectory = step.getTestRunParent().getTestNgContext().getOutputDirectory();
+//    	return (getPathFileEvidenciaStep(outputDirectory, step, evidence));
+//    }
 
+	public String getPathFileEvidenciaStep(StepEvidence evidence) {
+		String fileName = getNameFileEvidenciaStep(evidence);
+		return (getPathFolderEvidenciasStep() + File.separator + fileName);
+	}
 }

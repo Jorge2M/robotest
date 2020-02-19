@@ -11,8 +11,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.testmaker.domain.InputParamsTM;
-import com.mng.testmaker.domain.StepTM;
-import com.mng.testmaker.domain.StepTM.StepEvidence;
+import com.mng.testmaker.domain.suitetree.StepTM;
+import com.mng.testmaker.domain.suitetree.StepEvidence;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.testmaker.testreports.html.StoreStepEvidencies;
@@ -37,7 +37,8 @@ public class StorerErrorDataStepValidationMango implements StorerErrorStep {
         	WebDriver driver = TestMaker.getDriverTestCase();
             String windowHandle = loadErrorPage(driver);
             try {
-                String nombreErrorFile = StoreStepEvidencies.getPathFileEvidenciaStep(step, StepEvidence.errorpage);
+            	StoreStepEvidencies storer = new StoreStepEvidencies(step);
+                String nombreErrorFile = storer.getPathFileEvidenciaStep(StepEvidence.errorpage);
                 File errorImage = new File(nombreErrorFile);
                 try (FileWriter fw = new FileWriter(errorImage)) {
                     fw.write(driver.getPageSource());

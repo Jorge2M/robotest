@@ -11,13 +11,12 @@ response.setDateHeader ("Expires", -1);%>
 <%@ page import="com.mng.testmaker.domain.RepositoryI"%>
 <%@ page import="com.mng.testmaker.conf.defaultstorer.RepositorySQLite"%>
 <%@ page import="com.mng.testmaker.repository.jdbc.dao.SuitesDAO"%>
-<%@ page import="com.mng.testmaker.domain.data.SuiteData"%>
+<%@ page import="com.mng.testmaker.domain.suitetree.SuiteBean"%>
 
 <%
-String idExecSuite = request.getParameter("idExecSuite");
+	String idExecSuite = request.getParameter("idExecSuite");
 String suiteName = request.getParameter("suite");
 String channel = request.getParameter("channel");
-
 %>
 
 <html>
@@ -60,9 +59,9 @@ table#tablaScripts td.nombreTestSuite {
 <tbody>
 
 <%
-List<SuiteData> listSuitesToDisplay = getSuitesToDisplay(idExecSuite, suiteName, channel);
+	List<SuiteBean> listSuitesToDisplay = getSuitesToDisplay(idExecSuite, suiteName, channel);
 int displayedSuites = 0;
-for (SuiteData suite : listSuitesToDisplay) {
+for (SuiteBean suite : listSuitesToDisplay) {
 %>
 	<tr id="scriptData">
 		<td id="idExecution"><%=suite.getIdExecSuite()%></td>
@@ -94,14 +93,14 @@ for (SuiteData suite : listSuitesToDisplay) {
 </body>
 </html>
 
-<%!private List<SuiteData> getSuitesToDisplay(String idExecSuite, String suiteName, String channel) throws Exception {
+<%!private List<SuiteBean> getSuitesToDisplay(String idExecSuite, String suiteName, String channel) throws Exception {
 	if (idExecSuite!=null) {
 		return Arrays.asList(
 				TestMaker.getSuite(idExecSuite));
 	} else {
-		List<SuiteData> listSuites = TestMaker.getListSuites();
-		List<SuiteData> listSuitesToReturn = new ArrayList<>();
-		for (SuiteData suite : listSuites) {
+		List<SuiteBean> listSuites = TestMaker.getListSuites();
+		List<SuiteBean> listSuitesToReturn = new ArrayList<>();
+		for (SuiteBean suite : listSuites) {
 			if (suite.getName().compareTo(suiteName)==0 &&
 				suite.getChannel().toString().compareTo(channel)==0) {
 				listSuitesToReturn.add(suite);

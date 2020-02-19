@@ -5,12 +5,12 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -68,9 +68,9 @@ public class SecStoreCreditStpV {
     }
    
     @Validation
-    public static ChecksResult validaBloqueSaldoEnCuenta(boolean checkedSaldoEnCta, Channel channel, DataCtxPago dCtxPago, WebDriver driver) 
+    public static ChecksTM validaBloqueSaldoEnCuenta(boolean checkedSaldoEnCta, Channel channel, DataCtxPago dCtxPago, WebDriver driver) 
     throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    	ChecksTM validations = ChecksTM.getNew();
       	validations.add(
     		"Es visible el bloque correspondiente al pago mediante \"Saldo en cuenta\"",
     		Page1DktopCheckout.secStoreCredit.isVisible(driver), State.Defect);

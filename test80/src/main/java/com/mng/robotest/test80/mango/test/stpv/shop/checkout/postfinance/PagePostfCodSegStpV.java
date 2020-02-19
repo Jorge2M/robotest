@@ -5,11 +5,11 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.postfinance.PagePostfCodSeg;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -41,8 +41,8 @@ public class PagePostfCodSegStpV {
     }
     
     @Validation
-    public static ChecksResult validateIsPageTest(String nombrePago, String importeTotal, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPageTest(String nombrePago, String importeTotal, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
 	   	validations.add(
     		"Aparece la pasarela de pagos de PostFinance E-Payment de Test",
     		PagePostfCodSeg.isPasarelaPostfinanceTest(driver, nombrePago), State.Defect);
@@ -65,8 +65,8 @@ public class PagePostfCodSegStpV {
     }
     
     @Validation
-    public static ChecksResult validateIsPagePro(String importeTotal, String codPais, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPagePro(String importeTotal, String codPais, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
     	int maxSecondsWait = 5;
 	   	validations.add(
     		"Aparece la pasarela de pagos de PostFinance E-Payment (la esperamos hasta " + maxSecondsWait + " segundos)",

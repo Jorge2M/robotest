@@ -1,6 +1,6 @@
 package com.mng.robotest.test80.mango.test.pageobject.utils;
 
-import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
 
 public class DataScroll {
     public StepTM step;

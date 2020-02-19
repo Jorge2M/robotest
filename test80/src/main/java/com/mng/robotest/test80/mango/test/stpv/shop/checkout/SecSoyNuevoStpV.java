@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -32,8 +32,8 @@ public class SecSoyNuevoStpV {
     
     @SuppressWarnings("static-access")
     @Validation
-	public static ChecksResult validaRGPDText(DataCtxShop dCtxSh, WebDriver driver) {  
-    	ChecksResult validations = ChecksResult.getNew();
+	public static ChecksTM validaRGPDText(DataCtxShop dCtxSh, WebDriver driver) {  
+    	ChecksTM validations = ChecksTM.getNew();
 		if (dCtxSh.pais.getRgpd().equals("S")) {
 		 	validations.add(
 				"El texto de info de RGPD <b>SI</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais(),

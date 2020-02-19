@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopCheckout;
@@ -29,8 +29,8 @@ public class SecKlarnaStpV {
     }
 	
 	@Validation
-	private static ChecksResult checkIsVisibleModalDirecciones(Pago pago, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkIsVisibleModalDirecciones(Pago pago, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 3;
       	validations.add(
     		"Aparece el modal de las direcciones de Klarna (lo esperamos hasta " + maxSecondsWait + " segundos)",

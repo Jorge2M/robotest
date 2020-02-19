@@ -7,8 +7,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
-import com.mng.testmaker.domain.StepTM;
-import com.mng.testmaker.domain.TestCaseTM;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
+import com.mng.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.testmaker.service.TestMaker;
 
 
@@ -50,8 +51,8 @@ public class ValidationAspect {
     }
     
     private void finishValidation(InfoValidation infoValidation, StepTM step, boolean exceptionThrown) {
-    	ChecksResult checksResult = infoValidation.getListResultValidation();
-    	step.addChecksResult(checksResult);
+    	ChecksTM checksResult = infoValidation.getListResultValidation();
+    	step.addChecksTM(checksResult);
     	if (exceptionThrown) {
     		checksResult.getStepParent().setNOKstateByDefault();
     	}

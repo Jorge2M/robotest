@@ -459,17 +459,17 @@ public abstract class InputParamsTM {
 	}
 	public List<String> getListTestCasesName() {
 		List<String> listTestCasesName = new ArrayList<>();
-		List<TestCaseData> listTestCasesData = getListTestCasesData();
-		for (TestCaseData testCaseData : listTestCasesData) {
+		List<TestCaseParams> listTestCasesData = getListTestCasesData();
+		for (TestCaseParams testCaseData : listTestCasesData) {
 			listTestCasesName.add(testCaseData.getName());
 		}
 		return listTestCasesName;
 	}
 	
-	public List<TestCaseData> getListTestCasesData() {
-		List<TestCaseData> listTestCaseData = new ArrayList<>();
+	public List<TestCaseParams> getListTestCasesData() {
+		List<TestCaseParams> listTestCaseData = new ArrayList<>();
 		for (String testCaseItem : getListTestCaseItems()) {
-			TestCaseData testCaseData = new TestCaseData();
+			TestCaseParams testCaseData = new TestCaseParams();
 			Pattern pattern = Pattern.compile(patternTestCaseItem);
 			Matcher matcher = pattern.matcher(testCaseItem);
 			if (matcher.find()) {
@@ -487,8 +487,8 @@ public abstract class InputParamsTM {
 		}
 		return listTestCaseData; 
 	}
-	public TestCaseData getTestCaseData(String nameTestCase) {
-		for (TestCaseData testCaseData : getListTestCasesData()) {
+	public TestCaseParams getTestCaseParams(String nameTestCase) {
+		for (TestCaseParams testCaseData : getListTestCasesData()) {
 			if (TestNameUtils.isMethodNameTestCase(nameTestCase, testCaseData.getName())) {
 				return testCaseData;
 			}

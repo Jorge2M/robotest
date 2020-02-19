@@ -19,7 +19,7 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
-import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;

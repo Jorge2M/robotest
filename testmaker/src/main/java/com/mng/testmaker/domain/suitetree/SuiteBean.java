@@ -1,20 +1,16 @@
-package com.mng.testmaker.domain.data;
+package com.mng.testmaker.domain.suitetree;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.StateExecution;
-import com.mng.testmaker.domain.SuiteTM;
-import com.mng.testmaker.domain.TestRunTM;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
-public class SuiteData {
+public class SuiteBean {
 
-	private List<TestRunData> listTestRun;
+	private List<TestRunBean> listTestRun;
 	private String idExecSuite;
 	private State result;
 	private StateExecution stateExecution;
@@ -32,40 +28,10 @@ public class SuiteData {
 	private String pathReportHtml;
 	private String urlReportHtml;
 	
-	public static SuiteData from(SuiteTM suite) {
-		SuiteData suiteData = new SuiteData();
-		InputParamsTM inputParams = suite.getInputParams();
-		
-		suiteData.setIdExecSuite(suite.getIdExecution());
-		suiteData.setName(suite.getName());
-		suiteData.setVersion(inputParams.getVersion());
-		suiteData.setChannel(inputParams.getChannel());
-		suiteData.setApp(inputParams.getApp().toString());
-		suiteData.setWebDriverType(inputParams.getWebDriverType());
-		suiteData.setResult(suite.getResult());
-		suiteData.setInicioDate(suite.getInicio());
-		suiteData.setFinDate(suite.getFin());
-		suiteData.setDurationMillis(suite.getDurationMillis());
-		suiteData.setNumberTestCases(suite.getNumberTestCases());
-		suiteData.setMoreInfo(inputParams.getMoreInfo());
-		suiteData.setUrlBase(inputParams.getUrlBase());
-		suiteData.setPathReportHtml(suite.getPathReportHtml());
-		suiteData.setUrlReportHtml(suite.getDnsReportHtml());
-		suiteData.setStateExecution(suite.getStateExecution());
-		
-		List<TestRunData> listTestRun = new ArrayList<>();
-		for (TestRunTM testRun : suite.getListTestRuns()) {
-			listTestRun.add(TestRunData.from(testRun));
-		}
-		suiteData.setListTestRun(listTestRun);
-		
-		return suiteData;
-	}
-	
-	public List<TestRunData> getListTestRun() {
+	public List<TestRunBean> getListTestRun() {
 		return listTestRun;
 	}
-	public void setListTestRun(List<TestRunData> listTestRun) {
+	public void setListTestRun(List<TestRunBean> listTestRun) {
 		this.listTestRun = listTestRun;
 	}
 	public String getIdExecSuite() {
@@ -171,12 +137,11 @@ public class SuiteData {
 		if (o == this) { 
 			return true; 
 		} 
-		if (!(o instanceof SuiteData)) { 
+		if (!(o instanceof SuiteBean)) { 
 			return false; 
 		} 
 		
-		SuiteData c = (SuiteData) o; 
+		SuiteBean c = (SuiteBean) o; 
 		return (c.getIdExecSuite().compareTo(getIdExecSuite())==0); 
 	}
-	
 }

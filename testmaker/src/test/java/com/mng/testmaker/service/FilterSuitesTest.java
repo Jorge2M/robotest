@@ -18,22 +18,22 @@ import static com.mng.testmaker.domain.StateExecution.*;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.RepositoryI;
 import com.mng.testmaker.domain.StateExecution;
-import com.mng.testmaker.domain.data.SuiteData;
+import com.mng.testmaker.domain.suitetree.SuiteBean;
 import com.mng.testmaker.service.FilterSuites.SetSuiteRun;
 
 
 public class FilterSuitesTest {
 
 	private LocalDate fechaHoy = LocalDate.now();
-	private SuiteData suite1 = getNew("Suite1", Finished, "SmokeTest", desktop, "shop", fechaHoy);
-	private SuiteData suite2 = getNew("Suite2", Started, "SmokeTest", movil_web, "shop", fechaHoy);
-	private SuiteData suite3 = getNew("Suite3", Stopping, "MenusPais", desktop, "outlet", fechaHoy.minusDays(3));
-	private SuiteData suite4 = getNew("Suite4", Stopped, "MenusPais", movil_web, "shop", fechaHoy.minusDays(1));
-	private SuiteData suite5 = getNew("Suite5", Finished, "SmokeTest", desktop, "outlet", fechaHoy.minusDays(5));
+	private SuiteBean suite1 = getNew("Suite1", Finished, "SmokeTest", desktop, "shop", fechaHoy);
+	private SuiteBean suite2 = getNew("Suite2", Started, "SmokeTest", movil_web, "shop", fechaHoy);
+	private SuiteBean suite3 = getNew("Suite3", Stopping, "MenusPais", desktop, "outlet", fechaHoy.minusDays(3));
+	private SuiteBean suite4 = getNew("Suite4", Stopped, "MenusPais", movil_web, "shop", fechaHoy.minusDays(1));
+	private SuiteBean suite5 = getNew("Suite5", Finished, "SmokeTest", desktop, "outlet", fechaHoy.minusDays(5));
 	
-	private List<SuiteData> listSuitesInMemory = Arrays.asList(suite1, suite2, suite3);
-	private List<SuiteData> listSuitesInRepository = Arrays.asList(suite3, suite4, suite5);
-	private List<SuiteData> listSuitesInRepositoryDesde = Arrays.asList(suite4);
+	private List<SuiteBean> listSuitesInMemory = Arrays.asList(suite1, suite2, suite3);
+	private List<SuiteBean> listSuitesInRepository = Arrays.asList(suite3, suite4, suite5);
+	private List<SuiteBean> listSuitesInRepositoryDesde = Arrays.asList(suite4);
 	
 	
 	@Test
@@ -42,7 +42,7 @@ public class FilterSuitesTest {
 		FilterSuites filterSuitesSpy = createFilterSuitesSpy(FilterSuites.getNew());
 		
 		//When
-		List<SuiteData> listSuites = filterSuitesSpy.getListSuites();
+		List<SuiteBean> listSuites = filterSuitesSpy.getListSuites();
 		
 		//Then
 		assertTrue(listSuites.contains(suite1));
@@ -59,7 +59,7 @@ public class FilterSuitesTest {
 		FilterSuites filterSuitesSpy = createFilterSuitesSpy(FilterSuites.getNew(null, null, null, SetSuiteRun.running, null));
 		
 		//When
-		List<SuiteData> listSuites = filterSuitesSpy.getListSuites();
+		List<SuiteBean> listSuites = filterSuitesSpy.getListSuites();
 		
 		//Then
 		assertTrue(listSuites.contains(suite2));
@@ -73,7 +73,7 @@ public class FilterSuitesTest {
 		FilterSuites filterSuitesSpy = createFilterSuitesSpy(FilterSuites.getNew("SmokeTest", null, null, null, null));
 		
 		//When
-		List<SuiteData> listSuites = filterSuitesSpy.getListSuites();
+		List<SuiteBean> listSuites = filterSuitesSpy.getListSuites();
 		
 		//Then
 		assertTrue(listSuites.contains(suite1));
@@ -89,7 +89,7 @@ public class FilterSuitesTest {
 		FilterSuites filterSuitesSpy = createFilterSuitesSpy(FilterSuites.getNew(null, null, null, null, getDate(fechaDesde)));
 		
 		//When
-		List<SuiteData> listSuites = filterSuitesSpy.getListSuites();
+		List<SuiteBean> listSuites = filterSuitesSpy.getListSuites();
 		
 		//Then
 		assertTrue(listSuites.contains(suite1));
@@ -109,13 +109,13 @@ public class FilterSuitesTest {
 		return filterSuitesSpy;
 	}
 
-	private SuiteData getNew(String idExecSuite, 
+	private SuiteBean getNew(String idExecSuite, 
 							 StateExecution stateExecution, 
 							 String nameSuite, 
 							 Channel channel, 
 							 String app, 
 							 LocalDate iniFecha) {
-		SuiteData suiteData = new SuiteData();
+		SuiteBean suiteData = new SuiteBean();
 		suiteData.setIdExecSuite(idExecSuite);
 		suiteData.setStateExecution(stateExecution);
 		suiteData.setName(nameSuite);

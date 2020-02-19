@@ -1,11 +1,11 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardAdyen;
@@ -19,8 +19,8 @@ public class PageKoCardAdyenStpV {
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
     @Validation
-    public static ChecksResult validateIsPage(String importeTotal, Pais pais, Channel channel, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPage(String importeTotal, Pais pais, Channel channel, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
     	if (channel==Channel.desktop) {
 	      	validations.add(
 	    		"En  la página resultante figura el importe total de la compra (" + importeTotal + ")",

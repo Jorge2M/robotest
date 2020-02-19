@@ -5,8 +5,8 @@ import org.testng.*;
 
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.TestCaseTM;
-import com.mng.testmaker.domain.TestRunTM;
+import com.mng.testmaker.domain.suitetree.TestCaseTM;
+import com.mng.testmaker.domain.suitetree.TestRunTM;
 
 
 public class InvokeListener extends TestListenerAdapter implements ISuiteListener {

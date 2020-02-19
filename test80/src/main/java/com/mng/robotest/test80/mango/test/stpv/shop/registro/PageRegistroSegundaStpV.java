@@ -5,10 +5,10 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -21,9 +21,9 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 public class PageRegistroSegundaStpV {
     
 	@Validation
-    public static ChecksResult validaIsPageRegistroOK(Pais paisRegistro, AppEcom app, Map<String,String> dataRegistro, WebDriver driver) 
+    public static ChecksTM validaIsPageRegistroOK(Pais paisRegistro, AppEcom app, Map<String,String> dataRegistro, WebDriver driver) 
     throws Exception {
-		ChecksResult validations = ChecksResult.getNew();
+		ChecksTM validations = ChecksTM.getNew();
         String lineasComaSeparated = "";
         int numLineas = 0;
         if (paisRegistro.getShoponline().stateLinea(LineaType.she, app)==ThreeState.TRUE) {

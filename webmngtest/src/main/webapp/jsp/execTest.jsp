@@ -21,7 +21,7 @@ response.setDateHeader ("Expires", -1);%>
 	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.Suites" %>
 	<%@ page import="com.mng.robotest.test80.mango.conftestmaker.AppEcom" %>
 	<%@ page import="com.mng.testmaker.service.TestMaker" %>
-	<%@ page import="com.mng.testmaker.domain.SuiteTM" %>
+	<%@ page import="com.mng.testmaker.domain.suitetree.SuiteTM" %>
 
 	<style>
 	body {

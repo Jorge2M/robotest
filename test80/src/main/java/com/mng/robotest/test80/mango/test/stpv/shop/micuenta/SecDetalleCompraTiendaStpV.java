@@ -2,8 +2,8 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
@@ -32,8 +32,8 @@ public class SecDetalleCompraTiendaStpV {
 	
     @SuppressWarnings("static-access")
     @Validation
-    private ChecksResult checkData(CompraTienda compraTienda) {
-        ChecksResult validations = ChecksResult.getNew();
+    private ChecksTM checkData(CompraTienda compraTienda) {
+        ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 1;
         validations.add(
         	"Es visible la capa correspondiente al detalle del tícket de compra (la esperamos hasta " + maxSecondsWait + " segundos)",

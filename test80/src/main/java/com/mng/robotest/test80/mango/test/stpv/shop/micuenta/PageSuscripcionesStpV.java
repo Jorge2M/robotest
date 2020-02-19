@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageSuscripciones;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageSuscripciones.idNewsletters;
 
@@ -22,13 +22,13 @@ public class PageSuscripcionesStpV {
     }
 
     @Validation
-    public static ChecksResult validaIsDataAssociatedToRegister (Map<String,String> datosRegOk, WebDriver driver) {
+    public static ChecksTM validaIsDataAssociatedToRegister (Map<String,String> datosRegOk, WebDriver driver) {
         int numLineasTotales = Integer.valueOf(datosRegOk.get("numlineas")).intValue();
         String lineasUnchecked = datosRegOk.get("clicklineas");
         StringTokenizer tokensLinDesmarcadas = new StringTokenizer(lineasUnchecked, ",");
         int numLinDesmarcadas = tokensLinDesmarcadas.countTokens();
 
-        ChecksResult validations = ChecksResult.getNew();
+        ChecksTM validations = ChecksTM.getNew();
         validations.add(
             "Aparecen "  + numLineasTotales + " Newsletter",
             PageSuscripciones.getNumNewsletters(driver)==numLineasTotales, State.Warn);

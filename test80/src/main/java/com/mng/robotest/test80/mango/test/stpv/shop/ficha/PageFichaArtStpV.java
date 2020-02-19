@@ -5,8 +5,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
@@ -77,8 +77,8 @@ public class PageFichaArtStpV {
     }
     
     @Validation
-    public ChecksResult validateIsFichaArtAlgunoColorNoDisponible(String refArticulo) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validateIsFichaArtAlgunoColorNoDisponible(String refArticulo) {
+    	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece la página correspondiente a la ficha del artículo " + refArticulo,
 			pageFicha.isFichaArticuloUntil(refArticulo, 0), State.Defect); 
@@ -96,8 +96,8 @@ public class PageFichaArtStpV {
     }
     
     @Validation
-    public ChecksResult validaDetallesProducto(DataFichaArt datosArticulo) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validaDetallesProducto(DataFichaArt datosArticulo) {
+    	ChecksTM validations = ChecksTM.getNew();
         if (datosArticulo.availableReferencia()) {
             int maxSecondsWait = 3;
 		 	validations.add(
@@ -175,8 +175,8 @@ public class PageFichaArtStpV {
     }
     
     @Validation
-    public ChecksResult checkAppearsCapaAvisame() {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM checkAppearsCapaAvisame() {
+    	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"No aparece el botón \"COMPRAR\"",
 			!SecBolsa.isVisibleBotonComprar(Channel.desktop, driver), State.Defect);
@@ -212,8 +212,8 @@ public class PageFichaArtStpV {
     }
     
     @Validation
-    public ChecksResult checkAvisoTallaUnica(boolean isTallaUnica, TypeFicha typeFichaAct) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM checkAvisoTallaUnica(boolean isTallaUnica, TypeFicha typeFichaAct) {
+    	ChecksTM validations = ChecksTM.getNew();
     	boolean isVisibleAviso = pageFicha.secDataProduct.isVisibleAvisoSeleccionTalla(driver);
     	if (isTallaUnica || typeFichaAct==TypeFicha.New) {
 		 	validations.add(
@@ -291,8 +291,8 @@ public class PageFichaArtStpV {
     }
     
     @Validation
-    private ChecksResult checkCapaAltaFavoritos() {
-    	ChecksResult validations = ChecksResult.getNew();
+    private ChecksTM checkCapaAltaFavoritos() {
+    	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait1 = 3;
 	 	validations.add(
 			"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + maxSecondsWait1 + " segundos)",
@@ -376,8 +376,8 @@ public class PageFichaArtStpV {
     }
     
     @Validation
-    public ChecksResult validaPrevNext(LocationArticle locationArt, DataCtxShop dCtxSh) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validaPrevNext(LocationArticle locationArt, DataCtxShop dCtxSh) {
+    	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 5;
     	boolean isVisiblePrevLink = pageFicha.secDataProduct.isVisiblePrevNextUntil(ProductNav.Prev, maxSecondsWait, driver);
         if (locationArt.isFirstInGalery()) {
@@ -454,8 +454,8 @@ public class PageFichaArtStpV {
     }    
     
     @Validation
-    public ChecksResult checkImgCentralAfterZoom(String pngImgCentralOriginal) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM checkImgCentralAfterZoom(String pngImgCentralOriginal) {
+    	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 	 		"Se aplica un Zoom sobre la imagen central",
 	 		((PageFichaArtOld)pageFicha).isVisibleFichaConZoom(), State.Defect);
@@ -466,8 +466,8 @@ public class PageFichaArtStpV {
     }
     
     @Validation
-    public ChecksResult validaBreadCrumbFichaOld(String urlGaleryOrigin) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validaBreadCrumbFichaOld(String urlGaleryOrigin) {
+    	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 	 		"Existen el bloque correspondiente a las <b>BreadCrumb</b>",
 	 		SecBreadcrumbFichaOld.isVisibleBreadCrumb(driver), State.Defect);    	

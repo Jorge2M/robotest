@@ -3,14 +3,14 @@ package com.mng.robotest.test80.mango.test.stpv.shop.menus;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataFavoritos;
@@ -156,7 +156,7 @@ public class SecMenusUserStpV {
 	}
 
 	@Validation
-	public ChecksResult checkVisibilityLinkMangoLikesYou() throws Exception {	
+	public ChecksTM checkVisibilityLinkMangoLikesYou() throws Exception {	
 		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
 		if (channel==Channel.desktop && app==AppEcom.shop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
@@ -193,9 +193,9 @@ public class SecMenusUserStpV {
 	}
 	
 	@Validation
-    public ChecksResult checkLoyaltyPoints(int initPoints, int donatedPoints, int finalPoints) 
+    public ChecksTM checkLoyaltyPoints(int initPoints, int donatedPoints, int finalPoints) 
     throws Exception {
-		ChecksResult checks = ChecksResult.getNew();
+		ChecksTM checks = ChecksTM.getNew();
  		int loyaltyPointsExpected = initPoints - donatedPoints;
 	 	checks.add(
 			"Los Loyalty Points que figuran ahora en la web (<b>" + finalPoints + "</b>) " + 
@@ -212,7 +212,7 @@ public class SecMenusUserStpV {
 		userMenus.hoverIconForShowUserMenuDesktopShop();
 	}
 	
-    public static class ChecksResultWithNumberPoints extends ChecksResult {
+    public static class ChecksResultWithNumberPoints extends ChecksTM {
     	int numberPoints ;
     	private ChecksResultWithNumberPoints() {
     		super();

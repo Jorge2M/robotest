@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraOnline;
@@ -37,8 +37,8 @@ public class PageDetallePedidoStpV {
     }
     
     @Validation
-    public ChecksResult areOkPrendasOnline(int numPrendasCompraOnline, WebDriver driver) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM areOkPrendasOnline(int numPrendasCompraOnline, WebDriver driver) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
 	    int maxSecondsWait = 2;
       	validations.add(
       		"Es visible alguna prenda (la esperamos hasta " + maxSecondsWait + " segundos)",
@@ -61,8 +61,8 @@ public class PageDetallePedidoStpV {
     }
     
     @Validation
-    private ChecksResult validateIsPageOk(String codPedido, String importeTotalWithoutCurrency, String codPais, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    private ChecksTM validateIsPageOk(String codPedido, String importeTotalWithoutCurrency, String codPais, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
       	validations.add(
       		"Aparece la página de detalle del pedido",
       		pageDetalle.isPage(driver), State.Warn);	   

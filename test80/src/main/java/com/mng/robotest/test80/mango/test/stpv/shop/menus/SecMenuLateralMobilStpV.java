@@ -5,11 +5,11 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -123,8 +123,8 @@ public class SecMenuLateralMobilStpV {
     }
     
     @Validation
-    private ChecksResult checkGaleriaAfterSelectNuevo() throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    private ChecksTM checkGaleriaAfterSelectNuevo() throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
 	    PageGaleria pageGaleria = PageGaleria.getNew(Channel.movil_web, app, driver);
 	    int maxSecondsWait = 3;
 	 	validations.add(
@@ -206,8 +206,8 @@ public class SecMenuLateralMobilStpV {
     }
     
     @Validation
-    public ChecksResult validaSelectLineaNuevoWithCarrusels(Pais pais) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validaSelectLineaNuevoWithCarrusels(Pais pais) {
+    	ChecksTM validations = ChecksTM.getNew();
     	
         String listCarrusels = "";
         boolean carruselsOk = true;
@@ -227,8 +227,8 @@ public class SecMenuLateralMobilStpV {
     }
         
     @Validation
-    public ChecksResult validaSelectLineaRebajasWithSublineas(Pais pais) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validaSelectLineaRebajasWithSublineas(Pais pais) {
+    	ChecksTM validations = ChecksTM.getNew();
         String listSublineas = "";
         boolean isSublineasOk = true;
         for (Linea linea : pais.getShoponline().getLineasToTest(app)) {
@@ -247,8 +247,8 @@ public class SecMenuLateralMobilStpV {
     }
      
     @Validation
-    public ChecksResult validaSelecLineaNinosWithSublineas(LineaType lineaNinosType) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validaSelecLineaNinosWithSublineas(LineaType lineaNinosType) {
+    	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Está seleccionada la línea <b>" + lineaNinosType + "</b>",
 			secMenuLateral.isSelectedLinea(lineaNinosType), State.Warn);
@@ -259,8 +259,8 @@ public class SecMenuLateralMobilStpV {
     }
     
     @Validation
-    public ChecksResult validaSelecLineaWithMenus2onLevelAssociated(LineaType lineaType, SublineaNinosType sublineaType) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validaSelecLineaWithMenus2onLevelAssociated(LineaType lineaType, SublineaNinosType sublineaType) {
+    	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Está seleccionada la línea <b>" + lineaType + "</b>",
 			secMenuLateral.isSelectedLinea(lineaType), State.Warn);

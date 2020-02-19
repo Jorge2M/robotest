@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -30,8 +30,8 @@ public class SecTarjetaPciStpV {
 	}
     
 	@Validation
-    public ChecksResult validateIsSectionOk(Pago pago, Pais pais) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validateIsSectionOk(Pago pago, Pais pais) {
+    	ChecksTM validations = ChecksTM.getNew();
     	if (channel==Channel.desktop && pago.getTypePago()!=TypePago.KrediKarti) {
             int maxSecondsWait = 5;
 		 	validations.add(

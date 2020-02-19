@@ -3,10 +3,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.ficha;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrOld;
@@ -16,8 +16,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecProductDescrO
 public class SecProductDescrOldStpV {
     
 	@Validation
-    public static ChecksResult validateAreInStateInitial(AppEcom appE, WebDriver driver) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateAreInStateInitial(AppEcom appE, WebDriver driver) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
     	for (TypePanel typePanel : TypePanel.values()) {
     		TypeStatePanel stateExpected = TypeStatePanel.missing;
             if (typePanel.getListApps().contains(appE)) {

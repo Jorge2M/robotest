@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.loyalty;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.loyalty.PageHomeConseguirPor1200Likes;
 
 public class PageHomeConseguirPor1200LikesStpV {
@@ -38,8 +38,8 @@ public class PageHomeConseguirPor1200LikesStpV {
 	}
 	
 	@Validation
-	public ChecksResult checkAfterConseguirButton() {
-		ChecksResult checks = ChecksResult.getNew();
+	public ChecksTM checkAfterConseguirButton() {
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSecondsWait = 5;
 		checks.add(
 			"Aparece el icono correspondiente a la operación realizada (lo esperamos hasta " + maxSecondsWait + " segundos)",

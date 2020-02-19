@@ -3,7 +3,7 @@ package com.mng.testmaker.boundary.aspects.step;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
-import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
 
 public class InfoStep {
 

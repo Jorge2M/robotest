@@ -11,9 +11,9 @@ import javax.xml.bind.Unmarshaller;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.sitemap.Sitemapindex;
@@ -42,8 +42,8 @@ public class BrowserStpV {
 	}
 
 	@Validation
-	private static ChecksResult checkPageRobotsTxt(String urlSitemap, AppEcom app, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkPageRobotsTxt(String urlSitemap, AppEcom app, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 
 		String contRobots1 = 
 			"User-Agent: *\n" +
@@ -133,8 +133,8 @@ public class BrowserStpV {
 	}
 
 	@Validation
-	private static ChecksResult checkResultUrlSitemal(WebDriver driver) throws Exception {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkResultUrlSitemal(WebDriver driver) throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
 		
 		Sitemapindex sitemapIndex = null;
 		try {

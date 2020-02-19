@@ -1,20 +1,14 @@
-package com.mng.testmaker.domain.data;
+package com.mng.testmaker.domain.suitetree;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.testng.ITestContext;
-
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.SuiteTM;
-import com.mng.testmaker.domain.TestCaseTM;
-import com.mng.testmaker.domain.TestRunTM;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
-public class TestRunData {
+public class TestRunBean {
 
-	private List<TestCaseData> listTestCase;
+	private List<TestCaseBean> listTestCase;
 	private String idExecSuite;
 	private String suiteName;
 	private String name;
@@ -86,50 +80,12 @@ public class TestRunData {
 	public void setWebDriverType(WebDriverType webDriverType) {
 		this.webDriverType = webDriverType;
 	}
-	public List<TestCaseData> getListTestCase() {
+	public List<TestCaseBean> getListTestCase() {
 		return listTestCase;
 	}
-	public void setListTestCase(List<TestCaseData> listTestCase) {
+	public void setListTestCase(List<TestCaseBean> listTestCase) {
 		this.listTestCase = listTestCase;
 	}
 	
-	public static TestRunData from(TestRunTM testRun) {
-		TestRunData testRunData = new TestRunData();
-		SuiteTM suite = testRun.getSuiteParent();
-		testRunData.setIdExecSuite(suite.getIdExecution());
-		testRunData.setSuiteName(suite.getName());
-		testRunData.setName(testRun.getName());
-		testRunData.setResult(testRun.getResult());
-		if (testRun.getBrowserStackMobil()!=null) {
-			testRunData.setDevice(testRun.getBrowserStackMobil().getDevice());
-		} else {
-			testRunData.setDevice("");
-		}
-		
-		Date inicio = new Date();
-		Date fin = new Date();
-		ITestContext ctxTestRun = testRun.getTestNgContext();
-		if (ctxTestRun!=null) {
-			inicio = testRun.getTestNgContext().getStartDate();
-			Date endDate = testRun.getTestNgContext().getEndDate();
-			if (endDate!=null) {
-				fin = endDate;
-			}
-		}
-		testRunData.setInicioDate(inicio);
-		testRunData.setFinDate(fin);
-		if (fin!=null && inicio!=null) {
-			testRunData.setDurationMillis(fin.getTime() - inicio.getTime());
-		}
-		testRunData.setNumberTestCases(testRun.getNumTestCases());
-		testRunData.setWebDriverType(suite.getInputParams().getWebDriverType());
-		
-		List<TestCaseData> listTestCase = new ArrayList<>();
-		for (TestCaseTM testCase : testRun.getListTestCases()) {
-			listTestCase.add(TestCaseData.from(testCase));
-		}
-		testRunData.setListTestCase(listTestCase);
-		
-		return testRunData;
-	}
+
 }

@@ -3,17 +3,17 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.Dotpay;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.dotpay.PageDotpayPaymentChannel;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
 public class PageDotpayPaymentChannelStpV {
 
 	@Validation
-    public static ChecksResult validateIsPage(String importeTotal, String codPais, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPage(String importeTotal, String codPais, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
       	validations.add(
     		"Aparece la página de Dotpay para la selección del banco",
     		PageDotpayPaymentChannel.isPage(driver), State.Warn);

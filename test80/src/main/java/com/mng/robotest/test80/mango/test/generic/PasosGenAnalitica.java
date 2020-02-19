@@ -9,12 +9,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.StepTM;
-import com.mng.testmaker.domain.StepTM.StepEvidence;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
+import com.mng.testmaker.domain.suitetree.StepEvidence;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.testreports.html.GestorDatosHarJSON;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
@@ -63,7 +63,7 @@ public class PasosGenAnalitica {
                 //Capturamos la excepción para que no se produzca error (las posteriores validaciones generarán un warning para este caso)
                 pLogger.warn(
                 	". Not located file HAR associated to method {}, step {}", 
-                	step.getTestCaseParent().getNameUnique(), Integer.valueOf(step.getPositionInTestCase()), e);
+                	step.getTestCaseParent().getNameUnique(), Integer.valueOf(step.getNumber()), e);
             }
             
             if (gestorHAR!=null) {
@@ -100,8 +100,8 @@ public class PasosGenAnalitica {
     }
 
     @Validation
-    public static ChecksResult validaPolyvore(GestorDatosHarJSON gestorHAR, DataPedido dataPedido) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validaPolyvore(GestorDatosHarJSON gestorHAR, DataPedido dataPedido) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
     	
         String urlPolyvore = "://www.polyvore.com/conversion/beacon.gif?";
         String paramPolyvore = "adv=mango.com";
@@ -160,8 +160,8 @@ public class PasosGenAnalitica {
     }    
     
     @Validation
-    public static ChecksResult validaCriteo(GestorDatosHarJSON gestorHAR, LineaType lineaId) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validaCriteo(GestorDatosHarJSON gestorHAR, LineaType lineaId) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
         if (lineaId!=LineaType.violeta) {
             String urlCriteo = ".criteo.com/dis/dis.aspx?";
             String paramCriteo = "sc_r=1920x1080";
@@ -226,8 +226,8 @@ public class PasosGenAnalitica {
 	}
         
     @Validation
-    public static ChecksResult validaBing(GestorDatosHarJSON gestorHAR, AppEcom app, WebDriver driver) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validaBing(GestorDatosHarJSON gestorHAR, AppEcom app, WebDriver driver) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
         if (UtilsMangoTest.isEntornoPRO(app, driver)) { //El tracking de Bing sólo se encuentra activo en PRO
             String urlBing = "://bat.bing.com/action/0?";
             String paramBing = "ti=5039068";
@@ -261,10 +261,10 @@ public class PasosGenAnalitica {
     }
     
     @Validation
-    public static ChecksResult validaGoogleAnalytics(GestorDatosHarJSON gestorHAR, AppEcom app) throws Exception {
+    public static ChecksTM validaGoogleAnalytics(GestorDatosHarJSON gestorHAR, AppEcom app) throws Exception {
         //TODO esta validación es temporal. Actualmente hay activados 2 formas de lanzar Google Analytics con lo que es normal que en algún
         //caso se ejecuten 2 peticiones. Cuando dejen sólo una forma habrá que restaurar la validación original
-    	ChecksResult validations = ChecksResult.getNew();
+    	ChecksTM validations = ChecksTM.getNew();
     	
         JSONArray listEntriesFilteredPage = gestorHAR.getListEntriesFilterURL("://www.google-analytics.com/collect","t=pageview");
         int numLineas = listEntriesFilteredPage.size(); 
@@ -305,8 +305,8 @@ public class PasosGenAnalitica {
     }
     
     @Validation
-    public static ChecksResult validaDatalayer(WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validaDatalayer(WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
         String firstLineDataLayerFunction = "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':"; 
 	 	validations.add(
 			"Figura el código JavaScript del tag <b>dataLayer</b>. Validamos la existencia de la 1a línea de la función: " + firstLineDataLayerFunction,
@@ -316,8 +316,8 @@ public class PasosGenAnalitica {
     
     @SuppressWarnings({ "rawtypes" })
     @Validation
-    public static ChecksResult validaNetTraffic(GestorDatosHarJSON gestorHAR) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validaNetTraffic(GestorDatosHarJSON gestorHAR) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
     	boolean peticionesOk = true;
     	String infoWarnings = "";
         JSONArray listEntriesTotal = gestorHAR.getListEntriesFilterURL("","");

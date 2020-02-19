@@ -6,8 +6,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -86,9 +86,9 @@ public class SecBannersStpV {
     }
         
     @Validation
-    public ChecksResult validacionesGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre) 
+    public ChecksTM validacionesGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre) 
     throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    	ChecksTM validations = ChecksTM.getNew();
     	int maxSecondsWait1 = 3;
     	int marginElements = 3;
     	int maxSecondsWait2 = 1;

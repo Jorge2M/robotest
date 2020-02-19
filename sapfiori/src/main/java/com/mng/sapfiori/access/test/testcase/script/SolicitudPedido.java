@@ -18,7 +18,7 @@ import com.mng.sapfiori.access.test.testcase.stpv.pedidos.PagePosSolicitudPedido
 import com.mng.sapfiori.access.test.testcase.stpv.pedidos.PageSolicitudPedidoStpV;
 import com.mng.sapfiori.access.test.testcase.webobject.pedidos.InfoGeneralSolPedido;
 import com.mng.sapfiori.access.test.testcase.webobject.pedidos.InputFieldPedido;
-import com.mng.testmaker.domain.TestCaseTM;
+import com.mng.testmaker.domain.suitetree.TestCaseTM;
 
 public class SolicitudPedido {
 

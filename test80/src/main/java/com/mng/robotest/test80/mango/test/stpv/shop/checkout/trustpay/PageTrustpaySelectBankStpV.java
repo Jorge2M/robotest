@@ -6,8 +6,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.trustpay.PageTrustpaySelectBank;
@@ -16,8 +16,8 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PageTrustpaySelectBankStpV {
 
 	@Validation
-    public static ChecksResult validateIsPage(String nombrePago, String importeTotal, String codPais, Channel channel, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPage(String nombrePago, String importeTotal, String codPais, Channel channel, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
 			PageTrustpaySelectBank.isPresentEntradaPago(nombrePago, channel, driver), State.Warn);

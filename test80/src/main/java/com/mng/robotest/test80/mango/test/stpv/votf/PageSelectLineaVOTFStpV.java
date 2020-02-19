@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.testab.manager.TestABmanager;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -19,8 +19,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 public class PageSelectLineaVOTFStpV {
 
 	@Validation
-    public static ChecksResult validateIsPage(WebDriver driver) { 
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPage(WebDriver driver) { 
+    	ChecksTM validations = ChecksTM.getNew();
     	validations.add(
     		"Aparece el banner correspondiente a SHE",
     		PageSelectLineaVOTF.isBannerPresent(LineaType.she, driver), State.Warn);

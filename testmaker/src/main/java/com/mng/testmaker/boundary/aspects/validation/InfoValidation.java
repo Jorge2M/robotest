@@ -6,8 +6,10 @@ import org.aspectj.lang.reflect.MethodSignature;
 
 import com.mng.testmaker.boundary.aspects.MatcherWithMethodParams;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.StepTM;
-import com.mng.testmaker.domain.TestCaseTM;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
+import com.mng.testmaker.domain.suitetree.Check;
+import com.mng.testmaker.domain.suitetree.TestCaseTM;
 
 public class InfoValidation {
 
@@ -15,7 +17,7 @@ public class InfoValidation {
 	private final MethodSignature methodSignature;
 	private final Validation valAnnotation;
 	private final Object resultMethod;
-	private final ChecksResult listResultValidations;
+	private final ChecksTM listResultValidations;
 	
 	private InfoValidation(JoinPoint joinPoint, Object resultMethod) {
 		this.joinPoint = joinPoint;
@@ -41,7 +43,7 @@ public class InfoValidation {
 		return (new InfoValidation(joinPoint));
 	}
 	
-	public ChecksResult getListResultValidation() {
+	public ChecksTM getListResultValidation() {
 		return listResultValidations;
 	}
 	
@@ -52,41 +54,41 @@ public class InfoValidation {
         return (validationAnnotation);
     }
 	
-	private ChecksResult getValResultFromMethodData() {
-		ChecksResult valResult = getValidationResultFromObjectMethodReturn();
+	private ChecksTM getValResultFromMethodData() {
+		ChecksTM valResult = getValidationResultFromObjectMethodReturn();
 		valResult.setPathMethod(methodSignature.getDeclaringTypeName() + "." + methodSignature.getName());
 		modifyValidationResultAccordingAnnotationParams(valResult);
 		return valResult;
 	}
 	
-    private ChecksResult getValidationResultFromObjectMethodReturn() {
+    private ChecksTM getValidationResultFromObjectMethodReturn() {
     	TestCaseTM testCaseInThread = TestCaseTM.getTestCaseInExecution();
     	StepTM step = testCaseInThread.getLastStep();
-    	ChecksResult valResult = ChecksResult.getNew(step);
+    	ChecksTM valResult = ChecksTM.getNew(step);
     	if (resultMethod!=null) {
     		//One Validation
 	        if (resultMethod instanceof Boolean) {
-	        	ResultValidation validation = new ResultValidation(1);
+	        	Check validation = new Check(1);
 	        	validation.setOvercomed((Boolean)resultMethod);
 	        	valResult.add(validation);
 	        	return valResult;
 	        }
 	        //Many Validations
-	        if (resultMethod instanceof ChecksResult) {
-	        	valResult = (ChecksResult)resultMethod;
+	        if (resultMethod instanceof ChecksTM) {
+	        	valResult = (ChecksTM)resultMethod;
 	        	return valResult;
 	        }
 	        
 	        throw (new RuntimeException(
 	        	"The return of a method marked with @Validation annotation must be of type boolean or " + 
-	        	ChecksResult.class.getName()));
+	        	ChecksTM.class.getName()));
     	} else {
-    		valResult.add(new ResultValidation(1));
+    		valResult.add(new Check(1));
     		return valResult;
     	}
     }
 
-    private void modifyValidationResultAccordingAnnotationParams(ChecksResult valResult) {
+    private void modifyValidationResultAccordingAnnotationParams(ChecksTM valResult) {
     	//Only exists annotations in the "One Validation" case
     	if (valResult.size()>0) {
 	    	if ("".compareTo(valResult.get(0).getDescription())==0) {

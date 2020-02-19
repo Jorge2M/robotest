@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -30,7 +30,7 @@ public class SecCrossSellingStpV {
 	}
 	
 	@Validation
-	public ChecksResult validaIsCorrect(LineaType lineaType) throws Exception {
+	public ChecksTM validaIsCorrect(LineaType lineaType) throws Exception {
 		//Obtenemos la lista de menús de Mujer-Prendas
 		SecMenusDesktop secMenus = SecMenusDesktop.getNew(app, driver);
 		List<WebElement> listaMenusBloque = 
@@ -43,7 +43,7 @@ public class SecCrossSellingStpV {
 		String hrefMenu2 = listaMenusBloque.get(1).getAttribute("href");
 		String hrefMenu3 = listaMenusBloque.get(2).getAttribute("href");
 
-		ChecksResult validations = ChecksResult.getNew();
+		ChecksTM validations = ChecksTM.getNew();
 		PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop, app, driver);
 		if (!secCrossSelling.isSectionVisible()) {
 			pageGaleria.scrollToPageFromFirst(PageGaleriaDesktop.maxPageToScroll, app);

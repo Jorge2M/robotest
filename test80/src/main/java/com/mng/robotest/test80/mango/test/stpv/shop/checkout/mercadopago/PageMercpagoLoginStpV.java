@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.PageMercpagoLogin;
@@ -18,8 +18,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.mercadopago.P
 public class PageMercpagoLoginStpV {
 
 	@Validation
-    public static ChecksResult validateIsPage(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPage(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
     	validations.add(
     		"Aparece la página de identificación de Mercadopago",
     		PageMercpagoLogin.isPage(driver), State.Defect);

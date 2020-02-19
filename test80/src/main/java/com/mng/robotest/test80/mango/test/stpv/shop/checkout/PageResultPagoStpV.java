@@ -3,12 +3,12 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -46,8 +46,8 @@ public class PageResultPagoStpV {
     }
     
     @Validation
-    public static ChecksResult validateTextConfirmacionPago(Channel channel, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateTextConfirmacionPago(Channel channel, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
 	    int maxSecondsWait1 = 10;
 	    boolean isVisibleTextConfirmacion = PageResultPago.isVisibleTextoConfirmacionPago(driver, channel, maxSecondsWait1);
        	validations.add(
@@ -64,8 +64,8 @@ public class PageResultPagoStpV {
     }
     
     @Validation
-    public static ChecksResult validateDataPedido(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateDataPedido(DataCtxPago dCtxPago, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
         String importeTotal = "";
         DataBag dataBag = dCtxPago.getDataPedido().getDataBag(); 
         if (dataBag!=null && "".compareTo(dataBag.getImporteTotal())!=0) {

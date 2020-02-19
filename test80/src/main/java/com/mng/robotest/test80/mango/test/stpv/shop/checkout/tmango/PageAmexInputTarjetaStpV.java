@@ -5,10 +5,10 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.PageAmexInputTarjeta;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -16,8 +16,8 @@ public class PageAmexInputTarjetaStpV {
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
 
     @Validation
-    public static ChecksResult validateIsPageOk(String importeTotal, String codPais, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPageOk(String importeTotal, String codPais, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 5;
 	 	validations.add(
 			"Aparece la pasarela de pagos de Banco Sabadell (la esperamos hasta " + maxSecondsWait + " segundos)",

@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -34,8 +34,8 @@ public class SecCabeceraStpV {
 	}
 
 	@Validation
-	public ChecksResult validateIconoBolsa() {
-		ChecksResult validations = ChecksResult.getNew();
+	public ChecksTM validateIconoBolsa() {
+		ChecksTM validations = ChecksTM.getNew();
 		boolean isVisibleIconoBolsa = secCabecera.isInStateIconoBolsa(StateElem.Visible);
 		if (pais.isVentaOnline()) {
 			validations.add(

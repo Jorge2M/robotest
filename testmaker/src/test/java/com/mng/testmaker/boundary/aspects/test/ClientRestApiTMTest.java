@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.InputParamsBasic;
+import com.mng.testmaker.domain.suitetree.SuiteBean;
 
 public class ClientRestApiTMTest {
 
@@ -23,11 +24,12 @@ public class ClientRestApiTMTest {
 		inputParams.setApp(AppEcom.shop);
 		inputParams.setVersion("V1");
 		inputParams.setUrlBase("https://shop.mango.com/preHome.faces");
-		inputParams.setListTestCaseItems(Arrays.asList("BOR001"));
+		inputParams.setListTestCaseItems(Arrays.asList("SES002"));
 		inputParams.setAsyncExec("false");
 		
 		ClientRestApiTM client = new ClientRestApiTM();
-		client.suiteRun(inputParams);
+		SuiteBean suiteData = client.suiteRun(inputParams);
+		System.out.println(suiteData);
 	}
 
 }

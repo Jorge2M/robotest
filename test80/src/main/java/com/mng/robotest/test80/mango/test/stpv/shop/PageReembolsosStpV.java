@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageReembolsos;
@@ -41,8 +41,8 @@ public class PageReembolsosStpV {
     }
     
     @Validation
-    private static ChecksResult checkClickReembolsos(boolean paisConSaldoCta, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    private static ChecksTM checkClickReembolsos(boolean paisConSaldoCta, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
     	validations.add(
     		"Aparece la página de reembolsos",
     		PageReembolsos.isPage(driver), State.Defect);    	
@@ -122,8 +122,8 @@ public class PageReembolsosStpV {
 	}
 
     @Validation
-    private static ChecksResult checkAfterModifyDataTransferencia(WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    private static ChecksTM checkAfterModifyDataTransferencia(WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsToWait = 15;
     	validations.add(
     		"Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + maxSecondsToWait + " segundos)",
@@ -147,8 +147,8 @@ public class PageReembolsosStpV {
     }
     
     @Validation
-    private static ChecksResult checkAfterSelectStoreCredit(WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    private static ChecksTM checkAfterSelectStoreCredit(WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
        	validations.add(
     		"Aparece seleccionado el radiobutton de \"Store Credit\"",
     		PageReembolsos.isCheckedRadio(TypeReembolso.StoreCredit, driver), State.Warn);

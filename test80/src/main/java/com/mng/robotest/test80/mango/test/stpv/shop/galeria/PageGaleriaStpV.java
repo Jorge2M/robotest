@@ -6,13 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
-import com.mng.testmaker.boundary.aspects.validation.ResultValidation;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
+import com.mng.testmaker.domain.suitetree.Check;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -271,8 +271,8 @@ public class PageGaleriaStpV {
     }
     
     @Validation
-    private ChecksResult checkNotRepeatedArticles() {
-    	ChecksResult validations = ChecksResult.getNew();
+    private ChecksTM checkNotRepeatedArticles() {
+    	ChecksTM validations = ChecksTM.getNew();
         ArrayList<NombreYRef> productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
         String producRepeatedWarning = "";
         if (productsRepeated!=null && productsRepeated.size()>0) {
@@ -327,9 +327,9 @@ public class PageGaleriaStpV {
     }
     
     @Validation
-    private ChecksResult checkOrderListArticles(FilterOrdenacion typeOrdenacion, int numArticulosPant, int numArticulosValidar) 
+    private ChecksTM checkOrderListArticles(FilterOrdenacion typeOrdenacion, int numArticulosPant, int numArticulosValidar) 
     throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    	ChecksTM validations = ChecksTM.getNew();
       	validations.add(
     		"Aparecen > 1 prendas",
     		numArticulosPant > 1, State.Warn);
@@ -354,8 +354,8 @@ public class PageGaleriaStpV {
     }
     
     @Validation
-    private ChecksResult checkBackTo1ersElementOk(DataCtxShop dCtxSh) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    private ChecksTM checkBackTo1ersElementOk(DataCtxShop dCtxSh) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
       	validations.add(
     		"Es clickable el 1er elemento de la lista",
     		pageGaleria.isClickableArticuloUntil(1, 0), State.Warn);
@@ -513,8 +513,8 @@ public class PageGaleriaStpV {
    
    	@SuppressWarnings("static-access")
     @Validation
-    private ChecksResult checkIsFichaArticle(String nombre1erArt, String precio1erArt, int maxSecondsWait) {
-    	ChecksResult validations = ChecksResult.getNew();
+    private ChecksTM checkIsFichaArticle(String nombre1erArt, String precio1erArt, int maxSecondsWait) {
+    	ChecksTM validations = ChecksTM.getNew();
     	
     	PageFicha pageFicha = PageFicha.newInstance(channel, app, driver);
       	validations.add(
@@ -617,10 +617,10 @@ public class PageGaleriaStpV {
     }
     
     @Validation
-    private ChecksResult checkArticlesEqualsToPreviousGalery(
+    private ChecksTM checkArticlesEqualsToPreviousGalery(
     	int articulosComprobar, NombreYRefList listArticlesGaleriaAnt, 
     	NombreYRefList listArticlesGaleriaAct, NumColumnas numColumnas) {
-   		ChecksResult validations = ChecksResult.getNew();
+   		ChecksTM validations = ChecksTM.getNew();
    		
    		boolean articlesEquals = listArticlesGaleriaAct.isArticleListEquals(listArticlesGaleriaAnt, articulosComprobar);
    		String infoWarning = "";
@@ -645,8 +645,8 @@ public class PageGaleriaStpV {
     }
    
     @Validation
-    public ChecksResult validaNombresYRefEnOrden(NodoStatus nodoAnt, NodoStatus nodoAct) {
-   		ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validaNombresYRefEnOrden(NodoStatus nodoAnt, NodoStatus nodoAct) {
+   		ChecksTM validations = ChecksTM.getNew();
    		validations.add(
     		"El número de artículos de la galería Nuevo (" + nodoAct.getArticlesNuevo().size() + ") es igual al del nodo " + 
     		nodoAnt.getIp() + " (" + nodoAnt.getArticlesNuevo().size() + ")",
@@ -667,8 +667,8 @@ public class PageGaleriaStpV {
 
     @SuppressWarnings("static-access")
     @Validation
-    public ChecksResult validaRebajasHasta70Jun2018(IdiomaPais idioma) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validaRebajasHasta70Jun2018(IdiomaPais idioma) {
+    	ChecksTM validations = ChecksTM.getNew();
      	validations.add(
      		"<b style=\"color:blue\">Rebajas</b></br>" +
      		"Es visible el banner de cabecera",
@@ -728,8 +728,8 @@ public class PageGaleriaStpV {
     }
 
     @Validation
-    private ChecksResult checkFiltrosSalesOnInGalerySale(SecMenusFiltroCollection filtrosCollection) {
-    	ChecksResult validations = ChecksResult.getNew();
+    private ChecksTM checkFiltrosSalesOnInGalerySale(SecMenusFiltroCollection filtrosCollection) {
+    	ChecksTM validations = ChecksTM.getNew();
      	validations.add(
      		"<b style=\"color:blue\">Rebajas</b></br>" +
      		"Son visibles los menús laterales de filtro a nivel detemporadas (Collection)",
@@ -768,9 +768,9 @@ public class PageGaleriaStpV {
     }
    
 	@Validation
-    private ChecksResult checkArticlesCountryWithSalesOn(Pais pais, LineaType lineaType, bloqueMenu menuType, boolean isGaleriaSale) 
+    private ChecksTM checkArticlesCountryWithSalesOn(Pais pais, LineaType lineaType, bloqueMenu menuType, boolean isGaleriaSale) 
 	throws Exception {
-	   	ChecksResult validations = ChecksResult.getNew();
+	   	ChecksTM validations = ChecksTM.getNew();
 	   	
 	    FilterOrdenacion ordenType;
 	    RebajasPaisDAO rebajasPaisDAO = new RebajasPaisDAO();
@@ -820,9 +820,9 @@ public class PageGaleriaStpV {
    }
    
    @Validation
-   public ChecksResult validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles, 
+   public ChecksTM validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles, 
 		   										  State levelError, boolean avoidEvidences) {
-	   ChecksResult validations = ChecksResult.getNew();
+	   ChecksTM validations = ChecksTM.getNew();
 	   	
 	   PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 	   List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.articlesFromOther, listTemporadas);
@@ -852,8 +852,8 @@ public class PageGaleriaStpV {
    }
    
    @Validation
-   public ChecksResult validaNotArticlesOfTypeDesktop(TypeArticle typeArticle, State levelError, boolean avoidEvidences) {
-	   	ChecksResult validations = ChecksResult.getNew();
+   public ChecksTM validaNotArticlesOfTypeDesktop(TypeArticle typeArticle, State levelError, boolean avoidEvidences) {
+	   	ChecksTM validations = ChecksTM.getNew();
 	   	PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 	   	List<String> listArtWrong = pageGaleriaDesktop.getArticlesOfType(typeArticle);
 	   	validations.add(
@@ -866,7 +866,7 @@ public class PageGaleriaStpV {
 	   	return validations; 
    }   
    
-   private void addInfoArtWrongToDescription(List<String> listArtWrong, TypeArticle typeArticle, ResultValidation validation) {
+   private void addInfoArtWrongToDescription(List<String> listArtWrong, TypeArticle typeArticle, Check validation) {
        String textToAdd =
            "<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " + 
            "hay " + listArtWrong.size() + " artículos que son del tipo <b>" + typeArticle + "</b><br>:";
@@ -889,8 +889,8 @@ public class PageGaleriaStpV {
     
     @SuppressWarnings("static-access")
     @Validation
-    private static ChecksResult checkAfterClickInfoRebajas(WebDriver driver) throws Exception {
-		ChecksResult validations = ChecksResult.getNew();
+    private static ChecksTM checkAfterClickInfoRebajas(WebDriver driver) throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
 	    int maxSecondsToWait = 1;
     	validations.add(
     		"<b style=\"color:blue\">Rebajas</b></br>" +
@@ -903,8 +903,8 @@ public class PageGaleriaStpV {
     }
     
 	@Validation
-    public ChecksResult validateGaleriaAfeterSelectMenu(DataCtxShop dCtxSh) throws Exception {
-		ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validateGaleriaAfeterSelectMenu(DataCtxShop dCtxSh) throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
 		int maxSecondsToWaitArticle = 3;
 		int maxSecondsToWaitIcon = 2;
 		validations.add (

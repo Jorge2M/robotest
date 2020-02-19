@@ -18,26 +18,25 @@ import org.testng.ISuite;
 import org.testng.reporters.EmailableReporter;
 import org.testng.xml.XmlSuite;
 
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.conf.ConstantesTM;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
-import com.mng.testmaker.domain.StepTM;
-import com.mng.testmaker.domain.StepTM.StepEvidence;
-import com.mng.testmaker.domain.SuiteTM;
-import com.mng.testmaker.domain.TestCaseTM;
-import com.mng.testmaker.domain.TestRunTM;
-import com.mng.testmaker.domain.data.SuiteData;
-import com.mng.testmaker.domain.data.TestCaseData;
-import com.mng.testmaker.domain.data.TestRunData;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
+import com.mng.testmaker.domain.suitetree.StepEvidence;
+import com.mng.testmaker.domain.suitetree.SuiteBean;
+import com.mng.testmaker.domain.suitetree.SuiteTM;
+import com.mng.testmaker.domain.suitetree.TestCaseBean;
+import com.mng.testmaker.domain.suitetree.TestRunBean;
 
 
 public class GenerateReports extends EmailableReporter {
 	
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
-    private SuiteTM suite;
+    private SuiteBean suite;
+    private InputParamsTM inputParamsSuite;
     private List<Integer> treeTable;
     private String outputDirectory = "";
     private String reportHtml = "";
@@ -45,7 +44,9 @@ public class GenerateReports extends EmailableReporter {
     @Override
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
         super.generateReport(xmlSuites, suites, outputDirectory);
-    	this.suite = (SuiteTM)xmlSuites.get(0);
+        SuiteTM suiteTM = ((SuiteTM)xmlSuites.get(0));
+    	this.suite = suiteTM.getSuiteBean();
+    	this.inputParamsSuite = suiteTM.getInputParams();
     	this.treeTable = getMapTree(suite);
     	this.outputDirectory = outputDirectory;
         try {
@@ -74,16 +75,15 @@ public class GenerateReports extends EmailableReporter {
     }
 
     public void pintaHeadersTableMain() {
-    	SuiteData suiteD = SuiteData.from(suite);
     	reportHtml+=
         	"<table id=\"tableMain\" class=\"tablemain\">" + 
             "<thead>\n" + 
             "  <tr id=\"header1\">\n" + 
             "    <th colspan=\"13\" class=\"head\">" + 
-            "      <div id=\"titleReport\">" + suiteD.getName() + " - " + suiteD.getApp() + ", " + suiteD.getChannel() + " (Id: " + suiteD.getIdExecSuite() + ")" +
-            "        <span id=\"descrVersion\">" + suiteD.getVersion() + "</span>" +
-            "        <span id=\"browser\">" + suiteD.getWebDriverType() + "</span>" + 
-            "        <span id=\"url\"><a id=\"urlLink\" href=\"" + suiteD.getUrlBase() + "\">" + suiteD.getUrlBase() + "</a></span>" + 
+            "      <div id=\"titleReport\">" + suite.getName() + " - " + suite.getApp() + ", " + suite.getChannel() + " (Id: " + suite.getIdExecSuite() + ")" +
+            "        <span id=\"descrVersion\">" + suite.getVersion() + "</span>" +
+            "        <span id=\"browser\">" + suite.getWebDriverType() + "</span>" + 
+            "        <span id=\"url\"><a id=\"urlLink\" href=\"" + suite.getUrlBase() + "\">" + suite.getUrlBase() + "</a></span>" + 
             "      </div>" + 
             "    </th>\n" + 
             "  </tr>\n" +
@@ -157,71 +157,69 @@ public class GenerateReports extends EmailableReporter {
         reportHtml+="<br>\n";
         reportHtml+="<br>\n";
     }
-    
-    private void pintaTestRunsOfSuite() {
-    	reportHtml+="<tbody id=\"treet2\">\n";
-        for (TestRunTM testRun : suite.getListTestRuns()) {
-        	TestRunData testRunD = TestRunData.from(testRun);
-            DateFormat format = DateFormat.getDateTimeInstance();
-            reportHtml+= 
-            	"<tr class=\"testrun\">" +
-            	"  <td style=\"display:none;\"></td>\n" + 
-            	"  <td class=\"nowrap\">" + testRunD.getName() + "</td>" + 
-            	"  <td class=\"nowrap\"><div id=\"device\">" + testRunD.getDevice() + "</div></td>" + 
-            	"  <td>" + testRunD.getNumberTestCases() + "</td>" + 
-            	"  <td><div class=\"result" + testRunD.getResult() + "\">" + testRunD.getResult() + "</div></td>" + 
-            	"  <td>" + testRunD.getDurationMillis() + "</td>" + "               <td></td>" + 
-            	"  <td><br><br></td>" + 
-            	"  <td></td>" + 
-            	"  <td></td>" +
-            	"  <td>" + format.format(testRunD.getInicioDate()) + "</td>" + 
-            	"  <td>" + format.format(testRunD.getFinDate()) + "</td>" +
-            	"  <td></td>" + 
-            	"</tr>\n";
-            
-            pintaTestCasesOfTestRun(testRun);
-        }
-    }    
-    
-    private void pintaTestCasesOfTestRun(TestRunTM testRun) {
-    	List<TestCaseTM> listTestCases = testRun.getListTestCases();
-    	String TagTimeout = "@TIMEOUTSTEP";
-    	for (int i=0; i<listTestCases.size(); i++) {
-    		TestCaseData testCaseD = TestCaseData.from(listTestCases.get(i));
-            DateFormat format = DateFormat.getDateTimeInstance();
-            reportHtml+= 
-                "<tr class=\"method\"" + " met=\"" + testCaseD.getIndexInTestRun() + "\">" +
-                "  <td style=\"display:none;\"></td>\n" + 
-                "  <td class=\"nowrap\">" + testCaseD.getNameUnique() + "</td>" + 
-                "  <td class=\"nowrap\"></td>" + 
-                "  <td>" + testCaseD.getNumberSteps() + "</td>" + 
-                "  <td><div class=\"result" + testCaseD.getResult() + "\">" + testCaseD.getResult() + "</div></td>" + 
-                "  <td>" + testCaseD.getDurationMillis() + "</td>" + 
-                "  <td></td>" + 
-                "  <td><br><br></td>" + 
-                "  <td colspan=2>" + testCaseD.getDescription() + "</td>" + 
-                "  <td>" + TagTimeout + format.format(testCaseD.getInicioDate()) + "</td>" + 
-                "  <td>" + TagTimeout + format.format(testCaseD.getFinDate()) + "</td>" +
-                "  <td>" + testCaseD.getClassSignature() + "</td>" + 
-                "</tr>\n";
-            
-            boolean timeoutStep = pintaStepsOfTestCase(listTestCases.get(i));
-            String font = "<font>";
-            if (timeoutStep) {
-                font = "<font class=\"timeout\">";
-            }
-            reportHtml = reportHtml.replaceAll(TagTimeout, font);
-        }
-    }    
-    
-    /**
-     * @return if Timeout
-     */
-    private boolean pintaStepsOfTestCase(TestCaseTM testCase) {
+
+	private void pintaTestRunsOfSuite() {
+		reportHtml+="<tbody id=\"treet2\">\n";
+		for (TestRunBean testRun : suite.getListTestRun()) {
+			DateFormat format = DateFormat.getDateTimeInstance();
+			reportHtml+= 
+				"<tr class=\"testrun\">" +
+				"  <td style=\"display:none;\"></td>\n" + 
+				"  <td class=\"nowrap\">" + testRun.getName() + "</td>" + 
+				"  <td class=\"nowrap\"><div id=\"device\">" + testRun.getDevice() + "</div></td>" + 
+				"  <td>" + testRun.getNumberTestCases() + "</td>" + 
+				"  <td><div class=\"result" + testRun.getResult() + "\">" + testRun.getResult() + "</div></td>" + 
+				"  <td>" + testRun.getDurationMillis() + "</td>" + "               <td></td>" + 
+				"  <td><br><br></td>" + 
+				"  <td></td>" + 
+				"  <td></td>" +
+				"  <td>" + format.format(testRun.getInicioDate()) + "</td>" + 
+				"  <td>" + format.format(testRun.getFinDate()) + "</td>" +
+				"  <td></td>" + 
+				"</tr>\n";
+
+			pintaTestCasesOfTestRun(testRun);
+		}
+	}
+
+	private void pintaTestCasesOfTestRun(TestRunBean testRun) {
+		List<TestCaseBean> listTestCases = testRun.getListTestCase();
+		String TagTimeout = "@TIMEOUTSTEP";
+		for (int i=0; i<listTestCases.size(); i++) {
+			TestCaseBean testCase = listTestCases.get(i);
+			DateFormat format = DateFormat.getDateTimeInstance();
+			reportHtml+= 
+				"<tr class=\"method\"" + " met=\"" + testCase.getIndexInTestRun() + "\">" +
+				"  <td style=\"display:none;\"></td>\n" + 
+				"  <td class=\"nowrap\">" + testCase.getNameUnique() + "</td>" + 
+				"  <td class=\"nowrap\"></td>" + 
+				"  <td>" + testCase.getNumberSteps() + "</td>" + 
+				"  <td><div class=\"result" + testCase.getResult() + "\">" + testCase.getResult() + "</div></td>" + 
+				"  <td>" + testCase.getDurationMillis() + "</td>" + 
+				"  <td></td>" + 
+				"  <td><br><br></td>" + 
+				"  <td colspan=2>" + testCase.getDescription() + "</td>" + 
+				"  <td>" + TagTimeout + format.format(testCase.getInicioDate()) + "</td>" + 
+				"  <td>" + TagTimeout + format.format(testCase.getFinDate()) + "</td>" +
+				"  <td>" + testCase.getClassSignature() + "</td>" + 
+				"</tr>\n";
+
+			boolean timeoutStep = pintaStepsOfTestCase(testCase);
+			String font = "<font>";
+			if (timeoutStep) {
+				font = "<font class=\"timeout\">";
+			}
+			reportHtml = reportHtml.replaceAll(TagTimeout, font);
+		}
+	}
+
+    private boolean pintaStepsOfTestCase(TestCaseBean testCase) {
     	boolean timeout = false;
-        for (StepTM step : testCase.getStepsList()) {
-            int stepNumber = step.getPositionInTestCase();
-            String ImageFileStep = StoreStepEvidencies.getPathFileEvidenciaStep(outputDirectory, step, StepEvidence.imagen);
+    	int stepNumber = 0;
+        for (StepTM step : testCase.getListStep()) {
+        	StoreStepEvidencies storerError = new StoreStepEvidencies(step);
+            stepNumber+=1;
+            String ImageFileStep = storerError.getPathFileEvidenciaStep(StepEvidence.imagen);
             File indexFile = new File(ImageFileStep);
             String litPNGNewStep = "";
             String PNGNewStep = "#";
@@ -230,33 +228,32 @@ public class GenerateReports extends EmailableReporter {
                 PNGNewStep = getRelativePathEvidencia(step, StepEvidence.imagen);
             }
 
-            String ErrorFileStep = StoreStepEvidencies.getPathFileEvidenciaStep(outputDirectory, step, StepEvidence.errorpage);
+            String ErrorFileStep = storerError.getPathFileEvidenciaStep(StepEvidence.errorpage);
             indexFile = new File(ErrorFileStep);
             String linkErrorNew = "";
             if (indexFile.exists()) {
                 linkErrorNew = " \\ <a href=\"" + getRelativePathEvidencia(step, StepEvidence.errorpage) + "\" target=\"_blank\">ErrorPage</a>";
             }
 
-            String HARPFileStep = StoreStepEvidencies.getPathFileEvidenciaStep(outputDirectory, step, StepEvidence.harp);
+            String HARPFileStep = storerError.getPathFileEvidenciaStep(StepEvidence.harp);
             indexFile = new File(HARPFileStep);
             String linkHarpNew = "";
             if (indexFile.exists()) {
-            	InputParamsTM inputParams = testCase.getSuiteParent().getInputParams();
                 String pathHARP = getDnsOfFileReport(
                 		indexFile.getAbsolutePath(), 
-                		inputParams.getWebAppDNS(), 
-                		inputParams.getTypeAccess()).replace('\\', '/');
+                		inputParamsSuite.getWebAppDNS(), 
+                		inputParamsSuite.getTypeAccess()).replace('\\', '/');
                 linkHarpNew = " \\ <a href=\"" + ConstantesTM.URL_SOFTWAREISHARD + pathHARP + "\" target=\"_blank\">NetTraffic</a>";
             }
             
-            String HARFileStep = StoreStepEvidencies.getPathFileEvidenciaStep(outputDirectory, step, StepEvidence.har);
+            String HARFileStep = storerError.getPathFileEvidenciaStep(StepEvidence.har);
             String linkHarNew = "";
             indexFile = new File(HARFileStep);
             if (indexFile.exists()) {
                 linkHarNew = " \\ <a href=\"" + getRelativePathEvidencia(step, StepEvidence.har) + "\" target=\"_blank\">NetJSON</a>";
             }
 
-            String HtmlFileStep = StoreStepEvidencies.getPathFileEvidenciaStep(outputDirectory, step, StepEvidence.html);
+            String HtmlFileStep = storerError.getPathFileEvidenciaStep(StepEvidence.html);
             indexFile = new File(HtmlFileStep);
             String linkHtmlNew = "";
             if (indexFile.exists()) {
@@ -276,7 +273,7 @@ public class GenerateReports extends EmailableReporter {
                 "     <td style=\"display:none;\"></td>\n" +
                 "     <td class=\"nowrap\">Step " + stepNumber + "</td>" + 
                 "     <td></td>" + 
-                "     <td>" + step.getNumChecksResult() + "</td>" + 
+                "     <td>" + step.getNumChecksTM() + "</td>" + 
                 "     <td><div class=\"result" + step.getResultSteps() + "\">" + step.getResultSteps() + "</div></td>" + 
                 "     <td>" + diffInMillies + "</td>" + 
                 "     <td><a href=\"" + PNGNewStep + "\" target=\"_blank\">" + litPNGNewStep + "</a>" + linkErrorNew + linkHarpNew + linkHarNew + "</td>" + 
@@ -294,16 +291,17 @@ public class GenerateReports extends EmailableReporter {
         return timeout;
     }
 
-    private String getRelativePathEvidencia(StepTM step, StepEvidence evidence) {
-        String fileName = StoreStepEvidencies.getNameFileEvidenciaStep(step.getPositionInTestCase(), evidence);
-        String testRunName = step.getTestRunParent().getName();
-        String testCaseNameUnique = step.getTestCaseParent().getNameUnique();
-        return ("./" + testRunName + "/" + testCaseNameUnique + "/" + fileName);
-    }
+	private String getRelativePathEvidencia(StepTM step, StepEvidence evidence) {
+		StoreStepEvidencies storer = new StoreStepEvidencies(step);
+		String fileName = storer.getNameFileEvidenciaStep(evidence);
+		String testRunName = step.getTestRunParent().getName();
+		String testCaseNameUnique = step.getTestCaseParent().getNameUnique();
+		return ("./" + testRunName + "/" + testCaseNameUnique + "/" + fileName);
+	}
     
     private void pintaValidacionesStep(StepTM step) {
-    	List<ChecksResult> listChecksResult = step.getListChecksResult();
-        for (ChecksResult checksResult : listChecksResult) {
+    	List<ChecksTM> listChecksResult = step.getListChecksTM();
+        for (ChecksTM checksResult : listChecksResult) {
             String descriptValid = checksResult.getHtmlValidationsBrSeparated();
             reportHtml+= 
             	"<tr class=\"validation collapsed\"" + " met=\"" + step.getTestCaseParent().getIndexInTestRun() + "\">" +
@@ -343,18 +341,18 @@ public class GenerateReports extends EmailableReporter {
         } 
     }
 
-    static List<Integer> getMapTree(SuiteTM suite) {
+    static List<Integer> getMapTree(SuiteBean suite) {
     	List<Integer> listMapReturn = new ArrayList<>();
-    	for (TestRunTM testRun : suite.getListTestRuns()) {
+    	for (TestRunBean testRun : suite.getListTestRun()) {
     		listMapReturn.add(0);
     		int posLastTestRun = listMapReturn.size();
-    		for (TestCaseTM testCase : testRun.getListTestCases()) {
+    		for (TestCaseBean testCase : testRun.getListTestCase()) {
     			listMapReturn.add(posLastTestRun);
         		int posLastTest = listMapReturn.size();
-    			for (StepTM step : testCase.getStepsList()) {
+    			for (StepTM step : testCase.getListStep()) {
     				listMapReturn.add(posLastTest);
             		int posLastStep = listMapReturn.size();
-            		for (int i=0; i<step.getListChecksResult().size(); i++) {
+            		for (int i=0; i<step.getListChecksTM().size(); i++) {
         				listMapReturn.add(posLastStep);
             		}
     			}
@@ -384,17 +382,17 @@ public class GenerateReports extends EmailableReporter {
         }
     }
 	
-    private static String getNamePC() {
-        String hostname = "";
-        try {
-            InetAddress addr;
-            addr = InetAddress.getLocalHost();
-            hostname = addr.getHostName();
-        }
-        catch (UnknownHostException ex) {
-            hostname = "Unknown";
-        }
+	private static String getNamePC() {
+		String hostname = "";
+		try {
+			InetAddress addr;
+			addr = InetAddress.getLocalHost();
+			hostname = addr.getHostName();
+		}
+		catch (UnknownHostException ex) {
+			hostname = "Unknown";
+		}
 		
-        return hostname;
-    }
+		return hostname;
+	}
 }

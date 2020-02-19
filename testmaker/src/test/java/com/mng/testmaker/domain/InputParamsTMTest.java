@@ -17,7 +17,7 @@ public class InputParamsTMTest {
 		inputParams.setListTestCaseItems(Arrays.asList(listTestCaseItems.split(",")));
 		
 		//When
-		List<TestCaseData> listTestCaseData = inputParams.getListTestCasesData();
+		List<TestCaseParams> listTestCaseData = inputParams.getListTestCasesData();
 		
 		//Then
 		assertTrue(listTestCaseData.size()==3);

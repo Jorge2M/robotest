@@ -4,17 +4,17 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageConsultaIdEans;
 
 public class PageConsultaIdEansStpV {
 
 	@Validation
-    public static ChecksResult validateIsPage(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPage(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Es visible el contenido de la pestaña Busqueda Excel",
 			PageConsultaIdEans.isVisibleDivBusquedaExcel(driver), State.Defect);
@@ -37,8 +37,8 @@ public class PageConsultaIdEansStpV {
 	}
     
     @Validation
-    private static ChecksResult checkAfterConsultContact(List<String> pedidosPrueba, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+    private static ChecksTM checkAfterConsultContact(List<String> pedidosPrueba, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	    int maxSecondsWait = 2;
     	validations.add(
     		"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsWait + " segundos)",
@@ -62,8 +62,8 @@ public class PageConsultaIdEansStpV {
 	}
     
     @Validation
-    private static ChecksResult checkAfterConsultaIdentPedidos(List<String> pedidosPrueba, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+    private static ChecksTM checkAfterConsultaIdentPedidos(List<String> pedidosPrueba, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
         int maxSecondsToWait = 2;
     	validations.add(
     		"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)",
@@ -103,8 +103,8 @@ public class PageConsultaIdEansStpV {
 	}
 	
 	@Validation
-	private static ChecksResult checkAfterConsultEAN(List<String> articulosPrueba, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterConsultEAN(List<String> articulosPrueba, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
         int maxSecondsToWait = 2;
     	validations.add(
     		"Se muestra la tabla de información (la esperamos un máximo de " + maxSecondsToWait + " segundos)",

@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;

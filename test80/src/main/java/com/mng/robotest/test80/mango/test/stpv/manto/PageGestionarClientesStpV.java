@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestionarClientes;
@@ -14,8 +14,8 @@ import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestionarClientes
 public class PageGestionarClientesStpV {
 
 	@Validation
-	public static ChecksResult validateIsPage(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	public static ChecksTM validateIsPage(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Estamos en la página " + PageGestionarClientes.titulo,
 			PageGestionarClientes.isPage(driver), State.Defect);
@@ -40,8 +40,8 @@ public class PageGestionarClientesStpV {
 	}
 	
 	@Validation
-	private static ChecksResult checkAfterSearchByDni(String dni, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterSearchByDni(String dni, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Se muestra la tabla de información",
 			PageGestionarClientes.isVisibleTablaInformacion(driver), State.Defect);
@@ -73,8 +73,8 @@ public class PageGestionarClientesStpV {
 	}
 	
 	@Validation
-	private static ChecksResult checkAfterClickButton(TypeThirdButton typeButton, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterClickButton(TypeThirdButton typeButton, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece el mensaje <b>" + typeButton.getMensaje() + "</b>",
 			PageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton, driver), State.Defect);
@@ -101,8 +101,8 @@ public class PageGestionarClientesStpV {
 	}
 	
 	@Validation
-	private static ChecksResult checkAfterClickDetalles(String dni, String idCliente, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterClickDetalles(String dni, String idCliente, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece el id del cliente <b>" + idCliente + "</b>",
 			PageGestionarClientes.isVisibleIdClienteClickDetallesButton(idCliente, driver), State.Defect);

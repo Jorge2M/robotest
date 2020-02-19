@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.DataDireccion;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.ModalDirecFactura;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page1DktopCheckout;
@@ -14,8 +14,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutW
 public class ModalDirecFacturaStpV {
 
 	@Validation
-    public static ChecksResult validateIsOk(WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsOk(WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 5;
 	 	validations.add(
 			"Es visible el formulario para la introducción de la \"Dirección de facturación\" (lo esperamos hasta " + maxSecondsWait + " seconds)",
@@ -40,8 +40,8 @@ public class ModalDirecFacturaStpV {
     }
 	
 	@Validation
-	private static ChecksResult checkAfterChangeDireccion(WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterChangeDireccion(WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Desaparece el modal de introducción de los datos de la dirección",
 	 		!ModalDirecFactura.isVisibleFormUntil(0, driver), State.Defect);    

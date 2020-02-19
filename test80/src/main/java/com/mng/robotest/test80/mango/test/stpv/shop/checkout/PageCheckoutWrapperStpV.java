@@ -7,14 +7,14 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -91,8 +91,8 @@ public class PageCheckoutWrapperStpV {
     }
     
     @Validation
-    private static ChecksResult checkAvailablePagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    private static ChecksTM checkAvailablePagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país (" + pais.getListPagosForTest(app, isEmpl).size() + ")",
 			PageCheckoutWrapper.isNumMetodosPagoOK(pais, app, channel, isEmpl, driver), State.Defect);    	
@@ -100,8 +100,8 @@ public class PageCheckoutWrapperStpV {
     }
     
     @Validation
-    private static ChecksResult checkLogosPagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) { 
-    	ChecksResult validations = ChecksResult.getNew();
+    private static ChecksTM checkLogosPagos(Pais pais, boolean isEmpl, AppEcom app, Channel channel, WebDriver driver) { 
+    	ChecksTM validations = ChecksTM.getNew();
         List<Pago> listPagos = pais.getListPagosForTest(app, isEmpl);
         if (listPagos.size()==1 && channel==Channel.movil_web) {
         	return validations;
@@ -419,8 +419,8 @@ public class PageCheckoutWrapperStpV {
     }
     
     @Validation
-    private static ChecksResult checkAfterInputTarjetaEmpleado(Pais pais, Channel channel, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    private static ChecksTM checkAfterInputTarjetaEmpleado(Pais pais, Channel channel, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
 	    int maxSecondsWait = 5;
 	 	validations.add(
 			"Aparece el campo de introducción del primer apellido (lo esperamos hasta " + maxSecondsWait + " segundos)",

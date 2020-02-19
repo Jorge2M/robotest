@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi.PageAssistQiwi1rst;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.assistqiwi.PageAssistQiwi1rst.pasarelasAssist;
@@ -14,8 +14,8 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PageAssistQiwi1rstStpV {
 
 	@Validation
-	public static ChecksResult validateIsPage(String importeTotal, String codPais, Channel channel, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	public static ChecksTM validateIsPage(String importeTotal, String codPais, Channel channel, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece el icono de Assist",
 			PageAssistQiwi1rst.isPresentIconoAssist(driver, channel), State.Warn);

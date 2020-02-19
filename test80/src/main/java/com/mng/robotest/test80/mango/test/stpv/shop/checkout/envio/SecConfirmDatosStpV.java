@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -49,9 +49,9 @@ public class SecConfirmDatosStpV {
 	}
 	
 	@Validation
-	private static ChecksResult checkConfirmacionCambioDireccionEnvio(DataPedido dataPedido, Channel channel, WebDriver driver) 
+	private static ChecksTM checkConfirmacionCambioDireccionEnvio(DataPedido dataPedido, Channel channel, WebDriver driver) 
 	throws Exception {
-		ChecksResult validations = ChecksResult.getNew();
+		ChecksTM validations = ChecksTM.getNew();
 		validations.add(
 			"Desaparece la capa de Droppoints",
 			!ModalDroppoints.isVisible(channel, driver), State.Warn);

@@ -2,7 +2,7 @@ package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageReembolsos;
 import org.openqa.selenium.WebDriver;
 
@@ -10,8 +10,8 @@ import org.openqa.selenium.WebDriver;
 public class PageReembolsosStpV {
 
     @Validation
-    public static ChecksResult validateIsPage (WebDriver driver) {
-        ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPage (WebDriver driver) {
+        ChecksTM validations = ChecksTM.getNew();
         validations.add(
         	"Aparece la página de Reembolsos",
         	PageReembolsos.isPage(driver), State.Defect);

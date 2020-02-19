@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.TestCaseTM;
+import com.mng.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 public class BuscarWithoutRefactor {

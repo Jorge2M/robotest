@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.PageCheckoutWrapper;
@@ -39,8 +39,8 @@ public class SecMetodoEnvioDesktopStpV {
     }
     
     @Validation
-    public static ChecksResult validaBlockSelectedDesktop(TipoTransporte tipoTransporte, WebDriver driver) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validaBlockSelectedDesktop(TipoTransporte tipoTransporte, WebDriver driver) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 5;
       	validations.add(
     		"Desaparece la capa de Loading  (lo esperamos hasta " + maxSecondsWait + " segundos)",

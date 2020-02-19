@@ -4,9 +4,9 @@ import org.testng.*;
 import org.testng.annotations.*;
 
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.domain.SuiteTM;
 import com.mng.testmaker.domain.SuitesExecuted;
-import com.mng.testmaker.domain.TestCaseData;
+import com.mng.testmaker.domain.TestCaseParams;
+import com.mng.testmaker.domain.suitetree.SuiteTM;
 
 import java.lang.reflect.*;
 import java.util.List;
@@ -18,7 +18,7 @@ public class MyTransformer implements IAnnotationTransformer {
 	@Override
 	public void transform(ITestAnnotation annotation, Class testClass, Constructor testConstructor, Method testMethod) {
 		SuiteTM suite = getSuiteOfTest();
-		TestCaseData testCaseData = suite.getInputParams().getTestCaseData(testMethod.getName());
+		TestCaseParams testCaseData = suite.getInputParams().getTestCaseParams(testMethod.getName());
 		if (testCaseData!=null) {
 			Integer invocationCount = testCaseData.getInvocationCount(); 
 			if (invocationCount!=null) {

@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMango;
@@ -14,8 +14,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.tmango.SecTMa
 public class SecTMangoStpV {
 
 	@Validation
-    public static ChecksResult validateIsSectionOk(Channel channel, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsSectionOk(Channel channel, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece el bloque de selección de la forma de pago",
 			SecTMango.isVisibleUntil(channel, 0, driver), State.Defect); 

@@ -3,16 +3,16 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.multibanco;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.multibanco.PageMultibancoEnProgreso;
 
 public class PageMultibancoEnProgresoStpv {
     
 	@Validation
-    public static ChecksResult validateIsPage(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPage(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
         int maxSecondsToWait = 3;
 	   	validations.add(
     		"Aparece la cabecera <b>Pagamento em progreso</b> (la esperamos hasta " + maxSecondsToWait + " segundos",

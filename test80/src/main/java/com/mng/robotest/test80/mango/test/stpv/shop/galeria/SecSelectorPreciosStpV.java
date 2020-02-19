@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -66,8 +66,8 @@ public class SecSelectorPreciosStpV {
 	}
 	
 	@Validation
-	private ChecksResult checkResultSelectFiltro(DataFilterPrecios dataFilter) throws Exception {
-		ChecksResult validations = ChecksResult.getNew();
+	private ChecksTM checkResultSelectFiltro(DataFilterPrecios dataFilter) throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
 		validations.add(
 			"El nuevo mínimo es mayor que el anterior. Era de <b>" + dataFilter.minimoOrig + "</b> y ahora es <b>" + dataFilter.minimoFinal + "</b>",
 			dataFilter.minimoFinal > dataFilter.minimoOrig, State.Warn);

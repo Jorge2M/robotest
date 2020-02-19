@@ -9,7 +9,7 @@ import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.SenderMailEndSuiteI;
-import com.mng.testmaker.domain.SuiteTM;
+import com.mng.testmaker.domain.suitetree.SuiteTM;
 
 public class DefaultMailEndSuite implements SenderMailEndSuiteI {
 	

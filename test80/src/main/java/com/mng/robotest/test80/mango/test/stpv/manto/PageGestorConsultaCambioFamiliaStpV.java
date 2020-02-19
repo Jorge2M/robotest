@@ -3,17 +3,17 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorConsultaCambioFamilia;
 
 public class PageGestorConsultaCambioFamiliaStpV {
 
 	@Validation
-	public static ChecksResult validateIsPage(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	public static ChecksTM validateIsPage(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Estamos en la página " + PageGestorConsultaCambioFamilia.titulo,
 			PageGestorConsultaCambioFamilia.isPage(driver), State.Defect);
@@ -36,8 +36,8 @@ public class PageGestorConsultaCambioFamiliaStpV {
 	}
 	
 	@Validation
-	private static ChecksResult checkAfterSearchProductXfamilia(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterSearchProductXfamilia(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 		validations.add(
 			"Aparece la tabla con los productos",
 			PageGestorConsultaCambioFamilia.isTablaProductosVisible(driver), State.Defect);
@@ -57,8 +57,8 @@ public class PageGestorConsultaCambioFamiliaStpV {
 	}
 	
 	@Validation
-	private static ChecksResult checkAfeterClickCambioFamilia(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfeterClickCambioFamilia(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 		validations.add(
 			"Aparece la tabla con las opciones para los cambios de familia",
 			PageGestorConsultaCambioFamilia.isTablaCambioFamiliaVisible(driver), State.Defect);

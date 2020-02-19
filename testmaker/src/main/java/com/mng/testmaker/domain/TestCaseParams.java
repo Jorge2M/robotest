@@ -1,6 +1,6 @@
 package com.mng.testmaker.domain;
 
-public class TestCaseData {
+public class TestCaseParams {
 
 	private String name;
 	private Integer invocationCount;

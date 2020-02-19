@@ -6,27 +6,25 @@ import org.testng.IReporter;
 import org.testng.ISuite;
 import org.testng.xml.XmlSuite;
 
-import com.mng.testmaker.domain.SuiteTM;
+import com.mng.testmaker.domain.suitetree.SuiteTM;
 
 public class Reporter implements IReporter {
 
-    public static final String TESTNG_FAILED_XML = "testng-failed.xml";
-    
-    @SuppressWarnings("unused")
-    private XmlSuite m_xmlSuite;
-  
-  
-    public Reporter() {
-    }
+	public static final String TESTNG_FAILED_XML = "testng-failed.xml";
 
-    public Reporter(XmlSuite xmlSuite) {
-        this.m_xmlSuite = xmlSuite;	
-    }
+	@SuppressWarnings("unused")
+	private XmlSuite m_xmlSuite;
 
-    @Override
-    public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
-    	SuiteTM suite = (SuiteTM)xmlSuites.get(0);
-        GenerateReports report = new GenerateReports();
-        report.generateReport(xmlSuites, suites, suite.getPathDirectory());
-    }
+	public Reporter() {}
+
+	public Reporter(XmlSuite xmlSuite) {
+		this.m_xmlSuite = xmlSuite;	
+	}
+
+	@Override
+	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
+		SuiteTM suite = (SuiteTM)xmlSuites.get(0);
+		GenerateReports report = new GenerateReports();
+		report.generateReport(xmlSuites, suites, suite.getPathDirectory());
+	}
 }

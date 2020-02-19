@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.yandex;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandex1rst;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandexPayingByCode;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -13,9 +13,9 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PageYandex1rstStpv {
     
 	@Validation
-    public static ChecksResult validateIsPage(String emailUsr, String importeTotal, String codPais, WebDriver driver) {
+    public static ChecksTM validateIsPage(String emailUsr, String importeTotal, String codPais, WebDriver driver) {
         //Esta validación debería hacerse en un punto posterior, una vez se ha intentado enviar el input que es cuando se genera el botón retry.
-    	ChecksResult validations = ChecksResult.getNew();
+    	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece la página inicial de Yandex",
 			PageYandex1rst.isPage(driver), State.Warn);

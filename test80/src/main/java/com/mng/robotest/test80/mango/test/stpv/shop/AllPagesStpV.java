@@ -5,10 +5,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.testmaker.service.webdriver.utils.WebUtils;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -30,9 +30,9 @@ public class AllPagesStpV {
     }
     
     @Validation
-    public static ChecksResult checksStandar(StdValidationFlags flagsVal, WebDriver driver) 
+    public static ChecksTM checksStandar(StdValidationFlags flagsVal, WebDriver driver) 
     throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    	ChecksTM validations = ChecksTM.getNew();
     	if (flagsVal.validaSEO) {
     		ResultadoErrores resValidac = AllPagesSEO.validacionesGenericasSEO(driver);
     		String descripValidac = "Se cumplen las validaciones genéricas de SEO";
@@ -82,8 +82,8 @@ public class AllPagesStpV {
     }
     
     @Validation
-    public static ChecksResult validatePageWithFooter(Pais pais, AppEcom app, WebDriver driver) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validatePageWithFooter(Pais pais, AppEcom app, WebDriver driver) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
 		validations.add(
 			"Aparece el footer",
 			SecFooter.isPresent(app, driver), State.Warn);

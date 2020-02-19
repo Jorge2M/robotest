@@ -2,11 +2,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.favoritos;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
@@ -43,8 +43,8 @@ public class PageFavoritosStpV {
     }
     
     @Validation
-    public ChecksResult validaIsPageOK(DataFavoritos dataFavoritos) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validaIsPageOK(DataFavoritos dataFavoritos) {
+    	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsToWaitCapa = 3;
         int maxSecondsToWaitArticles = 1;
     	validations.add(
@@ -75,8 +75,8 @@ public class PageFavoritosStpV {
     }
     
     @Validation
-    public ChecksResult checkShareIsOk() {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM checkShareIsOk() {
+    	ChecksTM validations = ChecksTM.getNew();
     	int secondsToWait = 5;
     	validations.add(
     		"Aparece el modal de favoritos compartidos",
@@ -134,8 +134,8 @@ public class PageFavoritosStpV {
     }
     
     @Validation
-    public ChecksResult checkFavoritosWithoutArticles() {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM checkFavoritosWithoutArticles() {
+    	ChecksTM validations = ChecksTM.getNew();
     	validations.add(
     		"No queda ningún artículo en Favoritos",
     		!pageFavoritos.hayArticulos(), State.Defect);

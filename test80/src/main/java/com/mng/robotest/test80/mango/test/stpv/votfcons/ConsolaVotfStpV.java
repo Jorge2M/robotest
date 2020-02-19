@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.stpv.votfcons;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.votfcons.IframeResult;
 import com.mng.robotest.test80.mango.test.pageobject.votfcons.PageConsola;
@@ -21,8 +21,8 @@ public class ConsolaVotfStpV {
     }
 	
 	@Validation
-	private static ChecksResult checkAfterAccessInitialPage(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterAccessInitialPage(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece el apartado \"Test servicios VOTF\"",
 			PageConsola.existTestServVOTF(driver), State.Warn);
@@ -89,8 +89,8 @@ public class ConsolaVotfStpV {
     }
 	
 	@Validation
-	private static ChecksResult checkAfterClickConsultDispEnvioDomicilio(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterClickConsultDispEnvioDomicilio(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 		int maxSecondsToWait = 5;
 		boolean isDataSelectCodigoTrasnp = PageConsola.isDataSelectCodigoTransporte(maxSecondsToWait, driver);
 	 	validations.add(
@@ -130,8 +130,8 @@ public class ConsolaVotfStpV {
     }
 	
 	@Validation
-	private static ChecksResult checkAfterClickConsultDispEnvioTienda(String paginaPadre, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterClickConsultDispEnvioTienda(String paginaPadre, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
         paginaPadre = driver.getWindowHandle();
 		try {
 	        PageConsola.switchToResultIFrame(driver);
@@ -170,8 +170,8 @@ public class ConsolaVotfStpV {
 	}
 	
 	@Validation
-	private static ChecksResult checkAfterSolicitudAtiendaInIframe(String codigoPedido, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterSolicitudAtiendaInIframe(String codigoPedido, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Código de pedido\"",
 			IframeResult.isPresentCodigoPedido(driver), State.Warn);
@@ -204,8 +204,8 @@ public class ConsolaVotfStpV {
 	}
 	
 	@Validation
-	private static ChecksResult checkAfterObtenerPedidosInIframe(String codigoPedido, String codigoPedidoFull, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterObtenerPedidosInIframe(String codigoPedido, String codigoPedidoFull, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Pedidos\"",
 			IframeResult.isPresentListaPedidos(driver), State.Warn);
@@ -254,8 +254,8 @@ public class ConsolaVotfStpV {
     }
 	
 	@Validation
-	private static ChecksResult checkAfterPreconfirmarPedido(String codigoPedidoFull, WebDriver driver) {
-        ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterPreconfirmarPedido(String codigoPedidoFull, WebDriver driver) {
+        ChecksTM validations = ChecksTM.getNew();
         String paginaPadre = driver.getWindowHandle();
         try {
 	        PageConsola.switchToResultIFrame(driver);
@@ -284,8 +284,8 @@ public class ConsolaVotfStpV {
     }
 	
 	@Validation
-	private static ChecksResult checkAfterConfirmarPedido(String codigoPedidoFull, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterConfirmarPedido(String codigoPedidoFull, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
         String paginaPadre = driver.getWindowHandle();
         try {
 			PageConsola.switchToResultIFrame(driver);

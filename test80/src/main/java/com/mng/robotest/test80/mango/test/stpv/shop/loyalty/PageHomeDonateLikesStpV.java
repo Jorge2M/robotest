@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.loyalty;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.loyalty.PageHomeDonateLikes;
 import com.mng.robotest.test80.mango.test.pageobject.shop.loyalty.PageHomeDonateLikes.ButtonLikes;
 
@@ -23,8 +23,8 @@ public class PageHomeDonateLikesStpV {
 	}
 	
 	@Validation
-	public ChecksResult checkIsPage() {
-		ChecksResult checks = ChecksResult.getNew();
+	public ChecksTM checkIsPage() {
+		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la pagina de <b>Donar Likes</b>",
 			pageHomeDonateLikes.checkIsPage(), State.Defect);
@@ -47,8 +47,8 @@ public class PageHomeDonateLikesStpV {
 	}
 	
 	@Validation
-	public ChecksResult checkAfterDonateLikes(ButtonLikes buttonSelected) {
-		ChecksResult checks = ChecksResult.getNew();
+	public ChecksTM checkAfterDonateLikes(ButtonLikes buttonSelected) {
+		ChecksTM checks = ChecksTM.getNew();
 		int maxSecondsWait = 5;
 		checks.add(
 			"Aparece el icono correspondiente a la operación realizada (lo esperamos hasta " + maxSecondsWait + " segundos)",

@@ -5,9 +5,9 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMisDatos;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
@@ -15,8 +15,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 public class PageMisDatosStpV {
 
     @Validation
-    public static ChecksResult validaIsPage (String usuarioReg, WebDriver driver) throws Exception {
-        ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validaIsPage (String usuarioReg, WebDriver driver) throws Exception {
+        ChecksTM validations = ChecksTM.getNew();
         validations.add(
             "Aparece una página con el la cabecera \"Mis datos\"",
             PageMisDatos.isPage(driver), State.Warn);
@@ -37,7 +37,7 @@ public class PageMisDatosStpV {
     }
 
     @Validation
-    public static ChecksResult validaIsDataAssociatedToRegister (Map<String,String> datosRegOk, String codpais, WebDriver driver) 
+    public static ChecksTM validaIsDataAssociatedToRegister (Map<String,String> datosRegOk, String codpais, WebDriver driver) 
     throws Exception {
         String nombre = datosRegOk.get("cfName");
         String apellidos = datosRegOk.get("cfSname");
@@ -47,7 +47,7 @@ public class PageMisDatosStpV {
         String poblacion = datosRegOk.get("cfCity");
         String provincia = datosRegOk.get("estadosPais");
 
-        ChecksResult validations = ChecksResult.getNew();
+        ChecksTM validations = ChecksTM.getNew();
         validations.add(
             "Aparece un campo de contraseña de tipo password",
             PageMisDatos.isVisiblePasswordTypePassword(driver), State.Defect);

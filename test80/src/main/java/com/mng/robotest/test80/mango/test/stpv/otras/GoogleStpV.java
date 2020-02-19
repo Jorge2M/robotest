@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.otras.PageGoogle;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test80.mango.test.pageobject.shop.landing.PageLanding;
@@ -24,8 +24,8 @@ public class GoogleStpV {
     }
 	
 	@Validation
-	private static ChecksResult checkLinksMango(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkLinksMango(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 3;
     	validations.add(
     		"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + maxSecondsWait + " segundos)",

@@ -9,7 +9,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.domain.TestRunTM;
+import com.mng.testmaker.domain.suitetree.TestRunTM;
 import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackDesktop;
 import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackMobil;
 

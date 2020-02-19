@@ -5,9 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.generic.ChequeRegalo;
 import com.mng.robotest.test80.mango.test.pageobject.chequeregalo.PageChequeRegaloInputData;
@@ -30,8 +30,8 @@ public class PageChequeRegaloInputDataStpV{
 	}
 
 	@Validation
-	private static ChecksResult checkInputDataTarjeta(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkInputDataTarjeta(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
     	int maxSecondsWait = 2;
     	validations.add(
     		"Aparece el cuadro de introduccion de datos determinado (lo esperamos hasta " + maxSecondsWait + " segundos)",
@@ -58,8 +58,8 @@ public class PageChequeRegaloInputDataStpV{
     }
 	
 	@Validation
-	private static ChecksResult checkInputOtherData(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkInputOtherData(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
     	int maxSecondsWait = 2;
     	validations.add(
     		"Es visible el campo de <b>cvv</b> (lo esperamos hasta " + maxSecondsWait + " segundos)</br>",
@@ -87,8 +87,8 @@ public class PageChequeRegaloInputDataStpV{
 	}
 	
 	@Validation
-	private static ChecksResult checkConsultaSaldoTarjeta(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkConsultaSaldoTarjeta(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
     	int maxSecondsWait = 2;
     	validations.add(
     		"Se pueden validar los datos (lo esperamos hasta " + maxSecondsWait + " segundos)",
@@ -129,8 +129,8 @@ public class PageChequeRegaloInputDataStpV{
     }
 	
 	@Validation
-	private static ChecksResult checkImporteSelected(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkImporteSelected(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	    int maxSecondsWait = 2;
     	validations.add(
     		"Aparece el titulo de la página correctamente (lo esperamos hasta " + maxSecondsWait + " segundos)",

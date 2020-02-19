@@ -1,32 +1,34 @@
-package com.mng.testmaker.boundary.aspects.validation;
+package com.mng.testmaker.domain.suitetree;
 
 import com.mng.testmaker.conf.State;
 
 
 
-public class ResultValidation {
+public class Check {
 	//TODO este campo es prescindible cuando esté completada la migración a Aspectos
-    private final int id;
+    private int id;
     
 	private String description = "";
     private State levelResult = State.Undefined;
     private boolean avoidEvidences = false;
 	boolean overcomed = false;
-    
-    public ResultValidation(int id) {
+
+    public Check() {}
+	
+    public Check(int id) {
     	this.id = id;
     }
     
-    public static ResultValidation of(int id, String description, boolean overcomed, State levelResult, boolean avoidEvidences) {
-    	ResultValidation resultValidation = of(id, levelResult);
+    public static Check of(int id, String description, boolean overcomed, State levelResult, boolean avoidEvidences) {
+    	Check resultValidation = of(id, levelResult);
     	resultValidation.setDescription(description);
     	resultValidation.setOvercomed(overcomed);
     	resultValidation.setAvoidEvidences(avoidEvidences);
     	return resultValidation;
     }
     
-    public static ResultValidation of(int id, State levelResult) {
-    	ResultValidation resultValidation = new ResultValidation(id);
+    public static Check of(int id, State levelResult) {
+    	Check resultValidation = new Check(id);
     	resultValidation.setLevelResult(levelResult);
     	return resultValidation;
     }
@@ -34,6 +36,9 @@ public class ResultValidation {
     public int getId() {
 		return id;
 	}
+    public void setId(int id) {
+    	this.id = id;
+    }
 
     public String getDescription() {
 		return description;

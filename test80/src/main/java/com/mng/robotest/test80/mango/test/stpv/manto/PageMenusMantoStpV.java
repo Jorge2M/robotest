@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageBolsas;
 import com.mng.robotest.test80.mango.test.pageobject.manto.SecCabecera;
@@ -35,8 +35,8 @@ public class PageMenusMantoStpV {
     }
 	
 	@Validation
-	private static ChecksResult checkIsPageOfSubmenu(String subMenu, String textAlertObtained, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkIsPageOfSubmenu(String subMenu, String textAlertObtained, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 		int maxSeconds = 2;
 	 	validations.add(
 			"Aparece la página asociada al menú <b>" + subMenu + "</b> (la esperamos hasta " + maxSeconds + " segundos)",

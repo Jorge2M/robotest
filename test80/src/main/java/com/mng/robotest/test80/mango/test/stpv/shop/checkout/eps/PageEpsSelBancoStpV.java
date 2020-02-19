@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.eps.PageEpsSelBanco;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
@@ -12,8 +12,8 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PageEpsSelBancoStpV {
 
 	@Validation
-    public static ChecksResult validateIsPage(String importeTotal, String codPais, Channel channel, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPage(String importeTotal, String codPais, Channel channel, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
     	validations.add(
     		"Figura el icono correspondiente al pago <b>EPS</b>",
     		PageEpsSelBanco.isPresentIconoEps(driver), State.Warn);

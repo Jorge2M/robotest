@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.identificacion;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.identificacion.PageRecuperaPasswd;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
@@ -13,8 +13,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 public class PageRecuperaPasswdStpV {
     
 	@Validation
-    public static ChecksResult isPage(WebDriver driver) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM isPage(WebDriver driver) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
     	int maxSecondsToWait = 2;
     	validations.add(
     		"Aparece la pantalla de recuperación de la contraseña (la esperamos hasta " + maxSecondsToWait + " segundos)",
@@ -43,8 +43,8 @@ public class PageRecuperaPasswdStpV {
     }
     
     @Validation
-    private static ChecksResult isPageCambioPassword(WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    private static ChecksTM isPageCambioPassword(WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsToWait = 2;
     	validations.add(
         	"Aparece el mensaje de \"Revisa tu email\" (lo esperamos hasta " + maxSecondsToWait + " segundos)",

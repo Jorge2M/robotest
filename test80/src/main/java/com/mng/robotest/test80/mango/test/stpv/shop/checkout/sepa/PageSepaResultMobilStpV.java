@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.sepa;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.sepa.PageSepaResultMobil;
 import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 
@@ -13,8 +13,8 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PageSepaResultMobilStpV {
     
 	@Validation
-    public static ChecksResult validateIsPage(String importeTotal, String codPais, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPage(String importeTotal, String codPais, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
     	validations.add(
     		"Aparece la página de resultado de SEPA para móvil",
     		PageSepaResultMobil.isPage(driver), State.Warn);	

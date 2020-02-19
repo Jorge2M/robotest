@@ -7,11 +7,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.openqa.selenium.WebDriver;
 
-import com.mng.testmaker.domain.TestRunTM;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.InputParamsTM.ManagementWebdriver;
+import com.mng.testmaker.domain.suitetree.TestRunTM;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackMobil;

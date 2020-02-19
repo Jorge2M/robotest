@@ -1,29 +1,33 @@
-package com.mng.testmaker.domain.data;
+package com.mng.testmaker.domain.suitetree;
 
 import java.util.Date;
 import java.util.List;
 
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.SuiteTM;
-import com.mng.testmaker.domain.TestCaseTM;
 
-public class TestCaseData {
+public class TestCaseBean {
 
-//	private List<StepData> listStepData;
+	private List<StepTM> listStep;
 	private String idExecSuite;
 	private String suiteName;
-    private String testRunName;
-    private String name;
-    private String nameUnique;
-    private String description;
-    private int indexInTestRun;
-    private State result;
-    private Date inicioDate;
-    private Date finDate; 
-    private float durationMillis;
-    private int numberSteps;
-    private String classSignature;
-    
+	private String testRunName;
+	private String name;
+	private String nameUnique;
+	private String description;
+	private int indexInTestRun;
+	private State result;
+	private Date inicioDate;
+	private Date finDate; 
+	private float durationMillis;
+	private int numberSteps;
+	private String classSignature;
+
+	public List<StepTM> getListStep() {
+		return listStep;
+	}
+	public void setListStep(List<StepTM> listStep) {
+		this.listStep = listStep;
+	}
 	public String getIdExecSuite() {
 		return idExecSuite;
 	}
@@ -102,30 +106,4 @@ public class TestCaseData {
 	public void setClassSignature(String classSignature) {
 		this.classSignature = classSignature;
 	}
-    
-	public static TestCaseData from(TestCaseTM testCase) {
-		TestCaseData testCaseData = new TestCaseData();
-		SuiteTM suite = testCase.getSuiteParent();
-		
-		testCaseData.setIdExecSuite(suite.getIdExecution());
-		testCaseData.setSuiteName(suite.getName());
-		testCaseData.setTestRunName(testCase.getTestRunParent().getName());
-		testCaseData.setName(testCase.getNameUnique());
-		testCaseData.setNameUnique(testCase.getNameUnique());
-		testCaseData.setDescription(testCase.getResult().getMethod().getDescription());
-		testCaseData.setIndexInTestRun(testCase.getIndexInTestRun());
-		testCaseData.setResult(testCase.getStateResult());
-		
-        Date inicio = new Date(testCase.getResult().getStartMillis());
-        Date fin = new Date(testCase.getResult().getEndMillis());
-		testCaseData.setInicioDate(inicio);
-		testCaseData.setFinDate(fin); 
-		testCaseData.setDurationMillis(fin.getTime() - inicio.getTime());
-		
-		testCaseData.setNumberSteps(testCase.getStepsList().size());
-		testCaseData.setClassSignature(testCase.getResult().getInstanceName());
-		
-		return testCaseData;
-	}
-	
 }

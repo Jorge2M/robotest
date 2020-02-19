@@ -9,34 +9,34 @@ import java.util.List;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
-import com.mng.testmaker.domain.StepTM;
-import com.mng.testmaker.domain.SuiteTM;
-import com.mng.testmaker.domain.TestCaseTM;
-import com.mng.testmaker.domain.TestRunTM;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
+import com.mng.testmaker.domain.suitetree.SuiteBean;
+import com.mng.testmaker.domain.suitetree.TestCaseBean;
+import com.mng.testmaker.domain.suitetree.TestRunBean;
 
 public class GenerateReportsTest {
 
 	@Test
 	public void testGetMapTree() {
 		//Given
-		SuiteTM suite = Mockito.mock(SuiteTM.class);
-		TestRunTM testRun1 = Mockito.mock(TestRunTM.class);
-		TestCaseTM testCase1 = Mockito.mock(TestCaseTM.class);
+		SuiteBean suite = Mockito.mock(SuiteBean.class);
+		TestRunBean testRun1 = Mockito.mock(TestRunBean.class);
+		TestCaseBean testCase1 = Mockito.mock(TestCaseBean.class);
 		StepTM step1 = Mockito.mock(StepTM.class);
 		StepTM step2 = Mockito.mock(StepTM.class);
-		ChecksResult val1 = Mockito.mock(ChecksResult.class);
-		ChecksResult val2 = Mockito.mock(ChecksResult.class);
-		TestCaseTM testCase2 = Mockito.mock(TestCaseTM.class);
+		ChecksTM val1 = Mockito.mock(ChecksTM.class);
+		ChecksTM val2 = Mockito.mock(ChecksTM.class);
+		TestCaseBean testCase2 = Mockito.mock(TestCaseBean.class);
 		StepTM step3 = Mockito.mock(StepTM.class);
-		ChecksResult val3 = Mockito.mock(ChecksResult.class);
+		ChecksTM val3 = Mockito.mock(ChecksTM.class);
 		
-		when(suite.getListTestRuns()).thenReturn(Arrays.asList(testRun1));
-		when(testRun1.getListTestCases()).thenReturn(Arrays.asList(testCase1,testCase2));
-		when(testCase1.getStepsList()).thenReturn(Arrays.asList(step1,step2));
-		when(step2.getListChecksResult()).thenReturn(Arrays.asList(val1,val2));
-		when(testCase2.getStepsList()).thenReturn(Arrays.asList(step3));
-		when(step3.getListChecksResult()).thenReturn(Arrays.asList(val3));
+		when(suite.getListTestRun()).thenReturn(Arrays.asList(testRun1));
+		when(testRun1.getListTestCase()).thenReturn(Arrays.asList(testCase1,testCase2));
+		when(testCase1.getListStep()).thenReturn(Arrays.asList(step1,step2));
+		when(step2.getListChecksTM()).thenReturn(Arrays.asList(val1,val2));
+		when(testCase2.getListStep()).thenReturn(Arrays.asList(step3));
+		when(step3.getListChecksTM()).thenReturn(Arrays.asList(val3));
 		
 		//When
 		List<Integer> mapTree = GenerateReports.getMapTree(suite);

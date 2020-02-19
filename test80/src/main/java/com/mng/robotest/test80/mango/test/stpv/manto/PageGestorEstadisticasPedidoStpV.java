@@ -3,17 +3,17 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorEstadisticasPedido;
 
 public class PageGestorEstadisticasPedidoStpV {
 
 	@Validation
-	public static ChecksResult validateIsPage(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	public static ChecksTM validateIsPage(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Estamos en la página " + PageGestorEstadisticasPedido.titulo,
 			PageGestorEstadisticasPedido.isPage(driver), State.Defect);
@@ -36,8 +36,8 @@ public class PageGestorEstadisticasPedidoStpV {
 	}
 	
 	@Validation
-	private static ChecksResult checkAfterSelectMostrarPedidosZalandos(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterSelectMostrarPedidosZalandos(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece la tabla de información",
 			PageGestorEstadisticasPedido.isTablaInformacionVisible(driver), State.Defect);
@@ -60,8 +60,8 @@ public class PageGestorEstadisticasPedidoStpV {
 	}
 	
 	@Validation
-	private static ChecksResult checkAfterCompararDias(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterCompararDias(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Las columnas de comparación en verde no contienen \"0 €\"",
 			PageGestorEstadisticasPedido.isColumnaCompararVerdeNoZero(driver), State.Defect);

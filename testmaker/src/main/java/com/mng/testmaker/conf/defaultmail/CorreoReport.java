@@ -13,11 +13,11 @@ import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.conf.defaultstorer.RepositorySQLite;
 import com.mng.testmaker.domain.RepositoryI;
-import com.mng.testmaker.domain.SuiteTM;
-import com.mng.testmaker.domain.TestCaseTM;
-import com.mng.testmaker.domain.TestRunTM;
-import com.mng.testmaker.domain.data.SuiteData;
-import com.mng.testmaker.domain.data.TestCaseData;
+import com.mng.testmaker.domain.suitetree.SuiteBean;
+import com.mng.testmaker.domain.suitetree.SuiteTM;
+import com.mng.testmaker.domain.suitetree.TestCaseBean;
+import com.mng.testmaker.domain.suitetree.TestCaseTM;
+import com.mng.testmaker.domain.suitetree.TestRunTM;
 import com.mng.testmaker.service.TestMaker;
 
 
@@ -43,7 +43,7 @@ public class CorreoReport {
 		Date fechaHasta = new Date(System.currentTimeMillis());
 		
 		RepositoryI repository = TestMaker.getRepository();
-		List<SuiteData> listSuites = repository.getListSuitesAfter(fechaDesde);
+		List<SuiteBean> listSuites = repository.getListSuitesAfter(fechaDesde);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
 
 		String html =
@@ -59,22 +59,22 @@ public class CorreoReport {
 	public static String constuctTableMail(List<SuiteTM> listSuites) throws Exception {
 		List<SuiteTestCasesData> listSuitesTestCases = new ArrayList<>();
 		for (SuiteTM suite : listSuites) {
-			List<TestCaseData> listTestCases = new ArrayList<>();
+			List<TestCaseBean> listTestCases = new ArrayList<>();
 			for (TestRunTM testRun : suite.getListTestRuns()) {
 				for (TestCaseTM testCaseTM : testRun.getListTestCases()) {
-					listTestCases.add(TestCaseData.from(testCaseTM));
+					listTestCases.add(testCaseTM.getTestCaseBean());
 				}
 			}
-			SuiteTestCasesData suiteTestCases = new SuiteTestCasesData(SuiteData.from(suite), listTestCases);
+			SuiteTestCasesData suiteTestCases = new SuiteTestCasesData(suite.getSuiteBean(), listTestCases);
 			listSuitesTestCases.add(suiteTestCases);
 		}
 		return buildTableMail(listSuitesTestCases);
 	}
 	
-	public static String constuctTableMail(List<SuiteData> listSuites, RepositoryI persistor) throws Exception {
+	public static String constuctTableMail(List<SuiteBean> listSuites, RepositoryI persistor) throws Exception {
 		List<SuiteTestCasesData> listSuitesTestCases = new ArrayList<>();
 		if (listSuites!=null) {
-			for (SuiteData suite : listSuites) {
+			for (SuiteBean suite : listSuites) {
 				SuiteTestCasesData suiteTestCases = new SuiteTestCasesData(
 						suite, 
 						TestMaker.getRepository().getListTestCases(suite.getIdExecSuite()));
@@ -116,7 +116,7 @@ public class CorreoReport {
 
 		if (listSuites!=null && listSuites.size()>0) {
 			for (SuiteTestCasesData suiteTestCases : listSuites) {
-				SuiteData suite = suiteTestCases.suite;
+				SuiteBean suite = suiteTestCases.suite;
 				String nameSuite = suite.getName();
 				String idSuite = suite.getIdExecSuite();
 				Map<State,Integer> testCasesState = mapNumberTestCasesInState(suiteTestCases.testCases);
@@ -218,9 +218,9 @@ public class CorreoReport {
 		return mapReturn;
 	}
 
-	private static Map<State,Integer> mapNumberTestCasesInState(List<TestCaseData> listTestCases) {
+	private static Map<State,Integer> mapNumberTestCasesInState(List<TestCaseBean> listTestCases) {
 		Map<State,Integer> mapReturn = getInitZeroValues();
-		for (TestCaseData testCase : listTestCases) {
+		for (TestCaseBean testCase : listTestCases) {
 			mapReturn.put(
 				testCase.getResult(), 
 				mapReturn.get(testCase.getResult())+1);
@@ -261,9 +261,9 @@ public class CorreoReport {
 	}	
 
 	private static class SuiteTestCasesData {
-		public SuiteData suite;
-		public List<TestCaseData> testCases;
-		public SuiteTestCasesData(SuiteData suite, List<TestCaseData> testCases) {
+		public SuiteBean suite;
+		public List<TestCaseBean> testCases;
+		public SuiteTestCasesData(SuiteBean suite, List<TestCaseBean> testCases) {
 			this.suite = suite;
 			this.testCases = testCases;
 		}

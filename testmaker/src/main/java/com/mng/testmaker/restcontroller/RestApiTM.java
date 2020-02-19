@@ -28,8 +28,8 @@ import com.mng.testmaker.domain.CreatorSuiteRun;
 import com.mng.testmaker.domain.InputParamsBasic;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
-import com.mng.testmaker.domain.SuiteTM;
-import com.mng.testmaker.domain.data.SuiteData;
+import com.mng.testmaker.domain.suitetree.SuiteBean;
+import com.mng.testmaker.domain.suitetree.SuiteTM;
 import com.mng.testmaker.domain.testfilter.TestMethodData;
 import com.mng.testmaker.service.FilterSuites.SetSuiteRun;
 import com.mng.testmaker.service.TestMaker;
@@ -63,7 +63,7 @@ public class RestApiTM {
 				SuiteTM suite = TestMaker.execSuite(creatorSuiteRun, inputParams.isAsyncExec());
 				return Response
 						.status(Response.Status.OK) 
-						.entity(SuiteData.from(suite))
+						.entity(suite.getSuiteBean())
 						.build();
 			} else {
 				List<MessageError> listErrors = resultCheck.getListMessagesError();
@@ -85,8 +85,8 @@ public class RestApiTM {
 	@GET
 	@Path("/suiterun/{idexecution}")
 	@Produces("application/json")
-	public SuiteData getSuiteRunData(@PathParam("idexecution") String idSuiteExec) throws Exception {
-		SuiteData suite = TestMaker.getSuite(idSuiteExec);
+	public SuiteBean getSuiteRunData(@PathParam("idexecution") String idSuiteExec) throws Exception {
+		SuiteBean suite = TestMaker.getSuite(idSuiteExec);
 		if (suite!=null) {
 			return suite;
 		} else {
@@ -97,7 +97,7 @@ public class RestApiTM {
 	@GET
 	@Path("/suiterun/{idexecution}/report")
 	public Response getSuiteReportHtml(@PathParam("idexecution") String idExecSuite) throws Exception {
-		SuiteData suite = TestMaker.getSuite(idExecSuite);
+		SuiteBean suite = TestMaker.getSuite(idExecSuite);
 		if (suite!=null) {
 			URI uriReport = UriBuilder.fromUri(suite.getUrlReportHtml()).build();
 			return Response.temporaryRedirect(uriReport).build();
@@ -109,7 +109,7 @@ public class RestApiTM {
 	@GET
 	@Path("/suiteruns")
 	@Produces("application/json")
-	public List<SuiteData> getListSuitesRunData(
+	public List<SuiteBean> getListSuitesRunData(
 						   @QueryParam("suite") String suite,
 						   @QueryParam("channel") String channel,
 						   @QueryParam("application") String application,

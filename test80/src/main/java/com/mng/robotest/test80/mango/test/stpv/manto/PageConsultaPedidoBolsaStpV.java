@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataPedido;
@@ -40,8 +40,8 @@ public class PageConsultaPedidoBolsaStpV {
         validaDatosEnvioPedido(dataPedido, typeDetalle, appE, driver);
     }
     
-    public static ChecksResult validaDatosEnvioPedido(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validaDatosEnvioPedido(DataPedido dataPedido, TypeDetalle typeDetalle, AppEcom appE, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
         TipoTransporte tipoTransporte = dataPedido.getPago().getTipoEnvioType(appE);
 	 	validations.add(
 			"El campo \"tipo servicio\" contiene el valor <b>" + tipoTransporte.getCodigoIntercambio() + "</b> (asociado al tipo de envío " + tipoTransporte + ")",
@@ -60,8 +60,8 @@ public class PageConsultaPedidoBolsaStpV {
     }
     
     @Validation
-    public static ChecksResult validaDatosGeneralesPedido(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validaDatosGeneralesPedido(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece la pantalla de detalle del pedido",
 			PageDetallePedido.isPage(driver), State.Warn);

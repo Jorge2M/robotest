@@ -18,7 +18,7 @@ import org.testng.xml.XmlInclude;
 import org.testng.xml.XmlTest;
 
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.domain.TestRunTM;
+import com.mng.testmaker.domain.suitetree.TestRunTM;
 import com.mng.testmaker.domain.util.TestNameUtils;
 
 public class FilterTestsSuiteXML {

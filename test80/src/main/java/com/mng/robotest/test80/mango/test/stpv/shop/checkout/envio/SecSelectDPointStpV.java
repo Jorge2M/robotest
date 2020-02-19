@@ -3,11 +3,11 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.envio;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.StepTM;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.envio.ModalDroppoints;
@@ -36,9 +36,9 @@ public class SecSelectDPointStpV {
     }
 	
 	@Validation
-	private static ChecksResult checkDroppointSelectedContainsDirecc(DataSearchDeliveryPoint dataSearchDp, WebDriver driver) 
+	private static ChecksTM checkDroppointSelectedContainsDirecc(DataSearchDeliveryPoint dataSearchDp, WebDriver driver) 
 	throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    	ChecksTM validations = ChecksTM.getNew();
 	    int maxSecondsWait = 5;
 	    State stateVal = State.Warn;
 	    if (dataSearchDp.typeData==DataSearchDp.CodigoPostal) {
@@ -53,8 +53,8 @@ public class SecSelectDPointStpV {
 	}
     
     @Validation
-    public static ChecksResult validaDeliveryPointOfType(TypeDeliveryPoint typeDp, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validaDeliveryPointOfType(TypeDeliveryPoint typeDp, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 3;
 	 	validations.add(
 			"Es visible el 1er delivery point de la lista (lo esperamos hasta " + maxSecondsWait + " segundos)",

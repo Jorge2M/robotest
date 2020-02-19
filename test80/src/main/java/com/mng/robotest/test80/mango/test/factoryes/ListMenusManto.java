@@ -9,7 +9,7 @@ import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.TiendaMantoEnum.TiendaManto;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.InputParamsTM;
-import com.mng.testmaker.domain.TestRunTM;
+import com.mng.testmaker.domain.suitetree.TestRunTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;

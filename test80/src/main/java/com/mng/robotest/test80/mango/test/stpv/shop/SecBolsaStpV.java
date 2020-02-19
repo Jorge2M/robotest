@@ -7,13 +7,13 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -175,8 +175,8 @@ public class SecBolsaStpV {
 	}
 
 	@Validation
-	private static ChecksResult checkIsBolsaVisibleInDesktop(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkIsBolsaVisibleInDesktop(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 		int maxSecondsWait = 1;
 	 	validations.add(
 			"Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + maxSecondsWait + " segundos)",
@@ -188,9 +188,9 @@ public class SecBolsaStpV {
 	}
 
 	@Validation
-	public static ChecksResult validaNumArtEnBolsa(DataBag dataBag, Channel channel, AppEcom app, WebDriver driver) 
+	public static ChecksTM validaNumArtEnBolsa(DataBag dataBag, Channel channel, AppEcom app, WebDriver driver) 
 	throws Exception {
-		ChecksResult validations = ChecksResult.getNew();
+		ChecksTM validations = ChecksTM.getNew();
 		int maxSecondsWait = 2;
 		String itemsSaved = String.valueOf(dataBag.getListArticulos().size());
 	 	validations.add(
@@ -200,9 +200,9 @@ public class SecBolsaStpV {
 	}
 
 	@Validation
-	public static ChecksResult validaCuadranArticulosBolsa(DataBag dataBag, AppEcom app, Channel channel, WebDriver driver) 
+	public static ChecksTM validaCuadranArticulosBolsa(DataBag dataBag, AppEcom app, Channel channel, WebDriver driver) 
 	throws Exception {
-		ChecksResult validations = ChecksResult.getNew();
+		ChecksTM validations = ChecksTM.getNew();
 		ValidatorContentBolsa validatorBolsa = new ValidatorContentBolsa(dataBag, app, channel, driver);
 		validations.add(
 			"Cuadra el número de artículos existentes en la bolsa",

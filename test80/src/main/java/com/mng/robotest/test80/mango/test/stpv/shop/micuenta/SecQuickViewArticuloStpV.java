@@ -1,8 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
 
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.SecQuickViewArticulo;
 
@@ -19,8 +19,8 @@ public class SecQuickViewArticuloStpV {
 	
     @SuppressWarnings("static-access")
     @Validation
-    public ChecksResult validateIsOk(ArticuloScreen articulo) {
-        ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validateIsOk(ArticuloScreen articulo) {
+        ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 2;
         validations.add(
         	"Aparece el quickview correspondiente al artículo (la esperamos hasta " + maxSecondsWait + " segundos)",

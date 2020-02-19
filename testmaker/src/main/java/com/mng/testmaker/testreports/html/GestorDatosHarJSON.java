@@ -7,29 +7,30 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 
-import com.mng.testmaker.domain.StepTM;
-import com.mng.testmaker.domain.StepTM.StepEvidence;
+import com.mng.testmaker.domain.suitetree.StepTM;
+import com.mng.testmaker.domain.suitetree.StepEvidence;
 
 
 public class GestorDatosHarJSON {
 
-    private JSONParser parser = new JSONParser();
-    private JSONObject fileHAR = null;   
+	private JSONParser parser = new JSONParser();
+	private JSONObject fileHAR = null;   
 
-    public GestorDatosHarJSON(String fileHAR) throws Exception {
-        parseHAR(fileHAR);
-    }
+	public GestorDatosHarJSON(String fileHAR) throws Exception {
+		parseHAR(fileHAR);
+	}
 	
-    public GestorDatosHarJSON(StepTM step) throws Exception {
-        String ficheroHAR = StoreStepEvidencies.getPathFileEvidenciaStep(step, StepEvidence.har);
-        parseHAR(ficheroHAR);
-    }
+	public GestorDatosHarJSON(StepTM step) throws Exception {
+		StoreStepEvidencies storer = new StoreStepEvidencies(step);
+		String ficheroHAR = storer.getPathFileEvidenciaStep(StepEvidence.har);
+		parseHAR(ficheroHAR);
+	}
 	
-    private void parseHAR(String fileHARToParse) throws Exception {
-        try (FileReader fileReaderHAR = new FileReader(fileHARToParse)) { 
-            this.fileHAR = (JSONObject)this.parser.parse(fileReaderHAR);
-        }
-    }
+	private void parseHAR(String fileHARToParse) throws Exception {
+		try (FileReader fileReaderHAR = new FileReader(fileHARToParse)) { 
+			this.fileHAR = (JSONObject)this.parser.parse(fileReaderHAR);
+		}
+	}
 	
     /**
      * Obtiene la lista de entradas filtradas según el valor del atributo URL del request

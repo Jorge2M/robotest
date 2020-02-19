@@ -3,16 +3,16 @@ package com.mng.robotest.test80.mango.test.stpv.shop.pedidos;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.pageobject.shop.pedidos.PageListPedidos;
 
 public class PageListPedidosStpV {
 
 	@Validation
-    public static ChecksResult validateIsPage(String codigoPedido, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPage(String codigoPedido, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
       	validations.add(
       		"La página contiene el bloque correspondiente a la lista de pedidos",
       		PageListPedidos.isPage(driver), State.Defect);	

@@ -12,12 +12,11 @@ import org.sqlite.SQLiteConfig.LockingMode;
 
 import com.mng.testmaker.conf.ConstantesTM;
 import com.mng.testmaker.domain.RepositoryI;
-import com.mng.testmaker.domain.SuiteTM;
-import com.mng.testmaker.domain.TestCaseTM;
-import com.mng.testmaker.domain.TestRunTM;
-import com.mng.testmaker.domain.data.SuiteData;
-import com.mng.testmaker.domain.data.TestCaseData;
-import com.mng.testmaker.domain.data.TestRunData;
+import com.mng.testmaker.domain.suitetree.SuiteBean;
+import com.mng.testmaker.domain.suitetree.SuiteTM;
+import com.mng.testmaker.domain.suitetree.TestCaseBean;
+import com.mng.testmaker.domain.suitetree.TestCaseTM;
+import com.mng.testmaker.domain.suitetree.TestRunTM;
 import com.mng.testmaker.repository.jdbc.dao.ConnectorBD;
 import com.mng.testmaker.repository.jdbc.dao.SuitesDAO;
 import com.mng.testmaker.repository.jdbc.dao.TestCasesDAO;
@@ -43,22 +42,22 @@ public class RepositorySQLite implements RepositoryI {
 	}
 	
 	@Override
-	public SuiteData getSuite(String suiteExecId) throws Exception {
+	public SuiteBean getSuite(String suiteExecId) throws Exception {
 		return (suitesDAO.getSuite(suiteExecId));
 	}
 	
 	@Override
-	public synchronized List<SuiteData> getListSuitesAfter(Date fechaDesde) throws Exception {
+	public synchronized List<SuiteBean> getListSuitesAfter(Date fechaDesde) throws Exception {
 		return (suitesDAO.getListSuitesAfter(fechaDesde));
 	}
 	
 	@Override
-	public synchronized List<SuiteData> getListSuites() throws Exception {
+	public synchronized List<SuiteBean> getListSuites() throws Exception {
 		return (suitesDAO.getListSuitesIdDesc());
 	}
 	
 	@Override
-	public synchronized List<TestCaseData> getListTestCases(String suiteExecId) throws Exception {
+	public synchronized List<TestCaseBean> getListTestCases(String suiteExecId) throws Exception {
 		return (testCasesDAO.getListTestCases(suiteExecId));
 	}
 	
@@ -87,15 +86,15 @@ public class RepositorySQLite implements RepositoryI {
 	}
 	
 	private synchronized void storeOnlySuite(SuiteTM suite) {
-		suitesDAO.insertOrReplaceSuite(SuiteData.from(suite));
+		suitesDAO.insertOrReplaceSuite(suite.getSuiteBean());
 	}
 	
 	private synchronized void storeSuiteAndChildren(SuiteTM suite) {
-		suitesDAO.insertOrReplaceSuite(SuiteData.from(suite));
+		suitesDAO.insertOrReplaceSuite(suite.getSuiteBean());
 		for (TestRunTM testRun : suite.getListTestRuns()) {
-			testRunsDAO.insertTestRun(TestRunData.from(testRun));
+			testRunsDAO.insertTestRun(testRun.getTestRunBean());
 			for (TestCaseTM testCase : testRun.getListTestCases()) {
-				testCasesDAO.insertTestCase(TestCaseData.from(testCase));
+				testCasesDAO.insertTestCase(testCase.getTestCaseBean());
 			}
 		}
 	}

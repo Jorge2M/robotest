@@ -1,10 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.galeria;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.ModalArticleNotAvailable;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.ModalArticleNotAvailable.StateModal;
@@ -42,8 +42,8 @@ public class ModalArticleNotAvailableStpV {
     }
 
     @Validation
-    public ChecksResult checkVisibleAvisame() throws Exception {
-        ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM checkVisibleAvisame() throws Exception {
+        ChecksTM validations = ChecksTM.getNew();
         boolean isVisibleModal = ModalArticleNotAvailable.isVisibleUntil(2, driver);
         boolean isVisibleRPGD = ModalArticleNotAvailable.isVisibleRPGD(2, driver);
         validations.add(

@@ -5,9 +5,9 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
@@ -49,8 +49,8 @@ public class BannerHeadGalleryStpV {
 
 	@Validation
 	@SuppressWarnings("static-access")
-	public ChecksResult checkBannerContainsText(List<String> possibleTexts) {
-		ChecksResult validations = ChecksResult.getNew();
+	public ChecksTM checkBannerContainsText(List<String> possibleTexts) {
+		ChecksTM validations = ChecksTM.getNew();
 		String textBanner = PageGaleriaDesktop.secBannerHead.getText(driver);
 		validations.add(
 			"El banner de cabecera contiene el texto <b>" + possibleTexts.get(0) + "</b>",
@@ -73,8 +73,8 @@ public class BannerHeadGalleryStpV {
 
     @SuppressWarnings("static-access")
     @Validation
-    public ChecksResult checkBannerSalesHead(TypeGalery typeGalery, Pais pais, IdiomaPais idioma) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM checkBannerSalesHead(TypeGalery typeGalery, Pais pais, IdiomaPais idioma) {
+    	ChecksTM validations = ChecksTM.getNew();
     	validations.add(
     		"<b style=\"color:blue\">Rebajas</b></br>" +
     		"Es visible el banner de cabecera",
@@ -107,8 +107,8 @@ public class BannerHeadGalleryStpV {
 
     @SuppressWarnings("static-access")
     @Validation
-    ChecksResult checkBannerHeadSalesOff(IdiomaPais idioma) {
-    	ChecksResult validations = ChecksResult.getNew();
+    ChecksTM checkBannerHeadSalesOff(IdiomaPais idioma) {
+    	ChecksTM validations = ChecksTM.getNew();
     	String saleTraduction = UtilsTestMango.getSaleTraduction(idioma);
     	validations.add(
     		"<b style=\"color:blue\">Rebajas</b></br>" +

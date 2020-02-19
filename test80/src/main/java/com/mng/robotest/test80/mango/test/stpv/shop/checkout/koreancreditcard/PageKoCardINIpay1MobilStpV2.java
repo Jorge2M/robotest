@@ -1,10 +1,10 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.checkout.koreancreditcard;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardAdyen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.koreancreditcard.PageKoCardINIpay1Mobil;
@@ -17,8 +17,8 @@ public class PageKoCardINIpay1MobilStpV2 {
     static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
     
     @Validation
-    public static ChecksResult validateIsPage(WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPage(WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
       	validations.add(
     		"Aparece una página de INIpay",
     		PageKoCardINIpay1Mobil.isPage(driver), State.Warn);

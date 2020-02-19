@@ -1,8 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.manto;
 
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 
-public class ChecksResultWithFlagLinkCodPed extends ChecksResult {
+public class ChecksResultWithFlagLinkCodPed extends ChecksTM {
 	boolean existsLinkCodPed;
 	private ChecksResultWithFlagLinkCodPed() {
 		super();

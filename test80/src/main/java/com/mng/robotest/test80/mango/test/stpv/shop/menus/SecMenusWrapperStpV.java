@@ -6,13 +6,13 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import static com.mng.robotest.test80.mango.test.data.Constantes.PrefixRebajas;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.data.CodIdioma;
 import com.mng.robotest.test80.mango.test.data.Constantes.ThreeState;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
@@ -75,8 +75,8 @@ public class SecMenusWrapperStpV {
     }
     
     @Validation
-    public ChecksResult validateLineas(Pais pais) throws Exception {
-        ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validateLineas(Pais pais) throws Exception {
+        ChecksTM validations = ChecksTM.getNew();
         LineaType[] lineasToTest = Linea.LineaType.values();
         for (LineaType lineaType : lineasToTest) {
             ThreeState stateLinea = pais.getShoponline().stateLinea(lineaType, app);
@@ -106,8 +106,8 @@ public class SecMenusWrapperStpV {
     }
     
     @Validation
-    public ChecksResult checkOrderAndTranslationMenus(Linea linea, CodIdioma codIdioma) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM checkOrderAndTranslationMenus(Linea linea, CodIdioma codIdioma) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
     	List<Label> menuInOrderTraduc = MenuTraduc.getLabels(linea.getType(), codIdioma);
     	List<DataScreenMenu> listMenusScreen = secMenusWrap.getListDataScreenMenus(linea, null);
     	ListComparator comparator = ListComparator.getNew(menuInOrderTraduc, listMenusScreen);
@@ -124,8 +124,8 @@ public class SecMenusWrapperStpV {
     }
     
     @Validation
-    public ChecksResult checkLineaRebajas(boolean salesOnInCountry, DataCtxShop dCtxSh) {
-        ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM checkLineaRebajas(boolean salesOnInCountry, DataCtxShop dCtxSh) {
+        ChecksTM validations = ChecksTM.getNew();
         int maxSeconds = 3;
         boolean isPresentLinRebajas = secMenusWrap.isLineaPresentUntil(LineaType.rebajas, maxSeconds);
         if (salesOnInCountry && dCtxSh.pais.isVentaOnline()) {

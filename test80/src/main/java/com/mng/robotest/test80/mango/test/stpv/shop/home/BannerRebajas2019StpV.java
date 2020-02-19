@@ -2,9 +2,10 @@ package com.mng.robotest.test80.mango.test.stpv.shop.home;
 
 import java.util.List;
 import org.openqa.selenium.WebDriver;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.pageobject.shop.bannersNew.DataBanner;
@@ -15,8 +16,8 @@ import static com.mng.robotest.test80.mango.test.data.Constantes.PrefixRebajas;
 public class BannerRebajas2019StpV {
 	
     @Validation
-    public static ChecksResult checkBanner(boolean salesOnInCountry, TypeHome typeHome, DataCtxShop dCtxSh, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM checkBanner(boolean salesOnInCountry, TypeHome typeHome, DataCtxShop dCtxSh, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
     	int maxBannersToLoad = 1;
     	DataBanner dataBanner1 = null;
         ManagerBannersScreen managerBannersScreen = new ManagerBannersScreen(maxBannersToLoad, driver);

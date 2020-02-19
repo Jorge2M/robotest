@@ -4,16 +4,16 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecBillpay;
 
 public class SecBillpayStpV {
     
 	@Validation
-    public static ChecksResult validateIsSectionOk(Channel channel, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsSectionOk(Channel channel, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparecen 3 desplegables para la selección de la fecha de nacimiento",
 			SecBillpay.isPresentSelectBirthBirthYear(driver) &&
@@ -41,8 +41,8 @@ public class SecBillpayStpV {
     }
 	
     @Validation
-    private static ChecksResult checkLastschriftAfterAccept(WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    private static ChecksTM checkLastschriftAfterAccept(WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece el campo para la introducción del titular",
 			SecBillpay.isPresentInputTitular(driver), State.Defect);

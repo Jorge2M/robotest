@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import org.apache.commons.compress.utils.IOUtils;
 
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.domain.StepTM.StepEvidence;
+import com.mng.testmaker.domain.suitetree.StepEvidence;
 
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.BrowserMobProxyServer;

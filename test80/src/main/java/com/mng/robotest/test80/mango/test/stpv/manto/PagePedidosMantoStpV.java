@@ -4,9 +4,9 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
@@ -144,8 +144,8 @@ public class PagePedidosMantoStpV {
 	}
 
 	@Validation
-	private static ChecksResult checkAfterSearchPedido(DataPedido dPedidoPrueba, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterSearchPedido(DataPedido dPedidoPrueba, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Tenemos el DNI del cliente " + dPedidoPrueba.getPago().getDni(),
 			!dPedidoPrueba.getPago().getDni().equals(""), State.Defect);

@@ -11,18 +11,18 @@ import javax.ws.rs.core.MultivaluedMap;
 import com.google.gson.Gson;
 import com.mng.testmaker.domain.InputParamsBasic;
 import com.mng.testmaker.domain.InputParamsTM;
-import com.mng.testmaker.domain.data.SuiteData;
+import com.mng.testmaker.domain.suitetree.SuiteBean;
 
 public class ClientRestApiTM extends JaxRsClient {
 	
-	public SuiteData suiteRun(InputParamsTM inputParams) throws Exception {
+	public SuiteBean suiteRun(InputParamsTM inputParams) throws Exception {
 		Form formParams = getFormParams(inputParams.getAllParamsValues());
 		Client client = getClientIgnoreCertificates();
-		SuiteData suiteData = 
+		SuiteBean suiteData = 
 			client
 				.target("http://localhost:80/suiterun")
 				.request(MediaType.APPLICATION_JSON)
-				.post(Entity.form(formParams), SuiteData.class);
+				.post(Entity.form(formParams), SuiteBean.class);
 		//TODO ha de retornar la Suite + TestRuns + TestCases ... + Steps + Validations
 		return suiteData;
 	}

@@ -20,12 +20,12 @@ import com.mng.testmaker.domain.CreatorSuiteRun;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.RepositoryI;
 import com.mng.testmaker.domain.StateExecution;
-import com.mng.testmaker.domain.StepTM;
-import com.mng.testmaker.domain.SuiteTM;
 import com.mng.testmaker.domain.SuitesExecuted;
-import com.mng.testmaker.domain.TestCaseTM;
-import com.mng.testmaker.domain.TestRunTM;
-import com.mng.testmaker.domain.data.SuiteData;
+import com.mng.testmaker.domain.suitetree.StepTM;
+import com.mng.testmaker.domain.suitetree.SuiteBean;
+import com.mng.testmaker.domain.suitetree.SuiteTM;
+import com.mng.testmaker.domain.suitetree.TestCaseTM;
+import com.mng.testmaker.domain.suitetree.TestRunTM;
 import com.mng.testmaker.service.FilterSuites.SetSuiteRun;
 
 public class TestMaker {
@@ -51,12 +51,12 @@ public class TestMaker {
 		suite.end();
 	}
 
-	public static SuiteData getSuite(String idExecution) throws Exception {
+	public static SuiteBean getSuite(String idExecution) throws Exception {
 		SuiteTM suite = getSuiteExecuted(idExecution);
 		if (suite!=null) {
-			return SuiteData.from(suite);
+			return suite.getSuiteBean();
 		}
-		SuiteData suiteData = getSuiteStored(idExecution);
+		SuiteBean suiteData = getSuiteStored(idExecution);
 		if (suiteData!=null) {
 			if (!suiteData.getStateExecution().isFinished()) {
 				suiteData.setStateExecution(StateExecution.Aborted);
@@ -65,19 +65,19 @@ public class TestMaker {
 		return suiteData;
 	}
 	
-	public static List<SuiteData> getListSuites() throws Exception {
+	public static List<SuiteBean> getListSuites() throws Exception {
 		FilterSuites filterSuites = FilterSuites.getNew();
 		return filterSuites.getListSuites();
 	}
 	
-	public static List<SuiteData> getListSuites(String suite, String channel, String application, String setSuite, Date fechaDesde) 
+	public static List<SuiteBean> getListSuites(String suite, String channel, String application, String setSuite, Date fechaDesde) 
 	throws Exception {
 		Channel channelEnum = channel!=null ? Channel.valueOf(channel) : null;
 		SetSuiteRun setSuiteEnum = setSuite!=null ? SetSuiteRun.valueOf(setSuite) : null;
 		return getListSuites(suite, channelEnum, application, setSuiteEnum, fechaDesde);
 	}
 	
-	public static List<SuiteData> getListSuites(String suite, Channel channel, String application, SetSuiteRun setSuite, Date fechaDesde) 
+	public static List<SuiteBean> getListSuites(String suite, Channel channel, String application, SetSuiteRun setSuite, Date fechaDesde) 
 	throws Exception {
 		FilterSuites filterSuites = FilterSuites.getNew(suite, channel, application, setSuite, fechaDesde);
 		return filterSuites.getListSuites();
@@ -91,7 +91,7 @@ public class TestMaker {
 		return (SuiteTM)ctx.getSuite().getXmlSuite();
 	}
 	
-	private static SuiteData getSuiteStored(String idExecution) throws Exception {
+	private static SuiteBean getSuiteStored(String idExecution) throws Exception {
 		return (repository.getSuite(idExecution));
 	}
 	

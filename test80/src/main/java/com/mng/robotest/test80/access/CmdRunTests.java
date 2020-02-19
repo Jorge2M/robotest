@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import com.mng.testmaker.boundary.access.CmdLineMaker;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.domain.CreatorSuiteRun;
-import com.mng.testmaker.domain.SuiteTM;
+import com.mng.testmaker.domain.suitetree.SuiteTM;
 import com.mng.testmaker.domain.testfilter.TestMethod;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;

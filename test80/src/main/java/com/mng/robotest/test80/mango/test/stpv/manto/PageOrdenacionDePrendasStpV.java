@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.service.webdriver.wrapper.ElementPageFunctions.StateElem;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageOrdenacionDePrendas;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageOrdenacionDePrendas.*;
 import com.mng.robotest.test80.mango.test.pageobject.shop.ficha.SecModalPersonalizacion;
@@ -32,8 +32,8 @@ public class PageOrdenacionDePrendasStpV {
 	}
 
     @Validation
-    public static ChecksResult validateIsPage(WebDriver driver) {
-        ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPage(WebDriver driver) {
+        ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 10;
         validations.add(
         	"Estamos en la página " + Orden.titulo.getXPath(),
@@ -58,8 +58,8 @@ public class PageOrdenacionDePrendasStpV {
 	}
 
     @Validation
-	private static ChecksResult validatePreProductionElements(WebDriver driver) {
-        ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM validatePreProductionElements(WebDriver driver) {
+        ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 10;
         validations.add(
         	"Está presente el enlace de <b>She</b>",
@@ -105,8 +105,8 @@ public class PageOrdenacionDePrendasStpV {
 	}
 
     @Validation
-	private static ChecksResult validateSectionPrenda(WebDriver driver) {
-        ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM validateSectionPrenda(WebDriver driver) {
+        ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 13;
         validations.add(
             "Se vuelve visible el selector de tipo de <b>Prendas</b>",
@@ -129,8 +129,8 @@ public class PageOrdenacionDePrendasStpV {
 	}
 
 	@Validation
-	private static ChecksResult validateTipoPrenda(WebDriver driver) {
-        ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM validateTipoPrenda(WebDriver driver) {
+        ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 20;
         validations.add(
             "Aparecen imagenes en la nueva página (lo esperamos hasta " + maxSecondsWait + " segundos)",
@@ -152,8 +152,8 @@ public class PageOrdenacionDePrendasStpV {
 	}
 
     @Validation
-    private static ChecksResult validateBajarPrenda(WebDriver driver, int maxSecondsWait) {
-        ChecksResult validations = ChecksResult.getNew();
+    private static ChecksTM validateBajarPrenda(WebDriver driver, int maxSecondsWait) {
+        ChecksTM validations = ChecksTM.getNew();
         validations.add(
             "Se sigue viendo la segunda prenda",
             PageOrdenacionDePrendas.isElementInStateUntil(Orden.segundaPrenda, StateElem.Visible, maxSecondsWait, driver), State.Defect);
@@ -173,8 +173,8 @@ public class PageOrdenacionDePrendasStpV {
 	}
 
     @Validation
-	private static ChecksResult validateAplicarOrden(WebDriver driver) {
-        ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM validateAplicarOrden(WebDriver driver) {
+        ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 15;
         validations.add(
             "Aparece correctamente el modal de confirmacion",

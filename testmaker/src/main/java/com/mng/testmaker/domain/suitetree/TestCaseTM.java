@@ -1,7 +1,8 @@
-package com.mng.testmaker.domain;
+package com.mng.testmaker.domain.suitetree;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -9,11 +10,13 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.InputParamsTM;
+import com.mng.testmaker.domain.StateExecution;
+import com.mng.testmaker.domain.SuitesExecuted;
 
 public class TestCaseTM  {
 
-	private final List<StepTM> listSteps = new ArrayList<>();
-	
+	private List<StepTM> listSteps = new ArrayList<>();
 	private StateExecution stateRun = StateExecution.Started;
 	private State state = State.Ok;
 	private final SuiteTM suiteParent;
@@ -114,13 +117,13 @@ public class TestCaseTM  {
 		listSteps.add(step);
 	}
 	
-	public List<StepTM> getStepsList() {
+	public List<StepTM> getListStep() {
 		return this.listSteps;
 	}
 
 	private State getStateFromSteps() {
 		State stateReturn = State.Ok;
-		for (StepTM step : getStepsList()) {
+		for (StepTM step : getListStep()) {
 			if (step.getResultSteps().isMoreCriticThan(stateReturn)) {
 				stateReturn = step.getResultSteps();
 			}
@@ -196,5 +199,36 @@ public class TestCaseTM  {
 	
 	public void setRefineDataName(String refineDataName) {
 		this.refineDataName = refineDataName;
+	}
+	
+	public TestCaseBean getTestCaseBean() {
+		TestCaseBean testCaseBean = new TestCaseBean();
+		SuiteTM suite = getSuiteParent();
+		
+		testCaseBean.setIdExecSuite(suite.getIdExecution());
+		testCaseBean.setSuiteName(suite.getName());
+		testCaseBean.setTestRunName(getTestRunParent().getName());
+		testCaseBean.setName(getNameUnique());
+		testCaseBean.setNameUnique(getNameUnique());
+		testCaseBean.setDescription(getResult().getMethod().getDescription());
+		testCaseBean.setIndexInTestRun(getIndexInTestRun());
+		testCaseBean.setResult(getStateResult());
+		
+		Date inicio = new Date(getResult().getStartMillis());
+		Date fin = new Date(getResult().getEndMillis());
+		testCaseBean.setInicioDate(inicio);
+		testCaseBean.setFinDate(fin); 
+		testCaseBean.setDurationMillis(fin.getTime() - inicio.getTime());
+		
+		testCaseBean.setNumberSteps(getListStep().size());
+		testCaseBean.setClassSignature(getResult().getInstanceName());
+		
+		List<StepTM> listStepBean = new ArrayList<>();
+		for (StepTM step : getListStep()) {
+			listStepBean.add(step);
+		}
+		testCaseBean.setListStep(listStepBean);
+		
+		return testCaseBean;
 	}
 }

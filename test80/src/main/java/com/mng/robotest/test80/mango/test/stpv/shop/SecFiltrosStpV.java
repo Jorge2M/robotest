@@ -5,13 +5,13 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Color;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -52,9 +52,9 @@ public class SecFiltrosStpV {
     }
 	
 	@Validation
-	private static ChecksResult checkAfterSelectFiltroColores(List<Color> colorsSelected, String litMenu, 
+	private static ChecksTM checkAfterSelectFiltroColores(List<Color> colorsSelected, String litMenu, 
 															  int numArticulos1page, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsToWait = 1;
         List<String> listCodColors = Color.getListCodigosColor(colorsSelected);
         String currentUrl = driver.getCurrentUrl();

@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pago;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -17,8 +17,8 @@ import com.mng.robotest.test80.mango.test.utils.ImporteScreen;
 public class PageAssist1rstStpV {
     
 	@Validation
-    public static ChecksResult validateIsPage(String importeTotal, Pais pais, Channel channel, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPage(String importeTotal, Pais pais, Channel channel, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Está presente el logo de Assist",
 			PageAssist1rst.isPresentLogoAssist(channel, driver), State.Warn);
@@ -53,8 +53,8 @@ public class PageAssist1rstStpV {
     }
 	
 	@Validation
-	private static ChecksResult checkAfterClickPayButton(Channel channel, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterClickPayButton(Channel channel, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 10;
 	 	validations.add(
 			"Desaparece la página con el botón de pago (lo esperamos hasta " + maxSecondsWait + " segundos)",

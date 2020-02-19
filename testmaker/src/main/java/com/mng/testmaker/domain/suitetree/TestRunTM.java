@@ -1,6 +1,7 @@
-package com.mng.testmaker.domain;
+package com.mng.testmaker.domain.suitetree;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.testng.ITestContext;
@@ -10,6 +11,7 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.StateExecution;
 import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackDesktop;
 import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackMobil;
 import com.mng.testmaker.testreports.html.StorerErrorStep;
@@ -126,5 +128,46 @@ public class TestRunTM extends XmlTest {
 	
 	public BrowserStackMobil getBrowserStackMobil() {
 		return this.browserStackMobil;
+	}
+	
+	public TestRunBean getTestRunBean() {
+		TestRunBean testRunBean = new TestRunBean();
+		SuiteTM suite = getSuiteParent();
+		
+		testRunBean.setIdExecSuite(suite.getIdExecution());
+		testRunBean.setSuiteName(suite.getName());
+		testRunBean.setName(getName());
+		testRunBean.setResult(getResult());
+		if (getBrowserStackMobil()!=null) {
+			testRunBean.setDevice(getBrowserStackMobil().getDevice());
+		} else {
+			testRunBean.setDevice("");
+		}
+		
+		Date inicio = new Date();
+		Date fin = new Date();
+		ITestContext ctxTestRun = getTestNgContext();
+		if (ctxTestRun!=null) {
+			inicio = getTestNgContext().getStartDate();
+			Date endDate = getTestNgContext().getEndDate();
+			if (endDate!=null) {
+				fin = endDate;
+			}
+		}
+		testRunBean.setInicioDate(inicio);
+		testRunBean.setFinDate(fin);
+		if (fin!=null && inicio!=null) {
+			testRunBean.setDurationMillis(fin.getTime() - inicio.getTime());
+		}
+		testRunBean.setNumberTestCases(getNumTestCases());
+		testRunBean.setWebDriverType(suite.getInputParams().getWebDriverType());
+		
+		List<TestCaseBean> listTestCase = new ArrayList<>();
+		for (TestCaseTM testCase : getListTestCases()) {
+			listTestCase.add(testCase.getTestCaseBean());
+		}
+		testRunBean.setListTestCase(listTestCase);
+		
+		return testRunBean;
 	}
 }

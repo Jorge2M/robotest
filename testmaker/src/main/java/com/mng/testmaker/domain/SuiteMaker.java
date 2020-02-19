@@ -12,6 +12,7 @@ import org.testng.xml.XmlSuite.ParallelMode;
 import com.mng.testmaker.boundary.listeners.InvokeListener;
 import com.mng.testmaker.boundary.listeners.MyTransformer;
 import com.mng.testmaker.conf.defaultmail.DefaultMailEndSuite;
+import com.mng.testmaker.domain.suitetree.SuiteTM;
 import com.mng.testmaker.domain.testfilter.FilterTestsSuiteXML;
 import com.mng.testmaker.domain.testfilter.TestMethod;
 import com.mng.testmaker.testreports.html.Reporter;

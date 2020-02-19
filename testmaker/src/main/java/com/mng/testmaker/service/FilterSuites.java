@@ -7,9 +7,9 @@ import java.util.List;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.RepositoryI;
-import com.mng.testmaker.domain.SuiteTM;
 import com.mng.testmaker.domain.SuitesExecuted;
-import com.mng.testmaker.domain.data.SuiteData;
+import com.mng.testmaker.domain.suitetree.SuiteBean;
+import com.mng.testmaker.domain.suitetree.SuiteTM;
 
 public class FilterSuites {
 
@@ -40,9 +40,9 @@ public class FilterSuites {
 	}
 	
 	
-	public List<SuiteData> getListSuites() throws Exception {
-		List<SuiteData> listSuitesInMemory;
-		List<SuiteData> listSuitesStored;
+	public List<SuiteBean> getListSuites() throws Exception {
+		List<SuiteBean> listSuitesInMemory;
+		List<SuiteBean> listSuitesStored;
 		if (desde==null) {
 			listSuitesInMemory = filter(getListSuitesInMemory());
 			listSuitesStored = filter(repository.getListSuites());
@@ -51,9 +51,9 @@ public class FilterSuites {
 			listSuitesStored = filter(repository.getListSuitesAfter(desde));
 		}
 
-		List<SuiteData> listToReturn = new ArrayList<>();
+		List<SuiteBean> listToReturn = new ArrayList<>();
 		listToReturn.addAll(listSuitesInMemory);
-		for (SuiteData suiteStored : listSuitesStored) {
+		for (SuiteBean suiteStored : listSuitesStored) {
 			if (!listSuitesInMemory.contains(suiteStored)) {
 				listToReturn.add(suiteStored);
 			}
@@ -61,9 +61,9 @@ public class FilterSuites {
 		return listToReturn;
 	}
 	
-	private List<SuiteData> filter(List<SuiteData> listToFilter) {
-		List<SuiteData> listFiltered = new ArrayList<>();
-		for (SuiteData suiteData : listToFilter) {
+	private List<SuiteBean> filter(List<SuiteBean> listToFilter) {
+		List<SuiteBean> listFiltered = new ArrayList<>();
+		for (SuiteBean suiteData : listToFilter) {
 			if (filterMatches(suiteData)) {
 				listFiltered.add(suiteData);
 			}
@@ -71,7 +71,7 @@ public class FilterSuites {
 		return listFiltered;
 	}
 	
-	private boolean filterMatches(SuiteData suiteData) {
+	private boolean filterMatches(SuiteBean suiteData) {
 		if (suite!=null) {
 			if (suite.compareTo(suiteData.getName())!=0) {
 				return false;
@@ -102,19 +102,19 @@ public class FilterSuites {
 		this.repository = repository;
 	}
 	
-	List<SuiteData> getListSuitesInMemory() {
-		List<SuiteData> listSuitesToReturn = new ArrayList<>();
+	List<SuiteBean> getListSuitesInMemory() {
+		List<SuiteBean> listSuitesToReturn = new ArrayList<>();
 		for (SuiteTM suite : SuitesExecuted.getSuitesExecuted()) {
-			listSuitesToReturn.add(SuiteData.from(suite));
+			listSuitesToReturn.add(suite.getSuiteBean());
 		}
-		listSuitesToReturn.sort(Comparator.comparing(SuiteData::getIdExecSuite).reversed());
+		listSuitesToReturn.sort(Comparator.comparing(SuiteBean::getIdExecSuite).reversed());
 		return listSuitesToReturn;
 	}
 	
-	List<SuiteData> getListSuitesInMemoryAfter(Date fechaDesde) {
-		List<SuiteData> listSuitesReturn = new ArrayList<>();
-		List<SuiteData> listSuites = getListSuitesInMemory();
-		for (SuiteData suiteData : listSuites) {
+	List<SuiteBean> getListSuitesInMemoryAfter(Date fechaDesde) {
+		List<SuiteBean> listSuitesReturn = new ArrayList<>();
+		List<SuiteBean> listSuites = getListSuitesInMemory();
+		for (SuiteBean suiteData : listSuites) {
 			if (suiteData.getInicioDate().after(fechaDesde)) {
 				listSuitesReturn.add(suiteData);
 			}

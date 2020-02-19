@@ -3,9 +3,9 @@ package com.mng.robotest.test80.mango.test.stpv.shop.checkout.yandex;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.yandex.PageYandexMoney;
 
@@ -22,8 +22,8 @@ public class PageYandexMoneyStpV {
     }
     
 	@Validation
-    private static ChecksResult checkIsPage(WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    private static ChecksTM checkIsPage(WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece el input para el <b>Payment Code</b>",
 			PageYandexMoney.isVisibleInputPaymentCode(driver), State.Warn);

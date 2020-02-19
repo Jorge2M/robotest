@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -18,8 +18,8 @@ public class ModalDroppointsStpV {
     
     @SuppressWarnings("static-access")
     @Validation
-    public static ChecksResult validaIsVisible(Channel channel, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validaIsVisible(Channel channel, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 3;
       	validations.add(
     		"Desaparece el mensaje de \"Cargando...\" (lo esperamos hasta " + maxSecondsWait + " segundos)",

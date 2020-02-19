@@ -4,12 +4,12 @@ import org.openqa.selenium.WebDriver;
 import java.util.HashMap;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
@@ -18,8 +18,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.Page2IdentChe
 public class Page2IdentCheckoutStpV {
     
 	@Validation
-    public static ChecksResult validateIsPage(boolean emailYetExists, int maxSecondsWait, WebDriver driver) {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validateIsPage(boolean emailYetExists, int maxSecondsWait, WebDriver driver) {
+    	ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + maxSecondsWait + " segundos)",
 			Page2IdentCheckout.isPageUntil(maxSecondsWait, driver), State.Defect);
@@ -79,8 +79,8 @@ public class Page2IdentCheckoutStpV {
     }
     
     @Validation
-    public static ChecksResult validaRGPDText(Pais pais, WebDriver driver) {  
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validaRGPDText(Pais pais, WebDriver driver) {  
+    	ChecksTM validations = ChecksTM.getNew();
 		if (pais.getRgpd().equals("S")) {
 		 	validations.add(
 				"El texto legal de RGPD <b>SI</b> existe para el pais " + pais.getCodigo_pais(),

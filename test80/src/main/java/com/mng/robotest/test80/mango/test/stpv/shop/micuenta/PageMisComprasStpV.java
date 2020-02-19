@@ -5,8 +5,8 @@ import org.openqa.selenium.WebDriver;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -69,8 +69,8 @@ public class PageMisComprasStpV {
     }
 
     @Validation
-    private ChecksResult validateIsPageWhenNotExistTabs() throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    private ChecksTM validateIsPageWhenNotExistTabs() throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsToWait = 2;
       	validations.add(
     		"Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsToWait + " segundos)",
@@ -85,8 +85,8 @@ public class PageMisComprasStpV {
     }
 
     @Validation
-    public ChecksResult validateIsPage() throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validateIsPage() throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
     	int maxSecondsWait = 2;
       	validations.add(
     		"Aparece la página de \"Mis Compras\" (la esperamos hasta " + maxSecondsWait + " segundos)",
@@ -122,8 +122,8 @@ public class PageMisComprasStpV {
 	}
 	
 	@Validation
-	private ChecksResult checkArticlesInList(TypeCompra typeCompra) {
-    	ChecksResult validations = ChecksResult.getNew();
+	private ChecksTM checkArticlesInList(TypeCompra typeCompra) {
+    	ChecksTM validations = ChecksTM.getNew();
     	int maxSecondsWait = 2;
     	boolean isVisibleAnyCompra = pageMisCompras.isVisibleAnyCompraUntil(maxSecondsWait); 
       	validations.add(
@@ -138,8 +138,8 @@ public class PageMisComprasStpV {
 	}
 		
 	@Validation
-	private ChecksResult checkListArticlesVoid(TypeCompra typeCompra) {
-    	ChecksResult validations = ChecksResult.getNew();
+	private ChecksTM checkListArticlesVoid(TypeCompra typeCompra) {
+    	ChecksTM validations = ChecksTM.getNew();
     	boolean isVisibleAnyCompra = pageMisCompras.isVisibleAnyCompraUntil(0);
       	validations.add(
     		"No aparece ningún artículo",
@@ -151,8 +151,8 @@ public class PageMisComprasStpV {
 	}
     
     @Validation
-    public ChecksResult validateIsCompraOnlineVisible(String codPedido, boolean isChequeRegalo) {
-        ChecksResult validations = ChecksResult.getNew();
+    public ChecksTM validateIsCompraOnlineVisible(String codPedido, boolean isChequeRegalo) {
+        ChecksTM validations = ChecksTM.getNew();
         State stateVal = State.Warn;
         boolean avoidEvidences = false;
         if (isChequeRegalo) {

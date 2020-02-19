@@ -1,9 +1,9 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.registro;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 
 import org.openqa.selenium.WebDriver;
 
@@ -17,8 +17,8 @@ import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 public class PageRegistroNinosStpV {
     
 	@Validation
-    public static ChecksResult validaIsPageWithNinos(int numNinos, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validaIsPageWithNinos(int numNinos, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
         int maxSecondsToWait = 5;
     	validations.add(
     		"Aparece la página de introducción de datos del niño (la esperamos un máximo de " + maxSecondsToWait + " segundos)",

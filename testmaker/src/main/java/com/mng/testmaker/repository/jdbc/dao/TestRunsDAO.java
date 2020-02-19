@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.data.TestRunData;
+import com.mng.testmaker.domain.suitetree.TestRunBean;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 
 
@@ -60,8 +60,8 @@ public class TestRunsDAO {
     	this.connector = connector;
     }
     
-    public List<TestRunData> getListTestRuns(String idSuite) throws Exception {
-    	List<TestRunData> listTestRuns = new ArrayList<>();
+    public List<TestRunBean> getListTestRuns(String idSuite) throws Exception {
+    	List<TestRunBean> listTestRuns = new ArrayList<>();
         try (Connection conn = connector.getConnection();
             PreparedStatement select = conn.prepareStatement(SQLSelectTestRunsSuite)) {
             select.setString(1, idSuite);
@@ -80,8 +80,8 @@ public class TestRunsDAO {
         }
     }   
     
-    private TestRunData getTestRun(ResultSet rowTestRun) throws Exception {
-    	TestRunData testRunData = new TestRunData();
+    private TestRunBean getTestRun(ResultSet rowTestRun) throws Exception {
+    	TestRunBean testRunData = new TestRunBean();
     	testRunData.setIdExecSuite(rowTestRun.getString("IDEXECSUITE"));
     	testRunData.setSuiteName(rowTestRun.getString("SUITE"));
     	testRunData.setName(rowTestRun.getString("NAME"));
@@ -99,7 +99,7 @@ public class TestRunsDAO {
     	return testRunData;
     }
     
-    public void insertTestRun(TestRunData testRun) {
+    public void insertTestRun(TestRunBean testRun) {
         try (Connection conn = connector.getConnection()) {
             try (PreparedStatement insert = conn.prepareStatement(SQLInsertTestRun)) {
     	        insert.setString(1, testRun.getIdExecSuite());

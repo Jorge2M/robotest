@@ -5,8 +5,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -29,8 +29,8 @@ public class Page1EnvioCheckoutMobilStpV {
 	public static ModalDroppointsStpV modalDroppoints;
 
 	@Validation
-	public static ChecksResult validateIsPage(boolean userLogged, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	public static ChecksTM validateIsPage(boolean userLogged, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 			validations.add(
 			"Aparece la página correspondiente al paso-1",
 			WebdrvWrapp.isElementPresent(driver, By.xpath("//h2[@data-toggle='step1']")), State.Warn);
@@ -105,8 +105,8 @@ public class Page1EnvioCheckoutMobilStpV {
     }
     
     @Validation
-    public static ChecksResult validaResultImputPromoEmpl(WebDriver driver) throws Exception {
-    	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validaResultImputPromoEmpl(WebDriver driver) throws Exception {
+    	ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 2;
 	 	validations.add(
 			"Aparece el descuento total aplicado al empleado (en menos de " + maxSecondsWait + " segundos)",

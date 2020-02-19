@@ -6,8 +6,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageRegistroAddressData;
@@ -16,8 +16,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.registro.PageRegistroD
 public class PageRegistroDirecStpV {
     
 	@Validation
-    public static ChecksResult isPageFromPais(Pais pais, WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM isPageFromPais(Pais pais, WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
     	int maxSecondsWait = 3;
     	validations.add(
     		"Aparece la página de introducción de datos de la dirección (la esperamos un máximo de " + maxSecondsWait + " segundos)",

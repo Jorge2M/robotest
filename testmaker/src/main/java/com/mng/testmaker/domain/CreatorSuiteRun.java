@@ -3,6 +3,7 @@ package com.mng.testmaker.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mng.testmaker.domain.suitetree.SuiteTM;
 import com.mng.testmaker.domain.testfilter.TestMethod;
 import com.mng.testmaker.domain.testfilter.TestMethodData;
 import com.mng.testmaker.service.TestMaker;

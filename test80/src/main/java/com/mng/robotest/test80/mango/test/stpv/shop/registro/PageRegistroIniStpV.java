@@ -7,8 +7,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.Constantes;
@@ -77,8 +77,8 @@ public class PageRegistroIniStpV {
 	}
 	
 	@Validation
-	public ChecksResult validateMessagesErrorDependingInputs(ListDataRegistro dataToSend) {
-		ChecksResult validations = ChecksResult.getNew();
+	public ChecksTM validateMessagesErrorDependingInputs(ListDataRegistro dataToSend) {
+		ChecksTM validations = ChecksTM.getNew();
 		for (DataRegistro dataInput : dataToSend.getDataPageInicial()) {
 			String dataInputString = dataInput.getDataRegType() + " (<b>" + dataInput.getData() + "</b>)";
 			if (dataInput.isValidPrevRegistro()) {
@@ -139,8 +139,8 @@ public class PageRegistroIniStpV {
     }
 	
 	@Validation
-	public ChecksResult validateAreInputsWithErrorMessageAssociated(int numInputsObligatoriosNoInf, Pais pais) {
-		ChecksResult validations = ChecksResult.getNew();
+	public ChecksTM validateAreInputsWithErrorMessageAssociated(int numInputsObligatoriosNoInf, Pais pais) {
+		ChecksTM validations = ChecksTM.getNew();
         int numInputsTypePassrod = pageRegistroIni.getNumberInputsTypePassword();
         int numErrCampObligatorio = pageRegistroIni.getNumberMsgCampoObligatorio();
         
@@ -176,8 +176,8 @@ public class PageRegistroIniStpV {
 	}  
 	
 	@Validation
-	public ChecksResult validateRGPD_inCountryWithRgpd(DataCtxShop dCtxSh) {
-		ChecksResult validations = ChecksResult.getNew();
+	public ChecksTM validateRGPD_inCountryWithRgpd(DataCtxShop dCtxSh) {
+		ChecksTM validations = ChecksTM.getNew();
 		int maxSeconds = 1;
     	validations.add(
     		"El texto de info de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais(),
@@ -193,8 +193,8 @@ public class PageRegistroIniStpV {
 	}
 	
 	@Validation
-	public ChecksResult validateRGPD_inCountryWithoutRgpd(DataCtxShop dCtxSh) {
-		ChecksResult validations = ChecksResult.getNew();
+	public ChecksTM validateRGPD_inCountryWithoutRgpd(DataCtxShop dCtxSh) {
+		ChecksTM validations = ChecksTM.getNew();
 		int maxSeconds = 1;
     	validations.add(
     		"El texto de info de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + dCtxSh.pais.getCodigo_pais(),

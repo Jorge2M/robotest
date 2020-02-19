@@ -1,4 +1,4 @@
-package com.mng.testmaker.domain;
+package com.mng.testmaker.domain.suitetree;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,6 +10,10 @@ import org.testng.xml.XmlTest;
 
 import com.mng.testmaker.conf.ConstantesTM;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.InputParamsTM;
+import com.mng.testmaker.domain.SenderMailEndSuiteI;
+import com.mng.testmaker.domain.StateExecution;
+import com.mng.testmaker.domain.SuitesExecuted;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.pool.PoolWebDrivers;
 import com.mng.testmaker.testreports.html.GenerateReports;
@@ -140,6 +144,9 @@ public class SuiteTM extends XmlSuite {
 	}
 	
 	public String getPathDirectory() {
+		return getPathDirectory(getName(), getIdExecution());
+	}
+	public static String getPathDirectory(String nameSuite, String idExecutionSuite) {
 		String userDir = System.getProperty("user.dir");
 		String lastCharUserDir = userDir.substring(userDir.length() - 1);
 		if (File.separator.compareTo(lastCharUserDir)!=0) {
@@ -148,8 +155,8 @@ public class SuiteTM extends XmlSuite {
 		return (
 			userDir +
 			ConstantesTM.directoryOutputTests + File.separator + 
-			getName() + File.separator + 
-			getIdExecution());
+			nameSuite + File.separator + 
+			idExecutionSuite);
 	}
 	
 	public String getPathReportHtml() {
@@ -159,6 +166,36 @@ public class SuiteTM extends XmlSuite {
 	public String getDnsReportHtml() {
 		String pathFileReport = getPathReportHtml();
 		return (GenerateReports.getDnsOfFileReport(pathFileReport, inputParams.getWebAppDNS(), inputParams.getTypeAccess()));
+	}
+	
+	public SuiteBean getSuiteBean() {
+		SuiteBean suiteBean = new SuiteBean();
+		InputParamsTM inputParams = getInputParams();
+		
+		suiteBean.setIdExecSuite(getIdExecution());
+		suiteBean.setName(getName());
+		suiteBean.setVersion(inputParams.getVersion());
+		suiteBean.setChannel(inputParams.getChannel());
+		suiteBean.setApp(inputParams.getApp().toString());
+		suiteBean.setWebDriverType(inputParams.getWebDriverType());
+		suiteBean.setResult(getResult());
+		suiteBean.setInicioDate(getInicio());
+		suiteBean.setFinDate(getFin());
+		suiteBean.setDurationMillis(getDurationMillis());
+		suiteBean.setNumberTestCases(getNumberTestCases());
+		suiteBean.setMoreInfo(inputParams.getMoreInfo());
+		suiteBean.setUrlBase(inputParams.getUrlBase());
+		suiteBean.setPathReportHtml(getPathReportHtml());
+		suiteBean.setUrlReportHtml(getDnsReportHtml());
+		suiteBean.setStateExecution(getStateExecution());
+		
+		List<TestRunBean> listTestRun = new ArrayList<>();
+		for (TestRunTM testRun : getListTestRuns()) {
+			listTestRun.add(testRun.getTestRunBean());
+		}
+		suiteBean.setListTestRun(listTestRun);
+		
+		return suiteBean;
 	}
 
 }

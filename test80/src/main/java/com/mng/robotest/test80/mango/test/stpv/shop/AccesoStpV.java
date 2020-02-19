@@ -7,13 +7,13 @@ import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
-import com.mng.testmaker.domain.StepTM;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.NodoStatus;
@@ -93,8 +93,8 @@ public class AccesoStpV {
     }
 	
 	@Validation
-	private static ChecksResult checkLinksAfterLogin(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkLinksAfterLogin(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
         int maxSecondsWait = 5;
         MenusUserWrapper userMenus = SecMenusWrap.getNew(dCtxSh.channel, dCtxSh.appE, driver).getMenusUser();
     	validations.add(
@@ -323,7 +323,7 @@ public class AccesoStpV {
      * @throws Exception
      */
     @Validation
-    private static ChecksResult validacAccesoNoApareceModal(String urlBaseTest, Pais paisPrevConf, WebDriver driver) 
+    private static ChecksTM validacAccesoNoApareceModal(String urlBaseTest, Pais paisPrevConf, WebDriver driver) 
     throws Exception {
     	ResultValWithPais validations = ResultValWithPais.getNew();
     	validations.add(
@@ -384,8 +384,8 @@ public class AccesoStpV {
     }
 
     @Validation
-    public static ChecksResult validaCompareStatusNodos(NodoStatus nodoAct, NodoStatus nodoAnt) throws Exception {
-       	ChecksResult validations = ChecksResult.getNew();
+    public static ChecksTM validaCompareStatusNodos(NodoStatus nodoAct, NodoStatus nodoAnt) throws Exception {
+       	ChecksTM validations = ChecksTM.getNew();
         JSONObject stockAct = nodoAct.getStatusJSON().getWarehouses();
         String vShopCAct = nodoAct.getStatusJSON().getVShopconfig();
         String vShopCAnt = nodoAnt.getStatusJSON().getVShopconfig();
@@ -408,7 +408,7 @@ public class AccesoStpV {
     	return validations;
     }
     
-    public static class ResultValWithPais extends ChecksResult {
+    public static class ResultValWithPais extends ChecksTM {
     	Pais pais;
     	private ResultValWithPais() {
     		super();

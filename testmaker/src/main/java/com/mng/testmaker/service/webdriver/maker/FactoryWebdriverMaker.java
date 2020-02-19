@@ -1,7 +1,7 @@
 package com.mng.testmaker.service.webdriver.maker;
 
 import com.mng.testmaker.domain.InputParamsTM;
-import com.mng.testmaker.domain.TestRunTM;
+import com.mng.testmaker.domain.suitetree.TestRunTM;
 
 public class FactoryWebdriverMaker {
 

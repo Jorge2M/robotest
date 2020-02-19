@@ -1,8 +1,8 @@
 package com.mng.robotest.test80.mango.test.stpv.shop.home;
 
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 
-public class ChecksResultWithFlagBannerExists extends ChecksResult {
+public class ChecksResultWithFlagBannerExists extends ChecksTM {
 	boolean existBanner;
 	private ChecksResultWithFlagBannerExists() {
 		super();

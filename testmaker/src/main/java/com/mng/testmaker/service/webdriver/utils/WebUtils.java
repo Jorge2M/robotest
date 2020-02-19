@@ -9,8 +9,8 @@ import javax.net.ssl.*;
 import org.testng.*;
 
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.domain.StepTM;
-import com.mng.testmaker.domain.StepTM.StepEvidence;
+import com.mng.testmaker.domain.suitetree.StepTM;
+import com.mng.testmaker.domain.suitetree.StepEvidence;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.testreports.html.ResultadoErrores;
 import com.mng.testmaker.testreports.html.StoreStepEvidencies;
@@ -121,16 +121,13 @@ public class WebUtils {
         sc.getSocketFactory());
     }
     
-    /**
-     * Se realiza una captura del HTML de la página
-     */
     public static void capturaHTMLPage(StepTM step) throws Exception {
         try {
-            String nombreHTMLfile = StoreStepEvidencies.getPathFileEvidenciaStep(step, StepEvidence.html);
+        	StoreStepEvidencies storer = new StoreStepEvidencies(step);
+            String nombreHTMLfile = storer.getPathFileEvidenciaStep(StepEvidence.html);
             File htmlFile = new File(nombreHTMLfile);
             try (FileWriter fw = new FileWriter(htmlFile)) {
-            	WebDriver driver = step.getTestCaseParent().getDriver();
-                fw.write(driver.getPageSource());
+                fw.write(step.getDriver().getPageSource());
             }
         } 
         catch (Exception e) {

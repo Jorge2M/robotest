@@ -3,17 +3,17 @@ package com.mng.robotest.test80.mango.test.stpv.manto;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.boundary.aspects.step.Step;
-import com.mng.testmaker.boundary.aspects.validation.ChecksResult;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test80.mango.test.pageobject.manto.PageGestorSaldosTPV;
 
 public class PageGestorSaldosTPVStpV {
 
 	@Validation
-	public static ChecksResult validateIsPage(WebDriver driver) {
-		ChecksResult validations = ChecksResult.getNew();
+	public static ChecksTM validateIsPage(WebDriver driver) {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Estamos en la página " + PageGestorSaldosTPV.titulo,
 			PageGestorSaldosTPV.isPage(driver), State.Defect);
@@ -33,8 +33,8 @@ public class PageGestorSaldosTPVStpV {
 	}
 	
 	@Validation
-	private static ChecksResult checkAfterConsultSaldosTpv(String tpv, WebDriver driver) throws Exception {
-		ChecksResult validations = ChecksResult.getNew();
+	private static ChecksTM checkAfterConsultSaldosTpv(String tpv, WebDriver driver) throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
 	 	validations.add(
 			"Aparece la tabla de saldos",
 			PageGestorSaldosTPV.isTablaSaldosVisible(driver), State.Defect);
