@@ -197,5 +197,19 @@ public class SuiteTM extends XmlSuite {
 		
 		return suiteBean;
 	}
-
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj==this) {
+			return true;
+		}
+		return false;
+//		if (!(obj instanceof SuiteTM)) {
+//			return false;
+//		}
+//		SuiteTM suite = (SuiteTM)obj;
+//		return (
+//			getIdExecution().compareTo(suite.getIdExecution())==0 &&
+//			getThreadId()==suite.getThreadId());
+	}
 }

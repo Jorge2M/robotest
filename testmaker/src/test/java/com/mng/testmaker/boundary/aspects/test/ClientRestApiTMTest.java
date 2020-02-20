@@ -24,11 +24,9 @@ public class ClientRestApiTMTest {
 		inputParams.setApp(AppEcom.shop);
 		inputParams.setVersion("V1");
 		inputParams.setUrlBase("https://shop.mango.com/preHome.faces");
-		inputParams.setListTestCaseItems(Arrays.asList("SES002"));
-		inputParams.setAsyncExec("false");
 		
 		ClientRestApiTM client = new ClientRestApiTM();
-		SuiteBean suiteData = client.suiteRun(inputParams);
+		SuiteBean suiteData = client.suiteRun(inputParams, Arrays.asList("SES002"));
 		System.out.println(suiteData);
 	}
 

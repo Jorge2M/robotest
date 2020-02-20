@@ -5,7 +5,10 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+
+import javax.ws.rs.core.Form;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -48,19 +51,13 @@ public class TestAspect {
 		Object returnValue = null;
 		InputParamsTM inputParams = testCase.getInputParamsSuite();
 		if (!inputParams.isRemote()) {
-			System.out.println("Prev Calling Service: " + testCase.getResult().hashCode());
 			ClientRestApiTM client = new ClientRestApiTM();
-			inputParams.setListTestCaseItems(Arrays.asList(testCase.getNameUnique()));
-			inputParams.setAsyncExec("false");
-			inputParams.setRemote("true");
-			client.suiteRun(testCase.getInputParamsSuite());
-			System.out.println("Next Calling Service: " + testCase.getResult().hashCode());
+			client.suiteRun(inputParams, Arrays.asList(testCase.getNameUnique()));
 		} else {
 			testCase.makeWebDriver();
 			returnValue = joinPoint.proceed();
 		}
 		
-		System.out.println("Around Afther");
 		return returnValue;
 	}
 
