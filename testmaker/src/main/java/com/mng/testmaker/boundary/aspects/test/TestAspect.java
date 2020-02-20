@@ -2,6 +2,8 @@ package com.mng.testmaker.boundary.aspects.test;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -35,9 +37,8 @@ public class TestAspect {
 		//testCase.makeWebDriver();
 	}
 
-//	TODO se obtiene un problema en ListPagosEspana porque el @Test retorna un Object[] en lugar de un void
 //	@Around("annotationTestPointcut() && atExecution()")
-//	public void aroundTest(ProceedingJoinPoint joinPoint) throws Throwable {
+//	public Object aroundTest(ProceedingJoinPoint joinPoint) throws Throwable {
 //		System.out.println("Around Before");
 //		TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
 //		skipTestIfSuiteEnded(testCase, joinPoint);
