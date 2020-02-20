@@ -40,20 +40,23 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
 
 	@Override //Start TestCase
 	public void onTestStart(ITestResult result) {
+		System.out.println("onTestStart: " + result.hashCode());
 		TestRunTM testRun = getTestRun(result);
 		TestCaseTM testCase = new TestCaseTM(result);
-		testCase.makeWebDriver();
+		//testCase.makeWebDriver();
 		testRun.addTestCase(testCase);
 	}
 
 	@Override //End TestCase Success
 	public void onTestSuccess(ITestResult result) {
+		System.out.println("onTestSuccess: " + result.hashCode());
 		TestCaseTM testCase = TestCaseTM.getTestCase(result);
 		testCase.end();
 	}
 
 	@Override //End TestCase Skipped
 	public void onTestSkipped(ITestResult result) {
+		System.out.println("onTestSkipped: " + result.hashCode());
 		TestCaseTM testCase = TestCaseTM.getTestCase(result);
 		if (testCase!=null) {
 			testCase.end(State.Skip);
@@ -62,6 +65,7 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
 
 	@Override //End TestCase Failure
 	public void onTestFailure(ITestResult result) {
+		System.out.println("onTestFailure: " + result.hashCode());
 		Log4jConfig.pLogger.error("Exception for TestNG", result.getThrowable());
 		TestCaseTM testCase = TestCaseTM.getTestCase(result);
 		if (testCase!=null) {

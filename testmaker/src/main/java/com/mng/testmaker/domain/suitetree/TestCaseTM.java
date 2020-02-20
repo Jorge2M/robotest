@@ -84,7 +84,8 @@ public class TestCaseTM  {
 			for (TestRunTM testRun : suite.getListTestRuns()) {
 				for (TestCaseTM testCase : testRun.getListTestCases()) {
 					if (testCase!=null) {
-						if (testCase.getResult()==result) {
+						System.out.println("Compare: " + testCase.getResult().hashCode() + " / " + result.hashCode());
+						if (testCase.getResult().equals(result)) {
 							return testCase;
 						}
 					}
