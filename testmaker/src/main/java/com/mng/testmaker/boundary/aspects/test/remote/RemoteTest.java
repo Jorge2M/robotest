@@ -1,5 +1,6 @@
-package com.mng.testmaker.boundary.aspects.test;
+package com.mng.testmaker.boundary.aspects.test.remote;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -10,11 +11,34 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
 import com.mng.testmaker.domain.InputParamsTM;
+import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.testmaker.domain.suitetree.StepTM;
 import com.mng.testmaker.domain.suitetree.SuiteBean;
+import com.mng.testmaker.domain.suitetree.TestCaseBean;
+import com.mng.testmaker.domain.suitetree.TestCaseTM;
 
-public class ClientRestApiTM extends JaxRsClient {
+public class RemoteTest extends JaxRsClient {
 	
-	public SuiteBean suiteRun(InputParamsTM inputParams, List<String> testCases) throws Exception {
+	public SuiteBean execute(TestCaseTM testCase, InputParamsTM inputParams) throws Exception {
+		//Exec TestCase
+		SuiteBean suiteRemote = suiteRun(inputParams, Arrays.asList(testCase.getNameUnique()));
+		TestCaseBean testCaseRemote = suiteRemote.
+				getListTestRun().get(0).
+				getListTestCase().get(0);
+		
+		//Coser
+		List<StepTM> listStepsRemote = testCaseRemote.getListStep();
+		for (StepTM stepRemote : listStepsRemote) {
+			stepRemote.setParents(testCase);
+			for (ChecksTM checks : stepRemote.getListChecksTM()) {
+				checks.setParents(stepRemote);
+			}
+		}
+		testCase.setListStep(listStepsRemote);
+		return suiteRemote;
+	}
+	
+	SuiteBean suiteRun(InputParamsTM inputParams, List<String> testCases) throws Exception {
 		Form formParams = getFormParams(inputParams.getAllParamsValues());
 		MultivaluedMap<String, String> mapParams = formParams.asMap();
 		mapParams.putSingle(InputParamsTM.TCaseNameParam, String.join(",", testCases));

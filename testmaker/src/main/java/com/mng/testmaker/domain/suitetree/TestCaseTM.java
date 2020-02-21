@@ -116,9 +116,11 @@ public class TestCaseTM  {
 	public void addStep(StepTM step) {
 		listSteps.add(step);
 	}
-	
 	public List<StepTM> getListStep() {
 		return this.listSteps;
+	}
+	public void setListStep(List<StepTM> listSteps) {
+		this.listSteps = listSteps;
 	}
 
 	private State getStateFromSteps() {

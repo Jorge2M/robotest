@@ -39,7 +39,7 @@ public class StepAspect {
         String stepResExpected = infoStep.getStepAnnotation().expected();
         datosStep.setDescripcion(matcher.match(stepDescription)); 
         datosStep.setResExpected(matcher.match(stepResExpected));
-        datosStep.setHoraInicio(new Date(System.currentTimeMillis()));
+        datosStep.setTimeInicio(System.currentTimeMillis());
     }
     
     @AfterThrowing(

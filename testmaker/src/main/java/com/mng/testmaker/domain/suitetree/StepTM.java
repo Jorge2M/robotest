@@ -29,8 +29,10 @@ public class StepTM {
 	private SaveWhen saveNettraffic= SaveWhen.Never;
 	private String pathMethod;
 	private int type_page; 
-	private Date hora_inicio; 
-	private Date hora_fin;
+	private long timeInicio = 0;
+	private long timeFin = 0;
+//	private Date hora_inicio; 
+//	private Date hora_fin;
 	private State result_steps = State.Ok;
 	private boolean excepExists = true;
 	private StateExecution state = StateExecution.Started;
@@ -49,6 +51,11 @@ public class StepTM {
 	
 	public TestCaseTM getTestCaseParent() {
 		return testCase;
+	}
+	public void setParents(TestCaseTM testCase) {
+		this.testCase = testCase;
+		this.testRun = testCase.getTestRunParent();
+		this.suite = testRun.getSuiteParent();
 	}
 	public TestRunTM getTestRunParent() {
 		return testRun;
@@ -78,7 +85,7 @@ public class StepTM {
 			setResultSteps(State.Nok);
 		}
 		storeEvidencies();
-		setHoraFin(new Date(System.currentTimeMillis()));
+		setTimeFin(System.currentTimeMillis());
 		setState(StateExecution.Finished);
 	}
 	public void storeEvidencies() {
@@ -148,17 +155,24 @@ public class StepTM {
 		this.type_page = type_page;
 	}
 	public Date getHoraInicio() {
-		return hora_inicio;
-	}
-	public void setHoraInicio(Date hora_inicio) {
-		this.hora_inicio = hora_inicio;
+		return new Date(getTimeInicio());
 	}
 	public Date getHoraFin() {
-		return hora_fin;
+		return new Date(getTimeFin());
 	}
-	public void setHoraFin(Date hora_fin) {
-		this.hora_fin = hora_fin;
+	public long getTimeInicio() {
+		return timeInicio;
 	}
+	public void setTimeInicio(long timeInicio) {
+		this.timeInicio = timeInicio;
+	}
+	public long getTimeFin() {
+		return timeFin;
+	}
+	public void setTimeFin(long timeFin) {
+		this.timeFin = timeFin;
+	}
+
 	public State getResultSteps() {
 		return result_steps;
 	}

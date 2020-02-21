@@ -2,24 +2,15 @@ package com.mng.testmaker.boundary.aspects.test;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
-import javax.ws.rs.core.Form;
-
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.testng.SkipException;
 import org.testng.annotations.Factory;
 
-import com.mng.testmaker.domain.InputParamsBasic;
+import com.mng.testmaker.boundary.aspects.test.remote.RemoteTest;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.testmaker.service.TestMaker;
@@ -44,16 +35,16 @@ public class TestAspect {
 
 	@Around("annotationTestPointcut() && atExecution()")
 	public Object aroundTest(ProceedingJoinPoint joinPoint) throws Throwable {
-		System.out.println("Around Before");
 		TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
 		skipTestIfSuiteEnded(testCase, joinPoint);
 		
 		Object returnValue = null;
 		InputParamsTM inputParams = testCase.getInputParamsSuite();
 		if (!inputParams.isRemote()) {
-			ClientRestApiTM client = new ClientRestApiTM();
-			client.suiteRun(inputParams, Arrays.asList(testCase.getNameUnique()));
+			RemoteTest remoteTest = new RemoteTest();
+			remoteTest.execute(testCase, inputParams);
 		} else {
+			//TODO El COM010 no lo soporta
 			testCase.makeWebDriver();
 			returnValue = joinPoint.proceed();
 		}
