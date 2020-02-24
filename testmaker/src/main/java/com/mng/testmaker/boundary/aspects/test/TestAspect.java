@@ -40,14 +40,14 @@ public class TestAspect {
 		
 		Object returnValue = null;
 		InputParamsTM inputParams = testCase.getInputParamsSuite();
-		if (!inputParams.isRemote()) {
-			RemoteTest remoteTest = new RemoteTest();
-			remoteTest.execute(testCase, inputParams);
-		} else {
+//		if (!inputParams.isRemote()) {
+//			RemoteTest remoteTest = new RemoteTest();
+//			remoteTest.execute(testCase, inputParams);
+//		} else {
 			//TODO El COM010 no lo soporta
 			testCase.makeWebDriver();
 			returnValue = joinPoint.proceed();
-		}
+//		}
 		
 		return returnValue;
 	}

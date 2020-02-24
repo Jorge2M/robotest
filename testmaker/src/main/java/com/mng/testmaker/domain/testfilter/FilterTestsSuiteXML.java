@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlDependencies;
@@ -68,16 +69,16 @@ public class FilterTestsSuiteXML {
     
     public List<TestMethod> getInitialTestCaseCandidatesToExecute(XmlTest testRun) {
         List<TestMethod> listTestToReturn = new ArrayList<>();
-        List<TestMethod> listTestsInXMLClasses = getTestsCasesInXMLClasses(testRun);
+        List<TestMethod> listTestsInXMLClasses = getTCasesAndFactorysInXMLClasses(testRun);
         //List<String> groupsFromTestRun = testRun.getIncludedGroups();
         for (TestMethod tmethod : listTestsInXMLClasses) {
         	if (testRun.getExcludedGroups()!=null && testRun.getExcludedGroups().size()>0) {
-	        	if (!groupsContainsAnyGroup(tmethod.getAnnotationTest().groups(), testRun.getExcludedGroups())) {
+	        	if (!groupsContainsAnyGroup(tmethod.getGroups(), testRun.getExcludedGroups())) {
 	        		listTestToReturn.add(tmethod);
 	        	}
         	} else {
         		if (testRun.getIncludedGroups()!=null && testRun.getIncludedGroups().size()>0) {
-		        	if (groupsContainsAnyGroup(tmethod.getAnnotationTest().groups(), testRun.getIncludedGroups())) {
+		        	if (groupsContainsAnyGroup(tmethod.getGroups(), testRun.getIncludedGroups())) {
 		        		listTestToReturn.add(tmethod);
 		        	}
         		}
@@ -107,7 +108,7 @@ public class FilterTestsSuiteXML {
     	
     	List<TestMethod> listTestsFiltered = new ArrayList<>();
     	for (TestMethod testMethod : listToFilter) {
-    		List<String> groupsMethod = Arrays.asList(testMethod.getAnnotationTest().groups());
+    		List<String> groupsMethod = Arrays.asList(testMethod.getGroups());
     		if (someGroupInList(groupsMethod, dFilter.getGroupsFilter())) {
     			listTestsFiltered.add(testMethod);
     		}
@@ -149,7 +150,7 @@ public class FilterTestsSuiteXML {
      * @return obtendremos una lista de TestCases teniendo en cuenta el filtro que suponen: 
      *   - Los includes de métodos específicos existentes en la XML programática asociados a clases
      */
-    protected List<TestMethod> getTestsCasesInXMLClasses(XmlTest testRun) {
+    protected List<TestMethod> getTCasesAndFactorysInXMLClasses(XmlTest testRun) {
         ArrayList<TestMethod> listOfAnnotationsOfTestCases = new ArrayList<>();
         try {
             for (XmlClass xmlClass : testRun.getClasses()) {
@@ -160,6 +161,12 @@ public class FilterTestsSuiteXML {
                         if (annotation.annotationType()==org.testng.annotations.Test.class &&
                         	((Test)annotation).enabled()) {
                             listOfAnnotationsOfTestCases.add(new TestMethod((Test)annotation, method));
+                            break;
+                        }
+                        if (annotation.annotationType()==org.testng.annotations.Factory.class &&
+                        	((Factory)annotation).enabled()) {
+                            listOfAnnotationsOfTestCases.add(new TestMethod((Factory)annotation, method));
+                            break;
                         }
                     }
                 }
@@ -176,38 +183,38 @@ public class FilterTestsSuiteXML {
     throws ClassNotFoundException {
         for (Iterator<XmlClass> iterator = testRun.getClasses().iterator(); iterator.hasNext(); ) {
             XmlClass xmlClass = iterator.next();
-            if (!isFactoryWithoutTestsClass(xmlClass)) {
+//            if (!isFactoryWithoutTestsClass(xmlClass)) {
 	            includeOnlyTestCasesInXmlClass(xmlClass, testCasesToInclude);
 	            if (xmlClass.getIncludedMethods().size()==0) {
 	                iterator.remove();
 	            }
-            }
+//            }
         }
     }
     
-    private boolean isFactoryWithoutTestsClass(XmlClass xmlClass) throws ClassNotFoundException {
-    	if (isAnnotationInClass(org.testng.annotations.Test.class, xmlClass)) {
-    		return false;
-    	}
-    	if (isAnnotationInClass(org.testng.annotations.Factory.class, xmlClass)) {
-    		return true;
-    	}
-    	return false;
-    }
+//    private boolean isFactoryWithoutTestsClass(XmlClass xmlClass) throws ClassNotFoundException {
+//    	if (isAnnotationInClass(org.testng.annotations.Test.class, xmlClass)) {
+//    		return false;
+//    	}
+//    	if (isAnnotationInClass(org.testng.annotations.Factory.class, xmlClass)) {
+//    		return true;
+//    	}
+//    	return false;
+//    }
     
-    private boolean isAnnotationInClass(Class<? extends Annotation> annotationExpected, XmlClass xmlClass) 
-    throws ClassNotFoundException {
-        List<Method> listMethods = Arrays.asList(Class.forName(xmlClass.getName()).getMethods());
-        for (Method method : listMethods) {
-        	List<Annotation> listAnnotations = Arrays.asList(method.getAnnotations());
-	        for (Annotation annotation : listAnnotations) {
-	        	if (annotation.annotationType()==annotationExpected) {
-	        		return true;
-	        	}
-	        }
-        }
-        return false;
-    }
+//    private boolean isAnnotationInClass(Class<? extends Annotation> annotationExpected, XmlClass xmlClass) 
+//    throws ClassNotFoundException {
+//        List<Method> listMethods = Arrays.asList(Class.forName(xmlClass.getName()).getMethods());
+//        for (Method method : listMethods) {
+//        	List<Annotation> listAnnotations = Arrays.asList(method.getAnnotations());
+//	        for (Annotation annotation : listAnnotations) {
+//	        	if (annotation.annotationType()==annotationExpected) {
+//	        		return true;
+//	        	}
+//	        }
+//        }
+//        return false;
+//    }
     
     /**
      * Remove of the dependencies with source or destination group without any test for execution
@@ -239,10 +246,12 @@ public class FilterTestsSuiteXML {
         for (Method method : methodList) {
             ArrayList<Annotation> annotationsList = new ArrayList<>(Arrays.asList(method.getDeclaredAnnotations()));
             for (Annotation annotation : annotationsList) {
-                if (annotation.annotationType()==org.testng.annotations.Test.class &&
-                	((Test)annotation).enabled() &&
-                	testMethodsContainsMethod(testCasesToInclude, method.getName()))
-                    includeMethods.add(new XmlInclude(method.getName()));
+                if (((annotation.annotationType()==org.testng.annotations.Test.class && ((Test)annotation).enabled()) ||
+                	 (annotation.annotationType()==org.testng.annotations.Factory.class && ((Factory)annotation).enabled())) &&
+                	testMethodsContainsMethod(testCasesToInclude, method.getName())) {
+                	includeMethods.add(new XmlInclude(method.getName()));
+                	break;
+                }
             }
         }              
         
@@ -253,7 +262,7 @@ public class FilterTestsSuiteXML {
         HashSet<String> listOfGropusWithTestCases = new HashSet<>();
         List<TestMethod> listOfTestAnnotations = getTestCasesToExecute(testRun);
         for (TestMethod testMethod : listOfTestAnnotations) {
-            listOfGropusWithTestCases.addAll(Arrays.asList(testMethod.getAnnotationTest().groups()));                        
+            listOfGropusWithTestCases.addAll(Arrays.asList(testMethod.getGroups()));
         }
         return listOfGropusWithTestCases;
     }
