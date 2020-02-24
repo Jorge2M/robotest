@@ -28,12 +28,16 @@ public class ListPagosEspana {
 	final boolean twoArticles = true;
 	final boolean anulPedido = true;
 	
-    @Factory
-    @Test (
-        groups={"Compra", "Canal:all_App:all"}, alwaysRun=true, priority=1, 
-        description=
-    		"Factoría que incluye varios tests por cada uno de los pagos de España " + 
-    		"variando los flags de usuario registrado, empleado y métodos de envío")
+    @Factory(
+          groups={"Compra", "Canal:all_App:all"}, 
+          description=
+      		"Factoría que incluye varios tests por cada uno de los pagos de España " + 
+      		"variando los flags de usuario registrado, empleado y métodos de envío")
+//    @Test (
+//        groups={"Compra", "Canal:all_App:all"}, alwaysRun=true, priority=1, 
+//        description=
+//    		"Factoría que incluye varios tests por cada uno de los pagos de España " + 
+//    		"variando los flags de usuario registrado, empleado y métodos de envío")
     public Object[] COM010_PagoFactory(ITestContext ctx) throws Exception {
         ArrayList<Object> listTests = new ArrayList<>(); 
         InputParamsTM inputData = TestMaker.getInputParamsSuite(ctx);
