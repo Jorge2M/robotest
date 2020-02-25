@@ -16,6 +16,7 @@ import com.mng.testmaker.domain.SuitesExecuted;
 
 public class TestCaseTM  {
 
+	private final int invocationCount;
 	private List<StepTM> listSteps = new ArrayList<>();
 	private StateExecution stateRun = StateExecution.Started;
 	private State state = State.Ok;
@@ -30,6 +31,7 @@ public class TestCaseTM  {
 		this.testRunParent = (TestRunTM)result.getTestContext().getCurrentXmlTest();
 		this.suiteParent = (SuiteTM)testRunParent.getSuite();
 		this.result = result;
+		this.invocationCount = makeInvocationCount();
 		this.threadId = Thread.currentThread().getId();
 //		if (suiteParent.getStateExecution()!=StateExecution.Stopping) {
 //			this.driver = getWebDriverForTestCase();
@@ -40,6 +42,23 @@ public class TestCaseTM  {
 	
 	public void makeWebDriver() {
 		this.driver = getWebDriverForTestCase();
+	}
+	
+	private int makeInvocationCount() {
+		int maxCount = 0;
+		List<TestCaseTM> listTestCases = testRunParent.getListTestCases();
+		for (TestCaseTM testCaseTM : listTestCases) {
+			if (testCaseTM.getNameUnique().compareTo(getNameUnique())==0) {
+				if (testCaseTM.getInvocationCount() > invocationCount) {
+					maxCount = testCaseTM.getInvocationCount();
+				}
+			}
+		}
+		return maxCount + 1;
+	}
+	
+	public int getInvocationCount() {
+		return invocationCount;
 	}
 	
 	public String getNameUnique() {
