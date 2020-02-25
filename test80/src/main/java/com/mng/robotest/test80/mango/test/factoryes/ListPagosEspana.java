@@ -29,7 +29,7 @@ public class ListPagosEspana {
 	final boolean anulPedido = true;
 	
     @Factory
-    @Test (
+    @Test ( 
         groups={"Compra", "Canal:all_App:all"}, alwaysRun=true, priority=1, 
         description=
     		"Factoría que incluye varios tests por cada uno de los pagos de España " + 
