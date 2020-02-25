@@ -58,7 +58,7 @@ public class TestAspect {
 		}
 	}
 	
-	private boolean isFactoryMethod(JoinPoint joinPoint) {
+	private boolean isFactoryMethod(JoinPoint joinPoint) { 
 		String testMethod = joinPoint.getSignature().getName();
 		Method[] listMethodsOfClass = joinPoint.getSignature().getDeclaringType().getDeclaredMethods();
 		for (Method methodOfClass : listMethodsOfClass) {
