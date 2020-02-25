@@ -71,7 +71,7 @@ public class SecTallasArticuloDesktop extends WebdrvWrapp {
 		if (capaVisible) {
 			return xpathCapaAdd + "//self::div[" + classCapaActive + "]";
 		}
-		return xpathCapaAdd + "//self::div[not(" + classCapaActive + ")]";
+		return xpathCapaAdd + "//self::div[not(" + classCapaActive + ")]"; 
 	}
 
 	private final String XPathTallaAvailableOutletOld = "//span[@data-id and not(@class[contains(.,'no-stock')])]";
