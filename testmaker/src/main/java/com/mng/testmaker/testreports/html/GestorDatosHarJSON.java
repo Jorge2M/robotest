@@ -8,7 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 
 import com.mng.testmaker.domain.suitetree.StepTM;
-import com.mng.testmaker.domain.suitetree.StepEvidence;
+import com.mng.testmaker.testreports.html.StoreStepEvidencies.StepEvidence;
 
 
 public class GestorDatosHarJSON {
@@ -22,7 +22,7 @@ public class GestorDatosHarJSON {
 	
 	public GestorDatosHarJSON(StepTM step) throws Exception {
 		StoreStepEvidencies storer = new StoreStepEvidencies(step);
-		String ficheroHAR = storer.getPathFileEvidenciaStep(StepEvidence.har);
+		String ficheroHAR = storer.getPathFileEvidencia(StepEvidence.har);
 		parseHAR(ficheroHAR);
 	}
 	

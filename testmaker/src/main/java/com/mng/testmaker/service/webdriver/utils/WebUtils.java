@@ -10,10 +10,10 @@ import org.testng.*;
 
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.domain.suitetree.StepTM;
-import com.mng.testmaker.domain.suitetree.StepEvidence;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.testreports.html.ResultadoErrores;
 import com.mng.testmaker.testreports.html.StoreStepEvidencies;
+import com.mng.testmaker.testreports.html.StoreStepEvidencies.StepEvidence;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntries;
@@ -124,7 +124,7 @@ public class WebUtils {
     public static void capturaHTMLPage(StepTM step) throws Exception {
         try {
         	StoreStepEvidencies storer = new StoreStepEvidencies(step);
-            String nombreHTMLfile = storer.getPathFileEvidenciaStep(StepEvidence.html);
+            String nombreHTMLfile = storer.getPathFileEvidencia(StepEvidence.html);
             File htmlFile = new File(nombreHTMLfile);
             try (FileWriter fw = new FileWriter(htmlFile)) {
                 fw.write(step.getDriver().getPageSource());

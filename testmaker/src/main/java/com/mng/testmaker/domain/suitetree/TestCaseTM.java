@@ -1,6 +1,7 @@
 package com.mng.testmaker.domain.suitetree;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -96,6 +97,25 @@ public class TestCaseTM  {
 
 	public State getStateResult() {
 		return this.state;
+	}
+	
+	public String getTestPathDirectory() {
+		SuiteTM suiteParent = getSuiteParent();
+		String suitePath = SuiteTM.getPathDirectory(
+				suiteParent.getName(), 
+				suiteParent.getIdExecution());
+		
+		TestRunTM testRunParent = getTestRunParent();
+		String testPath = 
+			suitePath + File.separator + 
+			testRunParent.getName() + File.separator +
+			getNameUnique();
+		
+		if (getInvocationCount()>1) {
+			testPath+="(" + getInvocationCount() + ")";
+		}
+		
+		return testPath;
 	}
 	
 	public static TestCaseTM getTestCase(ITestResult result) {

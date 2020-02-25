@@ -13,6 +13,7 @@ import com.mng.testmaker.domain.util.ParsePathClass;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.testreports.html.NetTrafficSaver;
 import com.mng.testmaker.testreports.html.StoreStepEvidencies;
+import com.mng.testmaker.testreports.html.StoreStepEvidencies.StepEvidence;
 
 public class StepTM {
 
@@ -69,6 +70,7 @@ public class StepTM {
 	public String getOutputDirectorySuite() {
 		return getTestRunParent().getTestNgContext().getOutputDirectory();
 	}
+	
 	public int getNumber() {
 		List<StepTM> listSteps = getTestCaseParent().getListStep();
 		for (int i=0; i<listSteps.size(); i++) {
@@ -88,11 +90,15 @@ public class StepTM {
 		setTimeFin(System.currentTimeMillis());
 		setState(StateExecution.Finished);
 	}
+	
+	public String getPathDirectory() {
+		return testCase.getTestPathDirectory();
+	}
 	public void storeEvidencies() {
 		StoreStepEvidencies storerEvidencies = new StoreStepEvidencies(this);
 		storerEvidencies.storeStepEvidencies();
 	}
-	
+
 	public List<ChecksTM> getListChecksTM() {
 		return listChecksTM;
 	}

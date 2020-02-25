@@ -24,11 +24,11 @@ import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.domain.suitetree.StepTM;
-import com.mng.testmaker.domain.suitetree.StepEvidence;
 import com.mng.testmaker.domain.suitetree.SuiteBean;
 import com.mng.testmaker.domain.suitetree.SuiteTM;
 import com.mng.testmaker.domain.suitetree.TestCaseBean;
 import com.mng.testmaker.domain.suitetree.TestRunBean;
+import com.mng.testmaker.testreports.html.StoreStepEvidencies.StepEvidence;
 
 
 public class GenerateReports extends EmailableReporter {
@@ -219,7 +219,7 @@ public class GenerateReports extends EmailableReporter {
         for (StepTM step : testCase.getListStep()) {
         	StoreStepEvidencies storerError = new StoreStepEvidencies(step);
             stepNumber+=1;
-            String ImageFileStep = storerError.getPathFileEvidenciaStep(StepEvidence.imagen);
+            String ImageFileStep = storerError.getPathFileEvidencia(StepEvidence.imagen);
             File indexFile = new File(ImageFileStep);
             String litPNGNewStep = "";
             String PNGNewStep = "#";
@@ -228,14 +228,14 @@ public class GenerateReports extends EmailableReporter {
                 PNGNewStep = getRelativePathEvidencia(step, StepEvidence.imagen);
             }
 
-            String ErrorFileStep = storerError.getPathFileEvidenciaStep(StepEvidence.errorpage);
+            String ErrorFileStep = storerError.getPathFileEvidencia(StepEvidence.errorpage);
             indexFile = new File(ErrorFileStep);
             String linkErrorNew = "";
             if (indexFile.exists()) {
                 linkErrorNew = " \\ <a href=\"" + getRelativePathEvidencia(step, StepEvidence.errorpage) + "\" target=\"_blank\">ErrorPage</a>";
             }
 
-            String HARPFileStep = storerError.getPathFileEvidenciaStep(StepEvidence.harp);
+            String HARPFileStep = storerError.getPathFileEvidencia(StepEvidence.harp);
             indexFile = new File(HARPFileStep);
             String linkHarpNew = "";
             if (indexFile.exists()) {
@@ -246,14 +246,14 @@ public class GenerateReports extends EmailableReporter {
                 linkHarpNew = " \\ <a href=\"" + ConstantesTM.URL_SOFTWAREISHARD + pathHARP + "\" target=\"_blank\">NetTraffic</a>";
             }
             
-            String HARFileStep = storerError.getPathFileEvidenciaStep(StepEvidence.har);
+            String HARFileStep = storerError.getPathFileEvidencia(StepEvidence.har);
             String linkHarNew = "";
             indexFile = new File(HARFileStep);
             if (indexFile.exists()) {
                 linkHarNew = " \\ <a href=\"" + getRelativePathEvidencia(step, StepEvidence.har) + "\" target=\"_blank\">NetJSON</a>";
             }
 
-            String HtmlFileStep = storerError.getPathFileEvidenciaStep(StepEvidence.html);
+            String HtmlFileStep = storerError.getPathFileEvidencia(StepEvidence.html);
             indexFile = new File(HtmlFileStep);
             String linkHtmlNew = "";
             if (indexFile.exists()) {
@@ -293,7 +293,7 @@ public class GenerateReports extends EmailableReporter {
 
 	private String getRelativePathEvidencia(StepTM step, StepEvidence evidence) {
 		StoreStepEvidencies storer = new StoreStepEvidencies(step);
-		String fileName = storer.getNameFileEvidenciaStep(evidence);
+		String fileName = storer.getNameFileEvidencia(evidence);
 		String testRunName = step.getTestRunParent().getName();
 		String testCaseNameUnique = step.getTestCaseParent().getNameUnique();
 		return ("./" + testRunName + "/" + testCaseNameUnique + "/" + fileName);

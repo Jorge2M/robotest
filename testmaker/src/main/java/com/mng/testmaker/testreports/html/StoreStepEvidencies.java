@@ -7,8 +7,6 @@ import com.mng.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.StepTM;
-import com.mng.testmaker.domain.suitetree.StepEvidence;
-import com.mng.testmaker.domain.suitetree.SuiteTM;
 import com.mng.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.testmaker.domain.suitetree.TestRunTM;
 import com.mng.testmaker.service.webdriver.utils.WebUtils;
@@ -18,18 +16,28 @@ public class StoreStepEvidencies {
 	private final StepTM step;
 	private final TestRunTM testRunParent;
 	private final TestCaseTM testCaseParent;
-	private final String outputDirectorySuite;
 	private final WebDriver driver;
 	private final StorerErrorStep storerError;
 	
 	public static String prefixEvidenciaStep = "Step-";
+	public enum StepEvidence {
+		imagen("png"), 
+		html("html"), 
+		errorpage("-error.html"), 
+		har("har"), 
+		harp("harp");
+		
+		public String fileExtension;
+		private StepEvidence(String fileExtension) {
+			this.fileExtension = fileExtension;
+		}
+	}
 
 	public StoreStepEvidencies(StepTM step) {
 		this.step = step;
 		this.testCaseParent = step.getTestCaseParent();
 		this.testRunParent = testCaseParent.getTestRunParent();
 		this.storerError = testRunParent.getStorerErrorStep();
-		this.outputDirectorySuite = testRunParent.getTestNgContext().getOutputDirectory();
 		this.driver = testCaseParent.getDriver();
 	}
 
@@ -77,23 +85,15 @@ public class StoreStepEvidencies {
 	}
 
 	private void createPathForEvidencesStore() {
-		String suitePath = SuiteTM.getPathDirectory(
-				step.getSuiteParent().getName(), 
-				step.getSuiteParent().getIdExecution());
-		
-		String pathEvidencias = 
-			suitePath + File.separator + 
-			step.getTestRunParent().getName() + File.separator +
-			step.getTestCaseParent().getNameUnique();
-
+		String pathEvidencias = step.getPathDirectory();
 		File directorio = new File(pathEvidencias);
 		if (!directorio.exists()) {
 			directorio.mkdirs();
 		}
 	}
-
+	
 	private void storeHardcopy() {
-		String nombreImagen = getPathFileEvidenciaStep(StepEvidence.imagen);
+		String nombreImagen = getPathFileEvidencia(StepEvidence.imagen);
 		try {
 			WebUtils.captureEntirePageMultipleBrowsers(driver, nombreImagen);
 		} 
@@ -103,7 +103,7 @@ public class StoreStepEvidencies {
 	}
 
 	private void storeErrorPage() {
-		String fileError = getPathFileEvidenciaStep(StepEvidence.errorpage);
+		String fileError = getPathFileEvidencia(StepEvidence.errorpage);
 		if (!new File(fileError).exists()) {
 			if (storerError!=null) {
 				try {
@@ -117,7 +117,7 @@ public class StoreStepEvidencies {
 	}
 
 	private void storeHTML() {
-		String nombreImagen = getPathFileEvidenciaStep(StepEvidence.html);
+		String nombreImagen = getPathFileEvidencia(StepEvidence.html);
 		if (!new File(nombreImagen).exists()) {
 			try {
 				WebUtils.capturaHTMLPage(step);
@@ -129,7 +129,7 @@ public class StoreStepEvidencies {
 	}
     
     private void storeNetTraffic() {
-    	String nameFileHar = getPathFileEvidenciaStep(StepEvidence.har);
+    	String nameFileHar = getPathFileEvidencia(StepEvidence.har);
     	if (!new File(nameFileHar).exists()) {
 		    try {
 	        	NetTrafficSaver netTraffic = new NetTrafficSaver();
@@ -142,26 +142,13 @@ public class StoreStepEvidencies {
 		    }    
     	}
     }
-
-	public String getPathFolderEvidenciasStep() {
-		return (
-			outputDirectorySuite + File.separator + 
-			step.getTestRunParent().getName() + File.separator + 
-			testCaseParent.getNameUnique());
+    
+	public String getPathFileEvidencia(StepEvidence evidence) {
+		String fileName = getNameFileEvidencia(evidence);
+		return (step.getPathDirectory() + File.separator + fileName);
 	}
-
-	public String getNameFileEvidenciaStep(StepEvidence evidence) {
+	public String getNameFileEvidencia(StepEvidence evidence) {
 		String extension = "." + evidence.fileExtension;
 		return (prefixEvidenciaStep + Integer.toString(step.getNumber()) + extension);
-	}
-
-//    public static String getPathFileEvidenciaStep(StepBean step, StepEvidence evidence) {
-//    	String outputDirectory = step.getTestRunParent().getTestNgContext().getOutputDirectory();
-//    	return (getPathFileEvidenciaStep(outputDirectory, step, evidence));
-//    }
-
-	public String getPathFileEvidenciaStep(StepEvidence evidence) {
-		String fileName = getNameFileEvidenciaStep(evidence);
-		return (getPathFolderEvidenciasStep() + File.separator + fileName);
 	}
 }

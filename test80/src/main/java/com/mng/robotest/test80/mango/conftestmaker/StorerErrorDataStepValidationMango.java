@@ -12,10 +12,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.suitetree.StepTM;
-import com.mng.testmaker.domain.suitetree.StepEvidence;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.testmaker.testreports.html.StoreStepEvidencies;
+import com.mng.testmaker.testreports.html.StoreStepEvidencies.StepEvidence;
 import com.mng.testmaker.testreports.html.StorerErrorStep;
 
 public class StorerErrorDataStepValidationMango implements StorerErrorStep {
@@ -38,7 +38,7 @@ public class StorerErrorDataStepValidationMango implements StorerErrorStep {
             String windowHandle = loadErrorPage(driver);
             try {
             	StoreStepEvidencies storer = new StoreStepEvidencies(step);
-                String nombreErrorFile = storer.getPathFileEvidenciaStep(StepEvidence.errorpage);
+                String nombreErrorFile = storer.getPathFileEvidencia(StepEvidence.errorpage);
                 File errorImage = new File(nombreErrorFile);
                 try (FileWriter fw = new FileWriter(errorImage)) {
                     fw.write(driver.getPageSource());
