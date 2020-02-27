@@ -60,7 +60,7 @@ public class TestAspect {
 //				throw new SkipException("TestCase removed");
 //			}
 //		}
-//	}
+//	} 
 	
 //	private boolean isFactoryMethod(JoinPoint joinPoint) {
 //		String testMethod = joinPoint.getSignature().getName();
