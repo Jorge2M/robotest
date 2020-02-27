@@ -1,4 +1,4 @@
-package com.mng.testmaker.testreports.html;
+package com.mng.testmaker.testreports.stepstore;
 
 import java.io.FileReader;
 import java.util.Iterator;
@@ -8,7 +8,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 
 import com.mng.testmaker.domain.suitetree.StepTM;
-import com.mng.testmaker.testreports.html.StoreStepEvidencies.StepEvidence;
 
 
 public class GestorDatosHarJSON {
@@ -21,8 +20,7 @@ public class GestorDatosHarJSON {
 	}
 	
 	public GestorDatosHarJSON(StepTM step) throws Exception {
-		StoreStepEvidencies storer = new StoreStepEvidencies(step);
-		String ficheroHAR = storer.getPathFileEvidencia(StepEvidence.har);
+		String ficheroHAR = StepEvidence.har.getPathFile(step);
 		parseHAR(ficheroHAR);
 	}
 	

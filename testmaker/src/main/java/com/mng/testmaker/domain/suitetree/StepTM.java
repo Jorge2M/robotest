@@ -11,9 +11,9 @@ import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.StateExecution;
 import com.mng.testmaker.domain.util.ParsePathClass;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.testreports.html.NetTrafficSaver;
-import com.mng.testmaker.testreports.html.StoreStepEvidencies;
-import com.mng.testmaker.testreports.html.StoreStepEvidencies.StepEvidence;
+import com.mng.testmaker.testreports.stepstore.StepEvidence;
+import com.mng.testmaker.testreports.stepstore.EvidencesWarehouse;
+import com.mng.testmaker.testreports.stepstore.NettrafficStorer;
 
 public class StepTM {
 
@@ -28,12 +28,12 @@ public class StepTM {
 	private SaveWhen saveErrorPage = SaveWhen.IfProblem;
 	private SaveWhen saveHtmlPage = SaveWhen.Never;
 	private SaveWhen saveNettraffic= SaveWhen.Never;
+	private EvidencesWarehouse evidencesWarehouse;
+
 	private String pathMethod;
 	private int type_page; 
 	private long timeInicio = 0;
 	private long timeFin = 0;
-//	private Date hora_inicio; 
-//	private Date hora_fin;
 	private State result_steps = State.Ok;
 	private boolean excepExists = true;
 	private StateExecution state = StateExecution.Started;
@@ -48,6 +48,7 @@ public class StepTM {
 			testRun = null;
 			suite = null;
 		}
+		evidencesWarehouse = new EvidencesWarehouse(this);
 	}
 	
 	public TestCaseTM getTestCaseParent() {
@@ -95,8 +96,8 @@ public class StepTM {
 		return testCase.getTestPathDirectory();
 	}
 	public void storeEvidencies() {
-		StoreStepEvidencies storerEvidencies = new StoreStepEvidencies(this);
-		storerEvidencies.storeStepEvidencies();
+		EvidencesWarehouse storerEvidencies = new EvidencesWarehouse(this);
+		storerEvidencies.store();
 	}
 
 	public List<ChecksTM> getListChecksTM() {
@@ -144,10 +145,18 @@ public class StepTM {
 	public void setSaveNettrafic(SaveWhen saveNettraffic) {
 		if (suite.getInputParams().isNetAnalysis()) {
 			this.saveNettraffic = saveNettraffic;
-			NetTrafficSaver netTraffic = new NetTrafficSaver();
+			NettrafficStorer netTraffic = new NettrafficStorer();
 			netTraffic.resetAndStartNetTraffic();
 		}
 	}
+
+	public EvidencesWarehouse getEvidencesWarehouse() {
+		return evidencesWarehouse;
+	}
+	public void setEvidencesWarehouse(EvidencesWarehouse evidencesWarehouse) {
+		this.evidencesWarehouse = evidencesWarehouse;
+	}
+
 	public String getPathMethod() {
 		return pathMethod;
 	}
@@ -249,6 +258,21 @@ public class StepTM {
 		default:
 			return saveImagePage;
 		}
+	}
+	public boolean isNecessaryStorage(StepEvidence evidencia) {
+		SaveWhen saveEvidenceWhen = getWhenSave(evidencia);
+		switch (saveEvidenceWhen) {
+		case Always:
+			return true;
+		case Never:
+			return false;
+		case IfProblem:
+			if (getResultSteps()!=State.Ok &&
+				!isAllValidationsWithAvoidEvidences()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean isAllValidationsWithAvoidEvidences() {

@@ -63,7 +63,11 @@ public class TestCaseTM  {
 	}
 	
 	public String getNameUnique() {
-		return result.getName() + getRefineDataName();
+		String nameTest = result.getName() + getRefineDataName();
+		if (getInvocationCount()>1) {
+			nameTest+="(" + getInvocationCount() + ")";
+		}
+		return nameTest;
 	}
 	
 	public void end(State state) {
@@ -110,10 +114,6 @@ public class TestCaseTM  {
 			suitePath + File.separator + 
 			testRunParent.getName() + File.separator +
 			getNameUnique();
-		
-		if (getInvocationCount()>1) {
-			testPath+="(" + getInvocationCount() + ")";
-		}
 		
 		return testPath;
 	}

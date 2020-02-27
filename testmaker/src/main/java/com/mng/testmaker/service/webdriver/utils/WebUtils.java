@@ -1,6 +1,5 @@
 package com.mng.testmaker.service.webdriver.utils;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,43 +8,16 @@ import javax.net.ssl.*;
 import org.testng.*;
 
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.testmaker.domain.suitetree.StepTM;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.testreports.html.ResultadoErrores;
-import com.mng.testmaker.testreports.html.StoreStepEvidencies;
-import com.mng.testmaker.testreports.html.StoreStepEvidencies.StepEvidence;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.Logs;
-import org.openqa.selenium.remote.Augmenter;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.apache.commons.io.FileUtils;
 
 public class WebUtils {
-    
-    public static void captureEntirePageMultipleBrowsers(WebDriver driver, String filename) throws RuntimeException {
-        if (driver != null) {
-            try {
-                WebDriver newWebDriver = null;
-                if (driver.getClass() == RemoteWebDriver.class) {
-                    newWebDriver = new Augmenter().augment(driver);
-                } else {
-                    newWebDriver = driver;
-                }
-                
-                File screenshot = ((TakesScreenshot)newWebDriver).getScreenshotAs(OutputType.FILE);
-                FileUtils.copyFile(screenshot, new File(filename));
-            }
-            catch(Exception e) {
-            	Log4jConfig.pLogger.error("Problem capturing Page and store in file {}", filename, e);
-            }
-        }
-    }
-	
+
     public static void acceptAllCertificates () {
         // Create a trust manager that does not validate certificate chains
         TrustManager[] trustAllCerts = new TrustManager[] {
@@ -120,21 +92,7 @@ public class WebUtils {
         javax.net.ssl.HttpsURLConnection.setDefaultSSLSocketFactory(
         sc.getSocketFactory());
     }
-    
-    public static void capturaHTMLPage(StepTM step) throws Exception {
-        try {
-        	StoreStepEvidencies storer = new StoreStepEvidencies(step);
-            String nombreHTMLfile = storer.getPathFileEvidencia(StepEvidence.html);
-            File htmlFile = new File(nombreHTMLfile);
-            try (FileWriter fw = new FileWriter(htmlFile)) {
-                fw.write(step.getDriver().getPageSource());
-            }
-        } 
-        catch (Exception e) {
-            throw e;
-        } 
-    }    
-    
+
     /**
      * Retorna el log de errores de WebDriver entre los que se encuentran los JavaScript
      * El nivel de errores de cada uno de los tipos se define en la creación del WebDriver

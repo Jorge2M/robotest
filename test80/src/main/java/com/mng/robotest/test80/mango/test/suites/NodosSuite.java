@@ -9,7 +9,7 @@ import static com.mng.robotest.test80.mango.test.suites.SuiteMakerResources.getP
 import com.mng.testmaker.domain.SuiteMaker;
 import com.mng.testmaker.domain.TestRunMaker;
 import com.mng.robotest.test80.access.InputParamsMango;
-import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
+import com.mng.robotest.test80.mango.conftestmaker.ErrorStorer;
 import com.mng.robotest.test80.mango.test.factoryes.ListAllNodes;
 
 public class NodosSuite extends SuiteMaker {
@@ -19,7 +19,7 @@ public class NodosSuite extends SuiteMaker {
     	setParameters(getParametersSuiteShop(inputParams));
     	addParameters(getSpecificParameters(inputParams.getUrlBase()));
     	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), ListAllNodes.class);
-    	testRun.setStorerErrorStep(new StorerErrorDataStepValidationMango());
+    	testRun.setStorerErrorStep(new ErrorStorer());
     	addTestRun(testRun);
     	setParallelMode(ParallelMode.METHODS);
     	setThreadCount(3);

@@ -13,7 +13,7 @@ public class CmdRunTests {
 		CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, inputParams);
 		if (cmdLineAccess.checkOptionsValue().isOk()) {
 			CreatorSuiteRun creatorSuiteRun = CreatorSuiteRunTestGoogle.getNew(inputParams);
-			creatorSuiteRun.execTestSuite();
+			creatorSuiteRun.execTestSuite(true);
 		}
 	}
 }

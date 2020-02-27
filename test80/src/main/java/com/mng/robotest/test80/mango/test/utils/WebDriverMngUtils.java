@@ -21,7 +21,7 @@ import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.testreports.html.ResultadoErrores;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.Log4jConfig;
-import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
+import com.mng.robotest.test80.mango.conftestmaker.ErrorStorer;
 import com.mng.robotest.test80.mango.test.generic.stackTrace;
 
 public class WebDriverMngUtils {
@@ -34,7 +34,7 @@ public class WebDriverMngUtils {
     public static String getNodeFromErrorPage(final WebDriver driver) throws Exception {
 
         //Cargamos la página errorPage en una pestaña aparte y nos posicionamos en ella 
-        String windowHandle = StorerErrorDataStepValidationMango.loadErrorPage(driver);
+        String windowHandle = ErrorStorer.loadErrorPage(driver);
         String nodo = "";
         
         try {
@@ -81,7 +81,7 @@ public class WebDriverMngUtils {
      */
     public static String getStackTraceFromErrorPage(final WebDriver driver) throws Exception {
         //Cargamos la página errorPage en una pestaña aparte y nos posicionamos en ella 
-        String windowHandle = StorerErrorDataStepValidationMango.loadErrorPage(driver);
+        String windowHandle = ErrorStorer.loadErrorPage(driver);
         String stackTrace = "";
         
         try {
