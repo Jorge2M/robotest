@@ -26,7 +26,7 @@ public class SecMenuLateralDesktop extends WebdrvWrapp {
 		"//self::*[@class[contains(.,'--selected')]]";
 	
 	private static String XPathLinkMenuWithTagShop = 
-		"//li[@class='_3AcVO' or @class='element' or not(@class)]" + //El not(@class) viene por un desarrollo de Jesús en un cloud (4-02-2020) 
+		"//li[not(@class)]" +  
 		"/a[@href[contains(.,'" + TagConcatMenus + "')]]";
 	private static String XPathSelectedRelativeMenuShop = 
 		"//self::*[@aria-label[contains(.,'seleccionado')]]";
