@@ -17,7 +17,7 @@ public class EvidencesWarehouse {
 		storedEvidences.put(StepEvidence.html, "<html></html>");
 	}
 	
-	public Map<StepEvidence, String> getStoredEvidences() {
+	public Map<StepEvidence, String> getStoredEvidences() {  
 		return storedEvidences;
 	}
 	public void setStoredEvidences(Map<StepEvidence, String> storedEvidences) {
