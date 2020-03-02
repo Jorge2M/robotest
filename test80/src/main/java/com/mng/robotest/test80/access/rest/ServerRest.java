@@ -11,9 +11,26 @@ import com.mng.testmaker.restcontroller.ServerRestTM;
 //-> Path C:\\users\jorge.muñoz\Programas\win-acme
 //-> Exec .\wacs.exe --force
 //-> Option "S Renew specific"
-//-> Certificate in C:\ProgramData\win-acme\acme-v02.api.letsencrypt.org\Certificates
-//[INFO] Adding renewal for [Manual] robotest.pro.mango.com
-//[INFO] Next renewal scheduled at 02/04/2020 10:21:39
+//-> Option "1" [Manual] -> Nos pide un TXT-Content
+//-> AWS 
+//    -> Acceder al AWS de mango-test
+//    -> Buscar servicio "DNS"
+//    -> Clickar "Zonas hospedadas"
+//    -> Seleccionar "pro.mango.com"
+//    -> Buscar "robotest"
+//    -> Modificar el registro _acme-challenge.robotest.pro.mango.com. introduciendo el TXT-Content 
+//-> Press Enter
+//-> Certificate in C:\ProgramData\win-acme\acme-v02.api.letsencrypt.org\Certificates ..
+//Último resultado (02-03-2020)
+//[INFO] Requesting certificate [Manual] robotest.pro.mango.com
+//[INFO] Store with CertificateStore...
+//[INFO] Installing certificate in the certificate store
+//[INFO] Adding certificate [Manual] robotest.pro.mango.com 2020/3/2 15:41:38 to store WebHosting
+//[INFO] Installing with None...
+//[INFO] Uninstalling certificate from the certificate store
+//[INFO] Removing certificate [Manual] robotest.pro.mango.com 2019/12/11 10:21:39 from store WebHosting
+//[INFO] Next renewal scheduled at 04/26/2020 16:41:38
+//[INFO] Renewal for [Manual] robotest.pro.mango.com succeeded
 
 //Probably the automation of the renewal is not possible because is utilized --manual method with TXT autentication (dns01)
 //(https://community.letsencrypt.org/t/automate-renewal-for-lets-encrypt-certificate/73972/10)
