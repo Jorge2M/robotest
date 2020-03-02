@@ -1,7 +1,5 @@
 package com.mng.robotest.test80.mango.conftestmaker;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.net.URI;
 
 import org.openqa.selenium.By;
@@ -25,19 +23,22 @@ public class ErrorStorer extends EvidenceStorer {
 	}
 	
 	@Override
-	public void captureContent(StepTM step) {
+	protected String captureContent(StepTM step) {
+		String content = "";
 		try {
-			capturaErrorPage(step);
+			content = capturaErrorPage(step);
 		}
 		catch (Exception e) {
 			Log4jConfig.pLogger.warn("Exception capturin error. " + e);
 		}
+		return content;
 	}
 	
 	/**
 	 * Se realiza una captura de ./errorPage.faces pues allí se pueden encontrar los datos de la instancia
 	 */
-	public static void capturaErrorPage(StepTM step) throws Exception {
+	private String capturaErrorPage(StepTM step) throws Exception {
+		String htmlPageError = "";
 		InputParamsTM inputParams = TestMaker.getTestCase().getInputParamsSuite();
 		WebDriverType webDriverType = inputParams.getWebDriverType();
 		if (webDriverType!=WebDriverType.browserstack) {
@@ -45,26 +46,28 @@ public class ErrorStorer extends EvidenceStorer {
 			//BrowserStack parece que no soporta abrir ventanas aparte
 			WebDriver driver = TestMaker.getDriverTestCase();
 			String windowHandle = loadErrorPage(driver);
-			try {
-				String nombreErrorFile = StepEvidence.errorpage.getPathFile(step);
-				File errorImage = new File(nombreErrorFile);
-				try (FileWriter fw = new FileWriter(errorImage)) {
-					fw.write(driver.getPageSource());
-				}
-			} 
-			catch (Exception e) {
-				throw e;
-			} 
-			finally {
+			htmlPageError = driver.getPageSource();
+//			try {
+				//String nombreErrorFile = StepEvidence.errorpage.getPathFile(step);
+//				File errorImage = new File(nombreErrorFile);
+//				try (FileWriter fw = new FileWriter(errorImage)) {
+//					fw.write(driver.getPageSource());
+//				}
+//			} 
+//			catch (Exception e) {
+//				throw e;
+//			} 
+//			finally {
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("window.close('" + Thread.currentThread().getName() + "');");
 				driver.switchTo().window(windowHandle);
-			}
+//			}
 		}
+		return htmlPageError;
 	}
 
 	/**
-	 * Carga la página errorPage.faces en una pestaña aparte y nos devuelve el windowHandle
+	 * Carga la página errorPage.faces en una pestaña aparte y nos devuelve el windowHandle de la pantalla padre
 	 */
 	public static String loadErrorPage(WebDriver driver) throws Exception {
 		String currentURL = driver.getCurrentUrl();

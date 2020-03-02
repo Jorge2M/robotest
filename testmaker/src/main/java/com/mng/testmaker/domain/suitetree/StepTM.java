@@ -41,6 +41,7 @@ public class StepTM {
 	
 	public StepTM() {
 		testCase = TestMaker.getTestCase();
+		evidencesWarehouse = new EvidencesWarehouse(this);
 		if (testCase!=null) {
 			testRun = testCase.getTestRunParent();
 			suite = testRun.getSuiteParent();
@@ -48,7 +49,6 @@ public class StepTM {
 			testRun = null;
 			suite = null;
 		}
-		evidencesWarehouse = new EvidencesWarehouse(this);
 	}
 	
 	public TestCaseTM getTestCaseParent() {
@@ -87,7 +87,7 @@ public class StepTM {
 		if (exceptionReceived) {
 			setResultSteps(State.Nok);
 		}
-		storeEvidencies();
+		captureAndStoreEvidences();
 		setTimeFin(System.currentTimeMillis());
 		setState(StateExecution.Finished);
 	}
@@ -95,9 +95,12 @@ public class StepTM {
 	public String getPathDirectory() {
 		return testCase.getTestPathDirectory();
 	}
-	public void storeEvidencies() {
-		EvidencesWarehouse storerEvidencies = new EvidencesWarehouse(this);
-		storerEvidencies.store();
+	
+	public void captureAndStoreEvidences() {
+		evidencesWarehouse.captureAndStore();
+	}
+	public void moveContentEvidencesToFile() {
+		evidencesWarehouse.moveContentEvidencesToFile();
 	}
 
 	public List<ChecksTM> getListChecksTM() {

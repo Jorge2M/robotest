@@ -58,16 +58,18 @@ public class NettrafficStorer extends EvidenceStorer {
 	}
 	
 	@Override
-	public void captureContent(StepTM step) {
+	protected String captureContent(StepTM step) {
+		String content = "";
 		Har har = getProxy().getHar(); 
 		Writer writer = new StringWriter();
 		try {
 			har.writeTo(writer);
-			this.content = writer.toString();
+			content = writer.toString();
 		}
 		catch (IOException e) {
 			Log4jConfig.pLogger.warn("Exception writing har. " + e);
 		}
+		return content;
 	}
 	
 	@Override

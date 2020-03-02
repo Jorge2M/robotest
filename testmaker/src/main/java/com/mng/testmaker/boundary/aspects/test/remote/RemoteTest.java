@@ -1,6 +1,9 @@
 package com.mng.testmaker.boundary.aspects.test.remote;
 
+import java.io.ByteArrayInputStream;
+import java.io.ObjectInputStream;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -26,15 +29,21 @@ public class RemoteTest extends JaxRsClient {
 				getListTestRun().get(0).
 				getListTestCase().get(0);
 		
-		//Coser
+		//Coser TestCase
 		List<StepTM> listStepsRemote = testCaseRemote.getListStep();
 		for (StepTM stepRemote : listStepsRemote) {
+			testCase.addStep(stepRemote);
 			stepRemote.setParents(testCase);
+			stepRemote.getEvidencesWarehouse().setStep(stepRemote);
+			stepRemote.moveContentEvidencesToFile();
 			for (ChecksTM checks : stepRemote.getListChecksTM()) {
 				checks.setParents(stepRemote);
 			}
 		}
-		testCase.setListStep(listStepsRemote);
+		String throwableStrB64 = testCaseRemote.getThrowable();
+		Throwable throwable = (Throwable)fromStringB64(throwableStrB64);
+		testCase.getResult().setThrowable(throwable);
+		testCase.getResult().setStatus(testCaseRemote.getStatusTng());
 		return suiteRemote;
 	}
 	
@@ -50,7 +59,7 @@ public class RemoteTest extends JaxRsClient {
 				.target("http://localhost:80/suiterun")
 				.request(MediaType.APPLICATION_JSON)
 				.post(Entity.form(formParams), SuiteBean.class);
-		//TODO ha de retornar la Suite + TestRuns + TestCases ... + Steps + Validations
+
 		return suiteData;
 	}
 	
@@ -60,5 +69,19 @@ public class RemoteTest extends JaxRsClient {
 			formParams.param(entry.getKey(), entry.getValue());
 		}
 		return formParams;
+	}
+	
+	/** Read the object from Base64 string. */
+	private static Object fromStringB64(String s) {
+		try {
+			byte [] data = Base64.getDecoder().decode( s );
+			ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(data));
+			Object o  = ois.readObject();
+			ois.close();
+			return o;
+		}
+		catch (Exception e) {
+			return null;
+		}
 	}
 }

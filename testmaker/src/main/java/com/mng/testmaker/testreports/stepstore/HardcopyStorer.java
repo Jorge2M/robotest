@@ -21,7 +21,7 @@ public class HardcopyStorer extends EvidenceStorer {
 	}
 	
 	@Override
-	public void captureContent(StepTM step) {
+	protected String captureContent(StepTM step) {
 		WebDriver driver = step.getDriver();
 		WebDriver newWebDriver = null;
 		if (driver.getClass() == RemoteWebDriver.class) {
@@ -29,12 +29,12 @@ public class HardcopyStorer extends EvidenceStorer {
 		} else {
 			newWebDriver = driver;
 		}
-		this.content = ((TakesScreenshot)newWebDriver).getScreenshotAs(OutputType.BASE64);
+		return ((TakesScreenshot)newWebDriver).getScreenshotAs(OutputType.BASE64);
 	}
 	
 	@Override
 	public void saveContentEvidenceInFile(String content, String pathFile) {
-		byte[] bytesPng = Base64.getMimeDecoder().decode(this.content);
+		byte[] bytesPng = Base64.getMimeDecoder().decode(content);
 		OutputStream stream = null;
 		try {
 			File file = new File(pathFile);

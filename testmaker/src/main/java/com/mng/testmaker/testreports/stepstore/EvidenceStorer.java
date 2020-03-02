@@ -11,14 +11,22 @@ public abstract class EvidenceStorer {
 	final StepEvidence evidenceType;
 	String content;
 
-	abstract public void captureContent(StepTM step);
+	abstract protected String captureContent(StepTM step);
+	
+	public void captureAndStoreContent(StepTM step) {
+		this.content = captureContent(step);
+	}
 	
 	public EvidenceStorer(StepEvidence evidenceType) {
 		this.evidenceType = evidenceType;
 	}
 	
+	public String getContent() {
+		return content;
+	}
+	
 	public void recoveryContent(StepTM step) {
-		this.content = step.getEvidencesWarehouse().getEvidence(evidenceType);
+		this.content = step.getEvidencesWarehouse().getEvidenceContent(evidenceType);
 	}
 
 	public void storeContentInFile(StepTM step) {
@@ -26,10 +34,6 @@ public abstract class EvidenceStorer {
 		if (!new File(pathFile).exists()) {
 			saveContentEvidenceInFile(content, pathFile);
 		}
-	}
-	
-	public void storeContentInStep(StepTM step) {
-		step.getEvidencesWarehouse().putEvidence(evidenceType, content);
 	}
 	
 	public String getPathFile(StepTM step) {

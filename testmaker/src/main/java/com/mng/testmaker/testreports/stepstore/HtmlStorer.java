@@ -9,7 +9,7 @@ public class HtmlStorer extends EvidenceStorer {
 	}
 	
 	@Override
-	public void captureContent(StepTM step) {
-		this.content = step.getDriver().getPageSource();
+	protected String captureContent(StepTM step) {
+		return step.getDriver().getPageSource();
 	}
 }

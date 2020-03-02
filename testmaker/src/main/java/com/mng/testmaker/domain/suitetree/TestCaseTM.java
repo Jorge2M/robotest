@@ -1,8 +1,11 @@
 package com.mng.testmaker.domain.suitetree;
 
-
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -254,6 +257,7 @@ public class TestCaseTM  {
 		testCaseBean.setDescription(getResult().getMethod().getDescription());
 		testCaseBean.setIndexInTestRun(getIndexInTestRun());
 		testCaseBean.setResult(getStateResult());
+		testCaseBean.setStatusTng(getResult().getStatus());
 		
 		Date inicio = new Date(getResult().getStartMillis());
 		Date fin = new Date(getResult().getEndMillis());
@@ -263,6 +267,7 @@ public class TestCaseTM  {
 		
 		testCaseBean.setNumberSteps(getListStep().size());
 		testCaseBean.setClassSignature(getResult().getInstanceName());
+		testCaseBean.setThrowable(toStringB64(getResult().getThrowable()));
 		
 		List<StepTM> listStepBean = new ArrayList<>();
 		for (StepTM step : getListStep()) {
@@ -271,5 +276,19 @@ public class TestCaseTM  {
 		testCaseBean.setListStep(listStepBean);
 		
 		return testCaseBean;
+	}
+
+	/** Write the object to a Base64 string. */
+	private static String toStringB64(Serializable o) {
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream( baos );
+			oos.writeObject( o );
+			oos.close();
+			return Base64.getEncoder().encodeToString(baos.toByteArray()); 
+		}
+		catch (Exception e) {
+			return null;
+		}
 	}
 }

@@ -41,7 +41,7 @@ public class SuiteTM extends XmlSuite {
 	public String getIdExecution() {
 		return idSuiteExecution;
 	}
-	
+
 	public long getThreadId() {
 		return threadId;
 	}
