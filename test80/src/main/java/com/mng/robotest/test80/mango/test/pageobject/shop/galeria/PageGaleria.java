@@ -120,13 +120,15 @@ public abstract class PageGaleria extends WebdrvWrapp {
 	private String getXPathArticulo() {
 		switch (app) {
 		case outlet:
-			if (from==From.buscador) {
-				return XPathArticuloDesktopBuscador;
+//			if (from==From.buscador) {
+//				return XPathArticuloDesktopBuscador;
+//			}
+//			if (channel==Channel.desktop) {
+//				return XPathArticuloDesktopOutlet;
+//			}
+			if (channel==Channel.movil_web) {
+				return XPathArticuloMobilOutlet;
 			}
-			if (channel==Channel.desktop) {
-				return XPathArticuloDesktopOutlet;
-			}
-			return XPathArticuloMobilOutlet;
 		case shop:
 		case votf:
 		default:

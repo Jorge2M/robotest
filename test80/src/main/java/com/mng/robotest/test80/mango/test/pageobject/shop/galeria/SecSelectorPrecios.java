@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop.OutletGalery;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 
@@ -19,14 +18,14 @@ public class SecSelectorPrecios extends WebdrvWrapp {
 	
 	private final WebDriver driver;
 	private final AppEcom app;
-	private OutletGalery outputGalery;
+//	private OutletGalery outputGalery;
 	
-	private static String XPathLineaFiltroOutlet = "//div[@id='priceRange']";
-	private static String XPathImporteMinimoOutlet = XPathLineaFiltroOutlet + "/a/span[@class[contains(.,'amount-value-min')]]";
-	private static String XPathImporteMaximoOutlet = XPathLineaFiltroOutlet + "/a/span[@class[contains(.,'amount-value-max')]]";
-	private static String XPathFiltroWrapperOutlet = "//div[@class='range-slider-wrapper']";
-	private static String XPathLeftCornerOutlet = XPathImporteMinimoOutlet + "/..";
-	private static String XPathRightCornerOutlet = XPathImporteMaximoOutlet + "/..";
+//	private static String XPathLineaFiltroOutlet = "//div[@id='priceRange']";
+//	private static String XPathImporteMinimoOutlet = XPathLineaFiltroOutlet + "/a/span[@class[contains(.,'amount-value-min')]]";
+//	private static String XPathImporteMaximoOutlet = XPathLineaFiltroOutlet + "/a/span[@class[contains(.,'amount-value-max')]]";
+//	private static String XPathFiltroWrapperOutlet = "//div[@class='range-slider-wrapper']";
+//	private static String XPathLeftCornerOutlet = XPathImporteMinimoOutlet + "/..";
+//	private static String XPathRightCornerOutlet = XPathImporteMaximoOutlet + "/..";
 	
 	private static String XPathLineaFiltroShop = "//div[@class[contains(.,'input-range__track--background')]]"; //
 	private static String XPathImporteMinimoShop = "(" + XPathLineaFiltroShop + "//span[@class[contains(.,'label-container')]])[1]"; //
@@ -40,73 +39,73 @@ public class SecSelectorPrecios extends WebdrvWrapp {
 		this.driver = driver;
 	}
 	
-	private OutletGalery getOutletGalery() {
-		if (outputGalery==null) {
-			if (app==AppEcom.outlet) {
-				outputGalery = PageGaleriaDesktop.getOutletVersion(driver);
-			} else {
-				outputGalery = OutletGalery.newwithreact;
-			}
-		}
-		return outputGalery;
-	}
+//	private OutletGalery getOutletGalery() {
+//		if (outputGalery==null) {
+//			if (app==AppEcom.outlet) {
+//				outputGalery = PageGaleriaDesktop.getOutletVersion(driver);
+//			} else {
+//				outputGalery = OutletGalery.newwithreact;
+//			}
+//		}
+//		return outputGalery;
+//	}
 	
 	private String getXPathLineaFiltro() {
 		switch (app) {
-		case outlet:
-			if (getOutletGalery()==OutletGalery.old) {
-				return XPathLineaFiltroOutlet;
-			}
+//		case outlet:
+//			if (getOutletGalery()==OutletGalery.old) {
+//				return XPathLineaFiltroOutlet;
+//			}
 		default:
 			return XPathLineaFiltroShop;
 		}
 	}
 	private String getXPathImporteMinimo() {
 		switch (app) {
-		case outlet:
-			if (getOutletGalery()==OutletGalery.old) {
-				return XPathImporteMinimoOutlet;
-			}
+//		case outlet:
+//			if (getOutletGalery()==OutletGalery.old) {
+//				return XPathImporteMinimoOutlet;
+//			}
 		default:
 			return XPathImporteMinimoShop;
 		}
 	}
 	private String getXPathImporteMaximo() {
 		switch (app) {
-		case outlet:
-			if (getOutletGalery()==OutletGalery.old) {
-				return XPathImporteMaximoOutlet;
-			}
+//		case outlet:
+//			if (getOutletGalery()==OutletGalery.old) {
+//				return XPathImporteMaximoOutlet;
+//			}
 		default:
 			return XPathImporteMaximoShop;
 		}
 	}
 	private String getXPathFiltroWrapper() {
 		switch (app) {
-		case outlet:
-			if (getOutletGalery()==OutletGalery.old) {
-				return XPathFiltroWrapperOutlet;
-			}
+//		case outlet:
+//			if (getOutletGalery()==OutletGalery.old) {
+//				return XPathFiltroWrapperOutlet;
+//			}
 		default:
 			return XPathFiltroWrapperShop;
 		}
 	}
 	private String getXPathLeftCorner() {
 		switch (app) {
-		case outlet:
-			if (getOutletGalery()==OutletGalery.old) {
-				return XPathLeftCornerOutlet;
-			}
+//		case outlet:
+//			if (getOutletGalery()==OutletGalery.old) {
+//				return XPathLeftCornerOutlet;
+//			}
 		default:
 			return XPathLeftCornerShop;
 		}
 	}
 	private String getXPathRightCorner() {
 		switch (app) {
-		case outlet:
-			if (getOutletGalery()==OutletGalery.old) {
-				return XPathRightCornerOutlet;
-			}
+//		case outlet:
+//			if (getOutletGalery()==OutletGalery.old) {
+//				return XPathRightCornerOutlet;
+//			}
 		default:
 			return XPathRightCornerShop;
 		}

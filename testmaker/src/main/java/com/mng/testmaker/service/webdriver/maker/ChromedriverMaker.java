@@ -23,7 +23,7 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 class ChromedriverMaker implements WebdriverMaker {
 	
 	//La versión de ChromeDriver ha de soportar la versión de Chrome instalada en el servidor donde se ejecute TestMaker
-	final static String ChromeDriverVersionDefault = "80.0.3987.16";
+	final static String ChromeDriverVersionDefault = "80.0.3987.106";
 	final WebDriverType webDriverType;
 	boolean isHeadless;
 	ChromeOptions options = new ChromeOptions();

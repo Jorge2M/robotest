@@ -21,7 +21,7 @@ import com.mng.testmaker.domain.SuiteMaker;
 
 public class CreatorSuiteRunMango extends CreatorSuiteRun {
 	
-	private final String ChromeDriverVersionDefault = "80.0.3987.16";
+	private final String ChromeDriverVersionDefault = "80.0.3987.106";
 	private final String GeckoDriverVersionDefault = "0.26.0";
 	
 	private CreatorSuiteRunMango() throws Exception {

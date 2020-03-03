@@ -25,8 +25,9 @@ public class SecPreciosArticulo extends WebdrvWrapp {
 			"//span[@class[contains(.,'tAcLx')]]",
 			
 			//TODO el price__price-crossed es por la nueva versión Outlet-Desktop-React
-			"//span[(@class[contains(.,'product-list-price')] and @class[contains(.,'line-through')]) or " +
-				   "(@class[contains(.,'list-product-price')] and @class[contains(.,'price__price-crossed')])]",
+//			"//span[(@class[contains(.,'product-list-price')] and @class[contains(.,'line-through')]) or " +
+//				   "(@class[contains(.,'list-product-price')] and @class[contains(.,'price__price-crossed')])]",
+			"//span[@class[contains(.,'tAcLx')]]",
 			
 			"//span[@class[contains(.,'product-price-crossed')]]",
 			"//span[@class[contains(.,'price-text--through')]]"),
@@ -43,7 +44,8 @@ public class SecPreciosArticulo extends WebdrvWrapp {
 			"//div[@class[contains(.,'_2-Zal')]]//span[@class[contains(.,'B16Le')]]",
 			
 			//TODO el product-price__price es por la nueva versión Outlet-Desktop-React
-			"//span[@class='product-list-sale-price' or (@class[contains(.,'product-price__price')] and not(@class[contains(.,'-crossed')]))]",
+			//"//span[@class='product-list-sale-price' or (@class[contains(.,'product-price__price')] and not(@class[contains(.,'-crossed')]))]",
+			"//div[@class[contains(.,'_2-Zal')]]//span[@class[contains(.,'B16Le')]]",
 			
 			"//div[@class[contains(.,'prices--cross')]]/span[@class='product-price']",
 			"//span[@class[contains(.,'info-price-sale')] or @class='product-price']"),
@@ -51,7 +53,8 @@ public class SecPreciosArticulo extends WebdrvWrapp {
 			"//div[@class='_3wfbJ' or not(@class)]/span[@class[contains(.,'B16Le')]]", //El not(@class) es debido al nuevo desarrollo en Cloud (04-febrero-2020)
 			
 			//TODO el product-price__price es por la nueva versión Outlet-Desktop-React
-			"//span[@class='product-list-sale-price' or (@class[contains(.,'product-price__price')] and not(@class[contains(.,'-crossed')]))]",
+			//duct-list-sale-price' or (@class[contains(.,'product-price__price')] and not(@class[contains(.,'-crossed')]))]",
+			"//div[@class='_3wfbJ' or not(@class)]/span[@class[contains(.,'B16Le')]]", //El not(@class) es debido al nuevo desarrollo en Cloud (04-febrero-2020)
 			
 			"//div[@class='product-prices']/span[@class='product-price']",
 			"//span[@class[contains(.,'info-price-sale')] or @class='product-price']"); //?

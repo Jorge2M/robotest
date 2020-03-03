@@ -37,45 +37,43 @@ public class PageGaleriaDesktop extends PageGaleria {
 	private final SecColoresArticuloDesktop secColores;
 	private final SecTallasArticuloDesktop secTallas;
 
-	//TODO cuando suba la nueva galería con react habrá que eliminar todo el código antiguo
-	public enum OutletGalery {old, newwithreact}
+//	public enum OutletGalery {old, newwithreact}
 	
 	public enum NumColumnas {dos, tres, cuatro}
 	public enum TypeSlider {prev, next}
 	public enum TypeColor {codigo, nombre}
 	public enum TypeArticleDesktop {
 		Simple (
-			"//self::*[@class[contains(.,'_2zQ2a')]]",
-			"//self::*[@data-imgsize = 'A1' or @class[contains(.,'product__A1')]]"), //Nueva versión outlet con react: "@class[contains(.,'product__A1')]"
+			"//self::*[@class[contains(.,'_2zQ2a')]]"),
+			//"//self::*[@data-imgsize = 'A1' or @class[contains(.,'product__A1')]]"), //Nueva versión outlet con react: "@class[contains(.,'product__A1')]"
 		Doble (
-			"//self::*[@class[contains(.,'_3QWF')]]",
-			"//self::*[@data-imgsize = 'A2' or @class[contains(.,'product__A2')]]"), //Nueva versión outlet con React: "@class[contains(.,'product__A1')]"
+			"//self::*[@class[contains(.,'_3QWF')]]"),
+			//"//self::*[@data-imgsize = 'A2' or @class[contains(.,'product__A2')]]"), //Nueva versión outlet con React: "@class[contains(.,'product__A1')]"
 		Video (
-			"//video",
 			"//video");
+			//"//video");
 		
 		String xpathRelativeArticleShop;
-		String xpathRelativeArticleOutlet;
-		private TypeArticleDesktop(String xpathRelativeArticleShop, String xpathRelativeArticleOutlet) {
+		//String xpathRelativeArticleOutlet;
+		private TypeArticleDesktop(String xpathRelativeArticleShop/*, String xpathRelativeArticleOutlet*/) {
 			this.xpathRelativeArticleShop = xpathRelativeArticleShop;
-			this.xpathRelativeArticleOutlet = xpathRelativeArticleOutlet;
+			//this.xpathRelativeArticleOutlet = xpathRelativeArticleOutlet;
 		}
 		
 		public String getXPathRelativeArticle(AppEcom app) {
-			if (app==AppEcom.outlet) {
-				return this.xpathRelativeArticleOutlet;
-			}
+//			if (app==AppEcom.outlet) {
+//				return this.xpathRelativeArticleOutlet;
+//			}
 			return xpathRelativeArticleShop;
 		}
 	}
 
-	//TODO cuando suba la nueva galería con react habrá que eliminar todo el código antiguo
-	private final static String XPathIsNewGaleriaOutletReact = "//div[@class[contains(.,'catalog__catalog')]]";
+//	private final static String XPathIsNewGaleriaOutletReact = "//div[@class[contains(.,'catalog__catalog')]]";
 	
 	private final static String classProductName = 
 		"(@class[contains(.,'productList__name')] or " +
 		 "@class[contains(.,'product-list-name')] or " + 
-		 "@class[contains(.,'product-description__name')] or " + //Nueva versión outlet con React
+		 //"@class[contains(.,'product-description__name')] or " + //Nueva versión outlet con React
 		 "@class[contains(.,'_1P8s4')] or " +
 		 "@class='product-list-info-name' or " +
 		 "@class='product-name')";
@@ -87,7 +85,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		"//img[@src and (" + 
 			   "@class[contains(.,'productListImg')] or " + 
 			   "@class[contains(.,'product-list-image')] or " +
-			   "@class[contains(.,'list-product-image')] or " + //Nueva versión outlet con React
+			   //"@class[contains(.,'list-product-image')] or " + //Nueva versión outlet con React
 			   "@class[contains(.,'TaqRk')] or " + 
 			   "@class[contains(.,'product-list-im')])]";
 	private final static String XPathImgSliderActiveRelativeArticleDesktop = 
@@ -128,13 +126,13 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return (isElementPresent(driver, By.xpath("//div[@class[contains(.,'container-fluid catalog')]]")));
 	}
 
-	public static OutletGalery getOutletVersion(WebDriver driver) {
-		By byNewGalery = By.xpath(XPathIsNewGaleriaOutletReact);
-		if (WebdrvWrapp.isElementVisible(driver, byNewGalery)) {
-			return OutletGalery.newwithreact;
-		}
-		return OutletGalery.old;
-	}
+//	public static OutletGalery getOutletVersion(WebDriver driver) {
+//		By byNewGalery = By.xpath(XPathIsNewGaleriaOutletReact);
+//		if (WebdrvWrapp.isElementVisible(driver, byNewGalery)) {
+//			return OutletGalery.newwithreact;
+//		}
+//		return OutletGalery.old;
+//	}
 
 	private String getXPathLabel(LabelArticle label) {
 		String xpath = "//span[@class='product-list-label' and (";

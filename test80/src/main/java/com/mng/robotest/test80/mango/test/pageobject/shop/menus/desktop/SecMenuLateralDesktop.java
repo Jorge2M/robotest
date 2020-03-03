@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
-import com.mng.robotest.test80.mango.test.pageobject.shop.galeria.PageGaleriaDesktop;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.MenuLateralDesktop;
 
 public class SecMenuLateralDesktop extends WebdrvWrapp {
@@ -15,18 +14,21 @@ public class SecMenuLateralDesktop extends WebdrvWrapp {
 	
 	private static String TagConcatMenus = "[@TAG_CONCAT_MENUS]";
 	
-	private static String XPathLinkMenuWithTagOutletOld = 
-		"//div[@class[contains(.,'sidebar')]]" + 
-		"//li[@data-ga-label[contains(.,'" + TagConcatMenus + "')]]" +
-		"/a";
-	private static String XPathLinkMenuWithTagOutletNew = 
-		"//li[@class[contains(.,'element')]]" +  
-		"/a[@href[contains(.,'" + TagConcatMenus + "')]]";
-	private static String XPathSelectedRelativeMenuOutlet = 
-		"//self::*[@class[contains(.,'--selected')]]";
+//	private static String XPathLinkMenuWithTagOutletOld = 
+//		"//div[@class[contains(.,'sidebar')]]" + 
+//		"//li[@data-ga-label[contains(.,'" + TagConcatMenus + "')]]" +
+//		"/a";
+//	private static String XPathLinkMenuWithTagOutletNew = 
+//		"//li[@class[contains(.,'element')]]" +  
+//		"/a[@href[contains(.,'" + TagConcatMenus + "')]]";
+//	private static String XPathSelectedRelativeMenuOutlet = 
+//		"//self::*[@class[contains(.,'--selected')]]";
 	
 	private static String XPathLinkMenuWithTagShop = 
-		"//li[not(@class)]" +  
+		"//li[not(@class) or @class='element']" +  
+		"/a[@href[contains(.,'" + TagConcatMenus + "')]]";
+	private static String XPathLinkMenuWithTagOutlet = 
+		"//li[@class='_3AcVO' or @class='element']" +  
 		"/a[@href[contains(.,'" + TagConcatMenus + "')]]";
 	private static String XPathSelectedRelativeMenuShop = 
 		"//self::*[@aria-label[contains(.,'seleccionado')]]";
@@ -43,15 +45,19 @@ public class SecMenuLateralDesktop extends WebdrvWrapp {
 		String dataGaLabel =  menu.getDataGaLabelMenuLateralDesktop();
 		switch (app) {
 		case outlet:
-			switch (PageGaleriaDesktop.getOutletVersion(driver)) {
-			case newwithreact:
-				return (XPathLinkMenuWithTagOutletNew
+			return (XPathLinkMenuWithTagOutlet
 					.replace(TagConcatMenus, dataGaLabel
 					.replace(":", "-")
 					.replaceFirst("-", "/")));
-			case old:
-				return (XPathLinkMenuWithTagOutletOld.replace(TagConcatMenus, dataGaLabel));
-			}
+//			switch (PageGaleriaDesktop.getOutletVersion(driver)) {
+//			case newwithreact:
+//				return (XPathLinkMenuWithTagOutletNew
+//					.replace(TagConcatMenus, dataGaLabel
+//					.replace(":", "-")
+//					.replaceFirst("-", "/")));
+//			case old:
+//				return (XPathLinkMenuWithTagOutletOld.replace(TagConcatMenus, dataGaLabel));
+//			}
 		default:
 			return (XPathLinkMenuWithTagShop
 				.replace(TagConcatMenus, dataGaLabel
@@ -62,8 +68,8 @@ public class SecMenuLateralDesktop extends WebdrvWrapp {
 	
 	private String getXPathSelectedRelativeMenu() {
 		switch (app) {
-		case outlet:
-			return XPathSelectedRelativeMenuOutlet;
+//		case outlet:
+//			return XPathSelectedRelativeMenuOutlet;
 		default:
 			return XPathSelectedRelativeMenuShop;
 		}
