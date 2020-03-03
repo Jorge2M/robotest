@@ -109,23 +109,14 @@ public abstract class PageGaleria extends WebdrvWrapp {
 		return secPrecios;
 	}
 	
-	final static String XPathArticuloDesktopShop = "//li[@id[contains(.,'product-key-id')]]";
-	
-	//"@id[contains(.,'product-key-id')]" paga Galería-Outlet-React -> Cuando suba se podrá unficar con el XPath de Shop
-	final static String XPathArticuloDesktopOutlet = "//li[@class[contains(.,'product-list-item')] or @id[contains(.,'product-key-id')] or @class='product']";
+	final static String XPathArticuloDesktop = "//li[@id[contains(.,'product-key-id')]]";
 	
 	final static String XPathArticuloDesktopBuscador = "//div[@class[contains(.,'product-list-item')]]";
-	final static String XPathArticuloMobilOutlet = XPathArticuloDesktopOutlet;
+	final static String XPathArticuloMobilOutlet = "//li[@class[contains(.,'product-list-item')] or @id[contains(.,'product-key-id')] or @class='product']";
 	final static String XPathArticuloMobilShop = "//li[@class='product']";
 	private String getXPathArticulo() {
 		switch (app) {
 		case outlet:
-//			if (from==From.buscador) {
-//				return XPathArticuloDesktopBuscador;
-//			}
-//			if (channel==Channel.desktop) {
-//				return XPathArticuloDesktopOutlet;
-//			}
 			if (channel==Channel.movil_web) {
 				return XPathArticuloMobilOutlet;
 			}
@@ -134,17 +125,13 @@ public abstract class PageGaleria extends WebdrvWrapp {
 		default:
 			if (channel==Channel.desktop) {
 				if (from==From.menu) {
-					return XPathArticuloDesktopShop;
+					return XPathArticuloDesktop;
 				}
 				return XPathArticuloDesktopBuscador;
 			}
 			return XPathArticuloMobilShop;
 		}
 	}
-	
-//	final static String XPathHearthIconRelativeArticle = 
-//		"//span[@class[contains(.,'product-favorite')] or " + 
-//		       "@class[contains(.,'product-list-fav')]]";
 	
 	String XPathHearthIconRelativeArticleDesktop = "//span[@class[contains(.,'_1lfLH')]]";
 	String XPathHearthIconRelativeArticleMovil = "//span[@class[contains(.,'product-favorite')]]";
@@ -169,44 +156,38 @@ public abstract class PageGaleria extends WebdrvWrapp {
 			"//self::*[not(@class[contains(.,'layout-2-coumns-A2')])]");
 	}
 	
-//	final static String XPathPrecioDefinitivoRelativeArticle = 
-//		"//span[@class[contains(.,'price')] and " + 
-//			"@class[not(contains(.,'line__through'))] and " + 
-//			"@class[not(contains(.,'price-crossed'))] and " +
-//			"@class[not(contains(.,'line-through'))]]"; //Galería Outlet React (cuando suba a PRO se podrá eliminar el line__through?)
-	
 	String getXPathAncestorArticulo() {
 		return (XPathArticulo.replaceFirst("//", "ancestor::"));
 	}
 	
-    static String classProductName = 
-        	"(@class[contains(.,'productList__name')] or " +
-        	 "@class[contains(.,'product-list-name')] or " + 
-        	 "@class='product-list-info-name' or " +
-        	 "@class='product-name')";
-    
-    public String getXPathCabeceraBusquedaProd() {
-        return ("//*[@id='buscador_cabecera2']");
-    }
-	
-    String getXPathLinkArticulo(int numArticulo) {
-        return ("(" + XPathArticulo + ")[" + numArticulo + "]//a");
-    }  
+	static String classProductName = 
+			"(@class[contains(.,'productList__name')] or " +
+			 "@class[contains(.,'product-list-name')] or " + 
+			 "@class='product-list-info-name' or " +
+			 "@class='product-name')";
 
-    public boolean isVisibleArticuloUntil(int numArticulo, int seconds) {
-        String xpathArticulo = XPathArticulo + "[" + numArticulo + "]"; 
-        return (isElementVisibleUntil(driver, By.xpath(xpathArticulo), seconds));
-    }
-    
-    public boolean isClickableArticuloUntil(int numArticulo, int seconds) {
-        String xpathArticulo = XPathArticulo + "[" + numArticulo + "]"; 
-        return (isElementClickableUntil(driver, By.xpath(xpathArticulo), seconds));
-    }
+	public String getXPathCabeceraBusquedaProd() {
+		return ("//*[@id='buscador_cabecera2']");
+	}
 	
-    public List<WebElement> getListaArticulos() {
-        List<WebElement> listaArticulos = driver.findElements(By.xpath(XPathArticulo));
-        return listaArticulos;
-    }
+	String getXPathLinkArticulo(int numArticulo) {
+		return ("(" + XPathArticulo + ")[" + numArticulo + "]//a");
+	}  
+
+	public boolean isVisibleArticuloUntil(int numArticulo, int seconds) {
+		String xpathArticulo = XPathArticulo + "[" + numArticulo + "]"; 
+		return (isElementVisibleUntil(driver, By.xpath(xpathArticulo), seconds));
+	}
+
+	public boolean isClickableArticuloUntil(int numArticulo, int seconds) {
+		String xpathArticulo = XPathArticulo + "[" + numArticulo + "]"; 
+		return (isElementClickableUntil(driver, By.xpath(xpathArticulo), seconds));
+	}
+	
+	public List<WebElement> getListaArticulos() {
+		List<WebElement> listaArticulos = driver.findElements(By.xpath(XPathArticulo));
+		return listaArticulos;
+	}
 	
     public boolean articlesInOrder(FilterOrdenacion typeOrden) throws Exception {
         return ("".compareTo(getAnyArticleNotInOrder(typeOrden))==0);
@@ -504,22 +485,6 @@ public abstract class PageGaleria extends WebdrvWrapp {
         return articulo;
     }
     
-//    /**
-//     * @return devuelve un artículo con un determinado texto (lo espera durante los segundos indicados) 
-//     */
-//
-//    public boolean isCabeceraResBusqueda(String categoriaProducto) {
-//        boolean isCabecera = false;
-//        String xpathCabe = getXPathCabeceraBusquedaProd();
-//        if (isElementPresent(driver, By.xpath(xpathCabe))) {
-//            if (driver.findElement(By.xpath(xpathCabe)).getText().toLowerCase().contains(categoriaProducto.toLowerCase())) {
-//                isCabecera = true;
-//            }
-//        }
-//        
-//        return isCabecera;
-//    }
-    
     /**
      * Función que realiza un scroll/paginación hasta el final de los artículos. Retorna el número de elementos obtenidos
      * Desktop: scrolla reiteradamente hasta el último elemento para forzar la paginación
@@ -532,7 +497,7 @@ public abstract class PageGaleria extends WebdrvWrapp {
         int lastPage = getNumLastPage();
         List<Integer> numArticlesXpage = new ArrayList<>();
         List<Integer> numArticlesDoubleXpage = new ArrayList<>();
-        initializeDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, pageToScroll+10);
+        initializeDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, pageToScroll + 10);
         updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, lastPage);
         while (!SecFooter.isVisible(app, driver) && lastPage < pageToScroll) {
         	goToLastPage();
@@ -708,15 +673,14 @@ public abstract class PageGaleria extends WebdrvWrapp {
     	return listArtToReturn;
     }
 
-    private static boolean isArticleNew(String nameAndLabelArticle) {
-    	for (LabelArticle label : listLabelsNew) {
-    		for (String labelNew : label.getListTraducciones()) {
-    			if (nameAndLabelArticle.contains(labelNew) || nameAndLabelArticle.contains(labelNew.toUpperCase())) {
-    				return true;
-    			}
-    		}
-    	}
-    	   
-    	return false;
-    }
+	private static boolean isArticleNew(String nameAndLabelArticle) {
+		for (LabelArticle label : listLabelsNew) {
+			for (String labelNew : label.getListTraducciones()) {
+				if (nameAndLabelArticle.contains(labelNew) || nameAndLabelArticle.contains(labelNew.toUpperCase())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }
