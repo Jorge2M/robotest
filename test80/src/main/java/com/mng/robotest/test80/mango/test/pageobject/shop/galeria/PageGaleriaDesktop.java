@@ -574,7 +574,7 @@ public class PageGaleriaDesktop extends PageGaleria {
         }
     }
     
-    public void clickSliderAfterHoverArticle(WebElement articulo, ArrayList<TypeSlider> typeSliderList)
+    public void clickSliderAfterHoverArticle(WebElement articulo, List<TypeSlider> typeSliderList)
     throws Exception {
         //Click Sliders
         for (TypeSlider typeSlider : typeSliderList) {
@@ -602,22 +602,28 @@ public class PageGaleriaDesktop extends PageGaleria {
     
     public WebElement hoverSliderUntilClickable(TypeSlider typeSlider, WebElement article) {
     	String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
-    	WebElement slider = article.findElement(By.xpath("." + xpathSlider));
-    	hoverArticle(article);
-    	if (getTypeDriver(driver)!=WebDriverType.firefox) {
-    		isElementClickableUntil(driver, slider, 5);
-    	} else {
-    		//TODO En el caso de Firefox-Geckodriver hay problemas con los moveToElement. 
-    		//En este caso parece que se posiciona en la esquina superior izquierda
-    		//Cuando se solvente podremos eliminar este código específico
-    		Actions actions = new Actions(driver);
-    		int i=0;
-    		while (!isElementClickableUntil(driver, slider, 1) && i<5) {
-    			actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).build().perform();
-    			hoverArticle(article);
-    			i+=1;
-    		}
+    	for (int i=0; i<5; i++) {
+        	hoverArticle(article);
+	    	if (isElementClickableUntil(driver, By.xpath(xpathSlider), 2)) {
+	    		break;
+	    	}
+	    	moveToElement(article.findElement(By.xpath("//a")), driver);
     	}
+    	WebElement slider = article.findElement(By.xpath("." + xpathSlider));
+//    	if (getTypeDriver(driver)!=WebDriverType.firefox) {
+//    		isElementClickableUntil(driver, slider, 5);
+//    	} else {
+//    		//TODO En el caso de Firefox-Geckodriver hay problemas con los moveToElement. 
+//    		//En este caso parece que se posiciona en la esquina superior izquierda
+//    		//Cuando se solvente podremos eliminar este código específico
+//    		Actions actions = new Actions(driver);
+//    		int i=0;
+//    		while (!isElementClickableUntil(driver, slider, 1) && i<5) {
+//    			actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).build().perform();
+//    			hoverArticle(article);
+//    			i+=1;
+//    		}
+//    	}
     	
     	return slider;
     }

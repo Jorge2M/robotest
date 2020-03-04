@@ -432,7 +432,7 @@ public class PageGaleriaStpV {
     		"Clickar la siguiente secuencia de sliders: <b>" + tagSliderList + "</b> del #{numArtConColores}o " + 
     		" artículo con variedad de colores (" + tagNombreArt + "). Previamente realizamos un \"Hover\" sobre dicho artículo", 
         expected="Aparece el artículo original(" + tagNombreArt + ")")
-    public String clicksSliderArticuloConColores(int numArtConColores, ArrayList<TypeSlider> typeSliderList, String srcImageExpected) 
+    public String clicksSliderArticuloConColores(int numArtConColores, List<TypeSlider> typeSliderList, String srcImageExpected) 
     throws Exception {
        if (channel!=Channel.desktop) {
            throw new RuntimeException("Method clickSliderArticuloConColores doesn't support channel " + channel);
@@ -453,18 +453,25 @@ public class PageGaleriaStpV {
        pageGaleriaDesktop.clickSliderAfterHoverArticle(articuloColores, typeSliderList);
        
        String srcImg2oSlider = pageGaleria.getImagenArticulo(articuloColores).getAttribute("src");
-       checkImageSliderArticleHasChanged(srcImg1erSlider, srcImg2oSlider);
+       checkImageSliderArticleHasChanged(srcImg1erSlider, srcImg2oSlider, typeSliderList.size());
        if ("".compareTo(srcImageExpected)!=0) {
     	   checkActualImgSliderIsTheExpected(srcImg2oSlider, srcImageExpected);
        }
        return srcImg2oSlider;
    }
-    
-   @Validation (
-	  description="Se modifica la imagen asociada al artículo (<b>antes</b>: #{srcImg1erSlider}, <b>ahora</b>: #{srcImg2oSlider})",
-	  level=State.Defect)
-   private boolean checkImageSliderArticleHasChanged(String srcImg1erSlider, String srcImg2oSlider) {
-       return (srcImg2oSlider.compareTo(srcImg1erSlider)!=0); 
+
+	@Validation
+	private ChecksTM checkImageSliderArticleHasChanged(String srcImg1erSlider, String srcImg2oSlider, int numClicks) {
+		State state = State.Defect;
+		if (numClicks>1) {
+			//Si hemos realizado varios clicks y sólo hay 2 imágenes habremos vuelto a la inicial
+			state = State.Warn;
+		}
+		ChecksTM validations = ChecksTM.getNew();
+		validations.add(
+			"Se modifica la imagen asociada al artículo (<b>antes</b>: " + srcImg1erSlider + ", <b>ahora</b>: " + srcImg2oSlider,
+			srcImg2oSlider.compareTo(srcImg1erSlider)!=0, state);
+		return validations;
    }
    
    @Validation (
@@ -474,7 +481,7 @@ public class PageGaleriaStpV {
        return (srcImgActual.compareTo(srcImgOriginalExpected)==0);
    }
     
-   private static String getStringSliderList(ArrayList<TypeSlider> typeSliderList) {
+   private static String getStringSliderList(List<TypeSlider> typeSliderList) {
        String listStr = "";
        for (TypeSlider typeSlider : typeSliderList) {
            listStr+=(typeSlider + ", ");
