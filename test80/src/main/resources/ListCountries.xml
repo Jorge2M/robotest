@@ -1018,15 +1018,16 @@
 <pago 
 	type="Sofort" tiendas="shop,outlet" empleado="n"
 	nombre="SOFORTÜBERWEISUNG" namefilter="SOFORT" testpasarela='s' testpago='s' paissofort='DE' bankcode='88888888' usrsofort='88888888' passsofort='88888888' tansofort='12345'>&TPV-016;</pago>
+<!-- 
 <pago 
 	type="Giropay" tiendas="shop,outlet" empleado="n"
-	nombre="GIROPAY" testpasarela='s' testpago='s' bankidgiropay="Oberbank AG 15000 OBKLAT2LXXX">&TPV-055;</pago>
+	nombre="GIROPAY" testpasarela='s' testpago='s' bankidgiropay="Oberbank AG 15000 OBKLAT2LXXX">&TPV-055;</pago>-->
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
 <pago 
 	type="KlarnaDeutsch" tiendas="shop,outlet" empleado="n"
-	nombre="KAUF AUF RECHNUNG MIT KLARNA" testpasarela='s' testpago='s'>&TPV-215;</pago> 
+	nombre="RECHNUNG" testpasarela='s' testpago='s'>&TPV-215;</pago> 
 <pago 
 	type="KlarnaDeutsch" tiendas="shop,outlet" empleado="n"
 	nombre="KLARNA KONTO" testpasarela='s' testpago='s'>&TPV-216;</pago>
@@ -2222,9 +2223,10 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-515;</pago>
+<!-- 
 <pago 
 	type="Trustpay" tiendas="shop,outlet" empleado="n" 
-	nombre="TRUSTPAY" testpasarela='s' testpago='s'>&TPV-121;</pago>
+	nombre="TRUSTPAY" testpasarela='s' testpago='s'>&TPV-121;</pago>-->
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
