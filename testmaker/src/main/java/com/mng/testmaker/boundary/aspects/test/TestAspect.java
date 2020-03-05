@@ -41,7 +41,7 @@ public class TestAspect {
 		
 		Object returnValue = null;
 		InputParamsTM inputParams = testCase.getInputParamsSuite();
-		if (!inputParams.isRemote()) {
+		if (false && !inputParams.isRemote()) {
 			RemoteTest remoteTest = new RemoteTest();
 			remoteTest.execute(testCase, inputParams);
 		} else {

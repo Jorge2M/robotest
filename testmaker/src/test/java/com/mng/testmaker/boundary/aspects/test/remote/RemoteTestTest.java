@@ -16,7 +16,7 @@ public class RemoteTestTest {
 	private enum Suites {SmokeTest}
 	private enum AppEcom {shop}
 	
-	//@Ignore
+	@Ignore
 	@Test
 	public void testSuiteRun() throws Exception {
 		//Given
