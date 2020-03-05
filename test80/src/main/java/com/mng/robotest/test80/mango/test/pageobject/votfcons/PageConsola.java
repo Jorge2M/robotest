@@ -78,10 +78,8 @@ public class PageConsola extends WebdrvWrapp {
      */
     static String XPathIframeResult = "//iframe[@id='resultFrame']";
     
-    /**
-     * @return el xpath correspondiente al botón "Realizar Solicitud A Tienda"
-     */
     static String XPathButtonSolATienda = "//a[@id='envioTiendaBolsa']";
+    static String XPathButtonSolADomicilio = "//a[@id='envioDomBolsa']";
     
     /**
      * @return el xpath correspondiente al botón "Obtención de Pedidos"
@@ -249,11 +247,12 @@ public class PageConsola extends WebdrvWrapp {
         clickAndWaitLoad(driver, By.xpath(XPathButtonDispEnvioTienda));
     }
     
-    /**
-     * Selección del botón "Realizar Solicitud A Tienda" y wait hasta carga de la página
-     */    
     public static void clickButtonSolATienda(WebDriver driver) throws Exception {
         clickAndWaitLoad(driver, By.xpath(XPathButtonSolATienda));
+    }
+    
+    public static void clickButtonSolADomicilio(WebDriver driver) throws Exception {
+        clickAndWaitLoad(driver, By.xpath(XPathButtonSolADomicilio));
     }
     
     /**

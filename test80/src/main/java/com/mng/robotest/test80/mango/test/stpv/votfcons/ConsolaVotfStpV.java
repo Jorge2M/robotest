@@ -42,8 +42,10 @@ public class ConsolaVotfStpV {
     }
     
 	@Step (
-		description="Introducimos el artículo disponible #{articulo} (a nivel de  artículo disponible y de compra) + la tienda #{tienda}",
-		expected="Aparecen datos correspondientes a " + PageConsola.msgConsTiposEnvioOK,
+		description=
+			"Introducimos el artículo disponible <b>#{articulo}</b> (a nivel de  artículo disponible y de compra) + la tienda <b>#{tienda}</b>",
+		expected=
+			"Aparecen datos correspondientes a " + PageConsola.msgConsTiposEnvioOK,
 		saveErrorData=SaveWhen.Never)
     public static void inputArticleAndTiendaDisp(String articulo, String tienda, WebDriver driver) throws Exception {
         PageConsola.inputArticDispYCompra(driver, articulo);
@@ -79,8 +81,11 @@ public class ConsolaVotfStpV {
 	}
     
 	@Step (
-		description="Introducimos el artículo #{articulo} (a nivel de  artículo disponible y de compra) + Seleccionar el botón \"Consultar Disponibilidad Envío Domicilio\"",
-		expected="Aparece la tabla de transportes con los tipos",
+		description=
+			"Introducimos el artículo <b>#{articulo}</b> (a nivel de  artículo disponible y de compra) + " + 
+			"Seleccionar el botón \"Consultar Disponibilidad Envío Domicilio\"",
+		expected=
+			"Aparece la tabla de transportes con los tipos",
 		saveErrorData=SaveWhen.Never)
     public static void consultarDispEnvDomic(String articulo, WebDriver driver) throws Exception {
         PageConsola.inputArticDispYCompra(driver, articulo);
@@ -91,10 +96,10 @@ public class ConsolaVotfStpV {
 	@Validation
 	private static ChecksTM checkAfterClickConsultDispEnvioDomicilio(WebDriver driver) {
 		ChecksTM validations = ChecksTM.getNew();
-		int maxSecondsToWait = 5;
+		int maxSecondsToWait = 10;
 		boolean isDataSelectCodigoTrasnp = PageConsola.isDataSelectCodigoTransporte(maxSecondsToWait, driver);
 	 	validations.add(
-			"En el desplegable \"Código de Transporte\" aparecen datos (lo esperamos hasta XX segundos)",
+			"En el desplegable \"Código de Transporte\" aparecen datos (lo esperamos hasta " + maxSecondsToWait + " segundos)",
 			isDataSelectCodigoTrasnp, State.Defect);
 	 	String codigosTransporte = "";
 	 	if (isDataSelectCodigoTrasnp) {
@@ -150,130 +155,147 @@ public class ConsolaVotfStpV {
 	}
     
 	@Step (
-		description="Seleccionar el botón \"Realizar Solicitud A Tienda\"",
+		description="Seleccionar el botón \"Realizar Solicitud A Domicilio\"",
 		expected="El pedido se crea correctamente",
 		saveErrorData=SaveWhen.Never)
     public static String realizarSolicitudTienda(String articulo, WebDriver driver) throws Exception {
         PageConsola.inputArticDispYCompra(driver, articulo);
-        PageConsola.clickButtonSolATienda(driver);
-        String codigoPedido = switchToIframeAndCheckAfterSolicitudAtienda(driver);
+        PageConsola.clickButtonSolADomicilio(driver);
+        String codigoPedido = switchToIframeAndCheckAfterSolicitudAdomicilio(driver);
         return codigoPedido;
     }
 	
-	private static String switchToIframeAndCheckAfterSolicitudAtienda(WebDriver driver) {
-        String paginaPadre = driver.getWindowHandle();
-        PageConsola.switchToResultIFrame(driver);
-        String codigoPedido = IframeResult.getCodigoPedido(driver);
-        checkAfterSolicitudAtiendaInIframe(codigoPedido, driver);
-        driver.switchTo().window(paginaPadre);
-        return codigoPedido;
+	private static String switchToIframeAndCheckAfterSolicitudAdomicilio(WebDriver driver) {
+		String paginaPadre = driver.getWindowHandle();
+		PageConsola.switchToResultIFrame(driver);
+		ChecksResultWithStringData checks = checkAfterSolicitudAdomicilioInIframe(driver);
+		driver.switchTo().window(paginaPadre);
+		return checks.getData();
 	}
 	
 	@Validation
-	private static ChecksTM checkAfterSolicitudAtiendaInIframe(String codigoPedido, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
-			"En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Código de pedido\"",
-			IframeResult.isPresentCodigoPedido(driver), State.Warn);
-	 	validations.add(
+	private static ChecksResultWithStringData checkAfterSolicitudAdomicilioInIframe(WebDriver driver) {
+		ChecksResultWithStringData validations = ChecksResultWithStringData.getNew();
+		int maxSeconds = 5;
+		validations.add(
+			"En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Código de pedido\"" + 
+			"(la esperamos hasta " + maxSeconds + " segundos)",
+			IframeResult.isPresentCodigoPedido(maxSeconds, driver), State.Warn);
+		
+		String codigoPedido = IframeResult.getCodigoPedido(driver);
+		validations.setData(codigoPedido);
+		validations.add(
 			"Aparece un código de pedido",
 			"".compareTo(codigoPedido)!=0, State.Defect);
-	 	validations.add(
+		validations.add(
 			"Aparece el literal \"Resultado creación pedido: (0) Total\"",
 			IframeResult.resCreacionPedidoOk(driver), State.Warn);
 	 	return validations;
 	}
-    
+
 	@Step (
 		description="Seleccionar el botón \"Obtener Pedidos\"",
 		expected="Aparece la lista de pedidos",
 		saveErrorData=SaveWhen.Never)
-    public static String obtenerPedidos(String codigoPedido, WebDriver driver) throws Exception {
-        PageConsola.clickButtonObtenerPedidos(driver);
-        String codigoPedidoFull = switchToIframeAndCheckAfterObtenerPedidos(codigoPedido, driver);
-        return codigoPedidoFull;
-    }
-	
-	private static String switchToIframeAndCheckAfterObtenerPedidos(String codigoPedido, WebDriver driver) {
-        String paginaPadre = driver.getWindowHandle();
-        PageConsola.switchToResultIFrame(driver);
-        String codigoPedidoFull = IframeResult.getPedidoFromListaPedidos(driver, codigoPedido);
-        checkAfterObtenerPedidosInIframe(codigoPedido, codigoPedidoFull, driver);
-        driver.switchTo().window(paginaPadre);
-        return codigoPedidoFull;
+	public static String obtenerPedidos(String codigoPedido, WebDriver driver) throws Exception {
+		PageConsola.clickButtonObtenerPedidos(driver);
+		String codigoPedidoFull = switchToIframeAndCheckAfterObtenerPedidos(codigoPedido, driver);
+		return codigoPedidoFull;
 	}
 	
-	@Validation
-	private static ChecksTM checkAfterObtenerPedidosInIframe(String codigoPedido, String codigoPedidoFull, WebDriver driver) {
-		ChecksTM validations = ChecksTM.getNew();
-	 	validations.add(
-			"En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Pedidos\"",
-			IframeResult.isPresentListaPedidos(driver), State.Warn);
-	 	validations.add(
-			"En la lista de pedidos aparece el generado anteriormente: " + codigoPedido,
-			"".compareTo(codigoPedidoFull)!=0, State.Defect);
-		return validations;
+	private static String switchToIframeAndCheckAfterObtenerPedidos(String codigoPedido, WebDriver driver) throws Exception {
+		String paginaPadre = driver.getWindowHandle();
+		PageConsola.switchToResultIFrame(driver);
+
+		checkAfterObtenerPedidosInIframe(codigoPedido, driver);
+		String codigoPedidoFull = IframeResult.getPedidoFromListaPedidos(driver, codigoPedido);
+		driver.switchTo().window(paginaPadre);
+		return codigoPedidoFull;
 	}
-    
+	
+	private static String checkAfterObtenerPedidosInIframe(String codigoPedido, WebDriver driver) throws Exception {
+		checkIsLineaPedidos(5, driver);
+		if ("".compareTo(codigoPedido)==0) {
+			return codigoPedido;
+		}
+		
+		checkIsPresentPedidoInList(codigoPedido, driver);
+		return IframeResult.getPedidoFromListaPedidos(driver, codigoPedido);
+	}
+	
+	@Validation (
+		description = "En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Pedidos\" (la esperamos hasta #{maxSeconds} segundos)",
+		level=State.Warn)
+	private static boolean checkIsLineaPedidos(int maxSeconds, WebDriver driver) {
+		return IframeResult.isPresentListaPedidosUntil(maxSeconds, driver);
+	}
+	
+	@Validation (
+		description = "En la lista de pedidos aparece el generado anteriormente: #{codigoPedido}",
+		level=State.Defect)
+	private static boolean checkIsPresentPedidoInList(String codigoPedido, WebDriver driver) throws Exception {
+		String codigoPedidoFull = IframeResult.getPedidoFromListaPedidos(driver, codigoPedido);
+	 	return "".compareTo(codigoPedidoFull)!=0;
+	}
+
 	@Step (
 		description="Seleccionar el pedido #{codigoPedidoFull} en el desplegable \"Pedido\" y pulsar \"Seleccionar pedido\"",
 		expected="Aparece el pedido seleccionado",
 		saveErrorData=SaveWhen.Never)
-    public static void seleccionarPedido(String codigoPedidoFull, WebDriver driver) throws Exception {
-        PageConsola.selectPedido(driver, codigoPedidoFull);
-        PageConsola.clickButtonSelectPedido(driver);
-        checkAfterSelectPedido(codigoPedidoFull, driver);
-    }
+	public static void seleccionarPedido(String codigoPedidoFull, WebDriver driver) throws Exception {
+		PageConsola.selectPedido(driver, codigoPedidoFull);
+		PageConsola.clickButtonSelectPedido(driver);
+		checkAfterSelectPedido(codigoPedidoFull, driver);
+	}
 	
 	@Validation (
 		description="En el bloque de \"Petición/Resultado\" aparece una línea \"Seleccionado: #{codigoPedidoFull}\"",
 		level=State.Warn)
 	private static boolean checkAfterSelectPedido(String codigoPedidoFull, WebDriver driver) {
 		boolean resultado = true;
-        String paginaPadre = driver.getWindowHandle();
-        try {  
-            PageConsola.switchToResultIFrame(driver);
-            if (IframeResult.resSelectPedidoOk(driver, codigoPedidoFull)) {
-                resultado = false;
-            }
-        }
-        finally {
-            driver.switchTo().window(paginaPadre);
-        }
-        
-        return resultado;
+		String paginaPadre = driver.getWindowHandle();
+		try {  
+			PageConsola.switchToResultIFrame(driver);
+			if (IframeResult.resSelectPedidoOk(driver, codigoPedidoFull)) {
+				resultado = false;
+			}
+		}
+		finally {
+			driver.switchTo().window(paginaPadre);
+		}
+
+		return resultado;
 	}
-    
+
 	@Step (
 		description="Pulsar el botón \"Preconfirmar Pedido\"",
 		expected="Aparece el pedido como preconfirmado",
 		saveErrorData=SaveWhen.Never)
-    public static void selectPreconfPedido(String codigoPedidoFull, WebDriver driver) throws Exception {
+	public static void selectPreconfPedido(String codigoPedidoFull, WebDriver driver) throws Exception {
 		PageConsola.clickButtonPreconfPedido(driver);
 		checkAfterPreconfirmarPedido(codigoPedidoFull, driver);
-    }
+	}
 	
 	@Validation
 	private static ChecksTM checkAfterPreconfirmarPedido(String codigoPedidoFull, WebDriver driver) {
-        ChecksTM validations = ChecksTM.getNew();
-        String paginaPadre = driver.getWindowHandle();
-        try {
-	        PageConsola.switchToResultIFrame(driver);
-	        boolean[] resultado = IframeResult.resSelPreconfPedidoOk(driver, codigoPedidoFull);
+		ChecksTM validations = ChecksTM.getNew();
+		String paginaPadre = driver.getWindowHandle();
+		try {
+			PageConsola.switchToResultIFrame(driver);
 		 	validations.add(
 				"En el bloque de \"Petición/Resultado\" aparece una línea \"Preconfirmado\"", 
-				resultado[0], State.Warn);
+				IframeResult.isLineaPreconfirmado(driver), State.Warn);
 		 	validations.add(
 				"Aparece un XML con el dato \"&lt;pedido&gt;" + codigoPedidoFull + "&lt;/pedido&gt;\"",
-				resultado[1], State.Defect);
-        }
-        finally {
-            driver.switchTo().window(paginaPadre);
-        }
-        
-        return validations;
+				IframeResult.isPedidoInXML(codigoPedidoFull, driver), State.Defect);
+		}
+		finally {
+			driver.switchTo().window(paginaPadre);
+		}
+
+		return validations;
 	}
-    
+
 	@Step (
 		description="Pulsar el botón \"Confirmar Pedido\"",
 		expected="Aparece el pedido confirmado",
