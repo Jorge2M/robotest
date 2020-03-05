@@ -133,7 +133,7 @@ public abstract class PageGaleria extends WebdrvWrapp {
 		}
 	}
 	
-	String XPathHearthIconRelativeArticleDesktop = "//span[@class[contains(.,'_1lfLH')]]";
+	String XPathHearthIconRelativeArticleDesktop = "//span[@class[contains(.,'icon-favorite')]]";
 	String XPathHearthIconRelativeArticleMovil = "//span[@class[contains(.,'product-favorite')]]";
 	String getXPathHearthIconRelativeArticle() {
 		switch (channel) {
