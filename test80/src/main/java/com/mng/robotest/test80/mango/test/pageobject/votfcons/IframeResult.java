@@ -31,11 +31,14 @@ public class IframeResult extends WebdrvWrapp {
     
     //xpath correspondiente al bloque de la lista de pedidos (resultante de selección del botón "Obtener Pedidos")
     private static final String XPathBlockListaPedidosFull = XPathBlockResultado + "//span[@class='pedido']";
-    
-    public static boolean resultadoContainsText(WebDriver driver, String text) {
-        return (driver.findElement(By.xpath(XPathBlockResultado)).getText().contains(text));
-    }
-    
+
+	public static boolean resultadoContainsText(WebDriver driver, String text) {
+		if (WebdrvWrapp.isElementPresent(driver, By.xpath(XPathBlockResultado))) {
+			return (driver.findElement(By.xpath(XPathBlockResultado)).getText().contains(text));
+		}
+		return false;
+	}
+
     public static boolean existsTransportes(WebDriver driver) {
         return (isElementPresent(driver, By.xpath(XPathBlockTransportes))); 
     }    
@@ -56,8 +59,8 @@ public class IframeResult extends WebdrvWrapp {
         return (isElementPresent(driver, By.xpath(XPathLintTipoStock)));
     }
     
-    public static boolean isPresentCodigoPedido(WebDriver driver) {
-        if (!isElementPresent(driver, By.xpath(XPathBlockResultPedido))) {
+    public static boolean isPresentCodigoPedido(int maxSeconds, WebDriver driver) {
+        if (!isElementPresentUntil(driver, By.xpath(XPathBlockResultPedido), maxSeconds)) {
             return false;
         }
         return (driver.findElement(By.xpath(XPathBlockResultPedido)).getText().contains("Código pedido")); 
@@ -71,25 +74,26 @@ public class IframeResult extends WebdrvWrapp {
         return codigoPedido;
     }
     
-    /**
-     * @return un pedido en formato largo (+2 dígitos) de los que aparece en la lista de pedidos (resultante de selección del botón "Obtener Pedidos") a partir de un pedido en formato corto
-     */
-    public static String getPedidoFromListaPedidos(WebDriver driver, String codPedidoShort) {
-        String pedidoFull = "";
-        List<WebElement> listPedidos = driver.findElements(By.xpath(XPathBlockListaPedidosFull));
-        
-        //En cada elemento buscamos el pedido en formato corto
-        Iterator<WebElement> it = listPedidos.iterator();
-        while (it.hasNext()) {
-            WebElement pedido = it.next();
-            if (pedido.getText().contains(codPedidoShort)) {
-                pedidoFull = pedido.getText();
-            }
-        }
-        
-        return pedidoFull;
-    }
-    
+	/**
+	 * @return un pedido en formato largo (+2 dígitos) de los que aparece en la lista de pedidos (resultante de selección del botón "Obtener Pedidos") a partir de un pedido en formato corto
+	 */
+	public static String getPedidoFromListaPedidos(WebDriver driver, String codPedidoShort) throws Exception {
+		String pedidoFull = "";
+		waitForPageLoaded(driver);
+		List<WebElement> listPedidos = driver.findElements(By.xpath(XPathBlockListaPedidosFull));
+
+		//En cada elemento buscamos el pedido en formato corto
+		Iterator<WebElement> it = listPedidos.iterator();
+		while (it.hasNext()) {
+			WebElement pedido = it.next();
+			if (pedido.getText().contains(codPedidoShort)) {
+				pedidoFull = pedido.getText();
+			}
+		}
+
+		return pedidoFull;
+	}
+
     public static boolean resCreacionPedidoOk(WebDriver driver) { 
         boolean resultado = false;
         if (isElementPresent(driver, By.xpath(XPathBlockResultado))) {
@@ -101,8 +105,8 @@ public class IframeResult extends WebdrvWrapp {
     /**
      * @return si está presente el bloque correspondiente a la lista de pedidos (resultante de selección del botón "Obtener Pedidos")
      */
-    public static boolean isPresentListaPedidos(WebDriver driver) {
-        if (!isElementPresent(driver, By.xpath(XPathBlockListPedidos))) {
+    public static boolean isPresentListaPedidosUntil(int maxSeconds, WebDriver driver) {
+        if (!isElementPresentUntil(driver, By.xpath(XPathBlockListPedidos), maxSeconds)) {
             return false;
         }
         return (driver.findElement(By.xpath(XPathBlockListPedidos)).getText().contains("Pedidos:"));
@@ -118,24 +122,21 @@ public class IframeResult extends WebdrvWrapp {
         }
         return resultado;        
     }
-    
-    /**
-     * @param codigoPedidoFull pedido en formato largo (+2 dígitos)
-     * @return si la selección del botón "Preconfirmar Pedido" ha sido Ok
-     */
-    public static boolean[] resSelPreconfPedidoOk(WebDriver driver, String codigoPedidoFull) {
-        boolean[] resultado = {false, false};
-        if (isElementPresent(driver, By.xpath(XPathBlockResultado))) {
-            //En el bloque de "Petición/Resultado" aparece una línea "Preconfirmado"
-            resultado[0] = driver.findElement(By.xpath(XPathBlockResultado)).getText().contains("Preconfirmado");
-            
-            //Aparece un XML con el dato "<pedido> + codigoPedidoFull + <pedido&gt>"
-            resultado[1] = driver.findElement(By.xpath(XPathBlockResultado + "//span")).getText().contains("<pedido>" + codigoPedidoFull + "</pedido>");
-        }
-    
-        return (resultado);
-    }
-    
+
+	public static boolean isLineaPreconfirmado(WebDriver driver) {
+		if (isElementPresentUntil(driver, By.xpath(XPathBlockResultado), 1)) {
+			return driver.findElement(By.xpath(XPathBlockResultado)).getText().contains("Preconfirmado");
+		}
+		return false;
+	}
+
+	public static boolean isPedidoInXML(String codigoPedidoFull, WebDriver driver) {
+		if (isElementPresent(driver, By.xpath(XPathBlockResultado))) {
+			return driver.findElement(By.xpath(XPathBlockResultado + "//span")).getText().contains("<pedido>" + codigoPedidoFull + "</pedido>");
+		}
+		return false;
+	}
+
     /**
      * @return si la selección del botón "Confirmar pedido" ha sido Ok
      */

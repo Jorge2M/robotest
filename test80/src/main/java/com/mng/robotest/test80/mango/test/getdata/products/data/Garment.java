@@ -100,6 +100,9 @@ public class Garment {
 		public String getGarmentId() {
 			return garmentId;
 		}
+		public String getArticleId() {
+			return garmentId + size.getId() + color.getId();
+		}
 		public void setGarmentId(String garmentId) {
 			this.garmentId = garmentId;
 		}

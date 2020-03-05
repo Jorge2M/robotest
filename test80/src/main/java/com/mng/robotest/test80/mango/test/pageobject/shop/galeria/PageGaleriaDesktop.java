@@ -36,63 +36,44 @@ public class PageGaleriaDesktop extends PageGaleria {
 	
 	private final SecColoresArticuloDesktop secColores;
 	private final SecTallasArticuloDesktop secTallas;
-
-	//TODO cuando suba la nueva galería con react habrá que eliminar todo el código antiguo
-	public enum OutletGalery {old, newwithreact}
 	
 	public enum NumColumnas {dos, tres, cuatro}
 	public enum TypeSlider {prev, next}
 	public enum TypeColor {codigo, nombre}
 	public enum TypeArticleDesktop {
 		Simple (
-			"//self::*[@class[contains(.,'_2zQ2a')]]",
-			"//self::*[@data-imgsize = 'A1' or @class[contains(.,'product__A1')]]"), //Nueva versión outlet con react: "@class[contains(.,'product__A1')]"
+			"//self::*[@class[contains(.,'_2zQ2a')]]"),
 		Doble (
-			"//self::*[@class[contains(.,'_3QWF')]]",
-			"//self::*[@data-imgsize = 'A2' or @class[contains(.,'product__A2')]]"), //Nueva versión outlet con React: "@class[contains(.,'product__A1')]"
+			"//self::*[@class[contains(.,'_3QWF')]]"),
 		Video (
-			"//video",
 			"//video");
 		
-		String xpathRelativeArticleShop;
-		String xpathRelativeArticleOutlet;
-		private TypeArticleDesktop(String xpathRelativeArticleShop, String xpathRelativeArticleOutlet) {
-			this.xpathRelativeArticleShop = xpathRelativeArticleShop;
-			this.xpathRelativeArticleOutlet = xpathRelativeArticleOutlet;
+		String xpathRelativeArticle;
+		private TypeArticleDesktop(String xpathRelativeArticle) {
+			this.xpathRelativeArticle = xpathRelativeArticle;
 		}
 		
-		public String getXPathRelativeArticle(AppEcom app) {
-			if (app==AppEcom.outlet) {
-				return this.xpathRelativeArticleOutlet;
-			}
-			return xpathRelativeArticleShop;
+		public String getXPathRelativeArticle() {
+			return xpathRelativeArticle;
 		}
 	}
-
-	//TODO cuando suba la nueva galería con react habrá que eliminar todo el código antiguo
-	private final static String XPathIsNewGaleriaOutletReact = "//div[@class[contains(.,'catalog__catalog')]]";
 	
 	private final static String classProductName = 
 		"(@class[contains(.,'productList__name')] or " +
 		 "@class[contains(.,'product-list-name')] or " + 
-		 "@class[contains(.,'product-description__name')] or " + //Nueva versión outlet con React
 		 "@class[contains(.,'_1P8s4')] or " +
 		 "@class='product-list-info-name' or " +
 		 "@class='product-name')";
-
-	//private final String XPathArticuloColoresNoDoble = XPathArticuloConColores + "//self::*[not(@class[contains(.,'layout-2-coumns-A2')])]";
 
 	private final static String XPathNombreRelativeToArticle = "//*[" + classProductName + "]";
 	private final static String XPathImgRelativeArticle = 
 		"//img[@src and (" + 
 			   "@class[contains(.,'productListImg')] or " + 
 			   "@class[contains(.,'product-list-image')] or " +
-			   "@class[contains(.,'list-product-image')] or " + //Nueva versión outlet con React
 			   "@class[contains(.,'TaqRk')] or " + 
 			   "@class[contains(.,'product-list-im')])]";
 	private final static String XPathImgSliderActiveRelativeArticleDesktop = 
 		"//div[@class[contains(.,'swiper-slide-active')]]" + XPathImgRelativeArticle;
-		//"//img[@src and (@class[contains(.,'productListImg')] or @class[contains(.,'product-list-im')] or @class[contains(.,'TaqRk')])]";
 
 	private PageGaleriaDesktop(From from, AppEcom app, WebDriver driver) {
 		super(from, Channel.desktop, app, driver);
@@ -127,15 +108,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	public boolean isPage() {
 		return (isElementPresent(driver, By.xpath("//div[@class[contains(.,'container-fluid catalog')]]")));
 	}
-
-	public static OutletGalery getOutletVersion(WebDriver driver) {
-		By byNewGalery = By.xpath(XPathIsNewGaleriaOutletReact);
-		if (WebdrvWrapp.isElementVisible(driver, byNewGalery)) {
-			return OutletGalery.newwithreact;
-		}
-		return OutletGalery.old;
-	}
-
+	
 	private String getXPathLabel(LabelArticle label) {
 		String xpath = "//span[@class='product-list-label' and (";
 		for (int i=0; i<label.getListTraducciones().size(); i++) {
@@ -189,20 +162,14 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 
 	String getXPathArticulo(TypeArticleDesktop sizeArticle) {
-		return ((XPathArticulo + sizeArticle.getXPathRelativeArticle(app)));
+		return ((XPathArticulo + sizeArticle.getXPathRelativeArticle()));
 	}
 
-	//private final static String iniXPathPaginaGaleriaOutlet = "//div[@id='page";
 	private final static String iniXPathPaginaGaleria = "//ul[@id='page";
 
 	@Override
 	String getXPathPagina(int pagina) {
-//		switch (app) {
-//		case outlet:
-//			return (iniXPathPaginaGaleriaOutlet + pagina + "Height']");
-//		default:
-			return (iniXPathPaginaGaleria + pagina + "']");
-//		}
+		return (iniXPathPaginaGaleria + pagina + "']");
 	}
 
 	private static String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
@@ -607,7 +574,7 @@ public class PageGaleriaDesktop extends PageGaleria {
         }
     }
     
-    public void clickSliderAfterHoverArticle(WebElement articulo, ArrayList<TypeSlider> typeSliderList)
+    public void clickSliderAfterHoverArticle(WebElement articulo, List<TypeSlider> typeSliderList)
     throws Exception {
         //Click Sliders
         for (TypeSlider typeSlider : typeSliderList) {
@@ -635,22 +602,28 @@ public class PageGaleriaDesktop extends PageGaleria {
     
     public WebElement hoverSliderUntilClickable(TypeSlider typeSlider, WebElement article) {
     	String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
-    	WebElement slider = article.findElement(By.xpath("." + xpathSlider));
-    	hoverArticle(article);
-    	if (getTypeDriver(driver)!=WebDriverType.firefox) {
-    		isElementClickableUntil(driver, slider, 5);
-    	} else {
-    		//TODO En el caso de Firefox-Geckodriver hay problemas con los moveToElement. 
-    		//En este caso parece que se posiciona en la esquina superior izquierda
-    		//Cuando se solvente podremos eliminar este código específico
-    		Actions actions = new Actions(driver);
-    		int i=0;
-    		while (!isElementClickableUntil(driver, slider, 1) && i<5) {
-    			actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).build().perform();
-    			hoverArticle(article);
-    			i+=1;
-    		}
+    	for (int i=0; i<5; i++) {
+        	hoverArticle(article);
+	    	if (isElementClickableUntil(driver, By.xpath(xpathSlider), 2)) {
+	    		break;
+	    	}
+	    	moveToElement(article.findElement(By.xpath("//a")), driver);
     	}
+    	WebElement slider = article.findElement(By.xpath("." + xpathSlider));
+//    	if (getTypeDriver(driver)!=WebDriverType.firefox) {
+//    		isElementClickableUntil(driver, slider, 5);
+//    	} else {
+//    		//TODO En el caso de Firefox-Geckodriver hay problemas con los moveToElement. 
+//    		//En este caso parece que se posiciona en la esquina superior izquierda
+//    		//Cuando se solvente podremos eliminar este código específico
+//    		Actions actions = new Actions(driver);
+//    		int i=0;
+//    		while (!isElementClickableUntil(driver, slider, 1) && i<5) {
+//    			actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).build().perform();
+//    			hoverArticle(article);
+//    			i+=1;
+//    		}
+//    	}
     	
     	return slider;
     }
@@ -788,18 +761,18 @@ public class PageGaleriaDesktop extends PageGaleria {
             break;
         }        
     }
-    
-    @Override
-    public boolean isHeaderArticlesVisible(String textHeader) {
-    	By byHeader = By.xpath(XPathHeaderArticles);
-    	if (WebdrvWrapp.isElementVisible(driver, byHeader)) {
-    		return (driver.findElement(byHeader).getText().toLowerCase().contains(textHeader.toLowerCase()));
-    	}
-    	
-    	return false;
-    }
-    
-    @Override
+
+	@Override
+	public boolean isHeaderArticlesVisible(String textHeader) {
+		By byHeader = By.xpath(XPathHeaderArticles);
+		if (WebdrvWrapp.isElementVisible(driver, byHeader)) {
+			return (driver.findElement(byHeader).getText().toLowerCase().contains(textHeader.toLowerCase()));
+		}
+		
+		return false;
+	}
+
+	@Override
 	public StateFavorito getStateHearthIcon(WebElement hearthIcon) {
 		if (hearthIcon.getAttribute("class").contains("icon-fill")) {
 			return StateFavorito.Marcado;
@@ -807,13 +780,13 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return StateFavorito.Desmarcado;
 	}
 
-    public void clickLinkColumnas(NumColumnas numColumnas) throws Exception {
-        String xpathLink = getXPathLinkNumColumnas(numColumnas);
-        clickAndWaitLoad(driver, By.xpath(xpathLink));
-    }
-    
-    public boolean isPresentAnyArticle(TypeArticleDesktop typeArticle) {
-    	String xpathVideo = getXPathArticulo(typeArticle);
-    	return (isElementPresent(driver, By.xpath(xpathVideo)));
-    }
+	public void clickLinkColumnas(NumColumnas numColumnas) throws Exception {
+		String xpathLink = getXPathLinkNumColumnas(numColumnas);
+		clickAndWaitLoad(driver, By.xpath(xpathLink));
+	}
+
+	public boolean isPresentAnyArticle(TypeArticleDesktop typeArticle) {
+		String xpathVideo = getXPathArticulo(typeArticle);
+		return (isElementPresent(driver, By.xpath(xpathVideo)));
+	}
 }

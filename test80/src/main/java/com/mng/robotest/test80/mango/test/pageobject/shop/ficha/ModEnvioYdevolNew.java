@@ -13,14 +13,14 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 public class ModEnvioYdevolNew extends WebdrvWrapp {
 
-    static String XPathWrapper = "//div[@class='handling-modal-wrapper']";
-    static String XPathAspaForClose = XPathWrapper + "//span[@class[contains(.,'modal-close')]]";
-    
-    public static boolean isVisibleUntil(int maxSecondsToWait, WebDriver driver) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathWrapper), maxSecondsToWait));
-    }
-    
-    public static void clickAspaForClose(WebDriver driver) throws Exception {
-        clickAndWaitLoad(driver, By.xpath(XPathAspaForClose));
-    }
+	static String XPathWrapper = "//div[@class='handling-modal-wrapper']";
+	static String XPathAspaForClose = XPathWrapper + "//span[@class[contains(.,'modal-close')]]";
+
+	public static boolean isVisibleUntil(int maxSecondsToWait, WebDriver driver) {
+		return (isElementVisibleUntil(driver, By.xpath(XPathWrapper), maxSecondsToWait));
+	}
+
+	public static void clickAspaForClose(WebDriver driver) throws Exception {
+		clickAndWaitLoad(driver, By.xpath(XPathAspaForClose));
+	}
 }

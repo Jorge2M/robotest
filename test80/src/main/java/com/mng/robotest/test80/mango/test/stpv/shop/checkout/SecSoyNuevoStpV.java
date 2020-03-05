@@ -14,26 +14,26 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecSoyNuevo;
 import com.mng.robotest.test80.mango.test.pageobject.shop.checkout.SecSoyNuevo.ActionNewsL;
 
 public class SecSoyNuevoStpV {
-    
+
 	@Step (
-		description="Desmarcamos el check NewsLetter, introducmos el email y seleccionamos \"Continuar\"", 
-        expected="Aparece la página de introducción de datos del usuario")
-    public static void inputEmailAndContinue(String email, boolean emailExistsYet, AppEcom appE, boolean userRegistered, 
-    											  Pais pais, Channel channel, WebDriver driver) throws Exception {
-        SecSoyNuevo.setCheckPubliNewsletter(driver, ActionNewsL.deactivate, channel);
-        SecSoyNuevo.inputEmail(email, driver);
-        SecSoyNuevo.clickContinue(channel, driver);
-        
-        Page2IdentCheckoutStpV.validateIsPage(emailExistsYet, 2, driver);
-        if (!userRegistered && appE != AppEcom.votf) {
-        	Page2IdentCheckoutStpV.validaRGPDText(pais, driver);
-        }
-    }
-    
-    @SuppressWarnings("static-access")
-    @Validation
+		description="Desmarcamos el check NewsLetter, introducmos el email <b>#{emailExistsYet}</b> y seleccionamos \"Continuar\"", 
+		expected="Aparece la página de introducción de datos del usuario")
+	public static void inputEmailAndContinue(String email, boolean emailExistsYet, AppEcom appE, boolean userRegistered, 
+												  Pais pais, Channel channel, WebDriver driver) throws Exception {
+		SecSoyNuevo.setCheckPubliNewsletter(driver, ActionNewsL.deactivate, channel);
+		SecSoyNuevo.inputEmail(email, driver);
+		SecSoyNuevo.clickContinue(channel, driver);
+
+		Page2IdentCheckoutStpV.validateIsPage(emailExistsYet, 2, driver);
+		if (!userRegistered && appE != AppEcom.votf) {
+			Page2IdentCheckoutStpV.validaRGPDText(pais, driver);
+		}
+	}
+
+	@SuppressWarnings("static-access")
+	@Validation
 	public static ChecksTM validaRGPDText(DataCtxShop dCtxSh, WebDriver driver) {  
-    	ChecksTM validations = ChecksTM.getNew();
+		ChecksTM validations = ChecksTM.getNew();
 		if (dCtxSh.pais.getRgpd().equals("S")) {
 		 	validations.add(
 				"El texto de info de RGPD <b>SI</b> existe en el apartado de <b>Soy nuevo</b> para el pais " + dCtxSh.pais.getCodigo_pais(),

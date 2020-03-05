@@ -16,11 +16,11 @@ public class SecColoresArticuloDesktop {
 	}
 	
 	String getXPathColorArticle() {
-		if (app==AppEcom.outlet) {
-			return XPathColorsArticleOutlet;
-		} else {
+//		if (app==AppEcom.outlet) {
+//			return XPathColorsArticleOutlet;
+//		} else {
 			return XPathColorsArticleShop;
-		}
+//		}
 	}
 	
 	String getXPathImgColorRelativeArticle(boolean selected) {

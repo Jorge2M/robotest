@@ -291,35 +291,34 @@ public class SecMenusDesktopStpV {
         secMenus.secMenuSuperior.secCarrusel.clickCarrousel(pais, lineaType, idCarrusel);
         checkAfterSelectCarrusel(linea, idCarrusel);
     }
-    
-    @Validation
-    private ChecksTM checkAfterSelectCarrusel(Linea linea, String idCarrusel) throws Exception {
-    	ChecksTM validations = ChecksTM.getNew();
-    	LineaType lineaType = linea.getType();
-	    PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
 
-	    int maxSecondsWait = 3;
-      	validations.add(
-    		"Aparece algún artículo (lo esperamos hasta " + maxSecondsWait + " segundos)",
-    		pageGaleriaDesktop.isVisibleArticleUntil(1, maxSecondsWait), State.Info, true);
-      	validations.add(
-    		"El 1er artículo es de tipo " + linea.getType(),
-    		pageGaleriaDesktop.isArticleFromLinea(1, lineaType), State.Warn);
-	    if (lineaType!=LineaType.nuevo) {
-	      	validations.add(
-        		"El 1er artículo es de la línea " + idCarrusel,
-        		pageGaleriaDesktop.isArticleFromCarrusel(1, linea, idCarrusel), State.Warn);
-	    }
-	    boolean panoramEnLinea = (linea.getPanoramicas()!=null && linea.getPanoramicas().compareTo("s")==0);
-	    if (panoramEnLinea) {
-	      	validations.add(
-        		"Aparece algún artículo doble",
-        		pageGaleriaDesktop.getNumArticulos(TypeArticleDesktop.Doble)!=0, State.Warn);
-	    }
-	    	
-	    return validations;
-    }
-    
+	@Validation
+	private ChecksTM checkAfterSelectCarrusel(Linea linea, String idCarrusel) throws Exception {
+		ChecksTM validations = ChecksTM.getNew();
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(Channel.desktop, app, driver);
+
+		int maxSecondsWait = 3;
+		validations.add(
+			"Aparece algún artículo (lo esperamos hasta " + maxSecondsWait + " segundos)",
+			pageGaleriaDesktop.isVisibleArticleUntil(1, maxSecondsWait), State.Info, true);
+//			validations.add(
+//			"El 1er artículo es de tipo " + linea.getType(),
+//			pageGaleriaDesktop.isArticleFromLinea(1, lineaType), State.Warn);
+		if (linea.getType()!=LineaType.nuevo) {
+			validations.add(
+				"El 1er artículo es de la línea " + idCarrusel,
+				pageGaleriaDesktop.isArticleFromCarrusel(1, linea, idCarrusel), State.Warn);
+		}
+		boolean panoramEnLinea = (linea.getPanoramicas()!=null && linea.getPanoramicas().compareTo("s")==0);
+		if (panoramEnLinea) {
+			validations.add(
+				"Aparece algún artículo doble",
+				pageGaleriaDesktop.getNumArticulos(TypeArticleDesktop.Doble)!=0, State.Warn);
+		}
+	
+		return validations;
+	}
+
     @Step (
     	description=
     		"Seleccionar la <b style=\"color:chocolate\">Línea</b> " + 
