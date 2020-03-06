@@ -208,7 +208,7 @@ public class ConsolaVotfStpV {
 		PageConsola.switchToResultIFrame(driver);
 
 		checkAfterObtenerPedidosInIframe(codigoPedido, driver);
-		String codigoPedidoFull = IframeResult.getPedidoFromListaPedidos(driver, codigoPedido);
+		String codigoPedidoFull = IframeResult.getPedidoFromListaPedidosUntil(codigoPedido, 5, driver);
 		driver.switchTo().window(paginaPadre);
 		return codigoPedidoFull;
 	}
@@ -219,8 +219,8 @@ public class ConsolaVotfStpV {
 			return codigoPedido;
 		}
 		
-		checkIsPresentPedidoInList(codigoPedido, driver);
-		return IframeResult.getPedidoFromListaPedidos(driver, codigoPedido);
+		checkIsPresentPedidoInList(codigoPedido, 5, driver);
+		return IframeResult.getPedidoFromListaPedidosUntil(codigoPedido, 1, driver);
 	}
 	
 	@Validation (
@@ -231,10 +231,10 @@ public class ConsolaVotfStpV {
 	}
 	
 	@Validation (
-		description = "En la lista de pedidos aparece el generado anteriormente: #{codigoPedido}",
+		description = "En la lista de pedidos aparece el generado anteriormente: #{codigoPedido} (lo esperamos hasta #{maxSeconds} segundos)",
 		level=State.Defect)
-	private static boolean checkIsPresentPedidoInList(String codigoPedido, WebDriver driver) throws Exception {
-		String codigoPedidoFull = IframeResult.getPedidoFromListaPedidos(driver, codigoPedido);
+	private static boolean checkIsPresentPedidoInList(String codigoPedido, int maxSeconds, WebDriver driver) throws Exception {
+		String codigoPedidoFull = IframeResult.getPedidoFromListaPedidosUntil(codigoPedido, maxSeconds, driver);
 	 	return "".compareTo(codigoPedidoFull)!=0;
 	}
 
