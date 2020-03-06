@@ -3,7 +3,7 @@ package com.mng.robotest.test80.mango.test.suites;
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.test80.access.InputParamsMango;
-import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
+import com.mng.robotest.test80.mango.conftestmaker.ErrorStorer;
 import com.mng.robotest.test80.mango.test.appmanto.Manto;
 import com.mng.testmaker.domain.SuiteMaker;
 import com.mng.testmaker.domain.TestRunMaker;
@@ -14,7 +14,7 @@ public class SmokeMantoSuite extends SuiteMaker {
     	super(inputParams);
     	setParameters(SuiteMakerResources.getParametersSuiteShop(inputParams));
     	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), Manto.class);
-    	testRun.setStorerErrorStep(new StorerErrorDataStepValidationMango());
+    	testRun.setStorerErrorStep(new ErrorStorer());
     	addTestRun(testRun);
     	setParallelMode(ParallelMode.METHODS);
     	setThreadCount(3);

@@ -57,6 +57,6 @@ public class ValidationAspect {
     		checksResult.getStepParent().setNOKstateByDefault();
     	}
     	checksResult.checkValidations();
-    	step.storeEvidencies();
+    	//step.storeEvidencies();
     }
 }

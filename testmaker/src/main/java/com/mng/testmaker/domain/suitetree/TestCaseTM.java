@@ -1,7 +1,11 @@
 package com.mng.testmaker.domain.suitetree;
 
-
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +20,7 @@ import com.mng.testmaker.domain.SuitesExecuted;
 
 public class TestCaseTM  {
 
+	private final int invocationCount;
 	private List<StepTM> listSteps = new ArrayList<>();
 	private StateExecution stateRun = StateExecution.Started;
 	private State state = State.Ok;
@@ -30,6 +35,7 @@ public class TestCaseTM  {
 		this.testRunParent = (TestRunTM)result.getTestContext().getCurrentXmlTest();
 		this.suiteParent = (SuiteTM)testRunParent.getSuite();
 		this.result = result;
+		this.invocationCount = makeInvocationCount();
 		this.threadId = Thread.currentThread().getId();
 //		if (suiteParent.getStateExecution()!=StateExecution.Stopping) {
 //			this.driver = getWebDriverForTestCase();
@@ -42,8 +48,29 @@ public class TestCaseTM  {
 		this.driver = getWebDriverForTestCase();
 	}
 	
+	private int makeInvocationCount() {
+		int maxCount = 0;
+		List<TestCaseTM> listTestCases = testRunParent.getListTestCases();
+		for (TestCaseTM testCaseTM : listTestCases) {
+			if (testCaseTM.getNameUnique().compareTo(getNameUnique())==0) {
+				if (testCaseTM.getInvocationCount() > invocationCount) {
+					maxCount = testCaseTM.getInvocationCount();
+				}
+			}
+		}
+		return maxCount + 1;
+	}
+	
+	public int getInvocationCount() {
+		return invocationCount;
+	}
+	
 	public String getNameUnique() {
-		return result.getName() + getRefineDataName();
+		String nameTest = result.getName() + getRefineDataName();
+		if (getInvocationCount()>1) {
+			nameTest+="(" + getInvocationCount() + ")";
+		}
+		return nameTest;
 	}
 	
 	public void end(State state) {
@@ -79,12 +106,27 @@ public class TestCaseTM  {
 		return this.state;
 	}
 	
+	public String getTestPathDirectory() {
+		SuiteTM suiteParent = getSuiteParent();
+		String suitePath = SuiteTM.getPathDirectory(
+				suiteParent.getName(), 
+				suiteParent.getIdExecution());
+		
+		TestRunTM testRunParent = getTestRunParent();
+		String testPath = 
+			suitePath + File.separator + 
+			testRunParent.getName() + File.separator +
+			getNameUnique();
+		
+		return testPath;
+	}
+	
 	public static TestCaseTM getTestCase(ITestResult result) {
 		for (SuiteTM suite : SuitesExecuted.getSuitesExecuted()) {
 			for (TestRunTM testRun : suite.getListTestRuns()) {
 				for (TestCaseTM testCase : testRun.getListTestCases()) {
 					if (testCase!=null) {
-						if (testCase.getResult()==result) {
+						if (testCase.getResult().equals(result)) {
 							return testCase;
 						}
 					}
@@ -116,9 +158,11 @@ public class TestCaseTM  {
 	public void addStep(StepTM step) {
 		listSteps.add(step);
 	}
-	
 	public List<StepTM> getListStep() {
 		return this.listSteps;
+	}
+	public void setListStep(List<StepTM> listSteps) {
+		this.listSteps = listSteps;
 	}
 
 	private State getStateFromSteps() {
@@ -213,6 +257,7 @@ public class TestCaseTM  {
 		testCaseBean.setDescription(getResult().getMethod().getDescription());
 		testCaseBean.setIndexInTestRun(getIndexInTestRun());
 		testCaseBean.setResult(getStateResult());
+		testCaseBean.setStatusTng(getResult().getStatus());
 		
 		Date inicio = new Date(getResult().getStartMillis());
 		Date fin = new Date(getResult().getEndMillis());
@@ -222,6 +267,7 @@ public class TestCaseTM  {
 		
 		testCaseBean.setNumberSteps(getListStep().size());
 		testCaseBean.setClassSignature(getResult().getInstanceName());
+		testCaseBean.setThrowable(toStringB64(getResult().getThrowable()));
 		
 		List<StepTM> listStepBean = new ArrayList<>();
 		for (StepTM step : getListStep()) {
@@ -230,5 +276,19 @@ public class TestCaseTM  {
 		testCaseBean.setListStep(listStepBean);
 		
 		return testCaseBean;
+	}
+
+	/** Write the object to a Base64 string. */
+	private static String toStringB64(Serializable o) {
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream( baos );
+			oos.writeObject( o );
+			oos.close();
+			return Base64.getEncoder().encodeToString(baos.toByteArray()); 
+		}
+		catch (Exception e) {
+			return null;
+		}
 	}
 }

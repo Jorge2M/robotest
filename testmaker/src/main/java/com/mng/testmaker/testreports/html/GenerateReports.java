@@ -24,12 +24,11 @@ import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.domain.suitetree.StepTM;
-import com.mng.testmaker.domain.suitetree.StepEvidence;
 import com.mng.testmaker.domain.suitetree.SuiteBean;
 import com.mng.testmaker.domain.suitetree.SuiteTM;
 import com.mng.testmaker.domain.suitetree.TestCaseBean;
 import com.mng.testmaker.domain.suitetree.TestRunBean;
-
+import com.mng.testmaker.testreports.stepstore.StepEvidence;
 
 public class GenerateReports extends EmailableReporter {
 	
@@ -217,9 +216,8 @@ public class GenerateReports extends EmailableReporter {
     	boolean timeout = false;
     	int stepNumber = 0;
         for (StepTM step : testCase.getListStep()) {
-        	StoreStepEvidencies storerError = new StoreStepEvidencies(step);
             stepNumber+=1;
-            String ImageFileStep = storerError.getPathFileEvidenciaStep(StepEvidence.imagen);
+            String ImageFileStep = StepEvidence.imagen.getPathFile(step);
             File indexFile = new File(ImageFileStep);
             String litPNGNewStep = "";
             String PNGNewStep = "#";
@@ -228,14 +226,14 @@ public class GenerateReports extends EmailableReporter {
                 PNGNewStep = getRelativePathEvidencia(step, StepEvidence.imagen);
             }
 
-            String ErrorFileStep = storerError.getPathFileEvidenciaStep(StepEvidence.errorpage);
+            String ErrorFileStep = StepEvidence.errorpage.getPathFile(step);
             indexFile = new File(ErrorFileStep);
             String linkErrorNew = "";
             if (indexFile.exists()) {
                 linkErrorNew = " \\ <a href=\"" + getRelativePathEvidencia(step, StepEvidence.errorpage) + "\" target=\"_blank\">ErrorPage</a>";
             }
 
-            String HARPFileStep = storerError.getPathFileEvidenciaStep(StepEvidence.harp);
+            String HARPFileStep = StepEvidence.harp.getPathFile(step);
             indexFile = new File(HARPFileStep);
             String linkHarpNew = "";
             if (indexFile.exists()) {
@@ -246,14 +244,14 @@ public class GenerateReports extends EmailableReporter {
                 linkHarpNew = " \\ <a href=\"" + ConstantesTM.URL_SOFTWAREISHARD + pathHARP + "\" target=\"_blank\">NetTraffic</a>";
             }
             
-            String HARFileStep = storerError.getPathFileEvidenciaStep(StepEvidence.har);
+            String HARFileStep = StepEvidence.har.getPathFile(step);
             String linkHarNew = "";
             indexFile = new File(HARFileStep);
             if (indexFile.exists()) {
                 linkHarNew = " \\ <a href=\"" + getRelativePathEvidencia(step, StepEvidence.har) + "\" target=\"_blank\">NetJSON</a>";
             }
 
-            String HtmlFileStep = storerError.getPathFileEvidenciaStep(StepEvidence.html);
+            String HtmlFileStep = StepEvidence.html.getPathFile(step);
             indexFile = new File(HtmlFileStep);
             String linkHtmlNew = "";
             if (indexFile.exists()) {
@@ -292,36 +290,35 @@ public class GenerateReports extends EmailableReporter {
     }
 
 	private String getRelativePathEvidencia(StepTM step, StepEvidence evidence) {
-		StoreStepEvidencies storer = new StoreStepEvidencies(step);
-		String fileName = storer.getNameFileEvidenciaStep(evidence);
+		String fileName = evidence.getNameFileEvidence(step);
 		String testRunName = step.getTestRunParent().getName();
 		String testCaseNameUnique = step.getTestCaseParent().getNameUnique();
 		return ("./" + testRunName + "/" + testCaseNameUnique + "/" + fileName);
 	}
-    
-    private void pintaValidacionesStep(StepTM step) {
-    	List<ChecksTM> listChecksResult = step.getListChecksTM();
-        for (ChecksTM checksResult : listChecksResult) {
-            String descriptValid = checksResult.getHtmlValidationsBrSeparated();
-            reportHtml+= 
-            	"<tr class=\"validation collapsed\"" + " met=\"" + step.getTestCaseParent().getIndexInTestRun() + "\">" +
-            	"    <td style=\"display:none;\"></td>\n" + 
-            	"    <td class=\"nowrap\">Validation " + checksResult.getPositionInStep() + "</td>" + 
-            	"    <td></td>" + 
-            	"    <td></td>" + 
-            	"    <td><div class=\"result" + checksResult.getStateValidation() + "\">" + checksResult.getStateValidation() + "</div></td>" + 
-            	"    <td></td>" + 
-            	"    <td></td>" + 
-            	"    <td></td>" + 
-            	"    <td>" + descriptValid + "</td>" + 
-            	"    <td></td>" +
-            	"    <td></td>" + 
-                "    <td></td>" +                        
-                "    <td>" + checksResult.getNameClass() + " / " + checksResult.getNameMethod() + "</td>" + 
-                "</tr>\n";
-        }
-    }
-    
+
+	private void pintaValidacionesStep(StepTM step) {
+		List<ChecksTM> listChecksResult = step.getListChecksTM();
+		for (ChecksTM checksResult : listChecksResult) {
+			String descriptValid = checksResult.getHtmlValidationsBrSeparated();
+			reportHtml+= 
+				"<tr class=\"validation collapsed\"" + " met=\"" + step.getTestCaseParent().getIndexInTestRun() + "\">" +
+				"    <td style=\"display:none;\"></td>\n" + 
+				"    <td class=\"nowrap\">Validation " + checksResult.getPositionInStep() + "</td>" + 
+				"    <td></td>" + 
+				"    <td></td>" + 
+				"    <td><div class=\"result" + checksResult.getStateValidation() + "\">" + checksResult.getStateValidation() + "</div></td>" + 
+				"    <td></td>" + 
+				"    <td></td>" + 
+				"    <td></td>" + 
+				"    <td>" + descriptValid + "</td>" + 
+				"    <td></td>" +
+				"    <td></td>" + 
+				"    <td></td>" +                        
+				"    <td>" + checksResult.getNameClass() + " / " + checksResult.getNameMethod() + "</td>" + 
+				"</tr>\n";
+		}
+	}
+
     public void pintaCierreHTML() {
     	reportHtml+=
         	"</tbody>" + 

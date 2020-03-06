@@ -18,7 +18,7 @@ import com.mng.robotest.test80.mango.test.suites.*;
 
 public class CmdRunTests { 
 	
-	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger);
+	static Logger pLogger = LogManager.getLogger(Log4jConfig.log4jLogger); 
 
 	enum TypeCallbackSchema {http, https}
 	public enum TypeCallBackMethod {POST, GET}

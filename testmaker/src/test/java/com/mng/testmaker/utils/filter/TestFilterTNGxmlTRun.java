@@ -62,7 +62,7 @@ public class TestFilterTNGxmlTRun {
         
         TestMethod methodIncluded = testStub.getListTests().get(0);
         String methodNameExpected = testStub.getMethodsIncludedInClass().get(0);
-        assertEquals("The description is " + descriptionExpected, descriptionExpected, methodIncluded.getAnnotationTest().description());
+        assertEquals("The description is " + descriptionExpected, descriptionExpected, methodIncluded.getDescription());
         assertEquals("The method is " + methodNameExpected, methodNameExpected, methodIncluded.getMethod().getName());
     }
     

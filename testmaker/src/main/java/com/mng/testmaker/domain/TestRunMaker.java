@@ -17,7 +17,7 @@ import com.mng.testmaker.domain.suitetree.TestRunTM;
 import com.mng.testmaker.domain.testfilter.FilterTestsSuiteXML;
 import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackDesktop;
 import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackMobil;
-import com.mng.testmaker.testreports.html.StorerErrorStep;
+import com.mng.testmaker.testreports.stepstore.EvidenceStorer;
 
 public class TestRunMaker {
 
@@ -27,7 +27,7 @@ public class TestRunMaker {
     
     private List<String> groups = new ArrayList<>();
     private Map<String,String> dependencyGroups = new HashMap<>();
-    private StorerErrorStep storerErrorStep = null;
+    private EvidenceStorer storerErrorStep = null;
 	private BrowserStackDesktop browserStackDesktop = null;
 	private BrowserStackMobil browserStackMobil = null;
     
@@ -65,7 +65,7 @@ public class TestRunMaker {
     	this.dependencyGroups.putAll(dependencyGroups);
     }
     
-    public void setStorerErrorStep(StorerErrorStep storerErrorStep) {
+    public void setStorerErrorStep(EvidenceStorer storerErrorStep) {
     	this.storerErrorStep = storerErrorStep;
     }
     

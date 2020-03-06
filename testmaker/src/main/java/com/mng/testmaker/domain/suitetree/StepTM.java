@@ -11,8 +11,9 @@ import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.StateExecution;
 import com.mng.testmaker.domain.util.ParsePathClass;
 import com.mng.testmaker.service.TestMaker;
-import com.mng.testmaker.testreports.html.NetTrafficSaver;
-import com.mng.testmaker.testreports.html.StoreStepEvidencies;
+import com.mng.testmaker.testreports.stepstore.StepEvidence;
+import com.mng.testmaker.testreports.stepstore.EvidencesWarehouse;
+import com.mng.testmaker.testreports.stepstore.NettrafficStorer;
 
 public class StepTM {
 
@@ -27,10 +28,12 @@ public class StepTM {
 	private SaveWhen saveErrorPage = SaveWhen.IfProblem;
 	private SaveWhen saveHtmlPage = SaveWhen.Never;
 	private SaveWhen saveNettraffic= SaveWhen.Never;
+	private EvidencesWarehouse evidencesWarehouse;
+
 	private String pathMethod;
 	private int type_page; 
-	private Date hora_inicio; 
-	private Date hora_fin;
+	private long timeInicio = 0;
+	private long timeFin = 0;
 	private State result_steps = State.Ok;
 	private boolean excepExists = true;
 	private StateExecution state = StateExecution.Started;
@@ -38,6 +41,7 @@ public class StepTM {
 	
 	public StepTM() {
 		testCase = TestMaker.getTestCase();
+		evidencesWarehouse = new EvidencesWarehouse(this);
 		if (testCase!=null) {
 			testRun = testCase.getTestRunParent();
 			suite = testRun.getSuiteParent();
@@ -49,6 +53,11 @@ public class StepTM {
 	
 	public TestCaseTM getTestCaseParent() {
 		return testCase;
+	}
+	public void setParents(TestCaseTM testCase) {
+		this.testCase = testCase;
+		this.testRun = testCase.getTestRunParent();
+		this.suite = testRun.getSuiteParent();
 	}
 	public TestRunTM getTestRunParent() {
 		return testRun;
@@ -62,6 +71,7 @@ public class StepTM {
 	public String getOutputDirectorySuite() {
 		return getTestRunParent().getTestNgContext().getOutputDirectory();
 	}
+	
 	public int getNumber() {
 		List<StepTM> listSteps = getTestCaseParent().getListStep();
 		for (int i=0; i<listSteps.size(); i++) {
@@ -77,15 +87,22 @@ public class StepTM {
 		if (exceptionReceived) {
 			setResultSteps(State.Nok);
 		}
-		storeEvidencies();
-		setHoraFin(new Date(System.currentTimeMillis()));
+		captureAndStoreEvidences();
+		setTimeFin(System.currentTimeMillis());
 		setState(StateExecution.Finished);
 	}
-	public void storeEvidencies() {
-		StoreStepEvidencies storerEvidencies = new StoreStepEvidencies(this);
-		storerEvidencies.storeStepEvidencies();
+	
+	public String getPathDirectory() {
+		return testCase.getTestPathDirectory();
 	}
 	
+	public void captureAndStoreEvidences() {
+		evidencesWarehouse.captureAndStore();
+	}
+	public void moveContentEvidencesToFile() {
+		evidencesWarehouse.moveContentEvidencesToFile();
+	}
+
 	public List<ChecksTM> getListChecksTM() {
 		return listChecksTM;
 	}
@@ -131,10 +148,18 @@ public class StepTM {
 	public void setSaveNettrafic(SaveWhen saveNettraffic) {
 		if (suite.getInputParams().isNetAnalysis()) {
 			this.saveNettraffic = saveNettraffic;
-			NetTrafficSaver netTraffic = new NetTrafficSaver();
+			NettrafficStorer netTraffic = new NettrafficStorer();
 			netTraffic.resetAndStartNetTraffic();
 		}
 	}
+
+	public EvidencesWarehouse getEvidencesWarehouse() {
+		return evidencesWarehouse;
+	}
+	public void setEvidencesWarehouse(EvidencesWarehouse evidencesWarehouse) {
+		this.evidencesWarehouse = evidencesWarehouse;
+	}
+
 	public String getPathMethod() {
 		return pathMethod;
 	}
@@ -148,17 +173,24 @@ public class StepTM {
 		this.type_page = type_page;
 	}
 	public Date getHoraInicio() {
-		return hora_inicio;
-	}
-	public void setHoraInicio(Date hora_inicio) {
-		this.hora_inicio = hora_inicio;
+		return new Date(getTimeInicio());
 	}
 	public Date getHoraFin() {
-		return hora_fin;
+		return new Date(getTimeFin());
 	}
-	public void setHoraFin(Date hora_fin) {
-		this.hora_fin = hora_fin;
+	public long getTimeInicio() {
+		return timeInicio;
 	}
+	public void setTimeInicio(long timeInicio) {
+		this.timeInicio = timeInicio;
+	}
+	public long getTimeFin() {
+		return timeFin;
+	}
+	public void setTimeFin(long timeFin) {
+		this.timeFin = timeFin;
+	}
+
 	public State getResultSteps() {
 		return result_steps;
 	}
@@ -229,6 +261,21 @@ public class StepTM {
 		default:
 			return saveImagePage;
 		}
+	}
+	public boolean isNecessaryStorage(StepEvidence evidencia) {
+		SaveWhen saveEvidenceWhen = getWhenSave(evidencia);
+		switch (saveEvidenceWhen) {
+		case Always:
+			return true;
+		case Never:
+			return false;
+		case IfProblem:
+			if (getResultSteps()!=State.Ok &&
+				!isAllValidationsWithAvoidEvidences()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean isAllValidationsWithAvoidEvidences() {

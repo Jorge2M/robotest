@@ -14,7 +14,7 @@ import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.StateExecution;
 import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackDesktop;
 import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackMobil;
-import com.mng.testmaker.testreports.html.StorerErrorStep;
+import com.mng.testmaker.testreports.stepstore.EvidenceStorer;
 
 public class TestRunTM extends XmlTest {
 
@@ -23,7 +23,7 @@ public class TestRunTM extends XmlTest {
 	private State state = State.Ok;
 	public XmlGroups x_xmlGroupsVisible;
 	private ITestContext testNgContext;
-	private StorerErrorStep storerErrorStep = null;
+	private EvidenceStorer storerErrorEvidence = null;
 	private List<TestCaseTM> listTestCases = new ArrayList<>();
 	private BrowserStackDesktop browserStackDesktop = null;
 	private BrowserStackMobil browserStackMobil = null;
@@ -78,12 +78,12 @@ public class TestRunTM extends XmlTest {
 		setTestRunOutputDirectory(suiteDirectory);
 	}
 
-	public StorerErrorStep getStorerErrorStep() {
-		return storerErrorStep;
+	public EvidenceStorer getStorerErrorEvidence() {
+		return storerErrorEvidence;
 	}
 
-	public void setStorerErrorStep(StorerErrorStep storerErrorStep) {
-		this.storerErrorStep = storerErrorStep;
+	public void setStorerErrorStep(EvidenceStorer storerErrorEvidence) {
+		this.storerErrorEvidence = storerErrorEvidence;
 	}
 
 	private void setTestRunOutputDirectory(String outputDirectory) {

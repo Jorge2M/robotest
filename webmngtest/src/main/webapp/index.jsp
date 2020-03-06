@@ -227,7 +227,7 @@ for (SuiteTestData suiteTest : listTestSuites) {
 																					selected = "selected";
 																				}
 						%>
-								<option value="<%=testMethod.getMethod().getName()%>" <%=selected%> title="<%=testMethod.getAnnotationTest().description()%>"><%=testMethod.getMethod().getName()%></option>
+								<option value="<%=testMethod.getMethod().getName()%>" <%=selected%> title="<%=testMethod.getDescription()%>"><%=testMethod.getMethod().getName()%></option>
 						<%
 							}
 						%>

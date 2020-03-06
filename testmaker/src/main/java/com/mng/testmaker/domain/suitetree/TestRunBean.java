@@ -86,6 +86,4 @@ public class TestRunBean {
 	public void setListTestCase(List<TestCaseBean> listTestCase) {
 		this.listTestCase = listTestCase;
 	}
-	
-
 }

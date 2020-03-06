@@ -16,11 +16,13 @@ public class TestCaseBean {
 	private String description;
 	private int indexInTestRun;
 	private State result;
+	private int statusTng;
 	private Date inicioDate;
 	private Date finDate; 
 	private float durationMillis;
 	private int numberSteps;
 	private String classSignature;
+	private String throwable;
 
 	public List<StepTM> getListStep() {
 		return listStep;
@@ -76,6 +78,12 @@ public class TestCaseBean {
 	public void setResult(State result) {
 		this.result = result;
 	}
+	public int getStatusTng() {
+		return statusTng;
+	}
+	public void setStatusTng(int statusTng) {
+		this.statusTng = statusTng;
+	}
 	public Date getInicioDate() {
 		return inicioDate;
 	}
@@ -106,4 +114,11 @@ public class TestCaseBean {
 	public void setClassSignature(String classSignature) {
 		this.classSignature = classSignature;
 	}
+	public String getThrowable() {
+		return throwable;
+	}
+	public void setThrowable(String throwable) {
+		this.throwable = throwable;
+	}
+
 }

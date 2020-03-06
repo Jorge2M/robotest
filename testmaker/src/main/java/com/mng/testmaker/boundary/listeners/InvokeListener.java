@@ -39,10 +39,10 @@ public class InvokeListener extends TestListenerAdapter implements ISuiteListene
 	}
 
 	@Override //Start TestCase
-	public void onTestStart(ITestResult result) {
+	public synchronized void onTestStart(ITestResult result) {
 		TestRunTM testRun = getTestRun(result);
 		TestCaseTM testCase = new TestCaseTM(result);
-		testCase.makeWebDriver();
+		//testCase.makeWebDriver();
 		testRun.addTestCase(testCase);
 	}
 

@@ -1,4 +1,4 @@
-package com.mng.testmaker.boundary.aspects.test;
+package com.mng.testmaker.boundary.aspects.test.remote;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;

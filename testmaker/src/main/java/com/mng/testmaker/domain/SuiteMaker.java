@@ -15,6 +15,7 @@ import com.mng.testmaker.conf.defaultmail.DefaultMailEndSuite;
 import com.mng.testmaker.domain.suitetree.SuiteTM;
 import com.mng.testmaker.domain.testfilter.FilterTestsSuiteXML;
 import com.mng.testmaker.domain.testfilter.TestMethod;
+import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.testmaker.testreports.html.Reporter;
 
 public abstract class SuiteMaker {
@@ -37,9 +38,10 @@ public abstract class SuiteMaker {
 		this.filterSuiteXML = FilterTestsSuiteXML.getNew(inputData.getDataFilter());
 	}
 	
-    private static String makeIdSuiteExecution() {
+    private static synchronized String makeIdSuiteExecution() {
         Calendar c1 = Calendar.getInstance();
         String timestamp = new SimpleDateFormat("yyMMdd_HHmmssSS").format(c1.getTime());
+        WebdrvWrapp.waitMillis(1);
         return (timestamp);
     }
 	

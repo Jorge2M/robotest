@@ -26,8 +26,8 @@ public class SuiteTM extends XmlSuite {
 	private long threadId;
 	private StateExecution stateExecution = StateExecution.NotStarted;
 	private State result = State.Ok;
-	private Date inicio;
-	private Date fin;
+	private long timeInicio = 0;
+	private long timeFin = 0;
 	private final PoolWebDrivers poolWebDrivers = new PoolWebDrivers();
 	private SenderMailEndSuiteI senderMail;
 	
@@ -41,7 +41,7 @@ public class SuiteTM extends XmlSuite {
 	public String getIdExecution() {
 		return idSuiteExecution;
 	}
-	
+
 	public long getThreadId() {
 		return threadId;
 	}
@@ -89,7 +89,7 @@ public class SuiteTM extends XmlSuite {
 	public void start() {
 		this.threadId = Thread.currentThread().getId();
 		stateExecution = StateExecution.Started;
-		inicio = new Date(); 
+		timeInicio = (new Date()).getTime(); 
     	SuitesExecuted.add(this);
 		if (inputParams.isStoreResult()) {
 			TestMaker.getRepository().storeSuite(this);
@@ -99,7 +99,7 @@ public class SuiteTM extends XmlSuite {
 	public void end() {
 		stateExecution = StateExecution.Finished;
 		result = getResultFromTestsRun();
-		fin = new Date(); 
+		timeFin = (new Date()).getTime(); 
 		poolWebDrivers.removeAllStrWd();
 		if (inputParams.isSendMailInEndSuite()) {
 			senderMail.sendMail(this);
@@ -121,18 +121,27 @@ public class SuiteTM extends XmlSuite {
 	}
 	
 	public Date getInicio() {
-		return inicio;
+		return new Date(getTimeInicio());
 	}
-	
 	public Date getFin() {
-		return fin;
+		return new Date(getTimeFin());
 	}
 	
+	public long getTimeInicio() {
+		return timeInicio;
+	}
+	public void setTimeInicio(long timeInicio) {
+		this.timeInicio = timeInicio;
+	}
+	public long getTimeFin() {
+		return timeFin;
+	}
+	public void setTimeFin(long timeFin) {
+		this.timeFin = timeFin;
+	}
+
 	public long getDurationMillis() {
-		if (fin!=null && inicio!=null) {
-			return fin.getTime() - inicio.getTime();
-		}
-		return 0;
+		return timeFin - timeInicio;
 	}
 	
 	public void setListenersClass(List<Class<?>> listListeners) {
@@ -197,5 +206,19 @@ public class SuiteTM extends XmlSuite {
 		
 		return suiteBean;
 	}
-
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj==this) {
+			return true;
+		}
+		return false;
+//		if (!(obj instanceof SuiteTM)) {
+//			return false;
+//		}
+//		SuiteTM suite = (SuiteTM)obj;
+//		return (
+//			getIdExecution().compareTo(suite.getIdExecution())==0 &&
+//			getThreadId()==suite.getThreadId());
+	}
 }

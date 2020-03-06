@@ -9,7 +9,7 @@ import com.mng.testmaker.domain.util.ParsePathClass;
 
 public class ChecksTM {
 	
-	private final List<Check> listChecks = new ArrayList<>();
+	private List<Check> listChecks = new ArrayList<>();
 	private State stateValidation = State.Ok;
 	private boolean avoidEvidences;
 	private String pathMethod;
@@ -54,6 +54,13 @@ public class ChecksTM {
 		return listChecks;
 	}
 	
+	public void setParents(StepTM step) {
+		this.stepParent = step;
+		this.testCaseParent = stepParent.getTestCaseParent();
+		this.testRunParent = testCaseParent.getTestRunParent();
+		this.suiteParent = testRunParent.getSuiteParent();
+	}
+	
 	public SuiteTM getSuiteParent() {
 		return this.suiteParent;
 	}
@@ -87,6 +94,9 @@ public class ChecksTM {
 	}
 	public List<Check> getListChecks() {
 		return listChecks;
+	}
+	public void setListChecks(List<Check> listChecks) {
+		this.listChecks = listChecks;
 	}
 	
 	public String getPathClass() {

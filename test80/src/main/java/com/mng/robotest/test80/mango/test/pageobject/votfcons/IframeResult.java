@@ -74,10 +74,24 @@ public class IframeResult extends WebdrvWrapp {
         return codigoPedido;
     }
     
+    
+    
 	/**
 	 * @return un pedido en formato largo (+2 dígitos) de los que aparece en la lista de pedidos (resultante de selección del botón "Obtener Pedidos") a partir de un pedido en formato corto
 	 */
-	public static String getPedidoFromListaPedidos(WebDriver driver, String codPedidoShort) throws Exception {
+	public static String getPedidoFromListaPedidosUntil(String codPedidoShort, int maxSeconds, WebDriver driver) throws Exception {
+		String pedido = "";
+		for (int i=0; i<maxSeconds; i++) {
+			pedido = getPedidoFromListaPedidos(codPedidoShort, driver);
+			if ("".compareTo(pedido)!=0) {
+				return pedido;
+			}
+			waitMillis(1000);
+		}
+		return pedido;
+	}
+	
+	private static String getPedidoFromListaPedidos(String codPedidoShort, WebDriver driver) throws Exception {
 		String pedidoFull = "";
 		waitForPageLoaded(driver);
 		List<WebElement> listPedidos = driver.findElements(By.xpath(XPathBlockListaPedidosFull));

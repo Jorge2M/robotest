@@ -11,7 +11,7 @@ import org.testng.xml.XmlSuite.ParallelMode;
 import com.mng.testmaker.domain.SuiteMaker;
 import com.mng.testmaker.domain.TestRunMaker;
 import com.mng.robotest.test80.access.InputParamsMango;
-import com.mng.robotest.test80.mango.conftestmaker.StorerErrorDataStepValidationMango;
+import com.mng.robotest.test80.mango.conftestmaker.ErrorStorer;
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.factoryes.ListPrecompraPaises;
 
@@ -56,7 +56,7 @@ public class PagosPaisesSuite extends SuiteMaker {
     	List<Class<?>> listTestClasses = Arrays.asList(ListPrecompraPaises.class);
     	if (!isBrowserStack(inputParams.getWebDriverType())) {
 	    	TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), listTestClasses);
-	    	testRun.setStorerErrorStep(new StorerErrorDataStepValidationMango());
+	    	testRun.setStorerErrorStep(new ErrorStorer());
 	    	addTestRun(testRun);
 	    	setParallelMode(ParallelMode.METHODS);
 	    	setThreadCount(4);

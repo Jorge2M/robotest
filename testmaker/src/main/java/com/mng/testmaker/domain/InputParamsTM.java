@@ -36,6 +36,7 @@ public abstract class InputParamsTM {
 	public static final String TCaseNameParam = "tcases";
 	public static final String ServerDNSNameParam = "serverDNS";
 	public static final String AsyncExecParam = "asyncexec";
+	public static final String RemoteParam = "remote";
 	public static final String RecicleWDParam = "reciclewd";
 	public static final String NetAnalysisParam = "net";
 	public static final String StoreParam = "store";
@@ -84,6 +85,9 @@ public abstract class InputParamsTM {
 	
 	@FormParam(AsyncExecParam)
 	String asyncexec;
+	
+	@FormParam(RemoteParam)
+	String remote;
 
 	@FormParam(NetAnalysisParam)
 	String net;
@@ -210,6 +214,13 @@ public abstract class InputParamsTM {
 			.possibleValues(Arrays.asList("true", "false"))
 			.desc("Execution Asynchronous (true, false)")
 			.build());
+		
+		optionsTM.add(OptionTMaker.builder(InputParamsTM.RemoteParam)
+			.required(false)
+			.hasArgs()
+			.possibleValues(Arrays.asList("true", "false"))
+			.desc("Remote Execution (true, false)")
+			.build());
 
 		optionsTM.add(OptionTMaker.builder(InputParamsTM.NetAnalysisParam)
 			.required(false)
@@ -279,6 +290,7 @@ public abstract class InputParamsTM {
 		}
 		reciclewd = cmdLine.getOptionValue(RecicleWDParam);
 		asyncexec = cmdLine.getOptionValue(AsyncExecParam);
+		remote = cmdLine.getOptionValue(RemoteParam);
 		net = cmdLine.getOptionValue(NetAnalysisParam);
 		store = cmdLine.getOptionValue(StoreParam);
 		typeAccess = cmdLine.getOptionValue(TypeAccessParam);
@@ -298,6 +310,7 @@ public abstract class InputParamsTM {
 		ServerDNS(ServerDNSNameParam),
 		RecicleWD(RecicleWDParam),
 		AsyncExec(AsyncExecParam),
+		Remote(RemoteParam),
 		NetAnalysis(NetAnalysisParam),
 		Store(StoreParam),
 		Mails(MailsParam),
@@ -346,6 +359,8 @@ public abstract class InputParamsTM {
 			return this.reciclewd;
 		case AsyncExec:
 			return this.asyncexec;
+		case Remote:
+			return this.remote;
 		case NetAnalysis:
 			return this.net;
 		case Store:
@@ -533,6 +548,15 @@ public abstract class InputParamsTM {
 			return ("true".compareTo(asyncexec)==0);
 		}
 		return true;
+	} 
+	public void setRemote(String remote) {
+		this.remote = remote;
+	}
+	public boolean isRemote() {
+		if (remote!=null) {
+			return ("true".compareTo(remote)==0);
+		}
+		return false;
 	} 
 	public void setNetAnalysis(String net) {
 		this.net = net;

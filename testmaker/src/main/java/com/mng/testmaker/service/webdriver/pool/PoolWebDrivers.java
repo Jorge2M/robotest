@@ -16,7 +16,7 @@ import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.testmaker.service.webdriver.maker.brwstack.BrowserStackMobil;
 import com.mng.testmaker.service.webdriver.pool.StoredWebDrv.stateWd;
-import com.mng.testmaker.testreports.html.NetTrafficSaver;
+import com.mng.testmaker.testreports.stepstore.NettrafficStorer;
 
 /**
  * Clase encargada de gestionar un pool de objetos WebDriver
@@ -41,7 +41,7 @@ public class PoolWebDrivers {
     	InputParamsTM inputData = testRun.getSuiteParent().getInputParams();
         boolean netAnalysis = inputData.isNetAnalysis();
     	if (netAnalysis) {
-        	NetTrafficSaver.stopNetTrafficThread();
+        	NettrafficStorer.stopNetTrafficThread();
     	}
         
         ManagementWebdriver managementWdrv = inputData.getTypeManageWebdriver();
