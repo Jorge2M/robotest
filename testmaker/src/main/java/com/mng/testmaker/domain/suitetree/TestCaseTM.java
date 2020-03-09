@@ -253,6 +253,7 @@ public class TestCaseTM  {
 		testCaseBean.setSuiteName(suite.getName());
 		testCaseBean.setTestRunName(getTestRunParent().getName());
 		testCaseBean.setName(getNameUnique());
+		testCaseBean.setRefineDataName(getRefineDataName());
 		testCaseBean.setNameUnique(getNameUnique());
 		testCaseBean.setDescription(getResult().getMethod().getDescription());
 		testCaseBean.setIndexInTestRun(getIndexInTestRun());

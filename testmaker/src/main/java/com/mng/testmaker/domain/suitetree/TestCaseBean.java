@@ -12,6 +12,7 @@ public class TestCaseBean {
 	private String suiteName;
 	private String testRunName;
 	private String name;
+	private String refineDataName;
 	private String nameUnique;
 	private String description;
 	private int indexInTestRun;
@@ -50,6 +51,12 @@ public class TestCaseBean {
 	}
 	public String getName() {
 		return name;
+	}
+	public String getRefineDataName() {
+		return refineDataName;
+	}
+	public void setRefineDataName(String refineDataName) {
+		this.refineDataName = refineDataName;
 	}
 	public void setName(String name) {
 		this.name = name;

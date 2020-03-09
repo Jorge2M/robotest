@@ -29,13 +29,6 @@ public class ListMenusManto {
 	@Factory
 	public Object[] createInstances(ITestContext ctxTestRun) throws Exception {
 		InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
-		if (inputData.getTestObject()!=null) {
-			List<Object> listTests = new ArrayList<>();	
-			listTests.add(
-					SerializationUtils.deserialize(Base64.getDecoder().decode(inputData.getTestObject())));
-			return listTests.toArray(new Object[listTests.size()]);
-		}
-		
 		ArrayList<Menus> listTests = new ArrayList<Menus>();
 		AppEcom appEcom = (AppEcom)inputData.getApp();
 		try {

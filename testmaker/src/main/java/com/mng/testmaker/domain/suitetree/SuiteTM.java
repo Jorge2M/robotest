@@ -9,6 +9,7 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
 import com.mng.testmaker.conf.ConstantesTM;
+import com.mng.testmaker.conf.Log4jConfig;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.SenderMailEndSuiteI;
@@ -175,6 +176,18 @@ public class SuiteTM extends XmlSuite {
 	public String getDnsReportHtml() {
 		String pathFileReport = getPathReportHtml();
 		return (GenerateReports.getDnsOfFileReport(pathFileReport, inputParams.getWebAppDNS(), inputParams.getTypeAccess()));
+	}
+	
+	public static SuiteTM getSuiteCreatedInPresentThread() {
+		Long threadId = Thread.currentThread().getId();
+		List<SuiteTM> listSuites = SuitesExecuted.getSuitesExecuted();
+		for (SuiteTM suite : listSuites) {
+			if (threadId==suite.getThreadId()) {
+				return suite;
+			}
+		}
+		Log4jConfig.pLogger.warn("Not found Suite associated");
+		return listSuites.get(0);
 	}
 	
 	public SuiteBean getSuiteBean() {
