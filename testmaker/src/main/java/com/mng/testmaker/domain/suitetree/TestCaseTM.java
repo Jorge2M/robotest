@@ -20,7 +20,7 @@ import com.mng.testmaker.domain.SuitesExecuted;
 
 public class TestCaseTM  {
 
-	private final int invocationCount;
+	private int invocationCount;
 	private List<StepTM> listSteps = new ArrayList<>();
 	private StateExecution stateRun = StateExecution.Started;
 	private State state = State.Ok;
@@ -243,6 +243,7 @@ public class TestCaseTM  {
 	
 	public void setRefineDataName(String refineDataName) {
 		this.refineDataName = refineDataName;
+		this.invocationCount = makeInvocationCount();
 	}
 	
 	public TestCaseBean getTestCaseBean() {

@@ -29,14 +29,18 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV.Type
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
 @SuppressWarnings({ "static-access" })
-public class Favoritos {
 
+public class Favoritos implements Serializable {
+
+	private static final long serialVersionUID = -3932978752450813757L;
+	
 	public int prioridad;
 	private String index_fact = "";
 	private Pais paisFactory = null;

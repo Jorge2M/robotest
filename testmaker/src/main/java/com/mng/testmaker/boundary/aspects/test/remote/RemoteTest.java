@@ -45,6 +45,12 @@ public class RemoteTest extends JaxRsClient {
 				getListTestCase().get(0);
 		
 		//Coser TestCase
+		String throwableStrB64 = testCaseRemote.getThrowable();
+		Throwable throwable = (Throwable)fromStringB64(throwableStrB64);
+		testCase.getResult().setThrowable(throwable);
+		testCase.getResult().setStatus(testCaseRemote.getStatusTng());
+		testCase.setRefineDataName(testCaseRemote.getRefineDataName());
+		
 		List<StepTM> listStepsRemote = testCaseRemote.getListStep();
 		for (StepTM stepRemote : listStepsRemote) {
 			testCase.addStep(stepRemote);
@@ -55,11 +61,7 @@ public class RemoteTest extends JaxRsClient {
 				checks.setParents(stepRemote);
 			}
 		}
-		String throwableStrB64 = testCaseRemote.getThrowable();
-		Throwable throwable = (Throwable)fromStringB64(throwableStrB64);
-		testCase.getResult().setThrowable(throwable);
-		testCase.getResult().setStatus(testCaseRemote.getStatusTng());
-		testCase.setRefineDataName(testCaseRemote.getRefineDataName());
+
 		return suiteRemoteExecuted;
 	}
 	

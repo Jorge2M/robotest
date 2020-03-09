@@ -1,14 +1,14 @@
 package com.mng.robotest.test80.mango.test.factoryes.jaxb;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.*;
 
-/**
- * @author jorge.munoz
- *
- */
+public class Direccharnolatinos implements Serializable {
 
-public class Direccharnolatinos {
-    String check;
+	private static final long serialVersionUID = -6285735947183892226L;
+	
+	String check;
     String text;
 	
     public String getCheck() {

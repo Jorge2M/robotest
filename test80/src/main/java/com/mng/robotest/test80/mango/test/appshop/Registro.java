@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,9 +39,11 @@ import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroSegunda
 import com.mng.robotest.test80.mango.test.suites.RegistrosSuite.VersionRegistroSuite;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
-public class Registro {
+public class Registro implements Serializable {
     
-    private final static Pais españa = PaisGetter.get(PaisShop.España);
+	private static final long serialVersionUID = 9220128375933995114L;
+	
+	private final static Pais españa = PaisGetter.get(PaisShop.España);
     private final static IdiomaPais castellano = españa.getListIdiomas().get(0);
     
     private String index_fact = "";

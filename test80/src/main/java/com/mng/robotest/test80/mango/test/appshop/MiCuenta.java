@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
@@ -26,7 +27,9 @@ import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageMisDatosStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.micuenta.PageSuscripcionesStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
 
-public class MiCuenta {
+public class MiCuenta implements Serializable {
+	
+	private static final long serialVersionUID = 2188911402476562105L;
 	
 	public int prioridad;
 	private String index_fact = "";

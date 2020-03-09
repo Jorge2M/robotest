@@ -1,6 +1,8 @@
 package com.mng.robotest.test80.mango.test.appshop.rebajas;
 
 import org.testng.annotations.*;
+
+import java.io.Serializable;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 
@@ -31,9 +33,11 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.registro.PageRegistroIniStpV;
 
-public class RebajasJun2019 {
+public class RebajasJun2019 implements Serializable {
 
-    public int prioridad;
+	private static final long serialVersionUID = 4613310852981337754L;
+	
+	public int prioridad;
 	private InputParamsMango inputParamsSuite = null;
     private String index_fact;
     private Pais paisFactory = null;
