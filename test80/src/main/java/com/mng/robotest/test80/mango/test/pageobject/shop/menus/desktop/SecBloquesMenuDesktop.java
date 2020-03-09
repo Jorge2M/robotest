@@ -114,8 +114,8 @@ public class SecBloquesMenuDesktop extends WebdrvWrapp {
 
         return (
         	xpathMenuVisible + 
-        	"[@data-label[contains(.,'" + dataGaLabelMenu + "')] or @data-label[contains(.,'" + 
-        	dataGaLabelMenu.toLowerCase() + "')]]");
+        	"[@data-label[contains(.,'" + dataGaLabelMenu + "')] or " + 
+        	 "@data-label[contains(.,'" + dataGaLabelMenu.toLowerCase() + "')]]");
     }
     
     public boolean isCapaMenusLineaVisibleUntil(LineaType lineaId, int maxSecondsToWait) {

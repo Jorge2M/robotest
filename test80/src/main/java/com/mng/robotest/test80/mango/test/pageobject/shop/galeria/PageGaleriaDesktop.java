@@ -62,7 +62,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		"(@class[contains(.,'productList__name')] or " +
 		 "@class[contains(.,'product-list-name')] or " + 
 		 "@class='product-list-info-name' or " +
-		 "@class='product-name')";
+		 "@class[contains(.,'product-name')])";
 
 	private final static String XPathNombreRelativeToArticle = "//*[" + classProductName + "]";
 	private final static String XPathImgRelativeArticle = 
@@ -164,7 +164,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return ((XPathArticulo + sizeArticle.getXPathRelativeArticle()));
 	}
 
-	private final static String iniXPathPaginaGaleria = "//ul[@id='page";
+	private final static String iniXPathPaginaGaleria = "//*[@id='page";
 
 	@Override
 	String getXPathPagina(int pagina) {
