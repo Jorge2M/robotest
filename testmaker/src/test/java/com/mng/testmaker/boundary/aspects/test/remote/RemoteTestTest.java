@@ -30,7 +30,7 @@ public class RemoteTestTest {
 		
 		//When
 		RemoteTest remoteTest = new RemoteTest();
-		SuiteBean suiteRemote = remoteTest.suiteRun(inputParams, Arrays.asList("SES002"));
+		SuiteBean suiteRemote = remoteTest.suiteRun(inputParams, Arrays.asList("SES002"), null);
 		
 		//Then
 		TestCaseBean testCaseRemote = suiteRemote.

@@ -20,6 +20,7 @@ import com.mng.robotest.test80.mango.test.pageobject.manto.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageJCAS;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageMenusManto;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.openqa.selenium.WebDriver;
 
 public class ListMenusManto {
@@ -28,6 +29,13 @@ public class ListMenusManto {
 	@Factory
 	public Object[] createInstances(ITestContext ctxTestRun) throws Exception {
 		InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
+		if (inputData.getTestObject()!=null) {
+			List<Object> listTests = new ArrayList<>();	
+			listTests.add(
+					SerializationUtils.deserialize(Base64.getDecoder().decode(inputData.getTestObject())));
+			return listTests.toArray(new Object[listTests.size()]);
+		}
+		
 		ArrayList<Menus> listTests = new ArrayList<Menus>();
 		AppEcom appEcom = (AppEcom)inputData.getApp();
 		try {
@@ -42,14 +50,14 @@ public class ListMenusManto {
 				}
 				prioridad+=1;
 			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	
+		return listTests.toArray(new Object[listTests.size()]);
 	}
-	catch (Exception e) {
-	    e.printStackTrace();
-	    throw e;
-	}
-        		
-        return listTests.toArray(new Object[listTests.size()]);
-    }
 	
     /**
      * Obtiene la lista con los nombres de las cabeceras de los grupos de menús de Manto

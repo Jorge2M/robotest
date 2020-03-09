@@ -90,7 +90,7 @@ public class SecMenuLateralMobilStpV {
         validaSelecLinea(pais, lineaConCarrusels, null);
         navSelectCarrusels(lineaConCarrusels, pais);
     }
-    
+
     /**
      * Seleccionamos todos los sublinks de las líneas de móvil con 'carrusels' (nuevo u ofertas de momento)
      */
@@ -107,7 +107,7 @@ public class SecMenuLateralMobilStpV {
                 if (secMenuLateral.isCarruselNuevoAssociated(lineaDelPais)) {
                     selectCarruselNuevo(pais.getShoponline().getLinea(LineaType.nuevo), lineaDelPais);
                 }
-                break;            
+                break;
             default:
                 break;
             }

@@ -2,6 +2,7 @@ package com.mng.testmaker.boundary.aspects.test.remote;
 
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
@@ -13,6 +14,8 @@ import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
+import org.apache.commons.lang3.SerializationUtils;
+
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.domain.suitetree.StepTM;
@@ -22,10 +25,22 @@ import com.mng.testmaker.domain.suitetree.TestCaseTM;
 
 public class RemoteTest extends JaxRsClient {
 	
+	public SuiteBean execute(TestCaseTM testCase, InputParamsTM inputParams, Serializable testObject) 
+	throws Exception {
+		byte[] testSerialized = SerializationUtils.serialize(testObject);
+		String testSerializedStrB64 = Base64.getEncoder().encodeToString(testSerialized);
+		SuiteBean suiteRemote = suiteRun(inputParams, null, testSerializedStrB64);
+		return processTestCaseRemote(testCase, suiteRemote);
+	}
+	
 	public SuiteBean execute(TestCaseTM testCase, InputParamsTM inputParams) throws Exception {
-		//Exec TestCase
-		SuiteBean suiteRemote = suiteRun(inputParams, Arrays.asList(testCase.getNameUnique()));
-		TestCaseBean testCaseRemote = suiteRemote.
+		SuiteBean suiteRemote = suiteRun(inputParams, Arrays.asList(testCase.getNameUnique()), null);
+		return processTestCaseRemote(testCase, suiteRemote);
+	}
+	
+	private SuiteBean processTestCaseRemote(TestCaseTM testCase, SuiteBean suiteRemoteExecuted) {
+		//Get TestCase Remote
+		TestCaseBean testCaseRemote = suiteRemoteExecuted.
 				getListTestRun().get(0).
 				getListTestCase().get(0);
 		
@@ -44,15 +59,22 @@ public class RemoteTest extends JaxRsClient {
 		Throwable throwable = (Throwable)fromStringB64(throwableStrB64);
 		testCase.getResult().setThrowable(throwable);
 		testCase.getResult().setStatus(testCaseRemote.getStatusTng());
-		return suiteRemote;
+		return suiteRemoteExecuted;
 	}
 	
-	SuiteBean suiteRun(InputParamsTM inputParams, List<String> testCases) throws Exception {
+	SuiteBean suiteRun(InputParamsTM inputParams, List<String> testCases, String testObjectSerialized) 
+	throws Exception {
 		Form formParams = getFormParams(inputParams.getAllParamsValues());
 		MultivaluedMap<String, String> mapParams = formParams.asMap();
-		mapParams.putSingle(InputParamsTM.TCaseNameParam, String.join(",", testCases));
+		if (testCases!=null) {
+			mapParams.putSingle(InputParamsTM.TCaseNameParam, String.join(",", testCases));
+		}
+		if (testObjectSerialized!=null) {
+			mapParams.putSingle(InputParamsTM.TestObjectParam, testObjectSerialized);
+		}
 		mapParams.putSingle(InputParamsTM.AsyncExecParam, "false");
 		mapParams.putSingle(InputParamsTM.RemoteParam, "true");
+
 		Client client = getClientIgnoreCertificates();
 		SuiteBean suiteData = 
 			client

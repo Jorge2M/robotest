@@ -44,6 +44,7 @@ public abstract class InputParamsTM {
 	public static final String TypeAccessParam = "typeAccess";
 	public static final String ChromeDriverVersionParam = "chromedriverVersion";
 	public static final String GeckoDriverVersionParam = "geckodriverVersion";
+	public static final String TestObjectParam = "testobject";
 	
 	public static final String patternTestCaseItem = "([^\\{\\}]+)(?:\\{([0-9]+)(?:-([0-9]+)){0,1}\\}){0,1}";
 	
@@ -106,6 +107,9 @@ public abstract class InputParamsTM {
 	
 	@FormParam(GeckoDriverVersionParam)
 	String geckoDriverVersion;	
+	
+	@FormParam(TestObjectParam)
+	String testObject;
 
 	public InputParamsTM() {}
 
@@ -316,7 +320,8 @@ public abstract class InputParamsTM {
 		Mails(MailsParam),
 		TypeAccess(TypeAccessParam),
 		ChromeDriverVersion(ChromeDriverVersionParam),
-		GeckoDriverVersion(GeckoDriverVersionParam);
+		GeckoDriverVersion(GeckoDriverVersionParam),
+		TestObject(TestObjectParam);
 		
 		public String nameParam;
 		private ParamTM(String nameParam) {
@@ -373,9 +378,9 @@ public abstract class InputParamsTM {
 			return this.chromeDriverVersion;
 		case GeckoDriverVersion:
 			return this.geckoDriverVersion;
+		default:
+			return "";
 		}
-
-		return "";
 	}
 
 	public Class<? extends Enum<?>> getSuiteEnum() {
@@ -613,6 +618,12 @@ public abstract class InputParamsTM {
 		this.geckoDriverVersion = geckoDriverVersion;
 	}
 
+	public String getTestObject() {
+		return testObject;
+	}
+	public void setTestObject(String testObject) {
+		this.testObject = testObject;
+	}
 	public DataFilterTCases getDataFilter() {
 		DataFilterTCases dFilter = new DataFilterTCases(getChannel(), getApp());
 		dFilter.setGroupsFilter(getGroupsFilter());

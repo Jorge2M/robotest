@@ -1,5 +1,7 @@
 package com.mng.robotest.test80.mango.test.appmanto;
 
+import java.io.Serializable;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
@@ -15,8 +17,10 @@ import com.mng.robotest.test80.mango.test.stpv.manto.PageLoginMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageMenusMantoStpV;
 import com.mng.robotest.test80.mango.test.stpv.manto.PageSelTdaMantoStpV;
 
-public class Menus {
+public class Menus implements Serializable {
 
+	private static final long serialVersionUID = -5780907750259210736L;
+	
 	String cabeceraName = "";
 	String cabeceraNameNext = "";
 	int prioridad = 1;

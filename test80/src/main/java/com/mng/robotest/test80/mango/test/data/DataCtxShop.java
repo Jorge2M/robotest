@@ -2,6 +2,7 @@ package com.mng.robotest.test80.mango.test.data;
 
 import com.mng.testmaker.conf.Channel;
 
+import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -10,9 +11,11 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
 
-public class DataCtxShop implements Cloneable {
+public class DataCtxShop implements Cloneable, Serializable {
 
-    public String urlAcceso = "";
+	private static final long serialVersionUID = 1L;
+	
+	public String urlAcceso = "";
     public AppEcom appE = AppEcom.shop;
     public Channel channel = Channel.desktop;
     public Pais pais = null;

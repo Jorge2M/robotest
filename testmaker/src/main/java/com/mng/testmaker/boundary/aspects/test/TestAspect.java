@@ -5,6 +5,8 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
+import java.io.Serializable;
+
 import com.mng.testmaker.boundary.aspects.test.remote.RemoteTest;
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.suitetree.TestCaseTM;
@@ -20,14 +22,6 @@ public class TestAspect {
 	@Pointcut("execution(* *(..))")
 	public void atExecution(){}
 
-//	@Before("annotationTestPointcut() && atExecution()")
-//	public void before(JoinPoint joinPoint) {
-//		TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
-//		skipTestIfSuiteEnded(testCase, joinPoint);
-//		//TODO El COM010 no lo soporta
-//		//testCase.makeWebDriver();
-//	}
-
 	@Around("annotationTestPointcut() && atExecution()")
 	public Object aroundTest(ProceedingJoinPoint joinPoint) throws Throwable {
 		return manageAroundTest(joinPoint);
@@ -41,9 +35,9 @@ public class TestAspect {
 		
 		Object returnValue = null;
 		InputParamsTM inputParams = testCase.getInputParamsSuite();
-		if (false && !inputParams.isRemote()) {
+		if (!inputParams.isRemote()) {
 			RemoteTest remoteTest = new RemoteTest();
-			remoteTest.execute(testCase, inputParams);
+			remoteTest.execute(testCase, inputParams, (Serializable)joinPoint.getTarget());
 		} else {
 			testCase.makeWebDriver();
 			returnValue = joinPoint.proceed();

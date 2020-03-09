@@ -47,7 +47,7 @@ import org.openqa.selenium.WebDriver;
 
 
 public class Compra {
-
+	
 	private final static Pais españa = PaisGetter.get(PaisShop.España);
 	private final static Pais francia = PaisGetter.get(PaisShop.France);
 	private final static Pais colombia = PaisGetter.get(PaisShop.Colombia);
@@ -68,113 +68,113 @@ public class Compra {
 		return dCtxSh;
 	}
 
-    @Test (
-        groups={"Compra", "Canal:all_App:shop,outlet"}, alwaysRun=true, priority=2, 
-        description="[Usuario registrado][Tarjeta guardada] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
-    public void COM001_Compra_TrjSaved_Empl() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        dCtxSh.userConnected = "test.performance10@mango.com";
-        dCtxSh.passwordUser = "Mango123";
-        dCtxSh.userRegistered = true;
+	@Test (
+		groups={"Compra", "Canal:all_App:shop,outlet"}, alwaysRun=true, priority=2, 
+		description="[Usuario registrado][Tarjeta guardada] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
+	public void COM001_Compra_TrjSaved_Empl() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest();
+		dCtxSh.userConnected = "test.performance10@mango.com";
+		dCtxSh.passwordUser = "Mango123";
+		dCtxSh.userRegistered = true;
 
-        //To checkout
-        FlagsTestCkout FTCkout = new FlagsTestCkout();
-        FTCkout.validaPasarelas = false;  
-        FTCkout.validaPagos = false;
-        FTCkout.emailExist = true; 
-        FTCkout.trjGuardada = true;
-        FTCkout.isEmpl = true;
-        DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
-        dCtxPago.setFTCkout(FTCkout);
-        //TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
-        PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(dCtxSh, dCtxPago, driver);
+		//To checkout
+		FlagsTestCkout FTCkout = new FlagsTestCkout();
+		FTCkout.validaPasarelas = false;  
+		FTCkout.validaPagos = false;
+		FTCkout.emailExist = true; 
+		FTCkout.trjGuardada = true;
+		FTCkout.isEmpl = true;
+		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
+		dCtxPago.setFTCkout(FTCkout);
+		//TestAB.activateTestABiconoBolsaDesktop(0, dCtxSh, dFTest.driver);
+		PagoNavigationsStpV.testFromLoginToExecPaymetIfNeeded(dCtxSh, dCtxPago, driver);
 
-        //Pago
-        Pago pagoVisaToTest = españa.getPago("VISA");
-        DataPedido dataPedido = new DataPedido(dCtxSh.pais);
-        dataPedido.setPago(pagoVisaToTest);
-        
-        PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, driver);
-        dCtxPago.setDataPedido(dataPedido);
-        dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
-        dCtxPago.getFTCkout().validaPasarelas = true;
-        dCtxPago.getFTCkout().validaPagos = true;
-        PagoNavigationsStpV.testPagoFromCheckoutToEnd(dCtxPago, dCtxSh, pagoVisaToTest, driver);
-        
-        //Validación en Manto de los Pedidos (si existen)
-    	List<CheckPedido> listChecks = Arrays.asList(
-    		CheckPedido.consultarBolsa, 
-    		CheckPedido.consultarPedido);
-        DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
-        PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
-    }
+		//Pago
+		Pago pagoVisaToTest = españa.getPago("VISA");
+		DataPedido dataPedido = new DataPedido(dCtxSh.pais);
+		dataPedido.setPago(pagoVisaToTest);
 
-    @Test (
-        groups={"Compra", "Canal:desktop_App:shop"}, alwaysRun=true,
-        description="[Usuario registrado] Consulta datos cheque existente y posterior compra Cheque regalo")
-    public void COM004_Cheque_Regalo_UsrReg_emailExist() throws Exception {
-    	WebDriver driver = TestMaker.getDriverTestCase();
-        DataCtxShop dCtxSh = getCtxShForTest();
-        UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
-        dCtxSh.userConnected = userShop.user;
-        dCtxSh.passwordUser = userShop.password;        
-        dCtxSh.userRegistered = true;
-        dCtxSh.pais = españa;
-            
-        //Creamos una estructura para ir almacenando los datos del proceso de pagos
-        String nTarjeta;
-        String cvvTarjeta = "";
-        AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
-        SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
-        secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
-        SecFooterStpV.clickLinkFooter(FooterLink.cheque_regalo, false, dCtxSh.channel, driver);
-        if(dCtxSh.channel != Channel.movil_web){
-            nTarjeta = "100000040043";
-            cvvTarjeta = "618";
-            PageChequeRegaloInputDataStpV.paginaConsultarSaldo(nTarjeta, driver);
-            PageChequeRegaloInputDataStpV.insertCVVConsultaSaldo(cvvTarjeta, driver);
-        }
+		PageCheckoutWrapper.getDataPedidoFromCheckout(dataPedido, dCtxSh.channel, driver);
+		dCtxPago.setDataPedido(dataPedido);
+		dCtxPago.getDataPedido().setEmailCheckout(dCtxSh.userConnected);
+		dCtxPago.getFTCkout().validaPasarelas = true;
+		dCtxPago.getFTCkout().validaPagos = true;
+		PagoNavigationsStpV.testPagoFromCheckoutToEnd(dCtxPago, dCtxSh, pagoVisaToTest, driver);
 
-        PageChequeRegaloInputDataStpV.seleccionarCantidades(Importe.euro50, driver);
-        PageChequeRegaloInputDataStpV.clickQuieroComprarChequeRegalo(driver);
-            
-        ChequeRegalo chequeRegalo = new ChequeRegalo();
-        chequeRegalo.setNombre("Jorge");
-        chequeRegalo.setApellidos("Muñoz Martínez");
-        chequeRegalo.setEmail(Constantes.mail_standard);
-        chequeRegalo.setImporte(Importe.euro50);
-        chequeRegalo.setMensaje("Ya sólo queda por determinar si el universo partió de cero o del infinito");
-        PageChequeRegaloInputDataStpV.inputDataAndClickComprar(chequeRegalo, driver);
+		//Validación en Manto de los Pedidos (si existen)
+		List<CheckPedido> listChecks = Arrays.asList(
+			CheckPedido.consultarBolsa, 
+			CheckPedido.consultarPedido);
+		DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
+		PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
+	}
 
-        //Ejecutar el pago
-        FlagsTestCkout fTCkout = new FlagsTestCkout();
-        fTCkout.validaPasarelas = true;  
-        fTCkout.validaPagos = true;
-        fTCkout.validaPedidosEnManto = true;
-        fTCkout.emailExist = false; 
-        fTCkout.trjGuardada = false;
-        fTCkout.isEmpl = false;
-        fTCkout.isChequeRegalo = true;
-        DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
-        dCtxPago.setFTCkout(fTCkout);
-        Pago pagoVISA = españa.getPago("VISA");
-        dCtxPago.getDataPedido().setPago(pagoVISA);
-        DataPedido dataPedido = dCtxPago.getDataPedido();
-        dataPedido.setImporteTotal(PageCheckoutWrapper.getPrecioTotalFromResumen(dCtxSh.channel, driver));
-        dataPedido.setDireccionEnvio("");
-        dataPedido.setEmailCheckout(dCtxSh.userConnected);
-        PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, driver);
-        if (fTCkout.validaPedidosEnManto) {
-        	List<CheckPedido> listChecks = Arrays.asList(
-        		CheckPedido.consultarBolsa, 
-        		CheckPedido.consultarPedido,
-        		CheckPedido.anular); 
-        	DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
-            PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
-        }
-     }    
-    
+	@Test (
+		groups={"Compra", "Canal:desktop_App:shop"}, alwaysRun=true,
+		description="[Usuario registrado] Consulta datos cheque existente y posterior compra Cheque regalo")
+	public void COM004_Cheque_Regalo_UsrReg_emailExist() throws Exception {
+		WebDriver driver = TestMaker.getDriverTestCase();
+		DataCtxShop dCtxSh = getCtxShForTest();
+		UserShop userShop = GestorUsersShop.checkoutBestUserForNewTestCase();
+		dCtxSh.userConnected = userShop.user;
+		dCtxSh.passwordUser = userShop.password;        
+		dCtxSh.userRegistered = true;
+		dCtxSh.pais = españa;
+
+		//Creamos una estructura para ir almacenando los datos del proceso de pagos
+		String nTarjeta;
+		String cvvTarjeta = "";
+		AccesoStpV.accesoAplicacionEnUnPaso(dCtxSh, false, driver);
+		SecMenusWrapperStpV secMenusStpV = SecMenusWrapperStpV.getNew(dCtxSh, driver);
+		secMenusStpV.seleccionLinea(LineaType.she, null, dCtxSh);
+		SecFooterStpV.clickLinkFooter(FooterLink.cheque_regalo, false, dCtxSh.channel, driver);
+		if(dCtxSh.channel != Channel.movil_web){
+			nTarjeta = "100000040043";
+			cvvTarjeta = "618";
+			PageChequeRegaloInputDataStpV.paginaConsultarSaldo(nTarjeta, driver);
+			PageChequeRegaloInputDataStpV.insertCVVConsultaSaldo(cvvTarjeta, driver);
+		}
+
+		PageChequeRegaloInputDataStpV.seleccionarCantidades(Importe.euro50, driver);
+		PageChequeRegaloInputDataStpV.clickQuieroComprarChequeRegalo(driver);
+
+		ChequeRegalo chequeRegalo = new ChequeRegalo();
+		chequeRegalo.setNombre("Jorge");
+		chequeRegalo.setApellidos("Muñoz Martínez");
+		chequeRegalo.setEmail(Constantes.mail_standard);
+		chequeRegalo.setImporte(Importe.euro50);
+		chequeRegalo.setMensaje("Ya sólo queda por determinar si el universo partió de cero o del infinito");
+		PageChequeRegaloInputDataStpV.inputDataAndClickComprar(chequeRegalo, driver);
+
+		//Ejecutar el pago
+		FlagsTestCkout fTCkout = new FlagsTestCkout();
+		fTCkout.validaPasarelas = true;  
+		fTCkout.validaPagos = true;
+		fTCkout.validaPedidosEnManto = true;
+		fTCkout.emailExist = false; 
+		fTCkout.trjGuardada = false;
+		fTCkout.isEmpl = false;
+		fTCkout.isChequeRegalo = true;
+		DataCtxPago dCtxPago = new DataCtxPago(dCtxSh);
+		dCtxPago.setFTCkout(fTCkout);
+		Pago pagoVISA = españa.getPago("VISA");
+		dCtxPago.getDataPedido().setPago(pagoVISA);
+		DataPedido dataPedido = dCtxPago.getDataPedido();
+		dataPedido.setImporteTotal(PageCheckoutWrapper.getPrecioTotalFromResumen(dCtxSh.channel, driver));
+		dataPedido.setDireccionEnvio("");
+		dataPedido.setEmailCheckout(dCtxSh.userConnected);
+		PagoNavigationsStpV.checkPasarelaPago(dCtxPago, dCtxSh, driver);
+		if (fTCkout.validaPedidosEnManto) {
+			List<CheckPedido> listChecks = Arrays.asList(
+				CheckPedido.consultarBolsa, 
+				CheckPedido.consultarPedido,
+				CheckPedido.anular); 
+			DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(dCtxPago.getListPedidos(), listChecks);
+			PedidoNavigations.testPedidosEnManto(checksPedidos, dCtxSh.appE, driver);
+		}
+	}
+
     @Test (
         groups={"Compra", "Canal:desktop_App:shop,outlet"}, alwaysRun=true,
         description="[Usuario no registrado] Compra con cambio datos en dirección de envío en checkout")
