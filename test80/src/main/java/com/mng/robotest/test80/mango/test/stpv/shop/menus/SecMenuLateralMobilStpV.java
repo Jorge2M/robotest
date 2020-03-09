@@ -130,9 +130,9 @@ public class SecMenuLateralMobilStpV {
 	 	validations.add(
 			"Aparece algún artículo (esperamos " + maxSecondsWait + " segundos)",
 			pageGaleria.isVisibleArticleUntil(1, maxSecondsWait), State.Warn);
-	 	validations.add(
-			"El 1er artículo es de tipo " + LineaType.nuevo,
-			pageGaleria.isFirstArticleOfType(LineaType.nuevo), State.Warn);
+//	 	validations.add(
+//			"El 1er artículo es de tipo " + LineaType.nuevo,
+//			pageGaleria.isFirstArticleOfType(LineaType.nuevo), State.Warn);
 	 	
     	return validations;   
     }
