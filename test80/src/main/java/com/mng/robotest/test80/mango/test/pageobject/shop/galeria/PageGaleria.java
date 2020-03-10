@@ -90,7 +90,14 @@ public abstract class PageGaleria extends WebdrvWrapp {
     	    LabelArticle.NewNow, 
     	    LabelArticle.NewCollection);
 	
-	final static String XPathLinkRelativeToArticle = ".//a[@class='product-link']";
+    final static String classProductItem = 
+        	"@class[contains(.,'productList__name')] or " + 
+        	"@class[contains(.,'product-list-name')] or " + 
+        	"@class='product-list-info-name' or " +
+   		 	"@class[contains(.,'_1P8s4')] or " +
+        	"@class='product-name'";
+    final static String XPathNombreRelativeToArticle = "//*[" + classProductItem + "]";
+    final static String XPathLinkRelativeToArticle = ".//a[@class='product-link']";
 
 	public static PageGaleria getNew(Channel channel, AppEcom app, WebDriver driver) throws Exception {
 		return PageGaleria.getNew(From.menu, channel, app, driver);
@@ -112,7 +119,7 @@ public abstract class PageGaleria extends WebdrvWrapp {
 	final static String XPathArticuloDesktop = "//li[@id[contains(.,'product-key-id')]]";
 	
 	final static String XPathArticuloDesktopBuscador = "//div[@class[contains(.,'product-list-item')]]";
-	final static String XPathArticuloMobilOutlet = "//li[@class[contains(.,'product-list-item')] or @id[contains(.,'product-key-id')] or @class='product']";
+	final static String XPathArticuloMobilOutlet = "//div[@class[contains(.,'product-list-item')] or @id[contains(.,'product-key-id')] or @class='product']";
 	final static String XPathArticuloMobilShop = "//li[@class='product']";
 	private String getXPathArticulo() {
 		switch (app) {
@@ -364,47 +371,47 @@ public abstract class PageGaleria extends WebdrvWrapp {
 		return (id.replace("product-key-id-", ""));
 	}
 
-    public String getRefArticulo(WebElement articulo) {
-    	int lengthReferencia = 8;
-    	String id = getRefFromId(articulo);
-    	if ("".compareTo(id)!=0) {
-	    	if (id.length()>lengthReferencia) {
-	    		return (id.substring(0, lengthReferencia));
-	    	}
-	    	return id;
-    	}
-    	
-    	//Para el caso TestAB-1 se ejecutará este caso para conseguir los atributos del artículo
-    	String href = articulo.findElement(By.xpath(XPathLinkRelativeToArticle)).getAttribute("href");
-    	return (UtilsTestMango.getReferenciaFromHref(href));
-    }
-    
-    /**
-     * @return el nombre y referencia con color del artículo en formato "NOMBRE (REFERENCIACOLOR)"
-     */
-    public NombreYRef getNombreYRefArticulo(WebElement articulo) {
-        String nombreArticulo = getNombreArticulo(articulo);
-        String refArticulo = getRefColorArticulo(articulo);
-        return (new NombreYRef(nombreArticulo, refArticulo));
-    }
-    
-    public boolean waitToHearthIconInState(WebElement hearthIcon, StateFavorito stateIcon, int maxSecondsToWait) {
-    	for (int i=0; i<maxSecondsToWait; i++) {
-    		if (getStateHearthIcon(hearthIcon)==stateIcon) {
-    			return true;
-    		}
-    		waitMillis(1000);
-    	}
-    	return false;
-    }
-    
-    //Equivalent to Mobil
-    void clickHearthIcon(WebElement hearthIcon) throws Exception {
-    	moveToElement(hearthIcon, driver);
-    	isElementClickableUntil(driver, hearthIcon, 1/*seconds*/);
-        hearthIcon.click();
-    }
-    
+	public String getRefArticulo(WebElement articulo) {
+		int lengthReferencia = 8;
+		String id = getRefFromId(articulo);
+		if ("".compareTo(id)!=0) {
+			if (id.length()>lengthReferencia) {
+				return (id.substring(0, lengthReferencia));
+			}
+			return id;
+		}
+		
+		//Para el caso TestAB-1 se ejecutará este caso para conseguir los atributos del artículo
+		String href = articulo.findElement(By.xpath(XPathLinkRelativeToArticle)).getAttribute("href");
+		return (UtilsTestMango.getReferenciaFromHref(href));
+	}
+
+	/**
+	 * @return el nombre y referencia con color del artículo en formato "NOMBRE (REFERENCIACOLOR)"
+	 */
+	public NombreYRef getNombreYRefArticulo(WebElement articulo) {
+		String nombreArticulo = getNombreArticulo(articulo);
+		String refArticulo = getRefColorArticulo(articulo);
+		return (new NombreYRef(nombreArticulo, refArticulo));
+	}
+
+	public boolean waitToHearthIconInState(WebElement hearthIcon, StateFavorito stateIcon, int maxSecondsToWait) {
+		for (int i=0; i<maxSecondsToWait; i++) {
+			if (getStateHearthIcon(hearthIcon)==stateIcon) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
+	}
+
+	//Equivalent to Mobil
+	void clickHearthIcon(WebElement hearthIcon) throws Exception {
+		moveToElement(hearthIcon, driver);
+		isElementClickableUntil(driver, hearthIcon, 1/*seconds*/);
+		hearthIcon.click();
+	}
+
     /**
      * Busca artículos repetidos en la galería
      * @return 1er artículo repetido en la galería. Si no encuentra ninguno devuelve null
@@ -462,28 +469,39 @@ public abstract class PageGaleria extends WebdrvWrapp {
             driver.findElement(By.xpath(xpathIconoUpGalery)).click();
         }
     }
-    
-    /**
-     * @param driver
-     * @param categoriaProducto
-     * @return si existe la cabecera con el resultado de la búsqueda de una determinada categoría de producto
-     */
 
-    public String getArticuloWithText(String name, int secondsWait) {
-        String articulo = "";
-        
-        //Obtenemos el xpath de los artículos eliminando el último carácter (]) pues hemos de insertar condiciones en el XPATH
-        String xpathLitArticulos = XPathArticulo + "//*[" + classProductName + "]";
-        xpathLitArticulos = xpathLitArticulos.substring(0, xpathLitArticulos.length() - 1);
-        
-        xpathLitArticulos = xpathLitArticulos + " and text()[contains(.,'" + name + "')]]"; 
-        
-        if (isElementVisibleUntil(driver, By.xpath(xpathLitArticulos), secondsWait)) {
-            articulo = driver.findElement(By.xpath(xpathLitArticulos)).getText();
-        }
-        
-        return articulo;
+	public String getNombreArticuloWithText(String literal, int secondsWait) {
+		WebElement articulo = getArticleThatContainsLitUntil(literal, secondsWait);
+		if (articulo!=null) {
+			return getNombreArticulo(articulo);
+		}
+		return "";
+		
+//        String articulo = "";
+//        
+//        //Obtenemos el xpath de los artículos eliminando el último carácter (]) pues hemos de insertar condiciones en el XPATH
+//        String xpathLitArticulos = XPathArticulo + "//*[" + classProductName + "]";
+//        xpathLitArticulos = xpathLitArticulos.substring(0, xpathLitArticulos.length() - 1);
+//        
+//        xpathLitArticulos = xpathLitArticulos + " and text()[contains(.,'" + name + "')]]"; 
+//        
+//        if (isElementVisibleUntil(driver, By.xpath(xpathLitArticulos), secondsWait)) {
+//            articulo = driver.findElement(By.xpath(xpathLitArticulos)).getText();
+//        }
+//        
+//        return articulo;
     }
+	
+	public WebElement getArticleThatContainsLitUntil(String literal, int maxSeconds) {
+		By byArticleName = By.xpath(
+				XPathArticulo + 
+				XPathNombreRelativeToArticle + 
+				"//self::*[text()[contains(.,'" + literal + "')]]");
+		if (isElementPresentUntil(driver, byArticleName, maxSeconds)) {
+			return driver.findElement(By.xpath(XPathArticulo));
+		}
+		return null;
+	}
     
     /**
      * Función que realiza un scroll/paginación hasta el final de los artículos. Retorna el número de elementos obtenidos

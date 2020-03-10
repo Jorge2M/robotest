@@ -64,7 +64,7 @@ public class SecBuscadorStpV {
 		String producSin1erCaracter = categoriaABuscar.substring(1, categoriaABuscar.length()-1).toLowerCase();
 		validations.add(
 			"Aparece como mínimo un producto de tipo " + producSin1erCaracter + " (lo esperamos hasta " + maxSecondsWait + " segundos)",
-			"".compareTo(pageGaleria.getArticuloWithText(producSin1erCaracter, maxSecondsWait))!=0, State.Defect);
+			"".compareTo(pageGaleria.getNombreArticuloWithText(producSin1erCaracter, maxSecondsWait))!=0, State.Defect);
 		return validations;
 	}
 

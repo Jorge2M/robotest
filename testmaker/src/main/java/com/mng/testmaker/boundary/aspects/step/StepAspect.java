@@ -1,6 +1,5 @@
 package com.mng.testmaker.boundary.aspects.step;
 
-import java.sql.Date;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;

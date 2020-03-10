@@ -7,16 +7,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
 import com.mng.robotest.test80.mango.test.data.Constantes;
 import com.mng.robotest.test80.mango.test.data.Talla;
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
@@ -58,14 +55,6 @@ public class PageGaleriaDesktop extends PageGaleria {
 		}
 	}
 	
-	private final static String classProductName = 
-		"(@class[contains(.,'productList__name')] or " +
-		 "@class[contains(.,'product-list-name')] or " + 
-		 "@class[contains(.,'_1P8s4')] or " +
-		 "@class='product-list-info-name' or " +
-		 "@class='product-name')";
-
-	private final static String XPathNombreRelativeToArticle = "//*[" + classProductName + "]";
 	private final static String XPathImgRelativeArticle = 
 		"//img[@src and (" + 
 			   "@class[contains(.,'productListImg')] or " + 
