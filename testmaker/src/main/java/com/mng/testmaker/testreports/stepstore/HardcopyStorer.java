@@ -29,7 +29,15 @@ public class HardcopyStorer extends EvidenceStorer {
 		} else {
 			newWebDriver = driver;
 		}
-		return ((TakesScreenshot)newWebDriver).getScreenshotAs(OutputType.BASE64);
+		
+		String screenShot = "";
+		try {
+			screenShot = ((TakesScreenshot)newWebDriver).getScreenshotAs(OutputType.BASE64);
+		}
+		catch (Exception e) {
+			Log4jConfig.pLogger.warn("Problem capturing page", e);
+		}
+		return screenShot;
 	}
 	
 	@Override

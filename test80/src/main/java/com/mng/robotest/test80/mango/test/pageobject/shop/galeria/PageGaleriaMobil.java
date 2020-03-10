@@ -24,12 +24,6 @@ public class PageGaleriaMobil extends PageGaleria {
 	
     final static String TagIdColor = "@TagIdColor";
     final static String TagFlagSelected = "@TagFlagSelected";
-    final static String classProductItem = 
-    	"@class[contains(.,'productList__name')] or " + 
-    	"@class[contains(.,'product-list-name')] or " + 
-    	"@class='product-list-info-name' or " +
-    	"@class='product-name'";
-    final static String XPathNombreRelativeToArticle = "//*[" + classProductItem + "]";
 
     final static String XPathImgRelativeArticle = 
         "//img[@src and " + 
@@ -199,12 +193,12 @@ public class PageGaleriaMobil extends PageGaleria {
         
         return articulo;
     }
-    
-    @Override
-    public String getNombreArticulo(WebElement articulo) {
-        return (articulo.findElement(By.xpath("." + XPathNombreRelativeToArticle)).getText());
-    }
-    
+
+	@Override
+	public String getNombreArticulo(WebElement articulo) {
+		return (articulo.findElement(By.xpath("." + XPathNombreRelativeToArticle)).getText());
+	}
+ 
     @Override
     public String getPrecioArticulo(WebElement articulo) {
     	if (isArticleRebajado(articulo)) {
