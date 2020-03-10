@@ -1,5 +1,6 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,9 +31,11 @@ import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
-public class CompraFact {
+public class CompraFact implements Serializable {
 
-    public int prioridad;
+	private static final long serialVersionUID = -2440149806957032044L;
+	
+	public int prioridad;
     private String index_fact = "";
     private Pais paisFactory = null;
     private IdiomaPais idiomaFactory = null;

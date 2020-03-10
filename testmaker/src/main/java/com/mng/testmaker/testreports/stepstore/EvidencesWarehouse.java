@@ -9,6 +9,25 @@ import com.mng.testmaker.domain.suitetree.TestRunTM;
 
 public class EvidencesWarehouse {
 	
+	public enum Storage {
+		File(true, false), 
+		Memory(false, true), 
+		FileAndMemory(true, true);
+		
+		boolean file;
+		boolean memory;
+		private Storage(boolean file, boolean memory) {
+			this.file = file;
+			this.memory = memory;
+		}
+		public boolean inFile() {
+			return file;
+		}
+		public boolean inMemory() {
+			return memory;
+		}
+	}
+	
 	private List<StepEvidenceContent> storedEvidences = new ArrayList<StepEvidenceContent>();
 	private StepTM step;
 
@@ -57,8 +76,13 @@ public class EvidencesWarehouse {
 	}
 	
 	public void moveContentEvidencesToFile() {
+		List<StepEvidenceContent> listStepEvidences = getStoredEvidences();
+		if (listStepEvidences.size()==0) {
+			return;
+		}
+		
 		createPathForEvidencesStore(step);
-		for (StepEvidenceContent evidence : getStoredEvidences()) {
+		for (StepEvidenceContent evidence : listStepEvidences) {
 			EvidenceStorer evidenceStorer = evidenceStorerFactory(evidence.getStepEvidence());
 			if (evidenceStorer!=null) {
 				evidenceStorer.saveContentEvidenceInFile(
