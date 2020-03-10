@@ -94,7 +94,6 @@ public abstract class PageGaleria extends WebdrvWrapp {
         	"@class[contains(.,'productList__name')] or " + 
         	"@class[contains(.,'product-list-name')] or " + 
         	"@class='product-list-info-name' or " +
-   		 	"@class[contains(.,'_1P8s4')] or " +
         	"@class='product-name'";
     final static String XPathNombreRelativeToArticle = "//*[" + classProductItem + "]";
     final static String XPathLinkRelativeToArticle = ".//a[@class='product-link']";
