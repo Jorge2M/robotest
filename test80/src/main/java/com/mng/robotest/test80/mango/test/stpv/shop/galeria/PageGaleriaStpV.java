@@ -87,29 +87,30 @@ public class PageGaleriaStpV {
     	return secSelectorPreciosStpV;
     }
 
-    @Step (
-    	description="Seleccionamos el artículo #{locationArt} en una pestaña aparte", 
-        expected="Aparece la ficha del artículo seleccionado en una pestaña aparte")
-    public void selectArticuloEnPestanyaAndBack(LocationArticle locationArt) 
-    throws Exception {
-        String galeryWindowHandle = driver.getWindowHandle();
-        DataFichaArt datosArticulo = new DataFichaArt();
-        
-        //Almacenamos el nombre del artículo y su referencia
-        WebElement articulo = pageGaleria.getArticulo(locationArt);
-        datosArticulo.setNombre(pageGaleria.getNombreArticulo(articulo));
-        datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
+	@Step (
+		description="Seleccionamos el artículo #{locationArt} en una pestaña aparte", 
+		expected="Aparece la ficha del artículo seleccionado en una pestaña aparte")
+	public void selectArticuloEnPestanyaAndBack(LocationArticle locationArt) throws Exception {
+		String galeryWindowHandle = driver.getWindowHandle();
+		DataFichaArt datosArticulo = new DataFichaArt();
 
-        String detailWindowHandle = pageGaleria.openArticuloPestanyaAndGo(articulo, app);
-        PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel);
-        pageFichaStpV.validaDetallesProducto(datosArticulo);
-        
-        //Cerramos la pestaña y cambiamos a la ventana padre
-        driver.switchTo().window(detailWindowHandle);
-        driver.close();
-        driver.switchTo().window(galeryWindowHandle);
-    }
-    
+		//Almacenamos el nombre del artículo y su referencia
+		WebElement articulo = pageGaleria.getArticulo(locationArt);
+		datosArticulo.setNombre(pageGaleria.getNombreArticulo(articulo));
+		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
+
+		String detailWindowHandle = pageGaleria.openArticuloPestanyaAndGo(articulo, app);
+		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel);
+		pageFichaStpV.validaDetallesProducto(datosArticulo);
+
+		if (detailWindowHandle!=galeryWindowHandle) {
+			//Cerramos la pestaña y cambiamos a la ventana padre
+			driver.switchTo().window(detailWindowHandle);
+			driver.close();
+			driver.switchTo().window(galeryWindowHandle);
+		}
+	}
+
     @Step (
     	description="Seleccionar el artículo #{locationArt}", 
         expected="Aparece la ficha del artículo seleccionado")
