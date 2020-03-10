@@ -42,7 +42,7 @@ public class ConsolaVotf {
 
 	private Article getArticleAvailable() throws Exception {
 		Pais españa = PaisGetter.get(PaisShop.España);
-		GetterProducts getterProducts = new GetterProducts.Builder("https://shop.mango.com/", españa.getCodigo_alf(), AppEcom.shop).
+		GetterProducts getterProducts = new GetterProducts.Builder("https://shop.mango.com/", españa.getCodigo_alf(), AppEcom.votf).
 				linea(LineaType.she).
 				seccion("prendas").
 				galeria("camisas").

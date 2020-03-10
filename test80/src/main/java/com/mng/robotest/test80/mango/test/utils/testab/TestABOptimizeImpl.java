@@ -17,6 +17,8 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 	//3) Seleccionar la opción "OBTENER VISTA PREVIA"
 	//4) Seleccionar "Compartir vista previa"
 	//5) Obtener los datos de la URL que se muestra
+
+	
 	MobileSelectorTallaColor (
 		"GTM-5T8R33",
 		"SHOP-176-PLP-Mobile-Selector talla/color",
@@ -33,20 +35,6 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(AppEcom.shop)
 	),
 	
-//	MVPCheckoutDesktop (
-//		"GTM-5T8R33",
-//		"MVP Checkout - desktopr",
-//	    "UWOU5vObVAZJ7ylnbAK2vQ",
-//	    "GTM-KWJ6XJ_OPT-TXX7V$",
-//	    "QUICK_PREVIEW",
-//	    Arrays.asList(0,1),
-//	    Arrays.asList(
-//	    	"V0-Original", 
-//	    	"V1-MVP Checkout Desktop"),
-//	    Arrays.asList(Channel.desktop),
-//	    Arrays.asList(AppEcom.shop)
-//	),
-	
 	SHOP191_BuscadorDesktop (
 		"GTM-5T8R33",
 		"SHOP-191 - Buscador - Desktop - últimas búsquedas",
@@ -61,39 +49,11 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(AppEcom.shop, AppEcom.votf)
 	),
 	
-//	SHOP126_HeaderNuevosIconosDesktop (
-//		"GTM-5T8R33",
-//		"100% - SHOP-126 - Header - Desktop - Nuevos Iconos",
-//		"UWOU5vObVAZJ7ylnbAK2vQ",
-//		"GTM-KWJ6XJ_OPT-KVTBH$",
-//		"QUICK_PREVIEW",
-//		Arrays.asList(0,1),
-//		Arrays.asList(
-//			"V0-Original", 
-//			"V1-Nuevos iconos"),
-//		Arrays.asList(Channel.desktop),
-//		Arrays.asList(AppEcom.shop, AppEcom.votf)
-//	),
-	
-//	SHOP219_PLPMobileSinFavoritos (
-//		"GTM-5T8R33",
-//		"SHOP-219 - PLP - Mobile - Sin favoritos",
-//		"UWOU5vObVAZJ7ylnbAK2vQ",
-//		"GTM-KWJ6XJ_OPT-KTLLM$",
-//		"QUICK_PREVIEW",
-//		Arrays.asList(0,1),
-//		Arrays.asList(
-//			"V0-Original", 
-//			"V1-Sin favoritos"),
-//		Arrays.asList(Channel.movil_web),
-//		Arrays.asList(AppEcom.shop)
-//	),
-	
-	PLP_Desktop_NewFilters (
+	PLP_Desktop_New_filters_v2(
 		"GTM-5T8R33",
-		"PLP - Desktop - New filters",
+		"PLP - Desktop - New filters v2",
 		"UWOU5vObVAZJ7ylnbAK2vQ",
-		"GTM-KWJ6XJ_OPT-P3CVP$",
+		"GTM-KWJ6XJ_OPT-K9JCF$",
 		"QUICK_PREVIEW",
 		Arrays.asList(0,1),
 		Arrays.asList(
