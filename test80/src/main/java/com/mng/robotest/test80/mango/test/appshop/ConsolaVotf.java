@@ -1,5 +1,8 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
@@ -22,16 +25,25 @@ public class ConsolaVotf {
 		description="[PRE] Generar pedido mediante la consola de VOTF")
 	public void VTF001_GenerarPedido() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		Article article = getArticleAvailable();
-		String idArticle = article.getArticleId();
-		
+
 		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
 		String paginaIniVOTF = inputParamsSuite.getUrlBase();
 		ConsolaVotfStpV.accesoPagInicial(paginaIniVOTF, driver);
 		ConsolaVotfStpV.selectEntornoTestAndCons("Preproducción", driver);
+		
+		int numProdsMax = 10;
+		List<Article> listArticles = getArticlesAvailable(numProdsMax);
+		String idArticle = listArticles.get(0).getArticleId();
 		ConsolaVotfStpV.inputArticleAndTiendaDisp(idArticle, "00011459", driver);
 		ConsolaVotfStpV.consultarTiposEnvio(driver);
-		ConsolaVotfStpV.consultarDispEnvDomic(idArticle, driver);	
+		for (int i=0; i<numProdsMax; i++) {
+			//Iteramos hasta que damos con un artículo que existe en la tienda
+			idArticle = listArticles.get(i).getArticleId();
+			if (ConsolaVotfStpV.consultarDispEnvDomic(idArticle, driver)) {
+				break;
+			}
+		}
+		
 		ConsolaVotfStpV.consultarDispEnvTienda(idArticle, driver);
 		String codigoPedido = ConsolaVotfStpV.realizarSolicitudTienda(idArticle, driver);
 		String codigoPedidoFull = ConsolaVotfStpV.obtenerPedidos(codigoPedido, driver);
@@ -40,18 +52,22 @@ public class ConsolaVotf {
 		ConsolaVotfStpV.selectConfPedido(codigoPedidoFull, driver);
 	}
 
-	private Article getArticleAvailable() throws Exception {
+	private List<Article> getArticlesAvailable(int numProductsMax) throws Exception {
 		Pais españa = PaisGetter.get(PaisShop.España);
 		GetterProducts getterProducts = new GetterProducts.Builder("https://shop.mango.com/", españa.getCodigo_alf(), AppEcom.votf).
 				linea(LineaType.she).
 				seccion("prendas").
 				galeria("camisas").
 				familia("14").
-				numProducts(1).
+				numProducts(numProductsMax).
 				pagina(1).
 				build();
 		
-		Garment garment = getterProducts.getAll().get(0);
-		return garment.getArticleWithMoreStock();
+		
+		List<Article> listArticles = new ArrayList<>();
+		for (Garment garment : getterProducts.getAll()) {
+			listArticles.add(garment.getArticleWithMoreStock());
+		}
+		return listArticles;
 	}
 }
