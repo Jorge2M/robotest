@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -22,6 +23,7 @@ import com.mng.robotest.test80.mango.test.getdata.products.data.Garment.Article;
 public class GetterProducts extends JaxRsClient {
 	
 	private final String urlDomain;
+	private final String saleType;
 	private final String codigoPaisAlf;
 	private final AppEcom app;
 	private final LineaType lineaType;
@@ -39,7 +41,15 @@ public class GetterProducts extends JaxRsClient {
 		} else {
 			this.urlDomain = urlDomain + "/";
 		}
-			
+		
+		switch (app) {
+		case votf:
+			this.saleType = "V";
+			break;
+		default:
+			this.saleType = "";
+		}
+		
 		this.codigoPaisAlf = codigoPaisAlf;
 		this.app = app;
 		this.lineaType = lineaType;
@@ -53,7 +63,8 @@ public class GetterProducts extends JaxRsClient {
 	
 	private ProductList getProductList() throws Exception {
 		Client client = getClientIgnoreCertificates();
-		Response response = 
+		
+		WebTarget webTarget = 
 			client
 				.target(urlDomain + "services/productlist/products")
 				.path(codigoPaisAlf)
@@ -63,7 +74,13 @@ public class GetterProducts extends JaxRsClient {
 				.queryParam("menu", "familia;" + familia)
 				.queryParam("pageNum", pagina)
 				.queryParam("columnsPerRow", "1")
-				.queryParam("rowsPerPage", numProducts)
+				.queryParam("rowsPerPage", numProducts);
+		if ("".compareTo(saleType)!=0) {
+			webTarget = webTarget.queryParam("saleType", saleType);
+		}
+		
+		Response response = 
+			webTarget
 				.request(MediaType.APPLICATION_JSON)
 				.get();
 		
