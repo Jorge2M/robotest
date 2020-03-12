@@ -103,7 +103,7 @@ public class PageGaleriaStpV {
 		PageFichaArtStpV pageFichaStpV = new PageFichaArtStpV(app, channel);
 		pageFichaStpV.validaDetallesProducto(datosArticulo);
 
-		if (detailWindowHandle!=galeryWindowHandle) {
+		if (detailWindowHandle.compareTo(galeryWindowHandle)!=0) {
 			//Cerramos la pestaña y cambiamos a la ventana padre
 			driver.switchTo().window(detailWindowHandle);
 			driver.close();

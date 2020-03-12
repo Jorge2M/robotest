@@ -66,7 +66,7 @@ public class GetterProducts extends JaxRsClient {
 		
 		WebTarget webTarget = 
 			client
-				.target(urlDomain + "services/productlist/products")
+				.target(urlDomain.replace("http://",  "https://") + "services/productlist/products")
 				.path(codigoPaisAlf)
 				.path(getLineaPath())
 				.path("sections_" + lineaType.name() + "." + seccion + "_" + lineaType.name())
