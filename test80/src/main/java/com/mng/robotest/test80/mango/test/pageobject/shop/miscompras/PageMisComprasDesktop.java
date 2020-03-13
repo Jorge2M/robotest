@@ -1,65 +1,43 @@
-package com.mng.robotest.test80.mango.test.pageobject.shop.micuenta;
+package com.mng.robotest.test80.mango.test.pageobject.shop.miscompras;
 
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-//import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.mng.testmaker.conf.Channel;
-import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
-import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalDetalleMisCompras;
+import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraOnline;
+import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraTienda;
 
 
-public class PageMisCompras extends WebdrvWrapp {
-    
-    private final SecDetalleCompraTienda secDetalleCompraTienda;
-    private final SecQuickViewArticulo secQuickViewArticulo;
-    private final ModalDetalleMisCompras modalDetalleMisCompras;
-    
-    private final WebDriver driver;
-    private final Channel channel;
-    
-    public enum TypeCompra {Tienda, Online}
-    static String XPathCapaContenedora = "//div[@id='myPurchasesPage']";
-    static String XPathBlockTienda = "//div[@id='menuTabsShop']";
-    static String XPathBlockOnline = "//div[@id='menuTabsOnline']";
-    static String XPathListCompras = "//div[@id='listData']";
-    static String XPathEmptyListImageTienda = XPathListCompras + "//img[@src[contains(.,'empty_offline')]]"; 
-    static String XPathEmptyListImageOnline = XPathListCompras + "//img[@src[contains(.,'empty_online')]]";
-    static String prefixIdCompra = "box_";
-    static String XPathCompra = XPathListCompras + "//div[@id[contains(.,'" + prefixIdCompra + "')] and @class[contains(.,'fills')]]";
-    static String XPathArticuloMasInfo = "//div[@class='small-box-container']";
-    static String XPathReferenciaArticulo = XPathArticuloMasInfo + "//div[@class='reference']";
-    
-    private PageMisCompras(Channel channel, WebDriver driver) {
-    	this.driver = driver;
-    	this.channel = channel;
-        this.secDetalleCompraTienda = SecDetalleCompraTienda.getNew(driver);
-        this.secQuickViewArticulo = SecQuickViewArticulo.getNew(driver);
-        this.modalDetalleMisCompras = ModalDetalleMisCompras.getNew(channel, driver);
-    }
-    public static PageMisCompras getNew(Channel channel, WebDriver driver) {
-    	return new PageMisCompras(channel, driver);
-    }
-    
-    public SecDetalleCompraTienda getSecDetalleCompraTienda() {
-    	return this.secDetalleCompraTienda;
-    }
-    public SecQuickViewArticulo getSecQuickViewArticulo() {
-    	return this.secQuickViewArticulo;
-    }
-    public ModalDetalleMisCompras getModalDetalleMisCompras() {
-    	return this.modalDetalleMisCompras;
-    }
-    
-    public boolean isPageUntil(int maxSecondsToWait) {
-        return (isElementVisibleUntil(driver, By.xpath(XPathCapaContenedora), maxSecondsToWait));
-    }
-    
-    private String getXPathBlock(TypeCompra typeCompra) {
+public class PageMisComprasDesktop extends PageMisCompras {
+
+	static String XPathCapaContenedora = "//div[@id='myPurchasesPage']";
+	static String XPathBlockTienda = "//div[@id='menuTabsShop']";
+	static String XPathBlockOnline = "//div[@id='menuTabsOnline']";
+	static String XPathListCompras = "//div[@id='listData']";
+	static String XPathEmptyListImageTienda = XPathListCompras + "//img[@src[contains(.,'empty_offline')]]"; 
+	static String XPathEmptyListImageOnline = XPathListCompras + "//img[@src[contains(.,'empty_online')]]";
+	static String prefixIdCompra = "box_";
+	static String XPathCompra = XPathListCompras + "//div[@id[contains(.,'" + prefixIdCompra + "')] and @class[contains(.,'fills')]]";
+	static String XPathArticuloMasInfo = "//div[@class='small-box-container']";
+	static String XPathReferenciaArticulo = XPathArticuloMasInfo + "//div[@class='reference']";
+
+	private PageMisComprasDesktop(Channel channel, WebDriver driver) {
+		super(channel, driver);
+	}
+	public static PageMisComprasDesktop getNew(Channel channel, WebDriver driver) {
+		return new PageMisComprasDesktop(channel, driver);
+	}
+
+	@Override
+	public boolean isPageUntil(int maxSeconds) {
+		return (isElementVisibleUntil(driver, By.xpath(XPathCapaContenedora), maxSeconds));
+	}
+
+    private String getXPathBlockDesktop(TypeCompra typeCompra) {
         String xpathBlock = "";
         switch (typeCompra) {
         case Online: 
@@ -91,8 +69,8 @@ public class PageMisCompras extends WebdrvWrapp {
         return xpathBlock;        
     }
     
-    private String getXPathBlock(TypeCompra typeCompra, boolean active) {
-        String xpathBlock = getXPathBlock(typeCompra);
+    private String getXPathBlockDesktop(TypeCompra typeCompra, boolean active) {
+        String xpathBlock = getXPathBlockDesktop(typeCompra);
         String attributeActive = "@class[contains(.,'active')]";
         if (active) {
             return xpathBlock.replace("']", "' and " + attributeActive + "]");
@@ -131,13 +109,13 @@ public class PageMisCompras extends WebdrvWrapp {
         return (getXPathCompra(posInLista) + "//div[@class='shop']/p[2]");
     }
     
-    public boolean isPresentBlockUntil(int maxSecondsToWait, TypeCompra typeCompra) {
-        String xpathBlock = getXPathBlock(typeCompra);
+    public boolean isPresentBlockDesktopUntil(int maxSecondsToWait, TypeCompra typeCompra) {
+        String xpathBlock = getXPathBlockDesktop(typeCompra);
         return (isElementPresentUntil(driver, By.xpath(xpathBlock), maxSecondsToWait));
     }    
     
     public boolean isSelectedBlockUntil(int maxSecondsToWait, TypeCompra typeCompra) {
-        String xpathBlock = getXPathBlock(typeCompra, true);
+        String xpathBlock = getXPathBlockDesktop(typeCompra, true);
         return (isElementVisibleUntil(driver, By.xpath(xpathBlock), maxSecondsToWait));
     }
     
@@ -146,8 +124,8 @@ public class PageMisCompras extends WebdrvWrapp {
         return isElementVisible(driver, By.xpath(xpathImage));
     }
     
-    public void clickBlock(TypeCompra typeCompra) {
-        String xpathBlock = getXPathBlock(typeCompra);
+    public void clickBlockDesktop(TypeCompra typeCompra) {
+        String xpathBlock = getXPathBlockDesktop(typeCompra);
         driver.findElement(By.xpath(xpathBlock)).click();
     }
     

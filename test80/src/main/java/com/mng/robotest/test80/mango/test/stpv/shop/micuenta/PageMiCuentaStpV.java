@@ -14,6 +14,8 @@ import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.PageMiCuenta;
 import com.mng.robotest.test80.mango.test.stpv.shop.AllPagesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.StdValidationFlags;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
+import com.mng.robotest.test80.mango.test.stpv.shop.miscompras.PageMisComprasStpV;
+
 import org.openqa.selenium.WebDriver;
 
 public class PageMiCuentaStpV {

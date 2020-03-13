@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.stpv.shop.modales;
+package com.mng.robotest.test80.mango.test.stpv.shop.miscompras;
 
 
 import org.openqa.selenium.WebDriver;
@@ -7,8 +7,8 @@ import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.ModalDetalleMisCompras;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalBuscadorTiendasMisCompras;
-import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalDetalleMisCompras;
 
 public class ModalDetalleMisComprasStpV {
     

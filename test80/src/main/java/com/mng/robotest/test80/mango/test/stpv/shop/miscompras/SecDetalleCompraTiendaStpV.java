@@ -1,4 +1,4 @@
-package com.mng.robotest.test80.mango.test.stpv.shop.micuenta;
+package com.mng.robotest.test80.mango.test.stpv.shop.miscompras;
 
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
@@ -8,7 +8,7 @@ import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.CompraTienda;
-import com.mng.robotest.test80.mango.test.pageobject.shop.micuenta.SecDetalleCompraTienda;
+import com.mng.robotest.test80.mango.test.pageobject.shop.miscompras.SecDetalleCompraTienda;
 
 public class SecDetalleCompraTiendaStpV {
 	
