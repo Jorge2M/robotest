@@ -65,8 +65,12 @@ public class TestCaseTM  {
 		return invocationCount;
 	}
 	
+	public String getName() {
+		return result.getName();
+	}
+	
 	public String getNameUnique() {
-		String nameTest = result.getName() + getRefineDataName();
+		String nameTest = getName() + getRefineDataName();
 		if (getInvocationCount()>1) {
 			nameTest+="(" + getInvocationCount() + ")";
 		}

@@ -45,29 +45,4 @@ public class TestAspect {
 		
 		return returnValue;
 	}
-//
-//	private void skipTestIfSuiteEnded(TestCaseTM testCase, JoinPoint joinPoint) throws SkipException {
-//		if (testCase!=null) {
-//			TestMaker.skipTestsIfSuiteEnded(testCase.getSuiteParent());
-//		} else {
-//			if (!isFactoryMethod(joinPoint)) {
-//				throw new SkipException("TestCase removed");
-//			}
-//		}
-//	} 
-	
-//	private boolean isFactoryMethod(JoinPoint joinPoint) {
-//		String testMethod = joinPoint.getSignature().getName();
-//		Method[] listMethodsOfClass = joinPoint.getSignature().getDeclaringType().getDeclaredMethods();
-//		for (Method methodOfClass : listMethodsOfClass) {
-//			if (methodOfClass.getName().compareTo(testMethod)==0) {
-//				for (Annotation annotationMethod : methodOfClass.getAnnotations()) {
-//					if (annotationMethod.annotationType()==Factory.class) {
-//						return true;
-//					}
-//				}
-//			}
-//		}
-//		return false;
-//	}
 }

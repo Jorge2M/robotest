@@ -29,12 +29,18 @@ public class RemoteTest extends JaxRsClient {
 	throws Exception {
 		byte[] testSerialized = SerializationUtils.serialize(testObject);
 		String testSerializedStrB64 = Base64.getEncoder().encodeToString(testSerialized);
-		SuiteBean suiteRemote = suiteRun(inputParams, null, testSerializedStrB64);
-		return processTestCaseRemote(testCase, suiteRemote);
+		SuiteBean suiteRemote = suiteRun(
+				inputParams, 
+				null, 
+				testSerializedStrB64);
+		return processTestCaseRemote(testCase, suiteRemote); 
 	}
 	
 	public SuiteBean execute(TestCaseTM testCase, InputParamsTM inputParams) throws Exception {
-		SuiteBean suiteRemote = suiteRun(inputParams, Arrays.asList(testCase.getNameUnique()), null);
+		SuiteBean suiteRemote = suiteRun(
+				inputParams, 
+				Arrays.asList(testCase.getName()), 
+				null);
 		return processTestCaseRemote(testCase, suiteRemote);
 	}
 	

@@ -12,6 +12,7 @@ import com.mng.testmaker.domain.StateExecution;
 import com.mng.testmaker.domain.util.ParsePathClass;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.testmaker.testreports.stepstore.StepEvidence;
+import com.mng.testmaker.testreports.stepstore.Storage;
 import com.mng.testmaker.testreports.stepstore.EvidencesWarehouse;
 import com.mng.testmaker.testreports.stepstore.NettrafficStorer;
 
@@ -97,7 +98,11 @@ public class StepTM {
 	}
 	
 	public void captureAndStoreEvidences() {
-		evidencesWarehouse.captureAndStore();
+		if (suite.getInputParams().isRemote()) {
+			evidencesWarehouse.captureAndStore(Storage.Memory);
+		} else {
+			evidencesWarehouse.captureAndStore(Storage.File);
+		}
 	}
 	public void moveContentEvidencesToFile() {
 		evidencesWarehouse.moveContentEvidencesToFile();

@@ -9,25 +9,6 @@ import com.mng.testmaker.domain.suitetree.TestRunTM;
 
 public class EvidencesWarehouse {
 	
-	public enum Storage {
-		File(true, false), 
-		Memory(false, true), 
-		FileAndMemory(true, true);
-		
-		boolean file;
-		boolean memory;
-		private Storage(boolean file, boolean memory) {
-			this.file = file;
-			this.memory = memory;
-		}
-		public boolean inFile() {
-			return file;
-		}
-		public boolean inMemory() {
-			return memory;
-		}
-	}
-	
 	private List<StepEvidenceContent> storedEvidences = new ArrayList<StepEvidenceContent>();
 	private StepTM step;
 
@@ -59,18 +40,28 @@ public class EvidencesWarehouse {
 		return "";
 	}
 	
-	public void captureAndStore() {
+	public void captureAndStore(Storage typeStorage) {
 		if (isNecessariStorage(step)) {
-			createPathForEvidencesStore(step);
+			if (typeStorage.inFile()) {
+				createPathForEvidencesStore(step);
+			}
 			for (StepEvidence evidence : StepEvidence.values()) {
 				if (step.isNecessaryStorage(evidence)) {
-					EvidenceStorer evidenceStorer = evidenceStorerFactory(evidence);
-					if (evidenceStorer!=null) {
-						evidenceStorer.captureAndStoreContent(step);
-						evidenceStorer.storeContentInFile(step);
-						addEvidence(new StepEvidenceContent(evidence, evidenceStorer.getContent()));
-					}
+					storeEvidence(evidence, typeStorage);
 				}
+			}
+		}
+	}
+	
+	private void storeEvidence(StepEvidence evidence, Storage typeStorage) {
+		EvidenceStorer evidenceStorer = evidenceStorerFactory(evidence);
+		if (evidenceStorer!=null) {
+			evidenceStorer.captureAndStoreContent(step);
+			if (typeStorage.inFile()) {
+				evidenceStorer.storeContentInFile(step);
+			}
+			if (typeStorage.inMemory()) {
+				addEvidence(new StepEvidenceContent(evidence, evidenceStorer.getContent()));
 			}
 		}
 	}

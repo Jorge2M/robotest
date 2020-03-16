@@ -5,7 +5,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.testng.ITestContext;
 
 import java.util.ArrayList;
 import java.util.Base64;
@@ -13,7 +12,6 @@ import java.util.List;
 
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.suitetree.SuiteTM;
-import com.mng.testmaker.service.TestMaker;
 
 
 @Aspect
@@ -30,16 +28,27 @@ public class FactoryAspect {
 		return manageAroundFactory(joinPoint);
 	}
 	
+
 	private Object manageAroundFactory(ProceedingJoinPoint joinPoint) throws Throwable {
 		SuiteTM suite = SuiteTM.getSuiteCreatedInPresentThread();
 		InputParamsTM inputParams = suite.getInputParams();
-		if (inputParams.getTestObject()!=null) {
-			List<Object> listTests = new ArrayList<>();	
-			listTests.add(
-				SerializationUtils.deserialize(Base64.getDecoder().decode(inputParams.getTestObject())));
-			return listTests.toArray(new Object[listTests.size()]);
+		if (inputParams.isRemote()) {
+			return manageAroundRemote(inputParams);
 		}
 		
 		return joinPoint.proceed();
+	}
+	
+	/**
+	 * synchronized para evitar que un mismo TestObject sea procesado por varios @Factory
+	 */
+	private synchronized Object manageAroundRemote(InputParamsTM inputParams) {
+		List<Object> listTests = new ArrayList<>();	
+		if (inputParams.getTestObject()!=null) {
+			listTests.add(
+				SerializationUtils.deserialize(Base64.getDecoder().decode(inputParams.getTestObject())));
+			inputParams.setTestObject(null);
+		}
+		return listTests.toArray(new Object[listTests.size()]);
 	}
 }
