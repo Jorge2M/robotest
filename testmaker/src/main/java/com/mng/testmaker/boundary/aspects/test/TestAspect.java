@@ -4,8 +4,10 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 
 import java.io.Serializable;
+import java.lang.reflect.Method;
 
 import com.mng.testmaker.boundary.aspects.test.remote.RemoteTest;
 import com.mng.testmaker.domain.InputParamsTM;
@@ -39,8 +41,12 @@ public class TestAspect {
 			RemoteTest remoteTest = new RemoteTest();
 			remoteTest.execute(testCase, inputParams, (Serializable)joinPoint.getTarget());
 		} else {
-			testCase.makeWebDriver();
-			returnValue = joinPoint.proceed();
+			MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+			Method method = signature.getMethod();
+			if (method.getName().compareTo(inputParams.getListTestCasesName().get(0))==0) {
+				testCase.makeWebDriver();
+				returnValue = joinPoint.proceed();
+			}
 		}
 		
 		return returnValue;

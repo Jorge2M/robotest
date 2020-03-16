@@ -98,11 +98,13 @@ public abstract class SuiteMaker {
 		this.threadCount = threadCount;
 	}
     
-    private static List<Class<?>> createStandardListeners() {
+    private List<Class<?>> createStandardListeners() {
         List<Class<?>> listeners = new ArrayList<>();
         listeners.add(MyTransformer.class);
         listeners.add(InvokeListener.class);
-        listeners.add(Reporter.class);
+        if (!inputData.isRemote()) {
+        	listeners.add(Reporter.class);
+        }
         return listeners;
     }
 

@@ -31,7 +31,7 @@ public class RemoteTest extends JaxRsClient {
 		String testSerializedStrB64 = Base64.getEncoder().encodeToString(testSerialized);
 		SuiteBean suiteRemote = suiteRun(
 				inputParams, 
-				null, 
+				Arrays.asList(testCase.getName()), 
 				testSerializedStrB64);
 		return processTestCaseRemote(testCase, suiteRemote); 
 	}
