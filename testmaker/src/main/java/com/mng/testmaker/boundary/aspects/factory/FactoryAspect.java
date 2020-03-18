@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
@@ -29,20 +30,23 @@ public class FactoryAspect {
 	}
 	
 
-	private Object manageAroundFactory(ProceedingJoinPoint joinPoint) throws Throwable {
+	private Object[] manageAroundFactory(ProceedingJoinPoint joinPoint) throws Throwable {
 		SuiteTM suite = SuiteTM.getSuiteCreatedInPresentThread();
 		InputParamsTM inputParams = suite.getInputParams();
-		if (inputParams.isRemote()) {
-			return manageAroundRemote(inputParams);
+		Object[] listTests;
+		if (inputParams.isTestExecutingInRemote()) {
+			listTests = manageAroundRemote(inputParams);
+		} else {
+			listTests = (Object[])joinPoint.proceed();
 		}
-		
-		return joinPoint.proceed();
+		suite.addFactoryTests(Arrays.asList(listTests));
+		return listTests;
 	}
 	
 	/**
 	 * synchronized para evitar que un mismo TestObject sea procesado por varios @Factory
 	 */
-	private synchronized Object manageAroundRemote(InputParamsTM inputParams) {
+	private synchronized Object[] manageAroundRemote(InputParamsTM inputParams) {
 		List<Object> listTests = new ArrayList<>();	
 		if (inputParams.getTestObject()!=null) {
 			listTests.add(

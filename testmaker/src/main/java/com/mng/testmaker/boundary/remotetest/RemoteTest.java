@@ -1,4 +1,4 @@
-package com.mng.testmaker.boundary.aspects.test.remote;
+package com.mng.testmaker.boundary.remotetest;
 
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
@@ -17,6 +17,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import org.apache.commons.lang3.SerializationUtils;
 
 import com.mng.testmaker.domain.InputParamsTM;
+import com.mng.testmaker.domain.ServerSubscribers.ServerSubscriber;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.testmaker.domain.suitetree.StepTM;
 import com.mng.testmaker.domain.suitetree.SuiteBean;
@@ -25,7 +26,22 @@ import com.mng.testmaker.domain.suitetree.TestCaseTM;
 
 public class RemoteTest extends JaxRsClient {
 	
-	public SuiteBean execute(TestCaseTM testCase, InputParamsTM inputParams, Serializable testObject) 
+	private final ServerSubscriber server;
+	
+	public RemoteTest(ServerSubscriber server) {
+		this.server = server;
+	}
+	
+	public SuiteBean execute(TestCaseTM testCase, Object testObject) 
+	throws Exception {
+		InputParamsTM inputParams = testCase.getInputParamsSuite();
+		if (testCase.getSuiteParent().isTestFromFactory(testObject)) {
+			return executeTestFromFactory(testCase, inputParams, (Serializable)testObject);
+		}
+		return executeTestStandar(testCase, inputParams);
+	}
+	
+	private SuiteBean executeTestFromFactory(TestCaseTM testCase, InputParamsTM inputParams, Serializable testObject) 
 	throws Exception {
 		byte[] testSerialized = SerializationUtils.serialize(testObject);
 		String testSerializedStrB64 = Base64.getEncoder().encodeToString(testSerialized);
@@ -36,7 +52,7 @@ public class RemoteTest extends JaxRsClient {
 		return processTestCaseRemote(testCase, suiteRemote); 
 	}
 	
-	public SuiteBean execute(TestCaseTM testCase, InputParamsTM inputParams) throws Exception {
+	private SuiteBean executeTestStandar(TestCaseTM testCase, InputParamsTM inputParams) throws Exception {
 		SuiteBean suiteRemote = suiteRun(
 				inputParams, 
 				Arrays.asList(testCase.getName()), 
@@ -46,9 +62,7 @@ public class RemoteTest extends JaxRsClient {
 	
 	private SuiteBean processTestCaseRemote(TestCaseTM testCase, SuiteBean suiteRemoteExecuted) {
 		//Get TestCase Remote
-		TestCaseBean testCaseRemote = suiteRemoteExecuted.
-				getListTestRun().get(0).
-				getListTestCase().get(0);
+		TestCaseBean testCaseRemote = getTestCaseRemote(suiteRemoteExecuted);
 		
 		//Coser TestCase
 		String throwableStrB64 = testCaseRemote.getThrowable();
@@ -71,7 +85,19 @@ public class RemoteTest extends JaxRsClient {
 		return suiteRemoteExecuted;
 	}
 	
-	SuiteBean suiteRun(InputParamsTM inputParams, List<String> testCases, String testObjectSerialized) 
+	private TestCaseBean getTestCaseRemote(SuiteBean suiteRemote) {
+		List<TestCaseBean> listTestCaseRemote = suiteRemote
+				.getListTestRun().get(0)
+				.getListTestCase();
+		for (TestCaseBean testCaseRemote : listTestCaseRemote) {
+			if (testCaseRemote.getListStep().size() > 0) {
+				return testCaseRemote;
+			}
+		}
+		return listTestCaseRemote.get(0);
+	}
+	
+	public SuiteBean suiteRun(InputParamsTM inputParams, List<String> testCases, String testObjectSerialized) 
 	throws Exception {
 		Form formParams = getFormParams(inputParams.getAllParamsValues());
 		MultivaluedMap<String, String> mapParams = formParams.asMap();
@@ -87,7 +113,7 @@ public class RemoteTest extends JaxRsClient {
 		Client client = getClientIgnoreCertificates();
 		SuiteBean suiteData = 
 			client
-				.target("http://localhost:80/suiterun")
+				.target(server.getUrl() + "/suiterun")
 				.request(MediaType.APPLICATION_JSON)
 				.post(Entity.form(formParams), SuiteBean.class);
 

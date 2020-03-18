@@ -102,7 +102,7 @@ public abstract class SuiteMaker {
         List<Class<?>> listeners = new ArrayList<>();
         listeners.add(MyTransformer.class);
         listeners.add(InvokeListener.class);
-        if (!inputData.isRemote()) {
+        if (!inputData.isTestExecutingInRemote()) {
         	listeners.add(Reporter.class);
         }
         return listeners;

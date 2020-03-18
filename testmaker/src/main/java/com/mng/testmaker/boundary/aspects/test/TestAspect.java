@@ -6,11 +6,10 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 
-import java.io.Serializable;
 import java.lang.reflect.Method;
 
-import com.mng.testmaker.boundary.aspects.test.remote.RemoteTest;
 import com.mng.testmaker.domain.InputParamsTM;
+import com.mng.testmaker.domain.ServerSubscribers;
 import com.mng.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.testmaker.service.TestMaker;
 
@@ -35,20 +34,26 @@ public class TestAspect {
 			TestMaker.skipTestsIfSuiteEnded(testCase.getSuiteParent());
 		}
 		
-		Object returnValue = null;
 		InputParamsTM inputParams = testCase.getInputParamsSuite();
-		if (!inputParams.isRemote()) {
-			RemoteTest remoteTest = new RemoteTest();
-			remoteTest.execute(testCase, inputParams, (Serializable)joinPoint.getTarget());
+		if (!inputParams.isTestExecutingInRemote() && 
+			ServerSubscribers.isSome()) {
+			ServerSubscribers.sendTestToRemoteServer(testCase, joinPoint.getTarget());
+			//TODO si un @Test retorna un valor <> de void tendremos problemas. Se debería serializar el objeto de respuesta
+			return null;
 		} else {
-			MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-			Method method = signature.getMethod();
-			if (method.getName().compareTo(inputParams.getListTestCasesName().get(0))==0) {
-				testCase.makeWebDriver();
-				returnValue = joinPoint.proceed();
-			}
+			return executeTest(testCase, joinPoint);
 		}
-		
-		return returnValue;
 	}
+	
+	private Object executeTest(TestCaseTM testCase, ProceedingJoinPoint joinPoint) throws Throwable {
+		InputParamsTM inputParams = testCase.getInputParamsSuite();
+		Method presentMethod = ((MethodSignature)joinPoint.getSignature()).getMethod();
+		String testCaseFilter = inputParams.getListTestCasesName().get(0);
+		if (presentMethod.getName().compareTo(testCaseFilter)==0) {
+			testCase.makeWebDriver();
+			return joinPoint.proceed();
+		}
+		return null;
+	}
+	
 }

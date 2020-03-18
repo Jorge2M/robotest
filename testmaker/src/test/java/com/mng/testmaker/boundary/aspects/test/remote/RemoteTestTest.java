@@ -1,13 +1,16 @@
 package com.mng.testmaker.boundary.aspects.test.remote;
 
+import java.net.URL;
 import java.util.Arrays;
 
 import org.junit.Ignore;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import com.mng.testmaker.boundary.remotetest.RemoteTest;
 import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.domain.InputParamsBasic;
+import com.mng.testmaker.domain.ServerSubscribers.ServerSubscriber;
 import com.mng.testmaker.domain.suitetree.SuiteBean;
 import com.mng.testmaker.domain.suitetree.TestCaseBean;
 
@@ -29,7 +32,8 @@ public class RemoteTestTest {
 		inputParams.setUrlBase("https://shop.mango.com/preHome.faces");
 		
 		//When
-		RemoteTest remoteTest = new RemoteTest();
+		ServerSubscriber server = new ServerSubscriber(new URL("https://localhost:80"));
+		RemoteTest remoteTest = new RemoteTest(server);
 		SuiteBean suiteRemote = remoteTest.suiteRun(inputParams, Arrays.asList("SES002"), null);
 		
 		//Then

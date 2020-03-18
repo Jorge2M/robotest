@@ -98,7 +98,7 @@ public class StepTM {
 	}
 	
 	public void captureAndStoreEvidences() {
-		if (suite.getInputParams().isRemote()) {
+		if (suite.getInputParams().isTestExecutingInRemote()) {
 			evidencesWarehouse.captureAndStore(Storage.Memory);
 		} else {
 			evidencesWarehouse.captureAndStore(Storage.File);

@@ -13,7 +13,6 @@ import com.mng.testmaker.domain.TestRunMaker;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.ErrorStorer;
 import com.mng.robotest.test80.mango.test.data.Constantes;
-import com.mng.robotest.test80.mango.test.factoryes.LineasBannersFactory;
 import com.mng.robotest.test80.mango.test.factoryes.ListPrecompraPaises;
 
 public class PagosPaisesSuite extends SuiteMaker {

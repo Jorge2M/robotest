@@ -52,6 +52,18 @@ public class FichaProducto {
 		return dCtxSh;
 	}
 	
+//	@BeforeTest (groups={"FichaProducto", "Canal:desktop_App:all"})
+//	public void before() {
+//		InputParamsMango inputParamsSuite = (InputParamsMango)SuiteTM.getSuiteCreatedInPresentThread().getInputParams();
+//		System.out.println("Before Test. Test executing in remote: " + inputParamsSuite.isTestExecutingInRemote());
+//	}
+//	
+//	@AfterTest (groups={"FichaProducto", "Canal:desktop_App:all"})
+//	public void after() {
+//		InputParamsMango inputParamsSuite = (InputParamsMango)SuiteTM.getSuiteCreatedInPresentThread().getInputParams();
+//		System.out.println("After Test. Test executing in remote: " + inputParamsSuite.isTestExecutingInRemote());
+//	}
+	
 	@Test (
 		groups={"FichaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="[Usuario registrado] Se testean las features principales de una ficha con origen el buscador: añadir a la bolsa, selección color/talla, buscar en tienda, añadir a favoritos")

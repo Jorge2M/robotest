@@ -31,6 +31,7 @@ public class SuiteTM extends XmlSuite {
 	private long timeFin = 0;
 	private final PoolWebDrivers poolWebDrivers = new PoolWebDrivers();
 	private SenderMailEndSuiteI senderMail;
+	private List<Object> factoryTests = new ArrayList<>();
 	
 	public SuiteTM(String idSuiteExecution, InputParamsTM inputParams) {
 		this.idSuiteExecution = idSuiteExecution;
@@ -140,9 +141,23 @@ public class SuiteTM extends XmlSuite {
 	public void setTimeFin(long timeFin) {
 		this.timeFin = timeFin;
 	}
-
 	public long getDurationMillis() {
 		return timeFin - timeInicio;
+	}
+	
+	public List<Object> getFactoryTests() {
+		return factoryTests;
+	}
+	public void addFactoryTests(List<Object> newFactoryTests) {
+		factoryTests.addAll(newFactoryTests);
+	}
+	public boolean isTestFromFactory(Object test) {
+		for (Object testFactory : factoryTests) {
+			if (testFactory==test) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void setListenersClass(List<Class<?>> listListeners) {

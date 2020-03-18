@@ -554,10 +554,10 @@ public abstract class InputParamsTM {
 		}
 		return true;
 	} 
-	public void setRemote(String remote) {
+	public void setTestExecutingInRemote(String remote) {
 		this.remote = remote;
 	}
-	public boolean isRemote() {
+	public boolean isTestExecutingInRemote() {
 		if (remote!=null) {
 			return ("true".compareTo(remote)==0);
 		}
