@@ -49,7 +49,8 @@ public class TestAspect {
 		InputParamsTM inputParams = testCase.getInputParamsSuite();
 		Method presentMethod = ((MethodSignature)joinPoint.getSignature()).getMethod();
 		String testCaseFilter = inputParams.getListTestCasesName().get(0);
-		if (presentMethod.getName().compareTo(testCaseFilter)==0) {
+		if (!inputParams.isTestExecutingInRemote() || 
+			presentMethod.getName().compareTo(testCaseFilter)==0) {
 			testCase.makeWebDriver();
 			return joinPoint.proceed();
 		}
