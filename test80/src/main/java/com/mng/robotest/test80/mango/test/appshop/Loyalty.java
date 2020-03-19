@@ -2,7 +2,6 @@ package com.mng.robotest.test80.mango.test.appshop;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import com.mng.robotest.test80.mango.test.stpv.shop.loyalty.PageHomeConseguirPor1200LikesStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.loyalty.PageHomeDonateLikesStpV;
@@ -13,13 +12,11 @@ import com.mng.robotest.test80.mango.test.stpv.shop.loyalty.PageRegalarMisLikesS
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
-import com.mng.testmaker.domain.InputParamsTM.TypeAccess;
 import com.mng.testmaker.service.TestMaker;
 import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
-import com.mng.robotest.test80.mango.test.data.ValesData.Campanya;
 import com.mng.robotest.test80.mango.test.datastored.DataBag;
 import com.mng.robotest.test80.mango.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test80.mango.test.datastored.DataCtxPago;
@@ -30,10 +27,7 @@ import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.IdiomaPais;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.generic.UtilsMangoTest;
-import com.mng.robotest.test80.mango.test.generic.beans.FactoryVale;
-import com.mng.robotest.test80.mango.test.generic.beans.ValePais;
 import com.mng.robotest.test80.mango.test.getdata.loyaltypoints.ClientApiLoyaltyPointsDev;
-import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test80.mango.test.pageobject.shop.loyalty.PageHomeDonateLikes.ButtonLikes;
 import com.mng.robotest.test80.mango.test.pageobject.shop.menus.KeyMenu1rstLevel;
@@ -43,12 +37,9 @@ import com.mng.robotest.test80.mango.test.stpv.navigations.manto.PedidoNavigatio
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.GaleriaNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.navigations.shop.PagoNavigationsStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.AccesoStpV;
-import com.mng.robotest.test80.mango.test.stpv.shop.SecBolsaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusUserStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
-import com.mng.robotest.test80.mango.test.suites.RegistrosSuite.VersionRegistroSuite;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
-import com.mng.robotest.test80.mango.test.utils.UtilsTestMango;
 
 public class Loyalty {
 	
@@ -98,7 +89,7 @@ public class Loyalty {
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 		dCtxSh.pais = españa;
 		dCtxSh.idioma = castellano;
 		return dCtxSh;

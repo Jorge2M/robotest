@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import com.mng.testmaker.service.TestMaker;
-import com.mng.robotest.test80.access.InputParamsMango;
+//import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.PaisShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Pais;
@@ -26,9 +26,9 @@ public class ConsolaVotf {
 	public void VTF001_GenerarPedido() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
 
-		InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
-		String paginaIniVOTF = inputParamsSuite.getUrlBase();
-		ConsolaVotfStpV.accesoPagInicial(paginaIniVOTF, driver);
+		//InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+		//String paginaIniVOTF = inputParamsSuite.getUrlBase();
+		ConsolaVotfStpV.accesoPagInicial(/*paginaIniVOTF, */driver);
 		ConsolaVotfStpV.selectEntornoTestAndCons("Preproducción", driver);
 		
 		int numProdsMax = 10;

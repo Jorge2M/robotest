@@ -68,7 +68,7 @@ public class RebajasJun2019 implements Serializable {
 	    dCtxSh.setChannel(inputParamsSuite.getChannel());
 	    dCtxSh.pais = this.paisFactory;
 	    dCtxSh.idioma = this.idiomaFactory;
-	    dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+	    //dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 	    return dCtxSh;
     }
 	

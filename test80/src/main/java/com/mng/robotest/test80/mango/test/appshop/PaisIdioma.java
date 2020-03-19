@@ -78,7 +78,7 @@ public class PaisIdioma implements Serializable {
             dCtxSh.idioma = castellano;
             dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
             dCtxSh.setChannel(inputParamsSuite.getChannel());
-            dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+            //dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
         }
         if (linesToTest==null) {
             linesToTest = dCtxSh.pais.getShoponline().getLineasToTest(dCtxSh.appE);

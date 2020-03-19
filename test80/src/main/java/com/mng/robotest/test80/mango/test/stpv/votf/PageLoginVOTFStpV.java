@@ -32,7 +32,7 @@ public class PageLoginVOTFStpV {
         	step.setResExpected("Aparece la página de selección de la línea");
         }
         
-        PageLoginVOTF.goToFromUrlAndSetTestABs(urlAcceso, dCtxSh, driver);
+        PageLoginVOTF.goToFromUrlAndSetTestABs(/*urlAcceso,*/ dCtxSh, driver);
         PageLoginVOTF.inputUsuario(usuarioVOTF, driver);
         PageLoginVOTF.inputPassword(passwordVOTF, driver);
         PageLoginVOTF.clickButtonContinue(driver);

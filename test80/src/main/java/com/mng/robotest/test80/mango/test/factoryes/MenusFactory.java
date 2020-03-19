@@ -37,7 +37,7 @@ public class MenusFactory {
                     if (Utilidades.lineaToTest(linea, app)) {
                         List<Linea> lineasAprobar = new ArrayList<>();
                         lineasAprobar.add(linea);
-           	            DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, idioma, inputData.getUrlBase()); 
+           	            DataCtxShop dCtxSh = new DataCtxShop(app, channel, pais, idioma/*, inputData.getUrlBase()*/); 
                         listTests.add(new PaisIdioma(version, dCtxSh, lineasAprobar, prioridad));
                         prioridad+=1;            		
                         System.out.println(

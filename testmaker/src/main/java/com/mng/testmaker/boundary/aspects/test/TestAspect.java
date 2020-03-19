@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.ServerSubscribers;
@@ -48,9 +49,10 @@ public class TestAspect {
 	private Object executeTest(TestCaseTM testCase, ProceedingJoinPoint joinPoint) throws Throwable {
 		InputParamsTM inputParams = testCase.getInputParamsSuite();
 		Method presentMethod = ((MethodSignature)joinPoint.getSignature()).getMethod();
-		String testCaseFilter = inputParams.getListTestCasesName().get(0);
+		List<String> listTestCaseFilter = inputParams.getListTestCasesName();
 		if (!inputParams.isTestExecutingInRemote() || 
-			presentMethod.getName().compareTo(testCaseFilter)==0) {
+			listTestCaseFilter.size()==0 ||
+			presentMethod.getName().compareTo(listTestCaseFilter.get(0))==0) {
 			testCase.makeWebDriver();
 			return joinPoint.proceed();
 		}

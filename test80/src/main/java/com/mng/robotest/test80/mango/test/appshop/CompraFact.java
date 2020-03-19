@@ -98,7 +98,7 @@ public class CompraFact implements Serializable {
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
         dCtxSh.setChannel(inputParamsSuite.getChannel());
-        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+        //dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
         dCtxSh.pais = this.paisFactory;
         dCtxSh.idioma = this.idiomaFactory;
         return dCtxSh;

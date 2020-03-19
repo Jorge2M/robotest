@@ -210,11 +210,15 @@ public class TestCaseTM  {
 	
 	private WebDriver getWebDriverForTestCase() {
 		InputParamsTM inputData = suiteParent.getInputParams();
-		return (
-			suiteParent.getPoolWebDrivers().getWebDriver(
-				inputData.getWebDriverType(), 
-				inputData.getChannel(), 
-				testRunParent));
+		WebDriver driver = suiteParent
+				.getPoolWebDrivers()
+				.getWebDriver(
+						inputData.getWebDriverType(), 
+						inputData.getChannel(), 
+						testRunParent);
+		driver.manage().deleteAllCookies();
+		driver.get(inputData.getUrlBase());
+		return driver;
 	}
 	
 	public WebDriver getDriver() {

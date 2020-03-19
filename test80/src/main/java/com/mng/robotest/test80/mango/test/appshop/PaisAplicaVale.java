@@ -58,7 +58,7 @@ public class PaisAplicaVale implements Serializable {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		TestMaker.getTestCase().setRefineDataName(index_fact);
 		dCtxSh.userRegistered = false;
-		dCtxSh.urlAcceso = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
+		//dCtxSh.urlAcceso = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
 		DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);
 		FlagsTestCkout fTCkout = (FlagsTestCkout)fTCkoutIni.clone();
 		fTCkout.emailExist = true; 
@@ -82,7 +82,7 @@ public class PaisAplicaVale implements Serializable {
 		WebDriver driver = TestMaker.getDriverTestCase();
 		TestMaker.getTestCase().setRefineDataName(index_fact);
 		dCtxSh.userRegistered = false;
-		dCtxSh.urlAcceso = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
+		//dCtxSh.urlAcceso = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
 		DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);
 		FlagsTestCkout fTCkout = (FlagsTestCkout)fTCkoutIni.clone();
 		fTCkout.emailExist = true; 

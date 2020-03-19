@@ -13,10 +13,10 @@ import com.mng.robotest.test80.mango.test.pageobject.votfcons.PageConsola;
 public class ConsolaVotfStpV {
 
 	@Step (
-		description="Accedemos a la página inicial de VOTF",
+		description="Nos hemos posicionado en la página inicial de VOTF",
 		expected="Aparece la página inicial de VOTF")
-    public static void accesoPagInicial(String urlVOTF, WebDriver driver) {
-        driver.get(urlVOTF);
+    public static void accesoPagInicial(/*String urlVOTF,*/ WebDriver driver) {
+        //driver.get(urlVOTF);
         checkAfterAccessInitialPage(driver);
     }
 	

@@ -197,7 +197,7 @@ public class RebajasSpringIsHere2019 {
         dCtxSh.setChannel(inputParamsSuite.getChannel());
         dCtxSh.pais = this.paisFactory;
         dCtxSh.idioma = this.idiomaFactory;
-        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+        //dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
         return dCtxSh;
     }
 	

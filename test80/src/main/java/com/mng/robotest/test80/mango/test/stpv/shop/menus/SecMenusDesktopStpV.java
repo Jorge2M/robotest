@@ -16,6 +16,7 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.conf.State;
 import com.mng.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.test80.mango.test.data.Constantes;
+import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea;
@@ -483,7 +484,6 @@ public class SecMenusDesktopStpV {
         expected=
         	"Aparece la ficha del producto " + tagRefArticle)
     public static void checkURLRedirectFicha(Pais pais, DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-    	
     	GetterProducts getterProducts = new GetterProducts.Builder(dCtxSh).build();
     	Garment product = getterProducts.getAll().get(0);
     	Article article = product.getArticleWithMoreStock();

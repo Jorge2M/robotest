@@ -20,7 +20,6 @@ import com.mng.robotest.test80.mango.test.pageobject.manto.SecCabecera;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageJCAS;
 import com.mng.robotest.test80.mango.test.pageobject.shop.PageMenusManto;
 
-import org.apache.commons.lang3.SerializationUtils;
 import org.openqa.selenium.WebDriver;
 
 public class ListMenusManto {
@@ -32,7 +31,7 @@ public class ListMenusManto {
 		ArrayList<Menus> listTests = new ArrayList<Menus>();
 		AppEcom appEcom = (AppEcom)inputData.getApp();
 		try {
-			ArrayList<String> listCabeceraMenus = getListCabecerasMenus(inputData.getUrlBase(), ctxTestRun);
+			ArrayList<String> listCabeceraMenus = getListCabecerasMenus(/*inputData.getUrlBase(),*/ ctxTestRun);
 			int prioridad=0;
 			for (int i=0; i<listCabeceraMenus.size(); i++) {
 				System.out.println("Creado Test con datos: URL=" + inputData.getUrlBase() + ", cabeceraMenuName=" + listCabeceraMenus.get(i));
@@ -55,25 +54,25 @@ public class ListMenusManto {
     /**
      * Obtiene la lista con los nombres de las cabeceras de los grupos de menús de Manto
      */
-    private ArrayList<String> getListCabecerasMenus(String urlBaseManto, ITestContext ctxTestRun) throws Exception { 
+    private ArrayList<String> getListCabecerasMenus(/*String urlBaseManto, */ITestContext ctxTestRun) throws Exception { 
     	TestRunTM testRun = TestMaker.getTestRun(ctxTestRun);
     	WebDriver driver = 
     		FactoryWebdriverMaker.make(WebDriverType.firefox, testRun)
 				.setChannel(Channel.desktop)
 				.build(); 
 
-    	goToMantoLoginAndSelectTienda(urlBaseManto, Constantes.userManto, Constantes.passwordManto, driver);
+    	goToMantoLoginAndSelectTienda(/*urlBaseManto, */Constantes.userManto, Constantes.passwordManto, driver);
         ArrayList<String> listMenuNames = PageMenusManto.getListCabecerasMenusName(driver);
         driver.quit();
         return listMenuNames;
     }
     
-    private void goToMantoLoginAndSelectTienda(String urlManto, String usrManto, String passManto, WebDriver driver) 
+    private void goToMantoLoginAndSelectTienda(/*String urlManto, */String usrManto, String passManto, WebDriver driver) 
     throws Exception {
         String codigoEspanya = "001";
         String almacenEspanya = "001";
-    	driver.manage().deleteAllCookies();
-        driver.get(urlManto);
+//    	driver.manage().deleteAllCookies();
+//        driver.get(urlManto);
         PageJCAS.identication(driver, usrManto, passManto);
         TiendaManto tienda = TiendaManto.getTienda(almacenEspanya, codigoEspanya, AppEcom.shop);
         if (!PageSelTda.isPage(driver)) {

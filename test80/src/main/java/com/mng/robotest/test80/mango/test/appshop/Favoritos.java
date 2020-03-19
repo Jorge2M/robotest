@@ -65,7 +65,7 @@ public class Favoritos implements Serializable {
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 
 		//Si el acceso es normal (no es desde una @Factory) utilizaremos el España/Castellano
 		if (this.paisFactory==null) {

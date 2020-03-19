@@ -24,12 +24,12 @@ import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 @SuppressWarnings({"static-access"})
 public class AccesoNavigations {
 
-	public static void goToInitURL(String urlInit, WebDriver driver) throws Exception {
-    	String currentUrl = driver.getCurrentUrl();
-    	if (currentUrl.compareTo(urlInit)!=0) {
-    		driver.get(urlInit);
-    	}
-	}
+//	public static void goToInitURL(String urlInit, WebDriver driver) throws Exception {
+//    	String currentUrl = driver.getCurrentUrl();
+//    	if (currentUrl.compareTo(urlInit)!=0) {
+//    		driver.get(urlInit);
+//    	}
+//	}
 	
     /**
     /* Acceso a la página inicial (home) de la APP Web (shop o VOTF)
@@ -57,7 +57,7 @@ public class AccesoNavigations {
      */
     public static void accesoVOTF(DataCtxShop dCtxSh, WebDriver driver) 
     throws Exception {
-        PageLoginVOTF.goToFromUrlAndSetTestABs(dCtxSh.urlAcceso, dCtxSh, driver);
+        PageLoginVOTF.goToFromUrlAndSetTestABs(/*dCtxSh.urlAcceso,*/ dCtxSh, driver);
         PageLoginVOTF.inputUsuario(dCtxSh.pais.getAccesoVOTF().getUsuario(), driver);
         PageLoginVOTF.inputPassword(dCtxSh.pais.getAccesoVOTF().getPassword(), driver);
         PageLoginVOTF.clickButtonContinue(driver);

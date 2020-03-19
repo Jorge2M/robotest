@@ -18,8 +18,6 @@ public class BuscarWithoutRefactor {
 	public void BUS001_Buscar_literal_con_resultados() throws Exception {
 		TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
 		WebDriver driver = testCase.getDriver();
-		driver.get(testCase.getInputParamsSuite().getUrlBase());
-		
 		inputTextAndClickBuscarConGoogle("Wikipedia", driver);
 	}
 	

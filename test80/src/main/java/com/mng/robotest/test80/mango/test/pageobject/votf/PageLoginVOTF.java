@@ -7,7 +7,7 @@ import com.mng.testmaker.conf.Channel;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
-import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
+//import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
 import com.mng.robotest.test80.mango.test.utils.testab.TestABactive;
 
 public class PageLoginVOTF extends WebdrvWrapp {
@@ -16,8 +16,8 @@ public class PageLoginVOTF extends WebdrvWrapp {
     private static final String XPathInputPassword = "//input[@class='pwd']";
     private static final String XPathButtonContinue = "//input[@class[contains(.,'button submit')]]";
     
-    public static void goToFromUrlAndSetTestABs(String urlLogin, DataCtxShop dCtxSh, WebDriver driver) throws Exception {    
-    	AccesoNavigations.goToInitURL(urlLogin, driver);
+    public static void goToFromUrlAndSetTestABs(/*String urlLogin,*/ DataCtxShop dCtxSh, WebDriver driver) throws Exception {    
+    	//AccesoNavigations.goToInitURL(/*urlLogin,*/ driver);
         waitForPageLoaded(driver);
         activateTestsABs(dCtxSh.channel, dCtxSh.appE, driver);
     }

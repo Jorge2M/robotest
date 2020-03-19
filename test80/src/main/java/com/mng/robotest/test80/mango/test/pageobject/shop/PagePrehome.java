@@ -21,7 +21,7 @@ import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 import com.mng.robotest.test80.mango.test.pageobject.shop.cabecera.SecCabeceraOutletMobil;
 import com.mng.robotest.test80.mango.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.test80.mango.test.pageobject.utils.LocalStorage;
-import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
+//import com.mng.robotest.test80.mango.test.stpv.navigations.shop.AccesoNavigations;
 import com.mng.robotest.test80.mango.test.utils.testab.TestABactive;
 
 /**
@@ -228,7 +228,7 @@ public class PagePrehome extends WebdrvWrapp {
      * Ejecuta una acceso a la shop vía la páinga de prehome
      */
     public static void accesoShopViaPrehome(DataCtxShop dCtxSh, WebDriver driver) throws Exception {
-        goToPagePrehome(dCtxSh.urlAcceso, driver);
+    	identJCASifExists(/*dCtxSh.urlAcceso,*/ driver);
         TestABactive.currentTestABsToActivate(dCtxSh.channel, dCtxSh.appE, driver);
         PagePrehome.selecPaisIdiomaYAccede(dCtxSh, driver);
         ModalLoyaltyAfterAccess.closeModalIfVisible(driver);
@@ -247,13 +247,10 @@ public class PagePrehome extends WebdrvWrapp {
         selecionProvIdiomAndEnter(dCtxSh.pais, dCtxSh.idioma, dCtxSh.channel, driver);
     }
     
-    /**
-     * Nos posiconamos en la página de Prehome desde una URL (sorteando la página de JCAS si aparece)
-     */
-    public static void goToPagePrehome(String urlPreHome, WebDriver driver) throws Exception {
+    public static void identJCASifExists(/*String urlPreHome, */WebDriver driver) throws Exception {
     	//Temporal para test Canary!!!
     	//AccesoNavigations.goToInitURL(urlPreHome + "?canary=true", driver);
-    	AccesoNavigations.goToInitURL(urlPreHome, driver);
+    	//AccesoNavigations.goToInitURL(/*urlPreHome,*/ driver);
         waitForPageLoaded(driver);
         if (PageJCAS.thisPageIsShown(driver)) {
             PageJCAS.identication(driver, "jorge.munoz", "2010martina");

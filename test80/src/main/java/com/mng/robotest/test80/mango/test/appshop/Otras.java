@@ -38,7 +38,7 @@ public class Otras {
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 		return dCtxSh;
 	}
 	
@@ -95,7 +95,8 @@ public class Otras {
     public void OTR004_cambioPaisURL() throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
-        String urlBaseTest = dCtxSh.urlAcceso;
+        InputParamsMango inputParamsSuite = (InputParamsMango)TestMaker.getTestCase().getInputParamsSuite();
+        String urlBaseTest = inputParamsSuite.getUrlBase();
 
         //Definimos la lista de los 3 países que pueden estar asociados a la IP del usuario
         List<Pais> listPaisAsocIP = new ArrayList<>();

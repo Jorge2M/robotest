@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import com.mng.testmaker.domain.InputParamsTM;
+//import com.mng.testmaker.domain.InputParamsTM;
 import com.mng.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.testmaker.domain.suitetree.TestRunTM;
 import com.mng.testmaker.service.TestMaker;
@@ -107,7 +108,7 @@ public class Manto {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta de la información referente a varios pedidos")
 	public void MAN002_Consulta_ID_EAN() throws Exception {
-    	setDataMantoAccess();
+		setDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
@@ -132,7 +133,7 @@ public class Manto {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta y gestión de clientes")
 	public void MAN003_GestionarClientes() throws Exception {
-    	setDataMantoAccess();
+		setDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
@@ -150,7 +151,7 @@ public class Manto {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta de cheques")
 	public void MAN004_GestorCheques() throws Exception {
-    	setDataMantoAccess();
+		setDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
@@ -171,7 +172,7 @@ public class Manto {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Consulta de estadísticas de pedidos")
 	public void MAN005_GestorEstadisticasPedidos() throws Exception {
-    	setDataMantoAccess();
+		setDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
@@ -184,7 +185,7 @@ public class Manto {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Gestor de saldos de TPV")
 	public void MAN006_GestorSaldosTPV() throws Exception {
-    	setDataMantoAccess();
+		setDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
@@ -201,7 +202,7 @@ public class Manto {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Gestor de consulta y cambio de familia")
 	public void MAN007_GestorConsultaCambioFamilia() throws Exception {
-    	setDataMantoAccess();
+		setDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);
@@ -214,7 +215,7 @@ public class Manto {
 		groups={"Manto", "Canal:desktop_App:all"}, alwaysRun=true, 
 		description="Comprueba el correcto funcionamiento del ordenador de prendas")
 	public void MAN008_Ordenador_de_Prendas() throws Exception {
-    	setDataMantoAccess();
+		setDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		PageSelTdaMantoStpV.selectTienda(almacenEspanya, codigoEspanya, dMantoAcc.appE, driver);

@@ -72,7 +72,7 @@ public class TestNodos implements Serializable {
         DataCtxShop dCtxSh = new DataCtxShop();
         dCtxSh.setChannel(inputParamsSuite.getChannel());
         dCtxSh.setAppEcom(this.nodo.getAppEcom());
-        dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+        //dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
         dCtxSh.pais = españa;
         dCtxSh.idioma = castellano;
         return dCtxSh;

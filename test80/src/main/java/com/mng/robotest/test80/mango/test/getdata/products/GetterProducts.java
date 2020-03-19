@@ -1,5 +1,7 @@
 package com.mng.robotest.test80.mango.test.getdata.products;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,14 +13,17 @@ import javax.ws.rs.core.Response;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mng.robotest.test80.access.InputParamsMango;
 import com.mng.robotest.test80.mango.conftestmaker.AppEcom;
 import com.mng.robotest.test80.mango.test.data.DataCtxShop;
+//import com.mng.robotest.test80.mango.test.data.DataCtxShop;
 import com.mng.robotest.test80.mango.test.factoryes.jaxb.Linea.LineaType;
 import com.mng.robotest.test80.mango.test.getdata.JaxRsClient;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment;
 import com.mng.robotest.test80.mango.test.getdata.products.data.GarmentDetails;
 import com.mng.robotest.test80.mango.test.getdata.products.data.ProductList;
 import com.mng.robotest.test80.mango.test.getdata.products.data.Garment.Article;
+import com.mng.testmaker.service.TestMaker;
 
 public class GetterProducts extends JaxRsClient {
 	
@@ -34,12 +39,13 @@ public class GetterProducts extends JaxRsClient {
 	private final Integer pagina;
 	private final ProductList productList;
 	
-	private GetterProducts(String urlDomain, String codigoPaisAlf, AppEcom app, LineaType lineaType, String seccion, 
+	private GetterProducts(String url, String codigoPaisAlf, AppEcom app, LineaType lineaType, String seccion, 
 						   String galeria, String familia, Integer numProducts, Integer pagina) throws Exception {
-		if (urlDomain.charAt(urlDomain.length()-1)=='/') {
-			this.urlDomain = urlDomain;
+		String urlTmp = getDnsUrl(url);
+		if (urlTmp.charAt(urlTmp.length()-1)=='/') {
+			urlDomain = urlTmp;
 		} else {
-			this.urlDomain = urlDomain + "/";
+			urlDomain = urlTmp + "/";
 		}
 		
 		switch (app) {
@@ -66,7 +72,7 @@ public class GetterProducts extends JaxRsClient {
 		
 		WebTarget webTarget = 
 			client
-				.target(urlDomain + "services/productlist/products")
+				.target(urlDomain.replace("http:", "https:") + "services/productlist/products")
 				.path(codigoPaisAlf)
 				.path(getLineaPath())
 				.path("sections_" + lineaType.name() + "." + seccion + "_" + lineaType.name())
@@ -127,7 +133,7 @@ public class GetterProducts extends JaxRsClient {
 		Client client = ClientBuilder.newClient();
 		return ( 
 			client
-				.target(urlDomain + "services/garments")
+				.target(urlDomain.replace("http:", "https:") + "services/garments")
 				.path(article.getGarmentId())
 				.path("looktotal")
 				.queryParam("color", article.getColor().getId())
@@ -145,6 +151,11 @@ public class GetterProducts extends JaxRsClient {
 		}
 	}
 	
+	private String getDnsUrl(String url) throws URISyntaxException {
+		URI uri = new URI(url);
+		return (uri.getScheme() + "://" + uri.getHost());
+	}
+	
 	public static class Builder {
 		private final String url;
 		private final String codigoPaisAlf;
@@ -157,7 +168,8 @@ public class GetterProducts extends JaxRsClient {
 		private Integer pagina = 1;
 
 		public Builder(DataCtxShop dCtxSh) throws Exception {
-			this.url = dCtxSh.getDnsUrlAcceso();
+			this.url = ((InputParamsMango)TestMaker.getTestCase().getInputParamsSuite()).getUrlBase();
+			//this.url = dCtxSh.getDnsUrlAcceso();
 			this.codigoPaisAlf = dCtxSh.pais.getCodigo_alf();
 			this.app = dCtxSh.appE;
 		}
@@ -196,5 +208,7 @@ public class GetterProducts extends JaxRsClient {
 			return (
 				new GetterProducts(url, codigoPaisAlf, app, lineaType, seccion, galeria, familia, numProducts, pagina));
 		}
+		
+
 	}
 }

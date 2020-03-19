@@ -22,7 +22,7 @@ public class Buscador {
 		DataCtxShop dCtxSh = new DataCtxShop();
 		dCtxSh.setAppEcom((AppEcom)inputParamsSuite.getApp());
 		dCtxSh.setChannel(inputParamsSuite.getChannel());
-		dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
+		//dCtxSh.urlAcceso = inputParamsSuite.getUrlBase();
 		dCtxSh.pais = PaisGetter.get(PaisShop.España);
 		dCtxSh.idioma = dCtxSh.pais.getListIdiomas().get(0);
 		return dCtxSh;
