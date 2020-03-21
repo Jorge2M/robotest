@@ -1,6 +1,10 @@
 package com.mng.robotest.test80.mango.test.appshop;
 
+import java.lang.reflect.Method;
+
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestNGMethod;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import com.mng.robotest.test80.access.InputParamsMango;
@@ -36,6 +40,9 @@ import com.mng.robotest.test80.mango.test.stpv.shop.galeria.PageGaleriaStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.menus.SecMenusWrapperStpV;
 import com.mng.robotest.test80.mango.test.stpv.shop.modales.ModalBuscadorTiendasStpV;
 import com.mng.robotest.test80.mango.test.utils.PaisGetter;
+import com.mng.testmaker.domain.SuitesExecuted;
+import com.mng.testmaker.domain.suitetree.SuiteTM;
+import com.mng.testmaker.domain.suitetree.TestRunTM;
 import com.mng.testmaker.service.TestMaker;
 
 public class FichaProducto {
@@ -52,17 +59,32 @@ public class FichaProducto {
 		return dCtxSh;
 	}
 	
-//	@BeforeTest (groups={"FichaProducto", "Canal:desktop_App:all"})
-//	public void before() {
-//		InputParamsMango inputParamsSuite = (InputParamsMango)SuiteTM.getSuiteCreatedInPresentThread().getInputParams();
-//		System.out.println("Before Test. Test executing in remote: " + inputParamsSuite.isTestExecutingInRemote());
-//	}
-//	
-//	@AfterTest (groups={"FichaProducto", "Canal:desktop_App:all"})
-//	public void after() {
-//		InputParamsMango inputParamsSuite = (InputParamsMango)SuiteTM.getSuiteCreatedInPresentThread().getInputParams();
-//		System.out.println("After Test. Test executing in remote: " + inputParamsSuite.isTestExecutingInRemote());
-//	}
+	@BeforeMethod (groups={"FichaProducto", "Canal:desktop_App:all"})
+	public void before(Method method) {
+		TestRunTM testRun = getTestRun(method);
+		InputParamsMango inputParamsSuite = (InputParamsMango)testRun.getSuiteParent().getInputParams();
+		System.out.println("Before Method. Test executing in remote: " + inputParamsSuite.isTestExecutingInRemote());
+	}
+	
+	@AfterMethod (groups={"FichaProducto", "Canal:desktop_App:all"})
+	public void after(Method method) {
+		TestRunTM testRun = getTestRun(method);
+		InputParamsMango inputParamsSuite = (InputParamsMango)testRun.getSuiteParent().getInputParams();
+		System.out.println("After Method. Test executing in remote: " + inputParamsSuite.isTestExecutingInRemote());
+	}
+	
+	private static TestRunTM getTestRun(Method method) {
+		for (SuiteTM suite : SuitesExecuted.getSuitesExecuted()) {
+			for (TestRunTM testRun : suite.getListTestRuns()) {
+				for (ITestNGMethod testMethod : testRun.getTestNgContext().getAllTestMethods()) {
+					if (testMethod.getConstructorOrMethod().getMethod()==method) {
+						return testRun;
+					}
+				}
+			}
+		}
+		return null;
+	}
 	
 	@Test (
 		groups={"FichaProducto", "Canal:desktop_App:all"}, alwaysRun=true, 

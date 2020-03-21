@@ -94,7 +94,7 @@ public class PaisIdioma implements Serializable {
     public void PAR001_Lineas() throws Exception {
     	beforeMethod();
     	WebDriver driver = TestMaker.getDriverTestCase();
-    	TestMaker.getTestCase().setRefineDataName(index_fact);
+    	TestMaker.getTestCase().setSpecificInputData(index_fact);
     	
         PagePrehomeStpV.seleccionPaisIdiomaAndEnter(dCtxSh, driver);
         PageHomeMarcasStpV.validateIsPageWithCorrectLineas(dCtxSh.pais, dCtxSh.channel, dCtxSh.appE, driver);

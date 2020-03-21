@@ -56,7 +56,7 @@ public class PaisAplicaVale implements Serializable {
 		description="Compra usuario no registrado")
 	public void CHK001_Compra() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		TestMaker.getTestCase().setRefineDataName(index_fact);
+		TestMaker.getTestCase().setSpecificInputData(index_fact);
 		dCtxSh.userRegistered = false;
 		//dCtxSh.urlAcceso = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
 		DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);
@@ -80,7 +80,7 @@ public class PaisAplicaVale implements Serializable {
 			description="Compra usuario no registrado. Fake")
 		public void CHK002_CompraFake() throws Exception {
 		WebDriver driver = TestMaker.getDriverTestCase();
-		TestMaker.getTestCase().setRefineDataName(index_fact);
+		TestMaker.getTestCase().setSpecificInputData(index_fact);
 		dCtxSh.userRegistered = false;
 		//dCtxSh.urlAcceso = TestMaker.getTestCase().getInputParamsSuite().getUrlBase();
 		DataCtxPago dCtxPago = new DataCtxPago(this.dCtxSh);

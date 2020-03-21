@@ -82,7 +82,7 @@ public class Favoritos implements Serializable {
 		groups={"Favoritos", "Canal:all_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="[Usuario registrado] Alta favoritos desde la galería")
 	public void FAV001_AltaFavoritosDesdeGaleria() throws Exception {
-		TestMaker.getTestCase().setRefineDataName(this.index_fact);
+		TestMaker.getTestCase().setSpecificInputData(this.index_fact);
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 
@@ -126,7 +126,7 @@ public class Favoritos implements Serializable {
 		groups={"Favoritos", "Canal:all_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="[Usuario no registrado] Alta favoritos desde la galería y posterior identificación")
 	public void FAV002_AltaFavoritosDesdeFicha() throws Exception {
-		TestMaker.getTestCase().setRefineDataName(this.index_fact);
+		TestMaker.getTestCase().setSpecificInputData(this.index_fact);
 		WebDriver driver = TestMaker.getDriverTestCase();
 		DataCtxShop dCtxSh = getCtxShForTest();
 		dCtxSh.userRegistered=false;

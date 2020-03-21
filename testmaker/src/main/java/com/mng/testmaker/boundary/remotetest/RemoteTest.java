@@ -69,7 +69,7 @@ public class RemoteTest extends JaxRsClient {
 		Throwable throwable = (Throwable)fromStringB64(throwableStrB64);
 		testCase.getResult().setThrowable(throwable);
 		testCase.getResult().setStatus(testCaseRemote.getStatusTng());
-		testCase.setRefineDataName(testCaseRemote.getRefineDataName());
+		testCase.setSpecificInputData(testCaseRemote.getSpecificInputData());
 		
 		List<StepTM> listStepsRemote = testCaseRemote.getListStep();
 		for (StepTM stepRemote : listStepsRemote) {

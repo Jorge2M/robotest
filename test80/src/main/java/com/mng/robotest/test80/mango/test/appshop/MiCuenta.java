@@ -75,7 +75,7 @@ public class MiCuenta implements Serializable {
     public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion) 
     throws Exception {
     	WebDriver driver = TestMaker.getDriverTestCase();
-    	TestMaker.getTestCase().setRefineDataName(index_fact);
+    	TestMaker.getTestCase().setSpecificInputData(index_fact);
         DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userConnected = userConDevolucionPeroNoEnPRO;
         dCtxSh.passwordUser = passwordUserConDevolucion;
@@ -119,7 +119,7 @@ public class MiCuenta implements Serializable {
     public void MIC002_CheckConsultaMisCompras(
     		String userWithOnlinePurchases, String userWithStorePurchases, 
     		String passUserWithOnlinePurchases, String passUserWithStorePurchases) throws Exception {
-    	TestMaker.getTestCase().setRefineDataName(this.index_fact);
+    	TestMaker.getTestCase().setSpecificInputData(this.index_fact);
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
         

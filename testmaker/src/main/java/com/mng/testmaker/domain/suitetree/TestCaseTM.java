@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -28,37 +29,48 @@ public class TestCaseTM  {
 	private final TestRunTM testRunParent;
 	private final ITestResult result;
 	private final long threadId;
-	private String refineDataName = "";
+	private String specificInputData = "";
 	private WebDriver driver;
 
 	public TestCaseTM(ITestResult result) {
 		this.testRunParent = (TestRunTM)result.getTestContext().getCurrentXmlTest();
 		this.suiteParent = (SuiteTM)testRunParent.getSuite();
 		this.result = result;
-		this.invocationCount = makeInvocationCount();
 		this.threadId = Thread.currentThread().getId();
-//		if (suiteParent.getStateExecution()!=StateExecution.Stopping) {
-//			this.driver = getWebDriverForTestCase();
-//		} else {
-//			this.driver = null;
-//		}
+		this.invocationCount = getInvocationCountForTest();
 	}
 	
 	public void makeWebDriver() {
 		this.driver = getWebDriverForTestCase();
 	}
 	
-	private int makeInvocationCount() {
-		int maxCount = 0;
+	private void updateInvocationCount() {
+		this.invocationCount = getInvocationCountForTest();
+	}
+	
+	private int getInvocationCountForTest() {
+		List<Integer> listCounts = new ArrayList<>();
 		List<TestCaseTM> listTestCases = testRunParent.getListTestCases();
 		for (TestCaseTM testCaseTM : listTestCases) {
-			if (testCaseTM.getNameUnique().compareTo(getNameUnique())==0) {
-				if (testCaseTM.getInvocationCount() > invocationCount) {
-					maxCount = testCaseTM.getInvocationCount();
-				}
+			if (testCaseTM.getNameWithInputData().compareTo(getNameWithInputData())==0 &&
+				testCaseTM!=this) {
+				listCounts.add(testCaseTM.getInvocationCount());
 			}
 		}
-		return maxCount + 1;
+		
+		//Es el 1o
+		if (listCounts.size()==0) {
+			return 1;
+		}
+		//Buscamos un hueco entre los valores de counts existentes
+		Collections.sort(listCounts);
+		for (int i=0; i<listCounts.size(); i++) {
+			if (listCounts.get(i) > i+1) {
+				return listCounts.get(i) - 1;
+			}
+		}
+		//Si no hay hueco retornamos el valor máximo + 1
+		return (listCounts.get(listCounts.size()-1) + 1);
 	}
 	
 	public int getInvocationCount() {
@@ -69,8 +81,12 @@ public class TestCaseTM  {
 		return result.getName();
 	}
 	
+	public String getNameWithInputData() {
+		return getName() + getSpecificInputData();
+	}
+	
 	public String getNameUnique() {
-		String nameTest = getName() + getRefineDataName();
+		String nameTest = getNameWithInputData();
 		if (getInvocationCount()>1) {
 			nameTest+="(" + getInvocationCount() + ")";
 		}
@@ -245,13 +261,13 @@ public class TestCaseTM  {
 		return testRunParent.getTestNgContext();
 	}
 	
-	public String getRefineDataName() {
-		return this.refineDataName;
+	public String getSpecificInputData() {
+		return this.specificInputData;
 	}
 	
-	public void setRefineDataName(String refineDataName) {
-		this.refineDataName = refineDataName;
-		this.invocationCount = makeInvocationCount();
+	public void setSpecificInputData(String specificInputData) {
+		this.specificInputData = specificInputData;
+		updateInvocationCount();
 	}
 	
 	public TestCaseBean getTestCaseBean() {
@@ -262,7 +278,7 @@ public class TestCaseTM  {
 		testCaseBean.setSuiteName(suite.getName());
 		testCaseBean.setTestRunName(getTestRunParent().getName());
 		testCaseBean.setName(getNameUnique());
-		testCaseBean.setRefineDataName(getRefineDataName());
+		testCaseBean.setSpecificInputData(getSpecificInputData());
 		testCaseBean.setNameUnique(getNameUnique());
 		testCaseBean.setDescription(getResult().getMethod().getDescription());
 		testCaseBean.setIndexInTestRun(getIndexInTestRun());

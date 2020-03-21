@@ -108,7 +108,7 @@ public class CompraFact implements Serializable {
         groups={"Compra", "Canal:all_App:all"}, alwaysRun=true, priority=1, 
         description="Test de compra (creado desde Factoría) con valores específicos a nivel de Pago, Tipo de Envío, Usuario Conectado y Empleado")
     public void COM010_Pago() throws Exception {
-    	TestMaker.getTestCase().setRefineDataName(this.index_fact);
+    	TestMaker.getTestCase().setSpecificInputData(this.index_fact);
     	WebDriver driver = TestMaker.getDriverTestCase();
         DataCtxShop dCtxSh = getCtxShForTest();
         dCtxSh.userRegistered = this.usrRegistrado;

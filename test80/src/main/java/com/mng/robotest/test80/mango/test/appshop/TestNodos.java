@@ -84,7 +84,7 @@ public class TestNodos implements Serializable {
     public void NOD001_TestNodo() throws Throwable {
     	DataCtxShop dCtxSh = getCtxShForTest();
     	WebDriver driver = TestMaker.getDriverTestCase();
-    	TestMaker.getTestCase().setRefineDataName(index_fact);
+    	TestMaker.getTestCase().setSpecificInputData(index_fact);
         AppEcom appE = nodo.getAppEcom();
         AccesoStpV.testNodoState(nodo, driver);
         if (this.nodo.getStatusJSON().isStatusOk()) {

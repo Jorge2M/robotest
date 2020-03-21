@@ -36,8 +36,7 @@ public class TestAspect {
 		}
 		
 		InputParamsTM inputParams = testCase.getInputParamsSuite();
-		if (!inputParams.isTestExecutingInRemote() && 
-			ServerSubscribers.isSome()) {
+		if (executeTestRemote(inputParams)) {
 			ServerSubscribers.sendTestToRemoteServer(testCase, joinPoint.getTarget());
 			//TODO si un @Test retorna un valor <> de void tendremos problemas. Se debería serializar el objeto de respuesta
 			return null;
@@ -49,14 +48,28 @@ public class TestAspect {
 	private Object executeTest(TestCaseTM testCase, ProceedingJoinPoint joinPoint) throws Throwable {
 		InputParamsTM inputParams = testCase.getInputParamsSuite();
 		Method presentMethod = ((MethodSignature)joinPoint.getSignature()).getMethod();
-		List<String> listTestCaseFilter = inputParams.getListTestCasesName();
-		if (!inputParams.isTestExecutingInRemote() || 
-			listTestCaseFilter.size()==0 ||
-			presentMethod.getName().compareTo(listTestCaseFilter.get(0))==0) {
+		if (executeTestLocal(inputParams, presentMethod)) {
 			testCase.makeWebDriver();
 			return joinPoint.proceed();
 		}
 		return null;
+	}
+	
+	public static boolean executeTestRemote(InputParamsTM inputParams) {
+		return (
+			!inputParams.isTestExecutingInRemote() && 
+			ServerSubscribers.isSome());
+	}
+	public static boolean executeTestLocal(InputParamsTM inputParams, Method presentTestCaseMethod) {
+		if (executeTestRemote(inputParams)) {
+			return false;
+		}
+		List<String> listTestCaseFilter = inputParams.getListTestCasesName();
+		if (!inputParams.isTestExecutingInRemote() || 
+			listTestCaseFilter.size()==0) {
+			return true;
+		}
+		return (presentTestCaseMethod.getName().compareTo(listTestCaseFilter.get(0))==0);
 	}
 	
 }

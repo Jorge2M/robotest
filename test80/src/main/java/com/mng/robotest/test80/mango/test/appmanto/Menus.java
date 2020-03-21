@@ -54,7 +54,7 @@ public class Menus implements Serializable {
 		groups={"Menus", "Canal:desktop_App:all"},
 		description="Consulta de menús")
 	public void MAN005_ConsultaMenus() throws Exception {
-		TestMaker.getTestCase().setRefineDataName(this.index_fact);
+		TestMaker.getTestCase().setSpecificInputData(this.index_fact);
 		DataMantoAccess dMantoAcc = getDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoStpV.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
