@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import com.mng.testmaker.boundary.aspects.step.Step;
 import com.mng.testmaker.boundary.aspects.validation.Validation;
 import com.mng.testmaker.conf.State;
-import com.mng.testmaker.domain.TestCaseTM;
+import com.mng.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.testmaker.service.webdriver.wrapper.WebdrvWrapp;
 
 public class BuscarWithoutRefactor {
@@ -18,8 +18,6 @@ public class BuscarWithoutRefactor {
 	public void BUS001_Buscar_literal_con_resultados() throws Exception {
 		TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
 		WebDriver driver = testCase.getDriver();
-		driver.get(testCase.getInputParamsSuite().getUrlBase());
-		
 		inputTextAndClickBuscarConGoogle("Wikipedia", driver);
 	}
 	
@@ -42,7 +40,7 @@ public class BuscarWithoutRefactor {
 		description="Aparecen resultados de búsqueda",
 		level=State.Defect)
 	public boolean checkAreResults(WebDriver driver) {
-		By byEntradaResultado = By.xpath("//h3[@class='LC20lb']");
+		By byEntradaResultado = By.xpath("//h3[@class[contains(.,'LC20lb')]]");
 		return (
 			WebdrvWrapp.isElementVisible(driver, byEntradaResultado));
 	}

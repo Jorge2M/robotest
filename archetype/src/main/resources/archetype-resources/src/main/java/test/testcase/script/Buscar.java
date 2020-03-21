@@ -5,7 +5,7 @@ import ${package}.test.testcase.stpv.ResultsGooglePageStpV;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
-import com.mng.testmaker.domain.TestCaseTM;
+import com.mng.testmaker.domain.suitetree.TestCaseTM;
 
 public class Buscar {
 
@@ -15,7 +15,6 @@ public class Buscar {
 	public void BUS001_Search_With_ManyPages() throws Exception {
 		TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
 		WebDriver driver = testCase.getDriver();
-		driver.get(testCase.getInputParamsSuite().getUrlBase());
 		
 		GoogleMainPageStpV googlePageStpV = GoogleMainPageStpV.getNew(driver);
 		ResultsGooglePageStpV resultsPageStpV = 
@@ -28,7 +27,6 @@ public class Buscar {
 	public void BUS002_Search_Without_ManyPages() throws Exception {
 		TestCaseTM testCase = TestCaseTM.getTestCaseInExecution();
 		WebDriver driver = testCase.getDriver();
-		driver.get(testCase.getInputParamsSuite().getUrlBase());
 		
 		GoogleMainPageStpV googlePageStpV = GoogleMainPageStpV.getNew(driver);
 		ResultsGooglePageStpV resultsPageStpV = 
