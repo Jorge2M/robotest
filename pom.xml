@@ -16,7 +16,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<nexusUrl>https://citools.mangodev.net/nexus</nexusUrl>		
+		<!-- <nexusUrl>https://citools.mangodev.net/nexus</nexusUrl>-->		
 	</properties>
 
 	<!-- Configuraci?n de deployment. Apunta al repositorio Maven sobre el que

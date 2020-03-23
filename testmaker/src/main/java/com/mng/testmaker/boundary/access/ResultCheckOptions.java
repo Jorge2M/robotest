@@ -7,6 +7,8 @@ public class ResultCheckOptions {
 	private boolean ok;
 	private List<MessageError> listMessagesError;
 	
+	public ResultCheckOptions() {}
+	
 	private ResultCheckOptions(boolean ok, List<MessageError> listMessagesError) {
 		this.ok = ok;
 		this.listMessagesError = listMessagesError;

@@ -78,7 +78,9 @@ public class ServerRestTM {
 		try {
 			jettyServer.start();
 			System.out.println("Started Jetty Server!");
-			System.out.println("HttpPort: " + httpPort);
+			if (httpPort!=null) {
+				System.out.println("HttpPort: " + httpPort);
+			}
 			if (httpsPort!=null) {
 				System.out.println("HttpsPort: " + httpsPort);
 			}
@@ -107,7 +109,9 @@ public class ServerRestTM {
 			httpConfiguration.setSecurePort(httpsPort);
 		}
 		ServerConnector http = new ServerConnector(jettyServer, new HttpConnectionFactory(httpConfiguration));
-		http.setPort(httpPort);
+		if (httpPort!=null) {
+			http.setPort(httpPort);
+		}
 		jettyServer.addConnector(http);
 	}
 	private void setServerHttpsConnector() {
@@ -157,11 +161,11 @@ public class ServerRestTM {
 			this.appEnum = appEnum;
 		}
 
-		public Builder portHttp(int httpPort) {
+		public Builder portHttp(Integer httpPort) {
 			this.httpPort = httpPort;
 			return this;
 		}
-		public Builder portHttps(int httpsPort) {
+		public Builder portHttps(Integer httpsPort) {
 			this.httpsPort = httpsPort;
 			return this;
 		}
