@@ -1,5 +1,8 @@
 package com.mng.testmaker.boundary.access;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -9,6 +12,8 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.lang3.StringUtils;
 
+import com.mng.testmaker.conf.ConstantesTM;
+
 public class ServerCmdLine {
 
 	final static int PORT_DEFAULT = 80;
@@ -16,9 +21,11 @@ public class ServerCmdLine {
 	
 	final static String portparam = "port";
 	final static String secureportparam = "secureport";
+	final static String urlhubparam = "urlhub";
+	final static String urlslaveparam = "urlslave";
 	
 	/** 
-	 * -ip address [-port porthttp] [-secureport porthttps] [-help | -h] 
+	 * [-port porthttp] [-secureport porthttps] [-urlhub url] [-urlslave url] [-help | -h] 
 	 */  
 	public static ResultCmdServer parse(String[] args) {
 		ResultCmdServer resultParse = new ResultCmdServer();
@@ -48,6 +55,16 @@ public class ServerCmdLine {
 			.hasArg()
 			.desc("HTTPS Server Port").build());
 		
+		options.addOption(Option.builder(urlhubparam)
+			.required(false)
+			.hasArg()
+			.desc("URL Server Hub where connect present slave").build());
+		
+		options.addOption(Option.builder(urlslaveparam)
+			.required(false)
+			.hasArg()
+			.desc("URL Server Slave to subscribe in hub").build());
+		
 		return options;
 	}
 	
@@ -74,10 +91,34 @@ public class ServerCmdLine {
 		if (cmdLine.hasOption(secureportparam)) {
 			String portsecure = cmdLine.getOptionValue(secureportparam);
 			if (StringUtils.isNumeric(portsecure)) {
-				resultParse.setSecurePort(Integer.parseInt(cmdLine.getOptionValue(secureportparam)));
+				resultParse.setSecurePort(Integer.parseInt(portsecure));
 			}
 			else {
 				System.out.println("Param " + secureportparam + " must be a numeric value");
+				resultParse.setOk(false);
+				return resultParse;
+			}
+		}
+		
+		if (cmdLine.hasOption(urlhubparam)) {
+			String urlHub = cmdLine.getOptionValue(urlhubparam);
+			if (checkPatternValue(ConstantesTM.URL_Pattern, urlHub)) {
+				resultParse.setUrlServerHub(urlHub);
+			}
+			else {
+				System.out.println("Param " + urlhubparam + " is not a url with a valid format");
+				resultParse.setOk(false);
+				return resultParse;
+			}
+		}
+		
+		if (cmdLine.hasOption(urlslaveparam)) {
+			String urlServerSlave = cmdLine.getOptionValue(urlslaveparam);
+			if (checkPatternValue(ConstantesTM.URL_Pattern, urlServerSlave)) {
+				resultParse.setUrlServerSlave(urlServerSlave);
+			}
+			else {
+				System.out.println("Param " + urlslaveparam + " is not a url with a valid format");
 				resultParse.setOk(false);
 				return resultParse;
 			}
@@ -92,11 +133,19 @@ public class ServerCmdLine {
 		return resultParse;
 	}
 	
+	private static boolean checkPatternValue(String stringPattern, String value) {
+		Pattern pattern = Pattern.compile(stringPattern);
+		Matcher matcher = pattern.matcher(value);
+		return matcher.matches();
+	}
+	
 
 	public static class ResultCmdServer {
 		private boolean ok = false;
 		private Integer port = null;  
 		private Integer securePort = null;
+		private String urlServerHub = null;
+		private String urlServerSlave = null;
 		
 		public boolean isOk() {
 			return ok;
@@ -115,6 +164,18 @@ public class ServerCmdLine {
 		}
 		public void setSecurePort(Integer securePort) {
 			this.securePort = securePort;
+		}
+		public String getUrlServerHub() {
+			return urlServerHub;
+		}
+		public void setUrlServerHub(String urlServerHub) {
+			this.urlServerHub = urlServerHub;
+		}
+		public String getUrlServerSlave() {
+			return urlServerSlave;
+		}
+		public void setUrlServerSlave(String urlServerSlave) {
+			this.urlServerSlave = urlServerSlave;
 		}
 	}
 }

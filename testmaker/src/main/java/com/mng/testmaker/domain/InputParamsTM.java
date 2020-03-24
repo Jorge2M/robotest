@@ -16,6 +16,7 @@ import org.apache.commons.cli.CommandLine;
 
 import com.mng.testmaker.boundary.access.OptionTMaker;
 import com.mng.testmaker.conf.Channel;
+import com.mng.testmaker.conf.ConstantesTM;
 import com.mng.testmaker.domain.testfilter.DataFilterTCases;
 import com.mng.testmaker.domain.util.TestNameUtils;
 import com.mng.testmaker.service.webdriver.maker.FactoryWebdriverMaker.WebDriverType;
@@ -176,11 +177,10 @@ public abstract class InputParamsTM {
 			.desc("Application Web to test. Possible values: " + Arrays.toString(getNames(appEnum.getEnumConstants())))
 			.build());
 
-		String patternUrl = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 		optionsTM.add(OptionTMaker.builder(InputParamsTM.URLNameParam)
 			.required(true)
 			.hasArg()
-			.pattern(patternUrl)
+			.pattern(ConstantesTM.URL_Pattern)
 			.desc("Initial URL of the application Web to test")
 			.build());
 

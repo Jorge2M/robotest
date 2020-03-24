@@ -11,7 +11,6 @@ import java.util.List;
 
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -153,19 +152,19 @@ public class RestApiTM {
 		}
 	}
 	
-	@POST
+	@GET
 	@Path("/subscription")
-	public Response addSubscriber(@FormParam("url") String url) {
+	public Response addSubscriber(@QueryParam("urlslave") String urlslave) {
 		try {
-			URL urlSubscriber = new URL(url);
+			URL urlSubscriber = new URL(urlslave);
 			ServerSubscriber subscriber = new ServerSubscriber(urlSubscriber);
 			ServerSubscribers.add(subscriber);
 		}
 		catch (MalformedURLException e) {
 			return Response
-					.status(Response.Status.BAD_REQUEST)
-					.entity("url param with malformed value " + url)
-					.build();
+				.status(Response.Status.BAD_REQUEST)
+				.entity("urlslave param with malformed value " + urlslave)
+				.build();
 		}
 
 		return Response.ok().build();
@@ -173,7 +172,7 @@ public class RestApiTM {
 	
 	@DELETE
 	@Path("/subscription")
-	public Response removeSubscriber(@FormParam("url") String url) {
+	public Response removeSubscriber(@QueryParam("urlslave") String url) {
 		try {
 			URL urlSubscriber = new URL(url);
 			ServerSubscriber subscriber = new ServerSubscriber(urlSubscriber);
@@ -182,7 +181,7 @@ public class RestApiTM {
 		catch (MalformedURLException e) {
 			return Response
 					.status(Response.Status.BAD_REQUEST)
-					.entity("url param with malformed value " + url)
+					.entity("urlslave param with malformed value " + url)
 					.build();
 		}
 

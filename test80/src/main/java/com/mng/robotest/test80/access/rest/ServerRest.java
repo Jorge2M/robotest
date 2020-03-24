@@ -47,8 +47,11 @@ public class ServerRest {
 			CreatorSuiteRun creatorSuiteRun = CreatorSuiteRunMango.getNew();
 			ServerRestTM serverRest = new ServerRestTM.Builder(creatorSuiteRun, Suites.class, AppEcom.class)
 				.restApi(RestApiMango.class)
-				.portHttp(result.getPort())
-				.portHttps(result.getSecurePort())
+				.setWithParams(result)
+//				.portHttp(result.getPort())
+//				.portHttps(result.getSecurePort())
+//				.urlServerHub(result.getUrlServerHub())
+//				.urlServerSlave(result.getUrlServerSlave())
 				.certificate(
 					ServerRestTM.class.getResource("/robotest.pro.mango.com.pfx").toExternalForm(), 
 					"yvuF62JiD6HsGVS9lqY9CsZZC/unbW1MMR3dLotF48Q=")
